@@ -1,0 +1,23 @@
+/* Tailwind utilities only: no preflight, so the existing hand-written styles are not reset.
+   They supply the variants (hover:, focus:, md:, disabled:, divide-*, animate-*) that index.css never had. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* Platform palette: Tailwind's slate/gray, teal and emerald are re-pointed at the deep-teal / mint theme so every utility class follows it. */
+@layer theme {
+  :root, :host {
+    --color-slate-50: #f4faf8; --color-slate-100: #ebf5f1; --color-slate-200: #dcebe6; --color-slate-300: #cfdcd8; --color-slate-400: #8da19d;
+    --color-slate-500: #5f736f; --color-slate-600: #4b605b; --color-slate-700: #2f4f4c; --color-slate-800: #134744; --color-slate-900: #0e3e3b; --color-slate-950: #062b2a;
+    --color-gray-50: #f4faf8; --color-gray-100: #ebf5f1; --color-gray-200: #dcebe6; --color-gray-300: #cfdcd8; --color-gray-400: #8da19d;
+    --color-gray-500: #5f736f; --color-gray-600: #4b605b; --color-gray-700: #2f4f4c; --color-gray-800: #134744; --color-gray-900: #0e3e3b; --color-gray-950: #062b2a;
+    --color-teal-50: #effaf6; --color-teal-100: #daf5ec; --color-teal-200: #bfeede; --color-teal-300: #7fe3c2; --color-teal-400: #2fcf9c;
+    --color-teal-500: #1fb589; --color-teal-600: #117a6b; --color-teal-700: #0f5f55; --color-teal-800: #0f4c4a; --color-teal-900: #0b3f3d; --color-teal-950: #062b2a;
+    --color-emerald-50: #effaf6; --color-emerald-100: #daf5ec; --color-emerald-200: #bfeede; --color-emerald-300: #7fe3c2; --color-emerald-400: #2fcf9c;
+    --color-emerald-500: #1fb589; --color-emerald-600: #117a6b; --color-emerald-700: #0f5f55; --color-emerald-800: #0f4c4a; --color-emerald-900: #0b3f3d; --color-emerald-950: #062b2a;
+    /* amber / yellow / orange are re-pointed at a calm violet so no screen shows a harsh yellow */
+    --color-amber-50: #f5f3ff; --color-amber-100: #ede9fe; --color-amber-200: #ddd6fe; --color-amber-300: #c4b5fd; --color-amber-400: #a78bfa; --color-amber-500: #6d5bd0; --color-amber-600: #5b4bc0; --color-amber-700: #4c3fa8; --color-amber-800: #3b2f8f; --color-amber-900: #2e2470; --color-amber-950: #1e1747;
+    --color-yellow-50: #f5f3ff; --color-yellow-100: #ede9fe; --color-yellow-200: #ddd6fe; --color-yellow-300: #c4b5fd; --color-yellow-400: #a78bfa; --color-yellow-500: #6d5bd0; --color-yellow-600: #5b4bc0; --color-yellow-700: #4c3fa8; --color-yellow-800: #3b2f8f; --color-yellow-900: #2e2470; --color-yellow-950: #1e1747;
+    --color-orange-50: #f5f3ff; --color-orange-100: #ede9fe; --color-orange-200: #ddd6fe; --color-orange-300: #c4b5fd; --color-orange-400: #a78bfa; --color-orange-500: #6d5bd0; --color-orange-600: #5b4bc0; --color-orange-700: #4c3fa8; --color-orange-800: #3b2f8f; --color-orange-900: #2e2470; --color-orange-950: #1e1747;
+  }
+}

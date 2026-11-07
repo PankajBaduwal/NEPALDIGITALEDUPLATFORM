@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <script src="components/access-guard.js?v=2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#f4f5f9">
+  <title>Object Oriented Programming Using Java Lab · Eduverse</title>
+  <link rel="stylesheet" href="styles/ep-simulation.css?v=3.2">
+  <link rel="stylesheet" href="styles/sim-shell.css?v=3.2">
+  <link rel="stylesheet" href="styles/java-simulation.css?v=3.2">
+</head>
+<body>
+  <main class="ep-app" id="ep-app">
+    <!-- Header with Breadcrumbs, Title, Subtitle, and Actions -->
+    <header class="ep-header">
+      <div class="ep-brand" id="java-brand-mark" aria-hidden="true">JAVA</div>
+      <div class="ep-heading">
+        <nav class="ep-crumbs" id="ep-crumbs" aria-label="Location">Semester III › Object Oriented Programming Using Java Laboratory</nav>
+        <h1><span id="ep-title">Java Program Structure, JVM Architecture &amp; Bytecode Tracer ⭐ (Flagship)</span></h1>
+        <p id="ep-subtitle">U25CS311 · Unit I · Java OOP Basics, Classes, Objects &amp; Methods · PCC (1.5 Credits)</p>
+      </div>
+      <div class="ep-header-actions">
+        <div class="ep-learn ep-player-only" id="ep-learn" role="group" aria-label="Learning mode">
+          <button type="button" class="ep-seg active" data-learn="learn" title="Learn mode">📘 Learn</button>
+          <button type="button" class="ep-seg" data-learn="experiment" title="Experiment mode">🧪 Experiment</button>
+          <button type="button" class="ep-seg" data-learn="challenge" title="Challenge mode">🏆 Challenge</button>
+        </div>
+        <!-- Dark / White Theme Toggle Button -->
+        <button type="button" id="java-theme-toggle" class="ep-btn ep-btn-outline" title="Toggle between Dark and White theme" aria-label="Toggle Color Theme">
+          🌓 Dark Theme
+        </button>
+        <button type="button" id="ep-export" class="ep-btn ep-btn-outline" title="Download the current simulation view as a PNG image">⬇ Export</button>
+        <button type="button" id="ep-fullscreen" class="ep-btn ep-btn-outline ep-icon-btn" title="Full screen" aria-label="Full screen">⛶</button>
+      </div>
+    </header>
+
+    <!-- Player with Docks & Stage -->
+    <section id="ep-player" class="ep-player">
+      <div class="ep-layout">
+        <!-- Center Stage Area (LEFT in full screen) -->
+        <section class="ep-center">
+          <div class="ep-card ep-stage">
+            <!-- Top Readouts & State Badges -->
+            <div class="ep-stage-top">
+              <div id="ep-readouts" class="ep-readouts" aria-live="polite"></div>
+              <div class="java-stage-badges" id="java-stage-badges" style="display:flex;gap:6px">
+                <span class="ep-badge" id="java-overlay-sim">JVM Execution Engine</span>
+                <span class="ep-badge ep-badge-accent" id="java-overlay-state">Bytecode Verifier Ready</span>
+              </div>
+            </div>
+
+            <!-- Stage Row: Step-by-step Working Box + Canvas -->
+            <div id="ep-stage-row" class="ep-stage-row">
+              <div id="ep-work-card" class="ep-work-card">
+                <div class="ep-work-title">OOP Architecture &amp; Execution State</div>
+                <div id="ep-work-content" class="ep-work-content">
+                  <div class="java-work-item" style="margin-bottom:8px">
+                    <span style="display:block;font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase">What is happening:</span>
+                    <p id="java-what" style="margin:0;font-size:12.5px;line-height:1.45;color:var(--ink)">Java compilation pipeline loaded. Source code translates to bytecode and maps into JVM runtime areas.</p>
+                  </div>
+                  <div class="java-work-item" style="margin-bottom:8px">
+                    <span style="display:block;font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase">Technical Rationale &amp; Proof:</span>
+                    <p id="java-why" style="margin:0;font-size:12.5px;line-height:1.45;color:var(--ink)">Java achieves platform independence via intermediate bytecode executed identically across any OS with a compliant JVM.</p>
+                  </div>
+                  <div class="java-work-item">
+                    <span style="display:block;font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase">Next Evaluation Phase:</span>
+                    <p id="java-next-info" style="margin:0;font-size:12.5px;line-height:1.45;color:var(--ink)">Advance step to trace stack frames, heap object allocation, or method invocation dispatch.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Java Canvas Diagram -->
+              <div class="ep-canvas-wrap" style="position:relative;flex:1;min-width:320px">
+                <canvas id="java-canvas" width="860" height="520" aria-label="Java Laboratory Simulation Canvas"></canvas>
+              </div>
+            </div>
+
+            <!-- Bottom Console Output Emulator -->
+            <div class="java-console-emulator" id="java-console">
+              <div class="java-console-line">[JVM Init] Java Runtime Environment 21 initialized (64-Bit Server VM).</div>
+              <div class="java-console-line success">[Class Loaded] eduverse.kpriet.Main loaded successfully.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right Side: Controls & Parameter Dock -->
+        <aside class="ep-dock" id="ep-dock">
+          <!-- Unit & Experiment Selector Card -->
+          <section class="ep-card" style="padding:12px;margin-bottom:12px">
+            <h2 class="ep-card-title">Curriculum Experiment Navigation</h2>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px">
+              <div>
+                <label for="java-unit" style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase">Curriculum Unit</label>
+                <select id="java-unit" style="width:100%;height:32px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 8px;font-size:12.5px">
+                  <option value="1">Unit I · Java OOP Basics, Classes, Objects &amp; Methods</option>
+                  <option value="2">Unit II · Inheritance, Polymorphism &amp; Interfaces</option>
+                  <option value="3">Unit III · Exception Handling &amp; Multithreading</option>
+                  <option value="4">Unit IV · Packages, File Streams &amp; Generics</option>
+                  <option value="5">Unit V · Collections, JDBC &amp; Application Project</option>
+                </select>
+              </div>
+              <div>
+                <label for="java-simulation" style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase">Interactive Experiment</label>
+                <select id="java-simulation" style="width:100%;height:32px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 8px;font-size:12.5px">
+                  <!-- Populated dynamically by java-simulation.js -->
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <!-- Interactive Inputs & Configuration Form -->
+          <section class="ep-card" style="padding:12px;margin-bottom:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <h2 class="ep-card-title" style="margin:0">Experiment Parameters</h2>
+              <button type="button" id="java-reset-params" class="ep-btn ep-btn-sm" style="font-size:11px;padding:2px 8px">Default Values</button>
+            </div>
+            <form id="java-inputs-form" style="display:flex;flex-direction:column;gap:10px" onsubmit="return false;">
+              <!-- Dynamic parameter inputs rendered here -->
+            </form>
+            <div id="java-input-actions" style="margin-top:12px;display:flex;gap:8px">
+              <!-- Action buttons -->
+            </div>
+          </section>
+
+          <!-- Mathematical Formula / OOP Formalism Card -->
+          <section class="ep-card" style="padding:12px;margin-bottom:12px">
+            <h2 class="ep-card-title">Java Principle &amp; Formalism</h2>
+            <div id="ep-formula-box" style="padding:8px 10px;background:var(--bg);border-radius:6px;border:1px solid var(--line);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;color:var(--java-red-dark);word-break:break-word">
+              \text{Compilation: } \text{Source.java} \xrightarrow{\text{javac}} \text{Bytecode.class} \xrightarrow{\text{JVM}} \text{Machine Code}
+            </div>
+          </section>
+
+          <!-- Challenge Mode Assessment Card -->
+          <section class="ep-card" id="ep-challenge-card" style="padding:12px;margin-bottom:12px;display:none">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+              <span style="font-size:16px">🏆</span>
+              <h2 class="ep-card-title" style="margin:0">Laboratory Challenge</h2>
+            </div>
+            <p id="java-challenge-prompt" style="font-size:12.5px;color:var(--ink);line-height:1.45;margin-bottom:10px"></p>
+            <button type="button" id="java-verify-challenge" class="ep-btn java-btn-primary" style="width:100%;font-size:12px;font-weight:700">Verify Experiment Solution</button>
+            <div id="java-challenge-feedback" style="margin-top:8px;font-size:12px;padding:6px 8px;border-radius:4px;display:none"></div>
+          </section>
+
+          <!-- Pedagogical Notes Card -->
+          <section class="ep-card" style="padding:12px">
+            <h2 class="ep-card-title" id="ep-banner-title">Pedagogical Overview</h2>
+            <p id="ep-banner-text" style="font-size:12px;line-height:1.5;color:var(--muted);margin:0">
+              Interactive Java simulation built to strict R2025 CBCS laboratory pedagogical specifications.
+            </p>
+          </section>
+        </aside>
+      </div>
+
+      <!-- Footer Playback Controls -->
+      <footer class="ep-controls" id="ep-controls" role="toolbar" aria-label="Simulation controls">
+        <button type="button" class="ep-btn ep-big" id="ep-prev">◀ Prev Step</button>
+        <button type="button" class="ep-btn ep-big ep-btn-primary java-btn-primary" id="ep-play" aria-pressed="false">▶ Run Trace</button>
+        <button type="button" class="ep-btn ep-big" id="ep-pause" disabled>⏸ Pause</button>
+        <button type="button" class="ep-btn ep-big" id="ep-next">Next Step ▶</button>
+        <button type="button" class="ep-btn ep-big" id="ep-reset">↻ Reset</button>
+        <div class="ep-speed" role="group" aria-label="Execution Speed">
+          <span>Speed</span>
+          <select id="java-speed" aria-label="Execution speed" style="height:32px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 6px">
+            <option value="0.5">0.5x</option>
+            <option value="1" selected>1.0x</option>
+            <option value="2">2.0x</option>
+            <option value="4">4.0x</option>
+          </select>
+        </div>
+        <div class="ep-step-pill" style="margin-left:auto;display:flex;align-items:center;gap:8px">
+          <span id="java-step-label" style="font-size:12px;font-weight:700">Step 1 of 5</span>
+          <div style="width:70px;height:6px;background:var(--line);border-radius:999px;overflow:hidden">
+            <div id="java-progress-fill" style="width:20%;height:100%;background:var(--java-red);transition:width 0.2s"></div>
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Notification Toast -->
+    <div id="java-toast" class="ep-toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <!-- Load Catalog and Simulation Engine Scripts -->
+  <script src="tools/java-catalog.js"></script>
+  <script src="tools/java-simulation.js"></script>
+</body>
+</html>

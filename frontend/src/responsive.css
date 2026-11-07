@@ -1,0 +1,125 @@
+/* =========================================================================
+   Responsive platform layer: one layout system for phones, tablets, laptops, desktops and large touch displays.
+   The Smart Board teaching app (public/smartboard) is a separate page and does not load this file.
+
+   Device profiles are decided by the real viewport width and input type, never by a guess about physical size.
+     mobile        < 600     large mobile  600-767     tablet  768-1023
+     laptop        1024-1439 desktop       1440-1919   large desktop / 1080p board  1920-2399
+     large display 2400+ (UI scales up in steps)       touch board (pointer: coarse) from 1500
+   ========================================================================= */
+
+:root {
+  --rs-touch: 44px;
+  --rs-gutter: clamp(12px, 2vw, 28px);
+}
+
+/* ── Large displays: scale the whole interface in steps so text and touch targets stay comfortable ──
+   The viewport (and so the layout width) is still large, so wide tables and dashboards still get more room. */
+@media (pointer: coarse) and (min-width: 1500px) { html { zoom: 1.12; } }
+@media (min-width: 2400px) { html { zoom: 1.3; } }
+@media (min-width: 3000px) { html { zoom: 1.55; } }
+@media (min-width: 3600px) { html { zoom: 1.8; } }
+@media (min-width: 4600px) { html { zoom: 2.2; } }
+@media (pointer: coarse) and (min-width: 2400px) { html { zoom: 1.4; } }
+
+/* ── Large-screen density: card rows use the extra width instead of leaving it empty ── */
+@media (min-width: 1650px) {
+  #root [style*="repeat(3, 1fr)"]:not([style*="px repeat"]),
+  #root [style*="repeat(4, 1fr)"]:not([style*="px repeat"]) { grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)) !important; }
+}
+@media (min-width: 2200px) {
+  #root [style*="repeat(2, 1fr)"]:not([style*="px repeat"]),
+  #root [style*="1fr 1fr"]:not([style*="px"]) { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)) !important; }
+}
+
+
+
+/* flex content columns may shrink below their widest child, so one wide element cannot prop the whole page open (all widths) */
+#root [style*="flex: 1"], #root [style*="flex:1"], #root .flex-1, #root main { min-width: 0 !important; }
+
+/* ── wide data tables: the table's container scrolls sideways when the table is wider than it (sticky headers still work vertically) ── */
+#root :has(> table):not(td):not(th):not(table) { overflow-x: auto !important; max-width: 100%; -webkit-overflow-scrolling: touch; }
+
+/* ── Touch: comfortable targets on touch screens and interactive boards ── */
+@media (pointer: coarse) {
+  #root aside button, #root aside a { min-height: 48px; }
+  #root header button, #root header a[role="button"] { min-height: var(--rs-touch); min-width: var(--rs-touch); }
+  #root input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), #root select, #root textarea { min-height: var(--rs-touch); }
+  #root tbody tr button, #root tbody tr a[role="button"] { min-height: 40px; }
+  /* no hover-only reveal: keep hover affordances usable by touch */
+  #root [role="tab"], #root [role="menuitem"] { min-height: var(--rs-touch); }
+}
+
+/* ── Adaptive navigation: sidebar becomes a drawer below 1024 px ── */
+#rs-menu-btn, #rs-overlay, #rs-fs-btn { display: none; }
+#rs-menu-btn { position: fixed; top: 10px; left: 10px; z-index: 3100; width: var(--rs-touch); height: var(--rs-touch); border-radius: 12px; align-items: center; justify-content: center; background: #0f4c4a; color: #fff; border: 0; box-shadow: 0 8px 20px -8px rgba(6, 43, 42, .55); cursor: pointer; }
+#rs-overlay { position: fixed; inset: 0; z-index: 2990; background: rgba(6, 43, 42, .5); opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+#rs-fs-btn { position: fixed; right: 14px; bottom: 14px; z-index: 3100; width: 44px; height: 44px; border-radius: 12px; align-items: center; justify-content: center; background: rgba(15, 76, 74, .85); color: #fff; border: 0; cursor: pointer; opacity: .75; }
+#rs-fs-btn:hover, #rs-fs-btn:focus-visible { opacity: 1; }
+#rs-menu-btn:focus-visible, #rs-fs-btn:focus-visible { outline: 3px solid #2fcf9c; outline-offset: 2px; }
+@media (pointer: coarse) and (min-width: 1400px), (min-width: 2400px) { #rs-fs-btn { display: flex; } }
+
+@media (max-width: 1023px) {
+  body.rs-has-aside #rs-menu-btn { display: flex; }
+  #root aside:not(.sa-sidebar) {
+    position: fixed !important; top: 0; left: 0; bottom: 0; height: 100dvh !important; width: min(300px, 86vw) !important; max-width: 86vw;
+    z-index: 3000 !important; transform: translateX(-104%); transition: transform .24s ease; overflow-y: auto !important; overscroll-behavior: contain;
+    box-shadow: 0 0 44px rgba(6, 43, 42, .35);
+  }
+  body.rs-nav-open #root aside:not(.sa-sidebar) { transform: none; }
+  body.rs-nav-open #rs-overlay { display: block; opacity: 1; pointer-events: auto; }
+  body.rs-nav-open { overflow: hidden; }
+  /* while the drawer is open the button moves to the drawer's edge as a close control, clear of the logo */
+  body.rs-nav-open #rs-menu-btn { left: calc(min(300px, 86vw) - 54px); top: 12px; background: transparent; color: #0f4c4a; box-shadow: none; }
+  body.rs-has-aside .demo-banner { padding-left: 64px !important; }
+  /* leave room for the Menu button so it never covers the logo or title */
+  body.rs-has-aside #root header { padding-left: 64px !important; flex-wrap: wrap; row-gap: 8px; height: auto !important; min-height: 64px; }
+  body.rs-has-aside #root main { min-width: 0; width: 100%; }
+  #root [style*="flex-wrap"] > *, #root main > * { min-width: 0; }
+}
+
+/* ── Tablet and phone content ── */
+@media (max-width: 900px) {
+  #root table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  #root img, #root video, #root canvas { max-width: 100%; }
+  #root pre, #root code { max-width: 100%; overflow-x: auto; }
+}
+@media (max-width: 760px) {
+  /* inline multi-column grids stack (small calendar/timetable grids with a fixed first column are left alone) */
+  #root [style*="grid-template-columns"]:not([style*="px repeat"]):not([style*="repeat(7"]):not([style*="repeat(8"]) {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)) !important;
+  }
+  #root [style*="grid-column"] { grid-column: auto !important; }
+  /* modals and dialogs never exceed the screen */
+  #root [style*="position: fixed"][style*="inset: 0"] > div,
+  #root [role="dialog"] { max-width: calc(100vw - 16px) !important; max-height: 92dvh !important; overflow-y: auto !important; }
+  #root input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), #root select, #root textarea { font-size: 16px !important; } /* stops iOS zoom-on-focus */
+  #root main { padding-left: 12px !important; padding-right: 12px !important; }
+  /* rigid rows (toolbars, tab strips, header lines) wrap instead of pushing the page sideways; rows that scroll on purpose are left alone */
+  #root [style*="display: flex"]:not([style*="flex-direction: column"]):not([style*="overflow"]):not([style*="flex-wrap"]) { flex-wrap: wrap; row-gap: 8px; }
+  #root [style*="white-space: nowrap"]:not(td):not(th):not(button) { white-space: normal !important; }
+  #root header [style*="display: flex"] { min-width: 0; }
+  #root [style*="min-width"]:not(table):not(th):not(td) { min-width: 0 !important; }
+}
+@media (max-width: 480px) {
+  #root h1 { font-size: clamp(20px, 6vw, 26px) !important; }
+}
+
+
+/* ── split layouts (form + info panel, content + side panel) stack on tablets and phones ── */
+@media (max-width: 1023px) {
+  #root [style*="grid-template-columns: 1fr 2fr"], #root [style*="grid-template-columns: 2fr 1fr"] { grid-template-columns: minmax(0, 1fr) !important; }
+  #root [style*="display: grid"] > * { min-width: 0; }
+}
+/* decorative blurred orbs are hidden on phones: no sideways scroll, less paint work */
+@media (max-width: 760px) { .ui-orb { display: none !important; } }
+
+@media (prefers-reduced-motion: reduce) {
+  #root aside:not(.sa-sidebar), #rs-overlay { transition: none; }
+}
+
+@media print {
+  #rs-menu-btn, #rs-overlay, #rs-fs-btn { display: none !important; }
+  #root aside:not(.sa-sidebar) { display: none !important; }
+  html { zoom: 1 !important; }
+}

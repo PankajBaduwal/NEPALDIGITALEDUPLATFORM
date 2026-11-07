@@ -1,0 +1,226 @@
+/* =========================================================================
+   Nepal Education Platform — professional light theme
+   One light design language for every portal. Loaded after index.css so it
+   refines (never replaces) existing component styles.
+   ========================================================================= */
+
+:root {
+  color-scheme: light;
+  --ui-bg: #f4faf8;
+  --ui-surface: #ffffff;
+  --ui-border: #dcebe6;
+  --ui-border-strong: #cfdcd8;
+  --ui-text: #0e3e3b;
+  --ui-muted: #5f736f;
+  --ui-brand: #0f5f55;
+  --ui-brand-strong: #0f5f55;
+  --ui-accent: #117a6b;
+  --ui-ring: rgba(17, 122, 107, 0.28);
+  --ui-shadow-sm: 0 1px 2px rgba(14, 62, 59, 0.04), 0 1px 3px rgba(14, 62, 59, 0.04);
+  --ui-shadow-md: 0 6px 18px -8px rgba(14, 62, 59, 0.14), 0 2px 6px rgba(14, 62, 59, 0.04);
+  --ui-shadow-lg: 0 18px 40px -16px rgba(14, 62, 59, 0.22);
+  --ui-ease: cubic-bezier(0.22, 0.8, 0.28, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--ui-bg);
+  background-image: radial-gradient(1100px 480px at 85% -12%, rgba(31, 181, 137, 0.10), transparent 62%),
+    radial-gradient(800px 380px at -8% 0%, rgba(127, 227, 194, 0.16), transparent 58%);
+  background-attachment: fixed;
+  color: var(--ui-text);
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading, 'Plus Jakarta Sans'), var(--font-sans, 'Inter'), sans-serif;
+  letter-spacing: -0.01em;
+}
+
+::selection { background: rgba(31, 181, 137, 0.22); color: #052e2b; }
+
+/* Numbers line up in tables and KPI tiles */
+table, td, th { font-variant-numeric: tabular-nums; }
+
+/* ---------- Scrollbars ---------- */
+* { scrollbar-width: thin; scrollbar-color: #cfdcd8 transparent; }
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: #cfdcd8; border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
+*::-webkit-scrollbar-thumb:hover { background: #8da19d; background-clip: content-box; border: 2px solid transparent; }
+
+/* ---------- Focus & form controls ---------- */
+:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 2px; border-radius: 6px; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 2px; }
+
+input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']),
+select,
+textarea {
+  transition: border-color 0.18s var(--ui-ease), box-shadow 0.18s var(--ui-ease), background-color 0.18s var(--ui-ease);
+  background-color: #ffffff;
+  color: var(--ui-text);
+}
+input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']):focus,
+select:focus,
+textarea:focus {
+  outline: none !important;
+  border-color: var(--ui-accent) !important;
+  box-shadow: 0 0 0 3px var(--ui-ring) !important;
+}
+input::placeholder, textarea::placeholder { color: #8da19d; }
+input[type='checkbox'], input[type='radio'], input[type='range'] { accent-color: var(--ui-accent); }
+select { cursor: pointer; }
+:disabled { cursor: not-allowed; }
+
+/* ---------- Buttons: tactile and consistent ---------- */
+button, [role='button'], a {
+  transition: background-color 0.18s var(--ui-ease), border-color 0.18s var(--ui-ease), color 0.18s var(--ui-ease),
+    box-shadow 0.18s var(--ui-ease), transform 0.12s var(--ui-ease), opacity 0.18s var(--ui-ease), filter 0.18s var(--ui-ease);
+}
+button:not(:disabled):hover { filter: brightness(0.97) saturate(1.05); }
+button:not(:disabled):active { transform: translateY(1px) scale(0.985); filter: brightness(0.94); }
+button:disabled { opacity: 0.55; filter: grayscale(0.2); }
+
+/* ---------- Cards ---------- */
+[style*='border: 1px solid rgb(226, 232, 240)'][style*='border-radius'],
+[style*='border: 1px solid rgb(241, 245, 249)'][style*='border-radius'],
+.border.border-slate-200.rounded-xl,
+.border.border-slate-200.rounded-2xl {
+  transition: box-shadow 0.25s var(--ui-ease), border-color 0.25s var(--ui-ease), transform 0.25s var(--ui-ease);
+}
+[style*='border: 1px solid rgb(226, 232, 240)'][style*='background: rgb(255, 255, 255)'][style*='border-radius']:hover,
+.bg-white.border.border-slate-200.rounded-xl:hover,
+.bg-white.border.border-slate-200.rounded-2xl:hover {
+  border-color: #d3dbe6;
+  box-shadow: var(--ui-shadow-md);
+}
+
+/* ---------- Tables ---------- */
+table { border-collapse: collapse; }
+tbody tr { transition: background-color 0.15s var(--ui-ease); }
+tbody tr:hover { background-color: rgba(241, 245, 249, 0.7); }
+thead th, thead td { letter-spacing: 0.01em; }
+
+/* ---------- Charts ---------- */
+.recharts-default-tooltip {
+  background: #ffffff !important;
+  border: 1px solid var(--ui-border) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--ui-shadow-lg) !important;
+  color: var(--ui-text) !important;
+  padding: 10px 12px !important;
+}
+.recharts-default-tooltip .recharts-tooltip-label { color: var(--ui-muted) !important; font-weight: 700; margin-bottom: 4px !important; }
+.recharts-cartesian-grid line { stroke: #eef2f7; }
+.recharts-cartesian-axis-tick-value { fill: #5f736f; font-size: 11px; }
+.recharts-legend-item-text { color: #4b605b !important; font-size: 12px; }
+
+/* ---------- Motion ---------- */
+@keyframes ui-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ui-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes ui-pop {
+  from { opacity: 0; transform: scale(0.97) translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ui-bar-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes ui-shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* Page content settles in; tab switches replay it because the content re-mounts */
+main > *, #root > div > main > * {
+  animation: ui-rise 0.42s var(--ui-ease) both;
+}
+main > *:nth-child(2) { animation-delay: 0.04s; }
+main > *:nth-child(3) { animation-delay: 0.08s; }
+main > *:nth-child(4) { animation-delay: 0.12s; }
+main > *:nth-child(5) { animation-delay: 0.16s; }
+main > *:nth-child(n+6) { animation-delay: 0.2s; }
+
+/* Grids of cards cascade in */
+main [style*='display: grid'] > *,
+main .grid > * {
+  animation: ui-rise 0.46s var(--ui-ease) both;
+}
+main [style*='display: grid'] > *:nth-child(2), main .grid > *:nth-child(2) { animation-delay: 0.05s; }
+main [style*='display: grid'] > *:nth-child(3), main .grid > *:nth-child(3) { animation-delay: 0.1s; }
+main [style*='display: grid'] > *:nth-child(4), main .grid > *:nth-child(4) { animation-delay: 0.15s; }
+main [style*='display: grid'] > *:nth-child(5), main .grid > *:nth-child(5) { animation-delay: 0.2s; }
+main [style*='display: grid'] > *:nth-child(6), main .grid > *:nth-child(6) { animation-delay: 0.25s; }
+main [style*='display: grid'] > *:nth-child(n+7), main .grid > *:nth-child(n+7) { animation-delay: 0.3s; }
+
+/* Dialogs pop in */
+[style*='position: fixed'][style*='inset: 0'] > *, .fixed.inset-0 > * { animation: ui-pop 0.26s var(--ui-ease) both; }
+[style*='position: fixed'][style*='inset: 0'], .fixed.inset-0 { animation: ui-fade 0.2s ease both; }
+
+/* Progress bars grow from the left when they appear */
+[style*='height: 4px'][style*='width:'][style*='%'][style*='border-radius'],
+[style*='height: 5px'][style*='width:'][style*='%'][style*='border-radius'],
+[style*='height: 6px'][style*='width:'][style*='%'][style*='border-radius'],
+[style*='height: 7px'][style*='width:'][style*='%'][style*='border-radius'],
+[style*='height: 8px'][style*='width:'][style*='%'][style*='border-radius'],
+[style*='height: 10px'][style*='width:'][style*='%'][style*='border-radius'],
+.h-1\.5.rounded-full > div, .h-2.rounded-full > div {
+  transform-origin: left center;
+  animation: ui-bar-grow 0.9s var(--ui-ease) 0.15s both;
+}
+
+/* Loading placeholders */
+.ui-skeleton {
+  background: linear-gradient(90deg, #eef2f7 25%, #f4faf8 37%, #eef2f7 63%);
+  background-size: 800px 100%;
+  animation: ui-shimmer 1.3s linear infinite;
+  border-radius: 8px;
+}
+
+/* Sidebars and navigation */
+aside { box-shadow: 1px 0 0 var(--ui-border), 8px 0 24px -18px rgba(14, 62, 59, 0.18); }
+aside button:not(:disabled):hover { filter: none; background-color: rgba(31, 181, 137, 0.07); }
+
+/* Decorative light orbs used on hero panels */
+@keyframes ui-float {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(18px, -22px, 0) scale(1.06); }
+}
+.ui-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(46px);
+  pointer-events: none;
+  animation: ui-float 11s ease-in-out infinite;
+}
+.ui-orb--slow { animation-duration: 16s; animation-delay: -4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-delay: 0ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+@media print {
+  body { background: #ffffff !important; background-image: none !important; }
+  main > *, main [style*='display: grid'] > * { animation: none !important; }
+}
+
+/* ── dashboard polish (matches the supplied teal/mint reference) ─────────────────────────────
+   Softer corners and a faint teal shadow on white panels, for every portal except the public homepage.
+   Shadows are only added where a panel has none of its own. */
+body:not(:has(.nh)) [style*="border-radius: 12px"][style*="border"],
+body:not(:has(.nh)) [style*="border-radius: 14px"][style*="border"] { border-radius: 16px !important; }
+body:not(:has(.nh)) [style*="border-radius: 16px"][style*="border"] { border-radius: 18px !important; }
+body:not(:has(.nh)) [style*="background: rgb(255, 255, 255)"][style*="border-radius"][style*="border"] { box-shadow: 0 10px 28px -22px rgba(14, 62, 59, 0.32); }
+body:not(:has(.nh)) .rounded-xl, body:not(:has(.nh)) .rounded-2xl { border-radius: 16px; }

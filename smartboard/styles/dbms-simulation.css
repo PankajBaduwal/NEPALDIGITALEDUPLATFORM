@@ -1,0 +1,212 @@
+/**
+ * dbms-simulation.css
+ * Database Management Systems (U25CS401) Theme Styles
+ * Database Emerald / SQL Matrix Green (#10b981 / #059669) · Eduverse Glassmorphism
+ */
+
+:root {
+  --dbms-emerald: #10b981;
+  --dbms-emerald-dark: #059669;
+  --dbms-emerald-deep: #047857;
+  --dbms-emerald-light: #34d399;
+  --dbms-emerald-soft: rgba(16, 185, 129, 0.12);
+  --dbms-cyan: #06b6d4;
+  --dbms-amber: #f59e0b;
+  --dbms-rose: #f43f5e;
+  --dbms-indigo: #6366f1;
+  --dbms-slate-bg: #0f172a;
+  --dbms-slate-card: #1e293b;
+  --dbms-slate-border: #334155;
+}
+
+[data-theme="dark"] {
+  --dbms-emerald-soft: rgba(16, 185, 129, 0.22);
+}
+
+/* Brand badge in header */
+#dbms-brand-mark {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+  font-weight: 800;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+/* Active buttons & borders */
+.dbms-btn-primary {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3) !important;
+}
+
+.dbms-btn-primary:hover {
+  background: linear-gradient(135deg, #34d399, #10b981) !important;
+}
+
+/* Stage top badges */
+.dbms-stage-badges .ep-badge-accent {
+  background: var(--dbms-emerald-soft);
+  color: var(--dbms-emerald-dark);
+  border: 1px solid var(--dbms-emerald);
+}
+
+[data-theme="dark"] .dbms-stage-badges .ep-badge-accent {
+  color: var(--dbms-emerald-light);
+}
+
+/* Canvas styling */
+#dbms-canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  background-color: var(--card);
+}
+
+/* Pedagogical Work Box */
+.dbms-work-item {
+  border-left: 3px solid var(--dbms-emerald);
+  padding-left: 10px;
+}
+
+/* Relational Table Visualizer */
+.dbms-table-container {
+  overflow-x: auto;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+
+.dbms-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.dbms-table th {
+  background: var(--dbms-emerald-soft);
+  color: var(--ink);
+  font-weight: 700;
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 2px solid var(--dbms-emerald);
+}
+
+.dbms-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.dbms-table tr:hover {
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.dbms-table tr.highlighted-row {
+  background: rgba(16, 185, 129, 0.18) !important;
+  font-weight: 600;
+}
+
+.dbms-table tr.conflict-row {
+  background: rgba(244, 63, 94, 0.18) !important;
+}
+
+/* Relational Symbol Bar */
+.dbms-symbol-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+.dbms-symbol-btn {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dbms-symbol-btn:hover {
+  border-color: var(--dbms-emerald);
+  background: var(--dbms-emerald-soft);
+  color: var(--dbms-emerald-dark);
+}
+
+/* SQL Code Editor Area */
+.dbms-sql-box {
+  width: 100%;
+  min-height: 70px;
+  font-family: 'Fira Code', Consolas, Monaco, monospace;
+  font-size: 12.5px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  resize: vertical;
+  line-height: 1.4;
+}
+
+.dbms-sql-box:focus {
+  outline: none;
+  border-color: var(--dbms-emerald);
+  box-shadow: 0 0 0 2px var(--dbms-emerald-soft);
+}
+
+/* Query Execution Pipeline Step Indicators */
+.dbms-pipeline-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 10px 0;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.dbms-pipeline-node {
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.dbms-pipeline-node.active {
+  background: var(--dbms-emerald);
+  color: #ffffff;
+  border-color: var(--dbms-emerald-dark);
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+}
+
+.dbms-pipeline-node.completed {
+  background: var(--dbms-emerald-soft);
+  color: var(--dbms-emerald-dark);
+  border-color: var(--dbms-emerald);
+}
+
+/* Precedence Graph and WFG Node Badges */
+.dbms-graph-node {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 11px;
+  background: var(--card);
+  border: 1px solid var(--line);
+}

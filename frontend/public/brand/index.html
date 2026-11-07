@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nepal Digital Education Platform — Brand Identity</title>
+<link rel="icon" type="image/svg+xml" href="/brand/logo/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#087A55;--n:#142D4E;--c:#DC2445;--gold:#D8A849;--ink:#142D4E;--mut:#5b6b80;--line:#e3e8ee;--bg:#f7f9fb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+header.top{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:5}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+header.top img{height:34px}header.top nav{display:flex;gap:18px;font-size:13px;font-weight:600;color:var(--mut)}header.top a{color:inherit;text-decoration:none}header.top a:hover{color:var(--g)}
+@media(max-width:760px){header.top nav{display:none}}
+section{padding:72px 0;border-bottom:1px solid var(--line)}section:last-of-type{border:0}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--g)}
+h1,h2{margin:8px 0 0;letter-spacing:-.02em;line-height:1.1}h1{font-size:clamp(34px,5vw,60px)}h2{font-size:clamp(26px,3.4vw,38px)}
+p.lead{font-size:18px;color:var(--mut);max-width:680px;margin:14px 0 0}
+.hero{background:linear-gradient(180deg,#fff,var(--bg));text-align:center;padding:90px 0 70px}
+.hero img.main{width:min(640px,86%);margin:44px auto 0;display:block}
+.tag{display:inline-block;margin-top:26px;padding:8px 16px;border:1px solid var(--line);border-radius:999px;font-weight:700;font-size:14px;color:var(--n);background:#fff}
+.grid{display:grid;gap:18px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.g2,.g3,.g4{grid-template-columns:minmax(0,1fr)}}
+.card{border:1px solid var(--line);border-radius:18px;background:#fff;padding:26px;display:flex;flex-direction:column;gap:14px}
+.card .stage{display:grid;place-items:center;min-height:170px;border-radius:12px;background:var(--bg);padding:20px}
+.card .stage.dark{background:var(--n)}.card .stage.green{background:var(--g)}
+.card h3{margin:0;font-size:16px}.card small{color:var(--mut);font-size:13px}
+.label{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.sw{border-radius:16px;overflow:hidden;border:1px solid var(--line)}.sw i{display:block;height:110px}.sw div{padding:12px 14px;font-size:13px}.sw b{display:block;font-size:15px}.sw code{color:var(--mut)}
+.concept li{margin:8px 0}.concept{padding-left:18px;color:#34465e}
+.spec{display:flex;gap:26px;align-items:end;flex-wrap:wrap;padding:24px;background:var(--bg);border-radius:14px}
+.spec figure{margin:0;text-align:center;font-size:12px;color:var(--mut)}.spec figure img{display:block;margin:0 auto 8px}
+.spec.dark{background:var(--n)}.spec.dark figure{color:#a9b9d0}
+.mock{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.mock .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#f1f4f7;border-bottom:1px solid var(--line)}.mock .bar i{width:10px;height:10px;border-radius:50%;background:#d5dbe3}
+.mock .tab{margin-left:12px;display:flex;align-items:center;gap:8px;background:#fff;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:var(--mut)}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--line)}.hdr nav{display:flex;gap:22px;font-size:13px;font-weight:600;color:var(--mut)}.hdr .btn{background:var(--g);color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:13px}
+.side{display:grid;grid-template-columns:220px 1fr;min-height:200px}.side aside{border-right:1px solid var(--line);padding:16px}.side aside div{padding:9px 10px;border-radius:8px;font-size:13px;font-weight:600;color:var(--mut)}.side aside div.on{background:#e7f6f0;color:var(--g)}
+.phone{width:210px;border:8px solid #101828;border-radius:34px;background:#fff;padding:14px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:310px}
+.tile{display:inline-block;border-radius:22%;overflow:hidden;box-shadow:0 8px 22px -10px rgba(20,45,78,.5)}
+.avatar{width:96px;height:96px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center}
+footer{padding:40px 0;background:var(--n);color:#a9b9d0;font-size:14px}
+.type big{display:block;font-size:46px;font-weight:800;letter-spacing:.02em;color:var(--n);line-height:1.1}
+.type .l2{font-weight:600;letter-spacing:.165em;color:var(--g);font-size:19px}
+.w{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}.w span{font-size:30px;color:var(--n)}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><img src="/brand/logo/logo-horizontal.svg" alt="Nepal Digital Education Platform"><nav><a href="#concept">Concept</a><a href="#logos">Logo set</a><a href="#colour">Colour</a><a href="#type">Typography</a><a href="#small">Small sizes</a><a href="#apps">Applications</a><a href="#rules">Usage</a></nav></div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">Brand identity</div>
+  <h1>One Platform. Connected Education.<br>A Digital Future for Nepal.</h1>
+  <img class="main" src="/brand/logo/logo-stacked.svg" alt="Nepal Digital Education Platform, primary stacked logo">
+  <div class="tag">Nepal Digital Education Platform</div>
+</div></section>
+
+<section id="concept"><div class="wrap grid g2" style="align-items:center;gap:56px">
+  <div>
+    <div class="eyebrow">The idea</div><h2>Two pages, one connection, one nation.</h2>
+    <p class="lead">The symbol is an <b>N</b> for Nepal, built the way the platform is built.</p>
+    <ul class="concept">
+      <li><b>Two pages.</b> The two green stems are the pages of an open book: knowledge, teachers and students on either side.</li>
+      <li><b>One connection.</b> The navy diagonal is the single link that joins them: one platform connecting every school and college.</li>
+      <li><b>A pennant.</b> The small crimson triangle on the right page echoes Nepal's pennant flag and points forward: progress. The open space beside the diagonal repeats the flag's triangle.</li>
+      <li><b>Simple by construction.</b> Three flat shapes and one accent, no gradients, shadows or 3D. It reads at 16 px and holds up in one colour.</li>
+    </ul>
+  </div>
+  <div class="card" style="align-items:center">
+    <svg viewBox="0 0 600 340" width="100%" style="max-width:600px" role="img" aria-label="Symbol construction">
+      <image href="/brand/logo/icon.svg" x="150" y="14" width="300" height="300"/>
+      <g font-family="Manrope,sans-serif" font-size="13.5" font-weight="700">
+        <path d="M150 256 L204 240" stroke="#087A55" stroke-width="1.6"/><circle cx="204" cy="240" r="3.5" fill="#087A55"/><text x="6" y="262" fill="#087A55">Page · knowledge</text>
+        <path d="M146 150 L305 160" stroke="#142D4E" stroke-width="1.6"/><circle cx="305" cy="160" r="3.5" fill="#142D4E"/><text x="6" y="146" fill="#142D4E">Connection · one platform</text>
+        <path d="M397 79 L452 62" stroke="#DC2445" stroke-width="1.6"/><circle cx="397" cy="79" r="3.5" fill="#DC2445"/><text x="456" y="60" fill="#DC2445">Pennant · Nepal,</text><text x="456" y="77" fill="#DC2445">pointing forward</text>
+        <path d="M397 214 L452 232" stroke="#087A55" stroke-width="1.6"/><circle cx="397" cy="214" r="3.5" fill="#087A55"/><text x="456" y="240" fill="#087A55">Page · learners</text>
+      </g>
+    </svg>
+    <small>Construction on a 128 unit grid. Gaps between shapes are a constant 7 units, true transparency, so the mark works on any background.</small>
+  </div>
+</div></section>
+
+<section id="logos"><div class="wrap">
+  <div class="eyebrow">Logo set</div><h2>Five variations</h2>
+  <p class="lead">The wordmark is set in Manrope, converted to outlines. The two lines are set to exactly the same width.</p>
+  <div class="grid g2" style="margin-top:34px">
+    <div class="card"><span class="label">A · Primary horizontal</span><div class="stage"><img src="/brand/logo/logo-horizontal.svg" width="420" alt=""></div><small>Website headers, navigation bars, email signatures. Files: <code>logo-horizontal.svg</code></small></div>
+    <div class="card"><span class="label">B · Stacked</span><div class="stage"><img src="/brand/logo/logo-stacked.svg" width="260" alt=""></div><small>Documents, presentations, certificates, institutional branding. <code>logo-stacked.svg</code></small></div>
+    <div class="card"><span class="label">C · Icon only</span><div class="stage"><img src="/brand/logo/icon.svg" width="130" alt=""></div><small>Favicon, app icon, profile image. <code>icon.svg</code>, <code>icon-small.svg</code> (for 16–32 px), <code>favicon.svg</code></small></div>
+    <div class="card"><span class="label">E · Dark background</span><div class="stage dark"><img src="/brand/logo/logo-horizontal-dark.svg" width="420" alt=""></div><small>Dark website sections, Smart Board backgrounds, presentations. <code>logo-horizontal-dark.svg</code>, <code>logo-stacked-dark.svg</code>, <code>icon-dark.svg</code></small></div>
+  </div>
+  <h3 style="margin:44px 0 6px">D · Monochrome</h3>
+  <p class="lead" style="margin-top:0">Single-colour versions keep the same shapes and gaps. Use green, black or white.</p>
+  <div class="grid g3" style="margin-top:20px">
+    <div class="card"><div class="stage"><img src="/brand/logo/logo-horizontal-green.svg" width="320" alt=""></div><small>Single green · <code>-green.svg</code></small></div>
+    <div class="card"><div class="stage"><img src="/brand/logo/logo-horizontal-black.svg" width="320" alt=""></div><small>Solid black · official documents, print · <code>-black.svg</code></small></div>
+    <div class="card"><div class="stage green"><img src="/brand/logo/logo-horizontal-white.svg" width="320" alt=""></div><small>Solid white on colour · <code>-white.svg</code></small></div>
+  </div>
+</div></section>
+
+<section id="colour"><div class="wrap">
+  <div class="eyebrow">Colour</div><h2>Emerald and navy, with one Nepal accent</h2>
+  <div class="grid g4" style="margin-top:34px">
+    <div class="sw"><i style="background:#087A55"></i><div><b>Deep Emerald</b><code>#087A55</code><br>Primary · 5.35:1 on white</div></div>
+    <div class="sw"><i style="background:#142D4E"></i><div><b>Professional Navy</b><code>#142D4E</code><br>Primary · 13.9:1 on white</div></div>
+    <div class="sw"><i style="background:#fff;border-bottom:1px solid #e3e8ee"></i><div><b>Clean White</b><code>#FFFFFF</code><br>Primary</div></div>
+    <div class="sw"><i style="background:#DC2445"></i><div><b>Nepal Crimson</b><code>#DC2445</code><br>Accent: the pennant only · 4.8:1 on white</div></div>
+    <div class="sw"><i style="background:#D8A849"></i><div><b>Warm Gold</b><code>#D8A849</code><br>Optional accent for certificates and rules. Not used in the logo; do not use for text on white (2.2:1).</div></div>
+    <div class="sw"><i style="background:#3DDC9E"></i><div><b>Light Emerald</b><code>#3DDC9E</code><br>Dark-background version · 7.9:1 on navy</div></div>
+    <div class="sw"><i style="background:#FF4B68"></i><div><b>Light Crimson</b><code>#FF4B68</code><br>Pennant on dark · 4.3:1 on navy</div></div>
+  </div>
+  <p class="lead" style="font-size:15px">Contrast ratios were computed for these exact values. Green and navy carry the identity; crimson appears only as the small pennant.</p>
+</div></section>
+
+<section id="type"><div class="wrap grid g2" style="gap:56px;align-items:center">
+  <div><div class="eyebrow">Typography</div><h2>Manrope</h2>
+    <p class="lead">A clean geometric sans-serif with an institutional tone, open-licence (SIL OFL) and already used by the platform.</p>
+    <ul class="concept"><li><b>Line 1, “NEPAL DIGITAL”</b>: Manrope ExtraBold 800, slight positive tracking.</li><li><b>Line 2, “EDUCATION PLATFORM”</b>: Manrope SemiBold 600, wide tracking (0.165 em), tracked to match line 1 exactly.</li><li><b>Name:</b> always written in full, “NEPAL DIGITAL EDUCATION PLATFORM”.</li><li><b>Nepali text:</b> pair with Noto Sans Devanagari.</li></ul></div>
+  <div class="card type"><big>NEPAL DIGITAL</big><span class="l2">EDUCATION PLATFORM</span>
+    <div class="w"><span style="font-weight:400">Aa</span><span style="font-weight:500">Aa</span><span style="font-weight:600">Aa</span><span style="font-weight:700">Aa</span><span style="font-weight:800">Aa</span></div>
+    <small>Manrope 400 · 500 · 600 · 700 · 800</small></div>
+</div></section>
+
+<section id="small"><div class="wrap">
+  <div class="eyebrow">Small sizes</div><h2>Recognisable from 16 px to 512 px</h2>
+  <p class="lead">At 16–32 px use <code>icon-small.svg</code>: the same mark with wider gaps so the shapes stay separate.</p>
+  <div class="spec" style="margin-top:30px">
+    <figure><img src="/brand/logo/icon-small.svg" width="16" height="16" alt=""><span>16 × 16</span></figure>
+    <figure><img src="/brand/logo/icon-small.svg" width="32" height="32" alt=""><span>32 × 32</span></figure>
+    <figure><img src="/brand/logo/icon.svg" width="48" height="48" alt=""><span>48 × 48</span></figure>
+    <figure><img src="/brand/logo/icon.svg" width="128" height="128" alt=""><span>128</span></figure>
+    <figure><img src="/brand/logo/icon.svg" width="256" height="256" alt=""><span>512 master (shown 256)</span></figure>
+  </div>
+  <div class="spec dark" style="margin-top:14px">
+    <figure><img src="/brand/logo/icon-dark.svg" width="16" height="16" alt=""><span>16</span></figure>
+    <figure><img src="/brand/logo/icon-dark.svg" width="32" height="32" alt=""><span>32</span></figure>
+    <figure><img src="/brand/logo/icon-dark.svg" width="48" height="48" alt=""><span>48</span></figure>
+    <figure><img src="/brand/logo/icon-dark.svg" width="128" height="128" alt=""><span>128</span></figure>
+  </div>
+</div></section>
+
+<section id="apps"><div class="wrap">
+  <div class="eyebrow">Applications</div><h2>In use</h2>
+  <div class="grid" style="gap:26px;margin-top:34px">
+    <div class="mock"><div class="bar"><i></i><i></i><i></i><span class="tab"><img src="/brand/logo/favicon.svg" width="14" height="14" alt=""> Nepal Digital Education Platform</span></div>
+      <div class="hdr"><img src="/brand/logo/logo-horizontal.svg" height="40" alt="Nepal Digital Education Platform"><nav><span>Features</span><span>Role Portals</span><span>CDC Curriculum</span><span>FAQ</span></nav><span class="btn">Register School</span></div>
+      <div style="padding:34px 24px;background:var(--bg);color:var(--mut);font-size:14px">Website header and browser-tab favicon preview</div></div>
+
+    <div class="grid g3" style="align-items:stretch">
+      <div class="mock"><div class="side" style="grid-template-columns:150px 1fr"><aside><img src="/brand/logo/logo-horizontal.svg" width="130" alt="" style="margin-bottom:14px"><div class="on">Dashboard</div><div>Students</div><div>Teachers</div><div>Timetable</div></aside><div style="padding:18px;font-size:13px;color:var(--mut)">Dashboard sidebar</div></div></div>
+      <div class="card" style="align-items:center;justify-content:center"><div class="phone"><img src="/brand/logo/logo-stacked.svg" width="150" alt=""><small>Login page</small></div></div>
+      <div class="card" style="align-items:center;justify-content:center;gap:18px"><div style="display:flex;gap:16px;align-items:center"><span class="tile" style="width:84px;height:84px"><img src="/brand/logo/app-icon-light.svg" width="84" alt=""></span><span class="tile" style="width:84px;height:84px"><img src="/brand/logo/app-icon-dark.svg" width="84" alt=""></span><span class="tile" style="width:84px;height:84px"><img src="/brand/logo/app-icon-green.svg" width="84" alt=""></span></div><small>Mobile app icon: light, navy and green tiles</small>
+        <div style="display:flex;gap:16px;align-items:center"><span class="avatar"><img src="/brand/logo/icon.svg" width="58" alt=""></span><small>Social profile</small></div></div>
+    </div>
+
+    <div class="mock" style="background:var(--n)"><div style="padding:60px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap"><img src="/brand/logo/logo-horizontal-dark.svg" height="86" alt="Nepal Digital Education Platform"><span style="color:#a9b9d0;font-size:15px;max-width:360px">Smart Board and dark sections use the light version. It scales cleanly to 55–105 inch displays.</span></div></div>
+
+    <div class="mock"><div style="padding:36px;text-align:center;border:10px double #D8A849;margin:18px;border-radius:6px"><img src="/brand/logo/logo-stacked.svg" width="190" alt=""><div style="margin-top:10px;font-weight:800;letter-spacing:.2em;font-size:13px;color:var(--n)">CERTIFICATE OF ACHIEVEMENT</div><small style="color:var(--mut)">Certificate and official documents · gold used only as the border</small></div></div>
+  </div>
+</div></section>
+
+<section id="rules"><div class="wrap grid g2" style="gap:40px">
+  <div class="card"><h3>Clear space</h3><div class="stage" style="background:#fff"><svg viewBox="0 0 330 150" width="100%" style="max-width:340px"><rect x="1" y="1" width="328" height="148" fill="none" stroke="#DC2445" stroke-dasharray="5 5"/><image href="/brand/logo/logo-horizontal.svg" x="35" y="30" width="260" height="90"/></svg></div><small>Keep a margin equal to the height of the crimson pennant on every side (about one fifth of the symbol's height).</small></div>
+  <div class="card"><h3>Minimum size</h3><ul class="concept" style="margin:0"><li>Horizontal logo: 160 px wide (40 mm in print).</li><li>Stacked logo: 110 px wide (28 mm).</li><li>Icon: 16 px, using <code>icon-small.svg</code> below 33 px.</li></ul><h3 style="margin-top:8px">Do not</h3><ul class="concept" style="margin:0"><li>Stretch, rotate, recolour or add shadows or gradients.</li><li>Rearrange the symbol's shapes or change the name's wording.</li><li>Place the colour logo on busy images; use a mono or dark version.</li></ul></div>
+</div></section>
+
+<footer><div class="wrap">Nepal Digital Education Platform brand identity. All logo files are vector SVG in <code>/brand/logo/</code>. Wordmark outlines are derived from Manrope (SIL Open Font License).</div></footer>
+</body>
+</html>

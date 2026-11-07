@@ -1,0 +1,159 @@
+/* Responsive behaviour for the Super Admin dashboard.
+   The page styles are inline, so the rules below use !important and attribute selectors on the grids. */
+.sa-topbar,
+.sa-overlay { display: none; }
+
+.sa-main { min-width: 0; }
+.sa-sidebar { transition: transform 0.22s ease; }
+
+/* Grids that were fixed at 4–6 columns step down gradually */
+@media (max-width: 1180px) {
+  .sa-root [style*="repeat(6, 1fr)"] { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (max-width: 1100px) {
+  .sa-root [style*="repeat(4, 1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
+  .sa-root [style*="1.4fr 1fr"] { grid-template-columns: 1fr !important; }
+}
+.sa-root [style*="minmax(360px"] { grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr)) !important; }
+
+@media (max-width: 1023px) {
+  .sa-root { display: block !important; }
+
+  /* Sidebar becomes a slide-in drawer */
+  .sa-sidebar {
+    position: fixed !important;
+    top: 0; bottom: 0; left: 0;
+    width: 280px !important;
+    max-width: 86vw;
+    z-index: 60;
+    transform: translateX(-102%);
+    overflow-y: auto;
+    box-shadow: 0 0 40px rgba(14, 62, 59, 0.25);
+  }
+  .sa-sidebar.is-open { transform: none; }
+  .sa-overlay {
+    display: block;
+    position: fixed; inset: 0;
+    background: rgba(14, 62, 59, 0.45);
+    z-index: 55;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .sa-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+  .sa-topbar {
+    display: flex;
+    position: sticky; top: 0; z-index: 40;
+    align-items: center; gap: 12px;
+    padding: 10px 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #dcebe6;
+  }
+  .sa-topbar button {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px;
+    border-radius: 10px; border: 1px solid #dcebe6; background: #f4faf8; color: #0e3e3b;
+    cursor: pointer;
+  }
+  .sa-topbar button:focus-visible { outline: 2px solid #117a6b; outline-offset: 2px; }
+  .sa-topbar .sa-topbar-title { font-weight: 800; font-size: 14px; color: #0e3e3b; }
+  .sa-topbar .sa-topbar-sub { font-size: 11px; color: #5f736f; font-weight: 600; }
+
+  .sa-main { height: auto !important; min-height: 100vh; overflow: visible !important; }
+  .sa-header { padding: 16px !important; flex-wrap: wrap; gap: 12px; }
+  .sa-header h2 { font-size: 17px !important; line-height: 1.3; }
+  .sa-content { padding: 16px !important; }
+
+  /* Tables scroll sideways inside their own box instead of stretching the page */
+  .sa-main :has(> table) { overflow-x: auto !important; }
+  .sa-main table { min-width: 640px; }
+}
+
+@media (max-width: 760px) {
+  .sa-root [style*="repeat(6, 1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
+  .sa-root [style*="80px 1fr 100px 100px auto"] { grid-template-columns: 1fr !important; }
+  .sa-root [style*="80px 1fr 100px"] { grid-template-columns: 1fr 1fr !important; }
+}
+
+@media (max-width: 560px) {
+  .sa-root [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  .sa-header { padding: 12px !important; }
+  .sa-content { padding: 12px !important; }
+}
+
+@media (max-width: 420px) {
+  .sa-root [style*="repeat(4, 1fr)"],
+  .sa-root [style*="repeat(6, 1fr)"] { grid-template-columns: 1fr !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sa-sidebar, .sa-overlay { transition: none; }
+}
+
+/* ───────── Teacher-dashboard look: sidebar, header, cards ───────── */
+.sa-nav-label {
+  padding: 6px 10px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px;
+  text-transform: uppercase; color: #8da19d;
+}
+.sa-nav-item {
+  width: 100%; display: flex; align-items: center; gap: 12px;
+  padding: 9px 12px; border-radius: 8px; border: 0; border-left: 3px solid transparent;
+  background: transparent; color: #4b605b; font-size: 13px; font-weight: 700; text-align: left; cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+}
+.sa-nav-item svg { flex-shrink: 0; color: #5f736f; transition: color 0.15s ease; }
+.sa-nav-item:hover { background: #ebf5f1; color: #0e3e3b; }
+.sa-nav-item:hover svg { color: #0e3e3b; }
+.sa-nav-item:active { transform: scale(0.99); }
+.sa-nav-item.is-active { background: #e6f7f0; color: #117a6b; border-left-color: #117a6b; }
+.sa-nav-item.is-active svg { color: #117a6b; }
+.sa-nav-text { flex: 1; line-height: 1.25; }
+.sa-nav-badge { background: #6d5bd0; color: #fff; border-radius: 10px; padding: 1px 7px; font-size: 11px; font-weight: 800; }
+.sa-crumb { font-size: 11px; font-weight: 700; color: #8da19d; margin-bottom: 2px; }
+.sa-header { min-height: 64px; }
+.sa-header h2 { letter-spacing: -0.01em; }
+
+/* cards get the Teacher dashboard's 16px corners and a very light shadow */
+.sa-content [style*="border-radius: 12px"][style*="border: 1px solid rgb(226, 232, 240)"],
+.sa-content [style*="border-radius: 14px"][style*="border: 1px solid rgb(226, 232, 240)"] {
+  border-radius: 16px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ───────── motion ───────── */
+@keyframes sa-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes sa-spin { to { transform: rotate(360deg); } }
+@keyframes sa-shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+.sa-content > * { animation: sa-fade-up 0.28s ease both; }
+.animate-spin { animation: sa-spin 1s linear infinite; }
+.sa-skel {
+  background: linear-gradient(90deg, #eef2f6 25%, #f4faf8 37%, #eef2f6 63%);
+  background-size: 400% 100%; animation: sa-shimmer 1.4s ease infinite; border-radius: 16px;
+}
+
+/* every button and link answers the pointer */
+.sa-content button:not(:disabled), .sa-header button:not(:disabled) {
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease, filter 0.15s ease, opacity 0.15s ease;
+}
+.sa-content button:not(:disabled):hover, .sa-header button:not(:disabled):hover { filter: brightness(0.96); }
+.sa-content button:not(:disabled):active, .sa-header button:not(:disabled):active { transform: scale(0.98); }
+.sa-content button:disabled { cursor: not-allowed; }
+.sa-content tbody tr { transition: background-color 0.12s ease; }
+.sa-content tbody tr:hover { background: #f4faf8; }
+/* stat cards lift slightly */
+.sa-content [style*="padding: 20px"][style*="border-radius: 14px"]:hover,
+.sa-content [style*="padding: 20px"][style*="border-radius: 16px"]:hover {
+  transform: translateY(-2px); box-shadow: 0 8px 20px rgba(14, 62, 59, 0.08) !important;
+}
+.sa-content [style*="padding: 20px"][style*="border-radius: 14px"],
+.sa-content [style*="padding: 20px"][style*="border-radius: 16px"] { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+
+/* ───────── accessibility ───────── */
+.sa-root :is(button, a, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid #117a6b; outline-offset: 2px; }
+.sa-root input:focus, .sa-root select:focus, .sa-root textarea:focus { border-color: #117a6b; box-shadow: 0 0 0 3px rgba(17, 122, 107, 0.15); outline: none; }
+.sa-root input:focus-visible, .sa-root select:focus-visible, .sa-root textarea:focus-visible { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sa-content > *, .animate-spin, .sa-skel, .sa-nav-item, .sa-content button, .sa-content tbody tr { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,2702 @@
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { NepalEduLogo } from '../../components/common/NepalEduLogo';
+import { DemoRoleModal } from '../../components/common/DemoRoleModal';
+import {
+  GraduationCap,
+  BookOpen,
+  ClipboardCheck,
+  BarChart3,
+  Layers,
+  CheckCircle2,
+  Play,
+  ArrowRight,
+  ShieldCheck,
+  School,
+  Users,
+  Sparkles,
+  MonitorPlay,
+  MapPin,
+  X,
+  FileText,
+  Clock,
+  Award,
+  ChevronRight,
+  ChevronDown,
+  Check,
+  Laptop,
+  Compass,
+  Cpu,
+  BookMarked,
+  LayoutDashboard,
+  UserCheck,
+  ShieldAlert,
+  ExternalLink,
+  BookText,
+  Library,
+  Globe,
+  Sparkle,
+  Search,
+  CheckSquare,
+  BarChart,
+  HelpCircle,
+  LogIn,
+  Calendar,
+} from 'lucide-react';
+
+export const PublicHomePage: React.FC = () => {
+  const navigate = useNavigate();
+  const [demoModalOpen, setDemoModalOpen] = useState(false);
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [activeTab, setActiveTab] = useState<'smartboard' | 'assignment' | 'quiz' | 'student' | 'admin'>('smartboard');
+  const [activeGradeLevel, setActiveGradeLevel] = useState<'primary' | 'lower_sec' | 'secondary' | 'higher_sec'>('secondary');
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(0);
+
+  const toggleFaq = (index: number) => {
+    setExpandedFaq(expandedFaq === index ? null : index);
+  };
+
+  return (
+    <div
+      style={{
+        minHeight: '100vh',
+        background: '#FFFFFF',
+        color: '#172033',
+        fontFamily: '"Inter", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        overflowX: 'hidden',
+      }}
+    >
+      {/* ── STICKY MAIN NAVBAR (CLEAN & PROFESSIONAL) ──────────────────────── */}
+      <header
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 50,
+          background: 'rgba(255, 255, 255, 0.98)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderBottom: '1px solid #E2E8F0',
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.03)',
+        }}
+      >
+        {/* Subtle Top Accent Line */}
+        <div
+          style={{
+            height: '3px',
+            width: '100%',
+            background: 'linear-gradient(90deg, #047857 0%, #047857 35%, #10B981 70%, #047857 100%)',
+          }}
+        />
+
+        <div
+          style={{
+            maxWidth: '1320px',
+            margin: '0 auto',
+            padding: '12px 24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '24px',
+            flexWrap: 'nowrap',
+          }}
+        >
+          {/* Brand Identity: Compact Logo & Short Platform Name */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+            <NepalEduLogo size="sm" title="NepalEdu Platform" showTagline={false} onClick={() => navigate('/')} />
+          </div>
+
+          {/* Clean Navigation Links (Single Row, No Wrap) */}
+          <nav
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '24px',
+              fontSize: '14px',
+              fontWeight: 600,
+              whiteSpace: 'nowrap',
+              flexWrap: 'nowrap',
+            }}
+          >
+            <a
+              href="#features"
+              style={{
+                color: '#475569',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#047857')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#475569')}
+            >
+              Features
+            </a>
+            <a
+              href="#interactive-suite"
+              style={{
+                color: '#475569',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#047857')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#475569')}
+            >
+              Platform Studios
+            </a>
+            <a
+              href="#portals"
+              style={{
+                color: '#475569',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#047857')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#475569')}
+            >
+              Role Portals
+            </a>
+            <a
+              href="#curriculum"
+              style={{
+                color: '#475569',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#047857')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#475569')}
+            >
+              CDC Curriculum
+            </a>
+            <a
+              href="#faq"
+              style={{
+                color: '#475569',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#047857')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#475569')}
+            >
+              FAQ
+            </a>
+          </nav>
+
+          {/* Action CTAs (Single Row, No Wrap) */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0, whiteSpace: 'nowrap' }}>
+            {/* Live Demo Trigger */}
+            <button
+              onClick={() => setDemoModalOpen(true)}
+              style={{
+                padding: '8px 14px',
+                borderRadius: '8px',
+                border: '1px solid #A7F3D0',
+                background: '#ECFDF5',
+                color: '#047857',
+                fontSize: '13px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#D1FAE5';
+                e.currentTarget.style.borderColor = '#059669';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#ECFDF5';
+                e.currentTarget.style.borderColor = '#A7F3D0';
+              }}
+            >
+              <Sparkles size={14} color="#059669" />
+              <span>Demo Portals</span>
+            </button>
+
+            {/* Portal Login Button */}
+            <button
+              onClick={() => navigate('/login')}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '8px',
+                border: '1.5px solid #CBD5E1',
+                background: '#FFFFFF',
+                color: '#1E293B',
+                fontSize: '13.5px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#047857';
+                e.currentTarget.style.color = '#047857';
+                e.currentTarget.style.background = '#F8FAFC';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#CBD5E1';
+                e.currentTarget.style.color = '#1E293B';
+                e.currentTarget.style.background = '#FFFFFF';
+              }}
+            >
+              <LogIn size={14} />
+              <span>Login</span>
+            </button>
+
+            {/* Primary CTA: Register School */}
+            <button
+              onClick={() => navigate('/register')}
+              style={{
+                padding: '9px 18px',
+                borderRadius: '8px',
+                border: 'none',
+                background: '#047857',
+                color: '#FFFFFF',
+                fontSize: '13.5px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                boxShadow: '0 2px 6px rgba(15, 81, 50, 0.22)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#047857';
+                e.currentTarget.style.boxShadow = '0 4px 10px rgba(15, 81, 50, 0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#047857';
+                e.currentTarget.style.boxShadow = '0 2px 6px rgba(15, 81, 50, 0.22)';
+              }}
+            >
+              <span>Register School</span>
+              <ArrowRight size={14} />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* ── 3. HERO SECTION ─────────────────────────────────────────────────── */}
+      <section
+        style={{
+          background: 'linear-gradient(180deg, #F0FDF4 0%, #FFFFFF 100%)',
+          padding: '64px 24px 50px',
+          position: 'relative',
+          overflow: 'hidden',
+          borderBottom: '1px solid #E2E8F0',
+        }}
+      >
+        {/* Subtle decorative background glow circles */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '-10%',
+            right: '5%',
+            width: '500px',
+            height: '500px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%)',
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '5%',
+            left: '-5%',
+            width: '400px',
+            height: '400px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(15, 81, 50, 0.06) 0%, transparent 70%)',
+            pointerEvents: 'none',
+          }}
+        />
+
+        <div
+          style={{
+            maxWidth: '1320px',
+            margin: '0 auto',
+            display: 'grid',
+            gridTemplateColumns: '1.05fr 1fr',
+            gap: '50px',
+            alignItems: 'center',
+            position: 'relative',
+            zIndex: 1,
+          }}
+        >
+          {/* Left Hero Content */}
+          <div>
+            {/* National Compliance Pill */}
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 14px',
+                background: '#ECFDF5',
+                borderRadius: '30px',
+                color: '#047857',
+                fontSize: '12.5px',
+                fontWeight: 700,
+                marginBottom: '20px',
+                border: '1px solid #A7F3D0',
+                boxShadow: '0 2px 6px rgba(15, 81, 50, 0.06)',
+              }}
+            >
+              <span style={{ fontSize: '13px' }}>🇳🇵</span>
+              <span>National Unified Educational Platform of Nepal</span>
+              <span style={{ background: '#047857', color: '#FFF', fontSize: '10px', padding: '2px 6px', borderRadius: '8px', fontWeight: 800 }}>
+                CDC APPROVED
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1
+              style={{
+                fontSize: '48px',
+                fontWeight: 900,
+                lineHeight: 1.15,
+                color: '#0F172A',
+                letterSpacing: '-0.8px',
+                marginBottom: '20px',
+                fontFamily: '"Plus Jakarta Sans", "Inter", sans-serif',
+              }}
+            >
+              The Modern Digital Operating System for{' '}
+              <span
+                style={{
+                  background: 'linear-gradient(135deg, #047857 0%, #059669 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Schools & Colleges in Nepal
+              </span>
+            </h1>
+
+            {/* Subtitle */}
+            <p
+              style={{
+                fontSize: '17px',
+                color: '#475569',
+                lineHeight: 1.6,
+                marginBottom: '32px',
+                maxWidth: '560px',
+              }}
+            >
+              Unifying leadership, faculty, students, and curriculum operations in one secure cloud ecosystem.
+              From <strong>Classes 1 to 12</strong> in English and Nepali mediums, featuring interactive Smart Board lessons,
+              automated continuous assessment, timetable automation, and zero-hallucination CDC AI learning.
+            </p>
+
+            {/* Dual CTA Buttons */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap', marginBottom: '36px' }}>
+              <button
+                onClick={() => setDemoModalOpen(true)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '14px 28px',
+                  borderRadius: '10px',
+                  background: '#047857',
+                  color: '#FFFFFF',
+                  fontSize: '15px',
+                  fontWeight: 800,
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: '0 6px 18px rgba(15, 81, 50, 0.28)',
+                  transition: 'all 0.25s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#047857';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 8px 22px rgba(15, 81, 50, 0.35)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#047857';
+                  e.currentTarget.style.transform = 'none';
+                  e.currentTarget.style.boxShadow = '0 6px 18px rgba(15, 81, 50, 0.28)';
+                }}
+              >
+                <Sparkles size={18} />
+                <span>Launch Interactive Demo</span>
+                <ArrowRight size={18} />
+              </button>
+
+              <button
+                onClick={() => setShowVideoModal(true)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '13px 22px',
+                  borderRadius: '10px',
+                  background: '#FFFFFF',
+                  color: '#1E293B',
+                  fontSize: '14.5px',
+                  fontWeight: 700,
+                  border: '1.5px solid #CBD5E1',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#047857';
+                  e.currentTarget.style.background = '#F8FAFC';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#CBD5E1';
+                  e.currentTarget.style.background = '#FFFFFF';
+                }}
+              >
+                <div
+                  style={{
+                    width: '28px',
+                    height: '28px',
+                    borderRadius: '50%',
+                    background: '#ECFDF5',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#047857',
+                  }}
+                >
+                  <Play size={13} fill="#047857" />
+                </div>
+                <span>Platform Tour Video</span>
+              </button>
+            </div>
+
+            {/* Trust Points Ticker */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, auto)',
+                gap: '16px',
+                borderTop: '1px solid #E2E8F0',
+                paddingTop: '20px',
+                alignItems: 'center',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <CheckCircle2 size={17} color="#059669" />
+                <span style={{ fontSize: '13px', fontWeight: 600, color: '#475569' }}>
+                  Full CDC Dual Medium
+                </span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <CheckCircle2 size={17} color="#059669" />
+                <span style={{ fontSize: '13px', fontWeight: 600, color: '#475569' }}>
+                  Anti-Hallucination AI
+                </span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <CheckCircle2 size={17} color="#059669" />
+                <span style={{ fontSize: '13px', fontWeight: 600, color: '#475569' }}>
+                  MoEST EMIS Aligned
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Hero Interactive Visual */}
+          <div style={{ position: 'relative' }}>
+            {/* Visual Glass Frame Card */}
+            <div
+              style={{
+                position: 'relative',
+                borderRadius: '20px',
+                overflow: 'hidden',
+                boxShadow: '0 25px 50px -12px rgba(15, 81, 50, 0.25)',
+                border: '4px solid #FFFFFF',
+                background: '#FFFFFF',
+              }}
+            >
+              <img
+                src="/assets/brand/online_classroom_hero.jpg"
+                alt="Digital Classroom in Nepal with Smart Board and CDC curriculum"
+                style={{
+                  width: '100%',
+                  height: '440px',
+                  display: 'block',
+                  objectFit: 'cover',
+                }}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/assets/brand/nepal_hero_students_mountain_temple.png';
+                }}
+              />
+
+              {/* Bottom Live Session Overlay Bar */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  padding: '18px 22px',
+                  background: 'linear-gradient(to top, rgba(9, 56, 34, 0.95) 0%, rgba(9, 56, 34, 0.75) 70%, transparent 100%)',
+                  color: '#FFFFFF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#4ADE80', animation: 'pulse 1.5s infinite' }} />
+                    <span style={{ fontSize: '14.5px', fontWeight: 800 }}>Dhambojhi Model Secondary School</span>
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#D1FAE5', marginTop: '2px' }}>
+                    Active Session: Class 10 Compulsory Science (Force & Motion)
+                  </div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <span
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.22)',
+                      backdropFilter: 'blur(8px)',
+                      padding: '4px 10px',
+                      borderRadius: '12px',
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      display: 'inline-block',
+                    }}
+                  >
+                    EMIS: 570010001
+                  </span>
+                  <div style={{ fontSize: '11px', color: '#A7F3D0', marginTop: '3px' }}>28 Sections Connected</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating Live Badge 1: Top Left */}
+            <div
+              style={{
+                position: 'absolute',
+                top: '-16px',
+                left: '-16px',
+                background: '#FFFFFF',
+                borderRadius: '14px',
+                padding: '12px 18px',
+                boxShadow: '0 12px 28px -5px rgba(0, 0, 0, 0.15)',
+                border: '1.5px solid #E2E8F0',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                zIndex: 10,
+              }}
+            >
+              <div
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
+                  background: '#ECFDF5',
+                  color: '#047857',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 900,
+                  fontSize: '18px',
+                }}
+              >
+                🇳🇵
+              </div>
+              <div>
+                <div style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A' }}>Nepal CDC Framework</div>
+                <div style={{ fontSize: '11px', color: '#059669', fontWeight: 600 }}>Grades 1–12 Dual Medium</div>
+              </div>
+            </div>
+
+            {/* Floating Live Badge 2: Bottom Right */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '36px',
+                right: '-18px',
+                background: '#FFFFFF',
+                borderRadius: '14px',
+                padding: '12px 18px',
+                boxShadow: '0 14px 30px -5px rgba(0, 0, 0, 0.15)',
+                border: '1.5px solid #E2E8F0',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                zIndex: 10,
+              }}
+            >
+              <div
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
+                  background: '#EEF2FF',
+                  color: '#4F46E5',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Cpu size={20} />
+              </div>
+              <div>
+                <div style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A' }}>Grounded AI Assessment</div>
+                <div style={{ fontSize: '11px', color: '#4F46E5', fontWeight: 600 }}>Strict Textbook Citation Policy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. FIVE PILLARS OF EXCELLENCE ───────────────────────────────────── */}
+      <section id="features" style={{ padding: '60px 24px', background: '#FFFFFF' }}>
+        <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '44px' }}>
+            <span
+              style={{
+                background: '#ECFDF5',
+                color: '#047857',
+                padding: '5px 14px',
+                borderRadius: '20px',
+                fontSize: '12px',
+                fontWeight: 800,
+                letterSpacing: '0.5px',
+                textTransform: 'uppercase',
+                display: 'inline-block',
+                marginBottom: '8px',
+              }}
+            >
+              Comprehensive Academic Architecture
+            </span>
+            <h2 style={{ fontSize: '34px', fontWeight: 900, color: '#0F172A', letterSpacing: '-0.5px' }}>
+              Built for Nepal's Schools, Teachers, and Students
+            </h2>
+            <p style={{ fontSize: '16px', color: '#64748B', maxWidth: '650px', margin: '8px auto 0' }}>
+              Every module is specifically engineered around the guidelines of Nepal's Ministry of Education and Curriculum Development Centre.
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(5, 1fr)',
+              gap: '20px',
+            }}
+          >
+            {/* Card 1 */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '16px',
+                border: '1.5px solid #E2E8F0',
+                padding: '28px 22px',
+                textAlign: 'left',
+                transition: 'all 0.25s ease',
+                position: 'relative',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#047857';
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 16px 30px -8px rgba(15, 81, 50, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div
+                style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '14px',
+                  background: '#ECFDF5',
+                  color: '#047857',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '20px',
+                }}
+              >
+                <GraduationCap size={26} />
+              </div>
+              <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                Academic Administration
+              </h3>
+              <p style={{ fontSize: '13px', color: '#64748B', lineHeight: 1.55 }}>
+                Rosters, timetable scheduling engine, period quotas, class teacher designations, and section assignments.
+              </p>
+              <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid #F1F5F9', fontSize: '12px', fontWeight: 700, color: '#047857', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span>Conflict-Free Scheduling</span>
+                <ChevronRight size={14} />
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '16px',
+                border: '1.5px solid #E2E8F0',
+                padding: '28px 22px',
+                textAlign: 'left',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#047857';
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 16px 30px -8px rgba(15, 81, 50, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div
+                style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '14px',
+                  background: '#EFF6FF',
+                  color: '#2563EB',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '20px',
+                }}
+              >
+                <MonitorPlay size={26} />
+              </div>
+              <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                Smart Board & Whiteboard
+              </h3>
+              <p style={{ fontSize: '13px', color: '#64748B', lineHeight: 1.55 }}>
+                Infinite stylus canvas, geometry tools, side-by-side CDC textbook PDF reader, and instant student PDF export.
+              </p>
+              <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid #F1F5F9', fontSize: '12px', fontWeight: 700, color: '#2563EB', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span>Interactive Stylus Mode</span>
+                <ChevronRight size={14} />
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '16px',
+                border: '1.5px solid #E2E8F0',
+                padding: '28px 22px',
+                textAlign: 'left',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#047857';
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 16px 30px -8px rgba(15, 81, 50, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div
+                style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '14px',
+                  background: '#FFFBEB',
+                  color: '#D97706',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '20px',
+                }}
+              >
+                <ClipboardCheck size={26} />
+              </div>
+              <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                8-Step Assignment Studio
+              </h3>
+              <p style={{ fontSize: '13px', color: '#64748B', lineHeight: 1.55 }}>
+                Step-by-step rubrics, plagiarism detection, handwriting OCR evaluation, and automated gradebook recording.
+              </p>
+              <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid #F1F5F9', fontSize: '12px', fontWeight: 700, color: '#D97706', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span>Continuous Assessment</span>
+                <ChevronRight size={14} />
+              </div>
+            </div>
+
+            {/* Card 4 */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '16px',
+                border: '1.5px solid #E2E8F0',
+                padding: '28px 22px',
+                textAlign: 'left',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#047857';
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 16px 30px -8px rgba(15, 81, 50, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div
+                style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '14px',
+                  background: '#F5F3FF',
+                  color: '#7C3AED',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '20px',
+                }}
+              >
+                <BarChart3 size={26} />
+              </div>
+              <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                CDC 8-Point GPA & Exams
+              </h3>
+              <p style={{ fontSize: '13px', color: '#64748B', lineHeight: 1.55 }}>
+                A+ to NG terminal marksheets, automatic grade-point calculations, attendance roll call, and remedial alerts.
+              </p>
+              <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid #F1F5F9', fontSize: '12px', fontWeight: 700, color: '#7C3AED', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span>National SEE & NEB Matrix</span>
+                <ChevronRight size={14} />
+              </div>
+            </div>
+
+            {/* Card 5 */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '16px',
+                border: '1.5px solid #E2E8F0',
+                padding: '28px 22px',
+                textAlign: 'left',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#047857';
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 16px 30px -8px rgba(15, 81, 50, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div
+                style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '14px',
+                  background: '#FFF1F2',
+                  color: '#E11D48',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '20px',
+                }}
+              >
+                <Cpu size={26} />
+              </div>
+              <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                Grounded Bilingual AI
+              </h3>
+              <p style={{ fontSize: '13px', color: '#64748B', lineHeight: 1.55 }}>
+                Strict zero-hallucination AI tutor locked only to official CDC textbooks. Available in English & Nepali 24/7.
+              </p>
+              <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid #F1F5F9', fontSize: '12px', fontWeight: 700, color: '#E11D48', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span>Zero Hallucination</span>
+                <ChevronRight size={14} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. INTERACTIVE PLATFORM STUDIOS DEEP-DIVE ─────────────────────────── */}
+      <section
+        id="interactive-suite"
+        style={{
+          background: '#F8FAFC',
+          borderTop: '1px solid #E2E8F0',
+          borderBottom: '1px solid #E2E8F0',
+          padding: '80px 24px',
+        }}
+      >
+        <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <span
+              style={{
+                background: '#ECFDF5',
+                color: '#047857',
+                padding: '5px 14px',
+                borderRadius: '20px',
+                fontSize: '12px',
+                fontWeight: 800,
+                letterSpacing: '0.5px',
+                textTransform: 'uppercase',
+                display: 'inline-block',
+                marginBottom: '8px',
+              }}
+            >
+              Interactive Academic Suite
+            </span>
+            <h2 style={{ fontSize: '34px', fontWeight: 900, color: '#0F172A' }}>
+              Experience the Digital Classrooms of Tomorrow
+            </h2>
+            <p style={{ fontSize: '16px', color: '#64748B', maxWidth: '640px', margin: '8px auto 0' }}>
+              Select a module below to inspect the real-time workflows empowering school leadership, faculty, and students.
+            </p>
+          </div>
+
+          {/* Interactive Navigation Pills */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '12px',
+              marginBottom: '32px',
+              flexWrap: 'wrap',
+            }}
+          >
+            {[
+              { id: 'smartboard', label: '1. Smart Board & Digital Whiteboard', icon: MonitorPlay },
+              { id: 'assignment', label: '2. 8-Step Assignment Studio', icon: ClipboardCheck },
+              { id: 'quiz', label: '3. Quiz & Anti-Cheat Examination', icon: CheckSquare },
+              { id: 'student', label: '4. Student Portal & CDC Textbooks', icon: BookOpen },
+              { id: 'admin', label: '5. Principal & School Operations', icon: LayoutDashboard },
+            ].map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '12px 20px',
+                    borderRadius: '12px',
+                    border: isActive ? '2px solid #047857' : '1.5px solid #CBD5E1',
+                    background: isActive ? '#047857' : '#FFFFFF',
+                    color: isActive ? '#FFFFFF' : '#334155',
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    boxShadow: isActive ? '0 6px 16px rgba(15, 81, 50, 0.25)' : 'none',
+                  }}
+                >
+                  <Icon size={17} />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Tab Content Display Area */}
+          <div
+            style={{
+              background: '#FFFFFF',
+              borderRadius: '20px',
+              border: '1.5px solid #E2E8F0',
+              boxShadow: '0 20px 45px -10px rgba(0,0,0,0.07)',
+              overflow: 'hidden',
+              display: 'grid',
+              gridTemplateColumns: '1.25fr 1fr',
+              minHeight: '460px',
+            }}
+          >
+            {/* Left Column: Visual Mockup / Interactive Panel */}
+            <div style={{ background: '#F1F5F9', position: 'relative', borderRight: '1px solid #E2E8F0', overflow: 'hidden' }}>
+              {activeTab === 'smartboard' && (
+                <div style={{ padding: '24px', height: '100%', display: 'flex', flexDirection: 'column', gap: '14px', justifyContent: 'space-between' }}>
+                  <div style={{ borderRadius: '14px', overflow: 'hidden', border: '1.5px solid #CBD5E1', position: 'relative' }}>
+                    <img
+                      src="/assets/brand/online_smartboard_lecture.jpg"
+                      alt="Smart Board Lecture in Classroom"
+                      style={{ width: '100%', height: '260px', objectFit: 'cover', display: 'block' }}
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/assets/brand/nepal_classroom_smartboard_students.jpg';
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '12px',
+                        left: '12px',
+                        background: 'rgba(15, 81, 50, 0.9)',
+                        backdropFilter: 'blur(6px)',
+                        color: '#FFFFFF',
+                        padding: '4px 10px',
+                        borderRadius: '6px',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                      }}
+                    >
+                      ● Smart Board v2.4 Live
+                    </div>
+                  </div>
+
+                  <div style={{ background: '#FFFFFF', borderRadius: '12px', padding: '16px', border: '1px solid #E2E8F0' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                      <span style={{ fontWeight: 800, fontSize: '13.5px', color: '#0F172A' }}>Dual-Screen Teaching Mode Active</span>
+                      <span style={{ background: '#ECFDF5', color: '#059669', fontSize: '11px', fontWeight: 700, padding: '2px 8px', borderRadius: '6px' }}>CDC Class 10 Science</span>
+                    </div>
+                    <div style={{ fontSize: '12.5px', color: '#64748B', lineHeight: 1.5 }}>
+                      Split-screen view running official CDC Curriculum e-Textbook on the left pane with stylus handwriting, shape recognition, and laser pointer on the whiteboard canvas.
+                    </div>
+                    <div style={{ display: 'flex', gap: '8px', marginTop: '10px' }}>
+                      <button
+                        onClick={() => window.open('/smartboard/index.html', '_blank')}
+                        style={{
+                          background: '#047857',
+                          color: '#FFFFFF',
+                          border: 'none',
+                          padding: '6px 14px',
+                          borderRadius: '6px',
+                          fontSize: '12px',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                        }}
+                      >
+                        <ExternalLink size={13} />
+                        Launch Standalone Smart Board
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'assignment' && (
+                <div style={{ padding: '24px', height: '100%', display: 'flex', flexDirection: 'column', gap: '14px', justifyContent: 'space-between' }}>
+                  <div style={{ background: '#FFFFFF', borderRadius: '14px', padding: '18px', border: '1.5px solid #CBD5E1' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+                      <span style={{ background: '#ECFDF5', color: '#047857', padding: '3px 10px', borderRadius: '6px', fontSize: '11.5px', fontWeight: 800 }}>
+                        8-Step Assignment Workflow
+                      </span>
+                      <span style={{ fontSize: '12px', color: '#64748B' }}>CDC Unit 3: Mechanics</span>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', marginBottom: '12px' }}>
+                      {['1. Basic Info', '2. Questions', '3. Attachments', '4. Submission Rules', '5. Evaluation Rubrics', '6. Copy Detection', '7. Auto Checking', '8. Publish Marks'].map((step, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            background: idx < 6 ? '#047857' : '#F1F5F9',
+                            color: idx < 6 ? '#FFFFFF' : '#64748B',
+                            fontSize: '10.5px',
+                            fontWeight: 700,
+                            padding: '6px 8px',
+                            borderRadius: '6px',
+                            textAlign: 'center',
+                          }}
+                        >
+                          {step}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <img
+                    src="/assets/brand/online_students_collaborate.jpg"
+                    alt="Students Collaborating on Assignments"
+                    style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '12px', border: '1px solid #CBD5E1' }}
+                  />
+                </div>
+              )}
+
+              {activeTab === 'quiz' && (
+                <div style={{ padding: '24px', height: '100%', display: 'flex', flexDirection: 'column', gap: '14px', justifyContent: 'space-between' }}>
+                  <div style={{ background: '#FFFFFF', borderRadius: '14px', padding: '18px', border: '1.5px solid #CBD5E1' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#EF4444' }} />
+                        <span style={{ fontWeight: 800, fontSize: '13px', color: '#0F172A' }}>Anti-Cheat Proctoring Locked</span>
+                      </div>
+                      <span style={{ background: '#FEF2F2', color: '#EF4444', fontSize: '11px', fontWeight: 700, padding: '2px 8px', borderRadius: '6px' }}>Fullscreen Enforced</span>
+                    </div>
+                    <div style={{ background: '#F8FAFC', borderRadius: '8px', padding: '12px', border: '1px solid #E2E8F0' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 700, color: '#334155' }}>Q4. State Archimedes' Principle and give its SI unit formula.</div>
+                      <div style={{ fontSize: '11.5px', color: '#059669', marginTop: '6px', fontWeight: 600 }}>✓ Instant AI evaluation matched with CDC marking scheme: 4/4 Marks</div>
+                    </div>
+                  </div>
+
+                  <img
+                    src="/assets/brand/nepal_hero_students_mountain_temple.png"
+                    alt="Nepalese students taking terminal examinations"
+                    style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '12px', border: '1px solid #CBD5E1' }}
+                  />
+                </div>
+              )}
+
+              {activeTab === 'student' && (
+                <div style={{ padding: '24px', height: '100%', display: 'flex', flexDirection: 'column', gap: '14px', justifyContent: 'space-between' }}>
+                  <div style={{ background: '#FFFFFF', borderRadius: '14px', padding: '18px', border: '1.5px solid #CBD5E1' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                      <span style={{ fontWeight: 800, fontSize: '14px', color: '#0F172A' }}>Aarav Chaudhary (Roll 1)</span>
+                      <span style={{ background: '#EFF6FF', color: '#2563EB', fontSize: '11px', fontWeight: 700, padding: '2px 8px', borderRadius: '6px' }}>Class 10 Section A</span>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+                      <div style={{ background: '#F8FAFC', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '11px', color: '#64748B' }}>Assignments</div>
+                        <div style={{ fontSize: '16px', fontWeight: 800, color: '#047857' }}>94% Done</div>
+                      </div>
+                      <div style={{ background: '#F8FAFC', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '11px', color: '#64748B' }}>Attendance</div>
+                        <div style={{ fontSize: '16px', fontWeight: 800, color: '#2563EB' }}>96.8%</div>
+                      </div>
+                      <div style={{ background: '#F8FAFC', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '11px', color: '#64748B' }}>Current GPA</div>
+                        <div style={{ fontSize: '16px', fontWeight: 800, color: '#D97706' }}>3.85 (A+)</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <img
+                    src="/assets/brand/nepal_classroom_smartboard_students.jpg"
+                    alt="Students in classroom using digital resources"
+                    style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '12px', border: '1px solid #CBD5E1' }}
+                  />
+                </div>
+              )}
+
+              {activeTab === 'admin' && (
+                <div style={{ padding: '24px', height: '100%', display: 'flex', flexDirection: 'column', gap: '14px', justifyContent: 'space-between' }}>
+                  <div style={{ background: '#FFFFFF', borderRadius: '14px', padding: '18px', border: '1.5px solid #CBD5E1' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                      <span style={{ fontWeight: 800, fontSize: '14px', color: '#0F172A' }}>Executive Supervision & Compliance</span>
+                      <span style={{ background: '#ECFDF5', color: '#059669', fontSize: '11px', fontWeight: 700, padding: '2px 8px', borderRadius: '6px' }}>MoEST Audit Ready</span>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+                      <div style={{ background: '#F8FAFC', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '11px', color: '#64748B' }}>Total Students</div>
+                        <div style={{ fontSize: '16px', fontWeight: 800, color: '#047857' }}>252</div>
+                      </div>
+                      <div style={{ background: '#F8FAFC', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '11px', color: '#64748B' }}>Faculty Count</div>
+                        <div style={{ fontSize: '16px', fontWeight: 800, color: '#1E3A5F' }}>30 Teachers</div>
+                      </div>
+                      <div style={{ background: '#F8FAFC', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '11px', color: '#64748B' }}>Weekly Periods</div>
+                        <div style={{ fontSize: '16px', fontWeight: 800, color: '#7C3AED' }}>180 / Week</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <img
+                    src="/assets/brand/online_modern_school.jpg"
+                    alt="Modern School Campus in Nepal"
+                    style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '12px', border: '1px solid #CBD5E1' }}
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Right Column: Deep-Dive Feature List & Action Call */}
+            <div style={{ padding: '40px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#047857', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  Standardized Across All 7 Provinces
+                </span>
+                <h3 style={{ fontSize: '24px', fontWeight: 900, color: '#0F172A', marginTop: '6px', marginBottom: '16px' }}>
+                  {activeTab === 'smartboard' && 'Interactive Smart Board & Whiteboard Hub'}
+                  {activeTab === 'assignment' && 'Comprehensive 8-Step Assignment Studio'}
+                  {activeTab === 'quiz' && 'Proctored Quizzes & Continuous Evaluation'}
+                  {activeTab === 'student' && 'Dedicated Student Learning Experience'}
+                  {activeTab === 'admin' && 'Executive Academic Supervision & Timetables'}
+                </h3>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '28px' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ color: '#059669', marginTop: '2px', flexShrink: 0 }}>
+                      <CheckCircle2 size={19} fill="#ECFDF5" color="#059669" />
+                    </div>
+                    <div style={{ fontSize: '14.5px', color: '#334155', lineHeight: 1.5 }}>
+                      <strong>Full Nepal CDC Syllabus:</strong> Pre-loaded bilingual textbooks (Classes 1–12) with chapter breakdowns.
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ color: '#059669', marginTop: '2px', flexShrink: 0 }}>
+                      <CheckCircle2 size={19} fill="#ECFDF5" color="#059669" />
+                    </div>
+                    <div style={{ fontSize: '14.5px', color: '#334155', lineHeight: 1.5 }}>
+                      <strong>Real-Time Academic Sync:</strong> Actions taken by Subject Teachers immediately reflect in Class Teacher and Principal dashboards.
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ color: '#059669', marginTop: '2px', flexShrink: 0 }}>
+                      <CheckCircle2 size={19} fill="#ECFDF5" color="#059669" />
+                    </div>
+                    <div style={{ fontSize: '14.5px', color: '#334155', lineHeight: 1.5 }}>
+                      <strong>MoEST EMIS Integration:</strong> 1-click export of student attendance, terminal grades, and national census data.
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ color: '#059669', marginTop: '2px', flexShrink: 0 }}>
+                      <CheckCircle2 size={19} fill="#ECFDF5" color="#059669" />
+                    </div>
+                    <div style={{ fontSize: '14.5px', color: '#334155', lineHeight: 1.5 }}>
+                      <strong>Low-Bandwidth Resilient:</strong> Works reliably over 3G/4G connections across Himalayan and rural municipalities.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <button
+                  onClick={() => setDemoModalOpen(true)}
+                  style={{
+                    padding: '12px 24px',
+                    borderRadius: '8px',
+                    background: '#047857',
+                    color: '#FFFFFF',
+                    fontSize: '14px',
+                    fontWeight: 800,
+                    border: 'none',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 12px rgba(15, 81, 50, 0.25)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  <Sparkles size={16} />
+                  <span>Launch Live Demo</span>
+                </button>
+                <button
+                  onClick={() => navigate('/register')}
+                  style={{
+                    padding: '12px 20px',
+                    borderRadius: '8px',
+                    background: '#FFFFFF',
+                    color: '#0F172A',
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    border: '1.5px solid #CBD5E1',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Register School
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 6. DEDICATED ROLE PORTALS HUB (6 PERSONAS) ────────────────────────── */}
+      <section id="portals" style={{ padding: '80px 24px', background: '#FFFFFF' }}>
+        <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '44px' }}>
+            <span
+              style={{
+                background: '#ECFDF5',
+                color: '#047857',
+                padding: '5px 14px',
+                borderRadius: '20px',
+                fontSize: '12px',
+                fontWeight: 800,
+                letterSpacing: '0.5px',
+                textTransform: 'uppercase',
+                display: 'inline-block',
+                marginBottom: '8px',
+              }}
+            >
+              Tailored Role Portals
+            </span>
+            <h2 style={{ fontSize: '34px', fontWeight: 900, color: '#0F172A' }}>
+              One Platform. Dedicated Dashboards for Every Stakeholder.
+            </h2>
+            <p style={{ fontSize: '16px', color: '#64748B', maxWidth: '640px', margin: '8px auto 0' }}>
+              Every staff member, educator, and student receives a customized workspace strictly matching their academic responsibilities.
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '24px',
+            }}
+          >
+            {/* 1. Principal */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '16px',
+                border: '1.5px solid #E2E8F0',
+                padding: '28px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#7C3AED';
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 12px 28px -5px rgba(124, 58, 237, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <div
+                    style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      background: '#F5F3FF',
+                      color: '#7C3AED',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <GraduationCap size={24} />
+                  </div>
+                  <span style={{ background: '#F5F3FF', color: '#7C3AED', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px' }}>
+                    ACADEMIC HEAD
+                  </span>
+                </div>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                  Principal / Academic Leadership
+                </h3>
+                <p style={{ fontSize: '13.5px', color: '#64748B', lineHeight: 1.5, marginBottom: '18px' }}>
+                  Institutional oversight: monitor syllabus coverage, track faculty workloads, audit department results, and approve academic calendars.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px', color: '#475569', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#7C3AED" /> 8-point GPA Matrix & Terminal Analytics
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#7C3AED" /> Faculty Workload & Period Audit
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#7C3AED" /> Chronic Absenteeism & Remedial Alerts
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  onClick={() => setDemoModalOpen(true)}
+                  style={{
+                    flex: 1,
+                    padding: '10px',
+                    borderRadius: '8px',
+                    background: '#F5F3FF',
+                    color: '#7C3AED',
+                    border: '1px solid #DDD6FE',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Launch Demo
+                </button>
+                <button
+                  onClick={() => navigate('/login')}
+                  style={{
+                    padding: '10px 14px',
+                    borderRadius: '8px',
+                    background: '#FFFFFF',
+                    color: '#0F172A',
+                    border: '1.5px solid #CBD5E1',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+
+            {/* 2. School Admin */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '16px',
+                border: '1.5px solid #E2E8F0',
+                padding: '28px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#047857';
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 12px 28px -5px rgba(15, 81, 50, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <div
+                    style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      background: '#ECFDF5',
+                      color: '#047857',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <School size={24} />
+                  </div>
+                  <span style={{ background: '#ECFDF5', color: '#047857', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px' }}>
+                    OPERATIONS
+                  </span>
+                </div>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                  School & College Administrator
+                </h3>
+                <p style={{ fontSize: '13.5px', color: '#64748B', lineHeight: 1.5, marginBottom: '18px' }}>
+                  Full academic operations: enroll teachers and students individually or via CSV, configure classes & sections, and generate master timetables.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px', color: '#475569', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#047857" /> Bulk CSV Student & Teacher Enrollment
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#047857" /> Master Timetable Grid & Period Builder
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#047857" /> Feature Access & Resource Toggles
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  onClick={() => setDemoModalOpen(true)}
+                  style={{
+                    flex: 1,
+                    padding: '10px',
+                    borderRadius: '8px',
+                    background: '#ECFDF5',
+                    color: '#047857',
+                    border: '1px solid #A7F3D0',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Launch Demo
+                </button>
+                <button
+                  onClick={() => navigate('/login')}
+                  style={{
+                    padding: '10px 14px',
+                    borderRadius: '8px',
+                    background: '#FFFFFF',
+                    color: '#0F172A',
+                    border: '1.5px solid #CBD5E1',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+
+            {/* 3. Class Teacher */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '16px',
+                border: '1.5px solid #E2E8F0',
+                padding: '28px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#059669';
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 12px 28px -5px rgba(5, 150, 105, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <div
+                    style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      background: '#ECFDF5',
+                      color: '#059669',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <UserCheck size={24} />
+                  </div>
+                  <span style={{ background: '#ECFDF5', color: '#059669', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px' }}>
+                    SECTION SUPERVISOR
+                  </span>
+                </div>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                  Class Teacher (Section Supervisor)
+                </h3>
+                <p style={{ fontSize: '13.5px', color: '#64748B', lineHeight: 1.5, marginBottom: '18px' }}>
+                  Holistic section supervision: daily roll-call attendance, terminal marks entry, character conduct remarks, and section-wide announcements.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px', color: '#475569', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#059669" /> All-Subjects Terminal Marksheet Consolidation
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#059669" /> Daily Roll-Call & Chronic Absentee Alert
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#059669" /> Class-Wide Notice Board Broadcasting
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  onClick={() => setDemoModalOpen(true)}
+                  style={{
+                    flex: 1,
+                    padding: '10px',
+                    borderRadius: '8px',
+                    background: '#ECFDF5',
+                    color: '#059669',
+                    border: '1px solid #A7F3D0',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Launch Demo
+                </button>
+                <button
+                  onClick={() => navigate('/login')}
+                  style={{
+                    padding: '10px 14px',
+                    borderRadius: '8px',
+                    background: '#FFFFFF',
+                    color: '#0F172A',
+                    border: '1.5px solid #CBD5E1',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+
+            {/* 4. Subject Teacher */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '16px',
+                border: '1.5px solid #E2E8F0',
+                padding: '28px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#D97706';
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 12px 28px -5px rgba(217, 119, 6, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <div
+                    style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      background: '#FFFBEB',
+                      color: '#D97706',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Users size={24} />
+                  </div>
+                  <span style={{ background: '#FFFBEB', color: '#D97706', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px' }}>
+                    SUBJECT FACULTY
+                  </span>
+                </div>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                  Subject Teacher (Normal Faculty)
+                </h3>
+                <p style={{ fontSize: '13.5px', color: '#64748B', lineHeight: 1.5, marginBottom: '18px' }}>
+                  Focused instructional delivery: Smart Board lessons, assignment grading, CDC quiz generation, and subject-specific announcements.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px', color: '#475569', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#D97706" /> Interactive Smart Board & PDF Split View
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#D97706" /> Subject-Only Assignment & Quiz Studio
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#D97706" /> Real-Time Subject Announcements
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  onClick={() => setDemoModalOpen(true)}
+                  style={{
+                    flex: 1,
+                    padding: '10px',
+                    borderRadius: '8px',
+                    background: '#FFFBEB',
+                    color: '#D97706',
+                    border: '1px solid #FDE68A',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Launch Demo
+                </button>
+                <button
+                  onClick={() => navigate('/login')}
+                  style={{
+                    padding: '10px 14px',
+                    borderRadius: '8px',
+                    background: '#FFFFFF',
+                    color: '#0F172A',
+                    border: '1.5px solid #CBD5E1',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+
+            {/* 5. Student */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '16px',
+                border: '1.5px solid #E2E8F0',
+                padding: '28px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#E11D48';
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 12px 28px -5px rgba(225, 29, 72, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <div
+                    style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      background: '#FFF1F2',
+                      color: '#E11D48',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <BookOpen size={24} />
+                  </div>
+                  <span style={{ background: '#FFF1F2', color: '#E11D48', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px' }}>
+                    LEARNERS
+                  </span>
+                </div>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                  Student Learning Center
+                </h3>
+                <p style={{ fontSize: '13.5px', color: '#64748B', lineHeight: 1.5, marginBottom: '18px' }}>
+                  Interactive study hub: read digital CDC textbooks, submit handwritten assignments with camera OCR, take timed quizzes, and check report cards.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px', color: '#475569', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#E11D48" /> Digital CDC Textbooks & Notes
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#E11D48" /> Camera & PDF Homework Upload
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#E11D48" /> Anti-Hallucination AI Homework Buddy
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  onClick={() => setDemoModalOpen(true)}
+                  style={{
+                    flex: 1,
+                    padding: '10px',
+                    borderRadius: '8px',
+                    background: '#FFF1F2',
+                    color: '#E11D48',
+                    border: '1px solid #FECDD3',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Launch Demo
+                </button>
+                <button
+                  onClick={() => navigate('/login')}
+                  style={{
+                    padding: '10px 14px',
+                    borderRadius: '8px',
+                    background: '#FFFFFF',
+                    color: '#0F172A',
+                    border: '1.5px solid #CBD5E1',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+
+            {/* 6. Central Super Admin */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '16px',
+                border: '1.5px solid #E2E8F0',
+                padding: '28px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#1E3A5F';
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 12px 28px -5px rgba(30, 58, 95, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <div
+                    style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      background: '#EFF6FF',
+                      color: '#1E3A5F',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <ShieldAlert size={24} />
+                  </div>
+                  <span style={{ background: '#EFF6FF', color: '#1E3A5F', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px' }}>
+                    FEDERAL AUTHORITY
+                  </span>
+                </div>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                  Central Super Admin (MoEST / CDC)
+                </h3>
+                <p style={{ fontSize: '13.5px', color: '#64748B', lineHeight: 1.5, marginBottom: '18px' }}>
+                  National governance: approve institution registrations, regulate nationwide curriculum packages, oversee 77 district analytics, and manage system security.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px', color: '#475569', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#1E3A5F" /> Institutional Registration Approval Engine
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#1E3A5F" /> 77 Districts National Dashboard
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Check size={14} color="#1E3A5F" /> Licensing & Subscription Tiers
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  onClick={() => setDemoModalOpen(true)}
+                  style={{
+                    flex: 1,
+                    padding: '10px',
+                    borderRadius: '8px',
+                    background: '#EFF6FF',
+                    color: '#1E3A5F',
+                    border: '1px solid #BFDBFE',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Launch Demo
+                </button>
+                <button
+                  onClick={() => navigate('/super-admin-login')}
+                  style={{
+                    padding: '10px 14px',
+                    borderRadius: '8px',
+                    background: '#FFFFFF',
+                    color: '#0F172A',
+                    border: '1.5px solid #CBD5E1',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  MoEST Login
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 7. NEPAL CDC CURRICULUM SHOWCASE (CLASS 1–12 DUAL MEDIUM) ─────────── */}
+      <section id="curriculum" style={{ padding: '80px 24px', background: '#F8FAFC', borderTop: '1px solid #E2E8F0' }}>
+        <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <span
+              style={{
+                background: '#ECFDF5',
+                color: '#047857',
+                padding: '5px 14px',
+                borderRadius: '20px',
+                fontSize: '12px',
+                fontWeight: 800,
+                letterSpacing: '0.5px',
+                textTransform: 'uppercase',
+                display: 'inline-block',
+                marginBottom: '8px',
+              }}
+            >
+              Official National Syllabus
+            </span>
+            <h2 style={{ fontSize: '34px', fontWeight: 900, color: '#0F172A' }}>
+              Nepal CDC Curriculum (Class 1–12)
+            </h2>
+            <p style={{ fontSize: '16px', color: '#64748B', maxWidth: '640px', margin: '8px auto 0' }}>
+              Pre-structured according to the national syllabus framework with bilingual content, credit-hour quotas, and terminal mark weights.
+            </p>
+          </div>
+
+          {/* Level Switcher */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '32px', flexWrap: 'wrap' }}>
+            {[
+              { id: 'primary', label: 'Primary Level (Grades 1–5)', desc: 'Foundational literacy & numeracy' },
+              { id: 'lower_sec', label: 'Lower Secondary (Grades 6–8)', desc: 'Integrated science & human values' },
+              { id: 'secondary', label: 'Secondary (Grades 9–10 SEE)', desc: 'SEE board preparation' },
+              { id: 'higher_sec', label: 'Higher Secondary (Grades 11–12 NEB)', desc: 'Science, Management & Law' },
+            ].map((lvl) => {
+              const isActive = activeGradeLevel === lvl.id;
+              return (
+                <button
+                  key={lvl.id}
+                  onClick={() => setActiveGradeLevel(lvl.id as any)}
+                  style={{
+                    padding: '12px 22px',
+                    borderRadius: '12px',
+                    border: isActive ? '2px solid #047857' : '1.5px solid #CBD5E1',
+                    background: isActive ? '#047857' : '#FFFFFF',
+                    color: isActive ? '#FFFFFF' : '#334155',
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    boxShadow: isActive ? '0 4px 14px rgba(15, 81, 50, 0.2)' : 'none',
+                  }}
+                >
+                  {lvl.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Curriculum Subjects Grid */}
+          <div
+            style={{
+              background: '#FFFFFF',
+              borderRadius: '20px',
+              border: '1.5px solid #E2E8F0',
+              padding: '36px',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.04)',
+            }}
+          >
+            {activeGradeLevel === 'primary' && (
+              <div>
+                <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#0F172A' }}>Primary Level (Classes 1, 2, 3, 4, 5)</h4>
+                  <span style={{ background: '#ECFDF5', color: '#047857', padding: '4px 10px', borderRadius: '6px', fontSize: '12px', fontWeight: 700 }}>
+                    Integrated Thematic Curriculum
+                  </span>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+                  {[
+                    { code: 'NEP', name: 'Compulsory Nepali', nepName: 'नेपाली', hours: '5 Periods/wk' },
+                    { code: 'ENG', name: 'Compulsory English', nepName: 'अंग्रेजी', hours: '5 Periods/wk' },
+                    { code: 'MTH', name: 'Mathematics', nepName: 'गणित', hours: '5 Periods/wk' },
+                    { code: 'SOC', name: 'Our Surrounding / Social', nepName: 'हाम्रो सेरोफेरो', hours: '5 Periods/wk' },
+                    { code: 'HLT', name: 'Health & Physical Education', nepName: 'स्वास्थ्य तथा शारीरिक', hours: '3 Periods/wk' },
+                    { code: 'ART', name: 'Creative Arts & Music', nepName: 'सृजनात्मक कला', hours: '3 Periods/wk' },
+                    { code: 'LOC', name: 'Local Curriculum / Mother Tongue', nepName: 'स्थानीय पाठ्यक्रम', hours: '4 Periods/wk' },
+                    { code: 'ICT', name: 'Digital Literacy Intro', nepName: 'कम्प्युटर परिचय', hours: '2 Periods/wk' },
+                  ].map((sub, idx) => (
+                    <div key={idx} style={{ background: '#F8FAFC', borderRadius: '12px', padding: '16px', border: '1px solid #E2E8F0' }}>
+                      <span style={{ fontSize: '11px', fontWeight: 800, color: '#047857', background: '#ECFDF5', padding: '2px 6px', borderRadius: '4px' }}>
+                        {sub.code}
+                      </span>
+                      <div style={{ fontSize: '14.5px', fontWeight: 800, color: '#0F172A', marginTop: '8px' }}>{sub.name}</div>
+                      <div style={{ fontSize: '13px', color: '#64748B', marginTop: '2px' }}>{sub.nepName}</div>
+                      <div style={{ fontSize: '11px', color: '#059669', fontWeight: 600, marginTop: '8px' }}>{sub.hours}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeGradeLevel === 'lower_sec' && (
+              <div>
+                <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#0F172A' }}>Lower Secondary (Classes 6, 7, 8 - Basic Level)</h4>
+                  <span style={{ background: '#EFF6FF', color: '#2563EB', padding: '4px 10px', borderRadius: '6px', fontSize: '12px', fontWeight: 700 }}>
+                    Class 8 District Examination (BLE)
+                  </span>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+                  {[
+                    { code: 'NEP', name: 'Compulsory Nepali', nepName: 'अनिवार्य नेपाली', hours: '5 Periods/wk' },
+                    { code: 'ENG', name: 'Compulsory English', nepName: 'अनिवार्य अंग्रेजी', hours: '5 Periods/wk' },
+                    { code: 'MTH', name: 'Compulsory Mathematics', nepName: 'अनिवार्य गणित', hours: '5 Periods/wk' },
+                    { code: 'SCI', name: 'Science & Technology', nepName: 'विज्ञान तथा प्रविधि', hours: '5 Periods/wk' },
+                    { code: 'SOC', name: 'Social Studies & Human Values', nepName: 'सामाजिक अध्ययन तथा मानव मूल्य', hours: '5 Periods/wk' },
+                    { code: 'HLT', name: 'Health, Physical & Creative Arts', nepName: 'स्वास्थ्य, शारीरिक तथा सिर्जनात्मक कला', hours: '4 Periods/wk' },
+                    { code: 'VOT', name: 'Vocational & Technical Education', nepName: 'पेशा, व्यवसाय र प्रविधि शिक्षा', hours: '3 Periods/wk' },
+                    { code: 'LOC', name: 'Local Subject / Mother Tongue', nepName: 'स्थानीय विषय', hours: '3 Periods/wk' },
+                  ].map((sub, idx) => (
+                    <div key={idx} style={{ background: '#F8FAFC', borderRadius: '12px', padding: '16px', border: '1px solid #E2E8F0' }}>
+                      <span style={{ fontSize: '11px', fontWeight: 800, color: '#2563EB', background: '#EFF6FF', padding: '2px 6px', borderRadius: '4px' }}>
+                        {sub.code}
+                      </span>
+                      <div style={{ fontSize: '14.5px', fontWeight: 800, color: '#0F172A', marginTop: '8px' }}>{sub.name}</div>
+                      <div style={{ fontSize: '13px', color: '#64748B', marginTop: '2px' }}>{sub.nepName}</div>
+                      <div style={{ fontSize: '11px', color: '#2563EB', fontWeight: 600, marginTop: '8px' }}>{sub.hours}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeGradeLevel === 'secondary' && (
+              <div>
+                <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#0F172A' }}>Secondary Level (Classes 9 & 10 - SEE National Board)</h4>
+                  <span style={{ background: '#FEF3C7', color: '#B45309', padding: '4px 10px', borderRadius: '6px', fontSize: '12px', fontWeight: 700 }}>
+                    SEE Board Aligned (75 Th + 25 Pr)
+                  </span>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+                  {[
+                    { code: 'NEP10', name: 'Compulsory Nepali', nepName: 'अनिवार्य नेपाली (कोड: ००१)', hours: '5 Periods/wk' },
+                    { code: 'ENG10', name: 'Compulsory English', nepName: 'अनिवार्य अंग्रेजी (कोड: ००३)', hours: '5 Periods/wk' },
+                    { code: 'MTH10', name: 'Compulsory Mathematics', nepName: 'अनिवार्य गणित (कोड: ०११)', hours: '5 Periods/wk' },
+                    { code: 'SCI10', name: 'Science & Technology', nepName: 'विज्ञान तथा प्रविधि (कोड: ०१५)', hours: '5 Periods/wk' },
+                    { code: 'SOC10', name: 'Social Studies', nepName: 'सामाजिक अध्ययन (कोड: ०१७)', hours: '5 Periods/wk' },
+                    { code: 'OPT-I', name: 'Optional Mathematics / Env', nepName: 'ऐच्छिक प्रथम: ऐच्छिक गणित / वातावरण', hours: '4 Periods/wk' },
+                    { code: 'OPT-II', name: 'Computer Science / Accountancy', nepName: 'ऐच्छिक द्वितीय: कम्प्युटर / लेखा', hours: '4 Periods/wk' },
+                    { code: 'PRA10', name: 'Continuous Assessment (CAS)', nepName: 'प्रयोगात्मक २५ अंक मूल्यांकन', hours: 'Internal Continuous' },
+                  ].map((sub, idx) => (
+                    <div key={idx} style={{ background: '#F8FAFC', borderRadius: '12px', padding: '16px', border: '1px solid #E2E8F0' }}>
+                      <span style={{ fontSize: '11px', fontWeight: 800, color: '#D97706', background: '#FEF3C7', padding: '2px 6px', borderRadius: '4px' }}>
+                        {sub.code}
+                      </span>
+                      <div style={{ fontSize: '14.5px', fontWeight: 800, color: '#0F172A', marginTop: '8px' }}>{sub.name}</div>
+                      <div style={{ fontSize: '13px', color: '#64748B', marginTop: '2px' }}>{sub.nepName}</div>
+                      <div style={{ fontSize: '11px', color: '#D97706', fontWeight: 600, marginTop: '8px' }}>{sub.hours}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeGradeLevel === 'higher_sec' && (
+              <div>
+                <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#0F172A' }}>Higher Secondary (Classes 11 & 12 - NEB Board)</h4>
+                  <span style={{ background: '#F5F3FF', color: '#7C3AED', padding: '4px 10px', borderRadius: '6px', fontSize: '12px', fontWeight: 700 }}>
+                    National Examination Board (NEB) Streams
+                  </span>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+                  {[
+                    { code: 'NEP11', name: 'Compulsory Nepali', nepName: 'अनिवार्य नेपाली (११/१२)', hours: '3 Credit Hours' },
+                    { code: 'ENG11', name: 'Compulsory English', nepName: 'अनिवार्य अंग्रेजी (११/१२)', hours: '4 Credit Hours' },
+                    { code: 'SCI-PHY', name: 'Physics (Science Stream)', nepName: 'भौतिकशास्त्र (थ्योरी + ल्याब)', hours: '5 Credit Hours' },
+                    { code: 'SCI-CHM', name: 'Chemistry (Science Stream)', nepName: 'रसायनशास्त्र (थ्योरी + ल्याब)', hours: '5 Credit Hours' },
+                    { code: 'SCI-BIO', name: 'Biology / Mathematics', nepName: 'जीवविज्ञान वा गणित', hours: '5 Credit Hours' },
+                    { code: 'MGT-ACC', name: 'Accountancy (Management)', nepName: 'लेखाविधि सिद्धान्त', hours: '5 Credit Hours' },
+                    { code: 'MGT-ECO', name: 'Economics / Business Studies', nepName: 'अर्थशास्त्र / व्यापार अध्ययन', hours: '5 Credit Hours' },
+                    { code: 'LAW-JUR', name: 'Jurisprudence / Human Rights', nepName: 'कानून तथा न्यायशास्त्र', hours: '5 Credit Hours' },
+                  ].map((sub, idx) => (
+                    <div key={idx} style={{ background: '#F8FAFC', borderRadius: '12px', padding: '16px', border: '1px solid #E2E8F0' }}>
+                      <span style={{ fontSize: '11px', fontWeight: 800, color: '#7C3AED', background: '#F5F3FF', padding: '2px 6px', borderRadius: '4px' }}>
+                        {sub.code}
+                      </span>
+                      <div style={{ fontSize: '14.5px', fontWeight: 800, color: '#0F172A', marginTop: '8px' }}>{sub.name}</div>
+                      <div style={{ fontSize: '13px', color: '#64748B', marginTop: '2px' }}>{sub.nepName}</div>
+                      <div style={{ fontSize: '11px', color: '#7C3AED', fontWeight: 600, marginTop: '8px' }}>{sub.hours}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. GREEN NATIONWIDE STATS BAND ─────────────────────────────────── */}
+      <section
+        id="stats"
+        style={{
+          background: 'linear-gradient(135deg, #047857 0%, #047857 50%, #15803D 100%)',
+          color: '#FFFFFF',
+          padding: '60px 24px',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            maxWidth: '1320px',
+            margin: '0 auto',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '30px',
+            position: 'relative',
+            zIndex: 2,
+          }}
+        >
+          {/* Stat 1 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+            <div
+              style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '14px',
+                background: 'rgba(255, 255, 255, 0.16)',
+                backdropFilter: 'blur(6px)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FFFFFF',
+                flexShrink: 0,
+              }}
+            >
+              <School size={30} />
+            </div>
+            <div>
+              <div style={{ fontSize: '36px', fontWeight: 900, lineHeight: 1 }}>1,200+</div>
+              <div style={{ fontSize: '13.5px', color: '#D1FAE5', marginTop: '6px', fontWeight: 600 }}>
+                Schools & Colleges Onboarded
+              </div>
+            </div>
+          </div>
+
+          {/* Stat 2 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+            <div
+              style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '14px',
+                background: 'rgba(255, 255, 255, 0.16)',
+                backdropFilter: 'blur(6px)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FFFFFF',
+                flexShrink: 0,
+              }}
+            >
+              <Users size={30} />
+            </div>
+            <div>
+              <div style={{ fontSize: '36px', fontWeight: 900, lineHeight: 1 }}>2,50,000+</div>
+              <div style={{ fontSize: '13.5px', color: '#D1FAE5', marginTop: '6px', fontWeight: 600 }}>
+                Active Nepali Students
+              </div>
+            </div>
+          </div>
+
+          {/* Stat 3 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+            <div
+              style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '14px',
+                background: 'rgba(255, 255, 255, 0.16)',
+                backdropFilter: 'blur(6px)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FFFFFF',
+                flexShrink: 0,
+              }}
+            >
+              <GraduationCap size={30} />
+            </div>
+            <div>
+              <div style={{ fontSize: '36px', fontWeight: 900, lineHeight: 1 }}>15,000+</div>
+              <div style={{ fontSize: '13.5px', color: '#D1FAE5', marginTop: '6px', fontWeight: 600 }}>
+                Certified Teachers
+              </div>
+            </div>
+          </div>
+
+          {/* Stat 4 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+            <div
+              style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '14px',
+                background: 'rgba(255, 255, 255, 0.16)',
+                backdropFilter: 'blur(6px)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FFFFFF',
+                flexShrink: 0,
+              }}
+            >
+              <MapPin size={30} />
+            </div>
+            <div>
+              <div style={{ fontSize: '36px', fontWeight: 900, lineHeight: 1 }}>77 / 77</div>
+              <div style={{ fontSize: '13.5px', color: '#D1FAE5', marginTop: '6px', fontWeight: 600 }}>
+                Districts Covered Across Nepal
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 9. FREQUENTLY ASKED QUESTIONS (ACCORDION) ────────────────────────── */}
+      <section id="faq" style={{ padding: '80px 24px', background: '#FFFFFF' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '44px' }}>
+            <span
+              style={{
+                background: '#ECFDF5',
+                color: '#047857',
+                padding: '5px 14px',
+                borderRadius: '20px',
+                fontSize: '12px',
+                fontWeight: 800,
+                letterSpacing: '0.5px',
+                textTransform: 'uppercase',
+                display: 'inline-block',
+                marginBottom: '8px',
+              }}
+            >
+              Institutional Clarifications
+            </span>
+            <h2 style={{ fontSize: '34px', fontWeight: 900, color: '#0F172A' }}>
+              Frequently Asked Questions
+            </h2>
+            <p style={{ fontSize: '16px', color: '#64748B', margin: '8px auto 0' }}>
+              Everything you need to know about implementing the Nepal Digital Education Platform in your institution.
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            {[
+              {
+                q: 'Is this platform strictly aligned with the Nepal Curriculum Development Centre (CDC)?',
+                a: 'Yes, 100%. All course outlines, subject distributions, credit hours, and textbook materials for Classes 1 through 12 follow the official national curriculum mandated by the Ministry of Education, Science and Technology (MoEST) and the CDC in Sanothimi, Bhaktapur. Both English Medium and Nepali Medium textbooks are pre-loaded.',
+              },
+              {
+                q: 'How does the platform support teachers with low bandwidth or rural connectivity?',
+                a: 'The platform features an intelligent offline caching layer. Digital textbooks, downloaded lesson slides, and whiteboard canvas sessions operate without active internet. Student attendance and grades taken offline automatically synchronize with the central cloud database as soon as network connectivity is restored.',
+              },
+              {
+                q: 'What is the difference between a Class Teacher and a Subject Teacher on this platform?',
+                a: 'A Subject Teacher only manages the curricula, assignments, and smart board sessions for the specific subjects they are assigned in the timetable. A Class Teacher possesses section-wide supervisory authority, responsible for overall daily attendance roll-call, entering terminal exam marks across all subjects, calculating consolidated GPA, writing conduct remarks, and broadcasting class-level notices.',
+              },
+              {
+                q: 'Can our school import existing student and teacher rosters from Excel / CSV or EMIS?',
+                a: 'Yes. School Administrators can import hundreds of students and faculty in seconds using standard CSV templates. Furthermore, the platform matches the CEHRD / IEMIS student ID format, allowing straightforward one-click export for annual government reporting.',
+              },
+              {
+                q: 'How does the AI Assistant maintain a "Zero Hallucination" guarantee?',
+                a: 'Unlike generic chatbots, our educational AI is bound by strict curriculum retrieval-augmented boundaries (RAG). It will only formulate explanations, questions, and solutions citing verified page numbers from the official CDC textbooks. If a prompt falls outside the approved syllabus, it explicitly notifies the student rather than guessing.',
+              },
+              {
+                q: 'Can students submit handwritten homework assignments?',
+                a: 'Yes. Students can take a photo of their handwritten notebook pages using any smartphone camera or tablet. The system incorporates optical character recognition (OCR) and an 8-step teacher grading studio where educators can annotate directly on the student submission, apply rubric scores, and publish marks instantly.',
+              },
+            ].map((faq, idx) => {
+              const isExpanded = expandedFaq === idx;
+              return (
+                <div
+                  key={idx}
+                  style={{
+                    border: '1.5px solid #E2E8F0',
+                    borderRadius: '12px',
+                    overflow: 'hidden',
+                    background: isExpanded ? '#F8FAFC' : '#FFFFFF',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  <button
+                    onClick={() => toggleFaq(idx)}
+                    style={{
+                      width: '100%',
+                      padding: '20px 24px',
+                      background: 'none',
+                      border: 'none',
+                      textAlign: 'left',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      cursor: 'pointer',
+                      gap: '16px',
+                    }}
+                  >
+                    <span style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
+                      {faq.q}
+                    </span>
+                    <div
+                      style={{
+                        width: '28px',
+                        height: '28px',
+                        borderRadius: '50%',
+                        background: isExpanded ? '#047857' : '#F1F5F9',
+                        color: isExpanded ? '#FFFFFF' : '#64748B',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      <ChevronDown
+                        size={16}
+                        style={{
+                          transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.2s ease',
+                        }}
+                      />
+                    </div>
+                  </button>
+                  {isExpanded && (
+                    <div
+                      style={{
+                        padding: '0 24px 20px',
+                        fontSize: '14.5px',
+                        color: '#475569',
+                        lineHeight: 1.6,
+                        borderTop: '1px solid #E2E8F0',
+                        paddingTop: '16px',
+                      }}
+                    >
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 10. INSTITUTION ONBOARDING BANNER ───────────────────────────────── */}
+      <section
+        style={{
+          background: 'linear-gradient(135deg, #047857 0%, #047857 100%)',
+          padding: '70px 24px',
+          color: '#FFFFFF',
+          textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <div style={{ maxWidth: '850px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+          <span
+            style={{
+              background: 'rgba(255, 255, 255, 0.18)',
+              color: '#FFFFFF',
+              padding: '6px 16px',
+              borderRadius: '24px',
+              fontSize: '12px',
+              fontWeight: 800,
+              letterSpacing: '0.5px',
+              textTransform: 'uppercase',
+              display: 'inline-block',
+              marginBottom: '16px',
+            }}
+          >
+            Bring Your Institution to the Digital Forefront
+          </span>
+          <h2 style={{ fontSize: '38px', fontWeight: 900, marginBottom: '16px', letterSpacing: '-0.5px' }}>
+            Ready to Modernize Your School in Academic Year 2083?
+          </h2>
+          <p style={{ fontSize: '17px', color: '#D1FAE5', lineHeight: 1.6, marginBottom: '32px' }}>
+            Join leading community and institutional schools across Nepal. Complete our simple 3-minute registration to configure your school’s private digital campus.
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => navigate('/register')}
+              style={{
+                padding: '14px 32px',
+                borderRadius: '10px',
+                background: '#FFFFFF',
+                color: '#047857',
+                fontSize: '15px',
+                fontWeight: 900,
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#ECFDF5';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#FFFFFF';
+                e.currentTarget.style.transform = 'none';
+              }}
+            >
+              <span>Register Your School Now</span>
+              <ArrowRight size={18} />
+            </button>
+            <button
+              onClick={() => setDemoModalOpen(true)}
+              style={{
+                padding: '14px 26px',
+                borderRadius: '10px',
+                background: 'rgba(255, 255, 255, 0.15)',
+                color: '#FFFFFF',
+                fontSize: '15px',
+                fontWeight: 700,
+                border: '1.5px solid rgba(255, 255, 255, 0.3)',
+                cursor: 'pointer',
+                backdropFilter: 'blur(6px)',
+              }}
+            >
+              Try Interactive Demo
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 11. PROFESSIONAL EDUCATIONAL FOOTER ───────────────────────────────── */}
+      <footer id="footer" style={{ background: '#0F172A', color: '#94A3B8', padding: '64px 24px 32px' }}>
+        <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: '40px', marginBottom: '48px' }}>
+            {/* Column 1: Brand Info */}
+            <div>
+              <div style={{ marginBottom: '18px' }}>
+                <NepalEduLogo size="md" variant="white" />
+              </div>
+              <p style={{ fontSize: '13.5px', lineHeight: 1.6, color: '#94A3B8', maxWidth: '340px', marginBottom: '18px' }}>
+                The official national digital education operating system for schools and colleges across all 77 districts of Nepal. Fully compliant with Ministry of Education, Science & Technology (MoEST) and Curriculum Development Centre (CDC).
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px', color: '#64748B' }}>
+                <div>📍 Sanothimi, Bhaktapur & Singha Durbar, Kathmandu, Nepal</div>
+                <div>🔒 256-Bit TLS Encryption • ISO 27001 Data Security</div>
+                <div>🇳🇵 National EMIS Compliant (Format 5700XXXXX)</div>
+              </div>
+            </div>
+
+            {/* Column 2: Dedicated Portals */}
+            <div>
+              <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '18px' }}>
+                Role Portals
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '11px', fontSize: '13px' }}>
+                <Link to="/login" style={{ color: '#CBD5E1', textDecoration: 'none' }}>Principal Portal</Link>
+                <Link to="/login" style={{ color: '#CBD5E1', textDecoration: 'none' }}>School Admin Portal</Link>
+                <Link to="/login" style={{ color: '#CBD5E1', textDecoration: 'none' }}>Class Teacher Workspace</Link>
+                <Link to="/login" style={{ color: '#CBD5E1', textDecoration: 'none' }}>Subject Faculty Portal</Link>
+                <Link to="/login" style={{ color: '#CBD5E1', textDecoration: 'none' }}>Student Learning Center</Link>
+                <Link to="/super-admin-login" style={{ color: '#34D399', textDecoration: 'none', fontWeight: 700 }}>
+                  Super Admin (MoEST)
+                </Link>
+              </div>
+            </div>
+
+            {/* Column 3: CDC Curriculum */}
+            <div>
+              <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '18px' }}>
+                CDC Curriculum
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '11px', fontSize: '13px' }}>
+                <span style={{ color: '#94A3B8' }}>Primary (Classes 1–5)</span>
+                <span style={{ color: '#94A3B8' }}>Basic Level (Classes 6–8 BLE)</span>
+                <span style={{ color: '#94A3B8' }}>Secondary (Classes 9–10 SEE)</span>
+                <span style={{ color: '#94A3B8' }}>Higher Secondary (Classes 11–12 NEB)</span>
+                <a
+                  href="/smartboard/index.html"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ color: '#38BDF8', textDecoration: 'none', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                >
+                  <span>Smart Board Studio</span>
+                  <ExternalLink size={12} />
+                </a>
+              </div>
+            </div>
+
+            {/* Column 4: Institutions */}
+            <div>
+              <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '18px' }}>
+                Institutions
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '11px', fontSize: '13px' }}>
+                <Link to="/register" style={{ color: '#CBD5E1', textDecoration: 'none' }}>Register New School / College</Link>
+                <Link to="/institution-registration-status" style={{ color: '#CBD5E1', textDecoration: 'none' }}>Check Registration Status</Link>
+                <button
+                  onClick={() => setDemoModalOpen(true)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    color: '#34D399',
+                    fontWeight: 700,
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    fontSize: '13px',
+                  }}
+                >
+                  ⚡ Interactive Demo Ecosystem
+                </button>
+                <Link to="/login" style={{ color: '#CBD5E1', textDecoration: 'none' }}>Institution Portal Login</Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Copyright & Legal */}
+          <div
+            style={{
+              borderTop: '1px solid #1E293B',
+              paddingTop: '24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '12px',
+              fontSize: '12px',
+              color: '#64748B',
+            }}
+          >
+            <div>
+              © 2083 / 2026 Nepal Digital Education Platform. All rights reserved. Government of Nepal Standard.
+            </div>
+            <div style={{ display: 'flex', gap: '20px' }}>
+              <span style={{ cursor: 'pointer' }}>Privacy Policy</span>
+              <span style={{ cursor: 'pointer' }}>Terms of Academic Service</span>
+              <span style={{ cursor: 'pointer' }}>MoEST Guidelines</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Live Demo Role Modal */}
+      <DemoRoleModal isOpen={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
+
+      {/* Demo Video Modal */}
+      {showVideoModal && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.75)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 100,
+            padding: '20px',
+          }}
+          onClick={() => setShowVideoModal(false)}
+        >
+          <div
+            style={{
+              background: '#FFFFFF',
+              borderRadius: '20px',
+              maxWidth: '720px',
+              width: '100%',
+              padding: '24px',
+              position: 'relative',
+              boxShadow: '0 25px 50px rgba(0,0,0,0.3)',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <MonitorPlay size={22} color="#047857" />
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A' }}>
+                  Nepal Digital Education Platform Tour
+                </h3>
+              </div>
+              <button
+                onClick={() => setShowVideoModal(false)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748B' }}
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div
+              style={{
+                background: '#F8FAFC',
+                borderRadius: '14px',
+                padding: '20px',
+                textAlign: 'center',
+                marginBottom: '16px',
+                border: '1px solid #E2E8F0',
+              }}
+            >
+              <img
+                src="/assets/brand/online_smartboard_lecture.jpg"
+                alt="Smart Board Classroom Session"
+                style={{
+                  width: '100%',
+                  maxHeight: '280px',
+                  objectFit: 'cover',
+                  borderRadius: '10px',
+                  marginBottom: '16px',
+                }}
+              />
+              <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#0F172A', marginBottom: '6px' }}>
+                Smart Board, CDC Textbooks & AI Assessment Tour
+              </h4>
+              <p style={{ fontSize: '13.5px', color: '#64748B', maxWidth: '520px', margin: '0 auto 18px', lineHeight: 1.5 }}>
+                Interactive digital whiteboard with dual-pane CDC textbooks, OCR handwriting evaluation, and conflict-free timetable scheduling.
+              </p>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
+                <button
+                  onClick={() => {
+                    setShowVideoModal(false);
+                    setDemoModalOpen(true);
+                  }}
+                  style={{
+                    padding: '11px 22px',
+                    borderRadius: '8px',
+                    background: '#047857',
+                    color: '#FFFFFF',
+                    fontSize: '13.5px',
+                    fontWeight: 700,
+                    border: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Experience Live Demo Now →
+                </button>
+                <button
+                  onClick={() => window.open('/smartboard/index.html', '_blank')}
+                  style={{
+                    padding: '11px 18px',
+                    borderRadius: '8px',
+                    background: '#FFFFFF',
+                    color: '#0F172A',
+                    fontSize: '13.5px',
+                    fontWeight: 700,
+                    border: '1.5px solid #CBD5E1',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Open Smart Board
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default PublicHomePage;

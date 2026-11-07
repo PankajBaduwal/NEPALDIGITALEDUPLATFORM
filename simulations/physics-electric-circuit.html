@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ohm's Law & Electric Circuit · नेपाल डिजिटल शिक्षा</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --yellow: #facc15;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      touch-action: manipulation;
+    }
+    header {
+      background: rgba(30, 41, 59, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .badge {
+      background: #0284c7;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    h1 { font-size: 1.15rem; font-weight: 700; color: #fff; }
+    .subtitle { font-size: 0.8rem; color: var(--text-muted); }
+    .actions { display: flex; gap: 8px; }
+    .btn {
+      background: #334155;
+      color: #fff;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn:hover { background: #475569; }
+    .btn-primary { background: #0284c7; border-color: #0ea5e9; }
+    .btn-primary:hover { background: #0369a1; }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      flex: 1;
+      gap: 16px;
+      padding: 16px;
+    }
+    @media (max-width: 900px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    .canvas-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      min-height: 440px;
+      display: block;
+      background: #0b1120;
+    }
+    .canvas-hud {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      display: flex;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .hud-val { color: var(--accent); font-weight: bold; }
+
+    .controls-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+    .ctrl-group { display: flex; flex-direction: column; gap: 6px; }
+    .ctrl-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+    .ctrl-val { color: var(--accent); font-family: monospace; font-size: 0.95rem; }
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: #334155;
+      height: 8px;
+      border-radius: 4px;
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+    .switch-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .switch-btn.on { background: #16a34a; color: white; }
+    .switch-btn.off { background: #dc2626; color: white; }
+
+    .meter-card {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      text-align: center;
+    }
+    .meter-box {
+      background: #1e293b;
+      padding: 8px;
+      border-radius: 6px;
+    }
+    .meter-lbl { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; }
+    .meter-num { font-size: 1.15rem; font-family: monospace; font-weight: bold; color: var(--yellow); }
+
+    .theory-box {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid var(--accent);
+      padding: 10px 12px;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="badge">Class 6–10 · Physics</span>
+      <div>
+        <h1>Simple Electric Circuit & Ohm's Law (ओमको नियम)</h1>
+        <div class="subtitle">Nepal National Curriculum · Interactive Laboratory Simulation</div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="nepaliToggle" onclick="toggleLang()">🇳🇵 नेपाली / EN</button>
+      <button class="btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+      <button class="btn btn-primary" onclick="launchSmartBoard()">🖥 Smart Board Mode</button>
+    </div>
+  </header>
+
+  <div class="main-grid">
+    <div class="canvas-panel">
+      <div class="canvas-hud">
+        <div>Formula: <span class="hud-val">I = V / R</span></div>
+        <div>Power: <span class="hud-val" id="powerVal">0.00 W</span></div>
+      </div>
+      <canvas id="circuitCanvas"></canvas>
+    </div>
+
+    <div class="controls-panel">
+      <div class="section-title" id="ctrlTitle">Circuit Controls</div>
+      
+      <button class="switch-btn on" id="circuitSwitch" onclick="toggleSwitch()">
+        ⚡ Switch: <span>CLOSED (ON)</span>
+      </button>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">
+          <span id="voltLbl">Battery Voltage (V)</span>
+          <span class="ctrl-val" id="voltNum">12.0 V</span>
+        </div>
+        <input type="range" id="voltRange" min="1" max="48" step="0.5" value="12" oninput="updateCircuit()">
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">
+          <span id="resLbl">Resistance (R)</span>
+          <span class="ctrl-val" id="resNum">10.0 Ω</span>
+        </div>
+        <input type="range" id="resRange" min="1" max="100" step="0.5" value="10" oninput="updateCircuit()">
+      </div>
+
+      <div class="meter-card">
+        <div class="meter-box">
+          <div class="meter-lbl">Current (विद्युत प्रवाह)</div>
+          <div class="meter-num" id="currNum">1.20 A</div>
+        </div>
+        <div class="meter-box">
+          <div class="meter-lbl">Bulb Lumens</div>
+          <div class="meter-num" id="lumenNum">144 lm</div>
+        </div>
+      </div>
+
+      <div class="theory-box" id="theoryBox">
+        <strong>Ohm's Law:</strong> At constant temperature, the current (I) flowing through a conductor is directly proportional to the potential difference (V) across its ends and inversely proportional to its resistance (R): \( I = \frac{V}{R} \).
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let isNepali = false;
+    let isClosed = true;
+    let voltage = 12.0;
+    let resistance = 10.0;
+    let current = 1.20;
+    let electrons = [];
+    const canvas = document.getElementById('circuitCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Setup electron loop
+    for (let i = 0; i < 40; i++) {
+      electrons.push(i / 40);
+    }
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight || 450;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function updateCircuit() {
+      voltage = parseFloat(document.getElementById('voltRange').value);
+      resistance = parseFloat(document.getElementById('resRange').value);
+      document.getElementById('voltNum').textContent = voltage.toFixed(1) + ' V';
+      document.getElementById('resNum').textContent = resistance.toFixed(1) + ' Ω';
+      
+      if (isClosed) {
+        current = voltage / resistance;
+      } else {
+        current = 0;
+      }
+      const power = voltage * current;
+      document.getElementById('currNum').textContent = current.toFixed(2) + ' A';
+      document.getElementById('powerVal').textContent = power.toFixed(2) + ' W';
+      document.getElementById('lumenNum').textContent = Math.round(power * 10) + ' lm';
+    }
+
+    function toggleSwitch() {
+      isClosed = !isClosed;
+      const btn = document.getElementById('circuitSwitch');
+      if (isClosed) {
+        btn.className = 'switch-btn on';
+        btn.innerHTML = '⚡ Switch: <span>CLOSED (ON)</span>';
+      } else {
+        btn.className = 'switch-btn off';
+        btn.innerHTML = '⭕ Switch: <span>OPEN (OFF)</span>';
+      }
+      updateCircuit();
+    }
+
+    function toggleLang() {
+      isNepali = !isNepali;
+      const t = isNepali ? {
+        volt: "ब्याट्री भोल्टेज (भोल्ट - V)",
+        res: "प्रतिरोध (ओम - Ω)",
+        curr: "विद्युत प्रवाह (एम्पियर - A)",
+        theory: "<strong>ओमको नियम:</strong> स्थिर तापक्रममा, कुनै चालकबाट प्रवाहित हुने विद्युत प्रवाह (I) त्यसको दुई छेउबीचको सम्भावित भिन्नता (V) सँग प्रत्यक्ष समानुपातिक र प्रतिरोध (R) सँग व्युत्क्रमानुपातिक हुन्छ: I = V / R ।"
+      } : {
+        volt: "Battery Voltage (V)",
+        res: "Resistance (R)",
+        curr: "Current (I)",
+        theory: "<strong>Ohm's Law:</strong> At constant temperature, the electric current (I) flowing through a conductor is directly proportional to the potential difference (V) across its ends and inversely proportional to its resistance (R): I = V / R."
+      };
+      document.getElementById('voltLbl').textContent = t.volt;
+      document.getElementById('resLbl').textContent = t.res;
+      document.getElementById('theoryBox').innerHTML = t.theory;
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    function launchSmartBoard() {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'LAUNCH_SMARTBOARD', url: window.location.href }, '*');
+      } else {
+        window.open('/smartboard/index.html?mode=split&sim=' + encodeURIComponent(window.location.pathname), '_blank');
+      }
+    }
+
+    // Circuit Coordinates (Normalized to canvas)
+    function drawCircuit() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const w = canvas.width;
+      const h = canvas.height;
+      
+      const left = w * 0.18;
+      const right = w * 0.82;
+      const top = h * 0.22;
+      const bottom = h * 0.78;
+
+      // Draw wire loop
+      ctx.lineWidth = 6;
+      ctx.strokeStyle = isClosed ? '#0284c7' : '#475569';
+      ctx.beginPath();
+      ctx.moveTo(left, top);
+      ctx.lineTo(right, top);
+      ctx.lineTo(right, bottom);
+      ctx.lineTo(left, bottom);
+      ctx.closePath();
+      ctx.stroke();
+
+      // Battery on Left Wire
+      const batY = (top + bottom) / 2;
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(left - 15, batY - 35, 30, 70);
+      
+      // Battery Plates
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = '#ef4444'; // Positive (+)
+      ctx.beginPath();
+      ctx.moveTo(left - 24, batY - 12);
+      ctx.lineTo(left + 24, batY - 12);
+      ctx.stroke();
+
+      ctx.strokeStyle = '#38bdf8'; // Negative (-)
+      ctx.beginPath();
+      ctx.moveTo(left - 14, batY + 12);
+      ctx.lineTo(left + 14, batY + 12);
+      ctx.stroke();
+
+      ctx.fillStyle = '#ef4444';
+      ctx.font = 'bold 14px sans-serif';
+      ctx.fillText('+ ' + voltage.toFixed(1) + 'V', left - 60, batY - 12);
+
+      // Resistor on Bottom Wire
+      const resX = (left + right) / 2;
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(resX - 45, bottom - 15, 90, 30);
+      ctx.strokeStyle = '#a855f7';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(resX - 40, bottom);
+      for (let i = 0; i < 6; i++) {
+        const zigzag = (i % 2 === 0 ? -12 : 12);
+        ctx.lineTo(resX - 30 + i * 12, bottom + zigzag);
+      }
+      ctx.lineTo(resX + 40, bottom);
+      ctx.stroke();
+      ctx.fillStyle = '#c084fc';
+      ctx.font = 'bold 13px sans-serif';
+      ctx.fillText(resistance.toFixed(1) + ' Ω', resX - 20, bottom + 32);
+
+      // Light Bulb on Right Wire
+      const bulbY = (top + bottom) / 2;
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(right - 25, bulbY - 35, 50, 70);
+
+      // Bulb Glow
+      if (isClosed && current > 0) {
+        const glowRadius = Math.min(80, 20 + current * 15);
+        const gradient = ctx.createRadialGradient(right, bulbY, 5, right, bulbY, glowRadius);
+        gradient.addColorStop(0, 'rgba(250, 204, 21, 0.9)');
+        gradient.addColorStop(0.5, 'rgba(234, 179, 8, 0.3)');
+        gradient.addColorStop(1, 'rgba(234, 179, 8, 0)');
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(right, bulbY, glowRadius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Bulb Circle
+      ctx.strokeStyle = isClosed && current > 0 ? '#facc15' : '#64748b';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(right, bulbY, 20, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Switch on Top Wire
+      const swX = (left + right) / 2;
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(swX - 35, top - 15, 70, 30);
+
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.arc(swX - 25, top, 4, 0, Math.PI * 2);
+      ctx.arc(swX + 25, top, 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = isClosed ? '#22c55e' : '#ef4444';
+      ctx.beginPath();
+      ctx.moveTo(swX - 25, top);
+      if (isClosed) {
+        ctx.lineTo(swX + 25, top);
+      } else {
+        ctx.lineTo(swX + 10, top - 20); // Open lever
+      }
+      ctx.stroke();
+
+      // Electron flow animation
+      if (isClosed && current > 0) {
+        const speed = Math.min(0.015, current * 0.003);
+        const perimeter = 2 * (right - left) + 2 * (bottom - top);
+        
+        ctx.fillStyle = '#38bdf8';
+        for (let i = 0; i < electrons.length; i++) {
+          electrons[i] = (electrons[i] + speed) % 1;
+          const dist = electrons[i] * perimeter;
+          let ex, ey;
+
+          // Wire traversal: top -> right -> bottom -> left
+          const wL = right - left;
+          const hL = bottom - top;
+          if (dist < wL) {
+            ex = left + dist; ey = top;
+          } else if (dist < wL + hL) {
+            ex = right; ey = top + (dist - wL);
+          } else if (dist < 2 * wL + hL) {
+            ex = right - (dist - (wL + hL)); ey = bottom;
+          } else {
+            ex = left; ey = bottom - (dist - (2 * wL + hL));
+          }
+
+          ctx.beginPath();
+          ctx.arc(ex, ey, 3.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      requestAnimationFrame(drawCircuit);
+    }
+
+    updateCircuit();
+    drawCircuit();
+  </script>
+</body>
+</html>

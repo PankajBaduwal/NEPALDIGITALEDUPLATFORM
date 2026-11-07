@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Projectile Motion Simulation (प्रक्षेप्य गति) · नेपाल डिजिटल शिक्षा</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --accent: #38bdf8;
+      --gold: #fbbf24;
+      --green: #22c55e;
+      --text: #f8fafc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: rgba(30, 41, 59, 0.95);
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .badge {
+      background: #8b5cf6;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+    h1 { font-size: 1.15rem; font-weight: 700; }
+    .subtitle { font-size: 0.8rem; color: #94a3b8; }
+    .btn {
+      background: #334155;
+      color: #fff;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #475569; }
+    .btn-fire {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+    }
+    .btn-fire:hover { background: #dc2626; }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      flex: 1;
+      gap: 16px;
+      padding: 16px;
+    }
+    @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+
+    .canvas-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      min-height: 460px;
+      display: block;
+      background: #090d16;
+    }
+    .telemetry {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-family: monospace;
+      font-size: 0.85rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .tel-val { color: var(--gold); font-weight: bold; }
+
+    .controls-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .slider-group { display: flex; flex-direction: column; gap: 6px; }
+    .slider-group label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+    input[type=range] { width: 100%; height: 8px; border-radius: 4px; accent-color: var(--accent); }
+    .formula-card {
+      background: #0f172a;
+      border-left: 3px solid #8b5cf6;
+      padding: 10px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <span class="badge">Class 9–12 · Physics</span>
+      <h1>Projectile Motion Simulator (प्रक्षेप्य गति प्रयोगशाला)</h1>
+      <div class="subtitle">Trajectory, Range (R), Maximum Height (H), Time of Flight (T)</div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+      <button class="btn" onclick="window.open('/smartboard/index.html', '_blank')">🖥 Smart Board</button>
+    </div>
+  </header>
+
+  <div class="main-grid">
+    <div class="canvas-panel">
+      <div class="telemetry">
+        <div>Range (R): <span class="tel-val" id="telR">0.0 m</span></div>
+        <div>Max Height (H): <span class="tel-val" id="telH">0.0 m</span></div>
+        <div>Time of Flight: <span class="tel-val" id="telT">0.0 s</span></div>
+        <div>Current Pos: <span class="tel-val" id="telPos">(0, 0)</span></div>
+      </div>
+      <canvas id="motionCanvas"></canvas>
+    </div>
+
+    <div class="controls-panel">
+      <button class="btn-fire" onclick="fireProjectile()">🚀 LAUNCH PROJECTILE (प्रहार गर्नुहोस्)</button>
+      <button class="btn" onclick="clearTraj()">🧹 Clear Trajectories</button>
+
+      <div class="slider-group">
+        <label>
+          <span>Launch Angle (θ):</span>
+          <strong id="angleVal" style="color:var(--gold);">45°</strong>
+        </label>
+        <input type="range" id="angleSlider" min="5" max="85" value="45" oninput="updateValues()">
+      </div>
+
+      <div class="slider-group">
+        <label>
+          <span>Initial Velocity (u):</span>
+          <strong id="velVal" style="color:var(--accent);">25 m/s</strong>
+        </label>
+        <input type="range" id="velSlider" min="5" max="50" value="25" oninput="updateValues()">
+      </div>
+
+      <div class="slider-group">
+        <label>
+          <span>Gravity (g):</span>
+          <strong id="gVal" style="color:#22c55e;">9.8 m/s² (Earth)</strong>
+        </label>
+        <select id="gSelect" onchange="updateValues()" style="background:#0f172a; color:#fff; border:1px solid var(--border); padding:8px; border-radius:6px;">
+          <option value="9.8">Standard Earth (9.8 m/s²)</option>
+          <option value="9.78">Nepal Altitude / Mt. Everest (9.78 m/s²)</option>
+          <option value="1.62">Moon (1.62 m/s²)</option>
+          <option value="3.72">Mars (3.72 m/s²)</option>
+        </select>
+      </div>
+
+      <div class="formula-card">
+        <strong>Nepal Curriculum Physics Equations:</strong><br>
+        • Maximum Height: \( H = \frac{u^2 \sin^2\theta}{2g} \)<br>
+        • Horizontal Range: \( R = \frac{u^2 \sin 2\theta}{g} \)<br>
+        • Time of Flight: \( T = \frac{2u \sin\theta}{g} \)
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('motionCanvas');
+    const ctx = canvas.getContext('2d');
+    let angle = 45;
+    let velocity = 25;
+    let gravity = 9.8;
+    let isFlying = false;
+    let t = 0;
+    let currentTrajectory = [];
+    let savedTrajectories = [];
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight || 480;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function updateValues() {
+      angle = parseFloat(document.getElementById('angleSlider').value);
+      velocity = parseFloat(document.getElementById('velSlider').value);
+      gravity = parseFloat(document.getElementById('gSelect').value);
+
+      document.getElementById('angleVal').textContent = angle + '°';
+      document.getElementById('velVal').textContent = velocity + ' m/s';
+
+      const rad = (angle * Math.PI) / 180;
+      const H = (Math.pow(velocity * Math.sin(rad), 2)) / (2 * gravity);
+      const R = (Math.pow(velocity, 2) * Math.sin(2 * rad)) / gravity;
+      const T = (2 * velocity * Math.sin(rad)) / gravity;
+
+      document.getElementById('telH').textContent = H.toFixed(1) + ' m';
+      document.getElementById('telR').textContent = R.toFixed(1) + ' m';
+      document.getElementById('telT').textContent = T.toFixed(2) + ' s';
+    }
+
+    function fireProjectile() {
+      if (currentTrajectory.length > 0) {
+        savedTrajectories.push([...currentTrajectory]);
+        if (savedTrajectories.length > 5) savedTrajectories.shift();
+      }
+      currentTrajectory = [];
+      t = 0;
+      isFlying = true;
+    }
+
+    function clearTraj() {
+      savedTrajectories = [];
+      currentTrajectory = [];
+      isFlying = false;
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+      else document.exitFullscreen().catch(()=>{});
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const originX = 60;
+      const originY = canvas.height - 50;
+      const scale = 3.8; // px per meter
+
+      // Ground
+      ctx.fillStyle = '#1e293b';
+      ctx.fillRect(0, originY, canvas.width, 50);
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, originY);
+      ctx.lineTo(canvas.width, originY);
+      ctx.stroke();
+
+      // Cannon
+      const rad = (angle * Math.PI) / 180;
+      const cannonLen = 35;
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 8;
+      ctx.beginPath();
+      ctx.moveTo(originX, originY);
+      ctx.lineTo(originX + Math.cos(rad) * cannonLen, originY - Math.sin(rad) * cannonLen);
+      ctx.stroke();
+
+      ctx.fillStyle = '#334155';
+      ctx.beginPath();
+      ctx.arc(originX, originY, 14, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Draw Past Trajectories
+      savedTrajectories.forEach((traj, idx) => {
+        ctx.strokeStyle = `rgba(148, 163, 184, ${0.2 + idx * 0.15})`;
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        traj.forEach((pt, i) => {
+          const px = originX + pt.x * scale;
+          const py = originY - pt.y * scale;
+          if (i === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        });
+        ctx.stroke();
+        ctx.setLineDash([]);
+      });
+
+      // Simulation Step
+      if (isFlying) {
+        const rad = (angle * Math.PI) / 180;
+        const vx = velocity * Math.cos(rad);
+        const vy = velocity * Math.sin(rad);
+
+        const x = vx * t;
+        const y = vy * t - 0.5 * gravity * t * t;
+
+        if (y < 0 && t > 0) {
+          isFlying = false;
+        } else {
+          currentTrajectory.push({ x, y });
+          t += 0.035;
+          document.getElementById('telPos').textContent = `(${x.toFixed(1)}m, ${Math.max(0, y).toFixed(1)}m)`;
+        }
+      }
+
+      // Draw Active Trajectory
+      if (currentTrajectory.length > 0) {
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        currentTrajectory.forEach((pt, i) => {
+          const px = originX + pt.x * scale;
+          const py = originY - pt.y * scale;
+          if (i === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        });
+        ctx.stroke();
+
+        // Projectile ball
+        const last = currentTrajectory[currentTrajectory.length - 1];
+        const ballX = originX + last.x * scale;
+        const ballY = originY - last.y * scale;
+
+        ctx.fillStyle = '#ef4444';
+        ctx.beginPath();
+        ctx.arc(ballX, ballY, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    updateValues();
+    draw();
+  </script>
+</body>
+</html>

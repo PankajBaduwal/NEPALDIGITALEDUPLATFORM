@@ -1,0 +1,164 @@
+/**
+ * java-simulation.css
+ * Object Oriented Programming Using Java Laboratory (U25CS311) Theme Styles
+ * Java Crimson / Duke Red & Amber (#ef4444 / #dc2626 / #f97316) · Eduverse Glassmorphism
+ */
+
+:root {
+  --java-red: #ef4444;
+  --java-red-dark: #dc2626;
+  --java-red-deep: #b91c1c;
+  --java-red-light: #f87171;
+  --java-red-soft: rgba(239, 68, 68, 0.12);
+  --java-orange: #f97316;
+  --java-amber: #f59e0b;
+  --java-cyan: #06b6d4;
+  --java-emerald: #10b981;
+  --java-indigo: #6366f1;
+  --java-slate-bg: #0f172a;
+  --java-slate-card: #1e293b;
+  --java-slate-border: #334155;
+}
+
+[data-theme="dark"] {
+  --java-red-soft: rgba(239, 68, 68, 0.22);
+}
+
+/* Brand badge in header */
+#java-brand-mark {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+  font-weight: 800;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+/* Active buttons & borders */
+.java-btn-primary {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3) !important;
+}
+
+.java-btn-primary:hover {
+  background: linear-gradient(135deg, #f87171, #ef4444) !important;
+}
+
+/* Stage top badges */
+.java-stage-badges .ep-badge-accent {
+  background: var(--java-red-soft);
+  color: var(--java-red-dark);
+  border: 1px solid var(--java-red);
+}
+
+[data-theme="dark"] .java-stage-badges .ep-badge-accent {
+  color: var(--java-red-light);
+}
+
+/* Canvas styling */
+#java-canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  background-color: var(--card);
+}
+
+/* Pedagogical Work Box */
+.java-work-item {
+  border-left: 3px solid var(--java-red);
+  padding-left: 10px;
+}
+
+/* Java Code & Console Terminal Area */
+.java-code-box {
+  width: 100%;
+  min-height: 70px;
+  font-family: 'Fira Code', Consolas, Monaco, monospace;
+  font-size: 12.5px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.java-code-box:focus {
+  outline: none;
+  border-color: var(--java-red);
+  box-shadow: 0 0 0 2px var(--java-red-soft);
+}
+
+/* Stack Frame & Heap Memory Block Visualizer */
+.java-memory-wrap {
+  display: flex;
+  gap: 12px;
+  margin: 10px 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+}
+
+.java-stack-box {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.java-heap-box {
+  flex: 1.5;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.java-mem-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 4px;
+}
+
+/* Console Output Emulator */
+.java-console-emulator {
+  background: #090d16;
+  color: #38bdf8;
+  font-family: 'Fira Code', Consolas, Monaco, monospace;
+  font-size: 11.5px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 8px;
+  min-height: 48px;
+  overflow-x: auto;
+  border: 1px solid #1e293b;
+}
+
+.java-console-line {
+  line-height: 1.4;
+}
+
+.java-console-line.success {
+  color: #4ade80;
+}
+
+.java-console-line.error {
+  color: #f87171;
+}
+
+.java-console-line.warning {
+  color: #fbbf24;
+}

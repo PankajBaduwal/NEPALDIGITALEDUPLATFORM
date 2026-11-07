@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Institution Administration Portal — Nepal Digital Education Ecosystem</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+  <!-- ════════════════ SIDEBAR ════════════════ -->
+  <aside id="sidebar">
+    <div class="brand-section">
+      <div class="brand-icon">🏫</div>
+      <div class="brand-text">
+        <h1 id="sidebar-inst-name">Kathmandu Model Secondary</h1>
+        <span>INSTITUTION ADMIN</span>
+      </div>
+    </div>
+
+    <div class="nav-container">
+      <div class="nav-section-title">Operations</div>
+      <div class="nav-item active" data-view="overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Overview</span>
+      </div>
+
+      <div class="nav-section-title">People & Roles</div>
+      <div class="nav-item" data-view="teachers">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Teachers</span>
+      </div>
+      <div class="nav-item" data-view="students">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 14c4 0 7 2 7 6v1H5v-1c0-4 3-6 7-6z"/><circle cx="12" cy="7" r="4"/><path d="M22 10l-10-5-10 5 10 5 10-5z"/></svg>
+        <span>Students</span>
+      </div>
+      <div class="nav-item" data-view="class-teachers">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>Class Teachers</span>
+      </div>
+
+      <div class="nav-section-title">Academic Setup</div>
+      <div class="nav-item" data-view="classes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        <span>Classes (1–12)</span>
+      </div>
+      <div class="nav-item" data-view="sections">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+        <span>Sections</span>
+      </div>
+      <div class="nav-item" data-view="subjects">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        <span>Subjects</span>
+      </div>
+      <div class="nav-item" data-view="allocations">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+        <span>Subject Allocation</span>
+      </div>
+      <div class="nav-item" data-view="timetable">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Class Timetable</span>
+      </div>
+      <div class="nav-item" data-view="years">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Academic Years</span>
+      </div>
+
+      <div class="nav-section-title">Communication & Governance</div>
+      <div class="nav-item" data-view="announcements">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 17H2a3 3 0 003-3V9a7 7 0 0114 0v5a3 3 0 003 3zm-8.27 4a2 2 0 01-3.46 0"/></svg>
+        <span>Announcements</span>
+      </div>
+      <div class="nav-item" data-view="reports">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.21 15.89A10 10 0 118 2.83M22 12A10 10 0 0012 2v10z"/></svg>
+        <span>Reports & Analytics</span>
+      </div>
+      <div class="nav-item" data-view="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Institution Settings</span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-avatar" id="current-user-avatar">AD</div>
+      <div class="user-info">
+        <div class="user-name" id="current-user-name">Bikram Shrestha</div>
+        <div class="user-role" id="current-inst-code">SCH-2081-0001</div>
+      </div>
+      <button class="btn-icon-logout" id="btn-logout" title="Sign Out">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ════════════════ MAIN CONTENT ════════════════ -->
+  <main id="main-wrapper">
+    <header id="topbar">
+      <div>
+        <h2 class="page-title" id="page-title">Institution Overview</h2>
+        <p class="page-subtitle" id="page-subtitle">Real-time academic operations and monitoring</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="status-badge active" id="current-package-badge">Package 3 (Secondary)</span>
+        <a href="/smartboard/index.html" target="_blank" class="btn-primary" style="text-decoration:none;background:#0f172a;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Smart Board
+        </a>
+      </div>
+    </header>
+
+    <div class="content-body">
+
+      <!-- VIEW 1: OVERVIEW -->
+      <section id="view-overview" class="view-panel">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header"><span class="stat-label">Enrolled Students</span><span>🎒</span></div>
+            <div class="stat-value" id="stat-students">0</div>
+            <div class="stat-sub">Active learners in classes</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header"><span class="stat-label">Teaching Staff</span><span>👨‍🏫</span></div>
+            <div class="stat-value" id="stat-teachers">0</div>
+            <div class="stat-sub">Assigned subject teachers</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header"><span class="stat-label">Classes & Sections</span><span>🏛️</span></div>
+            <div class="stat-value" id="stat-classes-sections">0 / 0</div>
+            <div class="stat-sub">Configured class divisions</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header"><span class="stat-label">Active Subjects</span><span>📚</span></div>
+            <div class="stat-value" id="stat-subjects">0</div>
+            <div class="stat-sub">CDC compulsory & optional</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header"><span class="stat-label">Average Attendance</span><span>📈</span></div>
+            <div class="stat-value" id="stat-attendance">92%</div>
+            <div class="stat-sub">Across all sections</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header"><span class="stat-label">Academic Score</span><span>⭐</span></div>
+            <div class="stat-value" id="stat-score">75%</div>
+            <div class="stat-sub">Terminal performance</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:24px;">
+          <!-- Today's Timetable -->
+          <div class="table-card">
+            <div class="filter-bar">
+              <h3 style="font-size:15px;font-weight:700;" id="today-timetable-title">Today's Timetable Schedule</h3>
+              <span class="type-pill" id="today-day-pill">Today</span>
+            </div>
+            <div class="data-table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Class & Section</th>
+                    <th>Subject</th>
+                    <th>Teacher</th>
+                    <th>Room</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-today-timetable"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Pending Administrative Tasks & Upcoming Exams -->
+          <div style="display:flex;flex-direction:column;gap:18px;">
+            <div class="table-card" style="padding:18px;">
+              <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;">Administrative Action Items</h4>
+              <div id="pending-tasks-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+            </div>
+
+            <div class="table-card" style="padding:18px;">
+              <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;">Upcoming Examinations</h4>
+              <div id="upcoming-exams-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: TEACHERS -->
+      <section id="view-teachers" class="view-panel" style="display:none;">
+        <div class="table-card">
+          <div class="filter-bar">
+            <input type="text" id="search-teachers" class="input-search" placeholder="Search teacher by name...">
+            <button class="btn-primary" id="btn-add-teacher">+ Add New Teacher</button>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Teacher Name</th>
+                  <th>Username</th>
+                  <th>Assigned Subjects</th>
+                  <th>Class Teacher Duty</th>
+                  <th>Email & Phone</th>
+                  <th>Status</th>
+                  <th style="text-align:right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-teachers"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: STUDENTS -->
+      <section id="view-students" class="view-panel" style="display:none;">
+        <div class="table-card">
+          <div class="filter-bar">
+            <div style="display:flex;gap:10px;">
+              <input type="text" id="search-students" class="input-search" placeholder="Search student name, admission no...">
+              <select id="filter-student-class" class="select-filter">
+                <option value="ALL">All Classes</option>
+              </select>
+            </div>
+            <button class="btn-primary" id="btn-register-student">+ Register Student</button>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Roll</th>
+                  <th>Admission No</th>
+                  <th>Student Name</th>
+                  <th>Class & Section</th>
+                  <th>Guardian Information</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-students"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: CLASSES & SECTIONS -->
+      <section id="view-classes" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h3 style="font-size:16px;font-weight:700;">Configured Classes (Classes 1–12)</h3>
+            <button class="btn-primary" id="btn-configure-class">+ Configure Class</button>
+          </div>
+          <div id="classes-cards-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;"></div>
+        </div>
+      </section>
+
+      <section id="view-sections" class="view-panel" style="display:none;">
+        <div class="table-card">
+          <div class="filter-bar">
+            <h3 style="font-size:15px;font-weight:700;">Sections Management</h3>
+            <button class="btn-primary" id="btn-create-section">+ New Section</button>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Section Name</th>
+                  <th>Class Teacher</th>
+                  <th>Students Enrolled</th>
+                  <th>Subjects Allocated</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-sections"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: SUBJECTS & ALLOCATIONS -->
+      <section id="view-subjects" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding:20px;">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">Institution Subject Offerings</h3>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">Curated from Nepal Central CDC curriculum and assigned to active school grades.</p>
+          <div id="subjects-list-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:14px;"></div>
+        </div>
+      </section>
+
+      <section id="view-allocations" class="view-panel" style="display:none;">
+        <div class="table-card">
+          <div class="filter-bar">
+            <div>
+              <h3 style="font-size:15px;font-weight:700;">Subject-Teacher Allocations</h3>
+              <p style="font-size:12px;color:var(--text-muted)">Class &rarr; Section &rarr; Subject &rarr; Teacher</p>
+            </div>
+            <button class="btn-primary" id="btn-allocate-subject">+ Allocate Subject to Teacher</button>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Class & Section</th>
+                  <th>Subject</th>
+                  <th>Assigned Teacher</th>
+                  <th>Medium</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-allocations"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 6: CLASS TEACHERS -->
+      <section id="view-class-teachers" class="view-panel" style="display:none;">
+        <div class="table-card">
+          <div class="filter-bar">
+            <h3 style="font-size:15px;font-weight:700;">Class Teacher Assignments</h3>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Class & Section</th>
+                  <th>Designated Class Teacher</th>
+                  <th>Teacher Contact</th>
+                  <th>Responsibility Scope</th>
+                  <th style="text-align:right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-class-teachers"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 7: TIMETABLE -->
+      <section id="view-timetable" class="view-panel" style="display:none;">
+        <div class="table-card">
+          <div class="filter-bar">
+            <div style="display:flex;gap:10px;">
+              <select id="filter-timetable-section" class="select-filter">
+                <option value="ALL">All Sections</option>
+              </select>
+            </div>
+            <button class="btn-primary" id="btn-add-timetable-slot">+ Add Schedule Period</button>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Time Slot</th>
+                  <th>Class & Section</th>
+                  <th>Subject</th>
+                  <th>Teacher</th>
+                  <th>Room</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-timetable-full"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 8: ACADEMIC YEARS -->
+      <section id="view-years" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding:20px;">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:14px;">Academic Years Configuration</h3>
+          <div id="years-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 9: ANNOUNCEMENTS -->
+      <section id="view-announcements" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h3 style="font-size:16px;font-weight:700;">School-Wide Announcements</h3>
+            <button class="btn-primary" id="btn-new-school-announcement">+ Create Announcement</button>
+          </div>
+          <div id="school-announcements-list" style="display:flex;flex-direction:column;gap:12px;"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 10: REPORTS -->
+      <section id="view-reports" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding:24px;">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:14px;">Institutional Academic Reports</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:16px;">
+            <div class="stat-card">
+              <h4 style="font-weight:700;margin-bottom:6px;">Student Roster Summary</h4>
+              <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Export student enrollment list with roll numbers and section allocations.</p>
+              <button class="btn-outline" onclick="App.exportRoster()">Export CSV Roster</button>
+            </div>
+            <div class="stat-card">
+              <h4 style="font-weight:700;margin-bottom:6px;">Class Teacher Allocation Summary</h4>
+              <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Audit class teacher supervision across all academic levels.</p>
+              <button class="btn-outline" onclick="alert('Report generated')">Export PDF Audit</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 11: SETTINGS / PROFILE -->
+      <section id="view-settings" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding:24px;max-width:750px;">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">Institution Profile & Operational Timings</h3>
+          <form id="form-school-profile">
+            <div style="margin-bottom:16px;padding:12px;background:#f8fafc;border-radius:8px;border:1px solid var(--border);">
+              <h4 style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:6px;">Super Admin Managed Properties (Read-Only)</h4>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12.5px;">
+                <div>Institution Code: <b id="ro-code">-</b></div>
+                <div>EMIS Code: <b id="ro-emis">-</b></div>
+                <div>Location: <b id="ro-location">-</b></div>
+                <div>Institution Type: <b id="ro-type">-</b></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Institution Name</label>
+              <input type="text" id="prof-name" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Institution Name (Nepali)</label>
+              <input type="text" id="prof-name-nepali" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Campus Address</label>
+              <input type="text" id="prof-address" class="form-input">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="form-group">
+                <label class="form-label">Official Contact Email</label>
+                <input type="email" id="prof-email" class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Contact Phone</label>
+                <input type="text" id="prof-phone" class="form-input">
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="form-group">
+                <label class="form-label">Working Days</label>
+                <input type="text" id="prof-working-days" class="form-input" value="Sunday - Friday">
+              </div>
+              <div class="form-group">
+                <label class="form-label">School Timings</label>
+                <input type="text" id="prof-timings" class="form-input" value="10:00 AM - 04:00 PM">
+              </div>
+            </div>
+            <button type="submit" class="btn-primary" style="margin-top:10px;">Save Profile Changes</button>
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ════════════════ MODALS ════════════════ -->
+
+  <!-- Modal: Add Teacher -->
+  <div class="modal-overlay" id="modal-teacher">
+    <div class="modal-box" style="max-width:500px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Register Teacher</h3>
+        <button class="modal-close" onclick="App.closeModals()">&times;</button>
+      </div>
+      <form id="form-teacher">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Full Name (English) *</label>
+            <input type="text" id="teacher-fullname" class="form-input" required placeholder="e.g. Ramesh Adhikari">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Full Name (Nepali)</label>
+            <input type="text" id="teacher-fullname-nepali" class="form-input" placeholder="e.g. रमेश अधिकारी">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Username *</label>
+            <input type="text" id="teacher-username" class="form-input" required placeholder="teacher_ramesh">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="teacher-email" class="form-input" placeholder="ramesh@school.edu.np">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="text" id="teacher-phone" class="form-input" placeholder="9841000000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" id="teacher-password" class="form-input" placeholder="Default: Nepal@1234">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline" onclick="App.closeModals()">Cancel</button>
+          <button type="submit" class="btn-primary">Register Teacher</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Register Student -->
+  <div class="modal-overlay" id="modal-student">
+    <div class="modal-box" style="max-width:550px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Register Student</h3>
+        <button class="modal-close" onclick="App.closeModals()">&times;</button>
+      </div>
+      <form id="form-student">
+        <div class="modal-body">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div class="form-group">
+              <label class="form-label">Student Full Name *</label>
+              <input type="text" id="std-fullname" class="form-input" required placeholder="Aarav Thapa">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nepali Name</label>
+              <input type="text" id="std-fullname-nepali" class="form-input" placeholder="आरभ थापा">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div class="form-group">
+              <label class="form-label">Username *</label>
+              <input type="text" id="std-username" class="form-input" required placeholder="student_aarav">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Admission Number</label>
+              <input type="text" id="std-admission" class="form-input" placeholder="ADM-2081-01">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div class="form-group">
+              <label class="form-label">Target Section *</label>
+              <select id="std-section-id" class="form-select" required></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Roll Number *</label>
+              <input type="number" id="std-roll" class="form-input" required value="1">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div class="form-group">
+              <label class="form-label">Parent / Guardian Name</label>
+              <input type="text" id="std-guardian-name" class="form-input" placeholder="Guardian Full Name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Guardian Phone</label>
+              <input type="text" id="std-guardian-phone" class="form-input" placeholder="98XXXXXXXX">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline" onclick="App.closeModals()">Cancel</button>
+          <button type="submit" class="btn-primary">Register & Enroll</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Allocate Subject -->
+  <div class="modal-overlay" id="modal-allocate">
+    <div class="modal-box" style="max-width:500px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Allocate Subject to Teacher</h3>
+        <button class="modal-close" onclick="App.closeModals()">&times;</button>
+      </div>
+      <form id="form-allocate">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Section *</label>
+            <select id="alloc-section-id" class="form-select" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subject *</label>
+            <select id="alloc-subject-id" class="form-select" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Assign Teacher *</label>
+            <select id="alloc-teacher-id" class="form-select" required></select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline" onclick="App.closeModals()">Cancel</button>
+          <button type="submit" class="btn-primary">Assign Allocation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Assign Class Teacher -->
+  <div class="modal-overlay" id="modal-class-teacher">
+    <div class="modal-box" style="max-width:480px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Designate Primary Class Teacher</h3>
+        <button class="modal-close" onclick="App.closeModals()">&times;</button>
+      </div>
+      <form id="form-class-teacher">
+        <div class="modal-body">
+          <input type="hidden" id="ct-section-id">
+          <div class="form-group">
+            <label class="form-label">Section</label>
+            <input type="text" id="ct-section-name" class="form-input" readonly>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Select Primary Class Teacher *</label>
+            <select id="ct-teacher-id" class="form-select" required></select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline" onclick="App.closeModals()">Cancel</button>
+          <button type="submit" class="btn-primary">Confirm Assignment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+

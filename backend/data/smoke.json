@@ -1,0 +1,111 @@
+{
+ "total": 71,
+ "dyn": [
+  "/academic-planning/structure${y ? ",
+  "/academic-planning/explorer?academicYearId=${yearId}&classId=${classId}&medium=${medium}",
+  "/curriculum/subjects/${centralSubjectId}/chapters",
+  "/curriculum/textbooks?subjectId=${centralSubjectId}",
+  "/assignments/${id}",
+  "/assignments/${assignmentId}/submissions",
+  "/class-teacher/section/${sectionId}/overview",
+  "/class-teacher/section/${sectionId}/consolidated-results?examName=${encodeURIComponent(selectedExam)}",
+  "/timetable/student/${sectionId}",
+  "/curriculum/library/search?q=${encodeURIComponent(q.trim())}",
+  "/curriculum/library/subjects/${id}",
+  "/curriculum/library/reports/${name}",
+  "/analytics/principal${queryStr}",
+  "/quizzes/${id}",
+  "/assignments/student?sectionId=${sectionId}",
+  "/quizzes/student?classId=${classId}&sectionId=${sectionId}",
+  "/quizzes/${quizId}",
+  "/assignments/${assignment.id || assignment._id}/submissions",
+  "/teacher/insights/${scope.sectionId}${q}",
+  "/teacher/remarks/${scope.sectionId}",
+  "/quizzes/${quiz.id || quiz._id}/review",
+  "/quizzes/${quiz.id || quiz._id}/analytics",
+  "/timetable/builder/sections/${sectionId}",
+  "/timetable/builder/timetables/${id}",
+  "/timetable/teacher/${teacherId}",
+  "/timetable/history?limit=200${filter ? ",
+  "/admin/institutions/${institutionId}",
+  "/admin/registration-requests?status=${statusFilter}&search=${encodeURIComponent(searchTerm)}",
+  "/admin/users?${q.toString()}",
+  "/ai/conversations/${id}",
+  "/curriculum/subjects?gradeNumber=${gradeNumber}",
+  "/class-teacher/section/${secId}/overview",
+  "/auth/institution-registration-status/${encodeURIComponent(codeToSearch.trim())}",
+  "/feature-access/classes/${classId}",
+  "/feature-access/sections/${sectionId}",
+  "/timetable/student/${targetSec}",
+  "/simulation-activity/simulations?isPublished=true${gradeQuery}",
+  "/simulation-activity/activities?isPublished=true${gradeQuery}",
+  "/curriculum/textbooks?${params.toString()}",
+  "/curriculum/textbooks/${tb.id || tb._id}",
+  "/teacher/marks/${assessmentId}",
+  "/class-teacher/section/${secId}/consolidated-results",
+  "/analytics/class-teacher/${secId}",
+  "/teacher/workspace/${sectionId}/${centralSubjectId}",
+  "/assessment/items?sectionId=${sectionId}&centralSubjectId=${centralSubjectId}",
+  "/teacher/attendance/${sectionId}",
+  "/analytics/subject-teacher?sectionId=${sectionId}&centralSubjectId=${centralSubjectId}",
+  "/teacher/workspace/${secId}/${subId}",
+  "/curriculum/textbooks?subjectId=${subId}",
+  "/curriculum/textbooks?grade=${grade}",
+  "/teacher/workspace/${sectionId}/${subjectId}",
+  "/smartboard/simulations${grade ? ",
+  "/smartboard/activities${grade ? ",
+  "/curriculum/textbooks/${tbs[0].id || tbs[0]._id}"
+ ],
+ "out": {
+  "SUPER_ADMIN": {
+   "ok": 36,
+   "bad": [
+    "404 /timetable/teacher",
+    "404 /school-admin/allocations",
+    "404 /academic/subjects",
+    "500 /calendar",
+    "404 /school-admin/dashboard",
+    "404 /school-admin/profile",
+    "404 /school/dashboard",
+    "404 /school-admin/overview",
+    "404 /student/overview",
+    "404 /student/subjects",
+    "404 /student/attendance",
+    "404 /student/results",
+    "404 /student/notes"
+   ]
+  },
+  "SCHOOL_ADMIN": {
+   "ok": 49,
+   "bad": [
+    "404 /school-admin/allocations",
+    "404 /academic/subjects"
+   ]
+  },
+  "PRINCIPAL": {
+   "ok": 49,
+   "bad": [
+    "404 /school-admin/allocations",
+    "404 /academic/subjects"
+   ]
+  },
+  "TEACHER": {
+   "ok": 27,
+   "bad": [
+    "404 /academic/subjects"
+   ]
+  },
+  "TEACHER2": {
+   "ok": 27,
+   "bad": [
+    "404 /academic/subjects"
+   ]
+  },
+  "STUDENT": {
+   "ok": 22,
+   "bad": [
+    "404 /academic/subjects"
+   ]
+  }
+ }
+}

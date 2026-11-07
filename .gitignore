@@ -1,0 +1,33 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+
+# Local data and uploads
+backend/uploads/
+backend/*.db
+*.log
+
+# Large local source material (textbook PDFs, local backups): kept on disk, not in git
+Nepal data/
+backend/Nepal data/
+backend/books/
+backend/backups/
+backend/dist/
+
+# Local tooling / scratch
+.claude/
+*.tmp
+backend/data/models/
+backend/prisma/*.db
+backend/prisma/*.db-journal

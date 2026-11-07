@@ -1,0 +1,283 @@
+{
+ "questions": 30,
+ "passed": 27,
+ "accuracyTop3": 0.9,
+ "wrongClassResults": 0,
+ "emptyAnswers": 0,
+ "failures": [
+  {
+   "g": 5,
+   "s": "SOCIAL_STUDIES",
+   "q": "नेपालको राष्ट्रिय झन्डाको बारेमा बताऊ",
+   "ok": false,
+   "best": "सामाजिक अध्ययन कक्षा ५ p.83",
+   "returned": 6
+  },
+  {
+   "g": 10,
+   "s": "SCIENCE",
+   "q": "Ohm's law and electric resistance",
+   "ok": false,
+   "best": "विज्ञान तथा प्रविधि कक्षा १० p.374",
+   "returned": 6
+  },
+  {
+   "g": 10,
+   "s": "HISTORY",
+   "q": "राणा शासनको अन्त्य कसरी भयो?",
+   "ok": false,
+   "best": "इतिहास कक्षा १० p.28",
+   "returned": 6
+  }
+ ],
+ "rows": [
+  {
+   "g": 5,
+   "s": "ENGLISH",
+   "q": "How do I write a letter to my elder sister?",
+   "ok": true,
+   "best": "ENGLISH Grade 5 p.125",
+   "returned": 6
+  },
+  {
+   "g": 5,
+   "s": "SCIENCE",
+   "q": "पदार्थका अवस्थाहरू के के हुन्?",
+   "ok": true,
+   "best": "विज्ञान तथा प्रविधि कक्षा ५ p.22",
+   "returned": 6
+  },
+  {
+   "g": 5,
+   "s": "MATHEMATICS",
+   "q": "How to add fractions with the same denominator",
+   "ok": true,
+   "best": "Mathematics Grade 5 p.83",
+   "returned": 6
+  },
+  {
+   "g": 5,
+   "s": "SOCIAL_STUDIES",
+   "q": "नेपालको राष्ट्रिय झन्डाको बारेमा बताऊ",
+   "ok": false,
+   "best": "सामाजिक अध्ययन कक्षा ५ p.83",
+   "returned": 6
+  },
+  {
+   "g": 6,
+   "s": "SCIENCE",
+   "q": "फोटोसिन्थेसिस के हो?",
+   "ok": true,
+   "best": "विज्ञान तथा प्रविधि कक्षा ६ p.146",
+   "returned": 6
+  },
+  {
+   "g": 6,
+   "s": "MATHEMATICS",
+   "q": "perimeter र क्षेत्रफलको सूत्र",
+   "ok": true,
+   "best": "गणित कक्षा ६ p.128",
+   "returned": 6
+  },
+  {
+   "g": 7,
+   "s": "MATHEMATICS",
+   "q": "How do I solve a simple linear equation?",
+   "ok": true,
+   "best": "Mathematics Grade 7 p.184",
+   "returned": 6
+  },
+  {
+   "g": 7,
+   "s": "SCIENCE",
+   "q": "कोषका भागहरू र कार्य",
+   "ok": true,
+   "best": "विज्ञान तथा प्रविधि कक्षा ७ p.79",
+   "returned": 6
+  },
+  {
+   "g": 8,
+   "s": "SCIENCE",
+   "q": "What is the difference between speed and velocity?",
+   "ok": true,
+   "best": "Science and Technology Grade 8 p.159",
+   "returned": 6
+  },
+  {
+   "g": 8,
+   "s": "ENGLISH",
+   "q": "Explain the passive voice with examples",
+   "ok": true,
+   "best": "English Grade 8 1 ENGLISH Grade 8 p.233",
+   "returned": 6
+  },
+  {
+   "g": 8,
+   "s": "SOCIAL_STUDIES",
+   "q": "नेपालको भौगोलिक विविधता",
+   "ok": true,
+   "best": "सामाजिक अध्ययन कक्षा ८ p.40",
+   "returned": 6
+  },
+  {
+   "g": 9,
+   "s": "SCIENCE",
+   "q": "न्यूटनको गतिसम्बन्धी नियमहरू",
+   "ok": true,
+   "best": "विज्ञान तथा प्रविधि कक्षा ९ p.116",
+   "returned": 6
+  },
+  {
+   "g": 9,
+   "s": "COMPUTER_SCIENCE",
+   "q": "What is an operating system and what does it do?",
+   "ok": true,
+   "best": "Computer Science Grade - 9 p.37",
+   "returned": 6
+  },
+  {
+   "g": 9,
+   "s": "ECONOMICS",
+   "q": "माग र आपूर्तिको नियम",
+   "ok": true,
+   "best": "अर्थशास्त्र कक्षा ९ p.59",
+   "returned": 6
+  },
+  {
+   "g": 10,
+   "s": "SCIENCE",
+   "q": "Ohm's law and electric resistance",
+   "ok": false,
+   "best": "विज्ञान तथा प्रविधि कक्षा १० p.374",
+   "returned": 6
+  },
+  {
+   "g": 10,
+   "s": "MATHEMATICS",
+   "q": "Pythagoras theorem right angled triangle",
+   "ok": true,
+   "best": "गणित कक्षा १० p.234",
+   "returned": 6
+  },
+  {
+   "g": 10,
+   "s": "ENGLISH",
+   "q": "How are conditional sentences formed?",
+   "ok": true,
+   "best": "English 10 1 ENGLISH Grade 10 p.196",
+   "returned": 6
+  },
+  {
+   "g": 10,
+   "s": "GEOGRAPHY",
+   "q": "नेपालका प्रमुख नदीहरू",
+   "ok": true,
+   "best": "भूगोल कक्षा १० p.139",
+   "returned": 6
+  },
+  {
+   "g": 10,
+   "s": "HISTORY",
+   "q": "राणा शासनको अन्त्य कसरी भयो?",
+   "ok": false,
+   "best": "इतिहास कक्षा १० p.28",
+   "returned": 6
+  },
+  {
+   "g": 11,
+   "s": "PHYSICS",
+   "q": "State Newton's second law of motion and give its formula",
+   "ok": true,
+   "best": "PHYSICS Grade 11 p.83",
+   "returned": 6
+  },
+  {
+   "g": 11,
+   "s": "CHEMISTRY",
+   "q": "How is the periodic table arranged into groups and periods?",
+   "ok": true,
+   "best": "CHEMISTRY Grade 11 p.116",
+   "returned": 6
+  },
+  {
+   "g": 11,
+   "s": "BIOLOGY",
+   "q": "Describe the structure of a plant cell",
+   "ok": true,
+   "best": "BIOLOGY Grade 11 p.43",
+   "returned": 6
+  },
+  {
+   "g": 11,
+   "s": "ACCOUNTANCY",
+   "q": "डबल इन्ट्री प्रणाली के हो?",
+   "ok": true,
+   "best": "लेखाविधि कक्षा ११ p.454",
+   "returned": 6
+  },
+  {
+   "g": 12,
+   "s": "PHYSICS",
+   "q": "What is electromagnetic induction?",
+   "ok": true,
+   "best": "PHYSICS Grade 12 p.317",
+   "returned": 6
+  },
+  {
+   "g": 12,
+   "s": "CHEMISTRY",
+   "q": "Explain chemical equilibrium and Le Chatelier principle",
+   "ok": true,
+   "best": "Chemistry Grade 12 p.162",
+   "returned": 6
+  },
+  {
+   "g": 12,
+   "s": "BIOLOGY",
+   "q": "What is DNA replication?",
+   "ok": true,
+   "best": "BIOLOGY Grade 12 p.111",
+   "returned": 6
+  },
+  {
+   "g": 4,
+   "s": "SCIENCE",
+   "q": "हाम्रो वरिपरिका जीवजन्तुहरू",
+   "ok": true,
+   "best": "विज्ञान तथा प्रविधि कक्षा ४ p.87",
+   "returned": 6
+  },
+  {
+   "g": 3,
+   "s": "MATHEMATICS",
+   "q": "जोड र घटाउ गर्ने तरिका",
+   "ok": true,
+   "best": "स्वाध्याय सामग्री — गणित कक्षा ३ p.75",
+   "returned": 6
+  },
+  {
+   "g": 2,
+   "s": "ENGLISH",
+   "q": "Name the colours and animals",
+   "ok": true,
+   "best": "My name : ................................................................ Roll  p.206",
+   "returned": 6
+  },
+  {
+   "g": 1,
+   "s": "MATHEMATICS",
+   "q": "एकदेखि दस सम्मको गन्ती",
+   "ok": true,
+   "best": "गणित कक्षा १ p.125",
+   "returned": 6
+  },
+  {
+   "g": 5,
+   "s": "SCIENCE",
+   "q": "Schrodinger wave equation and quantum numbers",
+   "ok": true,
+   "best": "विज्ञान तथा प्रविधि कक्षा ५ p.53",
+   "returned": 6
+  }
+ ]
+}

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script src="components/access-guard.js?v=2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#090d16">
+  <title>Python Programming Interactive Lab · Eduverse Smart Board</title>
+  <link rel="stylesheet" href="styles/py-simulation.css?v=1.0">
+  <link rel="stylesheet" href="styles/sim-shell.css?v=3.2">
+</head>
+<body>
+  <main class="py-app" id="py-app">
+    <!-- Master Navigation & Playback Bar -->
+    <header class="py-master-bar">
+      <!-- Subject Branding -->
+      <div class="py-bar-brand">
+        <div class="py-brand-mark" aria-hidden="true">Py</div>
+        <div class="py-brand-meta">
+          <div class="py-brand-title">Python Programming Simulation Engine</div>
+          <div class="py-brand-sub">
+            <span class="py-badge-code">U25CS201 · Sem II</span>
+            <span id="py-topic" class="py-topic-tag">Program Execution &amp; Variables</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curriculum Selectors -->
+      <div class="py-bar-selectors">
+        <label class="py-pill-select" title="Select Curriculum Unit">
+          <span class="py-pill-label">UNIT</span>
+          <select id="py-unit" aria-label="Select Python Unit">
+            <option value="1" selected>Unit 1: Python Basics &amp; Execution</option>
+            <option value="2">Unit 2: Control Flow, Functions &amp; Modules</option>
+            <option value="3">Unit 3: Built-in Data Structures</option>
+            <option value="4">Unit 4: Exceptions &amp; Virtual File Handling</option>
+            <option value="5">Unit 5: NumPy &amp; Pandas Data Handling</option>
+          </select>
+        </label>
+
+        <label class="py-pill-select" id="py-simulation-wrap" title="Select Simulation Topic">
+          <span class="py-pill-label">TOPIC</span>
+          <select id="py-simulation" aria-label="Select simulation topic"></select>
+        </label>
+      </div>
+
+      <!-- Playback Controls -->
+      <div class="py-bar-playback" role="group" aria-label="Simulation playback controls">
+        <button type="button" class="py-ctrl-btn" id="py-prev" title="Step backward">◀ Prev</button>
+        <button type="button" class="py-ctrl-btn py-ctrl-run" id="py-run" title="Run / Play simulation">▶ Run</button>
+        <button type="button" class="py-ctrl-btn" id="py-pause" disabled title="Pause simulation">⏸ Pause</button>
+        <button type="button" class="py-ctrl-btn py-ctrl-next" id="py-next" title="Advance one logical statement">Next Step ▶</button>
+        <button type="button" class="py-ctrl-btn" id="py-reset" title="Reset execution state">↻ Reset</button>
+
+        <label class="py-pill-select py-pill-speed" for="py-speed" title="Execution Speed">
+          <span class="py-pill-label">SPEED</span>
+          <select id="py-speed" aria-label="Animation speed">
+            <option value="0.5">0.5×</option>
+            <option value="1" selected>1×</option>
+            <option value="1.5">1.5×</option>
+            <option value="2">2×</option>
+          </select>
+        </label>
+      </div>
+
+      <!-- Step Progress & Fullscreen -->
+      <div class="py-bar-actions">
+        <div class="py-step-pill">
+          <span id="py-step-label">Line 1 of 5</span>
+          <div class="py-progress-track" aria-hidden="true"><div id="py-progress-fill"></div></div>
+        </div>
+        <button type="button" id="py-fullscreen" class="py-icon-action" title="Toggle Fullscreen">⛶</button>
+        <button type="button" id="py-close" class="py-icon-action" aria-label="Close simulation">✕</button>
+      </div>
+    </header>
+
+    <!-- 3-Stage Workspace Layout -->
+    <div class="py-workspace">
+      <!-- Left Column: Parameters & Theory Dock -->
+      <aside class="py-dock-column">
+        <div class="py-dock-tabs" role="tablist">
+          <button type="button" class="py-dock-tab active" data-tab="tab-inputs" id="py-tab-btn-inputs">⚙️ Parameters</button>
+          <button type="button" class="py-dock-tab" data-tab="tab-theory" id="py-tab-btn-theory">📖 Theory</button>
+          <button type="button" class="py-dock-tab" data-tab="tab-ai" id="py-tab-btn-ai">🤖 Subject AI</button>
+        </div>
+
+        <!-- Tab 1: Inputs & Parameters -->
+        <div class="py-dock-pane active" id="tab-inputs">
+          <div class="py-field">
+            <span class="py-label">Preset Code Snippet</span>
+            <select class="py-select" id="py-preset-select">
+              <option value="default">Standard Syllabus Example</option>
+              <option value="custom">Custom Editable Snippet</option>
+            </select>
+          </div>
+
+          <div class="py-field">
+            <span class="py-label">Input / Workload Arguments</span>
+            <div id="py-dynamic-inputs" style="display:flex; flex-direction:column; gap:6px;"></div>
+          </div>
+
+          <div class="py-field" style="margin-top:auto;">
+            <span class="py-label">Learning Challenge</span>
+            <div id="py-challenge-box" style="background:var(--py-surface-card); border:1px solid var(--py-line); border-radius:6px; padding:8px; font-size:11px; color:var(--py-gold-light);"></div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Theory & Formulas -->
+        <div class="py-dock-pane" id="tab-theory">
+          <div class="py-field">
+            <span class="py-label">Syllabus Mapping</span>
+            <div id="py-syllabus-context" style="font-size:12px; color:var(--py-muted); line-height:1.5;"></div>
+          </div>
+          <div class="py-field">
+            <span class="py-label">Mathematical &amp; Logical Formulation</span>
+            <div id="py-formula-box" style="font-family:monospace; background:var(--py-surface-card); padding:8px; border-radius:6px; font-size:11px; color:#38bdf8; word-break:break-all;"></div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Subject AI Context -->
+        <div class="py-dock-pane" id="tab-ai">
+          <div class="py-field">
+            <span class="py-label">Engineering Question</span>
+            <input type="text" id="py-ai-input" class="py-input" placeholder="Ask AI about this Python concept..." />
+            <button type="button" id="py-ai-ask-btn" class="py-ctrl-btn" style="margin-top:4px;">Ask Subject AI</button>
+          </div>
+          <div id="py-ai-response" style="background:var(--py-surface-card); border-radius:6px; padding:8px; font-size:11px; line-height:1.5; color:var(--py-ink); max-height:220px; overflow-y:auto;">
+            Click a preset prompt or type a question to inspect verified Python engineering contexts.
+          </div>
+        </div>
+      </aside>
+
+      <!-- Center Column: Visualizer Stage -->
+      <section class="py-visual-column">
+        <div class="py-visual-header">
+          <span class="py-visual-title" id="py-visual-heading">Variable Bindings &amp; Memory State</span>
+          <span style="font-size:11px; color:var(--py-muted);">100% In-Memory Sandbox</span>
+        </div>
+
+        <div class="py-canvas-stage" id="py-stage-container">
+          <!-- Live Variables / Objects Grid -->
+          <div style="font-size:11px; font-weight:700; color:var(--py-muted); text-transform:uppercase;">Namespace &amp; In-Memory Objects</div>
+          <div class="py-var-grid" id="py-var-grid">
+            <!-- Dynamically populated variable cards -->
+          </div>
+
+          <!-- Data Structure / Matrix / Flowchart Stage -->
+          <div id="py-structure-stage" style="flex:1; min-height:140px; background:var(--py-surface); border:1px solid var(--py-line); border-radius:6px; padding:10px; display:flex; align-items:center; justify-content:center; overflow-x:auto;">
+            <!-- Rendered list/dict/numpy visual elements -->
+          </div>
+
+          <!-- Pedagogical "Why did this happen?" Card -->
+          <div class="py-explanation-card">
+            <div class="py-why-badge">💡 What is happening at this step?</div>
+            <div id="py-step-explanation">Select or Run code to observe line-by-line execution mechanics.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Code Editor & Terminal Output -->
+      <section class="py-editor-column">
+        <div class="py-editor-header">
+          <span>PYTHON SOURCE CODE (READ/EDIT)</span>
+          <span style="color:var(--py-gold-light);">Python 3.12 Subset</span>
+        </div>
+
+        <div class="py-code-viewport" id="py-code-viewport">
+          <!-- Dynamically populated lines with .active highlight -->
+        </div>
+
+        <div class="py-terminal-panel">
+          <div class="py-term-header">
+            <span>STANDARD OUTPUT (SIMULATED STDOUT)</span>
+            <button type="button" id="py-clear-term" style="background:none; border:none; color:var(--py-muted); cursor:pointer;">Clear</button>
+          </div>
+          <div class="py-term-output" id="py-terminal-output">user@eduverse:~$ python main.py</div>
+        </div>
+      </section>
+    </div>
+
+    <div class="py-toast" id="py-toast">Simulation Reset</div>
+  </main>
+
+  <script src="tools/py-catalog.js?v=1.0"></script>
+  <script src="tools/py-simulation.js?v=1.0"></script>
+</body>
+</html>

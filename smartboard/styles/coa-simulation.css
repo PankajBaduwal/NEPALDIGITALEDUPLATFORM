@@ -1,0 +1,89 @@
+/**
+ * coa-simulation.css
+ * Computer Organization and Architecture (U25CS305) Theme Styles
+ * Circuit Gold / Architecture Amber (#f59e0b) · Eduverse Glassmorphism
+ */
+
+:root {
+  --coa-gold: #f59e0b;
+  --coa-gold-dark: #d97706;
+  --coa-gold-light: #fbbf24;
+  --coa-gold-soft: rgba(245, 158, 11, 0.12);
+  --coa-cyan: #06b6d4;
+  --coa-emerald: #10b981;
+  --coa-rose: #f43f5e;
+}
+
+[data-theme="dark"] {
+  --coa-gold-soft: rgba(245, 158, 11, 0.2);
+}
+
+/* Brand badge in header */
+#coa-brand-mark {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  font-weight: 800;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+}
+
+/* Active buttons & borders */
+.coa-btn-primary {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+.coa-btn-primary:hover {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+}
+
+/* Stage top badges */
+.coa-stage-badges .ep-badge-accent {
+  background: var(--coa-gold-soft);
+  color: var(--coa-gold-dark);
+  border: 1px solid var(--coa-gold);
+}
+
+[data-theme="dark"] .coa-stage-badges .ep-badge-accent {
+  color: var(--coa-gold-light);
+}
+
+/* Canvas styling */
+#coa-canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Pedagogical Work Box */
+.coa-work-item p {
+  line-height: 1.5;
+}
+
+/* Datapath & Register Strip */
+.coa-reg-strip {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.coa-reg-box {
+  background: var(--card-soft);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.coa-reg-box b {
+  color: var(--coa-gold);
+}
+
+/* Challenge card */
+#ep-challenge-card {
+  border-left: 4px solid var(--coa-gold);
+}

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Digital Logic Gates Simulator · नेपाल डिजिटल शिक्षा</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card: #1e293b;
+      --border: #334155;
+      --accent: #38bdf8;
+      --led-on: #22c55e;
+      --led-off: #ef4444;
+      --text: #f8fafc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: rgba(30, 41, 59, 0.95);
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .badge {
+      background: #0ea5e9;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+    h1 { font-size: 1.15rem; font-weight: 700; }
+    .subtitle { font-size: 0.8rem; color: #94a3b8; }
+    .btn {
+      background: #334155;
+      color: #fff;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      flex: 1;
+      gap: 16px;
+      padding: 16px;
+    }
+    @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+    .canvas-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    canvas { max-width: 100%; height: auto; }
+    .controls-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .gate-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .gate-btn {
+      background: #0f172a;
+      color: #cbd5e1;
+      border: 1px solid var(--border);
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+    }
+    .gate-btn.active {
+      background: #0284c7;
+      color: #fff;
+      border-color: #38bdf8;
+    }
+    .input-toggles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .toggle-card {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+    .toggle-btn {
+      margin-top: 6px;
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .toggle-btn.val-1 { background: #22c55e; color: #fff; }
+    .toggle-btn.val-0 { background: #475569; color: #94a3b8; }
+    .truth-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #0f172a;
+      border-radius: 8px;
+      overflow: hidden;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .truth-table th, .truth-table td {
+      border: 1px solid var(--border);
+      padding: 8px;
+      text-align: center;
+    }
+    .truth-table th { background: #1e293b; color: #94a3b8; }
+    .truth-table tr.active-row {
+      background: rgba(56, 189, 248, 0.2);
+      font-weight: bold;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <span class="badge">Class 9–12 · Computer Science</span>
+      <h1>Digital Logic Circuit Simulator (डिजिटल लजिक गेट्स)</h1>
+      <div class="subtitle">Nepal National Curriculum · Interactive Gates & Dynamic Truth Table</div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+      <button class="btn" onclick="window.open('/smartboard/index.html', '_blank')">🖥 Smart Board</button>
+    </div>
+  </header>
+
+  <div class="main-grid">
+    <div class="canvas-panel">
+      <canvas id="gateCanvas" width="560" height="380"></canvas>
+    </div>
+
+    <div class="controls-panel">
+      <div style="font-weight:600; font-size:0.9rem;">Select Gate Type:</div>
+      <div class="gate-grid">
+        <button class="gate-btn active" onclick="setGate('AND')">AND</button>
+        <button class="gate-btn" onclick="setGate('OR')">OR</button>
+        <button class="gate-btn" onclick="setGate('NOT')">NOT</button>
+        <button class="gate-btn" onclick="setGate('NAND')">NAND</button>
+        <button class="gate-btn" onclick="setGate('NOR')">NOR</button>
+        <button class="gate-btn" onclick="setGate('XOR')">XOR</button>
+      </div>
+
+      <div class="input-toggles">
+        <div class="toggle-card">
+          <div style="font-size:0.8rem; color:#94a3b8;">Input A</div>
+          <button class="toggle-btn val-0" id="btnA" onclick="toggleInput('A')">0 (LOW)</button>
+        </div>
+        <div class="toggle-card" id="cardB">
+          <div style="font-size:0.8rem; color:#94a3b8;">Input B</div>
+          <button class="toggle-btn val-0" id="btnB" onclick="toggleInput('B')">0 (LOW)</button>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:0.85rem; font-weight:600; margin-bottom:6px; color:#cbd5e1;">Truth Table (सत्यता तालिका):</div>
+        <table class="truth-table" id="truthTable">
+          <!-- Populated by JS -->
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentGate = 'AND';
+    let inA = 0;
+    let inB = 0;
+    let outY = 0;
+    const canvas = document.getElementById('gateCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function evalGate(gate, a, b) {
+      switch(gate) {
+        case 'AND': return (a && b) ? 1 : 0;
+        case 'OR': return (a || b) ? 1 : 0;
+        case 'NOT': return (!a) ? 1 : 0;
+        case 'NAND': return !(a && b) ? 1 : 0;
+        case 'NOR': return !(a || b) ? 1 : 0;
+        case 'XOR': return (a !== b) ? 1 : 0;
+        default: return 0;
+      }
+    }
+
+    function setGate(gate) {
+      currentGate = gate;
+      document.querySelectorAll('.gate-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent === gate);
+      });
+      document.getElementById('cardB').style.display = (gate === 'NOT') ? 'none' : 'block';
+      update();
+    }
+
+    function toggleInput(which) {
+      if (which === 'A') inA = inA === 1 ? 0 : 1;
+      if (which === 'B') inB = inB === 1 ? 0 : 1;
+      update();
+    }
+
+    function update() {
+      outY = evalGate(currentGate, inA, inB);
+
+      const bA = document.getElementById('btnA');
+      bA.className = `toggle-btn val-${inA}`;
+      bA.textContent = inA === 1 ? '1 (HIGH)' : '0 (LOW)';
+
+      const bB = document.getElementById('btnB');
+      bB.className = `toggle-btn val-${inB}`;
+      bB.textContent = inB === 1 ? '1 (HIGH)' : '0 (LOW)';
+
+      renderTruthTable();
+      draw();
+    }
+
+    function renderTruthTable() {
+      const tb = document.getElementById('truthTable');
+      if (currentGate === 'NOT') {
+        tb.innerHTML = `
+          <tr><th>Input A</th><th>Output Y</th></tr>
+          <tr class="${inA === 0 ? 'active-row' : ''}"><td>0</td><td>1</td></tr>
+          <tr class="${inA === 1 ? 'active-row' : ''}"><td>1</td><td>0</td></tr>
+        `;
+      } else {
+        const rows = [
+          [0, 0, evalGate(currentGate, 0, 0)],
+          [0, 1, evalGate(currentGate, 0, 1)],
+          [1, 0, evalGate(currentGate, 1, 0)],
+          [1, 1, evalGate(currentGate, 1, 1)]
+        ];
+        let html = `<tr><th>A</th><th>B</th><th>Y</th></tr>`;
+        rows.forEach(([ra, rb, ry]) => {
+          const isActive = (ra === inA && rb === inB);
+          html += `<tr class="${isActive ? 'active-row' : ''}"><td>${ra}</td><td>${rb}</td><td>${ry}</td></tr>`;
+        });
+        tb.innerHTML = html;
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+
+      // Input Wire A
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = inA === 1 ? '#22c55e' : '#475569';
+      ctx.beginPath();
+      ctx.moveTo(80, cy - 40);
+      ctx.lineTo(cx - 70, cy - 40);
+      ctx.stroke();
+
+      ctx.fillStyle = inA === 1 ? '#22c55e' : '#94a3b8';
+      ctx.font = 'bold 16px monospace';
+      ctx.fillText(`A = ${inA}`, 25, cy - 35);
+
+      // Input Wire B (if not NOT)
+      if (currentGate !== 'NOT') {
+        ctx.strokeStyle = inB === 1 ? '#22c55e' : '#475569';
+        ctx.beginPath();
+        ctx.moveTo(80, cy + 40);
+        ctx.lineTo(cx - 70, cy + 40);
+        ctx.stroke();
+
+        ctx.fillStyle = inB === 1 ? '#22c55e' : '#94a3b8';
+        ctx.fillText(`B = ${inB}`, 25, cy + 45);
+      }
+
+      // Output Wire Y
+      ctx.strokeStyle = outY === 1 ? '#22c55e' : '#475569';
+      ctx.beginPath();
+      ctx.moveTo(cx + 80, cy);
+      ctx.lineTo(canvas.width - 100, cy);
+      ctx.stroke();
+
+      // Gate Box & Symbol
+      ctx.fillStyle = '#1e293b';
+      ctx.fillRect(cx - 70, cy - 70, 140, 140);
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(cx - 70, cy - 70, 140, 140);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 24px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(currentGate, cx, cy + 8);
+
+      // Output LED indicator
+      const ledX = canvas.width - 65;
+      const ledY = cy;
+      const grad = ctx.createRadialGradient(ledX, ledY, 5, ledX, ledY, 25);
+      if (outY === 1) {
+        grad.addColorStop(0, '#22c55e');
+        grad.addColorStop(1, 'rgba(34, 197, 94, 0.1)');
+      } else {
+        grad.addColorStop(0, '#ef4444');
+        grad.addColorStop(1, 'rgba(239, 68, 68, 0.1)');
+      }
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(ledX, ledY, 25, 0, 2 * Math.PI);
+      ctx.fill();
+
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 15px sans-serif';
+      ctx.fillText(`Y = ${outY}`, ledX, ledY + 45);
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+      else document.exitFullscreen().catch(()=>{});
+    }
+
+    update();
+  </script>
+</body>
+</html>

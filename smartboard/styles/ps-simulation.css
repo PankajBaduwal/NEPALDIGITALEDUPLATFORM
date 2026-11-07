@@ -1,0 +1,382 @@
+:root {
+  color-scheme: dark;
+  --ps-bg: #090e1a;
+  --ps-surface: #0f182c;
+  --ps-surface-card: #0d1527;
+  --ps-surface-hover: #1e2b48;
+  --ps-surface-inset: #060a14;
+  --ps-line: #1e2e4f;
+  --ps-line-light: #324773;
+  --ps-ink: #f8fafc;
+  --ps-muted: #94a3b8;
+  --ps-dim: #64748b;
+  --ps-primary: #06b6d4; /* Cyan / Probability Teal */
+  --ps-primary-light: #22d3ee;
+  --ps-primary-soft: rgba(6, 182, 212, 0.16);
+  --ps-purple: #8b5cf6;
+  --ps-purple-light: #a78bfa;
+  --ps-gold: #f59e0b;
+  --ps-gold-light: #fbbf24;
+  --ps-success: #10b981;
+  --ps-success-soft: rgba(16, 185, 129, 0.16);
+  --ps-danger: #ef4444;
+  --ps-danger-soft: rgba(239, 68, 68, 0.16);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+  background: var(--ps-bg);
+  color: var(--ps-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea { font: inherit; color: inherit; }
+button { touch-action: manipulation; cursor: pointer; }
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--ps-surface-inset); }
+::-webkit-scrollbar-thumb { background: var(--ps-line-light); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ps-primary); }
+
+/* Master App Container */
+.ps-app {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 10px 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--ps-bg);
+}
+
+/* Master Bar */
+.ps-master-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--ps-surface);
+  border: 1px solid var(--ps-line);
+  border-radius: 10px;
+  padding: 6px 14px;
+  margin-bottom: 6px;
+  flex-shrink: 0;
+}
+
+.ps-bar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ps-brand-mark {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+}
+.ps-brand-meta {
+  display: flex;
+  flex-direction: column;
+}
+.ps-brand-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ps-ink);
+}
+.ps-brand-sub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+.ps-badge-code {
+  background: var(--ps-primary-soft);
+  color: var(--ps-primary-light);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.ps-topic-tag {
+  color: var(--ps-muted);
+}
+
+.ps-bar-selectors {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ps-pill-select {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--ps-surface-card);
+  border: 1px solid var(--ps-line);
+  border-radius: 8px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+.ps-pill-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ps-primary-light);
+  text-transform: uppercase;
+}
+.ps-pill-select select {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ps-ink);
+  cursor: pointer;
+}
+
+.ps-bar-playback {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ps-ctrl-btn {
+  background: var(--ps-surface-card);
+  border: 1px solid var(--ps-line);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ps-ink);
+  transition: all 0.15s;
+}
+.ps-ctrl-btn:hover:not(:disabled) {
+  background: var(--ps-surface-hover);
+  border-color: var(--ps-primary-light);
+}
+.ps-ctrl-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.ps-ctrl-run {
+  background: var(--ps-primary);
+  border-color: var(--ps-primary-light);
+  color: #041017;
+  font-weight: 700;
+}
+.ps-ctrl-next {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-color: #34d399;
+  color: #fff;
+}
+
+.ps-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ps-icon-action {
+  background: var(--ps-surface-card);
+  border: 1px solid var(--ps-line);
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ps-muted);
+}
+.ps-icon-action:hover {
+  color: var(--ps-ink);
+  border-color: var(--ps-line-light);
+}
+
+/* 2-Column Responsive Workspace */
+.ps-workspace {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 8px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Left Dock */
+.ps-dock-column {
+  background: var(--ps-surface);
+  border: 1px solid var(--ps-line);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.ps-dock-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--ps-line);
+  background: var(--ps-surface-card);
+}
+.ps-dock-tab {
+  flex: 1;
+  padding: 8px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--ps-muted);
+}
+.ps-dock-tab.active {
+  color: var(--ps-primary-light);
+  border-bottom-color: var(--ps-primary-light);
+  background: var(--ps-surface);
+}
+.ps-dock-pane {
+  display: none;
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+}
+.ps-dock-pane.active {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ps-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ps-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ps-muted);
+  text-transform: uppercase;
+}
+.ps-input, .ps-select {
+  background: var(--ps-surface-card);
+  border: 1px solid var(--ps-line);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  color: var(--ps-ink);
+}
+
+/* Right Stage */
+.ps-stage-column {
+  background: var(--ps-surface);
+  border: 1px solid var(--ps-line);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 8px 12px;
+}
+.ps-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--ps-line);
+}
+.ps-stage-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ps-primary-light);
+}
+
+/* Interactive Canvas & Graphs */
+.ps-canvas-container {
+  flex: 1;
+  background: var(--ps-surface-inset);
+  border: 1px solid var(--ps-line);
+  border-radius: 8px;
+  margin: 6px 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.ps-canvas-stage {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+/* Metrics Dashboard Strip */
+.ps-metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  padding: 8px 0 4px;
+}
+.ps-metric-card {
+  background: var(--ps-surface-card);
+  border: 1px solid var(--ps-line);
+  border-radius: 6px;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ps-metric-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ps-muted);
+  text-transform: uppercase;
+}
+.ps-metric-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ps-primary-light);
+  font-family: monospace;
+}
+
+/* Pedagogical "Why?" Card */
+.ps-explanation-card {
+  background: var(--ps-surface-card);
+  border-left: 3px solid var(--ps-primary);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ps-ink);
+  flex-shrink: 0;
+}
+.ps-why-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ps-primary-light);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* Toast */
+.ps-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--ps-surface-card);
+  border: 1px solid var(--ps-line-light);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: var(--ps-ink);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.2s;
+  pointer-events: none;
+}
+.ps-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}

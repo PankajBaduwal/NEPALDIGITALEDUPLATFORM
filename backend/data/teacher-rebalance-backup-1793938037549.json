@@ -1,0 +1,66 @@
+[
+ {
+  "allocationId": "6aea4ffccaa1c3fc856dc1ec",
+  "sectionId": "6aea4ffccaa1c3fc856dc0d2",
+  "centralSubjectId": "6ae844d0a721bdae28ec44fb",
+  "from": "6aea4ffccaa1c3fc856dc0e0",
+  "to": "6aea4ffccaa1c3fc856dc0f4",
+  "periods": 7
+ },
+ {
+  "allocationId": "6aea4ffccaa1c3fc856dc20e",
+  "sectionId": "6aea4ffccaa1c3fc856dc0d6",
+  "centralSubjectId": "6ae844d0a721bdae28ec4506",
+  "from": "6aea4ffccaa1c3fc856dc0e0",
+  "to": "6aea4ffccaa1c3fc856dc0f3",
+  "periods": 7
+ },
+ {
+  "allocationId": "6aea4ffccaa1c3fc856dc1c8",
+  "sectionId": "6aea4ffccaa1c3fc856dc0cd",
+  "centralSubjectId": "6ae844d0a721bdae28ec44f5",
+  "from": "6aea4ffccaa1c3fc856dc0dd",
+  "to": "6aea4ffccaa1c3fc856dc0d9",
+  "periods": 7
+ },
+ {
+  "allocationId": "6aea4ffccaa1c3fc856dc1ea",
+  "sectionId": "6aea4ffccaa1c3fc856dc0d2",
+  "centralSubjectId": "6ae844d0a721bdae28ec44fa",
+  "from": "6aea4ffccaa1c3fc856dc0dd",
+  "to": "6aea4ffccaa1c3fc856dc0d8",
+  "periods": 7
+ },
+ {
+  "allocationId": "6aea4ffccaa1c3fc856dc1f8",
+  "sectionId": "6aea4ffccaa1c3fc856dc0d3",
+  "centralSubjectId": "6ae844d0a721bdae28ec44fb",
+  "from": "6aea4ffccaa1c3fc856dc0e1",
+  "to": "6aea4ffccaa1c3fc856dc0e6",
+  "periods": 7
+ },
+ {
+  "allocationId": "6aea4ffccaa1c3fc856dc204",
+  "sectionId": "6aea4ffccaa1c3fc856dc0d5",
+  "centralSubjectId": "6ae844d0a721bdae28ec4507",
+  "from": "6aea4ffccaa1c3fc856dc0e2",
+  "to": "6aea4ffccaa1c3fc856dc0e7",
+  "periods": 7
+ },
+ {
+  "allocationId": "6aea4ffccaa1c3fc856dc1d4",
+  "sectionId": "6aea4ffccaa1c3fc856dc0cf",
+  "centralSubjectId": "6ae844d0a721bdae28ec4501",
+  "from": "6aea4ffccaa1c3fc856dc0de",
+  "to": "6aea4ffccaa1c3fc856dc0e8",
+  "periods": 7
+ },
+ {
+  "allocationId": "6aea4ffccaa1c3fc856dc1e0",
+  "sectionId": "6aea4ffccaa1c3fc856dc0d0",
+  "centralSubjectId": "6ae844d0a721bdae28ec4501",
+  "from": "6aea4ffccaa1c3fc856dc0df",
+  "to": "6aea4ffccaa1c3fc856dc0db",
+  "periods": 7
+ }
+]

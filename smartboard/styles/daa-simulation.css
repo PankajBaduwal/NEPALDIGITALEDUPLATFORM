@@ -1,0 +1,380 @@
+/**
+ * daa-simulation.css
+ * Design and Analysis of Algorithms (U25CS403 / U21CS401)
+ * Styles for algorithm execution, array partitioning, recursion trees, DP matrices, and state-space pruning.
+ */
+:root {
+  color-scheme: dark;
+  --daa-bg: #0b0f19;
+  --daa-surface: #111827;
+  --daa-surface-card: #0e1626;
+  --daa-surface-hover: #1f2937;
+  --daa-surface-inset: #070b14;
+  --daa-line: #1f2937;
+  --daa-line-light: #374151;
+  --daa-ink: #f9fafb;
+  --daa-muted: #9ca3af;
+  --daa-dim: #6b7280;
+  --daa-primary: #f59e0b; /* Amber / Algorithm Gold */
+  --daa-primary-light: #fbbf24;
+  --daa-primary-soft: rgba(245, 158, 11, 0.16);
+  --daa-emerald: #10b981;
+  --daa-emerald-light: #34d399;
+  --daa-indigo: #6366f1;
+  --daa-indigo-light: #818cf8;
+  --daa-cyan: #06b6d4;
+  --daa-cyan-light: #22d3ee;
+  --daa-rose: #f43f5e;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --daa-bg: #f8fafc;
+  --daa-surface: #ffffff;
+  --daa-surface-card: #f1f5f9;
+  --daa-surface-hover: #e2e8f0;
+  --daa-surface-inset: #e2e8f0;
+  --daa-line: #cbd5e1;
+  --daa-line-light: #94a3b8;
+  --daa-ink: #0f172a;
+  --daa-muted: #475569;
+  --daa-dim: #64748b;
+  --daa-primary: #d97706;
+  --daa-primary-light: #f59e0b;
+  --daa-primary-soft: rgba(217, 119, 6, 0.14);
+}
+
+* { box-sizing: border-box; }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+  background: var(--daa-bg);
+  color: var(--daa-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea { font: inherit; color: inherit; }
+button { touch-action: manipulation; cursor: pointer; }
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--daa-surface-inset); }
+::-webkit-scrollbar-thumb { background: var(--daa-line-light); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--daa-primary); }
+
+/* Master App Container */
+.daa-app {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 10px 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--daa-bg);
+}
+
+/* Master Header Bar */
+.daa-master-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--daa-surface);
+  border: 1px solid var(--daa-line);
+  border-radius: 10px;
+  padding: 6px 14px;
+  margin-bottom: 6px;
+  flex-shrink: 0;
+}
+
+.daa-bar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.daa-brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--daa-primary), #d97706);
+  color: #000;
+  font-weight: 900;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+}
+.daa-brand-titles h1 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+.daa-brand-titles p {
+  font-size: 11px;
+  color: var(--daa-muted);
+  margin: 2px 0 0;
+}
+
+.daa-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.daa-btn {
+  background: var(--daa-surface-card);
+  border: 1px solid var(--daa-line);
+  color: var(--daa-ink);
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.daa-btn:hover {
+  background: var(--daa-surface-hover);
+  border-color: var(--daa-primary);
+}
+.daa-btn-primary {
+  background: var(--daa-primary);
+  border-color: var(--daa-primary);
+  color: #000000;
+}
+.daa-btn-primary:hover {
+  background: var(--daa-primary-light);
+}
+
+/* Master 3-Column Layout */
+.daa-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 310px 1fr 310px;
+  gap: 8px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 1200px) {
+  .daa-layout {
+    grid-template-columns: 280px 1fr;
+  }
+  .daa-right-dock {
+    display: none;
+  }
+}
+
+/* Panels */
+.daa-panel {
+  background: var(--daa-surface);
+  border: 1px solid var(--daa-line);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.daa-panel-header {
+  padding: 8px 12px;
+  background: var(--daa-surface-card);
+  border-bottom: 1px solid var(--daa-line);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--daa-primary-light);
+}
+
+.daa-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Controls */
+.daa-ctrl-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.daa-ctrl-group label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--daa-muted);
+}
+.daa-ctrl-group select,
+.daa-ctrl-group input[type="text"],
+.daa-ctrl-group input[type="number"],
+.daa-ctrl-group input[type="range"] {
+  background: var(--daa-surface-inset);
+  border: 1px solid var(--daa-line);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  color: var(--daa-ink);
+  outline: none;
+}
+.daa-ctrl-group select:focus,
+.daa-ctrl-group input:focus {
+  border-color: var(--daa-primary);
+}
+
+/* Complexity & Math Display Card */
+.daa-math-card {
+  background: var(--daa-surface-inset);
+  border: 1px solid var(--daa-line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 12px;
+  color: var(--daa-primary-light);
+  line-height: 1.4;
+  overflow-x: auto;
+}
+
+/* Stage Area (Center) */
+.daa-stage-wrap {
+  display: flex;
+  flex-direction: column;
+  background: var(--daa-surface);
+  border: 1px solid var(--daa-line);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.daa-stage-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: var(--daa-surface-card);
+  border-bottom: 1px solid var(--daa-line);
+  font-size: 12px;
+}
+
+.daa-badges {
+  display: flex;
+  gap: 6px;
+}
+.daa-badge {
+  background: var(--daa-surface-inset);
+  border: 1px solid var(--daa-line);
+  color: var(--daa-muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+.daa-badge-accent {
+  background: var(--daa-primary-soft);
+  border-color: var(--daa-primary);
+  color: var(--daa-primary-light);
+}
+
+.daa-stage-canvas-box {
+  flex: 1;
+  position: relative;
+  background: #080c14;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#daa-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Pedagogical Workbox */
+.daa-workbox {
+  background: var(--daa-surface-card);
+  border-top: 1px solid var(--daa-line);
+  padding: 8px 12px;
+  font-size: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.daa-work-cell {
+  background: var(--daa-surface-inset);
+  border: 1px solid var(--daa-line);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.daa-work-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--daa-muted);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+  display: block;
+}
+.daa-work-text {
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: var(--daa-ink);
+  margin: 0;
+}
+
+/* Playback Footer */
+.daa-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--daa-surface-card);
+  border-top: 1px solid var(--daa-line);
+  padding: 5px 12px;
+  font-size: 12px;
+}
+.daa-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Dynamic Interactive Tables (DP Matrix, Traces) */
+.daa-table-view {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  text-align: center;
+}
+.daa-table-view th {
+  background: var(--daa-surface-card);
+  color: var(--daa-primary-light);
+  padding: 5px 6px;
+  border: 1px solid var(--daa-line);
+}
+.daa-table-view td {
+  padding: 4px 6px;
+  border: 1px solid var(--daa-line);
+  color: var(--daa-ink);
+}
+.daa-table-view tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+.daa-table-view td.cell-active {
+  background: var(--daa-primary-soft) !important;
+  color: var(--daa-primary-light) !important;
+  font-weight: 800;
+}
+.daa-table-view td.cell-optimal {
+  background: rgba(16, 185, 129, 0.2) !important;
+  color: var(--daa-emerald-light) !important;
+  font-weight: 800;
+}

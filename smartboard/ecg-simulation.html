@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <script src="components/access-guard.js?v=2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#f4f5f9">
+  <title>Digital Electronics Lab · Eduverse</title>
+  <link rel="stylesheet" href="styles/ep-simulation.css?v=3.2">
+  <link rel="stylesheet" href="styles/sim-shell.css?v=3.2">
+  <link rel="stylesheet" href="styles/ecg-simulation.css?v=3.2">
+</head>
+<body>
+  <main class="ep-app" id="ep-app">
+    <!-- Header with Breadcrumbs, Title, Subtitle, and Actions -->
+    <header class="ep-header">
+      <div class="ep-brand" id="ecg-brand-mark" aria-hidden="true">DE</div>
+      <div class="ep-heading">
+        <nav class="ep-crumbs" id="ep-crumbs" aria-label="Location">Semester II › Digital Electronics</nav>
+        <h1><span id="ep-title">Logic Gate Simulator ⭐ (Flagship)</span></h1>
+        <p id="ep-subtitle">U21ECG01 / U25EC201 · Unit I · Boolean Theorems &amp; Logic Reduction</p>
+      </div>
+      <div class="ep-header-actions">
+        <div class="ep-learn ep-player-only" id="ep-learn" role="group" aria-label="Learning mode">
+          <button type="button" class="ep-seg active" data-learn="learn" title="Learn mode">📘 Learn</button>
+          <button type="button" class="ep-seg" data-learn="experiment" title="Experiment mode">🧪 Experiment</button>
+          <button type="button" class="ep-seg" data-learn="challenge" title="Challenge mode">🏆 Challenge</button>
+        </div>
+        <!-- Dark / White Theme Toggle Button -->
+        <button type="button" id="ecg-theme-toggle" class="ep-btn ep-btn-outline" title="Toggle between Dark and White theme" aria-label="Toggle Color Theme">
+          🌓 Dark Theme
+        </button>
+        <button type="button" id="ep-export" class="ep-btn ep-btn-outline" title="Download the current simulation view as a PNG image">⬇ Export</button>
+        <button type="button" id="ep-fullscreen" class="ep-btn ep-btn-outline ep-icon-btn" title="Full screen" aria-label="Full screen">⛶</button>
+      </div>
+    </header>
+
+    <!-- Player with Docks & Stage -->
+    <section id="ep-player" class="ep-player">
+      <div class="ep-layout">
+        <!-- Center Stage Area (LEFT in full screen) -->
+        <section class="ep-center">
+          <div class="ep-card ep-stage">
+            <!-- Top Readouts & State Badges -->
+            <div class="ep-stage-top">
+              <div id="ep-readouts" class="ep-readouts" aria-live="polite"></div>
+              <div class="ecg-stage-badges" id="ecg-stage-badges">
+                <span class="ep-badge" id="ecg-overlay-sim">Logic Gates</span>
+                <span class="ep-badge ep-badge-accent" id="ecg-overlay-state">Live Logic Engine</span>
+              </div>
+            </div>
+
+            <!-- Stage Row: Step-by-step Working Box + Canvas -->
+            <div id="ep-stage-row" class="ep-stage-row">
+              <div id="ep-work-card" class="ep-work-card">
+                <div class="ep-work-title">Pedagogical Analysis</div>
+                <div id="ep-work-content" class="ep-work-content">
+                  <div class="ecg-work-item">
+                    <span class="ecg-work-label">What is happening:</span>
+                    <p id="ecg-what">Circuit initialized. Ready to begin simulation.</p>
+                  </div>
+                  <div class="ecg-work-item">
+                    <span class="ecg-work-label">Why this happens:</span>
+                    <p id="ecg-why">Digital logic gates process binary inputs to produce deterministic outputs based on Boolean algebra.</p>
+                  </div>
+                  <div class="ecg-work-item">
+                    <span class="ecg-work-label">Next Step / Effect:</span>
+                    <p id="ecg-next-info">Advance the step or adjust parameters to observe dynamic logic changes.</p>
+                  </div>
+                </div>
+              </div>
+              <div id="ep-canvas-wrap" class="ep-canvas-wrap">
+                <canvas id="ecg-canvas" width="1000" height="560" role="img" aria-label="Interactive Digital Electronics Canvas"></canvas>
+              </div>
+            </div>
+
+            <div id="ep-warn" class="ep-warn hidden" role="alert"></div>
+
+            <!-- Bottom Step Banner -->
+            <div class="ep-banner" id="ep-banner" aria-live="polite">
+              <span class="ep-banner-no" id="ep-banner-no">Step 1 of 4</span>
+              <div><b id="ep-banner-title">Active State:</b> <span id="ep-banner-text">Inputs A=0, B=0 evaluated through logic gate</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right Side: Inspector Dock (Parameters & Inputs | Truth Table | Subject AI) -->
+        <aside class="ep-side" id="ep-side">
+          <!-- 1. Topic & Parameters Panel -->
+          <section class="ep-card" id="ep-params-card" aria-labelledby="ep-params-h">
+            <div class="ep-card-head ep-row">
+              <div>
+                <span class="ep-kicker">PARAMETERS &amp; CONTROLS</span>
+                <h2 id="ep-params-h">Circuit Inputs</h2>
+              </div>
+              <div class="ep-mini-actions">
+                <button type="button" class="ep-btn ep-small" id="ecg-reset-params">↻ Defaults</button>
+              </div>
+            </div>
+
+            <!-- Curriculum & Simulation Selection -->
+            <div class="ep-topic-pickers" style="margin-bottom:12px;display:flex;flex-direction:column;gap:6px">
+              <label class="ep-field-lbl" style="font-size:11px;font-weight:700;color:var(--muted)">Curriculum Unit
+                <select id="ecg-unit" style="width:100%;min-height:36px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:4px 8px;font-size:12.5px;font-weight:600">
+                  <option value="1" selected>Unit I: Boolean Theorems &amp; Logic Reduction</option>
+                  <option value="2">Unit II: Combinational Logic Design</option>
+                  <option value="3">Unit III: Latches and Flip-Flops</option>
+                  <option value="4">Unit IV: Sequential Circuits</option>
+                  <option value="5">Unit V: Registers and Hazards</option>
+                </select>
+              </label>
+              <label class="ep-field-lbl" style="font-size:11px;font-weight:700;color:var(--muted)">Simulation Topic
+                <select id="ecg-simulation" style="width:100%;min-height:36px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:4px 8px;font-size:12.5px;font-weight:600"></select>
+              </label>
+            </div>
+
+            <!-- Dynamic Input Switches & Parameters -->
+            <form id="ecg-inputs-form" class="ep-params" autocomplete="off" onsubmit="return false;"></form>
+            <div id="ecg-input-actions" class="ecg-input-actions"></div>
+          </section>
+
+          <!-- 2. Boolean Formula & Expressions Panel -->
+          <section class="ep-card ep-formula-card" id="ep-formula-card" aria-labelledby="ep-formula-h">
+            <div class="ep-card-head">
+              <span class="ep-kicker">BOOLEAN / MATHEMATICAL FORMULATION</span>
+              <h2 id="ep-formula-h">Governing Equations</h2>
+            </div>
+            <div id="ep-formulas" class="ep-formulas">
+              <div id="ecg-formula-box" class="ecg-formula-code"></div>
+            </div>
+          </section>
+
+          <!-- 3. Circuit Specifications & Live Truth Table Panel -->
+          <section class="ep-card" id="ep-spec-card">
+            <div class="ep-card-head">
+              <span class="ep-kicker">CIRCUIT SPECIFICATIONS &amp; STATES</span>
+              <h2>Truth Table / State Specification</h2>
+            </div>
+            <div id="ecg-spec-list"></div>
+          </section>
+
+          <!-- 4. Interactive Challenge Card (shown in challenge mode) -->
+          <section class="ep-card" id="ep-challenge-card" style="display:none;border-color:#ec4899">
+            <div class="ep-card-head">
+              <span class="ep-kicker" style="color:#db2777">CHALLENGE &amp; ASSESSMENT</span>
+              <h2>Interactive Subject Challenge</h2>
+            </div>
+            <div class="ecg-challenge-body" style="padding:10px 0">
+              <div class="ecg-challenge-prompt" id="ecg-challenge-prompt" style="font-size:13px;line-height:1.5;margin-bottom:12px"></div>
+              <div style="display:flex;gap:8px">
+                <button type="button" class="ep-btn ep-btn-primary" id="ecg-verify-challenge">Submit &amp; Verify</button>
+                <button type="button" class="ep-btn" id="ecg-reset-challenge">Reset</button>
+              </div>
+              <div id="ecg-challenge-result" style="margin-top:10px;font-size:12.5px;font-weight:600"></div>
+            </div>
+          </section>
+
+          <!-- 5. Context-Aware AI Tutor Panel -->
+          <section class="ep-card ep-ai" id="ep-ai-card" aria-labelledby="ep-ai-h">
+            <div class="ep-card-head">
+              <span class="ep-kicker">CONTEXT-AWARE TUTOR</span>
+              <h2 id="ep-ai-h">Digital Electronics AI Assistant</h2>
+            </div>
+            <p style="font-size:11.5px;color:var(--muted);margin-bottom:6px">
+              Ask about gate outputs, K-map grouping, flip-flop states, counter sequences, or hazards.
+            </p>
+            <textarea id="ecg-ai-question" rows="2" placeholder="e.g. Why does this K-map grouping simplify to AB'?" aria-label="Ask about this simulation step" style="width:100%;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px;font-size:12px"></textarea>
+            <button type="button" class="ep-btn ep-btn-primary" id="ecg-ask-ai" style="margin-top:6px;width:100%">Ask Subject AI</button>
+            <div id="ecg-ai-answer" class="ep-ai-answer hidden" aria-live="polite"></div>
+          </section>
+        </aside>
+      </div>
+
+      <!-- Footer Playback Controls -->
+      <footer class="ep-controls" id="ep-controls" role="toolbar" aria-label="Simulation controls">
+        <button type="button" class="ep-btn ep-big" id="ep-prev">◀ Prev</button>
+        <button type="button" class="ep-btn ep-big ep-btn-primary" id="ep-play" aria-pressed="false">▶ Play</button>
+        <button type="button" class="ep-btn ep-big" id="ep-pause" disabled>⏸ Pause</button>
+        <button type="button" class="ep-btn ep-big" id="ep-next">Next ▶</button>
+        <button type="button" class="ep-btn ep-big" id="ep-reset">↻ Reset</button>
+        <div class="ep-speed" role="group" aria-label="Playback Speed">
+          <span>Speed</span>
+          <select id="ecg-speed" aria-label="Animation speed" style="height:32px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 6px">
+            <option value="0.5">0.5×</option>
+            <option value="1" selected>1×</option>
+            <option value="1.5">1.5×</option>
+            <option value="2">2×</option>
+          </select>
+        </div>
+        <div class="ep-step-pill" style="margin-left:auto;display:flex;align-items:center;gap:8px">
+          <span id="ecg-step-label" style="font-size:12px;font-weight:700">Step 1 of 4</span>
+          <div style="width:70px;height:6px;background:var(--line);border-radius:999px;overflow:hidden">
+            <div id="ecg-progress-fill" style="width:25%;height:100%;background:var(--primary);transition:width 0.2s"></div>
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Notification Toast -->
+    <div id="ecg-toast" class="ep-toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <!-- Load Catalog and Simulation Engine Scripts -->
+  <script src="tools/ecg-catalog.js"></script>
+  <script src="tools/ecg-simulation.js"></script>
+</body>
+</html>

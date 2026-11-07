@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Fractions Visualizer (भिन्नको अवधारणा) · नेपाल डिजिटल शिक्षा</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --accent: #38bdf8;
+      --slice-color: #f97316;
+      --text: #f8fafc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: rgba(30, 41, 59, 0.95);
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .badge {
+      background: #10b981;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+    h1 { font-size: 1.15rem; font-weight: 700; }
+    .subtitle { font-size: 0.8rem; color: #94a3b8; }
+    .btn {
+      background: #334155;
+      color: #fff;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      flex: 1;
+      gap: 16px;
+      padding: 16px;
+    }
+    @media (max-width: 850px) { .main-grid { grid-template-columns: 1fr; } }
+    .canvas-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+    }
+    canvas {
+      max-width: 100%;
+      height: auto;
+      touch-action: none;
+      cursor: pointer;
+    }
+    .controls-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .fraction-display {
+      background: #0f172a;
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .frac-wrap {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #fff;
+    }
+    .frac-num { color: #f97316; border-bottom: 3px solid #fff; width: 100%; text-align: center; }
+    .frac-den { color: #38bdf8; width: 100%; text-align: center; }
+    .frac-nepali { font-size: 1.1rem; color: #94a3b8; margin-top: 8px; font-weight: normal; }
+    .slider-group { display: flex; flex-direction: column; gap: 8px; }
+    input[type=range] { width: 100%; height: 8px; border-radius: 4px; accent-color: var(--accent); }
+    .equivalent-box {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+    .equivalent-box span { color: #22c55e; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <span class="badge">Class 1–5 · Mathematics</span>
+      <h1>Interactive Fractions Visualizer (भिन्नको अवधारणा)</h1>
+      <div class="subtitle">Nepal National Primary Curriculum · Tap slices to select</div>
+    </div>
+    <div>
+      <button class="btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+      <button class="btn" onclick="window.open('/smartboard/index.html', '_blank')">🖥 Smart Board</button>
+    </div>
+  </header>
+
+  <div class="main-grid">
+    <div class="canvas-panel">
+      <canvas id="pizzaCanvas" width="460" height="460"></canvas>
+      <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 10px;">💡 Click or tap any slice to shade or unshade it!</div>
+    </div>
+
+    <div class="controls-panel">
+      <div class="fraction-display">
+        <div class="frac-wrap">
+          <div class="frac-num" id="fracNum">3</div>
+          <div class="frac-den" id="fracDen">4</div>
+        </div>
+        <div class="frac-nepali" id="fracNepali">चार भागको तीन भाग (३/४)</div>
+      </div>
+
+      <div class="slider-group">
+        <label style="display:flex; justify-content:space-between; font-size:0.85rem;">
+          <span>Denominator (कुल बराबर भागहरू):</span>
+          <strong id="denVal" style="color:var(--accent);">4</strong>
+        </label>
+        <input type="range" id="denSlider" min="2" max="12" value="4" oninput="changeDenominator(this.value)">
+      </div>
+
+      <div class="slider-group">
+        <label style="display:flex; justify-content:space-between; font-size:0.85rem;">
+          <span>Numerator (छायाङ्कित भागहरू):</span>
+          <strong id="numVal" style="color:#f97316;">3</strong>
+        </label>
+        <input type="range" id="numSlider" min="0" max="4" value="3" oninput="changeNumerator(this.value)">
+      </div>
+
+      <div class="equivalent-box" id="equivBox">
+        <div>Decimal Value: <span id="decVal">0.75</span></div>
+        <div>Percentage: <span id="pctVal">75%</span></div>
+        <div style="margin-top:6px;">Simplified: <span id="simplVal">3 / 4</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const nepaliNums = ['०','१','२','३','४','५','६','७','८','९','१०','११','१२'];
+    let denominator = 4;
+    let selectedSlices = [0, 1, 2]; // indices
+    const canvas = document.getElementById('pizzaCanvas');
+    const ctx = canvas.getContext('2d');
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = 175;
+
+    function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+
+    function updateLabels() {
+      const num = selectedSlices.length;
+      document.getElementById('fracNum').textContent = num;
+      document.getElementById('fracDen').textContent = denominator;
+      document.getElementById('denVal').textContent = denominator;
+      document.getElementById('numVal').textContent = num;
+      document.getElementById('numSlider').max = denominator;
+      document.getElementById('numSlider').value = num;
+
+      const dec = (num / denominator).toFixed(2);
+      const pct = Math.round((num / denominator) * 100);
+      const g = gcd(num, denominator);
+      const sNum = num / g;
+      const sDen = denominator / g;
+
+      document.getElementById('decVal').textContent = dec;
+      document.getElementById('pctVal').textContent = pct + '%';
+      document.getElementById('simplVal').textContent = sNum + ' / ' + sDen;
+
+      const nepNum = nepaliNums[num] || num;
+      const nepDen = nepaliNums[denominator] || denominator;
+      document.getElementById('fracNepali').textContent = nepDen + ' भागको ' + nepNum + ' भाग (' + nepNum + '/' + nepDen + ')';
+    }
+
+    function changeDenominator(newDen) {
+      denominator = parseInt(newDen, 10);
+      selectedSlices = selectedSlices.filter(i => i < denominator);
+      if (selectedSlices.length === 0 && denominator > 0) {
+        selectedSlices = [0];
+      }
+      updateLabels();
+      draw();
+    }
+
+    function changeNumerator(newNum) {
+      const target = parseInt(newNum, 10);
+      selectedSlices = [];
+      for (let i = 0; i < target; i++) selectedSlices.push(i);
+      updateLabels();
+      draw();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const anglePerSlice = (2 * Math.PI) / denominator;
+
+      // Outer rim
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius + 8, 0, 2 * Math.PI);
+      ctx.fillStyle = '#334155';
+      ctx.fill();
+
+      // Slices
+      for (let i = 0; i < denominator; i++) {
+        const start = -Math.PI / 2 + i * anglePerSlice;
+        const end = start + anglePerSlice;
+        const isSelected = selectedSlices.includes(i);
+
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, start, end);
+        ctx.closePath();
+
+        ctx.fillStyle = isSelected ? '#f97316' : '#1e293b';
+        ctx.fill();
+
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#0f172a';
+        ctx.stroke();
+
+        // Label on slice
+        const midAngle = start + anglePerSlice / 2;
+        const textX = centerX + Math.cos(midAngle) * (radius * 0.65);
+        const textY = centerY + Math.sin(midAngle) * (radius * 0.65);
+        ctx.fillStyle = isSelected ? '#ffffff' : '#64748b';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(`1/${denominator}`, textX, textY);
+      }
+
+      // Center pin
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 12, 0, 2 * Math.PI);
+      ctx.fillStyle = '#0f172a';
+      ctx.fill();
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const x = (e.clientX - rect.left) * scaleX - centerX;
+      const y = (e.clientY - rect.top) * scaleY - centerY;
+      const dist = Math.sqrt(x * x + y * y);
+      if (dist > radius) return;
+
+      let angle = Math.atan2(y, x) + Math.PI / 2;
+      if (angle < 0) angle += 2 * Math.PI;
+
+      const anglePerSlice = (2 * Math.PI) / denominator;
+      const sliceIdx = Math.floor(angle / anglePerSlice);
+
+      const existsIdx = selectedSlices.indexOf(sliceIdx);
+      if (existsIdx >= 0) {
+        selectedSlices.splice(existsIdx, 1);
+      } else {
+        selectedSlices.push(sliceIdx);
+      }
+      updateLabels();
+      draw();
+    });
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+      else document.exitFullscreen().catch(()=>{});
+    }
+
+    updateLabels();
+    draw();
+  </script>
+</body>
+</html>

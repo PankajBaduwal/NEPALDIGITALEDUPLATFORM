@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bohr's Atomic Model (बोरको पारमाणविक नमुना) · नेपाल डिजिटल शिक्षा</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card: #1e293b;
+      --border: #334155;
+      --accent: #38bdf8;
+      --electron: #38bdf8;
+      --proton: #ef4444;
+      --neutron: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: rgba(30, 41, 59, 0.95);
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .badge {
+      background: #0284c7;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+    h1 { font-size: 1.15rem; font-weight: 700; }
+    .subtitle { font-size: 0.8rem; color: #94a3b8; }
+    .btn {
+      background: #334155;
+      color: #fff;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      flex: 1;
+      gap: 16px;
+      padding: 16px;
+    }
+    @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+    .canvas-panel {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    canvas { max-width: 100%; height: auto; }
+    .controls-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .element-select {
+      background: #0f172a;
+      color: #fff;
+      border: 1px solid var(--border);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .stats-card {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .stat-item {
+      background: #1e293b;
+      padding: 8px;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .stat-lbl { font-size: 0.75rem; color: #94a3b8; }
+    .stat-val { font-size: 1.1rem; font-weight: bold; color: var(--accent); }
+    .shell-config {
+      background: #0f172a;
+      border-left: 3px solid #10b981;
+      padding: 10px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <span class="badge">Class 6–10 · Chemistry</span>
+      <h1>Bohr's Atomic Model Visualizer (बोरको पारमाणविक नमुना)</h1>
+      <div class="subtitle">Nepal CDC Curriculum · Elements H (1) to Ca (20) with K, L, M, N Shells</div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+      <button class="btn" onclick="window.open('/smartboard/index.html', '_blank')">🖥 Smart Board</button>
+    </div>
+  </header>
+
+  <div class="main-grid">
+    <div class="canvas-panel">
+      <canvas id="atomCanvas" width="500" height="500"></canvas>
+    </div>
+
+    <div class="controls-panel">
+      <label style="font-weight:600; font-size:0.9rem;">Select Element (तत्व छान्नुहोस्):</label>
+      <select class="element-select" id="elemSelect" onchange="changeElement(this.value)">
+        <option value="1">1. Hydrogen (H) · हाइड्रोजन</option>
+        <option value="2">2. Helium (He) · हिलियम</option>
+        <option value="3">3. Lithium (Li) · लिथियम</option>
+        <option value="6" selected>6. Carbon (C) · कार्बन</option>
+        <option value="7">7. Nitrogen (N) · नाइट्रोजन</option>
+        <option value="8">8. Oxygen (O) · अक्सिजन</option>
+        <option value="10">10. Neon (Ne) · नियोन</option>
+        <option value="11">11. Sodium (Na) · सोडियम</option>
+        <option value="12">12. Magnesium (Mg) · म्याग्नेसियम</option>
+        <option value="13">13. Aluminium (Al) · एलुमिनियम</option>
+        <option value="15">15. Phosphorus (P) · फस्फोरस</option>
+        <option value="17">17. Chlorine (Cl) · क्लोरिन</option>
+        <option value="18">18. Argon (Ar) · आर्गन</option>
+        <option value="19">19. Potassium (K) · पोटासियम</option>
+        <option value="20">20. Calcium (Ca) · क्याल्सियम</option>
+      </select>
+
+      <div class="stats-card">
+        <div class="stat-item">
+          <div class="stat-lbl">Atomic No. (Z)</div>
+          <div class="stat-val" id="zVal">6</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-lbl">Mass Number (A)</div>
+          <div class="stat-val" id="aVal">12</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-lbl">Protons (p⁺)</div>
+          <div class="stat-val" style="color:#ef4444;" id="pVal">6</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-lbl">Neutrons (n⁰)</div>
+          <div class="stat-val" style="color:#94a3b8;" id="nVal">6</div>
+        </div>
+      </div>
+
+      <div class="shell-config" id="shellBox">
+        <strong>Electronic Configuration (2n² नियम):</strong><br>
+        K Shell: 2 | L Shell: 4<br>
+        Valence Electrons: <strong>4</strong> (Valency: 4)
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const elementsData = {
+      1: { name: "Hydrogen", sym: "H", nepali: "हाइड्रोजन", z: 1, a: 1, shells: [1] },
+      2: { name: "Helium", sym: "He", nepali: "हिलियम", z: 2, a: 4, shells: [2] },
+      3: { name: "Lithium", sym: "Li", nepali: "लिथियम", z: 3, a: 7, shells: [2, 1] },
+      6: { name: "Carbon", sym: "C", nepali: "कार्बन", z: 6, a: 12, shells: [2, 4] },
+      7: { name: "Nitrogen", sym: "N", nepali: "नाइट्रोजन", z: 7, a: 14, shells: [2, 5] },
+      8: { name: "Oxygen", sym: "O", nepali: "अक्सिजन", z: 8, a: 16, shells: [2, 6] },
+      10: { name: "Neon", sym: "Ne", nepali: "नियोन", z: 10, a: 20, shells: [2, 8] },
+      11: { name: "Sodium", sym: "Na", nepali: "सोडियम", z: 11, a: 23, shells: [2, 8, 1] },
+      12: { name: "Magnesium", sym: "Mg", nepali: "म्याग्नेसियम", z: 12, a: 24, shells: [2, 8, 2] },
+      13: { name: "Aluminium", sym: "Al", nepali: "एलुमिनियम", z: 13, a: 27, shells: [2, 8, 3] },
+      15: { name: "Phosphorus", sym: "P", nepali: "फस्फोरस", z: 15, a: 31, shells: [2, 8, 5] },
+      17: { name: "Chlorine", sym: "Cl", nepali: "क्लोरिन", z: 17, a: 35, shells: [2, 8, 7] },
+      18: { name: "Argon", sym: "Ar", nepali: "आर्गन", z: 18, a: 40, shells: [2, 8, 8] },
+      19: { name: "Potassium", sym: "K", nepali: "पोटासियम", z: 19, a: 39, shells: [2, 8, 8, 1] },
+      20: { name: "Calcium", sym: "Ca", nepali: "क्याल्सियम", z: 20, a: 40, shells: [2, 8, 8, 2] }
+    };
+
+    let curZ = 6;
+    let rotationAngle = 0;
+    const canvas = document.getElementById('atomCanvas');
+    const ctx = canvas.getContext('2d');
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+
+    function changeElement(z) {
+      curZ = parseInt(z, 10);
+      const el = elementsData[curZ];
+      document.getElementById('zVal').textContent = el.z;
+      document.getElementById('aVal').textContent = el.a;
+      document.getElementById('pVal').textContent = el.z;
+      document.getElementById('nVal').textContent = el.a - el.z;
+
+      const shellNames = ['K', 'L', 'M', 'N'];
+      const shellText = el.shells.map((cnt, i) => `${shellNames[i]} Shell: ${cnt}`).join(' | ');
+      const valElectrons = el.shells[el.shells.length - 1];
+      const valency = valElectrons <= 4 ? valElectrons : 8 - valElectrons;
+      document.getElementById('shellBox').innerHTML = `
+        <strong>Electronic Configuration (इलेक्ट्रोन विन्यास):</strong><br>
+        ${shellText}<br>
+        Valence Electrons (संयोजकता इलेक्ट्रोन): <strong>${valElectrons}</strong> (Valency: ${valency})
+      `;
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+      else document.exitFullscreen().catch(()=>{});
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const el = elementsData[curZ];
+      rotationAngle += 0.015;
+
+      // Nucleus
+      const nucleusRadius = 32;
+      const grad = ctx.createRadialGradient(cx, cy, 5, cx, cy, nucleusRadius);
+      grad.addColorStop(0, '#ef4444');
+      grad.addColorStop(1, '#991b1b');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(cx, cy, nucleusRadius, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.strokeStyle = '#fca5a5';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Nucleus text
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 15px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(`${el.z}p⁺, ${el.a - el.z}n⁰`, cx, cy);
+
+      // Orbits (K, L, M, N)
+      const shellRadii = [65, 110, 160, 210];
+      const shellNames = ['K', 'L', 'M', 'N'];
+
+      el.shells.forEach((electronCount, sIdx) => {
+        const r = shellRadii[sIdx];
+
+        // Orbit ring
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Orbit label
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.7)';
+        ctx.font = '11px monospace';
+        ctx.fillText(shellNames[sIdx], cx + r - 12, cy - 6);
+
+        // Electrons on orbit
+        const dir = (sIdx % 2 === 0 ? 1 : -1);
+        const speed = (4 - sIdx) * 0.4;
+        const angleStep = (2 * Math.PI) / electronCount;
+
+        for (let i = 0; i < electronCount; i++) {
+          const theta = i * angleStep + rotationAngle * dir * speed;
+          const ex = cx + Math.cos(theta) * r;
+          const ey = cy + Math.sin(theta) * r;
+
+          ctx.fillStyle = '#38bdf8';
+          ctx.beginPath();
+          ctx.arc(ex, ey, 6, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.strokeStyle = '#fff';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    changeElement(6);
+    draw();
+  </script>
+</body>
+</html>

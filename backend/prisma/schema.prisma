@@ -1,0 +1,407 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ══════════════════════════════════════════════════════════════════
+// 1. TENANCY & PLATFORM
+// ══════════════════════════════════════════════════════════════════
+
+model Institution {
+  id                  String   @id @default(cuid())
+  code                String   @unique // e.g. "SCH-2081-0001" or EMIS Code
+  emisCode            String?  @unique
+  name                String
+  nameNepali          String?
+  type                String   @default("COMMUNITY") // COMMUNITY, INSTITUTIONAL, RELIGIOUS, TECHNICAL
+  province            String   // e.g. "Bagmati Province"
+  district            String   // e.g. "Kathmandu"
+  localLevel          String   // e.g. "Kathmandu Metropolitan City"
+  ward                Int?
+  address             String?
+  logoUrl             String?
+  workingDays         String?  @default("Sunday - Friday")
+  schoolTimings       String?  @default("10:00 AM - 04:00 PM")
+  email               String?
+  phone               String?
+  status              String   @default("ACTIVE") // ACTIVE, SUSPENDED, PENDING
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  users               User[]
+  subscriptions       Subscription[]
+  academicYears       AcademicYear[]
+  classes             Class[]
+  studentEnrollments  StudentEnrollment[]
+  institutionSubjects InstitutionSubject[]
+  subjectAllocations  SubjectAllocation[]
+  smartBoardNotes     SmartBoardNote[]
+  attendanceRecords   AttendanceRecord[]
+  examAssessments     ExamAssessment[]
+}
+
+model Package {
+  id             String         @id @default(cuid())
+  code           String         @unique // PACKAGE_1_FOUNDATION, PACKAGE_2_MIDDLE, PACKAGE_3_SECONDARY, TVET_ADDON
+  name           String
+  description    String?
+  gradesCovered  String         // e.g. "1,2,3,4,5"
+  features       String?
+  subscriptions  Subscription[]
+}
+
+model Subscription {
+  id             String       @id @default(cuid())
+  institutionId  String
+  packageId      String
+  startDate      DateTime     @default(now())
+  endDate        DateTime
+  status         String       @default("ACTIVE") // ACTIVE, EXPIRED, CANCELLED
+  maxStudents    Int          @default(1000)
+  maxTeachers    Int          @default(100)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  institution    Institution  @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  package        Package      @relation(fields: [packageId], references: [id], onDelete: Restrict)
+}
+
+// ══════════════════════════════════════════════════════════════════
+// 2. IDENTITY & ROLE-BASED ACCESS CONTROL (RBAC)
+// ══════════════════════════════════════════════════════════════════
+
+model User {
+  id                  String   @id @default(cuid())
+  institutionId       String?  // Null for SUPER_ADMIN
+  username            String   @unique
+  email               String?  @unique
+  passwordHash        String
+  fullName            String
+  fullNameNepali      String?
+  role                String   // SUPER_ADMIN, SCHOOL_ADMIN, PRINCIPAL, TEACHER, STUDENT
+  phone               String?
+  status              String   @default("ACTIVE") // ACTIVE, INACTIVE
+  avatarUrl           String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  institution         Institution?        @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  enrollments         StudentEnrollment[]
+  supervisedSections  Section[]           @relation("ClassTeacherSections")
+  subjectAllocations  SubjectAllocation[] @relation("TeacherAllocations")
+  smartBoardNotes     SmartBoardNote[]
+  studentMarks        StudentMark[]
+}
+
+// ══════════════════════════════════════════════════════════════════
+// 3. ACADEMIC STRUCTURE
+// ══════════════════════════════════════════════════════════════════
+
+model AcademicYear {
+  id             String              @id @default(cuid())
+  institutionId  String
+  name           String              // e.g. "2081/2082 B.S."
+  isCurrent      Boolean             @default(true)
+  startDate      DateTime?
+  endDate        DateTime?
+  createdAt      DateTime            @default(now())
+
+  institution    Institution         @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  sections       Section[]
+  enrollments    StudentEnrollment[]
+}
+
+model Class {
+  id             String       @id @default(cuid())
+  institutionId  String
+  gradeNumber    Int          // 1 to 12
+  name           String       // e.g. "Class 10"
+  board          String       @default("Nepal CDC") // Nepal CDC, Nepal SEE, Nepal NEB, Nepal BLE
+  createdAt      DateTime     @default(now())
+
+  institution    Institution  @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  sections       Section[]
+}
+
+model Section {
+  id                 String              @id @default(cuid())
+  classId            String
+  academicYearId     String
+  name               String              // e.g. "Section A"
+  classTeacherId     String?
+  createdAt          DateTime            @default(now())
+
+  class              Class               @relation(fields: [classId], references: [id], onDelete: Cascade)
+  academicYear       AcademicYear        @relation(fields: [academicYearId], references: [id], onDelete: Cascade)
+  classTeacher       User?               @relation("ClassTeacherSections", fields: [classTeacherId], references: [id], onDelete: SetNull)
+  enrollments        StudentEnrollment[]
+  subjectAllocations SubjectAllocation[]
+  attendanceRecords  AttendanceRecord[]
+  examAssessments    ExamAssessment[]
+  smartBoardNotes    SmartBoardNote[]
+  timetableSlots     TimetableSlot[]
+}
+
+model StudentEnrollment {
+  id               String       @id @default(cuid())
+  institutionId    String
+  studentId        String
+  sectionId        String
+  academicYearId   String
+  rollNumber       Int
+  admissionNumber  String?
+  guardianName     String?
+  guardianPhone    String?
+  guardianRelation String?
+  status           String       @default("ENROLLED") // ENROLLED, TRANSFERRED, GRADUATED, PROMOTED
+  createdAt        DateTime     @default(now())
+
+  institution      Institution  @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  student          User         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  section          Section      @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  academicYear     AcademicYear @relation(fields: [academicYearId], references: [id], onDelete: Cascade)
+}
+
+model TimetableSlot {
+  id                  String             @id @default(cuid())
+  institutionId       String
+  sectionId           String
+  subjectAllocationId String
+  dayOfWeek           String             // SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY
+  startTime           String             // "10:00"
+  endTime             String             // "10:45"
+  room                String?
+  createdAt           DateTime           @default(now())
+
+  section             Section            @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  subjectAllocation   SubjectAllocation  @relation(fields: [subjectAllocationId], references: [id], onDelete: Cascade)
+}
+
+model SchoolAnnouncement {
+  id              String   @id @default(cuid())
+  institutionId   String
+  title           String
+  content         String
+  targetType      String   @default("ALL") // ALL, TEACHERS, STUDENTS, SECTION
+  targetSectionId String?
+  authorName      String   @default("School Administration")
+  createdAt       DateTime @default(now())
+}
+
+// ══════════════════════════════════════════════════════════════════
+// 4. CENTRAL CURRICULUM & DIGITAL CONTENT REPOSITORY
+// ══════════════════════════════════════════════════════════════════
+
+model CentralSubject {
+  id                  String               @id @default(cuid())
+  code                String               @unique // e.g. "MATH-10", "SCI-10"
+  name                String               // "Mathematics"
+  nameNepali          String               // "गणित"
+  gradeNumber         Int                  // 10
+  medium              String               // "BOTH", "NEPALI", "ENGLISH"
+  isCompulsory        Boolean              @default(true)
+  packageTier         String               @default("PACKAGE_3_SECONDARY")
+  createdAt           DateTime             @default(now())
+
+  textbooks           Textbook[]
+  institutionSubjects InstitutionSubject[]
+}
+
+model Textbook {
+  id               String         @id @default(cuid())
+  centralSubjectId String
+  title            String
+  medium           String         // "NEPALI", "ENGLISH"
+  edition          String?        // "2078", "2082"
+  filePath         String         // Relative path in Nepal data/
+  fileSize         Int?
+  totalPages       Int?
+  createdAt        DateTime       @default(now())
+
+  subject          CentralSubject @relation(fields: [centralSubjectId], references: [id], onDelete: Cascade)
+  chapters         Chapter[]
+}
+
+model Chapter {
+  id            String    @id @default(cuid())
+  textbookId    String
+  chapterNumber Int
+  name          String
+  nameNepali    String?
+  startPage     Int?
+  endPage       Int?
+  createdAt     DateTime  @default(now())
+
+  textbook      Textbook  @relation(fields: [textbookId], references: [id], onDelete: Cascade)
+  topics        Topic[]
+}
+
+model Topic {
+  id            String   @id @default(cuid())
+  chapterId     String
+  topicNumber   Int?
+  title         String
+  titleNepali   String?
+  learningGoal  String?
+  simulations   String?  // JSON array of simulation IDs
+  createdAt     DateTime @default(now())
+
+  chapter       Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+}
+
+model SimulationCatalog {
+  id                 String   @id @default(cuid())
+  code               String   @unique // e.g. "sim-circuit-dc"
+  title              String
+  gradeLevel         String   // "grade-10"
+  subjectCode        String   // "science"
+  packageRequirement String   // "PACKAGE_3_SECONDARY"
+  runtimeMode        String   @default("split_workspace")
+  entrypointUrl      String   // Path in smartboard/
+  difficulty         String   @default("intermediate")
+  createdAt          DateTime @default(now())
+}
+
+// ══════════════════════════════════════════════════════════════════
+// 5. INSTITUTION SUBJECTS & TEACHER ALLOCATIONS
+// ══════════════════════════════════════════════════════════════════
+
+model InstitutionSubject {
+  id                 String              @id @default(cuid())
+  institutionId      String
+  centralSubjectId   String
+  customName         String?
+  createdAt          DateTime            @default(now())
+
+  institution        Institution         @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  centralSubject     CentralSubject      @relation(fields: [centralSubjectId], references: [id], onDelete: Restrict)
+  subjectAllocations SubjectAllocation[]
+  examAssessments    ExamAssessment[]
+}
+
+model SubjectAllocation {
+  id                   String             @id @default(cuid())
+  institutionId        String
+  teacherId            String
+  institutionSubjectId String
+  sectionId            String
+  createdAt            DateTime           @default(now())
+
+  institution          Institution        @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  teacher              User               @relation("TeacherAllocations", fields: [teacherId], references: [id], onDelete: Cascade)
+  institutionSubject   InstitutionSubject @relation(fields: [institutionSubjectId], references: [id], onDelete: Cascade)
+  section              Section            @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  smartBoardNotes      SmartBoardNote[]
+  timetableSlots       TimetableSlot[]
+}
+
+// ══════════════════════════════════════════════════════════════════
+// 6. CLASSROOM, SMART BOARD NOTES & ASSESSMENTS
+// ══════════════════════════════════════════════════════════════════
+
+model SmartBoardNote {
+  id                  String             @id @default(cuid())
+  institutionId       String
+  teacherId           String
+  sectionId           String
+  subjectAllocationId String?
+  title               String
+  notesPdfUrl         String             // Stored file path or data URL
+  pageCount           Int                @default(1)
+  createdAt           DateTime           @default(now())
+
+  institution         Institution        @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  teacher             User               @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  section             Section            @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  subjectAllocation   SubjectAllocation? @relation(fields: [subjectAllocationId], references: [id], onDelete: SetNull)
+}
+
+model AttendanceRecord {
+  id            String      @id @default(cuid())
+  institutionId String
+  sectionId     String
+  studentId     String
+  date          DateTime    @default(now())
+  status        String      // PRESENT, ABSENT, LATE, EXCUSED
+  markedById    String
+  createdAt     DateTime    @default(now())
+
+  institution   Institution @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  section       Section     @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+}
+
+model ExamAssessment {
+  id                   String             @id @default(cuid())
+  institutionId        String
+  sectionId            String
+  institutionSubjectId String
+  name                 String             // e.g. "First Terminal Exam 2081"
+  fullMarks            Float              @default(100.0)
+  passMarks            Float              @default(40.0)
+  examDate             DateTime?
+  isPublished          Boolean            @default(false)
+  createdAt            DateTime           @default(now())
+
+  institution          Institution        @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  section              Section            @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  institutionSubject   InstitutionSubject @relation(fields: [institutionSubjectId], references: [id], onDelete: Cascade)
+  marks                StudentMark[]
+}
+
+model StudentMark {
+  id               String         @id @default(cuid())
+  examAssessmentId String
+  studentId        String
+  theoryMarks      Float?
+  practicalMarks   Float?
+  totalMarks       Float
+  grade            String?        // A+, A, B+, B, C+, C, D, NG (Nepal Letter Grading System)
+  gpa              Float?         // 4.0, 3.6, etc.
+  remarks          String?
+  createdAt        DateTime       @default(now())
+
+  assessment       ExamAssessment @relation(fields: [examAssessmentId], references: [id], onDelete: Cascade)
+  student          User           @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+// ══════════════════════════════════════════════════════════════════
+// 7. SUPER ADMIN, AUDIT LOGS, ANNOUNCEMENTS & SETTINGS
+// ══════════════════════════════════════════════════════════════════
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  userId      String
+  userEmail   String?
+  userRole    String
+  action      String   // INSTITUTION_CREATED, STATUS_UPDATED, BULK_IMPORTED, SUBSCRIPTION_ASSIGNED, etc.
+  entityType  String   // INSTITUTION, USER, SUBSCRIPTION, CURRICULUM
+  entityId    String?
+  details     String?  // JSON stringified details
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+}
+
+model Announcement {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  targetRole  String   @default("ALL") // ALL, SCHOOL_ADMIN, TEACHER, STUDENT
+  isPinned    Boolean  @default(false)
+  authorName  String   @default("Super Admin")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PlatformSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  category    String   @default("GENERAL") // GENERAL, SECURITY, STORAGE, AI
+  updatedAt   DateTime @updatedAt
+}
+
+

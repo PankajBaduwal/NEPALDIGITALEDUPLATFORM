@@ -1,0 +1,16 @@
+[
+ {
+  "allocationId": "6aea4ffccaa1c3fc856dc114",
+  "sectionId": "6aea4ffccaa1c3fc856dc0b2",
+  "centralSubjectId": "6ae844d0a721bdae28ec44c8",
+  "from": "6aea4ffccaa1c3fc856dc0e3",
+  "to": "6aea4ffccaa1c3fc856dc0f1"
+ },
+ {
+  "allocationId": "6aea4ffccaa1c3fc856dc1b6",
+  "sectionId": "6aea4ffccaa1c3fc856dc0cc",
+  "centralSubjectId": "6ae844d0a721bdae28ec44f2",
+  "from": "6aea4ffccaa1c3fc856dc0f1",
+  "to": "6aea4ffccaa1c3fc856dc0e3"
+ }
+]

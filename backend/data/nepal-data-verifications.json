@@ -1,0 +1,23 @@
+{
+  "_note": "Manual verifications for PDFs whose content could not be read automatically. Each entry records what was checked. Applied by nepal-data-extractor.ts on every extraction run.",
+  "verifications": {
+    "class11/Reds-social 11_0yfbndw.pdf": {
+      "medium": "NEPALI",
+      "language": "Nepali",
+      "title": "सामाजिक अध्ययन तथा जीवनोपयोगी शिक्षा कक्षा ११",
+      "evidence": "Scanned PDF; page 1 rendered and inspected 2026-11-02: cover reads 'सामाजिक अध्ययन तथा जीवनोपयोगी शिक्षा, कक्षा ११' in Devanagari"
+    },
+    "class4/सामाजिक अध्ययन तथा मानव मूल्य कक्षा ४_x4w7kt9.pdf": {
+      "medium": "NEPALI",
+      "language": "Nepali",
+      "title": "सामाजिक अध्ययन तथा मानव मूल्य शिक्षा कक्षा ४",
+      "evidence": "Scanned PDF; page 1 rendered and inspected 2026-11-02: cover reads 'सामाजिक अध्ययन तथा मानव मूल्य शिक्षा, कक्षा ४' in Devanagari"
+    },
+    "class9/शिक्षा कक्षा ९_dkmivc2.pdf": {
+      "medium": "NEPALI",
+      "language": "Nepali",
+      "title": "शिक्षा कक्षा ९",
+      "evidence": "Scanned PDF; page 1 rendered and inspected 2026-11-02: cover reads 'शिक्षा, कक्षा ९' in Devanagari"
+    }
+  }
+}

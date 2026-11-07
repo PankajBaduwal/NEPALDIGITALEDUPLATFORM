@@ -1,0 +1,38 @@
+{
+  "name": "nepal-edu-platform-frontend",
+  "version": "1.0.0",
+  "description": "Nepal Digital Education Ecosystem — Portals Frontend (Super Admin, School Admin, Teacher, Student)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "nepal-education",
+    "smartboard",
+    "edtech",
+    "school-management"
+  ],
+  "dependencies": {
+    "@types/three": "^0.187.0",
+    "katex": "^0.19.1",
+    "lucide-react": "^1.66.0",
+    "nepali-date-converter": "^3.4.2",
+    "pdfjs-dist": "^6.4.299",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5",
+    "recharts": "^3.10.1",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "postcss": "^8.5.32",
+    "tailwindcss": "^4.3.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  }
+}

@@ -1,0 +1,936 @@
+[
+  {
+    "code": "KP-g18-class1-spatial-furry-cat",
+    "title": "Finding the Furry Cat! (Inside / Outside, Top / Bottom, Near / Far)",
+    "description": "Playful interactive kitten, tent, tree, and pond simulation to master Inside/Outside, Top/Bottom, and Near/Far concepts.",
+    "learningObjectives": [
+      "Distinguish and apply the concepts of Inside and Outside",
+      "Identify Top and Bottom spatial positions on trees and shelves",
+      "Evaluate relative distance: Near and Far from reference landmarks",
+      "Develop spatial vocabulary through tactile manipulation and audio read-aloud prompts"
+    ],
+    "gradeLevels": [
+      1
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 1,
+    "chapterTitle": "Shapes and Position",
+    "chapterTitleNepali": "आकारप्रकार र स्थान",
+    "topicName": "Spatial Relationships",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class1-spatial-furry-cat",
+    "componentKey": "kpriet:g18-class1-spatial-furry-cat",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "shapes and space",
+      "spatial relationships",
+      "inside outside",
+      "top bottom",
+      "near far",
+      "class 1",
+      "ncert"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class1-spatial-furry-cat"
+    }
+  },
+  {
+    "code": "KP-g18-class1-spatial-ramp-adventure",
+    "title": "Rolling or Sliding? The Ramp Adventure!",
+    "description": "Hands-on physics ramp adventure: test balls, boxes, coins, and batteries to discover which objects roll, slide, or do both!",
+    "learningObjectives": [
+      "Distinguish between objects with round/curved surfaces and flat surfaces",
+      "Understand why round objects roll and flat objects slide on an incline",
+      "Discover objects like coins and batteries that can both roll and slide depending on how they are placed",
+      "Predict which shapes can be stacked into tall towers without toppling"
+    ],
+    "gradeLevels": [
+      1
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 3,
+    "chapterTitle": "Geometrical Shapes",
+    "chapterTitleNepali": "ज्यामितीय आकारहरू",
+    "topicName": "Shapes and Rolling vs Sliding",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class1-spatial-ramp-adventure",
+    "componentKey": "kpriet:g18-class1-spatial-ramp-adventure",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "shapes",
+      "rolling and sliding",
+      "ramp",
+      "physics",
+      "solids",
+      "class 1",
+      "ncert"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class1-spatial-ramp-adventure"
+    }
+  },
+  {
+    "code": "KP-g18-class1-counting-garden-zero",
+    "title": "Counting in the Enchanted Garden (Numbers 1 to 9 & The Zero Concept)",
+    "description": "Gather mangoes, butterflies, and flowers into a 2x5 Ten-Frame basket with auditory tally, and explore the concept of Zero in the baby bird nest.",
+    "learningObjectives": [
+      "Develop 1-to-1 correspondence by counting objects up to 9 with pitch-matched audio",
+      "Recognize numerals 1–9 and connect quantities with number names in English & Hindi",
+      "Understand structured base-10 counting using a visual 2x5 Ten-Frame",
+      "Internalize the concept of Zero (शून्य) as an empty set or absence of items"
+    ],
+    "gradeLevels": [
+      1
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 5,
+    "chapterTitle": "Zero",
+    "chapterTitleNepali": "शून्य",
+    "topicName": "Numbers 1 to 9 and Zero",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class1-counting-garden-zero",
+    "componentKey": "kpriet:g18-class1-counting-garden-zero",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "counting",
+      "numbers 1 to 9",
+      "zero concept",
+      "ten frame",
+      "one to one correspondence",
+      "class 1",
+      "ncert"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class1-counting-garden-zero"
+    }
+  },
+  {
+    "code": "KP-g18-class1-measurement-balance",
+    "title": "The Great Animal Balancing Act! (Longer/Shorter, Heavier/Lighter, Taller/Shorter)",
+    "description": "Hands-on pan balance and measurement lab: compare heavy vs light with tilting scales, tall vs short from a common baseline, and measure with tiled units!",
+    "learningObjectives": [
+      "Compare weights using an interactive physical pan balance (Tarazu) to identify Heavier and Lighter",
+      "Compare heights and lengths from a strict common baseline to determine Taller/Shorter and Longer/Shorter",
+      "Measure lengths using concrete non-standard unit tiling (paperclips / blocks)",
+      "Develop foundational spatial and measurement vocabulary in English and Hindi"
+    ],
+    "gradeLevels": [
+      1
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 1,
+    "chapterTitle": "Shapes and Position",
+    "chapterTitleNepali": "आकारप्रकार र स्थान",
+    "topicName": "Measurement: Length, Weight, Height",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class1-measurement-balance",
+    "componentKey": "kpriet:g18-class1-measurement-balance",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "measurement",
+      "heavier lighter",
+      "taller shorter",
+      "longer shorter",
+      "pan balance",
+      "tarazu",
+      "class 1",
+      "ncert"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class1-measurement-balance"
+    }
+  },
+  {
+    "code": "KP-g18-class1-addition-subtraction-stories",
+    "title": "Addition & Subtraction Stories (Adding and Taking Away up to 9)",
+    "description": "Interactive addition and subtraction story adventures: make frogs hop together on lily pads, watch birds fly away from tree branches, and solve concrete word problem challenges!",
+    "learningObjectives": [
+      "Understand addition as combining two collections and counting on up to 9",
+      "Understand subtraction as taking away objects from a collection (how many are left?)",
+      "Connect real-world pictorial stories to symbolic math equations (A + B = C, A - B = C)",
+      "Reinforce number sense using dual-color Ten-Frame visual organizers"
+    ],
+    "gradeLevels": [
+      1
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 7,
+    "chapterTitle": "Addition up to 10",
+    "chapterTitleNepali": "योगफल १० सम्म आउने जोड",
+    "topicName": "Addition & Subtraction (Numbers up to 9)",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class1-addition-subtraction-stories",
+    "componentKey": "kpriet:g18-class1-addition-subtraction-stories",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "addition",
+      "subtraction",
+      "combining sets",
+      "taking away",
+      "ten frame",
+      "frogs on lily pad",
+      "birds on branch",
+      "math stories",
+      "class 1",
+      "ncert"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class1-addition-subtraction-stories"
+    }
+  },
+  {
+    "code": "KP-g18-class1-pattern-train",
+    "title": "The Rhythmic Pattern Train! (Repeating Sequences & Shapes)",
+    "description": "Complete the missing pattern carriages on the steam train! Hear the rhythmic chimes, discover ABAB, AABB, and ABC sequences, and watch the train chug happily!",
+    "learningObjectives": [
+      "Identify and extend repeating patterns in colors, shapes, and familiar objects (ABAB, AABB, ABC)",
+      "Develop auditory pattern recognition by matching visual sequences to musical chime rhythms",
+      "Understand the concept of the core repeating unit in foundational mathematics",
+      "Strengthen spatial reasoning and logical sequencing through hands-on train carriages"
+    ],
+    "gradeLevels": [
+      1
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 3,
+    "chapterTitle": "Geometrical Shapes",
+    "chapterTitleNepali": "ज्यामितीय आकारहरू",
+    "topicName": "Patterns: Repeating Sequences & Shapes",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class1-pattern-train",
+    "componentKey": "kpriet:g18-class1-pattern-train",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "patterns",
+      "repeating sequences",
+      "abab",
+      "aabb",
+      "abc",
+      "shapes",
+      "train",
+      "musical chimes",
+      "class 1",
+      "ncert"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class1-pattern-train"
+    }
+  },
+  {
+    "code": "KP-g18-class1-time-chintu-day",
+    "title": "A Day in the Life of Chintu! (Time, Sequences & Daily Routines)",
+    "description": "Join Chintu through morning, afternoon, evening, and night! Arrange his daily routine in chronological order and discover what happens earlier and later!",
+    "learningObjectives": [
+      "Recognize and name the four major parts of the day: Morning, Afternoon, Evening, and Night",
+      "Sequence routine daily activities in correct chronological order from sunrise to bedtime",
+      "Develop foundational comparative temporal concepts: Earlier vs Later, Before vs After",
+      "Associate visual environmental cues (sun rising, midday sun, sunset, starry moon) with time of day"
+    ],
+    "gradeLevels": [
+      1
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 12,
+    "chapterTitle": "Money and Time",
+    "chapterTitleNepali": "मुद्रा र समय",
+    "topicName": "Time: Daily Routine & Chronological Sequencing",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class1-time-chintu-day",
+    "componentKey": "kpriet:g18-class1-time-chintu-day",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "time",
+      "morning afternoon evening night",
+      "chronological sequencing",
+      "earlier later",
+      "before after",
+      "daily routine",
+      "chintu",
+      "class 1",
+      "ncert"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class1-time-chintu-day"
+    }
+  },
+  {
+    "code": "KP-g18-class1-currency-toy-shop",
+    "title": "The Village Toy Shop! (Indian Currency ₹1, ₹2, ₹5, ₹10 & Bundling 10s and 1s)",
+    "description": "Visit the vibrant village toy shop! Count and combine Indian coins (₹1, ₹2, ₹5, ₹10) to buy wooden spinning tops, kites, and clay elephants, and tie sticks into bundles of 10!",
+    "learningObjectives": [
+      "Recognize and name Indian currency denominations: ₹1, ₹2, ₹5, and ₹10 coins and notes",
+      "Combine different coin denominations to pay the exact price for items up to ₹20",
+      "Understand place-value grouping: 10 loose units form 1 Bundle of Ten (दहाई और इकाई)",
+      "Develop foundational financial literacy and mental addition in everyday contexts"
+    ],
+    "gradeLevels": [
+      1
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 12,
+    "chapterTitle": "Money and Time",
+    "chapterTitleNepali": "मुद्रा र समय",
+    "topicName": "Money & Place Value: Coins, Notes & Bundling Tens and Ones",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class1-currency-toy-shop",
+    "componentKey": "kpriet:g18-class1-currency-toy-shop",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "money",
+      "indian currency",
+      "rupee",
+      "coins",
+      "bundling tens and ones",
+      "place value",
+      "toy shop",
+      "class 1",
+      "ncert"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class1-currency-toy-shop"
+    }
+  },
+  {
+    "code": "KP-g18-class2-number-village",
+    "title": "Number Village: Read, Build & Compare (1 to 99)",
+    "description": "Explore the village to count items, build numbers with tens and ones, compare quantities, and find missing sequence cards.",
+    "learningObjectives": [
+      "Read and write 2-digit numerals up to 99 with place value insight (LO M201)",
+      "Count objects in groups of tens and loose ones (LO M202)",
+      "Compare two 2-digit numbers using <, >, and = (LO M202)",
+      "Identify missing numbers in a sequential number path (LO M201)"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 1,
+    "chapterTitle": "Numbers and Place Value",
+    "topicName": "Numbers 1 to 99 & Place Value",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-number-village",
+    "componentKey": "kpriet:g18-class2-number-village",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "class 2",
+      "math",
+      "ncert",
+      "numbers",
+      "tens and ones",
+      "place value",
+      "compare"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-number-village"
+    }
+  },
+  {
+    "code": "KP-g18-class2-tens-and-ones",
+    "title": "Tens and Ones Workshop: Bundling Lab",
+    "description": "Drag loose sticks into bundles of ten! Discover that 10 ones make exactly 1 ten bundle without changing the total count.",
+    "learningObjectives": [
+      "Group 10 loose ones into 1 ten-rod (bundling conservation) (LO M202)",
+      "Unbundle 1 ten into 10 loose ones (LO M202)",
+      "Express numbers in standard and expanded form (e.g., 34 = 3 tens + 4 ones)"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 1,
+    "chapterTitle": "Numbers and Place Value",
+    "topicName": "Place Value & Bundling 10 Ones into 1 Ten",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-tens-and-ones",
+    "componentKey": "kpriet:g18-class2-tens-and-ones",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "class 2",
+      "math",
+      "ncert",
+      "place value",
+      "bundling",
+      "tens and ones"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-tens-and-ones"
+    }
+  },
+  {
+    "code": "KP-g18-class2-rupee-market",
+    "title": "Rupee and Paise Play Market (₹1 to ₹100)",
+    "description": "Pay for classroom market items using authentic Indian play currency coins (₹1, ₹2, ₹5) and notes (₹10, ₹20, ₹50).",
+    "learningObjectives": [
+      "Recognize and combine Indian currency denominations: ₹1, ₹2, ₹5, ₹10, ₹20, ₹50 (LO M208)",
+      "Pay exact amounts up to ₹100 using combinations of notes and coins",
+      "Realize that the same monetary amount can be paid in multiple coin/note combinations"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 3,
+    "chapterTitle": "Money",
+    "topicName": "Indian Currency Notes & Coins (LO M208)",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-rupee-market",
+    "componentKey": "kpriet:g18-class2-rupee-market",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "class 2",
+      "math",
+      "ncert",
+      "money",
+      "rupee",
+      "currency",
+      "market"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-rupee-market"
+    }
+  },
+  {
+    "code": "KP-g18-class2-shape-explorer",
+    "title": "Shape Explorer: Flat Shapes and Solid Objects",
+    "description": "Explore 3D solids (cube, sphere, cylinder, cone) and test whether they roll, slide, or do both on an inclined ramp.",
+    "learningObjectives": [
+      "Observe and identify 3D solids: cube, cuboid, cylinder, cone, sphere (LO M209)",
+      "Distinguish curved surfaces from flat surfaces",
+      "Demonstrate why curved surfaces roll while flat surfaces slide"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 4,
+    "chapterTitle": "Shapes",
+    "topicName": "2D Flat Shapes & 3D Solids (LO M209)",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-shape-explorer",
+    "componentKey": "kpriet:g18-class2-shape-explorer",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "class 2",
+      "math",
+      "ncert",
+      "geometry",
+      "shapes",
+      "solids",
+      "rolling and sliding"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-shape-explorer"
+    }
+  },
+  {
+    "code": "KP-g18-class2-length-detective",
+    "title": "Length Detective: Measure with Uniform Units",
+    "description": "Measure virtual classroom objects using equal paper clips, pencils, and erasers placed end-to-end without gaps or overlaps.",
+    "learningObjectives": [
+      "Estimate and measure lengths using uniform non-standard units (paper clips, erasers) (LO M211)",
+      "Understand why measuring units must be placed end-to-end without gaps or overlap",
+      "Compare lengths of two classroom objects measured with the same unit"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 5,
+    "chapterTitle": "Measurement",
+    "topicName": "Non-Standard Measurement of Length (LO M211)",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-length-detective",
+    "componentKey": "kpriet:g18-class2-length-detective",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "class 2",
+      "math",
+      "ncert",
+      "measurement",
+      "length",
+      "non-standard units"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-length-detective"
+    }
+  },
+  {
+    "code": "KP-g18-class2-living-sorter",
+    "title": "Living, Non-Living & Once-Living Sorter",
+    "description": "Hands-on classification of living things, non-living objects, and things made from once-living nature (NCF-FS CG-8).",
+    "learningObjectives": [
+      "Distinguish living things from non-living objects using observable features (NCF-FS CG-8)",
+      "Understand that objects made of wood or dried leaves are once-living materials",
+      "Recognize that autonomous movement alone does not define living things (e.g. toy cars)"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "SCI",
+    "subjectName": "Environmental Studies",
+    "chapterNumber": 1,
+    "chapterTitle": "Living and Non-Living Things",
+    "topicName": "Observation & Natural World Classification",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-living-sorter",
+    "componentKey": "kpriet:g18-class2-living-sorter",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "class 2",
+      "science",
+      "integrated discovery",
+      "living non-living",
+      "classification",
+      "ncf-fs"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-living-sorter"
+    }
+  },
+  {
+    "code": "KP-g18-class2-plant-garden",
+    "title": "Plant Parts & Plant Needs Garden",
+    "description": "Assemble roots, stem, leaves, and flowers, then balance sunlight, water, and soil to nurture the plant to bloom.",
+    "learningObjectives": [
+      "Identify basic plant parts: roots, stem, leaves, flowers (NCF-FS CG-8)",
+      "Understand why roots absorb water and hold the plant in soil",
+      "Demonstrate that plants need balanced sunlight and water to produce flowers"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "SCI",
+    "subjectName": "Environmental Studies",
+    "chapterNumber": 2,
+    "chapterTitle": "Plants",
+    "topicName": "Plant Parts & Growth Requirements",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-plant-garden",
+    "componentKey": "kpriet:g18-class2-plant-garden",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "class 2",
+      "science",
+      "plants",
+      "roots",
+      "leaves",
+      "sunlight",
+      "water",
+      "ncf-fs"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-plant-garden"
+    }
+  },
+  {
+    "code": "KP-g18-class2-senses-explorer",
+    "title": "Human Body & Five Senses Explorer",
+    "description": "Discover how our eyes, ears, nose, tongue, and skin safely help us observe and learn about the world (NCF-FS CG-8).",
+    "learningObjectives": [
+      "Identify the five senses and their organs: eyes, ears, nose, tongue, skin (NCF-FS CG-8)",
+      "Match sensory observations with the corresponding sense organ",
+      "Follow personal safety rules: never smell unknown chemicals or touch hot surfaces"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "SCI",
+    "subjectName": "Environmental Studies",
+    "chapterNumber": 3,
+    "chapterTitle": "My Body and Five Senses",
+    "topicName": "The Five Senses & Safe Exploration",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-senses-explorer",
+    "componentKey": "kpriet:g18-class2-senses-explorer",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "class 2",
+      "science",
+      "senses",
+      "eyes",
+      "ears",
+      "nose",
+      "tongue",
+      "skin",
+      "ncf-fs"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-senses-explorer"
+    }
+  },
+  {
+    "code": "KP-g18-class2-water-saver",
+    "title": "Water Around Us & Water Conservation Lab",
+    "description": "Find leaking taps, turn off taps while brushing, and harvest rainwater to protect our precious water supply (NCF-FS CG-9).",
+    "learningObjectives": [
+      "Identify everyday uses and vital importance of clean water (NCF-FS CG-9)",
+      "Practice water-saving habits: closing taps during brushing, repairing leaks",
+      "Understand rainwater harvesting as a way to replenish water reserves"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "SCI",
+    "subjectName": "Environmental Studies",
+    "chapterNumber": 4,
+    "chapterTitle": "Water",
+    "topicName": "Water Uses, Conservation & Responsible Habits",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-water-saver",
+    "componentKey": "kpriet:g18-class2-water-saver",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "class 2",
+      "science",
+      "water",
+      "conservation",
+      "environment",
+      "ncf-fs"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-water-saver"
+    }
+  },
+  {
+    "code": "KP-g18-class2-sink-float",
+    "title": "Sink or Float Discovery Lab",
+    "description": "Predict whether everyday objects will sink or float in a water tub, then test and observe buoyancy (NCF-FS CG-8).",
+    "learningObjectives": [
+      "Predict and observe whether common objects sink or float in water (NCF-FS CG-8)",
+      "Understand that hollow shapes with trapped air (like boats) float easily",
+      "Follow the scientific inquiry cycle: Predict -> Test -> Observe -> Explain"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "SCI",
+    "subjectName": "Environmental Studies",
+    "chapterNumber": 4,
+    "chapterTitle": "Water",
+    "topicName": "Buoyancy, Density & Water Properties",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-sink-float",
+    "componentKey": "kpriet:g18-class2-sink-float",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "class 2",
+      "science",
+      "sink or float",
+      "buoyancy",
+      "water",
+      "ncf-fs"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-sink-float"
+    }
+  },
+  {
+    "code": "KP-g18-class2-push-pull",
+    "title": "Push, Pull, and Movement Playground",
+    "description": "Push and pull a toy cart across ice, wood, and rough carpet to observe how forces start motion and surfaces slow it down (NCF-FS CG-8).",
+    "learningObjectives": [
+      "Explore pushes (moving away) and pulls (drawing closer) as causes of motion (NCF-FS CG-8)",
+      "Observe qualitatively how rough surfaces like carpet stop moving objects faster than smooth ice",
+      "Demonstrate how changing force direction reverses the movement direction"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "SCI",
+    "subjectName": "Environmental Studies",
+    "chapterNumber": 5,
+    "chapterTitle": "Push, Pull and Movement",
+    "topicName": "Forces, Motion & Surface Friction",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-push-pull",
+    "componentKey": "kpriet:g18-class2-push-pull",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "class 2",
+      "science",
+      "push and pull",
+      "forces",
+      "friction",
+      "motion",
+      "ncf-fs"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-push-pull"
+    }
+  },
+  {
+    "code": "KP-g18-class1-counting",
+    "title": "Counting and Number Recognition",
+    "description": "Count objects arranged in ten-frames and match the quantity to its numeral and number name.",
+    "learningObjectives": [
+      "Count objects up to 20",
+      "Recognise numerals 1–20",
+      "Read and say number names",
+      "See numbers above 10 as ten and some more"
+    ],
+    "gradeLevels": [
+      1
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 9,
+    "chapterTitle": "Numbers 11 to 20",
+    "chapterTitleNepali": "११ देखि २० सम्मका सङ्ख्याहरू",
+    "topicName": "Numbers 1 to 20",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class1-counting",
+    "componentKey": "kpriet:g18-class1-counting",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "counting",
+      "numbers",
+      "ten frame",
+      "class 1"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class1-counting"
+    }
+  },
+  {
+    "code": "KP-g18-class1-addition-objects",
+    "title": "Addition with Objects",
+    "description": "Put two groups of objects together and count all of them to find the sum.",
+    "learningObjectives": [
+      "Understand addition as putting together",
+      "Count on to add",
+      "Write an addition sentence"
+    ],
+    "gradeLevels": [
+      1
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 7,
+    "chapterTitle": "Addition up to 10",
+    "chapterTitleNepali": "योगफल १० सम्म आउने जोड",
+    "topicName": "Adding small numbers",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class1-addition-objects",
+    "componentKey": "kpriet:g18-class1-addition-objects",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "addition",
+      "class 1"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class1-addition-objects"
+    }
+  },
+  {
+    "code": "KP-g18-class2-place-value",
+    "title": "Place Value",
+    "description": "Build a number with hundred-flats, ten-rods and unit cubes and read its expanded form.",
+    "learningObjectives": [
+      "Identify the place value of each digit",
+      "Represent numbers with base-ten blocks",
+      "Write numbers in expanded form"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 1,
+    "chapterTitle": "Numbers and Place Value",
+    "topicName": "Hundreds, tens and ones",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-place-value",
+    "componentKey": "kpriet:g18-class2-place-value",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "place value",
+      "base ten",
+      "class 2"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-place-value"
+    }
+  },
+  {
+    "code": "KP-g18-class2-add-subtract",
+    "title": "Addition and Subtraction on a Number Line",
+    "description": "Jump forwards to add and backwards to subtract on a number line, in tens and then ones.",
+    "learningObjectives": [
+      "Add and subtract two-digit numbers",
+      "Use jumps of tens and ones",
+      "Relate addition and subtraction"
+    ],
+    "gradeLevels": [
+      2
+    ],
+    "subjectCode": "MATH",
+    "subjectName": "Mathematics",
+    "chapterNumber": 2,
+    "chapterTitle": "Addition and Subtraction",
+    "topicName": "Adding and subtracting within 100",
+    "language": "en",
+    "simulationType": "2D_CANVAS",
+    "runtimeUrl": "/sim.html?id=g18-class2-add-subtract",
+    "componentKey": "kpriet:g18-class2-add-subtract",
+    "difficulty": "BEGINNER",
+    "estimatedMinutes": 15,
+    "status": "AVAILABLE",
+    "isPublished": true,
+    "tags": [
+      "kpriet",
+      "addition",
+      "subtraction",
+      "number line",
+      "class 2"
+    ],
+    "config": {
+      "source": "KPRIET",
+      "kprietId": "g18-class2-add-subtract"
+    }
+  }
+]

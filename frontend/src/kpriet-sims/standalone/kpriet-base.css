@@ -1,0 +1,1118 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Eduverse & PiyushDhara Design System (Tailwind CSS v4)
+ * Strict Global Semantic Design Tokens & High-Contrast Engine (Light & Dark)
+ */
+
+@layer base {
+  :root {
+    --color-scheme: light;
+    
+    /* 1. Base Layout & Surfaces */
+    --background: #f8fafc;
+    --foreground: #0f172a;
+
+    --surface: #ffffff;
+    --surface-foreground: #0f172a;
+
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --card-elevated: #ffffff;
+    --card-hover: #f8fafc;
+
+    --popover: #ffffff;
+    --popover-foreground: #0f172a;
+
+    /* 2. Primary / Brand Green (High Contrast against white text >= 4.6:1) */
+    --primary: #047857;
+    --primary-foreground: #ffffff;
+    --primary-hover: #065f46;
+    --primary-soft: #ecfdf5;
+    --primary-border: #a7f3d0;
+
+    /* 3. Secondary & Neutral Layers */
+    --secondary: #f1f5f9;
+    --secondary-foreground: #0f172a;
+    --secondary-hover: #e2e8f0;
+
+    --muted: #f1f5f9;
+    --muted-foreground: #475569;
+
+    --accent: #ecfdf5;
+    --accent-foreground: #065f46;
+
+    /* 4. Borders & Controls */
+    --border: #e2e8f0;
+    --border-subtle: #f1f5f9;
+    --border-card: #cbd5e1;
+    --border-focus: #10b981;
+    --input: #ffffff;
+    --input-border: #cbd5e1;
+    --input-foreground: #0f172a;
+    --input-placeholder: #64748b;
+    --ring: #10b981;
+
+    /* 5. Status Tokens */
+    --success: #059669;
+    --success-foreground: #ffffff;
+    --success-soft: #ecfdf5;
+    --success-border: #a7f3d0;
+    --success-text: #065f46;
+
+    --warning: #d97706;
+    --warning-foreground: #ffffff;
+    --warning-soft: #fffbeb;
+    --warning-border: #fde68a;
+    --warning-text: #92400e;
+
+    --error: #dc2626;
+    --error-hover: #b91c1c;
+    --error-foreground: #ffffff;
+    --error-soft: #fef2f2;
+    --error-border: #fecaca;
+    --error-text: #991b1b;
+
+    --info: #2563eb;
+    --info-foreground: #ffffff;
+    --info-soft: #eff6ff;
+    --info-border: #bfdbfe;
+    --info-text: #1e40af;
+
+    /* Legacy Token Aliases */
+    --bg-base: var(--background);
+    --bg-panel: var(--card);
+    --bg-surface: var(--surface);
+    --bg-card: var(--card);
+    --bg-card-elevated: var(--card-elevated);
+    --bg-card-hover: var(--card-hover);
+    --bg-muted: var(--muted);
+    --text-primary: var(--foreground);
+    --text-secondary: var(--muted-foreground);
+    --text-muted: var(--muted-foreground);
+    --color-brand: var(--primary);
+    --color-brand-hover: var(--primary-hover);
+    --color-brand-soft: var(--primary-soft);
+    --color-brand-border: var(--primary-border);
+    --color-on-brand: var(--primary-foreground);
+
+    /* Shadows — restrained, institutional */
+    --shadow-soft: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.04);
+    --shadow-elevated: 0 10px 24px -8px rgba(15, 23, 42, 0.12), 0 4px 8px -4px rgba(15, 23, 42, 0.06);
+    --shadow-lift: 0 12px 24px -12px rgba(15, 23, 42, 0.16), 0 2px 6px -2px rgba(15, 23, 42, 0.06);
+
+    /* Design-system aliases (one vocabulary across the portal) */
+    --primary-light: var(--primary-soft);
+    --surface-hover: var(--card-hover);
+    --danger: var(--error);
+    /* Primary actions are a solid deep green (kept as "gradients" so existing references still work). */
+    --gradient-primary: linear-gradient(#047857, #047857);
+    --gradient-primary-hover: linear-gradient(#065f46, #065f46);
+    --gradient-surface: linear-gradient(#ffffff, #ffffff);
+    --glow-primary: 0 0 0 4px rgba(16, 185, 129, 0.16);
+
+    /* Central Animation & Timing Tokens */
+    --duration-fast: 140ms;
+    --duration-normal: 200ms;
+    --duration-medium: 300ms;
+    --duration-slow: 400ms;
+
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+
+    --transition-all: all var(--duration-normal) var(--ease-out);
+    --transition-transform: transform var(--duration-fast) var(--ease-out);
+    --transition-colors: color var(--duration-normal) var(--ease-out), background-color var(--duration-normal) var(--ease-out), border-color var(--duration-normal) var(--ease-out);
+    --transition-shadow: box-shadow var(--duration-normal) var(--ease-out);
+  }
+
+  .dark {
+    --color-scheme: dark;
+
+    /* 1. Base Layout & Surfaces */
+    --background: #090d16;
+    --foreground: #ffffff;
+
+    --surface: #0f172a;
+    --surface-foreground: #ffffff;
+
+    --card: #131d33;
+    --card-foreground: #ffffff;
+    --card-elevated: #1a2642;
+    --card-hover: #1e2c4c;
+
+    --popover: #131d33;
+    --popover-foreground: #ffffff;
+
+    /* 2. Primary / Brand Green */
+    --primary: #10b981;
+    --primary-foreground: #ffffff;
+    --primary-hover: #059669;
+    --primary-soft: rgba(16, 185, 129, 0.15);
+    --primary-border: rgba(16, 185, 129, 0.35);
+
+    /* 3. Secondary & Neutral Layers */
+    --secondary: #1e293b;
+    --secondary-foreground: #ffffff;
+    --secondary-hover: #334155;
+
+    --muted: #1e293b;
+    --muted-foreground: #cbd5e1;
+
+    --accent: rgba(16, 185, 129, 0.15);
+    --accent-foreground: #6ee7b7;
+
+    /* 4. Borders & Controls */
+    --border: #1e293b;
+    --border-subtle: #131d33;
+    --border-card: #334155;
+    --border-focus: #34d399;
+    --input: #0f172a;
+    --input-border: #334155;
+    --input-foreground: #ffffff;
+    --input-placeholder: #94a3b8;
+    --ring: #34d399;
+
+    /* 5. Status Tokens */
+    --success: #10b981;
+    --success-foreground: #ffffff;
+    --success-soft: rgba(16, 185, 129, 0.15);
+    --success-border: rgba(16, 185, 129, 0.3);
+    --success-text: #6ee7b7;
+
+    --warning: #f59e0b;
+    --warning-foreground: #ffffff;
+    --warning-soft: rgba(245, 158, 11, 0.15);
+    --warning-border: rgba(245, 158, 11, 0.3);
+    --warning-text: #fde047;
+
+    --error: #ef4444;
+    --error-hover: #dc2626;
+    --error-foreground: #ffffff;
+    --error-soft: rgba(239, 68, 68, 0.15);
+    --error-border: rgba(239, 68, 68, 0.3);
+    --error-text: #fca5a5;
+
+    --info: #3b82f6;
+    --info-foreground: #ffffff;
+    --info-soft: rgba(59, 130, 246, 0.15);
+    --info-border: rgba(59, 130, 246, 0.3);
+    --info-text: #93c5fd;
+
+    /* Legacy Token Aliases */
+    --bg-base: var(--background);
+    --bg-panel: var(--card);
+    --bg-surface: var(--surface);
+    --bg-card: var(--card);
+    --bg-card-elevated: var(--card-elevated);
+    --bg-card-hover: var(--card-hover);
+    --bg-muted: var(--muted);
+    --text-primary: var(--foreground);
+    --text-secondary: var(--muted-foreground);
+    --text-muted: var(--muted-foreground);
+    --color-brand: var(--primary);
+    --color-brand-hover: var(--primary-hover);
+    --color-brand-soft: var(--primary-soft);
+    --color-brand-border: var(--primary-border);
+    --color-on-brand: var(--primary-foreground);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
+    --shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    --shadow-lift: 0 16px 32px -16px rgba(0, 0, 0, 0.6);
+    /* White text on the button keeps AA contrast with this deeper green in dark mode too. */
+    --gradient-primary: linear-gradient(#047857, #047857);
+    --gradient-primary-hover: linear-gradient(#059669, #059669);
+    --gradient-surface: linear-gradient(#131d33, #131d33);
+    --glow-primary: 0 0 0 4px rgba(52, 211, 153, 0.20);
+  }
+}
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /*
+   * Institutional accent ramp. The decorative hues used across older screens
+   * (indigo / violet / purple / fuchsia / pink) all resolve to one restrained
+   * navy, so the product reads as two colours — KPRIET green + navy — plus the
+   * semantic status colours. Status hues (emerald, amber, rose, sky) are untouched.
+   */
+  --color-indigo-50: #f3f6fa;
+  --color-indigo-100: #e6ecf4;
+  --color-indigo-200: #cbd6e6;
+  --color-indigo-300: #a9bad3;
+  --color-indigo-400: #8197b8;
+  --color-indigo-500: #566d96;
+  --color-indigo-600: #3e5480;
+  --color-indigo-700: #314466;
+  --color-indigo-800: #283752;
+  --color-indigo-900: #1f2a40;
+  --color-indigo-950: #141c2c;
+
+  --color-violet-50: var(--color-indigo-50);
+  --color-violet-100: var(--color-indigo-100);
+  --color-violet-200: var(--color-indigo-200);
+  --color-violet-300: var(--color-indigo-300);
+  --color-violet-400: var(--color-indigo-400);
+  --color-violet-500: var(--color-indigo-500);
+  --color-violet-600: var(--color-indigo-600);
+  --color-violet-700: var(--color-indigo-700);
+  --color-violet-800: var(--color-indigo-800);
+  --color-violet-900: var(--color-indigo-900);
+  --color-violet-950: var(--color-indigo-950);
+
+  --color-purple-50: var(--color-indigo-50);
+  --color-purple-100: var(--color-indigo-100);
+  --color-purple-200: var(--color-indigo-200);
+  --color-purple-300: var(--color-indigo-300);
+  --color-purple-400: var(--color-indigo-400);
+  --color-purple-500: var(--color-indigo-500);
+  --color-purple-600: var(--color-indigo-600);
+  --color-purple-700: var(--color-indigo-700);
+  --color-purple-800: var(--color-indigo-800);
+  --color-purple-900: var(--color-indigo-900);
+  --color-purple-950: var(--color-indigo-950);
+
+  --color-fuchsia-50: var(--color-indigo-50);
+  --color-fuchsia-100: var(--color-indigo-100);
+  --color-fuchsia-200: var(--color-indigo-200);
+  --color-fuchsia-300: var(--color-indigo-300);
+  --color-fuchsia-400: var(--color-indigo-400);
+  --color-fuchsia-500: var(--color-indigo-500);
+  --color-fuchsia-600: var(--color-indigo-600);
+  --color-fuchsia-700: var(--color-indigo-700);
+  --color-fuchsia-800: var(--color-indigo-800);
+  --color-fuchsia-900: var(--color-indigo-900);
+  --color-fuchsia-950: var(--color-indigo-950);
+
+  --color-pink-50: var(--color-indigo-50);
+  --color-pink-100: var(--color-indigo-100);
+  --color-pink-200: var(--color-indigo-200);
+  --color-pink-300: var(--color-indigo-300);
+  --color-pink-400: var(--color-indigo-400);
+  --color-pink-500: var(--color-indigo-500);
+  --color-pink-600: var(--color-indigo-600);
+  --color-pink-700: var(--color-indigo-700);
+  --color-pink-800: var(--color-indigo-800);
+  --color-pink-900: var(--color-indigo-900);
+  --color-pink-950: var(--color-indigo-950);
+
+  /* Typography weight ceiling: headings top out at bold, never black. */
+  --font-weight-extrabold: 700;
+  --font-weight-black: 700;
+
+  /* Precise, consistent corner radii (cards 12px, large panels 14px). */
+  --radius-2xl: 1rem;     /* cards */
+  --radius-3xl: 1.25rem;  /* large panels */
+
+  /* Restrained elevation — overlays keep depth, cards stay flat. */
+  --shadow-lg: 0 4px 12px -4px rgb(15 23 42 / 0.1), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+  --shadow-xl: 0 12px 28px -8px rgb(15 23 42 / 0.16), 0 4px 8px -4px rgb(15 23 42 / 0.06);
+  --shadow-2xl: 0 20px 40px -12px rgb(15 23 42 / 0.22);
+
+  /* Viewport-based Smart Board & Display Breakpoints */
+  --breakpoint-3xl: 1920px;
+  --breakpoint-4xl: 2560px;
+  --breakpoint-5xl: 3840px;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-elevated: var(--card-elevated);
+  --color-card-hover: var(--card-hover);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-border: var(--primary-border);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-bg-muted: var(--muted);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-card: var(--border-card);
+  --color-input: var(--input);
+  --color-input-border: var(--input-border);
+  --color-ring: var(--ring);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-soft: var(--success-soft);
+  --color-success-border: var(--success-border);
+  --color-success-text: var(--success-text);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-border: var(--warning-border);
+  --color-warning-text: var(--warning-text);
+
+  --color-error: var(--error);
+  --color-error-hover: var(--error-hover);
+  --color-error-foreground: var(--error-foreground);
+  --color-error-soft: var(--error-soft);
+  --color-error-border: var(--error-border);
+  --color-error-text: var(--error-text);
+
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-soft: var(--info-soft);
+  --color-info-border: var(--info-border);
+  --color-info-text: var(--info-text);
+
+  /* Legacy & Brand Aliases */
+  --color-base: var(--background);
+  --color-panel: var(--card);
+  --color-brand: var(--primary);
+  --color-brand-strong: var(--primary-hover);
+  --color-brand-soft: var(--primary-soft);
+  --color-brand-border: var(--primary-border);
+  --color-on-brand: var(--primary-foreground);
+  --color-ink: var(--foreground);
+  --color-ink-secondary: var(--secondary-foreground);
+  --color-ink-muted: var(--muted-foreground);
+  --color-line: var(--border);
+  --color-line-card: var(--border-card);
+  --color-ok: var(--success);
+  --color-ok-soft: var(--success-soft);
+  --color-warn: var(--warning);
+  --color-warn-soft: var(--warning-soft);
+  --color-bad: var(--error);
+  --color-bad-soft: var(--error-soft);
+}
+
+/* `text-muted` means the readable secondary text colour (the theme's "muted" colour is a surface).
+   Kept in the utilities layer — never !important or substring selectors — so hover / focus / opacity
+   variants such as hover:text-foreground, hover:bg-muted and bg-muted/30 work as written. */
+@layer utilities {
+  .text-muted { color: var(--muted-foreground); }
+  .text-muted\/40 { color: color-mix(in oklab, var(--muted-foreground) 40%, transparent); }
+  .text-muted\/60 { color: color-mix(in oklab, var(--muted-foreground) 60%, transparent); }
+  .text-muted\/80 { color: color-mix(in oklab, var(--muted-foreground) 80%, transparent); }
+}
+
+.text-ink {
+  color: var(--foreground);
+}
+
+.text-ink-secondary {
+  color: var(--secondary-foreground);
+}
+
+.text-ink-muted {
+  color: var(--muted-foreground);
+}
+
+/* Ensure pastel text classes become deep, readable, high-contrast colors in light mode */
+:root:not(.dark) .text-indigo-400,
+:root:not(.dark) [class~="text-indigo-400"] {
+  color: #314466 !important;
+}
+
+:root:not(.dark) .text-violet-400,
+:root:not(.dark) [class~="text-violet-400"] {
+  color: #314466 !important;
+}
+
+:root:not(.dark) .text-amber-400,
+:root:not(.dark) [class~="text-amber-400"] {
+  color: #b45309 !important;
+}
+
+:root:not(.dark) .text-amber-300,
+:root:not(.dark) [class~="text-amber-300"] {
+  color: #92400e !important;
+}
+
+:root:not(.dark) .text-emerald-400,
+:root:not(.dark) [class~="text-emerald-400"] {
+  color: #047857 !important;
+}
+
+:root:not(.dark) .text-emerald-300,
+:root:not(.dark) [class~="text-emerald-300"] {
+  color: #065f46 !important;
+}
+
+:root:not(.dark) .text-purple-400,
+:root:not(.dark) [class~="text-purple-400"] {
+  color: #314466 !important;
+}
+
+:root:not(.dark) .text-purple-300,
+:root:not(.dark) [class~="text-purple-300"] {
+  color: #283752 !important;
+}
+
+:root:not(.dark) .text-blue-400,
+:root:not(.dark) [class~="text-blue-400"] {
+  color: #1d4ed8 !important;
+}
+
+:root:not(.dark) .text-blue-300,
+:root:not(.dark) [class~="text-blue-300"] {
+  color: #1e40af !important;
+}
+
+:root:not(.dark) .text-rose-400,
+:root:not(.dark) [class~="text-rose-400"] {
+  color: #be123c !important;
+}
+
+:root:not(.dark) .text-rose-300,
+:root:not(.dark) [class~="text-rose-300"] {
+  color: #9f1239 !important;
+}
+
+:root:not(.dark) .text-teal-400,
+:root:not(.dark) [class~="text-teal-400"] {
+  color: #0f766e !important;
+}
+
+:root:not(.dark) .text-cyan-400,
+:root:not(.dark) [class~="text-cyan-400"] {
+  color: #0e7490 !important;
+}
+
+:root:not(.dark) .text-slate-400,
+:root:not(.dark) [class~="text-slate-400"] {
+  color: #334155 !important;
+}
+
+:root:not(.dark) .text-slate-300,
+:root:not(.dark) [class~="text-slate-300"] {
+  color: #1e293b !important;
+}
+
+:root:not(.dark) .text-gray-400,
+:root:not(.dark) [class~="text-gray-400"] {
+  color: #374151 !important;
+}
+
+:root:not(.dark) .text-zinc-400,
+:root:not(.dark) [class~="text-zinc-400"] {
+  color: #3f3f46 !important;
+}
+
+:root:not(.dark) .text-neutral-400,
+:root:not(.dark) [class~="text-neutral-400"] {
+  color: #404040 !important;
+}
+
+:root:not(.dark) .text-yellow-400,
+:root:not(.dark) [class~="text-yellow-400"] {
+  color: #a16207 !important;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    color-scheme: var(--color-scheme, light);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /*
+   * Large displays (Smart Boards, QHD / 4K monitors): text and rem-based spacing grow smoothly with the
+   * CSS viewport width beyond 1920px — 100% at 1920px, ~108% at 2560px, 125% at 3840px and above.
+   * Desktops and laptops (≤1920px) are unchanged. Percentages keep the visitor's own browser font
+   * size and browser zoom working; nothing is scaled with transforms.
+   */
+  @media (min-width: 1921px) {
+    html {
+      font-size: clamp(100%, calc(100% + (100vw - 1920px) * 0.0021), 125%);
+    }
+  }
+
+  /* Very wide screens (QHD+ / 4K boards): the standard page width grows a little so content uses the
+     space instead of sitting in a narrow column, while text lines stay readable. */
+  @media (min-width: 2400px) {
+    :root {
+      --container-7xl: 96rem;
+    }
+  }
+
+  /*
+   * Touch screens (Smart Boards, tablets): comfortable finger / stylus targets for form controls.
+   * Mouse users keep the compact desktop sizes.
+   */
+  @media (pointer: coarse) {
+    select,
+    input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='hidden']):not([type='file']),
+    .ev-input {
+      min-height: 44px;
+    }
+    input[type='checkbox'],
+    input[type='radio'] {
+      min-width: 20px;
+      min-height: 20px;
+    }
+    .ev-btn {
+      min-height: 44px;
+    }
+    .ev-btn-icon {
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  /* Universal Input & Form Element Default Styling */
+  input, select, textarea {
+    color: var(--foreground);
+    background-color: var(--input);
+    border-color: var(--border-card);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: var(--input-placeholder);
+    opacity: 1;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+  }
+
+  /* Custom Clean Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-card);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   EDUVERSE DESIGN SYSTEM UTILITIES
+   Typography: page 28 · section 20 · card 16 · body 14 · meta 12
+   Spacing scale: 4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48
+   ══════════════════════════════════════════════════════════════ */
+@layer components {
+  .ev-page-title { font-size: 1.75rem; line-height: 2.25rem; font-weight: 600; letter-spacing: -0.01em; color: var(--foreground); }
+  .ev-section-title { font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; color: var(--foreground); }
+  .ev-card-title { font-size: 0.9375rem; line-height: 1.5rem; font-weight: 600; color: var(--foreground); }
+  .ev-body { font-size: 0.875rem; line-height: 1.375rem; color: var(--foreground); }
+  .ev-meta { font-size: 0.75rem; line-height: 1rem; color: var(--muted-foreground); }
+
+  .ev-card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .ev-input {
+    display: block; width: 100%; height: 2.5rem; padding: 0 0.75rem;
+    border-radius: 0.5rem; border: 1px solid var(--input-border);
+    background: var(--input); color: var(--input-foreground); font-size: 0.875rem;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .ev-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent); }
+  .ev-label { display: block; margin-bottom: 0.375rem; font-size: 0.8125rem; font-weight: 500; color: var(--foreground); }
+  .ev-field-error { margin-top: 0.375rem; font-size: 0.75rem; color: var(--error-text); }
+
+  /* Tables: clear header, comfortable rows, hover state */
+  .ev-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.8125rem; }
+  .ev-table thead th {
+    position: sticky; top: 0; background: var(--muted); color: var(--muted-foreground);
+    font-weight: 600; font-size: 0.75rem; text-align: left; padding: 0.625rem 0.875rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .ev-table tbody td { padding: 0.75rem 0.875rem; border-bottom: 1px solid var(--border); color: var(--foreground); transition: background-color var(--duration-fast) var(--ease-out); }
+  .ev-table tbody tr { transition: background-color var(--duration-fast) var(--ease-out); }
+  .ev-table tbody tr:hover td { background: var(--card-hover); }
+  .ev-table tbody tr:last-child td { border-bottom: 0; }
+
+  /* ─── Interactive Micro-Interaction Utilities ─── */
+  .ev-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out),
+                background-color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+    cursor: pointer;
+    user-select: none;
+  }
+  .ev-btn:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+  .ev-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .ev-btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    transition: background-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out),
+                transform var(--duration-fast) var(--ease-out);
+    cursor: pointer;
+  }
+  .ev-btn-icon:hover:not(:disabled) {
+    background-color: var(--muted);
+    color: var(--foreground);
+  }
+  .ev-btn-icon:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  .ev-card-interactive {
+    transition: transform var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out),
+                border-color var(--duration-normal) var(--ease-out);
+    cursor: pointer;
+  }
+  .ev-card-interactive:hover {
+    box-shadow: var(--shadow-elevated);
+    border-color: var(--border-card);
+  }
+  .ev-card-interactive:active {
+    transform: scale(0.995);
+  }
+}
+
+/* Page entry transition — subtle, fast */
+@keyframes ev-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* Opacity only: page wrappers contain modals, and any transform on them (even translateY(0), or a
+   paused first frame) makes the wrapper the containing block for position:fixed descendants, so the
+   modal overlay would be trapped inside the page instead of covering the screen. */
+.ev-fade-in { animation: ev-fade-in var(--duration-normal) var(--ease-out) backwards; }
+
+/* Dropdown Entrance Transition */
+@keyframes ev-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ev-dropdown-in { animation: ev-dropdown-in var(--duration-fast) var(--ease-out) backwards; }
+
+/* Modal Dialog Transition */
+@keyframes ev-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ev-modal-in { animation: ev-modal-in var(--duration-normal) var(--ease-out) both; }
+
+/* Side Drawer Transition */
+@keyframes ev-drawer-in {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.ev-drawer-in { animation: ev-drawer-in var(--duration-medium) var(--ease-out) backwards; }
+
+/* Subtle Stagger Utilities for Dashboard KPIs and Sections */
+.ev-stagger-1 { animation-delay: 0ms; }
+.ev-stagger-2 { animation-delay: 40ms; }
+.ev-stagger-3 { animation-delay: 80ms; }
+.ev-stagger-4 { animation-delay: 120ms; }
+
+/* Indeterminate progress (timetable generation) */
+@keyframes ev-progress {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+/* Refined, Calm Skeleton Shimmer */
+@keyframes ev-shimmer {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.85; }
+}
+.ev-skeleton {
+  animation: ev-shimmer 2s ease-in-out infinite;
+  background-color: var(--muted);
+  border-radius: 0.375rem;
+}
+
+/* Legacy panel utility (kept for compatibility, no heavy blur) */
+.glass-panel {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  transition: border-color var(--duration-normal) var(--ease-out);
+}
+
+.glass-card-hover {
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out);
+}
+.glass-card-hover:hover {
+  box-shadow: var(--shadow-elevated);
+  border-color: var(--border-card);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SMART BOARD & RESPONSIVE MULTI-DISPLAY DESIGN ENGINE
+   Supports: Mobile, Tablet, Desktop, Smart Boards (55"-135"+), 105" Ultra-Wide
+   Rule 1: Space-efficiency — never simply enlarge desktop UI to huge displays.
+   Rule 2: Comfortable touch targets (>=38px) with compact padding.
+   Rule 3: Content-driven height, responsive card grids, zero horizontal overflow.
+   ══════════════════════════════════════════════════════════════ */
+
+/* 1. Fluid container that allows wide Smart Boards to breathe without rigid 1280px restrictions */
+.sb-container {
+  width: 100%;
+  max-width: min(98vw, 2560px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(0.75rem, 1.4vw, 2rem);
+  padding-right: clamp(0.75rem, 1.4vw, 2rem);
+}
+
+/* 2. Responsive Auto-Fitting Card Grids (Fits more cards per row on larger displays) */
+.sb-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: clamp(0.625rem, 0.9vw, 1rem);
+}
+
+/* Dense card grid for subject lists, notes, quizzes, and simulations */
+.sb-grid-dense {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: clamp(0.5rem, 0.75vw, 0.875rem);
+}
+
+/* 3. Horizontal Stats Summary Strip (single sleek row on wide boards) */
+.sb-grid-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+  gap: clamp(0.5rem, 0.8vw, 0.875rem);
+}
+
+/* 4. Compact Touch-Friendly Buttons */
+.sb-touch-btn {
+  min-height: 38px;
+  min-width: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+/* 5. Safe Area Margins for Smart Board bezels */
+.sb-safe-area {
+  padding-left: env(safe-area-inset-left, clamp(0.5rem, 1vw, 1.25rem));
+  padding-right: env(safe-area-inset-right, clamp(0.5rem, 1vw, 1.25rem));
+  padding-bottom: env(safe-area-inset-bottom, clamp(0.5rem, 1vw, 1.25rem));
+}
+
+/* 6. Viewport-bounded Dialogs & Modals */
+.sb-dialog-content {
+  max-height: min(88vh, 850px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* 7. 105" Ultra-Wide Classroom Display Optimization (21:9 / 32:9 Aspect Ratios >= 2:1) */
+@media (min-width: 2000px) and (min-aspect-ratio: 2/1) {
+  .sb-container {
+    max-width: min(96vw, 3200px);
+  }
+  .sb-grid-cards {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 1.125rem;
+  }
+  .sb-grid-stats {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+
+/* ───────────── Public home & sign-in pages ───────────── */
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.55rem 1rem;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25rem;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+.home-btn:focus-visible { outline: 2px solid #059669; outline-offset: 2px; }
+.home-btn svg { transition: transform 180ms ease; }
+.home-btn:hover svg { transform: translateX(2px); }
+.home-btn-lg { padding: 0.75rem 1.25rem; font-size: 15px; }
+.home-btn { transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 200ms ease, transform 180ms ease; }
+.home-btn:hover { transform: translateY(-1px); }
+.home-btn:active { transform: translateY(0) scale(0.98); }
+.home-btn-primary { background: linear-gradient(135deg, #059669 0%, #047857 60%, #065f46 100%); color: #fff; box-shadow: 0 1px 2px rgba(6, 78, 59, 0.25); }
+.home-btn-primary:hover { background: linear-gradient(135deg, #047857 0%, #065f46 60%, #064e3b 100%); box-shadow: 0 10px 24px -10px rgba(5, 150, 105, 0.6); }
+.home-btn-outline { background: #fff; color: #0F1B2D; border-color: #D3DBE6; }
+.home-btn-outline:hover { border-color: #6EE7B7; background: #F3FBF7; color: #065F46; }
+.home-btn-ghost { color: #3A4657; }
+.home-btn-ghost:hover { color: #0F1B2D; background: #F2F5F9; }
+.home-btn-light { background: #fff; color: #064E3B; }
+.home-btn-light:hover { background: #ECFDF5; box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.45); }
+.home-btn-on-dark { color: #fff; border-color: rgba(255, 255, 255, 0.35); }
+.home-btn-on-dark:hover { border-color: #fff; background: rgba(255, 255, 255, 0.08); }
+.home-btn-light:focus-visible, .home-btn-on-dark:focus-visible { outline-color: #fff; }
+
+/* Underline that grows from the left on hover */
+.home-link {
+  position: relative;
+  transition: color 160ms ease;
+}
+.home-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+}
+.home-link:hover::after, .home-link:focus-visible::after { transform: scaleX(1); }
+
+/* Page-load entrance (hero) and scroll reveal: opacity + a short rise, ending with no transform */
+@keyframes home-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.home-rise { animation: home-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.home-fade { animation: ev-fade-in 260ms ease-out backwards; }
+.home-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1), transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.home-reveal.is-shown { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .home-reveal { opacity: 1; transform: none; transition: none; }
+  .home-rise, .home-fade { animation: none; }
+  .home-link::after { transition: none; }
+}
+@media print {
+  .home-reveal { opacity: 1; transform: none; }
+}
+.signin-rise { animation: home-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+@media (prefers-reduced-motion: reduce) { .signin-rise { animation: none; } }
+
+/* Progress ring: the arc draws in once */
+@keyframes ev-ring-draw { from { stroke-dashoffset: var(--ring-c); } }
+.ev-ring-arc { animation: ev-ring-draw 900ms cubic-bezier(0.22, 1, 0.36, 1) backwards; transition: stroke-dashoffset 600ms ease; }
+@media (prefers-reduced-motion: reduce) { .ev-ring-arc { animation: none; transition: none; } }
+
+/* Inputs: hover + invalid states (focus ring is defined with .ev-input) */
+.ev-input { transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease; }
+.ev-input:hover:not(:focus):not(:disabled) { border-color: color-mix(in srgb, var(--foreground) 28%, var(--input-border)); }
+.ev-input[aria-invalid='true'] { border-color: var(--error); }
+.ev-input[aria-invalid='true']:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--error) 18%, transparent); }
+
+/* ── Home: hero background, floating cards, CTA glow, cards, timeline ── */
+.home-hero {
+  background:
+    radial-gradient(55% 60% at 85% 20%, rgba(16, 185, 129, 0.14), transparent 60%),
+    radial-gradient(45% 55% at 0% 0%, rgba(14, 116, 144, 0.10), transparent 60%),
+    linear-gradient(180deg, #F6FBF8 0%, #FFFFFF 85%);
+  background-size: 140% 140%, 140% 140%, 100% 100%;
+  animation: home-bg-drift 22s ease-in-out infinite alternate;
+}
+@keyframes home-bg-drift {
+  from { background-position: 0% 0%, 0% 0%, 0 0; }
+  to { background-position: 30% 20%, 15% 25%, 0 0; }
+}
+.home-hero-grid {
+  background-image: linear-gradient(to right, rgba(11, 18, 32, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(11, 18, 32, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(70% 60% at 60% 30%, black, transparent 75%);
+}
+@keyframes home-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.home-float { animation: home-float 6s ease-in-out infinite; }
+@keyframes home-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+.home-pulse { animation: home-pulse 2.2s ease-in-out infinite; }
+@keyframes home-bar { from { transform: scaleY(0); } }
+.home-bar { transform-origin: bottom; animation: home-bar 700ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+@keyframes home-draw { from { stroke-dasharray: 1; stroke-dashoffset: 1; } to { stroke-dasharray: 1; stroke-dashoffset: 0; } }
+.home-draw { animation: home-draw 1400ms ease-out 300ms backwards; }
+
+/* Primary CTA: soft breathing glow ring */
+.home-btn-glow { position: relative; }
+.home-btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 0.65rem;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.45);
+  animation: home-glow 2.8s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes home-glow { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.40); } 70%, 100% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); } }
+
+/* Cards that lift on hover (public pages only — no modals live inside them) */
+.home-card { transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms ease, border-color 280ms ease; }
+.home-card:hover { transform: translateY(-4px); border-color: #A7F3D0; box-shadow: 0 22px 44px -26px rgba(6, 78, 59, 0.35); }
+
+/* Gradient border that appears on hover */
+.home-gradient-border { border: 1px solid #E3E8EF; }
+.home-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #34d399, #0e7490 60%, transparent);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+.home-gradient-border:hover::before { opacity: 1; }
+
+/* Role chips / programme cards entering */
+@keyframes home-chip-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.home-chip { animation: home-chip-in 360ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+
+/* Timeline: the line fills, then each step appears */
+.home-timeline-fill { height: 0; transition: height 1200ms cubic-bezier(0.22, 1, 0.36, 1) 150ms; }
+.home-timeline.is-shown .home-timeline-fill { height: 100%; }
+@media (min-width: 768px) {
+  .home-timeline-fill { height: 1px; width: 0; transition: width 1200ms cubic-bezier(0.22, 1, 0.36, 1) 150ms; }
+  .home-timeline.is-shown .home-timeline-fill { width: 100%; height: 1px; }
+}
+.home-step { opacity: 0; transform: translateY(10px); transition: opacity 500ms ease, transform 500ms cubic-bezier(0.22, 1, 0.36, 1); }
+.home-timeline.is-shown .home-step { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero, .home-float, .home-pulse, .home-bar, .home-draw, .home-btn-glow::after, .home-chip { animation: none !important; }
+  .home-card, .home-card:hover, .home-btn:hover { transform: none; }
+  .home-timeline-fill { transition: none; height: 100%; }
+  @media (min-width: 768px) { .home-timeline-fill { width: 100%; height: 1px; } }
+  .home-step { opacity: 1; transform: none; transition: none; }
+}
+
+/* ── Sign-in brand panel ── */
+.signin-brand {
+  background:
+    radial-gradient(70% 55% at 100% 0%, rgba(52, 211, 153, 0.22), transparent 60%),
+    radial-gradient(60% 50% at 0% 100%, rgba(14, 116, 144, 0.28), transparent 60%),
+    linear-gradient(160deg, #064E3B 0%, #052E25 55%, #0B1220 100%);
+}
+.signin-grid {
+  opacity: 0.08;
+  background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+.signin-float { animation: home-float 6s ease-in-out infinite; }
+.signin-live { animation: home-pulse 2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .signin-float, .signin-live { animation: none; } }
+
+/* Notification bell: brief ring on a new notification, badge pop */
+@keyframes ev-bell-ring { 0%, 100% { transform: rotate(0); } 15% { transform: rotate(14deg); } 30% { transform: rotate(-12deg); } 45% { transform: rotate(8deg); } 60% { transform: rotate(-5deg); } 75% { transform: rotate(2deg); } }
+.ev-bell-ring { transform-origin: 50% 10%; animation: ev-bell-ring 900ms ease-in-out; }
+@keyframes ev-badge-pop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.ev-badge-pop { animation: ev-badge-pop 260ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@media (prefers-reduced-motion: reduce) { .ev-bell-ring, .ev-badge-pop { animation: none; } }
+
+/* Dashboard welcome banner (shared by every role dashboard) */
+.ev-banner {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background:
+    radial-gradient(60% 120% at 100% 0%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 65%),
+    radial-gradient(40% 90% at 0% 100%, color-mix(in srgb, var(--info) 8%, transparent), transparent 60%),
+    var(--card);
+  box-shadow: var(--shadow-soft);
+}
+@media (min-width: 640px) { .ev-banner { padding: 1.5rem 1.75rem; } }
+.ev-banner h1 { letter-spacing: -0.02em; }
+
+/* "Live" dot for the class in progress */
+.ev-live-dot { position: relative; display: inline-block; width: 7px; height: 7px; border-radius: 9999px; background: var(--success); }
+.ev-live-dot::after { content: ''; position: absolute; inset: -3px; border-radius: inherit; border: 2px solid var(--success); opacity: 0; animation: ev-live 1.8s ease-out infinite; }
+@keyframes ev-live { 0% { transform: scale(0.6); opacity: 0.7; } 100% { transform: scale(1.6); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .ev-live-dot::after { animation: none; } }

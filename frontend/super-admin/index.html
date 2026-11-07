@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nepal Digital Education Ecosystem — Super Admin Portal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       SIDEBAR
+       ══════════════════════════════════════════════ -->
+  <aside id="sidebar">
+    <div class="brand-section">
+      <div class="brand-icon">🇳🇵</div>
+      <div class="brand-text">
+        <h1>Nepal EduVerse</h1>
+        <span>SUPER ADMIN</span>
+      </div>
+    </div>
+
+    <div class="nav-container">
+      <div class="nav-section-title">Core Platform</div>
+      <div class="nav-item active" data-view="overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Overview</span>
+      </div>
+
+      <div class="nav-section-title">Institutions</div>
+      <div class="nav-item" data-view="institutions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v4M12 14v4M16 14v4"/></svg>
+        <span>Institutions</span>
+        <span class="nav-badge" id="badge-inst-count">0</span>
+      </div>
+      <div class="nav-item" data-view="bulk-import">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        <span>Bulk Import</span>
+      </div>
+      <div class="nav-item" data-view="administrators">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
+        <span>Administrators</span>
+      </div>
+      <div class="nav-item" data-view="users">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Users Directory</span>
+      </div>
+
+      <div class="nav-section-title">Academic & Content</div>
+      <div class="nav-item" data-view="curriculum">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        <span>Curriculum (1–12)</span>
+      </div>
+      <div class="nav-item" data-view="textbooks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        <span>CDC Textbooks</span>
+      </div>
+      <div class="nav-item" data-view="simulations">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 2v7.31M14 9.3V1.99M8.5 2h7M14 9.3a6.5 6.5 0 11-4 0"/></svg>
+        <span>Simulations</span>
+      </div>
+      <div class="nav-item" data-view="activities">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span>Activities</span>
+      </div>
+      <div class="nav-item" data-view="subscriptions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        <span>Subscriptions</span>
+      </div>
+
+      <div class="nav-section-title">System & Governance</div>
+      <div class="nav-item" data-view="analytics">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Analytics</span>
+      </div>
+      <div class="nav-item" data-view="announcements">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 17H2a3 3 0 003-3V9a7 7 0 0114 0v5a3 3 0 003 3zm-8.27 4a2 2 0 01-3.46 0"/></svg>
+        <span>Announcements</span>
+      </div>
+      <div class="nav-item" data-view="audit-logs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span>Audit Logs</span>
+      </div>
+      <div class="nav-item" data-view="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Settings</span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-avatar" id="current-user-avatar">SA</div>
+      <div class="user-info">
+        <div class="user-name" id="current-user-name">Super Admin</div>
+        <div class="user-role">Platform Central</div>
+      </div>
+      <button class="btn-icon-logout" id="btn-logout" title="Sign Out">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════════════
+       MAIN WRAPPER
+       ══════════════════════════════════════════════ -->
+  <main id="main-wrapper">
+    <header id="topbar">
+      <div class="topbar-left">
+        <div>
+          <h2 class="page-title" id="page-title">Platform Overview</h2>
+          <p class="page-subtitle" id="page-subtitle">Unified nationwide education administration</p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span class="status-badge active"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#10b981;"></span> Live System</span>
+        <a href="/smartboard/index.html" target="_blank" class="smartboard-launcher-btn" title="Open Smart Board Environment">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Launch Smart Board
+        </a>
+      </div>
+    </header>
+
+    <div class="content-body">
+
+      <!-- ════════════════ VIEW 1: OVERVIEW ════════════════ -->
+      <section id="view-overview" class="view-panel">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Total Institutions</span>
+              <div class="stat-icon accent-blue">🏫</div>
+            </div>
+            <div class="stat-value" id="stat-total-inst">0</div>
+            <div class="stat-sub"><span id="stat-active-inst" class="positive">0</span> active in Nepal</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Schools & Colleges</span>
+              <div class="stat-icon accent-purple">🏛️</div>
+            </div>
+            <div class="stat-value" id="stat-schools-colleges">0 / 0</div>
+            <div class="stat-sub">Basic & Secondary / Higher</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Total Teachers</span>
+              <div class="stat-icon accent-green">👨‍🏫</div>
+            </div>
+            <div class="stat-value" id="stat-teachers">0</div>
+            <div class="stat-sub">Across all classes & subjects</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Enrolled Students</span>
+              <div class="stat-icon accent-indigo">🎒</div>
+            </div>
+            <div class="stat-value" id="stat-students">0</div>
+            <div class="stat-sub">Active registered learners</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Active Subscriptions</span>
+              <div class="stat-icon accent-amber">💳</div>
+            </div>
+            <div class="stat-value" id="stat-subscriptions">0</div>
+            <div class="stat-sub"><span id="stat-expired-sub" style="color:var(--danger)">0</span> expired</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">CDC Textbooks</span>
+              <div class="stat-icon accent-rose">📚</div>
+            </div>
+            <div class="stat-value" id="stat-textbooks">0</div>
+            <div class="stat-sub">Classes 1–12 (Nepali & English)</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">STEM Simulations</span>
+              <div class="stat-icon accent-blue">🔬</div>
+            </div>
+            <div class="stat-value" id="stat-simulations">26</div>
+            <div class="stat-sub">Physics, Chemistry, Circuits, Math</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Smart Board Usage</span>
+              <div class="stat-icon accent-green">📋</div>
+            </div>
+            <div class="stat-value" id="stat-shared-notes">0</div>
+            <div class="stat-sub">Board notes shared with classes</div>
+          </div>
+        </div>
+
+        <!-- CHARTS SECTION -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3 class="chart-title">Ecosystem Growth Trends</h3>
+              <span style="font-size:12px;color:var(--text-muted)">Monthly Registrations</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="chart-growth"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3 class="chart-title">Package Distribution</h3>
+              <span style="font-size:12px;color:var(--text-muted)">Active Subscriptions</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="chart-packages"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3 class="chart-title">Province-Wise Institution Distribution</h3>
+            </div>
+            <div class="chart-container">
+              <canvas id="chart-provinces"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3 class="chart-title">Institution Types Breakdown</h3>
+            </div>
+            <div class="chart-container">
+              <canvas id="chart-types"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 2: INSTITUTIONS ════════════════ -->
+      <section id="view-institutions" class="view-panel" style="display:none;">
+        <div class="table-card">
+          <div class="filter-bar">
+            <div class="filter-inputs">
+              <input type="text" id="search-institutions" class="input-search" placeholder="Search by name, EMIS code, district...">
+              
+              <select id="filter-inst-province" class="select-filter">
+                <option value="ALL">All Provinces</option>
+                <option value="Koshi Province">Koshi Province</option>
+                <option value="Madhesh Province">Madhesh Province</option>
+                <option value="Bagmati Province">Bagmati Province</option>
+                <option value="Gandaki Province">Gandaki Province</option>
+                <option value="Lumbini Province">Lumbini Province</option>
+                <option value="Karnali Province">Karnali Province</option>
+                <option value="Sudurpashchim Province">Sudurpashchim Province</option>
+              </select>
+
+              <select id="filter-inst-type" class="select-filter">
+                <option value="ALL">All Types</option>
+                <option value="COMMUNITY">Community (Govt)</option>
+                <option value="INSTITUTIONAL">Institutional (Private)</option>
+                <option value="RELIGIOUS">Religious</option>
+                <option value="TECHNICAL">Technical & Vocational</option>
+              </select>
+
+              <select id="filter-inst-status" class="select-filter">
+                <option value="ALL">All Status</option>
+                <option value="ACTIVE">Active</option>
+                <option value="SUSPENDED">Suspended</option>
+                <option value="PENDING">Pending</option>
+              </select>
+            </div>
+
+            <div style="display:flex;gap:10px;">
+              <button class="btn-primary" id="btn-create-school">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Create School/College
+              </button>
+            </div>
+          </div>
+
+          <div class="data-table-wrapper">
+            <table class="data-table" id="table-institutions">
+              <thead>
+                <tr>
+                  <th>Code / EMIS</th>
+                  <th>Institution Name</th>
+                  <th>Type</th>
+                  <th>Province & District</th>
+                  <th>Active Package</th>
+                  <th>Admin / Contact</th>
+                  <th>Status</th>
+                  <th style="text-align:right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-institutions">
+                <!-- Loaded dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-pagination">
+            <span id="inst-pagination-text">Showing 1 to 10 of 0 entries</span>
+            <div class="page-controls">
+              <button class="page-btn" id="btn-inst-prev">Previous</button>
+              <button class="page-btn" id="btn-inst-next">Next</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 3: BULK IMPORT ════════════════ -->
+      <section id="view-bulk-import" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding: 24px; margin-bottom: 20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <div>
+              <h3 style="font-size:16px;font-weight:700;">Bulk Institution Onboarding</h3>
+              <p style="font-size:13px;color:var(--text-muted);margin-top:2px;">Upload CSV or Excel containing hundreds or thousands of Nepal schools and colleges.</p>
+            </div>
+            <button class="btn-outline" id="btn-download-template">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Download CSV Template
+            </button>
+          </div>
+
+          <!-- Drag and drop zone -->
+          <div id="import-dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 40px; text-align: center; background: #fafafa; cursor: pointer; transition: all 0.2s;">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#64748b" stroke-width="1.6" style="margin-bottom:12px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+            <h4 style="font-size:15px;font-weight:600;margin-bottom:4px;">Drag and drop school CSV/Excel file here</h4>
+            <p style="font-size:12.5px;color:var(--text-muted);">or click to browse your computer</p>
+            <input type="file" id="file-bulk-import" accept=".csv" style="display:none;">
+          </div>
+        </div>
+
+        <!-- Preview & Validation Results -->
+        <div class="table-card" id="import-preview-card" style="display:none;">
+          <div class="filter-bar" style="background:#f8fafc;">
+            <div>
+              <h4 style="font-size:14px;font-weight:700;" id="preview-summary-title">Validation Preview (0 records)</h4>
+              <span style="font-size:12px;color:var(--text-muted);" id="preview-summary-sub">0 valid, 0 errors, 0 duplicates</span>
+            </div>
+            <button class="btn-primary" id="btn-execute-import" style="background:#10b981;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Execute Import Now
+            </button>
+          </div>
+
+          <div class="data-table-wrapper" style="max-height: 400px; overflow-y:auto;">
+            <table class="data-table" id="table-import-preview">
+              <thead>
+                <tr>
+                  <th>Row</th>
+                  <th>EMIS Code</th>
+                  <th>Institution Name</th>
+                  <th>Province</th>
+                  <th>District & Local Level</th>
+                  <th>Validation Status</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-import-preview">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 4: ADMINISTRATORS ════════════════ -->
+      <section id="view-administrators" class="view-panel" style="display:none;">
+        <div class="table-card">
+          <div class="filter-bar">
+            <div class="filter-inputs">
+              <input type="text" id="search-admins" class="input-search" placeholder="Search administrators by name or username...">
+            </div>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Administrator</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th>Institution Associated</th>
+                  <th>Email / Phone</th>
+                  <th>Status</th>
+                  <th style="text-align:right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-administrators"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 5: USERS DIRECTORY ════════════════ -->
+      <section id="view-users" class="view-panel" style="display:none;">
+        <div class="table-card">
+          <div class="filter-bar">
+            <div class="filter-inputs">
+              <input type="text" id="search-users" class="input-search" placeholder="Search users by name, username...">
+              <select id="filter-user-role" class="select-filter">
+                <option value="ALL">All Roles</option>
+                <option value="SUPER_ADMIN">Super Admin</option>
+                <option value="SCHOOL_ADMIN">School Admin</option>
+                <option value="PRINCIPAL">Principal</option>
+                <option value="TEACHER">Teacher</option>
+                <option value="STUDENT">Student</option>
+              </select>
+              <select id="filter-user-status" class="select-filter">
+                <option value="ALL">All Status</option>
+                <option value="ACTIVE">Active</option>
+                <option value="INACTIVE">Inactive</option>
+              </select>
+            </div>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Full Name</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th>Institution</th>
+                  <th>Privacy Status</th>
+                  <th>Account Status</th>
+                  <th style="text-align:right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-users"></tbody>
+            </table>
+          </div>
+          <div class="table-pagination">
+            <span id="user-pagination-text">Showing entries</span>
+            <div class="page-controls">
+              <button class="page-btn" id="btn-user-prev">Previous</button>
+              <button class="page-btn" id="btn-user-next">Next</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 6: CURRICULUM (CLASSES 1-12) ════════════════ -->
+      <section id="view-curriculum" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding: 20px;">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">Nepal Curriculum Development Centre (CDC) Framework</h3>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">Centralized curriculum structure covering Basic Level (Classes 1–8) and Secondary Level (Classes 9–12).</p>
+          <div id="curriculum-classes-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;">
+            <!-- Generated dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 7: TEXTBOOKS ════════════════ -->
+      <section id="view-textbooks" class="view-panel" style="display:none;">
+        <div class="table-card">
+          <div class="filter-bar">
+            <h3 style="font-size:15px;font-weight:700;">Nepal Official CDC Textbooks Repository</h3>
+            <span class="status-badge active">Classes 1–12 Complete</span>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Grade</th>
+                  <th>Textbook Title</th>
+                  <th>Medium</th>
+                  <th>Edition</th>
+                  <th>File Reference</th>
+                  <th style="text-align:right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-textbooks"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 8: SIMULATIONS ════════════════ -->
+      <section id="view-simulations" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding: 20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <div>
+              <h3 style="font-size:16px;font-weight:700;">Central Interactive Simulation Library</h3>
+              <p style="font-size:13px;color:var(--text-muted);">26+ STEM laboratories integrated directly with the Smart Board canvas.</p>
+            </div>
+          </div>
+          <div id="simulations-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:16px;">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 9: ACTIVITIES ════════════════ -->
+      <section id="view-activities" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding:24px;">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">Classroom Interactive Learning Activities & Games</h3>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">Trivia, Memory Match, Quick Draw, Word Builder, Sequence Match, and Spot Difference.</p>
+          <div id="activities-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;"></div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 10: SUBSCRIPTIONS ════════════════ -->
+      <section id="view-subscriptions" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding:24px;">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:14px;">Platform Subscription Packages</h3>
+          <div id="packages-cards-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:18px;">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 11: ANALYTICS ════════════════ -->
+      <section id="view-analytics" class="view-panel" style="display:none;">
+        <div class="charts-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="chart-card">
+            <h3 class="chart-title">Resource Utilization Metrics</h3>
+            <div class="chart-container" style="height:300px;"><canvas id="chart-analytics-res"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <h3 class="chart-title">Active Class Distribution Across Institutions</h3>
+            <div class="chart-container" style="height:300px;"><canvas id="chart-analytics-grades"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 12: ANNOUNCEMENTS ════════════════ -->
+      <section id="view-announcements" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+            <h3 style="font-size:16px;font-weight:700;">System-Wide Platform Announcements</h3>
+            <button class="btn-primary" id="btn-create-announcement">+ New Announcement</button>
+          </div>
+          <div id="announcements-list" style="display:flex;flex-direction:column;gap:12px;"></div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 13: AUDIT LOGS ════════════════ -->
+      <section id="view-audit-logs" class="view-panel" style="display:none;">
+        <div class="table-card">
+          <div class="filter-bar">
+            <h3 style="font-size:15px;font-weight:700;">Platform Security & Administrative Audit Trail</h3>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Action</th>
+                  <th>Entity</th>
+                  <th>Operator</th>
+                  <th>IP Address</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-audit-logs"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════ VIEW 14: SETTINGS ════════════════ -->
+      <section id="view-settings" class="view-panel" style="display:none;">
+        <div class="table-card" style="padding:24px; max-width:700px;">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">Platform Global Configurations</h3>
+          <div class="form-group" style="margin-bottom:14px;">
+            <label class="form-label">Platform Name</label>
+            <input type="text" class="form-input" value="Nepal Digital Education Ecosystem" readonly>
+          </div>
+          <div class="form-group" style="margin-bottom:14px;">
+            <label class="form-label">Academic Framework Standard</label>
+            <input type="text" class="form-input" value="Curriculum Development Centre (CDC), Sanothimi, Bhaktapur" readonly>
+          </div>
+          <div class="form-group" style="margin-bottom:14px;">
+            <label class="form-label">Default Academic Year Format</label>
+            <input type="text" class="form-input" value="Bikram Sambat (2081/2082 B.S.)" readonly>
+          </div>
+          <div class="form-group" style="margin-bottom:14px;">
+            <label class="form-label">Central Smart Board Integration Status</label>
+            <span class="status-badge active" style="width:fit-content;">Connected to PiyushDhara EduVerse Smart Board</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ════════════════ MODALS ════════════════ -->
+
+  <!-- Modal: Create / Edit Institution -->
+  <div class="modal-overlay" id="modal-institution">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-inst-title">Register New Institution</h3>
+        <button class="modal-close" onclick="App.closeModals()">&times;</button>
+      </div>
+      <form id="form-institution">
+        <div class="modal-body">
+          <input type="hidden" id="inst-id">
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label class="form-label">Institution Name (English) *</label>
+              <input type="text" id="inst-name" class="form-input" required placeholder="e.g. Shree Janasewa Secondary School">
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Institution Name (Nepali)</label>
+              <input type="text" id="inst-name-nepali" class="form-input" placeholder="e.g. श्री जनसेवा माध्यमिक विद्यालय">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Institution Type *</label>
+              <select id="inst-type" class="form-select" required>
+                <option value="COMMUNITY">Community (Government)</option>
+                <option value="INSTITUTIONAL">Institutional (Private)</option>
+                <option value="RELIGIOUS">Religious (Gumba/Madrasa)</option>
+                <option value="TECHNICAL">Technical & Vocational College</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">EMIS Code (Optional)</label>
+              <input type="text" id="inst-emis" class="form-input" placeholder="e.g. 270010001 (auto-generates if empty)">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Province *</label>
+              <select id="inst-province" class="form-select" required>
+                <option value="Bagmati Province">Bagmati Province</option>
+                <option value="Gandaki Province">Gandaki Province</option>
+                <option value="Koshi Province">Koshi Province</option>
+                <option value="Madhesh Province">Madhesh Province</option>
+                <option value="Lumbini Province">Lumbini Province</option>
+                <option value="Karnali Province">Karnali Province</option>
+                <option value="Sudurpashchim Province">Sudurpashchim Province</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">District *</label>
+              <input type="text" id="inst-district" class="form-input" required placeholder="e.g. Kathmandu">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Municipality / Local Level *</label>
+              <input type="text" id="inst-local-level" class="form-input" required placeholder="e.g. Kathmandu Metropolitan City">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Ward Number</label>
+              <input type="number" id="inst-ward" class="form-input" placeholder="e.g. 4">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Email</label>
+              <input type="email" id="inst-email" class="form-input" placeholder="school@edu.np">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Phone</label>
+              <input type="text" id="inst-phone" class="form-input" placeholder="01-4455667">
+            </div>
+
+            <!-- Initial Administrator Provisioning -->
+            <div class="form-group full-width" id="wrap-admin-provisioning" style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);">
+              <h4 style="font-size:13px;font-weight:700;margin-bottom:8px;color:#2563eb;">Provision School Administrator Account</h4>
+            </div>
+            <div class="form-group" id="wrap-admin-user">
+              <label class="form-label">Admin Username</label>
+              <input type="text" id="inst-admin-username" class="form-input" placeholder="admin_schoolname">
+            </div>
+            <div class="form-group" id="wrap-admin-pass">
+              <label class="form-label">Admin Password</label>
+              <input type="password" id="inst-admin-password" class="form-input" placeholder="Nepal@1234">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline" onclick="App.closeModals()">Cancel</button>
+          <button type="submit" class="btn-primary" id="btn-save-institution">Save Institution</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Provision Administrator -->
+  <div class="modal-overlay" id="modal-provision-admin">
+    <div class="modal-box" style="max-width:480px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Provision Administrator</h3>
+        <button class="modal-close" onclick="App.closeModals()">&times;</button>
+      </div>
+      <form id="form-provision-admin">
+        <div class="modal-body">
+          <input type="hidden" id="prov-inst-id">
+          <div class="form-group" style="margin-bottom:12px;">
+            <label class="form-label">Institution</label>
+            <input type="text" id="prov-inst-name" class="form-input" readonly>
+          </div>
+          <div class="form-group" style="margin-bottom:12px;">
+            <label class="form-label">Full Name *</label>
+            <input type="text" id="prov-fullname" class="form-input" required placeholder="Administrator Full Name">
+          </div>
+          <div class="form-group" style="margin-bottom:12px;">
+            <label class="form-label">Username *</label>
+            <input type="text" id="prov-username" class="form-input" required placeholder="admin_username">
+          </div>
+          <div class="form-group" style="margin-bottom:12px;">
+            <label class="form-label">Email Address</label>
+            <input type="email" id="prov-email" class="form-input" placeholder="admin@school.edu.np">
+          </div>
+          <div class="form-group" style="margin-bottom:12px;">
+            <label class="form-label">Password (Leave blank for auto-generate)</label>
+            <input type="password" id="prov-password" class="form-input" placeholder="••••••••">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline" onclick="App.closeModals()">Cancel</button>
+          <button type="submit" class="btn-primary">Provision Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Assign Subscription -->
+  <div class="modal-overlay" id="modal-subscription">
+    <div class="modal-box" style="max-width:480px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Manage Institution Subscription</h3>
+        <button class="modal-close" onclick="App.closeModals()">&times;</button>
+      </div>
+      <form id="form-subscription">
+        <div class="modal-body">
+          <input type="hidden" id="sub-inst-id">
+          <div class="form-group" style="margin-bottom:12px;">
+            <label class="form-label">Institution</label>
+            <input type="text" id="sub-inst-name" class="form-input" readonly>
+          </div>
+          <div class="form-group" style="margin-bottom:12px;">
+            <label class="form-label">Select Package *</label>
+            <select id="sub-package-id" class="form-select" required>
+              <!-- Loaded dynamically -->
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:12px;">
+            <label class="form-label">Duration (Months)</label>
+            <select id="sub-duration" class="form-select">
+              <option value="12">12 Months (1 Year)</option>
+              <option value="24">24 Months (2 Years)</option>
+              <option value="36">36 Months (3 Years)</option>
+              <option value="6">6 Months</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline" onclick="App.closeModals()">Cancel</button>
+          <button type="submit" class="btn-primary">Assign Package</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
