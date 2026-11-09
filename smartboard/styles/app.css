@@ -11905,3 +11905,17 @@ body.controls-dock-right #smartboard-ai-btn { right: auto !important; left: 76px
 
 /* Local board: no cloud, so the platform cloud-save pill (title / Save / Notes) is not shown */
 body.sb-local #pd-cloud-sync-pill { display: none !important; }
+
+/* Shapes menu: "Find area of a drawn shape" (moved from the sidebar) */
+.fsc-area-btn { display: flex; align-items: center; gap: 10px; width: calc(100% - 24px); margin: 8px 12px 4px; padding: 9px 12px; border-radius: 10px; cursor: pointer; text-align: left;
+  color: #0e3e3b; background: rgba(20, 184, 166, .10); border: 1px solid rgba(20, 184, 166, .35); font-family: inherit; transition: background .15s, border-color .15s; }
+.fsc-area-btn:hover { background: rgba(20, 184, 166, .20); border-color: rgba(20, 184, 166, .65); }
+.fsc-area-btn svg { width: 22px; height: 22px; flex: none; color: #0f766e; }
+.fsc-area-text { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; }
+.fsc-area-text b { font-size: 12.5px; font-weight: 700; color: #0e3e3b; }
+.fsc-area-text small { font-size: 11px; color: #4b605b; }
+.fsc-area-btn kbd { font: 700 10px/1 inherit; padding: 3px 6px; border-radius: 5px; background: rgba(15, 23, 42, .06); color: #4b605b; border: 1px solid rgba(15, 23, 42, .15); }
+
+/* Insert (+) menu: stays inside the screen and scrolls when it has more options than fit */
+.flyout-insert-card { top: 0; transform: none; max-height: calc(100vh - var(--topbar, 48px) - var(--status, 28px) - 40px); }
+.flyout-insert-card .fic-options { overflow-y: auto; min-height: 0; scrollbar-width: thin; }

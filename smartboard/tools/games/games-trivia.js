@@ -120,7 +120,7 @@
         chips('Sound', [{ value: true, label: 'On' }, { value: false, label: 'Off' }], cfg.sound, (v) => { cfg.sound = v; saveCfg(); })
       ]);
       ctx.body.replaceChildren(h('div', { class: 'gm-setup gm-setup-wide' }, [
-        h('h3', { text: '🏆 Trivia Board' }),
+        h('h3', { text: 'Trivia Board' }),
         h('p', { text: 'Teams take turns choosing a category and a points value — answer before the timer runs out!' }),
         h('div', { class: 'gm-setup-2col' }, [left, right]),
         cfg.source === 'sample' ? h('p', { class: 'gm-sample', text: C.LABEL + '.' }) : null,
@@ -200,7 +200,7 @@
 
       ctx.body.replaceChildren(h('div', { class: 'gm-editor' }, [
         h('div', { class: 'gm-editor-head' }, [
-          h('h3', { text: '✎ My trivia questions' }),
+          h('h3', { text: 'My trivia questions' }),
           h('div', { class: 'gm-row' }, [
             addCat,
             h('button', { type: 'button', class: 'gm-btn gm-ghost', text: '📂 Import', on: { click: () => fileIn.click() } }),

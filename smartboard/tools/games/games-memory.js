@@ -133,7 +133,7 @@
         chips('Sound', [{ value: true, label: 'On' }, { value: false, label: 'Off' }], cfg.sound, (v) => { cfg.sound = v; saveCfg(); })
       ]);
       ctx.body.replaceChildren(h('div', { class: 'gm-setup gm-setup-wide' }, [
-        h('h3', { text: '🃏 Memory Match' }),
+        h('h3', { text: 'Memory Match' }),
         h('p', { text: 'Flip two cards at a time and match every term with its meaning — alone, as a class, or team against team.' }),
         h('div', { class: 'gm-setup-2col' }, [left, right]),
         cfg.source === 'sample' ? h('p', { class: 'gm-sample', text: C.LABEL + '.' }) : null,
@@ -196,7 +196,7 @@
       }
       ctx.body.replaceChildren(h('div', { class: 'gm-editor' }, [
         h('div', { class: 'gm-editor-head' }, [
-          h('h3', { text: '✎ My memory pairs' }),
+          h('h3', { text: 'My memory pairs' }),
           h('div', { class: 'gm-row' }, [
             addBtn,
             h('button', { type: 'button', class: 'gm-btn gm-ghost', text: '📂 Import', on: { click: () => fileIn.click() } }),

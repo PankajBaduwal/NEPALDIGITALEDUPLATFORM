@@ -145,7 +145,7 @@
         chips('Sound', [{ value: true, label: 'On' }, { value: false, label: 'Off' }], cfg.sound, (v) => { cfg.sound = v; saveCfg(); })
       ]);
       ctx.body.replaceChildren(h('div', { class: 'gm-setup gm-setup-wide' }, [
-        h('h3', { text: '🔤 Word Guess' }),
+        h('h3', { text: 'Word Guess' }),
         h('p', { text: 'Guess the hidden word letter by letter — fill the rocket’s energy and launch it! 🚀' }),
         h('div', { class: 'gm-setup-2col' }, [left, right]),
         cfg.cats.some((c) => c !== 'mine') ? h('p', { class: 'gm-sample', text: C.LABEL + '.' }) : null,
@@ -225,7 +225,7 @@
       }
       ctx.body.replaceChildren(h('div', { class: 'gm-editor' }, [
         h('div', { class: 'gm-editor-head' }, [
-          h('h3', { text: '✎ My words to guess' }),
+          h('h3', { text: 'My words to guess' }),
           h('div', { class: 'gm-row' }, [
             addBtn,
             h('button', { type: 'button', class: 'gm-btn gm-ghost', text: '📂 Import', on: { click: () => fileIn.click() } }),

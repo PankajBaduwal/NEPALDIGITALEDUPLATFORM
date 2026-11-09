@@ -430,7 +430,7 @@
         else build();
       };
       ctx.body.replaceChildren(h('div', { class: 'gm-setup gm-setup-wide gm-circle-setup' }, [
-        h('h3', { text: '⭕ Circle Challenge — settings' }),
+        h('h3', { text: 'Circle Challenge — settings' }),
         h('p', { text: 'Your accuracy % appears inside the circle you draw. 100% is a perfect circle.' }),
         h('div', { class: 'gm-setup-2col' }, [
           h('section', { class: 'gm-setup-col', 'aria-label': 'Players' }, [

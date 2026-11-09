@@ -144,7 +144,7 @@
         chips('Sound', [{ value: true, label: 'On' }, { value: false, label: 'Off' }], cfg.sound, (v) => { cfg.sound = v; saveCfg(); })
       ]);
       ctx.body.replaceChildren(h('div', { class: 'gm-setup gm-setup-wide' }, [
-        h('h3', { text: '🎲 Quiz Path' }),
+        h('h3', { text: 'Quiz Path' }),
         h('p', { text: 'Teams roll the dice and race along the path — question spaces test what you know.' }),
         h('div', { class: 'gm-setup-2col' }, [left, right]),
         cfg.picks.some((id) => !String(id).startsWith('my-')) ? h('p', { class: 'gm-sample', text: C.LABEL + '.' }) : null,

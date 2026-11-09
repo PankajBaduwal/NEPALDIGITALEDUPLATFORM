@@ -135,7 +135,7 @@
         chips('Sound', [{ value: true, label: 'On' }, { value: false, label: 'Off' }], cfg.sound, (v) => { cfg.sound = v; saveCfg(); })
       ]);
       ctx.body.replaceChildren(h('div', { class: 'gm-setup gm-setup-wide' }, [
-        h('h3', { text: '🗂️ Category Sort' }),
+        h('h3', { text: 'Category Sort' }),
         h('p', { text: 'Drag every card into the right group — as a class or team against team.' }),
         h('div', { class: 'gm-setup-2col' }, [left, right]),
         isMine(cur.id) ? null : h('p', { class: 'gm-sample', text: C.LABEL + '.' }),

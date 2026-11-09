@@ -160,7 +160,7 @@
         chips('Sound', [{ value: true, label: 'On' }, { value: false, label: 'Off' }], cfg.sound, (v) => { cfg.sound = v; saveCfg(); })
       ]);
       ctx.body.replaceChildren(h('div', { class: 'gm-setup gm-setup-wide' }, [
-        h('h3', { text: '🏁 Board Race' }),
+        h('h3', { text: 'Board Race' }),
         h('p', { text: 'Teams race side by side on the board — the first correct answer scores!' }),
         h('div', { class: 'gm-setup-2col' }, [left, right]),
         cfg.source === 'sets' ? h('p', { class: 'gm-sample', text: C.LABEL + '.' }) : null,

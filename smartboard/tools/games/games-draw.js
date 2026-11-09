@@ -151,7 +151,7 @@
         chips('Sound', [{ value: true, label: 'On' }, { value: false, label: 'Off' }], cfg.sound, (v) => { cfg.sound = v; saveCfg(); })
       ]);
       ctx.body.replaceChildren(h('div', { class: 'gm-setup gm-setup-wide' }, [
-        h('h3', { text: '🎨 Draw & Guess' }),
+        h('h3', { text: 'Draw & Guess' }),
         h('p', { text: 'One player draws a secret word — their team races to guess it before the time runs out!' }),
         h('div', { class: 'gm-setup-2col' }, [left, right]),
         cfg.cats.some((c) => c !== 'mine') ? h('p', { class: 'gm-sample', text: C.LABEL + '.' }) : null,
@@ -228,7 +228,7 @@
       }
       ctx.body.replaceChildren(h('div', { class: 'gm-editor' }, [
         h('div', { class: 'gm-editor-head' }, [
-          h('h3', { text: '✎ My words to draw' }),
+          h('h3', { text: 'My words to draw' }),
           h('div', { class: 'gm-row' }, [
             addBtn,
             h('button', { type: 'button', class: 'gm-btn gm-ghost', text: '📂 Import', on: { click: () => fileIn.click() } }),

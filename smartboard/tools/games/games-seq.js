@@ -140,7 +140,7 @@
         chips('Sound', [{ value: true, label: 'On' }, { value: false, label: 'Off' }], cfg.sound, (v) => { cfg.sound = v; saveCfg(); })
       ]);
       ctx.body.replaceChildren(h('div', { class: 'gm-setup gm-setup-wide' }, [
-        h('h3', { text: '🔢 Sequence Builder' }),
+        h('h3', { text: 'Sequence Builder' }),
         h('p', { text: 'Put the steps of a process, story or timeline in the right order — fewer checks, more points!' }),
         h('div', { class: 'gm-setup-2col' }, [left, right]),
         cfg.picks.some((id) => !String(id).startsWith('my-')) ? h('p', { class: 'gm-sample', text: C.LABEL + '.' }) : null,

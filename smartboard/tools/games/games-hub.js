@@ -86,17 +86,40 @@ const GamesHub = (() => {
     return s;
   }
 
+  // ── Icons (clean line icons instead of emoji) ──
+  const svg = (body) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + body + '</svg>';
+  const GAME_ICONS = {
+    trivia: svg('<path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>'),
+    memory: svg('<rect x="3" y="5" width="10" height="13" rx="2"/><path d="M8 18.5V20a1 1 0 0 0 1 1h9a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1h-1.5"/><path d="M8 9.5v4M6 11.5h4"/>'),
+    pictionary: svg('<path d="M4 20l1-4L16 5l3 3L8 19l-4 1z"/><path d="M14 7l3 3"/>'),
+    hangman: svg('<path d="M4 18l4.5-11L13 18M5.8 14h5.4"/><path d="M16 18h4"/>'),
+    sorting: svg('<rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><path d="M14 17h6M17 14l3 3-3 3"/>'),
+    sequence: svg('<circle cx="5" cy="6" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="18" r="2"/><path d="M6.6 7.6l3.8 3.2M13.6 13.2l3.8 3.2"/>'),
+    spot: svg('<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.4-4.4"/>'),
+    race: svg('<path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/>'),
+    boardgame: svg('<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/><circle cx="9" cy="15" r="1" fill="currentColor"/><circle cx="15" cy="15" r="1" fill="currentColor"/>'),
+    circle: svg('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/>')
+  };
+  const UI_ICONS = {
+    back: svg('<path d="M15 5l-7 7 7 7"/>'),
+    help: svg('<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.7.4-1.1 1-1.1 1.8M12 17h.01"/>'),
+    restart: svg('<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/>'),
+    close: svg('<path d="M6 6l12 12M18 6L6 18"/>'),
+    play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.5-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg>'
+  };
+  const icon = (html, cls) => h('span', { class: 'gm-ic' + (cls ? ' ' + cls : ''), 'aria-hidden': 'true', html });
+
   // ── Overlay DOM ──
   function build() {
     if (overlay) return overlay;
     overlay = h('div', { id: 'games-overlay', class: 'gm-overlay', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'gm-title', hidden: true });
-    const lbl = (icon, text) => [h('span', { 'aria-hidden': 'true', text: icon }), h('span', { class: 'gm-lbl', text })];
-    els.back = h('button', { type: 'button', class: 'gm-btn gm-ghost', 'data-act': 'back', title: 'Back to all games', 'aria-label': 'All games' }, lbl('←', 'All games'));
+    const lbl = (ic, text) => [icon(UI_ICONS[ic] || '', 'gm-ic-ui'), h('span', { class: 'gm-lbl', text })];
+    els.back = h('button', { type: 'button', class: 'gm-btn gm-ghost', 'data-act': 'back', title: 'Back to all games', 'aria-label': 'All games' }, lbl('back', 'All games'));
     els.title = h('h2', { id: 'gm-title', class: 'gm-title', text: 'Classroom Games' });
     els.hud = h('div', { class: 'gm-hud', 'aria-live': 'off' });
-    els.help = h('button', { type: 'button', class: 'gm-btn gm-ghost', 'data-act': 'help', 'aria-expanded': 'false', 'aria-label': 'How to play', title: 'How to play' }, lbl('❔', 'How to play'));
-    els.restart = h('button', { type: 'button', class: 'gm-btn gm-ghost', 'data-act': 'restart', 'aria-label': 'Restart', title: 'Restart this game' }, lbl('↻', 'Restart'));
-    els.close = h('button', { type: 'button', class: 'gm-btn gm-close', 'data-act': 'close', 'aria-label': 'Back to board', title: 'Close games and return to the board (Esc)' }, lbl('✕', 'Back to board'));
+    els.help = h('button', { type: 'button', class: 'gm-btn gm-ghost', 'data-act': 'help', 'aria-expanded': 'false', 'aria-label': 'How to play', title: 'How to play' }, lbl('help', 'How to play'));
+    els.restart = h('button', { type: 'button', class: 'gm-btn gm-ghost', 'data-act': 'restart', 'aria-label': 'Restart', title: 'Restart this game' }, lbl('restart', 'Restart'));
+    els.close = h('button', { type: 'button', class: 'gm-btn gm-close', 'data-act': 'close', 'aria-label': 'Back to board', title: 'Close games and return to the board (Esc)' }, lbl('close', 'Back to board'));
     const header = h('header', { class: 'gm-header' }, [
       h('div', { class: 'gm-header-left' }, [els.back, els.title]), els.hud,
       h('div', { class: 'gm-header-actions' }, [els.help, els.restart, els.close])
@@ -213,17 +236,17 @@ const GamesHub = (() => {
     const grid = h('div', { class: 'gm-grid' }, list.map((g) => {
       const ready = !!registry[g.id];
       return h('article', { class: 'gm-card', 'data-game': g.id }, [
-        h('div', { class: 'gm-card-icon', 'aria-hidden': 'true', text: g.icon }),
+        h('div', { class: 'gm-card-icon', 'aria-hidden': 'true', html: GAME_ICONS[g.id] || UI_ICONS.play }),
         h('div', { class: 'gm-card-body' }, [
           h('span', { class: 'gm-tag', text: g.category }),
           h('h3', { class: 'gm-card-title', text: g.name }),
           h('p', { class: 'gm-card-desc', text: g.desc })
         ]),
-        h('button', { type: 'button', class: 'gm-btn gm-primary gm-play', disabled: !ready, 'aria-label': `Play ${g.name}`, text: ready ? '▶ Play' : 'Coming soon', on: { click: () => launch(g.id) } })
+        h('button', { type: 'button', class: 'gm-btn gm-primary gm-play', disabled: !ready, 'aria-label': `Play ${g.name}`, on: { click: () => launch(g.id) } }, ready ? [icon(UI_ICONS.play, 'gm-ic-play'), h('span', { text: 'Play' })] : [h('span', { text: 'Coming soon' })])
       ]);
     }));
     els.main.replaceChildren(h('div', { class: 'gm-hub' }, [
-      h('p', { class: 'gm-hub-intro' }, ['Pick a game to play on the board. ', h('span', { class: 'gm-sample', text: C.LABEL + '.' })]),
+      h('p', { class: 'gm-hub-intro' }, ['Choose a game to play on the board. ', h('span', { class: 'gm-sample', text: C.LABEL + '.' })]),
       chips, grid
     ]));
   }
@@ -247,7 +270,7 @@ const GamesHub = (() => {
     disposeCurrent();
     view = 'game';
     overlay.dataset.view = 'game';
-    els.title.textContent = `${meta.icon} ${meta.name}`;
+    els.title.replaceChildren(icon(GAME_ICONS[id] || '', 'gm-title-ic'), document.createTextNode(meta.name));
     els.back.hidden = false; els.help.hidden = false; els.restart.hidden = false;
     els.hud.replaceChildren();
     els.helpPanel.replaceChildren();

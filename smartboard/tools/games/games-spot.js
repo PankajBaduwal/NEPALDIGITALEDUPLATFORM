@@ -215,7 +215,7 @@
         chips('Sound', [{ value: true, label: 'On' }, { value: false, label: 'Off' }], cfg.sound, (v) => { cfg.sound = v; saveCfg(); })
       ]);
       ctx.body.replaceChildren(h('div', { class: 'gm-setup gm-setup-wide' }, [
-        h('h3', { text: '🔍 Spot the Difference' }),
+        h('h3', { text: 'Spot the Difference' }),
         h('p', { text: 'Find every difference between the two pictures — sharp eyes and few wrong taps earn more stars!' }),
         h('div', { class: 'gm-setup-2col' }, [left, right]),
         cfg.picks.some((id) => !String(id).startsWith('my-')) ? h('p', { class: 'gm-sample', text: C.LABEL + '.' }) : null,
