@@ -12,6 +12,44 @@ function getInstId(req: AuthenticatedRequest): string {
 }
 
 export class SmartBoardController {
+  /**
+   * Who is using the board and what is being taught — drives the board header
+   * (teacher name, school, subject, class and section). Every id is optional.
+   */
+  static async getHeaderContext(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+    try {
+      const { Types } = await import('mongoose');
+      const { User, Institution, CentralSubject, Section, Class } = await import('../../models');
+      const valid = (v: any) => typeof v === 'string' && Types.ObjectId.isValid(v);
+      const subjectId = req.query.subjectId as string | undefined;
+      const sectionId = req.query.sectionId as string | undefined;
+      const instId = req.institutionId || req.user?.institutionId;
+
+      const [user, institution, subject, section] = await Promise.all([
+        User.findById(req.user!.userId).select('fullName fullNameNepali role').lean() as any,
+        instId && valid(String(instId)) ? (Institution.findById(String(instId)).select('name nameNepali logoUrl').lean() as any) : null,
+        valid(subjectId) ? (CentralSubject.findById(subjectId).select('name nameNepali code gradeNumber').lean() as any) : null,
+        valid(sectionId) ? (Section.findById(sectionId).select('name classId').lean() as any) : null,
+      ]);
+      const cls: any = section?.classId ? await Class.findById(section.classId).select('name gradeNumber').lean() : null;
+      const grade = cls?.gradeNumber ?? subject?.gradeNumber ?? null;
+
+      return ApiResponse.success(
+        res,
+        {
+          teacher: user ? { fullName: user.fullName, fullNameNepali: user.fullNameNepali || '', role: user.role } : null,
+          institution: institution ? { name: institution.name, nameNepali: institution.nameNepali || '', logoUrl: institution.logoUrl || '' } : null,
+          subject: subject ? { name: subject.name, nameNepali: subject.nameNepali || '', code: subject.code || '', gradeNumber: subject.gradeNumber } : null,
+          class: grade ? { gradeNumber: grade, name: cls?.name || `Class ${grade}` } : null,
+          section: section ? { name: section.name } : null,
+        },
+        'Smart Board context'
+      );
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // ── Classroom Sessions ────────────────────────────────────────
   static async startSession(req: AuthenticatedRequest, res: Response, next: NextFunction) {
     try {

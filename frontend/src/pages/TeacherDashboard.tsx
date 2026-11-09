@@ -88,6 +88,7 @@ import { ClassTeacherSectionPanel } from '../components/academic/ClassTeacherSec
 import { ExploreSimulationsPanel } from '../components/academic/ExploreSimulationsPanel';
 import { TeacherInsightsPanel, InsightScope } from '../components/academic/TeacherInsightsPanel';
 import { useDialogs } from '../components/common/Dialogs';
+import { launchDesktopSmartBoard, DESKTOP_SETUP_HINT } from '../components/simulations/desktopSmartBoard';
 import { TeachingDiaryPanel } from '../components/teacher/TeachingDiaryPanel';
 import { StudentDossierModal } from '../components/teacher/StudentDossierModal';
 
@@ -2426,6 +2427,28 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                   {!isSidebarCollapsed && <span>Launch Smart Board</span>}
                 </button>
 
+                <button
+                  type="button"
+                  onClick={() => launchDesktopSmartBoard(() => toast(DESKTOP_SETUP_HINT, 'error'))}
+                  title="Open the Smart Board desktop app on this computer"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    padding: '9px 12px',
+                    borderRadius: '8px',
+                    fontSize: '13px',
+                    fontWeight: '700',
+                    color: '#4b605b',
+                    border: 'none',
+                    background: 'transparent',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Monitor size={17} color="#5f736f" />
+                  {!isSidebarCollapsed && <span>Smart Board on Desktop</span>}
+                </button>
+
                 <button data-nav-feature="SIMULATIONS"
                   onClick={() => {
                     setActiveNav('SIMULATIONS');
@@ -2733,6 +2756,29 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
             >
               <Presentation size={15} color="#117a6b" />
               <span>Smart Board</span>
+            </button>
+
+            {/* Open the Smart Board desktop app (set up the first time by running smartboard/Launch.vbs) */}
+            <button
+              onClick={() => launchDesktopSmartBoard(() => toast(DESKTOP_SETUP_HINT, 'error'))}
+              title="Open the Smart Board desktop app on this computer"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '7px 12px',
+                background: isDarkMode ? '#134744' : '#ffffff',
+                border: isDarkMode ? '1.5px solid #117a6b' : '1px solid #cfdcd8',
+                borderRadius: '8px',
+                color: isDarkMode ? '#2fcf9c' : '#0e3e3b',
+                fontSize: '12px',
+                fontWeight: '700',
+                cursor: 'pointer',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+              }}
+            >
+              <Monitor size={15} color="#117a6b" />
+              <span>Desktop</span>
             </button>
 
             {/* Full Screen toggle */}
@@ -8318,6 +8364,23 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                     }}
                   >
                     Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => launchDesktopSmartBoard(() => toast(DESKTOP_SETUP_HINT, 'error'))}
+                    title="Open the Smart Board desktop app (a plain board, no class session)"
+                    style={{
+                      padding: '10px 16px',
+                      borderRadius: '8px',
+                      fontSize: '13px',
+                      fontWeight: '700',
+                      cursor: 'pointer',
+                      border: isDarkMode ? '1px solid #2f4f4c' : '1px solid #cfdcd8',
+                      background: 'transparent',
+                      color: isDarkMode ? '#cfdcd8' : '#2f4f4c',
+                    }}
+                  >
+                    🖥 Desktop app
                   </button>
                   <button
                     type="submit"

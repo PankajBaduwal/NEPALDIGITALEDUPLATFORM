@@ -1,30 +1,41 @@
 /**
  * VillageEnvironment.ts
  * Procedural 3D Nepalese Village Playground Environment using Three.js
+ * Supports Light & Dark themes, interactive door, toy box, roof cutaway, and spatial drop zones.
  */
 import * as THREE from 'three';
 
 export interface VillageElements {
   scene: THREE.Scene;
   house: THREE.Group;
+  roof: THREE.Mesh;
   door: THREE.Group;
   table: THREE.Group;
   chair: THREE.Group;
   basket: THREE.Group;
+  toyBox: THREE.Group;
+  toyBoxLid: THREE.Group;
   waterPot: THREE.Group;
   bag: THREE.Group;
   ball: THREE.Group;
+  teddy: THREE.Group;
+  toyCar: THREE.Group;
+  largeFlower: THREE.Group;
   trees: THREE.Group[];
   update: (delta: number) => void;
   openDoor: (open: boolean) => void;
+  openToyBox: (open: boolean) => void;
+  setRoofCutaway: (cutaway: boolean) => void;
+  setTheme: (isDark: boolean) => void;
+  highlightZone: (zone: 'house' | 'basket' | 'box' | 'table_above' | 'table_below' | 'tree' | 'flower' | null) => void;
 }
 
 export function createVillageEnvironment(scene: THREE.Scene): VillageElements {
   // ── 1. LIGHTING ──────────────────────────────────────────────
-  const ambientLight = new THREE.AmbientLight(0xfff6e6, 0.75);
+  const ambientLight = new THREE.AmbientLight(0xfff6e6, 0.78);
   scene.add(ambientLight);
 
-  const sunLight = new THREE.DirectionalLight(0xfffaed, 1.1);
+  const sunLight = new THREE.DirectionalLight(0xfffaed, 1.15);
   sunLight.position.set(18, 30, 22);
   sunLight.castShadow = true;
   sunLight.shadow.mapSize.width = 2048;
@@ -42,6 +53,15 @@ export function createVillageEnvironment(scene: THREE.Scene): VillageElements {
   const fillLight = new THREE.DirectionalLight(0x9bd8ff, 0.45);
   fillLight.position.set(-20, 15, -15);
   scene.add(fillLight);
+
+  // Warm Lantern for Veranda (Glows warmly in Dark Mode)
+  const lanternLight = new THREE.PointLight(0xffaa44, 0, 8);
+  lanternLight.position.set(-7.5, 2.4, 1.8);
+  scene.add(lanternLight);
+
+  const tableLanternLight = new THREE.PointLight(0xffaa44, 0, 6);
+  tableLanternLight.position.set(4.5, 1.8, 0.5);
+  scene.add(tableLanternLight);
 
   // ── 2. SKY & HIMALAYAN BACKGROUND ────────────────────────────
   scene.background = new THREE.Color(0xbfe3ff);
@@ -124,6 +144,25 @@ export function createVillageEnvironment(scene: THREE.Scene): VillageElements {
   plinth.receiveShadow = true;
   plinth.castShadow = true;
   house.add(plinth);
+
+  // House Interior Floor (Warm timber planks)
+  const floorMat = new THREE.MeshLambertMaterial({ color: 0xc4824d });
+  const floor = new THREE.Mesh(new THREE.BoxGeometry(6.0, 0.08, 3.6), floorMat);
+  floor.position.set(0, 0.54, 0);
+  floor.receiveShadow = true;
+  house.add(floor);
+
+  // Straw Mat / Sukul (सुकुल) inside room
+  const rugMat = new THREE.MeshLambertMaterial({ color: 0xca8a04 });
+  const rug = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.04, 1.8), rugMat);
+  rug.position.set(-1.0, 0.58, -0.6);
+  house.add(rug);
+
+  // Small Wooden Shelf inside room
+  const shelfWoodMat = new THREE.MeshLambertMaterial({ color: 0x5a381e });
+  const shelf = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1.2, 0.4), shelfWoodMat);
+  shelf.position.set(1.8, 1.2, -1.4);
+  house.add(shelf);
 
   // Veranda floor (पिँढी)
   const verandaMat = new THREE.MeshLambertMaterial({ color: 0xa45b34 });
@@ -208,7 +247,11 @@ export function createVillageEnvironment(scene: THREE.Scene): VillageElements {
   house.add(doorGroup);
 
   // Traditional Sloped Terracotta Roof (छाना)
-  const roofMat = new THREE.MeshLambertMaterial({ color: 0x933e24 });
+  const roofMat = new THREE.MeshLambertMaterial({
+    color: 0x933e24,
+    transparent: true,
+    opacity: 1.0,
+  });
   const roofWood = new THREE.MeshLambertMaterial({ color: 0x3f2212 });
 
   const mainRoofGeo = new THREE.ConeGeometry(5.6, 2.2, 4);
@@ -303,7 +346,32 @@ export function createVillageEnvironment(scene: THREE.Scene): VillageElements {
 
   scene.add(basket);
 
-  // ── 7. NEPALI BRASS WATER VESSEL (गाग्री / पानीको भाँडो) ──────
+  // ── 7. WOODEN TOY BOX / CHEST (बाकस) ─────────────────────────
+  const toyBox = new THREE.Group();
+  toyBox.position.set(-2.2, 0, -0.8);
+
+  const boxWoodMat = new THREE.MeshLambertMaterial({ color: 0x92400e });
+  const boxTrimMat = new THREE.MeshLambertMaterial({ color: 0x78350f });
+
+  // Main hollow body (open top)
+  const boxBase = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.7, 1.2), boxWoodMat);
+  boxBase.position.y = 0.35;
+  boxBase.castShadow = true;
+  boxBase.receiveShadow = true;
+  toyBox.add(boxBase);
+
+  // Openable Lid hinged at the back
+  const toyBoxLid = new THREE.Group();
+  toyBoxLid.position.set(0, 0.7, -0.6); // Hinge line
+  const lidMesh = new THREE.Mesh(new THREE.BoxGeometry(1.45, 0.1, 1.25), boxTrimMat);
+  lidMesh.position.set(0, 0.05, 0.6); // Offset from hinge
+  lidMesh.castShadow = true;
+  toyBoxLid.add(lidMesh);
+  toyBox.add(toyBoxLid);
+
+  scene.add(toyBox);
+
+  // ── 8. NEPALI BRASS WATER VESSEL (गाग्री / पानीको भाँडो) ──────
   const waterPot = new THREE.Group();
   waterPot.position.set(4.5, 1.42, 0.5); // Default placed above the table
 
@@ -330,7 +398,7 @@ export function createVillageEnvironment(scene: THREE.Scene): VillageElements {
 
   scene.add(waterPot);
 
-  // ── 8. SCHOOL BAG (झोला) ─────────────────────────────────────
+  // ── 9. SCHOOL BAG (झोला) ─────────────────────────────────────
   const bag = new THREE.Group();
   bag.position.set(4.5, 0.25, 0.5); // Default placed below the table
 
@@ -348,7 +416,7 @@ export function createVillageEnvironment(scene: THREE.Scene): VillageElements {
 
   scene.add(bag);
 
-  // ── 9. COLOURFUL PLAY BALL (बल) ──────────────────────────────
+  // ── 10. COLOURFUL PLAY BALL (बल) ─────────────────────────────
   const ball = new THREE.Group();
   ball.position.set(0.5, 0.3, 3.2); // Default placed inside the basket
 
@@ -360,14 +428,133 @@ export function createVillageEnvironment(scene: THREE.Scene): VillageElements {
   ballSphere.castShadow = true;
   ball.add(ballSphere);
 
-  // Yellow stripe around ball
   const stripeMat = new THREE.MeshLambertMaterial({ color: 0xfacc15 });
   const stripe = new THREE.Mesh(new THREE.TorusGeometry(0.305, 0.03, 8, 20), stripeMat);
   ball.add(stripe);
 
   scene.add(ball);
 
-  // ── 10. TREES & FLOWER PATCHES ───────────────────────────────
+  // ── 11. TEDDY BEAR (गुडिया) ──────────────────────────────────
+  const teddy = new THREE.Group();
+  teddy.position.set(-2.2, 0.35, -0.8); // Default inside toy box
+
+  const bearMat = new THREE.MeshLambertMaterial({ color: 0xb45309 });
+  const snoutMat = new THREE.MeshLambertMaterial({ color: 0xfef3c7 });
+  const eyeMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+
+  // Body
+  const bearBody = new THREE.Mesh(new THREE.SphereGeometry(0.24, 12, 12), bearMat);
+  bearBody.scale.set(1, 1.15, 0.95);
+  bearBody.position.y = 0.28;
+  bearBody.castShadow = true;
+  teddy.add(bearBody);
+
+  // Head
+  const bearHead = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 12), bearMat);
+  bearHead.position.set(0, 0.52, 0);
+  bearHead.castShadow = true;
+  teddy.add(bearHead);
+
+  // Ears
+  const leftEar = new THREE.Mesh(new THREE.SphereGeometry(0.07, 8, 8), bearMat);
+  leftEar.position.set(-0.16, 0.65, 0);
+  teddy.add(leftEar);
+  const rightEar = new THREE.Mesh(new THREE.SphereGeometry(0.07, 8, 8), bearMat);
+  rightEar.position.set(0.16, 0.65, 0);
+  teddy.add(rightEar);
+
+  // Snout
+  const snout = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), snoutMat);
+  snout.position.set(0, 0.49, 0.16);
+  teddy.add(snout);
+
+  // Eyes & Nose
+  const leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.025, 6, 6), eyeMat);
+  leftEye.position.set(-0.07, 0.54, 0.18);
+  teddy.add(leftEye);
+  const rightEye = new THREE.Mesh(new THREE.SphereGeometry(0.025, 6, 6), eyeMat);
+  rightEye.position.set(0.07, 0.54, 0.18);
+  teddy.add(rightEye);
+
+  scene.add(teddy);
+
+  // ── 12. TOY CAR (खेलौना गाडी) ─────────────────────────────────
+  const toyCar = new THREE.Group();
+  toyCar.position.set(-1.0, 0.15, 0.5); // Default on lawn outside
+
+  const carBodyMat = new THREE.MeshLambertMaterial({ color: 0x0284c7 });
+  const wheelMat = new THREE.MeshLambertMaterial({ color: 0x1f2937 });
+
+  const carBody = new THREE.Mesh(new THREE.BoxGeometry(0.75, 0.22, 0.38), carBodyMat);
+  carBody.position.y = 0.15;
+  carBody.castShadow = true;
+  toyCar.add(carBody);
+
+  const carCabin = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.18, 0.34), new THREE.MeshLambertMaterial({ color: 0x38bdf8 }));
+  carCabin.position.set(-0.06, 0.32, 0);
+  toyCar.add(carCabin);
+
+  // Wheels
+  [
+    { x: -0.22, z: -0.2 },
+    { x: 0.22, z: -0.2 },
+    { x: -0.22, z: 0.2 },
+    { x: 0.22, z: 0.2 },
+  ].forEach((wpos) => {
+    const wheel = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.06, 12), wheelMat);
+    wheel.rotation.x = Math.PI / 2;
+    wheel.position.set(wpos.x, 0.09, wpos.z);
+    wheel.castShadow = true;
+    toyCar.add(wheel);
+  });
+
+  scene.add(toyCar);
+
+  // ── 13. LARGE BLOOMING FLOWER (for butterfly above/below) ─────
+  const largeFlower = new THREE.Group();
+  largeFlower.position.set(-1.5, 0, 2.2);
+
+  // Stem
+  const stemMat = new THREE.MeshLambertMaterial({ color: 0x16a34a });
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 0.75, 8), stemMat);
+  stem.position.y = 0.38;
+  stem.castShadow = true;
+  largeFlower.add(stem);
+
+  // Leaves
+  const leafGeo = new THREE.SphereGeometry(0.18, 8, 8);
+  leafGeo.scale(1.4, 0.2, 0.6);
+  const leftLeaf = new THREE.Mesh(leafGeo, stemMat);
+  leftLeaf.position.set(-0.2, 0.28, 0);
+  leftLeaf.rotation.z = -0.35;
+  largeFlower.add(leftLeaf);
+
+  const rightLeaf = new THREE.Mesh(leafGeo, stemMat);
+  rightLeaf.position.set(0.2, 0.35, 0);
+  rightLeaf.rotation.z = 0.35;
+  largeFlower.add(rightLeaf);
+
+  // Center head
+  const flowerCenterMat = new THREE.MeshLambertMaterial({ color: 0x78350f });
+  const centerMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.08, 16), flowerCenterMat);
+  centerMesh.position.y = 0.75;
+  largeFlower.add(centerMesh);
+
+  // Petals (8 bright golden petals)
+  const petalMat = new THREE.MeshLambertMaterial({ color: 0xfacc15 });
+  for (let i = 0; i < 8; i++) {
+    const angle = (i / 8) * Math.PI * 2;
+    const petal = new THREE.Mesh(new THREE.SphereGeometry(0.16, 8, 8), petalMat);
+    petal.scale.set(1.4, 0.25, 0.7);
+    petal.rotation.y = angle;
+    petal.position.set(Math.cos(angle) * 0.32, 0.75, Math.sin(angle) * 0.32);
+    petal.castShadow = true;
+    largeFlower.add(petal);
+  }
+
+  scene.add(largeFlower);
+
+  // ── 14. TREES & FLOWER PATCHES ───────────────────────────────
   const trees: THREE.Group[] = [];
 
   function createPineTree(x: number, z: number, scale = 1): THREE.Group {
@@ -375,24 +562,24 @@ export function createVillageEnvironment(scene: THREE.Scene): VillageElements {
     t.position.set(x, 0, z);
 
     const trunkMat = new THREE.MeshLambertMaterial({ color: 0x5a381e });
-    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.22 * scale, 0.32 * scale, 1.8 * scale, 8), trunkMat);
-    trunk.position.y = 0.9 * scale;
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.24 * scale, 0.34 * scale, 2.0 * scale, 8), trunkMat);
+    trunk.position.y = 1.0 * scale;
     trunk.castShadow = true;
     t.add(trunk);
 
     const foliageMat = new THREE.MeshLambertMaterial({ color: 0x2d6b38 });
-    const tier1 = new THREE.Mesh(new THREE.ConeGeometry(1.6 * scale, 1.8 * scale, 8), foliageMat);
-    tier1.position.y = 2.1 * scale;
+    const tier1 = new THREE.Mesh(new THREE.ConeGeometry(1.8 * scale, 2.0 * scale, 8), foliageMat);
+    tier1.position.y = 2.4 * scale;
     tier1.castShadow = true;
     t.add(tier1);
 
-    const tier2 = new THREE.Mesh(new THREE.ConeGeometry(1.2 * scale, 1.6 * scale, 8), foliageMat);
-    tier2.position.y = 3.0 * scale;
+    const tier2 = new THREE.Mesh(new THREE.ConeGeometry(1.4 * scale, 1.8 * scale, 8), foliageMat);
+    tier2.position.y = 3.4 * scale;
     tier2.castShadow = true;
     t.add(tier2);
 
-    const tier3 = new THREE.Mesh(new THREE.ConeGeometry(0.8 * scale, 1.4 * scale, 8), foliageMat);
-    tier3.position.y = 3.8 * scale;
+    const tier3 = new THREE.Mesh(new THREE.ConeGeometry(0.9 * scale, 1.5 * scale, 8), foliageMat);
+    tier3.position.y = 4.3 * scale;
     tier3.castShadow = true;
     t.add(tier3);
 
@@ -437,57 +624,150 @@ export function createVillageEnvironment(scene: THREE.Scene): VillageElements {
   scene.add(rhodoTree);
   trees.push(rhodoTree);
 
-  // Flower Beds on the Lawn
-  const flowerBedColors = [0xf59e0b, 0xec4899, 0xa855f7, 0xef4444];
-  const flowerBedOffsets = [
-    { x: -5, z: 4.5 },
-    { x: 3, z: 3.5 },
-    { x: 6, z: 4.5 },
-    { x: -6.5, z: 3.2 },
-  ];
-  flowerBedOffsets.forEach((fpos, idx) => {
-    const fGroup = new THREE.Group();
-    fGroup.position.set(fpos.x, 0, fpos.z);
-    for (let j = 0; j < 5; j++) {
-      const col = flowerBedColors[(idx + j) % flowerBedColors.length];
-      const fl = new THREE.Mesh(
-        new THREE.SphereGeometry(0.14, 6, 6),
-        new THREE.MeshLambertMaterial({ color: col })
-      );
-      fl.position.set((Math.random() - 0.5) * 0.9, 0.15 + Math.random() * 0.15, (Math.random() - 0.5) * 0.9);
-      fGroup.add(fl);
-    }
-    scene.add(fGroup);
+  // ── 15. DYNAMIC TARGET HIGHLIGHT GLOW RING ────────────────────
+  const highlightRingGeo = new THREE.RingGeometry(0.95, 1.25, 32);
+  const highlightRingMat = new THREE.MeshBasicMaterial({
+    color: 0x22c55e,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: 0.85,
   });
+  const highlightRing = new THREE.Mesh(highlightRingGeo, highlightRingMat);
+  highlightRing.rotation.x = -Math.PI / 2;
+  highlightRing.position.set(0, 0.05, 0);
+  highlightRing.visible = false;
+  scene.add(highlightRing);
 
-  // ── 11. DOOR CONTROL ─────────────────────────────────────────
+  // ── 16. ANIMATION & CONTROLS ─────────────────────────────────
   let targetDoorAngle = 0;
   let currentDoorAngle = 0;
+  let targetBoxAngle = 0;
+  let currentBoxAngle = -Math.PI * 0.45; // Default open for toy access
 
   function openDoor(open: boolean) {
     targetDoorAngle = open ? -Math.PI * 0.65 : 0;
   }
 
+  function openToyBox(open: boolean) {
+    targetBoxAngle = open ? -Math.PI * 0.55 : 0;
+  }
+
+  function setRoofCutaway(cutaway: boolean) {
+    if (cutaway) {
+      (mainRoof.material as THREE.MeshLambertMaterial).opacity = 0.22;
+      mainRoof.material.depthWrite = false;
+    } else {
+      (mainRoof.material as THREE.MeshLambertMaterial).opacity = 1.0;
+      mainRoof.material.depthWrite = true;
+    }
+  }
+
+  function setTheme(isDark: boolean) {
+    if (isDark) {
+      scene.background = new THREE.Color(0x111c2e);
+      if (scene.fog) scene.fog.color.setHex(0x111c2e);
+      ambientLight.color.setHex(0x384a68);
+      ambientLight.intensity = 0.6;
+      sunLight.intensity = 0.35;
+      sunLight.color.setHex(0x7dd3fc);
+      lanternLight.intensity = 2.2;
+      tableLanternLight.intensity = 1.8;
+      groundMat.color.setHex(0x274a2f);
+    } else {
+      scene.background = new THREE.Color(0xbfe3ff);
+      if (scene.fog) scene.fog.color.setHex(0xbfe3ff);
+      ambientLight.color.setHex(0xfff6e6);
+      ambientLight.intensity = 0.78;
+      sunLight.intensity = 1.15;
+      sunLight.color.setHex(0xfffaed);
+      lanternLight.intensity = 0;
+      tableLanternLight.intensity = 0;
+      groundMat.color.setHex(0x5fa855);
+    }
+  }
+
+  function highlightZone(zone: 'house' | 'basket' | 'box' | 'table_above' | 'table_below' | 'tree' | 'flower' | null) {
+    if (!zone) {
+      highlightRing.visible = false;
+      return;
+    }
+    highlightRing.visible = true;
+    if (zone === 'basket') {
+      highlightRing.position.set(0.5, 0.08, 3.2);
+      highlightRing.scale.set(0.85, 0.85, 0.85);
+      highlightRingMat.color.setHex(0x3b82f6);
+    } else if (zone === 'box') {
+      highlightRing.position.set(-2.2, 0.08, -0.8);
+      highlightRing.scale.set(1.1, 1.1, 1.1);
+      highlightRingMat.color.setHex(0x10b981);
+    } else if (zone === 'house') {
+      highlightRing.position.set(-7.5, 0.08, -1.8);
+      highlightRing.scale.set(2.8, 2.8, 2.8);
+      highlightRingMat.color.setHex(0xf59e0b);
+    } else if (zone === 'table_above') {
+      highlightRing.position.set(4.5, 1.45, 0.5);
+      highlightRing.scale.set(1.4, 1.4, 1.4);
+      highlightRingMat.color.setHex(0xec4899);
+    } else if (zone === 'table_below') {
+      highlightRing.position.set(4.5, 0.08, 0.5);
+      highlightRing.scale.set(1.2, 1.2, 1.2);
+      highlightRingMat.color.setHex(0x8b5cf6);
+    } else if (zone === 'tree') {
+      highlightRing.position.set(7.5, 0.08, -3.5);
+      highlightRing.scale.set(2.2, 2.2, 2.2);
+      highlightRingMat.color.setHex(0x22c55e);
+    } else if (zone === 'flower') {
+      highlightRing.position.set(-1.5, 0.08, 2.2);
+      highlightRing.scale.set(0.9, 0.9, 0.9);
+      highlightRingMat.color.setHex(0xf43f5e);
+    }
+  }
+
+  let timeAccum = 0;
   function update(delta: number) {
+    timeAccum += delta;
+
+    // Smooth door animation
     if (Math.abs(currentDoorAngle - targetDoorAngle) > 0.01) {
       currentDoorAngle += (targetDoorAngle - currentDoorAngle) * Math.min(1, delta * 6);
       doorGroup.rotation.y = currentDoorAngle;
+    }
+
+    // Smooth toy box lid animation
+    if (Math.abs(currentBoxAngle - targetBoxAngle) > 0.01) {
+      currentBoxAngle += (targetBoxAngle - currentBoxAngle) * Math.min(1, delta * 6);
+      toyBoxLid.rotation.x = currentBoxAngle;
+    }
+
+    // Pulse highlight ring
+    if (highlightRing.visible) {
+      const pulse = 1 + Math.sin(timeAccum * 5) * 0.08;
+      highlightRing.scale.multiplyScalar(pulse / (highlightRing.scale.x || 1));
     }
   }
 
   return {
     scene,
     house,
+    roof: mainRoof,
     door: doorGroup,
     table,
     chair,
     basket,
+    toyBox,
+    toyBoxLid,
     waterPot,
     bag,
     ball,
+    teddy,
+    toyCar,
+    largeFlower,
     trees,
     update,
     openDoor,
+    openToyBox,
+    setRoofCutaway,
+    setTheme,
+    highlightZone,
   };
 }
-

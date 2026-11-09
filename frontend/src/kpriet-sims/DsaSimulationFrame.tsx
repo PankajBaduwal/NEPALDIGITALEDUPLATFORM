@@ -51,7 +51,7 @@ export const DsaSimulationFrame: React.FC<DsaSimulationFrameProps> = ({
       simulationId: assignedSimulation?._id || '',
       config: JSON.stringify(configuration),
     });
-    return `/smartboard/dsa-simulation.html?${query.toString()}`;
+    return `/smartboard/simulations/dsa-simulation.html?${query.toString()}`;
   }, [assignedSimulation, subject, userRole, configuration.category, configuration.topic, configuration.defaultExample, configuration.allowCustomInput, configuration.stepByStep, configuration.showPseudocode, configuration.showComplexity]);
 
   const handleMessage = (event: MessageEvent) => {

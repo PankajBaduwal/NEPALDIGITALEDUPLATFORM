@@ -32,7 +32,7 @@ async function main() {
     console.log(await IngestionService.syncInventory());
   } else if (cmd === 'report') {
     const docs: any[] = await RagDocument.find().sort({ gradeNumber: 1, subjectKey: 1, relativePath: 1 }).lean();
-    const root = path.resolve(__dirname, '../../..');
+    const root = path.resolve(__dirname, '../../../docs/rag-ai'); fs.mkdirSync(root, { recursive: true });
     const now = new Date().toISOString();
     const by = (f: (d: any) => string) => docs.reduce((m: Record<string, number>, d) => ((m[f(d)] = (m[f(d)] || 0) + 1), m), {});
     const sum = (f: (d: any) => number) => docs.reduce((n, d) => n + (f(d) || 0), 0);

@@ -3,176 +3,1399 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Number Line & Counting (सङ्ख्या रेखा र गणना) · नेपाल डिजिटल शिक्षा</title>
+  <title>Number Line & Counting Frog 3D · नेपाल डिजिटल शिक्षा</title>
+  <!-- Three.js from CDN with offline fallback -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Mukta:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090d16;
-      --card: #1e293b;
-      --border: #334155;
-      --accent: #38bdf8;
-      --frog: #22c55e;
-      --text: #f8fafc;
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --subtext: #475569;
+      --primary: #059669;
+      --primary-hover: #047857;
+      --primary-light: #ecfdf5;
+      --secondary: #0284c7;
+      --orange: #ea580c;
+      --orange-hover: #c2410c;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    body.dark-theme {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+      --primary: #10b981;
+      --primary-hover: #059669;
+      --primary-light: rgba(16, 185, 129, 0.15);
+      --secondary: #38bdf8;
+      --orange: #f97316;
+      --orange-hover: #ea580c;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', 'Mukta', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
+
+    /* ── HEADER ─────────────────────────────────────────────────────── */
     header {
-      background: rgba(30, 41, 59, 0.95);
-      padding: 12px 20px;
+      height: 52px;
+      padding: 0 18px;
+      background: var(--surface);
       border-bottom: 1px solid var(--border);
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      flex-shrink: 0;
+      z-index: 10;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
       gap: 10px;
     }
     .badge {
-      background: #10b981;
-      color: white;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(16, 185, 129, 0.3);
       font-size: 11px;
-      font-weight: 700;
-      padding: 4px 8px;
+      font-weight: 800;
+      padding: 3px 8px;
       border-radius: 6px;
       text-transform: uppercase;
     }
-    h1 { font-size: 1.15rem; font-weight: 700; }
-    .subtitle { font-size: 0.8rem; color: #94a3b8; }
-    .btn {
-      background: #334155;
-      color: #fff;
-      border: 1px solid var(--border);
-      padding: 8px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
+    .title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--text);
     }
-    .main-grid {
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      flex: 1;
-      gap: 16px;
-      padding: 16px;
+    .nep-title {
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 700;
+      margin-left: 6px;
     }
-    @media (max-width: 850px) { .main-grid { grid-template-columns: 1fr; } }
-    .canvas-panel {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    canvas { width: 100%; height: auto; }
-    .controls-panel {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .jump-btn-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .jump-btn {
-      padding: 14px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      color: white;
+
+    .header-btns {
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
     }
-    .jump-forward { background: #16a34a; }
-    .jump-backward { background: #ea580c; }
-    .display-card {
-      background: #0f172a;
-      border: 2px solid var(--accent);
-      border-radius: 10px;
-      padding: 16px;
-      text-align: center;
+    .btn-top {
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
     }
-    .pos-num { font-size: 2.8rem; font-weight: bold; color: #38bdf8; }
-    .pos-nepali { font-size: 1.4rem; color: #facc15; margin-top: 4px; }
+    .btn-top:hover {
+      background: var(--bg);
+      transform: translateY(-1px);
+    }
+
+    /* ── 2-COLUMN MAIN WORKSPACE WITH RESIZABLE SPLITTER ─── */
+    .workspace {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 0;
+      padding: 12px;
+      overflow: hidden;
+      height: calc(100% - 52px);
+      min-height: 0;
+      position: relative;
+    }
+    @media (max-width: 768px) {
+      .workspace {
+        flex-direction: column;
+        overflow-y: auto;
+      }
+    }
+
+    /* LEFT: 3D SIMULATION CANVAS CARD */
+    .canvas-card {
+      flex: 1 1 0%;
+      min-width: 300px;
+      height: 100%;
+      min-height: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+    #canvas-container {
+      width: 100%;
+      height: 100%;
+      flex: 1 1 0%;
+      min-height: 0;
+      cursor: grab;
+      touch-action: none;
+      position: relative;
+      overflow: hidden;
+    }
+    #canvas-container:active { cursor: grabbing; }
+    #canvas-container canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* MINIMAL HUD CONTROLS (Non-intrusive) */
+    .canvas-hud {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 20;
+      pointer-events: auto;
+    }
+    .hud-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 3px 6px;
+      box-shadow: var(--shadow-sm);
+    }
+    body.dark-theme .hud-bar {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .hud-btn {
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+    }
+    .hud-btn:hover {
+      background: var(--bg);
+      border-color: var(--border);
+    }
+    .hud-btn.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .hud-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--border);
+      margin: 0 2px;
+    }
+
+    /* SPLITTER RESIZER DIVIDER */
+    .splitter-handle {
+      width: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: col-resize;
+      user-select: none;
+      position: relative;
+      z-index: 15;
+      padding: 0 2px;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+    .splitter-handle:hover, .splitter-handle.dragging {
+      background: rgba(16, 185, 129, 0.12);
+    }
+    .splitter-bar {
+      width: 4px;
+      height: 48px;
+      background: var(--border);
+      border-radius: 4px;
+      transition: background 0.15s ease, height 0.15s ease;
+    }
+    .splitter-handle:hover .splitter-bar, .splitter-handle.dragging .splitter-bar {
+      background: var(--primary);
+      height: 64px;
+    }
+    .splitter-collapse-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      cursor: pointer;
+      color: var(--subtext);
+      opacity: 0;
+      transition: all 0.15s ease;
+    }
+    .splitter-handle:hover .splitter-collapse-btn {
+      opacity: 1;
+    }
+
+    .hint-floating {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      pointer-events: none;
+      box-shadow: var(--shadow-sm);
+      white-space: nowrap;
+    }
+    body.dark-theme .hint-floating {
+      background: rgba(30, 41, 59, 0.9);
+      color: #cbd5e1;
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    #toast-banner {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+      display: none;
+      z-index: 50;
+      animation: pop 0.3s ease;
+    }
+    @keyframes pop {
+      from { transform: translate(-50%, -10px); opacity: 0; }
+      to { transform: translate(-50%, 0); opacity: 1; }
+    }
+
+    /* RIGHT COLUMN: DEDICATED CONTROL & ACTIVITY SIDEBAR */
+    .sidebar {
+      width: 360px;
+      min-width: 260px;
+      max-width: 650px;
+      flex-shrink: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+      transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, padding 0.2s ease;
+    }
+    .sidebar.collapsed {
+      width: 0 !important;
+      min-width: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+    }
+    .sidebar::-webkit-scrollbar { width: 5px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    /* Current Position Card */
+    .pos-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .pos-badge {
+      width: 54px;
+      height: 54px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      border: 1.5px solid rgba(16, 185, 129, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .pos-en { font-size: 22px; font-weight: 900; color: var(--primary); line-height: 1; }
+    .pos-np { font-size: 15px; font-weight: 800; color: #f59e0b; line-height: 1; }
+    .pos-details { display: flex; flex-direction: column; gap: 1px; }
+    .pos-label { font-size: 10px; font-weight: 800; color: var(--subtext); text-transform: uppercase; }
+    .pos-word-en { font-size: 15px; font-weight: 800; color: var(--text); }
+    .pos-word-np { font-size: 13.5px; font-weight: 700; color: var(--primary); }
+
+    /* Section Title */
+    .section-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--subtext);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* 6 Learning Mode Pills Grid */
+    .modes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .mode-btn {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      text-align: left;
+    }
+    .mode-btn:hover { background: var(--bg); }
+    .mode-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Challenge / Activity Box */
+    .challenge-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .chal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chal-tag {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .chal-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.35;
+    }
+    .chal-sub {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+    .chal-eq {
+      font-size: 15px;
+      font-weight: 900;
+      color: #f59e0b;
+      margin-top: 2px;
+    }
+
+    /* Movement Action Buttons Grid */
+    .actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .act-btn {
+      height: 44px;
+      border-radius: 10px;
+      border: none;
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .act-btn:active { transform: scale(0.97); }
+
+    .btn-fwd {
+      background: var(--primary);
+      box-shadow: 0 3px 10px rgba(16, 185, 129, 0.25);
+    }
+    .btn-fwd:hover { background: var(--primary-hover); }
+
+    .btn-back {
+      background: var(--orange);
+      box-shadow: 0 3px 10px rgba(234, 88, 12, 0.25);
+    }
+    .btn-back:hover { background: var(--orange-hover); }
+
+    .btn-jump2 {
+      background: var(--secondary);
+      box-shadow: 0 3px 10px rgba(2, 132, 199, 0.25);
+    }
+    .btn-jump2:hover { opacity: 0.92; }
+
+    .btn-reset {
+      background: var(--surface);
+      color: var(--subtext);
+      border: 1px solid var(--border);
+    }
+    .btn-reset:hover { background: var(--border); color: var(--text); }
+
+    .btn-next-q {
+      grid-column: span 2;
+      background: #7c3aed;
+      color: #fff;
+      height: 38px;
+      border-radius: 10px;
+      border: none;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-next-q:hover { background: #6d28d9; }
+
+    /* Rules / Pedagogy Note */
+    .rules-card {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: var(--subtext);
+      margin-top: auto;
+    }
+    .rules-card strong { color: var(--text); }
+
+    /* Embedded mode optimization */
+    body.is-embedded header .embedded-hide { display: none !important; }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <div>
-      <span class="badge">Class 1–5 · Primary Math</span>
-      <h1>Interactive Number Line (सङ्ख्या रेखा र भ्यागुताको उफ्राइ)</h1>
-      <div class="subtitle">Nepal CDC Curriculum · Addition, Subtraction & Counting (० देखि २०)</div>
+    <div class="brand">
+      <span class="badge">Class 1–5 • CDC Nepal</span>
+      <div class="title">
+        Number Line 3D
+        <span class="nep-title">(सङ्ख्या रेखा र भ्यागुताको उफ्राइ 🐸)</span>
+      </div>
     </div>
-    <div style="display:flex; gap:8px;">
-      <button class="btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
-      <button class="btn" onclick="window.open('/smartboard/index.html', '_blank')">🖥 Smart Board</button>
+    <div class="header-actions">
+      <button class="btn-top" id="themeBtn" onclick="toggleTheme()">☀ Light</button>
+      <button class="btn-top" id="soundBtn" onclick="toggleSound()">🔊 Sound</button>
+      <button class="btn-top embedded-hide" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+      <button class="btn-top embedded-hide" style="background:#0284c7; color:#fff; border:none;" onclick="window.open('/smartboard/index.html', '_blank')">🖥 Smart Board</button>
     </div>
   </header>
 
-  <div class="main-grid">
-    <div class="canvas-panel">
-      <canvas id="numCanvas" width="700" height="360"></canvas>
+  <!-- 2-Column Main Workspace with Resizable Splitter -->
+  <div class="workspace" id="mainWorkspace">
+    <!-- LEFT: 3D Simulation Canvas Card -->
+    <div class="canvas-card" id="canvasCard">
+      <div id="canvas-container"></div>
+
+      <!-- Simulation Stage HUD: Unobtrusive View & Stage Controls -->
+      <div class="canvas-hud">
+        <div class="hud-bar">
+          <button class="hud-btn" id="hudStageToggle" onclick="toggleSidebarCollapse()" title="Toggle full simulation stage width">
+            <span id="stageExpandIcon">⛶</span>
+            <span id="stageExpandText">Expand Stage</span>
+          </button>
+          <div class="hud-divider"></div>
+          <button class="hud-btn" id="btnViewToggle" onclick="toggleViewAngle()" title="Toggle 3D perspective / Flat Top view">📐 Top View</button>
+          <button class="hud-btn" onclick="resetCameraView()" title="Reset Camera View">⟲ Reset</button>
+        </div>
+      </div>
+
+      <div id="toast-banner">⭐ Syabas! Correct! (सबास ! सही उत्तर)</div>
+      <div class="hint-floating">🖱️ Mouse: Scroll wheel to Zoom · Drag ground to Rotate 360° · Tap stones to hop</div>
     </div>
 
-    <div class="controls-panel">
-      <div class="display-card">
-        <div style="font-size:0.8rem; color:#94a3b8;">Current Position (हालको स्थान):</div>
-        <div class="pos-num" id="posNum">5</div>
-        <div class="pos-nepali" id="posNep">सङ्ख्या: ५ (पाँच)</div>
-      </div>
-
-      <div class="jump-btn-row">
-        <button class="jump-btn jump-forward" onclick="jump(1)">➕ अगाडि (+1)</button>
-        <button class="jump-btn jump-backward" onclick="jump(-1)">➖ पछाडि (-1)</button>
-      </div>
-
-      <div class="jump-btn-row">
-        <button class="jump-btn" style="background:#0284c7;" onclick="jump(2)">Jump +2 (जोडी)</button>
-        <button class="jump-btn" style="background:#475569;" onclick="resetPos()">पुनः सुरु (0)</button>
-      </div>
-
-      <div style="background:#0f172a; border-left:3px solid #10b981; padding:12px; border-radius:0 8px 8px 0; font-size:0.85rem; color:#cbd5e1; line-height:1.5;">
-        <strong>सङ्ख्या रेखाको नियम:</strong> दायाँतर्फ जाँदा सङ्ख्या बढ्छ (जोड), बायाँतर्फ जाँदा सङ्ख्या घट्छ (घटाउ) ।
-      </div>
+    <!-- Draggable Splitter Divider -->
+    <div class="splitter-handle" id="splitterHandle" title="Drag left/right to increase/decrease simulation area width">
+      <div class="splitter-bar"></div>
+      <button class="splitter-collapse-btn" id="splitterBtn" onclick="toggleSidebarCollapse()" title="Collapse/Expand sidebar">◀</button>
     </div>
+
+    <!-- RIGHT: Dedicated Control & Learning Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <!-- 1. Current Position Card -->
+      <div class="pos-card">
+        <div class="pos-badge">
+          <span class="pos-en" id="posEn">5</span>
+          <span class="pos-np" id="posNp">५</span>
+        </div>
+        <div class="pos-details">
+          <span class="pos-label">Current Position (हालको स्थान)</span>
+          <span class="pos-word-en" id="posWordEn">Five</span>
+          <span class="pos-word-np" id="posWordNp">पाँच</span>
+        </div>
+      </div>
+
+      <!-- 2. Learning Modes -->
+      <div class="section-title">Learning Modes (सिक्ने मोडहरू)</div>
+      <div class="modes-grid">
+        <button class="mode-btn active" onclick="setMode('EXPLORE')">🐸 1. Free Play</button>
+        <button class="mode-btn" onclick="setMode('COUNTING')">🎯 2. Counting</button>
+        <button class="mode-btn" onclick="setMode('ADDITION')">➕ 3. Addition</button>
+        <button class="mode-btn" onclick="setMode('SUBTRACTION')">➖ 4. Subtraction</button>
+        <button class="mode-btn" onclick="setMode('MISSING')">🧩 5. Missing Num</button>
+        <button class="mode-btn" onclick="setMode('RECOGNIZE')">🔍 6. Recognize</button>
+      </div>
+
+      <!-- 3. Active Challenge / Activity Card -->
+      <div class="challenge-card">
+        <div class="chal-header">
+          <span class="chal-tag" id="chalTag">FREE EXPLORATION</span>
+          <span style="font-size:12px; font-weight:800; color:#f59e0b;" id="starsCount">⭐ 0</span>
+        </div>
+        <div class="chal-title" id="chalTitle">Hop anywhere from ० to २०!</div>
+        <div class="chal-sub" id="chalSub">अगाडि वा पछाडि उफ्रिएर सङ्ख्याहरू सिक्नुहोस् ।</div>
+        <div class="chal-eq" id="chalEq">Current: 5 (५)</div>
+        <button class="btn-next-q" id="nextQBtn" onclick="nextChallenge()">✨ अर्को प्रश्न (Next Question)</button>
+      </div>
+
+      <!-- 4. Movement Action Buttons -->
+      <div class="section-title">Controls (चाल नियन्त्रण)</div>
+      <div class="actions-grid">
+        <button class="act-btn btn-back" onclick="step(-1)">
+          <span>➖</span>
+          <span>पछाडि (-1)</span>
+        </button>
+
+        <button class="act-btn btn-fwd" onclick="step(1)">
+          <span>➕</span>
+          <span>अगाडि (+1)</span>
+        </button>
+
+        <button class="act-btn btn-jump2" onclick="step(2)">
+          <span>👣</span>
+          <span>Jump +2</span>
+        </button>
+
+        <button class="act-btn btn-reset" onclick="resetPos()">
+          <span>🔄</span>
+          <span>0 (सुरु)</span>
+        </button>
+      </div>
+
+      <!-- 5. Pedagogical Rule Card -->
+      <div class="rules-card">
+        <strong>💡 सङ्ख्या रेखाको नियम:</strong><br>
+        दायाँ जाँदा सङ्ख्या बढ्छ <strong>(जोड +)</strong>, बायाँ जाँदा सङ्ख्या घट्छ <strong>(घटाउ -)</strong> ।
+      </div>
+    </aside>
   </div>
 
   <script>
-    const nepWords = ['शून्य','एक','दुई','तीन','चार','पाँच','छ','सात','आठ','नौ','दश','एघार','बाह्र','तेह्र','चौध','पन्ध्र','सोह्र','सत्र','अठार','उन्नाइस','बीस'];
-    const nepNums = ['०','१','२','३','४','५','६','७','८','९','१०','११','१२','१३','१४','१५','१६','१७','१८','१९','२०'];
+    // Embedded Smart Board detection
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('embed') === '1' || window.self !== window.top) {
+      document.body.classList.add('is-embedded');
+    }
+
+    // ── DATA TABLES ──────────────────────────────────────────────────
+    const NEP_NUMS = ['०','१','२','३','४','५','६','७','८','९','१०','११','१२','१३','१४','१५','१६','१७','१८','१९','२०'];
+    const NEP_WORDS = ['शून्य','एक','दुई','तीन','चार','पाँच','छ','सात','आठ','नौ','दश','एघार','बाह्र','तेह्र','चौध','पन्ध्र','सोह्र','सत्र','अठार','उन्नाइस','बीस'];
+    const EN_WORDS = ['Zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen','Twenty'];
+
     let pos = 5;
     let targetPos = 5;
-    let animFrogX = 5;
-    let jumpArc = 0;
-    const canvas = document.getElementById('numCanvas');
-    const ctx = canvas.getContext('2d');
+    let isJumping = false;
+    let jumpStartTime = 0;
+    let jumpDuration = 0.45;
+    let jumpStartPos = 5;
+    let isDoubleJump = false;
+    let isDark = false;
+    let soundEnabled = true;
+    let activeMode = 'EXPLORE';
+    let challenge = null;
+    let stars = 0;
 
-    function jump(delta) {
-      targetPos = Math.max(0, Math.min(20, pos + delta));
-      pos = targetPos;
-      document.getElementById('posNum').textContent = pos;
-      document.getElementById('posNep').textContent = `सङ्ख्या: ${nepNums[pos]} (${nepWords[pos]})`;
+    // Web Audio generator
+    let audioCtx = null;
+    function getAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function playHopSound(p) {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudio();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const freq = 220 + Math.min(p, 20) * 12;
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.exponentialRampToValueAtTime(freq * 2.2, now + 0.12);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.start(now); osc.stop(now + 0.23);
+      } catch(e){}
+    }
+
+    function playSuccessSound() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudio();
+        [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
+          const t = ctx.currentTime + i * 0.1;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(f, t);
+          gain.gain.setValueAtTime(0.2, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.32);
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.start(t); osc.stop(t + 0.33);
+        });
+      } catch(e){}
+    }
+
+    function speakNumber(p) {
+      if (!soundEnabled || !window.speechSynthesis) return;
+      try {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(EN_WORDS[p]);
+        u.pitch = 1.15; u.rate = 0.95;
+        window.speechSynthesis.speak(u);
+      } catch(e){}
+    }
+
+    // ── THREE.JS SETUP ──────────────────────────────────────────────
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xdbeafe);
+    scene.fog = new THREE.FogExp2(0xdbeafe, 0.016);
+
+    const camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 1000);
+    const cameraTarget = new THREE.Vector3(0, 0.8, 0);
+    const cameraSpherical = {
+      radius: 16.0,
+      theta: 0,
+      phi: 1.01
+    };
+    camera.position.set(0, 9.2, 13.5);
+    camera.lookAt(cameraTarget);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.08;
+    container.appendChild(renderer.domElement);
+
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xdcfce7, 0.85);
+    scene.add(hemiLight);
+
+    const dirLight = new THREE.DirectionalLight(0xfffaed, 1.35);
+    dirLight.position.set(14, 24, 16);
+    dirLight.castShadow = true;
+    scene.add(dirLight);
+
+    // Grassy Riverbank Ground
+    const groundGeo = new THREE.PlaneGeometry(84, 44, 32, 16);
+    const groundMat = new THREE.MeshStandardMaterial({ color: 0x48bb78, roughness: 0.85 });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.22;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    // Meandering Crystal Stream
+    const STEP = 2.4;
+    const streamGeo = new THREE.BoxGeometry(STEP * 21 + 6, 0.2, 5.2);
+    const streamMat = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      roughness: 0.1,
+      metalness: 0.4,
+      transparent: true,
+      opacity: 0.85,
+    });
+    const stream = new THREE.Mesh(streamGeo, streamMat);
+    stream.position.set(0, -0.05, 0);
+    stream.receiveShadow = true;
+    scene.add(stream);
+
+    const bankEdgeMat = new THREE.MeshStandardMaterial({ color: 0x86efac, roughness: 0.9 });
+    const bankNorth = new THREE.Mesh(new THREE.BoxGeometry(STEP * 21 + 8, 0.22, 0.6), bankEdgeMat);
+    bankNorth.position.set(0, 0.02, -2.6); scene.add(bankNorth);
+    const bankSouth = new THREE.Mesh(new THREE.BoxGeometry(STEP * 21 + 8, 0.22, 0.6), bankEdgeMat);
+    bankSouth.position.set(0, 0.02, 2.6); scene.add(bankSouth);
+
+    // ── STEPPING STONES WITH 100% UPRIGHT TEXTURE ────────────────────
+    const stoneMeshes = [];
+    const stoneGlowRings = [];
+    const stoneGeo = new THREE.CylinderGeometry(0.92, 1.02, 0.26, 32);
+
+    function getStoneX(n) { return (n - 10) * STEP; }
+
+    /**
+     * Creates an upright texture.
+     * Note: Rotating by Math.PI (180 deg) ensures numerals face the viewer upright when camera looks down from +Z!
+     */
+    function createStoneTexture(num, isSel, dark) {
+      const c = document.createElement('canvas');
+      c.width = 256; c.height = 256;
+      const ctx = c.getContext('2d');
+
+      // Rotate -90 degrees so numerals are upright to camera
+      ctx.translate(128, 128);
+      ctx.rotate(-Math.PI / 2);
+      ctx.translate(-128, -128);
+
+      // Radial stone gradient
+      const grad = ctx.createRadialGradient(128, 128, 15, 128, 128, 122);
+      if (isSel) {
+        grad.addColorStop(0, '#fef9c3');
+        grad.addColorStop(0.5, '#f59e0b');
+        grad.addColorStop(1, '#b45309');
+      } else if (dark) {
+        grad.addColorStop(0, '#38bdf8');
+        grad.addColorStop(0.4, '#1e3a8a');
+        grad.addColorStop(1, '#0f172a');
+      } else {
+        grad.addColorStop(0, '#ffffff');
+        grad.addColorStop(0.5, '#e2e8f0');
+        grad.addColorStop(1, '#94a3b8');
+      }
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(128, 128, 120, 0, Math.PI * 2); ctx.fill();
+
+      // Outer rim
+      ctx.lineWidth = isSel ? 12 : 7;
+      ctx.strokeStyle = isSel ? '#ffffff' : (dark ? '#38bdf8' : '#cbd5e1');
+      ctx.stroke();
+
+      // Nepali Numeral (top)
+      ctx.fillStyle = isSel ? '#78350f' : (dark ? '#f8fafc' : '#0f172a');
+      ctx.font = 'bold 84px Mukta, sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(NEP_NUMS[num], 128, 88);
+
+      // Clean divider
+      ctx.beginPath(); ctx.moveTo(64, 140); ctx.lineTo(192, 140);
+      ctx.lineWidth = 3.5;
+      ctx.strokeStyle = isSel ? 'rgba(120, 53, 15, 0.4)' : (dark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.18)');
+      ctx.stroke();
+
+      // English Numeral (bottom)
+      ctx.font = 'bold 68px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(num.toString(), 128, 186);
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.needsUpdate = true;
+      return tex;
+    }
+
+    const ringGeo = new THREE.RingGeometry(1.05, 1.25, 32);
+    const ringMat = new THREE.MeshBasicMaterial({ color: 0xfbbf24, side: THREE.DoubleSide });
+
+    for (let i = 0; i <= 20; i++) {
+      const isSel = i === pos;
+      const mat = new THREE.MeshStandardMaterial({
+        map: createStoneTexture(i, isSel, isDark),
+        roughness: 0.45,
+        metalness: 0.05,
+      });
+      const mesh = new THREE.Mesh(stoneGeo, mat);
+      mesh.position.set(getStoneX(i), isSel ? 0.28 : 0.15, 0);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      mesh.userData = { index: i };
+      scene.add(mesh);
+      stoneMeshes.push(mesh);
+
+      const glowRing = new THREE.Mesh(ringGeo, ringMat);
+      glowRing.rotation.x = -Math.PI / 2;
+      glowRing.position.set(getStoneX(i), 0.16, 0);
+      glowRing.visible = isSel;
+      scene.add(glowRing);
+      stoneGlowRings.push(glowRing);
+    }
+
+    function updateStones() {
+      stoneMeshes.forEach((mesh, idx) => {
+        const isSel = idx === pos;
+        mesh.material.map.dispose();
+        mesh.material.map = createStoneTexture(idx, isSel, isDark);
+        mesh.material.needsUpdate = true;
+        mesh.position.y = isSel ? 0.28 : 0.15;
+        stoneGlowRings[idx].visible = isSel;
+      });
+    }
+
+    // ── 3D FROG CHARACTER ───────────────────────────────────────────
+    const frogGroup = new THREE.Group();
+    scene.add(frogGroup);
+    frogGroup.position.set(getStoneX(pos), 0.44, 0);
+
+    const frogMat = new THREE.MeshStandardMaterial({ color: 0x22c55e, roughness: 0.32 });
+    const bellyMat = new THREE.MeshStandardMaterial({ color: 0xfef08a, roughness: 0.45 });
+
+    // Torso
+    const bodyMesh = new THREE.Mesh(new THREE.SphereGeometry(0.72, 28, 24), frogMat);
+    bodyMesh.scale.set(1.15, 0.94, 1.05); bodyMesh.position.y = 0.52; bodyMesh.castShadow = true;
+    frogGroup.add(bodyMesh);
+
+    // Belly
+    const bellyMesh = new THREE.Mesh(new THREE.SphereGeometry(0.55, 20, 18), bellyMat);
+    bellyMesh.scale.set(0.95, 0.82, 0.38); bellyMesh.position.set(0, 0.44, 0.52);
+    frogGroup.add(bellyMesh);
+
+    // Eyes
+    const eyeWhite = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.15 });
+    const pupilMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.1 });
+    const specMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+
+    const leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.26, 20, 20), eyeWhite);
+    leftEye.position.set(-0.38, 1.12, 0.24); leftEye.castShadow = true; frogGroup.add(leftEye);
+    const leftPupil = new THREE.Mesh(new THREE.SphereGeometry(0.13, 16, 16), pupilMat);
+    leftPupil.position.set(-0.38, 1.12, 0.45); frogGroup.add(leftPupil);
+    const leftSpec = new THREE.Mesh(new THREE.SphereGeometry(0.045, 10, 10), specMat);
+    leftSpec.position.set(-0.34, 1.20, 0.55); frogGroup.add(leftSpec);
+
+    const rightEye = new THREE.Mesh(new THREE.SphereGeometry(0.26, 20, 20), eyeWhite);
+    rightEye.position.set(0.38, 1.12, 0.24); rightEye.castShadow = true; frogGroup.add(rightEye);
+    const rightPupil = new THREE.Mesh(new THREE.SphereGeometry(0.13, 16, 16), pupilMat);
+    rightPupil.position.set(0.38, 1.12, 0.45); frogGroup.add(rightPupil);
+    const rightSpec = new THREE.Mesh(new THREE.SphereGeometry(0.045, 10, 10), specMat);
+    rightSpec.position.set(0.42, 1.20, 0.55); frogGroup.add(rightSpec);
+
+    // Rosy Cheeks & Smile
+    const cheekMat = new THREE.MeshBasicMaterial({ color: 0xf472b6, transparent: true, opacity: 0.65 });
+    const leftCheek = new THREE.Mesh(new THREE.CircleGeometry(0.12, 16), cheekMat);
+    leftCheek.position.set(-0.46, 0.65, 0.64); leftCheek.rotation.y = -0.3; frogGroup.add(leftCheek);
+    const rightCheek = new THREE.Mesh(new THREE.CircleGeometry(0.12, 16), cheekMat);
+    rightCheek.position.set(0.46, 0.65, 0.64); rightCheek.rotation.y = 0.3; frogGroup.add(rightCheek);
+
+    const smileMesh = new THREE.Mesh(new THREE.TorusGeometry(0.24, 0.035, 8, 24, Math.PI * 0.8), new THREE.MeshBasicMaterial({ color: 0x064e3b }));
+    smileMesh.position.set(0, 0.62, 0.68); smileMesh.rotation.z = Math.PI * 1.1;
+    frogGroup.add(smileMesh);
+
+    // Front Webbed Hands
+    const handGeo = new THREE.SphereGeometry(0.16, 14, 12); handGeo.scale(1.2, 0.45, 1.4);
+    const leftHand = new THREE.Mesh(handGeo, frogMat);
+    leftHand.position.set(-0.52, 0.12, 0.52); leftHand.castShadow = true; frogGroup.add(leftHand);
+    const rightHand = new THREE.Mesh(handGeo, frogMat);
+    rightHand.position.set(0.52, 0.12, 0.52); rightHand.castShadow = true; frogGroup.add(rightHand);
+
+    // Back Thighs
+    const thighGeo = new THREE.SphereGeometry(0.38, 16, 14); thighGeo.scale(0.8, 1.1, 1.2);
+    const leftThigh = new THREE.Mesh(thighGeo, frogMat);
+    leftThigh.position.set(-0.72, 0.38, -0.12); leftThigh.rotation.z = 0.35; leftThigh.castShadow = true; frogGroup.add(leftThigh);
+    const rightThigh = new THREE.Mesh(thighGeo, frogMat);
+    rightThigh.position.set(0.72, 0.38, -0.12); rightThigh.rotation.z = -0.35; rightThigh.castShadow = true; frogGroup.add(rightThigh);
+
+    // Clustered Canopy Trees
+    const trunkMat = new THREE.MeshStandardMaterial({ color: 0x78350f, roughness: 0.9 });
+    const leafMats = [
+      new THREE.MeshStandardMaterial({ color: 0x16a34a, roughness: 0.65 }),
+      new THREE.MeshStandardMaterial({ color: 0x22c55e, roughness: 0.65 }),
+      new THREE.MeshStandardMaterial({ color: 0x15803d, roughness: 0.65 }),
+    ];
+
+    [-24, -18, -11, -4, 4, 11, 18, 24].forEach((tx, i) => {
+      const tree = new THREE.Group();
+      const tr = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.42, 2.8, 10), trunkMat);
+      tr.position.y = 1.3; tr.castShadow = true; tree.add(tr);
+
+      const mat = leafMats[i % leafMats.length];
+      const mainCanopy = new THREE.Mesh(new THREE.SphereGeometry(1.6, 16, 14), mat);
+      mainCanopy.position.y = 3.6; mainCanopy.castShadow = true; tree.add(mainCanopy);
+
+      const sub1 = new THREE.Mesh(new THREE.SphereGeometry(1.1, 12, 10), mat);
+      sub1.position.set(-0.8, 3.2, 0.3); sub1.castShadow = true; tree.add(sub1);
+      const sub2 = new THREE.Mesh(new THREE.SphereGeometry(1.0, 12, 10), mat);
+      sub2.position.set(0.8, 3.1, -0.2); sub2.castShadow = true; tree.add(sub2);
+
+      tree.position.set(tx, 0, -8 - (i % 2) * 2.5); scene.add(tree);
+    });
+
+    // ── CLICK, DRAG, 360 ORBIT & ZOOM STATE ─────────────────────────
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let isDragging = false;
+    let isOrbiting = false;
+    let orbitStartX = 0;
+    let orbitStartY = 0;
+    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+
+    // ── ANIMATION LOOP WITH 3D ORBIT, ZOOM & TRACKING ──────────────
+    let clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const delta = clock.getDelta();
+      const elapsed = clock.getElapsedTime();
+
+      // Smooth horizontal camera tracking
+      const targetCamX = frogGroup.position.x * 0.85;
+      cameraTarget.x += (targetCamX - cameraTarget.x) * 0.08;
+
+      // Spherical coordinate positioning for smooth rotation and zoom
+      const sinPhi = Math.sin(cameraSpherical.phi);
+      const cosPhi = Math.cos(cameraSpherical.phi);
+      const sinTheta = Math.sin(cameraSpherical.theta);
+      const cosTheta = Math.cos(cameraSpherical.theta);
+
+      const targetX = cameraTarget.x + cameraSpherical.radius * sinPhi * sinTheta;
+      const targetY = cameraTarget.y + cameraSpherical.radius * cosPhi;
+      const targetZ = cameraTarget.z + cameraSpherical.radius * sinPhi * cosTheta;
+
+      camera.position.x += (targetX - camera.position.x) * 0.16;
+      camera.position.y += (targetY - camera.position.y) * 0.16;
+      camera.position.z += (targetZ - camera.position.z) * 0.16;
+      camera.lookAt(cameraTarget.x, cameraTarget.y, cameraTarget.z);
+
+      if (isJumping) {
+        const p = Math.min(1, (performance.now() - jumpStartTime) / (jumpDuration * 1000));
+        const sX = getStoneX(jumpStartPos);
+        const tX = getStoneX(targetPos);
+        const dist = Math.abs(targetPos - jumpStartPos);
+        const h = isDoubleJump ? 2.5 : Math.min(2.8, 1.2 + Math.sqrt(dist) * 0.55);
+
+        frogGroup.position.x = sX + (tX - sX) * p;
+        frogGroup.position.y = 0.44 + 4 * h * p * (1 - p);
+        frogGroup.rotation.z = Math.sin(p * Math.PI) * (tX >= sX ? -0.22 : 0.22);
+
+        const stretch = 1 + Math.sin(p * Math.PI) * 0.25;
+        frogGroup.scale.set(1 / Math.sqrt(stretch), stretch, 1 / Math.sqrt(stretch));
+
+        if (p >= 1) {
+          isJumping = false;
+          frogGroup.scale.set(1.22, 0.72, 1.22);
+        }
+      } else if (!isDragging) {
+        frogGroup.position.y = 0.44 + Math.sin(elapsed * 2.8) * 0.04;
+        frogGroup.scale.x += (1 - frogGroup.scale.x) * 0.12;
+        frogGroup.scale.y += (1 - frogGroup.scale.y) * 0.12;
+        frogGroup.scale.z += (1 - frogGroup.scale.z) * 0.12;
+        frogGroup.rotation.z += (0 - frogGroup.rotation.z) * 0.12;
+      }
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    function onResize() {
+      if (!container || !renderer || !camera) return;
+      const w = container.clientWidth || 800;
+      const h = container.clientHeight || 500;
+      if (w > 0 && h > 0) {
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h, false);
+      }
+    }
+    window.addEventListener('resize', onResize);
+    // Initial size trigger
+    requestAnimationFrame(onResize);
+
+    container.addEventListener('pointerdown', (e) => {
+      const rect = container.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+
+      if (raycaster.intersectObjects(frogGroup.children, true).length > 0) {
+        isDragging = true;
+        return;
+      }
+
+      const hits = raycaster.intersectObjects(stoneMeshes);
+      if (hits.length > 0) {
+        const dest = hits[0].object.userData.index;
+        if (dest !== pos) jumpTo(dest);
+        return;
+      }
+
+      // Dragging on ground/river freely orbits camera in 3D
+      isOrbiting = true;
+      orbitStartX = e.clientX;
+      orbitStartY = e.clientY;
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (isDragging) {
+        const rect = container.getBoundingClientRect();
+        mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+
+        const pt = new THREE.Vector3();
+        if (raycaster.ray.intersectPlane(plane, pt)) {
+          const minX = getStoneX(0);
+          const maxX = getStoneX(20);
+          const cX = Math.max(minX, Math.min(maxX, pt.x));
+          frogGroup.position.x = cX;
+          frogGroup.position.y = 0.75;
+        }
+      } else if (isOrbiting) {
+        const dx = e.clientX - orbitStartX;
+        const dy = e.clientY - orbitStartY;
+        orbitStartX = e.clientX;
+        orbitStartY = e.clientY;
+
+        cameraSpherical.theta -= dx * 0.007;
+        cameraSpherical.phi = Math.max(0.12, Math.min(Math.PI / 2 - 0.05, cameraSpherical.phi - dy * 0.007));
+      }
+    });
+
+    window.addEventListener('pointerup', () => {
+      if (isDragging) {
+        isDragging = false;
+        const nearest = Math.round((frogGroup.position.x / STEP) + 10);
+        jumpTo(Math.max(0, Math.min(20, nearest)));
+      }
+      isOrbiting = false;
+    });
+
+    // Mouse wheel zoom
+    container.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      cameraZoom(e.deltaY * 0.015);
+    }, { passive: false });
+
+    // Touch pinch zoom
+    let touchPinchDist = null;
+    container.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const dist = Math.hypot(dx, dy);
+        if (touchPinchDist !== null) {
+          const diff = touchPinchDist - dist;
+          cameraZoom(diff * 0.04);
+        }
+        touchPinchDist = dist;
+      }
+    });
+    container.addEventListener('touchend', () => { touchPinchDist = null; });
+
+    // ── CAMERA CONTROL FUNCTIONS ─────────────────────────────────────
+    function cameraZoom(delta) {
+      cameraSpherical.radius = Math.max(5.5, Math.min(38, cameraSpherical.radius + delta));
+    }
+    function cameraRotateY(delta) {
+      cameraSpherical.theta += delta;
+    }
+    let isTopView = false;
+    function toggleViewAngle() {
+      isTopView = !isTopView;
+      const btn = document.getElementById('btnViewToggle');
+      if (isTopView) {
+        cameraSpherical.phi = 0.12;
+        cameraSpherical.radius = 21;
+        cameraSpherical.theta = 0;
+        if (btn) btn.textContent = '📐 3D View';
+      } else {
+        cameraSpherical.phi = 1.01;
+        cameraSpherical.radius = 16.0;
+        cameraSpherical.theta = 0;
+        if (btn) btn.textContent = '📐 Top View';
+      }
+    }
+    function resetCameraView() {
+      isTopView = false;
+      cameraSpherical.phi = 1.01;
+      cameraSpherical.radius = 16.0;
+      cameraSpherical.theta = 0;
+      cameraTarget.set(frogGroup.position.x * 0.85, 0.8, 0);
+      const btn = document.getElementById('btnViewToggle');
+      if (btn) btn.textContent = '📐 Top';
+    }
+
+    // ── STAGE RESIZING & SPLITTER DIVIDER ─────────────────────────────
+    let isResizingSplitter = false;
+    const splitter = document.getElementById('splitterHandle');
+    const sidebar = document.getElementById('sidebar');
+    let isSidebarCollapsed = false;
+
+    function toggleSidebarCollapse() {
+      isSidebarCollapsed = !isSidebarCollapsed;
+      sidebar.classList.toggle('collapsed', isSidebarCollapsed);
+      const btnIcon = document.getElementById('stageExpandIcon');
+      const btnText = document.getElementById('stageExpandText');
+      const splitBtn = document.getElementById('splitterBtn');
+      if (isSidebarCollapsed) {
+        if (btnIcon) btnIcon.textContent = '▶';
+        if (btnText) btnText.textContent = 'Show Sidebar';
+        if (splitBtn) splitBtn.textContent = '▶';
+      } else {
+        if (btnIcon) btnIcon.textContent = '⛶';
+        if (btnText) btnText.textContent = 'Expand Stage';
+        if (splitBtn) splitBtn.textContent = '◀';
+      }
+      setTimeout(onResize, 230);
+    }
+
+    function setStagePreset(preset) {
+      if (preset === 'full') {
+        if (!isSidebarCollapsed) toggleSidebarCollapse();
+      } else if (preset === '70/30') {
+        if (isSidebarCollapsed) toggleSidebarCollapse();
+        sidebar.style.width = '360px';
+        setTimeout(onResize, 230);
+      }
+    }
+
+    if (splitter) {
+      splitter.addEventListener('pointerdown', (e) => {
+        isResizingSplitter = true;
+        splitter.classList.add('dragging');
+        document.body.style.cursor = 'col-resize';
+        e.preventDefault();
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!isResizingSplitter) return;
+        const containerRect = document.getElementById('mainWorkspace').getBoundingClientRect();
+        const newSidebarWidth = containerRect.right - e.clientX;
+        if (newSidebarWidth >= 240 && newSidebarWidth <= Math.min(650, containerRect.width - 280)) {
+          sidebar.classList.remove('collapsed');
+          isSidebarCollapsed = false;
+          sidebar.style.width = `${newSidebarWidth}px`;
+          onResize();
+        }
+      });
+
+      window.addEventListener('pointerup', () => {
+        if (isResizingSplitter) {
+          isResizingSplitter = false;
+          splitter.classList.remove('dragging');
+          document.body.style.cursor = '';
+          onResize();
+        }
+      });
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
+      onResize();
+    });
+    resizeObserver.observe(container);
+
+    // ── MOVEMENT LOGIC ───────────────────────────────────────────────
+    function jumpTo(dest, double = false) {
+      dest = Math.max(0, Math.min(20, dest));
+      if (dest === pos && !isJumping) return;
+
+      playHopSound(dest);
+      jumpStartPos = pos;
+      targetPos = dest;
+      pos = dest;
+      isDoubleJump = double;
+      jumpStartTime = performance.now();
+      isJumping = true;
+
+      frogGroup.rotation.y = dest >= jumpStartPos ? 0 : Math.PI;
+
+      updateUI();
+      updateStones();
+      speakNumber(dest);
+      checkChallenge();
+    }
+
+    function step(delta) {
+      if (isJumping) return;
+      jumpTo(pos + delta, delta === 2);
     }
 
     function resetPos() {
-      pos = 0; targetPos = 0;
-      document.getElementById('posNum').textContent = 0;
-      document.getElementById('posNep').textContent = `सङ्ख्या: ० (शून्य)`;
+      if (isJumping) return;
+      jumpTo(0);
+    }
+
+    function updateUI() {
+      document.getElementById('posEn').textContent = pos;
+      document.getElementById('posNp').textContent = NEP_NUMS[pos];
+      document.getElementById('posWordEn').textContent = EN_WORDS[pos];
+      document.getElementById('posWordNp').textContent = NEP_WORDS[pos];
+      document.getElementById('chalEq').textContent = `Current Position: ${pos} (${NEP_NUMS[pos]} - ${NEP_WORDS[pos]})`;
+    }
+
+    function showToast(text) {
+      const b = document.getElementById('toast-banner');
+      b.textContent = text;
+      b.style.display = 'block';
+      playSuccessSound();
+      stars++;
+      document.getElementById('starsCount').textContent = `⭐ ${stars}`;
+      setTimeout(() => { b.style.display = 'none'; }, 2800);
+    }
+
+    // ── 6 CURRICULUM MODES ───────────────────────────────────────────
+    function setMode(mode) {
+      activeMode = mode;
+      document.querySelectorAll('.mode-btn').forEach((p, i) => {
+        p.classList.toggle('active', ['EXPLORE','COUNTING','ADDITION','SUBTRACTION','MISSING','RECOGNIZE'][i] === mode);
+      });
+      document.getElementById('nextQBtn').style.display = mode === 'EXPLORE' ? 'none' : 'inline-flex';
+      nextChallenge();
+    }
+
+    function nextChallenge() {
+      const cTag = document.getElementById('chalTag');
+      const cTitle = document.getElementById('chalTitle');
+      const cSub = document.getElementById('chalSub');
+
+      if (activeMode === 'EXPLORE') {
+        cTag.textContent = 'FREE EXPLORATION';
+        cTitle.textContent = 'Hop anywhere from ० to २०!';
+        cSub.textContent = 'अगाडि वा पछाडि उफ्रिएर सङ्ख्याहरू सिक्नुहोस् ।';
+        challenge = null;
+        updateUI();
+        return;
+      }
+
+      if (activeMode === 'COUNTING') {
+        cTag.textContent = 'COUNTING ADVENTURE';
+        const target = Math.floor(Math.random() * 14) + 6;
+        jumpTo(0);
+        challenge = { target, solved: false };
+        cTitle.textContent = `Goal: Reach number ${target} (${NEP_NUMS[target]})!`;
+        cSub.textContent = `भ्यागुतालाई एक-एक पाइला उफ्रिएर ${NEP_NUMS[target]} सम्म पुर्‍याउनुहोस् ।`;
+      } else if (activeMode === 'ADDITION') {
+        cTag.textContent = 'ADDITION (जोड)';
+        const a = Math.floor(Math.random() * 9) + 2;
+        const b = Math.floor(Math.random() * 6) + 2;
+        jumpTo(a);
+        challenge = { target: a + b, eq: `${a} + ${b} = ${a + b}`, eqNp: `${NEP_NUMS[a]} + ${NEP_NUMS[b]} = ${NEP_NUMS[a + b]}`, solved: false };
+        cTitle.textContent = `Question: ${a} + ${b} = ? (${NEP_NUMS[a]} + ${NEP_NUMS[b]} = ?)`;
+        cSub.textContent = `Start at ${a} and hop forward ${b} steps!`;
+      } else if (activeMode === 'SUBTRACTION') {
+        cTag.textContent = 'SUBTRACTION (घटाउ)';
+        const a = Math.floor(Math.random() * 10) + 8;
+        const b = Math.floor(Math.random() * 6) + 2;
+        jumpTo(a);
+        challenge = { target: a - b, eq: `${a} − ${b} = ${a - b}`, eqNp: `${NEP_NUMS[a]} − ${NEP_NUMS[b]} = ${NEP_NUMS[a - b]}`, solved: false };
+        cTitle.textContent = `Question: ${a} − ${b} = ? (${NEP_NUMS[a]} − ${NEP_NUMS[b]} = ?)`;
+        cSub.textContent = `Start at ${a} and hop backward ${b} steps!`;
+      } else if (activeMode === 'MISSING') {
+        cTag.textContent = 'MISSING NUMBER';
+        const start = Math.floor(Math.random() * 15) + 1;
+        jumpTo(start);
+        challenge = { target: start + 2, solved: false };
+        cTitle.textContent = `Sequence: ${start}, ${start + 1}, [ ? ], ${start + 3}`;
+        cSub.textContent = `क्रममा हराएको सङ्ख्यामा भ्यागुतालाई उफार्नुहोस् ।`;
+      } else if (activeMode === 'RECOGNIZE') {
+        cTag.textContent = 'NUMBER RECOGNITION';
+        const target = Math.floor(Math.random() * 21);
+        challenge = { target, solved: false };
+        cTitle.textContent = `Find number ${target} (${NEP_NUMS[target]} - ${NEP_WORDS[target]})!`;
+        cSub.textContent = `सङ्ख्या रेखामा ${NEP_NUMS[target]} पत्ता लगाउनुहोस् ।`;
+      }
+    }
+
+    function checkChallenge() {
+      if (!challenge || challenge.solved || activeMode === 'EXPLORE') return;
+      if (pos === challenge.target) {
+        challenge.solved = true;
+        const msg = challenge.eq
+          ? `⭐ Syabas! ${challenge.eq} (${challenge.eqNp})`
+          : `⭐ Syabas! Landed on ${pos} (${NEP_NUMS[pos]} - ${NEP_WORDS[pos]})!`;
+        showToast(msg);
+      }
+    }
+
+    // ── THEME & FULLSCREEN ───────────────────────────────────────────
+    function toggleTheme() {
+      isDark = !isDark;
+      document.body.classList.toggle('dark-theme', isDark);
+      document.getElementById('themeBtn').textContent = isDark ? '☾ Dark' : '☀ Light';
+
+      scene.background.setHex(isDark ? 0x0f172a : 0xdbeafe);
+      scene.fog.color.setHex(isDark ? 0x0f172a : 0xdbeafe);
+      dirLight.color.setHex(isDark ? 0x7dd3fc : 0xfffaed);
+      dirLight.intensity = isDark ? 0.8 : 1.35;
+      hemiLight.color.setHex(isDark ? 0x334155 : 0xffffff);
+
+      updateStones();
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundBtn').textContent = soundEnabled ? '🔊 Sound' : '🔇 Mute';
     }
 
     function toggleFullscreen() {
@@ -180,72 +1403,13 @@
       else document.exitFullscreen().catch(()=>{});
     }
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const startX = 40;
-      const endX = canvas.width - 40;
-      const lineY = canvas.height / 2 + 50;
-      const step = (endX - startX) / 20;
-
-      // Draw Main Number Line
-      ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 4;
-      ctx.beginPath();
-      ctx.moveTo(startX, lineY);
-      ctx.lineTo(endX, lineY);
-      ctx.stroke();
-
-      // Tick marks and numbers 0 to 20
-      for (let i = 0; i <= 20; i++) {
-        const x = startX + i * step;
-        ctx.strokeStyle = (i === pos) ? '#facc15' : '#64748b';
-        ctx.lineWidth = (i === pos) ? 3 : 2;
-        ctx.beginPath();
-        ctx.moveTo(x, lineY - 12);
-        ctx.lineTo(x, lineY + 12);
-        ctx.stroke();
-
-        // English number
-        ctx.fillStyle = (i === pos) ? '#facc15' : '#cbd5e1';
-        ctx.font = (i === pos) ? 'bold 15px sans-serif' : '13px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(i, x, lineY + 30);
-
-        // Nepali number
-        ctx.fillStyle = (i === pos) ? '#facc15' : '#94a3b8';
-        ctx.font = '12px sans-serif';
-        ctx.fillText(nepNums[i], x, lineY + 48);
-      }
-
-      // Smooth frog animation
-      animFrogX += (targetPos - animFrogX) * 0.15;
-      const frogPixelX = startX + animFrogX * step;
-      const arcHeight = Math.abs(targetPos - animFrogX) * 45;
-      const frogPixelY = lineY - 24 - arcHeight;
-
-      // Draw Frog
-      ctx.fillStyle = '#22c55e';
-      ctx.beginPath();
-      ctx.arc(frogPixelX, frogPixelY, 18, 0, 2 * Math.PI);
-      ctx.fill();
-
-      // Frog Eyes
-      ctx.fillStyle = '#fff';
-      ctx.beginPath();
-      ctx.arc(frogPixelX - 7, frogPixelY - 14, 6, 0, 2 * Math.PI);
-      ctx.arc(frogPixelX + 7, frogPixelY - 14, 6, 0, 2 * Math.PI);
-      ctx.fill();
-
-      ctx.fillStyle = '#000';
-      ctx.beginPath();
-      ctx.arc(frogPixelX - 7, frogPixelY - 14, 3, 0, 2 * Math.PI);
-      ctx.arc(frogPixelX + 7, frogPixelY - 14, 3, 0, 2 * Math.PI);
-      ctx.fill();
-
-      requestAnimationFrame(draw);
-    }
-
-    draw();
+    // Keyboard shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') step(1);
+      else if (e.key === 'ArrowLeft') step(-1);
+      else if (e.key === ' ') step(2);
+      else if (e.key === '0' || e.key === 'Home') resetPos();
+    });
   </script>
 </body>
 </html>

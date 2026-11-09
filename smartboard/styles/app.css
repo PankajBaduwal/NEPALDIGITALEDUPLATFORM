@@ -11872,3 +11872,36 @@ body.gos-show-sidebar #color-palette {
     min-height: 30px !important;
   }
 }
+
+/* ── Nepal board: symbol-only controls (names stay in the tooltips) ─────────────────────── */
+#board-fullscreen-float-btn { width: 42px; height: 42px; padding: 0 !important; border-radius: 50% !important; justify-content: center; gap: 0 !important; }
+#board-fullscreen-float-btn span { display: none !important; }
+#board-fullscreen-float-btn svg { width: 20px !important; height: 20px !important; }
+.right-controls-tab { padding: 14px 7px !important; display: flex; align-items: center; justify-content: center; line-height: 1; }
+.right-controls-tab:hover { padding-right: 9px !important; }
+.mini-controls-reopen-tab { padding: 12px 8px !important; font-size: 14px !important; line-height: 1; }
+#btn-toggle-controls .toggle-text { display: none !important; }
+#btn-toggle-controls { padding-left: 10px; padding-right: 10px; }
+
+/* ── One AI button only: the Nepal curriculum assistant (#smartboard-ai-btn). The generic round one is hidden. ── */
+#btn-ai-fab { display: none !important; }
+body.controls-dock-right #smartboard-ai-btn { right: auto !important; left: 76px; }
+
+/* ── Page options dialog: Clear page / Delete page ── */
+.fs-page-choices { display: grid; gap: 9px; margin-top: 14px; text-align: left; }
+.fs-page-choice { display: flex; flex-direction: column; gap: 3px; width: 100%; padding: 12px 14px; border-radius: 12px; cursor: pointer; font-family: inherit;
+  border: 1px solid rgba(20,184,166,.45); background: rgba(20,184,166,.1); color: #0f172a; text-align: left; }
+.fs-page-choice b { font-size: 14px; font-weight: 800; color: #0f766e; }
+.fs-page-choice span { font-size: 12px; line-height: 1.4; color: #475569; }
+.fs-page-choice:hover { background: rgba(20,184,166,.2); }
+.fs-page-choice.danger { border-color: rgba(220,38,38,.45); background: rgba(220,38,38,.08); }
+.fs-page-choice.danger b { color: #b91c1c; }
+.fs-page-choice.danger:hover { background: rgba(220,38,38,.16); }
+.fs-page-choice:disabled { opacity: .5; cursor: not-allowed; }
+.fs-page-choice { color: #e2e8f0; }
+.fs-page-choice b { color: #5eead4; font-size: 14.5px; }
+.fs-page-choice span { color: #b4c4d3; }
+.fs-page-choice.danger b { color: #fca5a5; }
+
+/* Local board: no cloud, so the platform cloud-save pill (title / Save / Notes) is not shown */
+body.sb-local #pd-cloud-sync-pill { display: none !important; }

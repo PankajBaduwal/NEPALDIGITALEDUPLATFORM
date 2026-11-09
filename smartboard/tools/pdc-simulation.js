@@ -344,7 +344,7 @@
               window.parent.postMessage({ type: 'EDUVERSE_SIM_CLOSE' }, '*');
             }
           } catch (e) {}
-          window.location.href = 'index.html?role=teacher&subjectCode=U25RPHU02';
+          window.location.href = '../index.html?role=teacher&subjectCode=U25RPHU02';
         }
       });
     }

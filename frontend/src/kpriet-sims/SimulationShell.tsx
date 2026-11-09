@@ -850,7 +850,7 @@ export const SimulationShell: React.FC<SimulationShellProps> = ({
       : isEcg ? 'ecg-simulation.html'
       : 'ma-simulation.html';
 
-    return `/smartboard/${page}?${query}`;
+    return `/smartboard/simulations/${page}?${query}`;
   }, [iframeUrl, definition, subject, isPhysicsDataStorage, isEssentialsComputing, params, theme]);
 
   const isIframeMode = Boolean(effectiveIframeUrl);

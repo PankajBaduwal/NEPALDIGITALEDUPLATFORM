@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <script src="../components/access-guard.js?v=2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#f4f5f9">
+  <title>Probability &amp; Statistical Modeling for Computing Systems · Eduverse</title>
+  <link rel="stylesheet" href="../styles/ep-simulation.css?v=3.2">
+  <link rel="stylesheet" href="../styles/sim-shell.css?v=3.2">
+  <link rel="stylesheet" href="../styles/ps-simulation.css?v=3.2">
+</head>
+<body>
+  <main class="ep-app" id="ep-app">
+    <!-- Header with Breadcrumbs, Title, Subtitle, and Actions -->
+    <header class="ep-header">
+      <div class="ep-brand" id="ps-brand-mark" aria-hidden="true">PS</div>
+      <div class="ep-heading">
+        <nav class="ep-crumbs" id="ep-crumbs" aria-label="Location">Semester III › Probability &amp; Statistical Modeling</nav>
+        <h1><span id="ep-title">Random Experiment &amp; Sample Space Explorer ⭐ (Flagship)</span></h1>
+        <p id="ep-subtitle">U25MA301 · Unit I · Probability &amp; Random Variables · BSC (4 Credits)</p>
+      </div>
+      <div class="ep-header-actions">
+        <div class="ep-learn ep-player-only" id="ep-learn" role="group" aria-label="Learning mode">
+          <button type="button" class="ep-seg active" data-learn="learn" title="Learn mode">📘 Learn</button>
+          <button type="button" class="ep-seg" data-learn="experiment" title="Experiment mode">🧪 Experiment</button>
+          <button type="button" class="ep-seg" data-learn="challenge" title="Challenge mode">🏆 Challenge</button>
+        </div>
+        <!-- Dark / White Theme Toggle Button -->
+        <button type="button" id="ps-theme-toggle" class="ep-btn ep-btn-outline" title="Toggle between Dark and White theme" aria-label="Toggle Color Theme">
+          🌓 Dark Theme
+        </button>
+        <button type="button" id="ep-export" class="ep-btn ep-btn-outline" title="Download the current simulation view as a PNG image">⬇ Export</button>
+        <button type="button" id="ep-fullscreen" class="ep-btn ep-btn-outline ep-icon-btn" title="Full screen" aria-label="Full screen">⛶</button>
+      </div>
+    </header>
+
+    <!-- Player with Docks & Stage -->
+    <section id="ep-player" class="ep-player">
+      <div class="ep-layout">
+        <!-- Center Stage Area (LEFT in full screen) -->
+        <section class="ep-center">
+          <div class="ep-card ep-stage">
+            <!-- Top Readouts & State Badges -->
+            <div class="ep-stage-top">
+              <div id="ep-readouts" class="ep-readouts" aria-live="polite"></div>
+              <div class="ps-stage-badges" id="ps-stage-badges" style="display:flex;gap:6px">
+                <span class="ep-badge" id="ps-overlay-sim">Discrete Sample Space</span>
+                <span class="ep-badge ep-badge-accent" id="ps-overlay-state">Exact Fractions</span>
+              </div>
+            </div>
+
+            <!-- Stage Row: Step-by-step Working Box + Canvas -->
+            <div id="ep-stage-row" class="ep-stage-row">
+              <div id="ep-work-card" class="ep-work-card">
+                <div class="ep-work-title">Pedagogical Analysis</div>
+                <div id="ep-work-content" class="ep-work-content">
+                  <div class="ps-work-item" style="margin-bottom:8px">
+                    <span style="display:block;font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase">What is happening:</span>
+                    <p id="ps-what" style="margin:0;font-size:12.5px;line-height:1.45;color:var(--ink)">Sample space S initialized with 36 equally likely outcomes for pair of dice.</p>
+                  </div>
+                  <div class="ps-work-item" style="margin-bottom:8px">
+                    <span style="display:block;font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase">Why this happens:</span>
+                    <p id="ps-why" style="margin:0;font-size:12.5px;line-height:1.45;color:var(--ink)">Equally likely outcomes yield probability as ratio: n(E)/n(S). Event union subtracts intersection to avoid double counting.</p>
+                  </div>
+                  <div class="ps-work-item">
+                    <span style="display:block;font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase">Next Step / Effect:</span>
+                    <p id="ps-next-info" style="margin:0;font-size:12.5px;line-height:1.45;color:var(--ink)">Adjust parameters or click Next to step through sample points.</p>
+                  </div>
+                </div>
+              </div>
+              <div id="ep-canvas-wrap" class="ep-canvas-wrap" style="position:relative">
+                <canvas id="ps-canvas" width="1000" height="560" role="img" aria-label="Interactive Probability and Statistics Simulation Canvas"></canvas>
+              </div>
+            </div>
+
+            <div id="ep-warn" class="ep-warn hidden" role="alert"></div>
+
+            <!-- Bottom Step Banner -->
+            <div class="ep-banner" id="ep-banner" aria-live="polite">
+              <span class="ep-banner-no" id="ep-banner-no">Step 1 of 4</span>
+              <div><b id="ep-banner-title">Current State:</b> <span id="ep-banner-text">Theoretical distribution calculated</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right Side: Inspector Dock (Parameters & Inputs | Governing Formula | Metrics | Subject AI) -->
+        <aside class="ep-side" id="ep-side">
+          <!-- 1. Topic & Parameters Panel -->
+          <section class="ep-card" id="ep-params-card" aria-labelledby="ep-params-h">
+            <div class="ep-card-head ep-row">
+              <div>
+                <span class="ep-kicker">PARAMETERS &amp; CONTROLS</span>
+                <h2 id="ep-params-h">Model Parameters</h2>
+              </div>
+              <div class="ep-mini-actions">
+                <button type="button" class="ep-btn ep-small" id="ps-reset-params">↻ Default</button>
+              </div>
+            </div>
+
+            <!-- Curriculum & Simulation Selection -->
+            <div class="ep-topic-pickers" style="margin-bottom:12px;display:flex;flex-direction:column;gap:6px">
+              <label class="ep-field-lbl" style="font-size:11px;font-weight:700;color:var(--muted)">Curriculum Unit
+                <select id="ps-unit" style="width:100%;min-height:36px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:4px 8px;font-size:12.5px;font-weight:600">
+                  <option value="1" selected>Unit I: Probability &amp; Random Variables</option>
+                  <option value="2">Unit II: Standard Probability Distributions</option>
+                  <option value="3">Unit III: Joint Distributions &amp; Statistical Modeling</option>
+                  <option value="4">Unit IV: Sampling Distributions &amp; Hypothesis Testing</option>
+                  <option value="5">Unit V: Stochastic Processes, Queueing &amp; Systems</option>
+                </select>
+              </label>
+              <label class="ep-field-lbl" style="font-size:11px;font-weight:700;color:var(--muted)">Simulation Topic
+                <select id="ps-simulation" style="width:100%;min-height:36px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:4px 8px;font-size:12.5px;font-weight:600"></select>
+              </label>
+            </div>
+
+            <!-- Dynamic Input Form / Sliders -->
+            <form id="ps-inputs-form" class="ep-params" autocomplete="off" onsubmit="return false;"></form>
+            <div id="ps-input-actions" class="ps-input-actions"></div>
+          </section>
+
+          <!-- 2. Governing Formula Panel -->
+          <section class="ep-card ep-formula-card" id="ep-formula-card" aria-labelledby="ep-formula-h">
+            <div class="ep-card-head">
+              <span class="ep-kicker">GOVERNING EQUATION &amp; THEOREM</span>
+              <h2 id="ep-formula-h">Mathematical Model</h2>
+            </div>
+            <div id="ep-formulas" class="ep-formulas">
+              <div id="ps-formula-box" class="ps-formula-code" style="font-family:var(--mono);font-size:12px;padding:8px 12px;background:var(--card-soft);border-radius:6px;border-left:3px solid var(--primary)"></div>
+            </div>
+          </section>
+
+          <!-- 3. Statistical Metrics & Specifications -->
+          <section class="ep-card" id="ep-spec-card">
+            <div class="ep-card-head">
+              <span class="ep-kicker">COMPUTED STATISTICAL PROPERTIES</span>
+              <h2>Summary Quantities</h2>
+            </div>
+            <div id="ps-spec-list"></div>
+          </section>
+
+          <!-- 4. Interactive Challenge Card -->
+          <section class="ep-card" id="ep-challenge-card" style="display:none;border-color:#06b6d4">
+            <div class="ep-card-head">
+              <span class="ep-kicker" style="color:#0891b2">CHALLENGE &amp; ASSESSMENT</span>
+              <h2>Interactive Practical Task</h2>
+            </div>
+            <div class="ps-challenge-body" style="padding:10px 0">
+              <div class="ps-challenge-prompt" id="ps-challenge-prompt" style="font-size:13px;line-height:1.5;margin-bottom:12px"></div>
+              <div style="display:flex;gap:8px">
+                <button type="button" class="ep-btn ep-btn-primary" id="ps-verify-challenge">Verify Answer</button>
+                <button type="button" class="ep-btn" id="ps-reset-challenge">Reset Task</button>
+              </div>
+              <div id="ps-challenge-result" style="margin-top:10px;font-size:12.5px;font-weight:600"></div>
+            </div>
+          </section>
+
+          <!-- 5. Subject AI Assistant -->
+          <section class="ep-card ep-ai" id="ep-ai-card" aria-labelledby="ep-ai-h">
+            <div class="ep-card-head">
+              <span class="ep-kicker">CONTEXT-AWARE TUTOR</span>
+              <h2 id="ep-ai-h">Probability &amp; Stats AI Tutor</h2>
+            </div>
+            <p style="font-size:11.5px;color:var(--muted);margin-bottom:6px">
+              Ask about distributions, variance calculations, Bayes' theorem, hypothesis testing rejection regions, or Little's Law.
+            </p>
+            <textarea id="ps-ai-question" rows="2" placeholder="e.g. Why is the Poisson distribution an approximation to the Binomial?" aria-label="Ask about this simulation step" style="width:100%;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px;font-size:12px"></textarea>
+            <button type="button" class="ep-btn ep-btn-primary" id="ps-ask-ai" style="margin-top:6px;width:100%">Ask Probability AI</button>
+            <div id="ps-ai-answer" class="ep-ai-answer hidden" aria-live="polite"></div>
+          </section>
+        </aside>
+      </div>
+
+      <!-- Footer Playback Controls -->
+      <footer class="ep-controls" id="ep-controls" role="toolbar" aria-label="Simulation controls">
+        <button type="button" class="ep-btn ep-big" id="ep-prev">◀ Prev</button>
+        <button type="button" class="ep-btn ep-big ep-btn-primary" id="ep-play" aria-pressed="false">▶ Play / Sample</button>
+        <button type="button" class="ep-btn ep-big" id="ep-pause" disabled>⏸ Pause</button>
+        <button type="button" class="ep-btn ep-big" id="ep-next">Next Step ▶</button>
+        <button type="button" class="ep-btn ep-big" id="ep-reset">↻ Reset</button>
+        <div class="ep-speed" role="group" aria-label="Playback Speed">
+          <span>Speed</span>
+          <select id="ps-speed" aria-label="Animation speed" style="height:32px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 6px">
+            <option value="0.5">0.5×</option>
+            <option value="1" selected>1×</option>
+            <option value="1.5">1.5×</option>
+            <option value="2">2×</option>
+          </select>
+        </div>
+        <div class="ep-step-pill" style="margin-left:auto;display:flex;align-items:center;gap:8px">
+          <span id="ps-step-label" style="font-size:12px;font-weight:700">Step 1 of 4</span>
+          <div style="width:70px;height:6px;background:var(--line);border-radius:999px;overflow:hidden">
+            <div id="ps-progress-fill" style="width:25%;height:100%;background:var(--primary);transition:width 0.2s"></div>
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Notification Toast -->
+    <div id="ps-toast" class="ep-toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <!-- Load Catalog and Simulation Engine Scripts -->
+  <script src="../tools/ps-catalog.js"></script>
+  <script src="../tools/ps-simulation.js"></script>
+</body>
+</html>

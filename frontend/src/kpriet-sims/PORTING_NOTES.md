@@ -21,9 +21,14 @@ Class 1–2 library entries seeded by `src/scripts/seedKprietClassSimulations.ts
 Not ported: KPRIET's Mathematics Workspace (runs student code on the server) — see the project notes.
 
 ## Launch on Smart Board
-Every ported simulation has a direct "Smart Board" button (Overall cards, player, Class 1–2 library cards, preview window, student list).
-`components/simulations/smartBoardLaunch.ts` opens `/smartboard/index.html?embed=/simulations/<id>/play?embed=1&title=…&id=<id>` (the Smart Board app is
-unchanged). The backend (`backend/src/modules/simulation-activity/simulation-launch.routes.ts`) serves `/simulations/<id>/play` (redirects to
-`/sim.html?id=<id>&embed=1`, which runs the simulation full-bleed inside the board partition) and answers the board's access check
-(`/api/v1/simulations/:id/access`, `/api/v1/simulations/entitlements`). The platform sign-in token is copied to `eduverse_token`, the key the board's guard reads.
+Every simulation has a direct "Smart Board" button (Overall cards, player, library cards, preview window, student list).
+`components/simulations/smartBoardLaunch.ts` opens `/smartboard/index.html?simbg=/simulations/<id>/play?embed=1&title=…&id=<id>`.
 
+- `smartboard/components/sim-backdrop.js` (new, additive; one `<script>` line added to `smartboard/index.html`) runs the simulation live
+  BEHIND the board's drawing layers, so every sidebar tool works over it (pen, highlighter, eraser, text, shapes and instruments,
+  tables, undo/redo, pages). Select = click through to the simulation (or move your annotations after "Switch"); the pill closes it.
+  It also swaps the default dark ink for a bright colour so writing shows on dark simulations.
+  (The board's older `embed=` launch shows the simulation in a split partition, which only supports pen, highlighter and eraser.)
+- Backend (`backend/src/modules/simulation-activity/simulation-launch.routes.ts`): `/simulations/<id>/play` redirects a library code,
+  component key or ported id to whatever runs it (`/sim.html`, `/embed/simulation/<key>` for the platform's React simulations, or a
+  static HTML page); `/api/v1/simulations/:id/access` is the access check. The platform sign-in token is copied to `eduverse_token`.

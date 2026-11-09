@@ -23,7 +23,7 @@ async function main() {
   const snapshot = { generatedAt: new Date().toISOString(), sourceFolder: 'Nepal data', documents: docs };
   fs.writeFileSync(path.join(outDir, 'nepal-curriculum-extraction.json'), JSON.stringify(snapshot, null, 1), 'utf8');
 
-  const reportDir = path.resolve(__dirname, '../../..');
+  const reportDir = path.resolve(__dirname, '../../../docs/nepal-data');
   writeNepalDataReports(snapshot, reportDir);
   console.log(`[Nepal Data] ${docs.length} PDFs inspected. Snapshot and reports written.`);
 }

@@ -903,8 +903,14 @@ const Canvas = (() => {
     drawCtx.setTransform(currentDPR, 0, 0, currentDPR, 0, 0);
     drawCtx.clearRect(0, 0, W, H);
     applyTransformToCtx(drawCtx);
+    // Only draw strokes that can be seen: a long lesson holds thousands of strokes, most of them off-screen after panning / zooming.
+    const vx0 = -panX / zoomLevel, vy0 = -panY / zoomLevel;
+    const vx1 = vx0 + W / zoomLevel, vy1 = vy0 + H / zoomLevel;
     for (let i = 0; i < strokes.length; i++) {
-      drawSingleStroke(drawCtx, strokes[i]);
+      const s = strokes[i];
+      const b = s && (s._bbox || (s.points && s.points.length ? computeStrokeBounds(s) : null));
+      if (b && (b.maxX < vx0 || b.minX > vx1 || b.maxY < vy0 || b.minY > vy1)) continue;
+      drawSingleStroke(drawCtx, s);
     }
     drawCtx.restore();
   }

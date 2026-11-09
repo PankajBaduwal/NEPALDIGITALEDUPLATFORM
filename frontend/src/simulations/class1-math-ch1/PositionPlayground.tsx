@@ -1,9 +1,10 @@
 /**
  * PositionPlayground.tsx
- * Simulation 01: My 3D Position Playground – Inside, Outside, Above and Below
- * Grade 1 • Mathematics • Chapter 1 (आकारप्रकार र स्थान)
+ * Grade 1 Mathematics • Chapter 1: आकारप्रकार र स्थान (Shapes & Position)
+ * Master 3D Simulation: My 3D Position Playground – Inside, Outside, Above and Below
+ * मेरो ३डी स्थिति खेलमैदान – भित्र, बाहिर, माथि र तल
  */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import * as THREE from 'three';
 import {
   Volume2,
@@ -15,22 +16,32 @@ import {
   ChevronLeft,
   CheckCircle2,
   XCircle,
-  Layers,
-  Compass,
-  Star,
-  Trophy,
   ArrowLeft,
+  Sun,
+  Moon,
+  Home,
+  Layers,
   Eye,
+  Trophy,
+  ZoomIn,
+  ZoomOut,
+  Maximize2,
+  Minimize2,
+  Compass,
   Play,
+  RotateCw,
+  Info,
 } from 'lucide-react';
 import { createVillageEnvironment, VillageElements } from './VillageEnvironment';
 import { createCharactersAndAnimals, VillageCharacters } from './CharactersAndAnimals';
+import { evaluateSpatialPosition, SpatialResult, PLAYGROUND_ZONES } from './SpatialDetector';
 import {
-  PLAYGROUND_LEVELS,
-  SimulationLevel,
-  LevelStep,
+  MODE_1_INSIDE_OUTSIDE_TASKS,
+  MODE_2_ABOVE_BELOW_TASKS,
+  MODE_4_FOLLOW_INSTRUCTION_TASKS,
+  DISCOVERY_OBJECT_ITEMS,
   ASSESSMENT_QUESTIONS,
-  AssessmentQuestion,
+  SpatialPlaygroundTask,
 } from './PlaygroundLevels';
 import { AudioController } from '../audio/AudioController';
 import { api } from '../../services/api';
@@ -41,35 +52,45 @@ interface PositionPlaygroundProps {
   initialLanguage?: 'ne' | 'en';
 }
 
+type LearningMode = 'MODE_1' | 'MODE_2' | 'MODE_3' | 'MODE_4' | 'MODE_5';
+
 export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
   onBackToLibrary,
   initialLanguage = 'ne',
 }) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
-  // Simulation State
+  // ── APP & SIMULATION STATE ────────────────────────────────────
   const [lang, setLang] = useState<'ne' | 'en'>(initialLanguage);
   const [isMuted, setIsMuted] = useState<boolean>(false);
-  const [mode, setMode] = useState<'GUIDED' | 'FREE_PLAY' | 'ASSESSMENT'>('GUIDED');
-  const [currentLevelIdx, setCurrentLevelIdx] = useState<number>(0);
-  const [currentStepIdx, setCurrentStepIdx] = useState<number>(0);
+  const [currentMode, setCurrentMode] = useState<LearningMode>('MODE_1');
+  const [taskIndex, setTaskIndex] = useState<number>(0);
+  const [selectedObjectId, setSelectedObjectId] = useState<string>('cat');
+  const [currentDetection, setCurrentDetection] = useState<SpatialResult | null>(null);
 
-  // Interaction & Feedback
+  // Visual & Controls State
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isRoofCutaway, setIsRoofCutaway] = useState<boolean>(true);
+  const [isDoorOpen, setIsDoorOpen] = useState<boolean>(true);
+  const [isBoxOpen, setIsBoxOpen] = useState<boolean>(true);
+  const [hintTier, setHintTier] = useState<number>(0);
   const [feedback, setFeedback] = useState<{
     type: 'success' | 'error' | 'info' | null;
     message: string;
   }>({ type: null, message: '' });
-  const [isDemoPlaying, setIsDemoPlaying] = useState<boolean>(false);
 
-  // Assessment State
-  const [assessmentIndex, setAssessmentIndex] = useState<number>(0);
-  const [assessmentScore, setAssessmentScore] = useState<number>(0);
-  const [assessmentAnswers, setAssessmentAnswers] = useState<Record<string, boolean>>({});
-  const [isAssessmentFinished, setIsAssessmentFinished] = useState<boolean>(false);
+  // Stage Layout Split (70/30 or Full)
+  const [stageLayout, setStageLayout] = useState<'split' | 'wide' | 'full'>('split');
+
+  // Assessment Challenge (Mode 5) State
+  const [quizIndex, setQuizIndex] = useState<number>(0);
+  const [quizScore, setQuizScore] = useState<number>(0);
+  const [quizAnswers, setQuizAnswers] = useState<Record<string, boolean>>({});
+  const [isQuizFinished, setIsQuizFinished] = useState<boolean>(false);
   const [isSavingProgress, setIsSavingProgress] = useState<boolean>(false);
 
-  // Three.js References
-  const threeRefs = useRef<{
+  // ── THREE.JS ENGINE REFS ──────────────────────────────────────
+  const threeEngineRef = useRef<{
     renderer: THREE.WebGLRenderer;
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;
@@ -77,79 +98,165 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
     characters: VillageCharacters;
     animFrameId: number;
     clock: THREE.Clock;
-    isDoorOpen: boolean;
+    draggableList: THREE.Group[];
+    // Orbit camera controls state
+    spherical: { radius: number; theta: number; phi: number };
+    target: THREE.Vector3;
+    isOrbiting: boolean;
+    orbitStart: { x: number; y: number };
+    // Drag state
+    draggedGroup: THREE.Group | null;
+    dragPlane: THREE.Plane;
+    dragPlaneOffset: THREE.Vector3;
   } | null>(null);
 
-  const currentLevel: SimulationLevel = PLAYGROUND_LEVELS[currentLevelIdx] || PLAYGROUND_LEVELS[0];
-  const currentStep: LevelStep = currentLevel.steps[currentStepIdx] || currentLevel.steps[0];
+  // Active task list according to mode
+  const activeTaskList: SpatialPlaygroundTask[] =
+    currentMode === 'MODE_1'
+      ? MODE_1_INSIDE_OUTSIDE_TASKS
+      : currentMode === 'MODE_2'
+      ? MODE_2_ABOVE_BELOW_TASKS
+      : currentMode === 'MODE_4'
+      ? MODE_4_FOLLOW_INSTRUCTION_TASKS
+      : [];
 
-  // ── INITIALIZE THREE.JS 3D SCENE ─────────────────────────────
+  const currentTask: SpatialPlaygroundTask | null =
+    activeTaskList.length > 0 ? activeTaskList[taskIndex] || activeTaskList[0] : null;
+
+  // ── INITIALIZE THREE.JS WEBGL ENGINE ─────────────────────────
   useEffect(() => {
     if (!mountRef.current) return;
     const container = mountRef.current;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    const initialWidth = container.clientWidth || 800;
+    const initialHeight = container.clientHeight || 560;
 
     // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setSize(width, height);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
+    renderer.setSize(initialWidth, initialHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0xe0f2fe, 1.0);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.05;
+
+    // Remove any leftover canvas
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
     container.appendChild(renderer.domElement);
 
-    // Scene & Camera
+    // Scene & Perspective Camera
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    // Three-quarter isometric viewpoint
-    camera.position.set(12, 11, 16);
-    camera.lookAt(0, 1.2, 0);
+    scene.background = new THREE.Color(0xe0f2fe);
+    scene.fog = new THREE.FogExp2(0xe0f2fe, 0.015);
 
-    // Build Environment & Characters
+    const camera = new THREE.PerspectiveCamera(45, initialWidth / initialHeight, 0.1, 150);
+
+    // Camera Spherical Coordinates for 360 Orbit
+    const cameraTarget = new THREE.Vector3(0, 1.2, 0);
+    const cameraRadius = 24;
+    const cameraPhi = Math.PI / 3.4; // ~52 degrees elevation
+    const cameraTheta = Math.PI / 4.2; // ~42 degrees azimuth
+
+    camera.position.set(
+      cameraTarget.x + cameraRadius * Math.sin(cameraPhi) * Math.sin(cameraTheta),
+      cameraTarget.y + cameraRadius * Math.cos(cameraPhi),
+      cameraTarget.z + cameraRadius * Math.sin(cameraPhi) * Math.cos(cameraTheta)
+    );
+    camera.lookAt(cameraTarget);
+
+    // Build Procedural Environment & Animated Characters
     const environment = createVillageEnvironment(scene);
     const characters = createCharactersAndAnimals(scene);
     const clock = new THREE.Clock();
 
-    let isDoorOpen = false;
+    // Default: Open door and cutaway roof so interior is visible
+    environment.openDoor(true);
+    environment.setRoofCutaway(true);
+    environment.openToyBox(true);
 
-    // Animation Loop
-    function animate() {
-      const delta = clock.getDelta();
-      environment.update(delta);
-      characters.update(delta);
-      renderer.render(scene, camera);
-      threeRefs.current!.animFrameId = requestAnimationFrame(animate);
-    }
-    const animFrameId = requestAnimationFrame(animate);
+    // Tag Draggable Objects with Metadata
+    const draggables: THREE.Group[] = [
+      characters.cat,
+      characters.dog,
+      characters.bird,
+      characters.rabbit,
+      characters.butterfly,
+      environment.ball,
+      environment.teddy,
+      environment.toyCar,
+      environment.waterPot,
+      environment.bag,
+    ];
 
-    threeRefs.current = {
+    characters.cat.userData = { id: 'cat', nameEn: 'Cat', nameNe: 'बिरालो', isDraggable: true, defaultY: 0 };
+    characters.dog.userData = { id: 'dog', nameEn: 'Dog', nameNe: 'कुकुर', isDraggable: true, defaultY: 0 };
+    characters.bird.userData = { id: 'bird', nameEn: 'Bird', nameNe: 'चरा', isDraggable: true, defaultY: 3.5 };
+    characters.rabbit.userData = { id: 'rabbit', nameEn: 'Rabbit', nameNe: 'खरायो', isDraggable: true, defaultY: 0 };
+    characters.butterfly.userData = { id: 'butterfly', nameEn: 'Butterfly', nameNe: 'पुतली', isDraggable: true, defaultY: 1.5 };
+    environment.ball.userData = { id: 'ball', nameEn: 'Ball', nameNe: 'बल', isDraggable: true, defaultY: 0.28 };
+    environment.teddy.userData = { id: 'teddy', nameEn: 'Teddy Bear', nameNe: 'गुडिया', isDraggable: true, defaultY: 0.28 };
+    environment.toyCar.userData = { id: 'toyCar', nameEn: 'Toy Car', nameNe: 'गाडी', isDraggable: true, defaultY: 0.16 };
+    environment.waterPot.userData = { id: 'waterPot', nameEn: 'Water Pot', nameNe: 'गाग्री', isDraggable: true, defaultY: 0.4 };
+    environment.bag.userData = { id: 'bag', nameEn: 'School Bag', nameNe: 'झोला', isDraggable: true, defaultY: 0.3 };
+
+    // Initial placement of items in logical starting spots
+    characters.cat.position.set(-3.8, 0, 1.8);
+    characters.dog.position.set(-2.0, 0, 3.2);
+    characters.bird.position.set(4.0, 3.2, -1.0);
+    characters.rabbit.position.set(2.5, 0, 3.5);
+    characters.butterfly.position.set(-1.0, 1.8, 1.0);
+    environment.ball.position.set(1.5, 0.28, 3.0);
+    environment.teddy.position.set(-1.2, 0.28, 0.5);
+    environment.toyCar.position.set(-3.2, 0.16, 2.5);
+    environment.waterPot.position.set(3.5, 0.4, 1.5);
+    environment.bag.position.set(4.0, 0.3, -1.5);
+
+    // Save Engine State
+    threeEngineRef.current = {
       renderer,
       scene,
       camera,
       environment,
       characters,
-      animFrameId,
+      animFrameId: 0,
       clock,
-      isDoorOpen,
+      draggableList: draggables,
+      spherical: { radius: cameraRadius, theta: cameraTheta, phi: cameraPhi },
+      target: cameraTarget,
+      isOrbiting: false,
+      orbitStart: { x: 0, y: 0 },
+      draggedGroup: null,
+      dragPlane: new THREE.Plane(new THREE.Vector3(0, 1, 0), 0),
+      dragPlaneOffset: new THREE.Vector3(),
     };
 
-    // Resize Handler
-    const handleResize = () => {
-      if (!container || !threeRefs.current) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
+    // Animation Loop
+    function renderLoop() {
+      const delta = clock.getDelta();
+      environment.update(delta);
+      characters.update(delta);
+      renderer.render(scene, camera);
+      threeEngineRef.current!.animFrameId = requestAnimationFrame(renderLoop);
+    }
+    threeEngineRef.current.animFrameId = requestAnimationFrame(renderLoop);
+
+    // Resize Handler via ResizeObserver
+    const resizeObserver = new ResizeObserver(() => {
+      if (!container || !threeEngineRef.current) return;
+      const w = container.clientWidth || 800;
+      const h = container.clientHeight || 560;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
-    };
-    window.addEventListener('resize', handleResize);
+    });
+    resizeObserver.observe(container);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      if (threeRefs.current) {
-        cancelAnimationFrame(threeRefs.current.animFrameId);
+      resizeObserver.disconnect();
+      if (threeEngineRef.current) {
+        cancelAnimationFrame(threeEngineRef.current.animFrameId);
         renderer.dispose();
         if (renderer.domElement.parentNode) {
           renderer.domElement.parentNode.removeChild(renderer.domElement);
@@ -158,253 +265,513 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
     };
   }, []);
 
-  // ── SOUND & SPEECH ON STEP CHANGE ────────────────────────────
-  useEffect(() => {
-    if (mode === 'GUIDED') {
-      const text = lang === 'ne' ? currentStep.instructionNe : currentStep.instructionEn;
-      AudioController.speak(text, lang);
-    } else if (mode === 'ASSESSMENT') {
-      const q = ASSESSMENT_QUESTIONS[assessmentIndex];
-      if (q) {
-        const text = lang === 'ne' ? q.questionNe : q.questionEn;
-        AudioController.speak(text, lang);
-      }
-    }
-  }, [currentLevelIdx, currentStepIdx, mode, assessmentIndex, lang]);
+  // ── UPDATE CAMERA SPHERICAL COORDINATES ────────────────────────
+  const updateCameraTransform = useCallback(() => {
+    if (!threeEngineRef.current) return;
+    const { camera, spherical, target } = threeEngineRef.current;
+    // Clamp radius, phi
+    spherical.radius = Math.max(8, Math.min(spherical.radius, 45));
+    spherical.phi = Math.max(0.15, Math.min(spherical.phi, Math.PI / 2 - 0.05)); // prevent below ground
 
-  // ── TOGGLE AUDIO MUTE ────────────────────────────────────────
-  const toggleMute = () => {
-    const nextMuted = !isMuted;
-    setIsMuted(nextMuted);
-    AudioController.setMuted(nextMuted);
+    camera.position.set(
+      target.x + spherical.radius * Math.sin(spherical.phi) * Math.sin(spherical.theta),
+      target.y + spherical.radius * Math.cos(spherical.phi),
+      target.z + spherical.radius * Math.sin(spherical.phi) * Math.cos(spherical.theta)
+    );
+    camera.lookAt(target);
+  }, []);
+
+  // ── CAMERA VIEW PRESETS ────────────────────────────────────────
+  const setCameraView = (view: 'overview' | 'house' | 'garden' | 'tree' | 'top') => {
+    if (!threeEngineRef.current) return;
+    const { spherical, target } = threeEngineRef.current;
+    AudioController.playClick();
+
+    if (view === 'overview') {
+      target.set(0, 1.2, 0);
+      spherical.radius = 24;
+      spherical.theta = Math.PI / 4.2;
+      spherical.phi = Math.PI / 3.4;
+    } else if (view === 'house') {
+      target.set(-7.5, 1.5, -2.0);
+      spherical.radius = 14;
+      spherical.theta = Math.PI / 5;
+      spherical.phi = Math.PI / 3.6;
+    } else if (view === 'garden') {
+      target.set(2.0, 1.0, 2.0);
+      spherical.radius = 12;
+      spherical.theta = Math.PI / 3.5;
+      spherical.phi = Math.PI / 3.2;
+    } else if (view === 'tree') {
+      target.set(7.5, 3.0, -3.5);
+      spherical.radius = 13;
+      spherical.theta = Math.PI / 3;
+      spherical.phi = Math.PI / 3.2;
+    } else if (view === 'top') {
+      target.set(0, 0, 0);
+      spherical.radius = 26;
+      spherical.theta = 0;
+      spherical.phi = 0.18;
+    }
+    updateCameraTransform();
   };
 
-  // ── REPLAY CURRENT NARRATION ─────────────────────────────────
-  const replayAudio = () => {
-    if (mode === 'GUIDED') {
-      const text = lang === 'ne' ? currentStep.instructionNe : currentStep.instructionEn;
-      AudioController.speak(text, lang);
-    } else if (mode === 'ASSESSMENT') {
-      const q = ASSESSMENT_QUESTIONS[assessmentIndex];
-      if (q) {
-        const text = lang === 'ne' ? q.questionNe : q.questionEn;
-        AudioController.speak(text, lang);
-      }
+  // ── THEME & VISUAL TOGGLES ────────────────────────────────────
+  const toggleDarkMode = () => {
+    const next = !isDarkMode;
+    setIsDarkMode(next);
+    if (!threeEngineRef.current) return;
+    threeEngineRef.current.environment.setTheme(next);
+    if (next) {
+      threeEngineRef.current.scene.background = new THREE.Color(0x0f172a);
+      threeEngineRef.current.scene.fog = new THREE.FogExp2(0x0f172a, 0.018);
+    } else {
+      threeEngineRef.current.scene.background = new THREE.Color(0xe0f2fe);
+      threeEngineRef.current.scene.fog = new THREE.FogExp2(0xe0f2fe, 0.015);
     }
-  };
-
-  // ── RESET CAMERA VIEW ────────────────────────────────────────
-  const resetCamera = () => {
-    if (!threeRefs.current) return;
-    const { camera } = threeRefs.current;
-    camera.position.set(12, 11, 16);
-    camera.lookAt(0, 1.2, 0);
     AudioController.playClick();
   };
 
-  // ── RUN STEP DEMO ANIMATION ──────────────────────────────────
-  const playStepDemo = () => {
-    if (!threeRefs.current || isDemoPlaying) return;
-    const { environment, characters } = threeRefs.current;
-    setIsDemoPlaying(true);
-    AudioController.playPop();
-
-    if (currentStep.demoAction === 'door_cat') {
-      // 1. Open the house door
-      environment.openDoor(true);
-      threeRefs.current.isDoorOpen = true;
-
-      // 2. Cat walks into the house
-      setTimeout(() => {
-        characters.moveCatTo(-7.5, 0.4, -2.5, 1.5); // Inside house
-      }, 500);
-
-      // 3. Close door partially
-      setTimeout(() => {
-        environment.openDoor(false);
-        setIsDemoPlaying(false);
-        setFeedback({
-          type: 'success',
-          message: lang === 'ne' ? 'बिरालो घरभित्र पस्यो (भित्र)। कुकुर पिँढीमा बाहिर बस्यो (बाहिर)।' : 'Cat is inside the house! Dog is outside on the veranda.',
-        });
-        AudioController.playSuccess();
-      }, 2500);
-    } else if (currentStep.demoAction === 'bird_tree') {
-      // Fly bird above tree
-      characters.moveBirdTo(7.5, 4.8, -3.5, 1.2);
-      // Place ball below table
-      setTimeout(() => {
-        environment.ball.position.set(4.5, 0.28, 0.5);
-        setIsDemoPlaying(false);
-        setFeedback({
-          type: 'success',
-          message: lang === 'ne' ? 'चरा रूखमाथि छ (माथि)। बल टेबलमुनि छ (तल)।' : 'Bird is above the tree. Ball is below the table.',
-        });
-        AudioController.playSuccess();
-      }, 1400);
-    } else {
-      setIsDemoPlaying(false);
+  const toggleRoofCutaway = () => {
+    const next = !isRoofCutaway;
+    setIsRoofCutaway(next);
+    if (threeEngineRef.current) {
+      threeEngineRef.current.environment.setRoofCutaway(next);
     }
+    AudioController.playPop();
   };
 
-  // ── INTERACTIVE ACTION DISPATCHER ────────────────────────────
-  const handleObjectPlacement = (targetPos: string) => {
-    if (!threeRefs.current) return;
-    const { environment, characters } = threeRefs.current;
-
+  const toggleDoor = () => {
+    const next = !isDoorOpen;
+    setIsDoorOpen(next);
+    if (threeEngineRef.current) {
+      threeEngineRef.current.environment.openDoor(next);
+    }
     AudioController.playPop();
+  };
 
-    // Check if user choice matches target step
-    if (targetPos === currentStep.targetPosition) {
-      AudioController.playSuccess();
+  const toggleBox = () => {
+    const next = !isBoxOpen;
+    setIsBoxOpen(next);
+    if (threeEngineRef.current) {
+      threeEngineRef.current.environment.openToyBox(next);
+    }
+    AudioController.playPop();
+  };
 
-      // Animate 3D scene according to correct placement
-      if (currentStep.targetObject === 'cat') {
-        if (targetPos === 'inside_house') {
-          environment.openDoor(true);
-          characters.moveCatTo(-7.5, 0.4, -2.5, 1.2);
-          setTimeout(() => environment.openDoor(false), 1400);
+  // ── SOUND & SPEECH ON TASK / MODE CHANGE ──────────────────────
+  useEffect(() => {
+    setHintTier(0);
+    setFeedback({ type: null, message: '' });
+
+    if (currentMode === 'MODE_1' || currentMode === 'MODE_2' || currentMode === 'MODE_4') {
+      if (currentTask) {
+        setSelectedObjectId(currentTask.targetObject);
+        // Highlight corresponding drop zone
+        if (threeEngineRef.current) {
+          threeEngineRef.current.environment.highlightZone(currentTask.targetZoneKey);
+        }
+        const text = lang === 'ne' ? currentTask.instructionNe : currentTask.instructionEn;
+        AudioController.speak(text, lang);
+      }
+    } else if (currentMode === 'MODE_3') {
+      // Discovery mode
+      if (threeEngineRef.current) {
+        threeEngineRef.current.environment.highlightZone(null);
+      }
+      const intro =
+        lang === 'ne'
+          ? 'कुनै पनि जनावर वा खेलौना तानेर जहाँसुकै राख्नुहोस्, र स्थान सिक्नुहोस्!'
+          : 'Drag any animal or toy anywhere, and discover its 3D position!';
+      AudioController.speak(intro, lang);
+    } else if (currentMode === 'MODE_5') {
+      // Assessment Challenge mode
+      const q = ASSESSMENT_QUESTIONS[quizIndex];
+      if (q) {
+        const text = lang === 'ne' ? q.questionNe : q.questionEn;
+        AudioController.speak(text, lang);
+      }
+    }
+  }, [currentMode, taskIndex, quizIndex, lang]);
+
+  // ── LIVE POSITION EVALUATOR HELPER ────────────────────────────
+  const runEvaluation = useCallback(
+    (group: THREE.Group) => {
+      const u = group.userData;
+      const res = evaluateSpatialPosition(
+        group.position,
+        u.id || 'object',
+        u.nameEn || 'Object',
+        u.nameNe || 'वस्तु'
+      );
+      setCurrentDetection(res);
+      return res;
+    },
+    []
+  );
+
+  // ── RAYCASTING 3D POINTER DRAG & DROP LOGIC ───────────────────
+  const getPointerNormalized = (e: React.PointerEvent<HTMLDivElement>) => {
+    const rect = mountRef.current!.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    return new THREE.Vector2(x, y);
+  };
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!threeEngineRef.current || !mountRef.current) return;
+    const engine = threeEngineRef.current;
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+
+    const mouse = getPointerNormalized(e);
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, engine.camera);
+
+    // Raycast against all draggable groups
+    const hits = raycaster.intersectObjects(engine.draggableList, true);
+
+    if (hits.length > 0) {
+      // Find root draggable group
+      let rootGroup: THREE.Group | null = null;
+      let curr: THREE.Object3D | null = hits[0].object;
+      while (curr) {
+        if (curr.userData && curr.userData.isDraggable) {
+          rootGroup = curr as THREE.Group;
+          break;
+        }
+        curr = curr.parent;
+      }
+
+      if (rootGroup) {
+        engine.draggedGroup = rootGroup;
+        setSelectedObjectId(rootGroup.userData.id);
+
+        // Position the horizontal dragging math plane at object's current Y
+        const currentY = rootGroup.position.y;
+        engine.dragPlane.set(new THREE.Vector3(0, 1, 0), -currentY);
+
+        const planeIntersect = new THREE.Vector3();
+        if (raycaster.ray.intersectPlane(engine.dragPlane, planeIntersect)) {
+          engine.dragPlaneOffset.copy(planeIntersect).sub(rootGroup.position);
+        }
+
+        AudioController.playPop();
+        runEvaluation(rootGroup);
+        return;
+      }
+    }
+
+    // If no draggable object hit, start camera orbit!
+    engine.isOrbiting = true;
+    engine.orbitStart = { x: e.clientX, y: e.clientY };
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!threeEngineRef.current || !mountRef.current) return;
+    const engine = threeEngineRef.current;
+
+    // 1. OBJECT DRAGGING
+    if (engine.draggedGroup) {
+      const mouse = getPointerNormalized(e);
+      const raycaster = new THREE.Raycaster();
+      raycaster.setFromCamera(mouse, engine.camera);
+
+      const intersection = new THREE.Vector3();
+      if (raycaster.ray.intersectPlane(engine.dragPlane, intersection)) {
+        const nextPos = intersection.sub(engine.dragPlaneOffset);
+
+        // Snapping / Elevation logic for special zones
+        const z = PLAYGROUND_ZONES;
+        const dBasket = Math.hypot(nextPos.x - z.basketCenter.x, nextPos.z - z.basketCenter.z);
+        const dTable = Math.hypot(nextPos.x - z.tableCenter.x, nextPos.z - z.tableCenter.z);
+        const dTree = Math.hypot(nextPos.x - z.treeCenter.x, nextPos.z - z.treeCenter.z);
+        const dFlower = Math.hypot(nextPos.x - z.flowerCenter.x, nextPos.z - z.flowerCenter.z);
+        const dToyBox = Math.hypot(nextPos.x - (-2.2), nextPos.z - (-0.8));
+
+        // Basket snap
+        if (dBasket < z.basketRadius * 0.95) {
+          nextPos.y = THREE.MathUtils.lerp(nextPos.y, 0.42, 0.2);
+        }
+        // Toy box snap
+        else if (dToyBox < 1.0) {
+          nextPos.y = THREE.MathUtils.lerp(nextPos.y, 0.35, 0.2);
+          if (!isBoxOpen) toggleBox();
+        }
+        // Table above/below snap
+        else if (dTable < z.tableRadius * 0.9) {
+          if (nextPos.y >= 0.8) {
+            nextPos.y = THREE.MathUtils.lerp(nextPos.y, 1.38, 0.25);
+          } else {
+            nextPos.y = THREE.MathUtils.lerp(nextPos.y, 0.28, 0.25);
+          }
+        }
+        // Tree above/below snap
+        else if (dTree < z.treeRadius) {
+          const id = engine.draggedGroup.userData.id;
+          if (id === 'bird' || id === 'butterfly') {
+            nextPos.y = THREE.MathUtils.lerp(nextPos.y, 4.6, 0.2);
+          } else {
+            nextPos.y = THREE.MathUtils.lerp(nextPos.y, 0, 0.2);
+          }
+        }
+        // Flower above snap
+        else if (dFlower < z.flowerRadius) {
+          const id = engine.draggedGroup.userData.id;
+          if (id === 'bird' || id === 'butterfly') {
+            nextPos.y = THREE.MathUtils.lerp(nextPos.y, 1.6, 0.2);
+          }
         } else {
-          characters.moveCatTo(-5.5, 0, 1.5, 1.0);
+          // Normal ground or base height
+          const baseY = engine.draggedGroup.userData.defaultY || 0;
+          nextPos.y = THREE.MathUtils.lerp(nextPos.y, baseY, 0.15);
         }
-      } else if (currentStep.targetObject === 'dog') {
-        if (targetPos === 'outside_house') {
-          characters.moveDogTo(-4.5, 0, 0.5, 1.0);
-        }
-      } else if (currentStep.targetObject === 'ball') {
-        if (targetPos === 'inside_basket') {
-          environment.ball.position.set(0.5, 0.45, 3.2);
-        } else if (targetPos === 'outside_basket') {
-          environment.ball.position.set(1.8, 0.28, 3.8);
-        } else if (targetPos === 'below_table') {
-          environment.ball.position.set(4.5, 0.28, 0.5);
-        }
-      } else if (currentStep.targetObject === 'bird') {
-        if (targetPos === 'above_tree') {
-          characters.moveBirdTo(7.5, 4.6, -3.5, 1.0);
-        }
-      } else if (currentStep.targetObject === 'waterPot') {
-        if (targetPos === 'above_table') {
-          environment.waterPot.position.set(4.5, 1.42, 0.5);
-        }
-      } else if (currentStep.targetObject === 'bag') {
-        if (targetPos === 'below_table') {
-          environment.bag.position.set(4.5, 0.25, 0.5);
-        }
-      } else if (currentStep.targetObject === 'child') {
-        if (targetPos === 'right') {
-          characters.moveChildTo(3.2, 0, 4.0, 1.0);
-        } else if (targetPos === 'left') {
-          characters.moveChildTo(-3.2, 0, 4.0, 1.0);
-        }
+
+        // Clamp boundaries so objects don't fly off world
+        nextPos.x = Math.max(-13, Math.min(nextPos.x, 13));
+        nextPos.z = Math.max(-13, Math.min(nextPos.z, 13));
+
+        engine.draggedGroup.position.copy(nextPos);
+        runEvaluation(engine.draggedGroup);
       }
+      return;
+    }
 
-      setFeedback({
-        type: 'success',
-        message: lang === 'ne' ? 'धेरै राम्रो! सही ठाउँमा राख्नुभयो!' : 'Very good! Placed in the correct position!',
-      });
+    // 2. CAMERA ORBITING
+    if (engine.isOrbiting) {
+      const dx = e.clientX - engine.orbitStart.x;
+      const dy = e.clientY - engine.orbitStart.y;
+      engine.orbitStart = { x: e.clientX, y: e.clientY };
 
-      // Auto-advance to next step
-      setTimeout(() => {
-        handleNextStep();
-      }, 1600);
-    } else {
-      AudioController.playBoop();
-      setFeedback({
-        type: 'error',
-        message: lang === 'ne' ? `फेरि प्रयास गर्नुहोस्! ${currentStep.hintNe}` : `Try again! ${currentStep.hintEn}`,
-      });
+      const rotateSpeed = 0.007;
+      engine.spherical.theta -= dx * rotateSpeed;
+      engine.spherical.phi -= dy * rotateSpeed;
+      updateCameraTransform();
     }
   };
 
-  // ── MULTIPLE CHOICE OPTION SELECTION ─────────────────────────
-  const handleSelectOption = (opt: { isCorrect: boolean; explanationEn: string; explanationNe: string }) => {
-    if (opt.isCorrect) {
-      AudioController.playSuccess();
-      setFeedback({
-        type: 'success',
-        message: lang === 'ne' ? opt.explanationNe : opt.explanationEn,
-      });
-      setTimeout(() => {
-        handleNextStep();
-      }, 1600);
-    } else {
-      AudioController.playBoop();
-      setFeedback({
-        type: 'error',
-        message: lang === 'ne' ? opt.explanationNe : opt.explanationEn,
-      });
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!threeEngineRef.current) return;
+    const engine = threeEngineRef.current;
+    try {
+      (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {
+      // Ignored if pointer wasn't captured
+    }
+
+    if (engine.draggedGroup) {
+      const group = engine.draggedGroup;
+      engine.draggedGroup = null;
+      const evaluation = runEvaluation(group);
+
+      // Verify Task Success in Mode 1, Mode 2, or Mode 4
+      if (currentMode === 'MODE_1' || currentMode === 'MODE_2' || currentMode === 'MODE_4') {
+        if (currentTask && currentTask.targetObject === group.userData.id) {
+          const isMatch = checkTaskSatisfaction(evaluation, currentTask.targetPosition);
+          if (isMatch) {
+            handleTaskSuccess(currentTask);
+          } else {
+            AudioController.playBoop();
+            setFeedback({
+              type: 'error',
+              message:
+                lang === 'ne'
+                  ? `अझै पुगेन! ${hintTier === 0 ? currentTask.hint1Ne : currentTask.hint2Ne}`
+                  : `Not quite there! ${hintTier === 0 ? currentTask.hint1En : currentTask.hint2En}`,
+            });
+          }
+        }
+      } else if (currentMode === 'MODE_3') {
+        // Discovery sandbox mode: speak out loud what position was achieved!
+        AudioController.playSuccess();
+        const speech = lang === 'ne' ? evaluation.descriptionNe : evaluation.descriptionEn;
+        AudioController.speak(speech, lang);
+      }
+    }
+
+    engine.isOrbiting = false;
+  };
+
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (!threeEngineRef.current) return;
+    const engine = threeEngineRef.current;
+    const zoomFactor = e.deltaY * 0.02;
+    engine.spherical.radius += zoomFactor;
+    updateCameraTransform();
+  };
+
+  // ── CHECK TASK SATISFACTION ───────────────────────────────────
+  const checkTaskSatisfaction = (res: SpatialResult, targetPos: string): boolean => {
+    switch (targetPos) {
+      case 'inside_house':
+        return res.relation === 'inside' && res.target === 'house';
+      case 'outside_house':
+        return (res.relation === 'outside' && res.target === 'house') || res.target === 'none';
+      case 'inside_basket':
+        return res.relation === 'inside' && res.target === 'basket';
+      case 'outside_basket':
+        return res.relation === 'outside' && res.target === 'basket';
+      case 'inside_box':
+        return res.relation === 'inside' && res.target === 'box';
+      case 'outside_box':
+        return res.relation === 'outside' && res.target === 'box';
+      case 'above_tree':
+        return res.relation === 'above' && res.target === 'tree';
+      case 'below_tree':
+        return res.relation === 'below' && res.target === 'tree';
+      case 'above_flower':
+        return res.relation === 'above' && res.target === 'flower';
+      case 'below_flower':
+        return res.relation === 'below' && res.target === 'flower';
+      case 'above_table':
+        return res.relation === 'above' && res.target === 'table';
+      case 'below_table':
+        return res.relation === 'below' && res.target === 'table';
+      default:
+        return false;
     }
   };
 
-  // ── ADVANCE STEP OR LEVEL ────────────────────────────────────
-  const handleNextStep = () => {
-    setFeedback({ type: null, message: '' });
-    if (currentStepIdx < currentLevel.steps.length - 1) {
-      setCurrentStepIdx(currentStepIdx + 1);
-    } else {
-      // Level Complete!
-      AudioController.playCelebration();
-      if (currentLevelIdx < PLAYGROUND_LEVELS.length - 1) {
-        setCurrentLevelIdx(currentLevelIdx + 1);
-        setCurrentStepIdx(0);
+  // ── TASK SUCCESS HANDLER ──────────────────────────────────────
+  const handleTaskSuccess = (task: SpatialPlaygroundTask) => {
+    AudioController.playSuccess();
+    setFeedback({
+      type: 'success',
+      message: lang === 'ne' ? task.successMessageNe : task.successMessageEn,
+    });
+
+    const msg = lang === 'ne' ? task.successMessageNe : task.successMessageEn;
+    AudioController.speak(msg, lang);
+
+    // Auto-advance after 2 seconds
+    setTimeout(() => {
+      if (taskIndex < activeTaskList.length - 1) {
+        setTaskIndex((prev) => prev + 1);
       } else {
-        // All 5 levels completed! Switch to assessment or free play
-        setMode('FREE_PLAY');
+        AudioController.playCelebration();
+        setFeedback({
+          type: 'success',
+          message:
+            lang === 'ne'
+              ? 'बधाई छ! तपाईंले यो मोडका सबै अभ्यास सफलतापूर्वक पूरा गर्नुभयो! 🌟'
+              : 'Congratulations! You have successfully mastered all tasks in this mode! 🌟',
+        });
       }
+    }, 2200);
+  };
+
+  // ── QUICK PLACEMENT TELEPORT BUTTON (SMART BOARD / ACCESSIBILITY) ─
+  const quickPlaceObject = (preset: string) => {
+    if (!threeEngineRef.current) return;
+    const engine = threeEngineRef.current;
+    const targetGroup = engine.draggableList.find((g) => g.userData.id === selectedObjectId);
+    if (!targetGroup) return;
+
+    AudioController.playPop();
+
+    switch (preset) {
+      case 'inside_house':
+        engine.environment.openDoor(true);
+        setIsDoorOpen(true);
+        targetGroup.position.set(-7.5, 0.4, -2.5);
+        break;
+      case 'outside_house':
+        targetGroup.position.set(-5.0, 0, 1.8);
+        break;
+      case 'inside_basket':
+        targetGroup.position.set(0.5, 0.42, 3.2);
+        break;
+      case 'outside_basket':
+        targetGroup.position.set(2.0, 0, 3.2);
+        break;
+      case 'inside_box':
+        engine.environment.openToyBox(true);
+        setIsBoxOpen(true);
+        targetGroup.position.set(-2.2, 0.35, -0.8);
+        break;
+      case 'outside_box':
+        targetGroup.position.set(-0.8, 0, -0.5);
+        break;
+      case 'above_tree':
+        targetGroup.position.set(7.5, 4.6, -3.5);
+        break;
+      case 'below_tree':
+        targetGroup.position.set(7.5, 0, -3.0);
+        break;
+      case 'above_table':
+        targetGroup.position.set(4.5, 1.38, 0.5);
+        break;
+      case 'below_table':
+        targetGroup.position.set(4.5, 0.28, 0.5);
+        break;
+      case 'above_flower':
+        targetGroup.position.set(-1.5, 1.6, 2.2);
+        break;
+      default:
+        break;
+    }
+
+    const evaluation = runEvaluation(targetGroup);
+    if (currentMode === 'MODE_1' || currentMode === 'MODE_2' || currentMode === 'MODE_4') {
+      if (currentTask && currentTask.targetObject === targetGroup.userData.id) {
+        if (checkTaskSatisfaction(evaluation, currentTask.targetPosition)) {
+          handleTaskSuccess(currentTask);
+        }
+      }
+    } else if (currentMode === 'MODE_3') {
+      const speech = lang === 'ne' ? evaluation.descriptionNe : evaluation.descriptionEn;
+      AudioController.speak(speech, lang);
     }
   };
 
-  const handlePrevStep = () => {
-    setFeedback({ type: null, message: '' });
-    if (currentStepIdx > 0) {
-      setCurrentStepIdx(currentStepIdx - 1);
-    } else if (currentLevelIdx > 0) {
-      setCurrentLevelIdx(currentLevelIdx - 1);
-      setCurrentStepIdx(PLAYGROUND_LEVELS[currentLevelIdx - 1].steps.length - 1);
+  // ── ADVANCE / REPLAY AUDIO ────────────────────────────────────
+  const replayCurrentSpeech = () => {
+    if (currentMode === 'MODE_5') {
+      const q = ASSESSMENT_QUESTIONS[quizIndex];
+      if (q) AudioController.speak(lang === 'ne' ? q.questionNe : q.questionEn, lang);
+    } else if (currentTask) {
+      AudioController.speak(lang === 'ne' ? currentTask.instructionNe : currentTask.instructionEn, lang);
     }
   };
 
-  // ── FINAL ASSESSMENT ANSWER SELECTION ────────────────────────
-  const handleAssessmentAnswer = (isCorrect: boolean) => {
-    const q = ASSESSMENT_QUESTIONS[assessmentIndex];
+  // ── ASSESSMENT MODE 5 LOGIC ───────────────────────────────────
+  const handleQuizAnswer = (isCorrect: boolean, explanationNe: string, explanationEn: string) => {
+    const q = ASSESSMENT_QUESTIONS[quizIndex];
     if (isCorrect) {
       AudioController.playSuccess();
-      setAssessmentScore((prev) => prev + 1);
-      setAssessmentAnswers((prev) => ({ ...prev, [q.id]: true }));
+      setQuizScore((prev) => prev + 1);
+      setQuizAnswers((prev) => ({ ...prev, [q.id]: true }));
+      setFeedback({ type: 'success', message: lang === 'ne' ? explanationNe : explanationEn });
     } else {
       AudioController.playBoop();
-      setAssessmentAnswers((prev) => ({ ...prev, [q.id]: false }));
+      setQuizAnswers((prev) => ({ ...prev, [q.id]: false }));
+      setFeedback({ type: 'error', message: lang === 'ne' ? explanationNe : explanationEn });
     }
 
-    if (assessmentIndex < ASSESSMENT_QUESTIONS.length - 1) {
-      setAssessmentIndex((prev) => prev + 1);
-    } else {
-      // Finished all 12 questions!
-      setIsAssessmentFinished(true);
-      AudioController.playCelebration();
-      saveAssessmentProgress();
-    }
+    setTimeout(() => {
+      if (quizIndex < ASSESSMENT_QUESTIONS.length - 1) {
+        setQuizIndex((prev) => prev + 1);
+      } else {
+        setIsQuizFinished(true);
+        AudioController.playCelebration();
+        saveQuizProgress();
+      }
+    }, 1800);
   };
 
-  // ── SAVE PROGRESS TO BACKEND API ─────────────────────────────
-  const saveAssessmentProgress = async () => {
+  const saveQuizProgress = async () => {
     setIsSavingProgress(true);
     try {
       const totalQ = ASSESSMENT_QUESTIONS.length;
-      const finalScore = assessmentScore;
+      const finalScore = quizScore;
       const pct = Math.round((finalScore / totalQ) * 100);
 
-      // Collect concepts understood and to review
       const understood: string[] = [];
       const toReview: string[] = [];
 
       ASSESSMENT_QUESTIONS.forEach((q) => {
-        if (assessmentAnswers[q.id]) {
-          understood.push(q.concept);
-        } else {
-          toReview.push(q.concept);
-        }
+        if (quizAnswers[q.id]) understood.push(q.concept);
+        else toReview.push(q.concept);
       });
 
       await api.post('/simulation-activity/simulations/SIM-MATH-G1-CH1-01/progress', {
@@ -416,210 +783,112 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
         assessmentScore: finalScore,
         totalQuestions: totalQ,
         percentage: pct,
-        timeSpentSeconds: 300,
+        timeSpentSeconds: 320,
         conceptsUnderstood: Array.from(new Set(understood)),
         conceptsToReview: Array.from(new Set(toReview)),
         isCompleted: pct >= 60,
       });
     } catch (e) {
-      console.warn('Unable to save simulation progress to backend:', e);
+      console.warn('Simulation progress saving note:', e);
     } finally {
       setIsSavingProgress(false);
     }
   };
 
-  // ── FREE PLAY INTERACTION BUTTONS ────────────────────────────
-  const handleFreePlayAction = (action: string) => {
-    if (!threeRefs.current) return;
-    const { environment, characters } = threeRefs.current;
-    AudioController.playPop();
-
-    switch (action) {
-      case 'toggle_door':
-        threeRefs.current.isDoorOpen = !threeRefs.current.isDoorOpen;
-        environment.openDoor(threeRefs.current.isDoorOpen);
-        break;
-      case 'cat_inside':
-        environment.openDoor(true);
-        characters.moveCatTo(-7.5, 0.4, -2.5, 1.2);
-        setTimeout(() => environment.openDoor(false), 1400);
-        break;
-      case 'cat_outside':
-        characters.moveCatTo(-5.5, 0, 1.5, 1.0);
-        break;
-      case 'dog_veranda':
-        characters.moveDogTo(-4.5, 0, 0.5, 1.0);
-        break;
-      case 'dog_garden':
-        characters.moveDogTo(1.5, 0, 2.5, 1.0);
-        break;
-      case 'bird_tree':
-        characters.moveBirdTo(7.5, 4.6, -3.5, 1.0);
-        break;
-      case 'bird_roof':
-        characters.moveBirdTo(-7.5, 4.8, -3.0, 1.2);
-        break;
-      case 'ball_basket':
-        environment.ball.position.set(0.5, 0.45, 3.2);
-        break;
-      case 'ball_table_below':
-        environment.ball.position.set(4.5, 0.28, 0.5);
-        break;
-      case 'pot_table_above':
-        environment.waterPot.position.set(4.5, 1.42, 0.5);
-        break;
-    }
-  };
-
+  // ─────────────────────────────────────────────────────────────
+  // RENDER JSX
+  // ─────────────────────────────────────────────────────────────
   return (
     <div
       style={{
         width: '100%',
         height: '100%',
-        minHeight: '88vh',
         display: 'flex',
         flexDirection: 'column',
-        background: '#0f172a',
-        borderRadius: '16px',
+        background: isDarkMode ? '#090d16' : '#f1f5f9',
+        color: isDarkMode ? '#f8fafc' : '#0f172a',
+        fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
         overflow: 'hidden',
-        boxShadow: '0 8px 30px rgba(0,0,0,0.35)',
-        position: 'relative',
         userSelect: 'none',
-        fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       }}
     >
-      {/* ── TOP HEADER / CONTROLS ─────────────────────────────────── */}
-      <div
+      {/* ── TOP NAV BAR ─────────────────────────────────────────── */}
+      <header
         style={{
-          background: 'linear-gradient(90deg, #0e3e3b 0%, #117a6b 100%)',
-          color: '#ffffff',
-          padding: '12px 20px',
           display: 'flex',
-          justifyContent: 'space-between',
           alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '12px',
-          zIndex: 10,
-          borderBottom: '2px solid rgba(255,255,255,0.12)',
+          justifyContent: 'space-between',
+          padding: '10px 18px',
+          background: isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+          backdropFilter: 'blur(10px)',
+          borderBottom: isDarkMode ? '1px solid rgba(255,255,255,0.08)' : '1px solid #e2e8f0',
+          zIndex: 30,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <button
             onClick={onBackToLibrary}
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              background: 'rgba(255,255,255,0.15)',
-              color: '#ffffff',
+              background: isDarkMode ? '#1e293b' : '#e2e8f0',
+              color: isDarkMode ? '#f8fafc' : '#334155',
               border: 'none',
               padding: '7px 14px',
               borderRadius: '8px',
               fontSize: '12px',
               fontWeight: '700',
               cursor: 'pointer',
-              transition: 'background 0.2s',
+              transition: 'all 0.15s',
             }}
           >
             <ArrowLeft size={16} />
-            <span>{lang === 'ne' ? 'लाइब्रेरी फर्कनुहोस्' : 'Return to Library'}</span>
+            <span>{lang === 'ne' ? 'फर्कनुहोस्' : 'Back'}</span>
           </button>
 
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <h2 style={{ fontSize: '16px', fontWeight: '800', margin: 0 }}>
-                {lang === 'ne' ? 'मेरो ३डी स्थिति खेलमैदान' : 'My 3D Position Playground'}
-              </h2>
+              <span style={{ fontSize: '18px' }}>🏡</span>
+              <h1 style={{ fontSize: '16px', fontWeight: '800', margin: 0, letterSpacing: '-0.2px' }}>
+                {lang === 'ne'
+                  ? 'मेरो ३डी स्थिति खेलमैदान – भित्र, बाहिर, माथि र तल'
+                  : 'My 3D Position Playground – Inside, Outside, Above and Below'}
+              </h1>
               <span
                 style={{
-                  background: '#fef08a',
-                  color: '#854d0e',
+                  background: '#0284c7',
+                  color: '#ffffff',
                   fontSize: '10px',
                   fontWeight: '800',
                   padding: '2px 8px',
                   borderRadius: '12px',
-                  textTransform: 'uppercase',
+                  letterSpacing: '0.4px',
                 }}
               >
-                Class 1 • Math • Ch 1
+                CLASS 1 • CDC NEPAL
               </span>
             </div>
-            <p style={{ margin: '2px 0 0 0', fontSize: '11px', color: '#bbf7d0' }}>
-              {lang === 'ne' ? 'आकारप्रकार र स्थान (भित्र, बाहिर, माथि, तल, अग्लो, होचो, लामो, छोटो)' : 'Shapes & Position (Inside, Outside, Above, Below, Tall, Short, Long)'}
+            <p style={{ margin: '2px 0 0 0', fontSize: '11px', color: isDarkMode ? '#94a3b8' : '#64748b' }}>
+              {lang === 'ne'
+                ? 'गणित • पाठ १: आकारप्रकार र स्थान (भित्र, बाहिर, माथि, तल)'
+                : 'Mathematics • Chapter 1: Shapes & Position (Inside, Outside, Above, Below)'}
             </p>
           </div>
         </div>
 
-        {/* Mode & Navigation Pills */}
+        {/* Global Action Toggles */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {/* Mode Switcher */}
-          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.25)', borderRadius: '8px', padding: '3px' }}>
-            <button
-              onClick={() => {
-                setMode('GUIDED');
-                AudioController.playClick();
-              }}
-              style={{
-                padding: '5px 12px',
-                borderRadius: '6px',
-                fontSize: '11px',
-                fontWeight: '700',
-                border: 'none',
-                cursor: 'pointer',
-                background: mode === 'GUIDED' ? '#ffffff' : 'transparent',
-                color: mode === 'GUIDED' ? '#117a6b' : '#ffffff',
-              }}
-            >
-              {lang === 'ne' ? 'सिकाइ पाठ' : 'Lessons (1–5)'}
-            </button>
-            <button
-              onClick={() => {
-                setMode('FREE_PLAY');
-                AudioController.playClick();
-              }}
-              style={{
-                padding: '5px 12px',
-                borderRadius: '6px',
-                fontSize: '11px',
-                fontWeight: '700',
-                border: 'none',
-                cursor: 'pointer',
-                background: mode === 'FREE_PLAY' ? '#ffffff' : 'transparent',
-                color: mode === 'FREE_PLAY' ? '#117a6b' : '#ffffff',
-              }}
-            >
-              {lang === 'ne' ? 'खुला अन्वेषण' : 'Free Explore'}
-            </button>
-            <button
-              onClick={() => {
-                setMode('ASSESSMENT');
-                setAssessmentIndex(0);
-                setAssessmentScore(0);
-                setIsAssessmentFinished(false);
-                AudioController.playClick();
-              }}
-              style={{
-                padding: '5px 12px',
-                borderRadius: '6px',
-                fontSize: '11px',
-                fontWeight: '700',
-                border: 'none',
-                cursor: 'pointer',
-                background: mode === 'ASSESSMENT' ? '#f59e0b' : 'transparent',
-                color: mode === 'ASSESSMENT' ? '#000000' : '#ffffff',
-              }}
-            >
-              {lang === 'ne' ? 'मूल्याङ्कन' : 'Assessment'}
-            </button>
-          </div>
-
-          {/* Bilingual Toggle */}
+          {/* Language Switch */}
           <button
-            onClick={() => setLang(lang === 'ne' ? 'en' : 'ne')}
+            onClick={() => {
+              setLang(lang === 'ne' ? 'en' : 'ne');
+              AudioController.playClick();
+            }}
             style={{
-              padding: '6px 12px',
+              padding: '6px 14px',
               borderRadius: '8px',
-              background: 'rgba(255,255,255,0.2)',
+              background: '#0284c7',
               color: '#ffffff',
               fontSize: '11px',
               fontWeight: '800',
@@ -630,678 +899,839 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
             {lang === 'ne' ? 'English' : 'नेपाली'}
           </button>
 
-          {/* Audio Mute */}
+          {/* Dark / Light Mode */}
           <button
-            onClick={toggleMute}
+            onClick={toggleDarkMode}
             style={{
-              padding: '7px',
+              padding: '7px 11px',
               borderRadius: '8px',
-              background: 'rgba(255,255,255,0.2)',
-              color: '#ffffff',
+              background: isDarkMode ? '#1e293b' : '#f1f5f9',
+              color: isDarkMode ? '#fde047' : '#0284c7',
+              border: isDarkMode ? '1px solid #334155' : '1px solid #cbd5e1',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px',
+              fontSize: '11px',
+              fontWeight: '700',
+            }}
+            title="Toggle Day / Night"
+          >
+            {isDarkMode ? <Moon size={15} /> : <Sun size={15} />}
+            <span>{isDarkMode ? (lang === 'ne' ? 'रात' : 'Night') : (lang === 'ne' ? 'दिन' : 'Day')}</span>
+          </button>
+
+          {/* Roof Cutaway */}
+          <button
+            onClick={toggleRoofCutaway}
+            style={{
+              padding: '7px 11px',
+              borderRadius: '8px',
+              background: isRoofCutaway ? '#059669' : isDarkMode ? '#1e293b' : '#f1f5f9',
+              color: isRoofCutaway ? '#ffffff' : isDarkMode ? '#e2e8f0' : '#334155',
               border: 'none',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
+              gap: '5px',
+              fontSize: '11px',
+              fontWeight: '700',
             }}
-            title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
+            title="Roof Cutaway (Inside View)"
+          >
+            <Eye size={15} />
+            <span>{lang === 'ne' ? 'कोठाभित्र हेर्नुहोस्' : 'View Inside'}</span>
+          </button>
+
+          {/* Audio Mute */}
+          <button
+            onClick={() => {
+              const m = !isMuted;
+              setIsMuted(m);
+              AudioController.setMuted(m);
+            }}
+            style={{
+              padding: '7px',
+              borderRadius: '8px',
+              background: isDarkMode ? '#1e293b' : '#f1f5f9',
+              color: isDarkMode ? '#e2e8f0' : '#475569',
+              border: isDarkMode ? '1px solid #334155' : '1px solid #cbd5e1',
+              cursor: 'pointer',
+            }}
+            title={isMuted ? 'Unmute' : 'Mute'}
           >
             {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
           </button>
 
           {/* Reset Camera */}
           <button
-            onClick={resetCamera}
+            onClick={() => setCameraView('overview')}
             style={{
               padding: '7px',
               borderRadius: '8px',
-              background: 'rgba(255,255,255,0.2)',
-              color: '#ffffff',
-              border: 'none',
+              background: isDarkMode ? '#1e293b' : '#f1f5f9',
+              color: isDarkMode ? '#e2e8f0' : '#475569',
+              border: isDarkMode ? '1px solid #334155' : '1px solid #cbd5e1',
               cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
             }}
             title="Reset 3D View"
           >
             <RotateCcw size={16} />
           </button>
         </div>
-      </div>
+      </header>
 
-      {/* ── 3D CANVAS VIEWPORT ────────────────────────────────────── */}
-      <div
-        ref={mountRef}
+      {/* ── 5 MODE SELECTOR TABS ─────────────────────────────────── */}
+      <nav
         style={{
-          flex: 1,
-          width: '100%',
-          position: 'relative',
-          cursor: 'grab',
-        }}
-      />
-
-      {/* ── BOTTOM INTERACTIVE HUD BAR ───────────────────────────── */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 16,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: 'calc(100% - 32px)',
-          maxWidth: '920px',
-          background: 'rgba(255, 255, 255, 0.94)',
-          backdropFilter: 'blur(12px)',
-          borderRadius: '18px',
-          padding: '16px 20px',
-          boxShadow: '0 10px 35px rgba(0,0,0,0.25)',
-          border: '2px solid rgba(255,255,255,0.8)',
-          zIndex: 20,
           display: 'flex',
-          flexDirection: 'column',
-          gap: '12px',
+          alignItems: 'center',
+          gap: '6px',
+          padding: '8px 18px',
+          background: isDarkMode ? '#131b2e' : '#e2e8f0',
+          borderBottom: isDarkMode ? '1px solid rgba(255,255,255,0.06)' : '1px solid #cbd5e1',
+          overflowX: 'auto',
+          zIndex: 20,
         }}
       >
-        {/* ── 1. GUIDED LEARNING MODE HUD ─────────────────────────── */}
-        {mode === 'GUIDED' && (
-          <>
-            {/* Level Title & Progress Indicator */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span
-                  style={{
-                    background: '#117a6b',
-                    color: '#ffffff',
-                    padding: '2px 10px',
-                    borderRadius: '12px',
-                    fontSize: '11px',
-                    fontWeight: '800',
-                  }}
-                >
-                  Level {currentLevel.levelNumber} / {PLAYGROUND_LEVELS.length}
-                </span>
-                <span style={{ fontSize: '13px', fontWeight: '800', color: '#0f172a' }}>
-                  {lang === 'ne' ? currentLevel.titleNe : currentLevel.titleEn}
-                </span>
-              </div>
+        <span
+          style={{
+            fontSize: '11px',
+            fontWeight: '800',
+            color: isDarkMode ? '#94a3b8' : '#64748b',
+            textTransform: 'uppercase',
+            marginRight: '6px',
+          }}
+        >
+          {lang === 'ne' ? 'सिकाइ मोडहरू:' : 'Modes:'}
+        </span>
 
-              {/* Progress step dots */}
-              <div style={{ display: 'flex', gap: '5px' }}>
-                {currentLevel.steps.map((st, idx) => (
-                  <div
-                    key={st.id}
-                    style={{
-                      width: idx === currentStepIdx ? '22px' : '8px',
-                      height: '8px',
-                      borderRadius: '4px',
-                      background: idx === currentStepIdx ? '#117a6b' : idx < currentStepIdx ? '#10b981' : '#cbd5e1',
-                      transition: 'all 0.2s',
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Instruction Card with Audio Speaker */}
-            <div
+        {[
+          { key: 'MODE_1', labelNe: '१. भित्र र बाहिर', labelEn: '1. Inside & Outside', icon: '🚪' },
+          { key: 'MODE_2', labelNe: '२. माथि र तल', labelEn: '2. Above & Below', icon: '↕️' },
+          { key: 'MODE_3', labelNe: '३. स्थान पत्ता लगाऔँ', labelEn: '3. Position Discovery', icon: '🔍' },
+          { key: 'MODE_4', labelNe: '४. निर्देशन अनुसार', labelEn: '4. Follow Instruction', icon: '🎯' },
+          { key: 'MODE_5', labelNe: '५. स्थान चुनौती', labelEn: '5. Spatial Challenge', icon: '🏆' },
+        ].map((m) => {
+          const isActive = currentMode === m.key;
+          return (
+            <button
+              key={m.key}
+              onClick={() => {
+                setCurrentMode(m.key as LearningMode);
+                setTaskIndex(0);
+                AudioController.playClick();
+              }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '12px',
-                background: '#f8fafc',
-                padding: '10px 14px',
-                borderRadius: '12px',
-                border: '1px solid #e2e8f0',
+                gap: '6px',
+                padding: '6px 14px',
+                borderRadius: '8px',
+                fontSize: '12px',
+                fontWeight: '800',
+                border: 'none',
+                cursor: 'pointer',
+                background: isActive ? '#0284c7' : isDarkMode ? '#1e293b' : '#ffffff',
+                color: isActive ? '#ffffff' : isDarkMode ? '#cbd5e1' : '#334155',
+                boxShadow: isActive ? '0 2px 8px rgba(2, 132, 199, 0.4)' : 'none',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.15s',
               }}
             >
-              <button
-                onClick={replayAudio}
-                style={{
-                  width: '38px',
-                  height: '38px',
-                  borderRadius: '50%',
-                  background: '#0284c7',
-                  color: '#ffffff',
-                  border: 'none',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  flexShrink: 0,
-                  boxShadow: '0 2px 6px rgba(2, 132, 199, 0.3)',
-                }}
-                title="Play Audio Instruction"
-              >
-                <Volume2 size={20} />
-              </button>
+              <span>{m.icon}</span>
+              <span>{lang === 'ne' ? m.labelNe : m.labelEn}</span>
+            </button>
+          );
+        })}
+      </nav>
 
-              <div style={{ flex: 1 }}>
-                <p style={{ margin: 0, fontSize: '15px', fontWeight: '800', color: '#0f172a', lineHeight: 1.3 }}>
-                  {lang === 'ne' ? currentStep.instructionNe : currentStep.instructionEn}
-                </p>
-                <p style={{ margin: '2px 0 0 0', fontSize: '12px', color: '#64748b' }}>
-                  {lang === 'ne' ? currentStep.hintNe : currentStep.hintEn}
-                </p>
-              </div>
+      {/* ── MAIN 2-COLUMN WORKSPACE: 3D STAGE (LEFT) + RIGHT PANEL ─ */}
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'row',
+          overflow: 'hidden',
+          position: 'relative',
+        }}
+      >
+        {/* ── LEFT COLUMN: 3D STAGE VIEWPORT ────────────────────── */}
+        <div
+          style={{
+            flex: stageLayout === 'full' ? 1 : stageLayout === 'wide' ? 0.78 : 0.68,
+            height: '100%',
+            position: 'relative',
+            background: isDarkMode ? '#0f172a' : '#e0f2fe',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          {/* THREE.JS WebGL Canvas Container */}
+          <div
+            ref={mountRef}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onWheel={handleWheel}
+            style={{
+              width: '100%',
+              height: '100%',
+              cursor: 'grab',
+              touchAction: 'none',
+            }}
+          />
 
-              {/* Watch Demo button if available for this step */}
-              {currentStep.demoAction && (
-                <button
-                  onClick={playStepDemo}
-                  disabled={isDemoPlaying}
+          {/* Floating Camera & View Overlay Toolbar (Top Left of 3D Scene) */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 12,
+              left: 12,
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '6px',
+              background: isDarkMode ? 'rgba(15, 23, 42, 0.85)' : 'rgba(255, 255, 255, 0.9)',
+              backdropFilter: 'blur(8px)',
+              padding: '6px 10px',
+              borderRadius: '12px',
+              boxShadow: '0 4px 15px rgba(0,0,0,0.12)',
+              border: isDarkMode ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.08)',
+              zIndex: 10,
+            }}
+          >
+            <span
+              style={{
+                fontSize: '10px',
+                fontWeight: '800',
+                color: isDarkMode ? '#94a3b8' : '#64748b',
+                alignSelf: 'center',
+                marginRight: '2px',
+              }}
+            >
+              🎥 VIEW:
+            </span>
+            <button
+              onClick={() => setCameraView('overview')}
+              style={toolBtnStyle(isDarkMode)}
+              title="Overview"
+            >
+              Overview
+            </button>
+            <button onClick={() => setCameraView('house')} style={toolBtnStyle(isDarkMode)} title="House">
+              🏠 House
+            </button>
+            <button onClick={() => setCameraView('garden')} style={toolBtnStyle(isDarkMode)} title="Garden">
+              🧺 Garden
+            </button>
+            <button onClick={() => setCameraView('tree')} style={toolBtnStyle(isDarkMode)} title="Tree">
+              🌲 Tree
+            </button>
+            <button onClick={() => setCameraView('top')} style={toolBtnStyle(isDarkMode)} title="Top View">
+              📐 Top
+            </button>
+
+            <div style={{ width: '1px', background: isDarkMode ? '#334155' : '#cbd5e1', margin: '0 4px' }} />
+
+            {/* Door & Box manual controls */}
+            <button onClick={toggleDoor} style={toolBtnStyle(isDarkMode)}>
+              🚪 {isDoorOpen ? 'Close Door' : 'Open Door'}
+            </button>
+            <button onClick={toggleBox} style={toolBtnStyle(isDarkMode)}>
+              📦 {isBoxOpen ? 'Close Box' : 'Open Box'}
+            </button>
+          </div>
+
+          {/* Floating Stage Width Toggle (Top Right of 3D Scene) */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 12,
+              right: 12,
+              display: 'flex',
+              gap: '4px',
+              background: isDarkMode ? 'rgba(15, 23, 42, 0.85)' : 'rgba(255, 255, 255, 0.9)',
+              backdropFilter: 'blur(8px)',
+              padding: '4px 8px',
+              borderRadius: '10px',
+              boxShadow: '0 4px 15px rgba(0,0,0,0.12)',
+              zIndex: 10,
+            }}
+          >
+            <button
+              onClick={() => setStageLayout(stageLayout === 'full' ? 'split' : 'full')}
+              style={{
+                padding: '4px 8px',
+                fontSize: '11px',
+                fontWeight: '700',
+                border: 'none',
+                borderRadius: '6px',
+                background: stageLayout === 'full' ? '#0284c7' : 'transparent',
+                color: stageLayout === 'full' ? '#ffffff' : isDarkMode ? '#cbd5e1' : '#475569',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+            >
+              {stageLayout === 'full' ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
+              <span>{stageLayout === 'full' ? 'Split View' : 'Full Stage'}</span>
+            </button>
+          </div>
+
+          {/* Floating Live 3D Hint Banner at Bottom of Canvas */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 12,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              background: isDarkMode ? 'rgba(15, 23, 42, 0.92)' : 'rgba(255, 255, 255, 0.95)',
+              backdropFilter: 'blur(10px)',
+              padding: '8px 18px',
+              borderRadius: '24px',
+              boxShadow: '0 6px 20px rgba(0,0,0,0.2)',
+              border: isDarkMode ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.06)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              zIndex: 10,
+              maxWidth: '90%',
+            }}
+          >
+            <span style={{ fontSize: '15px' }}>💡</span>
+            <span style={{ fontSize: '12px', fontWeight: '700', color: isDarkMode ? '#e2e8f0' : '#1e293b' }}>
+              {lang === 'ne'
+                ? '३डी वस्तुलाई माउस वा औँलाले तानेर (Drag) राख्नुहोस् • पृष्ठभूमिलाई तानेर ३६०° घुमाउनुहोस् • पाङ्ग्रा घुमाएर जुम गर्नुहोस्'
+                : 'Drag 3D items with mouse/touch • Drag background to orbit 360° • Mouse wheel to zoom in/out'}
+            </span>
+          </div>
+        </div>
+
+        {/* ── RIGHT COLUMN: ORGANIZED CONTROLS & DASHBOARD ──────── */}
+        {stageLayout !== 'full' && (
+          <aside
+            style={{
+              flex: stageLayout === 'wide' ? 0.22 : 0.32,
+              minWidth: '320px',
+              maxWidth: '460px',
+              height: '100%',
+              background: isDarkMode ? '#0d1322' : '#ffffff',
+              borderLeft: isDarkMode ? '1px solid rgba(255,255,255,0.08)' : '1px solid #e2e8f0',
+              display: 'flex',
+              flexDirection: 'column',
+              overflowY: 'auto',
+              padding: '16px 18px',
+              gap: '14px',
+              boxShadow: '-4px 0 20px rgba(0,0,0,0.04)',
+              zIndex: 15,
+            }}
+          >
+            {/* ── SECTION 1: LIVE POSITION DETECTOR CARD ──────────── */}
+            <div
+              style={{
+                background: isDarkMode ? '#172033' : '#f8fafc',
+                border: isDarkMode ? '1px solid #283548' : '1px solid #e2e8f0',
+                borderRadius: '14px',
+                padding: '12px 14px',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                <span style={{ fontSize: '11px', fontWeight: '800', color: '#0284c7', textTransform: 'uppercase' }}>
+                  {lang === 'ne' ? 'स्थान पहिचान (Live Detection)' : 'Live 3D Position'}
+                </span>
+                <span
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '8px 14px',
-                    borderRadius: '8px',
-                    background: '#e0f2fe',
-                    color: '#0369a1',
-                    border: '1px solid #bae6fd',
-                    fontSize: '12px',
+                    background: currentDetection?.relation === 'inside' ? '#059669' : '#0284c7',
+                    color: '#ffffff',
+                    fontSize: '10px',
                     fontWeight: '800',
-                    cursor: isDemoPlaying ? 'not-allowed' : 'pointer',
+                    padding: '2px 8px',
+                    borderRadius: '8px',
+                    textTransform: 'uppercase',
                   }}
                 >
-                  <Play size={14} fill="#0369a1" />
-                  <span>{lang === 'ne' ? 'डेमो हेर्नुहोस्' : 'Watch Demo'}</span>
-                </button>
-              )}
+                  {currentDetection?.relation || 'placed'}
+                </span>
+              </div>
+
+              <div style={{ fontSize: '14px', fontWeight: '800', color: isDarkMode ? '#f8fafc' : '#0f172a' }}>
+                {lang === 'ne'
+                  ? currentDetection?.titleNe || 'वस्तु तानेर राख्नुहोस्'
+                  : currentDetection?.titleEn || 'Drag object to detect position'}
+              </div>
+              <div style={{ fontSize: '12px', color: isDarkMode ? '#94a3b8' : '#64748b', marginTop: '2px' }}>
+                {lang === 'ne'
+                  ? currentDetection?.descriptionNe || 'वस्तुको स्थिति यहाँ स्वतः देखिनेछ।'
+                  : currentDetection?.descriptionEn || 'Real-time spatial relation is detected automatically.'}
+              </div>
             </div>
 
-            {/* Multiple Choice Options or Target Buttons */}
-            {currentStep.options ? (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
-                {currentStep.options.map((opt) => (
-                  <button
-                    key={opt.id}
-                    onClick={() => handleSelectOption(opt)}
-                    style={{
-                      padding: '12px 16px',
-                      borderRadius: '10px',
-                      background: '#ffffff',
-                      border: '2px solid #cbd5e1',
-                      color: '#0f172a',
-                      fontSize: '13px',
-                      fontWeight: '800',
-                      cursor: 'pointer',
-                      textAlign: 'center',
-                      boxShadow: '0 2px 4px rgba(0,0,0,0.04)',
-                      transition: 'all 0.15s',
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#117a6b')}
-                    onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#cbd5e1')}
-                  >
-                    {lang === 'ne' ? opt.labelNe : opt.labelEn}
-                  </button>
-                ))}
-              </div>
-            ) : (
-              /* Direct Interactive Placement Target Buttons */
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                {currentStep.targetPosition.includes('inside') || currentStep.targetPosition.includes('outside') ? (
-                  <>
-                    <button
-                      onClick={() => handleObjectPlacement('inside_house')}
-                      style={{
-                        flex: 1,
-                        padding: '10px 14px',
-                        background: '#f0fdf4',
-                        color: '#166534',
-                        border: '2px solid #86efac',
-                        borderRadius: '10px',
-                        fontSize: '13px',
-                        fontWeight: '800',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {lang === 'ne' ? 'घरभित्र राख्नुहोस् (Inside)' : 'Put Inside House'}
-                    </button>
-                    <button
-                      onClick={() => handleObjectPlacement('outside_house')}
-                      style={{
-                        flex: 1,
-                        padding: '10px 14px',
-                        background: '#fef2f2',
-                        color: '#991b1b',
-                        border: '2px solid #fca5a5',
-                        borderRadius: '10px',
-                        fontSize: '13px',
-                        fontWeight: '800',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {lang === 'ne' ? 'घरबाहिर राख्नुहोस् (Outside)' : 'Put Outside House'}
-                    </button>
-                    <button
-                      onClick={() => handleObjectPlacement('inside_basket')}
-                      style={{
-                        flex: 1,
-                        padding: '10px 14px',
-                        background: '#eff6ff',
-                        color: '#1e40af',
-                        border: '2px solid #93c5fd',
-                        borderRadius: '10px',
-                        fontSize: '13px',
-                        fontWeight: '800',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {lang === 'ne' ? 'टोकरीभित्र (Inside Basket)' : 'Put in Basket'}
-                    </button>
-                    <button
-                      onClick={() => handleObjectPlacement('outside_basket')}
-                      style={{
-                        flex: 1,
-                        padding: '10px 14px',
-                        background: '#faf5ff',
-                        color: '#6b21a8',
-                        border: '2px solid #d8b4fe',
-                        borderRadius: '10px',
-                        fontSize: '13px',
-                        fontWeight: '800',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {lang === 'ne' ? 'टोकरीबाहिर (Outside Basket)' : 'Put Outside Basket'}
-                    </button>
-                  </>
-                ) : currentStep.targetPosition.includes('above') || currentStep.targetPosition.includes('below') ? (
-                  <>
-                    <button
-                      onClick={() => handleObjectPlacement('above_tree')}
-                      style={{
-                        flex: 1,
-                        padding: '10px 14px',
-                        background: '#ecfdf5',
-                        color: '#065f46',
-                        border: '2px solid #6ee7b7',
-                        borderRadius: '10px',
-                        fontSize: '13px',
-                        fontWeight: '800',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {lang === 'ne' ? 'रूखमाथि (Above Tree)' : 'Above Tree'}
-                    </button>
-                    <button
-                      onClick={() => handleObjectPlacement('below_table')}
-                      style={{
-                        flex: 1,
-                        padding: '10px 14px',
-                        background: '#fef3c7',
-                        color: '#92400e',
-                        border: '2px solid #fcd34d',
-                        borderRadius: '10px',
-                        fontSize: '13px',
-                        fontWeight: '800',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {lang === 'ne' ? 'टेबलमुनि तल (Below Table)' : 'Below Table'}
-                    </button>
-                    <button
-                      onClick={() => handleObjectPlacement('above_table')}
-                      style={{
-                        flex: 1,
-                        padding: '10px 14px',
-                        background: '#e0f2fe',
-                        color: '#075985',
-                        border: '2px solid #7dd3fc',
-                        borderRadius: '10px',
-                        fontSize: '13px',
-                        fontWeight: '800',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {lang === 'ne' ? 'टेबलमाथि (Above Table)' : 'Above Table'}
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      onClick={() => handleObjectPlacement('right')}
-                      style={{
-                        flex: 1,
-                        padding: '10px 14px',
-                        background: '#f0fdf4',
-                        color: '#166534',
-                        border: '2px solid #86efac',
-                        borderRadius: '10px',
-                        fontSize: '13px',
-                        fontWeight: '800',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {lang === 'ne' ? 'दायाँ लैजानुहोस् (Right)' : 'Move to Right'}
-                    </button>
-                    <button
-                      onClick={() => handleObjectPlacement('left')}
-                      style={{
-                        flex: 1,
-                        padding: '10px 14px',
-                        background: '#eff6ff',
-                        color: '#1e40af',
-                        border: '2px solid #93c5fd',
-                        borderRadius: '10px',
-                        fontSize: '13px',
-                        fontWeight: '800',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {lang === 'ne' ? 'बायाँ लैजानुहोस् (Left)' : 'Move to Left'}
-                    </button>
-                  </>
-                )}
-              </div>
-            )}
-
-            {/* Feedback Alert Banner */}
-            {feedback.message && (
+            {/* ── SECTION 2: ACTIVE TASK / QUESTION CARD ──────────── */}
+            {currentMode !== 'MODE_5' && currentTask && (
               <div
                 style={{
+                  background: isDarkMode ? '#1e293b' : '#f0fdf4',
+                  border: isDarkMode ? '1px solid #334155' : '1px solid #bbf7d0',
+                  borderRadius: '16px',
+                  padding: '14px 16px',
                   display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '8px 12px',
-                  borderRadius: '8px',
-                  fontSize: '12px',
-                  fontWeight: '700',
-                  background: feedback.type === 'success' ? '#dcfce7' : '#fee2e2',
-                  color: feedback.type === 'success' ? '#166534' : '#991b1b',
-                  border: `1px solid ${feedback.type === 'success' ? '#86efac' : '#fca5a5'}`,
+                  flexDirection: 'column',
+                  gap: '10px',
                 }}
               >
-                {feedback.type === 'success' ? <CheckCircle2 size={16} /> : <XCircle size={16} />}
-                <span>{feedback.message}</span>
-              </div>
-            )}
-
-            {/* Navigation buttons: Prev / Next */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <button
-                onClick={handlePrevStep}
-                disabled={currentLevelIdx === 0 && currentStepIdx === 0}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  padding: '6px 12px',
-                  borderRadius: '6px',
-                  background: '#f1f5f9',
-                  color: '#475569',
-                  border: '1px solid #cbd5e1',
-                  fontSize: '11px',
-                  fontWeight: '700',
-                  cursor: currentLevelIdx === 0 && currentStepIdx === 0 ? 'not-allowed' : 'pointer',
-                }}
-              >
-                <ChevronLeft size={14} /> {lang === 'ne' ? 'अघिल्लो' : 'Previous'}
-              </button>
-
-              <button
-                onClick={handleNextStep}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  padding: '6px 16px',
-                  borderRadius: '6px',
-                  background: '#117a6b',
-                  color: '#ffffff',
-                  border: 'none',
-                  fontSize: '11px',
-                  fontWeight: '700',
-                  cursor: 'pointer',
-                }}
-              >
-                <span>{lang === 'ne' ? 'पछिल्लो' : 'Next Step'}</span>
-                <ChevronRight size={14} />
-              </button>
-            </div>
-          </>
-        )}
-
-        {/* ── 2. FREE EXPLORATION MODE HUD ────────────────────────── */}
-        {mode === 'FREE_PLAY' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div>
-                <h4 style={{ margin: 0, fontSize: '14px', fontWeight: '800', color: '#0f172a' }}>
-                  {lang === 'ne' ? 'खुला खेलमैदान अन्वेषण (Free Play)' : 'Free Sandbox Village Exploration'}
-                </h4>
-                <p style={{ margin: '2px 0 0 0', fontSize: '11px', color: '#64748b' }}>
-                  {lang === 'ne' ? 'कुनै पनि जनावर वा वस्तुलाई थिचेर स्थान परिवर्तन गर्नुहोस् र रमाइलो गर्नुहोस्।' : 'Freely move animals and objects around the village playground.'}
-                </p>
-              </div>
-
-              <button
-                onClick={() => {
-                  setMode('ASSESSMENT');
-                  setAssessmentIndex(0);
-                  setAssessmentScore(0);
-                  setIsAssessmentFinished(false);
-                }}
-                style={{
-                  padding: '8px 16px',
-                  borderRadius: '8px',
-                  background: '#f59e0b',
-                  color: '#000000',
-                  border: 'none',
-                  fontSize: '12px',
-                  fontWeight: '800',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                }}
-              >
-                <Trophy size={14} />
-                <span>{lang === 'ne' ? 'मूल्याङ्कन सुरु गर्नुहोस्' : 'Start Final Assessment'}</span>
-              </button>
-            </div>
-
-            {/* Quick action buttons */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              <button
-                onClick={() => handleFreePlayAction('toggle_door')}
-                style={{ padding: '6px 12px', borderRadius: '6px', background: '#e2e8f0', border: 'none', fontSize: '11px', fontWeight: '700', cursor: 'pointer' }}
-              >
-                🚪 {lang === 'ne' ? 'ढोका खोल्नुहोस् / बन्द गर्नुहोस्' : 'Toggle Door'}
-              </button>
-              <button
-                onClick={() => handleFreePlayAction('cat_inside')}
-                style={{ padding: '6px 12px', borderRadius: '6px', background: '#dcfce7', border: 'none', fontSize: '11px', fontWeight: '700', cursor: 'pointer', color: '#166534' }}
-              >
-                🐱 {lang === 'ne' ? 'बिरालो घरभित्र' : 'Cat Inside'}
-              </button>
-              <button
-                onClick={() => handleFreePlayAction('cat_outside')}
-                style={{ padding: '6px 12px', borderRadius: '6px', background: '#fee2e2', border: 'none', fontSize: '11px', fontWeight: '700', cursor: 'pointer', color: '#991b1b' }}
-              >
-                🐱 {lang === 'ne' ? 'बिरालो बाहिर' : 'Cat Outside'}
-              </button>
-              <button
-                onClick={() => handleFreePlayAction('bird_tree')}
-                style={{ padding: '6px 12px', borderRadius: '6px', background: '#e0f2fe', border: 'none', fontSize: '11px', fontWeight: '700', cursor: 'pointer', color: '#0369a1' }}
-              >
-                🐦 {lang === 'ne' ? 'चरा रूखमाथि' : 'Bird Above Tree'}
-              </button>
-              <button
-                onClick={() => handleFreePlayAction('ball_table_below')}
-                style={{ padding: '6px 12px', borderRadius: '6px', background: '#fef3c7', border: 'none', fontSize: '11px', fontWeight: '700', cursor: 'pointer', color: '#92400e' }}
-              >
-                ⚽ {lang === 'ne' ? 'बल टेबलमुनि तल' : 'Ball Below Table'}
-              </button>
-              <button
-                onClick={() => handleFreePlayAction('ball_basket')}
-                style={{ padding: '6px 12px', borderRadius: '6px', background: '#fae8ff', border: 'none', fontSize: '11px', fontWeight: '700', cursor: 'pointer', color: '#86198f' }}
-              >
-                🧺 {lang === 'ne' ? 'बल टोकरीभित्र' : 'Ball in Basket'}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* ── 3. ASSESSMENT MODE HUD ──────────────────────────────── */}
-        {mode === 'ASSESSMENT' && (
-          <div>
-            {!isAssessmentFinished ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {/* Task index indicator */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span
-                      style={{
-                        background: '#f59e0b',
-                        color: '#000000',
-                        padding: '2px 8px',
-                        borderRadius: '12px',
-                        fontSize: '11px',
-                        fontWeight: '800',
-                      }}
-                    >
-                      Question {assessmentIndex + 1} / {ASSESSMENT_QUESTIONS.length}
-                    </span>
-                    <span style={{ fontSize: '12px', fontWeight: '700', color: '#475569' }}>
-                      {lang === 'ne' ? ASSESSMENT_QUESTIONS[assessmentIndex].conceptNe : ASSESSMENT_QUESTIONS[assessmentIndex].concept}
-                    </span>
-                  </div>
-
-                  <span style={{ fontSize: '12px', fontWeight: '800', color: '#16a34a' }}>
-                    Score: {assessmentScore} / {assessmentIndex}
-                  </span>
-                </div>
-
-                {/* Question Prompt */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    background: '#fffbeb',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #fef3c7',
-                  }}
-                >
-                  <button
-                    onClick={replayAudio}
+                  <span
                     style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '50%',
-                      background: '#f59e0b',
-                      color: '#000000',
-                      border: 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      flexShrink: 0,
+                      background: '#16a34a',
+                      color: '#ffffff',
+                      fontSize: '11px',
+                      fontWeight: '800',
+                      padding: '2px 10px',
+                      borderRadius: '10px',
                     }}
                   >
-                    <Volume2 size={16} />
-                  </button>
-                  <span style={{ fontSize: '14px', fontWeight: '800', color: '#78350f' }}>
-                    {lang === 'ne' ? ASSESSMENT_QUESTIONS[assessmentIndex].questionNe : ASSESSMENT_QUESTIONS[assessmentIndex].questionEn}
+                    {lang === 'ne'
+                      ? `अभ्यास ${taskIndex + 1} / ${activeTaskList.length}`
+                      : `Task ${taskIndex + 1} of ${activeTaskList.length}`}
                   </span>
-                </div>
 
-                {/* Multiple Choice Answers */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '10px' }}>
-                  {ASSESSMENT_QUESTIONS[assessmentIndex].options.map((opt) => (
-                    <button
-                      key={opt.id}
-                      onClick={() => handleAssessmentAnswer(opt.isCorrect)}
-                      style={{
-                        padding: '12px 16px',
-                        borderRadius: '10px',
-                        background: '#ffffff',
-                        border: '2px solid #cbd5e1',
-                        color: '#0f172a',
-                        fontSize: '13px',
-                        fontWeight: '800',
-                        cursor: 'pointer',
-                        textAlign: 'left',
-                        boxShadow: '0 2px 4px rgba(0,0,0,0.04)',
-                        transition: 'all 0.15s',
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#f59e0b')}
-                      onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#cbd5e1')}
-                    >
-                      {lang === 'ne' ? opt.labelNe : opt.labelEn}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              /* Assessment Completion Screen */
-              <div style={{ textAlign: 'center', padding: '12px 0' }}>
-                <Trophy size={42} color="#f59e0b" style={{ margin: '0 auto 8px auto' }} />
-                <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0' }}>
-                  {lang === 'ne' ? 'बधाई छ! मूल्याङ्कन पूरा भयो!' : 'Congratulations! Assessment Completed!'}
-                </h3>
-                <p style={{ fontSize: '13px', color: '#475569', margin: '0 0 12px 0' }}>
-                  {lang === 'ne' ? `तपाईंको नतिजा: ${assessmentScore} / ${ASSESSMENT_QUESTIONS.length} (${Math.round((assessmentScore / ASSESSMENT_QUESTIONS.length) * 100)}%)` : `Your Score: ${assessmentScore} / ${ASSESSMENT_QUESTIONS.length} (${Math.round((assessmentScore / ASSESSMENT_QUESTIONS.length) * 100)}%)`}
-                </p>
-
-                {/* Stars earned */}
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '16px' }}>
-                  {[1, 2, 3].map((starIdx) => {
-                    const earned = assessmentScore >= starIdx * 4;
-                    return (
-                      <Star
-                        key={starIdx}
-                        size={28}
-                        fill={earned ? '#f59e0b' : '#e2e8f0'}
-                        color={earned ? '#d97706' : '#cbd5e1'}
-                      />
-                    );
-                  })}
-                </div>
-
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
                   <button
-                    onClick={() => {
-                      setAssessmentIndex(0);
-                      setAssessmentScore(0);
-                      setIsAssessmentFinished(false);
-                      AudioController.playClick();
-                    }}
+                    onClick={replayCurrentSpeech}
                     style={{
-                      padding: '8px 18px',
-                      borderRadius: '8px',
-                      background: '#f1f5f9',
-                      color: '#334155',
-                      border: '1px solid #cbd5e1',
-                      fontSize: '12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      padding: '4px 8px',
+                      background: '#0284c7',
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: '6px',
+                      fontSize: '11px',
                       fontWeight: '700',
                       cursor: 'pointer',
                     }}
                   >
-                    {lang === 'ne' ? 'फेरि प्रयास गर्नुहोस्' : 'Try Again'}
+                    <Volume2 size={13} />
+                    <span>{lang === 'ne' ? 'सुन्नुहोस्' : 'Listen'}</span>
+                  </button>
+                </div>
+
+                {/* Instruction Text */}
+                <div style={{ fontSize: '15px', fontWeight: '800', lineHeight: '1.4', color: isDarkMode ? '#ffffff' : '#065f46' }}>
+                  {lang === 'ne' ? currentTask.instructionNe : currentTask.instructionEn}
+                </div>
+
+                {/* Feedback Alert if any */}
+                {feedback.message && (
+                  <div
+                    style={{
+                      padding: '8px 12px',
+                      borderRadius: '8px',
+                      fontSize: '12px',
+                      fontWeight: '700',
+                      background: feedback.type === 'success' ? '#dcfce7' : '#fee2e2',
+                      color: feedback.type === 'success' ? '#166534' : '#991b1b',
+                      border: feedback.type === 'success' ? '1px solid #86efac' : '1px solid #fca5a5',
+                    }}
+                  >
+                    {feedback.message}
+                  </div>
+                )}
+
+                {/* Hint System */}
+                <div style={{ display: 'flex', gap: '6px', marginTop: '4px' }}>
+                  <button
+                    onClick={() => {
+                      setHintTier(1);
+                      AudioController.playClick();
+                      const h = lang === 'ne' ? currentTask.hint1Ne : currentTask.hint1En;
+                      AudioController.speak(h, lang);
+                    }}
+                    style={{
+                      flex: 1,
+                      padding: '6px 10px',
+                      borderRadius: '8px',
+                      background: hintTier >= 1 ? '#fef08a' : isDarkMode ? '#334155' : '#e2e8f0',
+                      color: hintTier >= 1 ? '#854d0e' : isDarkMode ? '#e2e8f0' : '#475569',
+                      border: 'none',
+                      fontSize: '11px',
+                      fontWeight: '700',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    💡 {lang === 'ne' ? 'इशारा १' : 'Hint 1'}
                   </button>
 
                   <button
-                    onClick={onBackToLibrary}
+                    onClick={() => {
+                      setHintTier(2);
+                      AudioController.playClick();
+                      const h = lang === 'ne' ? currentTask.hint2Ne : currentTask.hint2En;
+                      AudioController.speak(h, lang);
+                    }}
                     style={{
-                      padding: '8px 20px',
+                      flex: 1,
+                      padding: '6px 10px',
                       borderRadius: '8px',
-                      background: '#117a6b',
+                      background: hintTier >= 2 ? '#fef08a' : isDarkMode ? '#334155' : '#e2e8f0',
+                      color: hintTier >= 2 ? '#854d0e' : isDarkMode ? '#e2e8f0' : '#475569',
+                      border: 'none',
+                      fontSize: '11px',
+                      fontWeight: '700',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    💡 {lang === 'ne' ? 'इशारा २' : 'Hint 2'}
+                  </button>
+
+                  <button
+                    onClick={() => quickPlaceObject(currentTask.targetPosition)}
+                    style={{
+                      flex: 1,
+                      padding: '6px 10px',
+                      borderRadius: '8px',
+                      background: '#10b981',
                       color: '#ffffff',
                       border: 'none',
-                      fontSize: '12px',
+                      fontSize: '11px',
                       fontWeight: '800',
                       cursor: 'pointer',
                     }}
                   >
-                    {lang === 'ne' ? 'लाइब्रेरी फर्कनुहोस्' : 'Return to Library'}
+                    ✨ {lang === 'ne' ? 'सिकाउनुहोस्' : 'Solve'}
                   </button>
                 </div>
+
+                {hintTier > 0 && (
+                  <div style={{ fontSize: '12px', color: isDarkMode ? '#fde047' : '#854d0e', fontStyle: 'italic' }}>
+                    {hintTier === 1
+                      ? lang === 'ne' ? currentTask.hint1Ne : currentTask.hint1En
+                      : lang === 'ne' ? currentTask.hint2Ne : currentTask.hint2En}
+                  </div>
+                )}
               </div>
             )}
-          </div>
+
+            {/* ── SECTION 3: 3D OBJECT SELECTOR TRAY ───────────────── */}
+            <div>
+              <span
+                style={{
+                  fontSize: '11px',
+                  fontWeight: '800',
+                  color: isDarkMode ? '#94a3b8' : '#64748b',
+                  textTransform: 'uppercase',
+                  display: 'block',
+                  marginBottom: '8px',
+                }}
+              >
+                {lang === 'ne' ? 'वस्तु वा जनावर छान्नुहोस् (Pick to Place):' : 'Select Object or Animal:'}
+              </span>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(5, 1fr)',
+                  gap: '6px',
+                }}
+              >
+                {DISCOVERY_OBJECT_ITEMS.map((item) => {
+                  const isSel = selectedObjectId === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        setSelectedObjectId(item.id);
+                        AudioController.playPop();
+                        if (threeEngineRef.current) {
+                          const grp = threeEngineRef.current.draggableList.find((g) => g.userData.id === item.id);
+                          if (grp) runEvaluation(grp);
+                        }
+                      }}
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '8px 4px',
+                        borderRadius: '10px',
+                        background: isSel ? '#0284c7' : isDarkMode ? '#1e293b' : '#f1f5f9',
+                        color: isSel ? '#ffffff' : isDarkMode ? '#e2e8f0' : '#1e293b',
+                        border: isSel ? '2px solid #38bdf8' : isDarkMode ? '1px solid #334155' : '1px solid #e2e8f0',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s',
+                      }}
+                    >
+                      <span style={{ fontSize: '20px' }}>{item.icon}</span>
+                      <span style={{ fontSize: '10px', fontWeight: '800', marginTop: '3px' }}>
+                        {lang === 'ne' ? item.nameNe : item.nameEn}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* ── SECTION 4: SMART BOARD ONE-TAP PLACEMENT BUTTONS ─ */}
+            <div
+              style={{
+                background: isDarkMode ? '#131c2d' : '#f8fafc',
+                border: isDarkMode ? '1px solid #233148' : '1px solid #e2e8f0',
+                borderRadius: '14px',
+                padding: '12px',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '11px',
+                  fontWeight: '800',
+                  color: isDarkMode ? '#94a3b8' : '#64748b',
+                  textTransform: 'uppercase',
+                  marginBottom: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                }}
+              >
+                <span>⚡</span>
+                <span>{lang === 'ne' ? 'द्रुत स्थान बटनहरू (Quick Placement):' : 'Quick Teleport to Zone:'}</span>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+                <button onClick={() => quickPlaceObject('inside_house')} style={quickActionBtnStyle(isDarkMode)}>
+                  🏠 {lang === 'ne' ? 'घरभित्र (Inside)' : 'Inside House'}
+                </button>
+                <button onClick={() => quickPlaceObject('outside_house')} style={quickActionBtnStyle(isDarkMode)}>
+                  🏡 {lang === 'ne' ? 'घरबाहिर (Outside)' : 'Outside House'}
+                </button>
+                <button onClick={() => quickPlaceObject('inside_basket')} style={quickActionBtnStyle(isDarkMode)}>
+                  🧺 {lang === 'ne' ? 'टोकरीभित्र (Inside)' : 'Inside Basket'}
+                </button>
+                <button onClick={() => quickPlaceObject('outside_basket')} style={quickActionBtnStyle(isDarkMode)}>
+                  🌿 {lang === 'ne' ? 'टोकरीबाहिर (Outside)' : 'Outside Basket'}
+                </button>
+                <button onClick={() => quickPlaceObject('inside_box')} style={quickActionBtnStyle(isDarkMode)}>
+                  📦 {lang === 'ne' ? 'बाकसभित्र (Inside)' : 'Inside Box'}
+                </button>
+                <button onClick={() => quickPlaceObject('outside_box')} style={quickActionBtnStyle(isDarkMode)}>
+                  🌱 {lang === 'ne' ? 'बाकसबाहिर (Outside)' : 'Outside Box'}
+                </button>
+                <button onClick={() => quickPlaceObject('above_table')} style={quickActionBtnStyle(isDarkMode)}>
+                  🪵 {lang === 'ne' ? 'टेबलमाथि (Above)' : 'Above Table'}
+                </button>
+                <button onClick={() => quickPlaceObject('below_table')} style={quickActionBtnStyle(isDarkMode)}>
+                  🪑 {lang === 'ne' ? 'टेबलमुनि (Below)' : 'Below Table'}
+                </button>
+                <button onClick={() => quickPlaceObject('above_tree')} style={quickActionBtnStyle(isDarkMode)}>
+                  🌲 {lang === 'ne' ? 'रूखमाथि (Above)' : 'Above Tree'}
+                </button>
+                <button onClick={() => quickPlaceObject('below_tree')} style={quickActionBtnStyle(isDarkMode)}>
+                  🍂 {lang === 'ne' ? 'रूखमुनि (Below)' : 'Below Tree'}
+                </button>
+              </div>
+            </div>
+
+            {/* ── SECTION 5: MODE 5 SPATIAL POSITION CHALLENGE ──────── */}
+            {currentMode === 'MODE_5' && (
+              <div
+                style={{
+                  background: isDarkMode ? '#1e293b' : '#eff6ff',
+                  border: isDarkMode ? '1px solid #334155' : '1px solid #bfdbfe',
+                  borderRadius: '16px',
+                  padding: '16px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '13px', fontWeight: '800', color: '#0284c7' }}>
+                    🏆 {lang === 'ne' ? 'स्थान पहिचान चुनौती' : 'Spatial Quiz Challenge'}
+                  </span>
+                  <span
+                    style={{
+                      background: '#f59e0b',
+                      color: '#ffffff',
+                      fontSize: '11px',
+                      fontWeight: '800',
+                      padding: '2px 8px',
+                      borderRadius: '8px',
+                    }}
+                  >
+                    ⭐ {quizScore} / {ASSESSMENT_QUESTIONS.length}
+                  </span>
+                </div>
+
+                {!isQuizFinished ? (
+                  <>
+                    <div style={{ fontSize: '11px', fontWeight: '700', color: isDarkMode ? '#94a3b8' : '#64748b' }}>
+                      {lang === 'ne'
+                        ? `प्रश्न ${quizIndex + 1} / ${ASSESSMENT_QUESTIONS.length}`
+                        : `Question ${quizIndex + 1} of ${ASSESSMENT_QUESTIONS.length}`}
+                    </div>
+
+                    <div style={{ fontSize: '14px', fontWeight: '800', lineHeight: '1.4' }}>
+                      {lang === 'ne'
+                        ? ASSESSMENT_QUESTIONS[quizIndex].questionNe
+                        : ASSESSMENT_QUESTIONS[quizIndex].questionEn}
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '6px' }}>
+                      {ASSESSMENT_QUESTIONS[quizIndex].options.map((opt) => (
+                        <button
+                          key={opt.id}
+                          onClick={() => handleQuizAnswer(opt.isCorrect, opt.explanationNe, opt.explanationEn)}
+                          style={{
+                            padding: '10px 14px',
+                            borderRadius: '10px',
+                            background: isDarkMode ? '#334155' : '#ffffff',
+                            color: isDarkMode ? '#ffffff' : '#0f172a',
+                            border: isDarkMode ? '1px solid #475569' : '1px solid #cbd5e1',
+                            fontSize: '13px',
+                            fontWeight: '700',
+                            textAlign: 'left',
+                            cursor: 'pointer',
+                            boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                          }}
+                        >
+                          {lang === 'ne' ? opt.labelNe : opt.labelEn}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div style={{ textAlign: 'center', padding: '10px 0' }}>
+                    <div style={{ fontSize: '32px' }}>🎉</div>
+                    <div style={{ fontSize: '16px', fontWeight: '800', marginTop: '6px' }}>
+                      {lang === 'ne' ? 'उत्कृष्ट नतिजा!' : 'Quiz Completed!'}
+                    </div>
+                    <p style={{ fontSize: '13px', color: isDarkMode ? '#cbd5e1' : '#475569', margin: '6px 0 14px 0' }}>
+                      {lang === 'ne'
+                        ? `तपाईंले ${ASSESSMENT_QUESTIONS.length} मा ${quizScore} अंक प्राप्त गर्नुभयो!`
+                        : `You scored ${quizScore} out of ${ASSESSMENT_QUESTIONS.length}!`}
+                    </p>
+                    <button
+                      onClick={() => {
+                        setQuizIndex(0);
+                        setQuizScore(0);
+                        setIsQuizFinished(false);
+                        AudioController.playClick();
+                      }}
+                      style={{
+                        padding: '8px 16px',
+                        background: '#0284c7',
+                        color: '#ffffff',
+                        border: 'none',
+                        borderRadius: '8px',
+                        fontSize: '12px',
+                        fontWeight: '800',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {lang === 'ne' ? 'फेरि अभ्यास गर्नुहोस्' : 'Restart Quiz'}
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Task Next / Prev Controls */}
+            {currentMode !== 'MODE_5' && (
+              <div style={{ display: 'flex', gap: '8px', marginTop: 'auto' }}>
+                <button
+                  disabled={taskIndex === 0}
+                  onClick={() => {
+                    setTaskIndex((prev) => Math.max(0, prev - 1));
+                    AudioController.playClick();
+                  }}
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '4px',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    background: isDarkMode ? '#1e293b' : '#e2e8f0',
+                    color: isDarkMode ? '#e2e8f0' : '#475569',
+                    border: 'none',
+                    fontSize: '12px',
+                    fontWeight: '700',
+                    cursor: taskIndex === 0 ? 'not-allowed' : 'pointer',
+                    opacity: taskIndex === 0 ? 0.5 : 1,
+                  }}
+                >
+                  <ChevronLeft size={16} />
+                  <span>{lang === 'ne' ? 'अघिल्लो' : 'Previous'}</span>
+                </button>
+
+                <button
+                  disabled={taskIndex >= activeTaskList.length - 1}
+                  onClick={() => {
+                    setTaskIndex((prev) => Math.min(activeTaskList.length - 1, prev + 1));
+                    AudioController.playClick();
+                  }}
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '4px',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    background: '#0284c7',
+                    color: '#ffffff',
+                    border: 'none',
+                    fontSize: '12px',
+                    fontWeight: '700',
+                    cursor: taskIndex >= activeTaskList.length - 1 ? 'not-allowed' : 'pointer',
+                    opacity: taskIndex >= activeTaskList.length - 1 ? 0.5 : 1,
+                  }}
+                >
+                  <span>{lang === 'ne' ? 'अर्को अभ्यास' : 'Next Task'}</span>
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+            )}
+          </aside>
         )}
       </div>
     </div>
   );
 };
 
+// ── INLINE STYLING HELPERS ──────────────────────────────────────
+function toolBtnStyle(isDark: boolean): React.CSSProperties {
+  return {
+    padding: '4px 8px',
+    borderRadius: '6px',
+    background: isDark ? '#1e293b' : '#f1f5f9',
+    color: isDark ? '#e2e8f0' : '#334155',
+    border: isDark ? '1px solid #334155' : '1px solid #cbd5e1',
+    fontSize: '10px',
+    fontWeight: '700',
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
+  };
+}
+
+function quickActionBtnStyle(isDark: boolean): React.CSSProperties {
+  return {
+    padding: '8px 10px',
+    borderRadius: '8px',
+    background: isDark ? '#1e293b' : '#ffffff',
+    color: isDark ? '#f1f5f9' : '#0f172a',
+    border: isDark ? '1px solid #334155' : '1px solid #cbd5e1',
+    fontSize: '11px',
+    fontWeight: '700',
+    cursor: 'pointer',
+    textAlign: 'left',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+    transition: 'background 0.12s',
+  };
+}

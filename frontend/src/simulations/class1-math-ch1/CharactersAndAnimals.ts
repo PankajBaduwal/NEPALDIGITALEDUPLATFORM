@@ -1,6 +1,8 @@
 /**
  * CharactersAndAnimals.ts
- * Procedural 3D Characters and Animals for Simulation 01
+ * Procedural 3D Characters and Animals for Class 1 Mathematics Chapter 1
+ * Features: Child (आशिष), Cat (बिरालो), Dog (कुकुर), Bird (चरा), Rabbit (खरायो),
+ * Butterfly (पुतली), Cow (गाई), Goat (बाख्रा) with idle and movement animations.
  */
 import * as THREE from 'three';
 
@@ -10,12 +12,15 @@ export interface VillageCharacters {
   dog: THREE.Group;
   bird: THREE.Group;
   rabbit: THREE.Group;
-  elephantBig?: THREE.Group;
-  elephantSmall?: THREE.Group;
+  butterfly: THREE.Group;
+  cow: THREE.Group;
+  goat: THREE.Group;
   update: (delta: number) => void;
   moveCatTo: (x: number, y: number, z: number, duration?: number) => void;
   moveDogTo: (x: number, y: number, z: number, duration?: number) => void;
   moveBirdTo: (x: number, y: number, z: number, duration?: number) => void;
+  moveRabbitTo: (x: number, y: number, z: number, duration?: number) => void;
+  moveButterflyTo: (x: number, y: number, z: number, duration?: number) => void;
   moveChildTo: (x: number, y: number, z: number, duration?: number) => void;
 }
 
@@ -98,148 +103,141 @@ export function createCharactersAndAnimals(scene: THREE.Scene): VillageCharacter
   const smileGeo = new THREE.TorusGeometry(0.09, 0.02, 6, 10, Math.PI);
   const smileMat = new THREE.MeshBasicMaterial({ color: 0x991b1b });
   const smile = new THREE.Mesh(smileGeo, smileMat);
-  smile.position.set(0, 1.78, 0.29);
-  smile.rotation.x = Math.PI / 1.1;
+  smile.rotation.x = Math.PI / 2;
+  smile.rotation.z = Math.PI;
+  smile.position.set(0, 1.76, 0.3);
   child.add(smile);
 
-  // Nepali Dhaka Topi (नेपाली ढाका टोपी)
-  const topiMat = new THREE.MeshLambertMaterial({ color: 0xbe123c });
-  const topi = new THREE.Mesh(new THREE.CylinderGeometry(0.31, 0.33, 0.28, 16), topiMat);
-  topi.position.set(0, 2.16, 0);
-  topi.rotation.z = -0.05;
+  // Traditional Nepali Topi (ढाका टोपी)
+  const topiMat = new THREE.MeshLambertMaterial({ color: 0xd97706 });
+  const topi = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.32, 0.28, 12), topiMat);
+  topi.position.set(0, 2.22, 0);
+  topi.rotation.x = -0.1;
   child.add(topi);
 
   scene.add(child);
 
-  // ── 2. CUTE CAT (बिरालो) ──────────────────────────────────────
+  // ── 2. PLAYFUL CAT (बिरालो) ──────────────────────────────────
   const cat = new THREE.Group();
-  cat.position.set(-5.5, 0, 1.5); // Starts in front of house veranda
+  cat.position.set(-5.2, 0, 1.6); // Default outside on veranda
 
-  const catMat = new THREE.MeshLambertMaterial({ color: 0xf97316 }); // Friendly orange tabby
+  const catMat = new THREE.MeshLambertMaterial({ color: 0xe67e22 }); // Ginger tabby
   const catWhite = new THREE.MeshLambertMaterial({ color: 0xffffff });
 
-  // Body
+  // Cat Body
   const catBody = new THREE.Mesh(new THREE.SphereGeometry(0.32, 12, 12), catMat);
-  catBody.scale.set(1.4, 0.9, 0.9);
-  catBody.position.set(0, 0.32, 0);
+  catBody.scale.set(0.9, 1.1, 1.3);
+  catBody.position.y = 0.38;
   catBody.castShadow = true;
   cat.add(catBody);
 
-  // Belly
-  const catBelly = new THREE.Mesh(new THREE.SphereGeometry(0.24, 10, 10), catWhite);
-  catBelly.scale.set(1.1, 0.8, 0.8);
-  catBelly.position.set(0.05, 0.26, 0.12);
-  cat.add(catBelly);
-
-  // Head
+  // Cat Head
   const catHead = new THREE.Mesh(new THREE.SphereGeometry(0.24, 12, 12), catMat);
-  catHead.position.set(0.42, 0.48, 0);
+  catHead.position.set(0, 0.62, 0.32);
   catHead.castShadow = true;
   cat.add(catHead);
 
-  // Pointy Ears
-  const earGeo = new THREE.ConeGeometry(0.09, 0.16, 4);
-  const leftEar = new THREE.Mesh(earGeo, catMat);
-  leftEar.position.set(0.42, 0.72, 0.12);
-  cat.add(leftEar);
+  // Cat Ears
+  const earGeo = new THREE.ConeGeometry(0.08, 0.16, 4);
+  const leftEarCat = new THREE.Mesh(earGeo, catMat);
+  leftEarCat.position.set(-0.14, 0.82, 0.32);
+  leftEarCat.rotation.z = 0.25;
+  cat.add(leftEarCat);
 
-  const rightEar = new THREE.Mesh(earGeo, catMat);
-  rightEar.position.set(0.42, 0.72, -0.12);
-  cat.add(rightEar);
+  const rightEarCat = new THREE.Mesh(earGeo, catMat);
+  rightEarCat.position.set(0.14, 0.82, 0.32);
+  rightEarCat.rotation.z = -0.25;
+  cat.add(rightEarCat);
 
-  // Eyes
-  const catEyeMat = new THREE.MeshBasicMaterial({ color: 0x10b981 }); // Green eyes
-  const catEyeL = new THREE.Mesh(new THREE.SphereGeometry(0.035, 6, 6), catEyeMat);
-  catEyeL.position.set(0.6, 0.52, 0.09);
-  cat.add(catEyeL);
+  // Cat Eyes
+  const catEyeMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
+  const leftCatEye = new THREE.Mesh(new THREE.SphereGeometry(0.035, 6, 6), catEyeMat);
+  leftCatEye.position.set(-0.08, 0.66, 0.52);
+  cat.add(leftCatEye);
 
-  const catEyeR = new THREE.Mesh(new THREE.SphereGeometry(0.035, 6, 6), catEyeMat);
-  catEyeR.position.set(0.6, 0.52, -0.09);
-  cat.add(catEyeR);
+  const rightCatEye = new THREE.Mesh(new THREE.SphereGeometry(0.035, 6, 6), catEyeMat);
+  rightCatEye.position.set(0.08, 0.66, 0.52);
+  cat.add(rightCatEye);
 
-  // Tail
+  // Cat Tail (animated)
   const catTail = new THREE.Group();
-  catTail.position.set(-0.44, 0.36, 0);
-  const tailMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 0.45, 6), catMat);
-  tailMesh.position.set(-0.15, 0.18, 0);
-  tailMesh.rotation.z = -0.6;
+  catTail.position.set(0, 0.35, -0.42);
+  const tailMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.05, 0.55, 6), catMat);
+  tailMesh.position.set(0, 0.25, -0.1);
+  tailMesh.rotation.x = -0.6;
   catTail.add(tailMesh);
   cat.add(catTail);
 
-  // Legs
-  const legMat = catMat;
-  const legPositions = [
-    { x: 0.28, z: 0.16 },
-    { x: 0.28, z: -0.16 },
-    { x: -0.28, z: 0.16 },
-    { x: -0.28, z: -0.16 },
+  // Cat Paws
+  const pawOffsets = [
+    { x: -0.16, z: 0.22 },
+    { x: 0.16, z: 0.22 },
+    { x: -0.18, z: -0.2 },
+    { x: 0.18, z: -0.2 },
   ];
-  legPositions.forEach((lp) => {
-    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.24, 6), legMat);
-    leg.position.set(lp.x, 0.12, lp.z);
-    cat.add(leg);
+  pawOffsets.forEach((p) => {
+    const paw = new THREE.Mesh(new THREE.SphereGeometry(0.07, 6, 6), catWhite);
+    paw.position.set(p.x, 0.07, p.z);
+    cat.add(paw);
   });
 
   scene.add(cat);
 
-  // ── 3. FRIENDLY DOG (कुकुर) ──────────────────────────────────
+  // ── 3. LOYAL VILLAGE DOG (कुकुर) ──────────────────────────────
   const dog = new THREE.Group();
-  dog.position.set(-4.5, 0, 0.5); // Sits on the veranda outside the house
+  dog.position.set(-3.8, 0, 2.2); // Outside in front of veranda
 
-  const dogMat = new THREE.MeshLambertMaterial({ color: 0xb45309 }); // Golden brown Nepali Bhote dog
+  const dogMat = new THREE.MeshLambertMaterial({ color: 0xb45309 }); // Golden brown
   const dogDark = new THREE.MeshLambertMaterial({ color: 0x78350f });
 
-  // Body
-  const dogBody = new THREE.Mesh(new THREE.SphereGeometry(0.42, 12, 12), dogMat);
-  dogBody.scale.set(1.4, 1.0, 0.95);
-  dogBody.position.set(0, 0.48, 0);
+  const dogBody = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.48, 0.9), dogMat);
+  dogBody.position.y = 0.48;
   dogBody.castShadow = true;
   dog.add(dogBody);
 
-  // Head & Snout
-  const dogHead = new THREE.Mesh(new THREE.SphereGeometry(0.3, 12, 12), dogMat);
-  dogHead.position.set(0.52, 0.76, 0);
+  const dogHead = new THREE.Mesh(new THREE.SphereGeometry(0.26, 12, 12), dogMat);
+  dogHead.position.set(0, 0.76, 0.48);
   dogHead.castShadow = true;
   dog.add(dogHead);
 
-  const dogSnout = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.18, 0.22), dogMat);
-  dogSnout.position.set(0.76, 0.72, 0);
+  const dogSnout = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.16, 0.22), dogMat);
+  dogSnout.position.set(0, 0.72, 0.7);
   dog.add(dogSnout);
 
-  const dogNose = new THREE.Mesh(new THREE.SphereGeometry(0.05, 6, 6), new THREE.MeshBasicMaterial({ color: 0x111827 }));
-  dogNose.position.set(0.89, 0.76, 0);
+  const dogNose = new THREE.Mesh(new THREE.SphereGeometry(0.045, 6, 6), new THREE.MeshBasicMaterial({ color: 0x111827 }));
+  dogNose.position.set(0, 0.76, 0.82);
   dog.add(dogNose);
 
   // Floppy Ears
-  const leftEarDog = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.26, 0.12), dogDark);
-  leftEarDog.position.set(0.5, 0.8, 0.24);
-  leftEarDog.rotation.x = 0.3;
+  const leftEarDog = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.24, 0.12), dogDark);
+  leftEarDog.position.set(-0.22, 0.78, 0.44);
+  leftEarDog.rotation.z = -0.3;
   dog.add(leftEarDog);
 
-  const rightEarDog = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.26, 0.12), dogDark);
-  rightEarDog.position.set(0.5, 0.8, -0.24);
-  rightEarDog.rotation.x = -0.3;
+  const rightEarDog = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.24, 0.12), dogDark);
+  rightEarDog.position.set(0.22, 0.78, 0.44);
+  rightEarDog.rotation.z = 0.3;
   dog.add(rightEarDog);
 
   // Dog Tail (animated)
   const dogTail = new THREE.Group();
-  dogTail.position.set(-0.55, 0.52, 0);
+  dogTail.position.set(0, 0.52, -0.45);
   const dogTailMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.06, 0.42, 6), dogMat);
-  dogTailMesh.position.set(-0.15, 0.18, 0);
-  dogTailMesh.rotation.z = -0.8;
+  dogTailMesh.position.set(0, 0.18, -0.15);
+  dogTailMesh.rotation.x = -0.8;
   dogTail.add(dogTailMesh);
   dog.add(dogTail);
 
   // Dog Legs
   const dogLegs = [
-    { x: 0.35, z: 0.2 },
-    { x: 0.35, z: -0.2 },
-    { x: -0.35, z: 0.2 },
-    { x: -0.35, z: -0.2 },
+    { x: -0.2, z: 0.3 },
+    { x: 0.2, z: 0.3 },
+    { x: -0.2, z: -0.3 },
+    { x: 0.2, z: -0.3 },
   ];
   dogLegs.forEach((dl) => {
-    const l = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.06, 0.35, 6), dogMat);
-    l.position.set(dl.x, 0.18, dl.z);
+    const l = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.05, 0.32, 6), dogMat);
+    l.position.set(dl.x, 0.16, dl.z);
     dog.add(l);
   });
 
@@ -247,7 +245,7 @@ export function createCharactersAndAnimals(scene: THREE.Scene): VillageCharacter
 
   // ── 4. CHIRPING BIRD (चरा) ────────────────────────────────────
   const bird = new THREE.Group();
-  bird.position.set(7.5, 3.8, -3.5); // Default placed above the tree
+  bird.position.set(7.5, 4.4, -3.5); // Default placed above the tree
 
   const birdMat = new THREE.MeshLambertMaterial({ color: 0x06b6d4 }); // Turquoise bluebird
   const beakMat = new THREE.MeshLambertMaterial({ color: 0xf59e0b });
@@ -278,7 +276,7 @@ export function createCharactersAndAnimals(scene: THREE.Scene): VillageCharacter
 
   // ── 5. CUTE HOPPING RABBIT (खरायो) ────────────────────────────
   const rabbit = new THREE.Group();
-  rabbit.position.set(2.0, 0, 4.0); // Garden lawn
+  rabbit.position.set(7.5, 0, -2.2); // Default below the tree
 
   const rabbitMat = new THREE.MeshLambertMaterial({ color: 0xf8fafc });
   const rabbitBody = new THREE.Mesh(new THREE.SphereGeometry(0.24, 10, 10), rabbitMat);
@@ -303,7 +301,87 @@ export function createCharactersAndAnimals(scene: THREE.Scene): VillageCharacter
 
   scene.add(rabbit);
 
-  // ── 6. ANIMATION & TWEEN HELPERS ──────────────────────────────
+  // ── 6. FLUTTERING BUTTERFLY (पुतली) ──────────────────────────
+  const butterfly = new THREE.Group();
+  butterfly.position.set(-1.5, 1.4, 2.2); // Default hovering above flower
+
+  const bFlyBodyMat = new THREE.MeshLambertMaterial({ color: 0x1e293b });
+  const bFlyWingMat = new THREE.MeshLambertMaterial({ color: 0xf43f5e, side: THREE.DoubleSide });
+
+  const bFlyBody = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.22, 6), bFlyBodyMat);
+  bFlyBody.rotation.x = Math.PI / 2;
+  butterfly.add(bFlyBody);
+
+  const bFlyLeftWing = new THREE.Mesh(new THREE.CircleGeometry(0.18, 8), bFlyWingMat);
+  bFlyLeftWing.position.set(-0.16, 0.02, 0);
+  bFlyLeftWing.rotation.x = Math.PI / 2;
+  butterfly.add(bFlyLeftWing);
+
+  const bFlyRightWing = new THREE.Mesh(new THREE.CircleGeometry(0.18, 8), bFlyWingMat);
+  bFlyRightWing.position.set(0.16, 0.02, 0);
+  bFlyRightWing.rotation.x = Math.PI / 2;
+  butterfly.add(bFlyRightWing);
+
+  scene.add(butterfly);
+
+  // ── 7. BACKGROUND COW & GOAT (गाई र बाख्रा) ──────────────────
+  const cow = new THREE.Group();
+  cow.position.set(13.5, 0, -12); // Background meadow
+  const cowMat = new THREE.MeshLambertMaterial({ color: 0xfaf5ef });
+  const cowSpotMat = new THREE.MeshLambertMaterial({ color: 0x334155 });
+
+  const cowBody = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1.1, 0.8), cowMat);
+  cowBody.position.y = 1.1;
+  cow.add(cowBody);
+
+  const cowSpot = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.6, 0.82), cowSpotMat);
+  cowSpot.position.set(0.2, 1.1, 0);
+  cow.add(cowSpot);
+
+  const cowHead = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.6, 0.5), cowMat);
+  cowHead.position.set(1.0, 1.5, 0);
+  cow.add(cowHead);
+
+  [
+    { x: -0.6, z: -0.3 },
+    { x: 0.6, z: -0.3 },
+    { x: -0.6, z: 0.3 },
+    { x: 0.6, z: 0.3 },
+  ].forEach((pos) => {
+    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.08, 0.7, 6), cowMat);
+    leg.position.set(pos.x, 0.35, pos.z);
+    cow.add(leg);
+  });
+  cow.scale.set(0.85, 0.85, 0.85);
+  scene.add(cow);
+
+  // Small Goat
+  const goat = new THREE.Group();
+  goat.position.set(11, 0, -8.5);
+  const goatMat = new THREE.MeshLambertMaterial({ color: 0x475569 });
+
+  const goatBody = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.6, 0.45), goatMat);
+  goatBody.position.y = 0.65;
+  goat.add(goatBody);
+
+  const goatHead = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.35, 0.3), goatMat);
+  goatHead.position.set(0.55, 0.9, 0);
+  goat.add(goatHead);
+
+  [
+    { x: -0.35, z: -0.16 },
+    { x: 0.35, z: -0.16 },
+    { x: -0.35, z: 0.16 },
+    { x: 0.35, z: 0.16 },
+  ].forEach((pos) => {
+    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.04, 0.45, 6), goatMat);
+    leg.position.set(pos.x, 0.22, pos.z);
+    goat.add(leg);
+  });
+  goat.scale.set(0.75, 0.75, 0.75);
+  scene.add(goat);
+
+  // ── 8. ANIMATION & TWEEN HELPERS ──────────────────────────────
   interface MoveTarget {
     group: THREE.Group;
     startX: number;
@@ -347,6 +425,12 @@ export function createCharactersAndAnimals(scene: THREE.Scene): VillageCharacter
   function moveBirdTo(x: number, y: number, z: number, dur = 1.0) {
     moveGroupTo(bird, x, y, z, dur);
   }
+  function moveRabbitTo(x: number, y: number, z: number, dur = 1.0) {
+    moveGroupTo(rabbit, x, y, z, dur);
+  }
+  function moveButterflyTo(x: number, y: number, z: number, dur = 0.9) {
+    moveGroupTo(butterfly, x, y, z, dur);
+  }
   function moveChildTo(x: number, y: number, z: number, dur = 1.2) {
     moveGroupTo(child, x, y, z, dur);
   }
@@ -356,7 +440,6 @@ export function createCharactersAndAnimals(scene: THREE.Scene): VillageCharacter
 
     // Gentle breathing / idle swaying of child
     child.position.y = Math.sin(time * 2.5) * 0.02;
-    child.rotation.y = Math.sin(time * 0.8) * 0.06;
 
     // Dog tail wagging
     dogTail.rotation.y = Math.sin(time * 12) * 0.5;
@@ -370,6 +453,14 @@ export function createCharactersAndAnimals(scene: THREE.Scene): VillageCharacter
 
     // Rabbit gentle hopping
     rabbit.position.y = Math.max(0, Math.sin(time * 3) * 0.08);
+
+    // Butterfly fluttering
+    bFlyLeftWing.rotation.z = Math.sin(time * 22) * 0.8;
+    bFlyRightWing.rotation.z = -Math.sin(time * 22) * 0.8;
+    butterfly.position.y += Math.sin(time * 4) * 0.003;
+
+    // Background cow idle
+    cowHead.rotation.y = Math.sin(time * 0.8) * 0.12;
 
     // Update ongoing smooth interpolations
     for (let i = moveTargets.length - 1; i >= 0; i--) {
@@ -402,11 +493,15 @@ export function createCharactersAndAnimals(scene: THREE.Scene): VillageCharacter
     dog,
     bird,
     rabbit,
+    butterfly,
+    cow,
+    goat,
     update,
     moveCatTo,
     moveDogTo,
     moveBirdTo,
+    moveRabbitTo,
+    moveButterflyTo,
     moveChildTo,
   };
 }
-

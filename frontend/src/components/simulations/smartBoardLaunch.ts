@@ -1,12 +1,14 @@
 /**
- * Sends a simulation ported from KPRIET straight to the Smart Board, in a split partition beside a whiteboard
- * (the Smart Board's own "embed" launch; the Smart Board app itself is unchanged).
+ * Sends a simulation straight to the Smart Board, where it runs full-board with every sidebar tool usable over it.
  *
- *   /smartboard/index.html?embed=/simulations/<id>/play?embed=1&title=…&id=<id>
+ *   /smartboard/index.html?simbg=/simulations/<id>/play?embed=1&title=…&id=<id>
  *
- * The board's access guard reads the sign-in token under the key `eduverse_token`, so the platform's token is
- * copied there first (same browser, same site). The backend answers the guard (/api/v1/simulations/:id/access)
- * and serves /simulations/<id>/play, which hands over to the simulation page in embedded mode.
+ * The simulation runs live behind the board's drawing layers (smartboard/components/sim-backdrop.js), so every sidebar
+ * tool works over it. The board's older `embed` split-partition launch only supports pen, highlighter and eraser.
+ *
+ * The platform's sign-in token is also copied to `eduverse_token` (the key the board's guards read). The backend
+ * answers the access check (/api/v1/simulations/:id/access) and serves /simulations/<id>/play, which hands over
+ * to whatever runs the simulation.
  */
 export const isKprietSimulation = (sim: { componentKey?: string } | null | undefined): boolean => Boolean(sim?.componentKey?.startsWith('kpriet:'));
 
@@ -18,7 +20,7 @@ export function launchOnSmartBoard(simulationId: string, title: string): void {
     /* storage unavailable: the board will ask the user to sign in */
   }
   const qs = new URLSearchParams({
-    embed: `/simulations/${encodeURIComponent(simulationId)}/play?embed=1`,
+    simbg: `/simulations/${encodeURIComponent(simulationId)}/play?embed=1`,
     title: title.slice(0, 120),
     id: simulationId,
     returnUrl: window.location.pathname,

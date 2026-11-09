@@ -29,7 +29,7 @@ const UI = (() => {
           subjectCode: urlParams.get('subjectCode') || '',
           departmentName: urlParams.get('departmentName') || '',
           semesterNumber: urlParams.get('semesterNumber') || 1,
-          teacherName: urlParams.get('teacherName') || 'Faculty Member',
+          teacherName: urlParams.get('teacherName') || (function () { try { var u = JSON.parse(localStorage.getItem('nepal_edu_user') || 'null'); return u && u.fullName; } catch (e) { return ''; } })() || 'Teacher',
           subjectId: urlParams.get('subjectId') || ''
         };
       }
@@ -521,7 +521,7 @@ const UI = (() => {
         // Footer
         ctx.fillStyle = '#86efac';
         ctx.font = '20px "JetBrains Mono", monospace';
-        ctx.fillText(`Faculty: ${session.teacherName || 'Faculty Member'} | EduVerse Smart Board Presentation Mode`, 70, 1000);
+        ctx.fillText(`Faculty: ${session.teacherName || 'Teacher'} | Nepal Digital Education · Smart Board`, 70, 1000);
 
         return {
           index: i + 1,

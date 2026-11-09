@@ -12,6 +12,7 @@ const router = Router();
 router.post('/sessions', authMiddleware, tenantMiddleware, teacherOnly, SmartBoardController.startSession);
 router.put('/sessions/:id', authMiddleware, tenantMiddleware, teacherOnly, SmartBoardController.updateSession);
 router.post('/sessions/:id/end', authMiddleware, tenantMiddleware, teacherOnly, SmartBoardController.endSession);
+router.get('/header-context', authMiddleware, tenantMiddleware, SmartBoardController.getHeaderContext);
 router.get('/sessions/active', authMiddleware, tenantMiddleware, SmartBoardController.getActiveSession);
 router.get('/sessions/history', authMiddleware, tenantMiddleware, SmartBoardController.listSessions);
 

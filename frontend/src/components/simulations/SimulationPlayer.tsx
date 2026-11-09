@@ -5,6 +5,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Maximize2, Minimize2, ExternalLink, RefreshCw } from 'lucide-react';
 import { KprietSimulationPlayer } from './KprietSimulationPlayer';
+import { launchOnSmartBoard } from './smartBoardLaunch';
 import { PositionPlayground } from '../../simulations/class1-math-ch1/PositionPlayground';
 import { BigSmallWorld } from '../../simulations/class1-math-ch1/BigSmallWorld';
 import { TallShortAdventure } from '../../simulations/class1-math-ch1/TallShortAdventure';
@@ -74,6 +75,9 @@ import { AdditionEquationStudio as AdditionEquationStudioCh10 } from '../../simu
 import { AdditionBlockBuilder } from '../../simulations/class1-math-ch10/AdditionBlockBuilder';
 import { AdditionChallengeWorld } from '../../simulations/class1-math-ch10/AdditionChallengeWorld';
 
+// Class 1–5 Mathematics - Interactive Number Line & Counting Frog 3D Edition
+import { NumberLineFrog3D } from '../../simulations/number-line-3d/NumberLineFrog3D';
+
 export interface SimulationPlayerProps {
   simulation: {
     id: string;
@@ -92,12 +96,15 @@ export interface SimulationPlayerProps {
   };
   onClose: () => void;
   userRole?: string;
+  /** Running inside a Smart Board partition: no Smart Board button. */
+  embedded?: boolean;
 }
 
-export const SimulationPlayer: React.FC<SimulationPlayerProps> = ({
+const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
   simulation,
   onClose,
   userRole = 'TEACHER',
+  embedded = false,
 }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -117,14 +124,24 @@ export const SimulationPlayer: React.FC<SimulationPlayerProps> = ({
   }
 
   // Render direct interactive React Three.js WebGL components
-  if (simulation.componentKey === 'class1-math-ch1-playground') {
+  if (
+    simulation.componentKey === 'class1-math-ch1-playground' ||
+    simulation.code === 'SIM-MATH-G1-CH1-01' ||
+    simulation.code === 'SIM-MATH-G1-C1-01'
+  ) {
     return <PositionPlayground onBackToLibrary={onClose} userRole={userRole} />;
   }
-  if (simulation.componentKey === 'class1-math-ch1-big-small') {
-    return <BigSmallWorld onBackToLibrary={onClose} />;
+  if (
+    simulation.componentKey === 'class1-math-ch1-big-small' ||
+    simulation.code === 'SIM-MATH-G1-CH1-02'
+  ) {
+    return <BigSmallWorld onBackToLibrary={onClose} userRole={userRole} />;
   }
-  if (simulation.componentKey === 'class1-math-ch1-tall-short') {
-    return <TallShortAdventure onBackToLibrary={onClose} />;
+  if (
+    simulation.componentKey === 'class1-math-ch1-tall-short' ||
+    simulation.code === 'SIM-MATH-G1-CH1-03'
+  ) {
+    return <TallShortAdventure onBackToLibrary={onClose} userRole={userRole} />;
   }
   if (simulation.componentKey === 'class1-math-ch1-long-short') {
     return <LongShortExplorer onBackToLibrary={onClose} />;
@@ -286,6 +303,15 @@ export const SimulationPlayer: React.FC<SimulationPlayerProps> = ({
     return <AdditionChallengeWorld onBackToLibrary={onClose} userRole={userRole} />;
   }
 
+  // Class 1–5 Mathematics - Interactive Number Line & Counting Frog 3D Edition
+  if (
+    simulation.componentKey === 'class1-math-number-line-frog' ||
+    simulation.code === 'SIM-MATH-G1-NUMBERLINE' ||
+    simulation.runtimeUrl?.includes('math-number-line')
+  ) {
+    return <NumberLineFrog3D onBackToLibrary={onClose} userRole={userRole} embedded={embedded} />;
+  }
+
   // Fallback to iframe player for HTML simulations
   return (
     <div
@@ -377,3 +403,23 @@ export const SimulationPlayer: React.FC<SimulationPlayerProps> = ({
   );
 };
 
+/** The running simulation, with a "Launch on Smart Board" button over it (every simulation, every role). */
+export const SimulationPlayer: React.FC<SimulationPlayerProps> = (props) => {
+  const { simulation, embedded } = props;
+  const ported = String(simulation.componentKey || '').startsWith('kpriet:'); // ported ones carry their own button
+  return (
+    <>
+      <SimulationPlayerView {...props} />
+      {!embedded && !ported && (
+        <button
+          type="button"
+          onClick={() => launchOnSmartBoard(simulation.componentKey || simulation.code || simulation.id, simulation.title)}
+          aria-label="Launch on Smart Board"
+          style={{ position: 'fixed', right: 16, bottom: 16, zIndex: 10030, height: 42, padding: '0 16px', borderRadius: 999, border: '1px solid rgba(255,255,255,.3)', background: '#0f4c4a', color: '#fff', display: 'inline-flex', alignItems: 'center', gap: 8, fontWeight: 800, fontSize: 13, cursor: 'pointer', boxShadow: '0 8px 22px rgba(15,76,74,.4)' }}
+        >
+          🖥 Launch on Smart Board
+        </button>
+      )}
+    </>
+  );
+};

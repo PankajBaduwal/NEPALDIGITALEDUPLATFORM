@@ -33,8 +33,11 @@
     if (!tab) return;
     var open = isOpen();
     tab.classList.toggle('active', open);
-    tab.innerHTML = open ? '<span>Close ▶</span>' : '<span>◀ Controls</span>';
+    tab.innerHTML = open
+      ? '<svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>'
+      : '<svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4l-6 6 6 6"/></svg>';
     tab.title = open ? 'Close controls' : 'Open controls on the right side';
+    tab.setAttribute('aria-label', open ? 'Close controls' : 'Open controls');
     tab.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
 

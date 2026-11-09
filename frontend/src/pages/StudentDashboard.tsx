@@ -2411,9 +2411,9 @@ export const StudentDashboard: React.FC = () => {
                       >
                         🚀 Launch Simulation (प्रयोगशाला खोल्नुहोस्)
                       </button>
-                      {isKprietSimulation(sim) && (
+                      {(
                         <button
-                          onClick={() => launchOnSmartBoard(String(sim.componentKey).slice('kpriet:'.length), sim.title)}
+                          onClick={() => launchOnSmartBoard(sim.code || sim.id, sim.title)}
                           style={{ width: '100%', marginTop: '8px', padding: '9px', background: '#0f4c4a', color: '#ffffff', borderRadius: '8px', fontSize: '13px', fontWeight: '700', border: 'none', cursor: 'pointer' }}
                         >
                           🖥 Launch on Smart Board

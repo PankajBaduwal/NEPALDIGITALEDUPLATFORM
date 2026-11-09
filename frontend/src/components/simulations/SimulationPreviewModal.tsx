@@ -192,7 +192,7 @@ export const SimulationPreviewModal: React.FC<SimulationPreviewModalProps> = ({
               <span>Launch 3D Simulation</span>
             </button>
 
-            {(userRole === 'TEACHER' || String(simulation.componentKey || '').startsWith('kpriet:')) && onLaunchSmartBoard && (
+            {onLaunchSmartBoard && (
               <button
                 onClick={() => onLaunchSmartBoard(simulation)}
                 style={{
@@ -212,7 +212,7 @@ export const SimulationPreviewModal: React.FC<SimulationPreviewModalProps> = ({
                 }}
               >
                 <Monitor size={16} />
-                <span>Smart Board</span>
+                <span>Launch to Smart Board</span>
               </button>
             )}
           </div>

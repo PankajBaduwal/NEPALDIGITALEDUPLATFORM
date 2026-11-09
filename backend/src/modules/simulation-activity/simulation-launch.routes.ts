@@ -1,6 +1,8 @@
 import { Router, Request, Response } from 'express';
+import mongoose from 'mongoose';
 import { authMiddleware } from '../../common/middleware/auth.middleware';
 import { ApiResponse } from '../../common/utils/response.util';
+import { Simulation } from '../../models';
 
 /**
  * "Launch on Smart Board" support for the simulations ported from KPRIET.
@@ -13,10 +15,36 @@ import { ApiResponse } from '../../common/utils/response.util';
 
 const SAFE_ID = /^[A-Za-z0-9._-]{1,120}$/;
 
-/** GET /simulations/:id/play — the page the Smart Board embeds. Hands over to the simulation host page. */
-export function simulationPlayRedirect(req: Request, res: Response) {
+/**
+ * GET /simulations/:id/play — the page the Smart Board embeds. `:id` is a library code (e.g. SIM-MATH-G1-CH1-01), a component
+ * key, or the id of a simulation ported from KPRIET. It hands over to whatever actually runs that simulation:
+ *   ported KPRIET simulation        → /sim.html?id=<id>&embed=1
+ *   platform React simulation       → /embed/simulation/<componentKey>
+ *   platform HTML simulation        → its own page (runtimeUrl)
+ */
+export async function simulationPlayRedirect(req: Request, res: Response) {
   const { id } = req.params;
   if (!SAFE_ID.test(id)) return res.status(400).send('Invalid simulation id');
+  let sim: any = null;
+  try {
+    const query: any[] = [{ code: id }, { componentKey: id }];
+    if (mongoose.isValidObjectId(id)) {
+      query.push({ _id: id });
+    }
+    sim = await Simulation.findOne({ $or: query }).lean();
+  } catch {
+    sim = null;
+  }
+  const key = String(sim?.componentKey || '');
+  if (key.startsWith('kpriet:')) return res.redirect(302, `/sim.html?id=${encodeURIComponent(key.slice('kpriet:'.length))}&embed=1`);
+  if (key) return res.redirect(302, `/embed/simulation/${encodeURIComponent(key)}`);
+  const url = String(sim?.runtimeUrl || '');
+  if (url.startsWith('/') && !url.startsWith('//')) return res.redirect(302, url + (url.includes('?') ? '&' : '?') + 'embed=1');
+
+  // Fallback: If id itself is a platform componentKey or code, send directly to EmbeddedSimulationPage
+  if (!id.startsWith('sim_') && !id.startsWith('kpriet')) {
+    return res.redirect(302, `/embed/simulation/${encodeURIComponent(id)}`);
+  }
   return res.redirect(302, `/sim.html?id=${encodeURIComponent(id)}&embed=1`);
 }
 

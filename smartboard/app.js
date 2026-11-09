@@ -37,10 +37,9 @@ const App = (() => {
     }
 
     // Attach unload & visibility listeners immediately
-    window.addEventListener('beforeunload', () => { saveActiveSession(); });
-    window.addEventListener('pagehide', () => { saveActiveSession(); });
+    window.addEventListener('pagehide', () => { flushSession(); });
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden') saveActiveSession();
+      if (document.visibilityState === 'hidden') flushSession();
     });
 
     UI.buildSidebar();
@@ -106,127 +105,136 @@ const App = (() => {
 
   
   // ─────────────────────────────────────────────
-  // BOARD PERSISTENCE (Bulletproof Synchronous localStorage + Unlimited IndexedDB)
-  // Guarantees 100% stroke & shape persistence on refresh (F5) and page reload
+  // BOARD PERSISTENCE + 2-DAY HISTORY
+  //
+  //  • Every time the board is opened it starts as a NEW, empty board. Work is never silently re-opened.
+  //  • Everything you do is auto-saved (debounced, only the pages that changed) as an entry in "History".
+  //  • History keeps the last 2 days; older entries are deleted automatically. Any entry can be re-opened.
+  //  • Refreshing the page (F5) or pressing Back keeps the current board, so a refresh never loses work.
   // ─────────────────────────────────────────────
   const DB_NAME = 'EduVerseSmartBoardDB';
-  const DB_VERSION = 1;
-  const STORE_NAME = 'board_sessions';
-  let dbInstance = null;
-  let autoSaveTimer = null;
+  const DB_VERSION = 2;
+  const LEGACY_STORE = 'board_sessions';
+  const STORE_META = 'history_meta';   // id → { id, createdAt, savedAt, pageCount, subject, thumb }
+  const STORE_DATA = 'history_data';   // `${id}|m` settings · `${id}|p|${uid}` one page · `${id}|ppt` presenter state
+  const HISTORY_TTL_MS = 2 * 24 * 60 * 60 * 1000;
+  const SAVE_DEBOUNCE_MS = 1500;       // save this long after the last change …
+  const SAVE_MAXWAIT_MS = 10000;       // … but never wait longer than this while drawing continuously
+  const THUMB_EVERY_MS = 45000;
+  const PPT_EVERY_MS = 20000;
+  const INTENT_KEY = 'sb_intent';      // sessionStorage: 'new' | 'resume:<id>' (set just before the board reloads itself)
+  const LIVE_KEY = 'sb_live_id';       // sessionStorage: id of the board open in this tab
+  const BACKUP_KEY = 'sb_unload_backup';
 
-  /** Board opened to show one catalogue simulation (?embed=…): a fresh board that is never saved over the user's own session. */
+  let dbPromise = null;
+  let sessionId = null;
+  let sessionCreatedAt = Date.now();
+  let everSaved = false;
+  let restoring = false;               // while a saved board is being loaded, nothing is written
+  let saveTimer = null;
+  let firstDirtyAt = 0;
+  let saveBusy = false;
+  let metaDirty = false;
+  const dirtyPages = new Set();        // page uids changed since they were last written
+  let knownUids = new Set();           // page uids currently stored for this entry
+  let lastThumbAt = 0;
+  let lastThumb = null;
+  let lastPptAt = 0;
+  let lastPrune = 0;
+
+  /** Board opened to show one catalogue simulation (?embed=…): a fresh board that is never saved over the user's own history. */
   function isEmbedLaunch() {
     try { return !!new URLSearchParams(window.location.search).get('embed'); } catch (e) { return false; }
   }
 
-  function getSessionKey() {
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const subId = urlParams.get('subjectId') || urlParams.get('sim') || urlParams.get('id');
-      if (subId) return 'board_session_' + subId;
-    } catch(e) {}
-    return 'current_active_session';
+  function newId(prefix) { return (prefix || 'b') + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+  function ensureUid(pg) { if (!pg._uid) pg._uid = newId('p'); return pg._uid; }
+  function whenIdle(fn) {
+    if (typeof requestIdleCallback === 'function') requestIdleCallback(fn, { timeout: 2500 });
+    else setTimeout(fn, 0);
   }
 
+  // ── IndexedDB ──
   function getDb() {
-    return new Promise((resolve) => {
-      if (dbInstance) return resolve(dbInstance);
+    if (dbPromise) return dbPromise;
+    dbPromise = new Promise((resolve) => {
       if (typeof window === 'undefined' || !window.indexedDB) return resolve(null);
       try {
         const req = indexedDB.open(DB_NAME, DB_VERSION);
         req.onupgradeneeded = (e) => {
           const db = e.target.result;
-          if (!db.objectStoreNames.contains(STORE_NAME)) {
-            db.createObjectStore(STORE_NAME);
-          }
+          [LEGACY_STORE, STORE_META, STORE_DATA].forEach(n => { if (!db.objectStoreNames.contains(n)) db.createObjectStore(n); });
         };
         req.onsuccess = (e) => {
-          dbInstance = e.target.result;
-          resolve(dbInstance);
+          const db = e.target.result;
+          db.onversionchange = () => { try { db.close(); } catch (er) { /* ignore */ } dbPromise = null; };
+          resolve(db);
         };
-        req.onerror = (err) => {
-          resolve(null);
-        };
-      } catch (e) {
-        resolve(null);
-      }
+        req.onerror = () => resolve(null);
+        req.onblocked = () => resolve(null);
+      } catch (e) { resolve(null); }
+    });
+    return dbPromise;
+  }
+
+  /** Runs `work(tx, stores)` in one transaction; resolves with the value work returns once the transaction completes (null on failure). */
+  function runTx(storeNames, mode, work) {
+    return getDb().then((db) => {
+      if (!db) return null;
+      return new Promise((resolve) => {
+        try {
+          const tx = db.transaction(storeNames, mode);
+          let out;
+          tx.oncomplete = () => resolve(typeof out === 'function' ? out() : out);
+          tx.onerror = tx.onabort = () => resolve(null);
+          out = work(tx);
+        } catch (e) { resolve(null); }
+      });
     });
   }
+  const reqValue = (req) => () => req.result;
 
-  async function saveSessionToDb(sessionData) {
-    const db = await getDb();
-    const key = getSessionKey();
-    if (db) {
-      return new Promise((resolve) => {
-        try {
-          const tx = db.transaction(STORE_NAME, 'readwrite');
-          const store = tx.objectStore(STORE_NAME);
-          store.put(sessionData, key);
-          store.put(sessionData, 'current_active_session');
-          tx.oncomplete = () => resolve(true);
-          tx.onerror = () => resolve(false);
-        } catch (err) {
-          resolve(false);
-        }
+  // ── what counts as "something on the board" ──
+  function isBlankPage(pg) {
+    return !(pg.strokes && pg.strokes.length) && !(pg.shapes && pg.shapes.length) && !pg.bgImage && !pg.drawDataUrl &&
+      !(pg.splitState && pg.splitState.mode && pg.splitState.mode !== 'normal');
+  }
+  function boardIsBlank() { return pages.every(isBlankPage); }
+
+  function makeThumb() {
+    try {
+      const base = document.getElementById('grid-canvas');
+      if (!base || !base.width || !base.height) return lastThumb;
+      const tw = 240, th = Math.max(1, Math.round(tw * base.height / base.width));
+      const c = document.createElement('canvas');
+      c.width = tw; c.height = th;
+      const x = c.getContext('2d');
+      x.fillStyle = '#ffffff';
+      x.fillRect(0, 0, tw, th);
+      ['grid-canvas', 'shape-canvas', 'draw-canvas'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el && el.width && el.height) x.drawImage(el, 0, 0, tw, th);
       });
-    }
-    return false;
+      return c.toDataURL('image/jpeg', 0.6);
+    } catch (e) { return lastThumb; }
   }
 
-  async function loadSessionFromDb() {
-    const db = await getDb();
-    const key = getSessionKey();
-    if (db) {
-      return new Promise((resolve) => {
-        try {
-          const tx = db.transaction(STORE_NAME, 'readonly');
-          const store = tx.objectStore(STORE_NAME);
-          const req = store.get(key);
-          req.onsuccess = (e) => {
-            if (e.target.result) {
-              resolve(e.target.result);
-            } else if (key !== 'current_active_session') {
-              const reqDef = store.get('current_active_session');
-              reqDef.onsuccess = (ev) => resolve(ev.target.result || null);
-              reqDef.onerror = () => resolve(null);
-            } else {
-              resolve(null);
-            }
-          };
-          req.onerror = () => resolve(null);
-        } catch (err) {
-          resolve(null);
-        }
-      });
-    }
-    return null;
-  }
-
-  async function clearSessionFromDb() {
-    const db = await getDb();
-    const key = getSessionKey();
-    if (db) {
-      return new Promise((resolve) => {
-        try {
-          const tx = db.transaction(STORE_NAME, 'readwrite');
-          const store = tx.objectStore(STORE_NAME);
-          store.delete(key);
-          store.delete('current_active_session');
-          tx.oncomplete = () => resolve(true);
-          tx.onerror = () => resolve(false);
-        } catch (err) {
-          resolve(false);
-        }
-      });
-    }
-    return false;
-  }
-
-  function getActiveSessionPayload() {
-    saveCurrent();
+  /** Plain, structured-clone-safe page record. Shapes go through JSON (they may carry image elements / functions). */
+  function pageRecord(pg) {
     return {
-      version: 2,
+      uid: ensureUid(pg),
+      id: pg.id,
+      label: pg.label,
+      shapes: pg.shapes && pg.shapes.length ? JSON.parse(JSON.stringify(pg.shapes)) : [],
+      strokes: pg.strokes || [],
+      drawDataUrl: pg.drawDataUrl || null,
+      bgImage: pg.bgImage || null,
+      boardColorId: pg.boardColorId || null,
+      splitState: pg.splitState ? JSON.parse(JSON.stringify(pg.splitState)) : null
+    };
+  }
+  function settingsRecord() {
+    return {
       savedAt: Date.now(),
       currentPage,
       activeChapter,
@@ -237,64 +245,172 @@ const App = (() => {
       eraserSize,
       boardBrightness,
       boardColorId: (typeof Canvas !== 'undefined' && Canvas.getBoardColorId) ? Canvas.getBoardColorId() : null,
-      pages: pages.map(pg => ({
-        id: pg.id,
-        label: pg.label,
-        shapes: pg.shapes ? JSON.parse(JSON.stringify(pg.shapes)) : [],
-        strokes: pg.strokes ? JSON.parse(JSON.stringify(pg.strokes)) : [],
-        drawDataUrl: pg.drawDataUrl || null,
-        bgImage: pg.bgImage || null,
-        boardColorId: pg.boardColorId || null,
-        splitState: pg.splitState ? JSON.parse(JSON.stringify(pg.splitState)) : null,
-        history: pg.history ? JSON.parse(JSON.stringify(pg.history)) : [],
-        redoStack: pg.redoStack ? JSON.parse(JSON.stringify(pg.redoStack)) : []
-      })),
-      pptPresenterState: (typeof PptPresenter !== 'undefined' && PptPresenter.serializeState)
-        ? PptPresenter.serializeState()
-        : null
+      pageUids: pages.map(ensureUid),
+      pageLabels: pages.map(p => ({ id: p.id, label: p.label }))
     };
   }
 
-  function saveActiveSession() {
-    if (isEmbedLaunch()) return;
-    try {
-      const payload = getActiveSessionPayload();
-      const key = getSessionKey();
-
-      // 1. Synchronous localStorage save (instant and atomic across refresh)
-      try {
-        const jsonStr = JSON.stringify(payload);
-        localStorage.setItem(key, jsonStr);
-        localStorage.setItem('current_active_session', jsonStr);
-        localStorage.setItem('mbp_active_session_backup', jsonStr);
-      } catch (storageErr) {
-        // If quota exceeded (e.g. large PPT images), save strokes/shapes without large image blobs
-        try {
-          const lightweight = {
-            ...payload,
-            pages: payload.pages.map(p => ({ ...p, bgImage: null })),
-            pptPresenterState: null
-          };
-          const lightStr = JSON.stringify(lightweight);
-          localStorage.setItem(key, lightStr);
-          localStorage.setItem('current_active_session', lightStr);
-          localStorage.setItem('mbp_active_session_backup', lightStr);
-        } catch(err2) {}
+  /** Writes one history entry (settings + the given page records + presenter state) atomically and removes pages that no longer exist. */
+  function writeEntry(id, createdAt, settings, records, ppt, thumb) {
+    const meta = {
+      id, createdAt, savedAt: settings.savedAt, pageCount: settings.pageUids.length,
+      subject: settings.activeSubject || '', chapter: settings.activeChapter || null, thumb: thumb || null
+    };
+    const keep = new Set(settings.pageUids);
+    const orphans = [...knownUids].filter(u => !keep.has(u));
+    const put = (tx, recs) => {
+      const data = tx.objectStore(STORE_DATA);
+      recs.forEach(r => data.put(r, id + '|p|' + r.uid));
+      data.put(settings, id + '|m');
+      if (ppt !== undefined) { if (ppt) data.put(ppt, id + '|ppt'); else data.delete(id + '|ppt'); }
+      orphans.forEach(u => data.delete(id + '|p|' + u));
+      tx.objectStore(STORE_META).put(meta, id);
+    };
+    return runTx([STORE_META, STORE_DATA], 'readwrite', (tx) => {
+      try { put(tx, records); }
+      catch (e) { // a record held something that cannot be cloned — fall back to plain JSON for those pages
+        put(tx, records.map(r => JSON.parse(JSON.stringify(r))));
       }
-
-      // 2. Asynchronous IndexedDB save
-      saveSessionToDb(payload);
-    } catch (e) {
-      console.warn('saveActiveSession error:', e);
-    }
+    }).then((ok) => {
+      if (ok !== null) {
+        everSaved = true;
+        knownUids = keep;
+        records.forEach(r => dirtyPages.delete(r.uid));
+      }
+      return ok;
+    });
   }
 
+  /** Collects what has to be written right now. `all` = every page (used for the final flush when the board closes). */
+  function collectSave(all) {
+    if (isEmbedLaunch() || restoring || !sessionId) return null;
+    saveCurrent();
+    if (boardIsBlank() && !everSaved) return null;       // never record an untouched board
+    const cur = pages[currentPage];
+    if (cur) dirtyPages.add(ensureUid(cur));
+    const records = [];
+    pages.forEach((pg) => {
+      const uid = ensureUid(pg);
+      if (all || dirtyPages.has(uid) || !knownUids.has(uid)) records.push(pageRecord(pg));
+    });
+    const now = Date.now();
+    if (all || now - lastThumbAt > THUMB_EVERY_MS || !lastThumb) { lastThumb = makeThumb(); lastThumbAt = now; }
+    let ppt;                                               // undefined = leave as it is
+    if (typeof PptPresenter !== 'undefined' && PptPresenter.serializeState && (all || now - lastPptAt > PPT_EVERY_MS)) {
+      try { ppt = PptPresenter.serializeState() || null; lastPptAt = now; } catch (e) { ppt = undefined; }
+    }
+    return { settings: settingsRecord(), records, ppt, thumb: lastThumb };
+  }
+
+  function runSave() {
+    saveTimer = null;
+    if (saveBusy) { scheduleAutoSave(); return; }
+    firstDirtyAt = 0;
+    const job = collectSave(false);
+    metaDirty = false;
+    if (!job) return;
+    saveBusy = true;
+    writeEntry(sessionId, sessionCreatedAt, job.settings, job.records, job.ppt, job.thumb)
+      .finally(() => { saveBusy = false; });
+    if (Date.now() - lastPrune > 10 * 60 * 1000) pruneExpired();
+  }
+
+  /** Debounced: many strokes in a row cause ONE save shortly after you pause, and only the changed page is written. */
   function scheduleAutoSave() {
-    saveActiveSession();
-    if (autoSaveTimer) clearTimeout(autoSaveTimer);
-    autoSaveTimer = setTimeout(() => {
-      saveActiveSession();
-    }, 100);
+    if (isEmbedLaunch() || restoring) return;
+    const pg = pages[currentPage];
+    if (pg) dirtyPages.add(ensureUid(pg));
+    metaDirty = true;
+    const now = Date.now();
+    if (!firstDirtyAt) firstDirtyAt = now;
+    if (saveTimer) clearTimeout(saveTimer);
+    const wait = Math.max(0, Math.min(SAVE_DEBOUNCE_MS, firstDirtyAt + SAVE_MAXWAIT_MS - now));
+    saveTimer = setTimeout(() => whenIdle(runSave), wait);
+  }
+  // kept for the modules that call it after every stroke: now just the cheap debounced version
+  function saveActiveSession() { scheduleAutoSave(); }
+
+  /** Final save when the board is hidden / closed / reloaded. Starts the write immediately and also leaves a copy for a same-tab reload. */
+  function flushSession() {
+    if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
+    firstDirtyAt = 0;
+    const job = collectSave(true);
+    if (!job) return;
+    writeEntry(sessionId, sessionCreatedAt, job.settings, job.records, job.ppt, job.thumb);
+    try { sessionStorage.setItem(LIVE_KEY, sessionId); } catch (e) { /* ignore */ }   // keeps "this tab's board" known for a refresh
+    try {
+      const data = sessionDataFromParts(job.settings, pages.map(pageRecord), job.ppt);
+      sessionStorage.setItem(BACKUP_KEY, JSON.stringify({ id: sessionId, savedAt: job.settings.savedAt, createdAt: sessionCreatedAt, data }));
+    } catch (e) { try { sessionStorage.removeItem(BACKUP_KEY); } catch (er) { /* ignore */ } }
+  }
+
+  function sessionDataFromParts(settings, pageRecs, ppt) {
+    return Object.assign({}, settings, { version: 3, pages: pageRecs, pptPresenterState: ppt || null });
+  }
+
+  // ── History: list / open / delete ──
+  function pruneExpired() {
+    lastPrune = Date.now();
+    const cutoff = Date.now() - HISTORY_TTL_MS;
+    return runTx([STORE_META], 'readonly', (tx) => { const r = tx.objectStore(STORE_META).getAll(); return reqValue(r); }).then((all) => {
+      const stale = (all || []).filter(m => m && m.savedAt < cutoff && m.id !== sessionId).map(m => m.id);
+      return Promise.all(stale.map(deleteEntry));
+    }).catch(() => null);
+  }
+
+  function deleteEntry(id) {
+    return runTx([STORE_META, STORE_DATA], 'readwrite', (tx) => {
+      tx.objectStore(STORE_META).delete(id);
+      tx.objectStore(STORE_DATA).delete(IDBKeyRange.bound(id + '|', id + '|￿'));
+    }).then((ok) => { if (id === sessionId) { everSaved = false; knownUids = new Set(); } return ok; });
+  }
+
+  /** History entries (newest first), expired ones removed. */
+  function listHistory() {
+    return pruneExpired().then(() => runTx([STORE_META], 'readonly', (tx) => { const r = tx.objectStore(STORE_META).getAll(); return reqValue(r); }))
+      .then((all) => (all || []).filter(Boolean).sort((a, b) => b.savedAt - a.savedAt)
+        .map(m => Object.assign({}, m, { current: m.id === sessionId, expiresAt: m.savedAt + HISTORY_TTL_MS })));
+  }
+
+  function clearHistory() {
+    return listHistory().then(list => Promise.all(list.filter(m => !m.current).map(m => deleteEntry(m.id))));
+  }
+
+  function loadEntry(id) {
+    return runTx([STORE_META, STORE_DATA], 'readonly', (tx) => {
+      const data = tx.objectStore(STORE_DATA);
+      const metaReq = tx.objectStore(STORE_META).get(id);
+      const setReq = data.get(id + '|m');
+      const pptReq = data.get(id + '|ppt');
+      const pageReqs = [];
+      setReq.onsuccess = () => {
+        const s = setReq.result;
+        if (s && Array.isArray(s.pageUids)) s.pageUids.forEach(u => pageReqs.push(data.get(id + '|p|' + u)));
+      };
+      return () => {
+        const s = setReq.result;
+        if (!s) return null;
+        return { meta: metaReq.result, data: sessionDataFromParts(s, pageReqs.map(r => r.result).filter(Boolean), pptReq.result || null) };
+      };
+    });
+  }
+
+  /** Re-open a history entry: the current board is saved first, then the page reloads straight into the chosen one. */
+  function openHistoryEntry(id) {
+    flushSession();
+    try { sessionStorage.setItem(INTENT_KEY, 'resume:' + id); } catch (e) { /* ignore */ }
+    setTimeout(() => window.location.reload(), 120);   // let the final write start
+  }
+  /** Start a clean board (the current one stays in history). */
+  function startNewBoard() {
+    flushSession();
+    try { sessionStorage.setItem(INTENT_KEY, 'new'); } catch (e) { /* ignore */ }
+    setTimeout(() => window.location.reload(), 120);
+  }
+
+  // ── First board of a visit, or back to a board after refresh ──
+  function navigationType() {
+    try { const n = performance.getEntriesByType('navigation')[0]; return n ? n.type : 'navigate'; } catch (e) { return 'navigate'; }
   }
 
   function applySessionData(data) {
@@ -308,6 +424,7 @@ const App = (() => {
 
     pages = data.pages.map((pg, idx) => ({
       id: pg.id || (idx + 1),
+      _uid: pg.uid || newId('p'),
       label: pg.label || ('Page ' + (idx + 1)),
       shapes: Array.isArray(pg.shapes) ? pg.shapes : [],
       strokes: Array.isArray(pg.strokes) ? pg.strokes : [],
@@ -330,21 +447,12 @@ const App = (() => {
     renderPageTabs();
     updatePageControls();
 
-    if (data.currentTool) {
-      setTool(data.currentTool);
-    } else {
-      setTool('pen');
-    }
-
-    if (data.currentColor) {
-      setColor(data.currentColor);
-    }
+    setTool(data.currentTool || 'pen');
+    if (data.currentColor) setColor(data.currentColor);
 
     if (data.pptPresenterState && typeof PptPresenter !== 'undefined' && PptPresenter.restoreState) {
       const hasSplit = pages[currentPage].splitState && pages[currentPage].splitState.mode !== 'normal';
-      if (!hasSplit) {
-        PptPresenter.restoreState(data.pptPresenterState);
-      }
+      if (!hasSplit) PptPresenter.restoreState(data.pptPresenterState);
     }
 
     UI.updateStatus();
@@ -361,47 +469,107 @@ const App = (() => {
     return true;
   }
 
+  /** Decides which board this visit shows: a brand-new one (default), the one chosen from History, or the same one after a refresh. */
   function restoreActiveSession() {
     if (isEmbedLaunch()) return false;
+    let intent = null, liveId = null;
     try {
-      let data = null;
-      const key = getSessionKey();
+      intent = sessionStorage.getItem(INTENT_KEY);
+      sessionStorage.removeItem(INTENT_KEY);
+      liveId = sessionStorage.getItem(LIVE_KEY);
+    } catch (e) { /* ignore */ }
 
-      // Step 1: Read immediately from synchronous localStorage (0ms delay)
-      try {
-        const raw = localStorage.getItem(key) || localStorage.getItem('current_active_session') || localStorage.getItem('mbp_active_session_backup');
-        if (raw) data = JSON.parse(raw);
-      } catch (e) {}
-
-      if (data && Array.isArray(data.pages) && data.pages.length > 0) {
-        applySessionData(data);
-      }
-
-      // Step 2: Background check on IndexedDB for newer updates or PPT images
-      loadSessionFromDb().then(dbData => {
-        if (dbData && Array.isArray(dbData.pages) && dbData.pages.length > 0) {
-          if (!data || (dbData.savedAt && dbData.savedAt > (data.savedAt || 0))) {
-            applySessionData(dbData);
-          }
-        }
-      }).catch(() => {});
-
-      return true;
-    } catch (e) {
-      console.error('restoreActiveSession error:', e);
-      return false;
+    let resumeId = null;
+    if (intent && intent.indexOf('resume:') === 0) resumeId = intent.slice(7);
+    else if (!intent) {
+      const nav = navigationType();
+      if ((nav === 'reload' || nav === 'back_forward') && liveId) resumeId = liveId;
     }
+
+    if (!resumeId) {
+      // NEW board
+      sessionId = newId('b');
+      sessionCreatedAt = Date.now();
+      try { sessionStorage.setItem(LIVE_KEY, sessionId); sessionStorage.removeItem(BACKUP_KEY); } catch (e) { /* ignore */ }
+      migrateLegacy();
+      pruneExpired();
+      return true;
+    }
+
+    // RESUME (from History, or this tab's board after a refresh)
+    sessionId = resumeId;
+    try { sessionStorage.setItem(LIVE_KEY, sessionId); } catch (e) { /* ignore */ }
+    restoring = true;
+    let backup = null;
+    try { backup = JSON.parse(sessionStorage.getItem(BACKUP_KEY) || 'null'); sessionStorage.removeItem(BACKUP_KEY); } catch (e) { /* ignore */ }
+    if (backup && backup.id !== resumeId) backup = null;
+
+    loadEntry(resumeId).then((entry) => {
+      let data = entry && entry.data, createdAt = entry && entry.meta && entry.meta.createdAt;
+      if (backup && backup.data && (!data || (backup.savedAt || 0) > (data.savedAt || 0))) { data = backup.data; createdAt = createdAt || backup.createdAt; }
+      if (data && Array.isArray(data.pages) && data.pages.length) {
+        sessionCreatedAt = createdAt || Date.now();
+        knownUids = new Set((data.pages || []).map(p => p.uid).filter(Boolean));
+        everSaved = !!entry;
+        applySessionData(data);
+        knownUids = new Set(pages.map(p => p._uid));
+        pages.forEach(p => dirtyPages.add(p._uid));
+        if (!entry) everSaved = false;
+      } else if (!entry) {
+        if (typeof showToast === 'function') showToast('That history entry is no longer available');
+      }
+    }).catch(() => {}).finally(() => {
+      restoring = false;
+      if (everSaved === false && !boardIsBlank()) scheduleAutoSave();
+      pruneExpired();
+    });
+    return true;
   }
 
-  function clearActiveSessionStorage() {
-    clearSessionFromDb();
+  /** One-time: the old "continue where you left off" copy becomes a normal history entry, then all the old storage is freed. */
+  function migrateLegacy() {
+    let done = false;
+    try { done = localStorage.getItem('sb_legacy_migrated') === '1'; } catch (e) { /* ignore */ }
+    if (done) return;
+    const keys = ['current_active_session', 'mbp_active_session_backup', 'mbp_active_session_meta'];
+    let payload = null;
     try {
-      localStorage.removeItem(getSessionKey());
-      localStorage.removeItem('current_active_session');
-      localStorage.removeItem('mbp_active_session_backup');
-      localStorage.removeItem('mbp_active_session_meta');
-    } catch (e) {}
+      const raw = localStorage.getItem('current_active_session') || localStorage.getItem('mbp_active_session_backup');
+      if (raw) payload = JSON.parse(raw);
+    } catch (e) { /* ignore */ }
+    const finish = (pl) => {
+      try {
+        if (pl && Array.isArray(pl.pages) && pl.pages.some(p => (p.strokes && p.strokes.length) || (p.shapes && p.shapes.length) || p.bgImage) &&
+            pl.savedAt && Date.now() - pl.savedAt < HISTORY_TTL_MS) {
+          const id = newId('b');
+          const recs = pl.pages.map((p, i) => ({
+            uid: newId('p'), id: p.id || (i + 1), label: p.label || ('Page ' + (i + 1)),
+            shapes: p.shapes || [], strokes: p.strokes || [], drawDataUrl: p.drawDataUrl || null, bgImage: p.bgImage || null,
+            boardColorId: p.boardColorId || null, splitState: p.splitState || null
+          }));
+          const settings = {
+            savedAt: pl.savedAt, currentPage: pl.currentPage || 0, activeChapter: pl.activeChapter, activeSubject: pl.activeSubject,
+            currentTool: pl.currentTool, currentColor: pl.currentColor, penSize: pl.penSize, eraserSize: pl.eraserSize,
+            boardBrightness: pl.boardBrightness, boardColorId: pl.boardColorId || null,
+            pageUids: recs.map(r => r.uid), pageLabels: recs.map(r => ({ id: r.id, label: r.label }))
+          };
+          const saved = knownUids; knownUids = new Set();
+          writeEntry(id, pl.savedAt, settings, recs, pl.pptPresenterState || null, null).finally(() => { knownUids = saved; });
+        }
+      } catch (e) { /* best effort */ }
+      try {
+        keys.forEach(k => localStorage.removeItem(k));
+        for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && k.indexOf('board_session_') === 0) localStorage.removeItem(k); }
+        localStorage.setItem('sb_legacy_migrated', '1');
+      } catch (e) { /* ignore */ }
+      runTx([LEGACY_STORE], 'readwrite', (tx) => { tx.objectStore(LEGACY_STORE).clear(); });
+    };
+    if (payload) { finish(payload); return; }
+    runTx([LEGACY_STORE], 'readonly', (tx) => { const r = tx.objectStore(LEGACY_STORE).get('current_active_session'); return reqValue(r); }).then(finish);
   }
+
+  // kept for API compatibility
+  function clearActiveSessionStorage() { return sessionId ? deleteEntry(sessionId) : Promise.resolve(); }
 
   function $(id) { return document.getElementById(id); }
 
@@ -648,10 +816,15 @@ const App = (() => {
   // CLEAR CURRENT PAGE (With Confirmation & Undo)
   // ─────────────────────────────────────────────
   function confirmClearCurrentPage() {
+    const title = $('fs-modal-title');
+    if (title) title.textContent = `Page ${currentPage + 1} of ${pages.length}`;
     const desc = $('fs-modal-desc');
-    if (desc) {
-      desc.textContent = `This will remove all pen strokes, handwriting, shapes, and graphs from Page ${currentPage + 1}. Other pages will remain unchanged.`;
-    }
+    if (desc) desc.textContent = 'Choose what to do with this page. Other pages are not changed.';
+    const del = $('fs-modal-delete');
+    const onlyPage = pages.length <= 1;
+    if (del) del.disabled = onlyPage;
+    const dh = $('fs-delete-hint');
+    if (dh) dh.textContent = onlyPage ? 'Not available — this is the only page.' : 'Remove this page completely. Later pages move up.';
     const modal = $('fs-clear-modal');
     if (modal) modal.classList.remove('hidden');
   }
@@ -681,6 +854,14 @@ const App = (() => {
         undo();
       });
     }
+  }
+
+  function executeDeleteCurrentPage() {
+    closeClearModal();
+    if (pages.length <= 1) { showToast('Cannot delete the only page'); return; }
+    const n = currentPage + 1;
+    deletePage(currentPage);
+    showToast(`Page ${n} deleted`);
   }
 
   function clearBoard() {
@@ -1805,7 +1986,7 @@ const App = (() => {
     toggleSidebar, toggleRPanel,
     addPage, insertPageMiddle, deleteCurrentPage, switchPage, deletePage,
     prevPage, nextPage, updatePageControls,
-    confirmClearCurrentPage, closeClearModal, executeClearCurrentPage,
+    confirmClearCurrentPage, closeClearModal, executeClearCurrentPage, executeDeleteCurrentPage,
     openPdfModal, closePdfModal, downloadGeneratedPdf,
     getPages: () => pages, getCurrentPage: () => currentPage,
     getCurrentPageIndex: () => currentPage, getPageCount: () => pages.length,
@@ -1850,7 +2031,15 @@ const App = (() => {
     saveActiveSession,
     restoreActiveSession,
     scheduleAutoSave,
-    clearActiveSessionStorage
+    clearActiveSessionStorage,
+    // board history (last 2 days)
+    flushSession,
+    listHistory,
+    openHistoryEntry,
+    deleteHistoryEntry: deleteEntry,
+    clearHistory,
+    startNewBoard,
+    get historyDays() { return HISTORY_TTL_MS / 86400000; }
   };
 
 })();

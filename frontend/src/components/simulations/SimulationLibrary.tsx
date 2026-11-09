@@ -17,6 +17,7 @@ import {
   Play,
   Monitor,
   BookOpen,
+  Eye,
   ChevronRight,
   Layers,
   Sparkles,
@@ -883,80 +884,73 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
                           )}
                         </div>
 
-                        {/* Action Buttons */}
-                        <div style={{ display: 'flex', gap: '8px', paddingTop: '10px', borderTop: '1px solid #e2e8f0' }}>
+                        {/* Action Buttons: Exactly Two Options (Preview & Launch to Smart Board) */}
+                        <div style={{ display: 'flex', gap: '10px', paddingTop: '12px', borderTop: '1px solid #e2e8f0' }}>
                           <button
-                            onClick={() => setPreviewSimulation(sim)}
+                            type="button"
+                            onClick={() => setActiveSimulation(sim)}
                             style={{
                               flex: 1,
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
                               gap: '6px',
-                              padding: '8px 12px',
+                              padding: '9px 12px',
                               background: '#ffffff',
-                              color: '#334155',
-                              border: '1px solid #cbd5e1',
+                              color: '#0f766e',
+                              border: '1.5px solid #0f766e',
                               borderRadius: '8px',
                               fontSize: '12px',
                               fontWeight: '700',
                               cursor: 'pointer',
+                              transition: 'all 0.15s ease',
                             }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = '#f0fdfa';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = '#ffffff';
+                            }}
+                            title="Preview simulation right here"
                           >
-                            <BookOpen size={13} />
+                            <Eye size={15} />
                             <span>Preview</span>
                           </button>
 
                           <button
-                            onClick={() => setActiveSimulation(sim)}
+                            type="button"
+                            onClick={() => launchOnSmartBoard(sim.componentKey || sim.code || sim.id, sim.title)}
                             style={{
-                              flex: 1.3,
+                              flex: 1.5,
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
                               gap: '6px',
-                              padding: '8px 14px',
-                              background: '#117a6b',
+                              padding: '9px 14px',
+                              background: '#0284c7',
                               color: '#ffffff',
                               border: 'none',
                               borderRadius: '8px',
                               fontSize: '12px',
                               fontWeight: '800',
                               cursor: 'pointer',
-                              boxShadow: '0 2px 6px rgba(17,122,107,0.2)',
+                              boxShadow: '0 2px 6px rgba(2, 132, 199, 0.25)',
+                              transition: 'all 0.15s ease',
+                              whiteSpace: 'nowrap',
                             }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = '#0369a1';
+                              e.currentTarget.style.transform = 'translateY(-1px)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = '#0284c7';
+                              e.currentTarget.style.transform = 'translateY(0)';
+                            }}
+                            title="Launch to Smart Board"
                           >
-                            <Play size={13} fill="#ffffff" />
-                            <span>Launch Simulation</span>
+                            <Monitor size={15} />
+                            <span>Launch to Smart Board</span>
                           </button>
-
-                          {isKprietSimulation(sim) && (
-                            <button
-                              onClick={() => launchOnSmartBoard(String(sim.componentKey).slice('kpriet:'.length), sim.title)}
-                              style={{ padding: '8px 10px', background: '#0284c7', color: '#ffffff', border: 'none', borderRadius: '8px', fontSize: '12px', cursor: 'pointer' }}
-                              title="Launch directly on the Smart Board"
-                            >
-                              <Monitor size={14} />
-                            </button>
-                          )}
-
-                          {userRole === 'TEACHER' && !isKprietSimulation(sim) && (
-                            <button
-                              onClick={() => handleLaunchSmartBoard(sim)}
-                              style={{
-                                padding: '8px 10px',
-                                background: '#0284c7',
-                                color: '#ffffff',
-                                border: 'none',
-                                borderRadius: '8px',
-                                fontSize: '12px',
-                                cursor: 'pointer',
-                              }}
-                              title="Launch on Classroom Smart Board"
-                            >
-                              <Monitor size={14} />
-                            </button>
-                          )}
                         </div>
                       </div>
                     ))}
@@ -983,7 +977,7 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
             setPreviewSimulation(null);
             setActiveSimulation(sim);
           }}
-          onLaunchSmartBoard={isKprietSimulation(previewSimulation) ? () => launchOnSmartBoard(String(previewSimulation.componentKey).slice('kpriet:'.length), previewSimulation.title) : userRole === 'TEACHER' ? () => handleLaunchSmartBoard(previewSimulation) : undefined}
+          onLaunchSmartBoard={() => launchOnSmartBoard(previewSimulation.componentKey || previewSimulation.code || previewSimulation.id, previewSimulation.title)}
           userRole={userRole}
         />
       )}

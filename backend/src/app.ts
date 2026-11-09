@@ -44,6 +44,13 @@ export function createApp() {
   app.use(express.json({ limit: '50mb' }));
   app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
+  // The simulation pages now live in /smartboard/simulations/. Old links (database entries, bookmarks) still work:
+  // /smartboard/<name>-simulation.html  →  /smartboard/simulations/<name>-simulation.html  (query string kept)
+  app.get(/^\/smartboard\/([a-z0-9]+-simulation\.html)$/i, (req, res) => {
+    const q = req.url.indexOf('?');
+    res.redirect(302, `/smartboard/simulations/${req.params[0]}${q >= 0 ? req.url.slice(q) : ''}`);
+  });
+
   // Serve existing Smart Board as static files with correct base path
   app.use('/smartboard', express.static(ENV.SMARTBOARD_PATH));
 
@@ -85,7 +92,7 @@ export function createApp() {
   // replaces them and they duplicated features without the newer permission checks.
 
   // Health check
-  app.get('/health', (req, res) => {
+  app.get(['/health', '/api/health', '/api/v1/health'], (req, res) => {
     res.json({
       status: 'UP',
       timestamp: new Date().toISOString(),

@@ -6,12 +6,12 @@
   <base href="/smartboard/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://generativelanguage.googleapis.com; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
-  <title>PiyushDhara EduVerse Board</title>
+  <title>Nepal Digital Education · Smart Board</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/app.css?v=2.2.1">
+  <link rel="stylesheet" href="styles/app.css?v=2.2.2">
   <link rel="stylesheet" href="styles/games.css?v=3.1.1">
 </head>
 <body class="smartboard-mode">
@@ -32,7 +32,7 @@
     <div class="tb-dropdown subj-dd-wrap" id="dd-subj-syllabus">
       <button id="subj-active-pill" class="tb-dropdown-btn subj-pill-btn active" onclick="UI.toggleActiveSubjectSyllabusDropdown()" title="Click to view chapter-wise syllabus & subject PPTs">
         <span class="subj-icon" id="top-active-subj-icon">📐</span>
-        <span class="subj-name" id="top-active-subj-name">Calculus and Differential Equations</span>
+        <span class="subj-name" id="top-active-subj-name">Subject</span>
         <span class="subj-badge-tag">Syllabus</span>
         <span class="dd-arrow">▼</span>
       </button>
@@ -160,6 +160,12 @@
 
   <div class="tb-div"></div>
 
+  <!-- HISTORY: boards from the last 2 days -->
+  <button class="tb-dropdown-btn file-menu-btn" id="btn-board-history" onclick="BoardHistory.toggle()" title="History — boards from the last 2 days" aria-label="History">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l3 2"/></svg>
+    <span>History</span>
+  </button>
+
   <!-- CONSOLIDATED FILE MENU (No Duplication) -->
   <div class="tb-dropdown" id="dd-file">
     <button class="tb-dropdown-btn file-menu-btn" onclick="UI.toggleDropdown('dd-file')" title="Session & File Menu">
@@ -167,13 +173,26 @@
       <span>File</span> <span class="dd-arrow">▼</span>
     </button>
     <div class="tb-dropdown-menu">
-      <button class="dd-item" onclick="App.clearBoard(); UI.closeAllDropdowns()">
+      <button class="dd-item" onclick="App.startNewBoard(); UI.closeAllDropdowns()">
         <div class="dd-item-left">
           <svg viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8"/></svg>
-          New / Clear Board
+          New Board
+        </div>
+      </button>
+      <button class="dd-item" onclick="BoardHistory.open(); UI.closeAllDropdowns()">
+        <div class="dd-item-left">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          History (last 2 days)
+        </div>
+      </button>
+      <button class="dd-item" onclick="App.clearBoard(); UI.closeAllDropdowns()">
+        <div class="dd-item-left">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M4 6h12M8 6V4h4v2M6 6l1 10h6l1-10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Clear / Delete Page
         </div>
         <span class="dd-shortcut">Ctrl+N</span>
       </button>
+      <div class="dd-sep"></div>
       <button class="dd-item" onclick="App.loadBoard(); UI.closeAllDropdowns()">
         <div class="dd-item-left">
           <svg viewBox="0 0 20 20" fill="none"><path d="M3 10V16a1 1 0 001 1h12a1 1 0 001-1V10M10 3v10M7 6l3-3 3 3" stroke="currentColor" stroke-width="1.5"/></svg>
@@ -234,9 +253,8 @@
 </header>
 
 <!-- Floating Exit Fullscreen Button (Visible ONLY in Fullscreen Board Mode) -->
-<button id="board-fullscreen-float-btn" onclick="App.toggleFullscreen()" title="Exit Fullscreen Board Mode (Esc)">
+<button id="board-fullscreen-float-btn" onclick="App.toggleFullscreen()" title="Exit Fullscreen (Esc)" aria-label="Exit fullscreen">
   <svg viewBox="0 0 20 20" fill="none" style="width:16px;height:16px;"><path d="M7 3v4H3M13 3v4h4M3 13h4v4M17 13h-4v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  <span>Exit Fullscreen</span>
 </button>
 
 <!-- Floating Fullscreen Page Capsule (Right-Middle side: Navigation, Add Page & Clear Page) -->
@@ -296,12 +314,21 @@
       </svg>
     </div>
     <div class="fs-modal-body">
-      <h3 id="fs-modal-title" class="fs-modal-title">Clear this page?</h3>
-      <p id="fs-modal-desc" class="fs-modal-desc">This will remove all content from the current page.</p>
+      <h3 id="fs-modal-title" class="fs-modal-title">Current page</h3>
+      <p id="fs-modal-desc" class="fs-modal-desc">Choose what to do with this page.</p>
+      <div class="fs-page-choices">
+        <button type="button" class="fs-page-choice" onclick="App.executeClearCurrentPage()">
+          <b>Clear page</b>
+          <span id="fs-clear-hint">Remove everything drawn on this page. The page stays, and you can undo it.</span>
+        </button>
+        <button type="button" class="fs-page-choice danger" id="fs-modal-delete" onclick="App.executeDeleteCurrentPage()">
+          <b>Delete page</b>
+          <span id="fs-delete-hint">Remove this page completely. Later pages move up.</span>
+        </button>
+      </div>
     </div>
     <div class="fs-modal-actions">
       <button type="button" class="fs-modal-btn fs-modal-cancel" onclick="App.closeClearModal()">Cancel</button>
-      <button type="button" class="fs-modal-btn fs-modal-confirm" onclick="App.executeClearCurrentPage()">Clear Page</button>
     </div>
   </div>
 </div>
@@ -427,6 +454,15 @@
           <path d="M7 10.5v4M5 12.5h4"/>
           <circle cx="15.5" cy="11.5" r="1" fill="currentColor"/>
           <circle cx="18" cy="14" r="1" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <!-- 6c. Calculator (standard + scientific) -->
+      <button class="tool-btn" id="btn-fp-calc" onclick="Calculator.toggle()" title="Calculator — standard and scientific" aria-label="Calculator">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="2.5" width="14" height="19" rx="2.5"/>
+          <rect x="8" y="5.5" width="8" height="3.5" rx="0.8"/>
+          <path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01" stroke-width="2.6"/>
         </svg>
       </button>
 
@@ -1029,8 +1065,8 @@
       <span>Fullscreen</span>
     </button>
 
-    <span class="sb-brand-tag">PiyushDhara</span>
-    <span class="sb-ver-tag">EduVerse &middot; v2.0</span>
+    <span class="sb-brand-tag">Nepal Digital Education</span>
+    <span class="sb-ver-tag">Smart Board</span>
   </div>
 </footer>
 
@@ -1049,7 +1085,7 @@
 <script src="tools/geometry-tool.js?v=2.2.1"></script>
 <script src="tools/compass-geometry.js?v=1.0.0"></script>
 <script src="tools/compass-tool.js?v=1.0.5"></script>
-<script src="tools/canvas.js?v=compass-1"></script>
+<script src="tools/canvas.js?v=history-1"></script>
 <script src="tools/image-tool.js?v=2.2.1"></script>
 <script src="tools/drawing.js?v=2.2.7"></script>
 <script src="tools/smart-drawing.js?v=2.2.1"></script>
@@ -2423,7 +2459,7 @@ window.GraphEngine = GraphEngine;
 
 </script>
 <script src="components/ui.js?v=compass-1"></script>
-<script src="app.js?v=compass-1"></script>
+<script src="app.js?v=history-2"></script>
 <script>
 'use strict';
 
@@ -2480,7 +2516,7 @@ const Library = (() => {
       <div style="display:flex;align-items:center;gap:12px;padding:12px 18px;
         background:linear-gradient(90deg,#060e1c,#101d3a,#060e1c);
         border-bottom:1.5px solid #c9a84c;flex-shrink:0">
-        <img src="../assets/logo.png" style="height:36px;width:36px;object-fit:contain;
+        <img src="assets/logo.png" style="height:36px;width:36px;object-fit:contain;
           filter:drop-shadow(0 0 6px rgba(201,168,76,.5))">
         <div>
           <div style="font-family:Georgia,serif;font-size:16px;font-weight:700;
@@ -3007,11 +3043,18 @@ window.Library = Library;
 <script src="tools/pdc-catalog.js?v=2.2.5"></script>
 <script src="tools/ecg-catalog.js?v=2.2.5"></script>
 <script src="tools/chem-catalog.js?v=2.2.5"></script>
-<script src="modules/rbac/rbac-bridge.js?v=2.2.5"></script>
+<script src="modules/rbac/rbac-bridge.js?v=2.2.6"></script>
 <script src="tools/dsa-board-bridge.js?v=2.2.5"></script>
 <script src="components/controls-dock.js?v=2.2.5"></script>
 <script src="components/chapter-deeplink.js?v=2.2.6"></script>
 <script src="components/embed-launch.js?v=2"></script>
+<script src="components/sim-backdrop.js?v=1"></script>
+<script src="components/history-panel.js?v=1"></script>
+<script src="assets/vendor/nepali-date-converter.umd.js"></script>
+<script src="components/board-date.js?v=1"></script>
+<script src="tools/calculator.js?v=5"></script>
+<script src="tools/casio-engine.js?v=2"></script>
+<script src="tools/casio.js?v=3"></script>
 <!-- Classroom Games (self-contained overlay; rules/content are separate from rendering) -->
 <script src="tools/games/game-engine.js?v=2.9.0"></script>
 <script src="tools/games/game-content.js?v=2.7.1"></script>

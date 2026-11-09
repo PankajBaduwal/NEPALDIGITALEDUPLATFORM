@@ -24,7 +24,7 @@ const REPORT_FILES: Record<string, string> = {
   mapping: 'NEPAL_TEXTBOOK_MAPPING_REPORT.md',
   issues: 'NEPAL_DATA_ISSUES.md',
 };
-const REPORT_DIR = path.resolve(__dirname, '../../../..');
+const REPORT_DIR = path.resolve(__dirname, '../../../../docs/nepal-data');
 
 type Actor = { userId: string; role: string };
 

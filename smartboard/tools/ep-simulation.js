@@ -739,7 +739,7 @@
         window.parent.postMessage({ type: 'EDUVERSE_SIM_LAUNCH_SMARTBOARD', simKey: s.id, title: s.title, context: { embedUrl: embedUrl } }, window.location.origin);
       } else {
         const qs = new URLSearchParams({ embed: embedUrl, title: s.title, id: s.id });
-        window.location.href = `index.html?${qs.toString()}`;
+        window.location.href = `../index.html?${qs.toString()}`;
       }
       return;
     }
@@ -749,7 +749,7 @@
     if (window.parent !== window) window.parent.postMessage({ type: 'EDUVERSE_SIM_LAUNCH_SMARTBOARD', simKey: s.id, title: s.title, context }, window.location.origin);
     else {
       const q = new URLSearchParams({ subjectId: ctx.subjectId, subjectName: ctx.subjectName, subjectCode: ctx.subjectCode, departmentName: ctx.departmentName, semesterNumber: ctx.semesterNumber, role: ctx.role, preset: s.id, title: s.title, topic: s.topic, config: JSON.stringify(context.config), state: JSON.stringify(context.state) });
-      window.location.href = `index.html?${q.toString()}`;
+      window.location.href = `../index.html?${q.toString()}`;
     }
   }
   function publish() {

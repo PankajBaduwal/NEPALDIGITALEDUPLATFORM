@@ -53,13 +53,15 @@
     const role = String(session.role || session.user?.role || '').toLowerCase();
     if (role === 'student') {
       if (session.subjectId) {
-        return `/student/subjects/${encodeURIComponent(session.subjectId)}`;
+        return '/student';
       }
-      return '/student/dashboard';
+      return '/student';
     }
-    if (role === 'hod') return '/hod/dashboard';
-    if (role === 'admin' || role === 'principal') return '/admin/dashboard';
-    return '/teacher/dashboard';
+    if (role === 'hod') return '/hod';
+    if (role === 'principal') return '/principal';
+    if (role === 'school_admin' || role === 'college_admin' || role === 'admin') return '/school-admin';
+    if (role === 'super_admin') return '/super-admin';
+    return '/teacher';
   }
 
   /* ══════════════════════════════════════════════════════════
@@ -125,6 +127,20 @@
       }
     }
     return lastRes || { ok: false, status: 0, json: async () => ({}) };
+  }
+
+  /** The signed-in platform user (set by the Nepal platform's own login, same site). */
+  function platformUser() {
+    try {
+      const u = JSON.parse(localStorage.getItem('nepal_edu_user') || 'null');
+      return u && typeof u === 'object' ? u : null;
+    } catch (e) { return null; }
+  }
+  function platformToken() {
+    try {
+      const t = localStorage.getItem('nepal_edu_token') || localStorage.getItem('eduverse_token') || '';
+      return /^[\w-]+\.[\w-]+\.[\w-]+$/.test(t) ? t : '';
+    } catch (e) { return ''; }
   }
 
   let session = null;
@@ -331,8 +347,17 @@
 
   // Ensure clean, non-hardcoded defaults
   if (!session.subjectName) session.subjectName = 'Academic Subject';
-  if (!session.departmentName) session.departmentName = 'KPRIET Programme';
-  if (!session.teacherName) session.teacherName = session.name || 'Faculty Member';
+  // Nepal platform: the header shows the person who opened the board (never a placeholder or a programme name)
+  {
+    const pu = platformUser();
+    if (pu && pu.fullName) {
+      session.teacherName = pu.fullName;
+      session.name = pu.fullName;
+    }
+    if (pu && pu.institutionName) session.institutionName = pu.institutionName;
+    if (!session.teacherName || session.teacherName === 'Faculty Member') session.teacherName = session.name || 'Teacher';
+    if (session.departmentName === 'KPRIET Programme') session.departmentName = '';
+  }
   if (!session.role) session.role = 'teacher';
 
   try {
@@ -454,6 +479,47 @@
      Fetches live syllabus units, notes, PPTs, formulas,
      and simulations from backend when available.
      ══════════════════════════════════════════════════════════ */
+  /** Fills the header from this platform's API: who is teaching, at which school, what subject, which class and section. */
+  async function hydrateNepalContext() {
+    const tok = platformToken();
+    const q = new URLSearchParams();
+    if (session.subjectId && /^[0-9a-fA-F]{24}$/.test(String(session.subjectId))) q.set('subjectId', String(session.subjectId));
+    const sec = session.sectionId || paramSectionId;
+    if (sec && /^[0-9a-fA-F]{24}$/.test(String(sec))) q.set('sectionId', String(sec));
+    try {
+      if (tok) {
+        const res = await apiFetch('/smartboard/header-context' + (q.toString() ? '?' + q.toString() : ''), {
+          headers: { Authorization: 'Bearer ' + tok, Accept: 'application/json' }
+        });
+        if (res && res.ok) {
+          const json = await res.json();
+          const d = (json && json.data) || json;
+          if (d) {
+            if (d.teacher && d.teacher.fullName) { session.teacherName = d.teacher.fullName; session.name = d.teacher.fullName; }
+            if (d.institution && d.institution.name) session.institutionName = d.institution.name;
+            if (d.subject && d.subject.name) {
+              session.subjectName = d.subject.name;
+              if (d.subject.code) session.subjectCode = d.subject.code;
+            }
+            if (d.class && d.class.gradeNumber) session.classLabel = 'Class ' + d.class.gradeNumber;
+            if (d.section && d.section.name) session.sectionLabel = 'Section ' + String(d.section.name).replace(/^section\s*/i, '');
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('[Board header] context note:', err.message);
+    }
+    if (session.subjectName === 'Loading Subject...' || (session.subjectName === 'Academic Subject' && !session.subjectId)) session.subjectName = displaySubjectName();
+    try {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+      localStorage.setItem(ACTIVE_STORAGE_KEY, JSON.stringify(session));
+    } catch (e) {}
+    updateHeaderBarElements();
+    // the row-2 subject pill is drawn by ui.js; ask it to redraw with the real subject name
+    try { if (typeof UI !== 'undefined' && UI && typeof UI.renderTopChapters === 'function') UI.renderTopChapters(); } catch (e) { /* cosmetic */ }
+    window.dispatchEvent(new CustomEvent('smartboard:subject-context-ready', { detail: session }));
+  }
+
   async function hydrateBackendContext() {
     if (!session.subjectId || session.subjectId === 'sub-academic') return;
     try {
@@ -615,6 +681,21 @@
      [Center] Subject Title (Primary) & Department • Semester
      [Right] Faculty & Subject Mode Badges | Action Buttons
      ══════════════════════════════════════════════════════════ */
+  function buildClassLabel() {
+    const parts = [];
+    if (session.classLabel) parts.push(session.classLabel);
+    const sec = session.sectionLabel || (session.section ? 'Section ' + String(session.section).replace(/^section\s*/i, '') : '');
+    if (sec) parts.push(sec);
+    return parts.join(' · ');
+  }
+
+  /** The subject being taught; before it is known, the lesson title from the launch link (never "Loading…"). */
+  function displaySubjectName() {
+    const n = session.subjectName;
+    if (n && n !== 'Loading Subject...' && n !== 'Academic Subject') return n;
+    return new URLSearchParams(window.location.search).get('title') || 'Smart Board';
+  }
+
   function injectSessionBar() {
     if (document.getElementById('rbac-session-bar')) return;
 
@@ -626,68 +707,44 @@
     const bar = document.createElement('div');
     bar.id = 'rbac-session-bar';
     bar.setAttribute('data-subject-id', session.subjectId || '');
+    const classLabel = escapeHtml(buildClassLabel());
+    const schoolName = escapeHtml(session.institutionName || '');
+    const hasClassSession = !!(new URLSearchParams(window.location.search).get('sessionId'));
     bar.innerHTML =
       '<div class="rbac-sb-left">' +
-        '<div class="rbac-sb-brand">' +
-          '<img src="assets/kpriet-logo.png" class="rbac-sb-logo" alt="PiyushDhara" onerror="this.src=\'assets/logo.png\'">' +
-          '<div class="rbac-sb-brand-text">' +
-            '<span class="rbac-brand-title">PiyushDhara</span>' +
-            '<span class="rbac-brand-sub">KPRIET</span>' +
-          '</div>' +
-        '</div>' +
+        '<img src="assets/brand/nepal-logo-dark.svg" class="rbac-sb-logo-img" alt="Nepal Digital Education Platform">' +
       '</div>' +
       '<div class="rbac-sb-center">' +
         '<div class="rbac-sb-subject-main">' +
           '<span class="rbac-sb-domain-icon" id="rbac-header-sub-icon">' + activeIcon + '</span>' +
-          '<span class="rbac-sb-subject-title" id="rbac-header-sub-name">' + subName + '</span>' +
+          '<span class="rbac-sb-subject-title" id="rbac-header-sub-name">' + escapeHtml(displaySubjectName()) + '</span>' +
           (session.subjectCode
             ? '<span class="rbac-sb-code-tag" id="rbac-header-sub-code">' + escapeHtml(session.subjectCode) + '</span>'
             : '<span class="rbac-sb-code-tag" id="rbac-header-sub-code" style="display:none"></span>'
           ) +
         '</div>' +
         '<div class="rbac-sb-subject-sub">' +
-          '<span id="rbac-header-dept-name">' + deptName + '</span>' +
-          '<span class="rbac-sb-sep">•</span>' +
-          '<span id="rbac-header-sem-name">Semester ' + escapeHtml(session.semesterNumber || 1) + '</span>' +
-          (session.section
-            ? '<span class="rbac-sb-sep" id="rbac-header-sec-sep">•</span><span id="rbac-header-section-name">' + escapeHtml(session.section) + '</span>'
-            : '<span class="rbac-sb-sep" id="rbac-header-sec-sep" style="display:none">•</span><span id="rbac-header-section-name" style="display:none"></span>'
-          ) +
+          '<span id="rbac-header-class"' + (classLabel ? '' : ' style="display:none"') + '>' + classLabel + '</span>' +
           '<span class="rbac-sb-sep" id="rbac-header-focus-sep"' + (focusLabel ? '' : ' style="display:none"') + '>•</span>' +
           '<span id="rbac-header-focus"' + (focusLabel ? '' : ' style="display:none"') + '>' + focusLabel + '</span>' +
         '</div>' +
       '</div>' +
       '<div class="rbac-sb-right">' +
-        '<div class="rbac-sb-meta">' +
-          '<span class="rbac-badge rbac-badge-teacher" title="Teaching Faculty">' +
-            '<span class="rbac-badge-icon">👤</span>' +
-            '<span id="rbac-header-teacher-name">' + teacherName + '</span>' +
-          '</span>' +
-          '<span class="rbac-badge rbac-badge-mode" title="Whiteboard resources strictly isolated to this subject">' +
-            '<span class="rbac-badge-icon">🔒</span>' +
-            '<span>Subject Mode</span>' +
-          '</span>' +
-        '</div>' +
-        '<div class="rbac-sb-buttons">' +
-          '<button class="rbac-btn rbac-btn-formulas" id="rbac-board-formulas" title="Subject-Specific Formulas & Theorems">' +
-            '<span>📐</span> <span class="btn-lbl">Formulas</span>' +
-          '</button>' +
-          '<button class="rbac-btn rbac-btn-sim" id="rbac-board-simulations" title="Subject-Specific Interactive Simulations">' +
-            '<span>🔬</span> <span class="btn-lbl">Simulation Lab</span>' +
-          '</button>' +
-          (isTeacher
-            ? '<button class="rbac-btn rbac-btn-share" id="rbac-board-share-notes" title="Compile whiteboard or notes and share with enrolled students">' +
-                '<span>📄</span> <span class="btn-lbl">Share Notes</span>' +
-              '</button>'
-            : ''
-          ) +
-          '<button class="rbac-btn rbac-btn-portal" id="rbac-back-to-dashboard" title="Return to Academic Portal">' +
-            '<span>←</span> <span class="btn-lbl">Portal</span>' +
-          '</button>' +
-          '<div class="rbac-overflow-wrap" id="rbac-overflow-wrap">' +
-            '<button class="rbac-btn rbac-btn-more" id="rbac-btn-more" title="More Options" aria-label="More Options"><span>⋮</span></button>' +
-            '<div class="rbac-overflow-menu hidden" id="rbac-overflow-menu"></div>' +
-          '</div>' +
+        '<span class="rbac-badge rbac-badge-teacher" title="Signed in on this board">' +
+          '<span class="rbac-badge-icon">👤</span>' +
+          '<span id="rbac-header-teacher-name">' + teacherName + '</span>' +
+          '<span class="rbac-sb-school" id="rbac-header-school"' + (schoolName ? '' : ' style="display:none"') + '>' + (schoolName ? '· ' + schoolName : '') + '</span>' +
+        '</span>' +
+        (hasClassSession
+          ? '<button class="rbac-btn rbac-btn-end" id="rbac-end-lesson" title="End this class session and log the teaching time"><span>⏹</span> <span class="btn-lbl">End lesson</span></button>'
+          : ''
+        ) +
+        '<button class="rbac-btn rbac-btn-portal" id="rbac-back-to-dashboard" title="Back to your dashboard">' +
+          '<span>←</span> <span class="btn-lbl">Dashboard</span>' +
+        '</button>' +
+        '<div class="rbac-overflow-wrap" id="rbac-overflow-wrap">' +
+          '<button class="rbac-btn rbac-btn-more" id="rbac-btn-more" title="More" aria-label="More"><span>⋮</span></button>' +
+          '<div class="rbac-overflow-menu hidden" id="rbac-overflow-menu"></div>' +
         '</div>' +
       '</div>';
 
@@ -704,7 +761,8 @@
       mini.id = 'mini-controls-reopen';
       mini.className = 'mini-controls-reopen-tab hidden';
       mini.title = 'Open Controls (C)';
-      mini.innerHTML = '<span>Controls ▶</span>';
+      mini.innerHTML = '<span>▶</span>';
+      mini.setAttribute('aria-label', 'Open controls');
       mini.addEventListener('click', function() {
         if (typeof window.UI !== 'undefined' && typeof window.UI.toggleControlsPalette === 'function') {
           window.UI.toggleControlsPalette();
@@ -775,7 +833,35 @@
       /* Responsive breakpoints */
       '@media (max-width:1150px){#rbac-session-bar .rbac-sb-meta{display:none;}}',
       '@media (max-width:960px){#rbac-session-bar .rbac-btn-focus,#rbac-session-bar .rbac-btn-portal{display:none;}#rbac-session-bar .rbac-btn-more{display:inline-flex;}}',
-      '@media (max-width:768px){#rbac-session-bar .btn-lbl{display:none;}#rbac-session-bar .rbac-sb-brand-text{display:none;}#rbac-session-bar .rbac-sb-subject-title{font-size:13.5px;}}'
+      '@media (max-width:768px){#rbac-session-bar .btn-lbl{display:none;}#rbac-session-bar .rbac-sb-brand-text{display:none;}#rbac-session-bar .rbac-sb-subject-title{font-size:13.5px;}}',
+      /* Nepal Digital Education header: logo, subject + class, who is teaching, End lesson, Dashboard, menu */
+      '#rbac-session-bar{background:linear-gradient(90deg,#062b2a 0%,#0b3f3d 50%,#062b2a 100%) !important;border-bottom:1px solid rgba(125,230,200,0.28) !important;}',
+      '#rbac-session-bar .rbac-sb-left{padding-right:10px;margin-right:4px;border-right:1px solid rgba(255,255,255,0.14);}',
+      '#rbac-session-bar .rbac-sb-logo-img{height:22px;width:auto;display:block;}',
+      '#rbac-session-bar .rbac-sb-subject-sub{color:#bfeede;}',
+      '#rbac-session-bar .rbac-sb-code-tag{background:rgba(125,230,200,0.18) !important;border-color:rgba(125,230,200,0.45) !important;}',
+      '#rbac-session-bar .rbac-badge-teacher{max-width:380px;overflow:hidden;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#f8fafc;padding:2px 8px;}',
+      '#rbac-session-bar .rbac-badge-teacher #rbac-header-teacher-name{font-weight:800;}',
+      '#rbac-session-bar .rbac-sb-school{color:#bfeede;font-weight:600;margin-left:4px;max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}',
+      '#rbac-session-bar .rbac-btn-end{background:#991b1b;border:1px solid #f87171;color:#fee2e2;}',
+      '#rbac-session-bar .rbac-btn-portal{display:inline-flex !important;}',
+      '#rbac-session-bar .rbac-btn-more{display:inline-flex !important;}',
+      '.rbac-overflow-menu{background:#062b2a !important;border-color:rgba(125,230,200,0.4) !important;min-width:210px !important;}',
+      '.rbac-overflow-menu .rbac-menu-item{display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:transparent;border:0;color:#e6fffa;font:700 12px "Plus Jakarta Sans","Inter",sans-serif;padding:8px 10px;border-radius:6px;cursor:pointer;}',
+      '.rbac-overflow-menu .rbac-menu-item:hover{background:rgba(125,230,200,0.14);}',
+      '#rbac-session-bar .rbac-sb-center{overflow:hidden;min-width:0;}',
+      '#rbac-session-bar .rbac-sb-subject-main{min-width:0;}',
+      '#rbac-session-bar .rbac-sb-subject-title{min-width:0;}',
+      '@media (max-width:1000px){#rbac-session-bar .rbac-sb-school{display:none;}}',
+      '@media (max-width:900px){#rbac-session-bar .rbac-sb-code-tag{display:none !important;}#rbac-session-bar .rbac-badge-teacher{max-width:112px;}#rbac-session-bar .rbac-badge-icon{display:none;}#rbac-session-bar .rbac-btn .btn-lbl{display:none;}#topbar .tb-primary-tools .tb-dropdown-btn > span:not(.dd-arrow){display:none !important;}}',
+      '@media (max-width:720px){#rbac-session-bar .rbac-sb-subject-sub{display:none;}#rbac-session-bar .rbac-sb-logo-img{height:20px;}}',
+      '.rbac-overflow-menu .rbac-menu-who{display:flex;flex-direction:column;gap:1px;padding:7px 10px 8px;margin-bottom:3px;border-bottom:1px solid rgba(125,230,200,0.25);color:#f8fafc;font:600 12px "Plus Jakarta Sans","Inter",sans-serif;}',
+      '.rbac-overflow-menu .rbac-menu-who span{color:#bfeede;font-weight:600;font-size:11px;}',
+      '@media (max-width:560px){#rbac-session-bar .rbac-badge-teacher{display:none;}#rbac-session-bar .rbac-sb-subject-title{font-size:12px;}}',
+      /* row 2: tool buttons become icon-only on narrower boards so nothing runs off the screen (tooltips keep the names) */
+      '@media (max-width:900px){#topbar .tb-primary-tools .tb-btn > svg + span,#topbar .tb-primary-tools .tb-btn .rec-dot + span,#topbar #btn-workspace-split #top-split-label,#topbar #tb-btn-share-notes .tb-lbl{display:none !important;}}',
+      /* the cloud save / notes / end pill used to float over the header: its actions now live in the menu and End lesson */
+      '#pd-cloud-sync-pill{display:none !important;}'
     ].join('');
     document.head.appendChild(style);
 
@@ -818,6 +904,15 @@
       });
     }
 
+    const endBtn = document.getElementById('rbac-end-lesson');
+    if (endBtn) {
+      endBtn.addEventListener('click', function() {
+        const real = document.getElementById('pd-btn-end-session');
+        if (real) real.click();
+        else if (window.App && typeof window.App.showToast === 'function') window.App.showToast('No class session is linked to this board.');
+      });
+    }
+
     const moreBtn = document.getElementById('rbac-btn-more');
     const overflowMenu = document.getElementById('rbac-overflow-menu');
     if (moreBtn && overflowMenu) {
@@ -825,9 +920,22 @@
         e.stopPropagation();
         overflowMenu.classList.toggle('hidden');
         if (!overflowMenu.classList.contains('hidden')) {
-          overflowMenu.innerHTML =
-            '<button class="rbac-btn rbac-btn-focus" style="width:100%;margin-bottom:4px;" onclick="if(window.App)window.App.toggleFullscreen();">🎯 Focus Mode</button>' +
-            '<button class="rbac-btn rbac-btn-portal" style="width:100%;" onclick="document.getElementById(\'rbac-back-to-dashboard\').click();">← Return to Portal</button>';
+          const items = [
+            ['formulas', '📐', 'Formulas & theorems', openSubjectFormulasDrawer],
+            ['sims', '🔬', 'Simulation Lab', openSimulationsDialog],
+            ['cloud-save', '☁️', 'Save to school cloud', function() { const b = document.getElementById('pd-btn-cloud-save'); if (b) b.click(); }],
+            ['cloud-load', '📂', 'Saved notes', function() { const b = document.getElementById('pd-btn-cloud-load'); if (b) b.click(); }]
+          ];
+          const whoName = escapeHtml(session.teacherName || session.name || 'Teacher');
+          const whoSchool = escapeHtml(session.institutionName || '');
+          const who = '<div class="rbac-menu-who"><b>' + whoName + '</b>' + (whoSchool ? '<span>' + whoSchool + '</span>' : '') + '</div>';
+          overflowMenu.innerHTML = who + items.map(function(it) {
+            return '<button type="button" class="rbac-menu-item" data-act="' + it[0] + '"><span>' + it[1] + '</span><span>' + it[2] + '</span></button>';
+          }).join('');
+          items.forEach(function(it) {
+            const el = overflowMenu.querySelector('[data-act="' + it[0] + '"]');
+            if (el) el.addEventListener('click', function() { overflowMenu.classList.add('hidden'); try { it[3](); } catch (err) { console.warn('[Board menu]', err); } });
+          });
         }
       });
       document.addEventListener('click', function() {
@@ -857,7 +965,19 @@
     const icon = session.subjectIcon || getSubjectIcon(domain, subName);
 
     const subNameEl = document.getElementById('rbac-header-sub-name');
-    if (subNameEl) subNameEl.textContent = subName;
+    if (subNameEl) subNameEl.textContent = displaySubjectName();
+
+    const classEl = document.getElementById('rbac-header-class');
+    if (classEl) {
+      const label = buildClassLabel();
+      classEl.textContent = label;
+      classEl.style.display = label ? '' : 'none';
+    }
+    const schoolEl = document.getElementById('rbac-header-school');
+    if (schoolEl) {
+      schoolEl.textContent = session.institutionName ? '· ' + session.institutionName : '';
+      schoolEl.style.display = session.institutionName ? '' : 'none';
+    }
 
     const iconEl = document.getElementById('rbac-header-sub-icon');
     if (iconEl) iconEl.textContent = icon;
@@ -924,7 +1044,7 @@
       btn.id = 'tb-btn-share-notes';
       btn.title = 'Share Smart Board Notes & Materials with Students';
       btn.style.cssText = 'background:linear-gradient(135deg,#1b4d32,#2e7d32);border:1.2px solid #4CAF70;color:#ffffff;font-weight:700;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:12px;box-shadow:0 2px 8px rgba(27,77,50,0.3);margin-right:4px;';
-      btn.innerHTML = '<span style="font-size:13px">📄</span><span>Share Notes</span>';
+      btn.innerHTML = '<span style="font-size:13px">📄</span><span class="tb-lbl">Share Notes</span>';
       btn.addEventListener('click', openShareNotesDialog);
       tools.insertBefore(btn, tools.firstChild);
     }
@@ -2624,7 +2744,7 @@
         labFrameUrl = '/simulations/' + encodeURIComponent(resolvedSim) + '/play?embed=1';
       } else {
         const labFile = isChemLab ? 'chem-simulation.html' : isEcgLab ? 'ecg-simulation.html' : isPdcLab ? 'pdc-simulation.html' : isEeLab ? 'ee-simulation.html' : isMaLab ? 'ma-simulation.html' : isEgLab ? 'eg-simulation.html' : isEpLab ? 'ep-simulation.html' : 'cn-simulation.html';
-        const cnUrl = new URL(labFile, window.location.href);
+        const cnUrl = new URL('simulations/' + labFile, window.location.href);
         cnUrl.search = cnQuery.toString();
         labFrameUrl = cnUrl.toString();
       }
@@ -2653,7 +2773,7 @@
         config: JSON.stringify(config),
         state: JSON.stringify(state),
       });
-      const frameUrl = new URL(isCLab ? 'c-simulation.html' : isOsLab ? 'os-simulation.html' : 'dsa-simulation.html', window.location.href);
+      const frameUrl = new URL('simulations/' + (isCLab ? 'c-simulation.html' : isOsLab ? 'os-simulation.html' : 'dsa-simulation.html'), window.location.href);
       frameUrl.search = frameQuery.toString();
       labFrameUrl = frameUrl.toString();
     }
@@ -3304,13 +3424,13 @@
             🔒
           </div>
           <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #34d399; margin-bottom: 8px;">
-            KPRIET Eduverse • Protected Workspace
+            Nepal Digital Education • Protected Workspace
           </div>
           <h2 style="font-size: 22px; font-weight: 800; color: #ffffff; margin: 0 0 12px; line-height: 1.3;">
             Authentication Required
           </h2>
           <p style="font-size: 13.5px; color: #94a3b8; line-height: 1.6; margin: 0 0 24px;">
-            The interactive Smart Board is restricted to authenticated students and faculty. Please sign in to your Eduverse account to access classroom boards, interactive simulations, and digital notes.
+            The interactive Smart Board is restricted to authenticated students and faculty. Please sign in to your Nepal Digital Education account to access classroom boards, interactive simulations, and digital notes.
           </p>
           <div style="display: flex; flex-direction: column; gap: 10px;">
             <a href="/signin" id="sb-auth-login-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; background: #247D4C; color: #ffffff; font-weight: 700; font-size: 14px; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 14px rgba(36, 125, 76, 0.4); transition: all 0.2s ease;">
@@ -3400,7 +3520,16 @@
     return false;
   }
 
+  /** Local board (?local=1, opened by the desktop launcher): a plain Smart Board that needs no sign-in and no server. */
+  function isLocalBoard() {
+    try { return new URLSearchParams(window.location.search).get('local') === '1'; } catch (e) { return false; }
+  }
+
   async function init() {
+    if (isLocalBoard()) {
+      document.body.classList.add('sb-local');
+      return;
+    }
     // Enforce authentication: students and teachers must be logged in
     const isAuthenticated = await verifyAuthenticatedUser();
     if (!isAuthenticated) {
@@ -3411,6 +3540,7 @@
     document.body.classList.add('rbac-session-active');
     injectSessionBar();
     hydrateBackendContext();
+    hydrateNepalContext();
     broadcastStatus();
 
     // Auto-launch initial resource if scheduled

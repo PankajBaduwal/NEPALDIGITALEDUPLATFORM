@@ -17,7 +17,7 @@ import { inspectNepalData, type ExtractedDocument } from './nepal-data-extractor
 import { writeNepalDataReports } from './nepal-data-reports';
 
 export const SNAPSHOT_PATH = path.resolve(__dirname, '../../../../data/nepal-curriculum-extraction.json');
-const REPORT_DIR = path.resolve(__dirname, '../../../../..');
+const REPORT_DIR = path.resolve(__dirname, '../../../../../docs/nepal-data');
 
 /** Names used by subjects that were configured before the PDF library existed. */
 const LEGACY_ALIASES: Record<string, string[]> = {

@@ -14,6 +14,7 @@ export default defineConfig({
     rollupOptions: { input: { main: path.resolve(__dirname, 'index.html'), sim: path.resolve(__dirname, 'sim.html') } },
   },
   server: {
+    host: '0.0.0.0',
     port: 3000,
     proxy: {
       '/api': {

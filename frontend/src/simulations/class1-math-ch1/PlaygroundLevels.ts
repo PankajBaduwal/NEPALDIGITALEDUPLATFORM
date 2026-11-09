@@ -33,8 +33,222 @@ export interface SimulationLevel {
   steps: LevelStep[];
 }
 
+// ── SPATIAL TASKS FOR MODE 1, 2, AND 4 ─────────────────────────────
+export interface SpatialPlaygroundTask {
+  id: string;
+  mode: 1 | 2 | 4;
+  titleEn: string;
+  titleNe: string;
+  instructionEn: string;
+  instructionNe: string;
+  targetObject: 'cat' | 'dog' | 'bird' | 'rabbit' | 'butterfly' | 'ball' | 'teddy' | 'toyCar' | 'waterPot' | 'bag';
+  targetPosition: 'inside_house' | 'outside_house' | 'inside_basket' | 'outside_basket' | 'inside_box' | 'outside_box' | 'above_tree' | 'below_tree' | 'above_flower' | 'below_flower' | 'above_table' | 'below_table';
+  targetZoneKey: 'house' | 'basket' | 'box' | 'table_above' | 'table_below' | 'tree' | 'flower';
+  hint1En: string;
+  hint1Ne: string;
+  hint2En: string;
+  hint2Ne: string;
+  successMessageEn: string;
+  successMessageNe: string;
+}
+
+export const MODE_1_INSIDE_OUTSIDE_TASKS: SpatialPlaygroundTask[] = [
+  {
+    id: 'm1_t1',
+    mode: 1,
+    titleEn: 'Cat Inside the House',
+    titleNe: 'बिरालो घरभित्र',
+    instructionEn: 'Put the gentle cat INSIDE the village house! (भित्र)',
+    instructionNe: 'बिरालोलाई घरभित्र राख्नुहोस्! (भित्र)',
+    targetObject: 'cat',
+    targetPosition: 'inside_house',
+    targetZoneKey: 'house',
+    hint1En: 'The house has an open door. Drag or tap to place the cat inside the room.',
+    hint1Ne: 'घरको ढोका खुल्ला छ। बिरालोलाई कोठाभित्र लैजानुहोस्।',
+    hint2En: 'Move the cat past the doorway into the warm room.',
+    hint2Ne: 'बिरालोलाई ढोकाबाट भित्र कोठाको गलैँचामा राख्नुहोस्।',
+    successMessageEn: 'Wonderful! The cat is resting safely inside the house (भित्र)!',
+    successMessageNe: 'सबास! बिरालो सुरक्षित रूपमा घरभित्र (भित्र) बस्यो!',
+  },
+  {
+    id: 'm1_t2',
+    mode: 1,
+    titleEn: 'Dog Outside on the Veranda',
+    titleNe: 'कुकुर पिँढीमा बाहिर',
+    instructionEn: 'Put the friendly dog OUTSIDE on the veranda! (बाहिर)',
+    instructionNe: 'कुकुरलाई घरबाहिर पिँढीमा राख्नुहोस्! (बाहिर)',
+    targetObject: 'dog',
+    targetPosition: 'outside_house',
+    targetZoneKey: 'house',
+    hint1En: 'Outside means in the garden or on the front veranda, not in the room.',
+    hint1Ne: 'बाहिर भनेको कोठाभित्र होइन, पिँढी वा हरियो बगैँचामा हो।',
+    hint2En: 'Place the dog outside the front doorway.',
+    hint2Ne: 'कुकुरलाई घरको ढोकाअगाडिको पिँढीमा राख्नुहोस्।',
+    successMessageEn: 'Great job! The faithful dog is sitting outside on the veranda (बाहिर)!',
+    successMessageNe: 'धेरै राम्रो! कुकुर घरबाहिर पिँढीमा (बाहिर) बसेको छ!',
+  },
+  {
+    id: 'm1_t3',
+    mode: 1,
+    titleEn: 'Ball Inside the Basket',
+    titleNe: 'बल टोकरीभित्र',
+    instructionEn: 'Put the red play ball INSIDE the woven bamboo basket (डोको)! (भित्र)',
+    instructionNe: 'रातो बललाई बाँसको टोकरीभित्र राख्नुहोस्! (भित्र)',
+    targetObject: 'ball',
+    targetPosition: 'inside_basket',
+    targetZoneKey: 'basket',
+    hint1En: 'Drag the red ball into the opening of the round bamboo basket.',
+    hint1Ne: 'रातो बललाई बाँसको टोकरीको मुखभित्र हाल्नुहोस्।',
+    hint2En: 'The basket sits in the garden. Drop the ball right inside.',
+    hint2Ne: 'टोकरी बगैँचामा छ। बललाई टोकरीको भित्र खसाल्नुहोस्।',
+    successMessageEn: 'Excellent! The ball is stored inside the basket (भित्र)!',
+    successMessageNe: 'उत्कृष्ट! बल बाँसको टोकरीभित्र (भित्र) राखियो!',
+  },
+  {
+    id: 'm1_t4',
+    mode: 1,
+    titleEn: 'Teddy Bear Inside the Toy Box',
+    titleNe: 'गुडिया बाकसभित्र',
+    instructionEn: 'Put the cuddly teddy bear INSIDE the wooden toy box! (भित्र)',
+    instructionNe: 'गुडियालाई काठको खेलौना बाकसभित्र राख्नुहोस्! (भित्र)',
+    targetObject: 'teddy',
+    targetPosition: 'inside_box',
+    targetZoneKey: 'box',
+    hint1En: 'The wooden toy box has a hinged lid. Place the teddy bear into the box.',
+    hint1Ne: 'काठको बाकसको ढक्कन खुल्छ। गुडियालाई बाकसभित्र हाल्नुहोस्।',
+    hint2En: 'Move the teddy over the wooden box and drop it inside.',
+    hint2Ne: 'गुडियालाई बाकसको भित्री भागमा राख्नुहोस्।',
+    successMessageEn: 'Well done! The teddy bear is neatly packed inside the toy box (भित्र)!',
+    successMessageNe: 'सबास! गुडिया बाकसभित्र (भित्र) सुरक्षित भयो!',
+  },
+  {
+    id: 'm1_t5',
+    mode: 1,
+    titleEn: 'Toy Car Outside on the Path',
+    titleNe: 'खेलौना गाडी बाहिर बाटोमा',
+    instructionEn: 'Put the little toy car OUTSIDE on the grassy path! (बाहिर)',
+    instructionNe: 'खेलौना गाडीलाई बाकसबाहिर घाँसमा राख्नुहोस्! (बाहिर)',
+    targetObject: 'toyCar',
+    targetPosition: 'outside_box',
+    targetZoneKey: 'box',
+    hint1En: 'Take the car out of any container and place it outside on the lawn.',
+    hint1Ne: 'गाडीलाई कुनै बाकसमा नराखी बाहिर हरियो घाँसमा राख्नुहोस्।',
+    hint2En: 'Outside means open ground in the sunny playground.',
+    hint2Ne: 'बाहिर भनेको खुला जमिनमा हो।',
+    successMessageEn: 'Super! The toy car is zooming outside on the lawn (बाहिर)!',
+    successMessageNe: 'अति राम्रो! गाडी बाहिर घाँसमा (बाहिर) गुड्न तयार छ!',
+  },
+];
+
+export const MODE_2_ABOVE_BELOW_TASKS: SpatialPlaygroundTask[] = [
+  {
+    id: 'm2_t1',
+    mode: 2,
+    titleEn: 'Bird Above the Pine Tree',
+    titleNe: 'चरा रूखमाथि',
+    instructionEn: 'Fly the blue mountain bird ABOVE the tall pine tree! (माथि)',
+    instructionNe: 'नीलो चरालाई अग्लो सल्लाको रूखमाथि उडाउनुहोस्! (माथि)',
+    targetObject: 'bird',
+    targetPosition: 'above_tree',
+    targetZoneKey: 'tree',
+    hint1En: 'Above means higher in altitude. Move the bird up near the tree canopy.',
+    hint1Ne: 'माथि भनेको उचाइमा हो। चरालाई रूखको माथिल्लो हाँगातिर लैजानुहोस्।',
+    hint2En: 'Perch the bird on top of the green pine tree.',
+    hint2Ne: 'चरालाई रूखको टुप्पोमा माथि राख्नुहोस्।',
+    successMessageEn: 'Wonderful! The blue bird is singing high above the tree (माथि)!',
+    successMessageNe: 'सबास! नीलो चरा रूखको माथि (माथि) सुरिलो गाउँदै छ!',
+  },
+  {
+    id: 'm2_t2',
+    mode: 2,
+    titleEn: 'Rabbit Below the Tree',
+    titleNe: 'खरायो रूखमुनि तल',
+    instructionEn: 'Put the white rabbit on the ground BELOW the tree! (तल)',
+    instructionNe: 'सेतो खरायोलाई रूखको छहारीमुनि तल राख्नुहोस्! (तल)',
+    targetObject: 'rabbit',
+    targetPosition: 'below_tree',
+    targetZoneKey: 'tree',
+    hint1En: 'Below means under the green branches on the cool grass.',
+    hint1Ne: 'तल भनेको जमिनमा छहारीमुनि हो। खरायोलाई रूखको फेदमा राख्नुहोस्।',
+    hint2En: 'The rabbit rests beneath the tall branches on the ground.',
+    hint2Ne: 'खरायो रूखमुनि घाँसमा बस्छ।',
+    successMessageEn: 'Perfect! The rabbit is resting coolly below the tree branches (तल)!',
+    successMessageNe: 'धेरै राम्रो! खरायो रूखमुनि तल (तल) आनन्दले बस्यो!',
+  },
+  {
+    id: 'm2_t3',
+    mode: 2,
+    titleEn: 'Water Pitcher Above the Table',
+    titleNe: 'गाग्री टेबलमाथि',
+    instructionEn: 'Place the brass water pitcher (गाग्री) ABOVE on the wooden table! (माथि)',
+    instructionNe: 'पित्तलको गाग्रीलाई काठको टेबलमाथि राख्नुहोस्! (माथि)',
+    targetObject: 'waterPot',
+    targetPosition: 'above_table',
+    targetZoneKey: 'table_above',
+    hint1En: 'Above the table means sitting upon the flat wooden tabletop.',
+    hint1Ne: 'टेबलमाथि भनेको टेबलको माथिल्लो काठको सतहमा हो।',
+    hint2En: 'Rest the pot right on top of the study table.',
+    hint2Ne: 'गाग्रीलाई टेबलको माथि राख्नुहोस्।',
+    successMessageEn: 'Splendid! The traditional pitcher is proudly placed above the table (माथि)!',
+    successMessageNe: 'उत्कृष्ट! गाग्री टेबलमाथि (माथि) सुरक्षित छ!',
+  },
+  {
+    id: 'm2_t4',
+    mode: 2,
+    titleEn: 'School Bag Below the Table',
+    titleNe: 'झोला टेबलमुनि तल',
+    instructionEn: 'Put the blue school bag BELOW the study table! (तल)',
+    instructionNe: 'नीलो स्कुल झोलालाई टेबलमुनि तल राख्नुहोस्! (तल)',
+    targetObject: 'bag',
+    targetPosition: 'below_table',
+    targetZoneKey: 'table_below',
+    hint1En: 'Below means under the wooden table surface on the ground.',
+    hint1Ne: 'तल भनेको टेबलको काठमुनि जमिनको भागमा हो।',
+    hint2En: 'Slide the backpack underneath the four table legs.',
+    hint2Ne: 'झोलालाई टेबलको मुनि जमिनमा राख्नुहोस्।',
+    successMessageEn: 'Great! The school bag is neatly stored below the table (तल)!',
+    successMessageNe: 'सबास! स्कुल झोला टेबलमुनि तल (तल) राखियो!',
+  },
+  {
+    id: 'm2_t5',
+    mode: 2,
+    titleEn: 'Butterfly Above the Flower',
+    titleNe: 'पुतली फूलमाथि',
+    instructionEn: 'Fly the bright butterfly ABOVE the yellow sunflower! (माथि)',
+    instructionNe: 'रङ्गीबिरङ्गी पुतलीलाई पहेँलो फूलमाथि उडाउनुहोस्! (माथि)',
+    targetObject: 'butterfly',
+    targetPosition: 'above_flower',
+    targetZoneKey: 'flower',
+    hint1En: 'Above the flower means hovering over its golden petals.',
+    hint1Ne: 'फूलमाथि भनेको फूलको पहेँलो पत्रदलभन्दा माथि हावामा हो।',
+    hint2En: 'Fly the butterfly right above the blooming flower in the garden.',
+    hint2Ne: 'पुतलीलाई बगैँचाको ठूलो फूलमाथि उडाउनुहोस्।',
+    successMessageEn: 'Magical! The colorful butterfly is dancing above the sunflower (माथि)!',
+    successMessageNe: 'अति सुन्दर! पुतली पहेँलो फूलमाथि (माथि) उड्दै छ!',
+  },
+];
+
+export const MODE_4_FOLLOW_INSTRUCTION_TASKS: SpatialPlaygroundTask[] = [
+  ...MODE_1_INSIDE_OUTSIDE_TASKS.slice(0, 4),
+  ...MODE_2_ABOVE_BELOW_TASKS.slice(0, 4),
+];
+
+export const DISCOVERY_OBJECT_ITEMS = [
+  { id: 'cat', nameEn: 'Cat', nameNe: 'बिरालो', icon: '🐱', category: 'animal' },
+  { id: 'dog', nameEn: 'Dog', nameNe: 'कुकुर', icon: '🐶', category: 'animal' },
+  { id: 'bird', nameEn: 'Bird', nameNe: 'चरा', icon: '🐦', category: 'animal' },
+  { id: 'rabbit', nameEn: 'Rabbit', nameNe: 'खरायो', icon: '🐰', category: 'animal' },
+  { id: 'butterfly', nameEn: 'Butterfly', nameNe: 'पुतली', icon: '🦋', category: 'animal' },
+  { id: 'ball', nameEn: 'Ball', nameNe: 'बल', icon: '⚽', category: 'object' },
+  { id: 'teddy', nameEn: 'Teddy Bear', nameNe: 'गुडिया', icon: '🧸', category: 'object' },
+  { id: 'toyCar', nameEn: 'Toy Car', nameNe: 'गाडी', icon: '🚗', category: 'object' },
+  { id: 'waterPot', nameEn: 'Water Pot', nameNe: 'गाग्री', icon: '🏺', category: 'object' },
+  { id: 'bag', nameEn: 'School Bag', nameNe: 'झोला', icon: '🎒', category: 'object' },
+];
+
 export const PLAYGROUND_LEVELS: SimulationLevel[] = [
   // ── LEVEL 1: INSIDE AND OUTSIDE (भित्र र बाहिर) ───────────────
+
   {
     levelNumber: 1,
     titleEn: 'Inside and Outside',

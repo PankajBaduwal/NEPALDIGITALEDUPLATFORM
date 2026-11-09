@@ -1619,7 +1619,7 @@ const WorkspaceSplit = (() => {
   function safeEmbedSrc(src) {
     if (typeof src !== 'string') return '';
     // same-site pages only: catalogue player or Smart Board simulation pages
-    if (!/^\/(api\/v1\/[A-Za-z0-9._\/-]+|api\/[A-Za-z0-9._\/-]+|simulations\/[A-Za-z0-9._-]+\/play|smartboard\/[a-z0-9-]+\.html)(\?[^#]*)?$/i.test(src)) return '';
+    if (!/^\/(api\/v1\/[A-Za-z0-9._\/-]+|api\/[A-Za-z0-9._\/-]+|simulations\/[A-Za-z0-9._-]+\/play|smartboard\/(?:simulations\/)?[a-z0-9-]+\.html)(\?[^#]*)?$/i.test(src)) return '';
     return src;
   }
 
@@ -1667,7 +1667,7 @@ const WorkspaceSplit = (() => {
   function mountCsSimContent(p, container) {
     const id = p.id;
     container.innerHTML = `
-      <iframe src="dsa-simulation.html" style="width:100%;height:100%;border:none;background:#081329;" title="Computer Science Simulation Lab"></iframe>
+      <iframe src="simulations/dsa-simulation.html" style="width:100%;height:100%;border:none;background:#081329;" title="Computer Science Simulation Lab"></iframe>
     `;
   }
 

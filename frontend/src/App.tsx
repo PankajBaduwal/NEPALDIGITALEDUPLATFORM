@@ -22,6 +22,7 @@ const PrincipalDashboard = lazy(() => import('./pages/PrincipalDashboard').then(
 const HODDashboard = lazy(() => import('./pages/HODDashboard').then((m) => ({ default: m.HODDashboard })));
 const ClassTeacherDashboard = lazy(() => import('./pages/ClassTeacherDashboard').then((m) => ({ default: m.ClassTeacherDashboard })));
 const TeacherDashboard = lazy(() => import('./pages/TeacherDashboard').then((m) => ({ default: m.TeacherDashboard })));
+const EmbeddedSimulationPage = lazy(() => import('./pages/EmbeddedSimulationPage').then((m) => ({ default: m.EmbeddedSimulationPage })));
 const StudentDashboard = lazy(() => import('./pages/StudentDashboard').then((m) => ({ default: m.StudentDashboard })));
 
 const RouteLoading: React.FC = () => (
@@ -67,6 +68,8 @@ export const App: React.FC = () => {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/launchpad" element={<Navigate to="/login" replace />} />
+          {/* Bare page the Smart Board embeds to run a platform simulation (any signed-in user) */}
+          <Route path="/embed/simulation/:key" element={<ProtectedRoute><EmbeddedSimulationPage /></ProtectedRoute>} />
 
           {/* Protected Role Dashboards */}
           <Route

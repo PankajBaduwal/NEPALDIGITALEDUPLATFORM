@@ -44,6 +44,7 @@ export function buildMappingMatrix(docs: ExtractedDocument[]) {
 }
 
 export function writeNepalDataReports(snapshot: Snapshot, outDir: string) {
+  fs.mkdirSync(outDir, { recursive: true });
   const docs = [...snapshot.documents].sort(gradeSort);
   const generated = snapshot.generatedAt.replace('T', ' ').slice(0, 19) + ' UTC';
   const classified = docs.filter((d) => d.status === 'CLASSIFIED');
