@@ -1,4 +1,5 @@
 import React, { lazy } from 'react';
+import { findClass3Sim } from '../class3-math/registry';
 
 /** Class 2 Mathematics · lessons 1–17. Loaded only when a child opens one. Looked up by `componentKey` or `code`. */
 type Comp = React.ComponentType<{ onBackToLibrary: () => void; userRole?: string }>;
@@ -30,4 +31,4 @@ export const CLASS2_MATH: { code: string; key: string; Component: Comp }[] = [
 ];
 
 export const findClass2Sim = (componentKey?: string, code?: string) =>
-  CLASS2_MATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code));
+  CLASS2_MATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code)) || findClass3Sim(componentKey, code);
