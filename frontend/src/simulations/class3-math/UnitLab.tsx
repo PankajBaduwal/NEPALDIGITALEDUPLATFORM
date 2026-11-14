@@ -11,7 +11,7 @@ import { shuffle, rnd } from '../class1-math-kit/nepali';
 import { big as bigFmt, fmt, near } from './h3';
 
 export type Visual = 'jug' | 'ruler' | 'road' | 'scale' | 'hours' | 'minutes';
-export interface Pair { bigNp: string; bigEn: string; smallNp: string; smallEn: string; factor: number; max: number; step: number; visual: Visual; color: string }
+export interface Pair { bigNp: string; bigEn: string; smallNp: string; smallEn: string; factor: number; max: number; step: number; visual: Visual; color: string; bs?: string; ss?: string }
 export interface UnitCfg { code: string; chapter: number; titleNp: string; titleEn: string; pairs: Pair[]; hintNp: string; hintEn: string }
 interface Props { onBackToLibrary: () => void; userRole?: string }
 
@@ -32,11 +32,11 @@ const buildScene = (ctx: any, g: THREE.Group): SceneApi => {
       tag(`${bg} L + ${extra} mL`, 0, 7.4, 0);
     } else if (p.visual === 'ruler' || p.visual === 'road') {
       const isRoad = p.visual === 'road'; const L = 20; const bar = shadowed(new THREE.Mesh(new THREE.BoxGeometry(L, isRoad ? 0.1 : 0.15, isRoad ? 2.6 : 1.2), mat(isRoad ? '#475569' : '#fde68a', 0.7))); bar.position.set(0, 0.07, 0); g.add(bar);
-      for (let i = 0; i <= p.max; i++) { const x = -L / 2 + (L * i) / p.max; const m = shadowed(new THREE.Mesh(new THREE.BoxGeometry(0.12, isRoad ? 1.2 : 0.5, 0.12), mat(isRoad ? '#f8fafc' : '#7c2d12'))); m.position.set(x, isRoad ? 0.7 : 0.3, isRoad ? 1.6 : 0.7); g.add(m); const t = textSprite(`${i}${isRoad ? 'km' : 'm'}`, 1.3, { px: 44, w: 192, h: 96, bg: null, color: '#0f172a' }); t.position.set(x, isRoad ? 1.8 : 1.1, isRoad ? 1.6 : 0.7); g.add(t); }
+      for (let i = 0; i <= p.max; i++) { const x = -L / 2 + (L * i) / p.max; const m = shadowed(new THREE.Mesh(new THREE.BoxGeometry(0.12, isRoad ? 1.2 : 0.5, 0.12), mat(isRoad ? '#f8fafc' : '#7c2d12'))); m.position.set(x, isRoad ? 0.7 : 0.3, isRoad ? 1.6 : 0.7); g.add(m); const t = textSprite(`${i}${p.bs ?? (isRoad ? 'km' : 'm')}`, 1.3, { px: 44, w: 192, h: 96, bg: null, color: '#0f172a' }); t.position.set(x, isRoad ? 1.8 : 1.1, isRoad ? 1.6 : 0.7); g.add(t); }
       const x = -L / 2 + (L * total) / maxTotal;
       if (isRoad) { const car = new THREE.Group(); const body = shadowed(new THREE.Mesh(new THREE.BoxGeometry(2, 0.7, 1.1), mat('#ef4444', 0.4))); body.position.y = 0.6; car.add(body); const top = shadowed(new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.55, 1), mat('#fecaca', 0.4))); top.position.set(-0.1, 1.2, 0); car.add(top); [-0.6, 0.6].forEach((a) => [-0.55, 0.55].forEach((b) => { const w = shadowed(new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.2, 14), mat('#111827'))); w.rotation.x = Math.PI / 2; w.position.set(a, 0.3, b); car.add(w); })); car.position.set(x, 0, 0); g.add(car); carry = car; }
       else { const fill = shadowed(new THREE.Mesh(new THREE.BoxGeometry(Math.max(0.02, x + L / 2), 0.3, 0.8), mat(p.color, 0.4))); fill.position.set((x - L / 2) / 2, 0.3, 0); g.add(fill); }
-      tag(isRoad ? `${(total / p.factor).toFixed(total % p.factor ? 1 : 0)} km` : `${bg} m + ${extra} cm`, isRoad ? x : 0, 3, 0);
+      tag(isRoad ? `${(total / p.factor).toFixed(total % p.factor ? 1 : 0)} km` : `${bg} ${p.bs ?? 'm'} + ${extra} ${p.ss ?? 'cm'}`, isRoad ? x : 0, 3, 0);
     } else if (p.visual === 'scale') {
       const base = shadowed(new THREE.Mesh(new THREE.BoxGeometry(8, 0.3, 3), mat('#94a3b8', 0.5))); base.position.set(-3, 0.15, 0); g.add(base);
       for (let i = 0; i < bg; i++) { const b = shadowed(new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.2, 1.2), mat('#a16207', 0.7))); b.position.set(-5.5 + (i % 3) * 1.7, 0.9 + Math.floor(i / 3) * 1.25, 0); g.add(b); const t = textSprite('1 kg', 1, { px: 40, w: 160, h: 80, bg: null, color: '#fff' }); t.position.set(-5.5 + (i % 3) * 1.7, 0.9 + Math.floor(i / 3) * 1.25, 0.65); g.add(t); }

@@ -13,6 +13,7 @@
     "seed:class1": "tsx src/scripts/seedClassOneDemo.ts",
     "seed:class2-math": "tsx src/scripts/seedClass2Math.ts",
     "seed:class3-math": "tsx src/scripts/seedClass3Math.ts",
+    "seed:class4-math": "tsx src/scripts/seedClass4Math.ts",
     "seed:class1-math-ch11-22": "tsx src/scripts/seedClass1MathCh11to22.ts",
     "verify:class1": "tsx src/scripts/verifyClassOneDemo.ts",
     "reset:dhambojhi": "tsx src/scripts/resetDhambojhiDemoData.ts",
