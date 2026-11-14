@@ -1,6 +1,6 @@
 # Nepal Textbook Mapping Report
 
-Generated: 2026-11-02 12:34:58 UTC.
+Generated: 2026-11-14 06:54:42 UTC.
 
 Each row is one **logical subject** in one class. English-medium and Nepali-medium editions hang off the same subject record and are never two separate subjects. `Both media` is a language textbook used by every section regardless of medium.
 
@@ -190,15 +190,15 @@ A dash (—) means no PDF for that medium exists in `Nepal data/`. The library s
 
 | File | Type | Classes | Notes |
 | --- | --- | --- | --- |
-| Curriculum (T)/1694337718_jx35alj.pdf | CURRICULUM | 9–12 | Secondary Level School Curriculum (Technical and Vocational Stream) (Grade 9 - 12) Compute |
-| Curriculum (T)/Secondary Level School Curriculum (Grade 9 - 12) Animal Science (Technical and Vocational Stream)_f2y6v9d.pdf | CURRICULUM | 9–12 | Secondary Level School Curriculum (Technical and Vocational Stream) (Grade 9 - 12) Animal  |
-| Curriculum (T)/Secondary Level School Curriculum (Grade 9 - 12) Civil Engineering (Technical and Vocational Stream)_uoeeqaf.pdf | CURRICULUM | 9–12 | Secondary Level School Curriculum (Technical and Vocational Stream) (Grade 9 - 12) Civil E |
-| Curriculum (T)/Secondary Level School Curriculum (Grade 9 - 12) Electrical Engineering (Technical and Vocational Stream)_4shhbjz.pdf | CURRICULUM | 9–12 | Secondary Level School Curriculum (Technical and Vocational Stream) (Grade 9 - 12) Electri |
-| Curriculum (T)/संगीत शिक्षा कक्षा ९-१० (प्राविधिक तथा व्यावसायिक संकाय )_fqsjhai.pdf | CURRICULUM | 9–10 | 1 dfWolds txsf] kf7\ oj\|md -k\|fljlws tyf Jofj;floswf/_ ;ª\ uLt lzIff kf7\ oj\|md -sIff (–!) |
-| Teaching Materials/1.Vedabisayasya teacher shrot samagri new final 7.1.2025_6czytjd.pdf | TEACHER_RESOURCE | — | j]bljifo:o lzIf0f;\|f]tM;fdu\|L 1 g]kfn;j{sf/M lzIfflj1fgk\|ljlwdGqfnoM kf7\oj\|mdljsf;s]Gb\|d\ |
-| Teaching Materials/cultural resource final- शि. सन्द._kdmbtcu.pdf | TEACHER_RESOURCE | — | g]kfnL ;fdflhs ;f+: s[lts ljljwtf 1 g] kfnL ;fdflhs ;f+:s[lts ljljwtf 2 c:dfsd\ ;+:s[td\ s |
-| Teaching Materials/English Composition Grade 6 - 8 (सन्दर्भ एवम् स्व अध्ययन सामग्री)_ybx9l3r.pdf | TEACHER_RESOURCE | 6–8 | English Composition Grade 6-8 Government of Nepal Ministry of Education, Science and Techn |
-| Teaching Materials/English Composition Grade 9 - 12 (सन्दर्भ एवम् स्व अध्ययन सामग्री)_h2lkhrs.pdf | TEACHER_RESOURCE | 9–12 | English Composition Grade 9-12 Government of Nepal Ministry of Education, Science and Tech |
-| Teaching Materials/दोस्रो भाषाका रुपमा नेपाली भाषा सिकाइका लागि शिक्षण स्रोत सामग्री_8koizzj.pdf | TEACHER_RESOURCE | — | lzIf0f ;\|f]t;fdu\|L 1 lzIf0f ;\|f]t;fdu\|L bf];\|f] efiffsf ¿kdf g]kfnL efiff l;sfOsf nflu g]k |
-| Teaching Materials/प्रकाशन शैली (House Style)_2sbrcm7.pdf | TEACHER_RESOURCE | — | k\|sfzs g]kfn ;/sf/ lzIff, lj1fg tyf k\|ljlw dGqfno kf7\oj\|md ljsf; s]Gb\| ;fgf]l7dL, eStk'/  |
-| Teaching Materials/शिशु विकास केन्द्रका सहजकर्ता, अभिभावक तथा स्याहारकर्ताका लागि सहयोगी पुस्तिका_u6ntzlr.pdf | TEACHER_RESOURCE | — | k\|fSsyg k\|f/lDes afnljsf; / lzIffsf] kf7\oj\|mdn] afnaflnsfsf] ;jf{ª\uL0f ljsf; / afnaflnsf |
+| Curriculum (T)/1694337718_jx35alj.pdf | CURRICULUM | 9–12 | Secondary Level School Curriculum (Technical and Vocational Stream) (Grade 9 - 12) Computer Engineering 2078 |
+| Curriculum (T)/Secondary Level School Curriculum (Grade 9 - 12) Animal Science (Technical and Vocational Stream)_f2y6v9d.pdf | CURRICULUM | 9–12 | Secondary Level School Curriculum (Technical and Vocational Stream) (Grade 9 - 12) Animal Science 2078 |
+| Curriculum (T)/Secondary Level School Curriculum (Grade 9 - 12) Civil Engineering (Technical and Vocational Stream)_uoeeqaf.pdf | CURRICULUM | 9–12 | Secondary Level School Curriculum (Technical and Vocational Stream) (Grade 9 - 12) Civil Engineering 2078 |
+| Curriculum (T)/Secondary Level School Curriculum (Grade 9 - 12) Electrical Engineering (Technical and Vocational Stream)_4shhbjz.pdf | CURRICULUM | 9–12 | Secondary Level School Curriculum (Technical and Vocational Stream) (Grade 9 - 12) Electrical Engineering 2078 |
+| Curriculum (T)/संगीत शिक्षा कक्षा ९-१० (प्राविधिक तथा व्यावसायिक संकाय )_fqsjhai.pdf | CURRICULUM | 9–10 | संगीत शिक्षा कक्षा ९-१० (प्राविधिक तथा व्यावसायिक संकाय ) |
+| Teaching Materials/1.Vedabisayasya teacher shrot samagri new final 7.1.2025_6czytjd.pdf | TEACHER_RESOURCE | — | 1.Vedabisayasya teacher shrot samagri new final 7.1.2025 |
+| Teaching Materials/cultural resource final- शि. सन्द._kdmbtcu.pdf | TEACHER_RESOURCE | — | cultural resource final- शि. सन्द. |
+| Teaching Materials/English Composition Grade 6 - 8 (सन्दर्भ एवम् स्व अध्ययन सामग्री)_ybx9l3r.pdf | TEACHER_RESOURCE | 6–8 | English Composition Grade 6-8 |
+| Teaching Materials/English Composition Grade 9 - 12 (सन्दर्भ एवम् स्व अध्ययन सामग्री)_h2lkhrs.pdf | TEACHER_RESOURCE | 9–12 | English Composition Grade 9-12 |
+| Teaching Materials/दोस्रो भाषाका रुपमा नेपाली भाषा सिकाइका लागि शिक्षण स्रोत सामग्री_8koizzj.pdf | TEACHER_RESOURCE | — | दोस्रो भाषाका रुपमा नेपाली भाषा सिकाइका लागि शिक्षण स्रोत सामग्री |
+| Teaching Materials/प्रकाशन शैली (House Style)_2sbrcm7.pdf | TEACHER_RESOURCE | — | प्रकाशन शैली (House Style) |
+| Teaching Materials/शिशु विकास केन्द्रका सहजकर्ता, अभिभावक तथा स्याहारकर्ताका लागि सहयोगी पुस्तिका_u6ntzlr.pdf | TEACHER_RESOURCE | — | शिशु विकास केन्द्रका सहजकर्ता, अभिभावक तथा स्याहारकर्ताका लागि सहयोगी पुस्तिका |

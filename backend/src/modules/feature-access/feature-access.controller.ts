@@ -5,9 +5,11 @@ import { FEATURE_DEFINITIONS, FeatureKey } from '../../models/FeatureAccess';
 
 // Features the student / teacher dashboards can hide. Each lists the registry keys that must ALL be on.
 const DASHBOARD_FEATURES: Record<string, { student: FeatureKey[]; teacher: FeatureKey[] }> = {
+  STUDENT_DASHBOARD: { student: [FeatureKey.STUDENT_DASHBOARD], teacher: [FeatureKey.STUDENT_DASHBOARD] },
   ASSIGNMENTS: { student: [FeatureKey.ASSIGNMENTS], teacher: [FeatureKey.ASSIGNMENTS] },
   QUIZZES: { student: [FeatureKey.QUIZZES], teacher: [FeatureKey.QUIZZES] },
   NOTES: { student: [FeatureKey.NOTES], teacher: [FeatureKey.NOTES] },
+  VIDEOS: { student: [FeatureKey.VIDEOS], teacher: [FeatureKey.VIDEOS] },
   MATERIALS: { student: [FeatureKey.MATERIALS], teacher: [FeatureKey.MATERIALS] },
   SIMULATIONS: { student: [FeatureKey.SIMULATIONS], teacher: [FeatureKey.SIMULATIONS] },
   AI: { student: [FeatureKey.AI_ASSISTANT, FeatureKey.AI_STUDENT_ACCESS], teacher: [FeatureKey.AI_ASSISTANT, FeatureKey.AI_TEACHER_ACCESS] },
@@ -37,22 +39,39 @@ export class FeatureAccessController {
         for (const a of allocs) if (a.sectionId && !seen.has(String(a.sectionId))) { seen.add(String(a.sectionId)); contexts.push({ sectionId: String(a.sectionId), classId: a.classId ? String(a.classId) : undefined }); }
         for (const l of led) if (!seen.has(String(l._id))) { seen.add(String(l._id)); contexts.push({ sectionId: String(l._id), classId: l.classId ? String(l.classId) : undefined }); }
       }
-      if (contexts.length === 0) return res.json({ success: true, data: { disabled: [] } });
-
-      const disabled: string[] = [];
-      for (const [name, def] of Object.entries(DASHBOARD_FEATURES)) {
-        let onSomewhere = false;
-        for (const ctx of contexts) {
-          let on = true;
-          for (const key of def[role]) {
-            const r = await FeatureAccessService.resolveFeatureAccess({ institutionId, featureKey: key, ...ctx });
-            if (!r.effectiveEnabled) { on = false; break; }
+      if (contexts.length === 0) {
+        // Teacher has no assigned sections yet; evaluate at institution level
+        const off = new Set<string>();
+        for (const [name, def] of Object.entries(DASHBOARD_FEATURES)) {
+          const keys = def[role];
+          if (!keys.length) continue;
+          for (const key of keys) {
+            const r = await FeatureAccessService.resolveFeatureAccess({ institutionId, featureKey: key });
+            if (!r.effectiveEnabled) { off.add(name); break; }
           }
-          if (on) { onSomewhere = true; break; }
         }
-        if (!onSomewhere) disabled.push(name);
+        return res.json({ success: true, data: { disabled: Array.from(off), bySection: {} } });
       }
-      res.json({ success: true, data: { disabled } });
+
+      // what is switched off in each context (a student's own class, or each section a teacher teaches)
+      const offIn: Array<{ sectionId?: string; off: Set<string> }> = [];
+      for (const ctx of contexts) {
+        const off = new Set<string>();
+        for (const [name, def] of Object.entries(DASHBOARD_FEATURES)) {
+          const keys = def[role];
+          if (!keys.length) continue;
+          for (const key of keys) {
+            const r = await FeatureAccessService.resolveFeatureAccess({ institutionId, featureKey: key, ...ctx });
+            if (!r.effectiveEnabled) { off.add(name); break; }
+          }
+        }
+        offIn.push({ sectionId: ctx.sectionId, off });
+      }
+      // a feature is "off" overall only when it is off in every context
+      const disabled = Object.keys(DASHBOARD_FEATURES).filter((name) => offIn.length > 0 && offIn.every((c) => c.off.has(name)));
+      const bySection: Record<string, string[]> = {};
+      for (const c of offIn) if (c.sectionId) bySection[c.sectionId] = Array.from(c.off);
+      res.json({ success: true, data: { disabled, bySection } });
     } catch (err) {
       next(err);
     }

@@ -16,6 +16,7 @@ import { ThemeToggle } from './components/common/ThemeToggle';
 const InstitutionRegistrationPage = lazy(() => import('./pages/public/InstitutionRegistrationPage').then((m) => ({ default: m.InstitutionRegistrationPage })));
 const InstitutionRegistrationStatusPage = lazy(() => import('./pages/public/InstitutionRegistrationStatusPage').then((m) => ({ default: m.InstitutionRegistrationStatusPage })));
 const Launchpad = lazy(() => import('./pages/Launchpad').then((m) => ({ default: m.Launchpad })));
+const SuperAdminSchoolPage = lazy(() => import('./pages/SuperAdminSchoolPage').then((m) => ({ default: m.SuperAdminSchoolPage })));
 const SuperAdminDashboard = lazy(() => import('./pages/SuperAdminDashboard').then((m) => ({ default: m.SuperAdminDashboard })));
 const SchoolAdminDashboard = lazy(() => import('./pages/SchoolAdminDashboard').then((m) => ({ default: m.SchoolAdminDashboard })));
 const PrincipalDashboard = lazy(() => import('./pages/PrincipalDashboard').then((m) => ({ default: m.PrincipalDashboard })));
@@ -72,6 +73,14 @@ export const App: React.FC = () => {
           <Route path="/embed/simulation/:key" element={<ProtectedRoute><EmbeddedSimulationPage /></ProtectedRoute>} />
 
           {/* Protected Role Dashboards */}
+          <Route
+            path="/super-admin/school/:id"
+            element={
+              <ProtectedRoute allowedRoles={['SUPER_ADMIN']}>
+                <SuperAdminSchoolPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/super-admin/*"
             element={

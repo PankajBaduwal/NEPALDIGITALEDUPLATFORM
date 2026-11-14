@@ -19,8 +19,9 @@ export class ClassTeacherController {
     try {
       const { sectionId } = req.params;
       const institutionId = req.institutionId || req.user?.institutionId;
-      const examName = req.query.examName as string | undefined;
-      const data = await ClassTeacherService.getConsolidatedResults(req.user!.userId, sectionId, institutionId!.toString(), examName, req.user?.role);
+      // the page sends the examination id (examinationId); a name or code (examName) still works for older callers
+      const examRef = (req.query.examinationId as string | undefined) || (req.query.examName as string | undefined);
+      const data = await ClassTeacherService.getConsolidatedResults(req.user!.userId, sectionId, institutionId!.toString(), examRef, req.user?.role);
       return ApiResponse.success(res, data, 'Consolidated section marksheet loaded');
     } catch (err) {
       next(err);

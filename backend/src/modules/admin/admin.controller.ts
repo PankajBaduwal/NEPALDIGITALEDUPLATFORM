@@ -48,6 +48,34 @@ export class AdminController {
     }
   }
 
+  static async getInstitutionInsights(req: Request, res: Response, next: NextFunction) {
+    try {
+      const data = await AdminService.getInstitutionInsights(req.params.id);
+      return ApiResponse.success(res, data, 'Institution insights loaded');
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getStudentAccess(req: Request, res: Response, next: NextFunction) {
+    try {
+      return ApiResponse.success(res, await AdminService.getStudentAccess(req.params.id), 'Student dashboard access loaded');
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async setStudentAccess(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+    try {
+      const { scope, classId, enabled } = req.body || {};
+      if (scope !== 'SCHOOL' && scope !== 'CLASS') return ApiResponse.error(res, 'scope must be SCHOOL or CLASS', 400, 'VALIDATION_ERROR');
+      const data = await AdminService.setStudentAccess({ institutionId: req.params.id, scope, classId, enabled: Boolean(enabled), userId: req.user?.userId || 'SYSTEM' });
+      return ApiResponse.success(res, data, 'Student dashboard access updated');
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async createInstitution(req: AuthenticatedRequest, res: Response, next: NextFunction) {
     try {
       const result = await AdminService.createInstitution(req.body, {

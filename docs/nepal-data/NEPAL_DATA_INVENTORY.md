@@ -1,6 +1,6 @@
 # Nepal Data — PDF Inventory
 
-Generated: 2026-11-02 12:34:58 UTC by `npm run curriculum:extract` (backend/src/scripts/extractNepalData.ts).
+Generated: 2026-11-14 06:54:42 UTC by `npm run curriculum:extract` (backend/src/scripts/extractNepalData.ts).
 
 Every file below was opened and hashed. Nothing in this list is inferred from an expected folder layout.
 

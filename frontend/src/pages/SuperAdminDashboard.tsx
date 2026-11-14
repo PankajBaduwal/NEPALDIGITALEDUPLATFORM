@@ -3,8 +3,10 @@ import { UserManagementPanel } from '@/components/admin/UserManagementPanel';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
+import { usePersistentState } from '../hooks/usePersistentState';
 import {
   Building2,
+  School,
   Users,
   BookOpen,
   Atom,
@@ -74,7 +76,7 @@ import { formatTime } from '../utils/dates';
 export const SuperAdminDashboard: React.FC = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'OVERVIEW' | 'INSTITUTIONS' | 'REQUESTS' | 'PROVISIONING_HISTORY' | 'IMPORT' | 'USERS' | 'LIBRARY' | 'CURRICULUM' | 'SIMULATIONS' | 'SUBSCRIPTIONS' | 'AI_INDEX' | 'SECURITY' | 'PLATFORM'>('OVERVIEW');
+  const [activeTab, setActiveTab] = usePersistentState<'OVERVIEW' | 'INSTITUTIONS' | 'REQUESTS' | 'PROVISIONING_HISTORY' | 'IMPORT' | 'USERS' | 'LIBRARY' | 'CURRICULUM' | 'SIMULATIONS' | 'SUBSCRIPTIONS' | 'AI_INDEX' | 'SECURITY' | 'PLATFORM'>('superadmin.tab', 'OVERVIEW');
   const [isProvisioningWizardOpen, setIsProvisioningWizardOpen] = useState(false);
   const [selectedInstForManage, setSelectedInstForManage] = useState<string | null>(null);
   const [isManageModalOpen, setIsManageModalOpen] = useState(false);
@@ -205,6 +207,10 @@ export const SuperAdminDashboard: React.FC = () => {
   }, [activeTab]);
 
   useEffect(() => {
+    if ((activeTab as string) === 'CURRICULUM') setActiveTab('LIBRARY'); // the two curriculum pages are now one
+  }, []);
+
+  useEffect(() => {
     loadDashboardData();
     const interval = setInterval(() => {
       loadDashboardData(true);
@@ -213,7 +219,7 @@ export const SuperAdminDashboard: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (activeTab === 'CURRICULUM') {
+    if (activeTab === 'LIBRARY') {
       loadCurriculumData();
     }
     if (activeTab === 'SIMULATIONS') {
@@ -653,13 +659,46 @@ export const SuperAdminDashboard: React.FC = () => {
     };
   }, [instPage, debouncedSearch, filterProvince]);
 
-  const NAV_GROUPS: Array<{ label: string; items: Array<{ key: typeof activeTab; label: string; icon: React.ComponentType<any> }> }> = [
-    { label: 'Overview', items: [{ key: 'OVERVIEW', label: 'Central Overview', icon: Building2 }, { key: 'PLATFORM', label: 'Platform Operations', icon: TrendingUp }] },
-    { label: 'Institutions', items: [{ key: 'INSTITUTIONS', label: 'Institutions Directory', icon: Building2 }, { key: 'REQUESTS', label: 'Registration Requests', icon: ShieldCheck }, { key: 'PROVISIONING_HISTORY', label: 'Provisioning Audit Logs', icon: Clock }, { key: 'IMPORT', label: 'Bulk Onboarding', icon: FileSpreadsheet }] },
-    { label: 'Curriculum & Learning', items: [{ key: 'LIBRARY', label: 'Nepal Curriculum & Textbook Library', icon: Layers }, { key: 'CURRICULUM', label: 'Textbook Uploads & Chapters', icon: BookOpen }, { key: 'SIMULATIONS', label: 'Simulations & Activities', icon: Sparkles }, { key: 'AI_INDEX', label: 'AI Knowledge Index', icon: BookCheck }] },
-    { label: 'Administration', items: [{ key: 'USERS', label: 'Users & Audit Log', icon: Users }, { key: 'SUBSCRIPTIONS', label: 'Subscriptions & Licensing', icon: CreditCard }, { key: 'SECURITY', label: 'Account Security', icon: ShieldCheck }] },
+  const getSuperAdminSection = (tab: string): 'OVERVIEW' | 'INSTITUTIONS' | 'CURRICULUM' | 'ADMINISTRATION' => {
+    if (tab === 'OVERVIEW') return 'OVERVIEW';
+    if (['INSTITUTIONS', 'REQUESTS', 'PROVISIONING_HISTORY', 'IMPORT'].includes(tab)) return 'INSTITUTIONS';
+    if (['LIBRARY', 'CURRICULUM', 'SIMULATIONS', 'AI_INDEX'].includes(tab)) return 'CURRICULUM';
+    if (['USERS', 'SUBSCRIPTIONS', 'SECURITY', 'PLATFORM'].includes(tab)) return 'ADMINISTRATION';
+    return 'OVERVIEW';
+  };
+
+  const TAB_METADATA: Record<string, { group: string; label: string }> = {
+    OVERVIEW: { group: 'Central Command', label: 'Executive Overview' },
+    INSTITUTIONS: { group: 'Institutions Management', label: 'Institutions Directory' },
+    REQUESTS: { group: 'Institutions Management', label: 'Self-Registration Requests Queue' },
+    PROVISIONING_HISTORY: { group: 'Institutions Management', label: 'Provisioning Audit Logs' },
+    IMPORT: { group: 'Institutions Management', label: 'Bulk Institution Onboarding' },
+    LIBRARY: { group: 'Curriculum & Learning', label: 'National Curriculum & Textbooks' },
+    CURRICULUM: { group: 'Curriculum & Learning', label: 'National Curriculum & Textbooks' },
+    SIMULATIONS: { group: 'Curriculum & Learning', label: '3D Simulations & Interactive Activities' },
+    AI_INDEX: { group: 'Curriculum & Learning', label: 'AI Semantic Knowledge Index' },
+    USERS: { group: 'Platform Administration', label: 'Users & Audit Logs' },
+    SUBSCRIPTIONS: { group: 'Platform Administration', label: 'Subscriptions & Licensing' },
+    SECURITY: { group: 'Platform Administration', label: 'Account Security & Access Control' },
+    PLATFORM: { group: 'Platform Administration', label: 'Platform Operations & Infrastructure' },
+  };
+
+  const currentNav = TAB_METADATA[activeTab] || { group: 'Super Admin', label: 'Dashboard' };
+  const currentSection = getSuperAdminSection(activeTab);
+  const pendingReqCount = Number(stats?.requests?.pending || stats?.stats?.pendingRequests || 0);
+
+  const PRIMARY_SECTIONS: Array<{
+    key: 'OVERVIEW' | 'INSTITUTIONS' | 'CURRICULUM' | 'ADMINISTRATION';
+    label: string;
+    icon: React.ComponentType<any>;
+    defaultTab: typeof activeTab;
+    badge: number;
+  }> = [
+    { key: 'OVERVIEW', label: 'Central Overview', icon: Building2, defaultTab: 'OVERVIEW', badge: 0 },
+    { key: 'INSTITUTIONS', label: 'Institutions Hub', icon: School, defaultTab: 'INSTITUTIONS', badge: pendingReqCount },
+    { key: 'CURRICULUM', label: 'Curriculum & Learning', icon: Layers, defaultTab: 'LIBRARY', badge: 0 },
+    { key: 'ADMINISTRATION', label: 'Platform Administration', icon: ShieldCheck, defaultTab: 'USERS', badge: 0 },
   ];
-  const currentNav = NAV_GROUPS.flatMap((g) => g.items.map((i) => ({ ...i, group: g.label }))).find((i) => i.key === activeTab);
 
   // Escape closes the slide-in menu on small screens
   useEffect(() => {
@@ -681,33 +720,33 @@ export const SuperAdminDashboard: React.FC = () => {
           <div style={{ fontSize: '11px', color: '#5f736f', fontWeight: 700, marginTop: '8px', letterSpacing: '0.04em' }}>Central Super Admin</div>
         </div>
 
-        <nav aria-label="Sections" style={{ flex: 1, padding: '16px 10px', display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto' }}>
-          {NAV_GROUPS.map((g) => (
-            <div key={g.label}>
-              <div className="sa-nav-label">{g.label}</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', marginTop: '2px' }}>
-                {g.items.map((it) => {
-                  const active = activeTab === it.key;
-                  const Icon = it.icon;
-                  const badge = it.key === 'REQUESTS' ? Number(stats?.requests?.pending || stats?.stats?.pendingRequests || 0) : 0;
-                  return (
-                    <button
-                      key={it.key}
-                      type="button"
-                      className={`sa-nav-item${active ? ' is-active' : ''}`}
-                      aria-current={active ? 'page' : undefined}
-                      aria-label={badge ? `${it.label}, ${badge} pending` : undefined}
-                      onClick={() => setActiveTab(it.key)}
-                    >
-                      <Icon size={18} aria-hidden="true" />
-                      <span className="sa-nav-text">{it.label}</span>
-                      {badge > 0 && <span className="sa-nav-badge">{badge}</span>}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+        <nav aria-label="Sections" style={{ flex: 1, padding: '16px 12px', display: 'flex', flexDirection: 'column', gap: '6px', overflowY: 'auto' }}>
+          <div style={{ padding: '0 8px 6px', fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#8da19d' }}>
+            Main Command
+          </div>
+          {PRIMARY_SECTIONS.map((sec) => {
+            const isSelected = currentSection === sec.key;
+            const Icon = sec.icon;
+            return (
+              <button
+                key={sec.key}
+                type="button"
+                className={`sa-nav-item${isSelected ? ' is-active' : ''}`}
+                aria-current={isSelected ? 'page' : undefined}
+                aria-label={sec.badge ? `${sec.label}, ${sec.badge} pending` : undefined}
+                onClick={() => {
+                  if (currentSection !== sec.key) {
+                    setActiveTab(sec.defaultTab);
+                  }
+                  if (navOpen) setNavOpen(false);
+                }}
+              >
+                <Icon size={18} aria-hidden="true" />
+                <span className="sa-nav-text">{sec.label}</span>
+                {sec.badge > 0 && <span className="sa-nav-badge">{sec.badge}</span>}
+              </button>
+            );
+          })}
         </nav>
 
         <div style={{ padding: '16px', borderTop: '1px solid #dcebe6', background: '#f4faf8' }}>
@@ -823,47 +862,6 @@ export const SuperAdminDashboard: React.FC = () => {
               </button>
             )}
 
-            {activeTab === 'CURRICULUM' && (
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <button
-                  onClick={handleScanAndIngest}
-                  disabled={isIngesting}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    background: '#117a6b',
-                    color: '#ffffff',
-                    padding: '8px 16px',
-                    borderRadius: '8px',
-                    fontSize: '13px',
-                    fontWeight: '700',
-                  }}
-                  title="Scan & ingest all 141 CDC textbooks from Nepal data folder"
-                >
-                  <RefreshCw size={16} className={isIngesting ? 'animate-spin' : ''} />
-                  {isIngesting ? 'Ingesting CDC Data...' : '⚡ Scan & Ingest 141 CDC Books'}
-                </button>
-
-                <button
-                  onClick={() => setIsUploadModalOpen(true)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    background: '#117a6b',
-                    color: '#ffffff',
-                    padding: '8px 16px',
-                    borderRadius: '8px',
-                    fontSize: '13px',
-                    fontWeight: '700',
-                  }}
-                >
-                  <UploadCloud size={16} /> Upload Textbook PDF
-                </button>
-              </div>
-            )}
-
             {activeTab === 'SIMULATIONS' && (
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button
@@ -913,6 +911,178 @@ export const SuperAdminDashboard: React.FC = () => {
         </div>
 
         <div className="sa-content" style={{ padding: '32px', flex: 1 }}>
+          {/* Sub-tabs for Institutions Hub */}
+          {currentSection === 'INSTITUTIONS' && (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: '#ffffff',
+              padding: '6px 10px',
+              borderRadius: '12px',
+              border: '1px solid #e2e8f0',
+              marginBottom: '24px',
+              overflowX: 'auto',
+              WebkitOverflowScrolling: 'touch',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.03)'
+            }}>
+              {[
+                { key: 'INSTITUTIONS', label: 'Institutions Directory', icon: Building2 },
+                { key: 'REQUESTS', label: 'Registration Requests', icon: ShieldCheck, badge: pendingReqCount, badgeColor: '#6d5bd0' },
+                { key: 'PROVISIONING_HISTORY', label: 'Provisioning History', icon: Clock },
+                { key: 'IMPORT', label: 'Bulk Onboarding', icon: FileSpreadsheet },
+              ].map((t) => {
+                const isSelected = activeTab === t.key;
+                const Icon = t.icon;
+                return (
+                  <button
+                    key={t.key}
+                    type="button"
+                    onClick={() => setActiveTab(t.key as any)}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '7px',
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      fontSize: '12.5px',
+                      fontWeight: isSelected ? 800 : 600,
+                      background: isSelected ? '#117a6b' : 'transparent',
+                      color: isSelected ? '#ffffff' : '#475569',
+                      border: isSelected ? '1px solid #117a6b' : '1px solid transparent',
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                      transition: 'all 0.15s ease',
+                      boxShadow: isSelected ? '0 2px 6px rgba(17,122,107,0.2)' : 'none',
+                    }}
+                  >
+                    <Icon size={15} color={isSelected ? '#ffffff' : '#64748b'} />
+                    <span>{t.label}</span>
+                    {t.badge !== undefined && t.badge > 0 && (
+                      <span
+                        style={{
+                          fontSize: '10.5px',
+                          padding: '1px 7px',
+                          borderRadius: '999px',
+                          background: isSelected ? 'rgba(255,255,255,0.25)' : (t.badgeColor || '#6d5bd0'),
+                          color: '#ffffff',
+                          fontWeight: 800,
+                        }}
+                      >
+                        {t.badge}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Sub-tabs for Curriculum & Learning */}
+          {currentSection === 'CURRICULUM' && (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: '#ffffff',
+              padding: '6px 10px',
+              borderRadius: '12px',
+              border: '1px solid #e2e8f0',
+              marginBottom: '24px',
+              overflowX: 'auto',
+              WebkitOverflowScrolling: 'touch',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.03)'
+            }}>
+              {[
+                { key: 'LIBRARY', label: 'Curriculum & Textbook Library', icon: Layers },
+                { key: 'SIMULATIONS', label: 'Simulations & Activities', icon: Sparkles },
+                { key: 'AI_INDEX', label: 'AI Knowledge Index', icon: BookCheck },
+              ].map((t) => {
+                const isSelected = activeTab === t.key || (t.key === 'LIBRARY' && activeTab === 'CURRICULUM');
+                const Icon = t.icon;
+                return (
+                  <button
+                    key={t.key}
+                    type="button"
+                    onClick={() => setActiveTab(t.key as any)}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '7px',
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      fontSize: '12.5px',
+                      fontWeight: isSelected ? 800 : 600,
+                      background: isSelected ? '#117a6b' : 'transparent',
+                      color: isSelected ? '#ffffff' : '#475569',
+                      border: isSelected ? '1px solid #117a6b' : '1px solid transparent',
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                      transition: 'all 0.15s ease',
+                      boxShadow: isSelected ? '0 2px 6px rgba(17,122,107,0.2)' : 'none',
+                    }}
+                  >
+                    <Icon size={15} color={isSelected ? '#ffffff' : '#64748b'} />
+                    <span>{t.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Sub-tabs for Platform Administration */}
+          {currentSection === 'ADMINISTRATION' && (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: '#ffffff',
+              padding: '6px 10px',
+              borderRadius: '12px',
+              border: '1px solid #e2e8f0',
+              marginBottom: '24px',
+              overflowX: 'auto',
+              WebkitOverflowScrolling: 'touch',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.03)'
+            }}>
+              {[
+                { key: 'USERS', label: 'Users & Audit Log', icon: Users },
+                { key: 'SUBSCRIPTIONS', label: 'Subscriptions & Licensing', icon: CreditCard },
+                { key: 'SECURITY', label: 'Account Security', icon: ShieldCheck },
+                { key: 'PLATFORM', label: 'Platform Operations', icon: TrendingUp },
+              ].map((t) => {
+                const isSelected = activeTab === t.key;
+                const Icon = t.icon;
+                return (
+                  <button
+                    key={t.key}
+                    type="button"
+                    onClick={() => setActiveTab(t.key as any)}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '7px',
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      fontSize: '12.5px',
+                      fontWeight: isSelected ? 800 : 600,
+                      background: isSelected ? '#117a6b' : 'transparent',
+                      color: isSelected ? '#ffffff' : '#475569',
+                      border: isSelected ? '1px solid #117a6b' : '1px solid transparent',
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                      transition: 'all 0.15s ease',
+                      boxShadow: isSelected ? '0 2px 6px rgba(17,122,107,0.2)' : 'none',
+                    }}
+                  >
+                    <Icon size={15} color={isSelected ? '#ffffff' : '#64748b'} />
+                    <span>{t.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
           {/* TAB 1: OVERVIEW */}
           {activeTab === 'OVERVIEW' && loading && !stats && (
             <div aria-busy="true" aria-label="Loading overview">
@@ -1576,7 +1746,7 @@ export const SuperAdminDashboard: React.FC = () => {
                   </h3>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
                     <div
-                      onClick={() => setActiveTab('CURRICULUM')}
+                      onClick={() => setActiveTab('LIBRARY')}
                       style={{ border: '1px solid #dcebe6', borderRadius: '10px', padding: '16px', cursor: 'pointer', background: '#f4faf8', transition: 'all 0.15s ease' }}
                     >
                       <div style={{ fontWeight: '800', fontSize: '13px', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '8px', color: '#0e3e3b' }}>
@@ -1678,8 +1848,7 @@ export const SuperAdminDashboard: React.FC = () => {
                         <td style={{ padding: '12px 16px' }}>
                           <div
                             onClick={() => {
-                              setSelectedInstForManage(inst.id || inst._id);
-                              setIsManageModalOpen(true);
+                              navigate(`/super-admin/school/${inst.id || inst._id}`);
                             }}
                             style={{
                               fontWeight: '700',
@@ -1716,8 +1885,7 @@ export const SuperAdminDashboard: React.FC = () => {
                         <td style={{ padding: '12px 16px', textAlign: 'right' }}>
                           <button
                             onClick={() => {
-                              setSelectedInstForManage(inst.id || inst._id);
-                              setIsManageModalOpen(true);
+                              navigate(`/super-admin/school/${inst.id || inst._id}`);
                             }}
                             style={{
                               display: 'inline-flex',
@@ -1770,57 +1938,19 @@ export const SuperAdminDashboard: React.FC = () => {
           {activeTab === 'IMPORT' && <BulkInstitutionImport onDone={() => loadDashboardData()} />}
 
           {/* TAB 4: CURRICULUM & DIGITAL TEXTBOOKS */}
-          {activeTab === 'LIBRARY' && <CurriculumLibraryPanel />}
-
-          {activeTab === 'CURRICULUM' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
-                <button
-                  onClick={() => setIsUploadModalOpen(true)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '8px 16px',
-                    background: '#117a6b',
-                    color: '#ffffff',
-                    border: 'none',
-                    borderRadius: '8px',
-                    fontSize: '13px',
-                    fontWeight: '700',
-                    cursor: 'pointer',
-                  }}
-                >
-                  <Plus size={16} /> Upload New CDC Textbook PDF
-                </button>
-                <button
-                  onClick={handleScanAndIngest}
-                  disabled={isIngesting}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '8px 16px',
-                    background: '#f4faf8',
-                    color: '#0e3e3b',
-                    border: '1px solid #cfdcd8',
-                    borderRadius: '8px',
-                    fontSize: '13px',
-                    fontWeight: '700',
-                    cursor: isIngesting ? 'not-allowed' : 'pointer',
-                  }}
-                >
-                  <RefreshCw size={14} className={isIngesting ? 'animate-spin' : ''} />
-                  <span>{isIngesting ? 'Scanning Nepal data/…' : 'Re-sync Nepal data/ Folder'}</span>
-                </button>
-              </div>
-
-              <ClassTextbookBrowser
-                theme="blue"
-                title="Super Admin: Classes 1–12 Digital Textbook & Curriculum PDF Management"
-                subtitle="Browse, inspect, and read all official national textbooks across Classes 1–12 stored in the Nepal data/ folders with English and Nepali medium sorting."
-              />
-            </div>
+          {activeTab === 'LIBRARY' && (
+            <CurriculumLibraryPanel
+              textbooksView={
+                <ClassTextbookBrowser
+                  theme="blue"
+                  title="Classes 1–12 Digital Textbook & Curriculum PDF Management"
+                  subtitle="Browse, inspect, and read all official national textbooks across Classes 1–12 stored in the Nepal data/ folders with English and Nepali medium sorting."
+                  onUpload={() => setIsUploadModalOpen(true)}
+                  onSync={handleScanAndIngest}
+                  isSyncing={isIngesting}
+                />
+              }
+            />
           )}
 
           {/* TAB 5: SIMULATIONS & INTERACTIVE ACTIVITIES (PHASE 7) */}

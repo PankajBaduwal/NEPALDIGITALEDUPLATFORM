@@ -4,6 +4,7 @@ import { useLiveRefresh } from '../services/realtime';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
+import { usePersistentState } from '../hooks/usePersistentState';
 import { Siren, UserMinus, MonitorPlay, Stamp } from 'lucide-react';
 import { EmergencyAlertPanel, TeacherCoverPanel, LiveClassroomsPanel, SchoolDocumentsPanel } from '../components/principal/PrincipalOperations';
 import {
@@ -81,11 +82,10 @@ export const PrincipalDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   // Navigation tabs organized into logical academic groups
-  const [activeTab, setActiveTab] = useState<
+  const [activeTab, setActiveTab] = usePersistentState<
     | 'OVERVIEW'
     | 'INSTITUTION_PROFILE'
     | 'ACADEMIC_CALENDAR'
-    | 'FEATURE_ACCESS'
     | 'ACADEMIC_PERFORMANCE'
     | 'TEXTBOOKS'
     | 'CURRICULUM_COVERAGE'
@@ -110,7 +110,20 @@ export const PrincipalDashboard: React.FC = () => {
     | 'SCHOOL_DOCUMENTS'
     | 'APPROVALS'
     | 'PROFILE'
-  >('OVERVIEW');
+  >('principal.tab', 'OVERVIEW');
+
+  const getPrimarySection = (tab: string): 'OVERVIEW' | 'ACADEMICS' | 'FACULTY' | 'STUDENTS' | 'ASSESSMENTS' | 'OPERATIONS' | 'COMMUNICATIONS' | 'GOVERNANCE' | 'PROFILE' => {
+    if (tab === 'OVERVIEW') return 'OVERVIEW';
+    if (['ACADEMIC_PERFORMANCE', 'TEXTBOOKS', 'CURRICULUM_COVERAGE', 'CLASS_PERFORMANCE', 'SUBJECT_PERFORMANCE', 'FEATURE_ACCESS', 'ACADEMICS'].includes(tab)) return 'ACADEMICS';
+    if (['TEACHERS', 'TEACHER_WORKLOAD', 'CLASS_TEACHER_ASSIGNMENT', 'STAFF_COVER', 'FACULTY'].includes(tab)) return 'FACULTY';
+    if (['STUDENTS', 'AT_RISK_STUDENTS', 'STUDENT_ATTENDANCE'].includes(tab)) return 'STUDENTS';
+    if (['ASSIGNMENTS_OVERVIEW', 'QUIZ_OVERVIEW', 'EXAM_RESULTS', 'EVALUATION_PROGRESS', 'ASSESSMENTS'].includes(tab)) return 'ASSESSMENTS';
+    if (['TIMETABLE_OVERVIEW', 'LIVE_CLASSROOMS', 'ACADEMIC_CALENDAR', 'OPERATIONS'].includes(tab)) return 'OPERATIONS';
+    if (['ANNOUNCEMENTS', 'EMERGENCY_ALERTS', 'COMMUNICATIONS'].includes(tab)) return 'COMMUNICATIONS';
+    if (['APPROVALS', 'REPORTS', 'SCHOOL_DOCUMENTS', 'INSTITUTION_PROFILE', 'GOVERNANCE'].includes(tab)) return 'GOVERNANCE';
+    if (tab === 'PROFILE') return 'PROFILE';
+    return 'OVERVIEW';
+  };
 
   // Core Data States
   const [loading, setLoading] = useState(true);
@@ -127,8 +140,6 @@ export const PrincipalDashboard: React.FC = () => {
   const [loadWarnings, setLoadWarnings] = useState<string[]>([]);
   const [studentsList, setStudentsList] = useState<any[]>([]);
   const [classesList, setClassesList] = useState<any[]>([]);
-  const [featureMatrix, setFeatureMatrix] = useState<any>(null);
-  const [featureMatrixLoading, setFeatureMatrixLoading] = useState(false);
   const [selectedSectionId, setSelectedSectionId] = useState<string>('');
   const [selectedSectionName, setSelectedSectionName] = useState<string>('');
   const [subjectsList, setSubjectsList] = useState<any[]>([]);
@@ -657,35 +668,7 @@ export const PrincipalDashboard: React.FC = () => {
   }, [user]);
 
   useEffect(() => {
-    if (activeTab === 'FEATURE_ACCESS') {
-      loadPrincipalFeatureMatrix();
-    }
   }, [activeTab]);
-
-  const loadPrincipalFeatureMatrix = async () => {
-    setFeatureMatrixLoading(true);
-    try {
-      const response = await api.get('/feature-access/matrix');
-      setFeatureMatrix(response?.data || response || null);
-    } catch (error: any) {
-      alert(error.message || 'Failed to load class feature settings.');
-    } finally {
-      setFeatureMatrixLoading(false);
-    }
-  };
-
-  const togglePrincipalClassFeature = async (classId: string, featureKey: string, enabled: boolean) => {
-    try {
-      await api.put(`/feature-access/classes/${classId}`, {
-        featureKey,
-        enabled: !enabled,
-        reason: 'Class feature setting changed by Principal',
-      });
-      await loadPrincipalFeatureMatrix();
-    } catch (error: any) {
-      alert(error.message || 'Failed to update class feature setting.');
-    }
-  };
 
   const loadAllPrincipalData = async (silent = false) => {
     if (!silent) setLoading(true);
@@ -1180,227 +1163,135 @@ export const PrincipalDashboard: React.FC = () => {
             flexShrink: 0,
           }}
         >
-          <div className="p-3 space-y-4">
-            {/* Helper for ultra-clean sidebar items */}
+          <div style={{ padding: '14px 12px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <div style={{ padding: '0 8px 8px 8px', fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#94a3b8' }}>
+              Academic Supervision
+            </div>
             {(() => {
-              const renderItem = (
-                itemKey: string,
-                label: string,
-                IconComponent: React.ElementType,
-                badge?: number | string,
-                badgeColor?: string
-              ) => {
-                const isActive = activeTab === itemKey;
+              const currentSection = getPrimarySection(activeTab);
+
+              const sidebarSections: {
+                sectionKey: 'OVERVIEW' | 'ACADEMICS' | 'FACULTY' | 'STUDENTS' | 'ASSESSMENTS' | 'OPERATIONS' | 'COMMUNICATIONS' | 'GOVERNANCE';
+                defaultTab: any;
+                label: string;
+                icon: React.ElementType;
+                badge?: number | string;
+                badgeColor?: string;
+              }[] = [
+                {
+                  sectionKey: 'OVERVIEW',
+                  defaultTab: 'OVERVIEW',
+                  label: 'Executive Overview',
+                  icon: School,
+                },
+                {
+                  sectionKey: 'ACADEMICS',
+                  defaultTab: 'ACADEMIC_PERFORMANCE',
+                  label: 'Academics & Curriculum',
+                  icon: BookOpenCheck,
+                },
+                {
+                  sectionKey: 'FACULTY',
+                  defaultTab: 'TEACHERS',
+                  label: 'Faculty & Workload',
+                  icon: Users,
+                },
+                {
+                  sectionKey: 'STUDENTS',
+                  defaultTab: 'STUDENTS',
+                  label: 'Students & Attendance',
+                  icon: GraduationCap,
+                  badge: (analyticsData?.atRiskStudents?.length || 0) > 0 ? analyticsData.atRiskStudents.length : undefined,
+                  badgeColor: '#ef4444',
+                },
+                {
+                  sectionKey: 'ASSESSMENTS',
+                  defaultTab: 'EXAM_RESULTS',
+                  label: 'Examinations & Assessments',
+                  icon: Award,
+                },
+                {
+                  sectionKey: 'OPERATIONS',
+                  defaultTab: 'TIMETABLE_OVERVIEW',
+                  label: 'Operations & Timetable',
+                  icon: Clock,
+                },
+                {
+                  sectionKey: 'COMMUNICATIONS',
+                  defaultTab: 'ANNOUNCEMENTS',
+                  label: 'Communications & Notices',
+                  icon: Megaphone,
+                },
+                {
+                  sectionKey: 'GOVERNANCE',
+                  defaultTab: pendingApprovals.length > 0 ? 'APPROVALS' : 'REPORTS',
+                  label: 'Governance & Approvals',
+                  icon: ShieldCheck,
+                  badge: pendingApprovals.length > 0 ? pendingApprovals.length : undefined,
+                  badgeColor: '#6d5bd0',
+                },
+              ];
+
+              return sidebarSections.map((item) => {
+                const isSelected = currentSection === item.sectionKey;
+                const IconComponent = item.icon;
                 return (
                   <button
-                    key={itemKey}
-                    onClick={() => setActiveTab(itemKey as any)}
+                    key={item.sectionKey}
+                    onClick={() => {
+                      if (currentSection !== item.sectionKey) {
+                        setActiveTab(item.defaultTab);
+                      }
+                    }}
                     style={{
                       width: '100%',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '10px',
-                      padding: '9px 12px',
+                      padding: '10px 12px',
                       borderRadius: '10px',
-                      fontSize: '12px',
-                      fontWeight: isActive ? 800 : 600,
+                      fontSize: '13px',
+                      fontWeight: isSelected ? 800 : 600,
                       transition: 'all 0.15s ease',
                       cursor: 'pointer',
-                      background: isActive ? '#effaf6' : 'transparent',
-                      color: isActive ? '#0f5f55' : '#4b605b',
-                      border: isActive ? '1px solid #bfeede' : '1px solid transparent',
-                      borderLeft: isActive ? '4px solid #117a6b' : '4px solid transparent',
+                      background: isSelected ? '#effaf6' : 'transparent',
+                      color: isSelected ? '#0f5f55' : '#475569',
+                      border: isSelected ? '1px solid #bfeede' : '1px solid transparent',
+                      borderLeft: isSelected ? '4px solid #117a6b' : '4px solid transparent',
                       textAlign: 'left',
-                      boxShadow: isActive ? '0 1px 3px rgba(17, 122, 107, 0.08)' : 'none',
+                      boxShadow: isSelected ? '0 1px 3px rgba(17, 122, 107, 0.08)' : 'none',
                     }}
-                    className={!isActive ? 'hover:bg-slate-50 hover:text-slate-900' : ''}
+                    className={!isSelected ? 'hover:bg-slate-50 hover:text-slate-900' : ''}
                   >
-                    <IconComponent size={16} color={isActive ? '#117a6b' : '#8da19d'} style={{ flexShrink: 0 }} />
+                    <IconComponent size={17} color={isSelected ? '#117a6b' : '#64748b'} style={{ flexShrink: 0 }} />
                     <span style={{ flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {label}
+                      {item.label}
                     </span>
-                    {badge !== undefined && (
+                    {item.badge !== undefined && (
                       <span
                         style={{
                           marginLeft: 'auto',
                           padding: '2px 7px',
                           borderRadius: '9999px',
-                          fontSize: '10px',
+                          fontSize: '10.5px',
                           fontWeight: 800,
-                          background: badgeColor || '#117a6b',
+                          background: item.badgeColor || '#117a6b',
                           color: '#ffffff',
                           flexShrink: 0,
                         }}
                       >
-                        {badge}
+                        {item.badge}
                       </span>
                     )}
                   </button>
                 );
-              };
-
-              return (
-                <>
-                  {/* Group 1: OVERVIEW & LEADERSHIP */}
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => toggleSidebarGroup('overview')}
-                      className="w-full px-3 py-1.5 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition rounded-lg hover:bg-slate-50"
-                    >
-                      <span>Overview & Leadership</span>
-                      <ChevronDown
-                        size={13}
-                        className={`transition-transform duration-200 ${collapsedGroups['overview'] ? '-rotate-90' : ''}`}
-                      />
-                    </button>
-                    {!collapsedGroups['overview'] && (
-                      <div className="space-y-0.5 mt-1">
-                        {renderItem('OVERVIEW', 'Executive Overview', School)}
-                        {renderItem('INSTITUTION_PROFILE', 'Institution Profile', Layers)}
-                        {renderItem('ACADEMIC_CALENDAR', 'Academic Calendar', Calendar)}
-                        {renderItem('PROFILE', 'Profile & Security', UserCheck)}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Group 2: ACADEMIC SUPERVISION */}
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => toggleSidebarGroup('academic')}
-                      className="w-full px-3 py-1.5 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition rounded-lg hover:bg-slate-50"
-                    >
-                      <span>Academic Supervision</span>
-                      <ChevronDown
-                        size={13}
-                        className={`transition-transform duration-200 ${collapsedGroups['academic'] ? '-rotate-90' : ''}`}
-                      />
-                    </button>
-                    {!collapsedGroups['academic'] && (
-                      <div className="space-y-0.5 mt-1">
-                        {renderItem('ACADEMIC_PERFORMANCE', 'Academic Performance', TrendingUp)}
-                        {renderItem('TEXTBOOKS', 'Classes 1–12 Textbooks & PDFs', BookOpenCheck)}
-                        {renderItem('CURRICULUM_COVERAGE', 'Curriculum Pacing (1–12)', BookOpen)}
-                        {renderItem('CLASS_PERFORMANCE', 'Class & Section Results', Layers)}
-                        {renderItem('SUBJECT_PERFORMANCE', 'Subject Performance', Award)}
-                        {renderItem('TIMETABLE_OVERVIEW', 'Institutional Timetable', Clock)}
-                        {renderItem('FEATURE_ACCESS', 'Class Learning Access', Sliders)}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Group 3: FACULTY & WORKLOAD */}
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => toggleSidebarGroup('faculty')}
-                      className="w-full px-3 py-1.5 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition rounded-lg hover:bg-slate-50"
-                    >
-                      <span>Faculty & Workload</span>
-                      <ChevronDown
-                        size={13}
-                        className={`transition-transform duration-200 ${collapsedGroups['faculty'] ? '-rotate-90' : ''}`}
-                      />
-                    </button>
-                    {!collapsedGroups['faculty'] && (
-                      <div className="space-y-0.5 mt-1">
-                        {renderItem('TEACHERS', 'Faculty Directory & Evaluation', Users)}
-                        {renderItem('TEACHER_WORKLOAD', 'Teaching Periods & Workload', BarChart2)}
-                        {renderItem('CLASS_TEACHER_ASSIGNMENT', 'Class Teacher Designation', UserCheck)}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Group 4: STUDENT MONITORING */}
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => toggleSidebarGroup('student')}
-                      className="w-full px-3 py-1.5 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition rounded-lg hover:bg-slate-50"
-                    >
-                      <span>Student Monitoring</span>
-                      <ChevronDown
-                        size={13}
-                        className={`transition-transform duration-200 ${collapsedGroups['student'] ? '-rotate-90' : ''}`}
-                      />
-                    </button>
-                    {!collapsedGroups['student'] && (
-                      <div className="space-y-0.5 mt-1">
-                        {renderItem('STUDENTS', 'Enrolled Student Registry', GraduationCap)}
-                        {renderItem(
-                          'AT_RISK_STUDENTS',
-                          'At-Risk & Remedial Alerts',
-                          AlertTriangle,
-                          analyticsData?.atRiskStudents?.length ?? 0,
-                          '#ef4444'
-                        )}
-                        {renderItem('STUDENT_ATTENDANCE', 'Attendance Logs & Trends', CheckSquare)}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Group 5: ASSESSMENTS & STUDIOS */}
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => toggleSidebarGroup('assessments')}
-                      className="w-full px-3 py-1.5 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition rounded-lg hover:bg-slate-50"
-                    >
-                      <span>Assessments & Studios</span>
-                      <ChevronDown
-                        size={13}
-                        className={`transition-transform duration-200 ${collapsedGroups['assessments'] ? '-rotate-90' : ''}`}
-                      />
-                    </button>
-                    {!collapsedGroups['assessments'] && (
-                      <div className="space-y-0.5 mt-1">
-                        {renderItem('ASSIGNMENTS_OVERVIEW', 'Assignment Studio Oversight', FileText)}
-                        {renderItem('QUIZ_OVERVIEW', 'Quiz & Exam Assessment', Award)}
-                        {renderItem('EXAM_RESULTS', 'Terminal Marks & Results', ShieldCheck)}
-                        {renderItem('EVALUATION_PROGRESS', 'Faculty Evaluation Tracker', Clock)}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Group 6: GOVERNANCE & REPORTS */}
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => toggleSidebarGroup('governance')}
-                      className="w-full px-3 py-1.5 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition rounded-lg hover:bg-slate-50"
-                    >
-                      <span>Governance & Reports</span>
-                      <ChevronDown
-                        size={13}
-                        className={`transition-transform duration-200 ${collapsedGroups['governance'] ? '-rotate-90' : ''}`}
-                      />
-                    </button>
-                    {!collapsedGroups['governance'] && (
-                      <div className="space-y-0.5 mt-1">
-                        {renderItem(
-                          'APPROVALS',
-                          'Academic Approvals',
-                          ShieldAlert,
-                          pendingApprovals.length,
-                          '#6d5bd0'
-                        )}
-                        {renderItem('REPORTS', 'Institutional Reports', Download)}
-                        {renderItem('ANNOUNCEMENTS', 'School Announcements', Megaphone)}
-                        {renderItem('EMERGENCY_ALERTS', 'Emergency Alerts', Siren)}
-                        {renderItem('STAFF_COVER', 'Absence & Cover', UserMinus)}
-                        {renderItem('LIVE_CLASSROOMS', 'Live Classrooms', MonitorPlay)}
-                        {renderItem('SCHOOL_DOCUMENTS', 'Reports, Stamp & Certificates', Stamp)}
-                      </div>
-                    )}
-                  </div>
-                </>
-              );
+              });
             })()}
           </div>
 
-          <div className="p-3 border-t border-slate-100 bg-slate-50/50 text-[11px] text-slate-400 text-center">
-            Nepal CDC Ecosystem v2.4 • Supervisory Authority
+          <div style={{ padding: '14px', borderTop: '1px solid #f1f5f9', background: '#f8fafc', fontSize: '11px', color: '#94a3b8', textAlign: 'center' }}>
+            <div style={{ fontWeight: 700, color: '#475569' }}>Nepal CDC Ecosystem</div>
+            <div style={{ fontSize: '10.5px', marginTop: '2px' }}>Principal Leadership Portal</div>
           </div>
         </aside>
 
@@ -1418,6 +1309,410 @@ export const PrincipalDashboard: React.FC = () => {
               <button onClick={() => loadAllPrincipalData()} className="font-bold underline">Retry</button>
             </div>
           )}
+
+          {/* ── UNIFIED IN-PAGE SUB-TAB BAR ─────────────────────────── */}
+          {(() => {
+            const currentSection = getPrimarySection(activeTab);
+
+            if (currentSection === 'ACADEMICS') {
+              return (
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: '#ffffff',
+                  padding: '6px 10px',
+                  borderRadius: '12px',
+                  border: '1px solid #e2e8f0',
+                  marginBottom: '20px',
+                  overflowX: 'auto',
+                  WebkitOverflowScrolling: 'touch',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)'
+                }}>
+                  {[
+                    { key: 'ACADEMIC_PERFORMANCE', label: 'Performance Analytics', icon: TrendingUp },
+                    { key: 'TEXTBOOKS', label: 'Digital Textbooks (1–12)', icon: BookOpenCheck },
+                    { key: 'CURRICULUM_COVERAGE', label: 'Curriculum Pacing', icon: BookOpen },
+                    { key: 'CLASS_PERFORMANCE', label: 'Class & Section Results', icon: Layers },
+                    { key: 'SUBJECT_PERFORMANCE', label: 'Subject Performance', icon: Award },
+                    { key: 'FEATURE_ACCESS', label: 'Feature Access Matrix', icon: Sliders },
+                  ].map(t => {
+                    const isSelected = activeTab === t.key;
+                    const Icon = t.icon;
+                    return (
+                      <button
+                        key={t.key}
+                        onClick={() => setActiveTab(t.key as any)}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '7px',
+                          padding: '8px 14px',
+                          borderRadius: '8px',
+                          fontSize: '12.5px',
+                          fontWeight: isSelected ? 800 : 600,
+                          background: isSelected ? '#0f766e' : 'transparent',
+                          color: isSelected ? '#ffffff' : '#475569',
+                          border: isSelected ? '1px solid #0f766e' : '1px solid transparent',
+                          cursor: 'pointer',
+                          whiteSpace: 'nowrap',
+                          transition: 'all 0.15s ease',
+                          boxShadow: isSelected ? '0 2px 6px rgba(15,118,110,0.2)' : 'none',
+                        }}
+                      >
+                        <Icon size={14} color={isSelected ? '#ffffff' : '#64748b'} />
+                        <span>{t.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              );
+            }
+
+            if (currentSection === 'FACULTY') {
+              return (
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: '#ffffff',
+                  padding: '6px 10px',
+                  borderRadius: '12px',
+                  border: '1px solid #e2e8f0',
+                  marginBottom: '20px',
+                  overflowX: 'auto',
+                  WebkitOverflowScrolling: 'touch',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)'
+                }}>
+                  {[
+                    { key: 'TEACHERS', label: 'Faculty Directory', icon: Users },
+                    { key: 'TEACHER_WORKLOAD', label: 'Workload & Periods', icon: BarChart2 },
+                    { key: 'CLASS_TEACHER_ASSIGNMENT', label: 'Class Teacher Designation', icon: UserCheck },
+                    { key: 'STAFF_COVER', label: 'Absence & Cover', icon: UserMinus },
+                  ].map(t => {
+                    const isSelected = activeTab === t.key;
+                    const Icon = t.icon;
+                    return (
+                      <button
+                        key={t.key}
+                        onClick={() => setActiveTab(t.key as any)}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '7px',
+                          padding: '8px 14px',
+                          borderRadius: '8px',
+                          fontSize: '12.5px',
+                          fontWeight: isSelected ? 800 : 600,
+                          background: isSelected ? '#0f766e' : 'transparent',
+                          color: isSelected ? '#ffffff' : '#475569',
+                          border: isSelected ? '1px solid #0f766e' : '1px solid transparent',
+                          cursor: 'pointer',
+                          whiteSpace: 'nowrap',
+                          transition: 'all 0.15s ease',
+                          boxShadow: isSelected ? '0 2px 6px rgba(15,118,110,0.2)' : 'none',
+                        }}
+                      >
+                        <Icon size={14} color={isSelected ? '#ffffff' : '#64748b'} />
+                        <span>{t.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              );
+            }
+
+            if (currentSection === 'STUDENTS') {
+              return (
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: '#ffffff',
+                  padding: '6px 10px',
+                  borderRadius: '12px',
+                  border: '1px solid #e2e8f0',
+                  marginBottom: '20px',
+                  overflowX: 'auto',
+                  WebkitOverflowScrolling: 'touch',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)'
+                }}>
+                  {[
+                    { key: 'STUDENTS', label: 'Student Registry', icon: GraduationCap },
+                    { key: 'STUDENT_ATTENDANCE', label: 'Attendance Records', icon: CheckSquare },
+                    { key: 'AT_RISK_STUDENTS', label: 'At-Risk & Remedial Alerts', icon: AlertTriangle, badge: analyticsData?.atRiskStudents?.length || 0, badgeColor: '#ef4444' },
+                  ].map(t => {
+                    const isSelected = activeTab === t.key;
+                    const Icon = t.icon;
+                    return (
+                      <button
+                        key={t.key}
+                        onClick={() => setActiveTab(t.key as any)}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '7px',
+                          padding: '8px 14px',
+                          borderRadius: '8px',
+                          fontSize: '12.5px',
+                          fontWeight: isSelected ? 800 : 600,
+                          background: isSelected ? '#0f766e' : 'transparent',
+                          color: isSelected ? '#ffffff' : '#475569',
+                          border: isSelected ? '1px solid #0f766e' : '1px solid transparent',
+                          cursor: 'pointer',
+                          whiteSpace: 'nowrap',
+                          transition: 'all 0.15s ease',
+                          boxShadow: isSelected ? '0 2px 6px rgba(15,118,110,0.2)' : 'none',
+                        }}
+                      >
+                        <Icon size={14} color={isSelected ? '#ffffff' : '#64748b'} />
+                        <span>{t.label}</span>
+                        {t.badge !== undefined && t.badge > 0 && (
+                          <span
+                            style={{
+                              fontSize: '10.5px',
+                              padding: '1px 6px',
+                              borderRadius: '999px',
+                              background: isSelected ? 'rgba(255,255,255,0.25)' : t.badgeColor,
+                              color: '#ffffff',
+                              fontWeight: 800,
+                            }}
+                          >
+                            {t.badge}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              );
+            }
+
+            if (currentSection === 'ASSESSMENTS') {
+              return (
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: '#ffffff',
+                  padding: '6px 10px',
+                  borderRadius: '12px',
+                  border: '1px solid #e2e8f0',
+                  marginBottom: '20px',
+                  overflowX: 'auto',
+                  WebkitOverflowScrolling: 'touch',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)'
+                }}>
+                  {[
+                    { key: 'EXAM_RESULTS', label: 'Terminal Marks & Results', icon: ShieldCheck },
+                    { key: 'ASSIGNMENTS_OVERVIEW', label: 'Assignments Oversight', icon: FileText },
+                    { key: 'QUIZ_OVERVIEW', label: 'Quiz Assessments', icon: Award },
+                    { key: 'EVALUATION_PROGRESS', label: 'Teacher Evaluation Tracker', icon: Clock },
+                  ].map(t => {
+                    const isSelected = activeTab === t.key;
+                    const Icon = t.icon;
+                    return (
+                      <button
+                        key={t.key}
+                        onClick={() => setActiveTab(t.key as any)}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '7px',
+                          padding: '8px 14px',
+                          borderRadius: '8px',
+                          fontSize: '12.5px',
+                          fontWeight: isSelected ? 800 : 600,
+                          background: isSelected ? '#0f766e' : 'transparent',
+                          color: isSelected ? '#ffffff' : '#475569',
+                          border: isSelected ? '1px solid #0f766e' : '1px solid transparent',
+                          cursor: 'pointer',
+                          whiteSpace: 'nowrap',
+                          transition: 'all 0.15s ease',
+                          boxShadow: isSelected ? '0 2px 6px rgba(15,118,110,0.2)' : 'none',
+                        }}
+                      >
+                        <Icon size={14} color={isSelected ? '#ffffff' : '#64748b'} />
+                        <span>{t.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              );
+            }
+
+            if (currentSection === 'OPERATIONS') {
+              return (
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: '#ffffff',
+                  padding: '6px 10px',
+                  borderRadius: '12px',
+                  border: '1px solid #e2e8f0',
+                  marginBottom: '20px',
+                  overflowX: 'auto',
+                  WebkitOverflowScrolling: 'touch',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)'
+                }}>
+                  {[
+                    { key: 'TIMETABLE_OVERVIEW', label: 'Institutional Timetable', icon: Clock },
+                    { key: 'LIVE_CLASSROOMS', label: 'Live Classrooms', icon: MonitorPlay },
+                    { key: 'ACADEMIC_CALENDAR', label: 'Academic Calendar', icon: Calendar },
+                  ].map(t => {
+                    const isSelected = activeTab === t.key;
+                    const Icon = t.icon;
+                    return (
+                      <button
+                        key={t.key}
+                        onClick={() => setActiveTab(t.key as any)}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '7px',
+                          padding: '8px 14px',
+                          borderRadius: '8px',
+                          fontSize: '12.5px',
+                          fontWeight: isSelected ? 800 : 600,
+                          background: isSelected ? '#0f766e' : 'transparent',
+                          color: isSelected ? '#ffffff' : '#475569',
+                          border: isSelected ? '1px solid #0f766e' : '1px solid transparent',
+                          cursor: 'pointer',
+                          whiteSpace: 'nowrap',
+                          transition: 'all 0.15s ease',
+                          boxShadow: isSelected ? '0 2px 6px rgba(15,118,110,0.2)' : 'none',
+                        }}
+                      >
+                        <Icon size={14} color={isSelected ? '#ffffff' : '#64748b'} />
+                        <span>{t.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              );
+            }
+
+            if (currentSection === 'COMMUNICATIONS') {
+              return (
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: '#ffffff',
+                  padding: '6px 10px',
+                  borderRadius: '12px',
+                  border: '1px solid #e2e8f0',
+                  marginBottom: '20px',
+                  overflowX: 'auto',
+                  WebkitOverflowScrolling: 'touch',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)'
+                }}>
+                  {[
+                    { key: 'ANNOUNCEMENTS', label: 'School Announcements', icon: Megaphone },
+                    { key: 'EMERGENCY_ALERTS', label: 'Emergency Alerts', icon: Siren },
+                  ].map(t => {
+                    const isSelected = activeTab === t.key;
+                    const Icon = t.icon;
+                    return (
+                      <button
+                        key={t.key}
+                        onClick={() => setActiveTab(t.key as any)}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '7px',
+                          padding: '8px 14px',
+                          borderRadius: '8px',
+                          fontSize: '12.5px',
+                          fontWeight: isSelected ? 800 : 600,
+                          background: isSelected ? '#0f766e' : 'transparent',
+                          color: isSelected ? '#ffffff' : '#475569',
+                          border: isSelected ? '1px solid #0f766e' : '1px solid transparent',
+                          cursor: 'pointer',
+                          whiteSpace: 'nowrap',
+                          transition: 'all 0.15s ease',
+                          boxShadow: isSelected ? '0 2px 6px rgba(15,118,110,0.2)' : 'none',
+                        }}
+                      >
+                        <Icon size={14} color={isSelected ? '#ffffff' : '#64748b'} />
+                        <span>{t.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              );
+            }
+
+            if (currentSection === 'GOVERNANCE') {
+              return (
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: '#ffffff',
+                  padding: '6px 10px',
+                  borderRadius: '12px',
+                  border: '1px solid #e2e8f0',
+                  marginBottom: '20px',
+                  overflowX: 'auto',
+                  WebkitOverflowScrolling: 'touch',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)'
+                }}>
+                  {[
+                    { key: 'APPROVALS', label: 'Pending Approvals', icon: ShieldAlert, badge: pendingApprovals.length, badgeColor: '#6d5bd0' },
+                    { key: 'SCHOOL_DOCUMENTS', label: 'Reports, Stamp & Certificates', icon: Stamp },
+                    { key: 'REPORTS', label: 'Institutional Reports', icon: Download },
+                    { key: 'INSTITUTION_PROFILE', label: 'Institution Profile', icon: Layers },
+                  ].map(t => {
+                    const isSelected = activeTab === t.key;
+                    const Icon = t.icon;
+                    return (
+                      <button
+                        key={t.key}
+                        onClick={() => setActiveTab(t.key as any)}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '7px',
+                          padding: '8px 14px',
+                          borderRadius: '8px',
+                          fontSize: '12.5px',
+                          fontWeight: isSelected ? 800 : 600,
+                          background: isSelected ? '#0f766e' : 'transparent',
+                          color: isSelected ? '#ffffff' : '#475569',
+                          border: isSelected ? '1px solid #0f766e' : '1px solid transparent',
+                          cursor: 'pointer',
+                          whiteSpace: 'nowrap',
+                          transition: 'all 0.15s ease',
+                          boxShadow: isSelected ? '0 2px 6px rgba(15,118,110,0.2)' : 'none',
+                        }}
+                      >
+                        <Icon size={14} color={isSelected ? '#ffffff' : '#64748b'} />
+                        <span>{t.label}</span>
+                        {t.badge !== undefined && t.badge > 0 && (
+                          <span
+                            style={{
+                              fontSize: '10.5px',
+                              padding: '1px 6px',
+                              borderRadius: '999px',
+                              background: isSelected ? 'rgba(255,255,255,0.25)' : t.badgeColor,
+                              color: '#ffffff',
+                              fontWeight: 800,
+                            }}
+                          >
+                            {t.badge}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              );
+            }
+
+            return null;
+          })()}
 
           {activeTab === 'OVERVIEW' && (
             <div className="space-y-6">
@@ -3291,123 +3586,6 @@ export const PrincipalDashboard: React.FC = () => {
             );
           })()}
 
-          {activeTab === 'FEATURE_ACCESS' && (
-            <section className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
-              <div className="flex items-center justify-between gap-4 mb-5 flex-wrap">
-                <div>
-                  <h3 className="text-base font-bold text-slate-800">Class Learning Access</h3>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Configure learning resources, homework assignments, and practice tests available to students in each class.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={loadPrincipalFeatureMatrix}
-                  disabled={featureMatrixLoading}
-                  className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50 transition"
-                >
-                  <RefreshCw size={14} className={featureMatrixLoading ? 'animate-spin' : ''} />
-                  Refresh
-                </button>
-              </div>
-
-              {/* Resource Access Summary Badges */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
-                {[
-                  { key: 'NOTES', label: 'Notes', icon: FileText, color: 'text-teal-700 bg-teal-50 border-teal-200' },
-                  { key: 'MATERIALS', label: 'Materials', icon: BookOpen, color: 'text-blue-700 bg-blue-50 border-blue-200' },
-                  { key: 'PRESENTATIONS', label: 'Presentations', icon: BookMarked, color: 'text-indigo-700 bg-indigo-50 border-indigo-200' },
-                  { key: 'VIDEOS', label: 'Videos', icon: Maximize2, color: 'text-purple-700 bg-purple-50 border-purple-200' },
-                  { key: 'ASSIGNMENTS', label: 'Assignments', icon: FileSpreadsheet, color: 'text-rose-700 bg-rose-50 border-rose-200' },
-                  { key: 'QUIZZES', label: 'Quizzes', icon: Award, color: 'text-amber-700 bg-amber-50 border-amber-200' },
-                ].map((item) => {
-                  const enabledCount = (featureMatrix?.classes || []).filter(
-                    (row: any) => row.features?.[item.key]?.enabled
-                  ).length;
-                  const total = (featureMatrix?.classes || []).length || classesList.length;
-                  return (
-                    <div key={item.key} className={`p-3 rounded-xl border ${item.color} shadow-xs space-y-1`}>
-                      <div className="flex items-center justify-between text-xs font-bold">
-                        <span>{item.label}</span>
-                        <item.icon size={13} />
-                      </div>
-                      <div className="text-sm font-black font-mono">
-                        {enabledCount} / {total}
-                      </div>
-                      <div className="text-[10px] font-semibold opacity-80">Classes Active</div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {featureMatrixLoading ? (
-                <p className="py-8 text-center text-sm text-slate-500">Loading class feature settings…</p>
-              ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full min-w-[840px] text-left text-xs">
-                    <thead>
-                      <tr className="border-b border-slate-200 text-slate-500 bg-slate-50/50">
-                        <th className="py-3 px-4">Class</th>
-                        {[
-                          ['NOTES', 'Notes'],
-                          ['MATERIALS', 'Materials'],
-                          ['PRESENTATIONS', 'Presentations'],
-                          ['VIDEOS', 'Videos'],
-                          ['ASSIGNMENTS', 'Assignments'],
-                          ['QUIZZES', 'Quizzes'],
-                        ].map(([key, label]) => (
-                          <th key={key} className="px-3 py-3 text-center">{label}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {(featureMatrix?.classes || [])
-                        .filter((row: any) => classesList.some((cls: any) => (cls.id || cls._id) === row.classId))
-                        .map((row: any) => (
-                          <tr key={row.classId} className="hover:bg-slate-50/60 transition">
-                            <th className="py-3 px-4 font-bold text-slate-800">
-                              {row.className || `Class ${row.gradeNumber}`}
-                            </th>
-                            {[
-                              ['NOTES', 'Notes'],
-                              ['MATERIALS', 'Materials'],
-                              ['PRESENTATIONS', 'Presentations'],
-                              ['VIDEOS', 'Videos'],
-                              ['ASSIGNMENTS', 'Assignments'],
-                              ['QUIZZES', 'Quizzes'],
-                            ].map(([featureKey]) => {
-                              const feature = row.features?.[featureKey];
-                              const isDisabled = !feature || !feature.isEditable || featureMatrixLoading;
-                              return (
-                                <td key={featureKey} className="px-3 py-3 text-center">
-                                  <button
-                                    type="button"
-                                    disabled={isDisabled}
-                                    title={feature?.source === 'SUBSCRIPTION_BLOCKED' ? 'Unavailable in the current subscription' : undefined}
-                                    onClick={() => togglePrincipalClassFeature(row.classId, featureKey, feature.enabled)}
-                                    className={`rounded-lg px-3.5 py-1.5 font-bold text-xs transition disabled:cursor-not-allowed disabled:opacity-50 shadow-xs inline-flex items-center gap-1.5 ${
-                                      feature?.enabled
-                                        ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border border-emerald-300'
-                                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-300'
-                                    }`}
-                                  >
-                                    <span className={`w-1.5 h-1.5 rounded-full ${feature?.enabled ? 'bg-emerald-600' : 'bg-slate-400'}`} />
-                                    <span>{feature?.enabled ? 'On' : 'Off'}</span>
-                                  </button>
-                                </td>
-                              );
-                            })}
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                  {!(featureMatrix?.classes || []).some((row: any) => classesList.some((cls: any) => (cls.id || cls._id) === row.classId)) && (
-                    <p className="py-8 text-center text-sm text-slate-500">No configured classes are available.</p>
-                  )}
-                </div>
-              )}
-            </section>
-          )}
 
           {/* ── PRINCIPAL PROFILE & SECURITY ─────────────────────────── */}
           {activeTab === 'PROFILE' && (

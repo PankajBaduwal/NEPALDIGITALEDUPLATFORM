@@ -26,7 +26,7 @@ export interface FeatureResolutionResult {
   featureKey: FeatureKey;
   isAllowed: boolean;
   effectiveEnabled: boolean;
-  source: 'PLATFORM_SUBSCRIPTION_LIMITATION' | 'STUDENT_OVERRIDE' | 'SECTION_OVERRIDE' | 'CLASS_OVERRIDE' | 'INSTITUTION_DEFAULT' | 'PLATFORM_DEFAULT';
+  source: 'STUDENT_DASHBOARD_OFF' | 'PLATFORM_SUBSCRIPTION_LIMITATION' | 'STUDENT_OVERRIDE' | 'SECTION_OVERRIDE' | 'CLASS_OVERRIDE' | 'INSTITUTION_DEFAULT' | 'PLATFORM_DEFAULT';
   inherited: boolean;
   reason?: string;
   classId?: string;
@@ -34,6 +34,17 @@ export interface FeatureResolutionResult {
   studentId?: string;
   metadata?: any;
 }
+
+/** Features that exist only because students use the platform; they follow the Student Dashboard switch. */
+const STUDENT_FACING_FEATURES = new Set<FeatureKey>([
+  FeatureKey.ASSIGNMENTS, FeatureKey.ASSIGNMENTS_CREATION, FeatureKey.ASSIGNMENTS_VISIBILITY, FeatureKey.ASSIGNMENTS_ONLINE_SUBMISSION,
+  FeatureKey.ASSIGNMENTS_FILE_UPLOAD, FeatureKey.ASSIGNMENTS_TEXT_SUBMISSION, FeatureKey.ASSIGNMENTS_DEADLINES,
+  FeatureKey.ASSIGNMENTS_LATE_SUBMISSION, FeatureKey.ASSIGNMENTS_FEEDBACK,
+  FeatureKey.QUIZZES, FeatureKey.QUIZZES_TEACHER_CREATE, FeatureKey.QUIZZES_ONLINE_ACCESS, FeatureKey.QUIZZES_TIMED,
+  FeatureKey.QUIZZES_PRACTICE, FeatureKey.QUIZZES_GRADED, FeatureKey.QUIZZES_RESULT_VISIBILITY, FeatureKey.QUIZZES_ATTEMPT_LIMITS,
+  FeatureKey.NOTES, FeatureKey.MATERIALS, FeatureKey.PRESENTATIONS, FeatureKey.VIDEOS,
+  FeatureKey.SIMULATIONS_STUDENT_ACCESS, FeatureKey.AI_STUDENT_ACCESS, FeatureKey.TEXTBOOKS_STUDENT_ACCESS,
+]);
 
 export class FeatureAccessService {
   /**
@@ -51,6 +62,26 @@ export class FeatureAccessService {
   static async resolveFeatureAccess(ctx: ResolveFeatureContext): Promise<FeatureResolutionResult> {
     const { institutionId, featureKey, studentId } = ctx;
     let { classId, sectionId } = ctx;
+
+    // The Student Dashboard is the master switch for everything students use. When the Super Admin turns it off
+    // for a school or class, assignments, quizzes, notes, materials, videos and sharing go off with it, for the
+    // students AND for the teachers of that class (teachers keep every other feature).
+    if (featureKey !== FeatureKey.STUDENT_DASHBOARD && STUDENT_FACING_FEATURES.has(featureKey)) {
+      const master = await this.resolveFeatureAccess({ ...ctx, featureKey: FeatureKey.STUDENT_DASHBOARD });
+      if (!master.effectiveEnabled) {
+        return {
+          featureKey,
+          isAllowed: false,
+          effectiveEnabled: false,
+          source: 'STUDENT_DASHBOARD_OFF',
+          inherited: true,
+          reason: 'The student dashboard is switched off for this school or class, so student learning features are off too.',
+          classId: master.classId,
+          sectionId: master.sectionId,
+          studentId,
+        };
+      }
+    }
 
     // Resolve enrollment, classId, and sectionId from studentId if needed
     let enrollmentDoc: any = null;

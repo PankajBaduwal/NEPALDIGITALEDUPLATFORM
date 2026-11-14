@@ -1,0 +1,234 @@
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { ArrowLeft, Volume2, VolumeX, Star, RotateCcw, Trophy } from 'lucide-react';
+import { AudioController } from '../audio/AudioController';
+import { api } from '../../services/api';
+import { FONT_NP, toNp } from './nepali';
+
+/**
+ * The shared "play frame" for the Class 1 Mathematics simulations:
+ * header, speaking mascot, Learn / Play / Challenge tabs, stars, friendly feedback and a quiz panel.
+ * Every simulation only supplies its own 3D scene and its own controls.
+ */
+export type Mode = 'LEARN' | 'PLAY' | 'CHALLENGE';
+export interface KitConfig { code: string; chapter: number; titleNp: string; titleEn: string }
+
+const PRAISE: [string, string][] = [['शाबास!', 'Well done!'], ['धेरै राम्रो!', 'Great job!'], ['वाह! सही!', 'Wow! Correct!'], ['अति उत्तम!', 'Excellent!'], ['तिमी जान्ने रहेछौ!', 'You know it!']];
+const TRY: [string, string][] = [['फेरि प्रयास गरौँ!', "Let's try again!"], ['ध्यान दिएर हेरौँ!', 'Look carefully!'], ['अलि फेरि सोचौँ!', 'Think once more!']];
+
+export function useSimKit(cfg: KitConfig) {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [lang, setLangState] = useState<'ne' | 'en'>('ne');
+  const [muted, setMutedState] = useState(false);
+  const [mode, setMode] = useState<Mode>('LEARN');
+  const [stars, setStars] = useState(0);
+  const [bubble, setBubble] = useState<{ np: string; en: string }>({ np: '', en: '' });
+  const [toast, setToast] = useState<{ ok: boolean; np: string; en: string } | null>(null);
+  const langRef = useRef(lang);
+  const toastTimer = useRef<number | undefined>(undefined);
+  langRef.current = lang;
+
+  const t = useCallback((np: string, en: string) => (langRef.current === 'ne' ? np : en), []);
+  const say = useCallback((np: string, en: string, speak = true) => {
+    setBubble({ np, en });
+    if (speak) AudioController.speak(langRef.current === 'ne' ? np : en, langRef.current);
+  }, []);
+  const flash = useCallback((ok: boolean, np: string, en: string) => {
+    setToast({ ok, np, en });
+    window.clearTimeout(toastTimer.current);
+    toastTimer.current = window.setTimeout(() => setToast(null), 1500);
+  }, []);
+  const good = useCallback((np?: string, en?: string) => {
+    AudioController.playSuccess();
+    const p = PRAISE[Math.floor(Math.random() * PRAISE.length)];
+    flash(true, np || p[0], en || p[1]);
+    AudioController.speak(langRef.current === 'ne' ? np || p[0] : en || p[1], langRef.current);
+  }, [flash]);
+  const oops = useCallback((np?: string, en?: string) => {
+    AudioController.playBoop();
+    const p = TRY[Math.floor(Math.random() * TRY.length)];
+    flash(false, np || p[0], en || p[1]);
+  }, [flash]);
+  const tap = useCallback(() => AudioController.playPop(), []);
+  const star = useCallback(() => setStars((s) => s + 1), []);
+  const setLang = useCallback((l: 'ne' | 'en') => { langRef.current = l; setLangState(l); }, []);
+  const setMuted = useCallback((m: boolean) => { AudioController.setMuted(m); setMutedState(m); }, []);
+  const finish = useCallback((score: number, total: number) => {
+    AudioController.playCelebration();
+    api.post(`/simulation-activity/simulations/${cfg.code}/progress`, {
+      gradeLevel: 1, subjectCode: 'MATH', chapterNumber: cfg.chapter, simulationTitle: cfg.titleEn,
+      assessmentScore: score, totalQuestions: total, percentage: Math.round((score / Math.max(1, total)) * 100), isCompleted: true,
+    }).catch(() => undefined);
+  }, [cfg.code, cfg.chapter, cfg.titleEn]);
+
+  useEffect(() => () => { window.clearTimeout(toastTimer.current); AudioController.stopSpeech(); }, []);
+
+  return { cfg, stageRef, lang, setLang, muted, setMuted, mode, setMode, stars, star, bubble, toast, t, say, flash, good, oops, tap, finish };
+}
+export type SimKit = ReturnType<typeof useSimKit>;
+
+const css = `
+@keyframes simPop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes simShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+@keyframes simBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.sim-btn{border:none;cursor:pointer;font-family:${FONT_NP};font-weight:800;border-radius:16px;transition:transform .12s, box-shadow .12s;touch-action:manipulation}
+.sim-btn:active{transform:scale(.95)}
+.sim-btn:disabled{opacity:.5;cursor:not-allowed}
+`;
+
+export const bigBtn = (bg: string, fg = '#fff'): React.CSSProperties => ({ background: bg, color: fg, padding: '12px 20px', fontSize: 18, minHeight: 56, boxShadow: '0 4px 0 rgba(0,0,0,.18)' });
+
+interface FrameProps {
+  kit: SimKit;
+  onBack: () => void;
+  /** controls shown under the 3D stage */
+  panel?: React.ReactNode;
+  /** big text over the stage (an equation, a number…) */
+  hud?: React.ReactNode;
+  /** which tabs to show */
+  modes?: Mode[];
+  /** extra header content */
+  extra?: React.ReactNode;
+}
+const MODE_LABEL: Record<Mode, [string, string, string]> = { LEARN: ['सिकौँ', 'Learn', '📖'], PLAY: ['खेलौँ', 'Play', '🎈'], CHALLENGE: ['चुनौती', 'Challenge', '🏆'] };
+
+export const SimFrame: React.FC<FrameProps> = ({ kit, onBack, panel, hud, modes = ['LEARN', 'PLAY', 'CHALLENGE'], extra }) => {
+  const { lang, bubble, toast } = kit;
+  const L = (np: string, en: string) => (lang === 'ne' ? np : en);
+  return (
+    <div style={{ width: '100%', height: '100%', minHeight: '88vh', display: 'flex', flexDirection: 'column', background: '#f0f9ff', fontFamily: FONT_NP, color: '#0f172a' }}>
+      <style>{css}</style>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 12px', background: 'linear-gradient(90deg,#0f766e,#0ea5e9)', color: '#fff', flexWrap: 'wrap' }}>
+        <button className="sim-btn" onClick={onBack} style={{ background: 'rgba(255,255,255,.2)', color: '#fff', padding: '8px 12px', fontSize: 14, display: 'inline-flex', alignItems: 'center', gap: 6 }}><ArrowLeft size={16} /> {L('फर्कनुहोस्', 'Back')}</button>
+        <div style={{ flex: 1, minWidth: 160 }}>
+          <div style={{ fontSize: 12, opacity: 0.9, fontWeight: 700 }}>{L('कक्षा १ • गणित • अध्याय', 'Class 1 • Maths • Chapter')} {lang === 'ne' ? toNp(kit.cfg.chapter) : kit.cfg.chapter}</div>
+          <div style={{ fontSize: 18, fontWeight: 900, lineHeight: 1.2 }}>{lang === 'ne' ? kit.cfg.titleNp : kit.cfg.titleEn}</div>
+        </div>
+        {extra}
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'rgba(255,255,255,.22)', padding: '6px 12px', borderRadius: 20, fontWeight: 900 }}><Star size={16} fill="#fde047" color="#fde047" /> {lang === 'ne' ? toNp(kit.stars) : kit.stars}</div>
+        <button className="sim-btn" onClick={() => kit.setLang(lang === 'ne' ? 'en' : 'ne')} style={{ background: 'rgba(255,255,255,.2)', color: '#fff', padding: '8px 12px', fontSize: 14 }}>{lang === 'ne' ? 'EN' : 'नेपाली'}</button>
+        <button className="sim-btn" aria-label="sound" onClick={() => kit.setMuted(!kit.muted)} style={{ background: 'rgba(255,255,255,.2)', color: '#fff', padding: '8px 10px' }}>{kit.muted ? <VolumeX size={18} /> : <Volume2 size={18} />}</button>
+      </div>
+
+      <div style={{ position: 'relative', flex: 1, minHeight: 320 }}>
+        <div ref={kit.stageRef} style={{ position: 'absolute', inset: 0 }} />
+        {(bubble.np || bubble.en) && (
+          <div style={{ position: 'absolute', left: 10, top: 10, maxWidth: 'min(440px, 70%)', display: 'flex', gap: 8, alignItems: 'flex-start', animation: 'simPop .3s' }}>
+            <div style={{ fontSize: 34, animation: 'simBob 2s infinite' }}>🐻</div>
+            <div style={{ background: '#fff', border: '3px solid #0ea5e9', borderRadius: 18, padding: '8px 12px', fontSize: 16, fontWeight: 800, lineHeight: 1.35, boxShadow: '0 4px 10px rgba(0,0,0,.12)', cursor: 'pointer' }} onClick={() => kit.say(bubble.np, bubble.en)} title="🔊">
+              {L(bubble.np, bubble.en)} <span style={{ opacity: 0.6 }}>🔊</span>
+            </div>
+          </div>
+        )}
+        {hud && <div style={{ position: 'absolute', top: 10, right: 10, textAlign: 'right', pointerEvents: 'none' }}>{hud}</div>}
+        {toast && (
+          <div style={{ position: 'absolute', left: '50%', top: '38%', transform: 'translateX(-50%)', background: toast.ok ? '#16a34a' : '#f97316', color: '#fff', padding: '14px 28px', borderRadius: 24, fontSize: 28, fontWeight: 900, boxShadow: '0 8px 24px rgba(0,0,0,.25)', animation: toast.ok ? 'simPop .35s' : 'simShake .4s', pointerEvents: 'none', whiteSpace: 'nowrap' }}>
+            {toast.ok ? '⭐ ' : '🤔 '}{L(toast.np, toast.en)}
+          </div>
+        )}
+      </div>
+
+      <div style={{ background: '#fff', borderTop: '3px solid #bae6fd', padding: '8px 12px 12px' }}>
+        <div style={{ display: 'flex', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
+          {modes.map((m) => {
+            const [np, en, ic] = MODE_LABEL[m];
+            const on = kit.mode === m;
+            return (
+              <button key={m} className="sim-btn" onClick={() => kit.setMode(m)} style={{ padding: '8px 16px', fontSize: 16, background: on ? '#0ea5e9' : '#e0f2fe', color: on ? '#fff' : '#075985', boxShadow: on ? '0 3px 0 #0369a1' : 'none' }}>{ic} {L(np, en)}</button>
+            );
+          })}
+        </div>
+        {panel}
+      </div>
+    </div>
+  );
+};
+
+/* ───────── challenge quiz ───────── */
+export interface QuizOption { key: string; label: React.ReactNode }
+export interface QuizQuestion { np: string; en: string; options: QuizOption[]; answer: string }
+interface QuizProps { kit: SimKit; questions: QuizQuestion[]; resetKey?: number | string; onAsk?: (q: QuizQuestion, index: number) => void }
+
+export const QuizPanel: React.FC<QuizProps> = ({ kit, questions, resetKey, onAsk }) => {
+  const [idx, setIdx] = useState(0);
+  const [score, setScore] = useState(0);
+  const [tries, setTries] = useState(0);
+  const [picked, setPicked] = useState<string | null>(null);
+  const [reveal, setReveal] = useState<string | null>(null);
+  const [done, setDone] = useState(false);
+  const askRef = useRef(onAsk);
+  askRef.current = onAsk;
+  const lock = useRef(false);
+  const q = questions[idx];
+
+  useEffect(() => { setIdx(0); setScore(0); setTries(0); setPicked(null); setReveal(null); setDone(false); lock.current = false; }, [resetKey]);
+  useEffect(() => {
+    if (done || !q) return;
+    askRef.current?.(q, idx);
+    kit.say(q.np, q.en);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idx, done, resetKey]);
+
+  const next = (gained: boolean) => {
+    const ns = score + (gained ? 1 : 0);
+    window.setTimeout(() => {
+      lock.current = false;
+      setPicked(null); setReveal(null); setTries(0);
+      if (idx + 1 >= questions.length) { setScore(ns); setDone(true); kit.finish(ns, questions.length); } else { setScore(ns); setIdx(idx + 1); }
+    }, 1000);
+  };
+  const choose = (key: string) => {
+    if (lock.current || !q) return;
+    setPicked(key);
+    if (key === q.answer) {
+      lock.current = true; kit.good(); kit.star(); next(true);
+    } else if (tries >= 1) {
+      lock.current = true; kit.oops(); setReveal(q.answer); next(false);
+    } else {
+      setTries(1); kit.oops();
+      window.setTimeout(() => setPicked(null), 600);
+    }
+  };
+
+  const L = (np: string, en: string) => kit.t(np, en);
+  if (done) {
+    const stars = Math.round((score / Math.max(1, questions.length)) * 3);
+    return (
+      <div style={{ textAlign: 'center', padding: 8, animation: 'simPop .4s' }}>
+        <Trophy size={40} color="#f59e0b" />
+        <div style={{ fontSize: 22, fontWeight: 900, margin: '4px 0' }}>{L('सबै सकियो!', 'All done!')} {'⭐'.repeat(Math.max(1, stars))}</div>
+        <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 8 }}>{L(`${toNp(questions.length)} मध्ये ${toNp(score)} सही`, `${score} of ${questions.length} correct`)}</div>
+        <button className="sim-btn" style={bigBtn('#0ea5e9')} onClick={() => { setIdx(0); setScore(0); setDone(false); }}><RotateCcw size={16} style={{ verticalAlign: -2 }} /> {L('फेरि खेलौँ', 'Play again')}</button>
+      </div>
+    );
+  }
+  if (!q) return null;
+  return (
+    <div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
+        <div style={{ fontSize: 13, fontWeight: 800, color: '#64748b' }}>{L('प्रश्न', 'Question')} {kit.lang === 'ne' ? toNp(idx + 1) : idx + 1}/{kit.lang === 'ne' ? toNp(questions.length) : questions.length}</div>
+        <div style={{ fontSize: 20, fontWeight: 900, flex: 1, minWidth: 200 }}>{L(q.np, q.en)}</div>
+        <button className="sim-btn" style={{ background: '#e0f2fe', color: '#075985', padding: '6px 12px', fontSize: 14 }} onClick={() => kit.say(q.np, q.en)}>🔊</button>
+      </div>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+        {q.options.map((o) => {
+          const isPicked = picked === o.key;
+          const isAns = reveal === o.key;
+          const bad = isPicked && o.key !== q.answer;
+          const bg = isAns || (isPicked && o.key === q.answer) ? '#22c55e' : bad ? '#fb923c' : '#fef3c7';
+          const fg = isAns || (isPicked && o.key === q.answer) || bad ? '#fff' : '#78350f';
+          return (
+            <button key={o.key} className="sim-btn" onClick={() => choose(o.key)} style={{ ...bigBtn(bg, fg), minWidth: 92, fontSize: 24, animation: bad ? 'simShake .4s' : undefined, border: '3px solid rgba(0,0,0,.06)' }}>{o.label}</button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+/** small helper for rows of control buttons under the stage */
+export const Controls: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>{children}</div>
+);
+export const CBtn: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { color?: string }> = ({ color = '#0ea5e9', children, style, ...rest }) => (
+  <button className="sim-btn" {...rest} style={{ ...bigBtn(color), ...style }}>{children}</button>
+);

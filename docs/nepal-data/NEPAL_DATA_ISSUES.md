@@ -1,6 +1,6 @@
 # Nepal Data — Issues Requiring Attention
 
-Generated: 2026-11-02 12:34:58 UTC.
+Generated: 2026-11-14 06:54:42 UTC.
 
 ## Unresolved documents (manual classification required) (0)
 

@@ -21,9 +21,9 @@ export const DemoBanner: React.FC = () => {
     if (user.role === 'SCHOOL_ADMIN') return 'School Administrator';
     if (user.role === 'PRINCIPAL') return 'Principal / Academic Head';
     if (user.role === 'TEACHER') {
-      return user.isClassTeacher ? 'Class Teacher (Class 10 Section A)' : 'Normal Teacher (Subject Faculty)';
+      return user.isClassTeacher ? 'Class Teacher' : 'Subject Teacher (Faculty)';
     }
-    if (user.role === 'STUDENT') return 'Student (Class 10)';
+    if (user.role === 'STUDENT') return 'Student';
     return user.role;
   };
 

@@ -5,6 +5,8 @@ import { tenantMiddleware } from '../../common/middleware/tenant.middleware';
 import { authorize } from '../../common/middleware/rbac.middleware';
 import { UserRole } from '../../common/constants/roles';
 
+// Access control belongs to the Super Admin only. Schools (principals, school admins, teachers) cannot change or
+// even read these settings; they only receive the result through /my-features.
 const router = Router();
 
 // Public / Authenticated Registry
@@ -26,7 +28,7 @@ router.get(
   '/matrix',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN, UserRole.PRINCIPAL, UserRole.TEACHER),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.getClassMatrix
 );
 
@@ -35,14 +37,14 @@ router.get(
   '/institution',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN, UserRole.PRINCIPAL, UserRole.TEACHER),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.getInstitutionSettings
 );
 router.put(
   '/institution',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN, UserRole.PRINCIPAL),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.updateInstitutionSetting
 );
 
@@ -51,21 +53,21 @@ router.get(
   '/classes/:classId',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN, UserRole.PRINCIPAL, UserRole.TEACHER),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.getClassSettings
 );
 router.put(
   '/classes/:classId',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN, UserRole.PRINCIPAL),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.updateClassSetting
 );
 router.post(
   '/classes/bulk',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN, UserRole.PRINCIPAL),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.bulkUpdateClassSettings
 );
 
@@ -74,14 +76,14 @@ router.get(
   '/sections/:sectionId',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN, UserRole.PRINCIPAL, UserRole.TEACHER),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.getSectionSettings
 );
 router.put(
   '/sections/:sectionId',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN, UserRole.PRINCIPAL),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.updateSectionSetting
 );
 
@@ -90,7 +92,7 @@ router.post(
   '/students/:studentId/override',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.setStudentOverride
 );
 
@@ -99,7 +101,7 @@ router.post(
   '/reset',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.resetOverrides
 );
 
@@ -108,23 +110,23 @@ router.get(
   '/device-profiles',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN, UserRole.PRINCIPAL, UserRole.TEACHER),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.getDeviceProfiles
 );
 router.put(
   '/device-profiles',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.upsertDeviceProfile
 );
 
-// Audit History (School Admin & Principal can monitor)
+// Audit History (Super Admin only)
 router.get(
   '/history',
   authMiddleware,
   tenantMiddleware,
-  authorize(UserRole.SUPER_ADMIN, UserRole.SCHOOL_ADMIN, UserRole.PRINCIPAL),
+  authorize(UserRole.SUPER_ADMIN),
   FeatureAccessController.getConfigurationHistory
 );
 

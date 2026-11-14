@@ -1,4 +1,5 @@
-import { useHiddenNavs, HiddenNavStyle } from '../hooks/useHiddenNavs';
+import { useHiddenNavs, useDisabledFeatures, HiddenNavStyle } from '../hooks/useHiddenNavs';
+import { usePersistentState } from '../hooks/usePersistentState';
 import { SchoolLogoBadge } from '../components/common/SchoolLogoBadge';
 import React, { useState, useEffect, useRef } from 'react';
 import { AIAssistantPanel } from '../components/ai/AIAssistantPanel';
@@ -116,7 +117,7 @@ export const TeacherDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   // Navigation state matching screenshots 1, 2, 3
-  const [activeNav, setActiveNav] = useState<
+  const [activeNav, setActiveNav] = usePersistentState<
     | 'OVERVIEW'
     | 'MY_SUBJECTS'
     | 'LEARNING_RESOURCES'
@@ -143,10 +144,76 @@ export const TeacherDashboard: React.FC = () => {
     | 'NOTIFICATIONS'
     | 'CLASS_TEACHER'
     | 'PROFILE'
-  >('OVERVIEW');
+  >('teacher.nav', 'OVERVIEW');
   // Menu items for features the school switched off for every class this teacher teaches are hidden
   const hiddenNavs = useHiddenNavs({ ASSIGNMENTS: 'ASSIGNMENTS', QUIZZES: 'QUIZZES', LEARNING_RESOURCES: ['MATERIALS', 'NOTES'], AI_ASSISTANT: 'AI', SIMULATIONS: 'SIMULATIONS' });
-  useEffect(() => { if (hiddenNavs.includes(activeNav as string)) setActiveNav('OVERVIEW'); }, [hiddenNavs.join(','), activeNav]);
+
+  // What the Super Admin switched off, class by class. When a class's student dashboard is off, everything that only
+  // exists for students (assignments, quizzes, notes, resources, uploads) is hidden for that class's teacher.
+  const feat = useDisabledFeatures();
+  const secOf = (alloc: any) => String(alloc?.sectionId?._id || alloc?.sectionId?.id || alloc?.sectionId || '');
+
+  const isStudentDashOffFor = (sectionId?: string) => {
+    if (feat.disabled.includes('STUDENT_DASHBOARD')) return true;
+    if (sectionId && feat.bySection[sectionId]?.includes('STUDENT_DASHBOARD')) return true;
+    return false;
+  };
+
+  // (declared here, before it is used just below)
+  const [allocations, setAllocations] = useState<any[]>([]);
+  const [selectedWorkspace, setSelectedWorkspace] = useState<any>(null);
+  const [activeCourseIndex, setActiveCourseIndex] = useState<number>(0);
+
+  const activeAlloc = selectedWorkspace || (allocations.length > 0 ? allocations[activeCourseIndex || 0] : null) || (allocations.length > 0 ? allocations[0] : null);
+  const activeSectionId = secOf(activeAlloc);
+  const primarySectionId = allocations.length > 0 ? secOf(allocations[0]) : '';
+  const currentSectionId = activeSectionId || primarySectionId;
+
+  const isStudentDashboardOffEverywhere =
+    feat.disabled.includes('STUDENT_DASHBOARD') ||
+    (allocations.length > 0 && allocations.every((a) => isStudentDashOffFor(secOf(a)))) ||
+    (Object.keys(feat.bySection).length > 0 && Object.keys(feat.bySection).every((sid) => isStudentDashOffFor(sid)));
+
+  const offFor = (sectionId: string, name: string) => {
+    if (name === 'ASSIGNMENTS' || name === 'QUIZZES') {
+      if (isStudentDashOffFor(sectionId) || isStudentDashboardOffEverywhere) return true;
+    }
+    return sectionId && feat.bySection[sectionId] ? feat.bySection[sectionId].includes(name) : feat.disabled.includes(name);
+  };
+
+  const isAssignmentsDisabled =
+    isStudentDashboardOffEverywhere ||
+    feat.disabled.includes('STUDENT_DASHBOARD') ||
+    feat.disabled.includes('ASSIGNMENTS') ||
+    hiddenNavs.includes('ASSIGNMENTS') ||
+    (currentSectionId ? (isStudentDashOffFor(currentSectionId) || offFor(currentSectionId, 'ASSIGNMENTS')) : false) ||
+    (primarySectionId ? (isStudentDashOffFor(primarySectionId) || offFor(primarySectionId, 'ASSIGNMENTS')) : false);
+
+  const isQuizzesDisabled =
+    isStudentDashboardOffEverywhere ||
+    feat.disabled.includes('STUDENT_DASHBOARD') ||
+    feat.disabled.includes('QUIZZES') ||
+    hiddenNavs.includes('QUIZZES') ||
+    (currentSectionId ? (isStudentDashOffFor(currentSectionId) || offFor(currentSectionId, 'QUIZZES')) : false) ||
+    (primarySectionId ? (isStudentDashOffFor(primarySectionId) || offFor(primarySectionId, 'QUIZZES')) : false);
+
+  const resourcesOff = (sectionId: string) => offFor(sectionId, 'MATERIALS') && offFor(sectionId, 'NOTES');
+  const wsTabHidden = (key: string) => {
+    const sid = String(selectedWorkspace?.section?.id || selectedWorkspace?.section?._id || '');
+    if (key === 'RESOURCES' || key === 'UPLOAD') return resourcesOff(sid);
+    if (key === 'ASSIGNMENTS') return offFor(sid, 'ASSIGNMENTS');
+    if (key === 'QUIZZES') return offFor(sid, 'QUIZZES');
+    return false;
+  };
+
+  useEffect(() => {
+    if (hiddenNavs.includes(activeNav as string)) {
+      setActiveNav('OVERVIEW');
+    }
+    if ((isAssignmentsDisabled && activeNav === 'ASSIGNMENTS') || (isQuizzesDisabled && activeNav === 'QUIZZES')) {
+      setActiveNav('OVERVIEW');
+    }
+  }, [hiddenNavs.join(','), activeNav, isAssignmentsDisabled, isQuizzesDisabled]);
 
   // Sidebar collapsible groups
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
@@ -164,7 +231,6 @@ export const TeacherDashboard: React.FC = () => {
 
   // Core Data State
   const [overview, setOverview] = useState<any>(null);
-  const [allocations, setAllocations] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Selected Subject Workspace State (Screenshot 3)
@@ -172,7 +238,9 @@ export const TeacherDashboard: React.FC = () => {
   const { toast } = useDialogs();
   const [dossier, setDossier] = useState<{ studentId: string; sectionId?: string } | null>(null);
   const idOfAny = (v: any) => String(v?.id || v?._id || v || '') || undefined;
-  const [selectedWorkspace, setSelectedWorkspace] = useState<any>(null);
+  // the subject workspace that was open is reopened after a refresh
+  const [savedWorkspace, setSavedWorkspace] = usePersistentState<{ sectionId: string; centralSubjectId: string } | null>('teacher.workspace', null);
+  const workspaceRestored = useRef(false);
   const [workspaceLoading, setWorkspaceLoading] = useState(false);
   const [workspaceTab, setWorkspaceTab] = useState<
     | 'OVERVIEW'
@@ -192,6 +260,8 @@ export const TeacherDashboard: React.FC = () => {
     | 'PROGRESS'
     | 'AI'
   >('OVERVIEW');
+  // a workspace tab that is switched off for this class can never stay open
+  useEffect(() => { if (wsTabHidden(workspaceTab as string)) setWorkspaceTab('OVERVIEW'); }, [workspaceTab, selectedWorkspace, JSON.stringify(feat.bySection), feat.disabled.join(',')]);
 
   // Unified Learning Resources & Upload Files State
   const [isUploadFilesModalOpen, setIsUploadFilesModalOpen] = useState(false);
@@ -224,7 +294,6 @@ export const TeacherDashboard: React.FC = () => {
   const [isSubmittingMarks, setIsSubmittingMarks] = useState<boolean>(false);
 
   // Active Subject Index for 6 Subjects
-  const [activeCourseIndex, setActiveCourseIndex] = useState<number>(0);
 
   const SUBJECT_COURSES = allocations.map((allocation, allocIndex) => {
     const section = allocation.sectionId && typeof allocation.sectionId === 'object' ? allocation.sectionId : {};
@@ -972,6 +1041,14 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
     }
   };
 
+  // remember which workspace is open (only after the saved one has been given the chance to reopen)
+  useEffect(() => {
+    if (!workspaceRestored.current) return;
+    const sid = selectedWorkspace?.section?.id || selectedWorkspace?.section?._id;
+    const cid = selectedWorkspace?.subject?.id || selectedWorkspace?.subject?._id;
+    setSavedWorkspace(sid && cid ? { sectionId: String(sid), centralSubjectId: String(cid) } : null);
+  }, [selectedWorkspace]);
+
   const openWorkspace = async (alloc: any, switchTab = true) => {
     if (!alloc) return;
     const sectionId = alloc.sectionId?._id || alloc.sectionId?.id || alloc.sectionId;
@@ -1083,6 +1160,15 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
       setWorkspaceLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (workspaceRestored.current || allocations.length === 0) return;
+    workspaceRestored.current = true;
+    if (!savedWorkspace) return;
+    const idOf = (v: any) => String(v?._id || v?.id || v || '');
+    const alloc = allocations.find((a: any) => idOf(a.sectionId) === savedWorkspace.sectionId && idOf(a.centralSubjectId) === savedWorkspace.centralSubjectId);
+    if (alloc) openWorkspace(alloc, false);
+  }, [allocations]);
 
   const handleOpenTextbook = async (alloc: any) => {
     if (!alloc) return;
@@ -1807,7 +1893,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
           color: #dcebe6 !important;
         }
       `}</style>
-      <HiddenNavStyle hidden={hiddenNavs} />
+      <HiddenNavStyle hidden={[...hiddenNavs, ...(isAssignmentsDisabled ? ['ASSIGNMENTS'] : []), ...(isQuizzesDisabled ? ['QUIZZES'] : [])]} />
       {/* ══════════════════════════════════════════════════════════════════
           1. LEFT SIDEBAR NAVIGATION (Matching Screenshot 1 & 2)
          ══════════════════════════════════════════════════════════════════ */}
@@ -2173,55 +2259,59 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                 </button>
 
 
-                <button data-nav-feature="ASSIGNMENTS"
-                  onClick={() => {
-                    setActiveNav('ASSIGNMENTS');
-                    if (allocations.length > 0) openWorkspace(allocations[0], false);
-                    setWorkspaceTab('ASSIGNMENTS');
-                  }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    padding: '9px 14px',
-                    borderRadius: '10px',
-                    fontSize: '13px',
-                    fontWeight: '700',
-                    border: activeNav === 'ASSIGNMENTS' ? '1.5px solid #1fb589' : '1.5px solid transparent',
-                    cursor: 'pointer',
-                    background: activeNav === 'ASSIGNMENTS' ? '#effaf6' : 'transparent',
-                    color: activeNav === 'ASSIGNMENTS' ? '#117a6b' : '#4b605b',
-                    textAlign: 'left',
-                  }}
-                >
-                  <ClipboardList size={17} color={activeNav === 'ASSIGNMENTS' ? '#117a6b' : '#5f736f'} />
-                  {!isSidebarCollapsed && <span>Assignments</span>}
-                </button>
+                {!isAssignmentsDisabled && (
+                  <button data-nav-feature="ASSIGNMENTS"
+                    onClick={() => {
+                      setActiveNav('ASSIGNMENTS');
+                      if (allocations.length > 0) openWorkspace(allocations[0], false);
+                      setWorkspaceTab('ASSIGNMENTS');
+                    }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      padding: '9px 14px',
+                      borderRadius: '10px',
+                      fontSize: '13px',
+                      fontWeight: '700',
+                      border: activeNav === 'ASSIGNMENTS' ? '1.5px solid #1fb589' : '1.5px solid transparent',
+                      cursor: 'pointer',
+                      background: activeNav === 'ASSIGNMENTS' ? '#effaf6' : 'transparent',
+                      color: activeNav === 'ASSIGNMENTS' ? '#117a6b' : '#4b605b',
+                      textAlign: 'left',
+                    }}
+                  >
+                    <ClipboardList size={17} color={activeNav === 'ASSIGNMENTS' ? '#117a6b' : '#5f736f'} />
+                    {!isSidebarCollapsed && <span>Assignments</span>}
+                  </button>
+                )}
 
-                <button data-nav-feature="QUIZZES"
-                  onClick={() => {
-                    setActiveNav('QUIZZES');
-                    if (allocations.length > 0) openWorkspace(allocations[0], false);
-                    setWorkspaceTab('QUIZZES');
-                  }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    padding: '9px 14px',
-                    borderRadius: '10px',
-                    fontSize: '13px',
-                    fontWeight: '700',
-                    border: activeNav === 'QUIZZES' ? '1.5px solid #1fb589' : '1.5px solid transparent',
-                    cursor: 'pointer',
-                    background: activeNav === 'QUIZZES' ? '#effaf6' : 'transparent',
-                    color: activeNav === 'QUIZZES' ? '#117a6b' : '#4b605b',
-                    textAlign: 'left',
-                  }}
-                >
-                  <HelpCircle size={17} color={activeNav === 'QUIZZES' ? '#117a6b' : '#5f736f'} />
-                  {!isSidebarCollapsed && <span>Quizzes</span>}
-                </button>
+                {!isQuizzesDisabled && (
+                  <button data-nav-feature="QUIZZES"
+                    onClick={() => {
+                      setActiveNav('QUIZZES');
+                      if (allocations.length > 0) openWorkspace(allocations[0], false);
+                      setWorkspaceTab('QUIZZES');
+                    }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      padding: '9px 14px',
+                      borderRadius: '10px',
+                      fontSize: '13px',
+                      fontWeight: '700',
+                      border: activeNav === 'QUIZZES' ? '1.5px solid #1fb589' : '1.5px solid transparent',
+                      cursor: 'pointer',
+                      background: activeNav === 'QUIZZES' ? '#effaf6' : 'transparent',
+                      color: activeNav === 'QUIZZES' ? '#117a6b' : '#4b605b',
+                      textAlign: 'left',
+                    }}
+                  >
+                    <HelpCircle size={17} color={activeNav === 'QUIZZES' ? '#117a6b' : '#5f736f'} />
+                    {!isSidebarCollapsed && <span>Quizzes</span>}
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -3454,6 +3544,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                             >
                               Attendance
                             </button>
+                            {!resourcesOff(secOf(alloc)) && (
                             <button
                               onClick={() => {
                                 setActiveCourseIndex(idx);
@@ -3464,6 +3555,8 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                             >
                               Notes
                             </button>
+                            )}
+                            {!offFor(secOf(alloc), 'QUIZZES') && (
                             <button
                               onClick={() => {
                                 setActiveCourseIndex(idx);
@@ -3474,6 +3567,8 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                             >
                               Quiz
                             </button>
+                            )}
+                            {!offFor(secOf(alloc), 'ASSIGNMENTS') && (
                             <button
                               onClick={() => {
                                 setActiveCourseIndex(idx);
@@ -3484,6 +3579,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                             >
                               Assignment
                             </button>
+                            )}
                             <button
                               onClick={() => {
                                 setActiveCourseIndex(idx);
@@ -3507,10 +3603,15 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
               </div>
 
               {/* ══════════════════════════════════════════════════════════════
-                  ROW 6: BOTTOM 3-COLUMN ROW (Assignments, Quizzes, Recent Activity)
+                  ROW 6: BOTTOM ROW (Assignments, Quizzes, Recent Activity)
                  ══════════════════════════════════════════════════════════════ */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: (isAssignmentsDisabled && isQuizzesDisabled) ? '1fr' : 'repeat(3, 1fr)',
+                gap: '20px'
+              }}>
                 {/* Column 1: Upcoming Assignments */}
+                {!isAssignmentsDisabled && (
                 <div
                   style={{
                     background: '#ffffff',
@@ -3557,8 +3658,10 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                     ))}
                   </div>
                 </div>
+                )}
 
                 {/* Column 2: Upcoming Quizzes */}
+                {!isQuizzesDisabled && (
                 <div
                   style={{
                     background: '#ffffff',
@@ -3605,6 +3708,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                     ))}
                   </div>
                 </div>
+                )}
 
                 {/* Column 3: Recent Activity */}
                 <div
@@ -3869,6 +3973,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                   >
                                     <span>Attendance</span>
                                   </button>
+                                  {!resourcesOff(secOf(matchingAlloc)) && (
                                   <button
                                     onClick={() => {
                                       setActiveCourseIndex(idx);
@@ -3892,6 +3997,8 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                   >
                                     <span>Notes</span>
                                   </button>
+                                  )}
+                                  {!offFor(secOf(matchingAlloc), 'QUIZZES') && (
                                   <button
                                     onClick={() => {
                                       setActiveCourseIndex(idx);
@@ -3915,6 +4022,8 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                   >
                                     <span>Quiz</span>
                                   </button>
+                                  )}
+                                  {!offFor(secOf(matchingAlloc), 'ASSIGNMENTS') && (
                                   <button
                                     onClick={() => {
                                       setActiveCourseIndex(idx);
@@ -3938,6 +4047,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                   >
                                     <span>Assignment</span>
                                   </button>
+                                  )}
                                   <button
                                     onClick={() => {
                                       setActiveCourseIndex(idx);
@@ -4103,7 +4213,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                       }}
                     >
                       {/* Row 1 (8 Items: Overview, Book / CDC PDF, Attendance Engine, Marks Entry, Learning Resources, Upload Files, Curriculum & Units, Assignments) */}
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: '8px' }}>
+                      <div style={{ display: 'grid', gridAutoFlow: 'column', gridAutoColumns: '1fr', gap: '8px' }}>
                         {[
                           { key: 'OVERVIEW', label: 'Overview', icon: BookOpen, type: 'TAB' },
                           { key: 'TEXTBOOK', label: 'Book / CDC PDF', count: 'Official', icon: BookOpen, type: 'TAB' },
@@ -4113,7 +4223,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                           { key: 'UPLOAD', label: 'Upload Files', icon: FolderPlus, type: 'ACTION', action: () => setIsUploadFilesModalOpen(true) },
                           { key: 'CURRICULUM', label: 'Curriculum & Units', count: (cdcChaptersData.DEFAULT || []).length || undefined, icon: BookOpenCheck, type: 'TAB' },
                           { key: 'ASSIGNMENTS', label: 'Assignments', count: (selectedWorkspace?.assignments || []).length || undefined, icon: ClipboardList, type: 'TAB' },
-                        ].map((item) => {
+                        ].filter((item) => !wsTabHidden(item.key)).map((item) => {
                           const Icon = item.icon;
                           const isTab = item.type === 'TAB';
                           const active = isTab && workspaceTab === item.key;
@@ -4179,7 +4289,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                       </div>
 
                       {/* Row 2 (6 Items: Quizzes 3, Academic Monitoring 1 Flagged, Announcements, Student Progress 9, AI Lesson Copilot, Secure Vault) */}
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '8px' }}>
+                      <div style={{ display: 'grid', gridAutoFlow: 'column', gridAutoColumns: '1fr', gap: '8px' }}>
                         {[
                           { key: 'QUIZZES', label: 'Quizzes', icon: HelpCircle, type: 'TAB' },
                           { key: 'MONITORING', label: 'Academic Monitoring', icon: Target, type: 'TAB' },
@@ -4187,7 +4297,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                           { key: 'PROGRESS', label: 'Student Progress', count: courseStudents.length || undefined, icon: BarChart2, type: 'TAB' },
                           { key: 'AI', label: 'AI Lesson Copilot', icon: Sparkles, type: 'TAB' },
                           { key: 'VAULT', label: 'Secure Vault', icon: Lock, type: 'ACTION', action: () => setIsVaultModalOpen(true) },
-                        ].map((item) => {
+                        ].filter((item) => !wsTabHidden(item.key)).map((item) => {
                           const Icon = item.icon;
                           const isTab = item.type === 'TAB';
                           const active = isTab && workspaceTab === item.key;

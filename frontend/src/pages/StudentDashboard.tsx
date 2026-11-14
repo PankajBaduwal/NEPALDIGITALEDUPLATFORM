@@ -1,10 +1,11 @@
-import { useHiddenNavs, HiddenNavStyle } from '../hooks/useHiddenNavs';
+import { usePersistentState, hasPersistedState } from '../hooks/usePersistentState';
+import { useHiddenNavs, useDisabledFeatures, HiddenNavStyle } from '../hooks/useHiddenNavs';
 import { launchOnSmartBoard, isKprietSimulation } from '../components/simulations/smartBoardLaunch';
 import { NotificationCenter } from '../components/notifications/NotificationCenter';
 import { SchoolLogoBadge } from '../components/common/SchoolLogoBadge';
 import { StudentSnapshot } from '../components/student/StudentSnapshot';
 import { AIAssistantPanel } from '../components/ai/AIAssistantPanel';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLiveRefresh } from '../services/realtime';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -77,10 +78,13 @@ export const StudentDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   // Navigation & State
-  const [activeNav, setActiveNav] = useState<TabType>('OVERVIEW');
+  const [activeNav, setActiveNav] = usePersistentState<TabType>('student.nav', 'OVERVIEW');
   // Menu items for features the school switched off for this student's class are hidden
   const hiddenNavs = useHiddenNavs({ ASSIGNMENTS: 'ASSIGNMENTS', QUIZZES: 'QUIZZES', MATERIALS: 'MATERIALS', NOTES: 'NOTES', ACTIVITIES: 'SIMULATIONS', AI: 'AI', GROUP_COURSEWORK: ['ASSIGNMENTS', 'QUIZZES', 'MATERIALS', 'NOTES'], CARD_COURSEWORK: ['ASSIGNMENTS', 'QUIZZES'] });
   useEffect(() => { if (hiddenNavs.includes(activeNav)) setActiveNav('OVERVIEW'); }, [hiddenNavs.join(','), activeNav]);
+  // The Super Admin can switch the whole student dashboard off for a school or class
+  const { disabled: disabledFeatures } = useDisabledFeatures();
+  const dashboardOff = disabledFeatures.includes('STUDENT_DASHBOARD');
   const [collapsedSidebar, setCollapsedSidebar] = useState(false);
   const [academicMenuOpen, setAcademicMenuOpen] = useState(true);
   const [courseworkMenuOpen, setCourseworkMenuOpen] = useState(true);
@@ -97,6 +101,7 @@ export const StudentDashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [loadIssues, setLoadIssues] = useState<string[]>([]);
   const [viewNote, setViewNote] = useState<any>(null);
+  const hadSavedNav = useRef(hasPersistedState('student.nav'));
   const [prefs, setPrefs] = useState<{ textSize: 'NORMAL' | 'LARGE'; defaultTab: string }>({ textSize: 'NORMAL', defaultTab: 'OVERVIEW' });
   const [prefsSaved, setPrefsSaved] = useState(false);
 
@@ -104,7 +109,7 @@ export const StudentDashboard: React.FC = () => {
   useEffect(() => {
     api.get<any>('/auth/preferences').then((p) => {
       setPrefs({ textSize: p.textSize, defaultTab: p.defaultTab });
-      if (p.defaultTab && p.defaultTab !== 'OVERVIEW') setActiveNav(p.defaultTab as any);
+      if (!hadSavedNav.current && p.defaultTab && p.defaultTab !== 'OVERVIEW') setActiveNav(p.defaultTab as any);
     }).catch(() => undefined);
   }, []);
 
@@ -348,6 +353,21 @@ export const StudentDashboard: React.FC = () => {
   const className = overview?.academicInfo?.className || '—';
   const sectionName = overview?.academicInfo?.sectionName || '—';
   const institutionName = overview?.institution?.name || user?.institutionName || 'Institution not available';
+
+  if (dashboardOff) {
+    return (
+      <div style={{ minHeight: '100vh', background: '#f4faf8', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+        <div style={{ maxWidth: 460, width: '100%', background: '#fff', border: '1px solid #dcebe6', borderRadius: 20, padding: '36px 28px', textAlign: 'center', boxShadow: '0 8px 30px rgba(15,95,85,0.08)' }}>
+          <div style={{ fontSize: 44, marginBottom: 8 }}>🎓</div>
+          <h2 style={{ margin: '0 0 8px', fontSize: 20, fontWeight: 900, color: '#0e3e3b' }}>Student dashboard is not available</h2>
+          <p style={{ margin: '0 0 22px', fontSize: 14, color: '#5f736f', lineHeight: 1.6 }}>
+            The student dashboard is not turned on for your class yet. Please speak to your class teacher. Your marks and attendance are still kept safely by your school.
+          </p>
+          <button onClick={() => { logout(); navigate('/'); }} style={{ padding: '10px 22px', borderRadius: 10, border: 'none', background: '#117a6b', color: '#fff', fontWeight: 800, cursor: 'pointer' }}>Sign out</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f4faf8', color: '#0e3e3b', fontFamily: 'system-ui, -apple-system, sans-serif' }}>

@@ -9,19 +9,40 @@ export type NavFeatureMap = Record<string, string | string[]>;
  * (every class they teach) and returns the menu keys to hide. Fails open: if the call fails nothing is hidden,
  * and the server still blocks any switched-off feature.
  */
-export const useHiddenNavs = (map: NavFeatureMap) => {
-  const [disabled, setDisabled] = useState<string[]>([]);
+export const useDisabledFeatures = () => {
+  const [state, setState] = useState<{ disabled: string[]; bySection: Record<string, string[]>; loaded: boolean }>({ disabled: [], bySection: {}, loaded: false });
   useEffect(() => {
     let live = true;
     api.get<any>('/feature-access/my-features')
-      .then((r) => { if (live) setDisabled(Array.isArray(r?.disabled) ? r.disabled : Array.isArray(r?.data?.disabled) ? r.data.disabled : []); })
-      .catch(() => undefined);
+      .then((r) => {
+        if (!live) return;
+        const d = r?.data && !Array.isArray(r.disabled) ? r.data : r;
+        setState({ disabled: Array.isArray(d?.disabled) ? d.disabled : [], bySection: d?.bySection && typeof d.bySection === 'object' ? d.bySection : {}, loaded: true });
+      })
+      .catch(() => { if (live) setState({ disabled: [], bySection: {}, loaded: true }); });
     return () => { live = false; };
   }, []);
-  const hidden = Object.entries(map)
-    .filter(([, f]) => (Array.isArray(f) ? f : [f]).every((x) => disabled.includes(x)))
+  return state;
+};
+
+export const useHiddenNavs = (map: NavFeatureMap) => {
+  const { disabled } = useDisabledFeatures();
+  return Object.entries(map)
+    .filter(([nav, f]) => {
+      // If STUDENT_DASHBOARD is disabled, student-facing features (ASSIGNMENTS, QUIZZES) must be hidden
+      if (
+        disabled.includes('STUDENT_DASHBOARD') &&
+        (nav === 'ASSIGNMENTS' ||
+          nav === 'QUIZZES' ||
+          f === 'ASSIGNMENTS' ||
+          f === 'QUIZZES' ||
+          (Array.isArray(f) && (f.includes('ASSIGNMENTS') || f.includes('QUIZZES'))))
+      ) {
+        return true;
+      }
+      return (Array.isArray(f) ? f : [f]).every((x) => disabled.includes(x));
+    })
     .map(([nav]) => nav);
-  return hidden;
 };
 
 /** Hides every menu button tagged data-nav-feature="KEY" for the given keys (page-wide, including quick links). */

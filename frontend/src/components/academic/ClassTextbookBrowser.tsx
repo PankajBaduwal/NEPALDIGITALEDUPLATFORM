@@ -13,6 +13,15 @@ import {
   CheckCircle2,
   FileText,
   RotateCcw,
+  LayoutGrid,
+  Table as TableIcon,
+  Plus,
+  RefreshCw,
+  UploadCloud,
+  X,
+  Globe,
+  Check,
+  GraduationCap,
 } from 'lucide-react';
 import { api } from '../../services/api';
 import { PdfReaderModal, TextbookData } from '../PdfReaderModal';
@@ -23,20 +32,56 @@ export interface ClassTextbookBrowserProps {
   theme?: 'emerald' | 'blue';
   onOpenReader?: (textbook: any) => void;
   initialGrade?: string;
+  onUpload?: () => void;
+  onSync?: () => void;
+  isSyncing?: boolean;
 }
 
+/**
+ * Sanitizes textbook titles extracted from cover pages that accidentally
+ * captured student form fill blanks like "Name : Roll number : School :" or "My name : .... Roll".
+ */
+export const formatBookTitle = (tb: any): string => {
+  const t = (tb?.title || '').trim();
+  const lower = t.toLowerCase();
+  const isGarbage =
+    !t ||
+    lower.includes('roll number') ||
+    (lower.includes('roll') && lower.includes('name')) ||
+    lower.startsWith('name :') ||
+    lower.startsWith('name:') ||
+    lower.startsWith('my name') ||
+    t.includes('....') ||
+    t.includes('????') ||
+    t.length < 3;
+
+  if (isGarbage) {
+    if (tb.sourceRelativePath) {
+      const baseName = tb.sourceRelativePath.split('/').pop()?.replace(/\.pdf$/i, '') || '';
+      // Strip random hash suffix like _rxsqekn or _pypxs5t
+      const cleanName = baseName.replace(/_[a-z0-9]{6,10}$/i, '').trim();
+      if (cleanName) {
+        return cleanName.replace(/-(\d{4})$/, ' ($1)');
+      }
+    }
+    return `Class ${tb.gradeNumber || ''} ${tb.logicalKey || 'Textbook'}`;
+  }
+  return t;
+};
+
 export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
-  title = 'Classes 1–12 Digital Textbooks & PDF Library',
-  subtitle = 'Official Curriculum Development Centre (CDC) accredited textbooks organized by Class (1–12) with dual-medium English and Nepali support.',
+  title = 'Classes 1–12 Digital Textbook & Curriculum PDF Management',
+  subtitle = 'Official Curriculum Development Centre (CDC) accredited textbooks across Classes 1–12 stored in the Nepal data/ folders with English and Nepali medium sorting.',
   theme = 'emerald',
   onOpenReader,
   initialGrade = 'ALL',
+  onUpload,
+  onSync,
+  isSyncing = false,
 }) => {
-  // Palette based on theme
-  const isEmerald = theme === 'emerald';
-  const primaryColor = isEmerald ? '#117a6b' : '#117a6b';
-  const primaryBg = isEmerald ? '#e6f7f0' : '#e6f7f0';
-  const primaryBorder = isEmerald ? '#bfeede' : '#bfeede';
+  const primaryColor = '#0f766e';
+  const primaryBg = '#f0fdfa';
+  const primaryBorder = '#ccfbf1';
 
   const [textbooks, setTextbooks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -47,6 +92,7 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
   const [selectedMedium, setSelectedMedium] = useState<'ALL' | 'ENGLISH' | 'NEPALI'>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'DEFAULT' | 'TITLE_ASC' | 'PAGES_DESC' | 'CHAPTERS_DESC'>('DEFAULT');
+  const [viewMode, setViewMode] = useState<'GRID' | 'TABLE'>('GRID');
 
   // Modal State
   const [activeReaderTextbook, setActiveReaderTextbook] = useState<TextbookData | null>(null);
@@ -62,7 +108,7 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
         const raw = res?.data || res;
         const list = Array.isArray(raw) ? raw : raw?.textbooks || [];
 
-        // Curriculum documents + teaching materials from Nepal data (shown alongside the class books)
+        // Curriculum documents + teaching materials from Nepal data
         let materials: any[] = [];
         try {
           const mr = await api.get<any>('/curriculum/reference-materials');
@@ -82,7 +128,7 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
             accessPath: `/curriculum/reference-materials/${m.id}/access`,
           }));
         } catch {
-          // Staff-only endpoint: other roles simply see the class textbooks.
+          // Staff-only endpoint
         }
         if (isMounted) {
           setTextbooks([...list, ...materials]);
@@ -111,7 +157,11 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
     }
     textbooks.forEach((tb) => {
       if (tb.isMaterial) {
-        if (tb.gradeFrom) for (let g = tb.gradeFrom; g <= (tb.gradeTo || tb.gradeFrom); g++) if (counts[String(g)] !== undefined) counts[String(g)] += 1;
+        if (tb.gradeFrom) {
+          for (let g = tb.gradeFrom; g <= (tb.gradeTo || tb.gradeFrom); g++) {
+            if (counts[String(g)] !== undefined) counts[String(g)] += 1;
+          }
+        }
         return;
       }
       const g = tb.gradeNumber ? String(tb.gradeNumber) : null;
@@ -120,6 +170,20 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
       }
     });
     return counts;
+  }, [textbooks]);
+
+  // Medium breakdown counts
+  const mediumCounts = useMemo(() => {
+    let eng = 0;
+    let nep = 0;
+    let dual = 0;
+    textbooks.forEach((tb) => {
+      const med = tb.medium || 'NEPALI';
+      if (med === 'ENGLISH') eng++;
+      else if (med === 'NEPALI') nep++;
+      else dual++;
+    });
+    return { eng, nep, dual };
   }, [textbooks]);
 
   // Filtered and Sorted Textbooks
@@ -146,13 +210,15 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
         }
       }
 
-      // Search query (matches title, titleNepali, sourceRelativePath, or subject code)
+      // Search query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
-        const matchesTitle = tb.title?.toLowerCase().includes(q);
+        const formattedTitle = formatBookTitle(tb).toLowerCase();
+        const matchesTitle = tb.title?.toLowerCase().includes(q) || formattedTitle.includes(q);
         const matchesNp = tb.titleNepali?.toLowerCase().includes(q);
         const matchesPath = tb.sourceRelativePath?.toLowerCase().includes(q) || tb.pdfPath?.toLowerCase().includes(q);
-        const matchesSubject = tb.subjectId?.name?.toLowerCase().includes(q) || tb.subjectId?.code?.toLowerCase().includes(q);
+        const matchesSubject =
+          tb.subjectId?.name?.toLowerCase().includes(q) || tb.subjectId?.code?.toLowerCase().includes(q);
         if (!matchesTitle && !matchesNp && !matchesPath && !matchesSubject) {
           return false;
         }
@@ -164,7 +230,7 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
     // Sorting
     result.sort((a, b) => {
       if (sortBy === 'TITLE_ASC') {
-        return (a.title || '').localeCompare(b.title || '');
+        return formatBookTitle(a).localeCompare(formatBookTitle(b));
       }
       if (sortBy === 'PAGES_DESC') {
         return (b.pageCount || 0) - (a.pageCount || 0);
@@ -178,7 +244,7 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
       const gA = a.gradeNumber || 99;
       const gB = b.gradeNumber || 99;
       if (gA !== gB) return gA - gB;
-      return (a.title || '').localeCompare(b.title || '');
+      return formatBookTitle(a).localeCompare(formatBookTitle(b));
     });
 
     return result;
@@ -196,169 +262,257 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
     }
   };
 
-  const formatBookTitle = (tb: any): string => {
-    if (!tb.title || tb.title.toLowerCase().startsWith('name : roll number') || tb.title.includes('????')) {
-      if (tb.sourceRelativePath) {
-        const baseName = tb.sourceRelativePath.split('/').pop()?.replace(/\.pdf$/i, '') || '';
-        const cleanName = baseName.replace(/_[a-z0-9]{6,10}$/i, '');
-        if (cleanName) return cleanName;
-      }
-      return `Class ${tb.gradeNumber || ''} ${tb.logicalKey || 'Textbook'}`;
-    }
-    return tb.title;
+  const isFiltered = selectedGrade !== 'ALL' || selectedMedium !== 'ALL' || searchQuery.trim().length > 0;
+
+  const handleResetFilters = () => {
+    setSelectedGrade('ALL');
+    setSelectedMedium('ALL');
+    setSearchQuery('');
+    setSortBy('DEFAULT');
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      {/* ── HEADER BANNER ─────────────────────────────────────────── */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      {/* ── UNIFIED EXECUTIVE HEADER BANNER ─────────────────────────── */}
       <div
         style={{
           background: '#ffffff',
           borderRadius: '16px',
-          border: '1px solid #dcebe6',
-          padding: '22px 26px',
+          border: '1px solid #e2e8f0',
+          padding: '20px 24px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '16px',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
+          boxShadow: '0 4px 20px -2px rgba(0, 0, 0, 0.04)',
         }}
       >
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-            <div
-              style={{
-                width: '38px',
-                height: '38px',
-                borderRadius: '10px',
-                background: primaryBg,
-                color: primaryColor,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: `1px solid ${primaryBorder}`,
-              }}
-            >
-              <BookCheck size={22} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div
+            style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '12px',
+              background: '#0f766e',
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 2px 8px rgba(15, 118, 110, 0.25)',
+              flexShrink: 0,
+            }}
+          >
+            <BookCheck size={24} />
+          </div>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span
+                style={{
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  color: '#0f766e',
+                  background: '#f0fdfa',
+                  border: '1px solid #ccfbf1',
+                  padding: '1px 8px',
+                  borderRadius: '6px',
+                }}
+              >
+                Government of Nepal • CDC
+              </span>
             </div>
-            <div>
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0e3e3b', margin: 0 }}>
-                {title}
-              </h3>
-              <p style={{ fontSize: '13px', color: '#5f736f', margin: '2px 0 0 0' }}>
-                {subtitle}
-              </p>
-            </div>
+            <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: '3px 0 0' }}>
+              {title}
+            </h2>
+            <p style={{ fontSize: '12.5px', color: '#64748b', margin: '2px 0 0' }}>
+              {subtitle}
+            </p>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <div style={{ textAlign: 'right', display: 'flex', gap: '16px', background: '#f4faf8', padding: '10px 18px', borderRadius: '12px', border: '1px solid #dcebe6' }}>
-            <div>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: primaryColor }}>
-                {textbooks.length}
-              </div>
-              <div style={{ fontSize: '11px', color: '#5f736f', fontWeight: 600 }}>Total Books</div>
-            </div>
-            <div style={{ width: '1px', background: '#cfdcd8' }} />
-            <div>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: '#0e3e3b' }}>
-                12
-              </div>
-              <div style={{ fontSize: '11px', color: '#5f736f', fontWeight: 600 }}>Classes (1–12)</div>
-            </div>
-            <div style={{ width: '1px', background: '#cfdcd8' }} />
-            <div>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: '#6d5bd0' }}>
-                2
-              </div>
-              <div style={{ fontSize: '11px', color: '#5f736f', fontWeight: 600 }}>Mediums (En/Np)</div>
-            </div>
-          </div>
-
-          <a
-            href="/smartboard/index.html"
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* Action Controls & Quick Metrics */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          {/* Quick Metrics Cluster */}
+          <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
-              padding: '10px 16px',
-              background: `linear-gradient(135deg, ${primaryColor}, #3b82f6)`,
-              color: '#ffffff',
+              gap: '14px',
+              background: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              padding: '6px 14px',
               borderRadius: '10px',
-              fontSize: '12.5px',
-              fontWeight: 700,
-              textDecoration: 'none',
-              boxShadow: '0 3px 8px rgba(37, 99, 235, 0.25)',
-              transition: 'transform 0.15s ease',
             }}
           >
-            <Presentation size={16} />
-            <span>Launch Smart Board</span>
-          </a>
+            <div>
+              <div style={{ fontSize: '15px', fontWeight: 800, color: '#0f766e', textAlign: 'center' }}>
+                {textbooks.length}
+              </div>
+              <div style={{ fontSize: '10.5px', color: '#64748b', fontWeight: 600 }}>Total Books</div>
+            </div>
+            <div style={{ width: '1px', height: '22px', background: '#cbd5e1' }} />
+            <div>
+              <div style={{ fontSize: '15px', fontWeight: 800, color: '#1e293b', textAlign: 'center' }}>
+                12
+              </div>
+              <div style={{ fontSize: '10.5px', color: '#64748b', fontWeight: 600 }}>Classes (1–12)</div>
+            </div>
+            <div style={{ width: '1px', height: '22px', background: '#cbd5e1' }} />
+            <div>
+              <div style={{ fontSize: '15px', fontWeight: 800, color: '#6366f1', textAlign: 'center' }}>
+                2
+              </div>
+              <div style={{ fontSize: '10.5px', color: '#64748b', fontWeight: 600 }}>Mediums (En/Np)</div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <a
+              href="/smartboard/index.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: '#ffffff',
+                color: '#0f766e',
+                border: '1px solid #99f6e4',
+                borderRadius: '8px',
+                fontSize: '12.5px',
+                fontWeight: 700,
+                textDecoration: 'none',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+                transition: 'all 0.15s ease',
+              }}
+              title="Launch Smart Board interactive presentation environment"
+            >
+              <Presentation size={15} color="#0f766e" />
+              <span>Smart Board</span>
+            </a>
+
+            {onSync && (
+              <button
+                onClick={onSync}
+                disabled={isSyncing}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '8px 14px',
+                  background: '#f8fafc',
+                  color: '#334155',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: '8px',
+                  fontSize: '12.5px',
+                  fontWeight: 700,
+                  cursor: isSyncing ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+                title="Scan and ingest CDC textbooks from Nepal data/ folders"
+              >
+                <RefreshCw size={14} className={isSyncing ? 'animate-spin' : ''} color="#64748b" />
+                <span>{isSyncing ? 'Scanning...' : 'Re-sync Nepal data/'}</span>
+              </button>
+            )}
+
+            {onUpload && (
+              <button
+                onClick={onUpload}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '8px 16px',
+                  background: '#0f766e',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '8px',
+                  fontSize: '12.5px',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 6px rgba(15,118,110,0.25)',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                <Plus size={15} />
+                <span>Upload PDF</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* ── CLASS BUTTON SELECTOR (CLASSES 1 TO 12) ────────────────── */}
+      {/* ── CLASS SEGMENTED NAVIGATION BAR (CLASSES 1 TO 12) ─────────── */}
       <div
         style={{
           background: '#ffffff',
-          borderRadius: '16px',
-          border: '1px solid #dcebe6',
-          padding: '16px 20px',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+          borderRadius: '14px',
+          border: '1px solid #e2e8f0',
+          padding: '12px 16px',
+          boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Folder size={16} color={primaryColor} />
-            <span style={{ fontSize: '13px', fontWeight: 800, color: '#0e3e3b' }}>
-              Select Class / Grade (Folders in Nepal data/):
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <Folder size={15} color="#0f766e" />
+            <span style={{ fontSize: '12.5px', fontWeight: 800, color: '#1e293b' }}>
+              Select Class / Grade (Nepal data/ archives):
             </span>
           </div>
-
           {selectedGrade !== 'ALL' && (
             <button
               onClick={() => setSelectedGrade('ALL')}
               style={{
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
                 gap: '4px',
                 background: 'none',
                 border: 'none',
-                color: primaryColor,
+                color: '#0f766e',
                 fontSize: '12px',
                 fontWeight: 700,
                 cursor: 'pointer',
-                padding: '2px 6px',
+                padding: '2px 4px',
               }}
             >
-              <RotateCcw size={13} /> View All Classes
+              <RotateCcw size={12} /> Show All Classes ({textbooks.length})
             </button>
           )}
         </div>
 
-        {/* Horizontal Class Pills List */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+        {/* Clean Horizontal Tabs Scroll Container */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            overflowX: 'auto',
+            paddingBottom: '4px',
+            WebkitOverflowScrolling: 'touch',
+          }}
+        >
           <button
             onClick={() => setSelectedGrade('ALL')}
             style={{
-              padding: '8px 16px',
-              borderRadius: '10px',
-              fontSize: '13px',
+              padding: '6px 14px',
+              borderRadius: '8px',
+              fontSize: '12.5px',
               fontWeight: selectedGrade === 'ALL' ? 800 : 600,
-              background: selectedGrade === 'ALL' ? primaryColor : '#f4faf8',
-              color: selectedGrade === 'ALL' ? '#ffffff' : '#2f4f4c',
-              border: `1.5px solid ${selectedGrade === 'ALL' ? primaryColor : '#dcebe6'}`,
+              background: selectedGrade === 'ALL' ? '#0f766e' : '#f8fafc',
+              color: selectedGrade === 'ALL' ? '#ffffff' : '#334155',
+              border: `1px solid ${selectedGrade === 'ALL' ? '#0f766e' : '#e2e8f0'}`,
               cursor: 'pointer',
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
+              whiteSpace: 'nowrap',
+              boxShadow: selectedGrade === 'ALL' ? '0 2px 6px rgba(15,118,110,0.2)' : 'none',
               transition: 'all 0.15s ease',
-              boxShadow: selectedGrade === 'ALL' ? '0 2px 6px rgba(0,0,0,0.1)' : 'none',
             }}
           >
             <span>All Classes</span>
@@ -367,9 +521,9 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
                 fontSize: '11px',
                 padding: '1px 6px',
                 borderRadius: '999px',
-                background: selectedGrade === 'ALL' ? 'rgba(255,255,255,0.25)' : '#dcebe6',
-                color: selectedGrade === 'ALL' ? '#ffffff' : '#5f736f',
-                fontWeight: 700,
+                background: selectedGrade === 'ALL' ? 'rgba(255,255,255,0.25)' : '#e2e8f0',
+                color: selectedGrade === 'ALL' ? '#ffffff' : '#64748b',
+                fontWeight: 800,
               }}
             >
               {gradeCounts['ALL']}
@@ -384,19 +538,20 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
                 key={g}
                 onClick={() => setSelectedGrade(String(g))}
                 style={{
-                  padding: '8px 14px',
-                  borderRadius: '10px',
-                  fontSize: '13px',
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  fontSize: '12.5px',
                   fontWeight: isSelected ? 800 : 600,
-                  background: isSelected ? primaryColor : '#ffffff',
-                  color: isSelected ? '#ffffff' : '#2f4f4c',
-                  border: `1.5px solid ${isSelected ? primaryColor : '#dcebe6'}`,
+                  background: isSelected ? '#0f766e' : '#ffffff',
+                  color: isSelected ? '#ffffff' : '#334155',
+                  border: `1px solid ${isSelected ? '#0f766e' : '#e2e8f0'}`,
                   cursor: 'pointer',
-                  display: 'flex',
+                  display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
+                  whiteSpace: 'nowrap',
+                  boxShadow: isSelected ? '0 2px 6px rgba(15,118,110,0.2)' : 'none',
                   transition: 'all 0.15s ease',
-                  boxShadow: isSelected ? '0 2px 6px rgba(0,0,0,0.12)' : 'none',
                 }}
               >
                 <span>Class {g}</span>
@@ -405,8 +560,8 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
                     fontSize: '11px',
                     padding: '1px 6px',
                     borderRadius: '999px',
-                    background: isSelected ? 'rgba(255,255,255,0.25)' : count > 0 ? '#e6f7f0' : '#ebf5f1',
-                    color: isSelected ? '#ffffff' : count > 0 ? '#117a6b' : '#8da19d',
+                    background: isSelected ? 'rgba(255,255,255,0.25)' : count > 0 ? '#f0fdfa' : '#f1f5f9',
+                    color: isSelected ? '#ffffff' : count > 0 ? '#0f766e' : '#94a3b8',
                     fontWeight: 700,
                   }}
                 >
@@ -418,90 +573,80 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
         </div>
       </div>
 
-      {/* ── FILTER & SORT CONTROLS BAR ──────────────────────────────── */}
+      {/* ── TOOLBAR: SEARCH, MEDIUM FILTER, SORT & VIEW SWITCHER ───── */}
       <div
         style={{
           background: '#ffffff',
           borderRadius: '14px',
-          border: '1px solid #dcebe6',
-          padding: '14px 20px',
+          border: '1px solid #e2e8f0',
+          padding: '12px 18px',
           display: 'flex',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: '14px',
+          gap: '12px',
           boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
         }}
       >
-        {/* Realtime Search Input */}
-        <div style={{ flex: '1 1 200px', position: 'relative' }}>
+        {/* Real-time Search Box */}
+        <div style={{ flex: '1 1 260px', minWidth: '220px', position: 'relative' }}>
           <Search
-            size={16}
+            size={15}
             style={{
               position: 'absolute',
               left: '12px',
               top: '50%',
               transform: 'translateY(-50%)',
-              color: '#8da19d',
+              color: '#94a3b8',
             }}
           />
           <input
             type="text"
-            placeholder="Search textbook by title, subject, or filename..."
+            placeholder="Search textbook by title, subject, chapter, or file..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
               width: '100%',
-              padding: '9px 14px 9px 36px',
+              padding: '8px 32px 8px 34px',
               borderRadius: '8px',
-              border: '1.5px solid #cfdcd8',
+              border: '1px solid #cbd5e1',
               fontSize: '13px',
-              color: '#0e3e3b',
+              color: '#0f172a',
               outline: 'none',
+              background: '#ffffff',
               boxSizing: 'border-box',
             }}
-            onFocus={(e) => (e.target.style.borderColor = primaryColor)}
-            onBlur={(e) => (e.target.style.borderColor = '#cfdcd8')}
           />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              style={{
+                position: 'absolute',
+                right: '10px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#94a3b8',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '2px',
+              }}
+            >
+              <X size={14} />
+            </button>
+          )}
         </div>
 
-        {/* Grade Filter Dropdown */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '13px', fontWeight: 700, color: '#0e3e3b' }}>
-            Filter Textbooks:
-          </span>
-          <select
-            value={selectedGrade}
-            onChange={(e) => setSelectedGrade(e.target.value)}
-            style={{
-              padding: '8px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: 600,
-              border: '1.5px solid #cfdcd8',
-              background: '#ffffff',
-              color: '#0e3e3b',
-              cursor: 'pointer',
-              outline: 'none',
-            }}
-          >
-            <option value="ALL">All Grades (1–12)</option>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((g) => (
-              <option key={g} value={String(g)}>
-                Grade {g}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Medium Filter Pills */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#4b605b' }}>
+        {/* Medium Segmented Control */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <span style={{ fontSize: '12px', fontWeight: 700, color: '#64748b', marginRight: '4px' }}>
             Medium:
           </span>
           {[
             { key: 'ALL', label: 'All Mediums' },
             { key: 'ENGLISH', label: 'English Medium' },
-            { key: 'NEPALI', label: 'Nepali Medium (नेपाली)' },
+            { key: 'NEPALI', label: 'Nepali (नेपाली)' },
           ].map((m) => {
             const isSel = selectedMedium === m.key;
             return (
@@ -509,15 +654,16 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
                 key={m.key}
                 onClick={() => setSelectedMedium(m.key as any)}
                 style={{
-                  padding: '7px 12px',
-                  borderRadius: '8px',
+                  padding: '6px 11px',
+                  borderRadius: '7px',
                   fontSize: '12px',
-                  fontWeight: isSel ? 800 : 600,
-                  background: isSel ? (m.key === 'ENGLISH' ? '#117a6b' : m.key === 'NEPALI' ? '#6d5bd0' : primaryColor) : '#f4faf8',
-                  color: isSel ? '#ffffff' : '#4b605b',
-                  border: `1px solid ${isSel ? 'transparent' : '#cfdcd8'}`,
+                  fontWeight: isSel ? 700 : 500,
+                  background: isSel ? '#0f766e' : '#f8fafc',
+                  color: isSel ? '#ffffff' : '#475569',
+                  border: `1px solid ${isSel ? '#0f766e' : '#e2e8f0'}`,
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 {m.label}
@@ -526,21 +672,22 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
           })}
         </div>
 
-        {/* Sort By Dropdown */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <SlidersHorizontal size={15} color="#5f736f" />
+        {/* Sort Dropdown */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <SlidersHorizontal size={14} color="#64748b" />
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
             style={{
-              padding: '8px 12px',
-              borderRadius: '8px',
-              border: '1.5px solid #cfdcd8',
-              fontSize: '12.5px',
-              color: '#2f4f4c',
+              padding: '7px 10px',
+              borderRadius: '7px',
+              border: '1px solid #cbd5e1',
+              fontSize: '12px',
+              color: '#334155',
               background: '#ffffff',
               fontWeight: 600,
               cursor: 'pointer',
+              outline: 'none',
             }}
           >
             <option value="DEFAULT">Sort: Class & Title</option>
@@ -550,89 +697,177 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
           </select>
         </div>
 
-        {/* Result Counter Pill */}
+        {/* View Mode Switcher (Grid / Table) */}
         <div
           style={{
-            marginLeft: 'auto',
-            padding: '7px 14px',
-            background: primaryBg,
+            display: 'flex',
+            background: '#f1f5f9',
+            padding: '2px',
             borderRadius: '8px',
-            border: `1px solid ${primaryBorder}`,
-            fontSize: '12.5px',
-            fontWeight: 800,
-            color: primaryColor,
+            border: '1px solid #e2e8f0',
           }}
         >
-          {filteredTextbooks.length} Books Found
-          {selectedGrade !== 'ALL' && ` in Class ${selectedGrade}`}
+          <button
+            onClick={() => setViewMode('GRID')}
+            title="Grid Cards View"
+            style={{
+              padding: '5px 9px',
+              borderRadius: '6px',
+              border: 'none',
+              background: viewMode === 'GRID' ? '#ffffff' : 'transparent',
+              color: viewMode === 'GRID' ? '#0f766e' : '#64748b',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              fontSize: '12px',
+              fontWeight: 700,
+              boxShadow: viewMode === 'GRID' ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
+            }}
+          >
+            <LayoutGrid size={14} />
+            <span>Grid</span>
+          </button>
+          <button
+            onClick={() => setViewMode('TABLE')}
+            title="Compact Table View"
+            style={{
+              padding: '5px 9px',
+              borderRadius: '6px',
+              border: 'none',
+              background: viewMode === 'TABLE' ? '#ffffff' : 'transparent',
+              color: viewMode === 'TABLE' ? '#0f766e' : '#64748b',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              fontSize: '12px',
+              fontWeight: 700,
+              boxShadow: viewMode === 'TABLE' ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
+            }}
+          >
+            <TableIcon size={14} />
+            <span>Table</span>
+          </button>
+        </div>
+
+        {/* Results Counter Pill & Reset Button */}
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div
+            style={{
+              padding: '6px 12px',
+              background: '#f0fdfa',
+              borderRadius: '7px',
+              border: '1px solid #ccfbf1',
+              fontSize: '12px',
+              fontWeight: 800,
+              color: '#0f766e',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {filteredTextbooks.length} Books
+            {selectedGrade !== 'ALL' ? ` in Class ${selectedGrade}` : ''}
+          </div>
+
+          {isFiltered && (
+            <button
+              onClick={handleResetFilters}
+              title="Reset all search & medium filters"
+              style={{
+                padding: '5px 9px',
+                borderRadius: '6px',
+                background: '#f8fafc',
+                border: '1px solid #cbd5e1',
+                color: '#64748b',
+                fontSize: '11.5px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+            >
+              <RotateCcw size={11} /> Reset
+            </button>
+          )}
         </div>
       </div>
 
-      {/* ── ACTIVE CLASS CONTEXT BANNER ─────────────────────────────── */}
+      {/* ── ACTIVE FILTER CONTEXT CHIP ──────────────────────────────── */}
       {selectedGrade !== 'ALL' && (
         <div
           style={{
-            background: '#f4faf8',
-            border: '1px solid #dcebe6',
-            borderRadius: '12px',
-            padding: '12px 18px',
+            background: '#f8fafc',
+            border: '1px solid #e2e8f0',
+            borderRadius: '10px',
+            padding: '10px 16px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            fontSize: '12.5px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ fontSize: '13px', fontWeight: 800, color: '#0e3e3b' }}>
-              Viewing Folder:
-            </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontWeight: 700, color: '#334155' }}>Active Folder:</span>
             <code
               style={{
                 background: '#ffffff',
-                border: '1px solid #cfdcd8',
-                padding: '3px 8px',
+                border: '1px solid #cbd5e1',
+                padding: '2px 8px',
                 borderRadius: '6px',
                 fontSize: '12px',
                 fontWeight: 700,
-                color: primaryColor,
+                color: '#0f766e',
+                fontFamily: 'ui-monospace, SFMono-Regular, monospace',
               }}
             >
               Nepal data/class{selectedGrade}/
             </code>
-            <span style={{ fontSize: '12px', color: '#5f736f' }}>
-              • {filteredTextbooks.length} official textbook PDFs extracted
+            <span style={{ color: '#64748b' }}>
+              • {filteredTextbooks.length} textbooks cataloged
             </span>
           </div>
-
-          <div style={{ fontSize: '12px', color: '#5f736f' }}>
-            Classes 1–12 Dual-Medium CDC Curriculum
-          </div>
+          <button
+            onClick={() => setSelectedGrade('ALL')}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#0f766e',
+              fontWeight: 700,
+              fontSize: '12px',
+              cursor: 'pointer',
+            }}
+          >
+            Show All Classes ✕
+          </button>
         </div>
       )}
 
-      {/* ── TEXTBOOKS GRID ─────────────────────────────────────────── */}
+      {/* ── CONTENT PRESENTATION (GRID OR TABLE) ─────────────────────── */}
       {loading ? (
         <div
           style={{
             textAlign: 'center',
-            padding: '80px 20px',
+            padding: '60px 20px',
             background: '#ffffff',
-            borderRadius: '16px',
-            border: '1px solid #dcebe6',
-            color: '#5f736f',
+            borderRadius: '14px',
+            border: '1px solid #e2e8f0',
+            color: '#64748b',
           }}
         >
-          <div style={{ fontSize: '15px', fontWeight: 700, color: '#0e3e3b', marginBottom: '6px' }}>
-            Loading Nepal CDC Textbooks...
+          <RefreshCw size={24} className="animate-spin" color="#0f766e" style={{ margin: '0 auto 10px' }} />
+          <div style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a' }}>
+            Loading Nepal CDC Digital Textbooks...
           </div>
-          <div style={{ fontSize: '13px' }}>
-            Connecting to official curriculum repository and streaming catalog.
+          <div style={{ fontSize: '12px', color: '#64748b', marginTop: '3px' }}>
+            Connecting to official national curriculum repository.
           </div>
         </div>
       ) : error ? (
         <div
           style={{
             textAlign: 'center',
-            padding: '40px',
+            padding: '30px',
             background: '#fef2f2',
             borderRadius: '12px',
             border: '1px solid #fecaca',
@@ -647,29 +882,25 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
             textAlign: 'center',
             padding: '60px 20px',
             background: '#ffffff',
-            borderRadius: '16px',
-            border: '1px solid #dcebe6',
+            borderRadius: '14px',
+            border: '1px solid #e2e8f0',
           }}
         >
-          <BookOpen size={44} color="#8da19d" style={{ margin: '0 auto 12px' }} />
-          <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#0e3e3b', margin: '0 0 6px' }}>
+          <BookOpen size={40} color="#cbd5e1" style={{ margin: '0 auto 10px' }} />
+          <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: '0 0 6px' }}>
             No Textbooks Match Your Filters
           </h4>
-          <p style={{ fontSize: '13px', color: '#5f736f', maxWidth: '440px', margin: '0 auto 16px' }}>
-            No books found for Class {selectedGrade} with the selected medium filter. Try changing medium to "All Mediums" or clearing your search.
+          <p style={{ fontSize: '13px', color: '#64748b', maxWidth: '420px', margin: '0 auto 14px' }}>
+            No books found for Class {selectedGrade} with the selected medium or query.
           </p>
           <button
-            onClick={() => {
-              setSelectedGrade('ALL');
-              setSelectedMedium('ALL');
-              setSearchQuery('');
-            }}
+            onClick={handleResetFilters}
             style={{
               padding: '8px 16px',
               borderRadius: '8px',
-              background: primaryColor,
+              background: '#0f766e',
               color: '#ffffff',
-              fontSize: '13px',
+              fontSize: '12.5px',
               fontWeight: 700,
               border: 'none',
               cursor: 'pointer',
@@ -678,12 +909,13 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
             Reset All Filters
           </button>
         </div>
-      ) : (
+      ) : viewMode === 'GRID' ? (
+        /* ── GRID CARD VIEW ─────────────────────────────────────────── */
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))',
-            gap: '18px',
+            gap: '16px',
           }}
         >
           {filteredTextbooks.map((tb) => {
@@ -691,14 +923,19 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
             const chaptersCount = Array.isArray(tb.chapters) ? tb.chapters.length : 0;
             const isEng = tb.medium === 'ENGLISH';
             const isNep = tb.medium === 'NEPALI';
-            const isBoth = tb.medium === 'BOTH';
+            const cleanTitle = formatBookTitle(tb);
 
-            // Determine folder path
             const folderName = tb.sourceRelativePath
               ? tb.sourceRelativePath.split('/')[0]
               : tb.gradeNumber
-                ? `class${tb.gradeNumber}`
-                : 'class';
+              ? `class${tb.gradeNumber}`
+              : 'class';
+
+            // Clean Edition Tag (Hide 'Not stated in source')
+            const hasRealEdition =
+              tb.edition &&
+              tb.edition.trim().length > 0 &&
+              !tb.edition.toLowerCase().includes('not stated');
 
             return (
               <div
@@ -706,28 +943,28 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
                 style={{
                   background: '#ffffff',
                   borderRadius: '14px',
-                  border: '1px solid #dcebe6',
-                  padding: '18px 20px',
+                  border: '1px solid #e2e8f0',
+                  padding: '16px 18px',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  gap: '14px',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.03)',
+                  gap: '12px',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.02)',
                   transition: 'all 0.15s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = primaryColor;
+                  e.currentTarget.style.borderColor = '#0f766e';
                   e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.06)';
+                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(15,118,110,0.08)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#dcebe6';
+                  e.currentTarget.style.borderColor = '#e2e8f0';
                   e.currentTarget.style.transform = 'none';
-                  e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.03)';
+                  e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.02)';
                 }}
               >
                 <div>
-                  {/* Top Badges */}
+                  {/* Top Badges Row */}
                   <div
                     style={{
                       display: 'flex',
@@ -740,27 +977,33 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
                       style={{
                         fontSize: '11px',
                         fontWeight: 800,
-                        background: '#e6f7f0',
-                        color: '#117a6b',
-                        padding: '3px 8px',
+                        background: '#f0fdfa',
+                        color: '#0f766e',
+                        padding: '2px 8px',
                         borderRadius: '6px',
-                        border: '1px solid #bfeede',
+                        border: '1px solid #ccfbf1',
                       }}
                     >
                       {tb.isMaterial
-                        ? `${tb.materialKind} · ${tb.gradeFrom ? (tb.gradeTo && tb.gradeTo !== tb.gradeFrom ? `Class ${tb.gradeFrom}–${tb.gradeTo}` : `Class ${tb.gradeFrom}`) : 'All Classes'}`
+                        ? `${tb.materialKind} · ${
+                            tb.gradeFrom
+                              ? tb.gradeTo && tb.gradeTo !== tb.gradeFrom
+                                ? `Class ${tb.gradeFrom}–${tb.gradeTo}`
+                                : `Class ${tb.gradeFrom}`
+                              : 'All Classes'
+                          }`
                         : `Class ${tb.gradeNumber || '—'}`}
                     </span>
 
-                    <div style={{ display: 'flex', gap: '6px' }}>
+                    <div style={{ display: 'flex', gap: '5px' }}>
                       <span
                         style={{
                           fontSize: '10.5px',
                           fontWeight: 700,
-                          background: isEng ? '#e6f7f0' : isNep ? '#f5f3ff' : '#f5f3ff',
-                          color: isEng ? '#117a6b' : isNep ? '#6d5bd0' : '#7c3aed',
-                          border: `1px solid ${isEng ? '#bfeede' : isNep ? '#ddd6fe' : '#ddd6fe'}`,
-                          padding: '2px 7px',
+                          background: isEng ? '#ecfdf5' : isNep ? '#f5f3ff' : '#f0fdf4',
+                          color: isEng ? '#047857' : isNep ? '#6d28d9' : '#0f766e',
+                          border: `1px solid ${isEng ? '#a7f3d0' : isNep ? '#ddd6fe' : '#bbf7d0'}`,
+                          padding: '1px 7px',
                           borderRadius: '6px',
                         }}
                       >
@@ -770,17 +1013,18 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
                       <span
                         style={{
                           fontSize: '10.5px',
-                          fontWeight: 700,
-                          background: '#f4faf8',
-                          color: '#5f736f',
-                          border: '1px solid #dcebe6',
-                          padding: '2px 6px',
+                          fontWeight: 600,
+                          background: '#f8fafc',
+                          color: '#64748b',
+                          border: '1px solid #e2e8f0',
+                          padding: '1px 6px',
                           borderRadius: '6px',
                           display: 'inline-flex',
                           alignItems: 'center',
                           gap: '3px',
+                          fontFamily: 'monospace',
                         }}
-                        title={`Source folder: Nepal data/${folderName}/`}
+                        title={`Folder: Nepal data/${folderName}/`}
                       >
                         <Folder size={10} />
                         {folderName}
@@ -788,55 +1032,84 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
                     </div>
                   </div>
 
-                  {/* Book Title */}
+                  {/* Sanitized Book Title */}
                   <h4
                     style={{
-                      fontSize: '15px',
+                      fontSize: '14.5px',
                       fontWeight: 800,
-                      color: '#0e3e3b',
-                      margin: '0 0 4px',
+                      color: '#0f172a',
+                      margin: '0 0 3px',
                       lineHeight: '1.35',
                     }}
+                    title={cleanTitle}
                   >
-                    {formatBookTitle(tb)}
+                    {cleanTitle}
                   </h4>
 
                   {tb.titleNepali && tb.titleNepali !== tb.title && (
-                    <div style={{ fontSize: '13px', color: '#5f736f', fontWeight: 600, marginBottom: '6px' }}>
+                    <div style={{ fontSize: '12.5px', color: '#64748b', fontWeight: 600, marginBottom: '6px' }}>
                       {tb.titleNepali}
                     </div>
                   )}
 
-                  {/* Metadata Indicators */}
+                  {/* Metadata Indicators Row */}
                   <div
                     style={{
                       display: 'flex',
                       flexWrap: 'wrap',
-                      gap: '8px',
-                      marginTop: '10px',
+                      gap: '6px',
+                      marginTop: '8px',
                       fontSize: '11px',
-                      color: '#5f736f',
+                      color: '#64748b',
                       fontWeight: 600,
                     }}
                   >
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', background: '#f4faf8', padding: '2px 7px', borderRadius: '4px' }}>
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '3px',
+                        background: '#f8fafc',
+                        border: '1px solid #e2e8f0',
+                        padding: '2px 6px',
+                        borderRadius: '5px',
+                      }}
+                    >
                       📖 {chaptersCount > 0 ? `${chaptersCount} Chapters` : 'Curriculum PDF'}
                     </span>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', background: '#f4faf8', padding: '2px 7px', borderRadius: '4px' }}>
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '3px',
+                        background: '#f8fafc',
+                        border: '1px solid #e2e8f0',
+                        padding: '2px 6px',
+                        borderRadius: '5px',
+                      }}
+                    >
                       📄 {tb.pageCount || '—'} Pages
                     </span>
-                    {tb.edition && (
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', background: '#f4faf8', padding: '2px 7px', borderRadius: '4px' }}>
-                        🇳🇵 {tb.edition}
-                      </span>
-                    )}
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '3px',
+                        background: '#f8fafc',
+                        border: '1px solid #e2e8f0',
+                        padding: '2px 6px',
+                        borderRadius: '5px',
+                      }}
+                    >
+                      {hasRealEdition ? `🇳🇵 ${tb.edition}` : '🏛️ CDC Accredited'}
+                    </span>
                   </div>
                 </div>
 
                 {/* Card Action Buttons */}
                 <div
                   style={{
-                    borderTop: '1px solid #ebf5f1',
+                    borderTop: '1px solid #f1f5f9',
                     paddingTop: '12px',
                     display: 'flex',
                     gap: '8px',
@@ -846,55 +1119,257 @@ export const ClassTextbookBrowser: React.FC<ClassTextbookBrowserProps> = ({
                     onClick={() => handleOpenPdf(tb)}
                     style={{
                       flex: 1,
-                      padding: '9px 12px',
-                      background: primaryColor,
+                      padding: '8px 12px',
+                      background: '#0f766e',
                       color: '#ffffff',
                       border: 'none',
-                      borderRadius: '8px',
+                      borderRadius: '7px',
                       fontSize: '12px',
                       fontWeight: 700,
                       cursor: 'pointer',
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '6px',
+                      gap: '5px',
+                      boxShadow: '0 1px 3px rgba(15,118,110,0.2)',
                       transition: 'background 0.15s ease',
-                      boxShadow: '0 2px 6px rgba(17, 122, 107, 0.2)',
+                      whiteSpace: 'nowrap',
                     }}
                   >
-                    <BookOpen size={14} />
+                    <BookOpen size={13} />
                     <span>Read PDF</span>
                   </button>
 
-                  {!tb.isMaterial && <a
-                    href={`/smartboard/index.html?pdf=${encodeURIComponent(
-                      `/api/v1/curriculum/textbooks/${tbId}/pdf`
-                    )}&title=${encodeURIComponent(tb.title)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      padding: '9px 12px',
-                      background: primaryBg,
-                      color: primaryColor,
-                      border: `1px solid ${primaryBorder}`,
-                      borderRadius: '8px',
-                      fontSize: '12px',
-                      fontWeight: 700,
-                      textDecoration: 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                      transition: 'all 0.15s ease',
-                    }}
-                    title="Launch on Interactive Smart Board"
-                  >
-                    <Presentation size={14} />
-                    <span>Smart Board</span>
-                  </a>}
+                  {!tb.isMaterial && (
+                    <a
+                      href={`/smartboard/index.html?pdf=${encodeURIComponent(
+                        `/api/v1/curriculum/textbooks/${tbId}/pdf`
+                      )}&title=${encodeURIComponent(cleanTitle)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        padding: '8px 12px',
+                        background: '#f0fdfa',
+                        color: '#0f766e',
+                        border: '1px solid #99f6e4',
+                        borderRadius: '7px',
+                        fontSize: '12px',
+                        fontWeight: 700,
+                        textDecoration: 'none',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        whiteSpace: 'nowrap',
+                        transition: 'all 0.15s ease',
+                      }}
+                      title="Launch on Interactive Smart Board"
+                    >
+                      <Presentation size={13} />
+                      <span>Smart Board</span>
+                    </a>
+                  )}
                 </div>
               </div>
             );
           })}
+        </div>
+      ) : (
+        /* ── COMPACT TABLE VIEW ─────────────────────────────────────── */
+        <div
+          style={{
+            background: '#ffffff',
+            borderRadius: '14px',
+            border: '1px solid #e2e8f0',
+            overflow: 'hidden',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
+          }}
+        >
+          <div style={{ overflowX: 'auto', width: '100%', WebkitOverflowScrolling: 'touch' }}>
+            <table
+              style={{
+                width: '100%',
+                minWidth: '1050px',
+                borderCollapse: 'separate',
+                borderSpacing: 0,
+                textAlign: 'left',
+                fontSize: '13px',
+              }}
+            >
+              <thead>
+                <tr
+                  style={{
+                    background: '#f8fafc',
+                    borderBottom: '1px solid #e2e8f0',
+                    color: '#475569',
+                    fontWeight: '700',
+                    fontSize: '11px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                  }}
+                >
+                  <th style={{ padding: '12px 16px', width: '45px', borderBottom: '1px solid #e2e8f0' }}>#</th>
+                  <th style={{ padding: '12px 16px', width: '100px', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap' }}>Class</th>
+                  <th style={{ padding: '12px 16px', minWidth: '300px', borderBottom: '1px solid #e2e8f0' }}>Textbook Title</th>
+                  <th style={{ padding: '12px 16px', width: '120px', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap' }}>Medium</th>
+                  <th style={{ padding: '12px 16px', width: '110px', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap' }}>Pages</th>
+                  <th style={{ padding: '12px 16px', width: '120px', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap' }}>Chapters</th>
+                  <th style={{ padding: '12px 16px', width: '150px', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap' }}>Archive Folder</th>
+                  <th style={{ padding: '12px 16px', width: '200px', textAlign: 'right', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap' }}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredTextbooks.map((tb, idx) => {
+                  const tbId = tb.id || tb._id;
+                  const chaptersCount = Array.isArray(tb.chapters) ? tb.chapters.length : 0;
+                  const isEng = tb.medium === 'ENGLISH';
+                  const isNep = tb.medium === 'NEPALI';
+                  const cleanTitle = formatBookTitle(tb);
+                  const folderName = tb.sourceRelativePath
+                    ? tb.sourceRelativePath.split('/')[0]
+                    : tb.gradeNumber
+                    ? `class${tb.gradeNumber}`
+                    : 'class';
+
+                  return (
+                    <tr
+                      key={tbId}
+                      style={{
+                        borderBottom: '1px solid #f1f5f9',
+                        transition: 'background 0.15s ease',
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = '#f8fafc')}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                    >
+                      <td style={{ padding: '12px 16px', color: '#94a3b8', fontSize: '12px', borderBottom: '1px solid #f1f5f9' }}>
+                        {idx + 1}
+                      </td>
+
+                      <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', whiteSpace: 'nowrap' }}>
+                        <span
+                          style={{
+                            fontWeight: 800,
+                            fontSize: '11.5px',
+                            background: '#f0fdfa',
+                            color: '#0f766e',
+                            border: '1px solid #ccfbf1',
+                            padding: '2px 8px',
+                            borderRadius: '6px',
+                          }}
+                        >
+                          {tb.isMaterial
+                            ? tb.gradeFrom
+                              ? `Class ${tb.gradeFrom}`
+                              : 'Curriculum'
+                            : `Class ${tb.gradeNumber || '—'}`}
+                        </span>
+                      </td>
+
+                      <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9' }}>
+                        <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '13.5px' }}>
+                          {cleanTitle}
+                        </div>
+                        {tb.titleNepali && tb.titleNepali !== tb.title && (
+                          <div style={{ fontSize: '12px', color: '#64748b' }}>
+                            {tb.titleNepali}
+                          </div>
+                        )}
+                      </td>
+
+                      <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', whiteSpace: 'nowrap' }}>
+                        <span
+                          style={{
+                            fontSize: '11px',
+                            fontWeight: 700,
+                            background: isEng ? '#ecfdf5' : isNep ? '#f5f3ff' : '#f0fdf4',
+                            color: isEng ? '#047857' : isNep ? '#6d28d9' : '#0f766e',
+                            border: `1px solid ${isEng ? '#a7f3d0' : isNep ? '#ddd6fe' : '#bbf7d0'}`,
+                            padding: '2px 8px',
+                            borderRadius: '6px',
+                          }}
+                        >
+                          {isEng ? 'English' : isNep ? 'नेपाली' : 'Dual'}
+                        </span>
+                      </td>
+
+                      <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', whiteSpace: 'nowrap', color: '#334155', fontWeight: 600, fontSize: '12px' }}>
+                        {tb.pageCount ? `${tb.pageCount} pages` : '—'}
+                      </td>
+
+                      <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', whiteSpace: 'nowrap', color: '#64748b', fontSize: '12px' }}>
+                        {chaptersCount > 0 ? `${chaptersCount} chapters` : 'Full Doc'}
+                      </td>
+
+                      <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', whiteSpace: 'nowrap' }}>
+                        <code
+                          style={{
+                            fontFamily: 'ui-monospace, SFMono-Regular, monospace',
+                            fontSize: '11px',
+                            background: '#f8fafc',
+                            color: '#64748b',
+                            border: '1px solid #e2e8f0',
+                            padding: '2px 6px',
+                            borderRadius: '4px',
+                          }}
+                        >
+                          {folderName}
+                        </code>
+                      </td>
+
+                      <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', textAlign: 'right', whiteSpace: 'nowrap' }}>
+                        <div style={{ display: 'inline-flex', gap: '6px', alignItems: 'center' }}>
+                          <button
+                            onClick={() => handleOpenPdf(tb)}
+                            style={{
+                              padding: '5px 10px',
+                              borderRadius: '6px',
+                              background: '#0f766e',
+                              color: '#ffffff',
+                              border: 'none',
+                              fontSize: '11.5px',
+                              fontWeight: 700,
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                            }}
+                          >
+                            <BookOpen size={12} />
+                            <span>Read</span>
+                          </button>
+
+                          {!tb.isMaterial && (
+                            <a
+                              href={`/smartboard/index.html?pdf=${encodeURIComponent(
+                                `/api/v1/curriculum/textbooks/${tbId}/pdf`
+                              )}&title=${encodeURIComponent(cleanTitle)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{
+                                padding: '5px 10px',
+                                borderRadius: '6px',
+                                background: '#f0fdfa',
+                                color: '#0f766e',
+                                border: '1px solid #99f6e4',
+                                fontSize: '11.5px',
+                                fontWeight: 700,
+                                textDecoration: 'none',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                              }}
+                            >
+                              <Presentation size={12} />
+                              <span>Smart Board</span>
+                            </a>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

@@ -2,10 +2,12 @@
  * SimulationPlayer.tsx
  * Dedicated Simulation Player Component for 3D Interactive & HTML Simulations
  */
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { ArrowLeft, Maximize2, Minimize2, ExternalLink, RefreshCw } from 'lucide-react';
 import { KprietSimulationPlayer } from './KprietSimulationPlayer';
 import { launchOnSmartBoard } from './smartBoardLaunch';
+import { findClass1Sim } from '../../simulations/class1-math-ch11-22/registry';
+import { findClass1ThreeD } from '../../simulations/class1-math-3d/registry';
 import { PositionPlayground } from '../../simulations/class1-math-ch1/PositionPlayground';
 import { BigSmallWorld } from '../../simulations/class1-math-ch1/BigSmallWorld';
 import { TallShortAdventure } from '../../simulations/class1-math-ch1/TallShortAdventure';
@@ -121,6 +123,17 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
   // Simulations ported from KPRIET (Class 1–2 library entries): run in the isolated KPRIET host page
   if (simulation.componentKey?.startsWith('kpriet:')) {
     return <KprietSimulationPlayer simulationId={simulation.componentKey.slice('kpriet:'.length)} title={simulation.title} onClose={onClose} />;
+  }
+
+  // Class 1 Mathematics chapters 1–10: the 3D rebuilds take over from the older 2D pages (same componentKey)
+  const threeD = findClass1ThreeD(simulation.componentKey);
+  if (threeD) {
+    const Sim3D = threeD;
+    return (
+      <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', fontWeight: 800, color: '#0f766e' }}>Loading…</div>}>
+        <Sim3D onBackToLibrary={onClose} userRole={userRole} />
+      </Suspense>
+    );
   }
 
   // Render direct interactive React Three.js WebGL components
@@ -301,6 +314,17 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
   }
   if (simulation.componentKey === 'class1-math-ch10-challenge-world') {
     return <AdditionChallengeWorld onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Class 1 Mathematics - Chapters 11–22 (3D, one shared kit)
+  const ch1122 = findClass1Sim(simulation.componentKey, simulation.code);
+  if (ch1122) {
+    const Sim = ch1122.Component;
+    return (
+      <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', fontWeight: 800, color: '#0f766e' }}>Loading…</div>}>
+        <Sim onBackToLibrary={onClose} userRole={userRole} />
+      </Suspense>
+    );
   }
 
   // Class 1–5 Mathematics - Interactive Number Line & Counting Frog 3D Edition

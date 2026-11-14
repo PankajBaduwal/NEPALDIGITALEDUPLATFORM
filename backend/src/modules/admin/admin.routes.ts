@@ -19,6 +19,9 @@ router.get('/overview', AdminController.getOverview);
 // 2. Institution Management & Direct Provisioning
 router.get('/institutions', AdminController.getInstitutions);
 router.post('/institutions/provision', AdminController.provisionInstitution);
+router.get('/institutions/:id/insights', AdminController.getInstitutionInsights);
+router.get('/institutions/:id/student-access', AdminController.getStudentAccess);
+router.put('/institutions/:id/student-access', AdminController.setStudentAccess);
 router.get('/institutions/:id', AdminController.getInstitutionDetails);
 router.patch('/institutions/:id/assign-leadership', AdminController.assignLeadership);
 router.post('/institutions', AdminController.createInstitution);

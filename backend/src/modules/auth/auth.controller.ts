@@ -146,6 +146,15 @@ export class AuthController {
     }
   }
 
+  static async demoClassAccounts(req: Request, res: Response, next: NextFunction) {
+    try {
+      const grade = Math.max(1, Math.min(12, Number(req.query.grade) || 1));
+      return ApiResponse.success(res, await AuthService.demoClassAccounts(grade), 'Demo accounts');
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async registerInstitution(req: Request, res: Response, next: NextFunction) {
     try {
       const result = await RegistrationService.submitPublicRegistration(req.body);

@@ -243,7 +243,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
         osc.start();
         osc.stop(ctx.currentTime + 0.08);
       }
-    } catch (e) {}
+    } catch (e) { }
   };
 
   // Setup round
@@ -338,7 +338,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
           timeSpentSeconds: 120,
         }),
       });
-    } catch (e) {}
+    } catch (e) { }
   };
 
   return (

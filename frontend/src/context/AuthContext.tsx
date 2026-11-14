@@ -1,3 +1,4 @@
+import { clearPersistedUi } from '../hooks/usePersistentState';
 import React, { createContext, useContext, useState } from 'react';
 import { api } from '../services/api';
 import { TwoFactorModal } from '../components/auth/TwoFactorModal';
@@ -57,6 +58,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const applySession = (data: { token: string; user: UserSession }) => {
     api.setToken(data.token);
+    clearPersistedUi();
     localStorage.setItem('nepal_edu_user', JSON.stringify(data.user));
     setUser(data.user);
     setTokenState(data.token);
@@ -76,6 +78,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const demoLogin = async (role: string) => {
     const data = await api.post<{ token: string; user: UserSession }>('/auth/demo-login', { role });
     api.setToken(data.token);
+    clearPersistedUi();
     localStorage.setItem('nepal_edu_user', JSON.stringify(data.user));
     setUser(data.user);
     setTokenState(data.token);
@@ -83,6 +86,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = () => {
+    clearPersistedUi();
     api.clearToken();
     localStorage.removeItem('nepal_edu_user');
     localStorage.removeItem('nepal_edu_token');

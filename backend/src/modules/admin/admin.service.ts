@@ -18,8 +18,11 @@ import {
   AssignmentSubmission,
   Class,
   StudentEnrollment,
+  Section,
 } from '../../models';
 import { UserRole } from '../../common/constants/roles';
+import { FeatureAccessService } from '../feature-access/feature-access.service';
+import { ClassFeatureSettings, SectionFeatureSettings, StudentFeatureOverride, FeatureKey } from '../../models/FeatureAccess';
 import { AuditService } from '../../common/services/audit.service';
 
 export class AdminService {
@@ -251,6 +254,153 @@ export class AdminService {
         totalClasses: classCount,
       },
     };
+  }
+
+  /**
+   * Super Admin view of one school: registration counts only (students, teachers, classes), never marks,
+   * attendance, activity, or a single teacher's or student's name. The only people named are the school's
+   * designated Principal and Administrator.
+   */
+  static async getInstitutionInsights(id: string) {
+    const institution: any = await Institution.findById(id).lean();
+    if (!institution) throw { status: 404, message: 'Institution not found', code: 'INSTITUTION_NOT_FOUND' };
+    const instId = institution._id;
+
+    const monthKey = (d: Date) => `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
+    const sinceYear = new Date(); sinceYear.setUTCMonth(sinceYear.getUTCMonth() - 11, 1); sinceYear.setUTCHours(0, 0, 0, 0);
+
+    const [leaders, subscriptions, classes, teacherTotals, studentTotals, registered] = await Promise.all([
+      User.find({ institutionId: instId, role: { $in: [UserRole.SCHOOL_ADMIN, 'COLLEGE_ADMIN' as any, UserRole.PRINCIPAL] } })
+        .select('fullName username email role').lean(),
+      Subscription.find({ institutionId: instId }).populate('planId').populate('packageId').lean(),
+      Class.find({ institutionId: instId }).select('gradeNumber name').sort({ gradeNumber: 1 }).lean(),
+      User.aggregate([{ $match: { institutionId: instId, role: UserRole.TEACHER } }, { $group: { _id: '$status', n: { $sum: 1 } } }]),
+      User.aggregate([{ $match: { institutionId: instId, role: UserRole.STUDENT } }, { $group: { _id: '$status', n: { $sum: 1 } } }]),
+      User.aggregate([
+        { $match: { institutionId: instId, role: { $in: [UserRole.STUDENT, UserRole.TEACHER] }, createdAt: { $gte: sinceYear } } },
+        { $group: { _id: { m: { $dateToString: { format: '%Y-%m', date: '$createdAt' } }, r: '$role' }, n: { $sum: 1 } } },
+      ]),
+    ]);
+
+    const classIds = classes.map((c: any) => c._id);
+    const sections: any[] = await Section.find({ classId: { $in: classIds } }).select('classId').lean();
+    const sectionIds = sections.map((s) => s._id);
+    const gradeByClass = new Map<string, number>(classes.map((c: any) => [String(c._id), c.gradeNumber]));
+    const gradeBySection = new Map<string, number>(sections.map((s) => [String(s._id), gradeByClass.get(String(s.classId)) || 0]));
+
+    const enrollBySection: any[] = await StudentEnrollment.aggregate([
+      { $match: { sectionId: { $in: sectionIds }, status: 'ENROLLED' } },
+      { $group: { _id: '$sectionId', n: { $sum: 1 } } },
+    ]);
+    const perGradeMap = new Map<number, number>();
+    for (const e of enrollBySection) {
+      const g = gradeBySection.get(String(e._id)) || 0;
+      perGradeMap.set(g, (perGradeMap.get(g) || 0) + e.n);
+    }
+    const studentsPerGrade = Array.from(perGradeMap.entries()).sort((a, b) => a[0] - b[0]).map(([grade, students]) => ({ grade: grade ? `Class ${grade}` : 'Unplaced', students }));
+    const sections_per_grade = new Map<number, number>();
+    for (const s of sections) { const g = gradeByClass.get(String(s.classId)) || 0; sections_per_grade.set(g, (sections_per_grade.get(g) || 0) + 1); }
+    const sectionsPerGrade = Array.from(sections_per_grade.entries()).sort((a, b) => a[0] - b[0]).map(([g, n]) => ({ grade: g ? `Class ${g}` : 'Other', sections: n }));
+
+    const sum = (rows: any[]) => rows.reduce((a, r) => a + r.n, 0);
+    const byStatus = (rows: any[], s: string) => rows.filter((r) => r._id === s).reduce((a, r) => a + r.n, 0);
+
+    // registrations per month for the last 12 months (counts of accounts created)
+    const months: string[] = [];
+    const cursor = new Date(sinceYear);
+    for (let i = 0; i < 12; i++) { months.push(monthKey(cursor)); cursor.setUTCMonth(cursor.getUTCMonth() + 1); }
+    const registrations = months.map((m) => ({
+      month: m,
+      students: (registered as any[]).filter((r) => r._id.m === m && r._id.r === UserRole.STUDENT).reduce((a, r) => a + r.n, 0),
+      teachers: (registered as any[]).filter((r) => r._id.m === m && r._id.r === UserRole.TEACHER).reduce((a, r) => a + r.n, 0),
+    }));
+
+    const now = Date.now();
+    const dayMs = 86400000;
+    const activeSub: any = (subscriptions as any[]).find((s) => s.status === 'ACTIVE') || (subscriptions as any[])[0] || null;
+
+    return {
+      institution,
+      leadership: (leaders as any[]).map((u) => ({ fullName: u.fullName, username: u.username, email: u.email, role: u.role })),
+      subscription: activeSub ? {
+        packageName: activeSub.planId?.name || activeSub.packageId?.name || activeSub.planId?.code || 'Package',
+        packageCode: activeSub.planId?.code || activeSub.packageId?.code,
+        limits: activeSub.planId?.features ? { maxStudents: activeSub.planId.features.maxStudents, maxTeachers: activeSub.planId.features.maxTeachers } : null,
+        status: activeSub.status,
+        startDate: activeSub.startDate,
+        endDate: activeSub.endDate,
+        daysLeft: activeSub.endDate ? Math.ceil((new Date(activeSub.endDate).getTime() - now) / dayMs) : null,
+      } : null,
+      counts: {
+        students: sum(studentTotals as any[]),
+        studentsActive: byStatus(studentTotals as any[], 'ACTIVE'),
+        teachers: sum(teacherTotals as any[]),
+        teachersActive: byStatus(teacherTotals as any[], 'ACTIVE'),
+        classes: classes.length,
+        sections: sections.length,
+        leaders: (leaders as any[]).length,
+      },
+      studentsPerGrade,
+      sectionsPerGrade,
+      registrations,
+    };
+  }
+
+  /**
+   * Student-dashboard switch for one school: the whole school plus each class.
+   * Turning the student dashboard off also turns off assignments, quizzes, notes, materials, videos and sharing
+   * for the students and for the teachers of those classes (see FeatureAccessService).
+   */
+  static async getStudentAccess(institutionId: string) {
+    const institution: any = await Institution.findById(institutionId).select('name').lean();
+    if (!institution) throw { status: 404, message: 'Institution not found', code: 'INSTITUTION_NOT_FOUND' };
+    const classes: any[] = await Class.find({ institutionId }).select('gradeNumber name').sort({ gradeNumber: 1 }).lean();
+    const sections: any[] = await Section.find({ classId: { $in: classes.map((c) => c._id) } }).select('classId').lean();
+    const classBySection = new Map<string, string>(sections.map((s) => [String(s._id), String(s.classId)]));
+    const enrolled: any[] = await StudentEnrollment.aggregate([
+      { $match: { sectionId: { $in: sections.map((s) => s._id) }, status: 'ENROLLED' } },
+      { $group: { _id: '$sectionId', n: { $sum: 1 } } },
+    ]);
+    const perClass = new Map<string, number>();
+    for (const e of enrolled) { const c = classBySection.get(String(e._id)); if (c) perClass.set(c, (perClass.get(c) || 0) + e.n); }
+
+    const school = await FeatureAccessService.resolveFeatureAccess({ institutionId, featureKey: FeatureKey.STUDENT_DASHBOARD });
+    const explicit: any[] = await ClassFeatureSettings.find({ institutionId, featureKey: FeatureKey.STUDENT_DASHBOARD }).select('classId').lean();
+    const explicitSet = new Set(explicit.map((e) => String(e.classId)));
+
+    const rows = [] as any[];
+    for (const c of classes) {
+      const r = await FeatureAccessService.resolveFeatureAccess({ institutionId, classId: String(c._id), featureKey: FeatureKey.STUDENT_DASHBOARD });
+      rows.push({
+        classId: String(c._id),
+        name: c.name || `Class ${c.gradeNumber}`,
+        gradeNumber: c.gradeNumber,
+        students: perClass.get(String(c._id)) || 0,
+        enabled: r.effectiveEnabled,
+        customised: explicitSet.has(String(c._id)),
+        lockedByPackage: r.source === 'PLATFORM_SUBSCRIPTION_LIMITATION',
+        reason: r.source === 'PLATFORM_SUBSCRIPTION_LIMITATION' ? r.reason : undefined,
+      });
+    }
+    return { schoolName: institution.name, schoolEnabled: school.effectiveEnabled, classes: rows };
+  }
+
+  static async setStudentAccess(params: { institutionId: string; scope: 'SCHOOL' | 'CLASS'; classId?: string; enabled: boolean; userId: string }) {
+    const { institutionId, scope, classId, enabled, userId } = params;
+    const exists = await Institution.exists({ _id: institutionId });
+    if (!exists) throw { status: 404, message: 'Institution not found', code: 'INSTITUTION_NOT_FOUND' };
+    const key = FeatureKey.STUDENT_DASHBOARD;
+    if (scope === 'CLASS') {
+      if (!classId) throw { status: 400, message: 'classId is required', code: 'VALIDATION_ERROR' };
+      await FeatureAccessService.updateClassSetting({ institutionId, classId, featureKey: key, enabled, userId, reason: `Super Admin turned the student dashboard ${enabled ? 'on' : 'off'} for this class` });
+    } else {
+      await FeatureAccessService.updateInstitutionSetting({ institutionId, featureKey: key, enabled, userId, reason: `Super Admin turned the student dashboard ${enabled ? 'on' : 'off'} for the whole school` });
+      // the school-wide switch is the master: clear any class, section or student exceptions so every class follows it
+      await ClassFeatureSettings.deleteMany({ institutionId, featureKey: key });
+      await SectionFeatureSettings.deleteMany({ institutionId, featureKey: key });
+      await StudentFeatureOverride.deleteMany({ institutionId, featureKey: key });
+    }
+    return this.getStudentAccess(institutionId);
   }
 
   static async assignInstitutionLeadership(

@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { PdfReaderModal } from '../PdfReaderModal';
+import { usePersistentState } from '../../hooks/usePersistentState';
 import { Badge, Button, Card, Field, Notice, Table, colors, inputStyle, mediumLabel, td } from './ui';
 
-type View = 'OVERVIEW' | 'BROWSE' | 'SEARCH' | 'ISSUES' | 'INSTITUTIONS' | 'REPORTS';
+type View = 'OVERVIEW' | 'TEXTBOOKS' | 'BROWSE' | 'SEARCH' | 'ISSUES' | 'INSTITUTIONS' | 'REPORTS';
 const VIEWS: Array<[View, string]> = [
   ['OVERVIEW', 'Overview'],
+  ['TEXTBOOKS', 'Textbooks & Uploads'],
   ['BROWSE', 'Classes & Subjects'],
   ['SEARCH', 'Search'],
   ['ISSUES', 'Data Issues'],
@@ -22,8 +24,8 @@ const REPORTS: Array<[string, string]> = [
 const statusTone = (s?: string) => (s === 'VERIFIED' || s === 'EXTRACTED' ? 'brand' : s === 'NO_SOURCE_PDF' ? 'danger' : 'warn');
 
 /** Super Admin: Nepal Curriculum & Textbook Library (Country → Curriculum → Class → Medium → Subject → Textbook → Chapter). */
-export const CurriculumLibraryPanel: React.FC = () => {
-  const [view, setView] = useState<View>('OVERVIEW');
+export const CurriculumLibraryPanel: React.FC<{ textbooksView?: React.ReactNode }> = ({ textbooksView }) => {
+  const [view, setView] = usePersistentState<View>('superadmin.library.view', 'OVERVIEW');
   const [reader, setReader] = useState<any>(null);
   const [detailId, setDetailId] = useState<string | null>(null);
 
@@ -37,6 +39,7 @@ export const CurriculumLibraryPanel: React.FC = () => {
         ))}
       </div>
       {view === 'OVERVIEW' && <Overview />}
+      {view === 'TEXTBOOKS' && (textbooksView || <p style={{ color: colors.muted, fontSize: 13 }}>Textbook management is not available here.</p>)}
       {view === 'BROWSE' && <Browse onOpenSubject={setDetailId} onRead={setReader} />}
       {view === 'SEARCH' && <Search onOpenSubject={setDetailId} onRead={setReader} />}
       {view === 'ISSUES' && <Issues onRead={setReader} />}

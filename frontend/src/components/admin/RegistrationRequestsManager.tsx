@@ -21,8 +21,15 @@ import {
   Sparkles,
   RefreshCw,
   Eye,
+  Phone,
+  Mail,
+  Copy,
+  Check,
+  Calendar,
+  Layers,
+  CheckCheck,
 } from 'lucide-react';
-import { formatDate, formatDateTime, formatTime } from '../../utils/dates';
+import { formatDate, formatDateAD, formatDateBS, formatDateTime, formatTime } from '../../utils/dates';
 
 export interface PossibleDuplicate { kind: 'REQUEST' | 'INSTITUTION'; ref: string; name: string; emisCode?: string; status?: string; why: string }
 
@@ -77,6 +84,17 @@ export const RegistrationRequestsManager: React.FC = () => {
   const [actionLoading, setActionLoading] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
+
+  // Copied code feedback
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+
+  const handleCopyCode = (code: string) => {
+    navigator.clipboard.writeText(code);
+    setCopiedCode(code);
+    setTimeout(() => {
+      setCopiedCode(null);
+    }, 2000);
+  };
 
   // Edit Request State
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -229,25 +247,28 @@ export const RegistrationRequestsManager: React.FC = () => {
     switch (status) {
       case 'APPROVED':
       case 'ACTIVE':
-        return { bg: '#dcfce7', color: '#16a34a', border: '#bbf7d0', label: 'Approved & Active' };
+        return { bg: '#ecfdf5', color: '#047857', border: '#a7f3d0', dot: '#10b981', label: 'Approved & Active' };
       case 'PROVISIONING':
-        return { bg: '#e0e7ff', color: '#4338ca', border: '#c7d2fe', label: 'Provisioning' };
+        return { bg: '#eef2ff', color: '#4338ca', border: '#c7d2fe', dot: '#6366f1', label: 'Provisioning...' };
       case 'UNDER_VERIFICATION':
-        return { bg: '#e0f2fe', color: '#0369a1', border: '#bae6fd', label: 'Under Verification' };
+        return { bg: '#f0f9ff', color: '#0369a1', border: '#bae6fd', dot: '#0284c7', label: 'Under Verification' };
       case 'PENDING':
       case 'SUBMITTED':
-        return { bg: '#ede9fe', color: '#4c3fa8', border: '#ddd6fe', label: 'Pending Review' };
+        return { bg: '#fffbeb', color: '#b45309', border: '#fde68a', dot: '#f59e0b', label: 'Pending Review' };
       case 'MORE_INFO_REQUIRED':
-        return { bg: '#f5f3ff', color: '#4c3fa8', border: '#ede9fe', label: 'Clarification Needed' };
+        return { bg: '#faf5ff', color: '#7e22ce', border: '#e9d5ff', dot: '#9333ea', label: 'Clarification Needed' };
       case 'REJECTED':
-        return { bg: '#fee2e2', color: '#dc2626', border: '#fecaca', label: 'Rejected' };
+        return { bg: '#fff1f2', color: '#be123c', border: '#fecdd3', dot: '#f43f5e', label: 'Rejected' };
       default:
-        return { bg: '#ebf5f1', color: '#4b605b', border: '#dcebe6', label: status };
+        return { bg: '#f8fafc', color: '#475569', border: '#e2e8f0', dot: '#94a3b8', label: status };
     }
   };
 
   const pendingCount = requests.filter(r => ['PENDING', 'SUBMITTED', 'UNDER_VERIFICATION'].includes(r.status)).length;
+  const underVerificationCount = requests.filter(r => r.status === 'UNDER_VERIFICATION').length;
+  const moreInfoCount = requests.filter(r => r.status === 'MORE_INFO_REQUIRED').length;
   const approvedCount = requests.filter(r => ['APPROVED', 'ACTIVE'].includes(r.status)).length;
+  const rejectedCount = requests.filter(r => r.status === 'REJECTED').length;
 
   return (
     <div>
@@ -255,27 +276,27 @@ export const RegistrationRequestsManager: React.FC = () => {
       {pendingCount > 0 && (
         <div
           style={{
-            background: 'linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)',
-            border: '1.5px solid #ddd6fe',
+            background: 'linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #fef3c7 100%)',
+            border: '1px solid #bbf7d0',
             borderRadius: '12px',
             padding: '14px 20px',
             marginBottom: '20px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            boxShadow: '0 2px 8px rgba(109,91,208, 0.08)',
+            boxShadow: '0 2px 10px rgba(16, 185, 129, 0.08)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: '#6d5bd0', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#0f766e', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 2px 6px rgba(15,118,110,0.25)' }}>
               <Sparkles size={20} />
             </div>
             <div>
-              <div style={{ fontWeight: '800', fontSize: '14px', color: '#3b2f8f' }}>
+              <div style={{ fontWeight: '800', fontSize: '14px', color: '#0f172a' }}>
                 {pendingCount} Institution Self-Registration{pendingCount > 1 ? 's' : ''} Awaiting Super Admin Review
               </div>
-              <div style={{ fontSize: '12px', color: '#4c3fa8' }}>
-                Schools and colleges have submitted registration forms through the public portal. You can review, edit details, or approve & provision immediately.
+              <div style={{ fontSize: '12px', color: '#475569', marginTop: '2px' }}>
+                Schools and colleges have submitted registration forms through the portal. Review information, edit records, or perform 1-click provisioning.
               </div>
             </div>
           </div>
@@ -284,12 +305,14 @@ export const RegistrationRequestsManager: React.FC = () => {
             style={{
               padding: '8px 16px',
               borderRadius: '8px',
-              background: '#4c3fa8',
+              background: '#0f766e',
               color: '#ffffff',
               border: 'none',
               fontWeight: '700',
               fontSize: '12px',
               cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              boxShadow: '0 2px 6px rgba(15,118,110,0.2)',
             }}
           >
             Filter Pending ({pendingCount})
@@ -298,12 +321,12 @@ export const RegistrationRequestsManager: React.FC = () => {
       )}
 
       {actionSuccess && (
-        <div style={{ background: '#e6f7f0', border: '1px solid #bfeede', borderRadius: '10px', padding: '12px 16px', color: '#0f4c4a', fontSize: '13px', marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ background: '#ecfdf5', border: '1px solid #a7f3d0', borderRadius: '10px', padding: '12px 16px', color: '#065f46', fontSize: '13px', marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <CheckCircle2 size={16} color="#117a6b" />
-            <span>{actionSuccess}</span>
+            <CheckCircle2 size={16} color="#059669" />
+            <span style={{ fontWeight: '600' }}>{actionSuccess}</span>
           </div>
-          <button onClick={() => setActionSuccess(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#0f4c4a', fontWeight: 'bold' }}>✕</button>
+          <button onClick={() => setActionSuccess(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#065f46', fontWeight: 'bold' }}>✕</button>
         </div>
       )}
 
@@ -323,245 +346,498 @@ export const RegistrationRequestsManager: React.FC = () => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: '20px',
-          gap: '12px',
+          marginBottom: '18px',
+          gap: '14px',
           flexWrap: 'wrap',
         }}
       >
-        <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '8px', flex: 1, minWidth: '280px', maxWidth: '420px' }}>
+        <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '8px', flex: 1, minWidth: '300px', maxWidth: '440px' }}>
           <div style={{ position: 'relative', width: '100%' }}>
-            <Search size={16} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: '#8da19d' }} />
+            <Search size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
             <input
               type="text"
               placeholder="Search by Institution, EMIS, Ref Code, Contact..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              style={{ width: '100%', padding: '8px 12px 8px 34px', borderRadius: '8px', border: '1px solid #cfdcd8', fontSize: '13px', outline: 'none' }}
+              style={{
+                width: '100%',
+                padding: '9px 12px 9px 36px',
+                borderRadius: '8px',
+                border: '1px solid #cbd5e1',
+                fontSize: '13px',
+                outline: 'none',
+                background: '#ffffff',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+              }}
             />
           </div>
           <button
             type="submit"
-            style={{ padding: '8px 16px', borderRadius: '8px', background: '#117a6b', color: '#ffffff', fontWeight: '700', fontSize: '13px', border: 'none', cursor: 'pointer' }}
+            style={{
+              padding: '9px 18px',
+              borderRadius: '8px',
+              background: '#0f766e',
+              color: '#ffffff',
+              fontWeight: '700',
+              fontSize: '13px',
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: '0 1px 2px rgba(15,118,110,0.2)',
+              whiteSpace: 'nowrap',
+            }}
           >
             Search
           </button>
         </form>
 
-        <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '12px', fontWeight: '700', color: '#5f736f', marginRight: '4px' }}>Filter:</span>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '12px', fontWeight: '700', color: '#64748b', marginRight: '2px' }}>Status:</span>
           {[
-            { key: 'ALL', label: 'All' },
-            { key: 'PENDING', label: `Pending (${pendingCount})` },
-            { key: 'UNDER_VERIFICATION', label: 'Under Verification' },
-            { key: 'MORE_INFO_REQUIRED', label: 'Clarification Needed' },
-            { key: 'APPROVED', label: `Approved (${approvedCount})` },
-            { key: 'REJECTED', label: 'Rejected' },
-          ].map((st) => (
-            <button
-              key={st.key}
-              onClick={() => setStatusFilter(st.key)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: '6px',
-                border: 'none',
-                fontSize: '12px',
-                fontWeight: '700',
-                cursor: 'pointer',
-                background: statusFilter === st.key ? '#117a6b' : '#ebf5f1',
-                color: statusFilter === st.key ? '#ffffff' : '#4b605b',
-                transition: 'all 0.15s ease',
-              }}
-            >
-              {st.label}
-            </button>
-          ))}
+            { key: 'ALL', label: 'All', count: requests.length },
+            { key: 'PENDING', label: 'Pending Review', count: pendingCount, highlight: pendingCount > 0 },
+            { key: 'UNDER_VERIFICATION', label: 'Under Verification', count: underVerificationCount },
+            { key: 'MORE_INFO_REQUIRED', label: 'Clarification', count: moreInfoCount },
+            { key: 'APPROVED', label: 'Approved', count: approvedCount },
+            { key: 'REJECTED', label: 'Rejected', count: rejectedCount },
+          ].map((st) => {
+            const isActive = statusFilter === st.key;
+            return (
+              <button
+                key={st.key}
+                onClick={() => setStatusFilter(st.key)}
+                style={{
+                  padding: '7px 13px',
+                  borderRadius: '8px',
+                  border: isActive ? '1px solid #0f766e' : '1px solid #e2e8f0',
+                  fontSize: '12px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  background: isActive ? '#0f766e' : '#ffffff',
+                  color: isActive ? '#ffffff' : '#475569',
+                  boxShadow: isActive ? '0 2px 4px rgba(15,118,110,0.2)' : '0 1px 2px rgba(0,0,0,0.03)',
+                  transition: 'all 0.15s ease',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <span>{st.label}</span>
+                <span
+                  style={{
+                    fontSize: '11px',
+                    padding: '1px 6px',
+                    borderRadius: '999px',
+                    background: isActive ? 'rgba(255,255,255,0.25)' : (st.highlight ? '#fef3c7' : '#f1f5f9'),
+                    color: isActive ? '#ffffff' : (st.highlight ? '#b45309' : '#64748b'),
+                    fontWeight: '800',
+                  }}
+                >
+                  {st.count}
+                </span>
+              </button>
+            );
+          })}
           <button
             onClick={loadRequests}
             title="Refresh List"
-            style={{ padding: '6px 10px', borderRadius: '6px', background: '#f4faf8', border: '1px solid #dcebe6', cursor: 'pointer', color: '#4b605b' }}
+            style={{
+              padding: '7px 11px',
+              borderRadius: '8px',
+              background: '#ffffff',
+              border: '1px solid #e2e8f0',
+              cursor: 'pointer',
+              color: '#475569',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              fontSize: '12px',
+              fontWeight: '600',
+            }}
           >
-            <RefreshCw size={14} />
+            <RefreshCw size={13} />
+            <span>Refresh</span>
           </button>
         </div>
       </div>
 
-      {/* Main Requests Table */}
+      {/* Main Requests Table Container with Horizontal Scroll */}
       <div
         style={{
           background: '#ffffff',
-          borderRadius: '12px',
-          border: '1px solid #dcebe6',
+          borderRadius: '14px',
+          border: '1px solid #e2e8f0',
           overflow: 'hidden',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+          boxShadow: '0 4px 20px -2px rgba(0, 0, 0, 0.04)',
         }}
       >
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
-          <thead>
-            <tr style={{ background: '#f4faf8', borderBottom: '1px solid #dcebe6', color: '#4b605b', fontWeight: '700' }}>
-              <th style={{ padding: '12px 16px' }}>Tracking & EMIS</th>
-              <th style={{ padding: '12px 16px' }}>Institution & Type</th>
-              <th style={{ padding: '12px 16px' }}>Province & District</th>
-              <th style={{ padding: '12px 16px' }}>Contact Person</th>
-              <th style={{ padding: '12px 16px' }}>Status</th>
-              <th style={{ padding: '12px 16px' }}>Submitted</th>
-              <th style={{ padding: '12px 16px', textAlign: 'right' }}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {loading ? (
-              <tr>
-                <td colSpan={7} style={{ padding: '40px', textAlign: 'center', color: '#5f736f' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                    <Loader2 size={18} className="animate-spin" />
-                    <span>Loading registration requests from MongoDB...</span>
-                  </div>
-                </td>
+        <div style={{ overflowX: 'auto', width: '100%', WebkitOverflowScrolling: 'touch' }}>
+          <table
+            style={{
+              width: '100%',
+              minWidth: '1260px',
+              borderCollapse: 'separate',
+              borderSpacing: 0,
+              textAlign: 'left',
+              fontSize: '13px',
+            }}
+          >
+            <thead>
+              <tr
+                style={{
+                  background: '#f8fafc',
+                  borderBottom: '1px solid #e2e8f0',
+                  color: '#475569',
+                  fontWeight: '700',
+                  fontSize: '11px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                }}
+              >
+                <th style={{ padding: '13px 18px', width: '180px', minWidth: '180px', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap' }}>
+                  Tracking & EMIS
+                </th>
+                <th style={{ padding: '13px 18px', minWidth: '270px', borderBottom: '1px solid #e2e8f0' }}>
+                  Institution & Classification
+                </th>
+                <th style={{ padding: '13px 18px', width: '210px', minWidth: '210px', borderBottom: '1px solid #e2e8f0' }}>
+                  Province & District
+                </th>
+                <th style={{ padding: '13px 18px', width: '230px', minWidth: '220px', borderBottom: '1px solid #e2e8f0' }}>
+                  Contact Person
+                </th>
+                <th style={{ padding: '13px 18px', width: '160px', minWidth: '155px', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap' }}>
+                  Status
+                </th>
+                <th style={{ padding: '13px 18px', width: '150px', minWidth: '145px', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap' }}>
+                  Submitted
+                </th>
+                <th style={{ padding: '13px 18px', width: '230px', minWidth: '220px', textAlign: 'right', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap' }}>
+                  Actions
+                </th>
               </tr>
-            ) : requests.length === 0 ? (
-              <tr>
-                <td colSpan={7} style={{ padding: '40px', textAlign: 'center', color: '#5f736f' }}>
-                  No registration requests matching criteria found.
-                </td>
-              </tr>
-            ) : (
-              requests.map((req) => {
-                const targetId = req.id || (req as any)._id;
-                const badge = getStatusBadge(req.status);
-                const isPending = ['PENDING', 'SUBMITTED', 'UNDER_VERIFICATION', 'MORE_INFO_REQUIRED'].includes(req.status);
-                return (
-                  <tr key={targetId} style={{ borderBottom: '1px solid #ebf5f1', transition: 'background 0.15s ease' }}>
-                    <td style={{ padding: '12px 16px' }}>
-                      <div style={{ fontWeight: '800', color: '#117a6b', fontFamily: 'monospace' }}>
-                        {req.requestCode}
-                      </div>
-                      <div style={{ fontSize: '11px', color: '#5f736f', fontFamily: 'monospace' }}>
-                        EMIS: {req.emisCode}
-                      </div>
-                    </td>
-
-                    <td style={{ padding: '12px 16px' }}>
-                      <div style={{ fontWeight: '700', color: '#0e3e3b' }}>{req.institutionName}</div>
-                      {req.possibleDuplicates && req.possibleDuplicates.length > 0 && (
-                        <div
-                          title={req.possibleDuplicates.map((d) => `${d.ref} (${d.name}) — ${d.why}`).join('\n')}
-                          style={{ display: 'inline-block', marginTop: '3px', background: '#ede9fe', color: '#3b2f8f', border: '1px solid #ddd6fe', padding: '1px 8px', borderRadius: '999px', fontSize: '10.5px', fontWeight: '800' }}
-                        >
-                          ⚠ Possible duplicate of {req.possibleDuplicates[0].ref}
-                          {req.possibleDuplicates.length > 1 ? ` +${req.possibleDuplicates.length - 1}` : ''}
-                        </div>
-                      )}
-                      <div style={{ fontSize: '11px', color: '#5f736f', display: 'flex', gap: '6px', marginTop: '2px' }}>
-                        <span style={{ background: '#ebf5f1', padding: '1px 6px', borderRadius: '4px', fontWeight: '600' }}>
-                          {req.institutionKind || 'SCHOOL'}
-                        </span>
-                        <span>•</span>
-                        <span>{req.institutionType}</span>
-                      </div>
-                    </td>
-
-                    <td style={{ padding: '12px 16px' }}>
-                      <div style={{ fontWeight: '600', color: '#2f4f4c' }}>{req.localLevel}</div>
-                      <div style={{ fontSize: '11px', color: '#5f736f' }}>{req.district}, {req.province}</div>
-                    </td>
-
-                    <td style={{ padding: '12px 16px' }}>
-                      <div style={{ fontWeight: '600' }}>{req.contactPerson}</div>
-                      <div style={{ fontSize: '11px', color: '#5f736f' }}>{req.phone} • {req.email}</div>
-                    </td>
-
-                    <td style={{ padding: '12px 16px' }}>
-                      <span
-                        style={{
-                          padding: '4px 8px',
-                          borderRadius: '6px',
-                          fontSize: '11px',
-                          fontWeight: '700',
-                          background: badge.bg,
-                          color: badge.color,
-                          border: `1px solid ${badge.border}`,
-                        }}
-                      >
-                        {badge.label}
-                      </span>
-                    </td>
-
-                    <td style={{ padding: '12px 16px', fontSize: '12px', color: '#5f736f' }}>
-                      {formatDate(req.createdAt)}
-                    </td>
-
-                    <td style={{ padding: '12px 16px', textAlign: 'right' }}>
-                      <div style={{ display: 'inline-flex', gap: '6px', alignItems: 'center' }}>
-                        <button
-                          onClick={() => handleOpenEdit(req)}
-                          title="Edit application details before approval"
-                          style={{
-                            padding: '6px 10px',
-                            borderRadius: '6px',
-                            background: '#f4faf8',
-                            color: '#0e3e3b',
-                            border: '1px solid #cfdcd8',
-                            fontWeight: '700',
-                            fontSize: '12px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '4px',
-                          }}
-                        >
-                          <Edit size={13} color="#4b605b" />
-                          <span>Edit</span>
-                        </button>
-
-                        <button
-                          onClick={() => setSelectedRequest(req)}
-                          style={{
-                            padding: '6px 10px',
-                            borderRadius: '6px',
-                            background: '#e6f7f0',
-                            color: '#117a6b',
-                            border: '1px solid #bfeede',
-                            fontWeight: '700',
-                            fontSize: '12px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '4px',
-                          }}
-                        >
-                          <Eye size={13} />
-                          <span>Review</span>
-                        </button>
-
-                        {isPending && (
-                          <button
-                            onClick={() => handleApproveAndProvision(targetId)}
-                            title="1-Click Approve & Provision"
+            </thead>
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan={7} style={{ padding: '48px', textAlign: 'center', color: '#64748b' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                      <Loader2 size={20} className="animate-spin" color="#0f766e" />
+                      <span style={{ fontWeight: '500' }}>Loading registration requests from server...</span>
+                    </div>
+                  </td>
+                </tr>
+              ) : requests.length === 0 ? (
+                <tr>
+                  <td colSpan={7} style={{ padding: '48px', textAlign: 'center', color: '#64748b' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                      <Layers size={32} color="#cbd5e1" />
+                      <div style={{ fontWeight: '600', color: '#334155' }}>No registration requests found</div>
+                      <div style={{ fontSize: '12px', color: '#94a3b8' }}>Try adjusting your status filter or search query.</div>
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                requests.map((req) => {
+                  const targetId = req.id || (req as any)._id;
+                  const badge = getStatusBadge(req.status);
+                  const isPending = ['PENDING', 'SUBMITTED', 'UNDER_VERIFICATION', 'MORE_INFO_REQUIRED'].includes(req.status);
+                  return (
+                    <tr
+                      key={targetId}
+                      style={{
+                        borderBottom: '1px solid #f1f5f9',
+                        transition: 'background 0.15s ease',
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = '#f8fafc')}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                    >
+                      {/* Tracking & EMIS */}
+                      <td style={{ padding: '14px 18px', verticalAlign: 'middle', borderBottom: '1px solid #f1f5f9', whiteSpace: 'nowrap' }}>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                          <span
                             style={{
-                              padding: '6px 10px',
+                              fontWeight: '800',
+                              color: '#0f766e',
+                              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+                              fontSize: '12.5px',
+                              background: '#f0fdfa',
+                              border: '1px solid #ccfbf1',
+                              padding: '3px 8px',
                               borderRadius: '6px',
-                              background: '#e6f7f0',
-                              color: '#117a6b',
-                              border: '1px solid #bfeede',
+                              letterSpacing: '0.02em',
+                              whiteSpace: 'nowrap',
+                            }}
+                          >
+                            {req.requestCode}
+                          </span>
+                          <button
+                            onClick={() => handleCopyCode(req.requestCode)}
+                            title="Copy tracking code"
+                            style={{
+                              background: 'none',
+                              border: 'none',
+                              cursor: 'pointer',
+                              color: copiedCode === req.requestCode ? '#16a34a' : '#94a3b8',
+                              display: 'flex',
+                              alignItems: 'center',
+                              padding: '4px',
+                              borderRadius: '4px',
+                              transition: 'color 0.15s ease',
+                            }}
+                          >
+                            {copiedCode === req.requestCode ? <Check size={13} /> : <Copy size={13} />}
+                          </button>
+                        </div>
+                        <div
+                          style={{
+                            fontSize: '11.5px',
+                            color: '#64748b',
+                            fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+                            marginTop: '4px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
+                          <span style={{ fontWeight: '600', color: '#94a3b8' }}>EMIS:</span>
+                          <span style={{ fontWeight: '700', color: '#334155' }}>{req.emisCode}</span>
+                        </div>
+                      </td>
+
+                      {/* Institution & Classification */}
+                      <td style={{ padding: '14px 18px', verticalAlign: 'middle', borderBottom: '1px solid #f1f5f9' }}>
+                        <div style={{ fontWeight: '700', color: '#0f172a', fontSize: '13.5px', lineHeight: '1.3' }}>
+                          {req.institutionName}
+                        </div>
+                        {req.nameNepali && (
+                          <div style={{ fontSize: '12px', color: '#64748b', marginTop: '1px' }}>
+                            {req.nameNepali}
+                          </div>
+                        )}
+                        {req.possibleDuplicates && req.possibleDuplicates.length > 0 && (
+                          <div
+                            title={req.possibleDuplicates.map((d) => `${d.ref} (${d.name}) — ${d.why}`).join('\n')}
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              marginTop: '4px',
+                              background: '#fef3c7',
+                              color: '#92400e',
+                              border: '1px solid #fde68a',
+                              padding: '2px 8px',
+                              borderRadius: '6px',
+                              fontSize: '11px',
+                              fontWeight: '600',
+                            }}
+                          >
+                            <AlertTriangle size={12} color="#b45309" />
+                            <span>
+                              Possible duplicate of{' '}
+                              <span style={{ fontFamily: 'monospace', fontWeight: '700' }}>
+                                {req.possibleDuplicates[0].ref}
+                              </span>
+                              {req.possibleDuplicates.length > 1 ? ` (+${req.possibleDuplicates.length - 1})` : ''}
+                            </span>
+                          </div>
+                        )}
+                        <div style={{ fontSize: '11px', color: '#64748b', display: 'flex', alignItems: 'center', gap: '6px', marginTop: '5px' }}>
+                          <span
+                            style={{
+                              background: req.institutionKind === 'COLLEGE' ? '#eff6ff' : '#ecfdf5',
+                              color: req.institutionKind === 'COLLEGE' ? '#1d4ed8' : '#047857',
+                              border: `1px solid ${req.institutionKind === 'COLLEGE' ? '#bfdbfe' : '#a7f3d0'}`,
+                              padding: '1px 6px',
+                              borderRadius: '4px',
+                              fontWeight: '700',
+                              fontSize: '10.5px',
+                              letterSpacing: '0.03em',
+                            }}
+                          >
+                            {req.institutionKind || 'SCHOOL'}
+                          </span>
+                          <span style={{ color: '#cbd5e1' }}>•</span>
+                          <span style={{ fontWeight: '600', color: '#475569' }}>{req.institutionType}</span>
+                          {req.academicYear && (
+                            <>
+                              <span style={{ color: '#cbd5e1' }}>•</span>
+                              <span style={{ color: '#64748b' }}>{req.academicYear}</span>
+                            </>
+                          )}
+                        </div>
+                      </td>
+
+                      {/* Province & District */}
+                      <td style={{ padding: '14px 18px', verticalAlign: 'middle', borderBottom: '1px solid #f1f5f9' }}>
+                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '6px' }}>
+                          <Building2 size={14} color="#0d9488" style={{ marginTop: '2px', flexShrink: 0 }} />
+                          <div>
+                            <div style={{ fontWeight: '600', color: '#1e293b', fontSize: '13px', lineHeight: '1.3' }}>
+                              {req.localLevel}
+                              {req.ward ? ` - Ward ${req.ward}` : ''}
+                            </div>
+                            <div style={{ fontSize: '11.5px', color: '#64748b', marginTop: '2px' }}>
+                              {req.district}, {req.province}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+
+                      {/* Contact Person */}
+                      <td style={{ padding: '14px 18px', verticalAlign: 'middle', borderBottom: '1px solid #f1f5f9' }}>
+                        <div style={{ fontWeight: '700', color: '#0f172a', fontSize: '13px' }}>
+                          {req.contactPerson}
+                          {req.designation && (
+                            <span style={{ fontWeight: '500', color: '#64748b', fontSize: '11.5px', marginLeft: '4px' }}>
+                              ({req.designation})
+                            </span>
+                          )}
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#475569', fontSize: '11.5px', marginTop: '3px' }}>
+                          <Phone size={11} color="#0d9488" style={{ flexShrink: 0 }} />
+                          <span style={{ fontFamily: 'monospace' }}>{req.phone}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#64748b', fontSize: '11px', marginTop: '2px' }}>
+                          <Mail size={11} color="#94a3b8" style={{ flexShrink: 0 }} />
+                          <span style={{ maxWidth: '190px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={req.email}>
+                            {req.email}
+                          </span>
+                        </div>
+                      </td>
+
+                      {/* Status */}
+                      <td style={{ padding: '14px 18px', verticalAlign: 'middle', borderBottom: '1px solid #f1f5f9', whiteSpace: 'nowrap' }}>
+                        <span
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            padding: '4px 10px',
+                            borderRadius: '999px',
+                            fontSize: '11.5px',
+                            fontWeight: '700',
+                            background: badge.bg,
+                            color: badge.color,
+                            border: `1px solid ${badge.border}`,
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
+                          <span
+                            style={{
+                              width: '7px',
+                              height: '7px',
+                              borderRadius: '50%',
+                              background: badge.dot,
+                              display: 'inline-block',
+                            }}
+                          />
+                          {badge.label}
+                        </span>
+                      </td>
+
+                      {/* Submitted Date */}
+                      <td style={{ padding: '14px 18px', verticalAlign: 'middle', borderBottom: '1px solid #f1f5f9', whiteSpace: 'nowrap' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontWeight: '600', color: '#334155', fontSize: '12px' }}>
+                          <Calendar size={12} color="#64748b" style={{ flexShrink: 0 }} />
+                          <span>{formatDateAD(req.createdAt)}</span>
+                        </div>
+                        <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px', paddingLeft: '17px' }}>
+                          ({formatDateBS(req.createdAt)} BS)
+                        </div>
+                      </td>
+
+                      {/* Actions */}
+                      <td style={{ padding: '14px 18px', verticalAlign: 'middle', borderBottom: '1px solid #f1f5f9', textAlign: 'right', whiteSpace: 'nowrap' }}>
+                        <div style={{ display: 'inline-flex', gap: '6px', alignItems: 'center', justifyContent: 'flex-end' }}>
+                          <button
+                            onClick={() => handleOpenEdit(req)}
+                            title="Edit application details before approval"
+                            style={{
+                              padding: '6px 11px',
+                              borderRadius: '7px',
+                              background: '#ffffff',
+                              color: '#334155',
+                              border: '1px solid #cbd5e1',
+                              fontWeight: '600',
+                              fontSize: '12px',
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              transition: 'all 0.15s ease',
+                              whiteSpace: 'nowrap',
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.background = '#f8fafc')}
+                            onMouseLeave={(e) => (e.currentTarget.style.background = '#ffffff')}
+                          >
+                            <Edit size={13} color="#64748b" />
+                            <span>Edit</span>
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedRequest(req)}
+                            title="Review full application form and documents"
+                            style={{
+                              padding: '6px 12px',
+                              borderRadius: '7px',
+                              background: '#f0fdfa',
+                              color: '#0f766e',
+                              border: '1px solid #99f6e4',
                               fontWeight: '700',
                               fontSize: '12px',
                               cursor: 'pointer',
-                              display: 'flex',
+                              display: 'inline-flex',
                               alignItems: 'center',
                               gap: '4px',
+                              transition: 'all 0.15s ease',
+                              whiteSpace: 'nowrap',
                             }}
+                            onMouseEnter={(e) => (e.currentTarget.style.background = '#ccfbf1')}
+                            onMouseLeave={(e) => (e.currentTarget.style.background = '#f0fdfa')}
                           >
-                            <CheckCircle2 size={13} />
-                            <span>Approve</span>
+                            <Eye size={13} color="#0f766e" />
+                            <span>Review</span>
                           </button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </table>
+
+                          {isPending && (
+                            <button
+                              onClick={() => handleApproveAndProvision(targetId)}
+                              title="1-Click Approve & Provision"
+                              style={{
+                                padding: '6px 13px',
+                                borderRadius: '7px',
+                                background: '#059669',
+                                color: '#ffffff',
+                                border: '1px solid #047857',
+                                fontWeight: '700',
+                                fontSize: '12px',
+                                cursor: 'pointer',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '5px',
+                                boxShadow: '0 1px 3px rgba(5,150,105,0.25)',
+                                transition: 'all 0.15s ease',
+                                whiteSpace: 'nowrap',
+                              }}
+                              onMouseEnter={(e) => (e.currentTarget.style.background = '#047857')}
+                              onMouseLeave={(e) => (e.currentTarget.style.background = '#059669')}
+                            >
+                              <CheckCircle2 size={13} color="#ffffff" />
+                              <span>Approve</span>
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Review Modal */}

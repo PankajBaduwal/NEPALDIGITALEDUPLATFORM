@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import { usePersistentState } from '../../hooks/usePersistentState';
 import { api } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 import {
@@ -21,6 +23,7 @@ import {
 } from 'lucide-react';
 import { ClassTeacherTools } from './ClassTeacherTools';
 import { StudentDossierModal } from '../teacher/StudentDossierModal';
+import { ReportCardSheet, useReportCardStyles } from './ReportCardSheet';
 
 interface ClassTeacherSectionPanelProps {
   sectionId: string;
@@ -36,19 +39,24 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
   readOnly = false,
 }) => {
   const { user } = useAuth();
-  const [activeSubTab, setActiveSubTab] = useState<'CONSOLIDATED' | 'REPORT_CARDS' | 'ROSTER' | 'TOOLS'>('CONSOLIDATED');
+  const [activeSubTab, setActiveSubTab] = usePersistentState<'CONSOLIDATED' | 'REPORT_CARDS' | 'ROSTER' | 'TOOLS'>(`classteacher.${sectionId}.subtab`, 'CONSOLIDATED');
   const [dossierId, setDossierId] = useState<string | null>(null);
   // Absence notices and ledger exports belong to the designated class teacher only (the panel is read-only for principals)
   const showTools = !readOnly && user?.role === 'TEACHER';
   const [loading, setLoading] = useState(true);
   const [overviewData, setOverviewData] = useState<any>(null);
   const [consolidatedData, setConsolidatedData] = useState<any>(null);
-  const [selectedExam, setSelectedExam] = useState<string>('');
-  const [selectedStudentId, setSelectedStudentId] = useState<string>('');
+  const [selectedExam, setSelectedExam] = usePersistentState<string>(`classteacher.${sectionId}.exam`, '');
+  const [selectedStudentId, setSelectedStudentId] = usePersistentState<string>(`classteacher.${sectionId}.student`, '');
   const [isPublishing, setIsPublishing] = useState(false);
   const [publishSuccess, setPublishSuccess] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [isBulkPrintMode, setIsBulkPrintMode] = useState(false);
+  // report cards queued for printing (rendered in a print-only layer, one A4 page each)
+  const [printList, setPrintList] = useState<any[] | null>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+  const [previewZoom, setPreviewZoom] = useState(1);
+  useReportCardStyles();
 
   useEffect(() => {
     if (sectionId) {
@@ -61,7 +69,7 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
     try {
       const [ovRes, resRes] = await Promise.all([
         api.get(`/class-teacher/section/${sectionId}/overview`).catch(() => null),
-        api.get(`/class-teacher/section/${sectionId}/consolidated-results?examName=${encodeURIComponent(selectedExam)}`).catch(() => null),
+        api.get(`/class-teacher/section/${sectionId}/consolidated-results${selectedExam ? `?examinationId=${encodeURIComponent(selectedExam)}` : ''}`).catch(() => null),
       ]);
       if (ovRes) setOverviewData(ovRes);
       if (resRes) {
@@ -143,7 +151,7 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
   const handleDownloadReportCard = async (studentId: string, studentName: string) => {
     try {
       await api.downloadBlob(
-        `/analytics/export/report-card/${studentId}/latest`,
+        `/analytics/export/report-card/${studentId}/${activeExamId || 'latest'}`,
         `ReportCard_${studentName.replace(/\s+/g, '_')}_${displaySectionName}.pdf`
       );
     } catch (err: any) {
@@ -154,7 +162,7 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
   const handleExportCsv = async () => {
     try {
       await api.downloadBlob(
-        `/analytics/export/results-csv/${sectionId}/latest`,
+        `/analytics/export/results-csv/${sectionId}/${activeExamId || 'latest'}`,
         `Consolidated_Marks_${displaySectionName.replace(/\s+/g, '_')}.csv`
       );
     } catch (err: any) {
@@ -172,6 +180,33 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
   );
 
   const selectedStudent = studentsList.find((s: any) => s.studentId === selectedStudentId) || studentsList[0];
+  const activeExamId: string = selectedExam || consolidatedData?.examination?.id || '';
+  const examOptions: any[] = consolidatedData?.examinations || [];
+  const activeExam = consolidatedData?.examination;
+  const sectionTitle = /^section/i.test(String(displaySectionName)) ? String(displaySectionName) : `Section ${displaySectionName}`;
+
+  const startPrint = (list: any[]) => {
+    if (!list.length) return;
+    setPrintList(list);
+  };
+  // print once the print layer is on the page; clear it afterwards
+  useEffect(() => {
+    if (!printList) return;
+    const done = () => setPrintList(null);
+    window.addEventListener('afterprint', done, { once: true });
+    const id = window.setTimeout(() => window.print(), 400);
+    return () => { window.clearTimeout(id); window.removeEventListener('afterprint', done); };
+  }, [printList]);
+  // fit the on-screen A4 preview to the available width
+  useEffect(() => {
+    const el = previewRef.current;
+    if (!el || activeSubTab !== 'REPORT_CARDS') return;
+    const fit = () => setPreviewZoom(Math.max(0.3, Math.min(1, (el.clientWidth - 4) / 794)));
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [activeSubTab, selectedStudent]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -208,7 +243,7 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <h2 style={{ fontSize: '22px', fontWeight: '800', margin: 0 }}>
-                {displayClassName} — Section {displaySectionName}
+                {displayClassName} — {sectionTitle}
               </h2>
               <span
                 style={{
@@ -273,9 +308,9 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
           </span>
         </div>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <span style={{ fontSize: '11px', color: '#5f736f' }}>Exam Term:</span>
+          <span style={{ fontSize: '11px', color: '#5f736f' }}>Examination:</span>
           <select
-            value={selectedExam}
+            value={activeExamId}
             onChange={(e) => setSelectedExam(e.target.value)}
             style={{
               padding: '4px 10px',
@@ -287,9 +322,10 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
               color: '#0e3e3b',
             }}
           >
-            <option value="Term 1 Examination 2083">Term 1 Examination 2083</option>
-            <option value="Term 2 Examination 2083">Term 2 Examination 2083</option>
-            <option value="Final Examination 2083">Final Examination 2083</option>
+            {examOptions.length === 0 && <option value="">No examinations yet</option>}
+            {examOptions.map((e: any) => (
+              <option key={e.id} value={e.id}>{e.name}{e.isPublished ? '' : ' (not published)'}</option>
+            ))}
           </select>
         </div>
       </div>
@@ -623,7 +659,7 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
               >
                 {studentsList.map((s: any) => (
                   <option key={s.studentId} value={s.studentId}>
-                    Roll {s.rollNumber}: {s.fullName} ({s.overallGrade} • GPA {s.overallGpa ? s.overallGpa.toFixed(2) : '3.60'})
+                    Roll {s.rollNumber}: {s.fullName} ({s.complete ? `${s.overallGrade} • GPA ${Number(s.overallGpa).toFixed(2)}` : 'marks pending'})
                   </option>
                 ))}
               </select>
@@ -631,7 +667,7 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
 
             <div style={{ display: 'flex', gap: '10px' }}>
               <button
-                onClick={() => window.print()}
+                onClick={() => startPrint(selectedStudent ? [selectedStudent] : [])}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -647,6 +683,26 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
                 }}
               >
                 <Printer size={15} /> Print Report Card
+              </button>
+
+              <button
+                onClick={() => startPrint(studentsList)}
+                title="Print every student's report card, one A4 page each"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '8px 16px',
+                  background: '#f4faf8',
+                  color: '#0e3e3b',
+                  border: '1px solid #cfdcd8',
+                  borderRadius: '8px',
+                  fontSize: '12px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                }}
+              >
+                <Printer size={15} /> Print All ({studentsList.length})
               </button>
 
               <button
@@ -670,155 +726,21 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
             </div>
           </div>
 
-          {/* Report Card Document View (CDC 2078 Compliant) */}
-          {selectedStudent && (
-            <div
-              id="printable-report-card"
-              style={{
-                background: '#ffffff',
-                border: '2px solid #0e3e3b',
-                borderRadius: '16px',
-                padding: '36px 40px',
-                maxWidth: '850px',
-                margin: '0 auto',
-                width: '100%',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-                fontFamily: 'system-ui, -apple-system, sans-serif',
-              }}
-            >
-              {/* Official School Header */}
-              <div style={{ textAlign: 'center', borderBottom: '2px solid #0e3e3b', paddingBottom: '16px', marginBottom: '20px' }}>
-                <div style={{ fontSize: '11px', fontWeight: '800', color: '#5f736f', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                  Government of Nepal • Ministry of Education, Science and Technology
-                </div>
-                <div style={{ fontSize: '10px', color: '#117a6b', fontWeight: '700', marginTop: '2px' }}>
-                  Curriculum Development Centre (CDC) Standard Grading System 2078
-                </div>
-                <h1 style={{ fontSize: '22px', fontWeight: '900', color: '#0e3e3b', margin: '8px 0 2px 0' }}>
-                  DHAMBOJHI HIGHER SECONDARY SCHOOL
-                </h1>
-                <p style={{ fontSize: '12px', color: '#4b605b', margin: '0 0 4px 0' }}>
-                  Nepalgunj Sub-Metropolitan City, Banke, Lumbini Province, Nepal
-                </p>
-                <div style={{ display: 'inline-block', background: '#ebf5f1', padding: '2px 10px', borderRadius: '4px', fontSize: '11px', fontWeight: '700', color: '#2f4f4c' }}>
-                  EMIS Code: 570010001 • Academic Year 2083 BS (2026/27 AD)
-                </div>
-                <div style={{ fontSize: '15px', fontWeight: '800', color: '#0f4c4a', marginTop: '10px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  OFFICIAL PROGRESS REPORT (TERMINAL EVALUATION)
-                </div>
+          {/* Report card preview (A4). The same sheet is what gets printed. */}
+          {activeExam && !activeExam.isPublished && (
+            <div style={{ background: '#fffbeb', border: '1px solid #fde68a', color: '#92400e', borderRadius: '10px', padding: '9px 14px', fontSize: '12px', fontWeight: 600 }}>
+              Results for “{activeExam.name}” are not published yet — report cards are marked PROVISIONAL.
+            </div>
+          )}
+          {selectedStudent && activeExam ? (
+            <div ref={previewRef} style={{ width: '100%', overflowX: 'hidden' }}>
+              <div style={{ zoom: previewZoom, width: 794, margin: '0 auto', boxShadow: '0 6px 28px rgba(15,23,42,0.18)', borderRadius: 2 } as React.CSSProperties}>
+                <ReportCardSheet data={consolidatedData} student={selectedStudent} />
               </div>
-
-              {/* Student Metadata Table */}
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: '10px',
-                  background: '#f4faf8',
-                  padding: '14px 18px',
-                  borderRadius: '8px',
-                  border: '1px solid #dcebe6',
-                  marginBottom: '20px',
-                  fontSize: '12px',
-                }}
-              >
-                <div>
-                  <span style={{ color: '#5f736f' }}>Student Name: </span>
-                  <strong style={{ color: '#0e3e3b' }}>{selectedStudent.fullName}</strong>
-                  {selectedStudent.fullNameNepali && <span style={{ color: '#5f736f', marginLeft: '6px' }}>({selectedStudent.fullNameNepali})</span>}
-                </div>
-                <div>
-                  <span style={{ color: '#5f736f' }}>Roll Number: </span>
-                  <strong style={{ color: '#0e3e3b' }}>{selectedStudent.rollNumber}</strong>
-                </div>
-                <div>
-                  <span style={{ color: '#5f736f' }}>Class & Section: </span>
-                  <strong style={{ color: '#0e3e3b' }}>{displayClassName} - Section {displaySectionName}</strong>
-                </div>
-                <div>
-                  <span style={{ color: '#5f736f' }}>Examination: </span>
-                  <strong style={{ color: '#117a6b' }}>{selectedExam}</strong>
-                </div>
-              </div>
-
-              {/* Subject Marks Table */}
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', marginBottom: '20px' }}>
-                <thead>
-                  <tr style={{ background: '#ebf5f1', borderTop: '1px solid #cfdcd8', borderBottom: '2px solid #cfdcd8' }}>
-                    <th style={{ padding: '8px 10px', textAlign: 'left', fontWeight: '700' }}>Subject</th>
-                    <th style={{ padding: '8px 10px', textAlign: 'center', fontWeight: '700' }}>Credit Hours</th>
-                    <th style={{ padding: '8px 10px', textAlign: 'center', fontWeight: '700' }}>Full Marks</th>
-                    <th style={{ padding: '8px 10px', textAlign: 'center', fontWeight: '700' }}>Marks Obtd</th>
-                    <th style={{ padding: '8px 10px', textAlign: 'center', fontWeight: '700' }}>Final Grade</th>
-                    <th style={{ padding: '8px 10px', textAlign: 'center', fontWeight: '700' }}>Grade Point</th>
-                    <th style={{ padding: '8px 10px', textAlign: 'left', fontWeight: '700' }}>Remarks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {selectedStudent.subjectMarks?.map((sm: any, idx: number) => (
-                    <tr key={idx} style={{ borderBottom: '1px solid #dcebe6' }}>
-                      <td style={{ padding: '8px 10px', fontWeight: '700', color: '#0e3e3b' }}>{sm.subjectName}</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center' }}>{sm.creditHours || 4}</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center' }}>{sm.totalMarks}</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center', fontWeight: '700' }}>{sm.marksObtained ?? '—'}</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center', fontWeight: '800', color: '#0f5f55' }}>{sm.grade}</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center', fontWeight: '700' }}>{sm.gpa ? sm.gpa.toFixed(2) : '3.60'}</td>
-                      <td style={{ padding: '8px 10px', color: '#5f736f', fontSize: '11px' }}>
-                        {sm.grade === 'A+' ? 'Outstanding' : sm.grade === 'A' ? 'Excellent' : sm.grade === 'B+' ? 'Very Good' : 'Satisfactory'}
-                      </td>
-                    </tr>
-                  ))}
-                  {/* Summary Row */}
-                  <tr style={{ background: '#f4faf8', borderTop: '2px solid #cfdcd8', fontWeight: '800' }}>
-                    <td style={{ padding: '10px', textAlign: 'left' }}>Total / Overall Result</td>
-                    <td style={{ padding: '10px', textAlign: 'center' }}>24.0</td>
-                    <td style={{ padding: '10px', textAlign: 'center' }}>{selectedStudent.totalMaxMarks}</td>
-                    <td style={{ padding: '10px', textAlign: 'center', color: '#117a6b' }}>{selectedStudent.totalMarksObtained}</td>
-                    <td style={{ padding: '10px', textAlign: 'center', color: '#0f4c4a' }}>{selectedStudent.overallGrade}</td>
-                    <td style={{ padding: '10px', textAlign: 'center', color: '#0e3e3b', fontSize: '13px' }}>
-                      {selectedStudent.overallGpa ? selectedStudent.overallGpa.toFixed(2) : '3.60'}
-                    </td>
-                    <td style={{ padding: '10px', color: '#117a6b' }}>PASS (Passed with Distinction)</td>
-                  </tr>
-                </tbody>
-              </table>
-
-              {/* CDC 2078 Grading Key Reference */}
-              <div
-                style={{
-                  border: '1px solid #dcebe6',
-                  borderRadius: '8px',
-                  padding: '8px 12px',
-                  fontSize: '10px',
-                  color: '#5f736f',
-                  marginBottom: '30px',
-                  background: '#fcfcfd',
-                }}
-              >
-                <strong>CDC 2078 Standard Scale:</strong> 90–100% (A+ : 4.0 Outstanding) | 80–89% (A : 3.6 Excellent) | 70–79% (B+ : 3.2 Very Good) | 60–69% (B : 2.8 Good) | 50–59% (C+ : 2.4 Satisfactory) | 35–49% (D : 1.6 Basic) | Below 35% (NG : Non-Graded)
-              </div>
-
-              {/* Signatures & Seal Block */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', paddingTop: '20px', marginTop: '20px' }}>
-                <div style={{ textAlign: 'center', width: '180px' }}>
-                  <div style={{ borderBottom: '1px solid #0e3e3b', marginBottom: '6px', height: '30px' }}></div>
-                  <div style={{ fontSize: '11px', fontWeight: '700', color: '#0e3e3b' }}>Class Teacher</div>
-                  <div style={{ fontSize: '10px', color: '#5f736f' }}>Dhambojhi Higher Secondary</div>
-                </div>
-
-                <div style={{ textAlign: 'center', width: '120px' }}>
-                  <div style={{ width: '60px', height: '60px', border: '2px dashed #8da19d', borderRadius: '50%', margin: '0 auto 6px auto', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#8da19d' }}>
-                    SEAL
-                  </div>
-                  <div style={{ fontSize: '10px', color: '#5f736f' }}>Institution Seal</div>
-                </div>
-
-                <div style={{ textAlign: 'center', width: '180px' }}>
-                  <div style={{ borderBottom: '1px solid #0e3e3b', marginBottom: '6px', height: '30px' }}></div>
-                  <div style={{ fontSize: '11px', fontWeight: '700', color: '#0e3e3b' }}>Dr. Shailesh Kumar Verma</div>
-                  <div style={{ fontSize: '10px', color: '#5f736f' }}>Headmaster / Principal</div>
-                </div>
-              </div>
+            </div>
+          ) : (
+            <div style={{ background: '#fff', border: '1px dashed #cfdcd8', borderRadius: 12, padding: 32, textAlign: 'center', color: '#5f736f', fontSize: 13 }}>
+              No marks have been entered for this examination yet, so there is no report card to show.
             </div>
           )}
         </div>
@@ -880,7 +802,7 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
                     {st.fullNameNepali && <div style={{ fontSize: '11px', color: '#5f736f' }}>{st.fullNameNepali}</div>}
                   </td>
                   <td style={{ padding: '10px 12px', color: '#5f736f', fontFamily: 'monospace' }}>
-                    dhambojhi_s_{String(st.rollNumber).padStart(3, '0')}
+                    {st.username || '—'}
                   </td>
                   <td style={{ padding: '10px 12px', textAlign: 'center' }}>
                     <span
@@ -893,11 +815,11 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
                         color: '#0f4c4a',
                       }}
                     >
-                      {90 + ((idx * 3) % 9)}%
+                      {st.attendance ? `${st.attendance.percentage}%` : '—'}
                     </span>
                   </td>
                   <td style={{ padding: '10px 12px', color: '#4b605b' }}>
-                    +977 98{40000000 + st.rollNumber * 1234}
+                    {st.guardianName || '—'}{st.guardianPhone ? <div style={{ fontSize: '11px', color: '#5f736f' }}>{st.guardianPhone}</div> : null}
                   </td>
                   <td style={{ padding: '10px 12px', textAlign: 'center' }}>
                     <span style={{ fontSize: '11px', fontWeight: '700', color: '#117a6b', background: '#e6f7f0', padding: '2px 8px', borderRadius: '10px' }}>
@@ -909,6 +831,14 @@ export const ClassTeacherSectionPanel: React.FC<ClassTeacherSectionPanelProps> =
             </tbody>
           </table>
         </div>
+      )}
+      {printList && createPortal(
+        <div id="rc-print-root">
+          {printList.map((s: any) => (
+            <ReportCardSheet key={String(s.studentId)} data={consolidatedData} student={s} />
+          ))}
+        </div>,
+        document.body
       )}
     </div>
   );

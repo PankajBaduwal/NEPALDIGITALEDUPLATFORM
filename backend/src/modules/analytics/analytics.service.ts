@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
+import fs from 'fs';
 import PDFDocument from 'pdfkit';
+import { ClassTeacherService } from '../class-teacher/class-teacher.service';
 import {
   Institution,
   User,
@@ -1126,169 +1128,186 @@ export class AnalyticsService {
    * Generates a downloadable / streamable PDF Report Card according to Nepal CDC directives
    */
   static async exportReportCardPdf(studentId: string, examinationId: string, opts: { publishedOnly?: boolean } = {}): Promise<Buffer> {
-    return new Promise(async (resolve, reject) => {
+    const student: any = await User.findById(studentId);
+    if (!student) throw { status: 404, message: 'Student not found' };
+    const enrollment: any = await StudentEnrollment.findOne({ studentId, status: 'ENROLLED' }).sort({ createdAt: -1 });
+    const section: any = enrollment ? await Section.findById(enrollment.sectionId).populate('classId') : null;
+    if (!section) throw { status: 404, message: 'This student is not enrolled in a section' };
+
+    // One examination only: the one asked for, or (for "latest") the latest published terminal exam that has marks
+    const report: any = await ClassTeacherService.buildExamReport(section, examinationId && examinationId !== 'latest' ? examinationId : undefined);
+    if (!report.examination) throw { status: 404, message: 'No examination record found for report card generation' };
+    if (opts.publishedOnly && !report.examination.isPublished) throw { status: 403, message: 'Results for this examination have not been published yet' };
+    const row: any = report.consolidatedStudents.find((r: any) => String(r.studentId) === String(studentId));
+    if (!row || !row.subjectMarks.some((m: any) => m.isSubmitted)) throw { status: 404, message: 'No marks have been recorded for this student in this examination' };
+
+    const inst: any = report.institution || {};
+    const exam = report.examination;
+    const cls: any = section.classId || {};
+    const sectionLabel = /^section/i.test(String(section.name)) ? String(section.name) : `Section ${section.name}`;
+    const provisional = !exam.isPublished;
+    const NAVY = '#0b2a4a', TEAL = '#0f766e', SOFT = '#f1f5f9', LINE = '#cbd5e1', MUTED = '#64748b', INK = '#0f172a';
+    const NIRMALA = 'C:/Windows/Fonts/Nirmala.ttc';
+    const hasNepali = fs.existsSync(NIRMALA);
+    const fmt = (d: any) => { try { return new Date(d).toISOString().slice(0, 10); } catch { return ''; } };
+    const num = (v: any) => (v === null || v === undefined ? '—' : String(Math.round(Number(v) * 100) / 100));
+
+    return new Promise<Buffer>((resolve, reject) => {
       try {
-        const student = await User.findById(studentId);
-        if (!student) return reject(new Error('Student not found'));
-
-        const enrollment = await StudentEnrollment.findOne({ studentId })
-          .populate('sectionId')
-          .populate('academicYearId');
-
-        const section = await Section.findById(enrollment?.sectionId).populate('classId');
-        const institution = await Institution.findById(student.institutionId);
-
-        let examination: any = null;
-        if (examinationId && examinationId !== 'latest' && mongoose.isValidObjectId(examinationId)) {
-          examination = await Examination.findById(examinationId);
-        }
-        if (!examination) {
-          examination = await Examination.findOne({
-            institutionId: student.institutionId,
-            ...(opts.publishedOnly ? { isPublished: true } : {}),
-          }).sort({ startDate: -1 });
-        }
-        if (!examination) return reject(new Error('No examination record found for report card generation'));
-
-        const markScope: any = opts.publishedOnly ? { workflowStatus: 'PUBLISHED' } : {};
-        let marks = await StudentMark.find({
-          studentId,
-          examinationId: examination._id,
-          ...markScope,
-        }).populate('centralSubjectId');
-
-        if (!marks || marks.length === 0) {
-          marks = await StudentMark.find({ studentId, institutionId: student.institutionId, ...markScope }).populate('centralSubjectId');
-        }
-
-        // Build PDF with PDFKit
-        const doc = new PDFDocument({ margin: 40, size: 'A4' });
+        const doc = new PDFDocument({ margin: 0, size: 'A4', info: { Title: `Report Card — ${student.fullName} — ${exam.name}`, Author: inst.name || 'Nepal Digital Education Platform' } });
         const buffers: Buffer[] = [];
-
         doc.on('data', buffers.push.bind(buffers));
         doc.on('end', () => resolve(Buffer.concat(buffers)));
         doc.on('error', reject);
+        if (hasNepali) { doc.registerFont('NP', NIRMALA, 'NirmalaUI'); doc.registerFont('NPB', NIRMALA, 'NirmalaUI-Bold'); }
+        const W = 595.28, L = 40, R = W - 40, CW = R - L;
+        const txt = (s: string, x: number, y: number, o: any = {}) => doc.text(s, x, y, { lineBreak: false, ...o });
 
-        // ── 1. School Header
-        doc.rect(20, 20, 555, 800).strokeColor('#0f172a').lineWidth(1.5).stroke();
+        // page frame (double border like a certificate)
+        doc.lineWidth(2.4).strokeColor(NAVY).rect(18, 18, W - 36, 805.9).stroke();
+        doc.lineWidth(0.6).strokeColor(TEAL).rect(24, 24, W - 48, 793.9).stroke();
 
-        doc.fontSize(16).font('Helvetica-Bold').fillColor('#0f172a').text(
-          institution?.name || 'NEPAL MODEL HIGHER SECONDARY SCHOOL',
-          { align: 'center' }
-        );
-        doc.fontSize(10).font('Helvetica').fillColor('#475569').text(
-          `${institution?.district || 'Kathmandu'}, ${institution?.province || 'Bagmati Province'}, Nepal`,
-          { align: 'center' }
-        );
-        doc.fontSize(9).text(`EMIS Code: ${institution?.emisCode || '270010001'} | Affiliated to CDC / NEB Nepal`, {
-          align: 'center',
+        // watermark
+        if (provisional) {
+          doc.save();
+          doc.rotate(-35, { origin: [W / 2, 430] });
+          doc.fillColor('#94a3b8').fillOpacity(0.13).font('Helvetica-Bold').fontSize(74);
+          txt('PROVISIONAL', 70, 400, { width: W - 140, align: 'center' });
+          doc.restore();
+          doc.fillOpacity(1);
+        }
+
+        // header
+        doc.fillColor(MUTED).font('Helvetica-Bold').fontSize(8);
+        txt('GOVERNMENT OF NEPAL', L, 38, { width: CW, align: 'center', characterSpacing: 1.6 });
+        doc.font('Helvetica').fontSize(8);
+        txt('Ministry of Education, Science and Technology  •  Curriculum Development Centre (CDC)', L, 49, { width: CW, align: 'center' });
+        doc.fillColor(NAVY).font('Helvetica-Bold').fontSize(19);
+        txt(String(inst.name || 'School').toUpperCase(), L, 66, { width: CW, align: 'center' });
+        let y = 90;
+        if (hasNepali && inst.nameNepali) { doc.font('NPB').fontSize(13).fillColor(TEAL); txt(inst.nameNepali, L, y, { width: CW, align: 'center' }); y += 18; }
+        doc.fillColor(MUTED).font('Helvetica').fontSize(8.5);
+        txt([inst.localLevel, inst.district, inst.province].filter(Boolean).join(', ') + ', Nepal', L, y, { width: CW, align: 'center' });
+        txt(`EMIS Code: ${inst.emisCode || '—'}   •   Academic Year ${report.academicYear?.name || ''} BS`, L, y + 12, { width: CW, align: 'center' });
+
+        // title ribbon
+        y += 32;
+        doc.rect(L + 60, y, CW - 120, 26).fill(NAVY);
+        doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(13);
+        txt('PROGRESS REPORT CARD', L + 60, y + 7, { width: CW - 120, align: 'center', characterSpacing: 2.4 });
+        doc.fillColor(INK).font('Helvetica-Bold').fontSize(10.5);
+        txt(exam.name, L, y + 34, { width: CW, align: 'center' });
+        doc.fillColor(MUTED).font('Helvetica').fontSize(8);
+        txt(`${fmt(exam.startDate)} to ${fmt(exam.endDate)}${provisional ? '   •   Provisional — results not yet published' : ''}`, L, y + 48, { width: CW, align: 'center' });
+
+        // student details
+        y += 68;
+        doc.roundedRect(L, y, CW, 78, 4).fillAndStroke(SOFT, LINE);
+        const col = (label: string, value: string, x: number, yy: number, w: number) => {
+          doc.fillColor(MUTED).font('Helvetica').fontSize(7.5); txt(label.toUpperCase(), x, yy, { width: w });
+          doc.fillColor(INK).font('Helvetica-Bold').fontSize(10); txt(value, x, yy + 10, { width: w });
+        };
+        col('Student name', student.fullName, L + 12, y + 9, 230);
+        if (hasNepali && student.fullNameNepali) { doc.font('NP').fontSize(9).fillColor(MUTED); txt(student.fullNameNepali, L + 12, y + 31, { width: 230 }); }
+        col('Roll number', String(row.rollNumber), L + 250, y + 9, 60);
+        col('Class & section', `${cls.name || 'Grade ' + cls.gradeNumber} — ${sectionLabel}`, L + 320, y + 9, 190);
+        col('Admission no.', String(row.admissionNumber || '—'), L + 12, y + 52, 120);
+        col('Medium', section.medium === 'NEPALI' ? 'Nepali' : section.medium === 'ENGLISH' ? 'English' : 'Bilingual', L + 250, y + 52, 70);
+        col('Attendance', row.attendance ? `${row.attendance.percentage}%  (${row.attendance.present + row.attendance.late}/${row.attendance.total} days)` : '—', L + 320, y + 52, 190);
+
+        // marks table
+        y += 90;
+        const cols = [
+          { k: 'sn', t: 'S.N', w: 24, a: 'center' }, { k: 'sub', t: 'Subject', w: 128, a: 'left' }, { k: 'cr', t: 'Credit', w: 36, a: 'center' }, { k: 'fm', t: 'Full', w: 36, a: 'center' },
+          { k: 'pm', t: 'Pass', w: 34, a: 'center' }, { k: 'th', t: 'Theory', w: 42, a: 'center' }, { k: 'pr', t: 'Practical', w: 46, a: 'center' }, { k: 'ob', t: 'Obtained', w: 48, a: 'center' },
+          { k: 'gr', t: 'Grade', w: 36, a: 'center' }, { k: 'gp', t: 'GPA', w: 33, a: 'center' }, { k: 're', t: 'Remarks', w: 52, a: 'left' }
+        ];
+        const pos: Record<string, number> = {}; let cx = L; cols.forEach((c) => { pos[c.k] = cx; cx += c.w; });
+        doc.rect(L, y, CW, 22).fill(NAVY);
+        doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(8);
+        cols.forEach((c) => txt(c.t, pos[c.k] + (c.a === 'left' ? 5 : 0), y + 7, { width: c.w - (c.a === 'left' ? 5 : 0), align: c.a }));
+        y += 22;
+        row.subjectMarks.forEach((m: any, i: number) => {
+          doc.rect(L, y, CW, 26).fillAndStroke(i % 2 ? SOFT : '#ffffff', LINE);
+          const base = y + 8;
+          doc.fillColor(INK).font('Helvetica').fontSize(8.5);
+          const cell = (k: string, s: string, bold = false, color = INK) => { doc.fillColor(color).font(bold ? 'Helvetica-Bold' : 'Helvetica'); const c = cols.find((q) => q.k === k)!; txt(s, pos[k] + (c.a === 'left' ? 5 : 0), base, { width: c.w - (c.a === 'left' ? 5 : 0), align: c.a as any }); };
+          cell('sn', String(i + 1));
+          cell('sub', m.subjectName, true, NAVY);
+          cell('cr', num(m.creditHours)); cell('fm', num(m.totalMarks)); cell('pm', num(m.passMarks));
+          cell('th', num(m.theoryMarks)); cell('pr', num(m.practicalMarks));
+          cell('ob', num(m.marksObtained), true);
+          cell('gr', m.grade || '—', true, m.grade === 'NG' ? '#b91c1c' : TEAL); cell('gp', m.gpa === null ? '—' : Number(m.gpa).toFixed(2));
+          doc.fontSize(7.5); cell('re', m.remark || (m.isSubmitted ? '' : 'Pending'), false, MUTED);
+          y += 26;
         });
-        doc.moveDown(0.5);
+        doc.rect(L, y, CW, 26).fillAndStroke('#e2f3f0', LINE);
+        doc.fillColor(NAVY).font('Helvetica-Bold').fontSize(9);
+        txt('TOTAL', pos.sub + 5, y + 8, { width: 120 });
+        txt(num(row.subjectMarks.reduce((s: number, m: any) => s + (m.creditHours || 0), 0)), pos.cr, y + 8, { width: 36, align: 'center' });
+        txt(num(row.totalFullMarks), pos.fm, y + 8, { width: 36, align: 'center' });
+        txt(num(row.totalMarksObtained), pos.ob, y + 8, { width: 48, align: 'center' });
+        txt(row.overallGrade, pos.gr, y + 8, { width: 36, align: 'center' });
+        txt(row.overallGpa ? Number(row.overallGpa).toFixed(2) : '—', pos.gp, y + 8, { width: 33, align: 'center' });
+        y += 36;
 
-        doc.fontSize(13).font('Helvetica-Bold').fillColor('#1e40af').text(
-          `ACADEMIC PROGRESS REPORT CARD — ${examination.name.toUpperCase()}`,
-          { align: 'center' }
-        );
-        doc.moveDown(0.8);
-
-        // ── 2. Student Info Box
-        doc.rect(40, doc.y, 515, 65).fillAndStroke('#f8fafc', '#cbd5e1');
-        const boxTop = doc.y + 10;
-
-        doc.fontSize(10).font('Helvetica-Bold').fillColor('#0f172a');
-        doc.text(`Student Name: `, 50, boxTop);
-        doc.font('Helvetica').text(student.fullName, 140, boxTop);
-
-        doc.font('Helvetica-Bold').text(`Roll No: `, 380, boxTop);
-        doc.font('Helvetica').text(String(enrollment?.rollNumber || 1), 450, boxTop);
-
-        doc.font('Helvetica-Bold').text(`Class & Section: `, 50, boxTop + 20);
-        doc.font('Helvetica').text(
-          `Grade ${(section?.classId as any)?.gradeNumber || 10} — ${section?.name || 'Section A'}`,
-          140,
-          boxTop + 20
-        );
-
-        doc.font('Helvetica-Bold').text(`Admission No: `, 380, boxTop + 20);
-        doc.font('Helvetica').text(enrollment?.admissionNumber || 'ADM-2081-01', 450, boxTop + 20);
-
-        doc.font('Helvetica-Bold').text(`Academic Year: `, 50, boxTop + 40);
-        doc.font('Helvetica').text('2081 / 2082 B.S.', 140, boxTop + 40);
-
-        doc.y = boxTop + 65;
-        doc.moveDown(1);
-
-        // ── 3. Marks & Grades Table
-        const tableTop = doc.y;
-        doc.rect(40, tableTop, 515, 24).fillAndStroke('#1e293b', '#1e293b');
-
-        doc.fontSize(9).font('Helvetica-Bold').fillColor('#ffffff');
-        doc.text('Subject', 50, tableTop + 7, { width: 180 });
-        doc.text('Credit', 230, tableTop + 7, { width: 40, align: 'center' });
-        doc.text('Theory', 270, tableTop + 7, { width: 50, align: 'center' });
-        doc.text('Practical', 320, tableTop + 7, { width: 55, align: 'center' });
-        doc.text('Total', 380, tableTop + 7, { width: 45, align: 'center' });
-        doc.text('Grade', 430, tableTop + 7, { width: 40, align: 'center' });
-        doc.text('GPA', 480, tableTop + 7, { width: 40, align: 'center' });
-
-        let currentY = tableTop + 24;
-        let totalGpa = 0;
-        let totalSubjects = marks.length;
-
-        marks.forEach((m: any, idx: number) => {
-          const bg = idx % 2 === 0 ? '#ffffff' : '#f8fafc';
-          doc.rect(40, currentY, 515, 22).fillAndStroke(bg, '#e2e8f0');
-
-          doc.fontSize(9).font('Helvetica').fillColor('#0f172a');
-          doc.text(m.centralSubjectId?.name || 'Subject', 50, currentY + 6, { width: 175 });
-          doc.text(String(m.centralSubjectId?.creditHours || 4), 230, currentY + 6, { width: 40, align: 'center' });
-          doc.text(m.theoryMarks !== undefined ? String(m.theoryMarks) : '—', 270, currentY + 6, { width: 50, align: 'center' });
-          doc.text(m.practicalMarks !== undefined ? String(m.practicalMarks) : '—', 320, currentY + 6, { width: 55, align: 'center' });
-          doc.font('Helvetica-Bold').text(String(m.totalMarks), 380, currentY + 6, { width: 45, align: 'center' });
-          doc.text(m.grade, 430, currentY + 6, { width: 40, align: 'center' });
-          doc.text(String(m.gpa), 480, currentY + 6, { width: 40, align: 'center' });
-
-          totalGpa += m.gpa || 0;
-          currentY += 22;
+        // summary boxes
+        const resultText = row.result === 'PASSED' ? 'PASSED' : row.result === 'NOT_PASSED' ? 'NOT PASSED' : 'INCOMPLETE';
+        const boxes: Array<[string, string]> = [
+          ['Total marks', `${num(row.totalMarksObtained)} / ${num(row.totalMaxMarks)}`], ['Percentage', `${row.percentage}%`], ['Overall grade', row.overallGrade],
+          ['GPA', row.overallGpa ? Number(row.overallGpa).toFixed(2) : '—'], ['Result', resultText], ['Position', row.rank ? `${row.rank} of ${report.rankedCount}` : '—']
+        ];
+        const bw = (CW - 5 * 6) / 6;
+        boxes.forEach(([lab, val], i) => {
+          const bx = L + i * (bw + 6);
+          doc.roundedRect(bx, y, bw, 40, 4).fillAndStroke('#ffffff', LINE);
+          doc.fillColor(MUTED).font('Helvetica').fontSize(7); txt(lab.toUpperCase(), bx, y + 7, { width: bw, align: 'center' });
+          doc.fillColor(lab === 'Result' && row.result !== 'PASSED' ? '#b91c1c' : NAVY).font('Helvetica-Bold').fontSize(lab === 'Total marks' ? 10 : 13); txt(val, bx, y + 20, { width: bw, align: 'center' });
         });
+        y += 50;
+        doc.fillColor(INK).font('Helvetica').fontSize(8.5);
+        const resultLine = row.result === 'PASSED' ? `Passed — ${row.overallRemark}.` : row.result === 'NOT_PASSED' ? `Not passed: non-graded in ${row.failedSubjects.join(', ')}.` : `Result incomplete: marks pending for ${row.missingSubjects.join(', ') || 'one or more subjects'}.`;
+        txt(`Result: ${resultLine}`, L, y, { width: CW, align: 'center' });
+        y += 18;
 
-        const overallGpa = totalSubjects > 0 ? (totalGpa / totalSubjects).toFixed(2) : '3.60';
-        const overallLetter = NepalGradingUtil.calculateGrade(Number(overallGpa) * 25);
+        // class teacher's remark
+        const remarkFor = row.result === 'PASSED'
+          ? ({ 'A+': 'Outstanding performance. Keep up the excellent work.', A: 'Excellent work. Continue with the same dedication.', 'B+': 'Very good performance. A little more practice will bring even better results.', B: 'Good effort. Regular revision will help to improve further.', 'C+': 'Satisfactory. Needs more practice and regular reading at home.', C: 'Acceptable. Please give extra time to revision at home.', D: 'Basic level reached. Extra support and regular practice are needed.' } as any)[row.overallGrade] || ''
+          : row.result === 'NOT_PASSED' ? 'Extra practice and support are needed in the subjects marked NG.' : 'The report will be completed once all subject marks are entered.';
+        doc.roundedRect(L, y, CW, 44, 4).fillAndStroke('#ffffff', LINE);
+        doc.fillColor(MUTED).font('Helvetica').fontSize(7.5); txt("CLASS TEACHER'S REMARKS", L + 10, y + 7);
+        doc.fillColor(INK).font('Helvetica').fontSize(9); txt(remarkFor, L + 10, y + 20, { width: CW - 20 });
+        y += 54;
 
-        // ── 4. Summary Box
-        doc.y = currentY + 15;
-        doc.rect(40, doc.y, 515, 50).fillAndStroke('#eff6ff', '#bfdbfe');
-        const summaryY = doc.y + 12;
+        // grade scale
+        doc.fillColor(MUTED).font('Helvetica-Bold').fontSize(7.5); txt('CDC 2078 GRADING SCALE', L, y);
+        y += 11;
+        const scale: Array<[string, string, string]> = [['A+', '90–100', '4.0'], ['A', '80–89', '3.6'], ['B+', '70–79', '3.2'], ['B', '60–69', '2.8'], ['C+', '50–59', '2.4'], ['C', '40–49', '2.0'], ['D', '35–39', '1.6'], ['NG', 'Below 35', '0.0']];
+        const sw = CW / scale.length;
+        scale.forEach((s, i) => {
+          const sx = L + i * sw;
+          doc.rect(sx, y, sw, 34).fillAndStroke(i % 2 ? SOFT : '#ffffff', LINE);
+          doc.fillColor(NAVY).font('Helvetica-Bold').fontSize(9); txt(s[0], sx, y + 4, { width: sw, align: 'center' });
+          doc.fillColor(MUTED).font('Helvetica').fontSize(7); txt(s[2] === '0.0' ? 'Below 35%' : `${s[1]}%`, sx, y + 16, { width: sw, align: 'center' }); txt(`GPA ${s[2]}`, sx, y + 25, { width: sw, align: 'center' });
+        });
+        y += 44;
 
-        doc.fontSize(11).font('Helvetica-Bold').fillColor('#1e40af');
-        doc.text(`Grade Point Average (GPA): ${overallGpa}`, 60, summaryY);
-        doc.text(`Overall Letter Grade: ${overallLetter}`, 280, summaryY);
-
-        doc.fontSize(9).font('Helvetica').fillColor('#475569');
-        doc.text(`Result Status: ${Number(overallGpa) >= 1.6 ? 'PASSED (Promoted)' : 'NEEDS IMPROVEMENT'}`, 60, summaryY + 18);
-        doc.text(`Grading System: Nepal Curriculum Development Centre (CDC 2078)`, 280, summaryY + 18);
-
-        // ── 5. Official Grading System Legend
-        doc.y = summaryY + 45;
-        doc.fontSize(8).font('Helvetica-Bold').fillColor('#334155').text('NEPAL CDC LETTER GRADING DIRECTIVE REFERENCE:', 40, doc.y);
-        doc.fontSize(7.5).font('Helvetica').fillColor('#64748b').text(
-          'A+ (90-100% | GPA 4.0 Outstanding)   A (80-89% | GPA 3.6 Excellent)   B+ (70-79% | GPA 3.2 Very Good)   B (60-69% | GPA 2.8 Good)\n' +
-          'C+ (50-59% | GPA 2.4 Satisfactory)   C (40-49% | GPA 2.0 Acceptable)   D (35-39% | GPA 1.6 Basic)   NG (Below 35% | Non-Graded)',
-          40,
-          doc.y + 12
-        );
-
-        // ── 6. Signature Blocks
-        const sigY = 740;
-        doc.strokeColor('#94a3b8').lineWidth(1);
-        doc.moveTo(60, sigY).lineTo(180, sigY).stroke();
-        doc.moveTo(230, sigY).lineTo(350, sigY).stroke();
-        doc.moveTo(400, sigY).lineTo(520, sigY).stroke();
-
-        doc.fontSize(8.5).font('Helvetica-Bold').fillColor('#1e293b');
-        doc.text('Class Teacher', 85, sigY + 6);
-        doc.text('Exam Controller', 250, sigY + 6);
-        doc.text('School Principal', 425, sigY + 6);
+        // signatures + seal
+        const sigY = Math.max(y + 36, 728);
+        doc.strokeColor(NAVY).lineWidth(0.8);
+        doc.moveTo(L + 10, sigY).lineTo(L + 150, sigY).stroke();
+        doc.moveTo(R - 150, sigY).lineTo(R - 10, sigY).stroke();
+        doc.fillColor(INK).font('Helvetica-Bold').fontSize(9);
+        txt('Class Teacher', L + 10, sigY + 5, { width: 140, align: 'center' });
+        txt('Principal / Headmaster', R - 150, sigY + 5, { width: 140, align: 'center' });
+        doc.fillColor(MUTED).font('Helvetica').fontSize(8);
+        txt(report.classTeacher?.fullName || '', L + 10, sigY + 17, { width: 140, align: 'center' });
+        txt(report.principal?.fullName || '', R - 150, sigY + 17, { width: 140, align: 'center' });
+        doc.lineWidth(1).strokeColor('#94a3b8').dash(3, { space: 3 }).circle(W / 2, sigY - 14, 30).stroke().undash();
+        doc.fillColor('#94a3b8').font('Helvetica').fontSize(7); txt('OFFICIAL', W / 2 - 30, sigY - 21, { width: 60, align: 'center' }); txt('SEAL', W / 2 - 30, sigY - 11, { width: 60, align: 'center' });
+        doc.fillColor(MUTED).fontSize(7.5);
+        txt(`Date of issue: ${fmt(new Date())}`, L + 10, sigY + 38, { width: 200 });
+        txt('Computer-generated report card — valid with the school seal and signatures.', L, 806, { width: CW, align: 'center' });
 
         doc.end();
       } catch (err) {
@@ -1301,67 +1320,35 @@ export class AnalyticsService {
    * Generates a consolidated class result CSV string
    */
   static async exportClassResultsCsv(sectionId: string, examinationId: string): Promise<string> {
-    const secObjectId = new mongoose.Types.ObjectId(sectionId);
-    const examObjectId = new mongoose.Types.ObjectId(examinationId);
+    const section: any = await Section.findById(sectionId).populate('classId');
+    if (!section) throw { status: 404, message: 'Section not found' };
 
-    const section = await Section.findById(sectionId).populate('classId');
-    const examination = await Examination.findById(examinationId);
+    // Same data as the on-screen marksheet and the report cards: one examination, one row per subject
+    const report: any = await ClassTeacherService.buildExamReport(section, examinationId && examinationId !== 'latest' ? examinationId : undefined);
+    if (!report.examination) throw { status: 404, message: 'No examination found for this section' };
 
-    const enrollments = await StudentEnrollment.find({ sectionId: secObjectId })
-      .populate('studentId', 'fullName')
-      .sort({ rollNumber: 1 });
+    const cell = (v: any) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const subjects: string[] = report.assessments.map((a: any) => a.centralSubjectId?.name || 'Subject');
+    const rows: string[] = [
+      [`${cell('Examination')}`, cell(report.examination.name), cell(report.examination.isPublished ? 'Published' : 'Not published')].join(','),
+      ['Roll No', 'Student Name', ...subjects.map((s) => cell(`${s} (marks / grade)`)), 'Marks Obtained', 'Full Marks', 'Percentage', 'GPA', 'Grade', 'Result', 'Position', 'Attendance %'].join(','),
+    ];
 
-    const marks = await StudentMark.find({ sectionId: secObjectId, examinationId: examObjectId })
-      .populate('centralSubjectId', 'name code');
-
-    // Distinct subjects
-    const subjectsMap: Record<string, string> = {};
-    marks.forEach((m: any) => {
-      if (m.centralSubjectId) {
-        subjectsMap[m.centralSubjectId.id] = m.centralSubjectId.name;
-      }
-    });
-    const subjectIds = Object.keys(subjectsMap);
-
-    // Header row
-    const headers = ['Roll No', 'Student Name', ...subjectIds.map((sId) => `"${subjectsMap[sId]} (Marks)"`), 'Total Marks', 'Average GPA', 'Grade', 'Result'];
-    const rows: string[] = [headers.join(',')];
-
-    enrollments.forEach((enr: any) => {
-      const sId = enr.studentId?._id?.toString() || enr.studentId?.id || enr.studentId;
-      const studentName = enr.studentId?.fullName || 'Student';
-      const studentMarks = marks.filter((m: any) => (m.studentId?._id || m.studentId)?.toString() === sId);
-
-      let totalScore = 0;
-      let gpaSum = 0;
-      let failed = false;
-
-      const subjectScores = subjectIds.map((subId) => {
-        const found = studentMarks.find((m: any) => (m.centralSubjectId?._id || m.centralSubjectId)?.toString() === subId);
-        if (found) {
-          totalScore += found.totalMarks || 0;
-          gpaSum += found.gpa || 0;
-          if (found.grade === 'NG' || found.totalMarks < 35) failed = true;
-          return `${found.totalMarks} (${found.grade})`;
-        }
-        return '—';
-      });
-
-      const avgGpa = studentMarks.length > 0 ? (gpaSum / studentMarks.length).toFixed(2) : '0.00';
-      const grade = NepalGradingUtil.calculateGrade(Number(avgGpa) * 25);
-      const result = !failed && Number(avgGpa) >= 1.6 ? 'PASSED' : 'NEEDS SUPPORT';
-
+    for (const r of report.consolidatedStudents) {
       rows.push([
-        enr.rollNumber || '',
-        `"${studentName}"`,
-        ...subjectScores.map((s) => `"${s}"`),
-        totalScore,
-        avgGpa,
-        grade,
-        result,
+        r.rollNumber ?? '',
+        cell(r.fullName),
+        ...r.subjectMarks.map((m: any) => cell(m.isSubmitted ? `${m.marksObtained} (${m.grade})` : '—')),
+        r.totalMarksObtained,
+        r.totalMaxMarks,
+        r.percentage,
+        r.overallGpa ? Number(r.overallGpa).toFixed(2) : '',
+        r.overallGrade,
+        r.result === 'PASSED' ? 'PASSED' : r.result === 'NOT_PASSED' ? 'NOT PASSED' : 'INCOMPLETE',
+        r.rank ?? '',
+        r.attendance ? r.attendance.percentage : '',
       ].join(','));
-    });
-
+    }
     return rows.join('\n');
   }
 

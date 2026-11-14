@@ -1,7 +1,7 @@
 import { ENV } from '../../config/env';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
-import { User, Institution, Subscription, RegistrationRequest, Section } from '../../models';
+import { User, Institution, Subscription, RegistrationRequest, Section, Class, AcademicYear, StudentEnrollment, SubjectAllocation } from '../../models';
 import { TokenUtil } from '../../common/utils/token.util';
 import { UserRole } from '../../common/constants/roles';
 import { MailService } from '../../common/services/mail.service';
@@ -165,6 +165,41 @@ export class AuthService {
         institutionCode: institution?.emisCode || institution?.id,
         activePackages: activeSubscriptions.map((s) => (s.packageId as any)?.code || 'STANDARD'),
       },
+    };
+  }
+
+  /**
+   * Demo mode only: the Class 1 demo accounts of the demo school (class teachers, subject teachers, students),
+   * so the login page can offer one-click entry for each of them.
+   */
+  static async demoClassAccounts(grade = 1) {
+    if (!ENV.DEMO_MODE) {
+      throw { status: 403, message: 'Demo login is disabled', code: 'DEMO_DISABLED' };
+    }
+    const inst: any = await Institution.findOne({ emisCode: '570010001' });
+    if (!inst) return { classTeachers: [], subjectTeachers: [], students: [] };
+    const year: any = await AcademicYear.findOne({ institutionId: inst._id, isCurrent: true });
+    const cls: any = await Class.findOne({ institutionId: inst._id, gradeNumber: grade });
+    if (!year || !cls) return { classTeachers: [], subjectTeachers: [], students: [] };
+    const sections: any[] = await Section.find({ classId: cls._id, academicYearId: year._id }).sort({ name: 1 }).populate('classTeacherId', 'username fullName');
+    const ids = sections.map((s) => s._id);
+    const label = (s: any) => (/^section/i.test(String(s.name)) ? String(s.name) : `Section ${s.name}`);
+    const allocs: any[] = await SubjectAllocation.find({ sectionId: { $in: ids } }).populate('teacherId', 'username fullName').populate('centralSubjectId', 'name code');
+    const enrolments: any[] = await StudentEnrollment.find({ sectionId: { $in: ids }, academicYearId: year._id, status: { $ne: 'GRADUATED' } }).sort({ rollNumber: 1 }).populate('studentId', 'username fullName');
+    const secById = new Map(sections.map((s) => [String(s._id), s]));
+    const subjectOrder = ['NEP1', 'ENG1', 'MTH1', 'SER1'];
+    return {
+      grade,
+      school: inst.name,
+      password: 'DemoPass123!',
+      classTeachers: sections.filter((s) => s.classTeacherId).map((s) => ({ username: s.classTeacherId.username, fullName: s.classTeacherId.fullName, section: label(s), medium: s.medium })),
+      subjectTeachers: allocs
+        .filter((a) => a.teacherId && a.centralSubjectId)
+        .sort((a, b) => String(a.sectionId).localeCompare(String(b.sectionId)) || subjectOrder.indexOf(a.centralSubjectId.code) - subjectOrder.indexOf(b.centralSubjectId.code))
+        .map((a) => ({ username: a.teacherId.username, fullName: a.teacherId.fullName, subject: a.centralSubjectId.name, section: label(secById.get(String(a.sectionId))) })),
+      students: enrolments
+        .filter((e) => e.studentId)
+        .map((e) => ({ username: e.studentId.username, fullName: e.studentId.fullName, rollNumber: e.rollNumber, section: label(secById.get(String(e.sectionId))) }))
     };
   }
 

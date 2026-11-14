@@ -72,6 +72,19 @@ export const LoginPage: React.FC = () => {
   const [rememberMe, setRememberMe] = useState(true);
   const [loading, setLoading] = useState(false);
   const [demoLoading, setDemoLoading] = useState(false);
+  // Class 1 demo accounts (class teachers, subject teachers, students) offered next to the 1-click demo entry
+  const [class1, setClass1] = useState<{
+    classTeachers: Array<{ username: string; fullName: string; section: string }>;
+    subjectTeachers: Array<{ username: string; fullName: string; subject: string; section: string }>;
+    students: Array<{ username: string; fullName: string; section: string; rollNumber: number }>;
+  } | null>(null);
+  useEffect(() => {
+    let alive = true;
+    api.get<any>('/auth/demo-class-accounts?grade=1')
+      .then((res) => { const d = (res && (res as any).data) || res; if (alive && d && Array.isArray(d.students)) setClass1(d); })
+      .catch(() => { /* demo accounts are optional: hidden when demo mode is off */ });
+    return () => { alive = false; };
+  }, []);
   const [error, setError] = useState<string | null>(null);
 
   // Load public institutions list
@@ -1059,6 +1072,48 @@ export const LoginPage: React.FC = () => {
                       {demoLoading ? 'Launching Demo...' : `Instant 1-Click Demo Entry (${selectedRole.title.replace(' Login', '')})`}
                     </span>
                   </button>
+
+                  {/* Class 1: one-click entry for every class teacher, subject teacher and student */}
+                  {class1 && (selectedRole.key === 'CLASS_TEACHER' || selectedRole.key === 'TEACHER' || selectedRole.key === 'STUDENT') && (() => {
+                    const items: Array<{ username: string; name: string; sub: string; group: string }> =
+                      selectedRole.key === 'CLASS_TEACHER'
+                        ? class1.classTeachers.map((x) => ({ username: x.username, name: x.fullName, sub: 'Class teacher', group: x.section }))
+                        : selectedRole.key === 'TEACHER'
+                          ? class1.subjectTeachers.map((x) => ({ username: x.username, name: x.fullName, sub: x.subject, group: x.section }))
+                          : class1.students.map((x) => ({ username: x.username, name: x.fullName, sub: `Roll ${x.rollNumber}`, group: x.section }));
+                    const groups = Array.from(new Set(items.map((i) => i.group)));
+                    return (
+                      <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px dashed #E2E8F0' }}>
+                        <div style={{ fontSize: '12px', fontWeight: 800, color: '#334155', marginBottom: '2px' }}>
+                          Class 1 demo accounts · {selectedRole.key === 'CLASS_TEACHER' ? 'Class teachers' : selectedRole.key === 'TEACHER' ? 'Subject teachers' : 'Students'}
+                        </div>
+                        <div style={{ fontSize: '11px', color: '#64748b', marginBottom: '8px' }}>Click an account to sign in instantly.</div>
+                        {groups.map((g) => (
+                          <div key={g} style={{ marginBottom: '8px' }}>
+                            <div style={{ fontSize: '10.5px', fontWeight: 800, letterSpacing: '.05em', textTransform: 'uppercase', color: '#94A3B8', margin: '4px 0' }}>{g}</div>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '6px' }}>
+                              {items.filter((i) => i.group === g).map((i) => (
+                                <button
+                                  key={i.username + i.sub}
+                                  type="button"
+                                  disabled={demoLoading}
+                                  onClick={() => handleDemoLogin(i.username, selectedRole.route)}
+                                  title={`${i.name} · ${i.username}`}
+                                  style={{
+                                    textAlign: 'left', padding: '7px 10px', borderRadius: '8px', background: '#fff', cursor: demoLoading ? 'not-allowed' : 'pointer',
+                                    border: `1px solid ${selectedRole.border}`, color: '#0f172a', display: 'flex', flexDirection: 'column', gap: '1px', minWidth: 0
+                                  }}
+                                >
+                                  <span style={{ fontSize: '12px', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{i.name}</span>
+                                  <span style={{ fontSize: '10.5px', color: selectedRole.color, fontWeight: 700 }}>{i.sub}</span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
 
                 </div>
               )}
