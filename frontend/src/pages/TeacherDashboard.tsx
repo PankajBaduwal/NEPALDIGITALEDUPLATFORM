@@ -2563,27 +2563,6 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                   <Compass size={17} color={activeNav === 'SIMULATIONS' ? '#117a6b' : '#5f736f'} />
                   {!isSidebarCollapsed && <span>Explore Simulations</span>}
                 </button>
-
-                <button
-                  onClick={() => handleOpenLauncher()}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    padding: '9px 12px',
-                    borderRadius: '8px',
-                    fontSize: '13px',
-                    fontWeight: '700',
-                    border: 'none',
-                    cursor: 'pointer',
-                    background: 'transparent',
-                    color: '#117a6b',
-                    textAlign: 'left',
-                  }}
-                >
-                  <Presentation size={17} color="#117a6b" />
-                  {!isSidebarCollapsed && <span>Launch Smart Board</span>}
-                </button>
               </div>
             )}
           </div>
