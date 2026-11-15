@@ -58,24 +58,44 @@ export const ScopeService = {
       };
     }
 
-    if (user.role === 'TEACHER') {
+    const teacherRoles = ['TEACHER', 'PRINCIPAL', 'SCHOOL_ADMIN', 'COLLEGE_ADMIN', 'HOD'];
+    if (teacherRoles.includes(user.role)) {
       const allocs: any[] = await SubjectAllocation.find({ teacherId: user.userId, status: { $ne: 'INACTIVE' } }).populate('sectionId', 'medium institutionId').lean();
       const mine = allocs.filter((a) => !user.institutionId || !a.institutionId || String(a.institutionId) === String(user.institutionId));
-      if (!mine.length) throw new ScopeError('You have no teaching assignments yet.', 403, 'NO_ALLOCATION');
+      if (!mine.length) {
+        // Teachers / school administrators reviewing curriculum have access to school curriculum grades
+        const grades = request.grade ? [request.grade] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        return {
+          role: 'TEACHER',
+          grades,
+          subjectKeys: request.subjectKey ? [request.subjectKey] : [],
+          mediums: ['ENGLISH', 'NEPALI'],
+          includeStaffResources: true,
+          label: request.grade ? `Class ${request.grade}${request.subjectKey ? ` · ${request.subjectKey}` : ''}` : 'Teaching Resources',
+          allowedSubjects: [],
+        };
+      }
       const subs: any[] = await CentralSubject.find({ _id: { $in: mine.map((a) => a.centralSubjectId) } }).select('name logicalKey gradeNumber').lean();
       const allowed = subs.filter((s) => s.logicalKey).map((s) => ({ key: String(s.logicalKey), name: s.name as string, grade: s.gradeNumber as number }));
       const allowedGrades = [...new Set(allowed.map((a) => a.grade))];
       let grades = allowedGrades;
       let keys = [...new Set(allowed.map((a) => a.key))];
       if (request.grade) {
-        if (!allowedGrades.includes(request.grade) && !request.allClasses) throw new ScopeError('You are not assigned to this class.');
-        grades = [request.grade];
-        keys = [...new Set(allowed.filter((a) => a.grade === request.grade).map((a) => a.key))];
+        if (!allowedGrades.includes(request.grade) && !request.allClasses) {
+          // If not explicitly allocated, allow teachers to inspect curriculum for lesson preparation
+          grades = [request.grade];
+        } else {
+          grades = [request.grade];
+          keys = [...new Set(allowed.filter((a) => a.grade === request.grade).map((a) => a.key))];
+        }
       }
       if (request.subjectKey) {
         const ok = allowed.some((a) => a.key === request.subjectKey && (!request.grade || a.grade === request.grade));
-        if (!ok) throw new ScopeError('You are not assigned to this subject.');
-        keys = [request.subjectKey];
+        if (ok) {
+          keys = [request.subjectKey];
+        } else if (['PRINCIPAL', 'SCHOOL_ADMIN', 'COLLEGE_ADMIN', 'HOD'].includes(user.role)) {
+          keys = [request.subjectKey];
+        }
       }
       // Authorised cross-class search: widen to every class but keep the teacher's own subjects
       if (request.allClasses) grades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -84,7 +104,7 @@ export const ScopeService = {
         role: 'TEACHER',
         grades,
         subjectKeys: keys,
-        mediums,
+        mediums: mediums.length ? mediums : ['ENGLISH', 'NEPALI'],
         includeStaffResources: true,
         label: request.allClasses ? 'All classes (your subjects)' : request.grade ? `Class ${request.grade}${request.subjectKey ? ` · ${allowed.find((a) => a.key === request.subjectKey)?.name || request.subjectKey}` : ''}` : 'Your classes',
         allowedSubjects: allowed,
@@ -106,13 +126,14 @@ export const ScopeService = {
     throw new ScopeError('AI textbook assistant is available to students and teachers only.');
   },
 
-  toFilter(scope: RagScope, extra: { chapterNumber?: number } = {}): VectorFilter {
+  toFilter(scope: RagScope, extra: { chapterNumber?: number; documentIds?: string[] } = {}): VectorFilter {
     return {
       grades: scope.grades,
       subjectKeys: scope.subjectKeys,
       mediums: scope.mediums,
       includeStaffResources: scope.includeStaffResources,
       chapterNumber: extra.chapterNumber,
+      documentIds: extra.documentIds,
     };
   },
 

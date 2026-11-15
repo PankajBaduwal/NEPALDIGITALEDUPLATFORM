@@ -1,6 +1,6 @@
 # RAG PDF Processing Report
 
-Generated 2026-11-13T08:31:55.164Z.
+Generated 2026-11-15T08:32:48.965Z.
 
 ## How each text layer is processed
 

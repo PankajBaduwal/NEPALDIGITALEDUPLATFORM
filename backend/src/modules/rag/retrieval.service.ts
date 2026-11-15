@@ -38,7 +38,7 @@ async function embedQuery(q: string): Promise<number[]> {
 }
 
 /** Keyword retrieval with MongoDB's text index, restricted to the same scope. */
-async function keywordSearch(query: string, scope: RagScope, chapterNumber: number | undefined, k: number): Promise<string[]> {
+async function keywordSearch(query: string, scope: RagScope, opts: { chapterNumber?: number; documentIds?: string[] }, k: number): Promise<string[]> {
   const terms = query.replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter((t) => t.length > 2).slice(0, 12);
   if (!terms.length) return [];
   const filter: any = { $text: { $search: terms.join(' ') } };
@@ -48,7 +48,11 @@ async function keywordSearch(query: string, scope: RagScope, chapterNumber: numb
     ...(staff ? [{ audience: 'STAFF' }] : []),
   ];
   if (scope.subjectKeys.length) filter.$and = [{ $or: [{ subjectKey: { $in: scope.subjectKeys } }, { audience: 'STAFF' }] }];
-  if (chapterNumber != null) filter.chapterNumber = chapterNumber;
+  if (opts.chapterNumber != null) filter.chapterNumber = opts.chapterNumber;
+  if (opts.documentIds?.length) {
+    const mongoose = await import('mongoose');
+    filter.documentId = { $in: opts.documentIds.map((id) => new mongoose.Types.ObjectId(id)) };
+  }
   const rows: any[] = await RagChunk.find(filter, { score: { $meta: 'textScore' } }).sort({ score: { $meta: 'textScore' } }).limit(k).select('_id').lean();
   return rows.map((r) => String(r._id));
 }
@@ -58,11 +62,18 @@ export const RetrievalService = {
    * Hybrid retrieval: semantic (embeddings) + keyword, merged by reciprocal-rank fusion,
    * then re-validated against the caller's scope so nothing outside it can reach the model.
    */
-  async retrieve(query: string, scope: RagScope, opts: { topK?: number; chapterNumber?: number } = {}): Promise<RetrievedChunk[]> {
+  async retrieve(
+    query: string,
+    scope: RagScope,
+    opts: { topK?: number; chapterNumber?: number; documentIds?: string[]; pageNumber?: number } = {}
+  ): Promise<RetrievedChunk[]> {
     const topK = opts.topK ?? 6;
     const vec = await embedQuery(query);
-    const filter = ScopeService.toFilter(scope, { chapterNumber: opts.chapterNumber });
-    const [vecHits, kwIds] = await Promise.all([VectorStore.search(vec, filter, 30), keywordSearch(query, scope, opts.chapterNumber, 20).catch(() => [])]);
+    const filter = ScopeService.toFilter(scope, { chapterNumber: opts.chapterNumber, documentIds: opts.documentIds });
+    const [vecHits, kwIds] = await Promise.all([
+      VectorStore.search(vec, filter, 30),
+      keywordSearch(query, scope, { chapterNumber: opts.chapterNumber, documentIds: opts.documentIds }, 20).catch(() => []),
+    ]);
 
     const fused = new Map<string, { score: number; vectorScore?: number; keywordRank?: number }>();
     vecHits.forEach((h, i) => fused.set(h.id, { score: 1 / (60 + i), vectorScore: h.score }));
@@ -72,6 +83,26 @@ export const RetrievalService = {
       cur.keywordRank = i + 1;
       fused.set(id, cur);
     });
+
+    // If pageNumber is provided, fetch chunks directly on this page and boost them
+    if (opts.pageNumber && opts.documentIds?.length) {
+      try {
+        const mongoose = await import('mongoose');
+        const pageChunks: any[] = await RagChunk.find({
+          documentId: { $in: opts.documentIds.map((id) => new mongoose.Types.ObjectId(id)) },
+          pageStart: { $lte: opts.pageNumber },
+          pageEnd: { $gte: opts.pageNumber },
+        }).select('_id').lean();
+        pageChunks.forEach((c) => {
+          const id = String(c._id);
+          const cur = fused.get(id) || { score: 0 };
+          cur.score += 2.0; // Boost chunks containing the active page
+          fused.set(id, cur);
+        });
+      } catch {
+        // Continue if page chunk lookup fails
+      }
+    }
     const candidates = [...fused.entries()].sort((a, b) => b[1].score - a[1].score).slice(0, topK * 3);
     if (!candidates.length) return [];
     const rows: any[] = await RagChunk.find({ _id: { $in: candidates.map(([id]) => id) } })

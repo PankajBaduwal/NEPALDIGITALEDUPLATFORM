@@ -30,7 +30,8 @@
     "timetable:migrate": "tsx src/scripts/migrateTimetables.ts",
     "timetable:setup-dhambojhi": "tsx src/scripts/setupDhambojhiTimetable.ts",
     "test:timetable": "tsx src/test_phase10.ts && tsx src/test_timetable_e2e.ts",
-    "db:backup": "tsx src/scripts/backupCollections.ts"
+    "db:backup": "tsx src/scripts/backupCollections.ts",
+    "seed:class56-math": "tsx src/scripts/seedClass56Math.ts"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.2",

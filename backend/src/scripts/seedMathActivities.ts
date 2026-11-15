@@ -1,5 +1,5 @@
 /**
- * Registers auto-graded practice activities for Mathematics, Classes 1–4 — one activity per lesson, ten questions each.
+ * Registers auto-graded practice activities for Mathematics, Classes 1–6 — one activity per lesson, ten questions each.
  * They use the existing Activity system (MCQ, true/false, numerical, fill-in-the-blanks, ordering, matching, sorting), so students
  * find them under Activities and teachers can assign them to a class. Safe to run again: it replaces the questions of each
  * activity by `code`. Class 1 also keeps its older activities (codes ACT-C1-...).
@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { Activity, ActivityQuestion } from '../models/SimulationActivity';
 import { G, Gen, build, Q } from './mathActivityKit';
+import { H } from './mathActivityKit56';
 
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/nepal_edu_ecosystem';
@@ -118,7 +119,54 @@ const C4: Lesson[] = [
   L(4, 15, 'Algebra', 'बीजगणित', G.solveAdd(), G.solveSub(), G.solveMul(), G.evalExpr(), G.solveAdd(), G.evalExpr()),
 ];
 
-const ALL = [...C1, ...C2, ...C3, ...C4];
+/* ─────── Class 5 ─────── */
+const solid5 = G.bank([['How many faces does a cube have?', undefined, '6', ['4', '8', '12']], ['How many edges does a cuboid have?', undefined, '12', ['6', '8', '10']], ['How many vertices does a square pyramid have?', undefined, '5', ['4', '6', '8']], ['A cylinder has how many flat faces?', undefined, '2', ['1', '3', '0']], ['A sphere has how many vertices?', undefined, '0', ['1', '2', '8']], ['Which solid has one vertex and one flat face?', undefined, 'Cone', ['Cylinder', 'Cube', 'Sphere']]]);
+const unitBank5 = G.bank([['100 kg makes one…', undefined, 'Quintal', ['Tonne', 'Gram', 'Litre']], ['1000 kg makes one…', undefined, 'Tonne', ['Quintal', 'Gram', 'Litre']], ['1 km is equal to…', undefined, '1000 m', ['100 m', '10 m', '10000 m']], ['1 litre is equal to…', undefined, '1000 mL', ['100 mL', '10 mL', '10000 mL']]]);
+const C5: Lesson[] = [
+  L(5, 1, 'Lines and Angles', 'रेखा र कोण', H.angleOps(), H.angleKind56(), H.angleOps(), H.angleKind56(), G.straightAngle(), H.angleOps()),
+  L(5, 2, 'Solid Objects', 'ठोस वस्तुहरू', solid5, solid5, H.polygonFaces(), H.euler(), G.tfBank([['A cube has 6 faces, 12 edges and 8 vertices.', undefined, true, 'Yes.'], ['A cone has 2 vertices.', undefined, false, 'A cone has 1 vertex.'], ['A cylinder has 2 flat faces.', undefined, true, 'Top and bottom.']])),
+  L(5, 3, 'Number Sense', 'सङ्ख्याको ज्ञान', H.croreIndian(), H.croreDigit(), H.placeValue(), H.croreCount(), G.order(999999999, 4, true, 100000000), H.croreIndian(), H.placeValue()),
+  L(5, 4, 'Simplification', 'सरलीकरण', H.bodmas(), H.bodmasMcq(), H.bodmas(), H.bodmas(), H.bodmasMcq(), H.bodmas()),
+  L(5, 5, 'Fraction', 'भिन्न', H.fracAdd(), H.fracSub(), H.mixed(), H.fracAdd(), H.fracOfAmt(), H.mixed(), G.cmpFrac()),
+  L(5, 6, 'Decimal', 'दशमलव', H.decAdd(), H.decSub(), H.decPlace(), H.decAdd(), H.decSub(), G.decimal(), G.decTenth()),
+  L(5, 7, 'Percentage', 'प्रतिशत', H.pctOf(), H.fracToPct(), H.pctToDec(), H.pctOf(), G.percent(), H.fracToPct()),
+  L(5, 8, 'Time', 'समय', G.time24(), G.time12to24(), G.duration(), G.timeUnits(), G.time24(), G.time12to24()),
+  L(5, 9, 'Distance', 'दुरी', G.units('km', 'm', 1000, 9, 'किमी', 'मिटर'), G.units('m', 'cm', 100), G.units('cm', 'mm', 10, 9, 'सेमी', 'मिमी'), G.unitsMixed('km', 'm', 1000), G.unitsMixed('m', 'cm', 100), unitBank5),
+  L(5, 10, 'Capacity', 'क्षमता', G.units('L', 'mL', 1000, 9, 'लिटर', 'मिलिलिटर'), G.unitsMixed('L', 'mL', 1000), G.units('L', 'mL', 1000), G.addN(2000, 100), G.subN(2000, 100), unitBank5),
+  L(5, 11, 'Weight', 'तौल', G.units('kg', 'g', 1000, 9, 'केजी', 'ग्राम'), G.unitsMixed('kg', 'g', 1000), G.units('kg', 'g', 1000), G.addN(2000, 100), G.subN(2000, 100), unitBank5),
+  L(5, 12, 'Perimeter, Area and Volume', 'परिमिति, क्षेत्रफल र आयतन', G.perimeter(), G.area(), G.squareP(), G.squareA(), G.missingSide(), H.volume(), H.volCube(), H.volMissing()),
+  L(5, 13, 'Bill and Budget', 'बिल र बजेट', H.discBill(), H.discount(), H.vat(), G.bill(), H.budgetSave(), G.moneyChange()),
+  L(5, 14, 'Presentation of Data', 'तथ्याङ्कको प्रस्तुति', H.tally(), G.graphScale(), G.graphMost(), G.graphDiff(), G.graphTotal(), H.barRead()),
+  L(5, 15, 'Algebraic Expressions', 'बीजीय अभिव्यक्ति', G.evalExpr(), H.likeTerms(), H.exprWord(), G.evalExpr(), H.likeTerms(), G.solveAdd()),
+];
+
+/* ─────── Class 6 ─────── */
+const solid6 = G.bank([['How many faces does a prism with a hexagonal base have?', undefined, '8', ['6', '7', '12']], ['A cube net has how many squares?', undefined, '6', ['4', '5', '8']], ['A cone has how many curved faces?', undefined, '1', ['2', '0', '3']], ['A triangular prism has how many vertices?', undefined, '6', ['5', '8', '9']], ['A square pyramid has how many edges?', undefined, '8', ['5', '6', '12']]]);
+const plane6 = G.bank([['A quadrilateral with all sides equal and no right angles is a…', undefined, 'Rhombus', ['Square', 'Rectangle', 'Trapezium']], ['A quadrilateral with exactly one pair of parallel sides is a…', undefined, 'Trapezium', ['Rectangle', 'Rhombus', 'Square']], ['The angles of a quadrilateral add up to…', undefined, '360°', ['180°', '90°', '270°']], ['A triangle with all angles less than 90° is…', undefined, 'Acute-angled', ['Right-angled', 'Obtuse-angled', 'Straight']]]);
+const C6: Lesson[] = [
+  L(6, 1, 'Set', 'समूह', H.setOps(), H.setOps(), H.setCard(), H.setMember(), H.setOps(), H.setCard()),
+  L(6, 2, 'Whole Number', 'पूर्ण सङ्ख्या', H.croreIndian(), H.factors(), H.primeTf(), H.hcf(), H.lcm(), H.divRule(), H.placeValue(), H.hcf(), H.lcm()),
+  L(6, 3, 'Integers', 'पूर्णाङ्क', H.intAdd(), H.intSub(), H.intCmp(), H.intOrder(), H.intAbs(), H.intWord(), H.intAdd(), H.intSub()),
+  L(6, 4, 'Fraction', 'भिन्न', H.fracAdd(true), H.fracSub(), H.fracMul(), H.fracDiv(), H.mixed(), H.fracMul(), H.fracDiv(), H.fracOfAmt()),
+  L(6, 5, 'Decimal', 'दशमलव', H.decShift(), H.decMul(), H.decDivWhole(), H.decAdd(), H.decSub(), H.decMul(), H.decShift()),
+  L(6, 6, 'Percentage', 'प्रतिशत', H.pctOf(), H.fracToPct(), H.pctToDec(), H.pctIncrease(), H.discount(), H.vat(), H.pctOf()),
+  L(6, 7, 'Profit and Loss', 'नाफा र नोक्सान', H.profit(), H.loss(), H.profitPct(), H.profit(), H.loss(), H.profitPct()),
+  L(6, 8, 'Unitary Method', 'ऐकिक नियम', H.unitary(), H.unitaryHow(), H.unitary(), H.unitaryHow(), H.unitary(), H.discBill()),
+  L(6, 9, 'Distance', 'दुरी', G.units('km', 'm', 1000, 9, 'किमी', 'मिटर'), G.units('m', 'cm', 100), G.units('cm', 'mm', 10, 9, 'सेमी', 'मिमी'), G.units('hm', 'm', 100, 9), G.units('dam', 'm', 10, 9), G.unitsMixed('km', 'm', 1000), G.unitsMixed('m', 'cm', 100)),
+  L(6, 10, 'Perimeter, Area and Volume', 'परिमिति, क्षेत्रफल र आयतन', H.triArea(), H.parArea(), H.trapArea(), H.volume(), H.volCube(), H.volMissing(), H.litres(), G.area()),
+  L(6, 11, 'Indices', 'घाताङ्क', H.power(), H.indexLaw(), H.power(), H.indexLaw(), G.bank([['a⁰ = ?', undefined, '1', ['0', 'a', 'undefined']], ['10³ = ?', undefined, '1000', ['30', '100', '10000']]]), H.power()),
+  L(6, 12, 'Algebraic Expression', 'बीजीय अभिव्यक्ति', H.expand(), H.likeTerms(), H.exprWord(), G.evalExpr(), H.expand(), H.likeTerms()),
+  L(6, 13, 'Equation, Inequality and Graph', 'समीकरण, असमानता र ग्राफ', G.solveAdd(), G.solveSub(), G.solveMul(), H.twoStep(), H.ineqTf(), H.linearY(), H.twoStep(), H.ineqTf()),
+  L(6, 14, 'Lines and Angles', 'रेखा र कोण', H.transversal(), H.transversal(), H.angleOps(), H.angleKind56(), H.transversal(), H.angleOps()),
+  L(6, 15, 'Plane Shapes', 'समतलीय आकृतिहरू', H.triThird(), H.quadAngle(), plane6, H.triThird(), H.quadAngle(), plane6),
+  L(6, 16, 'Circle', 'वृत्त', H.circleD(), H.circumference(), H.circleD(), H.circumference(), G.bank([['The longest chord of a circle is the…', undefined, 'Diameter', ['Radius', 'Arc', 'Sector']], ['A line from the centre to the circle is the…', undefined, 'Radius', ['Chord', 'Diameter', 'Arc']]])),
+  L(6, 17, 'Solid Objects', 'ठोस वस्तुहरू', solid6, H.polygonFaces(), H.euler(), solid6, H.volume(), H.volCube()),
+  L(6, 18, 'Co-ordinate Geometry', 'निर्देशाङ्क ज्यामिति', H.quadrant(), H.reflect(), H.quadrant(), H.reflect(), G.bank([['The coordinates of the origin are…', undefined, '(0, 0)', ['(1, 1)', '(0, 1)', '(1, 0)']], ['The point (3, −2) lies in…', undefined, 'Quadrant IV', ['Quadrant I', 'Quadrant II', 'Quadrant III']]])),
+  L(6, 19, 'Symmetry and Tessellation', 'सममिति र टेस्सेलेसन', H.symLines(), H.tessel(), H.symLines(), H.tessel(), G.tfBank([['A circle has infinitely many lines of symmetry.', undefined, true, 'Yes.'], ['A scalene triangle has 3 lines of symmetry.', undefined, false, 'It has none.']])),
+  L(6, 20, 'Statistics', 'तथ्याङ्कशास्त्र', H.mean(), H.median(), H.mode(), H.range(), H.mean(), H.median(), H.mode(), H.range()),
+];
+
+const ALL = [...C1, ...C2, ...C3, ...C4, ...C5, ...C6];
 const toQuestion = (activityId: any, n: number, q: Q) => ({ activityId, questionNumber: n, type: q.type, prompt: q.prompt, promptNepali: q.promptNepali, points: 1, explanation: q.explanation || '', hint: q.hint, data: q.data });
 
 async function main() {
@@ -142,7 +190,7 @@ async function main() {
     acts++; qs += questions.length;
     if (questions.length < 8) console.warn(`  ${code}: only ${questions.length} questions`);
   }
-  console.log(`Done: ${acts} activities, ${qs} questions (Classes 1–4 Mathematics).`);
+  console.log(`Done: ${acts} activities, ${qs} questions (Classes 1–6 Mathematics).`);
   await mongoose.disconnect();
 }
 main().catch((e) => { console.error(e); process.exit(1); });

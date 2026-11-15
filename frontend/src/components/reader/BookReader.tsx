@@ -19,7 +19,10 @@ import {
   Presentation,
   Bookmark,
   Layers,
+  Sparkles,
 } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
+import { TeacherAIPanel } from './TeacherAIPanel';
 import FlipBook, { FlipBookHandle, PageSurface } from './FlipBook';
 import {
   canReadAsBook,
@@ -148,6 +151,17 @@ export const BookReader: React.FC<BookReaderProps> = ({
   const [activeTab, setActiveTab] = useState<'chapters' | 'bookmarks'>('chapters');
   const [bookmarks, setBookmarks] = useState<number[]>([]);
   const [chapterSearch, setChapterSearch] = useState('');
+
+  // Teacher-Only AI Assistant Drawer State
+  const { user } = useAuth();
+  const isTeacher = Boolean(
+    user && ['TEACHER', 'PRINCIPAL', 'SCHOOL_ADMIN', 'COLLEGE_ADMIN', 'HOD', 'SUPER_ADMIN'].includes(user.role)
+  );
+  const [teacherAIOpen, setTeacherAIOpen] = useState(false);
+
+  const activeChapter = useMemo(() => {
+    return chapters.find((ch) => page >= ch.startPage && page <= ch.endPage);
+  }, [chapters, page]);
 
   // Load bookmarks for docId
   useEffect(() => {
@@ -545,6 +559,23 @@ export const BookReader: React.FC<BookReaderProps> = ({
 
         {/* Right Section: Tools, Smart Board, Bookmarks, Sound, Fullscreen */}
         <div className="br-bar__end">
+          {/* Teacher AI Teaching Assistant Launcher Button */}
+          {isTeacher && (
+            <button
+              type="button"
+              className={`br-btn ${
+                teacherAIOpen
+                  ? 'bg-teal-600 border-teal-500 text-white shadow-sm'
+                  : 'text-teal-400 hover:text-teal-300 border-teal-500/40 bg-teal-950/40'
+              }`}
+              onClick={() => setTeacherAIOpen(!teacherAIOpen)}
+              title="Open Teacher-Only AI Assistant (Lesson plans, concepts, questions)"
+            >
+              <Sparkles size={16} />
+              <span className="font-bold text-xs hidden sm:inline">Teacher AI</span>
+            </button>
+          )}
+
           <button
             type="button"
             className={`br-btn ${bookmarks.includes(page) ? 'bg-amber-600 border-amber-500 text-white' : ''}`}
@@ -817,6 +848,22 @@ export const BookReader: React.FC<BookReaderProps> = ({
             </div>
           )}
         </div>
+
+        {/* Teacher AI Teaching Assistant Drawer */}
+        {isTeacher && (
+          <TeacherAIPanel
+            isOpen={teacherAIOpen}
+            onClose={() => setTeacherAIOpen(false)}
+            textbookTitle={title}
+            textbookId={docId}
+            currentPage={page}
+            currentChapter={activeChapter}
+            pdfUrl={url}
+            gradeNumber={gradeNumber}
+            onJumpToPage={(pg) => goToPage(pg)}
+            onOpenSmartBoard={onOpenSmartBoard}
+          />
+        )}
       </div>
     </div>
   );

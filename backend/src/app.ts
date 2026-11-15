@@ -29,6 +29,7 @@ import { assignmentRoutes } from './modules/assignment/assignment.routes';
 import { academicMaterialRoutes } from './modules/academic-materials/material.routes';
 import { notificationRoutes } from './modules/notifications/notification.routes';
 import { calendarRoutes } from './modules/calendar/calendar.routes';
+import { teacherAssistantRoutes } from './modules/ai/teacher-assistant.routes';
 import { errorHandler } from './common/middleware/error.middleware';
 
 export function createApp() {
@@ -121,6 +122,8 @@ export function createApp() {
   v1.use('/simulation-activity', simulationActivityRoutes);
   v1.use('/simulations', simulationLaunchRoutes);
   v1.use('/ai', aiRoutes);
+  v1.use('/teacher-assistant', teacherAssistantRoutes);
+  v1.use('/ai/teacher-assistant', teacherAssistantRoutes);
   v1.use('/assessment', assessmentRoutes);
   v1.use('/timetable', timetableRoutes);
   v1.use('/academic-planning', academicPlanningRoutes);

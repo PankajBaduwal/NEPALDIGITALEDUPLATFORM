@@ -13,6 +13,8 @@ export interface RagAnswerInput {
   language?: 'ne' | 'en' | 'auto';
   task?: RagTask;
   chapterNumber?: number;
+  documentIds?: string[];
+  pageNumber?: number;
   history?: Array<{ sender: 'USER' | 'ASSISTANT'; content: string }>;
   /** Extra context supplied by the caller, e.g. text read from a Smart Board image. */
   extraContext?: string;
@@ -93,7 +95,12 @@ export const RagAnswerService = {
     const lastUser = [...history].reverse().find((m) => m.sender === 'USER')?.content;
     const retrievalQuery = question.trim().split(/\s+/).length < 6 && lastUser ? `${lastUser}\n${question}` : question;
 
-    const chunks = await RetrievalService.retrieve(retrievalQuery, scope, { topK: 6, chapterNumber: input.chapterNumber });
+    const chunks = await RetrievalService.retrieve(retrievalQuery, scope, {
+      topK: 6,
+      chapterNumber: input.chapterNumber,
+      documentIds: input.documentIds,
+      pageNumber: input.pageNumber,
+    });
     const lang = input.language && input.language !== 'auto' ? (input.language === 'ne' ? 'Nepali' : 'English') : looksNepali(question) ? 'Nepali' : 'English';
 
     const extracts = chunks

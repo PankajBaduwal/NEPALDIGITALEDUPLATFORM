@@ -705,7 +705,7 @@ export const SchoolAdminDashboard: React.FC = () => {
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: '#f4faf8', color: '#0e3e3b' }}>
       {/* Sidebar */}
-      <aside style={{ width: '260px', background: '#ffffff', borderRight: '1px solid #dcebe6', color: '#0e3e3b', display: 'flex', flexDirection: 'column' }}>
+      <aside style={{ width: '260px', background: '#ffffff', borderRight: '1px solid #dcebe6', color: '#0e3e3b', display: 'flex', flexDirection: 'column', position: 'sticky', top: 0, height: '100vh', flexShrink: 0 }}>
         <div style={{ padding: '24px 20px', borderBottom: '1px solid #dcebe6', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <SchoolLogoBadge size={40} radius={8} fallback={
           <div style={{ width: '36px', height: '36px', background: '#117a6b', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -722,352 +722,93 @@ export const SchoolAdminDashboard: React.FC = () => {
           </div>
         </div>
 
-        <nav style={{ flex: 1, padding: '16px 12px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          <button
-            onClick={() => setActiveTab('OVERVIEW')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'OVERVIEW' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'OVERVIEW' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'OVERVIEW' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <School size={18} color={activeTab === 'OVERVIEW' ? '#117a6b' : '#5f736f'} /> Institution Dashboard
-          </button>
+        {(() => {
+          // Sidebar grouped by job. A college admin does not see school-only items (CDC textbooks, medium of instruction).
+          const isCollege = user?.role === 'COLLEGE_ADMIN';
+          type NavItem = { tab: string; label: string; icon: any; badge?: number; onOpen?: () => void; schoolOnly?: boolean };
+          const groups: { title?: string; items: NavItem[] }[] = [
+            { items: [{ tab: 'OVERVIEW', label: 'Dashboard', icon: School }] },
+            {
+              title: 'Academics',
+              items: [
+                { tab: 'CLASSES', label: 'Classes & Sections', icon: Layers },
+                { tab: 'ALLOCATION', label: 'Curriculum & Subjects', icon: BookOpen },
+                { tab: 'TIMETABLE', label: 'Timetable', icon: Clock, onOpen: loadTimetableData },
+              ],
+            },
+            {
+              title: 'People',
+              items: [
+                { tab: 'TEACHERS', label: 'Teachers & Faculty', icon: Users },
+                { tab: 'STUDENTS', label: 'Student Registry', icon: GraduationCap },
+              ],
+            },
+            {
+              title: 'Examinations',
+              items: [{ tab: 'EXAMINATIONS', label: 'Exams & Marks', icon: Award, onOpen: loadExamData }],
+            },
+            {
+              title: 'Insights',
+              items: [{ tab: 'ANALYTICS', label: 'Academic Analytics', icon: TrendingUp, onOpen: loadAnalyticsData }],
+            },
+            {
+              title: 'Administration',
+              items: [
+                { tab: 'ANNOUNCEMENTS', label: 'Announcements', icon: Megaphone, badge: schoolAnnouncements.length, onOpen: loadSchoolAnnouncements },
+                { tab: 'INSTITUTION_SETUP', label: 'Institution Setup & Medium', icon: Building, schoolOnly: true },
+                { tab: 'SUBSCRIPTION', label: 'Subscription & Licence', icon: CreditCard, onOpen: loadSchoolSubscription },
+              ],
+            },
+          ];
+          return (
+            <nav style={{ flex: 1, padding: '12px 12px 16px', display: 'flex', flexDirection: 'column', gap: '2px', overflowY: 'auto' }}>
+              {groups.map((g, gi) => {
+                const items = g.items.filter((it) => !(isCollege && it.schoolOnly));
+                if (items.length === 0) return null;
+                return (
+                  <div key={g.title || gi} style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: gi === 0 ? 0 : '12px' }}>
+                    {g.title && (
+                      <div style={{ padding: '4px 14px', fontSize: '10px', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#8da19d' }}>{g.title}</div>
+                    )}
+                    {items.map((it) => {
+                      const on = activeTab === it.tab;
+                      const Icon = it.icon;
+                      return (
+                        <button
+                          key={it.tab}
+                          onClick={() => { setActiveTab(it.tab as any); it.onOpen?.(); }}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '12px',
+                            padding: '8px 14px',
+                            borderRadius: '8px',
+                            fontSize: '13px',
+                            fontWeight: '700',
+                            color: on ? '#117a6b' : '#5f736f',
+                            background: on ? '#e6f7f0' : 'transparent',
+                            borderLeft: on ? '3px solid #117a6b' : '3px solid transparent',
+                            textAlign: 'left',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          <Icon size={17} color={on ? '#117a6b' : '#5f736f'} />
+                          <span style={{ flex: 1 }}>{it.label}</span>
+                          {!!it.badge && it.badge > 0 && (
+                            <span style={{ fontSize: '10px', background: '#dcfce7', color: '#15803d', padding: '1px 7px', borderRadius: '10px', fontWeight: 800 }}>{it.badge}</span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </nav>
+          );
+        })()}
 
-          <button
-            onClick={() => setActiveTab('CLASSES')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'CLASSES' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'CLASSES' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'CLASSES' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <Layers size={18} color={activeTab === 'CLASSES' ? '#117a6b' : '#5f736f'} /> Classes & Sections
-          </button>
-
-          <button
-            onClick={() => setActiveTab('TEACHERS')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'TEACHERS' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'TEACHERS' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'TEACHERS' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <Users size={18} color={activeTab === 'TEACHERS' ? '#117a6b' : '#5f736f'} /> Teachers & Faculty
-          </button>
-
-          <button
-            onClick={() => setActiveTab('STUDENTS')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'STUDENTS' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'STUDENTS' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'STUDENTS' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <GraduationCap size={18} color={activeTab === 'STUDENTS' ? '#117a6b' : '#5f736f'} /> Student Registry
-          </button>
-
-          <button
-            onClick={() => setActiveTab('ALLOCATION')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'ALLOCATION' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'ALLOCATION' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'ALLOCATION' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <BookOpen size={18} color={activeTab === 'ALLOCATION' ? '#117a6b' : '#5f736f'} /> Academic Curriculum & Subjects
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('TIMETABLE');
-              loadTimetableData();
-            }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'TIMETABLE' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'TIMETABLE' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'TIMETABLE' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <Clock size={18} color={activeTab === 'TIMETABLE' ? '#117a6b' : '#5f736f'} /> Timetable Management
-          </button>
-
-          <button
-            onClick={() => setActiveTab('ASSIGNMENTS_ADMIN')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'ASSIGNMENTS_ADMIN' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'ASSIGNMENTS_ADMIN' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'ASSIGNMENTS_ADMIN' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <FileText size={18} color={activeTab === 'ASSIGNMENTS_ADMIN' ? '#117a6b' : '#5f736f'} />
-            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-              <span>Assignment Studio</span>
-              {assignmentsData.stats?.pendingEvaluations > 0 && (
-                <span style={{ fontSize: '10px', background: '#ede9fe', color: '#3b2f8f', padding: '1px 6px', borderRadius: '10px', fontWeight: '800' }}>
-                  {assignmentsData.stats.pendingEvaluations}
-                </span>
-              )}
-            </span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('QUIZ_ADMIN')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'QUIZ_ADMIN' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'QUIZ_ADMIN' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'QUIZ_ADMIN' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <Award size={18} color={activeTab === 'QUIZ_ADMIN' ? '#117a6b' : '#5f736f'} />
-            <span>Quiz Assessment</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('RESOURCES')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'RESOURCES' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'RESOURCES' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'RESOURCES' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <BookOpenCheck size={18} color={activeTab === 'RESOURCES' ? '#117a6b' : '#5f736f'} />
-            <span>Textbooks & PDF Reader</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('INSTITUTION_SETUP')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'INSTITUTION_SETUP' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'INSTITUTION_SETUP' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'INSTITUTION_SETUP' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <Building size={18} color={activeTab === 'INSTITUTION_SETUP' ? '#117a6b' : '#5f736f'} />
-            <span>Institution Setup & Medium</span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('EXAMINATIONS');
-              loadExamData();
-            }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'EXAMINATIONS' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'EXAMINATIONS' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'EXAMINATIONS' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <Award size={18} color={activeTab === 'EXAMINATIONS' ? '#117a6b' : '#5f736f'} /> Examinations & Marks
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('ANALYTICS');
-              loadAnalyticsData();
-            }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'ANALYTICS' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'ANALYTICS' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'ANALYTICS' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <TrendingUp size={18} color={activeTab === 'ANALYTICS' ? '#117a6b' : '#5f736f'} /> Academic Analytics
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('SUBSCRIPTION');
-              loadSchoolSubscription();
-            }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'SUBSCRIPTION' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'SUBSCRIPTION' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'SUBSCRIPTION' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <CreditCard size={18} color={activeTab === 'SUBSCRIPTION' ? '#117a6b' : '#5f736f'} /> Subscription & Licensing
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('ANNOUNCEMENTS');
-              loadSchoolAnnouncements();
-            }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'ANNOUNCEMENTS' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'ANNOUNCEMENTS' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'ANNOUNCEMENTS' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <Megaphone size={18} color={activeTab === 'ANNOUNCEMENTS' ? '#117a6b' : '#5f736f'} />
-            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-              <span>Announcements</span>
-              {schoolAnnouncements.length > 0 && (
-                <span style={{ fontSize: '11px', background: '#dcfce7', color: '#15803d', padding: '1px 6px', borderRadius: '10px', fontWeight: '800' }}>
-                  {schoolAnnouncements.length}
-                </span>
-              )}
-            </span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('PROFILE')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: '700',
-              color: activeTab === 'PROFILE' ? '#117a6b' : '#5f736f',
-              background: activeTab === 'PROFILE' ? '#e6f7f0' : 'transparent',
-              borderLeft: activeTab === 'PROFILE' ? '3px solid #117a6b' : '3px solid transparent',
-              textAlign: 'left'
-            }}
-          >
-            <User size={18} color={activeTab === 'PROFILE' ? '#117a6b' : '#5f736f'} /> Profile & Security
-          </button>
-        </nav>
-
-        {/* Smart Board Launcher Button */}
+        {/* Profile and sign out (the admin does not teach, so no Smart Board launcher here) */}
         <div style={{ padding: '16px', borderTop: '1px solid #dcebe6', background: '#f4faf8' }}>
-          <a
-            href="/smartboard/index.html"
-            target="_blank"
-            rel="noreferrer"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              padding: '10px',
-              background: 'linear-gradient(135deg, #117a6b, #1fb589)',
-              borderRadius: '8px',
-              color: '#ffffff',
-              fontSize: '13px',
-              fontWeight: '700',
-              textDecoration: 'none',
-              marginBottom: '16px',
-              boxShadow: '0 2px 6px rgba(17, 122, 107, 0.2)',
-            }}
-          >
-            <Presentation size={16} /> Open Smart Board
-          </a>
-
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div
               onClick={() => setActiveTab('PROFILE')}
