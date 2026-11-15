@@ -13,14 +13,21 @@ export const useDisabledFeatures = () => {
   const [state, setState] = useState<{ disabled: string[]; bySection: Record<string, string[]>; loaded: boolean }>({ disabled: [], bySection: {}, loaded: false });
   useEffect(() => {
     let live = true;
-    api.get<any>('/feature-access/my-features')
-      .then((r) => {
-        if (!live) return;
-        const d = r?.data && !Array.isArray(r.disabled) ? r.data : r;
-        setState({ disabled: Array.isArray(d?.disabled) ? d.disabled : [], bySection: d?.bySection && typeof d.bySection === 'object' ? d.bySection : {}, loaded: true });
-      })
-      .catch(() => { if (live) setState({ disabled: [], bySection: {}, loaded: true }); });
-    return () => { live = false; };
+    const load = (keepOnError: boolean) =>
+      api.get<any>('/feature-access/my-features')
+        .then((r) => {
+          if (!live) return;
+          const d = r?.data && !Array.isArray(r.disabled) ? r.data : r;
+          setState({ disabled: Array.isArray(d?.disabled) ? d.disabled : [], bySection: d?.bySection && typeof d.bySection === 'object' ? d.bySection : {}, loaded: true });
+        })
+        .catch(() => { if (live && !keepOnError) setState({ disabled: [], bySection: {}, loaded: true }); });
+    load(false);
+    // The Super Admin can switch features while this dashboard stays open: re-check when the tab regains focus and every minute.
+    const refresh = () => { if (document.visibilityState === 'visible') load(true); };
+    document.addEventListener('visibilitychange', refresh);
+    window.addEventListener('focus', refresh);
+    const timer = window.setInterval(refresh, 60_000);
+    return () => { live = false; document.removeEventListener('visibilitychange', refresh); window.removeEventListener('focus', refresh); window.clearInterval(timer); };
   }, []);
   return state;
 };
