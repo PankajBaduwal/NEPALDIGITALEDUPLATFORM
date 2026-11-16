@@ -45,8 +45,56 @@
     return h;
   }
 
-  // 2. Initialize Embedded Resource (Textbook PDF or Simulation)
+  // 2. Initialize Embedded Resource (Textbook PDF, Simulation or Presentation Note)
+  function showPresentationNoteModal(note) {
+    var existing = document.getElementById('pd-presentation-note-modal');
+    if (existing) existing.remove();
+
+    var div = document.createElement('div');
+    div.id = 'pd-presentation-note-modal';
+    div.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.75);backdrop-filter:blur(8px);z-index:99999;display:flex;align-items:center;justify-content:center;padding:24px;';
+
+    var title = note.title || 'Teacher Assistant Lesson Note';
+    var content = note.formattedContent || note.content || '';
+    var pageNum = note.pageNumber ? 'Page ' + note.pageNumber : '';
+
+    div.innerHTML =
+      '<div style="background:#FFFFFF;border-radius:20px;max-width:850px;width:100%;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.35);border:1px solid #DCE5DE;">' +
+      '<div style="padding:18px 24px;background:#F4F6F3;border-bottom:1px solid #DCE5DE;display:flex;justify-content:space-between;align-items:center;">' +
+      '<div>' +
+      '<span style="font-size:10px;font-weight:800;letter-spacing:0.05em;color:#187C68;text-transform:uppercase;background:#E5F2EB;padding:2px 8px;border-radius:12px;">Classroom Presentation Mode</span>' +
+      '<h2 style="margin:4px 0 0;font-size:18px;font-weight:800;color:#26332E;">' + title + '</h2>' +
+      (pageNum ? '<div style="font-size:12px;color:#68766F;margin-top:2px;">' + pageNum + '</div>' : '') +
+      '</div>' +
+      '<button id="pd-close-pres-modal" style="background:#EAF0EB;border:none;border-radius:8px;width:32px;height:32px;font-size:16px;font-weight:bold;cursor:pointer;color:#26332E;display:flex;align-items:center;justify-content:center;">✕</button>' +
+      '</div>' +
+      '<div style="padding:24px;flex:1;overflow-y:auto;font-size:14px;line-height:1.7;color:#26332E;background:#FFFFFF;white-space:pre-wrap;font-family:Inter,system-ui,sans-serif;">' +
+      content +
+      '</div>' +
+      '<div style="padding:14px 24px;background:#F4F6F3;border-top:1px solid #DCE5DE;display:flex;justify-content:space-between;align-items:center;">' +
+      '<span style="font-size:11px;color:#68766F;">🇳🇵 Nepal Digital Education Platform · Smart Board Bridge</span>' +
+      '<button id="pd-close-pres-modal-btn" style="padding:8px 20px;background:#187C68;color:#FFFFFF;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">Continue on Board</button>' +
+      '</div>' +
+      '</div>';
+
+    document.body.appendChild(div);
+
+    document.getElementById('pd-close-pres-modal')?.addEventListener('click', function() { div.remove(); });
+    document.getElementById('pd-close-pres-modal-btn')?.addEventListener('click', function() { div.remove(); });
+  }
+
   function initSessionResource() {
+    var presentNote = params.get('presentNote');
+    if (presentNote) {
+      try {
+        var rawNote = localStorage.getItem('nepal_smartboard_active_presentation');
+        if (rawNote) {
+          var noteObj = JSON.parse(rawNote);
+          showPresentationNoteModal(noteObj);
+        }
+      } catch (e) {}
+    }
+
     if (pdfUrl && typeof WorkspaceSplit !== 'undefined' && typeof WorkspaceSplit.openEmbed === 'function') {
       var embedPdf = pdfUrl + '#page=' + pageNumber + '&zoom=100';
       WorkspaceSplit.openEmbed(embedPdf, sessionTitle + ' (Textbook PDF)');
