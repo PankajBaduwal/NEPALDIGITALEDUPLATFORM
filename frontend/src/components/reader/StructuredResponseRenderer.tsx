@@ -41,9 +41,9 @@ function renderMath(text: string): string {
         displayMode: true,
         throwOnError: false,
       });
-      return `<div class="katex-display-box my-3.5 p-3 rounded-xl bg-white border border-[#DCE5DE] shadow-xs text-center font-mono overflow-x-auto text-[#187C68]">${rendered}</div>`;
+      return `<div class="katex-display-box my-3.5 p-3.5 rounded-xl bg-white border-2 border-black shadow-xs text-center font-mono overflow-x-auto text-black font-black text-sm">${rendered}</div>`;
     } catch {
-      return `<pre class="p-2.5 rounded-lg bg-[#EAF0EB] text-[#26332E] text-xs font-mono">${escapeHtml(expr)}</pre>`;
+      return `<pre class="p-2.5 rounded-lg bg-slate-100 text-black text-xs font-mono font-bold border border-black/30">${escapeHtml(expr)}</pre>`;
     }
   });
 
@@ -54,28 +54,28 @@ function renderMath(text: string): string {
         displayMode: false,
         throwOnError: false,
       });
-      return `<span class="katex-inline-box px-1.5 py-0.5 rounded bg-[#EAF0EB]/70 text-[#187C68] font-mono font-medium">${rendered}</span>`;
+      return `<span class="katex-inline-box px-1.5 py-0.5 rounded bg-slate-100 text-black font-mono font-black border border-black/20">${rendered}</span>`;
     } catch {
-      return `<code class="px-1 py-0.5 rounded bg-[#EAF0EB] text-[#26332E] text-xs">${escapeHtml(expr)}</code>`;
+      return `<code class="px-1 py-0.5 rounded bg-slate-100 text-black text-xs font-bold">${escapeHtml(expr)}</code>`;
     }
   });
 
   return res;
 }
 
-/** Format inline markdown: bold, italics, code, links */
+/** Format inline markdown: bold, italics, code, citations */
 function formatInlineMarkdown(text: string): string {
   if (!text) return '';
   let str = text;
 
-  // Bold
-  str = str.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#26332E] bg-[#E5F2EB]/60 px-1 py-0.5 rounded">$1</strong>');
-  // Italics
-  str = str.replace(/\*([^*]+)\*/g, '<em class="italic text-[#68766F]">$1</em>');
+  // Bold text: pure black extra bold
+  str = str.replace(/\*\*(.*?)\*\*/g, '<strong class="font-black text-black bg-yellow-100/80 px-1 py-0.5 rounded border-b border-black/20">$1</strong>');
+  // Italics: pure black font-bold
+  str = str.replace(/\*([^*]+)\*/g, '<em class="italic text-black font-bold">$1</em>');
   // Inline code
-  str = str.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-[#EAF0EB] text-[#187C68] font-mono text-[11px] font-semibold border border-[#DCE5DE]/60">$1</code>');
+  str = str.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-100 text-black font-mono text-[11px] font-black border border-black/40">$1</code>');
   // Citations [p. 16] or [पेज १६]
-  str = str.replace(/\[(p\.\s*\d+|पेज\s*[\d०-९]+|Page\s*\d+)\]/gi, '<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-[#E5F2EB] text-[#187C68] font-bold text-[10px] border border-[#187C68]/20 tracking-tight">$1</span>');
+  str = str.replace(/\[(p\.\s*\d+|पेज\s*[\d०-९]+|Page\s*\d+)\]/gi, '<span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-slate-200 text-black font-black text-[11px] border border-black tracking-tight">$1</span>');
 
   return str;
 }
@@ -182,45 +182,45 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
     const isComparison = rawHeader.length >= 2;
 
     return (
-      <div key={`table-${index}`} className="my-4 rounded-xl border border-[#DCE5DE] bg-white overflow-hidden shadow-xs">
-        <div className="bg-[#EAF0EB]/90 px-4 py-2.5 border-b border-[#DCE5DE] flex items-center justify-between">
+      <div key={`table-${index}`} className="my-5 rounded-2xl border-2 border-black bg-white overflow-hidden shadow-sm">
+        <div className="bg-slate-100 px-4 py-3 border-b-2 border-black flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Table size={15} className="text-[#187C68]" />
-            <span className="text-xs font-bold text-[#26332E] tracking-wide">
+            <Table size={16} className="text-black" />
+            <span className="text-xs font-black text-black tracking-wide uppercase">
               {isComparison ? 'Concept Comparison (तुलना / भिन्नता)' : 'Structured Data Table'}
             </span>
           </div>
-          <span className="text-[10px] font-semibold text-[#68766F] bg-white px-2 py-0.5 rounded-full border border-[#DCE5DE]">
+          <span className="text-[11px] font-black text-black bg-white px-2.5 py-0.5 rounded-full border border-black shadow-xs">
             {rawHeader.length} Columns
           </span>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs">
+          <table className="w-full text-left border-collapse text-xs md:text-sm">
             <thead>
-              <tr className="bg-[#F4F6F3] border-b border-[#DCE5DE]">
+              <tr className="bg-slate-200 border-b-2 border-black">
                 {rawHeader.map((h, i) => (
                   <th
                     key={i}
-                    className="p-3 font-bold text-[#187C68] border-r last:border-r-0 border-[#DCE5DE] tracking-tight bg-[#EAF0EB]/40"
+                    className="p-3 font-black text-black border-r-2 last:border-r-0 border-black tracking-tight"
                   >
                     <span dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(h)) }} />
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DCE5DE]/70">
+            <tbody className="divide-y border-black">
               {dataRows.map((row, rIdx) => (
                 <tr
                   key={rIdx}
-                  className={`transition-colors hover:bg-[#E5F2EB]/30 ${
-                    rIdx % 2 === 0 ? 'bg-white' : 'bg-[#F9FBFA]'
+                  className={`transition-colors ${
+                    rIdx % 2 === 0 ? 'bg-white' : 'bg-slate-50'
                   }`}
                 >
                   {row.map((cell, cIdx) => (
                     <td
                       key={cIdx}
-                      className="p-3 text-[#26332E] border-r last:border-r-0 border-[#DCE5DE]/70 leading-relaxed align-top"
+                      className="p-3 text-black font-bold border-r last:border-r-0 border-slate-300 leading-relaxed align-top"
                     >
                       <div
                         dangerouslySetInnerHTML={{
@@ -238,11 +238,10 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
     );
   };
 
-  // Group blocks into coherent sections (e.g. detect Numerical steps, Advantages/Disadvantages)
   return (
     <div
-      className={`structured-response-body text-[#26332E] leading-relaxed transition-all ${
-        showToClass ? 'text-[14px] md:text-[15px]' : 'text-[12.5px] md:text-[13px]'
+      className={`structured-response-body text-black font-bold leading-relaxed transition-all ${
+        showToClass ? 'text-[15px] md:text-[16px]' : 'text-[13px] md:text-[14px]'
       }`}
     >
       {blocks.map((block, idx) => {
@@ -251,9 +250,9 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return (
               <h1
                 key={idx}
-                className="text-base md:text-lg font-black text-[#187C68] mt-6 mb-3 pb-2 border-b-2 border-[#187C68]/20 flex items-center gap-2"
+                className="text-lg md:text-xl font-black text-black mt-6 mb-3 pb-2 border-b-2 border-black flex items-center gap-2"
               >
-                <Sparkles size={18} className="text-[#187C68] flex-shrink-0" />
+                <Sparkles size={20} className="text-black flex-shrink-0" />
                 <span dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.title)) }} />
               </h1>
             );
@@ -262,9 +261,9 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return (
               <h2
                 key={idx}
-                className="text-sm md:text-base font-extrabold text-[#26332E] mt-5 mb-2.5 pb-1.5 border-b border-[#DCE5DE] flex items-center gap-2"
+                className="text-base md:text-lg font-black text-black mt-5 mb-2.5 pb-1.5 border-b-2 border-black/40 flex items-center gap-2"
               >
-                <span className="w-2 h-2 rounded-full bg-[#187C68] flex-shrink-0"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-black flex-shrink-0"></span>
                 <span dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.title)) }} />
               </h2>
             );
@@ -284,24 +283,24 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return (
               <div
                 key={idx}
-                className={`mt-4 mb-2 p-2 rounded-lg flex items-center gap-2 font-bold tracking-tight text-xs uppercase ${
+                className={`mt-4 mb-2 p-2.5 rounded-xl flex items-center gap-2 font-black tracking-tight text-xs uppercase border-2 ${
                   isNumericalStep
-                    ? 'bg-[#E5F2EB] text-[#187C68] border border-[#187C68]/30'
+                    ? 'bg-emerald-50 text-black border-emerald-700'
                     : isAdvantage
-                    ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                    ? 'bg-emerald-100 text-black border-emerald-800'
                     : isDisadvantage
-                    ? 'bg-rose-50 text-rose-800 border border-rose-200'
-                    : 'bg-[#EAF0EB]/80 text-[#187C68] border border-[#DCE5DE]'
+                    ? 'bg-rose-100 text-black border-rose-800'
+                    : 'bg-slate-100 text-black border-black'
                 }`}
               >
                 {isNumericalStep ? (
-                  <Calculator size={14} className="text-[#187C68]" />
+                  <Calculator size={15} className="text-black" />
                 ) : isAdvantage ? (
-                  <CheckCircle2 size={14} className="text-emerald-600" />
+                  <CheckCircle2 size={15} className="text-emerald-900" />
                 ) : isDisadvantage ? (
-                  <XCircle size={14} className="text-rose-600" />
+                  <XCircle size={15} className="text-rose-900" />
                 ) : (
-                  <BookOpen size={13} className="text-[#187C68]" />
+                  <BookOpen size={15} className="text-black" />
                 )}
                 <span dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.title)) }} />
               </div>
@@ -312,11 +311,11 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return (
               <div
                 key={idx}
-                className="my-3.5 p-3.5 rounded-xl bg-[#E5F2EB]/70 border-l-4 border-[#187C68] text-[#26332E] shadow-xs flex items-start gap-2.5"
+                className="my-4 p-4 rounded-2xl bg-amber-50/80 border-l-4 border-black text-black shadow-xs flex items-start gap-3 border border-amber-200"
               >
-                <Lightbulb size={18} className="text-[#187C68] flex-shrink-0 mt-0.5" />
+                <Lightbulb size={20} className="text-black flex-shrink-0 mt-0.5" />
                 <div
-                  className="font-medium text-xs leading-relaxed"
+                  className="font-bold text-xs md:text-sm leading-relaxed text-black"
                   dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.content)) }}
                 />
               </div>
@@ -324,10 +323,10 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
 
           case 'BULLET':
             return (
-              <div key={idx} className="flex items-start gap-2.5 my-1.5 ml-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#187C68] mt-2 flex-shrink-0" />
+              <div key={idx} className="flex items-start gap-2.5 my-2 ml-1">
+                <span className="w-2 h-2 rounded-full bg-black mt-2 flex-shrink-0" />
                 <div
-                  className="leading-relaxed text-[#26332E]"
+                  className="leading-relaxed text-black font-bold"
                   dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.content)) }}
                 />
               </div>
@@ -337,13 +336,13 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return (
               <div
                 key={idx}
-                className="flex items-start gap-3 my-2.5 p-2.5 rounded-xl bg-white border border-[#DCE5DE] shadow-xs hover:border-[#187C68]/40 transition-colors"
+                className="flex items-start gap-3.5 my-3 p-3 rounded-2xl bg-white border-2 border-black shadow-xs"
               >
-                <div className="w-6 h-6 rounded-lg bg-[#187C68] text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-xs">
+                <div className="w-7 h-7 rounded-lg bg-black text-white font-black text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-xs">
                   {block.number}
                 </div>
                 <div
-                  className="leading-relaxed text-[#26332E] flex-1"
+                  className="leading-relaxed text-black font-bold flex-1"
                   dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.content)) }}
                 />
               </div>
@@ -353,14 +352,14 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return renderTableBlock(block.lines, idx);
 
           case 'DIVIDER':
-            return <hr key={idx} className="my-5 border-[#DCE5DE]" />;
+            return <hr key={idx} className="my-5 border-black/40" />;
 
           case 'PARAGRAPH':
           default:
             return (
               <div
                 key={idx}
-                className="my-2 leading-relaxed text-[#26332E]"
+                className="my-2.5 leading-relaxed text-black font-bold"
                 dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.content)) }}
               />
             );

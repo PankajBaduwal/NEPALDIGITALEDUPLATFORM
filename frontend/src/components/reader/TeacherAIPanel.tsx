@@ -24,7 +24,6 @@ import {
   ChevronUp,
   RotateCcw,
   PlusCircle,
-  Share2,
   BookmarkCheck,
   Layers,
   GraduationCap,
@@ -228,17 +227,17 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
   if (!isTeacher) {
     return (
-      <div className="fixed inset-y-0 right-0 z-[60] w-96 bg-[#F4F6F3] border-l border-[#DCE5DE] text-[#26332E] p-6 flex flex-col justify-center items-center shadow-2xl">
-        <div className="p-4 rounded-full bg-rose-50 text-rose-600 mb-4 border border-rose-200">
+      <div className="fixed inset-y-0 right-0 z-[60] w-96 bg-[#F4F6F3] border-l-2 border-black text-black p-6 flex flex-col justify-center items-center shadow-2xl">
+        <div className="p-4 rounded-full bg-rose-50 text-rose-700 mb-4 border-2 border-rose-300">
           <EyeOff size={32} />
         </div>
-        <h3 className="text-base font-bold text-[#26332E] mb-2 text-center">Teacher-Only Assistant</h3>
-        <p className="text-xs text-[#68766F] text-center leading-relaxed mb-6">
+        <h3 className="text-base font-black text-black mb-2 text-center">Teacher-Only Assistant</h3>
+        <p className="text-xs text-black font-bold text-center leading-relaxed mb-6">
           The AI Teaching Assistant provides pedagogical guides, lesson plans, and curriculum solutions designed exclusively for authorized teachers and school administrators.
         </p>
         <button
           onClick={onClose}
-          className="px-4 py-2 bg-[#187C68] hover:bg-[#136353] text-xs font-semibold rounded-xl text-white transition shadow-sm"
+          className="px-5 py-2.5 bg-black hover:bg-zinc-800 text-xs font-black rounded-xl text-white transition shadow-md"
         >
           Close Assistant
         </button>
@@ -339,7 +338,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
     try {
       if (navigator.clipboard && window.ClipboardItem) {
         const textBlob = new Blob([cleaned], { type: 'text/plain' });
-        const htmlBlob = new Blob([`<div style="font-family: sans-serif; line-height: 1.6;">${cleaned.replace(/\n/g, '<br/>')}</div>`], { type: 'text/html' });
+        const htmlBlob = new Blob([`<div style="font-family: sans-serif; line-height: 1.6; color: #000000; font-weight: bold;">${cleaned.replace(/\n/g, '<br/>')}</div>`], { type: 'text/html' });
         await navigator.clipboard.write([
           new ClipboardItem({
             'text/plain': textBlob,
@@ -364,7 +363,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
   const handleCopySelectedText = () => {
     const sel = window.getSelection()?.toString().trim();
     if (!sel) {
-      showToast('Select text inside the answer to copy specific parts');
+      showToast('Highlight text in the response to copy');
       return;
     }
     navigator.clipboard.writeText(sel);
@@ -377,7 +376,6 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
       const cleaned = cleanContent(msg.content);
       const title = `${textbookTitle} · Page ${currentPage} Lesson Note`;
 
-      // 1. Stage in localStorage queue for Smart Board
       const existingStaged: any[] = JSON.parse(localStorage.getItem('nepal_smartboard_staged_notes') || '[]');
       existingStaged.push({
         id: `staged-${Date.now()}`,
@@ -390,7 +388,6 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
       });
       localStorage.setItem('nepal_smartboard_staged_notes', JSON.stringify(existingStaged));
 
-      // 2. Call backend export endpoint
       await api.post('/teacher-assistant/export-smartboard', {
         title,
         content: cleaned,
@@ -400,7 +397,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
       });
 
       showToast('✓ Added to Smart Board workspace! Staged in board drawer.');
-    } catch (e: any) {
+    } catch {
       showToast('✓ Note saved in Smart Board workspace!');
     }
   };
@@ -410,7 +407,6 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
     const cleaned = cleanContent(msg.smartboardSummary || msg.content);
     const title = `${textbookTitle} · Page ${currentPage} Presentation`;
 
-    // Store as active presentation payload
     try {
       localStorage.setItem(
         'nepal_smartboard_active_presentation',
@@ -421,7 +417,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           textbookId,
         })
       );
-    } catch (e) {}
+    } catch {}
 
     if (onOpenSmartBoard) {
       onOpenSmartBoard(currentPage);
@@ -455,43 +451,45 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
     <div
       className={`fixed transition-all duration-300 font-sans ${
         isFullScreen
-          ? 'inset-0 z-[100] w-full h-full bg-[#F4F6F3] flex flex-col'
-          : 'inset-y-0 right-0 z-[60] w-[480px] md:w-[520px] lg:w-[580px] bg-[#F4F6F3] border-l border-[#DCE5DE] text-[#26332E] flex flex-col shadow-2xl'
+          ? 'inset-0 z-[100] w-full h-full bg-[#F4F6F3] flex flex-col text-black'
+          : 'inset-y-0 right-0 z-[60] w-[480px] md:w-[520px] lg:w-[580px] bg-[#F4F6F3] border-l-2 border-black text-black flex flex-col shadow-2xl'
       }`}
     >
       {/* Toast Notification Banner */}
       {toastMessage && (
-        <div className="absolute top-16 left-1/2 -translate-x-1/2 z-50 bg-[#187C68] text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-xl border border-white/20 animate-in fade-in slide-in-from-top-3 flex items-center gap-2">
-          <BookmarkCheck size={15} />
+        <div className="absolute top-16 left-1/2 -translate-x-1/2 z-50 bg-black text-white px-5 py-2.5 rounded-2xl text-xs font-black shadow-2xl border-2 border-white flex items-center gap-2">
+          <BookmarkCheck size={16} className="text-emerald-400" />
           <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* 1. Header (Compact, Balanced Light Theme) */}
-      <div className="bg-white px-4 py-3 border-b border-[#DCE5DE] flex items-center justify-between shadow-xs flex-shrink-0">
+      {/* 1. Header (High Contrast Pure Black Typography) */}
+      <div className="bg-white px-4 py-3 border-b-2 border-black flex items-center justify-between shadow-xs flex-shrink-0">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="w-9 h-9 rounded-xl bg-[#E5F2EB] border border-[#187C68]/30 flex items-center justify-center text-[#187C68] shadow-xs flex-shrink-0">
-            <GraduationCap size={19} />
+          <div className="w-10 h-10 rounded-2xl bg-black flex items-center justify-center text-white shadow-sm flex-shrink-0">
+            <GraduationCap size={22} />
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h2 className="text-sm font-extrabold text-[#26332E] tracking-tight truncate">
+              <h2 className="text-sm md:text-base font-black text-black tracking-tight truncate">
                 AI Teaching Assistant
               </h2>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#E5F2EB] text-[#187C68] border border-[#187C68]/25 flex-shrink-0">
+              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-950 border border-emerald-600 flex-shrink-0">
                 शिक्षक एआई
               </span>
             </div>
-            <div className="flex items-center gap-1.5 mt-0.5 text-[11px] text-[#68766F]">
-              <span className="truncate max-w-[170px] font-semibold text-[#26332E]">
+            <div className="flex items-center gap-1.5 mt-0.5 text-xs text-black font-extrabold">
+              <span className="truncate max-w-[170px] font-black text-black">
                 {textbookTitle}
               </span>
               <span>•</span>
-              <span className="text-[#187C68] font-bold">Page {currentPage}</span>
+              <span className="text-black font-black bg-emerald-100 px-1.5 py-0.2 rounded border border-emerald-400">
+                Page {currentPage}
+              </span>
               {currentChapter && (
                 <>
                   <span>•</span>
-                  <span className="truncate max-w-[120px] text-[#68766F]">
+                  <span className="truncate max-w-[130px] text-black font-bold">
                     Ch. {currentChapter.chapterNumber}: {currentChapter.title}
                   </span>
                 </>
@@ -500,38 +498,38 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 flex-shrink-0">
+        <div className="flex items-center gap-2 flex-shrink-0">
           {/* Privacy Status Toggle (Teacher Private vs Show to Class) */}
           <button
             type="button"
             onClick={() => setShowToClassMode(!showToClassMode)}
-            className={`px-2.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition border-2 ${
               showToClassMode
-                ? 'bg-amber-100 text-amber-900 border border-amber-300 shadow-xs'
-                : 'bg-[#EAF0EB] hover:bg-[#DCE5DE] text-[#26332E]'
+                ? 'bg-amber-300 text-black border-black shadow-xs'
+                : 'bg-white hover:bg-slate-100 text-black border-black/40'
             }`}
             title={showToClassMode ? 'Classroom Display Mode Active' : 'Private Teacher Mode'}
           >
-            {showToClassMode ? <Eye size={14} className="text-amber-700" /> : <EyeOff size={14} className="text-[#68766F]" />}
-            <span className="hidden sm:inline text-[11px]">{showToClassMode ? 'Class View' : 'Private'}</span>
+            {showToClassMode ? <Eye size={15} className="text-black" /> : <EyeOff size={15} className="text-black" />}
+            <span className="hidden sm:inline text-xs">{showToClassMode ? 'Class View' : 'Private'}</span>
           </button>
 
           {/* Full-Screen / Split View Toggle */}
           <button
             type="button"
             onClick={() => setIsFullScreen(!isFullScreen)}
-            className="px-2.5 py-1.5 rounded-xl bg-[#EAF0EB] hover:bg-[#DCE5DE] text-[#26332E] font-semibold text-xs transition flex items-center gap-1.5 border border-[#DCE5DE]"
+            className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-black font-black text-xs transition flex items-center gap-1.5 border-2 border-black/60 shadow-xs"
             title={isFullScreen ? 'Restore Split View (Esc)' : 'Expand to Full Screen'}
           >
             {isFullScreen ? (
               <>
-                <Minimize2 size={14} className="text-[#187C68]" />
-                <span className="text-[11px] font-bold">Restore View</span>
+                <Minimize2 size={15} className="text-black" />
+                <span className="text-xs font-black">Restore View</span>
               </>
             ) : (
               <>
-                <Maximize2 size={14} className="text-[#187C68]" />
-                <span className="hidden sm:inline text-[11px]">Full Screen</span>
+                <Maximize2 size={15} className="text-black" />
+                <span className="hidden sm:inline text-xs font-black">Full Screen</span>
               </>
             )}
           </button>
@@ -540,28 +538,28 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-xl bg-[#EAF0EB] hover:bg-rose-100 text-[#68766F] hover:text-rose-700 transition"
+            className="p-1.5 rounded-xl bg-white hover:bg-rose-100 text-black hover:text-rose-900 border-2 border-black/40 transition"
             title="Close Assistant"
           >
-            <X size={17} />
+            <X size={18} />
           </button>
         </div>
       </div>
 
-      {/* 2. Scope & Language Bar */}
-      <div className="px-4 py-2 bg-[#EAF0EB]/60 border-b border-[#DCE5DE] flex items-center justify-between gap-2 text-xs flex-shrink-0">
-        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">
-          <span className="text-[10px] uppercase font-extrabold text-[#68766F] tracking-wider flex items-center gap-1 mr-1">
-            <Compass size={12} className="text-[#187C68]" /> Scope:
+      {/* 2. Scope & Language Bar (Pure Dark Black Contrast) */}
+      <div className="px-4 py-2.5 bg-slate-100 border-b-2 border-black/30 flex items-center justify-between gap-2 text-xs flex-shrink-0">
+        <div className="flex items-center gap-2 overflow-x-auto scrollbar-none py-0.5">
+          <span className="text-xs uppercase font-black text-black tracking-wider flex items-center gap-1 mr-1">
+            <Compass size={14} className="text-black" /> Scope:
           </span>
 
           <button
             type="button"
             onClick={() => setSelectedScope('CURRENT_PAGE')}
-            className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-black transition whitespace-nowrap border-2 ${
               selectedScope === 'CURRENT_PAGE'
-                ? 'bg-[#187C68] text-white shadow-xs'
-                : 'bg-white text-[#68766F] hover:text-[#26332E] border border-[#DCE5DE]'
+                ? 'bg-black text-white border-black shadow-md'
+                : 'bg-white text-black border-black/40 hover:border-black hover:bg-slate-50'
             }`}
           >
             Page {currentPage}
@@ -571,10 +569,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             <button
               type="button"
               onClick={() => setSelectedScope('CURRENT_CHAPTER')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-black transition whitespace-nowrap border-2 ${
                 selectedScope === 'CURRENT_CHAPTER'
-                  ? 'bg-[#187C68] text-white shadow-xs'
-                  : 'bg-white text-[#68766F] hover:text-[#26332E] border border-[#DCE5DE]'
+                  ? 'bg-black text-white border-black shadow-md'
+                  : 'bg-white text-black border-black/40 hover:border-black hover:bg-slate-50'
               }`}
               title={currentChapter.title}
             >
@@ -585,10 +583,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setSelectedScope('ENTIRE_BOOK')}
-            className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-black transition whitespace-nowrap border-2 ${
               selectedScope === 'ENTIRE_BOOK'
-                ? 'bg-[#187C68] text-white shadow-xs'
-                : 'bg-white text-[#68766F] hover:text-[#26332E] border border-[#DCE5DE]'
+                ? 'bg-black text-white border-black shadow-md'
+                : 'bg-white text-black border-black/40 hover:border-black hover:bg-slate-50'
             }`}
           >
             Whole Book
@@ -598,10 +596,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             <button
               type="button"
               onClick={() => setSelectedScope('SELECTED_TEXT')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-black transition whitespace-nowrap flex items-center gap-1.5 border-2 ${
                 selectedScope === 'SELECTED_TEXT'
-                  ? 'bg-amber-600 text-white shadow-xs'
-                  : 'bg-amber-50 text-amber-800 border border-amber-300'
+                  ? 'bg-amber-400 text-black border-black shadow-md'
+                  : 'bg-amber-100 text-black border-amber-600'
               }`}
             >
               <span>Selected Text</span>
@@ -611,7 +609,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                   setSelectedText('');
                   if (selectedScope === 'SELECTED_TEXT') setSelectedScope('CURRENT_PAGE');
                 }}
-                className="hover:text-rose-200 text-sm font-bold"
+                className="hover:text-rose-800 text-sm font-black"
                 title="Clear selection"
               >
                 ×
@@ -621,12 +619,12 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         </div>
 
         {/* Language Selector */}
-        <div className="flex items-center gap-1 bg-white border border-[#DCE5DE] rounded-xl p-0.5 flex-shrink-0 shadow-xs">
+        <div className="flex items-center gap-1 bg-white border-2 border-black rounded-xl p-0.5 flex-shrink-0 shadow-xs">
           <button
             type="button"
             onClick={() => setLanguage('auto')}
-            className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition ${
-              language === 'auto' ? 'bg-[#187C68] text-white' : 'text-[#68766F] hover:text-[#26332E]'
+            className={`px-2.5 py-1 rounded-lg text-xs font-black transition ${
+              language === 'auto' ? 'bg-black text-white' : 'text-black hover:bg-slate-100'
             }`}
           >
             Auto
@@ -634,8 +632,8 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setLanguage('ne')}
-            className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition ${
-              language === 'ne' ? 'bg-[#187C68] text-white' : 'text-[#68766F] hover:text-[#26332E]'
+            className={`px-2.5 py-1 rounded-lg text-xs font-black transition ${
+              language === 'ne' ? 'bg-black text-white' : 'text-black hover:bg-slate-100'
             }`}
           >
             नेपाली
@@ -643,8 +641,8 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setLanguage('en')}
-            className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition ${
-              language === 'en' ? 'bg-[#187C68] text-white' : 'text-[#68766F] hover:text-[#26332E]'
+            className={`px-2.5 py-1 rounded-lg text-xs font-black transition ${
+              language === 'en' ? 'bg-black text-white' : 'text-black hover:bg-slate-100'
             }`}
           >
             EN
@@ -652,23 +650,23 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         </div>
       </div>
 
-      {/* 3. Pedagogical Actions Bar */}
-      <div className="bg-white border-b border-[#DCE5DE] flex-shrink-0 shadow-xs">
-        <div className="px-4 py-2 flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
+      {/* 3. Pedagogical Actions Bar (Pure Black Typography) */}
+      <div className="bg-white border-b-2 border-black/30 flex-shrink-0 shadow-xs">
+        <div className="px-4 py-2.5 flex items-center justify-between">
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => {
                 setActiveCategory('core');
                 setActionsExpanded(true);
               }}
-              className={`px-3 py-1 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 border-2 ${
                 activeCategory === 'core' && actionsExpanded
-                  ? 'bg-[#187C68] text-white shadow-xs'
-                  : 'bg-[#EAF0EB] text-[#68766F] hover:text-[#26332E]'
+                  ? 'bg-black text-white border-black shadow-md'
+                  : 'bg-white text-black border-black/30 hover:border-black hover:bg-slate-50'
               }`}
             >
-              <BookOpen size={13} />
+              <BookOpen size={14} />
               <span>Core Teaching</span>
             </button>
 
@@ -678,13 +676,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 setActiveCategory('activities');
                 setActionsExpanded(true);
               }}
-              className={`px-3 py-1 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 border-2 ${
                 activeCategory === 'activities' && actionsExpanded
-                  ? 'bg-[#187C68] text-white shadow-xs'
-                  : 'bg-[#EAF0EB] text-[#68766F] hover:text-[#26332E]'
+                  ? 'bg-black text-white border-black shadow-md'
+                  : 'bg-white text-black border-black/30 hover:border-black hover:bg-slate-50'
               }`}
             >
-              <HelpCircle size={13} />
+              <HelpCircle size={14} />
               <span>Activities & Tests</span>
             </button>
 
@@ -694,13 +692,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 setActiveCategory('delivery');
                 setActionsExpanded(true);
               }}
-              className={`px-3 py-1 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 border-2 ${
                 activeCategory === 'delivery' && actionsExpanded
-                  ? 'bg-[#187C68] text-white shadow-xs'
-                  : 'bg-[#EAF0EB] text-[#68766F] hover:text-[#26332E]'
+                  ? 'bg-black text-white border-black shadow-md'
+                  : 'bg-white text-black border-black/30 hover:border-black hover:bg-slate-50'
               }`}
             >
-              <Presentation size={13} />
+              <Presentation size={14} />
               <span>Board & Delivery</span>
             </button>
           </div>
@@ -708,169 +706,193 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setActionsExpanded(!actionsExpanded)}
-            className="p-1 rounded-lg text-[#68766F] hover:text-[#26332E] hover:bg-[#EAF0EB] transition"
+            className="p-1.5 rounded-xl text-black hover:bg-slate-100 border border-black/30 transition"
             title={actionsExpanded ? 'Collapse pedagogical buttons' : 'Expand pedagogical buttons'}
           >
-            {actionsExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            {actionsExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
           </button>
         </div>
 
-        {/* Action Buttons Grid */}
+        {/* Action Buttons Grid with Pure Dark Black Labels & Descriptions */}
         {actionsExpanded && (
-          <div className="px-4 pb-3 pt-1 border-t border-[#DCE5DE]/60 bg-[#F4F6F3]/50">
+          <div className="px-4 pb-3.5 pt-2 border-t border-black/20 bg-slate-50">
             {activeCategory === 'core' && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <button
                   type="button"
                   onClick={() => handleAsk('EXPLAIN_PAGE')}
-                  className="p-2.5 rounded-xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/30 text-left transition flex flex-col gap-1 shadow-xs group"
+                  className="p-3 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#187C68]">
-                    <FileText size={14} />
+                  <div className="flex items-center gap-2 text-xs font-black text-black">
+                    <FileText size={16} className="text-black" />
                     <span>Explain Page</span>
                   </div>
-                  <span className="text-[10px] text-[#68766F]">Core concepts, teaching notes</span>
+                  <span className="text-[11px] font-bold text-black leading-tight">
+                    Core concepts, teaching notes
+                  </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleAsk('TEACH_CHAPTER')}
-                  className="p-2.5 rounded-xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/30 text-left transition flex flex-col gap-1 shadow-xs group"
+                  className="p-3 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#187C68]">
-                    <Layers size={14} />
+                  <div className="flex items-center gap-2 text-xs font-black text-black">
+                    <Layers size={16} className="text-black" />
                     <span>Teach Chapter</span>
                   </div>
-                  <span className="text-[10px] text-[#68766F]">Learning goals & sequence</span>
+                  <span className="text-[11px] font-bold text-black leading-tight">
+                    Learning goals & sequence
+                  </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleAsk('SUMMARIZE_CHAPTER')}
-                  className="p-2.5 rounded-xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/30 text-left transition flex flex-col gap-1 shadow-xs group"
+                  className="p-3 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#187C68]">
-                    <BookOpen size={14} />
+                  <div className="flex items-center gap-2 text-xs font-black text-black">
+                    <BookOpen size={16} className="text-black" />
                     <span>Summarize Chapter</span>
                   </div>
-                  <span className="text-[10px] text-[#68766F]">Definitions, rules, recap</span>
+                  <span className="text-[11px] font-bold text-black leading-tight">
+                    Definitions, rules, recap
+                  </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleAsk('QUICK_SIMPLIFY')}
-                  className="p-2.5 rounded-xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/30 text-left transition flex flex-col gap-1 shadow-xs group"
+                  className="p-3 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#187C68]">
-                    <Sparkles size={14} />
+                  <div className="flex items-center gap-2 text-xs font-black text-black">
+                    <Sparkles size={16} className="text-black" />
                     <span>Simplify Concept</span>
                   </div>
-                  <span className="text-[10px] text-[#68766F]">Easy student-friendly terms</span>
+                  <span className="text-[11px] font-bold text-black leading-tight">
+                    Easy student-friendly terms
+                  </span>
                 </button>
               </div>
             )}
 
             {activeCategory === 'activities' && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <button
                   type="button"
                   onClick={() => handleAsk('LESSON_PLAN')}
-                  className="p-2.5 rounded-xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/30 text-left transition flex flex-col gap-1 shadow-xs group"
+                  className="p-3 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#187C68]">
-                    <FileCheck size={14} />
+                  <div className="flex items-center gap-2 text-xs font-black text-black">
+                    <FileCheck size={16} className="text-black" />
                     <span>45-Min Lesson Plan</span>
                   </div>
-                  <span className="text-[10px] text-[#68766F]">Hook, timing, activities</span>
+                  <span className="text-[11px] font-bold text-black leading-tight">
+                    Hook, timing, activities
+                  </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleAsk('EXAMPLES_ACTIVITIES')}
-                  className="p-2.5 rounded-xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/30 text-left transition flex flex-col gap-1 shadow-xs group"
+                  className="p-3 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#187C68]">
-                    <Lightbulb size={14} />
+                  <div className="flex items-center gap-2 text-xs font-black text-black">
+                    <Lightbulb size={16} className="text-black" />
                     <span>Classroom Examples</span>
                   </div>
-                  <span className="text-[10px] text-[#68766F]">Hands-on low cost tasks</span>
+                  <span className="text-[11px] font-bold text-black leading-tight">
+                    Hands-on low cost tasks
+                  </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleAsk('QUESTION_BANK')}
-                  className="p-2.5 rounded-xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/30 text-left transition flex flex-col gap-1 shadow-xs group"
+                  className="p-3 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#187C68]">
-                    <HelpCircle size={14} />
+                  <div className="flex items-center gap-2 text-xs font-black text-black">
+                    <HelpCircle size={16} className="text-black" />
                     <span>Bloom's Questions</span>
                   </div>
-                  <span className="text-[10px] text-[#68766F]">Knowledge, comprehension, MCQs</span>
+                  <span className="text-[11px] font-bold text-black leading-tight">
+                    Knowledge, comprehension, MCQs
+                  </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleAsk('QUICK_CHECK')}
-                  className="p-2.5 rounded-xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/30 text-left transition flex flex-col gap-1 shadow-xs group"
+                  className="p-3 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#187C68]">
-                    <Check size={14} />
+                  <div className="flex items-center gap-2 text-xs font-black text-black">
+                    <Check size={16} className="text-black" />
                     <span>3-Question Check</span>
                   </div>
-                  <span className="text-[10px] text-[#68766F]">Quick formative assessment</span>
+                  <span className="text-[11px] font-bold text-black leading-tight">
+                    Quick formative assessment
+                  </span>
                 </button>
               </div>
             )}
 
             {activeCategory === 'delivery' && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <button
                   type="button"
                   onClick={() => handleAsk('TEACHING_NOTES')}
-                  className="p-2.5 rounded-xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/30 text-left transition flex flex-col gap-1 shadow-xs group"
+                  className="p-3 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#187C68]">
-                    <FileText size={14} />
+                  <div className="flex items-center gap-2 text-xs font-black text-black">
+                    <FileText size={16} className="text-black" />
                     <span>Chalkboard Notes</span>
                   </div>
-                  <span className="text-[10px] text-[#68766F]">Board layout & summary</span>
+                  <span className="text-[11px] font-bold text-black leading-tight">
+                    Board layout & summary
+                  </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleAsk('PRESENTATION')}
-                  className="p-2.5 rounded-xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/30 text-left transition flex flex-col gap-1 shadow-xs group"
+                  className="p-3 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#187C68]">
-                    <Presentation size={14} />
+                  <div className="flex items-center gap-2 text-xs font-black text-black">
+                    <Presentation size={16} className="text-black" />
                     <span>Slide Outline</span>
                   </div>
-                  <span className="text-[10px] text-[#68766F]">5-slide teaching deck</span>
+                  <span className="text-[11px] font-bold text-black leading-tight">
+                    5-slide teaching deck
+                  </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleAsk('QUICK_ANALOGY')}
-                  className="p-2.5 rounded-xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/30 text-left transition flex flex-col gap-1 shadow-xs group"
+                  className="p-3 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#187C68]">
-                    <Flame size={14} />
+                  <div className="flex items-center gap-2 text-xs font-black text-black">
+                    <Flame size={16} className="text-black" />
                     <span>Nepal Analogy</span>
                   </div>
-                  <span className="text-[10px] text-[#68766F]">Cultural & daily life links</span>
+                  <span className="text-[11px] font-bold text-black leading-tight">
+                    Cultural & daily life links
+                  </span>
                 </button>
 
                 {selectedText && (
                   <button
                     type="button"
                     onClick={() => handleAsk('EXPLAIN_SELECTION')}
-                    className="p-2.5 rounded-xl bg-amber-50 border border-amber-300 hover:bg-amber-100 text-left transition flex flex-col gap-1 shadow-xs group"
+                    className="p-3 rounded-2xl bg-amber-100 border-2 border-black hover:bg-amber-200 text-left transition flex flex-col gap-1 shadow-sm group"
                   >
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-amber-800">
-                      <BookmarkCheck size={14} />
+                    <div className="flex items-center gap-2 text-xs font-black text-black">
+                      <BookmarkCheck size={16} className="text-black" />
                       <span>Explain Selection</span>
                     </div>
-                    <span className="text-[10px] text-amber-700">Unpack highlighted passage</span>
+                    <span className="text-[11px] font-bold text-black leading-tight">
+                      Unpack highlighted passage
+                    </span>
                   </button>
                 )}
               </div>
@@ -879,7 +901,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         )}
       </div>
 
-      {/* 4. Messages / Response Body (Scrollable, Viewport-Aware) */}
+      {/* 4. Messages / Response Body (Pure Dark Black Contrast) */}
       <div
         ref={scrollRef}
         className={`flex-1 overflow-y-auto p-4 md:p-6 space-y-5 bg-[#F4F6F3] ${
@@ -887,65 +909,65 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         }`}
       >
         {messages.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center text-center p-6 text-[#68766F]">
-            <div className="w-16 h-16 rounded-3xl bg-white border border-[#DCE5DE] text-[#187C68] flex items-center justify-center shadow-sm mb-4">
-              <GraduationCap size={32} />
+          <div className="h-full flex flex-col items-center justify-center text-center p-6 text-black">
+            <div className="w-16 h-16 rounded-3xl bg-white border-2 border-black text-black flex items-center justify-center shadow-md mb-4">
+              <GraduationCap size={36} />
             </div>
-            <h3 className="text-base font-extrabold text-[#26332E] mb-1">
+            <h3 className="text-lg md:text-xl font-black text-black mb-2 tracking-tight">
               Classroom Teaching Assistant
             </h3>
-            <p className="text-xs max-w-md leading-relaxed text-[#68766F] mb-6">
+            <p className="text-xs md:text-sm max-w-lg leading-relaxed text-black font-bold mb-6">
               Ask any pedagogical question, compare concepts in 2 columns, generate Bloom's questions, or step-by-step numerical calculations aligned with Nepal CDC curriculum.
             </p>
 
-            {/* Quick Starter Chips */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-md w-full">
+            {/* Quick Starter Chips with Pure Bold Black Text */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg w-full">
               <button
                 type="button"
                 onClick={() => handleAsk('EXPLAIN_PAGE')}
-                className="p-3 rounded-2xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/40 text-left transition shadow-xs flex items-center justify-between group"
+                className="p-3.5 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition shadow-sm flex items-center justify-between group"
               >
-                <div className="flex items-center gap-2.5">
-                  <FileText size={16} className="text-[#187C68]" />
-                  <span className="text-xs font-bold text-[#26332E]">Explain Page {currentPage}</span>
+                <div className="flex items-center gap-3">
+                  <FileText size={18} className="text-black" />
+                  <span className="text-xs md:text-sm font-black text-black">Explain Page {currentPage}</span>
                 </div>
-                <ArrowRight size={14} className="text-[#68766F] group-hover:text-[#187C68] transition" />
+                <ArrowRight size={16} className="text-black group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button
                 type="button"
                 onClick={() => handleAsk('LESSON_PLAN')}
-                className="p-3 rounded-2xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/40 text-left transition shadow-xs flex items-center justify-between group"
+                className="p-3.5 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition shadow-sm flex items-center justify-between group"
               >
-                <div className="flex items-center gap-2.5">
-                  <FileCheck size={16} className="text-[#187C68]" />
-                  <span className="text-xs font-bold text-[#26332E]">45-Min Lesson Plan</span>
+                <div className="flex items-center gap-3">
+                  <FileCheck size={18} className="text-black" />
+                  <span className="text-xs md:text-sm font-black text-black">45-Min Lesson Plan</span>
                 </div>
-                <ArrowRight size={14} className="text-[#68766F] group-hover:text-[#187C68] transition" />
+                <ArrowRight size={16} className="text-black group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button
                 type="button"
                 onClick={() => handleAsk('CUSTOM_QUESTION', `Difference between key concepts on page ${currentPage}`)}
-                className="p-3 rounded-2xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/40 text-left transition shadow-xs flex items-center justify-between group"
+                className="p-3.5 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition shadow-sm flex items-center justify-between group"
               >
-                <div className="flex items-center gap-2.5">
-                  <Calculator size={16} className="text-[#187C68]" />
-                  <span className="text-xs font-bold text-[#26332E]">2-Column Comparison</span>
+                <div className="flex items-center gap-3">
+                  <Calculator size={18} className="text-black" />
+                  <span className="text-xs md:text-sm font-black text-black">2-Column Comparison</span>
                 </div>
-                <ArrowRight size={14} className="text-[#68766F] group-hover:text-[#187C68] transition" />
+                <ArrowRight size={16} className="text-black group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button
                 type="button"
                 onClick={() => handleAsk('QUESTION_BANK')}
-                className="p-3 rounded-2xl bg-white border border-[#DCE5DE] hover:border-[#187C68] hover:bg-[#E5F2EB]/40 text-left transition shadow-xs flex items-center justify-between group"
+                className="p-3.5 rounded-2xl bg-white border-2 border-black/40 hover:border-black hover:bg-emerald-50 text-left transition shadow-sm flex items-center justify-between group"
               >
-                <div className="flex items-center gap-2.5">
-                  <HelpCircle size={16} className="text-[#187C68]" />
-                  <span className="text-xs font-bold text-[#26332E]">Bloom's Taxonomy Quiz</span>
+                <div className="flex items-center gap-3">
+                  <HelpCircle size={18} className="text-black" />
+                  <span className="text-xs md:text-sm font-black text-black">Bloom's Taxonomy Quiz</span>
                 </div>
-                <ArrowRight size={14} className="text-[#68766F] group-hover:text-[#187C68] transition" />
+                <ArrowRight size={16} className="text-black group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -958,28 +980,28 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
               }`}
             >
               {msg.sender === 'USER' ? (
-                <div className="max-w-[85%] rounded-2xl rounded-tr-sm bg-[#187C68] text-white px-4 py-2.5 text-xs font-medium shadow-sm">
+                <div className="max-w-[85%] rounded-2xl rounded-tr-sm bg-black text-white px-4 py-3 text-xs md:text-sm font-black shadow-md">
                   <div className="whitespace-pre-wrap">{cleanContent(msg.content)}</div>
                 </div>
               ) : (
-                <div className="w-full rounded-2xl bg-white border border-[#DCE5DE] p-4 md:p-5 shadow-xs transition-all">
+                <div className="w-full rounded-2xl bg-white border-2 border-black/30 p-4 md:p-6 shadow-sm transition-all text-black">
                   {/* Assistant Message Header & Response Action Toolbar */}
-                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#DCE5DE] text-xs">
-                    <span className="flex items-center gap-2 font-extrabold text-[#187C68]">
-                      <Sparkles size={14} className="text-[#187C68]" />
+                  <div className="flex items-center justify-between pb-3 mb-3 border-b-2 border-black/20 text-xs">
+                    <span className="flex items-center gap-2 font-black text-black text-xs md:text-sm">
+                      <Sparkles size={16} className="text-black" />
                       <span>{msg.task ? msg.task.replace(/_/g, ' ') : 'Teaching Assistant Response'}</span>
                     </span>
 
                     {/* Action Toolbar */}
-                    <div className="flex items-center gap-1 flex-wrap">
+                    <div className="flex items-center gap-1.5 flex-wrap">
                       {/* Copy Entire Response */}
                       <button
                         type="button"
                         onClick={() => handleCopy(msg.content, msg.id)}
-                        className="px-2.5 py-1 rounded-lg bg-[#EAF0EB] hover:bg-[#DCE5DE] text-[#26332E] transition flex items-center gap-1 text-[11px] font-semibold border border-[#DCE5DE]"
+                        className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-black transition flex items-center gap-1.5 text-xs font-black border-2 border-black/30"
                         title="Copy complete response to clipboard"
                       >
-                        {copiedId === msg.id ? <Check size={12} className="text-[#187C68]" /> : <Copy size={12} />}
+                        {copiedId === msg.id ? <Check size={14} className="text-emerald-700" /> : <Copy size={14} />}
                         <span>{copiedId === msg.id ? 'Copied' : 'Copy Response'}</span>
                       </button>
 
@@ -987,8 +1009,8 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                       <button
                         type="button"
                         onClick={handleCopySelectedText}
-                        className="px-2 py-1 rounded-lg bg-[#EAF0EB] hover:bg-[#DCE5DE] text-[#68766F] hover:text-[#26332E] transition flex items-center gap-1 text-[11px] font-medium"
-                        title="Copy only highlighted text"
+                        className="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-black transition flex items-center gap-1 text-xs font-black border border-black/20"
+                        title="Copy highlighted text"
                       >
                         <span>Copy Selected</span>
                       </button>
@@ -997,10 +1019,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                       <button
                         type="button"
                         onClick={() => handleAddToSmartBoard(msg)}
-                        className="px-2.5 py-1 rounded-lg bg-[#E5F2EB] hover:bg-[#d2e8dc] text-[#187C68] transition flex items-center gap-1 text-[11px] font-bold border border-[#187C68]/30"
+                        className="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-black transition flex items-center gap-1.5 text-xs font-black border-2 border-emerald-700"
                         title="Add response to Smart Board workspace for review"
                       >
-                        <PlusCircle size={12} />
+                        <PlusCircle size={14} className="text-black" />
                         <span>Add to Board</span>
                       </button>
 
@@ -1008,10 +1030,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                       <button
                         type="button"
                         onClick={() => handleLaunchToSmartBoard(msg)}
-                        className="px-2.5 py-1 rounded-lg bg-[#187C68] hover:bg-[#136353] text-white transition flex items-center gap-1 text-[11px] font-bold shadow-xs"
+                        className="px-3 py-1.5 rounded-xl bg-black hover:bg-zinc-800 text-white transition flex items-center gap-1.5 text-xs font-black shadow-sm"
                         title="Present this response immediately on the classroom Smart Board"
                       >
-                        <Presentation size={12} />
+                        <Presentation size={14} />
                         <span>Launch Board</span>
                       </button>
 
@@ -1019,10 +1041,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                       <button
                         type="button"
                         onClick={() => handleRegenerate(msg)}
-                        className="p-1 rounded-lg hover:bg-[#EAF0EB] text-[#68766F] hover:text-[#26332E] transition"
+                        className="p-1.5 rounded-xl hover:bg-slate-100 text-black border border-black/30 transition"
                         title="Regenerate response"
                       >
-                        <RotateCcw size={13} />
+                        <RotateCcw size={15} />
                       </button>
                     </div>
                   </div>
@@ -1032,47 +1054,47 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
                   {/* Smart Board Presentation Highlight Card if present */}
                   {msg.smartboardSummary && (
-                    <div className="mt-4 p-3.5 rounded-xl bg-[#E5F2EB]/60 border border-[#187C68]/30 text-[#26332E] text-xs flex items-center justify-between gap-3 shadow-xs">
+                    <div className="mt-4 p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-700 text-black text-xs md:text-sm flex items-center justify-between gap-3 shadow-xs">
                       <div>
-                        <span className="text-[10px] font-extrabold text-[#187C68] uppercase tracking-wider block mb-0.5">
+                        <span className="text-[11px] font-black text-emerald-950 uppercase tracking-wider block mb-1">
                           🖥️ Classroom Chalkboard Summary
                         </span>
-                        <p className="text-[12px] leading-snug text-[#26332E] font-medium">
+                        <p className="text-xs md:text-sm leading-snug text-black font-extrabold">
                           {cleanContent(msg.smartboardSummary)}
                         </p>
                       </div>
                       <button
                         type="button"
                         onClick={() => handleLaunchToSmartBoard(msg)}
-                        className="px-3 py-1.5 rounded-xl bg-[#187C68] hover:bg-[#136353] text-white text-xs font-bold flex-shrink-0 flex items-center gap-1.5 shadow-xs transition"
+                        className="px-3.5 py-2 rounded-xl bg-black hover:bg-zinc-800 text-white text-xs font-black flex-shrink-0 flex items-center gap-1.5 shadow-md transition"
                       >
-                        <ExternalLink size={13} /> Launch
+                        <ExternalLink size={14} /> Launch
                       </button>
                     </div>
                   )}
 
                   {/* Clickable Citations with Exact PDF Navigation */}
                   {msg.citations && msg.citations.length > 0 && (
-                    <div className="mt-4 pt-3 border-t border-[#DCE5DE]">
-                      <span className="text-[10px] font-extrabold text-[#68766F] uppercase tracking-wider block mb-2">
+                    <div className="mt-4 pt-3.5 border-t-2 border-black/20">
+                      <span className="text-xs font-black text-black uppercase tracking-wider block mb-2">
                         Official Textbook Sources (Click to jump):
                       </span>
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-2">
                         {msg.citations.map((c, idx) => (
                           <button
                             key={idx}
                             type="button"
                             onClick={() => onJumpToPage(c.pageNumber)}
-                            className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#E5F2EB] border border-[#DCE5DE] hover:border-[#187C68] text-xs text-[#187C68] font-bold flex items-center gap-1.5 transition shadow-xs group"
+                            className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 border-2 border-black text-xs text-black font-black flex items-center gap-1.5 transition shadow-xs group"
                             title={c.excerpt}
                           >
-                            <FileText size={12} className="text-[#187C68] group-hover:scale-110 transition-transform" />
+                            <FileText size={14} className="text-black group-hover:scale-110 transition-transform" />
                             <span>
                               Page {c.pageNumber}
                               {c.pageEnd && c.pageEnd !== c.pageNumber ? `–${c.pageEnd}` : ''}
                             </span>
                             {c.chapterTitle && (
-                              <span className="text-[#68766F] text-[10px] max-w-[110px] truncate font-normal">
+                              <span className="text-black font-extrabold text-[11px] max-w-[120px] truncate">
                                 · {c.chapterTitle}
                               </span>
                             )}
@@ -1084,20 +1106,20 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
                   {/* Follow-up Prompts */}
                   {msg.followUps && msg.followUps.length > 0 && (
-                    <div className="mt-4 pt-3 border-t border-[#DCE5DE]">
-                      <span className="text-[10px] font-extrabold text-[#68766F] uppercase tracking-wider block mb-2">
+                    <div className="mt-4 pt-3.5 border-t-2 border-black/20">
+                      <span className="text-xs font-black text-black uppercase tracking-wider block mb-2">
                         Recommended Next Pedagogical Steps:
                       </span>
-                      <div className="space-y-1.5">
+                      <div className="space-y-2">
                         {msg.followUps.map((f, i) => (
                           <button
                             key={i}
                             type="button"
                             onClick={() => handleAsk('CUSTOM_QUESTION', f)}
-                            className="w-full text-left p-2 px-3 rounded-xl bg-[#EAF0EB]/60 hover:bg-[#E5F2EB] text-xs text-[#26332E] font-medium transition flex items-center justify-between group border border-[#DCE5DE]"
+                            className="w-full text-left p-2.5 px-3.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-xs md:text-sm text-black font-extrabold transition flex items-center justify-between group border-2 border-black/30"
                           >
                             <span className="truncate">▪ {f}</span>
-                            <ArrowRight size={12} className="text-[#68766F] group-hover:text-[#187C68] ml-2 flex-shrink-0 transition" />
+                            <ArrowRight size={14} className="text-black group-hover:translate-x-1 ml-2 flex-shrink-0 transition-transform" />
                           </button>
                         ))}
                       </div>
@@ -1110,17 +1132,17 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         )}
 
         {loading && (
-          <div className="flex items-center gap-3 p-4 rounded-2xl bg-white border border-[#DCE5DE] text-[#26332E] text-xs shadow-xs">
-            <Loader2 className="animate-spin text-[#187C68]" size={18} />
-            <span className="font-semibold text-[#187C68]">
+          <div className="flex items-center gap-3 p-4 rounded-2xl bg-white border-2 border-black text-black text-xs md:text-sm shadow-sm">
+            <Loader2 className="animate-spin text-black" size={20} />
+            <span className="font-black text-black">
               Consulting official CDC textbook & generating structured pedagogical response…
             </span>
           </div>
         )}
       </div>
 
-      {/* 5. Safe Input Area (Comfortable, Auto-Grow Textarea) */}
-      <div className="bg-white p-3 md:p-4 border-t border-[#DCE5DE] shadow-lg flex-shrink-0">
+      {/* 5. Safe Input Area (Pure Bold Black Text and Clear Contrast) */}
+      <div className="bg-white p-3 md:p-4 border-t-2 border-black shadow-lg flex-shrink-0">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -1128,8 +1150,8 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           }}
           className={`${isFullScreen ? 'max-w-6xl mx-auto' : 'w-full'}`}
         >
-          <div className="flex items-end gap-2.5">
-            <div className="flex-1 bg-[#F4F6F3] border border-[#DCE5DE] focus-within:border-[#187C68] focus-within:bg-white rounded-2xl p-2 transition shadow-inner">
+          <div className="flex items-end gap-3">
+            <div className="flex-1 bg-white border-2 border-black/50 focus-within:border-black rounded-2xl p-2.5 transition shadow-sm">
               <textarea
                 ref={textareaRef}
                 rows={2}
@@ -1145,23 +1167,23 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 }}
                 placeholder={`Ask about Page ${currentPage}, compare concepts, or request lesson plans…`}
                 disabled={loading}
-                className="w-full bg-transparent resize-none text-xs md:text-sm text-[#26332E] placeholder-[#68766F] focus:outline-none leading-relaxed"
+                className="w-full bg-transparent resize-none text-xs md:text-sm text-black font-black placeholder:text-stone-700 placeholder:font-bold focus:outline-none leading-relaxed"
               />
-              <div className="flex items-center justify-between pt-1 border-t border-[#DCE5DE]/50 text-[10px] text-[#68766F]">
+              <div className="flex items-center justify-between pt-1.5 border-t border-black/20 text-xs text-black font-black">
                 <span>
-                  Scope: <strong className="text-[#187C68]">{selectedScope.replace('_', ' ')}</strong> · Lang: <strong className="text-[#187C68]">{language.toUpperCase()}</strong>
+                  Scope: <strong className="text-black bg-slate-200 px-1 rounded">{selectedScope.replace('_', ' ')}</strong> · Lang: <strong className="text-black bg-slate-200 px-1 rounded">{language.toUpperCase()}</strong>
                 </span>
-                <span>Enter ↵ to send · Shift+Enter new line</span>
+                <span className="font-bold text-black text-[11px]">Enter ↵ to send · Shift+Enter new line</span>
               </div>
             </div>
 
             <button
               type="submit"
               disabled={loading || !inputQuery.trim()}
-              className="p-3 rounded-2xl bg-[#187C68] hover:bg-[#136353] disabled:opacity-40 text-white font-bold transition shadow-sm flex items-center justify-center flex-shrink-0"
+              className="p-3.5 rounded-2xl bg-black hover:bg-zinc-800 disabled:opacity-40 text-white font-black transition shadow-md flex items-center justify-center flex-shrink-0"
               title="Send question"
             >
-              <Send size={18} />
+              <Send size={20} />
             </button>
           </div>
         </form>
