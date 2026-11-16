@@ -179,15 +179,22 @@ function safeParseAiJson(raw: string): any {
       .replace(/\\"/g, '"')
       .replace(/\\\\/g, '\\');
   } else {
-    // 4. Strip { "answer": " at the beginning and "} at the end
-    extractedAnswer = cleaned
-      .replace(/^\s*\{\s*"answer"\s*:\s*"?/i, '')
-      .replace(/"?\s*,\s*"(?:groundedness|sources|followUps|smartboardSummary)"[\s\S]*$/i, '')
-      .replace(/"?\s*\}\s*$/i, '')
-      .replace(/\\n/g, '\n')
-      .replace(/\\r/g, '\r')
-      .replace(/\\t/g, '\t')
-      .replace(/\\"/g, '"');
+    // 4. Fallback extraction after "answer": "
+    const mStart = cleaned.match(/"answer"\s*:\s*"?([\s\S]*)/i);
+    if (mStart && mStart[1]) {
+      extractedAnswer = mStart[1]
+        .replace(/",\s*"(?:groundedness|sources|followUps|smartboardSummary)"[\s\S]*$/i, '')
+        .replace(/"?\s*\}\s*$/i, '')
+        .replace(/\\n/g, '\n')
+        .replace(/\\r/g, '\r')
+        .replace(/\\t/g, '\t')
+        .replace(/\\"/g, '"')
+        .replace(/\\\\/g, '\\');
+    } else {
+      extractedAnswer = cleaned
+        .replace(/^```(?:markdown)?\s*|```\s*$/gi, '')
+        .trim();
+    }
   }
 
   let smartboardSummary = '';

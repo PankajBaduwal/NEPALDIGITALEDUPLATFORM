@@ -1142,7 +1142,7 @@ const GraphObject = (() => {
       showMinorGrid: options.showMinorGrid !== undefined ? options.showMinorGrid : true,
       showAxes: options.showAxes !== undefined ? options.showAxes : true,
       showLabels: options.showLabels !== undefined ? options.showLabels : true,
-      bgColor: options.bgColor || '#E9E2CE',
+      bgColor: options.bgColor || ((typeof Canvas !== 'undefined' && Canvas.getBoardColor) ? Canvas.getBoardColor().bg : '#f8fafc'),
       color: '#38bdf8',
 
       // Transformation and family state
@@ -1266,7 +1266,7 @@ const GraphObject = (() => {
     ctx.save();
     const gx = g.x, gy = g.y, gw = g.w, gh = g.h;
 
-    const boardBg = g.bgColor || '#E9E2CE';
+    const boardBg = g.bgColor || ((typeof Canvas !== 'undefined' && Canvas.getBoardColor) ? Canvas.getBoardColor().bg : '#f8fafc');
     const isLight = (boardBg.toLowerCase() === '#e9e2ce' || boardBg === '#f8fafc' || boardBg === '#ffffff' || boardBg === '#f4f6f8' || boardBg === '#f1f5f9' || boardBg === 'white');
 
     // Outer Container (Modern Glass Panel with Dynamic Board Theme)

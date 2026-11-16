@@ -102,29 +102,44 @@ function cleanContent(raw: string): string {
   if (!raw) return '';
   let str = raw.trim();
 
-  // If content is wrapped in raw JSON string { "answer": "..." }
-  if (str.startsWith('{') && str.includes('"answer"')) {
+  // If content is wrapped in markdown json fence
+  if (str.startsWith('```json') && str.endsWith('```')) {
+    str = str.replace(/^```json\s*/i, '').replace(/```\s*$/i, '').trim();
+  }
+
+  // Check if string contains JSON-like object with "answer" key
+  if (str.includes('"answer"')) {
     try {
       const parsed = JSON.parse(str);
-      if (parsed.answer) return parsed.answer;
+      if (parsed && typeof parsed === 'object') {
+        if (parsed.answer) return cleanContent(parsed.answer);
+        if (parsed.content) return cleanContent(parsed.content);
+      }
     } catch {
       // Regex extraction fallback
       const m = str.match(/"answer"\s*:\s*"([\s\S]*?)(?="\s*,\s*"(?:groundedness|sources|followUps|smartboardSummary)"|\s*"\s*\}|\s*\}$)/i);
       if (m && m[1]) {
-        return m[1]
+        return cleanContent(m[1]
+          .replace(/\\n/g, '\n')
+          .replace(/\\r/g, '\r')
+          .replace(/\\t/g, '\t')
+          .replace(/\\"/g, '"')
+          .replace(/\\\\/g, '\\'));
+      }
+      // If regex with lookahead didn't match (e.g. truncated response), extract after "answer": "
+      const mStart = str.match(/"answer"\s*:\s*"?([\s\S]*)/i);
+      if (mStart && mStart[1]) {
+        let extracted = mStart[1];
+        extracted = extracted
+          .replace(/",\s*"(?:groundedness|sources|followUps|smartboardSummary)"[\s\S]*$/i, '')
+          .replace(/"?\s*\}\s*$/i, '')
           .replace(/\\n/g, '\n')
           .replace(/\\r/g, '\r')
           .replace(/\\t/g, '\t')
           .replace(/\\"/g, '"')
           .replace(/\\\\/g, '\\');
+        return cleanContent(extracted.trim());
       }
-      // Strip outer JSON boilerplate
-      str = str
-        .replace(/^\s*\{\s*"answer"\s*:\s*"?/i, '')
-        .replace(/"?\s*,\s*"(?:groundedness|sources|followUps|smartboardSummary)"[\s\S]*$/i, '')
-        .replace(/"?\s*\}\s*$/i, '')
-        .replace(/\\n/g, '\n')
-        .replace(/\\"/g, '"');
     }
   }
 
@@ -357,8 +372,9 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
     // Numbered lists
     processed = processed.replace(/^\d+\. (.*$)/gim, '<li class="ml-4 list-decimal text-slate-200 my-1 pl-1 leading-relaxed font-normal">$1</li>');
 
-    // Paragraph breaks
-    processed = processed.replace(/\n\n/g, '<div class="my-2.5"></div>');
+    // Paragraph breaks and line breaks
+    processed = processed.replace(/\n\n+/g, '<div class="my-2.5"></div>');
+    processed = processed.replace(/(?<!<\/h[1-3]>|<\/div>|<\/li>|<\/hr>)\n/g, '<br />');
 
     return (
       <div

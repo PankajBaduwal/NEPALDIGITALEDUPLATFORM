@@ -12,7 +12,7 @@ export class TeacherAssistantController {
       const user = {
         userId: req.user!.userId,
         role: req.user!.role,
-        institutionId: req.institutionId || req.user?.institutionId,
+        institutionId: (req.institutionId || req.user?.institutionId) || undefined,
       };
 
       const result = await TeacherAssistantService.ask(user, req.body);
