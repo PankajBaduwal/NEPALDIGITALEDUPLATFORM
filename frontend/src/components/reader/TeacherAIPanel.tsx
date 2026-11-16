@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import {
   Sparkles,
   BookOpen,
@@ -28,6 +28,8 @@ import {
   Layers,
   GraduationCap,
   Calculator,
+  MessageSquareQuote,
+  HelpCircleIcon,
 } from 'lucide-react';
 import { api } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
@@ -157,6 +159,61 @@ function cleanContent(raw: string): string {
   return str;
 }
 
+/** Generate smart, curriculum-aware recommended questions for the active chapter */
+function getChapterQuestions(
+  textbook: string,
+  chapterNum?: number,
+  chapterTitle?: string,
+  page?: number
+): string[] {
+  const tLower = (chapterTitle || '').toLowerCase();
+
+  // 1. Physics: Rotational Dynamics
+  if (tLower.includes('rotational') || tLower.includes('torque') || tLower.includes('inertia')) {
+    return [
+      `Explain Moment of Inertia and its physical significance with examples (Page ${page || 8})`,
+      'Derive relation between Torque and Angular Acceleration (τ = Iα)',
+      'Difference between Moment of Inertia and Radius of Gyration',
+      'State and prove Theorem of Parallel Axes with diagram',
+      'Calculate Rotational Kinetic Energy of a rolling solid cylinder',
+      '3-Minute classroom check on Conservation of Angular Momentum',
+    ];
+  }
+
+  // 2. Physics: Mechanics / Fluid / Waves
+  if (tLower.includes('fluid') || tLower.includes('mechanic') || tLower.includes('wave') || tLower.includes('motion')) {
+    return [
+      `Key formulas and step-by-step principles on Page ${page || 1}`,
+      `Difference between key concepts in ${chapterTitle || 'this topic'}`,
+      `Classroom real-world Nepal analogy for ${chapterTitle || 'Mechanics'}`,
+      `40-Minute lesson plan for Chapter ${chapterNum || 1}`,
+      `Bloom's taxonomy question bank with marking scheme for ${chapterTitle || 'this topic'}`,
+    ];
+  }
+
+  // 3. Math Chapters
+  if (tLower.includes('matrix') || tLower.includes('vector') || tLower.includes('derivative') || tLower.includes('integration') || tLower.includes('geometry') || textbook.toLowerCase().includes('math')) {
+    return [
+      `Step-by-step worked solution for numerical on Page ${page || 1}`,
+      `Formula breakdown and variable definitions on Page ${page || 1}`,
+      `Difference between concepts in ${chapterTitle || 'this chapter'}`,
+      `Common student mistakes and chalkboard layout for ${chapterTitle || 'this lesson'}`,
+      `5 Practice problems with model solutions for Chapter ${chapterNum || 1}`,
+    ];
+  }
+
+  // 4. Default / General Chapter Questions
+  const chLabel = chapterTitle ? `"${chapterTitle}"` : `Chapter ${chapterNum || 1}`;
+  return [
+    `Explain core concepts and pedagogical breakdown of Page ${page || 1}`,
+    `Difference between key terms in ${chLabel}`,
+    `40-Minute structured classroom lesson plan for ${chLabel}`,
+    `Bloom's taxonomy questions (Knowledge, Understanding, Application) for ${chLabel}`,
+    `Classroom chalkboard notes and diagrams for ${chLabel}`,
+    `Real-world Nepal analogy and classroom activity for Page ${page || 1}`,
+  ];
+}
+
 export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
   isOpen,
   onClose,
@@ -181,7 +238,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [actionsExpanded, setActionsExpanded] = useState(true);
+  const [actionsExpanded, setActionsExpanded] = useState(false);
   const [activeCategory, setActiveCategory] = useState<'core' | 'activities' | 'delivery'>('core');
 
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -190,8 +247,18 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
   const showToast = useCallback((msg: string) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 3200);
+    setTimeout(() => setToastMessage(null), 3000);
   }, []);
+
+  // Compute smart recommended chapter questions
+  const recommendedQuestions = useMemo(() => {
+    return getChapterQuestions(
+      textbookTitle,
+      currentChapter?.chapterNumber,
+      currentChapter?.title,
+      currentPage
+    );
+  }, [textbookTitle, currentChapter, currentPage]);
 
   // Keyboard shortcut: Esc to exit full-screen mode
   useEffect(() => {
@@ -227,22 +294,17 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
   if (!isTeacher) {
     return (
-      <div className="teacher-ai-panel-root fixed inset-y-0 right-0 z-[60] w-96 bg-[#F4F6F3] border-l-2 border-black p-6 flex flex-col justify-center items-center shadow-2xl">
-        <style>{`
-          .teacher-ai-panel-root, .teacher-ai-panel-root * {
-            color: #000000 !important;
-          }
-        `}</style>
-        <div className="p-4 rounded-full bg-rose-100 text-black mb-4 border-2 border-black">
-          <EyeOff size={32} className="text-black" />
+      <div className="fixed inset-y-0 right-0 z-[60] w-96 bg-[#f8fafc] border-l border-slate-200 text-slate-900 p-6 flex flex-col justify-center items-center shadow-2xl">
+        <div className="p-4 rounded-full bg-rose-50 text-rose-700 mb-4 border border-rose-200">
+          <EyeOff size={32} />
         </div>
-        <h3 className="text-base font-black text-black mb-2 text-center">Teacher-Only Assistant</h3>
-        <p className="text-xs text-black font-black text-center leading-relaxed mb-6">
+        <h3 className="text-base font-bold text-slate-900 mb-2 text-center">Teacher-Only Assistant</h3>
+        <p className="text-xs text-slate-600 font-medium text-center leading-relaxed mb-6">
           The AI Teaching Assistant provides pedagogical guides, lesson plans, and curriculum solutions designed exclusively for authorized teachers and school administrators.
         </p>
         <button
           onClick={onClose}
-          className="px-5 py-2.5 bg-emerald-300 hover:bg-emerald-400 text-xs font-black rounded-xl text-black border-2 border-black transition shadow-md"
+          className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-xs font-bold rounded-xl text-white transition shadow-sm"
         >
           Close Assistant
         </button>
@@ -257,7 +319,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
     setLoading(true);
     setInputQuery('');
 
-    // Collapse actions deck when user generates an answer to maximize reading area
+    // Collapse actions bar when user generates an answer to maximize reading area
     if (task !== 'CUSTOM_QUESTION') {
       setActionsExpanded(false);
     }
@@ -311,12 +373,18 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
       const cleanAnswer = cleanContent(data.answer || 'Response generated.');
 
+      // Ensure follow-ups are present
+      let followUps = Array.isArray(data.followUps) && data.followUps.length > 0 ? data.followUps : [];
+      if (followUps.length === 0) {
+        followUps = recommendedQuestions.slice(0, 3);
+      }
+
       const assistantMsg: TeacherMessage = {
         id: data.messageId || `a-${Date.now()}`,
         sender: 'ASSISTANT',
         content: cleanAnswer,
         citations: data.citations || [],
-        followUps: data.followUps || [],
+        followUps,
         smartboardSummary: cleanContent(data.smartboardSummary || ''),
         task,
         scope: selectedScope,
@@ -343,7 +411,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
     try {
       if (navigator.clipboard && window.ClipboardItem) {
         const textBlob = new Blob([cleaned], { type: 'text/plain' });
-        const htmlBlob = new Blob([`<div style="font-family: sans-serif; line-height: 1.6; color: #000000; font-weight: bold;">${cleaned.replace(/\n/g, '<br/>')}</div>`], { type: 'text/html' });
+        const htmlBlob = new Blob([`<div style="font-family: sans-serif; line-height: 1.6; color: #0f172a;">${cleaned.replace(/\n/g, '<br/>')}</div>`], { type: 'text/html' });
         await navigator.clipboard.write([
           new ClipboardItem({
             'text/plain': textBlob,
@@ -454,67 +522,47 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
   return (
     <div
-      className={`teacher-ai-panel-root fixed transition-all duration-300 font-sans ${
+      className={`fixed transition-all duration-300 font-sans text-slate-900 bg-[#f8fafc] ${
         isFullScreen
-          ? 'inset-0 z-[100] w-full h-full bg-[#F4F6F3] flex flex-col'
-          : 'inset-y-0 right-0 z-[60] w-[480px] md:w-[520px] lg:w-[580px] bg-[#F4F6F3] border-l-2 border-black flex flex-col shadow-2xl'
+          ? 'inset-0 z-[100] w-full h-full flex flex-col'
+          : 'inset-y-0 right-0 z-[60] w-[480px] md:w-[520px] lg:w-[580px] border-l border-slate-200 flex flex-col shadow-2xl'
       }`}
     >
-      {/* Universal Pure Black Typography Enforcement */}
-      <style>{`
-        .teacher-ai-panel-root,
-        .teacher-ai-panel-root *:not(svg) {
-          color: #000000 !important;
-          -webkit-text-fill-color: #000000 !important;
-        }
-        .teacher-ai-panel-root input::placeholder,
-        .teacher-ai-panel-root textarea::placeholder {
-          color: #222222 !important;
-          -webkit-text-fill-color: #222222 !important;
-          opacity: 0.75 !important;
-          font-weight: 700 !important;
-        }
-        .teacher-ai-panel-root svg {
-          color: #000000 !important;
-          stroke: #000000 !important;
-        }
-      `}</style>
-
       {/* Toast Notification Banner */}
       {toastMessage && (
-        <div className="absolute top-16 left-1/2 -translate-x-1/2 z-50 bg-emerald-300 px-5 py-2.5 rounded-2xl text-xs font-black shadow-2xl border-2 border-black flex items-center gap-2">
-          <BookmarkCheck size={16} />
+        <div className="absolute top-16 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-xl border border-slate-700 flex items-center gap-2">
+          <BookmarkCheck size={15} className="text-emerald-400" />
           <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* 1. Header (Pure Black High-Contrast Elements) */}
-      <div className="bg-white px-4 py-3 border-b-2 border-black flex items-center justify-between shadow-xs flex-shrink-0">
+      {/* 1. Header (Clean, Professional, Elevated) */}
+      <div className="bg-white px-4 py-3 border-b border-slate-200 flex items-center justify-between shadow-2xs flex-shrink-0">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-200 border-2 border-black flex items-center justify-center shadow-sm flex-shrink-0">
-            <GraduationCap size={22} />
+          <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs flex-shrink-0">
+            <GraduationCap size={20} />
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h2 className="text-sm md:text-base font-black tracking-tight truncate">
+              <h2 className="text-sm font-extrabold text-slate-900 tracking-tight truncate">
                 AI Teaching Assistant
               </h2>
-              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-200 border-2 border-black flex-shrink-0">
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300 flex-shrink-0">
                 शिक्षक एआई
               </span>
             </div>
-            <div className="flex items-center gap-1.5 mt-0.5 text-xs font-black">
-              <span className="truncate max-w-[170px] font-black">
+            <div className="flex items-center gap-1.5 mt-0.5 text-xs text-slate-700 font-medium">
+              <span className="truncate max-w-[170px] font-bold text-slate-900">
                 {textbookTitle}
               </span>
               <span>•</span>
-              <span className="font-black bg-emerald-200 px-2 py-0.5 rounded-md border border-black">
+              <span className="font-bold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
                 Page {currentPage}
               </span>
               {currentChapter && (
                 <>
                   <span>•</span>
-                  <span className="truncate max-w-[130px] font-bold">
+                  <span className="truncate max-w-[130px] text-slate-700">
                     Ch. {currentChapter.chapterNumber}: {currentChapter.title}
                   </span>
                 </>
@@ -523,38 +571,38 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-2 flex-shrink-0">
+        <div className="flex items-center gap-1.5 flex-shrink-0">
           {/* Privacy Status Toggle (Teacher Private vs Show to Class) */}
           <button
             type="button"
             onClick={() => setShowToClassMode(!showToClassMode)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition border-2 border-black ${
+            className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition border ${
               showToClassMode
-                ? 'bg-amber-300 shadow-xs'
-                : 'bg-white hover:bg-slate-100'
+                ? 'bg-amber-50 text-amber-900 border-amber-300 shadow-2xs'
+                : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200'
             }`}
             title={showToClassMode ? 'Classroom Display Mode Active' : 'Private Teacher Mode'}
           >
-            {showToClassMode ? <Eye size={15} /> : <EyeOff size={15} />}
-            <span className="hidden sm:inline text-xs">{showToClassMode ? 'Class View' : 'Private'}</span>
+            {showToClassMode ? <Eye size={14} className="text-amber-700" /> : <EyeOff size={14} className="text-slate-500" />}
+            <span className="hidden sm:inline text-[11px] font-bold">{showToClassMode ? 'Class View' : 'Private'}</span>
           </button>
 
           {/* Full-Screen / Split View Toggle */}
           <button
             type="button"
             onClick={() => setIsFullScreen(!isFullScreen)}
-            className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 font-black text-xs transition flex items-center gap-1.5 border-2 border-black shadow-xs"
+            className="px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs transition flex items-center gap-1.5 border border-slate-200 shadow-2xs"
             title={isFullScreen ? 'Restore Split View (Esc)' : 'Expand to Full Screen'}
           >
             {isFullScreen ? (
               <>
-                <Minimize2 size={15} />
-                <span className="text-xs font-black">Restore View</span>
+                <Minimize2 size={14} className="text-emerald-700" />
+                <span className="text-[11px]">Restore View</span>
               </>
             ) : (
               <>
-                <Maximize2 size={15} />
-                <span className="hidden sm:inline text-xs font-black">Full Screen</span>
+                <Maximize2 size={14} className="text-emerald-700" />
+                <span className="hidden sm:inline text-[11px]">Full Screen</span>
               </>
             )}
           </button>
@@ -563,28 +611,28 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-xl bg-white hover:bg-rose-100 border-2 border-black transition"
+            className="p-1.5 rounded-lg bg-white hover:bg-rose-50 text-slate-600 hover:text-rose-700 border border-slate-200 transition"
             title="Close Assistant"
           >
-            <X size={18} />
+            <X size={16} />
           </button>
         </div>
       </div>
 
-      {/* 2. Scope & Language Bar (Pure Bold Black Contrast) */}
-      <div className="px-4 py-2.5 bg-slate-100 border-b-2 border-black flex items-center justify-between gap-2 text-xs flex-shrink-0">
-        <div className="flex items-center gap-2 overflow-x-auto scrollbar-none py-0.5">
-          <span className="text-xs uppercase font-black tracking-wider flex items-center gap-1 mr-1">
-            <Compass size={14} /> Scope:
+      {/* 2. Scope & Language Bar */}
+      <div className="px-4 py-2 bg-slate-100/80 border-b border-slate-200 flex items-center justify-between gap-2 text-xs flex-shrink-0">
+        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">
+          <span className="text-[11px] uppercase font-bold text-slate-600 tracking-wider flex items-center gap-1 mr-1">
+            <Compass size={13} className="text-emerald-700" /> Scope:
           </span>
 
           <button
             type="button"
             onClick={() => setSelectedScope('CURRENT_PAGE')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-black transition whitespace-nowrap border-2 border-black ${
+            className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap border ${
               selectedScope === 'CURRENT_PAGE'
-                ? 'bg-emerald-300 shadow-md ring-2 ring-black'
-                : 'bg-white hover:bg-slate-50'
+                ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
+                : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
             }`}
           >
             Page {currentPage}
@@ -594,10 +642,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             <button
               type="button"
               onClick={() => setSelectedScope('CURRENT_CHAPTER')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-black transition whitespace-nowrap border-2 border-black ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap border ${
                 selectedScope === 'CURRENT_CHAPTER'
-                  ? 'bg-emerald-300 shadow-md ring-2 ring-black'
-                  : 'bg-white hover:bg-slate-50'
+                  ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
+                  : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
               }`}
               title={currentChapter.title}
             >
@@ -608,10 +656,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setSelectedScope('ENTIRE_BOOK')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-black transition whitespace-nowrap border-2 border-black ${
+            className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap border ${
               selectedScope === 'ENTIRE_BOOK'
-                ? 'bg-emerald-300 shadow-md ring-2 ring-black'
-                : 'bg-white hover:bg-slate-50'
+                ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
+                : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
             }`}
           >
             Whole Book
@@ -621,10 +669,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             <button
               type="button"
               onClick={() => setSelectedScope('SELECTED_TEXT')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-black transition whitespace-nowrap flex items-center gap-1.5 border-2 border-black ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap flex items-center gap-1.5 border ${
                 selectedScope === 'SELECTED_TEXT'
-                  ? 'bg-amber-300 shadow-md ring-2 ring-black'
-                  : 'bg-amber-100'
+                  ? 'bg-amber-600 text-white border-amber-600 shadow-xs'
+                  : 'bg-amber-50 text-amber-900 border-amber-300'
               }`}
             >
               <span>Selected Text</span>
@@ -634,7 +682,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                   setSelectedText('');
                   if (selectedScope === 'SELECTED_TEXT') setSelectedScope('CURRENT_PAGE');
                 }}
-                className="hover:text-rose-900 text-sm font-black ml-1"
+                className="hover:text-rose-900 text-sm font-bold ml-1"
                 title="Clear selection"
               >
                 ×
@@ -644,12 +692,12 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         </div>
 
         {/* Language Selector */}
-        <div className="flex items-center gap-1 bg-white border-2 border-black rounded-xl p-0.5 flex-shrink-0 shadow-xs">
+        <div className="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-0.5 flex-shrink-0 shadow-2xs">
           <button
             type="button"
             onClick={() => setLanguage('auto')}
-            className={`px-2.5 py-1 rounded-lg text-xs font-black transition border ${
-              language === 'auto' ? 'bg-emerald-300 border-black shadow-xs' : 'border-transparent hover:bg-slate-100'
+            className={`px-2 py-0.5 rounded text-[11px] font-bold transition ${
+              language === 'auto' ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
             }`}
           >
             Auto
@@ -657,8 +705,8 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setLanguage('ne')}
-            className={`px-2.5 py-1 rounded-lg text-xs font-black transition border ${
-              language === 'ne' ? 'bg-emerald-300 border-black shadow-xs' : 'border-transparent hover:bg-slate-100'
+            className={`px-2 py-0.5 rounded text-[11px] font-bold transition ${
+              language === 'ne' ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
             }`}
           >
             नेपाली
@@ -666,8 +714,8 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setLanguage('en')}
-            className={`px-2.5 py-1 rounded-lg text-xs font-black transition border ${
-              language === 'en' ? 'bg-emerald-300 border-black shadow-xs' : 'border-transparent hover:bg-slate-100'
+            className={`px-2 py-0.5 rounded text-[11px] font-bold transition ${
+              language === 'en' ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
             }`}
           >
             EN
@@ -675,23 +723,23 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         </div>
       </div>
 
-      {/* 3. Pedagogical Actions Bar (Pure Black Typography) */}
-      <div className="bg-white border-b-2 border-black flex-shrink-0 shadow-xs">
-        <div className="px-4 py-2.5 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+      {/* 3. Pedagogical Actions Bar (Compact & Expandable) */}
+      <div className="bg-white border-b border-slate-200 flex-shrink-0 shadow-2xs">
+        <div className="px-4 py-2 flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
             <button
               type="button"
               onClick={() => {
                 setActiveCategory('core');
                 setActionsExpanded(true);
               }}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 border-2 border-black ${
+              className={`px-3 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'core' && actionsExpanded
-                  ? 'bg-emerald-300 shadow-md ring-2 ring-black'
-                  : 'bg-white hover:bg-slate-100'
+                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
+                  : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <BookOpen size={14} />
+              <BookOpen size={13} />
               <span>Core Teaching</span>
             </button>
 
@@ -701,13 +749,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 setActiveCategory('activities');
                 setActionsExpanded(true);
               }}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 border-2 border-black ${
+              className={`px-3 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'activities' && actionsExpanded
-                  ? 'bg-emerald-300 shadow-md ring-2 ring-black'
-                  : 'bg-white hover:bg-slate-100'
+                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
+                  : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <HelpCircle size={14} />
+              <HelpCircle size={13} />
               <span>Activities & Tests</span>
             </button>
 
@@ -717,13 +765,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 setActiveCategory('delivery');
                 setActionsExpanded(true);
               }}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 border-2 border-black ${
+              className={`px-3 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'delivery' && actionsExpanded
-                  ? 'bg-emerald-300 shadow-md ring-2 ring-black'
-                  : 'bg-white hover:bg-slate-100'
+                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
+                  : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <Presentation size={14} />
+              <Presentation size={13} />
               <span>Board & Delivery</span>
             </button>
           </div>
@@ -731,28 +779,28 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setActionsExpanded(!actionsExpanded)}
-            className="p-1.5 rounded-xl hover:bg-slate-100 border-2 border-black transition"
+            className="p-1 rounded-lg hover:bg-slate-100 border border-slate-200 text-slate-600 transition"
             title={actionsExpanded ? 'Collapse pedagogical buttons' : 'Expand pedagogical buttons'}
           >
-            {actionsExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+            {actionsExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </button>
         </div>
 
-        {/* Action Buttons Grid with Pure Dark Black Labels & Descriptions */}
+        {/* Action Buttons Grid */}
         {actionsExpanded && (
-          <div className="px-4 pb-3.5 pt-2 border-t border-black/20 bg-slate-50">
+          <div className="px-4 pb-3 pt-1 border-t border-slate-100 bg-slate-50/70">
             {activeCategory === 'core' && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <button
                   type="button"
                   onClick={() => handleAsk('EXPLAIN_PAGE')}
-                  className="p-3 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <div className="flex items-center gap-2 text-xs font-black">
-                    <FileText size={16} />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <FileText size={14} className="text-emerald-700" />
                     <span>Explain Page</span>
                   </div>
-                  <span className="text-[11px] font-black leading-tight">
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
                     Core concepts, teaching notes
                   </span>
                 </button>
@@ -760,13 +808,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('TEACH_CHAPTER')}
-                  className="p-3 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <div className="flex items-center gap-2 text-xs font-black">
-                    <Layers size={16} />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <Layers size={14} className="text-emerald-700" />
                     <span>Teach Chapter</span>
                   </div>
-                  <span className="text-[11px] font-black leading-tight">
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
                     Learning goals & sequence
                   </span>
                 </button>
@@ -774,13 +822,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('SUMMARIZE_CHAPTER')}
-                  className="p-3 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <div className="flex items-center gap-2 text-xs font-black">
-                    <BookOpen size={16} />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <BookOpen size={14} className="text-emerald-700" />
                     <span>Summarize Chapter</span>
                   </div>
-                  <span className="text-[11px] font-black leading-tight">
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
                     Definitions, rules, recap
                   </span>
                 </button>
@@ -788,13 +836,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('QUICK_SIMPLIFY')}
-                  className="p-3 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <div className="flex items-center gap-2 text-xs font-black">
-                    <Sparkles size={16} />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <Sparkles size={14} className="text-emerald-700" />
                     <span>Simplify Concept</span>
                   </div>
-                  <span className="text-[11px] font-black leading-tight">
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
                     Easy student-friendly terms
                   </span>
                 </button>
@@ -802,17 +850,17 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             )}
 
             {activeCategory === 'activities' && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <button
                   type="button"
                   onClick={() => handleAsk('LESSON_PLAN')}
-                  className="p-3 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <div className="flex items-center gap-2 text-xs font-black">
-                    <FileCheck size={16} />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <FileCheck size={14} className="text-emerald-700" />
                     <span>45-Min Lesson Plan</span>
                   </div>
-                  <span className="text-[11px] font-black leading-tight">
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
                     Hook, timing, activities
                   </span>
                 </button>
@@ -820,13 +868,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('EXAMPLES_ACTIVITIES')}
-                  className="p-3 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <div className="flex items-center gap-2 text-xs font-black">
-                    <Lightbulb size={16} />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <Lightbulb size={14} className="text-emerald-700" />
                     <span>Classroom Examples</span>
                   </div>
-                  <span className="text-[11px] font-black leading-tight">
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
                     Hands-on low cost tasks
                   </span>
                 </button>
@@ -834,13 +882,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('QUESTION_BANK')}
-                  className="p-3 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <div className="flex items-center gap-2 text-xs font-black">
-                    <HelpCircle size={16} />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <HelpCircle size={14} className="text-emerald-700" />
                     <span>Bloom's Questions</span>
                   </div>
-                  <span className="text-[11px] font-black leading-tight">
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
                     Knowledge, comprehension, MCQs
                   </span>
                 </button>
@@ -848,13 +896,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('QUICK_CHECK')}
-                  className="p-3 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <div className="flex items-center gap-2 text-xs font-black">
-                    <Check size={16} />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <Check size={14} className="text-emerald-700" />
                     <span>3-Question Check</span>
                   </div>
-                  <span className="text-[11px] font-black leading-tight">
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
                     Quick formative assessment
                   </span>
                 </button>
@@ -862,17 +910,17 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             )}
 
             {activeCategory === 'delivery' && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <button
                   type="button"
                   onClick={() => handleAsk('TEACHING_NOTES')}
-                  className="p-3 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <div className="flex items-center gap-2 text-xs font-black">
-                    <FileText size={16} />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <FileText size={14} className="text-emerald-700" />
                     <span>Chalkboard Notes</span>
                   </div>
-                  <span className="text-[11px] font-black leading-tight">
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
                     Board layout & summary
                   </span>
                 </button>
@@ -880,13 +928,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('PRESENTATION')}
-                  className="p-3 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <div className="flex items-center gap-2 text-xs font-black">
-                    <Presentation size={16} />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <Presentation size={14} className="text-emerald-700" />
                     <span>Slide Outline</span>
                   </div>
-                  <span className="text-[11px] font-black leading-tight">
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
                     5-slide teaching deck
                   </span>
                 </button>
@@ -894,13 +942,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('QUICK_ANALOGY')}
-                  className="p-3 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition flex flex-col gap-1 shadow-sm group"
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <div className="flex items-center gap-2 text-xs font-black">
-                    <Flame size={16} />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <Flame size={14} className="text-emerald-700" />
                     <span>Nepal Analogy</span>
                   </div>
-                  <span className="text-[11px] font-black leading-tight">
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
                     Cultural & daily life links
                   </span>
                 </button>
@@ -909,13 +957,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                   <button
                     type="button"
                     onClick={() => handleAsk('EXPLAIN_SELECTION')}
-                    className="p-3 rounded-2xl bg-amber-100 border-2 border-black hover:bg-amber-200 text-left transition flex flex-col gap-1 shadow-sm group"
+                    className="p-2.5 rounded-xl bg-amber-50 border border-amber-300 hover:bg-amber-100 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                   >
-                    <div className="flex items-center gap-2 text-xs font-black">
-                      <BookmarkCheck size={16} />
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900">
+                      <BookmarkCheck size={14} />
                       <span>Explain Selection</span>
                     </div>
-                    <span className="text-[11px] font-black leading-tight">
+                    <span className="text-[10px] text-amber-800 leading-tight">
                       Unpack highlighted passage
                     </span>
                   </button>
@@ -926,74 +974,54 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         )}
       </div>
 
-      {/* 4. Messages / Response Body (Pure Dark Black Contrast) */}
+      {/* 4. Messages / Response Body */}
       <div
         ref={scrollRef}
-        className={`flex-1 overflow-y-auto p-4 md:p-6 space-y-5 bg-[#F4F6F3] ${
-          isFullScreen ? 'max-w-6xl mx-auto w-full' : 'w-full'
+        className={`flex-1 overflow-y-auto p-4 md:p-6 space-y-5 bg-[#f8fafc] ${
+          isFullScreen ? 'max-w-4xl mx-auto w-full' : 'w-full'
         }`}
       >
         {messages.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center text-center p-6">
-            <div className="w-16 h-16 rounded-3xl bg-emerald-200 border-2 border-black flex items-center justify-center shadow-md mb-4">
-              <GraduationCap size={36} />
+          <div className="h-full flex flex-col items-center justify-center p-4 text-center">
+            <div className="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs mb-3">
+              <GraduationCap size={32} />
             </div>
-            <h3 className="text-lg md:text-xl font-black mb-2 tracking-tight">
+            <h3 className="text-base font-extrabold text-slate-900 mb-1 tracking-tight">
               Classroom Teaching Assistant
             </h3>
-            <p className="text-xs md:text-sm max-w-lg leading-relaxed font-black mb-6">
-              Ask any pedagogical question, compare concepts in 2 columns, generate Bloom's questions, or step-by-step numerical calculations aligned with Nepal CDC curriculum.
+            <p className="text-xs max-w-md leading-relaxed text-slate-600 mb-5">
+              Instant curriculum guidance, 2-column concept comparisons, step-by-step calculations, and lesson prep aligned with Nepal CDC syllabus.
             </p>
 
-            {/* Quick Starter Chips with Pure Bold Black Text */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg w-full">
-              <button
-                type="button"
-                onClick={() => handleAsk('EXPLAIN_PAGE')}
-                className="p-3.5 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition shadow-sm flex items-center justify-between group"
-              >
-                <div className="flex items-center gap-3">
-                  <FileText size={18} />
-                  <span className="text-xs md:text-sm font-black">Explain Page {currentPage}</span>
-                </div>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+            {/* Smart Chapter-Aware Recommended Questions Section */}
+            <div className="w-full max-w-xl text-left bg-white rounded-2xl border border-slate-200 p-4 shadow-xs">
+              <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+                <span className="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
+                  <Lightbulb size={15} className="text-amber-500" />
+                  <span>
+                    Recommended Questions for {currentChapter ? `Ch. ${currentChapter.chapterNumber}: ${currentChapter.title}` : `Page ${currentPage}`}:
+                  </span>
+                </span>
+                <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                  Click to Ask
+                </span>
+              </div>
 
-              <button
-                type="button"
-                onClick={() => handleAsk('LESSON_PLAN')}
-                className="p-3.5 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition shadow-sm flex items-center justify-between group"
-              >
-                <div className="flex items-center gap-3">
-                  <FileCheck size={18} />
-                  <span className="text-xs md:text-sm font-black">45-Min Lesson Plan</span>
-                </div>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleAsk('CUSTOM_QUESTION', `Difference between key concepts on page ${currentPage}`)}
-                className="p-3.5 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition shadow-sm flex items-center justify-between group"
-              >
-                <div className="flex items-center gap-3">
-                  <Calculator size={18} />
-                  <span className="text-xs md:text-sm font-black">2-Column Comparison</span>
-                </div>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleAsk('QUESTION_BANK')}
-                className="p-3.5 rounded-2xl bg-white border-2 border-black hover:bg-emerald-50 text-left transition shadow-sm flex items-center justify-between group"
-              >
-                <div className="flex items-center gap-3">
-                  <HelpCircle size={18} />
-                  <span className="text-xs md:text-sm font-black">Bloom's Taxonomy Quiz</span>
-                </div>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+              <div className="space-y-1.5">
+                {recommendedQuestions.map((q, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => handleAsk('CUSTOM_QUESTION', q)}
+                    className="w-full text-left p-2.5 px-3 rounded-xl bg-slate-50 hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-xs text-slate-900 font-semibold transition flex items-center justify-between group shadow-2xs"
+                  >
+                    <span className="leading-snug pr-2 text-slate-900 group-hover:text-emerald-900">
+                      ▪ {q}
+                    </span>
+                    <ArrowRight size={13} className="text-slate-400 group-hover:text-emerald-700 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         ) : (
@@ -1005,71 +1033,66 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
               }`}
             >
               {msg.sender === 'USER' ? (
-                <div className="max-w-[85%] rounded-2xl rounded-tr-sm bg-slate-200 border-2 border-black px-4 py-3 text-xs md:text-sm font-black shadow-md">
+                <div className="max-w-[85%] rounded-2xl rounded-tr-xs bg-slate-900 text-white px-4 py-2.5 text-xs font-medium shadow-xs">
                   <div className="whitespace-pre-wrap">{cleanContent(msg.content)}</div>
                 </div>
               ) : (
-                <div className="w-full rounded-2xl bg-white border-2 border-black p-4 md:p-6 shadow-sm transition-all">
-                  {/* Assistant Message Header & Response Action Toolbar */}
-                  <div className="flex items-center justify-between pb-3 mb-3 border-b-2 border-black text-xs">
-                    <span className="flex items-center gap-2 font-black text-xs md:text-sm">
-                      <Sparkles size={16} />
-                      <span>{msg.task ? msg.task.replace(/_/g, ' ') : 'Teaching Assistant Response'}</span>
+                <div className="w-full rounded-2xl bg-white border border-slate-200 p-4 md:p-5 shadow-xs transition-all text-slate-900">
+                  {/* Assistant Message Header & Action Toolbar */}
+                  <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-slate-100 text-xs">
+                    <span className="flex items-center gap-1.5 font-bold text-emerald-900 text-xs">
+                      <Sparkles size={14} className="text-emerald-700" />
+                      <span>{msg.task ? msg.task.replace(/_/g, ' ') : 'AI Teaching Response'}</span>
                     </span>
 
-                    {/* Action Toolbar */}
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      {/* Copy Entire Response */}
+                    {/* Toolbar Actions */}
+                    <div className="flex items-center gap-1 flex-wrap">
                       <button
                         type="button"
                         onClick={() => handleCopy(msg.content, msg.id)}
-                        className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 transition flex items-center gap-1.5 text-xs font-black border-2 border-black"
+                        className="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 transition flex items-center gap-1 text-[11px] font-semibold border border-slate-200"
                         title="Copy complete response to clipboard"
                       >
-                        {copiedId === msg.id ? <Check size={14} className="text-emerald-700" /> : <Copy size={14} />}
-                        <span>{copiedId === msg.id ? 'Copied' : 'Copy Response'}</span>
+                        {copiedId === msg.id ? <Check size={12} className="text-emerald-700" /> : <Copy size={12} />}
+                        <span>{copiedId === msg.id ? 'Copied' : 'Copy'}</span>
                       </button>
 
-                      {/* Copy Selected Text */}
                       <button
                         type="button"
                         onClick={handleCopySelectedText}
-                        className="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 transition flex items-center gap-1 text-xs font-black border border-black"
+                        className="px-2 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition flex items-center gap-1 text-[11px] font-medium border border-slate-200"
                         title="Copy highlighted text"
                       >
                         <span>Copy Selected</span>
                       </button>
 
-                      {/* Add to Smart Board Workspace */}
                       <button
                         type="button"
                         onClick={() => handleAddToSmartBoard(msg)}
-                        className="px-3 py-1.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 transition flex items-center gap-1.5 text-xs font-black border-2 border-black"
+                        className="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 transition flex items-center gap-1 text-[11px] font-bold border border-emerald-300"
                         title="Add response to Smart Board workspace for review"
                       >
-                        <PlusCircle size={14} />
+                        <PlusCircle size={12} />
                         <span>Add to Board</span>
                       </button>
 
-                      {/* Launch to Smart Board Directly */}
                       <button
                         type="button"
                         onClick={() => handleLaunchToSmartBoard(msg)}
-                        className="px-3 py-1.5 rounded-xl bg-emerald-300 hover:bg-emerald-400 transition flex items-center gap-1.5 text-xs font-black border-2 border-black shadow-sm"
+                        className="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition flex items-center gap-1 text-[11px] font-bold shadow-2xs"
                         title="Present this response immediately on the classroom Smart Board"
                       >
-                        <Presentation size={14} />
+                        <Presentation size={12} />
                         <span>Launch Board</span>
                       </button>
 
-                      {/* Regenerate */}
                       <button
                         type="button"
                         onClick={() => handleRegenerate(msg)}
-                        className="p-1.5 rounded-xl hover:bg-slate-100 border border-black transition"
+                        className="p-1 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition"
                         title="Regenerate response"
                       >
-                        <RotateCcw size={15} />
+                        <RotateCcw size={13} />
                       </button>
                     </div>
                   </div>
@@ -1079,47 +1102,47 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
                   {/* Smart Board Presentation Highlight Card if present */}
                   {msg.smartboardSummary && (
-                    <div className="mt-4 p-4 rounded-2xl bg-emerald-100 border-2 border-black text-xs md:text-sm flex items-center justify-between gap-3 shadow-xs">
+                    <div className="mt-4 p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 text-slate-900 text-xs flex items-center justify-between gap-3 shadow-2xs">
                       <div>
-                        <span className="text-[11px] font-black uppercase tracking-wider block mb-1">
-                          🖥️ Classroom Chalkboard Summary
+                        <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider block mb-0.5">
+                          🖥️ Chalkboard Summary
                         </span>
-                        <p className="text-xs md:text-sm leading-snug font-black">
+                        <p className="text-[12px] leading-snug text-slate-800 font-medium">
                           {cleanContent(msg.smartboardSummary)}
                         </p>
                       </div>
                       <button
                         type="button"
                         onClick={() => handleLaunchToSmartBoard(msg)}
-                        className="px-3.5 py-2 rounded-xl bg-emerald-300 hover:bg-emerald-400 text-xs font-black flex-shrink-0 flex items-center gap-1.5 border-2 border-black shadow-md transition"
+                        className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex-shrink-0 flex items-center gap-1 shadow-2xs transition"
                       >
-                        <ExternalLink size={14} /> Launch
+                        <ExternalLink size={12} /> Launch
                       </button>
                     </div>
                   )}
 
                   {/* Clickable Citations with Exact PDF Navigation */}
                   {msg.citations && msg.citations.length > 0 && (
-                    <div className="mt-4 pt-3.5 border-t-2 border-black">
-                      <span className="text-xs font-black uppercase tracking-wider block mb-2">
-                        Official Textbook Sources (Click to jump):
+                    <div className="mt-4 pt-3 border-t border-slate-100">
+                      <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mb-1.5">
+                        Textbook Sources (Click to jump):
                       </span>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5">
                         {msg.citations.map((c, idx) => (
                           <button
                             key={idx}
                             type="button"
                             onClick={() => onJumpToPage(c.pageNumber)}
-                            className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 border-2 border-black text-xs font-black flex items-center gap-1.5 transition shadow-xs group"
+                            className="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 text-xs text-emerald-900 font-semibold flex items-center gap-1.5 transition shadow-2xs group"
                             title={c.excerpt}
                           >
-                            <FileText size={14} className="group-hover:scale-110 transition-transform" />
+                            <FileText size={12} className="text-emerald-700 group-hover:scale-110 transition-transform" />
                             <span>
                               Page {c.pageNumber}
                               {c.pageEnd && c.pageEnd !== c.pageNumber ? `–${c.pageEnd}` : ''}
                             </span>
                             {c.chapterTitle && (
-                              <span className="font-extrabold text-[11px] max-w-[120px] truncate">
+                              <span className="text-slate-500 text-[10px] max-w-[110px] truncate font-normal">
                                 · {c.chapterTitle}
                               </span>
                             )}
@@ -1129,22 +1152,23 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                     </div>
                   )}
 
-                  {/* Follow-up Prompts */}
+                  {/* Chapter-Aware Follow-up Prompts */}
                   {msg.followUps && msg.followUps.length > 0 && (
-                    <div className="mt-4 pt-3.5 border-t-2 border-black">
-                      <span className="text-xs font-black uppercase tracking-wider block mb-2">
-                        Recommended Next Pedagogical Steps:
+                    <div className="mt-4 pt-3 border-t border-slate-100">
+                      <span className="text-[11px] font-extrabold text-slate-800 flex items-center gap-1 mb-2">
+                        <Lightbulb size={13} className="text-amber-500" />
+                        <span>Recommended Next Questions for {currentChapter ? `Ch. ${currentChapter.chapterNumber}` : 'this Topic'}:</span>
                       </span>
-                      <div className="space-y-2">
+                      <div className="space-y-1.5">
                         {msg.followUps.map((f, i) => (
                           <button
                             key={i}
                             type="button"
                             onClick={() => handleAsk('CUSTOM_QUESTION', f)}
-                            className="w-full text-left p-2.5 px-3.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-xs md:text-sm font-black transition flex items-center justify-between group border-2 border-black"
+                            className="w-full text-left p-2 px-3 rounded-xl bg-slate-50/80 hover:bg-emerald-50/70 text-xs text-slate-900 font-medium transition flex items-center justify-between group border border-slate-200 hover:border-emerald-300"
                           >
-                            <span className="truncate">▪ {f}</span>
-                            <ArrowRight size={14} className="group-hover:translate-x-1 ml-2 flex-shrink-0 transition-transform" />
+                            <span className="truncate pr-2">▪ {f}</span>
+                            <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 ml-2 flex-shrink-0 transition-transform" />
                           </button>
                         ))}
                       </div>
@@ -1157,26 +1181,26 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         )}
 
         {loading && (
-          <div className="flex items-center gap-3 p-4 rounded-2xl bg-white border-2 border-black text-xs md:text-sm shadow-sm">
-            <Loader2 className="animate-spin" size={20} />
-            <span className="font-black">
-              Consulting official CDC textbook & generating structured pedagogical response…
+          <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 text-xs shadow-2xs">
+            <Loader2 className="animate-spin text-emerald-700" size={17} />
+            <span className="font-semibold text-slate-800">
+              Consulting CDC textbook & generating pedagogical guidance…
             </span>
           </div>
         )}
       </div>
 
-      {/* 5. Safe Input Area (Pure Bold Black Text and Clear Contrast) */}
-      <div className="bg-white p-3 md:p-4 border-t-2 border-black shadow-lg flex-shrink-0">
+      {/* 5. Input Area */}
+      <div className="bg-white p-3 md:p-3.5 border-t border-slate-200 shadow-sm flex-shrink-0">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handleAsk('CUSTOM_QUESTION');
           }}
-          className={`${isFullScreen ? 'max-w-6xl mx-auto' : 'w-full'}`}
+          className={`${isFullScreen ? 'max-w-4xl mx-auto' : 'w-full'}`}
         >
-          <div className="flex items-end gap-3">
-            <div className="flex-1 bg-white border-2 border-black focus-within:border-black rounded-2xl p-2.5 transition shadow-sm">
+          <div className="flex items-end gap-2.5">
+            <div className="flex-1 bg-slate-50/90 border border-slate-200 focus-within:border-emerald-600 focus-within:bg-white rounded-xl p-2 transition shadow-inner">
               <textarea
                 ref={textareaRef}
                 rows={2}
@@ -1192,23 +1216,23 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 }}
                 placeholder={`Ask about Page ${currentPage}, compare concepts, or request lesson plans…`}
                 disabled={loading}
-                className="w-full bg-transparent resize-none text-xs md:text-sm font-black focus:outline-none leading-relaxed"
+                className="w-full bg-transparent resize-none text-xs md:text-sm text-slate-900 placeholder:text-slate-500 font-medium focus:outline-none leading-relaxed"
               />
-              <div className="flex items-center justify-between pt-1.5 border-t border-black/20 text-xs font-black">
+              <div className="flex items-center justify-between pt-1 border-t border-slate-200/60 text-[10px] text-slate-600 font-medium">
                 <span>
-                  Scope: <strong className="bg-emerald-200 px-1.5 py-0.5 rounded border border-black">{selectedScope.replace('_', ' ')}</strong> · Lang: <strong className="bg-emerald-200 px-1.5 py-0.5 rounded border border-black">{language.toUpperCase()}</strong>
+                  Scope: <strong className="text-slate-900 bg-slate-200/70 px-1 py-0.2 rounded">{selectedScope.replace('_', ' ')}</strong> · Lang: <strong className="text-slate-900 bg-slate-200/70 px-1 py-0.2 rounded">{language.toUpperCase()}</strong>
                 </span>
-                <span className="font-black text-[11px]">Enter ↵ to send · Shift+Enter new line</span>
+                <span className="text-slate-500">Enter ↵ to send · Shift+Enter new line</span>
               </div>
             </div>
 
             <button
               type="submit"
               disabled={loading || !inputQuery.trim()}
-              className="p-3.5 rounded-2xl bg-emerald-300 hover:bg-emerald-400 border-2 border-black disabled:opacity-40 font-black transition shadow-md flex items-center justify-center flex-shrink-0"
+              className="p-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-40 text-white font-bold transition shadow-xs flex items-center justify-center flex-shrink-0"
               title="Send question"
             >
-              <Send size={20} />
+              <Send size={16} />
             </button>
           </div>
         </form>
