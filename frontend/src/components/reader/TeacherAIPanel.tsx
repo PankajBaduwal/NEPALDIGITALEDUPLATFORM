@@ -27,9 +27,8 @@ import {
   BookmarkCheck,
   Layers,
   GraduationCap,
-  Calculator,
-  MessageSquareQuote,
-  HelpCircleIcon,
+  Scale,
+  CheckSquare,
 } from 'lucide-react';
 import { api } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
@@ -167,50 +166,149 @@ function getChapterQuestions(
   page?: number
 ): string[] {
   const tLower = (chapterTitle || '').toLowerCase();
+  const bookLower = (textbook || '').toLowerCase();
 
   // 1. Physics: Rotational Dynamics
-  if (tLower.includes('rotational') || tLower.includes('torque') || tLower.includes('inertia')) {
+  if (tLower.includes('rotational') || tLower.includes('torque') || tLower.includes('inertia') || tLower.includes('gyration')) {
     return [
       `Explain Moment of Inertia and its physical significance with examples (Page ${page || 8})`,
       'Derive relation between Torque and Angular Acceleration (τ = Iα)',
-      'Difference between Moment of Inertia and Radius of Gyration',
-      'State and prove Theorem of Parallel Axes with diagram',
-      'Calculate Rotational Kinetic Energy of a rolling solid cylinder',
-      '3-Minute classroom check on Conservation of Angular Momentum',
+      'Difference between Moment of Inertia and Radius of Gyration in 2 columns',
+      'State and prove Theorem of Parallel Axes with classroom chalkboard diagram',
+      'Calculate Rotational Kinetic Energy of a rolling solid cylinder vs sphere',
+      '3-Minute classroom formative check on Conservation of Angular Momentum',
     ];
   }
 
-  // 2. Physics: Mechanics / Fluid / Waves
-  if (tLower.includes('fluid') || tLower.includes('mechanic') || tLower.includes('wave') || tLower.includes('motion')) {
+  // 2. Physics: Recent Trends in Physics (Grade 12 Physics Ch. 25)
+  if (tLower.includes('recent trend') || tLower.includes('nanotech') || tLower.includes('superconduct') || tLower.includes('seismology') || tLower.includes('medical physics')) {
     return [
-      `Key formulas and step-by-step principles on Page ${page || 1}`,
-      `Difference between key concepts in ${chapterTitle || 'this topic'}`,
-      `Classroom real-world Nepal analogy for ${chapterTitle || 'Mechanics'}`,
-      `40-Minute lesson plan for Chapter ${chapterNum || 1}`,
-      `Bloom's taxonomy question bank with marking scheme for ${chapterTitle || 'this topic'}`,
+      `Core concepts and modern classroom applications of Nanotechnology (Page ${page || 490})`,
+      'Explain Superconductivity, critical temperature, and the Meissner Effect',
+      'Working principle of Photovoltaic Solar Cells and renewable energy in Nepal',
+      'Seismology: Difference between Primary (P) and Secondary (S) earthquake waves',
+      'Medical Physics: Compare working principles of MRI, CT Scan, and Ultrasound',
+      `40-Minute lesson plan for Chapter ${chapterNum || 25}: Recent Trends in Physics`,
     ];
   }
 
-  // 3. Math Chapters
-  if (tLower.includes('matrix') || tLower.includes('vector') || tLower.includes('derivative') || tLower.includes('integration') || tLower.includes('geometry') || textbook.toLowerCase().includes('math')) {
+  // 3. Physics: Wave Motion, Sound & Optics
+  if (tLower.includes('wave') || tLower.includes('optic') || tLower.includes('sound') || tLower.includes('doppler') || tLower.includes('interference') || tLower.includes('diffraction')) {
     return [
-      `Step-by-step worked solution for numerical on Page ${page || 1}`,
-      `Formula breakdown and variable definitions on Page ${page || 1}`,
-      `Difference between concepts in ${chapterTitle || 'this chapter'}`,
-      `Common student mistakes and chalkboard layout for ${chapterTitle || 'this lesson'}`,
-      `5 Practice problems with model solutions for Chapter ${chapterNum || 1}`,
+      `Derive Doppler effect formula when source moves towards stationary observer`,
+      `Explain Young's Double Slit Experiment conditions for constructive & destructive interference (Page ${page || 1})`,
+      'Difference between Interference and Diffraction in 2-column table',
+      'Stationary waves in open vs closed organ pipes and harmonic frequencies',
+      `Classroom demonstration and real-world Nepal analogy for ${chapterTitle || 'Wave Optics'}`,
+      `5 High-yield Bloom's questions with model answers for Chapter ${chapterNum || 1}`,
     ];
   }
 
-  // 4. Default / General Chapter Questions
+  // 4. Physics: Electricity, Magnetism & Electromagnetic Induction
+  if (tLower.includes('electric') || tLower.includes('magnet') || tLower.includes('induction') || tLower.includes('potential') || tLower.includes('current') || tLower.includes('circuit')) {
+    return [
+      `State Kirchhoff's First & Second Laws with chalkboard circuit diagram (Page ${page || 1})`,
+      'Derive expression for Magnetic Field at center of circular coil (Biot-Savart Law)',
+      'Working principle and sensitivity of Moving Coil Galvanometer',
+      'State Faraday\'s laws and Lenz\'s law of Electromagnetic Induction with examples',
+      'Series LCR AC Circuit: Derive impedance, resonance frequency, and power factor',
+      `40-Minute classroom lesson plan and student activities for ${chapterTitle || 'Electromagnetism'}`,
+    ];
+  }
+
+  // 5. Physics: Modern Physics, Atoms & Nuclear
+  if (tLower.includes('photoelectric') || tLower.includes('bohr') || tLower.includes('nuclear') || tLower.includes('radioactiv') || tLower.includes('semiconductor') || tLower.includes('diode')) {
+    return [
+      `Explain Einstein's Photoelectric Equation and stopping potential (Page ${page || 1})`,
+      'Postulates of Bohr\'s Atomic Model and derivation of radius of hydrogen atom',
+      'State Radioactive Decay Law and derive relation between Half-Life and Decay Constant',
+      'Forward and Reverse Biased Characteristics of p-n Junction Diode with circuit diagram',
+      'Full Wave Bridge Rectifier: Working principle and input/output waveforms',
+      `Bloom's taxonomy question bank (Knowledge, Understanding, Numerical) for ${chapterTitle || 'Modern Physics'}`,
+    ];
+  }
+
+  // 6. Physics: Mechanics, SHM & Fluid Dynamics
+  if (tLower.includes('fluid') || tLower.includes('mechanic') || tLower.includes('shm') || tLower.includes('harmonic') || tLower.includes('bernoulli') || tLower.includes('surface tension')) {
+    return [
+      `State and prove Bernoulli's Theorem with fluid flow diagram (Page ${page || 1})`,
+      'Derive expression for time period of Simple Harmonic Motion of simple pendulum',
+      'Explain Surface Tension and derive excess pressure inside liquid drop and soap bubble',
+      'Stokes\' Law and derivation of Terminal Velocity of a spherical ball in viscous fluid',
+      `Real-world Nepal application (hydropower/bridges) for ${chapterTitle || 'Mechanics'}`,
+      `Chalkboard summary notes and key formulas for Chapter ${chapterNum || 1}`,
+    ];
+  }
+
+  // 7. Mathematics: Calculus (Derivatives, Integrals, Limits)
+  if (tLower.includes('derivative') || tLower.includes('different') || tLower.includes('integr') || tLower.includes('calculus') || tLower.includes('limit')) {
+    return [
+      `Step-by-step worked solution for key problem on Page ${page || 1}`,
+      'First Principle Derivative: Derive derivative of trigonometric function step-by-step',
+      'Application of Derivatives: Finding Maxima and Minima with second derivative test',
+      'Integration by Parts formula and model worked example',
+      'Definite Integrals: Area enclosed between two curves with coordinate sketch',
+      `Common student misconceptions and chalkboard board plan for ${chapterTitle || 'Calculus'}`,
+    ];
+  }
+
+  // 8. Mathematics: Matrices, Vectors, Coordinate Geometry & Algebra
+  if (tLower.includes('matrix') || tLower.includes('vector') || tLower.includes('determinant') || tLower.includes('geometry') || tLower.includes('conic') || tLower.includes('trigonometr') || bookLower.includes('math')) {
+    return [
+      `Step-by-step numerical solution for problem on Page ${page || 1}`,
+      'Matrix Inversion Method vs Cramer\'s Rule for solving system of linear equations',
+      'Vector Product (Cross Product) properties and physical applications',
+      'Condition for perpendicular and parallel pair of straight lines through origin',
+      'Standard equation and focal properties of Parabola / Ellipse with diagram',
+      `5 Practice problems with marking scheme for Chapter ${chapterNum || 1}`,
+    ];
+  }
+
+  // 9. Chemistry: Chemical Bonding, Periodic, States of Matter & Organic
+  if (bookLower.includes('chem') || tLower.includes('reaction') || tLower.includes('bond') || tLower.includes('organic') || tLower.includes('acid') || tLower.includes('electrochem')) {
+    return [
+      `Core chemical principles and reaction mechanism on Page ${page || 1}`,
+      'VSEPR Theory: Predict geometry and bond angles of covalent molecules with diagrams',
+      'Le Chatelier\'s Principle: Effect of temperature, pressure, and concentration on equilibrium',
+      'Electrochemical Cell vs Electrolytic Cell in a 2-column comparison table',
+      'Organic Reaction Mechanism: SN1 vs SN2 nucleophilic substitution step-by-step',
+      `40-Minute lesson plan with low-cost laboratory demonstration for ${chapterTitle || 'Chemistry'}`,
+    ];
+  }
+
+  // 10. Biology: Cell, Genetics, Physiology & Ecology
+  if (bookLower.includes('bio') || tLower.includes('cell') || tLower.includes('genetic') || tLower.includes('plant') || tLower.includes('animal') || tLower.includes('organism')) {
+    return [
+      `Core biological concept and anatomical diagram on Page ${page || 1}`,
+      'Mitosis vs Meiosis cell division: Differences, stages, and chromosome numbers',
+      'Mendel\'s Laws of Inheritance with monohybrid and dihybrid cross Punnett squares',
+      'Light Reaction vs Dark Reaction (Calvin Cycle) in photosynthesis',
+      'Classroom diagram: Human heart / kidney structure with chalkboard labeling guide',
+      `Bloom's taxonomy question bank for ${chapterTitle || 'Biology'} with grading rubric`,
+    ];
+  }
+
+  // 11. School Level Science (Grades 1–10)
+  if (bookLower.includes('science') || tLower.includes('force') || tLower.includes('energy') || tLower.includes('light') || tLower.includes('living')) {
+    return [
+      `Explain core scientific concepts on Page ${page || 1} in simple student-friendly language`,
+      `Difference between key terms in ${chapterTitle || 'this unit'} in 2 columns`,
+      `Hands-on classroom activity using low-cost materials available in Nepal`,
+      `40-Minute structured classroom lesson plan for Chapter ${chapterNum || 1}`,
+      `Bloom's questions (Knowledge, Understanding, Application) with answer key`,
+      `Relatable Nepal real-world analogy and daily life connection for Page ${page || 1}`,
+    ];
+  }
+
+  // 12. Default / General Chapter Questions
   const chLabel = chapterTitle ? `"${chapterTitle}"` : `Chapter ${chapterNum || 1}`;
   return [
     `Explain core concepts and pedagogical breakdown of Page ${page || 1}`,
-    `Difference between key terms in ${chLabel}`,
+    `Difference between key concepts in ${chLabel} in a 2-column table`,
     `40-Minute structured classroom lesson plan for ${chLabel}`,
-    `Bloom's taxonomy questions (Knowledge, Understanding, Application) for ${chLabel}`,
-    `Classroom chalkboard notes and diagrams for ${chLabel}`,
-    `Real-world Nepal analogy and classroom activity for Page ${page || 1}`,
+    `Bloom's taxonomy questions (Knowledge, Understanding, Application) with answers for ${chLabel}`,
+    `Recommended chalkboard notes and diagrams for teaching ${chLabel}`,
+    `Relatable Nepal cultural analogy and interactive student activity for Page ${page || 1}`,
   ];
 }
 
@@ -250,7 +348,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
     setTimeout(() => setToastMessage(null), 3000);
   }, []);
 
-  // Compute smart recommended chapter questions
+  // Compute smart recommended chapter questions dynamically
   const recommendedQuestions = useMemo(() => {
     return getChapterQuestions(
       textbookTitle,
@@ -525,7 +623,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
       className={`fixed transition-all duration-300 font-sans text-slate-900 bg-[#f8fafc] ${
         isFullScreen
           ? 'inset-0 z-[100] w-full h-full flex flex-col'
-          : 'inset-y-0 right-0 z-[60] w-[480px] md:w-[520px] lg:w-[580px] border-l border-slate-200 flex flex-col shadow-2xl'
+          : 'inset-y-0 right-0 z-[60] w-[490px] md:w-[540px] lg:w-[600px] border-l border-slate-200 flex flex-col shadow-2xl'
       }`}
     >
       {/* Toast Notification Banner */}
@@ -562,7 +660,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
               {currentChapter && (
                 <>
                   <span>•</span>
-                  <span className="truncate max-w-[130px] text-slate-700">
+                  <span className="truncate max-w-[140px] text-slate-700">
                     Ch. {currentChapter.chapterNumber}: {currentChapter.title}
                   </span>
                 </>
@@ -726,7 +824,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
       {/* 3. Pedagogical Actions Bar (Compact & Expandable) */}
       <div className="bg-white border-b border-slate-200 flex-shrink-0 shadow-2xs">
         <div className="px-4 py-2 flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 flex-wrap">
             <button
               type="button"
               onClick={() => {
@@ -736,10 +834,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
               className={`px-3 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'core' && actionsExpanded
                   ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
-                  : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
+                  : 'bg-slate-100 text-slate-800 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <BookOpen size={13} />
+              <BookOpen size={13} className={activeCategory === 'core' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
               <span>Core Teaching</span>
             </button>
 
@@ -752,10 +850,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
               className={`px-3 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'activities' && actionsExpanded
                   ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
-                  : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
+                  : 'bg-slate-100 text-slate-800 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <HelpCircle size={13} />
+              <HelpCircle size={13} className={activeCategory === 'activities' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
               <span>Activities & Tests</span>
             </button>
 
@@ -768,10 +866,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
               className={`px-3 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'delivery' && actionsExpanded
                   ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
-                  : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
+                  : 'bg-slate-100 text-slate-800 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <Presentation size={13} />
+              <Presentation size={13} className={activeCategory === 'delivery' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
               <span>Board & Delivery</span>
             </button>
           </div>
@@ -899,7 +997,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                   className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <Check size={14} className="text-emerald-700" />
+                    <CheckSquare size={14} className="text-emerald-700" />
                     <span>3-Question Check</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -977,29 +1075,101 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
       {/* 4. Messages / Response Body */}
       <div
         ref={scrollRef}
-        className={`flex-1 overflow-y-auto p-4 md:p-6 space-y-5 bg-[#f8fafc] ${
+        className={`flex-1 overflow-y-auto p-4 md:p-6 space-y-5 bg-[#f8fafc] pb-14 ${
           isFullScreen ? 'max-w-4xl mx-auto w-full' : 'w-full'
         }`}
       >
         {messages.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center p-4 text-center">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs mb-3">
-              <GraduationCap size={32} />
+          <div className="flex flex-col items-center justify-center p-2 text-center">
+            {/* Header / Intro Card */}
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs mb-2.5">
+              <GraduationCap size={28} />
             </div>
             <h3 className="text-base font-extrabold text-slate-900 mb-1 tracking-tight">
               Classroom Teaching Assistant
             </h3>
-            <p className="text-xs max-w-md leading-relaxed text-slate-600 mb-5">
-              Instant curriculum guidance, 2-column concept comparisons, step-by-step calculations, and lesson prep aligned with Nepal CDC syllabus.
+            <p className="text-xs max-w-md leading-relaxed text-slate-600 mb-4">
+              Ask any pedagogical question, compare concepts in 2 columns, generate Bloom's questions, or step-by-step calculations aligned with Nepal CDC curriculum.
             </p>
 
+            {/* Quick 4 Starter Tiles (Clean 2x2 grid in split view, 4x1 grid in fullscreen) */}
+            <div className="w-full max-w-xl grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+              <button
+                type="button"
+                onClick={() => handleAsk('EXPLAIN_PAGE')}
+                className="p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 group-hover:scale-105 transition-transform">
+                    <FileText size={15} />
+                  </div>
+                  <ArrowRight size={13} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">Explain Page {currentPage}</div>
+                  <div className="text-[10px] text-slate-500 font-medium">Core concepts & notes</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleAsk('LESSON_PLAN')}
+                className="p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <div className="p-1.5 rounded-lg bg-blue-50 text-blue-800 border border-blue-200 group-hover:scale-105 transition-transform">
+                    <FileCheck size={15} />
+                  </div>
+                  <ArrowRight size={13} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">45-Min Lesson Plan</div>
+                  <div className="text-[10px] text-slate-500 font-medium">Objectives & activities</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleAsk('CUSTOM_QUESTION', `Generate a 2-column comparison table of the key differences in concepts on Page ${currentPage}`)}
+                className="p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <div className="p-1.5 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 group-hover:scale-105 transition-transform">
+                    <Scale size={15} />
+                  </div>
+                  <ArrowRight size={13} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">2-Column Comparison</div>
+                  <div className="text-[10px] text-slate-500 font-medium">Differences & tabular view</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleAsk('QUESTION_BANK')}
+                className="p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <div className="p-1.5 rounded-lg bg-purple-50 text-purple-800 border border-purple-200 group-hover:scale-105 transition-transform">
+                    <HelpCircle size={15} />
+                  </div>
+                  <ArrowRight size={13} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">Bloom's Quiz</div>
+                  <div className="text-[10px] text-slate-500 font-medium">Knowledge & questions</div>
+                </div>
+              </button>
+            </div>
+
             {/* Smart Chapter-Aware Recommended Questions Section */}
-            <div className="w-full max-w-xl text-left bg-white rounded-2xl border border-slate-200 p-4 shadow-xs">
+            <div className="w-full max-w-xl text-left bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs">
               <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
                 <span className="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
                   <Lightbulb size={15} className="text-amber-500" />
                   <span>
-                    Recommended Questions for {currentChapter ? `Ch. ${currentChapter.chapterNumber}: ${currentChapter.title}` : `Page ${currentPage}`}:
+                    Curriculum Questions for {currentChapter ? `Ch. ${currentChapter.chapterNumber}: ${currentChapter.title}` : `Page ${currentPage}`}:
                   </span>
                 </span>
                 <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">

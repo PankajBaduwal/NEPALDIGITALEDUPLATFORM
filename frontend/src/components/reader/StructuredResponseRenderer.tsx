@@ -5,14 +5,11 @@ import {
   Table,
   CheckCircle2,
   XCircle,
-  HelpCircle,
   Calculator,
   BookOpen,
   Sparkles,
   Lightbulb,
-  FileCheck,
   Award,
-  ArrowRight,
 } from 'lucide-react';
 
 interface StructuredResponseRendererProps {
@@ -30,7 +27,7 @@ function escapeHtml(text: string): string {
     .replace(/'/g, '&#039;');
 }
 
-/** Render KaTeX expressions safely */
+/** Render KaTeX expressions cleanly without clunky button boxes */
 function renderMath(text: string): string {
   if (!text) return '';
 
@@ -41,7 +38,7 @@ function renderMath(text: string): string {
         displayMode: true,
         throwOnError: false,
       });
-      return `<div class="katex-display-box my-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-center font-mono overflow-x-auto text-[#0f172a] font-bold text-sm shadow-xs">${rendered}</div>`;
+      return `<div class="katex-display-box my-3.5 p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-center font-mono overflow-x-auto text-[#0f172a] font-bold text-sm shadow-2xs">${rendered}</div>`;
     } catch {
       return `<pre class="p-2.5 rounded-lg bg-slate-100 text-[#0f172a] text-xs font-mono font-semibold border border-slate-200">${escapeHtml(expr)}</pre>`;
     }
@@ -54,7 +51,8 @@ function renderMath(text: string): string {
         displayMode: false,
         throwOnError: false,
       });
-      return `<span class="katex-inline-box px-1.5 py-0.5 rounded bg-slate-100 text-[#0f172a] font-mono font-bold text-[12px] border border-slate-200">${rendered}</span>`;
+      // Render clean, natural mathematical typography with subtle padding, not a clunky button box
+      return `<span class="katex-inline-box px-1 py-0.5 mx-0.5 rounded bg-slate-100 text-[#0f172a] font-mono font-semibold text-[13px] border border-slate-200/70 inline-flex items-center align-baseline">${rendered}</span>`;
     } catch {
       return `<code class="px-1 py-0.5 rounded bg-slate-100 text-[#0f172a] text-xs font-semibold">${escapeHtml(expr)}</code>`;
     }
@@ -68,14 +66,14 @@ function formatInlineMarkdown(text: string): string {
   if (!text) return '';
   let str = text;
 
-  // Bold text: deep black font-bold
-  str = str.replace(/\*\*(.*?)\*\*/g, '<strong class="font-extrabold text-[#0f172a] bg-amber-50/90 px-1 py-0.5 rounded border-b border-amber-300">$1</strong>');
+  // Clean bold text: pure dark black extra bold without heavy distracting background
+  str = str.replace(/\*\*(.*?)\*\*/g, '<strong class="font-extrabold text-[#0f172a]">$1</strong>');
   // Italics
   str = str.replace(/\*([^*]+)\*/g, '<em class="italic text-[#1e293b] font-medium">$1</em>');
   // Inline code
   str = str.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-100 text-[#0f172a] font-mono text-[11px] font-bold border border-slate-200">$1</code>');
   // Citations [p. 16] or [पेज १६]
-  str = str.replace(/\[(p\.\s*[\d,\s\-]+|पेज\s*[\d०-९,\s\-]+|Page\s*[\d,\s\-]+)\]/gi, '<span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 font-bold text-[10px] border border-emerald-300 shadow-2xs">$1</span>');
+  str = str.replace(/\[(p\.\s*[\d,\s\-]+|पेज\s*[\d०-९,\s\-]+|Page\s*[\d,\s\-]+)\]/gi, '<span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-950 font-bold text-[10px] border border-emerald-300 shadow-2xs">$1</span>');
 
   return str;
 }
@@ -182,7 +180,7 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
     const isComparison = rawHeader.length >= 2;
 
     return (
-      <div key={`table-${index}`} className="my-4 rounded-xl border border-slate-200 bg-white overflow-hidden shadow-xs">
+      <div key={`table-${index}`} className="my-4 rounded-xl border border-slate-200 bg-white overflow-hidden shadow-2xs">
         <div className="bg-slate-50 px-3.5 py-2.5 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Table size={15} className="text-emerald-700" />
@@ -190,7 +188,7 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
               {isComparison ? 'Concept Comparison (तुलना / भिन्नता)' : 'Structured Table'}
             </span>
           </div>
-          <span className="text-[10px] font-bold text-[#334155] bg-white px-2 py-0.5 rounded-full border border-slate-200">
+          <span className="text-[10px] font-bold text-slate-700 bg-white px-2 py-0.5 rounded border border-slate-200">
             {rawHeader.length} Columns
           </span>
         </div>
@@ -286,32 +284,28 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return (
               <div
                 key={idx}
-                className={`mt-3.5 mb-1.5 flex items-center gap-2 font-bold text-xs ${
+                className={`mt-4 mb-2 flex items-center gap-2 font-bold text-xs md:text-sm ${
                   isNumericalStep
-                    ? 'p-2 rounded-lg bg-emerald-50 text-emerald-950 border border-emerald-200'
+                    ? 'p-2.5 rounded-xl bg-emerald-50/80 text-emerald-950 border border-emerald-200 shadow-2xs'
                     : isAdvantage
-                    ? 'p-2 rounded-lg bg-emerald-50 text-emerald-950 border border-emerald-200'
+                    ? 'p-2.5 rounded-xl bg-emerald-50/80 text-emerald-950 border border-emerald-200 shadow-2xs'
                     : isDisadvantage
-                    ? 'p-2 rounded-lg bg-rose-50 text-rose-950 border border-rose-200'
-                    : isSimpleExpl
-                    ? 'text-emerald-800 uppercase tracking-wide border-b border-emerald-200 pb-1'
-                    : isKeyChar
-                    ? 'text-blue-800 uppercase tracking-wide border-b border-blue-200 pb-1'
-                    : isClassroomEx
-                    ? 'text-amber-800 uppercase tracking-wide border-b border-amber-200 pb-1'
-                    : 'text-[#0f172a] uppercase tracking-wide border-b border-slate-200 pb-1'
+                    ? 'p-2.5 rounded-xl bg-rose-50/80 text-rose-950 border border-rose-200 shadow-2xs'
+                    : 'text-[#0f172a] uppercase tracking-wide border-b border-slate-200 pb-1 pt-1.5'
                 }`}
               >
                 {isNumericalStep ? (
-                  <Calculator size={14} className="text-emerald-700" />
+                  <Calculator size={15} className="text-emerald-700" />
                 ) : isAdvantage ? (
-                  <CheckCircle2 size={14} className="text-emerald-700" />
+                  <CheckCircle2 size={15} className="text-emerald-700" />
                 ) : isDisadvantage ? (
-                  <XCircle size={14} className="text-rose-700" />
+                  <XCircle size={15} className="text-rose-700" />
                 ) : isClassroomEx ? (
-                  <Lightbulb size={14} className="text-amber-700" />
+                  <Lightbulb size={15} className="text-amber-600" />
+                ) : isKeyChar ? (
+                  <Sparkles size={15} className="text-blue-600" />
                 ) : (
-                  <BookOpen size={14} className="text-emerald-700" />
+                  <BookOpen size={15} className="text-emerald-700" />
                 )}
                 <span dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.title)) }} />
               </div>
@@ -322,7 +316,7 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return (
               <div
                 key={idx}
-                className="my-3 p-3.5 rounded-xl bg-emerald-50/70 border-l-4 border-emerald-600 text-[#0f172a] shadow-2xs flex items-start gap-2.5 border border-emerald-200/80"
+                className="my-3 p-3.5 rounded-xl bg-emerald-50/60 border-l-4 border-emerald-600 text-[#0f172a] shadow-2xs flex items-start gap-3 border border-emerald-200/70"
               >
                 <Lightbulb size={18} className="text-emerald-700 flex-shrink-0 mt-0.5" />
                 <div
@@ -337,7 +331,7 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
               <div key={idx} className="flex items-start gap-2.5 my-1.5 ml-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-700 mt-2 flex-shrink-0" />
                 <div
-                  className="leading-relaxed text-[#0f172a] font-normal"
+                  className="leading-relaxed text-[#0f172a] font-normal text-xs md:text-sm"
                   dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.content)) }}
                 />
               </div>
@@ -347,13 +341,13 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return (
               <div
                 key={idx}
-                className="flex items-start gap-3 my-2 p-2.5 rounded-xl bg-white border border-slate-200 shadow-2xs"
+                className="flex items-start gap-3 my-2.5 p-3 rounded-xl bg-slate-50/70 border border-slate-200/80 shadow-2xs"
               >
-                <div className="w-6 h-6 rounded-md bg-emerald-700 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs">
+                <div className="w-6 h-6 rounded-lg bg-emerald-700 text-white font-extrabold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs">
                   {block.number}
                 </div>
                 <div
-                  className="leading-relaxed text-[#0f172a] font-normal flex-1"
+                  className="leading-relaxed text-[#0f172a] font-medium flex-1 text-xs md:text-sm"
                   dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.content)) }}
                 />
               </div>
@@ -370,7 +364,7 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return (
               <div
                 key={idx}
-                className="my-2 leading-relaxed text-[#0f172a] font-normal"
+                className="my-2 leading-relaxed text-[#0f172a] font-normal text-xs md:text-sm"
                 dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.content)) }}
               />
             );
