@@ -1,4 +1,5 @@
 import React, { lazy } from 'react';
+import { findClass7Sim } from '../class7-math/registry';
 
 /** Class 6 Mathematics · lessons 1–20 of "Mathematics, Grade 6". Loaded only when a child opens one. Looked up by `componentKey` or `code`. */
 type Comp = React.ComponentType<{ onBackToLibrary: () => void; userRole?: string }>;
@@ -39,4 +40,4 @@ export const CLASS6_MATH: { code: string; key: string; titleEn: string; titleNp:
 ];
 
 export const findClass6Sim = (componentKey?: string, code?: string) =>
-  CLASS6_MATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code));
+  CLASS6_MATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code)) || findClass7Sim(componentKey, code);
