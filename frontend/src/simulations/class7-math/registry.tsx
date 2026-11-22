@@ -472,6 +472,65 @@ export const CLASS7_MATH = [
     titleNp: 'समतलीय आकृतिहरूको खोज तथा चुनौती',
     Component: L(() => import('./PlaneFiguresDiscoveryChallenge'), 'PlaneFiguresDiscoveryChallenge'),
   },
+  // ── LESSON 15: CONGRUENT FIGURES (अनुरूप आकृतिहरू) ────────────
+  {
+    code: 'SIM-MATH-G7-L15-01',
+    key: 'class7-math-l15-congruent-discovery',
+    lesson: 15,
+    titleEn: 'Congruent Figure Discovery Lab',
+    titleNp: 'अनुरूप आकृति खोजी प्रयोगशाला',
+    Component: L(() => import('./CongruentFigureDiscoveryLab'), 'CongruentFigureDiscoveryLab'),
+  },
+  {
+    code: 'SIM-MATH-G7-L15-02',
+    key: 'class7-math-l15-congruence-measurement',
+    lesson: 15,
+    titleEn: 'Congruence Measurement Studio',
+    titleNp: 'अनुरूपता नाप तथा चुनौती स्टुडियो',
+    Component: L(() => import('./CongruenceMeasurementStudio'), 'CongruenceMeasurementStudio'),
+  },
+  // ── LESSON 16: SOLID OBJECTS (ठोस वस्तुहरू) ────────────
+  {
+    code: 'SIM-MATH-G7-L16-01',
+    key: 'class7-math-l16-solid-objects-3d',
+    lesson: 16,
+    titleEn: '3D Solid Object Explorer',
+    titleNp: '३D ठोस वस्तु अन्वेषक',
+    Component: L(() => import('./SolidObjectExplorer3D'), 'SolidObjectExplorer3D'),
+  },
+  {
+    code: 'SIM-MATH-G7-L16-02',
+    key: 'class7-math-l16-polyhedra-euler-3d',
+    lesson: 16,
+    titleEn: "Polyhedra and Euler's Relation",
+    titleNp: 'बहुफलक र यूलरको सम्बन्ध प्रयोगशाला',
+    Component: L(() => import('./PolyhedraEulerRelationLab'), 'PolyhedraEulerRelationLab'),
+  },
+  {
+    code: 'SIM-MATH-G7-L16-03',
+    key: 'class7-math-l16-cone-cylinder-3d',
+    lesson: 16,
+    titleEn: 'Cone and Cylinder Discovery Lab',
+    titleNp: 'सोली र बेलना खोजी प्रयोगशाला',
+    Component: L(() => import('./ConeCylinderDiscoveryLab'), 'ConeCylinderDiscoveryLab'),
+  },
+  // ── LESSON 17: COORDINATES (निर्देशाङ्कहरू) ────────────
+  {
+    code: 'SIM-MATH-G7-L17-01',
+    key: 'class7-math-l17-coordinate-playground',
+    lesson: 17,
+    titleEn: 'Coordinate Plane Playground',
+    titleNp: 'निर्देशाङ्क समतल र बिन्दु अङ्कन खेलमैदान',
+    Component: L(() => import('./CoordinatePlanePlayground'), 'CoordinatePlanePlayground'),
+  },
+  {
+    code: 'SIM-MATH-G7-L17-02',
+    key: 'class7-math-l17-coordinate-builder',
+    lesson: 17,
+    titleEn: 'Coordinate Geometry Builder',
+    titleNp: 'निर्देशाङ्क ज्यामिति र आकृति निर्माण',
+    Component: L(() => import('./CoordinateGeometryBuilder'), 'CoordinateGeometryBuilder'),
+  },
   // ── LESSON 18: SYMMETRY AND TESSELLATION (सममिति र टेसलेसन) ────────────
   {
     code: 'SIM-MATH-G7-L18-01',
