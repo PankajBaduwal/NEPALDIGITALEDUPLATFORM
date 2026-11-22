@@ -114,6 +114,93 @@ export const CLASS8_MATH = [
     titleNp: 'समानुपात र अज्ञात मान प्रयोगशाला',
     Component: L(() => import('./ProportionUnknownValueLab'), 'ProportionUnknownValueLab'),
   },
+
+  // ── UNIT 5: PROFIT AND LOSS (नाफा र नोक्सान) ──────────────────────────
+  {
+    code: 'SIM-MATH-G8-U5-01',
+    key: 'class8-math-u5-profit-loss-marketplace',
+    lesson: 5,
+    unit: 5,
+    titleEn: 'Profit and Loss Interactive Marketplace',
+    titleNp: 'नाफा र नोक्सान अन्तरक्रियात्मक बजार',
+    Component: L(() => import('./ProfitLossMarketplace'), 'ProfitLossMarketplace'),
+  },
+  {
+    code: 'SIM-MATH-G8-U5-02',
+    key: 'class8-math-u5-discount-smart-shopping',
+    lesson: 5,
+    unit: 5,
+    titleEn: 'Discount and Smart Shopping Lab',
+    titleNp: 'छुट र किनमेल प्रयोगशाला',
+    Component: L(() => import('./DiscountSmartShoppingLab'), 'DiscountSmartShoppingLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U5-03',
+    key: 'class8-math-u5-business-profit-loss',
+    lesson: 5,
+    unit: 5,
+    titleEn: 'Business Profit and Loss Challenge',
+    titleNp: 'व्यापारिक नाफा-नोक्सान चुनौती',
+    Component: L(() => import('./BusinessProfitLossChallenge'), 'BusinessProfitLossChallenge'),
+  },
+
+  // ── UNIT 6: UNITARY METHOD (एकाइ विधि) ────────────────────────────────
+  {
+    code: 'SIM-MATH-G8-U6-01',
+    key: 'class8-math-u6-direct-variation-lab',
+    lesson: 6,
+    unit: 6,
+    titleEn: 'Direct Variation Discovery Lab',
+    titleNp: 'प्रत्यक्ष विचरण अन्वेषण प्रयोगशाला',
+    Component: L(() => import('./DirectVariationDiscoveryLab'), 'DirectVariationDiscoveryLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U6-02',
+    key: 'class8-math-u6-indirect-variation-work-time',
+    lesson: 6,
+    unit: 6,
+    titleEn: 'Indirect Variation and Work-Time Lab',
+    titleNp: 'अप्रत्यक्ष विचरण र कार्य-समय प्रयोगशाला',
+    Component: L(() => import('./IndirectVariationWorkTimeLab'), 'IndirectVariationWorkTimeLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U6-03',
+    key: 'class8-math-u6-unitary-real-life-solver',
+    lesson: 6,
+    unit: 6,
+    titleEn: 'Real-Life Unitary Method Solver & Arrow Method',
+    titleNp: 'व्यावहारिक एकाइ विधि र तीर विधि',
+    Component: L(() => import('./UnitaryMethodRealLifeSolver'), 'UnitaryMethodRealLifeSolver'),
+  },
+
+  // ── UNIT 7: SIMPLE INTEREST (साधारण ब्याज) ────────────────────────────
+  {
+    code: 'SIM-MATH-G8-U7-01',
+    key: 'class8-math-u7-simple-interest-banking',
+    lesson: 7,
+    unit: 7,
+    titleEn: 'Simple Interest Banking Playground',
+    titleNp: 'साधारण ब्याज र बैंकिङ खेलमैदान',
+    Component: L(() => import('./SimpleInterestBankingPlayground'), 'SimpleInterestBankingPlayground'),
+  },
+  {
+    code: 'SIM-MATH-G8-U7-02',
+    key: 'class8-math-u7-simple-interest-formula-unknown',
+    lesson: 7,
+    unit: 7,
+    titleEn: 'Simple Interest Formula & Unknown Variables Lab',
+    titleNp: 'साधारण ब्याज सूत्र र अज्ञात मान प्रयोगशाला',
+    Component: L(() => import('./SimpleInterestFormulaUnknownLab'), 'SimpleInterestFormulaUnknownLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U7-03',
+    key: 'class8-math-u7-amount-tax-banking',
+    lesson: 7,
+    unit: 7,
+    titleEn: 'Total Amount, Interest Tax & Banking Challenge',
+    titleNp: 'मिश्रधन, ब्याज कर र बैंकिङ चुनौती',
+    Component: L(() => import('./AmountTaxBankingChallenge'), 'AmountTaxBankingChallenge'),
+  },
 ];
 
 export const findClass8Sim = (componentKey?: string, code?: string) =>
