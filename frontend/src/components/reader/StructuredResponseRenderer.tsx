@@ -10,11 +10,18 @@ import {
   Sparkles,
   Lightbulb,
   Award,
+  Bookmark,
+  Target,
+  FileQuestion,
+  HelpCircle,
+  Layers,
+  ArrowRight,
 } from 'lucide-react';
 
 interface StructuredResponseRendererProps {
   content: string;
   showToClass?: boolean;
+  onJumpToPage?: (page: number) => void;
 }
 
 /** Sanitize raw text to prevent XSS while allowing KaTeX */
@@ -38,9 +45,9 @@ function renderMath(text: string): string {
         displayMode: true,
         throwOnError: false,
       });
-      return `<div class="katex-display-box my-3.5 p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-center font-mono overflow-x-auto text-[#0f172a] font-bold text-sm shadow-2xs">${rendered}</div>`;
+      return `<div class="katex-display-box my-3 p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-center font-mono overflow-x-auto text-slate-900 font-bold text-sm shadow-2xs">${rendered}</div>`;
     } catch {
-      return `<pre class="p-2.5 rounded-lg bg-slate-100 text-[#0f172a] text-xs font-mono font-semibold border border-slate-200">${escapeHtml(expr)}</pre>`;
+      return `<pre class="p-2.5 rounded-lg bg-slate-100 text-slate-900 text-xs font-mono font-semibold border border-slate-200">${escapeHtml(expr)}</pre>`;
     }
   });
 
@@ -51,10 +58,10 @@ function renderMath(text: string): string {
         displayMode: false,
         throwOnError: false,
       });
-      // Render clean, natural mathematical typography with subtle padding, not a clunky button box
-      return `<span class="katex-inline-box px-1 py-0.5 mx-0.5 rounded bg-slate-100 text-[#0f172a] font-mono font-semibold text-[13px] border border-slate-200/70 inline-flex items-center align-baseline">${rendered}</span>`;
+      // Render clean, natural mathematical typography with subtle padding
+      return `<span class="katex-inline-box px-1.5 py-0.5 mx-0.5 rounded bg-slate-100 text-slate-900 font-mono font-semibold text-[13px] border border-slate-200/80 inline-flex items-center align-baseline">${rendered}</span>`;
     } catch {
-      return `<code class="px-1 py-0.5 rounded bg-slate-100 text-[#0f172a] text-xs font-semibold">${escapeHtml(expr)}</code>`;
+      return `<code class="px-1 py-0.5 rounded bg-slate-100 text-slate-900 text-xs font-semibold">${escapeHtml(expr)}</code>`;
     }
   });
 
@@ -66,14 +73,18 @@ function formatInlineMarkdown(text: string): string {
   if (!text) return '';
   let str = text;
 
-  // Clean bold text: pure dark black extra bold without heavy distracting background
-  str = str.replace(/\*\*(.*?)\*\*/g, '<strong class="font-extrabold text-[#0f172a]">$1</strong>');
+  // Clean bold text
+  str = str.replace(/\*\*(.*?)\*\*/g, '<strong class="font-extrabold text-slate-900">$1</strong>');
   // Italics
-  str = str.replace(/\*([^*]+)\*/g, '<em class="italic text-[#1e293b] font-medium">$1</em>');
+  str = str.replace(/\*([^*]+)\*/g, '<em class="italic text-slate-700 font-medium">$1</em>');
   // Inline code
-  str = str.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-100 text-[#0f172a] font-mono text-[11px] font-bold border border-slate-200">$1</code>');
-  // Citations [p. 16] or [पेज १६]
-  str = str.replace(/\[(p\.\s*[\d,\s\-]+|पेज\s*[\d०-९,\s\-]+|Page\s*[\d,\s\-]+)\]/gi, '<span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-950 font-bold text-[10px] border border-emerald-300 shadow-2xs">$1</span>');
+  str = str.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-100 text-slate-900 font-mono text-[11px] font-bold border border-slate-200">$1</code>');
+  // Citations [p. 16] or [पेज १६] or [p. 6, 8] or p. 6
+  str = str.replace(/\[?(p\.\s*([\d]+(?:,\s*[\d]+|-[\d]+)*)|पेज\s*([\d०-९]+)|Page\s*([\d]+))\]?/gi, (match, fullMatch, pNum1, pNum2, pNum3) => {
+    const pageTarget = pNum1 || pNum2 || pNum3 || '';
+    const numericOnly = pageTarget.match(/\d+/)?.[0] || '';
+    return `<span class="inline-flex items-center gap-0.5 px-2 py-0.5 mx-0.5 rounded-md bg-emerald-50 text-emerald-900 font-bold text-[10px] border border-emerald-300 hover:bg-emerald-100 hover:border-emerald-400 cursor-pointer transition shadow-2xs" data-page="${numericOnly}" title="Click to view textbook page">${fullMatch}</span>`;
+  });
 
   return str;
 }
@@ -81,6 +92,7 @@ function formatInlineMarkdown(text: string): string {
 export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProps> = ({
   content,
   showToClass = false,
+  onJumpToPage,
 }) => {
   // Parse markdown content into semantic blocks
   const blocks = useMemo(() => {
@@ -163,6 +175,21 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
     return parsedBlocks;
   }, [content]);
 
+  // Click delegate for jump-to-page links
+  const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!onJumpToPage) return;
+    const target = (e.target as HTMLElement).closest('[data-page]');
+    if (target) {
+      const pageStr = target.getAttribute('data-page');
+      if (pageStr) {
+        const pageNum = parseInt(pageStr, 10);
+        if (!isNaN(pageNum) && pageNum > 0) {
+          onJumpToPage(pageNum);
+        }
+      }
+    }
+  };
+
   // Render Table Component (Comparison Tables or Multi-column Differences)
   const renderTableBlock = (tableLines: string[], index: number) => {
     if (tableLines.length < 2) return null;
@@ -180,11 +207,11 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
     const isComparison = rawHeader.length >= 2;
 
     return (
-      <div key={`table-${index}`} className="my-4 rounded-xl border border-slate-200 bg-white overflow-hidden shadow-2xs">
-        <div className="bg-slate-50 px-3.5 py-2.5 border-b border-slate-200 flex items-center justify-between">
+      <div key={`table-${index}`} className="my-3.5 rounded-xl border border-slate-200 bg-white overflow-hidden shadow-2xs">
+        <div className="bg-slate-50 px-3.5 py-2 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Table size={15} className="text-emerald-700" />
-            <span className="text-xs font-bold text-[#0f172a] uppercase tracking-wide">
+            <Table size={14} className="text-emerald-700" />
+            <span className="text-xs font-bold text-slate-900 tracking-tight">
               {isComparison ? 'Concept Comparison (तुलना / भिन्नता)' : 'Structured Table'}
             </span>
           </div>
@@ -194,13 +221,13 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs md:text-sm">
+          <table className="w-full text-left border-collapse text-xs">
             <thead>
               <tr className="bg-slate-100/90 border-b border-slate-200">
                 {rawHeader.map((h, i) => (
                   <th
                     key={i}
-                    className="p-3 font-extrabold text-[#0f172a] border-r last:border-r-0 border-slate-200 tracking-tight"
+                    className="p-2.5 font-extrabold text-slate-900 border-r last:border-r-0 border-slate-200 tracking-tight"
                   >
                     <span dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(h)) }} />
                   </th>
@@ -218,7 +245,7 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
                   {row.map((cell, cIdx) => (
                     <td
                       key={cIdx}
-                      className="p-3 text-[#0f172a] font-medium border-r last:border-r-0 border-slate-100 leading-relaxed align-top"
+                      className="p-2.5 text-slate-800 font-medium border-r last:border-r-0 border-slate-100 leading-relaxed align-top"
                     >
                       <div
                         dangerouslySetInnerHTML={{
@@ -238,28 +265,35 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
 
   return (
     <div
-      className={`structured-response-body text-[#0f172a] leading-relaxed transition-all ${
-        showToClass ? 'text-[14px] md:text-[15px]' : 'text-[12.5px] md:text-[13px]'
+      onClick={handleContainerClick}
+      className={`structured-response-body text-slate-900 leading-relaxed transition-all ${
+        showToClass ? 'text-[13.5px] md:text-[14.5px]' : 'text-[12.5px] md:text-[13px]'
       }`}
     >
       {blocks.map((block, idx) => {
         switch (block.type) {
           case 'H1':
             return (
-              <h1
+              <div
                 key={idx}
-                className="text-base md:text-lg font-extrabold text-[#0f172a] mt-4 mb-2 pb-1.5 border-b border-slate-200 flex items-center gap-2"
+                className="mt-3.5 mb-2.5 pb-2 border-b border-slate-200 flex items-start gap-2.5 bg-gradient-to-r from-emerald-50/60 to-transparent p-2.5 rounded-xl border border-emerald-100/80"
               >
-                <Sparkles size={17} className="text-emerald-700 flex-shrink-0" />
-                <span dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.title)) }} />
-              </h1>
+                <div className="p-1 rounded-lg bg-emerald-600 text-white flex-shrink-0 mt-0.5">
+                  <Sparkles size={16} />
+                </div>
+                <div>
+                  <h1 className="text-sm md:text-base font-extrabold text-slate-900 tracking-tight leading-snug">
+                    <span dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.title)) }} />
+                  </h1>
+                </div>
+              </div>
             );
 
           case 'H2':
             return (
               <h2
                 key={idx}
-                className="text-sm md:text-base font-extrabold text-[#0f172a] mt-4 mb-2 pb-1 border-b border-slate-100 flex items-center gap-2"
+                className="text-xs md:text-sm font-extrabold text-slate-900 mt-4 mb-2 pb-1 border-b border-slate-200/90 flex items-center gap-2"
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-600 flex-shrink-0"></span>
                 <span dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.title)) }} />
@@ -280,58 +314,91 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             const isSimpleExpl = titleLower.includes('simple explanation') || titleLower.includes('सरल व्याख्या');
             const isKeyChar = titleLower.includes('key characteristics') || titleLower.includes('विशेषता');
             const isClassroomEx = titleLower.includes('classroom example') || titleLower.includes('उदाहरण');
+            const isLearningObj = titleLower.includes('learning objective') || titleLower.includes('सिकाइ उपलब्धि');
 
             return (
               <div
                 key={idx}
-                className={`mt-4 mb-2 flex items-center gap-2 font-bold text-xs md:text-sm ${
-                  isNumericalStep
-                    ? 'p-2.5 rounded-xl bg-emerald-50/80 text-emerald-950 border border-emerald-200 shadow-2xs'
+                className={`mt-3.5 mb-2 flex items-center gap-2 text-xs md:text-sm font-bold ${
+                  isSimpleExpl
+                    ? 'p-2 rounded-lg bg-emerald-50/80 text-emerald-950 border-l-4 border-emerald-600'
+                    : isKeyChar
+                    ? 'p-2 rounded-lg bg-indigo-50/80 text-indigo-950 border-l-4 border-indigo-600'
+                    : isClassroomEx
+                    ? 'p-2 rounded-lg bg-amber-50/80 text-amber-950 border-l-4 border-amber-500'
+                    : isLearningObj
+                    ? 'p-2 rounded-lg bg-teal-50/80 text-teal-950 border-l-4 border-teal-600'
+                    : isNumericalStep
+                    ? 'p-2 rounded-lg bg-slate-100 text-slate-900 border-l-4 border-slate-600'
                     : isAdvantage
-                    ? 'p-2.5 rounded-xl bg-emerald-50/80 text-emerald-950 border border-emerald-200 shadow-2xs'
+                    ? 'p-2 rounded-lg bg-emerald-50/80 text-emerald-950 border-l-4 border-emerald-500'
                     : isDisadvantage
-                    ? 'p-2.5 rounded-xl bg-rose-50/80 text-rose-950 border border-rose-200 shadow-2xs'
-                    : 'text-[#0f172a] uppercase tracking-wide border-b border-slate-200 pb-1 pt-1.5'
+                    ? 'p-2 rounded-lg bg-rose-50/80 text-rose-950 border-l-4 border-rose-500'
+                    : 'text-slate-900 border-b border-slate-200 pb-1 pt-1 font-extrabold uppercase tracking-wide'
                 }`}
               >
-                {isNumericalStep ? (
-                  <Calculator size={15} className="text-emerald-700" />
-                ) : isAdvantage ? (
-                  <CheckCircle2 size={15} className="text-emerald-700" />
-                ) : isDisadvantage ? (
-                  <XCircle size={15} className="text-rose-700" />
-                ) : isClassroomEx ? (
-                  <Lightbulb size={15} className="text-amber-600" />
+                {isSimpleExpl ? (
+                  <BookOpen size={14} className="text-emerald-700 flex-shrink-0" />
                 ) : isKeyChar ? (
-                  <Sparkles size={15} className="text-blue-600" />
+                  <Sparkles size={14} className="text-indigo-700 flex-shrink-0" />
+                ) : isClassroomEx ? (
+                  <Lightbulb size={14} className="text-amber-600 flex-shrink-0" />
+                ) : isLearningObj ? (
+                  <Target size={14} className="text-teal-700 flex-shrink-0" />
+                ) : isNumericalStep ? (
+                  <Calculator size={14} className="text-slate-700 flex-shrink-0" />
+                ) : isAdvantage ? (
+                  <CheckCircle2 size={14} className="text-emerald-600 flex-shrink-0" />
+                ) : isDisadvantage ? (
+                  <XCircle size={14} className="text-rose-600 flex-shrink-0" />
                 ) : (
-                  <BookOpen size={15} className="text-emerald-700" />
+                  <Bookmark size={14} className="text-emerald-700 flex-shrink-0" />
                 )}
                 <span dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.title)) }} />
               </div>
             );
           }
 
-          case 'CALLOUT':
+          case 'CALLOUT': {
+            const contentLower = block.content.toLowerCase();
+            const isDefinition = contentLower.includes('definition') || contentLower.includes('परिभाषा');
+            const isFormula = contentLower.includes('formula') || contentLower.includes('सूत्र');
+            const isNote = contentLower.includes('note') || contentLower.includes('टिपोट');
+
             return (
               <div
                 key={idx}
-                className="my-3 p-3.5 rounded-xl bg-emerald-50/60 border-l-4 border-emerald-600 text-[#0f172a] shadow-2xs flex items-start gap-3 border border-emerald-200/70"
+                className={`my-2.5 p-3 rounded-xl border text-slate-900 shadow-2xs flex items-start gap-2.5 ${
+                  isDefinition
+                    ? 'bg-emerald-50/70 border-emerald-200/90 border-l-4 border-l-emerald-600'
+                    : isFormula
+                    ? 'bg-amber-50/70 border-amber-200/90 border-l-4 border-l-amber-500'
+                    : isNote
+                    ? 'bg-blue-50/70 border-blue-200/90 border-l-4 border-l-blue-600'
+                    : 'bg-slate-50/80 border-slate-200/90 border-l-4 border-l-emerald-600'
+                }`}
               >
-                <Lightbulb size={18} className="text-emerald-700 flex-shrink-0 mt-0.5" />
+                {isDefinition ? (
+                  <Bookmark size={16} className="text-emerald-700 flex-shrink-0 mt-0.5" />
+                ) : isFormula ? (
+                  <Calculator size={16} className="text-amber-700 flex-shrink-0 mt-0.5" />
+                ) : (
+                  <Lightbulb size={16} className="text-emerald-700 flex-shrink-0 mt-0.5" />
+                )}
                 <div
-                  className="font-medium text-xs md:text-sm leading-relaxed text-[#0f172a]"
+                  className="font-medium text-xs md:text-sm leading-relaxed text-slate-900 flex-1"
                   dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.content)) }}
                 />
               </div>
             );
+          }
 
           case 'BULLET':
             return (
               <div key={idx} className="flex items-start gap-2.5 my-1.5 ml-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-700 mt-2 flex-shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0" />
                 <div
-                  className="leading-relaxed text-[#0f172a] font-normal text-xs md:text-sm"
+                  className="leading-relaxed text-slate-800 font-normal text-xs md:text-sm"
                   dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.content)) }}
                 />
               </div>
@@ -341,13 +408,13 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return (
               <div
                 key={idx}
-                className="flex items-start gap-3 my-2.5 p-3 rounded-xl bg-slate-50/70 border border-slate-200/80 shadow-2xs"
+                className="flex items-start gap-2.5 my-2 p-2.5 rounded-xl bg-slate-50/80 border border-slate-200 shadow-2xs"
               >
-                <div className="w-6 h-6 rounded-lg bg-emerald-700 text-white font-extrabold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs">
+                <div className="w-5 h-5 rounded-md bg-emerald-600 text-white font-extrabold text-[11px] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs">
                   {block.number}
                 </div>
                 <div
-                  className="leading-relaxed text-[#0f172a] font-medium flex-1 text-xs md:text-sm"
+                  className="leading-relaxed text-slate-900 font-medium flex-1 text-xs md:text-sm"
                   dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.content)) }}
                 />
               </div>
@@ -357,14 +424,14 @@ export const StructuredResponseRenderer: React.FC<StructuredResponseRendererProp
             return renderTableBlock(block.lines, idx);
 
           case 'DIVIDER':
-            return <hr key={idx} className="my-4 border-slate-200" />;
+            return <hr key={idx} className="my-3.5 border-slate-200" />;
 
           case 'PARAGRAPH':
           default:
             return (
               <div
                 key={idx}
-                className="my-2 leading-relaxed text-[#0f172a] font-normal text-xs md:text-sm"
+                className="my-1.5 leading-relaxed text-slate-800 font-normal text-xs md:text-sm"
                 dangerouslySetInnerHTML={{ __html: renderMath(formatInlineMarkdown(block.content)) }}
               />
             );

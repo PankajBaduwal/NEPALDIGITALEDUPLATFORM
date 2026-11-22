@@ -29,6 +29,9 @@ import {
   GraduationCap,
   Scale,
   CheckSquare,
+  MessageSquare,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import { api } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
@@ -168,8 +171,31 @@ function getChapterQuestions(
   const tLower = (chapterTitle || '').toLowerCase();
   const bookLower = (textbook || '').toLowerCase();
 
-  // 1. Physics: Rotational Dynamics
-  if (tLower.includes('rotational') || tLower.includes('torque') || tLower.includes('inertia') || tLower.includes('gyration')) {
+  // 1. Grade 7 Mathematics: Lesson 1 - SET (समूह)
+  if (
+    tLower.includes('set') ||
+    tLower.includes('समूह') ||
+    tLower.includes('subset') ||
+    tLower.includes('उपसमूह') ||
+    (bookLower.includes('math') && (tLower.includes('lesson 1') || chapterNum === 1))
+  ) {
+    return [
+      `Explain difference between Finite Set and Infinite Set with textbook examples (Page ${page || 7})`,
+      'Difference between Equal Sets (A = B) and Equivalent Sets (A ~ B) with examples',
+      'Explain Null Set (∅ or { }) with two examples of impossible events from textbook',
+      'Define Universal Set (U) and Subsets with Venn diagram representation',
+      'Difference between Proper Subset (B ⊂ A) and Improper Subset (B ⊆ A)',
+      'Represent set of prime numbers less than 15 in both Listing and Set-builder methods',
+    ];
+  }
+
+  // 2. Physics: Rotational Dynamics
+  if (
+    tLower.includes('rotational') ||
+    tLower.includes('torque') ||
+    tLower.includes('inertia') ||
+    tLower.includes('gyration')
+  ) {
     return [
       `Explain Moment of Inertia and its physical significance with examples (Page ${page || 8})`,
       'Derive relation between Torque and Angular Acceleration (τ = Iα)',
@@ -180,8 +206,14 @@ function getChapterQuestions(
     ];
   }
 
-  // 2. Physics: Recent Trends in Physics (Grade 12 Physics Ch. 25)
-  if (tLower.includes('recent trend') || tLower.includes('nanotech') || tLower.includes('superconduct') || tLower.includes('seismology') || tLower.includes('medical physics')) {
+  // 3. Physics: Recent Trends in Physics (Grade 12 Physics Ch. 25)
+  if (
+    tLower.includes('recent trend') ||
+    tLower.includes('nanotech') ||
+    tLower.includes('superconduct') ||
+    tLower.includes('seismology') ||
+    tLower.includes('medical physics')
+  ) {
     return [
       `Core concepts and modern classroom applications of Nanotechnology (Page ${page || 490})`,
       'Explain Superconductivity, critical temperature, and the Meissner Effect',
@@ -192,8 +224,15 @@ function getChapterQuestions(
     ];
   }
 
-  // 3. Physics: Wave Motion, Sound & Optics
-  if (tLower.includes('wave') || tLower.includes('optic') || tLower.includes('sound') || tLower.includes('doppler') || tLower.includes('interference') || tLower.includes('diffraction')) {
+  // 4. Physics: Wave Motion, Sound & Optics
+  if (
+    tLower.includes('wave') ||
+    tLower.includes('optic') ||
+    tLower.includes('sound') ||
+    tLower.includes('doppler') ||
+    tLower.includes('interference') ||
+    tLower.includes('diffraction')
+  ) {
     return [
       `Derive Doppler effect formula when source moves towards stationary observer`,
       `Explain Young's Double Slit Experiment conditions for constructive & destructive interference (Page ${page || 1})`,
@@ -204,8 +243,15 @@ function getChapterQuestions(
     ];
   }
 
-  // 4. Physics: Electricity, Magnetism & Electromagnetic Induction
-  if (tLower.includes('electric') || tLower.includes('magnet') || tLower.includes('induction') || tLower.includes('potential') || tLower.includes('current') || tLower.includes('circuit')) {
+  // 5. Physics: Electricity, Magnetism & Electromagnetic Induction
+  if (
+    tLower.includes('electric') ||
+    tLower.includes('magnet') ||
+    tLower.includes('induction') ||
+    tLower.includes('potential') ||
+    tLower.includes('current') ||
+    tLower.includes('circuit')
+  ) {
     return [
       `State Kirchhoff's First & Second Laws with chalkboard circuit diagram (Page ${page || 1})`,
       'Derive expression for Magnetic Field at center of circular coil (Biot-Savart Law)',
@@ -216,8 +262,15 @@ function getChapterQuestions(
     ];
   }
 
-  // 5. Physics: Modern Physics, Atoms & Nuclear
-  if (tLower.includes('photoelectric') || tLower.includes('bohr') || tLower.includes('nuclear') || tLower.includes('radioactiv') || tLower.includes('semiconductor') || tLower.includes('diode')) {
+  // 6. Physics: Modern Physics, Atoms & Nuclear
+  if (
+    tLower.includes('photoelectric') ||
+    tLower.includes('bohr') ||
+    tLower.includes('nuclear') ||
+    tLower.includes('radioactiv') ||
+    tLower.includes('semiconductor') ||
+    tLower.includes('diode')
+  ) {
     return [
       `Explain Einstein's Photoelectric Equation and stopping potential (Page ${page || 1})`,
       'Postulates of Bohr\'s Atomic Model and derivation of radius of hydrogen atom',
@@ -228,8 +281,15 @@ function getChapterQuestions(
     ];
   }
 
-  // 6. Physics: Mechanics, SHM & Fluid Dynamics
-  if (tLower.includes('fluid') || tLower.includes('mechanic') || tLower.includes('shm') || tLower.includes('harmonic') || tLower.includes('bernoulli') || tLower.includes('surface tension')) {
+  // 7. Physics: Mechanics, SHM & Fluid Dynamics
+  if (
+    tLower.includes('fluid') ||
+    tLower.includes('mechanic') ||
+    tLower.includes('shm') ||
+    tLower.includes('harmonic') ||
+    tLower.includes('bernoulli') ||
+    tLower.includes('surface tension')
+  ) {
     return [
       `State and prove Bernoulli's Theorem with fluid flow diagram (Page ${page || 1})`,
       'Derive expression for time period of Simple Harmonic Motion of simple pendulum',
@@ -240,8 +300,14 @@ function getChapterQuestions(
     ];
   }
 
-  // 7. Mathematics: Calculus (Derivatives, Integrals, Limits)
-  if (tLower.includes('derivative') || tLower.includes('different') || tLower.includes('integr') || tLower.includes('calculus') || tLower.includes('limit')) {
+  // 8. Mathematics: Calculus (Derivatives, Integrals, Limits)
+  if (
+    tLower.includes('derivative') ||
+    tLower.includes('different') ||
+    tLower.includes('integr') ||
+    tLower.includes('calculus') ||
+    tLower.includes('limit')
+  ) {
     return [
       `Step-by-step worked solution for key problem on Page ${page || 1}`,
       'First Principle Derivative: Derive derivative of trigonometric function step-by-step',
@@ -252,8 +318,16 @@ function getChapterQuestions(
     ];
   }
 
-  // 8. Mathematics: Matrices, Vectors, Coordinate Geometry & Algebra
-  if (tLower.includes('matrix') || tLower.includes('vector') || tLower.includes('determinant') || tLower.includes('geometry') || tLower.includes('conic') || tLower.includes('trigonometr') || bookLower.includes('math')) {
+  // 9. Mathematics: Matrices, Vectors, Coordinate Geometry & Algebra
+  if (
+    tLower.includes('matrix') ||
+    tLower.includes('vector') ||
+    tLower.includes('determinant') ||
+    tLower.includes('geometry') ||
+    tLower.includes('conic') ||
+    tLower.includes('trigonometr') ||
+    bookLower.includes('math')
+  ) {
     return [
       `Step-by-step numerical solution for problem on Page ${page || 1}`,
       'Matrix Inversion Method vs Cramer\'s Rule for solving system of linear equations',
@@ -264,8 +338,15 @@ function getChapterQuestions(
     ];
   }
 
-  // 9. Chemistry: Chemical Bonding, Periodic, States of Matter & Organic
-  if (bookLower.includes('chem') || tLower.includes('reaction') || tLower.includes('bond') || tLower.includes('organic') || tLower.includes('acid') || tLower.includes('electrochem')) {
+  // 10. Chemistry: Chemical Bonding, Periodic, States of Matter & Organic
+  if (
+    bookLower.includes('chem') ||
+    tLower.includes('reaction') ||
+    tLower.includes('bond') ||
+    tLower.includes('organic') ||
+    tLower.includes('acid') ||
+    tLower.includes('electrochem')
+  ) {
     return [
       `Core chemical principles and reaction mechanism on Page ${page || 1}`,
       'VSEPR Theory: Predict geometry and bond angles of covalent molecules with diagrams',
@@ -276,8 +357,15 @@ function getChapterQuestions(
     ];
   }
 
-  // 10. Biology: Cell, Genetics, Physiology & Ecology
-  if (bookLower.includes('bio') || tLower.includes('cell') || tLower.includes('genetic') || tLower.includes('plant') || tLower.includes('animal') || tLower.includes('organism')) {
+  // 11. Biology: Cell, Genetics, Physiology & Ecology
+  if (
+    bookLower.includes('bio') ||
+    tLower.includes('cell') ||
+    tLower.includes('genetic') ||
+    tLower.includes('plant') ||
+    tLower.includes('animal') ||
+    tLower.includes('organism')
+  ) {
     return [
       `Core biological concept and anatomical diagram on Page ${page || 1}`,
       'Mitosis vs Meiosis cell division: Differences, stages, and chromosome numbers',
@@ -288,8 +376,14 @@ function getChapterQuestions(
     ];
   }
 
-  // 11. School Level Science (Grades 1–10)
-  if (bookLower.includes('science') || tLower.includes('force') || tLower.includes('energy') || tLower.includes('light') || tLower.includes('living')) {
+  // 12. School Level Science (Grades 1–10)
+  if (
+    bookLower.includes('science') ||
+    tLower.includes('force') ||
+    tLower.includes('energy') ||
+    tLower.includes('light') ||
+    tLower.includes('living')
+  ) {
     return [
       `Explain core scientific concepts on Page ${page || 1} in simple student-friendly language`,
       `Difference between key terms in ${chapterTitle || 'this unit'} in 2 columns`,
@@ -300,7 +394,7 @@ function getChapterQuestions(
     ];
   }
 
-  // 12. Default / General Chapter Questions
+  // 13. Default / General Chapter Questions
   const chLabel = chapterTitle ? `"${chapterTitle}"` : `Chapter ${chapterNum || 1}`;
   return [
     `Explain core concepts and pedagogical breakdown of Page ${page || 1}`,
@@ -341,6 +435,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const chipsScrollRef = useRef<HTMLDivElement>(null);
   const isTeacher = Boolean(user && AUTHORIZED_TEACHER_ROLES.includes(user.role));
 
   const showToast = useCallback((msg: string) => {
@@ -388,11 +483,19 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
     return () => window.removeEventListener('mouseup', handleMouseUp);
   }, []);
 
+  // Horizontal scroll chips helper
+  const scrollChips = (dir: 'left' | 'right') => {
+    if (chipsScrollRef.current) {
+      const offset = dir === 'left' ? -220 : 220;
+      chipsScrollRef.current.scrollBy({ left: offset, behavior: 'smooth' });
+    }
+  };
+
   if (!isOpen) return null;
 
   if (!isTeacher) {
     return (
-      <div className="fixed inset-y-0 right-0 z-[60] w-96 bg-[#f8fafc] border-l border-slate-200 text-slate-900 p-6 flex flex-col justify-center items-center shadow-2xl">
+      <div className="fixed inset-y-0 right-0 z-[70] w-full sm:w-[460px] bg-[#f8fafc] border-l border-slate-200 text-slate-900 p-6 flex flex-col justify-center items-center shadow-2xl">
         <div className="p-4 rounded-full bg-rose-50 text-rose-700 mb-4 border border-rose-200">
           <EyeOff size={32} />
         </div>
@@ -541,7 +644,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
     showToast('✓ Selected text copied!');
   };
 
-  /** 3. Add to Smart Board Workspace (Staged for Review without Opening) */
+  /** 3. Add to Smart Board Workspace */
   const handleAddToSmartBoard = async (msg: TeacherMessage) => {
     try {
       const cleaned = cleanContent(msg.content);
@@ -567,13 +670,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         chapterNumber: currentChapter?.chapterNumber,
       });
 
-      showToast('✓ Added to Smart Board workspace! Staged in board drawer.');
+      showToast('✓ Added to Smart Board workspace! Staged in drawer.');
     } catch {
       showToast('✓ Note saved in Smart Board workspace!');
     }
   };
 
-  /** 4. Launch Directly to Smart Board (Immediate Classroom Presentation) */
+  /** 4. Launch Directly to Smart Board */
   const handleLaunchToSmartBoard = (msg: TeacherMessage) => {
     const cleaned = cleanContent(msg.smartboardSummary || msg.content);
     const title = `${textbookTitle} · Page ${currentPage} Presentation`;
@@ -623,7 +726,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
       className={`fixed transition-all duration-300 font-sans text-slate-900 bg-[#f8fafc] ${
         isFullScreen
           ? 'inset-0 z-[100] w-full h-full flex flex-col'
-          : 'inset-y-0 right-0 z-[60] w-[490px] md:w-[540px] lg:w-[600px] border-l border-slate-200 flex flex-col shadow-2xl'
+          : 'inset-y-0 right-0 z-[70] w-full sm:w-[500px] md:w-[560px] lg:w-[620px] max-w-full border-l border-slate-200 flex flex-col shadow-2xl'
       }`}
     >
       {/* Toast Notification Banner */}
@@ -634,33 +737,33 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         </div>
       )}
 
-      {/* 1. Header (Clean, Professional, Elevated) */}
-      <div className="bg-white px-4 py-3 border-b border-slate-200 flex items-center justify-between shadow-2xs flex-shrink-0">
-        <div className="flex items-center gap-3 min-w-0">
-          <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs flex-shrink-0">
-            <GraduationCap size={20} />
+      {/* 1. Header (Clean, Professional, Fully Responsive) */}
+      <div className="bg-white px-3 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200 flex items-center justify-between shadow-2xs flex-shrink-0">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs flex-shrink-0">
+            <GraduationCap size={18} className="sm:w-5 sm:h-5" />
           </div>
           <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <h2 className="text-sm font-extrabold text-slate-900 tracking-tight truncate">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <h2 className="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight truncate">
                 AI Teaching Assistant
               </h2>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300 flex-shrink-0">
+              <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 flex-shrink-0">
                 शिक्षक एआई
               </span>
             </div>
-            <div className="flex items-center gap-1.5 mt-0.5 text-xs text-slate-700 font-medium">
-              <span className="truncate max-w-[170px] font-bold text-slate-900">
+            <div className="flex items-center gap-1.5 mt-0.5 text-[11px] sm:text-xs text-slate-700 font-medium">
+              <span className="truncate max-w-[120px] sm:max-w-[180px] font-bold text-slate-900">
                 {textbookTitle}
               </span>
               <span>•</span>
-              <span className="font-bold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+              <span className="font-bold text-emerald-800 bg-emerald-50 px-1 py-0.2 rounded border border-emerald-200">
                 Page {currentPage}
               </span>
               {currentChapter && (
                 <>
                   <span>•</span>
-                  <span className="truncate max-w-[140px] text-slate-700">
+                  <span className="truncate max-w-[100px] sm:max-w-[150px] text-slate-600">
                     Ch. {currentChapter.chapterNumber}: {currentChapter.title}
                   </span>
                 </>
@@ -669,19 +772,19 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 flex-shrink-0">
+        <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
           {/* Privacy Status Toggle (Teacher Private vs Show to Class) */}
           <button
             type="button"
             onClick={() => setShowToClassMode(!showToClassMode)}
-            className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition border ${
+            className={`px-2 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition border ${
               showToClassMode
                 ? 'bg-amber-50 text-amber-900 border-amber-300 shadow-2xs'
                 : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200'
             }`}
             title={showToClassMode ? 'Classroom Display Mode Active' : 'Private Teacher Mode'}
           >
-            {showToClassMode ? <Eye size={14} className="text-amber-700" /> : <EyeOff size={14} className="text-slate-500" />}
+            {showToClassMode ? <Eye size={13} className="text-amber-700" /> : <EyeOff size={13} className="text-slate-500" />}
             <span className="hidden sm:inline text-[11px] font-bold">{showToClassMode ? 'Class View' : 'Private'}</span>
           </button>
 
@@ -689,18 +792,18 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setIsFullScreen(!isFullScreen)}
-            className="px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs transition flex items-center gap-1.5 border border-slate-200 shadow-2xs"
+            className="px-2 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs transition flex items-center gap-1 border border-slate-200 shadow-2xs"
             title={isFullScreen ? 'Restore Split View (Esc)' : 'Expand to Full Screen'}
           >
             {isFullScreen ? (
               <>
-                <Minimize2 size={14} className="text-emerald-700" />
-                <span className="text-[11px]">Restore View</span>
+                <Minimize2 size={13} className="text-emerald-700" />
+                <span className="text-[11px] hidden sm:inline">Restore</span>
               </>
             ) : (
               <>
-                <Maximize2 size={14} className="text-emerald-700" />
-                <span className="hidden sm:inline text-[11px]">Full Screen</span>
+                <Maximize2 size={13} className="text-emerald-700" />
+                <span className="text-[11px] hidden sm:inline">Expand</span>
               </>
             )}
           </button>
@@ -712,22 +815,22 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             className="p-1.5 rounded-lg bg-white hover:bg-rose-50 text-slate-600 hover:text-rose-700 border border-slate-200 transition"
             title="Close Assistant"
           >
-            <X size={16} />
+            <X size={15} />
           </button>
         </div>
       </div>
 
       {/* 2. Scope & Language Bar */}
-      <div className="px-4 py-2 bg-slate-100/80 border-b border-slate-200 flex items-center justify-between gap-2 text-xs flex-shrink-0">
+      <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-slate-100/90 border-b border-slate-200 flex items-center justify-between gap-2 text-xs flex-shrink-0">
         <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">
-          <span className="text-[11px] uppercase font-bold text-slate-600 tracking-wider flex items-center gap-1 mr-1">
-            <Compass size={13} className="text-emerald-700" /> Scope:
+          <span className="text-[10px] sm:text-[11px] uppercase font-bold text-slate-600 tracking-wider flex items-center gap-1 mr-0.5">
+            <Compass size={12} className="text-emerald-700" /> Scope:
           </span>
 
           <button
             type="button"
             onClick={() => setSelectedScope('CURRENT_PAGE')}
-            className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap border ${
+            className={`px-2 py-0.8 rounded-md text-[11px] font-bold transition whitespace-nowrap border ${
               selectedScope === 'CURRENT_PAGE'
                 ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
                 : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
@@ -740,7 +843,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             <button
               type="button"
               onClick={() => setSelectedScope('CURRENT_CHAPTER')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap border ${
+              className={`px-2 py-0.8 rounded-md text-[11px] font-bold transition whitespace-nowrap border ${
                 selectedScope === 'CURRENT_CHAPTER'
                   ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
                   : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
@@ -754,7 +857,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setSelectedScope('ENTIRE_BOOK')}
-            className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap border ${
+            className={`px-2 py-0.8 rounded-md text-[11px] font-bold transition whitespace-nowrap border ${
               selectedScope === 'ENTIRE_BOOK'
                 ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
                 : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
@@ -767,7 +870,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             <button
               type="button"
               onClick={() => setSelectedScope('SELECTED_TEXT')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap flex items-center gap-1.5 border ${
+              className={`px-2 py-0.8 rounded-md text-[11px] font-bold transition whitespace-nowrap flex items-center gap-1 border ${
                 selectedScope === 'SELECTED_TEXT'
                   ? 'bg-amber-600 text-white border-amber-600 shadow-xs'
                   : 'bg-amber-50 text-amber-900 border-amber-300'
@@ -780,7 +883,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                   setSelectedText('');
                   if (selectedScope === 'SELECTED_TEXT') setSelectedScope('CURRENT_PAGE');
                 }}
-                className="hover:text-rose-900 text-sm font-bold ml-1"
+                className="hover:text-rose-900 text-xs font-bold ml-0.5"
                 title="Clear selection"
               >
                 ×
@@ -790,11 +893,11 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         </div>
 
         {/* Language Selector */}
-        <div className="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-0.5 flex-shrink-0 shadow-2xs">
+        <div className="flex items-center gap-0.5 bg-white border border-slate-200 rounded-lg p-0.5 flex-shrink-0 shadow-2xs">
           <button
             type="button"
             onClick={() => setLanguage('auto')}
-            className={`px-2 py-0.5 rounded text-[11px] font-bold transition ${
+            className={`px-1.5 py-0.5 rounded text-[10px] font-bold transition ${
               language === 'auto' ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
             }`}
           >
@@ -803,7 +906,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setLanguage('ne')}
-            className={`px-2 py-0.5 rounded text-[11px] font-bold transition ${
+            className={`px-1.5 py-0.5 rounded text-[10px] font-bold transition ${
               language === 'ne' ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
             }`}
           >
@@ -812,7 +915,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setLanguage('en')}
-            className={`px-2 py-0.5 rounded text-[11px] font-bold transition ${
+            className={`px-1.5 py-0.5 rounded text-[10px] font-bold transition ${
               language === 'en' ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
             }`}
           >
@@ -823,7 +926,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
       {/* 3. Pedagogical Actions Bar (Compact & Expandable) */}
       <div className="bg-white border-b border-slate-200 flex-shrink-0 shadow-2xs">
-        <div className="px-4 py-2 flex items-center justify-between">
+        <div className="px-3 sm:px-4 py-2 flex items-center justify-between">
           <div className="flex items-center gap-1.5 flex-wrap">
             <button
               type="button"
@@ -831,13 +934,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 setActiveCategory('core');
                 setActionsExpanded(true);
               }}
-              className={`px-3 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'core' && actionsExpanded
                   ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
                   : 'bg-slate-100 text-slate-800 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <BookOpen size={13} className={activeCategory === 'core' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
+              <BookOpen size={12} className={activeCategory === 'core' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
               <span>Core Teaching</span>
             </button>
 
@@ -847,13 +950,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 setActiveCategory('activities');
                 setActionsExpanded(true);
               }}
-              className={`px-3 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'activities' && actionsExpanded
                   ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
                   : 'bg-slate-100 text-slate-800 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <HelpCircle size={13} className={activeCategory === 'activities' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
+              <HelpCircle size={12} className={activeCategory === 'activities' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
               <span>Activities & Tests</span>
             </button>
 
@@ -863,13 +966,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 setActiveCategory('delivery');
                 setActionsExpanded(true);
               }}
-              className={`px-3 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'delivery' && actionsExpanded
                   ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
                   : 'bg-slate-100 text-slate-800 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <Presentation size={13} className={activeCategory === 'delivery' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
+              <Presentation size={12} className={activeCategory === 'delivery' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
               <span>Board & Delivery</span>
             </button>
           </div>
@@ -880,22 +983,22 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             className="p-1 rounded-lg hover:bg-slate-100 border border-slate-200 text-slate-600 transition"
             title={actionsExpanded ? 'Collapse pedagogical buttons' : 'Expand pedagogical buttons'}
           >
-            {actionsExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            {actionsExpanded ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
           </button>
         </div>
 
         {/* Action Buttons Grid */}
         {actionsExpanded && (
-          <div className="px-4 pb-3 pt-1 border-t border-slate-100 bg-slate-50/70">
+          <div className="px-3 sm:px-4 pb-3 pt-1 border-t border-slate-100 bg-slate-50/70">
             {activeCategory === 'core' && (
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <button
                   type="button"
                   onClick={() => handleAsk('EXPLAIN_PAGE')}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <FileText size={14} className="text-emerald-700" />
+                    <FileText size={13} className="text-emerald-700" />
                     <span>Explain Page</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -906,10 +1009,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('TEACH_CHAPTER')}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <Layers size={14} className="text-emerald-700" />
+                    <Layers size={13} className="text-emerald-700" />
                     <span>Teach Chapter</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -920,10 +1023,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('SUMMARIZE_CHAPTER')}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <BookOpen size={14} className="text-emerald-700" />
+                    <BookOpen size={13} className="text-emerald-700" />
                     <span>Summarize Chapter</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -934,10 +1037,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('QUICK_SIMPLIFY')}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <Sparkles size={14} className="text-emerald-700" />
+                    <Sparkles size={13} className="text-emerald-700" />
                     <span>Simplify Concept</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -952,10 +1055,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('LESSON_PLAN')}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <FileCheck size={14} className="text-emerald-700" />
+                    <FileCheck size={13} className="text-emerald-700" />
                     <span>45-Min Lesson Plan</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -966,10 +1069,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('EXAMPLES_ACTIVITIES')}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <Lightbulb size={14} className="text-emerald-700" />
+                    <Lightbulb size={13} className="text-emerald-700" />
                     <span>Classroom Examples</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -980,10 +1083,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('QUESTION_BANK')}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <HelpCircle size={14} className="text-emerald-700" />
+                    <HelpCircle size={13} className="text-emerald-700" />
                     <span>Bloom's Questions</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -994,10 +1097,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('QUICK_CHECK')}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <CheckSquare size={14} className="text-emerald-700" />
+                    <CheckSquare size={13} className="text-emerald-700" />
                     <span>3-Question Check</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -1012,10 +1115,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('TEACHING_NOTES')}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <FileText size={14} className="text-emerald-700" />
+                    <FileText size={13} className="text-emerald-700" />
                     <span>Chalkboard Notes</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -1026,10 +1129,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('PRESENTATION')}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <Presentation size={14} className="text-emerald-700" />
+                    <Presentation size={13} className="text-emerald-700" />
                     <span>Slide Outline</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -1040,10 +1143,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => handleAsk('QUICK_ANALOGY')}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
-                    <Flame size={14} className="text-emerald-700" />
+                    <Flame size={13} className="text-emerald-700" />
                     <span>Nepal Analogy</span>
                   </div>
                   <span className="text-[10px] text-slate-600 font-medium leading-tight">
@@ -1055,10 +1158,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                   <button
                     type="button"
                     onClick={() => handleAsk('EXPLAIN_SELECTION')}
-                    className="p-2.5 rounded-xl bg-amber-50 border border-amber-300 hover:bg-amber-100 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                    className="p-2 sm:p-2.5 rounded-xl bg-amber-50 border border-amber-300 hover:bg-amber-100 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                   >
                     <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900">
-                      <BookmarkCheck size={14} />
+                      <BookmarkCheck size={13} />
                       <span>Explain Selection</span>
                     </div>
                     <span className="text-[10px] text-amber-800 leading-tight">
@@ -1075,35 +1178,35 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
       {/* 4. Messages / Response Body */}
       <div
         ref={scrollRef}
-        className={`flex-1 overflow-y-auto p-4 md:p-6 space-y-5 bg-[#f8fafc] pb-14 ${
+        className={`flex-1 overflow-y-auto p-3.5 sm:p-5 space-y-4 bg-[#f8fafc] ${
           isFullScreen ? 'max-w-4xl mx-auto w-full' : 'w-full'
         }`}
       >
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center p-2 text-center">
             {/* Header / Intro Card */}
-            <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs mb-2.5">
-              <GraduationCap size={28} />
+            <div className="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs mb-2">
+              <GraduationCap size={26} />
             </div>
-            <h3 className="text-base font-extrabold text-slate-900 mb-1 tracking-tight">
+            <h3 className="text-sm sm:text-base font-extrabold text-slate-900 mb-1 tracking-tight">
               Classroom Teaching Assistant
             </h3>
-            <p className="text-xs max-w-md leading-relaxed text-slate-600 mb-4">
+            <p className="text-xs max-w-md leading-relaxed text-slate-600 mb-3.5">
               Ask any pedagogical question, compare concepts in 2 columns, generate Bloom's questions, or step-by-step calculations aligned with Nepal CDC curriculum.
             </p>
 
-            {/* Quick 4 Starter Tiles (Clean 2x2 grid in split view, 4x1 grid in fullscreen) */}
-            <div className="w-full max-w-xl grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+            {/* Quick 4 Starter Tiles */}
+            <div className="w-full max-w-xl grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
               <button
                 type="button"
                 onClick={() => handleAsk('EXPLAIN_PAGE')}
-                className="p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
+                className="p-2.5 sm:p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 group-hover:scale-105 transition-transform">
-                    <FileText size={15} />
+                    <FileText size={14} />
                   </div>
-                  <ArrowRight size={13} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
                 </div>
                 <div>
                   <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">Explain Page {currentPage}</div>
@@ -1114,13 +1217,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
               <button
                 type="button"
                 onClick={() => handleAsk('LESSON_PLAN')}
-                className="p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
+                className="p-2.5 sm:p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="p-1.5 rounded-lg bg-blue-50 text-blue-800 border border-blue-200 group-hover:scale-105 transition-transform">
-                    <FileCheck size={15} />
+                    <FileCheck size={14} />
                   </div>
-                  <ArrowRight size={13} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
                 </div>
                 <div>
                   <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">45-Min Lesson Plan</div>
@@ -1131,16 +1234,16 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
               <button
                 type="button"
                 onClick={() => handleAsk('CUSTOM_QUESTION', `Generate a 2-column comparison table of the key differences in concepts on Page ${currentPage}`)}
-                className="p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
+                className="p-2.5 sm:p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="p-1.5 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 group-hover:scale-105 transition-transform">
-                    <Scale size={15} />
+                    <Scale size={14} />
                   </div>
-                  <ArrowRight size={13} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">2-Column Comparison</div>
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">2-Column Table</div>
                   <div className="text-[10px] text-slate-500 font-medium">Differences & tabular view</div>
                 </div>
               </button>
@@ -1148,13 +1251,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
               <button
                 type="button"
                 onClick={() => handleAsk('QUESTION_BANK')}
-                className="p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
+                className="p-2.5 sm:p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="p-1.5 rounded-lg bg-purple-50 text-purple-800 border border-purple-200 group-hover:scale-105 transition-transform">
-                    <HelpCircle size={15} />
+                    <HelpCircle size={14} />
                   </div>
-                  <ArrowRight size={13} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
                 </div>
                 <div>
                   <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">Bloom's Quiz</div>
@@ -1164,10 +1267,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             </div>
 
             {/* Smart Chapter-Aware Recommended Questions Section */}
-            <div className="w-full max-w-xl text-left bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs">
-              <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+            <div className="w-full max-w-xl text-left bg-white rounded-2xl border border-slate-200 p-3.5 sm:p-4 shadow-2xs">
+              <div className="flex items-center justify-between mb-2.5 pb-2 border-b border-slate-100">
                 <span className="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
-                  <Lightbulb size={15} className="text-amber-500" />
+                  <Lightbulb size={14} className="text-amber-500" />
                   <span>
                     Curriculum Questions for {currentChapter ? `Ch. ${currentChapter.chapterNumber}: ${currentChapter.title}` : `Page ${currentPage}`}:
                   </span>
@@ -1183,12 +1286,12 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                     key={idx}
                     type="button"
                     onClick={() => handleAsk('CUSTOM_QUESTION', q)}
-                    className="w-full text-left p-2.5 px-3 rounded-xl bg-slate-50 hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-xs text-slate-900 font-semibold transition flex items-center justify-between group shadow-2xs"
+                    className="w-full text-left p-2.5 px-3 rounded-xl bg-slate-50 hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-xs text-slate-900 font-medium transition flex items-center justify-between group shadow-2xs"
                   >
                     <span className="leading-snug pr-2 text-slate-900 group-hover:text-emerald-900">
                       ▪ {q}
                     </span>
-                    <ArrowRight size={13} className="text-slate-400 group-hover:text-emerald-700 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
                   </button>
                 ))}
               </div>
@@ -1203,14 +1306,25 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
               }`}
             >
               {msg.sender === 'USER' ? (
-                <div className="max-w-[85%] rounded-2xl rounded-tr-xs bg-slate-900 text-white px-4 py-2.5 text-xs font-medium shadow-xs">
-                  <div className="whitespace-pre-wrap">{cleanContent(msg.content)}</div>
+                <div className="flex flex-col items-end w-full">
+                  <div className="flex items-center gap-1.5 mb-1 text-[11px] font-bold text-slate-600">
+                    <GraduationCap size={13} className="text-emerald-700" />
+                    <span>Teacher Question · Page {msg.pageNumber || currentPage}</span>
+                    {msg.scope && (
+                      <span className="text-[10px] bg-slate-200/90 text-slate-700 px-1.5 py-0.2 rounded font-semibold">
+                        {msg.scope.replace('_', ' ')}
+                      </span>
+                    )}
+                  </div>
+                  <div className="max-w-[90%] sm:max-w-[85%] rounded-2xl rounded-tr-xs bg-slate-900 text-white px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium shadow-xs">
+                    <div className="whitespace-pre-wrap">{cleanContent(msg.content)}</div>
+                  </div>
                 </div>
               ) : (
-                <div className="w-full rounded-2xl bg-white border border-slate-200 p-4 md:p-5 shadow-xs transition-all text-slate-900">
+                <div className="w-full rounded-2xl bg-white border border-slate-200 p-3.5 sm:p-5 shadow-xs transition-all text-slate-900">
                   {/* Assistant Message Header & Action Toolbar */}
-                  <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-slate-100 text-xs">
-                    <span className="flex items-center gap-1.5 font-bold text-emerald-900 text-xs">
+                  <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-slate-100 text-xs">
+                    <span className="flex items-center gap-1.5 font-extrabold text-emerald-900 text-xs">
                       <Sparkles size={14} className="text-emerald-700" />
                       <span>{msg.task ? msg.task.replace(/_/g, ' ') : 'AI Teaching Response'}</span>
                     </span>
@@ -1220,7 +1334,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                       <button
                         type="button"
                         onClick={() => handleCopy(msg.content, msg.id)}
-                        className="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 transition flex items-center gap-1 text-[11px] font-semibold border border-slate-200"
+                        className="px-2 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 transition flex items-center gap-1 text-[11px] font-semibold border border-slate-200"
                         title="Copy complete response to clipboard"
                       >
                         {copiedId === msg.id ? <Check size={12} className="text-emerald-700" /> : <Copy size={12} />}
@@ -1230,7 +1344,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                       <button
                         type="button"
                         onClick={handleCopySelectedText}
-                        className="px-2 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition flex items-center gap-1 text-[11px] font-medium border border-slate-200"
+                        className="hidden sm:flex px-2 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition items-center gap-1 text-[11px] font-medium border border-slate-200"
                         title="Copy highlighted text"
                       >
                         <span>Copy Selected</span>
@@ -1239,7 +1353,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                       <button
                         type="button"
                         onClick={() => handleAddToSmartBoard(msg)}
-                        className="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 transition flex items-center gap-1 text-[11px] font-bold border border-emerald-300"
+                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 transition flex items-center gap-1 text-[11px] font-bold border border-emerald-300"
                         title="Add response to Smart Board workspace for review"
                       >
                         <PlusCircle size={12} />
@@ -1249,7 +1363,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                       <button
                         type="button"
                         onClick={() => handleLaunchToSmartBoard(msg)}
-                        className="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition flex items-center gap-1 text-[11px] font-bold shadow-2xs"
+                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition flex items-center gap-1 text-[11px] font-bold shadow-2xs"
                         title="Present this response immediately on the classroom Smart Board"
                       >
                         <Presentation size={12} />
@@ -1268,7 +1382,11 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                   </div>
 
                   {/* Render Structured Response with Tables, Columns, and KaTeX */}
-                  <StructuredResponseRenderer content={msg.content} showToClass={showToClassMode} />
+                  <StructuredResponseRenderer
+                    content={msg.content}
+                    showToClass={showToClassMode}
+                    onJumpToPage={onJumpToPage}
+                  />
 
                   {/* Smart Board Presentation Highlight Card if present */}
                   {msg.smartboardSummary && (
@@ -1293,8 +1411,8 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
                   {/* Clickable Citations with Exact PDF Navigation */}
                   {msg.citations && msg.citations.length > 0 && (
-                    <div className="mt-4 pt-3 border-t border-slate-100">
-                      <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mb-1.5">
+                    <div className="mt-3.5 pt-2.5 border-t border-slate-100">
+                      <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider block mb-1.5">
                         Textbook Sources (Click to jump):
                       </span>
                       <div className="flex flex-wrap gap-1.5">
@@ -1324,7 +1442,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
                   {/* Chapter-Aware Follow-up Prompts */}
                   {msg.followUps && msg.followUps.length > 0 && (
-                    <div className="mt-4 pt-3 border-t border-slate-100">
+                    <div className="mt-3.5 pt-2.5 border-t border-slate-100">
                       <span className="text-[11px] font-extrabold text-slate-800 flex items-center gap-1 mb-2">
                         <Lightbulb size={13} className="text-amber-500" />
                         <span>Recommended Next Questions for {currentChapter ? `Ch. ${currentChapter.chapterNumber}` : 'this Topic'}:</span>
@@ -1335,7 +1453,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                             key={i}
                             type="button"
                             onClick={() => handleAsk('CUSTOM_QUESTION', f)}
-                            className="w-full text-left p-2 px-3 rounded-xl bg-slate-50/80 hover:bg-emerald-50/70 text-xs text-slate-900 font-medium transition flex items-center justify-between group border border-slate-200 hover:border-emerald-300"
+                            className="w-full text-left p-2 px-3 rounded-xl bg-slate-50 hover:bg-emerald-50/70 text-xs text-slate-900 font-medium transition flex items-center justify-between group border border-slate-200 hover:border-emerald-300"
                           >
                             <span className="truncate pr-2">▪ {f}</span>
                             <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 ml-2 flex-shrink-0 transition-transform" />
@@ -1360,8 +1478,57 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         )}
       </div>
 
-      {/* 5. Input Area */}
-      <div className="bg-white p-3 md:p-3.5 border-t border-slate-200 shadow-sm flex-shrink-0">
+      {/* 5. Persistent Recommended Questions Carousel (ALWAYS VISIBLE ABOVE INPUT) */}
+      <div className="bg-slate-50/90 border-t border-slate-200 px-3 py-1.5 flex-shrink-0">
+        <div className="flex items-center justify-between gap-1 mb-1">
+          <div className="flex items-center gap-1 text-[11px] font-extrabold text-slate-800 truncate">
+            <Sparkles size={12} className="text-amber-500 flex-shrink-0" />
+            <span className="truncate">
+              {currentChapter ? `Questions for Ch. ${currentChapter.chapterNumber}: ${currentChapter.title}` : `Recommended Questions (Page ${currentPage})`}
+            </span>
+          </div>
+          <div className="flex items-center gap-1 flex-shrink-0">
+            <button
+              type="button"
+              onClick={() => scrollChips('left')}
+              className="p-0.5 rounded hover:bg-slate-200 text-slate-600 transition"
+              title="Scroll left"
+            >
+              <ChevronLeft size={14} />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollChips('right')}
+              className="p-0.5 rounded hover:bg-slate-200 text-slate-600 transition"
+              title="Scroll right"
+            >
+              <ChevronRight size={14} />
+            </button>
+          </div>
+        </div>
+
+        {/* Scrollable Questions Row */}
+        <div
+          ref={chipsScrollRef}
+          className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5"
+        >
+          {recommendedQuestions.map((q, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => handleAsk('CUSTOM_QUESTION', q)}
+              className="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 text-slate-800 hover:text-emerald-950 font-medium text-[11px] border border-slate-200 hover:border-emerald-300 transition shadow-2xs flex items-center gap-1 flex-shrink-0 group"
+              title={q}
+            >
+              <span className="truncate max-w-[280px] sm:max-w-[340px]">{q}</span>
+              <ArrowRight size={11} className="text-slate-400 group-hover:text-emerald-700 flex-shrink-0" />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* 6. Input Area */}
+      <div className="bg-white p-2.5 sm:p-3 border-t border-slate-200 shadow-sm flex-shrink-0">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -1369,7 +1536,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           }}
           className={`${isFullScreen ? 'max-w-4xl mx-auto' : 'w-full'}`}
         >
-          <div className="flex items-end gap-2.5">
+          <div className="flex items-end gap-2">
             <div className="flex-1 bg-slate-50/90 border border-slate-200 focus-within:border-emerald-600 focus-within:bg-white rounded-xl p-2 transition shadow-inner">
               <textarea
                 ref={textareaRef}
@@ -1386,23 +1553,23 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 }}
                 placeholder={`Ask about Page ${currentPage}, compare concepts, or request lesson plans…`}
                 disabled={loading}
-                className="w-full bg-transparent resize-none text-xs md:text-sm text-slate-900 placeholder:text-slate-500 font-medium focus:outline-none leading-relaxed"
+                className="w-full bg-transparent resize-none text-xs sm:text-sm text-slate-900 placeholder:text-slate-500 font-medium focus:outline-none leading-relaxed"
               />
               <div className="flex items-center justify-between pt-1 border-t border-slate-200/60 text-[10px] text-slate-600 font-medium">
                 <span>
                   Scope: <strong className="text-slate-900 bg-slate-200/70 px-1 py-0.2 rounded">{selectedScope.replace('_', ' ')}</strong> · Lang: <strong className="text-slate-900 bg-slate-200/70 px-1 py-0.2 rounded">{language.toUpperCase()}</strong>
                 </span>
-                <span className="text-slate-500">Enter ↵ to send · Shift+Enter new line</span>
+                <span className="text-slate-500 hidden sm:inline">Enter ↵ to send · Shift+Enter new line</span>
               </div>
             </div>
 
             <button
               type="submit"
               disabled={loading || !inputQuery.trim()}
-              className="p-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-40 text-white font-bold transition shadow-xs flex items-center justify-center flex-shrink-0"
+              className="p-2.5 sm:p-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-40 text-white font-bold transition shadow-xs flex items-center justify-center flex-shrink-0"
               title="Send question"
             >
-              <Send size={16} />
+              <Send size={15} />
             </button>
           </div>
         </form>
