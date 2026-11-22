@@ -67,6 +67,47 @@ export const CLASS7_MATH = [
     titleNp: 'मेरो कक्षाकोठा – वास्तविक वस्तुबाट समूह निर्माण',
     Component: L(() => import('./ClassroomSetFormation3D'), 'ClassroomSetFormation3D'),
   },
+  // ── LESSON 2: WHOLE NUMBER (पूर्ण सङ्ख्या) ──────────────────────────
+  {
+    code: 'SIM-MATH-G7-L2-01',
+    key: 'class7-math-l2-square-root-discovery',
+    lesson: 2,
+    titleEn: 'Square and Square Root Discovery Lab',
+    titleNp: 'वर्ग र वर्गमूल खोजी प्रयोगशाला',
+    Component: L(() => import('./SquareRootDiscoveryLab'), 'SquareRootDiscoveryLab'),
+  },
+  {
+    code: 'SIM-MATH-G7-L2-02',
+    key: 'class7-math-l2-square-root-studio',
+    lesson: 2,
+    titleEn: 'Square Root Calculation Studio',
+    titleNp: 'वर्गमूल गणना प्रयोगशाला',
+    Component: L(() => import('./SquareRootCalculationStudio'), 'SquareRootCalculationStudio'),
+  },
+  {
+    code: 'SIM-MATH-G7-L2-03',
+    key: 'class7-math-l2-cube-root-explorer',
+    lesson: 2,
+    titleEn: 'Cube and Cube Root Explorer',
+    titleNp: 'घन र घनमूल खोजी संसार',
+    Component: L(() => import('./CubeRootExplorer'), 'CubeRootExplorer'),
+  },
+  {
+    code: 'SIM-MATH-G7-L2-04',
+    key: 'class7-math-l2-hcf-discovery',
+    lesson: 2,
+    titleEn: 'HCF Discovery & Problem-Solving Lab',
+    titleNp: 'महत्तम समापवर्तक (म.स.) खोजी प्रयोगशाला',
+    Component: L(() => import('./HcfDiscoveryLab'), 'HcfDiscoveryLab'),
+  },
+  {
+    code: 'SIM-MATH-G7-L2-05',
+    key: 'class7-math-l2-lcm-discovery',
+    lesson: 2,
+    titleEn: 'LCM Discovery and Real-Life Challenge',
+    titleNp: 'लघुत्तम समापवर्त्य (ल.स.) खोजी प्रयोगशाला',
+    Component: L(() => import('./LcmDiscoveryLab'), 'LcmDiscoveryLab'),
+  },
 ];
 
 export const findClass7Sim = (componentKey?: string, code?: string) =>
