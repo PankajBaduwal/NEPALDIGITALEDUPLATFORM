@@ -462,6 +462,93 @@ export const CLASS8_MATH = [
     titleNp: '३D ठोस ज्यामिति चुनौती संसार',
     Component: L(() => import('./SolidGeometryChallengeWorld3D'), 'SolidGeometryChallengeWorld3D'),
   },
+
+  // ── UNIT 17: COORDINATES (निर्देशाङ्कहरू) ───────────────────────────────
+  {
+    code: 'SIM-MATH-G8-U17-01',
+    key: 'class8-math-u17-cartesian-coordinate-explorer',
+    lesson: 17,
+    unit: 17,
+    titleEn: 'Cartesian Coordinate Plane Explorer',
+    titleNp: 'कार्तीय निर्देशाङ्क समतल अन्वेषक',
+    Component: L(() => import('./CartesianCoordinateExplorer'), 'CartesianCoordinateExplorer'),
+  },
+  {
+    code: 'SIM-MATH-G8-U17-02',
+    key: 'class8-math-u17-distance-points-lab',
+    lesson: 17,
+    unit: 17,
+    titleEn: 'Distance Between Points Lab',
+    titleNp: 'दुई बिन्दुहरू बीचको दूरी प्रयोगशाला',
+    Component: L(() => import('./DistanceBetweenPointsLab'), 'DistanceBetweenPointsLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U17-03',
+    key: 'class8-math-u17-coordinate-challenge-world',
+    lesson: 17,
+    unit: 17,
+    titleEn: 'Coordinate Geometry Challenge World',
+    titleNp: 'निर्देशाङ्क ज्यामिति चुनौती संसार',
+    Component: L(() => import('./CoordinateGeometryChallengeWorld'), 'CoordinateGeometryChallengeWorld'),
+  },
+
+  // ── UNIT 18: TESSELLATION (टेसेलेसन) ──────────────────────────────────
+  {
+    code: 'SIM-MATH-G8-U18-01',
+    key: 'class8-math-u18-tessellation-discovery-studio',
+    lesson: 18,
+    unit: 18,
+    titleEn: 'Tessellation Discovery Studio',
+    titleNp: 'टेसेलेसन खोजी स्टुडियो',
+    Component: L(() => import('./TessellationDiscoveryStudio'), 'TessellationDiscoveryStudio'),
+  },
+  {
+    code: 'SIM-MATH-G8-U18-02',
+    key: 'class8-math-u18-regular-semiregular-tessellation',
+    lesson: 18,
+    unit: 18,
+    titleEn: 'Regular & Semi-Regular Tessellation Lab',
+    titleNp: 'नियमित र अर्ध-नियमित टेसेलेसन प्रयोगशाला',
+    Component: L(() => import('./RegularSemiRegularTessellationLab'), 'RegularSemiRegularTessellationLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U18-03',
+    key: 'class8-math-u18-tessellation-pattern-designer',
+    lesson: 18,
+    unit: 18,
+    titleEn: 'Tessellation Pattern Designer',
+    titleNp: 'टेसेलेसन ढाँचा डिजाइनर',
+    Component: L(() => import('./TessellationPatternDesigner'), 'TessellationPatternDesigner'),
+  },
+
+  // ── UNIT 19: TRANSFORMATION (रूपान्तरण) ───────────────────────────────
+  {
+    code: 'SIM-MATH-G8-U19-01',
+    key: 'class8-math-u19-reflection-explorer',
+    lesson: 19,
+    unit: 19,
+    titleEn: 'Reflection Transformation Explorer',
+    titleNp: 'परावर्तन रूपान्तरण अन्वेषक',
+    Component: L(() => import('./ReflectionExplorer'), 'ReflectionExplorer'),
+  },
+  {
+    code: 'SIM-MATH-G8-U19-02',
+    key: 'class8-math-u19-translation-motion-lab',
+    lesson: 19,
+    unit: 19,
+    titleEn: 'Translation Motion Lab',
+    titleNp: 'विस्थापन गति प्रयोगशाला',
+    Component: L(() => import('./TranslationMotionLab'), 'TranslationMotionLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U19-03',
+    key: 'class8-math-u19-rotation-transformation-challenge',
+    lesson: 19,
+    unit: 19,
+    titleEn: 'Rotation & Transformation Challenge',
+    titleNp: 'परिक्रमण र रूपान्तरण चुनौती',
+    Component: L(() => import('./RotationTransformationChallenge'), 'RotationTransformationChallenge'),
+  },
 ];
 
 export const findClass8Sim = (componentKey?: string, code?: string) =>
