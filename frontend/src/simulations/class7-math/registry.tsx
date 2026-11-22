@@ -472,6 +472,81 @@ export const CLASS7_MATH = [
     titleNp: 'समतलीय आकृतिहरूको खोज तथा चुनौती',
     Component: L(() => import('./PlaneFiguresDiscoveryChallenge'), 'PlaneFiguresDiscoveryChallenge'),
   },
+  // ── LESSON 18: SYMMETRY AND TESSELLATION (सममिति र टेसलेसन) ────────────
+  {
+    code: 'SIM-MATH-G7-L18-01',
+    key: 'class7-math-l18-line-symmetry',
+    lesson: 18,
+    titleEn: 'Line Symmetry and Mirror Playground',
+    titleNp: 'रेखीय सममिति र ऐना खेलमैदान',
+    Component: L(() => import('./LineSymmetryMirrorPlayground'), 'LineSymmetryMirrorPlayground'),
+  },
+  {
+    code: 'SIM-MATH-G7-L18-02',
+    key: 'class7-math-l18-point-symmetry',
+    lesson: 18,
+    titleEn: 'Point Symmetry and 180° Rotation Lab',
+    titleNp: 'बिन्दु सममिति र १८०° परिक्रमण प्रयोगशाला',
+    Component: L(() => import('./PointSymmetryRotationLab'), 'PointSymmetryRotationLab'),
+  },
+  {
+    code: 'SIM-MATH-G7-L18-03',
+    key: 'class7-math-l18-tessellation-studio',
+    lesson: 18,
+    titleEn: 'Tessellation Design Studio',
+    titleNp: 'टेसलेसन डिजाइन स्टुडियो',
+    Component: L(() => import('./TessellationDesignStudio'), 'TessellationDesignStudio'),
+  },
+  // ── LESSON 19: TRANSFORMATION (रूपान्तरण) ────────────
+  {
+    code: 'SIM-MATH-G7-L19-01',
+    key: 'class7-math-l19-reflection-lab',
+    lesson: 19,
+    titleEn: 'Reflection and Mirror Transformation Lab',
+    titleNp: 'परावर्तन र ऐना रूपान्तरण प्रयोगशाला',
+    Component: L(() => import('./ReflectionTransformationLab'), 'ReflectionTransformationLab'),
+  },
+  {
+    code: 'SIM-MATH-G7-L19-02',
+    key: 'class7-math-l19-translation-playground',
+    lesson: 19,
+    titleEn: 'Translation and Movement Playground',
+    titleNp: 'स्थानान्तरण र गति खेलमैदान',
+    Component: L(() => import('./TranslationMovementPlayground'), 'TranslationMovementPlayground'),
+  },
+  // ── LESSON 20: BEARING AND SCALE DRAWING (दिगंश र मापन चित्र) ────────────
+  {
+    code: 'SIM-MATH-G7-L20-01',
+    key: 'class7-math-l20-compass-bearing',
+    lesson: 20,
+    titleEn: 'Compass and Bearing Discovery Lab',
+    titleNp: 'दिशासूचक यन्त्र र दिगंश खोजी प्रयोगशाला',
+    Component: L(() => import('./CompassBearingDiscoveryLab'), 'CompassBearingDiscoveryLab'),
+  },
+  {
+    code: 'SIM-MATH-G7-L20-02',
+    key: 'class7-math-l20-map-bearing',
+    lesson: 20,
+    titleEn: 'Map Reading and Bearing Explorer',
+    titleNp: 'नक्सा अध्ययन र दिगंश अन्वेषक',
+    Component: L(() => import('./MapReadingBearingExplorer'), 'MapReadingBearingExplorer'),
+  },
+  {
+    code: 'SIM-MATH-G7-L20-03',
+    key: 'class7-math-l20-scale-drawing',
+    lesson: 20,
+    titleEn: 'Scale Drawing and Measurement Lab',
+    titleNp: 'मापन चित्र र नाप प्रयोगशाला',
+    Component: L(() => import('./ScaleDrawingMeasurementLab'), 'ScaleDrawingMeasurementLab'),
+  },
+  {
+    code: 'SIM-MATH-G7-L20-04',
+    key: 'class7-math-l20-field-project',
+    lesson: 20,
+    titleEn: 'Bearing and Scale Drawing Field Project',
+    titleNp: 'दिगंश र मापन चित्र परियोजना कार्य',
+    Component: L(() => import('./BearingScaleFieldProject'), 'BearingScaleFieldProject'),
+  },
 ];
 
 export const findClass7Sim = (componentKey?: string, code?: string) =>
