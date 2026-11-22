@@ -288,6 +288,93 @@ export const CLASS8_MATH = [
     titleNp: 'बीजीय व्यञ्जकहरूको म.स. र ल.स.',
     Component: L(() => import('./HcfLcmAlgebraicExpressionsLab'), 'HcfLcmAlgebraicExpressionsLab'),
   },
+
+  // ── UNIT 11: ALGEBRAIC FRACTION (बीजीय भिन्न) ──────────────────────────
+  {
+    code: 'SIM-MATH-G8-U11-01',
+    key: 'class8-math-u11-algebraic-fraction-discovery',
+    lesson: 11,
+    unit: 11,
+    titleEn: 'Algebraic Fraction Discovery and Simplification Lab',
+    titleNp: 'बीजीय भिन्न खोजी र सरलीकरण प्रयोगशाला',
+    Component: L(() => import('./AlgebraicFractionDiscoveryLab'), 'AlgebraicFractionDiscoveryLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U11-02',
+    key: 'class8-math-u11-algebraic-fraction-add-sub',
+    lesson: 11,
+    unit: 11,
+    titleEn: 'Algebraic Fraction Addition and Subtraction Lab',
+    titleNp: 'बीजीय भिन्नको जोड र घटाउ प्रयोगशाला',
+    Component: L(() => import('./AlgebraicFractionAddSubLab'), 'AlgebraicFractionAddSubLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U11-03',
+    key: 'class8-math-u11-algebraic-fraction-mul-div',
+    lesson: 11,
+    unit: 11,
+    titleEn: 'Algebraic Fraction Multiplication and Division Lab',
+    titleNp: 'बीजीय भिन्नको गुणन र भाग प्रयोगशाला',
+    Component: L(() => import('./AlgebraicFractionMulDivLab'), 'AlgebraicFractionMulDivLab'),
+  },
+
+  // ── UNIT 12: SIMULTANEOUS & QUADRATIC EQUATIONS (युगपत र द्विघात समीकरण) ──
+  {
+    code: 'SIM-MATH-G8-U12-01',
+    key: 'class8-math-u12-simultaneous-equations-graph',
+    lesson: 12,
+    unit: 12,
+    titleEn: 'Simultaneous Equations Graph and Table Studio',
+    titleNp: 'युगपत समीकरण ग्राफ र तालिका स्टुडियो',
+    Component: L(() => import('./SimultaneousEquationsGraphPlotter'), 'SimultaneousEquationsGraphPlotter'),
+  },
+  {
+    code: 'SIM-MATH-G8-U12-02',
+    key: 'class8-math-u12-quadratic-equation-factorization',
+    lesson: 12,
+    unit: 12,
+    titleEn: 'Quadratic Equation Factorization Lab',
+    titleNp: 'द्विघात समीकरण गुणनखण्ड प्रयोगशाला',
+    Component: L(() => import('./QuadraticEquationFactorizationLab'), 'QuadraticEquationFactorizationLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U12-03',
+    key: 'class8-math-u12-equation-solver-challenge',
+    lesson: 12,
+    unit: 12,
+    titleEn: 'Real-Life Equation Solver Challenge',
+    titleNp: 'समीकरण व्यावहारिक समस्या समाधान',
+    Component: L(() => import('./EquationSolverRealLifeChallenge'), 'EquationSolverRealLifeChallenge'),
+  },
+
+  // ── UNIT 13: LINES AND ANGLES (रेखाहरू र कोणहरू) ──────────────────────
+  {
+    code: 'SIM-MATH-G8-U13-01',
+    key: 'class8-math-u13-lines-transversal-explorer',
+    lesson: 13,
+    unit: 13,
+    titleEn: 'Lines and Angles Transversal Explorer',
+    titleNp: 'समानान्तर रेखा र छेदक कोण अन्वेषक',
+    Component: L(() => import('./LinesAnglesTransversalExplorer'), 'LinesAnglesTransversalExplorer'),
+  },
+  {
+    code: 'SIM-MATH-G8-U13-02',
+    key: 'class8-math-u13-parallel-lines-relationship',
+    lesson: 13,
+    unit: 13,
+    titleEn: 'Parallel Lines Angle Relationship Lab',
+    titleNp: 'समानान्तर रेखा र कोण सम्बन्ध प्रयोगशाला',
+    Component: L(() => import('./ParallelLinesAngleRelationshipLab'), 'ParallelLinesAngleRelationshipLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U13-03',
+    key: 'class8-math-u13-unknown-angle-solver',
+    lesson: 13,
+    unit: 13,
+    titleEn: 'Unknown Angle Solver Challenge',
+    titleNp: 'अज्ञात कोण पत्ता लगाउने चुनौती',
+    Component: L(() => import('./UnknownAngleSolverChallenge'), 'UnknownAngleSolverChallenge'),
+  },
 ];
 
 export const findClass8Sim = (componentKey?: string, code?: string) =>
