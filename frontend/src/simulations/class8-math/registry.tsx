@@ -549,6 +549,64 @@ export const CLASS8_MATH = [
     titleNp: 'परिक्रमण र रूपान्तरण चुनौती',
     Component: L(() => import('./RotationTransformationChallenge'), 'RotationTransformationChallenge'),
   },
+
+  // ── UNIT 20: BEARING AND SCALE DRAWING (दिगंश र मापन चित्र) ───────────
+  {
+    code: 'SIM-MATH-G8-U20-01',
+    key: 'class8-math-u20-compass-bearing-explorer',
+    lesson: 20,
+    unit: 20,
+    titleEn: 'Interactive Compass and Bearing Explorer',
+    titleNp: 'कम्पास र दिगंश अन्वेषक',
+    Component: L(() => import('./InteractiveCompassBearingExplorer'), 'InteractiveCompassBearingExplorer'),
+  },
+  {
+    code: 'SIM-MATH-G8-U20-02',
+    key: 'class8-math-u20-scale-drawing-studio',
+    lesson: 20,
+    unit: 20,
+    titleEn: 'Scale Drawing and Map Measurement Studio',
+    titleNp: 'मापन चित्र र नक्सा मापन स्टुडियो',
+    Component: L(() => import('./ScaleDrawingMapStudio'), 'ScaleDrawingMapStudio'),
+  },
+  {
+    code: 'SIM-MATH-G8-U20-03',
+    key: 'class8-math-u20-navigation-challenge',
+    lesson: 20,
+    unit: 20,
+    titleEn: 'Bearing and Scale Navigation Challenge',
+    titleNp: 'दिगंश र मापन नेभिगेसन चुनौती',
+    Component: L(() => import('./BearingScaleNavigationChallenge'), 'BearingScaleNavigationChallenge'),
+  },
+
+  // ── UNIT 21: STATISTICS (तथ्याङ्कशास्त्र) ──────────────────────────────
+  {
+    code: 'SIM-MATH-G8-U21-01',
+    key: 'class8-math-u21-data-visualization-lab',
+    lesson: 21,
+    unit: 21,
+    titleEn: 'Statistical Data Visualization Lab',
+    titleNp: 'तथ्याङ्किय तथ्याङ्क चित्र प्रयोगशाला',
+    Component: L(() => import('./StatisticalDataVisualizationLab'), 'StatisticalDataVisualizationLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U21-02',
+    key: 'class8-math-u21-mean-median-mode-lab',
+    lesson: 21,
+    unit: 21,
+    titleEn: 'Mean, Median and Mode Discovery Lab',
+    titleNp: 'औसत, मध्यिका र बहुलक प्रयोगशाला',
+    Component: L(() => import('./MeanMedianModeDiscoveryLab'), 'MeanMedianModeDiscoveryLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U21-03',
+    key: 'class8-math-u21-statistics-challenge-world',
+    lesson: 21,
+    unit: 21,
+    titleEn: 'Real-Life Statistics Challenge World',
+    titleNp: 'व्यावहारिक तथ्याङ्क चुनौती संसार',
+    Component: L(() => import('./RealLifeStatisticsChallengeWorld'), 'RealLifeStatisticsChallengeWorld'),
+  },
 ];
 
 export const findClass8Sim = (componentKey?: string, code?: string) =>
