@@ -24,8 +24,20 @@ class FrogAudioService {
     this.soundEnabled = enabled;
   }
 
+  public setMuted(muted: boolean) {
+    this.soundEnabled = !muted;
+  }
+
   public isSoundEnabled(): boolean {
     return this.soundEnabled;
+  }
+
+  public playRibbit(step: number = 0) {
+    this.playHop(step);
+  }
+
+  public playSuccess() {
+    this.playCelebration();
   }
 
   /**

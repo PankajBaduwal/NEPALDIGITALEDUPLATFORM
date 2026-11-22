@@ -1,102 +1,256 @@
 /**
  * Lesson 6 · Weight (तौल)
- * Weigh It — heavier goes down. Balance an object with 1 kg, 2 kg and 5 kg weights to find how heavy it is.
+ * Weigh It — heavier goes down. Balance an object with 1 kg, 2 kg and 5 kg weights to find its weight.
+ * Pure 2D Implementation for Smart Boards & Desktops.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { mat, shadowed, textSprite } from '../class1-math-kit/models';
-import { rnd, shuffle } from '../class1-math-kit/nepali';
+import React, { useEffect, useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit/SimFrame2D';
+import { Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp, rnd } from '../class1-math-kit/nepali';
 import { fmt, numChoices } from './helpers';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
+
 const ITEMS = [
-  { np: 'किताब', en: 'Book', emoji: '📕', w: 1, color: '#ef4444' },
-  { np: 'झोला', en: 'Bag', emoji: '🎒', w: 2, color: '#0ea5e9' },
-  { np: 'तरबुजा', en: 'Watermelon', emoji: '🍉', w: 3, color: '#22c55e' },
-  { np: 'बिरालो', en: 'Cat', emoji: '🐱', w: 4, color: '#f59e0b' },
-  { np: 'चामलको बोरा', en: 'Rice sack', emoji: '🌾', w: 5, color: '#d6b88c' },
-  { np: 'ढुङ्गा', en: 'Big stone', emoji: '🪨', w: 8, color: '#94a3b8' },
+  { np: 'किताब', en: 'Book', emoji: '📕', w: 1, color: '#EF4444' },
+  { np: 'झोला', en: 'School Bag', emoji: '🎒', w: 2, color: '#0284C7' },
+  { np: 'तरबुजा', en: 'Watermelon', emoji: '🍉', w: 3, color: '#16A34A' },
+  { np: 'बिरालो', en: 'Cat', emoji: '🐱', w: 4, color: '#F59E0B' },
+  { np: 'चामलको बोरा', en: 'Rice sack', emoji: '🌾', w: 5, color: '#D97706' },
+  { np: 'ठूलो ढुङ्गा', en: 'Big stone', emoji: '🪨', w: 8, color: '#64748B' },
 ];
 
 export const WeighIt: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G2-L6-01', chapter: 6, titleNp: 'तौलौँ (तौल)', titleEn: 'Weigh It (Weight)' });
-  const [item, setItem] = useState(2);
-  const [item2, setItem2] = useState<number | null>(null);
+  const kit = useSimKit({
+    code: 'SIM-MATH-G2-L6-01',
+    chapter: 6,
+    titleNp: 'तौलौँ (तौल)',
+    titleEn: 'Weigh It (Weight)',
+  });
+
+  const [itemIndex, setItemIndex] = useState(2); // default Watermelon 3kg
   const [weights, setWeights] = useState<number[]>([]);
   const [li, setLi] = useState(0);
-  const scene = useRef<{ set: (left: number, right: { kind: 'weights'; list: number[] } | { kind: 'item'; i: number } | null, animate?: boolean) => void } | null>(null);
 
-  useStage(kit.stageRef, (ctx) => {
-    const base = shadowed(new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.7, 3.4, 12), mat('#92400e', 0.8))); base.position.y = 1.7; ctx.scene.add(base);
-    const foot = shadowed(new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.8, 0.3, 24), mat('#92400e', 0.8))); foot.position.y = 0.15; ctx.scene.add(foot);
-    const beam = new THREE.Group(); beam.position.y = 3.5; ctx.scene.add(beam);
-    beam.add(shadowed(new THREE.Mesh(new THREE.BoxGeometry(10.5, 0.25, 0.5), mat('#f59e0b', 0.5))));
-    const mkPan = (x: number) => { const g = new THREE.Group(); g.position.set(x, -0.4, 0); const rope = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 1.4, 6), mat('#78350f')); rope.position.y = 0.7; g.add(rope); const pan = shadowed(new THREE.Mesh(new THREE.CylinderGeometry(1.9, 1.9, 0.18, 32), mat('#cbd5e1', 0.4, 0.5))); pan.position.y = -0.1; g.add(pan); const load = new THREE.Group(); g.add(load); beam.add(g); return { g, load }; };
-    const L = mkPan(-4.4), R = mkPan(4.4);
-    let tilt = 0;
-    const clear = (grp: THREE.Group) => [...grp.children].forEach((c) => grp.remove(c));
-    const objMesh = (i: number) => { const it = ITEMS[i]; const g = new THREE.Group(); const b = shadowed(new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.5, 1.5), mat(it.color, 0.5))); b.position.y = 0.85; g.add(b); const s = textSprite(it.emoji, 1.6, { px: 120, w: 160, h: 160 }); s.position.set(0, 0.9, 0.9); g.add(s); return g; };
-    const set = (left: number, right: any, animate = true) => {
-      clear(L.load); clear(R.load);
-      L.load.add(objMesh(left));
-      let rw = 0;
-      if (right?.kind === 'item') { R.load.add(objMesh(right.i)); rw = ITEMS[right.i].w; }
-      else if (right?.kind === 'weights') {
-        let x = -1.1, y = 0; right.list.forEach((w: number) => {
-          const h = 0.5 + w * 0.12; const wt = shadowed(new THREE.Mesh(new THREE.CylinderGeometry(0.35 + w * 0.05, 0.45 + w * 0.06, h, 16), mat(w === 5 ? '#334155' : w === 2 ? '#475569' : '#64748b', 0.4, 0.6)));
-          wt.position.set(x, 0.09 + h / 2 + y, 0); R.load.add(wt);
-          const t = textSprite(`${w}`, 0.7, { px: 90, w: 128, h: 128, color: '#fff' }); t.position.set(x, 0.09 + h / 2 + y, 0.6); R.load.add(t);
-          x += 0.95; if (x > 1.2) { x = -1.1; y += 1.2; }
-        }); rw = right.list.reduce((a: number, b: number) => a + b, 0);
-      }
-      const lw = ITEMS[left].w; const to = lw === rw ? 0 : lw > rw ? 0.22 : -0.22; const from = tilt; tilt = to;
-      const apply2 = (k: number) => { const v = from + (to - from) * k; beam.rotation.z = v; L.g.rotation.z = -v; R.g.rotation.z = -v; };
-      if (animate) ctx.tween(900, apply2, undefined, ease.back); else apply2(1);
-    };
-    scene.current = { set };
-    set(2, { kind: 'weights', list: [] }, false);
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 6, 13], target: [0, 3, 0], minDistance: 8, maxDistance: 22 });
+  const targetItem = ITEMS[itemIndex];
+  const totalRightWeight = weights.reduce((a, b) => a + b, 0);
+  const isBalanced = targetItem.w === totalRightWeight;
 
-  const sum = weights.reduce((a, b) => a + b, 0);
-  const show = (i: number, w: number[] | null, j: number | null = null) => { setItem(i); setItem2(j); setWeights(w || []); scene.current?.set(i, j !== null ? { kind: 'item', i: j } : { kind: 'weights', list: w || [] }); };
-  const addW = (w: number) => { if (item2 !== null) return; const nw = [...weights, w]; if (nw.length > 12) return; setWeights(nw); scene.current?.set(item, { kind: 'weights', list: nw }); kit.tap(); const s = nw.reduce((a, b) => a + b, 0); if (s === ITEMS[item].w) { kit.good(`${ITEMS[item].np} ${fmt('ne', s)} किलो हो`, `The ${ITEMS[item].en.toLowerCase()} weighs ${s} kg`); kit.star(); } };
-  const delW = () => { if (!weights.length) return; const nw = weights.slice(0, -1); setWeights(nw); scene.current?.set(item, { kind: 'weights', list: nw }); };
+  const tiltAngle =
+    targetItem.w === totalRightWeight
+      ? 0
+      : targetItem.w > totalRightWeight
+        ? 10
+        : -10;
+
+  const addWeight = (w: number) => {
+    kit.tap();
+    const next = [...weights, w];
+    setWeights(next);
+    const sum = next.reduce((a, b) => a + b, 0);
+
+    if (sum === targetItem.w) {
+      kit.good(
+        `स्याबास! तराजु सन्तुलित भयो! ${targetItem.np}को तौल ${toNp(targetItem.w)} के.जी. हो।`,
+        `Balanced! The ${targetItem.en} weighs exactly ${targetItem.w} kg.`
+      );
+      kit.star();
+    } else if (sum > targetItem.w) {
+      kit.oops('ढक बढी भयो! केही ढक हटाउनुहोस्', 'Too heavy on the right! Remove some weights.');
+    }
+  };
+
+  const removeWeight = (idx: number) => {
+    kit.tap();
+    setWeights((prev) => prev.filter((_, i) => i !== idx));
+  };
+
+  const clearWeights = () => {
+    setWeights([]);
+  };
 
   useEffect(() => {
-    if (kit.mode === 'LEARN') { const pairs: [number, number][] = [[0, 4], [3, 1], [5, 2], [2, 0]]; const [a, b] = pairs[li % pairs.length]; show(a, null, b); const hv = ITEMS[a].w > ITEMS[b].w ? a : b; kit.say(`${ITEMS[hv].np} बढी भारी छ, त्यसैले तल झर्यो।`, `The ${ITEMS[hv].en.toLowerCase()} is heavier, so it goes down.`); }
-    else if (kit.mode === 'PLAY') { show(item2 === null ? item : 2, []); kit.say('किलोका तौल थपेर बराबर बनाऔँ।', 'Add kilogram weights until it balances.'); }
+    if (kit.mode === 'LEARN') {
+      setItemIndex(li % ITEMS.length);
+      setWeights([]);
+      const it = ITEMS[li % ITEMS.length];
+      kit.say(
+        `${it.np}लाई तौलन दायाँ पल्लामा १, २ वा ५ के.जी. का ढकहरू राख्नुहोस्।`,
+        `Place 1kg, 2kg, or 5kg weights on the right pan to weigh the ${it.en}.`
+      );
+    } else if (kit.mode === 'PLAY') {
+      setItemIndex(rnd(0, ITEMS.length - 1));
+      setWeights([]);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kit.mode, li]);
 
-  const data = useMemo(() => Array.from({ length: 8 }, (_, i) => {
-    if (i % 2 === 0) { const a = rnd(0, 5); let b = rnd(0, 5); while (ITEMS[b].w === ITEMS[a].w) b = rnd(0, 5); return { kind: 'heavy', a, b }; }
-    return { kind: 'kg', a: rnd(0, 5) };
-  }), []);
-  const questions: (QuizQuestion & { d: any })[] = data.map((d: any, i) => d.kind === 'heavy'
-    ? { np: 'कुन भारी छ? (तल झर्ने)', en: 'Which one is heavier? (the lower side)', d, answer: String(ITEMS[d.a].w > ITEMS[d.b].w ? d.a : d.b), options: [d.a, d.b].map((v) => ({ key: String(v), label: <span>{ITEMS[v].emoji} {kit.t(ITEMS[v].np, ITEMS[v].en)}</span> })) }
-    : { np: `${ITEMS[d.a].np}को तौल कति किलो छ? (तौल गनौँ)`, en: `How many kg does the ${ITEMS[d.a].en.toLowerCase()} weigh? (count the weights)`, d, answer: String(ITEMS[d.a].w), options: numChoices(ITEMS[d.a].w, i * 5 + 2, [1, -1, 2]).map((v) => ({ key: String(v), label: `${fmt(kit.lang, v)} kg` })) });
+  // Quiz questions for Challenge Mode
+  const questions: QuizQuestion[] = ITEMS.map((it, i) => ({
+    np: `यदि तराजुमा ${it.np} र ${toNp(it.w)} के.जी. को ढक बराबर भएमा ${it.np}को तौल कति हो?`,
+    en: `If the ${it.en} balances with ${it.w} kg weight, how much does the ${it.en} weigh?`,
+    answer: String(it.w),
+    options: numChoices(it.w, i * 17 + 3, [1, -1, 2, -2]).map((v) => ({
+      key: String(v),
+      label: `${fmt(kit.lang, v)} ${kit.t('के.जी.', 'kg')}`,
+    })),
+  }));
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', textAlign: 'center' }}>
-      {item2 === null ? <><div style={{ fontSize: 16, fontWeight: 800 }}>{ITEMS[item].emoji} {kit.t(ITEMS[item].np, ITEMS[item].en)}</div><div style={{ fontSize: 32, fontWeight: 900, color: sum === ITEMS[item].w ? '#16a34a' : '#0369a1' }}>{fmt(kit.lang, sum)} kg</div></> : <div style={{ fontSize: 22, fontWeight: 900 }}>{ITEMS[item].emoji} vs {ITEMS[item2].emoji}</div>}
+  const hud = (
+    <div
+      style={{
+        background: '#FFFFFF',
+        borderRadius: 16,
+        padding: '8px 18px',
+        border: '2px solid #187C68',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+        fontSize: 15,
+        fontWeight: 900,
+        color: '#26332E',
+      }}
+    >
+      {kit.t('दायाँ पल्लाको ढक', 'Right Weights')}:{' '}
+      <span style={{ color: isBalanced ? '#16A34A' : '#0284C7', fontSize: 18 }}>
+        {toNp(totalRightWeight)} {kit.t('के.जी.', 'kg')}
+      </span>{' '}
+      {isBalanced && <span style={{ color: '#16A34A' }}>✅ {kit.t('बराबर!', 'Balanced!')}</span>}
     </div>
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 220 }}>{kit.t('भारी वस्तु तल झर्छ, हलुका माथि जान्छ।', 'The heavier thing goes down; the lighter goes up.')}</div>
-      <CBtn color="#16a34a" onClick={() => { kit.star(); setLi(li + 1); }}>{kit.t('अर्को', 'Next')} ➜</CBtn>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <div>
-      <Controls>{ITEMS.map((it, i) => <CBtn key={i} color={i === item && item2 === null ? '#0ea5e9' : '#94a3b8'} style={{ minHeight: 44, padding: '6px 10px', fontSize: 15 }} onClick={() => show(i, [])}>{it.emoji}</CBtn>)}</Controls>
-      <div style={{ marginTop: 6 }}><Controls><b>{kit.t('तौल थपौँ', 'Add weight')}:</b><CBtn color="#64748b" onClick={() => addW(1)}>+1 kg</CBtn><CBtn color="#475569" onClick={() => addW(2)}>+2 kg</CBtn><CBtn color="#334155" onClick={() => addW(5)}>+5 kg</CBtn><CBtn color="#f59e0b" onClick={delW}>↶</CBtn><CBtn color="#8b5cf6" onClick={() => show(rnd(0, 5), [])}>🎲</CBtn></Controls></div>
-    </div>
+
+  const panel = kit.mode === 'CHALLENGE' ? (
+    <QuizPanel kit={kit} questions={questions} />
   ) : (
-    <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => { const d = q.d; if (d.kind === 'heavy') show(d.a, null, d.b); else { const list: number[] = []; let r = ITEMS[d.a].w; while (r >= 5 && Math.random() < 0.5) { list.push(5); r -= 5; } while (r > 0) { list.push(1); r -= 1; } show(d.a, list); } }} />
+    <Controls>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+        <span style={{ fontSize: 13, fontWeight: 800, color: '#26332E' }}>
+          {kit.t('ढक थप्नुहोस्:', 'Add Weights:')}
+        </span>
+        <CBtn color="#334155" onClick={() => addWeight(1)}>+१ {kit.t('के.जी.', 'kg')}</CBtn>
+        <CBtn color="#475569" onClick={() => addWeight(2)}>+२ {kit.t('के.जी.', 'kg')}</CBtn>
+        <CBtn color="#1E293B" onClick={() => addWeight(5)}>+५ {kit.t('के.जी.', 'kg')}</CBtn>
+        <CBtn color="#EF4444" disabled={weights.length === 0} onClick={clearWeights}>
+          ↺ {kit.t('ढक खाली', 'Clear')}
+        </CBtn>
+
+        {kit.mode === 'LEARN' && (
+          <CBtn color="#187C68" onClick={() => setLi((v) => v + 1)}>
+            {kit.t('अर्को वस्तु', 'Next Item')} ➜
+          </CBtn>
+        )}
+
+        {kit.mode === 'PLAY' && (
+          <CBtn
+            color="#D97706"
+            onClick={() => {
+              setItemIndex(rnd(0, ITEMS.length - 1));
+              setWeights([]);
+            }}
+          >
+            🎲 {kit.t('नयाँ वस्तु', 'Random Item')}
+          </CBtn>
+        )}
+      </div>
+    </Controls>
   );
-  void shuffle;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+
+  return (
+    <SimFrame2D kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} grade={2}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 380,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+        }}
+      >
+        <div
+          style={{
+            width: '100%',
+            maxWidth: 820,
+            background: '#FFFFFF',
+            borderRadius: 24,
+            padding: '30px 24px',
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.04)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {/* Double-Pan Balance Scale SVG */}
+          <svg width="640" height="260" viewBox="0 0 640 260">
+            {/* Stand Post */}
+            <rect x="314" y="90" width="12" height="150" fill="#92400E" rx="4" />
+            <ellipse cx="320" cy="240" rx="60" ry="14" fill="#78350F" />
+            <circle cx="320" cy="90" r="8" fill="#F59E0B" stroke="#B45309" strokeWidth="2" />
+
+            {/* Tilting Beam & Hanging Pans */}
+            <g
+              transform={`rotate(${tiltAngle} 320 90)`}
+              style={{ transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
+            >
+              {/* Beam */}
+              <line x1="80" y1="90" x2="560" y2="90" stroke="#D97706" strokeWidth="8" strokeLinecap="round" />
+
+              {/* Left Pan Chains & Pan */}
+              <g transform="translate(80, 90)">
+                <line x1="0" y1="0" x2="-40" y2="70" stroke="#94A3B8" strokeWidth="2" />
+                <line x1="0" y1="0" x2="40" y2="70" stroke="#94A3B8" strokeWidth="2" />
+                <ellipse cx="0" cy="74" rx="55" ry="12" fill="#CBD5E1" stroke="#64748B" strokeWidth="2" />
+                {/* Item emoji & text */}
+                <text x="0" y="55" textAnchor="middle" fontSize="36">
+                  {targetItem.emoji}
+                </text>
+                <text x="0" y="98" textAnchor="middle" fill="#1E293B" fontSize="13" fontWeight="900">
+                  {kit.t(targetItem.np, targetItem.en)}
+                </text>
+              </g>
+
+              {/* Right Pan Chains & Pan */}
+              <g transform="translate(560, 90)">
+                <line x1="0" y1="0" x2="-40" y2="70" stroke="#94A3B8" strokeWidth="2" />
+                <line x1="0" y1="0" x2="40" y2="70" stroke="#94A3B8" strokeWidth="2" />
+                <ellipse cx="0" cy="74" rx="55" ry="12" fill="#CBD5E1" stroke="#64748B" strokeWidth="2" />
+
+                {/* Standard Weights piled on right pan */}
+                {weights.map((w, idx) => (
+                  <g
+                    key={idx}
+                    transform={`translate(${(idx % 3 - 1) * 22}, ${54 - Math.floor(idx / 3) * 16})`}
+                    onClick={() => removeWeight(idx)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <rect x="-10" y="-8" width="20" height="16" rx="4" fill="#334155" stroke="#0F172A" strokeWidth="1.5" />
+                    <text x="0" y="4" textAnchor="middle" fill="#FFFFFF" fontSize="9" fontWeight="900">
+                      {w}k
+                    </text>
+                  </g>
+                ))}
+              </g>
+            </g>
+          </svg>
+
+          {/* Feedback footer */}
+          <div style={{ fontSize: 14, fontWeight: 800, color: '#64748B', textAlign: 'center' }}>
+            {isBalanced ? (
+              <span style={{ color: '#16A34A', fontSize: 16 }}>
+                🎉 {kit.t('तराजु बराबर छ! दुवै पल्लाको तौल बराबर भयो।', 'Perfect! The scale is in balance.')}
+              </span>
+            ) : targetItem.w > totalRightWeight ? (
+              <span>
+                {kit.t('वस्तु गह्रुँगो छ, दायाँ पल्लामा अझै ढक थप्नुहोस्।', 'The item is heavier. Add more weights to the right pan.')}
+              </span>
+            ) : (
+              <span style={{ color: '#EF4444' }}>
+                {kit.t('दायाँ पल्ला गह्रुँगो भयो! ढकमा थिचेर हटाउनुहोस्।', 'The right pan is heavier! Click on a weight to remove it.')}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+    </SimFrame2D>
+  );
 };

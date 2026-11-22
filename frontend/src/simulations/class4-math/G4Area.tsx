@@ -1,84 +1,290 @@
 /**
  * Class 4 lesson 12 · Perimeter and area (परिमिति र क्षेत्रफल)
- * Garden Lab — an ant walks round a rectangular garden (perimeter); square tiles cover it (area).
+ * GardenLab — 2D Rectangular Garden exploring Perimeter (boundary walk) and Area (square tiling).
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { mat, shadowed, textSprite } from '../class1-math-kit/models';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizQuestion } from '../class1-math-kit/SimKit';
 import { rnd } from '../class1-math-kit/nepali';
-import { fmt, Hud, Tip, Props, numQ } from './h4';
+import { fmt, Props, numQ } from './h4';
 
 type Mode = 'P' | 'A';
-interface Api { set: (l: number, w: number, mode: Mode, rows: number) => void; walk: (l: number, w: number, done: () => void) => void }
-const S = 0.85;
 
 export const GardenLab: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G4-L12-01', chapter: 12, titleNp: 'बगैँचा प्रयोगशाला (परिमिति र क्षेत्रफल)', titleEn: 'Garden Lab (Perimeter & Area)' });
+  const kit = useSimKit({
+    code: 'SIM-MATH-G4-L12-01',
+    chapter: 12,
+    titleNp: 'बगैँचा प्रयोगशाला (परिमिति र क्षेत्रफल)',
+    titleEn: 'Garden Lab (Perimeter & Area)',
+  });
+
   const [l, setL] = useState(6);
   const [w, setW] = useState(4);
   const [mode, setMode] = useState<Mode>('P');
-  const [busy, setBusy] = useState(false);
-  const [rows, setRows] = useState(4);
-  const [target, setTarget] = useState({ mode: 'P' as Mode, v: 20 });
-  const scene = useRef<Api | null>(null);
+  const [filledRows, setFilledRows] = useState(4);
 
-  useStage(kit.stageRef, (ctx) => {
-    const g = new THREE.Group(); ctx.scene.add(g); let ant: THREE.Mesh | null = null;
-    const pt = (l2: number, w2: number, u: number, v: number) => new THREE.Vector3((u - l2 / 2) * S, 0.5, (v - w2 / 2) * S);
-    const set = (l2: number, w2: number, m: Mode, r: number) => {
-      g.clear(); ant = null;
-      const floor = shadowed(new THREE.Mesh(new THREE.BoxGeometry(l2 * S, 0.2, w2 * S), mat('#bbf7d0', 0.8))); floor.position.y = 0.1; g.add(floor);
-      if (m === 'A') {
-        for (let i = 0; i < l2; i++) for (let j = 0; j < w2; j++) { if (j >= r) continue; const t = shadowed(new THREE.Mesh(new THREE.BoxGeometry(S * 0.92, 0.18, S * 0.92), mat((i + j) % 2 ? '#38bdf8' : '#0ea5e9', 0.5))); t.position.set((i + 0.5 - l2 / 2) * S, 0.29, (j + 0.5 - w2 / 2) * S); g.add(t); }
+  const perimeter = 2 * (l + w);
+  const area = l * w;
+
+  const handleWalk = () => {
+    setMode('P');
+    kit.tap();
+    kit.say(
+      `परिमिति (Perimeter) = २ × (लम्बाइ + चौडाइ) = २ × (${l} + ${w}) = ${perimeter} मिटर`,
+      `Perimeter = 2 × (L + W) = 2 × (${l} + ${w}) = ${perimeter} m`
+    );
+    kit.star();
+  };
+
+  const handleTile = () => {
+    setMode('A');
+    setFilledRows(w);
+    kit.tap();
+    kit.say(
+      `क्षेत्रफल (Area) = लम्बाइ × चौडाइ = ${l} × ${w} = ${area} वर्ग मिटर`,
+      `Area = L × W = ${l} × ${w} = ${area} sq m`
+    );
+    kit.star();
+  };
+
+  const questions: QuizQuestion[] = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => {
+      const ql = rnd(3, 9);
+      const qw = rnd(2, 6);
+      const qP = 2 * (ql + qw);
+      const qA = ql * qw;
+
+      if (i % 2 === 0) {
+        return numQ(
+          `लम्बाइ ${ql} मिटर र चौडाइ ${qw} मिटर भएको बगैँचाको परिमिति कति हुन्छ?`,
+          `What is the perimeter of a garden ${ql} m long and ${qw} m wide?`,
+          qP,
+          i,
+          [2, -2, 4, -4, ql, qw],
+          (x) => `${fmt(kit.lang, x)} ${kit.t('मि.', 'm')}`,
+          1
+        );
       } else {
-        const cols = ['#ef4444', '#f59e0b', '#ef4444', '#f59e0b']; const sides: [number, number, number, number][] = [[0, 0, 1, 0], [l2, 0, 0, 1], [l2, w2, -1, 0], [0, w2, 0, -1]]; const len = [l2, w2, l2, w2];
-        sides.forEach(([x0, y0, dx, dy], si) => { for (let k = 0; k < len[si]; k++) { const p = pt(l2, w2, x0 + dx * k, y0 + dy * k); const post = shadowed(new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.9, 0.16), mat(cols[si], 0.5))); post.position.set(p.x, 0.55, p.z); g.add(post); } });
+        return numQ(
+          `लम्बाइ ${ql} मिटर र चौडाइ ${qw} मिटर भएको बगैँचाको क्षेत्रफल कति हुन्छ?`,
+          `What is the area of a garden ${ql} m long and ${qw} m wide?`,
+          qA,
+          i + 2,
+          [ql, -ql, qw, -qw, qP],
+          (x) => `${fmt(kit.lang, x)} ${kit.t('वर्ग मि.', 'sq m')}`,
+          1
+        );
       }
-      const lt = textSprite(`${l2}`, 1.5, { px: 56, w: 160, h: 80, bg: '#ffffff', border: '#ef4444' }); lt.position.set(0, 0.6, (w2 / 2) * S + 0.9); g.add(lt);
-      const wt = textSprite(`${w2}`, 1.5, { px: 56, w: 160, h: 80, bg: '#ffffff', border: '#f59e0b' }); wt.position.set((l2 / 2) * S + 0.9, 0.6, 0); g.add(wt);
-    };
-    const walk = (l2: number, w2: number, done: () => void) => {
-      set(l2, w2, 'P', 0); const a = shadowed(new THREE.Mesh(new THREE.SphereGeometry(0.34, 20, 16), mat('#7c2d12', 0.4))); g.add(a); ant = a;
-      const path = [pt(l2, w2, 0, 0), pt(l2, w2, l2, 0), pt(l2, w2, l2, w2), pt(l2, w2, 0, w2), pt(l2, w2, 0, 0)]; const lens = path.slice(1).map((p, i) => p.distanceTo(path[i])); const tot = lens.reduce((s, x) => s + x, 0);
-      ctx.tween(Math.max(2500, (l2 + w2) * 300), (k) => { let d = k * tot, i = 0; while (i < 3 && d > lens[i]) { d -= lens[i]; i++; } const p0 = path[i], p1 = path[i + 1]; a.position.lerpVectors(p0, p1, Math.min(1, d / lens[i])); a.position.y = 0.5; }, done, ease.inOut);
-    };
-    scene.current = { set, walk }; set(6, 4, 'P', 4);
-    return () => { scene.current = null; void ant; };
-  }, [], { camera: [0, 13, 9], target: [0, 0, 0], minDistance: 7, maxDistance: 24, ground: 0xfef9c3 });
+    });
+  }, [kit.lang]);
 
-  const apply = (l2: number, w2: number, m: Mode = mode, r = w2) => { setL(l2); setW(w2); setMode(m); setRows(r); scene.current?.set(l2, w2, m, r); };
-  const P = 2 * (l + w), A = l * w;
-  const newTarget = () => { const m: Mode = rnd(0, 1) ? 'P' : 'A'; const v = m === 'P' ? rnd(5, 14) * 2 : [12, 16, 18, 20, 24, 30, 36][rnd(0, 6)]; setTarget({ mode: m, v }); apply(2, 2, m); kit.say(m === 'P' ? `परिमिति ${fmt('ne', v)} भएको आयत बनाऔँ` : `क्षेत्रफल ${fmt('ne', v)} भएको आयत बनाऔँ`, m === 'P' ? `Make a rectangle with perimeter ${v}` : `Make a rectangle with area ${v}`); };
-  const freshLearn = () => { const l2 = rnd(4, 9), w2 = rnd(2, 5); apply(l2, w2, 'P'); kit.say(`लम्बाइ ${fmt('ne', l2)}, चौडाइ ${fmt('ne', w2)}। कमिला वरिपरि हिँडोस्`, `Length ${l2}, width ${w2}. Let the ant walk all the way round`); };
-  useEffect(() => { if (kit.mode === 'LEARN') freshLearn(); else if (kit.mode === 'PLAY') newTarget(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [kit.mode]);
-  const doWalk = () => { if (busy) return; setMode('P'); setBusy(true); scene.current?.walk(l, w, () => { setBusy(false); kit.say(`परिमिति = २ × (${fmt('ne', l)} + ${fmt('ne', w)}) = ${fmt('ne', P)}`, `Perimeter = 2 × (${l} + ${w}) = ${P}`); kit.star(); }); };
-  const doFill = () => { if (busy) return; setMode('A'); setRows(0); scene.current?.set(l, w, 'A', 0); setBusy(true); let r = 0; const step = () => { r++; setRows(r); scene.current?.set(l, w, 'A', r); if (r < w) window.setTimeout(step, 450); else { setBusy(false); kit.say(`क्षेत्रफल = ${fmt('ne', l)} × ${fmt('ne', w)} = ${fmt('ne', A)}`, `Area = ${l} × ${w} = ${A}`); kit.star(); } }; window.setTimeout(step, 300); };
-  const check = () => { const v = target.mode === 'P' ? P : A; if (v === target.v) { kit.good(); kit.star(); window.setTimeout(newTarget, 1300); } else kit.oops(`अहिले ${target.mode === 'P' ? 'परिमिति' : 'क्षेत्रफल'} ${fmt('ne', v)}`, `Now the ${target.mode === 'P' ? 'perimeter' : 'area'} is ${v}`); };
-  const bump = (dl: number, dw: number) => apply(Math.max(1, Math.min(12, l + dl)), Math.max(1, Math.min(8, w + dw)), kit.mode === 'PLAY' ? target.mode : mode);
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      mascotGreeting={
+        mode === 'P'
+          ? kit.t(
+            `परिमिति (Perimeter) = घेराको कुल लम्बाइ = २ × (${l} + ${w}) = ${perimeter} मिटर`,
+            `Perimeter = Total distance around the boundary = 2 × (${l} + ${w}) = ${perimeter} m`
+          )
+          : kit.t(
+            `क्षेत्रफल (Area) = ओगटेको ठाउँ = लम्बाइ × चौडाइ = ${l} × ${w} = ${area} वर्ग मिटर`,
+            `Area = Surface covered = Length × Width = ${l} × ${w} = ${area} sq m`
+          )
+      }
+      questions={questions}
+      controls={
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <button
+            onClick={handleWalk}
+            style={{
+              padding: '8px 18px',
+              borderRadius: 10,
+              border: mode === 'P' ? '2px solid #EF4444' : '1px solid #CBD5E1',
+              background: mode === 'P' ? '#FEE2E2' : '#FFFFFF',
+              color: mode === 'P' ? '#DC2626' : '#334155',
+              fontWeight: 800,
+              fontSize: 14,
+              cursor: 'pointer',
+            }}
+          >
+            🐜 {kit.t('परिमिति (Perimeter)', 'Perimeter (Walk)')}
+          </button>
+          <button
+            onClick={handleTile}
+            style={{
+              padding: '8px 18px',
+              borderRadius: 10,
+              border: mode === 'A' ? '2px solid #0EA5E9' : '1px solid #CBD5E1',
+              background: mode === 'A' ? '#E0F2FE' : '#FFFFFF',
+              color: mode === 'A' ? '#0284C7' : '#334155',
+              fontWeight: 800,
+              fontSize: 14,
+              cursor: 'pointer',
+            }}
+          >
+            🟩 {kit.t('क्षेत्रफल (Area)', 'Area (Tiles)')}
+          </button>
+          <button
+            onClick={() => l > 2 && setL(l - 1)}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('लम्बाइ', 'L')} −
+          </button>
+          <button
+            onClick={() => l < 10 && setL(l + 1)}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('लम्बाइ', 'L')} +
+          </button>
+          <button
+            onClick={() => w > 2 && setW(w - 1)}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('चौडाइ', 'W')} −
+          </button>
+          <button
+            onClick={() => w < 7 && setW(w + 1)}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('चौडाइ', 'W')} +
+          </button>
+        </div>
+      }
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 650, gap: 16 }}>
+        {/* Metric Summary Card */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #E2E8F0',
+            borderRadius: 16,
+            padding: '12px 28px',
+            textAlign: 'center',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+            display: 'flex',
+            justifyContent: 'space-around',
+            width: '100%',
+          }}
+        >
+          <div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#64748B' }}>
+              {kit.t('लम्बाइ × चौडाइ', 'Length × Width')}
+            </div>
+            <div style={{ fontSize: 20, fontWeight: 900, color: '#1E293B' }}>
+              {l} m × {w} m
+            </div>
+          </div>
+          <div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#EF4444' }}>
+              {kit.t('परिमिति (Perimeter)', 'Perimeter')}
+            </div>
+            <div style={{ fontSize: 22, fontWeight: 900, color: '#EF4444' }}>
+              {fmt(kit.lang, perimeter)} {kit.t('मि.', 'm')}
+            </div>
+          </div>
+          <div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#0EA5E9' }}>
+              {kit.t('क्षेत्रफल (Area)', 'Area')}
+            </div>
+            <div style={{ fontSize: 22, fontWeight: 900, color: '#0EA5E9' }}>
+              {fmt(kit.lang, area)} {kit.t('वर्ग मि.', 'sq m')}
+            </div>
+          </div>
+        </div>
 
-  const data = useMemo(() => Array.from({ length: 8 }, (_, i) => { const l2 = rnd(3, 12), w2 = rnd(2, 8); return { l: l2, w: w2, i }; }), []);
-  const questions: (QuizQuestion & { d: { l: number; w: number; m: Mode } })[] = data.map((d, i) => {
-    const sq = i % 4 === 3; const w2 = sq ? d.l : d.w; const shape = sq ? 'वर्गको' : 'आयतको'; const shapeEn = sq ? 'square' : 'rectangle';
-    if (i % 4 === 2) return { d: { l: d.l, w: d.w, m: 'P' as Mode }, ...numQ(`आयतको परिमिति ${fmt('ne', 2 * (d.l + d.w))} र लम्बाइ ${fmt('ne', d.l)} भए चौडाइ कति?`, `A rectangle has perimeter ${2 * (d.l + d.w)} and length ${d.l}. What is the width?`, d.w, i, [1, -1, 2, d.l], (x) => fmt(kit.lang, x), 1) };
-    if (i % 2 === 0) return { d: { l: d.l, w: w2, m: 'P' as Mode }, ...numQ(`${sq ? 'वर्ग' : 'आयत'}को ${sq ? 'भुजा' : 'लम्बाइ ' + fmt('ne', d.l) + ', चौडाइ'} ${fmt('ne', sq ? d.l : w2)}। परिमिति कति?`, `${shapeEn[0].toUpperCase() + shapeEn.slice(1)}: ${sq ? 'side ' + d.l : 'length ' + d.l + ', width ' + w2}. What is the perimeter?`, 2 * (d.l + w2), i, [2, -2, d.l, 4, -4], (x) => fmt(kit.lang, x), 1) };
-    void shape;
-    return { d: { l: d.l, w: w2, m: 'A' as Mode }, ...numQ(`लम्बाइ ${fmt('ne', d.l)}, चौडाइ ${fmt('ne', w2)} भएको आयतको क्षेत्रफल कति?`, `A rectangle is ${d.l} long and ${w2} wide. What is its area?`, d.l * w2, i + 1, [d.l, -d.l, w2, 2 * (d.l + w2), 1], (x) => fmt(kit.lang, x), 1) };
-  });
+        {/* 2D Interactive Garden Canvas */}
+        <div
+          style={{
+            position: 'relative',
+            background: '#DCFCE7',
+            borderRadius: 18,
+            border: mode === 'P' ? '4px dashed #EF4444' : '3px solid #15803D',
+            padding: '36px 44px',
+            boxShadow: '0 6px 18px rgba(0,0,0,0.04)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {/* Top Label */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 8,
+              fontSize: 12,
+              fontWeight: 800,
+              color: '#15803D',
+              background: '#FFFFFF',
+              padding: '2px 10px',
+              borderRadius: 6,
+            }}
+          >
+            ↔ {kit.t('लम्बाइ', 'Length')}: {l} m
+          </div>
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <Hud color={mode === 'P' ? '#ef4444' : '#0ea5e9'}>
-      {kit.mode === 'PLAY' && <div style={{ fontSize: 15, fontWeight: 900 }}>🎯 {target.mode === 'P' ? kit.t('परिमिति', 'Perimeter') : kit.t('क्षेत्रफल', 'Area')} = {fmt(kit.lang, target.v)}</div>}
-      <div style={{ fontSize: 14, fontWeight: 800, color: '#475569' }}>{kit.t('लम्बाइ', 'Length')} {fmt(kit.lang, l)} · {kit.t('चौडाइ', 'Width')} {fmt(kit.lang, w)}</div>
-      <div style={{ fontSize: 20, fontWeight: 900, color: mode === 'P' ? '#ef4444' : '#0ea5e9' }}>{mode === 'P' ? `${kit.t('परिमिति', 'Perimeter')} = 2 × (${fmt(kit.lang, l)} + ${fmt(kit.lang, w)}) = ${fmt(kit.lang, P)}` : `${kit.t('क्षेत्रफल', 'Area')} = ${fmt(kit.lang, l)} × ${fmt(kit.lang, w)} = ${fmt(kit.lang, rows >= w ? A : l * rows)}`}</div>
-    </Hud>
+          {/* Left Label */}
+          <div
+            style={{
+              position: 'absolute',
+              left: 6,
+              top: '50%',
+              transform: 'translateY(-50%) rotate(-90deg)',
+              fontSize: 12,
+              fontWeight: 800,
+              color: '#15803D',
+              background: '#FFFFFF',
+              padding: '2px 10px',
+              borderRadius: 6,
+            }}
+          >
+            ↕ {kit.t('चौडाइ', 'Width')}: {w} m
+          </div>
+
+          {/* Grid Area Tiles */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: `repeat(${l}, 38px)`,
+              gap: 2,
+              background: 'rgba(0,0,0,0.08)',
+              padding: 2,
+              borderRadius: 6,
+            }}
+          >
+            {Array.from({ length: w }).map((_, rIdx) =>
+              Array.from({ length: l }).map((__, cIdx) => (
+                <div
+                  key={`${rIdx}-${cIdx}`}
+                  style={{
+                    width: 38,
+                    height: 38,
+                    borderRadius: 4,
+                    background:
+                      mode === 'A'
+                        ? (rIdx + cIdx) % 2 === 0
+                          ? '#0284C7'
+                          : '#38BDF8'
+                        : '#BBF7D0',
+                    border: '1px solid rgba(0,0,0,0.06)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 10,
+                    fontWeight: 700,
+                    color: mode === 'A' ? '#FFFFFF' : '#166534',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  {mode === 'A' ? '1m²' : ''}
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+    </SimFrame2D>
   );
-  const adj = [[-1, 0, 'L −'], [1, 0, 'L +'], [0, -1, 'W −'], [0, 1, 'W +']].map(([a, b, t]) => <CBtn key={t as string} color="#f59e0b" disabled={busy} onClick={() => bump(a as number, b as number)}>{kit.lang === 'ne' ? (t as string).replace('L', 'ल').replace('W', 'चौ') : (t as string)}</CBtn>);
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls><Tip>{kit.t('परिमिति = वरिपरिको दुरी · क्षेत्रफल = भित्रको ठाउँ (वर्ग एकाइ)', 'Perimeter = distance around · Area = space inside (square units)')}</Tip>{adj}<CBtn color="#ef4444" disabled={busy} onClick={doWalk}>🐜 {kit.t('परिमिति', 'Perimeter')}</CBtn><CBtn color="#0ea5e9" disabled={busy} onClick={doFill}>▦ {kit.t('क्षेत्रफल', 'Area')}</CBtn><CBtn color="#8b5cf6" disabled={busy} onClick={freshLearn}>🎲</CBtn></Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>{adj}<CBtn color="#16a34a" onClick={check}>✓ {kit.t('जाँचौँ', 'Check')}</CBtn><CBtn color="#8b5cf6" onClick={newTarget}>🎲</CBtn></Controls>
-  ) : <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => apply(q.d.l, q.d.w, q.d.m)} />;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };
+export default GardenLab;

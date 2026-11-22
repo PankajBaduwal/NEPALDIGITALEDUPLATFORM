@@ -2,12 +2,10 @@
  * Class 5 lesson 1 · Lines and angles (AngleLab) and lesson 2 · Solid objects (SolidLab).
  * `solidCfg` is also used by Class 6 lesson 17.
  */
-import * as THREE from 'three';
-import { mat, shadowed } from '../class1-math-kit/models';
 import { rnd } from '../class1-math-kit/nepali';
 import { makeLab, LabCfg } from './Lab';
 import { bi, choice, numChoice, Params } from './h5';
-import { box, tag, rod, sector, disc } from './vis';
+import { box, tag, rod, sector, disc, customDraw } from './vis';
 
 /* ───────────── Angle lab ───────────── */
 const kindOf = (a: number) => (a === 0 ? 0 : a < 90 ? 1 : a === 90 ? 2 : a < 180 ? 3 : a === 180 ? 4 : a < 360 ? 5 : 6);
@@ -66,21 +64,117 @@ export const SOLIDS: Solid[] = [
 ];
 const FC = ['#ef4444', '#f97316', '#facc15', '#22c55e', '#0ea5e9', '#8b5cf6'];
 
-const drawSolid = (g: THREE.Group, s: Solid, spread: number) => {
-  const root = new THREE.Group(); root.position.y = 3; g.add(root);
-  if (s.faces) {
-    s.faces.forEach((f, k) => {
-      const pos: number[] = []; for (let i = 1; i < f.length - 1; i++) [f[0], f[i], f[i + 1]].forEach((v) => pos.push(...v));
-      const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); geo.computeVertexNormals();
-      const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: FC[k % 6], side: THREE.DoubleSide, roughness: 0.5, transparent: true, opacity: 0.93 })); m.castShadow = true;
-      const c = new THREE.Vector3(); f.forEach((v) => c.add(new THREE.Vector3(...v))); c.divideScalar(f.length);
-      const grp = new THREE.Group(); grp.position.copy(c.clone().multiplyScalar(spread * 0.7)); grp.add(m);
-      const loop = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(f.map((v) => new THREE.Vector3(...v))), new THREE.LineBasicMaterial({ color: '#0f172a' })); grp.add(loop); root.add(grp);
-    });
-  } else if (s.curved === 'cyl') { const m = shadowed(new THREE.Mesh(new THREE.CylinderGeometry(1.4, 1.4, 3, 40), mat('#38bdf8', 0.4))); root.add(m); }
-  else if (s.curved === 'cone') { const m = shadowed(new THREE.Mesh(new THREE.ConeGeometry(1.7, 3.2, 40), mat('#f97316', 0.4))); root.add(m); }
-  else { const m = shadowed(new THREE.Mesh(new THREE.SphereGeometry(1.9, 40, 28), mat('#22c55e', 0.3))); root.add(m); }
-  const rot = (g.userData.rot ?? 0) as number; root.rotation.y = rot + 0.6; root.rotation.x = 0.35;
+const drawSolid = (g: any, s: Solid, spread: number) => {
+  customDraw(g, (ctx, toScreen, scale) => {
+    if (s.faces) {
+      // 3D rotation angle
+      const rotY = 0.6;
+      const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+
+      // Project 3D vector with rotation and spread
+      const proj = (vx: number, vy: number, vz: number, cx: number, cy: number, cz: number) => {
+        const ox = vx + cx * spread * 0.7;
+        const oy = vy + cy * spread * 0.7 + 3.0;
+        const oz = vz + cz * spread * 0.7;
+        // Rotate around Y
+        const rx = ox * cosY - oz * sinY;
+        const rz = ox * sinY + oz * cosY;
+        return toScreen(rx, oy, rz);
+      };
+
+      // Compute faces with centroid for depth sorting
+      const sortedFaces = s.faces.map((f, k) => {
+        let cx = 0, cy = 0, cz = 0;
+        f.forEach(([vx, vy, vz]) => { cx += vx; cy += vy; cz += vz; });
+        cx /= f.length; cy /= f.length; cz /= f.length;
+        const rz = cx * sinY + cz * cosY;
+        return { f, k, cx, cy, cz, depth: rz };
+      }).sort((a, b) => a.depth - b.depth);
+
+      sortedFaces.forEach(({ f, k, cx, cy, cz }) => {
+        ctx.fillStyle = FC[k % 6];
+        ctx.globalAlpha = 0.9;
+        ctx.beginPath();
+        f.forEach(([vx, vy, vz], idx) => {
+          const [sx, sy] = proj(vx, vy, vz, cx, cy, cz);
+          if (idx === 0) ctx.moveTo(sx, sy);
+          else ctx.lineTo(sx, sy);
+        });
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = '#0F172A';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      });
+    } else if (s.curved === 'cyl') {
+      const [topX, topY] = toScreen(0, 4.4, 0);
+      const [botX, botY] = toScreen(0, 1.6, 0);
+      const rw = 1.4 * scale;
+      const rh = 0.45 * scale;
+
+      // Cylinder Body
+      ctx.fillStyle = '#38BDF8';
+      ctx.beginPath();
+      ctx.moveTo(topX - rw, topY);
+      ctx.lineTo(botX - rw, botY);
+      ctx.ellipse(botX, botY, rw, rh, 0, Math.PI, 0, true);
+      ctx.lineTo(topX + rw, topY);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#0284C7';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Top Lid
+      ctx.fillStyle = '#7DD3FC';
+      ctx.beginPath();
+      ctx.ellipse(topX, topY, rw, rh, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+    } else if (s.curved === 'cone') {
+      const [apexX, apexY] = toScreen(0, 4.8, 0);
+      const [botX, botY] = toScreen(0, 1.6, 0);
+      const rw = 1.7 * scale;
+      const rh = 0.45 * scale;
+
+      // Cone Body
+      ctx.fillStyle = '#FB923C';
+      ctx.beginPath();
+      ctx.moveTo(apexX, apexY);
+      ctx.lineTo(botX - rw, botY);
+      ctx.ellipse(botX, botY, rw, rh, 0, Math.PI, 0, true);
+      ctx.lineTo(apexX, apexY);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#EA580C';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Bottom Base Outline
+      ctx.fillStyle = '#FDBA74';
+      ctx.beginPath();
+      ctx.ellipse(botX, botY, rw, rh, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    } else {
+      // Sphere
+      const [cx, cy] = toScreen(0, 3, 0);
+      const rad = 1.9 * scale;
+      const grad = ctx.createRadialGradient(cx - rad * 0.3, cy - rad * 0.3, rad * 0.1, cx, cy, rad);
+      grad.addColorStop(0, '#86EFAC');
+      grad.addColorStop(0.7, '#22C55E');
+      grad.addColorStop(1, '#15803D');
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#166534';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+  }, 1);
 };
 
 export const solidCfg = (o: { code: string; chapter: number; titleNp: string; titleEn: string; six?: boolean }): LabCfg => ({

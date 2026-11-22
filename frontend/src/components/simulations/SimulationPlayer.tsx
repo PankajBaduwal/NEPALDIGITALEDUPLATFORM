@@ -7,7 +7,6 @@ import { ArrowLeft, Maximize2, Minimize2, ExternalLink, RefreshCw } from 'lucide
 import { KprietSimulationPlayer } from './KprietSimulationPlayer';
 import { launchOnSmartBoard } from './smartBoardLaunch';
 import { findClass1Sim } from '../../simulations/class1-math-ch11-22/registry';
-import { findClass1ThreeD } from '../../simulations/class1-math-3d/registry';
 import { PositionPlayground } from '../../simulations/class1-math-ch1/PositionPlayground';
 import { BigSmallWorld } from '../../simulations/class1-math-ch1/BigSmallWorld';
 import { TallShortAdventure } from '../../simulations/class1-math-ch1/TallShortAdventure';
@@ -77,8 +76,8 @@ import { AdditionEquationStudio as AdditionEquationStudioCh10 } from '../../simu
 import { AdditionBlockBuilder } from '../../simulations/class1-math-ch10/AdditionBlockBuilder';
 import { AdditionChallengeWorld } from '../../simulations/class1-math-ch10/AdditionChallengeWorld';
 
-// Class 1–5 Mathematics - Interactive Number Line & Counting Frog 3D Edition
-import { NumberLineFrog3D } from '../../simulations/number-line-3d/NumberLineFrog3D';
+// Class 1–5 Mathematics - Interactive Number Line & Counting Frog 2D Edition
+import { NumberLineFrog2D } from '../../simulations/number-line-2d/NumberLineFrog2D';
 
 // Class 4 Science & Technology - Chapter 1: Scientific Learning (वैज्ञानिक सिकाइ)
 import { FloatingSinkingLab } from '../../simulations/class4-science/ch1-scientific-learning/FloatingSinkingLab';
@@ -219,10 +218,10 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(() => {});
+      document.documentElement.requestFullscreen().catch(() => { });
       setIsFullscreen(true);
     } else {
-      document.exitFullscreen().catch(() => {});
+      document.exitFullscreen().catch(() => { });
       setIsFullscreen(false);
     }
   };
@@ -232,16 +231,7 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
     return <KprietSimulationPlayer simulationId={simulation.componentKey.slice('kpriet:'.length)} title={simulation.title} onClose={onClose} />;
   }
 
-  // Class 1 Mathematics chapters 1–10: the 3D rebuilds take over from the older 2D pages (same componentKey)
-  const threeD = findClass1ThreeD(simulation.componentKey);
-  if (threeD) {
-    const Sim3D = threeD;
-    return (
-      <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', fontWeight: 800, color: '#0f766e' }}>Loading…</div>}>
-        <Sim3D onBackToLibrary={onClose} userRole={userRole} />
-      </Suspense>
-    );
-  }
+  // Class 1–6 Mathematics: rendered in 100% polished 2D educational simulations
 
   // Render direct interactive React Three.js WebGL components
   if (
@@ -434,13 +424,13 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
     );
   }
 
-  // Class 1–5 Mathematics - Interactive Number Line & Counting Frog 3D Edition
+  // Class 1–5 Mathematics - Interactive Number Line & Counting Frog 2D Edition
   if (
     simulation.componentKey === 'class1-math-number-line-frog' ||
     simulation.code === 'SIM-MATH-G1-NUMBERLINE' ||
     simulation.runtimeUrl?.includes('math-number-line')
   ) {
-    return <NumberLineFrog3D onBackToLibrary={onClose} userRole={userRole} embedded={embedded} />;
+    return <NumberLineFrog2D onBackToLibrary={onClose} userRole={userRole} embedded={embedded} />;
   }
 
   // ── Class 4 Science & Technology (विज्ञान तथा प्रविधि - कक्षा ४) ────────
@@ -768,24 +758,25 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
       style={{
         width: '100%',
         height: isFullscreen ? '100vh' : '88vh',
-        background: '#0f172a',
+        background: '#F5F7F5',
         borderRadius: isFullscreen ? '0' : '16px',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
-        boxShadow: '0 8px 30px rgba(0,0,0,0.35)',
+        boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+        border: '1px solid #DCE5DE',
       }}
     >
       {/* Player Header */}
       <div
         style={{
-          background: '#1e293b',
+          background: '#187C68',
           color: '#ffffff',
           padding: '12px 20px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          borderBottom: '1px solid #334155',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -795,23 +786,24 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              background: 'rgba(255,255,255,0.1)',
+              background: 'rgba(255,255,255,0.18)',
               color: '#ffffff',
               border: 'none',
-              padding: '6px 14px',
-              borderRadius: '8px',
-              fontSize: '12px',
-              fontWeight: '700',
+              padding: '8px 14px',
+              borderRadius: '10px',
+              fontSize: '13px',
+              fontWeight: '800',
               cursor: 'pointer',
+              transition: 'background 0.15s',
             }}
           >
             <ArrowLeft size={16} /> Return to Library
           </button>
           <div>
-            <h3 style={{ margin: 0, fontSize: '15px', fontWeight: '800' }}>
+            <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '900' }}>
               {simulation.title} {simulation.titleNepali && `(${simulation.titleNepali})`}
             </h3>
-            <span style={{ fontSize: '11px', color: '#94a3b8' }}>
+            <span style={{ fontSize: '11px', color: '#A7F3D0', fontWeight: '700' }}>
               Class {simulation.gradeLevels?.join(', ')} • {simulation.subjectCode || 'General'}
             </span>
           </div>
@@ -821,7 +813,7 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
           <button
             onClick={toggleFullscreen}
             style={{
-              background: 'rgba(255,255,255,0.1)',
+              background: 'rgba(255,255,255,0.18)',
               color: '#ffffff',
               border: 'none',
               padding: '8px',

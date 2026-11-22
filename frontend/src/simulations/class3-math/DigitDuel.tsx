@@ -1,85 +1,305 @@
 /**
  * Lesson 3 · Comparison of numbers (सङ्ख्याको तुलना)
- * Digit Duel — two five-digit numbers stand in rows of cards; compare place by place from the left and choose >, < or =.
+ * Digit Duel — two five-digit numbers compared place by place from left to right; choose >, < or =.
+ * Pure 2D Implementation for Smart Boards & Desktops.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { mat, shadowed, textSprite } from '../class1-math-kit/models';
-import { rnd, shuffle } from '../class1-math-kit/nepali';
+import React, { useEffect, useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit/SimFrame2D';
+import { Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { rnd, shuffle, toNp } from '../class1-math-kit/nepali';
 import { big, fmt, digitsOf, PLACES } from './h3';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
-const pair = (): [number, number] => {
-  const a = rnd(10000, 99999); const r = rnd(0, 9);
-  if (r === 0) return [a, a];
-  const same = rnd(0, 3); const s = String(a); let b = Number(s.slice(0, same) + String(rnd(0, 9)) + String(rnd(10000, 99999)).slice(same + 1));
-  if (b < 10000) b += 10000; return [a, b];
-};
+
 const sym = (a: number, b: number) => (a > b ? '>' : a < b ? '<' : '=');
 
 export const DigitDuel: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G3-L3-01', chapter: 3, titleNp: 'अङ्कको द्वन्द्व (तुलना)', titleEn: 'Digit Duel (Comparison)' });
-  const [ab, setAb] = useState<[number, number]>([48215, 48721]);
-  const [col, setCol] = useState(-1);
-  const [shown, setShown] = useState(false);
-  const [auto, setAuto] = useState(0);
-  const timers = useRef<number[]>([]);
-  const scene = useRef<{ show: (a: number, b: number) => void; mark: (c: number) => void } | null>(null);
+  const kit = useSimKit({
+    code: 'SIM-MATH-G3-L3-01',
+    chapter: 3,
+    titleNp: 'अङ्कको द्वन्द्व (तुलना)',
+    titleEn: 'Digit Duel (Comparison)',
+  });
 
-  useStage(kit.stageRef, (ctx) => {
-    const g = new THREE.Group(); ctx.scene.add(g);
-    let cards: THREE.Mesh[][] = [[], []]; const labels: THREE.Object3D[] = [];
-    const clear = () => { g.clear(); cards = [[], []]; labels.length = 0; };
-    const show = (a: number, b: number) => {
-      clear();
-      [a, b].forEach((n, r) => digitsOf(n).forEach((d, c) => {
-        const m = shadowed(new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.5, 2.1), mat(r ? '#38bdf8' : '#fb923c', 0.5))); m.position.set((c - 2) * 2.1, 0.25, r ? 2.2 : -2.2); g.add(m); cards[r].push(m);
-        const t = textSprite(String(d), 1.8, { px: 150, w: 128, h: 128, bg: null, color: '#0f172a' }); t.position.set((c - 2) * 2.1, 1.5, r ? 2.2 : -2.2); g.add(t);
-      }));
-      PLACES.forEach((p, c) => { const t = textSprite(p.np, 1.6, { px: 44, w: 256, h: 96, bg: null, color: '#475569' }); t.position.set((c - 2) * 2.1, 0.1, 0); g.add(t); });
-    };
-    const mark = (c: number) => cards.forEach((row) => row.forEach((m, i) => { (m.material as THREE.MeshStandardMaterial).emissive.setHex(i === c ? 0xfacc15 : 0); (m.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.6; m.position.y = i === c ? 0.6 : 0.25; }));
-    scene.current = { show, mark }; show(48215, 48721);
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 9, 11], target: [0, 0.6, 0], minDistance: 7, maxDistance: 20, ground: 0xfef9c3 });
+  const [a, setA] = useState(48215);
+  const [b, setB] = useState(48721);
+  const [activeCol, setActiveCol] = useState(-1);
+  const [revealed, setRevealed] = useState(false);
+  const [guess, setGuess] = useState<string | null>(null);
 
-  const clearTimers = () => { timers.current.forEach((t) => window.clearTimeout(t)); timers.current = []; };
-  useEffect(() => clearTimers, []);
-  const load = (a: number, b: number) => { clearTimers(); setAb([a, b]); setCol(-1); setShown(false); scene.current?.show(a, b); };
+  const da = digitsOf(a);
+  const db = digitsOf(b);
 
-  const walk = (a: number, b: number) => {
-    const da = digitsOf(a), db = digitsOf(b); let c = 0;
-    const step = () => {
-      setCol(c); scene.current?.mark(c); kit.tap();
-      if (da[c] !== db[c] || c === 4) {
-        timers.current.push(window.setTimeout(() => { setShown(true); const s = sym(a, b); kit.say(s === '=' ? 'सबै अङ्क उस्तै छन् — दुवै सङ्ख्या बराबर छन्' : `${PLACES[c].np}को अङ्क ${da[c]} र ${db[c]} फरक छ — ${a > b ? 'पहिलो ठूलो' : 'दोस्रो ठूलो'}`, s === '=' ? 'All digits match — the numbers are equal' : `The ${PLACES[c].en.toLowerCase()} digits differ: ${da[c]} and ${db[c]} — ${a > b ? 'the first is greater' : 'the second is greater'}`); }, 700));
-      } else { c += 1; timers.current.push(window.setTimeout(step, 900)); }
-    };
-    step();
+  const newPair = () => {
+    const x = rnd(10000, 99999);
+    // 50% chance of differing in higher places, 25% near end, 10% equal
+    const r = rnd(0, 9);
+    let y = x;
+    if (r !== 0) {
+      const matchPlaces = rnd(0, 3);
+      const strA = String(x);
+      const diffDigit = (Number(strA[matchPlaces]) + rnd(1, 8)) % 10;
+      const strB = strA.slice(0, matchPlaces) + diffDigit + strA.slice(matchPlaces + 1);
+      y = Number(strB);
+      if (y < 10000) y += 10000;
+    }
+    setA(x);
+    setB(y);
+    setActiveCol(-1);
+    setRevealed(false);
+    setGuess(null);
   };
+
+  const walkStepByStep = () => {
+    setActiveCol(0);
+    setRevealed(false);
+    kit.tap();
+
+    let c = 0;
+    const interval = setInterval(() => {
+      setActiveCol(c);
+      kit.tap();
+      if (da[c] !== db[c] || c === 4) {
+        clearInterval(interval);
+        setRevealed(true);
+        const s = sym(a, b);
+        kit.say(
+          s === '='
+            ? 'सबै अङ्क बराबर छन् — दुवै सङ्ख्या बराबर छन्'
+            : `${PLACES[c].np}को अङ्क ${toNp(da[c])} र ${toNp(db[c])} फरक छ — ${a > b ? 'पहिलो ठूलो' : 'दोस्रो ठूलो'}`,
+          s === '='
+            ? 'All digits match — numbers are equal'
+            : `${PLACES[c].en} digits differ: ${da[c]} vs ${db[c]}`
+        );
+      } else {
+        c += 1;
+      }
+    }, 800);
+  };
+
+  const handleGuess = (sign: string) => {
+    const correct = sym(a, b);
+    setGuess(sign);
+    setRevealed(true);
+    if (sign === correct) {
+      kit.good(
+        `स्याबास! ${toNp(a.toLocaleString('en-US'))} ${sign} ${toNp(b.toLocaleString('en-US'))} सही हो!`,
+        `Correct! ${a.toLocaleString('en-US')} ${sign} ${b.toLocaleString('en-US')}`
+      );
+      kit.star();
+    } else {
+      kit.oops('ध्यान दिएर बायाँतर्फबाट पहिलो फरक अङ्क तुलना गरौँ', 'Compare digits from left to right.');
+    }
+  };
+
   useEffect(() => {
-    if (kit.mode === 'LEARN') { const p = pair(); load(p[0], p[1]); kit.say('बायाँबाट अङ्क तुलना गरौँ', 'Compare the digits from the left'); timers.current.push(window.setTimeout(() => walk(p[0], p[1]), 1200)); }
-    else if (kit.mode === 'PLAY') { const p = pair(); load(p[0], p[1]); }
+    newPair();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [kit.mode, auto]);
+  }, [kit.mode]);
 
-  const choose = (s: string) => { if (shown) return; const right = sym(ab[0], ab[1]); walk(ab[0], ab[1]); if (s === right) { kit.good(); kit.star(); } else kit.oops(`सही चिन्ह ${right} हो`, `The right sign is ${right}`); };
+  // Quiz Questions for Challenge Mode
+  const quizData = useMemo(() => Array.from({ length: 6 }, () => {
+    const x = rnd(10000, 99999);
+    const y = rnd(0, 4) === 0 ? x : x + rnd(-300, 300);
+    return { a: x, b: Math.max(10000, Math.min(99999, y)) };
+  }), []);
 
-  const data = useMemo(() => Array.from({ length: 8 }, () => pair()), []);
-  const questions: (QuizQuestion & { p: [number, number] })[] = data.map((p, i) => ({ np: `${p[0].toLocaleString('en-US')} ◯ ${p[1].toLocaleString('en-US')} — सही चिन्ह कुन हो?`, en: `${p[0].toLocaleString('en-US')} ◯ ${p[1].toLocaleString('en-US')} — which sign fits?`, p, answer: sym(p[0], p[1]), options: shuffle(['>', '<', '='], i + 1).map((s) => ({ key: s, label: s })) }));
+  const questions: QuizQuestion[] = quizData.map((d) => ({
+    np: `${toNp(d.a.toLocaleString('en-US'))} ___ ${toNp(d.b.toLocaleString('en-US'))} मा कुन चिह्न मिल्छ?`,
+    en: `Which sign completes ${d.a.toLocaleString('en-US')} ___ ${d.b.toLocaleString('en-US')}?`,
+    answer: sym(d.a, d.b),
+    options: ['>', '<', '='].map((s) => ({ key: s, label: s })),
+  }));
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #f59e0b', textAlign: 'center' }}>
-      <div style={{ fontSize: 26, fontWeight: 900 }}><span style={{ color: '#ea580c' }}>{big(kit.lang, ab[0])}</span> {shown ? <span style={{ color: '#16a34a' }}>{sym(ab[0], ab[1])}</span> : '◯'} <span style={{ color: '#0284c7' }}>{big(kit.lang, ab[1])}</span></div>
-      {col >= 0 && <div style={{ fontSize: 14, fontWeight: 800 }}>{kit.t(PLACES[col].np, PLACES[col].en)}: {fmt(kit.lang, digitsOf(ab[0])[col])} / {fmt(kit.lang, digitsOf(ab[1])[col])}</div>}
+  const hud = (
+    <div
+      style={{
+        background: '#FFFFFF',
+        borderRadius: 16,
+        padding: '8px 18px',
+        border: '2px solid #187C68',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+        fontSize: 18,
+        fontWeight: 900,
+        color: '#26332E',
+      }}
+    >
+      <span style={{ color: '#0284C7' }}>{toNp(a.toLocaleString('en-US'))}</span>{' '}
+      <span style={{ color: '#187C68', padding: '0 6px' }}>{revealed ? sym(a, b) : '?'}</span>{' '}
+      <span style={{ color: '#E11D48' }}>{toNp(b.toLocaleString('en-US'))}</span>
     </div>
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls><div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 220 }}>{kit.t('बढी अङ्क भएको सङ्ख्या ठूलो · अङ्क बराबर भए बायाँबाट तुलना', 'More digits = bigger. Same digits? compare from the left.')}</div><CBtn color="#16a34a" onClick={() => { kit.star(); setAuto(auto + 1); }}>{kit.t('अर्को', 'Next')} ➜</CBtn></Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>{['>', '<', '='].map((s) => <CBtn key={s} color="#8b5cf6" style={{ minWidth: 70, fontSize: 28 }} onClick={() => choose(s)}>{s}</CBtn>)}<CBtn color="#16a34a" onClick={() => setAuto(auto + 1)}>🎲 {kit.t('अर्को', 'Next')}</CBtn></Controls>
-  ) : <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => load(q.p[0], q.p[1])} />;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+
+  const panel = kit.mode === 'CHALLENGE' ? (
+    <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => { setA(q.a); setB(q.b); setRevealed(false); }} />
+  ) : (
+    <Controls>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+        <div style={{ display: 'inline-flex', gap: 6 }}>
+          {['>', '=', '<'].map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => handleGuess(s)}
+              style={{
+                width: 48,
+                height: 44,
+                borderRadius: 10,
+                fontSize: 22,
+                fontWeight: 900,
+                border: 'none',
+                cursor: 'pointer',
+                background: guess === s ? (s === sym(a, b) ? '#16A34A' : '#DC2626') : '#187C68',
+                color: '#FFFFFF',
+              }}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+
+        <CBtn color="#059669" onClick={walkStepByStep}>
+          🔍 {kit.t('स्थानमान तुलना गरौँ', 'Step-by-Step Compare')}
+        </CBtn>
+        <CBtn color="#64748B" onClick={newPair}>
+          🎲 {kit.t('नयाँ सङ्ख्याहरू', 'New Pair')}
+        </CBtn>
+      </div>
+    </Controls>
+  );
+
+  return (
+    <SimFrame2D kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} grade={3}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 380,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          gap: 20,
+        }}
+      >
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 24,
+            padding: '30px 40px',
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.04)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 20,
+            maxWidth: 780,
+            width: '100%',
+          }}
+        >
+          {/* Column Place Labels */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(5, 1fr)',
+              gap: 12,
+              width: '100%',
+              textAlign: 'center',
+            }}
+          >
+            {PLACES.map((p, i) => (
+              <div
+                key={p.en}
+                style={{
+                  fontSize: 12,
+                  fontWeight: 900,
+                  color: activeCol === i ? '#DC2626' : p.color,
+                  background: activeCol === i ? '#FEE2E2' : '#F8FAFC',
+                  padding: '6px 4px',
+                  borderRadius: 8,
+                  border: activeCol === i ? '2px solid #EF4444' : '1px solid #E2E8F0',
+                }}
+              >
+                {kit.lang === 'ne' ? p.np : p.en}
+              </div>
+            ))}
+          </div>
+
+          {/* Row A: First Number */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, width: '100%' }}>
+            <span style={{ fontSize: 13, fontWeight: 900, color: '#0284C7', minWidth: 50 }}>
+              {kit.t('सङ्ख्या १:', 'Num 1:')}
+            </span>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, flex: 1 }}>
+              {da.map((digit, i) => (
+                <div
+                  key={i}
+                  style={{
+                    background: activeCol === i ? '#E0F2FE' : '#FFFFFF',
+                    border: `2.5px solid ${activeCol === i ? '#0284C7' : '#CBD5E1'}`,
+                    borderRadius: 12,
+                    padding: '12px 0',
+                    textAlign: 'center',
+                    fontSize: 26,
+                    fontWeight: 900,
+                    color: '#0284C7',
+                    boxShadow: activeCol === i ? '0 4px 12px rgba(2, 132, 199, 0.2)' : 'none',
+                  }}
+                >
+                  {toNp(digit)}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Middle Sign Badge */}
+          <div
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: '50%',
+              background: '#F1F5F9',
+              border: '3px solid #187C68',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 26,
+              fontWeight: 900,
+              color: '#187C68',
+            }}
+          >
+            {revealed ? sym(a, b) : '?'}
+          </div>
+
+          {/* Row B: Second Number */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, width: '100%' }}>
+            <span style={{ fontSize: 13, fontWeight: 900, color: '#E11D48', minWidth: 50 }}>
+              {kit.t('सङ्ख्या २:', 'Num 2:')}
+            </span>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, flex: 1 }}>
+              {db.map((digit, i) => (
+                <div
+                  key={i}
+                  style={{
+                    background: activeCol === i ? '#FFE4E6' : '#FFFFFF',
+                    border: `2.5px solid ${activeCol === i ? '#E11D48' : '#CBD5E1'}`,
+                    borderRadius: 12,
+                    padding: '12px 0',
+                    textAlign: 'center',
+                    fontSize: 26,
+                    fontWeight: 900,
+                    color: '#E11D48',
+                    boxShadow: activeCol === i ? '0 4px 12px rgba(225, 29, 72, 0.2)' : 'none',
+                  }}
+                >
+                  {toNp(digit)}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </SimFrame2D>
+  );
 };

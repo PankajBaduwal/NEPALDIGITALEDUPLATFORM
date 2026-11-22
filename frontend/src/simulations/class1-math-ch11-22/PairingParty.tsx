@@ -1,121 +1,312 @@
 /**
  * Chapter 12 · Odd and Even numbers (जोर र बिजोर सङ्ख्या)
- * Pairing Party — balls line up in two columns; make pairs. No one left alone = even, one left alone = odd.
+ * Sim 1: Pairing Party (जोडी बनाऔँ) — Pure 2D Edition
+ * 100% 2D SVG / CSS Animations – No Three.js/WebGL dependencies.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, QuizPanel, Controls, CBtn, useSimKit, QuizQuestion } from '../class1-math-kit/SimKit';
-import { ball, mat, shadowed, textSprite, PALETTE } from '../class1-math-kit/models';
-import { enName, npName, toNp, shuffle, rnd } from '../class1-math-kit/nepali';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp } from '../class1-math-kit/nepali';
 
-interface Props { onBackToLibrary: () => void; userRole?: string }
+interface Props {
+  onBackToLibrary: () => void;
+  userRole?: string;
+}
+
 const LEARN_NUMS = [6, 7, 10, 13, 16, 19];
+const BALL_EMOJIS = ['⚽', '🏀', '🎾', '🏐', '⚾', '🎱', '🔮', '🎈'];
 
 export const PairingParty: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G1-CH12-01', chapter: 12, titleNp: 'जोडी बनाऔँ (जोर र बिजोर)', titleEn: 'Pairing Party (Odd and Even)' });
-  const [n, setN] = useState(7);
-  const [paired, setPaired] = useState(false);
-  const [li, setLi] = useState(0);
-  const scene = useRef<{ set: (n: number) => void; pair: () => void } | null>(null);
-  const live = useRef({ onPaired: () => {} });
-  live.current.onPaired = () => setPaired(true);
+  const kit = useSimKit({
+    code: 'SIM-MATH-G1-CH12-01',
+    chapter: 12,
+    titleNp: 'जोडी बनाऔँ (जोर र बिजोर)',
+    titleEn: 'Pairing Party (Odd and Even)',
+  });
 
-  useStage(kit.stageRef, (ctx) => {
-    const stage = shadowed(new THREE.Mesh(new THREE.CylinderGeometry(5.6, 5.9, 0.4, 48), mat('#fde68a', 0.8)));
-    stage.position.y = 0.2; ctx.scene.add(stage);
-    const group = new THREE.Group(); group.position.y = 0.4; ctx.scene.add(group);
-    let balls: THREE.Object3D[] = [];
-    let extras: THREE.Object3D[] = [];
-    const slot = (i: number, total: number) => {
-      const rows = Math.ceil(total / 2);
-      return new THREE.Vector3(i % 2 === 0 ? -1.9 : 1.9, 0.6, (Math.floor(i / 2) - (rows - 1) / 2) * 1.25);
-    };
-    const set = (num: number) => {
-      [...balls, ...extras].forEach((o) => group.remove(o));
-      balls = []; extras = [];
-      for (let i = 0; i < num; i++) {
-        const b = ball(PALETTE[Math.floor(i / 2) % PALETTE.length], 0.55);
-        b.position.copy(slot(i, num)); b.userData.home = b.position.clone(); b.userData.i = i;
-        group.add(b); balls.push(b);
-      }
-    };
-    const pair = () => {
-      const num = balls.length;
-      const pairs = Math.floor(num / 2);
-      for (let p = 0; p < pairs; p++) {
-        const a = balls[p * 2], b = balls[p * 2 + 1];
-        const z = a.userData.home.z;
-        ctx.tween(700, (k) => { a.position.x = -1.9 + 1.3 * k; b.position.x = 1.9 - 1.3 * k; a.position.y = 0.6 + Math.sin(k * Math.PI) * 0.7; b.position.y = a.position.y; }, () => {
-          const ribbon = shadowed(new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 1.1, 8), mat('#ec4899', 0.4)));
-          ribbon.rotation.z = Math.PI / 2; ribbon.position.set(0, 0.5, z); group.add(ribbon); extras.push(ribbon);
-        }, ease.inOut);
-      }
-      window.setTimeout(() => {
-        if (num % 2 === 1) {
-          const lone = balls[num - 1];
-          const sad = textSprite('😢', 1.2, { px: 90, w: 128, h: 128 }); sad.position.set(0, 1.4, 0); lone.add(sad); extras.push(sad);
-          ctx.tween(900, (k) => lone.scale.setScalar(1 + Math.sin(k * Math.PI * 4) * 0.18));
-        } else { balls.forEach((b) => ctx.tween(500, (k) => b.scale.setScalar(1 + Math.sin(k * Math.PI) * 0.2))); }
-        live.current.onPaired();
-      }, 900);
-    };
-    scene.current = { set, pair };
-    set(7);
-    ctx.onFrame((_dt, time) => { group.rotation.y = Math.sin(time * 0.3) * 0.08; });
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 10, 9], target: [0, 0.5, 0], minDistance: 6, maxDistance: 22 });
+  const [n, setN] = useState<number>(7);
+  const [isPaired, setIsPaired] = useState<boolean>(false);
+  const [learnIdx, setLearnIdx] = useState<number>(0);
 
-  const apply = (num: number) => { setN(num); setPaired(false); scene.current?.set(num); };
-  useEffect(() => {
-    if (kit.mode === 'LEARN') { apply(LEARN_NUMS[li]); kit.say(`${npName(LEARN_NUMS[li])} वटा बल छन्। जोडी बनाउन सकिन्छ?`, `There are ${LEARN_NUMS[li]} balls. Can we make pairs?`); }
-    else if (kit.mode === 'PLAY') { apply(n); kit.say('सङ्ख्या रोजौँ र जोडी बनाऔँ।', 'Pick a number and make pairs.'); }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [kit.mode, li]);
+  const isNe = kit.lang === 'ne';
+  const L = (np: string, en: string) => (isNe ? np : en);
 
-  const doPair = () => {
-    if (paired) return;
-    scene.current?.pair();
-    window.setTimeout(() => {
-      kit.tap();
-      if (n % 2 === 0) kit.say(`कोही एक्लो भएन। ${npName(n)} जोर सङ्ख्या हो।`, `Nobody is alone. ${enName(n)} is an even number.`);
-      else kit.say(`एउटा एक्लो भयो। ${npName(n)} बिजोर सङ्ख्या हो।`, `One is left alone. ${enName(n)} is an odd number.`);
-    }, 950);
+  const pairsCount = Math.floor(n / 2);
+  const isOdd = n % 2 !== 0;
+
+  const handlePair = () => {
+    kit.tap();
+    setIsPaired(true);
+
+    if (isOdd) {
+      kit.oops('एउटा एक्लै रह्यो! त्यसैले यो बिजोर सङ्ख्या हो।', 'One is left alone! So this is an ODD number.');
+    } else {
+      kit.good('सबैको जोडी बन्यो! यो जोर सङ्ख्या हो।', 'Everyone has a pair! This is an EVEN number.');
+    }
   };
 
-  const data = useMemo(() => shuffle(Array.from({ length: 20 }, (_, i) => i + 1)).slice(0, 8), []);
-  const questions: (QuizQuestion & { num: number })[] = data.map((v) => ({
-    np: `${toNp(v)} जोर हो कि बिजोर?`, en: `Is ${v} odd or even?`, num: v, answer: v % 2 === 0 ? 'even' : 'odd',
-    options: [{ key: 'even', label: kit.t('जोर 👯', 'Even 👯') }, { key: 'odd', label: kit.t('बिजोर 🧍', 'Odd 🧍') }],
-  }));
+  const changeNumber = (val: number) => {
+    kit.tap();
+    setN(val);
+    setIsPaired(false);
+  };
 
-  const num = (v: number) => (kit.lang === 'ne' ? toNp(v) : String(v));
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', textAlign: 'center' }}>
-      <div style={{ fontSize: 40, fontWeight: 900 }}>{num(n)}</div>
-      {paired && <div style={{ fontSize: 20, fontWeight: 900, color: n % 2 ? '#ea580c' : '#16a34a' }}>{n % 2 ? kit.t('बिजोर (Odd)', 'Odd') : kit.t('जोर (Even)', 'Even')}</div>}
-    </div>
+  const nextLearn = () => {
+    const nextI = (learnIdx + 1) % LEARN_NUMS.length;
+    setLearnIdx(nextI);
+    setN(LEARN_NUMS[nextI]);
+    setIsPaired(false);
+  };
+
+  const quizQuestions: QuizQuestion[] = useMemo(
+    () => [
+      {
+        np: 'सङ्ख्या ८ जोर हो कि बिजोर? (८ मा जोडी बन्छ कि बन्दैन?)',
+        en: 'Is number 8 Even or Odd?',
+        options: [
+          { key: 'even', label: isNe ? 'जोर (Even)' : 'Even' },
+          { key: 'odd', label: isNe ? 'बिजोर (Odd)' : 'Odd' },
+        ],
+        answer: 'even',
+      },
+      {
+        np: 'सङ्ख्या ९ जोर हो कि बिजोर?',
+        en: 'Is number 9 Even or Odd?',
+        options: [
+          { key: 'odd', label: isNe ? 'बिजोर (Odd)' : 'Odd' },
+          { key: 'even', label: isNe ? 'जोर (Even)' : 'Even' },
+        ],
+        answer: 'odd',
+      },
+      {
+        np: 'सङ्ख्या १२ जोर हो कि बिजोर?',
+        en: 'Is number 12 Even or Odd?',
+        options: [
+          { key: 'even', label: isNe ? 'जोर (Even)' : 'Even' },
+          { key: 'odd', label: isNe ? 'बिजोर (Odd)' : 'Odd' },
+        ],
+        answer: 'even',
+      },
+      {
+        np: 'सङ्ख्या १५ जोर हो कि बिजोर?',
+        en: 'Is number 15 Even or Odd?',
+        options: [
+          { key: 'odd', label: isNe ? 'बिजोर (Odd)' : 'Odd' },
+          { key: 'even', label: isNe ? 'जोर (Even)' : 'Even' },
+        ],
+        answer: 'odd',
+      },
+    ],
+    [isNe]
   );
 
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 18, flex: 1, minWidth: 200 }}>{kit.t(`${npName(n)} वटा बल — जोडी बनाऔँ`, `${n} balls — let's make pairs`)}</div>
-      <CBtn color="#ec4899" disabled={paired} onClick={doPair}>🎀 {kit.t('जोडी बनाऔँ', 'Make pairs')}</CBtn>
-      <CBtn color="#16a34a" disabled={!paired} onClick={() => { kit.star(); setLi((li + 1) % LEARN_NUMS.length); }}>{kit.t('अर्को', 'Next')} ➜</CBtn>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>
-      {Array.from({ length: 20 }, (_, i) => i + 1).map((v) => (
-        <CBtn key={v} color={v === n ? '#0ea5e9' : v % 2 ? '#fb923c' : '#4ade80'} style={{ minWidth: 44, padding: '6px 8px', minHeight: 44, fontSize: 16 }} onClick={() => apply(v)}>{num(v)}</CBtn>
-      ))}
-      <CBtn color="#ec4899" disabled={paired} onClick={doPair}>🎀 {kit.t('जोडी', 'Pairs')}</CBtn>
-    </Controls>
-  ) : (
-    <div>
-      <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => apply(q.num)} />
-      <div style={{ marginTop: 8 }}><CBtn color="#ec4899" disabled={paired} onClick={doPair} style={{ minHeight: 44, padding: '6px 14px', fontSize: 15 }}>🎀 {kit.t('सहयोग: जोडी बनाऔँ', 'Hint: make pairs')}</CBtn></div>
-    </div>
-  );
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      grade={1}
+      hud={
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #187C68',
+            borderRadius: 16,
+            padding: '8px 18px',
+            boxShadow: '0 4px 12px rgba(24,124,104,0.15)',
+            fontWeight: 900,
+            fontSize: 20,
+            color: '#187C68',
+          }}
+        >
+          {L(`सङ्ख्या: ${toNp(n)}`, `Number: ${n}`)}{' '}
+          {isPaired && (
+            <span
+              style={{
+                marginLeft: 10,
+                color: isOdd ? '#D97706' : '#059669',
+                fontSize: 18,
+              }}
+            >
+              • {isOdd ? L('बिजोर (ODD)', 'ODD') : L('जोर (EVEN)', 'EVEN')}
+            </span>
+          )}
+        </div>
+      }
+      panel={
+        kit.mode === 'CHALLENGE' ? (
+          <QuizPanel kit={kit} questions={quizQuestions} />
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+              <button
+                onClick={handlePair}
+                style={{
+                  background: '#187C68',
+                  color: '#FFF',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: 14,
+                  fontSize: 16,
+                  fontWeight: 900,
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 10px rgba(24,124,104,0.25)',
+                }}
+              >
+                🎀 {L('जोडी बनाऔँ (Make Pairs)', 'Make Pairs')}
+              </button>
 
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+              {kit.mode === 'LEARN' ? (
+                <button
+                  onClick={nextLearn}
+                  style={{
+                    background: '#E7F1FC',
+                    color: '#1E3A8A',
+                    border: '1px solid #BFDBFE',
+                    padding: '12px 20px',
+                    borderRadius: 14,
+                    fontSize: 14,
+                    fontWeight: 900,
+                    cursor: 'pointer',
+                    marginLeft: 'auto',
+                  }}
+                >
+                  👉 {L('अर्को सङ्ख्या हेरौँ', 'Next Number')}
+                </button>
+              ) : (
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center', marginLeft: 'auto' }}>
+                  <span style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>
+                    {L('सङ्ख्या रोज्नुहोस्:', 'Pick a number:')}
+                  </span>
+                  {[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16].map((num) => (
+                    <button
+                      key={num}
+                      onClick={() => changeNumber(num)}
+                      style={{
+                        width: 38,
+                        height: 38,
+                        borderRadius: 10,
+                        border: n === num ? '2px solid #187C68' : '1px solid #CBD5E1',
+                        background: n === num ? '#187C68' : '#FFFFFF',
+                        color: n === num ? '#FFFFFF' : '#334155',
+                        fontWeight: 900,
+                        fontSize: 14,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {isNe ? toNp(num) : num}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )
+      }
+    >
+      {/* ── Main 2D Stage: Pairs in Rows ───────────────────────── */}
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 440,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 24,
+          background: 'linear-gradient(180deg, #FEF3C7 0%, #F5F7F5 60%)',
+        }}
+      >
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 24,
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+            padding: '24px 32px',
+            minWidth: 'min(480px, 92vw)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 14,
+          }}
+        >
+          {Array.from({ length: pairsCount }).map((_, pIdx) => {
+            const ballIcon = BALL_EMOJIS[pIdx % BALL_EMOJIS.length];
+            return (
+              <div
+                key={pIdx}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: isPaired ? 12 : 64,
+                  transition: 'gap 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  position: 'relative',
+                  padding: '4px 0',
+                }}
+              >
+                <div style={{ fontSize: 36, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))' }}>{ballIcon}</div>
+
+                {isPaired && (
+                  <div
+                    style={{
+                      background: '#EC4899',
+                      color: '#FFF',
+                      padding: '2px 10px',
+                      borderRadius: 12,
+                      fontSize: 12,
+                      fontWeight: 900,
+                      animation: 'simPop 0.3s ease',
+                    }}
+                  >
+                    🎀 {L(`जोडी ${toNp(pIdx + 1)}`, `Pair ${pIdx + 1}`)}
+                  </div>
+                )}
+
+                <div style={{ fontSize: 36, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))' }}>{ballIcon}</div>
+              </div>
+            );
+          })}
+
+          {/* Leftover single item for Odd numbers */}
+          {isOdd && (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 12,
+                marginTop: 6,
+                padding: '6px 0',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 36,
+                  filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))',
+                  animation: isPaired ? 'bounce 0.8s infinite' : 'none',
+                }}
+              >
+                ⚽
+              </div>
+              {isPaired && (
+                <div
+                  style={{
+                    background: '#F59E0B',
+                    color: '#FFF',
+                    padding: '4px 12px',
+                    borderRadius: 12,
+                    fontSize: 12,
+                    fontWeight: 900,
+                  }}
+                >
+                  😢 {L('एक्लै बाँकी (No pair)', 'Left alone (Odd)')}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </SimFrame2D>
+  );
 };

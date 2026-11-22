@@ -1,118 +1,520 @@
 /**
  * Class 4 lesson 4 · Number sense (सङ्ख्याको ज्ञान)
- * Lakh Towers (7-digit place value) and Round-Off Line (rounding to the nearest 10, 100 or 1000).
+ * LakhTowers — 7-digit place-value 2D pillars (दशलाख, लाख, दशहजार, हजार, सय, दशक, एकाइ).
+ * RoundingLine — 2D interactive number line for rounding to the nearest 10, 100, or 1000.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { mat, shadowed, textSprite, ball } from '../class1-math-kit/models';
-import { rnd, shuffle } from '../class1-math-kit/nepali';
-import { fmt, big, Hud, Tip, Props, mcq, numQ, indian, lakhWords, Pillars, digitsOf, PL7 } from './h4';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizQuestion } from '../class1-math-kit/SimKit';
+import { rnd } from '../class1-math-kit/nepali';
+import { fmt, big, Props, mcq, numQ, indian, lakhWords, digitsOf, PL7 } from './h4';
 
 const inl = (lang: 'ne' | 'en', n: number) => fmt(lang, indian(n));
 
-/* ───────────── Lakh Towers ───────────── */
+/* ───────────── 1. LakhTowers ───────────── */
 export const LakhTowers: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G4-L4-01', chapter: 4, titleNp: 'लाख टावर', titleEn: 'Lakh Towers' });
-  const [n, setN] = useState(4560789);
-  const [rev, setRev] = useState(7);
-  const [sel, setSel] = useState(6);
-  const sc = useRef<Pillars | null>(null);
-
-  useStage(kit.stageRef, (ctx) => {
-    const P = new Pillars(ctx, 7, { u: 0.46, colors: PL7.map((p) => p.color), names: PL7 }); sc.current = P;
-    return () => { sc.current = null; P.dispose(); };
-  }, [], { camera: [0, 5, 12.5], target: [0, 2.5, 0], minDistance: 7, maxDistance: 26 });
-
-  const show = (v: number, upto = 7) => { const d = digitsOf(v, 7).map((x, i) => (i < upto ? x : 0)); sc.current?.set(d); };
-  const fresh = () => { const v = rnd(1000000, 9999999); setN(v); setRev(0); show(v, 0); kit.say('अंक एक एक गरेर खोलौँ', 'Let us reveal the digits one by one'); };
-  useEffect(() => { if (kit.mode === 'LEARN') fresh(); else if (kit.mode === 'PLAY') { setN(2305040); setSel(6); show(2305040); } /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [kit.mode]);
-
-  const learnNext = () => {
-    if (rev >= 7) { kit.star(); fresh(); return; }
-    const c = rev, d = digitsOf(n, 7)[c]; setRev(c + 1); show(n, c + 1); sc.current?.highlight(c);
-    const val = d * Math.pow(10, 6 - c);
-    kit.say(`${PL7[c].np}: ${fmt('ne', d)} → ${fmt('ne', indian(val))}`, `${PL7[c].en}: ${d} → ${indian(val)}`);
-  };
-  const bump = (dd: number) => { const d = digitsOf(n, 7); d[sel] = (d[sel] + dd + 10) % 10; const v = Number(d.join('')); setN(v); sc.current?.set(d); sc.current?.highlight(sel); };
-  useEffect(() => { if (kit.mode === 'PLAY') sc.current?.highlight(sel); }, [sel, kit.mode]);
-
-  const data = useMemo(() => Array.from({ length: 8 }, () => rnd(1000000, 9999999)), []);
-  const questions: (QuizQuestion & { n: number })[] = data.map((v, i) => {
-    const ds = digitsOf(v, 7); const c = rnd(1, 6); const d = ds[c] || 3; ds[c] = d; const vv = Number(ds.join(''));
-    if (i % 3 === 0) { const val = d * Math.pow(10, 6 - c); return { n: vv, ...numQ(`${inl('ne', vv)} मा ${PL7[c].np} स्थानको अङ्क ${fmt('ne', d)} को स्थानीय मान कति?`, `In ${indian(vv)}, what is the place value of the digit ${d} in the ${PL7[c].en.toLowerCase()} place?`, val, i, [val * 10, val / 10, -val + d, d], (x) => inl(kit.lang, x), 1) }; }
-    if (i % 3 === 1) return { n: vv, ...numQ(`${inl('ne', vv)} भन्दा १ ले ठूलो सङ्ख्या कुन हो?`, `Which number is 1 more than ${indian(vv)}?`, vv + 1, i, [-1, 10, 100, 2], (x) => inl(kit.lang, x)) };
-    return { n: vv, ...mcq(`${inl('ne', vv)} को लाख स्थानको अङ्क कुन हो?`, `What is the digit in the lakhs place of ${indian(vv)}?`, String(ds[1]), [String((ds[1] + 1) % 10), String((ds[1] + 3) % 10), String(ds[0]), String((ds[1] + 6) % 10)], i) };
+  const kit = useSimKit({
+    code: 'SIM-MATH-G4-L4-01',
+    chapter: 4,
+    titleNp: 'लाख टावर (७ अङ्कको स्थानीय मान)',
+    titleEn: 'Lakh Towers (7-Digit Place Value)',
   });
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <Hud color="#14b8a6">
-      <div style={{ fontSize: 28, fontWeight: 900 }}>{kit.mode === 'LEARN' && rev < 7 ? '…' : inl(kit.lang, n)}</div>
-      {(kit.mode !== 'LEARN' || rev >= 7) && kit.lang === 'en' && <div style={{ fontSize: 12, fontWeight: 700, color: '#475569' }}>{lakhWords(n)}</div>}
-    </Hud>
-  );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls><Tip>{kit.t('दायाँबाट ३ अङ्क, त्यसपछि २-२ अङ्कमा अल्पविराम', 'Commas: first 3 digits from the right, then every 2')}</Tip><CBtn color="#16a34a" onClick={learnNext}>{rev >= 7 ? kit.t('नयाँ', 'New') : kit.t('अर्को अङ्क', 'Next digit')} ➜</CBtn></Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>{PL7.map((p, i) => <CBtn key={i} color={i === sel ? p.color : '#94a3b8'} style={{ minWidth: 48 }} onClick={() => setSel(i)}>{kit.t(p.np, p.en)}</CBtn>)}<CBtn color="#16a34a" onClick={() => bump(1)}>▲</CBtn><CBtn color="#ef4444" onClick={() => bump(-1)}>▼</CBtn></Controls>
-  ) : <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => show(q.n)} />;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
-};
+  const [n, setN] = useState(4560789);
+  const [selPlace, setSelPlace] = useState(0); // 0 (Ten-Lakhs) to 6 (Ones)
 
-/* ───────────── Round-Off Line ───────────── */
-const rr = (u: number) => { let v = 0; do v = rnd(u, u * 10 - 1); while (v % u === 0); return v; };
-export const RoundingLine: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G4-L4-02', chapter: 4, titleNp: 'अनुमान रेखा (नजिकको मान)', titleEn: 'Round-Off Line' });
-  const [n, setN] = useState(47);
-  const [u, setU] = useState(10);
-  const [rolled, setRolled] = useState(false);
-  const scene = useRef<{ set: (n: number, u: number, roll: boolean) => void } | null>(null);
-  const lower = Math.floor(n / u) * u, up = n % u >= u / 2; const ans = up ? lower + u : lower;
+  const digits = useMemo(() => digitsOf(n, 7), [n]);
 
-  useStage(kit.stageRef, (ctx) => {
-    const g = new THREE.Group(); ctx.scene.add(g);
-    const set = (nn: number, uu: number, roll: boolean) => {
-      g.clear(); const lo = Math.floor(nn / uu) * uu; const goUp = nn % uu >= uu / 2; const L = 20;
-      const bar = shadowed(new THREE.Mesh(new THREE.BoxGeometry(L + 1, 0.2, 1.4), mat('#fde68a', 0.7))); bar.position.y = 0.1; g.add(bar);
-      for (let i = 0; i <= 10; i++) {
-        const x = -L / 2 + (L * i) / 10; const end = i === 0 || i === 10;
-        const t = shadowed(new THREE.Mesh(new THREE.BoxGeometry(0.12, end ? 2.2 : i === 5 ? 1.4 : 0.6, 0.12), mat(end ? (i === 0 ? '#0ea5e9' : '#f97316') : i === 5 ? '#dc2626' : '#7c2d12'))); t.position.set(x, (end ? 2.2 : i === 5 ? 1.4 : 0.6) / 2 + 0.2, 0.8); g.add(t);
-        const lab = textSprite(String(lo + (uu * i) / 10), end ? 2 : 1.2, { px: end ? 56 : 40, w: 192, h: 96, bg: end ? '#ffffff' : null, border: end ? (i === 0 ? '#0ea5e9' : '#f97316') : undefined, color: '#0f172a' }); lab.position.set(x, end ? 3.3 : 1.2, 0.8); g.add(lab);
+  const bump = (idx: number, delta: number) => {
+    const d = [...digits];
+    d[idx] = (d[idx] + delta + 10) % 10;
+    const nextVal = Number(d.join(''));
+    setN(nextVal);
+    setSelPlace(idx);
+    kit.tap();
+    const place = PL7[idx];
+    const placeVal = d[idx] * place.val;
+    kit.say(
+      `${place.np}: ${d[idx]} × ${place.val} = ${fmt('ne', indian(placeVal))}`,
+      `${place.en}: ${d[idx]} × ${place.val} = ${indian(placeVal)}`
+    );
+  };
+
+  const fresh = () => {
+    const nextVal = rnd(1000000, 9999999);
+    setN(nextVal);
+    kit.tap();
+  };
+
+  const questions: QuizQuestion[] = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => {
+      const v = rnd(1000000, 9999999);
+      const ds = digitsOf(v, 7);
+      const c = rnd(0, 6);
+      const d = ds[c] || 4;
+      const place = PL7[c];
+      const placeVal = d * place.val;
+
+      if (i % 2 === 0) {
+        return numQ(
+          `${inl('ne', v)} मा ${place.np} स्थानको अङ्क ${fmt('ne', d)} को स्थानीय मान कति?`,
+          `In ${indian(v)}, what is the place value of the digit ${d} in the ${place.en.toLowerCase()} place?`,
+          placeVal,
+          i,
+          [placeVal * 10, Math.floor(placeVal / 10), placeVal + 100, placeVal - 100],
+          (x) => inl(kit.lang, x),
+          1
+        );
+      } else {
+        return mcq(
+          `${inl('ne', v)} को ${place.np} स्थानको अङ्क कुन हो?`,
+          `What is the digit in the ${place.en.toLowerCase()} place of ${indian(v)}?`,
+          String(d),
+          [String((d + 1) % 10), String((d + 3) % 10), String((d + 7) % 10)],
+          i
+        );
       }
-      const mid = textSprite(kit.lang === 'ne' ? 'बीचको बिन्दु' : 'halfway', 1.8, { px: 40, w: 256, h: 80, bg: '#fee2e2', border: '#dc2626' }); mid.position.set(0, 2.5, 0.8); g.add(mid);
-      const bx = -L / 2 + (L * (nn - lo)) / uu; const bl = ball('#16a34a', 0.5); bl.position.set(bx, 0.7, 0); g.add(bl);
-      const tag = textSprite(String(nn), 2.2, { px: 60, w: 256, h: 96, bg: '#16a34a', color: '#fff' }); tag.position.set(bx, 2.2, 0); g.add(tag);
-      if (roll) { const tx = goUp ? L / 2 : -L / 2; ctx.tween(900, (k) => { bl.position.x = bx + (tx - bx) * k; tag.position.x = bl.position.x; bl.rotation.z = -k * 6; }, undefined, ease.inOut); }
-    };
-    scene.current = { set }; set(47, 10, false);
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 6, 15], target: [0, 1.4, 0], minDistance: 8, maxDistance: 26, ground: 0xecfccb });
+    });
+  }, [kit.lang]);
 
-  const apply = (nn: number, uu: number, roll = false) => { setN(nn); setU(uu); setRolled(roll); scene.current?.set(nn, uu, roll); };
-  const nextEx = (uu = u) => apply(rr(uu), uu);
-  useEffect(() => { nextEx(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [kit.mode]);
-  const doRound = () => { apply(n, u, true); setRolled(true); const lo = Math.floor(n / u) * u; kit.say(`${fmt('ne', n)} ${n - lo >= u / 2 ? 'बीचभन्दा माथि' : 'बीचभन्दा तल'} → ${fmt('ne', ans)}`, `${n} is ${n - lo >= u / 2 ? 'at or past' : 'before'} halfway → ${ans}`); kit.star(); };
-  const guess = (g: number) => { if (g === ans) { kit.good(); kit.star(); apply(n, u, true); window.setTimeout(() => nextEx(), 1700); } else kit.oops(`${fmt('ne', n)} कुन अङ्कको नजिक छ?`, 'Which end is it closer to?'); };
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      mascotGreeting={kit.t(
+        `७ अङ्कको सङ्ख्या: ${inl(kit.lang, n)}। नेपाली पद्धतिमा पहिलो ३ अङ्क, त्यसपछि २-२ अङ्कमा अल्पविराम लगाइन्छ।`,
+        `7-Digit Number: ${indian(n)}. Commas: first 3 digits from the right, then every 2 digits.`
+      )}
+      questions={questions}
+      controls={
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <button
+            onClick={() => bump(selPlace, 1)}
+            style={{
+              padding: '8px 18px',
+              borderRadius: 10,
+              border: 'none',
+              background: '#187C68',
+              color: '#FFFFFF',
+              fontWeight: 800,
+              cursor: 'pointer',
+            }}
+          >
+            ▲ {kit.t('अङ्क बढाऊ (+१)', 'Increase (+1)')}
+          </button>
+          <button
+            onClick={() => bump(selPlace, -1)}
+            style={{
+              padding: '8px 18px',
+              borderRadius: 10,
+              border: 'none',
+              background: '#EF4444',
+              color: '#FFFFFF',
+              fontWeight: 800,
+              cursor: 'pointer',
+            }}
+          >
+            ▼ {kit.t('अङ्क घटाऊ (-१)', 'Decrease (-1)')}
+          </button>
+          <button
+            onClick={fresh}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            🎲 {kit.t('नयाँ सङ्ख्या', 'Random Number')}
+          </button>
+        </div>
+      }
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 780, gap: 16 }}>
+        {/* Large Number & Words Banner */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #E2E8F0',
+            borderRadius: 16,
+            padding: '12px 28px',
+            textAlign: 'center',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 4,
+          }}
+        >
+          <div style={{ fontSize: 32, fontWeight: 900, color: '#187C68', letterSpacing: 1.5 }}>
+            {inl(kit.lang, n)}
+          </div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#64748B' }}>
+            {lakhWords(n)}
+          </div>
+        </div>
 
-  const data = useMemo(() => Array.from({ length: 8 }, (_, i) => { const uu = [10, 100, 1000][i % 3]; return { n: rr(uu), u: uu }; }), []);
-  const questions: (QuizQuestion & { d: { n: number; u: number } })[] = data.map((d, i) => {
-    const lo = Math.floor(d.n / d.u) * d.u; const a = d.n % d.u >= d.u / 2 ? lo + d.u : lo;
-    return { d, ...mcq(`${big('ne', d.n)} लाई नजिकको ${fmt('ne', d.u)} मा मिलाऔँ`, `Round ${d.n.toLocaleString('en-US')} to the nearest ${d.u}`, String(a), [String(lo), String(lo + d.u), String(lo - d.u), String(lo + 2 * d.u)], i) };
-  }).map((q) => ({ ...q, options: q.options.map((o) => ({ key: o.key, label: big(kit.lang, Number(o.key)) })) }));
+        {/* 7-Pillar Place Value Representation */}
+        <div
+          style={{
+            width: '100%',
+            background: '#FFFFFF',
+            borderRadius: 18,
+            border: '2px solid #E2E8F0',
+            padding: '20px 16px',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(7, 1fr)',
+            gap: 8,
+          }}
+        >
+          {PL7.map((place, idx) => {
+            const digit = digits[idx];
+            const isSelected = selPlace === idx;
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <Hud color="#16a34a">
-      <div style={{ fontSize: 15, fontWeight: 800, color: '#475569' }}>{kit.t(`नजिकको ${fmt('ne', u)}`, `Nearest ${u}`)}</div>
-      <div style={{ fontSize: 26, fontWeight: 900 }}>{big(kit.lang, n)} ≈ {rolled ? <span style={{ color: '#16a34a' }}>{big(kit.lang, ans)}</span> : '?'}</div>
-    </Hud>
+            return (
+              <div
+                key={place.k}
+                onClick={() => {
+                  setSelPlace(idx);
+                  kit.tap();
+                  kit.say(
+                    `${place.np}: ${digit} (स्थानीय मान: ${fmt('ne', indian(digit * place.val))})`,
+                    `${place.en}: ${digit} (Place value: ${indian(digit * place.val)})`
+                  );
+                }}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  background: isSelected ? '#F8FAFC' : 'transparent',
+                  borderRadius: 12,
+                  padding: '8px 2px',
+                  border: isSelected ? `2px solid ${place.color}` : '1px solid transparent',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {/* Place Name Header */}
+                <div style={{ fontSize: 11, fontWeight: 900, color: place.color, textAlign: 'center', height: 26 }}>
+                  {kit.t(place.np, place.en)}
+                </div>
+
+                {/* Vertical Pillar with Stacked Beads */}
+                <div
+                  style={{
+                    position: 'relative',
+                    width: 32,
+                    height: 150,
+                    background: '#F1F5F9',
+                    borderRadius: 16,
+                    border: '1px solid #E2E8F0',
+                    display: 'flex',
+                    flexDirection: 'column-reverse',
+                    alignItems: 'center',
+                    padding: '4px 0',
+                    gap: 3,
+                    margin: '8px 0',
+                  }}
+                >
+                  {/* Central wire */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: 4,
+                      bottom: 4,
+                      width: 3,
+                      background: '#CBD5E1',
+                      borderRadius: 2,
+                    }}
+                  />
+                  {/* Beads */}
+                  {Array.from({ length: digit }).map((_, bIdx) => (
+                    <div
+                      key={bIdx}
+                      style={{
+                        zIndex: 1,
+                        width: 24,
+                        height: 12,
+                        borderRadius: 6,
+                        background: place.color,
+                        border: '1px solid rgba(0,0,0,0.15)',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Big Digit Box */}
+                <div
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 900,
+                    color: place.color,
+                    background: '#FFFFFF',
+                    width: 38,
+                    height: 38,
+                    borderRadius: 8,
+                    border: `2px solid ${place.color}`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {fmt(kit.lang, digit)}
+                </div>
+
+                {/* Place Value Multiplier */}
+                <div style={{ fontSize: 9, color: '#94A3B8', fontWeight: 700, marginTop: 4, textAlign: 'center' }}>
+                  {place.val >= 1000 ? `${place.val / 1000}k` : place.val}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </SimFrame2D>
   );
-  const unitBtns = [10, 100, 1000].map((x) => <CBtn key={x} color={x === u ? '#16a34a' : '#94a3b8'} onClick={() => nextEx(x)}>{fmt(kit.lang, x)}</CBtn>);
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls><Tip>{kit.t('बीचको बिन्दु वा त्यसभन्दा माथि भए माथि, नत्र तल', 'At halfway or past it → round up; before it → round down')}</Tip>{unitBtns}<CBtn color="#16a34a" onClick={doRound}>⚽ {kit.t('गुडाऔँ', 'Roll')}</CBtn><CBtn color="#8b5cf6" onClick={() => nextEx()}>🎲</CBtn></Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>{unitBtns}<CBtn color="#0ea5e9" onClick={() => guess(lower)}>{big(kit.lang, lower)}</CBtn><CBtn color="#f97316" onClick={() => guess(lower + u)}>{big(kit.lang, lower + u)}</CBtn></Controls>
-  ) : <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => apply(q.d.n, q.d.u)} />;
-  void shuffle;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };
+
+/* ───────────── 2. RoundingLine ───────────── */
+const getRandVal = (u: number) => {
+  let v = 0;
+  do v = rnd(u, u * 10 - 1);
+  while (v % u === 0);
+  return v;
+};
+
+export const RoundingLine: React.FC<Props> = ({ onBackToLibrary }) => {
+  const kit = useSimKit({
+    code: 'SIM-MATH-G4-L4-02',
+    chapter: 4,
+    titleNp: 'अनुमान रेखा (नजिकको मान)',
+    titleEn: 'Round-Off Line (Nearest 10, 100, 1000)',
+  });
+
+  const [u, setU] = useState(10); // 10, 100, or 1000
+  const [n, setN] = useState(47);
+  const [rolled, setRolled] = useState(false);
+
+  const lower = Math.floor(n / u) * u;
+  const upper = lower + u;
+  const isUp = n % u >= u / 2;
+  const roundedAnswer = isUp ? upper : lower;
+
+  const nextNumber = (newU = u) => {
+    setU(newU);
+    setN(getRandVal(newU));
+    setRolled(false);
+    kit.tap();
+  };
+
+  const handleRoll = () => {
+    setRolled(true);
+    kit.tap();
+    kit.say(
+      `${n} लाई नजिकको ${u} मा मिलाउँदा ${roundedAnswer} हुन्छ।`,
+      `Rounding ${n} to the nearest ${u} gives ${roundedAnswer}.`
+    );
+    kit.star();
+  };
+
+  const questions: QuizQuestion[] = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => {
+      const qu = [10, 100, 1000][i % 3];
+      const qn = getRandVal(qu);
+      const qLower = Math.floor(qn / qu) * qu;
+      const qAns = qn % qu >= qu / 2 ? qLower + qu : qLower;
+
+      return mcq(
+        `${big('ne', qn)} लाई नजिकको ${fmt('ne', qu)} मा मिलाउँदा कति हुन्छ?`,
+        `Round ${qn.toLocaleString('en-US')} to the nearest ${qu}:`,
+        String(qAns),
+        [String(qLower), String(qLower + qu), String(qLower - qu)],
+        i
+      );
+    });
+  }, []);
+
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      mascotGreeting={
+        rolled
+          ? kit.t(
+            `${n} बीचको बिन्दुभन्दा ${isUp ? 'माथि वा बराबर' : 'तल'} छ, त्यसैले नजिकको मान = ${roundedAnswer}`,
+            `${n} is ${isUp ? 'at or past' : 'before'} halfway, so it rounds to ${roundedAnswer}`
+          )
+          : kit.t(
+            `${n} लाई नजिकको ${u} मा मिलाऔँ। बीचको बिन्दु हेर्नुहोस्!`,
+            `Round ${n} to nearest ${u}. Check the halfway mark!`
+          )
+      }
+      questions={questions}
+      controls={
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {[10, 100, 1000].map((unit) => (
+            <button
+              key={unit}
+              onClick={() => nextNumber(unit)}
+              style={{
+                padding: '8px 16px',
+                borderRadius: 10,
+                border: u === unit ? '2px solid #187C68' : '1px solid #CBD5E1',
+                background: u === unit ? '#E6F3E9' : '#FFFFFF',
+                color: u === unit ? '#187C68' : '#334155',
+                fontWeight: 800,
+                fontSize: 14,
+                cursor: 'pointer',
+              }}
+            >
+              {fmt(kit.lang, unit)}
+            </button>
+          ))}
+          <button
+            onClick={handleRoll}
+            style={{
+              padding: '9px 20px',
+              borderRadius: 12,
+              border: 'none',
+              background: '#187C68',
+              color: '#FFFFFF',
+              fontWeight: 800,
+              fontSize: 14,
+              cursor: 'pointer',
+              boxShadow: '0 4px 12px rgba(24,124,104,0.2)',
+            }}
+          >
+            ⚽ {kit.t('गुडाऔँ (Round Off)', 'Roll / Round Off')}
+          </button>
+          <button
+            onClick={() => nextNumber(u)}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            🎲 {kit.t('नयाँ सङ्ख्या', 'Random')}
+          </button>
+        </div>
+      }
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 720, gap: 16 }}>
+        {/* Banner Card */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #E2E8F0',
+            borderRadius: 16,
+            padding: '12px 28px',
+            textAlign: 'center',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+          }}
+        >
+          <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>
+            {kit.t(`नजिकको ${fmt('ne', u)} मा सन्निकट मान`, `Rounding to Nearest ${u}`)}
+          </div>
+          <div style={{ fontSize: 28, fontWeight: 900, color: '#1E293B', marginTop: 4 }}>
+            {big(kit.lang, n)} ≈{' '}
+            <span style={{ color: rolled ? '#187C68' : '#94A3B8' }}>
+              {rolled ? big(kit.lang, roundedAnswer) : '?'}
+            </span>
+          </div>
+        </div>
+
+        {/* 2D SVG Number Line */}
+        <div
+          style={{
+            width: '100%',
+            background: '#FFFFFF',
+            borderRadius: 18,
+            border: '2px solid #E2E8F0',
+            padding: '24px 20px',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <svg viewBox="0 0 520 130" style={{ width: '100%', maxWidth: 520 }}>
+            {/* Number Line Track */}
+            <line x1="40" y1="70" x2="480" y2="70" stroke="#CBD5E1" strokeWidth="6" strokeLinecap="round" />
+
+            {/* Lower Bound & Upper Bound Ticks */}
+            {/* 10 divisions */}
+            {Array.from({ length: 11 }).map((_, i) => {
+              const x = 40 + (440 * i) / 10;
+              const isEnd = i === 0 || i === 10;
+              const isMid = i === 5;
+              const val = lower + (u * i) / 10;
+
+              return (
+                <g key={i}>
+                  <line
+                    x1={x}
+                    y1={isEnd ? 48 : isMid ? 54 : 62}
+                    x2={x}
+                    y2="78"
+                    stroke={isEnd ? '#187C68' : isMid ? '#EF4444' : '#94A3B8'}
+                    strokeWidth={isEnd ? 3 : isMid ? 2.5 : 1.5}
+                  />
+                  {isEnd && (
+                    <text x={x} y="102" textAnchor="middle" fill="#187C68" fontSize="13" fontWeight="900">
+                      {val}
+                    </text>
+                  )}
+                  {isMid && (
+                    <text x={x} y="102" textAnchor="middle" fill="#EF4444" fontSize="11" fontWeight="800">
+                      {val}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
+
+            {/* Halfway Label Tag */}
+            <rect x="215" y="10" width="90" height="24" rx="6" fill="#FEE2E2" stroke="#EF4444" strokeWidth="1" />
+            <text x="260" y="26" textAnchor="middle" fill="#DC2626" fontSize="10" fontWeight="900">
+              {kit.t('बीचको बिन्दु', 'Halfway')}
+            </text>
+
+            {/* Ball Marker */}
+            {(() => {
+              const fraction = (n - lower) / u;
+              const initialX = 40 + 440 * fraction;
+              const finalX = isUp ? 480 : 40;
+              const ballX = rolled ? finalX : initialX;
+
+              return (
+                <g style={{ transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)' }}>
+                  <circle
+                    cx={ballX}
+                    cy="70"
+                    r="14"
+                    fill={rolled ? '#187C68' : '#F59E0B'}
+                    stroke="#FFFFFF"
+                    strokeWidth="3"
+                    style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}
+                  />
+                  {/* Tag on top of ball */}
+                  <rect
+                    x={ballX - 22}
+                    y="32"
+                    width="44"
+                    height="20"
+                    rx="5"
+                    fill={rolled ? '#187C68' : '#F59E0B'}
+                  />
+                  <text
+                    x={ballX}
+                    y="46"
+                    textAnchor="middle"
+                    fill="#FFFFFF"
+                    fontSize="11"
+                    fontWeight="900"
+                  >
+                    {n}
+                  </text>
+                </g>
+              );
+            })()}
+          </svg>
+        </div>
+      </div>
+    </SimFrame2D>
+  );
+};
+
+export default LakhTowers;

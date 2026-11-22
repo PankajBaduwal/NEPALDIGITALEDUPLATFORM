@@ -1,9 +1,7 @@
 /**
  * Class 6 lessons 14–19 · Lines and angles, Plane shapes, Circle, Solid objects, Co-ordinate geometry, Symmetry and tessellation.
  */
-import * as THREE from 'three';
 import { rnd } from '../class1-math-kit/nepali';
-import { mat } from '../class1-math-kit/models';
 import { makeLab, LabCfg } from '../class5-math/Lab';
 import { bi, choice, numChoice } from '../class5-math/h5';
 import { solidCfg } from '../class5-math/G5Geometry';
@@ -119,7 +117,9 @@ export const circleCfg: LabCfg = {
   params: [{ id: 'r', np: 'अर्धव्यास r', en: 'Radius r', min: 1, max: 7, init: 4, color: '#ef4444' }, { id: 'pt', np: 'भाग', en: 'Part', min: 0, max: 5, init: 0, names: CPART, color: '#8b5cf6' }],
   stage: { camera: [0, 17, 11], target: [0, 0, 1], minDistance: 8, maxDistance: 30 },
   draw: (g, p, lang) => {
-    const R = 0.5 * p.r; disc(g, R, '#fecaca', 0, 0.04, -1.5); const cz = -1.5; const ring = new THREE.Mesh(new THREE.TorusGeometry(R, 0.07, 10, 80), mat(p.pt === 5 ? '#dc2626' : '#7f1d1d')); ring.rotation.x = Math.PI / 2; ring.position.set(0, 0.1, cz); g.add(ring);
+    const R = 0.5 * p.r; const cz = -1.5;
+    disc(g, R, '#fecaca', 0, 0.04, cz);
+    disc(g, R + 0.06, p.pt === 5 ? '#dc2626' : '#7f1d1d', 0, 0.02, cz, 0.5);
     box(g, 0.3, 0.3, 0.3, 0, 0.2, cz, '#111827');
     const at = (a: number) => [R * Math.cos(rad(a)), 0.2, cz - R * Math.sin(rad(a))] as [number, number, number];
     if (p.pt === 0) rod(g, [0, 0.2, cz], at(30), '#2563eb', 0.14);
@@ -158,10 +158,10 @@ export const coordCfg: LabCfg = {
   params: [{ id: 'x', np: 'x', en: 'x', min: -6, max: 6, init: 3, color: '#0ea5e9' }, { id: 'y', np: 'y', en: 'y', min: -6, max: 6, init: 2, color: '#ef4444' }, { id: 'rf', np: 'परावर्तन', en: 'Reflect', min: 0, max: 2, init: 0, names: [{ np: 'छैन', en: 'None' }, { np: 'x-अक्षमा', en: 'In x-axis' }, { np: 'y-अक्षमा', en: 'In y-axis' }] }],
   stage: { camera: [0, 14, 9], target: [0, 0, 0], minDistance: 8, maxDistance: 24 },
   draw: (g, p) => {
-    const U = 0.95, X = (v: number) => v * U, Z = (v: number) => -v * U; [[1, 1, '#bbf7d0'], [-1, 1, '#fde68a'], [-1, -1, '#bfdbfe'], [1, -1, '#fbcfe8']].forEach(([sx, sy, c]) => box(g, 6.6 * U, 0.06, 6.6 * U, Number(sx) * 3.3 * U, 0.03, -Number(sy) * 3.3 * U, String(c), 0.9));
+    const U = 0.95, X = (v: number) => v * U, Z = (v: number) => -v * U;[[1, 1, '#bbf7d0'], [-1, 1, '#fde68a'], [-1, -1, '#bfdbfe'], [1, -1, '#fbcfe8']].forEach(([sx, sy, c]) => box(g, 6.6 * U, 0.06, 6.6 * U, Number(sx) * 3.3 * U, 0.03, -Number(sy) * 3.3 * U, String(c), 0.9));
     for (let v = -6; v <= 6; v++) { if (v === 0) continue; rod(g, [X(v), 0.07, Z(-6.5)], [X(v), 0.07, Z(6.5)], '#e2e8f0', 0.025); rod(g, [X(-6.5), 0.07, Z(v)], [X(6.5), 0.07, Z(v)], '#e2e8f0', 0.025); tag(g, String(v), X(v), 0.2, Z(0) + 0.7, 0.9, { px: 48, w: 96, h: 64 }); tag(g, String(v), X(0) - 0.7, 0.2, Z(v), 0.9, { px: 48, w: 96, h: 64 }); }
     rod(g, [X(-6.8), 0.14, 0], [X(6.8), 0.14, 0], '#111827', 0.1); rod(g, [0, 0.14, Z(-6.8)], [0, 0.14, Z(6.8)], '#111827', 0.1); tag(g, 'x', X(7.3), 0.3, 0, 1.2, { px: 64, w: 96, h: 96 }); tag(g, 'y', 0, 0.3, Z(7.3), 1.2, { px: 64, w: 96, h: 96 });
-    const pin = (x: number, y: number, c: string, label: string) => { const b = new THREE.Mesh(new THREE.SphereGeometry(0.34, 20, 14), mat(c, 0.3)); b.position.set(X(x), 0.5, Z(y)); g.add(b); rod(g, [X(x), 0.14, Z(0)], [X(x), 0.14, Z(y)], c, 0.05); rod(g, [X(0), 0.14, Z(y)], [X(x), 0.14, Z(y)], c, 0.05); tag(g, label, X(x) + 0.5, 1.4, Z(y), 1.9, { px: 52, w: 224, h: 80, bg: '#fff', border: c }); };
+    const pin = (x: number, y: number, c: string, label: string) => { disc(g, 0.34, c, X(x), 0.5, Z(y)); rod(g, [X(x), 0.14, Z(0)], [X(x), 0.14, Z(y)], c, 0.05); rod(g, [X(0), 0.14, Z(y)], [X(x), 0.14, Z(y)], c, 0.05); tag(g, label, X(x) + 0.5, 1.4, Z(y), 1.9, { px: 52, w: 224, h: 80, bg: '#fff', border: c }); };
     pin(p.x, p.y, '#2563eb', `(${p.x}, ${p.y})`); if (p.rf === 1) pin(p.x, -p.y, '#dc2626', `(${p.x}, ${-p.y})`); if (p.rf === 2) pin(-p.x, p.y, '#dc2626', `(${-p.x}, ${p.y})`);
   },
   info: (p) => { const q = quad(p.x, p.y); return bi(`बिन्दु (${p.x}, ${p.y}) · ${QN[q]}${p.rf === 1 ? `\nx-अक्षमा परावर्तन: (${p.x}, ${-p.y})` : p.rf === 2 ? `\ny-अक्षमा परावर्तन: (${-p.x}, ${p.y})` : `\nx-अक्षबाट ${Math.abs(p.y)}, y-अक्षबाट ${Math.abs(p.x)} एकाइ टाढा`}`, `Point (${p.x}, ${p.y}) · ${QE[q]}${p.rf === 1 ? `\nReflected in the x-axis: (${p.x}, ${-p.y})` : p.rf === 2 ? `\nReflected in the y-axis: (${-p.x}, ${p.y})` : `\n${Math.abs(p.y)} units from the x-axis, ${Math.abs(p.x)} from the y-axis`}`); },

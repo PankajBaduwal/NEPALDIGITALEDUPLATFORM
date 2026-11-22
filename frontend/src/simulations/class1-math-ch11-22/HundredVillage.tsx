@@ -1,154 +1,250 @@
 /**
- * Chapter 15 · Numbers from 21 to 100 (२१ देखि १०० सम्मका सङ्ख्या)
- * Hundred Village — build any number with tens towers and one cubes, and watch it light up on the 100 wall.
+ * Chapter 15 · Numbers 21 to 100 (२१ देखि १०० सम्मका सङ्ख्या)
+ * Sim 1: Hundred Village (१०० सम्मको गाउँ) — Pure 2D Edition
+ * 100% 2D SVG / Interactive 100-Grid – No Three.js/WebGL dependencies.
  */
-import React, { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit } from '../class1-math-kit/SimKit';
-import { cube } from '../class1-math-kit/models';
-import { Blocks } from '../class1-math-kit/place';
-import { enName, npName, toNp, rnd } from '../class1-math-kit/nepali';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp } from '../class1-math-kit/nepali';
 
-interface Props { onBackToLibrary: () => void; userRole?: string }
-const ROW_COLORS = ['#ef4444', '#f97316', '#facc15', '#22c55e', '#14b8a6', '#0ea5e9', '#6366f1', '#a855f7', '#ec4899', '#78716c'];
-const COUNT_BY_TENS = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+interface Props {
+  onBackToLibrary: () => void;
+  userRole?: string;
+}
 
 export const HundredVillage: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G1-CH15-01', chapter: 15, titleNp: 'सय गाउँ (२१ देखि १०० सम्म)', titleEn: 'Hundred Village (Numbers 21 to 100)' });
-  const [tens, setTens] = useState(2);
-  const [ones, setOnes] = useState(3);
-  const [step, setStep] = useState(0);
-  const [round, setRound] = useState(0);
-  const [target, setTarget] = useState(() => rnd(21, 99));
-  const [score, setScore] = useState(0);
-  const [finished, setFinished] = useState(false);
-  const scene = useRef<{ blocks: Blocks; wall: (n: number) => void } | null>(null);
-  const val = tens * 10 + ones;
+  const kit = useSimKit({
+    code: 'SIM-MATH-G1-CH15-01',
+    chapter: 15,
+    titleNp: '१०० सम्मका सङ्ख्या (दशक र एकाइ)',
+    titleEn: 'Hundred Village (Numbers to 100)',
+  });
 
-  useStage(kit.stageRef, (ctx) => {
-    const blocks = new Blocks(ctx, { x: -5, z: 2.5, tensColor: '#38bdf8', onesColor: '#facc15', u: 0.5 });
-    const cubes: THREE.Mesh[] = [];
-    const wallG = new THREE.Group(); wallG.position.set(-3.2, 0, -4.5); ctx.scene.add(wallG);
-    for (let i = 0; i < 100; i++) {
-      const c = cube(ROW_COLORS[Math.floor(i / 10)], 0.52) as THREE.Mesh;
-      c.position.set((i % 10) * 0.62, 0.35 + Math.floor(i / 10) * 0.62, 0);
-      c.userData.i = i; wallG.add(c); cubes.push(c);
-    }
-    const wall = (n: number) => cubes.forEach((c, i) => {
-      const m = c.material as THREE.MeshStandardMaterial;
-      m.transparent = true; m.opacity = i < n ? 1 : 0.14; m.emissive.set(i < n ? ROW_COLORS[Math.floor(i / 10)] : '#000000'); m.emissiveIntensity = i < n ? 0.18 : 0;
-    });
-    wall(23);
-    scene.current = { blocks, wall };
-    blocks.setNumber(23);
-    return () => { scene.current = null; blocks.dispose(); };
-  }, [], { camera: [-1, 10, 13.5], target: [-0.5, 2.2, 0], minDistance: 8, maxDistance: 24 });
+  const [n, setN] = useState<number>(34);
 
-  // keep the 3D board matching the numbers
-  useEffect(() => { const s = scene.current; if (!s) return; s.wall(val); }, [val]);
-  const rebuild = (t: number, o: number) => { setTens(t); setOnes(o); scene.current?.blocks.set(t, o); };
-  const addTen = () => { if (tens >= 10 || val >= 100) { kit.oops('१०० भन्दा बढी हुँदैन', 'Not more than 100'); return; } scene.current?.blocks.addTen(); setTens(tens + 1); kit.tap(); };
-  const delTen = () => { if (!tens) return; scene.current?.blocks.removeTen(); setTens(tens - 1); kit.tap(); };
-  const addOne = () => {
-    if (val >= 100) { kit.oops('१०० भन्दा बढी हुँदैन', 'Not more than 100'); return; }
+  const isNe = kit.lang === 'ne';
+  const L = (np: string, en: string) => (isNe ? np : en);
+
+  const tens = Math.floor(n / 10);
+  const ones = n % 10;
+
+  const handleSelectNumber = (num: number) => {
     kit.tap();
-    if (ones === 9) { // ten loose cubes make a new ten
-      scene.current?.blocks.addOne();
-      window.setTimeout(() => { scene.current?.blocks.bundle(); }, 350);
-      kit.say('१० वटा एकाइ मिलेर १ दशक बन्यो!', '10 ones make 1 ten!');
-      setOnes(0); setTens(tens + 1);
-    } else { scene.current?.blocks.addOne(); setOnes(ones + 1); }
-  };
-  const delOne = () => {
-    if (!ones) {
-      if (!tens) return;
-      scene.current?.blocks.breakTen(); setTens(tens - 1); setOnes(9); scene.current && window.setTimeout(() => scene.current?.blocks.removeOne(), 700);
-      return;
-    }
-    scene.current?.blocks.removeOne(); setOnes(ones - 1); kit.tap();
+    setN(num);
+    const t = Math.floor(num / 10);
+    const o = num % 10;
+    kit.say(
+      `${toNp(num)} मा ${toNp(t)} दशक र ${toNp(o)} एकाइ हुन्छन्।`,
+      `${num} has ${t} tens and ${o} ones.`
+    );
   };
 
-  const num = (v: number) => (kit.lang === 'ne' ? toNp(v) : String(v));
-  const sayNum = () => kit.say(`${toNp(val)} — ${tens} दशक र ${ones} एकाइ`, `${enName(val)} — ${tens} tens and ${ones} ones`);
-
-  useEffect(() => {
-    if (kit.mode === 'LEARN') { rebuild(0, 0); setStep(0); kit.say('दश-दशका समूह गनौँ। +१० थिचौँ।', 'Let us count in tens. Press +10.'); }
-    else if (kit.mode === 'PLAY') { rebuild(4, 7); kit.say('आफूले मन लागेको सङ्ख्या बनाऔँ।', 'Build any number you like.'); }
-    else { newRound(0, true); }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [kit.mode]);
-
-  const learnTen = () => {
-    if (step >= 10) return;
-    scene.current?.blocks.addTen(); setTens(step + 1); setStep(step + 1); kit.tap();
-    const v = (step + 1) * 10;
-    kit.say(`${toNp(v)} · ${npName(v)}`, `${v} · ${enName(v)}`);
-    if (step + 1 === 10) { kit.good('सय बन्यो! १० दशक = १००', '10 tens = 100!'); kit.star(); }
-  };
-  const newRound = (r: number, reset = false) => {
-    const t = rnd(21, 99);
-    setTarget(t); rebuild(0, 0);
-    if (reset) { setScore(0); setFinished(false); }
-    setRound(r);
-    kit.say(`${toNp(t)} बनाऔँ।`, `Build ${enName(t)} (${t}).`);
-  };
-  const check = () => {
-    if (val === target) {
-      kit.good(); kit.star();
-      const ns = score + 1;
-      setScore(ns);
-      window.setTimeout(() => { if (round + 1 >= 5) { setFinished(true); kit.finish(ns, 5); } else newRound(round + 1); }, 1100);
-    } else {
-      kit.oops(`तिमीले ${toNp(val)} बनायौ। ${toNp(target)} चाहिन्छ।`, `You made ${val}. We need ${target}.`);
-    }
-  };
-
-  const hud = (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', textAlign: 'center' }}>
-      {kit.mode === 'CHALLENGE'
-        ? <div style={{ fontSize: 30, fontWeight: 900 }}>{kit.t('बनाऔँ', 'Build')}: {num(target)}</div>
-        : <>
-          <div style={{ fontSize: 40, fontWeight: 900 }}>{num(val)}</div>
-          <div style={{ fontSize: 16, fontWeight: 800, color: '#0369a1' }}>{num(tens)} {kit.t('दशक', 'tens')} + {num(ones)} {kit.t('एकाइ', 'ones')}</div>
-          <div style={{ fontSize: 15, fontWeight: 700, color: '#64748b', textTransform: 'capitalize' }}>{kit.lang === 'ne' ? npName(val) : enName(val)}</div>
-        </>}
-    </div>
+  const quizQuestions: QuizQuestion[] = useMemo(
+    () => [
+      {
+        np: 'सङ्ख्या ४५ मा कति दशक (Tens) हुन्छन्?',
+        en: 'How many tens are in number 45?',
+        options: [
+          { key: '4', label: isNe ? '४ दशक' : '4 tens' },
+          { key: '5', label: isNe ? '५ दशक' : '5 tens' },
+          { key: '40', label: isNe ? '४० दशक' : '40 tens' },
+        ],
+        answer: '4',
+      },
+      {
+        np: 'सङ्ख्या ७२ मा कति एकाइ (Ones) हुन्छन्?',
+        en: 'How many ones are in number 72?',
+        options: [
+          { key: '2', label: isNe ? '२ एकाइ' : '2 ones' },
+          { key: '7', label: isNe ? '७ एकाइ' : '7 ones' },
+          { key: '20', label: isNe ? '२० एकाइ' : '20 ones' },
+        ],
+        answer: '2',
+      },
+      {
+        np: '३ दशक र ८ एकाइ मिलेर कुन सङ्ख्या बन्छ?',
+        en: 'Which number is formed by 3 tens and 8 ones?',
+        options: [
+          { key: '38', label: isNe ? '३८' : '38' },
+          { key: '83', label: isNe ? '८३' : '83' },
+          { key: '30', label: isNe ? '३०' : '30' },
+        ],
+        answer: '38',
+      },
+    ],
+    [isNe]
   );
 
-  const buildPad = (
-    <>
-      <CBtn color="#0ea5e9" onClick={addTen}>+10 🟦</CBtn>
-      <CBtn color="#94a3b8" onClick={delTen}>−10</CBtn>
-      <CBtn color="#eab308" onClick={addOne}>+1 🟨</CBtn>
-      <CBtn color="#94a3b8" onClick={delOne}>−1</CBtn>
-      <CBtn color="#f59e0b" onClick={() => rebuild(0, 0)}>↺</CBtn>
-    </>
-  );
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      grade={1}
+      hud={
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #187C68',
+            borderRadius: 16,
+            padding: '8px 18px',
+            boxShadow: '0 4px 12px rgba(24,124,104,0.15)',
+            fontWeight: 900,
+            fontSize: 20,
+            color: '#187C68',
+          }}
+        >
+          {isNe ? toNp(n) : n} ={' '}
+          <span style={{ color: '#0369A1' }}>
+            {isNe ? `${toNp(tens)} दशक` : `${tens} tens`}
+          </span>{' '}
+          +{' '}
+          <span style={{ color: '#D97706' }}>
+            {isNe ? `${toNp(ones)} एकाइ` : `${ones} ones`}
+          </span>
+        </div>
+      }
+      panel={
+        kit.mode === 'CHALLENGE' ? (
+          <QuizPanel kit={kit} questions={quizQuestions} />
+        ) : (
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>
+              💡 {L('१०० को ग्रिडमा कुनै पनि सङ्ख्या छोएर दशक र एकाइ हेर्नुहोस्!', 'Tap any number in the 100-grid to see its tens and ones!')}
+            </span>
+          </div>
+        )
+      }
+    >
+      {/* ── 2D 100-Grid & Place Value Blocks ──────────────────── */}
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 460,
+          display: 'grid',
+          gridTemplateColumns: 'minmax(280px, 1.2fr) minmax(240px, 0.8fr)',
+          gap: 20,
+          padding: 20,
+          background: 'linear-gradient(180deg, #E0F2FE 0%, #F5F7F5 60%)',
+          alignItems: 'center',
+        }}
+      >
+        {/* 100-Grid Table */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 20,
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+            padding: 14,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(10, 1fr)',
+            gap: 4,
+          }}
+        >
+          {Array.from({ length: 100 }, (_, i) => {
+            const num = i + 1;
+            const isSelected = num === n;
 
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 18, flex: 1, minWidth: 220 }}>{step < 10 ? kit.t('दश दश गरेर १०० सम्म पुगौँ', 'Count by tens up to 100') : kit.t('१० दशक = १००! 🎉', '10 tens = 100! 🎉')}</div>
-      <CBtn color="#0ea5e9" disabled={step >= 10} onClick={learnTen}>+10 🟦</CBtn>
-      <CBtn color="#f59e0b" onClick={() => { rebuild(0, 0); setStep(0); }}>↺</CBtn>
-      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', width: '100%' }}>
-        {COUNT_BY_TENS.map((v, i) => <span key={v} style={{ padding: '2px 10px', borderRadius: 12, fontWeight: 800, background: i < step ? '#bae6fd' : '#f1f5f9', color: i < step ? '#075985' : '#94a3b8' }}>{num(v)}</span>)}
+            return (
+              <button
+                key={num}
+                onClick={() => handleSelectNumber(num)}
+                style={{
+                  height: 36,
+                  borderRadius: 8,
+                  border: isSelected ? '2px solid #187C68' : '1px solid #E2E8F0',
+                  background: isSelected ? '#187C68' : '#F8FAFC',
+                  color: isSelected ? '#FFFFFF' : '#334155',
+                  fontWeight: 900,
+                  fontSize: 12,
+                  cursor: 'pointer',
+                  transform: isSelected ? 'scale(1.1)' : 'none',
+                  transition: 'all 0.1s ease',
+                  boxShadow: isSelected ? '0 2px 6px rgba(24,124,104,0.25)' : 'none',
+                }}
+              >
+                {isNe ? toNp(num) : num}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Place Value Rods & Units Display */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 20,
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+            padding: 20,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+          }}
+        >
+          <div style={{ fontSize: 16, fontWeight: 900, color: '#187C68' }}>
+            🧱 {L(`स्थानमान प्रतिनिधित्व (${toNp(n)})`, `Place Value Representation (${n})`)}
+          </div>
+
+          {/* Tens Rods (१० को मुठ्ठा) */}
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 800, color: '#0369A1', marginBottom: 6 }}>
+              📦 {L(`दशक (Tens): ${toNp(tens)} वटा मुठ्ठा (= ${toNp(tens * 10)})`, `Tens: ${tens} bundles (= ${tens * 10})`)}
+            </div>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {Array.from({ length: tens }).map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: 22,
+                    height: 70,
+                    background: '#0284C7',
+                    borderRadius: 6,
+                    border: '1px solid #0369A1',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#FFF',
+                    fontSize: 10,
+                    fontWeight: 900,
+                  }}
+                  title="१० को मुठ्ठा"
+                >
+                  १०
+                </div>
+              ))}
+              {tens === 0 && <span style={{ color: '#94A3B8', fontSize: 12 }}>शून्य दशक</span>}
+            </div>
+          </div>
+
+          {/* Ones Cubes (एकाइ) */}
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 800, color: '#D97706', marginBottom: 6 }}>
+              🔶 {L(`एकाइ (Ones): ${toNp(ones)} वटा`, `Ones: ${ones} units`)}
+            </div>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {Array.from({ length: ones }).map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: 20,
+                    height: 20,
+                    background: '#F59E0B',
+                    borderRadius: 4,
+                    border: '1px solid #D97706',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                  }}
+                  title="१ एकाइ"
+                />
+              ))}
+              {ones === 0 && <span style={{ color: '#94A3B8', fontSize: 12 }}>शून्य एकाइ</span>}
+            </div>
+          </div>
+        </div>
       </div>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>{buildPad}<CBtn color="#16a34a" onClick={sayNum}>🔊</CBtn></Controls>
-  ) : finished ? (
-    <div style={{ textAlign: 'center' }}>
-      <div style={{ fontSize: 22, fontWeight: 900 }}>🏆 {kit.t(`५ मध्ये ${toNp(score)} सही!`, `${score} of 5 correct!`)}</div>
-      <CBtn color="#0ea5e9" onClick={() => newRound(0, true)}>↺ {kit.t('फेरि खेलौँ', 'Play again')}</CBtn>
-    </div>
-  ) : (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, minWidth: 130 }}>{kit.t('प्रश्न', 'Round')} {num(round + 1)}/{num(5)}</div>
-      {buildPad}
-      <CBtn color="#16a34a" onClick={check}>✓ {kit.t('जाँचौँ', 'Check')}</CBtn>
-    </Controls>
+    </SimFrame2D>
   );
-
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };

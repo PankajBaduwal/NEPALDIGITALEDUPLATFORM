@@ -1,87 +1,258 @@
 /**
  * Lesson 7 · Addition (जोड) — three-digit numbers
- * Add Town — join two numbers made of blocks; ten ones bundle into a ten, ten tens bundle into a hundred.
+ * Add Town — join two numbers made of blocks; bundle 10 ones into a ten, 10 tens into a hundred.
+ * Pure 2D Implementation for Smart Boards & Desktops.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useStage } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { rnd } from '../class1-math-kit/nepali';
-import { Blocks3, fmt, numChoices } from './helpers';
+import React, { useEffect, useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit/SimFrame2D';
+import { Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { rnd, toNp } from '../class1-math-kit/nepali';
+import { Base10Blocks2D } from './Base10Blocks2D';
+import { fmt, numChoices } from './helpers';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
-const LEARN = [[234, 125], [346, 178], [457, 265], [568, 247], [129, 386]];
+
+const LEARN_PAIRS = [
+  [234, 125],
+  [346, 178],
+  [457, 265],
+  [568, 247],
+  [129, 386],
+];
 
 export const AddTown: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G2-L7-01', chapter: 7, titleNp: 'जोड सहर (तीन अङ्क)', titleEn: 'Add Town (three-digit addition)' });
+  const kit = useSimKit({
+    code: 'SIM-MATH-G2-L7-01',
+    chapter: 7,
+    titleNp: 'जोड सहर (तीन अङ्क)',
+    titleEn: 'Add Town (three-digit addition)',
+  });
+
   const [a, setA] = useState(234);
   const [b, setB] = useState(125);
   const [joined, setJoined] = useState(false);
-  const [busy, setBusy] = useState(false);
-  const [, tick] = useState(0);
+  const [h, setH] = useState(0);
+  const [t, setT] = useState(0);
+  const [o, setO] = useState(0);
   const [li, setLi] = useState(0);
-  const scene = useRef<{ A: Blocks3; B: Blocks3 } | null>(null);
 
-  useStage(kit.stageRef, (ctx) => {
-    const A = new Blocks3(ctx, { x: -6.5, z: -3.2, u: 0.3, labelColor: '#0ea5e9' });
-    const B = new Blocks3(ctx, { x: -6.5, z: 2.4, u: 0.3, labelColor: '#f43f5e' });
-    scene.current = { A, B }; A.setNumber(234); B.setNumber(125);
-    return () => { scene.current = null; A.dispose(); B.dispose(); };
-  }, [], { camera: [0, 12, 15], target: [0, 1.2, -0.3], minDistance: 8, maxDistance: 26 });
-
-  const setup = (x: number, y: number) => { setA(x); setB(y); setJoined(false); setBusy(false); scene.current?.A.setNumber(x); scene.current?.B.setNumber(y); };
-  const join = () => {
-    if (joined || busy || !scene.current) return;
-    setBusy(true); kit.tap(); kit.say('दुवै सङ्ख्याका ब्लकहरू जोडौँ।', 'Join the blocks of both numbers.');
-    scene.current.A.absorb(scene.current.B, () => { setBusy(false); setJoined(true); tick((v) => v + 1); });
+  const setup = (x: number, y: number) => {
+    setA(x);
+    setB(y);
+    setJoined(false);
+    setH(Math.floor(x / 100) + Math.floor(y / 100));
+    setT(Math.floor((x % 100) / 10) + Math.floor((y % 100) / 10));
+    setO((x % 10) + (y % 10));
   };
-  const A = scene.current?.A;
-  const canOnes = joined && !busy && !!A && A.ones.length >= 10;
-  const canTens = joined && !busy && !!A && A.tens.length >= 10;
-  const finished = joined && !busy && !!A && A.ones.length < 10 && A.tens.length < 10;
-  const doneFor = useRef('');
-  useEffect(() => { if (finished && kit.mode !== 'CHALLENGE' && doneFor.current !== `${a}+${b}`) { doneFor.current = `${a}+${b}`; kit.good(`${a} + ${b} = ${a + b}`, `${a} + ${b} = ${a + b}`); kit.star(); } /* eslint-disable-next-line */ }, [finished]);
-  const bundleOnes = () => { if (!canOnes) return; setBusy(true); kit.say('१० एकाइ → १ दशक', '10 ones → 1 ten'); scene.current?.A.bundleOnes(() => { setBusy(false); tick((v) => v + 1); }); };
-  const bundleTens = () => { if (!canTens) return; setBusy(true); kit.say('१० दशक → १ सय', '10 tens → 1 hundred'); scene.current?.A.bundleTens(() => { setBusy(false); tick((v) => v + 1); }); };
+
+  const handleJoin = () => {
+    setJoined(true);
+    kit.tap();
+    kit.say('दुवै सङ्ख्याका ब्लकहरू जोडौँ।', 'Join the blocks of both numbers.');
+  };
+
+  const canBundleOnes = joined && o >= 10;
+  const canBundleTens = joined && t >= 10;
+  const isFinished = joined && o < 10 && t < 10;
+
+  const bundleOnes = () => {
+    if (!canBundleOnes) return;
+    kit.tap();
+    setO((prev) => prev - 10);
+    setT((prev) => prev + 1);
+    kit.say('१० एकाइ मिलेर १ नयाँ दशक बन्यो!', '10 ones bundled into 1 ten!');
+  };
+
+  const bundleTens = () => {
+    if (!canBundleTens) return;
+    kit.tap();
+    setT((prev) => prev - 10);
+    setH((prev) => prev + 1);
+    kit.say('१० दशक मिलेर १ नयाँ सय बन्यो!', '10 tens bundled into 1 hundred!');
+  };
 
   useEffect(() => {
-    doneFor.current = '';
-    if (kit.mode === 'LEARN') { setup(LEARN[li][0], LEARN[li][1]); kit.say(`${LEARN[li][0]} र ${LEARN[li][1]} जोडौँ।`, `Let us add ${LEARN[li][0]} and ${LEARN[li][1]}.`); }
-    else if (kit.mode === 'PLAY') { const x = rnd(120, 560), y = rnd(120, 400); setup(x, y); kit.say('जोडौँ थिचेर ब्लक मिलाऔँ।', 'Press Join to put the blocks together.'); }
+    if (isFinished && joined && kit.mode !== 'CHALLENGE') {
+      kit.good(`${toNp(a)} + ${toNp(b)} = ${toNp(a + b)}`, `${a} + ${b} = ${a + b}`);
+      kit.star();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFinished, joined]);
+
+  useEffect(() => {
+    if (kit.mode === 'LEARN') {
+      const pair = LEARN_PAIRS[li % LEARN_PAIRS.length];
+      setup(pair[0], pair[1]);
+      kit.say(
+        `${toNp(pair[0])} र ${toNp(pair[1])} जोडौँ।`,
+        `Let us add ${pair[0]} and ${pair[1]}.`
+      );
+    } else if (kit.mode === 'PLAY') {
+      setup(rnd(120, 500), rnd(120, 450));
+      kit.say('जोडौँ थिचेर ब्लक मिलाऔँ।', 'Press Join to put the blocks together.');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kit.mode, li]);
 
+  // Quiz questions for Challenge Mode
   const data = useMemo(() => Array.from({ length: 6 }, (_, i) => {
     let x = 0, y = 0;
-    for (;;) { x = rnd(120, 650); y = rnd(110, 320); const carry = (x % 10) + (y % 10) >= 10 || (Math.floor(x / 10) % 10) + (Math.floor(y / 10) % 10) >= 10; if ((i % 2 === 0) === carry) continue; if (x + y <= 999) break; }
-    return { x, y, s: x + y };
+    for (;;) {
+      x = rnd(120, 550);
+      y = rnd(110, 380);
+      if (x + y <= 999) break;
+    }
+    return { x, y, sum: x + y };
   }), []);
+
   const questions: (QuizQuestion & { x: number; y: number })[] = data.map((d, i) => ({
-    np: `${fmt('ne', d.x)} + ${fmt('ne', d.y)} = ?`, en: `${d.x} + ${d.y} = ?`, x: d.x, y: d.y, answer: String(d.s),
-    options: numChoices(d.s, i * 17 + 3, [10, -10, 100, 1, -1]).map((v) => ({ key: String(v), label: fmt(kit.lang, v) })),
+    np: `${toNp(d.x)} + ${toNp(d.y)} = ?`,
+    en: `${d.x} + ${d.y} = ?`,
+    x: d.x,
+    y: d.y,
+    answer: String(d.sum),
+    options: numChoices(d.sum, i * 17 + 3, [10, -10, 100, 1, -1]).map((v) => ({
+      key: String(v),
+      label: fmt(kit.lang, v),
+    })),
   }));
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', fontSize: 30, fontWeight: 900 }}>
-      {fmt(kit.lang, a)} + {fmt(kit.lang, b)} = <span style={{ color: finished ? '#16a34a' : '#94a3b8' }}>{finished ? fmt(kit.lang, a + b) : '?'}</span>
+  const hud = (
+    <div
+      style={{
+        background: '#FFFFFF',
+        borderRadius: 16,
+        padding: '8px 18px',
+        border: '2px solid #187C68',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+        fontSize: 22,
+        fontWeight: 900,
+        color: '#26332E',
+      }}
+    >
+      <span style={{ color: '#0284C7' }}>{toNp(a)}</span> +{' '}
+      <span style={{ color: '#E11D48' }}>{toNp(b)}</span> ={' '}
+      <span style={{ color: isFinished ? '#16A34A' : '#94A3B8' }}>
+        {isFinished ? toNp(a + b) : '?'}
+      </span>
     </div>
   );
-  const steps = (
-    <>
-      <CBtn color="#8b5cf6" disabled={joined || busy} onClick={join}>① {kit.t('जोडौँ', 'Join')}</CBtn>
-      <CBtn color="#f97316" disabled={!canOnes} onClick={bundleOnes}>② {kit.t('१० एकाइ बाँधौँ', 'Bundle 10 ones')}</CBtn>
-      <CBtn color="#ef4444" disabled={!canTens} onClick={bundleTens}>③ {kit.t('१० दशक बाँधौँ', 'Bundle 10 tens')}</CBtn>
-    </>
-  );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 200 }}>{finished ? `✅ ${a} + ${b} = ${a + b}` : joined ? kit.t('१० वा बढी भए बाँधौँ', 'Bundle when there are 10 or more') : kit.t('पहिले दुवै सङ्ख्या जोडौँ', 'First join the two numbers')}</div>
-      {steps}
-      <CBtn color="#16a34a" disabled={!finished} onClick={() => setLi((li + 1) % LEARN.length)}>{kit.t('अर्को', 'Next')} ➜</CBtn>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>{steps}<CBtn color="#8b5cf6" onClick={() => setup(rnd(120, 560), rnd(120, 400))}>🎲 {kit.t('नयाँ प्रश्न', 'New problem')}</CBtn><CBtn color="#f59e0b" onClick={() => setup(a, b)}>↺</CBtn></Controls>
+
+  const panel = kit.mode === 'CHALLENGE' ? (
+    <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => setup(q.x, q.y)} />
   ) : (
-    <div><QuizPanel kit={kit} questions={questions} onAsk={(q: any) => setup(q.x, q.y)} /><div style={{ marginTop: 8, display: 'flex', gap: 8, flexWrap: 'wrap' }}>{steps}</div></div>
+    <Controls>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+        <CBtn color="#8B5CF6" disabled={joined} onClick={handleJoin}>
+          ① {kit.t('ब्लक जोडौँ', 'Join Blocks')}
+        </CBtn>
+        <CBtn color="#F97316" disabled={!canBundleOnes} onClick={bundleOnes}>
+          ② {kit.t('१० एकाइ बाँधौँ ➔ १ दशक', 'Bundle 10 Ones')}
+        </CBtn>
+        <CBtn color="#059669" disabled={!canBundleTens} onClick={bundleTens}>
+          ③ {kit.t('१० दशक बाँधौँ ➔ १ सय', 'Bundle 10 Tens')}
+        </CBtn>
+
+        {kit.mode === 'LEARN' && (
+          <CBtn color="#187C68" onClick={() => setLi((v) => v + 1)}>
+            {kit.t('अर्को जोड', 'Next Problem')} ➜
+          </CBtn>
+        )}
+
+        {kit.mode === 'PLAY' && (
+          <CBtn color="#D97706" onClick={() => setup(rnd(120, 500), rnd(120, 450))}>
+            🎲 {kit.t('नयाँ प्रश्न', 'Random')}
+          </CBtn>
+        )}
+      </div>
+    </Controls>
   );
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+
+  return (
+    <SimFrame2D kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} grade={2}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 380,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          gap: 20,
+        }}
+      >
+        {!joined ? (
+          /* Separate Number Blocks Before Join */
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: 20,
+              width: '100%',
+              maxWidth: 880,
+            }}
+          >
+            <Base10Blocks2D
+              hundreds={Math.floor(a / 100)}
+              tens={Math.floor((a % 100) / 10)}
+              ones={a % 10}
+              lang={kit.lang}
+              title={kit.t(`पहिलो सङ्ख्या: ${toNp(a)}`, `First Number: ${a}`)}
+              color="#0284C7"
+              compact
+            />
+            <Base10Blocks2D
+              hundreds={Math.floor(b / 100)}
+              tens={Math.floor((b % 100) / 10)}
+              ones={b % 10}
+              lang={kit.lang}
+              title={kit.t(`दोस्रो सङ्ख्या: ${toNp(b)}`, `Second Number: ${b}`)}
+              color="#E11D48"
+              compact
+            />
+          </div>
+        ) : (
+          /* Joined Combined Block Board with Bundling Status */
+          <div style={{ width: '100%', maxWidth: 840 }}>
+            <Base10Blocks2D
+              hundreds={h}
+              tens={t}
+              ones={o}
+              lang={kit.lang}
+              title={
+                isFinished
+                  ? kit.t(`जोडफल: ${toNp(a + b)} ✅`, `Total Sum: ${a + b} ✅`)
+                  : kit.t('जोडिएका ब्लकहरू (बाँध्ने चरण)', 'Joined Blocks (Regrouping)')
+              }
+              color={isFinished ? '#16A34A' : '#8B5CF6'}
+            />
+            {/* Helpful Regrouping Tip Banner */}
+            {!isFinished && (
+              <div
+                style={{
+                  marginTop: 12,
+                  background: '#FEF3C7',
+                  border: '1.5px solid #FDE68A',
+                  borderRadius: 12,
+                  padding: '8px 16px',
+                  fontSize: 14,
+                  fontWeight: 800,
+                  color: '#92400E',
+                  textAlign: 'center',
+                }}
+              >
+                {canBundleOnes
+                  ? kit.t('⚠️ एकाइ कोठामा १० वा सोभन्दा बढी ब्लक छन्। "१० एकाइ बाँधौँ" थिच्नुहोस्!', '⚠️ 10 or more ones! Click Bundle 10 Ones!')
+                  : canBundleTens
+                  ? kit.t('⚠️ दशक कोठामा १० वा सोभन्दा बढी ब्लक छन्। "१० दशक बाँधौँ" थिच्नुहोस्!', '⚠️ 10 or more tens! Click Bundle 10 Tens!')
+                  : null}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </SimFrame2D>
+  );
 };

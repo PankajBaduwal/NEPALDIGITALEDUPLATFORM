@@ -1,75 +1,265 @@
 /**
  * Class 4 lesson 14 · Bar diagram (स्तम्भ चित्र)
- * Bar Graph Lab — 3D bars; one block stands for 1, 2, 5 or 10; read, build and compare.
+ * BarGraphLab — 2D Interactive Bar Chart with customizable scales (1, 2, 5, 10).
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { mat, shadowed, textSprite } from '../class1-math-kit/models';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizQuestion } from '../class1-math-kit/SimKit';
 import { rnd } from '../class1-math-kit/nepali';
-import { fmt, Hud, Tip, Props, numQ, mcq } from './h4';
+import { fmt, Props, numQ, mcq } from './h4';
 
-const CATS = [['क्रिकेट', 'Cricket', '#ef4444'], ['फुटबल', 'Football', '#0ea5e9'], ['भलिबल', 'Volleyball', '#eab308'], ['खो-खो', 'Kho-kho', '#22c55e'], ['बास्केटबल', 'Basketball', '#8b5cf6']] as const;
+const CATS = [
+  { np: 'क्रिकेट', en: 'Cricket', color: '#EF4444' },
+  { np: 'फुटबल', en: 'Football', color: '#0EA5E9' },
+  { np: 'भलिबल', en: 'Volleyball', color: '#F59E0B' },
+  { np: 'खो-खो', en: 'Kho-kho', color: '#10B981' },
+];
+
 const SCALES = [1, 2, 5, 10];
-const mk = (sc: number, n: number) => Array.from({ length: n }, () => sc * rnd(1, 10));
-type Api = { set: (vals: number[], sc: number, hi: number) => void };
 
 export const BarGraphLab: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G4-L14-01', chapter: 14, titleNp: 'स्तम्भ चित्र प्रयोगशाला', titleEn: 'Bar Graph Lab' });
-  const [sc, setSc] = useState(5);
-  const [vals, setVals] = useState<number[]>([30, 45, 20, 35]);
-  const [goal, setGoal] = useState<number[]>([25, 40, 15, 35]);
-  const [hi, setHi] = useState(-1);
-  const scene = useRef<Api | null>(null);
-
-  useStage(kit.stageRef, (ctx) => {
-    const g = new THREE.Group(); ctx.scene.add(g);
-    const set = (vs: number[], s: number, h: number) => {
-      g.clear(); const n = vs.length; const x0 = -((n - 1) * 3) / 2;
-      const back = shadowed(new THREE.Mesh(new THREE.BoxGeometry(n * 3 + 3, 0.2, 2.6), mat('#e2e8f0', 0.8))); back.position.set(0, 0.1, 0); g.add(back);
-      for (let k = 2; k <= 10; k += 2) { const t = textSprite(String(k * s), 1.1, { px: 40, w: 128, h: 64, bg: null, color: '#334155' }); t.position.set(x0 - 2.2, 0.2 + k * 0.62, 0); g.add(t); const ln = new THREE.Mesh(new THREE.BoxGeometry(n * 3 + 1.5, 0.02, 0.02), mat('#cbd5e1')); ln.position.set(0, 0.2 + k * 0.62 - 0.31, -1.1); g.add(ln); }
-      vs.forEach((v, i) => {
-        const b = Math.round(v / s); const col = CATS[i][2];
-        for (let k = 0; k < b; k++) { const m = shadowed(new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.58, 1.4), mat(col, 0.5))); m.position.set(x0 + i * 3, 0.5 + k * 0.62, 0); m.userData.bar = i; (m.material as THREE.MeshStandardMaterial).emissive.setHex(h === i ? 0x555555 : 0); g.add(m); }
-        const lab = textSprite(kit.lang === 'ne' ? CATS[i][0] : CATS[i][1], 1.9, { px: 44, w: 256, h: 80, bg: null, color: '#0f172a' }); lab.position.set(x0 + i * 3, -0.4, 1.5); g.add(lab);
-      });
-    };
-    ctx.onTap(() => g.children.filter((o) => o.userData.bar !== undefined), (hit) => { if (hit) tapRef.current?.(hit.object.userData.bar); });
-    scene.current = { set }; set([30, 45, 20, 35], 5, -1);
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 7, 15], target: [0, 3.2, 0], minDistance: 8, maxDistance: 26, ground: 0xecfccb });
-  const tapRef = useRef<((i: number) => void) | null>(null);
-
-  const put = (vs: number[], s: number, h = -1) => { setVals(vs); setSc(s); setHi(h); scene.current?.set(vs, s, h); };
-  tapRef.current = (i: number) => { if (kit.mode === 'LEARN') { put(vals, sc, i); kit.say(`${CATS[i][0]}: ${fmt('ne', vals[i])}`, `${CATS[i][1]}: ${vals[i]}`); } };
-  const freshLearn = () => { const s = SCALES[rnd(0, 3)]; put(mk(s, 4), s); kit.say(`१ खण्ड = ${fmt('ne', s)}। स्तम्भ ट्याप गरी मान पढौँ`, `1 block = ${s}. Tap a bar to read its value`); };
-  const newGoal = () => { const s = SCALES[rnd(1, 3)]; const gv = mk(s, 4); setGoal(gv); put(gv.map(() => 0), s); kit.say('तालिकाअनुसार स्तम्भ बनाऔँ', 'Build the bars to match the table'); };
-  useEffect(() => { if (kit.mode === 'LEARN') freshLearn(); else if (kit.mode === 'PLAY') newGoal(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [kit.mode]);
-  const bump = (i: number, d: number) => { const v = vals.slice(); v[i] = Math.max(0, Math.min(sc * 10, v[i] + d * sc)); put(v, sc); };
-  const check = () => { if (vals.every((v, i) => v === goal[i])) { kit.good(); kit.star(); window.setTimeout(newGoal, 1300); } else kit.oops('केही स्तम्भ मिलेनन्', 'Some bars do not match yet'); };
-
-  const data = useMemo(() => Array.from({ length: 8 }, (_, i) => { const s = SCALES[i % 4]; return { s, v: mk(s, 4), i }; }), []);
-  const questions: (QuizQuestion & { d: { s: number; v: number[] } })[] = data.map((d, i) => {
-    const mx = d.v.indexOf(Math.max(...d.v)), mn = d.v.indexOf(Math.min(...d.v)); const a = rnd(0, 1), b = rnd(2, 3);
-    if (i % 4 === 0) return { d, ...numQ(`${CATS[a][0]} को स्तम्भ कति देखाउँछ?`, `What value does the ${CATS[a][1]} bar show?`, d.v[a], i, [d.s, -d.s, 2 * d.s, 5, 10], (x) => fmt(kit.lang, x), 1) };
-    if (i % 4 === 1) { const q = mcq('सबैभन्दा अग्लो स्तम्भ कुन हो?', 'Which bar is the tallest?', String(mx), [0, 1, 2, 3].filter((x) => x !== mx).map(String), i); return { d, ...q, options: q.options.map((o) => ({ key: o.key, label: kit.lang === 'ne' ? CATS[Number(o.key)][0] : CATS[Number(o.key)][1] })) }; }
-    if (i % 4 === 2) return { d, ...numQ(`${CATS[a][0]} र ${CATS[b][0]} को फरक कति?`, `What is the difference between ${CATS[a][1]} and ${CATS[b][1]}?`, Math.abs(d.v[a] - d.v[b]), i + 5, [d.s, -d.s, 2 * d.s, 5, 10], (x) => fmt(kit.lang, x), 0) };
-    void mn;
-    return { d, ...numQ('सबै स्तम्भको जम्मा कति?', 'What is the total of all the bars?', d.v.reduce((s2, x) => s2 + x, 0), i + 2, [10, -10, 5, -5, 20], (x) => fmt(kit.lang, x), 1) };
+  const kit = useSimKit({
+    code: 'SIM-MATH-G4-L14-01',
+    chapter: 14,
+    titleNp: 'स्तम्भ चित्र प्रयोगशाला (बार ग्राफ)',
+    titleEn: 'Bar Graph Lab',
   });
 
-  const hud = kit.mode === 'CHALLENGE' ? <Hud color="#22c55e"><div style={{ fontSize: 15, fontWeight: 900 }}>{kit.t(`१ खण्ड = ${fmt('ne', sc)}`, `1 block = ${sc}`)}</div></Hud> : (
-    <Hud color="#22c55e">
-      <div style={{ fontSize: 15, fontWeight: 900 }}>{kit.t(`१ खण्ड = ${fmt('ne', sc)}`, `1 block = ${sc}`)}</div>
-      {kit.mode === 'PLAY' ? <div style={{ fontSize: 13, fontWeight: 800 }}>🎯 {CATS.slice(0, 4).map((c, i) => `${kit.t(c[0], c[1])} ${fmt(kit.lang, goal[i])}`).join(' · ')}</div>
-        : <div style={{ fontSize: 13, fontWeight: 700, color: '#475569' }}>{hi >= 0 ? `${kit.t(CATS[hi][0], CATS[hi][1])} = ${fmt(kit.lang, vals[hi])}` : kit.t('स्तम्भ ट्याप गर', 'Tap a bar')}</div>}
-    </Hud>
+  const [scale, setScale] = useState(5);
+  const [vals, setVals] = useState<number[]>([30, 45, 20, 35]);
+  const [activeBar, setActiveBar] = useState<number | null>(null);
+
+  const applyScale = (newScale: number) => {
+    setScale(newScale);
+    const newVals = CATS.map(() => rnd(1, 8) * newScale);
+    setVals(newVals);
+    kit.tap();
+    kit.say(`स्केल: १ एकाइ = ${newScale}`, `Scale: 1 unit = ${newScale}`);
+  };
+
+  const bump = (idx: number, delta: number) => {
+    const next = [...vals];
+    next[idx] = Math.max(0, Math.min(scale * 10, next[idx] + delta * scale));
+    setVals(next);
+    setActiveBar(idx);
+    kit.tap();
+    kit.say(`${CATS[idx].np}: ${next[idx]}`, `${CATS[idx].en}: ${next[idx]}`);
+  };
+
+  const fresh = () => {
+    const nextVals = CATS.map(() => rnd(1, 8) * scale);
+    setVals(nextVals);
+    setActiveBar(null);
+    kit.tap();
+  };
+
+  const questions: QuizQuestion[] = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => {
+      const qScale = SCALES[i % SCALES.length];
+      const qVals = CATS.map(() => rnd(1, 8) * qScale);
+      const catIdx = i % CATS.length;
+      const count = qVals[catIdx];
+      const maxI = qVals.indexOf(Math.max(...qVals));
+
+      if (i % 2 === 0) {
+        return numQ(
+          `${CATS[catIdx].np}को स्तम्भले कति सङ्ख्या देखाउँछ? (स्केल = ${qScale})`,
+          `What value does the ${CATS[catIdx].en} bar show? (Scale = ${qScale})`,
+          count,
+          i,
+          [qScale, -qScale, 2 * qScale, 5],
+          (x) => fmt(kit.lang, x),
+          1
+        );
+      } else {
+        const q = mcq(
+          'कुन खेलको स्तम्भ सबैभन्दा अग्लो (धेरै) छ?',
+          'Which sport has the tallest bar?',
+          String(maxI),
+          [0, 1, 2, 3].filter((x) => x !== maxI).map(String),
+          i
+        );
+        return {
+          ...q,
+          options: q.options.map((o) => ({
+            key: o.key,
+            label: kit.lang === 'ne' ? CATS[Number(o.key)].np : CATS[Number(o.key)].en,
+          })),
+        };
+      }
+    });
+  }, [kit.lang]);
+
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      mascotGreeting={
+        activeBar !== null
+          ? kit.t(
+              `${CATS[activeBar].np}: ${vals[activeBar]} (स्केल १ खण्ड = ${scale})`,
+              `${CATS[activeBar].en}: ${vals[activeBar]} (Scale 1 unit = ${scale})`
+            )
+          : kit.t(
+              `स्तम्भ चित्र: १ खण्ड = ${scale}। स्तम्भमा ट्याप गरेर वा +/− थिचेर मान हेरौँ!`,
+              `Bar Graph: 1 block = ${scale}. Tap any bar or use +/− to adjust values!`
+            )
+      }
+      questions={questions}
+      controls={
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div style={{ fontSize: 13, fontWeight: 800, color: '#475569' }}>
+            {kit.t('स्केल (Scale):', 'Scale:')}
+          </div>
+          {SCALES.map((s) => (
+            <button
+              key={s}
+              onClick={() => applyScale(s)}
+              style={{
+                padding: '7px 14px',
+                borderRadius: 10,
+                border: scale === s ? '2px solid #187C68' : '1px solid #CBD5E1',
+                background: scale === s ? '#E6F3E9' : '#FFFFFF',
+                color: scale === s ? '#187C68' : '#334155',
+                fontWeight: 800,
+                fontSize: 13,
+                cursor: 'pointer',
+              }}
+            >
+              १ = {s}
+            </button>
+          ))}
+          <button
+            onClick={fresh}
+            style={{ padding: '7px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            🎲 {kit.t('नयाँ तथ्याङ्क', 'Random')}
+          </button>
+        </div>
+      }
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 700, gap: 16 }}>
+        {/* Graph Display Card */}
+        <div
+          style={{
+            width: '100%',
+            background: '#FFFFFF',
+            borderRadius: 18,
+            border: '2px solid #E2E8F0',
+            padding: '24px 28px',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {/* SVG Bar Chart with Gridlines */}
+          <svg viewBox="0 0 520 250" style={{ width: '100%', maxWidth: 520 }}>
+            {/* Background horizontal gridlines */}
+            {[0, 2, 4, 6, 8, 10].map((k) => {
+              const y = 200 - k * 18;
+              const val = k * scale;
+              return (
+                <g key={k}>
+                  <line x1="50" y1={y} x2="480" y2={y} stroke="#F1F5F9" strokeWidth="1.5" />
+                  <text x="42" y={y + 4} textAnchor="end" fill="#64748B" fontSize="11" fontWeight="700">
+                    {val}
+                  </text>
+                </g>
+              );
+            })}
+
+            {/* X-axis line */}
+            <line x1="50" y1="200" x2="480" y2="200" stroke="#334155" strokeWidth="2" />
+
+            {/* Bars */}
+            {CATS.map((cat, i) => {
+              const val = vals[i];
+              const barHeight = (val / (10 * scale)) * 180;
+              const x = 75 + i * 105;
+              const y = 200 - barHeight;
+              const isSelected = activeBar === i;
+
+              return (
+                <g key={cat.en} onClick={() => { setActiveBar(i); kit.tap(); }} style={{ cursor: 'pointer' }}>
+                  {/* Bar rect */}
+                  <rect
+                    x={x}
+                    y={y}
+                    width="55"
+                    height={Math.max(2, barHeight)}
+                    rx="6"
+                    fill={cat.color}
+                    stroke={isSelected ? '#1E293B' : 'transparent'}
+                    strokeWidth={isSelected ? 3 : 0}
+                    style={{
+                      transition: 'all 0.25s ease',
+                      filter: isSelected ? 'drop-shadow(0 4px 8px rgba(0,0,0,0.15))' : 'none',
+                    }}
+                  />
+                  {/* Value on top of bar */}
+                  <text
+                    x={x + 27.5}
+                    y={y - 6}
+                    textAnchor="middle"
+                    fill={cat.color}
+                    fontSize="13"
+                    fontWeight="900"
+                  >
+                    {val}
+                  </text>
+                  {/* Category label below bar */}
+                  <text
+                    x={x + 27.5}
+                    y="222"
+                    textAnchor="middle"
+                    fill="#1E293B"
+                    fontSize="12"
+                    fontWeight="800"
+                  >
+                    {kit.t(cat.np, cat.en)}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+
+          {/* Stepper controls below chart for each bar */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, width: '100%', marginTop: 8 }}>
+            {CATS.map((cat, idx) => (
+              <div key={idx} style={{ display: 'flex', gap: 6, justifyContent: 'center' }}>
+                <button
+                  onClick={() => bump(idx, -1)}
+                  style={{
+                    padding: '4px 10px',
+                    borderRadius: 6,
+                    border: '1px solid #CBD5E1',
+                    background: '#F8FAFC',
+                    fontWeight: 900,
+                    cursor: 'pointer',
+                  }}
+                >
+                  −
+                </button>
+                <button
+                  onClick={() => bump(idx, 1)}
+                  style={{
+                    padding: '4px 10px',
+                    borderRadius: 6,
+                    border: '1px solid #CBD5E1',
+                    background: '#F8FAFC',
+                    fontWeight: 900,
+                    cursor: 'pointer',
+                  }}
+                >
+                  +
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </SimFrame2D>
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls><Tip>{kit.t('स्तम्भका खण्ड गनेर × मापन', 'Count the blocks and multiply by the scale')}</Tip><CBtn color="#16a34a" onClick={freshLearn}>🎲 {kit.t('नयाँ', 'New')}</CBtn></Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>{CATS.slice(0, 4).map((c, i) => <span key={i} style={{ display: 'inline-flex', gap: 4 }}><CBtn color={c[2]} style={{ minWidth: 44 }} onClick={() => bump(i, -1)}>−</CBtn><CBtn color={c[2]} onClick={() => bump(i, 1)}>+ {kit.t(c[0], c[1])}</CBtn></span>)}<CBtn color="#16a34a" onClick={check}>✓ {kit.t('जाँचौँ', 'Check')}</CBtn></Controls>
-  ) : <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => put(q.d.v, q.d.s)} />;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };
+export default BarGraphLab;

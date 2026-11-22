@@ -1,114 +1,338 @@
 /**
  * Lesson 15 · Currency (मुद्रा)
- * Rupee Market — buy things with Nepali notes and coins (up to Rs 1000): pay exactly, add prices, find the change.
+ * Rupee Market — buy things with Nepali notes and coins (up to Rs 1000): pay exact, add prices, find change.
+ * Pure 2D Implementation for Smart Boards & Desktops.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { mat, shadowed, textSprite, note, coin, NOTE_VALUES, COIN_VALUES } from '../class1-math-kit/models';
-import { rnd } from '../class1-math-kit/nepali';
+import React, { useEffect, useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit/SimFrame2D';
+import { Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp, rnd } from '../class1-math-kit/nepali';
 import { fmt, numChoices } from './helpers';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
-const NOTE_BG: Record<number, string> = { 5: '#f9a8a8', 10: '#d8b4fe', 20: '#fdba74', 50: '#93c5fd', 100: '#bef264', 500: '#fde68a', 1000: '#a7f3d0' };
-const NOTES2 = [5, 10, 20, 50, 100, 500, 1000];
+
 const GOODS = [
-  { np: 'कापी', en: 'Copy book', emoji: '📒', price: 35 }, { np: 'झोला', en: 'Bag', emoji: '🎒', price: 250 }, { np: 'जुत्ता', en: 'Shoes', emoji: '👟', price: 450 },
-  { np: 'दूध', en: 'Milk', emoji: '🥛', price: 60 }, { np: 'स्याउ (१ के.जी.)', en: 'Apples (1 kg)', emoji: '🍎', price: 180 }, { np: 'पेन', en: 'Pen', emoji: '🖊️', price: 15 },
-  { np: 'बिस्कुट', en: 'Biscuits', emoji: '🍪', price: 45 }, { np: 'बल', en: 'Ball', emoji: '⚽', price: 120 },
+  { np: 'कापी', en: 'Copy book', emoji: '📒', price: 35 },
+  { np: 'झोला', en: 'Bag', emoji: '🎒', price: 250 },
+  { np: 'जुत्ता', en: 'Shoes', emoji: '👟', price: 450 },
+  { np: 'दूध', en: 'Milk', emoji: '🥛', price: 60 },
+  { np: 'स्याउ (१ के.जी.)', en: 'Apples (1 kg)', emoji: '🍎', price: 180 },
+  { np: 'पेन', en: 'Pen', emoji: '🖊️', price: 15 },
+  { np: 'बिस्कुट', en: 'Biscuits', emoji: '🍪', price: 45 },
+  { np: 'बल', en: 'Ball', emoji: '⚽', price: 120 },
+];
+
+const NOTES = [
+  { v: 5, color: '#F87171', label: 'रु ५' },
+  { v: 10, color: '#C084FC', label: 'रु १०' },
+  { v: 20, color: '#FB923C', label: 'रु २०' },
+  { v: 50, color: '#60A5FA', label: 'रु ५०' },
+  { v: 100, color: '#4ADE80', label: 'रु १००' },
+  { v: 500, color: '#FBBF24', label: 'रु ५००' },
 ];
 
 export const RupeeMarket: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G2-L15-01', chapter: 15, titleNp: 'रुपैयाँ बजार (मुद्रा)', titleEn: 'Rupee Market (Currency)' });
-  const [cart, setCart] = useState<number[]>([]);
-  const [paid, setPaid] = useState<{ kind: 'coin' | 'note'; v: number }[]>([]);
-  const [li, setLi] = useState(0);
-  const scene = useRef<{ stock: (idx: number[]) => void; money: (list: { kind: 'coin' | 'note'; v: number }[]) => void; selectOnly: (idx: number[]) => void } | null>(null);
-  const live = useRef({ mode: kit.mode, pick: (_i: number) => {} });
-  live.current.mode = kit.mode;
-
-  useStage(kit.stageRef, (ctx) => {
-    const shelf = shadowed(new THREE.Mesh(new THREE.BoxGeometry(17, 0.4, 3), mat('#92400e', 0.85))); shelf.position.set(0, 1.5, -3); ctx.scene.add(shelf);
-    const wall = shadowed(new THREE.Mesh(new THREE.BoxGeometry(17.6, 4.6, 0.3), mat('#fde68a', 0.9))); wall.position.set(0, 3.7, -4.6); ctx.scene.add(wall);
-    const counter = shadowed(new THREE.Mesh(new THREE.BoxGeometry(17, 0.6, 4.4), mat('#b45309', 0.8))); counter.position.set(0, 0.3, 2.8); ctx.scene.add(counter);
-    const shelfItems = new THREE.Group(); ctx.scene.add(shelfItems);
-    const moneyG = new THREE.Group(); ctx.scene.add(moneyG);
-    const items: THREE.Group[] = [];
-    const stock = (idx: number[]) => {
-      [...shelfItems.children].forEach((c) => shelfItems.remove(c)); items.length = 0;
-      idx.forEach((gi, i) => {
-        const g = new THREE.Group(); const gd = GOODS[gi];
-        const box = shadowed(new THREE.Mesh(new THREE.BoxGeometry(1.7, 1.7, 1.7), mat('#fff7ed', 0.6))); box.position.y = 1; g.add(box);
-        const em = textSprite(gd.emoji, 1.5, { px: 120, w: 160, h: 160 }); em.position.set(0, 1.05, 1); g.add(em);
-        const tag = textSprite(`Rs ${gd.price}`, 1.6, { px: 66, w: 256, h: 112, bg: '#ffffff', border: '#16a34a', color: '#14532d' }); tag.position.set(0, -0.15, 1.2); g.add(tag);
-        g.position.set((i - (idx.length - 1) / 2) * 2.5, 1.7, -3); g.userData.good = gi; g.userData.i = i; shelfItems.add(g); items.push(g);
-      });
-    };
-    const selectOnly = (idx: number[]) => items.forEach((g) => { g.userData.sel = idx.includes(g.userData.good); });
-    const money = (list: { kind: 'coin' | 'note'; v: number }[]) => {
-      [...moneyG.children].forEach((c) => moneyG.remove(c));
-      list.forEach((m, i) => {
-        const o = m.kind === 'note' ? note(m.v) : coin(m.v, 0.6); o.scale.setScalar(m.kind === 'note' ? 0.55 : 1);
-        const to = new THREE.Vector3(-7 + (i % 8) * 2, 0.7 + Math.floor(i / 8) * 0.05, 2.2 + Math.floor(i / 8) * 1.1); o.position.set(to.x, 5, to.z); moneyG.add(o);
-        if (i === list.length - 1) { const p0 = o.position.clone(); ctx.tween(480, (k) => o.position.lerpVectors(p0, to, k), undefined, ease.bounce); } else o.position.copy(to);
-      });
-    };
-    scene.current = { stock, money, selectOnly };
-    ctx.onFrame((_d, t) => items.forEach((g) => { g.position.y += ((g.userData.sel ? 2.4 : 1.7) + Math.sin(t * 2 + g.userData.i) * 0.04 - g.position.y) * 0.15; }));
-    ctx.onTap(() => items, (hit) => { if (!hit || live.current.mode === 'CHALLENGE') return; let o: THREE.Object3D | null = hit.object; while (o && o.userData.good === undefined) o = o.parent; if (o) live.current.pick(o.userData.good); });
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 6, 12.5], target: [0, 2, -0.2], minDistance: 8, maxDistance: 22, ground: 0xfde68a, sky: 0xfef3c7 });
-
-  const shown = useRef<number[]>([0, 3, 5, 6, 7]);
-  const total = cart.reduce((a, g) => a + GOODS[g].price, 0);
-  const paidSum = paid.reduce((a, p) => a + p.v, 0);
-  live.current.pick = (gi) => { if (kit.mode === 'CHALLENGE') return; const next = cart.includes(gi) ? cart.filter((x) => x !== gi) : [...cart, gi]; setCart(next); scene.current?.selectOnly(next); kit.tap(); kit.say(`${GOODS[gi].np} रु. ${GOODS[gi].price}`, `${GOODS[gi].en}: Rs ${GOODS[gi].price}`); };
-
-  const setShelf = (idx: number[]) => { shown.current = idx; scene.current?.stock(idx); };
-  useEffect(() => {
-    setPaid([]); scene.current?.money([]);
-    if (kit.mode === 'LEARN') { setShelf([0, 5, 6, 3, 7]); setCart([5]); scene.current?.selectOnly([5]); kit.say('पेन रु. १५ को छ। नोट र सिक्का थपेर ठीक रकम तिरौँ।', 'The pen costs Rs 15. Add notes and coins to pay exactly.'); }
-    else if (kit.mode === 'PLAY') { setShelf([0, 3, 5, 6, 7]); setCart([]); scene.current?.selectOnly([]); kit.say('सामान छोएर किनौँ, अनि पैसा तिरौँ।', 'Tap goods to buy, then pay.'); }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [kit.mode, li]);
-
-  const addMoney = (kind: 'coin' | 'note', v: number) => { if (paidSum + v > 2000) return; const n = [...paid, { kind, v }]; setPaid(n); scene.current?.money(n); kit.tap(); };
-  const pay = () => {
-    if (!cart.length) { kit.oops('पहिले सामान रोजौँ', 'Choose goods first'); return; }
-    if (paidSum === total) { kit.good(`रु. ${total} ठीक तिर्यौँ!`, `You paid exactly Rs ${total}!`); kit.star(); setPaid([]); scene.current?.money([]); if (kit.mode === 'LEARN') window.setTimeout(() => setLi((v) => v + 1), 900); }
-    else if (paidSum < total) kit.oops(`रु. ${total - paidSum} अझै चाहिन्छ`, `You need Rs ${total - paidSum} more`);
-    else kit.oops(`रु. ${paidSum - total} फिर्ता पाउँछौ (फिर्ता = ${paidSum - total})`, `That is Rs ${paidSum - total} too much — your change would be Rs ${paidSum - total}`);
-  };
-
-  const data = useMemo(() => Array.from({ length: 8 }, (_, i) => {
-    if (i % 3 === 0) { const a = rnd(0, 7); let b = rnd(0, 7); while (b === a) b = rnd(0, 7); return { kind: 'total', a, b }; }
-    if (i % 3 === 1) { const a = rnd(0, 7); const price = GOODS[a].price; const pay = NOTES2.find((n) => n > price) || 1000; return { kind: 'change', a, pay }; }
-    const a = rnd(0, 7); return { kind: 'notes', a };
-  }), []);
-  const questions: (QuizQuestion & { d: any })[] = data.map((d: any, i) => {
-    if (d.kind === 'total') { const s = GOODS[d.a].price + GOODS[d.b].price; return { np: `${GOODS[d.a].np} (रु. ${d.a >= 0 ? GOODS[d.a].price : ''}) र ${GOODS[d.b].np} (रु. ${GOODS[d.b].price}) को जम्मा कति?`, en: `${GOODS[d.a].en} (Rs ${GOODS[d.a].price}) and ${GOODS[d.b].en} (Rs ${GOODS[d.b].price}). What is the total?`, d, answer: String(s), options: numChoices(s, i * 7 + 3, [10, -10, 5, -5, 1]).map((v) => ({ key: String(v), label: `Rs ${fmt(kit.lang, v)}` })) }; }
-    if (d.kind === 'change') { const ch = d.pay - GOODS[d.a].price; return { np: `${GOODS[d.a].np}को मूल्य रु. ${GOODS[d.a].price}। तिमीले रु. ${d.pay}को नोट दियौ। फिर्ता कति पाउँछौ?`, en: `The ${GOODS[d.a].en.toLowerCase()} costs Rs ${GOODS[d.a].price}. You pay with a Rs ${d.pay} note. How much change do you get?`, d, answer: String(ch), options: numChoices(ch, i * 11 + 2, [10, -10, 5, -5, 20]).map((v) => ({ key: String(v), label: `Rs ${fmt(kit.lang, v)}` })) }; }
-    const price = GOODS[d.a].price; const best = NOTES2.filter((n) => n <= price).pop() || 5; return { np: `रु. ${price} को सामानको लागि सबैभन्दा ठूलो कुन नोट प्रयोग गर्न सकिन्छ (रु. ${price} भन्दा बढी नभएको)?`, en: `Which is the biggest note that is not more than Rs ${price}?`, d, answer: String(best), options: [5, 10, 20, 50, 100, 500, 1000].filter((n) => n === best || Math.abs(Math.log10(n) - Math.log10(best)) < 0.75).slice(0, 3).map((v) => ({ key: String(v), label: <span style={{ background: NOTE_BG[v], padding: '2px 10px', borderRadius: 6, color: '#1f2937' }}>Rs {v}</span> })) };
+  const kit = useSimKit({
+    code: 'SIM-MATH-G2-L15-01',
+    chapter: 15,
+    titleNp: 'रुपैयाँ बजार (मुद्रा)',
+    titleEn: 'Rupee Market (Currency)',
   });
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #16a34a', textAlign: 'center' }}>
-      <div style={{ fontSize: 15, fontWeight: 800 }}>{kit.t('जम्मा मूल्य', 'Total price')}: <b style={{ fontSize: 24 }}>Rs {fmt(kit.lang, total)}</b></div>
-      <div style={{ fontSize: 20, fontWeight: 900, color: paidSum === total && total ? '#16a34a' : paidSum > total ? '#dc2626' : '#0369a1' }}>{kit.t('तिरेको', 'Paid')}: Rs {fmt(kit.lang, paidSum)}</div>
+  const [cart, setCart] = useState<number[]>([0]); // indices in GOODS
+  const [paid, setPaid] = useState<number[]>([]); // values of notes paid
+
+  const totalPrice = cart.reduce((sum, idx) => sum + GOODS[idx].price, 0);
+  const totalPaid = paid.reduce((sum, v) => sum + v, 0);
+  const changeDue = Math.max(0, totalPaid - totalPrice);
+  const isPaidEnough = totalPaid >= totalPrice && totalPrice > 0;
+
+  const toggleCartItem = (idx: number) => {
+    kit.tap();
+    const next = cart.includes(idx) ? cart.filter((x) => x !== idx) : [...cart, idx];
+    setCart(next);
+  };
+
+  const addCash = (v: number) => {
+    kit.tap();
+    const next = [...paid, v];
+    setPaid(next);
+    const sum = next.reduce((a, b) => a + b, 0);
+    kit.say(`रु ${toNp(v)} तिरियो`, `Paid Rs ${v}`);
+
+    if (sum >= totalPrice && totalPrice > 0) {
+      const change = sum - totalPrice;
+      if (change === 0) {
+        kit.good(`बराबर रकम भुक्तानी भयो! धन्यवाद।`, `Exact payment! Thank you.`);
+      } else {
+        kit.good(`रकम पुग्यो! फिर्ता पाउने रकम: रु ${toNp(change)}`, `Payment complete! Change due: Rs ${change}`);
+      }
+      kit.star();
+    }
+  };
+
+  const clearCash = () => {
+    kit.tap();
+    setPaid([]);
+  };
+
+  useEffect(() => {
+    if (kit.mode === 'LEARN') {
+      setCart([0, 5]); // Copy book Rs 35 + Pen Rs 15 = Rs 50
+      setPaid([]);
+      kit.say(
+        'सामान किन्नुहोस् र नेपाली नोटहरू थिचेर ठीक रकम तिर्नुहोस्।',
+        'Select goods and tap Nepali notes to make the payment.'
+      );
+    } else if (kit.mode === 'PLAY') {
+      setCart([rnd(0, GOODS.length - 1)]);
+      setPaid([]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [kit.mode]);
+
+  // Quiz Questions for Challenge Mode
+  const questions: QuizQuestion[] = [
+    {
+      np: 'रु १०० को सामान किनेर रु ५०० को नोट दिँदा कति फिर्ता पाउनुहुन्छ?',
+      en: 'If you buy an item for Rs 100 and pay with a Rs 500 note, what is your change?',
+      answer: '400',
+      options: [
+        { key: '400', label: 'रु ४००' },
+        { key: '300', label: 'रु ३००' },
+        { key: '450', label: 'रु ४५०' },
+      ],
+    },
+    {
+      np: 'कापीको मूल्य रु ३५ र पेनको मूल्य रु १५ छ। दुवैको जम्मा मूल्य कति?',
+      en: 'A copy book costs Rs 35 and a pen costs Rs 15. What is the total?',
+      answer: '50',
+      options: [
+        { key: '50', label: 'रु ५०' },
+        { key: '40', label: 'रु ४०' },
+        { key: '60', label: 'रु ६०' },
+      ],
+    },
+    {
+      np: 'रु ५० बनाउन रु १० का कतिवटा नोट चाहिन्छन्?',
+      en: 'How many Rs 10 notes make Rs 50?',
+      answer: '5',
+      options: [
+        { key: '5', label: '५ वटा' },
+        { key: '10', label: '१० वटा' },
+        { key: '2', label: '२ वटा' },
+      ],
+    },
+    {
+      np: 'रु १०० को एउटा नोट बराबर रु २० का कतिवटा नोट हुन्छन्?',
+      en: 'How many Rs 20 notes equal one Rs 100 note?',
+      answer: '5',
+      options: [
+        { key: '5', label: '५ वटा' },
+        { key: '4', label: '४ वटा' },
+        { key: '6', label: '६ वटा' },
+      ],
+    },
+  ];
+
+  const hud = (
+    <div
+      style={{
+        background: '#FFFFFF',
+        borderRadius: 16,
+        padding: '8px 18px',
+        border: '2px solid #187C68',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+        fontSize: 16,
+        fontWeight: 900,
+        color: '#26332E',
+      }}
+    >
+      {kit.t('जम्मा मूल्य', 'Total Price')}:{' '}
+      <span style={{ color: '#0284C7', fontSize: 20 }}>
+        रु {toNp(totalPrice)}
+      </span>
     </div>
   );
-  const chip = (kind: 'coin' | 'note', v: number) => (
-    <CBtn key={`${kind}${v}`} onClick={() => addMoney(kind, v)} style={{ background: kind === 'note' ? NOTE_BG[v] : '#fbbf24', color: '#1f2937', minWidth: 60, padding: '6px 8px', minHeight: 48, fontSize: 16, boxShadow: '0 3px 0 rgba(0,0,0,.2)', borderRadius: kind === 'coin' ? 40 : 10 }}>{kind === 'note' ? '💵' : '🪙'}{fmt(kit.lang, v)}</CBtn>
-  );
-  const moneyBar = (<>{COIN_VALUES.map((v) => chip('coin', v))}{NOTES2.map((v) => chip('note', v))}<CBtn color="#f59e0b" onClick={() => { setPaid([]); scene.current?.money([]); }}>↺</CBtn><CBtn color="#16a34a" onClick={pay}>✓ {kit.t('तिरौँ', 'Pay')}</CBtn></>);
+
   const panel = kit.mode === 'CHALLENGE' ? (
-    <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => { const d = q.d; const idx = d.kind === 'total' ? [d.a, d.b] : [d.a]; setShelf([...new Set([...idx, 0, 3, 5, 6, 7])].slice(0, 5)); window.setTimeout(() => scene.current?.selectOnly(idx), 50); setPaid([]); scene.current?.money(d.kind === 'change' ? [{ kind: 'note', v: d.pay }] : []); }} />
+    <QuizPanel kit={kit} questions={questions} />
   ) : (
-    <div>
-      <div style={{ fontWeight: 800, marginBottom: 6 }}>{kit.mode === 'LEARN' ? kit.t('पेनको मूल्य रु. १५ तिरौँ', 'Pay Rs 15 for the pen') : kit.t('सामान छानेर रकम तिरौँ', 'Choose goods, then pay')}</div>
-      <Controls>{moneyBar}</Controls>
-    </div>
+    <Controls>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+        <span style={{ fontSize: 13, fontWeight: 800, color: '#26332E' }}>
+          {kit.t('पैसा तिर्नुहोस्:', 'Pay Cash:')}
+        </span>
+        {NOTES.map((note) => (
+          <button
+            key={note.v}
+            type="button"
+            onClick={() => addCash(note.v)}
+            style={{
+              padding: '6px 12px',
+              borderRadius: 8,
+              fontWeight: 900,
+              fontSize: 13,
+              border: `2px solid ${note.color}`,
+              background: '#FFFFFF',
+              color: '#1E293B',
+              cursor: 'pointer',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.06)',
+            }}
+          >
+            💵 {note.label}
+          </button>
+        ))}
+
+        <CBtn color="#EF4444" disabled={paid.length === 0} onClick={clearCash}>
+          ↺ {kit.t('रकम फिर्ता', 'Clear Cash')}
+        </CBtn>
+        <CBtn
+          color="#D97706"
+          onClick={() => {
+            setCart([rnd(0, GOODS.length - 1)]);
+            setPaid([]);
+          }}
+        >
+          🎲 {kit.t('नयाँ सामान', 'New Item')}
+        </CBtn>
+      </div>
+    </Controls>
   );
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+
+  return (
+    <SimFrame2D kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} grade={2}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 380,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          gap: 16,
+        }}
+      >
+        {/* Market Goods Shelf */}
+        <div style={{ width: '100%', maxWidth: 880 }}>
+          <div style={{ fontSize: 14, fontWeight: 800, color: '#64748B', marginBottom: 8 }}>
+            🛒 {kit.t('पसलको सामान (छोएर झोलामा हाल्नुहोस्):', 'Store Shelf (Tap to add to cart):')}
+          </div>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))',
+              gap: 10,
+            }}
+          >
+            {GOODS.map((g, idx) => {
+              const inCart = cart.includes(idx);
+              return (
+                <div
+                  key={g.en}
+                  onClick={() => toggleCartItem(idx)}
+                  style={{
+                    background: inCart ? '#F0FDF4' : '#FFFFFF',
+                    border: `2px solid ${inCart ? '#16A34A' : '#E2E8F0'}`,
+                    borderRadius: 14,
+                    padding: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    transform: inCart ? 'scale(1.04)' : 'none',
+                    boxShadow: inCart ? '0 4px 12px rgba(22, 163, 74, 0.15)' : 'none',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  <span style={{ fontSize: 28 }}>{g.emoji}</span>
+                  <div style={{ fontSize: 12, fontWeight: 800, color: '#1E293B', marginTop: 4 }}>
+                    {kit.t(g.np, g.en)}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 900,
+                      color: '#059669',
+                      background: '#DCFCE7',
+                      borderRadius: 6,
+                      padding: '2px 6px',
+                      marginTop: 2,
+                    }}
+                  >
+                    रु {toNp(g.price)}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Cash Register & Change Calculation Box */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #E2E8F0',
+            borderRadius: 20,
+            padding: '16px 24px',
+            width: '100%',
+            maxWidth: 880,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
+            flexWrap: 'wrap',
+            gap: 14,
+          }}
+        >
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>
+              {kit.t('तिरेको रकम:', 'Cash Paid:')}
+            </div>
+            <div style={{ fontSize: 24, fontWeight: 900, color: '#0284C7' }}>
+              रु {toNp(totalPaid)}
+            </div>
+            {/* Visual list of paid notes */}
+            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 4 }}>
+              {paid.map((val, k) => (
+                <span
+                  key={k}
+                  style={{
+                    background: '#E0F2FE',
+                    color: '#0369A1',
+                    borderRadius: 4,
+                    padding: '1px 6px',
+                    fontSize: 11,
+                    fontWeight: 800,
+                  }}
+                >
+                  रु {toNp(val)}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>
+              {kit.t('फिर्ता रकम (Change):', 'Change Due:')}
+            </div>
+            <div
+              style={{
+                fontSize: 24,
+                fontWeight: 900,
+                color: isPaidEnough ? '#16A34A' : '#EF4444',
+              }}
+            >
+              {isPaidEnough ? `रु ${toNp(changeDue)}` : kit.t('रकम पुगेन', 'Insufficient')}
+            </div>
+            <div style={{ fontSize: 11, color: '#64748B', fontWeight: 700 }}>
+              {toNp(totalPaid)} − {toNp(totalPrice)} = {toNp(changeDue)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </SimFrame2D>
+  );
 };

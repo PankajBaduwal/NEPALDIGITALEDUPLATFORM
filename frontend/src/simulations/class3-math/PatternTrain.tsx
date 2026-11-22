@@ -1,76 +1,271 @@
 /**
  * Lesson 4 · Number patterns (सङ्ख्याको ढाँचा)
- * Pattern Train — a train of numbered wagons follows a rule (add or subtract the same number); find the missing wagon.
+ * Pattern Train — wagons follow an arithmetic rule (add or subtract); find the missing wagon number!
+ * Pure 2D Implementation for Smart Boards & Desktops.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { mat, shadowed, textSprite } from '../class1-math-kit/models';
-import { rnd } from '../class1-math-kit/nepali';
+import React, { useEffect, useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit/SimFrame2D';
+import { Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { rnd, toNp } from '../class1-math-kit/nepali';
 import { big, fmt, near } from './h3';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
 interface Pat { start: number; step: number; hide: number }
-const mk = (): Pat => { const step = [2, 3, 5, 10, 25, 100, 250, 1000][rnd(0, 7)] * (rnd(0, 2) ? 1 : -1); const start = step > 0 ? rnd(1, 40) * (step >= 100 ? 10 : 1) : rnd(0, 20) * Math.abs(step) + Math.abs(step) * 8; return { start, step, hide: rnd(1, 5) }; };
-const seq = (p: Pat) => Array.from({ length: 7 }, (_, i) => p.start + p.step * i);
-const COL = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#0ea5e9', '#8b5cf6', '#ec4899'];
+
+const mkPattern = (): Pat => {
+  const step = [2, 3, 5, 10, 25, 100, 250, 1000][rnd(0, 7)] * (rnd(0, 2) ? 1 : -1);
+  const start = step > 0 ? rnd(1, 40) * (Math.abs(step) >= 100 ? 10 : 1) : rnd(0, 20) * Math.abs(step) + Math.abs(step) * 8;
+  return { start, step, hide: rnd(1, 5) };
+};
+
+const getSequence = (p: Pat) => Array.from({ length: 7 }, (_, i) => p.start + p.step * i);
+
+const WAGON_COLORS = ['#EF4444', '#F97316', '#EAB308', '#10B981', '#06B6D4', '#3B82F6', '#8B5CF6'];
 
 export const PatternTrain: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G3-L4-01', chapter: 4, titleNp: 'ढाँचा रेल', titleEn: 'Pattern Train' });
+  const kit = useSimKit({
+    code: 'SIM-MATH-G3-L4-01',
+    chapter: 4,
+    titleNp: 'ढाँचा रेल',
+    titleEn: 'Pattern Train',
+  });
+
   const [pat, setPat] = useState<Pat>({ start: 5, step: 5, hide: 3 });
-  const [open, setOpen] = useState(false);
-  const [seed, setSeed] = useState(0);
-  const scene = useRef<{ build: (p: Pat, hidden: boolean) => void; reveal: () => void } | null>(null);
+  const [revealed, setRevealed] = useState(false);
+  const [selectedGuess, setSelectedGuess] = useState<number | null>(null);
 
-  useStage(kit.stageRef, (ctx) => {
-    const g = new THREE.Group(); ctx.scene.add(g);
-    const rail = shadowed(new THREE.Mesh(new THREE.BoxGeometry(24, 0.2, 0.5), mat('#78716c', 0.8))); rail.position.set(0, 0.3, 0); ctx.scene.add(rail);
-    let hid: THREE.Sprite | null = null; let hidVal = 0; let wag: THREE.Group | null = null;
-    const label = (v: number, q = false) => textSprite(q ? '?' : v.toLocaleString('en-US'), 1.7, { px: 64, w: 256, h: 128, bg: q ? '#fde68a' : '#ffffff', border: q ? '#f59e0b' : '#94a3b8' });
-    const build = (p: Pat, hidden: boolean) => {
-      g.clear(); hid = null; const s = seq(p);
-      s.forEach((v, i) => {
-        const w = new THREE.Group(); w.position.set((i - 3) * 3.3, 0, 0);
-        const body = shadowed(new THREE.Mesh(new THREE.BoxGeometry(2.8, 1.5, 1.6), mat(COL[i], 0.5))); body.position.y = 1.2; w.add(body);
-        [-0.9, 0.9].forEach((x) => [-0.8, 0.8].forEach((z) => { const wh = shadowed(new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.2, 16), mat('#1f2937', 0.6))); wh.rotation.x = Math.PI / 2; wh.position.set(x, 0.5, z); w.add(wh); }));
-        const q = hidden && i === p.hide; const t = label(v, q); t.position.set(0, 2.4, 0); w.add(t);
-        if (q) { hid = t; hidVal = v; wag = w; }
-        if (i < 6) { const hk = shadowed(new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.12, 0.12), mat('#475569'))); hk.position.set(1.7, 0.8, 0); w.add(hk); }
-        g.add(w); w.scale.setScalar(0.01); ctx.tween(300 + i * 90, (k) => w.scale.setScalar(Math.max(0.01, k)), undefined, ease.back);
-      });
-    };
-    const reveal = () => { if (!hid || !wag) return; const t = label(hidVal); t.position.copy(hid.position); wag.remove(hid); wag.add(t); hid = null; };
-    scene.current = { build, reveal }; build({ start: 5, step: 5, hide: 3 }, false);
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 4.5, 13.5], target: [0, 1.6, 0], minDistance: 8, maxDistance: 24, ground: 0xe7e5e4 });
+  const seq = getSequence(pat);
+  const answer = seq[Math.max(0, pat.hide)];
 
-  const load = (p: Pat, hidden: boolean) => { setPat(p); setOpen(!hidden); scene.current?.build(p, hidden); };
-  const rule = (p: Pat) => `${p.step > 0 ? '+' : '−'}${Math.abs(p.step).toLocaleString('en-US')}`;
+  const ruleText = pat.step > 0 ? `+${pat.step}` : `−${Math.abs(pat.step)}`;
+
+  const newTrain = (hide = true) => {
+    const p = mkPattern();
+    if (!hide) p.hide = -1;
+    setPat(p);
+    setRevealed(!hide);
+    setSelectedGuess(null);
+    kit.say(
+      `ढाँचाको नियम: हरेक पटक ${p.step > 0 ? 'जोड्ने' : 'घटाउने'} ${toNp(Math.abs(p.step))}`,
+      `Rule: ${p.step > 0 ? 'add' : 'subtract'} ${Math.abs(p.step)} each time`
+    );
+  };
+
+  const handlePickOption = (val: number) => {
+    setSelectedGuess(val);
+    if (val === answer) {
+      setRevealed(true);
+      kit.good('शानदार! ढाँचा पत्ता लगाउनुभयो!', 'Great job! Pattern matched!');
+      kit.star();
+    } else {
+      kit.oops(`नियम ${ruleText} हो। फेरि प्रयास गरौँ!`, `The rule is ${ruleText}. Try again!`);
+    }
+  };
 
   useEffect(() => {
-    if (kit.mode === 'LEARN') { const p = { ...mk(), hide: -1 }; load(p, false); kit.say(`ढाँचा: हरेक पटक ${p.step > 0 ? 'जोड्ने' : 'घटाउने'} ${Math.abs(p.step)}`, `Rule: ${p.step > 0 ? 'add' : 'subtract'} ${Math.abs(p.step)} each time`); }
-    else if (kit.mode === 'PLAY') { const p = mk(); load(p, true); kit.say('खाली डिब्बामा के सङ्ख्या आउँछ?', 'Which number goes in the empty wagon?'); }
+    if (kit.mode === 'LEARN') {
+      newTrain(false);
+    } else if (kit.mode === 'PLAY') {
+      newTrain(true);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [kit.mode, seed]);
+  }, [kit.mode]);
 
-  const answer = seq(pat)[Math.max(0, pat.hide)];
-  const opts = useMemo(() => near(answer, seed + 4, [Math.abs(pat.step), -Math.abs(pat.step), 2 * Math.abs(pat.step), 1, -1]), [answer, seed, pat.step]);
-  const pick = (v: number) => { if (open) return; if (v === answer) { setOpen(true); scene.current?.reveal(); kit.good(); kit.star(); window.setTimeout(() => setSeed((s) => s + 1), 1400); } else kit.oops(`नियम ${rule(pat)} हो`, `The rule is ${rule(pat)}`); };
+  const options = useMemo(() => {
+    return near(answer, pat.start + 4, [Math.abs(pat.step), -Math.abs(pat.step), 2 * Math.abs(pat.step), 1, -1]);
+  }, [answer, pat.start, pat.step]);
 
-  const data = useMemo(() => Array.from({ length: 8 }, () => mk()), []);
-  const questions: (QuizQuestion & { p: Pat })[] = data.map((p, i) => { const a = seq(p)[p.hide]; return { np: 'खाली डिब्बामा कुन सङ्ख्या आउँछ?', en: 'Which number is missing from the train?', p, answer: String(a), options: near(a, i + 9, [Math.abs(p.step), -Math.abs(p.step), 2 * Math.abs(p.step), 1, -1]).map((x) => ({ key: String(x), label: big(kit.lang, x) })) }; });
+  // Quiz Questions for Challenge Mode
+  const quizData = useMemo(() => Array.from({ length: 6 }, () => {
+    const p = mkPattern();
+    return { p, s: getSequence(p) };
+  }), []);
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #22c55e', textAlign: 'center' }}>
-      <div style={{ fontSize: 15, fontWeight: 800, color: '#64748b' }}>{kit.t('नियम', 'Rule')}</div>
-      <div style={{ fontSize: 28, fontWeight: 900 }}>{kit.mode === 'PLAY' && !open ? '?' : fmt(kit.lang, rule(pat).replace(/\d+/, (x) => x)) }</div>
+  const questions: QuizQuestion[] = quizData.map((d) => {
+    const hiddenVal = d.s[d.p.hide];
+    const displaySeq = d.s.map((v, i) => (i === d.p.hide ? '?' : toNp(v))).join(', ');
+    return {
+      np: `ढाँचा ${displaySeq} मा '?' को ठाउँमा कुन सङ्ख्या आउँछ?`,
+      en: `In sequence ${displaySeq}, what number replaces '?'?`,
+      answer: String(hiddenVal),
+      options: near(hiddenVal, d.p.start + 7, [Math.abs(d.p.step), -Math.abs(d.p.step), 10]).map((v) => ({
+        key: String(v),
+        label: toNp(v),
+      })),
+    };
+  });
+
+  const hud = (
+    <div
+      style={{
+        background: '#FFFFFF',
+        borderRadius: 16,
+        padding: '8px 18px',
+        border: '2px solid #187C68',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+        fontSize: 16,
+        fontWeight: 900,
+        color: '#26332E',
+      }}
+    >
+      {kit.t('ढाँचाको नियम', 'Pattern Rule')}:{' '}
+      <span style={{ color: '#059669', fontSize: 18 }}>{toNp(ruleText)}</span>
     </div>
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls><div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 220 }}>{kit.t('दुई छिमेकी डिब्बाबीचको फरक हेरौँ', 'Look at the gap between neighbouring wagons')}</div><CBtn color="#16a34a" onClick={() => { kit.star(); setSeed(seed + 1); }}>{kit.t('अर्को ढाँचा', 'Next pattern')} ➜</CBtn></Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>{opts.map((v) => <CBtn key={v} color="#0ea5e9" style={{ minWidth: 90, fontSize: 22 }} onClick={() => pick(v)}>{big(kit.lang, v)}</CBtn>)}</Controls>
-  ) : <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => load(q.p, true)} />;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+
+  const panel = kit.mode === 'CHALLENGE' ? (
+    <QuizPanel kit={kit} questions={questions} />
+  ) : (
+    <Controls>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+        {/* Choices if wagon is hidden */}
+        {!revealed && (
+          <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+            <span style={{ fontSize: 13, fontWeight: 800, color: '#26332E' }}>
+              {kit.t('? को उत्तर छान्नुहोस्:', 'Choose ? value:')}
+            </span>
+            {options.map((val) => (
+              <button
+                key={val}
+                type="button"
+                onClick={() => handlePickOption(val)}
+                style={{
+                  padding: '6px 14px',
+                  borderRadius: 10,
+                  fontSize: 14,
+                  fontWeight: 900,
+                  border: 'none',
+                  cursor: 'pointer',
+                  background: selectedGuess === val ? (val === answer ? '#16A34A' : '#DC2626') : '#0284C7',
+                  color: '#FFFFFF',
+                }}
+              >
+                {toNp(val)}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <CBtn color="#8B5CF6" onClick={() => setRevealed(true)}>
+          👁️ {kit.t('उत्तर देखाऔँ', 'Reveal')}
+        </CBtn>
+        <CBtn color="#D97706" onClick={() => newTrain(kit.mode === 'PLAY')}>
+          🎲 {kit.t('नयाँ रेल', 'New Train')}
+        </CBtn>
+      </div>
+    </Controls>
+  );
+
+  return (
+    <SimFrame2D kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} grade={3}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 380,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          gap: 20,
+        }}
+      >
+        {/* 2D Train on Tracks */}
+        <div
+          style={{
+            width: '100%',
+            maxWidth: 960,
+            background: '#FFFFFF',
+            borderRadius: 24,
+            padding: '40px 24px',
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.04)',
+            overflowX: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {/* Engine & Wagons Row */}
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6, minWidth: 800 }}>
+            {/* Locomotive Engine */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <span style={{ fontSize: 24, marginBottom: -6 }}>💨</span>
+              <svg width="90" height="74" viewBox="0 0 90 74">
+                <rect x="10" y="20" width="70" height="38" rx="6" fill="#1E293B" />
+                <rect x="50" y="6" width="28" height="20" rx="4" fill="#334155" />
+                <circle cx="28" cy="62" r="10" fill="#64748B" stroke="#0F172A" strokeWidth="2" />
+                <circle cx="62" cy="62" r="10" fill="#64748B" stroke="#0F172A" strokeWidth="2" />
+                <polygon points="10,40 0,46 10,52" fill="#F59E0B" />
+              </svg>
+            </div>
+
+            {/* 7 Wagons */}
+            {seq.map((val, idx) => {
+              const isHidden = !revealed && idx === pat.hide;
+              const color = WAGON_COLORS[idx % WAGON_COLORS.length];
+
+              return (
+                <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  {/* Step difference connector badge */}
+                  {idx > 0 && (
+                    <div
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 900,
+                        color: '#64748B',
+                        background: '#F1F5F9',
+                        borderRadius: 4,
+                        padding: '1px 4px',
+                        marginBottom: 4,
+                      }}
+                    >
+                      {toNp(ruleText)}
+                    </div>
+                  )}
+
+                  {/* Wagon SVG */}
+                  <svg width="86" height="74" viewBox="0 0 86 74">
+                    <rect
+                      x="4"
+                      y="16"
+                      width="78"
+                      height="42"
+                      rx="8"
+                      fill={isHidden ? '#FEF3C7' : color}
+                      stroke={isHidden ? '#D97706' : '#1E293B'}
+                      strokeWidth="2.5"
+                    />
+                    <text
+                      x="43"
+                      y="44"
+                      textAnchor="middle"
+                      fill={isHidden ? '#B45309' : '#FFFFFF'}
+                      fontSize="16"
+                      fontWeight="900"
+                    >
+                      {isHidden ? '?' : toNp(val)}
+                    </text>
+                    {/* Wheels */}
+                    <circle cx="24" cy="62" r="8" fill="#475569" stroke="#1E293B" strokeWidth="2" />
+                    <circle cx="62" cy="62" r="8" fill="#475569" stroke="#1E293B" strokeWidth="2" />
+                  </svg>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Railway Tracks SVG */}
+          <svg width="100%" height="24" viewBox="0 0 860 24" style={{ maxWidth: 860, marginTop: -6 }}>
+            <line x1="10" y1="6" x2="850" y2="6" stroke="#475569" strokeWidth="3" />
+            <line x1="10" y1="18" x2="850" y2="18" stroke="#475569" strokeWidth="3" />
+            {Array.from({ length: 42 }).map((_, i) => (
+              <line key={i} x1={20 + i * 20} y1="2" x2={20 + i * 20} y2="22" stroke="#94A3B8" strokeWidth="2.5" />
+            ))}
+          </svg>
+        </div>
+      </div>
+    </SimFrame2D>
+  );
 };

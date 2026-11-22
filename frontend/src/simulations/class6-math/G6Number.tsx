@@ -112,7 +112,7 @@ export const integerCfg: LabCfg = {
     const X = (v: number) => v * 0.68; const r = intRes(p); box(g, 28, 0.15, 0.4, 0, 0.08, 0, '#334155');
     for (let v = -20; v <= 20; v++) { box(g, 0.06, v % 5 === 0 ? 0.8 : 0.4, 0.06, X(v), 0.4, 0, v === 0 ? '#dc2626' : '#334155'); if (v % 5 === 0) tag(g, String(v), X(v), -0.8, 1.2, 1.4, { px: 52, w: 128, h: 64, color: v < 0 ? '#b91c1c' : v > 0 ? '#1d4ed8' : '#0f172a' }); }
     const dir = intRes(p) >= p.st ? 1 : -1; rod(g, [X(p.st), 1.6, 0], [X(r), 1.6, 0], dir > 0 ? '#22c55e' : '#ef4444', 0.18);
-    const ball = (v: number, c: string) => { const b = box(g, 0.8, 0.8, 0.8, X(v), 0.6, 0, c, 0.3); b.geometry.dispose(); };
+    const ball = (v: number, c: string) => { box(g, 0.8, 0.8, 0.8, X(v), 0.6, 0, c, 0.3); };
     ball(p.st, '#0ea5e9'); ball(r, '#facc15'); tag(g, String(p.st), X(p.st), 2.8, 0, 1.4, { px: 52, w: 128, h: 80, bg: '#fff', border: '#0ea5e9' }); tag(g, String(r), X(r), 3.8, 0, 1.6, { px: 56, w: 128, h: 80, bg: '#fff', border: '#f59e0b' });
   },
   info: (p) => { const r = intRes(p); return bi(`${sg(p.st)} ${p.op ? '−' : '+'} ${sg(p.mv)} = ${r}\n${p.op ? 'घटाउनु = विपरीत सङ्ख्या जोड्नु: ' + sg(p.st) + ' + ' + sg(-p.mv) : 'धनात्मक दायाँ, ऋणात्मक बायाँ हिँड्छ'}`, `${sg(p.st)} ${p.op ? '−' : '+'} ${sg(p.mv)} = ${r}\n${p.op ? 'Subtracting = adding the opposite: ' + sg(p.st) + ' + ' + sg(-p.mv) : 'Positive moves right, negative moves left'}`); },

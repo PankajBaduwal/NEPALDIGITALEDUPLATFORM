@@ -1,96 +1,397 @@
 /**
  * Lesson 14 · Multiplication (गुणन)
- * Multiplication Trays — equal trays of tens-rods and ones-cubes; multiply a two-digit number by a one-digit number, ones first then tens.
- * Times-Table Wall — a 10 × 10 wall of cubes; pick rows and columns to see any table fact.
+ * MultTrays — 2D equal trays with tens-rods and ones-units to multiply 2-digit by 1-digit.
+ * TimesWall — 2D 10×10 interactive array wall for multiplication tables.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { mat, shadowed, cube, tenRod } from '../class1-math-kit/models';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizQuestion } from '../class1-math-kit/SimKit';
 import { rnd } from '../class1-math-kit/nepali';
 import { fmt, near } from './h3';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
 
 export const MultTrays: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G3-L14-01', chapter: 14, titleNp: 'गुणन ट्रे', titleEn: 'Multiplication Trays' });
-  const [a, setA] = useState(23);
-  const [b, setB] = useState(4);
-  const [step, setStep] = useState(0);
-  const scene = useRef<{ set: (a: number, b: number, hi: number) => void } | null>(null);
-  const t = Math.floor(a / 10), o = a % 10;
+  const kit = useSimKit({
+    code: 'SIM-MATH-G3-L14-01',
+    chapter: 14,
+    titleNp: 'गुणन ट्रे (दशक र एकाइ)',
+    titleEn: 'Multiplication Trays (Tens and Ones)',
+  });
 
-  useStage(kit.stageRef, (ctx) => {
-    const g = new THREE.Group(); ctx.scene.add(g);
-    const set = (aa: number, bb: number, hi: number) => {
-      g.clear(); const tt = Math.floor(aa / 10), oo = aa % 10;
-      for (let k = 0; k < bb; k++) {
-        const tray = shadowed(new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.2, 4.6), mat('#fcd34d', 0.7))); tray.position.set((k - (bb - 1) / 2) * 3.7, 0.1, 0); g.add(tray);
-        for (let i = 0; i < tt; i++) { const r = tenRod(hi === 2 || hi === 3 ? '#fb923c' : '#38bdf8'); r.position.set((k - (bb - 1) / 2) * 3.7 - 1.1 + (i % 3) * 0.6, 0.2, -1.4 + Math.floor(i / 3) * 0.0); r.rotation.y = Math.PI / 2; r.position.z = -1.5 + i * 0.5; r.position.x = (k - (bb - 1) / 2) * 3.7 - 0.6; g.add(r); }
-        for (let i = 0; i < oo; i++) { const c = cube(hi === 1 || hi === 3 ? '#f87171' : '#facc15', 0.46); c.position.set((k - (bb - 1) / 2) * 3.7 + 0.8 + (i % 2) * 0.55, 0.45, -1.6 + Math.floor(i / 2) * 0.55); g.add(c); }
-        g.scale.setScalar(1); const grp = tray; grp.scale.y = 0.01; ctx.tween(260 + k * 60, (q) => { grp.scale.y = Math.max(0.01, q); }, undefined, ease.back);
+  const [a, setA] = useState(23); // e.g. 23
+  const [b, setB] = useState(4);  // e.g. 4 trays
+  const [step, setStep] = useState(0); // 0=start, 1=ones, 2=tens, 3=total
+
+  const tens = Math.floor(a / 10);
+  const ones = a % 10;
+  const total = a * b;
+
+  const nextStep = () => {
+    const s = step >= 3 ? 1 : step + 1;
+    setStep(s);
+    kit.tap();
+    if (s === 1) {
+      kit.say(`एकाइ: ${ones} × ${b} = ${ones * b}`, `Ones: ${ones} × ${b} = ${ones * b}`);
+    } else if (s === 2) {
+      kit.say(`दशक: ${tens} × ${b} = ${tens * b} दशक = ${tens * b * 10}`, `Tens: ${tens} × ${b} = ${tens * b} tens = ${tens * b * 10}`);
+    } else {
+      kit.say(`जोडौँ: ${tens * b * 10} + ${ones * b} = ${total}`, `Add: ${tens * b * 10} + ${ones * b} = ${total}`);
+      kit.star();
+    }
+  };
+
+  const fresh = () => {
+    setA(rnd(12, 35));
+    setB(rnd(2, 5));
+    setStep(0);
+    kit.tap();
+  };
+
+  const questions: QuizQuestion[] = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => {
+      const qa = rnd(12, 39);
+      const qb = rnd(2, 6);
+      const ans = qa * qb;
+      return {
+        np: `${qa} × ${qb} = ?`,
+        en: `${qa} × ${qb} = ?`,
+        answer: String(ans),
+        options: near(ans, i + 2, [qb, -qb, 10, -10, 1, -1]).map((x) => ({
+          key: String(x),
+          label: fmt(kit.lang, x),
+        })),
+      };
+    });
+  }, [kit.lang]);
+
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      mascotGreeting={
+        step === 0
+          ? kit.t(`${b} वटा ट्रे, हरेकमा ${a} ( ${tens} दशक र ${ones} एकाइ )`, `${b} trays, each holding ${a} (${tens} tens and ${ones} ones)`)
+          : step === 1
+          ? kit.t(`एकाइ गुणन: ${ones} × ${b} = ${ones * b}`, `Multiply ones: ${ones} × ${b} = ${ones * b}`)
+          : step === 2
+          ? kit.t(`दशक गुणन: ${tens} × ${b} = ${tens * b} दशक = ${tens * b * 10}`, `Multiply tens: ${tens} × ${b} = ${tens * b} tens = ${tens * b * 10}`)
+          : kit.t(`कुल जम्मा: ${tens * b * 10} + ${ones * b} = ${total}`, `Total product: ${tens * b * 10} + ${ones * b} = ${total}`)
       }
-    };
-    scene.current = { set }; set(23, 4, 0);
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 9, 12], target: [0, 0.6, 0], minDistance: 7, maxDistance: 24, ground: 0xfef3c7 });
+      questions={questions}
+      controls={
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <button
+            onClick={() => a > 11 && (setA(a - 1), setStep(0))}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('सङ्ख्या', 'Number')} −
+          </button>
+          <button
+            onClick={() => a < 45 && (setA(a + 1), setStep(0))}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('सङ्ख्या', 'Number')} +
+          </button>
+          <button
+            onClick={() => b > 2 && (setB(b - 1), setStep(0))}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('ट्रे', 'Trays')} −
+          </button>
+          <button
+            onClick={() => b < 6 && (setB(b + 1), setStep(0))}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('ट्रे', 'Trays')} +
+          </button>
+          <button
+            onClick={nextStep}
+            style={{
+              padding: '9px 20px',
+              borderRadius: 12,
+              border: 'none',
+              background: '#187C68',
+              color: '#FFFFFF',
+              fontWeight: 800,
+              fontSize: 14,
+              cursor: 'pointer',
+            }}
+          >
+            {kit.t('चरण ➜', 'Step ➜')}
+          </button>
+          <button
+            onClick={fresh}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            🎲 {kit.t('नयाँ', 'Random')}
+          </button>
+        </div>
+      }
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 720, gap: 16 }}>
+        {/* Math Equation Banner */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #E2E8F0',
+            borderRadius: 16,
+            padding: '12px 24px',
+            textAlign: 'center',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+          }}
+        >
+          <div style={{ fontSize: 26, fontWeight: 900, color: '#1E293B' }}>
+            {fmt(kit.lang, a)} × {fmt(kit.lang, b)} = {step === 3 ? fmt(kit.lang, total) : '?'}
+          </div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#64748B', marginTop: 4 }}>
+            {fmt(kit.lang, tens)} {kit.t('दशक (Tens)', 'tens')} + {fmt(kit.lang, ones)} {kit.t('एकाइ (Ones)', 'ones')} × {fmt(kit.lang, b)} {kit.t('ट्रे', 'trays')}
+          </div>
+        </div>
 
-  const apply = (aa: number, bb: number, s = 0) => { setA(aa); setB(bb); setStep(s); scene.current?.set(aa, bb, s); };
-  const SAY = (aa: number, bb: number, s: number) => { const oo = aa % 10, tt = Math.floor(aa / 10); return s === 1 ? [`एकाइ: ${oo} × ${bb} = ${oo * bb}`, `Ones: ${oo} × ${bb} = ${oo * bb}`] : s === 2 ? [`दशक: ${tt} × ${bb} = ${tt * bb} दशक = ${tt * bb * 10}`, `Tens: ${tt} × ${bb} = ${tt * bb} tens = ${tt * bb * 10}`] : [`जोडौँ: ${tt * bb * 10} + ${oo * bb} = ${aa * bb}`, `Add: ${tt * bb * 10} + ${oo * bb} = ${aa * bb}`]; };
-  const next = () => { const s = step >= 3 ? 1 : step + 1; setStep(s); scene.current?.set(a, b, s); const m = SAY(a, b, s); kit.say(m[0], m[1]); if (s === 3) kit.star(); };
-  const fresh = () => apply(rnd(11, 49), rnd(2, 6), 0);
-  useEffect(() => { if (kit.mode !== 'CHALLENGE') fresh(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [kit.mode]);
+        {/* Trays Canvas Grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: `repeat(${b <= 3 ? b : Math.ceil(b / 2)}, 1fr)`,
+            gap: 14,
+            width: '100%',
+          }}
+        >
+          {Array.from({ length: b }).map((_, trayIdx) => (
+            <div
+              key={trayIdx}
+              style={{
+                background: '#FFFBEB',
+                border: '2px solid #FCD34D',
+                borderRadius: 16,
+                padding: '14px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 10,
+                boxShadow: '0 4px 12px rgba(245,158,11,0.08)',
+              }}
+            >
+              <div style={{ fontSize: 12, fontWeight: 800, color: '#B45309', borderBottom: '1px solid #FDE68A', paddingBottom: 4 }}>
+                {kit.t(`ट्रे ${fmt(kit.lang, trayIdx + 1)}`, `Tray ${trayIdx + 1}`)}
+              </div>
 
-  const data = useMemo(() => Array.from({ length: 8 }, () => ({ a: rnd(11, 49), b: rnd(2, 6) })), []);
-  const questions: (QuizQuestion & { q: { a: number; b: number } })[] = data.map((q, i) => ({ q, np: `${q.a} × ${q.b} = ?`, en: `${q.a} × ${q.b} = ?`, answer: String(q.a * q.b), options: near(q.a * q.b, i + 2, [q.b, -q.b, 10, -10, 1, -1]).map((x) => ({ key: String(x), label: fmt(kit.lang, x) })) }));
+              {/* Tens Rods */}
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 6,
+                  alignItems: 'center',
+                  background: step === 2 || step === 3 ? '#E0F2FE' : 'transparent',
+                  padding: 4,
+                  borderRadius: 8,
+                }}
+              >
+                {Array.from({ length: tens }).map((_, rIdx) => (
+                  <div
+                    key={rIdx}
+                    style={{
+                      width: 14,
+                      height: 54,
+                      background: '#0284C7',
+                      borderRadius: 4,
+                      border: '1px solid #0369A1',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      padding: '2px 0',
+                    }}
+                    title="10"
+                  >
+                    {Array.from({ length: 5 }).map((_, d) => (
+                      <div key={d} style={{ height: 1, background: '#7DD3FC' }} />
+                    ))}
+                  </div>
+                ))}
+                <span style={{ fontSize: 11, fontWeight: 700, color: '#0369A1', marginLeft: 4 }}>
+                  {tens * 10}
+                </span>
+              </div>
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #f59e0b', textAlign: 'center' }}>
-      <div style={{ fontSize: 26, fontWeight: 900 }}>{fmt(kit.lang, a)} × {fmt(kit.lang, b)} = {step === 3 ? fmt(kit.lang, a * b) : '?'}</div>
-      <div style={{ fontSize: 14, fontWeight: 800 }}>{step ? kit.t(SAY(a, b, step)[0], SAY(a, b, step)[1]) : kit.t(`${b} ट्रे, हरेकमा ${a}`, `${b} trays with ${a} in each`)}</div>
-      <div style={{ fontSize: 12, color: '#64748b', fontWeight: 700 }}>{t} {kit.t('दशक', 'tens')} · {o} {kit.t('एकाइ', 'ones')}</div>
-    </div>
+              {/* Ones Units */}
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 6,
+                  flexWrap: 'wrap',
+                  background: step === 1 || step === 3 ? '#FEE2E2' : 'transparent',
+                  padding: 4,
+                  borderRadius: 8,
+                }}
+              >
+                {Array.from({ length: ones }).map((_, oIdx) => (
+                  <div
+                    key={oIdx}
+                    style={{
+                      width: 16,
+                      height: 16,
+                      background: '#EF4444',
+                      borderRadius: 3,
+                      border: '1px solid #B91C1C',
+                    }}
+                    title="1"
+                  />
+                ))}
+                <span style={{ fontSize: 11, fontWeight: 700, color: '#B91C1C', marginLeft: 2, alignSelf: 'center' }}>
+                  {ones}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </SimFrame2D>
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls><div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 220 }}>{kit.t('पहिले एकाइ, पछि दशक गुणा गरेर जोडौँ', 'Multiply the ones, then the tens, then add')}</div><CBtn color="#16a34a" onClick={next}>{kit.t('चरण', 'Step')} ➜</CBtn><CBtn color="#8b5cf6" onClick={fresh}>🎲</CBtn></Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls><CBtn color="#f59e0b" onClick={() => a > 11 && apply(a - 1, b)}>{kit.t('सङ्ख्या', 'Number')} −</CBtn><CBtn color="#f59e0b" onClick={() => a < 49 && apply(a + 1, b)}>{kit.t('सङ्ख्या', 'Number')} +</CBtn><CBtn color="#0ea5e9" onClick={() => b > 2 && apply(a, b - 1)}>{kit.t('ट्रे', 'Trays')} −</CBtn><CBtn color="#0ea5e9" onClick={() => b < 6 && apply(a, b + 1)}>{kit.t('ट्रे', 'Trays')} +</CBtn><CBtn color="#16a34a" onClick={next}>{kit.t('चरण', 'Step')} ➜</CBtn></Controls>
-  ) : <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => apply(q.q.a, q.q.b, 0)} />;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };
 
 export const TimesWall: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G3-L14-02', chapter: 14, titleNp: 'पहाडा पर्खाल', titleEn: 'Times-Table Wall' });
+  const kit = useSimKit({
+    code: 'SIM-MATH-G3-L14-02',
+    chapter: 14,
+    titleNp: 'पहाडा पर्खाल (१०×१०)',
+    titleEn: 'Times-Table Wall (10×10)',
+  });
+
   const [r, setR] = useState(3);
   const [c, setC] = useState(4);
-  const [li, setLi] = useState(2);
-  const scene = useRef<{ mark: (r: number, c: number) => void } | null>(null);
 
-  useStage(kit.stageRef, (ctx) => {
-    const cubes: THREE.Mesh[] = [];
-    for (let y = 0; y < 10; y++) for (let x = 0; x < 10; x++) { const m = cube('#cbd5e1', 0.9) as unknown as THREE.Mesh; m.position.set((x - 4.5) * 1.0, 0.5 + y * 1.0, 0); m.userData = { x: x + 1, y: y + 1 }; ctx.scene.add(m); cubes.push(m); }
-    const mark = (rr: number, cc: number) => cubes.forEach((m) => { const on = m.userData.x <= cc && m.userData.y <= rr; (m.material as THREE.MeshStandardMaterial).color.set(on ? (m.userData.y % 2 ? '#f97316' : '#0ea5e9') : '#e2e8f0'); m.scale.setScalar(on ? 0.95 : 0.7); });
-    scene.current = { mark }; mark(3, 4);
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 6, 18], target: [0, 5, 0], minDistance: 9, maxDistance: 30, ground: 0xeef2ff });
+  const apply = (newR: number, newC: number) => {
+    setR(newR);
+    setC(newC);
+    kit.tap();
+    kit.say(`${newR} × ${newC} = ${newR * newC}`, `${newR} rows of ${newC} = ${newR * newC}`);
+  };
 
-  const apply = (rr: number, cc: number, speak = false) => { setR(rr); setC(cc); scene.current?.mark(rr, cc); if (speak) kit.say(`${rr} × ${cc} = ${rr * cc}`, `${rr} rows of ${cc} = ${rr * cc}`); };
-  useEffect(() => { if (kit.mode === 'LEARN') apply(li, 5, true); else if (kit.mode === 'PLAY') apply(r, c); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [kit.mode, li]);
+  const questions: QuizQuestion[] = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => {
+      const qr = rnd(2, 10);
+      const qc = rnd(2, 10);
+      const ans = qr * qc;
+      return {
+        np: `${qr} × ${qc} = ?`,
+        en: `${qr} × ${qc} = ?`,
+        answer: String(ans),
+        options: near(ans, i + 3, [qr, -qr, qc, -qc, 1, -1]).map((x) => ({
+          key: String(x),
+          label: fmt(kit.lang, x),
+        })),
+      };
+    });
+  }, [kit.lang]);
 
-  const data = useMemo(() => Array.from({ length: 8 }, () => ({ r: rnd(2, 10), c: rnd(2, 10) })), []);
-  const questions: (QuizQuestion & { q: { r: number; c: number } })[] = data.map((q, i) => ({ q, np: `${q.r} × ${q.c} = ?`, en: `${q.r} × ${q.c} = ?`, answer: String(q.r * q.c), options: near(q.r * q.c, i + 3, [q.r, -q.r, q.c, -q.c, 1, -1]).map((x) => ({ key: String(x), label: fmt(kit.lang, x) })) }));
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      mascotGreeting={kit.t(
+        `${r} पङ्क्ति (Rows) र ${c} स्तम्भ (Columns) = ${r * c} वटा कोठा`,
+        `${r} rows and ${c} columns = ${r * c} blocks`
+      )}
+      questions={questions}
+      controls={
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <button
+            onClick={() => r > 1 && apply(r - 1, c)}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('पङ्क्ति', 'Rows')} −
+          </button>
+          <button
+            onClick={() => r < 10 && apply(r + 1, c)}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('पङ्क्ति', 'Rows')} +
+          </button>
+          <button
+            onClick={() => c > 1 && apply(r, c - 1)}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('स्तम्भ', 'Cols')} −
+          </button>
+          <button
+            onClick={() => c < 10 && apply(r, c + 1)}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('स्तम्भ', 'Cols')} +
+          </button>
+        </div>
+      }
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 540, gap: 16 }}>
+        {/* Product Card */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #E2E8F0',
+            borderRadius: 16,
+            padding: '12px 24px',
+            textAlign: 'center',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+          }}
+        >
+          <div style={{ fontSize: 28, fontWeight: 900, color: '#187C68' }}>
+            {fmt(kit.lang, r)} × {fmt(kit.lang, c)} = {fmt(kit.lang, r * c)}
+          </div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#64748B', marginTop: 4 }}>
+            {Array.from({ length: r }).map(() => String(c)).join(' + ')} = {r * c}
+          </div>
+        </div>
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #6366f1', textAlign: 'center' }}>
-      <div style={{ fontSize: 30, fontWeight: 900 }}>{fmt(kit.lang, r)} × {fmt(kit.lang, c)} = {fmt(kit.lang, r * c)}</div>
-      <div style={{ fontSize: 13, fontWeight: 700, color: '#475569' }}>{kit.t(`${c} + `.repeat(Math.min(r, 4)) + (r > 4 ? '…' : ''), '')}</div>
-    </div>
+        {/* 10x10 Interactive Grid Wall */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #E2E8F0',
+            borderRadius: 16,
+            padding: 16,
+            boxShadow: '0 6px 18px rgba(0,0,0,0.04)',
+            width: '100%',
+            maxWidth: 420,
+          }}
+        >
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(10, 1fr)',
+              gap: 4,
+            }}
+          >
+            {Array.from({ length: 10 }).map((_, rowIdx) =>
+              Array.from({ length: 10 }).map((__, colIdx) => {
+                const isActive = rowIdx < r && colIdx < c;
+                return (
+                  <div
+                    key={`${rowIdx}-${colIdx}`}
+                    onClick={() => apply(rowIdx + 1, colIdx + 1)}
+                    style={{
+                      aspectRatio: '1/1',
+                      borderRadius: 6,
+                      background: isActive
+                        ? (rowIdx % 2 === 0 ? '#187C68' : '#22C55E')
+                        : '#F1F5F9',
+                      border: isActive ? '1px solid #0F5143' : '1px solid #E2E8F0',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease',
+                      boxShadow: isActive ? '0 2px 4px rgba(24,124,104,0.2)' : 'none',
+                    }}
+                    title={`${rowIdx + 1} × ${colIdx + 1}`}
+                  />
+                );
+              })
+            )}
+          </div>
+          <div style={{ fontSize: 11, color: '#94A3B8', fontWeight: 600, textAlign: 'center', marginTop: 10 }}>
+            {kit.t('कोठामा ट्याप गरेर पहाडा आकार बदल्नुहोस्', 'Tap any square to change the array size')}
+          </div>
+        </div>
+      </div>
+    </SimFrame2D>
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls><div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 220 }}>{kit.t('हरेक पङ्क्तिमा ५ घन — पङ्क्ति थप्दा ५ को पहाडा', 'Every row has 5 cubes — add a row to count by 5')}</div><CBtn color="#16a34a" onClick={() => { kit.star(); setLi((li % 10) + 1); }}>{kit.t('अर्को पङ्क्ति', 'Next row')} ➜</CBtn></Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls><CBtn color="#f59e0b" onClick={() => r > 1 && apply(r - 1, c, true)}>{kit.t('पङ्क्ति', 'Rows')} −</CBtn><CBtn color="#f59e0b" onClick={() => r < 10 && apply(r + 1, c, true)}>{kit.t('पङ्क्ति', 'Rows')} +</CBtn><CBtn color="#0ea5e9" onClick={() => c > 1 && apply(r, c - 1, true)}>{kit.t('स्तम्भ', 'Cols')} −</CBtn><CBtn color="#0ea5e9" onClick={() => c < 10 && apply(r, c + 1, true)}>{kit.t('स्तम्भ', 'Cols')} +</CBtn></Controls>
-  ) : <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => apply(q.q.r, q.q.c)} />;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };
+
+export default MultTrays;

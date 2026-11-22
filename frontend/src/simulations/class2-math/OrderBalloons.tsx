@@ -1,107 +1,327 @@
 /**
  * Lesson 4 · Comparison of numbers (सङ्ख्याको तुलना) — ascending and descending order
- * Order the Balloons — tap the balloons from the smallest to the biggest (or biggest to smallest).
+ * Order the Balloons — tap the balloons from smallest to biggest (or biggest to smallest).
+ * Pure 2D Implementation for Smart Boards & Desktops.
  */
-import React, { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit } from '../class1-math-kit/SimKit';
-import { balloon, textSprite, PALETTE } from '../class1-math-kit/models';
-import { rnd, shuffle } from '../class1-math-kit/nepali';
+import React, { useEffect, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit/SimFrame2D';
+import { Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { rnd, shuffle, toNp } from '../class1-math-kit/nepali';
 import { fmt } from './helpers';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
 type Dir = 'UP' | 'DOWN';
 
+const BALLOON_COLORS = ['#EF4444', '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6'];
+
 export const OrderBalloons: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G2-L4-02', chapter: 4, titleNp: 'बेलुन मिलाऔँ (क्रम)', titleEn: 'Order the Balloons (Ascending / Descending)' });
+  const kit = useSimKit({
+    code: 'SIM-MATH-G2-L4-02',
+    chapter: 4,
+    titleNp: 'बेलुन मिलाऔँ (क्रम)',
+    titleEn: 'Order the Balloons (Ascending / Descending)',
+  });
+
   const [dir, setDir] = useState<Dir>('UP');
   const [nums, setNums] = useState<number[]>([]);
-  const [next, setNext] = useState(0);
-  const [round, setRound] = useState(0);
+  const [picked, setPicked] = useState<number[]>([]);
   const [mistakes, setMistakes] = useState(0);
-  const [score, setScore] = useState(0);
-  const [finished, setFinished] = useState(false);
-  const scene = useRef<{ show: (n: number[]) => void; mark: (i: number) => void; demo: (order: number[]) => void } | null>(null);
-  const live = useRef({ tap: (_i: number) => {} });
 
-  useStage(kit.stageRef, (ctx) => {
-    const items: THREE.Group[] = [];
-    const group = new THREE.Group(); ctx.scene.add(group);
-    const slots = [-6.4, -3.2, 0, 3.2, 6.4];
-    const show = (n: number[]) => {
-      [...group.children].forEach((c) => group.remove(c)); items.length = 0;
-      n.forEach((v, i) => {
-        const g = new THREE.Group(); const b = balloon(PALETTE[i % PALETTE.length]); b.scale.setScalar(1.7); g.add(b);
-        const lab = textSprite(String(v), 2.1, { px: 92, w: 256, h: 128, bg: '#ffffff', border: PALETTE[i % PALETTE.length] }); lab.position.set(0, 2.5, 0.8); g.add(lab);
-        g.userData.i = i; g.userData.home = new THREE.Vector3(slots[i], 1.6, 0); g.position.copy(g.userData.home); g.userData.target = g.userData.home.clone(); group.add(g); items.push(g);
-      });
-    };
-    const mark = (i: number) => { const g = items[i]; g.userData.done = true; ctx.tween(520, (k) => g.scale.setScalar(1 + Math.sin(k * Math.PI) * 0.3), undefined, ease.out); };
-    const demo = (order: number[]) => order.forEach((idx, rank) => { const g = items[idx]; g.userData.target = new THREE.Vector3(slots[rank], 1.6, 0); ctx.tween(800, () => undefined); });
-    scene.current = { show, mark, demo };
-    ctx.onFrame((_d, t) => items.forEach((g, i) => { g.position.x += (g.userData.target.x - g.position.x) * 0.1; g.position.y = 1.6 + Math.sin(t * 1.5 + i) * 0.2 + (g.userData.done ? 1.8 : 0); }));
-    ctx.onTap(() => items, (hit) => { if (!hit) return; let o: THREE.Object3D | null = hit.object; while (o && o.userData.i === undefined) o = o.parent; if (o) live.current.tap(o.userData.i); });
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 4.5, 14], target: [0, 3, 0], minDistance: 8, maxDistance: 22, sky: 0xc4e8ff });
-
-  const sortedIdx = (n: number[], d: Dir) => n.map((_, i) => i).sort((p, q) => (d === 'UP' ? n[p] - n[q] : n[q] - n[p]));
   const fresh = (d: Dir) => {
-    const set = new Set<number>(); while (set.size < 5) set.add(rnd(100, 999));
-    const n = shuffle(Array.from(set)); setNums(n); setNext(0); setMistakes(0); scene.current?.show(n);
-    kit.say(d === 'UP' ? 'सबैभन्दा सानोदेखि ठूलोसम्म छोऔँ।' : 'सबैभन्दा ठूलोदेखि सानोसम्म छोऔँ।', d === 'UP' ? 'Tap from the smallest to the biggest.' : 'Tap from the biggest to the smallest.');
-    return n;
+    const set = new Set<number>();
+    while (set.size < 5) set.add(rnd(100, 999));
+    const list = shuffle(Array.from(set));
+    setNums(list);
+    setPicked([]);
+    setMistakes(0);
+    kit.say(
+      d === 'UP'
+        ? 'सबैभन्दा सानोदेखि ठूलोसम्म बेलुन छोऔँ (बढ्दो क्रम)।'
+        : 'सबैभन्दा ठूलोदेखि सानोसम्म बेलुन छोऔँ (घट्दो क्रम)।',
+      d === 'UP'
+        ? 'Tap balloons from smallest to biggest (ascending).'
+        : 'Tap balloons from biggest to smallest (descending).'
+    );
   };
-  const order = sortedIdx(nums, dir);
 
-  live.current.tap = (i) => {
-    if (kit.mode === 'LEARN' || finished || !nums.length) return;
-    if (order.slice(0, next).includes(i)) return;
-    if (i === order[next]) {
-      scene.current?.mark(i); kit.tap(); kit.say(`${nums[i]}`, `${nums[i]}`);
-      if (next + 1 === 5) {
-        kit.good(); kit.star();
-        if (kit.mode === 'CHALLENGE') {
-          const ns = score + (mistakes === 0 ? 1 : 0); setScore(ns);
-          window.setTimeout(() => { if (round + 1 >= 5) { setFinished(true); kit.finish(ns, 5); } else { setRound(round + 1); const d: Dir = (round + 1) % 2 ? 'DOWN' : 'UP'; setDir(d); fresh(d); } }, 1200);
-        }
+  const sortedNums = [...nums].sort((p, q) => (dir === 'UP' ? p - q : q - p));
+
+  const handleTap = (val: number) => {
+    if (picked.includes(val)) return;
+    const nextExpected = sortedNums[picked.length];
+    if (val === nextExpected) {
+      kit.tap();
+      const nextPicked = [...picked, val];
+      setPicked(nextPicked);
+      kit.say(`${fmt(kit.lang, val)}`, `${val}`);
+
+      if (nextPicked.length === nums.length) {
+        kit.good('शानदार! सबै बेलुनहरू सही क्रममा मिलाउनुभयो!', 'Great job! Ordered all balloons correctly!');
+        kit.star();
       }
-      setNext(next + 1);
-    } else { setMistakes((m) => m + 1); kit.oops(dir === 'UP' ? 'अझै सानो सङ्ख्या छ' : 'अझै ठूलो सङ्ख्या छ', dir === 'UP' ? 'There is a smaller number' : 'There is a bigger number'); }
+    } else {
+      kit.oops(
+        dir === 'UP' ? 'अझै सानो सङ्ख्या बाँकी छ!' : 'अझै ठूलो सङ्ख्या बाँकी छ!',
+        dir === 'UP' ? 'There is a smaller number!' : 'There is a greater number!'
+      );
+      setMistakes((v) => v + 1);
+    }
+  };
+
+  const autoOrder = () => {
+    setPicked([...sortedNums]);
+    kit.good('सही क्रम हेर्नुहोस्!', 'See the correct order!');
   };
 
   useEffect(() => {
-    setRound(0); setScore(0); setFinished(false); setNext(0);
-    if (kit.mode === 'LEARN') {
-      const n = fresh('UP'); setDir('UP');
-      kit.say('साना सङ्ख्यादेखि ठूलासम्म मिलाउनुलाई बढ्दो क्रम भनिन्छ।', 'Small to big is called ascending order.');
-      window.setTimeout(() => scene.current?.demo(sortedIdx(n, 'UP')), 1500);
-    } else { const d: Dir = 'UP'; setDir(d); fresh(d); }
+    fresh(dir);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [kit.mode]);
+  }, [dir, kit.mode]);
 
-  const demoDir = (d: Dir) => { setDir(d); scene.current?.demo(sortedIdx(nums, d)); kit.say(d === 'UP' ? 'बढ्दो क्रम: सानोदेखि ठूलो' : 'घट्दो क्रम: ठूलोदेखि सानो', d === 'UP' ? 'Ascending: small to big' : 'Descending: big to small'); };
-  const hud = kit.mode === 'CHALLENGE' ? (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', fontWeight: 900, fontSize: 20 }}>{kit.t('चरण', 'Round')} {fmt(kit.lang, round + 1)}/{fmt(kit.lang, 5)} · {dir === 'UP' ? kit.t('बढ्दो ↑', 'Ascending ↑') : kit.t('घट्दो ↓', 'Descending ↓')}</div>
-  ) : null;
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 200 }}>{dir === 'UP' ? kit.t('बढ्दो क्रम ↑ (सानोदेखि ठूलो)', 'Ascending ↑ (small to big)') : kit.t('घट्दो क्रम ↓ (ठूलोदेखि सानो)', 'Descending ↓ (big to small)')}</div>
-      <CBtn color="#0ea5e9" onClick={() => demoDir('UP')}>↑ {kit.t('बढ्दो', 'Ascending')}</CBtn>
-      <CBtn color="#f97316" onClick={() => demoDir('DOWN')}>↓ {kit.t('घट्दो', 'Descending')}</CBtn>
-      <CBtn color="#8b5cf6" onClick={() => { const n = fresh('UP'); setDir('UP'); window.setTimeout(() => scene.current?.demo(sortedIdx(n, 'UP')), 800); }}>🎲</CBtn>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>
-      <CBtn color={dir === 'UP' ? '#0ea5e9' : '#94a3b8'} onClick={() => { setDir('UP'); fresh('UP'); }}>↑ {kit.t('बढ्दो', 'Ascending')}</CBtn>
-      <CBtn color={dir === 'DOWN' ? '#f97316' : '#94a3b8'} onClick={() => { setDir('DOWN'); fresh('DOWN'); }}>↓ {kit.t('घट्दो', 'Descending')}</CBtn>
-      <div style={{ fontWeight: 800 }}>{next === 5 ? '🎉' : `${fmt(kit.lang, next)}/${fmt(kit.lang, 5)}`}</div>
-      <CBtn color="#8b5cf6" onClick={() => fresh(dir)}>🎲 {kit.t('नयाँ', 'New')}</CBtn>
-    </Controls>
-  ) : finished ? (
-    <div style={{ textAlign: 'center' }}><div style={{ fontSize: 22, fontWeight: 900 }}>🏆 {kit.t(`५ मध्ये ${fmt('ne', score)} एकै पटकमा सही!`, `${score} of 5 perfect!`)}</div><CBtn color="#0ea5e9" onClick={() => { setRound(0); setScore(0); setFinished(false); setDir('UP'); fresh('UP'); }}>↺ {kit.t('फेरि', 'Again')}</CBtn></div>
-  ) : (
-    <div style={{ fontWeight: 800, fontSize: 18 }}>{dir === 'UP' ? kit.t('सानोदेखि ठूलो क्रममा बेलुन छोऔँ ↑', 'Tap the balloons from smallest to biggest ↑') : kit.t('ठूलोदेखि सानो क्रममा बेलुन छोऔँ ↓', 'Tap the balloons from biggest to smallest ↓')}</div>
+  // Quiz Questions for Challenge
+  const questions: QuizQuestion[] = [
+    {
+      np: 'सङ्ख्याहरू १२५, ३४०, २१० लाई बढ्दो क्रम (सानोबाट ठूलो) मा मिलाउँदा कुन सही हुन्छ?',
+      en: 'Which shows 125, 340, 210 in ascending order (smallest to largest)?',
+      answer: '125, 210, 340',
+      options: [
+        { key: '125, 210, 340', label: '१२५, २१०, ३४०' },
+        { key: '340, 210, 125', label: '३४०, २१०, १२५' },
+        { key: '210, 125, 340', label: '२१०, १२५, ३४०' },
+      ],
+    },
+    {
+      np: 'सङ्ख्याहरू ५००, ८५०, ३२० लाई घट्दो क्रम (ठूलोबाट सानो) मा मिलाउँदा कुन सही हुन्छ?',
+      en: 'Which shows 500, 850, 320 in descending order (largest to smallest)?',
+      answer: '850, 500, 320',
+      options: [
+        { key: '850, 500, 320', label: '८५०, ५००, ३२०' },
+        { key: '320, 500, 850', label: '३२०, ५००, ८५०' },
+        { key: '500, 850, 320', label: '५००, ८५०, ३२०' },
+      ],
+    },
+    {
+      np: '४५०, ४०५, ५४० मा सबैभन्दा सानो सङ्ख्या कुन हो?',
+      en: 'Which is the smallest number among 450, 405, 540?',
+      answer: '405',
+      options: [
+        { key: '405', label: '४०५' },
+        { key: '450', label: '४५०' },
+        { key: '540', label: '५४०' },
+      ],
+    },
+    {
+      np: '७८०, ७०८, ८०७ मा सबैभन्दा ठूलो सङ्ख्या कुन हो?',
+      en: 'Which is the greatest number among 780, 708, 807?',
+      answer: '807',
+      options: [
+        { key: '807', label: '८०७' },
+        { key: '780', label: '७८०' },
+        { key: '708', label: '७०८' },
+      ],
+    },
+  ];
+
+  const hud = (
+    <div
+      style={{
+        background: '#FFFFFF',
+        borderRadius: 16,
+        padding: '8px 18px',
+        border: '2px solid #187C68',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+        fontSize: 16,
+        fontWeight: 900,
+        color: '#26332E',
+      }}
+    >
+      {kit.t('क्रम', 'Order')}:{' '}
+      <span style={{ color: dir === 'UP' ? '#059669' : '#DC2626' }}>
+        {dir === 'UP' ? kit.t('बढ्दो (सानो ➜ ठूलो)', 'Ascending (Small ➜ Big)') : kit.t('घट्दो (ठूलो ➜ सानो)', 'Descending (Big ➜ Small)')}
+      </span>
+    </div>
   );
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+
+  const panel = kit.mode === 'CHALLENGE' ? (
+    <QuizPanel kit={kit} questions={questions} />
+  ) : (
+    <Controls>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+        <button
+          type="button"
+          onClick={() => { setDir('UP'); fresh('UP'); }}
+          style={{
+            padding: '8px 16px',
+            borderRadius: 12,
+            border: 'none',
+            cursor: 'pointer',
+            fontWeight: 800,
+            background: dir === 'UP' ? '#187C68' : '#E2E8F0',
+            color: dir === 'UP' ? '#FFFFFF' : '#334155',
+          }}
+        >
+          📈 {kit.t('बढ्दो क्रम (सानो ➜ ठूलो)', 'Ascending')}
+        </button>
+        <button
+          type="button"
+          onClick={() => { setDir('DOWN'); fresh('DOWN'); }}
+          style={{
+            padding: '8px 16px',
+            borderRadius: 12,
+            border: 'none',
+            cursor: 'pointer',
+            fontWeight: 800,
+            background: dir === 'DOWN' ? '#187C68' : '#E2E8F0',
+            color: dir === 'DOWN' ? '#FFFFFF' : '#334155',
+          }}
+        >
+          📉 {kit.t('घट्दो क्रम (ठूलो ➜ सानो)', 'Descending')}
+        </button>
+
+        <CBtn color="#8B5CF6" onClick={autoOrder}>
+          👁️ {kit.t('सही क्रम देखाऔँ', 'Show Order')}
+        </CBtn>
+        <CBtn color="#64748B" onClick={() => fresh(dir)}>
+          🎲 {kit.t('नयाँ बेलुनहरू', 'New Balloons')}
+        </CBtn>
+      </div>
+    </Controls>
+  );
+
+  return (
+    <SimFrame2D kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} grade={2}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 380,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+        }}
+      >
+        {/* Floating Balloons Container */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            gap: 24,
+            width: '100%',
+            maxWidth: 880,
+            flexWrap: 'wrap',
+            minHeight: 280,
+          }}
+        >
+          {nums.map((val, idx) => {
+            const isPicked = picked.includes(val);
+            const pickRank = picked.indexOf(val) + 1;
+            const color = BALLOON_COLORS[idx % BALLOON_COLORS.length];
+
+            return (
+              <div
+                key={val}
+                onClick={() => handleTap(val)}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  cursor: isPicked ? 'default' : 'pointer',
+                  transform: isPicked ? 'translateY(-30px)' : 'none',
+                  transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  position: 'relative',
+                }}
+              >
+                {/* Picked order badge */}
+                {isPicked && (
+                  <div
+                    style={{
+                      background: '#16A34A',
+                      color: '#FFFFFF',
+                      borderRadius: '50%',
+                      width: 28,
+                      height: 28,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 900,
+                      fontSize: 14,
+                      marginBottom: 6,
+                      boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+                    }}
+                  >
+                    ✓ {toNp(pickRank)}
+                  </div>
+                )}
+
+                {/* SVG Balloon */}
+                <svg width="110" height="150" viewBox="0 0 110 150">
+                  {/* Balloon Oval */}
+                  <ellipse
+                    cx="55"
+                    cy="60"
+                    rx="48"
+                    ry="55"
+                    fill={color}
+                    opacity={isPicked ? 0.9 : 1}
+                    filter="drop-shadow(0 6px 12px rgba(0,0,0,0.15))"
+                  />
+                  {/* Balloon Shine */}
+                  <ellipse cx="40" cy="40" rx="14" ry="20" fill="#FFFFFF" opacity="0.35" transform="rotate(-20 40 40)" />
+                  {/* Balloon Knot */}
+                  <polygon points="50,115 60,115 55,122" fill={color} />
+                  {/* Balloon String */}
+                  <path d="M55 122 Q58 135 52 148" stroke="#94A3B8" strokeWidth="2" fill="none" />
+                  {/* Number Text */}
+                  <text
+                    x="55"
+                    y="68"
+                    textAnchor="middle"
+                    fill="#FFFFFF"
+                    fontSize="22"
+                    fontWeight="900"
+                    style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}
+                  >
+                    {fmt(kit.lang, val)}
+                  </text>
+                </svg>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Selected sequence breadcrumbs */}
+        <div
+          style={{
+            marginTop: 24,
+            background: '#FFFFFF',
+            borderRadius: 14,
+            padding: '10px 20px',
+            border: '1.5px solid #E2E8F0',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+          }}
+        >
+          <span style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>
+            {kit.t('तपाईंको क्रम:', 'Selected:')}
+          </span>
+          {picked.length === 0 ? (
+            <span style={{ fontSize: 13, color: '#94A3B8', fontStyle: 'italic' }}>
+              {kit.t('(बेलुन छोएर मिलाउनुहोस्)', '(Tap balloons to order)')}
+            </span>
+          ) : (
+            picked.map((v, i) => (
+              <span key={v} style={{ fontWeight: 900, color: '#187C68', fontSize: 16 }}>
+                {fmt(kit.lang, v)}
+                {i < picked.length - 1 && ' ➔ '}
+              </span>
+            ))
+          )}
+        </div>
+      </div>
+    </SimFrame2D>
+  );
 };

@@ -1,122 +1,430 @@
 /**
  * Class 4 lesson 6 · Fraction, decimal and percentage (भिन्न, दशमलव र प्रतिशत)
- * Fraction Pies (equivalent fractions, comparing) and Decimal Grid (fraction = decimal = percent).
+ * FractionPies — 2D Interactive Pie charts for equivalent fractions and comparison.
+ * DecimalGrid — 2D 100-Square grid demonstrating Fraction = Decimal = Percentage.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { mat, shadowed, textSprite } from '../class1-math-kit/models';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizQuestion } from '../class1-math-kit/SimKit';
 import { rnd } from '../class1-math-kit/nepali';
-import { fmt, Hud, Tip, Props, mcq, numQ } from './h4';
+import { fmt, Props, mcq, numQ } from './h4';
 
-/* ───────────── Fraction Pies ───────────── */
-const pieColors = ['#ef4444', '#f97316'];
 const frac = (lang: 'ne' | 'en', n: number, d: number) => `${fmt(lang, n)}/${fmt(lang, d)}`;
-type PieApi = { set: (i: number, n: number, d: number) => void };
+
+/* ───────────── 1. FractionPies ───────────── */
+const pieColors = ['#EF4444', '#0EA5E9'];
 
 export const FractionPies: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G4-L6-01', chapter: 6, titleNp: 'भिन्नको पाई', titleEn: 'Fraction Pies' });
-  const [A, setA] = useState<[number, number]>([1, 2]);
+  const kit = useSimKit({
+    code: 'SIM-MATH-G4-L6-01',
+    chapter: 6,
+    titleNp: 'भिन्नको पाई (समतुल्य भिन्न)',
+    titleEn: 'Fraction Pies (Equivalent Fractions)',
+  });
+
+  const [A, setA] = useState<[number, number]>([1, 2]); // [shaded, total]
   const [B, setB] = useState<[number, number]>([2, 4]);
-  const [k, setK] = useState(2);
-  const [target, setTarget] = useState<[number, number]>([3, 4]);
-  const scene = useRef<PieApi | null>(null);
+  const [multiplier, setMultiplier] = useState(2);
 
-  useStage(kit.stageRef, (ctx) => {
-    const g = [new THREE.Group(), new THREE.Group()]; g[0].position.x = -4.4; g[1].position.x = 4.4; g.forEach((x) => { x.position.y = 0.3; ctx.scene.add(x); });
-    const set = (i: number, n: number, d: number) => {
-      g[i].clear();
-      for (let s = 0; s < d; s++) {
-        const th = (2 * Math.PI) / d; const m = shadowed(new THREE.Mesh(new THREE.CylinderGeometry(3.2, 3.2, 0.7, 40, 1, false, s * th + 0.02, th - 0.04), mat(s < n ? pieColors[i] : '#f1f5f9', 0.5)));
-        m.userData.slice = s; g[i].add(m);
-      }
-      const lab = textSprite(`${n}/${d}`, 2.6, { px: 64, w: 256, h: 112, bg: '#ffffff', border: pieColors[i] }); lab.position.set(0, 3.2, 0); g[i].add(lab);
-    };
-    set(0, 1, 2); set(1, 2, 4); scene.current = { set };
-    ctx.onTap(() => g[0].children.filter((c) => c.userData.slice !== undefined), (hit) => { if (hit) tapRef.current?.(hit.object.userData.slice); });
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 12, 8], target: [0, 0, 0], minDistance: 7, maxDistance: 22, ground: 0xfef9c3 });
-  const tapRef = useRef<((s: number) => void) | null>(null);
-
-  const put = (i: number, n: number, d: number) => { if (i === 0) setA([n, d]); else setB([n, d]); scene.current?.set(i, n, d); };
-  const learn = (kk: number, base = A) => { setK(kk); put(0, base[0], base[1]); put(1, base[0] * kk, base[1] * kk); kit.say(`${frac('ne', base[0], base[1])} = ${frac('ne', base[0] * kk, base[1] * kk)}`, `${base[0]}/${base[1]} = ${base[0] * kk}/${base[1] * kk}`); };
-  const freshLearn = () => { const d = rnd(2, 6), n = rnd(1, d - 1); const base: [number, number] = [n, d]; put(0, n, d); learn(2, base); };
-  const newTarget = () => { const d = rnd(3, 8), n = rnd(1, d - 1); setTarget([n, d]); put(0, 0, d); put(1, n, d); kit.say(`${frac('ne', n, d)} बनाउन पाई ट्याप गर`, `Tap the pie to shade ${n}/${d}`); };
-  useEffect(() => { if (kit.mode === 'LEARN') freshLearn(); else if (kit.mode === 'PLAY') newTarget(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [kit.mode]);
-  tapRef.current = (s: number) => {
-    if (kit.mode !== 'PLAY') return; const nn = s + 1 === A[0] ? s : s + 1; put(0, nn, A[1]); kit.tap();
-    if (nn === target[0]) { kit.good(); kit.star(); window.setTimeout(newTarget, 1200); }
+  const applyMultiplier = (k: number) => {
+    setMultiplier(k);
+    setB([A[0] * k, A[1] * k]);
+    kit.tap();
+    kit.say(
+      `${frac('ne', A[0], A[1])} = ${frac('ne', A[0] * k, A[1] * k)}`,
+      `${A[0]}/${A[1]} = ${A[0] * k}/${A[1] * k}`
+    );
   };
 
-  const data = useMemo(() => Array.from({ length: 8 }, (_, i) => { const d = rnd(2, 6), n = rnd(1, d - 1), kk = rnd(2, 4); const d2 = rnd(3, 9), n2 = rnd(1, d2 - 1); return { d, n, kk, d2, n2, i }; }), []);
-  const questions: (QuizQuestion & { d: any })[] = data.map((d, i) => {
-    if (i % 3 === 0) return { d, ...mcq('रङ्गिन भाग कति भिन्न हो?', 'What fraction is shaded?', `${d.n}/${d.d}`, [`${d.d - d.n}/${d.d}`, `${d.n}/${d.d + 1}`, `${d.n + 1}/${d.d}`], i), options: mcq('', '', `${d.n}/${d.d}`, [`${d.d - d.n}/${d.d}`, `${d.n}/${d.d + 1}`, `${d.n + 1}/${d.d}`], i).options.map((o) => ({ key: o.key, label: o.key.split('/').map((x) => fmt(kit.lang, x)).join('/') })) };
-    if (i % 3 === 1) return { d, ...numQ(`${frac('ne', d.n, d.d)} = ?/${fmt('ne', d.d * d.kk)}`, `${d.n}/${d.d} = ?/${d.d * d.kk}`, d.n * d.kk, i, [1, -1, d.kk, 2], (x) => fmt(kit.lang, x), 1) };
-    const gt = d.n / d.d > d.n2 / d.d2 ? 0 : d.n / d.d < d.n2 / d.d2 ? 1 : 2;
-    return { d, ...mcq(`${frac('ne', d.n, d.d)} र ${frac('ne', d.n2, d.d2)} मध्ये कुन ठूलो?`, `Which is greater: ${d.n}/${d.d} or ${d.n2}/${d.d2}?`, ['a', 'b', 'eq'][gt], ['a', 'b', 'eq'].filter((x) => x !== ['a', 'b', 'eq'][gt]), i), options: [{ key: 'a', label: frac(kit.lang, d.n, d.d) }, { key: 'b', label: frac(kit.lang, d.n2, d.d2) }, { key: 'eq', label: kit.t('बराबर', 'Equal') }] };
-  });
+  const fresh = () => {
+    const d = rnd(2, 6);
+    const n = rnd(1, d - 1);
+    setA([n, d]);
+    setB([n * 2, d * 2]);
+    setMultiplier(2);
+    kit.tap();
+  };
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <Hud color="#ef4444">
-      {kit.mode === 'PLAY' ? <div style={{ fontSize: 24, fontWeight: 900 }}>🎯 {frac(kit.lang, target[0], target[1])} · {frac(kit.lang, A[0], A[1])}</div>
-        : <div style={{ fontSize: 24, fontWeight: 900 }}>{frac(kit.lang, A[0], A[1])} = {frac(kit.lang, B[0], B[1])}</div>}
-      {kit.mode === 'LEARN' && <div style={{ fontSize: 13, fontWeight: 700, color: '#475569' }}>{fmt(kit.lang, A[0])}×{fmt(kit.lang, k)} / {fmt(kit.lang, A[1])}×{fmt(kit.lang, k)}</div>}
-    </Hud>
+  const toggleSliceA = (sIdx: number) => {
+    const nextShaded = sIdx + 1 === A[0] ? sIdx : sIdx + 1;
+    setA([nextShaded, A[1]]);
+    setB([nextShaded * multiplier, A[1] * multiplier]);
+    kit.tap();
+    kit.say(`${nextShaded}/${A[1]}`, `${nextShaded}/${A[1]}`);
+  };
+
+  const questions: QuizQuestion[] = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => {
+      const qd = rnd(2, 6);
+      const qn = rnd(1, qd - 1);
+      const qk = rnd(2, 4);
+
+      if (i % 2 === 0) {
+        return mcq(
+          `रङ्गिन भाग कति भिन्न हो? (${qn} भाग रङ्गिएको, जम्मा ${qd} भाग)`,
+          `What fraction is shaded? (${qn} parts shaded out of ${qd})`,
+          `${qn}/${qd}`,
+          [`${qd - qn}/${qd}`, `${qn}/${qd + 1}`, `${qn + 1}/${qd}`],
+          i
+        );
+      } else {
+        return numQ(
+          `${frac('ne', qn, qd)} = ?/${fmt('ne', qd * qk)} (समतुल्य भिन्न)`,
+          `${qn}/${qd} = ?/${qd * qk} (Equivalent fraction)`,
+          qn * qk,
+          i,
+          [1, -1, qk, 2],
+          (x) => fmt(kit.lang, x),
+          1
+        );
+      }
+    });
+  }, [kit.lang]);
+
+  // SVG Pie Generator
+  const renderPie = (n: number, d: number, color: string, isInteractive: boolean) => {
+    const radius = 70;
+    const center = 85;
+
+    return (
+      <svg width="170" height="170" viewBox="0 0 170 170">
+        {Array.from({ length: d }).map((_, s) => {
+          const startAngle = (s * 2 * Math.PI) / d - Math.PI / 2;
+          const endAngle = ((s + 1) * 2 * Math.PI) / d - Math.PI / 2;
+          const isShaded = s < n;
+
+          const x1 = center + radius * Math.cos(startAngle);
+          const y1 = center + radius * Math.sin(startAngle);
+          const x2 = center + radius * Math.cos(endAngle);
+          const y2 = center + radius * Math.sin(endAngle);
+
+          const largeArc = endAngle - startAngle > Math.PI ? 1 : 0;
+          const pathData = `M ${center} ${center} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+
+          return (
+            <path
+              key={s}
+              d={pathData}
+              fill={isShaded ? color : '#F1F5F9'}
+              stroke="#FFFFFF"
+              strokeWidth="2.5"
+              onClick={() => isInteractive && toggleSliceA(s)}
+              style={{
+                cursor: isInteractive ? 'pointer' : 'default',
+                transition: 'fill 0.2s ease',
+              }}
+            />
+          );
+        })}
+      </svg>
+    );
+  };
+
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      mascotGreeting={kit.t(
+        `अंश र हर दुवैलाई एउटै सङ्ख्याले गुणा गर्दा समतुल्य (बराबर) भिन्न बन्छ: ${A[0]}/${A[1]} = ${B[0]}/${B[1]}`,
+        `Multiplying numerator and denominator by the same number creates an equivalent fraction: ${A[0]}/${A[1]} = ${B[0]}/${B[1]}`
+      )}
+      questions={questions}
+      controls={
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {[2, 3, 4].map((k) => (
+            <button
+              key={k}
+              onClick={() => applyMultiplier(k)}
+              style={{
+                padding: '8px 16px',
+                borderRadius: 10,
+                border: multiplier === k ? '2px solid #187C68' : '1px solid #CBD5E1',
+                background: multiplier === k ? '#E6F3E9' : '#FFFFFF',
+                color: multiplier === k ? '#187C68' : '#334155',
+                fontWeight: 800,
+                fontSize: 14,
+                cursor: 'pointer',
+              }}
+            >
+              ×{fmt(kit.lang, k)}
+            </button>
+          ))}
+          <button
+            onClick={() => A[0] > 0 && setA([A[0] - 1, A[1]])}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('रङ्गिन', 'Shade')} −
+          </button>
+          <button
+            onClick={() => A[0] < A[1] && setA([A[0] + 1, A[1]])}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            {kit.t('रङ्गिन', 'Shade')} +
+          </button>
+          <button
+            onClick={fresh}
+            style={{ padding: '8px 14px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            🎲 {kit.t('नयाँ भिन्न', 'Random')}
+          </button>
+        </div>
+      }
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 680, gap: 16 }}>
+        {/* Equivalence Card */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #E2E8F0',
+            borderRadius: 16,
+            padding: '12px 28px',
+            textAlign: 'center',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+          }}
+        >
+          <div style={{ fontSize: 28, fontWeight: 900, color: '#187C68' }}>
+            {frac(kit.lang, A[0], A[1])} = {frac(kit.lang, B[0], B[1])}
+          </div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#64748B', marginTop: 4 }}>
+            ({A[0]} × {multiplier}) / ({A[1]} × {multiplier}) = {B[0]}/{B[1]}
+          </div>
+        </div>
+
+        {/* 2 Pies Comparison View */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 60px 1fr',
+            alignItems: 'center',
+            gap: 16,
+            width: '100%',
+          }}
+        >
+          {/* Pie A */}
+          <div
+            style={{
+              background: '#FFFFFF',
+              borderRadius: 18,
+              border: '2px solid #E2E8F0',
+              padding: '16px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 8,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+            }}
+          >
+            <div style={{ fontSize: 13, fontWeight: 800, color: pieColors[0] }}>
+              {kit.t('पहिलो पाई (ट्याप गर)', 'First Pie (Tap to shade)')}
+            </div>
+            {renderPie(A[0], A[1], pieColors[0], true)}
+            <div style={{ fontSize: 20, fontWeight: 900, color: pieColors[0] }}>
+              {frac(kit.lang, A[0], A[1])}
+            </div>
+          </div>
+
+          <div style={{ fontSize: 32, fontWeight: 900, color: '#187C68', textAlign: 'center' }}>=</div>
+
+          {/* Pie B */}
+          <div
+            style={{
+              background: '#FFFFFF',
+              borderRadius: 18,
+              border: '2px solid #E2E8F0',
+              padding: '16px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 8,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+            }}
+          >
+            <div style={{ fontSize: 13, fontWeight: 800, color: pieColors[1] }}>
+              {kit.t('समतुल्य पाई (×' + multiplier + ')', 'Equivalent Pie (×' + multiplier + ')')}
+            </div>
+            {renderPie(B[0], B[1], pieColors[1], false)}
+            <div style={{ fontSize: 20, fontWeight: 900, color: pieColors[1] }}>
+              {frac(kit.lang, B[0], B[1])}
+            </div>
+          </div>
+        </div>
+      </div>
+    </SimFrame2D>
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls><Tip>{kit.t('अंश र हर दुवैलाई एउटै सङ्ख्याले गुणा गर्दा बराबर भिन्न बन्छ', 'Multiply top and bottom by the same number: same fraction')}</Tip>{[2, 3, 4].map((x) => <CBtn key={x} color={x === k ? '#ef4444' : '#94a3b8'} onClick={() => { learn(x); kit.star(); }}>×{fmt(kit.lang, x)}</CBtn>)}<CBtn color="#8b5cf6" onClick={freshLearn}>🎲</CBtn></Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls><Tip>{kit.t('बायाँको पाईका टुक्रा ट्याप गरी रङ्ग्याऔँ', 'Tap slices of the left pie to shade them')}</Tip><CBtn color="#f59e0b" onClick={() => A[0] > 0 && put(0, A[0] - 1, A[1])}>−</CBtn><CBtn color="#f59e0b" onClick={() => A[0] < A[1] && put(0, A[0] + 1, A[1])}>+</CBtn><CBtn color="#8b5cf6" onClick={newTarget}>🎲</CBtn></Controls>
-  ) : <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => { const d = q.d; put(0, d.n, d.d); if (d.i % 3 === 1) put(1, d.n * d.kk, d.d * d.kk); else put(1, d.n2, d.d2); }} />;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };
 
-/* ───────────── Decimal Grid ───────────── */
+/* ───────────── 2. DecimalGrid ───────────── */
 export const DecimalGrid: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G4-L6-02', chapter: 6, titleNp: 'दशमलव ग्रिड', titleEn: 'Decimal Grid' });
-  const [n, setN] = useState(35);
-  const [target, setTarget] = useState(60);
-  const scene = useRef<{ set: (n: number) => void } | null>(null);
-
-  useStage(kit.stageRef, (ctx) => {
-    const tiles: THREE.Mesh[] = []; const g = new THREE.Group(); ctx.scene.add(g);
-    for (let r = 0; r < 10; r++) for (let c = 0; c < 10; c++) {
-      const t = shadowed(new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.5, 0.85), mat('#e2e8f0', 0.6))); t.position.set((c - 4.5) * 0.95, 0.25, (r - 4.5) * 0.95); t.userData.i = r * 10 + c; g.add(t); tiles.push(t);
-    }
-    const set = (v: number) => tiles.forEach((t, i) => { const on = i < v; (t.material as THREE.MeshStandardMaterial).color.set(on ? (Math.floor(i / 10) % 2 ? '#0ea5e9' : '#38bdf8') : '#e2e8f0'); t.scale.y = on ? 1.6 : 1; t.position.y = on ? 0.4 : 0.25; });
-    ctx.onTap(() => tiles, (hit) => { if (hit) tapRef.current?.(hit.object.userData.i + 1); });
-    scene.current = { set }; set(35);
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 12, 10], target: [0, 0, 0], minDistance: 7, maxDistance: 22, ground: 0xecfccb });
-  const tapRef = useRef<((v: number) => void) | null>(null);
-
-  const put = (v: number) => { const x = Math.max(0, Math.min(100, v)); setN(x); scene.current?.set(x); };
-  const dec = (v: number) => (v / 100).toFixed(2).replace(/0$/, '');
-  const say = (v: number) => kit.say(`${fmt('ne', v)}/१०० = ${fmt('ne', dec(v))} = ${fmt('ne', v)}%`, `${v}/100 = ${dec(v)} = ${v}%`);
-  const newTarget = () => { const t = rnd(1, 19) * 5; setTarget(t); put(0); kit.say(`${fmt('ne', t)}% रङ्ग्याऔँ`, `Shade ${t}%`); };
-  useEffect(() => { if (kit.mode === 'LEARN') { put(35); say(35); } else if (kit.mode === 'PLAY') newTarget(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [kit.mode]);
-  tapRef.current = (v: number) => { if (kit.mode === 'CHALLENGE') return; put(v); if (kit.mode === 'LEARN') say(v); };
-  const check = () => { if (n === target) { kit.good(); kit.star(); window.setTimeout(newTarget, 1200); } else kit.oops(n < target ? 'अझै रङ्ग्याऔँ' : 'अलि घटाऔँ', n < target ? 'Shade a few more' : 'Too many — take some away'); };
-
-  const data = useMemo(() => Array.from({ length: 8 }, () => rnd(1, 19) * 5 + (rnd(0, 1) ? 0 : rnd(1, 4))), []);
-  const questions: (QuizQuestion & { v: number })[] = data.map((v, i) => {
-    if (i % 3 === 0) return { v, ...numQ('कति प्रतिशत रङ्गिएको छ?', 'What percent is shaded?', v, i, [10, -10, 5, -5, 1], (x) => `${fmt(kit.lang, x)}%`, 1) };
-    if (i % 3 === 1) return { v, ...mcq('रङ्गिएको भागलाई दशमलवमा लेख', 'Write the shaded part as a decimal', dec(v), [dec(Math.min(99, v + 10)), dec(Math.max(1, v - 10)), (v / 10).toFixed(1), dec(v + 1)], i), options: mcq('', '', dec(v), [dec(Math.min(99, v + 10)), dec(Math.max(1, v - 10)), (v / 10).toFixed(1), dec(v + 1)], i).options.map((o) => ({ key: o.key, label: fmt(kit.lang, o.key) })) };
-    return { v, ...numQ(`${fmt('ne', v)}/१०० = ?%`, `${v}/100 = ?%`, v, i + 2, [10, -10, 1, 100], (x) => `${fmt(kit.lang, x)}%`, 1) };
+  const kit = useSimKit({
+    code: 'SIM-MATH-G4-L6-02',
+    chapter: 6,
+    titleNp: 'दशमलव ग्रिड (१०० कोठा)',
+    titleEn: 'Decimal Grid (100 Squares)',
   });
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <Hud color="#0ea5e9">
-      {kit.mode === 'PLAY' && <div style={{ fontSize: 15, fontWeight: 900 }}>🎯 {fmt(kit.lang, target)}%</div>}
-      <div style={{ fontSize: 22, fontWeight: 900 }}>{fmt(kit.lang, n)}/{fmt(kit.lang, 100)} = {fmt(kit.lang, dec(n))} = {fmt(kit.lang, n)}%</div>
-      <div style={{ fontSize: 12, fontWeight: 700, color: '#475569' }}>{kit.t('१०० मध्ये रङ्गिएका', 'shaded out of 100')}</div>
-    </Hud>
+  const [n, setN] = useState(35); // 0 to 100
+
+  const decimal = (n / 100).toFixed(2);
+  const percent = n;
+
+  const setVal = (v: number) => {
+    const nextVal = Math.max(0, Math.min(100, v));
+    setN(nextVal);
+    kit.tap();
+    kit.say(
+      `${nextVal}/१०० = ${decimal} = ${nextVal}%`,
+      `${nextVal}/100 = ${decimal} = ${nextVal}%`
+    );
+  };
+
+  const questions: QuizQuestion[] = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => {
+      const qv = rnd(1, 19) * 5;
+      const qdec = (qv / 100).toFixed(2);
+
+      if (i % 2 === 0) {
+        return numQ(
+          `१०० मध्ये ${qv} कोठा रङ्ग्याउँदा कति प्रतिशत हुन्छ?`,
+          `If ${qv} out of 100 squares are shaded, what percentage is that?`,
+          qv,
+          i,
+          [10, -10, 5, -5, 1],
+          (x) => `${fmt(kit.lang, x)}%`,
+          1
+        );
+      } else {
+        return mcq(
+          `${qv}/१०० लाई दशमलवमा लेख्नुहोस्:`,
+          `Write ${qv}/100 as a decimal:`,
+          qdec,
+          [((qv + 10) / 100).toFixed(2), ((qv - 5) / 100).toFixed(2), (qv / 10).toFixed(1)],
+          i
+        );
+      }
+    });
+  }, [kit.lang]);
+
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      mascotGreeting={kit.t(
+        `१०० मध्ये रङ्गिएका भाग: ${n}/१०० = ${decimal} = ${percent}%`,
+        `Shaded parts out of 100: ${n}/100 = ${decimal} = ${percent}%`
+      )}
+      questions={questions}
+      controls={
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {[10, 25, 50, 75].map((preset) => (
+            <button
+              key={preset}
+              onClick={() => setVal(preset)}
+              style={{
+                padding: '6px 12px',
+                borderRadius: 8,
+                border: n === preset ? '2px solid #187C68' : '1px solid #CBD5E1',
+                background: n === preset ? '#E6F3E9' : '#FFFFFF',
+                color: n === preset ? '#187C68' : '#334155',
+                fontWeight: 800,
+                fontSize: 13,
+                cursor: 'pointer',
+              }}
+            >
+              {fmt(kit.lang, preset)}%
+            </button>
+          ))}
+          <button
+            onClick={() => setVal(n - 10)}
+            style={{ padding: '6px 12px', borderRadius: 8, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            −10
+          </button>
+          <button
+            onClick={() => setVal(n - 1)}
+            style={{ padding: '6px 12px', borderRadius: 8, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            −1
+          </button>
+          <button
+            onClick={() => setVal(n + 1)}
+            style={{ padding: '6px 12px', borderRadius: 8, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            +1
+          </button>
+          <button
+            onClick={() => setVal(n + 10)}
+            style={{ padding: '6px 12px', borderRadius: 8, border: '1px solid #CBD5E1', background: '#FFFFFF', fontWeight: 700 }}
+          >
+            +10
+          </button>
+        </div>
+      }
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 540, gap: 16 }}>
+        {/* Equivalency Card */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #E2E8F0',
+            borderRadius: 16,
+            padding: '12px 24px',
+            textAlign: 'center',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+          }}
+        >
+          <div style={{ fontSize: 24, fontWeight: 900, color: '#187C68' }}>
+            {fmt(kit.lang, n)}/१०० = {decimal} = {fmt(kit.lang, percent)}%
+          </div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#64748B', marginTop: 4 }}>
+            {kit.t('भिन्न = दशमलव = प्रतिशत', 'Fraction = Decimal = Percent')}
+          </div>
+        </div>
+
+        {/* 10x10 Hundred Grid */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 18,
+            border: '2px solid #E2E8F0',
+            padding: 16,
+            boxShadow: '0 6px 18px rgba(0,0,0,0.04)',
+            width: '100%',
+            maxWidth: 380,
+          }}
+        >
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(10, 1fr)',
+              gap: 3,
+            }}
+          >
+            {Array.from({ length: 100 }).map((_, idx) => {
+              const isShaded = idx < n;
+              return (
+                <div
+                  key={idx}
+                  onClick={() => setVal(idx + 1)}
+                  style={{
+                    aspectRatio: '1/1',
+                    borderRadius: 4,
+                    background: isShaded ? (Math.floor(idx / 10) % 2 === 0 ? '#0284C7' : '#38BDF8') : '#F1F5F9',
+                    border: isShaded ? '1px solid #0369A1' : '1px solid #E2E8F0',
+                    cursor: 'pointer',
+                    transition: 'all 0.1s ease',
+                  }}
+                  title={`${idx + 1}`}
+                />
+              );
+            })}
+          </div>
+          <div style={{ fontSize: 11, color: '#94A3B8', fontWeight: 600, textAlign: 'center', marginTop: 8 }}>
+            {kit.t('कोठामा ट्याप गरेर रङ्गिन भाग बदल्नुहोस्', 'Tap squares to shade')}
+          </div>
+        </div>
+      </div>
+    </SimFrame2D>
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls><Tip>{kit.t('१०० मध्ये जति भाग = भिन्न = दशमलव = प्रतिशत', 'Parts out of 100 = fraction = decimal = percent')}</Tip>{[10, 25, 50, 75].map((v) => <CBtn key={v} color="#0ea5e9" onClick={() => { put(v); say(v); kit.star(); }}>{fmt(kit.lang, v)}%</CBtn>)}</Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls><CBtn color="#ef4444" onClick={() => put(n - 10)}>−10</CBtn><CBtn color="#ef4444" onClick={() => put(n - 1)}>−1</CBtn><CBtn color="#0ea5e9" onClick={() => put(n + 1)}>+1</CBtn><CBtn color="#0ea5e9" onClick={() => put(n + 10)}>+10</CBtn><CBtn color="#16a34a" onClick={check}>✓ {kit.t('जाँचौँ', 'Check')}</CBtn><CBtn color="#8b5cf6" onClick={newTarget}>🎲</CBtn></Controls>
-  ) : <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => put(q.v)} />;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };
+
+export default FractionPies;
