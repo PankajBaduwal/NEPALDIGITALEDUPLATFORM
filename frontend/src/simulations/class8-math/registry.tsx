@@ -201,6 +201,93 @@ export const CLASS8_MATH = [
     titleNp: 'मिश्रधन, ब्याज कर र बैंकिङ चुनौती',
     Component: L(() => import('./AmountTaxBankingChallenge'), 'AmountTaxBankingChallenge'),
   },
+
+  // ── UNIT 8: AREA AND VOLUME (क्षेत्रफल र आयतन) ────────────────────────
+  {
+    code: 'SIM-MATH-G8-U8-01',
+    key: 'class8-math-u8-geometry-area-explorer',
+    lesson: 8,
+    unit: 8,
+    titleEn: 'Geometry Area Explorer',
+    titleNp: 'ज्यामितीय क्षेत्रफल अन्वेषक',
+    Component: L(() => import('./GeometryAreaExplorer'), 'GeometryAreaExplorer'),
+  },
+  {
+    code: 'SIM-MATH-G8-U8-02',
+    key: 'class8-math-u8-circle-circumference-lab',
+    lesson: 8,
+    unit: 8,
+    titleEn: 'Circle and Circumference Discovery Lab',
+    titleNp: 'वृत्त, परिधि र क्षेत्रफल',
+    Component: L(() => import('./CircleCircumferenceLab'), 'CircleCircumferenceLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U8-03',
+    key: 'class8-math-u8-composite-shaded-area-solver',
+    lesson: 8,
+    unit: 8,
+    titleEn: 'Composite Shapes and Shaded Area Solver',
+    titleNp: 'संयुक्त आकृति र छायाङ्कित क्षेत्रफल',
+    Component: L(() => import('./CompositeShadedAreaSolver'), 'CompositeShadedAreaSolver'),
+  },
+
+  // ── UNIT 9: INDICES (घाताङ्क) ──────────────────────────────────────────
+  {
+    code: 'SIM-MATH-G8-U9-01',
+    key: 'class8-math-u9-indices-exponent-playground',
+    lesson: 9,
+    unit: 9,
+    titleEn: 'Indices Discovery and Exponent Playground',
+    titleNp: 'घाताङ्क खोजी र गुणन खेलमैदान',
+    Component: L(() => import('./IndicesExponentPlayground'), 'IndicesExponentPlayground'),
+  },
+  {
+    code: 'SIM-MATH-G8-U9-02',
+    key: 'class8-math-u9-laws-of-indices-lab',
+    lesson: 9,
+    unit: 9,
+    titleEn: 'Laws of Indices Interactive Lab',
+    titleNp: 'घाताङ्कका नियमहरू प्रयोगशाला',
+    Component: L(() => import('./LawsOfIndicesLab'), 'LawsOfIndicesLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U9-03',
+    key: 'class8-math-u9-expression-indices-challenge',
+    lesson: 9,
+    unit: 9,
+    titleEn: 'Expression Simplification and Indices Challenge',
+    titleNp: 'व्यञ्जक सरलीकरण र घाताङ्क चुनौती',
+    Component: L(() => import('./ExpressionSimplificationIndicesChallenge'), 'ExpressionSimplificationIndicesChallenge'),
+  },
+
+  // ── UNIT 10: ALGEBRAIC EXPRESSION (बीजगणितीय व्यञ्जक) ──────────────────
+  {
+    code: 'SIM-MATH-G8-U10-01',
+    key: 'class8-math-u10-algebraic-tiles-factorization',
+    lesson: 10,
+    unit: 10,
+    titleEn: 'Algebraic Tiles and Factorization Playground',
+    titleNp: 'बीजगणितीय टायल र खण्डीकरण',
+    Component: L(() => import('./AlgebraicTilesFactorizationPlayground'), 'AlgebraicTilesFactorizationPlayground'),
+  },
+  {
+    code: 'SIM-MATH-G8-U10-02',
+    key: 'class8-math-u10-quadratic-factorization-lab',
+    lesson: 10,
+    unit: 10,
+    titleEn: 'Quadratic Expression and Factorization Lab',
+    titleNp: 'वर्ग समीकरण र खण्डीकरण प्रयोगशाला',
+    Component: L(() => import('./QuadraticFactorizationLab'), 'QuadraticFactorizationLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U10-03',
+    key: 'class8-math-u10-hcf-lcm-algebraic-expressions',
+    lesson: 10,
+    unit: 10,
+    titleEn: 'HCF and LCM of Algebraic Expressions Lab',
+    titleNp: 'बीजीय व्यञ्जकहरूको म.स. र ल.स.',
+    Component: L(() => import('./HcfLcmAlgebraicExpressionsLab'), 'HcfLcmAlgebraicExpressionsLab'),
+  },
 ];
 
 export const findClass8Sim = (componentKey?: string, code?: string) =>
