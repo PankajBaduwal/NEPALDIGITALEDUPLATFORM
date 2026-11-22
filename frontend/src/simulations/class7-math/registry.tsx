@@ -608,5 +608,7 @@ export const CLASS7_MATH = [
   },
 ];
 
+import { findClass8Sim } from '../class8-math/registry';
+
 export const findClass7Sim = (componentKey?: string, code?: string) =>
-  CLASS7_MATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code));
+  CLASS7_MATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code)) || findClass8Sim(componentKey, code);
