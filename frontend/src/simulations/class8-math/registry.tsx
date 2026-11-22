@@ -375,6 +375,93 @@ export const CLASS8_MATH = [
     titleNp: 'अज्ञात कोण पत्ता लगाउने चुनौती',
     Component: L(() => import('./UnknownAngleSolverChallenge'), 'UnknownAngleSolverChallenge'),
   },
+
+  // ── UNIT 14: PLANE FIGURES (समतलीय आकृतिहरू) ───────────────────────────
+  {
+    code: 'SIM-MATH-G8-U14-01',
+    key: 'class8-math-u14-triangle-quadrilateral-discovery',
+    lesson: 14,
+    unit: 14,
+    titleEn: 'Triangle and Quadrilateral Discovery Lab',
+    titleNp: 'त्रिभुज र चतुर्भुज खोजी प्रयोगशाला',
+    Component: L(() => import('./TriangleQuadrilateralDiscoveryLab'), 'TriangleQuadrilateralDiscoveryLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U14-02',
+    key: 'class8-math-u14-geometric-construction-studio',
+    lesson: 14,
+    unit: 14,
+    titleEn: 'Geometric Construction Studio',
+    titleNp: 'ज्यामितीय रचना स्टुडियो',
+    Component: L(() => import('./GeometricConstructionStudio'), 'GeometricConstructionStudio'),
+  },
+  {
+    code: 'SIM-MATH-G8-U14-03',
+    key: 'class8-math-u14-polygon-explorer',
+    lesson: 14,
+    unit: 14,
+    titleEn: 'Polygon Explorer and Angle Calculator',
+    titleNp: 'बहुभुज अन्वेषक र कोण क्यालकुलेटर',
+    Component: L(() => import('./PolygonExplorerAngleCalculator'), 'PolygonExplorerAngleCalculator'),
+  },
+
+  // ── UNIT 15: CONGRUENCY AND SIMILARITY (सर्वाङ्गसमता र समरूपता) ─────────
+  {
+    code: 'SIM-MATH-G8-U15-01',
+    key: 'class8-math-u15-congruent-triangle-discovery',
+    lesson: 15,
+    unit: 15,
+    titleEn: 'Congruent Triangle Discovery Lab',
+    titleNp: 'सर्वाङ्गसम त्रिभुज खोजी प्रयोगशाला',
+    Component: L(() => import('./CongruentTriangleDiscoveryLab'), 'CongruentTriangleDiscoveryLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U15-02',
+    key: 'class8-math-u15-triangle-congruency-test',
+    lesson: 15,
+    unit: 15,
+    titleEn: 'Triangle Congruency Test Lab',
+    titleNp: 'त्रिभुज सर्वाङ्गसमता परीक्षण प्रयोगशाला',
+    Component: L(() => import('./TriangleCongruencyTestLab'), 'TriangleCongruencyTestLab'),
+  },
+  {
+    code: 'SIM-MATH-G8-U15-03',
+    key: 'class8-math-u15-similar-figures-lab',
+    lesson: 15,
+    unit: 15,
+    titleEn: 'Similar Figures and Triangle Similarity Lab',
+    titleNp: 'समरूप आकृति र त्रिभुज समरूपता प्रयोगशाला',
+    Component: L(() => import('./SimilarFiguresSimilarityLab'), 'SimilarFiguresSimilarityLab'),
+  },
+
+  // ── UNIT 16: SOLID OBJECTS (ठोस वस्तुहरू) ─────────────────────────────
+  {
+    code: 'SIM-MATH-G8-U16-01',
+    key: 'class8-math-u16-prism-pyramid-explorer',
+    lesson: 16,
+    unit: 16,
+    titleEn: '3D Prism and Pyramid Explorer',
+    titleNp: '३D प्रिज्म र पिरामिड अन्वेषक',
+    Component: L(() => import('./SolidPrismPyramidExplorer3D'), 'SolidPrismPyramidExplorer3D'),
+  },
+  {
+    code: 'SIM-MATH-G8-U16-02',
+    key: 'class8-math-u16-net-builder-folding',
+    lesson: 16,
+    unit: 16,
+    titleEn: '3D Solid Net Builder and Folding Lab',
+    titleNp: '३D ठोस वस्तु जालो र पट्याउने प्रयोगशाला',
+    Component: L(() => import('./SolidNetBuilderFoldingLab3D'), 'SolidNetBuilderFoldingLab3D'),
+  },
+  {
+    code: 'SIM-MATH-G8-U16-03',
+    key: 'class8-math-u16-solid-geometry-challenge',
+    lesson: 16,
+    unit: 16,
+    titleEn: '3D Solid Geometry Challenge World',
+    titleNp: '३D ठोस ज्यामिति चुनौती संसार',
+    Component: L(() => import('./SolidGeometryChallengeWorld3D'), 'SolidGeometryChallengeWorld3D'),
+  },
 ];
 
 export const findClass8Sim = (componentKey?: string, code?: string) =>
