@@ -161,6 +161,42 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     titleNp: 'वृत्तका साध्यहरू अन्तरक्रियात्मक अन्वेषक',
     Component: L(() => import('./CircleTheoremExplorer'), 'CircleTheoremExplorer'),
   },
+
+  // ── UNIT 13: STATISTICS (तथ्याङ्क शास्त्र) ──────────────────────────────────
+  {
+    code: 'SIM-MATH-G10-U13-01',
+    key: 'class10-math-u13-statistics-lab',
+    lesson: 1,
+    unit: 13,
+    grade: 10,
+    titleEn: 'Interactive Statistics Laboratory',
+    titleNp: 'अन्तरक्रियात्मक तथ्याङ्क शास्त्र प्रयोगशाला',
+    Component: L(() => import('./InteractiveStatisticsLab'), 'InteractiveStatisticsLab'),
+  },
+
+  // ── UNIT 14: PROBABILITY (सम्भाव्यता) ─────────────────────────────────────────
+  {
+    code: 'SIM-MATH-G10-U14-01',
+    key: 'class10-math-u14-probability-tree-lab',
+    lesson: 1,
+    unit: 14,
+    grade: 10,
+    titleEn: 'Probability Experiment and Tree Diagram Lab',
+    titleNp: 'सम्भाव्यता प्रयोग तथा वृक्ष चित्र प्रयोगशाला',
+    Component: L(() => import('./ProbabilityTreeLab'), 'ProbabilityTreeLab'),
+  },
+
+  // ── UNIT 15: TRIGONOMETRY (त्रिकोणमिति) ───────────────────────────────────────
+  {
+    code: 'SIM-MATH-G10-U15-01',
+    key: 'class10-math-u15-heights-distances',
+    lesson: 1,
+    unit: 15,
+    grade: 10,
+    titleEn: 'Heights and Distances Explorer',
+    titleNp: 'उचाइ र दूरी अन्वेषक प्रयोगशाला',
+    Component: L(() => import('./HeightsDistancesExplorer'), 'HeightsDistancesExplorer'),
+  },
 ];
 
 export const findClass10Sim = (componentKey?: string, code?: string) =>
