@@ -89,6 +89,42 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     titleNp: 'अनुक्रम र श्रेणी नमुना प्रयोगशाला',
     Component: L(() => import('./SequenceSeriesLab'), 'SequenceSeriesLab'),
   },
+
+  // ── UNIT 7: QUADRATIC EQUATION (वर्ग समीकरण) ──────────────────────────────
+  {
+    code: 'SIM-MATH-G10-U7-01',
+    key: 'class10-math-u7-quadratic-explorer',
+    lesson: 1,
+    unit: 7,
+    grade: 10,
+    titleEn: 'Quadratic Equation and Parabola Explorer',
+    titleNp: 'वर्ग समीकरण तथा परबोला अन्वेषक',
+    Component: L(() => import('./QuadraticEquationExplorer'), 'QuadraticEquationExplorer'),
+  },
+
+  // ── UNIT 8: ALGEBRAIC FRACTION (बीजीय भिन्न) ──────────────────────────────
+  {
+    code: 'SIM-MATH-G10-U8-01',
+    key: 'class10-math-u8-algebraic-fraction-lab',
+    lesson: 1,
+    unit: 8,
+    grade: 10,
+    titleEn: 'Algebraic Fraction Visual Laboratory',
+    titleNp: 'बीजीय भिन्न दृश्य प्रयोगशाला',
+    Component: L(() => import('./AlgebraicFractionLab'), 'AlgebraicFractionLab'),
+  },
+
+  // ── UNIT 9: INDICES (घाताङ्क) ──────────────────────────────────────────────
+  {
+    code: 'SIM-MATH-G10-U9-01',
+    key: 'class10-math-u9-indices-explorer',
+    lesson: 1,
+    unit: 9,
+    grade: 10,
+    titleEn: 'Laws of Indices Interactive Explorer',
+    titleNp: 'घाताङ्कका नियमहरू अन्तरक्रियात्मक अन्वेषक',
+    Component: L(() => import('./IndicesExplorer'), 'IndicesExplorer'),
+  },
 ];
 
 export const findClass10Sim = (componentKey?: string, code?: string) =>
