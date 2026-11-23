@@ -660,5 +660,8 @@ export const CLASS9_MATH = [
   },
 ];
 
+import { findClass9OptMathSim } from '../class9-optmath/registry';
+
 export const findClass9Sim = (componentKey?: string, code?: string) =>
-  CLASS9_MATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code));
+  CLASS9_MATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code)) ||
+  findClass9OptMathSim(componentKey, code);
