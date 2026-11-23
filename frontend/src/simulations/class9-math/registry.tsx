@@ -594,6 +594,70 @@ export const CLASS9_MATH = [
     titleNp: 'मध्यक र मध्यिका तुलना तथा अज्ञात बारम्बारता चुनौती',
     Component: L(() => import('./MeanMedianComparisonChallenge'), 'MeanMedianComparisonChallenge'),
   },
+
+  // ── UNIT 19: PROBABILITY (सम्भाव्यता) ────────────────────────────────────
+  {
+    code: 'SIM-MATH-G9-U19-01',
+    key: 'class9-math-u19-probability-experiment-lab',
+    lesson: 19,
+    unit: 19,
+    grade: 9,
+    titleEn: 'Probability Experiment Laboratory',
+    titleNp: 'सम्भाव्यता प्रयोग प्रयोगशाला',
+    Component: L(() => import('./ProbabilityExperimentLab'), 'ProbabilityExperimentLab'),
+  },
+  {
+    code: 'SIM-MATH-G9-U19-02',
+    key: 'class9-math-u19-probability-challenge-real-life-lab',
+    lesson: 19,
+    unit: 19,
+    grade: 9,
+    titleEn: 'Probability Challenge and Real-Life Lab',
+    titleNp: 'सम्भाव्यता चुनौती तथा व्यावहारिक प्रयोगशाला',
+    Component: L(() => import('./ProbabilityChallengeRealLifeLab'), 'ProbabilityChallengeRealLifeLab'),
+  },
+  {
+    code: 'SIM-MATH-G9-U19-03',
+    key: 'class9-math-u19-empirical-probability-analyser',
+    lesson: 19,
+    unit: 19,
+    grade: 9,
+    titleEn: 'Empirical Probability and Experiment Analyser',
+    titleNp: 'प्रयोगात्मक सम्भाव्यता तथा विश्लेषण प्रयोगशाला',
+    Component: L(() => import('./EmpiricalProbabilityAnalyser'), 'EmpiricalProbabilityAnalyser'),
+  },
+
+  // ── UNIT 20: TRIGONOMETRY (त्रिकोणमिति) ──────────────────────────────────
+  {
+    code: 'SIM-MATH-G9-U20-01',
+    key: 'class9-math-u20-trigonometric-ratio-explorer',
+    lesson: 20,
+    unit: 20,
+    grade: 9,
+    titleEn: 'Trigonometric Ratio Explorer',
+    titleNp: 'त्रिकोणमितीय अनुपात अन्वेषक',
+    Component: L(() => import('./TrigonometricRatioExplorer'), 'TrigonometricRatioExplorer'),
+  },
+  {
+    code: 'SIM-MATH-G9-U20-02',
+    key: 'class9-math-u20-special-angles-identities-lab',
+    lesson: 20,
+    unit: 20,
+    grade: 9,
+    titleEn: 'Special Angles and Trigonometric Identities Lab',
+    titleNp: 'विशिष्ट कोण तथा त्रिकोणमितीय सर्वसमिका प्रयोगशाला',
+    Component: L(() => import('./SpecialAnglesIdentitiesLab'), 'SpecialAnglesIdentitiesLab'),
+  },
+  {
+    code: 'SIM-MATH-G9-U20-03',
+    key: 'class9-math-u20-height-distance-application-lab',
+    lesson: 20,
+    unit: 20,
+    grade: 9,
+    titleEn: 'Height and Distance Application Laboratory',
+    titleNp: 'उचाइ र दुरी व्यावहारिक अनुप्रयोग प्रयोगशाला',
+    Component: L(() => import('./HeightDistanceApplicationLab'), 'HeightDistanceApplicationLab'),
+  },
 ];
 
 export const findClass9Sim = (componentKey?: string, code?: string) =>
