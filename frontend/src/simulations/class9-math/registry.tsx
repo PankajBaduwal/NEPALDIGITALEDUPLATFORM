@@ -146,6 +146,70 @@ export const CLASS9_MATH = [
     titleNp: 'ट्याक्सी भाडा तथा घरायसी खर्च हिसाब',
     Component: L(() => import('./TaxiFareHouseholdChallenge'), 'TaxiFareHouseholdChallenge'),
   },
+
+  // ── UNIT 5: AREA (क्षेत्रफल) ──────────────────────────────────────────────
+  {
+    code: 'SIM-MATH-G9-U5-01',
+    key: 'class9-math-u5-herons-formula-land-explorer',
+    lesson: 5,
+    unit: 5,
+    grade: 9,
+    titleEn: "Heron's Formula and Land Area Explorer",
+    titleNp: 'हिरोनको सूत्र तथा जग्गा क्षेत्रफल अन्वेषक',
+    Component: L(() => import('./HeronsFormulaLandExplorer'), 'HeronsFormulaLandExplorer'),
+  },
+  {
+    code: 'SIM-MATH-G9-U5-02',
+    key: 'class9-math-u5-room-area-painting-cost',
+    lesson: 5,
+    unit: 5,
+    grade: 9,
+    titleEn: 'Room Area and Painting Cost Simulator',
+    titleNp: 'कोठाको क्षेत्रफल तथा रङरोगन खर्च सिमुलेटर',
+    Component: L(() => import('./RoomAreaPaintingCostSimulator'), 'RoomAreaPaintingCostSimulator'),
+  },
+  {
+    code: 'SIM-MATH-G9-U5-03',
+    key: 'class9-math-u5-nepal-land-area-converter',
+    lesson: 5,
+    unit: 5,
+    grade: 9,
+    titleEn: 'Nepal Land Measurement and Area Converter',
+    titleNp: 'नेपाल जग्गा नाप तथा क्षेत्रफल रूपान्तरण',
+    Component: L(() => import('./NepalLandAreaConverter'), 'NepalLandAreaConverter'),
+  },
+
+  // ── UNIT 6: PRISM (प्रिज्म) ───────────────────────────────────────────────
+  {
+    code: 'SIM-MATH-G9-U6-01',
+    key: 'class9-math-u6-explore-build-prism',
+    lesson: 6,
+    unit: 6,
+    grade: 9,
+    titleEn: 'Explore and Build a Prism',
+    titleNp: 'प्रिज्मको अन्वेषण तथा निर्माण',
+    Component: L(() => import('./ExploreBuildPrism'), 'ExploreBuildPrism'),
+  },
+  {
+    code: 'SIM-MATH-G9-U6-02',
+    key: 'class9-math-u6-surface-area-laboratory',
+    lesson: 6,
+    unit: 6,
+    grade: 9,
+    titleEn: 'Lateral and Total Surface Area Laboratory',
+    titleNp: 'प्रिज्मको छड्के र कुल सतहको क्षेत्रफल प्रयोगशाला',
+    Component: L(() => import('./PrismSurfaceAreaLaboratory'), 'PrismSurfaceAreaLaboratory'),
+  },
+  {
+    code: 'SIM-MATH-G9-U6-03',
+    key: 'class9-math-u6-prism-volume-water-tank',
+    lesson: 6,
+    unit: 6,
+    grade: 9,
+    titleEn: 'Prism Volume and Water Tank Designer',
+    titleNp: 'प्रिज्मको आयतन तथा पानी ट्याङ्की डिजाइन',
+    Component: L(() => import('./PrismVolumeWaterTankDesigner'), 'PrismVolumeWaterTankDesigner'),
+  },
 ];
 
 export const findClass9Sim = (componentKey?: string, code?: string) =>
