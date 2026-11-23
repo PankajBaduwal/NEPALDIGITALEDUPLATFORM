@@ -1,4 +1,5 @@
 import React from 'react';
+import { findClass10Sim } from '../class10-math/registry';
 
 const L = (loader: () => Promise<any>, exportName?: string) =>
   React.lazy(async () => {
@@ -212,4 +213,5 @@ export const CLASS9_OPTMATH: Class9OptMathSimDef[] = [
 ];
 
 export const findClass9OptMathSim = (componentKey?: string, code?: string) =>
-  CLASS9_OPTMATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code));
+  CLASS9_OPTMATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code)) ||
+  findClass10Sim(componentKey, code);
