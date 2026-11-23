@@ -53,6 +53,42 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     titleNp: 'जनसङ्ख्या वृद्धि तथा ह्रास अन्वेषक',
     Component: L(() => import('./GrowthDepreciationExplorer'), 'GrowthDepreciationExplorer'),
   },
+
+  // ── UNIT 4: CURRENCY AND EXCHANGE RATE (मुद्रा र विनिमय दर) ───────────────
+  {
+    code: 'SIM-MATH-G10-U4-01',
+    key: 'class10-math-u4-currency-exchange-lab',
+    lesson: 1,
+    unit: 4,
+    grade: 10,
+    titleEn: 'Currency Exchange and Conversion Laboratory',
+    titleNp: 'मुद्रा विनिमय तथा रूपान्तरण प्रयोगशाला',
+    Component: L(() => import('./CurrencyExchangeLab'), 'CurrencyExchangeLab'),
+  },
+
+  // ── UNIT 5: AREA AND VOLUME (क्षेत्रफल र आयतन) ────────────────────────────
+  {
+    code: 'SIM-MATH-G10-U5-01',
+    key: 'class10-math-u5-3d-geometry-explorer',
+    lesson: 1,
+    unit: 5,
+    grade: 10,
+    titleEn: '3D Geometry: Area and Volume Explorer',
+    titleNp: '३डी ज्यामिति: क्षेत्रफल तथा आयतन अन्वेषक',
+    Component: L(() => import('./AreaVolume3DExplorer'), 'AreaVolume3DExplorer'),
+  },
+
+  // ── UNIT 6: SEQUENCE AND SERIES (अनुक्रम र श्रेणी) ─────────────────────────
+  {
+    code: 'SIM-MATH-G10-U6-01',
+    key: 'class10-math-u6-sequence-series-lab',
+    lesson: 1,
+    unit: 6,
+    grade: 10,
+    titleEn: 'Sequence and Series Pattern Laboratory',
+    titleNp: 'अनुक्रम र श्रेणी नमुना प्रयोगशाला',
+    Component: L(() => import('./SequenceSeriesLab'), 'SequenceSeriesLab'),
+  },
 ];
 
 export const findClass10Sim = (componentKey?: string, code?: string) =>
