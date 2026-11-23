@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from 'react';
+import { findClass9Sim } from '../class9-math/registry';
 
 const L = (fn: () => Promise<any>, exportName?: string) => {
   const Comp = lazy(async () => {
@@ -610,4 +611,4 @@ export const CLASS8_MATH = [
 ];
 
 export const findClass8Sim = (componentKey?: string, code?: string) =>
-  CLASS8_MATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code));
+  CLASS8_MATH.find((s) => (componentKey && s.key === componentKey) || (code && s.code === code)) || findClass9Sim(componentKey, code);
