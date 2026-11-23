@@ -125,6 +125,42 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     titleNp: 'घाताङ्कका नियमहरू अन्तरक्रियात्मक अन्वेषक',
     Component: L(() => import('./IndicesExplorer'), 'IndicesExplorer'),
   },
+
+  // ── UNIT 10: TRIANGLE AND QUADRILATERALS (त्रिभुज र चतुर्भुजहरू) ──────────
+  {
+    code: 'SIM-MATH-G10-U10-01',
+    key: 'class10-math-u10-equal-area-geometry',
+    lesson: 1,
+    unit: 10,
+    grade: 10,
+    titleEn: 'Equal-Area Geometry Explorer',
+    titleNp: 'समान क्षेत्रफल ज्यामिति अन्वेषक',
+    Component: L(() => import('./EqualAreaGeometryExplorer'), 'EqualAreaGeometryExplorer'),
+  },
+
+  // ── UNIT 11: CONSTRUCTION (रचना) ──────────────────────────────────────────
+  {
+    code: 'SIM-MATH-G10-U11-01',
+    key: 'class10-math-u11-construction-studio',
+    lesson: 1,
+    unit: 11,
+    grade: 10,
+    titleEn: 'Interactive Geometric Construction Studio',
+    titleNp: 'अन्तरक्रियात्मक ज्यामितीय रचना स्टुडियो',
+    Component: L(() => import('./GeometricConstructionStudio'), 'GeometricConstructionStudio'),
+  },
+
+  // ── UNIT 12: CIRCLE (वृत्त) ────────────────────────────────────────────────
+  {
+    code: 'SIM-MATH-G10-U12-01',
+    key: 'class10-math-u12-circle-theorems',
+    lesson: 1,
+    unit: 12,
+    grade: 10,
+    titleEn: 'Circle Theorem Explorer',
+    titleNp: 'वृत्तका साध्यहरू अन्तरक्रियात्मक अन्वेषक',
+    Component: L(() => import('./CircleTheoremExplorer'), 'CircleTheoremExplorer'),
+  },
 ];
 
 export const findClass10Sim = (componentKey?: string, code?: string) =>
