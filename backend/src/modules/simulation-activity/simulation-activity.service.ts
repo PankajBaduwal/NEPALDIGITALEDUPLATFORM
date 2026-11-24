@@ -154,7 +154,14 @@ export class SimulationActivityService {
       query.gradeLevels = filter.grade;
     }
     if (filter.subjectCode) {
-      query.subjectCode = filter.subjectCode;
+      const sc = filter.subjectCode.toUpperCase();
+      if (sc === 'MATH') {
+        query.subjectCode = { $in: ['MATH', 'MTH', /^MATH-/i] };
+      } else if (sc === 'OPTMATH') {
+        query.subjectCode = { $in: ['OPTMATH', /^OPTMATH-/i] };
+      } else {
+        query.subjectCode = filter.subjectCode;
+      }
     }
     if (filter.chapterNumber) {
       query.chapterNumber = filter.chapterNumber;
@@ -866,12 +873,12 @@ export class SimulationActivityService {
         },
         {
           code: 'SIM-MATH-G1-NUMBERLINE',
-          title: 'Number Line & Counting Frog (3D Edition)',
-          titleNepali: 'सङ्ख्या रेखा र भ्यागुताको उफ्राइ (थ्रीडी)',
+          title: 'Number Line & Counting Frog',
+          titleNepali: 'सङ्ख्या रेखा र भ्यागुताको उफ्राइ',
           description:
-            'Interactive 3D number line and garden with animated frog demonstrating counting, addition, subtraction, missing numbers, and Nepali numerals ० देखि २०.',
+            'Interactive number line and garden with animated frog demonstrating counting, addition, subtraction, missing numbers, and Nepali numerals ० देखि २०.',
           learningObjectives: [
-            'Count forward and backward on 3D number line',
+            'Count forward and backward on number line',
             'Recognize Nepali numerals and word values (० देखि २०)',
             'Perform single-digit addition and subtraction using forward and backward jumps',
             'Solve missing number challenges and complete number patterns',
@@ -881,11 +888,11 @@ export class SimulationActivityService {
           chapterNumber: 1,
           topicName: 'Numbers & Basic Operations',
           language: 'both' as const,
-          simulationType: '3D_WEBGL' as const,
+          simulationType: '2D_CANVAS' as const,
           componentKey: 'class1-math-number-line-frog',
           runtimeUrl: '/simulations/math-number-line.html',
           isPublished: true,
-          tags: ['Math', 'Primary', 'Counting', 'Number Line', '3D', 'Class 1-5'],
+          tags: ['Math', 'Primary', 'Counting', 'Number Line', '', 'Class 1-5'],
         },
         {
           code: 'SIM-BIO-G6-CELL',
@@ -920,16 +927,16 @@ export class SimulationActivityService {
     const class1MathSims = [
       {
         code: 'SIM-MATH-G1-CH1-01',
-        title: 'My 3D Position Playground – Inside, Outside, Above and Below',
+        title: 'My Position Playground – Inside, Outside, Above and Below',
         titleNepali: 'मेरो ३डी स्थिति खेलमैदान – भित्र, बाहिर, माथि र तल',
         description:
-          'Interactive 3D Nepalese village playground for learning Inside/Outside and Above/Below spatial relationships through real-time dragging, object placement, and audio-guided tasks.',
+          'Interactive Nepalese village playground for learning Inside/Outside and Above/Below spatial relationships through real-time dragging, object placement, and audio-guided tasks.',
         descriptionNepali:
           'नेपाली गाउँको सुन्दर ३डी खेलमैदानमा भित्र र बाहिर, माथि र तलका अवधारणाहरू प्रत्यक्ष अभ्यास र अन्तरक्रिया मार्फत सिक्नुहोस्।',
         learningObjectives: [
           'Identify whether an object or animal is inside or outside (भित्र र बाहिर)',
           'Identify vertical positions: above and below (माथि र तल)',
-          'Drag, place, and verify 3D objects in the village environment',
+          'Drag, place, and verify objects in the village environment',
           'Build foundational spatial vocabulary in Nepali and English',
         ],
         learningObjectivesNepali: [
@@ -948,7 +955,7 @@ export class SimulationActivityService {
         topicName: 'Inside, Outside, Above and Below',
         topicNameNepali: 'भित्र, बाहिर, माथि र तल',
         language: 'both' as const,
-        simulationType: '3D_WEBGL' as const,
+        simulationType: '2D_CANVAS' as const,
         runtimeUrl: '/simulations/class1-math-ch1-playground',
         componentKey: 'class1-math-ch1-playground',
         difficulty: 'BEGINNER' as const,
@@ -956,19 +963,19 @@ export class SimulationActivityService {
         status: 'AVAILABLE' as const,
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 1', 'Shapes and Position', '3D WebGL', 'Inside Outside', 'Above Below', 'Nepal CDC'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 1', 'Shapes and Position', 'Inside Outside', 'Above Below', 'Nepal CDC'],
       },
       {
         code: 'SIM-MATH-G1-CH1-02',
         title: 'Big and Small World',
         titleNepali: 'ठूलो र सानो संसार',
         description:
-          'Interactive 3D scale laboratory comparing volume, mass perception, and object sizes with elephants, balls, traditional clay pots, and fruit baskets.',
+          'Interactive scale laboratory comparing volume, mass perception, and object sizes with elephants, balls, traditional clay pots, and fruit baskets.',
         descriptionNepali:
           'हात्ती, बल, माटोका भाँडा र फलफूलका टोकरीहरूको आकार तुलना गरी ठूलो र सानो छुट्याउने अन्तरक्रियात्मक ३डी अभ्यास।',
         learningObjectives: [
           'Distinguish between big and small (ठूलो र सानो)',
-          'Compare overall physical scale and dimensions of 3D objects',
+          'Compare overall physical scale and dimensions of objects',
           'Sort and classify items from smallest to biggest',
         ],
         learningObjectivesNepali: [
@@ -986,7 +993,7 @@ export class SimulationActivityService {
         topicName: 'Big and Small',
         topicNameNepali: 'ठूलो र सानो',
         language: 'both' as const,
-        simulationType: '3D_WEBGL' as const,
+        simulationType: '2D_CANVAS' as const,
         runtimeUrl: '/simulations/class1-math-ch1-big-small',
         componentKey: 'class1-math-ch1-big-small',
         difficulty: 'BEGINNER' as const,
@@ -994,7 +1001,7 @@ export class SimulationActivityService {
         status: 'AVAILABLE' as const,
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 1', 'Big and Small', 'Size Comparison', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 1', 'Big and Small', 'Size Comparison'],
       },
       {
         code: 'SIM-MATH-G1-CH1-03',
@@ -1024,7 +1031,7 @@ export class SimulationActivityService {
         topicName: 'Tall and Short',
         topicNameNepali: 'अग्लो र होचो',
         language: 'both' as const,
-        simulationType: '3D_WEBGL' as const,
+        simulationType: '2D_CANVAS' as const,
         runtimeUrl: '/simulations/class1-math-ch1-tall-short',
         componentKey: 'class1-math-ch1-tall-short',
         difficulty: 'BEGINNER' as const,
@@ -1032,7 +1039,7 @@ export class SimulationActivityService {
         status: 'AVAILABLE' as const,
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 1', 'Tall and Short', 'Height', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 1', 'Tall and Short', 'Height'],
       },
       {
         code: 'SIM-MATH-G1-CH1-04',
@@ -1062,7 +1069,7 @@ export class SimulationActivityService {
         topicName: 'Long and Short',
         topicNameNepali: 'लामो र छोटो',
         language: 'both' as const,
-        simulationType: '3D_WEBGL' as const,
+        simulationType: '2D_CANVAS' as const,
         runtimeUrl: '/simulations/class1-math-ch1-long-short',
         componentKey: 'class1-math-ch1-long-short',
         difficulty: 'BEGINNER' as const,
@@ -1070,7 +1077,7 @@ export class SimulationActivityService {
         status: 'AVAILABLE' as const,
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 1', 'Long and Short', 'Length Comparison', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 1', 'Long and Short', 'Length Comparison'],
       },
       {
         code: 'SIM-MATH-G1-CH1-05',
@@ -1100,7 +1107,7 @@ export class SimulationActivityService {
         topicName: 'Direction and Distance',
         topicNameNepali: 'दिशा र दूरी',
         language: 'both' as const,
-        simulationType: '3D_WEBGL' as const,
+        simulationType: '2D_CANVAS' as const,
         runtimeUrl: '/simulations/class1-math-ch1-direction-distance',
         componentKey: 'class1-math-ch1-direction-distance',
         difficulty: 'BEGINNER' as const,
@@ -1108,7 +1115,7 @@ export class SimulationActivityService {
         status: 'AVAILABLE' as const,
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 1', 'Direction', 'Distance', 'Right Left', 'Near Far', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 1', 'Direction', 'Distance', 'Right Left', 'Near Far'],
       },
     ];
 
@@ -1138,7 +1145,7 @@ export class SimulationActivityService {
         title: 'Straight and Curved Line Explorer',
         titleNepali: 'सीधा र बाङ्गो रेखा चिनौँ',
         description:
-          'Explore straight and curved lines in a vibrant 3D village playground with roads, ropes, bridges, railway tracks, and interactive line transformations.',
+          'Explore straight and curved lines in a vibrant village playground with roads, ropes, bridges, railway tracks, and interactive line transformations.',
         descriptionNepali:
           'नेपाली गाउँको सुन्दर ३डी खेलमैदानमा सडक, डोरी, पुल, रेलको लिक र विभिन्न वस्तुहरूको सहयोगले सिधा र बाङ्गो रेखा चिन्नुहोस् र तुलना गर्नुहोस्।',
         learningObjectives: [
@@ -1163,7 +1170,7 @@ export class SimulationActivityService {
         topicName: 'Straight and Curved Lines',
         topicNameNepali: 'सिधा र बाङ्गो रेखा',
         language: 'both' as const,
-        simulationType: '3D_WEBGL' as const,
+        simulationType: '2D_CANVAS' as const,
         runtimeUrl: '/simulations/class1-math-ch2-explorer',
         componentKey: 'class1-math-ch2-explorer',
         difficulty: 'BEGINNER' as const,
@@ -1171,7 +1178,7 @@ export class SimulationActivityService {
         status: 'AVAILABLE' as const,
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 2', 'Lines', 'Straight Line', 'Curved Line', '3D WebGL', 'Nepal CDC'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 2', 'Lines', 'Straight Line', 'Curved Line', 'Nepal CDC'],
       },
       {
         code: 'SIM-MATH-G1-CH2-02',
@@ -1203,7 +1210,7 @@ export class SimulationActivityService {
         topicName: 'Colouring Lines',
         topicNameNepali: 'रेखाहरूमा रङ भर्ने',
         language: 'both' as const,
-        simulationType: '3D_WEBGL' as const,
+        simulationType: '2D_CANVAS' as const,
         runtimeUrl: '/simulations/class1-math-ch2-colouring',
         componentKey: 'class1-math-ch2-colouring',
         difficulty: 'BEGINNER' as const,
@@ -1243,7 +1250,7 @@ export class SimulationActivityService {
         topicName: 'Connect Dots',
         topicNameNepali: 'थोप्ला जोड्ने',
         language: 'both' as const,
-        simulationType: '3D_WEBGL' as const,
+        simulationType: '2D_CANVAS' as const,
         runtimeUrl: '/simulations/class1-math-ch2-dots',
         componentKey: 'class1-math-ch2-dots',
         difficulty: 'BEGINNER' as const,
@@ -1283,7 +1290,7 @@ export class SimulationActivityService {
         topicName: 'Draw with Objects',
         topicNameNepali: 'वस्तु प्रयोग गरी कोर्ने',
         language: 'both' as const,
-        simulationType: '3D_WEBGL' as const,
+        simulationType: '2D_CANVAS' as const,
         runtimeUrl: '/simulations/class1-math-ch2-objects',
         componentKey: 'class1-math-ch2-objects',
         difficulty: 'BEGINNER' as const,
@@ -1295,10 +1302,10 @@ export class SimulationActivityService {
       },
       {
         code: 'SIM-MATH-G1-CH2-05',
-        title: 'My 3D Line Drawing Playground',
+        title: 'My Line Drawing Playground',
         titleNepali: 'आफैँ रेखा कोरौँ',
         description:
-          'Freehand and guided line drawing playground in 3D village sandpit: trace templates, draw free lines, choose vibrant colours, erase, and save creations.',
+          'Freehand and guided line drawing playground in village sandpit: trace templates, draw free lines, choose vibrant colours, erase, and save creations.',
         descriptionNepali:
           '३डी खेलमैदानमा आफैँ सिधा र बाङ्गा रेखाहरू कोर्नुहोस्, टेम्प्लेट पछ्याउनुहोस्, रङहरू बदल्नुहोस् र रमाइलो कला सिर्जना गर्नुहोस्।',
         learningObjectives: [
@@ -1323,7 +1330,7 @@ export class SimulationActivityService {
         topicName: 'Free Drawing',
         topicNameNepali: 'आफैँ रेखा कोर्ने',
         language: 'both' as const,
-        simulationType: '3D_WEBGL' as const,
+        simulationType: '2D_CANVAS' as const,
         runtimeUrl: '/simulations/class1-math-ch2-drawing',
         componentKey: 'class1-math-ch2-drawing',
         difficulty: 'BEGINNER' as const,
@@ -1331,7 +1338,7 @@ export class SimulationActivityService {
         status: 'AVAILABLE' as const,
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 2', 'Free Drawing', 'Tracing', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 2', 'Free Drawing', 'Tracing'],
       },
     ];
 
@@ -1350,10 +1357,10 @@ export class SimulationActivityService {
     const class1MathCh3Sims = [
       {
         code: 'SIM-MATH-G1-CH3-01',
-        title: 'Shape Explorer 3D',
+        title: 'Shape Explorer ',
         titleNepali: 'आकारहरू चिनौँ',
         description:
-          'Explore circles (वृत्त), triangles (त्रिभुज), and quadrilaterals (चतुर्भुज) in an interactive 3D playground with real-world objects, multi-angle 3D rotation, and guided progressive challenges.',
+          'Explore circles (वृत्त), triangles (त्रिभुज), and quadrilaterals (चतुर्भुज) in an interactive playground with real-world objects, multi-angle rotation, and guided progressive challenges.',
         descriptionNepali:
           'रङ्गीचङ्गी ३डी खेलमैदानमा वृत्त, त्रिभुज र चतुर्भुज आकारहरूलाई वास्तविक वस्तुहरूको सहयोगले चिन्नुहोस्, ३डी मोडेल घुमाउनुहोस् र तुलना गर्नुहोस्।',
         learningObjectives: [
@@ -1367,7 +1374,7 @@ export class SimulationActivityService {
         subjectName: 'Mathematics',
         chapterNumber: 3,
         chapterTitle: 'Geometrical Shapes',
-        simulationType: 'THREE_JS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch3-explorer',
         runtimeUrl: '/simulations/class1-math-ch3/explorer',
         difficulty: 'BEGINNER',
@@ -1375,7 +1382,7 @@ export class SimulationActivityService {
         accessLevel: 'FREE',
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 3', 'Shapes', 'Circle', 'Triangle', 'Quadrilateral', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 3', 'Shapes', 'Circle', 'Triangle', 'Quadrilateral'],
       },
       {
         code: 'SIM-MATH-G1-CH3-02',
@@ -1438,7 +1445,7 @@ export class SimulationActivityService {
         title: 'Shape Detective',
         titleNepali: 'आकार खोजौँ',
         description:
-          'Explore 3 vibrant 3D environments (Classroom, Playground, Nepalese Village) as a Shape Detective to discover hidden circles, triangles, and quadrilaterals in everyday surroundings.',
+          'Explore 3 vibrant environments (Classroom, Playground, Nepalese Village) as a Shape Detective to discover hidden circles, triangles, and quadrilaterals in everyday surroundings.',
         descriptionNepali:
           'कक्षाकोठा, खेलमैदान र गाउँका ३ फरक वातावरणमा घुमेर लुकेका वृत्त, त्रिभुज र चतुर्भुज आकारका वस्तुहरू पत्ता लगाउने जासुसी खेल।',
         learningObjectives: [
@@ -1451,7 +1458,7 @@ export class SimulationActivityService {
         subjectName: 'Mathematics',
         chapterNumber: 3,
         chapterTitle: 'Geometrical Shapes',
-        simulationType: 'THREE_JS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch3-detective',
         runtimeUrl: '/simulations/class1-math-ch3/detective',
         difficulty: 'BEGINNER',
@@ -1466,7 +1473,7 @@ export class SimulationActivityService {
         title: 'Build with Shapes',
         titleNepali: 'आकारहरूबाट चित्र बनाऔँ',
         description:
-          'Creative 3D construction canvas where students drag, place, rotate, and combine circles, triangles, squares, and rectangles to build houses, robots, buses, flowers, and vehicles.',
+          'Creative construction canvas where students drag, place, rotate, and combine circles, triangles, squares, and rectangles to build houses, robots, buses, flowers, and vehicles.',
         descriptionNepali:
           'वृत्त, त्रिभुज, वर्ग र आयतका टुक्राहरू जोडेर घर, रोबोट, बस, फूल र गाडी जस्ता रमाइला चित्रहरू बनाउने सिर्जनात्मक खेल।',
         learningObjectives: [
@@ -1479,7 +1486,7 @@ export class SimulationActivityService {
         subjectName: 'Mathematics',
         chapterNumber: 3,
         chapterTitle: 'Geometrical Shapes',
-        simulationType: 'THREE_JS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch3-builder',
         runtimeUrl: '/simulations/class1-math-ch3/builder',
         difficulty: 'BEGINNER',
@@ -1509,7 +1516,7 @@ export class SimulationActivityService {
         title: 'Many and Few Adventure',
         titleNepali: 'धेरै र थोरै चिनौँ',
         description:
-          'Compare two groups of real-world objects in an interactive 3D village marketplace (apples, flowers, birds, balls) to identify which group has more (धेरै) or fewer (थोरै) items.',
+          'Compare two groups of real-world objects in an interactive village marketplace (apples, flowers, birds, balls) to identify which group has more (धेरै) or fewer (थोरै) items.',
         descriptionNepali:
           'नेपाली गाउँको सुन्दर बजारमा स्याउ, फूल, चरा र बलहरूका समूह तुलना गरी धेरै र थोरै छुट्याउने ३डी अन्तरक्रियात्मक खेल।',
         learningObjectives: [
@@ -1523,7 +1530,7 @@ export class SimulationActivityService {
         subjectName: 'Mathematics',
         chapterNumber: 4,
         chapterTitle: 'Numbers up to 9',
-        simulationType: 'THREE_JS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch4-many-few',
         runtimeUrl: '/simulations/class1-math-ch4/many-few',
         difficulty: 'BEGINNER',
@@ -1531,14 +1538,14 @@ export class SimulationActivityService {
         accessLevel: 'FREE',
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 4', 'Many and Few', 'धेरै र थोरै', 'Comparison', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 4', 'Many and Few', 'धेरै र थोरै', 'Comparison'],
       },
       {
         code: 'SIM-MATH-G1-CH4-02',
         title: 'Number Garden 1–9',
         titleNepali: '१ देखि ९ सम्म गनौँ',
         description:
-          'Explore and count objects from 1 to 9 in an interactive 3D garden with animated butterflies, rabbits, fish, balloons, and fruit trees, linking tactile counting to numerals.',
+          'Explore and count objects from 1 to 9 in an interactive garden with animated butterflies, rabbits, fish, balloons, and fruit trees, linking tactile counting to numerals.',
         descriptionNepali:
           'रङ्गीचङ्गी ३डी बगैँचामा पुतली, खरायो, माछा, बेलुन र फलफूलहरू छोएर १ देखि ९ सम्म क्रमैसँग गन्ने र सङ्ख्या चिन्ने रमाइलो अभ्यास।',
         learningObjectives: [
@@ -1552,7 +1559,7 @@ export class SimulationActivityService {
         subjectName: 'Mathematics',
         chapterNumber: 4,
         chapterTitle: 'Numbers up to 9',
-        simulationType: 'THREE_JS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch4-garden',
         runtimeUrl: '/simulations/class1-math-ch4/garden',
         difficulty: 'BEGINNER',
@@ -1560,7 +1567,7 @@ export class SimulationActivityService {
         accessLevel: 'FREE',
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 4', 'Counting', '1 to 9', '१ देखि ९', '3D Garden'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 4', 'Counting', '1 to 9', '१ देखि ९', 'Garden'],
       },
       {
         code: 'SIM-MATH-G1-CH4-03',
@@ -1623,7 +1630,7 @@ export class SimulationActivityService {
         title: 'Number Sequence Adventure',
         titleNepali: 'सङ्ख्या क्रम मिलाऔँ',
         description:
-          'Navigate a 3D stepping stone river pathway by ordering shuffled numbers 1–9, filling in missing numbers, and continuing increasing number sequences.',
+          'Navigate a stepping stone river pathway by ordering shuffled numbers 1–9, filling in missing numbers, and continuing increasing number sequences.',
         descriptionNepali:
           '३डी ढुङ्गे खोलाको बाटोमा १ देखि ९ सम्मका सङ्ख्याहरूलाई मिलाएर राख्ने, छुटेका सङ्ख्या भर्ने र सङ्ख्याको क्रम पूरा गर्ने साहसिक खेल।',
         learningObjectives: [
@@ -1636,7 +1643,7 @@ export class SimulationActivityService {
         subjectName: 'Mathematics',
         chapterNumber: 4,
         chapterTitle: 'Numbers up to 9',
-        simulationType: 'THREE_JS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch4-sequence',
         runtimeUrl: '/simulations/class1-math-ch4/sequence',
         difficulty: 'BEGINNER',
@@ -1644,7 +1651,7 @@ export class SimulationActivityService {
         accessLevel: 'FREE',
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 4', 'Sequence', 'Stepping Stones', 'Ordering', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 4', 'Sequence', 'Stepping Stones', 'Ordering'],
       },
     ];
 
@@ -1664,7 +1671,7 @@ export class SimulationActivityService {
         title: 'The Zero Discovery Playground',
         titleNepali: 'शून्य चिनौँ',
         description:
-          'Explore a vibrant 3D village playground to discover situations where no objects remain, understanding zero (०) as an empty group.',
+          'Explore a vibrant village playground to discover situations where no objects remain, understanding zero (०) as an empty group.',
         descriptionNepali:
           '३डी गाउँको खेलमैदान अन्वेषण गर्दै कुनै समूहमा कुनै वस्तु बाँकी नहुँदा शून्य (०) हुन्छ भनी प्रत्यक्ष अनुभव र अन्तरक्रियाबाट सिक्नुहोस्।',
         subjectCode: 'MATH',
@@ -1685,7 +1692,7 @@ export class SimulationActivityService {
           'वस्तुहरू हटाउँदै जाँदा अन्तिममा शून्य बाँकी रहने प्रक्रिया बुझ्ने',
           'वातावरणमा शून्यको अवस्था पहिचान गर्ने',
         ],
-        simulationType: 'THREE_JS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch5-playground',
         runtimeUrl: '/simulations/class1-math/ch5/playground',
         difficulty: 'BEGINNER',
@@ -1693,7 +1700,7 @@ export class SimulationActivityService {
         accessLevel: 'FREE',
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 5', 'Zero', 'Shunya', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 5', 'Zero', 'Shunya'],
       },
       {
         code: 'SIM-MATH-G1-CH5-02',
@@ -1721,7 +1728,7 @@ export class SimulationActivityService {
           'वस्तुहरू निकाल्दै जाँदा शून्य हुने अवस्था अनुभव गर्ने',
           'खाली समूहलाई सङ्ख्या ० सँग जोड्ने',
         ],
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch5-empty-basket',
         runtimeUrl: '/simulations/class1-math/ch5/empty-basket',
         difficulty: 'BEGINNER',
@@ -1757,7 +1764,7 @@ export class SimulationActivityService {
           'सबै वस्तु हटेपछि बाँकी शून्य हुन्छ भनी पुष्टि गर्ने',
           'अन्तिम सङ्ख्या शून्य (०) छान्ने',
         ],
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch5-where-did-it-go',
         runtimeUrl: '/simulations/class1-math/ch5/where-did-it-go',
         difficulty: 'BEGINNER',
@@ -1793,7 +1800,7 @@ export class SimulationActivityService {
           'कुनै पनि बासिन्दा वा वस्तु नभएको स्थान पहिचान गर्ने',
           'देवनागरी र अङ्ग्रेजी दुवै लिपिमा सङ्ख्या बुझ्ने',
         ],
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch5-count-village',
         runtimeUrl: '/simulations/class1-math/ch5/count-village',
         difficulty: 'BEGINNER',
@@ -1829,7 +1836,7 @@ export class SimulationActivityService {
           'खाली समूहहरू तुरुन्त पहिचान गर्ने',
           'उच्च अङ्क र ताराहरू प्राप्त गरी दक्षता प्रमाणित गर्ने',
         ],
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch5-zero-challenge',
         runtimeUrl: '/simulations/class1-math/ch5/zero-challenge',
         difficulty: 'BEGINNER',
@@ -1857,7 +1864,7 @@ export class SimulationActivityService {
         title: 'Ten Object Adventure',
         titleNepali: 'दश वस्तुहरू गनौँ',
         description:
-          'Explore an interactive 3D village garden to count groups of objects individually until reaching exactly ten (१० / 10).',
+          'Explore an interactive village garden to count groups of objects individually until reaching exactly ten (१० / 10).',
         descriptionNepali:
           '३डी गाउँको बगैँचामा वस्तुहरू एक–एक गरी गन्दै ठ्याक्कै दश (१०) वटा वस्तुहरूको समूह बनाउनुहोस् र गणना गर्नुहोस्।',
         subjectCode: 'MATH',
@@ -1878,7 +1885,7 @@ export class SimulationActivityService {
           'कुनै समूहमा ठ्याक्कै १० वटा वस्तु भएको पहिचान गर्ने',
           '१० भन्दा साना समूहबाट १० को समूह छुट्याउने',
         ],
-        simulationType: 'THREE_JS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch6-ten-objects',
         runtimeUrl: '/simulations/class1-math/ch6/ten-objects',
         difficulty: 'BEGINNER',
@@ -1886,7 +1893,7 @@ export class SimulationActivityService {
         accessLevel: 'FREE',
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 6', 'Ten', 'Counting', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 6', 'Ten', 'Counting'],
       },
       {
         code: 'SIM-MATH-G1-CH6-02',
@@ -1914,7 +1921,7 @@ export class SimulationActivityService {
           'नाम "दश" र "Ten" उच्चारण र पहिचान गर्ने',
           'अन्य सङ्ख्याहरूबाट १० लाई छुट्याउने',
         ],
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch6-discovery',
         runtimeUrl: '/simulations/class1-math/ch6/discovery',
         difficulty: 'BEGINNER',
@@ -1950,7 +1957,7 @@ export class SimulationActivityService {
           'दुई टोकरीमा वस्तुहरू बाँड्दै जम्मा १० हुने प्रक्रिया अनुभव गर्ने',
           'जम्मा परिमाण स्थिर रहने अवधारणा बुझ्ने',
         ],
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch6-make-ten',
         runtimeUrl: '/simulations/class1-math/ch6/make-ten',
         difficulty: 'BEGINNER',
@@ -1986,7 +1993,7 @@ export class SimulationActivityService {
           '१० वटा वस्तुलाई सङ्ख्या १० सँग जोड्न सक्ने',
           '१० वटा भएको समूह ठम्याउन सक्ने',
         ],
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch6-count-match',
         runtimeUrl: '/simulations/class1-math/ch6/count-match',
         difficulty: 'BEGINNER',
@@ -2022,7 +2029,7 @@ export class SimulationActivityService {
           'देवनागरी सङ्ख्या १० सही तरिकाले लेख्न सक्ने',
           '१० मा १ र ० दुईवटा अङ्क मिलेर बनेको हुन्छ भनी बुझ्ने',
         ],
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch6-writing',
         runtimeUrl: '/simulations/class1-math/ch6/writing',
         difficulty: 'BEGINNER',
@@ -2050,7 +2057,7 @@ export class SimulationActivityService {
         title: 'Addition Playground',
         titleNepali: 'जोड्ने खेलमैदान',
         description:
-          'Combine two groups of real-world objects in a 3D village playground, move them together into a combined basket, and discover the total.',
+          'Combine two groups of real-world objects in a village playground, move them together into a combined basket, and discover the total.',
         descriptionNepali:
           '३डी गाउँको खेलमैदानमा दुई समूहका वस्तुहरूलाई एकै ठाउँमा मिसाएर जम्मा सङ्ख्या पत्ता लगाउने र जोडको अवधारणा बुझ्ने अभ्यास।',
         subjectCode: 'MATH',
@@ -2059,7 +2066,7 @@ export class SimulationActivityService {
         chapterNumber: 7,
         chapterName: 'Addition up to 10',
         chapterNameNepali: 'योगफल १० सम्म आउने जोड',
-        simulationType: 'THREE_JS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch7-playground',
         runtimeUrl: '/simulations/class1-math/ch7/playground',
         difficulty: 'BEGINNER',
@@ -2078,7 +2085,7 @@ export class SimulationActivityService {
         ],
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 7', 'Addition', 'Playground', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 7', 'Addition', 'Playground'],
       },
       {
         code: 'SIM-MATH-G1-CH7-02',
@@ -2094,7 +2101,7 @@ export class SimulationActivityService {
         chapterNumber: 7,
         chapterName: 'Addition up to 10',
         chapterNameNepali: 'योगफल १० सम्म आउने जोड',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch7-make-total',
         runtimeUrl: '/simulations/class1-math/ch7/make-total',
         difficulty: 'BEGINNER',
@@ -2127,7 +2134,7 @@ export class SimulationActivityService {
         chapterNumber: 7,
         chapterName: 'Addition up to 10',
         chapterNameNepali: 'योगफल १० सम्म आउने जोड',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch7-number-houses',
         runtimeUrl: '/simulations/class1-math/ch7/number-houses',
         difficulty: 'BEGINNER',
@@ -2160,7 +2167,7 @@ export class SimulationActivityService {
         chapterNumber: 7,
         chapterName: 'Addition up to 10',
         chapterNameNepali: 'योगफल १० सम्म आउने जोड',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch7-count-on',
         runtimeUrl: '/simulations/class1-math/ch7/count-on',
         difficulty: 'BEGINNER',
@@ -2193,7 +2200,7 @@ export class SimulationActivityService {
         chapterNumber: 7,
         chapterName: 'Addition up to 10',
         chapterNameNepali: 'योगफल १० सम्म आउने जोड',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch7-equation-studio',
         runtimeUrl: '/simulations/class1-math/ch7/equation-studio',
         difficulty: 'BEGINNER',
@@ -2232,7 +2239,7 @@ export class SimulationActivityService {
         title: 'Subtraction Playground',
         titleNepali: 'घटाउ खेलमैदान',
         description:
-          'Teach the basic meaning of subtraction through physically removing objects from a 3D group into a removal basket and discovering the remainder.',
+          'Teach the basic meaning of subtraction through physically removing objects from a group into a removal basket and discovering the remainder.',
         descriptionNepali:
           '३डी खेलमैदानमा वस्तुहरूको समूहबाट केही वस्तु हटाएर बाँकी सङ्ख्या पत्ता लगाउने र घटाउको आधारभूत अवधारणा बुझ्ने अभ्यास।',
         subjectCode: 'MATH',
@@ -2241,7 +2248,7 @@ export class SimulationActivityService {
         chapterNumber: 8,
         chapterName: 'Subtraction up to 10',
         chapterNameNepali: '१० सम्मका सङ्ख्याहरूको घटाउ',
-        simulationType: 'THREE_JS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch8-playground',
         runtimeUrl: '/simulations/class1-math/ch8/playground',
         difficulty: 'BEGINNER',
@@ -2260,7 +2267,7 @@ export class SimulationActivityService {
         ],
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 8', 'Subtraction', 'Playground', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 8', 'Subtraction', 'Playground'],
       },
       {
         code: 'SIM-MATH-G1-CH8-02',
@@ -2276,7 +2283,7 @@ export class SimulationActivityService {
         chapterNumber: 8,
         chapterName: 'Subtraction up to 10',
         chapterNameNepali: '१० सम्मका सङ्ख्याहरूको घटाउ',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch8-basket-adventure',
         runtimeUrl: '/simulations/class1-math/ch8/basket-adventure',
         difficulty: 'BEGINNER',
@@ -2309,7 +2316,7 @@ export class SimulationActivityService {
         chapterNumber: 8,
         chapterName: 'Subtraction up to 10',
         chapterNameNepali: '१० सम्मका सङ्ख्याहरूको घटाउ',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch8-equation-studio',
         runtimeUrl: '/simulations/class1-math/ch8/equation-studio',
         difficulty: 'BEGINNER',
@@ -2342,7 +2349,7 @@ export class SimulationActivityService {
         chapterNumber: 8,
         chapterName: 'Subtraction up to 10',
         chapterNameNepali: '१० सम्मका सङ्ख्याहरूको घटाउ',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch8-difference-explorer',
         runtimeUrl: '/simulations/class1-math/ch8/difference-explorer',
         difficulty: 'BEGINNER',
@@ -2375,7 +2382,7 @@ export class SimulationActivityService {
         chapterNumber: 8,
         chapterName: 'Subtraction up to 10',
         chapterNameNepali: '१० सम्मका सङ्ख्याहरूको घटाउ',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch8-challenge-world',
         runtimeUrl: '/simulations/class1-math/ch8/challenge-world',
         difficulty: 'BEGINNER',
@@ -2412,7 +2419,7 @@ export class SimulationActivityService {
         title: 'Number Garden 11–20',
         titleNepali: '११ देखि २० सम्मको सङ्ख्या बगैँचा',
         description:
-          'Count apples, flowers, leaves, and butterflies in a 3D garden to discover and recognize quantities from 11 to 20 with dual numerals.',
+          'Count apples, flowers, leaves, and butterflies in a garden to discover and recognize quantities from 11 to 20 with dual numerals.',
         descriptionNepali:
           '३डी बगैँचामा ११ देखि २० सम्मका स्याउ, फूल, पात र पुतलीहरू गन्दै सङ्ख्या र देवनागरी अङ्कहरू पहिचान गर्ने अभ्यास।',
         subjectCode: 'MATH',
@@ -2421,7 +2428,7 @@ export class SimulationActivityService {
         chapterNumber: 9,
         chapterName: 'Numbers 11 to 20',
         chapterNameNepali: '११ देखि २० सम्मका सङ्ख्याहरू',
-        simulationType: 'THREE_JS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch9-garden',
         runtimeUrl: '/simulations/class1-math/ch9/garden',
         difficulty: 'BEGINNER',
@@ -2440,7 +2447,7 @@ export class SimulationActivityService {
         ],
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 9', 'Numbers 11-20', 'Counting', 'Garden', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 9', 'Numbers 11-20', 'Counting', 'Garden'],
       },
       {
         code: 'SIM-MATH-G1-CH9-02',
@@ -2456,7 +2463,7 @@ export class SimulationActivityService {
         chapterNumber: 9,
         chapterName: 'Numbers 11 to 20',
         chapterNameNepali: '११ देखि २० सम्मका सङ्ख्याहरू',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch9-group-ten',
         runtimeUrl: '/simulations/class1-math/ch9/group-ten',
         difficulty: 'BEGINNER',
@@ -2489,7 +2496,7 @@ export class SimulationActivityService {
         chapterNumber: 9,
         chapterName: 'Numbers 11 to 20',
         chapterNameNepali: '११ देखि २० सम्मका सङ्ख्याहरू',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch9-tens-ones',
         runtimeUrl: '/simulations/class1-math/ch9/tens-ones',
         difficulty: 'BEGINNER',
@@ -2513,7 +2520,7 @@ export class SimulationActivityService {
         title: 'Number Line Adventure',
         titleNepali: 'सङ्ख्यारेखाको साहसिक यात्रा',
         description:
-          'Navigate a 3D stepping-stone number line from 0 to 20 to master number before, after, between, and missing numbers in sequence.',
+          'Navigate a stepping-stone number line from 0 to 20 to master number before, after, between, and missing numbers in sequence.',
         descriptionNepali:
           '० देखि २० सम्मको सङ्ख्यारेखामा अगाडिको, पछाडिको र बीचको सङ्ख्या तथा खाली क्रम पत्ता लगाउने साहसिक यात्रा।',
         subjectCode: 'MATH',
@@ -2522,7 +2529,7 @@ export class SimulationActivityService {
         chapterNumber: 9,
         chapterName: 'Numbers 11 to 20',
         chapterNameNepali: '११ देखि २० सम्मका सङ्ख्याहरू',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch9-number-line',
         runtimeUrl: '/simulations/class1-math/ch9/number-line',
         difficulty: 'BEGINNER',
@@ -2557,7 +2564,7 @@ export class SimulationActivityService {
         chapterNumber: 9,
         chapterName: 'Numbers 11 to 20',
         chapterNameNepali: '११ देखि २० सम्मका सङ्ख्याहरू',
-        simulationType: 'HTML5_CANVAS',
+        simulationType: '2D_CANVAS',
         componentKey: 'class1-math-ch9-challenge-world',
         runtimeUrl: '/simulations/class1-math/ch9/challenge-world',
         difficulty: 'BEGINNER',
@@ -2899,6 +2906,7 @@ export class SimulationActivityService {
       9: [
         { code: 'SCI', name: 'Science & Technology', nameNepali: 'विज्ञान तथा प्रविधि', icon: 'Atom' },
         { code: 'MATH', name: 'Compulsory Mathematics', nameNepali: 'अनिवार्य गणित', icon: 'Calculator' },
+        { code: 'OPTMATH', name: 'Optional Mathematics', nameNepali: 'ऐच्छिक गणित', icon: 'Binary' },
         { code: 'COM', name: 'Computer Science', nameNepali: 'कम्प्युटर विज्ञान', icon: 'Binary' },
         { code: 'SOC', name: 'Social Studies', nameNepali: 'सामाजिक अध्ययन', icon: 'Globe' },
         { code: 'ENG', name: 'English', nameNepali: 'English', icon: 'Languages' },
@@ -2907,6 +2915,7 @@ export class SimulationActivityService {
       10: [
         { code: 'SCI', name: 'Science & Technology', nameNepali: 'विज्ञान तथा प्रविधि', icon: 'Atom' },
         { code: 'MATH', name: 'Compulsory Mathematics', nameNepali: 'अनिवार्य गणित', icon: 'Calculator' },
+        { code: 'OPTMATH', name: 'Optional Mathematics', nameNepali: 'ऐच्छिक गणित', icon: 'Binary' },
         { code: 'COM', name: 'Computer Science', nameNepali: 'कम्प्युटर विज्ञान', icon: 'Binary' },
         { code: 'SOC', name: 'Social Studies', nameNepali: 'सामाजिक अध्ययन', icon: 'Globe' },
         { code: 'ENG', name: 'English', nameNepali: 'English', icon: 'Languages' },
@@ -3034,11 +3043,21 @@ export class SimulationActivityService {
 
       // Build subject-level details
       const subjectsData = subjectsConfig.map((sub) => {
-        const subSims = gradeSims.filter(
-          (s: any) =>
-            (s.subjectCode || '').toUpperCase() === sub.code.toUpperCase() ||
-            (sub.code === 'MATH' && s.subjectCode === 'MTH')
-        );
+        const subSims = gradeSims.filter((s: any) => {
+          const sc = (s.subjectCode || '').toUpperCase();
+          if (sub.code === 'MATH') {
+            return (
+              sc === 'MATH' ||
+              sc === 'MTH' ||
+              sc.startsWith('MATH-') ||
+              (sc.includes('MATH') && !sc.includes('OPT'))
+            );
+          }
+          if (sub.code === 'OPTMATH') {
+            return sc === 'OPTMATH' || sc.startsWith('OPTMATH-') || sc.includes('OPTMATH');
+          }
+          return sc === sub.code.toUpperCase();
+        });
 
         // Build chapter list
         const key = `${g}_${sub.code}`;
@@ -3076,7 +3095,7 @@ export class SimulationActivityService {
               difficulty: s.difficulty || 'BEGINNER',
               estimatedMinutes: s.estimatedMinutes || 15,
               language: s.language || 'both',
-              simulationType: s.simulationType || '3D_WEBGL',
+              simulationType: s.simulationType || '2D_CANVAS',
               componentKey: s.componentKey,
               runtimeUrl: s.runtimeUrl,
               status: s.status || 'AVAILABLE',
@@ -3110,7 +3129,7 @@ export class SimulationActivityService {
     }
 
     const featuredSims = allSims
-      .filter((s: any) => s.simulationType === '3D_WEBGL' || s.code === 'SIM-MATH-G1-CH1-01')
+      .filter((s: any) => s.simulationType === '2D_CANVAS' || s.code === 'SIM-MATH-G1-CH1-01')
       .slice(0, 6)
       .map((s: any) => ({
         id: String(s._id || s.id),
