@@ -119,6 +119,27 @@ export const GRADE_10_SCIENCE_SIMULATIONS: Grade10SimulationEntry[] = [
     descriptionNepali: 'रोबर्ट बोयलको १६६० को गिनी र प्वाँखको ऐतिहासिक अन्तरक्रियात्मक प्रयोगशाला। हावा भएको नली (हावाको अवरोधले प्वाँख ढिलो खस्ने) र शुन्य नली (हावा पम्प गरी फालिएको: दुवै वस्तु समान प्रवेग a = g ले सँगै खस्ने) को प्रत्यक्ष तुलना र अध्ययन गर्नुहोस्।',
     tags: ['coin and feather', 'boyle experiment', 'vacuum tube', 'free fall', 'acceleration due to gravity', 'air resistance', 'class 10 science', 'see exam'],
   },
+  // ── CHAPTER 2: PRESSURE ──────────────────────────────────────────────
+  {
+    id: 'sim-sci-g10-ch2-01',
+    code: 'SIM-SCI-G10-CH2-01',
+    title: "Pascal's Law Master Laboratory",
+    titleNepali: 'पास्कलको नियम बृहत् अनुसन्धान प्रयोगशाला',
+    gradeLevels: [10],
+    subjectCode: 'SCI',
+    subjectName: 'Science & Technology',
+    chapterNumber: 2,
+    chapterTitle: 'Pressure',
+    chapterTitleNepali: 'चाप',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class10-sci-ch2-pascals-law',
+    runtimeUrl: '/sim/pascals-law',
+    difficulty: 'INTERMEDIATE',
+    estimatedMinutes: 25,
+    description: "Ultra-high-definition interactive simulation demonstrating Pascal's Law: multi-piston spherical flask with omnidirectional equal pressure transmission, hydraulic lift & press with vehicle lifting and work conservation, automotive hydraulic brakes with pedal and clamping pads, SEE exam formula solver, and interactive concept quiz.",
+    descriptionNepali: 'पास्कलको नियमको बृहत् अन्तरक्रियात्मक प्रयोगशाला: चार पिस्टन भएको गोलाकार भाँडोमा सबैतिर बराबर चाप प्रसारण, हाइड्रोलिक लिफ्ट र प्रेसमा बल गुणन र कार्यको संरक्षण, सवारी साधनको हाइड्रोलिक ब्रेक, SEE परीक्षाको गणितीय समस्या समाधान र अन्तरक्रियात्मक प्रश्नोत्तरी।',
+    tags: ['pressure', "pascal's law", 'hydraulic lift', 'hydraulic press', 'hydraulic brakes', 'force multiplier', 'piston', 'see exam', 'class 10 science'],
+  },
   // ── CHAPTER 5: LIGHT ─────────────────────────────────────────────────
   {
     id: 'sim-sci-g10-ch5-01',

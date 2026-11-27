@@ -31,6 +31,7 @@ const ExploreComputerSim = lazy(() => import('./simulations/class4-science/ch2-i
 const UniversalGravitationSim = lazy(() => import('./simulations/class10-science/ch1-force/UniversalGravitationSim'));
 const TidesGravitationSim = lazy(() => import('./simulations/class10-science/ch1-force/TidesGravitationSim'));
 const CoinAndFeatherSim = lazy(() => import('./simulations/class10-science/ch1-force/CoinAndFeatherSim'));
+const PascalsLawSim = lazy(() => import('./simulations/class10-science/ch2-pressure/PascalsLawSim').then((m) => ({ default: m.PascalsLawSim })));
 const PhenomenaOfLightSim = lazy(() => import('./simulations/class10-science/ch5-light/PhenomenaOfLightSim'));
 const PollutionLabSim = lazy(() => import('./simulations/class4-science/ch3-organisms-environment/PollutionLabSim'));
 const LivingEnvironmentSim = lazy(() => import('./simulations/class4-science/ch3-organisms-environment/LivingEnvironmentSim'));
@@ -86,6 +87,7 @@ export const App: React.FC = () => {
           <Route path="/sim/universal-gravitation" element={<UniversalGravitationSim onBackToLibrary={() => window.history.back()} />} />
           <Route path="/sim/ocean-tides" element={<TidesGravitationSim onBackToLibrary={() => window.history.back()} />} />
           <Route path="/sim/coin-and-feather" element={<CoinAndFeatherSim onBackToLibrary={() => window.history.back()} />} />
+          <Route path="/sim/pascals-law" element={<PascalsLawSim onBackToLibrary={() => window.history.back()} />} />
           <Route path="/sim/phenomena-of-light" element={<PhenomenaOfLightSim onBackToLibrary={() => window.history.back()} />} />
           <Route path="/sim/pollution-lab" element={<PollutionLabSim onBackToLibrary={() => window.history.back()} />} />
           <Route path="/sim/living-environment" element={<LivingEnvironmentSim onBackToLibrary={() => window.history.back()} />} />

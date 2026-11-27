@@ -183,6 +183,8 @@ import {
 import { UniversalGravitationSim } from '../../simulations/class10-science/ch1-force/UniversalGravitationSim';
 import { TidesGravitationSim } from '../../simulations/class10-science/ch1-force/TidesGravitationSim';
 import { CoinAndFeatherSim } from '../../simulations/class10-science/ch1-force/CoinAndFeatherSim';
+import { PascalsLawSim } from '../../simulations/class10-science/ch2-pressure/PascalsLawSim';
+import { PhenomenaOfLightSim } from '../../simulations/class10-science/ch5-light/PhenomenaOfLightSim';
 
 export interface SimulationPlayerProps {
   simulation: {
@@ -739,6 +741,18 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
     simulation.componentKey === 'coin-and-feather'
   ) {
     return <CoinAndFeatherSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (
+    simulation.componentKey === 'class10-sci-ch2-pascals-law' ||
+    simulation.componentKey === 'pascals-law'
+  ) {
+    return <PascalsLawSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (
+    simulation.componentKey === 'class10-sci-ch5-phenomena-of-light' ||
+    simulation.componentKey === 'phenomena-of-light'
+  ) {
+    return <PhenomenaOfLightSim onBackToLibrary={onClose} userRole={userRole} />;
   }
 
   // Fallback to iframe player for HTML simulations
