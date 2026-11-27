@@ -26,7 +26,7 @@ function mediumFor(grade: number, stream: string, sectionName: string) {
 }
 
 export async function setupDhambojhi(log: (s: string) => void = console.log) {
-  const inst: any = await Institution.findOne({ name: SCHOOL });
+  const inst: any = await Institution.findOne({ $or: [{ name: /Dhambojhi/i }, { emisCode: '570010001' }] });
   if (!inst) throw new Error(`${SCHOOL} not found`);
   const institutionId = String(inst._id);
   const principal: any = await User.findOne({ institutionId, role: 'PRINCIPAL', status: 'ACTIVE' });

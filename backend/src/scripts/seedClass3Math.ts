@@ -1,5 +1,5 @@
 /**
- * Registers the Class 3 Mathematics simulations (3D, one to two per lesson of "My Mathematics, Grade 3").
+ * Registers the Class 3 Mathematics simulations (2D, one to two per lesson of "My Mathematics, Grade 3").
  * Code: frontend/src/simulations/class3-math/. Safe to run again: it updates by `code`.
  *   npm run seed:class3-math
  */
@@ -15,7 +15,7 @@ const SimulationSchema = new mongoose.Schema(
     code: { type: String, required: true, unique: true }, title: { type: String, required: true }, titleNepali: String,
     description: { type: String, required: true }, descriptionNepali: String, subjectCode: { type: String, required: true }, subjectName: { type: String, required: true },
     gradeLevels: [{ type: Number, required: true }], chapterNumber: Number, chapterName: String, chapterNameNepali: String,
-    simulationType: { type: String, enum: ['THREE_JS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'], default: 'REACT_CANVAS' },
+    simulationType: { type: String, enum: ['HTML5_CANVAS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'], default: 'REACT_CANVAS' },
     componentKey: String, runtimeUrl: String, difficulty: { type: String, enum: ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'], default: 'BEGINNER' },
     estimatedDurationMinutes: { type: Number, default: 15 }, learningObjectives: [String], learningObjectivesNepali: [String],
     isPublished: { type: Boolean, default: true }, currentVersion: { type: String, default: '1.0.0' }, tags: [String],
@@ -33,7 +33,7 @@ const LESSONS: Record<number, [string, string]> = {
 // code, key, lesson, title, titleNp, description, descriptionNp, objectives, objectivesNp, tags
 type S = [string, string, number, string, string, string, string, string[], string[], string[]];
 const SIMS: S[] = [
-  ['SIM-MATH-G3-L1-01', 'class3-math-l1-minute-clock', 1, 'Minute Clock', 'मिनेट घडी', 'Read any time on a big 3D clock: o\'clock, half past, quarter past, quarter to and every minute; one full turn of the long hand is 60 minutes.', 'ठूलो ३डी घडीमा कुनै पनि समय पढ्ने: ठीक बज्ने, साढे, सवा, पौने र हरेक मिनेट।', ['Read time to the minute', 'Hour hand and minute hand'], ['मिनेटसम्म समय पढ्ने', 'घण्टा र मिनेटको सुई'], ['Clock', 'Time']],
+  ['SIM-MATH-G3-L1-01', 'class3-math-l1-minute-clock', 1, 'Minute Clock', 'मिनेट घडी', 'Read any time on a big clock: o\'clock, half past, quarter past, quarter to and every minute; one full turn of the long hand is 60 minutes.', 'ठूलो ३डी घडीमा कुनै पनि समय पढ्ने: ठीक बज्ने, साढे, सवा, पौने र हरेक मिनेट।', ['Read time to the minute', 'Hour hand and minute hand'], ['मिनेटसम्म समय पढ्ने', 'घण्टा र मिनेटको सुई'], ['Clock', 'Time']],
   ['SIM-MATH-G3-L2-01', 'class3-math-l2-five-digit', 2, 'Five-Digit Towers', 'पाँच अङ्कका टावर', 'Five columns of cubes (ten-thousands to ones): build, read and write numbers up to 99,999 and find place values.', 'पाँच स्तम्भका घनले ९९,९९९ सम्मका सङ्ख्या बनाउने, पढ्ने, लेख्ने र स्थानीय मान पत्ता लगाउने।', ['Read and write five-digit numbers', 'Place value and face value'], ['पाँच अङ्कका सङ्ख्या पढ्ने र लेख्ने', 'स्थानीय मान'], ['Place value']],
   ['SIM-MATH-G3-L3-01', 'class3-math-l3-digit-duel', 3, 'Digit Duel', 'अङ्कको द्वन्द्व', 'Two five-digit numbers stand in rows of cards; compare place by place from the left and choose >, < or =.', 'दुई पाँच अङ्कका सङ्ख्या कार्डमा राखेर बायाँबाट स्थानअनुसार तुलना गर्ने।', ['Compare five-digit numbers', 'Use >, < and ='], ['पाँच अङ्कका सङ्ख्या तुलना गर्ने', '>, < र = प्रयोग गर्ने'], ['Comparison']],
   ['SIM-MATH-G3-L4-01', 'class3-math-l4-pattern-train', 4, 'Pattern Train', 'ढाँचा रेल', 'A train of numbered wagons follows a rule (add or subtract the same number); find the missing wagon.', 'सङ्ख्या लेखिएका डिब्बाको रेल एउटै नियम पछ्याउँछ; हराएको डिब्बा पत्ता लगाउने।', ['Find the rule of a number pattern', 'Complete a pattern'], ['सङ्ख्या ढाँचाको नियम पत्ता लगाउने', 'ढाँचा पूरा गर्ने'], ['Patterns']],
@@ -64,9 +64,9 @@ async function main() {
     const [chEn, chNp] = LESSONS[ch];
     const doc = {
       code, title, titleNepali: titleNp, description: desc, descriptionNepali: descNp, subjectCode: 'MATH', subjectName: 'Mathematics', gradeLevels: [3],
-      chapterNumber: ch, chapterName: chEn, chapterNameNepali: chNp, simulationType: 'THREE_JS', componentKey: key, runtimeUrl: `/simulations/class3-math/l${ch}/${key}`,
+      chapterNumber: ch, chapterName: chEn, chapterNameNepali: chNp, simulationType: 'HTML5_CANVAS', componentKey: key, runtimeUrl: `/simulations/class3-math/l${ch}/${key}`,
       difficulty: 'BEGINNER', estimatedDurationMinutes: 15, learningObjectives: obj, learningObjectivesNepali: objNp, isPublished: true, currentVersion: '1.0.0',
-      tags: ['Class 3', 'Mathematics', `Lesson ${ch}`, ...tags, '3D WebGL', 'Learn · Play · Challenge'],
+      tags: ['Class 3', 'Mathematics', `Lesson ${ch}`, ...tags, 'Learn · Play · Challenge'],
     };
     await Simulation.findOneAndUpdate({ code }, { $set: doc }, { upsert: true });
     console.log(`[OK] ${code}  ${title}`);

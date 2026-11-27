@@ -40,7 +40,7 @@ export const KprietSimulationPlayer: React.FC<Props> = ({ simulationId, title, o
         type="button"
         onClick={() => launchOnSmartBoard(simulationId, title || 'Simulation')}
         aria-label="Launch on Smart Board"
-        style={{ position: 'absolute', right: 60, bottom: 12, zIndex: 2, height: 40, padding: '0 14px', borderRadius: 999, border: '1px solid rgba(255,255,255,.25)', background: 'rgba(15,76,74,.92)', color: '#fff', display: 'inline-flex', alignItems: 'center', gap: 6, fontWeight: 700, fontSize: 13, cursor: 'pointer' }}
+        style={{ position: 'absolute', right: 60, bottom: 12, zIndex: 2, height: 40, padding: '0 14px', borderRadius: 999, border: '1px solid rgba(255,255,255,.25)', background: 'rgba(15,23,42,.92)', color: '#fff', display: 'inline-flex', alignItems: 'center', gap: 6, fontWeight: 700, fontSize: 13, cursor: 'pointer' }}
       >
         <Monitor size={16} /> Launch on Smart Board
       </button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import {
   Sparkles,
   BookOpen,
@@ -22,11 +22,20 @@ import {
   ExternalLink,
   ChevronDown,
   ChevronUp,
+  RotateCcw,
+  PlusCircle,
+  BookmarkCheck,
+  Layers,
+  GraduationCap,
+  Scale,
+  CheckSquare,
+  MessageSquare,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
-import katex from 'katex';
-import 'katex/dist/katex.min.css';
 import { api } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
+import { StructuredResponseRenderer } from './StructuredResponseRenderer';
 
 export type TeacherScope =
   | 'CURRENT_PAGE'
@@ -102,29 +111,45 @@ function cleanContent(raw: string): string {
   if (!raw) return '';
   let str = raw.trim();
 
-  // If content is wrapped in raw JSON string { "answer": "..." }
-  if (str.startsWith('{') && str.includes('"answer"')) {
+  // If content is wrapped in markdown json fence
+  if (str.startsWith('```json') && str.endsWith('```')) {
+    str = str.replace(/^```json\s*/i, '').replace(/```\s*$/i, '').trim();
+  }
+
+  // Check if string contains JSON-like object with "answer" key
+  if (str.includes('"answer"')) {
     try {
       const parsed = JSON.parse(str);
-      if (parsed.answer) return parsed.answer;
+      if (parsed && typeof parsed === 'object') {
+        if (parsed.answer) return cleanContent(parsed.answer);
+        if (parsed.content) return cleanContent(parsed.content);
+      }
     } catch {
       // Regex extraction fallback
       const m = str.match(/"answer"\s*:\s*"([\s\S]*?)(?="\s*,\s*"(?:groundedness|sources|followUps|smartboardSummary)"|\s*"\s*\}|\s*\}$)/i);
       if (m && m[1]) {
-        return m[1]
+        return cleanContent(
+          m[1]
+            .replace(/\\n/g, '\n')
+            .replace(/\\r/g, '\r')
+            .replace(/\\t/g, '\t')
+            .replace(/\\"/g, '"')
+            .replace(/\\\\/g, '\\')
+        );
+      }
+      const mStart = str.match(/"answer"\s*:\s*"?([\s\S]*)/i);
+      if (mStart && mStart[1]) {
+        let extracted = mStart[1];
+        extracted = extracted
+          .replace(/",\s*"(?:groundedness|sources|followUps|smartboardSummary)"[\s\S]*$/i, '')
+          .replace(/"?\s*\}\s*$/i, '')
           .replace(/\\n/g, '\n')
           .replace(/\\r/g, '\r')
           .replace(/\\t/g, '\t')
           .replace(/\\"/g, '"')
           .replace(/\\\\/g, '\\');
+        return cleanContent(extracted.trim());
       }
-      // Strip outer JSON boilerplate
-      str = str
-        .replace(/^\s*\{\s*"answer"\s*:\s*"?/i, '')
-        .replace(/"?\s*,\s*"(?:groundedness|sources|followUps|smartboardSummary)"[\s\S]*$/i, '')
-        .replace(/"?\s*\}\s*$/i, '')
-        .replace(/\\n/g, '\n')
-        .replace(/\\"/g, '"');
     }
   }
 
@@ -134,6 +159,251 @@ function cleanContent(raw: string): string {
   }
 
   return str;
+}
+
+/** Generate smart, curriculum-aware recommended questions for the active chapter */
+function getChapterQuestions(
+  textbook: string,
+  chapterNum?: number,
+  chapterTitle?: string,
+  page?: number
+): string[] {
+  const tLower = (chapterTitle || '').toLowerCase();
+  const bookLower = (textbook || '').toLowerCase();
+
+  // 1. Grade 7 Mathematics: Lesson 1 - SET (समूह)
+  if (
+    tLower.includes('set') ||
+    tLower.includes('समूह') ||
+    tLower.includes('subset') ||
+    tLower.includes('उपसमूह') ||
+    (bookLower.includes('math') && (tLower.includes('lesson 1') || chapterNum === 1))
+  ) {
+    return [
+      `Explain difference between Finite Set and Infinite Set with textbook examples (Page ${page || 7})`,
+      'Difference between Equal Sets (A = B) and Equivalent Sets (A ~ B) with examples',
+      'Explain Null Set (∅ or { }) with two examples of impossible events from textbook',
+      'Define Universal Set (U) and Subsets with Venn diagram representation',
+      'Difference between Proper Subset (B ⊂ A) and Improper Subset (B ⊆ A)',
+      'Represent set of prime numbers less than 15 in both Listing and Set-builder methods',
+    ];
+  }
+
+  // 2. Physics: Rotational Dynamics
+  if (
+    tLower.includes('rotational') ||
+    tLower.includes('torque') ||
+    tLower.includes('inertia') ||
+    tLower.includes('gyration')
+  ) {
+    return [
+      `Explain Moment of Inertia and its physical significance with examples (Page ${page || 8})`,
+      'Derive relation between Torque and Angular Acceleration (τ = Iα)',
+      'Difference between Moment of Inertia and Radius of Gyration in 2 columns',
+      'State and prove Theorem of Parallel Axes with classroom chalkboard diagram',
+      'Calculate Rotational Kinetic Energy of a rolling solid cylinder vs sphere',
+      '3-Minute classroom formative check on Conservation of Angular Momentum',
+    ];
+  }
+
+  // 3. Physics: Recent Trends in Physics (Grade 12 Physics Ch. 25)
+  if (
+    tLower.includes('recent trend') ||
+    tLower.includes('nanotech') ||
+    tLower.includes('superconduct') ||
+    tLower.includes('seismology') ||
+    tLower.includes('medical physics')
+  ) {
+    return [
+      `Core concepts and modern classroom applications of Nanotechnology (Page ${page || 490})`,
+      'Explain Superconductivity, critical temperature, and the Meissner Effect',
+      'Working principle of Photovoltaic Solar Cells and renewable energy in Nepal',
+      'Seismology: Difference between Primary (P) and Secondary (S) earthquake waves',
+      'Medical Physics: Compare working principles of MRI, CT Scan, and Ultrasound',
+      `40-Minute lesson plan for Chapter ${chapterNum || 25}: Recent Trends in Physics`,
+    ];
+  }
+
+  // 4. Physics: Wave Motion, Sound & Optics
+  if (
+    tLower.includes('wave') ||
+    tLower.includes('optic') ||
+    tLower.includes('sound') ||
+    tLower.includes('doppler') ||
+    tLower.includes('interference') ||
+    tLower.includes('diffraction')
+  ) {
+    return [
+      `Derive Doppler effect formula when source moves towards stationary observer`,
+      `Explain Young's Double Slit Experiment conditions for constructive & destructive interference (Page ${page || 1})`,
+      'Difference between Interference and Diffraction in 2-column table',
+      'Stationary waves in open vs closed organ pipes and harmonic frequencies',
+      `Classroom demonstration and real-world Nepal analogy for ${chapterTitle || 'Wave Optics'}`,
+      `5 High-yield Bloom's questions with model answers for Chapter ${chapterNum || 1}`,
+    ];
+  }
+
+  // 5. Physics: Electricity, Magnetism & Electromagnetic Induction
+  if (
+    tLower.includes('electric') ||
+    tLower.includes('magnet') ||
+    tLower.includes('induction') ||
+    tLower.includes('potential') ||
+    tLower.includes('current') ||
+    tLower.includes('circuit')
+  ) {
+    return [
+      `State Kirchhoff's First & Second Laws with chalkboard circuit diagram (Page ${page || 1})`,
+      'Derive expression for Magnetic Field at center of circular coil (Biot-Savart Law)',
+      'Working principle and sensitivity of Moving Coil Galvanometer',
+      'State Faraday\'s laws and Lenz\'s law of Electromagnetic Induction with examples',
+      'Series LCR AC Circuit: Derive impedance, resonance frequency, and power factor',
+      `40-Minute classroom lesson plan and student activities for ${chapterTitle || 'Electromagnetism'}`,
+    ];
+  }
+
+  // 6. Physics: Modern Physics, Atoms & Nuclear
+  if (
+    tLower.includes('photoelectric') ||
+    tLower.includes('bohr') ||
+    tLower.includes('nuclear') ||
+    tLower.includes('radioactiv') ||
+    tLower.includes('semiconductor') ||
+    tLower.includes('diode')
+  ) {
+    return [
+      `Explain Einstein's Photoelectric Equation and stopping potential (Page ${page || 1})`,
+      'Postulates of Bohr\'s Atomic Model and derivation of radius of hydrogen atom',
+      'State Radioactive Decay Law and derive relation between Half-Life and Decay Constant',
+      'Forward and Reverse Biased Characteristics of p-n Junction Diode with circuit diagram',
+      'Full Wave Bridge Rectifier: Working principle and input/output waveforms',
+      `Bloom's taxonomy question bank (Knowledge, Understanding, Numerical) for ${chapterTitle || 'Modern Physics'}`,
+    ];
+  }
+
+  // 7. Physics: Mechanics, SHM & Fluid Dynamics
+  if (
+    tLower.includes('fluid') ||
+    tLower.includes('mechanic') ||
+    tLower.includes('shm') ||
+    tLower.includes('harmonic') ||
+    tLower.includes('bernoulli') ||
+    tLower.includes('surface tension')
+  ) {
+    return [
+      `State and prove Bernoulli's Theorem with fluid flow diagram (Page ${page || 1})`,
+      'Derive expression for time period of Simple Harmonic Motion of simple pendulum',
+      'Explain Surface Tension and derive excess pressure inside liquid drop and soap bubble',
+      'Stokes\' Law and derivation of Terminal Velocity of a spherical ball in viscous fluid',
+      `Real-world Nepal application (hydropower/bridges) for ${chapterTitle || 'Mechanics'}`,
+      `Chalkboard summary notes and key formulas for Chapter ${chapterNum || 1}`,
+    ];
+  }
+
+  // 8. Mathematics: Calculus (Derivatives, Integrals, Limits)
+  if (
+    tLower.includes('derivative') ||
+    tLower.includes('different') ||
+    tLower.includes('integr') ||
+    tLower.includes('calculus') ||
+    tLower.includes('limit')
+  ) {
+    return [
+      `Step-by-step worked solution for key problem on Page ${page || 1}`,
+      'First Principle Derivative: Derive derivative of trigonometric function step-by-step',
+      'Application of Derivatives: Finding Maxima and Minima with second derivative test',
+      'Integration by Parts formula and model worked example',
+      'Definite Integrals: Area enclosed between two curves with coordinate sketch',
+      `Common student misconceptions and chalkboard board plan for ${chapterTitle || 'Calculus'}`,
+    ];
+  }
+
+  // 9. Mathematics: Matrices, Vectors, Coordinate Geometry & Algebra
+  if (
+    tLower.includes('matrix') ||
+    tLower.includes('vector') ||
+    tLower.includes('determinant') ||
+    tLower.includes('geometry') ||
+    tLower.includes('conic') ||
+    tLower.includes('trigonometr') ||
+    bookLower.includes('math')
+  ) {
+    return [
+      `Step-by-step numerical solution for problem on Page ${page || 1}`,
+      'Matrix Inversion Method vs Cramer\'s Rule for solving system of linear equations',
+      'Vector Product (Cross Product) properties and physical applications',
+      'Condition for perpendicular and parallel pair of straight lines through origin',
+      'Standard equation and focal properties of Parabola / Ellipse with diagram',
+      `5 Practice problems with marking scheme for Chapter ${chapterNum || 1}`,
+    ];
+  }
+
+  // 10. Chemistry: Chemical Bonding, Periodic, States of Matter & Organic
+  if (
+    bookLower.includes('chem') ||
+    tLower.includes('reaction') ||
+    tLower.includes('bond') ||
+    tLower.includes('organic') ||
+    tLower.includes('acid') ||
+    tLower.includes('electrochem')
+  ) {
+    return [
+      `Core chemical principles and reaction mechanism on Page ${page || 1}`,
+      'VSEPR Theory: Predict geometry and bond angles of covalent molecules with diagrams',
+      'Le Chatelier\'s Principle: Effect of temperature, pressure, and concentration on equilibrium',
+      'Electrochemical Cell vs Electrolytic Cell in a 2-column comparison table',
+      'Organic Reaction Mechanism: SN1 vs SN2 nucleophilic substitution step-by-step',
+      `40-Minute lesson plan with low-cost laboratory demonstration for ${chapterTitle || 'Chemistry'}`,
+    ];
+  }
+
+  // 11. Biology: Cell, Genetics, Physiology & Ecology
+  if (
+    bookLower.includes('bio') ||
+    tLower.includes('cell') ||
+    tLower.includes('genetic') ||
+    tLower.includes('plant') ||
+    tLower.includes('animal') ||
+    tLower.includes('organism')
+  ) {
+    return [
+      `Core biological concept and anatomical diagram on Page ${page || 1}`,
+      'Mitosis vs Meiosis cell division: Differences, stages, and chromosome numbers',
+      'Mendel\'s Laws of Inheritance with monohybrid and dihybrid cross Punnett squares',
+      'Light Reaction vs Dark Reaction (Calvin Cycle) in photosynthesis',
+      'Classroom diagram: Human heart / kidney structure with chalkboard labeling guide',
+      `Bloom's taxonomy question bank for ${chapterTitle || 'Biology'} with grading rubric`,
+    ];
+  }
+
+  // 12. School Level Science (Grades 1–10)
+  if (
+    bookLower.includes('science') ||
+    tLower.includes('force') ||
+    tLower.includes('energy') ||
+    tLower.includes('light') ||
+    tLower.includes('living')
+  ) {
+    return [
+      `Explain core scientific concepts on Page ${page || 1} in simple student-friendly language`,
+      `Difference between key terms in ${chapterTitle || 'this unit'} in 2 columns`,
+      `Hands-on classroom activity using low-cost materials available in Nepal`,
+      `40-Minute structured classroom lesson plan for Chapter ${chapterNum || 1}`,
+      `Bloom's questions (Knowledge, Understanding, Application) with answer key`,
+      `Relatable Nepal real-world analogy and daily life connection for Page ${page || 1}`,
+    ];
+  }
+
+  // 13. Default / General Chapter Questions
+  const chLabel = chapterTitle ? `"${chapterTitle}"` : `Chapter ${chapterNum || 1}`;
+  return [
+    `Explain core concepts and pedagogical breakdown of Page ${page || 1}`,
+    `Difference between key concepts in ${chLabel} in a 2-column table`,
+    `40-Minute structured classroom lesson plan for ${chLabel}`,
+    `Bloom's taxonomy questions (Knowledge, Understanding, Application) with answers for ${chLabel}`,
+    `Recommended chalkboard notes and diagrams for teaching ${chLabel}`,
+    `Relatable Nepal cultural analogy and interactive student activity for Page ${page || 1}`,
+  ];
 }
 
 export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
@@ -157,13 +427,42 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
   const [language, setLanguage] = useState<'auto' | 'ne' | 'en'>('auto');
   const [loading, setLoading] = useState(false);
   const [showToClassMode, setShowToClassMode] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [panelWidth, setPanelWidth] = useState<'normal' | 'wide'>('normal');
-  const [actionsExpanded, setActionsExpanded] = useState(true);
+  const [actionsExpanded, setActionsExpanded] = useState(false);
   const [activeCategory, setActiveCategory] = useState<'core' | 'activities' | 'delivery'>('core');
 
   const scrollRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const chipsScrollRef = useRef<HTMLDivElement>(null);
   const isTeacher = Boolean(user && AUTHORIZED_TEACHER_ROLES.includes(user.role));
+
+  const showToast = useCallback((msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 3000);
+  }, []);
+
+  // Compute smart recommended chapter questions dynamically
+  const recommendedQuestions = useMemo(() => {
+    return getChapterQuestions(
+      textbookTitle,
+      currentChapter?.chapterNumber,
+      currentChapter?.title,
+      currentPage
+    );
+  }, [textbookTitle, currentChapter, currentPage]);
+
+  // Keyboard shortcut: Esc to exit full-screen mode
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isFullScreen) {
+        setIsFullScreen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isFullScreen]);
 
   // Auto-scroll on new message
   useEffect(() => {
@@ -184,21 +483,29 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
     return () => window.removeEventListener('mouseup', handleMouseUp);
   }, []);
 
+  // Horizontal scroll chips helper
+  const scrollChips = (dir: 'left' | 'right') => {
+    if (chipsScrollRef.current) {
+      const offset = dir === 'left' ? -220 : 220;
+      chipsScrollRef.current.scrollBy({ left: offset, behavior: 'smooth' });
+    }
+  };
+
   if (!isOpen) return null;
 
   if (!isTeacher) {
     return (
-      <div className="fixed inset-y-0 right-0 z-[60] w-96 bg-slate-950/95 backdrop-blur-xl border-l border-rose-900/40 text-slate-200 p-6 flex flex-col justify-center items-center shadow-2xl">
-        <div className="p-4 rounded-full bg-rose-500/20 text-rose-400 mb-4">
+      <div className="fixed inset-y-0 right-0 z-[70] w-full sm:w-[460px] bg-[#f8fafc] border-l border-slate-200 text-slate-900 p-6 flex flex-col justify-center items-center shadow-2xl">
+        <div className="p-4 rounded-full bg-rose-50 text-rose-700 mb-4 border border-rose-200">
           <EyeOff size={32} />
         </div>
-        <h3 className="text-base font-bold text-white mb-2 text-center">Teacher-Only Assistant</h3>
-        <p className="text-xs text-slate-400 text-center leading-relaxed mb-6">
-          The AI Teaching Assistant provides pedagogical guides, lesson plans, and curriculum solutions designed exclusively for teachers and school administrators.
+        <h3 className="text-base font-bold text-slate-900 mb-2 text-center">Teacher-Only Assistant</h3>
+        <p className="text-xs text-slate-600 font-medium text-center leading-relaxed mb-6">
+          The AI Teaching Assistant provides pedagogical guides, lesson plans, and curriculum solutions designed exclusively for authorized teachers and school administrators.
         </p>
         <button
           onClick={onClose}
-          className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg text-slate-300 transition"
+          className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-xs font-bold rounded-xl text-white transition shadow-sm"
         >
           Close Assistant
         </button>
@@ -267,12 +574,18 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
 
       const cleanAnswer = cleanContent(data.answer || 'Response generated.');
 
+      // Ensure follow-ups are present
+      let followUps = Array.isArray(data.followUps) && data.followUps.length > 0 ? data.followUps : [];
+      if (followUps.length === 0) {
+        followUps = recommendedQuestions.slice(0, 3);
+      }
+
       const assistantMsg: TeacherMessage = {
         id: data.messageId || `a-${Date.now()}`,
         sender: 'ASSISTANT',
         content: cleanAnswer,
         citations: data.citations || [],
-        followUps: data.followUps || [],
+        followUps,
         smartboardSummary: cleanContent(data.smartboardSummary || ''),
         task,
         scope: selectedScope,
@@ -293,145 +606,213 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
     }
   };
 
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(cleanContent(text));
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+  /** 1. Copy Entire Response */
+  const handleCopy = async (text: string, id: string) => {
+    const cleaned = cleanContent(text);
+    try {
+      if (navigator.clipboard && window.ClipboardItem) {
+        const textBlob = new Blob([cleaned], { type: 'text/plain' });
+        const htmlBlob = new Blob([`<div style="font-family: sans-serif; line-height: 1.6; color: #0f172a;">${cleaned.replace(/\n/g, '<br/>')}</div>`], { type: 'text/html' });
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            'text/plain': textBlob,
+            'text/html': htmlBlob,
+          }),
+        ]);
+      } else {
+        await navigator.clipboard.writeText(cleaned);
+      }
+      setCopiedId(id);
+      showToast('✓ Response copied to clipboard!');
+      setTimeout(() => setCopiedId(null), 2500);
+    } catch {
+      navigator.clipboard.writeText(cleaned);
+      setCopiedId(id);
+      showToast('✓ Response copied!');
+      setTimeout(() => setCopiedId(null), 2500);
+    }
   };
 
-  const handlePresentOnSmartBoard = (summaryText?: string) => {
-    if (onOpenSmartBoard) {
-      onOpenSmartBoard(currentPage);
+  /** 2. Copy Selected Text */
+  const handleCopySelectedText = () => {
+    const sel = window.getSelection()?.toString().trim();
+    if (!sel) {
+      showToast('Highlight text in the response to copy');
       return;
     }
+    navigator.clipboard.writeText(sel);
+    showToast('✓ Selected text copied!');
+  };
+
+  /** 3. Add to Smart Board Workspace */
+  const handleAddToSmartBoard = async (msg: TeacherMessage) => {
+    try {
+      const cleaned = cleanContent(msg.content);
+      const title = `${textbookTitle} · Page ${currentPage} Lesson Note`;
+
+      const existingStaged: any[] = JSON.parse(localStorage.getItem('nepal_smartboard_staged_notes') || '[]');
+      existingStaged.push({
+        id: `staged-${Date.now()}`,
+        title,
+        content: cleaned,
+        textbookId,
+        pageNumber: currentPage,
+        chapterNumber: currentChapter?.chapterNumber,
+        timestamp: new Date().toISOString(),
+      });
+      localStorage.setItem('nepal_smartboard_staged_notes', JSON.stringify(existingStaged));
+
+      await api.post('/teacher-assistant/export-smartboard', {
+        title,
+        content: cleaned,
+        pageNumber: currentPage,
+        textbookId,
+        chapterNumber: currentChapter?.chapterNumber,
+      });
+
+      showToast('✓ Added to Smart Board workspace! Staged in drawer.');
+    } catch {
+      showToast('✓ Note saved in Smart Board workspace!');
+    }
+  };
+
+  /** 4. Launch Directly to Smart Board */
+  const handleLaunchToSmartBoard = (msg: TeacherMessage) => {
+    const cleaned = cleanContent(msg.smartboardSummary || msg.content);
+    const title = `${textbookTitle} · Page ${currentPage} Presentation`;
+
+    try {
+      localStorage.setItem(
+        'nepal_smartboard_active_presentation',
+        JSON.stringify({
+          title,
+          content: cleaned,
+          pageNumber: currentPage,
+          textbookId,
+        })
+      );
+    } catch {}
+
+    if (onOpenSmartBoard) {
+      onOpenSmartBoard(currentPage);
+      showToast('🚀 Launching presentation on Smart Board…');
+      return;
+    }
+
     const token = localStorage.getItem('nepal_edu_token') || '';
     const qs = new URLSearchParams({
       pdf: pdfUrl || `/api/v1/curriculum/textbooks/${textbookId}/pdf`,
       page: String(currentPage),
       title: `${textbookTitle} · Page ${currentPage}`,
       textbookId: textbookId || '',
+      presentNote: '1',
       token,
     });
     window.open(`/smartboard/index.html?${qs.toString()}`, '_blank');
+    showToast('🚀 Smart Board opened in classroom presentation mode!');
   };
 
-  const renderFormatted = (rawContent: string) => {
-    const content = cleanContent(rawContent);
-
-    // KaTeX Math Display $$...$$
-    let processed = content.replace(/\$\$([\s\S]*?)\$\$/g, (_match, expr) => {
-      try {
-        return `<div class="katex-display my-3 overflow-x-auto py-2 px-3 rounded-xl bg-slate-950/70 border border-teal-500/30 text-center font-mono">${katex.renderToString(expr.trim(), { displayMode: true, throwOnError: false })}</div>`;
-      } catch {
-        return `<pre class="text-xs bg-slate-950 p-2 rounded">${expr}</pre>`;
-      }
-    });
-
-    // KaTeX Math Inline $...$
-    processed = processed.replace(/\$([^\$\n]+?)\$/g, (_match, expr) => {
-      try {
-        return `<span class="katex-inline px-1 py-0.5 rounded bg-slate-950/60 font-mono text-teal-300">${katex.renderToString(expr.trim(), { displayMode: false, throwOnError: false })}</span>`;
-      } catch {
-        return `<code>${expr}</code>`;
-      }
-    });
-
-    // Markdown Headers
-    processed = processed
-      .replace(/^### (.*$)/gim, '<h3 class="text-xs font-bold text-teal-300 uppercase tracking-wider mt-4 mb-1.5 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span>$1</h3>')
-      .replace(/^## (.*$)/gim, '<h2 class="text-sm font-bold text-white mt-5 mb-2 pb-1.5 border-b border-teal-500/20 flex items-center gap-2"><span class="text-teal-400">§</span>$1</h2>')
-      .replace(/^# (.*$)/gim, '<h1 class="text-base font-extrabold text-teal-200 mt-5 mb-2 pb-2 border-b border-slate-700/80">$1</h1>');
-
-    // Horizontal Rule
-    processed = processed.replace(/^---$/gim, '<hr class="my-4 border-slate-800/80" />');
-
-    // Bold text
-    processed = processed.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white bg-teal-500/10 px-1 rounded">$1</strong>');
-
-    // Italic text
-    processed = processed.replace(/\*(.*?)\*/g, '<em class="italic text-slate-300">$1</em>');
-
-    // Bullet points
-    processed = processed.replace(/^[-*] (.*$)/gim, '<li class="ml-4 list-disc text-slate-200 my-1 pl-1 leading-relaxed">$1</li>');
-
-    // Numbered lists
-    processed = processed.replace(/^\d+\. (.*$)/gim, '<li class="ml-4 list-decimal text-slate-200 my-1 pl-1 leading-relaxed font-normal">$1</li>');
-
-    // Paragraph breaks
-    processed = processed.replace(/\n\n/g, '<div class="my-2.5"></div>');
-
-    return (
-      <div
-        className="text-[12px] leading-relaxed text-slate-200 space-y-1 font-sans selection:bg-teal-500/30 selection:text-white"
-        dangerouslySetInnerHTML={{ __html: processed }}
-      />
-    );
+  /** 5. Regenerate Response */
+  const handleRegenerate = (msg: TeacherMessage) => {
+    if (msg.task) {
+      handleAsk(msg.task);
+    } else {
+      handleAsk('CUSTOM_QUESTION', msg.content);
+    }
   };
 
   return (
     <div
-      className={`fixed inset-y-0 right-0 z-[60] bg-slate-950/95 backdrop-blur-2xl border-l border-slate-800 text-slate-100 flex flex-col shadow-2xl transition-all duration-300 ${
-        panelWidth === 'wide' ? 'w-[720px]' : 'w-[460px]'
+      className={`fixed transition-all duration-300 font-sans text-slate-900 bg-[#f8fafc] ${
+        isFullScreen
+          ? 'inset-0 z-[100] w-full h-full flex flex-col'
+          : 'inset-y-0 right-0 z-[70] w-full sm:w-[500px] md:w-[560px] lg:w-[620px] max-w-full border-l border-slate-200 flex flex-col shadow-2xl'
       }`}
     >
-      {/* 1. Elevated Header */}
-      <div className="p-3 bg-gradient-to-r from-slate-900/90 via-slate-900/80 to-slate-950 border-b border-slate-800 flex items-center justify-between shadow-sm">
+      {/* Toast Notification Banner */}
+      {toastMessage && (
+        <div className="absolute top-16 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-xl border border-slate-700 flex items-center gap-2">
+          <BookmarkCheck size={15} className="text-emerald-400" />
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
+      {/* 1. Header (Clean, Professional, Fully Responsive) */}
+      <div className="bg-white px-3 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200 flex items-center justify-between shadow-2xs flex-shrink-0">
         <div className="flex items-center gap-2.5 min-w-0">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-teal-500/20 flex-shrink-0">
-            <Sparkles size={16} />
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs flex-shrink-0">
+            <GraduationCap size={18} className="sm:w-5 sm:h-5" />
           </div>
           <div className="min-w-0">
-            <div className="flex items-center gap-1.5">
-              <h2 className="text-xs font-bold text-white tracking-wide truncate">Teacher AI Assistant</h2>
-              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-teal-500/15 text-teal-300 border border-teal-500/30 flex-shrink-0">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <h2 className="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight truncate">
+                AI Teaching Assistant
+              </h2>
+              <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 flex-shrink-0">
                 शिक्षक एआई
               </span>
             </div>
-            <div className="flex items-center gap-1.5 mt-0.5 text-[10px] text-slate-400">
-              <span className="truncate max-w-[160px] text-slate-300 font-medium">{textbookTitle}</span>
+            <div className="flex items-center gap-1.5 mt-0.5 text-[11px] sm:text-xs text-slate-700 font-medium">
+              <span className="truncate max-w-[120px] sm:max-w-[180px] font-bold text-slate-900">
+                {textbookTitle}
+              </span>
               <span>•</span>
-              <span className="text-teal-400 font-semibold">Page {currentPage}</span>
+              <span className="font-bold text-emerald-800 bg-emerald-50 px-1 py-0.2 rounded border border-emerald-200">
+                Page {currentPage}
+              </span>
               {currentChapter && (
                 <>
                   <span>•</span>
-                  <span className="truncate max-w-[100px] text-slate-400">Ch. {currentChapter.chapterNumber}</span>
+                  <span className="truncate max-w-[100px] sm:max-w-[150px] text-slate-600">
+                    Ch. {currentChapter.chapterNumber}: {currentChapter.title}
+                  </span>
                 </>
               )}
             </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-1 flex-shrink-0">
-          {/* Show to Class Presentation Mode */}
+        <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
+          {/* Privacy Status Toggle (Teacher Private vs Show to Class) */}
           <button
             type="button"
             onClick={() => setShowToClassMode(!showToClassMode)}
-            className={`px-2 py-1 rounded-lg text-xs font-medium flex items-center gap-1.5 transition ${
+            className={`px-2 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition border ${
               showToClassMode
-                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm'
-                : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-slate-200'
+                ? 'bg-amber-50 text-amber-900 border-amber-300 shadow-2xs'
+                : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200'
             }`}
-            title={showToClassMode ? 'Exit Presentation Mode' : 'Show to Class Mode (Large Cards)'}
+            title={showToClassMode ? 'Classroom Display Mode Active' : 'Private Teacher Mode'}
           >
-            {showToClassMode ? <Eye size={13} /> : <EyeOff size={13} />}
-            <span className="text-[10px] font-semibold">{showToClassMode ? 'Class View' : 'Private'}</span>
+            {showToClassMode ? <Eye size={13} className="text-amber-700" /> : <EyeOff size={13} className="text-slate-500" />}
+            <span className="hidden sm:inline text-[11px] font-bold">{showToClassMode ? 'Class View' : 'Private'}</span>
           </button>
 
-          {/* Width Expand Toggle */}
+          {/* Full-Screen / Split View Toggle */}
           <button
             type="button"
-            onClick={() => setPanelWidth(panelWidth === 'wide' ? 'normal' : 'wide')}
-            className="p-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition"
-            title={panelWidth === 'wide' ? 'Standard Width' : 'Expand Sidebar'}
+            onClick={() => setIsFullScreen(!isFullScreen)}
+            className="px-2 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs transition flex items-center gap-1 border border-slate-200 shadow-2xs"
+            title={isFullScreen ? 'Restore Split View (Esc)' : 'Expand to Full Screen'}
           >
-            {panelWidth === 'wide' ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
+            {isFullScreen ? (
+              <>
+                <Minimize2 size={13} className="text-emerald-700" />
+                <span className="text-[11px] hidden sm:inline">Restore</span>
+              </>
+            ) : (
+              <>
+                <Maximize2 size={13} className="text-emerald-700" />
+                <span className="text-[11px] hidden sm:inline">Expand</span>
+              </>
+            )}
           </button>
 
-          {/* Close Panel */}
+          {/* Close Assistant */}
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg bg-slate-800/80 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 transition"
+            className="p-1.5 rounded-lg bg-white hover:bg-rose-50 text-slate-600 hover:text-rose-700 border border-slate-200 transition"
             title="Close Assistant"
           >
             <X size={15} />
@@ -439,20 +820,20 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         </div>
       </div>
 
-      {/* 2. Scope & Language Segmented Bar */}
-      <div className="px-3 py-1.5 bg-slate-900/50 border-b border-slate-800/70 flex items-center justify-between gap-1 text-[11px]">
-        <div className="flex items-center gap-1 overflow-x-auto scrollbar-none py-0.5">
-          <span className="text-[9px] uppercase font-bold text-slate-500 tracking-wider flex items-center gap-1 mr-1">
-            <Compass size={11} className="text-teal-400" /> Scope:
+      {/* 2. Scope & Language Bar */}
+      <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-slate-100/90 border-b border-slate-200 flex items-center justify-between gap-2 text-xs flex-shrink-0">
+        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">
+          <span className="text-[10px] sm:text-[11px] uppercase font-bold text-slate-600 tracking-wider flex items-center gap-1 mr-0.5">
+            <Compass size={12} className="text-emerald-700" /> Scope:
           </span>
 
           <button
             type="button"
             onClick={() => setSelectedScope('CURRENT_PAGE')}
-            className={`px-2 py-0.5 rounded-md text-[10px] font-semibold transition whitespace-nowrap ${
+            className={`px-2 py-0.8 rounded-md text-[11px] font-bold transition whitespace-nowrap border ${
               selectedScope === 'CURRENT_PAGE'
-                ? 'bg-teal-600 text-white shadow-sm'
-                : 'bg-slate-800/80 text-slate-400 hover:text-slate-200'
+                ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
+                : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
             }`}
           >
             Page {currentPage}
@@ -462,10 +843,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             <button
               type="button"
               onClick={() => setSelectedScope('CURRENT_CHAPTER')}
-              className={`px-2 py-0.5 rounded-md text-[10px] font-semibold transition whitespace-nowrap ${
+              className={`px-2 py-0.8 rounded-md text-[11px] font-bold transition whitespace-nowrap border ${
                 selectedScope === 'CURRENT_CHAPTER'
-                  ? 'bg-teal-600 text-white shadow-sm'
-                  : 'bg-slate-800/80 text-slate-400 hover:text-slate-200'
+                  ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
+                  : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
               }`}
               title={currentChapter.title}
             >
@@ -476,10 +857,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setSelectedScope('ENTIRE_BOOK')}
-            className={`px-2 py-0.5 rounded-md text-[10px] font-semibold transition whitespace-nowrap ${
+            className={`px-2 py-0.8 rounded-md text-[11px] font-bold transition whitespace-nowrap border ${
               selectedScope === 'ENTIRE_BOOK'
-                ? 'bg-teal-600 text-white shadow-sm'
-                : 'bg-slate-800/80 text-slate-400 hover:text-slate-200'
+                ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
+                : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
             }`}
           >
             Whole Book
@@ -489,10 +870,10 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
             <button
               type="button"
               onClick={() => setSelectedScope('SELECTED_TEXT')}
-              className={`px-2 py-0.5 rounded-md text-[10px] font-semibold transition whitespace-nowrap flex items-center gap-1 ${
+              className={`px-2 py-0.8 rounded-md text-[11px] font-bold transition whitespace-nowrap flex items-center gap-1 border ${
                 selectedScope === 'SELECTED_TEXT'
-                  ? 'bg-amber-600 text-white shadow-sm'
-                  : 'bg-amber-950/60 text-amber-300 border border-amber-600/40'
+                  ? 'bg-amber-600 text-white border-amber-600 shadow-xs'
+                  : 'bg-amber-50 text-amber-900 border-amber-300'
               }`}
             >
               <span>Selected Text</span>
@@ -502,7 +883,7 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                   setSelectedText('');
                   if (selectedScope === 'SELECTED_TEXT') setSelectedScope('CURRENT_PAGE');
                 }}
-                className="hover:text-rose-200 ml-0.5 text-xs font-bold"
+                className="hover:text-rose-900 text-xs font-bold ml-0.5"
                 title="Clear selection"
               >
                 ×
@@ -511,13 +892,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           )}
         </div>
 
-        {/* Language Segmented Pill */}
-        <div className="flex items-center gap-0.5 bg-slate-900 border border-slate-800 rounded-lg p-0.5 flex-shrink-0">
+        {/* Language Selector */}
+        <div className="flex items-center gap-0.5 bg-white border border-slate-200 rounded-lg p-0.5 flex-shrink-0 shadow-2xs">
           <button
             type="button"
             onClick={() => setLanguage('auto')}
-            className={`px-1.5 py-0.5 rounded text-[9px] font-semibold transition ${
-              language === 'auto' ? 'bg-teal-600 text-white' : 'text-slate-400 hover:text-slate-200'
+            className={`px-1.5 py-0.5 rounded text-[10px] font-bold transition ${
+              language === 'auto' ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
             }`}
           >
             Auto
@@ -525,8 +906,8 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setLanguage('ne')}
-            className={`px-1.5 py-0.5 rounded text-[9px] font-semibold transition ${
-              language === 'ne' ? 'bg-teal-600 text-white' : 'text-slate-400 hover:text-slate-200'
+            className={`px-1.5 py-0.5 rounded text-[10px] font-bold transition ${
+              language === 'ne' ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
             }`}
           >
             नेपाली
@@ -534,8 +915,8 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
           <button
             type="button"
             onClick={() => setLanguage('en')}
-            className={`px-1.5 py-0.5 rounded text-[9px] font-semibold transition ${
-              language === 'en' ? 'bg-teal-600 text-white' : 'text-slate-400 hover:text-slate-200'
+            className={`px-1.5 py-0.5 rounded text-[10px] font-bold transition ${
+              language === 'en' ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
             }`}
           >
             EN
@@ -543,44 +924,23 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         </div>
       </div>
 
-      {/* Selected Text Callout Bar */}
-      {selectedText && selectedScope === 'SELECTED_TEXT' && (
-        <div className="px-3 py-1 bg-amber-950/30 border-b border-amber-800/30 text-[10px] text-amber-200/90 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5 truncate">
-            <span className="font-bold text-amber-400 uppercase tracking-wider text-[9px]">Selection:</span>
-            <span className="truncate italic text-amber-100">{selectedText}</span>
-          </div>
-          <button
-            type="button"
-            onClick={() => {
-              setSelectedText('');
-              setSelectedScope('CURRENT_PAGE');
-            }}
-            className="text-amber-400 hover:text-white text-xs font-bold px-1"
-          >
-            Clear
-          </button>
-        </div>
-      )}
-
-      {/* 3. Compact & Well-Organized Pedagogical Actions Deck */}
-      <div className="bg-slate-900/40 border-b border-slate-800">
-        <div className="px-3 py-1.5 flex items-center justify-between">
-          {/* Category Tabs */}
-          <div className="flex items-center gap-1">
+      {/* 3. Pedagogical Actions Bar (Compact & Expandable) */}
+      <div className="bg-white border-b border-slate-200 flex-shrink-0 shadow-2xs">
+        <div className="px-3 sm:px-4 py-2 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 flex-wrap">
             <button
               type="button"
               onClick={() => {
                 setActiveCategory('core');
                 setActionsExpanded(true);
               }}
-              className={`px-2 py-1 rounded-md text-[10px] font-semibold transition flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'core' && actionsExpanded
-                  ? 'bg-teal-500/20 text-teal-300 border border-teal-500/30'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
+                  : 'bg-slate-100 text-slate-800 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <FileText size={11} className="text-teal-400" />
+              <BookOpen size={12} className={activeCategory === 'core' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
               <span>Core Teaching</span>
             </button>
 
@@ -590,13 +950,13 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 setActiveCategory('activities');
                 setActionsExpanded(true);
               }}
-              className={`px-2 py-1 rounded-md text-[10px] font-semibold transition flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'activities' && actionsExpanded
-                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
+                  : 'bg-slate-100 text-slate-800 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <Lightbulb size={11} className="text-emerald-400" />
+              <HelpCircle size={12} className={activeCategory === 'activities' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
               <span>Activities & Tests</span>
             </button>
 
@@ -606,228 +966,334 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                 setActiveCategory('delivery');
                 setActionsExpanded(true);
               }}
-              className={`px-2 py-1 rounded-md text-[10px] font-semibold transition flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border ${
                 activeCategory === 'delivery' && actionsExpanded
-                  ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
+                  : 'bg-slate-100 text-slate-800 border-slate-200 hover:bg-slate-200'
               }`}
             >
-              <Presentation size={11} className="text-purple-400" />
+              <Presentation size={12} className={activeCategory === 'delivery' && actionsExpanded ? 'text-white' : 'text-emerald-700'} />
               <span>Board & Delivery</span>
             </button>
           </div>
 
-          {/* Toggle Expand/Collapse */}
           <button
             type="button"
             onClick={() => setActionsExpanded(!actionsExpanded)}
-            className="p-1 rounded text-slate-400 hover:text-slate-200 transition flex items-center gap-0.5 text-[10px]"
-            title={actionsExpanded ? 'Minimize Actions' : 'Expand Actions'}
+            className="p-1 rounded-lg hover:bg-slate-100 border border-slate-200 text-slate-600 transition"
+            title={actionsExpanded ? 'Collapse pedagogical buttons' : 'Expand pedagogical buttons'}
           >
-            <span className="text-[9px] uppercase font-bold text-slate-500">
-              {actionsExpanded ? 'Collapse' : 'Actions'}
-            </span>
-            {actionsExpanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+            {actionsExpanded ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
           </button>
         </div>
 
-        {/* Action Buttons Row (Collapsible) */}
+        {/* Action Buttons Grid */}
         {actionsExpanded && (
-          <div className="px-3 pb-2.5 pt-0.5 grid grid-cols-4 gap-1.5 transition-all">
+          <div className="px-3 sm:px-4 pb-3 pt-1 border-t border-slate-100 bg-slate-50/70">
             {activeCategory === 'core' && (
-              <>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <button
                   type="button"
                   onClick={() => handleAsk('EXPLAIN_PAGE')}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-teal-500/40 hover:bg-teal-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition disabled:opacity-50 group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <FileText size={15} className="text-teal-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">Explain Page</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleAsk('SUMMARIZE_CHAPTER')}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/40 hover:bg-cyan-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition disabled:opacity-50 group"
-                >
-                  <BookOpen size={15} className="text-cyan-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">Summarize Chapter</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleAsk('LESSON_PLAN')}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 hover:bg-emerald-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition disabled:opacity-50 group"
-                >
-                  <FileCheck size={15} className="text-emerald-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">45m Lesson Plan</span>
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <FileText size={13} className="text-emerald-700" />
+                    <span>Explain Page</span>
+                  </div>
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
+                    Core concepts, teaching notes
+                  </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleAsk('TEACH_CHAPTER')}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500/40 hover:bg-blue-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition disabled:opacity-50 group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <Compass size={15} className="text-blue-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">Teach Chapter</span>
-                </button>
-              </>
-            )}
-
-            {activeCategory === 'activities' && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => handleAsk('EXAMPLES_ACTIVITIES')}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-500/40 hover:bg-amber-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition disabled:opacity-50 group"
-                >
-                  <Lightbulb size={15} className="text-amber-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">Worked Examples</span>
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <Layers size={13} className="text-emerald-700" />
+                    <span>Teach Chapter</span>
+                  </div>
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
+                    Learning goals & sequence
+                  </span>
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => handleAsk('QUESTION_BANK')}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-500/40 hover:bg-sky-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition disabled:opacity-50 group"
+                  onClick={() => handleAsk('SUMMARIZE_CHAPTER')}
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <HelpCircle size={15} className="text-sky-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">Bloom's Questions</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleAsk('QUICK_ANALOGY')}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-teal-500/40 hover:bg-teal-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition disabled:opacity-50 group"
-                >
-                  <Sparkles size={15} className="text-teal-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">Nepal Analogy</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleAsk('QUICK_CHECK')}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 hover:bg-emerald-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition disabled:opacity-50 group"
-                >
-                  <HelpCircle size={15} className="text-emerald-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">3-Question Check</span>
-                </button>
-              </>
-            )}
-
-            {activeCategory === 'delivery' && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => handleAsk('TEACHING_NOTES')}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500/40 hover:bg-indigo-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition disabled:opacity-50 group"
-                >
-                  <FileText size={15} className="text-indigo-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">Board Notes</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleAsk('PRESENTATION')}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-purple-500/40 hover:bg-purple-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition disabled:opacity-50 group"
-                >
-                  <Presentation size={15} className="text-purple-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">Slide Cards</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handlePresentOnSmartBoard()}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-teal-500/40 hover:bg-teal-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition group"
-                >
-                  <ExternalLink size={15} className="text-teal-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">Launch Board</span>
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <BookOpen size={13} className="text-emerald-700" />
+                    <span>Summarize Chapter</span>
+                  </div>
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
+                    Definitions, rules, recap
+                  </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleAsk('QUICK_SIMPLIFY')}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-rose-500/40 hover:bg-rose-950/30 text-slate-200 flex flex-col items-center gap-1 text-center transition disabled:opacity-50 group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
                 >
-                  <Flame size={15} className="text-rose-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-semibold leading-tight">Simplify</span>
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <Sparkles size={13} className="text-emerald-700" />
+                    <span>Simplify Concept</span>
+                  </div>
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
+                    Easy student-friendly terms
+                  </span>
                 </button>
-              </>
+              </div>
+            )}
+
+            {activeCategory === 'activities' && (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleAsk('LESSON_PLAN')}
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                >
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <FileCheck size={13} className="text-emerald-700" />
+                    <span>45-Min Lesson Plan</span>
+                  </div>
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
+                    Hook, timing, activities
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleAsk('EXAMPLES_ACTIVITIES')}
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                >
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <Lightbulb size={13} className="text-emerald-700" />
+                    <span>Classroom Examples</span>
+                  </div>
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
+                    Hands-on low cost tasks
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleAsk('QUESTION_BANK')}
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                >
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <HelpCircle size={13} className="text-emerald-700" />
+                    <span>Bloom's Questions</span>
+                  </div>
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
+                    Knowledge, comprehension, MCQs
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleAsk('QUICK_CHECK')}
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                >
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <CheckSquare size={13} className="text-emerald-700" />
+                    <span>3-Question Check</span>
+                  </div>
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
+                    Quick formative assessment
+                  </span>
+                </button>
+              </div>
+            )}
+
+            {activeCategory === 'delivery' && (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleAsk('TEACHING_NOTES')}
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                >
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <FileText size={13} className="text-emerald-700" />
+                    <span>Chalkboard Notes</span>
+                  </div>
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
+                    Board layout & summary
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleAsk('PRESENTATION')}
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                >
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <Presentation size={13} className="text-emerald-700" />
+                    <span>Slide Outline</span>
+                  </div>
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
+                    5-slide teaching deck
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleAsk('QUICK_ANALOGY')}
+                  className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                >
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                    <Flame size={13} className="text-emerald-700" />
+                    <span>Nepal Analogy</span>
+                  </div>
+                  <span className="text-[10px] text-slate-600 font-medium leading-tight">
+                    Cultural & daily life links
+                  </span>
+                </button>
+
+                {selectedText && (
+                  <button
+                    type="button"
+                    onClick={() => handleAsk('EXPLAIN_SELECTION')}
+                    className="p-2 sm:p-2.5 rounded-xl bg-amber-50 border border-amber-300 hover:bg-amber-100 text-left transition flex flex-col gap-0.5 shadow-2xs group"
+                  >
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900">
+                      <BookmarkCheck size={13} />
+                      <span>Explain Selection</span>
+                    </div>
+                    <span className="text-[10px] text-amber-800 leading-tight">
+                      Unpack highlighted passage
+                    </span>
+                  </button>
+                )}
+              </div>
             )}
           </div>
         )}
       </div>
 
-      {/* 4. Messages Stream Viewport */}
+      {/* 4. Messages / Response Body */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto p-3.5 space-y-4 scrollbar-thin scrollbar-thumb-slate-800"
+        className={`flex-1 overflow-y-auto p-3.5 sm:p-5 space-y-4 bg-[#f8fafc] ${
+          isFullScreen ? 'max-w-4xl mx-auto w-full' : 'w-full'
+        }`}
       >
         {messages.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center text-center p-6 text-slate-400">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-teal-500/20 to-emerald-500/10 border border-teal-500/30 text-teal-400 flex items-center justify-center mb-3 shadow-lg shadow-teal-500/10">
-              <Sparkles size={22} />
+          <div className="flex flex-col items-center justify-center p-2 text-center">
+            {/* Header / Intro Card */}
+            <div className="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs mb-2">
+              <GraduationCap size={26} />
             </div>
-            <h3 className="text-sm font-bold text-white mb-1">Teacher AI Classroom Co-Pilot</h3>
-            <p className="text-[11px] text-slate-400 max-w-[280px] leading-relaxed mb-5">
-              Grounded in the official CDC curriculum. Select an action above or ask any question for Page {currentPage}.
+            <h3 className="text-sm sm:text-base font-extrabold text-slate-900 mb-1 tracking-tight">
+              Classroom Teaching Assistant
+            </h3>
+            <p className="text-xs max-w-md leading-relaxed text-slate-600 mb-3.5">
+              Ask any pedagogical question, compare concepts in 2 columns, generate Bloom's questions, or step-by-step calculations aligned with Nepal CDC curriculum.
             </p>
 
-            <div className="text-[11px] space-y-1.5 w-full max-w-[300px]">
-              <div
+            {/* Quick 4 Starter Tiles */}
+            <div className="w-full max-w-xl grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+              <button
+                type="button"
                 onClick={() => handleAsk('EXPLAIN_PAGE')}
-                className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-teal-500/40 text-left cursor-pointer transition flex items-center justify-between text-slate-300 hover:text-white group"
+                className="p-2.5 sm:p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
               >
-                <div className="flex items-center gap-2">
-                  <FileText size={14} className="text-teal-400" />
-                  <span className="font-medium">Explain Page {currentPage}</span>
+                <div className="flex items-center justify-between mb-1">
+                  <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 group-hover:scale-105 transition-transform">
+                    <FileText size={14} />
+                  </div>
+                  <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
                 </div>
-                <ArrowRight size={12} className="text-slate-500 group-hover:text-teal-400 transition" />
-              </div>
-
-              <div
-                onClick={() => handleAsk('SUMMARIZE_CHAPTER')}
-                className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/40 text-left cursor-pointer transition flex items-center justify-between text-slate-300 hover:text-white group"
-              >
-                <div className="flex items-center gap-2">
-                  <BookOpen size={14} className="text-cyan-400" />
-                  <span className="font-medium">
-                    {currentChapter ? `Summarize Chapter ${currentChapter.chapterNumber}` : 'Summarize Current Chapter'}
-                  </span>
+                <div>
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">Explain Page {currentPage}</div>
+                  <div className="text-[10px] text-slate-500 font-medium">Core concepts & notes</div>
                 </div>
-                <ArrowRight size={12} className="text-slate-500 group-hover:text-cyan-400 transition" />
-              </div>
+              </button>
 
-              <div
+              <button
+                type="button"
                 onClick={() => handleAsk('LESSON_PLAN')}
-                className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/40 text-left cursor-pointer transition flex items-center justify-between text-slate-300 hover:text-white group"
+                className="p-2.5 sm:p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
               >
-                <div className="flex items-center gap-2">
-                  <FileCheck size={14} className="text-emerald-400" />
-                  <span className="font-medium">45-min Structured Lesson Plan</span>
+                <div className="flex items-center justify-between mb-1">
+                  <div className="p-1.5 rounded-lg bg-blue-50 text-blue-800 border border-blue-200 group-hover:scale-105 transition-transform">
+                    <FileCheck size={14} />
+                  </div>
+                  <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
                 </div>
-                <ArrowRight size={12} className="text-slate-500 group-hover:text-emerald-400 transition" />
+                <div>
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">45-Min Lesson Plan</div>
+                  <div className="text-[10px] text-slate-500 font-medium">Objectives & activities</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleAsk('CUSTOM_QUESTION', `Generate a 2-column comparison table of the key differences in concepts on Page ${currentPage}`)}
+                className="p-2.5 sm:p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <div className="p-1.5 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 group-hover:scale-105 transition-transform">
+                    <Scale size={14} />
+                  </div>
+                  <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">2-Column Table</div>
+                  <div className="text-[10px] text-slate-500 font-medium">Differences & tabular view</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleAsk('QUESTION_BANK')}
+                className="p-2.5 sm:p-3 rounded-xl bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-left transition shadow-2xs flex flex-col justify-between group"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <div className="p-1.5 rounded-lg bg-purple-50 text-purple-800 border border-purple-200 group-hover:scale-105 transition-transform">
+                    <HelpCircle size={14} />
+                  </div>
+                  <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">Bloom's Quiz</div>
+                  <div className="text-[10px] text-slate-500 font-medium">Knowledge & questions</div>
+                </div>
+              </button>
+            </div>
+
+            {/* Smart Chapter-Aware Recommended Questions Section */}
+            <div className="w-full max-w-xl text-left bg-white rounded-2xl border border-slate-200 p-3.5 sm:p-4 shadow-2xs">
+              <div className="flex items-center justify-between mb-2.5 pb-2 border-b border-slate-100">
+                <span className="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
+                  <Lightbulb size={14} className="text-amber-500" />
+                  <span>
+                    Curriculum Questions for {currentChapter ? `Ch. ${currentChapter.chapterNumber}: ${currentChapter.title}` : `Page ${currentPage}`}:
+                  </span>
+                </span>
+                <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                  Click to Ask
+                </span>
               </div>
 
-              <div
-                onClick={() => handleAsk('QUESTION_BANK')}
-                className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-sky-500/40 text-left cursor-pointer transition flex items-center justify-between text-slate-300 hover:text-white group"
-              >
-                <div className="flex items-center gap-2">
-                  <HelpCircle size={14} className="text-sky-400" />
-                  <span className="font-medium">Bloom's Taxonomy Questions</span>
-                </div>
-                <ArrowRight size={12} className="text-slate-500 group-hover:text-sky-400 transition" />
+              <div className="space-y-1.5">
+                {recommendedQuestions.map((q, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => handleAsk('CUSTOM_QUESTION', q)}
+                    className="w-full text-left p-2.5 px-3 rounded-xl bg-slate-50 hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 text-xs text-slate-900 font-medium transition flex items-center justify-between group shadow-2xs"
+                  >
+                    <span className="leading-snug pr-2 text-slate-900 group-hover:text-emerald-900">
+                      ▪ {q}
+                    </span>
+                    <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -840,72 +1306,113 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
               }`}
             >
               {msg.sender === 'USER' ? (
-                <div className="max-w-[85%] rounded-2xl rounded-tr-sm bg-gradient-to-r from-teal-600 to-teal-500 text-white px-3.5 py-2 text-xs shadow-md">
-                  <div className="font-medium whitespace-pre-wrap">{cleanContent(msg.content)}</div>
+                <div className="flex flex-col items-end w-full">
+                  <div className="flex items-center gap-1.5 mb-1 text-[11px] font-bold text-slate-600">
+                    <GraduationCap size={13} className="text-emerald-700" />
+                    <span>Teacher Question · Page {msg.pageNumber || currentPage}</span>
+                    {msg.scope && (
+                      <span className="text-[10px] bg-slate-200/90 text-slate-700 px-1.5 py-0.2 rounded font-semibold">
+                        {msg.scope.replace('_', ' ')}
+                      </span>
+                    )}
+                  </div>
+                  <div className="max-w-[90%] sm:max-w-[85%] rounded-2xl rounded-tr-xs bg-slate-900 text-white px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium shadow-xs">
+                    <div className="whitespace-pre-wrap">{cleanContent(msg.content)}</div>
+                  </div>
                 </div>
               ) : (
-                <div
-                  className={`w-full rounded-2xl rounded-tl-sm border text-slate-100 p-4 shadow-xl transition-all ${
-                    showToClassMode
-                      ? 'bg-slate-900 border-amber-500/40 text-sm'
-                      : 'bg-slate-900/80 border-slate-800/80'
-                  }`}
-                >
-                  {/* Assistant Message Header Actions */}
-                  <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-slate-800 text-[10px] text-slate-400">
-                    <span className="flex items-center gap-1.5 font-bold text-teal-300">
-                      <Sparkles size={13} className="text-teal-400" />
-                      {msg.task ? msg.task.replace(/_/g, ' ') : 'Teaching Assistant'}
+                <div className="w-full rounded-2xl bg-white border border-slate-200 p-3.5 sm:p-5 shadow-xs transition-all text-slate-900">
+                  {/* Assistant Message Header & Action Toolbar */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-slate-100 text-xs">
+                    <span className="flex items-center gap-1.5 font-extrabold text-emerald-900 text-xs">
+                      <Sparkles size={14} className="text-emerald-700" />
+                      <span>{msg.task ? msg.task.replace(/_/g, ' ') : 'AI Teaching Response'}</span>
                     </span>
-                    <div className="flex items-center gap-1">
+
+                    {/* Toolbar Actions */}
+                    <div className="flex items-center gap-1 flex-wrap">
                       <button
                         type="button"
                         onClick={() => handleCopy(msg.content, msg.id)}
-                        className="px-2 py-1 rounded-md bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1 text-[10px]"
-                        title="Copy to clipboard"
+                        className="px-2 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 transition flex items-center gap-1 text-[11px] font-semibold border border-slate-200"
+                        title="Copy complete response to clipboard"
                       >
-                        {copiedId === msg.id ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                        {copiedId === msg.id ? <Check size={12} className="text-emerald-700" /> : <Copy size={12} />}
                         <span>{copiedId === msg.id ? 'Copied' : 'Copy'}</span>
                       </button>
 
                       <button
                         type="button"
-                        onClick={() => handlePresentOnSmartBoard(msg.smartboardSummary)}
-                        className="px-2 py-1 rounded-md bg-teal-950/80 border border-teal-600/40 hover:bg-teal-900/60 text-teal-300 transition flex items-center gap-1 text-[10px]"
-                        title="Present on Smart Board"
+                        onClick={handleCopySelectedText}
+                        className="hidden sm:flex px-2 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition items-center gap-1 text-[11px] font-medium border border-slate-200"
+                        title="Copy highlighted text"
+                      >
+                        <span>Copy Selected</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => handleAddToSmartBoard(msg)}
+                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 transition flex items-center gap-1 text-[11px] font-bold border border-emerald-300"
+                        title="Add response to Smart Board workspace for review"
+                      >
+                        <PlusCircle size={12} />
+                        <span>Add to Board</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => handleLaunchToSmartBoard(msg)}
+                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition flex items-center gap-1 text-[11px] font-bold shadow-2xs"
+                        title="Present this response immediately on the classroom Smart Board"
                       >
                         <Presentation size={12} />
-                        <span>Smart Board</span>
+                        <span>Launch Board</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => handleRegenerate(msg)}
+                        className="p-1 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition"
+                        title="Regenerate response"
+                      >
+                        <RotateCcw size={13} />
                       </button>
                     </div>
                   </div>
 
-                  {/* Render Parsed Markdown Body */}
-                  {renderFormatted(msg.content)}
+                  {/* Render Structured Response with Tables, Columns, and KaTeX */}
+                  <StructuredResponseRenderer
+                    content={msg.content}
+                    showToClass={showToClassMode}
+                    onJumpToPage={onJumpToPage}
+                  />
 
                   {/* Smart Board Presentation Highlight Card if present */}
                   {msg.smartboardSummary && (
-                    <div className="mt-4 p-3 rounded-xl bg-gradient-to-r from-teal-950/60 to-slate-900 border border-teal-500/30 text-teal-200 text-xs flex items-center justify-between gap-3 shadow-md">
+                    <div className="mt-4 p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 text-slate-900 text-xs flex items-center justify-between gap-3 shadow-2xs">
                       <div>
-                        <span className="text-[9px] font-bold text-teal-400 uppercase tracking-wider block mb-0.5">
-                          🖥️ Smart Board Highlight
+                        <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider block mb-0.5">
+                          🖥️ Chalkboard Summary
                         </span>
-                        <p className="text-[11px] leading-snug text-teal-100">{cleanContent(msg.smartboardSummary)}</p>
+                        <p className="text-[12px] leading-snug text-slate-800 font-medium">
+                          {cleanContent(msg.smartboardSummary)}
+                        </p>
                       </div>
                       <button
                         type="button"
-                        onClick={() => handlePresentOnSmartBoard(msg.smartboardSummary)}
-                        className="px-2.5 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-[10px] font-bold flex-shrink-0 flex items-center gap-1 shadow transition"
+                        onClick={() => handleLaunchToSmartBoard(msg)}
+                        className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex-shrink-0 flex items-center gap-1 shadow-2xs transition"
                       >
-                        <ExternalLink size={12} /> Project
+                        <ExternalLink size={12} /> Launch
                       </button>
                     </div>
                   )}
 
                   {/* Clickable Citations with Exact PDF Navigation */}
                   {msg.citations && msg.citations.length > 0 && (
-                    <div className="mt-4 pt-2.5 border-t border-slate-800">
-                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
+                    <div className="mt-3.5 pt-2.5 border-t border-slate-100">
+                      <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider block mb-1.5">
                         Textbook Sources (Click to jump):
                       </span>
                       <div className="flex flex-wrap gap-1.5">
@@ -914,16 +1421,16 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                             key={idx}
                             type="button"
                             onClick={() => onJumpToPage(c.pageNumber)}
-                            className="px-2.5 py-1 rounded-lg bg-slate-950/80 hover:bg-teal-950/80 border border-slate-800 hover:border-teal-500/50 text-[10px] text-teal-300 font-medium flex items-center gap-1.5 transition group"
+                            className="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 text-xs text-emerald-900 font-semibold flex items-center gap-1.5 transition shadow-2xs group"
                             title={c.excerpt}
                           >
-                            <FileText size={11} className="text-teal-400 group-hover:scale-110 transition-transform" />
+                            <FileText size={12} className="text-emerald-700 group-hover:scale-110 transition-transform" />
                             <span>
                               Page {c.pageNumber}
                               {c.pageEnd && c.pageEnd !== c.pageNumber ? `–${c.pageEnd}` : ''}
                             </span>
                             {c.chapterTitle && (
-                              <span className="text-slate-400 text-[9px] max-w-[90px] truncate">
+                              <span className="text-slate-500 text-[10px] max-w-[110px] truncate font-normal">
                                 · {c.chapterTitle}
                               </span>
                             )}
@@ -933,22 +1440,23 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
                     </div>
                   )}
 
-                  {/* Follow-up Prompts */}
+                  {/* Chapter-Aware Follow-up Prompts */}
                   {msg.followUps && msg.followUps.length > 0 && (
-                    <div className="mt-3.5 pt-2.5 border-t border-slate-800/60">
-                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                        Suggested Next Steps:
+                    <div className="mt-3.5 pt-2.5 border-t border-slate-100">
+                      <span className="text-[11px] font-extrabold text-slate-800 flex items-center gap-1 mb-2">
+                        <Lightbulb size={13} className="text-amber-500" />
+                        <span>Recommended Next Questions for {currentChapter ? `Ch. ${currentChapter.chapterNumber}` : 'this Topic'}:</span>
                       </span>
-                      <div className="space-y-1">
+                      <div className="space-y-1.5">
                         {msg.followUps.map((f, i) => (
                           <button
                             key={i}
                             type="button"
                             onClick={() => handleAsk('CUSTOM_QUESTION', f)}
-                            className="w-full text-left p-1.5 px-2.5 rounded-lg bg-slate-950/60 hover:bg-slate-800 text-[11px] text-slate-300 hover:text-white transition flex items-center justify-between group border border-slate-800/40"
+                            className="w-full text-left p-2 px-3 rounded-xl bg-slate-50 hover:bg-emerald-50/70 text-xs text-slate-900 font-medium transition flex items-center justify-between group border border-slate-200 hover:border-emerald-300"
                           >
-                            <span className="truncate">▪ {f}</span>
-                            <ArrowRight size={11} className="text-slate-500 group-hover:text-teal-400 ml-1.5 flex-shrink-0 transition" />
+                            <span className="truncate pr-2">▪ {f}</span>
+                            <ArrowRight size={12} className="text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 ml-2 flex-shrink-0 transition-transform" />
                           </button>
                         ))}
                       </div>
@@ -961,43 +1469,110 @@ export const TeacherAIPanel: React.FC<TeacherAIPanelProps> = ({
         )}
 
         {loading && (
-          <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-slate-900 border border-slate-800 text-slate-400 text-xs shadow-lg">
-            <Loader2 className="animate-spin text-teal-400" size={16} />
-            <span className="text-slate-300">Consulting official CDC textbook & generating pedagogical guidance…</span>
+          <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 text-xs shadow-2xs">
+            <Loader2 className="animate-spin text-emerald-700" size={17} />
+            <span className="font-semibold text-slate-800">
+              Consulting CDC textbook & generating pedagogical guidance…
+            </span>
           </div>
         )}
       </div>
 
-      {/* 5. Safe Chat Input Box */}
-      <div className="p-3 bg-slate-950 border-t border-slate-800/80 shadow-2xl relative z-10">
+      {/* 5. Persistent Recommended Questions Carousel (ALWAYS VISIBLE ABOVE INPUT) */}
+      <div className="bg-slate-50/90 border-t border-slate-200 px-3 py-1.5 flex-shrink-0">
+        <div className="flex items-center justify-between gap-1 mb-1">
+          <div className="flex items-center gap-1 text-[11px] font-extrabold text-slate-800 truncate">
+            <Sparkles size={12} className="text-amber-500 flex-shrink-0" />
+            <span className="truncate">
+              {currentChapter ? `Questions for Ch. ${currentChapter.chapterNumber}: ${currentChapter.title}` : `Recommended Questions (Page ${currentPage})`}
+            </span>
+          </div>
+          <div className="flex items-center gap-1 flex-shrink-0">
+            <button
+              type="button"
+              onClick={() => scrollChips('left')}
+              className="p-0.5 rounded hover:bg-slate-200 text-slate-600 transition"
+              title="Scroll left"
+            >
+              <ChevronLeft size={14} />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollChips('right')}
+              className="p-0.5 rounded hover:bg-slate-200 text-slate-600 transition"
+              title="Scroll right"
+            >
+              <ChevronRight size={14} />
+            </button>
+          </div>
+        </div>
+
+        {/* Scrollable Questions Row */}
+        <div
+          ref={chipsScrollRef}
+          className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5"
+        >
+          {recommendedQuestions.map((q, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => handleAsk('CUSTOM_QUESTION', q)}
+              className="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 text-slate-800 hover:text-emerald-950 font-medium text-[11px] border border-slate-200 hover:border-emerald-300 transition shadow-2xs flex items-center gap-1 flex-shrink-0 group"
+              title={q}
+            >
+              <span className="truncate max-w-[280px] sm:max-w-[340px]">{q}</span>
+              <ArrowRight size={11} className="text-slate-400 group-hover:text-emerald-700 flex-shrink-0" />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* 6. Input Area */}
+      <div className="bg-white p-2.5 sm:p-3 border-t border-slate-200 shadow-sm flex-shrink-0">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handleAsk('CUSTOM_QUESTION');
           }}
-          className="flex items-center gap-2"
+          className={`${isFullScreen ? 'max-w-4xl mx-auto' : 'w-full'}`}
         >
-          <input
-            type="text"
-            value={inputQuery}
-            onChange={(e) => setInputQuery(e.target.value)}
-            placeholder={`Ask about Page ${currentPage} or teaching instructions…`}
-            disabled={loading}
-            className="flex-1 px-3.5 py-2.5 bg-slate-900 border border-slate-700/80 focus:border-teal-500 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none transition shadow-inner"
-          />
-          <button
-            type="submit"
-            disabled={loading || !inputQuery.trim()}
-            className="p-2.5 rounded-xl bg-gradient-to-tr from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-400 disabled:opacity-40 text-white font-medium transition shadow-md shadow-teal-600/30 flex-shrink-0"
-            title="Send query"
-          >
-            <Send size={15} />
-          </button>
+          <div className="flex items-end gap-2">
+            <div className="flex-1 bg-slate-50/90 border border-slate-200 focus-within:border-emerald-600 focus-within:bg-white rounded-xl p-2 transition shadow-inner">
+              <textarea
+                ref={textareaRef}
+                rows={2}
+                value={inputQuery}
+                onChange={(e) => setInputQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (inputQuery.trim() && !loading) {
+                      handleAsk('CUSTOM_QUESTION');
+                    }
+                  }
+                }}
+                placeholder={`Ask about Page ${currentPage}, compare concepts, or request lesson plans…`}
+                disabled={loading}
+                className="w-full bg-transparent resize-none text-xs sm:text-sm text-slate-900 placeholder:text-slate-500 font-medium focus:outline-none leading-relaxed"
+              />
+              <div className="flex items-center justify-between pt-1 border-t border-slate-200/60 text-[10px] text-slate-600 font-medium">
+                <span>
+                  Scope: <strong className="text-slate-900 bg-slate-200/70 px-1 py-0.2 rounded">{selectedScope.replace('_', ' ')}</strong> · Lang: <strong className="text-slate-900 bg-slate-200/70 px-1 py-0.2 rounded">{language.toUpperCase()}</strong>
+                </span>
+                <span className="text-slate-500 hidden sm:inline">Enter ↵ to send · Shift+Enter new line</span>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading || !inputQuery.trim()}
+              className="p-2.5 sm:p-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-40 text-white font-bold transition shadow-xs flex items-center justify-center flex-shrink-0"
+              title="Send question"
+            >
+              <Send size={15} />
+            </button>
+          </div>
         </form>
-        <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500 px-0.5">
-          <span>Teacher-Only AI Assistant · Nepal CDC Curriculum</span>
-          <span>Supports LaTeX Math $...$</span>
-        </div>
       </div>
     </div>
   );

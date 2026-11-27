@@ -21,7 +21,7 @@ const SimulationSchema = new mongoose.Schema(
     chapterNameNepali: { type: String },
     simulationType: {
       type: String,
-      enum: ['THREE_JS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'],
+      enum: ['HTML5_CANVAS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'],
       default: 'REACT_CANVAS',
     },
     componentKey: { type: String },
@@ -54,7 +54,7 @@ async function seedCh9() {
         title: 'Number Garden 11–20',
         titleNepali: '११ देखि २० सम्मको सङ्ख्या बगैँचा',
         description:
-          'Count apples, flowers, leaves, and butterflies in a 3D garden to discover and recognize quantities from 11 to 20 with dual numerals.',
+          'Count apples, flowers, leaves, and butterflies in a garden to discover and recognize quantities from 11 to 20 with dual numerals.',
         descriptionNepali:
           '३डी बगैँचामा ११ देखि २० सम्मका स्याउ, फूल, पात र पुतलीहरू गन्दै सङ्ख्या र देवनागरी अङ्कहरू पहिचान गर्ने अभ्यास।',
         subjectCode: 'MATH',
@@ -63,7 +63,7 @@ async function seedCh9() {
         chapterNumber: 9,
         chapterName: 'Numbers 11 to 20',
         chapterNameNepali: '११ देखि २० सम्मका सङ्ख्याहरू',
-        simulationType: 'THREE_JS',
+        simulationType: 'HTML5_CANVAS',
         componentKey: 'class1-math-ch9-garden',
         runtimeUrl: '/simulations/class1-math/ch9/garden',
         difficulty: 'BEGINNER',
@@ -82,7 +82,7 @@ async function seedCh9() {
         ],
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 9', 'Numbers 11-20', 'Counting', 'Garden', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 9', 'Numbers 11-20', 'Counting', 'Garden'],
       },
       {
         code: 'SIM-MATH-G1-CH9-02',
@@ -155,7 +155,7 @@ async function seedCh9() {
         title: 'Number Line Adventure',
         titleNepali: 'सङ्ख्यारेखाको साहसिक यात्रा',
         description:
-          'Navigate a 3D stepping-stone number line from 0 to 20 to master number before, after, between, and missing numbers in sequence.',
+          'Navigate a stepping-stone number line from 0 to 20 to master number before, after, between, and missing numbers in sequence.',
         descriptionNepali:
           '० देखि २० सम्मको सङ्ख्यारेखामा अगाडिको, पछाडिको र बीचको सङ्ख्या तथा खाली क्रम पत्ता लगाउने साहसिक यात्रा।',
         subjectCode: 'MATH',

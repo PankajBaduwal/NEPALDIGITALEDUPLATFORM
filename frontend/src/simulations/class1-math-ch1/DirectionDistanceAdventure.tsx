@@ -102,22 +102,22 @@ export const DirectionDistanceAdventure: React.FC<DirectionDistanceAdventureProp
   };
 
   return (
-    <div style={{ width: '100%', minHeight: '88vh', background: 'linear-gradient(135deg, #0f172a 0%, #334155 100%)', borderRadius: '16px', color: '#ffffff', padding: '20px', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ width: '100%', minHeight: '88vh', background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)', borderRadius: '16px', color: '#26332E', padding: '20px', display: 'flex', flexDirection: 'column' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <button onClick={onBackToLibrary} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.2)', border: 'none', color: '#ffffff', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>
+        <button onClick={onBackToLibrary} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FFFFFF', border: 'none', color: '#26332E', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>
           <ArrowLeft size={16} /> {lang === 'ne' ? 'लाइब्रेरी फर्कनुहोस्' : 'Return to Library'}
         </button>
         <h2 style={{ margin: 0, fontSize: '18px', fontWeight: '800' }}>
           {lang === 'ne' ? 'दिशा र दूरी साहसिक यात्रा' : 'Direction and Distance Adventure'}
         </h2>
-        <button onClick={() => setLang(lang === 'ne' ? 'en' : 'ne')} style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: '#ffffff', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>
+        <button onClick={() => setLang(lang === 'ne' ? 'en' : 'ne')} style={{ background: '#FFFFFF', border: 'none', color: '#26332E', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>
           {lang === 'ne' ? 'English' : 'नेपाली'}
         </button>
       </div>
 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         {!isFinished ? (
-          <div style={{ maxWidth: '680px', width: '100%', background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(10px)', padding: '28px', borderRadius: '20px', textAlign: 'center' }}>
+          <div style={{ maxWidth: '680px', width: '100%', background: '#FFFFFF', backdropFilter: 'blur(10px)', padding: '28px', borderRadius: '20px', textAlign: 'center' }}>
             <span style={{ background: '#38bdf8', color: '#082f49', padding: '3px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: '800' }}>
               {current.category}
             </span>
@@ -152,18 +152,18 @@ export const DirectionDistanceAdventure: React.FC<DirectionDistanceAdventureProp
             </div>
 
             {feedback && (
-              <div style={{ padding: '10px 16px', borderRadius: '10px', background: 'rgba(255,255,255,0.2)', fontSize: '14px', fontWeight: '700' }}>
+              <div style={{ padding: '10px 16px', borderRadius: '10px', background: '#FFFFFF', fontSize: '14px', fontWeight: '700' }}>
                 {feedback}
               </div>
             )}
           </div>
         ) : (
-          <div style={{ textAlign: 'center', background: '#e2e8f0', padding: '36px', borderRadius: '20px' }}>
+          <div style={{ textAlign: 'center', background: '#FFFFFF', padding: '36px', borderRadius: '20px' }}>
             <Trophy size={50} color="#fcd34d" style={{ margin: '0 auto 12px auto' }} />
             <h3 style={{ fontSize: '24px', fontWeight: '800' }}>
               {lang === 'ne' ? 'सबास! दिशा र दूरी अभ्यास पूरा भयो!' : 'Great Job! Direction & Distance Completed!'}
             </h3>
-            <p style={{ fontSize: '16px', color: '#93c5fd' }}>
+            <p style={{ fontSize: '16px', color: '#26332E' }}>
               {lang === 'ne' ? `नतिजा: ${score} / ${missions.length}` : `Score: ${score} / ${missions.length}`}
             </p>
             <button onClick={onBackToLibrary} style={{ marginTop: '20px', padding: '10px 24px', borderRadius: '8px', background: '#f59e0b', color: '#000000', border: 'none', fontWeight: '800', cursor: 'pointer' }}>

@@ -253,8 +253,8 @@ export const CountAndMatchTen: React.FC<Props> = ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        background: '#042f2e',
-        color: '#0f172a',
+        background: '#FFFFFF',
+        color: '#26332E',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -265,7 +265,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgba(2, 44, 34, 0.95)',
+          background: '#FFFFFF',
           borderBottom: '1px solid rgba(45, 212, 191, 0.25)',
         }}
       >
@@ -277,10 +277,10 @@ export const CountAndMatchTen: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '10px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 600,
               fontSize: '14px',
@@ -291,10 +291,10 @@ export const CountAndMatchTen: React.FC<Props> = ({
           </button>
 
           <div>
-            <div style={{ fontSize: '11px', color: '#5eead4', textTransform: 'uppercase', fontWeight: 800 }}>
+            <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
               कक्षा १ • गणित • अध्याय ६ : दश (Ten)
             </div>
-            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#f0fdfa' }}>
+            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
                 ? 'सिमुलेसन ०४: गनेर दशसँग मिलाऔँ (Count and Match Ten)'
                 : 'Simulation 04: Count and Match Ten'}
@@ -313,7 +313,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
               border: '1px solid rgba(245, 158, 11, 0.4)',
               padding: '6px 14px',
               borderRadius: '20px',
-              color: '#fef08a',
+              color: '#26332E',
               fontWeight: 800,
             }}
           >
@@ -325,10 +325,10 @@ export const CountAndMatchTen: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: '#e2e8f0',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 700,
               fontSize: '13px',
@@ -341,10 +341,10 @@ export const CountAndMatchTen: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: soundEnabled ? '#5eead4' : '#94a3b8',
+              color: soundEnabled ? '#5eead4' : '#26332E',
               cursor: 'pointer',
             }}
           >
@@ -360,7 +360,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '8px',
           padding: '12px 16px',
-          background: '#f8fafc',
+          background: 'rgba(255,255,255,0.9)',
           borderBottom: '1px solid rgba(45, 212, 191, 0.2)',
           overflowX: 'auto',
         }}
@@ -379,8 +379,8 @@ export const CountAndMatchTen: React.FC<Props> = ({
                 padding: '8px 14px',
                 borderRadius: '12px',
                 border: isSelected ? '2px solid #5eead4' : '1px solid rgba(255, 255, 255, 0.15)',
-                background: isSelected ? 'rgba(13, 148, 136, 0.8)' : 'rgba(30, 41, 59, 0.6)',
-                color: '#ffffff',
+                background: isSelected ? 'rgba(13, 148, 136, 0.8)' : '#F1F5F9',
+                color: '#26332E',
                 fontWeight: 700,
                 fontSize: '12px',
                 cursor: 'pointer',
@@ -432,12 +432,12 @@ export const CountAndMatchTen: React.FC<Props> = ({
               position: 'absolute',
               top: '12px',
               right: '16px',
-              background: 'rgba(0,0,0,0.5)',
+              background: 'rgba(255,255,255,0.9)',
               padding: '6px 16px',
               borderRadius: '12px',
               fontSize: '14px',
               fontWeight: 800,
-              color: '#fef08a',
+              color: '#26332E',
             }}
           >
             {language === 'np'
@@ -473,13 +473,13 @@ export const CountAndMatchTen: React.FC<Props> = ({
                         position: 'absolute',
                         top: '-8px',
                         right: '-8px',
-                        background: '#10b981',
+                        background: '#FFFFFF',
                         borderRadius: '50%',
                         width: '20px',
                         height: '20px',
                         fontSize: '11px',
                         fontWeight: 900,
-                        color: '#ffffff',
+                        color: '#26332E',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -497,7 +497,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
         {/* Matching Numerals Row */}
         <div
           style={{
-            background: 'rgba(255, 255, 255, 0.95)',
+            background: 'rgba(255,255,255,0.9)',
             borderRadius: '20px',
             padding: '20px 32px',
             border: '2px solid rgba(45, 212, 191, 0.3)',
@@ -508,7 +508,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
             width: '100%',
           }}
         >
-          <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 900, color: '#fef08a' }}>
+          <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 900, color: '#26332E' }}>
             {language === 'np' ? 'सही सङ्ख्या कार्ड छान्नुहोस्:' : 'Select the matching number card:'}
           </h2>
 
@@ -531,9 +531,9 @@ export const CountAndMatchTen: React.FC<Props> = ({
                         ? isCorrect
                           ? '#10b981'
                           : '#ef4444'
-                        : 'rgba(30, 41, 59, 0.8)',
+                        : '#F1F5F9',
                     border: '3px solid rgba(45, 212, 191, 0.4)',
-                    color: '#ffffff',
+                    color: '#26332E',
                     fontSize: '32px',
                     fontWeight: 900,
                     cursor: selectedMatchChoice !== null ? 'default' : 'pointer',
@@ -574,8 +574,8 @@ export const CountAndMatchTen: React.FC<Props> = ({
                   style={{
                     padding: '8px 16px',
                     borderRadius: '10px',
-                    background: '#0d9488',
-                    color: '#ffffff',
+                    background: '#FFFFFF',
+                    color: '#26332E',
                     border: 'none',
                     fontWeight: 800,
                     cursor: 'pointer',

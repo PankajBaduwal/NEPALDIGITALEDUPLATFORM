@@ -7,7 +7,7 @@ const UI = (() => {
   let panelOpen = false;
 
   const BOARD_COLORS = [
-    { id:'white', bg:'#f4f6f8', line:'rgba(15,23,42,0.055)', major:'rgba(15,23,42,0.12)', label:'Soft Whiteboard' },
+    { id:'white', bg:'#f8fafc', line:'rgba(15,23,42,0.055)', major:'rgba(15,23,42,0.11)', label:'Clean Whiteboard' },
     { id:'black', bg:'#0b0d13', line:'rgba(255,255,255,0.07)',  major:'rgba(255,255,255,0.14)', label:'Blackboard' },
     { id:'navy',  bg:'#0a1224', line:'rgba(148,163,184,0.08)', major:'rgba(148,163,184,0.16)', label:'Cosmic Navy' },
     { id:'green', bg:'#0e2419', line:'rgba(255,255,255,0.075)', major:'rgba(255,255,255,0.15)', label:'Chalkboard Green' },
@@ -1086,10 +1086,10 @@ const UI = (() => {
       if (typeof pdfjsLib === 'undefined') {
         await new Promise((resolve, reject) => {
           const s = document.createElement('script');
-          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+          s.src = 'assets/vendor/pdf.min.js';
           s.onload = () => {
             if (window.pdfjsLib) {
-              window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+              window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/vendor/pdf.worker.min.js';
             }
             resolve();
           };

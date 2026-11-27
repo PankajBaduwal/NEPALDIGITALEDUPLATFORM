@@ -1,120 +1,263 @@
 /**
  * Lesson 10 · Area (क्षेत्रफल)
- * Tile the Floor — cover a shape with square tiles and count them; compare two shapes.
+ * Tile the Floor — cover a shape with square unit tiles and count them; compare areas.
+ * Pure 2D Implementation for Smart Boards & Desktops.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { mat, shadowed, cube } from '../class1-math-kit/models';
-import { rnd } from '../class1-math-kit/nepali';
+import React, { useEffect, useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit/SimFrame2D';
+import { Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp, rnd } from '../class1-math-kit/nepali';
 import { fmt, numChoices } from './helpers';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
-const COLS = 7, ROWS = 5, CELL = 0.95;
+
+const COLS = 7;
+const ROWS = 5;
+
 type Shape = number[]; // cell indices
-const rect = (w: number, h: number, ox = 0, oy = 0): Shape => { const r: number[] = []; for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) r.push((y + oy) * COLS + x + ox); return r; };
+
+const rect = (w: number, h: number, ox = 1, oy = 1): Shape => {
+  const r: number[] = [];
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      r.push((y + oy) * COLS + x + ox);
+    }
+  }
+  return r;
+};
+
 const SHAPES: { np: string; en: string; cells: Shape }[] = [
-  { np: 'आयत ३×४', en: 'Rectangle 3×4', cells: rect(4, 3) },
-  { np: 'वर्ग ३×३', en: 'Square 3×3', cells: rect(3, 3) },
-  { np: 'L आकार', en: 'L shape', cells: [...rect(2, 4), ...rect(2, 1, 2, 3)] },
-  { np: 'सिँढी', en: 'Stairs', cells: [0, 1, 2, 3, 4, COLS, COLS + 1, COLS + 2, COLS + 3, COLS * 2, COLS * 2 + 1, COLS * 2 + 2, COLS * 3, COLS * 3 + 1, COLS * 4] },
-  { np: 'T आकार', en: 'T shape', cells: [...rect(5, 1), ...rect(1, 3, 2, 1)] },
+  { np: 'आयत ३×४ (१२ एकाइ)', en: 'Rectangle 3×4 (12 units)', cells: rect(4, 3, 1, 1) },
+  { np: 'वर्ग ३×३ (९ एकाइ)', en: 'Square 3×3 (9 units)', cells: rect(3, 3, 2, 1) },
+  { np: 'L आकार (१० एकाइ)', en: 'L Shape (10 units)', cells: [...rect(2, 4, 1, 0), ...rect(2, 1, 3, 3)] },
+  { np: 'T आकार (८ एकाइ)', en: 'T Shape (8 units)', cells: [...rect(5, 1, 1, 0), ...rect(1, 3, 3, 1)] },
+  { np: 'आयत २×५ (१० एकाइ)', en: 'Rectangle 2×5 (10 units)', cells: rect(5, 2, 1, 1) },
 ];
-const randShape = (n: number): Shape => { const set = new Set<number>([rnd(0, COLS * ROWS - 1)]); while (set.size < n) { const arr = Array.from(set); const p = arr[rnd(0, arr.length - 1)]; const d = [1, -1, COLS, -COLS][rnd(0, 3)]; const q = p + d; if (q < 0 || q >= COLS * ROWS) continue; if (Math.abs(d) === 1 && Math.floor(q / COLS) !== Math.floor(p / COLS)) continue; set.add(q); } return Array.from(set); };
 
 export const TileTheFloor: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G2-L10-01', chapter: 10, titleNp: 'टाइल बिछ्याऔँ (क्षेत्रफल)', titleEn: 'Tile the Floor (Area)' });
+  const kit = useSimKit({
+    code: 'SIM-MATH-G2-L10-01',
+    chapter: 10,
+    titleNp: 'टाइल बिछ्याऔँ (क्षेत्रफल)',
+    titleEn: 'Tile the Floor (Area)',
+  });
+
+  const [shapeIndex, setShapeIndex] = useState(0);
   const [tiled, setTiled] = useState<Set<number>>(new Set());
-  const [target, setTarget] = useState<Shape>([]);
-  const [shapeName, setShapeName] = useState('');
-  const [second, setSecond] = useState<Shape | null>(null);
   const [li, setLi] = useState(0);
-  const [busy, setBusy] = useState(false);
-  const scene = useRef<{ drawA: (outline: Shape, tiles: Set<number>, animate?: number[]) => void; drawB: (tiles: Shape | null) => void } | null>(null);
-  const live = useRef({ mode: kit.mode, toggle: (_i: number) => {} });
-  live.current.mode = kit.mode;
 
-  useStage(kit.stageRef, (ctx) => {
-    const mkBoard = (x: number) => {
-      const g = new THREE.Group(); g.position.set(x, 0, 0); ctx.scene.add(g);
-      const floor = shadowed(new THREE.Mesh(new THREE.BoxGeometry(COLS * CELL + 0.3, 0.2, ROWS * CELL + 0.3), mat('#e2e8f0', 0.9))); floor.position.set(0, -0.1, 0); g.add(floor);
-      const cells: THREE.Mesh[] = []; const tiles: (THREE.Object3D | null)[] = Array(COLS * ROWS).fill(null);
-      for (let i = 0; i < COLS * ROWS; i++) { const c = new THREE.Mesh(new THREE.BoxGeometry(CELL * 0.94, 0.04, CELL * 0.94), new THREE.MeshStandardMaterial({ color: '#cbd5e1', roughness: 0.9 })); c.position.set(((i % COLS) - (COLS - 1) / 2) * CELL, 0.02, (Math.floor(i / COLS) - (ROWS - 1) / 2) * CELL); c.userData.cell = i; g.add(c); cells.push(c); }
-      return { g, cells, tiles };
-    };
-    const A = mkBoard(-4.2), B = mkBoard(4.6); B.g.visible = false;
-    const cellPos = (i: number) => new THREE.Vector3(((i % COLS) - (COLS - 1) / 2) * CELL, 0.45, (Math.floor(i / COLS) - (ROWS - 1) / 2) * CELL);
-    const colorFor = (i: number) => ['#38bdf8', '#34d399', '#fbbf24', '#f472b6', '#a78bfa'][(i % COLS + Math.floor(i / COLS)) % 5];
-    const put = (b: typeof A, i: number, animate: boolean) => {
-      if (b.tiles[i]) return; const t = cube(colorFor(i), CELL * 0.88); t.scale.y = 0.55; const p = cellPos(i); t.position.copy(p); b.g.add(t); b.tiles[i] = t;
-      if (animate) { t.scale.set(0.01, 0.01, 0.01); ctx.tween(300, (k) => t.scale.set(k, 0.55 * k, k), undefined, ease.back); }
-    };
-    const draw = (b: typeof A, outline: Shape | null, tiles: Set<number>, animateOrder?: number[]) => {
-      b.tiles.forEach((t, i) => { if (t) { b.g.remove(t); b.tiles[i] = null; } });
-      b.cells.forEach((c, i) => { (c.material as THREE.MeshStandardMaterial).color.set(outline && outline.includes(i) ? '#fde68a' : '#cbd5e1'); });
-      if (animateOrder) animateOrder.forEach((i, k) => window.setTimeout(() => put(b, i, true), k * 160)); else tiles.forEach((i) => put(b, i, false));
-    };
-    scene.current = {
-      drawA: (outline, tiles, animate) => { draw(A, outline, tiles, animate); },
-      drawB: (tiles) => { B.g.visible = !!tiles; if (tiles) draw(B, tiles, new Set(tiles)); },
-    };
-    ctx.onTap(() => A.cells, (hit) => { if (hit && live.current.mode === 'PLAY') live.current.toggle(hit.object.userData.cell); });
-    draw(A, null, new Set());
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 11, 9.5], target: [0, 0, 0.2], minDistance: 7, maxDistance: 20, ground: 0xd9f99d });
+  const curShape = SHAPES[shapeIndex];
+  const targetCells = curShape.cells;
+  const isFull = targetCells.every((c) => tiled.has(c));
 
-  live.current.toggle = (i) => {
-    const next = new Set(tiled); if (next.has(i)) next.delete(i); else next.add(i);
-    setTiled(next); scene.current?.drawA([], next); kit.tap();
-    kit.say(`${next.size}`, `${next.size}`, true);
+  const toggleCell = (idx: number) => {
+    if (!targetCells.includes(idx)) return;
+    kit.tap();
+    setTiled((prev) => {
+      const next = new Set(prev);
+      if (next.has(idx)) {
+        next.delete(idx);
+      } else {
+        next.add(idx);
+        if (next.size === targetCells.length) {
+          kit.good(
+            `स्याबास! सबै ${toNp(targetCells.length)} टाइलहरू भरियो। क्षेत्रफल = ${toNp(targetCells.length)} वर्ग एकाइ।`,
+            `Great job! All ${targetCells.length} tiles placed. Area = ${targetCells.length} square units.`
+          );
+          kit.star();
+        }
+      }
+      return next;
+    });
   };
 
-  const loadShape = (cells: Shape, name: string, auto = true) => {
-    setTarget(cells); setShapeName(name); setSecond(null); scene.current?.drawB(null);
-    if (auto) { setBusy(true); setTiled(new Set()); scene.current?.drawA(cells, new Set(), cells); let k = 0; const tick = () => { k += 1; kit.say(`${k}`, `${k}`, true); if (k < cells.length) window.setTimeout(tick, 160); else { setTiled(new Set(cells)); setBusy(false); kit.good(`${cells.length} टाइल = ${cells.length} वर्ग एकाइ`, `${cells.length} tiles = ${cells.length} square units`); kit.star(); } }; window.setTimeout(tick, 200); }
-    else { setTiled(new Set(cells)); scene.current?.drawA(cells, new Set(cells)); }
+  const fillAll = () => {
+    kit.tap();
+    setTiled(new Set(targetCells));
+    kit.good(
+      `क्षेत्रफल = ${toNp(targetCells.length)} वर्ग एकाइ`,
+      `Area = ${targetCells.length} square units`
+    );
+    kit.star();
   };
+
+  const clearAll = () => {
+    kit.tap();
+    setTiled(new Set());
+  };
+
+  const handleNextShape = () => {
+    const nextIdx = (shapeIndex + 1) % SHAPES.length;
+    setShapeIndex(nextIdx);
+    setTiled(new Set());
+    const sh = SHAPES[nextIdx];
+    kit.say(
+      `${sh.np}लाई टाइलले भरौँ र क्षेत्रफल नापौँ।`,
+      `Cover the ${sh.en} with tiles to find its area.`
+    );
+  };
+
   useEffect(() => {
-    setBusy(false);
-    if (kit.mode === 'LEARN') { const s = SHAPES[li % SHAPES.length]; loadShape(s.cells, kit.lang === 'ne' ? s.np : s.en); kit.say('प्रत्येक वर्ग टाइल गनेर क्षेत्रफल पत्ता लगाऔँ।', 'Count the square tiles to find the area.'); }
-    else if (kit.mode === 'PLAY') { setTiled(new Set()); setTarget([]); setSecond(null); scene.current?.drawB(null); scene.current?.drawA([], new Set()); kit.say('वर्गहरू छोएर टाइल बिछ्याऔँ।', 'Tap squares to lay tiles.'); }
+    if (kit.mode === 'LEARN') {
+      const idx = li % SHAPES.length;
+      setShapeIndex(idx);
+      setTiled(new Set());
+      kit.say(
+        'आकारमा कतिवटा वर्ग टाइल अटाउँछन्, त्यो नै त्यसको क्षेत्रफल हो।',
+        'The number of square tiles that cover a shape is its area.'
+      );
+    } else if (kit.mode === 'PLAY') {
+      setShapeIndex(rnd(0, SHAPES.length - 1));
+      setTiled(new Set());
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kit.mode, li]);
 
-  const data = useMemo(() => Array.from({ length: 8 }, (_, i) => {
-    if (i % 2 === 0) { const s = randShape(rnd(5, 16)); return { kind: 'count', a: s }; }
-    const n1 = rnd(6, 15); let n2 = rnd(6, 15); while (n2 === n1) n2 = rnd(6, 15);
-    return { kind: 'bigger', a: randShape(n1), b: randShape(n2) };
-  }), []);
-  const questions: (QuizQuestion & { d: any })[] = data.map((d: any, i) => d.kind === 'count'
-    ? { np: 'आकारमा कतिवटा वर्ग टाइल छन्?', en: 'How many square tiles are in the shape?', d, answer: String(d.a.length), options: numChoices(d.a.length, i * 3 + 1, [1, -1, 2, -2]).map((v) => ({ key: String(v), label: fmt(kit.lang, v) })) }
-    : { np: 'कुनको क्षेत्रफल बढी छ?', en: 'Which shape has the bigger area?', d, answer: d.a.length > d.b.length ? 'left' : 'right', options: [{ key: 'left', label: kit.t('बायाँ', 'Left') }, { key: 'right', label: kit.t('दायाँ', 'Right') }] });
+  // Quiz Questions for Challenge Mode
+  const questions: QuizQuestion[] = SHAPES.map((sh, i) => ({
+    np: `${sh.np.split(' (')[0]}लाई पूरै ढाक्न कतिवटा १ वर्ग एकाइका टाइल चाहिन्छ?`,
+    en: `How many 1-unit square tiles are needed to completely cover ${sh.en.split(' (')[0]}?`,
+    answer: String(sh.cells.length),
+    options: numChoices(sh.cells.length, i * 11 + 2, [1, -1, 2, -2]).map((v) => ({
+      key: String(v),
+      label: `${fmt(kit.lang, v)} ${kit.t('टाइल', 'tiles')}`,
+    })),
+  }));
 
-  const area = tiled.size;
   const hud = (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', textAlign: 'center' }}>
-      {kit.mode === 'CHALLENGE' ? <div style={{ fontSize: 18, fontWeight: 900 }}>{kit.t('टाइल गनौँ!', 'Count the tiles!')}</div> : <>
-        {shapeName && <div style={{ fontSize: 15, fontWeight: 800 }}>{shapeName}</div>}
-        <div style={{ fontSize: 15, fontWeight: 800 }}>{kit.t('क्षेत्रफल', 'Area')}</div>
-        <div style={{ fontSize: 34, fontWeight: 900, color: '#0369a1' }}>{fmt(kit.lang, area)} {kit.t('वर्ग एकाइ', 'sq. units')}</div></>}
+    <div
+      style={{
+        background: '#FFFFFF',
+        borderRadius: 16,
+        padding: '8px 18px',
+        border: '2px solid #187C68',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+        fontSize: 16,
+        fontWeight: 900,
+        color: '#26332E',
+      }}
+    >
+      {kit.t('बिछ्याइएका टाइल', 'Tiles Placed')}:{' '}
+      <span style={{ color: isFull ? '#16A34A' : '#0284C7', fontSize: 20 }}>
+        {toNp(tiled.size)}
+      </span>{' '}
+      / {toNp(targetCells.length)} {kit.t('वर्ग एकाइ', 'sq. units')}
     </div>
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 220 }}>{kit.t('सतहले ढाकेको ठाउँ नै क्षेत्रफल हो।', 'Area is how much flat space a shape covers.')}</div>
-      <CBtn color="#8b5cf6" disabled={busy} onClick={() => loadShape(target, shapeName)}>↺ {kit.t('फेरि', 'Again')}</CBtn>
-      <CBtn color="#16a34a" disabled={busy} onClick={() => setLi(li + 1)}>{kit.t('अर्को', 'Next')} ➜</CBtn>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 200 }}>{kit.t('वर्ग छोएर टाइल राखौँ / हटाऔँ', 'Tap a square to add or remove a tile')}</div>
-      <CBtn color="#f59e0b" onClick={() => { setTiled(new Set()); scene.current?.drawA([], new Set()); }}>↺ {kit.t('सबै हटाऔँ', 'Clear')}</CBtn>
-      <CBtn color="#8b5cf6" onClick={() => { const s = randShape(rnd(6, 14)); setTiled(new Set(s)); scene.current?.drawA([], new Set(s)); }}>🎲</CBtn>
-    </Controls>
+
+  const panel = kit.mode === 'CHALLENGE' ? (
+    <QuizPanel kit={kit} questions={questions} />
   ) : (
-    <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => { const d = q.d; setShapeName(''); setTiled(new Set(d.a)); scene.current?.drawA([], new Set(d.a)); setSecond(d.b || null); scene.current?.drawB(d.b || null); }} />
+    <Controls>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+        <CBtn color="#059669" onClick={fillAll}>
+          🟩 {kit.t('सबै टाइल भरौँ', 'Fill All Tiles')}
+        </CBtn>
+        <CBtn color="#EF4444" disabled={tiled.size === 0} onClick={clearAll}>
+          ↺ {kit.t('खाली गरौँ', 'Clear')}
+        </CBtn>
+
+        {kit.mode === 'LEARN' && (
+          <CBtn color="#187C68" onClick={() => { setLi((v) => v + 1); handleNextShape(); }}>
+            {kit.t('अर्को आकार', 'Next Shape')} ➜
+          </CBtn>
+        )}
+
+        {kit.mode === 'PLAY' && (
+          <CBtn color="#D97706" onClick={handleNextShape}>
+            🎲 {kit.t('नयाँ आकार', 'Random Shape')}
+          </CBtn>
+        )}
+      </div>
+    </Controls>
   );
-  void second;
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+
+  return (
+    <SimFrame2D kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} grade={2}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 380,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+        }}
+      >
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 24,
+            padding: '30px 40px',
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.04)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 16,
+          }}
+        >
+          {/* Shape Title */}
+          <div style={{ fontSize: 18, fontWeight: 900, color: '#1E293B' }}>
+            {kit.t(curShape.np, curShape.en)}
+          </div>
+
+          {/* 7x5 Grid Floor */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: `repeat(${COLS}, 56px)`,
+              gridTemplateRows: `repeat(${ROWS}, 56px)`,
+              gap: 4,
+              background: '#F1F5F9',
+              padding: 10,
+              borderRadius: 16,
+              border: '2px solid #CBD5E1',
+            }}
+          >
+            {Array.from({ length: COLS * ROWS }).map((_, idx) => {
+              const isTarget = targetCells.includes(idx);
+              const isFilled = tiled.has(idx);
+
+              return (
+                <div
+                  key={idx}
+                  onClick={() => toggleCell(idx)}
+                  style={{
+                    width: 56,
+                    height: 56,
+                    borderRadius: 8,
+                    cursor: isTarget ? 'pointer' : 'default',
+                    border: isTarget ? '2px dashed #0284C7' : '1px solid #E2E8F0',
+                    background: isFilled
+                      ? '#38BDF8'
+                      : isTarget
+                        ? '#E0F2FE'
+                        : '#FFFFFF',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'all 0.15s ease',
+                    boxShadow: isFilled ? '0 2px 6px rgba(2, 132, 199, 0.3)' : 'none',
+                  }}
+                >
+                  {isFilled && (
+                    <span style={{ fontSize: 15, fontWeight: 900, color: '#FFFFFF' }}>
+                      {toNp(Array.from(tiled).indexOf(idx) + 1)}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <div style={{ fontSize: 13, color: '#64748B', fontWeight: 700 }}>
+            {kit.t('नीलो घेराभित्र छोएर १ वर्ग एकाइ टाइल बिछ्याउनुहोस्', 'Tap inside the blue outline to place 1 sq-unit tiles')}
+          </div>
+        </div>
+      </div>
+    </SimFrame2D>
+  );
 };

@@ -1,0 +1,518 @@
+/**
+ * NumberSystemDiscoveryPlayground.tsx
+ * Grade 8 Mathematics – Unit 2: WHOLE NUMBERS (पूर्ण सङ्ख्याहरू)
+ * Simulation 1: Number System Discovery Playground (सङ्ख्या पद्धति खोजी खेलमैदान)
+ * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 2)
+ */
+import React, { useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit/SimFrame2D';
+import { useSimKit, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp, FONT_NP } from '../class1-math-kit/nepali';
+import { Binary, Layers, Power, ToggleLeft, ToggleRight, Sparkles, Check, HelpCircle, ArrowRight } from 'lucide-react';
+
+const QUIZ_QUESTIONS: QuizQuestion[] = [
+  {
+    np: 'दशमलव सङ्ख्या पद्धति (Decimal System) को आधार (Base) कति हुन्छ र यसमा कुन-कुन अङ्कहरू प्रयोग गरिन्छन्?',
+    en: 'What is the base of the Decimal Number System and which digits are used in it?',
+    options: [
+      { key: 'A', label: 'आधार १०, अङ्कहरू ० देखि ९ सम्म (Base 10, digits 0–9)' },
+      { key: 'B', label: 'आधार २, अङ्कहरू ० र १' },
+      { key: 'C', label: 'आधार ५, अङ्कहरू ० देखि ४ सम्म' },
+      { key: 'D', label: 'आधार ८, अङ्कहरू ० देखि ७ सम्म' },
+    ],
+    answer: 'A',
+  },
+  {
+    np: 'कम्प्युटर र विद्युतीय सर्किटमा स्विच अन (ON) र अफ (OFF) जनाउन कुन सङ्ख्या पद्धति प्रयोग गरिन्छ?',
+    en: 'Which number system is used to represent switch ON and OFF in electrical circuits and computers?',
+    options: [
+      { key: 'A', label: 'द्विआधार पद्धति (Binary System: ON = 1, OFF = 0)' },
+      { key: 'B', label: 'पञ्चआधार पद्धति (Quinary System)' },
+      { key: 'C', label: 'दशमलव पद्धति (Decimal System)' },
+      { key: 'D', label: 'रोमन पद्धति' },
+    ],
+    answer: 'A',
+  },
+  {
+    np: 'द्विआधार सङ्ख्या १०१०१₂ (10101₂) को दशमलव मान (Decimal Value) कति हुन्छ?',
+    en: 'What is the decimal equivalent of the binary number 10101₂?',
+    options: [
+      { key: 'A', label: '२१ [ १६ + ० + ४ + ० + १ = २१ ]' },
+      { key: 'B', label: '१५' },
+      { key: 'C', label: '३१' },
+      { key: 'D', label: '१०' },
+    ],
+    answer: 'A',
+  },
+  {
+    np: 'पञ्चआधार सङ्ख्या पद्धति (Quinary System) मा कुन अङ्क प्रयोग गर्न पाइँदैन?',
+    en: 'Which digit cannot be used in the Quinary (Base-5) number system?',
+    options: [
+      { key: 'A', label: '५ (पञ्चआधारमा ०, १, २, ३, ४ मात्र हुन्छन्)' },
+      { key: 'B', label: '४' },
+      { key: 'C', label: '०' },
+      { key: 'D', label: '३' },
+    ],
+    answer: 'A',
+  },
+  {
+    np: 'पञ्चआधार सङ्ख्या २३४₅ (234₅) को विस्तारित रूप (Expanded Form) कुन हो?',
+    en: 'What is the correct expanded form of the quinary number 234₅?',
+    options: [
+      { key: 'A', label: '२ × ५² + ३ × ५¹ + ४ × ५⁰' },
+      { key: 'B', label: '२ × १०² + ३ × १०¹ + ४ × १०⁰' },
+      { key: 'C', label: '२ × २² + ३ × २¹ + ४ × २⁰' },
+      { key: 'D', label: '२३ × ५ + ४' },
+    ],
+    answer: 'A',
+  },
+];
+
+export const NumberSystemDiscoveryPlayground: React.FC<{
+  onBack?: () => void;
+  onBackToLibrary?: () => void;
+}> = ({ onBack, onBackToLibrary }) => {
+  const kit = useSimKit({
+    code: 'SIM-MATH-G8-U2-01',
+    chapter: 2,
+    titleNp: 'सङ्ख्या पद्धति खोजी खेलमैदान (Number System Discovery)',
+    titleEn: 'Number System Discovery Playground',
+  });
+  const isNe = kit.lang === 'ne';
+  const L = (np: string, en: string) => (isNe ? np : en);
+  const handleBack = onBackToLibrary || onBack || (() => window.history.back());
+
+  const [activeTab, setActiveTab] = useState<'decimal' | 'binary' | 'quinary' | 'compare'>('decimal');
+
+  // Decimal interactive state (4 digits: d3, d2, d1, d0)
+  const [decDigits, setDecDigits] = useState<number[]>([1, 2, 5, 6]);
+
+  // Binary switches (5 bits: b4, b3, b2, b1, b0)
+  const [binaryBits, setBinaryBits] = useState<number[]>([1, 0, 1, 0, 1]);
+
+  // Quinary digits (4 digits: q3, q2, q1, q0)
+  const [quinaryDigits, setQuinaryDigits] = useState<number[]>([1, 3, 4, 0]);
+
+  // Comparison selector decimal number
+  const [selectedCompDec, setSelectedCompDec] = useState<number>(25);
+
+  const decValue = decDigits[0] * 1000 + decDigits[1] * 100 + decDigits[2] * 10 + decDigits[3];
+  const binaryValue = binaryBits.reduce((acc, bit, idx) => acc + bit * Math.pow(2, 4 - idx), 0);
+  const quinaryValue = quinaryDigits[0] * 125 + quinaryDigits[1] * 25 + quinaryDigits[2] * 5 + quinaryDigits[3];
+
+  const toBinaryString = (val: number) => (val >>> 0).toString(2);
+  const toQuinaryString = (val: number) => {
+    if (val === 0) return '0';
+    let res = '';
+    let n = val;
+    while (n > 0) {
+      res = (n % 5).toString() + res;
+      n = Math.floor(n / 5);
+    }
+    return res;
+  };
+
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={handleBack}
+      grade={8}
+      questions={QUIZ_QUESTIONS}
+      mascotGreeting={L(
+        'नमस्ते! सङ्ख्या पद्धति खोजी खेलमैदानमा स्वागत छ। दशमलव (१०), द्विआधार (२) र पञ्चआधार (५) पद्धति बुझौँ!',
+        'Hello! Welcome to Number System Discovery. Let us master Decimal (Base 10), Binary (Base 2), and Quinary (Base 5)!'
+      )}
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        {/* Navigation Tabs */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
+          {[
+            { id: 'decimal', labelNp: '१. दशमलव पद्धति (Base 10)', labelEn: '1. Decimal System (Base 10)', icon: Layers },
+            { id: 'binary', labelNp: '२. द्विआधार पद्धति (Base 2)', labelEn: '2. Binary System (Base 2)', icon: Binary },
+            { id: 'quinary', labelNp: '३. पञ्चआधार पद्धति (Base 5)', labelEn: '3. Quinary System (Base 5)', icon: Power },
+            { id: 'compare', labelNp: '४. पद्धतिहरूको तुलना तालिम', labelEn: '4. System Comparison', icon: Sparkles },
+          ].map((tab) => {
+            const Icon = tab.icon;
+            const active = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  padding: '8px 14px',
+                  borderRadius: 8,
+                  fontWeight: 700,
+                  fontSize: 13,
+                  cursor: 'pointer',
+                  border: 'none',
+                  background: active ? '#0284c7' : '#ffffff',
+                  color: active ? '#ffffff' : '#334155',
+                  boxShadow: active ? '0 2px 4px rgba(2, 132, 199, 0.25)' : 'none',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <Icon size={16} />
+                <span>{isNe ? tab.labelNp : tab.labelEn}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Tab 1: Decimal System */}
+        {activeTab === 'decimal' && (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
+            <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                <h3 style={{ margin: 0, color: '#0369a1', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Layers size={20} />
+                  {L('दशमलव सङ्ख्या पद्धति (Decimal System - आधार १०)', 'Decimal Number System (Base 10)')}
+                </h3>
+                <span style={{ fontSize: 13, background: '#e0f2fe', color: '#0284c7', padding: '4px 10px', borderRadius: 20, fontWeight: 700 }}>
+                  {L('प्रयोग हुने १० अङ्कहरू: ०, १, २, ३, ४, ५, ६, ७, ८, ९', 'Digits used: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9')}
+                </span>
+              </div>
+              <p style={{ margin: '0 0 16px 0', fontSize: 14, color: '#475569', lineHeight: 1.6 }}>
+                {L(
+                  'हामीले दैनिक जीवनमा प्रयोग गर्ने हिन्दु-अरेबिक सङ्ख्या पद्धति नै दशमलव पद्धति हो। यसको प्रत्येक स्थानको मान १० को घात (Power of 10) मा बढ्छ।',
+                  'The Hindu-Arabic system used in daily life is the decimal system. Each position value increases by powers of 10.'
+                )}
+              </p>
+
+              {/* Interactive Digit Place-Value Table */}
+              <div style={{ overflowX: 'auto', marginBottom: 16 }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center' }}>
+                  <thead>
+                    <tr style={{ background: '#f1f5f9' }}>
+                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('स्थान (Place)', 'Place')}</th>
+                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('हजार (Thousand: १०³)', '10³ (1000)')}</th>
+                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('सय (Hundred: १०²)', '10² (100)')}</th>
+                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('दश (Ten: १०¹)', '10¹ (10)')}</th>
+                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('एक (One: १०⁰)', '10⁰ (1)')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style={{ padding: 12, border: '1px solid #cbd5e1', fontWeight: 700, color: '#0369a1' }}>
+                        {L('अङ्क (Digit 0-9)', 'Digit (0-9)')}
+                      </td>
+                      {decDigits.map((d, idx) => (
+                        <td key={idx} style={{ padding: 10, border: '1px solid #cbd5e1' }}>
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                            <button
+                              onClick={() => {
+                                const next = [...decDigits];
+                                next[idx] = (next[idx] + 1) % 10;
+                                setDecDigits(next);
+                              }}
+                              style={{ padding: '2px 8px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', background: '#f8fafc' }}
+                            >
+                              ▲
+                            </button>
+                            <span style={{ fontSize: 24, fontWeight: 900, color: '#0f172a' }}>{isNe ? toNp(d) : d}</span>
+                            <button
+                              onClick={() => {
+                                const next = [...decDigits];
+                                next[idx] = (next[idx] + 9) % 10;
+                                setDecDigits(next);
+                              }}
+                              style={{ padding: '2px 8px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', background: '#f8fafc' }}
+                            >
+                              ▼
+                            </button>
+                          </div>
+                        </td>
+                      ))}
+                    </tr>
+                    <tr style={{ background: '#fafafa' }}>
+                      <td style={{ padding: 10, border: '1px solid #cbd5e1', fontWeight: 700 }}>
+                        {L('स्थानीय मान (Place Value)', 'Place Value')}
+                      </td>
+                      <td style={{ padding: 10, border: '1px solid #cbd5e1', color: '#0284c7', fontWeight: 800 }}>
+                        {isNe ? toNp(decDigits[0] * 1000) : decDigits[0] * 1000}
+                      </td>
+                      <td style={{ padding: 10, border: '1px solid #cbd5e1', color: '#0284c7', fontWeight: 800 }}>
+                        {isNe ? toNp(decDigits[1] * 100) : decDigits[1] * 100}
+                      </td>
+                      <td style={{ padding: 10, border: '1px solid #cbd5e1', color: '#0284c7', fontWeight: 800 }}>
+                        {isNe ? toNp(decDigits[2] * 10) : decDigits[2] * 10}
+                      </td>
+                      <td style={{ padding: 10, border: '1px solid #cbd5e1', color: '#0284c7', fontWeight: 800 }}>
+                        {isNe ? toNp(decDigits[3]) : decDigits[3]}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Expanded Form Display */}
+              <div style={{ background: '#f0f9ff', padding: 16, borderRadius: 12, border: '1.5px solid #bae6fd' }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#0369a1' }}>
+                  {L('विस्तारित रूप (Expanded Form):', 'Expanded Form:')}
+                </div>
+                <div style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginTop: 6 }}>
+                  {isNe ? toNp(decValue) : decValue} = ({isNe ? toNp(decDigits[0]) : decDigits[0]} × १०³) + ({isNe ? toNp(decDigits[1]) : decDigits[1]} × १०²) + ({isNe ? toNp(decDigits[2]) : decDigits[2]} × १०¹) + ({isNe ? toNp(decDigits[3]) : decDigits[3]} × १०⁰)
+                </div>
+                <div style={{ fontSize: 14, color: '#0284c7', marginTop: 4 }}>
+                  = {isNe ? toNp(decDigits[0] * 1000) : decDigits[0] * 1000} + {isNe ? toNp(decDigits[1] * 100) : decDigits[1] * 100} + {isNe ? toNp(decDigits[2] * 10) : decDigits[2] * 10} + {isNe ? toNp(decDigits[3]) : decDigits[3]} = {isNe ? toNp(decValue) : decValue}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 2: Binary System */}
+        {activeTab === 'binary' && (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
+            <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                <h3 style={{ margin: 0, color: '#16a34a', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Binary size={20} />
+                  {L('द्विआधार सङ्ख्या पद्धति (Binary Number System - आधार २)', 'Binary Number System (Base 2)')}
+                </h3>
+                <span style={{ fontSize: 13, background: '#dcfce7', color: '#15803d', padding: '4px 10px', borderRadius: 20, fontWeight: 700 }}>
+                  {L('प्रयोग हुने २ अङ्कहरू: ० र १ (Bits)', 'Digits used: 0 and 1')}
+                </span>
+              </div>
+              <p style={{ margin: '0 0 14px 0', fontSize: 14, color: '#475569', lineHeight: 1.6 }}>
+                {L(
+                  'कम्प्युटर सर्किटमा करेन्ट प्रवाह हुनु (स्विच अन) लाई १ र नहुनु (स्विच अफ) लाई ० मानिन्छ। यसको प्रत्येक स्थानको मान २ को घात (२⁴, २³, २², २¹, २⁰) मा हुन्छ।',
+                  'In digital electronics, switch ON is 1 and switch OFF is 0. Place values are powers of 2 (16, 8, 4, 2, 1).'
+                )}
+              </p>
+
+              {/* Switches Interactive Circuit */}
+              <div style={{ background: '#f8fafc', padding: 16, borderRadius: 12, border: '1px solid #cbd5e1', marginBottom: 16 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#334155', marginBottom: 12 }}>
+                  {L('स्विच अन (१) / अफ (०) गरेर द्विआधार सङ्ख्या बनाउनुहोस्:', 'Toggle switches ON (1) / OFF (0) to build binary number:')}
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, textAlign: 'center' }}>
+                  {[
+                    { power: '२⁴ (16)', val: 16 },
+                    { power: '२³ (8)', val: 8 },
+                    { power: '२² (4)', val: 4 },
+                    { power: '२¹ (2)', val: 2 },
+                    { power: '२⁰ (1)', val: 1 },
+                  ].map((p, idx) => {
+                    const isOn = binaryBits[idx] === 1;
+                    return (
+                      <div
+                        key={idx}
+                        onClick={() => {
+                          const next = [...binaryBits];
+                          next[idx] = next[idx] === 1 ? 0 : 1;
+                          setBinaryBits(next);
+                        }}
+                        style={{
+                          background: isOn ? '#dcfce7' : '#f1f5f9',
+                          border: isOn ? '2px solid #22c55e' : '1px solid #cbd5e1',
+                          borderRadius: 12,
+                          padding: 12,
+                          cursor: 'pointer',
+                          transition: 'all 0.15s',
+                        }}
+                      >
+                        <div style={{ fontSize: 11, fontWeight: 700, color: '#64748b' }}>{p.power}</div>
+                        <div style={{ fontSize: 24, fontWeight: 900, color: isOn ? '#15803d' : '#94a3b8', margin: '6px 0' }}>
+                          {isOn ? '१ (ON)' : '० (OFF)'}
+                        </div>
+                        <div style={{ fontSize: 12, color: isOn ? '#166534' : '#64748b', fontWeight: 700 }}>
+                          {isOn ? `+${p.val}` : '+0'}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Binary Calculation Result */}
+              <div style={{ background: '#ecfdf5', padding: 16, borderRadius: 12, border: '1.5px solid #a7f3d0' }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#065f46' }}>
+                  {L('द्विआधार सङ्ख्या र दशमलव समतुल्यता:', 'Binary Number and Decimal Equivalent:')}
+                </div>
+                <div style={{ fontSize: 22, fontWeight: 900, color: '#047857', marginTop: 4 }}>
+                  {binaryBits.join('')}₂ = {isNe ? toNp(binaryValue) : binaryValue}₁₀
+                </div>
+                <div style={{ fontSize: 13, color: '#064e3b', marginTop: 6, lineHeight: 1.6 }}>
+                  {L('विस्तार:', 'Expanded calculation:')}{' '}
+                  {binaryBits
+                    .map((b, i) => `(${b} × २^${4 - i})`)
+                    .join(' + ')}{' '}
+                  = {binaryBits.map((b, i) => b * Math.pow(2, 4 - i)).join(' + ')} = {binaryValue}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 3: Quinary System */}
+        {activeTab === 'quinary' && (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
+            <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                <h3 style={{ margin: 0, color: '#ea580c', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Power size={20} />
+                  {L('पञ्चआधार सङ्ख्या पद्धति (Quinary System - आधार ५)', 'Quinary Number System (Base 5)')}
+                </h3>
+                <span style={{ fontSize: 13, background: '#ffedd5', color: '#c2410c', padding: '4px 10px', borderRadius: 20, fontWeight: 700 }}>
+                  {L('प्रयोग हुने ५ अङ्कहरू: ०, १, २, ३, ४', 'Digits used: 0, 1, 2, 3, 4')}
+                </span>
+              </div>
+              <p style={{ margin: '0 0 14px 0', fontSize: 14, color: '#475569', lineHeight: 1.6 }}>
+                {L(
+                  '५ वटा वस्तुहरू (जस्तै कलम, गेडागुडी) को समूह बनाएर गणना गर्ने विधिलाई पञ्चआधार पद्धति भनिन्छ। यसमा ५ प्रयोग हुँदैन, ४ पछि सिधै १०₅ (पाँच) आउँछ।',
+                  'Counting in bundles of five objects is the quinary system. Digit 5 is not allowed; after 4 comes 10₅ (representing 5).'
+                )}
+              </p>
+
+              {/* Quinary Place Values */}
+              <div style={{ overflowX: 'auto', marginBottom: 16 }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center' }}>
+                  <thead>
+                    <tr style={{ background: '#fff7ed' }}>
+                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>{L('स्थान (Place)', 'Place')}</th>
+                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>५³ (125)</th>
+                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>५² (25)</th>
+                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>५¹ (5)</th>
+                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>५⁰ (1)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style={{ padding: 10, border: '1px solid #fed7aa', fontWeight: 700, color: '#c2410c' }}>
+                        {L('अङ्क (०-४)', 'Digit (0-4)')}
+                      </td>
+                      {quinaryDigits.map((q, idx) => (
+                        <td key={idx} style={{ padding: 10, border: '1px solid #fed7aa' }}>
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                            <button
+                              onClick={() => {
+                                const next = [...quinaryDigits];
+                                next[idx] = (next[idx] + 1) % 5;
+                                setQuinaryDigits(next);
+                              }}
+                              style={{ padding: '2px 8px', borderRadius: 4, border: '1px solid #fed7aa', cursor: 'pointer', background: '#fff' }}
+                            >
+                              ▲
+                            </button>
+                            <span style={{ fontSize: 24, fontWeight: 900, color: '#9a3412' }}>{isNe ? toNp(q) : q}</span>
+                            <button
+                              onClick={() => {
+                                const next = [...quinaryDigits];
+                                next[idx] = (next[idx] + 4) % 5;
+                                setQuinaryDigits(next);
+                              }}
+                              style={{ padding: '2px 8px', borderRadius: 4, border: '1px solid #fed7aa', cursor: 'pointer', background: '#fff' }}
+                            >
+                              ▼
+                            </button>
+                          </div>
+                        </td>
+                      ))}
+                    </tr>
+                    <tr style={{ background: '#fffaf5' }}>
+                      <td style={{ padding: 10, border: '1px solid #fed7aa', fontWeight: 700 }}>
+                        {L('स्थानीय मान (Value)', 'Value')}
+                      </td>
+                      <td style={{ padding: 10, border: '1px solid #fed7aa', color: '#c2410c', fontWeight: 800 }}>
+                        {isNe ? toNp(quinaryDigits[0] * 125) : quinaryDigits[0] * 125}
+                      </td>
+                      <td style={{ padding: 10, border: '1px solid #fed7aa', color: '#c2410c', fontWeight: 800 }}>
+                        {isNe ? toNp(quinaryDigits[1] * 25) : quinaryDigits[1] * 25}
+                      </td>
+                      <td style={{ padding: 10, border: '1px solid #fed7aa', color: '#c2410c', fontWeight: 800 }}>
+                        {isNe ? toNp(quinaryDigits[2] * 5) : quinaryDigits[2] * 5}
+                      </td>
+                      <td style={{ padding: 10, border: '1px solid #fed7aa', color: '#c2410c', fontWeight: 800 }}>
+                        {isNe ? toNp(quinaryDigits[3]) : quinaryDigits[3]}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Quinary Result Box */}
+              <div style={{ background: '#fff7ed', padding: 16, borderRadius: 12, border: '1.5px solid #fdba74' }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#9a3412' }}>
+                  {L('पञ्चआधार सङ्ख्या र दशमलव मान:', 'Quinary Number & Decimal Value:')}
+                </div>
+                <div style={{ fontSize: 22, fontWeight: 900, color: '#c2410c', marginTop: 4 }}>
+                  {quinaryDigits.join('')}₅ = {isNe ? toNp(quinaryValue) : quinaryValue}₁₀
+                </div>
+                <div style={{ fontSize: 13, color: '#7c2d12', marginTop: 6 }}>
+                  = ({quinaryDigits[0]} × १२५) + ({quinaryDigits[1]} × २५) + ({quinaryDigits[2]} × ५) + ({quinaryDigits[3]} × १) = {quinaryValue}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 4: Compare Number Systems */}
+        {activeTab === 'compare' && (
+          <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
+            <h3 style={{ margin: '0 0 12px 0', color: '#0369a1', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
+              <Sparkles size={20} />
+              {L('सङ्ख्या पद्धतिहरूको प्रत्यक्ष तुलना तालिम (Comparison Studio)', 'Number Systems Comparative Table')}
+            </h3>
+            <p style={{ margin: '0 0 16px 0', fontSize: 14, color: '#475569' }}>
+              {L(
+                'पाठ्यपुस्तकका प्रमुख सङ्ख्याहरूलाई दशमलव, द्विआधार र पञ्चआधारमा तुलना गरेर हेर्नुहोस्:',
+                'Compare textbook quantities side-by-side in Decimal, Binary, and Quinary systems:'
+              )}
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: 16 }}>
+              {[1, 5, 10, 15, 20, 25, 37, 50, 69, 100].map((num) => (
+                <button
+                  key={num}
+                  onClick={() => setSelectedCompDec(num)}
+                  style={{
+                    padding: '8px 12px',
+                    borderRadius: 8,
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    border: selectedCompDec === num ? '2px solid #0284c7' : '1px solid #cbd5e1',
+                    background: selectedCompDec === num ? '#e0f2fe' : '#ffffff',
+                    color: selectedCompDec === num ? '#0369a1' : '#334155',
+                  }}
+                >
+                  {isNe ? toNp(num) : num}₁₀
+                </button>
+              ))}
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14 }}>
+              <div style={{ background: '#f0f9ff', padding: 16, borderRadius: 12, border: '1.5px solid #bae6fd', textAlign: 'center' }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#0284c7' }}>{L('दशमलव (Decimal)', 'Decimal (Base 10)')}</div>
+                <div style={{ fontSize: 26, fontWeight: 900, color: '#0369a1', marginTop: 6 }}>
+                  {isNe ? toNp(selectedCompDec) : selectedCompDec}₁₀
+                </div>
+                <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>{L('आधार १०', 'Base 10')}</div>
+              </div>
+
+              <div style={{ background: '#ecfdf5', padding: 16, borderRadius: 12, border: '1.5px solid #a7f3d0', textAlign: 'center' }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#059669' }}>{L('द्विआधार (Binary)', 'Binary (Base 2)')}</div>
+                <div style={{ fontSize: 26, fontWeight: 900, color: '#047857', marginTop: 6 }}>
+                  {toBinaryString(selectedCompDec)}₂
+                </div>
+                <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>{L('आधार २', 'Base 2')}</div>
+              </div>
+
+              <div style={{ background: '#fff7ed', padding: 16, borderRadius: 12, border: '1.5px solid #fed7aa', textAlign: 'center' }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#ea580c' }}>{L('पञ्चआधार (Quinary)', 'Quinary (Base 5)')}</div>
+                <div style={{ fontSize: 26, fontWeight: 900, color: '#c2410c', marginTop: 6 }}>
+                  {toQuinaryString(selectedCompDec)}₅
+                </div>
+                <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>{L('आधार ५', 'Base 5')}</div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </SimFrame2D>
+  );
+};
+
+export default NumberSystemDiscoveryPlayground;

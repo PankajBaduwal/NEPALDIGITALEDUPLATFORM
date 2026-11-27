@@ -1,13 +1,11 @@
 /**
  * Class 6 lessons 11 · Indices, 12 · Algebraic expression, 13 · Equation, inequality and graph.
  */
-import * as THREE from 'three';
 import { rnd } from '../class1-math-kit/nepali';
-import { mat } from '../class1-math-kit/models';
 import { makeLab, LabCfg } from '../class5-math/Lab';
 import { bi, choice, numChoice } from '../class5-math/h5';
 import { algebraCfg, likeTermsCfg } from '../class5-math/G5Data';
-import { box, tag, rod, cubeBlock } from '../class5-math/vis';
+import { box, tag, rod, cubeBlock, disc } from '../class5-math/vis';
 
 /* ───────────── indices ───────────── */
 const dims = (b: number, e: number): [number, number, number] => [[1, 1, 1], [b, 1, 1], [b, b, 1], [b, b, b], [b * b, b, b], [b * b, b * b, b]][e] as [number, number, number];
@@ -114,7 +112,8 @@ export const inequalityCfg: LabCfg = {
     const X = (v: number) => (v - 3) * 0.95; box(g, 22 * 0.95, 0.15, 0.3, 0, 0.08, 0, '#334155');
     for (let v = -8; v <= 14; v++) { box(g, 0.05, 0.5, 0.05, X(v), 0.3, 0, '#334155'); if (v % 2 === 0) tag(g, String(v), X(v), -0.8, 1.2, 1.3, { px: 52, w: 128, h: 64 }); }
     const right = p.ty < 2; const end = right ? 14.6 : -8.6; rod(g, [X(p.k), 0.7, 0], [X(end), 0.7, 0], '#22c55e', 0.22); const closed = p.ty === 1 || p.ty === 3;
-    const ring = new THREE.Mesh(new THREE.SphereGeometry(0.42, 24, 16), mat(closed ? '#16a34a' : '#ffffff', 0.4)); ring.position.set(X(p.k), 0.7, 0); g.add(ring); if (!closed) { const o = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.09, 12, 28), mat('#16a34a')); o.position.copy(ring.position); g.add(o); }
+    disc(g, 0.42, closed ? '#16a34a' : '#ffffff', X(p.k), 0.7, 0);
+    if (!closed) disc(g, 0.46, '#16a34a', X(p.k), 0.7, 0, 0.5);
     const ok = holds(p.t, p.k, p.ty); box(g, 0.7, 0.7, 0.7, X(p.t), 1.7, 0, ok ? '#22c55e' : '#ef4444', 0.3); tag(g, `${p.t} ${ok ? '✓' : '✗'}`, X(p.t), 3, 0, 1.8, { px: 56, w: 192, h: 80, bg: '#fff', border: ok ? '#22c55e' : '#ef4444' });
     tag(g, `x ${INEQ[p.ty].s} ${p.k}`, 0, 5.2, 0, 4, { px: 64, w: 400, h: 96, bg: '#fff', border: '#0ea5e9' });
   },
@@ -142,7 +141,7 @@ export const graphCfg: LabCfg = {
     const X = (x: number) => -5 + x * 1.5, Y = (y: number) => 0.2 + y * 0.5; rod(g, [X(0), 0.2, 0], [X(6.4), 0.2, 0], '#334155', 0.12); rod(g, [X(0), 0.2, 0], [X(0), Y(17), 0], '#334155', 0.12);
     for (let x = 0; x <= 6; x++) { tag(g, String(x), X(x), -0.5, 0, 1.1, { px: 52, w: 96, h: 64 }); rod(g, [X(x), 0.2, -0.3], [X(x), Y(16), -0.3], '#e2e8f0', 0.03); }
     for (let y = 0; y <= 16; y += 4) { tag(g, String(y), X(0) - 0.9, Y(y), 0, 1.1, { px: 52, w: 96, h: 64 }); rod(g, [X(0), Y(y), -0.3], [X(6.4), Y(y), -0.3], '#e2e8f0', 0.03); }
-    for (let x = 0; x <= 5; x++) { const y = p.m * x + p.c; rod(g, [X(x), Y(y), 0], [X(x + 1), Y(p.m * (x + 1) + p.c), 0], '#ec4899', 0.1); const b = new THREE.Mesh(new THREE.SphereGeometry(0.28, 20, 14), mat('#f59e0b', 0.3)); b.position.set(X(x), Y(y), 0); g.add(b); tag(g, `(${x}, ${y})`, X(x) + 0.2, Y(y) + 0.6, 0, 1.7, { px: 40, w: 192, h: 64 }); }
+    for (let x = 0; x <= 5; x++) { const y = p.m * x + p.c; rod(g, [X(x), Y(y), 0], [X(x + 1), Y(p.m * (x + 1) + p.c), 0], '#ec4899', 0.1); disc(g, 0.28, '#f59e0b', X(x), Y(y), 0); tag(g, `(${x}, ${y})`, X(x) + 0.2, Y(y) + 0.6, 0, 1.7, { px: 40, w: 192, h: 64 }); }
     tag(g, `y = ${p.m}x + ${p.c}`, 3.5, 9, 0, 4.4, { px: 62, w: 460, h: 96, bg: '#fff', border: '#ec4899' }); void lang;
   },
   info: (p) => bi(`y = ${p.m}x + ${p.c}\nx = 0,1,2,3 हुँदा y = ${[0, 1, 2, 3].map((x) => p.m * x + p.c).join(', ')}\nx १ ले बढ्दा y ${p.m} ले बढ्छ`, `y = ${p.m}x + ${p.c}\nWhen x = 0,1,2,3, y = ${[0, 1, 2, 3].map((x) => p.m * x + p.c).join(', ')}\nEvery time x goes up by 1, y goes up by ${p.m}`),

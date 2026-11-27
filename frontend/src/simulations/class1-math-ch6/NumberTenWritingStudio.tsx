@@ -279,8 +279,8 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #042f2e 0%, #134e4a 50%, #115e59 100%)',
-        color: '#0f172a',
+        background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
+        color: '#26332E',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -291,7 +291,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgba(2, 44, 34, 0.9)',
+          background: '#FFFFFF',
           backdropFilter: 'blur(12px)',
           borderBottom: '1px solid rgba(45, 212, 191, 0.25)',
         }}
@@ -304,10 +304,10 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '10px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 600,
               fontSize: '14px',
@@ -318,10 +318,10 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
           </button>
 
           <div>
-            <div style={{ fontSize: '11px', color: '#5eead4', textTransform: 'uppercase', fontWeight: 800 }}>
+            <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
               कक्षा १ • गणित • अध्याय ६ : दश (Ten)
             </div>
-            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#f0fdfa' }}>
+            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
                 ? 'सिमुलेसन ०५: १० लेख्न सिकौँ (Number Ten Writing Studio)'
                 : 'Simulation 05: Number Ten Writing Studio'}
@@ -335,7 +335,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
           <div
             style={{
               display: 'flex',
-              background: 'rgba(0,0,0,0.4)',
+              background: 'rgba(255,255,255,0.9)',
               borderRadius: '10px',
               padding: '3px',
               border: '1px solid rgba(45, 212, 191, 0.3)',
@@ -389,7 +389,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
               border: '1px solid rgba(245, 158, 11, 0.4)',
               padding: '6px 14px',
               borderRadius: '20px',
-              color: '#fef08a',
+              color: '#26332E',
               fontWeight: 800,
             }}
           >
@@ -401,10 +401,10 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: '#e2e8f0',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 700,
               fontSize: '13px',
@@ -417,10 +417,10 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: soundEnabled ? '#5eead4' : '#94a3b8',
+              color: soundEnabled ? '#5eead4' : '#26332E',
               cursor: 'pointer',
             }}
           >
@@ -450,7 +450,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
             position: 'relative',
             width: '100%',
             maxWidth: '560px',
-            background: '#1e293b',
+            background: '#FFFFFF',
             borderRadius: '28px',
             border: '14px solid #78350f',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
@@ -472,7 +472,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
               borderBottom: '1px dashed rgba(255, 255, 255, 0.15)',
             }}
           >
-            <div style={{ fontSize: '18px', fontWeight: 900, color: '#fef08a' }}>
+            <div style={{ fontSize: '18px', fontWeight: 900, color: '#26332E' }}>
               {scriptMode === 'np' ? 'सङ्ख्या १० (दश)' : 'Number 10 (Ten)'}
             </div>
 
@@ -489,7 +489,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
                 background: 'rgba(13, 148, 136, 0.3)',
                 border: '1px solid rgba(45, 212, 191, 0.4)',
                 borderRadius: '8px',
-                color: '#5eead4',
+                color: '#26332E',
                 fontSize: '12px',
                 fontWeight: 700,
                 cursor: 'pointer',
@@ -506,7 +506,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
               position: 'relative',
               width: '400px',
               height: '260px',
-              background: '#0f172a',
+              background: '#FFFFFF',
               borderRadius: '20px',
               overflow: 'hidden',
               boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.8)',
@@ -609,7 +609,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
               {accuracyScore >= 60 ? (
                 <>
                   <Sparkles size={16} color="#34d399" />
-                  <span style={{ fontWeight: 800, color: '#34d399', fontSize: '13px' }}>
+                  <span style={{ fontWeight: 800, color: '#26332E', fontSize: '13px' }}>
                     {language === 'np' ? `शानदार! शुद्धता: ${accuracyScore}% ⭐` : `Splendid! Accuracy: ${accuracyScore}% ⭐`}
                   </span>
                 </>
@@ -626,7 +626,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
 
           {/* Chalk Color Palette */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '12px' }}>
-            <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 700 }}>
+            <span style={{ fontSize: '12px', color: '#26332E', fontWeight: 700 }}>
               {language === 'np' ? 'चक रङ:' : 'Chalk:'}
             </span>
             {['#38bdf8', '#facc15', '#4ade80', '#f472b6', '#ffffff'].map((c) => (
@@ -660,7 +660,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
               background: 'linear-gradient(135deg, #f59e0b, #d97706)',
               border: 'none',
               borderRadius: '12px',
-              color: '#ffffff',
+              color: '#26332E',
               fontWeight: 800,
               cursor: isAnimatingDemo ? 'not-allowed' : 'pointer',
             }}
@@ -679,7 +679,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
               background: 'rgba(239, 68, 68, 0.2)',
               border: '1px solid rgba(239, 68, 68, 0.4)',
               borderRadius: '12px',
-              color: '#fca5a5',
+              color: '#26332E',
               fontWeight: 700,
               cursor: 'pointer',
             }}

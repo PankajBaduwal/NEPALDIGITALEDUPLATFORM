@@ -52,9 +52,9 @@
 
 /* ── Adaptive navigation: sidebar becomes a drawer below 1024 px ── */
 #rs-menu-btn, #rs-overlay, #rs-fs-btn { display: none; }
-#rs-menu-btn { position: fixed; top: 10px; left: 10px; z-index: 3100; width: var(--rs-touch); height: var(--rs-touch); border-radius: 12px; align-items: center; justify-content: center; background: #0f4c4a; color: #fff; border: 0; box-shadow: 0 8px 20px -8px rgba(6, 43, 42, .55); cursor: pointer; }
-#rs-overlay { position: fixed; inset: 0; z-index: 2990; background: rgba(6, 43, 42, .5); opacity: 0; pointer-events: none; transition: opacity .2s ease; }
-#rs-fs-btn { position: fixed; right: 14px; bottom: 14px; z-index: 3100; width: 44px; height: 44px; border-radius: 12px; align-items: center; justify-content: center; background: rgba(15, 76, 74, .85); color: #fff; border: 0; cursor: pointer; opacity: .75; }
+#rs-menu-btn { position: fixed; top: 10px; left: 10px; z-index: 3100; width: var(--rs-touch); height: var(--rs-touch); border-radius: 12px; align-items: center; justify-content: center; background: #0F172A; color: #fff; border: 0; box-shadow: 0 8px 20px -8px rgba(9,13,22, .55); cursor: pointer; }
+#rs-overlay { position: fixed; inset: 0; z-index: 2990; background: rgba(9,13,22, .5); opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+#rs-fs-btn { position: fixed; right: 14px; bottom: 14px; z-index: 3100; width: 44px; height: 44px; border-radius: 12px; align-items: center; justify-content: center; background: rgba(15,23,42, .85); color: #fff; border: 0; cursor: pointer; opacity: .75; }
 #rs-fs-btn:hover, #rs-fs-btn:focus-visible { opacity: 1; }
 #rs-menu-btn:focus-visible, #rs-fs-btn:focus-visible { outline: 3px solid #2fcf9c; outline-offset: 2px; }
 @media (pointer: coarse) and (min-width: 1400px), (min-width: 2400px) { #rs-fs-btn { display: flex; } }
@@ -64,7 +64,7 @@
   #root aside:not(.sa-sidebar) {
     position: fixed !important; top: 0; left: 0; bottom: 0; height: 100dvh !important; width: min(300px, 86vw) !important; max-width: 86vw;
     z-index: 3000 !important; transform: translateX(-104%); transition: transform .24s ease; overflow-y: auto !important; overscroll-behavior: contain;
-    box-shadow: 0 0 44px rgba(6, 43, 42, .35);
+    box-shadow: 0 0 44px rgba(9,13,22, .35);
   }
   body.rs-nav-open #root aside:not(.sa-sidebar) { transform: none; }
   body.rs-nav-open #rs-overlay { display: block; opacity: 1; pointer-events: auto; }

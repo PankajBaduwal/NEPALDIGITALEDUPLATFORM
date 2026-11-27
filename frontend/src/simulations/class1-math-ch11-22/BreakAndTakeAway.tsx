@@ -1,125 +1,309 @@
 /**
  * Chapter 17 · Subtraction of numbers up to two digits (दुई अङ्कसम्मका सङ्ख्याको घटाउ)
- * Break and Take Away — take blocks away; if there are not enough ones, break one tower into ten ones.
+ * Sim 1: Break and Take Away (फुकाऔँ र घटाऔँ) — Pure 2D Edition
+ * 100% 2D SVG / CSS Animations – No Three.js/WebGL dependencies.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useStage } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { Blocks } from '../class1-math-kit/place';
-import { toNp, shuffle, rnd } from '../class1-math-kit/nepali';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp } from '../class1-math-kit/nepali';
 
-interface Props { onBackToLibrary: () => void; userRole?: string }
-const LEARN = [[48, 23], [39, 15], [52, 27], [60, 34], [75, 38]];
+interface Props {
+  onBackToLibrary: () => void;
+  userRole?: string;
+}
 
 export const BreakAndTakeAway: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G1-CH17-01', chapter: 17, titleNp: 'फुकाऔँ र घटाऔँ (दुई अङ्क)', titleEn: 'Break and Take Away (two digits)' });
-  const [a, setA] = useState(52);
-  const [b, setB] = useState(27);
-  const [tens, setTens] = useState(5);
-  const [ones, setOnes] = useState(2);
-  const [remT, setRemT] = useState(2);
-  const [remO, setRemO] = useState(7);
-  const [li, setLi] = useState(0);
-  const [busy, setBusy] = useState(false);
-  const scene = useRef<{ blocks: Blocks } | null>(null);
-  const finishedFor = useRef('');
+  const kit = useSimKit({
+    code: 'SIM-MATH-G1-CH17-01',
+    chapter: 17,
+    titleNp: 'फुकाऔँ र घटाऔँ (दुई अङ्कको घटाउ)',
+    titleEn: 'Break and Take Away (Subtraction with Borrowing)',
+  });
 
-  useStage(kit.stageRef, (ctx) => {
-    const blocks = new Blocks(ctx, { x: -6, z: 0, tensColor: '#38bdf8', onesColor: '#facc15', u: 0.5 });
-    scene.current = { blocks }; blocks.setNumber(52);
-    return () => { scene.current = null; blocks.dispose(); };
-  }, [], { camera: [0, 9, 13], target: [0, 1.8, 0], minDistance: 8, maxDistance: 24 });
+  const [start, setStart] = useState<number>(32);
+  const [take, setTake] = useState<number>(15);
+  const [isBroken, setIsBroken] = useState<boolean>(false);
+  const [isDone, setIsDone] = useState<boolean>(false);
 
-  const setup = (x: number, y: number) => {
-    setA(x); setB(y); setTens(Math.floor(x / 10)); setOnes(x % 10); setRemT(Math.floor(y / 10)); setRemO(y % 10); setBusy(false);
-    finishedFor.current = '';
-    scene.current?.blocks.setNumber(x);
-  };
-  const done = (t: number, o: number, rt: number, ro: number) => {
-    if (kit.mode === 'CHALLENGE') return;
-    if (rt === 0 && ro === 0 && finishedFor.current !== `${a}-${b}`) {
-      finishedFor.current = `${a}-${b}`;
-      kit.good(`${a} − ${b} = ${t * 10 + o}`, `${a} − ${b} = ${t * 10 + o}`);
-      kit.star();
-    }
-  };
-  const takeOne = () => {
-    if (busy) return;
-    if (remO === 0) { kit.oops('एकाइ पहिले नै सबै घटाइसक्यौँ', 'You already took all the ones'); return; }
-    if (ones === 0) { kit.oops('एकाइ पुगेन! एउटा दशक फुकाऔँ 🔨', 'Not enough ones! Break a ten 🔨'); return; }
-    scene.current?.blocks.removeOne(); kit.tap();
-    setOnes(ones - 1); setRemO(remO - 1); done(tens, ones - 1, remT, remO - 1);
-  };
-  const takeTen = () => {
-    if (busy) return;
-    if (remT === 0) { kit.oops('दशक पहिले नै सबै घटाइसक्यौँ', 'You already took all the tens'); return; }
-    if (tens === 0) return;
-    scene.current?.blocks.removeTen(); kit.tap();
-    setTens(tens - 1); setRemT(remT - 1); done(tens - 1, ones, remT - 1, remO);
-  };
-  const breakTen = () => {
-    if (busy) return;
-    if (!tens) return;
-    if (ones >= remO) { kit.oops('अहिले फुकाउनु पर्दैन', 'No need to break a ten now'); return; }
-    setBusy(true);
-    scene.current?.blocks.breakTen(() => setBusy(false));
-    setTens(tens - 1); setOnes(ones + 10);
-    kit.say('एउटा दशक फुक्यो — अब १० वटा एकाइ छन्!', 'One ten broke into 10 ones!');
+  const isNe = kit.lang === 'ne';
+  const L = (np: string, en: string) => (isNe ? np : en);
+
+  const diff = start - take;
+  const initialTens = Math.floor(start / 10);
+  const initialOnes = start % 10;
+
+  const currentTens = isBroken ? initialTens - 1 : initialTens;
+  const currentOnes = isBroken ? initialOnes + 10 : initialOnes;
+
+  const handleBreakTen = () => {
+    kit.tap();
+    setIsBroken(true);
+    kit.good(
+      '१ दशक फुकाएर १० एकाइ बनाइयो! अब सजिलै घटाउन सकिन्छ।',
+      'Unbundled 1 ten into 10 ones! Now we can subtract easily.'
+    );
   };
 
-  useEffect(() => {
-    if (kit.mode === 'LEARN') { setup(LEARN[li][0], LEARN[li][1]); kit.say(`${toNp(LEARN[li][0])} बाट ${toNp(LEARN[li][1])} घटाऔँ।`, `Take ${LEARN[li][1]} away from ${LEARN[li][0]}.`); }
-    else if (kit.mode === 'PLAY') { const [x, y] = [rnd(40, 90), rnd(11, 39)]; setup(x, y); kit.say('ब्लक हटाएर घटाऔँ। एकाइ नपुगे दशक फुकाऔँ।', 'Take blocks away. If ones are not enough, break a ten.'); }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [kit.mode, li]);
+  const handleSubtract = () => {
+    kit.tap();
+    setIsDone(true);
+    kit.good(
+      `${toNp(start)} बाट ${toNp(take)} घटाउँदा बाँकी = ${toNp(diff)}`,
+      `${start} − ${take} = ${diff}`
+    );
+  };
 
-  const data = useMemo(() => Array.from({ length: 6 }, (_, i) => {
-    let x = 0, y = 0;
-    for (;;) { x = rnd(30, 90); y = rnd(11, x - 5 > 45 ? 45 : x - 5); const borrow = (x % 10) < (y % 10); if ((i % 2 === 0) === borrow) continue; if (y < x) break; }
-    const r = x - y;
-    const wrong = Math.floor(x / 10 - y / 10) * 10 + Math.abs((x % 10) - (y % 10));
-    const opts = Array.from(new Set([r, wrong === r ? r + 1 : wrong, r + 10, r + 1])).slice(0, 3);
-    if (!opts.includes(r)) opts[0] = r;
-    return { x, y, r, opts: shuffle(opts) };
-  }), []);
-  const questions: (QuizQuestion & { x: number; y: number })[] = data.map((d) => ({
-    np: `${toNp(d.x)} − ${toNp(d.y)} = ?`, en: `${d.x} − ${d.y} = ?`, x: d.x, y: d.y, answer: String(d.r),
-    options: d.opts.map((v) => ({ key: String(v), label: kit.lang === 'ne' ? toNp(v) : String(v) })),
-  }));
+  const newProblem = () => {
+    kit.tap();
+    const newStart = Math.floor(Math.random() * 30) + 22; // 22 to 51
+    const newTake = Math.floor(Math.random() * (newStart - 10)) + 6;
+    setStart(newStart);
+    setTake(newTake);
+    setIsBroken(false);
+    setIsDone(false);
+  };
 
-  const num = (v: number) => (kit.lang === 'ne' ? toNp(v) : String(v));
-  const complete = remT === 0 && remO === 0;
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', textAlign: 'center' }}>
-      <div style={{ fontSize: 32, fontWeight: 900 }}>{num(a)} − {num(b)} = <span style={{ color: complete ? '#16a34a' : '#94a3b8' }}>{complete ? num(tens * 10 + ones) : '?'}</span></div>
-      {!complete && <div style={{ fontSize: 16, fontWeight: 800, color: '#be123c' }}>{kit.t('अझै घटाउनु पर्ने', 'Still to take away')}: {num(remT)} {kit.t('दशक', 'tens')} + {num(remO)} {kit.t('एकाइ', 'ones')}</div>}
-    </div>
-  );
-  const buttons = (
-    <>
-      <CBtn color="#eab308" onClick={takeOne} disabled={busy}>−1 🟨 {kit.t('एकाइ', 'one')}</CBtn>
-      <CBtn color="#0ea5e9" onClick={takeTen} disabled={busy}>−10 🟦 {kit.t('दशक', 'ten')}</CBtn>
-      <CBtn color="#f97316" onClick={breakTen} disabled={busy}>🔨 {kit.t('दशक फुकाऔँ', 'Break a ten')}</CBtn>
-    </>
-  );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 180 }}>{complete ? `✅ ${a} − ${b} = ${tens * 10 + ones}` : kit.t('पहिले एकाइ, अनि दशक घटाऔँ', 'Take away ones first, then tens')}</div>
-      {buttons}
-      <CBtn color="#16a34a" disabled={!complete} onClick={() => setLi((li + 1) % LEARN.length)}>{kit.t('अर्को', 'Next')} ➜</CBtn>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>
-      {buttons}
-      <CBtn color="#8b5cf6" onClick={() => setup(rnd(40, 90), rnd(11, 39))}>🎲 {kit.t('नयाँ प्रश्न', 'New problem')}</CBtn>
-      <CBtn color="#f59e0b" onClick={() => setup(a, b)}>↺</CBtn>
-    </Controls>
-  ) : (
-    <div>
-      <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => setup(q.x, q.y)} />
-      <div style={{ marginTop: 8, display: 'flex', gap: 8, flexWrap: 'wrap' }}>{buttons}</div>
-    </div>
+  const quizQuestions: QuizQuestion[] = useMemo(
+    () => [
+      {
+        np: '३२ − १५ गर्दा कति बाँकी रहन्छ?',
+        en: 'What is 32 − 15?',
+        options: [
+          { key: '17', label: isNe ? '१७' : '17' },
+          { key: '18', label: isNe ? '१८' : '18' },
+          { key: '15', label: isNe ? '१५' : '15' },
+        ],
+        answer: '17',
+      },
+      {
+        np: '१ दशक फुकाउँदा कतिवटा एकाइ बन्छन्?',
+        en: 'Unbundling 1 ten gives how many ones?',
+        options: [
+          { key: '10', label: isNe ? '१० एकाइ' : '10 ones' },
+          { key: '5', label: isNe ? '५ एकाइ' : '5 ones' },
+          { key: '1', label: isNe ? '१ एकाइ' : '1 one' },
+        ],
+        answer: '10',
+      },
+      {
+        np: '४० − १३ को घटाउफल कति हुन्छ?',
+        en: 'What is 40 − 13?',
+        options: [
+          { key: '27', label: isNe ? '२७' : '27' },
+          { key: '28', label: isNe ? '२८' : '28' },
+          { key: '37', label: isNe ? '३७' : '37' },
+        ],
+        answer: '27',
+      },
+    ],
+    [isNe]
   );
 
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      grade={1}
+      hud={
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #187C68',
+            borderRadius: 16,
+            padding: '8px 18px',
+            boxShadow: '0 4px 12px rgba(24,124,104,0.15)',
+            fontWeight: 900,
+            fontSize: 22,
+            color: '#187C68',
+          }}
+        >
+          {isNe ? toNp(start) : start} − {isNe ? toNp(take) : take} ={' '}
+          <span style={{ color: isDone ? '#047857' : '#94A3B8' }}>
+            {isDone ? (isNe ? toNp(diff) : diff) : '?'}
+          </span>
+        </div>
+      }
+      panel={
+        kit.mode === 'CHALLENGE' ? (
+          <QuizPanel kit={kit} questions={quizQuestions} />
+        ) : (
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            {!isBroken && initialOnes < take % 10 && (
+              <button
+                onClick={handleBreakTen}
+                style={{
+                  background: '#D97706',
+                  color: '#FFF',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: 14,
+                  fontSize: 15,
+                  fontWeight: 900,
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 10px rgba(217,119,6,0.25)',
+                }}
+              >
+                🔓 {L('१ दशक फुकाऔँ (Unbundle 1 Ten to 10 Ones)', 'Unbundle 1 Ten')}
+              </button>
+            )}
+
+            <button
+              onClick={handleSubtract}
+              disabled={isDone}
+              style={{
+                background: isDone ? '#CBD5E1' : '#187C68',
+                color: '#FFF',
+                border: 'none',
+                padding: '12px 24px',
+                borderRadius: 14,
+                fontSize: 16,
+                fontWeight: 900,
+                cursor: isDone ? 'default' : 'pointer',
+                boxShadow: '0 4px 10px rgba(24,124,104,0.25)',
+              }}
+            >
+              ✂️ {L('घटाऔँ (Subtract)', 'Subtract')}
+            </button>
+
+            <button
+              onClick={newProblem}
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid #CBD5E1',
+                padding: '12px 18px',
+                borderRadius: 14,
+                fontSize: 14,
+                fontWeight: 800,
+                cursor: 'pointer',
+              }}
+            >
+              🔄 {L('नयाँ प्रश्न', 'New Problem')}
+            </button>
+          </div>
+        )
+      }
+    >
+      {/* ── 2D Unbundling Workspace ───────────────────────────── */}
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 460,
+          display: 'grid',
+          gridTemplateColumns: 'minmax(280px, 1.2fr) minmax(220px, 0.8fr)',
+          gap: 20,
+          padding: 24,
+          background: 'linear-gradient(180deg, #FCE8EF 0%, #F5F7F5 60%)',
+        }}
+      >
+        {/* Workspace Block Area */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 20,
+            border: '2px solid #E2E8F0',
+            padding: 20,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+          }}
+        >
+          <div style={{ fontSize: 18, fontWeight: 900, color: '#187C68' }}>
+            🧱 {L(`शुरुको सङ्ख्या: ${toNp(start)}`, `Starting Number: ${start}`)}
+          </div>
+
+          {/* Tens */}
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 800, color: '#0369A1', marginBottom: 6 }}>
+              📦 {L(`दशक (Tens): ${toNp(currentTens)} वटा`, `Tens: ${currentTens}`)}
+            </div>
+            <div style={{ display: 'flex', gap: 8 }}>
+              {Array.from({ length: currentTens }).map((_, i) => (
+                <div key={i} style={{ width: 24, height: 75, background: '#0284C7', borderRadius: 6 }} />
+              ))}
+            </div>
+          </div>
+
+          {/* Ones */}
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 800, color: '#D97706', marginBottom: 6 }}>
+              🔶 {L(`एकाइ (Ones): ${toNp(currentOnes)} वटा`, `Ones: ${currentOnes}`)}
+            </div>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {Array.from({ length: currentOnes }).map((_, i) => {
+                const isCrossed = isDone && i < take % 10;
+                return (
+                  <div
+                    key={i}
+                    style={{
+                      width: 22,
+                      height: 22,
+                      background: isCrossed ? '#CBD5E1' : '#F59E0B',
+                      borderRadius: 4,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#EF4444',
+                      fontWeight: 900,
+                      fontSize: 14,
+                    }}
+                  >
+                    {isCrossed ? '✕' : ''}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Calculation Note */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 20,
+            border: '2px solid #E2E8F0',
+            padding: 20,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 12,
+            justifyContent: 'center',
+          }}
+        >
+          <div style={{ fontSize: 15, fontWeight: 800, color: '#64748B' }}>
+            {L('घटाउने कार्यविधि:', 'Steps:')}
+          </div>
+          <div style={{ fontSize: 14, color: '#334155', lineHeight: 1.6 }}>
+            1. {L(`पहिले एकाइ घटाउने (${toNp(initialOnes)} − ${toNp(take % 10)})`, `Subtract ones first`)}
+            <br />
+            {initialOnes < take % 10 && (
+              <span style={{ color: '#D97706', fontWeight: 800 }}>
+                ⚠️ {L('एकाइ नपुगेकाले १ दशक फुकाइयो (+१० एकाइ)', 'Not enough ones, unbundled 1 ten')}
+                <br />
+              </span>
+            )}
+            2. {L(`दशकबाट दशक घटाउने`, `Subtract tens from tens`)}
+          </div>
+
+          {isDone && (
+            <div
+              style={{
+                background: '#E6F3E9',
+                border: '2px solid #10B981',
+                borderRadius: 14,
+                padding: '12px 16px',
+                marginTop: 10,
+              }}
+            >
+              <div style={{ fontWeight: 900, fontSize: 18, color: '#065F46' }}>
+                🎉 {L(`बाँकी = ${toNp(diff)}`, `Remaining = ${diff}`)}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </SimFrame2D>
+  );
 };

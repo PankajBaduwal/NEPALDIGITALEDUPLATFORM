@@ -1,152 +1,283 @@
 /**
- * Chapter 20 · Coins and Notes (सिक्का र नोट)
- * Toy Shop — choose a toy, read its price, pay the exact amount with Nepali coins and notes.
+ * Chapter 20 · Coins and Notes (सिक्का र नोट - खेलौना पसल)
+ * Sim 2: Toy Shop (खेलौना पसल) — Pure 2D Edition
+ * 100% 2D SVG / Interactive Shop – No Three.js/WebGL dependencies.
  */
-import React, { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit } from '../class1-math-kit/SimKit';
-import { coin, note, mat, shadowed, NOTE_VALUES, COIN_VALUES, apple, balloon, ball, pencil, critter, star, basket, textSprite } from '../class1-math-kit/models';
-import { toNp, shuffle } from '../class1-math-kit/nepali';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp } from '../class1-math-kit/nepali';
 
-interface Props { onBackToLibrary: () => void; userRole?: string }
-const NOTE_BG: Record<number, string> = { 5: '#f9a8a8', 10: '#d8b4fe', 20: '#fdba74', 50: '#93c5fd', 100: '#bef264' };
-const TOYS = [
-  { id: 'pencil', price: 5, np: 'पेन्सिल', en: 'Pencil', make: () => { const p = pencil('#facc15', 2); p.rotation.z = Math.PI / 2.6; p.scale.setScalar(0.9); return p; } },
-  { id: 'balloon', price: 10, np: 'बेलुन', en: 'Balloon', make: () => balloon('#ef4444') },
-  { id: 'apple', price: 15, np: 'स्याउ', en: 'Apple', make: () => { const a = apple('#dc2626'); a.scale.setScalar(1.5); return a; } },
-  { id: 'ball', price: 20, np: 'बल', en: 'Ball', make: () => ball('#0ea5e9', 0.7) },
-  { id: 'bear', price: 35, np: 'भालु', en: 'Teddy bear', make: () => { const b = critter('bear', '#a16207'); b.scale.setScalar(1.1); return b; } },
-  { id: 'star', price: 50, np: 'तारा', en: 'Golden star', make: () => { const s = star('#facc15', 0.8); s.rotation.x = 0; return s; } },
+interface Props {
+  onBackToLibrary: () => void;
+  userRole?: string;
+}
+
+interface Toy {
+  id: string;
+  nameEn: string;
+  nameNp: string;
+  price: number;
+  emoji: string;
+}
+
+const TOYS: Toy[] = [
+  { id: 'ball', nameEn: 'Football', nameNp: 'फुटबल', price: 15, emoji: '⚽' },
+  { id: 'car', nameEn: 'Toy Car', nameNp: 'खेलौना कार', price: 25, emoji: '🚗' },
+  { id: 'bear', nameEn: 'Teddy Bear', nameNp: 'भालु खेलौना', price: 30, emoji: '🧸' },
+  { id: 'kite', nameEn: 'Colorful Kite', nameNp: 'चङ्गा', price: 10, emoji: '🪁' },
+  { id: 'train', nameEn: 'Toy Train', nameNp: 'रेलगाडी', price: 40, emoji: '🚂' },
 ];
 
 export const ToyShop: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G1-CH20-02', chapter: 20, titleNp: 'खेलौना पसल (रुपैयाँ तिरौँ)', titleEn: 'Toy Shop (Pay with Rupees)' });
-  const [sel, setSel] = useState<number | null>(null);
-  const [paid, setPaid] = useState<{ kind: 'coin' | 'note'; v: number }[]>([]);
-  const [bought, setBought] = useState<number[]>([]);
-  const [round, setRound] = useState(0);
-  const [score, setScore] = useState(0);
-  const [finished, setFinished] = useState(false);
-  const [learnStep, setLearnStep] = useState(0);
-  const scene = useRef<{ select: (i: number | null) => void; addMoney: (k: 'coin' | 'note', v: number) => void; clearMoney: () => void; buy: (i: number) => void; reset: () => void } | null>(null);
-  const live = useRef({ mode: kit.mode, onSelect: (_i: number) => {} });
-  live.current.mode = kit.mode;
-  const total = paid.reduce((a, p) => a + p.v, 0);
-  const num = (v: number) => (kit.lang === 'ne' ? toNp(v) : String(v));
-  const price = sel !== null ? TOYS[sel].price : 0;
+  const kit = useSimKit({
+    code: 'SIM-MATH-G1-CH20-02',
+    chapter: 20,
+    titleNp: 'खेलौना पसल (खरिद र फिर्ता)',
+    titleEn: 'Toy Shop (Purchasing & Change)',
+  });
 
-  useStage(kit.stageRef, (ctx) => {
-    const shelf = shadowed(new THREE.Mesh(new THREE.BoxGeometry(15, 0.4, 3), mat('#92400e', 0.85))); shelf.position.set(0, 1.6, -3); ctx.scene.add(shelf);
-    const back = shadowed(new THREE.Mesh(new THREE.BoxGeometry(15.6, 4, 0.3), mat('#fcd34d', 0.9))); back.position.set(0, 3.3, -4.6); ctx.scene.add(back);
-    const counter = shadowed(new THREE.Mesh(new THREE.BoxGeometry(15, 0.6, 4), mat('#b45309', 0.8))); counter.position.set(0, 0.3, 3); ctx.scene.add(counter);
-    const bask = basket('#c2410c', 2.6); bask.position.set(7.4, 0.6, 3); ctx.scene.add(bask);
-    const toys: THREE.Group[] = [];
-    TOYS.forEach((t, i) => {
-      const g = new THREE.Group();
-      const m = t.make(); m.position.y = 0; m.scale.multiplyScalar(1.5); g.add(m);
-      const tag = textSprite(`Rs ${t.price}`, 1.4, { px: 70, w: 256, h: 128, bg: '#ffffff', border: '#16a34a', color: '#14532d' }); tag.position.set(0, -0.35, 1.5); g.add(tag);
-      g.position.set(-6 + i * 2.4, 2.4, -3); g.userData.toy = i; g.userData.home = g.position.clone();
-      ctx.scene.add(g); toys.push(g);
-    });
-    const money = new THREE.Group(); ctx.scene.add(money);
-    const select = (i: number | null) => toys.forEach((g, j) => { g.userData.sel = i === j; });
-    const addMoney = (kind: 'coin' | 'note', v: number) => {
-      const o = kind === 'note' ? note(v) : coin(v, 0.7);
-      const idx = money.children.length;
-      const to = new THREE.Vector3(-6.5 + (idx % 6) * 2.4, 0.7 + Math.floor(idx / 6) * 0.06, 2.2 + Math.floor(idx / 6) * 1.2);
-      o.position.set(to.x, 6, to.z); o.scale.setScalar(kind === 'note' ? 0.65 : 1); money.add(o);
-      const p0 = o.position.clone();
-      ctx.tween(520, (k) => o.position.lerpVectors(p0, to, k), undefined, ease.bounce);
-    };
-    const clearMoney = () => [...money.children].forEach((c) => money.remove(c));
-    const buy = (i: number) => {
-      const g = toys[i]; const p0 = g.position.clone(); const p1 = new THREE.Vector3(7.4, 1.6, 3);
-      ctx.tween(900, (k) => { g.position.lerpVectors(p0, p1, k); g.position.y += Math.sin(k * Math.PI) * 3; g.scale.setScalar(1 - 0.3 * k); }, () => { g.visible = false; }, ease.inOut);
-      g.userData.sold = true;
-    };
-    const reset = () => toys.forEach((g) => { g.visible = true; g.userData.sold = false; g.userData.sel = false; g.position.copy(g.userData.home); g.scale.setScalar(1); });
-    scene.current = { select, addMoney, clearMoney, buy, reset };
-    ctx.onFrame((_d, t) => toys.forEach((g, i) => { if (g.userData.sold) return; const up = g.userData.sel ? 0.9 : 0; g.position.y += (g.userData.home.y + up + Math.sin(t * 2 + i) * 0.05 - g.position.y) * 0.15; g.rotation.y = g.userData.sel ? t : 0; }));
-    ctx.onTap(() => toys.filter((g) => !g.userData.sold), (hit) => {
-      if (!hit || live.current.mode === 'CHALLENGE') return;
-      let o: THREE.Object3D | null = hit.object;
-      while (o && o.userData.toy === undefined) o = o.parent;
-      if (o) live.current.onSelect(o.userData.toy);
-    });
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 5.4, 11], target: [0, 2.2, -0.6], minDistance: 7, maxDistance: 22, ground: 0xfde68a, sky: 0xfef3c7 });
+  const [selectedToy, setSelectedToy] = useState<Toy>(TOYS[0]);
+  const [paid, setPaid] = useState<number>(0);
 
-  const choose = (i: number) => {
-    if (bought.includes(i)) return;
-    setSel(i); setPaid([]); scene.current?.clearMoney(); scene.current?.select(i); kit.tap();
-    kit.say(`${TOYS[i].np} — रु. ${toNp(TOYS[i].price)}। ठीक रकम तिरौँ।`, `${TOYS[i].en} costs Rs ${TOYS[i].price}. Pay the exact amount.`);
-  };
-  live.current.onSelect = choose;
+  const isNe = kit.lang === 'ne';
+  const L = (np: string, en: string) => (isNe ? np : en);
 
-  const pay = () => {
-    if (sel === null) { kit.oops('पहिले खेलौना रोजौँ', 'Choose a toy first'); return; }
-    if (total === price) {
-      kit.good(`${TOYS[sel].np} किन्यौँ!`, `You bought the ${TOYS[sel].en.toLowerCase()}!`); kit.star();
-      scene.current?.buy(sel); setBought((b) => [...b, sel]); setSel(null); setPaid([]);
-      window.setTimeout(() => scene.current?.clearMoney(), 700);
-      if (kit.mode === 'CHALLENGE') {
-        const ns = score + 1; setScore(ns);
-        window.setTimeout(() => { if (round + 1 >= 5) { setFinished(true); kit.finish(ns, 5); } else nextTask(round + 1); }, 1200);
-      } else if (kit.mode === 'LEARN') setLearnStep((s) => s + 1);
-    } else if (total < price) kit.oops(`रु. ${toNp(price - total)} अझै चाहिन्छ`, `You need Rs ${price - total} more`);
-    else kit.oops(`रु. ${toNp(total - price)} धेरै भयो`, `That is Rs ${total - price} too much`);
-  };
-  const addMoney = (kind: 'coin' | 'note', v: number) => {
-    if (sel === null) { kit.oops('पहिले खेलौना रोजौँ', 'Choose a toy first'); return; }
-    scene.current?.addMoney(kind, v); setPaid((p) => [...p, { kind, v }]); kit.tap();
+  const change = Math.max(0, paid - selectedToy.price);
+  const isPaidEnough = paid >= selectedToy.price;
+
+  const addPayment = (amount: number) => {
+    kit.tap();
+    const newPaid = paid + amount;
+    setPaid(newPaid);
+    if (newPaid >= selectedToy.price) {
+      const chg = newPaid - selectedToy.price;
+      kit.good(
+        `खरिद सफल! खेलौनाको मूल्य रु ${toNp(selectedToy.price)}, फिर्ता रकम रु ${toNp(chg)}।`,
+        `Purchase complete! Toy price Rs ${selectedToy.price}, change Rs ${chg}.`
+      );
+    }
   };
 
-  const tasks = useRef<number[]>([]);
-  const nextTask = (r: number) => {
-    setRound(r);
-    const i = tasks.current[r];
-    setPaid([]); scene.current?.clearMoney(); setSel(i); scene.current?.select(i);
-    kit.say(`${TOYS[i].np} किन्नुहोस्। मूल्य रु. ${toNp(TOYS[i].price)}। ठीक रकम तिरौँ।`, `Buy the ${TOYS[i].en.toLowerCase()}. It costs Rs ${TOYS[i].price}. Pay exactly.`);
+  const clearPurchase = () => {
+    kit.tap();
+    setPaid(0);
   };
-  useEffect(() => {
-    scene.current?.reset(); scene.current?.clearMoney(); setBought([]); setPaid([]); setSel(null); setRound(0); setScore(0); setFinished(false); setLearnStep(0);
-    if (kit.mode === 'LEARN') { choose(0); kit.say('पेन्सिल रु. ५ को छ। रु. ५ को नोट थपौँ।', 'The pencil costs Rs 5. Add a Rs 5 note.'); }
-    else if (kit.mode === 'PLAY') kit.say('मन परेको खेलौना छोऔँ र पैसा तिरौँ।', 'Tap a toy and pay for it.');
-    else { tasks.current = shuffle([0, 1, 2, 3, 4, 5]).slice(0, 5); window.setTimeout(() => nextTask(0), 100); }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [kit.mode]);
-  useEffect(() => { if (kit.mode === 'LEARN' && learnStep > 0 && learnStep < TOYS.length) { const i = learnStep; window.setTimeout(() => choose(i), 900); } /* eslint-disable-next-line */ }, [learnStep]);
 
-  const hud = (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #16a34a', textAlign: 'center' }}>
-      <div style={{ fontSize: 15, fontWeight: 800 }}>{kit.t('मूल्य', 'Price')}: <b style={{ fontSize: 24 }}>{sel === null ? '—' : `${kit.t('रु.', 'Rs')} ${num(price)}`}</b></div>
-      <div style={{ fontSize: 20, fontWeight: 900, color: total === price && sel !== null ? '#16a34a' : total > price ? '#dc2626' : '#0369a1' }}>{kit.t('तिरेको', 'Paid')}: {kit.t('रु.', 'Rs')} {num(total)}</div>
-    </div>
+  const selectToy = (toy: Toy) => {
+    kit.tap();
+    setSelectedToy(toy);
+    setPaid(0);
+  };
+
+  const quizQuestions: QuizQuestion[] = useMemo(
+    () => [
+      {
+        np: 'रु १५ को फुटबल किन्न रु २० दिँदा कति फिर्ता आउँछ?',
+        en: 'A football costs Rs 15. You give Rs 20. How much is the change?',
+        options: [
+          { key: '5', label: isNe ? 'रु ५' : 'Rs 5' },
+          { key: '10', label: isNe ? 'रु १०' : 'Rs 10' },
+          { key: '2', label: isNe ? 'रु २' : 'Rs 2' },
+        ],
+        answer: '5',
+      },
+      {
+        np: 'रु २५ को खेलौना किन्न रु ५० दिँदा कति फिर्ता आउँछ?',
+        en: 'A toy costs Rs 25. You pay Rs 50. How much is the change?',
+        options: [
+          { key: '25', label: isNe ? 'रु २५' : 'Rs 25' },
+          { key: '20', label: isNe ? 'रु २०' : 'Rs 20' },
+          { key: '30', label: isNe ? 'रु ३०' : 'Rs 30' },
+        ],
+        answer: '25',
+      },
+    ],
+    [isNe]
   );
-  const chip = (kind: 'coin' | 'note', v: number) => (
-    <CBtn key={`${kind}${v}`} onClick={() => addMoney(kind, v)} style={{ background: kind === 'note' ? NOTE_BG[v] : '#fbbf24', color: '#1f2937', minWidth: 64, padding: '8px 8px', boxShadow: '0 3px 0 rgba(0,0,0,.2)', borderRadius: kind === 'coin' ? 40 : 10 }}>
-      {kind === 'note' ? '💵' : '🪙'} {num(v)}
-    </CBtn>
+
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      grade={1}
+      hud={
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #187C68',
+            borderRadius: 16,
+            padding: '8px 18px',
+            boxShadow: '0 4px 12px rgba(24,124,104,0.15)',
+            fontWeight: 900,
+            fontSize: 18,
+            color: '#187C68',
+          }}
+        >
+          🏷️ {L('मूल्य:', 'Price:')} रु {isNe ? toNp(selectedToy.price) : selectedToy.price} |{' '}
+          {L('तिरेको:', 'Paid:')} रु {isNe ? toNp(paid) : paid} |{' '}
+          <span style={{ color: '#047857' }}>
+            {L('फिर्ता:', 'Change:')} रु {isNe ? toNp(change) : change}
+          </span>
+        </div>
+      }
+      panel={
+        kit.mode === 'CHALLENGE' ? (
+          <QuizPanel kit={kit} questions={quizQuestions} />
+        ) : (
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>
+              {L('पैसा तिर्नुहोस्:', 'Pay with cash:')}
+            </span>
+            {[5, 10, 20, 50].map((amt) => (
+              <button
+                key={amt}
+                onClick={() => addPayment(amt)}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: 12,
+                  border: '1px solid #187C68',
+                  background: '#FFFFFF',
+                  color: '#187C68',
+                  fontWeight: 900,
+                  fontSize: 14,
+                  cursor: 'pointer',
+                }}
+              >
+                + रु {isNe ? toNp(amt) : amt}
+              </button>
+            ))}
+
+            <button
+              onClick={clearPurchase}
+              style={{
+                marginLeft: 'auto',
+                background: '#F1F5F9',
+                border: '1px solid #CBD5E1',
+                padding: '8px 14px',
+                borderRadius: 10,
+                fontSize: 13,
+                fontWeight: 800,
+                cursor: 'pointer',
+              }}
+            >
+              🔄 {L('पुनः सुरु', 'Reset Payment')}
+            </button>
+          </div>
+        )
+      }
+    >
+      {/* ── 2D Toy Shop Counter ───────────────────────────────── */}
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 460,
+          display: 'grid',
+          gridTemplateColumns: 'minmax(280px, 1.2fr) minmax(220px, 0.8fr)',
+          gap: 20,
+          padding: 24,
+          background: 'linear-gradient(180deg, #E0F2FE 0%, #F5F7F5 60%)',
+          alignItems: 'center',
+        }}
+      >
+        {/* Toy Shelves */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 24,
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+            padding: 20,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 14,
+          }}
+        >
+          <div style={{ fontSize: 16, fontWeight: 900, color: '#187C68' }}>
+            🏪 {L('खेलौना छान्नुहोस् (Choose a Toy):', 'Choose a Toy:')}
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 12 }}>
+            {TOYS.map((toy) => {
+              const isSelected = selectedToy.id === toy.id;
+              return (
+                <div
+                  key={toy.id}
+                  onClick={() => selectToy(toy)}
+                  style={{
+                    borderRadius: 16,
+                    border: isSelected ? '3px solid #187C68' : '1px solid #E2E8F0',
+                    background: isSelected ? '#E6F3E9' : '#F8FAFC',
+                    padding: 12,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    transform: isSelected ? 'scale(1.05)' : 'none',
+                    transition: 'all 0.15s ease',
+                    boxShadow: isSelected ? '0 4px 12px rgba(24,124,104,0.2)' : 'none',
+                  }}
+                >
+                  <span style={{ fontSize: 44 }}>{toy.emoji}</span>
+                  <div style={{ fontSize: 13, fontWeight: 900, marginTop: 6, color: '#1E293B' }}>
+                    {isNe ? toy.nameNp : toy.nameEn}
+                  </div>
+                  <div style={{ fontSize: 12, fontWeight: 800, color: '#D97706' }}>
+                    रु {isNe ? toNp(toy.price) : toy.price}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Cash Register / Counter Card */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 24,
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+            padding: 24,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            textAlign: 'center',
+          }}
+        >
+          <div style={{ fontSize: 48 }}>{selectedToy.emoji}</div>
+          <div style={{ fontSize: 20, fontWeight: 900, color: '#187C68' }}>
+            {isNe ? selectedToy.nameNp : selectedToy.nameEn}
+          </div>
+          <div style={{ fontSize: 15, color: '#475569', fontWeight: 800 }}>
+            {L(`मूल्य: रु ${toNp(selectedToy.price)}`, `Price: Rs ${selectedToy.price}`)}
+          </div>
+
+          {isPaidEnough ? (
+            <div
+              style={{
+                background: '#E6F3E9',
+                border: '2px solid #10B981',
+                borderRadius: 16,
+                padding: '12px 16px',
+                animation: 'simPop 0.3s ease',
+              }}
+            >
+              <div style={{ fontWeight: 900, fontSize: 16, color: '#065F46' }}>
+                🎉 {L('रकम भुक्तानी भयो!', 'Payment Received!')}
+              </div>
+              <div style={{ fontSize: 14, fontWeight: 800, color: '#047857', marginTop: 4 }}>
+                {L(`फिर्ता रकम: रु ${toNp(change)}`, `Change to return: Rs ${change}`)}
+              </div>
+            </div>
+          ) : (
+            <div style={{ color: '#D97706', fontSize: 13, fontWeight: 800 }}>
+              ⚠️ {L(`अझै रु ${toNp(selectedToy.price - paid)} तिर्न बाँकी`, `Rs ${selectedToy.price - paid} remaining to pay`)}
+            </div>
+          )}
+        </div>
+      </div>
+    </SimFrame2D>
   );
-  const money = (
-    <>
-      {COIN_VALUES.map((v) => chip('coin', v))}{NOTE_VALUES.map((v) => chip('note', v))}
-      <CBtn color="#f59e0b" onClick={() => { setPaid([]); scene.current?.clearMoney(); }}>↺</CBtn>
-      <CBtn color="#16a34a" onClick={pay}>✓ {kit.t('तिरौँ', 'Pay')}</CBtn>
-    </>
-  );
-  const panel = finished ? (
-    <div style={{ textAlign: 'center' }}>
-      <div style={{ fontSize: 22, fontWeight: 900 }}>🏆 {kit.t(`५ मध्ये ${toNp(score)} सही!`, `${score} of 5 correct!`)}</div>
-      <CBtn color="#0ea5e9" onClick={() => { kit.setMode('PLAY'); window.setTimeout(() => kit.setMode('CHALLENGE'), 0); }}>↺ {kit.t('फेरि खेलौँ', 'Play again')}</CBtn>
-    </div>
-  ) : (
-    <div>
-      {kit.mode === 'CHALLENGE' && <div style={{ fontWeight: 800, marginBottom: 6 }}>{kit.t('कार्य', 'Task')} {num(round + 1)}/{num(5)}{sel !== null && ` · ${kit.t(TOYS[sel].np, TOYS[sel].en)} ${kit.t('रु.', 'Rs')} ${num(price)}`}</div>}
-      {kit.mode === 'LEARN' && <div style={{ fontWeight: 800, marginBottom: 6 }}>{learnStep >= TOYS.length ? kit.t('🎉 सबै खेलौना किनियो!', '🎉 You bought everything!') : kit.t('नोट वा सिक्का थपेर ठीक रकम बनाऔँ।', 'Add notes or coins to make the exact price.')}</div>}
-      <Controls>{money}</Controls>
-    </div>
-  );
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };

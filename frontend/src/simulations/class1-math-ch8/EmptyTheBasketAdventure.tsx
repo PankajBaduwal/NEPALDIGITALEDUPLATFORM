@@ -255,22 +255,22 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
   };
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header Bar */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-semibold">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-700 font-semibold">
               Class 1 • Math • Chapter 8 • Simulation 02
             </span>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
-              <Package className="w-4 h-4 text-amber-400" />
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <Package className="w-4 h-4 text-amber-700" />
               {language === 'np' ? 'टोकरी खाली गर्ने साहसिक खेल' : 'Empty the Basket Adventure'}
             </h1>
           </div>
@@ -290,8 +290,8 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
             onClick={() => setSoundEnabled((s) => !s)}
             className={`p-2 rounded-lg border transition ${
               soundEnabled
-                ? 'bg-slate-700 border-slate-600 text-emerald-400'
-                : 'bg-slate-800 border-slate-700 text-slate-500'
+                ? 'bg-slate-100 border-slate-300 text-emerald-700'
+                : 'bg-white border-slate-200 text-slate-500'
             }`}
           >
             {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
@@ -300,26 +300,26 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
       </header>
 
       {/* Main Content Area */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-center justify-center bg-slate-950">
+      <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-center justify-center bg-slate-50">
         {!completed ? (
-          <div className="w-full max-w-3xl bg-slate-850/90 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+          <div className="w-full max-w-3xl bg-slate-850/90 border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
             {/* Activity Banner */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
                 {language === 'np'
                   ? `अभ्यास ${NEP_DIGITS[actIndex + 1]} / ${NEP_DIGITS[CONTAINER_ACTIVITIES.length]}: ${currentAct.containerNameNp}`
                   : `Activity ${actIndex + 1} of ${CONTAINER_ACTIVITIES.length}: ${currentAct.containerNameEn}`}
               </span>
               <button
                 onClick={() => speak(currentAct.descriptionNp, currentAct.descriptionEn)}
-                className="text-slate-400 hover:text-white flex items-center gap-1 text-xs"
+                className="text-slate-500 hover:text-slate-900 flex items-center gap-1 text-xs"
               >
                 <Volume2 className="w-4 h-4" />
                 <span>{language === 'np' ? 'सुन्नुहोस्' : 'Listen'}</span>
               </button>
             </div>
 
-            <h2 className="text-lg md:text-xl font-bold text-white text-center">
+            <h2 className="text-lg md:text-xl font-bold text-slate-900 text-center">
               {language === 'np' ? currentAct.descriptionNp : currentAct.descriptionEn}
             </h2>
 
@@ -328,10 +328,10 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
               {/* Inside Container Card */}
               <div className="bg-amber-950/20 border-2 border-amber-500/40 rounded-3xl p-5 flex flex-col items-center min-h-[220px] justify-between">
                 <div className="flex items-center justify-between w-full">
-                  <span className="text-xs font-bold text-amber-300">
+                  <span className="text-xs font-bold text-amber-700">
                     {language === 'np' ? currentAct.containerNameNp : currentAct.containerNameEn}
                   </span>
-                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-black">
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-700 font-black">
                     {language === 'np' ? `बाँकी: ${NEP_DIGITS[remaining]}` : `Left: ${remaining}`}
                   </span>
                 </div>
@@ -357,7 +357,7 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
                   })}
                 </div>
 
-                <span className="text-[11px] text-slate-400 italic">
+                <span className="text-[11px] text-slate-500 italic">
                   {language === 'np' ? 'हटाउन वस्तुमा थिच्नुहोस्' : 'Click item to take away'}
                 </span>
               </div>
@@ -365,10 +365,10 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
               {/* Outside Removal Card */}
               <div className="bg-rose-950/20 border-2 border-rose-500/40 rounded-3xl p-5 flex flex-col items-center min-h-[220px] justify-between">
                 <div className="flex items-center justify-between w-full">
-                  <span className="text-xs font-bold text-rose-300">
+                  <span className="text-xs font-bold text-rose-700">
                     {language === 'np' ? 'हटाइएका वस्तुहरू' : 'Removed Items'}
                   </span>
-                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-black">
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-700 font-black">
                     {language === 'np'
                       ? `हटाइयो: ${NEP_DIGITS[removedIndices.size]} / ${NEP_DIGITS[currentAct.takeAwayTarget]}`
                       : `Removed: ${removedIndices.size} of ${currentAct.takeAwayTarget}`}
@@ -390,7 +390,7 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
                   )}
                 </div>
 
-                <span className="text-[11px] text-slate-400 italic">
+                <span className="text-[11px] text-slate-500 italic">
                   {language === 'np' ? 'हटाउने लक्ष्य' : 'Target to remove'}:{' '}
                   {language === 'np'
                     ? NEP_DIGITS[currentAct.takeAwayTarget]
@@ -400,8 +400,8 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
             </div>
 
             {/* Live Subtraction Equation Formula */}
-            <div className="bg-slate-800/80 rounded-2xl p-4 border border-slate-700 flex items-center justify-center gap-4 text-2xl font-black">
-              <span className="text-amber-400">
+            <div className="bg-white rounded-2xl p-4 border border-slate-200 flex items-center justify-center gap-4 text-2xl font-black">
+              <span className="text-amber-700">
                 {language === 'np'
                   ? NEP_DIGITS[currentAct.initialCount]
                   : currentAct.initialCount}
@@ -412,12 +412,12 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
                   ? NEP_DIGITS[removedIndices.size]
                   : removedIndices.size}
               </span>
-              <Equal className="w-6 h-6 text-emerald-400 font-black" />
+              <Equal className="w-6 h-6 text-emerald-700 font-black" />
               <span
                 className={`px-3 py-1 rounded-xl border ${
                   isTargetReached
-                    ? 'bg-emerald-600/30 border-emerald-400 text-emerald-300'
-                    : 'bg-slate-700 border-slate-600 text-slate-400'
+                    ? 'bg-emerald-600/30 border-emerald-400 text-emerald-700'
+                    : 'bg-slate-100 border-slate-300 text-slate-500'
                 }`}
               >
                 {language === 'np' ? NEP_DIGITS[remaining] : remaining}
@@ -431,7 +431,7 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
                   setRemovedIndices(new Set());
                   playSound('click');
                 }}
-                className="px-3 py-2 text-xs rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5"
+                className="px-3 py-2 text-xs rounded-xl bg-white hover:bg-slate-100 text-slate-600 flex items-center gap-1.5"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 {language === 'np' ? 'सुरुबाट' : 'Reset'}
@@ -456,14 +456,14 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
           </div>
         ) : (
           /* Completion Summary */
-          <div className="w-full max-w-md bg-slate-850 border border-slate-700 rounded-3xl p-6 text-center flex flex-col items-center gap-4 shadow-2xl">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-400">
+          <div className="w-full max-w-md bg-slate-850 border border-slate-200 rounded-3xl p-6 text-center flex flex-col items-center gap-4 shadow-2xl">
+            <div className="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-700">
               <Trophy className="w-8 h-8" />
             </div>
-            <h2 className="text-xl font-black text-white">
+            <h2 className="text-xl font-black text-slate-900">
               {language === 'np' ? 'सबै टोकरीहरू पूरा भए!' : 'All Containers Completed!'}
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500">
               {language === 'np'
                 ? 'तपाईंले भाँडा र टोकरीहरूबाट वस्तु निकालेर घटाउ गर्न सिक्नुभयो।'
                 : 'You successfully learned subtraction by removing items from containers.'}
@@ -475,7 +475,7 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
                   setRemovedIndices(new Set());
                   setCompleted(false);
                 }}
-                className="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition flex items-center justify-center gap-1.5"
+                className="flex-1 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs font-bold transition flex items-center justify-center gap-1.5"
               >
                 <RotateCcw className="w-4 h-4" />
                 {language === 'np' ? 'पुनः खेल्नुहोस्' : 'Play Again'}

@@ -1,5 +1,5 @@
 /**
- * Registers the Class 4 Mathematics simulations (3D, one to four per lesson of "Mathematics, Grade 4").
+ * Registers the Class 4 Mathematics simulations (2D, one to four per lesson of "Mathematics, Grade 4").
  * Code: frontend/src/simulations/class4-math/. Safe to run again: it updates by `code`.
  *   npm run seed:class4-math
  */
@@ -15,7 +15,7 @@ const SimulationSchema = new mongoose.Schema(
     code: { type: String, required: true, unique: true }, title: { type: String, required: true }, titleNepali: String,
     description: { type: String, required: true }, descriptionNepali: String, subjectCode: { type: String, required: true }, subjectName: { type: String, required: true },
     gradeLevels: [{ type: Number, required: true }], chapterNumber: Number, chapterName: String, chapterNameNepali: String,
-    simulationType: { type: String, enum: ['THREE_JS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'], default: 'REACT_CANVAS' },
+    simulationType: { type: String, enum: ['HTML5_CANVAS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'], default: 'REACT_CANVAS' },
     componentKey: String, runtimeUrl: String, difficulty: { type: String, enum: ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'], default: 'BEGINNER' },
     estimatedDurationMinutes: { type: Number, default: 15 }, learningObjectives: [String], learningObjectivesNepali: [String],
     isPublished: { type: Boolean, default: true }, currentVersion: { type: String, default: '1.0.0' }, tags: [String],
@@ -32,7 +32,7 @@ const LESSONS: Record<number, [string, string]> = {
 // code, key, lesson, title, titleNp, description, descriptionNp, objectives
 type S = [string, string, number, string, string, string, string, string[]];
 const SIMS: S[] = [
-  ['SIM-MATH-G4-L1-01', 'class4-math-l1-protractor', 1, 'Protractor Lab', 'चाँद प्रयोगशाला', 'A 3D protractor: open an arm from the base line, read the angle in degrees and name acute, right, obtuse and straight angles.', '३डी चाँदमा भुजा खोलेर कोण डिग्रीमा पढ्ने; न्यून, समकोण, अधिक र सरल कोण चिन्ने।', ['Measure and construct angles with a protractor', 'Name kinds of angles']],
+  ['SIM-MATH-G4-L1-01', 'class4-math-l1-protractor', 1, 'Protractor Lab', 'चाँद प्रयोगशाला', 'A protractor: open an arm from the base line, read the angle in degrees and name acute, right, obtuse and straight angles.', '३डी चाँदमा भुजा खोलेर कोण डिग्रीमा पढ्ने; न्यून, समकोण, अधिक र सरल कोण चिन्ने।', ['Measure and construct angles with a protractor', 'Name kinds of angles']],
   ['SIM-MATH-G4-L2-01', 'class4-math-l2-shape-builder', 2, 'Shape Builder', 'आकृति निर्माता', 'Triangles and quadrilaterals as 3D tiles with labelled vertices and side lengths; learn their properties and name them.', 'शीर्षबिन्दु र भुजाको नापसहित त्रिभुज र चतुर्भुजका आकृति; गुण पढ्ने र नाम भन्ने।', ['Name plane figures', 'Sides, vertices and equal sides']],
   ['SIM-MATH-G4-L3-01', 'class4-math-l3-solid-explorer', 3, 'Solid Explorer', 'ठोस वस्तु अन्वेषक', 'Spin a cube, cuboid, pyramid, prism, cylinder, cone and sphere; count faces, edges and vertices.', 'घन, घनाभ, पिरामिड, प्रिज्म, बेलना, शङ्कु र गोला घुमाएर सतह, किनारा र शीर्ष गन्ने।', ['Faces, edges and vertices of solids', 'Tell flat from curved faces']],
   ['SIM-MATH-G4-L4-01', 'class4-math-l4-lakh-towers', 4, 'Lakh Towers', 'लाख टावर', 'Seven columns of cubes (ten-lakhs to ones): build and read numbers up to 99,99,999 with place values and commas.', 'सात स्तम्भका घनले ९९,९९,९९९ सम्मका सङ्ख्या बनाउने, पढ्ने र स्थानीय मान पत्ता लगाउने।', ['Read and write 7-digit numbers', 'Place value in the lakh system']],
@@ -47,11 +47,11 @@ const SIMS: S[] = [
   ['SIM-MATH-G4-L8-01', 'class4-math-l8-note-counter', 8, 'Note Counter', 'नोट गणक', 'Stacks of Nepali notes and coins: make an amount, find the fewest notes, and Rs to paisa.', 'नेपाली नोट र सिक्काका थुप्रा: रकम बनाउने, कम नोट खोज्ने, रुपैयाँ र पैसा।', ['Count money', 'Rupees and paisa']],
   ['SIM-MATH-G4-L9-01', 'class4-math-l9-distance', 9, 'Distance: km, m, cm, mm', 'दुरी: किमी, मिटर, सेमी, मिमी', 'Roads and rulers to convert kilometres, metres, centimetres and millimetres.', 'सडक र रुलरबाट किमी, मिटर, सेमी र मिमी रूपान्तरण।', ['Convert units of length']],
   ['SIM-MATH-G4-L10-01', 'class4-math-l10-capacity', 10, 'Capacity: litre and millilitre', 'क्षमता: लिटर र मिलिलिटर', 'Fill a tank with litre bottles and millilitre cups; 1 L = 1000 mL.', 'लिटर र मिलिलिटरले ट्याङ्की भर्ने; १ लिटर = १००० मिलि।', ['Convert litres and millilitres']],
-  ['SIM-MATH-G4-L11-01', 'class4-math-l11-weight', 11, 'Weight: kilogram and gram', 'तौल: किलोग्राम र ग्राम', 'Weigh on a 3D scale; 1 kg = 1000 g.', '३डी तराजुमा तौल्ने; १ केजी = १००० ग्राम।', ['Convert kilograms and grams']],
+  ['SIM-MATH-G4-L11-01', 'class4-math-l11-weight', 11, 'Weight: kilogram and gram', 'तौल: किलोग्राम र ग्राम', 'Weigh on a scale; 1 kg = 1000 g.', '३डी तराजुमा तौल्ने; १ केजी = १००० ग्राम।', ['Convert kilograms and grams']],
   ['SIM-MATH-G4-L12-01', 'class4-math-l12-garden-lab', 12, 'Garden Lab (Perimeter & Area)', 'बगैँचा प्रयोगशाला', 'An ant walks round a garden (perimeter) and tiles cover it (area); change length and width.', 'कमिला बगैँचा वरिपरि हिँड्छ (परिमिति) र टाइलले छोप्छ (क्षेत्रफल)।', ['Perimeter of rectangle and square', 'Area of rectangle and square']],
   ['SIM-MATH-G4-L13-01', 'class4-math-l13-bill-shop', 13, 'Bill Shop', 'बिल पसल', 'Shop from shelves: quantity × rate = amount; total bill and change.', 'पसलबाट सामान किन्ने: परिमाण × दर = रकम; जम्मा बिल र फिर्ता।', ['Prepare a bill', 'Find the change']],
   ['SIM-MATH-G4-L13-02', 'class4-math-l13-budget-towers', 13, 'Budget Towers', 'बजेट टावर', 'Towers for income and spending; saving = income − spending; spot a deficit.', 'आम्दानी र खर्चका टावर; बचत = आम्दानी − खर्च।', ['Make a simple budget', 'Saving and deficit']],
-  ['SIM-MATH-G4-L14-01', 'class4-math-l14-bar-graph', 14, 'Bar Graph Lab', 'स्तम्भ चित्र प्रयोगशाला', '3D bars with a scale of 1, 2, 5 or 10 per block: read, build and compare.', '१, २, ५ वा १० प्रति खण्डका ३डी स्तम्भ: पढ्ने, बनाउने र तुलना गर्ने।', ['Read and draw bar graphs']],
+  ['SIM-MATH-G4-L14-01', 'class4-math-l14-bar-graph', 14, 'Bar Graph Lab', 'स्तम्भ चित्र प्रयोगशाला', 'bars with a scale of 1, 2, 5 or 10 per block: read, build and compare.', '१, २, ५ वा १० प्रति खण्डका ३डी स्तम्भ: पढ्ने, बनाउने र तुलना गर्ने।', ['Read and draw bar graphs']],
   ['SIM-MATH-G4-L15-01', 'class4-math-l15-balance-algebra', 15, 'Balance Algebra', 'तराजु बीजगणित', 'A balance with an unknown x: take the same from both sides, or guess x until it balances.', 'अज्ञात x भएको तराजु: दुवैतिरबाट बराबर हटाउने वा अनुमान गर्ने।', ['Solve simple equations', 'Use a letter for an unknown']],
 ];
 
@@ -61,9 +61,9 @@ async function main() {
     const [chEn, chNp] = LESSONS[ch];
     const doc = {
       code, title, titleNepali: titleNp, description: desc, descriptionNepali: descNp, subjectCode: 'MATH', subjectName: 'Mathematics', gradeLevels: [4],
-      chapterNumber: ch, chapterName: chEn, chapterNameNepali: chNp, simulationType: 'THREE_JS', componentKey: key, runtimeUrl: `/simulations/class4-math/l${ch}/${key}`,
+      chapterNumber: ch, chapterName: chEn, chapterNameNepali: chNp, simulationType: 'HTML5_CANVAS', componentKey: key, runtimeUrl: `/simulations/class4-math/l${ch}/${key}`,
       difficulty: 'INTERMEDIATE', estimatedDurationMinutes: 15, learningObjectives: obj, learningObjectivesNepali: obj, isPublished: true, currentVersion: '1.0.0',
-      tags: ['Class 4', 'Mathematics', `Lesson ${ch}`, chEn, '3D WebGL', 'Learn · Play · Challenge'],
+      tags: ['Class 4', 'Mathematics', `Lesson ${ch}`, chEn, 'Learn · Play · Challenge'],
     };
     await Simulation.findOneAndUpdate({ code }, { $set: doc }, { upsert: true });
     console.log(`[OK] ${code}  ${title}`);

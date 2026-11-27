@@ -1,131 +1,312 @@
 /**
  * Chapter 11 · Subtraction of numbers up to 20 (२० सम्मका सङ्ख्याको घटाउ)
- * Sim 1: Fly-Away Birds — birds sit on a garden wall; tap a bird and it flies away, so the child SEES taking away.
+ * Sim 1: Fly-Away Birds (चरा उडे!) — Pure 2D Edition
+ * 100% 2D SVG / CSS Animations – No Three.js/WebGL dependencies.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, QuizPanel, Controls, CBtn, useSimKit, QuizQuestion } from '../class1-math-kit/SimKit';
-import { bird, tree, mat, shadowed, PALETTE } from '../class1-math-kit/models';
-import { enName, npName, toNp, shuffle, rnd } from '../class1-math-kit/nepali';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp } from '../class1-math-kit/nepali';
 
-interface Props { onBackToLibrary: () => void; userRole?: string }
-const MISSIONS = [{ s: 12, k: 3 }, { s: 15, k: 5 }, { s: 18, k: 6 }, { s: 20, k: 8 }, { s: 14, k: 4 }];
+interface Props {
+  onBackToLibrary: () => void;
+  userRole?: string;
+}
+
+const MISSIONS = [
+  { s: 12, k: 3 },
+  { s: 15, k: 5 },
+  { s: 18, k: 6 },
+  { s: 20, k: 8 },
+  { s: 14, k: 4 },
+];
+
+const BIRD_COLORS = ['#3B82F6', '#EF4444', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4'];
 
 export const FlyAwayBirds: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G1-CH11-01', chapter: 11, titleNp: 'चरा उडे! (२० सम्मको घटाउ)', titleEn: 'Fly-Away Birds (Take away up to 20)' });
+  const kit = useSimKit({
+    code: 'SIM-MATH-G1-CH11-01',
+    chapter: 11,
+    titleNp: 'चरा उडे! (२० सम्मको घटाउ)',
+    titleEn: 'Fly-Away Birds (Take away up to 20)',
+  });
+
   const [start, setStart] = useState(15);
   const [taken, setTaken] = useState(0);
   const [mi, setMi] = useState(0);
-  const [done, setDone] = useState(false);
-  const scene = useRef<{ set: (n: number) => void; flyMany: (k: number) => void } | null>(null);
-  const live = useRef({ mode: kit.mode, onFly: () => {} });
-  live.current.mode = kit.mode;
-  live.current.onFly = () => setTaken((t) => t + 1);
 
-  useStage(kit.stageRef, (ctx) => {
-    const wall = shadowed(new THREE.Mesh(new THREE.BoxGeometry(11, 0.7, 8), mat('#d6b98c', 0.9)));
-    wall.position.y = 0.35; ctx.scene.add(wall);
-    const t = tree(); t.position.set(-8.5, 0, -4); ctx.scene.add(t);
-    const t2 = tree(); t2.position.set(8.5, 0, -5); t2.scale.setScalar(0.85); ctx.scene.add(t2);
-    const flock = new THREE.Group(); ctx.scene.add(flock);
-    const slot = (i: number) => new THREE.Vector3(((i % 5) - 2) * 2, 0.7, Math.floor(i / 5) * 1.7 - 2.6);
-    const set = (n: number) => {
-      [...flock.children].forEach((c) => flock.remove(c));
-      for (let i = 0; i < n; i++) {
-        const b = bird(PALETTE[i % PALETTE.length]);
-        b.position.copy(slot(i)); b.rotation.y = -0.5; b.scale.setScalar(1.5); b.userData.isBird = true; b.userData.i = i;
-        flock.add(b);
+  const isNe = kit.lang === 'ne';
+  const L = (np: string, en: string) => (isNe ? np : en);
+  const remaining = Math.max(0, start - taken);
+
+  const mission = MISSIONS[mi % MISSIONS.length];
+
+  const flyOneBird = () => {
+    if (remaining <= 0) return;
+    kit.tap();
+    setTaken((t) => t + 1);
+  };
+
+  const resetBirds = (newStart?: number) => {
+    setStart(newStart ?? start);
+    setTaken(0);
+  };
+
+  const nextMission = () => {
+    const nextIdx = (mi + 1) % MISSIONS.length;
+    setMi(nextIdx);
+    setStart(MISSIONS[nextIdx].s);
+    setTaken(0);
+    kit.good(
+      `नयाँ कथा: ${toNp(MISSIONS[nextIdx].s)} चरा बसेका छन्!`,
+      `New mission: ${MISSIONS[nextIdx].s} birds on the wall!`
+    );
+  };
+
+  const quizQuestions: QuizQuestion[] = useMemo(
+    () => [
+      {
+        np: '१५ चरामा ३ चरा उडे भने कति बाँकी रहन्छन्? (१५ − ३ = ?)',
+        en: '15 birds on a wall, 3 fly away. How many remain? (15 − 3 = ?)',
+        options: [
+          { key: '12', label: isNe ? '१२' : '12' },
+          { key: '11', label: isNe ? '११' : '11' },
+          { key: '18', label: isNe ? '१८' : '18' },
+        ],
+        answer: '12',
+      },
+      {
+        np: '१८ चरामा ६ चरा उडे भने कति बाँकी? (१८ − ६ = ?)',
+        en: '18 birds on a wall, 6 fly away. How many remain? (18 − 6 = ?)',
+        options: [
+          { key: '12', label: isNe ? '१२' : '12' },
+          { key: '14', label: isNe ? '१४' : '14' },
+          { key: '10', label: isNe ? '१०' : '10' },
+        ],
+        answer: '12',
+      },
+      {
+        np: '२० मा ८ घटाउँदा कति हुन्छ? (२० − ८ = ?)',
+        en: 'What is 20 − 8?',
+        options: [
+          { key: '12', label: isNe ? '१२' : '12' },
+          { key: '13', label: isNe ? '१३' : '13' },
+          { key: '11', label: isNe ? '११' : '11' },
+        ],
+        answer: '12',
+      },
+      {
+        np: '१४ चरामा ४ चरा उडे भने कति चरा बाँकी? (१४ − ४ = ?)',
+        en: '14 birds, 4 fly away. How many remain? (14 − 4 = ?)',
+        options: [
+          { key: '10', label: isNe ? '१०' : '10' },
+          { key: '9', label: isNe ? '९' : '9' },
+          { key: '8', label: isNe ? '८' : '8' },
+        ],
+        answer: '10',
+      },
+    ],
+    [isNe]
+  );
+
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      grade={1}
+      hud={
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #187C68',
+            borderRadius: 16,
+            padding: '8px 16px',
+            boxShadow: '0 4px 12px rgba(24,124,104,0.15)',
+            fontWeight: 900,
+            fontSize: 22,
+            color: '#187C68',
+          }}
+        >
+          {isNe ? toNp(start) : start} − {isNe ? toNp(taken) : taken} ={' '}
+          <span style={{ color: '#047857' }}>{isNe ? toNp(remaining) : remaining}</span>
+        </div>
       }
-    };
-    const fly = (b: THREE.Object3D) => {
-      if (b.userData.flying) return;
-      b.userData.flying = true;
-      const p0 = b.position.clone();
-      const dir = (Math.random() - 0.5) * 8;
-      ctx.tween(1500, (k) => {
-        b.position.set(p0.x + dir * k, p0.y + 7 * k + Math.sin(k * 14) * 0.2, p0.z - 5 * k);
-        b.rotation.y = -0.5 - k * 0.6;
-        (b.userData.wings || []).forEach((w: THREE.Object3D, j: number) => { w.rotation.x = Math.sin(k * 60 + j) * 0.9; });
-        b.scale.setScalar(1.5 * (1 - 0.6 * k));
-      }, () => flock.remove(b), ease.inOut);
-    };
-    const flyMany = (k: number) => {
-      const sitting = flock.children.filter((c) => !c.userData.flying).slice(-k);
-      sitting.forEach((b, i) => window.setTimeout(() => { fly(b); live.current.onFly(); }, 350 * (i + 1)));
-    };
-    scene.current = { set, flyMany };
-    set(15);
-    ctx.onFrame((_dt, time) => flock.children.forEach((b) => { if (!b.userData.flying) b.position.y = 0.7 + Math.abs(Math.sin(time * 2 + b.userData.i)) * 0.04; }));
-    ctx.onTap(() => flock.children, (hit) => {
-      if (!hit || live.current.mode === 'CHALLENGE') return;
-      let o: THREE.Object3D | null = hit.object;
-      while (o && !o.userData.isBird) o = o.parent;
-      if (!o || o.userData.flying) return;
-      fly(o); live.current.onFly();
-    });
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 9.5, 11.5], target: [0, 0.6, -0.6], minDistance: 6, maxDistance: 22 });
+      panel={
+        kit.mode === 'CHALLENGE' ? (
+          <QuizPanel kit={kit} questions={quizQuestions} />
+        ) : (
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <button
+              onClick={flyOneBird}
+              disabled={remaining === 0}
+              style={{
+                background: remaining === 0 ? '#94A3B8' : '#187C68',
+                color: '#FFF',
+                border: 'none',
+                padding: '12px 24px',
+                borderRadius: 14,
+                fontSize: 16,
+                fontWeight: 900,
+                cursor: remaining === 0 ? 'not-allowed' : 'pointer',
+                boxShadow: '0 4px 10px rgba(24,124,104,0.25)',
+              }}
+            >
+              🕊️ {L('१ चरा उडाउनुहोस् (−१)', 'Make 1 Bird Fly Away (−1)')}
+            </button>
 
-  const mission = MISSIONS[mi];
-  // Learn: set up the mission. Play: set up the chosen number.
-  useEffect(() => {
-    if (kit.mode === 'LEARN') {
-      setStart(mission.s); setTaken(0); setDone(false); scene.current?.set(mission.s);
-      kit.say(`${npName(mission.s)} वटा चरा पर्खालमा बसे। ${npName(mission.k)} वटा चरालाई छोएर उडाऔँ।`, `${mission.s} birds sat on the wall. Tap ${mission.k} birds to make them fly away.`);
-    } else if (kit.mode === 'PLAY') {
-      setTaken(0); scene.current?.set(start);
-      kit.say('कुनै पनि चरालाई छोऔँ र उडेको हेरौँ।', 'Tap any bird and watch it fly away.');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [kit.mode, mi]);
-  useEffect(() => { if (kit.mode === 'PLAY') { setTaken(0); scene.current?.set(start); } /* eslint-disable-next-line */ }, [start]);
-  useEffect(() => {
-    if (kit.mode === 'LEARN' && !done && taken >= mission.k) {
-      setDone(true); kit.good(`${mission.s} − ${mission.k} = ${mission.s - mission.k}`, `${mission.s} − ${mission.k} = ${mission.s - mission.k}`); kit.star();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [taken]);
+            <button
+              onClick={() => resetBirds()}
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid #CBD5E1',
+                padding: '12px 18px',
+                borderRadius: 14,
+                fontSize: 14,
+                fontWeight: 800,
+                cursor: 'pointer',
+              }}
+            >
+              🔄 {L('सबै चरा फर्काउनुहोस्', 'Reset All Birds')}
+            </button>
 
-  const data = useMemo(() => Array.from({ length: 6 }, () => {
-    const s = rnd(11, 20), k = rnd(2, Math.min(9, s - 1)), a = s - k;
-    const opts = shuffle([a, a + 1, a - 1 < 0 ? a + 2 : a - 1].filter((v, i, arr) => arr.indexOf(v) === i));
-    return { s, k, a, opts };
-  }), []);
-  const questions: (QuizQuestion & { s: number; k: number })[] = data.map((d) => ({
-    np: `${npName(d.s)} वटा चरा थिए। ${npName(d.k)} वटा उडे। कति बाँकी रहे?`,
-    en: `There were ${d.s} birds. ${d.k} flew away. How many are left?`,
-    answer: String(d.a), s: d.s, k: d.k,
-    options: d.opts.map((v) => ({ key: String(v), label: kit.lang === 'ne' ? toNp(v) : String(v) })),
-  }));
+            {kit.mode === 'LEARN' && (
+              <button
+                onClick={nextMission}
+                style={{
+                  background: '#E7F1FC',
+                  color: '#1E3A8A',
+                  border: '1px solid #BFDBFE',
+                  padding: '12px 20px',
+                  borderRadius: 14,
+                  fontSize: 14,
+                  fontWeight: 900,
+                  cursor: 'pointer',
+                  marginLeft: 'auto',
+                }}
+              >
+                👉 {L('अर्को कथा / समस्या', 'Next Story Mission')}
+              </button>
+            )}
+          </div>
+        )
+      }
+    >
+      {/* ── 2D Garden Scene & Birds on Wall ──────────────────── */}
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 440,
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          background: 'linear-gradient(180deg, #BAE6FD 0%, #E0F2FE 45%, #DCFCE7 75%, #F5F7F5 100%)',
+          overflow: 'hidden',
+          paddingBottom: 24,
+        }}
+      >
+        {/* Floating Clouds */}
+        <div style={{ position: 'absolute', top: 30, left: '10%', fontSize: 44, opacity: 0.8 }}>☁️</div>
+        <div style={{ position: 'absolute', top: 50, right: '15%', fontSize: 56, opacity: 0.7 }}>☁️</div>
+        <div style={{ position: 'absolute', top: 15, right: '40%', fontSize: 36, opacity: 0.9 }}>☀️</div>
 
-  const left = start - taken;
-  const num = (n: number) => (kit.lang === 'ne' ? toNp(n) : String(n));
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.92)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', fontSize: 34, fontWeight: 900 }}>
-      {num(start)} − {num(taken)} = <span style={{ color: '#16a34a' }}>{num(left)}</span>
-    </div>
-  );
+        {/* Trees */}
+        <div style={{ position: 'absolute', bottom: 110, left: 20, fontSize: 80 }}>🌳</div>
+        <div style={{ position: 'absolute', bottom: 120, right: 30, fontSize: 90 }}>🌲</div>
 
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontSize: 18, fontWeight: 800, flex: 1, minWidth: 220 }}>
-        {kit.t(`${npName(mission.s)} वटा चरा। ${npName(mission.k)} वटा उडाऔँ।`, `${mission.s} birds. Make ${mission.k} fly away.`)} {done && '✅'}
+        {/* Flown away birds animation area */}
+        {taken > 0 && (
+          <div
+            style={{
+              position: 'absolute',
+              top: 70,
+              display: 'flex',
+              gap: 16,
+              alignItems: 'center',
+              background: 'rgba(255,255,255,0.85)',
+              padding: '6px 16px',
+              borderRadius: 20,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            }}
+          >
+            <span style={{ fontSize: 24 }}>🕊️</span>
+            <span style={{ fontSize: 14, fontWeight: 900, color: '#0369A1' }}>
+              {L(`उडेका चरा: ${toNp(taken)} वटा`, `Flown away: ${taken} birds`)}
+            </span>
+          </div>
+        )}
+
+        {/* Birds Sitting on Wall Grid */}
+        <div
+          style={{
+            zIndex: 10,
+            width: 'min(720px, 92vw)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(52px, 1fr))',
+            gap: 10,
+            padding: '16px 20px',
+            marginBottom: -8,
+            justifyItems: 'center',
+          }}
+        >
+          {Array.from({ length: start }).map((_, i) => {
+            const isGone = i >= remaining;
+            const birdColor = BIRD_COLORS[i % BIRD_COLORS.length];
+
+            return (
+              <div
+                key={i}
+                onClick={() => {
+                  if (!isGone) {
+                    flyOneBird();
+                  }
+                }}
+                style={{
+                  width: 52,
+                  height: 52,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 34,
+                  cursor: isGone ? 'default' : 'pointer',
+                  opacity: isGone ? 0.15 : 1,
+                  transform: isGone ? 'translateY(-60px) scale(0.6)' : 'none',
+                  transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  filter: isGone ? 'grayscale(100%)' : `drop-shadow(0 4px 6px ${birdColor}40)`,
+                }}
+                title={isGone ? 'उडेको चरा' : 'चरा उडाउन छुनुहोस्!'}
+              >
+                🐦
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Stone Garden Wall */}
+        <div
+          style={{
+            width: 'min(780px, 96vw)',
+            height: 90,
+            background: 'linear-gradient(180deg, #D4D4D8 0%, #A1A1AA 40%, #71717A 100%)',
+            borderRadius: '16px 16px 0 0',
+            border: '3px solid #52525B',
+            borderBottom: 'none',
+            boxShadow: '0 -4px 14px rgba(0,0,0,0.12)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#FFFFFF',
+            fontWeight: 900,
+            fontSize: 16,
+            letterSpacing: '0.05em',
+            zIndex: 5,
+          }}
+        >
+          🧱 {L(`पर्खालमा बाँकी चरा: ${toNp(remaining)} वटा`, `Birds remaining on wall: ${remaining}`)}
+        </div>
       </div>
-      <CBtn color="#f59e0b" onClick={() => { setTaken(0); setDone(false); scene.current?.set(mission.s); }}>↺ {kit.t('फेरि', 'Again')}</CBtn>
-      <CBtn color="#16a34a" disabled={!done} onClick={() => setMi((mi + 1) % MISSIONS.length)}>{kit.t('अर्को', 'Next')} ➜</CBtn>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>
-      <span style={{ fontWeight: 800 }}>{kit.t('सुरुमा कति चरा?', 'How many birds to start?')}</span>
-      {[11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((n) => (
-        <CBtn key={n} color={n === start ? '#0ea5e9' : '#94a3b8'} style={{ minWidth: 48, padding: '8px 10px' }} onClick={() => setStart(n)}>{num(n)}</CBtn>
-      ))}
-      <CBtn color="#f59e0b" onClick={() => { setTaken(0); scene.current?.set(start); }}>↺</CBtn>
-    </Controls>
-  ) : (
-    <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => { setStart(q.s); setTaken(0); scene.current?.set(q.s); window.setTimeout(() => scene.current?.flyMany(q.k), 600); }} />
+    </SimFrame2D>
   );
-
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };

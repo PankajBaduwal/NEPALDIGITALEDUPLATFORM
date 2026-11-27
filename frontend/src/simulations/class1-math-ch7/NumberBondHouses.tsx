@@ -167,29 +167,29 @@ export const NumberBondHouses: React.FC<Props> = ({
   };
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header Bar */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 font-semibold">
               Class 1 • Math • Chapter 7 • Simulation 03
             </span>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
-              <Home className="w-4 h-4 text-amber-400" />
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <Home className="w-4 h-4 text-amber-700" />
               {language === 'np' ? 'सङ्ख्याका घरहरू' : 'Number Bond Houses'}
             </h1>
           </div>
         </div>
 
         {/* Mode Selector */}
-        <div className="flex items-center gap-1 bg-slate-900/60 p-1 rounded-xl border border-slate-700 text-xs">
+        <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200 text-xs">
           <button
             onClick={() => {
               setActiveMode('EXPLORE');
@@ -198,7 +198,7 @@ export const NumberBondHouses: React.FC<Props> = ({
             className={`px-3 py-1.5 rounded-lg font-bold transition ${
               activeMode === 'EXPLORE'
                 ? 'bg-emerald-600 text-white'
-                : 'text-slate-300 hover:bg-slate-800'
+                : 'text-slate-600 hover:bg-white'
             }`}
           >
             {language === 'np' ? 'घरहरू अवलोकन' : 'Explore Houses'}
@@ -215,7 +215,7 @@ export const NumberBondHouses: React.FC<Props> = ({
             className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1 ${
               activeMode === 'CHALLENGE'
                 ? 'bg-amber-600 text-white'
-                : 'text-slate-300 hover:bg-slate-800'
+                : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Trophy className="w-3.5 h-3.5" />
@@ -238,8 +238,8 @@ export const NumberBondHouses: React.FC<Props> = ({
             onClick={() => setSoundEnabled((s) => !s)}
             className={`p-2 rounded-lg border transition ${
               soundEnabled
-                ? 'bg-slate-700 border-slate-600 text-emerald-400'
-                : 'bg-slate-800 border-slate-700 text-slate-500'
+                ? 'bg-slate-100 border-slate-300 text-emerald-700'
+                : 'bg-white border-slate-200 text-slate-500'
             }`}
           >
             {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
@@ -248,9 +248,9 @@ export const NumberBondHouses: React.FC<Props> = ({
       </header>
 
       {/* Main Container */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-center justify-center bg-slate-950">
+      <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-center justify-center bg-slate-50">
         {activeMode === 'EXPLORE' ? (
-          <div className="w-full max-w-4xl bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col items-center gap-6">
+          <div className="w-full max-w-4xl bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col items-center gap-6">
             {/* House Selector Tabs */}
             <div className="flex flex-wrap justify-center gap-2">
               {[5, 6, 7, 8, 9, 10].map((sum) => (
@@ -260,7 +260,7 @@ export const NumberBondHouses: React.FC<Props> = ({
                   className={`px-4 py-2 rounded-2xl font-black text-sm transition border ${
                     targetSum === sum
                       ? 'bg-amber-500 border-amber-400 text-slate-950 shadow-lg shadow-amber-500/20 scale-105'
-                      : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-750'
+                      : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-750'
                   }`}
                 >
                   {language === 'np' ? `${NEP_DIGITS[sum]} को घर` : `House ${sum}`}
@@ -272,8 +272,8 @@ export const NumberBondHouses: React.FC<Props> = ({
             <div className="w-full max-w-lg flex flex-col items-center">
               {/* Roof */}
               <div className="w-0 h-0 border-l-[160px] border-l-transparent border-r-[160px] border-r-transparent border-b-[90px] border-b-amber-600 relative flex justify-center">
-                <div className="absolute top-[32px] w-14 h-14 rounded-full bg-slate-950 border-2 border-amber-300 flex items-center justify-center shadow-inner">
-                  <span className="text-2xl font-black text-amber-400">
+                <div className="absolute top-[32px] w-14 h-14 rounded-full bg-slate-50 border-2 border-amber-300 flex items-center justify-center shadow-inner">
+                  <span className="text-2xl font-black text-amber-700">
                     {language === 'np' ? NEP_DIGITS[targetSum] : targetSum}
                   </span>
                 </div>
@@ -284,10 +284,10 @@ export const NumberBondHouses: React.FC<Props> = ({
                 {/* Room 1 (Left) */}
                 <div className="flex flex-col items-center justify-between p-3 bg-amber-950/20 rounded-bl-2xl">
                   <div className="text-center">
-                    <span className="text-xs font-bold text-amber-300 block mb-1">
+                    <span className="text-xs font-bold text-amber-700 block mb-1">
                       {language === 'np' ? 'पहिलो कोठा' : 'Room A'}
                     </span>
-                    <span className="text-3xl font-black text-amber-400">
+                    <span className="text-3xl font-black text-amber-700">
                       {language === 'np' ? NEP_DIGITS[leftRoomCount] : leftRoomCount}
                     </span>
                   </div>
@@ -307,7 +307,7 @@ export const NumberBondHouses: React.FC<Props> = ({
                           playSound('pop');
                         }
                       }}
-                      className="w-8 h-8 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 disabled:opacity-40"
+                      className="w-8 h-8 rounded-lg bg-white text-slate-900 font-bold hover:bg-slate-100 disabled:opacity-40"
                     >
                       -
                     </button>
@@ -319,7 +319,7 @@ export const NumberBondHouses: React.FC<Props> = ({
                           playSound('pop');
                         }
                       }}
-                      className="w-8 h-8 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 disabled:opacity-40"
+                      className="w-8 h-8 rounded-lg bg-white text-slate-900 font-bold hover:bg-slate-100 disabled:opacity-40"
                     >
                       +
                     </button>
@@ -329,10 +329,10 @@ export const NumberBondHouses: React.FC<Props> = ({
                 {/* Room 2 (Right) */}
                 <div className="flex flex-col items-center justify-between p-3 bg-sky-950/20 rounded-br-2xl">
                   <div className="text-center">
-                    <span className="text-xs font-bold text-sky-300 block mb-1">
+                    <span className="text-xs font-bold text-sky-700 block mb-1">
                       {language === 'np' ? 'दोस्रो कोठा' : 'Room B'}
                     </span>
-                    <span className="text-3xl font-black text-sky-400">
+                    <span className="text-3xl font-black text-sky-700">
                       {language === 'np' ? NEP_DIGITS[rightRoomCount] : rightRoomCount}
                     </span>
                   </div>
@@ -352,7 +352,7 @@ export const NumberBondHouses: React.FC<Props> = ({
                           playSound('pop');
                         }
                       }}
-                      className="w-8 h-8 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 disabled:opacity-40"
+                      className="w-8 h-8 rounded-lg bg-white text-slate-900 font-bold hover:bg-slate-100 disabled:opacity-40"
                     >
                       -
                     </button>
@@ -364,7 +364,7 @@ export const NumberBondHouses: React.FC<Props> = ({
                           playSound('pop');
                         }
                       }}
-                      className="w-8 h-8 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 disabled:opacity-40"
+                      className="w-8 h-8 rounded-lg bg-white text-slate-900 font-bold hover:bg-slate-100 disabled:opacity-40"
                     >
                       +
                     </button>
@@ -374,16 +374,16 @@ export const NumberBondHouses: React.FC<Props> = ({
             </div>
 
             {/* Live Formula Banner */}
-            <div className="px-6 py-3 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center gap-3 text-xl font-black">
-              <span className="text-amber-400">
+            <div className="px-6 py-3 rounded-2xl bg-white border border-slate-200 flex items-center gap-3 text-xl font-black">
+              <span className="text-amber-700">
                 {language === 'np' ? NEP_DIGITS[leftRoomCount] : leftRoomCount}
               </span>
-              <Plus className="w-5 h-5 text-emerald-400" />
-              <span className="text-sky-400">
+              <Plus className="w-5 h-5 text-emerald-700" />
+              <span className="text-sky-700">
                 {language === 'np' ? NEP_DIGITS[rightRoomCount] : rightRoomCount}
               </span>
-              <span className="text-slate-400">=</span>
-              <span className="text-emerald-400">
+              <span className="text-slate-500">=</span>
+              <span className="text-emerald-700">
                 {language === 'np' ? NEP_DIGITS[targetSum] : targetSum}
               </span>
             </div>
@@ -403,7 +403,7 @@ export const NumberBondHouses: React.FC<Props> = ({
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
                       isCurrent
                         ? 'bg-emerald-600 border-emerald-400 text-white scale-105'
-                        : 'bg-slate-800/60 border-slate-700 text-slate-300 hover:bg-slate-700'
+                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-100'
                     }`}
                   >
                     {language === 'np'
@@ -416,17 +416,17 @@ export const NumberBondHouses: React.FC<Props> = ({
           </div>
         ) : (
           /* CHALLENGE MODE */
-          <div className="w-full max-w-lg bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col items-center gap-6">
-            <div className="flex items-center justify-between w-full border-b border-slate-800 pb-3">
-              <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+          <div className="w-full max-w-lg bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col items-center gap-6">
+            <div className="flex items-center justify-between w-full border-b border-slate-200 pb-3">
+              <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
                 {language === 'np' ? 'खाली कोठा पत्ता लगाउनुहोस्' : 'Find the Missing Room Count'}
               </span>
-              <span className="text-xs px-2.5 py-1 rounded-full bg-slate-800 text-emerald-400 font-bold border border-slate-700">
+              <span className="text-xs px-2.5 py-1 rounded-full bg-white text-emerald-700 font-bold border border-slate-200">
                 {language === 'np' ? `अङ्क: ${challengeScore}` : `Score: ${challengeScore}`}
               </span>
             </div>
 
-            <p className="text-sm text-center text-slate-200">
+            <p className="text-sm text-center text-slate-700">
               {language === 'np'
                 ? `घरको छानामा जम्मा ${challengeTarget} छ। एउटा कोठामा ${challengeGivenPart} छ भने अर्को कोठामा कति चाहिन्छ?`
                 : `The roof total is ${challengeTarget}. One room has ${challengeGivenPart}. How many are needed in the second room?`}
@@ -435,8 +435,8 @@ export const NumberBondHouses: React.FC<Props> = ({
             {/* Challenge House Representation */}
             <div className="w-full max-w-sm flex flex-col items-center">
               <div className="w-0 h-0 border-l-[130px] border-l-transparent border-r-[130px] border-r-transparent border-b-[75px] border-b-amber-600 relative flex justify-center">
-                <div className="absolute top-[24px] w-12 h-12 rounded-full bg-slate-950 border-2 border-amber-300 flex items-center justify-center">
-                  <span className="text-xl font-black text-amber-400">
+                <div className="absolute top-[24px] w-12 h-12 rounded-full bg-slate-50 border-2 border-amber-300 flex items-center justify-center">
+                  <span className="text-xl font-black text-amber-700">
                     {language === 'np' ? NEP_DIGITS[challengeTarget] : challengeTarget}
                   </span>
                 </div>
@@ -444,18 +444,18 @@ export const NumberBondHouses: React.FC<Props> = ({
 
               <div className="w-full bg-slate-850 border-4 border-amber-600 rounded-b-3xl grid grid-cols-2 divide-x-4 divide-amber-600 p-4">
                 <div className="flex flex-col items-center justify-center p-4">
-                  <span className="text-xs text-amber-300 mb-1">
+                  <span className="text-xs text-amber-700 mb-1">
                     {language === 'np' ? 'दिइएको' : 'Given'}
                   </span>
-                  <span className="text-4xl font-black text-amber-400">
+                  <span className="text-4xl font-black text-amber-700">
                     {language === 'np' ? NEP_DIGITS[challengeGivenPart] : challengeGivenPart}
                   </span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-4">
-                  <span className="text-xs text-sky-300 mb-1">
+                  <span className="text-xs text-sky-700 mb-1">
                     {language === 'np' ? 'खाली (?)' : 'Missing (?)'}
                   </span>
-                  <span className="text-4xl font-black text-sky-400">
+                  <span className="text-4xl font-black text-sky-700">
                     {challengeUserPart !== null
                       ? language === 'np'
                         ? NEP_DIGITS[challengeUserPart]
@@ -485,7 +485,7 @@ export const NumberBondHouses: React.FC<Props> = ({
                         ? challengeFeedback
                           ? 'bg-emerald-600 border-emerald-400 text-white'
                           : 'bg-rose-600 border-rose-400 text-white'
-                        : 'bg-slate-800 border-slate-700 text-white hover:bg-slate-750'
+                        : 'bg-white border-slate-200 text-slate-900 hover:bg-slate-750'
                     }`}
                   >
                     {language === 'np' ? NEP_DIGITS[ans] : ans}

@@ -7,12 +7,13 @@
 const Canvas = (() => {
 
   const BOARD_BACKGROUNDS = [
-    // 1. Classic & Plain
-    { id: 'white',          category: 'plain',   label: 'Warm Ivory Board',    bg: '#E9E2CE', pattern: 'grid', line: 'rgba(15,23,42,0.055)', major: 'rgba(15,23,42,0.12)' },
+    // 1. Classic & Plain (Clean, neutral Whiteboard by default across all screen sizes)
+    { id: 'white',          category: 'plain',   label: 'Clean Whiteboard Grid', bg: '#f8fafc', pattern: 'grid', line: 'rgba(15,23,42,0.055)', major: 'rgba(15,23,42,0.11)' },
+    { id: 'warm-ivory',     category: 'plain',   label: 'Warm Ivory Board',    bg: '#E9E2CE', pattern: 'grid', line: 'rgba(15,23,42,0.055)', major: 'rgba(15,23,42,0.12)' },
     { id: 'black',          category: 'plain',   label: 'Blackboard Deep',     bg: '#0b0d13', pattern: 'grid', line: 'rgba(255,255,255,0.07)',  major: 'rgba(255,255,255,0.14)' },
     { id: 'navy',           category: 'plain',   label: 'Cosmic Navy',         bg: '#0a1224', pattern: 'grid', line: 'rgba(148,163,184,0.08)', major: 'rgba(148,163,184,0.16)' },
     { id: 'green',          category: 'plain',   label: 'Chalkboard Green',    bg: '#0e2419', pattern: 'grid', line: 'rgba(255,255,255,0.075)', major: 'rgba(255,255,255,0.15)' },
-    { id: 'plain-white',    category: 'plain',   label: 'Soft White Plain',    bg: '#f4f6f8', pattern: 'none' },
+    { id: 'plain-white',    category: 'plain',   label: 'Soft White Plain',    bg: '#f8fafc', pattern: 'none' },
     { id: 'plain-black',    category: 'plain',   label: 'Deep Obsidian Plain', bg: '#080a0f', pattern: 'none' },
     { id: 'plain-green',    category: 'plain',   label: 'Chalkboard Plain',    bg: '#0e2419', pattern: 'none' },
     { id: 'plain-cream',    category: 'plain',   label: 'Warm Ivory Sepia',    bg: '#fdfaf2', pattern: 'none' },
@@ -148,6 +149,9 @@ const Canvas = (() => {
     gridCtx  = document.getElementById('grid-canvas').getContext('2d');
     shapeCtx = document.getElementById('shape-canvas').getContext('2d');
     drawCtx  = document.getElementById('draw-canvas').getContext('2d');
+
+    // Ensure the clean default board background is immediately applied on all screen sizes
+    setBoardColor(currentBoardColor.id);
 
     resize();
     window.addEventListener('resize', resize);
@@ -305,6 +309,10 @@ const Canvas = (() => {
   }
 
   function setBoardColor(id, bg, line, major) {
+    // If legacy 'white' is requested with the old ivory tint #E9E2CE, upgrade to the clean whiteboard #f8fafc
+    if (id === 'white' && (!bg || bg.toLowerCase() === '#e9e2ce')) {
+      bg = '#f8fafc';
+    }
     let match = BOARD_BACKGROUNDS.find(b => b.id === id) || BOARD_COLORS.find(b => b.id === id);
     if (!match && id) {
       match = BOARD_BACKGROUNDS.find(b => b.id.toLowerCase() === id.toLowerCase() || b.id.endsWith(id.toLowerCase()));
@@ -315,7 +323,7 @@ const Canvas = (() => {
       if (line) currentBoardColor.line = line;
       if (major) currentBoardColor.major = major;
     } else {
-      bg = bg || (id && id.startsWith('#') ? id : '#E9E2CE');
+      bg = bg || (id && id.startsWith('#') ? id : '#f8fafc');
       if (!line) {
         const colors = getGridColors(bg);
         line = colors.line;
@@ -326,6 +334,8 @@ const Canvas = (() => {
 
     const zone = document.getElementById('canvas-zone');
     if (zone) zone.style.background = currentBoardColor.bg;
+    const mainEl = document.getElementById('app-main');
+    if (mainEl) mainEl.style.background = currentBoardColor.bg;
 
     // Harmonize UI elements (page tabs & statusbar footer) with board color
     document.documentElement.style.setProperty('--board-bg', currentBoardColor.bg);
@@ -333,7 +343,7 @@ const Canvas = (() => {
 
     // Auto-adjust pen color contrast if pen color would match background
     if (typeof App !== 'undefined' && App.currentColor && App.setColor) {
-      const isNowLight = (currentBoardColor.id === 'white' || currentBoardColor.id === 'plain-white' || currentBoardColor.id === 'ruled-white' || currentBoardColor.bg.toLowerCase() === '#e9e2ce' || currentBoardColor.bg === '#f4f6f8' || currentBoardColor.bg === '#ffffff' || currentBoardColor.bg === '#f1f5f9');
+      const isNowLight = (currentBoardColor.id === 'white' || currentBoardColor.id === 'plain-white' || currentBoardColor.id === 'ruled-white' || currentBoardColor.bg.toLowerCase() === '#e9e2ce' || currentBoardColor.bg === '#f4f6f8' || currentBoardColor.bg === '#ffffff' || currentBoardColor.bg === '#f1f5f9' || currentBoardColor.bg === '#f8fafc');
       if (isNowLight && App.currentColor.toLowerCase() === '#ffffff') {
         App.setColor('#0f172a');
       } else if (!isNowLight && (App.currentColor.toLowerCase() === '#0f172a' || App.currentColor.toLowerCase() === '#000000')) {
@@ -358,9 +368,12 @@ const Canvas = (() => {
     // Don't resize the grid canvas here — resize() handles DPR-aware sizing
     // Re-apply DPR transform (may be reset by other operations)
     gridCtx.setTransform(currentDPR, 0, 0, currentDPR, 0, 0);
-    gridCtx.clearRect(0, 0, screenW, screenH);
+    // Fill beyond screen dimensions to avoid any subpixel rounding gaps on 4K/large smartboards
+    const fillW = Math.max(screenW, (gc.width / currentDPR) || screenW) + 4;
+    const fillH = Math.max(screenH, (gc.height / currentDPR) || screenH) + 4;
+    gridCtx.clearRect(0, 0, fillW, fillH);
     gridCtx.fillStyle = currentBoardColor.bg;
-    gridCtx.fillRect(0, 0, screenW, screenH);
+    gridCtx.fillRect(0, 0, fillW, fillH);
 
     if (bgImageObj && bgImageObj.complete && bgImageObj.naturalWidth > 0) {
       gridCtx.save();

@@ -418,8 +418,8 @@ export const NumberTracingSimulation: React.FC<Props> = ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #042f2e 0%, #134e4a 50%, #115e59 100%)',
-        color: '#0f172a',
+        background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
+        color: '#26332E',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -430,7 +430,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgba(2, 44, 34, 0.85)',
+          background: '#FFFFFF',
           backdropFilter: 'blur(12px)',
           borderBottom: '1px solid rgba(45, 212, 191, 0.2)',
         }}
@@ -443,10 +443,10 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '10px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 600,
               fontSize: '14px',
@@ -457,10 +457,10 @@ export const NumberTracingSimulation: React.FC<Props> = ({
           </button>
 
           <div>
-            <div style={{ fontSize: '11px', color: '#5eead4', textTransform: 'uppercase', fontWeight: 800 }}>
+            <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
               कक्षा १ • गणित • अध्याय ४ : ९ सम्मका सङ्ख्याहरू
             </div>
-            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#f0fdfa' }}>
+            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
                 ? 'सिमुलेसन ०४: सङ्ख्या लेख्न सिकौँ (Number Tracing Studio)'
                 : 'Simulation 04: Number Tracing & Writing Studio'}
@@ -474,7 +474,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
           <div
             style={{
               display: 'flex',
-              background: 'rgba(0,0,0,0.4)',
+              background: 'rgba(255,255,255,0.9)',
               borderRadius: '10px',
               padding: '3px',
               border: '1px solid rgba(45, 212, 191, 0.3)',
@@ -528,7 +528,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               border: '1px solid rgba(245, 158, 11, 0.4)',
               padding: '6px 14px',
               borderRadius: '20px',
-              color: '#fef08a',
+              color: '#26332E',
               fontWeight: 800,
             }}
           >
@@ -541,10 +541,10 @@ export const NumberTracingSimulation: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: '#e2e8f0',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 700,
               fontSize: '13px',
@@ -558,10 +558,10 @@ export const NumberTracingSimulation: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: soundEnabled ? '#5eead4' : '#94a3b8',
+              color: soundEnabled ? '#5eead4' : '#26332E',
               cursor: 'pointer',
             }}
           >
@@ -577,7 +577,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '8px',
           padding: '12px 16px',
-          background: '#f8fafc',
+          background: 'rgba(255,255,255,0.9)',
           borderBottom: '1px solid rgba(45, 212, 191, 0.2)',
           overflowX: 'auto',
         }}
@@ -605,8 +605,8 @@ export const NumberTracingSimulation: React.FC<Props> = ({
                   ? 'linear-gradient(135deg, #0d9488, #0f766e)'
                   : isDone
                   ? 'rgba(16, 185, 129, 0.2)'
-                  : 'rgba(30, 41, 59, 0.5)',
-                color: isSelected ? '#ffffff' : '#334155',
+                  : '#F1F5F9',
+                color: isSelected ? '#ffffff' : '#26332E',
                 cursor: 'pointer',
                 transform: isSelected ? 'scale(1.08)' : 'scale(1)',
                 transition: 'all 0.18s ease',
@@ -623,7 +623,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
                     position: 'absolute',
                     top: '-4px',
                     right: '-4px',
-                    background: '#10b981',
+                    background: '#FFFFFF',
                     borderRadius: '50%',
                     width: '18px',
                     height: '18px',
@@ -661,7 +661,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
             position: 'relative',
             width: '100%',
             maxWidth: '560px',
-            background: '#1e293b',
+            background: '#FFFFFF',
             borderRadius: '28px',
             border: '14px solid #78350f', // Wooden chalkboard border
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0,0,0,0.6)',
@@ -686,12 +686,12 @@ export const NumberTracingSimulation: React.FC<Props> = ({
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span style={{ fontSize: '24px' }}>{activeNumeral.icon}</span>
               <div>
-                <span style={{ fontSize: '18px', fontWeight: 900, color: '#fef08a' }}>
+                <span style={{ fontSize: '18px', fontWeight: 900, color: '#26332E' }}>
                   {scriptMode === 'np'
                     ? `सङ्ख्या ${activeNumeral.nepaliChar} (${activeNumeral.nepaliName})`
                     : `Number ${activeNumeral.value} (${activeNumeral.englishName})`}
                 </span>
-                <div style={{ fontSize: '11px', color: '#64748b' }}>
+                <div style={{ fontSize: '11px', color: '#26332E' }}>
                   {language === 'np'
                     ? 'थोप्लाहरू जोडेर सङ्ख्या कोर्नुहोस्'
                     : 'Trace along the guide path smoothly'}
@@ -714,7 +714,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
                 background: 'rgba(13, 148, 136, 0.3)',
                 border: '1px solid rgba(45, 212, 191, 0.4)',
                 borderRadius: '8px',
-                color: '#5eead4',
+                color: '#26332E',
                 fontSize: '12px',
                 fontWeight: 700,
                 cursor: 'pointer',
@@ -731,7 +731,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               position: 'relative',
               width: '320px',
               height: '320px',
-              background: '#0f172a',
+              background: '#FFFFFF',
               borderRadius: '20px',
               overflow: 'hidden',
               boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.8)',
@@ -849,7 +849,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               {accuracyScore >= 60 ? (
                 <>
                   <Sparkles size={18} color="#34d399" />
-                  <span style={{ fontWeight: 800, color: '#34d399', fontSize: '14px' }}>
+                  <span style={{ fontWeight: 800, color: '#26332E', fontSize: '14px' }}>
                     {language === 'np'
                       ? `शानदार! शुद्धता: ${accuracyScore}% ⭐ (Star Earned!)`
                       : `Splendid! Accuracy: ${accuracyScore}% ⭐`}
@@ -877,7 +877,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               marginTop: '14px',
             }}
           >
-            <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 700 }}>
+            <span style={{ fontSize: '12px', color: '#26332E', fontWeight: 700 }}>
               {language === 'np' ? 'चक रङ (Chalk):' : 'Chalk:'}
             </span>
             {['#38bdf8', '#facc15', '#4ade80', '#f472b6', '#ffffff'].map((c) => (
@@ -917,10 +917,10 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '10px 18px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '12px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: currentIndex === 0 ? 'not-allowed' : 'pointer',
               opacity: currentIndex === 0 ? 0.4 : 1,
               fontWeight: 700,
@@ -942,7 +942,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               background: 'linear-gradient(135deg, #f59e0b, #d97706)',
               border: 'none',
               borderRadius: '12px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: isAnimatingDemo ? 'not-allowed' : 'pointer',
               fontWeight: 800,
               boxShadow: '0 4px 12px rgba(245, 158, 11, 0.3)',
@@ -969,7 +969,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               background: 'rgba(239, 68, 68, 0.2)',
               border: '1px solid rgba(239, 68, 68, 0.4)',
               borderRadius: '12px',
-              color: '#fca5a5',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 700,
             }}
@@ -987,10 +987,10 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '10px 18px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '12px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: currentIndex === NUMERALS.length - 1 ? 'not-allowed' : 'pointer',
               opacity: currentIndex === NUMERALS.length - 1 ? 0.4 : 1,
               fontWeight: 700,
@@ -1005,7 +1005,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
         {completedList.length >= 9 && (
           <div
             style={{
-              background: 'linear-gradient(135deg, #065f46, #047857)',
+              background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
               borderRadius: '20px',
               padding: '20px 30px',
               boxShadow: '0 12px 32px rgba(0,0,0,0.4)',
@@ -1021,12 +1021,12 @@ export const NumberTracingSimulation: React.FC<Props> = ({
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <Trophy size={44} color="#fde047" />
               <div>
-                <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 900, color: '#f0fdf4' }}>
+                <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 900, color: '#26332E' }}>
                   {language === 'np'
                     ? 'बधाई छ! तपाईंले १ देखि ९ सम्म सबै सङ्ख्याहरू लेख्न सिक्नुभयो!'
                     : 'Congratulations! You mastered writing all numbers 1 through 9!'}
                 </h3>
-                <span style={{ fontSize: '13px', color: '#a7f3d0' }}>
+                <span style={{ fontSize: '13px', color: '#26332E' }}>
                   {language === 'np'
                     ? 'तपाईंले ९ वटै ताराहरू प्राप्त गर्नुभयो।'
                     : 'You earned all 9 stars in the Tracing Studio.'}

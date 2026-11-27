@@ -352,41 +352,41 @@ export const NumberLineAdventure: React.FC<Props> = ({
   };
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header Bar */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
             title="Back to Chapter 9"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 font-semibold">
                 Class 1 • Math • Chapter 9
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-700 font-semibold">
                 Simulation 04
               </span>
             </div>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
               {language === 'np' ? 'सङ्ख्यारेखाको साहसिक यात्रा (० देखि २०)' : 'Number Line Adventure (0 to 20)'}
             </h1>
           </div>
         </div>
 
         {/* Mode Selector */}
-        <div className="flex items-center gap-1 bg-slate-900/60 p-1 rounded-xl border border-slate-700/60 text-xs">
+        <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200/60 text-xs">
           <button
             onClick={() => {
               playSound('hop');
               setMode('EXPLORE_LINE');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              mode === 'EXPLORE_LINE' ? 'bg-teal-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'EXPLORE_LINE' ? 'bg-teal-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Compass className="w-3.5 h-3.5" />
@@ -398,7 +398,7 @@ export const NumberLineAdventure: React.FC<Props> = ({
               setMode('ADVENTURE');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              mode === 'ADVENTURE' ? 'bg-amber-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'ADVENTURE' ? 'bg-amber-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Trophy className="w-3.5 h-3.5" />
@@ -410,10 +410,10 @@ export const NumberLineAdventure: React.FC<Props> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setSoundEnabled((prev) => !prev)}
-            className="p-2 rounded-xl bg-slate-700/80 hover:bg-slate-700 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-100 transition text-slate-700"
             title={soundEnabled ? 'Mute' : 'Unmute'}
           >
-            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-400" /> : <VolumeX className="w-5 h-5 text-slate-400" />}
+            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
           <button
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
@@ -432,17 +432,17 @@ export const NumberLineAdventure: React.FC<Props> = ({
         {mode === 'EXPLORE_LINE' && (
           <div className="flex-1 flex flex-col max-w-6xl mx-auto w-full justify-between gap-6">
             {/* Top Prompt Card */}
-            <div className="bg-slate-800/80 p-5 rounded-3xl border border-slate-700 flex flex-wrap items-center justify-between gap-4 shadow-xl">
+            <div className="bg-white p-5 rounded-3xl border border-slate-200 flex flex-wrap items-center justify-between gap-4 shadow-xl">
               <div>
-                <span className="text-xs px-2.5 py-1 rounded-full bg-teal-500/20 text-teal-300 font-bold uppercase">
+                <span className="text-xs px-2.5 py-1 rounded-full bg-teal-500/20 text-teal-700 font-bold uppercase">
                   {language === 'np' ? 'सङ्ख्यारेखा निर्देशन' : 'Number Line Guide'}
                 </span>
-                <h2 className="text-xl md:text-2xl font-black text-white mt-1">
+                <h2 className="text-xl md:text-2xl font-black text-slate-900 mt-1">
                   {language === 'np'
                     ? `तपाईं अहिले ढुङ्गा ${NEP_NUMERALS[currentPos]} (${NEP_NAMES[currentPos] || currentPos}) मा हुनुहुन्छ।`
                     : `You are currently standing on stone ${currentPos} (${EN_NAMES[currentPos] || currentPos}).`}
                 </h2>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-500 mt-0.5">
                   {language === 'np'
                     ? 'कुनै पनि ढुङ्गामा क्लिक गरेर उफ्रनुहोस् वा तलका अघिल्लो/पछिल्लो बटन प्रयोग गर्नुहोस्।'
                     : 'Click any stepping stone to hop, or use Previous / Next buttons.'}
@@ -453,7 +453,7 @@ export const NumberLineAdventure: React.FC<Props> = ({
                 <button
                   disabled={currentPos <= 0}
                   onClick={() => handleHopTo(currentPos - 1)}
-                  className="px-4 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 disabled:opacity-40 text-xs font-bold text-white transition flex items-center gap-1"
+                  className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 text-xs font-bold text-slate-900 transition flex items-center gap-1"
                 >
                   <ChevronLeft className="w-4 h-4" />
                   {language === 'np' ? 'अघिल्लो (-१)' : 'Previous'}
@@ -470,7 +470,7 @@ export const NumberLineAdventure: React.FC<Props> = ({
             </div>
 
             {/* Stepping Stone Number Path Display (Scrollable or 2-row wrapped) */}
-            <div className="bg-slate-900/90 p-6 rounded-3xl border border-teal-500/30 shadow-2xl relative overflow-hidden flex flex-col items-center justify-center min-h-[260px]">
+            <div className="bg-slate-50 p-6 rounded-3xl border border-teal-500/30 shadow-2xl relative overflow-hidden flex flex-col items-center justify-center min-h-[260px]">
               {/* Stepping river background aesthetic */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-950/40 via-teal-950/30 to-blue-950/40 pointer-events-none" />
 
@@ -488,8 +488,8 @@ export const NumberLineAdventure: React.FC<Props> = ({
                         isCurrent
                           ? 'bg-gradient-to-b from-amber-400 to-amber-500 text-slate-950 scale-110 shadow-xl shadow-amber-500/40 ring-4 ring-amber-300 -translate-y-2'
                           : isHighlightRange
-                          ? 'bg-slate-800 hover:bg-teal-700/80 text-teal-300 border-2 border-teal-500/50 hover:scale-105'
-                          : 'bg-slate-800/60 hover:bg-slate-700 text-slate-400 border border-slate-700 hover:scale-102'
+                          ? 'bg-white hover:bg-teal-700/80 text-teal-700 border-2 border-teal-500/50 hover:scale-105'
+                          : 'bg-white hover:bg-slate-100 text-slate-500 border border-slate-200 hover:scale-102'
                       }`}
                     >
                       {/* Character avatar badge when current */}
@@ -513,14 +513,14 @@ export const NumberLineAdventure: React.FC<Props> = ({
             {/* Three Essential Relationship Cards: Before, Active, After */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Card 1: Before */}
-              <div className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 flex flex-col items-center text-center">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+              <div className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                   {language === 'np' ? 'ठीक अगाडिको सङ्ख्या (Before)' : 'Number Just Before'}
                 </span>
                 <span className="text-3xl font-black text-rose-400 my-2">
                   {currentPos > 0 ? NEP_NUMERALS[currentPos - 1] : '—'}
                 </span>
-                <span className="text-xs text-slate-400">
+                <span className="text-xs text-slate-500">
                   {currentPos > 0
                     ? `${NEP_NUMERALS[currentPos]} भन्दा १ कम = ${NEP_NUMERALS[currentPos - 1]}`
                     : 'कुनै छैन'}
@@ -528,27 +528,27 @@ export const NumberLineAdventure: React.FC<Props> = ({
               </div>
 
               {/* Card 2: Current */}
-              <div className="bg-gradient-to-b from-slate-800 to-slate-900 p-5 rounded-2xl border-2 border-amber-400/60 flex flex-col items-center text-center shadow-lg">
-                <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+              <div className="bg-gradient-to-b from-slate-800 to-emerald-50 p-5 rounded-2xl border-2 border-amber-400/60 flex flex-col items-center text-center shadow-lg">
+                <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
                   {language === 'np' ? 'हालको सङ्ख्या (Current)' : 'Selected Number'}
                 </span>
-                <span className="text-4xl font-black text-amber-300 my-1">
+                <span className="text-4xl font-black text-amber-700 my-1">
                   {NEP_NUMERALS[currentPos]}
                 </span>
-                <span className="text-xs font-bold text-white">
+                <span className="text-xs font-bold text-slate-900">
                   {language === 'np' ? NEP_NAMES[currentPos] || '' : EN_NAMES[currentPos] || ''} ({currentPos})
                 </span>
               </div>
 
               {/* Card 3: After */}
-              <div className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 flex flex-col items-center text-center">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+              <div className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                   {language === 'np' ? 'ठीक पछाडिको सङ्ख्या (After)' : 'Number Just After'}
                 </span>
-                <span className="text-3xl font-black text-emerald-400 my-2">
+                <span className="text-3xl font-black text-emerald-700 my-2">
                   {currentPos < 20 ? NEP_NUMERALS[currentPos + 1] : '—'}
                 </span>
-                <span className="text-xs text-slate-400">
+                <span className="text-xs text-slate-500">
                   {currentPos < 20
                     ? `${NEP_NUMERALS[currentPos]} भन्दा १ बढी = ${NEP_NUMERALS[currentPos + 1]}`
                     : 'कुनै छैन'}
@@ -564,27 +564,27 @@ export const NumberLineAdventure: React.FC<Props> = ({
         {mode === 'ADVENTURE' && (
           <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full justify-center">
             {!adventureCompleted ? (
-              <div className="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
                 {/* Status Bar */}
-                <div className="flex items-center justify-between text-xs text-slate-400 border-b border-slate-700 pb-3">
+                <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-200 pb-3">
                   <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold">
+                    <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-700 font-bold">
                       {challenges[challengeIdx].type}
                     </span>
-                    <span className="font-bold text-white">
+                    <span className="font-bold text-slate-900">
                       {language === 'np'
                         ? `चुनौती ${NEP_NUMERALS[challengeIdx + 1]} / ${NEP_NUMERALS[challenges.length]}`
                         : `Mission ${challengeIdx + 1} of ${challenges.length}`}
                     </span>
                   </div>
-                  <span className="font-bold text-amber-400">
+                  <span className="font-bold text-amber-700">
                     {language === 'np' ? `अङ्क: ${NEP_NUMERALS[challengeScore]}` : `Score: ${challengeScore}`}
                   </span>
                 </div>
 
                 {/* Question */}
                 <div>
-                  <h3 className="text-xl md:text-2xl font-black text-white">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900">
                     {language === 'np' ? challenges[challengeIdx].questionNp : challenges[challengeIdx].questionEn}
                   </h3>
                 </div>
@@ -594,7 +594,7 @@ export const NumberLineAdventure: React.FC<Props> = ({
                   {challenges[challengeIdx].options.map((opt) => {
                     const isSelected = challengeSelected === opt;
                     const isCorrectOpt = opt === challenges[challengeIdx].correct;
-                    let btnStyle = 'bg-slate-700/80 hover:bg-slate-700 text-white';
+                    let btnStyle = 'bg-slate-100 hover:bg-slate-100 text-slate-900';
 
                     if (challengeAnswered) {
                       if (isCorrectOpt) {
@@ -602,7 +602,7 @@ export const NumberLineAdventure: React.FC<Props> = ({
                       } else if (isSelected) {
                         btnStyle = 'bg-rose-600 text-white font-black';
                       } else {
-                        btnStyle = 'bg-slate-800 text-slate-500 opacity-50';
+                        btnStyle = 'bg-white text-slate-500 opacity-50';
                       }
                     }
 
@@ -611,7 +611,7 @@ export const NumberLineAdventure: React.FC<Props> = ({
                         key={opt}
                         disabled={challengeAnswered}
                         onClick={() => handleAdventureAnswer(opt)}
-                        className={`p-5 rounded-2xl text-xl font-black transition flex flex-col items-center justify-center gap-1 border border-slate-600 ${btnStyle}`}
+                        className={`p-5 rounded-2xl text-xl font-black transition flex flex-col items-center justify-center gap-1 border border-slate-300 ${btnStyle}`}
                       >
                         <span className="text-3xl">{NEP_NUMERALS[opt]}</span>
                         <span className="text-xs opacity-75">{opt}</span>
@@ -622,8 +622,8 @@ export const NumberLineAdventure: React.FC<Props> = ({
 
                 {/* Explanation Card */}
                 {challengeAnswered && (
-                  <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700 text-xs text-slate-300">
-                    <p className="font-bold text-amber-400 mb-1">
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+                    <p className="font-bold text-amber-700 mb-1">
                       {language === 'np' ? 'व्याख्या:' : 'Explanation:'}
                     </p>
                     <p>
@@ -647,16 +647,16 @@ export const NumberLineAdventure: React.FC<Props> = ({
               </div>
             ) : (
               /* Completion Celebration Card */
-              <div className="bg-slate-800/95 border-2 border-teal-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
+              <div className="bg-white border-2 border-teal-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
                 <div className="w-20 h-20 rounded-full bg-teal-500/20 flex items-center justify-center">
                   <Award className="w-10 h-10 text-teal-400" />
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-black text-white">
+                  <h3 className="text-2xl font-black text-slate-900">
                     {language === 'np' ? 'बधाई छ! साहसिक यात्रा सफल भयो!' : 'Congratulations! Adventure Completed!'}
                   </h3>
-                  <p className="text-slate-400 text-xs mt-1">
+                  <p className="text-slate-500 text-xs mt-1">
                     {language === 'np'
                       ? 'तपाईंले सङ्ख्यारेखामा अघिल्लो, पछिल्लो र बीचको सङ्ख्या कुशलतापूर्वक चिन्नुभयो।'
                       : 'You mastered numbers before, after, between, and sequence gaps on the number line.'}
@@ -670,7 +670,7 @@ export const NumberLineAdventure: React.FC<Props> = ({
                 <div className="flex gap-3 w-full">
                   <button
                     onClick={handleAdventureReset}
-                    className="flex-1 py-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                    className="flex-1 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                   >
                     {language === 'np' ? 'फेरि यात्रा गर्नुहोस्' : 'Restart Adventure'}
                   </button>

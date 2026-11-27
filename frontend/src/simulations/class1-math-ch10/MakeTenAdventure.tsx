@@ -425,41 +425,41 @@ export const MakeTenAdventure: React.FC<Props> = ({
   };
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
             title="Back to Chapter 10"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 font-semibold">
                 Class 1 • Math • Chapter 10
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-700 font-semibold">
                 Simulation 02
               </span>
             </div>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
               {language === 'np' ? 'दश बनाएर जोडौँ (Make Ten Strategy)' : 'Make Ten Adventure'}
             </h1>
           </div>
         </div>
 
         {/* Mode Selector */}
-        <div className="flex items-center gap-1 bg-slate-900/60 p-1 rounded-xl border border-slate-700/60 text-xs">
+        <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200/60 text-xs">
           <button
             onClick={() => {
               playSound('click');
               setMode('EXPLORE_STEPS');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              mode === 'EXPLORE_STEPS' ? 'bg-cyan-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'EXPLORE_STEPS' ? 'bg-cyan-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Grid className="w-3.5 h-3.5" />
@@ -471,7 +471,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
               setMode('SPLIT_PRACTICE');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              mode === 'SPLIT_PRACTICE' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'SPLIT_PRACTICE' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <GitBranch className="w-3.5 h-3.5" />
@@ -483,7 +483,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
               setMode('QUIZ');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              mode === 'QUIZ' ? 'bg-amber-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'QUIZ' ? 'bg-amber-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Trophy className="w-3.5 h-3.5" />
@@ -495,10 +495,10 @@ export const MakeTenAdventure: React.FC<Props> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setSoundEnabled((prev) => !prev)}
-            className="p-2 rounded-xl bg-slate-700/80 hover:bg-slate-700 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-100 transition text-slate-700"
             title={soundEnabled ? 'Mute' : 'Unmute'}
           >
-            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-400" /> : <VolumeX className="w-5 h-5 text-slate-400" />}
+            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
           <button
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
@@ -517,8 +517,8 @@ export const MakeTenAdventure: React.FC<Props> = ({
         {mode === 'EXPLORE_STEPS' && (
           <div className="flex-1 flex flex-col max-w-5xl mx-auto w-full gap-6">
             {/* Problem Selector Row */}
-            <div className="flex flex-wrap items-center justify-center gap-2 bg-slate-800/60 p-3 rounded-2xl border border-slate-700/60">
-              <span className="text-xs font-bold text-slate-400 mr-2 uppercase tracking-wider">
+            <div className="flex flex-wrap items-center justify-center gap-2 bg-white p-3 rounded-2xl border border-slate-200/60">
+              <span className="text-xs font-bold text-slate-500 mr-2 uppercase tracking-wider">
                 {language === 'np' ? 'जोड समस्या छान्नुहोस्:' : 'Select Problem:'}
               </span>
               {problems.map((p, idx) => (
@@ -528,7 +528,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                   className={`px-3.5 py-1.5 rounded-xl font-bold text-xs transition ${
                     problemIdx === idx
                       ? 'bg-cyan-500 text-slate-950 shadow-md scale-105'
-                      : 'bg-slate-700/80 hover:bg-slate-700 text-white'
+                      : 'bg-slate-100 hover:bg-slate-100 text-slate-900'
                   }`}
                 >
                   {NEP_NUMERALS[p.a]} + {NEP_NUMERALS[p.b]}
@@ -537,23 +537,23 @@ export const MakeTenAdventure: React.FC<Props> = ({
             </div>
 
             {/* Central Interactive Board */}
-            <div className="bg-slate-800/85 rounded-3xl border border-slate-700 p-6 shadow-2xl flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-2xl flex flex-col gap-6">
               {/* Header Title & Equation */}
-              <div className="flex flex-wrap items-center justify-between border-b border-slate-700 pb-3 gap-2">
+              <div className="flex flex-wrap items-center justify-between border-b border-slate-200 pb-3 gap-2">
                 <div>
-                  <h2 className="text-2xl font-black text-white flex items-center gap-2">
+                  <h2 className="text-2xl font-black text-slate-900 flex items-center gap-2">
                     <span>
                       {NEP_NUMERALS[currentProb.a]} + {NEP_NUMERALS[currentProb.b]} = ?
                     </span>
-                    <span className="text-slate-400 text-sm font-normal">
+                    <span className="text-slate-500 text-sm font-normal">
                       ({currentProb.a} + {currentProb.b})
                     </span>
                   </h2>
                 </div>
 
                 {/* Step Indicator */}
-                <div className="flex items-center gap-1.5 bg-slate-900/60 px-3 py-1.5 rounded-xl border border-slate-700">
-                  <span className="text-xs text-slate-400 font-bold uppercase mr-1">
+                <div className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
+                  <span className="text-xs text-slate-500 font-bold uppercase mr-1">
                     {language === 'np' ? 'चरण:' : 'Step:'}
                   </span>
                   {[1, 2, 3, 4, 5].map((s) => (
@@ -564,7 +564,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                           ? 'bg-cyan-500 text-slate-950 scale-110 shadow'
                           : step > s
                           ? 'bg-emerald-600 text-white'
-                          : 'bg-slate-800 text-slate-500'
+                          : 'bg-white text-slate-500'
                       }`}
                     >
                       {NEP_NUMERALS[s]}
@@ -576,18 +576,18 @@ export const MakeTenAdventure: React.FC<Props> = ({
               {/* Ten-Frame Interactive Visual Stage */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 {/* FIRST TEN-FRAME (Holds A + Needs X to make 10) */}
-                <div className="bg-slate-900/80 p-5 rounded-2xl border-2 border-cyan-500/40 flex flex-col items-center">
+                <div className="bg-slate-50 p-5 rounded-2xl border-2 border-cyan-500/40 flex flex-col items-center">
                   <div className="flex items-center justify-between w-full mb-3">
                     <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">
                       {language === 'np' ? 'पहिलो दश-कोठे घर (Ten-Frame A)' : 'Ten-Frame A'}
                     </span>
-                    <span className="text-xs font-bold text-white bg-slate-800 px-2 py-0.5 rounded-full">
+                    <span className="text-xs font-bold text-slate-900 bg-white px-2 py-0.5 rounded-full">
                       {step >= 4 ? '१० / १० (पूरा)' : `${NEP_NUMERALS[currentProb.a]} / १०`}
                     </span>
                   </div>
 
                   {/* 10-Cell Grid (2x5) */}
-                  <div className="grid grid-cols-5 gap-2 p-3 bg-slate-950/60 rounded-xl border border-slate-700">
+                  <div className="grid grid-cols-5 gap-2 p-3 bg-slate-50 rounded-xl border border-slate-200">
                     {Array.from({ length: 10 }).map((_, cellIdx) => {
                       const isOriginalA = cellIdx < currentProb.a;
                       const isTransferred = step >= 4 && cellIdx >= currentProb.a && cellIdx < 10;
@@ -602,8 +602,8 @@ export const MakeTenAdventure: React.FC<Props> = ({
                               : isTransferred
                               ? 'bg-amber-400 text-slate-950 border-amber-300 scale-105 animate-scaleIn'
                               : isNeededTarget
-                              ? 'bg-rose-500/20 border-rose-400 border-dashed animate-pulse text-rose-300'
-                              : 'bg-slate-900 border-slate-700 text-slate-600'
+                              ? 'bg-rose-500/20 border-rose-400 border-dashed animate-pulse text-rose-700'
+                              : 'bg-slate-50 border-slate-200 text-slate-600'
                           }`}
                         >
                           {isOriginalA
@@ -619,7 +619,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                   </div>
 
                   {/* Footnote */}
-                  <span className="text-xs text-slate-400 mt-3 font-semibold text-center">
+                  <span className="text-xs text-slate-500 mt-3 font-semibold text-center">
                     {step === 1 && (language === 'np' ? `सुरुमा ${NEP_NUMERALS[currentProb.a]} ओटा वस्तु छन्।` : `Initially ${currentProb.a} items.`)}
                     {step === 2 && (language === 'np' ? `१० बनाउन अझै ${NEP_NUMERALS[currentProb.need]} ओटा चाहिन्छ!` : `Needs ${currentProb.need} more to make 10!`)}
                     {step >= 4 && (language === 'np' ? `स्याबास! १ पूरा दश (१०) बन्यो!` : `1 Complete Ten (10) formed!`)}
@@ -627,12 +627,12 @@ export const MakeTenAdventure: React.FC<Props> = ({
                 </div>
 
                 {/* SECOND GROUP (B) & SPLITTING (Need + Remain) */}
-                <div className="bg-slate-900/80 p-5 rounded-2xl border-2 border-amber-500/40 flex flex-col items-center">
+                <div className="bg-slate-50 p-5 rounded-2xl border-2 border-amber-500/40 flex flex-col items-center">
                   <div className="flex items-center justify-between w-full mb-3">
-                    <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                    <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
                       {language === 'np' ? 'दोस्रो समूह (Group B)' : 'Group B'}
                     </span>
-                    <span className="text-xs font-bold text-white bg-slate-800 px-2 py-0.5 rounded-full">
+                    <span className="text-xs font-bold text-slate-900 bg-white px-2 py-0.5 rounded-full">
                       {NEP_NUMERALS[currentProb.b]} ओटा
                     </span>
                   </div>
@@ -656,7 +656,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                       <div className="flex items-center justify-around w-full gap-4">
                         {/* Needed Part (Transfers to Ten-Frame) */}
                         <div className="flex-1 bg-amber-500/20 border border-amber-400 p-2.5 rounded-xl text-center">
-                          <span className="text-[10px] font-bold text-amber-300 block mb-1">
+                          <span className="text-[10px] font-bold text-amber-700 block mb-1">
                             {language === 'np' ? `१० बनाउन जाने (${NEP_NUMERALS[currentProb.need]})` : `For 10 (${currentProb.need})`}
                           </span>
                           <div className="flex justify-center gap-1.5">
@@ -665,7 +665,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                                 key={i}
                                 className={`w-8 h-8 rounded-lg font-bold text-xs flex items-center justify-center ${
                                   step >= 4
-                                    ? 'bg-slate-700 text-slate-400 border border-slate-600'
+                                    ? 'bg-slate-100 text-slate-500 border border-slate-300'
                                     : 'bg-amber-400 text-slate-950'
                                 }`}
                               >
@@ -677,7 +677,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
 
                         {/* Remaining Part */}
                         <div className="flex-1 bg-emerald-500/20 border border-emerald-400 p-2.5 rounded-xl text-center">
-                          <span className="text-[10px] font-bold text-emerald-300 block mb-1">
+                          <span className="text-[10px] font-bold text-emerald-700 block mb-1">
                             {language === 'np' ? `बाँकी रहने (${NEP_NUMERALS[currentProb.remain]})` : `Remaining (${currentProb.remain})`}
                           </span>
                           <div className="flex justify-center gap-1.5">
@@ -695,7 +695,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                     </div>
                   )}
 
-                  <span className="text-xs text-slate-400 mt-3 font-semibold text-center">
+                  <span className="text-xs text-slate-500 mt-3 font-semibold text-center">
                     {step < 3 && (language === 'np' ? `दोस्रो समूहमा ${NEP_NUMERALS[currentProb.b]} छन्।` : `Group B has ${currentProb.b} items.`)}
                     {step === 3 && (language === 'np' ? `${NEP_NUMERALS[currentProb.b]} लाई ${NEP_NUMERALS[currentProb.need]} र ${NEP_NUMERALS[currentProb.remain]} मा फुटाइयो।` : `${currentProb.b} split into ${currentProb.need} and ${currentProb.remain}.`)}
                     {step >= 4 && (language === 'np' ? `अब दोस्रो समूहमा ${NEP_NUMERALS[currentProb.remain]} मात्र बाँकी छ।` : `Now only ${currentProb.remain} remaining in Group B.`)}
@@ -704,12 +704,12 @@ export const MakeTenAdventure: React.FC<Props> = ({
               </div>
 
               {/* Mathematical Equation Breakdown Studio */}
-              <div className="bg-slate-900/90 p-4 rounded-2xl border border-slate-700 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="flex flex-col gap-1">
                   <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">
                     {language === 'np' ? 'चरणबद्ध गणितीय सूत्र:' : 'Equation Steps:'}
                   </span>
-                  <div className="text-xl md:text-2xl font-black text-white tracking-wide">
+                  <div className="text-xl md:text-2xl font-black text-slate-900 tracking-wide">
                     {step === 1 && `${NEP_NUMERALS[currentProb.a]} + ${NEP_NUMERALS[currentProb.b]} = ?`}
                     {step === 2 && (
                       <>
@@ -728,7 +728,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                     )}
                     {step === 5 && (
                       <>
-                        १० + {NEP_NUMERALS[currentProb.remain]} = <span className="text-amber-400">{NEP_NUMERALS[currentProb.sum]}</span> (स्याबास!)
+                        १० + {NEP_NUMERALS[currentProb.remain]} = <span className="text-amber-700">{NEP_NUMERALS[currentProb.sum]}</span> (स्याबास!)
                       </>
                     )}
                   </div>
@@ -738,7 +738,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleResetStep}
-                    className="p-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-300 transition"
+                    className="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition"
                     title="Reset to Step 1"
                   >
                     <RotateCcw className="w-4 h-4" />
@@ -763,23 +763,23 @@ export const MakeTenAdventure: React.FC<Props> = ({
         {/* ========================================================================= */}
         {mode === 'SPLIT_PRACTICE' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
               {/* Mission Header */}
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="text-xs font-bold uppercase text-emerald-400 tracking-wider">
+                  <span className="text-xs font-bold uppercase text-emerald-700 tracking-wider">
                     {language === 'np' ? 'अभ्यास कार्य' : 'Split Challenge'}
                   </span>
-                  <h3 className="text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? (
                       <>
-                        <span className="text-amber-400">{NEP_NUMERALS[practiceProb.a]}</span> लाई १० बनाउन{' '}
-                        <span className="text-emerald-400">{NEP_NUMERALS[practiceProb.b]}</span> लाई फुटाउनुहोस्!
+                        <span className="text-amber-700">{NEP_NUMERALS[practiceProb.a]}</span> लाई १० बनाउन{' '}
+                        <span className="text-emerald-700">{NEP_NUMERALS[practiceProb.b]}</span> लाई फुटाउनुहोस्!
                       </>
                     ) : (
                       <>
-                        Split <span className="text-emerald-400">{practiceProb.b}</span> to make{' '}
-                        <span className="text-amber-400">{practiceProb.a}</span> into 10!
+                        Split <span className="text-emerald-700">{practiceProb.b}</span> to make{' '}
+                        <span className="text-amber-700">{practiceProb.a}</span> into 10!
                       </>
                     )}
                   </h3>
@@ -787,7 +787,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
 
                 <button
                   onClick={handleNextPracticeProblem}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को प्रश्न' : 'Next Challenge'}
                 </button>
@@ -796,7 +796,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
               {/* Interactive Splitter Controls */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Part 1: How much needed for 10? */}
-                <div className="bg-slate-900/80 p-5 rounded-2xl border border-cyan-500/40 flex flex-col items-center">
+                <div className="bg-slate-50 p-5 rounded-2xl border border-cyan-500/40 flex flex-col items-center">
                   <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-2">
                     {language === 'np'
                       ? `${NEP_NUMERALS[practiceProb.a]} लाई १० बनाउन कति चाहिन्छ?`
@@ -814,21 +814,21 @@ export const MakeTenAdventure: React.FC<Props> = ({
                         className={`w-11 h-11 rounded-xl font-black text-lg transition border ${
                           userNeedInput === n
                             ? 'bg-cyan-500 text-slate-950 border-cyan-300 scale-105 shadow'
-                            : 'bg-slate-800 text-white border-slate-700 hover:bg-slate-700'
+                            : 'bg-white text-slate-900 border-slate-200 hover:bg-slate-100'
                         }`}
                       >
                         {NEP_NUMERALS[n]}
                       </button>
                     ))}
                   </div>
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-slate-500">
                     {language === 'np' ? `चाहिने सङ्ख्या: ${userNeedInput ? NEP_NUMERALS[userNeedInput] : '?'}` : `Needed: ${userNeedInput || '?'}`}
                   </span>
                 </div>
 
                 {/* Part 2: What remains from B? */}
-                <div className="bg-slate-900/80 p-5 rounded-2xl border border-emerald-500/40 flex flex-col items-center">
-                  <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">
+                <div className="bg-slate-50 p-5 rounded-2xl border border-emerald-500/40 flex flex-col items-center">
+                  <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-2">
                     {language === 'np'
                       ? `${NEP_NUMERALS[practiceProb.b]} बाट बाँकी कति रहन्छ?`
                       : `What remains from ${practiceProb.b}?`}
@@ -845,22 +845,22 @@ export const MakeTenAdventure: React.FC<Props> = ({
                         className={`w-11 h-11 rounded-xl font-black text-lg transition border ${
                           userRemainInput === n
                             ? 'bg-emerald-500 text-slate-950 border-emerald-300 scale-105 shadow'
-                            : 'bg-slate-800 text-white border-slate-700 hover:bg-slate-700'
+                            : 'bg-white text-slate-900 border-slate-200 hover:bg-slate-100'
                         }`}
                       >
                         {NEP_NUMERALS[n]}
                       </button>
                     ))}
                   </div>
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-slate-500">
                     {language === 'np' ? `बाँकी रहने: ${userRemainInput ? NEP_NUMERALS[userRemainInput] : '?'}` : `Remaining: ${userRemainInput || '?'}`}
                   </span>
                 </div>
               </div>
 
               {/* Status & Verify */}
-              <div className="bg-slate-900/90 p-4 rounded-2xl border border-slate-700 flex flex-wrap items-center justify-between gap-4">
-                <div className="text-lg font-black text-white">
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                <div className="text-lg font-black text-slate-900">
                   {NEP_NUMERALS[practiceProb.b]} = {userNeedInput ? NEP_NUMERALS[userNeedInput] : '?'}{' '}
                   + {userRemainInput ? NEP_NUMERALS[userRemainInput] : '?'}
                 </div>
@@ -877,7 +877,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
 
               {practiceFeedback === 'success' && (
                 <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-emerald-200 text-sm font-bold flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-emerald-400" />
+                  <Sparkles className="w-5 h-5 text-emerald-700" />
                   <span>
                     {language === 'np'
                       ? `स्याबास! १० + ${NEP_NUMERALS[practiceProb.remain]} = ${NEP_NUMERALS[practiceProb.sum]} हुन्छ!`
@@ -905,8 +905,8 @@ export const MakeTenAdventure: React.FC<Props> = ({
         {mode === 'QUIZ' && (
           <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full justify-center">
             {!quizCompleted ? (
-              <div className="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-                <div className="flex items-center justify-between text-xs text-slate-400 border-b border-slate-700 pb-3">
+              <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+                <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-200 pb-3">
                   <span className="font-bold text-cyan-400">
                     {language === 'np'
                       ? `प्रश्न ${NEP_NUMERALS[quizIdx + 1]} / ${NEP_NUMERALS[quizList.length]}`
@@ -917,7 +917,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                   </span>
                 </div>
 
-                <h3 className="text-xl md:text-2xl font-black text-white">
+                <h3 className="text-xl md:text-2xl font-black text-slate-900">
                   {language === 'np' ? quizList[quizIdx].questionNp : quizList[quizIdx].questionEn}
                 </h3>
 
@@ -925,7 +925,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                   {quizList[quizIdx].options.map((opt) => {
                     const isSelected = quizSelected === opt;
                     const isCorrectOpt = opt === quizList[quizIdx].correct;
-                    let btnStyle = 'bg-slate-700/80 hover:bg-slate-700 text-white';
+                    let btnStyle = 'bg-slate-100 hover:bg-slate-100 text-slate-900';
 
                     if (quizAnswered) {
                       if (isCorrectOpt) {
@@ -933,7 +933,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                       } else if (isSelected) {
                         btnStyle = 'bg-rose-600 text-white font-black';
                       } else {
-                        btnStyle = 'bg-slate-800 text-slate-500 opacity-50';
+                        btnStyle = 'bg-white text-slate-500 opacity-50';
                       }
                     }
 
@@ -942,7 +942,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                         key={opt}
                         disabled={quizAnswered}
                         onClick={() => handleQuizAnswer(opt)}
-                        className={`p-4 rounded-2xl text-xl font-bold transition flex flex-col items-center justify-center gap-1 border border-slate-600 ${btnStyle}`}
+                        className={`p-4 rounded-2xl text-xl font-bold transition flex flex-col items-center justify-center gap-1 border border-slate-300 ${btnStyle}`}
                       >
                         <span className="text-3xl">{NEP_NUMERALS[opt]}</span>
                         <span className="text-xs opacity-75">{opt}</span>
@@ -952,7 +952,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                 </div>
 
                 {quizAnswered && (
-                  <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700 text-xs text-slate-300">
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
                     <p className="font-bold text-cyan-400 mb-1">
                       {language === 'np' ? 'व्याख्या:' : 'Explanation:'}
                     </p>
@@ -973,16 +973,16 @@ export const MakeTenAdventure: React.FC<Props> = ({
                 )}
               </div>
             ) : (
-              <div className="bg-slate-800/95 border-2 border-cyan-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
+              <div className="bg-white border-2 border-cyan-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
                 <div className="w-20 h-20 rounded-full bg-cyan-500/20 flex items-center justify-center">
                   <Award className="w-10 h-10 text-cyan-400" />
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-black text-white">
+                  <h3 className="text-2xl font-black text-slate-900">
                     {language === 'np' ? 'बधाई छ! मूल्याङ्कन पूरा भयो!' : 'Congratulations! Quiz Completed!'}
                   </h3>
-                  <p className="text-slate-400 text-xs mt-1">
+                  <p className="text-slate-500 text-xs mt-1">
                     {language === 'np'
                       ? 'तपाईंले दश बनाएर जोड गर्ने विधि सफलतापूर्वक सिक्नुभयो।'
                       : 'You have mastered the Make-10 addition strategy.'}
@@ -996,7 +996,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                 <div className="flex gap-3 w-full">
                   <button
                     onClick={handleQuizReset}
-                    className="flex-1 py-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                    className="flex-1 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                   >
                     {language === 'np' ? 'पुनः परीक्षा दिनुहोस्' : 'Retake Quiz'}
                   </button>

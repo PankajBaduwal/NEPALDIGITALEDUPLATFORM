@@ -1,12 +1,10 @@
 /**
  * Class 5 lesson 8 · Time, lesson 12 · Perimeter, area and volume. (Class 6 lesson 10 reuses the volume lab.)
  */
-import * as THREE from 'three';
-import { clockModel, mat } from '../class1-math-kit/models';
 import { rnd } from '../class1-math-kit/nepali';
 import { makeLab, LabCfg } from './Lab';
 import { bi, choice, numChoice } from './h5';
-import { box, tag, tiles, outline, cubeBlock, rod } from './vis';
+import { box, tag, tiles, outline, cubeBlock, rod, customDraw } from './vis';
 
 /* ───────────── time ───────────── */
 const t12 = (h: number, m: number) => `${h % 12 === 0 ? 12 : h % 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;
@@ -21,9 +19,78 @@ export const timeCfg = (o: { code: string; chapter: number; titleNp: string; tit
   stage: { camera: [0, 4, 13], target: [0, 3, 0], minDistance: 7, maxDistance: 22 },
   draw: (g, p, lang) => {
     const [eh, em] = addT(p.h, p.m, p.dh, p.dm);
+    customDraw(g, (ctx, toScreen, scale) => {
+      [[p.h, p.m, -4.2, '#0ea5e9'], [eh, em, 4.2, '#22c55e']].forEach(([h, m, x, c]) => {
+        const [cx, cy] = toScreen(Number(x), 3.4, 0);
+        const cr = 2.7 * scale;
+
+        // Outer Rim
+        ctx.fillStyle = '#f97316';
+        ctx.beginPath();
+        ctx.arc(cx, cy, cr + 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Clock Face
+        ctx.fillStyle = '#fffbeb';
+        ctx.beginPath();
+        ctx.arc(cx, cy, cr, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#d97706';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // 12 Numbers & Ticks
+        for (let num = 1; num <= 12; num++) {
+          const ang = (num / 12) * Math.PI * 2 - Math.PI / 2;
+          const tx = cx + Math.cos(ang) * (cr * 0.78);
+          const ty = cy + Math.sin(ang) * (cr * 0.78);
+          ctx.fillStyle = '#1e293b';
+          ctx.font = `bold ${Math.max(10, cr * 0.18)}px sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(String(num), tx, ty);
+        }
+
+        // Hour Hand
+        const hrVal = (Number(h) % 12) + Number(m) / 60;
+        const hrAng = (hrVal / 12) * Math.PI * 2 - Math.PI / 2;
+        ctx.strokeStyle = '#1e293b';
+        ctx.lineWidth = Math.max(3, cr * 0.08);
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(hrAng) * (cr * 0.5), cy + Math.sin(hrAng) * (cr * 0.5));
+        ctx.stroke();
+
+        // Minute Hand
+        const minAng = (Number(m) / 60) * Math.PI * 2 - Math.PI / 2;
+        ctx.strokeStyle = String(c);
+        ctx.lineWidth = Math.max(2, cr * 0.05);
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(minAng) * (cr * 0.75), cy + Math.sin(minAng) * (cr * 0.75));
+        ctx.stroke();
+
+        // Center Cap
+        ctx.fillStyle = '#dc2626';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Day/Night Orb above clock
+        const day = Number(h) >= 6 && Number(h) < 18;
+        const [ox, oy] = toScreen(Number(x), 7.1, 0);
+        ctx.fillStyle = day ? '#facc15' : '#94a3b8';
+        ctx.beginPath();
+        ctx.arc(ox, oy, 14, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = day ? '#eab308' : '#64748b';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      });
+    }, 1);
+
     [[p.h, p.m, -4.2, '#0ea5e9'], [eh, em, 4.2, '#22c55e']].forEach(([h, m, x, c], i) => {
-      const ck = clockModel(2.7); ck.group.position.set(Number(x), 3.4, 0); g.add(ck.group); ck.setTime(Number(h) % 12 || 12, Number(m));
-      const day = Number(h) >= 6 && Number(h) < 18; const orb = new THREE.Mesh(new THREE.SphereGeometry(0.55, 24, 16), mat(day ? '#facc15' : '#cbd5e1', 0.3)); orb.position.set(Number(x), 7.1, 0); g.add(orb);
       tag(g, `${t24(Number(h), Number(m))}  (${t12(Number(h), Number(m))})`, Number(x), 0.2, 1.5, 4.4, { px: 46, w: 440, h: 80, bg: '#ffffff', border: String(c) });
       tag(g, i === 0 ? (lang === 'ne' ? 'सुरु' : 'Start') : lang === 'ne' ? 'अन्त्य' : 'End', Number(x), 8.1, 0, 2.2, { px: 50, w: 256, h: 80 });
     });

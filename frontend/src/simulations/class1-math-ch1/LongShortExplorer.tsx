@@ -92,22 +92,22 @@ export const LongShortExplorer: React.FC<LongShortExplorerProps> = ({
   };
 
   return (
-    <div style={{ width: '100%', minHeight: '88vh', background: 'linear-gradient(135deg, #701a75 0%, #4a044e 100%)', borderRadius: '16px', color: '#ffffff', padding: '20px', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ width: '100%', minHeight: '88vh', background: 'linear-gradient(135deg, #FCE8EF 0%, #FFF3D6 100%)', borderRadius: '16px', color: '#26332E', padding: '20px', display: 'flex', flexDirection: 'column' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <button onClick={onBackToLibrary} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.2)', border: 'none', color: '#ffffff', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>
+        <button onClick={onBackToLibrary} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FFFFFF', border: 'none', color: '#26332E', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>
           <ArrowLeft size={16} /> {lang === 'ne' ? 'लाइब्रेरी फर्कनुहोस्' : 'Return to Library'}
         </button>
         <h2 style={{ margin: 0, fontSize: '18px', fontWeight: '800' }}>
           {lang === 'ne' ? 'लामो र छोटो अन्वेषक (Long & Short Explorer)' : 'Long and Short Explorer'}
         </h2>
-        <button onClick={() => setLang(lang === 'ne' ? 'en' : 'ne')} style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: '#ffffff', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>
+        <button onClick={() => setLang(lang === 'ne' ? 'en' : 'ne')} style={{ background: '#FFFFFF', border: 'none', color: '#26332E', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>
           {lang === 'ne' ? 'English' : 'नेपाली'}
         </button>
       </div>
 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         {!isFinished ? (
-          <div style={{ maxWidth: '720px', width: '100%', background: '#e2e8f0', backdropFilter: 'blur(10px)', padding: '28px', borderRadius: '20px', textAlign: 'center' }}>
+          <div style={{ maxWidth: '720px', width: '100%', background: '#FFFFFF', backdropFilter: 'blur(10px)', padding: '28px', borderRadius: '20px', textAlign: 'center' }}>
             <span style={{ background: '#fbcfe8', color: '#831843', padding: '3px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: '800' }}>
               Step {stepIdx + 1} of {activities.length}
             </span>
@@ -116,7 +116,7 @@ export const LongShortExplorer: React.FC<LongShortExplorerProps> = ({
             </h3>
 
             {/* Horizontal baseline comparisons */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'flex-start', background: 'rgba(0,0,0,0.2)', padding: '24px', borderRadius: '14px', borderLeft: '6px solid #f472b6', marginBottom: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'flex-start', background: 'rgba(255,255,255,0.9)', padding: '24px', borderRadius: '14px', borderLeft: '6px solid #f472b6', marginBottom: '20px' }}>
               <div
                 onClick={() => handleSelect('A')}
                 style={{
@@ -161,18 +161,18 @@ export const LongShortExplorer: React.FC<LongShortExplorerProps> = ({
             </div>
 
             {feedback && (
-              <div style={{ padding: '10px 16px', borderRadius: '10px', background: 'rgba(255,255,255,0.2)', fontSize: '14px', fontWeight: '700' }}>
+              <div style={{ padding: '10px 16px', borderRadius: '10px', background: '#FFFFFF', fontSize: '14px', fontWeight: '700' }}>
                 {feedback}
               </div>
             )}
           </div>
         ) : (
-          <div style={{ textAlign: 'center', background: '#e2e8f0', padding: '36px', borderRadius: '20px' }}>
+          <div style={{ textAlign: 'center', background: '#FFFFFF', padding: '36px', borderRadius: '20px' }}>
             <Trophy size={50} color="#fcd34d" style={{ margin: '0 auto 12px auto' }} />
             <h3 style={{ fontSize: '24px', fontWeight: '800' }}>
               {lang === 'ne' ? 'सबास! लामो र छोटो अभ्यास पूरा भयो!' : 'Great Job! Long & Short Completed!'}
             </h3>
-            <p style={{ fontSize: '16px', color: '#f5d0fe' }}>
+            <p style={{ fontSize: '16px', color: '#26332E' }}>
               {lang === 'ne' ? `नतिजा: ${score} / ${activities.length}` : `Score: ${score} / ${activities.length}`}
             </p>
             <button onClick={onBackToLibrary} style={{ marginTop: '20px', padding: '10px 24px', borderRadius: '8px', background: '#f59e0b', color: '#000000', border: 'none', fontWeight: '800', cursor: 'pointer' }}>

@@ -1,110 +1,288 @@
 /**
  * Lesson 8 · Subtraction (घटाउ) — three-digit numbers
  * Take Away Town — take blocks away; break a hundred into tens or a ten into ones when you need more.
+ * Pure 2D Implementation for Smart Boards & Desktops.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useStage } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { rnd } from '../class1-math-kit/nepali';
-import { Blocks3, fmt, numChoices } from './helpers';
+import React, { useEffect, useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit/SimFrame2D';
+import { Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { rnd, toNp } from '../class1-math-kit/nepali';
+import { Base10Blocks2D } from './Base10Blocks2D';
+import { fmt, numChoices } from './helpers';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
-const LEARN = [[468, 235], [352, 127], [600, 243], [745, 368], [530, 176]];
+
+const LEARN_PAIRS = [
+  [468, 235],
+  [352, 127],
+  [600, 243],
+  [745, 368],
+  [530, 176],
+];
 
 export const TakeAwayTown: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G2-L8-01', chapter: 8, titleNp: 'घटाउ सहर (तीन अङ्क)', titleEn: 'Take Away Town (three-digit subtraction)' });
+  const kit = useSimKit({
+    code: 'SIM-MATH-G2-L8-01',
+    chapter: 8,
+    titleNp: 'घटाउ सहर (तीन अङ्क)',
+    titleEn: 'Take Away Town (three-digit subtraction)',
+  });
+
   const [a, setA] = useState(468);
   const [b, setB] = useState(235);
-  const [h, setH] = useState(4); const [t, setT] = useState(6); const [o, setO] = useState(8);
-  const [rh, setRh] = useState(2); const [rt, setRt] = useState(3); const [ro, setRo] = useState(5);
-  const [busy, setBusy] = useState(false);
+  const [h, setH] = useState(4);
+  const [t, setT] = useState(6);
+  const [o, setO] = useState(8);
+  const [remH, setRemH] = useState(2);
+  const [remT, setRemT] = useState(3);
+  const [remO, setRemO] = useState(5);
   const [li, setLi] = useState(0);
-  const scene = useRef<Blocks3 | null>(null);
-  const doneFor = useRef('');
-
-  useStage(kit.stageRef, (ctx) => {
-    const bl = new Blocks3(ctx, { x: -6.5, z: 0, u: 0.34 });
-    scene.current = bl; bl.setNumber(468);
-    return () => { scene.current = null; bl.dispose(); };
-  }, [], { camera: [0, 9, 13.5], target: [0, 1.6, 0], minDistance: 7, maxDistance: 24 });
 
   const setup = (x: number, y: number) => {
-    setA(x); setB(y); setH(Math.floor(x / 100)); setT(Math.floor((x % 100) / 10)); setO(x % 10);
-    setRh(Math.floor(y / 100)); setRt(Math.floor((y % 100) / 10)); setRo(y % 10); setBusy(false); doneFor.current = '';
-    scene.current?.setNumber(x);
+    setA(x);
+    setB(y);
+    setH(Math.floor(x / 100));
+    setT(Math.floor((x % 100) / 10));
+    setO(x % 10);
+    setRemH(Math.floor(y / 100));
+    setRemT(Math.floor((y % 100) / 10));
+    setRemO(y % 10);
   };
-  const complete = rh === 0 && rt === 0 && ro === 0;
-  useEffect(() => { if (complete && kit.mode !== 'CHALLENGE' && doneFor.current !== `${a}-${b}`) { doneFor.current = `${a}-${b}`; kit.good(`${a} − ${b} = ${h * 100 + t * 10 + o}`, `${a} − ${b} = ${h * 100 + t * 10 + o}`); kit.star(); } /* eslint-disable-next-line */ }, [complete]);
 
-  const takeO = () => {
-    if (busy) return;
-    if (ro === 0) { kit.oops('एकाइ पहिले नै घटाइसक्यौँ', 'You already took all the ones'); return; }
-    if (o === 0) { kit.oops('एकाइ पुगेन! दशक फुकाऔँ 🔨', 'Not enough ones! Break a ten 🔨'); return; }
-    scene.current?.removeOne(); setO(o - 1); setRo(ro - 1); kit.tap();
+  const isComplete = remH === 0 && remT === 0 && remO === 0;
+
+  const takeOne = () => {
+    if (remO === 0) {
+      kit.oops('एकाइ पहिले नै घटाइसक्यौँ', 'Already took all needed ones');
+      return;
+    }
+    if (o === 0) {
+      kit.oops('एकाइ पुगेन! १ दशक फुकाऔँ 🔨', 'Not enough ones! Break a ten 🔨');
+      return;
+    }
+    kit.tap();
+    setO((v) => v - 1);
+    setRemO((v) => v - 1);
   };
-  const takeT = () => {
-    if (busy) return;
-    if (rt === 0) { kit.oops('दशक पहिले नै घटाइसक्यौँ', 'You already took all the tens'); return; }
-    if (t === 0) { kit.oops('दशक पुगेन! सय फुकाऔँ 🔨', 'Not enough tens! Break a hundred 🔨'); return; }
-    scene.current?.removeTen(); setT(t - 1); setRt(rt - 1); kit.tap();
+
+  const takeTen = () => {
+    if (remT === 0) {
+      kit.oops('दशक पहिले नै घटाइसक्यौँ', 'Already took all needed tens');
+      return;
+    }
+    if (t === 0) {
+      kit.oops('दशक पुगेन! १ सय फुकाऔँ 🔨', 'Not enough tens! Break a hundred 🔨');
+      return;
+    }
+    kit.tap();
+    setT((v) => v - 1);
+    setRemT((v) => v - 1);
   };
-  const takeH = () => {
-    if (busy) return;
-    if (rh === 0) { kit.oops('सय पहिले नै घटाइसक्यौँ', 'You already took all the hundreds'); return; }
+
+  const takeHundred = () => {
+    if (remH === 0) {
+      kit.oops('सय पहिले नै घटाइसक्यौँ', 'Already took all needed hundreds');
+      return;
+    }
     if (h === 0) return;
-    scene.current?.removeHundred(); setH(h - 1); setRh(rh - 1); kit.tap();
+    kit.tap();
+    setH((v) => v - 1);
+    setRemH((v) => v - 1);
   };
-  const breakT = () => {
-    if (busy || !t) return;
-    if (o >= ro) { kit.oops('अहिले फुकाउनु पर्दैन', 'No need to break a ten now'); return; }
-    setBusy(true); scene.current?.breakTen(() => setBusy(false)); setT(t - 1); setO(o + 10); kit.say('१ दशक फुक्यो — १० एकाइ भयो!', '1 ten broke into 10 ones!');
+
+  const breakTen = () => {
+    if (t <= 0) {
+      kit.oops('फुकाउनको लागि दशक बाँकी छैन!', 'No tens left to break!');
+      return;
+    }
+    kit.tap();
+    setT((v) => v - 1);
+    setO((v) => v + 10);
+    kit.say('१ दशक फुकेर १० एकाइ भयो!', '1 ten unbundled into 10 ones!');
   };
-  const breakH = () => {
-    if (busy || !h) return;
-    if (t >= rt) { kit.oops('अहिले सय फुकाउनु पर्दैन', 'No need to break a hundred now'); return; }
-    setBusy(true); scene.current?.breakHundred(() => setBusy(false)); setH(h - 1); setT(t + 10); kit.say('१ सय फुक्यो — १० दशक भयो!', '1 hundred broke into 10 tens!');
+
+  const breakHundred = () => {
+    if (h <= 0) {
+      kit.oops('फुकाउनको लागि सय बाँकी छैन!', 'No hundreds left to break!');
+      return;
+    }
+    kit.tap();
+    setH((v) => v - 1);
+    setT((v) => v + 10);
+    kit.say('१ सय फुकेर १० दशक भयो!', '1 hundred unbundled into 10 tens!');
   };
 
   useEffect(() => {
-    if (kit.mode === 'LEARN') { setup(LEARN[li][0], LEARN[li][1]); kit.say(`${LEARN[li][0]} बाट ${LEARN[li][1]} घटाऔँ।`, `Take ${LEARN[li][1]} away from ${LEARN[li][0]}.`); }
-    else if (kit.mode === 'PLAY') { const x = rnd(400, 900); setup(x, rnd(110, x - 120 > 480 ? 480 : x - 120)); kit.say('ब्लक हटाउँदै घटाऔँ। नपुगे फुकाऔँ।', 'Take blocks away. Break a ten or a hundred if you need more.'); }
+    if (isComplete && kit.mode !== 'CHALLENGE') {
+      kit.good(`${toNp(a)} − ${toNp(b)} = ${toNp(a - b)}`, `${a} − ${b} = ${a - b}`);
+      kit.star();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isComplete]);
+
+  useEffect(() => {
+    if (kit.mode === 'LEARN') {
+      const pair = LEARN_PAIRS[li % LEARN_PAIRS.length];
+      setup(pair[0], pair[1]);
+      kit.say(
+        `${toNp(pair[0])} बाट ${toNp(pair[1])} घटाऔँ।`,
+        `Let us subtract ${pair[1]} from ${pair[0]}.`
+      );
+    } else if (kit.mode === 'PLAY') {
+      let x = rnd(250, 890);
+      let y = rnd(100, x - 20);
+      setup(x, y);
+      kit.say('घटाउने ब्लकहरू हटाउँदै जानुहोस्।', 'Take away blocks according to the subtrahend.');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kit.mode, li]);
 
-  const data = useMemo(() => Array.from({ length: 6 }, (_, i) => {
-    let x = 0, y = 0;
-    for (;;) { x = rnd(300, 950); y = rnd(110, Math.min(x - 100, 480)); const borrow = (x % 10) < (y % 10) || (Math.floor(x / 10) % 10) < (Math.floor(y / 10) % 10); if ((i % 2 === 0) === borrow) continue; if (y < x) break; }
-    return { x, y, r: x - y };
+  // Quiz Questions for Challenge Mode
+  const data = useMemo(() => Array.from({ length: 6 }, () => {
+    const x = rnd(250, 890);
+    const y = rnd(100, x - 20);
+    return { x, y, diff: x - y };
   }), []);
+
   const questions: (QuizQuestion & { x: number; y: number })[] = data.map((d, i) => ({
-    np: `${fmt('ne', d.x)} − ${fmt('ne', d.y)} = ?`, en: `${d.x} − ${d.y} = ?`, x: d.x, y: d.y, answer: String(d.r),
-    options: numChoices(d.r, i * 19 + 7, [10, -10, 100, 1, -1]).map((v) => ({ key: String(v), label: fmt(kit.lang, v) })),
+    np: `${toNp(d.x)} − ${toNp(d.y)} = ?`,
+    en: `${d.x} − ${d.y} = ?`,
+    x: d.x,
+    y: d.y,
+    answer: String(d.diff),
+    options: numChoices(d.diff, i * 19 + 5, [10, -10, 100, 1, -1]).map((v) => ({
+      key: String(v),
+      label: fmt(kit.lang, v),
+    })),
   }));
 
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', textAlign: 'center' }}>
-      <div style={{ fontSize: 30, fontWeight: 900 }}>{fmt(kit.lang, a)} − {fmt(kit.lang, b)} = <span style={{ color: complete ? '#16a34a' : '#94a3b8' }}>{complete ? fmt(kit.lang, h * 100 + t * 10 + o) : '?'}</span></div>
-      {!complete && <div style={{ fontSize: 15, fontWeight: 800, color: '#be123c' }}>{kit.t('अझै घटाउनु पर्ने', 'Still to take')}: {fmt(kit.lang, rh)} {kit.t('सय', 'h')} + {fmt(kit.lang, rt)} {kit.t('दशक', 't')} + {fmt(kit.lang, ro)} {kit.t('एकाइ', 'o')}</div>}
+  const hud = (
+    <div
+      style={{
+        background: '#FFFFFF',
+        borderRadius: 16,
+        padding: '8px 18px',
+        border: '2px solid #187C68',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+        fontSize: 22,
+        fontWeight: 900,
+        color: '#26332E',
+      }}
+    >
+      <span style={{ color: '#0284C7' }}>{toNp(a)}</span> −{' '}
+      <span style={{ color: '#E11D48' }}>{toNp(b)}</span> ={' '}
+      <span style={{ color: isComplete ? '#16A34A' : '#94A3B8' }}>
+        {isComplete ? toNp(a - b) : '?'}
+      </span>
     </div>
   );
-  const buttons = (
-    <>
-      <CBtn color="#fb7185" disabled={busy} onClick={takeH}>−100 🟥</CBtn>
-      <CBtn color="#0ea5e9" disabled={busy} onClick={takeT}>−10 🟦</CBtn>
-      <CBtn color="#eab308" disabled={busy} onClick={takeO}>−1 🟨</CBtn>
-      <CBtn color="#f97316" disabled={busy} onClick={breakT}>🔨 {kit.t('दशक', 'ten')}</CBtn>
-      <CBtn color="#dc2626" disabled={busy} onClick={breakH}>🔨 {kit.t('सय', 'hundred')}</CBtn>
-    </>
-  );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 180 }}>{complete ? `✅ ${a} − ${b} = ${h * 100 + t * 10 + o}` : kit.t('एकाइ, दशक, सय — यही क्रममा', 'Ones, then tens, then hundreds')}</div>
-      {buttons}<CBtn color="#16a34a" disabled={!complete} onClick={() => setLi((li + 1) % LEARN.length)}>{kit.t('अर्को', 'Next')} ➜</CBtn>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>{buttons}<CBtn color="#8b5cf6" onClick={() => { const x = rnd(400, 900); setup(x, rnd(110, Math.min(x - 120, 480))); }}>🎲</CBtn><CBtn color="#f59e0b" onClick={() => setup(a, b)}>↺</CBtn></Controls>
+
+  const panel = kit.mode === 'CHALLENGE' ? (
+    <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => setup(q.x, q.y)} />
   ) : (
-    <div><QuizPanel kit={kit} questions={questions} onAsk={(q: any) => setup(q.x, q.y)} /><div style={{ marginTop: 8, display: 'flex', gap: 8, flexWrap: 'wrap' }}>{buttons}</div></div>
+    <Controls>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+        {/* Step-by-step subtraction buttons */}
+        <div style={{ display: 'inline-flex', gap: 4, background: '#FFFBEB', padding: '4px 8px', borderRadius: 10, border: '1px solid #FDE68A' }}>
+          <CBtn color="#92400E" disabled={remO === 0} onClick={takeOne}>
+            -१ {kit.t('एकाइ घटाऔँ', 'Take One')} ({toNp(remO)})
+          </CBtn>
+          <CBtn color="#D97706" disabled={t <= 0} onClick={breakTen}>
+            🔨 {kit.t('१ दशक फुकाऔँ', 'Break 1 Ten')}
+          </CBtn>
+        </div>
+
+        <div style={{ display: 'inline-flex', gap: 4, background: '#EFF6FF', padding: '4px 8px', borderRadius: 10, border: '1px solid #BFDBFE' }}>
+          <CBtn color="#1E40AF" disabled={remT === 0} onClick={takeTen}>
+            -१ {kit.t('दशक घटाऔँ', 'Take Ten')} ({toNp(remT)})
+          </CBtn>
+          <CBtn color="#2563EB" disabled={h <= 0} onClick={breakHundred}>
+            🔨 {kit.t('१ सय फुकाऔँ', 'Break 1 Hundred')}
+          </CBtn>
+        </div>
+
+        <div style={{ display: 'inline-flex', gap: 4, background: '#F0FDF4', padding: '4px 8px', borderRadius: 10, border: '1px solid #BBF7D0' }}>
+          <CBtn color="#166534" disabled={remH === 0} onClick={takeHundred}>
+            -१ {kit.t('सय घटाऔँ', 'Take Hundred')} ({toNp(remH)})
+          </CBtn>
+        </div>
+
+        {kit.mode === 'LEARN' && (
+          <CBtn color="#187C68" onClick={() => setLi((v) => v + 1)}>
+            {kit.t('अर्को घटाउ', 'Next Problem')} ➜
+          </CBtn>
+        )}
+
+        {kit.mode === 'PLAY' && (
+          <CBtn
+            color="#D97706"
+            onClick={() => {
+              const x = rnd(250, 890);
+              const y = rnd(100, x - 20);
+              setup(x, y);
+            }}
+          >
+            🎲 {kit.t('नयाँ प्रश्न', 'Random')}
+          </CBtn>
+        )}
+      </div>
+    </Controls>
   );
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+
+  return (
+    <SimFrame2D kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} grade={2}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 380,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          gap: 16,
+        }}
+      >
+        {/* Remaining to take away status chip */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #E11D48',
+            borderRadius: 14,
+            padding: '8px 20px',
+            boxShadow: '0 4px 12px rgba(225, 29, 72, 0.08)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 16,
+          }}
+        >
+          <span style={{ fontSize: 14, fontWeight: 900, color: '#E11D48' }}>
+            {kit.t('घटाउन बाँकी:', 'Still to take away:')}
+          </span>
+          <span style={{ fontSize: 14, fontWeight: 800, color: '#1E293B' }}>
+            {kit.t('सय', 'Hundreds')}: <b style={{ color: '#166534' }}>{toNp(remH)}</b> |{' '}
+            {kit.t('दशक', 'Tens')}: <b style={{ color: '#1E40AF' }}>{toNp(remT)}</b> |{' '}
+            {kit.t('एकाइ', 'Ones')}: <b style={{ color: '#92400E' }}>{toNp(remO)}</b>
+          </span>
+        </div>
+
+        {/* The Blocks Board */}
+        <div style={{ width: '100%', maxWidth: 840 }}>
+          <Base10Blocks2D
+            hundreds={h}
+            tens={t}
+            ones={o}
+            lang={kit.lang}
+            title={
+              isComplete
+                ? kit.t(`बाँकी घटाउफल: ${toNp(a - b)} ✅`, `Remaining Difference: ${a - b} ✅`)
+                : kit.t(`हालको ब्लक संख्या: ${toNp(h * 100 + t * 10 + o)}`, `Current Blocks: ${h * 100 + t * 10 + o}`)
+            }
+            color={isComplete ? '#16A34A' : '#0284C7'}
+          />
+        </div>
+      </div>
+    </SimFrame2D>
+  );
 };

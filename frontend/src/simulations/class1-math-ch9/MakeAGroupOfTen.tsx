@@ -401,41 +401,41 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
   const onesCount = selectedNum === 20 ? 0 : selectedNum - 10;
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header Bar */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
             title="Back to Chapter 9"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 font-semibold">
                 Class 1 • Math • Chapter 9
               </span>
               <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 font-semibold">
                 Simulation 02
               </span>
             </div>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
               {language === 'np' ? 'दशको समूह बनाऔँ (१० + क = ११ देखि २०)' : 'Make a Group of Ten (10 + N)'}
             </h1>
           </div>
         </div>
 
         {/* Mode Selector */}
-        <div className="flex items-center gap-1 bg-slate-900/60 p-1 rounded-xl border border-slate-700/60 text-xs">
+        <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200/60 text-xs">
           <button
             onClick={() => {
               playSound('click');
               setMode('EXPLORE');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              mode === 'EXPLORE' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'EXPLORE' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Package className="w-3.5 h-3.5" />
@@ -447,7 +447,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
               setMode('PRACTICE');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              mode === 'PRACTICE' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'PRACTICE' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Boxes className="w-3.5 h-3.5" />
@@ -459,7 +459,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
               setMode('QUIZ');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              mode === 'QUIZ' ? 'bg-amber-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'QUIZ' ? 'bg-amber-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Trophy className="w-3.5 h-3.5" />
@@ -471,10 +471,10 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setSoundEnabled((prev) => !prev)}
-            className="p-2 rounded-xl bg-slate-700/80 hover:bg-slate-700 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-100 transition text-slate-700"
             title={soundEnabled ? 'Mute' : 'Unmute'}
           >
-            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-400" /> : <VolumeX className="w-5 h-5 text-slate-400" />}
+            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
 
           <button
@@ -494,8 +494,8 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
         {mode === 'EXPLORE' && (
           <div className="flex-1 flex flex-col p-4 md:p-6 overflow-y-auto">
             {/* Number Selector Row 11 - 20 */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mb-4 bg-slate-800/60 p-3 rounded-2xl border border-slate-700/60">
-              <span className="text-xs font-bold text-slate-400 mr-2 uppercase tracking-wider">
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-4 bg-white p-3 rounded-2xl border border-slate-200/60">
+              <span className="text-xs font-bold text-slate-500 mr-2 uppercase tracking-wider">
                 {language === 'np' ? 'सङ्ख्या छान्नुहोस्:' : 'Choose Number:'}
               </span>
               {[11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((num) => (
@@ -505,7 +505,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                   className={`w-11 h-11 rounded-xl font-bold flex flex-col items-center justify-center transition-all ${
                     selectedNum === num
                       ? 'bg-amber-500 text-slate-950 scale-105 shadow-lg shadow-amber-500/30 ring-2 ring-amber-300'
-                      : 'bg-slate-700/80 hover:bg-slate-700 text-white hover:scale-102'
+                      : 'bg-slate-100 hover:bg-slate-100 text-slate-900 hover:scale-102'
                   }`}
                 >
                   <span className="text-sm leading-none">{NEP_NUMERALS[num]}</span>
@@ -517,22 +517,22 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
             {/* Central Stage: Interactive Visual Workbench */}
             <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch min-h-[380px]">
               {/* Left & Center: Bundles & Ones Display (8 cols) */}
-              <div className="lg:col-span-8 bg-gradient-to-br from-slate-800/80 to-slate-900/90 rounded-3xl border border-slate-700/80 p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden">
+              <div className="lg:col-span-8 bg-gradient-to-br from-slate-800/80 to-emerald-50/90 rounded-3xl border border-slate-200/80 p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden">
                 {/* Background glow decoration */}
                 <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
 
                 {/* Subheader banner */}
-                <div className="flex items-center justify-between border-b border-slate-700/60 pb-3">
+                <div className="flex items-center justify-between border-b border-slate-200/60 pb-3">
                   <div>
-                    <h2 className="text-xl font-extrabold text-white flex items-center gap-2">
+                    <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
                       <span>{NEP_NUMERALS[selectedNum]}</span>
-                      <span className="text-amber-400">({selectedNum})</span>
-                      <span className="text-slate-400 font-normal text-sm">
+                      <span className="text-amber-700">({selectedNum})</span>
+                      <span className="text-slate-500 font-normal text-sm">
                         • {language === 'np' ? NEP_NAMES[selectedNum] : EN_NAMES[selectedNum]}
                       </span>
                     </h2>
-                    <p className="text-xs text-slate-400 mt-0.5">
+                    <p className="text-xs text-slate-500 mt-0.5">
                       {selectedNum === 20
                         ? language === 'np'
                           ? '२० मा १० का २ वटा पूरा समूह (दहाइ) हुन्छन् र एकाइ शून्य रहन्छ।'
@@ -565,8 +565,8 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                 {/* Interactive Visual Display: Tens Bundle vs Ones Blocks */}
                 <div className="flex-1 flex flex-col md:flex-row items-center justify-around gap-6 py-6">
                   {/* TENS COLUMN (दहाइ) */}
-                  <div className="flex-1 w-full flex flex-col items-center bg-slate-900/60 p-4 rounded-2xl border border-emerald-500/30">
-                    <div className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5 mb-3">
+                  <div className="flex-1 w-full flex flex-col items-center bg-slate-50 p-4 rounded-2xl border border-emerald-500/30">
+                    <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5 mb-3">
                       <Package className="w-4 h-4" />
                       {language === 'np' ? `दहाइ (१० को समूह: ${NEP_NUMERALS[tensCount]})` : `Tens (Groups of 10: ${tensCount})`}
                     </div>
@@ -578,7 +578,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                           className={`relative p-3 rounded-2xl transition-all duration-500 ${
                             isBundled
                               ? 'bg-gradient-to-b from-amber-500/20 to-amber-600/30 border-2 border-amber-400 shadow-lg shadow-amber-500/10'
-                              : 'bg-slate-800/80 border border-slate-700'
+                              : 'bg-white border border-slate-200'
                           }`}
                         >
                           {/* Bundle ribbon tag */}
@@ -607,19 +607,19 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                       ))}
                     </div>
 
-                    <span className="mt-3 text-xs font-semibold text-emerald-300">
+                    <span className="mt-3 text-xs font-semibold text-emerald-700">
                       {tensCount === 1 ? '१ दश = १०' : '२ दश = २०'}
                     </span>
                   </div>
 
                   {/* PLUS CONNECTOR */}
                   <div className="flex flex-col items-center">
-                    <span className="text-3xl font-black text-amber-400">+</span>
+                    <span className="text-3xl font-black text-amber-700">+</span>
                   </div>
 
                   {/* ONES COLUMN (एकाइ) */}
-                  <div className="flex-1 w-full flex flex-col items-center bg-slate-900/60 p-4 rounded-2xl border border-sky-500/30">
-                    <div className="text-xs font-bold uppercase tracking-wider text-sky-400 flex items-center gap-1.5 mb-3">
+                  <div className="flex-1 w-full flex flex-col items-center bg-slate-50 p-4 rounded-2xl border border-sky-500/30">
+                    <div className="text-xs font-bold uppercase tracking-wider text-sky-700 flex items-center gap-1.5 mb-3">
                       <Boxes className="w-4 h-4" />
                       {language === 'np' ? `एकाइ (बाँकी क्युबहरू: ${NEP_NUMERALS[onesCount]})` : `Ones (Loose Cubes: ${onesCount})`}
                     </div>
@@ -643,37 +643,37 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                       )}
                     </div>
 
-                    <span className="mt-3 text-xs font-semibold text-sky-300">
+                    <span className="mt-3 text-xs font-semibold text-sky-700">
                       {language === 'np' ? `${NEP_NUMERALS[onesCount]} एकाइ` : `${onesCount} Ones`}
                     </span>
                   </div>
                 </div>
 
                 {/* Bottom Mathematical Formula Card */}
-                <div className="bg-slate-900/80 p-4 rounded-2xl border border-slate-700 flex flex-wrap items-center justify-between gap-4">
+                <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <span className="text-xs px-2.5 py-1 rounded-lg bg-indigo-500/20 text-indigo-300 font-bold">
+                    <span className="text-xs px-2.5 py-1 rounded-lg bg-indigo-500/20 text-indigo-700 font-bold">
                       {language === 'np' ? 'गणितीय सूत्र:' : 'Equation:'}
                     </span>
-                    <span className="text-xl md:text-2xl font-black text-white tracking-wide">
+                    <span className="text-xl md:text-2xl font-black text-slate-900 tracking-wide">
                       {tensCount === 2 ? (
                         <>
-                          १० + १० = <span className="text-amber-400">२०</span> (बीस)
+                          १० + १० = <span className="text-amber-700">२०</span> (बीस)
                         </>
                       ) : (
                         <>
                           १० + {NEP_NUMERALS[onesCount]} ={' '}
-                          <span className="text-amber-400">{NEP_NUMERALS[selectedNum]}</span> ({NEP_NAMES[selectedNum]})
+                          <span className="text-amber-700">{NEP_NUMERALS[selectedNum]}</span> ({NEP_NAMES[selectedNum]})
                         </>
                       )}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-xs text-slate-300">
-                    <span className="px-2.5 py-1 bg-emerald-500/20 text-emerald-300 rounded-lg font-bold">
+                  <div className="flex items-center gap-2 text-xs text-slate-600">
+                    <span className="px-2.5 py-1 bg-emerald-500/20 text-emerald-700 rounded-lg font-bold">
                       दहाइ = {NEP_NUMERALS[tensCount]}
                     </span>
-                    <span className="px-2.5 py-1 bg-sky-500/20 text-sky-300 rounded-lg font-bold">
+                    <span className="px-2.5 py-1 bg-sky-500/20 text-sky-700 rounded-lg font-bold">
                       एकाइ = {NEP_NUMERALS[onesCount]}
                     </span>
                   </div>
@@ -683,45 +683,45 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
               {/* Right: Place Value Table & Audio Guide (4 cols) */}
               <div className="lg:col-span-4 flex flex-col gap-4">
                 {/* Place Value Table (स्थानमान तालिका) */}
-                <div className="bg-slate-800/80 rounded-3xl border border-slate-700/80 p-5 shadow-xl flex flex-col justify-between">
+                <div className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-xl flex flex-col justify-between">
                   <div>
-                    <h3 className="text-sm font-bold text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                    <h3 className="text-sm font-bold text-amber-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
                       <Sparkles className="w-4 h-4" />
                       {language === 'np' ? 'स्थानमान तालिका (Place Value)' : 'Place Value Table'}
                     </h3>
 
                     <table className="w-full text-center border-collapse">
                       <thead>
-                        <tr className="bg-slate-900/60 text-xs font-bold text-slate-400">
-                          <th className="p-2 border border-slate-700 text-emerald-400">
+                        <tr className="bg-slate-50 text-xs font-bold text-slate-500">
+                          <th className="p-2 border border-slate-200 text-emerald-700">
                             {language === 'np' ? 'दहाइ (Tens)' : 'Tens'}
                           </th>
-                          <th className="p-2 border border-slate-700 text-sky-400">
+                          <th className="p-2 border border-slate-200 text-sky-700">
                             {language === 'np' ? 'एकाइ (Ones)' : 'Ones'}
                           </th>
-                          <th className="p-2 border border-slate-700 text-amber-400">
+                          <th className="p-2 border border-slate-200 text-amber-700">
                             {language === 'np' ? 'सङ्ख्या (Number)' : 'Total'}
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr className="bg-slate-800/40 text-lg font-black text-white">
-                          <td className="p-3 border border-slate-700 text-emerald-300 bg-emerald-500/10">
+                        <tr className="bg-white text-lg font-black text-slate-900">
+                          <td className="p-3 border border-slate-200 text-emerald-700 bg-emerald-500/10">
                             {NEP_NUMERALS[tensCount]}
                           </td>
-                          <td className="p-3 border border-slate-700 text-sky-300 bg-sky-500/10">
+                          <td className="p-3 border border-slate-200 text-sky-700 bg-sky-500/10">
                             {NEP_NUMERALS[onesCount]}
                           </td>
-                          <td className="p-3 border border-slate-700 text-amber-300 bg-amber-500/10">
+                          <td className="p-3 border border-slate-200 text-amber-700 bg-amber-500/10">
                             {NEP_NUMERALS[selectedNum]}
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <div className="mt-4 p-3 rounded-xl bg-slate-900/50 border border-slate-700 text-xs text-slate-300 space-y-2">
+                    <div className="mt-4 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-2">
                       <div className="flex items-start gap-2">
-                        <Lightbulb className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                        <Lightbulb className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
                         <p>
                           {language === 'np'
                             ? '११ देखि १९ सम्मका प्रत्येक सङ्ख्यामा सधैँ १ दश र बाँकी एकाइ हुन्छन्।'
@@ -729,7 +729,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                         </p>
                       </div>
                       <div className="flex items-start gap-2">
-                        <Lightbulb className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <Lightbulb className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
                         <p>
                           {language === 'np'
                             ? '२० मा १० का २ पूरा समूह हुन्छन्, त्यसैले २ दहाइ र ० एकाइ हुन्छ।'
@@ -754,15 +754,15 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                 </div>
 
                 {/* Quick Number Cards Navigator */}
-                <div className="bg-slate-800/80 rounded-3xl border border-slate-700/80 p-4 shadow-xl flex-1 flex flex-col justify-center">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                <div className="bg-white rounded-3xl border border-slate-200/80 p-4 shadow-xl flex-1 flex flex-col justify-center">
+                  <span className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     {language === 'np' ? 'क्रमशः अगाडि बढ्नुहोस्:' : 'Step Through:'}
                   </span>
                   <div className="flex gap-2">
                     <button
                       disabled={selectedNum <= 11}
                       onClick={() => handleSelectNumber(selectedNum - 1)}
-                      className="flex-1 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 disabled:opacity-40 text-xs font-bold transition"
+                      className="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 text-xs font-bold transition"
                     >
                       ← {language === 'np' ? 'अघिल्लो' : 'Previous'}
                     </button>
@@ -785,21 +785,21 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
         {/* ========================================================================= */}
         {mode === 'PRACTICE' && (
           <div className="flex-1 flex flex-col p-6 overflow-y-auto max-w-5xl mx-auto w-full">
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-6 shadow-2xl flex flex-col gap-6">
+            <div className="bg-gradient-to-br from-slate-800 to-emerald-50 border border-slate-200 rounded-3xl p-6 shadow-2xl flex flex-col gap-6">
               {/* Mission Header */}
-              <div className="flex flex-wrap items-center justify-between border-b border-slate-700 pb-4 gap-4">
+              <div className="flex flex-wrap items-center justify-between border-b border-slate-200 pb-4 gap-4">
                 <div>
-                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold uppercase">
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 font-bold uppercase">
                     {language === 'np' ? 'चुनौती कार्य' : 'Mission Challenge'}
                   </span>
-                  <h2 className="text-2xl font-extrabold text-white mt-1">
+                  <h2 className="text-2xl font-extrabold text-slate-900 mt-1">
                     {language === 'np' ? (
                       <>
-                        सङ्ख्या <span className="text-amber-400">{NEP_NUMERALS[practiceTarget]}</span> ({NEP_NAMES[practiceTarget]}) बनाउनुहोस्!
+                        सङ्ख्या <span className="text-amber-700">{NEP_NUMERALS[practiceTarget]}</span> ({NEP_NAMES[practiceTarget]}) बनाउनुहोस्!
                       </>
                     ) : (
                       <>
-                        Build the number <span className="text-amber-400">{practiceTarget}</span> ({EN_NAMES[practiceTarget]})!
+                        Build the number <span className="text-amber-700">{practiceTarget}</span> ({EN_NAMES[practiceTarget]})!
                       </>
                     )}
                   </h2>
@@ -807,9 +807,9 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
 
                 <button
                   onClick={handleNextPracticeTarget}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-xs font-bold text-white transition flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-900 transition flex items-center gap-1.5"
                 >
-                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  <Sparkles className="w-4 h-4 text-amber-700" />
                   {language === 'np' ? 'अर्को सङ्ख्या छान्नुहोस्' : 'Try Another'}
                 </button>
               </div>
@@ -817,8 +817,8 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
               {/* Workbench Layout: 1 Ten Bundle Pre-loaded + Clickable Single Units */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Pre-bundled 10 */}
-                <div className="bg-slate-900/70 p-5 rounded-2xl border border-amber-500/40 flex flex-col items-center justify-between min-h-[220px]">
-                  <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                <div className="bg-slate-50 p-5 rounded-2xl border border-amber-500/40 flex flex-col items-center justify-between min-h-[220px]">
+                  <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
                     {language === 'np' ? '१ दशको समूह (सधैँ तयार १०)' : '1 Group of Ten (Ready 10)'}
                   </span>
                   <div className="p-4 bg-amber-500/10 rounded-2xl border border-amber-400/50 flex flex-wrap gap-2 justify-center max-w-[200px]">
@@ -831,14 +831,14 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                       </div>
                     ))}
                   </div>
-                  <span className="text-xs font-bold text-amber-300">
+                  <span className="text-xs font-bold text-amber-700">
                     {language === 'np' ? 'आधार = १०' : 'Base = 10'}
                   </span>
                 </div>
 
                 {/* Additional Units Box */}
-                <div className="bg-slate-900/70 p-5 rounded-2xl border border-sky-500/40 flex flex-col items-center justify-between min-h-[220px]">
-                  <span className="text-xs font-bold text-sky-400 uppercase tracking-wider">
+                <div className="bg-slate-50 p-5 rounded-2xl border border-sky-500/40 flex flex-col items-center justify-between min-h-[220px]">
+                  <span className="text-xs font-bold text-sky-700 uppercase tracking-wider">
                     {language === 'np'
                       ? `थपिएका एकाइहरू (${NEP_NUMERALS[Math.max(0, selectedUnitsCount - 10)]})`
                       : `Added Loose Units (${Math.max(0, selectedUnitsCount - 10)})`}
@@ -877,7 +877,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                     </button>
                     <button
                       onClick={handlePracticeReset}
-                      className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-300 transition"
+                      className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition"
                       title="Reset"
                     >
                       <RotateCcw className="w-4 h-4" />
@@ -887,12 +887,12 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
               </div>
 
               {/* Status and Verification */}
-              <div className="bg-slate-900/90 p-4 rounded-2xl border border-slate-700 flex flex-wrap items-center justify-between gap-4">
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-slate-500">
                     {language === 'np' ? 'तपाईंले बनाएको जम्मा सङ्ख्या:' : 'Current Total Built:'}
                   </span>
-                  <div className="text-2xl font-black text-amber-400">
+                  <div className="text-2xl font-black text-amber-700">
                     १० + {NEP_NUMERALS[Math.max(0, selectedUnitsCount - 10)]} ={' '}
                     {NEP_NUMERALS[selectedUnitsCount || 10]}
                   </div>
@@ -910,7 +910,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
               {/* Feedback Alert */}
               {practiceFeedback === 'success' && (
                 <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-emerald-200 text-sm font-bold flex items-center gap-3">
-                  <Sparkles className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <Sparkles className="w-5 h-5 text-emerald-700 shrink-0" />
                   <div>
                     {language === 'np'
                       ? `स्याबास! १० र ${NEP_NUMERALS[practiceTarget - 10]} मिलेर ठीक ${NEP_NUMERALS[practiceTarget]} बन्यो!`
@@ -938,10 +938,10 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
         {mode === 'QUIZ' && (
           <div className="flex-1 flex flex-col p-6 overflow-y-auto max-w-3xl mx-auto w-full justify-center">
             {!quizCompleted ? (
-              <div className="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
                 {/* Progress bar */}
-                <div className="flex items-center justify-between text-xs text-slate-400 border-b border-slate-700 pb-3">
-                  <span className="font-bold text-amber-400">
+                <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-200 pb-3">
+                  <span className="font-bold text-amber-700">
                     {language === 'np'
                       ? `प्रश्न ${NEP_NUMERALS[quizIndex + 1]} / ${NEP_NUMERALS[quizList.length]}`
                       : `Question ${quizIndex + 1} of ${quizList.length}`}
@@ -953,7 +953,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
 
                 {/* Question */}
                 <div>
-                  <h3 className="text-xl md:text-2xl font-extrabold text-white">
+                  <h3 className="text-xl md:text-2xl font-extrabold text-slate-900">
                     {language === 'np' ? quizList[quizIndex].questionNp : quizList[quizIndex].questionEn}
                   </h3>
                 </div>
@@ -963,7 +963,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                   {quizList[quizIndex].options.map((opt) => {
                     const isSelected = quizSelected === opt;
                     const isCorrectOpt = opt === quizList[quizIndex].correct;
-                    let btnStyle = 'bg-slate-700/80 hover:bg-slate-700 text-white';
+                    let btnStyle = 'bg-slate-100 hover:bg-slate-100 text-slate-900';
 
                     if (quizAnswered) {
                       if (isCorrectOpt) {
@@ -971,7 +971,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                       } else if (isSelected) {
                         btnStyle = 'bg-rose-600 text-white font-black';
                       } else {
-                        btnStyle = 'bg-slate-800 text-slate-500 opacity-50';
+                        btnStyle = 'bg-white text-slate-500 opacity-50';
                       }
                     }
 
@@ -980,7 +980,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                         key={opt}
                         disabled={quizAnswered}
                         onClick={() => handleQuizAnswer(opt)}
-                        className={`p-4 rounded-2xl text-lg font-bold transition flex flex-col items-center justify-center gap-1 border border-slate-600 ${btnStyle}`}
+                        className={`p-4 rounded-2xl text-lg font-bold transition flex flex-col items-center justify-center gap-1 border border-slate-300 ${btnStyle}`}
                       >
                         <span className="text-2xl">{NEP_NUMERALS[opt]}</span>
                         <span className="text-xs opacity-75">{opt}</span>
@@ -991,8 +991,8 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
 
                 {/* Feedback & Explanation */}
                 {quizAnswered && (
-                  <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700 text-xs text-slate-300">
-                    <p className="font-bold text-amber-400 mb-1">
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+                    <p className="font-bold text-amber-700 mb-1">
                       {language === 'np' ? 'व्याख्या:' : 'Explanation:'}
                     </p>
                     <p>
@@ -1016,25 +1016,25 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
               </div>
             ) : (
               /* Quiz Finished Celebratory Card */
-              <div className="bg-slate-800/95 border-2 border-amber-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
+              <div className="bg-white border-2 border-amber-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
                 <div className="w-20 h-20 rounded-full bg-amber-500/20 flex items-center justify-center">
-                  <Award className="w-10 h-10 text-amber-400" />
+                  <Award className="w-10 h-10 text-amber-700" />
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-black text-white">
+                  <h3 className="text-2xl font-black text-slate-900">
                     {language === 'np' ? 'बधाई छ! मूल्याङ्कन पूरा भयो!' : 'Congratulations! Quiz Completed!'}
                   </h3>
-                  <p className="text-slate-400 text-xs mt-1">
+                  <p className="text-slate-500 text-xs mt-1">
                     {language === 'np'
                       ? 'तपाईंले दशको समूह र एकाइ सम्बन्धी ज्ञान सफलतापूर्वक हासिल गर्नुभयो।'
                       : 'You have mastered groups of ten and place values 11–20.'}
                   </p>
                 </div>
 
-                <div className="text-4xl font-black text-amber-400">
+                <div className="text-4xl font-black text-amber-700">
                   {NEP_NUMERALS[quizScore]} / {NEP_NUMERALS[quizList.length]}
-                  <span className="text-xs text-slate-400 block font-normal mt-1">
+                  <span className="text-xs text-slate-500 block font-normal mt-1">
                     {quizScore >= 8 ? 'उत्कृष्ट (Outstanding)' : 'राम्रो (Good effort)'}
                   </span>
                 </div>
@@ -1042,7 +1042,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                 <div className="flex gap-3 w-full">
                   <button
                     onClick={handleQuizReset}
-                    className="flex-1 py-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                    className="flex-1 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                   >
                     {language === 'np' ? 'फेरि प्रयास गर्नुहोस्' : 'Retake Quiz'}
                   </button>

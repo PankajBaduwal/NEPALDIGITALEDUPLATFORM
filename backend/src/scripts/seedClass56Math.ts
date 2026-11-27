@@ -1,5 +1,5 @@
 /**
- * Registers the Class 5 and Class 6 Mathematics simulations (3D labs, one to three per lesson).
+ * Registers the Class 5 and Class 6 Mathematics simulations (labs, one to three per lesson).
  * Code: frontend/src/simulations/class5-math/ and class6-math/. The titles come from each registry file.
  * Safe to run again: it updates by `code`.
  *   npm run seed:class56-math
@@ -17,7 +17,7 @@ const SimulationSchema = new mongoose.Schema(
     code: { type: String, required: true, unique: true }, title: { type: String, required: true }, titleNepali: String,
     description: { type: String, required: true }, descriptionNepali: String, subjectCode: { type: String, required: true }, subjectName: { type: String, required: true },
     gradeLevels: [{ type: Number, required: true }], chapterNumber: Number, chapterName: String, chapterNameNepali: String,
-    simulationType: { type: String, enum: ['THREE_JS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'], default: 'REACT_CANVAS' },
+    simulationType: { type: String, enum: ['HTML5_CANVAS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'], default: 'REACT_CANVAS' },
     componentKey: String, runtimeUrl: String, difficulty: { type: String, enum: ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'], default: 'BEGINNER' },
     estimatedDurationMinutes: { type: Number, default: 15 }, learningObjectives: [String], learningObjectivesNepali: [String],
     isPublished: { type: Boolean, default: true }, currentVersion: { type: String, default: '1.0.0' }, tags: [String],
@@ -50,12 +50,12 @@ async function main() {
       const [chEn, chNp] = names[s.lesson];
       const doc = {
         code: s.code, title: s.title, titleNepali: s.titleNp,
-        description: `A 3D lab for "${chEn}" (Class ${grade}): change the numbers and watch the scene, make a target in Play, then answer eight questions in Challenge.`,
+        description: `an interactive lab for "${chEn}" (Class ${grade}): change the numbers and watch the scene, make a target in Play, then answer eight questions in Challenge.`,
         descriptionNepali: `कक्षा ${grade} को "${chNp}" का लागि ३डी प्रयोगशाला: सङ्ख्या बदलेर हेर्ने, खेलमा लक्ष्य बनाउने र चुनौतीमा आठ प्रश्न हल गर्ने।`,
         subjectCode: 'MATH', subjectName: 'Mathematics', gradeLevels: [grade], chapterNumber: s.lesson, chapterName: chEn, chapterNameNepali: chNp,
-        simulationType: 'THREE_JS', componentKey: s.key, runtimeUrl: `/simulations/${dir}/l${s.lesson}/${s.key}`, difficulty: 'INTERMEDIATE', estimatedDurationMinutes: 15,
+        simulationType: 'HTML5_CANVAS', componentKey: s.key, runtimeUrl: `/simulations/${dir}/l${s.lesson}/${s.key}`, difficulty: 'INTERMEDIATE', estimatedDurationMinutes: 15,
         learningObjectives: [`Explore ${chEn}`, 'Make a target in Play', 'Answer questions in Challenge'], learningObjectivesNepali: [`${chNp} अन्वेषण`, 'खेलमा लक्ष्य बनाउने', 'चुनौतीमा प्रश्न हल गर्ने'],
-        isPublished: true, currentVersion: '1.0.0', tags: [`Class ${grade}`, 'Mathematics', `Lesson ${s.lesson}`, chEn, '3D WebGL', 'Learn · Play · Challenge'],
+        isPublished: true, currentVersion: '1.0.0', tags: [`Class ${grade}`, 'Mathematics', `Lesson ${s.lesson}`, chEn, 'Learn · Play · Challenge'],
       };
       await Simulation.findOneAndUpdate({ code: s.code }, { $set: doc }, { upsert: true, returnDocument: 'after' });
       console.log(`[OK] ${s.code}  ${s.title}`);

@@ -1,111 +1,291 @@
 /**
  * Lesson 14 · Pictograph and table (चित्रचार्ट र तालिका)
- * Tally & Pictograph — children vote for a pet; tally marks (bundles of five), a table and a pictograph grow together.
+ * Tally & Pictograph — children vote for pets; tally marks (bundles of 5), table and pictograph row grow together.
+ * Pure 2D Implementation for Smart Boards & Desktops.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { mat, shadowed, textSprite, critter, CritterKind } from '../class1-math-kit/models';
-import { rnd, shuffle } from '../class1-math-kit/nepali';
+import React, { useEffect, useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit/SimFrame2D';
+import { Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp, rnd } from '../class1-math-kit/nepali';
 import { fmt, numChoices } from './helpers';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
-const PETS: { np: string; en: string; emoji: string; color: string; kind: CritterKind; fur: string }[] = [
-  { np: 'कुकुर', en: 'Dog', emoji: '🐶', color: '#f59e0b', kind: 'dog', fur: '#d6b88c' },
-  { np: 'बिरालो', en: 'Cat', emoji: '🐱', color: '#8b5cf6', kind: 'cat', fur: '#fb923c' },
-  { np: 'खरायो', en: 'Rabbit', emoji: '🐰', color: '#ec4899', kind: 'rabbit', fur: '#f9a8d4' },
-  { np: 'चरा', en: 'Bird', emoji: '🐦', color: '#0ea5e9', kind: 'mouse', fur: '#94a3b8' },
+
+const PETS = [
+  { np: 'कुकुर', en: 'Dog', emoji: '🐶', color: '#F59E0B' },
+  { np: 'बिरालो', en: 'Cat', emoji: '🐱', color: '#8B5CF6' },
+  { np: 'खरायो', en: 'Rabbit', emoji: '🐰', color: '#EC4899' },
+  { np: 'चरा', en: 'Bird', emoji: '🐦', color: '#0EA5E9' },
 ];
+
 const MAXV = 15;
 
 export const TallyChart: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G2-L14-01', chapter: 14, titleNp: 'ट्याली र चित्रचार्ट', titleEn: 'Tally and Pictograph' });
-  const [counts, setCounts] = useState<number[]>([0, 0, 0, 0]);
-  const [busy, setBusy] = useState(false);
-  const scene = useRef<{ set: (c: number[], animateIdx?: number) => void } | null>(null);
-
-  useStage(kit.stageRef, (ctx) => {
-    const board = shadowed(new THREE.Mesh(new THREE.BoxGeometry(14, 0.4, 7), mat('#fef3c7', 0.9))); board.position.y = -0.05; ctx.scene.add(board);
-    const back = shadowed(new THREE.Mesh(new THREE.BoxGeometry(14, 6.2, 0.3), mat('#ecfeff', 0.9))); back.position.set(0, 3.1, -3.4); ctx.scene.add(back);
-    const rows: THREE.Group[] = [];
-    PETS.forEach((p, i) => {
-      const g = new THREE.Group(); g.position.set(0, 0.2, -2.4 + i * 1.7); ctx.scene.add(g); rows.push(g);
-      const lab = textSprite(`${p.emoji} ${p.en}`, 2.3, { px: 54, w: 256, h: 96, bg: '#ffffff', border: p.color }); lab.position.set(-5.6, 0.7, 0); g.add(lab);
-    });
-    const tally = (n: number, color: string) => {
-      const g = new THREE.Group(); const bundles = Math.floor(n / 5), rest = n % 5;
-      const stick = () => shadowed(new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.9, 0.09), mat(color, 0.5)));
-      let x = 0;
-      for (let b = 0; b < bundles; b++) { for (let k = 0; k < 4; k++) { const s = stick(); s.position.set(x + k * 0.2, 0.45, 0); g.add(s); } const d = stick(); d.scale.y = 1.25; d.rotation.z = 1.15; d.position.set(x + 0.3, 0.45, 0.07); g.add(d); x += 1.25; }
-      for (let k = 0; k < rest; k++) { const s = stick(); s.position.set(x + k * 0.2, 0.45, 0); g.add(s); }
-      return g;
-    };
-    const set = (c: number[], animIdx = -1) => {
-      rows.forEach((row, i) => {
-        [...row.children].forEach((ch, k) => { if (k > 0) row.remove(ch); });
-        const t = tally(c[i], '#1e293b'); t.position.set(-4, 0, 0); row.add(t);
-        for (let k = 0; k < c[i]; k++) {
-          const m = critter(PETS[i].kind, PETS[i].fur); m.scale.setScalar(0.32); m.position.set(0.4 + k * 0.6, 0, 0.1); m.rotation.y = 0; row.add(m);
-          if (i === animIdx && k === c[i] - 1) { m.scale.setScalar(0.01); ctx.tween(420, (t2) => m.scale.setScalar(Math.max(0.01, t2) * 0.32), undefined, ease.back); }
-        }
-      });
-    };
-    scene.current = { set };
-    set([0, 0, 0, 0]);
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 7.5, 9.5], target: [0, 1.1, -0.6], minDistance: 6, maxDistance: 18, ground: 0xbbf7d0 });
-
-  const vote = (i: number) => { if (counts[i] >= MAXV) { kit.oops('खाना भरियो', 'This row is full'); return; } const c = counts.map((v, j) => (j === i ? v + 1 : v)); setCounts(c); scene.current?.set(c, i); kit.tap(); kit.say(PETS[i].np, PETS[i].en); };
-  const reset = () => { setCounts([0, 0, 0, 0]); scene.current?.set([0, 0, 0, 0]); };
-  const survey = () => {
-    if (busy) return; reset(); setBusy(true); const picks = Array.from({ length: 14 }, () => rnd(0, 3)); const local = [0, 0, 0, 0]; let k = 0;
-    kit.say('बच्चाहरूले मनपर्ने घरपालुवा जनावर रोज्दैछन्।', 'The children are choosing their favourite pets.');
-    const step = () => { const f = picks[k]; local[f] += 1; setCounts([...local]); scene.current?.set([...local], f); kit.tap(); k += 1; if (k < picks.length) window.setTimeout(step, 600); else { setBusy(false); kit.say('ट्याली, तालिका र चित्रचार्ट तयार!', 'The tally, table and pictograph are ready!'); kit.star(); } };
-    window.setTimeout(step, 500);
-  };
-
-  const quiz = useMemo(() => {
-    let c: number[]; let guard = 0;
-    do { c = Array.from({ length: 4 }, () => rnd(2, 12)); guard++; } while (guard < 200 && !(c.filter((v) => v === Math.max(...c)).length === 1 && c.filter((v) => v === Math.min(...c)).length === 1));
-    const qs = [{ k: 'count', i: rnd(0, 3) }, { k: 'most' }, { k: 'least' }, { k: 'count', i: rnd(0, 3) }, { k: 'more', i: c.indexOf(Math.max(...c)), j: c.indexOf(Math.min(...c)) }, { k: 'total' }];
-    return { c, qs };
-  }, []);
-  const questions: QuizQuestion[] = quiz.qs.map((q: any, qi) => {
-    const c = quiz.c; const mx = c.indexOf(Math.max(...c)), mn = c.indexOf(Math.min(...c));
-    const petOpts = (ans: number) => shuffle([ans, ...shuffle([0, 1, 2, 3].filter((x) => x !== ans), qi + 5).slice(0, 2)], ans + qi).map((v) => ({ key: String(v), label: <span>{PETS[v].emoji} {kit.t(PETS[v].np, PETS[v].en)}</span> }));
-    const numOpts = (ans: number) => numChoices(ans, qi * 7 + 3, [1, -1, 2, 5]).map((v) => ({ key: String(v), label: fmt(kit.lang, v) }));
-    if (q.k === 'count') return { np: `${PETS[q.i].np}लाई कतिजनाले मत दिए? (ट्याली गनौँ)`, en: `How many children chose the ${PETS[q.i].en.toLowerCase()}? (count the tally)`, answer: String(c[q.i]), options: numOpts(c[q.i]) };
-    if (q.k === 'most') return { np: 'सबैभन्दा धेरै मन परेको घरपालुवा जनावर कुन हो?', en: 'Which pet is liked by the most children?', answer: String(mx), options: petOpts(mx) };
-    if (q.k === 'least') return { np: 'सबैभन्दा कम मन परेको घरपालुवा जनावर कुन हो?', en: 'Which pet is liked by the fewest children?', answer: String(mn), options: petOpts(mn) };
-    if (q.k === 'more') { const d = c[q.i] - c[q.j]; return { np: `${PETS[q.i].np}ले ${PETS[q.j].np}भन्दा कति धेरै मत पायो?`, en: `How many more votes did the ${PETS[q.i].en.toLowerCase()} get than the ${PETS[q.j].en.toLowerCase()}?`, answer: String(d), options: numOpts(d) }; }
-    const t = c.reduce((a, b) => a + b, 0); return { np: 'जम्मा कतिजना बच्चाले मत दिए?', en: 'How many children voted in all?', answer: String(t), options: numOpts(t) };
+  const kit = useSimKit({
+    code: 'SIM-MATH-G2-L14-01',
+    chapter: 14,
+    titleNp: 'ट्याली र चित्रचार्ट',
+    titleEn: 'Tally and Pictograph',
   });
 
+  const [counts, setCounts] = useState<number[]>([4, 6, 3, 5]);
+
+  const handleVote = (i: number) => {
+    if (counts[i] >= MAXV) {
+      kit.oops('यो पङ्क्ति भरियो', 'Row is full');
+      return;
+    }
+    kit.tap();
+    const next = [...counts];
+    next[i] += 1;
+    setCounts(next);
+    kit.say(`${PETS[i].np} — जम्मा ${toNp(next[i])}`, `${PETS[i].en} — count ${next[i]}`);
+  };
+
+  const handleClear = () => {
+    kit.tap();
+    setCounts([0, 0, 0, 0]);
+  };
+
+  const handleRandomize = () => {
+    kit.tap();
+    setCounts([rnd(2, 9), rnd(2, 9), rnd(2, 9), rnd(2, 9)]);
+  };
+
   useEffect(() => {
-    if (kit.mode === 'LEARN') { reset(); kit.say('"सर्वेक्षण" थिचौँ। प्रत्येक मतले ट्याली र चित्र थप्छ।', 'Press Survey. Each vote adds a tally mark and a picture.'); }
-    else if (kit.mode === 'PLAY') { reset(); kit.say('जनावर थिचेर मत थपौँ।', 'Tap a pet to add a vote.'); }
-    else { scene.current?.set(quiz.c); setCounts(quiz.c); }
+    if (kit.mode === 'LEARN') {
+      kit.say(
+        'हरेक ५ वटा गन्दा १ समूह बन्छ — ४ वटा ठाडो धर्को र १ छड्के धर्को।',
+        'Every 5 counts form a bundle: 4 vertical lines and 1 diagonal slash.'
+      );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kit.mode]);
 
+  // Quiz questions for Challenge Mode
+  const maxIdx = counts.indexOf(Math.max(...counts));
+  const questions: QuizQuestion[] = [
+    {
+      np: `तालिकामा सबैभन्दा बढी मनपराइएको जनावर कुन हो?`,
+      en: `Which pet has the highest number of votes?`,
+      answer: PETS[maxIdx].en,
+      options: PETS.map((p) => ({
+        key: p.en,
+        label: kit.lang === 'ne' ? `${p.emoji} ${p.np}` : `${p.emoji} ${p.en}`,
+      })),
+    },
+    {
+      np: `${PETS[0].np}को लागि कतिवटा भोट आएको छ?`,
+      en: `How many votes did the ${PETS[0].en} receive?`,
+      answer: String(counts[0]),
+      options: numChoices(counts[0], 12, [1, -1, 2, -2]).map((v) => ({
+        key: String(v),
+        label: toNp(v),
+      })),
+    },
+    {
+      np: 'ट्याली चिन्हमा १ समूह (बन्डल) ले कति सङ्ख्या बुझाउँछ?',
+      en: 'How much does one complete tally bundle represent?',
+      answer: '5',
+      options: [
+        { key: '5', label: '५' },
+        { key: '10', label: '१०' },
+        { key: '4', label: '४' },
+      ],
+    },
+  ];
+
+  const totalVotes = counts.reduce((a, b) => a + b, 0);
+
   const hud = (
-    <div style={{ background: 'rgba(255,255,255,.95)', borderRadius: 14, padding: '6px 10px', border: '3px solid #0ea5e9', fontSize: 14, fontWeight: 800 }}>
-      <table style={{ borderCollapse: 'collapse' }}><tbody>
-        <tr><td style={{ padding: '2px 8px', color: '#64748b' }}>{kit.t('जनावर', 'Pet')}</td><td style={{ padding: '2px 8px', color: '#64748b' }}>{kit.t('सङ्ख्या', 'Number')}</td></tr>
-        {PETS.map((p, i) => <tr key={p.en}><td style={{ padding: '2px 8px' }}>{p.emoji}</td><td style={{ padding: '2px 8px', textAlign: 'center', fontSize: 18 }}>{fmt(kit.lang, counts[i])}</td></tr>)}
-      </tbody></table>
+    <div
+      style={{
+        background: '#FFFFFF',
+        borderRadius: 16,
+        padding: '8px 18px',
+        border: '2px solid #187C68',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+        fontSize: 15,
+        fontWeight: 900,
+        color: '#26332E',
+      }}
+    >
+      {kit.t('जम्मा भोट', 'Total Votes')}:{' '}
+      <span style={{ color: '#059669', fontSize: 18 }}>{toNp(totalVotes)}</span>
     </div>
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 220 }}>{kit.t('५ वटा ट्याली = ||||/ (एक बन्डल)', 'Five tally marks make a bundle: ||||/')}</div>
-      <CBtn color="#8b5cf6" disabled={busy} onClick={survey}>🗳 {kit.t('सर्वेक्षण', 'Survey')}</CBtn>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>{PETS.map((p, i) => <CBtn key={p.en} color={p.color} onClick={() => vote(i)}>{p.emoji} {kit.t(p.np, p.en)}</CBtn>)}<CBtn color="#f59e0b" onClick={reset}>↺</CBtn></Controls>
-  ) : (
+
+  const panel = kit.mode === 'CHALLENGE' ? (
     <QuizPanel kit={kit} questions={questions} />
+  ) : (
+    <Controls>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+        <span style={{ fontSize: 13, fontWeight: 800, color: '#26332E' }}>
+          {kit.t('भोट थप्नुहोस्:', 'Vote for:')}
+        </span>
+        {PETS.map((p, i) => (
+          <CBtn key={p.en} color={p.color} onClick={() => handleVote(i)}>
+            {p.emoji} +१ {kit.t(p.np, p.en)}
+          </CBtn>
+        ))}
+
+        <CBtn color="#64748B" onClick={handleClear}>
+          ↺ {kit.t('खाली गरौँ', 'Clear')}
+        </CBtn>
+        <CBtn color="#187C68" onClick={handleRandomize}>
+          🎲 {kit.t('नयाँ नतिजा', 'Random Data')}
+        </CBtn>
+      </div>
+    </Controls>
   );
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+
+  // Helper to render Tally SVG Bundle (||||/)
+  const renderTally = (n: number) => {
+    const bundles = Math.floor(n / 5);
+    const remainder = n % 5;
+
+    return (
+      <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+        {Array.from({ length: bundles }).map((_, b) => (
+          <svg key={b} width="40" height="30" viewBox="0 0 40 30">
+            {/* 4 vertical bars */}
+            <line x1="6" y1="4" x2="6" y2="26" stroke="#1E293B" strokeWidth="3" strokeLinecap="round" />
+            <line x1="14" y1="4" x2="14" y2="26" stroke="#1E293B" strokeWidth="3" strokeLinecap="round" />
+            <line x1="22" y1="4" x2="22" y2="26" stroke="#1E293B" strokeWidth="3" strokeLinecap="round" />
+            <line x1="30" y1="4" x2="30" y2="26" stroke="#1E293B" strokeWidth="3" strokeLinecap="round" />
+            {/* 1 diagonal slash across */}
+            <line x1="2" y1="26" x2="34" y2="4" stroke="#DC2626" strokeWidth="3" strokeLinecap="round" />
+          </svg>
+        ))}
+        {remainder > 0 && (
+          <svg width={remainder * 9 + 4} height="30" viewBox={`0 0 ${remainder * 9 + 4} 30`}>
+            {Array.from({ length: remainder }).map((_, r) => (
+              <line
+                key={r}
+                x1={6 + r * 8}
+                y1="4"
+                x2={6 + r * 8}
+                y2="26"
+                stroke="#1E293B"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+            ))}
+          </svg>
+        )}
+        {n === 0 && <span style={{ fontSize: 13, color: '#94A3B8', fontStyle: 'italic' }}>०</span>}
+      </div>
+    );
+  };
+
+  return (
+    <SimFrame2D kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} grade={2}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 380,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+        }}
+      >
+        <div
+          style={{
+            width: '100%',
+            maxWidth: 820,
+            background: '#FFFFFF',
+            borderRadius: 24,
+            padding: 24,
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.04)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 14,
+          }}
+        >
+          {/* Table Header */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '140px 180px 1fr 60px',
+              gap: 12,
+              paddingBottom: 8,
+              borderBottom: '2px solid #E2E8F0',
+              fontWeight: 900,
+              fontSize: 14,
+              color: '#64748B',
+            }}
+          >
+            <div>{kit.t('जनावर (Pet)', 'Pet')}</div>
+            <div>{kit.t('ट्याली चिन्ह (Tally)', 'Tally Marks')}</div>
+            <div>{kit.t('चित्रचार्ट (Pictograph)', 'Pictograph')}</div>
+            <div style={{ textAlign: 'right' }}>{kit.t('संख्या', 'Count')}</div>
+          </div>
+
+          {/* Table Rows for each pet */}
+          {PETS.map((pet, i) => (
+            <div
+              key={pet.en}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '140px 180px 1fr 60px',
+                gap: 12,
+                alignItems: 'center',
+                padding: '8px 0',
+                borderBottom: i < PETS.length - 1 ? '1px solid #F1F5F9' : 'none',
+              }}
+            >
+              {/* Pet Name with clickable vote badge */}
+              <div
+                onClick={() => handleVote(i)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  cursor: 'pointer',
+                  fontWeight: 900,
+                  fontSize: 15,
+                  color: '#1E293B',
+                }}
+              >
+                <span style={{ fontSize: 24 }}>{pet.emoji}</span>
+                <span>{kit.t(pet.np, pet.en)}</span>
+              </div>
+
+              {/* Tally Marks */}
+              <div>{renderTally(counts[i])}</div>
+
+              {/* Pictograph Emoji Icons */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                {Array.from({ length: counts[i] }).map((_, k) => (
+                  <span key={k} style={{ fontSize: 20 }}>
+                    {pet.emoji}
+                  </span>
+                ))}
+              </div>
+
+              {/* Number Count Badge */}
+              <div style={{ textAlign: 'right' }}>
+                <span
+                  style={{
+                    background: '#F1F5F9',
+                    borderRadius: 8,
+                    padding: '4px 10px',
+                    fontWeight: 900,
+                    fontSize: 15,
+                    color: pet.color,
+                  }}
+                >
+                  {toNp(counts[i])}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </SimFrame2D>
+  );
 };

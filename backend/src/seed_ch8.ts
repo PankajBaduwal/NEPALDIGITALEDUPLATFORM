@@ -21,7 +21,7 @@ const SimulationSchema = new mongoose.Schema(
     chapterNameNepali: { type: String },
     simulationType: {
       type: String,
-      enum: ['THREE_JS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'],
+      enum: ['HTML5_CANVAS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'],
       default: 'REACT_CANVAS',
     },
     componentKey: { type: String },
@@ -54,7 +54,7 @@ async function seedCh8() {
         title: 'Subtraction Playground',
         titleNepali: 'घटाउ खेलमैदान',
         description:
-          'Teach the basic meaning of subtraction through physically removing objects from a 3D group into a removal basket and discovering the remainder.',
+          'Teach the basic meaning of subtraction through physically removing objects from a group into a removal basket and discovering the remainder.',
         descriptionNepali:
           '३डी खेलमैदानमा वस्तुहरूको समूहबाट केही वस्तु हटाएर बाँकी सङ्ख्या पत्ता लगाउने र घटाउको आधारभूत अवधारणा बुझ्ने अभ्यास।',
         subjectCode: 'MATH',
@@ -63,7 +63,7 @@ async function seedCh8() {
         chapterNumber: 8,
         chapterName: 'Subtraction up to 10',
         chapterNameNepali: '१० सम्मका सङ्ख्याहरूको घटाउ',
-        simulationType: 'THREE_JS',
+        simulationType: 'HTML5_CANVAS',
         componentKey: 'class1-math-ch8-playground',
         runtimeUrl: '/simulations/class1-math/ch8/playground',
         difficulty: 'BEGINNER',
@@ -82,7 +82,7 @@ async function seedCh8() {
         ],
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 8', 'Subtraction', 'Playground', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 8', 'Subtraction', 'Playground'],
       },
       {
         code: 'SIM-MATH-G1-CH8-02',

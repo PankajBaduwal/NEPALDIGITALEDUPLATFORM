@@ -27,6 +27,7 @@ export type TeacherAssistantTask =
   | 'QUICK_SIMPLIFY'
   | 'QUICK_ANALOGY'
   | 'QUICK_CHECK'
+  | 'SOLVE_EXERCISE'
   | 'CUSTOM_QUESTION';
 
 export interface TeacherAssistantAskDTO {
@@ -126,6 +127,16 @@ For each Slide:
 
   QUICK_CHECK: `Provide 3 quick, punchy formative questions a teacher can ask verbally right now to quickly check whether the class has understood the concept. Include what to listen for in the students' answers.`,
 
+  SOLVE_EXERCISE: `The teacher wants the textbook EXERCISE on the given page(s) SOLVED. Do NOT write lesson guidance, background notes or a lesson plan.
+Using ONLY the exercise questions that appear in the page text provided, solve EVERY question in the exact order printed:
+- Reproduce each question number and its question text briefly (for multiple choice include the options).
+- Then give the answer immediately below it, in the form "**Answer:** (b) ..." for MCQs, with a one- or two-line reason.
+- For numerical or written questions give a short step-by-step solution (Given, Formula, Calculation, Final answer).
+- Keep the section headings from the textbook (e.g. A. Multiple choice questions, B. Short questions) as headings.
+- If a question depends on a figure or diagram that is not in the text (for example an orbital box diagram), say so and give the most likely answer from the visible options.
+- Always commit to one best option for every MCQ. If the printed options look misprinted, add one short sentence saying so after the answer; never leave a question without a chosen answer.\n- Do not skip any question. If the page text appears cut off, solve what is present and say which numbers are missing.
+End with a compact answer key table (Q.No | Answer).`,
+
   CUSTOM_QUESTION: `Answer the teacher's question with pedagogical rigor, curriculum fidelity, and classroom-ready actionable guidance.`,
 };
 
@@ -179,15 +190,22 @@ function safeParseAiJson(raw: string): any {
       .replace(/\\"/g, '"')
       .replace(/\\\\/g, '\\');
   } else {
-    // 4. Strip { "answer": " at the beginning and "} at the end
-    extractedAnswer = cleaned
-      .replace(/^\s*\{\s*"answer"\s*:\s*"?/i, '')
-      .replace(/"?\s*,\s*"(?:groundedness|sources|followUps|smartboardSummary)"[\s\S]*$/i, '')
-      .replace(/"?\s*\}\s*$/i, '')
-      .replace(/\\n/g, '\n')
-      .replace(/\\r/g, '\r')
-      .replace(/\\t/g, '\t')
-      .replace(/\\"/g, '"');
+    // 4. Fallback extraction after "answer": "
+    const mStart = cleaned.match(/"answer"\s*:\s*"?([\s\S]*)/i);
+    if (mStart && mStart[1]) {
+      extractedAnswer = mStart[1]
+        .replace(/",\s*"(?:groundedness|sources|followUps|smartboardSummary)"[\s\S]*$/i, '')
+        .replace(/"?\s*\}\s*$/i, '')
+        .replace(/\\n/g, '\n')
+        .replace(/\\r/g, '\r')
+        .replace(/\\t/g, '\t')
+        .replace(/\\"/g, '"')
+        .replace(/\\\\/g, '\\');
+    } else {
+      extractedAnswer = cleaned
+        .replace(/^```(?:markdown)?\s*|```\s*$/gi, '')
+        .trim();
+    }
   }
 
   let smartboardSummary = '';
@@ -230,6 +248,14 @@ export class TeacherAssistantService {
       throw err;
     }
 
+    // Detect "solve the exercise on page N" requests and a page number written in the query itself
+    const qRaw = dto.query || '';
+    const wantsSolve = /\b(solve|answer|work\s*out|complete|do)\b[\s\S]{0,60}\b(exercise|exercises|questions?|problems?|mcqs?)\b|\b(exercise|questions?)\b[\s\S]{0,40}\b(solve|answers?|solution)\b|\bsolve\b[\s\S]{0,30}\bpage\b|अभ्यास.*(हल|समाधान)|हल.*अभ्यास/i.test(qRaw);
+    const qPageMatch = qRaw.match(/\b(?:page|pg|p)\.?\s*(?:no\.?|number|#)?\s*(\d{1,4})\b|पृष्ठ\s*(?:नं\.?)?\s*(\d{1,4})/i);
+    const queryPage = qPageMatch ? parseInt(qPageMatch[1] || qPageMatch[2], 10) : undefined;
+    if (queryPage) dto = { ...dto, pageNumber: queryPage };
+    if (wantsSolve) dto = { ...dto, task: 'SOLVE_EXERCISE', scope: dto.scope === 'SELECTED_TEXT' ? 'CURRENT_PAGE' : dto.scope, selectedText: dto.scope === 'SELECTED_TEXT' ? dto.selectedText : undefined };
+
     const task: TeacherAssistantTask = dto.task || (dto.selectedText ? 'EXPLAIN_SELECTION' : dto.pageNumber ? 'EXPLAIN_PAGE' : 'CUSTOM_QUESTION');
     const scopeMode: TeacherAssistantScope = dto.scope || (dto.selectedText ? 'SELECTED_TEXT' : (task === 'SUMMARIZE_CHAPTER' || task === 'TEACH_CHAPTER') && dto.chapterNumber ? 'CURRENT_CHAPTER' : dto.pageNumber ? 'CURRENT_PAGE' : dto.chapterNumber ? 'CURRENT_CHAPTER' : 'ENTIRE_BOOK');
 
@@ -265,6 +291,16 @@ export class TeacherAssistantService {
       if (pageDoc?.text) {
         pageText = pageDoc.text;
       }
+      if (task === 'SOLVE_EXERCISE') {
+        // The page the teacher names may be the printed number or the PDF number (they differ by a few pages) and an
+        // exercise often runs over two pages, so look at a small window and start from the page that holds "Exercise".
+        const win: any[] = await RagPage.find({ documentId: ragDoc._id, page: { $gte: Math.max(1, pageNumber - 1), $lte: pageNumber + 2 } }).sort({ page: 1 }).lean();
+        const startIdx = win.findIndex((w) => /\bExercise\s+(?:A\.|1\.|Multiple)/i.test(w.text || ''));
+        const use = startIdx >= 0 ? win.slice(startIdx) : win;
+        if (use.length) {
+          pageText = use.map((w) => '[PAGE ' + w.page + ']' + String.fromCharCode(10) + w.text).join(String.fromCharCode(10, 10));
+        }
+      }
     }
 
     // 5. Build Retrieval Query
@@ -282,6 +318,7 @@ export class TeacherAssistantService {
       else if (task === 'QUICK_SIMPLIFY') queryText = `Simplify concept on page ${pageNumber || ''}: ${dto.selectedText || ''}`;
       else if (task === 'QUICK_ANALOGY') queryText = `Real-world Nepal analogy for page ${pageNumber || ''}: ${dto.selectedText || ''}`;
       else if (task === 'QUICK_CHECK') queryText = `3 check understanding questions for page ${pageNumber || ''}`;
+      else if (task === 'SOLVE_EXERCISE') queryText = `Solve the exercise on page ${pageNumber || ''}`;
       else queryText = `Pedagogical explanation for ${ragDoc?.title || 'this textbook'}`;
     }
 
@@ -343,9 +380,24 @@ ROLE & RESPONSIBILITY:
 - Base your answers firmly on the textbook extracts. Cite specific page numbers [p. X] whenever referencing textbook ideas so teachers can point students to their books.
 - Maintain a respectful, supportive, highly competent teacher-to-teacher tone.
 
+STRUCTURED PEDAGOGICAL FORMATTING RULES:
+1. For DIFFERENCES or COMPARISONS (e.g. between Heat & Temperature, Acids & Bases): Always output a structured 2-column or 3-column Markdown table with concept names as column headers (| Property / आधार | Concept A | Concept B |) and topic-aligned rows.
+2. For NUMERICAL PROBLEMS: Always use structured step headers:
+   ### 1. Given Data (दिएको जानकारी)
+   ### 2. To Find (पत्ता लगाउनुपर्ने)
+   ### 3. Formula (प्रयोग हुने सूत्र) [using $$...$$]
+   ### 4. Step-by-Step Calculation (चरणबद्ध गणना)
+   ### 5. Final Answer (अन्तिम उत्तर)
+3. For DEFINITIONS: Always include a highlighted callout:
+   > **Definition (परिभाषा):** <Clear, formal textbook definition>
+   followed by ### Simple Explanation, ### Key Characteristics, and ### Classroom Example.
+4. For ADVANTAGES & DISADVANTAGES: Use ### Advantages (फाइदाहरू) and ### Disadvantages (बेफाइदाहरू).
+5. For FORMULAS: State formula in display math $$...$$, variable definitions table (Variable, Meaning, SI Unit), and conditions.
+6. For PROCESSES: Use clear sequential steps: ### Step 1: ..., ### Step 2: ... with visual flow.
+
 Return ONLY a JSON response in the following schema:
 {
-  "answer": "<Comprehensive markdown response with structured headers, bullet points, and lesson guidance>",
+  "answer": "<Comprehensive structured markdown response following the pedagogical rules above>",
   "groundedness": "TEXTBOOK|PARTIAL|GENERAL",
   "sources": [<numbers of extracts used: 1, 2, ...>],
   "followUps": ["<3 practical follow-up pedagogical prompts or next steps for the teacher>"],
@@ -365,7 +417,7 @@ ${contextParts.join('\n\n')}
 TEACHER'S PROMPT / QUESTION:
 ${queryText}
 
-Please provide an outstanding, classroom-tested response for the teacher.`;
+${task === 'SOLVE_EXERCISE' ? 'Solve every exercise question exactly as instructed: question first, then its answer.' : 'Please provide an outstanding, classroom-tested response for the teacher.'}`;
 
     // 9. Execute Gemini AI Call
     let rawResult: string;
@@ -376,7 +428,7 @@ Please provide an outstanding, classroom-tested response for the teacher.`;
         prompt: userPrompt,
         json: true,
         temperature: 0.3,
-        maxOutputTokens: 4096,
+        maxOutputTokens: task === 'SOLVE_EXERCISE' ? 8192 : 4096,
       });
     } catch {
       fallbackDegraded = true;

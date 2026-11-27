@@ -271,8 +271,8 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #451a03 0%, #78350f 50%, #92400e 100%)',
-        color: '#0f172a',
+        background: 'linear-gradient(135deg, #FFF3D6 0%, #FFE9D8 100%)',
+        color: '#26332E',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -283,7 +283,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgba(24, 10, 2, 0.9)',
+          background: '#FFFFFF',
           backdropFilter: 'blur(12px)',
           borderBottom: '1px solid rgba(251, 191, 36, 0.25)',
         }}
@@ -296,10 +296,10 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '10px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 600,
               fontSize: '14px',
@@ -310,10 +310,10 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
           </button>
 
           <div>
-            <div style={{ fontSize: '11px', color: '#fbbf24', textTransform: 'uppercase', fontWeight: 800 }}>
+            <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
               कक्षा १ • गणित • अध्याय ५ : शून्य (Zero)
             </div>
-            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#fef08a' }}>
+            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
                 ? 'सिमुलेसन ०२: खाली टोकरी चिनौँ (Empty Basket Adventure)'
                 : 'Simulation 02: Empty Basket Adventure'}
@@ -333,7 +333,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
               border: '1px solid rgba(245, 158, 11, 0.5)',
               padding: '6px 14px',
               borderRadius: '20px',
-              color: '#fef08a',
+              color: '#26332E',
               fontWeight: 800,
             }}
           >
@@ -346,10 +346,10 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: '#e2e8f0',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 700,
               fontSize: '13px',
@@ -363,10 +363,10 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: soundEnabled ? '#facc15' : '#94a3b8',
+              color: soundEnabled ? '#facc15' : '#26332E',
               cursor: 'pointer',
             }}
           >
@@ -382,7 +382,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '12px',
           padding: '12px 16px',
-          background: '#f8fafc',
+          background: 'rgba(255,255,255,0.9)',
           borderBottom: '1px solid rgba(251, 191, 36, 0.2)',
         }}
       >
@@ -400,8 +400,8 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                 padding: '8px 18px',
                 borderRadius: '12px',
                 border: isSelected ? '2px solid #fbbf24' : '1px solid rgba(255, 255, 255, 0.15)',
-                background: isSelected ? 'rgba(217, 119, 6, 0.8)' : 'rgba(30, 41, 59, 0.6)',
-                color: '#ffffff',
+                background: isSelected ? 'rgba(217, 119, 6, 0.8)' : '#F1F5F9',
+                color: '#26332E',
                 fontWeight: 800,
                 fontSize: '13px',
                 cursor: 'pointer',
@@ -441,12 +441,12 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
             }}
           >
             <div style={{ textAlign: 'center' }}>
-              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 900, color: '#fef08a' }}>
+              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 900, color: '#26332E' }}>
                 {language === 'np'
                   ? emptyChallenges[emptyRoundIndex].promptNp
                   : emptyChallenges[emptyRoundIndex].promptEn}
               </h2>
-              <p style={{ margin: '6px 0 0', fontSize: '13px', color: '#fde68a' }}>
+              <p style={{ margin: '6px 0 0', fontSize: '13px', color: '#26332E' }}>
                 {language === 'np'
                   ? `चरण ${emptyRoundIndex + 1} / ${emptyChallenges.length}`
                   : `Round ${emptyRoundIndex + 1} of ${emptyChallenges.length}`}
@@ -467,7 +467,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                       width: '240px',
                       height: '240px',
                       borderRadius: '24px',
-                      background: '#f8fafc',
+                      background: 'rgba(255,255,255,0.9)',
                       border: isSelected
                         ? isCorrect
                           ? '4px solid #10b981'
@@ -484,7 +484,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                       transition: 'all 0.18s ease',
                     }}
                   >
-                    <span style={{ fontSize: '16px', fontWeight: 800, color: '#fef08a' }}>
+                    <span style={{ fontSize: '16px', fontWeight: 800, color: '#26332E' }}>
                       {language === 'np' ? c.labelNp : c.labelEn}
                     </span>
 
@@ -508,7 +508,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                           style={{
                             fontSize: '13px',
                             fontWeight: 900,
-                            color: '#475569',
+                            color: '#26332E',
                             fontStyle: 'italic',
                           }}
                         >
@@ -525,7 +525,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                       )}
                     </div>
 
-                    <div style={{ fontSize: '13px', color: '#64748b', fontWeight: 700 }}>
+                    <div style={{ fontSize: '13px', color: '#26332E', fontWeight: 700 }}>
                       {language === 'np'
                         ? `वस्तु सङ्ख्या: ${formatNum(c.count)}`
                         : `Item Count: ${c.count}`}
@@ -560,8 +560,8 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                     style={{
                       padding: '10px 20px',
                       borderRadius: '12px',
-                      background: '#0284c7',
-                      color: '#ffffff',
+                      background: '#FFFFFF',
+                      color: '#26332E',
                       border: 'none',
                       fontWeight: 800,
                       cursor: 'pointer',
@@ -593,12 +593,12 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
             }}
           >
             <div style={{ textAlign: 'center' }}>
-              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 900, color: '#fef08a' }}>
+              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 900, color: '#26332E' }}>
                 {language === 'np'
                   ? 'वस्तुहरू निकाल्दै टोकरीलाई खाली (०) बनाऔँ'
                   : 'Remove objects until the basket becomes empty (0)'}
               </h2>
-              <p style={{ margin: '6px 0 0', fontSize: '13px', color: '#fde68a' }}>
+              <p style={{ margin: '6px 0 0', fontSize: '13px', color: '#26332E' }}>
                 {language === 'np'
                   ? 'स्याउहरू एक–एक गरेर निकाल्नुहोस् र शून्य अवस्था बुझ्नुहोस्।'
                   : 'Remove items one by one and observe the count reach zero.'}
@@ -611,7 +611,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                 width: '320px',
                 height: '300px',
                 borderRadius: '28px',
-                background: '#f8fafc',
+                background: 'rgba(255,255,255,0.9)',
                 border: '4px solid #f59e0b',
                 display: 'flex',
                 flexDirection: 'column',
@@ -621,7 +621,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                 boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
               }}
             >
-              <span style={{ fontSize: '18px', fontWeight: 900, color: '#fef08a' }}>
+              <span style={{ fontSize: '18px', fontWeight: 900, color: '#26332E' }}>
                 {moveItemCount === 0
                   ? language === 'np'
                     ? 'खाली टोकरी (Empty Basket)'
@@ -649,10 +649,10 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
               >
                 {moveItemCount === 0 ? (
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '42px', fontWeight: 900, color: '#facc15' }}>
+                    <div style={{ fontSize: '42px', fontWeight: 900, color: '#26332E' }}>
                       {language === 'np' ? '०' : '0'}
                     </div>
-                    <div style={{ fontSize: '12px', color: '#475569', fontWeight: 800 }}>
+                    <div style={{ fontSize: '12px', color: '#26332E', fontWeight: 800 }}>
                       {language === 'np' ? 'कुनै वस्तु छैन (Zero)' : 'No objects (Zero)'}
                     </div>
                   </div>
@@ -690,9 +690,9 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                   style={{
                     padding: '10px 18px',
                     borderRadius: '12px',
-                    background: '#10b981',
+                    background: '#FFFFFF',
                     border: 'none',
-                    color: '#ffffff',
+                    color: '#26332E',
                     fontWeight: 800,
                     cursor: moveItemCount >= 6 ? 'not-allowed' : 'pointer',
                     opacity: moveItemCount >= 6 ? 0.4 : 1,
@@ -719,12 +719,12 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
             }}
           >
             <div style={{ textAlign: 'center' }}>
-              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 900, color: '#fef08a' }}>
+              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 900, color: '#26332E' }}>
                 {language === 'np'
                   ? 'खाली भाँडोलाई सङ्ख्या ० सँग मिलाऔँ'
                   : 'Match empty containers with numeral 0'}
               </h2>
-              <p style={{ margin: '6px 0 0', fontSize: '13px', color: '#fde68a' }}>
+              <p style={{ margin: '6px 0 0', fontSize: '13px', color: '#26332E' }}>
                 {language === 'np'
                   ? 'कार्डहरूमा क्लिक गरेर सही सङ्ख्या जोडी पूरा गर्नुहोस्।'
                   : 'Click on each card to confirm its count.'}
@@ -741,9 +741,9 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                     style={{
                       padding: '20px',
                       borderRadius: '20px',
-                      background: isMatched ? 'rgba(16, 185, 129, 0.25)' : 'rgba(30, 41, 59, 0.8)',
+                      background: isMatched ? 'rgba(16, 185, 129, 0.25)' : '#F1F5F9',
                       border: isMatched ? '3px solid #10b981' : '2px solid rgba(251, 191, 36, 0.3)',
-                      color: '#ffffff',
+                      color: '#26332E',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
@@ -756,7 +756,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                         <div style={{ fontWeight: 800, fontSize: '15px' }}>
                           {language === 'np' ? card.labelNp : card.labelEn}
                         </div>
-                        <div style={{ fontSize: '11px', color: '#64748b' }}>
+                        <div style={{ fontSize: '11px', color: '#26332E' }}>
                           {card.count === 0 ? 'कुनै वस्तु छैन' : `${card.count} Items`}
                         </div>
                       </div>
@@ -789,7 +789,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                 }}
               >
                 <Trophy size={32} color="#fbbf24" />
-                <span style={{ fontWeight: 800, color: '#f0fdf4', fontSize: '15px' }}>
+                <span style={{ fontWeight: 800, color: '#26332E', fontSize: '15px' }}>
                   {language === 'np'
                     ? 'शानदार! सबै भाँडाहरू सही सङ्ख्यासँग मिले! (+३ ताराहरू)'
                     : 'Splendid! All containers matched successfully! (+3 Stars)'}

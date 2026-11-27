@@ -248,7 +248,7 @@ export const AIAssignmentGeneratorModal: React.FC<AIAssignmentGeneratorModalProp
         position: 'fixed',
         inset: 0,
         zIndex: 9999,
-        background: 'rgba(14, 62, 59, 0.75)',
+        background: 'rgba(15,23,42, 0.75)',
         backdropFilter: 'blur(5px)',
         display: 'flex',
         alignItems: 'center',

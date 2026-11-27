@@ -24,9 +24,9 @@ export const StudentDossierModal: React.FC<Props> = ({ studentId, sectionId, onC
 
   const maxPct = Math.max(100, ...(d?.trend || []).map((t: any) => t.percent));
   return (
-    <div role="presentation" onClick={onClose} style={{ position: 'fixed', inset: 0, background: 'rgba(14,62,59,0.5)', zIndex: 3000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-      <div role="dialog" aria-modal="true" aria-label="Student dossier" onClick={(e) => e.stopPropagation()} style={{ background: '#f4faf8', borderRadius: 16, width: 'min(760px, 100%)', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 25px 60px rgba(14,62,59,0.35)' }}>
-        <div style={{ position: 'sticky', top: 0, background: '#117a6b', color: '#fff', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderRadius: '16px 16px 0 0' }}>
+    <div role="presentation" onClick={onClose} style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.5)', zIndex: 3000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+      <div role="dialog" aria-modal="true" aria-label="Student dossier" onClick={(e) => e.stopPropagation()} style={{ background: '#F8FAFC', borderRadius: 16, width: 'min(760px, 100%)', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 25px 60px rgba(15,23,42,0.35)' }}>
+        <div style={{ position: 'sticky', top: 0, background: '#EA580C', color: '#fff', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderRadius: '16px 16px 0 0' }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontWeight: 900, fontSize: 18 }}>
               {d?.student?.name || 'Student dossier'}

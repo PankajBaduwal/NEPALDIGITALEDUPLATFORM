@@ -1,84 +1,308 @@
 /**
  * Lesson 11 · Multiplication 1 (गुणन १) — equal groups
- * Equal Groups Garden — baskets with the same number of apples: 3 + 3 + 3 = 3 × 3.
+ * Equal Groups Garden — baskets with the same number of apples: 3 + 3 + 3 = 3 × 3 = 9.
+ * Pure 2D Implementation for Smart Boards & Desktops.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { apple, basket } from '../class1-math-kit/models';
-import { rnd, shuffle } from '../class1-math-kit/nepali';
+import React, { useEffect, useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit/SimFrame2D';
+import { Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { rnd, shuffle, toNp } from '../class1-math-kit/nepali';
 import { fmt, numChoices } from './helpers';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
-const LEARN = [[3, 2], [2, 4], [5, 3], [4, 5], [10, 3]]; // [apples per basket, baskets]
+
+const LEARN_PRESETS = [
+  [3, 2], // 2 baskets of 3
+  [2, 4], // 4 baskets of 2
+  [5, 3], // 3 baskets of 5
+  [4, 4], // 4 baskets of 4
+  [10, 3], // 3 baskets of 10
+];
 
 export const EqualGroups: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G2-L11-01', chapter: 11, titleNp: 'बराबर समूह बगैँचा (गुणन)', titleEn: 'Equal Groups Garden (Multiplication)' });
-  const [per, setPer] = useState(3);
-  const [groups, setGroups] = useState(0);
+  const kit = useSimKit({
+    code: 'SIM-MATH-G2-L11-01',
+    chapter: 11,
+    titleNp: 'बराबर समूह बगैँचा (गुणन)',
+    titleEn: 'Equal Groups Garden (Multiplication)',
+  });
+
+  const [per, setPer] = useState(3); // apples per basket
+  const [groups, setGroups] = useState(2); // number of baskets
   const [li, setLi] = useState(0);
-  const [busy, setBusy] = useState(false);
-  const scene = useRef<{ set: (per: number, groups: number, animateLast?: boolean) => void } | null>(null);
 
-  useStage(kit.stageRef, (ctx) => {
-    const root = new THREE.Group(); ctx.scene.add(root);
-    const slot = (g: number) => new THREE.Vector3(((g % 5) - 2) * 3.1, 0, Math.floor(g / 5) * 3.2 - 1.2);
-    const set = (p: number, n: number, animateLast = false) => {
-      [...root.children].forEach((c) => root.remove(c));
-      for (let g = 0; g < n; g++) {
-        const grp = new THREE.Group(); grp.position.copy(slot(g));
-        const b = basket('#c2410c', 2.3); b.scale.setScalar(1); grp.add(b);
-        const ring = Math.min(p, 10);
-        for (let i = 0; i < ring; i++) { const a = apple(['#ef4444', '#f97316', '#22c55e', '#eab308', '#ec4899'][g % 5]); a.scale.setScalar(p > 6 ? 0.55 : 0.7); const col = i % 4, row = Math.floor(i / 4); a.position.set((col - 1.5) * 0.5, 0.95 + row * 0.38, (row % 2) * 0.1); grp.add(a); }
-        root.add(grp);
-        if (animateLast && g === n - 1) { grp.position.y = 4; grp.scale.setScalar(0.1); const y0 = 0; ctx.tween(650, (k) => { grp.position.y = 4 * (1 - k) + y0 * k; grp.scale.setScalar(Math.max(0.1, k)); }, undefined, ease.bounce); }
-      }
-    };
-    scene.current = { set };
-    set(3, 0);
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 8.5, 11], target: [0, 0.8, 0.5], minDistance: 7, maxDistance: 20 });
+  const total = groups * per;
 
-  const apply = (p: number, g: number, animate = false) => { setPer(p); setGroups(g); scene.current?.set(p, g, animate); };
-  const addGroup = () => { if (groups >= 10) { kit.oops('१० टोकरीसम्म', 'Up to 10 baskets'); return; } apply(per, groups + 1, true); kit.tap(); const g = groups + 1; kit.say(`${g} × ${per} = ${g * per}`, `${g} × ${per} = ${g * per}`); };
-  const delGroup = () => { if (!groups) return; apply(per, groups - 1); };
-  const learnShow = () => { const [p, g] = LEARN[li % LEARN.length]; setBusy(true); apply(p, 0); let n = 0; const tick = () => { n += 1; apply(p, n, true); kit.say(`${p}`, `${p}`); if (n < g) window.setTimeout(tick, 900); else window.setTimeout(() => { setBusy(false); kit.good(`${g} × ${p} = ${g * p}`, `${g} × ${p} = ${g * p}`); kit.star(); }, 800); }; window.setTimeout(tick, 400); };
+  const addGroup = () => {
+    if (groups >= 8) {
+      kit.oops('८ टोकरीसम्म मात्र', 'Up to 8 baskets');
+      return;
+    }
+    kit.tap();
+    const nextG = groups + 1;
+    setGroups(nextG);
+    kit.say(
+      `${toNp(nextG)} × ${toNp(per)} = ${toNp(nextG * per)}`,
+      `${nextG} × ${per} = ${nextG * per}`
+    );
+  };
+
+  const delGroup = () => {
+    if (groups <= 1) return;
+    kit.tap();
+    setGroups((v) => v - 1);
+  };
+
+  const setApplesPerBasket = (p: number) => {
+    kit.tap();
+    setPer(p);
+    kit.say(`प्रत्येक टोकरीमा ${toNp(p)} स्याउ`, `${p} apples per basket`);
+  };
 
   useEffect(() => {
-    if (kit.mode === 'LEARN') { const [p] = LEARN[li % LEARN.length]; apply(p, 0); kit.say('बराबर समूह बनाऔँ। प्रत्येक टोकरीमा बराबर स्याउ।', 'Make equal groups. Every basket has the same number of apples.'); }
-    else if (kit.mode === 'PLAY') { apply(per, 2); kit.say('टोकरी थपेर गुणन देखौँ।', 'Add baskets and see the multiplication.'); }
+    if (kit.mode === 'LEARN') {
+      const [p, g] = LEARN_PRESETS[li % LEARN_PRESETS.length];
+      setPer(p);
+      setGroups(g);
+      kit.say(
+        `प्रत्येक टोकरीमा ${toNp(p)} स्याउ छन्। जम्मा ${toNp(g)} टोकरी।`,
+        `Every basket has ${p} apples. There are ${g} baskets.`
+      );
+    } else if (kit.mode === 'PLAY') {
+      setPer(rnd(2, 5));
+      setGroups(rnd(2, 5));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kit.mode, li]);
 
-  const data = useMemo(() => Array.from({ length: 8 }, (_, i) => {
-    const p = [2, 3, 4, 5, 10][rnd(0, 4)], g = rnd(2, 6);
+  // Quiz questions for Challenge Mode
+  const data = useMemo(() => Array.from({ length: 6 }, (_, i) => {
+    const p = [2, 3, 4, 5, 10][rnd(0, 4)];
+    const g = rnd(2, 5);
     return { p, g, kind: i % 2 === 0 ? 'total' : 'sentence' };
   }), []);
-  const questions: (QuizQuestion & { p: number; g: number })[] = data.map((d, i) => d.kind === 'total'
-    ? { np: `${fmt('ne', d.g)} टोकरी, प्रत्येकमा ${fmt('ne', d.p)} स्याउ। जम्मा कति स्याउ?`, en: `${d.g} baskets with ${d.p} apples each. How many apples in all?`, p: d.p, g: d.g, answer: String(d.p * d.g), options: numChoices(d.p * d.g, i * 5 + 1, [d.p, -d.p, 1, -1]).map((v) => ({ key: String(v), label: fmt(kit.lang, v) })) }
-    : { np: 'यो चित्रको गुणन वाक्य कुन हो?', en: 'Which multiplication sentence matches the picture?', p: d.p, g: d.g, answer: `${d.g}x${d.p}`, options: shuffle([`${d.g}x${d.p}`, `${d.p}x${d.g === d.p ? d.g + 1 : d.g}`, `${d.g + 1}x${d.p}`].filter((v, k, a) => a.indexOf(v) === k), i + 9).map((v) => ({ key: v, label: v.replace('x', ' × ') + ` = ${v.split('x').map(Number).reduce((a, b) => a * b, 1)}` })) });
 
-  const repeated = groups ? Array.from({ length: groups }, () => per).join(' + ') : '';
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', textAlign: 'center', maxWidth: 360 }}>
-      {repeated && <div style={{ fontSize: 17, fontWeight: 800, color: '#64748b' }}>{repeated} = {groups * per}</div>}
-      <div style={{ fontSize: 32, fontWeight: 900 }}>{fmt(kit.lang, groups)} × {fmt(kit.lang, per)} = <span style={{ color: '#16a34a' }}>{fmt(kit.lang, groups * per)}</span></div>
+  const questions: (QuizQuestion & { p: number; g: number })[] = data.map((d, i) =>
+    d.kind === 'total'
+      ? {
+        np: `${toNp(d.g)} वटा टोकरी, प्रत्येकमा ${toNp(d.p)} स्याउ। जम्मा कति स्याउ हुन्छन्?`,
+        en: `${d.g} baskets with ${d.p} apples each. How many apples in total?`,
+        p: d.p,
+        g: d.g,
+        answer: String(d.p * d.g),
+        options: numChoices(d.p * d.g, i * 5 + 1, [d.p, -d.p, 1, -1]).map((v) => ({
+          key: String(v),
+          label: fmt(kit.lang, v),
+        })),
+      }
+      : {
+        np: `चित्रमा ${toNp(d.g)} टोकरीमा ${toNp(d.p)}–${toNp(d.p)} स्याउ छन्। यसको गुणन वाक्य कुन हो?`,
+        en: `Which multiplication sentence matches ${d.g} baskets of ${d.p} apples?`,
+        p: d.p,
+        g: d.g,
+        answer: `${d.g}x${d.p}`,
+        options: shuffle([`${d.g}x${d.p}`, `${d.p}x${d.g + 1}`, `${d.g + 1}x${d.p}`], i + 9).map((v) => ({
+          key: v,
+          label: v.replace('x', ' × ') + ` = ${v.split('x').map(Number).reduce((a, b) => a * b, 1)}`,
+        })),
+      }
+  );
+
+  const additionSentence = Array.from({ length: groups })
+    .map(() => toNp(per))
+    .join(' + ');
+
+  const hud = (
+    <div
+      style={{
+        background: '#FFFFFF',
+        borderRadius: 16,
+        padding: '8px 18px',
+        border: '2px solid #187C68',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+        fontSize: 18,
+        fontWeight: 900,
+        color: '#26332E',
+      }}
+    >
+      <span style={{ color: '#059669' }}>
+        {toNp(groups)} × {toNp(per)} = {toNp(total)}
+      </span>
     </div>
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 200 }}>{kit.t(`प्रत्येक टोकरीमा ${fmt('ne', per)} स्याउ`, `${per} apples in each basket`)}</div>
-      <CBtn color="#8b5cf6" disabled={busy} onClick={learnShow}>▶ {kit.t('देखाऔँ', 'Show me')}</CBtn>
-      <CBtn color="#16a34a" disabled={busy} onClick={() => setLi(li + 1)}>{kit.t('अर्को', 'Next')} ➜</CBtn>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>
-      <b>{kit.t('प्रत्येकमा', 'Each')}:</b>{[2, 3, 4, 5, 10].map((p) => <CBtn key={p} color={p === per ? '#0ea5e9' : '#94a3b8'} style={{ minWidth: 52 }} onClick={() => apply(p, groups)}>{fmt(kit.lang, p)}</CBtn>)}
-      <CBtn color="#16a34a" onClick={addGroup}>+ 🧺 {kit.t('टोकरी', 'basket')}</CBtn><CBtn color="#94a3b8" onClick={delGroup}>−</CBtn><CBtn color="#f59e0b" onClick={() => apply(per, 0)}>↺</CBtn>
-    </Controls>
+
+  const panel = kit.mode === 'CHALLENGE' ? (
+    <QuizPanel kit={kit} questions={questions} />
   ) : (
-    <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => apply(q.p, q.g)} />
+    <Controls>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+        {/* Apple per basket selector */}
+        <div style={{ display: 'inline-flex', gap: 4, background: '#FEF2F2', padding: '4px 8px', borderRadius: 10, border: '1px solid #FECACA' }}>
+          <span style={{ fontSize: 13, fontWeight: 800, color: '#DC2626', alignSelf: 'center', marginRight: 4 }}>
+            {kit.t('स्याउ संख्या:', 'Apples:')}
+          </span>
+          {[2, 3, 4, 5, 10].map((num) => (
+            <button
+              key={num}
+              type="button"
+              onClick={() => setApplesPerBasket(num)}
+              style={{
+                width: 34,
+                height: 32,
+                borderRadius: 8,
+                fontSize: 13,
+                fontWeight: 900,
+                border: 'none',
+                cursor: 'pointer',
+                background: per === num ? '#DC2626' : '#FFFFFF',
+                color: per === num ? '#FFFFFF' : '#1E293B',
+              }}
+            >
+              {kit.lang === 'ne' ? toNp(num) : num}
+            </button>
+          ))}
+        </div>
+
+        {/* Group Adjusters */}
+        <CBtn color="#059669" disabled={groups >= 8} onClick={addGroup}>
+          🧺 {kit.t('+१ टोकरी थपौँ', '+1 Basket')}
+        </CBtn>
+        <CBtn color="#DC2626" disabled={groups <= 1} onClick={delGroup}>
+          -१ {kit.t('टोकरी घटाऔँ', '-1 Basket')}
+        </CBtn>
+
+        {kit.mode === 'LEARN' && (
+          <CBtn color="#187C68" onClick={() => setLi((v) => v + 1)}>
+            {kit.t('अर्को उदाहरण', 'Next Example')} ➜
+          </CBtn>
+        )}
+
+        {kit.mode === 'PLAY' && (
+          <CBtn
+            color="#D97706"
+            onClick={() => {
+              setPer(rnd(2, 5));
+              setGroups(rnd(2, 5));
+            }}
+          >
+            🎲 {kit.t('नयाँ समूह', 'Random')}
+          </CBtn>
+        )}
+      </div>
+    </Controls>
   );
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+
+  return (
+    <SimFrame2D kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} grade={2}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 380,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          gap: 20,
+        }}
+      >
+        {/* Equations Explanation Banner */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #E2E8F0',
+            borderRadius: 16,
+            padding: '12px 24px',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 20,
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
+          <div style={{ fontSize: 16, fontWeight: 800, color: '#64748B' }}>
+            {kit.t('बारम्बार जोड', 'Repeated Addition')}:{' '}
+            <span style={{ color: '#0284C7', fontWeight: 900 }}>
+              {additionSentence} = {toNp(total)}
+            </span>
+          </div>
+          <div style={{ fontSize: 20, color: '#CBD5E1' }}>➔</div>
+          <div style={{ fontSize: 18, fontWeight: 900, color: '#059669' }}>
+            {kit.t('गुणन रूप', 'Multiplication')}: {toNp(groups)} × {toNp(per)} = {toNp(total)}
+          </div>
+        </div>
+
+        {/* 2D Baskets Display Grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+            gap: 16,
+            width: '100%',
+            maxWidth: 820,
+            justifyContent: 'center',
+          }}
+        >
+          {Array.from({ length: groups }).map((_, gIdx) => (
+            <div
+              key={gIdx}
+              style={{
+                background: '#FFFFFF',
+                borderRadius: 16,
+                padding: '12px',
+                border: '2px solid #E2E8F0',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 8,
+              }}
+            >
+              <div style={{ fontSize: 12, fontWeight: 800, color: '#64748B' }}>
+                {kit.t(`टोकरी #${toNp(gIdx + 1)}`, `Basket #${gIdx + 1}`)}
+              </div>
+
+              {/* Basket with apples */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: 4,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  maxWidth: 120,
+                  minHeight: 50,
+                  background: '#FEF2F2',
+                  padding: '6px 8px',
+                  borderRadius: 12,
+                  border: '1.5px solid #FECACA',
+                }}
+              >
+                {Array.from({ length: per }).map((_, aIdx) => (
+                  <span key={aIdx} style={{ fontSize: per > 6 ? 16 : 22 }}>
+                    🍎
+                  </span>
+                ))}
+              </div>
+
+              <div
+                style={{
+                  background: '#F1F5F9',
+                  borderRadius: 8,
+                  padding: '2px 8px',
+                  fontSize: 12,
+                  fontWeight: 900,
+                  color: '#1E293B',
+                }}
+              >
+                {toNp(per)} {kit.t('स्याउ', 'apples')}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </SimFrame2D>
+  );
 };

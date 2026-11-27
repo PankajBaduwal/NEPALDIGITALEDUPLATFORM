@@ -1,133 +1,221 @@
 /**
  * Chapter 20 · Coins and Notes (सिक्का र नोट)
- * Coins & Notes Explorer — Nepali coins and notes on a 3D table: flip them, hear their value, make an amount.
+ * Sim 1: Coins and Notes (नेपाली मुद्रा) — Pure 2D Edition
+ * 100% 2D SVG / Interactive Money – No Three.js/WebGL dependencies.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { coin, note, mat, shadowed, NOTE_VALUES, COIN_VALUES } from '../class1-math-kit/models';
-import { npName, enName, toNp, shuffle, rnd } from '../class1-math-kit/nepali';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp } from '../class1-math-kit/nepali';
 
-interface Props { onBackToLibrary: () => void; userRole?: string }
-const NOTE_BG: Record<number, string> = { 5: '#f9a8a8', 10: '#d8b4fe', 20: '#fdba74', 50: '#93c5fd', 100: '#bef264' };
+interface Props {
+  onBackToLibrary: () => void;
+  userRole?: string;
+}
+
+interface MoneyItem {
+  id: string;
+  nameEn: string;
+  nameNp: string;
+  val: number;
+  type: 'coin' | 'note';
+  color: string;
+}
+
+const MONEY_TYPES: MoneyItem[] = [
+  { id: 'c1', nameEn: 'Rs 1 Coin', nameNp: 'रु १ सिक्का', val: 1, type: 'coin', color: '#D4AF37' },
+  { id: 'c2', nameEn: 'Rs 2 Coin', nameNp: 'रु २ सिक्का', val: 2, type: 'coin', color: '#C0C0C0' },
+  { id: 'n5', nameEn: 'Rs 5 Note', nameNp: 'रु ५ नोट', val: 5, type: 'note', color: '#EF4444' },
+  { id: 'n10', nameEn: 'Rs 10 Note', nameNp: 'रु १० नोट', val: 10, type: 'note', color: '#F97316' },
+  { id: 'n20', nameEn: 'Rs 20 Note', nameNp: 'रु २० नोट', val: 20, type: 'note', color: '#84CC16' },
+  { id: 'n50', nameEn: 'Rs 50 Note', nameNp: 'रु ५० नोट', val: 50, type: 'note', color: '#06B6D4' },
+];
 
 export const CoinsAndNotes: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G1-CH20-01', chapter: 20, titleNp: 'सिक्का र नोट चिनौँ', titleEn: 'Coins and Notes Explorer' });
-  const [picked, setPicked] = useState<{ kind: 'coin' | 'note'; v: number } | null>(null);
-  const [target, setTarget] = useState(35);
-  const [table, setTable] = useState<{ kind: 'coin' | 'note'; v: number }[]>([]);
-  const scene = useRef<{ flip: (o: THREE.Object3D) => void; showOne: (kind: 'coin' | 'note', v: number) => void; showAll: () => void; addToTable: (kind: 'coin' | 'note', v: number) => void; clearTable: () => void } | null>(null);
-  const live = useRef({ mode: kit.mode, onPick: (_k: 'coin' | 'note', _v: number) => {} });
-  live.current.mode = kit.mode;
-  live.current.onPick = (k, v) => {
-    setPicked({ kind: k, v });
-    kit.say(`${npName(v)} रुपैयाँको ${k === 'coin' ? 'सिक्का' : 'नोट'}`, `${enName(v)} rupee ${k}`);
+  const kit = useSimKit({
+    code: 'SIM-MATH-G1-CH20-01',
+    chapter: 20,
+    titleNp: 'सिक्का र नोट (नेपाली मुद्रा)',
+    titleEn: 'Coins and Notes (Nepali Currency)',
+  });
+
+  const [wallet, setWallet] = useState<MoneyItem[]>([]);
+
+  const isNe = kit.lang === 'ne';
+  const L = (np: string, en: string) => (isNe ? np : en);
+
+  const totalAmount = wallet.reduce((sum, item) => sum + item.val, 0);
+
+  const addMoney = (item: MoneyItem) => {
+    kit.tap();
+    setWallet((prev) => [...prev, item]);
   };
 
-  useStage(kit.stageRef, (ctx) => {
-    const tableTop = shadowed(new THREE.Mesh(new THREE.BoxGeometry(18, 0.5, 10), mat('#a16207', 0.85))); tableTop.position.y = -0.05; ctx.scene.add(tableTop);
-    const things = new THREE.Group(); ctx.scene.add(things);
-    const stack = new THREE.Group(); ctx.scene.add(stack);
-    const clear = () => [...things.children].forEach((c) => things.remove(c));
-    const showAll = () => {
-      clear(); stack.visible = false; things.visible = true;
-      NOTE_VALUES.forEach((v, i) => { const n = note(v); n.position.set(-5.2 + (i % 3) * 3.6 + (i >= 3 ? 1.8 : 0), 0.3, -2 + Math.floor(i / 3) * 2.1); n.rotation.y = (i % 2 ? 1 : -1) * 0.08; n.userData.kind = 'note'; things.add(n); });
-      COIN_VALUES.forEach((v, i) => { const c = coin(v, 0.8); c.position.set(-3.6 + i * 2.4, 0.4, 2.8); c.userData.kind = 'coin'; things.add(c); });
-    };
-    const showOne = (kind: 'coin' | 'note', v: number) => {
-      clear(); stack.visible = false; things.visible = true;
-      const o = kind === 'note' ? note(v) : coin(v, 1.8); o.scale.setScalar(kind === 'note' ? 1.5 : 1); o.position.set(0, kind === 'note' ? 0.5 : 0.5, 0); o.userData.kind = kind; things.add(o);
-    };
-    const flip = (o: THREE.Object3D) => {
-      const from = o.rotation.x; const to = from + Math.PI; const y0 = o.position.y;
-      ctx.tween(600, (k) => { o.rotation.x = from + (to - from) * k; o.position.y = y0 + Math.sin(k * Math.PI) * 1.4; }, undefined, ease.inOut);
-    };
-    const addToTable = (kind: 'coin' | 'note', v: number) => {
-      things.visible = false; stack.visible = true;
-      const o = kind === 'note' ? note(v) : coin(v, 0.75);
-      const i = stack.children.length;
-      o.position.set(-6 + (i % 5) * (kind === 'note' ? 3.3 : 1.7) * 0.8, 6, -1.5 + Math.floor(i / 5) * 2.2);
-      o.userData.target = new THREE.Vector3(-5.5 + (i % 5) * 2.7, 0.35 + Math.floor(i / 25) * 0.05, -2 + Math.floor(i / 5) * 2.1);
-      stack.add(o);
-      const p0 = o.position.clone(); const p1 = o.userData.target;
-      ctx.tween(520, (k) => o.position.lerpVectors(p0, p1, k), undefined, ease.bounce);
-    };
-    const clearTable = () => [...stack.children].forEach((c) => stack.remove(c));
-    scene.current = { flip, showOne, showAll, addToTable, clearTable };
-    showAll();
-    ctx.onTap(() => [...things.children], (hit) => {
-      if (!hit || live.current.mode === 'CHALLENGE') return;
-      let o: THREE.Object3D | null = hit.object;
-      while (o && o.userData.value === undefined) o = o.parent;
-      if (!o) return;
-      flip(o); kit.tap(); live.current.onPick(o.userData.kind, o.userData.value);
-    });
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 11, 10], target: [0, 0, 0.5], minDistance: 6, maxDistance: 20, ground: null, sky: 0xe0f2fe });
-
-  const total = table.reduce((a, t) => a + t.v, 0);
-  const num = (v: number) => (kit.lang === 'ne' ? toNp(v) : String(v));
-  useEffect(() => {
-    const s = scene.current; if (!s) return;
-    if (kit.mode === 'LEARN') { s.showAll(); setPicked(null); kit.say('नोट र सिक्का छोएर पल्टाऔँ।', 'Tap a note or coin to flip it.'); }
-    else if (kit.mode === 'PLAY') { s.clearTable(); setTable([]); const t = 5 * rnd(2, 14); setTarget(t); kit.say(`रु. ${toNp(t)} बनाऔँ।`, `Make Rs ${t}.`); }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [kit.mode]);
-
-  const addMoney = (kind: 'coin' | 'note', v: number) => {
-    if (total + v > 200) { kit.oops(); return; }
-    scene.current?.addToTable(kind, v); setTable((t) => [...t, { kind, v }]); kit.tap();
-    const nt = total + v;
-    if (nt === target) { kit.good(`रु. ${toNp(nt)} भयो!`, `That makes Rs ${nt}!`); kit.star(); }
+  const clearWallet = () => {
+    kit.tap();
+    setWallet([]);
   };
-  const newTarget = () => { scene.current?.clearTable(); setTable([]); const t = 5 * rnd(2, 14); setTarget(t); kit.say(`रु. ${toNp(t)} बनाऔँ।`, `Make Rs ${t}.`); };
 
-  const data = useMemo(() => Array.from({ length: 8 }, (_, i) => {
-    const kind: 'coin' | 'note' = i % 3 === 2 ? 'coin' : 'note';
-    const pool = kind === 'note' ? NOTE_VALUES : COIN_VALUES;
-    const v = pool[rnd(0, pool.length - 1)];
-    const opts = shuffle([v, ...shuffle(pool.filter((x) => x !== v)).slice(0, 2)]);
-    return { kind, v, opts };
-  }), []);
-  const questions: (QuizQuestion & { kind: 'coin' | 'note'; v: number })[] = data.map((d) => ({
-    np: d.kind === 'note' ? 'यो नोट कति रुपैयाँको हो?' : 'यो सिक्का कति रुपैयाँको हो?', en: d.kind === 'note' ? 'How many rupees is this note?' : 'How many rupees is this coin?',
-    kind: d.kind, v: d.v, answer: String(d.v),
-    options: d.opts.map((o) => ({ key: String(o), label: <span>{kit.t('रु.', 'Rs')} {num(o)}</span> })),
-  }));
-
-  const hud = kit.mode === 'PLAY' ? (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', textAlign: 'center' }}>
-      <div style={{ fontSize: 16, fontWeight: 800 }}>{kit.t('बनाउनु पर्ने', 'Make')}: <b style={{ fontSize: 26 }}>{kit.t('रु.', 'Rs')} {num(target)}</b></div>
-      <div style={{ fontSize: 22, fontWeight: 900, color: total === target ? '#16a34a' : total > target ? '#dc2626' : '#0369a1' }}>{kit.t('जम्मा', 'Total')}: {kit.t('रु.', 'Rs')} {num(total)}</div>
-    </div>
-  ) : kit.mode === 'LEARN' && picked ? (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', fontSize: 24, fontWeight: 900 }}>
-      {picked.kind === 'note' ? '💵' : '🪙'} {kit.t('रु.', 'Rs')} {num(picked.v)}
-    </div>
-  ) : null;
-
-  const chip = (kind: 'coin' | 'note', v: number) => (
-    <CBtn key={`${kind}${v}`} onClick={() => addMoney(kind, v)} style={{ background: kind === 'note' ? NOTE_BG[v] : '#fbbf24', color: '#1f2937', minWidth: 72, padding: '8px 10px', boxShadow: '0 3px 0 rgba(0,0,0,.2)', borderRadius: kind === 'coin' ? 40 : 10 }}>
-      {kind === 'note' ? '💵' : '🪙'} {num(v)}
-    </CBtn>
+  const quizQuestions: QuizQuestion[] = useMemo(
+    () => [
+      {
+        np: 'कुन बढी मूल्यको छ: रु १० को नोट कि रु ५ को नोट?',
+        en: 'Which is worth more: Rs 10 note or Rs 5 note?',
+        options: [
+          { key: '10', label: isNe ? 'रु १० को नोट' : 'Rs 10 note' },
+          { key: '5', label: isNe ? 'रु ५ को नोट' : 'Rs 5 note' },
+          { key: 'same', label: isNe ? 'बराबर' : 'Same' },
+        ],
+        answer: '10',
+      },
+      {
+        np: 'रु ५ बनाउन रु १ का कतिवटा सिक्का चाहिन्छ?',
+        en: 'How many Rs 1 coins make Rs 5?',
+        options: [
+          { key: '5', label: isNe ? '५ वटा' : '5 coins' },
+          { key: '2', label: isNe ? '२ वटा' : '2 coins' },
+          { key: '10', label: isNe ? '१० वटा' : '10 coins' },
+        ],
+        answer: '5',
+      },
+    ],
+    [isNe]
   );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 220 }}>{kit.t('नेपाली नोटहरू: ५, १०, २०, ५०, १००। सिक्का: १, २, ५, १०।', 'Nepali notes: 5, 10, 20, 50, 100. Coins: 1, 2, 5, 10.')}</div>
-      <CBtn color="#8b5cf6" onClick={() => scene.current?.showAll()}>↺</CBtn>
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <div>
-      <Controls>
-        {COIN_VALUES.map((v) => chip('coin', v))}
-        {NOTE_VALUES.map((v) => chip('note', v))}
-        <CBtn color="#f59e0b" onClick={() => { scene.current?.clearTable(); setTable([]); }}>↺</CBtn>
-        <CBtn color="#8b5cf6" onClick={newTarget}>🎲 {kit.t('नयाँ रकम', 'New amount')}</CBtn>
-      </Controls>
-    </div>
-  ) : (
-    <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => scene.current?.showOne(q.kind, q.v)} />
+
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      grade={1}
+      hud={
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #187C68',
+            borderRadius: 16,
+            padding: '8px 18px',
+            boxShadow: '0 4px 12px rgba(24,124,104,0.15)',
+            fontWeight: 900,
+            fontSize: 22,
+            color: '#187C68',
+          }}
+        >
+          💰 {L(`जम्मा रकम: रु ${toNp(totalAmount)}`, `Total Amount: Rs ${totalAmount}`)}
+        </div>
+      }
+      panel={
+        kit.mode === 'CHALLENGE' ? (
+          <QuizPanel kit={kit} questions={quizQuestions} />
+        ) : (
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>
+              {L('सिक्का वा नोट थप्न छुनुहोस्:', 'Tap to add money:')}
+            </span>
+            {MONEY_TYPES.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => addMoney(item)}
+                style={{
+                  padding: '8px 14px',
+                  borderRadius: 12,
+                  border: '1px solid #CBD5E1',
+                  background: '#FFFFFF',
+                  color: '#187C68',
+                  fontWeight: 900,
+                  fontSize: 14,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              >
+                <span>{item.type === 'coin' ? '🪙' : '💵'}</span>
+                <span>{isNe ? item.nameNp : item.nameEn}</span>
+              </button>
+            ))}
+
+            <button
+              onClick={clearWallet}
+              style={{
+                marginLeft: 'auto',
+                background: '#F1F5F9',
+                border: '1px solid #CBD5E1',
+                padding: '8px 14px',
+                borderRadius: 10,
+                fontSize: 13,
+                fontWeight: 800,
+                cursor: 'pointer',
+              }}
+            >
+              🔄 {L('रकम हटाउनुहोस्', 'Clear')}
+            </button>
+          </div>
+        )
+      }
+    >
+      {/* ── 2D Money Wallet Area ──────────────────────────────── */}
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 460,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 24,
+          background: 'linear-gradient(180deg, #FEF3C7 0%, #F5F7F5 60%)',
+        }}
+      >
+        <div
+          style={{
+            width: 'min(720px, 94vw)',
+            minHeight: 280,
+            background: '#FFFFFF',
+            borderRadius: 24,
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+            padding: 24,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <div style={{ fontSize: 16, fontWeight: 900, color: '#187C68', marginBottom: 16 }}>
+            👛 {L('तपाईँको थैलीमा भएका सिक्का र नोटहरू:', 'Coins and notes in your wallet:')}
+          </div>
+
+          <div style={{ flex: 1, display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+            {wallet.map((item, idx) => (
+              <div
+                key={idx}
+                style={{
+                  width: item.type === 'coin' ? 64 : 110,
+                  height: item.type === 'coin' ? 64 : 64,
+                  borderRadius: item.type === 'coin' ? 32 : 12,
+                  background: item.type === 'coin' ? item.color : '#F0FDF4',
+                  border: item.type === 'coin' ? '3px solid #B45309' : `2px solid ${item.color}`,
+                  color: item.type === 'coin' ? '#FFFFFF' : '#166534',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 900,
+                  fontSize: 16,
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+                  animation: 'simPop 0.25s ease',
+                }}
+              >
+                {isNe ? toNp(item.val) : item.val}
+              </div>
+            ))}
+
+            {wallet.length === 0 && (
+              <div style={{ color: '#94A3B8', fontSize: 15, fontWeight: 700 }}>
+                {L('थैली खाली छ। तलका बटनबाट सिक्का वा नोट थप्नुहोस्!', 'Wallet is empty. Tap buttons below to add money!')}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </SimFrame2D>
   );
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };

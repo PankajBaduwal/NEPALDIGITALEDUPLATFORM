@@ -251,22 +251,22 @@ export const DifferenceExplorer: React.FC<Props> = ({
     .sort((a, b) => a - b);
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header Bar */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-semibold">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-700 font-semibold">
               Class 1 • Math • Chapter 8 • Simulation 04
             </span>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
-              <Scale className="w-4 h-4 text-amber-400" />
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <Scale className="w-4 h-4 text-amber-700" />
               {language === 'np' ? 'बढी र कम पत्ता लगाऔँ' : 'More or Less – Difference Explorer'}
             </h1>
           </div>
@@ -286,8 +286,8 @@ export const DifferenceExplorer: React.FC<Props> = ({
             onClick={() => setSoundEnabled((s) => !s)}
             className={`p-2 rounded-lg border transition ${
               soundEnabled
-                ? 'bg-slate-700 border-slate-600 text-emerald-400'
-                : 'bg-slate-800 border-slate-700 text-slate-500'
+                ? 'bg-slate-100 border-slate-300 text-emerald-700'
+                : 'bg-white border-slate-200 text-slate-500'
             }`}
           >
             {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
@@ -296,38 +296,38 @@ export const DifferenceExplorer: React.FC<Props> = ({
       </header>
 
       {/* Main Container */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-center justify-center bg-slate-950">
+      <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-center justify-center bg-slate-50">
         {!completed ? (
-          <div className="w-full max-w-3xl bg-slate-850/90 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+          <div className="w-full max-w-3xl bg-slate-850/90 border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
             {/* Banner */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
                 {language === 'np'
                   ? `तुलना ${NEP_DIGITS[currentIndex + 1]} / ${NEP_DIGITS[COMPARISON_ACTIVITIES.length]}`
                   : `Comparison ${currentIndex + 1} of ${COMPARISON_ACTIVITIES.length}`}
               </span>
               <button
                 onClick={() => speak(currentComp.questionNp, currentComp.questionEn)}
-                className="text-slate-400 hover:text-white flex items-center gap-1 text-xs"
+                className="text-slate-500 hover:text-slate-900 flex items-center gap-1 text-xs"
               >
                 <Volume2 className="w-4 h-4" />
                 <span>{language === 'np' ? 'सुन्नुहोस्' : 'Listen'}</span>
               </button>
             </div>
 
-            <h2 className="text-lg md:text-xl font-bold text-white text-center">
+            <h2 className="text-lg md:text-xl font-bold text-slate-900 text-center">
               {language === 'np' ? currentComp.questionNp : currentComp.questionEn}
             </h2>
 
             {/* Side-by-Side Comparison Grid */}
-            <div className="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 flex flex-col gap-4">
+            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 flex flex-col gap-4">
               {/* Group A Row */}
-              <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-4">
                 <div className="flex items-center gap-2 w-32">
-                  <span className="text-sm font-bold text-amber-300">
+                  <span className="text-sm font-bold text-amber-700">
                     {language === 'np' ? currentComp.itemA.nameNp : currentComp.itemA.nameEn}
                   </span>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-black">
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-700 font-black">
                     {language === 'np' ? NEP_DIGITS[currentComp.itemA.count] : currentComp.itemA.count}
                   </span>
                 </div>
@@ -356,10 +356,10 @@ export const DifferenceExplorer: React.FC<Props> = ({
               {/* Group B Row */}
               <div className="flex items-center justify-between pt-2">
                 <div className="flex items-center gap-2 w-32">
-                  <span className="text-sm font-bold text-rose-300">
+                  <span className="text-sm font-bold text-rose-700">
                     {language === 'np' ? currentComp.itemB.nameNp : currentComp.itemB.nameEn}
                   </span>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-black">
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-700 font-black">
                     {language === 'np' ? NEP_DIGITS[currentComp.itemB.count] : currentComp.itemB.count}
                   </span>
                 </div>
@@ -396,16 +396,16 @@ export const DifferenceExplorer: React.FC<Props> = ({
 
             {/* Live Formula Banner */}
             {isMatched && (
-              <div className="bg-slate-800/80 rounded-2xl p-3 border border-slate-700 flex items-center justify-center gap-4 text-xl font-black">
-                <span className="text-amber-400">
+              <div className="bg-white rounded-2xl p-3 border border-slate-200 flex items-center justify-center gap-4 text-xl font-black">
+                <span className="text-amber-700">
                   {language === 'np' ? NEP_DIGITS[largerCount] : largerCount}
                 </span>
                 <Minus className="w-5 h-5 text-rose-400" />
                 <span className="text-rose-400">
                   {language === 'np' ? NEP_DIGITS[smallerCount] : smallerCount}
                 </span>
-                <Equal className="w-5 h-5 text-emerald-400" />
-                <span className="text-emerald-400">
+                <Equal className="w-5 h-5 text-emerald-700" />
+                <span className="text-emerald-700">
                   {isCorrect
                     ? language === 'np'
                       ? NEP_DIGITS[correctDifference]
@@ -417,7 +417,7 @@ export const DifferenceExplorer: React.FC<Props> = ({
 
             {/* Answer Selector */}
             <div className="flex flex-col gap-2">
-              <span className="text-xs text-slate-300 text-center font-bold">
+              <span className="text-xs text-slate-600 text-center font-bold">
                 {language === 'np' ? 'संख्यात्मक फरक छान्नुहोस्:' : 'Select the numerical difference:'}
               </span>
               <div className="grid grid-cols-3 gap-3">
@@ -430,7 +430,7 @@ export const DifferenceExplorer: React.FC<Props> = ({
                         ? isCorrect
                           ? 'bg-emerald-600 border-emerald-400 text-white'
                           : 'bg-rose-600 border-rose-400 text-white'
-                        : 'bg-slate-800 border-slate-700 text-white hover:bg-slate-750'
+                        : 'bg-white border-slate-200 text-slate-900 hover:bg-slate-750'
                     }`}
                   >
                     {language === 'np' ? NEP_DIGITS[opt] : opt}
@@ -460,14 +460,14 @@ export const DifferenceExplorer: React.FC<Props> = ({
           </div>
         ) : (
           /* Completion Summary */
-          <div className="w-full max-w-md bg-slate-850 border border-slate-700 rounded-3xl p-6 text-center flex flex-col items-center gap-4 shadow-2xl">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-400">
+          <div className="w-full max-w-md bg-slate-850 border border-slate-200 rounded-3xl p-6 text-center flex flex-col items-center gap-4 shadow-2xl">
+            <div className="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-700">
               <Trophy className="w-8 h-8" />
             </div>
-            <h2 className="text-xl font-black text-white">
+            <h2 className="text-xl font-black text-slate-900">
               {language === 'np' ? 'सबै तुलना पूरा भए!' : 'All Differences Found!'}
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500">
               {language === 'np'
                 ? 'तपाईंले दुई समूहबीचको संख्यात्मक फरक (कति बढी / कति कम) पत्ता लगाउन सफलता प्राप्त गर्नुभयो।'
                 : 'You successfully compared two groups to find the numerical difference.'}
@@ -481,7 +481,7 @@ export const DifferenceExplorer: React.FC<Props> = ({
                   setIsCorrect(null);
                   setCompleted(false);
                 }}
-                className="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition flex items-center justify-center gap-1.5"
+                className="flex-1 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs font-bold transition flex items-center justify-center gap-1.5"
               >
                 <RotateCcw className="w-4 h-4" />
                 {language === 'np' ? 'पुनः खेल्नुहोस्' : 'Play Again'}

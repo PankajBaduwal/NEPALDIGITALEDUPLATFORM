@@ -1,71 +1,501 @@
 /**
  * Lesson 11 · Geometrical shapes (ज्यामितीय आकार)
- * Face Explorer — open up a cube, cuboid, cylinder, cone or pyramid and see the flat shapes (faces) it is made of.
+ * Face Explorer — 2D Interactive Solid & Net Unfolder.
+ * Explore Cube, Cuboid, Cylinder, Cone, and Pyramid with interactive 2D nets, faces, vertices, and edges.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizQuestion } from '../class1-math-kit/SimKit';
 import { shuffle } from '../class1-math-kit/nepali';
 import { fmt } from './h3';
 
 interface Props { onBackToLibrary: () => void; userRole?: string }
-interface Face { geo: THREE.BufferGeometry; pos: THREE.Vector3; rot: THREE.Euler; n: THREE.Vector3; color: string }
-const V = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
-const plane = (w: number, h: number, pos: THREE.Vector3, rot: THREE.Euler, n: THREE.Vector3, color: string): Face => ({ geo: new THREE.PlaneGeometry(w, h), pos, rot, n, color });
-const SOLIDS = [
-  { id: 'cube', np: 'घन', en: 'Cube', info: ['६ वटा वर्गाकार सतह', '6 faces — all squares'], flat: 6, shape: 'square', build: (): Face[] => { const r = (x: number, y: number, z: number) => new THREE.Euler(x, y, z); return [plane(2, 2, V(0, 0, 1), r(0, 0, 0), V(0, 0, 1), '#ef4444'), plane(2, 2, V(0, 0, -1), r(0, Math.PI, 0), V(0, 0, -1), '#ef4444'), plane(2, 2, V(1, 0, 0), r(0, Math.PI / 2, 0), V(1, 0, 0), '#f97316'), plane(2, 2, V(-1, 0, 0), r(0, -Math.PI / 2, 0), V(-1, 0, 0), '#f97316'), plane(2, 2, V(0, 1, 0), r(-Math.PI / 2, 0, 0), V(0, 1, 0), '#eab308'), plane(2, 2, V(0, -1, 0), r(Math.PI / 2, 0, 0), V(0, -1, 0), '#eab308')]; } },
-  { id: 'cuboid', np: 'घनाभ', en: 'Cuboid', info: ['६ वटा आयताकार सतह', '6 faces — rectangles'], flat: 6, shape: 'rectangle', build: (): Face[] => { const r = (x: number, y: number, z: number) => new THREE.Euler(x, y, z); return [plane(3, 1.6, V(0, 0, 0.9), r(0, 0, 0), V(0, 0, 1), '#0ea5e9'), plane(3, 1.6, V(0, 0, -0.9), r(0, Math.PI, 0), V(0, 0, -1), '#0ea5e9'), plane(1.8, 1.6, V(1.5, 0, 0), r(0, Math.PI / 2, 0), V(1, 0, 0), '#22c55e'), plane(1.8, 1.6, V(-1.5, 0, 0), r(0, -Math.PI / 2, 0), V(-1, 0, 0), '#22c55e'), plane(3, 1.8, V(0, 0.8, 0), r(-Math.PI / 2, 0, 0), V(0, 1, 0), '#a855f7'), plane(3, 1.8, V(0, -0.8, 0), r(Math.PI / 2, 0, 0), V(0, -1, 0), '#a855f7')]; } },
-  { id: 'cylinder', np: 'बेलना', en: 'Cylinder', info: ['२ वटा गोलो सतह र १ वटा बाङ्गो सतह', '2 flat circles and 1 curved face'], flat: 2, shape: 'circle', build: (): Face[] => [
-    { geo: new THREE.CircleGeometry(1.1, 40), pos: V(0, 1.2, 0), rot: new THREE.Euler(-Math.PI / 2, 0, 0), n: V(0, 1, 0), color: '#ef4444' },
-    { geo: new THREE.CircleGeometry(1.1, 40), pos: V(0, -1.2, 0), rot: new THREE.Euler(Math.PI / 2, 0, 0), n: V(0, -1, 0), color: '#ef4444' },
-    { geo: new THREE.CylinderGeometry(1.1, 1.1, 2.4, 40, 1, true), pos: V(0, 0, 0), rot: new THREE.Euler(), n: V(1, 0, 0), color: '#0ea5e9' }] },
-  { id: 'cone', np: 'शङ्कु', en: 'Cone', info: ['१ वटा गोलो सतह र १ वटा बाङ्गो सतह', '1 flat circle and 1 curved face'], flat: 1, shape: 'circle', build: (): Face[] => [
-    { geo: new THREE.CircleGeometry(1.2, 40), pos: V(0, -1.3, 0), rot: new THREE.Euler(Math.PI / 2, 0, 0), n: V(0, -1, 0), color: '#ef4444' },
-    { geo: new THREE.ConeGeometry(1.2, 2.6, 40, 1, true), pos: V(0, 0, 0), rot: new THREE.Euler(), n: V(0, 1, 0), color: '#8b5cf6' }] },
-  { id: 'pyramid', np: 'पिरामिड', en: 'Pyramid', info: ['१ वर्ग र ४ त्रिभुजाकार सतह', '1 square and 4 triangle faces'], flat: 5, shape: 'triangle', build: (): Face[] => {
-    const apex = V(0, 1.3, 0); const c = [V(-1.2, -1.3, -1.2), V(1.2, -1.3, -1.2), V(1.2, -1.3, 1.2), V(-1.2, -1.3, 1.2)]; const out: Face[] = [plane(2.4, 2.4, V(0, -1.3, 0), new THREE.Euler(Math.PI / 2, 0, 0), V(0, -1, 0), '#eab308')];
-    for (let i = 0; i < 4; i++) { const a = c[i], b = c[(i + 1) % 4]; const cen = a.clone().add(b).add(apex).divideScalar(3); const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute([a.x - cen.x, a.y - cen.y, a.z - cen.z, b.x - cen.x, b.y - cen.y, b.z - cen.z, apex.x - cen.x, apex.y - cen.y, apex.z - cen.z], 3)); g.computeVertexNormals(); out.push({ geo: g, pos: cen, rot: new THREE.Euler(), n: V(cen.x, 0.2, cen.z).normalize(), color: ['#f97316', '#22c55e', '#0ea5e9', '#ec4899'][i] }); }
-    return out; } },
+
+interface NetPiece {
+  id: string;
+  nameNp: string;
+  nameEn: string;
+  shape: 'rect' | 'circle' | 'polygon';
+  x: number;
+  y: number;
+  w?: number;
+  h?: number;
+  r?: number;
+  pts?: string;
+  color: string;
+  label: string;
+}
+
+interface SolidDef {
+  id: string;
+  np: string;
+  en: string;
+  faces: number;
+  edges: number;
+  vertices: number;
+  infoNp: string;
+  infoEn: string;
+  netShapes: string;
+  netPieces: NetPiece[];
+}
+
+const SOLIDS: SolidDef[] = [
+  {
+    id: 'cube',
+    np: 'घन',
+    en: 'Cube',
+    faces: 6,
+    edges: 12,
+    vertices: 8,
+    infoNp: '६ वटा बराबर वर्गाकार सतहहरू',
+    infoEn: '6 identical square faces',
+    netShapes: '6 Squares',
+    netPieces: [
+      { id: 'top', nameNp: 'माथिल्लो सतह', nameEn: 'Top face', shape: 'rect', x: 190, y: 30, w: 70, h: 70, color: '#F87171', label: '1' },
+      { id: 'left', nameNp: 'बायाँ सतह', nameEn: 'Left face', shape: 'rect', x: 120, y: 100, w: 70, h: 70, color: '#FB923C', label: '2' },
+      { id: 'front', nameNp: 'अगाडिको सतह', nameEn: 'Front face', shape: 'rect', x: 190, y: 100, w: 70, h: 70, color: '#FBBF24', label: '3' },
+      { id: 'right', nameNp: 'दायाँ सतह', nameEn: 'Right face', shape: 'rect', x: 260, y: 100, w: 70, h: 70, color: '#34D399', label: '4' },
+      { id: 'back', nameNp: 'पछाडिको सतह', nameEn: 'Back face', shape: 'rect', x: 330, y: 100, w: 70, h: 70, color: '#60A5FA', label: '5' },
+      { id: 'bottom', nameNp: 'तल्लो सतह', nameEn: 'Bottom face', shape: 'rect', x: 190, y: 170, w: 70, h: 70, color: '#A78BFA', label: '6' },
+    ],
+  },
+  {
+    id: 'cuboid',
+    np: 'घनाभ',
+    en: 'Cuboid',
+    faces: 6,
+    edges: 12,
+    vertices: 8,
+    infoNp: '६ वटा आयताकार सतहहरू (विपरीत सतह बराबर)',
+    infoEn: '6 rectangular faces (opposite faces equal)',
+    netShapes: '6 Rectangles',
+    netPieces: [
+      { id: 'top', nameNp: 'माथिल्लो', nameEn: 'Top', shape: 'rect', x: 180, y: 30, w: 90, h: 60, color: '#38BDF8', label: '1' },
+      { id: 'left', nameNp: 'बायाँ', nameEn: 'Left', shape: 'rect', x: 120, y: 90, w: 60, h: 80, color: '#4ADE80', label: '2' },
+      { id: 'front', nameNp: 'अगाडि', nameEn: 'Front', shape: 'rect', x: 180, y: 90, w: 90, h: 80, color: '#F472B6', label: '3' },
+      { id: 'right', nameNp: 'दायाँ', nameEn: 'Right', shape: 'rect', x: 270, y: 90, w: 60, h: 80, color: '#818CF8', label: '4' },
+      { id: 'back', nameNp: 'पछाडि', nameEn: 'Back', shape: 'rect', x: 330, y: 90, w: 90, h: 80, color: '#FCD34D', label: '5' },
+      { id: 'bottom', nameNp: 'तल', nameEn: 'Bottom', shape: 'rect', x: 180, y: 170, w: 90, h: 60, color: '#FB923C', label: '6' },
+    ],
+  },
+  {
+    id: 'cylinder',
+    np: 'बेलना',
+    en: 'Cylinder',
+    faces: 3,
+    edges: 2,
+    vertices: 0,
+    infoNp: '२ वटा गोलो समतल र १ वटा घुमाउरो (आयताकार) सतह',
+    infoEn: '2 circular flat faces and 1 curved unrolled rectangular face',
+    netShapes: '2 Circles + 1 Rectangle',
+    netPieces: [
+      { id: 'c1', nameNp: 'माथिल्लो वृत्त', nameEn: 'Top circle', shape: 'circle', x: 230, y: 55, r: 35, color: '#F87171', label: 'Circle 1' },
+      { id: 'body', nameNp: 'घुमाउरो सतह (आयत)', nameEn: 'Unrolled body (rectangle)', shape: 'rect', x: 130, y: 95, w: 200, h: 90, color: '#38BDF8', label: 'Curved Wall' },
+      { id: 'c2', nameNp: 'तल्लो वृत्त', nameEn: 'Bottom circle', shape: 'circle', x: 230, y: 220, r: 35, color: '#34D399', label: 'Circle 2' },
+    ],
+  },
+  {
+    id: 'cone',
+    np: 'शङ्कु',
+    en: 'Cone',
+    faces: 2,
+    edges: 1,
+    vertices: 1,
+    infoNp: '१ वटा गोलो पिँध र १ वटा घुमाउरो सतह (वृत्तखण्ड)',
+    infoEn: '1 circular base and 1 curved sector face with apex',
+    netShapes: '1 Circle + 1 Sector',
+    netPieces: [
+      { id: 'sector', nameNp: 'घुमाउरो सतह (वृत्तखण्ड)', nameEn: 'Sector (curved surface)', shape: 'polygon', pts: '220,40 130,150 220,175 310,150', color: '#A78BFA', label: 'Sector Net', x: 220, y: 110 },
+      { id: 'base', nameNp: 'पिँध (वृत्त)', nameEn: 'Base circle', shape: 'circle', x: 220, y: 215, r: 34, color: '#FBBF24', label: 'Circle Base' },
+    ],
+  },
+  {
+    id: 'pyramid',
+    np: 'पिरामिड',
+    en: 'Pyramid',
+    faces: 5,
+    edges: 8,
+    vertices: 5,
+    infoNp: '१ वटा वर्गाकार पिँध र ४ वटा त्रिभुजाकार सतहहरू',
+    infoEn: '1 square base and 4 triangular faces meeting at the apex',
+    netShapes: '1 Square + 4 Triangles',
+    netPieces: [
+      { id: 't1', nameNp: 'माथिल्लो त्रिभुज', nameEn: 'Top triangle', shape: 'polygon', pts: '225,40 185,110 265,110', color: '#F87171', label: 'Tri 1', x: 225, y: 75 },
+      { id: 't2', nameNp: 'बायाँ त्रिभुज', nameEn: 'Left triangle', shape: 'polygon', pts: '115,150 185,110 185,190', color: '#FB923C', label: 'Tri 2', x: 150, y: 150 },
+      { id: 'base', nameNp: 'वर्गाकार पिँध', nameEn: 'Square base', shape: 'rect', x: 185, y: 110, w: 80, h: 80, color: '#FBBF24', label: 'Base', pts: '' },
+      { id: 't3', nameNp: 'दायाँ त्रिभुज', nameEn: 'Right triangle', shape: 'polygon', pts: '335,150 265,110 265,190', color: '#34D399', label: 'Tri 3', x: 300, y: 150 },
+      { id: 't4', nameNp: 'तल्लो त्रिभुज', nameEn: 'Bottom triangle', shape: 'polygon', pts: '225,260 185,190 265,190', color: '#60A5FA', label: 'Tri 4', x: 225, y: 225 },
+    ],
+  },
 ];
 
 export const FaceExplorer: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G3-L11-01', chapter: 11, titleNp: 'सतह अन्वेषक (ज्यामितीय आकार)', titleEn: 'Face Explorer (Geometrical Shapes)' });
-  const [sel, setSel] = useState(0);
-  const [open, setOpen] = useState(false);
-  const scene = useRef<{ show: (i: number) => void; explode: (on: boolean) => void } | null>(null);
-
-  useStage(kit.stageRef, (ctx) => {
-    const g = new THREE.Group(); ctx.scene.add(g); let faces: { m: THREE.Mesh; f: Face }[] = []; let amt = 0, goal = 0;
-    const show = (i: number) => { g.clear(); faces = SOLIDS[i].build().map((f) => { const m = new THREE.Mesh(f.geo, new THREE.MeshStandardMaterial({ color: f.color, roughness: 0.45, side: THREE.DoubleSide })); m.castShadow = true; m.rotation.copy(f.rot); m.position.copy(f.pos); g.add(m); return { m, f }; }); g.position.y = 2.8; g.scale.setScalar(1.5); g.rotation.x = 0.5; amt = goal = 0; };
-    ctx.onFrame((dt) => { amt += (goal - amt) * Math.min(1, dt * 5); faces.forEach(({ m, f }) => m.position.copy(f.pos).addScaledVector(f.n, amt * 2.2)); g.rotation.y += dt * 0.35; });
-    scene.current = { show, explode: (on) => { goal = on ? 1 : 0; } }; show(0);
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 5.5, 10], target: [0, 2.8, 0], minDistance: 6, maxDistance: 22, ground: 0xe0e7ff });
-
-  const choose = (i: number) => { setSel(i); setOpen(false); scene.current?.show(i); kit.say(`${SOLIDS[i].np} — ${SOLIDS[i].info[0]}`, `${SOLIDS[i].en}: ${SOLIDS[i].info[1]}`); };
-  const toggle = () => { const o = !open; setOpen(o); scene.current?.explode(o); kit.tap(); };
-  useEffect(() => { if (kit.mode === 'LEARN') choose(0); else if (kit.mode === 'PLAY') { setOpen(false); scene.current?.explode(false); } /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [kit.mode]);
-
-  const data = useMemo(() => Array.from({ length: 8 }, (_, i) => ({ s: i % 5, kind: i % 3 })), []);
-  const NAMES = { square: ['वर्ग', 'square'], rectangle: ['आयत', 'rectangle'], circle: ['वृत्त (गोलो)', 'circle'], triangle: ['त्रिभुज', 'triangle'] } as const;
-  const questions: (QuizQuestion & { s: number })[] = data.map((d, i) => {
-    const S = SOLIDS[d.s];
-    if (d.kind === 0) { const opts = Array.from(new Set([S.flat, S.flat + 2, Math.max(1, S.flat - 1)])); return { s: d.s, np: `${S.np}मा कतिवटा समतल सतह हुन्छन्?`, en: `How many flat faces does a ${S.en.toLowerCase()} have?`, answer: String(S.flat), options: shuffle(opts, i).map((x) => ({ key: String(x), label: fmt(kit.lang, x) })) }; }
-    if (d.kind === 1) { const k = S.shape as keyof typeof NAMES; return { s: d.s, np: `${S.np}को सतह कुन आकारको हुन्छ?`, en: `Which shape appears as a face of a ${S.en.toLowerCase()}?`, answer: k, options: shuffle(Object.keys(NAMES), i + 3).slice(0, 4).concat(Object.keys(NAMES).includes(k) ? [] : [k]).filter((x, j, a) => a.indexOf(x) === j).slice(0, 3).map((x) => ({ key: x, label: kit.t(NAMES[x as keyof typeof NAMES][0], NAMES[x as keyof typeof NAMES][1]) })) }; }
-    return { s: d.s, np: 'यो कुन आकार हो? (खोलेर हेर)', en: 'Which solid is this?', answer: String(d.s), options: shuffle([d.s, (d.s + 1) % 5, (d.s + 3) % 5], i + 7).map((x) => ({ key: String(x), label: kit.t(SOLIDS[x].np, SOLIDS[x].en) })) };
+  const kit = useSimKit({
+    code: 'SIM-MATH-G3-L11-01',
+    chapter: 11,
+    titleNp: 'सतह अन्वेषक (ज्यामितीय आकार)',
+    titleEn: 'Face Explorer (Geometrical Shapes)',
   });
-  questions.forEach((q) => { if (!q.options.some((o) => o.key === q.answer)) { const a = q.answer as keyof typeof NAMES; q.options[0] = { key: q.answer, label: kit.t(NAMES[a][0], NAMES[a][1]) }; } });
 
-  const S = SOLIDS[sel];
-  const hud = kit.mode === 'CHALLENGE' ? null : (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #6366f1', textAlign: 'center', maxWidth: 320 }}>
-      <div style={{ fontSize: 22, fontWeight: 900 }}>{kit.t(S.np, S.en)}</div><div style={{ fontSize: 14, fontWeight: 700 }}>{kit.t(S.info[0], S.info[1])}</div>
-    </div>
+  const [solidIdx, setSolidIdx] = useState(0);
+  const [unfold, setUnfold] = useState(1); // 0 = folded 3D-iso, 1 = unrolled 2D net
+  const [selectedPiece, setSelectedPiece] = useState<string | null>(null);
+
+  const solid = SOLIDS[solidIdx];
+
+  const choose = (idx: number) => {
+    setSolidIdx(idx);
+    setSelectedPiece(null);
+    kit.tap();
+    kit.say(`${SOLIDS[idx].np} — ${SOLIDS[idx].infoNp}`, `${SOLIDS[idx].en} — ${SOLIDS[idx].infoEn}`);
+  };
+
+  const questions: QuizQuestion[] = useMemo(() => {
+    const list: QuizQuestion[] = [];
+    SOLIDS.forEach((s, idx) => {
+      // Question 1: Number of faces
+      list.push({
+        np: `${s.np}मा कतिवटा सतह हुन्छन्?`,
+        en: `How many faces does a ${s.en.toLowerCase()} have?`,
+        answer: String(s.faces),
+        options: shuffle(Array.from(new Set([s.faces, s.faces + 2, Math.max(1, s.faces - 1), 6])), idx).map((v) => ({
+          key: String(v),
+          label: fmt(kit.lang, v),
+        })),
+      });
+      // Question 2: Edges or Vertices
+      list.push({
+        np: `${s.np}मा कतिवटा किनार (Edges) हुन्छन्?`,
+        en: `How many edges does a ${s.en.toLowerCase()} have?`,
+        answer: String(s.edges),
+        options: shuffle(Array.from(new Set([s.edges, s.edges + 4, Math.max(0, s.edges - 2), 12])), idx + 5).map((v) => ({
+          key: String(v),
+          label: fmt(kit.lang, v),
+        })),
+      });
+    });
+    return list;
+  }, [kit.lang]);
+
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      mascotGreeting={kit.t(
+        'आकारहरू खोलेर तिनका समतल र घुमाउरो सतहहरू (Net) हेरौँ!',
+        'Unfold 3D shapes to explore their 2D nets and flat faces!'
+      )}
+      questions={questions}
+      onAskQuestion={(q) => {
+        // Find matching solid for this quiz question
+        const sIdx = SOLIDS.findIndex((s) => q.np.includes(s.np));
+        if (sIdx !== -1) setSolidIdx(sIdx);
+      }}
+      controls={
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
+          {/* Solid Switcher */}
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
+            {SOLIDS.map((s, i) => (
+              <button
+                key={s.id}
+                onClick={() => choose(i)}
+                style={{
+                  padding: '9px 16px',
+                  borderRadius: 12,
+                  border: i === solidIdx ? '2px solid #187C68' : '1px solid #CBD5E1',
+                  background: i === solidIdx ? '#E6F3E9' : '#FFFFFF',
+                  color: i === solidIdx ? '#187C68' : '#334155',
+                  fontWeight: 800,
+                  fontSize: 14,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: i === solidIdx ? '0 2px 8px rgba(24,124,104,0.15)' : 'none',
+                }}
+              >
+                {kit.t(s.np, s.en)}
+              </button>
+            ))}
+          </div>
+
+          {/* Fold / Unfold Switcher */}
+          <div style={{ display: 'flex', gap: 10, justifyContent: 'center', alignItems: 'center' }}>
+            <button
+              onClick={() => {
+                setUnfold(0);
+                kit.tap();
+                kit.say('बन्द अवस्था (३D आकार)', 'Folded 3D shape view');
+              }}
+              style={{
+                padding: '8px 16px',
+                borderRadius: 10,
+                border: 'none',
+                background: unfold === 0 ? '#187C68' : '#F1F5F9',
+                color: unfold === 0 ? '#FFFFFF' : '#475569',
+                fontWeight: 700,
+                fontSize: 13,
+                cursor: 'pointer',
+              }}
+            >
+              📦 {kit.t('बन्द आकार (३D)', 'Folded Solid')}
+            </button>
+            <button
+              onClick={() => {
+                setUnfold(1);
+                kit.tap();
+                kit.say('खोलेको अवस्था (२D जाली / Net)', 'Unfolded 2D net view');
+              }}
+              style={{
+                padding: '8px 16px',
+                borderRadius: 10,
+                border: 'none',
+                background: unfold === 1 ? '#187C68' : '#F1F5F9',
+                color: unfold === 1 ? '#FFFFFF' : '#475569',
+                fontWeight: 700,
+                fontSize: 13,
+                cursor: 'pointer',
+              }}
+            >
+              📄 {kit.t('खोलेको जाली (२D Net)', 'Unfolded Net')}
+            </button>
+          </div>
+        </div>
+      }
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 760, gap: 16 }}>
+        {/* Solid Summary Card */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            width: '100%',
+            background: '#FFFFFF',
+            border: '2px solid #E2E8F0',
+            borderRadius: 16,
+            padding: '12px 20px',
+            boxShadow: '0 4px 14px rgba(0,0,0,0.04)',
+          }}
+        >
+          <div>
+            <div style={{ fontSize: 22, fontWeight: 900, color: '#187C68' }}>{kit.t(solid.np, solid.en)}</div>
+            <div style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>{kit.t(solid.infoNp, solid.infoEn)}</div>
+          </div>
+          <div style={{ display: 'flex', gap: 16, textAlign: 'center' }}>
+            <div style={{ background: '#F8FAFC', padding: '6px 12px', borderRadius: 10, border: '1px solid #CBD5E1' }}>
+              <div style={{ fontSize: 18, fontWeight: 900, color: '#2563EB' }}>{fmt(kit.lang, solid.faces)}</div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#64748B' }}>{kit.t('सतह (Faces)', 'Faces')}</div>
+            </div>
+            <div style={{ background: '#F8FAFC', padding: '6px 12px', borderRadius: 10, border: '1px solid #CBD5E1' }}>
+              <div style={{ fontSize: 18, fontWeight: 900, color: '#10B981' }}>{fmt(kit.lang, solid.edges)}</div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#64748B' }}>{kit.t('किनार (Edges)', 'Edges')}</div>
+            </div>
+            <div style={{ background: '#F8FAFC', padding: '6px 12px', borderRadius: 10, border: '1px solid #CBD5E1' }}>
+              <div style={{ fontSize: 18, fontWeight: 900, color: '#F59E0B' }}>{fmt(kit.lang, solid.vertices)}</div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#64748B' }}>{kit.t('शिरविन्दु (Vertices)', 'Vertices')}</div>
+            </div>
+          </div>
+        </div>
+
+        {/* 2D Canvas Area */}
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            minHeight: 320,
+            background: '#FFFFFF',
+            borderRadius: 20,
+            border: '2px solid #E2E8F0',
+            boxShadow: '0 6px 18px rgba(0,0,0,0.03)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
+          }}
+        >
+          {unfold === 1 ? (
+            /* 2D Unfolded Net */
+            <svg viewBox="0 0 460 300" style={{ width: '100%', maxHeight: 340, touchAction: 'manipulation' }}>
+              {/* Background grid */}
+              <defs>
+                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F1F5F9" strokeWidth="1" />
+                </pattern>
+              </defs>
+              <rect width="460" height="300" fill="url(#grid)" />
+
+              {/* Net Pieces */}
+              {solid.netPieces.map((p) => {
+                const isSel = selectedPiece === p.id;
+                const stroke = isSel ? '#1E293B' : '#475569';
+                const strokeWidth = isSel ? 3.5 : 1.5;
+
+                const handleClick = () => {
+                  setSelectedPiece(p.id);
+                  kit.tap();
+                  kit.say(p.nameNp, p.nameEn);
+                };
+
+                if (p.shape === 'rect') {
+                  return (
+                    <g key={p.id} onClick={handleClick} style={{ cursor: 'pointer' }}>
+                      <rect
+                        x={p.x}
+                        y={p.y}
+                        width={p.w}
+                        height={p.h}
+                        fill={p.color}
+                        stroke={stroke}
+                        strokeWidth={strokeWidth}
+                        rx="4"
+                        style={{ filter: isSel ? 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' : 'none' }}
+                      />
+                      <text
+                        x={(p.x ?? 0) + (p.w ?? 0) / 2}
+                        y={(p.y ?? 0) + (p.h ?? 0) / 2 + 5}
+                        textAnchor="middle"
+                        fill="#FFFFFF"
+                        fontWeight="900"
+                        fontSize="14"
+                      >
+                        {p.label}
+                      </text>
+                    </g>
+                  );
+                }
+                if (p.shape === 'circle') {
+                  return (
+                    <g key={p.id} onClick={handleClick} style={{ cursor: 'pointer' }}>
+                      <circle
+                        cx={p.x}
+                        cy={p.y}
+                        r={p.r}
+                        fill={p.color}
+                        stroke={stroke}
+                        strokeWidth={strokeWidth}
+                        style={{ filter: isSel ? 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' : 'none' }}
+                      />
+                      <text
+                        x={p.x}
+                        y={(p.y ?? 0) + 4}
+                        textAnchor="middle"
+                        fill="#FFFFFF"
+                        fontWeight="900"
+                        fontSize="12"
+                      >
+                        {p.label}
+                      </text>
+                    </g>
+                  );
+                }
+                if (p.shape === 'polygon') {
+                  return (
+                    <g key={p.id} onClick={handleClick} style={{ cursor: 'pointer' }}>
+                      <polygon
+                        points={p.pts}
+                        fill={p.color}
+                        stroke={stroke}
+                        strokeWidth={strokeWidth}
+                        style={{ filter: isSel ? 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' : 'none' }}
+                      />
+                      <text
+                        x={p.x}
+                        y={(p.y ?? 0) + 4}
+                        textAnchor="middle"
+                        fill="#FFFFFF"
+                        fontWeight="900"
+                        fontSize="12"
+                      >
+                        {p.label}
+                      </text>
+                    </g>
+                  );
+                }
+                return null;
+              })}
+
+              <text x="20" y="285" fill="#94A3B8" fontSize="12" fontWeight="700">
+                {kit.t('सतहमा ट्याप गरेर विवरण हेर्नुहोस्', 'Tap any face to inspect it')}
+              </text>
+            </svg>
+          ) : (
+            /* 2D Isometric Projections with shaded faces */
+            <svg viewBox="0 0 400 280" style={{ width: '100%', maxHeight: 320 }}>
+              {solid.id === 'cube' && (
+                <g transform="translate(140, 60)">
+                  {/* Top face */}
+                  <polygon points="60,0 120,30 60,60 0,30" fill="#F87171" stroke="#B91C1C" strokeWidth="2" />
+                  {/* Left face */}
+                  <polygon points="0,30 60,60 60,130 0,100" fill="#FB923C" stroke="#C2410C" strokeWidth="2" />
+                  {/* Right face */}
+                  <polygon points="60,60 120,30 120,100 60,130" fill="#FBBF24" stroke="#B45309" strokeWidth="2" />
+                  {/* Vertex labels */}
+                  <circle cx="60" cy="0" r="4" fill="#1E293B" />
+                  <circle cx="120" cy="30" r="4" fill="#1E293B" />
+                  <circle cx="0" cy="30" r="4" fill="#1E293B" />
+                  <circle cx="60" cy="60" r="4" fill="#1E293B" />
+                  <circle cx="60" cy="130" r="4" fill="#1E293B" />
+                  <circle cx="0" cy="100" r="4" fill="#1E293B" />
+                  <circle cx="120" cy="100" r="4" fill="#1E293B" />
+                  <text x="60" y="160" textAnchor="middle" fill="#334155" fontWeight="800" fontSize="16">
+                    {kit.t('घन (Cube)', 'Cube')}
+                  </text>
+                </g>
+              )}
+              {solid.id === 'cuboid' && (
+                <g transform="translate(130, 60)">
+                  {/* Top face */}
+                  <polygon points="70,0 150,30 80,60 0,30" fill="#38BDF8" stroke="#0284C7" strokeWidth="2" />
+                  {/* Left face */}
+                  <polygon points="0,30 80,60 80,120 0,90" fill="#4ADE80" stroke="#16A34A" strokeWidth="2" />
+                  {/* Right face */}
+                  <polygon points="80,60 150,30 150,90 80,120" fill="#F472B6" stroke="#DB2777" strokeWidth="2" />
+                  <text x="75" y="150" textAnchor="middle" fill="#334155" fontWeight="800" fontSize="16">
+                    {kit.t('घनाभ (Cuboid)', 'Cuboid')}
+                  </text>
+                </g>
+              )}
+              {solid.id === 'cylinder' && (
+                <g transform="translate(150, 40)">
+                  {/* Curved body */}
+                  <rect x="0" y="30" width="100" height="110" fill="#38BDF8" stroke="#0284C7" strokeWidth="2" />
+                  {/* Top ellipse */}
+                  <ellipse cx="50" cy="30" rx="50" ry="20" fill="#F87171" stroke="#B91C1C" strokeWidth="2" />
+                  {/* Bottom ellipse */}
+                  <ellipse cx="50" cy="140" rx="50" ry="20" fill="#34D399" stroke="#059669" strokeWidth="2" />
+                  <text x="50" y="185" textAnchor="middle" fill="#334155" fontWeight="800" fontSize="16">
+                    {kit.t('बेलना (Cylinder)', 'Cylinder')}
+                  </text>
+                </g>
+              )}
+              {solid.id === 'cone' && (
+                <g transform="translate(150, 45)">
+                  {/* Base ellipse */}
+                  <ellipse cx="50" cy="130" rx="50" ry="18" fill="#FBBF24" stroke="#B45309" strokeWidth="2" />
+                  {/* Cone triangle */}
+                  <path d="M 0 130 L 50 10 L 100 130 Z" fill="#A78BFA" fillOpacity="0.85" stroke="#7C3AED" strokeWidth="2" />
+                  <circle cx="50" cy="10" r="5" fill="#EF4444" />
+                  <text x="50" y="175" textAnchor="middle" fill="#334155" fontWeight="800" fontSize="16">
+                    {kit.t('शङ्कु (Cone)', 'Cone')}
+                  </text>
+                </g>
+              )}
+              {solid.id === 'pyramid' && (
+                <g transform="translate(140, 50)">
+                  {/* Front-left triangle */}
+                  <polygon points="60,10 0,110 60,130" fill="#FB923C" stroke="#EA580C" strokeWidth="2" />
+                  {/* Front-right triangle */}
+                  <polygon points="60,10 60,130 120,110" fill="#F87171" stroke="#DC2626" strokeWidth="2" />
+                  <circle cx="60" cy="10" r="5" fill="#EF4444" />
+                  <text x="60" y="160" textAnchor="middle" fill="#334155" fontWeight="800" fontSize="16">
+                    {kit.t('पिरामिड (Pyramid)', 'Pyramid')}
+                  </text>
+                </g>
+              )}
+            </svg>
+          )}
+        </div>
+      </div>
+    </SimFrame2D>
   );
-  const picker = SOLIDS.map((s, i) => <CBtn key={s.id} color={i === sel ? '#6366f1' : '#94a3b8'} style={{ minHeight: 44, padding: '6px 12px', fontSize: 15 }} onClick={() => choose(i)}>{kit.t(s.np, s.en)}</CBtn>);
-  const panel = kit.mode === 'CHALLENGE' ? <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => { setSel(q.s); scene.current?.show(q.s); scene.current?.explode(true); }} /> : (
-    <Controls>{picker}<CBtn color="#16a34a" onClick={toggle}>{open ? '🔒' : '🔓'} {open ? kit.t('बन्द गर', 'Close up') : kit.t('खोलेर हेर', 'Open up')}</CBtn></Controls>
-  );
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
 };
+export default FaceExplorer;

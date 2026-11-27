@@ -205,8 +205,8 @@ export const MakeTenChallenge: React.FC<Props> = ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)',
-        color: '#0f172a',
+        background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
+        color: '#26332E',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -217,7 +217,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgba(255, 255, 255, 0.95)',
+          background: 'rgba(255,255,255,0.9)',
           borderBottom: '1px solid rgba(129, 140, 248, 0.3)',
         }}
       >
@@ -229,10 +229,10 @@ export const MakeTenChallenge: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '10px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 600,
               fontSize: '14px',
@@ -243,10 +243,10 @@ export const MakeTenChallenge: React.FC<Props> = ({
           </button>
 
           <div>
-            <div style={{ fontSize: '11px', color: '#a5b4fc', textTransform: 'uppercase', fontWeight: 800 }}>
+            <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
               कक्षा १ • गणित • अध्याय ६ : दश (Ten)
             </div>
-            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#f0fdfa' }}>
+            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
                 ? 'सिमुलेसन ०३: दश बनाऔँ (Make Ten Challenge)'
                 : 'Simulation 03: Make Ten Challenge'}
@@ -265,7 +265,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
               border: '1px solid rgba(245, 158, 11, 0.4)',
               padding: '6px 14px',
               borderRadius: '20px',
-              color: '#fef08a',
+              color: '#26332E',
               fontWeight: 800,
             }}
           >
@@ -277,10 +277,10 @@ export const MakeTenChallenge: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: '#e2e8f0',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 700,
               fontSize: '13px',
@@ -293,10 +293,10 @@ export const MakeTenChallenge: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: soundEnabled ? '#a5b4fc' : '#94a3b8',
+              color: soundEnabled ? '#a5b4fc' : '#26332E',
               cursor: 'pointer',
             }}
           >
@@ -312,7 +312,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '12px',
           padding: '12px 16px',
-          background: '#f8fafc',
+          background: 'rgba(255,255,255,0.9)',
           borderBottom: '1px solid rgba(129, 140, 248, 0.2)',
         }}
       >
@@ -322,8 +322,8 @@ export const MakeTenChallenge: React.FC<Props> = ({
             padding: '8px 20px',
             borderRadius: '12px',
             border: activeMode === 'EXPLORE_PAIRS' ? '2px solid #a5b4fc' : '1px solid rgba(255, 255, 255, 0.15)',
-            background: activeMode === 'EXPLORE_PAIRS' ? 'rgba(79, 70, 229, 0.8)' : 'rgba(30, 41, 59, 0.6)',
-            color: '#ffffff',
+            background: activeMode === 'EXPLORE_PAIRS' ? 'rgba(79, 70, 229, 0.8)' : '#F1F5F9',
+            color: '#26332E',
             fontWeight: 800,
             fontSize: '13px',
             cursor: 'pointer',
@@ -338,8 +338,8 @@ export const MakeTenChallenge: React.FC<Props> = ({
             padding: '8px 20px',
             borderRadius: '12px',
             border: activeMode === 'SOLVE_PUZZLE' ? '2px solid #a5b4fc' : '1px solid rgba(255, 255, 255, 0.15)',
-            background: activeMode === 'SOLVE_PUZZLE' ? 'rgba(79, 70, 229, 0.8)' : 'rgba(30, 41, 59, 0.6)',
-            color: '#ffffff',
+            background: activeMode === 'SOLVE_PUZZLE' ? 'rgba(79, 70, 229, 0.8)' : '#F1F5F9',
+            color: '#26332E',
             fontWeight: 800,
             fontSize: '13px',
             cursor: 'pointer',
@@ -381,19 +381,19 @@ export const MakeTenChallenge: React.FC<Props> = ({
             <div
               style={{
                 textAlign: 'center',
-                background: '#f8fafc',
+                background: 'rgba(255,255,255,0.9)',
                 padding: '16px 32px',
                 borderRadius: '20px',
                 border: '2px solid rgba(129, 140, 248, 0.4)',
               }}
             >
-              <div style={{ fontSize: '13px', color: '#a5b4fc', fontWeight: 800 }}>
+              <div style={{ fontSize: '13px', color: '#26332E', fontWeight: 800 }}>
                 {language === 'np' ? 'दश बनाउने जोड (Combinations that make 10)' : 'Combinations of 10'}
               </div>
-              <div style={{ fontSize: '32px', fontWeight: 900, color: '#facc15', marginTop: '4px' }}>
+              <div style={{ fontSize: '32px', fontWeight: 900, color: '#26332E', marginTop: '4px' }}>
                 {formatNum(basketACount)} + {formatNum(basketBCount)} = {formatNum(10)}
               </div>
-              <div style={{ fontSize: '13px', color: '#475569', marginTop: '4px' }}>
+              <div style={{ fontSize: '13px', color: '#26332E', marginTop: '4px' }}>
                 {language === 'np'
                   ? `${formatName(basketACount)} र ${formatName(basketBCount)} मिलेर दश हुन्छ।`
                   : `${formatName(basketACount)} and ${formatName(basketBCount)} make Ten.`}
@@ -408,7 +408,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                   width: '320px',
                   height: '240px',
                   borderRadius: '24px',
-                  background: '#f8fafc',
+                  background: 'rgba(255,255,255,0.9)',
                   border: '3px solid #38bdf8',
                   padding: '20px',
                   display: 'flex',
@@ -418,7 +418,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                   boxShadow: '0 12px 28px rgba(0,0,0,0.3)',
                 }}
               >
-                <div style={{ fontSize: '16px', fontWeight: 800, color: '#38bdf8' }}>
+                <div style={{ fontSize: '16px', fontWeight: 800, color: '#26332E' }}>
                   {language === 'np' ? `टोकरी १: ${formatNum(basketACount)} स्याउ` : `Basket 1: ${basketACount} Apples`}
                 </div>
 
@@ -431,7 +431,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                   ))}
                 </div>
 
-                <div style={{ fontSize: '24px', fontWeight: 900, color: '#fef08a' }}>
+                <div style={{ fontSize: '24px', fontWeight: 900, color: '#26332E' }}>
                   {formatNum(basketACount)}
                 </div>
               </div>
@@ -487,7 +487,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                   width: '320px',
                   height: '240px',
                   borderRadius: '24px',
-                  background: '#f8fafc',
+                  background: 'rgba(255,255,255,0.9)',
                   border: '3px solid #f472b6',
                   padding: '20px',
                   display: 'flex',
@@ -510,7 +510,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                   ))}
                 </div>
 
-                <div style={{ fontSize: '24px', fontWeight: 900, color: '#fef08a' }}>
+                <div style={{ fontSize: '24px', fontWeight: 900, color: '#26332E' }}>
                   {formatNum(basketBCount)}
                 </div>
               </div>
@@ -535,9 +535,9 @@ export const MakeTenChallenge: React.FC<Props> = ({
                   style={{
                     padding: '8px 14px',
                     borderRadius: '10px',
-                    background: basketACount === p.a ? '#059669' : 'rgba(30, 41, 59, 0.8)',
-                    border: '1px solid #e2e8f0',
-                    color: '#ffffff',
+                    background: basketACount === p.a ? '#059669' : '#F1F5F9',
+                    border: '1px solid #DCE5DE',
+                    color: '#26332E',
                     fontWeight: 800,
                     fontSize: '13px',
                     cursor: 'pointer',
@@ -564,12 +564,12 @@ export const MakeTenChallenge: React.FC<Props> = ({
             }}
           >
             <div style={{ textAlign: 'center' }}>
-              <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 900, color: '#fef08a' }}>
+              <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 900, color: '#26332E' }}>
                 {language === 'np'
                   ? `${formatNum(puzzles[puzzleIndex].givenA)} मा कति जोड्दा १० हुन्छ?`
                   : `What number added to ${puzzles[puzzleIndex].givenA} makes 10?`}
               </h2>
-              <p style={{ margin: '6px 0 0', fontSize: '13px', color: '#a5b4fc' }}>
+              <p style={{ margin: '6px 0 0', fontSize: '13px', color: '#26332E' }}>
                 {language === 'np'
                   ? `प्रश्न ${puzzleIndex + 1} / ${puzzles.length}`
                   : `Question ${puzzleIndex + 1} of ${puzzles.length}`}
@@ -582,21 +582,21 @@ export const MakeTenChallenge: React.FC<Props> = ({
                 display: 'flex',
                 alignItems: 'center',
                 gap: '16px',
-                background: '#f8fafc',
+                background: 'rgba(255,255,255,0.9)',
                 padding: '20px 32px',
                 borderRadius: '20px',
                 border: '2px solid rgba(129, 140, 248, 0.4)',
               }}
             >
-              <span style={{ fontSize: '42px', fontWeight: 900, color: '#38bdf8' }}>
+              <span style={{ fontSize: '42px', fontWeight: 900, color: '#26332E' }}>
                 {formatNum(puzzles[puzzleIndex].givenA)}
               </span>
-              <span style={{ fontSize: '32px', fontWeight: 900, color: '#ffffff' }}>+</span>
+              <span style={{ fontSize: '32px', fontWeight: 900, color: '#26332E' }}>+</span>
               <span
                 style={{
                   fontSize: '42px',
                   fontWeight: 900,
-                  color: selectedPuzzleChoice !== null ? '#facc15' : '#94a3b8',
+                  color: selectedPuzzleChoice !== null ? '#facc15' : '#26332E',
                   borderBottom: '3px dashed #facc15',
                   minWidth: '50px',
                   textAlign: 'center',
@@ -604,7 +604,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
               >
                 {selectedPuzzleChoice !== null ? formatNum(selectedPuzzleChoice) : '?'}
               </span>
-              <span style={{ fontSize: '32px', fontWeight: 900, color: '#ffffff' }}>=</span>
+              <span style={{ fontSize: '32px', fontWeight: 900, color: '#26332E' }}>=</span>
               <span style={{ fontSize: '42px', fontWeight: 900, color: '#22c55e' }}>
                 {formatNum(10)}
               </span>
@@ -626,9 +626,9 @@ export const MakeTenChallenge: React.FC<Props> = ({
                         ? opt === puzzles[puzzleIndex].neededB
                           ? '#10b981'
                           : '#ef4444'
-                        : 'rgba(30, 41, 59, 0.85)',
+                        : '#F1F5F9',
                     border: '2px solid rgba(129, 140, 248, 0.4)',
-                    color: '#ffffff',
+                    color: '#26332E',
                     fontSize: '34px',
                     fontWeight: 900,
                     cursor: selectedPuzzleChoice !== null ? 'default' : 'pointer',

@@ -379,7 +379,7 @@ export const AssignmentStudioModal: React.FC<AssignmentStudioModalProps> = ({
         position: 'fixed',
         inset: 0,
         zIndex: 9990,
-        background: 'rgba(14, 62, 59, 0.75)',
+        background: 'rgba(15,23,42, 0.75)',
         backdropFilter: 'blur(5px)',
         display: 'flex',
         alignItems: 'center',
@@ -1542,7 +1542,7 @@ export const AssignmentStudioModal: React.FC<AssignmentStudioModalProps> = ({
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                boxShadow: '0 4px 6px -1px rgba(17, 122, 107, 0.25)',
+                boxShadow: '0 4px 6px -1px rgba(234,88,12, 0.25)',
               }}
             >
               <Rocket size={15} />

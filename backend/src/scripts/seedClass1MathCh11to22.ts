@@ -1,5 +1,5 @@
 /**
- * Registers the Class 1 Mathematics simulations for chapters 11–22 (the 3D simulations built on the shared kit in
+ * Registers the Class 1 Mathematics simulations for chapters 11–22 (the simulations built on the shared kit in
  * frontend/src/simulations/class1-math-kit). Safe to run again: it updates by `code`.
  *   npm run seed:class1-math-ch11-22
  */
@@ -23,7 +23,7 @@ const SimulationSchema = new mongoose.Schema(
     chapterNumber: Number,
     chapterName: String,
     chapterNameNepali: String,
-    simulationType: { type: String, enum: ['THREE_JS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'], default: 'REACT_CANVAS' },
+    simulationType: { type: String, enum: ['HTML5_CANVAS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'], default: 'REACT_CANVAS' },
     componentKey: String,
     runtimeUrl: String,
     difficulty: { type: String, enum: ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'], default: 'BEGINNER' },
@@ -41,7 +41,7 @@ const Simulation = mongoose.models.Simulation || mongoose.model('Simulation', Si
 interface S { code: string; key: string; ch: number; chEn: string; chNp: string; title: string; titleNp: string; desc: string; descNp: string; obj: string[]; objNp: string[]; tags: string[]; minutes?: number }
 const SIMS: S[] = [
   { code: 'SIM-MATH-G1-CH11-01', key: 'class1-math-ch11-birds', ch: 11, chEn: 'Subtraction of numbers up to 20', chNp: '२० सम्मका सङ्ख्याको घटाउ',
-    title: 'Fly-Away Birds', titleNp: 'चरा उडे!', desc: 'Birds sit on a 3D garden wall. Tap a bird and it flies away, so children see subtraction as taking away. Learn with guided stories, play freely, then take the challenge.',
+    title: 'Fly-Away Birds', titleNp: 'चरा उडे!', desc: 'Birds sit on an interactive garden wall. Tap a bird and it flies away, so children see subtraction as taking away. Learn with guided stories, play freely, then take the challenge.',
     descNp: '३डी पर्खालमा चराहरू बसेका छन्। चरालाई छुँदा उड्छ — यसरी बच्चाले घटाउ भनेको हटाउनु हो भनी देख्छन्।',
     obj: ['Understand subtraction as taking away', 'Subtract within 20 using objects', 'Read and write 15 − 6 = 9'], objNp: ['घटाउ भनेको हटाउनु हो भनी बुझ्ने', 'वस्तुको सहायताले २० भित्रको घटाउ गर्ने', '१५ − ६ = ९ पढ्ने र लेख्ने'], tags: ['Subtraction', 'Take away'] },
   { code: 'SIM-MATH-G1-CH12-01', key: 'class1-math-ch12-pairs', ch: 12, chEn: 'Odd and Even numbers', chNp: 'जोर र बिजोर सङ्ख्या',
@@ -49,11 +49,11 @@ const SIMS: S[] = [
     descNp: 'बलहरू दुई लहरमा बस्छन्। रिबनले जोडी बनाउँदा कोही एक्लो भएन भने जोर, एउटा एक्लो भयो भने बिजोर।',
     obj: ['Make pairs to test a number', 'Tell odd and even numbers up to 20', 'Notice odd/even in the number line'], objNp: ['जोडी बनाएर सङ्ख्या जाँच्ने', '२० सम्म जोर र बिजोर छुट्याउने', 'जोर–बिजोरको ढाँचा चिन्ने'], tags: ['Odd', 'Even', 'Pairs'] },
   { code: 'SIM-MATH-G1-CH13-01', key: 'class1-math-ch13-names', ch: 13, chEn: 'Number names up to 20', chNp: '२० सम्मका सङ्ख्याका नाम',
-    title: 'Number Name Blocks', titleNp: 'सङ्ख्याको नाम बनाऔँ', desc: 'See the amount and the numeral, then tap 3D letter blocks in the right order to spell the number name (one to twenty).',
+    title: 'Number Name Blocks', titleNp: 'सङ्ख्याको नाम बनाऔँ', desc: 'See the amount and the numeral, then tap letter blocks in the right order to spell the number name (one to twenty).',
     descNp: 'सङ्ख्या र वस्तुको मात्रा हेरेर ३डी अक्षर ब्लक क्रमैसँग छोएर सङ्ख्याको नाम बनाउने (one देखि twenty सम्म)।',
     obj: ['Read number names up to twenty', 'Spell number names', 'Match numerals with number names'], objNp: ['२० सम्मका सङ्ख्याका नाम पढ्ने', 'सङ्ख्याका नाम हिज्जे गर्ने', 'अङ्क र नाम मिलाउने'], tags: ['Number names', 'Spelling'] },
   { code: 'SIM-MATH-G1-CH14-01', key: 'class1-math-ch14-race', ch: 14, chEn: 'Ordinal numbers', chNp: 'क्रमसूचक सङ्ख्या',
-    title: 'Race Day', titleNp: 'दौड प्रतियोगिता', desc: 'Ten animal friends race on a 3D track. Their finishing order teaches 1st, 2nd, 3rd up to 10th. Tap an animal to hear its place.',
+    title: 'Race Day', titleNp: 'दौड प्रतियोगिता', desc: 'Ten animal friends race on an interactive track. Their finishing order teaches 1st, 2nd, 3rd up to 10th. Tap an animal to hear its place.',
     descNp: 'दस वटा जनावर ३डी ट्र्याकमा दौडिन्छन्। उनीहरू पुगेको क्रमले पहिलो, दोस्रो, तेस्रो … दसौँ सिकाउँछ।',
     obj: ['Use first to tenth', 'Tell the position of an object', 'Match ordinal words with 1st, 2nd, 3rd'], objNp: ['पहिलोदेखि दसौँसम्म प्रयोग गर्ने', 'वस्तुको स्थान भन्ने', 'क्रमसूचक शब्द र १ औँ, २ औँ मिलाउने'], tags: ['Ordinal', 'Position'] },
   { code: 'SIM-MATH-G1-CH15-01', key: 'class1-math-ch15-hundred', ch: 15, chEn: 'Numbers from 21 to 100', chNp: '२१ देखि १०० सम्मका सङ्ख्या',
@@ -69,7 +69,7 @@ const SIMS: S[] = [
     descNp: 'सङ्ख्याबाट ब्लक हटाएर घटाउने। एकाइ नपुगे एउटा दशकलाई १० वटा एकाइमा फुकाउने।',
     obj: ['Subtract 2-digit numbers', 'Understand borrowing (regrouping)', 'Subtract ones before tens'], objNp: ['दुई अङ्कका सङ्ख्या घटाउने', 'सापटी (regrouping) बुझ्ने', 'पहिले एकाइ, पछि दशक घटाउने'], tags: ['Subtraction', 'Borrowing'], minutes: 18 },
   { code: 'SIM-MATH-G1-CH18-01', key: 'class1-math-ch18-cards', ch: 18, chEn: 'Devanagari numerals up to 100', chNp: '१०० सम्मका देवनागरी अङ्क',
-    title: 'Nepali Number Cards', titleNp: 'नेपाली अङ्क कार्ड', desc: 'Flip a 3D card to see 37 become ३७. Play the memory-match game to pair English digits with Nepali digits.',
+    title: 'Nepali Number Cards', titleNp: 'नेपाली अङ्क कार्ड', desc: 'Flip an interactive card to see 37 become ३७. Play the memory-match game to pair English digits with Nepali digits.',
     descNp: '३डी कार्ड पल्टाएर 37 लाई ३७ बन्दै गरेको हेर्ने। अङ्ग्रेजी र नेपाली अङ्क जोडा मिलाउने मेमोरी खेल।',
     obj: ['Read and write Devanagari numerals 0–100', 'Match English and Nepali numerals', 'Name the digits in Nepali'], objNp: ['०–१०० सम्मका देवनागरी अङ्क पढ्ने र लेख्ने', 'अङ्ग्रेजी र नेपाली अङ्क मिलाउने', 'अङ्कहरूको नाम भन्ने'], tags: ['Devanagari', 'Numerals', 'Memory game'] },
   { code: 'SIM-MATH-G1-CH19-01', key: 'class1-math-ch19-week', ch: 19, chEn: 'Time', chNp: 'समय',
@@ -77,11 +77,11 @@ const SIMS: S[] = [
     descNp: 'हप्ताका सात दिनका सात रङ्गीन बेलुन। क्रम सिक्ने, हप्ता गाउने र बारहरू क्रमैसँग मिलाउने।',
     obj: ['Name the seven days', 'Say the first and last day', 'Tell which day comes before and after'], objNp: ['सात वारका नाम भन्ने', 'पहिलो र अन्तिम बार भन्ने', 'अगाडि र पछाडिको बार भन्ने'], tags: ['Days of the week', 'Time'] },
   { code: 'SIM-MATH-G1-CH19-02', key: 'class1-math-ch19-clock', ch: 19, chEn: 'Time', chNp: 'समय',
-    title: 'Clock Tower', titleNp: 'घडी टावर', desc: 'A big 3D clock with a moving sun and moon. Read o\'clock and half past, set the clock yourself and see morning, afternoon, evening and night.',
+    title: 'Clock Tower', titleNp: 'घडी टावर', desc: 'A big clock with a moving sun and moon. Read o\'clock and half past, set the clock yourself and see morning, afternoon, evening and night.',
     descNp: 'सूर्य र चन्द्रमा सर्ने ठूलो ३डी घडी। ठीक बज्ने र साढे बज्ने समय पढ्ने, घडी मिलाउने र बिहान, दिउँसो, साँझ, रात चिन्ने।',
     obj: ['Read the hour and half hour', 'Know the short and long hands', 'Connect time with parts of the day'], objNp: ['घण्टा र आधा घण्टा पढ्ने', 'सानो र ठूलो सुई चिन्ने', 'समयलाई दिनका भागसँग जोड्ने'], tags: ['Clock', 'Time'] },
   { code: 'SIM-MATH-G1-CH20-01', key: 'class1-math-ch20-coins-notes', ch: 20, chEn: 'Coins and Notes', chNp: 'सिक्का र नोट',
-    title: 'Coins and Notes Explorer', titleNp: 'सिक्का र नोट चिनौँ', desc: 'Nepali coins (Rs 1, 2, 5, 10) and notes (Rs 5, 10, 20, 50, 100) on a 3D table. Flip them, hear their value and make an amount.',
+    title: 'Coins and Notes Explorer', titleNp: 'सिक्का र नोट चिनौँ', desc: 'Nepali coins (Rs 1, 2, 5, 10) and notes (Rs 5, 10, 20, 50, 100) on an interactive table. Flip them, hear their value and make an amount.',
     descNp: 'नेपाली सिक्का (१, २, ५, १०) र नोट (५, १०, २०, ५०, १००) ३डी टेबलमा। पल्टाउने, मूल्य सुन्ने र रकम बनाउने।',
     obj: ['Recognise Nepali coins and notes', 'Know the value of each', 'Make an amount with coins and notes'], objNp: ['नेपाली सिक्का र नोट चिन्ने', 'प्रत्येकको मूल्य जान्ने', 'सिक्का र नोटले रकम बनाउने'], tags: ['Money', 'Rupees'] },
   { code: 'SIM-MATH-G1-CH20-02', key: 'class1-math-ch20-toy-shop', ch: 20, chEn: 'Coins and Notes', chNp: 'सिक्का र नोट',
@@ -93,7 +93,7 @@ const SIMS: S[] = [
     descNp: 'पेन्सिल, रिबन वा लौरोको छेउमा घन एकपछि अर्को राखेर लम्बाइ नाप्ने। दुई वस्तु तुलना गरी कुन लामो भन्ने।',
     obj: ['Measure with equal units', 'Compare lengths', 'Use longer and shorter'], objNp: ['बराबर एकाइले नाप्ने', 'लम्बाइ तुलना गर्ने', 'लामो र छोटो प्रयोग गर्ने'], tags: ['Length', 'Measurement'] },
   { code: 'SIM-MATH-G1-CH22-01', key: 'class1-math-ch22-pictograph', ch: 22, chEn: 'Pictograph', chNp: 'चित्रचार्ट',
-    title: 'Fruit Basket Pictograph', titleNp: 'फलफूलको चित्रचार्ट', desc: 'Children vote for a favourite fruit; every vote becomes a fruit picture in a 3D chart. Read the chart: how many, which is most, which is least.',
+    title: 'Fruit Basket Pictograph', titleNp: 'फलफूलको चित्रचार्ट', desc: 'Children vote for a favourite fruit; every vote becomes a fruit picture in an interactive chart. Read the chart: how many, which is most, which is least.',
     descNp: 'बच्चाहरूले मनपर्ने फल रोज्छन्; प्रत्येक मत ३डी चार्टमा फलको चित्र बन्छ। चार्ट पढ्ने: कति, कुन धेरै, कुन कम।',
     obj: ['Make a pictograph from data', 'Read a pictograph', 'Find most, least and total'], objNp: ['तथ्याङ्कबाट चित्रचार्ट बनाउने', 'चित्रचार्ट पढ्ने', 'धेरै, कम र जम्मा पत्ता लगाउने'], tags: ['Pictograph', 'Data'] },
 ];
@@ -105,10 +105,10 @@ async function main() {
       code: s.code, title: s.title, titleNepali: s.titleNp, description: s.desc, descriptionNepali: s.descNp,
       subjectCode: 'MATH', subjectName: 'Mathematics', gradeLevels: [1],
       chapterNumber: s.ch, chapterName: s.chEn, chapterNameNepali: s.chNp,
-      simulationType: 'THREE_JS', componentKey: s.key, runtimeUrl: `/simulations/class1-math/ch${s.ch}/${s.key}`,
+      simulationType: 'HTML5_CANVAS', componentKey: s.key, runtimeUrl: `/simulations/class1-math/ch${s.ch}/${s.key}`,
       difficulty: 'BEGINNER', estimatedDurationMinutes: s.minutes ?? 15,
       learningObjectives: s.obj, learningObjectivesNepali: s.objNp, isPublished: true, currentVersion: '1.0.0',
-      tags: ['Class 1', 'Mathematics', `Chapter ${s.ch}`, ...s.tags, '3D WebGL', 'Learn · Play · Challenge'],
+      tags: ['Class 1', 'Mathematics', `Chapter ${s.ch}`, ...s.tags, 'Learn · Play · Challenge'],
     };
     await Simulation.findOneAndUpdate({ code: s.code }, { $set: doc }, { upsert: true, new: true });
     console.log(`[OK] ${s.code}  ${s.title}`);

@@ -1259,7 +1259,7 @@ export const PrincipalDashboard: React.FC = () => {
                       border: isSelected ? '1px solid #bfeede' : '1px solid transparent',
                       borderLeft: isSelected ? '4px solid #117a6b' : '4px solid transparent',
                       textAlign: 'left',
-                      boxShadow: isSelected ? '0 1px 3px rgba(17, 122, 107, 0.08)' : 'none',
+                      boxShadow: isSelected ? '0 1px 3px rgba(234,88,12, 0.08)' : 'none',
                     }}
                     className={!isSelected ? 'hover:bg-slate-50 hover:text-slate-900' : ''}
                   >
@@ -2918,7 +2918,7 @@ export const PrincipalDashboard: React.FC = () => {
                           gap: '6px',
                           cursor: 'pointer',
                           border: 'none',
-                          boxShadow: '0 2px 4px rgba(17, 122, 107, 0.2)',
+                          boxShadow: '0 2px 4px rgba(234,88,12, 0.2)',
                           transition: 'all 0.15s ease',
                         }}
                       >
@@ -2978,10 +2978,10 @@ export const PrincipalDashboard: React.FC = () => {
                       fontSize: '12px',
                       fontWeight: 700,
                       cursor: 'pointer',
-                      border: announcementSubTab === 'BROADCAST' ? '1px solid #117a6b' : '1px solid #cfdcd8',
-                      background: announcementSubTab === 'BROADCAST' ? '#117a6b' : '#ffffff',
-                      color: announcementSubTab === 'BROADCAST' ? '#ffffff' : '#4b605b',
-                      boxShadow: announcementSubTab === 'BROADCAST' ? '0 2px 4px rgba(17, 122, 107, 0.2)' : 'none',
+                      border: announcementSubTab === 'BROADCAST' ? '1px solid #EA580C' : '1px solid #CBD5E1',
+                      background: announcementSubTab === 'BROADCAST' ? '#EA580C' : '#ffffff',
+                      color: announcementSubTab === 'BROADCAST' ? '#ffffff' : '#475569',
+                      boxShadow: announcementSubTab === 'BROADCAST' ? '0 2px 4px rgba(234,88,12, 0.2)' : 'none',
                       transition: 'all 0.15s ease',
                     }}
                   >
@@ -2996,10 +2996,10 @@ export const PrincipalDashboard: React.FC = () => {
                       fontSize: '12px',
                       fontWeight: 700,
                       cursor: 'pointer',
-                      border: announcementSubTab === 'HISTORY' ? '1px solid #117a6b' : '1px solid #cfdcd8',
-                      background: announcementSubTab === 'HISTORY' ? '#117a6b' : '#ffffff',
-                      color: announcementSubTab === 'HISTORY' ? '#ffffff' : '#4b605b',
-                      boxShadow: announcementSubTab === 'HISTORY' ? '0 2px 4px rgba(17, 122, 107, 0.2)' : 'none',
+                      border: announcementSubTab === 'HISTORY' ? '1px solid #EA580C' : '1px solid #CBD5E1',
+                      background: announcementSubTab === 'HISTORY' ? '#EA580C' : '#ffffff',
+                      color: announcementSubTab === 'HISTORY' ? '#ffffff' : '#475569',
+                      boxShadow: announcementSubTab === 'HISTORY' ? '0 2px 4px rgba(234,88,12, 0.2)' : 'none',
                       transition: 'all 0.15s ease',
                       display: 'flex',
                       alignItems: 'center',
@@ -4096,10 +4096,10 @@ export const PrincipalDashboard: React.FC = () => {
                         fontSize: '12px',
                         fontWeight: 700,
                         cursor: 'pointer',
-                        border: calendarViewMode === 'GRID' ? '1px solid #117a6b' : '1px solid #cfdcd8',
-                        background: calendarViewMode === 'GRID' ? '#117a6b' : '#ffffff',
-                        color: calendarViewMode === 'GRID' ? '#ffffff' : '#4b605b',
-                        boxShadow: calendarViewMode === 'GRID' ? '0 2px 4px rgba(17, 122, 107, 0.2)' : 'none',
+                        border: calendarViewMode === 'GRID' ? '1px solid #EA580C' : '1px solid #CBD5E1',
+                        background: calendarViewMode === 'GRID' ? '#EA580C' : '#ffffff',
+                        color: calendarViewMode === 'GRID' ? '#ffffff' : '#475569',
+                        boxShadow: calendarViewMode === 'GRID' ? '0 2px 4px rgba(234,88,12, 0.2)' : 'none',
                         transition: 'all 0.15s ease',
                       }}
                     >
@@ -4114,10 +4114,10 @@ export const PrincipalDashboard: React.FC = () => {
                         fontSize: '12px',
                         fontWeight: 700,
                         cursor: 'pointer',
-                        border: calendarViewMode === 'LIST' ? '1px solid #117a6b' : '1px solid #cfdcd8',
-                        background: calendarViewMode === 'LIST' ? '#117a6b' : '#ffffff',
-                        color: calendarViewMode === 'LIST' ? '#ffffff' : '#4b605b',
-                        boxShadow: calendarViewMode === 'LIST' ? '0 2px 4px rgba(17, 122, 107, 0.2)' : 'none',
+                        border: calendarViewMode === 'LIST' ? '1px solid #EA580C' : '1px solid #CBD5E1',
+                        background: calendarViewMode === 'LIST' ? '#EA580C' : '#ffffff',
+                        color: calendarViewMode === 'LIST' ? '#ffffff' : '#475569',
+                        boxShadow: calendarViewMode === 'LIST' ? '0 2px 4px rgba(234,88,12, 0.2)' : 'none',
                         transition: 'all 0.15s ease',
                       }}
                     >
@@ -4305,7 +4305,7 @@ export const PrincipalDashboard: React.FC = () => {
                               background: isSelected ? '#117a6b' : '#f4faf8',
                               color: isSelected ? '#ffffff' : '#4b605b',
                               transition: 'all 0.15s ease',
-                              boxShadow: isSelected ? '0 2px 4px rgba(17, 122, 107, 0.2)' : 'none',
+                              boxShadow: isSelected ? '0 2px 4px rgba(234,88,12, 0.2)' : 'none',
                             }}
                           >
                             <span>{m.nameNp}</span>
@@ -5852,7 +5852,7 @@ export const PrincipalDashboard: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '6px',
-                    boxShadow: '0 2px 4px rgba(17, 122, 107, 0.3)',
+                    boxShadow: '0 2px 4px rgba(234,88,12, 0.3)',
                   }}
                 >
                   <Printer size={15} /> Print / Save as PDF (Ctrl+P)

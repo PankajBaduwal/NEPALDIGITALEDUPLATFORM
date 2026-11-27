@@ -184,7 +184,7 @@ export const LineDrawingPlayground: React.FC<Props> = ({
     if (!ctx) return;
 
     // Slate / Playground chalk board background
-    ctx.fillStyle = '#0f172a';
+    ctx.fillStyle = '#FFFDF5';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Subtle wooden slate border
@@ -319,7 +319,7 @@ export const LineDrawingPlayground: React.FC<Props> = ({
       rays.push({
         id: `sun_core`,
         points: circlePoints,
-        color: '#f59e0b',
+        color: '#26332E',
         width: 6,
         type: 'curved',
       });
@@ -881,8 +881,8 @@ export const LineDrawingPlayground: React.FC<Props> = ({
                     handleClear();
                   }}
                   style={{
-                    background: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)',
-                    color: '#ffffff',
+                    background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
+                    color: '#26332E',
                     border: 'none',
                     padding: '10px 20px',
                     borderRadius: '12px',
@@ -902,8 +902,8 @@ export const LineDrawingPlayground: React.FC<Props> = ({
               <button
                 onClick={onBackToLibrary}
                 style={{
-                  background: '#0284c7',
-                  color: '#ffffff',
+                  background: '#FFFFFF',
+                  color: '#26332E',
                   border: 'none',
                   padding: '10px 20px',
                   borderRadius: '12px',

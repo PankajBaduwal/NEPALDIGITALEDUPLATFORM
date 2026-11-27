@@ -1,125 +1,235 @@
 /**
- * Chapter 19 · Time (समय) — reading the clock
- * Clock Tower — a big 3D clock; the sun and moon move across the sky as the hour changes. O'clock and half past.
+ * Chapter 19 · Time (समय - घडी)
+ * Sim 2: Clock Tower (घडी टावर) — Pure 2D Edition
+ * 100% 2D SVG / Interactive Analog Clock – No Three.js/WebGL dependencies.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { useStage, ease } from '../class1-math-kit/useStage';
-import { SimFrame, Controls, CBtn, useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
-import { clockModel, Clock3D, ball, mat, shadowed } from '../class1-math-kit/models';
-import { enName, npName, toNp, shuffle, rnd } from '../class1-math-kit/nepali';
+import React, { useMemo, useState } from 'react';
+import { SimFrame2D } from '../class-math-2d-kit';
+import { useSimKit, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
+import { toNp } from '../class1-math-kit/nepali';
 
-interface Props { onBackToLibrary: () => void; userRole?: string }
-const partOfDay = (h24: number) => (h24 >= 5 && h24 < 12 ? ['बिहान', 'morning', '🌅'] : h24 >= 12 && h24 < 17 ? ['दिउँसो', 'afternoon', '☀️'] : h24 >= 17 && h24 < 20 ? ['साँझ', 'evening', '🌇'] : ['राति', 'night', '🌙']);
+interface Props {
+  onBackToLibrary: () => void;
+  userRole?: string;
+}
+
+const CLOCK_HOURS_NP = ['१२', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०', '११'];
 
 export const ClockTower: React.FC<Props> = ({ onBackToLibrary }) => {
-  const kit = useSimKit({ code: 'SIM-MATH-G1-CH19-02', chapter: 19, titleNp: 'घडी टावर (समय हेरौँ)', titleEn: 'Clock Tower (Telling the Time)' });
-  const [h24, setH24] = useState(9);
-  const [half, setHalf] = useState(false);
-  const [target, setTarget] = useState<{ h: number; half: boolean } | null>(null);
-  const scene = useRef<{ setTime: (h24: number, half: boolean, animate?: boolean) => void } | null>(null);
+  const kit = useSimKit({
+    code: 'SIM-MATH-G1-CH19-02',
+    chapter: 19,
+    titleNp: 'घडी टावर (समय पढौँ)',
+    titleEn: 'Clock Tower (Reading Time)',
+  });
 
-  useStage(kit.stageRef, (ctx) => {
-    const clock: Clock3D = clockModel(2.7);
-    clock.group.position.set(0, 4.4, 0); ctx.scene.add(clock.group);
-    const tower = shadowed(new THREE.Mesh(new THREE.BoxGeometry(3.2, 2.2, 2.2), mat('#c2410c', 0.8))); tower.position.set(0, 1.1, 0); ctx.scene.add(tower);
-    const roof = shadowed(new THREE.Mesh(new THREE.ConeGeometry(2.3, 1.6, 4), mat('#7c2d12', 0.8))); roof.rotation.y = Math.PI / 4; roof.position.set(0, 8.1, 0); ctx.scene.add(roof);
-    const sun = ball('#fde047', 1); (sun.material as THREE.MeshStandardMaterial).emissive.set('#fbbf24'); (sun.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.9; ctx.scene.add(sun);
-    const moon = ball('#e2e8f0', 0.75); (moon.material as THREE.MeshStandardMaterial).emissive.set('#94a3b8'); (moon.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.5; ctx.scene.add(moon);
-    const sky = ctx.scene.background as THREE.Color;
-    const day = new THREE.Color('#bfe6ff'), dusk = new THREE.Color('#fdba74'), night = new THREE.Color('#1e293b');
-    const fog = ctx.scene.fog as THREE.Fog;
-    let cur = { h: 9 };
-    const apply = (hh: number) => {
-      const a = ((hh - 6) / 12) * Math.PI; // 6am = east horizon, 12 noon = top, 6pm = west
-      sun.position.set(-Math.cos(a) * 11, Math.sin(a) * 9 + 0.5, -6); sun.visible = hh >= 5.5 && hh <= 18.5;
-      const b = ((hh - 18 + 24) % 24) / 12 * Math.PI;
-      moon.position.set(-Math.cos(b) * 11, Math.sin(b) * 9 + 0.5, -6); moon.visible = !(hh >= 6.5 && hh <= 17.5);
-      const light = hh >= 7 && hh <= 17 ? 1 : hh >= 5 && hh < 7 ? (hh - 5) / 2 : hh > 17 && hh <= 19 ? 1 - (hh - 17) / 2 : 0;
-      const tint = hh >= 5 && hh < 7 || hh > 17 && hh <= 19 ? dusk : day;
-      sky.copy(night).lerp(light > 0.99 ? day : tint, Math.max(0.0, light));
-      if (hh >= 5 && hh < 7 || hh > 17 && hh <= 19) sky.lerp(dusk, 0.5);
-      fog.color.copy(sky);
-    };
-    const setTime = (hh24: number, half2: boolean, animate = true) => {
-      const to = hh24 + (half2 ? 0.5 : 0);
-      const from = cur.h;
-      let d = to - from; if (Math.abs(d) > 12) d += d > 0 ? -24 : 24;
-      const run = (k: number) => { const v = (from + d * k + 24) % 24; cur.h = v; clock.setTime(Math.floor(v) % 12 || 12, Math.round((v % 1) * 60)); apply(v); };
-      if (!animate) { run(1); return; }
-      ctx.tween(800, run, undefined, ease.inOut);
-    };
-    scene.current = { setTime };
-    setTime(9, false, false);
-    ctx.onFrame((_d, t) => { sun.rotation.y = t; });
-    return () => { scene.current = null; };
-  }, [], { camera: [0, 5.2, 13], target: [0, 4.2, 0], minDistance: 7, maxDistance: 22, ground: 0x86efac });
+  const [hour, setHour] = useState<number>(3);
+  const [minute, setMinute] = useState<number>(0);
 
-  const update = (h: number, hf: boolean, speak = true) => {
-    setH24(h); setHalf(hf); scene.current?.setTime(h, hf);
-    const h12 = h % 12 || 12; const pd = partOfDay(h);
-    if (speak) kit.say(hf ? `साढे ${npName(h12)} बज्यो — ${pd[0]}` : `${npName(h12)} बज्यो — ${pd[0]}`, hf ? `It is half past ${enName(h12)} — ${pd[1]}` : `It is ${enName(h12)} o'clock — ${pd[1]}`);
+  const isNe = kit.lang === 'ne';
+  const L = (np: string, en: string) => (isNe ? np : en);
+
+  const setTime = (h: number, m: number) => {
+    kit.tap();
+    setHour(h);
+    setMinute(m);
+    const mStr = m === 0 ? (isNe ? 'ठीक' : "o'clock") : (isNe ? '३० मिनेट' : 'half past');
+    kit.say(
+      `${toNp(h)} बजेको छ। (${mStr})`,
+      `It is ${h}:${m === 0 ? '00' : '30'}.`
+    );
   };
 
-  useEffect(() => {
-    if (kit.mode === 'LEARN') { update(9, false); }
-    else if (kit.mode === 'PLAY') { newTarget(); }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [kit.mode]);
+  const hourAngle = (hour % 12) * 30 + (minute / 60) * 30;
+  const minuteAngle = minute * 6;
 
-  const newTarget = () => {
-    const t = { h: rnd(1, 12), half: Math.random() < 0.4 };
-    setTarget(t); update(12, false, false);
-    kit.say(t.half ? `घडीमा साढे ${npName(t.h)} बनाऔँ।` : `घडीमा ${npName(t.h)} बजे बनाऔँ।`, t.half ? `Make the clock show half past ${enName(t.h)}.` : `Make the clock show ${enName(t.h)} o'clock.`);
-  };
-  const check = () => {
-    if (!target) return;
-    if ((h24 % 12 || 12) === target.h && half === target.half) { kit.good(); kit.star(); window.setTimeout(newTarget, 1200); }
-    else kit.oops('फेरि हेरौँ — छोटो सुई घण्टा हो', 'Look again — the short hand shows the hour');
-  };
-
-  const data = useMemo(() => Array.from({ length: 8 }, () => {
-    const h = rnd(1, 12), hf = Math.random() < 0.4;
-    const mk = (hh: number, f: boolean) => `${hh}:${f ? '30' : '00'}`;
-    const wrongs = new Set<string>();
-    while (wrongs.size < 2) { const w = mk(rnd(1, 12), Math.random() < 0.4); if (w !== mk(h, hf)) wrongs.add(w); }
-    return { h, hf, opts: shuffle([mk(h, hf), ...Array.from(wrongs)]) };
-  }), []);
-  const label = (s: string) => { const [hh, mm] = s.split(':'); const n = Number(hh); return mm === '30' ? kit.t(`साढे ${toNp(n)}`, `half past ${n}`) : kit.t(`${toNp(n)} बजे`, `${n} o'clock`); };
-  const questions: (QuizQuestion & { h: number; hf: boolean })[] = data.map((d) => ({
-    np: 'घडीमा कति बजेको छ?', en: 'What time does the clock show?', h: d.h, hf: d.hf,
-    answer: `${d.h}:${d.hf ? '30' : '00'}`, options: d.opts.map((o) => ({ key: o, label: label(o) })),
-  }));
-
-  const pd = partOfDay(h24);
-  const hud = (
-    <div style={{ background: 'rgba(255,255,255,.93)', borderRadius: 18, padding: '8px 16px', border: '3px solid #0ea5e9', textAlign: 'center' }}>
-      {kit.mode === 'PLAY' && target
-        ? <div style={{ fontSize: 22, fontWeight: 900 }}>🎯 {target.half ? kit.t(`साढे ${toNp(target.h)}`, `half past ${target.h}`) : kit.t(`${toNp(target.h)} बजे`, `${target.h} o'clock`)}</div>
-        : kit.mode !== 'CHALLENGE' && <>
-          <div style={{ fontSize: 34, fontWeight: 900 }}>{String(h24 % 12 || 12)}:{half ? '30' : '00'}</div>
-          <div style={{ fontSize: 16, fontWeight: 800 }}>{pd[2]} {kit.t(pd[0], pd[1])}</div>
-        </>}
-    </div>
+  const quizQuestions: QuizQuestion[] = useMemo(
+    () => [
+      {
+        np: 'घडीको सानो सुईले के देखाउँछ?',
+        en: 'What does the short hand of the clock show?',
+        options: [
+          { key: 'hour', label: isNe ? 'घण्टा (Hour)' : 'Hour' },
+          { key: 'min', label: isNe ? 'मिनेट (Minute)' : 'Minute' },
+          { key: 'sec', label: isNe ? 'सेकेन्ड (Second)' : 'Second' },
+        ],
+        answer: 'hour',
+      },
+      {
+        np: 'घडीको लामो सुई १२ मा र सानो सुई ४ मा हुँदा कति बज्छ?',
+        en: 'Short hand on 4, long hand on 12. What time is it?',
+        options: [
+          { key: '4', label: isNe ? '४ बजे (4:00)' : '4:00' },
+          { key: '12', label: isNe ? '१२ बजे (12:00)' : '12:00' },
+          { key: '6', label: isNe ? '६ बजे (6:00)' : '6:00' },
+        ],
+        answer: '4',
+      },
+    ],
+    [isNe]
   );
 
-  const hourBtns = (
-    <>
-      <CBtn color="#f59e0b" onClick={() => update((h24 + 23) % 24, half)}>◀ {kit.t('१ घण्टा', '1 hour')}</CBtn>
-      <CBtn color="#f59e0b" onClick={() => update((h24 + 1) % 24, half)}>{kit.t('१ घण्टा', '1 hour')} ▶</CBtn>
-      <CBtn color={half ? '#8b5cf6' : '#94a3b8'} onClick={() => update(h24, !half)}>{half ? kit.t('साढे', 'Half past') : kit.t('ठीक बजे', "O'clock")} ⇄</CBtn>
-    </>
-  );
-  const panel = kit.mode === 'LEARN' ? (
-    <Controls>
-      <div style={{ fontWeight: 800, fontSize: 17, flex: 1, minWidth: 220 }}>{kit.t('सानो सुई घण्टा देखाउँछ, ठूलो सुई मिनेट।', 'The short hand shows the hour. The long hand shows the minutes.')}</div>
-      {hourBtns}
-    </Controls>
-  ) : kit.mode === 'PLAY' ? (
-    <Controls>{hourBtns}<CBtn color="#16a34a" onClick={check}>✓ {kit.t('जाँचौँ', 'Check')}</CBtn><CBtn color="#8b5cf6" onClick={newTarget}>🎲</CBtn></Controls>
-  ) : (
-    <QuizPanel kit={kit} questions={questions} onAsk={(q: any) => update(q.h, q.hf, false)} />
-  );
+  return (
+    <SimFrame2D
+      kit={kit}
+      onBack={onBackToLibrary}
+      grade={1}
+      hud={
+        <div
+          style={{
+            background: '#FFFFFF',
+            border: '2px solid #187C68',
+            borderRadius: 16,
+            padding: '8px 18px',
+            boxShadow: '0 4px 12px rgba(24,124,104,0.15)',
+            fontWeight: 900,
+            fontSize: 22,
+            color: '#187C68',
+          }}
+        >
+          🕒 {isNe ? toNp(hour) : hour}:{minute === 0 ? '००' : '३०'}{' '}
+          <span style={{ fontSize: 16, color: '#64748B' }}>
+            {minute === 0 ? (isNe ? 'बजे' : "o'clock") : (isNe ? 'साढे' : 'half past')}
+          </span>
+        </div>
+      }
+      panel={
+        kit.mode === 'CHALLENGE' ? (
+          <QuizPanel kit={kit} questions={quizQuestions} />
+        ) : (
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>
+              {L('घण्टा रोज्नुहोस्:', 'Select hour:')}
+            </span>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((h) => (
+              <button
+                key={h}
+                onClick={() => setTime(h, minute)}
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: 10,
+                  border: hour === h ? '2px solid #187C68' : '1px solid #CBD5E1',
+                  background: hour === h ? '#187C68' : '#FFFFFF',
+                  color: hour === h ? '#FFFFFF' : '#334155',
+                  fontWeight: 900,
+                  fontSize: 14,
+                  cursor: 'pointer',
+                }}
+              >
+                {isNe ? toNp(h) : h}
+              </button>
+            ))}
 
-  return <SimFrame kit={kit} onBack={onBackToLibrary} hud={hud} panel={panel} />;
+            <div style={{ display: 'flex', gap: 6, marginLeft: 'auto' }}>
+              <button
+                onClick={() => setTime(hour, 0)}
+                style={{
+                  padding: '8px 14px',
+                  borderRadius: 10,
+                  border: minute === 0 ? '2px solid #187C68' : '1px solid #CBD5E1',
+                  background: minute === 0 ? '#E6F3E9' : '#FFFFFF',
+                  color: minute === 0 ? '#187C68' : '#334155',
+                  fontWeight: 900,
+                  fontSize: 13,
+                  cursor: 'pointer',
+                }}
+              >
+                :00 {L('(ठीक)', "(o'clock)")}
+              </button>
+              <button
+                onClick={() => setTime(hour, 30)}
+                style={{
+                  padding: '8px 14px',
+                  borderRadius: 10,
+                  border: minute === 30 ? '2px solid #187C68' : '1px solid #CBD5E1',
+                  background: minute === 30 ? '#E6F3E9' : '#FFFFFF',
+                  color: minute === 30 ? '#187C68' : '#334155',
+                  fontWeight: 900,
+                  fontSize: 13,
+                  cursor: 'pointer',
+                }}
+              >
+                :30 {L('(साढे)', '(half past)')}
+              </button>
+            </div>
+          </div>
+        )
+      }
+    >
+      {/* ── 2D SVG Analog Clock ───────────────────────────────── */}
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: 460,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 24,
+          background: 'linear-gradient(180deg, #E0F2FE 0%, #F5F7F5 60%)',
+        }}
+      >
+        <svg
+          width="320"
+          height="320"
+          viewBox="0 0 320 320"
+          style={{ filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.12))' }}
+        >
+          {/* Outer Rim */}
+          <circle cx="160" cy="160" r="150" fill="#187C68" />
+          <circle cx="160" cy="160" r="140" fill="#FFFFFF" />
+
+          {/* 12 Hour Numbers */}
+          {Array.from({ length: 12 }, (_, i) => {
+            const hNum = i === 0 ? 12 : i;
+            const angle = (hNum * 30 * Math.PI) / 180;
+            const x = 160 + 110 * Math.sin(angle);
+            const y = 160 - 110 * Math.cos(angle);
+
+            return (
+              <text
+                key={hNum}
+                x={x}
+                y={y + 7}
+                textAnchor="middle"
+                fill="#1E293B"
+                fontSize="22"
+                fontWeight="900"
+                fontFamily="'Mukta', sans-serif"
+              >
+                {isNe ? toNp(hNum) : hNum}
+              </text>
+            );
+          })}
+
+          {/* Short Hour Hand */}
+          <line
+            x1="160"
+            y1="160"
+            x2={160 + 65 * Math.sin((hourAngle * Math.PI) / 180)}
+            y2={160 - 65 * Math.cos((hourAngle * Math.PI) / 180)}
+            stroke="#187C68"
+            strokeWidth="8"
+            strokeLinecap="round"
+          />
+
+          {/* Long Minute Hand */}
+          <line
+            x1="160"
+            y1="160"
+            x2={160 + 95 * Math.sin((minuteAngle * Math.PI) / 180)}
+            y2={160 - 95 * Math.cos((minuteAngle * Math.PI) / 180)}
+            stroke="#EF4444"
+            strokeWidth="5"
+            strokeLinecap="round"
+          />
+
+          {/* Center Pivot */}
+          <circle cx="160" cy="160" r="8" fill="#187C68" />
+        </svg>
+      </div>
+    </SimFrame2D>
+  );
 };

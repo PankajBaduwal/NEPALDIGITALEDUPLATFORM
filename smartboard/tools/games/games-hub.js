@@ -97,6 +97,7 @@ const GamesHub = (() => {
     sequence: svg('<circle cx="5" cy="6" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="18" r="2"/><path d="M6.6 7.6l3.8 3.2M13.6 13.2l3.8 3.2"/>'),
     spot: svg('<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.4-4.4"/>'),
     race: svg('<path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/>'),
+    tugofwar: svg('<path d="M3 12h18"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/><path d="M6 8l-3 4 3 4M18 8l3 4-3 4"/>'),
     boardgame: svg('<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/><circle cx="9" cy="15" r="1" fill="currentColor"/><circle cx="15" cy="15" r="1" fill="currentColor"/>'),
     circle: svg('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/>')
   };
@@ -236,17 +237,21 @@ const GamesHub = (() => {
     const grid = h('div', { class: 'gm-grid' }, list.map((g) => {
       const ready = !!registry[g.id];
       return h('article', { class: 'gm-card', 'data-game': g.id }, [
-        h('div', { class: 'gm-card-icon', 'aria-hidden': 'true', html: GAME_ICONS[g.id] || UI_ICONS.play }),
+        h('div', { class: 'gm-card-top' }, [
+          h('div', { class: 'gm-card-icon', 'aria-hidden': 'true', html: GAME_ICONS[g.id] || UI_ICONS.play }),
+          h('span', { class: 'gm-tag', text: g.category })
+        ]),
         h('div', { class: 'gm-card-body' }, [
-          h('span', { class: 'gm-tag', text: g.category }),
           h('h3', { class: 'gm-card-title', text: g.name }),
           h('p', { class: 'gm-card-desc', text: g.desc })
         ]),
-        h('button', { type: 'button', class: 'gm-btn gm-primary gm-play', disabled: !ready, 'aria-label': `Play ${g.name}`, on: { click: () => launch(g.id) } }, ready ? [icon(UI_ICONS.play, 'gm-ic-play'), h('span', { text: 'Play' })] : [h('span', { text: 'Coming soon' })])
+        h('div', { class: 'gm-card-foot' }, [
+          h('button', { type: 'button', class: 'gm-btn gm-play', disabled: !ready, 'aria-label': `Play ${g.name}`, on: { click: () => launch(g.id) } }, ready ? [icon(UI_ICONS.play, 'gm-ic-play'), h('span', { text: 'Play' })] : [h('span', { text: 'Coming soon' })])
+        ])
       ]);
     }));
     els.main.replaceChildren(h('div', { class: 'gm-hub' }, [
-      h('p', { class: 'gm-hub-intro' }, ['Choose a game to play on the board. ', h('span', { class: 'gm-sample', text: C.LABEL + '.' })]),
+      h('p', { class: 'gm-hub-intro', text: 'Select an interactive classroom activity to launch on the Smart Board.' }),
       chips, grid
     ]));
   }

@@ -271,22 +271,22 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
   };
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header Bar */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-semibold">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-700 font-semibold">
               Class 1 • Math • Chapter 8 • Simulation 05
             </span>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
-              <Compass className="w-4 h-4 text-amber-400" />
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <Compass className="w-4 h-4 text-amber-700" />
               {language === 'np' ? 'घटाउ चुनौती संसार' : 'Subtraction Challenge World'}
             </h1>
           </div>
@@ -306,8 +306,8 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
             onClick={() => setSoundEnabled((s) => !s)}
             className={`p-2 rounded-lg border transition ${
               soundEnabled
-                ? 'bg-slate-700 border-slate-600 text-emerald-400'
-                : 'bg-slate-800 border-slate-700 text-slate-500'
+                ? 'bg-slate-100 border-slate-300 text-emerald-700'
+                : 'bg-white border-slate-200 text-slate-500'
             }`}
           >
             {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
@@ -316,9 +316,9 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
       </header>
 
       {/* Main Village Exploration Area */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-center justify-center bg-slate-950">
+      <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-center justify-center bg-slate-50">
         {!completed ? (
-          <div className="w-full max-w-3xl bg-slate-850/90 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+          <div className="w-full max-w-3xl bg-slate-850/90 border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
             {/* Village Stations Tab Selector */}
             <div className="flex flex-wrap justify-center gap-2">
               {VILLAGE_STATIONS.map((st, idx) => (
@@ -331,7 +331,7 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
                   className={`px-3 py-2 rounded-2xl font-bold text-xs flex items-center gap-1.5 border transition ${
                     activeStationIdx === idx
                       ? 'bg-rose-600 border-rose-400 text-white shadow-lg shadow-rose-900/40 scale-105'
-                      : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-750'
+                      : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-750'
                   }`}
                 >
                   <span>{st.icon}</span>
@@ -341,23 +341,23 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
             </div>
 
             {/* Current Station Problem Header */}
-            <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 text-center">
-              <span className="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-1">
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center">
+              <span className="text-xs font-bold text-amber-700 uppercase tracking-wider block mb-1">
                 {language === 'np'
                   ? `केन्द्र ${NEP_DIGITS[activeStationIdx + 1]} / ५: ${currentStation.nameNp}`
                   : `Station ${activeStationIdx + 1} of 5: ${currentStation.nameEn}`}
               </span>
-              <h2 className="text-base md:text-lg font-bold text-white">
+              <h2 className="text-base md:text-lg font-bold text-slate-900">
                 {language === 'np' ? currentStation.questionNp : currentStation.questionEn}
               </h2>
             </div>
 
             {/* Visual Object / Equation Arena */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col items-center">
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col items-center">
               {currentStation.problemType === 'VERTICAL' ? (
                 /* Vertical Equation Display */
                 <div className="bg-slate-850 border-2 border-emerald-500/40 rounded-2xl p-4 flex flex-col items-end w-36 font-black text-3xl">
-                  <span className="text-amber-400">
+                  <span className="text-amber-700">
                     {language === 'np' ? NEP_DIGITS[currentStation.total] : currentStation.total}
                   </span>
                   <div className="flex items-center gap-2 text-rose-400">
@@ -366,8 +366,8 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
                       {language === 'np' ? NEP_DIGITS[currentStation.takeAway] : currentStation.takeAway}
                     </span>
                   </div>
-                  <div className="w-full h-1 bg-slate-600 my-2" />
-                  <span className="text-emerald-400">
+                  <div className="w-full h-1 bg-slate-200 my-2" />
+                  <span className="text-emerald-700">
                     {userSelected !== null
                       ? language === 'np'
                         ? NEP_DIGITS[userSelected]
@@ -397,8 +397,8 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
                     <span>{language === 'np' ? NEP_DIGITS[currentStation.total] : currentStation.total}</span>
                     <Minus className="w-5 h-5 text-rose-400" />
                     <span>{language === 'np' ? NEP_DIGITS[currentStation.takeAway] : currentStation.takeAway}</span>
-                    <Equal className="w-5 h-5 text-emerald-400" />
-                    <span className="text-emerald-400">
+                    <Equal className="w-5 h-5 text-emerald-700" />
+                    <span className="text-emerald-700">
                       {userSelected !== null
                         ? language === 'np'
                           ? NEP_DIGITS[userSelected]
@@ -412,7 +412,7 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
 
             {/* Answer Options */}
             <div className="flex flex-col gap-2">
-              <span className="text-xs text-slate-300 text-center font-bold">
+              <span className="text-xs text-slate-600 text-center font-bold">
                 {language === 'np' ? 'सही उत्तर छान्नुहोस्:' : 'Select the correct answer:'}
               </span>
               <div className="grid grid-cols-3 gap-3">
@@ -425,7 +425,7 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
                         ? isAnswerCorrect
                           ? 'bg-emerald-600 border-emerald-400 text-white shadow-lg'
                           : 'bg-rose-600 border-rose-400 text-white'
-                        : 'bg-slate-800 border-slate-700 text-white hover:bg-slate-750'
+                        : 'bg-white border-slate-200 text-slate-900 hover:bg-slate-750'
                     }`}
                   >
                     {language === 'np' ? NEP_DIGITS[opt] : opt}
@@ -455,40 +455,40 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
           </div>
         ) : (
           /* Completion Summary */
-          <div className="w-full max-w-md bg-slate-850 border border-slate-700 rounded-3xl p-6 text-center flex flex-col items-center gap-4 shadow-2xl">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-400">
+          <div className="w-full max-w-md bg-slate-850 border border-slate-200 rounded-3xl p-6 text-center flex flex-col items-center gap-4 shadow-2xl">
+            <div className="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-700">
               <Trophy className="w-8 h-8" />
             </div>
-            <h2 className="text-xl font-black text-white">
+            <h2 className="text-xl font-black text-slate-900">
               {language === 'np' ? 'घटाउ चुनौती संसार सम्पन्न भयो!' : 'All Village Challenges Completed!'}
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500">
               {language === 'np'
                 ? 'तपाईंले कक्षा १ को १० सम्मका सङ्ख्याहरूको घटाउ सम्बन्धी सबै अभ्यासहरू पूरा गर्नुभयो।'
                 : 'You mastered all subtraction concepts up to 10 in Class 1 Mathematics.'}
             </p>
-            <div className="w-full bg-slate-800/80 border border-slate-700 rounded-2xl p-4 flex justify-around">
+            <div className="w-full bg-white border border-slate-200 rounded-2xl p-4 flex justify-around">
               <div>
-                <span className="text-xs text-slate-400 block">
+                <span className="text-xs text-slate-500 block">
                   {language === 'np' ? 'केन्द्रहरू' : 'Stations'}
                 </span>
-                <span className="text-xl font-bold text-white">५ / 5</span>
+                <span className="text-xl font-bold text-slate-900">५ / 5</span>
               </div>
-              <div className="w-px bg-slate-700" />
+              <div className="w-px bg-slate-100" />
               <div>
-                <span className="text-xs text-emerald-400 block">
+                <span className="text-xs text-emerald-700 block">
                   {language === 'np' ? 'सटीक उत्तर' : 'Score'}
                 </span>
-                <span className="text-xl font-bold text-emerald-400">
+                <span className="text-xl font-bold text-emerald-700">
                   {language === 'np' ? NEP_DIGITS[score] : score}
                 </span>
               </div>
-              <div className="w-px bg-slate-700" />
+              <div className="w-px bg-slate-100" />
               <div>
-                <span className="text-xs text-amber-400 block">
+                <span className="text-xs text-amber-700 block">
                   {language === 'np' ? 'ताराहरू' : 'Stars'}
                 </span>
-                <span className="text-xl font-bold text-amber-400">★★★</span>
+                <span className="text-xl font-bold text-amber-700">★★★</span>
               </div>
             </div>
             <div className="flex gap-2 w-full pt-2">
@@ -499,7 +499,7 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
                   setIsAnswerCorrect(null);
                   setCompleted(false);
                 }}
-                className="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition flex items-center justify-center gap-1.5"
+                className="flex-1 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs font-bold transition flex items-center justify-center gap-1.5"
               >
                 <RotateCcw className="w-4 h-4" />
                 {language === 'np' ? 'पुनः खेल्नुहोस्' : 'Play Again'}
