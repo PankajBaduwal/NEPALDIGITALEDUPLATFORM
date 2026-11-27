@@ -184,6 +184,7 @@ import { UniversalGravitationSim } from '../../simulations/class10-science/ch1-f
 import { TidesGravitationSim } from '../../simulations/class10-science/ch1-force/TidesGravitationSim';
 import { CoinAndFeatherSim } from '../../simulations/class10-science/ch1-force/CoinAndFeatherSim';
 import { PascalsLawSim } from '../../simulations/class10-science/ch2-pressure/PascalsLawSim';
+import { ArchimedesPrincipleSim } from '../../simulations/class10-science/ch2-pressure/ArchimedesPrincipleSim';
 import { PhenomenaOfLightSim } from '../../simulations/class10-science/ch5-light/PhenomenaOfLightSim';
 
 export interface SimulationPlayerProps {
@@ -747,6 +748,12 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
     simulation.componentKey === 'pascals-law'
   ) {
     return <PascalsLawSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (
+    simulation.componentKey === 'class10-sci-ch2-archimedes-principle' ||
+    simulation.componentKey === 'archimedes-principle'
+  ) {
+    return <ArchimedesPrincipleSim onBackToLibrary={onClose} userRole={userRole} />;
   }
   if (
     simulation.componentKey === 'class10-sci-ch5-phenomena-of-light' ||
