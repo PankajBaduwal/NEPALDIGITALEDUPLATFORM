@@ -6,13 +6,13 @@ import { Calculator, ArrowDownUp, BarChart2, CheckCircle, RefreshCw } from 'luci
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'तथ्याङ्क ५, ८, १२, १५, २० को औसत (Mean) कति हुन्छ?',
+    np: 'तथ्याङ्क 5, 8, 12, 15, 20 को औसत (Mean) कति हुन्छ?',
     en: 'What is the mean of data 5, 8, 12, 15, 20?',
     options: [
-      { key: 'A', label: '१२ — (६० ÷ ५ = १२)' },
-      { key: 'B', label: '१०' },
-      { key: 'C', label: '१५' },
-      { key: 'D', label: '८' },
+      { key: 'A', label: '12 — (60 ÷ 5 = 12)' },
+      { key: 'B', label: '10' },
+      { key: 'C', label: '15' },
+      { key: 'D', label: '8' },
     ],
     answer: 'A',
   },
@@ -20,21 +20,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'यदि कुल पद सङ्ख्या n बिजोर (Odd) भए मध्यिका (Median) कुन पदको मान हुन्छ?',
     en: 'If total number of terms n is odd, median is the value of which term?',
     options: [
-      { key: 'A', label: '[(n + १) ÷ २] औं पदको मान' },
-      { key: 'B', label: '(n ÷ २) औं पदको मान' },
-      { key: 'C', label: '[(n - १) ÷ २] औं पदको मान' },
-      { key: 'D', label: '(n + २) औं पदको मान' },
+      { key: 'A', label: 'Value of the [(n + 1) ÷ 2]th term' },
+      { key: 'B', label: 'Value of the (n ÷ 2)th term' },
+      { key: 'C', label: 'Value of the [(n - 1) ÷ 2]th term' },
+      { key: 'D', label: 'Value of the (n + 2)th term' },
     ],
     answer: 'A',
   },
   {
-    np: 'तथ्याङ्क ७, ९, १२, १२, १५, १२, १८, २० को बहुलक (Mode) कति हो?',
+    np: 'तथ्याङ्क 7, 9, 12, 12, 15, 12, 18, 20 को बहुलक (Mode) कति हो?',
     en: 'What is the mode of data 7, 9, 12, 12, 15, 12, 18, 20?',
     options: [
-      { key: 'A', label: '१२ (सबैभन्दा बढी ३ पटक दोहोरिएको)' },
-      { key: 'B', label: '१५' },
-      { key: 'C', label: '७' },
-      { key: 'D', label: '२०' },
+      { key: 'A', label: '12' },
+      { key: 'B', label: '15' },
+      { key: 'C', label: '7' },
+      { key: 'D', label: '20' },
     ],
     answer: 'A',
   },
@@ -42,19 +42,19 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'मध्यिका निकाल्नुभन्दा अगाडि तथ्याङ्कलाई अनिवार्य रूपमा के गर्नुपर्दछ?',
     en: 'What must be done to the dataset before finding the median?',
     options: [
-      { key: 'A', label: 'बढ्दो वा घट्दो क्रममा मिलाएर राख्नुपर्छ (Sort in order)' },
-      { key: 'B', label: 'सबै जोड्नुपर्छ' },
-      { key: 'C', label: 'सबैभन्दा ठूलो मान हटाउनुपर्छ' },
-      { key: 'D', label: '२ ले गुणन गर्नुपर्छ' },
+      { key: 'A', label: 'Arrange in increasing or decreasing order (sort in order)' },
+      { key: 'B', label: 'Add them all' },
+      { key: 'C', label: 'Remove the largest value' },
+      { key: 'D', label: 'Multiply by 2' },
     ],
     answer: 'A',
   },
 ];
 
 const PRESETS = [
-  { nameNp: 'पाठ्यपुस्तक नमुना १ (बिजोर n=७)', data: [12, 15, 18, 20, 15, 25, 15] },
-  { nameNp: 'नमुना २ (जोर n=८)', data: [10, 14, 18, 12, 16, 20, 14, 24] },
-  { nameNp: 'परीक्षण अङ्क नमुना', data: [45, 52, 60, 52, 75, 80, 52, 68, 90] },
+  { nameNp: 'Textbook sample 1', data: [12, 15, 18, 20, 15, 25, 15] },
+  { nameNp: 'Sample 2', data: [10, 14, 18, 12, 16, 20, 14, 24] },
+  { nameNp: 'Test marks sample', data: [45, 52, 60, 52, 75, 80, 52, 68, 90] },
 ];
 
 export const MeanMedianModeDiscoveryLab: React.FC<{
@@ -147,7 +147,7 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
               activeTab === 'all' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            📊 {L('१. तीनवटै मान तुलना (Summary Comparison)', '1. Summary Comparison')}
+            📊 {L('1. तीनवटै मान तुलना (Summary Comparison)', '1. Summary Comparison')}
           </button>
           <button
             onClick={() => setActiveTab('mean')}
@@ -155,7 +155,7 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
               activeTab === 'mean' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🧮 {L('२. औसत विधि (Mean Lab)', '2. Mean Lab')}
+            🧮 {L('2. औसत विधि (Mean Lab)', '2. Mean Lab')}
           </button>
           <button
             onClick={() => setActiveTab('median')}
@@ -163,7 +163,7 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
               activeTab === 'median' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            ↔️ {L('३. मध्यिका क्रमबद्ध विधि (Median Lab)', '3. Median Lab')}
+            ↔️ {L('3. मध्यिका क्रमबद्ध विधि (Median Lab)', '3. Median Lab')}
           </button>
           <button
             onClick={() => setActiveTab('mode')}
@@ -171,7 +171,7 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
               activeTab === 'mode' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🎯 {L('४. बहुलक आवृत्ति (Mode Lab)', '4. Mode Lab')}
+            🎯 {L('4. बहुलक आवृत्ति (Mode Lab)', '4. Mode Lab')}
           </button>
         </div>
 
@@ -179,7 +179,7 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
         <div className="bg-white rounded-2xl shadow-sm p-4 border border-slate-200 space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap gap-1.5">
-              <span className="text-xs font-bold text-slate-500 self-center mr-1">नमुना छनोट:</span>
+              <span className="text-xs font-bold text-slate-500 self-center mr-1">Choose a sample:</span>
               {PRESETS.map((p, idx) => (
                 <button
                   key={idx}
@@ -195,7 +195,7 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
             <div className="flex items-center gap-1.5">
               <input
                 type="number"
-                placeholder="नयाँ सङ्ख्या..."
+                placeholder="New number..."
                 value={inputVal}
                 onChange={(e) => setInputVal(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleAddNumber()}
@@ -205,14 +205,14 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
                 onClick={handleAddNumber}
                 className="py-1.5 px-3 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded shadow"
               >
-                थप्नुहोस्
+                Add
               </button>
             </div>
           </div>
 
           {/* Current Dataset Tokens */}
           <div className="flex flex-wrap items-center gap-2 pt-1 border-t">
-            <span className="text-xs font-bold text-slate-500">हालको तथ्याङ्क (n = {n}):</span>
+            <span className="text-xs font-bold text-slate-500">Current data (n = {n}):</span>
             {dataList.map((val, i) => (
               <span
                 key={i}
@@ -236,7 +236,7 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
             {/* Mean Card */}
             <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 shadow-sm text-center">
               <span className="text-xs font-bold text-blue-800 uppercase tracking-wider block">
-                १. औसत (Mean X̄)
+                1. Mean (X̄)
               </span>
               <div className="text-4xl font-extrabold text-blue-600 font-mono my-2">{meanVal}</div>
               <div className="text-xs text-blue-900 bg-white p-2.5 rounded-xl border border-blue-200 font-mono">
@@ -247,26 +247,26 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
             {/* Median Card */}
             <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 shadow-sm text-center">
               <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider block">
-                २. मध्यिका (Median $M_d$)
+                2. Median ($M_d$)
               </span>
               <div className="text-4xl font-extrabold text-emerald-600 font-mono my-2">{medianInfo.val}</div>
               <div className="text-xs text-emerald-900 bg-white p-2.5 rounded-xl border border-emerald-200">
-                {isOdd ? `बिजोर (n=${n}): बीचको मान (${medianInfo.val})` : `जोर (n=${n}): दुई बीचका मानको औसत`}
+                {isOdd ? `Odd (n=${n}): middle value (${medianInfo.val})` : `Even (n=${n}): mean of the two middle values`}
               </div>
             </div>
 
             {/* Mode Card */}
             <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 shadow-sm text-center">
               <span className="text-xs font-bold text-amber-800 uppercase tracking-wider block">
-                ३. बहुलक (Mode $M_o$)
+                3. Mode ($M_o$)
               </span>
               <div className="text-4xl font-extrabold text-amber-600 font-mono my-2">
-                {modeInfo.modes.length > 0 ? modeInfo.modes.join(', ') : 'छैन (None)'}
+                {modeInfo.modes.length > 0 ? modeInfo.modes.join(', ') : 'None'}
               </div>
               <div className="text-xs text-amber-900 bg-white p-2.5 rounded-xl border border-amber-200">
                 {modeInfo.modes.length > 0
-                  ? `अधिकतम आवृत्ति: ${modeInfo.maxFreq} पटक`
-                  : 'कुनै पनि सङ्ख्या दोहोरिएको छैन'}
+                  ? `Highest frequency: ${modeInfo.maxFreq} times`
+                  : 'No number is repeated'}
               </div>
             </div>
           </div>
@@ -276,26 +276,26 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
         {activeTab === 'mean' && (
           <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-4">
             <h3 className="font-extrabold text-slate-800 text-base text-center">
-              औसत (Arithmetic Mean) निकाल्ने चरणबद्ध प्रक्रिया
+              Step-by-step process for finding the arithmetic mean
             </h3>
 
             <div className="p-4 bg-blue-50 rounded-xl border border-blue-200 space-y-3 text-xs text-blue-950">
               <div>
-                <span className="font-bold">चरण १: सबै मानहरूको जोडफल ($\sum X$) निकाल्नुहोस्:</span>
+                <span className="font-bold">Step 1: Find the sum of all values ($\sum X$):</span>
                 <div className="p-2 bg-white rounded border border-blue-200 font-mono mt-1 text-slate-700">
                   $\sum X$ = {dataList.join(' + ')} = <b className="text-blue-700">{sumX}</b>
                 </div>
               </div>
 
               <div>
-                <span className="font-bold">चरण २: कुल पद सङ्ख्या ($n$) गन्नुहोस्:</span>
+                <span className="font-bold">Step 2: Count the total number of terms ($n$):</span>
                 <div className="p-2 bg-white rounded border border-blue-200 font-mono mt-1 text-slate-700">
                   $n$ = <b className="text-blue-700">{n}</b>
                 </div>
               </div>
 
               <div>
-                <span className="font-bold">चरण ३: सूत्र प्रयोग गरी औसत निकाल्नुहोस्:</span>
+                <span className="font-bold">Step 3: Use the formula to find the mean:</span>
                 <div className="p-3 bg-white rounded border border-blue-200 font-mono mt-1 text-center text-sm font-bold text-blue-800">
                   X̄ = ∑X ÷ n = {sumX} ÷ {n} = {meanVal}
                 </div>
@@ -308,13 +308,13 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
         {activeTab === 'median' && (
           <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-4">
             <h3 className="font-extrabold text-slate-800 text-base text-center">
-              मध्यिका (Median) क्रमबद्ध विधि
+              Median: ordering method
             </h3>
 
             <div className="space-y-4 text-xs">
               <div>
                 <span className="font-bold text-slate-700 block mb-1">
-                  चरण १: तथ्याङ्कलाई सानोबाट ठूलो (Ascending Order) मा मिलाउँदा:
+                  Step 1: Arrange the data in ascending order:
                 </span>
                 <div className="flex flex-wrap gap-2 p-3 bg-slate-50 rounded-xl border border-slate-200">
                   {sortedList.map((val, idx) => {
@@ -338,19 +338,19 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
 
               <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-950 space-y-2">
                 <span className="font-bold block">
-                  चरण २: पद सङ्ख्या n = {n} ({isOdd ? 'बिजोर / Odd' : 'जोर / Even'}):
+                  Step 2: Number of terms n = {n} ({isOdd ? 'Odd' : 'Even'}):
                 </span>
 
                 {isOdd ? (
                   <div>
-                    बिजोर भएकोले मध्यिका = [(n + १) ÷ २] औं पदको मान
+                    Since it is odd, median = value of the [(n + 1) ÷ 2]th term
                     <div className="font-mono mt-1 p-2 bg-white rounded border border-emerald-200">
-                      = ({n} + 1) ÷ 2 = {Math.floor((n + 1) / 2)} औं पद = <b className="text-emerald-700 text-sm">{medianInfo.val}</b>
+                      = ({n} + 1) ÷ 2 = {Math.floor((n + 1) / 2)} th term = <b className="text-emerald-700 text-sm">{medianInfo.val}</b>
                     </div>
                   </div>
                 ) : (
                   <div>
-                    जोर भएकोले मध्यिका = (n ÷ २) औं र [(n ÷ २) + १] औं पदको औसत
+                    Since it is even, median = mean of the (n ÷ 2)th and [(n ÷ 2) + 1]th terms
                     <div className="font-mono mt-1 p-2 bg-white rounded border border-emerald-200">
                       = ({sortedList[medianInfo.index1]} + {sortedList[medianInfo.index2]}) ÷ 2 = <b className="text-emerald-700 text-sm">{medianInfo.val}</b>
                     </div>
@@ -365,12 +365,12 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
         {activeTab === 'mode' && (
           <div className="max-w-xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-4">
             <h3 className="font-extrabold text-slate-800 text-base text-center">
-              बहुलक (Mode) र आवृत्ति तालिका
+              Mode and frequency table
             </h3>
 
             <div className="p-4 bg-amber-50 rounded-xl border border-amber-200 space-y-3 text-xs">
               <span className="font-bold text-amber-950 block">
-                सबैभन्दा बढी पटक आउने मान (Highest Frequency Value):
+                Value that appears most often (highest frequency):
               </span>
 
               <div className="space-y-1.5">
@@ -385,15 +385,15 @@ export const MeanMedianModeDiscoveryLab: React.FC<{
                           : 'bg-white text-slate-700 border-amber-100'
                       }`}
                     >
-                      <span>सङ्ख्या: {val}</span>
-                      <span>आवृत्ति (पटक): {freq} {isMax ? '⭐ (बहुलक)' : ''}</span>
+                      <span>Number: {val}</span>
+                      <span>Frequency (times): {freq} {isMax ? '⭐ (mode)' : ''}</span>
                     </div>
                   );
                 })}
               </div>
 
               <div className="mt-3 p-3 bg-white rounded-xl border border-amber-200 text-center font-bold text-amber-900">
-                निष्कर्ष: बहुलक = {modeInfo.modes.length > 0 ? modeInfo.modes.join(', ') : 'कुनै बहुलक छैन'}
+                Conclusion: mode = {modeInfo.modes.length > 0 ? modeInfo.modes.join(', ') : 'No mode'}
               </div>
             </div>
           </div>

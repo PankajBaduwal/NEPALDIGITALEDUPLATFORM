@@ -1,6 +1,6 @@
 /**
  * RatioProportionRealLife.tsx
- * Grade 7 Mathematics – Lesson 6: RATIO AND PROPORTION (अनुपात र समानुपात)
+ * Grade 7 Mathematics – Lesson 6: RATIO AND PROPORTION
  * Simulation 3: Ratio & Proportion in Real Life (2D + Interactive Practical Activities)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 89-97)
  */
@@ -12,46 +12,46 @@ import { Users, DollarSign, Award, ShoppingBag, ArrowRight, Check } from 'lucide
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एउटा विद्यालयमा जम्मा ४५० विद्यार्थीमध्ये १८० जना छात्राहरू छन् भने छात्र र छात्राको सङ्ख्याको अनुपात कति हुन्छ?',
+    np: 'एउटा विद्यालयमा जम्मा 450 विद्यार्थीमध्ये 180 जना छात्राहरू छन् भने छात्र र छात्राको सङ्ख्याको अनुपात कति हुन्छ?',
     en: 'In a school of 450 students, 180 are girls. What is the ratio of boys to girls?',
     options: [
-      { key: 'A', label: '३ : २ (छात्र = २७०, छात्रा = १८० => २७०:१८० = ३:२)' },
-      { key: 'B', label: '२ : ३' },
-      { key: 'C', label: '२ : ५' },
-      { key: 'D', label: '३ : ५' },
+      { key: 'A', label: '3 : 2' },
+      { key: 'B', label: '2 : 3' },
+      { key: 'C', label: '2 : 5' },
+      { key: 'D', label: '3 : 5' },
     ],
     answer: 'A',
   },
   {
-    np: 'रु ५४,००० लाई ५ : ४ को अनुपातमा दुई व्यक्तिलाई बाँड्दा पहिलो व्यक्तिले कति पाउँछ?',
+    np: 'Rs 54,000 लाई 5 : 4 को अनुपातमा दुई व्यक्तिलाई बाँड्दा पहिलो व्यक्तिले कति पाउँछ?',
     en: 'When dividing Rs 54,000 between two persons in ratio 5 : 4, how much does the first person get?',
     options: [
-      { key: 'A', label: 'रु ३०,००० (५/९ × ५४००० = ३०,०००)' },
-      { key: 'B', label: 'रु २४,०००' },
-      { key: 'C', label: 'रु २०,०००' },
-      { key: 'D', label: 'रु २५,०००' },
+      { key: 'A', label: 'Rs 30,000 (5/9 × 54000 = 30,000)' },
+      { key: 'B', label: 'Rs 24,000' },
+      { key: 'C', label: 'Rs 20,000' },
+      { key: 'D', label: 'Rs 25,000' },
     ],
     answer: 'A',
   },
   {
-    np: 'प्रमेशको उचाइ १६५ सेमी र प्रमिलाको उचाइ १५० सेमी छ भने उनीहरूको उचाइको अनुपात कति हुन्छ?',
+    np: 'प्रमेशको उचाइ 165 cm र प्रमिलाको उचाइ 150 cm छ भने उनीहरूको उचाइको अनुपात कति हुन्छ?',
     en: "Pramesh's height is 165 cm and Pramila's height is 150 cm. What is the ratio of their heights?",
     options: [
-      { key: 'A', label: '११ : १० (१६५/१५० लाई १५ ले भाग गर्दा)' },
-      { key: 'B', label: '१० : ११' },
-      { key: 'C', label: '५ : ६' },
-      { key: 'D', label: '३३ : ३०' },
+      { key: 'A', label: '11 : 10' },
+      { key: 'B', label: '10 : 11' },
+      { key: 'C', label: '5 : 6' },
+      { key: 'D', label: '33 : 30' },
     ],
     answer: 'A',
   },
   {
-    np: '६ केजी सुन्तलाको मूल्य रु ५४० पर्छ भने सोही दरमा ८ केजी सुन्तलाको मूल्य कति पर्छ?',
+    np: '6 केजी सुन्तलाको मूल्य Rs 540 पर्छ भने सोही दरमा 8 केजी सुन्तलाको मूल्य कति पर्छ?',
     en: 'If 6 kg oranges cost Rs 540, what is the cost of 8 kg oranges at the same rate?',
     options: [
-      { key: 'A', label: 'रु ७२० (६/५४० = ८/x => x = ७२०)' },
-      { key: 'B', label: 'रु ६००' },
-      { key: 'C', label: 'रु ६४०' },
-      { key: 'D', label: 'रु ८००' },
+      { key: 'A', label: 'Rs 720 (6/540 = 8/x => x = 720)' },
+      { key: 'B', label: 'Rs 600' },
+      { key: 'C', label: 'Rs 640' },
+      { key: 'D', label: 'Rs 800' },
     ],
     answer: 'A',
   },
@@ -112,10 +112,10 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'school', np: '१. विद्यालय जनसंख्या (School Population)', en: '1. School Population' },
-            { id: 'heights', np: '२. उचाइ तुलना (Height Comparison)', en: '2. Height Comparison' },
-            { id: 'divide', np: '३. रकम बाँडफाँड (Divide Money in Ratio)', en: '3. Divide Money' },
-            { id: 'orange', np: '४. सुन्तलाको बजार भाउ (Orange Proportion)', en: '4. Price Proportion' },
+            { id: 'school', np: '1. विद्यालय जनसंख्या (School Population)', en: '1. School Population' },
+            { id: 'heights', np: '2. उचाइ तुलना (Height Comparison)', en: '2. Height Comparison' },
+            { id: 'divide', np: '3. रकम बाँडफाँड (Divide Money in Ratio)', en: '3. Divide Money' },
+            { id: 'orange', np: '4. सुन्तलाको बजार भाउ (Orange Proportion)', en: '4. Price Proportion' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -147,7 +147,7 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ ८९ अनुसार: एउटा विद्यालयमा जम्मा ४५० विद्यार्थी छन्, जसमध्ये १८० जना छात्राहरू छन्।',
+                'पाठ्यपुस्तक पृष्ठ 89 अनुसार: एउटा विद्यालयमा जम्मा 450 विद्यार्थी छन्, जसमध्ये 180 जना छात्राहरू छन्।',
                 'From Textbook Page 89: In a school with 450 total students, 180 are girls.'
               )}
             </p>
@@ -226,7 +226,7 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
                   {girlsCount} : {boysCount} = {girlsCount / 90} : {boysCount / 90}
                 </div>
                 <div style={{ fontSize: 12, color: '#831843', marginTop: 2 }}>
-                  {L(`९० ले भाग गर्दा सरल रूप प्राप्त हुन्छ`, `Dividing by common factor gives simplest form`)}
+                  {L(`90 ले भाग गर्दा सरल रूप प्राप्त हुन्छ`, `Dividing by common factor gives simplest form`)}
                 </div>
               </div>
 
@@ -250,7 +250,7 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
                   {girlsCount} : {totalStudents} = 2 : 5
                 </div>
                 <div style={{ fontSize: 12, color: '#047857', marginTop: 2 }}>
-                  {L(`५ जनामा २ जना छात्रा रहेछन्`, `2 out of every 5 students are girls`)}
+                  {L(`5 जनामा 2 जना छात्रा रहेछन्`, `2 out of every 5 students are girls`)}
                 </div>
               </div>
             </div>
@@ -265,7 +265,7 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ ८९ अनुसार: प्रमेशको उचाइ १६५ सेमी र प्रमिलाको उचाइ १५० सेमी छ। उचाइको अनुपात पत्ता लगाऔँ।',
+                'पाठ्यपुस्तक पृष्ठ 89 अनुसार: प्रमेशको उचाइ 165 cm र प्रमिलाको उचाइ 150 cm छ। उचाइको अनुपात पत्ता लगाऔँ।',
                 "From Textbook Page 89: Pramesh's height is 165 cm and Pramila's height is 150 cm."
               )}
             </p>
@@ -331,13 +331,13 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
                 }}
               >
                 <div>
-                  <strong>{L('अनुपात:', 'Ratio:')}</strong> १६५ सेमी : १५० सेमी = १६५ / १५०
+                  <strong>{L('अनुपात:', 'Ratio:')}</strong> 165 cm : 150 cm = 165 / 150
                 </div>
                 <div>
-                  <strong>{L('म.स. (HCF) निकाल्दा:', 'Finding HCF:')}</strong> HCF(165, 150) = १५
+                  <strong>{L('म.स. (HCF) निकाल्दा:', 'Finding HCF:')}</strong> HCF(165, 150) = 15
                 </div>
                 <div>
-                  <strong>{L('१५ ले भाग गर्दा:', 'Dividing by 15:')}</strong> (१६५ ÷ १५) / (१५० ÷ १५) = ११ / १०
+                  <strong>{L('15 ले भाग गर्दा:', 'Dividing by 15:')}</strong> (165 ÷ 15) / (150 ÷ 15) = 11 / 10
                 </div>
                 <div
                   style={{
@@ -347,7 +347,7 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
                     color: '#187C68',
                   }}
                 >
-                  {L('उचाइको अनुपात:', "Heights' Ratio:")} ११ : १० (11 : 10)
+                  {L('उचाइको अनुपात:', "Heights' Ratio:")} 11 : 10 (11 : 10)
                 </div>
               </div>
             </div>
@@ -362,7 +362,7 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ ९५ अनुसार: रु ५४,००० लाई ५ : ४ को अनुपातमा दुई व्यक्ति A र B बीच बाँडफाँड गर्नुहोस्।',
+                'पाठ्यपुस्तक पृष्ठ 95 अनुसार: Rs 54,000 लाई 5 : 4 को अनुपातमा दुई व्यक्ति A र B बीच बाँडफाँड गर्नुहोस्।',
                 'From Textbook Page 95: Divide Rs 54,000 between persons A and B in the ratio 5 : 4.'
               )}
             </p>
@@ -370,7 +370,7 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 600, color: '#334155', display: 'block' }}>
-                  {L('बाँड्नुपर्ने जम्मा रकम (Total Money): ', 'Total Money: ')} रु {totalMoney.toLocaleString()}
+                  {L('बाँड्नुपर्ने जम्मा रकम (Total Money): ', 'Total Money: ')} Rs {totalMoney.toLocaleString()}
                 </label>
                 <input
                   type="range"
@@ -436,11 +436,11 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
                 <div style={{ fontSize: 14, lineHeight: 1.8, marginTop: 8, color: '#14532D' }}>
                   <div>
                     <strong>{L('अनुपातका पदहरूको जोड:', 'Sum of Ratio Terms:')}</strong> {ratioPart1} + {ratioPart2} ={' '}
-                    <span style={{ fontWeight: 800 }}>{totalParts} भाग (parts)</span>
+                    <span style={{ fontWeight: 800 }}>{totalParts} parts</span>
                   </div>
                   <div>
-                    <strong>{L('१ भागको मान:', 'Value of 1 part:')}</strong> रु {totalMoney.toLocaleString()} ÷{' '}
-                    {totalParts} = रु {(totalMoney / totalParts).toLocaleString()}
+                    <strong>{L('1 भागको मान:', 'Value of 1 part:')}</strong> Rs {totalMoney.toLocaleString()} ÷{' '}
+                    {totalParts} = Rs {(totalMoney / totalParts).toLocaleString()}
                   </div>
                 </div>
               </div>
@@ -450,10 +450,10 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
                   {L('व्यक्ति A ले पाउने रकम', "Person A's Share")}
                 </span>
                 <div style={{ fontSize: 24, fontWeight: 800, color: '#2563EB', marginTop: 4 }}>
-                  रु {Math.round(share1).toLocaleString()}
+                  Rs {Math.round(share1).toLocaleString()}
                 </div>
                 <div style={{ fontSize: 12, color: '#1E3A8A', marginTop: 2 }}>
-                  ({ratioPart1}/{totalParts} × रु {totalMoney.toLocaleString()})
+                  ({ratioPart1}/{totalParts} × Rs {totalMoney.toLocaleString()})
                 </div>
               </div>
 
@@ -462,10 +462,10 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
                   {L('व्यक्ति B ले पाउने रकम', "Person B's Share")}
                 </span>
                 <div style={{ fontSize: 24, fontWeight: 800, color: '#9333EA', marginTop: 4 }}>
-                  रु {Math.round(share2).toLocaleString()}
+                  Rs {Math.round(share2).toLocaleString()}
                 </div>
                 <div style={{ fontSize: 12, color: '#581C87', marginTop: 2 }}>
-                  ({ratioPart2}/{totalParts} × रु {totalMoney.toLocaleString()})
+                  ({ratioPart2}/{totalParts} × Rs {totalMoney.toLocaleString()})
                 </div>
               </div>
             </div>
@@ -480,7 +480,7 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ ९५ अनुसार: ६ केजी सुन्तलाको मूल्य रु ५४० पर्छ भने सोही दरमा ८ केजी सुन्तलाको मूल्य कति पर्छ?',
+                'पाठ्यपुस्तक पृष्ठ 95 अनुसार: 6 केजी सुन्तलाको मूल्य Rs 540 पर्छ भने सोही दरमा 8 केजी सुन्तलाको मूल्य कति पर्छ?',
                 'From Textbook Page 95: If 6 kg of oranges cost Rs 540, what is the cost of 8 kg at the same rate?'
               )}
             </p>
@@ -505,7 +505,7 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 600, color: '#15803D', display: 'block' }}>
-                  {L('पहिलो मूल्य (First Cost): ', 'First Cost: ')} रु {orangeCost1}
+                  {L('पहिलो मूल्य (First Cost): ', 'First Cost: ')} Rs {orangeCost1}
                 </label>
                 <input
                   type="range"
@@ -580,7 +580,7 @@ export const RatioProportionRealLife: React.FC<{ onBackToLibrary?: () => void; o
                   color: '#C2410C',
                 }}
               >
-                {orangeKg2} kg {L('सुन्तलाको मूल्य:', 'Oranges Cost:')} रु {Math.round(orangeCost2).toLocaleString()}
+                {orangeKg2} kg {L('सुन्तलाको मूल्य:', 'Oranges Cost:')} Rs {Math.round(orangeCost2).toLocaleString()}
               </div>
             </div>
           </div>

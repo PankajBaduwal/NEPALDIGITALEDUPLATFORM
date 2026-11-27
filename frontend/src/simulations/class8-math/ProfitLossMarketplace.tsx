@@ -1,7 +1,7 @@
 /**
  * ProfitLossMarketplace.tsx
- * Grade 8 Mathematics – Unit 5: PROFIT AND LOSS (नाफा र नोक्सान)
- * Simulation 1: Profit and Loss Marketplace (नाफा र नोक्सान बजार)
+ * Grade 8 Mathematics – Unit 5: PROFIT AND LOSS
+ * Simulation 1: Profit and Loss Marketplace
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 5)
  */
 import React, { useState } from 'react';
@@ -15,10 +15,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुनै वस्तु किनेको मूल्य (CP) भन्दा बेचेको मूल्य (SP) धेरै (SP > CP) भए के हुन्छ?',
     en: 'When the selling price (SP) is greater than the cost price (CP), what occurs?',
     options: [
-      { key: 'A', label: 'नाफा (Profit = SP - CP)' },
-      { key: 'B', label: 'नोक्सान (Loss)' },
-      { key: 'C', label: 'नाफा पनि होइन, नोक्सान पनि होइन' },
-      { key: 'D', label: 'छुट मात्र' },
+      { key: 'A', label: 'Profit (SP - CP)' },
+      { key: 'B', label: 'Loss' },
+      { key: 'C', label: 'Neither profit nor loss' },
+      { key: 'D', label: 'Discount only' },
     ],
     answer: 'A',
   },
@@ -26,43 +26,43 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'नाफा प्रतिशत (Profit %) र नोक्सान प्रतिशत (Loss %) सधैं कुन मूल्यमा गणना गरिन्छ?',
     en: 'On which price are profit percentage and loss percentage always calculated?',
     options: [
-      { key: 'A', label: 'क्रय मूल्यमा (On Cost Price - CP)' },
-      { key: 'B', label: 'बिक्री मूल्यमा (On SP)' },
-      { key: 'C', label: 'अङ्कित मूल्यमा (On MP)' },
-      { key: 'D', label: 'छुट रकममा' },
+      { key: 'A', label: 'On cost price (CP)' },
+      { key: 'B', label: 'On selling price (SP)' },
+      { key: 'C', label: 'On marked price (MP)' },
+      { key: 'D', label: 'On the discount amount' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा झोला रु. ५०० मा किनेर रु. ६०० मा बेच्दा नाफा प्रतिशत कति हुन्छ?',
+    np: 'एउटा झोला Rs. 500 मा किनेर Rs. 600 मा बेच्दा नाफा प्रतिशत कति हुन्छ?',
     en: 'If a bag is bought for Rs. 500 and sold for Rs. 600, what is the profit percentage?',
     options: [
-      { key: 'A', label: '२०% [ नाफा १०० ÷ ५०० × १००% = २०% ]' },
-      { key: 'B', label: '१०%' },
-      { key: 'C', label: '२५%' },
-      { key: 'D', label: '१५%' },
+      { key: 'A', label: '20% [ profit 100 ÷ 500 × 100% = 20% ]' },
+      { key: 'B', label: '10%' },
+      { key: 'C', label: '25%' },
+      { key: 'D', label: '15%' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा वस्तु रु. ८०० मा किनेर रु. ७२० मा बेच्दा नोक्सान प्रतिशत कति हुन्छ?',
+    np: 'एउटा वस्तु Rs. 800 मा किनेर Rs. 720 मा बेच्दा नोक्सान प्रतिशत कति हुन्छ?',
     en: 'If an item is bought for Rs. 800 and sold for Rs. 720, what is the loss percentage?',
     options: [
-      { key: 'A', label: '१०% [ नोक्सान ८० ÷ ८०० × १००% = १०% ]' },
-      { key: 'B', label: '१२%' },
-      { key: 'C', label: '८%' },
-      { key: 'D', label: '२०%' },
+      { key: 'A', label: '10% [ loss 80 ÷ 800 × 100% = 10% ]' },
+      { key: 'B', label: '12%' },
+      { key: 'C', label: '8%' },
+      { key: 'D', label: '20%' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि क्रय मूल्य रु. १००० र नोक्सान रु. १५० भए बिक्री मूल्य (SP) कति हुन्छ?',
+    np: 'यदि क्रय मूल्य Rs. 1000 र नोक्सान Rs. 150 भए बिक्री मूल्य (SP) कति हुन्छ?',
     en: 'If cost price is Rs. 1000 and loss is Rs. 150, what is the selling price (SP)?',
     options: [
-      { key: 'A', label: 'रु. ८५० [ SP = CP - Loss = १००० - १५० = ८५० ]' },
-      { key: 'B', label: 'रु. ११५०' },
-      { key: 'C', label: 'रु. ९००' },
-      { key: 'D', label: 'रु. ७५०' },
+      { key: 'A', label: 'Rs. 850 [ SP = CP - Loss = 1000 - 150 = 850 ]' },
+      { key: 'B', label: 'Rs. 1150' },
+      { key: 'C', label: 'Rs. 900' },
+      { key: 'D', label: 'Rs. 750' },
     ],
     answer: 'A',
   },
@@ -137,9 +137,9 @@ export const ProfitLossMarketplace: React.FC<{
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'learn', labelNp: '१. पाठ्यपुस्तकका उदाहरणहरू (Learn)', labelEn: '1. Learn Concepts', icon: ShoppingBag },
-            { id: 'shopkeeper', labelNp: '२. विद्यार्थी पसले मोड (Shopkeeper Mode)', labelEn: '2. Student Shopkeeper', icon: Store },
-            { id: 'challenge', labelNp: '३. अभ्यास चुनौती (Challenge Quiz)', labelEn: '3. Challenge Quiz', icon: Award },
+            { id: 'learn', labelNp: '1. पाठ्यपुस्तकका उदाहरणहरू (Learn)', labelEn: '1. Learn Concepts', icon: ShoppingBag },
+            { id: 'shopkeeper', labelNp: '2. विद्यार्थी पसले मोड (Shopkeeper Mode)', labelEn: '2. Student Shopkeeper', icon: Store },
+            { id: 'challenge', labelNp: '3. अभ्यास चुनौती (Challenge Quiz)', labelEn: '3. Challenge Quiz', icon: Award },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -210,7 +210,7 @@ export const ProfitLossMarketplace: React.FC<{
                   {L('क्रय मूल्य (Cost Price - CP):', 'Cost Price (CP):')}
                 </div>
                 <div style={{ fontSize: 26, fontWeight: 900, color: '#0f172a', marginTop: 4 }}>
-                  रु. {isNe ? toNp(learnCp) : learnCp}
+                  Rs. {isNe ? toNp(learnCp) : learnCp}
                 </div>
                 <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>
                   {L('पसलेले किनेको मूल्य', 'Price paid by the shopkeeper to buy')}
@@ -222,7 +222,7 @@ export const ProfitLossMarketplace: React.FC<{
                   {L('बिक्री मूल्य (Selling Price - SP):', 'Selling Price (SP):')}
                 </div>
                 <div style={{ fontSize: 26, fontWeight: 900, color: '#0284c7', marginTop: 4 }}>
-                  रु. {isNe ? toNp(learnSp) : learnSp}
+                  Rs. {isNe ? toNp(learnSp) : learnSp}
                 </div>
                 <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>
                   {L('ग्राहकलाई बेचेको मूल्य', 'Price at which the item is sold')}
@@ -243,9 +243,9 @@ export const ProfitLossMarketplace: React.FC<{
                 {isProfit ? <TrendingUp size={24} color="#16a34a" /> : <TrendingDown size={24} color="#dc2626" />}
                 <span style={{ fontSize: 18, fontWeight: 900, color: isProfit ? '#15803d' : '#b91c1c' }}>
                   {isProfit
-                    ? L(`नाफा भयो! (SP > CP) : रु. ${toNp(absDiff)}`, `Profit! (SP > CP) : Rs. ${absDiff}`)
+                    ? L(`नाफा भयो! (SP > CP) : Rs. ${toNp(absDiff)}`, `Profit! (SP > CP) : Rs. ${absDiff}`)
                     : isLoss
-                    ? L(`नोक्सान भयो! (CP > SP) : रु. ${toNp(absDiff)}`, `Loss! (CP > SP) : Rs. ${absDiff}`)
+                    ? L(`नोक्सान भयो! (CP > SP) : Rs. ${toNp(absDiff)}`, `Loss! (CP > SP) : Rs. ${absDiff}`)
                     : L('नाफा पनि भएन, नोक्सान पनि भएन (SP = CP)', 'No Profit, No Loss')}
                 </span>
               </div>
@@ -254,11 +254,11 @@ export const ProfitLossMarketplace: React.FC<{
                 <div style={{ marginTop: 12, fontSize: 15, color: '#334155', lineHeight: 1.6 }}>
                   <div>
                     <strong>{isProfit ? L('नाफा सूत्र:', 'Profit Formula:') : L('नोक्सान सूत्र:', 'Loss Formula:')}</strong>{' '}
-                    {isProfit ? 'Profit = SP - CP' : 'Loss = CP - SP'} = रु. {absDiff}
+                    {isProfit ? 'Profit = SP - CP' : 'Loss = CP - SP'} = Rs. {absDiff}
                   </div>
                   <div style={{ marginTop: 4, fontWeight: 800, color: isProfit ? '#166534' : '#991b1b', fontSize: 17 }}>
                     {isProfit ? L('नाफा प्रतिशत = ', 'Profit % = ') : L('नोक्सान प्रतिशत = ', 'Loss % = ')}
-                    ({absDiff} ÷ {learnCp}) × १००% = {isNe ? toNp(percent.toFixed(2)) : percent.toFixed(2)}%
+                    ({absDiff} ÷ {learnCp}) × 100% = {isNe ? toNp(percent.toFixed(2)) : percent.toFixed(2)}%
                   </div>
                   <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>
                     {L('विशेष ध्यान दिनुहोस्: नाफा वा नोक्सान प्रतिशत सधैं क्रय मूल्य (CP) मा हिसाब गरिन्छ!', 'Note: Profit % and Loss % are always calculated on the Cost Price (CP)!')}
@@ -320,7 +320,7 @@ export const ProfitLossMarketplace: React.FC<{
                 {customIsProfit ? L('व्यापार नतिजा: नाफा भयो', 'Business Result: Profit') : L('व्यापार नतिजा: नोक्सान भयो', 'Business Result: Loss')}
               </div>
               <div style={{ fontSize: 26, fontWeight: 900, color: customIsProfit ? '#15803d' : '#b91c1c', marginTop: 4 }}>
-                {customIsProfit ? `+ रु. ${customAbsDiff}` : `- रु. ${customAbsDiff}`} ({customPercent.toFixed(2)}%)
+                {customIsProfit ? `+ Rs. ${customAbsDiff}` : `- Rs. ${customAbsDiff}`} ({customPercent.toFixed(2)}%)
               </div>
             </div>
           </div>
@@ -335,7 +335,7 @@ export const ProfitLossMarketplace: React.FC<{
             </h3>
             <p style={{ margin: 0, fontSize: 14, color: '#475569' }}>
               {L(
-                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" मोडमा क्लिक गरी ५ वटा आधिकारिक पाठ्यपुस्तकका प्रश्नहरू हल गर्नुहोस् र ताराहरू जित्नुहोस्!',
+                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" मोडमा क्लिक गरी 5 pcs आधिकारिक पाठ्यपुस्तकका प्रश्नहरू हल गर्नुहोस् र ताराहरू जित्नुहोस्!',
                 'Click "Challenge" in the header to take the official CDC curriculum quiz and earn mastery stars!'
               )}
             </p>

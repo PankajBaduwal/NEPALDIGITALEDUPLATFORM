@@ -30,9 +30,9 @@ const SOLIDS: Record<SolidType, SolidMeta> = {
     faces: 5,
     edges: 9,
     vertices: 6,
-    baseShapeNp: '२ वटा समानान्तर त्रिभुज (२ आधार, ३ आयत)',
+    baseShapeNp: '2 pcs समानान्तर त्रिभुज (2 आधार, 3 आयत)',
     baseShapeEn: '2 Parallel Triangles (2 bases, 3 rectangular faces)',
-    descNp: '२ वटा समानान्तर र सर्वाङ्गसम त्रिभुज आधारहरू र ३ वटा आयताकार छड्के सतहहरू (जम्मा ५ पृष्ठ, ९ किनारा, ६ शीर्षबिन्दु)।',
+    descNp: '2 pcs समानान्तर र सर्वाङ्गसम त्रिभुज आधारहरू र 3 pcs Rectangular छड्के सतहहरू (जम्मा 5 पृष्ठ, 9 किनारा, 6 शीर्षबिन्दु)।',
     descEn: 'Two parallel congruent triangular bases and three rectangular lateral faces (5 faces, 9 edges, 6 vertices).'
   },
   triangular_pyramid: {
@@ -43,22 +43,22 @@ const SOLIDS: Record<SolidType, SolidMeta> = {
     faces: 4,
     edges: 6,
     vertices: 4,
-    baseShapeNp: 'त्रिभुज (४ वटा त्रिकोणीय पृष्ठ)',
+    baseShapeNp: 'त्रिभुज (4 pcs त्रिकोणीय पृष्ठ)',
     baseShapeEn: 'Triangle (4 triangular faces)',
-    descNp: 'त्रिभुजाकार आधार र एउटै साझा शीर्षबिन्दुमा जोडिने ३ वटा त्रिकोणीय छड्के पृष्ठहरू (जम्मा ४ पृष्ठ, ६ किनारा, ४ शीर्षबिन्दु)।',
+    descNp: 'त्रिभुजाकार आधार र एउटै साझा शीर्षबिन्दुमा जोडिने 3 pcs त्रिकोणीय छड्के पृष्ठहरू (जम्मा 4 पृष्ठ, 6 किनारा, 4 शीर्षबिन्दु)।',
     descEn: 'A triangular base with three triangular lateral faces meeting at a common apex (4 faces, 6 edges, 4 vertices).'
   },
   square_pyramid: {
     id: 'square_pyramid',
-    nameNp: 'वर्गाकार आधार भएको पिरामिड (Square Pyramid)',
+    nameNp: 'Square आधार भएको पिरामिड (Square Pyramid)',
     nameEn: 'Square-Based Pyramid',
     kind: 'pyramid',
     faces: 5,
     edges: 8,
     vertices: 5,
-    baseShapeNp: 'वर्ग (१ वर्गाकार आधार, ४ त्रिकोण)',
+    baseShapeNp: 'वर्ग (1 Square आधार, 4 त्रिकोण)',
     baseShapeEn: 'Square (1 square base, 4 triangular faces)',
-    descNp: 'वर्गाकार आधार र एउटै शीर्षबिन्दुमा टुङ्गिने ४ वटा त्रिकोणीय छड्के पृष्ठहरू (जम्मा ५ पृष्ठ, ८ किनारा, ५ शीर्षबिन्दु)।',
+    descNp: 'Square आधार र एउटै शीर्षबिन्दुमा टुङ्गिने 4 pcs त्रिकोणीय छड्के पृष्ठहरू (जम्मा 5 पृष्ठ, 8 किनारा, 5 शीर्षबिन्दु)।',
     descEn: 'A square base and four triangular lateral faces meeting at the apex (5 faces, 8 edges, 5 vertices).'
   },
   hexagonal_pyramid: {
@@ -69,33 +69,33 @@ const SOLIDS: Record<SolidType, SolidMeta> = {
     faces: 7,
     edges: 12,
     vertices: 7,
-    baseShapeNp: 'षट्भुज (१ षट्भुज आधार, ६ त्रिकोण)',
+    baseShapeNp: 'षट्भुज (1 षट्भुज आधार, 6 त्रिकोण)',
     baseShapeEn: 'Hexagon (1 hexagonal base, 6 triangular faces)',
-    descNp: 'षट्भुजाकार आधार र शीर्षबिन्दुमा जोडिने ६ वटा त्रिकोणीय छड्के पृष्ठहरू (जम्मा ७ पृष्ठ, १२ किनारा, ७ शीर्षबिन्दु)।',
+    descNp: 'षट्भुजाकार आधार र शीर्षबिन्दुमा जोडिने 6 pcs त्रिकोणीय छड्के पृष्ठहरू (जम्मा 7 पृष्ठ, 12 किनारा, 7 शीर्षबिन्दु)।',
     descEn: 'A hexagonal base and six triangular lateral faces converging at the apex (7 faces, 12 edges, 7 vertices).'
   }
 };
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'त्रिभुजाकार प्रिज्म (Triangular Prism) मा कतिवटा पृष्ठहरू (Faces) हुन्छन्?',
+    np: 'त्रिभुजाकार प्रिज्म (Triangular Prism) मा कतिpcs पृष्ठहरू (Faces) हुन्छन्?',
     en: 'How many faces does a triangular prism have?',
     options: [
-      { key: 'A', label: '५ वटा (२ त्रिभुज + ३ आयत)' },
-      { key: 'B', label: '४ वटा' },
-      { key: 'C', label: '६ वटा' },
-      { key: 'D', label: '९ वटा' },
+      { key: 'A', label: '5 (2 triangles + 3 rectangles)' },
+      { key: 'B', label: '4 pcs' },
+      { key: 'C', label: '6 pcs' },
+      { key: 'D', label: '9 pcs' },
     ],
     answer: 'A',
   },
   {
-    np: 'वर्गाकार आधार भएको पिरामिड (Square Pyramid) मा कतिवटा किनाराहरू (Edges) हुन्छन्?',
+    np: 'Square आधार भएको पिरामिड (Square Pyramid) मा कतिpcs किनाराहरू (Edges) हुन्छन्?',
     en: 'How many edges does a square-based pyramid have?',
     options: [
-      { key: 'A', label: '८ वटा (४ आधार + ४ छड्के)' },
-      { key: 'B', label: '५ वटा' },
-      { key: 'C', label: '६ वटा' },
-      { key: 'D', label: '१० वटा' },
+      { key: 'A', label: '8 (4 base + 4 slanting)' },
+      { key: 'B', label: '5 pcs' },
+      { key: 'C', label: '6 pcs' },
+      { key: 'D', label: '10 pcs' },
     ],
     answer: 'A',
   },
@@ -103,10 +103,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'पिरामिडका सबै छड्के सतहहरू (Lateral faces) कुन आकारका हुन्छन्?',
     en: 'What shape are all the lateral faces of any pyramid?',
     options: [
-      { key: 'A', label: 'त्रिकोणीय (Triangular)' },
-      { key: 'B', label: 'आयताकार' },
-      { key: 'C', label: 'गोलाकार' },
-      { key: 'D', label: 'वर्गाकार' },
+      { key: 'A', label: 'Triangular' },
+      { key: 'B', label: 'Rectangular' },
+      { key: 'C', label: 'Circular' },
+      { key: 'D', label: 'Square' },
     ],
     answer: 'A',
   }
@@ -119,7 +119,7 @@ export const SolidPrismPyramidExplorer3D: React.FC<{
   const kit = useSimKit({
     code: 'SIM-MATH-G8-U16-01',
     chapter: 16,
-    titleNp: '३D प्रिज्म र पिरामिड अन्वेषक',
+    titleNp: '3D प्रिज्म र पिरामिड अन्वेषक',
     titleEn: '3D Prism and Pyramid Explorer',
   });
   const isNe = kit.lang === 'ne';
@@ -283,7 +283,7 @@ export const SolidPrismPyramidExplorer3D: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! ३D प्रिज्म र पिरामिडका मोडेलहरूलाई हातले घुमाएर पृष्ठ (Faces), किनारा (Edges) र शीर्षबिन्दु (Vertices) अध्ययन गर्नुहोस्!',
+        'नमस्ते! 3D प्रिज्म र पिरामिडका मोडेलहरूलाई हातले घुमाएर पृष्ठ (Faces), किनारा (Edges) र शीर्षबिन्दु (Vertices) अध्ययन गर्नुहोस्!',
         'Hello! Rotate and explore 3D models of prisms and pyramids to inspect their faces, edges, and vertices!'
       )}
     >
@@ -300,7 +300,7 @@ export const SolidPrismPyramidExplorer3D: React.FC<{
                   : 'bg-slate-800/60 border-slate-700 text-slate-300 hover:bg-slate-800'
               }`}
             >
-              <div className="text-xs text-amber-400 font-semibold">{SOLIDS[solidKey].kind === 'prism' ? 'प्रिज्म (Prism)' : 'पिरामिड (Pyramid)'}</div>
+              <div className="text-xs text-amber-400 font-semibold">{SOLIDS[solidKey].kind === 'prism' ? 'Prism' : 'Pyramid'}</div>
               <div className="font-bold text-xs text-slate-100 mt-1">{isNe ? SOLIDS[solidKey].nameNp.split(' ')[0] : SOLIDS[solidKey].nameEn}</div>
             </button>
           ))}
@@ -310,7 +310,7 @@ export const SolidPrismPyramidExplorer3D: React.FC<{
         <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 flex flex-col items-center relative">
           <canvas ref={canvasRef} className="w-full max-w-2xl h-72 cursor-grab active:cursor-grabbing rounded-xl" />
           <div className="absolute top-6 left-6 text-xs text-slate-400 bg-slate-900/80 px-2.5 py-1 rounded-md border border-slate-700 pointer-events-none">
-            🖱️ {L('माउस वा औंलाले ३D मोडेल घुमाउनुहोस्', 'Drag to rotate 3D solid in real-time')}
+            🖱️ {L('माउस वा औंलाले 3D मोडेल घुमाउनुहोस्', 'Drag to rotate 3D solid in real-time')}
           </div>
 
           <div className="absolute top-6 right-6 flex items-center gap-2">

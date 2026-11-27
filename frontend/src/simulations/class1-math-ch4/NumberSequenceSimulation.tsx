@@ -1,8 +1,8 @@
 /**
  * NumberSequenceSimulation.tsx
- * Simulation 05: Number Sequence Adventure (सङ्ख्या क्रम मिलाऔँ)
- * Class 1 Mathematics - Chapter 4: Numbers up to 9 (९ सम्मका सङ्ख्याहरू)
- * Based on Nepal CDC Curriculum (मेरो गणित, कक्षा १ - २०७६)
+ * Simulation 05: Number Sequence Adventure
+ * Class 1 Mathematics - Chapter 4: Numbers up to 9
+ * Based on Nepal CDC Curriculum
  */
 
 import React, { useState, useEffect, useCallback } from 'react';
@@ -43,7 +43,7 @@ interface BeforeAfterChallenge {
   options: number[];
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const NEP_NAMES = ['शून्य', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ'];
 const EN_NAMES = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
 
@@ -52,11 +52,11 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Language & Audio
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
-  // Script Mode: 'np' (१–९) vs 'en' (1–9)
-  const [scriptMode, setScriptMode] = useState<'np' | 'en'>('np');
+  // Script Mode: 'np' (1–9) vs 'en' (1–9)
+  const [scriptMode, setScriptMode] = useState<'np' | 'en'>('en');
 
   // Active Mode
   const [activeMode, setActiveMode] = useState<ActivityMode>('RIVER_CROSSING');
@@ -186,7 +186,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
         return ns;
       });
       speakText(
-        'वाह! तपाईंले नदी तर्नुभयो! १ देखि ९ सम्मका सबै ढुङ्गाहरू पार भए!',
+        'वाह! तपाईंले नदी तर्नुभयो! 1 देखि 9 सम्मका सबै ढुङ्गाहरू पार भए!',
         'Hooray! You crossed the river! All stones 1 through 9 completed!'
       );
       return;
@@ -228,7 +228,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
     setCrossingComplete(false);
     refreshRiverOptions(1);
     speakText(
-      'ढुङ्गाहरूमा १ देखि ९ सम्म क्रमबद्ध टेकेर नदी तर्नुहोस्!',
+      'ढुङ्गाहरूमा 1 देखि 9 सम्म क्रमबद्ध टेकेर नदी तर्नुहोस्!',
       'Step on the numbered stones from 1 to 9 in order to cross the river!'
     );
   };
@@ -405,11 +405,11 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
 
           <div>
             <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
-              कक्षा १ • गणित • अध्याय ४ : ९ सम्मका सङ्ख्याहरू
+              Class 1 • Maths • Chapter 4 : Numbers up to 9
             </div>
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
-                ? 'सिमुलेसन ०५: सङ्ख्या क्रम मिलाऔँ (Number Sequence Adventure)'
+                ? 'सिमुलेसन 05: सङ्ख्या क्रम मिलाऔँ (Number Sequence Adventure)'
                 : 'Simulation 05: Number Sequence Adventure'}
             </h1>
           </div>
@@ -440,7 +440,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 cursor: 'pointer',
               }}
             >
-              देवनागरी (१–९)
+              Nepali script (1–9)
             </button>
             <button
               onClick={() => setScriptMode('en')}
@@ -478,21 +478,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
           </div>
 
           {/* Language Switch */}
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            style={{
-              padding: '6px 12px',
-              background: '#FFFFFF',
-              border: '1px solid #DCE5DE',
-              borderRadius: '8px',
-              color: '#26332E',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '13px',
-            }}
-          >
-            {language === 'np' ? 'नेपाली | EN' : 'EN | नेपाली'}
-          </button>
+          
 
           {/* Sound Toggle */}
           <button
@@ -526,25 +512,25 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
         {[
           {
             key: 'RIVER_CROSSING',
-            np: '१. नदी तर्ने खेल (River Crossing)',
+            np: '1. नदी तर्ने खेल (River Crossing)',
             en: '1. River Crossing',
             icon: '🌊',
           },
           {
             key: 'ARRANGE_SEQUENCE',
-            np: '२. क्रम मिलाऔँ (Order 1 to 9)',
+            np: '2. क्रम मिलाऔँ (Order 1 to 9)',
             en: '2. Order 1 to 9',
             icon: '🚂',
           },
           {
             key: 'MISSING_NUMBERS',
-            np: '३. छुटेको सङ्ख्या (Missing Numbers)',
+            np: '3. छुटेको सङ्ख्या (Missing Numbers)',
             en: '3. Missing Numbers',
             icon: '❓',
           },
           {
             key: 'BEFORE_AFTER',
-            np: '४. अघि र पछिको सङ्ख्या (Before & After)',
+            np: '4. अघि र पछिको सङ्ख्या (Before & After)',
             en: '4. Before & After',
             icon: '↔️',
           },
@@ -615,7 +601,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
             >
               <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 800, color: '#26332E' }}>
                 {language === 'np'
-                  ? '१ देखि ९ सम्मका ढुङ्गाहरूमा टेकेर नदी पार गर्नुहोस्!'
+                  ? '1 देखि 9 सम्मका ढुङ्गाहरूमा टेकेर नदी पार गर्नुहोस्!'
                   : 'Step on the numbered stones 1 through 9 to cross the river!'}
               </h2>
               <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#26332E' }}>
@@ -830,7 +816,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                     </h3>
                     <span style={{ fontSize: '13px', color: '#26332E' }}>
                       {language === 'np'
-                        ? 'तपाईंले १ देखि ९ सम्मको क्रम बुझ्नुभयो।'
+                        ? 'तपाईंले 1 देखि 9 सम्मको क्रम बुझ्नुभयो।'
                         : 'You learned the sequence 1 to 9.'}
                     </span>
                   </div>
@@ -860,7 +846,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
         )}
 
         {/* ======================================================== */}
-        {/* MODE 2: ARRANGE SEQUENCE (१ देखि ९ सम्म मिलाऔँ)             */}
+        {/* MODE 2: ARRANGE SEQUENCE             */}
         {/* ======================================================== */}
         {activeMode === 'ARRANGE_SEQUENCE' && (
           <div
@@ -1025,7 +1011,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 <Sparkles size={32} color="#fbbf24" />
                 <span style={{ fontSize: '16px', fontWeight: 800, color: '#26332E' }}>
                   {language === 'np'
-                    ? 'उत्तम काम! सबै सङ्ख्याहरू सही क्रममा छन्! (+२ ताराहरू)'
+                    ? 'उत्तम काम! सबै सङ्ख्याहरू सही क्रममा छन्!'
                     : 'Splendid! All numbers in proper increasing order! (+2 Stars)'}
                 </span>
               </div>
@@ -1146,7 +1132,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 >
                   {missingFeedback
                     ? language === 'np'
-                      ? 'सबास! सही जवाफ (+१ तारा)'
+                      ? 'सबास! सही जवाफ (+1 तारा)'
                       : 'Correct! (+1 Star)'
                     : language === 'np'
                     ? 'पुनः प्रयास गर्नुहोस्!'
@@ -1278,7 +1264,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 >
                   {beforeAfterFeedback
                     ? language === 'np'
-                      ? 'सबास! सही उत्तर (+१ तारा)'
+                      ? 'सबास! सही उत्तर (+1 तारा)'
                       : 'Splendid! Correct (+1 Star)'
                     : language === 'np'
                     ? 'पुनः प्रयास गर्नुहोस्!'

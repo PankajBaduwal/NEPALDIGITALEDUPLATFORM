@@ -13,10 +13,10 @@ const QUIZ_QUESTIONS = [
     np: 'वृत्तको केन्द्रबाट परिधिसम्मको दुरीलाई के भनिन्छ?',
     en: 'What is the distance from the centre of a circle to any point on its circumference called?',
     options: [
-      { key: 'A', label: 'अर्धव्यास (Radius)' },
-      { key: 'B', label: 'व्यास (Diameter)' },
-      { key: 'C', label: 'जीवा (Chord)' },
-      { key: 'D', label: 'चाप (Arc)' },
+      { key: 'A', label: 'Radius' },
+      { key: 'B', label: 'Diameter' },
+      { key: 'C', label: 'Chord' },
+      { key: 'D', label: 'Arc' },
     ],
     answer: 'A',
   },
@@ -24,18 +24,18 @@ const QUIZ_QUESTIONS = [
     np: 'वृत्तको सबैभन्दा लामो जीवा (Longest Chord) कुन हो?',
     en: 'What is the longest possible chord in any circle?',
     options: [
-      { key: 'A', label: 'व्यास (Diameter, passing through centre)' },
-      { key: 'B', label: 'अर्धव्यास' },
-      { key: 'C', label: 'चाप' },
-      { key: 'D', label: 'स्पर्शरेखा' },
+      { key: 'A', label: 'Diameter (passing through the centre)' },
+      { key: 'B', label: 'Radius' },
+      { key: 'C', label: 'Arc' },
+      { key: 'D', label: 'Tangent' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि वृत्तको अर्धव्यास (Radius) ७ सेमी भए यसको परिधि (Circumference) कति हुन्छ? (π = २२/७)',
+    np: 'यदि वृत्तको Radius 7 cm भए यसको परिधि (Circumference) कति हुन्छ? (π = 22/7)',
     en: 'If the radius of a circle is 7 cm, what is its circumference? (π = 22/7)',
     options: [
-      { key: 'A', label: '44 cm (२πr = २ × २२/७ × ७ = ४४)' },
+      { key: 'A', label: '44 cm (2πr = 2 × 22/7 × 7 = 44)' },
       { key: 'B', label: '22 cm' },
       { key: 'C', label: '14 cm' },
       { key: 'D', label: '154 cm' },
@@ -120,7 +120,7 @@ export const InteractiveCircleExplorer: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! वृत्तको केन्द्र, अर्धव्यास, व्यास, जीवा र केन्द्रबाट जीवामा खिचिएको लम्बको दुरी प्रत्यक्ष तन्काएर सबैभन्दा लामो जीवा (व्यास) को रहस्य पत्ता लगाउनुहोस्!',
+        'नमस्ते! वृत्तको केन्द्र, Radius, व्यास, जीवा र केन्द्रबाट जीवामा खिचिएको लम्बको दुरी प्रत्यक्ष तन्काएर सबैभन्दा लामो जीवा (व्यास) को रहस्य पत्ता लगाउनुहोस्!',
         'Welcome! Explore the center, radius, diameter, chords, and perpendicular distance from the center. Discover that diameter is the longest possible chord!'
       )}
     >
@@ -141,7 +141,7 @@ export const InteractiveCircleExplorer: React.FC<{
           {/* Radius Slider */}
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#334155' }}>
-              <span>{L('अर्धव्यास (Radius r):', 'Radius r:')}</span>
+              <span>{L('Radius (Radius r):', 'Radius r:')}</span>
               <strong style={{ color: '#0F766E' }}>{fmt(radiusCm)} cm</strong>
             </div>
             <input
@@ -159,11 +159,11 @@ export const InteractiveCircleExplorer: React.FC<{
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: 12 }}>
             <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', color: '#166534' }}>
               <input type="checkbox" checked={showRadius} onChange={(e) => setShowRadius(e.target.checked)} />
-              {L('अर्धव्यास (Radius)', 'Radius')}
+              {L('Radius', 'Radius')}
             </label>
             <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', color: '#1E40AF' }}>
               <input type="checkbox" checked={showDiameter} onChange={(e) => setShowDiameter(e.target.checked)} />
-              {L('व्यास (Diameter)', 'Diameter')}
+              {L('Diameter', 'Diameter')}
             </label>
             <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', color: '#92400E' }}>
               <input type="checkbox" checked={showChord} onChange={(e) => setShowChord(e.target.checked)} />
@@ -362,10 +362,10 @@ export const InteractiveCircleExplorer: React.FC<{
               </strong>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, fontSize: 12 }}>
                 <div style={{ backgroundColor: '#F0FDF4', padding: 8, borderRadius: 6, color: '#166534' }}>
-                  <strong>{L('अर्धव्यास (r):', 'Radius:')}</strong> {fmt(radiusCm)} cm
+                  <strong>{L('Radius (r):', 'Radius:')}</strong> {fmt(radiusCm)} cm
                 </div>
                 <div style={{ backgroundColor: '#EFF6FF', padding: 8, borderRadius: 6, color: '#1E40AF' }}>
-                  <strong>{L('व्यास (d = २r):', 'Diameter:')}</strong> {fmt(diameterCm)} cm
+                  <strong>{L('व्यास (d = 2r):', 'Diameter:')}</strong> {fmt(diameterCm)} cm
                 </div>
                 <div style={{ backgroundColor: '#FFFBEB', padding: 8, borderRadius: 6, color: '#92400E' }}>
                   <strong>{L('जीवाको लम्बाइ (CD):', 'Chord CD:')}</strong> {fmt(chordLenCm)} cm
@@ -375,7 +375,7 @@ export const InteractiveCircleExplorer: React.FC<{
                 </div>
               </div>
               <div style={{ fontSize: 12, color: '#475569', marginTop: 4 }}>
-                <strong>{L('परिधि (Circumference = २πr):', 'Circumference (2πr):')}</strong>{' '}
+                <strong>{L('परिधि (Circumference = 2πr):', 'Circumference (2πr):')}</strong>{' '}
                 <span style={{ fontFamily: 'monospace', fontWeight: 700, color: '#0F766E' }}>
                   {fmt(circumCm)} cm
                 </span>
@@ -399,7 +399,7 @@ export const InteractiveCircleExplorer: React.FC<{
                 • <strong>{L('सबैभन्दा लामो जीवा:', 'Longest Chord:')}</strong>{' '}
                 {Number(perpDistCm) < 0.3
                   ? L(
-                      'जीवा केन्द्र O बाट जाँदा यसको लम्बाइ ठ्याक्कै व्यास (Diameter) बराबर अधिकतम हुन्छ!',
+                      'जीवा केन्द्र O बाट जाँदा यसको लम्बाइ ठ्याक्कै Diameter बराबर अधिकतम हुन्छ!',
                       'Chord passes through centre O: it becomes the diameter (maximum length)!'
                     )
                   : L(
@@ -430,7 +430,7 @@ export const InteractiveCircleExplorer: React.FC<{
                 📐 {L('पाइथागोरस सम्बन्ध (Right Triangle △OMC):', 'Pythagorean Relation in △OMC:')}
               </div>
               <div style={{ fontFamily: 'monospace', color: '#0F766E', marginTop: 4 }}>
-                OC² = OM² + MC² ⇒ r² = OM² + (CD / २)²
+                OC² = OM² + MC² ⇒ r² = OM² + (CD / 2)²
               </div>
               <div style={{ color: '#64748B', marginTop: 2 }}>
                 {fmt(radiusCm)}² = {fmt(perpDistCm)}² + ({fmt((Number(chordLenCm) / 2).toFixed(1))})²

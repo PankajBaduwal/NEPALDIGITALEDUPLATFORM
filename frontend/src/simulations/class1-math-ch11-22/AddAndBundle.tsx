@@ -1,6 +1,6 @@
 /**
- * Chapter 16 · Addition up to the sum of 100 (योगफल १०० सम्म आउने जोड)
- * Sim 1: Add and Bundle (जोडौँ र बाँधौँ) — Pure 2D Edition
+ * Chapter 16 · Addition up to the sum of 100
+ * Sim 1: Add and Bundle — Pure 2D Edition
  * 100% 2D SVG / CSS Animations – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -17,7 +17,7 @@ export const AddAndBundle: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G1-CH16-01',
     chapter: 16,
-    titleNp: 'जोडौँ र बाँधौँ (१०० सम्मको जोड)',
+    titleNp: 'जोडौँ र बाँधौँ (100 सम्मको जोड)',
     titleEn: 'Add and Bundle (Addition to 100)',
   });
 
@@ -40,7 +40,7 @@ export const AddAndBundle: React.FC<Props> = ({ onBackToLibrary }) => {
     setIsBundled(true);
     if (rawOnes >= 10) {
       kit.good(
-        `१० एकाइ मिलेर १ नयाँ दशक बन्यो! जम्मा योगफल = ${toNp(total)}`,
+        `10 एकाइ मिलेर 1 नयाँ दशक बन्यो! जम्मा योगफल = ${toNp(total)}`,
         `10 ones bundled into 1 new ten rod! Total sum = ${total}`
       );
     } else {
@@ -60,32 +60,32 @@ export const AddAndBundle: React.FC<Props> = ({ onBackToLibrary }) => {
   const quizQuestions: QuizQuestion[] = useMemo(
     () => [
       {
-        np: '२५ + १५ को योगफल कति हुन्छ?',
+        np: '25 + 15 को योगफल कति हुन्छ?',
         en: 'What is 25 + 15?',
         options: [
-          { key: '40', label: isNe ? '४०' : '40' },
-          { key: '30', label: isNe ? '३०' : '30' },
-          { key: '35', label: isNe ? '३५' : '35' },
+          { key: '40', label: isNe ? '40' : '40' },
+          { key: '30', label: isNe ? '30' : '30' },
+          { key: '35', label: isNe ? '35' : '35' },
         ],
         answer: '40',
       },
       {
-        np: '८ एकाइ र ५ एकाइ जोड्दा कति हुन्छ? (८ + ५)',
+        np: '8 एकाइ र 5 एकाइ जोड्दा कति हुन्छ? (8 + 5)',
         en: 'What is 8 ones + 5 ones?',
         options: [
-          { key: '13', label: isNe ? '१३ (१ दशक ३ एकाइ)' : '13 (1 ten 3 ones)' },
-          { key: '12', label: isNe ? '१२' : '12' },
-          { key: '14', label: isNe ? '१४' : '14' },
+          { key: '13', label: isNe ? '13' : '13 (1 ten 3 ones)' },
+          { key: '12', label: isNe ? '12' : '12' },
+          { key: '14', label: isNe ? '14' : '14' },
         ],
         answer: '13',
       },
       {
-        np: '३४ + २८ को योगफल कति हुन्छ?',
+        np: '34 + 28 को योगफल कति हुन्छ?',
         en: 'What is 34 + 28?',
         options: [
-          { key: '62', label: isNe ? '६२' : '62' },
-          { key: '52', label: isNe ? '५२' : '52' },
-          { key: '60', label: isNe ? '६०' : '60' },
+          { key: '62', label: isNe ? '62' : '62' },
+          { key: '52', label: isNe ? '52' : '52' },
+          { key: '60', label: isNe ? '60' : '60' },
         ],
         answer: '62',
       },

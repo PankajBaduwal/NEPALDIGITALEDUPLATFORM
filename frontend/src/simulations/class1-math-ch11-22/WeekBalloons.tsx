@@ -1,6 +1,6 @@
 /**
- * Chapter 19 · Time (समय - हप्ताका सात दिन)
- * Sim 1: Week Balloons (हप्ताका सात दिन) — Pure 2D Edition
+ * Chapter 19 · Time
+ * Sim 1: Week Balloons — Pure 2D Edition
  * 100% 2D SVG / CSS Animations – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -80,9 +80,9 @@ export const WeekBalloons: React.FC<Props> = ({ onBackToLibrary }) => {
         np: 'एक हप्तामा कति दिन हुन्छन्?',
         en: 'How many days are in a week?',
         options: [
-          { key: '7', label: isNe ? '७ दिन' : '7 days' },
-          { key: '5', label: isNe ? '५ दिन' : '5 days' },
-          { key: '6', label: isNe ? '६ दिन' : '6 days' },
+          { key: '7', label: isNe ? '7 दिन' : '7 days' },
+          { key: '5', label: isNe ? '5 दिन' : '5 days' },
+          { key: '6', label: isNe ? '6 दिन' : '6 days' },
         ],
         answer: '7',
       },
@@ -128,7 +128,7 @@ export const WeekBalloons: React.FC<Props> = ({ onBackToLibrary }) => {
             color: '#187C68',
           }}
         >
-          📅 {L(`राखिएका दिन: ${toNp(placedDays.length)}/७`, `Days placed: ${placedDays.length}/7`)}
+          📅 {L(`राखिएका दिन: ${toNp(placedDays.length)}/7`, `Days placed: ${placedDays.length}/7`)}
         </div>
       }
       panel={

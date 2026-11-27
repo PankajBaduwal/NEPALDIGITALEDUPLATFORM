@@ -1,7 +1,7 @@
 /**
  * MagnetExplorerSim.tsx
- * Simulation 27: 2D Magnet Explorer Physics Lab (चुम्बक अन्वेषक भौतिक प्रयोगशाला)
- * Grade 4 Science • Chapter 7: Energy (ऊर्जा)
+ * Simulation 27: 2D Magnet Explorer Physics Lab
+ * Grade 4 Science • Chapter 7: Energy
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
@@ -38,7 +38,7 @@ export const MagnetExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -401,7 +401,7 @@ export const MagnetExplorerSim: React.FC<BaseSimulationProps> = ({
       drawForceArrow(ctx, 470, magY, -1, '#4ade80');
 
       // Banner
-      drawPolesBanner(ctx, 440, 160, 'Attraction (आकर्षण)', 'Unlike poles attract (विपरीत ध्रुवहरू आकर्षित हुन्छन्)', '#4ade80');
+      drawPolesBanner(ctx, 440, 160, 'Attraction', 'Unlike poles attract', '#4ade80');
     } else {
       // LIKE POLES REPEL (North & North)
       ctx.strokeStyle = '#ef4444';
@@ -437,7 +437,7 @@ export const MagnetExplorerSim: React.FC<BaseSimulationProps> = ({
       drawForceArrow(ctx, 480, magY, 1, '#ef4444');
 
       // Banner
-      drawPolesBanner(ctx, 440, 160, 'Repulsion (प्रतिकर्षण)', 'Like poles repel (समान ध्रुवहरू विकर्षित हुन्छन्)', '#ef4444');
+      drawPolesBanner(ctx, 440, 160, 'Repulsion', 'Like poles repel', '#ef4444');
     }
     ctx.restore();
   }
@@ -542,7 +542,7 @@ export const MagnetExplorerSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 7: Energy'
-          : 'कक्षा ४ विज्ञान • एकाइ ७: ऊर्जा'
+          : 'कक्षा 4 विज्ञान • एकाइ 7: ऊर्जा'
       }
       currentStage={stage}
       onStageChange={setStage}

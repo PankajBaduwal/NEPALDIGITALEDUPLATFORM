@@ -1,7 +1,7 @@
 /**
  * NumberClassificationLab.tsx
- * Grade 8 Mathematics – Unit 3: RATIONAL AND IRRATIONAL NUMBERS (परिमेय र अपरिमेय सङ्ख्याहरू)
- * Simulation 3: Rational and Irrational Number Classification Lab (परिमेय र अपरिमेय सङ्ख्या वर्गीकरण प्रयोगशाला)
+ * Grade 8 Mathematics – Unit 3: RATIONAL AND IRRATIONAL NUMBERS
+ * Simulation 3: Rational and Irrational Number Classification Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 3)
  */
 import React, { useState } from 'react';
@@ -12,24 +12,24 @@ import { Network, Filter, PieChart, Layers, CheckCircle2, HelpCircle } from 'luc
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'दुई पूर्णाङ्कहरू a र b (जहाँ b ≠ ०) को अनुपात a/b को रूपमा व्यक्त गर्न सकिने सङ्ख्यालाई के भनिन्छ?',
+    np: 'दुई पूर्णाङ्कहरू a र b को अनुपात a/b को रूपमा व्यक्त गर्न सकिने सङ्ख्यालाई के भनिन्छ?',
     en: 'A number that can be expressed in the form a/b where a and b are integers and b ≠ 0 is called:',
     options: [
-      { key: 'A', label: 'परिमेय सङ्ख्या (Rational Number)' },
-      { key: 'B', label: 'अपरिमेय सङ्ख्या (Irrational Number)' },
-      { key: 'C', label: 'काल्पनिक सङ्ख्या (Imaginary Number)' },
-      { key: 'D', label: 'अपरिभाषित सङ्ख्या' },
+      { key: 'A', label: 'Rational number' },
+      { key: 'B', label: 'Irrational number' },
+      { key: 'C', label: 'Imaginary number' },
+      { key: 'D', label: 'Undefined number' },
     ],
     answer: 'A',
   },
   {
-    np: 'तलका मध्ये कुन सङ्ख्या अपरिमेय सङ्ख्या (Irrational Number) हो?',
+    np: 'तलका मध्ये कुन सङ्ख्या Irrational number हो?',
     en: 'Which of the following is an irrational number?',
     options: [
-      { key: 'A', label: '√२ (Non-terminating non-recurring: 1.4142135...)' },
-      { key: 'B', label: '०.२५ (Terminating decimal = 1/4)' },
-      { key: 'C', label: '०.३३३३... (Recurring decimal = 1/3)' },
-      { key: 'D', label: '-७ (-7/1)' },
+      { key: 'A', label: '√2 (Non-terminating non-recurring: 1.4142135...)' },
+      { key: 'B', label: '0.25 (Terminating decimal = 1/4)' },
+      { key: 'C', label: '0.3333... (Recurring decimal = 1/3)' },
+      { key: 'D', label: '-7 (-7/1)' },
     ],
     answer: 'A',
   },
@@ -37,10 +37,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समाप्त हुने दशमलव (Terminating) र दोहोरिने दशमलव (Recurring) कुन वर्गका सङ्ख्या हुन्?',
     en: 'Terminating decimals and recurring decimals both belong to which category?',
     options: [
-      { key: 'A', label: 'परिमेय सङ्ख्याहरू (Rational Numbers - किनकि यिनीहरूलाई भिन्न a/b मा रूपान्तरण गर्न सकिन्छ)' },
-      { key: 'B', label: 'अपरिमेय सङ्ख्याहरू' },
-      { key: 'C', label: 'प्राकृतिक सङ्ख्याहरू मात्र' },
-      { key: 'D', label: 'ऋणात्मक पूर्णाङ्क मात्र' },
+      { key: 'A', label: 'Rational numbers (because they can be written as a fraction a/b)' },
+      { key: 'B', label: 'Irrational numbers' },
+      { key: 'C', label: 'Natural numbers only' },
+      { key: 'D', label: 'Negative integers only' },
     ],
     answer: 'A',
   },
@@ -48,21 +48,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'सङ्ख्या समूहहरूको सम्बन्ध N ⊆ W ⊆ Z ⊆ Q ⊆ R मा Q ले कुन समूहलाई जनाउँछ?',
     en: 'In the nested number set relation N ⊆ W ⊆ Z ⊆ Q ⊆ R, what does Q represent?',
     options: [
-      { key: 'A', label: 'परिमेय सङ्ख्याहरूको समूह (Set of Rational Numbers)' },
-      { key: 'B', label: 'पूर्णाङ्कहरूको समूह' },
-      { key: 'C', label: 'प्राकृतिक सङ्ख्या' },
-      { key: 'D', label: 'अपरिमेय सङ्ख्या' },
+      { key: 'A', label: 'Set of rational numbers' },
+      { key: 'B', label: 'Set of integers' },
+      { key: 'C', label: 'Natural number' },
+      { key: 'D', label: 'Irrational number' },
     ],
     answer: 'A',
   },
   {
-    np: 'परिमेय सङ्ख्या (Q) र अपरिमेय सङ्ख्या (Q\') दुवै मिलेर कुन सङ्ख्या समूह बन्दछ?',
+    np: 'परिमेय सङ्ख्या (Q) र Irrational number (Q\') दुवै मिलेर कुन सङ्ख्या समूह बन्दछ?',
     en: 'Together, the disjoint sets of Rational (Q) and Irrational (Q\') numbers form:',
     options: [
-      { key: 'A', label: 'वास्तविक सङ्ख्याहरूको समूह (Real Numbers: R = Q ∪ Q\')' },
-      { key: 'B', label: 'प्राकृतिक सङ्ख्या' },
-      { key: 'C', label: 'पूर्ण सङ्ख्या' },
-      { key: 'D', label: 'शून्य मात्र' },
+      { key: 'A', label: 'Set of real numbers (R = Q ∪ Q\')' },
+      { key: 'B', label: 'Natural number' },
+      { key: 'C', label: 'Whole number' },
+      { key: 'D', label: 'Zero only' },
     ],
     answer: 'A',
   },
@@ -79,16 +79,16 @@ interface NumberCard {
 }
 
 const SAMPLE_NUMBERS: NumberCard[] = [
-  { id: '1', display: '5/2', type: 'rational', category: 'rational', decimalType: 'terminating', explanationNp: 'दुई पूर्णाङ्क ५ र २ को अनुपात हो (२.५)', explanationEn: 'Ratio of integers 5 and 2 (terminating 2.5)' },
-  { id: '2', display: '-7', type: 'rational', category: 'integer', decimalType: 'terminating', explanationNp: '-७ = -७/१, पूर्णाङ्क भएकाले परिमेय हो', explanationEn: '-7 = -7/1, integer so it is rational' },
-  { id: '3', display: '0', type: 'rational', category: 'whole', decimalType: 'terminating', explanationNp: '० = ०/१ (जहाँ हर १ ≠ ०)', explanationEn: '0 = 0/1 where denominator 1 ≠ 0' },
-  { id: '4', display: '0.25', type: 'rational', category: 'rational', decimalType: 'terminating', explanationNp: 'समाप्त हुने दशमलव = २५/१०० = १/४', explanationEn: 'Terminating decimal = 25/100 = 1/4' },
-  { id: '5', display: '0.333...', type: 'rational', category: 'rational', decimalType: 'recurring', explanationNp: 'दोहोरिने दशमलव = १/३', explanationEn: 'Recurring decimal 0.333... = 1/3' },
-  { id: '6', display: '0.4141...', type: 'rational', category: 'rational', decimalType: 'recurring', explanationNp: 'दोहोरिने दशमलव = ४१/९९', explanationEn: 'Recurring decimal 0.4141... = 41/99' },
-  { id: '7', display: '√2', type: 'irrational', category: 'irrational', decimalType: 'non_recurring', explanationNp: '१.४१४२१३५... समाप्त पनि नहुने र नदोहोरिने', explanationEn: '1.4142135... non-terminating and non-recurring' },
-  { id: '8', display: '√3', type: 'irrational', category: 'irrational', decimalType: 'non_recurring', explanationNp: '१.७३२०५०८... समाप्त पनि नहुने र नदोहोरिने', explanationEn: '1.7320508... non-terminating and non-recurring' },
-  { id: '9', display: '√5', type: 'irrational', category: 'irrational', decimalType: 'non_recurring', explanationNp: '२.२३६०६७९... अपरिमेय सङ्ख्या', explanationEn: '2.2360679... non-terminating radical' },
-  { id: '10', display: 'π', type: 'irrational', category: 'irrational', decimalType: 'non_recurring', explanationNp: '३.१४१५९२६५... अपरिमेय सङ्ख्या', explanationEn: '3.14159265... non-terminating non-recurring' },
+  { id: '1', display: '5/2', type: 'rational', category: 'rational', decimalType: 'terminating', explanationNp: 'दुई पूर्णाङ्क 5 र 2 को अनुपात हो (2.5)', explanationEn: 'Ratio of integers 5 and 2 (terminating 2.5)' },
+  { id: '2', display: '-7', type: 'rational', category: 'integer', decimalType: 'terminating', explanationNp: '-7 = -7/1, पूर्णाङ्क भएकाले परिमेय हो', explanationEn: '-7 = -7/1, integer so it is rational' },
+  { id: '3', display: '0', type: 'rational', category: 'whole', decimalType: 'terminating', explanationNp: '0 = 0/1', explanationEn: '0 = 0/1 where denominator 1 ≠ 0' },
+  { id: '4', display: '0.25', type: 'rational', category: 'rational', decimalType: 'terminating', explanationNp: 'समाप्त हुने दशमलव = 25/100 = 1/4', explanationEn: 'Terminating decimal = 25/100 = 1/4' },
+  { id: '5', display: '0.333...', type: 'rational', category: 'rational', decimalType: 'recurring', explanationNp: 'दोहोरिने दशमलव = 1/3', explanationEn: 'Recurring decimal 0.333... = 1/3' },
+  { id: '6', display: '0.4141...', type: 'rational', category: 'rational', decimalType: 'recurring', explanationNp: 'दोहोरिने दशमलव = 41/99', explanationEn: 'Recurring decimal 0.4141... = 41/99' },
+  { id: '7', display: '√2', type: 'irrational', category: 'irrational', decimalType: 'non_recurring', explanationNp: '1.4142135... समाप्त पनि नहुने र नदोहोरिने', explanationEn: '1.4142135... non-terminating and non-recurring' },
+  { id: '8', display: '√3', type: 'irrational', category: 'irrational', decimalType: 'non_recurring', explanationNp: '1.7320508... समाप्त पनि नहुने र नदोहोरिने', explanationEn: '1.7320508... non-terminating and non-recurring' },
+  { id: '9', display: '√5', type: 'irrational', category: 'irrational', decimalType: 'non_recurring', explanationNp: '2.2360679... Irrational number', explanationEn: '2.2360679... non-terminating radical' },
+  { id: '10', display: 'π', type: 'irrational', category: 'irrational', decimalType: 'non_recurring', explanationNp: '3.14159265... Irrational number', explanationEn: '3.14159265... non-terminating non-recurring' },
 ];
 
 export const NumberClassificationLab: React.FC<{
@@ -98,7 +98,7 @@ export const NumberClassificationLab: React.FC<{
   const kit = useSimKit({
     code: 'SIM-MATH-G8-U3-01',
     chapter: 3,
-    titleNp: 'परिमेय र अपरिमेय सङ्ख्या वर्गीकरण (Number Classification)',
+    titleNp: 'परिमेय र Irrational number वर्गीकरण (Number Classification)',
     titleEn: 'Rational and Irrational Classification Lab',
   });
   const isNe = kit.lang === 'ne';
@@ -147,7 +147,7 @@ export const NumberClassificationLab: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! परिमेय (a/b) र अपरिमेय (√२, √३) सङ्ख्याहरू, दशमलवका प्रकारहरू र भेनचित्रको सम्बन्ध सिकौँ!',
+        'नमस्ते! परिमेय (a/b) र अपरिमेय (√2, √3) सङ्ख्याहरू, दशमलवका प्रकारहरू र भेनचित्रको सम्बन्ध सिकौँ!',
         'Hello! Explore rational (a/b) & irrational (√2, √3) numbers, decimal forms, and real number Venn diagrams!'
       )}
     >
@@ -155,10 +155,10 @@ export const NumberClassificationLab: React.FC<{
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'discover', labelNp: '१. परिमेय र अपरिमेय परिचय', labelEn: '1. Rational vs Irrational', icon: Network },
-            { id: 'decimals', labelNp: '२. दशमलवका तीन प्रकारहरू', labelEn: '2. 3 Decimal Categories', icon: Filter },
-            { id: 'venn', labelNp: '३. सङ्ख्या समूहहरूको भेनचित्र (N⊆W⊆Z⊆Q⊆R)', labelEn: '3. Number Sets Venn Diagram', icon: Layers },
-            { id: 'challenge', labelNp: '४. वर्गीकरण अभ्यास चुनौती', labelEn: '4. Classification Challenge', icon: CheckCircle2 },
+            { id: 'discover', labelNp: '1. परिमेय र अपरिमेय परिचय', labelEn: '1. Rational vs Irrational', icon: Network },
+            { id: 'decimals', labelNp: '2. दशमलवका तीन प्रकारहरू', labelEn: '2. 3 Decimal Categories', icon: Filter },
+            { id: 'venn', labelNp: '3. सङ्ख्या समूहहरूको भेनचित्र (N⊆W⊆Z⊆Q⊆R)', labelEn: '3. Number Sets Venn Diagram', icon: Layers },
+            { id: 'challenge', labelNp: '4. वर्गीकरण अभ्यास चुनौती', labelEn: '4. Classification Challenge', icon: CheckCircle2 },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -197,7 +197,7 @@ export const NumberClassificationLab: React.FC<{
           <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
             <h3 style={{ margin: '0 0 12px 0', color: '#0369a1', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
               <Network size={20} />
-              {L('परिमेय र अपरिमेय सङ्ख्याको गणितीय परिभाषा', 'Mathematical Definitions of Rational and Irrational Numbers')}
+              {L('परिमेय र Irrational numberको गणितीय परिभाषा', 'Mathematical Definitions of Rational and Irrational Numbers')}
             </h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 16 }}>
@@ -208,19 +208,19 @@ export const NumberClassificationLab: React.FC<{
                 </div>
                 <div style={{ fontSize: 13, color: '#15803d', marginTop: 4, lineHeight: 1.6 }}>
                   {L(
-                    'a र b दुई पूर्णाङ्कहरू (Integers) हुन् जहाँ b ≠ ०, यस्ता दुई पूर्णाङ्कको अनुपात a/b को रूपमा लेख्न सकिने सङ्ख्या।',
+                    'a र b दुई पूर्णाङ्कहरू (Integers) हुन् जहाँ b ≠ 0, यस्ता दुई पूर्णाङ्कको अनुपात a/b को रूपमा लेख्न सकिने सङ्ख्या।',
                     'A number that can be expressed in the form a/b where a, b ∈ Z and b ≠ 0.'
                   )}
                 </div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#166534', marginTop: 6 }}>
-                  {L('उदाहरण: ५/२, -७, ०, २.१३, ०.३३३..., ०.७५', 'Examples: 5/2, -7, 0, 2.13, 0.333..., 0.75')}
+                  {L('उदाहरण: 5/2, -7, 0, 2.13, 0.333..., 0.75', 'Examples: 5/2, -7, 0, 2.13, 0.333..., 0.75')}
                 </div>
               </div>
 
               {/* Irrational Box */}
               <div style={{ background: '#fef2f2', padding: 14, borderRadius: 12, border: '1.5px solid #fecaca' }}>
                 <div style={{ fontSize: 15, fontWeight: 800, color: '#991b1b' }}>
-                  {L('अपरिमेय सङ्ख्या (Irrational Numbers - Q\')', 'Irrational Numbers (Q\')')}
+                  {L('Irrational number (Irrational Numbers - Q\')', 'Irrational Numbers (Q\')')}
                 </div>
                 <div style={{ fontSize: 13, color: '#b91c1c', marginTop: 4, lineHeight: 1.6 }}>
                   {L(
@@ -229,7 +229,7 @@ export const NumberClassificationLab: React.FC<{
                   )}
                 </div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#991b1b', marginTop: 6 }}>
-                  {L('उदाहरण: √२, √३, √५, π', 'Examples: √2, √3, √5, π')}
+                  {L('उदाहरण: √2, √3, √5, π', 'Examples: √2, √3, √5, π')}
                 </div>
               </div>
             </div>
@@ -263,7 +263,7 @@ export const NumberClassificationLab: React.FC<{
             <div style={{ background: '#f8fafc', padding: 14, borderRadius: 12, border: '1px solid #cbd5e1' }}>
               <div style={{ fontSize: 13, color: '#64748b' }}>{L('छानिएको सङ्ख्या:', 'Selected Number:')}</div>
               <div style={{ fontSize: 24, fontWeight: 900, color: selectedNum.type === 'rational' ? '#166534' : '#991b1b', marginTop: 2 }}>
-                {selectedNum.display} ({selectedNum.type === 'rational' ? L('परिमेय सङ्ख्या', 'Rational') : L('अपरिमेय सङ्ख्या', 'Irrational')})
+                {selectedNum.display} ({selectedNum.type === 'rational' ? L('परिमेय सङ्ख्या', 'Rational') : L('Irrational number', 'Irrational')})
               </div>
               <div style={{ fontSize: 14, color: '#334155', marginTop: 6 }}>
                 <strong>{L('कारण:', 'Reason:')}</strong> {isNe ? selectedNum.explanationNp : selectedNum.explanationEn}
@@ -283,9 +283,9 @@ export const NumberClassificationLab: React.FC<{
             <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
               {[
                 { id: 'all', labelNp: 'सबै (All)', labelEn: 'All' },
-                { id: 'terminating', labelNp: '१. समाप्त हुने (Terminating - Rational)', labelEn: 'Terminating' },
-                { id: 'recurring', labelNp: '२. दोहोरिने (Recurring - Rational)', labelEn: 'Recurring' },
-                { id: 'non_recurring', labelNp: '३. समाप्त नहुने र नदोहोरिने (Irrational)', labelEn: 'Non-recurring' },
+                { id: 'terminating', labelNp: '1. समाप्त हुने (Terminating - Rational)', labelEn: 'Terminating' },
+                { id: 'recurring', labelNp: '2. दोहोरिने (Recurring - Rational)', labelEn: 'Recurring' },
+                { id: 'non_recurring', labelNp: '3. समाप्त नहुने र नदोहोरिने (Irrational)', labelEn: 'Non-recurring' },
               ].map((f) => (
                 <button
                   key={f.id}
@@ -343,7 +343,7 @@ export const NumberClassificationLab: React.FC<{
             </h3>
             <p style={{ margin: '0 0 14px 0', fontSize: 13, color: '#475569' }}>
               {L(
-                'वास्तविक सङ्ख्या (R) भित्र परिमेय (Q) र अपरिमेय (Q\') दुईवटा विलगित (Disjoint) समूहहरू हुन्छन्। परिमेयभित्र क्रमशः Z, W र N समेटिएका हुन्छन्।',
+                'वास्तविक सङ्ख्या (R) भित्र परिमेय (Q) र अपरिमेय (Q\') दुईpcs विलगित (Disjoint) समूहहरू हुन्छन्। परिमेयभित्र क्रमशः Z, W र N समेटिएका हुन्छन्।',
                 'Real numbers (R) are partitioned into Rational (Q) and Irrational (Q\'). Inside Q lie Z, W, and N nested.'
               )}
             </p>
@@ -353,41 +353,41 @@ export const NumberClassificationLab: React.FC<{
               {/* Rational Hierarchy Box */}
               <div style={{ background: '#f0fdf4', border: '2.5px solid #16a34a', borderRadius: 16, padding: 14 }}>
                 <div style={{ fontSize: 14, fontWeight: 800, color: '#166534', marginBottom: 8 }}>
-                  Q: परिमेय सङ्ख्याहरू (Rational Numbers)
+                  Q: Rational numbers
                 </div>
                 {/* Z Box */}
                 <div style={{ background: '#dcfce7', border: '2px solid #22c55e', borderRadius: 12, padding: 12, marginBottom: 8 }}>
                   <div style={{ fontSize: 13, fontWeight: 800, color: '#15803d' }}>
-                    Z: पूर्णाङ्कहरू (Integers: ...-२, -१, ०, १, २...)
+                    Z: Integers (...-2, -1, 0, 1, 2...)
                   </div>
                   {/* W Box */}
                   <div style={{ background: '#bbf7d0', border: '2px solid #16a34a', borderRadius: 10, padding: 10, marginTop: 6 }}>
                     <div style={{ fontSize: 12, fontWeight: 800, color: '#14532d' }}>
-                      W: पूर्ण सङ्ख्याहरू (Whole Numbers: ०, १, २, ३...)
+                      W: Whole numbers (0, 1, 2, 3...)
                     </div>
                     {/* N Box */}
                     <div style={{ background: '#86efac', border: '2px solid #15803d', borderRadius: 8, padding: 8, marginTop: 6 }}>
                       <div style={{ fontSize: 12, fontWeight: 900, color: '#052e16' }}>
-                        N: प्राकृतिक सङ्ख्याहरू (Natural: १, २, ३, ४...)
+                        N: Natural numbers (1, 2, 3, 4...)
                       </div>
                     </div>
                   </div>
                 </div>
                 <div style={{ fontSize: 12, color: '#166534', fontWeight: 700 }}>
-                  भिन्नहरू (Fractions): ५/२, -३/४, २.५, ०.३३३...
+                  Fractions: 5/2, -3/4, 2.5, 0.333...
                 </div>
               </div>
 
               {/* Irrational Disjoint Box */}
               <div style={{ background: '#fef2f2', border: '2.5px solid #ef4444', borderRadius: 16, padding: 14 }}>
                 <div style={{ fontSize: 14, fontWeight: 800, color: '#991b1b', marginBottom: 8 }}>
-                  Q': अपरिमेय सङ्ख्याहरू (Irrational)
+                  Q': Irrational numbers
                 </div>
                 <div style={{ fontSize: 13, color: '#b91c1c', lineHeight: 1.6 }}>
-                  • √२ ≈ १.४१४२...<br />
-                  • √३ ≈ १.७३२०...<br />
-                  • √५ ≈ २.२३६०...<br />
-                  • π ≈ ३.१४१५...
+                  • √2 ≈ 1.4142...<br />
+                  • √3 ≈ 1.7320...<br />
+                  • √5 ≈ 2.2360...<br />
+                  • π ≈ 3.1415...
                 </div>
                 <div style={{ marginTop: 12, padding: 8, background: '#ffffff', borderRadius: 8, border: '1px solid #fca5a5', fontSize: 11, color: '#7f1d1d' }}>
                   {L('Q ∩ Q\' = ∅ (आपसमा कुनै साझा सदस्य हुँदैनन्)', 'Q ∩ Q\' = ∅ (Disjoint sets)')}
@@ -442,7 +442,7 @@ export const NumberClassificationLab: React.FC<{
                     cursor: 'pointer',
                   }}
                 >
-                  {L('अपरिमेय सङ्ख्या (Irrational)', 'Irrational')}
+                  {L('Irrational number (Irrational)', 'Irrational')}
                 </button>
               </div>
 

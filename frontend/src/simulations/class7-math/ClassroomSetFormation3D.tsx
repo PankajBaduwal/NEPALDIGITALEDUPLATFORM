@@ -1,6 +1,6 @@
 /**
  * ClassroomSetFormation3D.tsx
- * Grade 7 Mathematics – Lesson 1: SET (समूह)
+ * Grade 7 Mathematics – Lesson 1: SET
  * Simulation 6: My Classroom – Real-World Set Formation (3D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Page 15 Project Work)
  */
@@ -40,24 +40,24 @@ const CLASSROOM_ITEMS: ClassroomItem3D[] = [
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'कक्षाकोठाका १० वस्तुहरूबाट बनेका समूहहरू गणितीय हिसाबले कस्ता समूह हुन्?',
+    np: 'कक्षाकोठाका 10 वस्तुहरूबाट बनेका समूहहरू गणितीय हिसाबले कस्ता समूह हुन्?',
     en: 'The sets created from 10 classroom objects are what kind of sets?',
     options: [
-      { key: 'A', label: 'सीमित समूह (Finite Sets)' },
-      { key: 'B', label: 'असीमित समूह' },
-      { key: 'C', label: 'रिक्त समूह' },
-      { key: 'D', label: 'माथिका कुनै पनि होइन' },
+      { key: 'A', label: 'Finite sets' },
+      { key: 'B', label: 'Infinite sets' },
+      { key: 'C', label: 'Empty set' },
+      { key: 'D', label: 'None of the above' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि गणितीय औजारको समूह M र काठका वस्तुको समूह W दुवैमा ४-४ सदस्य भए तिनीहरूको सम्बन्ध के हुन्छ?',
+    np: 'यदि गणितीय औजारको समूह M र काठका वस्तुको समूह W दुवैमा 4-4 सदस्य भए तिनीहरूको सम्बन्ध के हुन्छ?',
     en: 'If set M (Math tools) and set W (Wooden items) both have 4 elements, what is their relation?',
     options: [
-      { key: 'A', label: 'M ~ W (समतुल्य समूह)' },
-      { key: 'B', label: 'M = W (बराबर)' },
+      { key: 'A', label: 'M ~ W' },
+      { key: 'B', label: 'M = W' },
       { key: 'C', label: 'M ⊆ ∅' },
-      { key: 'D', label: 'कुनै सम्बन्ध छैन' },
+      { key: 'D', label: 'No relation' },
     ],
     answer: 'A',
   },
@@ -319,7 +319,7 @@ export const ClassroomSetFormation3D: React.FC<{ onBackToLibrary?: () => void; o
           </button>
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#A7F3D0' }}>
-              {L('कक्षा ७ • गणित • अध्याय १: समूह (३D कक्षाकोठा)', 'Class 7 • Math • Chapter 1: SET (3D Classroom)')}
+              {L('कक्षा 7 • गणित • अध्याय 1: समूह (3D कक्षाकोठा)', 'Class 7 • Math • Chapter 1: SET (3D Classroom)')}
             </div>
             <h1 style={{ margin: 0, fontSize: 18, fontWeight: 900 }}>
               {isNe ? 'मेरो कक्षाकोठा – वास्तविक वस्तुबाट समूह निर्माण' : 'My Classroom – Real-World Set Formation'}
@@ -328,21 +328,7 @@ export const ClassroomSetFormation3D: React.FC<{ onBackToLibrary?: () => void; o
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button
-            onClick={() => kit.setLang(isNe ? 'en' : 'ne')}
-            style={{
-              padding: '6px 12px',
-              borderRadius: 8,
-              border: '1px solid rgba(255,255,255,0.3)',
-              background: 'rgba(255,255,255,0.12)',
-              color: '#FFFFFF',
-              fontWeight: 800,
-              fontSize: 12,
-              cursor: 'pointer',
-            }}
-          >
-            {isNe ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
@@ -351,10 +337,10 @@ export const ClassroomSetFormation3D: React.FC<{ onBackToLibrary?: () => void; o
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0' }}>
           {[
-            { id: 'collect', np: '१. कक्षाकोठाबाट १० वस्तु सङ्कलन', en: '1. Collect 10 Objects' },
-            { id: 'categorize', np: '२. साझा विशेषताका आधारमा समूह निर्माण', en: '2. Form Sets by Properties' },
-            { id: 'relations', np: '३. समूहहरूको सम्बन्ध (समतुल्य / उपसमूह)', en: '3. Set Relationships' },
-            { id: 'project', np: '४. पाठ्यपुस्तक परियोजना कार्य (प्रस्तुतीकरण)', en: '4. Textbook Project Presentation' },
+            { id: 'collect', np: '1. कक्षाकोठाबाट 10 वस्तु सङ्कलन', en: '1. Collect 10 Objects' },
+            { id: 'categorize', np: '2. साझा विशेषताका आधारमा समूह निर्माण', en: '2. Form Sets by Properties' },
+            { id: 'relations', np: '3. समूहहरूको सम्बन्ध (समतुल्य / उपसमूह)', en: '3. Set Relationships' },
+            { id: 'project', np: '4. पाठ्यपुस्तक परियोजना कार्य (प्रस्तुतीकरण)', en: '4. Textbook Project Presentation' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -383,10 +369,10 @@ export const ClassroomSetFormation3D: React.FC<{ onBackToLibrary?: () => void; o
         <div style={{ background: '#FFFFFF', borderRadius: 20, border: '1px solid #E2E8F0', overflow: 'hidden', boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}>
           <div style={{ padding: '12px 18px', background: '#F8FAFC', borderBottom: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
             <span style={{ fontSize: 13, fontWeight: 800, color: '#1E293B' }}>
-              🎮 {L('३D कक्षाकोठा: वस्तुमा क्लिक गरी सङ्कलन गर्नुहोस् (माउसले घुमाउन मिल्छ)', '3D Classroom: Click items to inspect/collect (Drag to rotate camera)')}
+              🎮 {L('3D कक्षाकोठा: वस्तुमा क्लिक गरी सङ्कलन गर्नुहोस् (माउसले घुमाउन मिल्छ)', '3D Classroom: Click items to inspect/collect (Drag to rotate camera)')}
             </span>
             <span style={{ fontSize: 12, fontWeight: 800, color: '#166534', background: '#DCFCE7', padding: '3px 8px', borderRadius: 6 }}>
-              {L(`सङ्कलित वस्तु: ${toNp(collectedIds.length)} / १०`, `Collected: ${collectedIds.length} / 10`)}
+              {L(`सङ्कलित वस्तु: ${toNp(collectedIds.length)} / 10`, `Collected: ${collectedIds.length} / 10`)}
             </span>
           </div>
 
@@ -416,13 +402,13 @@ export const ClassroomSetFormation3D: React.FC<{ onBackToLibrary?: () => void; o
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
               <h3 style={{ margin: 0, fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-                {L('कक्षाकोठाका १० वस्तुहरूको सूची (U)', 'Master List of 10 Classroom Items (U)')}
+                {L('कक्षाकोठाका 10 वस्तुहरूको सूची (U)', 'Master List of 10 Classroom Items (U)')}
               </h3>
               <button
                 onClick={() => {
                   kit.tap();
                   setCollectedIds(CLASSROOM_ITEMS.map((x) => x.id));
-                  kit.good(L('सबै १० वस्तुहरू सङ्कलन गरिए!', 'All 10 items collected!'));
+                  kit.good(L('सबै 10 वस्तुहरू सङ्कलन गरिए!', 'All 10 items collected!'));
                 }}
                 style={{
                   padding: '6px 12px',
@@ -435,7 +421,7 @@ export const ClassroomSetFormation3D: React.FC<{ onBackToLibrary?: () => void; o
                   cursor: 'pointer',
                 }}
               >
-                {L('सबै १० वस्तु छान्नुहोस्', 'Select All 10 Items')}
+                {L('सबै 10 वस्तु छान्नुहोस्', 'Select All 10 Items')}
               </button>
             </div>
 
@@ -594,7 +580,7 @@ export const ClassroomSetFormation3D: React.FC<{ onBackToLibrary?: () => void; o
                 📋 {L('पाठ्यपुस्तक परियोजना कार्य (Project Work - Page 15)', 'Textbook Project Work (Page 15)')}
               </div>
               <h3 style={{ margin: 0, fontSize: 18, fontWeight: 900, color: '#14532D', lineHeight: 1.4 }}>
-                "{L('आफ्नो कक्षाकोठामा भएका १० वटा वस्तुहरूको सूची तयार गर्नुहोस् र साझा विशेषताका आधारमा समूहहरू बनाई कक्षामा प्रस्तुत गर्नुहोस्।', 'Prepare a list of 10 items in your classroom, form different sets based on common properties, and present in class.')}"
+                "{L('आफ्नो कक्षाकोठामा भएका 10 pcs वस्तुहरूको सूची तयार गर्नुहोस् र साझा विशेषताका आधारमा समूहहरू बनाई कक्षामा प्रस्तुत गर्नुहोस्।', 'Prepare a list of 10 items in your classroom, form different sets based on common properties, and present in class.')}"
               </h3>
             </div>
 
@@ -608,19 +594,19 @@ export const ClassroomSetFormation3D: React.FC<{ onBackToLibrary?: () => void; o
                 <div>
                   <strong>{L('सर्वव्यापक समूह U:', 'Universal Set U:')}</strong> {'{ '}
                   {CLASSROOM_ITEMS.slice(0, 10).map((x) => (isNe ? x.nameNp : x.nameEn)).join(', ')}
-                  {' }'} (n = {isNe ? '१०' : '10'})
+                  {' }'} (n = {isNe ? '10' : '10'})
                 </div>
                 <div>
-                  <strong>{L('१. स्टेशनरी समूह S:', '1. Stationery Set S:')}</strong> n(S) = {isNe ? toNp(stationerySet.length) : stationerySet.length}
+                  <strong>{L('1. स्टेशनरी समूह S:', '1. Stationery Set S:')}</strong> n(S) = {isNe ? toNp(stationerySet.length) : stationerySet.length}
                 </div>
                 <div>
-                  <strong>{L('२. गणितीय औजार समूह M:', '2. Math Tools Set M:')}</strong> n(M) = {isNe ? toNp(mathSet.length) : mathSet.length}
+                  <strong>{L('2. गणितीय औजार समूह M:', '2. Math Tools Set M:')}</strong> n(M) = {isNe ? toNp(mathSet.length) : mathSet.length}
                 </div>
                 <div>
-                  <strong>{L('३. काठका वस्तुहरूको समूह W:', '3. Wooden Set W:')}</strong> n(W) = {isNe ? toNp(woodSet.length) : woodSet.length}
+                  <strong>{L('3. काठका वस्तुहरूको समूह W:', '3. Wooden Set W:')}</strong> n(W) = {isNe ? toNp(woodSet.length) : woodSet.length}
                 </div>
                 <div>
-                  <strong>{L('४. निष्कर्ष:', '4. Conclusion:')}</strong> {L('सबै समूहहरू सीमित छन् र U का उपसमूह हुन्।', 'All groups are finite sets and proper subsets of U.')}
+                  <strong>{L('4. निष्कर्ष:', '4. Conclusion:')}</strong> {L('सबै समूहहरू सीमित छन् र U का उपसमूह हुन्।', 'All groups are finite sets and proper subsets of U.')}
                 </div>
               </div>
             </div>

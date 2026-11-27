@@ -20,7 +20,7 @@ const L = (fn: () => Promise<any>, exportName?: string) => {
 };
 
 export const CLASS8_MATH = [
-  // ── UNIT 2: WHOLE NUMBERS (पूर्ण सङ्ख्याहरू) ──────────────────────────
+  // ── UNIT 2: WHOLE NUMBERS ──────────────────────────
   {
     code: 'SIM-MATH-G8-U2-01',
     key: 'class8-math-u2-number-systems',
@@ -40,7 +40,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./BinaryQuinaryConversionLab'), 'BinaryQuinaryConversionLab'),
   },
 
-  // ── UNIT 3: RATIONAL AND IRRATIONAL NUMBERS (परिमेय र अपरिमेय सङ्ख्याहरू) ──
+  // ── UNIT 3: RATIONAL AND IRRATIONAL NUMBERS ──
   {
     code: 'SIM-MATH-G8-U3-01',
     key: 'class8-math-u3-number-classification',
@@ -87,7 +87,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./ScientificNotationCalcLab'), 'ScientificNotationCalcLab'),
   },
 
-  // ── UNIT 4: RATIO AND PROPORTION (अनुपात र समानुपात) ──────────────────
+  // ── UNIT 4: RATIO AND PROPORTION ──────────────────
   {
     code: 'SIM-MATH-G8-U4-01',
     key: 'class8-math-u4-ratio-discovery',
@@ -116,7 +116,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./ProportionUnknownValueLab'), 'ProportionUnknownValueLab'),
   },
 
-  // ── UNIT 5: PROFIT AND LOSS (नाफा र नोक्सान) ──────────────────────────
+  // ── UNIT 5: PROFIT AND LOSS ──────────────────────────
   {
     code: 'SIM-MATH-G8-U5-01',
     key: 'class8-math-u5-profit-loss-marketplace',
@@ -145,7 +145,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./BusinessProfitLossChallenge'), 'BusinessProfitLossChallenge'),
   },
 
-  // ── UNIT 6: UNITARY METHOD (एकाइ विधि) ────────────────────────────────
+  // ── UNIT 6: UNITARY METHOD ────────────────────────────────
   {
     code: 'SIM-MATH-G8-U6-01',
     key: 'class8-math-u6-direct-variation-lab',
@@ -174,7 +174,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./UnitaryMethodRealLifeSolver'), 'UnitaryMethodRealLifeSolver'),
   },
 
-  // ── UNIT 7: SIMPLE INTEREST (साधारण ब्याज) ────────────────────────────
+  // ── UNIT 7: SIMPLE INTEREST ────────────────────────────
   {
     code: 'SIM-MATH-G8-U7-01',
     key: 'class8-math-u7-simple-interest-banking',
@@ -203,7 +203,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./AmountTaxBankingChallenge'), 'AmountTaxBankingChallenge'),
   },
 
-  // ── UNIT 8: AREA AND VOLUME (क्षेत्रफल र आयतन) ────────────────────────
+  // ── UNIT 8: AREA AND VOLUME ────────────────────────
   {
     code: 'SIM-MATH-G8-U8-01',
     key: 'class8-math-u8-geometry-area-explorer',
@@ -232,7 +232,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./CompositeShadedAreaSolver'), 'CompositeShadedAreaSolver'),
   },
 
-  // ── UNIT 9: INDICES (घाताङ्क) ──────────────────────────────────────────
+  // ── UNIT 9: INDICES ──────────────────────────────────────────
   {
     code: 'SIM-MATH-G8-U9-01',
     key: 'class8-math-u9-indices-exponent-playground',
@@ -261,7 +261,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./ExpressionSimplificationIndicesChallenge'), 'ExpressionSimplificationIndicesChallenge'),
   },
 
-  // ── UNIT 10: ALGEBRAIC EXPRESSION (बीजगणितीय व्यञ्जक) ──────────────────
+  // ── UNIT 10: ALGEBRAIC EXPRESSION ──────────────────
   {
     code: 'SIM-MATH-G8-U10-01',
     key: 'class8-math-u10-algebraic-tiles-factorization',
@@ -290,7 +290,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./HcfLcmAlgebraicExpressionsLab'), 'HcfLcmAlgebraicExpressionsLab'),
   },
 
-  // ── UNIT 11: ALGEBRAIC FRACTION (बीजीय भिन्न) ──────────────────────────
+  // ── UNIT 11: ALGEBRAIC FRACTION ──────────────────────────
   {
     code: 'SIM-MATH-G8-U11-01',
     key: 'class8-math-u11-algebraic-fraction-discovery',
@@ -319,7 +319,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./AlgebraicFractionMulDivLab'), 'AlgebraicFractionMulDivLab'),
   },
 
-  // ── UNIT 12: SIMULTANEOUS & QUADRATIC EQUATIONS (युगपत र द्विघात समीकरण) ──
+  // ── UNIT 12: SIMULTANEOUS & QUADRATIC EQUATIONS ──
   {
     code: 'SIM-MATH-G8-U12-01',
     key: 'class8-math-u12-simultaneous-equations-graph',
@@ -348,7 +348,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./EquationSolverRealLifeChallenge'), 'EquationSolverRealLifeChallenge'),
   },
 
-  // ── UNIT 13: LINES AND ANGLES (रेखाहरू र कोणहरू) ──────────────────────
+  // ── UNIT 13: LINES AND ANGLES ──────────────────────
   {
     code: 'SIM-MATH-G8-U13-01',
     key: 'class8-math-u13-lines-transversal-explorer',
@@ -377,7 +377,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./UnknownAngleSolverChallenge'), 'UnknownAngleSolverChallenge'),
   },
 
-  // ── UNIT 14: PLANE FIGURES (समतलीय आकृतिहरू) ───────────────────────────
+  // ── UNIT 14: PLANE FIGURES ───────────────────────────
   {
     code: 'SIM-MATH-G8-U14-01',
     key: 'class8-math-u14-triangle-quadrilateral-discovery',
@@ -406,7 +406,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./PolygonExplorerAngleCalculator'), 'PolygonExplorerAngleCalculator'),
   },
 
-  // ── UNIT 15: CONGRUENCY AND SIMILARITY (सर्वाङ्गसमता र समरूपता) ─────────
+  // ── UNIT 15: CONGRUENCY AND SIMILARITY ─────────
   {
     code: 'SIM-MATH-G8-U15-01',
     key: 'class8-math-u15-congruent-triangle-discovery',
@@ -435,14 +435,14 @@ export const CLASS8_MATH = [
     Component: L(() => import('./SimilarFiguresSimilarityLab'), 'SimilarFiguresSimilarityLab'),
   },
 
-  // ── UNIT 16: SOLID OBJECTS (ठोस वस्तुहरू) ─────────────────────────────
+  // ── UNIT 16: SOLID OBJECTS ─────────────────────────────
   {
     code: 'SIM-MATH-G8-U16-01',
     key: 'class8-math-u16-prism-pyramid-explorer',
     lesson: 16,
     unit: 16,
     titleEn: '3D Prism and Pyramid Explorer',
-    titleNp: '३D प्रिज्म र पिरामिड अन्वेषक',
+    titleNp: '3D प्रिज्म र पिरामिड अन्वेषक',
     Component: L(() => import('./SolidPrismPyramidExplorer3D'), 'SolidPrismPyramidExplorer3D'),
   },
   {
@@ -451,7 +451,7 @@ export const CLASS8_MATH = [
     lesson: 16,
     unit: 16,
     titleEn: '3D Solid Net Builder and Folding Lab',
-    titleNp: '३D ठोस वस्तु जालो र पट्याउने प्रयोगशाला',
+    titleNp: '3D ठोस वस्तु जालो र पट्याउने प्रयोगशाला',
     Component: L(() => import('./SolidNetBuilderFoldingLab3D'), 'SolidNetBuilderFoldingLab3D'),
   },
   {
@@ -460,11 +460,11 @@ export const CLASS8_MATH = [
     lesson: 16,
     unit: 16,
     titleEn: '3D Solid Geometry Challenge World',
-    titleNp: '३D ठोस ज्यामिति चुनौती संसार',
+    titleNp: '3D ठोस ज्यामिति चुनौती संसार',
     Component: L(() => import('./SolidGeometryChallengeWorld3D'), 'SolidGeometryChallengeWorld3D'),
   },
 
-  // ── UNIT 17: COORDINATES (निर्देशाङ्कहरू) ───────────────────────────────
+  // ── UNIT 17: COORDINATES ───────────────────────────────
   {
     code: 'SIM-MATH-G8-U17-01',
     key: 'class8-math-u17-cartesian-coordinate-explorer',
@@ -493,7 +493,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./CoordinateGeometryChallengeWorld'), 'CoordinateGeometryChallengeWorld'),
   },
 
-  // ── UNIT 18: TESSELLATION (टेसेलेसन) ──────────────────────────────────
+  // ── UNIT 18: TESSELLATION ──────────────────────────────────
   {
     code: 'SIM-MATH-G8-U18-01',
     key: 'class8-math-u18-tessellation-discovery-studio',
@@ -522,7 +522,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./TessellationPatternDesigner'), 'TessellationPatternDesigner'),
   },
 
-  // ── UNIT 19: TRANSFORMATION (रूपान्तरण) ───────────────────────────────
+  // ── UNIT 19: TRANSFORMATION ───────────────────────────────
   {
     code: 'SIM-MATH-G8-U19-01',
     key: 'class8-math-u19-reflection-explorer',
@@ -551,7 +551,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./RotationTransformationChallenge'), 'RotationTransformationChallenge'),
   },
 
-  // ── UNIT 20: BEARING AND SCALE DRAWING (दिगंश र मापन चित्र) ───────────
+  // ── UNIT 20: BEARING AND SCALE DRAWING ───────────
   {
     code: 'SIM-MATH-G8-U20-01',
     key: 'class8-math-u20-compass-bearing-explorer',
@@ -580,7 +580,7 @@ export const CLASS8_MATH = [
     Component: L(() => import('./BearingScaleNavigationChallenge'), 'BearingScaleNavigationChallenge'),
   },
 
-  // ── UNIT 21: STATISTICS (तथ्याङ्कशास्त्र) ──────────────────────────────
+  // ── UNIT 21: STATISTICS ──────────────────────────────
   {
     code: 'SIM-MATH-G8-U21-01',
     key: 'class8-math-u21-data-visualization-lab',

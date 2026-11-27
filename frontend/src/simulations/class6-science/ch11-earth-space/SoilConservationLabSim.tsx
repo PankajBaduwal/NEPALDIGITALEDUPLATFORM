@@ -1,13 +1,13 @@
 /**
  * SoilConservationLabSim.tsx
- * Simulation 45: 2D Soil Conservation & Erosion Laboratory (माटो संरक्षण प्रयोगशाला)
- * Grade 6 Science • Unit 11: Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 45: 2D Soil Conservation & Erosion Laboratory
+ * Grade 6 Science • Unit 11: Earth and Space
  *
  * Full 2D Comparative Hillside Erosion Experiment:
  * 1. 3 Slopes subjected to simulated torrential monsoon rainfall:
- *    - Slope A: Bare Deforested Slope (नाङ्गो डाँडा) -> 90% soil loss, mudslide
- *    - Slope B: Terraced Farming Slope (कान्ले/गरा खेती) -> Moderate runoff, terraces slow water
- *    - Slope C: Dense Forest Cover (वनजङ्गल) -> Tree canopy & roots prevent erosion (< 5% runoff)
+ *    - Slope A: Bare Deforested Slope -> 90% soil loss, mudslide
+ *    - Slope B: Terraced Farming Slope -> Moderate runoff, terraces slow water
+ *    - Slope C: Dense Forest Cover -> Tree canopy & roots prevent erosion (< 5% runoff)
  * 2. Real-time collection beakers measuring eroded sediment weight & runoff clarity
  */
 
@@ -23,7 +23,7 @@ export const SoilConservationLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -162,7 +162,7 @@ export const SoilConservationLabSim: React.FC<BaseSimulationProps> = ({
           ctx.stroke();
         }
       } else if (activeSlope === 'terraced') {
-        // --- 2. TERRACED FARMING SLOPE (कान्ले / गरा खेती) ---
+        // --- 2. TERRACED FARMING SLOPE ---
         // Terrace steps (5 terraces)
         ctx.fillStyle = '#854d0e';
         ctx.beginPath();
@@ -300,7 +300,7 @@ export const SoilConservationLabSim: React.FC<BaseSimulationProps> = ({
       ctx.font = '11px sans-serif';
       ctx.fillText(`${lang === 'en' ? 'Rainfall Duration:' : 'वर्षाको समय:'} ${rainDurationSec.toFixed(1)} s`, 32, 40);
       ctx.fillText(
-        `${lang === 'en' ? 'Soil Erosion Loss:' : 'माटो क्षय दर:'} ${activeSlope === 'bare' ? 'EXTREME (९०%)' : activeSlope === 'terraced' ? 'MODERATE (२५%)' : 'MINIMAL (<५%)'}`,
+        `${lang === 'en' ? 'Soil Erosion Loss:' : 'माटो क्षय दर:'} ${activeSlope === 'bare' ? 'EXTREME (90%)' : activeSlope === 'terraced' ? 'MODERATE (25%)' : 'MINIMAL (<5%)'}`,
         32,
         60
       );
@@ -377,9 +377,9 @@ export const SoilConservationLabSim: React.FC<BaseSimulationProps> = ({
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '14px' }}>
               {[
-                { id: 'bare', en: '1. Bare Hillside (नाङ्गो डाँडा)', ne: '१. नाङ्गो डाँडा (Deforested)', col: '#ef4444' },
-                { id: 'terraced', en: '2. Terraced Farm (कान्ले/गरा खेती)', ne: '२. कान्ले गरा खेती (Terraces)', col: '#f59e0b' },
-                { id: 'forested', en: '3. Forested Hill (हरियो वनजङ्गल)', ne: '३. घना वनजङ्गल (Dense Forest)', col: '#22c55e' },
+                { id: 'bare', en: '1. Bare Hillside', ne: '1. नाङ्गो डाँडा (Deforested)', col: '#ef4444' },
+                { id: 'terraced', en: '2. Terraced Farm', ne: '2. कान्ले गरा खेती (Terraces)', col: '#f59e0b' },
+                { id: 'forested', en: '3. Forested Hill', ne: '3. घना वनजङ्गल (Dense Forest)', col: '#22c55e' },
               ].map(s => (
                 <button
                   key={s.id}
@@ -464,7 +464,7 @@ export const SoilConservationLabSim: React.FC<BaseSimulationProps> = ({
             </h4>
             <p style={{ margin: 0, fontSize: '11px', color: '#475569', lineHeight: '1.5' }}>
               {lang === 'en'
-                ? 'Terraced farming (कान्ले/गरा खेती), contour plowing, and afforestation (रुख रोप्ने) break torrential rainfall velocity and anchor loose fertile topsoil with root networks, preventing devastating landslides (पहिरो).'
+                ? 'Terraced farming, contour plowing, and afforestation break torrential rainfall velocity and anchor loose fertile topsoil with root networks, preventing devastating landslides.'
                 : 'भिरालो पहाडमा कान्ले वा गरा बनाएर खेती गर्दा र धेरै रुखबिरुवा रोप्दा वर्षाको भेलको गति रोकिन्छ र बिरुवाका जराले माटोलाई बलियोसँग समातेर पहिरो र भू-क्षय हुन दिँदैन।'}
             </p>
           </div>
@@ -472,11 +472,11 @@ export const SoilConservationLabSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: Soil Erosion Threats' : '१. खोज: भू-क्षयको समस्या')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Testing Slopes' : '२. अन्वेषण: भिरालोपन परीक्षण')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Sediment & Clarity' : '३. अवलोकन: बगेको लेदो र सफाइ')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Root Power' : '४. बुझाइ: जराको सामर्थ्य')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Conservation Quiz' : '५. चुनौती: संरक्षण प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: Soil Erosion Threats' : '1. खोज: भू-क्षयको समस्या')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Testing Slopes' : '2. अन्वेषण: भिरालोपन परीक्षण')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Sediment & Clarity' : '3. अवलोकन: बगेको लेदो र सफाइ')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Root Power' : '4. बुझाइ: जराको सामर्थ्य')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Conservation Quiz' : '5. चुनौती: संरक्षण प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
@@ -502,7 +502,7 @@ export const SoilConservationLabSim: React.FC<BaseSimulationProps> = ({
                     : 'नेपालका भिरालो पहाडहरूमा भू-क्षय रोक्न कुन परम्परागत खेती प्रणाली अपनाइन्छ?'}
                 </p>
                 {[
-                  { id: 1, en: 'Terrace Farming (कान्ले / गरा खेती)', ne: 'कान्ले / गरा खेती (Terrace Farming)' },
+                  { id: 1, en: 'Terrace Farming', ne: 'कान्ले / गरा खेती (Terrace Farming)' },
                   { id: 2, en: 'Vertical Plowing down the slope', ne: 'ठाडो जोत्ने विधि' },
                   { id: 3, en: 'Cutting all trees', ne: 'सबै रुख काट्ने' },
                 ].map(opt => (

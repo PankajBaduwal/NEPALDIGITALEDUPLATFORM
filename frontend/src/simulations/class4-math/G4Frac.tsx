@@ -1,5 +1,5 @@
 /**
- * Class 4 lesson 6 · Fraction, decimal and percentage (भिन्न, दशमलव र प्रतिशत)
+ * Class 4 lesson 6 · Fraction, decimal and percentage
  * FractionPies — 2D Interactive Pie charts for equivalent fractions and comparison.
  * DecimalGrid — 2D 100-Square grid demonstrating Fraction = Decimal = Percentage.
  */
@@ -61,7 +61,7 @@ export const FractionPies: React.FC<Props> = ({ onBackToLibrary }) => {
 
       if (i % 2 === 0) {
         return mcq(
-          `रङ्गिन भाग कति भिन्न हो? (${qn} भाग रङ्गिएको, जम्मा ${qd} भाग)`,
+          `रङ्गिन भाग कति भिन्न हो?`,
           `What fraction is shaded? (${qn} parts shaded out of ${qd})`,
           `${qn}/${qd}`,
           [`${qd - qn}/${qd}`, `${qn}/${qd + 1}`, `${qn + 1}/${qd}`],
@@ -258,7 +258,7 @@ export const DecimalGrid: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G4-L6-02',
     chapter: 6,
-    titleNp: 'दशमलव ग्रिड (१०० कोठा)',
+    titleNp: 'दशमलव ग्रिड (100 कोठा)',
     titleEn: 'Decimal Grid (100 Squares)',
   });
 
@@ -272,7 +272,7 @@ export const DecimalGrid: React.FC<Props> = ({ onBackToLibrary }) => {
     setN(nextVal);
     kit.tap();
     kit.say(
-      `${nextVal}/१०० = ${decimal} = ${nextVal}%`,
+      `${nextVal}/100 = ${decimal} = ${nextVal}%`,
       `${nextVal}/100 = ${decimal} = ${nextVal}%`
     );
   };
@@ -284,7 +284,7 @@ export const DecimalGrid: React.FC<Props> = ({ onBackToLibrary }) => {
 
       if (i % 2 === 0) {
         return numQ(
-          `१०० मध्ये ${qv} कोठा रङ्ग्याउँदा कति प्रतिशत हुन्छ?`,
+          `100 मध्ये ${qv} कोठा रङ्ग्याउँदा कति प्रतिशत हुन्छ?`,
           `If ${qv} out of 100 squares are shaded, what percentage is that?`,
           qv,
           i,
@@ -294,7 +294,7 @@ export const DecimalGrid: React.FC<Props> = ({ onBackToLibrary }) => {
         );
       } else {
         return mcq(
-          `${qv}/१०० लाई दशमलवमा लेख्नुहोस्:`,
+          `${qv}/100 लाई दशमलवमा लेख्नुहोस्:`,
           `Write ${qv}/100 as a decimal:`,
           qdec,
           [((qv + 10) / 100).toFixed(2), ((qv - 5) / 100).toFixed(2), (qv / 10).toFixed(1)],
@@ -309,7 +309,7 @@ export const DecimalGrid: React.FC<Props> = ({ onBackToLibrary }) => {
       kit={kit}
       onBack={onBackToLibrary}
       mascotGreeting={kit.t(
-        `१०० मध्ये रङ्गिएका भाग: ${n}/१०० = ${decimal} = ${percent}%`,
+        `100 मध्ये रङ्गिएका भाग: ${n}/100 = ${decimal} = ${percent}%`,
         `Shaded parts out of 100: ${n}/100 = ${decimal} = ${percent}%`
       )}
       questions={questions}
@@ -373,7 +373,7 @@ export const DecimalGrid: React.FC<Props> = ({ onBackToLibrary }) => {
           }}
         >
           <div style={{ fontSize: 24, fontWeight: 900, color: '#187C68' }}>
-            {fmt(kit.lang, n)}/१०० = {decimal} = {fmt(kit.lang, percent)}%
+            {fmt(kit.lang, n)}/100 = {decimal} = {fmt(kit.lang, percent)}%
           </div>
           <div style={{ fontSize: 13, fontWeight: 700, color: '#64748B', marginTop: 4 }}>
             {kit.t('भिन्न = दशमलव = प्रतिशत', 'Fraction = Decimal = Percent')}

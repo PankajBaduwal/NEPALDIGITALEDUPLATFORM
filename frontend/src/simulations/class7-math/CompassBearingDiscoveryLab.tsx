@@ -1,7 +1,7 @@
 /**
  * CompassBearingDiscoveryLab.tsx
- * Grade 7 Mathematics – Lesson 20: BEARING AND SCALE DRAWING (दिगंश र मापन चित्र)
- * Simulation 1: Compass and Bearing Discovery Lab (दिशासूचक यन्त्र र दिगंश खोजी प्रयोगशाला)
+ * Grade 7 Mathematics – Lesson 20: BEARING AND SCALE DRAWING
+ * Simulation 1: Compass and Bearing Discovery Lab
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 293-300)
  */
 import React, { useState } from 'react';
@@ -15,10 +15,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दिगंश (Bearing) सधैं कुन दिशालाई आधार मानेर घडीको सुई घुम्ने दिशा (Clockwise) मा नापिन्छ?',
     en: 'Bearing is always measured starting from which reference direction in a clockwise sense?',
     options: [
-      { key: 'A', label: 'उत्तर दिशा (North - 000°)' },
-      { key: 'B', label: 'पूर्व दिशा' },
-      { key: 'C', label: 'दक्षिण दिशा' },
-      { key: 'D', label: 'पश्चिम दिशा' },
+      { key: 'A', label: 'North (000°)' },
+      { key: 'B', label: 'East' },
+      { key: 'C', label: 'South' },
+      { key: 'D', label: 'West' },
     ],
     answer: 'A',
   },
@@ -26,10 +26,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दिगंशलाई सामान्यतया कति अङ्कमा (Digits) लेख्ने अन्तर्राष्ट्रिय नियम छ?',
     en: 'In three-figure bearing notation, bearings are always written with how many digits?',
     options: [
-      { key: 'A', label: '३ अङ्क (Three digits, e.g. 045°, 090°)' },
-      { key: 'B', label: '२ अङ्क' },
-      { key: 'C', label: '४ अङ्क' },
-      { key: 'D', label: '१ अङ्क' },
+      { key: 'A', label: '3 digits (for example 045°, 090°)' },
+      { key: 'B', label: '2 digits' },
+      { key: 'C', label: '4 digits' },
+      { key: 'D', label: '1 digit' },
     ],
     answer: 'A',
   },
@@ -37,10 +37,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'उत्तर-पूर्व (North-East - NE) दिशाको दिगंश कति हुन्छ?',
     en: 'What is the three-figure bearing of the North-East (NE) direction?',
     options: [
-      { key: 'A', label: '०४५° (045°)' },
-      { key: 'B', label: '०९०°' },
-      { key: 'C', label: '१३५°' },
-      { key: 'D', label: '२२५°' },
+      { key: 'A', label: '045° (045°)' },
+      { key: 'B', label: '090°' },
+      { key: 'C', label: '135°' },
+      { key: 'D', label: '225°' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दक्षिण (South) दिशाको दिगंश कति हुन्छ?',
     en: 'What is the bearing of South (S)?',
     options: [
-      { key: 'A', label: '१८०°' },
-      { key: 'B', label: '०९०°' },
-      { key: 'C', label: '२७०°' },
-      { key: 'D', label: '३६०°' },
+      { key: 'A', label: '180°' },
+      { key: 'B', label: '090°' },
+      { key: 'C', label: '270°' },
+      { key: 'D', label: '360°' },
     ],
     answer: 'A',
   },
@@ -138,7 +138,7 @@ export const CompassBearingDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! उत्तर दिशा (North) लाई ०००° मानी घडीको सुईको दिशामा नापिएको कोण नै दिगंश (Bearing) हो। कम्पास घुमाएर हेरौँ!',
+        'नमस्ते! उत्तर दिशा (North) लाई 000° मानी घडीको सुईको दिशामा नापिएको कोण नै दिगंश (Bearing) हो। कम्पास घुमाएर हेरौँ!',
         'Hello! Measuring clockwise from North yields the bearing. Always written in 3 figures (e.g. 045°, 090°). Let us discover!'
       )}
     >
@@ -150,16 +150,16 @@ export const CompassBearingDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2 text-xs md:text-sm text-slate-800">
             <div className="bg-white p-3 rounded-xl border border-blue-200">
-              <span className="font-bold text-blue-700">१. उत्तर आधार (From North):</span>
-              <p className="text-[11px] text-slate-600 mt-0.5">सधैं उत्तर दिशा (North = 000°) बाट सुरु गरिन्छ।</p>
+              <span className="font-bold text-blue-700">1. Measured from North:</span>
+              <p className="text-[11px] text-slate-600 mt-0.5">Always start from the North direction (North = 000°).</p>
             </div>
             <div className="bg-white p-3 rounded-xl border border-blue-200">
-              <span className="font-bold text-blue-700">२. घडीको सुई घुम्ने दिशा (Clockwise):</span>
-              <p className="text-[11px] text-slate-600 mt-0.5">कोण सधैं घडीको सुई अनुसार दायाँतिर नापिन्छ।</p>
+              <span className="font-bold text-blue-700">2. Clockwise direction:</span>
+              <p className="text-[11px] text-slate-600 mt-0.5">The angle is always measured clockwise, to the right.</p>
             </div>
             <div className="bg-white p-3 rounded-xl border border-blue-200">
-              <span className="font-bold text-blue-700">३. तीन अङ्कको सङ्केत (3 Figures):</span>
-              <p className="text-[11px] text-slate-600 mt-0.5">जस्तै 45° लाई 045°, 90° लाई 090° लेखिन्छ।</p>
+              <span className="font-bold text-blue-700">3. Three-figure notation:</span>
+              <p className="text-[11px] text-slate-600 mt-0.5">For example, 45° is written 045° and 90° is written 090°.</p>
             </div>
           </div>
         </div>

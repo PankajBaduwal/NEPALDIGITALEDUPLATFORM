@@ -19,7 +19,7 @@ export const enName1000 = (n: number): string => {
   return `${enName(h)} hundred${r ? ' ' + enName(r) : ''}`;
 };
 
-/** Nepali hundred words: 345 → "तीन सय ४५" (the last two digits are read as numerals) */
+/** Nepali hundred words: 345 → "तीन सय 45" (the last two digits are read as numerals) */
 export const npBig = (n: number): string => {
   const NP = ['शून्य', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ'];
   if (n < 100) return toNp(n);

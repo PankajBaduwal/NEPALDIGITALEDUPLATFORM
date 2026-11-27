@@ -23,61 +23,61 @@ const PRESET_EVALS: PresetEval[] = [
   {
     id: 'e1',
     expr: '64^(2/3)',
-    exprNp: '६४^(२/३)',
+    exprNp: '64^(2/3)',
     baseNumber: 64,
     primeBase: 4,
     primePower: 3,
     fractionExpNum: 2,
     fractionExpDen: 3,
     isNegative: false,
-    step1: '६४ लाई आधार ४ को घातमा बदल्दा: ६४ = ४³',
-    step2: '(४³)^(२/३) = ४^(३ × २/३) = ४²',
-    step3: '४² = ४ × ४ = १६',
+    step1: 'Writing 64 as a power of base 4: 64 = 4³',
+    step2: '(4³)^(2/3) = 4^(3 × 2/3) = 4²',
+    step3: '4² = 4 × 4 = 16',
     finalAns: '16',
   },
   {
     id: 'e2',
     expr: '81^(-3/4)',
-    exprNp: '८१^(-३/४)',
+    exprNp: '81^(-3/4)',
     baseNumber: 81,
     primeBase: 3,
     primePower: 4,
     fractionExpNum: -3,
     fractionExpDen: 4,
     isNegative: true,
-    step1: '८१ लाई आधार ३ को घातमा बदल्दा: ८१ = ३⁴',
-    step2: '(३⁴)^(-३/४) = ३^(४ × (-३/४)) = ३^(-३)',
-    step3: '३^(-३) = १ / ३³ = १ / २७',
+    step1: 'Writing 81 as a power of base 3: 81 = 3⁴',
+    step2: '(3⁴)^(-3/4) = 3^(4 × (-3/4)) = 3^(-3)',
+    step3: '3^(-3) = 1 / 3³ = 1 / 27',
     finalAns: '1/27',
   },
   {
     id: 'e3',
     expr: '27^(-2/3)',
-    exprNp: '२७^(-२/३)',
+    exprNp: '27^(-2/3)',
     baseNumber: 27,
     primeBase: 3,
     primePower: 3,
     fractionExpNum: -2,
     fractionExpDen: 3,
     isNegative: true,
-    step1: '२७ = ३³',
-    step2: '(३³)^(-२/३) = ३^(-२)',
-    step3: '३^(-२) = १ / ३² = १ / ९',
+    step1: '27 = 3³',
+    step2: '(3³)^(-2/3) = 3^(-2)',
+    step3: '3^(-2) = 1 / 3² = 1 / 9',
     finalAns: '1/9',
   },
   {
     id: 'e4',
     expr: '32^(3/5)',
-    exprNp: '३२^(३/५)',
+    exprNp: '32^(3/5)',
     baseNumber: 32,
     primeBase: 2,
     primePower: 5,
     fractionExpNum: 3,
     fractionExpDen: 5,
     isNegative: false,
-    step1: '३२ लाई आधार २ को घातमा बदल्दा: ३२ = २⁵',
-    step2: '(२⁵)^(३/५) = २^(५ × ३/५) = २³',
-    step3: '२³ = ८',
+    step1: 'Writing 32 as a power of base 2: 32 = 2⁵',
+    step2: '(2⁵)^(3/5) = 2^(5 × 3/5) = 2³',
+    step3: '2³ = 8',
     finalAns: '8',
   },
 ];
@@ -87,18 +87,18 @@ const QUIZ_QUESTIONS = [
     np: 'कुनै पनि गैर-शून्य संख्याको शून्य घात (a⁰, जहाँ a ≠ 0) को मान कति हुन्छ?',
     en: 'What is the value of any non-zero number raised to the power zero (a⁰, a ≠ 0)?',
     options: [
-      { key: 'A', label: '1 (एक)' },
-      { key: 'B', label: '0 (शून्य)' },
+      { key: 'A', label: '1' },
+      { key: 'B', label: '0' },
       { key: 'C', label: 'a' },
-      { key: 'D', label: 'अनन्त' },
+      { key: 'D', label: 'Infinite' },
     ],
     answer: 'A',
   },
   {
-    np: '२⁻³ को मान कति हुन्छ?',
+    np: '2⁻³ को मान कति हुन्छ?',
     en: 'What is the value of 2⁻³?',
     options: [
-      { key: 'A', label: '1/8 (१/२³)' },
+      { key: 'A', label: '1/8 (1/2³)' },
       { key: 'B', label: '-8' },
       { key: 'C', label: '-6' },
       { key: 'D', label: '1/6' },
@@ -106,10 +106,10 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: '६४^(१/३) वा ³√६४ को मान कति हुन्छ?',
+    np: '64^(1/3) वा ³√64 को मान कति हुन्छ?',
     en: 'What is the value of 64^(1/3) or ³√64?',
     options: [
-      { key: 'A', label: '4 (४³ = ६४)' },
+      { key: 'A', label: '4 (4³ = 64)' },
       { key: 'B', label: '8' },
       { key: 'C', label: '16' },
       { key: 'D', label: '2' },
@@ -144,10 +144,10 @@ export const NegativeZeroRootIndicesLab: React.FC<{
     let explanation = '';
     if (exp > 0) {
       valStr = `${Math.pow(basePattern, exp)}`;
-      explanation = `अघिल्लो मान ÷ ${basePattern}`;
+      explanation = `Previous value ÷ ${basePattern}`;
     } else if (exp === 0) {
       valStr = '1';
-      explanation = `${basePattern} ÷ ${basePattern} = 1 (प्रमाणित: a⁰ = 1)`;
+      explanation = `${basePattern} ÷ ${basePattern} = 1`;
     } else {
       const positivePower = Math.pow(basePattern, Math.abs(exp));
       valStr = `1/${positivePower}`;
@@ -163,7 +163,7 @@ export const NegativeZeroRootIndicesLab: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! शून्य घाताङ्क (a⁰ = १), ऋणात्मक घाताङ्क (a⁻ᵐ = १/aᵐ) र भिन्न घाताङ्क (aᵐ/ⁿ) कसरी काम गर्छन्, यहाँ प्रत्यक्ष परीक्षण गरौं!',
+        'नमस्ते! शून्य घाताङ्क (a⁰ = 1), ऋणात्मक घाताङ्क (a⁻ᵐ = 1/aᵐ) र भिन्न घाताङ्क (aᵐ/ⁿ) कसरी काम गर्छन्, यहाँ प्रत्यक्ष परीक्षण गरौं!',
         'Welcome! Explore zero exponents (a⁰ = 1), negative exponents (a⁻ᵐ = 1/aᵐ), and rational/root powers through descending patterns and guided evaluations!'
       )}
     >
@@ -218,10 +218,10 @@ export const NegativeZeroRootIndicesLab: React.FC<{
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <strong style={{ fontSize: 14, color: '#1E293B' }}>
-                  {L('आधार छनोट गरी घट्दो क्रम ढाँचा हेर्नुहोस्:', 'Select base to observe pattern:')}
+                  {L('Base छनोट गरी घट्दो क्रम ढाँचा हेर्नुहोस्:', 'Select base to observe pattern:')}
                 </strong>
                 <div style={{ fontSize: 12, color: '#64748B' }}>
-                  {L('प्रत्येक एक घात घट्दा मान आधार संख्याले भाग हुन्छ।', 'Each step down divides by the base.')}
+                  {L('प्रत्येक एक घात घट्दा मान Base संख्याले भाग हुन्छ।', 'Each step down divides by the base.')}
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
@@ -239,7 +239,7 @@ export const NegativeZeroRootIndicesLab: React.FC<{
                       cursor: 'pointer',
                     }}
                   >
-                    आधार {b}
+                    Base {b}
                   </button>
                 ))}
               </div>
@@ -356,7 +356,7 @@ export const NegativeZeroRootIndicesLab: React.FC<{
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <div style={{ backgroundColor: '#F8FAFC', padding: 12, borderRadius: 8 }}>
                   <div style={{ fontSize: 12, fontWeight: 700, color: '#334155' }}>
-                    १. {L('आधारलाई रूढ गुणनखण्ड वा पूर्ण घातमा बदल्ने:', 'Convert base to prime power:')}
+                    1. {L('Baseलाई रूढ गुणनखण्ड वा पूर्ण घातमा बदल्ने:', 'Convert base to prime power:')}
                   </div>
                   <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#0F766E', marginTop: 4 }}>
                     {currEval.step1}
@@ -365,7 +365,7 @@ export const NegativeZeroRootIndicesLab: React.FC<{
 
                 <div style={{ backgroundColor: '#F8FAFC', padding: 12, borderRadius: 8 }}>
                   <div style={{ fontSize: 12, fontWeight: 700, color: '#334155' }}>
-                    २. {L('घातको घात नियम (aᵐ)ⁿ = aᵐⁿ प्रयोग गर्ने:', 'Apply power of a power law (aᵐ)ⁿ = aᵐⁿ:')}
+                    2. {L('घातको घात नियम (aᵐ)ⁿ = aᵐⁿ प्रयोग गर्ने:', 'Apply power of a power law (aᵐ)ⁿ = aᵐⁿ:')}
                   </div>
                   <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#0F766E', marginTop: 4 }}>
                     {currEval.step2}
@@ -374,7 +374,7 @@ export const NegativeZeroRootIndicesLab: React.FC<{
 
                 <div style={{ backgroundColor: '#F8FAFC', padding: 12, borderRadius: 8 }}>
                   <div style={{ fontSize: 12, fontWeight: 700, color: '#334155' }}>
-                    ३. {L('सरलीकरण गरी अन्तिम मान निकाल्ने:', 'Simplify for final value:')}
+                    3. {L('सरलीकरण गरी अन्तिम मान निकाल्ने:', 'Simplify for final value:')}
                   </div>
                   <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#0F766E', marginTop: 4 }}>
                     {currEval.step3}

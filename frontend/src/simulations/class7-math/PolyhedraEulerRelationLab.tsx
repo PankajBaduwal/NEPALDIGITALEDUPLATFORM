@@ -1,7 +1,7 @@
 /**
  * PolyhedraEulerRelationLab.tsx
- * Grade 7 Mathematics – Lesson 16: SOLID OBJECTS (ठोस वस्तुहरू)
- * Simulation 2: Regular Polyhedra and Euler's Relation Lab (नियमित बहुफलक र ओइलरको सम्बन्ध)
+ * Grade 7 Mathematics – Lesson 16: SOLID OBJECTS
+ * Simulation 2: Regular Polyhedra and Euler's Relation Lab
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 247-251)
  */
 import React, { useEffect, useRef, useState } from 'react';
@@ -13,35 +13,35 @@ import { Calculator, Check, CheckCircle2, RotateCcw, Shuffle, Sparkles } from 'l
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'नियमित बहुफलकहरूमा शीर्ष (V), किनारा (E) र पृष्ठ (F) बीचको ओइलरको सम्बन्ध (Euler\'s Relation) कुन हो?',
+    np: 'नियमित बहुफलकहरूमा शीर्ष (V), Edges (E) र Faces (F) बीचको ओइलरको सम्बन्ध (Euler\'s Relation) कुन हो?',
     en: 'What is Euler\'s relation connecting vertices (V), edges (E), and faces (F) of regular polyhedra?',
     options: [
-      { key: 'A', label: 'V − E + F = २' },
-      { key: 'B', label: 'V + E + F = २' },
-      { key: 'C', label: 'V + E − F = २' },
-      { key: 'D', label: 'V − E − F = २' },
+      { key: 'A', label: 'V − E + F = 2' },
+      { key: 'B', label: 'V + E + F = 2' },
+      { key: 'C', label: 'V + E − F = 2' },
+      { key: 'D', label: 'V − E − F = 2' },
     ],
     answer: 'A',
   },
   {
-    np: 'द्वादशफलक (Dodecahedron) मा कतिवटा पृष्ठहरू (Faces) हुन्छन्?',
+    np: 'द्वादशफलक (Dodecahedron) मा कतिpcs Facesहरू (Faces) हुन्छन्?',
     en: 'How many faces does a regular dodecahedron have?',
     options: [
-      { key: 'A', label: '१२ वटा (Twelve pentagonal faces)' },
-      { key: 'B', label: '२० वटा' },
-      { key: 'C', label: '३० वटा' },
-      { key: 'D', label: '८ वटा' },
+      { key: 'A', label: '12 pcs (Twelve pentagonal faces)' },
+      { key: 'B', label: '20 pcs' },
+      { key: 'C', label: '30 pcs' },
+      { key: 'D', label: '8 pcs' },
     ],
     answer: 'A',
   },
   {
-    np: 'विंशतिफलक (Icosahedron) मा २० पृष्ठ र ३० किनारा छन् भने शीर्षबिन्दु (V) कति हुन्छन्? (V = २ + E − F)',
+    np: 'विंशतिफलक (Icosahedron) मा 20 Faces र 30 किनारा छन् भने Vertices (V) कति हुन्छन्? (V = 2 + E − F)',
     en: 'An icosahedron has 20 faces and 30 edges. Using Euler\'s relation, how many vertices (V) does it have?',
     options: [
-      { key: 'A', label: '१२ वटा (२ + ३० − २० = १२)' },
-      { key: 'B', label: '२० वटा' },
-      { key: 'C', label: '१० वटा' },
-      { key: 'D', label: '१४ वटा' },
+      { key: 'A', label: '12 pcs (2 + 30 − 20 = 12)' },
+      { key: 'B', label: '20 pcs' },
+      { key: 'C', label: '10 pcs' },
+      { key: 'D', label: '14 pcs' },
     ],
     answer: 'A',
   },
@@ -49,10 +49,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'अष्टफलक (Octahedron) मा ओइलरको सम्बन्ध परीक्षण गर्दा: V − E + F = ?',
     en: 'Testing Euler\'s relation for an octahedron (V = 6, E = 12, F = 8): V − E + F = ?',
     options: [
-      { key: 'A', label: '२ (६ − १२ + ८ = २)' },
-      { key: 'B', label: '०' },
-      { key: 'C', label: '४' },
-      { key: 'D', label: '६' },
+      { key: 'A', label: '2 (6 − 12 + 8 = 2)' },
+      { key: 'B', label: '0' },
+      { key: 'C', label: '4' },
+      { key: 'D', label: '6' },
     ],
     answer: 'A',
   },
@@ -182,7 +182,7 @@ export const PolyhedraEulerRelationLab: React.FC<{ onBackToLibrary?: () => void;
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! पाँच नियमित बहुफलकहरूमा शीर्ष (V), किनारा (E) र पृष्ठ (F) बीचको सम्बन्ध सधैं V − E + F = २ हुन्छ। जाचौँ!',
+        'नमस्ते! पाँच नियमित बहुफलकहरूमा शीर्ष (V), Edges (E) र Faces (F) बीचको सम्बन्ध सधैं V − E + F = 2 हुन्छ। जाचौँ!',
         'Hello! In all regular polyhedra, the famous Euler\'s formula always holds: V − E + F = 2. Let us verify!'
       )}
     >
@@ -212,7 +212,7 @@ export const PolyhedraEulerRelationLab: React.FC<{ onBackToLibrary?: () => void;
             <div className="bg-slate-900 border border-slate-800 rounded-3xl p-4 flex flex-col items-center shadow-2xl">
               <canvas ref={canvasRef} className="w-full h-64 rounded-2xl cursor-grab" />
               <div className="text-xs text-slate-400 mt-2">
-                {isNe ? currentPoly.nameNp : currentPoly.nameEn} (३D मोडेल)
+                {isNe ? currentPoly.nameNp : currentPoly.nameEn} (3D model)
               </div>
             </div>
 
@@ -220,11 +220,11 @@ export const PolyhedraEulerRelationLab: React.FC<{ onBackToLibrary?: () => void;
             <div className="space-y-4">
               <div className="bg-indigo-50 p-4 rounded-2xl border border-indigo-200">
                 <h3 className="text-base font-bold text-indigo-950" style={{ fontFamily: FONT_NP }}>
-                  {L('ओइलरको सम्बन्ध (Euler\'s Relation): V − E + F = २', 'Euler\'s Relation: V − E + F = 2')}
+                  {L('ओइलरको सम्बन्ध (Euler\'s Relation): V − E + F = 2', 'Euler\'s Relation: V − E + F = 2')}
                 </h3>
                 <p className="text-xs text-indigo-800 mt-1">
                   {L(
-                    'कुनै पनि नियमित बहुफलकमा शीर्ष संख्या (V) बाट किनारा संख्या (E) घटाएर पृष्ठ संख्या (F) जोड्दा सधैं २ आउँछ।',
+                    'कुनै पनि नियमित बहुफलकमा शीर्ष संख्या (V) बाट किनारा संख्या (E) घटाएर Faces संख्या (F) जोड्दा सधैं 2 आउँछ।',
                     'Subtracting edges (E) from vertices (V) and adding faces (F) always equals 2.'
                   )}
                 </p>
@@ -233,19 +233,19 @@ export const PolyhedraEulerRelationLab: React.FC<{ onBackToLibrary?: () => void;
               {/* Live arithmetic verification for activePoly */}
               <div className="bg-emerald-50 border border-emerald-300 p-5 rounded-2xl space-y-2">
                 <div className="text-sm font-bold text-emerald-950">
-                  {isNe ? currentPoly.nameNp : currentPoly.nameEn} मा परीक्षण:
+                  {isNe ? currentPoly.nameNp : currentPoly.nameEn} Test on:
                 </div>
                 <div className="text-xs text-slate-700 space-y-1">
-                  <div>शीर्षबिन्दु (V) = <b>{currentPoly.v}</b></div>
-                  <div>किनारा (E) = <b>{currentPoly.e}</b></div>
-                  <div>पृष्ठ (F) = <b>{currentPoly.f}</b></div>
+                  <div>Vertices (V) = <b>{currentPoly.v}</b></div>
+                  <div>Edges (E) = <b>{currentPoly.e}</b></div>
+                  <div>Faces (F) = <b>{currentPoly.f}</b></div>
                 </div>
                 <div className="text-xl font-black text-emerald-900 pt-2 border-t border-emerald-200">
                   {currentPoly.v} − {currentPoly.e} + {currentPoly.f} ={' '}
                   <span className="text-blue-700">{currentPoly.v - currentPoly.e + currentPoly.f}</span>
                 </div>
                 <div className="text-xs text-emerald-700 font-bold">
-                  ✓ {L('सम्बन्ध पूर्ण रूपमा प्रमाणित भयो (V − E + F = २)', 'Relation verified successfully (V − E + F = 2)')}
+                  ✓ {L('सम्बन्ध पूर्ण रूपमा प्रमाणित भयो (V − E + F = 2)', 'Relation verified successfully (V − E + F = 2)')}
                 </div>
               </div>
             </div>
@@ -258,8 +258,8 @@ export const PolyhedraEulerRelationLab: React.FC<{ onBackToLibrary?: () => void;
                 <tr>
                   <th className="p-2.5 text-left border-r border-slate-300">{L('ठोस वस्तु (Solid Object)', 'Solid Object')}</th>
                   <th className="p-2.5 border-r border-slate-300">{L('शीर्ष (V)', 'Vertices (V)')}</th>
-                  <th className="p-2.5 border-r border-slate-300">{L('किनारा (E)', 'Edges (E)')}</th>
-                  <th className="p-2.5 border-r border-slate-300">{L('पृष्ठ (F)', 'Faces (F)')}</th>
+                  <th className="p-2.5 border-r border-slate-300">{L('Edges (E)', 'Edges (E)')}</th>
+                  <th className="p-2.5 border-r border-slate-300">{L('Faces (F)', 'Faces (F)')}</th>
                   <th className="p-2.5">{L('ओइलर सूत्र (V − E + F)', 'V − E + F')}</th>
                 </tr>
               </thead>
@@ -279,7 +279,7 @@ export const PolyhedraEulerRelationLab: React.FC<{ onBackToLibrary?: () => void;
                     <td className="p-2.5 border-r border-slate-200 font-bold text-rose-700">{toNp(p.e)}</td>
                     <td className="p-2.5 border-r border-slate-200 font-bold text-amber-700">{toNp(p.f)}</td>
                     <td className="p-2.5 font-black text-emerald-700">
-                      {p.v} − {p.e} + {p.f} = <b>२</b>
+                      {p.v} − {p.e} + {p.f} = <b>2</b>
                     </td>
                   </tr>
                 ))}
@@ -290,7 +290,7 @@ export const PolyhedraEulerRelationLab: React.FC<{ onBackToLibrary?: () => void;
           {/* Missing Component Solver */}
           <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-3">
             <div className="text-xs font-bold text-slate-800 uppercase">
-              {L('अज्ञात पृष्ठ संख्या पत्ता लगाउने क्यालकुलेटर (Find Missing Faces F):', 'Find Missing Component:')}
+              {L('अज्ञात Faces संख्या पत्ता लगाउने क्यालकुलेटर (Find Missing Faces F):', 'Find Missing Component:')}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
               <div>
@@ -306,7 +306,7 @@ export const PolyhedraEulerRelationLab: React.FC<{ onBackToLibrary?: () => void;
               </div>
               <div>
                 <label className="text-[11px] font-bold text-slate-600 block mb-1">
-                  {L('किनारा (E):', 'Edges (E):')}
+                  {L('Edges (E):', 'Edges (E):')}
                 </label>
                 <input
                   type="number"
@@ -320,14 +320,14 @@ export const PolyhedraEulerRelationLab: React.FC<{ onBackToLibrary?: () => void;
                   onClick={handleComputeF}
                   className="w-full mt-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-xs shadow-md"
                 >
-                  {L('पृष्ठ (F) निकाल्नुहोस्', 'Compute Faces F')}
+                  {L('Faces (F) निकाल्नुहोस्', 'Compute Faces F')}
                 </button>
               </div>
             </div>
 
             {resultF !== null && (
               <div className="text-xs text-emerald-800 font-bold bg-emerald-50 p-3 rounded-xl border border-emerald-200">
-                सूत्र: F = २ − V + E = २ − {calcV} + {calcE} = <span className="text-base font-black">{resultF}</span> पृष्ठ
+                Formula: F = 2 − V + E = 2 − {calcV} + {calcE} = <span className="text-base font-black">{resultF}</span> Faces
               </div>
             )}
           </div>

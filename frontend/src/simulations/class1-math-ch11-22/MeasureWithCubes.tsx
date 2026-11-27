@@ -1,6 +1,6 @@
 /**
- * Chapter 21 · Length (लम्बाइ - क्युबले नापौँ)
- * Sim 1: Measure with Cubes (क्युबले नापौँ) — Pure 2D Edition
+ * Chapter 21 · Length
+ * Sim 1: Measure with Cubes — Pure 2D Edition
  * 100% 2D SVG / Interactive Measuring – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -79,7 +79,7 @@ export const MeasureWithCubes: React.FC<Props> = ({ onBackToLibrary }) => {
         answer: 'touching',
       },
       {
-        np: 'एउटा सिसाकलम ६ क्युब लामो छ र रबर ३ क्युब। कुन लामो छ?',
+        np: 'एउटा सिसाकलम 6 क्युब लामो छ र रबर 3 क्युब। कुन लामो छ?',
         en: 'A pencil is 6 cubes long and an eraser is 3 cubes long. Which is longer?',
         options: [
           { key: 'pencil', label: isNe ? 'सिसाकलम (Pencil)' : 'Pencil' },
@@ -131,7 +131,7 @@ export const MeasureWithCubes: React.FC<Props> = ({ onBackToLibrary }) => {
                 boxShadow: '0 4px 10px rgba(24,124,104,0.25)',
               }}
             >
-              ➕ {L('१ क्युब थप्नुहोस् (+१)', 'Add 1 Cube (+1)')}
+              ➕ {L('1 क्युब थप्नुहोस् (+1)', 'Add 1 Cube (+1)')}
             </button>
 
             <button
@@ -147,7 +147,7 @@ export const MeasureWithCubes: React.FC<Props> = ({ onBackToLibrary }) => {
                 cursor: cubesCount === 0 ? 'not-allowed' : 'pointer',
               }}
             >
-              ➖ {L('१ क्युब हटाउनुहोस्', 'Remove 1 Cube')}
+              ➖ {L('1 क्युब हटाउनुहोस्', 'Remove 1 Cube')}
             </button>
 
             <button
@@ -278,7 +278,7 @@ export const MeasureWithCubes: React.FC<Props> = ({ onBackToLibrary }) => {
               ))}
               {cubesCount === 0 && (
                 <div style={{ color: '#94A3B8', fontSize: 13, fontWeight: 700, padding: 12 }}>
-                  {L('तलको "+१ क्युब थप्नुहोस्" बटन थिचेर लम्बाइ नाप्नुहोस्!', 'Tap "+1 Add Cube" below to measure the length!')}
+                  {L('तलको "+1 क्युब थप्नुहोस्" बटन थिचेर लम्बाइ नाप्नुहोस्!', 'Tap "+1 Add Cube" below to measure the length!')}
                 </div>
               )}
             </div>

@@ -6,24 +6,24 @@ import { Building2, Users, Gift, Percent, Calculator, ArrowRight } from 'lucide-
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एक कम्पनीले वार्षिक रु ५०,००,००० खुद नाफाबाट १०% रकम बोनस वितरण गर्दा कुल बोनस रकम कति हुन्छ?',
+    np: 'एक कम्पनीले वार्षिक Rs 50,00,000 खुद नाफाबाट 10% रकम बोनस वितरण गर्दा कुल बोनस रकम कति हुन्छ?',
     en: 'A company distributes 10% bonus from Rs 50,00,000 net profit. What is total bonus amount?',
     options: [
-      { key: 'A', label: 'रु ५,००,००० — (५०,००,००० × १०% = ५,००,०००)' },
-      { key: 'B', label: 'रु ५०,०००' },
-      { key: 'C', label: 'रु १०,००,०००' },
-      { key: 'D', label: 'रु २५,०००' },
+      { key: 'A', label: 'Rs 5,00,000 — (50,00,000 × 10% = 5,00,000)' },
+      { key: 'B', label: 'Rs 50,000' },
+      { key: 'C', label: 'Rs 10,00,000' },
+      { key: 'D', label: 'Rs 25,000' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि कुल बोनस रकम रु ६,००,००० लाई ५० जना कर्मचारीहरूमा समान रूपमा बाँड्दा प्रत्येकले कति पाउँछन्?',
+    np: 'यदि कुल बोनस रकम Rs 6,00,000 लाई 50 people कर्मचारीहरूमा समान रूपमा बाँड्दा प्रत्येकले कति पाउँछन्?',
     en: 'If Rs 6,00,000 total bonus is equally divided among 50 employees, how much does each receive?',
     options: [
-      { key: 'A', label: 'रु १२,००० — (६,००,००० ÷ ५० = १२,०००)' },
-      { key: 'B', label: 'रु १०,०००' },
-      { key: 'C', label: 'रु १५,०००' },
-      { key: 'D', label: 'रु ८,०००' },
+      { key: 'A', label: 'Rs 12,000 — (6,00,000 ÷ 50 = 12,000)' },
+      { key: 'B', label: 'Rs 10,000' },
+      { key: 'C', label: 'Rs 15,000' },
+      { key: 'D', label: 'Rs 8,000' },
     ],
     answer: 'A',
   },
@@ -31,21 +31,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कर्मचारीहरूलाई बोनस वितरण गरेपछि कम्पनीसँग बाँकी रहने रकमलाई के भनिन्छ?',
     en: 'What is the amount remaining with the company after bonus distribution called?',
     options: [
-      { key: 'A', label: 'बाँकी खुद नाफा / सञ्चित कोष (Retained Profit)' },
-      { key: 'B', label: 'कमिशन' },
-      { key: 'C', label: 'लाभांश मात्र' },
-      { key: 'D', label: 'बोनस प्रतिशत' },
+      { key: 'A', label: 'Remaining net profit / reserve fund (retained profit)' },
+      { key: 'B', label: 'Commission' },
+      { key: 'C', label: 'Dividend only' },
+      { key: 'D', label: 'Bonus percentage' },
     ],
     answer: 'A',
   },
   {
-    np: 'रु ४० लाख नाफाबाट रु २ लाख बोनस बाँड्दा बोनस प्रतिशत कति हुन्छ?',
+    np: 'Rs 40 लाख नाफाबाट Rs 2 लाख बोनस बाँड्दा Bonus percentage कति हुन्छ?',
     en: 'If Rs 2 lakh bonus is distributed from Rs 40 lakh profit, what is the bonus percentage?',
     options: [
-      { key: 'A', label: '५% — (२,००,००० ÷ ४०,००,०००) × १००% = ५%' },
-      { key: 'B', label: '१०%' },
-      { key: 'C', label: '२%' },
-      { key: 'D', label: '८%' },
+      { key: 'A', label: '5% — (2,00,000 ÷ 40,00,000) × 100% = 5%' },
+      { key: 'B', label: '10%' },
+      { key: 'C', label: '2%' },
+      { key: 'D', label: '8%' },
     ],
     answer: 'A',
   },
@@ -61,25 +61,25 @@ interface CompanyPreset {
 
 const PRESETS: CompanyPreset[] = [
   {
-    nameNp: 'होटल उद्योग (Hotel Industry)',
+    nameNp: 'Hotel उद्योग (Hotel Industry)',
     profit: 4000000,
     bonusRate: 10,
     employees: 80,
-    descNp: 'वार्षिक नाफा रु ४० लाख, १०% बोनस, ८० जना कर्मचारी',
+    descNp: 'वार्षिक नाफा Rs 40 लाख, 10% बोनस, 80 people कर्मचारी',
   },
   {
-    nameNp: 'जलविद्युत कम्पनी (Hydropower Co.)',
+    nameNp: 'Hydropower कम्पनी (Hydropower Co.)',
     profit: 15000000,
     bonusRate: 5,
     employees: 50,
-    descNp: 'वार्षिक नाफा रु १ करोड ५० लाख, ५% बोनस, ५० जना कर्मचारी',
+    descNp: 'वार्षिक नाफा Rs 1 करोड 50 लाख, 5% बोनस, 50 people कर्मचारी',
   },
   {
-    nameNp: 'उत्पादन उद्योग (Manufacturing)',
+    nameNp: 'Manufacturing उद्योग (Manufacturing)',
     profit: 8000000,
     bonusRate: 8,
     employees: 64,
-    descNp: 'वार्षिक नाफा रु ८० लाख, ८% बोनस, ६४ जना कर्मचारी',
+    descNp: 'वार्षिक नाफा Rs 80 लाख, 8% बोनस, 64 people कर्मचारी',
   },
 ];
 
@@ -122,7 +122,7 @@ export const CompanyProfitBonusDistribution: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! कम्पनीको खुद नाफाबाट बोनस प्रतिशत, कुल बोनस कोष र प्रत्येक कर्मचारीले पाउने बोनस रकमको हिसाब सिकौं!',
+        'नमस्ते! कम्पनीको खुद नाफाबाट Bonus percentage, कुल बोनस कोष र प्रत्येक कर्मचारीले पाउने बोनस रकमको हिसाब सिकौं!',
         'Welcome! Explore company net profit allocation, bonus pool percentage, and per-employee distribution!'
       )}
     >
@@ -135,7 +135,7 @@ export const CompanyProfitBonusDistribution: React.FC<{
               activeTab === 'dist' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🎁 {L('१. बोनस वितरण सिमुलेटर (Bonus Distribution)', '1. Bonus Distribution')}
+            🎁 {L('1. बोनस वितरण सिमुलेटर (Bonus Distribution)', '1. Bonus Distribution')}
           </button>
           <button
             onClick={() => setActiveTab('reverse')}
@@ -143,7 +143,7 @@ export const CompanyProfitBonusDistribution: React.FC<{
               activeTab === 'reverse' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🔄 {L('२. बोनस प्रतिशत पत्ता लगाउने (Find Bonus %)', '2. Reverse Calculator')}
+            🔄 {L('2. Bonus percentage पत्ता लगाउने (Find Bonus %)', '2. Reverse Calculator')}
           </button>
         </div>
 
@@ -154,12 +154,12 @@ export const CompanyProfitBonusDistribution: React.FC<{
             <div className="lg:col-span-6 bg-white rounded-2xl shadow-lg p-5 border border-slate-200 space-y-4">
               <h3 className="font-extrabold text-slate-800 text-sm flex items-center gap-2">
                 <Building2 className="w-5 h-5 text-amber-600" />
-                कम्पनी तथा बोनस विवरण
+                Company and bonus details
               </h3>
 
               {/* Presets */}
               <div className="space-y-1.5">
-                <span className="text-xs font-bold text-slate-600">पाठ्यपुस्तक नमुनाहरू:</span>
+                <span className="text-xs font-bold text-slate-600">Textbook samples:</span>
                 <div className="grid grid-cols-3 gap-1.5">
                   {PRESETS.map((p, i) => (
                     <button
@@ -180,9 +180,9 @@ export const CompanyProfitBonusDistribution: React.FC<{
               {/* Profit Slider */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>कम्पनीको खुद नाफा (Net Profit):</span>
+                  <span>Company’s net profit:</span>
                   <span className="font-mono text-indigo-700 text-sm">
-                    रु. {profit.toLocaleString()}
+                    Rs. {profit.toLocaleString()}
                   </span>
                 </div>
                 <input
@@ -199,7 +199,7 @@ export const CompanyProfitBonusDistribution: React.FC<{
               {/* Bonus Rate Slider */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>बोनस प्रतिशत (Bonus %):</span>
+                  <span>Bonus percentage:</span>
                   <span className="font-mono text-emerald-700 text-sm">{bonusRate}%</span>
                 </div>
                 <input
@@ -216,8 +216,8 @@ export const CompanyProfitBonusDistribution: React.FC<{
               {/* Employees Slider */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>कर्मचारी सङ्ख्या (Number of Staff):</span>
-                  <span className="font-mono text-amber-700 text-sm">{employees} जना</span>
+                  <span>Number of staff:</span>
+                  <span className="font-mono text-amber-700 text-sm">{employees} people</span>
                 </div>
                 <input
                   type="range"
@@ -236,45 +236,45 @@ export const CompanyProfitBonusDistribution: React.FC<{
               {/* Highlight Per Employee Bonus Card */}
               <div className="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-2xl p-5 shadow-sm text-center space-y-2">
                 <span className="text-xs font-bold text-emerald-900 uppercase tracking-wide block">
-                  प्रत्येक कर्मचारीले पाउने बोनस रकम (Bonus per Employee)
+                  Bonus amount per employee
                 </span>
                 <div className="text-4xl font-black text-emerald-600 font-mono">
-                  रु. {bonusPerEmployee.toLocaleString()}
+                  Rs. {bonusPerEmployee.toLocaleString()}
                 </div>
                 <span className="text-xs text-slate-600 font-semibold block">
-                  कुल बोनस रु. {totalBonusPool.toLocaleString()} ÷ {employees} जना
+                  Total bonus Rs. {totalBonusPool.toLocaleString()} ÷ {employees} people
                 </span>
               </div>
 
               {/* Visual Split Bar */}
               <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm space-y-3">
-                <span className="text-xs font-bold text-slate-700 block">नाफा बाँडफाँड दृश्य:</span>
+                <span className="text-xs font-bold text-slate-700 block">Profit distribution view:</span>
                 <div className="w-full h-8 rounded-full overflow-hidden flex border">
                   <div
                     style={{ width: `${100 - bonusRate}%` }}
                     className="bg-blue-600 flex items-center justify-center text-white text-[11px] font-bold"
                   >
-                    कम्पनीमा बाँकी ({(100 - bonusRate)}%)
+                    Remaining in the company ({(100 - bonusRate)}%)
                   </div>
                   <div
                     style={{ width: `${bonusRate}%` }}
                     className="bg-emerald-500 flex items-center justify-center text-white text-[10px] font-bold"
                   >
-                    बोनस ({bonusRate}%)
+                    Bonus ({bonusRate}%)
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 text-xs pt-1">
                   <div className="p-2.5 bg-slate-50 rounded-xl border">
-                    <span className="text-slate-500 block">कुल बोनस कोष:</span>
+                    <span className="text-slate-500 block">Total bonus fund:</span>
                     <span className="font-mono font-bold text-emerald-700 text-sm">
-                      रु. {totalBonusPool.toLocaleString()}
+                      Rs. {totalBonusPool.toLocaleString()}
                     </span>
                   </div>
                   <div className="p-2.5 bg-slate-50 rounded-xl border">
-                    <span className="text-slate-500 block">कम्पनीमा बाँकी खुद नाफा:</span>
+                    <span className="text-slate-500 block">Net profit remaining in the company:</span>
                     <span className="font-mono font-bold text-blue-700 text-sm">
-                      रु. {retainedProfit.toLocaleString()}
+                      Rs. {retainedProfit.toLocaleString()}
                     </span>
                   </div>
                 </div>
@@ -282,8 +282,8 @@ export const CompanyProfitBonusDistribution: React.FC<{
 
               {/* Formula Reminder */}
               <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-950 font-semibold space-y-1">
-                <div>• कुल बोनस रकम = खुद नाफा × बोनस प्रतिशत</div>
-                <div>• प्रति कर्मचारी बोनस = कुल बोनस रकम ÷ कर्मचारी सङ्ख्या</div>
+                <div>• Total bonus amount = net profit × bonus percentage</div>
+                <div>• Bonus per employee = total bonus amount ÷ number of staff</div>
               </div>
             </div>
           </div>
@@ -293,12 +293,12 @@ export const CompanyProfitBonusDistribution: React.FC<{
         {activeTab === 'reverse' && (
           <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-4">
             <h3 className="font-extrabold text-slate-800 text-sm text-center">
-              वितरित बोनस रकमबाट बोनस प्रतिशत (Bonus %) गणना गर्ने उल्टो विधि
+              Reverse method: calculating the bonus percentage from the distributed bonus amount
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
               <div>
-                <label className="block font-bold text-slate-700 mb-1">कम्पनीको कुल नाफा (रु):</label>
+                <label className="block font-bold text-slate-700 mb-1">Company’s total profit (Rs):</label>
                 <input
                   type="number"
                   value={revProfit}
@@ -308,7 +308,7 @@ export const CompanyProfitBonusDistribution: React.FC<{
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">वितरित कुल बोनस रकम (रु):</label>
+                <label className="block font-bold text-slate-700 mb-1">Total bonus amount distributed (Rs):</label>
                 <input
                   type="number"
                   value={revBonusPool}
@@ -319,10 +319,10 @@ export const CompanyProfitBonusDistribution: React.FC<{
             </div>
 
             <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-center space-y-1">
-              <span className="text-xs font-bold text-emerald-900 block">बोनस प्रतिशत (Bonus %):</span>
+              <span className="text-xs font-bold text-emerald-900 block">Bonus percentage:</span>
               <div className="text-3xl font-black text-emerald-700 font-mono">{revBonusPct}%</div>
               <span className="text-[11px] text-slate-600 font-mono block">
-                ({revBonusPool.toLocaleString()} ÷ {revProfit.toLocaleString()}) × १००% = {revBonusPct}%
+                ({revBonusPool.toLocaleString()} ÷ {revProfit.toLocaleString()}) × 100% = {revBonusPct}%
               </span>
             </div>
           </div>

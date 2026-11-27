@@ -1,13 +1,13 @@
 /**
  * MetalsNonMetalsLabSim.tsx
- * Simulation 37: 2D Metals and Non-metals Laboratory (धातु र अधातु परीक्षण)
- * Grade 6 Science • Unit 10: Materials in Daily Life (दैनिक जीवनमा प्रयोग हुने वस्तुहरू)
+ * Simulation 37: 2D Metals and Non-metals Laboratory
+ * Grade 6 Science • Unit 10: Materials in Daily Life
  *
  * Full 2D Interactive Materials Workbench featuring 4 physical tests:
- * 1. Hammer Malleability Test (कुट्दा पाता बन्ने): Metals flatten; non-metals shatter
- * 2. Electric Conductivity Test (विद्युत सुचालक): Lamp circuit with flowing electrons
- * 3. Surface Lustre Test (चम्किलोपन): Sandpaper reveals metallic sheen and sparkles
- * 4. Sonorous Ring Test (सुमधुर ध्वनि): Striking creates resonant acoustic sound rings
+ * 1. Hammer Malleability Test: Metals flatten; non-metals shatter
+ * 2. Electric Conductivity Test: Lamp circuit with flowing electrons
+ * 3. Surface Lustre Test: Sandpaper reveals metallic sheen and sparkles
+ * 4. Sonorous Ring Test: Striking creates resonant acoustic sound rings
  */
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -29,18 +29,18 @@ interface MaterialInfo {
 }
 
 const MATERIALS: MaterialInfo[] = [
-  { id: 'copper', nameEn: 'Copper (तामा)', nameNe: 'तामा (Copper)', isMetal: true, color: '#b45309', lustreColor: '#fb923c' },
-  { id: 'iron', nameEn: 'Iron (फलाम)', nameNe: 'फलाम (Iron)', isMetal: true, color: '#475569', lustreColor: '#cbd5e1' },
-  { id: 'aluminium', nameEn: 'Aluminium (आल्मुनियम)', nameNe: 'आल्मुनियम (Aluminium)', isMetal: true, color: '#64748b', lustreColor: '#f8fafc' },
-  { id: 'sulfur', nameEn: 'Sulfur (गन्धक)', nameNe: 'गन्धक (Sulfur)', isMetal: false, color: '#eab308', lustreColor: '#ca8a04' },
-  { id: 'coal_carbon', nameEn: 'Charcoal (कोइला)', nameNe: 'काठको कोइला (Charcoal)', isMetal: false, color: '#1e293b', lustreColor: '#0f172a' },
+  { id: 'copper', nameEn: 'Copper', nameNe: 'तामा (Copper)', isMetal: true, color: '#b45309', lustreColor: '#fb923c' },
+  { id: 'iron', nameEn: 'Iron', nameNe: 'फलाम (Iron)', isMetal: true, color: '#475569', lustreColor: '#cbd5e1' },
+  { id: 'aluminium', nameEn: 'Aluminium', nameNe: 'आल्मुनियम (Aluminium)', isMetal: true, color: '#64748b', lustreColor: '#f8fafc' },
+  { id: 'sulfur', nameEn: 'Sulfur', nameNe: 'गन्धक (Sulfur)', isMetal: false, color: '#eab308', lustreColor: '#ca8a04' },
+  { id: 'coal_carbon', nameEn: 'Charcoal', nameNe: 'काठको कोइला (Charcoal)', isMetal: false, color: '#1e293b', lustreColor: '#0f172a' },
 ];
 
 export const MetalsNonMetalsLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -308,10 +308,10 @@ export const MetalsNonMetalsLabSim: React.FC<BaseSimulationProps> = ({
         ctx.font = 'bold 13px sans-serif';
         if (currentMat.isMetal) {
           ctx.fillStyle = '#34d399';
-          ctx.fillText(lang === 'en' ? '✓ Good Conductor of Electricity (सुचालक)!' : '✓ विद्युतको राम्रो सुचालक (Good Conductor)!', cx - 120, tableY - 160);
+          ctx.fillText(lang === 'en' ? '✓ Good Conductor of Electricity!' : '✓ विद्युतको राम्रो सुचालक (Good Conductor)!', cx - 120, tableY - 160);
         } else {
           ctx.fillStyle = '#f87171';
-          ctx.fillText(lang === 'en' ? '✗ Poor Conductor / Insulator (कुचालक)!' : '✗ विद्युतको कुचालक (Insulator / Non-conductor)!', cx - 130, tableY - 160);
+          ctx.fillText(lang === 'en' ? '✗ Poor Conductor / Insulator!' : '✗ विद्युतको कुचालक (Insulator / Non-conductor)!', cx - 130, tableY - 160);
         }
       } else if (activeTest === 'lustre') {
         // --- 3. METALLIC LUSTRE TEST ---
@@ -426,7 +426,7 @@ export const MetalsNonMetalsLabSim: React.FC<BaseSimulationProps> = ({
       ctx.fillText(lang === 'en' ? currentMat.nameEn : currentMat.nameNe, 32, 62);
       ctx.fillStyle = currentMat.isMetal ? '#34d399' : '#f87171';
       ctx.font = 'bold 11px sans-serif';
-      ctx.fillText(currentMat.isMetal ? 'CLASSIFICATION: METAL (धातु)' : 'CLASSIFICATION: NON-METAL (अधातु)', 32, 82);
+      ctx.fillText(currentMat.isMetal ? 'CLASSIFICATION: METAL' : 'CLASSIFICATION: NON-METAL', 32, 82);
 
       animFrameRef.current = requestAnimationFrame(render);
     };
@@ -503,7 +503,7 @@ export const MetalsNonMetalsLabSim: React.FC<BaseSimulationProps> = ({
                 >
                   <div>{lang === 'en' ? m.nameEn : m.nameNe}</div>
                   <div style={{ fontSize: '9px', color: m.isMetal ? '#34d399' : '#fbbf24', marginTop: '2px' }}>
-                    {m.isMetal ? '● Metal (धातु)' : '▲ Non-Metal (अधातु)'}
+                    {m.isMetal ? '● Metal' : '▲ Non-Metal'}
                   </div>
                 </button>
               ))}
@@ -593,11 +593,11 @@ export const MetalsNonMetalsLabSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: Materials Around Us' : '१. खोज: वरपरका वस्तुहरू')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Testing Properties' : '२. अन्वेषण: गुण परीक्षण')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Malleability vs Brittleness' : '३. अवलोकन: लचिलोपन र भंगुरता')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Conduction Flow' : '४. बुझाइ: विद्युत प्रवाह')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Classification Quiz' : '५. चुनौती: धातु प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: Materials Around Us' : '1. खोज: वरपरका वस्तुहरू')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Testing Properties' : '2. अन्वेषण: गुण परीक्षण')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Malleability vs Brittleness' : '3. अवलोकन: लचिलोपन र भंगुरता')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Conduction Flow' : '4. बुझाइ: विद्युत प्रवाह')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Classification Quiz' : '5. चुनौती: धातु प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
@@ -623,9 +623,9 @@ export const MetalsNonMetalsLabSim: React.FC<BaseSimulationProps> = ({
                     : 'धातुलाई नभाँचीकन कुटेर पातलो पाता बनाउन सकिने गुणलाई के भनिन्छ?'}
                 </p>
                 {[
-                  { id: 1, en: 'Malleability (कुट्दा पाता बन्ने गुण)', ne: 'कुट्दा पाता बन्ने गुण (Malleability)' },
-                  { id: 2, en: 'Ductility (तन्कने गुण)', ne: 'तन्कने गुण (Ductility)' },
-                  { id: 3, en: 'Brittleness (भंगुरता)', ne: 'भंगुरता (Brittleness)' },
+                  { id: 1, en: 'Malleability', ne: 'कुट्दा पाता बन्ने गुण (Malleability)' },
+                  { id: 2, en: 'Ductility', ne: 'तन्कने गुण (Ductility)' },
+                  { id: 3, en: 'Brittleness', ne: 'भंगुरता (Brittleness)' },
                 ].map(opt => (
                   <button
                     key={opt.id}

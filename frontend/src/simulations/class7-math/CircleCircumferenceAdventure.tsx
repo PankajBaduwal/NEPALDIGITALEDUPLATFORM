@@ -1,6 +1,6 @@
 /**
  * CircleCircumferenceAdventure.tsx
- * Grade 7 Mathematics – Lesson 9: PERIMETER, AREA AND VOLUME (परिमिति, क्षेत्रफल र आयतन)
+ * Grade 7 Mathematics – Lesson 9: PERIMETER, AREA AND VOLUME
  * Simulation 4: Circle Circumference and Wheel Adventure (2D + Rolling Wheel Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 132-137)
  */
@@ -15,32 +15,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुनै पनि वृत्तको परिधि (Circumference) र व्यास (Diameter) को अनुपात कति बराबर हुन्छ?',
     en: 'What is the ratio of circumference to diameter for any circle?',
     options: [
-      { key: 'A', label: 'π (लगभग २२/७ वा ३.१४)' },
-      { key: 'B', label: '२π' },
-      { key: 'C', label: 'π/२' },
-      { key: 'D', label: '४' },
+      { key: 'A', label: 'π (about 22/7 or 3.14)' },
+      { key: 'B', label: '2π' },
+      { key: 'C', label: 'π/2' },
+      { key: 'D', label: '4' },
     ],
     answer: 'A',
   },
   {
-    np: 'व्यास (d) १४ सेमी (अर्धव्यास r = ७ सेमी) भएको वृत्तको परिधि कति हुन्छ? (π = २२/७)',
+    np: 'व्यास (d) 14 cm भएको वृत्तको परिधि कति हुन्छ? (π = 22/7)',
     en: 'What is the circumference of a circle with diameter 14 cm (radius 7 cm)? (π = 22/7)',
     options: [
-      { key: 'A', label: '४४ सेमी [ २ × (२२/७) × ७ = ४४ सेमी ]' },
-      { key: 'B', label: '२२ सेमी' },
-      { key: 'C', label: '८८ सेमी' },
-      { key: 'D', label: '१५४ सेमी' },
+      { key: 'A', label: '44 cm [ 2 × (22/7) × 7 = 44 cm ]' },
+      { key: 'B', label: '22 cm' },
+      { key: 'C', label: '88 cm' },
+      { key: 'D', label: '154 cm' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा साइकल १०० पटक पाङ्ग्रा घुम्दा ४४० मिटर दुरी पार गर्छ भने पाङ्ग्राको अर्धव्यास कति हुन्छ?',
+    np: 'एउटा साइकल 100 पटक पाङ्ग्रा घुम्दा 440 m दुरी पार गर्छ भने पाङ्ग्राको अर्धव्यास कति हुन्छ?',
     en: 'A cycle travels 440 metres in 100 wheel rotations. What is the wheel radius?',
     options: [
-      { key: 'A', label: '०.७ मिटर वा ७० सेमी (१ चक्कर = ४.४m => r = ४.४ ÷ (२×२२/७) = ०.७m)' },
-      { key: 'B', label: '१.४ मिटर' },
-      { key: 'C', label: '३५ सेमी' },
-      { key: 'D', label: '५० सेमी' },
+      { key: 'A', label: '0.7 m or 70 cm (circumference = 4.4 m => r = 4.4 ÷ (2×22/7) = 0.7 m)' },
+      { key: 'B', label: '1.4 m' },
+      { key: 'C', label: '35 cm' },
+      { key: 'D', label: '50 cm' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'अर्धव्यास (r) बाट परिधि निकाल्ने सही सुत्र कुन हो?',
     en: 'Which is the correct formula to calculate circumference from radius (r)?',
     options: [
-      { key: 'A', label: 'C = २πr' },
+      { key: 'A', label: 'C = 2πr' },
       { key: 'B', label: 'C = πr²' },
-      { key: 'C', label: 'C = २r' },
-      { key: 'D', label: 'C = ४πr' },
+      { key: 'C', label: 'C = 2r' },
+      { key: 'D', label: 'C = 4πr' },
     ],
     answer: 'A',
   },
@@ -99,7 +99,7 @@ export const CircleCircumferenceAdventure: React.FC<{ onBackToLibrary?: () => vo
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'वृत्तको परिधि र व्यासको अनुपात सधैँ स्थिर (π = २२/७ ≈ ३.१४) हुन्छ: C = २πr = πd!',
+        'वृत्तको परिधि र व्यासको अनुपात सधैँ स्थिर (π = 22/7 ≈ 3.14) हुन्छ: C = 2πr = πd!',
         'The ratio of circumference to diameter is always constant (π = 22/7 ≈ 3.14): C = 2πr = πd!'
       )}
     >
@@ -107,9 +107,9 @@ export const CircleCircumferenceAdventure: React.FC<{ onBackToLibrary?: () => vo
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'pi-discovery', np: '१. परिधि र π को खोजी (Discover π)', en: '1. Discover π' },
-            { id: 'calc', np: '२. परिधि क्याल्कुलेटर (C = 2πr)', en: '2. Circumference Calc' },
-            { id: 'wheel', np: '३. साइकल पाङ्ग्रा चक्कर (Wheel Rotations)', en: '3. Wheel Adventure' },
+            { id: 'pi-discovery', np: '1. परिधि र π को खोजी (Discover π)', en: '1. Discover π' },
+            { id: 'calc', np: '2. परिधि क्याल्कुलेटर (C = 2πr)', en: '2. Circumference Calc' },
+            { id: 'wheel', np: '3. साइकल पाङ्ग्रा Circumference (Wheel Rotations)', en: '3. Wheel Adventure' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -141,7 +141,7 @@ export const CircleCircumferenceAdventure: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'वृत्तको घेराको लम्बाइलाई परिधि (Circumference) भनिन्छ। परिधिलाई व्यासले भाग गर्दा सधैँ स्थिर मान ३.१४ (π) प्राप्त हुन्छ।',
+                'वृत्तको घेराको लम्बाइलाई परिधि (Circumference) भनिन्छ। परिधिलाई व्यासले भाग गर्दा सधैँ स्थिर मान 3.14 (π) प्राप्त हुन्छ।',
                 'The boundary length is Circumference. Dividing Circumference by Diameter always equals constant 3.14 (π).'
               )}
             </p>
@@ -203,15 +203,15 @@ export const CircleCircumferenceAdventure: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('१. धागोले नापेको परिधि (Circumference):', '1. Circumference:')}</strong> C = २ × (२२/७) ×{' '}
+                <strong>{L('1. धागोले नापेको परिधि (Circumference):', '1. Circumference:')}</strong> C = 2 × (22/7) ×{' '}
                 {coinRadius} = <span style={{ fontWeight: 800, color: '#15803D' }}>{coinCircumference.toFixed(1)} cm</span>
               </div>
               <div>
-                <strong>{L('२. परिधि र व्यासको अनुपात:', '2. Circumference / Diameter Ratio:')}</strong>
+                <strong>{L('2. परिधि र व्यासको अनुपात:', '2. Circumference / Diameter Ratio:')}</strong>
                 <br />
                 {coinCircumference.toFixed(1)} ÷ {coinDiameter} ={' '}
                 <span style={{ fontWeight: 800, color: '#047857', fontSize: 18 }}>
-                  {(coinCircumference / coinDiameter).toFixed(2)} ≈ π (पाई)
+                  {(coinCircumference / coinDiameter).toFixed(2)} ≈ π (pi)
                 </span>
               </div>
             </div>
@@ -226,7 +226,7 @@ export const CircleCircumferenceAdventure: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: अर्धव्यास r = ७ सेमी (व्यास १४ सेमी) भएको वृत्तको परिधि पत्ता लगाउनुहोस्:',
+                'पाठ्यपुस्तक उदाहरण: अर्धव्यास r = 7 cm भएको वृत्तको परिधि पत्ता लगाउनुहोस्:',
                 'Textbook Example: Find circumference of a circle with radius 7 cm (diameter 14 cm):'
               )}
             </p>
@@ -259,10 +259,10 @@ export const CircleCircumferenceAdventure: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('व्यास (Diameter):', 'Diameter:')}</strong> d = २r = २ × {calcRadius} = {calcDiameter} cm
+                <strong>{L('व्यास (Diameter):', 'Diameter:')}</strong> d = 2r = 2 × {calcRadius} = {calcDiameter} cm
               </div>
               <div>
-                <strong>{L('परिधि सूत्र (Formula):', 'Circumference Formula:')}</strong> C = २πr = २ × (२२/७) × {calcRadius}
+                <strong>{L('परिधि सूत्र (Formula):', 'Circumference Formula:')}</strong> C = 2πr = 2 × (22/7) × {calcRadius}
               </div>
               <div
                 style={{
@@ -282,11 +282,11 @@ export const CircleCircumferenceAdventure: React.FC<{ onBackToLibrary?: () => vo
         {activeTab === 'wheel' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('साइकलको पाङ्ग्रा र चक्कर (Bicycle Wheel Rotation Adventure)', 'Wheel Rotation Adventure')}
+              {L('साइकलको पाङ्ग्रा र Circumference (Bicycle Wheel Rotation Adventure)', 'Wheel Rotation Adventure')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: एउटा साइकल १०० पटक पाङ्ग्रा घुम्दा ४४० मिटर दुरी पार गर्छ भने पाङ्ग्राको अर्धव्यास कति हुन्छ?',
+                'पाठ्यपुस्तक उदाहरण: एउटा साइकल 100 पटक पाङ्ग्रा घुम्दा 440 m दुरी पार गर्छ भने पाङ्ग्राको अर्धव्यास कति हुन्छ?',
                 'Textbook Example: A cycle travels 440 m in 100 wheel rotations. Find the radius of the wheel:'
               )}
             </p>
@@ -312,7 +312,7 @@ export const CircleCircumferenceAdventure: React.FC<{ onBackToLibrary?: () => vo
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#D97706', display: 'block', marginBottom: 4 }}>
-                  {L('चक्कर सङ्ख्या: ', 'Rotations: ')} {rotations} चक्कर
+                  {L('Circumference सङ्ख्या: ', 'Rotations: ')} {rotations} Circumference
                 </label>
                 <input
                   type="range"
@@ -340,17 +340,17 @@ export const CircleCircumferenceAdventure: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('१. १ चक्करमा पार हुने दुरी (परिधि - C):', '1. Distance in 1 rotation (C):')}</strong>
+                <strong>{L('1. 1 Circumferenceमा पार हुने दुरी (परिधि - C):', '1. Distance in 1 rotation (C):')}</strong>
                 <br />
                 {totalDistanceM} m ÷ {rotations} ={' '}
                 <span style={{ fontWeight: 800, color: '#0369A1' }}>{distancePerRotation.toFixed(2)} m</span>
               </div>
               <div>
-                <strong>{L('२. परिधिबाट अर्धव्यास (r) निकाल्दा:', '2. Finding radius (r) from C:')}</strong>
-                <br />C = २πr ➜ {distancePerRotation.toFixed(2)} = २ × (२२/७) × r
+                <strong>{L('2. परिधिबाट अर्धव्यास (r) निकाल्दा:', '2. Finding radius (r) from C:')}</strong>
+                <br />C = 2πr ➜ {distancePerRotation.toFixed(2)} = 2 × (22/7) × r
               </div>
               <div>
-                r = ({distancePerRotation.toFixed(2)} × ७) ÷ ४४ ={' '}
+                r = ({distancePerRotation.toFixed(2)} × 7) ÷ 44 ={' '}
                 <span style={{ fontWeight: 800, color: '#166534' }}>{wheelRadiusM.toFixed(2)} m</span>
               </div>
               <div

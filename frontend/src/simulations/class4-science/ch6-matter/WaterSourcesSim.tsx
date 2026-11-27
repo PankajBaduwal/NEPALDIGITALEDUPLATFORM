@@ -1,16 +1,16 @@
 /**
  * WaterSourcesSim.tsx
- * Simulation 24: 2D Water Sources Nepalese Hydrological Diorama (नेपालका पानीका मुहानहरू)
- * Grade 4 Science • Chapter 6: Matter (पदार्थ)
+ * Simulation 24: 2D Water Sources Nepalese Hydrological Diorama
+ * Grade 4 Science • Chapter 6: Matter
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
  * - 4 Authentic Nepalese Water Sources:
- *   1. Himalayan Glacier (हिमनदी): Snow summits, blue glacial ice, pristine meltwater torrents
- *   2. Natural Stone Spout / Dhungedhara (ढुङ्गेधारा / हिटी): Carved stone spout, natural spring water
- *   3. Flowing River (नदी तथा खोला): Perennial mountain river with ripples, pebbles, aquatic life
- *   4. Dug Well / Aquifer (इनार र भूमिगत जल): Stone circular well with pulley, rope, bucket dipping into water table
- * - Interactive "Draw Water" simulation: Lower bucket or fill traditional brass water jar (ग्याग्री)
+ *   1. Himalayan Glacier: Snow summits, blue glacial ice, pristine meltwater torrents
+ *   2. Natural Stone Spout / Dhungedhara: Carved stone spout, natural spring water
+ *   3. Flowing River: Perennial mountain river with ripples, pebbles, aquatic life
+ *   4. Dug Well / Aquifer: Stone circular well with pulley, rope, bucket dipping into water table
+ * - Interactive "Draw Water" simulation: Lower bucket or fill traditional brass water jar
  * - Purity & usage analysis cards, Bilingual EN/NE, and curriculum quiz.
  */
 import React, { useState, useRef, useEffect } from 'react';
@@ -37,7 +37,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -54,7 +54,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
   const sources: WaterSourceInfo[] = [
     {
       id: 'glacier',
-      nameEn: 'Himalayan Glacier (हिमनदी)',
+      nameEn: 'Himalayan Glacier',
       nameNe: 'हिमनदी तथा हिमाल (Glacier)',
       purityEn: 'Pure Mineral Meltwater (High Purity)',
       purityNe: 'प्राकृतिक र शुद्ध खनिजयुक्त (अति शुद्ध)',
@@ -65,7 +65,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'spring',
-      nameEn: 'Stone Spout / Dhungedhara (ढुङ्गेधारा)',
+      nameEn: 'Stone Spout / Dhungedhara',
       nameNe: 'ढुङ्गेधारा तथा मूल (Natural Spring)',
       purityEn: 'Naturally Filtered Spring Water',
       purityNe: 'प्राकृतिक रूपमा छानिएको शुद्ध पानी',
@@ -76,7 +76,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'river',
-      nameEn: 'Flowing River (नदी तथा खोला)',
+      nameEn: 'Flowing River',
       nameNe: 'नदी तथा खोला (Flowing River)',
       purityEn: 'Freshwater (Requires Boiling for Drinking)',
       purityNe: 'ताजा पानी (पिउनुअघि उमाल्नुपर्ने)',
@@ -87,7 +87,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'well',
-      nameEn: 'Dug Well & Aquifer (इनार र जमिनमुनिको पानी)',
+      nameEn: 'Dug Well & Aquifer',
       nameNe: 'इनार र भूमिगत पानी (Dug Well)',
       purityEn: 'Groundwater (Filtered but check for minerals)',
       purityNe: 'भूमिगत जल (पिउनका लागि परीक्षण आवश्यक)',
@@ -194,7 +194,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
     };
   }, [activeSourceId, activeSource, isDrawingWater, bucketProgress, lang]);
 
-  // SCENE 1: GLACIER (हिमनदी)
+  // SCENE 1: GLACIER
   function renderGlacierScene(ctx: CanvasRenderingContext2D, t: number) {
     // Sky
     const sky = ctx.createLinearGradient(0, 0, 0, 320);
@@ -297,7 +297,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
     }
   }
 
-  // SCENE 2: STONE SPOUT / DHUNGEDHARA (ढुङ्गेधारा)
+  // SCENE 2: STONE SPOUT / DHUNGEDHARA
   function renderStoneSpoutScene(ctx: CanvasRenderingContext2D, t: number, drawing: boolean) {
     // Stone Courtyard background
     ctx.fillStyle = '#1e293b';
@@ -378,7 +378,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
       ctx.fill();
     }
 
-    // Traditional Brass Water Vessel (ग्याग्री / Amrit Kalash) placed under spout
+    // Traditional Brass Water Vessel placed under spout
     drawBrassVessel(ctx, nx + 60, 440, drawing);
   }
 
@@ -411,7 +411,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
     ctx.restore();
   }
 
-  // SCENE 3: FLOWING RIVER (नदी)
+  // SCENE 3: FLOWING RIVER
   function renderRiverScene(ctx: CanvasRenderingContext2D, t: number) {
     // Green Riverbank Landscape
     const sky = ctx.createLinearGradient(0, 0, 0, 240);
@@ -491,7 +491,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
     ctx.restore();
   }
 
-  // SCENE 4: DUG WELL / GROUNDWATER (इनार)
+  // SCENE 4: DUG WELL / GROUNDWATER
   function renderWellScene(ctx: CanvasRenderingContext2D, t: number, progress: number) {
     // Village courtyard & cross-section
     ctx.fillStyle = '#0f172a';
@@ -543,7 +543,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
     ctx.lineTo(wx + 65, wy - 30);
     ctx.stroke();
 
-    // Pulley Wheel (घिर्नी)
+    // Pulley Wheel
     ctx.fillStyle = '#334155';
     ctx.beginPath();
     ctx.arc(wx, wy - 15, 16, 0, Math.PI * 2);
@@ -634,7 +634,7 @@ export const WaterSourcesSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 6: Matter'
-          : 'कक्षा ४ विज्ञान • एकाइ ६: पदार्थ'
+          : 'कक्षा 4 विज्ञान • एकाइ 6: पदार्थ'
       }
       currentStage={stage}
       onStageChange={setStage}

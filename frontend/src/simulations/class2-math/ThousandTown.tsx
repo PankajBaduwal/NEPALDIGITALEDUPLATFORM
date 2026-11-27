@@ -1,5 +1,5 @@
 /**
- * Lesson 3 · Numbers up to 1000 (१००० सम्मका सङ्ख्या)
+ * Lesson 3 · Numbers up to 1000
  * Thousand Town — build any number up to 999 with hundred flats, ten rods and unit cubes.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -16,7 +16,7 @@ export const ThousandTown: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G2-L3-01',
     chapter: 3,
-    titleNp: 'हजार सहर (१००० सम्मका सङ्ख्या)',
+    titleNp: 'हजार सहर (1000 सम्मका सङ्ख्या)',
     titleEn: 'Thousand Town (Numbers up to 1000)',
   });
 
@@ -37,7 +37,7 @@ export const ThousandTown: React.FC<Props> = ({ onBackToLibrary }) => {
 
   const addHundred = () => {
     if (h >= 9) {
-      kit.oops('९९९ भन्दा बढी हुँदैन', 'Stay below 1000');
+      kit.oops('999 भन्दा बढी हुँदैन', 'Stay below 1000');
       return;
     }
     setH((v) => v + 1);
@@ -54,12 +54,12 @@ export const ThousandTown: React.FC<Props> = ({ onBackToLibrary }) => {
     kit.tap();
     if (t >= 9) {
       if (h >= 9) {
-        kit.oops('९९९ भन्दा बढी हुँदैन', 'Stay below 1000');
+        kit.oops('999 भन्दा बढी हुँदैन', 'Stay below 1000');
         return;
       }
       setT(0);
       setH((v) => v + 1);
-      kit.say('१० दशक मिलेर १ सय बन्यो!', '10 tens bundled into 1 hundred!');
+      kit.say('10 दशक मिलेर 1 सय बन्यो!', '10 tens bundled into 1 hundred!');
     } else {
       setT((v) => v + 1);
     }
@@ -72,7 +72,7 @@ export const ThousandTown: React.FC<Props> = ({ onBackToLibrary }) => {
     } else if (h > 0) {
       setH((v) => v - 1);
       setT(9);
-      kit.say('१ सय फुकेर १० दशक भयो', '1 hundred broke into 10 tens');
+      kit.say('1 सय फुकेर 10 दशक भयो', '1 hundred broke into 10 tens');
     }
   };
 
@@ -80,17 +80,17 @@ export const ThousandTown: React.FC<Props> = ({ onBackToLibrary }) => {
     kit.tap();
     if (o >= 9) {
       if (t >= 9 && h >= 9) {
-        kit.oops('९९९ भन्दा बढी हुँदैन', 'Stay below 1000');
+        kit.oops('999 भन्दा बढी हुँदैन', 'Stay below 1000');
         return;
       }
       setO(0);
       if (t >= 9) {
         setT(0);
         setH((v) => v + 1);
-        kit.say('१० दशक मिलेर १ सय बन्यो!', '10 tens bundled into 1 hundred!');
+        kit.say('10 दशक मिलेर 1 सय बन्यो!', '10 tens bundled into 1 hundred!');
       } else {
         setT((v) => v + 1);
-        kit.say('१० एकाइ मिलेर १ दशक बन्यो!', '10 ones bundled into 1 ten!');
+        kit.say('10 एकाइ मिलेर 1 दशक बन्यो!', '10 ones bundled into 1 ten!');
       }
     } else {
       setO((v) => v + 1);
@@ -104,12 +104,12 @@ export const ThousandTown: React.FC<Props> = ({ onBackToLibrary }) => {
     } else if (t > 0) {
       setT((v) => v - 1);
       setO(9);
-      kit.say('१ दशक फुकेर १० एकाइ भयो', '1 ten broke into 10 ones');
+      kit.say('1 दशक फुकेर 10 एकाइ भयो', '1 ten broke into 10 ones');
     } else if (h > 0) {
       setH((v) => v - 1);
       setT(9);
       setO(9);
-      kit.say('१ सय फुकेर १० दशक र १० एकाइ भयो', '1 hundred unbundled');
+      kit.say('1 सय फुकेर 10 दशक र 10 एकाइ भयो', '1 hundred unbundled');
     }
   };
 
@@ -210,20 +210,20 @@ export const ThousandTown: React.FC<Props> = ({ onBackToLibrary }) => {
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
         {/* Hundred buttons */}
         <div style={{ display: 'inline-flex', gap: 4, background: '#F0FDF4', padding: '4px 8px', borderRadius: 12, border: '1px solid #BBF7D0' }}>
-          <CBtn color="#166534" onClick={addHundred}>+१ {kit.t('सय', 'Hundred')}</CBtn>
-          <CBtn color="#166534" onClick={delHundred}>-१ {kit.t('सय', 'Hundred')}</CBtn>
+          <CBtn color="#166534" onClick={addHundred}>+1 {kit.t('सय', 'Hundred')}</CBtn>
+          <CBtn color="#166534" onClick={delHundred}>-1 {kit.t('सय', 'Hundred')}</CBtn>
         </div>
 
         {/* Ten buttons */}
         <div style={{ display: 'inline-flex', gap: 4, background: '#EFF6FF', padding: '4px 8px', borderRadius: 12, border: '1px solid #BFDBFE' }}>
-          <CBtn color="#1E40AF" onClick={addTen}>+१ {kit.t('दशक', 'Ten')}</CBtn>
-          <CBtn color="#1E40AF" onClick={delTen}>-१ {kit.t('दशक', 'Ten')}</CBtn>
+          <CBtn color="#1E40AF" onClick={addTen}>+1 {kit.t('दशक', 'Ten')}</CBtn>
+          <CBtn color="#1E40AF" onClick={delTen}>-1 {kit.t('दशक', 'Ten')}</CBtn>
         </div>
 
         {/* One buttons */}
         <div style={{ display: 'inline-flex', gap: 4, background: '#FFFBEB', padding: '4px 8px', borderRadius: 12, border: '1px solid #FDE68A' }}>
-          <CBtn color="#92400E" onClick={addOne}>+१ {kit.t('एकाइ', 'One')}</CBtn>
-          <CBtn color="#92400E" onClick={delOne}>-१ {kit.t('एकाइ', 'One')}</CBtn>
+          <CBtn color="#92400E" onClick={addOne}>+1 {kit.t('एकाइ', 'One')}</CBtn>
+          <CBtn color="#92400E" onClick={delOne}>-1 {kit.t('एकाइ', 'One')}</CBtn>
         </div>
 
         {kit.mode === 'LEARN' && (
@@ -260,7 +260,7 @@ export const ThousandTown: React.FC<Props> = ({ onBackToLibrary }) => {
             tens={t}
             ones={o}
             lang={kit.lang}
-            title={kit.t('स्थानमान ब्लकहरू (१००० सम्म)', 'Place Value Blocks (Up to 1000)')}
+            title={kit.t('स्थानमान ब्लकहरू (1000 सम्म)', 'Place Value Blocks (Up to 1000)')}
           />
         </div>
       </div>

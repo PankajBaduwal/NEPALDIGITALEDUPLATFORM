@@ -17,7 +17,7 @@ const PRESETS: PresetData[] = [
   {
     id: 'exam_marks',
     nameEn: 'Math Exam Marks (out of 50)',
-    nameNp: 'गणित परीक्षा प्राप्ताङ्क (पूर्णाङ्क ५०)',
+    nameNp: 'गणित परीक्षा प्राप्ताङ्क (पूर्णाङ्क 50)',
     values: [12, 25, 34, 18, 42, 28, 35, 15, 22, 38, 45, 19, 27, 31, 40, 14, 23, 33, 48, 29, 36, 17, 24, 30, 44],
     unitEn: 'Marks',
     unitNp: 'अङ्क',
@@ -579,7 +579,7 @@ export const DataClassificationFrequencyLab: React.FC<SimProps> = ({ onBackToLib
                 <span className="font-bold text-blue-700">💡 {L('स्मरण गर्नुहोस्:', 'Important Note:')}</span>
                 <span>
                   {L(
-                    'अन्तिम वर्गान्तरको Less-than c.f. सधैं जम्मा सङ्ख्या N सँग बराबर हुन्छ। सुरुको वर्गान्तरको More-than c.f. पनि N बाट सुरु भई घट्दै जान्छ।',
+                    'अन्तिम वर्गान्तरको Less-than c.f. सधैं जम्मा सङ्ख्या N सँग बराबर हुन्छ। सुरुको वर्गान्तरको More-than c.f. पनि N बाट सुRs भई घट्दै जान्छ।',
                     'The less-than c.f. of the last class always equals total sample size N. The more-than c.f. starts at N and decrements downward.'
                   )}
                 </span>

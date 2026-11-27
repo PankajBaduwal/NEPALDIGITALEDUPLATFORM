@@ -1,7 +1,7 @@
 /**
  * AdditionEquationStudio.tsx
- * Simulation 05: Addition Equation Studio (जोडका वाक्य बनाऔँ)
- * Class 1 Mathematics - Chapter 7: Addition up to 10 (योगफल १० सम्म आउने जोड)
+ * Simulation 05: Addition Equation Studio
+ * Class 1 Mathematics - Chapter 7: Addition up to 10
  * Nepal Digital Education Platform
  */
 
@@ -26,7 +26,7 @@ interface Props {
   userRole?: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
 interface EquationTask {
   id: string;
@@ -55,7 +55,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Task Index
@@ -233,15 +233,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              setLanguage((l) => (l === 'np' ? 'en' : 'np'));
-              playSound('click');
-            }}
-            className="px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition"
-          >
-            {language === 'np' ? 'EN' : 'नेपाली'}
-          </button>
+          
           <button
             onClick={() => setSoundEnabled((s) => !s)}
             className={`p-2 rounded-lg border transition ${
@@ -287,7 +279,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                 <div className="flex flex-wrap gap-2 justify-center min-h-[60px] items-center">
                   {currentTask.countA === 0 ? (
                     <span className="text-xs text-slate-500 italic">
-                      {language === 'np' ? '(शून्य वस्तु)' : '(Zero objects)'}
+                      {language === 'np' ? '' : '(Zero objects)'}
                     </span>
                   ) : (
                     Array.from({ length: currentTask.countA }).map((_, i) => (
@@ -307,7 +299,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                 <div className="flex flex-wrap gap-2 justify-center min-h-[60px] items-center">
                   {currentTask.countB === 0 ? (
                     <span className="text-xs text-slate-500 italic">
-                      {language === 'np' ? '(शून्य वस्तु)' : '(Zero objects)'}
+                      {language === 'np' ? '' : '(Zero objects)'}
                     </span>
                   ) : (
                     Array.from({ length: currentTask.countB }).map((_, i) => (

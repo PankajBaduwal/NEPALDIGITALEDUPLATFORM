@@ -1,7 +1,7 @@
 /**
  * lightTypes.ts
  * Type definitions, physical constants, and curriculum presets for
- * Class 10 Science Chapter 5: Phenomena of Light (प्रकाशका परिघटनाहरू)
+ * Class 10 Science Chapter 5: Phenomena of Light
  * Nepal CDC Alignment
  */
 
@@ -36,7 +36,7 @@ export interface OpticalMedium {
 export const OPTICAL_MEDIA: Record<MediumKey, OpticalMedium> = {
   vacuum: {
     key: 'vacuum',
-    nameEn: 'Vacuum (शून्य)',
+    nameEn: 'Vacuum',
     nameNe: 'शून्य (Vacuum)',
     refractiveIndex: 1.000,
     speedOfLight: 3.00,
@@ -46,7 +46,7 @@ export const OPTICAL_MEDIA: Record<MediumKey, OpticalMedium> = {
   },
   air: {
     key: 'air',
-    nameEn: 'Air (हावा)',
+    nameEn: 'Air',
     nameNe: 'हावा (Air)',
     refractiveIndex: 1.0003,
     speedOfLight: 2.997,
@@ -56,7 +56,7 @@ export const OPTICAL_MEDIA: Record<MediumKey, OpticalMedium> = {
   },
   water: {
     key: 'water',
-    nameEn: 'Water (पानी)',
+    nameEn: 'Water',
     nameNe: 'पानी (Water)',
     refractiveIndex: 1.333,
     speedOfLight: 2.25,
@@ -66,7 +66,7 @@ export const OPTICAL_MEDIA: Record<MediumKey, OpticalMedium> = {
   },
   crown_glass: {
     key: 'crown_glass',
-    nameEn: 'Crown Glass (काँच)',
+    nameEn: 'Crown Glass',
     nameNe: 'काँच (Crown Glass)',
     refractiveIndex: 1.52,
     speedOfLight: 1.97,
@@ -76,7 +76,7 @@ export const OPTICAL_MEDIA: Record<MediumKey, OpticalMedium> = {
   },
   flint_glass: {
     key: 'flint_glass',
-    nameEn: 'Flint Glass (फ्लिन्ट काँच)',
+    nameEn: 'Flint Glass',
     nameNe: 'फ्लिन्ट काँच (Dense Glass)',
     refractiveIndex: 1.66,
     speedOfLight: 1.80,
@@ -86,7 +86,7 @@ export const OPTICAL_MEDIA: Record<MediumKey, OpticalMedium> = {
   },
   diamond: {
     key: 'diamond',
-    nameEn: 'Diamond (हिरा)',
+    nameEn: 'Diamond',
     nameNe: 'हिरा (Diamond)',
     refractiveIndex: 2.42,
     speedOfLight: 1.24,
@@ -131,7 +131,7 @@ export const LIGHT_SIM_QUIZ: QuizQuestion[] = [
     questionEn: 'According to the Law of Reflection, what is the relation between the angle of incidence (i) and the angle of reflection (r)?',
     questionNe: 'परावर्तनको नियम अनुसार आपतन कोण (i) र परावर्तन कोण (r) बीच के सम्बन्ध हुन्छ?',
     optionsEn: ['i = r', 'i > r', 'i < r', 'i + r = 90°'],
-    optionsNe: ['i = r (बराबर)', 'i > r (आपतन कोण ठूलो)', 'i < r (परावर्तन कोण ठूलो)', 'i + r = ९०°'],
+    optionsNe: ['i = r', 'i > r', 'i < r', 'i + r = 90°'],
     correctIdx: 0,
     explanationEn: 'The first law of reflection states that the angle of incidence equals the angle of reflection (∠i = ∠r).',
     explanationNe: 'परावर्तनको पहिलो नियम अनुसार आपतन कोण र परावर्तन कोण सधैं बराबर हुन्छन् (∠i = ∠r)।',
@@ -170,7 +170,7 @@ export const LIGHT_SIM_QUIZ: QuizQuestion[] = [
     ],
     optionsNe: [
       'तिनीहरू एकअर्कासँग समानान्तर हुन्छन् र पार्श्व विस्थापन हुन्छ',
-      'तिनीहरू ९०° को कोणमा काटिन्छन्',
+      'तिनीहरू 90° को कोणमा काटिन्छन्',
       'निर्गत किरण उल्टो दिशामा फर्कन्छ',
       'तिनीहरू स्थायी रूपमा टाढा जान्छन्',
     ],
@@ -214,7 +214,7 @@ export const LIGHT_SIM_QUIZ: QuizQuestion[] = [
     id: 6,
     phenomenon: 'polarization',
     questionEn: 'According to Malus’s Law, what is the transmitted intensity when the analyzer is rotated to 90° relative to the polarizer?',
-    questionNe: 'मालसको नियम अनुसार पोलराइजरको सापेक्षमा एनालाइजरलाई ९०° मा घुमाउँदा प्रकाशको तीव्रता कति हुन्छ?',
+    questionNe: 'मालसको नियम अनुसार पोलराइजरको सापेक्षमा एनालाइजरलाई 90° मा घुमाउँदा प्रकाशको तीव्रता कति हुन्छ?',
     optionsEn: [
       'Zero (Complete extinction / Darkness)',
       'Equal to the initial intensity (I0)',
@@ -225,11 +225,11 @@ export const LIGHT_SIM_QUIZ: QuizQuestion[] = [
       'शून्य (पूर्ण अन्धकार / Complete extinction)',
       'सुरुको तीव्रता बराबर (I0)',
       'सुरुको भन्दा दोब्बर',
-      '५० प्रतिशत मात्र',
+      '50 प्रतिशत मात्र',
     ],
     correctIdx: 0,
     explanationEn: 'Malus’s law states I = I1 · cos²(θ). When θ = 90°, cos(90°) = 0, so transmitted intensity becomes zero.',
-    explanationNe: 'मालसको नियम I = I1 · cos²(θ) अनुसार θ = ९०° हुँदा cos(९०°) = ० हुने भएकाले प्रकाशको तीव्रता शून्य हुन्छ।',
+    explanationNe: 'मालसको नियम I = I1 · cos²(θ) अनुसार θ = 90° हुँदा cos(90°) = 0 हुने भएकाले प्रकाशको तीव्रता शून्य हुन्छ।',
   },
   {
     id: 7,

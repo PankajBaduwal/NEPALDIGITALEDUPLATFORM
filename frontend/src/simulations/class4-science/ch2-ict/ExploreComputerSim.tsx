@@ -1,7 +1,7 @@
 /**
  * ExploreComputerSim.tsx
- * Simulation 4: 2D Computer Workstation Explorer (कम्प्युटर कार्यस्थल २डी अन्वेषक)
- * Grade 4 Science • Chapter 2: Information & Communication Technology (सूचना तथा सञ्चार प्रविधि)
+ * Simulation 4: 2D Computer Workstation Explorer
+ * Grade 4 Science • Chapter 2: Information & Communication Technology
  *
  * Ultra-Realistic Photorealistic 2D Canvas & Vector Workstation Simulation:
  * - Ultra-realistic widescreen LCD/LED monitor with diagonal anti-glare glass sheen,
@@ -58,7 +58,7 @@ export const ExploreComputerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -118,7 +118,7 @@ export const ExploreComputerSim: React.FC<BaseSimulationProps> = ({
         { labelEn: 'Resolution', labelNe: 'रिजोल्युसन', value: '1920 × 1080 Full HD' },
         { labelEn: 'Panel Type', labelNe: 'प्यानल', value: 'IPS Anti-Glare Glass' },
         { labelEn: 'Refresh Rate', labelNe: 'रिफ्रेस दर', value: '75 Hz' },
-        { labelEn: 'Function', labelNe: 'कार्य', value: 'Visual Output (दृश्य आउटपुट)' },
+        { labelEn: 'Function', labelNe: 'कार्य', value: 'Visual Output' },
       ],
       funFactEn: 'Computer screens create millions of colors by mixing only three basic colors of light: Red, Green, and Blue (RGB)!',
       funFactNe: 'कम्प्युटर स्क्रिनले केवल तीनवटा आधारभूत रङ (रातो, हरियो, नीलो - RGB) मिलाएर लाखौं रङहरू बनाउँछ!',
@@ -138,10 +138,10 @@ export const ExploreComputerSim: React.FC<BaseSimulationProps> = ({
         { labelEn: 'Processor', labelNe: 'प्रोसेसर', value: 'Multi-Core 3.6 GHz' },
         { labelEn: 'Motherboard', labelNe: 'मदरबोर्ड', value: 'High-Speed System Bus' },
         { labelEn: 'Cooling', labelNe: 'कुलिङ', value: 'Silent Airflow Intake' },
-        { labelEn: 'Function', labelNe: 'कार्य', value: 'Central Processing (प्रशोधन)' },
+        { labelEn: 'Function', labelNe: 'कार्य', value: 'Central Processing' },
       ],
       funFactEn: 'A modern CPU can perform over 3 billion mathematical calculations in just one single second!',
-      funFactNe: 'आधुनिक सीपीयूले एक सेकेन्डमै ३ अर्ब भन्दा बढी गणितीय गणनाहरू गर्न सक्छ!',
+      funFactNe: 'आधुनिक सीपीयूले एक सेकेन्डमै 3 अर्ब भन्दा बढी गणितीय गणनाहरू गर्न सक्छ!',
     },
     keyboard: {
       id: 'keyboard',
@@ -158,10 +158,10 @@ export const ExploreComputerSim: React.FC<BaseSimulationProps> = ({
         { labelEn: 'Layout', labelNe: 'लेआउट', value: 'Standard QWERTY 104 Keys' },
         { labelEn: 'Key Switches', labelNe: 'स्विच', value: 'Tactile Membrane Scissor' },
         { labelEn: 'Wrist Rest', labelNe: 'रिस्ट रेस्ट', value: 'Contoured Soft-Grip' },
-        { labelEn: 'Function', labelNe: 'कार्य', value: 'Text Input (अक्षर इनपुट)' },
+        { labelEn: 'Function', labelNe: 'कार्य', value: 'Text Input' },
       ],
       funFactEn: 'The QWERTY keyboard layout was originally invented in 1873 for mechanical typewriters to prevent jammed keys!',
-      funFactNe: 'QWERTY किबोर्ड डिजाइन सन् १८७३ मा टाइपराइटरको किहरू आपसमा नअल्झिऊन् भनेर बनाइएको थियो!',
+      funFactNe: 'QWERTY किबोर्ड डिजाइन सन् 1873 मा टाइपराइटरको किहरू आपसमा नअल्झिऊन् भनेर बनाइएको थियो!',
     },
     mouse: {
       id: 'mouse',
@@ -178,10 +178,10 @@ export const ExploreComputerSim: React.FC<BaseSimulationProps> = ({
         { labelEn: 'Sensor', labelNe: 'सेन्सर', value: 'Optical Red LED 1200 DPI' },
         { labelEn: 'Buttons', labelNe: 'बटनहरू', value: 'Left, Right, Scroll Wheel' },
         { labelEn: 'Ergonomics', labelNe: 'बनावट', value: 'Two-Tone Sculpted Contour' },
-        { labelEn: 'Function', labelNe: 'कार्य', value: 'Pointer Input (कर्सर नियन्त्रण)' },
+        { labelEn: 'Function', labelNe: 'कार्य', value: 'Pointer Input' },
       ],
       funFactEn: 'The very first computer mouse was invented in 1964 by Douglas Engelbart and was made of carved wood with two metal wheels!',
-      funFactNe: 'संसारको पहिलो कम्प्युटर माउस सन् १९६४ मा डग्लस एंगेलबार्टले काठबाट बनाएका थिए!',
+      funFactNe: 'संसारको पहिलो कम्प्युटर माउस सन् 1964 मा डग्लस एंगेलबार्टले काठबाट बनाएका थिए!',
     },
     storage: {
       id: 'storage',
@@ -198,7 +198,7 @@ export const ExploreComputerSim: React.FC<BaseSimulationProps> = ({
         { labelEn: 'USB Flash', labelNe: 'पेनड्राइभ', value: '16 GB USB 3.0 Removable' },
         { labelEn: 'Optical Tray', labelNe: 'डिस्क ट्रे', value: 'DVD-RW Motorized' },
         { labelEn: 'SSD Storage', labelNe: 'एसएसडी', value: '512 GB Ultra-Fast NVMe' },
-        { labelEn: 'Function', labelNe: 'कार्य', value: 'Permanent Storage (भण्डारण)' },
+        { labelEn: 'Function', labelNe: 'कार्य', value: 'Permanent Storage' },
       ],
       funFactEn: 'Unlike RAM memory which forgets everything when power turns off, SSD and USB drives keep data safe forever!',
       funFactNe: 'बिजुली जाँदा मेटिने र्‍याम (RAM) भन्दा फरक, पेनड्राइभ र एसएसडीले वर्षौंसम्म डाटा सुरक्षित राख्छन्!',
@@ -1226,7 +1226,7 @@ export const ExploreComputerSim: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Computer Workstation Explorer"
-      titleNe="कम्प्युटर कार्यस्थल २डी अन्वेषक"
+      titleNe="कम्प्युटर कार्यस्थल 2डी अन्वेषक"
       subject="Science"
       grade={4}
       chapter={2}

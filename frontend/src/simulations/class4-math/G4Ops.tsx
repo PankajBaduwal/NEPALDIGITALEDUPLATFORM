@@ -1,5 +1,5 @@
 /**
- * Class 4 lesson 5 · Basic operations (गणितका आधारभूत क्रियाहरू)
+ * Class 4 lesson 5 · Basic operations
  * AddTowers4 — 7-digit column addition with carrying.
  * SubTowers4 — 7-digit column subtraction with borrowing.
  * MultiplyGrid — 2D Area model multiplication grid (2-digit × 2-digit).
@@ -56,7 +56,7 @@ const getSteps7 = (a: number, b: number, op: Op): Step[] => {
         cin: carry,
         res,
         cout,
-        np: `${x} + ${y}${carry ? ` + ${carry} (हातमा)` : ''} = ${sum}${cout ? ` → ${res} लेख्ने, १ हातमा` : ` → ${res} लेख्ने`}`,
+        np: `${x} + ${y}${carry ? ` + ${carry} (हातमा)` : ''} = ${sum}${cout ? ` → ${res} लेख्ने, 1 हातमा` : ` → ${res} लेख्ने`}`,
         en: `${x} + ${y}${carry ? ` + ${carry} (carry)` : ''} = ${sum}${cout ? ` → write ${res}, carry ${cout}` : ` → write ${res}`}`,
       });
       carry = cout;
@@ -71,7 +71,7 @@ const getSteps7 = (a: number, b: number, op: Op): Step[] => {
         cin: carry,
         res,
         cout: borrow,
-        np: `${top < 0 ? top : x}${carry ? ` − १ (सापटी दिएको) = ${top}` : ''}${borrow ? `; ${top} < ${y} त्यसैले १० सापट लिने → ${top + 10} − ${y} = ${res}` : ` − ${y} = ${res}`}`,
+        np: `${top < 0 ? top : x}${carry ? ` − 1 = ${top}` : ''}${borrow ? `; ${top} < ${y} त्यसैले 10 सापट लिने → ${top + 10} − ${y} = ${res}` : ` − ${y} = ${res}`}`,
         en: `${x}${carry ? ` − 1 (lent) = ${top}` : ''}${borrow ? `; ${top} < ${y} so borrow 10 → ${top + 10} − ${y} = ${res}` : ` − ${y} = ${res}`}`,
       });
       carry = borrow;
@@ -240,7 +240,7 @@ const make7Sim = (
             {/* Carry / Borrow Row */}
             <div style={{ display: 'grid', gridTemplateColumns: '36px repeat(7, 1fr)', gap: 6, textAlign: 'center', minHeight: 28 }}>
               <div style={{ fontSize: 11, color: '#DC2626', fontWeight: 800, alignSelf: 'center' }}>
-                {op === 'add' ? 'हातमा' : 'सापट'}
+                {op === 'add' ? 'Carry' : 'Borrow'}
               </div>
               {[0, 1, 2, 3, 4, 5, 6].map((c) => {
                 const s = st.find((step) => step.c === c);
@@ -391,7 +391,7 @@ const make7Sim = (
 export const AddTowers4 = make7Sim('add', {
   code: 'SIM-MATH-G4-L5-01',
   chapter: 5,
-  titleNp: 'जोडको टावर (७ अङ्क)',
+  titleNp: 'जोडको टावर (7 अङ्क)',
   titleEn: 'Addition Towers (7 digits)',
   color: '#16A34A',
   sign: '+',
@@ -400,7 +400,7 @@ export const AddTowers4 = make7Sim('add', {
 export const SubTowers4 = make7Sim('sub', {
   code: 'SIM-MATH-G4-L5-02',
   chapter: 5,
-  titleNp: 'घटाउको टावर (७ अङ्क)',
+  titleNp: 'घटाउको टावर (7 अङ्क)',
   titleEn: 'Subtraction Towers (7 digits)',
   color: '#EA580C',
   sign: '−',

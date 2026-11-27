@@ -1,17 +1,17 @@
 /**
  * AnimalClassificationSim.tsx
  * Master Interactive 2D Animal Taxonomy Studio: Vertebrates & Invertebrates
- * (जनावरको वर्गीकरण - २डी अन्तरक्रियात्मक जीव विज्ञान प्रयोगशाला)
- * Grade 4 Science • Chapter 4: Classification of Living Beings (जीवहरूको वर्गीकरण)
+ * (जनावरको वर्गीकरण - 2डी अन्तरक्रियात्मक जीव विज्ञान प्रयोगशाला)
+ * Grade 4 Science • Chapter 4: Classification of Living Beings
  *
  * 100% Native 2D Canvas & Vector Graphics (Zero WebGL/3D Dependencies)
  * - Ultra-Rich Natural Colors & Fauna of Nepal:
- *   1. Himalayan Monal / Danfe (डाँफे - National Bird): 9-colored iridescent plumage, curved beak, bony spine.
- *   2. Tree Frog (रुख भ्यागुतो): Vertebrate amphibian, webbed toes, internal skeletal backbone.
- *   3. Garden Snail (शङ्खे किरा): Invertebrate mollusk, spiral shell, soft muscular foot, no backbone.
- *   4. Himalayan Snow Trout / Asala (असला माछा): Freshwater vertebrate with bony vertebral column and swimming fins.
- *   5. Monarch Butterfly (पुतली): Invertebrate arthropod with chitinous exoskeleton and 6 jointed legs.
- * - Interactive X-Ray Backbone Scanner (कङ्काल स्क्यानर):
+ *   1. Himalayan Monal / Danfe: 9-colored iridescent plumage, curved beak, bony spine.
+ *   2. Tree Frog: Vertebrate amphibian, webbed toes, internal skeletal backbone.
+ *   3. Garden Snail: Invertebrate mollusk, spiral shell, soft muscular foot, no backbone.
+ *   4. Himalayan Snow Trout / Asala: Freshwater vertebrate with bony vertebral column and swimming fins.
+ *   5. Monarch Butterfly: Invertebrate arthropod with chitinous exoskeleton and 6 jointed legs.
+ * - Interactive X-Ray Backbone Scanner:
  *   Toggles an illuminated view showing the internal vertebral spine in vertebrates vs. exoskeleton in invertebrates.
  * - Interactive Sorting Laboratory: Drag or classify specimens into Vertebrate vs. Invertebrate collections.
  */
@@ -49,7 +49,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -71,7 +71,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
   const specimens: AnimalSpecimen[] = [
     {
       id: 'danfe',
-      nameEn: 'Himalayan Monal / Danfe (डाँफे)',
+      nameEn: 'Himalayan Monal / Danfe',
       nameNe: 'डाँफे (नेपालको राष्ट्रिय चरा)',
       isVertebrate: true,
       groupEn: 'Vertebrate • Class Aves (Bird)',
@@ -86,7 +86,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'frog',
-      nameEn: 'Tree Frog (रुख भ्यागुतो)',
+      nameEn: 'Tree Frog',
       nameNe: 'रुख भ्यागुतो (Tree Frog)',
       isVertebrate: true,
       groupEn: 'Vertebrate • Class Amphibia',
@@ -101,7 +101,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'snail',
-      nameEn: 'Garden Snail (शङ्खे किरा)',
+      nameEn: 'Garden Snail',
       nameNe: 'शङ्खे किरा (Garden Snail)',
       isVertebrate: false,
       groupEn: 'Invertebrate • Phylum Mollusca',
@@ -116,7 +116,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'trout',
-      nameEn: 'Himalayan Snow Trout / Asala (असला माछा)',
+      nameEn: 'Himalayan Snow Trout / Asala',
       nameNe: 'असला माछा (Himalayan Trout)',
       isVertebrate: true,
       groupEn: 'Vertebrate • Class Pisces (Fish)',
@@ -131,13 +131,13 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'butterfly',
-      nameEn: 'Monarch Butterfly (पुतली)',
+      nameEn: 'Monarch Butterfly',
       nameNe: 'पुतली (Monarch Butterfly)',
       isVertebrate: false,
       groupEn: 'Invertebrate • Phylum Arthropoda',
       groupNe: 'ढाड नभएको • जोर्नीयुक्त खुट्टा (Arthropoda)',
       characteristicsEn: 'Chitinous exoskeleton, 3-part body (head, thorax, abdomen), 6 jointed legs, wings.',
-      characteristicsNe: 'बाहिरी कडा छाला (Exoskeleton), ६ वटा जोर्नी भएका खुट्टा र रङ्गीचङ्गी पखेटा।',
+      characteristicsNe: 'बाहिरी कडा छाला (Exoskeleton), 6 वटा जोर्नी भएका खुट्टा र रङ्गीचङ्गी पखेटा।',
       descriptionEn: 'Invertebrate arthropod. Supported entirely by an external chitin armor rather than an internal spine.',
       descriptionNe: 'पुतलीको शरीरभित्र ढाडको हड्डी हुँदैन। यसलाई बाहिरी कडा खोल (Chitin) ले अड्याउँछ।',
       backboneInfoEn: 'INVERTEBRATE: Rigid outer exoskeleton, no internal vertebrae.',
@@ -228,7 +228,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
     const animX = centerX;
     const animY = centerY + 10;
 
-    // ── ANIMAL 1: HIMALAYAN MONAL / DANFE (डाँफे) ──
+    // ── ANIMAL 1: HIMALAYAN MONAL / DANFE ──
     if (currentSpecimen.id === 'danfe') {
       const breath = Math.sin(timeSec * 3) * 2;
       // Perched Rock Platform
@@ -349,7 +349,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
       }
     }
 
-    // ── ANIMAL 2: TREE FROG (रुख भ्यागुतो) ──
+    // ── ANIMAL 2: TREE FROG ──
     else if (currentSpecimen.id === 'frog') {
       const breath = Math.sin(timeSec * 4) * 2;
       // Large Green Frog Body
@@ -407,7 +407,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
       }
     }
 
-    // ── ANIMAL 3: GARDEN SNAIL (शङ्खे किरा) ──
+    // ── ANIMAL 3: GARDEN SNAIL ──
     else if (currentSpecimen.id === 'snail') {
       const crawl = Math.sin(timeSec * 2) * 4;
       // Soft Muscular Foot (Pale beige)
@@ -483,11 +483,11 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 12px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(lang === 'en' ? 'NO INTERNAL BONES (ढाड छैन)' : 'शरीरभित्र ढाड छैन (Invertebrate)', animX, animY - 60);
+        ctx.fillText(lang === 'en' ? 'NO INTERNAL BONES' : 'शरीरभित्र ढाड छैन (Invertebrate)', animX, animY - 60);
       }
     }
 
-    // ── ANIMAL 4: HIMALAYAN SNOW TROUT / ASALA (असला माछा) ──
+    // ── ANIMAL 4: HIMALAYAN SNOW TROUT / ASALA ──
     else if (currentSpecimen.id === 'trout') {
       const swimTail = Math.sin(timeSec * 8) * 16;
       // Streamlined Hydrodynamic Body
@@ -550,7 +550,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
       }
     }
 
-    // ── ANIMAL 5: MONARCH BUTTERFLY (पुतली) ──
+    // ── ANIMAL 5: MONARCH BUTTERFLY ──
     else if (currentSpecimen.id === 'butterfly') {
       const flap = Math.cos(timeSec * 14) * 0.85;
       const wingScaleX = Math.cos(flap);
@@ -608,7 +608,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 12px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(lang === 'en' ? 'NO INTERNAL BONES (ढाड छैन)' : 'शरीरभित्र ढाड छैन (Invertebrate)', animX, animY - 60);
+        ctx.fillText(lang === 'en' ? 'NO INTERNAL BONES' : 'शरीरभित्र ढाड छैन (Invertebrate)', animX, animY - 60);
       }
     }
     ctx.restore();
@@ -630,7 +630,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
       qEn: 'Which definitive anatomical feature separates Vertebrates from Invertebrates?',
       qNe: 'ढाड भएका (Vertebrates) र ढाड नभएका (Invertebrates) जनावरहरूलाई कुन अङ्गले छुट्याउँछ?',
       optionsEn: [
-        'An internal vertebral column (Backbone / मेरुदण्ड)',
+        'An internal vertebral column',
         'Having two colorful wings',
         'Living strictly in water ponds',
         'Having green skin',
@@ -658,7 +658,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
         'यसको शरीरभित्र करङ र टाउकोसँग जोडिएको बलियो ढाडको हड्डी हुन्छ',
         'यसले खेतबारीको अन्न खान्छ',
         'यो हिउँ परेको हिमालमा बस्छ',
-        'यसका प्वाँखमा ९ वटा रङ्ग हुन्छन्',
+        'यसका प्वाँखमा 9 वटा रङ्ग हुन्छन्',
       ],
       correct: 0,
       expEn: 'Birds possess a lightweight, hollow bony endoskeleton anchored by a rigid vertebral column for flight.',
@@ -668,7 +668,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
       qEn: 'How does a Garden Snail protect its soft body without internal bones?',
       qNe: 'शरीरभित्र हड्डी नभएको शङ्खे किराले आफ्नो नरम शरीरलाई कसरी जोगाउँछ?',
       optionsEn: [
-        'With a hard external spiral shell (Exoskeleton / शङ्ख)',
+        'With a hard external spiral shell',
         'By flying high in the blue sky',
         'By digging into deep ice',
         'With sharp steel claws',
@@ -879,7 +879,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
                   boxShadow: '0 4px 12px rgba(2, 132, 199, 0.4)',
                 }}
               >
-                🦴 {lang === 'en' ? 'Vertebrate (ढाड भएको)' : 'ढाड भएको (Vertebrate)'}
+                🦴 {lang === 'en' ? 'Vertebrate' : 'ढाड भएको (Vertebrate)'}
               </button>
 
               <button
@@ -896,7 +896,7 @@ export const AnimalClassificationSim: React.FC<BaseSimulationProps> = ({
                   boxShadow: '0 4px 12px rgba(217, 119, 6, 0.4)',
                 }}
               >
-                🪱 {lang === 'en' ? 'Invertebrate (ढाड नभएको)' : 'ढाड नभएको (Invertebrate)'}
+                🪱 {lang === 'en' ? 'Invertebrate' : 'ढाड नभएको (Invertebrate)'}
               </button>
             </div>
           </div>

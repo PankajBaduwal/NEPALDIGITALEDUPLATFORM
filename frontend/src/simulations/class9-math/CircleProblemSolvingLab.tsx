@@ -22,10 +22,10 @@ interface CircleProblem {
 const PROBLEMS: CircleProblem[] = [
   {
     id: 'p1',
-    titleNp: 'पाठ्यपुस्तक उदाहरण १: केन्द्रबाट जीवाको लम्ब दुरी पत्ता लगाउने',
+    titleNp: 'पाठ्यपुस्तक उदाहरण 1: केन्द्रबाट जीवाको लम्ब दुरी पत्ता लगाउने',
     titleEn: 'Textbook Example 1: Find Perpendicular Distance to Chord',
     storyNp:
-      'एउटा वृत्तको अर्धव्यास १० सेमी र जीवाको लम्बाइ १६ सेमी छ भने, वृत्तको केन्द्रबाट उक्त जीवा सम्मको लम्ब दुरी कति हुन्छ?',
+      'एउटा वृत्तको अर्धव्यास 10 cm र जीवाको लम्बाइ 16 cm छ भने, वृत्तको केन्द्रबाट उक्त जीवा सम्मको लम्ब दुरी कति हुन्छ?',
     storyEn:
       'A circle has a radius of 10 cm and a chord of length 16 cm. Find the perpendicular distance from the centre to the chord.',
     givenR: 10,
@@ -34,10 +34,10 @@ const PROBLEMS: CircleProblem[] = [
     correctVal: 6,
     unit: 'cm',
     solutionStepsNp: [
-      '१. केन्द्रबाट जीवामा खिचिएको लम्बले जीवालाई आधा गर्छ: आधा जीवा = १६ ÷ २ = ८ सेमी',
-      '२. समकोणी त्रिभुजमा पाइथागोरस साध्य: r² = d² + (जीवा/२)²',
-      '३. १०² = d² + ८² ⇒ १०० = d² + ६४',
-      '४. d² = १०० - ६४ = ३६ ⇒ d = √३६ = ६ सेमी',
+      '1. केन्द्रबाट जीवामा खिचिएको लम्बले जीवालाई आधा गर्छ: आधा जीवा = 16 ÷ 2 = 8 cm',
+      '2. समकोणी त्रिभुजमा पाइथागोरस साध्य: r² = d² + (जीवा/2)²',
+      '3. 10² = d² + 8² ⇒ 100 = d² + 64',
+      '4. d² = 100 - 64 = 36 ⇒ d = √36 = 6 cm',
     ],
     solutionStepsEn: [
       '1. Perpendicular from centre bisects chord: Half chord = 16 / 2 = 8 cm',
@@ -48,10 +48,10 @@ const PROBLEMS: CircleProblem[] = [
   },
   {
     id: 'p2',
-    titleNp: 'पाठ्यपुस्तक उदाहरण २: वृत्तको अर्धव्यास पत्ता लगाउने',
+    titleNp: 'पाठ्यपुस्तक उदाहरण 2: वृत्तको अर्धव्यास पत्ता लगाउने',
     titleEn: 'Textbook Example 2: Find Radius of Circle',
     storyNp:
-      'वृत्तको केन्द्रबाट ५ सेमी दुरीमा रहेको जीवाको लम्बाइ २४ सेमी छ भने, उक्त वृत्तको अर्धव्यास कति होला?',
+      'वृत्तको केन्द्रबाट 5 cm दुरीमा रहेको जीवाको लम्बाइ 24 cm छ भने, उक्त वृत्तको अर्धव्यास कति होला?',
     storyEn:
       'A chord of length 24 cm is at a distance of 5 cm from the centre of a circle. What is the radius of the circle?',
     givenD: 5,
@@ -60,10 +60,10 @@ const PROBLEMS: CircleProblem[] = [
     correctVal: 13,
     unit: 'cm',
     solutionStepsNp: [
-      '१. आधा जीवा = २४ ÷ २ = १२ सेमी',
-      '२. लम्ब दुरी d = ५ सेमी',
-      '३. पाइथागोरस साध्य अनुसार: r² = ५² + १२² = २५ + १४४ = १६९',
-      '४. r = √१६९ = १३ सेमी',
+      '1. आधा जीवा = 24 ÷ 2 = 12 cm',
+      '2. लम्ब दुरी d = 5 cm',
+      '3. पाइथागोरस साध्य अनुसार: r² = 5² + 12² = 25 + 144 = 169',
+      '4. r = √169 = 13 cm',
     ],
     solutionStepsEn: [
       '1. Half chord = 24 / 2 = 12 cm',
@@ -74,10 +74,10 @@ const PROBLEMS: CircleProblem[] = [
   },
   {
     id: 'p3',
-    titleNp: 'पाठ्यपुस्तक उदाहरण ३: जीवाको पूरा लम्बाइ पत्ता लगाउने',
+    titleNp: 'पाठ्यपुस्तक उदाहरण 3: जीवाको पूरा लम्बाइ पत्ता लगाउने',
     titleEn: 'Textbook Example 3: Find Total Chord Length',
     storyNp:
-      'एउटा वृत्तको अर्धव्यास २५ सेमी छ। केन्द्रबाट ७ सेमी दुरीमा रहेको जीवाको लम्बाइ कति हुन्छ?',
+      'एउटा वृत्तको अर्धव्यास 25 cm छ। केन्द्रबाट 7 cm दुरीमा रहेको जीवाको लम्बाइ कति हुन्छ?',
     storyEn:
       'A circle has a radius of 25 cm. What is the length of a chord situated at a distance of 7 cm from the centre?',
     givenR: 25,
@@ -86,10 +86,10 @@ const PROBLEMS: CircleProblem[] = [
     correctVal: 48,
     unit: 'cm',
     solutionStepsNp: [
-      '१. पाइथागोरस साध्य अनुसार: (जीवा/२)² = r² - d²',
-      '२. (जीवा/२)² = २५² - ७² = ६२५ - ४९ = ५७६',
-      '३. आधा जीवा = √५७६ = २४ सेमी',
-      '४. जीवाको पूरा लम्बाइ = २ × २४ = ४८ सेमी',
+      '1. पाइथागोरस साध्य अनुसार: (जीवा/2)² = r² - d²',
+      '2.² = 25² - 7² = 625 - 49 = 576',
+      '3. आधा जीवा = √576 = 24 cm',
+      '4. जीवाको पूरा लम्बाइ = 2 × 24 = 48 cm',
     ],
     solutionStepsEn: [
       '1. By Pythagoras: (half chord)² = r² - d²',
@@ -102,7 +102,7 @@ const PROBLEMS: CircleProblem[] = [
 
 const QUIZ_QUESTIONS = [
   {
-    np: 'वृत्तको अर्धव्यास (r), केन्द्रबाट जीवाको दुरी (d) र जीवाको लम्बाइ (c) बीचको सही सम्बन्ध कुन हो?',
+    np: 'वृत्तको Radius (r), केन्द्रबाट जीवाको दुरी (d) र जीवाको लम्बाइ (c) बीचको सही सम्बन्ध कुन हो?',
     en: 'What is the correct relation between radius (r), distance to chord (d), and chord length (c)?',
     options: [
       { key: 'A', label: 'r² = d² + (c/2)²' },
@@ -113,10 +113,10 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: '१० सेमी अर्धव्यास भएको वृत्तमा केन्द्रबाट ६ सेमी पर रहेको जीवाको लम्बाइ कति हुन्छ?',
+    np: '10 cm अर्धव्यास भएको वृत्तमा केन्द्रबाट 6 cm पर रहेको जीवाको लम्बाइ कति हुन्छ?',
     en: 'In a circle of radius 10 cm, what is the length of a chord 6 cm from the centre?',
     options: [
-      { key: 'A', label: '16 cm (२ × √(१०० - ३६) = २ × ८ = १६)' },
+      { key: 'A', label: '16 cm (2 × √(100 - 36) = 2 × 8 = 16)' },
       { key: 'B', label: '8 cm' },
       { key: 'C', label: '12 cm' },
       { key: 'D', label: '20 cm' },
@@ -124,13 +124,13 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: '५ सेमी अर्धव्यास भएको वृत्तमा ३ सेमी र ४ सेमी लम्बाइ भएका दुई जीवाहरू मध्ये कुन जीवा केन्द्रको नजिक हुन्छ?',
+    np: '5 cm अर्धव्यास भएको वृत्तमा 3 cm र 4 cm लम्बाइ भएका दुई जीवाहरू मध्ये कुन जीवा केन्द्रको नजिक हुन्छ?',
     en: 'In a circle of radius 5 cm, between chords of 3 cm and 4 cm, which is closer to the centre?',
     options: [
-      { key: 'A', label: '४ सेमीको जीवा (लामो जीवा केन्द्रको नजिक हुन्छ)' },
-      { key: 'B', label: '३ सेमीको जीवा' },
-      { key: 'C', label: 'दुवै बराबर दुरीमा हुन्छन्' },
-      { key: 'D', label: 'केन्द्रमै पर्छन्' },
+      { key: 'A', label: 'The 4 cm chord (the longer chord is nearer the centre)' },
+      { key: 'B', label: 'The 3 cm chord' },
+      { key: 'C', label: 'Both are at equal distance' },
+      { key: 'D', label: 'Both pass through the centre' },
     ],
     answer: 'A',
   },
@@ -181,7 +181,7 @@ export const CircleProblemSolvingLab: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! वृत्तको अर्धव्यास, जीवा र केन्द्रबाट लम्ब दुरी बीचको पाइथागोरस सम्बन्ध (r² = d² + (c/२)²) प्रयोग गरी पाठ्यपुस्तकका व्यावहारिक प्रश्नहरू समाधान गरौं!',
+        'नमस्ते! वृत्तको अर्धव्यास, जीवा र केन्द्रबाट लम्ब दुरी बीचको पाइथागोरस सम्बन्ध (r² = d² + (c/2)²) प्रयोग गरी पाठ्यपुस्तकका व्यावहारिक प्रश्नहरू समाधान गरौं!',
         'Welcome! Solve circle calculation problems using the Pythagorean relation r² = d² + (chord/2)² with step-by-step guidance!'
       )}
     >
@@ -249,14 +249,14 @@ export const CircleProblemSolvingLab: React.FC<{
           >
             <div style={{ fontSize: 13, color: '#134E4A' }}>
               <strong>{L('थाहा दिएको (Given):', 'Given:')}</strong>{' '}
-              {prob.givenR !== undefined && `अर्धव्यास (r) = ${fmt(prob.givenR)} cm `}
-              {prob.givenC !== undefined && `जीवा (c) = ${fmt(prob.givenC)} cm `}
-              {prob.givenD !== undefined && `लम्ब दुरी (d) = ${fmt(prob.givenD)} cm`}
+              {prob.givenR !== undefined && `Radius (r) = ${fmt(prob.givenR)} cm `}
+              {prob.givenC !== undefined && `Chord (c) = ${fmt(prob.givenC)} cm `}
+              {prob.givenD !== undefined && `Perpendicular distance (d) = ${fmt(prob.givenD)} cm`}
             </div>
             <div style={{ fontSize: 14, fontWeight: 800, color: '#D97706' }}>
-              {prob.findType === 'd' && L('पत्ता लगाउनुपर्ने: लम्ब दुरी (d) = ?', 'Find: Perp Distance (d) = ?')}
-              {prob.findType === 'r' && L('पत्ता लगाउनुपर्ने: अर्धव्यास (r) = ?', 'Find: Radius (r) = ?')}
-              {prob.findType === 'c' && L('पत्ता लगाउनुपर्ने: पूरा जीवा (c) = ?', 'Find: Chord Length (c) = ?')}
+              {prob.findType === 'd' && L('पत्ता लगाउनुपर्ने: Perpendicular distance (d) = ?', 'Find: Perp Distance (d) = ?')}
+              {prob.findType === 'r' && L('पत्ता लगाउनुपर्ने: Radius (r) = ?', 'Find: Radius (r) = ?')}
+              {prob.findType === 'c' && L('पत्ता लगाउनुपर्ने: पूरा Chord (c) = ?', 'Find: Chord Length (c) = ?')}
             </div>
           </div>
 
@@ -322,7 +322,7 @@ export const CircleProblemSolvingLab: React.FC<{
 
           {feedback === 'incorrect' && (
             <div style={{ padding: 12, backgroundColor: '#FEF2F2', borderRadius: 8, border: '1px solid #FCA5A5', color: '#991B1B', fontSize: 13 }}>
-              ❌ {L('मिलेन, कृपया r² = d² + (c/२)² सूत्र प्रयोग गरी पुनः प्रयास गर्नुहोस्।', 'Incorrect, please re-apply r² = d² + (c/2)².')}
+              ❌ {L('मिलेन, कृपया r² = d² + (c/2)² सूत्र प्रयोग गरी पुनः प्रयास गर्नुहोस्।', 'Incorrect, please re-apply r² = d² + (c/2)².')}
             </div>
           )}
 

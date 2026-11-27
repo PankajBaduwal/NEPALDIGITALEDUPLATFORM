@@ -1,7 +1,7 @@
 /**
  * PollutionLabSim.tsx
- * Simulation 9: 2D Environmental Pollution Laboratory (वातावरण प्रदूषण २डी प्रयोगशाला)
- * Grade 4 Science • Chapter 3: Organisms and Environment (जीव र वातावरण)
+ * Simulation 9: 2D Environmental Pollution Laboratory
+ * Grade 4 Science • Chapter 3: Organisms and Environment
  *
  * Ultra-Realistic Environmental Remediation Mini-Game with Core Detailing & Natural Colors.
  * Features:
@@ -91,7 +91,7 @@ export const PollutionLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -1115,7 +1115,7 @@ export const PollutionLabSim: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Environmental Pollution Laboratory"
-      titleNe="वातावरण प्रदूषण २डी प्रयोगशाला"
+      titleNe="वातावरण प्रदूषण 2डी प्रयोगशाला"
       subject="Science"
       grade={4}
       chapter={3}
@@ -1280,7 +1280,7 @@ export const PollutionLabSim: React.FC<BaseSimulationProps> = ({
                       ? 'सम्पूर्ण उपत्यका स्वच्छ र सुन्दर बन्यो!'
                       : 'Valley Fully Remediated & Pristine!'
                     : lang === 'ne'
-                    ? `प्रदूषण नियन्त्रण प्रगति: ${totalSectorsCleaned}/३ क्षेत्र स्वच्छ`
+                    ? `प्रदूषण नियन्त्रण प्रगति: ${totalSectorsCleaned}/3 क्षेत्र स्वच्छ`
                     : `Remediation Progress: ${totalSectorsCleaned}/3 Sectors Restored`}
                 </div>
                 <div style={{ fontSize: '11px', color: '#64748b' }}>
@@ -1478,7 +1478,7 @@ export const PollutionLabSim: React.FC<BaseSimulationProps> = ({
                   color: activePhase === 'air' ? '#15803d' : '#334155',
                 }}
               >
-                💨 {lang === 'ne' ? '१. वायु (Air)' : '1. Air Quality'}
+                💨 {lang === 'ne' ? '1. वायु (Air)' : '1. Air Quality'}
               </button>
 
               <button
@@ -1497,7 +1497,7 @@ export const PollutionLabSim: React.FC<BaseSimulationProps> = ({
                   color: activePhase === 'water' ? '#0e7490' : '#334155',
                 }}
               >
-                💧 {lang === 'ne' ? '२. जल (Water)' : '2. Water Purity'}
+                💧 {lang === 'ne' ? '2. जल (Water)' : '2. Water Purity'}
               </button>
 
               <button
@@ -1516,7 +1516,7 @@ export const PollutionLabSim: React.FC<BaseSimulationProps> = ({
                   color: activePhase === 'land' ? '#b45309' : '#334155',
                 }}
               >
-                🌱 {lang === 'ne' ? '३. भूमि (Land)' : '3. Soil Health'}
+                🌱 {lang === 'ne' ? '3. भूमि (Land)' : '3. Soil Health'}
               </button>
             </div>
           </div>
@@ -1645,10 +1645,10 @@ export const PollutionLabSim: React.FC<BaseSimulationProps> = ({
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <span style={{ fontSize: '11px', fontWeight: 800, color: '#0284c7', display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <Wind size={13} />
-                  {lang === 'ne' ? '१. वायु शुद्धीकरण' : '1. Air Remediation'}
+                  {lang === 'ne' ? '1. वायु शुद्धीकरण' : '1. Air Remediation'}
                 </span>
                 <span style={{ fontSize: '10px', fontWeight: 700, color: airRemediated ? '#16a34a' : '#dc2626' }}>
-                  {airRemediated ? (lang === 'ne' ? 'स्वच्छ (AQI २४)' : 'Pure (AQI 24)') : (lang === 'ne' ? 'विषाक्त' : 'Smog')}
+                  {airRemediated ? (lang === 'ne' ? 'स्वच्छ (AQI 24)' : 'Pure (AQI 24)') : (lang === 'ne' ? 'विषाक्त' : 'Smog')}
                 </span>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -1707,10 +1707,10 @@ export const PollutionLabSim: React.FC<BaseSimulationProps> = ({
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <span style={{ fontSize: '11px', fontWeight: 800, color: '#0891b2', display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <Droplets size={13} />
-                  {lang === 'ne' ? '२. जल शुद्धीकरण' : '2. Water Remediation'}
+                  {lang === 'ne' ? '2. जल शुद्धीकरण' : '2. Water Remediation'}
                 </span>
                 <span style={{ fontSize: '10px', fontWeight: 700, color: waterRemediated ? '#16a34a' : '#dc2626' }}>
-                  {waterRemediated ? (lang === 'ne' ? 'सफा (९८%)' : 'Pure (98%)') : (lang === 'ne' ? 'प्रदूषित' : 'Polluted')}
+                  {waterRemediated ? (lang === 'ne' ? 'सफा (98%)' : 'Pure (98%)') : (lang === 'ne' ? 'प्रदूषित' : 'Polluted')}
                 </span>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -1773,10 +1773,10 @@ export const PollutionLabSim: React.FC<BaseSimulationProps> = ({
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <span style={{ fontSize: '11px', fontWeight: 800, color: '#d97706', display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <Trash2 size={13} />
-                  {lang === 'ne' ? '३. भूमि स्वास्थ्य' : '3. Soil Health'}
+                  {lang === 'ne' ? '3. भूमि स्वास्थ्य' : '3. Soil Health'}
                 </span>
                 <span style={{ fontSize: '10px', fontWeight: 700, color: landRemediated ? '#16a34a' : '#dc2626' }}>
-                  {landRemediated ? (lang === 'ne' ? 'उर्वर (१००%)' : 'Fertile') : (lang === 'ne' ? 'फोहोर' : 'Littered')}
+                  {landRemediated ? (lang === 'ne' ? 'उर्वर (100%)' : 'Fertile') : (lang === 'ne' ? 'फोहोर' : 'Littered')}
                 </span>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>

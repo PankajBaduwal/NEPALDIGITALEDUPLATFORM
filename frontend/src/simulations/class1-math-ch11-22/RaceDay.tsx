@@ -1,6 +1,6 @@
 /**
- * Chapter 14 · Ordinal numbers (क्रमसूचक सङ्ख्या)
- * Sim 1: Race Day (दौड प्रतियोगिता) — Pure 2D Edition
+ * Chapter 14 · Ordinal numbers
+ * Sim 1: Race Day — Pure 2D Edition
  * 100% 2D SVG / CSS Animations – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';

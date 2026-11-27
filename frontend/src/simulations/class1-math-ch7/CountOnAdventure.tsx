@@ -1,7 +1,7 @@
 /**
  * CountOnAdventure.tsx
- * Simulation 04: Count On Adventure (गनेर जोडौँ)
- * Class 1 Mathematics - Chapter 7: Addition up to 10 (योगफल १० सम्म आउने जोड)
+ * Simulation 04: Count On Adventure
+ * Class 1 Mathematics - Chapter 7: Addition up to 10
  * Nepal Digital Education Platform
  */
 
@@ -25,7 +25,7 @@ interface Props {
   userRole?: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 const NEP_NAMES = ['शून्य', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ', 'दश'];
 const EN_NAMES = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
 
@@ -50,7 +50,7 @@ export const CountOnAdventure: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Mission Tracking
@@ -198,15 +198,7 @@ export const CountOnAdventure: React.FC<Props> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              setLanguage((l) => (l === 'np' ? 'en' : 'np'));
-              playSound('step');
-            }}
-            className="px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition"
-          >
-            {language === 'np' ? 'EN' : 'नेपाली'}
-          </button>
+          
           <button
             onClick={() => setSoundEnabled((s) => !s)}
             className={`p-2 rounded-lg border transition ${
@@ -232,7 +224,7 @@ export const CountOnAdventure: React.FC<Props> = ({
             </span>
             <div className="text-xs text-slate-600">
               {language === 'np'
-                ? `सुरुवाती सङ्ख्या: ${NEP_DIGITS[currentMission.startNum]} | थप पाइला: ${NEP_DIGITS[currentMission.addSteps]}`
+                ? `थप पाइला: ${NEP_DIGITS[currentMission.addSteps]}`
                 : `Start: ${currentMission.startNum} | Add: ${currentMission.addSteps}`}
             </div>
           </div>

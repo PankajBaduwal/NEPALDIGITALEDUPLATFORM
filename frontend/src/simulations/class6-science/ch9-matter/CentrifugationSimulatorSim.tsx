@@ -1,7 +1,7 @@
 /**
  * CentrifugationSimulatorSim.tsx
- * Simulation 36: 2D Centrifugation Simulator (सेन्ट्रिफ्युगेसन प्रयोगशाला)
- * Grade 6 Science • Unit 9: Matter (पदार्थ)
+ * Simulation 36: 2D Centrifugation Simulator
+ * Grade 6 Science • Unit 9: Matter
  *
  * 100% Native HTML5 Canvas 2D Interactive Centrifugal Separation Laboratory.
  * Features:
@@ -24,7 +24,7 @@ export const CentrifugationSimulatorSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -252,13 +252,13 @@ export const CentrifugationSimulatorSim: React.FC<BaseSimulationProps> = ({
         ctx.fillStyle = '#fef08a';
         ctx.font = 'bold 10px sans-serif';
         ctx.textAlign = 'left';
-        ctx.fillText(lang === 'ne' ? '• प्लाज्मा (हल्का पहेँलो ५५%)' : '• Plasma (Straw Fluid ~55%)', tubeInsetX + tubeW / 2 + 10, tubeTopY + 45);
+        ctx.fillText(lang === 'ne' ? '• प्लाज्मा (हल्का पहेँलो 55%)' : '• Plasma (Straw Fluid ~55%)', tubeInsetX + tubeW / 2 + 10, tubeTopY + 45);
 
         ctx.fillStyle = '#ffffff';
         ctx.fillText(lang === 'ne' ? '• सेतो रक्तकोष (WBCs)' : '• Buffy Coat (WBCs ~1%)', tubeInsetX + tubeW / 2 + 10, tubeTopY + 130);
 
         ctx.fillStyle = '#f87171';
-        ctx.fillText(lang === 'ne' ? '• रातो रक्तकोष (RBCs ४४%)' : '• RBC Pellet (Dense ~44%)', tubeInsetX + tubeW / 2 + 10, tubeTopY + 205);
+        ctx.fillText(lang === 'ne' ? '• रातो रक्तकोष (RBCs 44%)' : '• RBC Pellet (Dense ~44%)', tubeInsetX + tubeW / 2 + 10, tubeTopY + 205);
       } else {
         // Milk: Top Cream (Fat globules) vs Bottom Skim Milk (Water & proteins)
         ctx.fillStyle = '#f8fafc'; // Milk
@@ -294,7 +294,7 @@ export const CentrifugationSimulatorSim: React.FC<BaseSimulationProps> = ({
       titleNepali="उच्च गति सेन्ट्रिफ्युगेसन सिमुलेटर (अपकेन्द्री बल)"
       chapterNumber={9}
       chapterTitle="Unit 9: Matter"
-      chapterTitleNepali="एकाइ ९: पदार्थ"
+      chapterTitleNepali="एकाइ 9: पदार्थ"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -475,7 +475,7 @@ export const CentrifugationSimulatorSim: React.FC<BaseSimulationProps> = ({
           {/* Sample Selection */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. नमुना छान्नुहोस् (Sample Type)' : '1. Select Sample'}
+              {lang === 'ne' ? '1. नमुना छान्नुहोस् (Sample Type)' : '1. Select Sample'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '6px' }}>
               {[
@@ -556,13 +556,13 @@ export const CentrifugationSimulatorSim: React.FC<BaseSimulationProps> = ({
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: '#64748b' }}>{lang === 'ne' ? 'माथिल्लो तह (Supernatant):' : 'Upper Supernatant:'}</span>
                 <span style={{ fontWeight: 700, color: '#fef08a' }}>
-                  {sampleType === 'blood' ? (lang === 'ne' ? 'हल्का प्लाज्मा (५५%)' : 'Liquid Plasma (55%)') : (lang === 'ne' ? 'तर / क्रीम (Fat Cream)' : 'Light Cream')}
+                  {sampleType === 'blood' ? (lang === 'ne' ? 'हल्का प्लाज्मा (55%)' : 'Liquid Plasma (55%)') : (lang === 'ne' ? 'तर / क्रीम (Fat Cream)' : 'Light Cream')}
                 </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: '#64748b' }}>{lang === 'ne' ? 'तल्लो पिँध (Sediment Pellet):' : 'Bottom Pellet:'}</span>
                 <span style={{ fontWeight: 700, color: '#f87171' }}>
-                  {sampleType === 'blood' ? (lang === 'ne' ? 'रातो रक्तकोष RBCs (४५%)' : 'Dense RBC Pellet (45%)') : (lang === 'ne' ? 'फ्याटविहीन दूध (Skim Milk)' : 'Skim Milk Base')}
+                  {sampleType === 'blood' ? (lang === 'ne' ? 'रातो रक्तकोष RBCs (45%)' : 'Dense RBC Pellet (45%)') : (lang === 'ne' ? 'फ्याटविहीन दूध (Skim Milk)' : 'Skim Milk Base')}
                 </span>
               </div>
             </div>

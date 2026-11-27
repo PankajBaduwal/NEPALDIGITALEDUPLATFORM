@@ -12,7 +12,7 @@ interface Props {
 
 export const PlaceValuePillars2D: React.FC<Props> = ({
   digits,
-  lang = 'ne',
+  lang = 'en',
   onAddDigit,
   onDelDigit,
   interactive = false,

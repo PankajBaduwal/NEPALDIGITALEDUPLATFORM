@@ -1,5 +1,5 @@
 /**
- * Lesson 4 · Comparison of numbers (सङ्ख्याको तुलना) — ascending and descending order
+ * Lesson 4 · Comparison of numbers — ascending and descending order
  * Order the Balloons — tap the balloons from smallest to biggest (or biggest to smallest).
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -81,43 +81,43 @@ export const OrderBalloons: React.FC<Props> = ({ onBackToLibrary }) => {
   // Quiz Questions for Challenge
   const questions: QuizQuestion[] = [
     {
-      np: 'सङ्ख्याहरू १२५, ३४०, २१० लाई बढ्दो क्रम (सानोबाट ठूलो) मा मिलाउँदा कुन सही हुन्छ?',
+      np: 'सङ्ख्याहरू 125, 340, 210 लाई बढ्दो क्रम (सानोबाट ठूलो) मा मिलाउँदा कुन सही हुन्छ?',
       en: 'Which shows 125, 340, 210 in ascending order (smallest to largest)?',
       answer: '125, 210, 340',
       options: [
-        { key: '125, 210, 340', label: '१२५, २१०, ३४०' },
-        { key: '340, 210, 125', label: '३४०, २१०, १२५' },
-        { key: '210, 125, 340', label: '२१०, १२५, ३४०' },
+        { key: '125, 210, 340', label: '125, 210, 340' },
+        { key: '340, 210, 125', label: '340, 210, 125' },
+        { key: '210, 125, 340', label: '210, 125, 340' },
       ],
     },
     {
-      np: 'सङ्ख्याहरू ५००, ८५०, ३२० लाई घट्दो क्रम (ठूलोबाट सानो) मा मिलाउँदा कुन सही हुन्छ?',
+      np: 'सङ्ख्याहरू 500, 850, 320 लाई घट्दो क्रम (ठूलोबाट सानो) मा मिलाउँदा कुन सही हुन्छ?',
       en: 'Which shows 500, 850, 320 in descending order (largest to smallest)?',
       answer: '850, 500, 320',
       options: [
-        { key: '850, 500, 320', label: '८५०, ५००, ३२०' },
-        { key: '320, 500, 850', label: '३२०, ५००, ८५०' },
-        { key: '500, 850, 320', label: '५००, ८५०, ३२०' },
+        { key: '850, 500, 320', label: '850, 500, 320' },
+        { key: '320, 500, 850', label: '320, 500, 850' },
+        { key: '500, 850, 320', label: '500, 850, 320' },
       ],
     },
     {
-      np: '४५०, ४०५, ५४० मा सबैभन्दा सानो सङ्ख्या कुन हो?',
+      np: '450, 405, 540 मा सबैभन्दा सानो सङ्ख्या कुन हो?',
       en: 'Which is the smallest number among 450, 405, 540?',
       answer: '405',
       options: [
-        { key: '405', label: '४०५' },
-        { key: '450', label: '४५०' },
-        { key: '540', label: '५४०' },
+        { key: '405', label: '405' },
+        { key: '450', label: '450' },
+        { key: '540', label: '540' },
       ],
     },
     {
-      np: '७८०, ७०८, ८०७ मा सबैभन्दा ठूलो सङ्ख्या कुन हो?',
+      np: '780, 708, 807 मा सबैभन्दा ठूलो सङ्ख्या कुन हो?',
       en: 'Which is the greatest number among 780, 708, 807?',
       answer: '807',
       options: [
-        { key: '807', label: '८०७' },
-        { key: '780', label: '७८०' },
-        { key: '708', label: '७०८' },
+        { key: '807', label: '807' },
+        { key: '780', label: '780' },
+        { key: '708', label: '708' },
       ],
     },
   ];
@@ -310,7 +310,7 @@ export const OrderBalloons: React.FC<Props> = ({ onBackToLibrary }) => {
           </span>
           {picked.length === 0 ? (
             <span style={{ fontSize: 13, color: '#94A3B8', fontStyle: 'italic' }}>
-              {kit.t('(बेलुन छोएर मिलाउनुहोस्)', '(Tap balloons to order)')}
+              {kit.t('', '(Tap balloons to order)')}
             </span>
           ) : (
             picked.map((v, i) => (

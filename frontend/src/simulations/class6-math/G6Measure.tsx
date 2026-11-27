@@ -61,10 +61,10 @@ export const statsCfg: LabCfg = {
     if (i === 0 || i === 1) return numChoice(`${list} को मध्यिका कति?`, `Median of ${list}?`, st.median, i, [1, -1, 2, st.range, -2], 1, '', set);
     if (i === 2) return numChoice(`${list} को दायरा (अधिकतम − न्यूनतम) कति?`, `Range of ${list}?`, st.range, i, [1, -1, 2, st.median, -2], 0, '', set);
     if (i === 3) return numChoice(`${list} को जम्मा कति?`, `Sum of ${list}?`, st.sum, i, [1, -1, 7, 2, -2], 1, '', set);
-    if (i === 4) { const n = 7 * rnd(2, 8); return numChoice(`७ सङ्ख्याको जम्मा ${n} भए औसत कति?`, `The sum of 7 numbers is ${n}. Their mean is…`, n / 7, i, [1, -1, 7, 2, n], 1); }
+    if (i === 4) { const n = 7 * rnd(2, 8); return numChoice(`7 सङ्ख्याको जम्मा ${n} भए औसत कति?`, `The sum of 7 numbers is ${n}. Their mean is…`, n / 7, i, [1, -1, 7, 2, n], 1); }
     if (i === 5) return choice(`${list} को बहुलक (धेरै पटक आउने) कुन हो?`, `Mode (most frequent) of ${list}?`, String(st.modes.length ? st.modes[0] : mode), [String(st.median + 1), String(st.range + 1), String((st.median + 4) % 9 + 1)], i, set);
-    if (i === 6) return numChoice('१, २, ३, ४, ५ को औसत कति?', 'Mean of 1, 2, 3, 4, 5?', 3, i, [1, -1, 2, 15, 5], 1);
-    return meanInt ? numChoice(`${list} को औसत कति?`, `Mean of ${list}?`, st.sum / 7, i, [1, -1, 2, 7, 3], 1, '', set) : choice('औसतको सूत्र?', 'The formula for the mean is…', 'जम्मा ÷ सङ्ख्या | sum ÷ number of values', ['जम्मा × सङ्ख्या | sum × number', 'ठूलो − सानो | largest − smallest'], i);
+    if (i === 6) return numChoice('1, 2, 3, 4, 5 को औसत कति?', 'Mean of 1, 2, 3, 4, 5?', 3, i, [1, -1, 2, 15, 5], 1);
+    return meanInt ? numChoice(`${list} को औसत कति?`, `Mean of ${list}?`, st.sum / 7, i, [1, -1, 2, 7, 3], 1, '', set) : choice('औसतको सूत्र?', 'The formula for the mean is…', 'sum ÷ number of values', ['sum × number', 'largest − smallest'], i);
   },
 };
 export const StatsLab6 = makeLab(statsCfg);

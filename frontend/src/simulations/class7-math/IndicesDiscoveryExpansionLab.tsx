@@ -1,6 +1,6 @@
 /**
  * IndicesDiscoveryExpansionLab.tsx
- * Grade 7 Mathematics – Lesson 10: INDICES (घाताङ्क)
+ * Grade 7 Mathematics – Lesson 10: INDICES
  * Simulation 1: Indices Discovery and Expansion Lab (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 138-140)
  */
@@ -12,46 +12,46 @@ import { Zap, Hash, ArrowRight, RefreshCw, Check } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'घाताङ्कीय रूप ३⁵ (3⁵) मा आधार (Base) र घात (Power) कुन-कुन हुन्?',
+    np: 'घाताङ्कीय रूप 3⁵ (3⁵) मा आधार (Base) र घात (Power) कुन-कुन हुन्?',
     en: 'In index form 3⁵, which are the Base and the Power?',
     options: [
-      { key: 'A', label: 'आधार = ३, घात = ५ (Base = 3, Power = 5)' },
-      { key: 'B', label: 'आधार = ५, घात = ३' },
-      { key: 'C', label: 'दुवै आधार हुन्' },
-      { key: 'D', label: 'आधार = १५' },
+      { key: 'A', label: 'Base = 3, Power = 5' },
+      { key: 'B', label: 'Base = 5, Power = 3' },
+      { key: 'C', label: 'Both are bases' },
+      { key: 'D', label: 'Base = 15' },
     ],
     answer: 'A',
   },
   {
-    np: '४ × ४ × ४ × ४ × ४ × ४ लाई घाताङ्क रूपमा कसरी लेखिन्छ?',
+    np: '4 × 4 × 4 × 4 × 4 × 4 लाई घाताङ्क रूपमा कसरी लेखिन्छ?',
     en: 'How is 4 × 4 × 4 × 4 × 4 × 4 written in index form?',
     options: [
-      { key: 'A', label: '४⁶ (4⁶)' },
-      { key: 'B', label: '४ × ६' },
-      { key: 'C', label: '६⁴' },
-      { key: 'D', label: '२४' },
+      { key: 'A', label: '4⁶ (4⁶)' },
+      { key: 'B', label: '4 × 6' },
+      { key: 'C', label: '6⁴' },
+      { key: 'D', label: '24' },
     ],
     answer: 'A',
   },
   {
-    np: '(-२)⁴ को मान कति हुन्छ?',
+    np: '(-2)⁴ को मान कति हुन्छ?',
     en: 'What is the value of (-2)⁴?',
     options: [
-      { key: 'A', label: '+१६ [ (-२) × (-२) × (-२) × (-२) = +१६ ]' },
-      { key: 'B', label: '-१६' },
-      { key: 'C', label: '+८' },
-      { key: 'D', label: '-८' },
+      { key: 'A', label: '+16 [ (-2) × (-2) × (-2) × (-2) = +16 ]' },
+      { key: 'B', label: '-16' },
+      { key: 'C', label: '+8' },
+      { key: 'D', label: '-8' },
     ],
     answer: 'A',
   },
   {
-    np: '५³ को विस्तारित रूप (Expanded Form) कुन हो?',
+    np: '5³ को विस्तारित रूप (Expanded Form) कुन हो?',
     en: 'What is the expanded form of 5³?',
     options: [
-      { key: 'A', label: '५ × ५ × ५ = १२५' },
-      { key: 'B', label: '५ × ३ = १५' },
-      { key: 'C', label: '३ × ३ × ३ × ३ × ३' },
-      { key: 'D', label: '५ + ५ + ५ = १५' },
+      { key: 'A', label: '5 × 5 × 5 = 125' },
+      { key: 'B', label: '5 × 3 = 15' },
+      { key: 'C', label: '3 × 3 × 3 × 3 × 3' },
+      { key: 'D', label: '5 + 5 + 5 = 15' },
     ],
     answer: 'A',
   },
@@ -81,11 +81,11 @@ export const IndicesDiscoveryExpansionLab: React.FC<{ onBackToLibrary?: () => vo
 
   // Tab 2: Identify Base & Power examples
   const IDENTIFY_EXAMPLES = [
-    { expr: '3⁵', base: '3', power: '5', npText: '३ लाई ५ पटक गुणन गरिएको' },
-    { expr: '2³', base: '2', power: '3', npText: '२ लाई ३ पटक गुणन गरिएको' },
-    { expr: '5⁴', base: '5', power: '4', npText: '५ लाई ४ पटक गुणन गरिएको' },
-    { expr: 'x⁴', base: 'x', power: '4', npText: 'चल x लाई ४ पटक गुणन गरिएको' },
-    { expr: '(-3y)⁶', base: '-3y', power: '6', npText: '(-3y) लाई ६ पटक गुणन गरिएको' },
+    { expr: '3⁵', base: '3', power: '5', npText: '3 multiplied 5 times' },
+    { expr: '2³', base: '2', power: '3', npText: '2 लाई 3 times गुणन गरिएको' },
+    { expr: '5⁴', base: '5', power: '4', npText: '5 लाई 4 times गुणन गरिएको' },
+    { expr: 'x⁴', base: 'x', power: '4', npText: 'चल x लाई 4 times गुणन गरिएको' },
+    { expr: '(-3y)⁶', base: '-3y', power: '6', npText: '(-3y) लाई 6 times गुणन गरिएको' },
   ];
   const [selectedIdentify, setSelectedIdentify] = useState<number>(0);
 
@@ -109,9 +109,9 @@ export const IndicesDiscoveryExpansionLab: React.FC<{ onBackToLibrary?: () => vo
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'repeated', np: '१. बारम्बार गुणन र घाताङ्क', en: '1. Repeated Multiplication' },
-            { id: 'identify', np: '२. आधार र घात पहिचान', en: '2. Base & Power' },
-            { id: 'expand', np: '३. विस्तार र मान गणना', en: '3. Expansion & Value' },
+            { id: 'repeated', np: '1. बारम्बार गुणन र घाताङ्क', en: '1. Repeated Multiplication' },
+            { id: 'identify', np: '2. आधार र घात पहिचान', en: '2. Base & Power' },
+            { id: 'expand', np: '3. विस्तार र मान गणना', en: '3. Expansion & Value' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -143,7 +143,7 @@ export const IndicesDiscoveryExpansionLab: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'एउटै सङ्ख्यालाई पटक-पटक गुणन गर्दा संक्षिप्त रूपमा घाताङ्क (Index Notation) प्रयोग गरिन्छ।',
+                'एउटै सङ्ख्यालाई times-times गुणन गर्दा संक्षिप्त रूपमा घाताङ्क (Index Notation) प्रयोग गरिन्छ।',
                 'Repeatedly multiplying the same number is written compactly using index notation.'
               )}
             </p>
@@ -168,7 +168,7 @@ export const IndicesDiscoveryExpansionLab: React.FC<{ onBackToLibrary?: () => vo
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#D97706', display: 'block', marginBottom: 4 }}>
-                  {L('गुणन सङ्ख्या / घात (Power): ', 'Power: ')} {exponentVal} पटक
+                  {L('गुणन सङ्ख्या / घात (Power): ', 'Power: ')} {exponentVal} times
                 </label>
                 <input
                   type="range"
@@ -243,7 +243,7 @@ export const IndicesDiscoveryExpansionLab: React.FC<{ onBackToLibrary?: () => vo
               </div>
               <div style={{ fontSize: 14, color: '#15803D' }}>
                 {L(
-                  `अर्थ: आधार ${baseVal} लाई ${exponentVal} पटक आपसमा गुणन गर्दा = ${calculatedVal.toLocaleString()}`,
+                  `अर्थ: आधार ${baseVal} लाई ${exponentVal} times आपसमा गुणन गर्दा = ${calculatedVal.toLocaleString()}`,
                   `Meaning: Multiplying base ${baseVal} a total of ${exponentVal} times = ${calculatedVal.toLocaleString()}`
                 )}
               </div>
@@ -318,7 +318,7 @@ export const IndicesDiscoveryExpansionLab: React.FC<{ onBackToLibrary?: () => vo
                       {cur.power}
                     </div>
                     <div style={{ fontSize: 12, color: '#78350F', marginTop: 2 }}>
-                      {L('कति पटक गुणन गरिएको सङ्ख्या', 'Number of times repeated')}
+                      {L('कति times गुणन गरिएको सङ्ख्या', 'Number of times repeated')}
                     </div>
                   </div>
 
@@ -344,7 +344,7 @@ export const IndicesDiscoveryExpansionLab: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: (-२)⁴ को विस्तार र मान निकाल्ने विधि (ऋणात्मक आधारको जोड घात भए धनात्मक र बिजोर भए ऋणात्मक हुन्छ):',
+                'पाठ्यपुस्तक उदाहरण: (-2)⁴ को विस्तार र मान निकाल्ने विधि (ऋणात्मक आधारको जोड घात भए धनात्मक र बिजोर भए ऋणात्मक हुन्छ):',
                 'Textbook Example: (-2)⁴ expansion. Even power of negative is positive; odd power is negative:'
               )}
             </p>
@@ -368,7 +368,7 @@ export const IndicesDiscoveryExpansionLab: React.FC<{ onBackToLibrary?: () => vo
                     fontWeight: 700,
                   }}
                 >
-                  बदल्नुहोस् ({negBase})
+                  Change ({negBase})
                 </button>
               </div>
 

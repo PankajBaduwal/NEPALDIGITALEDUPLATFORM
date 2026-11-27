@@ -1,7 +1,7 @@
 /**
  * MapReadingBearingExplorer.tsx
- * Grade 7 Mathematics – Lesson 20: BEARING AND SCALE DRAWING (दिगंश र मापन चित्र)
- * Simulation 2: Map Reading and Bearing Explorer (नक्सा अध्ययन र दिगंश अन्वेषक)
+ * Grade 7 Mathematics – Lesson 20: BEARING AND SCALE DRAWING
+ * Simulation 2: Map Reading and Bearing Explorer
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 301-306)
  */
 import React, { useState } from 'react';
@@ -15,10 +15,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'नक्सामा स्थान A बाट स्थान B को दिगंश नाप्दा सबैभन्दा पहिले कुन बिन्दुमा उत्तर (North) रेखा खिच्नुपर्छ?',
     en: 'When measuring the bearing of location B from location A on a map, at which point should the North line be drawn first?',
     options: [
-      { key: 'A', label: 'सुरुवाती स्थान A मा (Starting Point A)' },
-      { key: 'B', label: 'स्थान B मा' },
-      { key: 'C', label: 'नक्साको कुनामा' },
-      { key: 'D', label: 'नक्साको केन्द्रमा' },
+      { key: 'A', label: 'At the starting point A' },
+      { key: 'B', label: 'At point B' },
+      { key: 'C', label: 'In a corner of the map' },
+      { key: 'D', label: 'At the centre of the map' },
     ],
     answer: 'A',
   },
@@ -26,10 +26,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'यदि गाउँपालिका भवनबाट विद्यालय ठीक पूर्व (East) दिशामा अवस्थित छ भने विद्यालयको दिगंश कति हुन्छ?',
     en: 'If a school is located due East from the municipality office, what is its bearing?',
     options: [
-      { key: 'A', label: '०९०° (090°)' },
-      { key: 'B', label: '०००°' },
-      { key: 'C', label: '१८०°' },
-      { key: 'D', label: '२७०°' },
+      { key: 'A', label: '090° (090°)' },
+      { key: 'B', label: '000°' },
+      { key: 'C', label: '180°' },
+      { key: 'D', label: '270°' },
     ],
     answer: 'A',
   },
@@ -37,21 +37,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'काठमाडौंबाट मनाङ (Manang from Kathmandu) उत्तर-पश्चिम दिशामा पर्छ। यसको सम्भावित दिगंश कति हुन्छ?',
     en: 'Manang lies North-West from Kathmandu. What is its approximate three-figure bearing?',
     options: [
-      { key: 'A', label: '३१५° (315°)' },
-      { key: 'B', label: '०४५°' },
-      { key: 'C', label: '१३५°' },
-      { key: 'D', label: '२२५°' },
+      { key: 'A', label: '315° (315°)' },
+      { key: 'B', label: '045°' },
+      { key: 'C', label: '135°' },
+      { key: 'D', label: '225°' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि A बाट B को दिगंश ०६०° छ भने, B बाट A को दिगंश (Back Bearing) कति हुन्छ? (६०° + १८०°)',
+    np: 'यदि A बाट B को दिगंश 060° छ भने, B बाट A को दिगंश (Back Bearing) कति हुन्छ? (60° + 180°)',
     en: 'If the bearing of B from A is 060°, what is the back bearing of A from B? (60° + 180°)',
     options: [
-      { key: 'A', label: '२४०°' },
-      { key: 'B', label: '१२०°' },
-      { key: 'C', label: '३००°' },
-      { key: 'D', label: '०६०°' },
+      { key: 'A', label: '240°' },
+      { key: 'B', label: '120°' },
+      { key: 'C', label: '300°' },
+      { key: 'D', label: '060°' },
     ],
     answer: 'A',
   },
@@ -208,8 +208,8 @@ export const MapReadingBearingExplorer: React.FC<{ onBackToLibrary?: () => void;
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 justify-center bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'municipality_map', np: '१. गाउँपालिका नक्सा अध्ययन (Municipality Map)', en: '1. Municipality Map Explorer' },
-            { id: 'nepal_map_challenge', np: '२. नेपाल नक्सा दिगंश चुनौती (Nepal Map Challenge)', en: '2. Nepal Map Challenge' },
+            { id: 'municipality_map', np: '1. गाउँपालिका नक्सा अध्ययन (Municipality Map)', en: '1. Municipality Map Explorer' },
+            { id: 'nepal_map_challenge', np: '2. नेपाल नक्सा दिगंश चुनौती (Nepal Map Challenge)', en: '2. Nepal Map Challenge' },
           ].map((item) => (
             <button
               key={item.id}
@@ -234,7 +234,7 @@ export const MapReadingBearingExplorer: React.FC<{ onBackToLibrary?: () => void;
               </h3>
               <p className="text-slate-700 text-xs md:text-sm mt-1">
                 {L(
-                  'चरण १: सुरुवाती स्थानमा ठाडो उत्तर (North) रेखा खिच्ने। चरण २: सो स्थानबाट गन्तव्य स्थानसम्म सीधा रेखा जोड्ने। चरण ३: उत्तर रेखाबाट घडीको सुईको दिशामा कोण नापी ३ अङ्कमा लेख्ने।',
+                  'चरण 1: सुरुवाती स्थानमा ठाडो उत्तर (North) रेखा खिच्ने। चरण 2: सो स्थानबाट गन्तव्य स्थानसम्म सीधा रेखा जोड्ने। चरण 3: उत्तर रेखाबाट घडीको सुईको दिशामा कोण नापी 3 अङ्कमा लेख्ने।',
                   'Step 1: Draw North line at origin. Step 2: Draw ray towards destination. Step 3: Measure angle clockwise from North.'
                 )}
               </p>

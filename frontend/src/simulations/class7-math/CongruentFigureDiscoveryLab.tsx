@@ -1,7 +1,7 @@
 /**
  * CongruentFigureDiscoveryLab.tsx
- * Grade 7 Mathematics – Lesson 15: CONGRUENT FIGURES (अनुरूप आकृतिहरू)
- * Simulation 1: Congruent Figure Discovery Lab (अनुरूप आकृति खोजी प्रयोगशाला)
+ * Grade 7 Mathematics – Lesson 15: CONGRUENT FIGURES
+ * Simulation 1: Congruent Figure Discovery Lab
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 231-239)
  */
 import React, { useState } from 'react';
@@ -15,10 +15,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समान आकार (Same Shape) र समान नाप (Same Size) भएका दुई आकृतिहरूलाई के भनिन्छ?',
     en: 'Figures that have both the exact same shape and the exact same size are called:',
     options: [
-      { key: 'A', label: 'अनुरूप आकृतिहरू (Congruent Figures)' },
-      { key: 'B', label: 'समरूप आकृतिहरू (Similar only)' },
-      { key: 'C', label: 'असमान आकृतिहरू' },
-      { key: 'D', label: 'समान्तर आकृतिहरू' },
+      { key: 'A', label: 'Congruent figures' },
+      { key: 'B', label: 'Similar figures only' },
+      { key: 'C', label: 'Unequal figures' },
+      { key: 'D', label: 'Parallel figures' },
     ],
     answer: 'A',
   },
@@ -26,10 +26,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दुई आकृतिहरू अनुरूप छन् वा छैनन् भनी प्रत्यक्ष जाँच्ने सबैभन्दा सजिलो विधि कुन हो?',
     en: 'What is the most direct physical method to verify if two figures are congruent?',
     options: [
-      { key: 'A', label: 'एउटा आकृतिलाई अर्कोमाथि खप्ट्याउने (Overlapping method)' },
-      { key: 'B', label: 'वजन जोख्ने' },
-      { key: 'C', label: 'रङ्ग हेर्ने' },
-      { key: 'D', label: 'परिधि मात्र जोड्ने' },
+      { key: 'A', label: 'Placing one figure over the other (overlapping method)' },
+      { key: 'B', label: 'Weighing them' },
+      { key: 'C', label: 'Looking at the colour' },
+      { key: 'D', label: 'Adding the perimeters only' },
     ],
     answer: 'A',
   },
@@ -37,10 +37,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'यदि दुई त्रिभुजहरू ABC र XYZ अनुरूप छन् (△ABC ≅ △XYZ) भने कुन सम्बन्ध सत्य हुन्छ?',
     en: 'If two triangles ABC and XYZ are congruent (△ABC ≅ △XYZ), which relationship is true?',
     options: [
-      { key: 'A', label: 'संगत भुजाहरू बराबर र संगत कोणहरू बराबर हुन्छन्' },
-      { key: 'B', label: 'भुजाहरू फरक तर कोण बराबर' },
-      { key: 'C', label: 'कोणहरू फरक तर भुजा बराबर' },
-      { key: 'D', label: 'कुनै भाग बराबर हुँदैनन्' },
+      { key: 'A', label: 'Corresponding sides are equal and corresponding angles are equal' },
+      { key: 'B', label: 'Different sides but equal angles' },
+      { key: 'C', label: 'Different angles but equal sides' },
+      { key: 'D', label: 'No parts are equal' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दुवै हात जोडेर नमस्कार गर्दा दुवै हत्केलाहरू एकआपसमा दुरुस्त खप्टिन्छन्। यो के को उदाहरण हो?',
     en: 'Joining hands in Namaskar where both palms overlap identically is a real-life example of:',
     options: [
-      { key: 'A', label: 'अनुरूप वस्तुहरू (Congruent Objects)' },
-      { key: 'B', label: 'असममित वस्तु' },
-      { key: 'C', label: 'असमान वस्तु' },
-      { key: 'D', label: 'टेसलेसन मात्र' },
+      { key: 'A', label: 'Congruent objects' },
+      { key: 'B', label: 'Asymmetric object' },
+      { key: 'C', label: 'Unequal object' },
+      { key: 'D', label: 'Tessellation only' },
     ],
     answer: 'A',
   },
@@ -79,7 +79,7 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
   const [selectedPairIdx, setSelectedPairIdx] = useState<number>(0);
   const PAIRS = [
     {
-      titleNp: 'जोडी १: उस्तै आकार र उस्तै नापका त्रिभुज (Congruent)',
+      titleNp: 'जोडी 1: उस्तै आकार र उस्तै नापका त्रिभुज (Congruent)',
       titleEn: 'Pair 1: Same Shape & Same Size Triangles',
       isCongruent: true,
       reasonNp: 'दुवैको आकार त्रिभुज र तीनवटै भुजाको लम्बाइ बराबर छ।',
@@ -88,7 +88,7 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
       fig2: { pts: '180,140 260,40 280,140' },
     },
     {
-      titleNp: 'जोडी २: उस्तै आकार तर फरक नाप (Same Shape, Different Size)',
+      titleNp: 'जोडी 2: उस्तै आकार तर फरक नाप (Same Shape, Different Size)',
       titleEn: 'Pair 2: Same Shape, Different Size (Not Congruent)',
       isCongruent: false,
       reasonNp: 'दुवै वर्ग (Square) भए पनि एउटा सानो र अर्को ठूलो भएकाले अनुरूप होइनन्।',
@@ -97,7 +97,7 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
       fig2: { rect: { x: 180, y: 50, s: 95 } },
     },
     {
-      titleNp: 'जोडी ३: फरक आकार (Different Shapes)',
+      titleNp: 'जोडी 3: फरक आकार (Different Shapes)',
       titleEn: 'Pair 3: Different Shapes (Triangle & Circle)',
       isCongruent: false,
       reasonNp: 'एउटा त्रिभुज र अर्को वृत्त भएकाले आकार नै फरक छ।',
@@ -106,7 +106,7 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
       fig2: { circle: { cx: 230, cy: 95, r: 45 } },
     },
     {
-      titleNp: 'जोडी ४: घुमेको अनुरूप त्रिभुज (Rotated Congruent)',
+      titleNp: 'जोडी 4: घुमेको अनुरूप त्रिभुज (Rotated Congruent)',
       titleEn: 'Pair 4: Rotated Congruent Triangles',
       isCongruent: true,
       reasonNp: 'दोस्रो त्रिभुज घुमेको भए पनि घुमाएर खप्ट्याउँदा दुरुस्त मिल्छ।',
@@ -142,11 +142,11 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 justify-center bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'shape_size', np: '१. समान आकार र समान नाप (Same Shape & Size)', en: '1. Shape & Size Test' },
-            { id: 'overlapping', np: '२. खप्ट्याउने प्रयोग (Overlapping Lab)', en: '2. Overlapping Lab' },
-            { id: 'tracing_paper', np: '३. ट्रेसिङ पेपर विधि (Tracing Paper)', en: '3. Virtual Tracing Paper' },
-            { id: 'corresponding_parts', np: '४. संगत भागहरू (Corresponding Parts)', en: '4. Corresponding Parts' },
-            { id: 'real_life', np: '५. व्यावहारिक उदाहरण (Real-Life)', en: '5. Real-Life Objects' },
+            { id: 'shape_size', np: '1. समान आकार र समान नाप (Same Shape & Size)', en: '1. Shape & Size Test' },
+            { id: 'overlapping', np: '2. खप्ट्याउने प्रयोग (Overlapping Lab)', en: '2. Overlapping Lab' },
+            { id: 'tracing_paper', np: '3. Tracing paper विधि (Tracing Paper)', en: '3. Virtual Tracing Paper' },
+            { id: 'corresponding_parts', np: '4. संगत भागहरू (Corresponding Parts)', en: '4. Corresponding Parts' },
+            { id: 'real_life', np: '5. व्यावहारिक उदाहरण (Real-Life)', en: '5. Real-Life Objects' },
           ].map((t) => (
             <button
               key={t.id}
@@ -240,10 +240,10 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
                   )}
 
                   <text x="90" y="165" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1e40af">
-                    चित्र १ (Figure 1)
+                    Figure 1
                   </text>
                   <text x="230" y="165" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#b45309">
-                    चित्र २ (Figure 2)
+                    Figure 2
                   </text>
                 </svg>
               </div>
@@ -304,14 +304,14 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
                   {/* Fixed Reference Triangle 1 at (60, 160) */}
                   <polygon points="60,160 140,160 140,80" fill="rgba(59, 130, 246, 0.3)" stroke="#2563eb" strokeWidth="3" />
                   <text x="100" y="140" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#1e40af">
-                    △१ (स्थिर)
+                    △1
                   </text>
 
                   {/* Movable & Rotatable Triangle 2 */}
                   <g transform={`translate(${60 + overlapX}, ${160 + overlapY}) rotate(${overlapRot}) translate(-60, -160)`}>
                     <polygon points="60,160 140,160 140,80" fill="rgba(245, 158, 11, 0.45)" stroke="#d97706" strokeWidth="3" />
                     <text x="100" y="140" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#92400e">
-                      △२ (सार्ने)
+                      △2
                     </text>
                   </g>
                 </svg>
@@ -319,7 +319,7 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
                 <div className="text-xs text-slate-500 mt-2">
                   {isPerfectOverlap
                     ? L('✓ दुवै आकृति पूर्ण रूपमा खप्टिए!', '✓ Boundaries overlap perfectly!')
-                    : L('दायाँतिरका नियन्त्रकहरूबाट △२ लाई △१ माथि लैजानुहोस्।', 'Use controls to align △2 on top of △1.')}
+                    : L('दायाँतिरका नियन्त्रकहरूबाट △2 लाई △1 माथि लैजानुहोस्।', 'Use controls to align △2 on top of △1.')}
                 </div>
               </div>
 
@@ -394,11 +394,11 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
           <div className="bg-white rounded-3xl p-6 shadow-xl border border-indigo-100 space-y-6">
             <div className="bg-purple-50 border-l-4 border-purple-600 p-4 rounded-r-2xl">
               <h3 className="text-base font-bold text-purple-950" style={{ fontFamily: FONT_NP }}>
-                {L('पाठ्यपुस्तक विधि: ट्रेसिङ पेपर (Tracing Paper) द्वारा परीक्षण:', 'CDC Tracing Paper Activity:')}
+                {L('पाठ्यपुस्तक विधि: Tracing paper (Tracing Paper) द्वारा परीक्षण:', 'CDC Tracing Paper Activity:')}
               </h3>
               <p className="text-slate-700 text-xs md:text-sm mt-1">
                 {L(
-                  'पारदर्शी ट्रेसिङ पेपरलाई पहिलो चित्रमाथि राखी सिसाकलमले घेरा कोरिन्छ, र सो ट्रेसिङ पेपरलाई अर्को चित्रमाथि लगेर खप्टिन्छ कि खप्टिँदैन हेरिन्छ।',
+                  'पारदर्शी Tracing paperलाई पहिलो चित्रमाथि राखी सिसाकलमले घेरा कोरिन्छ, र सो Tracing paperलाई अर्को चित्रमाथि लगेर खप्टिन्छ कि खप्टिँदैन हेरिन्छ।',
                   'Trace the outline of figure 1 onto tracing paper, then place the traced sheet over figure 2 to verify coincidence.'
                 )}
               </p>
@@ -409,24 +409,24 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
                 <svg width="300" height="200" viewBox="0 0 300 200">
                   {/* Figure 1 at Left */}
                   <polygon points="50,150 120,150 120,70" fill="#93c5fd" stroke="#2563eb" strokeWidth="2.5" />
-                  <text x="85" y="170" textAnchor="middle" fontSize="11" fontWeight="bold">चित्र १</text>
+                  <text x="85" y="170" textAnchor="middle" fontSize="11" fontWeight="bold">Figure 1</text>
 
                   {/* Figure 2 at Right */}
                   <polygon points="180,150 250,150 250,70" fill="#fed7aa" stroke="#ea580c" strokeWidth="2.5" />
-                  <text x="215" y="170" textAnchor="middle" fontSize="11" fontWeight="bold">चित्र २</text>
+                  <text x="215" y="170" textAnchor="middle" fontSize="11" fontWeight="bold">Figure 2</text>
 
                   {/* Tracing Paper Overlay */}
                   {isTracingPlaced ? (
                     <g transform="translate(130, 0)">
                       <rect x="40" y="50" width="90" height="110" fill="rgba(255, 255, 255, 0.75)" stroke="#6366f1" strokeWidth="2" strokeDasharray="4,2" />
                       <polygon points="50,150 120,150 120,70" fill="none" stroke="#4f46e5" strokeWidth="2.5" />
-                      <text x="85" y="45" textAnchor="middle" fontSize="10" fill="#4f46e5" fontWeight="bold">ट्रेसिङ पेपर</text>
+                      <text x="85" y="45" textAnchor="middle" fontSize="10" fill="#4f46e5" fontWeight="bold">Tracing paper</text>
                     </g>
                   ) : (
                     <g transform="translate(0, 0)">
                       <rect x="40" y="50" width="90" height="110" fill="rgba(255, 255, 255, 0.75)" stroke="#6366f1" strokeWidth="2" strokeDasharray="4,2" />
                       <polygon points="50,150 120,150 120,70" fill="none" stroke="#4f46e5" strokeWidth="2.5" />
-                      <text x="85" y="45" textAnchor="middle" fontSize="10" fill="#4f46e5" fontWeight="bold">ट्रेसिङ पेपर</text>
+                      <text x="85" y="45" textAnchor="middle" fontSize="10" fill="#4f46e5" fontWeight="bold">Tracing paper</text>
                     </g>
                   )}
                 </svg>
@@ -439,19 +439,19 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
                 >
                   <Copy className="w-4 h-4" />
                   {isTracingPlaced
-                    ? L('ट्रेसिङ पेपरलाई चित्र १ मा फर्काउनुहोस्', 'Return Tracing Paper to Figure 1')
-                    : L('ट्रेसिङ पेपरलाई चित्र २ माथि राख्नुहोस्', 'Move Tracing Paper over Figure 2')}
+                    ? L('Tracing paperलाई Figure 1 मा फर्काउनुहोस्', 'Return Tracing Paper to Figure 1')
+                    : L('Tracing paperलाई Figure 2 माथि राख्नुहोस्', 'Move Tracing Paper over Figure 2')}
                 </button>
 
                 <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl text-xs md:text-sm text-slate-700">
                   {isTracingPlaced ? (
                     <div className="text-emerald-800 font-bold flex items-center gap-1.5">
                       <Check className="w-5 h-5 text-emerald-600" />
-                      {L('चित्र १ बाट कोरिएको ट्रेसिङ रेखा चित्र २ को किनारामा दुरुस्त खप्टियो! अतः यी दुई आकृति अनुरूप हुन्।', 'The traced boundary of Figure 1 coincides exactly over Figure 2! Proving they are congruent.')}
+                      {L('Figure 1 बाट कोरिएको ट्रेसिङ रेखा Figure 2 को किनारामा दुरुस्त खप्टियो! अतः यी दुई आकृति अनुरूप हुन्।', 'The traced boundary of Figure 1 coincides exactly over Figure 2! Proving they are congruent.')}
                     </div>
                   ) : (
                     <div>
-                      {L('चित्र १ माथि ट्रेसिङ पेपर राखिएको छ। माथिको बटन थिचेर चित्र २ माथि सार्नुहोस्।', 'Tracing paper is on Figure 1. Click button to place it over Figure 2.')}
+                      {L('Figure 1 माथि Tracing paper राखिएको छ। माथिको बटन थिचेर Figure 2 माथि सार्नुहोस्।', 'Tracing paper is on Figure 1. Click button to place it over Figure 2.')}
                     </div>
                   )}
                 </div>
@@ -537,21 +537,21 @@ export const CongruentFigureDiscoveryLab: React.FC<{ onBackToLibrary?: () => voi
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
                 {
-                  titleNp: '१. नमस्कार गर्दा दुई हत्केला',
+                  titleNp: '1. नमस्कार गर्दा दुई हत्केला',
                   titleEn: '1. Palms in Namaskar',
                   descNp: 'दुवै हात जोड्दा औंला र हत्केलाहरू ठ्याक्कै दुरुस्त खप्टिन्छन्।',
                   descEn: 'Palms joined in Namaskar match in both shape and size.',
                 },
                 {
-                  titleNp: '२. ज्यामिति बाकसका सेटस्क्वायर',
+                  titleNp: '2. ज्यामिति बाकसका सेटस्क्वायर',
                   titleEn: '2. Set Squares in Geometry Box',
-                  descNp: 'एउटै बाकसका ३०°-६०° वा ४५°-४५° का सेटस्क्वायरहरू अनुरूप हुन्छन्।',
+                  descNp: 'एउटै बाकसका 30°-60° वा 45°-45° का सेटस्क्वायरहरू अनुरूप हुन्छन्।',
                   descEn: 'Identical setsquares manufactured to standard measurements.',
                 },
                 {
-                  titleNp: '३. एउटै दरका दुईवटा सिक्का',
+                  titleNp: '3. एउटै दरका दुईpcs सिक्का',
                   titleEn: '3. Identical Currency Coins',
-                  descNp: 'नेपाल राष्ट्र बैंकले छापेका दुईवटा ५ रुपैयाँका सिक्काहरू पूर्ण अनुरूप हुन्छन्।',
+                  descNp: 'नेपाल राष्ट्र बैंकले छापेका दुईpcs 5 rupeesका सिक्काहरू पूर्ण अनुरूप हुन्छन्।',
                   descEn: 'Two five-rupee coins minted to identical shape and thickness.',
                 },
               ].map((item, idx) => (

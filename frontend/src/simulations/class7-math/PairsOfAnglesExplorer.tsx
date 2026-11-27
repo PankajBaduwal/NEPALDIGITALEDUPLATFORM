@@ -1,7 +1,7 @@
 /**
  * PairsOfAnglesExplorer.tsx
- * Grade 7 Mathematics – Lesson 13: LINES AND ANGLES (रेखाहरू र कोणहरू)
- * Simulation 3: Pairs of Angles Explorer (सम्बन्धित कोणहरूको खोजी)
+ * Grade 7 Mathematics – Lesson 13: LINES AND ANGLES
+ * Simulation 3: Pairs of Angles Explorer
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 185-192)
  */
 import React, { useState } from 'react';
@@ -15,54 +15,54 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'शीर्ष र एउटा भुजा साझा भएका तर एकआपसमा नखप्टिएका कोणहरूलाई के भनिन्छ?',
     en: 'Angles having a common vertex, a common arm and non-overlapping interiors are called?',
     options: [
-      { key: 'A', label: 'सन्निकट कोणहरू (Adjacent Angles)' },
-      { key: 'B', label: 'शीर्षाभिमुख कोणहरू (Vertically Opposite)' },
-      { key: 'C', label: 'पूरक कोणहरू (Complementary)' },
-      { key: 'D', label: 'एकान्तर कोणहरू' },
+      { key: 'A', label: 'Adjacent angles' },
+      { key: 'B', label: 'Vertically opposite angles' },
+      { key: 'C', label: 'Complementary angles' },
+      { key: 'D', label: 'Alternate angles' },
     ],
     answer: 'A',
   },
   {
-    np: 'दुईवटा सीधा रेखाहरू आपसमा काटिँदा बन्ने आमने-सामनेका शीर्षाभिमुख कोणहरू के हुन्छन्?',
+    np: 'दुईpcs सीधा रेखाहरू आपसमा काटिँदा बन्ने आमने-सामनेका Vertically opposite angles के हुन्छन्?',
     en: 'When two straight lines intersect, vertically opposite angles are always:',
     options: [
-      { key: 'A', label: 'बराबर (Equal)' },
-      { key: 'B', label: 'जोड्दा ९०° हुने' },
-      { key: 'C', label: 'जोड्दा १८०° हुने' },
-      { key: 'D', label: 'फरक फरक' },
+      { key: 'A', label: 'Equal' },
+      { key: 'B', label: 'Adding up to 90°' },
+      { key: 'C', label: 'Adding up to 180°' },
+      { key: 'D', label: 'Different' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि दुई कोणहरूको योगफल ९०° हुन्छ भने तिनीहरूलाई के भनिन्छ?',
+    np: 'यदि दुई कोणहरूको योगफल 90° हुन्छ भने तिनीहरूलाई के भनिन्छ?',
     en: 'If the sum of two angles is 90°, they are called:',
     options: [
-      { key: 'A', label: 'पूरक कोणहरू (Complementary Angles)' },
-      { key: 'B', label: 'परिपूरक कोणहरू (Supplementary Angles)' },
-      { key: 'C', label: 'सन्निकट कोणहरू' },
-      { key: 'D', label: 'समकोण' },
+      { key: 'A', label: 'Complementary angles' },
+      { key: 'B', label: 'Supplementary angles' },
+      { key: 'C', label: 'Adjacent angles' },
+      { key: 'D', label: 'Right angle' },
     ],
     answer: 'A',
   },
   {
-    np: '३३° को पूरक कोण (Complement) कति हुन्छ? (९०° - ३३°)',
+    np: '33° को पूरक कोण (Complement) कति हुन्छ? (90° - 33°)',
     en: 'What is the complement of 33°? (90° - 33°)',
     options: [
-      { key: 'A', label: '५७°' },
-      { key: 'B', label: '१४७°' },
-      { key: 'C', label: '६७°' },
-      { key: 'D', label: '४७°' },
+      { key: 'A', label: '57°' },
+      { key: 'B', label: '147°' },
+      { key: 'C', label: '67°' },
+      { key: 'D', label: '47°' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि दुई कोणहरूको योगफल १८०° हुन्छ भने तिनीहरूलाई के भनिन्छ?',
+    np: 'यदि दुई कोणहरूको योगफल 180° हुन्छ भने तिनीहरूलाई के भनिन्छ?',
     en: 'If the sum of two angles is 180°, they are called:',
     options: [
-      { key: 'A', label: 'परिपूरक कोणहरू (Supplementary Angles)' },
-      { key: 'B', label: 'पूरक कोणहरू (Complementary Angles)' },
-      { key: 'C', label: 'शीर्षाभिमुख कोणहरू' },
-      { key: 'D', label: 'ऋजु कोण' },
+      { key: 'A', label: 'Supplementary angles' },
+      { key: 'B', label: 'Complementary angles' },
+      { key: 'C', label: 'Vertically opposite angles' },
+      { key: 'D', label: 'Straight angle' },
     ],
     answer: 'A',
   },
@@ -146,11 +146,11 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 justify-center bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'adjacent', np: '१. सन्निकट कोणहरू (Adjacent)', en: '1. Adjacent Angles' },
-            { id: 'vertical', np: '२. शीर्षाभिमुख कोणहरू (Vert. Opposite)', en: '2. Vertically Opposite' },
-            { id: 'complementary', np: '३. पूरक कोणहरू (Complementary 90°)', en: '3. Complementary (90°)' },
-            { id: 'supplementary', np: '४. परिपूरक कोणहरू (Supplementary 180°)', en: '4. Supplementary (180°)' },
-            { id: 'solver', np: '५. अज्ञात कोण समाधान (Angle Solver)', en: '5. Unknown Angle Challenge' },
+            { id: 'adjacent', np: '1. Adjacent angles (Adjacent)', en: '1. Adjacent Angles' },
+            { id: 'vertical', np: '2. Vertically opposite angles (Vert. Opposite)', en: '2. Vertically Opposite' },
+            { id: 'complementary', np: '3. पूरक कोणहरू (Complementary 90°)', en: '3. Complementary (90°)' },
+            { id: 'supplementary', np: '4. परिपूरक कोणहरू (Supplementary 180°)', en: '4. Supplementary (180°)' },
+            { id: 'solver', np: '5. अज्ञात कोण समाधान (Angle Solver)', en: '5. Unknown Angle Challenge' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -174,7 +174,7 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
           <div className="bg-white rounded-3xl p-6 shadow-xl border border-indigo-100 space-y-6">
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-2xl">
               <h3 className="text-lg font-bold text-blue-900" style={{ fontFamily: FONT_NP }}>
-                {L('सन्निकट कोणहरू (Adjacent Angles) को परिभाषा:', 'Definition of Adjacent Angles:')}
+                {L('Adjacent angles को परिभाषा:', 'Definition of Adjacent Angles:')}
               </h3>
               <p className="text-slate-700 text-sm mt-1">
                 {L(
@@ -216,7 +216,7 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
 
                         {/* Shared Arm OB */}
                         <line x1="80" y1="200" x2={bx} y2={by} stroke="#2563eb" strokeWidth="4" />
-                        <text x={bx + 5} y={by - 5} fontSize="14" fontWeight="bold" fill="#2563eb">B (साझा भुजा)</text>
+                        <text x={bx + 5} y={by - 5} fontSize="14" fontWeight="bold" fill="#2563eb">B</text>
 
                         {/* Outer Arm OC */}
                         <line x1="80" y1="200" x2={cx} y2={cy} stroke="#d97706" strokeWidth="3" />
@@ -230,7 +230,7 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
                   })()}
                 </svg>
                 <div className="text-xs text-slate-500 mt-2 text-center">
-                  {L('बिन्दु O = साझा शीर्षबिन्दु | रेखा OB = साझा भुजा', 'Point O = Common Vertex | Ray OB = Common Arm')}
+                  {L('रेखा OB = साझा भुजा', 'Point O = Common Vertex | Ray OB = Common Arm')}
                 </div>
               </div>
 
@@ -270,13 +270,13 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
                   </div>
                   <ul className="text-xs space-y-1.5 text-slate-600">
                     <li className="flex items-center gap-2 text-emerald-700">
-                      <Check className="w-4 h-4" /> {L('१. साझा शीर्षबिन्दु O छ।', '1. Common vertex O exists.')}
+                      <Check className="w-4 h-4" /> {L('1. साझा शीर्षबिन्दु O छ।', '1. Common vertex O exists.')}
                     </li>
                     <li className="flex items-center gap-2 text-emerald-700">
-                      <Check className="w-4 h-4" /> {L('२. साझा भुजा OB छ।', '2. Common arm OB exists.')}
+                      <Check className="w-4 h-4" /> {L('2. साझा भुजा OB छ।', '2. Common arm OB exists.')}
                     </li>
                     <li className="flex items-center gap-2 text-emerald-700">
-                      <Check className="w-4 h-4" /> {L('३. कोणका क्षेत्रहरू खप्टिएका छैनन्।', '3. Non-overlapping interior spaces.')}
+                      <Check className="w-4 h-4" /> {L('3. कोणका क्षेत्रहरू खप्टिएका छैनन्।', '3. Non-overlapping interior spaces.')}
                     </li>
                   </ul>
                   <div className="pt-2 text-sm font-bold text-indigo-700 border-t border-slate-200">
@@ -296,11 +296,11 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
           <div className="bg-white rounded-3xl p-6 shadow-xl border border-indigo-100 space-y-6">
             <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-2xl">
               <h3 className="text-lg font-bold text-emerald-900" style={{ fontFamily: FONT_NP }}>
-                {L('शीर्षाभिमुख कोणहरू (Vertically Opposite Angles):', 'Vertically Opposite Angles Theorem:')}
+                {L('Vertically opposite angles (Vertically Opposite Angles):', 'Vertically Opposite Angles Theorem:')}
               </h3>
               <p className="text-slate-700 text-sm mt-1">
                 {L(
-                  'दुई सीधा रेखाहरू आपसमा एउटा बिन्दुमा काटिँदा बन्ने आमने-सामनेका शीर्षाभिमुख कोणहरू सधैं बराबर (Equal) हुन्छन्।',
+                  'दुई सीधा रेखाहरू आपसमा एउटा बिन्दुमा काटिँदा बन्ने आमने-सामनेका Vertically opposite angles सधैं Equal हुन्छन्।',
                   'When two straight lines intersect at a point, the vertically opposite angles are always equal to each other.'
                 )}
               </p>
@@ -405,14 +405,14 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
                   </div>
                   <div className="grid grid-cols-2 gap-3 text-center">
                     <div className="bg-blue-100 border border-blue-300 p-3 rounded-xl">
-                      <div className="text-xs text-blue-700 font-semibold">{L('जोडी १ (नीलो)', 'Pair 1 (Blue)')}</div>
+                      <div className="text-xs text-blue-700 font-semibold">{L('जोडी 1', 'Pair 1 (Blue)')}</div>
                       <div className="text-lg font-black text-blue-900 mt-1">
                         ∠ROQ = ∠POS = {toNp(angle1)}°
                       </div>
                       <div className="text-xs text-blue-600 font-bold">✓ {L('बराबर', 'Equal')}</div>
                     </div>
                     <div className="bg-amber-100 border border-amber-300 p-3 rounded-xl">
-                      <div className="text-xs text-amber-700 font-semibold">{L('जोडी २ (सुन्तला)', 'Pair 2 (Orange)')}</div>
+                      <div className="text-xs text-amber-700 font-semibold">{L('जोडी 2', 'Pair 2 (Orange)')}</div>
                       <div className="text-lg font-black text-amber-900 mt-1">
                         ∠ROP = ∠SOQ = {toNp(180 - angle1)}°
                       </div>
@@ -420,7 +420,7 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
                     </div>
                   </div>
                   <div className="text-xs text-slate-500 text-center">
-                    {L('रेखा PQ मा: ∠ROP + ∠ROQ = १८०° (ऋजु जोडा / Linear Pair)', 'On line PQ: sum of linear pair is 180°')}
+                    {L('रेखा PQ मा: ∠ROP + ∠ROQ = 180° (ऋजु जोडा / Linear Pair)', 'On line PQ: sum of linear pair is 180°')}
                   </div>
                 </div>
               </div>
@@ -433,11 +433,11 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
           <div className="bg-white rounded-3xl p-6 shadow-xl border border-indigo-100 space-y-6">
             <div className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-2xl">
               <h3 className="text-lg font-bold text-purple-900" style={{ fontFamily: FONT_NP }}>
-                {L('पूरक कोणहरू (Complementary Angles) - योगफल ९०°:', 'Complementary Angles - Sum = 90°:')}
+                {L('Complementary angles - योगफल 90°:', 'Complementary Angles - Sum = 90°:')}
               </h3>
               <p className="text-slate-700 text-sm mt-1">
                 {L(
-                  'यदि दुई कोणहरूको नापको योगफल ९०° (समकोण) हुन्छ भने ती दुई कोणहरूलाई एकअर्काको पूरक कोण (Complement) भनिन्छ।',
+                  'यदि दुई कोणहरूको नापको योगफल 90° (Right angle) हुन्छ भने ती दुई कोणहरूलाई एकअर्काको पूरक कोण (Complement) भनिन्छ।',
                   'If the sum of two angles is 90° (Right angle), they are called complementary angles of each other.'
                 )}
               </p>
@@ -497,7 +497,7 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
               <div className="space-y-4">
                 <div className="bg-purple-50 p-4 rounded-xl border border-purple-200">
                   <label className="text-sm font-bold text-purple-900 block mb-1">
-                    {L(`कोण १ बदल्नुहोस्: ${toNp(angle1)}°`, `Adjust Angle 1: ${angle1}°`)}
+                    {L(`कोण 1 बदल्नुहोस्: ${toNp(angle1)}°`, `Adjust Angle 1: ${angle1}°`)}
                   </label>
                   <input
                     type="range"
@@ -515,18 +515,18 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
                   </div>
                   <div className="text-base font-bold text-purple-800">
                     {L(
-                      `कोण १ = ${toNp(angle1)}°`,
+                      `कोण 1 = ${toNp(angle1)}°`,
                       `Angle 1 = ${angle1}°`
                     )}
                   </div>
                   <div className="text-base font-bold text-blue-800">
                     {L(
-                      `पूरक कोण = ९०° - ${toNp(angle1)}° = ${toNp(90 - angle1)}°`,
+                      `पूरक कोण = 90° - ${toNp(angle1)}° = ${toNp(90 - angle1)}°`,
                       `Complementary Angle = 90° - ${angle1}° = ${90 - angle1}°`
                     )}
                   </div>
                   <div className="text-xs text-emerald-700 bg-emerald-50 p-2 rounded-lg border border-emerald-200 font-semibold">
-                    ✓ {toNp(angle1)}° + {toNp(90 - angle1)}° = {toNp(90)}° ({L('समकोण / Right Angle', 'Right Angle')})
+                    ✓ {toNp(angle1)}° + {toNp(90 - angle1)}° = {toNp(90)}° ({L('Right angle / Right Angle', 'Right Angle')})
                   </div>
                 </div>
               </div>
@@ -539,11 +539,11 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
           <div className="bg-white rounded-3xl p-6 shadow-xl border border-indigo-100 space-y-6">
             <div className="bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-2xl">
               <h3 className="text-lg font-bold text-rose-900" style={{ fontFamily: FONT_NP }}>
-                {L('परिपूरक कोणहरू (Supplementary Angles) - योगफल १८०°:', 'Supplementary Angles - Sum = 180°:')}
+                {L('Supplementary angles - योगफल 180°:', 'Supplementary Angles - Sum = 180°:')}
               </h3>
               <p className="text-slate-700 text-sm mt-1">
                 {L(
-                  'यदि दुई कोणहरूको नापको योगफल १८०° (ऋजु कोण) हुन्छ भने ती दुई कोणहरूलाई एकअर्काको परिपूरक कोण (Supplement) भनिन्छ।',
+                  'यदि दुई कोणहरूको नापको योगफल 180° (Straight angle) हुन्छ भने ती दुई कोणहरूलाई एकअर्काको परिपूरक कोण (Supplement) भनिन्छ।',
                   'If the sum of two angles is 180° (Straight angle), they are called supplementary angles of each other.'
                 )}
               </p>
@@ -618,12 +618,12 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
                   </div>
                   <div className="text-base font-bold text-sky-800">
                     {L(
-                      `परिपूरक कोण ∠AOC = १८०° - ${toNp(angle1)}° = ${toNp(180 - angle1)}°`,
+                      `परिपूरक कोण ∠AOC = 180° - ${toNp(angle1)}° = ${toNp(180 - angle1)}°`,
                       `Supplementary Angle ∠AOC = 180° - ${angle1}° = ${180 - angle1}°`
                     )}
                   </div>
                   <div className="text-xs text-emerald-700 bg-emerald-50 p-2 rounded-lg border border-emerald-200 font-semibold">
-                    ✓ {toNp(angle1)}° + {toNp(180 - angle1)}° = {toNp(180)}° ({L('ऋजु कोण / Straight Angle', 'Straight Angle')})
+                    ✓ {toNp(angle1)}° + {toNp(180 - angle1)}° = {toNp(180)}° ({L('Straight angle / Straight Angle', 'Straight Angle')})
                   </div>
                 </div>
               </div>
@@ -678,20 +678,20 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
                     )}
                   {solverType === 'linear' &&
                     L(
-                      `सीधा रेखामा सन्निकट कोणहरू x र ${toNp(knownAngle)}° छन्। x को मान कति हुन्छ?`,
+                      `सीधा रेखामा Adjacent angles x र ${toNp(knownAngle)}° छन्। x को मान कति हुन्छ?`,
                       `On a straight line, adjacent angles are x and ${knownAngle}°. Find x.`
                     )}
                   {solverType === 'vert' &&
                     L(
-                      `दुई सीधा रेखाहरू काटिँदा शीर्षाभिमुख कोणहरू x र ${toNp(knownAngle)}° छन्। x को मान कति हुन्छ?`,
+                      `दुई सीधा रेखाहरू काटिँदा Vertically opposite angles x र ${toNp(knownAngle)}° छन्। x को मान कति हुन्छ?`,
                       `Two lines intersect forming vertically opposite angles x and ${knownAngle}°. Find x.`
                     )}
                 </div>
 
                 <div className="bg-white p-4 rounded-xl border border-slate-200 text-sm text-slate-600">
-                  {solverType === 'comp' && `सूत्र: x + ${knownAngle}° = 90°`}
-                  {solverType === 'supp' && `सूत्र: x + ${knownAngle}° = 180°`}
-                  {solverType === 'linear' && `सूत्र: x + ${knownAngle}° = 180°`}
+                  {solverType === 'comp' && `Formula: x + ${knownAngle}° = 90°`}
+                  {solverType === 'supp' && `Formula: x + ${knownAngle}° = 180°`}
+                  {solverType === 'linear' && `Formula: x + ${knownAngle}° = 180°`}
                   {solverType === 'vert' && `सम्बन्ध: शीर्षाभिमुख कोण बराबर हुन्छन् (x = ${knownAngle}°)`}
                 </div>
               </div>
@@ -700,7 +700,7 @@ export const PairsOfAnglesExplorer: React.FC<{ onBackToLibrary?: () => void; onB
               <div className="space-y-4">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700 block">
-                    {L('तपाईंको उत्तर (डिग्रीमा) लेख्नुहोस्:', 'Enter your answer (in degrees):')}
+                    {L('तपाईंको उत्तर (degreesमा) लेख्नुहोस्:', 'Enter your answer (in degrees):')}
                   </label>
                   <div className="flex gap-2">
                     <input

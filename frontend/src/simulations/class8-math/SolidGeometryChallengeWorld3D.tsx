@@ -22,7 +22,7 @@ interface SolidChallengeItem {
 const SOLID_ITEMS: SolidChallengeItem[] = [
   {
     id: 'c1',
-    nameNp: 'त्रिभुजाकार प्रिज्म (Triangular Prism)',
+    nameNp: 'Triangular prism',
     nameEn: 'Triangular Prism',
     type: 'triangular_prism',
     faces: 5,
@@ -30,25 +30,25 @@ const SOLID_ITEMS: SolidChallengeItem[] = [
     vertices: 6,
     realLifeNp: 'टोब्लेरोन चकलेटको बाकस वा क्याम्पिङ टेन्ट (Camping Tent / Toblerone box)',
     realLifeEn: 'Camping tent or triangular packaging box',
-    netDescriptionNp: '२ वटा त्रिभुज र ३ वटा आयत',
+    netDescriptionNp: '2 pcs त्रिभुज र 3 pcs आयत',
     netDescriptionEn: '2 Triangles and 3 Rectangles'
   },
   {
     id: 'c2',
-    nameNp: 'वर्गाकार पिरामिड (Square Pyramid)',
+    nameNp: 'वर्गाकार Pyramid (Square Pyramid)',
     nameEn: 'Square Pyramid',
     type: 'square_pyramid',
     faces: 5,
     edges: 8,
     vertices: 5,
-    realLifeNp: 'इजिप्टको पिरामिड वा मन्दिरको गजुर आकारको छाना (Egyptian Pyramid / Temple Roof)',
+    realLifeNp: 'इजिप्टको Pyramid वा मन्दिरको गजुर आकारको छाना (Egyptian Pyramid / Temple Roof)',
     realLifeEn: 'Egyptian Pyramid or pointed temple roof',
-    netDescriptionNp: '१ वर्ग र ४ वटा त्रिभुज',
+    netDescriptionNp: '1 वर्ग र 4 pcs त्रिभुज',
     netDescriptionEn: '1 Square and 4 Triangles'
   },
   {
     id: 'c3',
-    nameNp: 'घन (Cube)',
+    nameNp: 'Cube',
     nameEn: 'Cube',
     type: 'cube',
     faces: 6,
@@ -56,12 +56,12 @@ const SOLID_ITEMS: SolidChallengeItem[] = [
     vertices: 8,
     realLifeNp: 'लुडोको गोटी वा रुबिक्स क्युब (Ludo Dice / Rubik\'s Cube)',
     realLifeEn: 'Playing dice or Rubik\'s Cube',
-    netDescriptionNp: '६ वटा बराबर वर्गहरू',
+    netDescriptionNp: '6 pcs बराबर वर्गहरू',
     netDescriptionEn: '6 Identical Squares'
   },
   {
     id: 'c4',
-    nameNp: 'बेलन (Cylinder)',
+    nameNp: 'Cylinder',
     nameEn: 'Cylinder',
     type: 'cylinder',
     faces: 3,
@@ -69,7 +69,7 @@ const SOLID_ITEMS: SolidChallengeItem[] = [
     vertices: 0,
     realLifeNp: 'पानीको पाइप वा चिसो पेय पदार्थको टिनको क्यान (Soda Can / Water Pipe)',
     realLifeEn: 'Soda tin can or circular pipe',
-    netDescriptionNp: '२ वटा वृत्त र १ वटा आयत',
+    netDescriptionNp: '2 pcs वृत्त र 1 pcs आयत',
     netDescriptionEn: '2 Circles and 1 Rectangle'
   },
   {
@@ -82,7 +82,7 @@ const SOLID_ITEMS: SolidChallengeItem[] = [
     vertices: 1,
     realLifeNp: 'आइसक्रिम कोन वा जन्मदिनको टोपी (Ice Cream Cone / Birthday Hat)',
     realLifeEn: 'Ice cream cone or birthday party hat',
-    netDescriptionNp: '१ वृत्त र १ वृत्तखण्ड',
+    netDescriptionNp: '1 वृत्त र 1 वृत्तखण्ड',
     netDescriptionEn: '1 Circle and 1 Circular Sector'
   }
 ];
@@ -92,21 +92,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'लुडोको गोटी (Dice) कुन ठोस वस्तुको वास्तविक उदाहरण हो?',
     en: 'A playing dice is a real-life example of which 3D solid?',
     options: [
-      { key: 'A', label: 'घन (Cube)' },
-      { key: 'B', label: 'घनाभ (Cuboid)' },
-      { key: 'C', label: 'बेलन (Cylinder)' },
-      { key: 'D', label: 'प्रिज्म (Prism)' },
+      { key: 'A', label: 'Cube' },
+      { key: 'B', label: 'Cuboid' },
+      { key: 'C', label: 'Cylinder' },
+      { key: 'D', label: 'Prism' },
     ],
     answer: 'A',
   },
   {
-    np: '२ वटा त्रिभुज र ३ वटा आयत मिलेर बन्ने जालोबाट कुन ठोस वस्तु बन्दछ?',
+    np: '2 pcs त्रिभुज र 3 pcs आयत मिलेर बन्ने जालोबाट कुन ठोस वस्तु बन्दछ?',
     en: 'Which solid is formed by a net of 2 triangles and 3 rectangles?',
     options: [
-      { key: 'A', label: 'त्रिभुजाकार प्रिज्म (Triangular Prism)' },
-      { key: 'B', label: 'चतुष्फलक' },
-      { key: 'C', label: 'पिरामिड' },
-      { key: 'D', label: 'घनाभ' },
+      { key: 'A', label: 'Triangular prism' },
+      { key: 'B', label: 'Tetrahedron' },
+      { key: 'C', label: 'Pyramid' },
+      { key: 'D', label: 'Cuboid' },
     ],
     answer: 'A',
   },
@@ -114,10 +114,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'युलरको सूत्र (Euler\'s Formula) अनुसार F + V - E को मान सधैं कति हुन्छ?',
     en: 'According to Euler\'s Formula, what is the value of F + V - E for simple polyhedra?',
     options: [
-      { key: 'A', label: '२ (Always 2)' },
-      { key: 'B', label: '०' },
-      { key: 'C', label: '४' },
-      { key: 'D', label: '६' },
+      { key: 'A', label: '2 (Always 2)' },
+      { key: 'B', label: '0' },
+      { key: 'C', label: '4' },
+      { key: 'D', label: '6' },
     ],
     answer: 'A',
   }
@@ -130,7 +130,7 @@ export const SolidGeometryChallengeWorld3D: React.FC<{
   const kit = useSimKit({
     code: 'SIM-MATH-G8-U16-03',
     chapter: 16,
-    titleNp: '३D ठोस ज्यामिति चुनौती संसार',
+    titleNp: '3D ठोस ज्यामिति चुनौती संसार',
     titleEn: '3D Solid Geometry Challenge World',
   });
   const isNe = kit.lang === 'ne';
@@ -274,7 +274,7 @@ export const SolidGeometryChallengeWorld3D: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! ३D ठोस वस्तुहरूको पहिचान, पृष्ठ र किनारा गणना, तथा दैनिक जीवनका उदाहरणहरूको चुनौती जित्नुहोस्!',
+        'नमस्ते! 3D ठोस वस्तुहरूको पहिचान, पृष्ठ र किनारा गणना, तथा दैनिक जीवनका उदाहरणहरूको चुनौती जित्नुहोस्!',
         'Hello! Test your skills on 3D solid identification, face/edge/vertex counting, and real-life object matching!'
       )}
     >
@@ -310,7 +310,7 @@ export const SolidGeometryChallengeWorld3D: React.FC<{
               activeTab === 'inspect' ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-300'
             }`}
           >
-            {L('१. ३D निरीक्षण (3D Inspection)', '1. 3D Inspection')}
+            {L('1. 3D निरीक्षण (3D Inspection)', '1. 3D Inspection')}
           </button>
           <button
             onClick={() => setActiveTab('count_challenge')}
@@ -318,7 +318,7 @@ export const SolidGeometryChallengeWorld3D: React.FC<{
               activeTab === 'count_challenge' ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-300'
             }`}
           >
-            {L('२. F, E, V गणना चुनौती', '2. Count F, E, V')}
+            {L('2. F, E, V गणना चुनौती', '2. Count F, E, V')}
           </button>
           <button
             onClick={() => setActiveTab('reallife')}
@@ -326,7 +326,7 @@ export const SolidGeometryChallengeWorld3D: React.FC<{
               activeTab === 'reallife' ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-300'
             }`}
           >
-            {L('३. दैनिक जीवनका उदाहरण (Real Life)', '3. Real-Life Examples')}
+            {L('3. दैनिक जीवनका उदाहरण (Real Life)', '3. Real-Life Examples')}
           </button>
         </div>
 
@@ -334,7 +334,7 @@ export const SolidGeometryChallengeWorld3D: React.FC<{
         <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 flex justify-center relative">
           <canvas ref={canvasRef} className="w-full max-w-2xl h-72 cursor-grab active:cursor-grabbing rounded-xl" />
           <div className="absolute top-6 left-6 text-xs text-slate-400 bg-slate-900/80 px-2.5 py-1 rounded-md border border-slate-700 pointer-events-none">
-            🖱️ {L('माउस वा टचले ३D मोडेल घुमाउनुहोस्', 'Drag to rotate 3D model')}
+            🖱️ {L('माउस वा टचले 3D मोडेल घुमाउनुहोस्', 'Drag to rotate 3D model')}
           </div>
         </div>
 
@@ -421,7 +421,7 @@ export const SolidGeometryChallengeWorld3D: React.FC<{
               >
                 {countVerdict === 'correct'
                   ? L(`🎉 बधाई छ! सही उत्तर: F = ${curSolid.faces}, E = ${curSolid.edges}, V = ${curSolid.vertices}`, `🎉 Correct! F = ${curSolid.faces}, E = ${curSolid.edges}, V = ${curSolid.vertices}`)
-                  : L(`❌ मिलेन! पुनः प्रयास गर्नुहोस्। (युलर सूत्र: F + V - E = २ हुनुपर्छ)`, '❌ Incorrect. Please count again!')}
+                  : L(`❌ मिलेन! पुनः प्रयास गर्नुहोस्। (युलर सूत्र: F + V - E = 2 हुनुपर्छ)`, '❌ Incorrect. Please count again!')}
               </div>
             )}
           </div>

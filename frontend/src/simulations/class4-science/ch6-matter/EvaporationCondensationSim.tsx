@@ -1,15 +1,15 @@
 /**
  * EvaporationCondensationSim.tsx
- * Simulation 22: 2D Evaporation and Condensation Lab (वाष्पीकरण र सङ्घनन प्रयोगशाला)
- * Grade 4 Science • Chapter 6: Matter (पदार्थ)
+ * Simulation 22: 2D Evaporation and Condensation Lab
+ * Grade 4 Science • Chapter 6: Matter
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
- * 1. Evaporation (वाष्पीकरण): Boiling water in flask on tripod stand over Bunsen burner,
+ * 1. Evaporation: Boiling water in flask on tripod stand over Bunsen burner,
  *    energetic bubbles forming and bursting into swirling steam vapor plumes.
- * 2. Condensation (सङ्घनन): Steam strikes an inclined cold glass plate cooled with ice cubes;
+ * 2. Condensation: Steam strikes an inclined cold glass plate cooled with ice cubes;
  *    vapor cools and condenses into glistening water droplets coalescing.
- * 3. Collection (संकलन): Droplets drip one by one from the plate edge into a receiving beaker below,
+ * 3. Collection: Droplets drip one by one from the plate edge into a receiving beaker below,
  *    creating water ripples and filling the beaker with pure distilled water.
  * 4. Interactive controls: Flame level, Ice refill, Temperature readouts, Bilingual EN/NE, and Quiz.
  */
@@ -30,7 +30,7 @@ export const EvaporationCondensationSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -510,7 +510,7 @@ export const EvaporationCondensationSim: React.FC<BaseSimulationProps> = ({
       ctx,
       fx + 70,
       fy - 35,
-      currentLang === 'en' ? '1. Evaporation (वाष्पीकरण)' : '१. वाष्पीकरण (Evaporation)',
+      currentLang === 'en' ? '1. Evaporation' : '1. वाष्पीकरण (Evaporation)',
       currentLang === 'en' ? 'Water absorbs heat → turns to steam' : 'पानी तातेर बाफमा परिणत हुन्छ',
       '#f97316'
     );
@@ -520,7 +520,7 @@ export const EvaporationCondensationSim: React.FC<BaseSimulationProps> = ({
       ctx,
       px + 120,
       py - 45,
-      currentLang === 'en' ? '2. Condensation (सङ्घनन)' : '२. सङ्घनन (Condensation)',
+      currentLang === 'en' ? '2. Condensation' : '2. सङ्घनन (Condensation)',
       currentLang === 'en' ? 'Cold surface cools steam → liquid drops' : 'चिसो सतहले बाफलाई पानीको थोपा बनाउँछ',
       '#38bdf8'
     );
@@ -530,7 +530,7 @@ export const EvaporationCondensationSim: React.FC<BaseSimulationProps> = ({
       ctx,
       rx + 50,
       ry - 35,
-      currentLang === 'en' ? '3. Collection (संकलन)' : '३. संकलन (Collection)',
+      currentLang === 'en' ? '3. Collection' : '3. संकलन (Collection)',
       currentLang === 'en' ? 'Pure distilled drops collect in beaker' : 'शुद्ध पानी बिकरमा जम्मा हुन्छ',
       '#4ade80'
     );
@@ -584,7 +584,7 @@ export const EvaporationCondensationSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 6: Matter'
-          : 'कक्षा ४ विज्ञान • एकाइ ६: पदार्थ'
+          : 'कक्षा 4 विज्ञान • एकाइ 6: पदार्थ'
       }
       currentStage={stage}
       onStageChange={setStage}
@@ -705,7 +705,7 @@ export const EvaporationCondensationSim: React.FC<BaseSimulationProps> = ({
               <div>
                 <div style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>
                   {flameLevel > 0
-                    ? lang === 'en' ? 'Boiling & Vaporizing (100°C)' : 'उम्लने र बाष्पीकरण हुँदै (१००°C)'
+                    ? lang === 'en' ? 'Boiling & Vaporizing (100°C)' : 'उम्लने र बाष्पीकरण हुँदै (100°C)'
                     : lang === 'en' ? 'Burner Standby' : 'बर्नर तयार अवस्था'}
                 </div>
                 <div style={{ fontSize: '11px', color: '#64748b' }}>

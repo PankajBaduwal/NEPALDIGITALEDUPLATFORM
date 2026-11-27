@@ -1,7 +1,7 @@
 /**
  * StraightCurvedLineExplorer.tsx (Pure 2D Edition)
- * Simulation 01: Straight and Curved Line Explorer (सीधा र बाङ्गो रेखा चिनौँ)
- * Class 1 • Mathematics • Chapter 2: Lines (रेखाहरू)
+ * Simulation 01: Straight and Curved Line Explorer
+ * Class 1 • Mathematics • Chapter 2: Lines
  * 100% 2D SVG & Canvas – Zero Three.js/WebGL dependencies.
  */
 import React, { useState } from 'react';
@@ -134,8 +134,8 @@ export const StraightCurvedLineExplorer: React.FC<Props> = ({ onBackToLibrary })
 
           <div style={{ fontSize: 20, fontWeight: 900, color: ropePulled ? '#187C68' : '#F59E0B', marginBottom: 16 }}>
             {ropePulled
-              ? `✅ ${kit.t('सिधा रेखा (Straight Line)', 'Straight Line (सिधा रेखा)')}`
-              : `〰️ ${kit.t('बाङ्गो रेखा (Curved Line)', 'Curved Line (बाङ्गो रेखा)')}`}
+              ? `✅ ${kit.t('सिधा रेखा (Straight Line)', 'Straight Line')}`
+              : `〰️ ${kit.t('बाङ्गो रेखा (Curved Line)', 'Curved Line')}`}
           </div>
 
           <svg width="100%" height="160" viewBox="0 0 600 160" style={{ overflow: 'visible' }}>

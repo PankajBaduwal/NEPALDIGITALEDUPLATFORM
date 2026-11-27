@@ -1,7 +1,7 @@
 /**
  * AdditionBlockBuilder.tsx
- * Simulation 04: Addition Block Builder (जोड ब्लक निर्माण खेल)
- * Class 1 Mathematics - Chapter 10: Addition up to 20 (योगफल २० सम्म आउने जोड)
+ * Simulation 04: Addition Block Builder
+ * Class 1 Mathematics - Chapter 10: Addition up to 20
  * Nepal Digital Education Platform
  */
 
@@ -27,10 +27,10 @@ interface Props {
 }
 
 const NEP_NUMERALS: Record<number, string> = {
-  0: '०', 1: '१', 2: '२', 3: '३', 4: '४', 5: '५',
-  6: '६', 7: '७', 8: '८', 9: '९', 10: '१०',
-  11: '११', 12: '१२', 13: '१३', 14: '१४', 15: '१५',
-  16: '१६', 17: '१७', 18: '१८', 19: '१९', 20: '२०',
+  0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5',
+  6: '6', 7: '7', 8: '8', 9: '9', 10: '10',
+  11: '11', 12: '12', 13: '13', 14: '14', 15: '15',
+  16: '16', 17: '17', 18: '18', 19: '19', 20: '20',
 };
 
 type BuilderMode = 'DUAL_TEN_FRAME' | 'COLOUR_ADDITION' | 'THREE_GROUPS' | 'QUIZ';
@@ -56,7 +56,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Mode
@@ -121,92 +121,92 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
     () => [
       {
         id: 1,
-        questionNp: '९ वटा राता ब्लक र ६ वटा नीला ब्लक मिलाउँदा जम्मा कति हुन्छ?',
+        questionNp: '9 वटा राता ब्लक र 6 वटा नीला ब्लक मिलाउँदा जम्मा कति हुन्छ?',
         questionEn: 'How many blocks in total when combining 9 red and 6 blue blocks?',
         options: [14, 15, 16],
         correct: 15,
-        explanationNp: '९ + ६ = १५ (पन्ध्र) हुन्छ।',
+        explanationNp: '9 + 6 = 15 हुन्छ।',
         explanationEn: '9 + 6 = 15 (Fifteen).',
       },
       {
         id: 2,
-        questionNp: 'पहिलो दश-कोठे घरमा १० ओटा र दोस्रो घरमा ५ ओटा ब्लक हुँदा जम्मा कति भयो?',
+        questionNp: 'पहिलो दश-कोठे घरमा 10 ओटा र दोस्रो घरमा 5 ओटा ब्लक हुँदा जम्मा कति भयो?',
         questionEn: 'If Frame 1 has 10 blocks and Frame 2 has 5 blocks, what is the total?',
         options: [14, 15, 16],
         correct: 15,
-        explanationNp: '१० + ५ = १५ हुन्छ।',
+        explanationNp: '10 + 5 = 15 हुन्छ।',
         explanationEn: '10 + 5 = 15.',
       },
       {
         id: 3,
-        questionNp: '८ + ७ को जोडफल कति हुन्छ?',
+        questionNp: '8 + 7 को जोडफल कति हुन्छ?',
         questionEn: 'What is the sum of 8 + 7?',
         options: [14, 15, 16],
         correct: 15,
-        explanationNp: '८ + ७ = १५ हुन्छ।',
+        explanationNp: '8 + 7 = 15 हुन्छ।',
         explanationEn: '8 + 7 = 15.',
       },
       {
         id: 4,
-        questionNp: '५ + ६ + ४ जोड्दा कति आउँछ?',
+        questionNp: '5 + 6 + 4 जोड्दा कति आउँछ?',
         questionEn: 'What is 5 + 6 + 4?',
         options: [14, 15, 16],
         correct: 15,
-        explanationNp: '६ र ४ जोड्दा १० हुन्छ, १० + ५ = १५।',
+        explanationNp: '6 र 4 जोड्दा 10 हुन्छ, 10 + 5 = 15।',
         explanationEn: '6 + 4 = 10, 10 + 5 = 15.',
       },
       {
         id: 5,
-        questionNp: '१० वटा राता र ९ वटा नीला ब्लक जोड्दा कति हुन्छ?',
+        questionNp: '10 वटा राता र 9 वटा नीला ब्लक जोड्दा कति हुन्छ?',
         questionEn: '10 red blocks and 9 blue blocks make how many?',
         options: [18, 19, 20],
         correct: 19,
-        explanationNp: '१० + ९ = १९ (उन्नाइस) हुन्छ।',
+        explanationNp: '10 + 9 = 19 हुन्छ।',
         explanationEn: '10 + 9 = 19 (Nineteen).',
       },
       {
         id: 6,
-        questionNp: '९ + ५ को जोडफल कति हो?',
+        questionNp: '9 + 5 को जोडफल कति हो?',
         questionEn: 'What is 9 + 5?',
         options: [13, 14, 15],
         correct: 14,
-        explanationNp: '९ + ५ = १४ (चौध) हुन्छ।',
+        explanationNp: '9 + 5 = 14 हुन्छ।',
         explanationEn: '9 + 5 = 14 (Fourteen).',
       },
       {
         id: 7,
-        questionNp: '७ + ३ + ६ जोड्दा कति हुन्छ?',
+        questionNp: '7 + 3 + 6 जोड्दा कति हुन्छ?',
         questionEn: 'What is the total of 7 + 3 + 6?',
         options: [15, 16, 17],
         correct: 16,
-        explanationNp: '७ + ३ = १०, १० + ६ = १६।',
+        explanationNp: '7 + 3 = 10, 10 + 6 = 16।',
         explanationEn: '7 + 3 = 10, 10 + 6 = 16.',
       },
       {
         id: 8,
-        questionNp: '९ + ८ को मान कति हुन्छ?',
+        questionNp: '9 + 8 को मान कति हुन्छ?',
         questionEn: 'What is the sum of 9 + 8?',
         options: [16, 17, 18],
         correct: 17,
-        explanationNp: '९ + ८ = १७ (सत्र) हुन्छ।',
+        explanationNp: '9 + 8 = 17 हुन्छ।',
         explanationEn: '9 + 8 = 17 (Seventeen).',
       },
       {
         id: 9,
-        questionNp: '८ + २ + ७ जोड्दा कति हुन्छ?',
+        questionNp: '8 + 2 + 7 जोड्दा कति हुन्छ?',
         questionEn: 'What is 8 + 2 + 7?',
         options: [16, 17, 18],
         correct: 17,
-        explanationNp: '८ + २ = १०, १० + ७ = १७।',
+        explanationNp: '8 + 2 = 10, 10 + 7 = 17।',
         explanationEn: '8 + 2 = 10, 10 + 7 = 17.',
       },
       {
         id: 10,
-        questionNp: '१० ओटाको पूरा घर र ६ ओटाको समूह मिलेर कति बन्छ?',
+        questionNp: '10 ओटाको पूरा घर र 6 ओटाको समूह मिलेर कति बन्छ?',
         questionEn: 'A full frame of 10 and a group of 6 make what number?',
         options: [15, 16, 17],
         correct: 16,
-        explanationNp: '१० + ६ = १६ (सोह्र) बन्दछ।',
+        explanationNp: '10 + 6 = 16 बन्दछ।',
         explanationEn: '10 + 6 = 16 (Sixteen).',
       },
     ],
@@ -432,7 +432,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
               mode === 'THREE_GROUPS' ? 'bg-amber-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
-            {language === 'np' ? '३ समूहको जोड' : 'Three Groups'}
+            {language === 'np' ? '3 समूहको जोड' : 'Three Groups'}
           </button>
           <button
             onClick={() => {
@@ -457,12 +457,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
           >
             {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            className="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold shadow-sm transition"
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
@@ -480,7 +475,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                     {language === 'np' ? 'रातो र नीलो ब्लक जोड' : 'Red & Blue Block Addition'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
-                    {NEP_NUMERALS[currentProb.a]} (रातो) + {NEP_NUMERALS[currentProb.b]} (नीलो) = {NEP_NUMERALS[currentProb.sum]} ({currentProb.a} + {currentProb.b} = {currentProb.sum})
+                    {NEP_NUMERALS[currentProb.a]} (red) + {NEP_NUMERALS[currentProb.b]} (blue) = {NEP_NUMERALS[currentProb.sum]} ({currentProb.a} + {currentProb.b} = {currentProb.sum})
                   </h3>
                 </div>
 
@@ -498,10 +493,10 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                 <div className="bg-slate-50 p-5 rounded-2xl border-2 border-emerald-500/40 flex flex-col items-center">
                   <div className="flex items-center justify-between w-full mb-3">
                     <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
-                      {language === 'np' ? 'पहिलो घर (पूरा १०)' : 'First House (Full 10)'}
+                      {language === 'np' ? 'पहिलो घर (पूरा 10)' : 'First House (Full 10)'}
                     </span>
                     <span className="text-xs font-bold text-slate-900 bg-white px-2 py-0.5 rounded-full">
-                      {NEP_NUMERALS[frame1Count]} / १०
+                      {NEP_NUMERALS[frame1Count]} / 10
                     </span>
                   </div>
 
@@ -523,7 +518,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                   </div>
 
                   <span className="text-xs text-emerald-700 font-bold mt-3">
-                    {language === 'np' ? '१ पूरा दश = १०' : '1 Full Ten = 10'}
+                    {language === 'np' ? '1 पूरा दश = 10' : '1 Full Ten = 10'}
                   </span>
                 </div>
 
@@ -534,7 +529,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                       {language === 'np' ? 'दोस्रो घर (बाँकी एकाइ)' : 'Second House (Remaining)'}
                     </span>
                     <span className="text-xs font-bold text-slate-900 bg-white px-2 py-0.5 rounded-full">
-                      {NEP_NUMERALS[frame2Count]} / १०
+                      {NEP_NUMERALS[frame2Count]} / 10
                     </span>
                   </div>
 
@@ -568,22 +563,22 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                     {language === 'np' ? 'समीकरण:' : 'Equation:'}
                   </span>
                   <span className="text-2xl font-black text-slate-900">
-                    १० + {NEP_NUMERALS[frame2Count]} ={' '}
+                    10 + {NEP_NUMERALS[frame2Count]} ={' '}
                     <span className="text-amber-700">{NEP_NUMERALS[currentProb.sum]}</span>
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2 text-xs">
                   <span className="px-3 py-1 rounded-xl bg-rose-500/20 text-rose-700 font-bold border border-rose-500/40">
-                    {NEP_NUMERALS[currentProb.a]} रातो
+                    {NEP_NUMERALS[currentProb.a]} red
                   </span>
                   <span>+</span>
                   <span className="px-3 py-1 rounded-xl bg-sky-500/20 text-sky-700 font-bold border border-sky-500/40">
-                    {NEP_NUMERALS[currentProb.b]} नीलो
+                    {NEP_NUMERALS[currentProb.b]} blue
                   </span>
                   <span>=</span>
                   <span className="px-3 py-1 rounded-xl bg-amber-500/20 text-amber-700 font-black border border-amber-500/40">
-                    {NEP_NUMERALS[currentProb.sum]} जम्मा
+                    {NEP_NUMERALS[currentProb.sum]} total
                   </span>
                 </div>
               </div>
@@ -600,10 +595,10 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-amber-700 tracking-wider">
-                    {language === 'np' ? '३ समूहको रङ्गीन ब्लक जोड' : 'Three Group Color Addition'}
+                    {language === 'np' ? '3 समूहको रङ्गीन ब्लक जोड' : 'Three Group Color Addition'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
-                    {NEP_NUMERALS[currentThree.a]} (रातो) + {NEP_NUMERALS[currentThree.b]} (नीलो) + {NEP_NUMERALS[currentThree.c!]} (पहेंलो) = {NEP_NUMERALS[currentThree.sum]}
+                    {NEP_NUMERALS[currentThree.a]} (red) + {NEP_NUMERALS[currentThree.b]} (blue) + {NEP_NUMERALS[currentThree.c!]} (yellow) = {NEP_NUMERALS[currentThree.sum]}
                   </h3>
                 </div>
 
@@ -753,7 +748,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                   </h3>
                   <p className="text-slate-500 text-xs mt-1">
                     {language === 'np'
-                      ? 'तपाईंले दश-कोठे घरमा रङ्गीन ब्लकहरू भरेर २० सम्मको जोड गर्न सिक्नुभयो।'
+                      ? 'तपाईंले दश-कोठे घरमा रङ्गीन ब्लकहरू भरेर 20 सम्मको जोड गर्न सिक्नुभयो।'
                       : 'You have mastered ten-frame houses and block addition up to 20.'}
                   </p>
                 </div>

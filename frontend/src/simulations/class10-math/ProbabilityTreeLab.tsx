@@ -88,41 +88,41 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
         'P(A ∩ B) = 0.5, P(A ∪ B) = 1',
       ],
       optionsNp: [
-        'P(A ∩ B) = ०, P(A ∪ B) = P(A) + P(B)',
-        'P(A ∩ B) = १, P(A ∪ B) = P(A) × P(B)',
+        'P(A ∩ B) = 0, P(A ∪ B) = P(A) + P(B)',
+        'P(A ∩ B) = 1, P(A ∪ B) = P(A) × P(B)',
         'P(A ∩ B) = P(A), P(A ∪ B) = P(A) - P(B)',
-        'P(A ∩ B) = ०.५, P(A ∪ B) = १',
+        'P(A ∩ B) = 0.5, P(A ∪ B) = 1',
       ],
       correct: 0,
       hintEn: 'Mutually exclusive events cannot happen together (A ∩ B = ∅), so P(A ∩ B) = 0 and P(A ∪ B) = P(A) + P(B).',
-      hintNp: 'पारस्परिक निषेधक घटनाहरू एकसाथ घट्न सक्दैनन् (A ∩ B = ∅), त्यसैले P(A ∩ B) = ० र P(A ∪ B) = P(A) + P(B) हुन्छ।',
+      hintNp: 'पारस्परिक निषेधक घटनाहरू एकसाथ घट्न सक्दैनन् (A ∩ B = ∅), त्यसैले P(A ∩ B) = 0 र P(A ∪ B) = P(A) + P(B) हुन्छ।',
     },
     {
       qEn: 'A bag has 4 Red and 6 Black balls. Two balls are drawn one after another without replacement. What is the probability that both are Red?',
-      qNp: 'एउटा झोलामा ४ रातो र ६ कालो बलहरू छन्। पुन: नराखी (Without replacement) दुईवटा बल पालैपालो झिक्दा दुवै रातो पर्ने सम्भाव्यता कति हुन्छ?',
+      qNp: 'एउटा झोलामा 4 रातो र 6 कालो बलहरू छन्। पुन: नराखी (Without replacement) दुईpcs बल पालैपालो झिक्दा दुवै रातो पर्ने सम्भाव्यता कति हुन्छ?',
       options: ['(4/10) × (3/9) = 12/90 = 2/15', '(4/10) × (4/10) = 16/100', '4/10 + 3/9', '4/10'],
-      optionsNp: ['(४/१०) × (३/९) = १२/९० = २/१५', '(४/१०) × (४/१०) = १६/१००', '४/१० + ३/९', '४/१०'],
+      optionsNp: ['(4/10) × (3/9) = 12/90 = 2/15', '(4/10) × (4/10) = 16/100', '4/10 + 3/9', '4/10'],
       correct: 0,
       hintEn: 'First draw: P(R1) = 4/10. Second draw without replacement: P(R2|R1) = 3/9. P(R1 ∩ R2) = 4/10 × 3/9 = 2/15.',
-      hintNp: 'पहिलो पटकमा P(R₁) = ४/१०। सट्टा नदिई दोस्रो पटकमा रातो ३ वटा र कुल ९ वटा बाँकी रहन्छन्: P(R₂|R₁) = ३/९। गुणन गर्दा २/१५।',
+      hintNp: 'R₁) = 3/9। गुणन गर्दा 2/15।',
     },
     {
       qEn: 'In tossing three fair coins simultaneously, how many total possible outcomes exist in the sample space S?',
-      qNp: 'तीनवटा सिक्का एकसाथ उफार्दा नमुना क्षेत्र S मा कुल कतिवटा सम्भावित परिणामहरू हुन्छन्?',
+      qNp: 'तीनpcs सिक्का एकसाथ उफार्दा नमुना क्षेत्र S मा कुल कतिpcs सम्भावित परिणामहरू हुन्छन्?',
       options: ['8 outcomes (2³)', '6 outcomes', '4 outcomes', '9 outcomes'],
-      optionsNp: ['८ वटा (२³)', '६ वटा', '४ वटा', '९ वटा'],
+      optionsNp: ['8 pcs (2³)', '6 pcs', '4 pcs', '9 pcs'],
       correct: 0, // 2^3 = 8
       hintEn: 'Each coin has 2 outcomes. For 3 coins: 2 × 2 × 2 = 8 outcomes (HHH, HHT, HTH, HTT, THH, THT, TTH, TTT).',
-      hintNp: 'प्रत्येक सिक्कामा २ परिणाम हुन्छन्। ३ वटा सिक्कामा: २ × २ × २ = ८ वटा परिणामहरू हुन्छन्।',
+      hintNp: 'प्रत्येक सिक्कामा 2 परिणाम हुन्छन्। 3 pcs सिक्कामा: 2 × 2 × 2 = 8 pcs परिणामहरू हुन्छन्।',
     },
     {
       qEn: 'From a standard deck of 52 cards, what is the probability of drawing a King OR a Spade (non-mutually exclusive)?',
-      qNp: '५२ पत्तीको तासको गड्डीबाट एउटा तास थुत्दा राजा (King) वा सुरत (Spade) पर्ने सम्भाव्यता कति हुन्छ?',
+      qNp: '52 पत्तीको तासको गड्डीबाट एउटा तास थुत्दा राजा (King) वा सुरत (Spade) पर्ने सम्भाव्यता कति हुन्छ?',
       options: ['16/52 = 4/13', '17/52', '13/52', '4/52'],
-      optionsNp: ['१६/५२ = ४/१३', '१७/५२', '१३/५२', '४/५२'],
+      optionsNp: ['16/52 = 4/13', '17/52', '13/52', '4/52'],
       correct: 0, // P(King) + P(Spade) - P(King of Spades) = 4/52 + 13/52 - 1/52 = 16/52 = 4/13
       hintEn: 'P(K ∪ S) = P(K) + P(S) - P(K ∩ S) = 4/52 + 13/52 - 1/52 = 16/52 = 4/13.',
-      hintNp: 'राजा ४ वटा, सुरत १३ वटा, र दुवै साझा (सुरतको राजा) १ वटा: P(K ∪ S) = ४/५२ + १३/५२ - १/५२ = १६/५२ = ४/१३।',
+      hintNp: 'राजा 4 pcs, सुरत 13 pcs, र दुवै साझा (सुरतको राजा) 1 pcs: P(K ∪ S) = 4/52 + 13/52 - 1/52 = 16/52 = 4/13।',
     },
   ];
 
@@ -152,7 +152,7 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ १४: सम्भाव्यता (Probability) प्रयोगशालामा स्वागत छ! यहाँ नमुना क्षेत्र, पारस्परिक निषेधक घटनाहरू, सट्टा दिएर/नदिएर गरिने परीक्षण र वृक्ष चित्र (Tree Diagram) प्रत्यक्ष अन्वेषण गर्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 14: सम्भाव्यता (Probability) प्रयोगशालामा स्वागत छ! यहाँ नमुना क्षेत्र, पारस्परिक निषेधक घटनाहरू, सट्टा दिएर/नदिएर गरिने परीक्षण र वृक्ष चित्र (Tree Diagram) प्रत्यक्ष अन्वेषण गर्नुहोस्!',
         'Welcome to Grade 10 Unit 14: Probability Experiment & Tree Diagram Lab! Explore sample spaces, mutually exclusive events, with/without replacement conditions, and interactive tree diagrams!'
       )}
     >
@@ -196,10 +196,10 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
               </span>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { id: 'coin1', np: '१ सिक्का (1 Coin)', en: '1 Coin' },
-                  { id: 'coin2', np: '२ सिक्का (2 Coins)', en: '2 Coins' },
-                  { id: 'coin3', np: '३ सिक्का (3 Coins)', en: '3 Coins' },
-                  { id: 'die1', np: '१ पासा (1 Die)', en: '1 Die' },
+                  { id: 'coin1', np: '1 सिक्का (1 Coin)', en: '1 Coin' },
+                  { id: 'coin2', np: '2 सिक्का (2 Coins)', en: '2 Coins' },
+                  { id: 'coin3', np: '3 सिक्का (3 Coins)', en: '3 Coins' },
+                  { id: 'die1', np: '1 पासा (1 Die)', en: '1 Die' },
                 ].map((exp) => (
                   <button
                     key={exp.id}
@@ -223,43 +223,43 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
             <div className="p-5 bg-teal-50 border border-teal-200 rounded-xl space-y-3 font-mono">
               {experimentType === 'coin1' && (
                 <div>
-                  <div className="text-xs font-bold text-teal-800 font-sans mb-1">१ सिक्का उफार्दा नमुना क्षेत्र (S):</div>
-                  <div className="text-xl font-bold text-[#142D4E]">S = {'{ H, T }'}, n(S) = २</div>
-                  <div className="text-xs text-slate-600 font-sans mt-2">P(शीर्ष H) = १/२ = ०.५, P(पुच्छर T) = १/२ = ०.५</div>
+                  <div className="text-xs font-bold text-teal-800 font-sans mb-1">1 सिक्का उफार्दा नमुना क्षेत्र (S):</div>
+                  <div className="text-xl font-bold text-[#142D4E]">S = {'{ H, T }'}, n(S) = 2</div>
+                  <div className="text-xs text-slate-600 font-sans mt-2">P = 1/2 = 0.5, P = 1/2 = 0.5</div>
                 </div>
               )}
               {experimentType === 'coin2' && (
                 <div>
-                  <div className="text-xs font-bold text-teal-800 font-sans mb-1">२ सिक्का एकसाथ उफार्दा नमुना क्षेत्र (S):</div>
-                  <div className="text-xl font-bold text-[#142D4E]">S = {'{ HH, HT, TH, TT }'}, n(S) = ४</div>
+                  <div className="text-xs font-bold text-teal-800 font-sans mb-1">Sample space (S) when 2 coins are tossed together:</div>
+                  <div className="text-xl font-bold text-[#142D4E]">S = {'{ HH, HT, TH, TT }'}, n(S) = 4</div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3 font-sans text-xs">
-                    <div className="p-2.5 bg-white rounded border text-center font-bold text-teal-700">HH (२ वटा H): P = १/४</div>
-                    <div className="p-2.5 bg-white rounded border text-center font-bold text-teal-700">HT (१ H, १ T): P = १/४</div>
-                    <div className="p-2.5 bg-white rounded border text-center font-bold text-teal-700">TH (१ T, १ H): P = १/४</div>
-                    <div className="p-2.5 bg-white rounded border text-center font-bold text-teal-700">TT (२ वटा T): P = १/४</div>
+                    <div className="p-2.5 bg-white rounded border text-center font-bold text-teal-700">HH: P = 1/4</div>
+                    <div className="p-2.5 bg-white rounded border text-center font-bold text-teal-700">HT (1 H, 1 T): P = 1/4</div>
+                    <div className="p-2.5 bg-white rounded border text-center font-bold text-teal-700">TH (1 T, 1 H): P = 1/4</div>
+                    <div className="p-2.5 bg-white rounded border text-center font-bold text-teal-700">TT: P = 1/4</div>
                   </div>
                 </div>
               )}
               {experimentType === 'coin3' && (
                 <div>
-                  <div className="text-xs font-bold text-teal-800 font-sans mb-1">३ सिक्का एकसाथ उफार्दा नमुना क्षेत्र (S = २³):</div>
+                  <div className="text-xs font-bold text-teal-800 font-sans mb-1">3 सिक्का एकसाथ उफार्दा नमुना क्षेत्र (S = 2³):</div>
                   <div className="text-base font-bold text-[#142D4E] break-words">
-                    S = {'{ HHH, HHT, HTH, HTT, THH, THT, TTH, TTT }'}, n(S) = ८
+                    S = {'{ HHH, HHT, HTH, HTT, THH, THT, TTH, TTT }'}, n(S) = 8
                   </div>
                   <div className="p-3 bg-white rounded border font-sans text-xs text-slate-700 mt-2 space-y-1">
-                    <div>• कम्तीमा २ वटा H आउने: {'{ HHH, HHT, HTH, THH }'} ⟹ P = ४/८ = १/२</div>
-                    <div>• ठिक १ वटा T आउने: {'{ HHT, HTH, THH }'} ⟹ P = ३/८</div>
+                    <div>• कम्तीमा 2 pcs H आउने: {'{ HHH, HHT, HTH, THH }'} ⟹ P = 4/8 = 1/2</div>
+                    <div>• ठिक 1 pcs T आउने: {'{ HHT, HTH, THH }'} ⟹ P = 3/8</div>
                   </div>
                 </div>
               )}
               {experimentType === 'die1' && (
                 <div>
-                  <div className="text-xs font-bold text-teal-800 font-sans mb-1">१ पासा (Die) गुल्ट्याउँदा नमुना क्षेत्र:</div>
-                  <div className="text-xl font-bold text-[#142D4E]">S = {'{ १, २, ३, ४, ५, ६ }'}, n(S) = ६</div>
+                  <div className="text-xs font-bold text-teal-800 font-sans mb-1">1 पासा (Die) गुल्ट्याउँदा नमुना क्षेत्र:</div>
+                  <div className="text-xl font-bold text-[#142D4E]">S = {'{ 1, 2, 3, 4, 5, 6 }'}, n(S) = 6</div>
                   <div className="p-3 bg-white rounded border font-sans text-xs text-slate-700 mt-2 space-y-1">
-                    <div>• जोर संख्या आउने {'{ २, ४, ६ }'} ⟹ P = ३/६ = १/२</div>
-                    <div>• बिजोर संख्या आउने {'{ १, ३, ५ }'} ⟹ P = ३/६ = १/२</div>
-                    <div>• रूढ संख्या (Prime) आउने {'{ २, ३, ५ }'} ⟹ P = ३/६ = १/२</div>
+                    <div>• जोर संख्या आउने {'{ 2, 4, 6 }'} ⟹ P = 3/6 = 1/2</div>
+                    <div>• बिजोर संख्या आउने {'{ 1, 3, 5 }'} ⟹ P = 3/6 = 1/2</div>
+                    <div>• रूढ संख्या (Prime) आउने {'{ 2, 3, 5 }'} ⟹ P = 3/6 = 1/2</div>
                   </div>
                 </div>
               )}
@@ -279,7 +279,7 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
                   eventScenario === 'die_even_odd' ? 'bg-[#167C80] text-white border-[#167C80]' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('१) पासामा जोर र बिजोर (पारस्परिक निषेधक)', '1) Die: Even & Odd (Mutually Exclusive)')}
+                {L('1) पासामा जोर र बिजोर (पारस्परिक निषेधक)', '1) Die: Even & Odd (Mutually Exclusive)')}
               </button>
               <button
                 onClick={() => setEventScenario('cards_king_spade')}
@@ -287,7 +287,7 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
                   eventScenario === 'cards_king_spade' ? 'bg-[#167C80] text-white border-[#167C80]' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('२) तासको गड्डीमा राजा र सुरत (गैर-निषेधक)', '2) Cards: King & Spade (Non-Exclusive)')}
+                {L('2) तासको गड्डीमा राजा र सुरत (गैर-निषेधक)', '2) Cards: King & Spade (Non-Exclusive)')}
               </button>
             </div>
 
@@ -296,13 +296,13 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
                 <span className="font-bold text-[#142D4E] font-sans block text-sm">
                   {L('पारस्परिक निषेधक घटनाहरू (Mutually Exclusive: A ∩ B = ∅):', 'Mutually Exclusive (A ∩ B = ∅):')}
                 </span>
-                <div>A = जोर संख्या आउने = {'{ २, ४, ६ }'} ⟹ n(A) = ३, P(A) = ३/६</div>
-                <div>B = बिजोर संख्या आउने = {'{ १, ३, ५ }'} ⟹ n(B) = ३, P(B) = ३/६</div>
+                <div>A = getting an even number = {'{ 2, 4, 6 }'} ⟹ n(A) = 3, P(A) = 3/6</div>
+                <div>B = getting an odd number = {'{ 1, 3, 5 }'} ⟹ n(B) = 3, P(B) = 3/6</div>
                 <div className="p-2.5 bg-white rounded border text-teal-800 font-bold">
-                  A ∩ B = ∅ (कुनै साझा सदस्य छैन) ⟹ P(A ∩ B) = ०
+                  A ∩ B = ∅ (no common member) ⟹ P(A ∩ B) = 0
                 </div>
                 <div className="text-base font-bold text-teal-900 font-sans pt-1">
-                  P(A ∪ B) = P(A) + P(B) = ३/६ + ३/६ = ६/६ = १ (निश्चित घटना)
+                  P(A ∪ B) = P(A) + P(B) = 3/6 + 3/6 = 6/6 = 1
                 </div>
               </div>
             ) : (
@@ -310,13 +310,13 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
                 <span className="font-bold text-amber-900 font-sans block text-sm">
                   {L('पारस्परिक गैर-निषेधक घटनाहरू (Non-Mutually Exclusive: A ∩ B ≠ ∅):', 'Non-Mutually Exclusive (A ∩ B ≠ ∅):')}
                 </span>
-                <div>A = राजा पर्ने (Kings) = ४ वटा ⟹ P(A) = ४/५२</div>
-                <div>B = सुरत पर्ने (Spades) = १३ वटा ⟹ P(B) = १३/५२</div>
+                <div>A = राजा पर्ने (Kings) = 4 pcs ⟹ P(A) = 4/52</div>
+                <div>B = सुरत पर्ने (Spades) = 13 pcs ⟹ P(B) = 13/52</div>
                 <div className="p-2.5 bg-white rounded border text-amber-800 font-bold">
-                  A ∩ B = {'{ सुरतको राजा }'} = १ वटा ⟹ P(A ∩ B) = १/५२ (साझा सदस्य छ!)
+                  A ∩ B = {'{ सुरतको राजा }'} = 1 pcs ⟹ P(A ∩ B) = 1/52
                 </div>
                 <div className="text-base font-bold text-amber-900 font-sans pt-1">
-                  P(A ∪ B) = P(A) + P(B) - P(A ∩ B) = ४/५२ + १३/५२ - १/५२ = १६/५२ = ४/१३
+                  P(A ∪ B) = P(A) + P(B) - P(A ∩ B) = 4/52 + 13/52 - 1/52 = 16/52 = 4/13
                 </div>
               </div>
             )}
@@ -334,7 +334,7 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
               </h4>
               <p className="text-xs text-slate-600">
                 {L(
-                  'झोलामा ५ रातो (R) र ७ हरियो (G) गरी कुल १२ वटा बलहरू छन्।',
+                  'झोलामा 5 रातो (R) र 7 हरियो (G) गरी कुल 12 pcs बलहरू छन्।',
                   'A bag contains 5 Red (R) and 7 Green (G) balls (Total = 12).'
                 )}
               </p>
@@ -363,10 +363,10 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
             {/* Pair Selector */}
             <div className="flex flex-wrap gap-2">
               {[
-                { id: 'RR', label: 'दुवै रातो (RR)' },
-                { id: 'RG', label: 'पहिलो रातो, दोस्रो हरियो (RG)' },
-                { id: 'GR', label: 'पहिलो हरियो, दोस्रो रातो (GR)' },
-                { id: 'GG', label: 'दुवै हरियो (GG)' },
+                { id: 'RR', label: 'Both red (RR)' },
+                { id: 'RG', label: 'First red, second green (RG)' },
+                { id: 'GR', label: 'First green, second red (GR)' },
+                { id: 'GG', label: 'Both green (GG)' },
               ].map((p) => (
                 <button
                   key={p.id}
@@ -394,8 +394,8 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
                 </span>
               </div>
 
-              <div>१) पहिलो बल झिक्दा सम्भाव्यता = {fmt(pFirst.toFixed(3))}</div>
-              <div>२) दोस्रो बल झिक्दा सम्भाव्यता = {fmt(pSecond.toFixed(3))} {!isWithReplacement && '(कुल बल ११ मा घट्यो!)'}</div>
+              <div>1) Probability when drawing the first ball = {fmt(pFirst.toFixed(3))}</div>
+              <div>2) Probability when drawing the second ball = {fmt(pSecond.toFixed(3))} {!isWithReplacement && ''}</div>
               <div className="text-base font-bold text-teal-900 pt-1">
                 P({selectedPair}) = {fmt(pFirst.toFixed(3))} × {fmt(pSecond.toFixed(3))} ={' '}
                 <strong className="text-emerald-700">{fmt(combinedProb.toFixed(4))}</strong>
@@ -405,12 +405,12 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
         )}
 
         {/* ══════════════════════════════════════════════════════════════════════════
-            TAB 4: TREE DIAGRAM (वृक्ष चित्र)
+            TAB 4: TREE DIAGRAM
         ══════════════════════════════════════════════════════════════════════════ */}
         {activeTab === 'treeDiagram' && (
           <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
             <h4 className="font-bold text-sm text-[#142D4E]">
-              {L('२ सिक्का उफार्दा वृक्ष चित्र (Tree Diagram for 2 Coins):', 'Tree Diagram for 2 Coins:')}
+              {L('2 सिक्का उफार्दा वृक्ष चित्र (Tree Diagram for 2 Coins):', 'Tree Diagram for 2 Coins:')}
             </h4>
 
             {/* SVG Tree Diagram */}
@@ -418,14 +418,14 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
               <svg width={480} height={220} viewBox="0 0 480 220" className="max-w-full font-mono">
                 {/* Root */}
                 <circle cx={40} cy={110} r={6} fill="#FFFFFF" />
-                <text x={35} y={130} fill="#94A3B8" fontSize="10">शुरु</text>
+                <text x={35} y={130} fill="#94A3B8" fontSize="10">Start</text>
 
                 {/* Level 1 Branches (First Toss) */}
                 <line x1={40} y1={110} x2={160} y2={60} stroke="#2DD4BF" strokeWidth={2} />
-                <text x={90} y={75} fill="#5EEAD4" fontSize="10">H (१/२)</text>
+                <text x={90} y={75} fill="#5EEAD4" fontSize="10">H (1/2)</text>
 
                 <line x1={40} y1={110} x2={160} y2={160} stroke="#F59E0B" strokeWidth={2} />
-                <text x={90} y={150} fill="#FDE68A" fontSize="10">T (१/२)</text>
+                <text x={90} y={150} fill="#FDE68A" fontSize="10">T (1/2)</text>
 
                 {/* Level 1 Nodes */}
                 <circle cx={160} cy={60} r={5} fill="#2DD4BF" />
@@ -436,29 +436,29 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
 
                 {/* Level 2 Branches from H */}
                 <line x1={160} y1={60} x2={300} y2={30} stroke="#2DD4BF" strokeWidth={1.5} />
-                <text x={220} y={40} fill="#5EEAD4" fontSize="10">H (१/२)</text>
+                <text x={220} y={40} fill="#5EEAD4" fontSize="10">H (1/2)</text>
 
                 <line x1={160} y1={60} x2={300} y2={90} stroke="#F59E0B" strokeWidth={1.5} />
-                <text x={220} y={85} fill="#FDE68A" fontSize="10">T (१/२)</text>
+                <text x={220} y={85} fill="#FDE68A" fontSize="10">T (1/2)</text>
 
                 {/* Level 2 Branches from T */}
                 <line x1={160} y1={160} x2={300} y2={130} stroke="#2DD4BF" strokeWidth={1.5} />
-                <text x={220} y={140} fill="#5EEAD4" fontSize="10">H (१/२)</text>
+                <text x={220} y={140} fill="#5EEAD4" fontSize="10">H (1/2)</text>
 
                 <line x1={160} y1={160} x2={300} y2={190} stroke="#F59E0B" strokeWidth={1.5} />
-                <text x={220} y={185} fill="#FDE68A" fontSize="10">T (१/२)</text>
+                <text x={220} y={185} fill="#FDE68A" fontSize="10">T (1/2)</text>
 
                 {/* Outcomes & Probabilities */}
-                <text x={340} y={34} fill="#FFFFFF" fontSize="11" fontWeight="bold">HH ⟹ P = १/४ (०.२५)</text>
-                <text x={340} y={94} fill="#FFFFFF" fontSize="11" fontWeight="bold">HT ⟹ P = १/४ (०.२५)</text>
-                <text x={340} y={134} fill="#FFFFFF" fontSize="11" fontWeight="bold">TH ⟹ P = १/४ (०.२५)</text>
-                <text x={340} y={194} fill="#FFFFFF" fontSize="11" fontWeight="bold">TT ⟹ P = १/४ (०.२५)</text>
+                <text x={340} y={34} fill="#FFFFFF" fontSize="11" fontWeight="bold">HH ⟹ P = 1/4 (0.25)</text>
+                <text x={340} y={94} fill="#FFFFFF" fontSize="11" fontWeight="bold">HT ⟹ P = 1/4 (0.25)</text>
+                <text x={340} y={134} fill="#FFFFFF" fontSize="11" fontWeight="bold">TH ⟹ P = 1/4 (0.25)</text>
+                <text x={340} y={194} fill="#FFFFFF" fontSize="11" fontWeight="bold">TT ⟹ P = 1/4 (0.25)</text>
               </svg>
             </div>
 
             <p className="text-xs text-slate-600 font-sans">
               {L(
-                'वृक्ष चित्रले क्रमिक रूपमा हुने परीक्षणका सबै सम्भावित शाखाहरू र तिनीहरूको संयुक्त सम्भाव्यता देखाउँछ। सबै शाखाहरूको कुल योगफल सधैँ १ (१/४ + १/४ + १/४ + १/४ = १) हुन्छ।',
+                'वृक्ष चित्रले क्रमिक रूपमा हुने परीक्षणका सबै सम्भावित शाखाहरू र तिनीहरूको संयुक्त सम्भाव्यता देखाउँछ। सबै शाखाहरूको कुल योगफल सधैँ 1 (1/4 + 1/4 + 1/4 + 1/4 = 1) हुन्छ।',
                 'The tree diagram visualizes all sequential outcome branches. The sum of all branch probabilities always equals 1.'
               )}
             </p>
@@ -492,21 +492,21 @@ export const ProbabilityTreeLab: React.FC<SimProps> = ({ onBackToLibrary, onBack
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono">
               <div className="p-4 bg-teal-50 border border-teal-200 rounded-xl space-y-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-teal-800 font-sans block">
-                  सैद्धान्तिक सम्भाव्यता (Theoretical)
+                  Theoretical probability
                 </span>
-                <div className="text-2xl font-black text-[#142D4E]">P(H) = ०.५०० (५०%)</div>
-                <div className="text-xs text-slate-500 font-sans">गणितीय सूत्र n(H)/n(S) अनुसार ठिक १/२</div>
+                <div className="text-2xl font-black text-[#142D4E]">P(H) = 0.500 (50%)</div>
+                <div className="text-xs text-slate-500 font-sans">Exactly 1/2 by the formula n(H)/n(S)</div>
               </div>
 
               <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl space-y-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-amber-900 font-sans block">
-                  प्रयोगात्मक सम्भाव्यता (Empirical: {fmt(numTrials)} परीक्षण)
+                  Experimental probability (empirical: {fmt(numTrials)} trials)
                 </span>
                 <div className="text-2xl font-black text-amber-800">
                   {fmt((headsCount / numTrials).toFixed(3))} ({fmt(((headsCount / numTrials) * 100).toFixed(1))}%)
                 </div>
                 <div className="text-xs text-slate-500 font-sans">
-                  {fmt(headsCount)} पटक H आयो (परीक्षण संख्या बढ्दा सैद्धान्तिक ०.५ को नजिक पुग्छ)
+                  {fmt(headsCount)} times H came up (as the number of trials grows, it approaches the theoretical 0.5)
                 </div>
               </div>
             </div>

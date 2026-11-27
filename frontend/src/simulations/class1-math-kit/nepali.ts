@@ -1,7 +1,7 @@
 /**
  * Shared words and numbers for the Class 1 Mathematics simulations (English + Nepali).
  */
-export const NP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+export const NP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 export const toNp = (n: number | string) => String(n).replace(/\d/g, (d) => NP_DIGITS[Number(d)]);
 
 const EN_SMALL = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];

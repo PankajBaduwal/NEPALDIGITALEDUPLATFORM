@@ -1,7 +1,7 @@
 /**
  * AngleExperimentVerificationLab.tsx
- * Grade 7 Mathematics – Lesson 13: LINES AND ANGLES (रेखाहरू र कोणहरू)
- * Simulation 4: Angle Experiment and Verification Lab (प्रयोगात्मक परीक्षण प्रयोगशाला)
+ * Grade 7 Mathematics – Lesson 13: LINES AND ANGLES
+ * Simulation 4: Angle Experiment and Verification Lab
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 196-204)
  */
 import React, { useState } from 'react';
@@ -12,24 +12,24 @@ import { Eye, CheckCircle2, RotateCcw, Plus, Check } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'प्रयोगात्मक विधिबाट शीर्षाभिमुख कोणहरू बराबर हुन्छन् भनी प्रमाणित गर्न कम्तीमा कतिवटा फरक चित्रहरू बनाइ परीक्षण गर्नुपर्छ?',
+    np: 'प्रयोगात्मक विधिबाट शीर्षाभिमुख कोणहरू बराबर हुन्छन् भनी प्रमाणित गर्न कम्तीमा कतिpcs फरक चित्रहरू बनाइ परीक्षण गर्नुपर्छ?',
     en: 'To experimentally verify that vertically opposite angles are equal, at least how many figures should be drawn and tested?',
     options: [
-      { key: 'A', label: 'कम्तीमा २ वा ३ वटा फरक चित्रहरू' },
-      { key: 'B', label: 'एउटा मात्र' },
-      { key: 'C', label: 'कुनै पनि चित्र आवश्यक छैन' },
-      { key: 'D', label: '१० वटा' },
+      { key: 'A', label: 'At least 2 or 3 different figures' },
+      { key: 'B', label: 'Only one' },
+      { key: 'C', label: 'No figure is needed' },
+      { key: 'D', label: '10 figures' },
     ],
     answer: 'A',
   },
   {
-    np: 'सीधा रेखामा बनेका दुई सन्निकट कोणहरूको नाप जोड्दा सधैं कति डिग्री हुन्छ?',
+    np: 'सीधा रेखामा बनेका दुई सन्निकट कोणहरूको नाप जोड्दा सधैं कति degrees हुन्छ?',
     en: 'What is always the sum of two adjacent angles formed on a straight line?',
     options: [
-      { key: 'A', label: '१८०° (ऋजु कोण)' },
-      { key: 'B', label: '९०°' },
-      { key: 'C', label: '३६०°' },
-      { key: 'D', label: '१२०°' },
+      { key: 'A', label: '180° (straight angle)' },
+      { key: 'B', label: '90°' },
+      { key: 'C', label: '360°' },
+      { key: 'D', label: '120°' },
     ],
     answer: 'A',
   },
@@ -37,21 +37,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'एउटा बिन्दुको वरिपरि बनेका सबै सन्निकट कोणहरूको योगफल कति हुन्छ?',
     en: 'What is the sum of all adjacent angles formed around a single point (Complete Angle)?',
     options: [
-      { key: 'A', label: '३६०° (पूर्ण कोण / Complete Angle)' },
-      { key: 'B', label: '१८०°' },
-      { key: 'C', label: '९०°' },
-      { key: 'D', label: '२७०°' },
+      { key: 'A', label: '360° (complete angle)' },
+      { key: 'B', label: '180°' },
+      { key: 'C', label: '90°' },
+      { key: 'D', label: '270°' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि सीधा रेखामा बनेका दुई सन्निकट कोणमध्ये एउटा ७०° छ भने अर्को कोण कति हुन्छ?',
+    np: 'यदि सीधा रेखामा बनेका दुई सन्निकट कोणमध्ये एउटा 70° छ भने अर्को कोण कति हुन्छ?',
     en: 'If one of two adjacent angles on a straight line is 70°, what is the other angle?',
     options: [
-      { key: 'A', label: '११०° (१८०° - ७०°)' },
-      { key: 'B', label: '२०°' },
-      { key: 'C', label: '७०°' },
-      { key: 'D', label: '२९०°' },
+      { key: 'A', label: '110° (180° - 70°)' },
+      { key: 'B', label: '20°' },
+      { key: 'C', label: '70°' },
+      { key: 'D', label: '290°' },
     ],
     answer: 'A',
   },
@@ -141,7 +141,7 @@ export const AngleExperimentVerificationLab: React.FC<{ onBackToLibrary?: () => 
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'साथीहरू! पाठ्यपुस्तकका ३ वटा मुख्य प्रयोगात्मक कार्यहरू (Experiments) प्रत्यक्ष नापेर र तालिका भरेर प्रमाणित गरौँ!',
+        'साथीहरू! पाठ्यपुस्तकका 3 pcs मुख्य प्रयोगात्मक कार्यहरू (Experiments) प्रत्यक्ष नापेर र तालिका भरेर प्रमाणित गरौँ!',
         'Friends! Let us experimentally verify the 3 major geometric angle theorems directly with measurement tables!'
       )}
     >
@@ -151,21 +151,21 @@ export const AngleExperimentVerificationLab: React.FC<{ onBackToLibrary?: () => 
           {[
             {
               id: 'vert_opposite',
-              titleNp: 'प्रयोग १: शीर्षाभिमुख कोणहरू बराबर',
+              titleNp: 'प्रयोग 1: शीर्षाभिमुख कोणहरू बराबर',
               titleEn: 'Exp 1: Vertically Opposite Equal',
               descNp: 'आपसमा काटिने रेखाहरूको परीक्षण',
               descEn: 'Intersecting straight lines',
             },
             {
               id: 'straight_line',
-              titleNp: 'प्रयोग २: ऋजु रेखाका सन्निकट कोण = १८०°',
+              titleNp: 'प्रयोग 2: ऋजु रेखाका सन्निकट कोण = 180°',
               titleEn: 'Exp 2: Straight Line Adjacent = 180°',
               descNp: 'सीधा रेखामा बनेका कोणहरूको योग',
               descEn: 'Linear pair adjacent sum',
             },
             {
               id: 'point_complete',
-              titleNp: 'प्रयोग ३: एउटा बिन्दु वरिपरि = ३६०°',
+              titleNp: 'प्रयोग 3: एउटा बिन्दु वरिपरि = 360°',
               titleEn: 'Exp 3: Around a Point = 360°',
               descNp: 'पूर्ण कोणको प्रयोगात्मक परीक्षण',
               descEn: 'Complete turn verification',
@@ -200,7 +200,7 @@ export const AngleExperimentVerificationLab: React.FC<{ onBackToLibrary?: () => 
             <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-2xl">
               <h3 className="text-lg font-bold text-blue-950" style={{ fontFamily: FONT_NP }}>
                 {L(
-                  'प्रयोगात्मक कार्य १: दुईवटा सीधा रेखाहरू आपसमा काटिँदा बन्ने शीर्षाभिमुख कोणहरू बराबर हुन्छन् भनी प्रयोगात्मक रूपमा परीक्षण गर्नुहोस्।',
+                  'प्रयोगात्मक कार्य 1: दुईpcs सीधा रेखाहरू आपसमा काटिँदा बन्ने शीर्षाभिमुख कोणहरू बराबर हुन्छन् भनी प्रयोगात्मक रूपमा परीक्षण गर्नुहोस्।',
                   'Experimental Activity 1: Verify experimentally that vertically opposite angles formed when two straight lines intersect are equal.'
                 )}
               </h3>
@@ -351,7 +351,7 @@ export const AngleExperimentVerificationLab: React.FC<{ onBackToLibrary?: () => 
             <div className="bg-amber-50 border-l-4 border-amber-600 p-4 rounded-r-2xl">
               <h3 className="text-lg font-bold text-amber-950" style={{ fontFamily: FONT_NP }}>
                 {L(
-                  'प्रयोगात्मक कार्य २: सीधा रेखामा बनेका दुई सन्निकट कोणहरूको योगफल १८०° हुन्छ भनी प्रयोगात्मक रूपमा परीक्षण गर्नुहोस्।',
+                  'प्रयोगात्मक कार्य 2: सीधा रेखामा बनेका दुई सन्निकट कोणहरूको योगफल 180° हुन्छ भनी प्रयोगात्मक रूपमा परीक्षण गर्नुहोस्।',
                   'Experimental Activity 2: Verify experimentally that the sum of adjacent angles on a straight line is 180°.'
                 )}
               </h3>
@@ -438,7 +438,7 @@ export const AngleExperimentVerificationLab: React.FC<{ onBackToLibrary?: () => 
                     ∠BOC + ∠AOC = {toNp(sliderAngle)}° + {toNp(180 - sliderAngle)}° = {toNp(180)}°
                   </div>
                   <div className="text-xs text-emerald-700 font-bold">
-                    ✓ {L('सधैं १८०° (ऋजु कोण) प्रमाणित भयो।', 'Always equals 180° (Straight Angle). Verified.')}
+                    ✓ {L('सधैं 180° (straight angle) प्रमाणित भयो।', 'Always equals 180° (Straight Angle). Verified.')}
                   </div>
                 </div>
               </div>
@@ -483,13 +483,13 @@ export const AngleExperimentVerificationLab: React.FC<{ onBackToLibrary?: () => 
             <div className="bg-purple-50 border-l-4 border-purple-600 p-4 rounded-r-2xl">
               <h3 className="text-lg font-bold text-purple-950" style={{ fontFamily: FONT_NP }}>
                 {L(
-                  'प्रयोगात्मक कार्य ३: एउटा बिन्दुको वरिपरि बन्ने सबै सन्निकट कोणहरूको योगफल ३६०° हुन्छ भनी प्रयोगात्मक रूपमा परीक्षण गर्नुहोस्।',
+                  'प्रयोगात्मक कार्य 3: एउटा बिन्दुको वरिपरि बन्ने सबै सन्निकट कोणहरूको योगफल 360° हुन्छ भनी प्रयोगात्मक रूपमा परीक्षण गर्नुहोस्।',
                   'Experimental Activity 3: Verify experimentally that the sum of angles formed around a point is 360° (Complete Angle).'
                 )}
               </h3>
               <p className="text-xs text-purple-800 mt-1">
                 {L(
-                  'विधि: एउटा बिन्दु O बाट चारवटा किरणहरू खिची चारवटै कोण नाप्नुहोस् र तिनीहरूको योगफल ३६०° भएको हेर्नुहोस्।',
+                  'विधि: एउटा बिन्दु O बाट चारpcs किरणहरू खिची चारवटै कोण नाप्नुहोस् र तिनीहरूको योगफल 360° भएको हेर्नुहोस्।',
                   'Method: Draw 4 rays from point O, measure all 4 angles, and verify that their sum equals 360°.'
                 )}
               </p>
@@ -608,7 +608,7 @@ export const AngleExperimentVerificationLab: React.FC<{ onBackToLibrary?: () => 
                     );
                   })()}
                   <div className="text-xs text-purple-700 font-bold">
-                    ✓ {L('पूर्ण कोण (Complete Angle) = ३६०° प्रमाणित भयो।', 'Complete Angle = 360° Verified.')}
+                    ✓ {L('पूर्ण कोण (Complete Angle) = 360° प्रमाणित भयो।', 'Complete Angle = 360° Verified.')}
                   </div>
                 </div>
               </div>
@@ -620,10 +620,10 @@ export const AngleExperimentVerificationLab: React.FC<{ onBackToLibrary?: () => 
                 <thead className="bg-slate-200 text-slate-800 font-bold">
                   <tr>
                     <th className="p-3 border-r border-slate-300">{L('चित्र नं.', 'Fig No.')}</th>
-                    <th className="p-3 border-r border-slate-300">∠१</th>
-                    <th className="p-3 border-r border-slate-300">∠२</th>
-                    <th className="p-3 border-r border-slate-300">∠३</th>
-                    <th className="p-3 border-r border-slate-300">∠४</th>
+                    <th className="p-3 border-r border-slate-300">∠1</th>
+                    <th className="p-3 border-r border-slate-300">∠2</th>
+                    <th className="p-3 border-r border-slate-300">∠3</th>
+                    <th className="p-3 border-r border-slate-300">∠4</th>
                     <th className="p-3">{L('योगफल (Sum = 360°)', 'Sum')}</th>
                   </tr>
                 </thead>

@@ -1,8 +1,8 @@
 /**
  * AdditionPlayground.tsx (Converted to 100% Pure 2D)
- * Simulation 01: Addition Playground up to 20 (जोड खेलमैदान - २० सम्मको जोड)
- * Class 1 Mathematics - Chapter 10: Addition up to 20 (योगफल २० सम्म आउने जोड)
- * Nepal CDC Curriculum Aligned (मेरो गणित, कक्षा १)
+ * Simulation 01: Addition Playground up to 20
+ * Class 1 Mathematics - Chapter 10: Addition up to 20
+ * Nepal CDC Curriculum Aligned
  * 100% Pure 2D Vector & Canvas – Zero WebGL/Three.js.
  */
 import React, { useState } from 'react';
@@ -19,7 +19,7 @@ export const AdditionPlayground: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G1-CH10-01',
     chapter: 10,
-    titleNp: 'योगफल २० सम्म आउने जोड (Addition up to 20)',
+    titleNp: 'योगफल 20 सम्म आउने जोड (Addition up to 20)',
     titleEn: 'Addition up to 20 (Making 10)',
   });
 
@@ -33,42 +33,42 @@ export const AdditionPlayground: React.FC<Props> = ({ onBackToLibrary }) => {
 
   const questions: QuizQuestion[] = [
     {
-      np: '८ + ५ जोड्दा पहिला १० बनाउन ८ मा कति थपिन्छ? (८ + २ = १०, बाँकी ३)',
+      np: '8 + 5 जोड्दा पहिला 10 बनाउन 8 मा कति थपिन्छ?',
       en: 'To solve 8 + 5 by making 10, how many are added to 8 first?',
       options: [
-        { key: '2', label: kit.t('२ (दुई)', '2 (Two)') },
-        { key: '3', label: kit.t('३ (तीन)', '3 (Three)') },
-        { key: '5', label: kit.t('५ (पाँच)', '5 (Five)') },
+        { key: '2', label: kit.t('2', '2 (Two)') },
+        { key: '3', label: kit.t('3', '3 (Three)') },
+        { key: '5', label: kit.t('5', '5 (Five)') },
       ],
       answer: '2',
     },
     {
-      np: '९ + ६ = ?',
+      np: '9 + 6 = ?',
       en: '9 + 6 = ?',
       options: [
-        { key: '15', label: kit.t('१५ (पन्ध्र - Fifteen)', '15 (Fifteen)') },
-        { key: '14', label: kit.t('१४ (चौध)', '14 (Fourteen)') },
-        { key: '16', label: kit.t('१६ (सोह्र)', '16 (Sixteen)') },
+        { key: '15', label: kit.t('15', '15 (Fifteen)') },
+        { key: '14', label: kit.t('14', '14 (Fourteen)') },
+        { key: '16', label: kit.t('16', '16 (Sixteen)') },
       ],
       answer: '15',
     },
     {
-      np: '१० + ७ = ?',
+      np: '10 + 7 = ?',
       en: '10 + 7 = ?',
       options: [
-        { key: '17', label: kit.t('१७ (सत्र)', '17 (Seventeen)') },
-        { key: '16', label: kit.t('१६ (सोह्र)', '16 (Sixteen)') },
-        { key: '18', label: kit.t('१८ (अठार)', '18 (Eighteen)') },
+        { key: '17', label: kit.t('17', '17 (Seventeen)') },
+        { key: '16', label: kit.t('16', '16 (Sixteen)') },
+        { key: '18', label: kit.t('18', '18 (Eighteen)') },
       ],
       answer: '17',
     },
     {
-      np: '७ + ८ = ?',
+      np: '7 + 8 = ?',
       en: '7 + 8 = ?',
       options: [
-        { key: '15', label: kit.t('१५ (पन्ध्र)', '15 (Fifteen)') },
-        { key: '14', label: kit.t('१४ (चौध)', '14 (Fourteen)') },
-        { key: '16', label: kit.t('१६ (सोह्र)', '16 (Sixteen)') },
+        { key: '15', label: kit.t('15', '15 (Fifteen)') },
+        { key: '14', label: kit.t('14', '14 (Fourteen)') },
+        { key: '16', label: kit.t('16', '16 (Sixteen)') },
       ],
       answer: '15',
     },
@@ -80,7 +80,7 @@ export const AdditionPlayground: React.FC<Props> = ({ onBackToLibrary }) => {
       onBack={onBackToLibrary}
       grade={1}
       mascotGreeting={kit.t(
-        '१० बनाएर सजिलै २० सम्मको जोड गर्न सकिन्छ!',
+        '10 बनाएर सजिलै 20 सम्मको जोड गर्न सकिन्छ!',
         'Make 10 first to easily add numbers up to 20!'
       )}
       questions={questions}
@@ -147,10 +147,10 @@ export const AdditionPlayground: React.FC<Props> = ({ onBackToLibrary }) => {
           }}
         >
           <div style={{ fontSize: 13, fontWeight: 800, color: '#166534', marginBottom: 4 }}>
-            💡 {kit.t('१० बनाउने तरिका (Making 10 Method):', 'Making 10 Strategy:')}
+            💡 {kit.t('10 बनाउने तरिका (Making 10 Method):', 'Making 10 Strategy:')}
           </div>
           <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a' }}>
-            {toNp(addendA)} + {toNp(addendB)} = ({toNp(addendA)} + {toNp(needForTen)}) + {toNp(leftoverB)} = १० + {toNp(leftoverB)} = {toNp(total)}
+            {toNp(addendA)} + {toNp(addendB)} = ({toNp(addendA)} + {toNp(needForTen)}) + {toNp(leftoverB)} = 10 + {toNp(leftoverB)} = {toNp(total)}
           </div>
         </div>
 

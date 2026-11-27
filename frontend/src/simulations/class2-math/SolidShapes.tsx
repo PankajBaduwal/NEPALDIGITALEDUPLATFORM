@@ -1,5 +1,5 @@
 /**
- * Lesson 13 · Geometric shapes (ज्यामितीय आकार) — solid shapes
+ * Lesson 13 · Geometric shapes — solid shapes
  * Solid Shapes Workshop — count faces, edges and corners; test if it rolls or slides on a ramp!
  * Pure 2D Implementation for Smart Boards & Desktops.
  */

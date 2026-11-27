@@ -1,6 +1,6 @@
 /**
  * SquareRootDiscoveryLab.tsx
- * Grade 7 Mathematics – Lesson 2: WHOLE NUMBER (पूर्ण सङ्ख्या)
+ * Grade 7 Mathematics – Lesson 2: WHOLE NUMBER
  * Simulation 1: Square and Square Root Discovery Lab (2D + 3D)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 16-24)
  */
@@ -17,14 +17,14 @@ interface SquarePreset {
 }
 
 const SQUARE_PRESETS: SquarePreset[] = [
-  { n: 1, labelNp: '१ × १ = १', labelEn: '1 × 1 = 1' },
-  { n: 2, labelNp: '२ × २ = ४', labelEn: '2 × 2 = 4' },
-  { n: 3, labelNp: '३ × ३ = ९', labelEn: '3 × 3 = 9' },
-  { n: 4, labelNp: '४ × ४ = १६', labelEn: '4 × 4 = 16' },
-  { n: 5, labelNp: '५ × ५ = २५', labelEn: '5 × 5 = 25' },
-  { n: 6, labelNp: '६ × ६ = ३६', labelEn: '6 × 6 = 36' },
-  { n: 7, labelNp: '७ × ७ = ४९', labelEn: '7 × 7 = 49' },
-  { n: 8, labelNp: '८ × ८ = ६४', labelEn: '8 × 8 = 64' },
+  { n: 1, labelNp: '1 × 1 = 1', labelEn: '1 × 1 = 1' },
+  { n: 2, labelNp: '2 × 2 = 4', labelEn: '2 × 2 = 4' },
+  { n: 3, labelNp: '3 × 3 = 9', labelEn: '3 × 3 = 9' },
+  { n: 4, labelNp: '4 × 4 = 16', labelEn: '4 × 4 = 16' },
+  { n: 5, labelNp: '5 × 5 = 25', labelEn: '5 × 5 = 25' },
+  { n: 6, labelNp: '6 × 6 = 36', labelEn: '6 × 6 = 36' },
+  { n: 7, labelNp: '7 × 7 = 49', labelEn: '7 × 7 = 49' },
+  { n: 8, labelNp: '8 × 8 = 64', labelEn: '8 × 8 = 64' },
 ];
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
@@ -32,32 +32,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुनै सङ्ख्यालाई सोही सङ्ख्याले गुणन गर्दा आउने गुणनफललाई के भनिन्छ?',
     en: 'What is the product called when a number is multiplied by itself?',
     options: [
-      { key: 'A', label: 'वर्ग सङ्ख्या (Square Number)' },
-      { key: 'B', label: 'घन सङ्ख्या (Cube Number)' },
-      { key: 'C', label: 'ऋणात्मक सङ्ख्या' },
-      { key: 'D', label: 'अभाज्य सङ्ख्या' },
+      { key: 'A', label: 'Square number' },
+      { key: 'B', label: 'Cube number' },
+      { key: 'C', label: 'Negative number' },
+      { key: 'D', label: 'Prime number' },
     ],
     answer: 'A',
   },
   {
-    np: '६४ को वर्गमूल (√६४) को मान कति हुन्छ?',
+    np: '64 को वर्गमूल (√64) को मान कति हुन्छ?',
     en: 'What is the square root of 64 (√64)?',
     options: [
-      { key: 'A', label: '६' },
-      { key: 'B', label: '७' },
-      { key: 'C', label: '८ (८ × ८ = ६४)' },
-      { key: 'D', label: '१६' },
+      { key: 'A', label: '6' },
+      { key: 'B', label: '7' },
+      { key: 'C', label: '8 (8 × 8 = 64)' },
+      { key: 'D', label: '16' },
     ],
     answer: 'C',
   },
   {
-    np: 'एउटा वर्गाकार बगैँचाको क्षेत्रफल ६२५ वर्ग मिटर छ भने त्यसको लम्बाइ कति मिटर हुन्छ?',
+    np: 'एउटा वर्गाकार बगैँचाको क्षेत्रफल 625 sq m छ भने त्यसको लम्बाइ कति m हुन्छ?',
     en: 'If the area of a square garden is 625 sq. m, what is its side length in meters?',
     options: [
-      { key: 'A', label: '१५ मिटर' },
-      { key: 'B', label: '२० मिटर' },
-      { key: 'C', label: '२५ मिटर (√६२५ = २५)' },
-      { key: 'D', label: '३५ मिटर' },
+      { key: 'A', label: '15 m' },
+      { key: 'B', label: '20 m' },
+      { key: 'C', label: '25 m (√625 = 25)' },
+      { key: 'D', label: '35 m' },
     ],
     answer: 'C',
   },
@@ -65,10 +65,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'तलका मध्ये कुन सङ्ख्या पूर्ण वर्ग सङ्ख्या (Perfect Square) हो?',
     en: 'Which of the following is a perfect square number?',
     options: [
-      { key: 'A', label: '२०' },
-      { key: 'B', label: '५०' },
-      { key: 'C', label: '८१ (९² = ८१)' },
-      { key: 'D', label: '९०' },
+      { key: 'A', label: '20' },
+      { key: 'B', label: '50' },
+      { key: 'C', label: '81 (9² = 81)' },
+      { key: 'D', label: '90' },
     ],
     answer: 'C',
   },
@@ -275,30 +275,16 @@ export const SquareRootDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
           </button>
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#99F6E4' }}>
-              {L('कक्षा ७ • गणित • अध्याय २: पूर्ण सङ्ख्या', 'Class 7 • Math • Chapter 2: Whole Number')}
+              {L('कक्षा 7 • गणित • अध्याय 2: पूर्ण सङ्ख्या', 'Class 7 • Math • Chapter 2: Whole Number')}
             </div>
             <h1 style={{ margin: 0, fontSize: 18, fontWeight: 900 }}>
-              {isNe ? 'वर्ग र वर्गमूल खोजी प्रयोगशाला (२D + ३D)' : 'Square & Square Root Discovery Lab (2D + 3D)'}
+              {isNe ? 'वर्ग र वर्गमूल खोजी प्रयोगशाला (2D + 3D)' : 'Square & Square Root Discovery Lab (2D + 3D)'}
             </h1>
           </div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button
-            onClick={() => kit.setLang(isNe ? 'en' : 'ne')}
-            style={{
-              padding: '6px 12px',
-              borderRadius: 8,
-              border: '1px solid rgba(255,255,255,0.3)',
-              background: 'rgba(255,255,255,0.12)',
-              color: '#FFFFFF',
-              fontWeight: 800,
-              fontSize: 12,
-              cursor: 'pointer',
-            }}
-          >
-            {isNe ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
@@ -307,11 +293,11 @@ export const SquareRootDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0' }}>
           {[
-            { id: 'build', np: '१. वर्ग सङ्ख्या निर्माण (टाइल्स)', en: '1. Build Square Number' },
-            { id: 'explore', np: '२. वर्ग सङ्ख्या अन्वेषण ग्रिड', en: '2. Explore Square Grid' },
-            { id: 'root', np: '३. वर्गमूलको अवधारणा (√)', en: '3. Discover Square Root (√)' },
-            { id: 'land3d', np: '४. ३D वर्गाकार जग्गा र क्षेत्रफल', en: '4. 3D Square Land & Area' },
-            { id: 'quiz', np: '५. अभ्यास र चुनौती', en: '5. Practice & Challenge' },
+            { id: 'build', np: '1. वर्ग सङ्ख्या निर्माण (टाइल्स)', en: '1. Build Square Number' },
+            { id: 'explore', np: '2. वर्ग सङ्ख्या अन्वेषण ग्रिड', en: '2. Explore Square Grid' },
+            { id: 'root', np: '3. वर्गमूलको अवधारणा (√)', en: '3. Discover Square Root (√)' },
+            { id: 'land3d', np: '4. 3D वर्गाकार जग्गा र क्षेत्रफल', en: '4. 3D Square Land & Area' },
+            { id: 'quiz', np: '5. अभ्यास र चुनौती', en: '5. Practice & Challenge' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -343,7 +329,7 @@ export const SquareRootDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('पाठ्यपुस्तक पृष्ठ १६-१८', 'Textbook Pages 16-18')}
+                  {L('पाठ्यपुस्तक पृष्ठ 16-18', 'Textbook Pages 16-18')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                   {L('टाइल्सहरूबाट वर्ग सङ्ख्या निर्माण गर्नुहोस्', 'Build Square Numbers with Tiles')}
@@ -649,7 +635,7 @@ export const SquareRootDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                   {L('पाठ्यपुस्तक उदाहरण: जग्गा र क्षेत्रफल', 'Textbook Example: Land & Area')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-                  {L('३D वर्गाकार बगैँचा / खेलमैदान (क्षेत्रफल = लम्बाइ²)', '3D Square Garden / Playground (Area = Side²)')}
+                  {L('3D वर्गाकार बगैँचा / खेलमैदान (क्षेत्रफल = लम्बाइ²)', '3D Square Garden / Playground (Area = Side²)')}
                 </h3>
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
@@ -693,7 +679,7 @@ export const SquareRootDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
             <div style={{ marginTop: 20, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
               <div style={{ background: '#F8FAFC', padding: 18, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                 <label style={{ fontSize: 13, fontWeight: 800, color: '#1E293B', display: 'block', marginBottom: 8 }}>
-                  {L('वर्गाकार जग्गाको एक भुजाको लम्बाइ (Side length):', 'Side length of square land:')} {isNe ? toNp(landSideLength) : landSideLength} {L('मिटर', 'm')}
+                  {L('वर्गाकार जग्गाको एक भुजाको लम्बाइ (Side length):', 'Side length of square land:')} {isNe ? toNp(landSideLength) : landSideLength} {L('m', 'm')}
                 </label>
                 <input
                   type="range"
@@ -705,9 +691,9 @@ export const SquareRootDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                   style={{ width: '100%', accentColor: '#0F766E', cursor: 'pointer' }}
                 />
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#64748B', marginTop: 4 }}>
-                  <span>५ मि. (5m)</span>
-                  <span>२५ मि. (२५² = ६२५ वर्ग मि.)</span>
-                  <span>३५ मि. (35m)</span>
+                  <span>5 m (5m)</span>
+                  <span>25 m</span>
+                  <span>35 m (35m)</span>
                 </div>
               </div>
 

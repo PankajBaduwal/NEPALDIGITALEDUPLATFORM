@@ -1,6 +1,6 @@
 /**
  * IntegerNumberLineAdventure.tsx
- * Grade 7 Mathematics – Lesson 3: INTEGER (पूर्णाङ्क)
+ * Grade 7 Mathematics – Lesson 3: INTEGER
  * Simulation 1: Integer Number Line Adventure (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 45-50)
  */
@@ -12,46 +12,46 @@ import { ArrowLeft, ArrowRight, RotateCcw, Check, Sparkles, HelpCircle } from 'l
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'सङ्ख्या रेखामा शून्य (०) भन्दा दायाँतर्फ कस्ता सङ्ख्याहरू हुन्छन्?',
+    np: 'सङ्ख्या रेखामा शून्य (0) भन्दा दायाँतर्फ कस्ता सङ्ख्याहरू हुन्छन्?',
     en: 'What kind of numbers are located to the right of zero (0) on a number line?',
     options: [
-      { key: 'A', label: 'धनात्मक पूर्णाङ्क (Positive Integers)' },
-      { key: 'B', label: 'ऋणात्मक पूर्णाङ्क (Negative Integers)' },
-      { key: 'C', label: 'दशमलव मात्र' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'Positive integers' },
+      { key: 'B', label: 'Negative integers' },
+      { key: 'C', label: 'Decimals only' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
   {
-    np: '-५ को विपरीत पूर्णाङ्क (Opposite Integer) कुन हो?',
+    np: '-5 को विपरीत पूर्णाङ्क (Opposite Integer) कुन हो?',
     en: 'What is the opposite integer of -5?',
     options: [
-      { key: 'A', label: '-५' },
-      { key: 'B', label: '+५' },
-      { key: 'C', label: '०' },
-      { key: 'D', label: '१०' },
+      { key: 'A', label: '-5' },
+      { key: 'B', label: '+5' },
+      { key: 'C', label: '0' },
+      { key: 'D', label: '10' },
     ],
     answer: 'B',
   },
   {
-    np: '|-७| को निरपेक्ष मान (Absolute Value) कति हुन्छ?',
+    np: '|-7| को निरपेक्ष मान (Absolute Value) कति हुन्छ?',
     en: 'What is the absolute value of |-7|?',
     options: [
-      { key: 'A', label: '-७' },
-      { key: 'B', label: '०' },
-      { key: 'C', label: '+७' },
-      { key: 'D', label: '१४' },
+      { key: 'A', label: '-7' },
+      { key: 'B', label: '0' },
+      { key: 'C', label: '+7' },
+      { key: 'D', label: '14' },
     ],
     answer: 'C',
   },
   {
-    np: '-२ बाट ५ एकाइ दायाँतर्फ सर्दा कुन पूर्णाङ्कमा पुगिन्छ?',
+    np: '-2 बाट 5 एकाइ दायाँतर्फ सर्दा कुन पूर्णाङ्कमा पुगिन्छ?',
     en: 'Moving 5 units right from -2 lands on which integer?',
     options: [
-      { key: 'A', label: '-७' },
-      { key: 'B', label: '+३ (-२ + ५ = ३)' },
-      { key: 'C', label: '+२' },
-      { key: 'D', label: '+५' },
+      { key: 'A', label: '-7' },
+      { key: 'B', label: '+3 (-2 + 5 = 3)' },
+      { key: 'C', label: '+2' },
+      { key: 'D', label: '+5' },
     ],
     answer: 'B',
   },
@@ -103,10 +103,10 @@ export const IntegerNumberLineAdventure: React.FC<{ onBackToLibrary?: () => void
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'explore', np: '१. सङ्ख्यारेखा अन्वेषण', en: '1. Explore Number Line' },
-            { id: 'move', np: '२. दायाँ र बायाँ चाल (Movement)', en: '2. Left & Right Movement' },
-            { id: 'opposite', np: '३. विपरीत पूर्णाङ्क (Opposite)', en: '3. Opposite Integers' },
-            { id: 'absolute', np: '४. निरपेक्ष मान (|x| Absolute Value)', en: '4. Absolute Value (|x|)' },
+            { id: 'explore', np: '1. सङ्ख्यारेखा अन्वेषण', en: '1. Explore Number Line' },
+            { id: 'move', np: '2. दायाँ र बायाँ चाल (Movement)', en: '2. Left & Right Movement' },
+            { id: 'opposite', np: '3. विपरीत पूर्णाङ्क (Opposite)', en: '3. Opposite Integers' },
+            { id: 'absolute', np: '4. निरपेक्ष मान (|x| Absolute Value)', en: '4. Absolute Value (|x|)' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -137,7 +137,7 @@ export const IntegerNumberLineAdventure: React.FC<{ onBackToLibrary?: () => void
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
             <div>
               <span style={{ fontSize: 11, fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '3px 8px', borderRadius: 6 }}>
-                {L('सङ्ख्या रेखा (-१० देखि +१०)', 'Number Line (-10 to +10)')}
+                {L('सङ्ख्या रेखा (-10 देखि +10)', 'Number Line (-10 to +10)')}
               </span>
               <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                 {L('स्थान:', 'Position:')}{' '}
@@ -161,7 +161,7 @@ export const IntegerNumberLineAdventure: React.FC<{ onBackToLibrary?: () => void
                 cursor: 'pointer',
               }}
             >
-              <RotateCcw size={14} /> {L('शून्य (०) मा फर्कनुहोस्', 'Reset to 0')}
+              <RotateCcw size={14} /> {L('शून्य (0) मा फर्कनुहोस्', 'Reset to 0')}
             </button>
           </div>
 
@@ -252,25 +252,25 @@ export const IntegerNumberLineAdventure: React.FC<{ onBackToLibrary?: () => void
               onClick={() => movePosition(-3)}
               style={{ padding: '8px 16px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FEE2E2', color: '#DC2626', fontWeight: 800, fontSize: 13, cursor: 'pointer' }}
             >
-              ← ३ एकाइ बायाँ (-3 Left)
+              ← 3 units left (-3)
             </button>
             <button
               onClick={() => movePosition(-1)}
               style={{ padding: '8px 16px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#FEE2E2', color: '#DC2626', fontWeight: 800, fontSize: 13, cursor: 'pointer' }}
             >
-              ← १ एकाइ बायाँ (-1 Left)
+              ← 1 unit left (-1)
             </button>
             <button
               onClick={() => movePosition(1)}
               style={{ padding: '8px 16px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#DCFCE7', color: '#166534', fontWeight: 800, fontSize: 13, cursor: 'pointer' }}
             >
-              १ एकाइ दायाँ (+1 Right) →
+              1 unit right (+1) →
             </button>
             <button
               onClick={() => movePosition(3)}
               style={{ padding: '8px 16px', borderRadius: 10, border: '1px solid #CBD5E1', background: '#DCFCE7', color: '#166534', fontWeight: 800, fontSize: 13, cursor: 'pointer' }}
             >
-              ३ एकाइ दायाँ (+3 Right) →
+              3 units right (+3) →
             </button>
           </div>
         </div>
@@ -299,7 +299,7 @@ export const IntegerNumberLineAdventure: React.FC<{ onBackToLibrary?: () => void
               <div style={{ background: '#F8FAFC', padding: 14, borderRadius: 12, border: '1px solid #E2E8F0' }}>
                 <span style={{ fontSize: 11, color: '#64748B', fontWeight: 700 }}>{L('विपरीत सङ्ख्या (Opposite):', 'Opposite:')}</span>
                 <div style={{ fontSize: 15, fontWeight: 900, color: '#0F766E', marginTop: 2 }}>
-                  {currentPos === 0 ? '०' : currentPos > 0 ? `-${isNe ? toNp(currentPos) : currentPos}` : `+${isNe ? toNp(Math.abs(currentPos)) : Math.abs(currentPos)}`}
+                  {currentPos === 0 ? '0' : currentPos > 0 ? `-${isNe ? toNp(currentPos) : currentPos}` : `+${isNe ? toNp(Math.abs(currentPos)) : Math.abs(currentPos)}`}
                 </div>
               </div>
             </div>
@@ -313,13 +313,13 @@ export const IntegerNumberLineAdventure: React.FC<{ onBackToLibrary?: () => void
             </h4>
             <p style={{ fontSize: 13, color: '#475569', margin: '0 0 16px', lineHeight: 1.6 }}>
               {L(
-                'शून्यबाट बराबर दुरीमा विपरित दिशातर्फ रहेका पूर्णाङ्कहरूलाई एक अर्काका विपरीत पूर्णाङ्क भनिन्छ। दुई विपरीत पूर्णाङ्कहरूको जोड सधैं शून्य हुन्छ: a + (-a) = ०।',
+                'शून्यबाट बराबर दुरीमा विपरित दिशातर्फ रहेका पूर्णाङ्कहरूलाई एक अर्काका विपरीत पूर्णाङ्क भनिन्छ। दुई विपरीत पूर्णाङ्कहरूको जोड सधैं शून्य हुन्छ: a + (-a) = 0।',
                 'Integers that are at equal distances from zero in opposite directions are called opposite integers. Their sum is always zero: a + (-a) = 0.'
               )}
             </p>
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', borderRadius: 14, padding: 16, textAlign: 'center' }}>
               <div style={{ fontSize: 20, fontWeight: 900, color: '#0F766E' }}>
-                ({currentPos > 0 ? `+${isNe ? toNp(currentPos) : currentPos}` : isNe ? toNp(currentPos) : currentPos}) + ({currentPos > 0 ? `-${isNe ? toNp(currentPos) : currentPos}` : `+${isNe ? toNp(Math.abs(currentPos)) : Math.abs(currentPos)}`}) = ०
+                ({currentPos > 0 ? `+${isNe ? toNp(currentPos) : currentPos}` : isNe ? toNp(currentPos) : currentPos}) + ({currentPos > 0 ? `-${isNe ? toNp(currentPos) : currentPos}` : `+${isNe ? toNp(Math.abs(currentPos)) : Math.abs(currentPos)}`}) = 0
               </div>
             </div>
           </div>

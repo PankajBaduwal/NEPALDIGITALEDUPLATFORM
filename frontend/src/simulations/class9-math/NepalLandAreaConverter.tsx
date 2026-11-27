@@ -25,46 +25,46 @@ const SQFT_PER_DHUR = 182.25;
 
 const QUIZ_QUESTIONS = [
   {
-    np: 'नेपालको पहाडी भूभागमा १ रोपनी बराबर कति आना हुन्छ?',
+    np: 'नेपालको पहाडी भूभागमा 1 Ropani बराबर कति आना हुन्छ?',
     en: 'In Nepal\'s hilly region, how many Aana make 1 Ropani?',
     options: [
-      { key: 'A', label: '४ आना' },
-      { key: 'B', label: '१२ आना' },
-      { key: 'C', label: '१६ आना (16 Aana)' },
-      { key: 'D', label: '२० आना' },
+      { key: 'A', label: '4 Aana' },
+      { key: 'B', label: '12 Aana' },
+      { key: 'C', label: '16 Aana' },
+      { key: 'D', label: '20 Aana' },
     ],
     answer: 'C',
   },
   {
-    np: 'तराई भूभागमा १ बिघा बराबर कति कट्ठा हुन्छ?',
+    np: 'तराई भूभागमा 1 Bigha बराबर कति कट्ठा हुन्छ?',
     en: 'In the Terai region, how many Kattha make 1 Bigha?',
     options: [
-      { key: 'A', label: '१० कट्ठा' },
-      { key: 'B', label: '१६ कट्ठा' },
-      { key: 'C', label: '२० कट्ठा (20 Kattha)' },
-      { key: 'D', label: '४० कट्ठा' },
+      { key: 'A', label: '10 Kattha' },
+      { key: 'B', label: '16 Kattha' },
+      { key: 'C', label: '20 Kattha' },
+      { key: 'D', label: '40 Kattha' },
     ],
     answer: 'C',
   },
   {
-    np: 'पाठ्यपुस्तक अनुसार १ रोपनीमा कति वर्ग फिट (sq. ft) क्षेत्रफल हुन्छ?',
+    np: 'पाठ्यपुस्तक अनुसार 1 Ropaniमा कति sq ft (sq. ft) क्षेत्रफल हुन्छ?',
     en: 'According to the CDC textbook, how many square feet are in 1 Ropani?',
     options: [
-      { key: 'A', label: '५,४७६ वर्ग फिट (5,476 sq. ft)' },
-      { key: 'B', label: '३,६४५ वर्ग फिट' },
-      { key: 'C', label: '७,२९० वर्ग फिट' },
-      { key: 'D', label: '१०,००० वर्ग फिट' },
+      { key: 'A', label: '5,476 sq ft (5,476 sq. ft)' },
+      { key: 'B', label: '3,645 sq ft' },
+      { key: 'C', label: '7,290 sq ft' },
+      { key: 'D', label: '10,000 sq ft' },
     ],
     answer: 'A',
   },
   {
-    np: '१ कट्ठा बराबर कति धुर हुन्छ?',
+    np: '1 Kattha बराबर कति धुर हुन्छ?',
     en: 'How many Dhur make 1 Kattha?',
     options: [
-      { key: 'A', label: '४ धुर' },
-      { key: 'B', label: '१६ धुर' },
-      { key: 'C', label: '२० धुर (20 Dhur)' },
-      { key: 'D', label: '१०० धुर' },
+      { key: 'A', label: '4 Dhur' },
+      { key: 'B', label: '16 Dhur' },
+      { key: 'C', label: '20 Dhur (20 Dhur)' },
+      { key: 'D', label: '100 Dhur' },
     ],
     answer: 'C',
   },
@@ -140,7 +140,7 @@ export const NepalLandAreaConverter: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! नेपालको परम्परागत जग्गा नाप प्रणाली (रोपनी-आना-पैसा-दाम र बिघा-कट्ठा-धुर) तथा वर्ग मिटर/फिट रूपान्तरण सिकौं!',
+        'नमस्ते! नेपालको परम्परागत जग्गा नाप प्रणाली (रोपनी-आना-पैसा-दाम र बिघा-कट्ठा-धुर) तथा sq m/फिट रूपान्तरण सिकौं!',
         'Welcome! Explore traditional Nepal land measurement systems (Ropani & Bigha) and area unit conversions!'
       )}
     >
@@ -156,7 +156,7 @@ export const NepalLandAreaConverter: React.FC<{
             }`}
           >
             <span>🔄</span>
-            <span>{L('१. जग्गा रूपान्तरण क्याल्कुलेटर', '1. Converter')}</span>
+            <span>{L('1. जग्गा रूपान्तरण क्याल्कुलेटर', '1. Converter')}</span>
           </button>
           <button
             onClick={() => setActiveTab('plot')}
@@ -167,7 +167,7 @@ export const NepalLandAreaConverter: React.FC<{
             }`}
           >
             <span>📐</span>
-            <span>{L('२. घडेरी नाप कार्यक्षेत्र', '2. Land Plot Studio')}</span>
+            <span>{L('2. घडेरी नाप कार्यक्षेत्र', '2. Land Plot Studio')}</span>
           </button>
           <button
             onClick={() => setActiveTab('table')}
@@ -178,7 +178,7 @@ export const NepalLandAreaConverter: React.FC<{
             }`}
           >
             <span>📋</span>
-            <span>{L('३. पाठ्यपुस्तक दर तालिका', '3. Unit Tables')}</span>
+            <span>{L('3. पाठ्यपुस्तक दर तालिका', '3. Unit Tables')}</span>
           </button>
         </div>
 
@@ -194,7 +194,7 @@ export const NepalLandAreaConverter: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'जग्गाको कुल क्षेत्रफल (वर्ग फिट वा वर्ग मिटर) प्रविष्ट गर्नुहोस् र सो क्षेत्रफल पहाडी प्रथा (रोपनी-आना-पैसा-दाम) तथा तराई प्रथा (बिघा-कट्ठा-धुर) मा स्वचालित रुपमा विभाजन गर्नुहोस्।',
+                  'जग्गाको कुल क्षेत्रफल (sq ft वा sq m) प्रविष्ट गर्नुहोस् र सो क्षेत्रफल पहाडी प्रथा (रोपनी-आना-पैसा-दाम) तथा तराई प्रथा (बिघा-कट्ठा-धुर) मा स्वचालित रुपमा विभाजन गर्नुहोस्।',
                   'Enter total land area in sq. ft or sq. meters to convert into Pahari (Ropani-Aana-Paisa-Daam) and Terai (Bigha-Kattha-Dhur) units.'
                 )}
               </p>
@@ -215,7 +215,7 @@ export const NepalLandAreaConverter: React.FC<{
                       inputUnit === 'sqft' ? 'bg-emerald-600 text-white' : 'bg-gray-50 dark:bg-gray-700'
                     }`}
                   >
-                    {L('वर्ग फिट (sq. ft)', 'Square Feet (sq ft)')}
+                    {L('sq ft (sq. ft)', 'Square Feet (sq ft)')}
                   </button>
                   <button
                     onClick={() => setInputUnit('sqm')}
@@ -223,13 +223,13 @@ export const NepalLandAreaConverter: React.FC<{
                       inputUnit === 'sqm' ? 'bg-emerald-600 text-white' : 'bg-gray-50 dark:bg-gray-700'
                     }`}
                   >
-                    {L('वर्ग मिटर (sq. m)', 'Square Meters (m²)')}
+                    {L('sq m (sq. m)', 'Square Meters (m²)')}
                   </button>
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">
-                    {inputUnit === 'sqft' ? L('क्षेत्रफल (वर्ग फिटमा):', 'Area in sq. ft:') : L('क्षेत्रफल (वर्ग मिटरमा):', 'Area in m²:')}
+                    {inputUnit === 'sqft' ? L('क्षेत्रफल (sq ftमा):', 'Area in sq. ft:') : L('क्षेत्रफल (sq mमा):', 'Area in m²:')}
                   </label>
                   <input
                     type="number"
@@ -250,25 +250,25 @@ export const NepalLandAreaConverter: React.FC<{
                       onClick={() => { setInputUnit('sqft'); setInputValue(5476); }}
                       className="p-2 bg-gray-50 dark:bg-gray-700 rounded-lg border hover:bg-gray-100 font-semibold text-left"
                     >
-                      १ रोपनी (5,476 sq ft)
+                      1 Ropani (5,476 sq ft)
                     </button>
                     <button
                       onClick={() => { setInputUnit('sqft'); setInputValue(342.25); }}
                       className="p-2 bg-gray-50 dark:bg-gray-700 rounded-lg border hover:bg-gray-100 font-semibold text-left"
                     >
-                      १ आना (342.25 sq ft)
+                      1 Aana (342.25 sq ft)
                     </button>
                     <button
                       onClick={() => { setInputUnit('sqft'); setInputValue(72900); }}
                       className="p-2 bg-gray-50 dark:bg-gray-700 rounded-lg border hover:bg-gray-100 font-semibold text-left"
                     >
-                      १ बिघा (72,900 sq ft)
+                      1 Bigha (72,900 sq ft)
                     </button>
                     <button
                       onClick={() => { setInputUnit('sqft'); setInputValue(3645); }}
                       className="p-2 bg-gray-50 dark:bg-gray-700 rounded-lg border hover:bg-gray-100 font-semibold text-left"
                     >
-                      १ कट्ठा (3,645 sq ft)
+                      1 Kattha (3,645 sq ft)
                     </button>
                   </div>
                 </div>
@@ -416,7 +416,7 @@ export const NepalLandAreaConverter: React.FC<{
                 {plotShape === 'rect' ? (
                   <div className="space-y-3">
                     <div>
-                      <label className="text-xs text-gray-600 dark:text-gray-400 font-semibold">{L('लम्बाइ l (मिटरमा):', 'Length (m):')}</label>
+                      <label className="text-xs text-gray-600 dark:text-gray-400 font-semibold">{L('लम्बाइ l:', 'Length (m):')}</label>
                       <input
                         type="number"
                         value={plotL}
@@ -425,7 +425,7 @@ export const NepalLandAreaConverter: React.FC<{
                       />
                     </div>
                     <div>
-                      <label className="text-xs text-gray-600 dark:text-gray-400 font-semibold">{L('चौडाइ b (मिटरमा):', 'Breadth (m):')}</label>
+                      <label className="text-xs text-gray-600 dark:text-gray-400 font-semibold">{L('चौडाइ b:', 'Breadth (m):')}</label>
                       <input
                         type="number"
                         value={plotB}
@@ -487,13 +487,13 @@ export const NepalLandAreaConverter: React.FC<{
 
                 <div className="grid grid-cols-2 gap-3 text-center">
                   <div className="p-4 bg-blue-50 dark:bg-blue-950/40 rounded-xl">
-                    <div className="text-xs text-gray-500">{L('वर्ग मिटर (m²)', 'Square Meters')}</div>
+                    <div className="text-xs text-gray-500">{L('sq m (m²)', 'Square Meters')}</div>
                     <div className="text-2xl font-black text-blue-600 dark:text-blue-400 font-mono mt-1">
                       {isNe ? toNp(calculatedPlotSqM.toFixed(2)) : calculatedPlotSqM.toFixed(2)} m²
                     </div>
                   </div>
                   <div className="p-4 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl">
-                    <div className="text-xs text-gray-500">{L('वर्ग फिट (sq. ft)', 'Square Feet')}</div>
+                    <div className="text-xs text-gray-500">{L('sq ft (sq. ft)', 'Square Feet')}</div>
                     <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 font-mono mt-1">
                       {isNe ? toNp(calculatedPlotSqFt.toFixed(2)) : calculatedPlotSqFt.toFixed(2)} sq ft
                     </div>
@@ -516,13 +516,13 @@ export const NepalLandAreaConverter: React.FC<{
               </h3>
               <table className="w-full text-xs text-left">
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
-                  <tr className="py-2"><td className="font-bold py-1.5">१ रोपनी</td><td>१६ आना = ६४ पैसा = २५६ दाम</td></tr>
-                  <tr className="py-2"><td className="font-bold py-1.5">१ आना</td><td>४ पैसा = १६ दाम</td></tr>
-                  <tr className="py-2"><td className="font-bold py-1.5">१ पैसा</td><td>४ दाम</td></tr>
-                  <tr className="py-2"><td className="font-bold py-1.5">१ रोपनी (वर्ग फिट)</td><td>५,४७६ वर्ग फिट (५०८.७४ m²)</td></tr>
-                  <tr className="py-2"><td className="font-bold py-1.5">१ आना (वर्ग फिट)</td><td>३४२.२५ वर्ग फिट (३१.८० m²)</td></tr>
-                  <tr className="py-2"><td className="font-bold py-1.5">१ पैसा (वर्ग फिट)</td><td>८५.५६ वर्ग फिट</td></tr>
-                  <tr className="py-2"><td className="font-bold py-1.5">१ दाम (वर्ग फिट)</td><td>२१.३९ वर्ग फिट</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Ropani</td><td>16 Aana = 64 Paisa = 256 Daam</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Aana</td><td>4 Paisa = 16 Daam</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Paisa</td><td>4 Daam</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Ropani (sq ft)</td><td>5,476 sq ft (508.74 m²)</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Aana (sq ft)</td><td>342.25 sq ft (31.80 m²)</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Paisa (sq ft)</td><td>85.56 sq ft</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Daam (sq ft)</td><td>21.39 sq ft</td></tr>
                 </tbody>
               </table>
             </div>
@@ -534,12 +534,12 @@ export const NepalLandAreaConverter: React.FC<{
               </h3>
               <table className="w-full text-xs text-left">
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
-                  <tr className="py-2"><td className="font-bold py-1.5">१ बिघा</td><td>२० कट्ठा = ४०० धुर</td></tr>
-                  <tr className="py-2"><td className="font-bold py-1.5">१ कट्ठा</td><td>२० धुर</td></tr>
-                  <tr className="py-2"><td className="font-bold py-1.5">१ बिघा (वर्ग फिट)</td><td>७२,९०० वर्ग फिट (६,७७२.६३ m²)</td></tr>
-                  <tr className="py-2"><td className="font-bold py-1.5">१ कट्ठा (वर्ग फिट)</td><td>३,६४५ वर्ग फिट (३३८.६३ m²)</td></tr>
-                  <tr className="py-2"><td className="font-bold py-1.5">१ धुर (वर्ग फिट)</td><td>१८२.२५ वर्ग फिट (१६.९३ m²)</td></tr>
-                  <tr className="py-2"><td className="font-bold py-1.5">१ बिघा (रोपनीमा)</td><td>१३ रोपनी ४ आना ३.३ पैसा</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Bigha</td><td>20 Kattha = 400 Dhur</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Kattha</td><td>20 Dhur</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Bigha (sq ft)</td><td>72,900 sq ft (6,772.63 m²)</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Kattha (sq ft)</td><td>3,645 sq ft (338.63 m²)</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Dhur (sq ft)</td><td>182.25 sq ft (16.93 m²)</td></tr>
+                  <tr className="py-2"><td className="font-bold py-1.5">1 Bigha (in Ropani)</td><td>13 Ropani 4 Aana 3.3 Paisa</td></tr>
                 </tbody>
               </table>
             </div>

@@ -28,13 +28,13 @@ const SCENARIOS: ProblemScenario[] = [
     type: 'simultaneous',
     titleEn: 'Sum and Difference of Numbers',
     titleNp: 'दुई संख्याहरूको जोड र अन्तर',
-    category: 'Numbers (संख्याहरू)',
+    category: 'Numbers',
     storyEn: 'The sum of two numbers is 16 and their difference is 4. Find the two numbers.',
-    storyNp: 'दुई संख्याहरूको जोड १६ छ र तिनीहरूको फरक ४ छ। ती दुई संख्याहरू पत्ता लगाउनुहोस्।',
+    storyNp: 'दुई संख्याहरूको जोड 16 छ र तिनीहरूको फरक 4 छ। ती दुई संख्याहरू पत्ता लगाउनुहोस्।',
     variableDefsEn: ['Let the larger number = x', 'Let the smaller number = y'],
     variableDefsNp: ['ठूलो संख्या = x मानौं', 'सानो संख्या = y मानौं'],
     equationsEn: ['Equation (1): x + y = 16', 'Equation (2): x - y = 4'],
-    equationsNp: ['समीकरण (१): x + y = १६', 'समीकरण (२): x - y = ४'],
+    equationsNp: ['समीकरण (1): x + y = 16', 'समीकरण (2): x - y = 4'],
     methodStepsEn: [
       'Add equation (1) and (2): (x + y) + (x - y) = 16 + 4',
       '2x = 20 => x = 10',
@@ -42,13 +42,13 @@ const SCENARIOS: ProblemScenario[] = [
       'Check: 10 + 6 = 16 and 10 - 6 = 4. Verified!'
     ],
     methodStepsNp: [
-      'समीकरण (१) र (२) जोड्दा: (x + y) + (x - y) = १६ + ४',
-      '२x = २० => x = १०',
-      'x = १० समीकरण (१) मा राख्दा: १० + y = १६ => y = ६',
-      'जाँच: १० + ६ = १६ र १० - ६ = ४। प्रमाणित भयो!'
+      'समीकरण (1) र (2) जोड्दा: (x + y) + (x - y) = 16 + 4',
+      '2x = 20 => x = 10',
+      'x = 10 समीकरण (1) मा राख्दा: 10 + y = 16 => y = 6',
+      'जाँच: 10 + 6 = 16 र 10 - 6 = 4। प्रमाणित भयो!'
     ],
     solutionTextEn: 'The larger number is 10 and the smaller number is 6.',
-    solutionTextNp: 'ठूलो संख्या १० र सानो संख्या ६ हुन्।',
+    solutionTextNp: 'ठूलो संख्या 10 र सानो संख्या 6 हुन्।',
     solutionVals: { x: 10, y: 6 }
   },
   {
@@ -56,13 +56,13 @@ const SCENARIOS: ProblemScenario[] = [
     type: 'simultaneous',
     titleEn: 'Stationery Shopping: Notebooks & Pens',
     titleNp: 'स्टेशनरी किनमेल: कापी र कलम',
-    category: 'Shopping & Cost (किनमेल)',
+    category: 'Shopping & Cost',
     storyEn: 'The cost of 2 notebooks and 3 pens is Rs. 140. The cost of 3 notebooks and 2 pens is Rs. 160. Find the cost of 1 notebook and 1 pen.',
-    storyNp: '२ वटा कापी र ३ वटा कलमको जम्मा मूल्य रु. १४० पर्छ। ३ वटा कापी र २ वटा कलमको जम्मा मूल्य रु. १६० पर्छ। एउटा कापी र एउटा कलमको मूल्य कति पर्ला?',
+    storyNp: '2 pcs कापी र 3 pcs कलमको जम्मा मूल्य Rs. 140 पर्छ। 3 pcs कापी र 2 pcs कलमको जम्मा मूल्य Rs. 160 पर्छ। एउटा कापी र एउटा कलमको मूल्य कति पर्ला?',
     variableDefsEn: ['Cost of 1 notebook = x', 'Cost of 1 pen = y'],
-    variableDefsNp: ['१ वटा कापीको मूल्य = x', '१ वटा कलमको मूल्य = y'],
+    variableDefsNp: ['1 pcs कापीको मूल्य = x', '1 pcs कलमको मूल्य = y'],
     equationsEn: ['Equation (1): 2x + 3y = 140', 'Equation (2): 3x + 2y = 160'],
-    equationsNp: ['समीकरण (१): २x + ३y = १४०', 'समीकरण (२): ३x + २y = १६०'],
+    equationsNp: ['समीकरण (1): 2x + 3y = 140', 'समीकरण (2): 3x + 2y = 160'],
     methodStepsEn: [
       'Multiply Eq(1) by 3: 6x + 9y = 420',
       'Multiply Eq(2) by 2: 6x + 4y = 320',
@@ -70,13 +70,13 @@ const SCENARIOS: ProblemScenario[] = [
       'Substitute y = 20 into Eq(1): 2x + 3(20) = 140 => 2x = 80 => x = 40'
     ],
     methodStepsNp: [
-      'समीकरण (१) लाई ३ ले गुणन गर्दा: ६x + ९y = ४२०',
-      'समीकरण (२) लाई २ ले गुणन गर्दा: ६x + ४y = ३२०',
-      'घटाउँदा: (६x + ९y) - (६x + ४y) = ४२० - ३२० => ५y = १०० => y = २०',
-      'y = २० समीकरण (१) मा राख्दा: २x + ३(२०) = १४० => २x = ८० => x = ४०'
+      'समीकरण (1) लाई 3 ले गुणन गर्दा: 6x + 9y = 420',
+      'समीकरण (2) लाई 2 ले गुणन गर्दा: 6x + 4y = 320',
+      'घटाउँदा: (6x + 9y) - (6x + 4y) = 420 - 320 => 5y = 100 => y = 20',
+      'y = 20 समीकरण (1) मा राख्दा: 2x + 3(20) = 140 => 2x = 80 => x = 40'
     ],
     solutionTextEn: '1 Notebook costs Rs. 40 and 1 Pen costs Rs. 20.',
-    solutionTextNp: '१ वटा कापीको मूल्य रु. ४० र १ वटा कलमको मूल्य रु. २० पर्छ।',
+    solutionTextNp: '1 pcs कापीको मूल्य Rs. 40 र 1 pcs कलमको मूल्य Rs. 20 पर्छ।',
     solutionVals: { x: 40, y: 20 }
   },
   {
@@ -84,13 +84,13 @@ const SCENARIOS: ProblemScenario[] = [
     type: 'simultaneous',
     titleEn: 'Father and Son Age Problem',
     titleNp: 'बुबा र छोराको उमेर समस्या',
-    category: 'Ages (उमेर)',
+    category: 'Ages',
     storyEn: 'The present age of a father is 4 times the age of his son. The sum of their ages is 50 years. Find their present ages.',
-    storyNp: 'बुबाको हालको उमेर छोराको उमेरको ४ गुणा छ। तिनीहरूको उमेरको जोड ५० वर्ष छ भने दुवैको हालको उमेर पत्ता लगाउनुहोस्।',
+    storyNp: 'बुबाको हालको उमेर छोराको उमेरको 4 गुणा छ। तिनीहरूको उमेरको जोड 50 वर्ष छ भने दुवैको हालको उमेर पत्ता लगाउनुहोस्।',
     variableDefsEn: ['Let son’s age = y years', 'Father’s age = x years'],
     variableDefsNp: ['छोराको उमेर = y वर्ष', 'बुबाको उमेर = x वर्ष'],
     equationsEn: ['Equation (1): x = 4y', 'Equation (2): x + y = 50'],
-    equationsNp: ['समीकरण (१): x = ४y', 'समीकरण (२): x + y = ५०'],
+    equationsNp: ['समीकरण (1): x = 4y', 'समीकरण (2): x + y = 50'],
     methodStepsEn: [
       'Substitute x = 4y into Equation (2): 4y + y = 50',
       '5y = 50 => y = 10 years (son)',
@@ -98,13 +98,13 @@ const SCENARIOS: ProblemScenario[] = [
       'Check: 40 + 10 = 50 and 40 = 4 × 10. Verified!'
     ],
     methodStepsNp: [
-      'समीकरण (२) मा x = ४y प्रतिस्थापन गर्दा: ४y + y = ५०',
-      '५y = ५० => y = १० वर्ष (छोरा)',
-      'बुबाको उमेर: x = ४(१०) = ४० वर्ष',
-      'जाँच: ४० + १० = ५० र ४० = ४ × १०। प्रमाणित भयो!'
+      'समीकरण (2) मा x = 4y प्रतिस्थापन गर्दा: 4y + y = 50',
+      '5y = 50 => y = 10 वर्ष (छोरा)',
+      'बुबाको उमेर: x = 4(10) = 40 वर्ष',
+      'जाँच: 40 + 10 = 50 र 40 = 4 × 10। प्रमाणित भयो!'
     ],
     solutionTextEn: 'Father is 40 years old and son is 10 years old.',
-    solutionTextNp: 'बुबाको उमेर ४० वर्ष र छोराको उमेर १० वर्ष छ।',
+    solutionTextNp: 'बुबाको उमेर 40 वर्ष र छोराको उमेर 10 वर्ष छ।',
     solutionVals: { x: 40, y: 10 }
   },
   {
@@ -112,13 +112,13 @@ const SCENARIOS: ProblemScenario[] = [
     type: 'quadratic',
     titleEn: 'Rectangular Garden Dimensions',
     titleNp: 'आयताकार बगैँचाको लम्बाइ र चौडाइ',
-    category: 'Geometry / Area (क्षेत्रमिति)',
+    category: 'Geometry / Area',
     storyEn: 'The length of a rectangular garden is 3 m more than its breadth. If the area of the garden is 40 sq m, find its length and breadth.',
-    storyNp: 'एउटा आयताकार बगैँचाको लम्बाइ त्यसको चौडाइभन्दा ३ मिटर बढी छ। यदि बगैँचाको क्षेत्रफल ४० वर्ग मिटर भए, लम्बाइ र चौडाइ कति होला?',
+    storyNp: 'एउटा आयताकार बगैँचाको लम्बाइ त्यसको चौडाइभन्दा 3 m बढी छ। यदि बगैँचाको क्षेत्रफल 40 sq m भए, लम्बाइ र चौडाइ कति होला?',
     variableDefsEn: ['Let breadth = x m', 'Length = (x + 3) m'],
-    variableDefsNp: ['चौडाइ = x मिटर', 'लम्बाइ = (x + ३) मिटर'],
+    variableDefsNp: ['चौडाइ = x m', 'लम्बाइ = (x + 3) m'],
     equationsEn: ['Area = Length × Breadth = 40', 'x(x + 3) = 40 => x² + 3x - 40 = 0'],
-    equationsNp: ['क्षेत्रफल = लम्बाइ × चौडाइ = ४०', 'x(x + ३) = ४० => x² + ३x - ४० = ०'],
+    equationsNp: ['क्षेत्रफल = लम्बाइ × चौडाइ = 40', 'x(x + 3) = 40 => x² + 3x - 40 = 0'],
     methodStepsEn: [
       'Quadratic equation: x² + 3x - 40 = 0',
       'Split middle term: 8 × (-5) = -40 and 8 - 5 = 3',
@@ -128,50 +128,50 @@ const SCENARIOS: ProblemScenario[] = [
       'Length = x + 3 = 5 + 3 = 8 m'
     ],
     methodStepsNp: [
-      'द्विघात समीकरण: x² + ३x - ४० = ०',
-      'मध्य पद विभाजन: ८ × (-५) = -४० र ८ - ५ = ३',
-      'x² + ८x - ५x - ४० = ० => x(x + ८) - ५(x + ८) = ०',
-      '(x - ५)(x + ८) = ० => x = ५ वा x = -८',
-      'लम्बाइ वा चौडाइ ऋणात्मक हुन नसक्ने भएकाले, x = ५ मिटर',
-      'लम्बाइ = x + ३ = ५ + ३ = ८ मिटर'
+      'द्विघात समीकरण: x² + 3x - 40 = 0',
+      'मध्य पद विभाजन: 8 × (-5) = -40 र 8 - 5 = 3',
+      'x² + 8x - 5x - 40 = 0 => x(x + 8) - 5(x + 8) = 0',
+      '(x - 5)(x + 8) = 0 => x = 5 वा x = -8',
+      'लम्बाइ वा चौडाइ ऋणात्मक हुन नसक्ने भएकाले, x = 5 m',
+      'लम्बाइ = x + 3 = 5 + 3 = 8 m'
     ],
     solutionTextEn: 'Breadth is 5 m and Length is 8 m (Area = 5 × 8 = 40 m²).',
-    solutionTextNp: 'चौडाइ ५ मिटर र लम्बाइ ८ मिटर छ (क्षेत्रफल = ५ × ८ = ४० वर्ग मिटर)।',
+    solutionTextNp: 'चौडाइ 5 m र लम्बाइ 8 m छ (क्षेत्रफल = 5 × 8 = 40 sq m)।',
     solutionVals: { x: 5, y: 8 }
   }
 ];
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'यदि दुई संख्याहरूको जोड १० र फरक २ भए ती संख्याहरू के के हुन्?',
+    np: 'यदि दुई संख्याहरूको जोड 10 र फरक 2 भए ती संख्याहरू के के हुन्?',
     en: 'If the sum of two numbers is 10 and difference is 2, what are the numbers?',
     options: [
-      { key: 'A', label: '७ र ३ (7, 3)' },
-      { key: 'B', label: '६ र ४ (6, 4)' },
-      { key: 'C', label: '८ र २ (8, 2)' },
-      { key: 'D', label: '५ र ५ (5, 5)' }
+      { key: 'A', label: '7 and 3' },
+      { key: 'B', label: '6 and 4' },
+      { key: 'C', label: '8 and 2' },
+      { key: 'D', label: '5 and 5' }
     ],
     answer: 'B'
   },
   {
-    np: 'लम्बाइ वा उमेरसम्बन्धी समस्यामा ऋणात्मक मूल (जस्तै x = -८) किन अमान्य गरिन्छ?',
+    np: 'लम्बाइ वा उमेरसम्बन्धी समस्यामा ऋणात्मक मूल (जस्तै x = -8) किन अमान्य गरिन्छ?',
     en: 'Why do we discard negative roots (e.g. x = -8) in geometric word problems for length or age?',
     options: [
-      { key: 'A', label: 'ऋणात्मक संख्याको वर्ग हुँदैन' },
-      { key: 'B', label: 'भौतिक लम्बाइ र उमेर ऋणात्मक हुँदैन (Length/age cannot be negative)' },
-      { key: 'C', label: 'शून्य गुणन नियमले मान्दैन' },
-      { key: 'D', label: 'काल्पनिक संख्या हो' }
+      { key: 'A', label: 'A negative number has no square' },
+      { key: 'B', label: 'Physical length and age cannot be negative' },
+      { key: 'C', label: 'The zero multiplication rule does not allow it' },
+      { key: 'D', label: 'It is an imaginary number' }
     ],
     answer: 'B'
   },
   {
-    np: '२x + y = ७ र x - y = २ बाट y हटाउन के गर्नुपर्छ?',
+    np: '2x + y = 7 र x - y = 2 बाट y हटाउन के गर्नुपर्छ?',
     en: 'To eliminate y from 2x + y = 7 and x - y = 2, we should:',
     options: [
-      { key: 'A', label: 'दुवै समीकरण जोड्नुपर्छ (Add both equations)' },
-      { key: 'B', label: 'समीकरण घटाउनुपर्छ' },
-      { key: 'C', label: '० ले गुणन गर्नुपर्छ' },
-      { key: 'D', label: '२ ले भाग गर्नुपर्छ' }
+      { key: 'A', label: 'Add both equations' },
+      { key: 'B', label: 'Subtract the equations' },
+      { key: 'C', label: 'Multiply by 0' },
+      { key: 'D', label: 'Divide by 2' }
     ],
     answer: 'A'
   }

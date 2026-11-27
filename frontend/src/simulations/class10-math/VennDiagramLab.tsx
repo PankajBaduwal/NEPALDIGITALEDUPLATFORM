@@ -100,7 +100,7 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
       expEn: 'n(A) = nₒ(A) + n(A ∩ B) = 45 + 20 = 65',
     },
     {
-      qNp: 'तीनवटा समूहहरू A, B, C मा, केवल दुईवटा मात्र समूहमा पर्ने सदस्यहरूको संख्या कसरी निकालिन्छ?',
+      qNp: 'तीनpcs समूहहरू A, B, C मा, केवल दुईpcs मात्र समूहमा पर्ने सदस्यहरूको संख्या कसरी निकालिन्छ?',
       qEn: 'In three sets A, B, C, how is the number of elements in exactly two sets found?',
       opts: [
         'nₒ(A ∩ B) + nₒ(B ∩ C) + nₒ(C ∩ A)',
@@ -109,7 +109,7 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
         'nₒ(A) + nₒ(B) + nₒ(C)',
       ],
       correct: 0,
-      expNp: 'केवल दुईवटा समूह = nₒ(A ∩ B) + nₒ(B ∩ C) + nₒ(C ∩ A) = [n(A ∩ B) - n(A ∩ B ∩ C)] + ...',
+      expNp: 'केवल दुईpcs समूह = nₒ(A ∩ B) + nₒ(B ∩ C) + nₒ(C ∩ A) = [n(A ∩ B) - n(A ∩ B ∩ C)] + ...',
       expEn: 'Exactly two sets = nₒ(A ∩ B) + nₒ(B ∩ C) + nₒ(C ∩ A)',
     },
   ];
@@ -120,7 +120,7 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ १: समूह (Sets) भेन चित्र प्रयोगशालामा स्वागत छ! यहाँ दुई र तीन समूहका भेन चित्र, विभिन्न खण्डहरू, र सूत्रहरू प्रत्यक्ष रूपमा अन्वेषण गर्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 1: समूह (Sets) भेन चित्र प्रयोगशालामा स्वागत छ! यहाँ दुई र तीन समूहका भेन चित्र, विभिन्न खण्डहरू, र सूत्रहरू प्रत्यक्ष रूपमा अन्वेषण गर्नुहोस्!',
         'Welcome to Grade 10 Unit 1: Sets Venn Diagram Laboratory! Explore 2-set and 3-set Venn diagrams, overlapping regions, and cardinality formulas interactively!'
       )}
     >
@@ -253,7 +253,7 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
               <div className="space-y-3 text-xs">
                 <div>
                   <div className="flex justify-between font-semibold text-slate-700">
-                    <span>n(U) [जम्मा]: {fmt(uTotal2)}</span>
+                    <span>n(U) [total]: {fmt(uTotal2)}</span>
                   </div>
                   <input type="range" min="50" max="200" value={uTotal2} onChange={(e) => setUTotal2(parseInt(e.target.value))} className="w-full accent-[#167C80]" />
                 </div>
@@ -274,7 +274,7 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
 
                 <div>
                   <div className="flex justify-between font-semibold text-amber-700">
-                    <span>n(A ∩ B) [प्रतिच्छेदन]: {fmt(nAB2)}</span>
+                    <span>n(A ∩ B) [intersection]: {fmt(nAB2)}</span>
                   </div>
                   <input type="range" min="0" max={Math.min(nA2, nB2)} value={nAB2} onChange={(e) => setNAB2(parseInt(e.target.value))} className="w-full accent-amber-500" />
                 </div>
@@ -302,8 +302,8 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
                 )}
                 {selectedRegion2 === 'intersection' && (
                   <div>
-                    <div className="font-bold text-amber-800 font-mono text-sm">दुवैमा पर्ने (A ∩ B) = n(A ∩ B)</div>
-                    <div className="text-slate-600">A र B दुवै समूहको साझा भाग</div>
+                    <div className="font-bold text-amber-800 font-mono text-sm">In both (A ∩ B) = n(A ∩ B)</div>
+                    <div className="text-slate-600">The common part of both sets A and B</div>
                     <div className="font-bold text-slate-800 font-mono text-sm">n(A ∩ B) = {fmt(nAB2)}</div>
                   </div>
                 )}
@@ -332,7 +332,7 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
             <div className="md:col-span-7 bg-[#142D4E] p-4 rounded-2xl flex flex-col items-center justify-between text-white shadow-md">
               <div className="w-full flex justify-between text-xs font-bold text-slate-300 mb-2">
                 <span>{L('सर्वव्यापक समूह U = ' + fmt(uTotal3), 'Universal Set U = ' + fmt(uTotal3))}</span>
-                <span>{L('७ वटा खण्डहरूमा क्लिक गर्नुहोस्', 'Click any of the 7 regions')}</span>
+                <span>{L('7 pcs खण्डहरूमा क्लिक गर्नुहोस्', 'Click any of the 7 regions')}</span>
               </div>
 
               <svg width="100%" height={290} viewBox="0 0 380 290" className="max-w-md">
@@ -386,7 +386,7 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
             {/* Three-Set Controls and Explorer */}
             <div className="md:col-span-5 bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
               <h3 className="font-bold text-[#142D4E] text-base">
-                {L('३ समूहका मानहरू (Cardinalities):', 'Set Parameters:')}
+                {L('3 समूहका मानहरू (Cardinalities):', 'Set Parameters:')}
               </h3>
 
               <div className="grid grid-cols-3 gap-2 text-xs">
@@ -435,7 +435,7 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
                   = {fmt(nA3)} + {fmt(nB3)} + {fmt(nC3)} - {fmt(nAB3)} - {fmt(nBC3)} - {fmt(nCA3)} + {fmt(nABC3)} = <span className="text-sm">{fmt(nUnion3)}</span>
                 </div>
                 <div className="text-slate-500 pt-1 border-t">
-                  n(कुनैमा नपर्ने) = n(U) - n(A ∪ B ∪ C) = {fmt(uTotal3)} - {fmt(nUnion3)} = {fmt(nNeither3)}
+                  n = n(U) - n(A ∪ B ∪ C) = {fmt(uTotal3)} - {fmt(nUnion3)} = {fmt(nNeither3)}
                 </div>
               </div>
             </div>
@@ -452,7 +452,7 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
                   surveyType === 'cricket' ? 'bg-[#167C80] text-white border-[#167C80]' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('१) दुई समूह: क्रिकेट र फुटबल सर्वेक्षण (300 जना)', '1) Two Sets: Cricket & Football (300 People)')}
+                {L('1) दुई समूह: क्रिकेट र फुटबल सर्वेक्षण (300 जना)', '1) Two Sets: Cricket & Football (300 People)')}
               </button>
               <button
                 onClick={() => setSurveyType('fruit')}
@@ -460,17 +460,17 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
                   surveyType === 'fruit' ? 'bg-[#167C80] text-white border-[#167C80]' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('२) तीन समूह: फलफूल सर्वेक्षण (सुन्तला, आँप, केरा)', '2) Three Sets: Fruit Preferences Survey')}
+                {L('2) तीन समूह: फलफूल सर्वेक्षण (सुन्तला, आँप, केरा)', '2) Three Sets: Fruit Preferences Survey')}
               </button>
             </div>
 
             {surveyType === 'cricket' && (
               <div className="space-y-3">
                 <div className="bg-blue-50 border-l-4 border-blue-600 p-3 rounded text-sm text-blue-900">
-                  <span className="font-bold">{L('पाठ्यपुस्तक उदाहरण १:', 'Textbook Example 1:')}</span>
+                  <span className="font-bold">{L('पाठ्यपुस्तक उदाहरण 1:', 'Textbook Example 1:')}</span>
                   <p className="mt-1">
                     {L(
-                      '३०० जना मानिसहरूमा गरिएको सर्वेक्षणमा १७५ जनाले क्रिकेट (C) र १५० जनाले फुटबल (F) मन पराउँछन्। २५ जनाले कुनै पनि खेल मन पराउँदैनन्।',
+                      '300 जना मानिसहरूमा गरिएको सर्वेक्षणमा 175 जनाले क्रिकेट (C) र 150 जनाले फुटबल (F) मन पराउँछन्। 25 जनाले कुनै पनि खेल मन पराउँदैनन्।',
                       'In a survey of 300 people, 175 like cricket (C), 150 like football (F), and 25 like neither.'
                     )}
                   </p>
@@ -478,7 +478,7 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-3 bg-slate-50 border rounded-xl font-mono text-xs space-y-1">
-                    <div className="font-bold text-slate-700">दिइएको मानहरू (Given):</div>
+                    <div className="font-bold text-slate-700">Given values:</div>
                     <div>n(U) = 300</div>
                     <div>n(C) = 175</div>
                     <div>n(F) = 150</div>
@@ -486,12 +486,12 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
                   </div>
 
                   <div className="p-3 bg-teal-50 border border-teal-200 rounded-xl font-mono text-xs space-y-1">
-                    <div className="font-bold text-[#167C80]">समाधान प्रक्रिया (Step-by-Step):</div>
+                    <div className="font-bold text-[#167C80]">Solution process (step by step):</div>
                     <div>n(C ∪ F) = n(U) - n(C ∪ F)̅ = 300 - 25 = 275</div>
-                    <div>n(C ∩ F) = n(C) + n(F) - n(C ∪ F) = 175 + 150 - 275 = <span className="font-bold text-amber-700">50 (दुवै मन पराउने)</span></div>
-                    <div>nₒ(C) = 175 - 50 = <span className="font-bold">125 (क्रिकेट मात्र)</span></div>
-                    <div>nₒ(F) = 150 - 50 = <span className="font-bold">100 (फुटबल मात्र)</span></div>
-                    <div>ठ्याक्कै एउटा मात्र = 125 + 100 = <span className="font-bold text-indigo-700">225</span></div>
+                    <div>n(C ∩ F) = n(C) + n(F) - n(C ∪ F) = 175 + 150 - 275 = <span className="font-bold text-amber-700">50</span></div>
+                    <div>nₒ(C) = 175 - 50 = <span className="font-bold">125</span></div>
+                    <div>nₒ(F) = 150 - 50 = <span className="font-bold">100</span></div>
+                    <div>Exactly one only = 125 + 100 = <span className="font-bold text-indigo-700">225</span></div>
                   </div>
                 </div>
               </div>
@@ -500,10 +500,10 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
             {surveyType === 'fruit' && (
               <div className="space-y-3">
                 <div className="bg-emerald-50 border-l-4 border-emerald-600 p-3 rounded text-sm text-emerald-900">
-                  <span className="font-bold">{L('पाठ्यपुस्तक उदाहरण २ (फलफूल सर्वेक्षण):', 'Textbook Example 2 (Fruit Survey):')}</span>
+                  <span className="font-bold">{L('पाठ्यपुस्तक उदाहरण 2:', 'Textbook Example 2 (Fruit Survey):')}</span>
                   <p className="mt-1">
                     {L(
-                      '४० जनाले सुन्तला (O), ३५ जनाले आँप (M), ५० जनाले केरा (B) मन पराउँछन्। १५ जनाले सुन्तला र आँप, २० जनाले आँप र केरा, २५ जनाले सुन्तला र केरा, ५ जनाले तीनवटै फल मन पराउँछन् र ३० जनाले कुनै पनि मन पराउँदैनन्।',
+                      '40 जनाले सुन्तला (O), 35 जनाले आँप (M), 50 जनाले केरा (B) मन पराउँछन्। 15 जनाले सुन्तला र आँप, 20 जनाले आँप र केरा, 25 जनाले सुन्तला र केरा, 5 जनाले तीनवटै फल मन पराउँछन् र 30 जनाले कुनै पनि मन पराउँदैनन्।',
                       '40 like orange, 35 like mango, 50 like banana; 15 like orange & mango, 20 like mango & banana, 25 like orange & banana, 5 like all three, and 30 like none.'
                     )}
                   </p>
@@ -511,10 +511,10 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
 
                 <div className="p-4 bg-slate-900 text-white rounded-xl font-mono text-xs space-y-2">
                   <div className="text-amber-400 font-bold text-sm">
-                    {L('भेन चित्रका ७ वटा खण्डहरूको गणना:', 'Calculation of all 7 internal regions:')}
+                    {L('भेन चित्रका 7 pcs खण्डहरूको गणना:', 'Calculation of all 7 internal regions:')}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-300">
-                    <div>तीनैवटा मन पराउने n(O ∩ M ∩ B) = 5</div>
+                    <div>तीनैpcs मन पराउने n(O ∩ M ∩ B) = 5</div>
                     <div>सुन्तला र आँप मात्र = 15 - 5 = 10</div>
                     <div>आँप र केरा मात्र = 20 - 5 = 15</div>
                     <div>सुन्तला र केरा मात्र = 25 - 5 = 20</div>
@@ -539,7 +539,7 @@ export const VennDiagramLab: React.FC<SimProps> = ({ onBackToLibrary, onBack }) 
                 {L(`प्रश्न ${toNp(quizIdx + 1)} / ${toNp(quizQuestions.length)}`, `Question ${quizIdx + 1} of ${quizQuestions.length}`)}
               </span>
               <span className="text-xs font-semibold px-2 py-1 bg-amber-100 text-amber-800 rounded">
-                {L('कक्षा १० एसईई (SEE) स्तर', 'SEE Grade 10 Level')}
+                {L('कक्षा 10 एसईई (SEE) स्तर', 'SEE Grade 10 Level')}
               </span>
             </div>
 

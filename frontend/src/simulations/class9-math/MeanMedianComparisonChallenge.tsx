@@ -15,7 +15,7 @@ interface ComparisonPreset {
 const COMPARISON_PRESETS: ComparisonPreset[] = [
   {
     id: 'symmetric',
-    titleEn: 'Symmetric Distribution (कक्षा परीक्षा अङ्क)',
+    titleEn: 'Symmetric Distribution',
     titleNp: 'सममित वितरण (Normal / Symmetric)',
     descriptionEn: 'Data evenly balanced around the center. Mean and median are almost identical.',
     descriptionNp: 'केन्द्र वरिपरि तथ्याङ्क बराबर सन्तुलित छ। मध्यक र मध्यिका लगभग बराबर हुन्छन्।',
@@ -23,7 +23,7 @@ const COMPARISON_PRESETS: ComparisonPreset[] = [
   },
   {
     id: 'skewed_high',
-    titleEn: 'Right-Skewed with High Outlier (तलब वितरण)',
+    titleEn: 'Right-Skewed with High Outlier',
     titleNp: 'दायाँ ढल्किएको (Right-Skewed / High Income)',
     descriptionEn: 'One extremely high salary pulls the mean up, while the median remains stable.',
     descriptionNp: 'एउटै ठूलो मान (Outlier) ले मध्यकलाई तान्छ तर मध्यिका यथावत रहन्छ।',
@@ -61,7 +61,7 @@ const MISSING_FREQ_PROBLEMS: MissingFreqProblem[] = [
     ],
     correctP: 10,
     equationEn: 'Mean = (10×3 + 20×8 + 30×p + 40×5 + 50×4) / (3 + 8 + p + 5 + 4) = 28\n590 + 30p = 28(20 + p)\n590 + 30p = 560 + 28p\n2p = 30 => p = 15... check: p = 10',
-    equationNp: 'मध्यक = (१०×३ + २०×८ + ३०×p + ४०×५ + ५०×४) / (३ + ८ + p + ५ + ४) = २८\n५९० + ३०p = २८(२० + p) => २p = २० => p = १०'
+    equationNp: 'मध्यक = (10×3 + 20×8 + 30×p + 40×5 + 50×4) / (3 + 8 + p + 5 + 4) = 28\n590 + 30p = 28(20 + p) => 2p = 20 => p = 10'
   },
   {
     id: 2,
@@ -75,7 +75,7 @@ const MISSING_FREQ_PROBLEMS: MissingFreqProblem[] = [
     ],
     correctP: 6,
     equationEn: 'Mean = (30 + 80 + 25p + 90 + 35) / (10 + p) = 25\n235 + 25p = 25(10 + p) => 235 + 25p = 250 + 25p (special balance case)',
-    equationNp: 'मध्यक = (३० + ८० + २५p + ९० + ३५) / (१० + p) = २५'
+    equationNp: 'मध्यक = (30 + 80 + 25p + 90 + 35) / (10 + p) = 25'
   }
 ];
 
@@ -317,7 +317,7 @@ export const MeanMedianComparisonChallenge: React.FC<SimProps> = ({ onBackToLibr
                   </div>
                   <div className="text-[11px] text-slate-600 space-y-1">
                     <div>{L('आरोही क्रम:', 'Sorted order:')} {compareStats.sorted.join(', ')}</div>
-                    <div>{L('स्थान:', 'Position:')} ((N+1)/2)-औं पद</div>
+                    <div>{L('स्थान:', 'Position:')} ((N+1)/2)th term</div>
                     <div className="font-mono text-[10px] pt-1 text-slate-500">
                       M_d = {fmt(compareStats.median)}
                     </div>

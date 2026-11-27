@@ -32,11 +32,11 @@ export const angleCfg: LabCfg = {
   goal: () => { const t = 15 * rnd(1, 23); return { p: { ang: t }, np: toN(`${t}° को कोण बनाऔँ`), en: `Make an angle of ${t}°` }; },
   quiz: (i) => {
     const pick = (lo: number, hi: number) => 5 * rnd(lo / 5, hi / 5);
-    if (i === 0) { const a = pick(10, 85); return choice('यो कुन कोण हो?', 'What kind of angle is this?', 'न्यून कोण | Acute', ['अधिक कोण | Obtuse', 'समकोण | Right', 'सरल कोण | Straight'], i, { ang: a }); }
-    if (i === 1) { const a = pick(100, 175); return choice('यो कुन कोण हो?', 'What kind of angle is this?', 'अधिक कोण | Obtuse', ['न्यून कोण | Acute', 'समकोण | Right', 'प्रतिवर्ती कोण | Reflex'], i, { ang: a }); }
+    if (i === 0) { const a = pick(10, 85); return choice('यो कुन कोण हो?', 'What kind of angle is this?', 'Acute', ['Obtuse', 'Right', 'Straight'], i, { ang: a }); }
+    if (i === 1) { const a = pick(100, 175); return choice('यो कुन कोण हो?', 'What kind of angle is this?', 'Obtuse', ['Acute', 'Right', 'Reflex'], i, { ang: a }); }
     if (i === 2) { const a = 5 * rnd(2, 16); return numChoice(`${a}° को पूरक कोण कति हो?`, `What is the complement of ${a}°?`, 90 - a, i, [10, -10, 20, 5, 90], 1, '°'); }
     if (i === 3) { const a = 5 * rnd(4, 32); return numChoice(`${a}° को सम्पूरक कोण कति हो?`, `What is the supplement of ${a}°?`, 180 - a, i, [10, -10, 20, 90, -20], 1, '°'); }
-    if (i === 4) { const a = pick(190, 350); return choice('यो कुन कोण हो?', 'What kind of angle is this?', 'प्रतिवर्ती कोण | Reflex', ['अधिक कोण | Obtuse', 'सरल कोण | Straight', 'न्यून कोण | Acute'], i, { ang: a }); }
+    if (i === 4) { const a = pick(190, 350); return choice('यो कुन कोण हो?', 'What kind of angle is this?', 'Reflex', ['Obtuse', 'Straight', 'Acute'], i, { ang: a }); }
     if (i === 5) return choice('समकोण कति डिग्रीको हुन्छ?', 'How many degrees is a right angle?', '90°', ['45°', '180°', '60°'], i, { ang: 90 });
     if (i === 6) return choice('सरल कोण कति डिग्रीको हुन्छ?', 'How many degrees is a straight angle?', '180°', ['90°', '360°', '120°'], i, { ang: 180 });
     const a = 5 * rnd(8, 30); return numChoice(`सरल रेखामा एउटा कोण ${a}° छ भने अर्को कोण कति?`, `On a straight line one angle is ${a}°. What is the other?`, 180 - a, i, [10, -10, 20, 90, -20], 1, '°');
@@ -187,7 +187,7 @@ export const solidCfg = (o: { code: string; chapter: number; titleNp: string; ti
   draw: (g, p, lang) => {
     const s = SOLIDS[p.solid]; drawSolid(g, s, p.spread);
     tag(g, lang === 'ne' ? s.np : s.en, 0, 6.6, 0, 3.4, { px: 58, w: 420, h: 96, bg: '#ffffff', border: '#8b5cf6' });
-    tag(g, `${lang === 'ne' ? 'सतह' : 'Faces'} ${s.F} · ${lang === 'ne' ? 'किनारा' : 'Edges'} ${s.E} · ${lang === 'ne' ? 'शीर्ष' : 'Vertices'} ${s.V}`.replace(/\d+/g, (d) => (lang === 'ne' ? [...d].map((c) => '०१२३४५६७८९'[+c]).join('') : d)), 0, -2.2, 3.5, 6, { px: 44, w: 640, h: 80, bg: '#ffffff', border: '#cbd5e1' });
+    tag(g, `${lang === 'ne' ? 'सतह' : 'Faces'} ${s.F} · ${lang === 'ne' ? 'किनारा' : 'Edges'} ${s.E} · ${lang === 'ne' ? 'शीर्ष' : 'Vertices'} ${s.V}`.replace(/\d+/g, (d) => (lang === 'ne' ? [...d].map((c) => '0123456789'[+c]).join('') : d)), 0, -2.2, 3.5, 6, { px: 44, w: 640, h: 80, bg: '#ffffff', border: '#cbd5e1' });
   },
   info: (p) => { const s = SOLIDS[p.solid]; return bi(`${s.np}\nसतह ${s.F} · किनारा ${s.E} · शीर्ष ${s.V}\nफैलाउने बटनले सतह छुट्याएर हेरौँ`, `${s.en}\nFaces ${s.F} · Edges ${s.E} · Vertices ${s.V}\nUse Spread to pull the faces apart`); },
   tip: bi('ठोस छानौँ, घुमाऔँ र सतह, किनारा, शीर्ष गनौँ', 'Pick a solid, turn it and count faces, edges and vertices'),
@@ -197,9 +197,9 @@ export const solidCfg = (o: { code: string; chapter: number; titleNp: string; ti
     if (i === 0) return numChoice(`${s.np} मा कति सतह हुन्छन्?`, `How many faces does a ${s.en.toLowerCase()} have?`, s.F, i, [1, -1, 2, 3, -2], 1, '', { solid: si });
     if (i === 1) return numChoice(`${s.np} मा कति किनारा हुन्छन्?`, `How many edges does a ${s.en.toLowerCase()} have?`, s.E, i, [1, -1, 2, 3, -2], 1, '', { solid: si });
     if (i === 2) return numChoice(`${s.np} मा कति शीर्ष हुन्छन्?`, `How many vertices does a ${s.en.toLowerCase()} have?`, s.V, i, [1, -1, 2, 3, -2], 1, '', { solid: si });
-    if (i === 3) return choice('कुन ठोसमा ६ वटै सतह वर्गाकार हुन्छन्?', 'Which solid has six square faces?', 'घन | Cube', ['घनाभ | Cuboid', 'बेलना | Cylinder', 'पिरामिड | Pyramid'], i, { solid: 0 });
-    if (i === 4) return choice('कुन ठोसमा कुनै शीर्ष हुँदैन?', 'Which solid has no vertex at all?', 'गोला | Sphere', ['घन | Cube', 'शङ्कु | Cone', 'घनाभ | Cuboid'], i, { solid: 7 });
-    if (i === 5) return choice('कुन ठोसमा समतल र वक्र दुवै सतह हुन्छन्?', 'Which solid has both flat and curved surfaces?', 'बेलना | Cylinder', ['घन | Cube', 'गोला | Sphere', 'घनाभ | Cuboid'], i, { solid: 5 });
+    if (i === 3) return choice('कुन ठोसमा 6 वटै सतह वर्गाकार हुन्छन्?', 'Which solid has six square faces?', 'Cube', ['Cuboid', 'Cylinder', 'Pyramid'], i, { solid: 0 });
+    if (i === 4) return choice('कुन ठोसमा कुनै शीर्ष हुँदैन?', 'Which solid has no vertex at all?', 'Sphere', ['Cube', 'Cone', 'Cuboid'], i, { solid: 7 });
+    if (i === 5) return choice('कुन ठोसमा समतल र वक्र दुवै सतह हुन्छन्?', 'Which solid has both flat and curved surfaces?', 'Cylinder', ['Cube', 'Sphere', 'Cuboid'], i, { solid: 5 });
     if (o.six) {
       if (i === 6) { const n = rnd(3, 8); return numChoice(`आधार ${n} भुजा भएको प्रिज्ममा कति सतह हुन्छन्?`, `How many faces has a prism whose base has ${n} sides?`, n + 2, i, [1, -1, 2, n, -2], 1); }
       return choice('घनको जाल बनाउँदा कति वर्ग चाहिन्छ?', 'How many squares are needed to make the net of a cube?', '6', ['4', '8', '12'], i, { solid: 0, spread: 3 });

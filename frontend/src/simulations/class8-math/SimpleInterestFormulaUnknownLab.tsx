@@ -1,7 +1,7 @@
 /**
  * SimpleInterestFormulaUnknownLab.tsx
- * Grade 8 Mathematics – Unit 7: SIMPLE INTEREST (साधारण ब्याज)
- * Simulation 2: Simple Interest Formula & Unknown Variables Lab (साधारण ब्याज सूत्र र अज्ञात मान प्रयोगशाला)
+ * Grade 8 Mathematics – Unit 7: SIMPLE INTEREST
+ * Simulation 2: Simple Interest Formula & Unknown Variables Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 7)
  */
 import React, { useState } from 'react';
@@ -12,57 +12,57 @@ import { Calculator, Clock, HelpCircle, CheckCircle, RefreshCw, ArrowRight, Comp
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'ब्याज I = रु. २,४००, समय T = ३ वर्ष र दर R = १०% भए सावाँ (P) निकाल्ने सूत्र र मान कति हुन्छ?',
+    np: 'ब्याज I = Rs. 2,400, समय T = 3 years र दर R = 10% भए सावाँ (P) निकाल्ने सूत्र र मान कति हुन्छ?',
     en: 'If I = Rs. 2,400, T = 3 years and R = 10%, what is the formula and value for Principal (P)?',
     options: [
-      { key: 'A', label: 'P = (100 × I) / (T × R) = रु. ८,०००' },
-      { key: 'B', label: 'P = रु. ७,५००' },
-      { key: 'C', label: 'P = रु. ६,०००' },
-      { key: 'D', label: 'P = रु. ९,०००' },
+      { key: 'A', label: 'P = (100 × I) / (T × R) = Rs. 8,000' },
+      { key: 'B', label: 'P = Rs. 7,500' },
+      { key: 'C', label: 'P = Rs. 6,000' },
+      { key: 'D', label: 'P = Rs. 9,000' },
     ],
     answer: 'A',
   },
   {
-    np: '३ वर्ष ६ महिनालाई वर्षमा रूपान्तरण गर्दा कति वर्ष हुन्छ?',
+    np: '3 years 6 महिनालाई yearsमा रूपान्तरण गर्दा कति years हुन्छ?',
     en: 'How many years is 3 years and 6 months when converted to fractional years?',
     options: [
-      { key: 'A', label: '३.५ वर्ष (3 + 6/12 = 3.5 years)' },
-      { key: 'B', label: '३.६ वर्ष' },
-      { key: 'C', label: '३.२ वर्ष' },
-      { key: 'D', label: '४ वर्ष' },
+      { key: 'A', label: '3.5 years (3 + 6/12 = 3.5 years)' },
+      { key: 'B', label: '3.6 years' },
+      { key: 'C', label: '3.2 years' },
+      { key: 'D', label: '4 years' },
     ],
     answer: 'A',
   },
   {
-    np: 'सान्तेमानले रु. ५,००० को १०% का दरले ३ वर्ष ६ महिनामा कति ब्याज पाउँछन्?',
+    np: 'सान्तेमानले Rs. 5,000 को 10% का दरले 3 years 6 महिनामा कति ब्याज पाउँछन्?',
     en: 'How much simple interest does Santaman receive on Rs. 5,000 at 10% for 3 years 6 months?',
     options: [
-      { key: 'A', label: 'रु. १,७५० [ (५००० × ३.५ × १०) ÷ १०० = १७५० ]' },
-      { key: 'B', label: 'रु. १,५००' },
-      { key: 'C', label: 'रु. २,०००' },
-      { key: 'D', label: 'रु. १,६५०' },
+      { key: 'A', label: 'Rs. 1,750 [ (5000 × 3.5 × 10) ÷ 100 = 1750 ]' },
+      { key: 'B', label: 'Rs. 1,500' },
+      { key: 'C', label: 'Rs. 2,000' },
+      { key: 'D', label: 'Rs. 1,650' },
     ],
     answer: 'A',
   },
   {
-    np: 'रु. ६,००० को ८% का दरले कति समय (T) मा रु. १,४४० ब्याज आउला?',
+    np: 'Rs. 6,000 को 8% का दरले कति समय (T) मा Rs. 1,440 ब्याज आउला?',
     en: 'In how much time (T) will Rs. 6,000 earn Rs. 1,440 interest at 8% per annum?',
     options: [
-      { key: 'A', label: '३ वर्ष [ T = (१०० × १४४०) ÷ (६००० × ८) = ३ ]' },
-      { key: 'B', label: '२.५ वर्ष' },
-      { key: 'C', label: '४ वर्ष' },
-      { key: 'D', label: '२ वर्ष' },
+      { key: 'A', label: '3 years [ T = (100 × 1440) ÷ (6000 × 8) = 3 ]' },
+      { key: 'B', label: '2.5 years' },
+      { key: 'C', label: '4 years' },
+      { key: 'D', label: '2 years' },
     ],
     answer: 'A',
   },
   {
-    np: 'रु. १२,००० को २ वर्षमा रु. २,८८० ब्याज आउन ब्याजदर (R) कति हुनुपर्छ?',
+    np: 'Rs. 12,000 को 2 yearsमा Rs. 2,880 ब्याज आउन ब्याजदर (R) कति हुनुपर्छ?',
     en: 'What interest rate (R) is needed for Rs. 12,000 to earn Rs. 2,880 interest in 2 years?',
     options: [
-      { key: 'A', label: '१२% [ R = (१०० × २८८०) ÷ (१२००० × २) = १२% ]' },
-      { key: 'B', label: '१०%' },
-      { key: 'C', label: '१५%' },
-      { key: 'D', label: '८%' },
+      { key: 'A', label: '12% [ R = (100 × 2880) ÷ (12000 × 2) = 12% ]' },
+      { key: 'B', label: '10%' },
+      { key: 'C', label: '15%' },
+      { key: 'D', label: '8%' },
     ],
     answer: 'A',
   },
@@ -111,7 +111,7 @@ export const SimpleInterestFormulaUnknownLab: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! I = PTR/100 बाट P, T र R का ३ ओटा रूपान्तरित सूत्रहरू बन्छन्। कुनै पनि अज्ञात मान पत्ता लगाऔं!',
+        'नमस्ते! I = PTR/100 बाट P, T र R का 3 ओटा रूपान्तरित सूत्रहरू बन्छन्। कुनै पनि अज्ञात मान पत्ता लगाऔं!',
         'Hello! From I = PTR/100, we derive 3 transformed formulas for P, T, and R. Let us solve any unknown value!'
       )}
     >
@@ -125,7 +125,7 @@ export const SimpleInterestFormulaUnknownLab: React.FC<{
             }`}
           >
             <Calculator className="w-4 h-4" />
-            {L('१. अज्ञात मान सूत्र चक्र (Formula & Unknown Solver)', '1. Unknown Variable Solver')}
+            {L('1. अज्ञात मान सूत्र चक्र (Formula & Unknown Solver)', '1. Unknown Variable Solver')}
           </button>
           <button
             onClick={() => setActiveTab('time_converter')}
@@ -134,7 +134,7 @@ export const SimpleInterestFormulaUnknownLab: React.FC<{
             }`}
           >
             <Clock className="w-4 h-4" />
-            {L('२. समय रूपान्तरण (वर्ष र महिना)', '2. Time Unit Converter')}
+            {L('2. समय रूपान्तरण (years र महिना)', '2. Time Unit Converter')}
           </button>
           <button
             onClick={() => setActiveTab('textbook_cases')}
@@ -143,7 +143,7 @@ export const SimpleInterestFormulaUnknownLab: React.FC<{
             }`}
           >
             <Compass className="w-4 h-4" />
-            {L('३. CDC पाठ्यपुस्तक उदाहरणहरू', '3. CDC Textbook Cases')}
+            {L('3. CDC पाठ्यपुस्तक उदाहरणहरू', '3. CDC Textbook Cases')}
           </button>
         </div>
 
@@ -263,19 +263,19 @@ export const SimpleInterestFormulaUnknownLab: React.FC<{
                 <div>
                   <div className="text-xs text-slate-400 font-bold uppercase">{L('निकाल्नुपर्ने मान (Calculated Target):', 'Calculated Target:')}</div>
                   <div className="text-3xl font-black text-amber-400 mt-1">
-                    {unknownTarget === 'I' && `I = रु. ${toNp(calcI.toFixed(2))}`}
-                    {unknownTarget === 'P' && `P = रु. ${toNp(calcP.toFixed(2))}`}
-                    {unknownTarget === 'T' && `T = ${toNp(calcT.toFixed(2))} ${L('वर्ष (years)', 'years')}`}
+                    {unknownTarget === 'I' && `I = Rs. ${toNp(calcI.toFixed(2))}`}
+                    {unknownTarget === 'P' && `P = Rs. ${toNp(calcP.toFixed(2))}`}
+                    {unknownTarget === 'T' && `T = ${toNp(calcT.toFixed(2))} ${L('years (years)', 'years')}`}
                     {unknownTarget === 'R' && `R = ${toNp(calcR.toFixed(2))}%`}
                   </div>
                 </div>
 
                 <div className="bg-slate-900/90 p-4 rounded-xl text-xs font-mono text-slate-300 space-y-1">
                   <div className="text-amber-300 font-bold">{L('प्रयोग गरिएको सूत्र:', 'Formula Used:')}</div>
-                  {unknownTarget === 'I' && <div>I = (P × T × R) ÷ 100 = ({toNp(inP)} × {toNp(inT)} × {toNp(inR)}) ÷ १००</div>}
-                  {unknownTarget === 'P' && <div>P = (100 × I) ÷ (T × R) = (१०० × {toNp(inI)}) ÷ ({toNp(inT)} × {toNp(inR)})</div>}
-                  {unknownTarget === 'T' && <div>T = (100 × I) ÷ (P × R) = (१०० × {toNp(inI)}) ÷ ({toNp(inP)} × {toNp(inR)})</div>}
-                  {unknownTarget === 'R' && <div>R = (100 × I) ÷ (P × T) = (१०० × {toNp(inI)}) ÷ ({toNp(inP)} × {toNp(inT)})</div>}
+                  {unknownTarget === 'I' && <div>I = (P × T × R) ÷ 100 = ({toNp(inP)} × {toNp(inT)} × {toNp(inR)}) ÷ 100</div>}
+                  {unknownTarget === 'P' && <div>P = (100 × I) ÷ (T × R) = (100 × {toNp(inI)}) ÷ ({toNp(inT)} × {toNp(inR)})</div>}
+                  {unknownTarget === 'T' && <div>T = (100 × I) ÷ (P × R) = (100 × {toNp(inI)}) ÷ ({toNp(inP)} × {toNp(inR)})</div>}
+                  {unknownTarget === 'R' && <div>R = (100 × I) ÷ (P × T) = (100 × {toNp(inI)}) ÷ ({toNp(inP)} × {toNp(inT)})</div>}
                 </div>
               </div>
             </div>
@@ -288,11 +288,11 @@ export const SimpleInterestFormulaUnknownLab: React.FC<{
             <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-6">
               <div className="border-b border-slate-100 pb-3">
                 <h3 className="text-lg font-bold text-slate-800">
-                  {L('महिनालाई वर्षमा रूपान्तरण गर्ने तरिका (Converting Months to Years)', 'Converting Months to Fractional Years')}
+                  {L('महिनालाई yearsमा रूपान्तरण गर्ने तरिका (Converting Months to Years)', 'Converting Months to Fractional Years')}
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
                   {L(
-                    'साधारण ब्याज सूत्र I = PTR/100 मा समय T सधैं वर्ष (Years) मा हुनुपर्छ। त्यसैले महिनालाई १२ ले भाग गरिन्छ।',
+                    'साधारण ब्याज सूत्र I = PTR/100 मा समय T सधैं years (Years) मा हुनुपर्छ। त्यसैले महिनालाई 12 ले भाग गरिन्छ।',
                     'In simple interest formula, Time T must always be in years. Months must be divided by 12.'
                   )}
                 </p>
@@ -301,7 +301,7 @@ export const SimpleInterestFormulaUnknownLab: React.FC<{
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 <div className="space-y-4">
                   <div>
-                    <label className="text-xs font-bold text-slate-600 block mb-1">{L('वर्ष संख्या (Years):', 'Years:')}</label>
+                    <label className="text-xs font-bold text-slate-600 block mb-1">{L('years संख्या (Years):', 'Years:')}</label>
                     <input
                       type="number"
                       value={convYears}
@@ -323,10 +323,10 @@ export const SimpleInterestFormulaUnknownLab: React.FC<{
                 <div className="bg-indigo-50 p-6 rounded-2xl border border-indigo-200 text-center space-y-2">
                   <div className="text-xs font-bold uppercase text-indigo-900">{L('रूपान्तरित समय (T in Years)', 'Converted T in Years')}</div>
                   <div className="text-3xl font-black text-indigo-700">
-                    {toNp(totalConvertedYears.toFixed(2))} {L('वर्ष', 'years')}
+                    {toNp(totalConvertedYears.toFixed(2))} {L('years', 'years')}
                   </div>
                   <div className="text-xs text-slate-600">
-                    T = {toNp(convYears)} + ({toNp(convMonths)} ÷ १२) = {toNp(convYears)} + {toNp((convMonths / 12).toFixed(2))} = <b>{toNp(totalConvertedYears.toFixed(2))}</b>
+                    T = {toNp(convYears)} + ({toNp(convMonths)} ÷ 12) = {toNp(convYears)} + {toNp((convMonths / 12).toFixed(2))} = <b>{toNp(totalConvertedYears.toFixed(2))}</b>
                   </div>
                 </div>
               </div>
@@ -351,7 +351,7 @@ export const SimpleInterestFormulaUnknownLab: React.FC<{
                 {L('सोमायाको बचत (Somaya CDC Example 1)', 'Somaya CDC Example 1')}
               </div>
               <p className="text-xs text-slate-600">
-                P = रु. २०,०००, R = १०%, T = २ वर्ष ⇒ I = रु. ४,०००।
+                P = Rs. 20,000, R = 10%, T = 2 years ⇒ I = Rs. 4,000.
               </p>
             </div>
 
@@ -369,7 +369,7 @@ export const SimpleInterestFormulaUnknownLab: React.FC<{
                 {L('सान्तेमानको ब्याज (Santaman CDC Example 2)', 'Santaman CDC Example 2')}
               </div>
               <p className="text-xs text-slate-600">
-                P = रु. ५,०००, R = १०%, T = ३ वर्ष ६ महिना (३.५ वर्ष) ⇒ I = रु. १,७५०।
+                P = Rs. 5,000, R = 10%, T = 3 years 6 months (3.5 years) ⇒ I = Rs. 1,750.
               </p>
             </div>
 
@@ -387,7 +387,7 @@ export const SimpleInterestFormulaUnknownLab: React.FC<{
                 {L('सावाँ पत्ता लगाउने (Finding Principal P - CDC Example 3)', 'Finding Principal P - CDC Example 3')}
               </div>
               <p className="text-xs text-slate-600">
-                I = रु. २,४००, T = ३ वर्ष, R = १०% ⇒ P = रु. ८,०००।
+                I = Rs. 2,400, T = 3 years, R = 10% ⇒ P = Rs. 8,000.
               </p>
             </div>
           </div>

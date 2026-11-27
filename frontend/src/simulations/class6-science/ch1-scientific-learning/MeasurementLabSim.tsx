@@ -1,14 +1,14 @@
 /**
  * MeasurementLabSim.tsx
- * Simulation 2: 2D Virtual Measurement Laboratory (नाप प्रयोगशाला)
- * Grade 6 Science • Unit 1: Scientific Learning (वैज्ञानिक सिकाइ)
+ * Simulation 2: 2D Virtual Measurement Laboratory
+ * Grade 6 Science • Unit 1: Scientific Learning
  *
  * Full 2D Interactive Measurement Apparatus:
  * 1. Calibrated Metric Ruler: Precision length measurement (cm & mm) with movable specimen block
- * 2. Precision Beam Balance (तराजु): Equal-arm balance comparing unknown mass to brass slotted weights
+ * 2. Precision Beam Balance: Equal-arm balance comparing unknown mass to brass slotted weights
  *    with Local Nepalese Units (Dharni, Pau, Tola)
  * 3. Graduated Measuring Cylinder: Liquid meniscus & Water displacement for irregular solid (V2 - V1)
- *    with Local volumetric conversions: Mana (माना) & Pathi (पाथी) vs Litres
+ *    with Local volumetric conversions: Mana & Pathi vs Litres
  * 4. Kid-friendly light educational theme (bg-slate-50, crisp white cards, natural wood workbench)
  */
 
@@ -24,7 +24,7 @@ export const MeasurementLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -215,7 +215,7 @@ export const MeasurementLabSim: React.FC<BaseSimulationProps> = ({
         const lengthText = `${(blockLengthMm / 10).toFixed(1)} cm (${blockLengthMm} mm)`;
         ctx.fillText(lengthText, blockX + blockW / 2 - 40, blockY - 24);
       } else if (mode === 'mass') {
-        // --- 2. EQUAL-ARM BEAM BALANCE (तराजु) ---
+        // --- 2. EQUAL-ARM BEAM BALANCE ---
         const standX = cx;
         const standBottomY = tableY;
         const standTopY = standBottomY - 190;
@@ -462,7 +462,7 @@ export const MeasurementLabSim: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Virtual Measurement Lab"
-      titleNe="नाप २डी प्रयोगशाला"
+      titleNe="नाप 2डी प्रयोगशाला"
       subject="Science"
       grade={6}
       chapter={1}
@@ -531,9 +531,9 @@ export const MeasurementLabSim: React.FC<BaseSimulationProps> = ({
             {mode === 'mass' && <Scale style={{ width: '14px', height: '14px' }} />}
             {mode === 'volume' && <Droplets style={{ width: '14px', height: '14px' }} />}
             <span>
-              {mode === 'length' && (lang === 'ne' ? `१. लम्बाइ नाप: ${(blockLengthMm / 10).toFixed(1)} cm (${blockLengthMm} mm)` : `1. Length: ${(blockLengthMm / 10).toFixed(1)} cm`)}
-              {mode === 'mass' && (lang === 'ne' ? `२. पिण्ड नाप: वस्तु ${sampleMassG}g vs ढक ${rightWeightG}g` : `2. Mass: Sample ${sampleMassG}g vs Weight ${rightWeightG}g`)}
-              {mode === 'volume' && (lang === 'ne' ? `३. आयतन नाप: ${currentVolumeMl} ml (ढुङ्गा: ${stoneVolumeMl} cm³)` : `3. Volume: ${currentVolumeMl} ml (Stone: ${stoneVolumeMl} cm³)`)}
+              {mode === 'length' && (lang === 'ne' ? `1. लम्बाइ नाप: ${(blockLengthMm / 10).toFixed(1)} cm (${blockLengthMm} mm)` : `1. Length: ${(blockLengthMm / 10).toFixed(1)} cm`)}
+              {mode === 'mass' && (lang === 'ne' ? `2. पिण्ड नाप: वस्तु ${sampleMassG}g vs ढक ${rightWeightG}g` : `2. Mass: Sample ${sampleMassG}g vs Weight ${rightWeightG}g`)}
+              {mode === 'volume' && (lang === 'ne' ? `3. आयतन नाप: ${currentVolumeMl} ml` : `3. Volume: ${currentVolumeMl} ml (Stone: ${stoneVolumeMl} cm³)`)}
             </span>
           </div>
 
@@ -621,13 +621,13 @@ export const MeasurementLabSim: React.FC<BaseSimulationProps> = ({
           {/* Mode Selector Buttons */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. नाप उपकरण छान्नुहोस्' : '1. Select Apparatus'}
+              {lang === 'ne' ? '1. नाप उपकरण छान्नुहोस्' : '1. Select Apparatus'}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {[
-                { id: 'length', nameEn: '1. Length (Ruler)', nameNe: '१. लम्बाइ नाप (स्केल)', icon: <Ruler style={{ width: '14px', height: '14px' }} /> },
-                { id: 'mass', nameEn: '2. Mass (Beam Balance)', nameNe: '२. पिण्ड नाप (तराजु)', icon: <Scale style={{ width: '14px', height: '14px' }} /> },
-                { id: 'volume', nameEn: '3. Volume (Measuring Cylinder)', nameNe: '३. आयतन नाप (सिलिन्डर)', icon: <Droplets style={{ width: '14px', height: '14px' }} /> },
+                { id: 'length', nameEn: '1. Length (Ruler)', nameNe: '1. लम्बाइ नाप (स्केल)', icon: <Ruler style={{ width: '14px', height: '14px' }} /> },
+                { id: 'mass', nameEn: '2. Mass (Beam Balance)', nameNe: '2. पिण्ड नाप (तराजु)', icon: <Scale style={{ width: '14px', height: '14px' }} /> },
+                { id: 'volume', nameEn: '3. Volume (Measuring Cylinder)', nameNe: '3. आयतन नाप (सिलिन्डर)', icon: <Droplets style={{ width: '14px', height: '14px' }} /> },
               ].map((m) => (
                 <button
                   key={m.id}
@@ -790,38 +790,38 @@ export const MeasurementLabSim: React.FC<BaseSimulationProps> = ({
               {mode === 'mass' ? (
                 <>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>१ पाउ (Pau)</span>
-                    <strong style={{ color: '#fbbf24' }}>२०० ग्राम (200 g)</strong>
+                    <span>1 Pau</span>
+                    <strong style={{ color: '#fbbf24' }}>200 g</strong>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>१ धार्नी (Dharni)</span>
-                    <strong style={{ color: '#fbbf24' }}>२.५ केजी (2500 g)</strong>
+                    <span>1 Dharni</span>
+                    <strong style={{ color: '#fbbf24' }}>2.5 kg (2500 g)</strong>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>१ तोला (Tola - Gold)</span>
-                    <strong style={{ color: '#fbbf24' }}>११.६६ ग्राम (11.66 g)</strong>
+                    <span>1 Tola (gold)</span>
+                    <strong style={{ color: '#fbbf24' }}>11.66 g</strong>
                   </div>
                 </>
               ) : mode === 'volume' ? (
                 <>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>१ माना (Mana)</span>
-                    <strong style={{ color: '#34d399' }}>०.५६८ लिटर (568 ml)</strong>
+                    <span>1 Mana</span>
+                    <strong style={{ color: '#34d399' }}>0.568 litre (568 ml)</strong>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>१ पाथी (Pathi = 8 Mana)</span>
-                    <strong style={{ color: '#34d399' }}>४.५४ लिटर (4.54 L)</strong>
+                    <span>1 Pathi (= 8 Mana)</span>
+                    <strong style={{ color: '#34d399' }}>4.54 litres (4.54 L)</strong>
                   </div>
                 </>
               ) : (
                 <>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>१ हात (Haat)</span>
-                    <strong style={{ color: '#38bdf8' }}>करिब १८ इन्च (45 cm)</strong>
+                    <span>1 Haat</span>
+                    <strong style={{ color: '#38bdf8' }}>about 18 inches (45 cm)</strong>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>१ बित्ता (Bitta)</span>
-                    <strong style={{ color: '#38bdf8' }}>करिब ९ इन्च (22.5 cm)</strong>
+                    <span>1 Bitta</span>
+                    <strong style={{ color: '#38bdf8' }}>about 9 inches (22.5 cm)</strong>
                   </div>
                 </>
               )}

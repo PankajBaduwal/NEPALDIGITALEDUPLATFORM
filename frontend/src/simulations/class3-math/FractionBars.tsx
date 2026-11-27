@@ -1,5 +1,5 @@
 /**
- * Lesson 7 · Fraction (भिन्न)
+ * Lesson 7 · Fraction
  * Chocolate Fractions — chocolate bar cut into equal pieces; eat some and read numerator / denominator.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -265,7 +265,7 @@ export const FractionBars: React.FC<Props> = ({ onBackToLibrary }) => {
                       marginTop: 6,
                     }}
                   >
-                    १/{toNp(d)}
+                    1/{toNp(d)}
                   </span>
                 </div>
               );

@@ -1,16 +1,16 @@
 /**
  * pascalTypes.ts
- * Type definitions, quiz questions, and presets for Pascal's Law Simulation (पास्कलको नियम)
- * Grade 10 Science & Technology • Chapter 2: Pressure (चाप)
+ * Type definitions, quiz questions, and presets for Pascal's Law Simulation
+ * Grade 10 Science & Technology • Chapter 2: Pressure
  * Curriculum Development Centre (CDC), Nepal
  */
 
 export type PascalMode =
-  | 'flask'            // Pascal's Multi-Piston Spherical Vessel (पास्कलको बहु-पिस्टन भाँडो)
-  | 'hydraulic_lift'   // Hydraulic Lift & Press (हाइड्रोलिक लिफ्ट र प्रेस)
-  | 'hydraulic_brakes' // Hydraulic Brake System (हाइड्रोलिक ब्रेक प्रणाली)
-  | 'numerical_lab'    // SEE Numerical Problem Solver (गणितीय प्रयोगशाला)
-  | 'challenge_quiz';  // Interactive Quiz (अभ्यास र प्रश्नोत्तरी)
+  | 'flask'            // Pascal's Multi-Piston Spherical Vessel
+  | 'hydraulic_lift'   // Hydraulic Lift & Press
+  | 'hydraulic_brakes' // Hydraulic Brake System
+  | 'numerical_lab'    // SEE Numerical Problem Solver
+  | 'challenge_quiz';  // Interactive Quiz
 
 export interface PistonVesselPort {
   id: string;
@@ -77,7 +77,7 @@ export const SEE_EXAM_PROBLEMS: SeeExamProblem[] = [
   {
     id: 'see_2079_q1',
     titleEn: 'Hydraulic Lift Output Force (SEE 2079 Model)',
-    titleNe: 'हाइड्रोलिक लिफ्टको निस्कने बल (SEE २०७९)',
+    titleNe: 'हाइड्रोलिक लिफ्टको निस्कने बल (SEE 2079)',
     examTag: 'SEE 2079 Compulsory Science',
     given: { f1: 50, a1: 10, a2: 250 },
     unknownParam: 'f2',
@@ -92,15 +92,15 @@ export const SEE_EXAM_PROBLEMS: SeeExamProblem[] = [
       'पास्कलको नियम अनुसार तरलमा चाप सबैतिर बराबर प्रसारण हुन्छ: P₁ = P₂',
       'सूत्र: F₁ / A₁ = F₂ / A₂',
       'F₂ को लागि रूपान्तरण गर्दा: F₂ = (F₁ × A₂) / A₁',
-      'मान प्रतिस्थापन गर्दा: F₂ = (५० N × २५० cm²) / १० cm²',
-      'F₂ = १२५० N (निस्कने बल २५ गुणाले बढ्यो!)',
+      'मान प्रतिस्थापन गर्दा: F₂ = (50 N × 250 cm²) / 10 cm²',
+      'F₂ = 1250 N',
     ],
     finalAnswerFormatted: 'F₂ = 1,250 N',
   },
   {
     id: 'see_2080_car',
     titleEn: 'Lifting 1500 kg Car (SEE 2080)',
-    titleNe: '१५०० kg कार उचाल्न आवश्यक बल (SEE २०८०)',
+    titleNe: '1500 kg कार उचाल्न आवश्यक बल (SEE 2080)',
     examTag: 'SEE 2080 Science Board',
     given: { a1: 20, a2: 500, massLoadKg: 1500 },
     unknownParam: 'f1',
@@ -112,11 +112,11 @@ export const SEE_EXAM_PROBLEMS: SeeExamProblem[] = [
       'F₁ = 588 N (A modest force of 588 N easily lifts a 1500 kg car!)',
     ],
     solutionStepsNe: [
-      'कारको तौल F₂ = m × g = १५०० kg × ९.८ m/s² = १४,७०० N',
+      'कारको तौल F₂ = m × g = 1500 kg × 9.8 m/s² = 14,700 N',
       'पास्कलको नियम अनुसार: F₁ / A₁ = F₂ / A₂',
       'F₁ = (F₂ × A₁) / A₂',
-      'F₁ = (१४,७०० N × २० cm²) / ५०० cm²',
-      'F₁ = ५८८ N (केवल ५८८ N बल लगाएर १५०० kg को कार उचाल्न सकिन्छ!)',
+      'F₁ = (14,700 N × 20 cm²) / 500 cm²',
+      'F₁ = 588 N',
     ],
     finalAnswerFormatted: 'F₁ = 588 N',
   },
@@ -136,11 +136,11 @@ export const SEE_EXAM_PROBLEMS: SeeExamProblem[] = [
       'Energy is conserved: W₁ = F₁ × d₁ = F₂ × d₂',
     ],
     solutionStepsNe: [
-      'पानी असंपीड्य भएकोले पिस्टन १ मा विस्थापित आयतन = पिस्टन २ मा उठेको आयतन: V₁ = V₂',
+      'पानी असंपीड्य भएकोले पिस्टन 1 मा विस्थापित आयतन = पिस्टन 2 मा उठेको आयतन: V₁ = V₂',
       'सूत्र: A₁ × d₁ = A₂ × d₂',
       'd₂ = (A₁ × d₁) / A₂',
-      'd₂ = (१५ cm² × २० cm) / ३०० cm²',
-      'd₂ = १.० cm (सानो पिस्टन २० cm तल जाँदा ठूलो पिस्टन १ cm माथि उठ्छ)',
+      'd₂ = (15 cm² × 20 cm) / 300 cm²',
+      'd₂ = 1.0 cm',
       'ऊर्जाको संरक्षण: W₁ = F₁ × d₁ = F₂ × d₂',
     ],
     finalAnswerFormatted: 'd₂ = 1.0 cm',
@@ -170,7 +170,7 @@ export const PASCAL_SIM_QUIZ: QuizQuestion[] = [
       "The liquid must be exposed to open atmospheric air",
     ],
     optionsNe: [
-      "तरल पदार्थ १००°C मा उम्लिएको हुनुपर्छ",
+      "तरल पदार्थ 100°C मा उम्लिएको हुनुपर्छ",
       "तरल पदार्थ बन्द भाँडोमा रहेको र असंपीड्य हुनुपर्छ",
       "भाँडोलाई पूर्ण शून्य (vacuum) मा राख्नुपर्छ",
       "तरल पदार्थ खुला हावामा रहेको हुनुपर्छ",
@@ -182,7 +182,7 @@ export const PASCAL_SIM_QUIZ: QuizQuestion[] = [
   {
     id: 2,
     questionEn: "In a hydraulic machine, if the area of Piston B is 10 times that of Piston A, what is the output force ratio (F₂ / F₁)?",
-    questionNe: "हाइड्रोलिक मेसिनमा यदि पिस्टन B को क्षेत्रफल पिस्टन A को भन्दा १० गुणा बढी छ भने, निस्कने बलको अनुपात कति हुन्छ?",
+    questionNe: "हाइड्रोलिक मेसिनमा यदि पिस्टन B को क्षेत्रफल पिस्टन A को भन्दा 10 गुणा बढी छ भने, निस्कने बलको अनुपात कति हुन्छ?",
     optionsEn: [
       "Output force is 10 times greater (F₂ = 10 × F₁)",
       "Output force is 10 times smaller (F₂ = F₁ / 10)",
@@ -190,14 +190,14 @@ export const PASCAL_SIM_QUIZ: QuizQuestion[] = [
       "Output force becomes zero",
     ],
     optionsNe: [
-      "निस्कने बल १० गुणा बढी हुन्छ (F₂ = १० × F₁)",
-      "निस्कने बल १० गुणा कम हुन्छ (F₂ = F₁ / १०)",
+      "निस्कने बल 10 गुणा बढी हुन्छ (F₂ = 10 × F₁)",
+      "निस्कने बल 10 गुणा कम हुन्छ (F₂ = F₁ / 10)",
       "निस्कने बल F₁ जति नै रहन्छ",
       "निस्कने बल शून्य हुन्छ",
     ],
     correctIndex: 0,
     explanationEn: "Since P₁ = P₂, F₁/A₁ = F₂/A₂. Therefore F₂ = F₁ × (A₂ / A₁) = 10 × F₁. It acts as a force multiplier!",
-    explanationNe: "P₁ = P₂ भएकोले, F₁/A₁ = F₂/A₂ हुन्छ। त्यसैले F₂ = F₁ × (A₂ / A₁) = १० × F₁ हुन्छ। यसले बल बढाउने साधन (Force Multiplier) को काम गर्छ।",
+    explanationNe: "P₁ = P₂ भएकोले, F₁/A₁ = F₂/A₂ हुन्छ। त्यसैले F₂ = F₁ × (A₂ / A₁) = 10 × F₁ हुन्छ। यसले बल बढाउने साधन (Force Multiplier) को काम गर्छ।",
   },
   {
     id: 3,

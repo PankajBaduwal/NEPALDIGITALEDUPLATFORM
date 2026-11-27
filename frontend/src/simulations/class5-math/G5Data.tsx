@@ -14,7 +14,7 @@ export const billCfg = (o: { code: string; chapter: number; titleNp: string; tit
   params: [
     ...ITEMS.map((it, i) => ({ id: `q${i}`, np: `${it.np} (रु ${it.price})`, en: `${it.en} (Rs ${it.price})`, min: 0, max: 10, init: [3, 2, 1][i], color: it.c })),
     { id: 'disc', np: 'छुट', en: 'Discount', min: 0, max: 20, step: 5, init: 10, show: (v) => `${v}%`, color: '#f59e0b' },
-    { id: 'vat', np: 'भ्याट', en: 'VAT', min: 0, max: 1, init: 1, names: [{ np: 'भ्याट छैन', en: 'No VAT' }, { np: 'भ्याट १३%', en: 'VAT 13%' }], color: '#8b5cf6' },
+    { id: 'vat', np: 'भ्याट', en: 'VAT', min: 0, max: 1, init: 1, names: [{ np: 'भ्याट छैन', en: 'No VAT' }, { np: 'भ्याट 13%', en: 'VAT 13%' }], color: '#8b5cf6' },
   ],
   stage: { camera: [0, 7, 15], target: [0, 3, 0], minDistance: 8, maxDistance: 26 },
   draw: (g, p, lang) => {
@@ -28,14 +28,14 @@ export const billCfg = (o: { code: string; chapter: number; titleNp: string; tit
   goal: () => { const q = [rnd(1, 6), rnd(1, 6), rnd(1, 3)]; const sub = q[0] * 35 + q[1] * 15 + q[2] * 120; return { p: { q0: q[0], q1: q[1], q2: q[2], disc: 0, vat: 0 }, np: `कुल रु ${sub} हुने बिल बनाऔँ (छुट र भ्याट नहुने)`, en: `Make a bill of exactly Rs ${sub} (no discount, no VAT)`, start: { q0: 0, q1: 0, q2: 0, disc: 0, vat: 0 } }; },
   quiz: (i) => {
     const q = [rnd(2, 8), rnd(2, 8), rnd(1, 4)]; const sub = q[0] * 35 + q[1] * 15 + q[2] * 120; const dp = 5 * rnd(1, 4); const d = (sub * dp) / 100;
-    if (i === 0) return numChoice(`${q[0]} कपी (रु ३५) को जम्मा कति?`, `${q[0]} copies at Rs 35 cost…`, q[0] * 35, i, [5, -5, 35, 10, 70], 1, '', { q0: q[0], q1: 0, q2: 0 });
-    if (i === 1) return numChoice(`${q[1]} कलम (रु १५) र ${q[2]} ज्यामिति बाकस (रु १२०) को जम्मा कति?`, `${q[1]} pens (Rs 15) and ${q[2]} geometry boxes (Rs 120) cost…`, q[1] * 15 + q[2] * 120, i, [15, -15, 10, 120, 30], 1, '', { q0: 0, q1: q[1], q2: q[2] });
+    if (i === 0) return numChoice(`${q[0]} कपी (रु 35) को जम्मा कति?`, `${q[0]} copies at Rs 35 cost…`, q[0] * 35, i, [5, -5, 35, 10, 70], 1, '', { q0: q[0], q1: 0, q2: 0 });
+    if (i === 1) return numChoice(`${q[1]} कलम (रु 15) र ${q[2]} ज्यामिति बाकस (रु 120) को जम्मा कति?`, `${q[1]} pens (Rs 15) and ${q[2]} geometry boxes (Rs 120) cost…`, q[1] * 15 + q[2] * 120, i, [15, -15, 10, 120, 30], 1, '', { q0: 0, q1: q[1], q2: q[2] });
     if (i === 2) return numChoice(`जम्मा रु ${sub}, ग्राहकले रु ${Math.ceil(sub / 100) * 100} दिए। फिर्ता कति?`, `Bill Rs ${sub}; the customer pays Rs ${Math.ceil(sub / 100) * 100}. Change?`, Math.ceil(sub / 100) * 100 - sub, i, [5, -5, 10, 20, 50], 0);
     if (i === 3) return numChoice(`रु ${sub} मा ${dp}% छुट भए छुट रकम कति?`, `A ${dp}% discount on Rs ${sub} is…`, d, i, [5, -5, 10, 20, 50], 0, '', { q0: q[0], q1: q[1], q2: q[2], disc: dp, vat: 0 });
     if (i === 4) return numChoice(`रु ${sub} मा ${dp}% छुट पछि तिर्नुपर्ने रकम?`, `Rs ${sub} after a ${dp}% discount is…`, sub - d, i, [5, -5, 10, d, 50], 1);
-    if (i === 5) { const a = 100 * rnd(2, 9); return numChoice(`रु ${a} मा १३% भ्याट कति हुन्छ?`, `13% VAT on Rs ${a} is…`, (a * 13) / 100, i, [1, -1, 3, 10, 13], 1); }
-    if (i === 6) { const a = 100 * rnd(2, 9); return numChoice(`रु ${a} को सामानमा १३% भ्याटसहित कुल कति?`, `Rs ${a} plus 13% VAT is…`, a + (a * 13) / 100, i, [1, -1, 13, 10, 3], 1); }
-    return numChoice(`एउटा पुस्तक रु ${sub} मा किनेर रु ${sub + 50} मा बेच्दा के हुन्छ? (नाफा रु)`, `A book bought for Rs ${sub} is sold for Rs ${sub + 50}. Profit in rupees?`, 50, i, [5, -5, 10, 100, 25], 1);
+    if (i === 5) { const a = 100 * rnd(2, 9); return numChoice(`रु ${a} मा 13% भ्याट कति हुन्छ?`, `13% VAT on Rs ${a} is…`, (a * 13) / 100, i, [1, -1, 3, 10, 13], 1); }
+    if (i === 6) { const a = 100 * rnd(2, 9); return numChoice(`रु ${a} को सामानमा 13% भ्याटसहित कुल कति?`, `Rs ${a} plus 13% VAT is…`, a + (a * 13) / 100, i, [1, -1, 13, 10, 3], 1); }
+    return numChoice(`एउटा पुस्तक रु ${sub} मा किनेर रु ${sub + 50} मा बेच्दा के हुन्छ?`, `A book bought for Rs ${sub} is sold for Rs ${sub + 50}. Profit in rupees?`, 50, i, [5, -5, 10, 100, 25], 1);
   },
 });
 export const BillLab5 = makeLab(billCfg({ code: 'SIM-MATH-G5-L13-01', chapter: 13, titleNp: 'बिल पसल', titleEn: 'Bill Shop' }));
@@ -60,9 +60,9 @@ export const budgetCfg = (o: { code: string; chapter: number; titleNp: string; t
   goal: () => { const inc = 5 * rnd(6, 14); const e = [rnd(5, 12), rnd(4, 10), rnd(3, 8), rnd(2, 6)]; const s = e.reduce((a, b) => a + b, 0); return { p: { inc, e0: e[0], e1: e[1], e2: e[2], e3: e[3] }, np: `आम्दानी ${inc}, खर्च ${s} बनाऔँ (बचत ${inc - s})`, en: `Set income ${inc} and spending ${s} (saving ${inc - s})`, start: { inc: 10, e0: 0, e1: 0, e2: 0, e3: 0 } }; },
   quiz: (i) => {
     const inc = 5 * rnd(8, 16), e = [rnd(5, 12), rnd(4, 10), rnd(3, 8), rnd(2, 6)]; const s = e.reduce((a, b) => a + b, 0); const set = { inc, e0: e[0], e1: e[1], e2: e[2], e3: e[3] };
-    if (i % 3 === 0) return numChoice(`आम्दानी रु ${inc} हजार, खर्च रु ${s} हजार भए बचत कति?`, `Income Rs ${inc} thousand, spending Rs ${s} thousand. Saving?`, inc - s, i, [1, -1, 5, 10, 2], 0, ' हजार | thousand'.slice(0, 0), set);
+    if (i % 3 === 0) return numChoice(`आम्दानी रु ${inc} हजार, खर्च रु ${s} हजार भए बचत कति?`, `Income Rs ${inc} thousand, spending Rs ${s} thousand. Saving?`, inc - s, i, [1, -1, 5, 10, 2], 0, 'thousand'.slice(0, 0), set);
     if (i % 3 === 1) return numChoice(`खाना ${e[0]}, भाडा ${e[1]}, शिक्षा ${e[2]}, अन्य ${e[3]} (हजार) भए जम्मा खर्च कति?`, `Food ${e[0]}, rent ${e[1]}, education ${e[2]}, other ${e[3]} (thousand). Total spending?`, s, i, [1, -1, 5, 10, 2], 1, '', set);
-    return choice(`आम्दानी ${s - 5} र खर्च ${s} भए के हुन्छ?`, `Income ${s - 5}, spending ${s}: what is it?`, 'घाटा | Deficit', ['बचत | Saving', 'बराबर | Balanced'], i);
+    return choice(`आम्दानी ${s - 5} र खर्च ${s} भए के हुन्छ?`, `Income ${s - 5}, spending ${s}: what is it?`, 'Deficit', ['Saving', 'Balanced'], i);
   },
 });
 export const BudgetLab5 = makeLab(budgetCfg({ code: 'SIM-MATH-G5-L13-02', chapter: 13, titleNp: 'बजेट टावर', titleEn: 'Budget Towers' }));
@@ -82,14 +82,14 @@ export const tallyCfg = (o: { code: string; chapter: number; titleNp: string; ti
     });
     tag(g, lang === 'ne' ? 'आवृत्ति' : 'Frequency', 7.3, 0.3, -5.6, 2.2, { px: 40, w: 256, h: 64 });
   },
-  info: (p) => { const t = CAT.reduce((s, _c, i) => s + p[`c${i}`], 0); const mx = Math.max(...CAT.map((_c, i) => p[`c${i}`])); const best = CAT.filter((_c, i) => p[`c${i}`] === mx).map((c) => c.np).join(', '); const bestE = CAT.filter((_c, i) => p[`c${i}`] === mx).map((c) => c.en).join(', '); return bi(`जम्मा = ${t}\nसबैभन्दा धेरै: ${best} (${mx})\nचार ठाडा रेखा र पाँचौँ तेर्सो = ५`, `Total = ${t}\nMost: ${bestE} (${mx})\nFour straight strokes and a slash make 5`); },
+  info: (p) => { const t = CAT.reduce((s, _c, i) => s + p[`c${i}`], 0); const mx = Math.max(...CAT.map((_c, i) => p[`c${i}`])); const best = CAT.filter((_c, i) => p[`c${i}`] === mx).map((c) => c.np).join(', '); const bestE = CAT.filter((_c, i) => p[`c${i}`] === mx).map((c) => c.en).join(', '); return bi(`जम्मा = ${t}\nसबैभन्दा धेरै: ${best} (${mx})\nचार ठाडा रेखा र पाँचौँ तेर्सो = 5`, `Total = ${t}\nMost: ${bestE} (${mx})\nFour straight strokes and a slash make 5`); },
   tip: bi('प्रत्येक फलको गणना चिह्न (tally) र आवृत्ति हेरौँ', 'Read the tally marks and the frequency of each fruit'),
   goal: () => { const c = [rnd(1, 12), rnd(1, 12), rnd(1, 12), rnd(1, 12), rnd(1, 12)]; return { p: { c0: c[0], c1: c[1], c2: c[2], c3: c[3], c4: c[4] }, np: `तालिका बनाऔँ: स्याउ ${c[0]}, आँप ${c[1]}, केरा ${c[2]}, सुन्तला ${c[3]}, अङ्गुर ${c[4]}`, en: `Make the table: apple ${c[0]}, mango ${c[1]}, banana ${c[2]}, orange ${c[3]}, grapes ${c[4]}`, start: { c0: 0, c1: 0, c2: 0, c3: 0, c4: 0 } }; },
   quiz: (i) => {
     const c = [rnd(2, 14), rnd(2, 14), rnd(2, 14), rnd(2, 14), rnd(2, 14)]; const set = { c0: c[0], c1: c[1], c2: c[2], c3: c[3], c4: c[4] }; const a = rnd(0, 2), b = rnd(3, 4);
     if (i === 0) return numChoice(`${CAT[a].np} कतिजनाले मन पराए?`, `How many chose ${CAT[a].en}?`, c[a], i, [1, -1, 2, 5, 3], 0, '', set);
     if (i === 1) return numChoice('जम्मा कतिजनाले भोट दिए?', 'How many votes in total?', c.reduce((s, x) => s + x, 0), i, [1, -1, 5, 10, 2], 1, '', set);
-    if (i === 2) { const mx = c.indexOf(Math.max(...c)); if (c.filter((x) => x === c[mx]).length > 1) return numChoice(`${CAT[a].np} र ${CAT[b].np} को फरक कति?`, `Difference between ${CAT[a].en} and ${CAT[b].en}?`, Math.abs(c[a] - c[b]), i, [1, -1, 2, 5, 3], 0, '', set); return choice('सबैभन्दा लोकप्रिय फल कुन हो?', 'Which fruit is the most popular?', `${CAT[mx].np} | ${CAT[mx].en}`, CAT.filter((_x, k) => k !== mx).map((x) => `${x.np} | ${x.en}`), i, set); }
+    if (i === 2) { const mx = c.indexOf(Math.max(...c)); if (c.filter((x) => x === c[mx]).length > 1) return numChoice(`${CAT[a].np} र ${CAT[b].np} को फरक कति?`, `Difference between ${CAT[a].en} and ${CAT[b].en}?`, Math.abs(c[a] - c[b]), i, [1, -1, 2, 5, 3], 0, '', set); return choice('सबैभन्दा लोकप्रिय फल कुन हो?', 'Which fruit is the most popular?', `${CAT[mx].en}`, CAT.filter((_x, k) => k !== mx).map((x) => `${x.en}`), i, set); }
     if (i === 3) return numChoice(`${CAT[a].np} र ${CAT[b].np} को फरक कति?`, `Difference between ${CAT[a].en} and ${CAT[b].en}?`, Math.abs(c[a] - c[b]), i, [1, -1, 2, 5, 3], 0, '', set);
     if (i === 4) { const n = rnd(6, 14); return choice(`${n} को गणना चिह्न कसरी देखाइन्छ?`, `How is ${n} shown in tally marks?`, `${Math.floor(n / 5)} | ${n % 5}`, [`${Math.floor(n / 5) + 1} | ${n % 5}`, `${Math.floor(n / 5)} | ${(n % 5) + 1}`, `${n % 5} | ${Math.floor(n / 5)}`], i); }
     if (i === 5) { const mn = c.indexOf(Math.min(...c)); return numChoice('सबैभन्दा कम भोट पाएको फलको भोट कति?', 'How many votes did the least popular fruit get?', c[mn], i, [1, -1, 2, 3, 5], 0, '', set); }
@@ -103,7 +103,7 @@ const SC = [1, 2, 5, 10];
 export const barCfg = (o: { code: string; chapter: number; titleNp: string; titleEn: string }): LabCfg => ({
   code: o.code, chapter: o.chapter, titleNp: o.titleNp, titleEn: o.titleEn, color: '#22c55e',
   params: [
-    { id: 'sc', np: 'मापन', en: 'Scale', min: 0, max: 3, init: 2, show: (v) => `१ खण्ड = ${SC[v]}`.replace('१ खण्ड', '1 block') },
+    { id: 'sc', np: 'मापन', en: 'Scale', min: 0, max: 3, init: 2, show: (v) => `1 खण्ड = ${SC[v]}`.replace('1 खण्ड', '1 block') },
     ...CAT.map((c, i) => ({ id: `v${i}`, np: c.np, en: c.en, min: 0, max: 10, init: [4, 7, 3, 6, 5][i], color: c.c })),
   ],
   stage: { camera: [0, 7, 16], target: [0, 3.2, 0], minDistance: 8, maxDistance: 28 },
@@ -112,18 +112,18 @@ export const barCfg = (o: { code: string; chapter: number; titleNp: string; titl
     for (let k = 2; k <= 10; k += 2) { tag(g, String(k * s), -8.8, 0.2 + k * 0.62, 0, 1.2, { px: 40, w: 128, h: 64 }); box(g, 15, 0.03, 0.03, 0, 0.2 + k * 0.62 - 0.31, -1.2, '#cbd5e1'); }
     CAT.forEach((c, i) => { for (let k = 0; k < p[`v${i}`]; k++) box(g, 1.9, 0.58, 1.4, -6 + i * 3, 0.5 + k * 0.62, 0, c.c, 0.5); tag(g, lang === 'ne' ? c.np : c.en, -6 + i * 3, -0.5, 1.6, 2.2, { px: 44, w: 256, h: 80 }); tag(g, String(p[`v${i}`] * s), -6 + i * 3, 0.9 + p[`v${i}`] * 0.62 + 0.3, 0, 1.6, { px: 50, w: 160, h: 72, bg: '#fff', border: c.c }); });
   },
-  info: (p) => { const s = SC[p.sc]; const t = CAT.reduce((a, _c, i) => a + p[`v${i}`] * s, 0); return bi(`१ खण्ड = ${s} · जम्मा = ${t}\nस्तम्भको खण्ड गन्ती × मापन = मान`, `1 block = ${s} · total = ${t}\nValue = number of blocks × scale`); },
+  info: (p) => { const s = SC[p.sc]; const t = CAT.reduce((a, _c, i) => a + p[`v${i}`] * s, 0); return bi(`1 खण्ड = ${s} · जम्मा = ${t}\nस्तम्भको खण्ड गन्ती × मापन = मान`, `1 block = ${s} · total = ${t}\nValue = number of blocks × scale`); },
   tip: bi('मापन छानेर स्तम्भको मान पढौँ: खण्ड × मापन', 'Pick a scale and read each bar: blocks × scale'),
-  goal: () => { const sc = rnd(1, 3), v = CAT.map(() => rnd(1, 9)); return { p: { sc, v0: v[0], v1: v[1], v2: v[2], v3: v[3], v4: v[4] }, np: `मापन १ खण्ड = ${SC[sc]} राखी स्तम्भ बनाऔँ: ${v.map((x) => x * SC[sc]).join(', ')}`, en: `With 1 block = ${SC[sc]}, build bars for ${v.map((x) => x * SC[sc]).join(', ')}`, start: { sc: 0, v0: 0, v1: 0, v2: 0, v3: 0, v4: 0 } }; },
+  goal: () => { const sc = rnd(1, 3), v = CAT.map(() => rnd(1, 9)); return { p: { sc, v0: v[0], v1: v[1], v2: v[2], v3: v[3], v4: v[4] }, np: `मापन 1 खण्ड = ${SC[sc]} राखी स्तम्भ बनाऔँ: ${v.map((x) => x * SC[sc]).join(', ')}`, en: `With 1 block = ${SC[sc]}, build bars for ${v.map((x) => x * SC[sc]).join(', ')}`, start: { sc: 0, v0: 0, v1: 0, v2: 0, v3: 0, v4: 0 } }; },
   quiz: (i) => {
     const sc = rnd(1, 3), s = SC[sc], v = CAT.map(() => rnd(2, 9)); const set = { sc, v0: v[0], v1: v[1], v2: v[2], v3: v[3], v4: v[4] }; const a = rnd(0, 1), b = rnd(2, 4);
     if (i === 0 || i === 1) return numChoice(`${CAT[a + i].np} को स्तम्भले कति देखाउँछ?`, `What value does the ${CAT[a + i].en} bar show?`, v[a + i] * s, i, [s, -s, 2 * s, 5, 10], 1, '', set);
     if (i === 2) return numChoice(`${CAT[a].np} र ${CAT[b].np} को फरक कति?`, `Difference between ${CAT[a].en} and ${CAT[b].en}?`, Math.abs(v[a] - v[b]) * s, i, [s, -s, 2 * s, 5, 10], 0, '', set);
     if (i === 3) return numChoice('सबै स्तम्भको जम्मा कति?', 'What is the total of all the bars?', v.reduce((x, y) => x + y, 0) * s, i, [10, -10, 5, 2 * s, 20], 1, '', set);
-    if (i === 4) { const mx = v.indexOf(Math.max(...v)); if (v.filter((x) => x === v[mx]).length === 1) return choice('सबैभन्दा अग्लो स्तम्भ कुन हो?', 'Which bar is the tallest?', `${CAT[mx].np} | ${CAT[mx].en}`, CAT.filter((_c, k) => k !== mx).map((x) => `${x.np} | ${x.en}`), i, set); }
-    if (i === 5) return numChoice(`मापन १ खण्ड = ${s} भए ${v[a]} खण्डको मान कति?`, `If 1 block = ${s}, what do ${v[a]} blocks show?`, v[a] * s, i, [s, -s, 2 * s, 5, 10], 1, '', set);
-    if (i === 6) return numChoice(`एउटा स्तम्भ ${v[b] * s} देखाउँछ र मापन १ खण्ड = ${s} भए कति खण्ड हुन्छन्?`, `A bar shows ${v[b] * s} with 1 block = ${s}. How many blocks?`, v[b], i, [1, -1, 2, 3, 5], 1, '', set);
-    return numChoice(`${CAT[a].np} को भन्दा ${CAT[b].np} को स्तम्भ कति थोरै वा धेरै छ? (फरक)`, `By how much do ${CAT[a].en} and ${CAT[b].en} differ?`, Math.abs(v[a] - v[b]) * s, i, [s, -s, 2 * s, 5, 10], 0, '', set);
+    if (i === 4) { const mx = v.indexOf(Math.max(...v)); if (v.filter((x) => x === v[mx]).length === 1) return choice('सबैभन्दा अग्लो स्तम्भ कुन हो?', 'Which bar is the tallest?', `${CAT[mx].en}`, CAT.filter((_c, k) => k !== mx).map((x) => `${x.en}`), i, set); }
+    if (i === 5) return numChoice(`मापन 1 खण्ड = ${s} भए ${v[a]} खण्डको मान कति?`, `If 1 block = ${s}, what do ${v[a]} blocks show?`, v[a] * s, i, [s, -s, 2 * s, 5, 10], 1, '', set);
+    if (i === 6) return numChoice(`एउटा स्तम्भ ${v[b] * s} देखाउँछ र मापन 1 खण्ड = ${s} भए कति खण्ड हुन्छन्?`, `A bar shows ${v[b] * s} with 1 block = ${s}. How many blocks?`, v[b], i, [1, -1, 2, 3, 5], 1, '', set);
+    return numChoice(`${CAT[a].np} को भन्दा ${CAT[b].np} को स्तम्भ कति थोरै वा धेरै छ?`, `By how much do ${CAT[a].en} and ${CAT[b].en} differ?`, Math.abs(v[a] - v[b]) * s, i, [s, -s, 2 * s, 5, 10], 0, '', set);
   },
 });
 export const BarLab5 = makeLab(barCfg({ code: 'SIM-MATH-G5-L14-02', chapter: 14, titleNp: 'स्तम्भ चित्र', titleEn: 'Bar Graph Lab' }));
@@ -149,7 +149,7 @@ export const algebraCfg = (o: { code: string; chapter: number; titleNp: string; 
     if (i === 4) return choice(`${a}x + ${b} मा गुणाङ्क कुन हो?`, `In ${a}x + ${b} the coefficient of x is…`, String(a), [String(b), 'x', String(a + b)], i, { a: Math.min(a, 5), b: Math.min(b, 9) });
     if (i === 5) return choice(`${a}x + ${b} मा स्थिर पद कुन हो?`, `In ${a}x + ${b} the constant term is…`, String(b), [String(a), 'x', String(a + b)], i, { a: Math.min(a, 5), b: Math.min(b, 9) });
     if (i === 6) return choice(`x को ${a} अर्थात् सङ्ख्यालाई ${a} ले गुणा गरेर ${b} घटाउँदा?`, `"x multiplied by ${a}, then ${b} subtracted" is…`, `${a}x − ${b}`, [`${a}x + ${b}`, `${a - b}x`, `${b}x − ${a}`], i);
-    return numChoice(`वर्गको भुजा x भए परिमिति कति x? (4 गुणा)`, `A square has side x. Its perimeter is how many times x?`, 4, i, [2, 3, 8, 1, 6], 1);
+    return numChoice(`वर्गको भुजा x भए परिमिति कति x?`, `A square has side x. Its perimeter is how many times x?`, 4, i, [2, 3, 8, 1, 6], 1);
   },
 });
 export const AlgebraLab5 = makeLab(algebraCfg({ code: 'SIM-MATH-G5-L15-01', chapter: 15, titleNp: 'बीजीय अभिव्यक्ति', titleEn: 'Algebra Blocks' }));
@@ -174,7 +174,7 @@ export const likeTermsCfg = (o: { code: string; chapter: number; titleNp: string
     const a = rnd(2, 6), b = rnd(1, 6), c = rnd(1, 9), d = rnd(1, 9);
     if (i < 3) return choice(`(${a}x + ${c}) + (${b}x + ${d}) = ?`, `(${a}x + ${c}) + (${b}x + ${d}) = ?`, `${a + b}x + ${c + d}`, [`${a * b}x + ${c + d}`, `${a + b}x + ${c * d}`, `${a + b + c + d}x`], i, { c1: a, c2: b, k1: c, k2: d });
     if (i === 3) return choice(`${a}x + ${b}x = ?`, `${a}x + ${b}x = ?`, `${a + b}x`, [`${a * b}x`, `${a + b}x²`, `${a + b}`], i);
-    if (i === 4) return choice(`कुन दुई पद समान हुन्?`, 'Which two terms are like terms?', `${a}x र ${b}x | ${a}x and ${b}x`, [`${a}x र ${b} | ${a}x and ${b}`, `${a} र x | ${a} and x`], i);
+    if (i === 4) return choice(`कुन दुई पद समान हुन्?`, 'Which two terms are like terms?', `${a}x and ${b}x`, [`${a}x and ${b}`, `${a} and x`], i);
     if (i === 5) { const big = a + b + 2; return choice(`${big}x − ${a}x = ?`, `${big}x − ${a}x = ?`, `${big - a}x`, [`${big + a}x`, `${big * a}x`, `${big - a}`], i); }
     if (i === 6) return choice(`${a}x + ${c} मा कतिवटा पद छन्?`, `How many terms are in ${a}x + ${c}?`, '2', ['1', '3', '4'], i);
     return choice(`${c} + ${d} + ${a}x + ${b}x = ?`, `${c} + ${d} + ${a}x + ${b}x = ?`, `${a + b}x + ${c + d}`, [`${a + b}x + ${c * d}`, `${a + b + c + d}x`, `${a * b}x + ${c + d}`], i);

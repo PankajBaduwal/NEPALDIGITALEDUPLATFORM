@@ -17,7 +17,7 @@ const TRY: [string, string][] = [['फेरि प्रयास गरौँ!
 
 export function useSimKit(cfg: KitConfig) {
   const stageRef = useRef<HTMLDivElement>(null);
-  const [lang, setLangState] = useState<'ne' | 'en'>('ne');
+  const [lang, setLangState] = useState<'ne' | 'en'>('en');
   const [muted, setMutedState] = useState(false);
   const [mode, setMode] = useState<Mode>('LEARN');
   const [stars, setStars] = useState(0);
@@ -50,7 +50,7 @@ export function useSimKit(cfg: KitConfig) {
   }, [flash]);
   const tap = useCallback(() => AudioController.playPop(), []);
   const star = useCallback(() => setStars((s) => s + 1), []);
-  const setLang = useCallback((l: 'ne' | 'en') => { langRef.current = l; setLangState(l); }, []);
+  const setLang = useCallback((_l: 'ne' | 'en') => { langRef.current = 'en'; setLangState('en'); }, []); // English only
   const setMuted = useCallback((m: boolean) => { AudioController.setMuted(m); setMutedState(m); }, []);
   const finish = useCallback((score: number, total: number) => {
     AudioController.playCelebration();
@@ -100,12 +100,12 @@ export const SimFrame: React.FC<FrameProps> = ({ kit, onBack, panel, hud, modes 
       <header style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 20px', background: '#142D4E', color: '#fff', borderBottom: '3px solid #167C80', flexWrap: 'wrap' }}>
         <button className="sim-btn" onClick={onBack} style={{ background: 'rgba(255,255,255,.14)', color: '#fff', border: '1px solid rgba(255,255,255,.2)', padding: '7px 13px', borderRadius: 10, fontSize: 13.5, display: 'inline-flex', alignItems: 'center', gap: 6 }}><ArrowLeft size={15} /> {L('फर्कनुहोस्', 'Back')}</button>
         <div style={{ flex: 1, minWidth: 160 }}>
-          <div style={{ fontSize: 11, color: '#9FCBCD', fontWeight: 700 }}>{L('कक्षा १ • गणित • अध्याय', 'Class 1 • Maths • Chapter')} {lang === 'ne' ? toNp(kit.cfg.chapter) : kit.cfg.chapter}</div>
+          <div style={{ fontSize: 11, color: '#9FCBCD', fontWeight: 700 }}>{L('कक्षा 1 • गणित • अध्याय', 'Class 1 • Maths • Chapter')} {lang === 'ne' ? toNp(kit.cfg.chapter) : kit.cfg.chapter}</div>
           <div style={{ fontSize: 17.5, fontWeight: 800, lineHeight: 1.25 }}>{lang === 'ne' ? kit.cfg.titleNp : kit.cfg.titleEn}</div>
         </div>
         {extra}
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(217,164,65,.2)', border: '1px solid rgba(217,164,65,.45)', color: '#F3E2B5', padding: '6px 12px', borderRadius: 999, fontWeight: 800, fontSize: 13.5 }}><Star size={15} fill="#D9A441" color="#D9A441" /> {lang === 'ne' ? toNp(kit.stars) : kit.stars}</div>
-        <button className="sim-btn" onClick={() => kit.setLang(lang === 'ne' ? 'en' : 'ne')} style={{ background: '#167C80', color: '#fff', padding: '7px 14px', borderRadius: 10, fontSize: 13 }}>{lang === 'ne' ? 'English' : 'नेपाली'}</button>
+        
         <button className="sim-btn" aria-label="sound" onClick={() => kit.setMuted(!kit.muted)} style={{ background: 'rgba(255,255,255,.14)', border: '1px solid rgba(255,255,255,.18)', color: '#fff', padding: '7px 10px', borderRadius: 10 }}>{kit.muted ? <VolumeX size={17} /> : <Volume2 size={17} />}</button>
       </header>
 

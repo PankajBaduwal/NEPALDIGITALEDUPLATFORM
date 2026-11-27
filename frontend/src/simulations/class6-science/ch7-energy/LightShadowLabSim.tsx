@@ -1,13 +1,13 @@
 /**
  * LightShadowLabSim.tsx
- * Simulation 23: 2D Light & Shadow Laboratory (प्रकाश र छायाँ प्रयोगशाला)
- * Grade 6 Science • Unit 7: Energy in Daily Life (दैनिक जीवनमा शक्ति)
+ * Simulation 23: 2D Light & Shadow Laboratory
+ * Grade 6 Science • Unit 7: Energy in Daily Life
  *
  * 100% Native HTML5 Canvas 2D Interactive Optics Laboratory.
  * Features:
  * 1. Rectilinear Propagation of Light: 3 aligned pinhole cardboards demonstrating light travels in straight lines
- * 2. Medium Classification: Transparent (काँच), Translucent (बटर पेपर), Opaque (काठ)
- * 3. Shadow Geometry: Umbra (गाढा छायाँ - complete darkness) and Penumbra (मधुरो छायाँ - partial shadow)
+ * 2. Medium Classification: Transparent, Translucent, Opaque
+ * 3. Shadow Geometry: Umbra and Penumbra
  * 4. 5-Stage inquiry pedagogy, bilingual EN/NE, audio effects, and 3-star scoring.
  */
 
@@ -24,7 +24,7 @@ export const LightShadowLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -317,7 +317,7 @@ export const LightShadowLabSim: React.FC<BaseSimulationProps> = ({
         ctx.arc(srcX, srcY, srcR, 0, Math.PI * 2);
         ctx.fill();
 
-        // Opaque Obstacle Sphere (काठको बल)
+        // Opaque Obstacle Sphere
         ctx.fillStyle = '#1e293b';
         ctx.strokeStyle = '#64748b';
         ctx.lineWidth = 3;
@@ -381,7 +381,7 @@ export const LightShadowLabSim: React.FC<BaseSimulationProps> = ({
       titleNepali="प्रकाश, छायाँ, गाढा छायाँ र मधुरो छायाँ प्रयोगशाला"
       chapterNumber={7}
       chapterTitle="Unit 7: Energy in Daily Life"
-      chapterTitleNepali="एकाइ ७: दैनिक जीवनमा शक्ति"
+      chapterTitleNepali="एकाइ 7: दैनिक जीवनमा शक्ति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -450,9 +450,9 @@ export const LightShadowLabSim: React.FC<BaseSimulationProps> = ({
           >
             <Sun style={{ width: '14px', height: '14px', color: '#fbbf24' }} />
             <span>
-              {opticsMode === 'rectilinear' && (lang === 'ne' ? '१. प्रकाशको सरल रेखीय प्रसारण' : '1. Rectilinear Propagation')}
-              {opticsMode === 'materials' && (lang === 'ne' ? `२. अप्टिकल माध्यम: ${medium.toUpperCase()}` : `2. Optical Media: ${medium.toUpperCase()}`)}
-              {opticsMode === 'umbra_penumbra' && (lang === 'ne' ? `३. गाढा र मधुरो छायाँ (${sourceSize === 'point' ? 'बिन्दु स्रोत' : 'विस्तृत स्रोत'})` : `3. Shadows (${sourceSize === 'point' ? 'Point Source' : 'Extended Source'})`)}
+              {opticsMode === 'rectilinear' && (lang === 'ne' ? '1. प्रकाशको सरल रेखीय प्रसारण' : '1. Rectilinear Propagation')}
+              {opticsMode === 'materials' && (lang === 'ne' ? `2. अप्टिकल माध्यम: ${medium.toUpperCase()}` : `2. Optical Media: ${medium.toUpperCase()}`)}
+              {opticsMode === 'umbra_penumbra' && (lang === 'ne' ? `3. गाढा र मधुरो छायाँ (${sourceSize === 'point' ? 'बिन्दु स्रोत' : 'विस्तृत स्रोत'})` : `3. Shadows (${sourceSize === 'point' ? 'Point Source' : 'Extended Source'})`)}
             </span>
           </div>
 
@@ -550,13 +550,13 @@ export const LightShadowLabSim: React.FC<BaseSimulationProps> = ({
           {/* Mode Selector Buttons */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. अप्टिक्स प्रयोग छान्नुहोस्' : '1. Select Optics Experiment'}
+              {lang === 'ne' ? '1. अप्टिक्स प्रयोग छान्नुहोस्' : '1. Select Optics Experiment'}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {[
-                { id: 'rectilinear', nameEn: '1. Rectilinear Propagation', nameNe: '१. सरल रेखामा प्रकाश' },
-                { id: 'materials', nameEn: '2. Optical Media Types', nameNe: '२. पारदर्शी र अपारदर्शी' },
-                { id: 'umbra_penumbra', nameEn: '3. Umbra & Penumbra', nameNe: '३. गाढा र मधुरो छायाँ' },
+                { id: 'rectilinear', nameEn: '1. Rectilinear Propagation', nameNe: '1. सरल रेखामा प्रकाश' },
+                { id: 'materials', nameEn: '2. Optical Media Types', nameNe: '2. पारदर्शी र अपारदर्शी' },
+                { id: 'umbra_penumbra', nameEn: '3. Umbra & Penumbra', nameNe: '3. गाढा र मधुरो छायाँ' },
               ].map((m) => (
                 <button
                   key={m.id}
@@ -620,7 +620,7 @@ export const LightShadowLabSim: React.FC<BaseSimulationProps> = ({
           {opticsMode === 'materials' && (
             <div>
               <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-                {lang === 'ne' ? '२. माध्यम छान्नुहोस् (Medium):' : '2. Optical Medium:'}
+                {lang === 'ne' ? '2. माध्यम छान्नुहोस् (Medium):' : '2. Optical Medium:'}
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {[
@@ -656,7 +656,7 @@ export const LightShadowLabSim: React.FC<BaseSimulationProps> = ({
           {opticsMode === 'umbra_penumbra' && (
             <div>
               <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-                {lang === 'ne' ? '२. प्रकाशको स्रोत छान्नुहोस्:' : '2. Light Source Geometry:'}
+                {lang === 'ne' ? '2. प्रकाशको स्रोत छान्नुहोस्:' : '2. Light Source Geometry:'}
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '6px' }}>
                 {[

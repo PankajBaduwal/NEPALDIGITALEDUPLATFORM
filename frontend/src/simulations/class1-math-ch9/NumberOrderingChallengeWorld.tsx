@@ -1,7 +1,7 @@
 /**
  * NumberOrderingChallengeWorld.tsx
- * Simulation 05: Number Ordering and Challenge World (सङ्ख्या मिलाउने चुनौती संसार)
- * Class 1 Mathematics - Chapter 9: Numbers 11 to 20 (११ देखि २० सम्मका सङ्ख्याहरू)
+ * Simulation 05: Number Ordering and Challenge World
+ * Class 1 Mathematics - Chapter 9: Numbers 11 to 20
  * Nepal Digital Education Platform
  */
 
@@ -29,13 +29,13 @@ interface Props {
 }
 
 const NEP_NUMERALS: Record<number, string> = {
-  11: '११', 12: '१२', 13: '१३', 14: '१४', 15: '१५',
-  16: '१६', 17: '१७', 18: '१८', 19: '१९', 20: '२०',
+  11: '11', 12: '12', 13: '13', 14: '14', 15: '15',
+  16: '16', 17: '17', 18: '18', 19: '19', 20: '20',
 };
 
 const NEP_NAMES: Record<number, string> = {
-  11: 'एघार', 12: 'बाह्र', 13: 'तेह्र', 14: 'चौध', 15: 'पन्ध्र',
-  16: 'सोह्र', 17: 'सत्र', 18: 'अठार', 19: 'उन्नाइस', 20: 'बीस',
+  11: 'Eleven', 12: 'Twelve', 13: 'Thirteen', 14: 'Fourteen', 15: 'Fifteen',
+  16: 'Sixteen', 17: 'Seventeen', 18: 'Eighteen', 19: 'Nineteen', 20: 'Twenty',
 };
 
 const EN_NAMES: Record<number, string> = {
@@ -60,7 +60,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Village Station: 'SHOP', 'COMPARE', 'TRAIN', 'MASTER'
@@ -96,38 +96,38 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
     () => [
       {
         id: 1,
-        station: 'पसल (Number Shop)',
-        questionNp: 'सङ्ख्या १७ को नेपाली नाम के हो?',
+        station: 'Number Shop',
+        questionNp: 'सङ्ख्या 17 को नेपाली नाम के हो?',
         questionEn: 'What is the Nepali name for number 17?',
-        options: ['सोह्र', 'सत्र', 'अठार'],
-        correct: 'सत्र',
-        explanationNp: '१७ लाई "सत्र" (Seventeen) भनिन्छ।',
-        explanationEn: '17 is सत्र (Seventeen).',
+        options: ['Sixteen', 'Seventeen', 'Eighteen'],
+        correct: 'Seventeen',
+        explanationNp: '17 लाई "Seventeen" (Seventeen) भनिन्छ।',
+        explanationEn: '17 is Seventeen (Seventeen).',
       },
       {
         id: 2,
         station: 'तुलना (Compare)',
-        questionNp: '११, १५, १३, १८ मध्ये सबैभन्दा सानो सङ्ख्या कुन हो?',
+        questionNp: '11, 15, 13, 18 मध्ये सबैभन्दा सानो सङ्ख्या कुन हो?',
         questionEn: 'Which is the smallest number among 11, 15, 13, 18?',
-        options: ['११', '१३', '१५'],
-        correct: '११',
-        explanationNp: '११ सबैभन्दा सानो सङ्ख्या हो।',
+        options: ['11', '13', '15'],
+        correct: '11',
+        explanationNp: '11 सबैभन्दा सानो सङ्ख्या हो।',
         explanationEn: '11 is the smallest number.',
       },
       {
         id: 3,
         station: 'तुलना (Compare)',
-        questionNp: '१४, २०, १६, १२ मध्ये सबैभन्दा ठूलो सङ्ख्या कुन हो?',
+        questionNp: '14, 20, 16, 12 मध्ये सबैभन्दा ठूलो सङ्ख्या कुन हो?',
         questionEn: 'Which is the largest number among 14, 20, 16, 12?',
-        options: ['१६', '२०', '१४'],
-        correct: '२०',
-        explanationNp: '२० सबैभन्दा ठूलो सङ्ख्या हो।',
+        options: ['16', '20', '14'],
+        correct: '20',
+        explanationNp: '20 सबैभन्दा ठूलो सङ्ख्या हो।',
         explanationEn: '20 is the largest number.',
       },
       {
         id: 4,
         station: 'रेल (Train Order)',
-        questionNp: '११, १२, १३, १४ कुन क्रममा छन्?',
+        questionNp: '11, 12, 13, 14 कुन क्रममा छन्?',
         questionEn: 'In what order are 11, 12, 13, 14?',
         options: ['बढ्दो क्रम (Ascending)', 'घट्दो क्रम (Descending)', 'उल्टो क्रम'],
         correct: 'बढ्दो क्रम (Ascending)',
@@ -136,18 +136,18 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
       },
       {
         id: 5,
-        station: 'पसल (Number Shop)',
-        questionNp: '"उन्नाइस" कुन अङ्कको नाम हो?',
+        station: 'Number Shop',
+        questionNp: '"Nineteen" कुन अङ्कको नाम हो?',
         questionEn: 'Which numeral is "Unnais" (Nineteen)?',
-        options: ['१८', '१९', '२०'],
-        correct: '१९',
-        explanationNp: '१९ लाई "उन्नाइस" भनिन्छ।',
+        options: ['18', '19', '20'],
+        correct: '19',
+        explanationNp: '19 लाई "Nineteen" भनिन्छ।',
         explanationEn: '19 is Unnais (Nineteen).',
       },
       {
         id: 6,
         station: 'रेल (Train Order)',
-        questionNp: '२०, १९, १८, १७ कुन क्रममा छन्?',
+        questionNp: '20, 19, 18, 17 कुन क्रममा छन्?',
         questionEn: 'In what order are 20, 19, 18, 17?',
         options: ['घट्दो क्रम (Descending)', 'बढ्दो क्रम (Ascending)', 'कुनै होइन'],
         correct: 'घट्दो क्रम (Descending)',
@@ -156,42 +156,42 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
       },
       {
         id: 7,
-        station: 'पसल (Number Shop)',
-        questionNp: 'सङ्ख्या १२ को नेपाली नाम के हो?',
+        station: 'Number Shop',
+        questionNp: 'सङ्ख्या 12 को नेपाली नाम के हो?',
         questionEn: 'What is the Nepali name for number 12?',
-        options: ['एघार', 'बाह्र', 'तेह्र'],
-        correct: 'बाह्र',
-        explanationNp: '१२ लाई "बाह्र" भनिन्छ।',
+        options: ['Eleven', 'Twelve', 'Thirteen'],
+        correct: 'Twelve',
+        explanationNp: '12 लाई "Twelve" भनिन्छ।',
         explanationEn: '12 is Bahra (Twelve).',
       },
       {
         id: 8,
         station: 'तुलना (Compare)',
-        questionNp: '१५ र १९ मा कुन ठूलो हो?',
+        questionNp: '15 र 19 मा कुन ठूलो हो?',
         questionEn: 'Which is greater: 15 or 19?',
-        options: ['१५', '१९', 'दुवै बराबर'],
-        correct: '१९',
-        explanationNp: '१९ सङ्ख्या १५ भन्दा ठूलो छ।',
+        options: ['15', '19', 'दुवै बराबर'],
+        correct: '19',
+        explanationNp: '19 सङ्ख्या 15 भन्दा ठूलो छ।',
         explanationEn: '19 is greater than 15.',
       },
       {
         id: 9,
-        station: 'पसल (Number Shop)',
-        questionNp: 'सङ्ख्या २० को नेपाली नाम के हो?',
+        station: 'Number Shop',
+        questionNp: 'सङ्ख्या 20 को नेपाली नाम के हो?',
         questionEn: 'What is the Nepali name for 20?',
-        options: ['उन्नाइस', 'बीस', 'दश'],
-        correct: 'बीस',
-        explanationNp: '२० लाई "बीस" भनिन्छ।',
+        options: ['Nineteen', 'Twenty', 'दश'],
+        correct: 'Twenty',
+        explanationNp: '20 लाई "Twenty" भनिन्छ।',
         explanationEn: '20 is Beas (Twenty).',
       },
       {
         id: 10,
         station: 'चुनौती (Master Challenge)',
-        questionNp: '११ देखि २० सम्ममा जम्मा कति वटा सङ्ख्याहरू हुन्छन्?',
+        questionNp: '11 देखि 20 सम्ममा जम्मा कति वटा सङ्ख्याहरू हुन्छन्?',
         questionEn: 'How many numbers are there in total from 11 to 20?',
-        options: ['९', '१०', '११'],
-        correct: '१०',
-        explanationNp: '११ देखि २० सम्म जम्मा १० वटा सङ्ख्याहरू हुन्छन्।',
+        options: ['9', '10', '11'],
+        correct: '10',
+        explanationNp: '11 देखि 20 सम्म जम्मा 10 वटा सङ्ख्याहरू हुन्छन्।',
         explanationEn: 'From 11 to 20 there are exactly 10 numbers.',
       },
     ],
@@ -503,7 +503,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               </span>
             </div>
             <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              {language === 'np' ? 'सङ्ख्या मिलाउने चुनौती संसार (११ देखि २०)' : 'Number Ordering Challenge World'}
+              {language === 'np' ? 'सङ्ख्या मिलाउने चुनौती संसार (11 देखि 20)' : 'Number Ordering Challenge World'}
             </h1>
           </div>
         </div>
@@ -520,7 +520,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
             }`}
           >
             <Store className="w-3.5 h-3.5" />
-            {language === 'np' ? '१. नाम पसल' : '1. Name Shop'}
+            {language === 'np' ? '1. नाम पसल' : '1. Name Shop'}
           </button>
           <button
             onClick={() => {
@@ -532,7 +532,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
             }`}
           >
             <Mountain className="w-3.5 h-3.5" />
-            {language === 'np' ? '२. सानो/ठूलो' : '2. Compare'}
+            {language === 'np' ? '2. सानो/ठूलो' : '2. Compare'}
           </button>
           <button
             onClick={() => {
@@ -544,7 +544,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
             }`}
           >
             <TrainTrack className="w-3.5 h-3.5" />
-            {language === 'np' ? '३. क्रम रेल' : '3. Order Train'}
+            {language === 'np' ? '3. क्रम रेल' : '3. Order Train'}
           </button>
           <button
             onClick={() => {
@@ -556,7 +556,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
             }`}
           >
             <Trophy className="w-3.5 h-3.5" />
-            {language === 'np' ? '४. महा-चुनौती' : '4. Master Quiz'}
+            {language === 'np' ? '4. महा-चुनौती' : '4. Master Quiz'}
           </button>
         </div>
 
@@ -569,19 +569,14 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
           >
             {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            className="px-3 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold shadow-sm transition"
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
       {/* Main Village Screen */}
       <main className="flex-1 flex flex-col p-4 md:p-6 overflow-y-auto">
         {/* ========================================================================= */}
-        {/* STATION 1: NUMBER NAME SHOP (अक्षरमा नाम जोडा मिलाउने) */}
+        {/* STATION 1: NUMBER NAME SHOP */}
         {/* ========================================================================= */}
         {activeStation === 'SHOP' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
@@ -590,7 +585,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-indigo-400 tracking-wider">
-                    {language === 'np' ? 'केन्द्र १: सङ्ख्या नाम पसल' : 'Station 1: Number Name Shop'}
+                    {language === 'np' ? 'केन्द्र 1: सङ्ख्या नाम पसल' : 'Station 1: Number Name Shop'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? 'सङ्ख्याको सही नेपाली नाम पत्ता लगाउनुहोस्!' : 'Find the correct word name!'}
@@ -667,7 +662,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
         )}
 
         {/* ========================================================================= */}
-        {/* STATION 2: SMALLEST & LARGEST COMPARISON (सानो र ठूलो) */}
+        {/* STATION 2: SMALLEST & LARGEST COMPARISON */}
         {/* ========================================================================= */}
         {activeStation === 'COMPARE' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
@@ -676,7 +671,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-emerald-700 tracking-wider">
-                    {language === 'np' ? 'केन्द्र २: तुलना हिमाल' : 'Station 2: Comparison Mountain'}
+                    {language === 'np' ? 'केन्द्र 2: तुलना हिमाल' : 'Station 2: Comparison Mountain'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {compareMode === 'SMALLEST'
@@ -782,7 +777,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
         )}
 
         {/* ========================================================================= */}
-        {/* STATION 3: TRAIN ORDERING (बढ्दो र घट्दो क्रमको रेल) */}
+        {/* STATION 3: TRAIN ORDERING */}
         {/* ========================================================================= */}
         {activeStation === 'TRAIN' && (
           <div className="flex-1 flex flex-col max-w-5xl mx-auto w-full justify-center">
@@ -791,7 +786,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-amber-700 tracking-wider">
-                    {language === 'np' ? 'केन्द्र ३: क्रम मिलाउने रेल' : 'Station 3: Number Train'}
+                    {language === 'np' ? 'केन्द्र 3: क्रम मिलाउने रेल' : 'Station 3: Number Train'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {trainOrderMode === 'ASCENDING'
@@ -924,7 +919,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
         )}
 
         {/* ========================================================================= */}
-        {/* STATION 4: MASTER VILLAGE CHALLENGE (१० प्रश्नहरूको महा-परीक्षा) */}
+        {/* STATION 4: MASTER VILLAGE CHALLENGE */}
         {/* ========================================================================= */}
         {activeStation === 'MASTER' && (
           <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full justify-center">
@@ -1022,7 +1017,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                   </h3>
                   <p className="text-slate-500 text-xs mt-1">
                     {language === 'np'
-                      ? 'तपाईंले कक्षा १ अध्याय ९ सम्बन्धी सम्पूर्ण ज्ञान प्रमाणित गर्नुभयो।'
+                      ? 'तपाईंले कक्षा 1 अध्याय 9 सम्बन्धी सम्पूर्ण ज्ञान प्रमाणित गर्नुभयो।'
                       : 'You have mastered numbers 11 to 20, ordering, comparison, and number names.'}
                   </p>
                 </div>

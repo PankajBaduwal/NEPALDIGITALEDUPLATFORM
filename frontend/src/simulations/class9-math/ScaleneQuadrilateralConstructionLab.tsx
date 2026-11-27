@@ -23,28 +23,28 @@ interface ConstructionCase {
 const CASES: ConstructionCase[] = [
   {
     id: 'case1',
-    titleNp: 'अवस्था १: चार भुजा र एउटा विकर्ण दिइएको (४ भुजाहरू र १ विकर्ण)',
+    titleNp: 'अवस्था 1: चार भुजा र एउटा विकर्ण दिइएको (4 भुजाहरू र 1 विकर्ण)',
     titleEn: 'Case 1: 4 Sides and 1 Diagonal Given',
     givenDataNp: 'AB = 4.8 cm, BC = 4.3 cm, CD = 3.6 cm, AD = 4.2 cm, विकर्ण AC = 6.0 cm',
     givenDataEn: 'AB = 4.8 cm, BC = 4.3 cm, CD = 3.6 cm, AD = 4.2 cm, Diagonal AC = 6.0 cm',
     steps: [
       {
         stepNum: 1,
-        instructionNp: 'रुलरको सहायताले आधार रेखाखण्ड AB = ४.८ सेमी खिच्नुहोस्।',
+        instructionNp: 'रुलरको सहायताले आधार रेखाखण्ड AB = 4.8 cm खिच्नुहोस्।',
         instructionEn: 'Draw the base line segment AB = 4.8 cm using a ruler.',
         tool: 'ruler',
         actionDesc: 'Base line AB = 4.8 cm drawn.',
       },
       {
         stepNum: 2,
-        instructionNp: 'कम्पासलाई ६.० सेमी (विकर्ण AC) खोली बिन्दु A बाट माथितिर चाप (arc) खिच्नुहोस्।',
+        instructionNp: 'कम्पासलाई 6.0 cm खोली बिन्दु A बाट माथितिर चाप (arc) खिच्नुहोस्।',
         instructionEn: 'Open compass to 6.0 cm (diagonal AC) and draw an arc from point A upwards.',
         tool: 'compass',
         actionDesc: 'Arc from A (radius = 6.0 cm).',
       },
       {
         stepNum: 3,
-        instructionNp: 'कम्पासलाई ४.३ सेमी (भुजा BC) खोली बिन्दु B बाट पहिलो चाप काट्ने गरी अर्को चाप खिच्नुहोस् र प्रतिच्छेदन बिन्दुलाई C नाम दिनुहोस्।',
+        instructionNp: 'कम्पासलाई 4.3 cm खोली बिन्दु B बाट पहिलो चाप काट्ने गरी अर्को चाप खिच्नुहोस् र प्रतिच्छेदन बिन्दुलाई C नाम दिनुहोस्।',
         instructionEn: 'Set compass to 4.3 cm (side BC) and draw an arc from B intersecting the first arc at point C.',
         tool: 'compass',
         actionDesc: 'Point C located at arc intersection.',
@@ -58,7 +58,7 @@ const CASES: ConstructionCase[] = [
       },
       {
         stepNum: 5,
-        instructionNp: 'बिन्दु A बाट ४.२ सेमी (AD) को चाप र बिन्दु C बाट ३.६ सेमी (CD) को चाप खिची प्रतिच्छेदन बिन्दु D पत्ता लगाउनुहोस्।',
+        instructionNp: 'बिन्दु A बाट 4.2 cm (AD) को चाप र बिन्दु C बाट 3.6 cm (CD) को चाप खिची प्रतिच्छेदन बिन्दु D पत्ता लगाउनुहोस्।',
         instructionEn: 'Draw an arc of 4.2 cm from A and 3.6 cm from C to locate intersection point D.',
         tool: 'compass',
         actionDesc: 'Point D located by arcs from A and C.',
@@ -74,42 +74,42 @@ const CASES: ConstructionCase[] = [
   },
   {
     id: 'case2',
-    titleNp: 'अवस्था २: तीन भुजा र दुई कोण दिइएको',
+    titleNp: 'अवस्था 2: तीन भुजा र दुई कोण दिइएको',
     titleEn: 'Case 2: 3 Sides and 2 Included Angles Given',
     givenDataNp: 'AB = 5.0 cm, BC = 4.5 cm, CD = 4.0 cm, ∠B = 75°, ∠C = 105°',
     givenDataEn: 'AB = 5.0 cm, BC = 4.5 cm, CD = 4.0 cm, ∠B = 75°, ∠C = 105°',
     steps: [
       {
         stepNum: 1,
-        instructionNp: 'आधार रेखाखण्ड BC = ४.५ सेमी खिच्नुहोस्।',
+        instructionNp: 'आधार रेखाखण्ड BC = 4.5 cm खिच्नुहोस्।',
         instructionEn: 'Draw the base line segment BC = 4.5 cm.',
         tool: 'ruler',
         actionDesc: 'Base BC = 4.5 cm drawn.',
       },
       {
         stepNum: 2,
-        instructionNp: 'प्रोटेक्टर वा कम्पासले बिन्दु B मा ७५° को कोण ∠CBX खिच्नुहोस्।',
+        instructionNp: 'प्रोटेक्टर वा कम्पासले बिन्दु B मा 75° को कोण ∠CBX खिच्नुहोस्।',
         instructionEn: 'Construct angle ∠CBX = 75° at point B.',
         tool: 'compass',
         actionDesc: 'Ray BX at 75° constructed.',
       },
       {
         stepNum: 3,
-        instructionNp: 'कम्पासले किरण BX मा ५.० सेमी नापी बिन्दु A चिन्ह लगाउनुहोस् (AB = ५.० सेमी)।',
+        instructionNp: 'कम्पासले किरण BX मा 5.0 cm नापी बिन्दु A चिन्ह लगाउनुहोस् (AB = 5.0 cm)।',
         instructionEn: 'Cut an arc of 5.0 cm along ray BX to mark vertex A.',
         tool: 'compass',
         actionDesc: 'Point A marked at 5.0 cm from B.',
       },
       {
         stepNum: 4,
-        instructionNp: 'बिन्दु C मा १०५° को कोण ∠BCY खिच्नुहोस्।',
+        instructionNp: 'बिन्दु C मा 105° को कोण ∠BCY खिच्नुहोस्।',
         instructionEn: 'Construct angle ∠BCY = 105° at vertex C.',
         tool: 'compass',
         actionDesc: 'Ray CY at 105° constructed.',
       },
       {
         stepNum: 5,
-        instructionNp: 'किरण CY मा ४.० सेमी नापी बिन्दु D चिन्ह लगाउनुहोस् र AD जोड्नुहोस्।',
+        instructionNp: 'किरण CY मा 4.0 cm नापी बिन्दु D चिन्ह लगाउनुहोस् र AD जोड्नुहोस्।',
         instructionEn: 'Mark point D at 4.0 cm on ray CY, then join AD to complete ABCD.',
         tool: 'ruler',
         actionDesc: 'Point D marked and AD joined.',
@@ -120,13 +120,13 @@ const CASES: ConstructionCase[] = [
 
 const QUIZ_QUESTIONS = [
   {
-    np: 'कुनै चतुर्भुजको निश्चित (अद्वितीय) रचना गर्न न्यूनतम कतिवटा स्वतन्त्र नापहरू चाहिन्छन्?',
+    np: 'कुनै चतुर्भुजको निश्चित (अद्वितीय) रचना गर्न न्यूनतम कतिpcs स्वतन्त्र नापहरू चाहिन्छन्?',
     en: 'How many independent geometric measurements are required to construct a unique quadrilateral?',
     options: [
-      { key: 'A', label: '5 वटा नापहरू (5 measurements)' },
-      { key: 'B', label: '4 वटा' },
-      { key: 'C', label: '3 वटा' },
-      { key: 'D', label: '6 वटा' },
+      { key: 'A', label: '5 measurements' },
+      { key: 'B', label: '4 pcs' },
+      { key: 'C', label: '3 pcs' },
+      { key: 'D', label: '6 pcs' },
     ],
     answer: 'A',
   },
@@ -134,10 +134,10 @@ const QUIZ_QUESTIONS = [
     np: 'चार भुजा र एक विकर्ण दिएको अवस्थामा सबैभन्दा पहिले कुन आकृतिको रचना गरिन्छ?',
     en: 'When 4 sides and 1 diagonal are given, which figure is constructed first?',
     options: [
-      { key: 'A', label: 'विकर्ण सहितको एउटा त्रिभुज (Three sides of one triangle: AB, BC, AC)' },
-      { key: 'B', label: 'आयत' },
-      { key: 'C', label: 'चारै कुनाका कोणहरू' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'One triangle with a diagonal (three sides of one triangle: AB, BC, AC)' },
+      { key: 'B', label: 'Rectangle' },
+      { key: 'C', label: 'The angles at all four corners' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
@@ -145,10 +145,10 @@ const QUIZ_QUESTIONS = [
     np: 'चापहरू (Arcs) काटिएको प्रतिच्छेदन बिन्दुले रचनामा के जनाउँछ?',
     en: 'What does the intersection point of two geometric compass arcs represent?',
     options: [
-      { key: 'A', label: 'अज्ञात शीर्षबिन्दु (Target vertex location)' },
-      { key: 'B', label: 'कोणको समद्विभाजक मात्र' },
-      { key: 'C', label: 'वृत्तको केन्द्र' },
-      { key: 'D', label: 'त्रुटि' },
+      { key: 'A', label: 'The unknown vertex (target vertex location)' },
+      { key: 'B', label: 'Only the angle bisector' },
+      { key: 'C', label: 'Centre of the circle' },
+      { key: 'D', label: 'Error' },
     ],
     answer: 'A',
   },
@@ -195,7 +195,7 @@ export const ScaleneQuadrilateralConstructionLab: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! पाठ्यपुस्तकका आधारमा रुलर र कम्पासको प्रयोग गरी ४ भुजा र १ विकर्ण दिइएको वा भुजाहरू र कोणहरू दिइएको अवस्थामा विषमबाहु चतुर्भुजको चरणबद्ध रचना गर्नुहोस्!',
+        'नमस्ते! पाठ्यपुस्तकका आधारमा रुलर र कम्पासको प्रयोग गरी 4 भुजा र 1 विकर्ण दिइएको वा भुजाहरू र कोणहरू दिइएको अवस्थामा विषमबाहु चतुर्भुजको चरणबद्ध रचना गर्नुहोस्!',
         'Welcome! Construct scalene quadrilaterals step-by-step using a virtual ruler and compass based on the official curriculum!'
       )}
     >

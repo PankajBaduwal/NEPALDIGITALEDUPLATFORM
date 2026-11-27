@@ -1,8 +1,8 @@
 /**
  * ShapeBuilderSimulation.tsx
- * Simulation 05: Build with Shapes (आकारहरूबाट चित्र बनाऔँ)
- * Class 1 Mathematics - Chapter 3: Geometrical Shapes (ज्यामितीय आकारहरू)
- * Based on Nepal CDC Curriculum (मेरो गणित, कक्षा १ - २०७६)
+ * Simulation 05: Build with Shapes
+ * Class 1 Mathematics - Chapter 3: Geometrical Shapes
+ * Based on Nepal CDC Curriculum
  */
 
 import React, { useState, useRef } from 'react';
@@ -55,7 +55,7 @@ export const ShapeBuilderSimulation: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Language & Audio
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Construction State
@@ -68,28 +68,28 @@ export const ShapeBuilderSimulation: React.FC<Props> = ({
   const blueprints: Blueprint[] = [
     {
       id: 'house',
-      titleEn: 'Build a Village House (घर)',
+      titleEn: 'Build a Village House',
       titleNp: 'गाउँको घर बनाऔँ',
       hintEn: 'Use a Triangle for the roof and a Quadrilateral for the walls!',
       hintNp: 'छानाका लागि त्रिभुज र भित्ताका लागि चतुर्भुज प्रयोग गर्नुहोस्!',
     },
     {
       id: 'robot',
-      titleEn: 'Build a Friendly Robot (रोबोट)',
+      titleEn: 'Build a Friendly Robot',
       titleNp: 'रमाइलो रोबोट बनाऔँ',
       hintEn: 'Use Quadrilaterals for body & head, Circles for eyes!',
       hintNp: 'शरीरका लागि चतुर्भुज र आँखाका लागि वृत्त प्रयोग गर्नुहोस्!',
     },
     {
       id: 'bus',
-      titleEn: 'Build a School Bus (बस)',
+      titleEn: 'Build a School Bus',
       titleNp: 'विद्यालय बस बनाऔँ',
       hintEn: 'Use Rectangles for the bus body and Circles for wheels!',
       hintNp: 'बसको शरीरका लागि आयताकार चतुर्भुज र पाङ्ग्राका लागि वृत्त प्रयोग गर्नुहोस्!',
     },
     {
       id: 'flower',
-      titleEn: 'Build a Garden Flower (फूल)',
+      titleEn: 'Build a Garden Flower',
       titleNp: 'सुन्दर फूल बनाऔँ',
       hintEn: 'Use Circles for petals and Triangles for leaves!',
       hintNp: 'फूलका लागि वृत्त र पातका लागि त्रिभुज प्रयोग गर्नुहोस्!',
@@ -307,7 +307,7 @@ export const ShapeBuilderSimulation: React.FC<Props> = ({
             </h1>
             <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
               {language === 'np'
-                ? 'कक्षा १ गणित • अध्याय ३: ज्यामितीय आकारहरू (वृत्त, त्रिभुज, चतुर्भुज)'
+                ? 'कक्षा 1 गणित • अध्याय 3: ज्यामितीय आकारहरू (वृत्त, त्रिभुज, चतुर्भुज)'
                 : 'Class 1 Math • Chapter 3: Geometrical Shapes'}
             </span>
           </div>
@@ -356,21 +356,7 @@ export const ShapeBuilderSimulation: React.FC<Props> = ({
           </div>
 
           {/* Language Toggle */}
-          <button
-            onClick={() => setLanguage(language === 'np' ? 'en' : 'np')}
-            style={{
-              background: '#ede9fe',
-              color: '#6d28d9',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '13px',
-              cursor: 'pointer',
-            }}
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
 
           {/* Sound Toggle */}
           <button

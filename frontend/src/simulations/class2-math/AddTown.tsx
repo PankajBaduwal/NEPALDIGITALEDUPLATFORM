@@ -1,5 +1,5 @@
 /**
- * Lesson 7 · Addition (जोड) — three-digit numbers
+ * Lesson 7 · Addition — three-digit numbers
  * Add Town — join two numbers made of blocks; bundle 10 ones into a ten, 10 tens into a hundred.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -60,7 +60,7 @@ export const AddTown: React.FC<Props> = ({ onBackToLibrary }) => {
     kit.tap();
     setO((prev) => prev - 10);
     setT((prev) => prev + 1);
-    kit.say('१० एकाइ मिलेर १ नयाँ दशक बन्यो!', '10 ones bundled into 1 ten!');
+    kit.say('10 एकाइ मिलेर 1 नयाँ दशक बन्यो!', '10 ones bundled into 1 ten!');
   };
 
   const bundleTens = () => {
@@ -68,7 +68,7 @@ export const AddTown: React.FC<Props> = ({ onBackToLibrary }) => {
     kit.tap();
     setT((prev) => prev - 10);
     setH((prev) => prev + 1);
-    kit.say('१० दशक मिलेर १ नयाँ सय बन्यो!', '10 tens bundled into 1 hundred!');
+    kit.say('10 दशक मिलेर 1 नयाँ सय बन्यो!', '10 tens bundled into 1 hundred!');
   };
 
   useEffect(() => {
@@ -147,10 +147,10 @@ export const AddTown: React.FC<Props> = ({ onBackToLibrary }) => {
           ① {kit.t('ब्लक जोडौँ', 'Join Blocks')}
         </CBtn>
         <CBtn color="#F97316" disabled={!canBundleOnes} onClick={bundleOnes}>
-          ② {kit.t('१० एकाइ बाँधौँ ➔ १ दशक', 'Bundle 10 Ones')}
+          ② {kit.t('10 एकाइ बाँधौँ ➔ 1 दशक', 'Bundle 10 Ones')}
         </CBtn>
         <CBtn color="#059669" disabled={!canBundleTens} onClick={bundleTens}>
-          ③ {kit.t('१० दशक बाँधौँ ➔ १ सय', 'Bundle 10 Tens')}
+          ③ {kit.t('10 दशक बाँधौँ ➔ 1 सय', 'Bundle 10 Tens')}
         </CBtn>
 
         {kit.mode === 'LEARN' && (
@@ -244,9 +244,9 @@ export const AddTown: React.FC<Props> = ({ onBackToLibrary }) => {
                 }}
               >
                 {canBundleOnes
-                  ? kit.t('⚠️ एकाइ कोठामा १० वा सोभन्दा बढी ब्लक छन्। "१० एकाइ बाँधौँ" थिच्नुहोस्!', '⚠️ 10 or more ones! Click Bundle 10 Ones!')
+                  ? kit.t('⚠️ एकाइ कोठामा 10 वा सोभन्दा बढी ब्लक छन्। "10 एकाइ बाँधौँ" थिच्नुहोस्!', '⚠️ 10 or more ones! Click Bundle 10 Ones!')
                   : canBundleTens
-                  ? kit.t('⚠️ दशक कोठामा १० वा सोभन्दा बढी ब्लक छन्। "१० दशक बाँधौँ" थिच्नुहोस्!', '⚠️ 10 or more tens! Click Bundle 10 Tens!')
+                  ? kit.t('⚠️ दशक कोठामा 10 वा सोभन्दा बढी ब्लक छन्। "10 दशक बाँधौँ" थिच्नुहोस्!', '⚠️ 10 or more tens! Click Bundle 10 Tens!')
                   : null}
               </div>
             )}

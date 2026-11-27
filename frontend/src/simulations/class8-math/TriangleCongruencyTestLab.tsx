@@ -22,50 +22,50 @@ const RULES_DATA: Record<CongruencyRule, RuleMeta> = {
     id: 'SAS',
     nameNp: 'भुजा-कोण-भुजा (Side-Angle-Side)',
     nameEn: 'Side-Angle-Side (SAS)',
-    codeNp: 'भु.को.भु. तथ्य',
+    codeNp: 'SAS fact',
     descNp: 'दुई भुजा र तिनीहरू बीचको कोण बराबर भएमा दुई त्रिभुजहरू सर्वाङ्गसम हुन्छन्।',
     descEn: 'If two sides and the included angle of one triangle are equal to two sides and included angle of another, the triangles are congruent.',
-    conditionsNp: ['१. भुजा AB = PQ', '२. बीचको कोण ∠B = ∠Q', '३. भुजा BC = QR'],
+    conditionsNp: ['1. भुजा AB = PQ', '2. बीचको कोण ∠B = ∠Q', '3. भुजा BC = QR'],
     conditionsEn: ['1. Side AB = PQ', '2. Included angle ∠B = ∠Q', '3. Side BC = QR']
   },
   RHS: {
     id: 'RHS',
     nameNp: 'समकोण-कर्ण-भुजा (Right angle - Hypotenuse - Side)',
     nameEn: 'Right angle-Hypotenuse-Side (RHS)',
-    codeNp: 'स.क.भु. तथ्य',
+    codeNp: 'RHS fact',
     descNp: 'दुई समकोण त्रिभुजमा कर्ण र एउटा भुजा बराबर भएमा तिनीहरू सर्वाङ्गसम हुन्छन्।',
     descEn: 'If the hypotenuse and one side of a right-angled triangle are equal to the hypotenuse and one side of another right-angled triangle, they are congruent.',
-    conditionsNp: ['१. समकोण ∠B = ∠Q = ९०°', '२. कर्ण AC = PR', '३. भुजा BC = QR'],
+    conditionsNp: ['1. समकोण ∠B = ∠Q = 90°', '2. कर्ण AC = PR', '3. भुजा BC = QR'],
     conditionsEn: ['1. Right angle ∠B = ∠Q = 90°', '2. Hypotenuse AC = PR', '3. Side BC = QR']
   },
   ASA: {
     id: 'ASA',
     nameNp: 'कोण-भुजा-कोण (Angle-Side-Angle)',
     nameEn: 'Angle-Side-Angle (ASA)',
-    codeNp: 'को.भु.को. तथ्य',
+    codeNp: 'ASA fact',
     descNp: 'दुई कोण र तिनीहरू बीचको भुजा बराबर भएमा दुई त्रिभुजहरू सर्वाङ्गसम हुन्छन्।',
     descEn: 'If two angles and the included side of one triangle are equal to two angles and included side of another, they are congruent.',
-    conditionsNp: ['१. कोण ∠B = ∠Q', '२. बीचको भुजा BC = QR', '३. कोण ∠C = ∠R'],
+    conditionsNp: ['1. कोण ∠B = ∠Q', '2. बीचको भुजा BC = QR', '3. कोण ∠C = ∠R'],
     conditionsEn: ['1. Angle ∠B = ∠Q', '2. Included side BC = QR', '3. Angle ∠C = ∠R']
   },
   SSS: {
     id: 'SSS',
     nameNp: 'भुजा-भुजा-भुजा (Side-Side-Side)',
     nameEn: 'Side-Side-Side (SSS)',
-    codeNp: 'भु.भु.भु. तथ्य',
+    codeNp: 'SSS fact',
     descNp: 'एउटा त्रिभुजका तीनवटै भुजाहरू अर्को त्रिभुजका तीन संगत भुजाहरूसँग बराबर भएमा तिनीहरू सर्वाङ्गसम हुन्छन्।',
     descEn: 'If three sides of one triangle are equal to the three corresponding sides of another triangle, the triangles are congruent.',
-    conditionsNp: ['१. भुजा AB = PQ', '२. भुजा BC = QR', '३. भुजा CA = RP'],
+    conditionsNp: ['1. भुजा AB = PQ', '2. भुजा BC = QR', '3. भुजा CA = RP'],
     conditionsEn: ['1. Side AB = PQ', '2. Side BC = QR', '3. Side CA = RP']
   },
   AAS: {
     id: 'AAS',
     nameNp: 'कोण-कोण-भुजा (Angle-Angle-Side)',
     nameEn: 'Angle-Angle-Side (AAS)',
-    codeNp: 'को.को.भु. तथ्य',
+    codeNp: 'AAS fact',
     descNp: 'दुई कोण र बीचमा नपर्ने एउटा संगत भुजा बराबर भएमा दुई त्रिभुजहरू सर्वाङ्गसम हुन्छन्।',
     descEn: 'If two angles and any non-included corresponding side of one triangle are equal to the corresponding parts of another, they are congruent.',
-    conditionsNp: ['१. कोण ∠A = ∠P', '२. कोण ∠B = ∠Q', '३. भुजा BC = QR'],
+    conditionsNp: ['1. कोण ∠A = ∠P', '2. कोण ∠B = ∠Q', '3. भुजा BC = QR'],
     conditionsEn: ['1. Angle ∠A = ∠P', '2. Angle ∠B = ∠Q', '3. Side BC = QR']
   }
 };
@@ -75,10 +75,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दुई त्रिभुजमा दुई भुजा र बीचको कोण बराबर भएमा कुन तथ्यले सर्वाङ्गसम हुन्छन्?',
     en: 'If two sides and the included angle of two triangles are equal, which condition proves congruency?',
     options: [
-      { key: 'A', label: 'भु.को.भु. (SAS)' },
-      { key: 'B', label: 'को.भु.को. (ASA)' },
-      { key: 'C', label: 'स.क.भु. (RHS)' },
-      { key: 'D', label: 'भु.भु.भु. (SSS)' },
+      { key: 'A', label: 'SAS' },
+      { key: 'B', label: 'ASA' },
+      { key: 'C', label: 'RHS' },
+      { key: 'D', label: 'SSS' },
     ],
     answer: 'A',
   },
@@ -86,21 +86,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समकोण त्रिभुजमा कर्ण (Hypotenuse) र एउटा भुजा बराबर भएमा कुन तथ्य लागु हुन्छ?',
     en: 'In right-angled triangles, which test applies when hypotenuse and one side are equal?',
     options: [
-      { key: 'A', label: 'स.क.भु. (RHS)' },
-      { key: 'B', label: 'भु.भु.भु. (SSS)' },
-      { key: 'C', label: 'को.को.को. (AAA)' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'RHS' },
+      { key: 'B', label: 'SSS' },
+      { key: 'C', label: 'AAA' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
   {
-    np: 'के SSA (दुई भुजा र बीचमा नपर्ने कोण) ले सामान्य त्रिभुजमा सर्वाङ्गसमता प्रमाणित गर्छ?',
+    np: 'के SSA ले सामान्य त्रिभुजमा सर्वाङ्गसमता प्रमाणित गर्छ?',
     en: 'Is SSA (two sides and a non-included angle) a valid general triangle congruency test?',
     options: [
-      { key: 'A', label: 'होइन, SSA मान्य सर्वाङ्गसम तथ्य होइन (Invalid general test)' },
-      { key: 'B', label: 'हो, सधैं मान्य हुन्छ' },
-      { key: 'C', label: 'विषमबाहुमा मात्र मान्य' },
-      { key: 'D', label: 'भन्न सकिँदैन' },
+      { key: 'A', label: 'No, SSA is not a valid congruence test' },
+      { key: 'B', label: 'Yes, it is always valid' },
+      { key: 'C', label: 'Valid only in scalene triangles' },
+      { key: 'D', label: 'Cannot be said' },
     ],
     answer: 'A',
   }
@@ -201,7 +201,7 @@ export const TriangleCongruencyTestLab: React.FC<{
                   <rect x="150" y="140" width="20" height="20" fill="none" stroke="#22c55e" strokeWidth="2" />
                   <line x1="0" y1="160" x2="60" y2="30" stroke="#f59e0b" strokeWidth="4" />
                   <line x1="170" y1="160" x2="60" y2="30" stroke="#38bdf8" strokeWidth="4" />
-                  <text x="15" y="90" fill="#f59e0b" fontSize="11" fontWeight="bold">कर्ण (Hyp)</text>
+                  <text x="15" y="90" fill="#f59e0b" fontSize="11" fontWeight="bold">Hypotenuse (Hyp)</text>
                 </g>
               )}
               {activeRule === 'SSS' && (
@@ -235,7 +235,7 @@ export const TriangleCongruencyTestLab: React.FC<{
                   <rect x="150" y="140" width="20" height="20" fill="none" stroke="#22c55e" strokeWidth="2" />
                   <line x1="0" y1="160" x2="60" y2="30" stroke="#f59e0b" strokeWidth="4" />
                   <line x1="170" y1="160" x2="60" y2="30" stroke="#38bdf8" strokeWidth="4" />
-                  <text x="15" y="90" fill="#f59e0b" fontSize="11" fontWeight="bold">कर्ण (Hyp)</text>
+                  <text x="15" y="90" fill="#f59e0b" fontSize="11" fontWeight="bold">Hypotenuse (Hyp)</text>
                 </g>
               )}
               {activeRule === 'SSS' && (
@@ -277,7 +277,7 @@ export const TriangleCongruencyTestLab: React.FC<{
           <AlertTriangle size={16} className="text-rose-400 shrink-0" />
           <span>
             {L(
-              '⚠️ महत्त्वपूर्ण: SSA (दुई भुजा र बीचमा नपर्ने कोण) सामान्य त्रिभुजका लागि मान्य सर्वाङ्गसमता तथ्य होइन!',
+              '⚠️ महत्त्वपूर्ण: SSA सामान्य त्रिभुजका लागि मान्य सर्वाङ्गसमता तथ्य होइन!',
               '⚠️ Important: SSA (two sides and a non-included angle) is NOT a valid general triangle congruency test!'
             )}
           </span>

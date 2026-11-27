@@ -17,10 +17,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'टेसेलेसन डिजाइन गर्दा दुई बहुभुजहरू बीच खाली ठाउँ (Gap) वा खप्टाइ (Overlap) हुन पाउँछ कि पाउँदैन?',
     en: 'Can there be any gaps or overlaps between polygons in a tessellation?',
     options: [
-      { key: 'A', label: 'पाउँदैन, न त खाली ठाउँ न त खप्टाइ हुन पाउँछ (Neither gaps nor overlaps)' },
-      { key: 'B', label: 'खाली ठाउँ मात्र हुन पाउँछ' },
-      { key: 'C', label: 'खप्टिन पाउँछ' },
-      { key: 'D', label: 'आफ्नो इच्छा अनुसार' },
+      { key: 'A', label: 'Neither gaps nor overlaps are allowed' },
+      { key: 'B', label: 'Only gaps are allowed' },
+      { key: 'C', label: 'Overlaps are allowed' },
+      { key: 'D', label: 'As you wish' },
     ],
     answer: 'A',
   },
@@ -28,10 +28,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'रङ्गीचङ्गी भुइँको टायल (Floor Tiling) कुन गणितीय सिद्धान्तमा आधारित छ?',
     en: 'Colorful floor tiling is an application of which mathematical principle?',
     options: [
-      { key: 'A', label: 'टेसेलेसन (Tessellation)' },
-      { key: 'B', label: 'वर्ग समीकरण' },
-      { key: 'C', label: 'आयतन' },
-      { key: 'D', label: 'साझा गुणनखण्ड' },
+      { key: 'A', label: 'Tessellation' },
+      { key: 'B', label: 'Quadratic equation' },
+      { key: 'C', label: 'Volume' },
+      { key: 'D', label: 'Common factor' },
     ],
     answer: 'A',
   }
@@ -108,7 +108,7 @@ export const TessellationPatternDesigner: React.FC<{
               designerMode === 'free_hex' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('१. षट्भुज मौरीको चाका ढाँचा (Hexagon Honeycomb)', '1. Hexagon Honeycomb')}
+            {L('1. षट्भुज मौरीको चाका ढाँचा (Hexagon Honeycomb)', '1. Hexagon Honeycomb')}
           </button>
           <button
             onClick={() => setDesignerMode('free_square')}
@@ -116,7 +116,7 @@ export const TessellationPatternDesigner: React.FC<{
               designerMode === 'free_square' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('२. वर्गाकार भुइँ टायल (Square Floor Tiling)', '2. Square Tiling')}
+            {L('2. वर्गाकार भुइँ टायल (Square Floor Tiling)', '2. Square Tiling')}
           </button>
           <button
             onClick={() => setDesignerMode('challenge')}
@@ -124,7 +124,7 @@ export const TessellationPatternDesigner: React.FC<{
               designerMode === 'challenge' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('३. छुटेको टायल चुनौती (Missing Tile Challenge)', '3. Missing Tile Challenge')}
+            {L('3. छुटेको टायल चुनौती (Missing Tile Challenge)', '3. Missing Tile Challenge')}
           </button>
         </div>
 

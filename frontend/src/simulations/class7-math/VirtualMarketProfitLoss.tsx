@@ -1,6 +1,6 @@
 /**
  * VirtualMarketProfitLoss.tsx
- * Grade 7 Mathematics – Lesson 7: PROFIT AND LOSS (नाफा र नोक्सान)
+ * Grade 7 Mathematics – Lesson 7: PROFIT AND LOSS
  * Simulation 1: Virtual Marketplace Profit and Loss (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 98-100)
  */
@@ -15,32 +15,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'विक्रय मूल्य (SP) क्रय मूल्य (CP) भन्दा बढी हुँदा (SP > CP) के हुन्छ?',
     en: 'When Selling Price (SP) is greater than Cost Price (CP) (SP > CP), what occurs?',
     options: [
-      { key: 'A', label: 'नाफा (Profit = SP - CP)' },
-      { key: 'B', label: 'नोक्सान (Loss = CP - SP)' },
-      { key: 'C', label: 'नाफा वा नोक्सान केही नहुने' },
-      { key: 'D', label: 'छुट (Discount)' },
+      { key: 'A', label: 'Profit (SP - CP)' },
+      { key: 'B', label: 'Loss (CP - SP)' },
+      { key: 'C', label: 'Neither profit nor loss' },
+      { key: 'D', label: 'Discount' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा रेडियो रु ७५० मा किनेर रु ८०० मा बेच्दा कति नाफा वा नोक्सान हुन्छ?',
+    np: 'एउटा रेडियो Rs 750 मा किनेर Rs 800 मा बेच्दा कति नाफा वा नोक्सान हुन्छ?',
     en: 'A radio is bought for Rs 750 and sold for Rs 800. What is the profit or loss?',
     options: [
-      { key: 'A', label: 'रु ५० नाफा (SP - CP = ८०० - ७५० = रु ५०)' },
-      { key: 'B', label: 'रु ५० नोक्सान' },
-      { key: 'C', label: 'रु १५० नाफा' },
-      { key: 'D', label: 'रु १०० नोक्सान' },
+      { key: 'A', label: 'Rs 50 profit (SP - CP = 800 - 750 = Rs 50)' },
+      { key: 'B', label: 'Rs 50 loss' },
+      { key: 'C', label: 'Rs 150 profit' },
+      { key: 'D', label: 'Rs 100 loss' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि एउटा साइकल रु १००० मा किनेर रु ९०० मा बेचेमा के हुन्छ?',
+    np: 'यदि एउटा साइकल Rs 1000 मा किनेर Rs 900 मा बेचेमा के हुन्छ?',
     en: 'If a bicycle is bought for Rs 1000 and sold for Rs 900, what is the result?',
     options: [
-      { key: 'A', label: 'रु १०० नोक्सान (CP - SP = १००० - ९०० = रु १००)' },
-      { key: 'B', label: 'रु १०० नाफा' },
-      { key: 'C', label: 'रु ९० नोक्सान' },
-      { key: 'D', label: 'नाफा न नोक्सान' },
+      { key: 'A', label: 'Rs 100 loss (CP - SP = 1000 - 900 = Rs 100)' },
+      { key: 'B', label: 'Rs 100 profit' },
+      { key: 'C', label: 'Rs 90 loss' },
+      { key: 'D', label: 'Neither profit nor loss' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'यदि क्रय मूल्य र विक्रय मूल्य दुवै बराबर (SP = CP) भएमा के हुन्छ?',
     en: 'If Cost Price equals Selling Price (SP = CP), what happens?',
     options: [
-      { key: 'A', label: 'नाफा पनि हुँदैन र नोक्सान पनि हुँदैन (Break-even)' },
-      { key: 'B', label: '१०% नाफा' },
-      { key: 'C', label: '१०% नोक्सान' },
-      { key: 'D', label: 'अतिरिक्त नाफा' },
+      { key: 'A', label: 'Neither profit nor loss (break-even)' },
+      { key: 'B', label: '10% profit' },
+      { key: 'C', label: '10% loss' },
+      { key: 'D', label: 'Extra profit' },
     ],
     answer: 'A',
   },
@@ -106,9 +106,9 @@ export const VirtualMarketProfitLoss: React.FC<{ onBackToLibrary?: () => void; o
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'market', np: '१. बजार पसल (Virtual Market Stall)', en: '1. Market Stall' },
-            { id: 'detector', np: '२. नाफा/नोक्सान तराजु (Profit-Loss Scale)', en: '2. Profit-Loss Scale' },
-            { id: 'scenarios', np: '३. पाठ्यपुस्तकका उदाहरणहरू (Textbook Cases)', en: '3. Textbook Cases' },
+            { id: 'market', np: '1. बजार पसल (Virtual Market Stall)', en: '1. Market Stall' },
+            { id: 'detector', np: '2. नाफा/नोक्सान तराजु (Profit-Loss Scale)', en: '2. Profit-Loss Scale' },
+            { id: 'scenarios', np: '3. पाठ्यपुस्तकका उदाहरणहरू (Textbook Cases)', en: '3. Textbook Cases' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -149,7 +149,7 @@ export const VirtualMarketProfitLoss: React.FC<{ onBackToLibrary?: () => void; o
             <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', margin: '20px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1', display: 'block', marginBottom: 4 }}>
-                  {L('क्रय मूल्य (Cost Price - CP): ', 'Cost Price (CP): ')} रु {costPrice}
+                  {L('क्रय मूल्य (Cost Price - CP): ', 'Cost Price (CP): ')} Rs {costPrice}
                 </label>
                 <input
                   type="range"
@@ -167,7 +167,7 @@ export const VirtualMarketProfitLoss: React.FC<{ onBackToLibrary?: () => void; o
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D', display: 'block', marginBottom: 4 }}>
-                  {L('विक्रय मूल्य (Selling Price - SP): ', 'Selling Price (SP): ')} रु {sellingPrice}
+                  {L('विक्रय मूल्य (Selling Price - SP): ', 'Selling Price (SP): ')} Rs {sellingPrice}
                 </label>
                 <input
                   type="range"
@@ -202,7 +202,7 @@ export const VirtualMarketProfitLoss: React.FC<{ onBackToLibrary?: () => void; o
                   {L('क्रय मूल्य (CP) - किनेको मूल्य', 'Cost Price (CP)')}
                 </div>
                 <div style={{ fontSize: 26, fontWeight: 800, color: '#1E40AF', marginTop: 4 }}>
-                  रु {costPrice.toLocaleString()}
+                  Rs {costPrice.toLocaleString()}
                 </div>
                 <div style={{ height: 10, background: '#BFDBFE', borderRadius: 4, marginTop: 10, overflow: 'hidden' }}>
                   <div style={{ width: `${Math.min(100, (costPrice / 2000) * 100)}%`, height: '100%', background: '#2563EB' }} />
@@ -215,7 +215,7 @@ export const VirtualMarketProfitLoss: React.FC<{ onBackToLibrary?: () => void; o
                   {L('विक्रय मूल्य (SP) - बेचेको मूल्य', 'Selling Price (SP)')}
                 </div>
                 <div style={{ fontSize: 26, fontWeight: 800, color: '#16A34A', marginTop: 4 }}>
-                  रु {sellingPrice.toLocaleString()}
+                  Rs {sellingPrice.toLocaleString()}
                 </div>
                 <div style={{ height: 10, background: '#BBF7D0', borderRadius: 4, marginTop: 10, overflow: 'hidden' }}>
                   <div style={{ width: `${Math.min(100, (sellingPrice / 2000) * 100)}%`, height: '100%', background: '#16A34A' }} />
@@ -242,19 +242,19 @@ export const VirtualMarketProfitLoss: React.FC<{ onBackToLibrary?: () => void; o
 
               <div>
                 <div style={{ fontSize: 18, fontWeight: 800, color: isProfit ? '#065F46' : isLoss ? '#991B1B' : '#334155' }}>
-                  {isProfit && L(`नाफा भयो! (Profit: रु ${diff})`, `Profit Earned! (Rs ${diff})`)}
-                  {isLoss && L(`नोक्सान भयो! (Loss: रु ${Math.abs(diff)})`, `Loss Incurred! (Rs ${Math.abs(diff)})`)}
+                  {isProfit && L(`नाफा भयो!`, `Profit Earned! (Rs ${diff})`)}
+                  {isLoss && L(`नोक्सान भयो! (Loss: Rs ${Math.abs(diff)})`, `Loss Incurred! (Rs ${Math.abs(diff)})`)}
                   {isBreakEven && L('नाफा पनि भएन र नोक्सान पनि भएन (Break-Even)', 'Break-Even (No Profit, No Loss)')}
                 </div>
                 <div style={{ fontSize: 13, color: isProfit ? '#047857' : isLoss ? '#B91C1C' : '#475569', marginTop: 4 }}>
                   {isProfit &&
                     L(
-                      `SP > CP भएकोले: नाफा (Profit) = SP - CP = रु ${sellingPrice} - रु ${costPrice} = रु ${diff}`,
+                      `SP > CP भएकोले: नाफा (Profit) = SP - CP = Rs ${sellingPrice} - Rs ${costPrice} = Rs ${diff}`,
                       `Since SP > CP: Profit = SP - CP = Rs ${sellingPrice} - Rs ${costPrice} = Rs ${diff}`
                     )}
                   {isLoss &&
                     L(
-                      `CP > SP भएकोले: नोक्सान (Loss) = CP - SP = रु ${costPrice} - रु ${sellingPrice} = रु ${Math.abs(diff)}`,
+                      `CP > SP भएकोले: नोक्सान (Loss) = CP - SP = Rs ${costPrice} - Rs ${sellingPrice} = Rs ${Math.abs(diff)}`,
                       `Since CP > SP: Loss = CP - SP = Rs ${costPrice} - Rs ${sellingPrice} = Rs ${Math.abs(diff)}`
                     )}
                   {isBreakEven &&
@@ -314,14 +314,14 @@ export const VirtualMarketProfitLoss: React.FC<{ onBackToLibrary?: () => void; o
                       <line x1="60" y1={leftY} x2="60" y2={leftY + 50} stroke="#94A3B8" strokeWidth="2" />
                       <ellipse cx="60" cy={leftY + 50} rx="35" ry="10" fill="#3B82F6" />
                       <text x="60" y={leftY + 75} textAnchor="middle" fill="#1E40AF" fontWeight="bold" fontSize="11">
-                        CP: रु {costPrice}
+                        CP: Rs {costPrice}
                       </text>
 
                       {/* Right string & pan (SP) */}
                       <line x1="260" y1={rightY} x2="260" y2={rightY + 50} stroke="#94A3B8" strokeWidth="2" />
                       <ellipse cx="260" cy={rightY + 50} rx="35" ry="10" fill="#10B981" />
                       <text x="260" y={rightY + 75} textAnchor="middle" fill="#047857" fontWeight="bold" fontSize="11">
-                        SP: रु {sellingPrice}
+                        SP: Rs {sellingPrice}
                       </text>
                     </>
                   );
@@ -330,9 +330,9 @@ export const VirtualMarketProfitLoss: React.FC<{ onBackToLibrary?: () => void; o
             </div>
 
             <div style={{ textAlign: 'center', fontSize: 15, fontWeight: 700 }}>
-              {isProfit && <span style={{ color: '#059669' }}>SP तर्फ भारी (SP &gt; CP) ➜ नाफा = रु {diff}</span>}
-              {isLoss && <span style={{ color: '#DC2626' }}>CP तर्फ भारी (CP &gt; SP) ➜ नोक्सान = रु {Math.abs(diff)}</span>}
-              {isBreakEven && <span style={{ color: '#64748B' }}>सन्तुलित (SP = CP) ➜ नाफा/नोक्सान = ०</span>}
+              {isProfit && <span style={{ color: '#059669' }}>SP is higher (SP &gt; CP) ➜ profit = Rs {diff}</span>}
+              {isLoss && <span style={{ color: '#DC2626' }}>CP is higher (CP &gt; SP) ➜ loss = Rs {Math.abs(diff)}</span>}
+              {isBreakEven && <span style={{ color: '#64748B' }}>सन्तुलित (SP = CP) ➜ नाफा/नोक्सान = 0</span>}
             </div>
           </div>
         )}
@@ -373,7 +373,7 @@ export const VirtualMarketProfitLoss: React.FC<{ onBackToLibrary?: () => void; o
                     {L(p.nameNp, p.nameEn)}
                   </div>
                   <div style={{ fontSize: 13, color: '#475569', marginTop: 4 }}>
-                    CP: रु {p.cp} | SP: रु {p.sp}
+                    CP: Rs {p.cp} | SP: Rs {p.sp}
                   </div>
                   <div
                     style={{
@@ -383,9 +383,9 @@ export const VirtualMarketProfitLoss: React.FC<{ onBackToLibrary?: () => void; o
                       color: p.sp > p.cp ? '#059669' : p.sp < p.cp ? '#DC2626' : '#64748B',
                     }}
                   >
-                    {p.sp > p.cp && `नाफा: रु ${p.sp - p.cp}`}
-                    {p.sp < p.cp && `नोक्सान: रु ${p.cp - p.sp}`}
-                    {p.sp === p.cp && `बराबर (Break-even)`}
+                    {p.sp > p.cp && `Profit: Rs ${p.sp - p.cp}`}
+                    {p.sp < p.cp && `Loss: Rs ${p.cp - p.sp}`}
+                    {p.sp === p.cp && `Break-even`}
                   </div>
                 </div>
               ))}

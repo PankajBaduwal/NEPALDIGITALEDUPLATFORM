@@ -1,6 +1,6 @@
 /**
  * InequalityNumberLineAdventure.tsx
- * Grade 7 Mathematics – Lesson 12: EQUATION, INEQUALITY AND GRAPH (समीकरण, असमानता र ग्राफ)
+ * Grade 7 Mathematics – Lesson 12: EQUATION, INEQUALITY AND GRAPH
  * Simulation 2: Inequality and Number Line Adventure (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 174-179)
  */
@@ -12,35 +12,35 @@ import { ArrowLeftRight, Check, AlertTriangle, RefreshCw } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'असमानता x > ४ मा सङ्ख्या रेखामा ४ को स्थानमा कस्तो बिन्दु (Circle) र कतातिर काँडो (Arrow) हुन्छ?',
+    np: 'असमानता x > 4 मा सङ्ख्या रेखामा 4 को स्थानमा कस्तो बिन्दु (Circle) र कतातिर काँडो (Arrow) हुन्छ?',
     en: 'For inequality x > 4, what circle is at 4 on the number line and in which direction does the arrow point?',
     options: [
-      { key: 'A', label: 'खुला वृत्त (Open circle), दायाँतर्फ काँडो (Rightward arrow)' },
-      { key: 'B', label: 'भरिएको वृत्त (Filled circle), बायाँतर्फ' },
-      { key: 'C', label: 'खुला वृत्त, बायाँतर्फ' },
-      { key: 'D', label: 'भरिएको वृत्त, दायाँतर्फ' },
+      { key: 'A', label: 'Open circle, arrow pointing right' },
+      { key: 'B', label: 'Filled circle, pointing left' },
+      { key: 'C', label: 'Open circle, pointing left' },
+      { key: 'D', label: 'Filled circle, pointing right' },
     ],
     answer: 'A',
   },
   {
-    np: 'असमानता x + २ > ५ लाई हल गर्दा कुन नतिजा आउँछ?',
+    np: 'असमानता x + 2 > 5 लाई हल गर्दा कुन नतिजा आउँछ?',
     en: 'Solving inequality x + 2 > 5 gives what result?',
     options: [
-      { key: 'A', label: 'x > ३ (५ - २ = ३)' },
-      { key: 'B', label: 'x < ३' },
-      { key: 'C', label: 'x ≥ ७' },
-      { key: 'D', label: 'x = ३' },
+      { key: 'A', label: 'x > 3 (5 - 2 = 3)' },
+      { key: 'B', label: 'x < 3' },
+      { key: 'C', label: 'x ≥ 7' },
+      { key: 'D', label: 'x = 3' },
     ],
     answer: 'A',
   },
   {
-    np: 'असमानता ३ - २x ≤ ९ लाई हल गर्दा (-२ ले भाग गर्दा चिन्ह उल्टिएर) के हुन्छ?',
+    np: 'असमानता 3 - 2x ≤ 9 लाई हल गर्दा (-2 ले भाग गर्दा चिन्ह उल्टिएर) के हुन्छ?',
     en: 'Solving 3 - 2x ≤ 9, what happens when dividing by -2?',
     options: [
-      { key: 'A', label: 'x ≥ -३ (ऋणात्मक सङ्ख्याले भाग गर्दा चिन्ह उल्टिन्छ)' },
-      { key: 'B', label: 'x ≤ -३' },
-      { key: 'C', label: 'x > ६' },
-      { key: 'D', label: 'x < -६' },
+      { key: 'A', label: 'x ≥ -3' },
+      { key: 'B', label: 'x ≤ -3' },
+      { key: 'C', label: 'x > 6' },
+      { key: 'D', label: 'x < -6' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समावेशी असमानता (≤ वा ≥) मा सीमा बिन्दुमा कस्तो वृत्त बनाइन्छ?',
     en: 'For inclusive inequalities (≤ or ≥), what kind of circle is drawn at the boundary point?',
     options: [
-      { key: 'A', label: 'भरिएको वा कालो वृत्त (Filled / Solid circle)' },
-      { key: 'B', label: 'खुला वृत्त (Open circle)' },
-      { key: 'C', label: 'कुनै वृत्त हुँदैन' },
-      { key: 'D', label: 'त्रिभुज' },
+      { key: 'A', label: 'Filled (solid) circle' },
+      { key: 'B', label: 'Open circle' },
+      { key: 'C', label: 'No circle' },
+      { key: 'D', label: 'Triangle' },
     ],
     answer: 'A',
   },
@@ -91,7 +91,7 @@ export const InequalityNumberLineAdventure: React.FC<{ onBackToLibrary?: () => v
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'असमानतामा > र < हुँदा खुला वृत्त (Open circle) र ≥ र ≤ हुँदा भरिएको वृत्त (Filled circle) हुन्छ। ऋणात्मक सङ्ख्याले गुणन वा भाग गर्दा चिन्ह उल्टिन्छ!',
+        'असमानतामा > र < हुँदा Open circle र ≥ र ≤ हुँदा भरिएको वृत्त (Filled circle) हुन्छ। ऋणात्मक सङ्ख्याले गुणन वा भाग गर्दा चिन्ह उल्टिन्छ!',
         '> and < use open circles, while ≥ and ≤ use filled circles. Multiplying or dividing by a negative number reverses the inequality!'
       )}
     >
@@ -99,9 +99,9 @@ export const InequalityNumberLineAdventure: React.FC<{ onBackToLibrary?: () => v
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'symbols', np: '१. सङ्ख्या रेखामा असमानता (Number Line)', en: '1. Number Line' },
-            { id: 'solver', np: '२. असमानता समाधान (Solve Inequalities)', en: '2. Solving Inequalities' },
-            { id: 'reversal', np: '३. चिन्ह उल्टिने नियम (Sign Reversal)', en: '3. Sign Reversal Rule' },
+            { id: 'symbols', np: '1. सङ्ख्या रेखामा असमानता (Number Line)', en: '1. Number Line' },
+            { id: 'solver', np: '2. असमानता समाधान (Solve Inequalities)', en: '2. Solving Inequalities' },
+            { id: 'reversal', np: '3. चिन्ह उल्टिने नियम (Sign Reversal)', en: '3. Sign Reversal Rule' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -257,13 +257,13 @@ export const InequalityNumberLineAdventure: React.FC<{ onBackToLibrary?: () => v
               }}
             >
               <div>
-                <strong>{L('व्याख्या:', 'Explanation:')}</strong> x {symbolType} {boundaryVal} मा{' '}
+                <strong>{L('व्याख्या:', 'Explanation:')}</strong> x {symbolType} at {boundaryVal}{' '}
                 {symbolType === '≥' || symbolType === '≤' ? (
-                  <span style={{ fontWeight: 800 }}>भरिएको वृत्त (सीमा {boundaryVal} समावेश छ)</span>
+                  <span style={{ fontWeight: 800 }}>Filled circle (boundary {boundaryVal} included)</span>
                 ) : (
-                  <span style={{ fontWeight: 800 }}>खुला वृत्त (सीमा {boundaryVal} समावेश छैन)</span>
+                  <span style={{ fontWeight: 800 }}>Open circle (boundary {boundaryVal} not included)</span>
                 )}
-                ।
+                .
               </div>
             </div>
           </div>
@@ -273,11 +273,11 @@ export const InequalityNumberLineAdventure: React.FC<{ onBackToLibrary?: () => v
         {activeTab === 'solver' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('असमानता हल गर्ने विधि: ३x - २ ≤ -११', 'Solving Linear Inequality: 3x - 2 ≤ -11')}
+              {L('असमानता हल गर्ने विधि: 3x - 2 ≤ -11', 'Solving Linear Inequality: 3x - 2 ≤ -11')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ १७६ को उदाहरण: दुवैतर्फ समान सङ्ख्या जोड्ने र भाग गर्ने चरणहरू:',
+                'पाठ्यपुस्तक पृष्ठ 176 को उदाहरण: दुवैतर्फ समान सङ्ख्या जोड्ने र भाग गर्ने चरणहरू:',
                 'Textbook Page 176 Example: Steps of adding and dividing to solve:'
               )}
             </p>
@@ -293,14 +293,14 @@ export const InequalityNumberLineAdventure: React.FC<{ onBackToLibrary?: () => v
               }}
             >
               <div>
-                <strong>{L('१. दिइएको:', '1. Given:')}</strong> ३x - २ ≤ -११
+                <strong>{L('1. दिइएको:', '1. Given:')}</strong> 3x - 2 ≤ -11
               </div>
               <div>
-                <strong>{L('२. दुवैतर्फ २ जोड्दा:', '2. Adding 2 to both sides:')}</strong> ३x - २ + २ ≤ -११ + २
-                <br />➜ ३x ≤ -९
+                <strong>{L('2. दुवैतर्फ 2 जोड्दा:', '2. Adding 2 to both sides:')}</strong> 3x - 2 + 2 ≤ -11 + 2
+                <br />➜ 3x ≤ -9
               </div>
               <div>
-                <strong>{L('३. दुवैतर्फ ३ ले भाग गर्दा:', '3. Dividing both sides by 3:')}</strong> (३x ÷ ३) ≤ (-९ ÷ ३)
+                <strong>{L('3. दुवैतर्फ 3 ले भाग गर्दा:', '3. Dividing both sides by 3:')}</strong> (3x ÷ 3) ≤ (-9 ÷ 3)
               </div>
               <div
                 style={{
@@ -310,10 +310,10 @@ export const InequalityNumberLineAdventure: React.FC<{ onBackToLibrary?: () => v
                   color: '#187C68',
                 }}
               >
-                x ≤ -३
+                x ≤ -3
               </div>
               <div style={{ fontSize: 13, color: '#64748B' }}>
-                {L('समाधान समूह: {-३, -४, -५, -६, ...}', 'Solution Set: {-3, -4, -5, -6, ...}')}
+                {L('समाधान समूह: {-3, -4, -5, -6, ...}', 'Solution Set: {-3, -4, -5, -6, ...}')}
               </div>
             </div>
           </div>
@@ -327,7 +327,7 @@ export const InequalityNumberLineAdventure: React.FC<{ onBackToLibrary?: () => v
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ १७७ अनुसार: असमानताको दुवैतर्फ ऋणात्मक सङ्ख्याले गुणन वा भाग गर्दा असमानताको चिन्ह उल्टिन्छ (≤ बाट ≥ वा > बाट < बन्छ):',
+                'पाठ्यपुस्तक पृष्ठ 177 अनुसार: असमानताको दुवैतर्फ ऋणात्मक सङ्ख्याले गुणन वा भाग गर्दा असमानताको चिन्ह उल्टिन्छ (≤ बाट ≥ वा > बाट < बन्छ):',
                 'Textbook Page 177: Multiplying or dividing by a negative number reverses the inequality sign (≤ becomes ≥):'
               )}
             </p>
@@ -343,10 +343,10 @@ export const InequalityNumberLineAdventure: React.FC<{ onBackToLibrary?: () => v
               }}
             >
               <div>
-                <strong>{L('१. दिइएको:', '1. Given:')}</strong> ३ - २x ≤ ९
+                <strong>{L('1. दिइएको:', '1. Given:')}</strong> 3 - 2x ≤ 9
               </div>
               <div>
-                <strong>{L('२. दुवैतर्फ ३ घटाउँदा:', '2. Subtracting 3:')}</strong> -२x ≤ ९ - ३ ➜ -२x ≤ ६
+                <strong>{L('2. दुवैतर्फ 3 घटाउँदा:', '2. Subtracting 3:')}</strong> -2x ≤ 9 - 3 ➜ -2x ≤ 6
               </div>
               <div
                 style={{
@@ -358,9 +358,9 @@ export const InequalityNumberLineAdventure: React.FC<{ onBackToLibrary?: () => v
                 }}
               >
                 <div style={{ color: '#B91C1C', fontWeight: 800 }}>
-                  ⚠️ {L('महत्त्वपूर्ण चरण: -२ ले भाग गर्दा चिन्ह उल्टिन्छ!', 'Critical: Dividing by -2 reverses the sign!')}
+                  ⚠️ {L('महत्त्वपूर्ण चरण: -2 ले भाग गर्दा चिन्ह उल्टिन्छ!', 'Critical: Dividing by -2 reverses the sign!')}
                 </div>
-                <div>(-२x ÷ -२) <span style={{ color: '#166534', fontWeight: 900, fontSize: 18 }}>≥</span> (६ ÷ -२)</div>
+                <div>(-2x ÷ -2) <span style={{ color: '#166534', fontWeight: 900, fontSize: 18 }}>≥</span> (6 ÷ -2)</div>
               </div>
               <div
                 style={{
@@ -370,7 +370,7 @@ export const InequalityNumberLineAdventure: React.FC<{ onBackToLibrary?: () => v
                   color: '#991B1B',
                 }}
               >
-                x ≥ -३
+                x ≥ -3
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 /**
  * NumberTenWritingStudio.tsx
- * Simulation 05: Number Ten Writing Studio (१० लेख्न सिकौँ)
- * Class 1 Mathematics - Chapter 6: Ten (दश)
+ * Simulation 05: Number Ten Writing Studio
+ * Class 1 Mathematics - Chapter 6: Ten
  * Nepal Digital Education Platform
  */
 
@@ -29,11 +29,11 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Navigation & Settings
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
-  // Script Mode: Devanagari (१०) vs International (10)
-  const [scriptMode, setScriptMode] = useState<'np' | 'en'>('np');
+  // Script Mode: Devanagari (10) vs International (10)
+  const [scriptMode, setScriptMode] = useState<'np' | 'en'>('en');
 
   // Chalk Drawing State
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -54,7 +54,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
   const enPath =
     'M 95 80 L 130 50 L 130 210 M 90 210 L 170 210 M 270 50 C 220 50, 220 210, 270 210 C 320 210, 320 50, 270 50';
 
-  // Nepali '१०': Digit १ on left, Digit ० on right
+  // Nepali '10': Digit 1 on left, Digit 0 on right
   const npPath =
     'M 105 85 C 105 60, 150 60, 150 90 C 150 120, 105 145, 105 180 C 105 210, 140 220, 160 210 M 270 70 C 230 70, 230 190, 270 190 C 310 190, 310 70, 270 70';
 
@@ -231,8 +231,8 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
       saveProgress(ns);
 
       speakText(
-        `शानदार! तपाईंले सङ्ख्या ${scriptMode === 'np' ? '१०' : '10'} सुन्दर लेख्नुभयो।`,
-        `Splendid! You wrote number ${scriptMode === 'np' ? '१०' : '10'} beautifully.`
+        `शानदार! तपाईंले सङ्ख्या ${scriptMode === 'np' ? '10' : '10'} सुन्दर लेख्नुभयो।`,
+        `Splendid! You wrote number ${scriptMode === 'np' ? '10' : '10'} beautifully.`
       );
     } else {
       playTone(280, 'sawtooth', 0.3);
@@ -247,8 +247,8 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
     clearCanvas();
 
     speakText(
-      `हेर्नुहोस्, सङ्ख्या ${scriptMode === 'np' ? '१०' : '10'} कसरी लेखिन्छ।`,
-      `Watch how number ${scriptMode === 'np' ? '१०' : '10'} is written.`
+      `हेर्नुहोस्, सङ्ख्या ${scriptMode === 'np' ? '10' : '10'} कसरी लेखिन्छ।`,
+      `Watch how number ${scriptMode === 'np' ? '10' : '10'} is written.`
     );
 
     let curr = 0;
@@ -267,7 +267,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
 
   useEffect(() => {
     speakText(
-      '१० लेख्न सिकौँ सिमुलेसनमा स्वागत छ! देवनागरी वा अङ्ग्रेजी लिपि छानेर कोर्नुहोस्।',
+      '10 लेख्न सिकौँ सिमुलेसनमा स्वागत छ! देवनागरी वा अङ्ग्रेजी लिपि छानेर कोर्नुहोस्।',
       'Welcome to Number Ten Writing Studio! Choose Devanagari or English to trace 10.'
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -319,11 +319,11 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
 
           <div>
             <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
-              कक्षा १ • गणित • अध्याय ६ : दश (Ten)
+              Class 1 • Maths • Chapter 6 : Ten
             </div>
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
-                ? 'सिमुलेसन ०५: १० लेख्न सिकौँ (Number Ten Writing Studio)'
+                ? 'सिमुलेसन 05: 10 लेख्न सिकौँ (Number Ten Writing Studio)'
                 : 'Simulation 05: Number Ten Writing Studio'}
             </h1>
           </div>
@@ -357,7 +357,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
                 cursor: 'pointer',
               }}
             >
-              देवनागरी (१०)
+              Nepali script (10)
             </button>
             <button
               onClick={() => {
@@ -397,21 +397,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
             <span>{stars} Stars</span>
           </div>
 
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            style={{
-              padding: '6px 12px',
-              background: '#FFFFFF',
-              border: '1px solid #DCE5DE',
-              borderRadius: '8px',
-              color: '#26332E',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '13px',
-            }}
-          >
-            {language === 'np' ? 'नेपाली | EN' : 'EN | नेपाली'}
-          </button>
+          
 
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
@@ -473,12 +459,12 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
             }}
           >
             <div style={{ fontSize: '18px', fontWeight: 900, color: '#26332E' }}>
-              {scriptMode === 'np' ? 'सङ्ख्या १० (दश)' : 'Number 10 (Ten)'}
+              {scriptMode === 'np' ? 'Number 10' : 'Number 10 (Ten)'}
             </div>
 
             <button
               onClick={() => {
-                const s = scriptMode === 'np' ? '१०, दश' : '10, Ten';
+                const s = scriptMode === 'np' ? '10, दश' : '10, Ten';
                 speakText(`सङ्ख्या ${s}`, `Number ${s}`);
               }}
               style={{

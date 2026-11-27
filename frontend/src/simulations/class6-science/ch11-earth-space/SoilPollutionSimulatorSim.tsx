@@ -1,12 +1,12 @@
 /**
  * SoilPollutionSimulatorSim.tsx
- * Simulation 46: 2D Soil Pollution & Remediation Simulator (माटो प्रदूषण र समाधान)
- * Grade 6 Science • Unit 11: Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 46: 2D Soil Pollution & Remediation Simulator
+ * Grade 6 Science • Unit 11: Earth and Space
  *
  * Full 2D Interactive Soil Ecology & Pollution Restoration featuring:
  * 1. Pollution Drivers: Excessive chemical pesticides, non-biodegradable plastics, chemical fertilizers
  * 2. Degradation indicators: Microbe loss, earthworm mortality, yellowing stunted crop leaves
- * 3. Eco-Remediation: Vermicomposting (गँड्यौला मल), organic manure, crop rotation nitrogen fixation
+ * 3. Eco-Remediation: Vermicomposting, organic manure, crop rotation nitrogen fixation
  * 4. Real-time vitality gauges: Soil Health (%), Earthworm Count, Soil pH
  */
 
@@ -20,7 +20,7 @@ export const SoilPollutionSimulatorSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -395,11 +395,11 @@ export const SoilPollutionSimulatorSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: What Pollutes Soil?' : '१. खोज: माटो कसरी प्रदूषित हुन्छ?')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Impact on Micro-life' : '२. अन्वेषण: सूक्ष्म जीवमा प्रभाव')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Plant Symptoms' : '३. अवलोकन: बिरुवामा देखिने असर')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Organic Remedies' : '४. बुझाइ: जैविक उपचार विधि')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Soil Ecology Quiz' : '५. चुनौती: माटो प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: What Pollutes Soil?' : '1. खोज: माटो कसरी प्रदूषित हुन्छ?')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Impact on Micro-life' : '2. अन्वेषण: सूक्ष्म जीवमा प्रभाव')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Plant Symptoms' : '3. अवलोकन: बिरुवामा देखिने असर')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Organic Remedies' : '4. बुझाइ: जैविक उपचार विधि')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Soil Ecology Quiz' : '5. चुनौती: माटो प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
@@ -412,9 +412,9 @@ export const SoilPollutionSimulatorSim: React.FC<BaseSimulationProps> = ({
                   : '"विषादी र प्लास्टिक हाल्नुहोस्" थिच्नुहोस्। गँड्यौलाहरू नष्ट भएको र बिरुवाका पात पहेंलिएर ओइलाएको हेर्नुहोस्।')}
                 {stage === 'observe' && (lang === 'en'
                   ? 'Now apply "Vermicompost & Organic Manure". Watch soil health restore to 88% and crops bloom with healthy yellow mustard flowers!'
-                  : 'अब "गँड्यौला मल र प्राङ्गारिक उपचार" थिच्नुहोस्। माटोको स्वास्थ्य ८८% मा फर्केको र तोरीका पहेँला फूल फुलेको अवलोकन गर्नुहोस्!')}
+                  : 'अब "गँड्यौला मल र प्राङ्गारिक उपचार" थिच्नुहोस्। माटोको स्वास्थ्य 88% मा फर्केको र तोरीका पहेँला फूल फुलेको अवलोकन गर्नुहोस्!')}
                 {stage === 'understand' && (lang === 'en'
-                  ? 'Traditional Nepalese composting (गोठेमल) maintains biodiversity and keeps soil fertile for generations without toxic chemical runoff.'
+                  ? 'Traditional Nepalese composting maintains biodiversity and keeps soil fertile for generations without toxic chemical runoff.'
                   : 'नेपालको परम्परागत गोठेमल र कम्पोस्टले माटोको जैविक विविधता जोगाउँछ र पुस्तौंसम्म माटोलाई मलिलो बनाइराख्छ।')}
               </p>
             ) : (

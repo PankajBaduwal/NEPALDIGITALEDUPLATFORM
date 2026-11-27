@@ -1,5 +1,5 @@
 /**
- * Lesson 5 · Ascending and descending order (बढ्दो र घट्दो क्रम)
+ * Lesson 5 · Ascending and descending order
  * Order the Rockets — tap rockets from smallest to biggest (ascending) or biggest to smallest (descending).
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -81,32 +81,32 @@ export const OrderRockets: React.FC<Props> = ({ onBackToLibrary }) => {
   // Quiz Questions for Challenge Mode
   const questions: QuizQuestion[] = [
     {
-      np: 'सङ्ख्याहरू १२,०००; ५४,०००; ३२,००० लाई बढ्दो क्रममा मिलाउँदा कुन सही हुन्छ?',
+      np: 'सङ्ख्याहरू 12,000; 54,000; 32,000 लाई बढ्दो क्रममा मिलाउँदा कुन सही हुन्छ?',
       en: 'Which order is ascending for 12000, 54000, 32000?',
       answer: '12000, 32000, 54000',
       options: [
-        { key: '12000, 32000, 54000', label: '१२,००० < ३२,००० < ५४,०००' },
-        { key: '54000, 32000, 12000', label: '५४,००० < ३२,००० < १२,०००' },
-        { key: '32000, 12000, 54000', label: '३२,००० < १२,००० < ५४,०००' },
+        { key: '12000, 32000, 54000', label: '12,000 < 32,000 < 54,000' },
+        { key: '54000, 32000, 12000', label: '54,000 < 32,000 < 12,000' },
+        { key: '32000, 12000, 54000', label: '32,000 < 12,000 < 54,000' },
       ],
     },
     {
-      np: 'सङ्ख्याहरू ८०,०००; ९५,०००; ४५,००० मा सबैभन्दा ठूलो सङ्ख्या कुन हो?',
+      np: 'सङ्ख्याहरू 80,000; 95,000; 45,000 मा सबैभन्दा ठूलो सङ्ख्या कुन हो?',
       en: 'Which is the largest among 80000, 95000, 45000?',
       answer: '95000',
       options: [
-        { key: '95000', label: '९५,०००' },
-        { key: '80000', label: '८०,०००' },
-        { key: '45000', label: '४५,०००' },
+        { key: '95000', label: '95,000' },
+        { key: '80000', label: '80,000' },
+        { key: '45000', label: '45,000' },
       ],
     },
     {
-      np: '६५,४०० र ६५,०४० मा कुन सङ्ख्या ठूलो छ?',
+      np: '65,400 र 65,040 मा कुन सङ्ख्या ठूलो छ?',
       en: 'Which is greater: 65400 or 65040?',
       answer: '65400',
       options: [
-        { key: '65400', label: '६५,४००' },
-        { key: '65040', label: '६५,०४०' },
+        { key: '65400', label: '65,400' },
+        { key: '65040', label: '65,040' },
       ],
     },
   ];

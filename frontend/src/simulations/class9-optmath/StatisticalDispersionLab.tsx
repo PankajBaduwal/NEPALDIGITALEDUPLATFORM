@@ -115,7 +115,7 @@ export const StatisticalDispersionLab: React.FC<SimProps> = ({ onBackToLibrary, 
               <span className="font-bold">{L('फैलावट (Dispersion) किन आवश्यक छ?', 'Why is Dispersion Needed?')}</span>
               <p className="mt-1">
                 {L(
-                  'औसत (Mean) एउटै हुँदैमा दुईवटा श्रेणी उस्तै हुँदैनन्। तथ्याङ्कहरू औसत मानको वरिपरि कति नजिक वा टाढा फैलिएका छन् भनी नाप्न विचलनशीलता (Dispersion) चाहिन्छ।',
+                  'औसत (Mean) एउटै हुँदैमा दुईpcs श्रेणी उस्तै हुँदैनन्। तथ्याङ्कहरू औसत मानको वरिपरि कति नजिक वा टाढा फैलिएका छन् भनी नाप्न विचलनशीलता (Dispersion) चाहिन्छ।',
                   'Two datasets can have the exact same mean, yet behave completely differently depending on how spread out the values are around the center.'
                 )}
               </p>
@@ -125,12 +125,12 @@ export const StatisticalDispersionLab: React.FC<SimProps> = ({ onBackToLibrary, 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="font-bold text-emerald-900">समूह A (कम फैलिएको / Consistent):</span>
+                  <span className="font-bold text-emerald-900">Group A:</span>
                   <span className="text-xs bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded font-mono">Range = 4</span>
                 </div>
                 <div className="font-mono text-sm">{groupA.join(', ')}</div>
                 <div className="text-xs text-slate-600">
-                  औसत (Mean) = २० | न्यूनतम = १८, अधिकतम = २२
+                  Mean = 20 | minimum = 18, maximum = 22
                 </div>
                 {/* Number line representation */}
                 <div className="pt-2">
@@ -146,12 +146,12 @@ export const StatisticalDispersionLab: React.FC<SimProps> = ({ onBackToLibrary, 
 
               <div className="p-4 bg-rose-50 border border-rose-200 rounded-xl space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="font-bold text-rose-900">समूह B (धेरै फैलिएको / Dispersed):</span>
+                  <span className="font-bold text-rose-900">Group B:</span>
                   <span className="text-xs bg-rose-200 text-rose-800 px-2 py-0.5 rounded font-mono">Range = 20</span>
                 </div>
                 <div className="font-mono text-sm">{groupB.join(', ')}</div>
                 <div className="text-xs text-slate-600">
-                  औसत (Mean) = २० | न्यूनतम = १०, अधिकतम = ३०
+                  Mean = 20 | minimum = 10, maximum = 30
                 </div>
                 {/* Number line representation */}
                 <div className="pt-2">
@@ -174,9 +174,9 @@ export const StatisticalDispersionLab: React.FC<SimProps> = ({ onBackToLibrary, 
             <div className="bg-blue-50 border-l-4 border-blue-600 p-3 rounded text-sm text-blue-900">
               <span className="font-bold">{L('पाठ्यपुस्तक सूत्र (Quartile Deviation Formulas):', 'CDC Formulas:')}</span>
               <div className="font-mono text-xs mt-1 space-y-1">
-                <div>अन्तर-चतुर्थांश विस्तार (Interquartile Range IQR) = Q₃ - Q₁</div>
-                <div>चतुर्थांश विचलन (Quartile Deviation QD) = (Q₃ - Q₁) / 2</div>
-                <div>चतुर्थांश विचलनको गुणाङ्क (Coeff. of QD) = (Q₃ - Q₁) / (Q₃ + Q₁)</div>
+                <div>Interquartile range (IQR) = Q₃ - Q₁</div>
+                <div>Quartile deviation (QD) = (Q₃ - Q₁) / 2</div>
+                <div>Coefficient of QD = (Q₃ - Q₁) / (Q₃ + Q₁)</div>
               </div>
             </div>
 
@@ -261,9 +261,9 @@ export const StatisticalDispersionLab: React.FC<SimProps> = ({ onBackToLibrary, 
               <table className="w-full text-left border-collapse text-sm">
                 <thead>
                   <tr className="bg-slate-100 border-b">
-                    <th className="p-2 font-bold text-slate-700">पद (x)</th>
+                    <th className="p-2 font-bold text-slate-700">Term (x)</th>
                     <th className="p-2 font-bold text-slate-700">
-                      {mdCenter === 'mean' ? '|x - X̄| (निरपेक्ष विचलन)' : '|x - Md| (निरपेक्ष विचलन)'}
+                      {mdCenter === 'mean' ? '|x - X̄| (absolute deviation)' : '|x - Md| (absolute deviation)'}
                     </th>
                   </tr>
                 </thead>
@@ -292,7 +292,7 @@ export const StatisticalDispersionLab: React.FC<SimProps> = ({ onBackToLibrary, 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="p-3 bg-indigo-50 border border-indigo-200 rounded-xl space-y-1">
                 <div className="text-xs text-indigo-800 font-bold">
-                  {mdCenter === 'mean' ? 'मध्यकबाट मध्यक विचलन (MD from Mean):' : 'मध्यिकाबाट मध्यक विचलन (MD from Median):'}
+                  {mdCenter === 'mean' ? 'Mean deviation from the mean (MD):' : 'मध्यिकाबाट मध्यक विचलन (MD from Median):'}
                 </div>
                 <div className="font-mono text-xs text-slate-600">MD = ∑|x - A| / N = {fmt(sumAbsDev.toFixed(2))} / {fmt(mdN)}</div>
                 <div className="text-xl font-bold text-indigo-950 font-mono">

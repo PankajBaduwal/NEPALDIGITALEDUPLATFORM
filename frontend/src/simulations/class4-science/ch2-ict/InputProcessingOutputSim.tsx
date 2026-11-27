@@ -1,7 +1,7 @@
 /**
  * InputProcessingOutputSim.tsx
- * Simulation 5: 2D Input, Processing & Output Pipeline (कम्प्युटरको कार्यप्रणाली - २डी चक्र)
- * Grade 4 Science • Chapter 2: Information & Communication Technology (सूचना तथा सञ्चार प्रविधि)
+ * Simulation 5: 2D Input, Processing & Output Pipeline
+ * Grade 4 Science • Chapter 2: Information & Communication Technology
  *
  * 100% Native HTML5 Canvas 2D Pipeline Simulation.
  * Features:
@@ -36,7 +36,7 @@ export const InputProcessingOutputSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -52,7 +52,7 @@ export const InputProcessingOutputSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'calc',
       nameEn: 'Arithmetic: 5 + 3 = 8',
-      nameNe: 'अङ्कगणित हिसाब: ५ + ३ = ८',
+      nameNe: 'अङ्कगणित हिसाब: 5 + 3 = 8',
       inputDeviceEn: 'Keyboard & Mouse',
       inputDeviceNe: 'किबोर्ड र माउस',
       inputPayload: '5 + 3',
@@ -195,8 +195,8 @@ export const InputProcessingOutputSim: React.FC<BaseSimulationProps> = ({
       const stations = [
         {
           id: 'input',
-          nameEn: '1. INPUT (इनपुट)',
-          nameNe: '१. इनपुट (कच्चा तथ्याङ्क)',
+          nameEn: '1. INPUT',
+          nameNe: '1. इनपुट (कच्चा तथ्याङ्क)',
           descEn: 'Raw Data Entry',
           color: '#f59e0b',
           x: 60,
@@ -206,8 +206,8 @@ export const InputProcessingOutputSim: React.FC<BaseSimulationProps> = ({
         },
         {
           id: 'process',
-          nameEn: '2. PROCESS (प्रशोधन)',
-          nameNe: '२. प्रशोधन (सिपियू दिमाग)',
+          nameEn: '2. PROCESS',
+          nameNe: '2. प्रशोधन (सिपियू दिमाग)',
           descEn: 'ALU & CPU Core',
           color: '#06b6d4',
           x: 340,
@@ -217,8 +217,8 @@ export const InputProcessingOutputSim: React.FC<BaseSimulationProps> = ({
         },
         {
           id: 'output',
-          nameEn: '3. OUTPUT (आउटपुट)',
-          nameNe: '३. आउटपुट (नतिजा/सूचना)',
+          nameEn: '3. OUTPUT',
+          nameNe: '3. आउटपुट (नतिजा/सूचना)',
           descEn: 'Result Information',
           color: '#10b981',
           x: 620,
@@ -467,7 +467,7 @@ export const InputProcessingOutputSim: React.FC<BaseSimulationProps> = ({
       ctx.fillStyle = '#e9d5ff';
       ctx.font = 'bold 11px sans-serif';
       ctx.textAlign = 'left';
-      ctx.fillText(lang === 'ne' ? '४. स्टोरेज (सङ्ग्रह)' : '4. STORAGE (Memory)', stX + 90, stY + 35);
+      ctx.fillText(lang === 'ne' ? '4. स्टोरेज (सङ्ग्रह)' : '4. STORAGE (Memory)', stX + 90, stY + 35);
       ctx.font = '9px sans-serif';
       ctx.fillStyle = '#c084fc';
       ctx.fillText(lang === 'ne' ? 'हार्ड डिस्क / SSD' : 'Hard Disk / SSD', stX + 90, stY + 52);
@@ -705,10 +705,10 @@ export const InputProcessingOutputSim: React.FC<BaseSimulationProps> = ({
                 <div style={{ fontSize: '11px', color: '#64748b' }}>
                   {isRunning
                     ? progress < 0.33
-                      ? (lang === 'ne' ? `१. इनपुट ग्रहण: ${currentTask.inputPayload}` : `1. Receiving Input: ${currentTask.inputPayload}`)
+                      ? (lang === 'ne' ? `1. इनपुट ग्रहण: ${currentTask.inputPayload}` : `1. Receiving Input: ${currentTask.inputPayload}`)
                       : progress < 0.66
-                      ? (lang === 'ne' ? `२. सिपियू प्रोसेसिङ: ${currentTask.processNe}` : `2. CPU ALU Processing: ${currentTask.processEn}`)
-                      : (lang === 'ne' ? `३. आउटपुट नतिजा: ${currentTask.outputPayload}` : `3. Displaying Output: ${currentTask.outputPayload}`)
+                      ? (lang === 'ne' ? `2. सिपियू प्रोसेसिङ: ${currentTask.processNe}` : `2. CPU ALU Processing: ${currentTask.processEn}`)
+                      : (lang === 'ne' ? `3. आउटपुट नतिजा: ${currentTask.outputPayload}` : `3. Displaying Output: ${currentTask.outputPayload}`)
                     : (lang === 'ne' ? 'चक्र सुरु गर्न "Run Cycle" थिच्नुहोस्' : 'Ready to start. Click "Run Cycle" to trace data packet')}
                 </div>
               </div>
@@ -843,7 +843,7 @@ export const InputProcessingOutputSim: React.FC<BaseSimulationProps> = ({
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#64748b' }}>
-                <span>{lang === 'ne' ? '१. इनपुट (Input)' : '1. Input Stage'}</span>
+                <span>{lang === 'ne' ? '1. इनपुट (Input)' : '1. Input Stage'}</span>
                 <span style={{ color: '#38bdf8' }}>{currentTask.inputPayload}</span>
               </div>
               <div style={{ fontSize: '11px', fontWeight: 700, color: '#0f172a', marginTop: '2px' }}>
@@ -861,7 +861,7 @@ export const InputProcessingOutputSim: React.FC<BaseSimulationProps> = ({
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#64748b' }}>
-                <span>{lang === 'ne' ? '२. प्रोसेस (Process)' : '2. Processing Stage'}</span>
+                <span>{lang === 'ne' ? '2. प्रोसेस (Process)' : '2. Processing Stage'}</span>
                 <span style={{ color: '#a855f7' }}>ALU / CPU</span>
               </div>
               <div style={{ fontSize: '11px', fontWeight: 600, color: '#e2e8f0', marginTop: '2px', lineHeight: 1.4 }}>
@@ -879,7 +879,7 @@ export const InputProcessingOutputSim: React.FC<BaseSimulationProps> = ({
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#64748b' }}>
-                <span>{lang === 'ne' ? '३. आउटपुट (Output)' : '3. Output Stage'}</span>
+                <span>{lang === 'ne' ? '3. आउटपुट (Output)' : '3. Output Stage'}</span>
                 <span style={{ color: '#4ade80' }}>{currentTask.outputPayload}</span>
               </div>
               <div style={{ fontSize: '11px', fontWeight: 700, color: '#0f172a', marginTop: '2px' }}>

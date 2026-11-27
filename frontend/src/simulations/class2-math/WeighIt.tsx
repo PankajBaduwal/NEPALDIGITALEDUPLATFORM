@@ -1,5 +1,5 @@
 /**
- * Lesson 6 · Weight (तौल)
+ * Lesson 6 · Weight
  * Weigh It — heavier goes down. Balance an object with 1 kg, 2 kg and 5 kg weights to find its weight.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -75,7 +75,7 @@ export const WeighIt: React.FC<Props> = ({ onBackToLibrary }) => {
       setWeights([]);
       const it = ITEMS[li % ITEMS.length];
       kit.say(
-        `${it.np}लाई तौलन दायाँ पल्लामा १, २ वा ५ के.जी. का ढकहरू राख्नुहोस्।`,
+        `${it.np}लाई तौलन दायाँ पल्लामा 1, 2 वा 5 के.जी. का ढकहरू राख्नुहोस्।`,
         `Place 1kg, 2kg, or 5kg weights on the right pan to weigh the ${it.en}.`
       );
     } else if (kit.mode === 'PLAY') {
@@ -125,9 +125,9 @@ export const WeighIt: React.FC<Props> = ({ onBackToLibrary }) => {
         <span style={{ fontSize: 13, fontWeight: 800, color: '#26332E' }}>
           {kit.t('ढक थप्नुहोस्:', 'Add Weights:')}
         </span>
-        <CBtn color="#334155" onClick={() => addWeight(1)}>+१ {kit.t('के.जी.', 'kg')}</CBtn>
-        <CBtn color="#475569" onClick={() => addWeight(2)}>+२ {kit.t('के.जी.', 'kg')}</CBtn>
-        <CBtn color="#1E293B" onClick={() => addWeight(5)}>+५ {kit.t('के.जी.', 'kg')}</CBtn>
+        <CBtn color="#334155" onClick={() => addWeight(1)}>+1 {kit.t('के.जी.', 'kg')}</CBtn>
+        <CBtn color="#475569" onClick={() => addWeight(2)}>+2 {kit.t('के.जी.', 'kg')}</CBtn>
+        <CBtn color="#1E293B" onClick={() => addWeight(5)}>+5 {kit.t('के.जी.', 'kg')}</CBtn>
         <CBtn color="#EF4444" disabled={weights.length === 0} onClick={clearWeights}>
           ↺ {kit.t('ढक खाली', 'Clear')}
         </CBtn>

@@ -1,6 +1,6 @@
 /**
  * pascalPhysics.ts
- * Mathematical & Physical Engine for Pascal's Law Simulation (पास्कलको नियम)
+ * Mathematical & Physical Engine for Pascal's Law Simulation
  * Grade 10 Science & Technology • Pressure
  * Nepal CDC Aligned
  */
@@ -27,7 +27,7 @@ export function calculatePressureKpa(forceN: number, areaCm2: number): number {
 }
 
 /**
- * Multi-Piston Equilibrium (पास्कलको भाँडो)
+ * Multi-Piston Equilibrium
  * When P1 is pushed with F1:
  * Pressure P = F1 / A1 is transmitted equally to all other pistons.
  * For any other piston i: F_i = P × A_i

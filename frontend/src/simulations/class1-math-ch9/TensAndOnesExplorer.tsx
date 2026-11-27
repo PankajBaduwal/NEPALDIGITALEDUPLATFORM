@@ -1,7 +1,7 @@
 /**
  * TensAndOnesExplorer.tsx
- * Simulation 03: Tens and Ones Explorer (दहाइ र एकाइ पत्ता लगाऔँ)
- * Class 1 Mathematics - Chapter 9: Numbers 11 to 20 (११ देखि २० सम्मका सङ्ख्याहरू)
+ * Simulation 03: Tens and Ones Explorer
+ * Class 1 Mathematics - Chapter 9: Numbers 11 to 20
  * Nepal Digital Education Platform
  */
 
@@ -28,10 +28,10 @@ interface Props {
 }
 
 const NEP_NUMERALS: Record<number, string> = {
-  0: '०', 1: '१', 2: '२', 3: '३', 4: '४', 5: '५',
-  6: '६', 7: '७', 8: '८', 9: '९', 10: '१०',
-  11: '११', 12: '१२', 13: '१३', 14: '१४', 15: '१५',
-  16: '१६', 17: '१७', 18: '१८', 19: '१९', 20: '२०',
+  0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5',
+  6: '6', 7: '7', 8: '8', 9: '9', 10: '10',
+  11: '11', 12: '12', 13: '13', 14: '14', 15: '15',
+  16: '16', 17: '17', 18: '18', 19: '19', 20: '20',
 };
 
 const NEP_NAMES: Record<number, string> = {
@@ -61,7 +61,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Mode: 'EXPLORE' | 'BUILDER' | 'QUIZ'
@@ -87,122 +87,122 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
     () => [
       {
         id: 1,
-        questionNp: 'सङ्ख्या १६ मा कति वटा दहाइ र कति वटा एकाइ छन्?',
+        questionNp: 'सङ्ख्या 16 मा कति वटा दहाइ र कति वटा एकाइ छन्?',
         questionEn: 'How many tens and ones are there in number 16?',
         tens: 1,
         ones: 6,
         total: 16,
         options: [16, 61, 10],
         correct: 16,
-        explanationNp: '१६ मा १ दहाइ र ६ एकाइ हुन्छन्।',
+        explanationNp: '16 मा 1 दहाइ र 6 एकाइ हुन्छन्।',
         explanationEn: '16 has 1 ten and 6 ones.',
       },
       {
         id: 2,
-        questionNp: '१ दहाइ र ४ एकाइ मिलेर कुन सङ्ख्या बन्छ?',
+        questionNp: '1 दहाइ र 4 एकाइ मिलेर कुन सङ्ख्या बन्छ?',
         questionEn: 'What number is formed by 1 ten and 4 ones?',
         tens: 1,
         ones: 4,
         total: 14,
         options: [14, 41, 15],
         correct: 14,
-        explanationNp: '१ दहाइ (१०) र ४ एकाइ (४) मिलेर १४ (चौध) बन्छ।',
+        explanationNp: '1 दहाइ (10) र 4 एकाइ (4) मिलेर 14 बन्छ।',
         explanationEn: '1 ten (10) and 4 ones (4) make 14 (Fourteen).',
       },
       {
         id: 3,
-        questionNp: 'सङ्ख्या २० मा एकाइको स्थानमा कुन अङ्क हुन्छ?',
+        questionNp: 'सङ्ख्या 20 मा एकाइको स्थानमा कुन अङ्क हुन्छ?',
         questionEn: 'What digit is in the ones place of number 20?',
         tens: 2,
         ones: 0,
         total: 20,
         options: [0, 2, 1],
         correct: 0,
-        explanationNp: '२० मा दहाइमा २ र एकाइमा ० (शून्य) हुन्छ।',
+        explanationNp: '20 मा दहाइमा 2 र एकाइमा 0 हुन्छ।',
         explanationEn: 'In 20, tens digit is 2 and ones digit is 0.',
       },
       {
         id: 4,
-        questionNp: '१ दहाइ र ९ एकाइ मिलेर बन्ने सङ्ख्या के हो?',
+        questionNp: '1 दहाइ र 9 एकाइ मिलेर बन्ने सङ्ख्या के हो?',
         questionEn: 'What number is 1 ten and 9 ones?',
         tens: 1,
         ones: 9,
         total: 19,
         options: [19, 91, 18],
         correct: 19,
-        explanationNp: '१ दहाइ र ९ एकाइ मिलेर १९ (उन्नाइस) हुन्छ।',
+        explanationNp: '1 दहाइ र 9 एकाइ मिलेर 19 हुन्छ।',
         explanationEn: '1 ten and 9 ones make 19 (Nineteen).',
       },
       {
         id: 5,
-        questionNp: 'सङ्ख्या ११ मा दहाइको स्थानमा कुन अङ्क छ?',
+        questionNp: 'सङ्ख्या 11 मा दहाइको स्थानमा कुन अङ्क छ?',
         questionEn: 'What digit is in the tens place of number 11?',
         tens: 1,
         ones: 1,
         total: 11,
         options: [1, 2, 0],
         correct: 1,
-        explanationNp: '११ मा दहाइमा १ र एकाइमा पनि १ हुन्छ।',
+        explanationNp: '11 मा दहाइमा 1 र एकाइमा पनि 1 हुन्छ।',
         explanationEn: 'In 11, the tens digit is 1 and ones digit is 1.',
       },
       {
         id: 6,
-        questionNp: '२ वटा दहाइका छडहरू मिलेर कति हुन्छ?',
+        questionNp: '2 वटा दहाइका छडहरू मिलेर कति हुन्छ?',
         questionEn: 'How much is 2 ten-rods?',
         tens: 2,
         ones: 0,
         total: 20,
         options: [12, 20, 2],
         correct: 20,
-        explanationNp: '१० + १० = २० (२ दहाइ) हुन्छ।',
+        explanationNp: '10 + 10 = 20 हुन्छ।',
         explanationEn: '10 + 10 = 20 (2 tens).',
       },
       {
         id: 7,
-        questionNp: 'सङ्ख्या १३ मा एकाइ कति ओटा छन्?',
+        questionNp: 'सङ्ख्या 13 मा एकाइ कति ओटा छन्?',
         questionEn: 'How many ones are there in number 13?',
         tens: 1,
         ones: 3,
         total: 13,
         options: [1, 3, 4],
         correct: 3,
-        explanationNp: '१३ मा १ दहाइ र ३ एकाइ छन्।',
+        explanationNp: '13 मा 1 दहाइ र 3 एकाइ छन्।',
         explanationEn: 'In 13, there are 1 ten and 3 ones.',
       },
       {
         id: 8,
-        questionNp: '१ दहाइ र ७ एकाइ मिलेर कुन सङ्ख्या बन्छ?',
+        questionNp: '1 दहाइ र 7 एकाइ मिलेर कुन सङ्ख्या बन्छ?',
         questionEn: 'What number is formed by 1 ten and 7 ones?',
         tens: 1,
         ones: 7,
         total: 17,
         options: [16, 17, 18],
         correct: 17,
-        explanationNp: '१ दहाइ र ७ एकाइ = १७ (सत्र)।',
+        explanationNp: '1 दहाइ र 7 एकाइ = 17।',
         explanationEn: '1 ten and 7 ones = 17 (Seventeen).',
       },
       {
         id: 9,
-        questionNp: 'सङ्ख्या १८ मा दहाइ र एकाइको जोड कसरी लेखिन्छ?',
+        questionNp: 'सङ्ख्या 18 मा दहाइ र एकाइको जोड कसरी लेखिन्छ?',
         questionEn: 'How is number 18 expressed as addition of tens and ones?',
         tens: 1,
         ones: 8,
         total: 18,
         options: [18, 108, 80],
         correct: 18,
-        explanationNp: '१० + ८ = १८ हुन्छ।',
+        explanationNp: '10 + 8 = 18 हुन्छ।',
         explanationEn: '10 + 8 = 18.',
       },
       {
         id: 10,
-        questionNp: 'सङ्ख्या १५ मा कति वटा एकाइ छन्?',
+        questionNp: 'सङ्ख्या 15 मा कति वटा एकाइ छन्?',
         questionEn: 'How many ones are there in number 15?',
         tens: 1,
         ones: 5,
         total: 15,
         options: [1, 5, 10],
         correct: 5,
-        explanationNp: '१५ मा ५ एकाइ छन्।',
+        explanationNp: '15 मा 5 एकाइ छन्।',
         explanationEn: 'There are 5 ones in 15.',
       },
     ],
@@ -515,12 +515,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
           >
             {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            className="px-3 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold shadow-sm transition"
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
@@ -580,7 +575,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                 </button>
               </div>
 
-              {/* Two Column Layout: Tens (दहाइ) vs Ones (एकाइ) */}
+              {/* Two Column Layout: Tens vs Ones */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* TENS COLUMN */}
                 <div className="bg-slate-50 p-5 rounded-2xl border-2 border-emerald-500/40 flex flex-col items-center justify-between min-h-[300px]">
@@ -589,7 +584,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                       {language === 'np' ? 'दहाइ (Tens)' : 'Tens Column'}
                     </span>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      {language === 'np' ? '१० वटा एकाइ बराबर १ दहाइ' : '10 units = 1 Ten Rod'}
+                      {language === 'np' ? '10 वटा एकाइ बराबर 1 दहाइ' : '10 units = 1 Ten Rod'}
                     </p>
                   </div>
 
@@ -601,7 +596,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                         className="flex flex-col items-center bg-emerald-500/20 border-2 border-emerald-400 rounded-xl p-2 shadow-lg shadow-emerald-500/10"
                       >
                         <span className="text-[10px] font-bold text-emerald-700 mb-1">
-                          {language === 'np' ? `१ दहाइ (${NEP_NUMERALS[10]})` : '1 Ten (10)'}
+                          {language === 'np' ? `1 दहाइ (${NEP_NUMERALS[10]})` : '1 Ten (10)'}
                         </span>
                         {/* 10 stacked segments */}
                         <div className="flex flex-col gap-0.5">
@@ -633,7 +628,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                       {language === 'np' ? 'एकाइ (Ones)' : 'Ones Column'}
                     </span>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      {language === 'np' ? 'छुट्टाटुट्टै १-१ वटा क्युबहरू' : 'Single Unit Cubes'}
+                      {language === 'np' ? 'छुट्टाटुट्टै 1-1 वटा क्युबहरू' : 'Single Unit Cubes'}
                     </p>
                   </div>
 
@@ -641,7 +636,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                   <div className="flex flex-wrap items-center justify-center gap-3 py-4 max-w-[240px] min-h-[160px]">
                     {expOnes === 0 ? (
                       <span className="text-slate-500 text-xs italic">
-                        {language === 'np' ? 'शून्य एकाइ (०)' : 'Zero Ones (0)'}
+                        {language === 'np' ? 'शून्य एकाइ (0)' : 'Zero Ones (0)'}
                       </span>
                     ) : (
                       Array.from({ length: expOnes }).map((_, cubeIdx) => (
@@ -736,7 +731,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                 {/* Tens Workstation */}
                 <div className="bg-slate-50 p-5 rounded-2xl border border-emerald-500/40 flex flex-col items-center justify-between min-h-[260px]">
                   <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
-                    {language === 'np' ? '१० को छड (Tens Rods)' : 'Tens Rods (10 each)'}
+                    {language === 'np' ? '10 को छड (Tens Rods)' : 'Tens Rods (10 each)'}
                   </span>
 
                   <div className="flex items-center justify-center gap-4 py-2">
@@ -750,7 +745,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                           key={idx}
                           className="w-10 h-32 bg-emerald-500 rounded-xl border-2 border-emerald-300 flex flex-col items-center justify-center text-emerald-950 font-black shadow-lg"
                         >
-                          <span className="text-xs">१०</span>
+                          <span className="text-xs">10</span>
                         </div>
                       ))
                     )}
@@ -762,7 +757,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                       disabled={userTens >= 2}
                       className="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 text-white font-bold text-xs transition"
                     >
-                      + {language === 'np' ? '१ छड थप्नुहोस्' : 'Add 1 Rod'}
+                      + {language === 'np' ? '1 छड थप्नुहोस्' : 'Add 1 Rod'}
                     </button>
                     <button
                       onClick={handleRemoveTenRod}
@@ -803,7 +798,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                       disabled={userOnes >= 9}
                       className="flex-1 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 disabled:opacity-40 text-white font-bold text-xs transition"
                     >
-                      + {language === 'np' ? '१ क्युब थप्नुहोस्' : 'Add 1 Cube'}
+                      + {language === 'np' ? '1 क्युब थप्नुहोस्' : 'Add 1 Cube'}
                     </button>
                     <button
                       onClick={handleRemoveOneCube}

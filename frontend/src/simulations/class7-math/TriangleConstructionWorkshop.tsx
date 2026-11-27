@@ -1,7 +1,7 @@
 /**
  * TriangleConstructionWorkshop.tsx
- * Grade 7 Mathematics – Lesson 14: PLANE FIGURES (समतलीय आकृतिहरू)
- * Simulation 1: Triangle Construction Workshop (त्रिभुज रचना कार्यशाला)
+ * Grade 7 Mathematics – Lesson 14: PLANE FIGURES
+ * Simulation 1: Triangle Construction Workshop
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 205-212)
  */
 import React, { useState } from 'react';
@@ -15,10 +15,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'त्रिभुजका तीनवटै भित्री कोणहरूको योगफल कति हुन्छ?',
     en: 'What is the sum of the three interior angles of any triangle?',
     options: [
-      { key: 'A', label: '१८०°' },
-      { key: 'B', label: '९०°' },
-      { key: 'C', label: '३६०°' },
-      { key: 'D', label: '२७०°' },
+      { key: 'A', label: '180°' },
+      { key: 'B', label: '90°' },
+      { key: 'C', label: '360°' },
+      { key: 'D', label: '270°' },
     ],
     answer: 'A',
   },
@@ -26,10 +26,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दुई भुजा र तिनीहरू बीचको कोण (SAS) दिइएको अवस्थामा त्रिभुज रचना गर्दा सुरुमा के खिचिन्छ?',
     en: 'When constructing a triangle given two sides and an included angle (SAS), what is drawn first?',
     options: [
-      { key: 'A', label: 'आधार भुजा (Base side)' },
-      { key: 'B', label: 'शीर्षबिन्दु' },
-      { key: 'C', label: 'माथिल्लो चाप' },
-      { key: 'D', label: 'मध्यबिन्दु' },
+      { key: 'A', label: 'Base side' },
+      { key: 'B', label: 'Vertex' },
+      { key: 'C', label: 'Upper arc' },
+      { key: 'D', label: 'Midpoint' },
     ],
     answer: 'A',
   },
@@ -37,21 +37,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'तीन भुजाको लम्बाइ दिइएको अवस्थामा (SSS), कुन ज्यामितीय उपकरण प्रयोग गरेर दुवै शीर्षबाट चाप काटिन्छ?',
     en: 'When three sides are given (SSS), which instrument is used to draw intersecting arcs from the vertices?',
     options: [
-      { key: 'A', label: 'कम्पास र रुलर (Compass & Ruler)' },
-      { key: 'B', label: 'प्रोटेक्टर मात्र' },
-      { key: 'C', label: 'रबर' },
-      { key: 'D', label: 'पेन्सिल मात्र' },
+      { key: 'A', label: 'Compass and ruler' },
+      { key: 'B', label: 'Protractor only' },
+      { key: 'C', label: 'Eraser' },
+      { key: 'D', label: 'Pencil only' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि त्रिभुजका दुई कोणहरू ४५° र ७५° छन् भने तेस्रो कोण कति हुन्छ?',
+    np: 'यदि त्रिभुजका दुई कोणहरू 45° र 75° छन् भने तेस्रो कोण कति हुन्छ?',
     en: 'If two angles of a triangle are 45° and 75°, what is the third angle?',
     options: [
-      { key: 'A', label: '६०° (१८०° - १२०°)' },
-      { key: 'B', label: '५०°' },
-      { key: 'C', label: '७०°' },
-      { key: 'D', label: '८०°' },
+      { key: 'A', label: '60° (180° - 120°)' },
+      { key: 'B', label: '50°' },
+      { key: 'C', label: '70°' },
+      { key: 'D', label: '80°' },
     ],
     answer: 'A',
   },
@@ -95,7 +95,7 @@ export const TriangleConstructionWorkshop: React.FC<{ onBackToLibrary?: () => vo
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते विद्यार्थीहरू! पाठ्यपुस्तकका ४ वटै त्रिभुज रचना विधिहरू (SAS, ASA, SSS, AAS) चरणबद्ध रूपमा अभ्यास गरौँ!',
+        'नमस्ते विद्यार्थीहरू! पाठ्यपुस्तकका 4 वटै त्रिभुज रचना विधिहरू (SAS, ASA, SSS, AAS) चरणबद्ध रूपमा अभ्यास गरौँ!',
         'Hello students! Explore all 4 official triangle construction methods (SAS, ASA, SSS, AAS) step-by-step!'
       )}
     >
@@ -103,10 +103,10 @@ export const TriangleConstructionWorkshop: React.FC<{ onBackToLibrary?: () => vo
         {/* Case Selection */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'sas', np: 'केस १: दुई भुजा र बीचको कोण (SAS)', en: 'Case 1: SAS (Two Sides & Angle)' },
-            { id: 'asa', np: 'केस २: एक भुजा र दुई कोण (ASA)', en: 'Case 2: ASA (One Side & Two Angles)' },
-            { id: 'sss', np: 'केस ३: तीनवटै भुजा (SSS)', en: 'Case 3: SSS (Three Sides Given)' },
-            { id: 'aas', np: 'केस ४: एक भुजा र विपरित कोण (AAS)', en: 'Case 4: AAS / Two Angles' },
+            { id: 'sas', np: 'केस 1: दुई भुजा र बीचको कोण (SAS)', en: 'Case 1: SAS (Two Sides & Angle)' },
+            { id: 'asa', np: 'केस 2: एक भुजा र दुई कोण (ASA)', en: 'Case 2: ASA (One Side & Two Angles)' },
+            { id: 'sss', np: 'केस 3: तीनवटै भुजा (SSS)', en: 'Case 3: SSS (Three Sides Given)' },
+            { id: 'aas', np: 'केस 4: एक भुजा र विपरित कोण (AAS)', en: 'Case 4: AAS / Two Angles' },
           ].map((c) => (
             <button
               key={c.id}
@@ -132,22 +132,22 @@ export const TriangleConstructionWorkshop: React.FC<{ onBackToLibrary?: () => vo
             <h3 className="text-base font-bold text-indigo-950" style={{ fontFamily: FONT_NP }}>
               {cCase === 'sas' &&
                 L(
-                  'उदाहरण १ (SAS): △PQR रचना गर्नुहोस् जहाँ PQ = ५.६ सेमी, QR = ४.५ सेमी र ∠PQR = ६०° छन्।',
+                  'उदाहरण 1 (SAS): △PQR रचना गर्नुहोस् जहाँ PQ = 5.6 cm, QR = 4.5 cm र ∠PQR = 60° छन्।',
                   'Example 1 (SAS): Construct △PQR where PQ = 5.6 cm, QR = 4.5 cm and ∠PQR = 60°.'
                 )}
               {cCase === 'asa' &&
                 L(
-                  'उदाहरण २ (ASA): △ABC रचना गर्नुहोस् जहाँ AB = ५.२ सेमी, ∠A = ७५° र ∠B = ६०° छन्।',
+                  'उदाहरण 2 (ASA): △ABC रचना गर्नुहोस् जहाँ AB = 5.2 cm, ∠A = 75° र ∠B = 60° छन्।',
                   'Example 2 (ASA): Construct △ABC where AB = 5.2 cm, ∠A = 75° and ∠B = 60°.'
                 )}
               {cCase === 'sss' &&
                 L(
-                  'उदाहरण ३ (SSS): △ABC रचना गर्नुहोस् जहाँ AB = ४.५ सेमी, BC = ५ सेमी र CA = ६.५ सेमी छन्।',
+                  'उदाहरण 3 (SSS): △ABC रचना गर्नुहोस् जहाँ AB = 4.5 cm, BC = 5 cm र CA = 6.5 cm छन्।',
                   'Example 3 (SSS): Construct △ABC where AB = 4.5 cm, BC = 5 cm and CA = 6.5 cm.'
                 )}
               {cCase === 'aas' &&
                 L(
-                  'उदाहरण ४ (AAS): △XYZ रचना गर्नुहोस् जहाँ XY = ५ सेमी, ∠X = ४५° र ∠Z = ७५° छन्। (∠Y = १८०° - १२०° = ६०°)',
+                  'उदाहरण 4 (AAS): △XYZ रचना गर्नुहोस् जहाँ XY = 5 cm, ∠X = 45° र ∠Z = 75° छन्। (∠Y = 180° - 120° = 60°)',
                   'Example 4 (AAS): Construct △XYZ where XY = 5 cm, ∠X = 45° and ∠Z = 75° (so ∠Y = 60°).'
                 )}
             </h3>
@@ -220,7 +220,7 @@ export const TriangleConstructionWorkshop: React.FC<{ onBackToLibrary?: () => vo
                     <>
                       {/* Compass arc from B with radius 4.5 cm (approx 150px) */}
                       <path d="M 120 70 A 150 150 0 0 1 180 60" fill="none" stroke="#6366f1" strokeWidth="2.5" />
-                      <text x="80" y="65" fontSize="11" fill="#4f46e5" fontWeight="bold">चाप r = ४.५ सेमी (Arc)</text>
+                      <text x="80" y="65" fontSize="11" fill="#4f46e5" fontWeight="bold">चाप r = 4.5 cm (Arc)</text>
                     </>
                   )}
                   {cCase === 'aas' && (
@@ -262,7 +262,7 @@ export const TriangleConstructionWorkshop: React.FC<{ onBackToLibrary?: () => vo
                       <path d="M 130 50 A 190 190 0 0 0 160 90" fill="none" stroke="#ec4899" strokeWidth="2.5" />
                       <circle cx="145" cy="65" r="4" fill="#ef4444" />
                       <text x="140" y="55" fontSize="13" fontWeight="bold" fill="#ef4444">A</text>
-                      <text x="210" y="65" fontSize="11" fill="#db2777" fontWeight="bold">चाप r = ६.५ सेमी</text>
+                      <text x="210" y="65" fontSize="11" fill="#db2777" fontWeight="bold">चाप r = 6.5 cm</text>
                     </>
                   )}
                   {cCase === 'aas' && (
@@ -338,18 +338,18 @@ export const TriangleConstructionWorkshop: React.FC<{ onBackToLibrary?: () => vo
           {/* Detailed CDC Instruction Text for Current Step */}
           <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-slate-700 text-sm space-y-1">
             <div className="font-bold text-indigo-900">
-              {cCase === 'sas' && step === 1 && L('चरण १: स्केलको सहायताले ५.६ सेमी लम्बाइ भएको रेखाखण्ड PQ खिच्नुहोस्।', 'Step 1: Draw a line segment PQ of length 5.6 cm using a ruler.')}
-              {cCase === 'sas' && step === 2 && L('चरण २: प्रोटेक्टर वा कम्पासको सहायताले बिन्दु Q मा ६०° को कोण बनाउने किरण खिच्नुहोस्।', 'Step 2: Construct an angle of 60° at vertex Q.')}
-              {cCase === 'sas' && step === 3 && L('चरण ३: कम्पासमा ४.५ सेमी नापेर Q बाट सो किरणमा चाप काट्नुहोस् र काटिएको बिन्दुलाई R नाम दिनुहोस्।', 'Step 3: Measure 4.5 cm with a compass, cut the ray from Q and label the point R.')}
-              {cCase === 'sas' && step === 4 && L('चरण ४: बिन्दु P र R लाई जोड्नुहोस्। यसरी अभीष्ट △PQR तयार भयो।', 'Step 4: Join points P and R. The required triangle △PQR is constructed.')}
+              {cCase === 'sas' && step === 1 && L('चरण 1: स्केलको सहायताले 5.6 cm लम्बाइ भएको रेखाखण्ड PQ खिच्नुहोस्।', 'Step 1: Draw a line segment PQ of length 5.6 cm using a ruler.')}
+              {cCase === 'sas' && step === 2 && L('चरण 2: प्रोटेक्टर वा कम्पासको सहायताले बिन्दु Q मा 60° को कोण बनाउने किरण खिच्नुहोस्।', 'Step 2: Construct an angle of 60° at vertex Q.')}
+              {cCase === 'sas' && step === 3 && L('चरण 3: कम्पासमा 4.5 cm नापेर Q बाट सो किरणमा चाप काट्नुहोस् र काटिएको बिन्दुलाई R नाम दिनुहोस्।', 'Step 3: Measure 4.5 cm with a compass, cut the ray from Q and label the point R.')}
+              {cCase === 'sas' && step === 4 && L('चरण 4: बिन्दु P र R लाई जोड्नुहोस्। यसरी अभीष्ट △PQR तयार भयो।', 'Step 4: Join points P and R. The required triangle △PQR is constructed.')}
 
-              {cCase === 'sss' && step === 1 && L('चरण १: स्केलको सहायताले BC = ५ सेमी रेखा खिच्नुहोस्।', 'Step 1: Draw base line BC = 5 cm using a ruler.')}
-              {cCase === 'sss' && step === 2 && L('चरण २: कम्पासमा ४.५ सेमी नापेर बिन्दु B बाट माथितिर एउटा चाप खिच्नुहोस्।', 'Step 2: Take radius 4.5 cm and draw an arc from point B.')}
-              {cCase === 'sss' && step === 3 && L('चरण ३: कम्पासमा ६.५ सेमी नापेर बिन्दु C बाट अघिको चापलाई काट्ने गरी अर्को चाप खिच्नुहोस् (काट्ने बिन्दु A)।', 'Step 3: Take radius 6.5 cm and draw an arc from point C cutting the first arc at point A.')}
-              {cCase === 'sss' && step === 4 && L('चरण ४: AB र AC लाई जोड्नुहोस्। अहिले △ABC तयार भयो।', 'Step 4: Join AB and AC. The required triangle △ABC is complete.')}
+              {cCase === 'sss' && step === 1 && L('चरण 1: स्केलको सहायताले BC = 5 cm रेखा खिच्नुहोस्।', 'Step 1: Draw base line BC = 5 cm using a ruler.')}
+              {cCase === 'sss' && step === 2 && L('चरण 2: कम्पासमा 4.5 cm नापेर बिन्दु B बाट माथितिर एउटा चाप खिच्नुहोस्।', 'Step 2: Take radius 4.5 cm and draw an arc from point B.')}
+              {cCase === 'sss' && step === 3 && L('चरण 3: कम्पासमा 6.5 cm नापेर बिन्दु C बाट अघिको चापलाई काट्ने गरी अर्को चाप खिच्नुहोस् (काट्ने बिन्दु A)।', 'Step 3: Take radius 6.5 cm and draw an arc from point C cutting the first arc at point A.')}
+              {cCase === 'sss' && step === 4 && L('चरण 4: AB र AC लाई जोड्नुहोस्। अहिले △ABC तयार भयो।', 'Step 4: Join AB and AC. The required triangle △ABC is complete.')}
 
               {(cCase === 'asa' || cCase === 'aas') && step <= 2 && L('आधार रेखा खिचेर दुवै छेउका कोणहरू निर्धारण गर्नुहोस्।', 'Draw the base line and determine both end angles.')}
-              {(cCase === 'asa' || cCase === 'aas') && step > 2 && L('दुवै कोणका किरणहरू जहाँ आपसमा काटिन्छन्, त्यहीँ तेस्रो शीर्षबिन्दु प्राप्त हुन्छ।', 'The intersection of both angle rays forms the third vertex.')}
+              {(cCase === 'asa' || cCase === 'aas') && step > 2 && L('दुवै कोणका किरणहरू जहाँ आपसमा काटिन्छन्, त्यहीँ तेस्रो Vertex प्राप्त हुन्छ।', 'The intersection of both angle rays forms the third vertex.')}
             </div>
           </div>
         </div>

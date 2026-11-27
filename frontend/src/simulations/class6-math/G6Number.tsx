@@ -38,8 +38,8 @@ export const vennCfg = (o: { code: string; chapter: number; titleNp: string; tit
     if (i === 3) return numChoice('n(A ∩ B) = ?', 'n(A ∩ B) = ?', both.length, i, [1, -1, 2, a.length, 3], 0, '', { ...set, op: 3 });
     if (i === 4) return choice('A − B = ?', 'A − B = ?', str(a.filter((x) => !b.includes(x))), [str(both), str(b.filter((x) => !a.includes(x))), str(uni)], i, { ...set, op: 4 });
     if (i === 5) return numChoice(`n(A) = ${a.length}, n(B) = ${b.length}, n(A ∩ B) = ${both.length} भए n(A ∪ B) कति?`, `n(A) = ${a.length}, n(B) = ${b.length}, n(A ∩ B) = ${both.length}. Find n(A ∪ B)`, a.length + b.length - both.length, i, [1, -1, both.length, 2, a.length + b.length], 0);
-    if (i === 6) { const x = rnd(1, 12); return choice(`${x} ∈ A हो?`, `Is ${x} ∈ A?`, a.includes(x) ? 'हो | Yes' : 'होइन | No', [a.includes(x) ? 'होइन | No' : 'हो | Yes'], i, { ...set, op: 0 }); }
-    return choice("A′ मा के पर्छ? (पूर्ण समूह U = 1 देखि 12)", "What is in A′? (U = 1 to 12)", str(Array.from({ length: 12 }, (_, k) => k + 1).filter((x) => !a.includes(x))), [str(a), str(b), str(uni)], i, { ...set, op: 6 });
+    if (i === 6) { const x = rnd(1, 12); return choice(`${x} ∈ A हो?`, `Is ${x} ∈ A?`, a.includes(x) ? 'Yes' : 'No', [a.includes(x) ? 'No' : 'Yes'], i, { ...set, op: 0 }); }
+    return choice("A′ मा के पर्छ?", "What is in A′? (U = 1 to 12)", str(Array.from({ length: 12 }, (_, k) => k + 1).filter((x) => !a.includes(x))), [str(a), str(b), str(uni)], i, { ...set, op: 6 });
   },
 });
 export const VennLab6 = makeLab(vennCfg({ code: 'SIM-MATH-G6-L1-01', chapter: 1, titleNp: 'भेन चित्र प्रयोगशाला', titleEn: 'Venn Diagram Lab' }));
@@ -58,16 +58,16 @@ export const factorCfg: LabCfg = {
     f.forEach((d, k) => { const z = -4.2 + k * 1.7; cubeBlock(g, p.n / d, d, 1, ['#ef4444', '#f59e0b', '#22c55e', '#0ea5e9', '#8b5cf6', '#ec4899'][k % 6], u, 0.5, z - 0.5 * (d - 1) * u, 0.04); tag(g, `${d} × ${p.n / d}`, -7.6, 0.4, z, 2.2, { px: 48, w: 256, h: 80 }); });
     tag(g, isPrime(p.n) ? (lang === 'ne' ? 'रुढ सङ्ख्या' : 'Prime number') : lang === 'ne' ? 'संयुक्त सङ्ख्या' : 'Composite number', 0, 0.5, 5.2, 4, { px: 54, w: 420, h: 96, bg: '#fff', border: isPrime(p.n) ? '#22c55e' : '#f59e0b' });
   },
-  info: (p) => { const f = factors(p.n); return bi(`${p.n} का गुणनखण्ड: ${f.join(', ')}\n${f.length} वटा गुणनखण्ड · ${isPrime(p.n) ? 'रुढ सङ्ख्या (२ मात्र)' : p.n === 1 ? '' : 'संयुक्त सङ्ख्या'}`, `Factors of ${p.n}: ${f.join(', ')}\n${f.length} factors · ${isPrime(p.n) ? 'prime (exactly 2 factors)' : 'composite'}`); },
+  info: (p) => { const f = factors(p.n); return bi(`${p.n} का गुणनखण्ड: ${f.join(', ')}\n${f.length} वटा गुणनखण्ड · ${isPrime(p.n) ? 'रुढ सङ्ख्या (2 मात्र)' : p.n === 1 ? '' : 'संयुक्त सङ्ख्या'}`, `Factors of ${p.n}: ${f.join(', ')}\n${f.length} factors · ${isPrime(p.n) ? 'prime (exactly 2 factors)' : 'composite'}`); },
   tip: bi('सङ्ख्या बदलेर कति तरिकाले आयत बन्छ हेरौँ; एक मात्र तरिका भए रुढ', 'Change the number: if only one rectangle fits (1 × n) it is prime'),
   goal: () => { const pr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]; const n = pr[rnd(0, pr.length - 1)]; return { p: { n }, np: 'एउटा रुढ सङ्ख्या देखाऔँ (पहिले ' + n + ' मिल्ने)', en: `Show the prime number ${n}`, start: { n: 12 } }; },
   quiz: (i) => {
     const n = [12, 18, 24, 30, 36, 20, 28, 45][i]; const pr = [7, 11, 13, 17, 19, 23][rnd(0, 5)]; const f = factors(n);
     if (i === 0 || i === 1) return choice(`${n} का सबै गुणनखण्ड कुन हुन्?`, `Which lists all the factors of ${n}?`, f.join(', '), [f.slice(0, -1).join(', '), [...f.slice(1)].join(', '), f.filter((x) => x % 2 === 0).join(', ')], i, { n });
     if (i === 2) return numChoice(`${n} मा कतिवटा गुणनखण्ड छन्?`, `How many factors does ${n} have?`, f.length, i, [1, -1, 2, 3, -2], 1, '', { n });
-    if (i === 3) return choice(`${pr} कस्तो सङ्ख्या हो?`, `Is ${pr} prime or composite?`, 'रुढ | Prime', ['संयुक्त | Composite'], i, { n: pr });
-    if (i === 4) return choice(`${n} कस्तो सङ्ख्या हो?`, `Is ${n} prime or composite?`, 'संयुक्त | Composite', ['रुढ | Prime'], i, { n });
-    if (i === 5) return choice('१ देखि २० सम्मका रुढ सङ्ख्याको सूची कुन हो?', 'Which lists the primes from 1 to 20?', '2, 3, 5, 7, 11, 13, 17, 19', ['1, 2, 3, 5, 7, 11, 13, 17, 19', '2, 3, 5, 7, 9, 11, 13, 17', '2, 4, 6, 8, 10, 12, 14, 16, 18'], i);
+    if (i === 3) return choice(`${pr} कस्तो सङ्ख्या हो?`, `Is ${pr} prime or composite?`, 'Prime', ['Composite'], i, { n: pr });
+    if (i === 4) return choice(`${n} कस्तो सङ्ख्या हो?`, `Is ${n} prime or composite?`, 'Composite', ['Prime'], i, { n });
+    if (i === 5) return choice('1 देखि 20 सम्मका रुढ सङ्ख्याको सूची कुन हो?', 'Which lists the primes from 1 to 20?', '2, 3, 5, 7, 11, 13, 17, 19', ['1, 2, 3, 5, 7, 11, 13, 17, 19', '2, 3, 5, 7, 9, 11, 13, 17', '2, 4, 6, 8, 10, 12, 14, 16, 18'], i);
     if (i === 6) return numChoice('सबैभन्दा सानो रुढ सङ्ख्या कुन हो?', 'What is the smallest prime number?', 2, i, [1, 3, 4, 5, 0], 0);
     return choice(`${rnd(2, 9) * 10 + 5} कुन सङ्ख्याले पूर्ण भाग जान्छ?`, 'Which number divides 45 exactly?', '5', ['2', '4', '7'], i, { n: 45 });
   },
@@ -94,9 +94,9 @@ export const hcfCfg: LabCfg = {
     if (i < 2) return numChoice(`${a} र ${b} को म.स. कति?`, `HCF of ${a} and ${b}?`, H, i, [1, -1, 2, 3, a], 1, '', set);
     if (i < 4) return numChoice(`${a} र ${b} को ल.स. कति?`, `LCM of ${a} and ${b}?`, L, i, [a, b, a * b, L / 2 || 1, 12], 1, '', set);
     if (i === 4) return numChoice(`म.स. ${H} र ल.स. ${L} भए, ${a} × ${b} कति?`, `HCF is ${H}, LCM is ${L}. What is ${a} × ${b}?`, H * L, i, [1, -1, H + L, 10, a + b], 1, '', set);
-    if (i === 5) return choice(`दुईवटा रुढ सङ्ख्याको म.स. कति हुन्छ?`, 'The HCF of two different primes is…', '1', ['2', 'दुवैको गुणन | their product', 'सानो सङ्ख्या | the smaller prime'], i);
+    if (i === 5) return choice(`दुईवटा रुढ सङ्ख्याको म.स. कति हुन्छ?`, 'The HCF of two different primes is…', '1', ['2', 'their product', 'the smaller prime'], i);
     if (i === 6) return numChoice(`घण्टी ${a} र ${b} मिनेटमा बज्छ; एकसाथ बजेपछि फेरि कति मिनेटपछि एकसाथ बज्छ?`, `Bells ring every ${a} and ${b} minutes. After how many minutes do they ring together again?`, L, i, [a, b, a * b, 12, -a], 1, '', set);
-    return numChoice(`${a * b} र ${a * (b + 1)} को म.स. कति? (साझा गुणनखण्ड)`, `HCF of ${a * b} and ${a * (b + 1)}?`, a, i, [1, -1, 2, b, a * b], 1);
+    return numChoice(`${a * b} र ${a * (b + 1)} को म.स. कति?`, `HCF of ${a * b} and ${a * (b + 1)}?`, a, i, [1, -1, 2, b, a * b], 1);
   },
 };
 export const HcfLcmLab6 = makeLab(hcfCfg);

@@ -130,9 +130,9 @@ export const QuartilePercentileExplorer: React.FC<SimProps> = ({ onBackToLibrary
             <div className="bg-blue-50 border-l-4 border-blue-600 p-3 rounded text-sm text-blue-900">
               <span className="font-bold">{L('पाठ्यपुस्तक सूत्र (CDC Formula):', 'Textbook Formulas:')}</span>
               <div className="font-mono text-xs mt-1 space-y-1">
-                <div>Q₁ = ((N + 1) / 4)औं पदको मान (First Quartile / 25th percentile)</div>
-                <div>Q₂ = ((N + 1) / 2)औं पदको मान (Median / 50th percentile)</div>
-                <div>Q₃ = (3(N + 1) / 4)औं पदको मान (Third Quartile / 75th percentile)</div>
+                <div>Q₁ = ((N + 1) / 4)th term (first quartile / 25th percentile)</div>
+                <div>Q₂ = ((N + 1) / 2)th term (median / 50th percentile)</div>
+                <div>Q₃ = (3(N + 1) / 4)th term (third quartile / 75th percentile)</div>
               </div>
             </div>
 
@@ -181,24 +181,24 @@ export const QuartilePercentileExplorer: React.FC<SimProps> = ({ onBackToLibrary
             {/* Results Display */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
               <div className="p-3 bg-indigo-50 border border-indigo-200 rounded-xl space-y-1">
-                <span className="text-xs font-bold text-indigo-800">पहिलो चतुर्थांश (First Quartile Q₁):</span>
-                <div className="text-xs text-slate-600 font-mono">स्थान = ({fmt(N)} + 1) / 4 = {fmt(posQ1)}औं पद</div>
+                <span className="text-xs font-bold text-indigo-800">First quartile (Q₁):</span>
+                <div className="text-xs text-slate-600 font-mono">Position = ({fmt(N)} + 1) / 4 = {fmt(posQ1)}th term</div>
                 <div className="text-lg font-bold text-indigo-950 font-mono">Q₁ = {fmt(valQ1.toFixed(2))}</div>
-                <div className="text-[11px] text-indigo-700">तथ्याङ्कको पहिलो २५% भाग छुट्याउँछ।</div>
+                <div className="text-[11px] text-indigo-700">It separates the first 25% of the data.</div>
               </div>
 
               <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl space-y-1">
-                <span className="text-xs font-bold text-amber-800">दोस्रो चतुर्थांश / मध्यिका (Median Q₂):</span>
-                <div className="text-xs text-slate-600 font-mono">स्थान = ({fmt(N)} + 1) / 2 = {fmt(posQ2)}औं पद</div>
+                <span className="text-xs font-bold text-amber-800">Second quartile / median (Q₂):</span>
+                <div className="text-xs text-slate-600 font-mono">Position = ({fmt(N)} + 1) / 2 = {fmt(posQ2)}th term</div>
                 <div className="text-lg font-bold text-amber-950 font-mono">Q₂ = {fmt(valQ2.toFixed(2))}</div>
-                <div className="text-[11px] text-amber-700">तथ्याङ्कलाई ठ्याक्कै दुई बराबर भाग (५०%) मा विभाजन गर्दछ।</div>
+                <div className="text-[11px] text-amber-700">It divides the data into exactly two equal parts (50%).</div>
               </div>
 
               <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
-                <span className="text-xs font-bold text-emerald-800">तेस्रो चतुर्थांश (Third Quartile Q₃):</span>
-                <div className="text-xs text-slate-600 font-mono">स्थान = 3({fmt(N)} + 1) / 4 = {fmt(posQ3)}औं पद</div>
+                <span className="text-xs font-bold text-emerald-800">Third quartile (Q₃):</span>
+                <div className="text-xs text-slate-600 font-mono">Position = 3({fmt(N)} + 1) / 4 = {fmt(posQ3)}th term</div>
                 <div className="text-lg font-bold text-emerald-950 font-mono">Q₃ = {fmt(valQ3.toFixed(2))}</div>
-                <div className="text-[11px] text-emerald-700">तथ्याङ्कको ७५% भाग भन्दा तल्लो मान छुट्याउँछ।</div>
+                <div className="text-[11px] text-emerald-700">It separates the value below 75% of the data.</div>
               </div>
             </div>
           </div>
@@ -254,7 +254,7 @@ export const QuartilePercentileExplorer: React.FC<SimProps> = ({ onBackToLibrary
                       );
                     })}
                     <tr className="bg-slate-50 font-bold">
-                      <td className="p-2.5">जम्मा (Total N = ∑f)</td>
+                      <td className="p-2.5">Total (N = ∑f)</td>
                       <td className="p-2.5 font-mono">{fmt(totalFreq)}</td>
                       <td className="p-2.5"></td>
                     </tr>
@@ -264,17 +264,17 @@ export const QuartilePercentileExplorer: React.FC<SimProps> = ({ onBackToLibrary
 
               <div className="md:col-span-5 space-y-3">
                 <div className="p-3 bg-slate-50 border rounded-xl space-y-1 font-mono text-xs">
-                  <div className="font-bold text-slate-800 text-sm">चतुर्थांश मानहरू (Quartiles):</div>
+                  <div className="font-bold text-slate-800 text-sm">Quartile values:</div>
                   <div className="text-indigo-900">
-                    Q₁ पद = ({fmt(totalFreq)} + 1) / 4 = {fmt(discPosQ1.toFixed(2))}
+                    Q₁ term = ({fmt(totalFreq)} + 1) / 4 = {fmt(discPosQ1.toFixed(2))}
                     <div className="font-bold text-sm text-indigo-700">➔ Q₁ = {fmt(discValQ1)}</div>
                   </div>
                   <div className="text-amber-900 pt-1">
-                    Q₂ पद = ({fmt(totalFreq)} + 1) / 2 = {fmt(discPosQ2.toFixed(2))}
+                    Q₂ term = ({fmt(totalFreq)} + 1) / 2 = {fmt(discPosQ2.toFixed(2))}
                     <div className="font-bold text-sm text-amber-700">➔ Q₂ = {fmt(discValQ2)}</div>
                   </div>
                   <div className="text-emerald-900 pt-1">
-                    Q₃ पद = 3({fmt(totalFreq)} + 1) / 4 = {fmt(discPosQ3.toFixed(2))}
+                    Q₃ term = 3({fmt(totalFreq)} + 1) / 4 = {fmt(discPosQ3.toFixed(2))}
                     <div className="font-bold text-sm text-emerald-700">➔ Q₃ = {fmt(discValQ3)}</div>
                   </div>
                 </div>
@@ -290,7 +290,7 @@ export const QuartilePercentileExplorer: React.FC<SimProps> = ({ onBackToLibrary
               <span className="font-bold">{L('शशांश (Percentile Pₖ):', 'Percentile Concept:')}</span>
               <p className="mt-1">
                 {L(
-                  'तथ्याङ्कलाई १०० बराबर भागमा विभाजन गर्ने ९९ वटा मानहरूलाई शशांश (Percentile) भनिन्छ। P₂₅ = Q₁ (पहिलो चतुर्थांश), P₅₀ = Q₂ (मध्यिका), र P₇₅ = Q₃ (तेस्रो चतुर्थांश) सँग बराबर हुन्छ!',
+                  'तथ्याङ्कलाई 100 बराबर भागमा विभाजन गर्ने 99 pcs मानहरूलाई शशांश (Percentile) भनिन्छ। P₂₅ = Q₁ (पहिलो चतुर्थांश), P₅₀ = Q₂ (मध्यिका), र P₇₅ = Q₃ (तेस्रो चतुर्थांश) सँग बराबर हुन्छ!',
                   'Percentiles divide a sorted dataset into 100 equal parts. P25 = Q1, P50 = Q2 (Median), and P75 = Q3.'
                 )}
               </p>
@@ -324,10 +324,10 @@ export const QuartilePercentileExplorer: React.FC<SimProps> = ({ onBackToLibrary
 
             <div className="p-4 bg-slate-50 border rounded-xl font-mono space-y-2 text-sm">
               <div className="text-slate-600">
-                P_{selectedK} = ({selectedK} × (N + 1) / 100)औं पदको मान
+                P_{selectedK} = ({selectedK} × (N + 1) / 100)th term
               </div>
               <div className="text-indigo-900 font-bold">
-                स्थान = ({selectedK} × ({fmt(N)} + 1)) / 100 = {fmt(posPk.toFixed(2))}औं पद
+                Position = ({selectedK} × ({fmt(N)} + 1)) / 100 = {fmt(posPk.toFixed(2))}th term
               </div>
               <div className="text-xl font-bold text-indigo-950">
                 P_{selectedK} = {fmt(valPk.toFixed(2))}

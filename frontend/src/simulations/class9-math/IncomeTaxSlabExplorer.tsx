@@ -6,13 +6,13 @@ import { DollarSign, ShieldCheck, Users, Calculator, RefreshCw, CheckCircle2 } f
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एक व्यक्तिको मासिक तलब रु ४०,००० छ भने १ महिनाको चाडपर्व खर्चसहित वार्षिक कुल आम्दानी कति हुन्छ?',
+    np: 'एक व्यक्तिको मासिक तलब Rs 40,000 छ भने 1 महिनाको चाडपर्व खर्चसहित वार्षिक कुल आम्दानी कति हुन्छ?',
     en: 'If a person earns Rs 40,000 per month, what is their annual income including 1 month festival allowance?',
     options: [
-      { key: 'A', label: 'रु ५,२०,००० (४०,००० × १३ महिना = ५,२०,०००)' },
-      { key: 'B', label: 'रु ४,८०,०००' },
-      { key: 'C', label: 'रु ५,००,०००' },
-      { key: 'D', label: 'रु ६,००,०००' },
+      { key: 'A', label: 'Rs 5,20,000' },
+      { key: 'B', label: 'Rs 4,80,000' },
+      { key: 'C', label: 'Rs 5,00,000' },
+      { key: 'D', label: 'Rs 6,00,000' },
     ],
     answer: 'A',
   },
@@ -20,10 +20,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'करयोग्य आय (Taxable Income) कसरी गणना गरिन्छ?',
     en: 'How is taxable income calculated?',
     options: [
-      { key: 'A', label: 'कुल वार्षिक आम्दानी − कर छुट तथा कट्टी रकमहरू' },
-      { key: 'B', label: 'कुल वार्षिक आम्दानी + बीमा शुल्क' },
-      { key: 'C', label: 'मासिक आम्दानी × १२' },
-      { key: 'D', label: 'सञ्चय कोष रकम मात्र' },
+      { key: 'A', label: 'Gross annual income − tax exemptions and deductions' },
+      { key: 'B', label: 'Gross annual income + insurance premium' },
+      { key: 'C', label: 'Monthly income × 12' },
+      { key: 'D', label: 'Provident fund amount only' },
     ],
     answer: 'A',
   },
@@ -31,10 +31,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'आयकर (Income Tax) कुन दरको आधारमा प्रगतिशील (Progressive) हुन्छ?',
     en: 'Why is income tax called progressive?',
     options: [
-      { key: 'A', label: 'आम्दानीको स्ल्याब बढ्दै जाँदा करको दर पनि बढ्छ (Higher income attracts higher tax slabs)' },
-      { key: 'B', label: 'सबैलाई एउटै निश्चित प्रतिशत कर लाग्छ' },
-      { key: 'C', label: 'कर सधैं घट्दो दरमा हुन्छ' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'As the income slab rises, the tax rate also rises (higher income attracts higher tax slabs)' },
+      { key: 'B', label: 'Everyone pays the same fixed percentage of tax' },
+      { key: 'C', label: 'Tax is always at a decreasing rate' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
@@ -42,10 +42,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'नागरिक लगानी कोष (CIT) र बीमामा जम्मा गरेको रकमले आयकरमा के प्रभाव पार्दछ?',
     en: 'What effect does depositing money into CIT and insurance have on income tax?',
     options: [
-      { key: 'A', label: 'करयोग्य आय घटाउँछ जसले गर्दा तिर्नुपर्ने कर कम हुन्छ' },
-      { key: 'B', label: 'करयोग्य आय बढाउँछ' },
-      { key: 'C', label: 'कुनै प्रभाव पार्दैन' },
-      { key: 'D', label: 'कर दोब्बर हुन्छ' },
+      { key: 'A', label: 'It reduces taxable income, so the tax payable is lower' },
+      { key: 'B', label: 'It increases taxable income' },
+      { key: 'C', label: 'It has no effect' },
+      { key: 'D', label: 'The tax doubles' },
     ],
     answer: 'A',
   },
@@ -102,31 +102,31 @@ export const IncomeTaxSlabExplorer: React.FC<{
       {
         limit: firstLimit,
         rate: 1,
-        labelNp: `पहिलो रु. ${firstLimit.toLocaleString()} सम्म (सामाजिक सुरक्षा)`,
+        labelNp: `First Rs. ${firstLimit.toLocaleString()} (Social Security)`,
         labelEn: `First Rs. ${firstLimit.toLocaleString()} (Social Security)`,
       },
       {
         limit: 200000,
         rate: 10,
-        labelNp: 'त्यसपछिको रु. २,००,००० सम्म',
+        labelNp: 'Next, up to Rs. 2,00,000',
         labelEn: 'Next Rs. 2,00,000',
       },
       {
         limit: 300000,
         rate: 20,
-        labelNp: 'त्यसपछिको रु. ३,००,००० सम्म',
+        labelNp: 'Next, up to Rs. 3,00,000',
         labelEn: 'Next Rs. 3,00,000',
       },
       {
         limit: fourthLimit,
         rate: 30,
-        labelNp: `त्यसपछिको रु. ${fourthLimit.toLocaleString()} सम्म`,
+        labelNp: `Next Rs. ${fourthLimit.toLocaleString()}`,
         labelEn: `Next Rs. ${fourthLimit.toLocaleString()}`,
       },
       {
         limit: Infinity,
         rate: 36,
-        labelNp: 'सोभन्दा माथिको बाँकी रकममा',
+        labelNp: 'On the remaining amount above that',
         labelEn: 'Remaining Above',
       },
     ];
@@ -181,7 +181,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
       kit.oops();
       setPracticeFeedback(
         L(
-          `❌ मिलेन। सही वार्षिक आयकर रु. ${correctTax.toLocaleString()} हो।`,
+          `❌ मिलेन। सही वार्षिक आयकर Rs. ${correctTax.toLocaleString()} हो।`,
           `❌ Incorrect. The correct tax is Rs. ${correctTax.toLocaleString()}.`
         )
       );
@@ -195,7 +195,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! कक्षा ९ एकाइ २ "कर" (Tax) मा स्वागत छ। मासिक तलबबाट वार्षिक आयकर, कर छुट र कर स्ल्याबहरूको हिसाब सिकौं!',
+        'नमस्ते! कक्षा 9 एकाइ 2 "कर" (Tax) मा स्वागत छ। मासिक तलबबाट वार्षिक आयकर, कर छुट र कर स्ल्याबहरूको हिसाब सिकौं!',
         'Welcome to Grade 9 Unit 2: Tax! Explore progressive income tax calculation, eligible deductions, and tax slab tiers!'
       )}
     >
@@ -208,7 +208,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
               activeTab === 'calc' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🧮 {L('१. आयकर क्यालकुलेटर (Tax Calculator)', '1. Tax Calculator')}
+            🧮 {L('1. आयकर क्यालकुलेटर (Tax Calculator)', '1. Tax Calculator')}
           </button>
           <button
             onClick={() => setActiveTab('slabs')}
@@ -216,7 +216,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
               activeTab === 'slabs' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            📊 {L('२. कर स्ल्याब संरचना (Tax Slab Tiers)', '2. Tax Slabs')}
+            📊 {L('2. कर स्ल्याब संरचना (Tax Slab Tiers)', '2. Tax Slabs')}
           </button>
           <button
             onClick={() => setActiveTab('practice')}
@@ -224,7 +224,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
               activeTab === 'practice' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🎯 {L('३. आयकर अभ्यास चुनौती (Practice Challenge)', '3. Practice')}
+            🎯 {L('3. आयकर अभ्यास चुनौती (Practice Challenge)', '3. Practice')}
           </button>
         </div>
 
@@ -241,7 +241,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
               {/* Status Radio */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  पारिवारिक स्थिति (Marital Status):
+                  Marital status:
                 </label>
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <button
@@ -252,7 +252,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
                         : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    अविवाहित (Single)
+                    Single
                   </button>
                   <button
                     onClick={() => setMaritalStatus('married')}
@@ -262,7 +262,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
                         : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    दम्पती/विवाहित (Couple / Married)
+                    Couple / married
                   </button>
                 </div>
               </div>
@@ -270,9 +270,9 @@ export const IncomeTaxSlabExplorer: React.FC<{
               {/* Monthly Salary Slider */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>मासिक तलब (Monthly Salary):</span>
+                  <span>Monthly salary:</span>
                   <span className="font-mono text-indigo-700 text-sm">
-                    रु. {monthlySalary.toLocaleString()}
+                    Rs. {monthlySalary.toLocaleString()}
                   </span>
                 </div>
                 <input
@@ -294,19 +294,19 @@ export const IncomeTaxSlabExplorer: React.FC<{
                   onChange={(e) => setHasDashainBonus(e.target.checked)}
                   className="accent-indigo-600 w-4 h-4"
                 />
-                <span>१ महिनाको चाडपर्व खर्च (दशैं खर्च) समावेश गर्ने ({monthsCount} महिना)</span>
+                <span>Include 1 month of festival allowance (Dashain allowance) ({monthsCount} months)</span>
               </label>
 
               {/* Eligible Deductions */}
               <div className="space-y-3 pt-2 border-t">
                 <span className="text-xs font-bold text-slate-700 block">
-                  कर छुट तथा कट्टी रकमहरू (Eligible Deductions):
+                  Tax exemptions and deductions (eligible deductions):
                 </span>
 
                 <div>
                   <div className="flex justify-between text-xs text-slate-600 font-semibold mb-1">
-                    <span>कर्मचारी सञ्चय कोष / नागरिक लगानी कोष (EPF/CIT):</span>
-                    <span className="font-mono font-bold text-slate-800">रु. {citDeduction.toLocaleString()}</span>
+                    <span>Employees’ Provident Fund / Citizen Investment Trust (EPF/CIT):</span>
+                    <span className="font-mono font-bold text-slate-800">Rs. {citDeduction.toLocaleString()}</span>
                   </div>
                   <input
                     type="range"
@@ -321,8 +321,8 @@ export const IncomeTaxSlabExplorer: React.FC<{
 
                 <div>
                   <div className="flex justify-between text-xs text-slate-600 font-semibold mb-1">
-                    <span>जीवन बीमा प्रिमियम छुट (Life Insurance, Max 40k):</span>
-                    <span className="font-mono font-bold text-slate-800">रु. {insuranceDeduction.toLocaleString()}</span>
+                    <span>Life insurance premium deduction (max 40k):</span>
+                    <span className="font-mono font-bold text-slate-800">Rs. {insuranceDeduction.toLocaleString()}</span>
                   </div>
                   <input
                     type="range"
@@ -342,15 +342,15 @@ export const IncomeTaxSlabExplorer: React.FC<{
               {/* Grand Total Tax Card */}
               <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-5 shadow-sm space-y-3">
                 <span className="text-xs font-bold text-amber-800 uppercase tracking-wide block">
-                  वार्षिक तिर्नुपर्ने कुल आयकर (Total Annual Tax Payable)
+                  Total annual income tax payable
                 </span>
                 <div className="text-4xl font-black text-amber-600 font-mono">
-                  रु. {breakdown.totalTax.toLocaleString()}
+                  Rs. {breakdown.totalTax.toLocaleString()}
                 </div>
                 <div className="text-xs text-slate-600 flex justify-between pt-1">
-                  <span>मासिक कट्टी हुने कर (Monthly TDS):</span>
+                  <span>Tax deducted monthly (monthly TDS):</span>
                   <span className="font-bold font-mono text-slate-900">
-                    रु. {Math.round(breakdown.totalTax / 12).toLocaleString()} / महिना
+                    Rs. {Math.round(breakdown.totalTax / 12).toLocaleString()} / month
                   </span>
                 </div>
               </div>
@@ -358,21 +358,21 @@ export const IncomeTaxSlabExplorer: React.FC<{
               {/* Income Summary Details */}
               <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm text-xs space-y-2">
                 <div className="flex justify-between text-slate-600">
-                  <span>कुल वार्षिक आम्दानी (Gross Annual):</span>
+                  <span>Gross annual income:</span>
                   <span className="font-mono font-bold text-slate-900">
-                    रु. {grossAnnual.toLocaleString()} ({monthsCount} महिना)
+                    Rs. {grossAnnual.toLocaleString()} ({monthsCount} months)
                   </span>
                 </div>
                 <div className="flex justify-between text-slate-600">
-                  <span>जम्मा कर कट्टी छुट (Total Deductions):</span>
+                  <span>Total tax deductions:</span>
                   <span className="font-mono font-bold text-emerald-700">
-                    − रु. {totalDeductions.toLocaleString()}
+                    − Rs. {totalDeductions.toLocaleString()}
                   </span>
                 </div>
                 <div className="flex justify-between pt-2 border-t font-bold text-slate-800">
-                  <span>करयोग्य आय (Taxable Income):</span>
+                  <span>Taxable income:</span>
                   <span className="font-mono text-sm text-indigo-700">
-                    रु. {taxableIncome.toLocaleString()}
+                    Rs. {taxableIncome.toLocaleString()}
                   </span>
                 </div>
               </div>
@@ -380,7 +380,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
               {/* Step-by-Step Slab Breakdown Table */}
               <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-sm text-xs space-y-2">
                 <span className="font-bold text-slate-800 block">
-                  स्ल्याब अनुसार कर हिसाब (Progressive Slab Breakdown):
+                  Tax calculation by slab (progressive slab breakdown):
                 </span>
                 <div className="space-y-1.5">
                   {breakdown.items.map((item, idx) => (
@@ -391,11 +391,11 @@ export const IncomeTaxSlabExplorer: React.FC<{
                       <div>
                         <div className="font-semibold text-slate-800">{item.slabName}</div>
                         <div className="text-[11px] text-slate-500 font-mono">
-                          रु. {item.taxableInSlab.toLocaleString()} मा {item.rate}%
+                          Rs. {item.taxableInSlab.toLocaleString()} at {item.rate}%
                         </div>
                       </div>
                       <span className="font-mono font-bold text-amber-700 text-sm">
-                        रु. {item.taxAmount.toLocaleString()}
+                        Rs. {item.taxAmount.toLocaleString()}
                       </span>
                     </div>
                   ))}
@@ -409,7 +409,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
         {activeTab === 'slabs' && (
           <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-5">
             <h3 className="font-extrabold text-slate-800 text-sm text-center">
-              नेपाल सरकारको आयकर स्ल्याब संरचना ({maritalStatus === 'single' ? 'अविवाहित' : 'विवाहित'})
+              Nepal Government’s income tax slab structure ({maritalStatus === 'single' ? 'Single' : 'Married'})
             </h3>
 
             <div className="space-y-3">
@@ -429,7 +429,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
             </div>
 
             <p className="text-xs text-slate-500 leading-relaxed bg-amber-50 p-3 rounded-xl border border-amber-200">
-              💡 <b>सामाजिक सुरक्षा कर (Social Security Tax):</b> पहिलो स्ल्याबमा लाग्ने १% करलाई सामाजिक सुरक्षा कोषमा योगदान मानिन्छ।
+              💡 <b>Social security tax:</b> The 1% tax on the first slab is treated as a contribution to the Social Security Fund.
             </p>
           </div>
         )}
@@ -442,14 +442,14 @@ export const IncomeTaxSlabExplorer: React.FC<{
                 {L('आयकर अभ्यास (Income Tax Practice Challenge)', 'Income Tax Practice Challenge')}
               </span>
               <h3 className="text-base font-extrabold text-slate-800 mt-2">
-                एक अविवाहित व्यक्तिको मासिक तलब रु. {practiceSalary.toLocaleString()} छ र १ महिनाको दशैं खर्च पाउँछन् (कुनै छुट छैन)। उनको वार्षिक आयकर कति होला?
+                A single person’s monthly salary is Rs. {practiceSalary.toLocaleString()} and they receive 1 month of Dashain allowance (no deductions). What is their annual income tax?
               </h3>
             </div>
 
             <div className="flex gap-2 max-w-sm mx-auto">
               <input
                 type="number"
-                placeholder="वार्षिक आयकर (रुपैयाँमा)..."
+                placeholder="Annual income tax (in rupees)..."
                 value={userTaxGuess}
                 onChange={(e) => {
                   setUserTaxGuess(e.target.value);
@@ -457,7 +457,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
                 }}
                 className="flex-1 p-2.5 rounded-xl border border-slate-300 font-mono text-sm bg-white"
               />
-              <span className="self-center font-bold text-slate-700 text-sm">रु.</span>
+              <span className="self-center font-bold text-slate-700 text-sm">Rs.</span>
             </div>
 
             <div className="flex justify-center gap-3">
@@ -465,7 +465,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
                 onClick={handleCheckPractice}
                 className="py-2.5 px-6 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs shadow-md transition-all"
               >
-                जाँच गर्नुहोस् (Check Answer)
+                Check answer
               </button>
               <button
                 onClick={() => {
@@ -476,7 +476,7 @@ export const IncomeTaxSlabExplorer: React.FC<{
                 }}
                 className="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs border"
               >
-                नयाँ तलब (New Salary)
+                New salary
               </button>
             </div>
 

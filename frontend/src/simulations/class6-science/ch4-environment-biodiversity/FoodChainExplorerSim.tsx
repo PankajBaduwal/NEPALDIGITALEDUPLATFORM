@@ -1,7 +1,7 @@
 /**
  * FoodChainExplorerSim.tsx
- * Simulation 10: 2D Food Chain & Energy Pyramid Explorer (आहार शृङ्खला तथा जालो)
- * Grade 6 Science • Unit 4: Environment and Biodiversity (वातावरण र जैविक विविधता)
+ * Simulation 10: 2D Food Chain & Energy Pyramid Explorer
+ * Grade 6 Science • Unit 4: Environment and Biodiversity
  *
  * 100% Native HTML5 Canvas 2D Trophic Dynamics Simulator.
  * Features:
@@ -36,7 +36,7 @@ export const FoodChainExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -60,59 +60,59 @@ export const FoodChainExplorerSim: React.FC<BaseSimulationProps> = ({
       color: '#22c55e',
       active: !disabledLinks.includes('producer'),
       descEn: 'Captures solar energy via photosynthesis; foundation of terrestrial ecosystem.',
-      descNe: 'सूर्यको प्रकाशबाट प्रकाश संश्लेषण गरी १०,००० जुल जैविक शक्ति उत्पादन गर्छ।',
+      descNe: 'सूर्यको प्रकाशबाट प्रकाश संश्लेषण गरी 10,000 जुल जैविक शक्ति उत्पादन गर्छ।',
     },
     {
       id: 'primary',
       level: 2,
       nameEn: 'Trophic Level 2: Primary Consumer',
       nameNe: 'दोस्रो तह: प्राथमिक उपभोक्ता (Herbivore)',
-      organismEn: 'Grasshopper (फट्याङ्ग्रा)',
+      organismEn: 'Grasshopper',
       organismNe: 'घाँस खाने फट्याङ्ग्रा',
       joules: 1000,
       color: '#84cc16',
       active: !disabledLinks.includes('primary'),
       descEn: 'Herbivore consuming grass. Retains exactly 10% (1,000 J); 90% lost as heat and metabolism.',
-      descNe: 'घाँस खाने शाकाहारी जीव। लिन्डेम्यानको नियम अनुसार १०% (१,००० जुल) मात्र शक्ति सञ्चित गर्छ।',
+      descNe: 'घाँस खाने शाकाहारी जीव। लिन्डेम्यानको नियम अनुसार 10% मात्र शक्ति सञ्चित गर्छ।',
     },
     {
       id: 'secondary',
       level: 3,
       nameEn: 'Trophic Level 3: Secondary Consumer',
       nameNe: 'तेस्रो तह: द्वितीय उपभोक्ता (Carnivore)',
-      organismEn: 'Field Frog (भ्यागुतो)',
+      organismEn: 'Field Frog',
       organismNe: 'कीरा खाने भ्यागुतो',
       joules: 100,
       color: '#06b6d4',
       active: !disabledLinks.includes('secondary'),
       descEn: 'Carnivore insectivore feeding on grasshoppers. Retains 100 Joules of energy.',
-      descNe: 'फट्याङ्ग्रा शिकार गर्ने मांसाहारी जीव; यसले १०० जुल शक्ति प्राप्त गर्छ।',
+      descNe: 'फट्याङ्ग्रा शिकार गर्ने मांसाहारी जीव; यसले 100 जुल शक्ति प्राप्त गर्छ।',
     },
     {
       id: 'tertiary',
       level: 4,
       nameEn: 'Trophic Level 4: Tertiary Consumer',
       nameNe: 'चौथो तह: तृतीय उपभोक्ता (Carnivore)',
-      organismEn: 'Rat Snake (धामन सर्प)',
+      organismEn: 'Rat Snake',
       organismNe: 'धामन सर्प (Predator)',
       joules: 10,
       color: '#eab308',
       active: !disabledLinks.includes('tertiary'),
       descEn: 'Carnivore hunting frogs. Energy dwindles to just 10 Joules at this level.',
-      descNe: 'भ्यागुतो खाने शिकारी सर्प; यहाँसम्म पुग्दा शक्ति घटेर १० जुल मात्र बाँकी रहन्छ।',
+      descNe: 'भ्यागुतो खाने शिकारी सर्प; यहाँसम्म पुग्दा शक्ति घटेर 10 जुल मात्र बाँकी रहन्छ।',
     },
     {
       id: 'apex',
       level: 5,
       nameEn: 'Trophic Level 5: Apex Predator',
       nameNe: 'पाँचौं तह: सर्वोच्च उपभोक्ता (Apex)',
-      organismEn: 'Himalayan Eagle (चिल / गिद्ध)',
+      organismEn: 'Himalayan Eagle',
       organismNe: 'हिमाली चिल / गरूड',
       joules: 1,
       color: '#ef4444',
       active: !disabledLinks.includes('apex'),
       descEn: 'Top-tier apex predator. Receives only 1 Joule of the original 10,000 Joules.',
-      descNe: 'आहार चक्रको शीर्ष शिकारी; सुरुको १०,००० जुलबाट केवल १ जुल मात्र प्राप्त गर्छ।',
+      descNe: 'आहार चक्रको शीर्ष शिकारी; सुरुको 10,000 जुलबाट केवल 1 जुल मात्र प्राप्त गर्छ।',
     },
   ];
 
@@ -373,7 +373,7 @@ export const FoodChainExplorerSim: React.FC<BaseSimulationProps> = ({
         ctx.font = 'bold 12px sans-serif';
         ctx.textAlign = 'center';
         ctx.fillText(
-          lang === 'ne' ? '☀️ सौर्य ऊर्जा: १०,००,००० जुल प्रकाश शक्ति' : '☀️ Solar Input: 1,000,000 Joules Radiant Energy (1% captured by plants)',
+          lang === 'ne' ? '☀️ सौर्य ऊर्जा: 10,00,000 जुल प्रकाश शक्ति' : '☀️ Solar Input: 1,000,000 Joules Radiant Energy (1% captured by plants)',
           pyrCenter,
           pyramidBaseY + 25
         );
@@ -392,7 +392,7 @@ export const FoodChainExplorerSim: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Food Chain & Energy Pyramid Explorer"
-      titleNe="आहार शृङ्खला तथा जालो २डी अन्वेषक"
+      titleNe="आहार शृङ्खला तथा जालो 2डी अन्वेषक"
       subject="Science"
       grade={6}
       chapter={4}
@@ -512,7 +512,7 @@ export const FoodChainExplorerSim: React.FC<BaseSimulationProps> = ({
                 backdropFilter: 'blur(8px)',
               }}
             >
-              {lang === 'ne' ? 'लिन्डेम्यानको १०% नियम' : "Lindeman's 10% Law"}
+              {lang === 'ne' ? 'लिन्डेम्यानको 10% नियम' : "Lindeman's 10% Law"}
             </span>
           </div>
 
@@ -637,7 +637,7 @@ export const FoodChainExplorerSim: React.FC<BaseSimulationProps> = ({
             </div>
             <div style={{ fontSize: '11px', color: '#64748b', lineHeight: 1.45 }}>
               {lang === 'ne'
-                ? 'उत्पादकदेखि उच्च उपभोक्तासम्म १०% ऊर्जा स्थानान्तरण र कुनै जीव लोप हुँदा पर्ने असर जाँच्नुहोस्।'
+                ? 'उत्पादकदेखि उच्च उपभोक्तासम्म 10% ऊर्जा स्थानान्तरण र कुनै जीव लोप हुँदा पर्ने असर जाँच्नुहोस्।'
                 : 'Inspect biomass energy loss across trophic levels and test the ecological consequences of species extinction.'}
             </div>
           </div>
@@ -736,10 +736,10 @@ export const FoodChainExplorerSim: React.FC<BaseSimulationProps> = ({
             }}
           >
             <div style={{ fontWeight: 800, color: '#38bdf8', marginBottom: '4px' }}>
-              💡 {lang === 'ne' ? '१०% ऊर्जा स्थानान्तरण नियम:' : '10% Energy Transfer Law:'}
+              💡 {lang === 'ne' ? '10% ऊर्जा स्थानान्तरण नियम:' : '10% Energy Transfer Law:'}
             </div>
             {lang === 'ne'
-              ? 'प्रत्येक पोषण तहमा केवल १०% शक्ति मात्र अर्को तहमा पुग्छ। ९०% शक्ति ताप, श्वासप्रश्वास र उत्सर्जनमा खेर जान्छ।'
+              ? 'प्रत्येक पोषण तहमा केवल 10% शक्ति मात्र अर्को तहमा पुग्छ। 90% शक्ति ताप, श्वासप्रश्वास र उत्सर्जनमा खेर जान्छ।'
               : 'Only ~10% of chemical energy transfers to the subsequent trophic level. 90% is consumed in cellular respiration, motion, and released as heat.'}
           </div>
 

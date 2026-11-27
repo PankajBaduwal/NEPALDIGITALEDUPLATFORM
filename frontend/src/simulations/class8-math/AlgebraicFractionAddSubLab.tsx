@@ -1,7 +1,7 @@
 /**
  * AlgebraicFractionAddSubLab.tsx
- * Grade 8 Mathematics – Unit 11: ALGEBRAIC FRACTION (बीजीय भिन्न)
- * Simulation 2: Algebraic Fraction Addition & Subtraction Lab (बीजीय भिन्नको जोड र घटाउ)
+ * Grade 8 Mathematics – Unit 11: ALGEBRAIC FRACTION
+ * Simulation 2: Algebraic Fraction Addition & Subtraction Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 11)
  */
 import React, { useState } from 'react';
@@ -12,10 +12,10 @@ import { Plus, Minus, Layers, Award, CheckCircle, RefreshCw, Calculator } from '
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'समान हर भएका बीजीय भिन्नहरू a/x र b/x को जोडफल कति हुन्छ?',
+    np: 'समान हर भएका बीजीय भिन्नहरू a/x and b/x को जोडफल कति हुन्छ?',
     en: 'What is the sum of like algebraic fractions a/x and b/x?',
     options: [
-      { key: 'A', label: '(a + b) / x [ हर उही रहन्छ, अंशहरू जोडिन्छन् ]' },
+      { key: 'A', label: '(a + b) / x [ the denominator stays the same, the numerators are added ]' },
       { key: 'B', label: '(a + b) / 2x' },
       { key: 'C', label: 'ab / x' },
       { key: 'D', label: '(a + b) / x²' },
@@ -26,7 +26,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: '5a / 6b - a / 6b लाई घटाएर सरल गर्दा अन्तिम मान कति हुन्छ?',
     en: 'Subtracting and simplifying 5a / 6b - a / 6b gives what final value?',
     options: [
-      { key: 'A', label: '2a / 3b [ 4a/6b लाई २ ले काट्दा 2a/3b ]' },
+      { key: 'A', label: '2a / 3b [ cancelling 4a/6b by 2 gives 2a/3b ]' },
       { key: 'B', label: '4a / 6b' },
       { key: 'C', label: '4a / b' },
       { key: 'D', label: '5 / 6' },
@@ -34,10 +34,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'असमहर बीजीय भिन्नहरू a/x र b/y लाई जोड्दा साझा हर (LCM) के हुन्छ?',
+    np: 'असमहर बीजीय भिन्नहरू a/x and b/y लाई जोड्दा साझा हर (LCM) के हुन्छ?',
     en: 'When adding unlike fractions a/x and b/y, what is the common denominator (LCM)?',
     options: [
-      { key: 'A', label: 'xy [ साझा हर xy ⇒ (ay + bx) / xy ]' },
+      { key: 'A', label: 'xy [ common denominator xy ⇒ (ay + bx) / xy ]' },
       { key: 'B', label: 'x + y' },
       { key: 'C', label: 'x / y' },
       { key: 'D', label: 'x²y²' },
@@ -72,7 +72,7 @@ const PRESET_OPERATIONS = [
   {
     id: 1,
     type: 'same_add',
-    titleNp: '२a/y + ३b/y (समान हर - जोड)',
+    titleNp: '2a/y + 3b/y',
     titleEn: '2a/y + 3b/y (Like Denominators)',
     f1: '2a / y',
     f2: '3b / y',
@@ -84,7 +84,7 @@ const PRESET_OPERATIONS = [
   {
     id: 2,
     type: 'same_sub',
-    titleNp: '५a/६b - a/६b (समान हर - घटाउ र सरलीकरण)',
+    titleNp: '5a/6b - a/6b',
     titleEn: '5a/6b - a/6b (Like Denominators)',
     f1: '5a / 6b',
     f2: 'a / 6b',
@@ -114,7 +114,7 @@ export const AlgebraicFractionAddSubLab: React.FC<{
   const kit = useSimKit({
     code: 'SIM-MATH-G8-U11-02',
     chapter: 11,
-    titleNp: 'बीजीय भिन्नको जोड र घटाउ (Algebraic Fraction Addition & Subtraction)',
+    titleNp: 'बीजीय भिन्नको जोड and घटाउ (Algebraic Fraction Addition & Subtraction)',
     titleEn: 'Algebraic Fraction Addition and Subtraction Lab',
   });
   const isNe = kit.lang === 'ne';
@@ -153,7 +153,7 @@ export const AlgebraicFractionAddSubLab: React.FC<{
             }`}
           >
             <Plus className="w-4 h-4" />
-            {L('१. समान हर भएका भिन्न (Like Fractions)', '1. Like Fractions')}
+            {L('1. समान हर भएका भिन्न (Like Fractions)', '1. Like Fractions')}
           </button>
           <button
             onClick={() => setActiveTab('diff_den')}
@@ -162,7 +162,7 @@ export const AlgebraicFractionAddSubLab: React.FC<{
             }`}
           >
             <Layers className="w-4 h-4" />
-            {L('२. असमहर भएका भिन्न (Unlike Fractions & LCM)', '2. Unlike Fractions')}
+            {L('2. असमहर भएका भिन्न (Unlike Fractions & LCM)', '2. Unlike Fractions')}
           </button>
         </div>
 
@@ -207,18 +207,18 @@ export const AlgebraicFractionAddSubLab: React.FC<{
                 </div>
 
                 <div className="text-xs text-slate-400 text-center font-sans">
-                  नियम: हर <b className="text-amber-400">y</b> उस्तै रहन्छ, केवल अंशहरू <b className="text-sky-300">{toNp(numA)}x</b> र <b className="text-emerald-300">{toNp(numB)}x</b> {sameOp === '+' ? 'जोडिन्छन्' : 'घटाइन्छन्'}।
+                  Rule: the denominator <b className="text-amber-400">y</b> stays the same, only the numerators <b className="text-sky-300">{toNp(numA)}x</b> and <b className="text-emerald-300">{toNp(numB)}x</b> {sameOp === '+' ? 'are added' : 'are subtracted'}.
                 </div>
               </div>
 
               {/* Sliders */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-sky-400 block mb-1">पहिलो अंश गुणाङ्क: {toNp(numA)}</label>
+                  <label className="text-xs text-sky-400 block mb-1">First numerator coefficient: {toNp(numA)}</label>
                   <input type="range" min="1" max="10" value={numA} onChange={(e) => setNumA(Number(e.target.value))} className="w-full accent-sky-500" />
                 </div>
                 <div>
-                  <label className="text-xs text-emerald-400 block mb-1">दोस्रो अंश गुणाङ्क: {toNp(numB)}</label>
+                  <label className="text-xs text-emerald-400 block mb-1">Second numerator coefficient: {toNp(numB)}</label>
                   <input type="range" min="1" max={sameOp === '-' ? numA : 10} value={numB} onChange={(e) => setNumB(Number(e.target.value))} className="w-full accent-emerald-500" />
                 </div>
               </div>
@@ -230,7 +230,7 @@ export const AlgebraicFractionAddSubLab: React.FC<{
                 <div key={p.id} className="p-5 bg-white rounded-2xl border border-slate-200 space-y-2">
                   <div className="text-xs font-bold uppercase text-indigo-700">{p.titleNp}</div>
                   <div className="text-base font-mono font-bold text-slate-800">{p.f1} {p.op} {p.f2}</div>
-                  <div className="text-xs text-slate-500 font-mono">साझा हर: {p.commonDen}</div>
+                  <div className="text-xs text-slate-500 font-mono">Common denominator: {p.commonDen}</div>
                   <div className="text-sm font-mono font-black text-emerald-700">= {p.finalAns}</div>
                 </div>
               ))}
@@ -244,11 +244,11 @@ export const AlgebraicFractionAddSubLab: React.FC<{
             <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-6">
               <div className="border-b border-slate-100 pb-3">
                 <h3 className="text-lg font-bold text-slate-800">
-                  {L('असमहर बीजीय भिन्नको जोड र घटाउ (CDC पाठ्यपुस्तक उदाहरण)', 'Unlike Algebraic Fractions (CDC Example)')}
+                  {L('असमहर बीजीय भिन्नको जोड and घटाउ (CDC पाठ्यपुस्तक उदाहरण)', 'Unlike Algebraic Fractions (CDC Example)')}
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
                   {L(
-                    'उदाहरण: x/(x+y) - y/(x-y) लाई हल गर्न हरहरूको ल.स. निकाल्ने र समहर बनाएर अंश घटाउने:',
+                    'उदाहरण: x/(x+y) - y/(x-y) लाई हल गर्न हरहरूको ल.स. निकाल्ने and समहर बनाएर अंश घटाउने:',
                     'Example: Subtract x/(x+y) - y/(x-y) by finding the LCM of denominators first:'
                   )}
                 </p>
@@ -257,28 +257,28 @@ export const AlgebraicFractionAddSubLab: React.FC<{
               {/* Step by step solution container */}
               <div className="bg-slate-900 text-white p-6 rounded-2xl font-mono text-xs space-y-4">
                 <div className="p-4 bg-slate-800 rounded-xl space-y-1">
-                  <div className="text-amber-400 font-bold uppercase text-sm">{L('चरण १: हरहरूको ल.स. (LCM) निकाल्ने', 'Step 1: Find LCM')}</div>
+                  <div className="text-amber-400 font-bold uppercase text-sm">{L('चरण 1: हरहरूको ल.स. (LCM) निकाल्ने', 'Step 1: Find LCM')}</div>
                   <div className="text-slate-300">
-                    पहिलो हर = (x + y), दोस्रो हर = (x - y) ⇒ <b>ल.स. = (x + y)(x - y) = x² - y²</b>
+                    First denominator = (x + y), second denominator = (x - y) ⇒ <b>LCM = (x + y)(x - y) = x² - y²</b>
                   </div>
                 </div>
 
                 <div className="p-4 bg-slate-800 rounded-xl space-y-1">
-                  <div className="text-sky-400 font-bold uppercase text-sm">{L('चरण २: समहर बनाउने (Cross Multiply)', 'Step 2: Equivalent Fractions')}</div>
+                  <div className="text-sky-400 font-bold uppercase text-sm">{L('चरण 2: समहर बनाउने (Cross Multiply)', 'Step 2: Equivalent Fractions')}</div>
                   <div className="text-slate-300 py-1">
                     [ x(x - y) - y(x + y) ] ÷ [ (x + y)(x - y) ]
                   </div>
                 </div>
 
                 <div className="p-4 bg-slate-800 rounded-xl space-y-1">
-                  <div className="text-emerald-400 font-bold uppercase text-sm">{L('चरण ३: अंशको सरलीकरण (Simplify Numerator)', 'Step 3: Simplify')}</div>
+                  <div className="text-emerald-400 font-bold uppercase text-sm">{L('चरण 3: अंशको सरलीकरण (Simplify Numerator)', 'Step 3: Simplify')}</div>
                   <div className="text-slate-300">
                     x² - xy - xy - y² = <b>x² - 2xy - y²</b>
                   </div>
                 </div>
 
                 <div className="p-5 bg-emerald-950/90 border border-emerald-500 rounded-xl text-center text-lg font-bold text-emerald-300">
-                  अन्तिम उत्तर = (x² - 2xy - y²) / (x² - y²)
+                  Final answer = (x² - 2xy - y²) / (x² - y²)
                 </div>
               </div>
             </div>

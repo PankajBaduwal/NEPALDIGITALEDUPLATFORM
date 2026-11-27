@@ -1,5 +1,5 @@
 /**
- * Class 4 lesson 12 · Perimeter and area (परिमिति र क्षेत्रफल)
+ * Class 4 lesson 12 · Perimeter and area
  * GardenLab — 2D Rectangular Garden exploring Perimeter (boundary walk) and Area (square tiling).
  */
 import React, { useMemo, useState } from 'react';
@@ -30,7 +30,7 @@ export const GardenLab: React.FC<Props> = ({ onBackToLibrary }) => {
     setMode('P');
     kit.tap();
     kit.say(
-      `परिमिति (Perimeter) = २ × (लम्बाइ + चौडाइ) = २ × (${l} + ${w}) = ${perimeter} मिटर`,
+      `परिमिति (Perimeter) = 2 × (लम्बाइ + चौडाइ) = 2 × (${l} + ${w}) = ${perimeter} मिटर`,
       `Perimeter = 2 × (L + W) = 2 × (${l} + ${w}) = ${perimeter} m`
     );
     kit.star();
@@ -85,7 +85,7 @@ export const GardenLab: React.FC<Props> = ({ onBackToLibrary }) => {
       mascotGreeting={
         mode === 'P'
           ? kit.t(
-            `परिमिति (Perimeter) = घेराको कुल लम्बाइ = २ × (${l} + ${w}) = ${perimeter} मिटर`,
+            `परिमिति (Perimeter) = घेराको कुल लम्बाइ = 2 × (${l} + ${w}) = ${perimeter} मिटर`,
             `Perimeter = Total distance around the boundary = 2 × (${l} + ${w}) = ${perimeter} m`
           )
           : kit.t(

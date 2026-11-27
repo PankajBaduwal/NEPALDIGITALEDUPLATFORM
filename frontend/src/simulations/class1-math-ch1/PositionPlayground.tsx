@@ -59,7 +59,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
   onBackToLibrary,
   initialLanguage = 'ne',
 }) => {
-  const [lang, setLang] = useState<'ne' | 'en'>(initialLanguage);
+  const [lang, setLang] = useState<'ne' | 'en'>('en');
   const [muted, setMuted] = useState(false);
   const [mode, setMode] = useState<Mode>('INSIDE_OUTSIDE');
   const [taskIdx, setTaskIdx] = useState(0);
@@ -203,7 +203,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
           </button>
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#9FCBCD' }}>
-              {L('कक्षा १ • गणित • अध्याय १', 'Class 1 • Mathematics • Chapter 1')}
+              {L('कक्षा 1 • गणित • अध्याय 1', 'Class 1 • Mathematics • Chapter 1')}
             </div>
             <h1 style={{ margin: 0, fontSize: 18, fontWeight: 900 }}>
               {L('मेरो स्थिति खेलमैदान (भित्र, बाहिर, माथि, तल)', 'Position Playground (Inside, Outside, Above, Below)')}
@@ -228,21 +228,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
             <span>{isNe ? toNp(stars) : stars}</span>
           </div>
 
-          <button
-            onClick={() => setLang(isNe ? 'en' : 'ne')}
-            style={{
-              background: 'rgba(255,255,255,0.2)',
-              color: '#FFFFFF',
-              border: 'none',
-              padding: '8px 14px',
-              borderRadius: 12,
-              fontSize: 13,
-              fontWeight: 800,
-              cursor: 'pointer',
-            }}
-          >
-            {isNe ? 'English' : 'नेपाली'}
-          </button>
+          
 
           <button
             onClick={toggleSound}
@@ -404,7 +390,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
           alignItems: 'stretch',
         }}
       >
-        {/* Zone 1: Village House (भित्र vs बाहिर) */}
+        {/* Zone 1: Village House */}
         <div
           style={{
             background: '#FFFFFF',
@@ -439,7 +425,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
             }}
           >
             <div style={{ fontSize: 13, fontWeight: 900, color: '#92400E', display: 'flex', justifyContent: 'space-between' }}>
-              <span>🚪 {L('घरभित्र (Inside the House)', 'Inside House (भित्र)')}</span>
+              <span>🚪 {L('घरभित्र (Inside the House)', 'Inside House')}</span>
               <span style={{ fontSize: 11, color: '#B45309' }}>{L('यहाँ राख्न थिच्नुहोस्', 'Tap to drop')}</span>
             </div>
             <div style={{ flex: 1, display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', padding: '8px 0' }}>
@@ -481,7 +467,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
             }}
           >
             <div style={{ fontSize: 13, fontWeight: 900, color: '#166534', display: 'flex', justifyContent: 'space-between' }}>
-              <span>🏡 {L('पिँढी / घरबाहिर (Outside the House)', 'Outside Veranda (बाहिर)')}</span>
+              <span>🏡 {L('पिँढी / घरबाहिर (Outside the House)', 'Outside Veranda')}</span>
               <span style={{ fontSize: 11, color: '#15803D' }}>{L('यहाँ राख्न थिच्नुहोस्', 'Tap to drop')}</span>
             </div>
             <div style={{ flex: 1, display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', padding: '8px 0' }}>
@@ -507,7 +493,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
           </div>
         </div>
 
-        {/* Zone 2: Picnic Table & Tree (माथि vs तल) */}
+        {/* Zone 2: Picnic Table & Tree */}
         <div
           style={{
             background: '#FFFFFF',
@@ -542,7 +528,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
             }}
           >
             <div style={{ fontSize: 13, fontWeight: 900, color: '#0369A1', display: 'flex', justifyContent: 'space-between' }}>
-              <span>☁️ {L('माथि (Above / Up High on Branches)', 'Above (माथि)')}</span>
+              <span>☁️ {L('माथि (Above / Up High on Branches)', 'Above')}</span>
               <span style={{ fontSize: 11, color: '#0284C7' }}>{L('यहाँ राख्न थिच्नुहोस्', 'Tap to drop')}</span>
             </div>
             <div style={{ flex: 1, display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', padding: '8px 0' }}>
@@ -584,7 +570,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
             }}
           >
             <div style={{ fontSize: 13, fontWeight: 900, color: '#334155', display: 'flex', justifyContent: 'space-between' }}>
-              <span>🌱 {L('तल (Below / Ground under Table)', 'Below (तल)')}</span>
+              <span>🌱 {L('तल (Below / Ground under Table)', 'Below')}</span>
               <span style={{ fontSize: 11, color: '#475569' }}>{L('यहाँ राख्न थिच्नुहोस्', 'Tap to drop')}</span>
             </div>
             <div style={{ flex: 1, display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', padding: '8px 0' }}>
@@ -610,7 +596,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
           </div>
         </div>
 
-        {/* Zone 3: Woven Basket (डालोभित्र vs डालोबाहिर) */}
+        {/* Zone 3: Woven Basket */}
         <div
           style={{
             background: '#FFFFFF',
@@ -645,7 +631,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
             }}
           >
             <div style={{ fontSize: 13, fontWeight: 900, color: '#9D174D', display: 'flex', justifyContent: 'space-between' }}>
-              <span>🧺 {L('डालोभित्र (Inside Basket)', 'Inside Basket (भित्र)')}</span>
+              <span>🧺 {L('डालोभित्र (Inside Basket)', 'Inside Basket')}</span>
               <span style={{ fontSize: 11, color: '#BE185D' }}>{L('यहाँ राख्न थिच्नुहोस्', 'Tap to drop')}</span>
             </div>
             <div style={{ flex: 1, display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', padding: '8px 0' }}>
@@ -687,7 +673,7 @@ export const PositionPlayground: React.FC<PositionPlaygroundProps> = ({
             }}
           >
             <div style={{ fontSize: 13, fontWeight: 900, color: '#6B21A8', display: 'flex', justifyContent: 'space-between' }}>
-              <span>🧺 {L('डालोबाइर (Outside Basket)', 'Outside Basket (बाहिर)')}</span>
+              <span>🧺 {L('डालोबाइर (Outside Basket)', 'Outside Basket')}</span>
               <span style={{ fontSize: 11, color: '#7E22CE' }}>{L('यहाँ राख्न थिच्नुहोस्', 'Tap to drop')}</span>
             </div>
             <div style={{ flex: 1, display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', padding: '8px 0' }}>

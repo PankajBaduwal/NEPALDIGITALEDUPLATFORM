@@ -1,6 +1,6 @@
 /**
  * VolumeCapacityExplorer.tsx
- * Grade 7 Mathematics – Lesson 9: PERIMETER, AREA AND VOLUME (परिमिति, क्षेत्रफल र आयतन)
+ * Grade 7 Mathematics – Lesson 9: PERIMETER, AREA AND VOLUME
  * Simulation 3: Volume and Capacity Explorer (3D + 2D Interactive Workspace)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 125-131)
  */
@@ -12,46 +12,46 @@ import { Box, Droplets, Gauge, ArrowRight, Check } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'लम्बाइ १५ सेमी, चौडाइ १४ सेमी र उचाइ १३ सेमी भएको घनाभको आयतन (Volume) कति हुन्छ?',
+    np: 'लम्बाइ 15 cm, चौडाइ 14 cm र उचाइ 13 cm भएको घनाभको आयतन (Volume) कति हुन्छ?',
     en: 'What is the volume of a cuboid with length 15 cm, breadth 14 cm, and height 13 cm?',
     options: [
-      { key: 'A', label: '२,७३० घन सेमी (१५ × १४ × १३ = २,७३० cm³)' },
-      { key: 'B', label: '२,५०० घन सेमी' },
-      { key: 'C', label: '३,००० घन सेमी' },
-      { key: 'D', label: '२,१६० घन सेमी' },
+      { key: 'A', label: '2,730 cu cm (15 × 14 × 13 = 2,730 cm³)' },
+      { key: 'B', label: '2,500 cu cm' },
+      { key: 'C', label: '3,000 cu cm' },
+      { key: 'D', label: '2,160 cu cm' },
     ],
     answer: 'A',
   },
   {
-    np: '६० सेमी भुजा भएको वर्गाकार बाकस (Cube) को आयतन कति हुन्छ?',
+    np: '60 cm भुजा भएको वर्गाकार बाकस (Cube) को आयतन कति हुन्छ?',
     en: 'What is the volume of a cube with edge 60 cm?',
     options: [
-      { key: 'A', label: '२,१६,००० घन सेमी (६०³ = २,१६,००० cm³)' },
-      { key: 'B', label: '३,६०० घन सेमी' },
-      { key: 'C', label: '२१,६०० घन सेमी' },
-      { key: 'D', label: '१,८०,००० घन सेमी' },
+      { key: 'A', label: '2,16,000 cu cm (60³ = 2,16,000 cm³)' },
+      { key: 'B', label: '3,600 cu cm' },
+      { key: 'C', label: '21,600 cu cm' },
+      { key: 'D', label: '1,80,000 cu cm' },
     ],
     answer: 'A',
   },
   {
-    np: '१ लिटर पानीको आयतन कति घन सेन्टिमिटर (cm³) बराबर हुन्छ?',
+    np: '1 litres पानीको आयतन कति घन सेन्टिm (cm³) बराबर हुन्छ?',
     en: 'How many cubic centimetres (cm³) is 1 litre of water equivalent to?',
     options: [
-      { key: 'A', label: '१,००० cm³ (1 litre = 1000 cm³)' },
-      { key: 'B', label: '१०० cm³' },
-      { key: 'C', label: '१०,००० cm³' },
-      { key: 'D', label: '५०० cm³' },
+      { key: 'A', label: '1,000 cm³ (1 litre = 1000 cm³)' },
+      { key: 'B', label: '100 cm³' },
+      { key: 'C', label: '10,000 cm³' },
+      { key: 'D', label: '500 cm³' },
     ],
     answer: 'A',
   },
   {
-    np: 'पानी ट्याङ्कीको क्षमता ६०० लिटर छ। लम्बाइ २०० सेमी र उचाइ ५० सेमी भए चौडाइ कति हुन्छ?',
+    np: 'पानी ट्याङ्कीको क्षमता 600 litres छ। लम्बाइ 200 cm र उचाइ 50 cm भए चौडाइ कति हुन्छ?',
     en: 'A tank holds 600 litres. If length is 200 cm and height is 50 cm, what is the breadth?',
     options: [
-      { key: 'A', label: '६० सेमी (६०० लिटर = ६,००,००० cm³ ÷ (२०० × ५०) = ६० सेमी)' },
-      { key: 'B', label: '५० सेमी' },
-      { key: 'C', label: '४० सेमी' },
-      { key: 'D', label: '८० सेमी' },
+      { key: 'A', label: '60 cm (600 litres = 6,00,000 cm³ ÷ (200 × 50) = 60 cm)' },
+      { key: 'B', label: '50 cm' },
+      { key: 'C', label: '40 cm' },
+      { key: 'D', label: '80 cm' },
     ],
     answer: 'A',
   },
@@ -100,7 +100,7 @@ export const VolumeCapacityExplorer: React.FC<{ onBackToLibrary?: () => void; on
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'घनाभको आयतन V = l × b × h र घनको आयतन V = a³ हुन्छ। १ लिटर = १,००० cm³ र १ m³ = १,००० लिटर हुन्छ!',
+        'घनाभको आयतन V = l × b × h र घनको आयतन V = a³ हुन्छ। 1 litres = 1,000 cm³ र 1 m³ = 1,000 litres हुन्छ!',
         'Cuboid volume V = l × b × h, Cube volume V = a³. 1 litre = 1000 cm³, and 1 m³ = 1000 litres!'
       )}
     >
@@ -108,9 +108,9 @@ export const VolumeCapacityExplorer: React.FC<{ onBackToLibrary?: () => void; on
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'cuboid', np: '१. घनाभको आयतन (V = l × b × h)', en: '1. Cuboid Volume' },
-            { id: 'cube', np: '२. घनको आयतन (V = a³)', en: '2. Cube Volume' },
-            { id: 'tank', np: '३. पानी ट्याङ्की र धारकता (Water Tank Capacity)', en: '3. Tank Capacity' },
+            { id: 'cuboid', np: '1. घनाभको आयतन (V = l × b × h)', en: '1. Cuboid Volume' },
+            { id: 'cube', np: '2. घनको आयतन (V = a³)', en: '2. Cube Volume' },
+            { id: 'tank', np: '3. पानी ट्याङ्की र धारकता (Water Tank Capacity)', en: '3. Tank Capacity' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -142,7 +142,7 @@ export const VolumeCapacityExplorer: React.FC<{ onBackToLibrary?: () => void; on
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: लम्बाइ १५ सेमी, चौडाइ १४ सेमी र उचाइ १३ सेमी भएको घनाभको आयतन निकाल्नुहोस्:',
+                'पाठ्यपुस्तक उदाहरण: लम्बाइ 15 cm, चौडाइ 14 cm र उचाइ 13 cm भएको घनाभको आयतन निकाल्नुहोस्:',
                 'Textbook Example: Find volume of cuboid with length 15 cm, breadth 14 cm, and height 13 cm:'
               )}
             </p>
@@ -224,11 +224,11 @@ export const VolumeCapacityExplorer: React.FC<{ onBackToLibrary?: () => void; on
                   color: '#166534',
                 }}
               >
-                {L('जम्मा आयतन = ', 'Total Volume = ')} {cuboidVolume.toLocaleString()} cm³ (घन सेन्टिमिटर)
+                {L('जम्मा आयतन = ', 'Total Volume = ')} {cuboidVolume.toLocaleString()} cm³ (cubic centimetre)
               </div>
               <div style={{ color: '#047857', fontSize: 14, marginTop: 4 }}>
                 {L(
-                  `लिटरमा रूपान्तरण गर्दा: ${cuboidVolume.toLocaleString()} ÷ १००० = ${cuboidLitres.toFixed(2)} लिटर`,
+                  `litresमा रूपान्तरण गर्दा: ${cuboidVolume.toLocaleString()} ÷ 1000 = ${cuboidLitres.toFixed(2)} litres`,
                   `In Litres: ${cuboidVolume.toLocaleString()} ÷ 1000 = ${cuboidLitres.toFixed(2)} Litres`
                 )}
               </div>
@@ -244,7 +244,7 @@ export const VolumeCapacityExplorer: React.FC<{ onBackToLibrary?: () => void; on
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: भुजा ६० सेमी भएको वर्गाकार बाकसको आयतन निकाल्नुहोस्:',
+                'पाठ्यपुस्तक उदाहरण: भुजा 60 cm भएको वर्गाकार बाकसको आयतन निकाल्नुहोस्:',
                 'Textbook Example: Find volume of cube box with edge length 60 cm:'
               )}
             </p>
@@ -294,7 +294,7 @@ export const VolumeCapacityExplorer: React.FC<{ onBackToLibrary?: () => void; on
               </div>
               <div style={{ color: '#4338CA', fontSize: 14, marginTop: 4 }}>
                 {L(
-                  `लिटरमा: ${cubeVol.toLocaleString()} ÷ १००० = ${cubeLitres.toLocaleString()} लिटर`,
+                  `litresमा: ${cubeVol.toLocaleString()} ÷ 1000 = ${cubeLitres.toLocaleString()} litres`,
                   `In Litres: ${cubeVol.toLocaleString()} ÷ 1000 = ${cubeLitres.toLocaleString()} Litres`
                 )}
               </div>
@@ -310,7 +310,7 @@ export const VolumeCapacityExplorer: React.FC<{ onBackToLibrary?: () => void; on
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: एउटा पानी ट्याङ्कीमा ६०० लिटर पानी अटाउँछ। यसको लम्बाइ २०० सेमी र उचाइ ५० सेमी भए चौडाइ कति हुन्छ?',
+                'पाठ्यपुस्तक उदाहरण: एउटा पानी ट्याङ्कीमा 600 litres पानी अटाउँछ। यसको लम्बाइ 200 cm र उचाइ 50 cm भए चौडाइ कति हुन्छ?',
                 'Textbook Example: A tank holds 600 litres. If length is 200 cm and height is 50 cm, what is the breadth?'
               )}
             </p>
@@ -318,7 +318,7 @@ export const VolumeCapacityExplorer: React.FC<{ onBackToLibrary?: () => void; on
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1', display: 'block', marginBottom: 4 }}>
-                  {L('ट्याङ्की क्षमता (लिटर): ', 'Capacity (Litres): ')} {tankCapacityL} L
+                  {L('ट्याङ्की क्षमता (litres): ', 'Capacity (Litres): ')} {tankCapacityL} L
                 </label>
                 <input
                   type="range"
@@ -382,20 +382,20 @@ export const VolumeCapacityExplorer: React.FC<{ onBackToLibrary?: () => void; on
               }}
             >
               <div>
-                <strong>{L('१. लिटरलाई घन सेमीमा बदल्दा:', '1. Converting Litres to cm³:')}</strong>
-                <br />१ लिटर = १,००० cm³ ➜ {tankCapacityL} लिटर = {tankCapacityL} × १,००० ={' '}
+                <strong>{L('1. litresलाई cu cmमा बदल्दा:', '1. Converting Litres to cm³:')}</strong>
+                <br />1 litres = 1,000 cm³ ➜ {tankCapacityL} litres = {tankCapacityL} × 1,000 ={' '}
                 <span style={{ fontWeight: 800, color: '#0369A1' }}>{tankTotalCm3.toLocaleString()} cm³</span>
               </div>
               <div>
-                <strong>{L('२. सम्बन्ध:', '2. Relation:')}</strong> V = l × b × h ➜ {tankTotalCm3.toLocaleString()} ={' '}
+                <strong>{L('2. सम्बन्ध:', '2. Relation:')}</strong> V = l × b × h ➜ {tankTotalCm3.toLocaleString()} ={' '}
                 {tankL} × b × {tankH}
               </div>
               <div>
-                <strong>{L('३. गुणन गर्दा:', '3. Multiplying knowns:')}</strong> {tankTotalCm3.toLocaleString()} ={' '}
+                <strong>{L('3. गुणन गर्दा:', '3. Multiplying knowns:')}</strong> {tankTotalCm3.toLocaleString()} ={' '}
                 {tankL * tankH} × b
               </div>
               <div>
-                <strong>{L('४. भाग गरी चौडाइ (b) निकाल्दा:', '4. Dividing to find breadth (b):')}</strong> b ={' '}
+                <strong>{L('4. भाग गरी चौडाइ (b) निकाल्दा:', '4. Dividing to find breadth (b):')}</strong> b ={' '}
                 {tankTotalCm3.toLocaleString()} ÷ {tankL * tankH}
               </div>
               <div

@@ -1,7 +1,7 @@
 /**
  * AnimalClassificationLabSim.tsx
- * Simulation 6: 2D Animal Classification Laboratory (जनावरहरूको वर्गीकरण प्रयोगशाला)
- * Grade 6 Science • Unit 3: Organisms & Their Structure (जीवहरू र तिनीहरूको बनावट)
+ * Simulation 6: 2D Animal Classification Laboratory
+ * Grade 6 Science • Unit 3: Organisms & Their Structure
  *
  * 100% Native HTML5 Canvas 2D Dental & Nutritional Morphology Simulator.
  * Features:
@@ -40,7 +40,7 @@ export const AnimalClassificationLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -57,9 +57,9 @@ export const AnimalClassificationLabSim: React.FC<BaseSimulationProps> = ({
   const profiles: Record<DietCategory, DietProfile> = {
     herbivore: {
       id: 'herbivore',
-      nameEn: 'Herbivore (शाकाहारी)',
+      nameEn: 'Herbivore',
       nameNe: 'शाकाहारी (Herbivore)',
-      animalEn: 'Spotted Deer (चित्तल मृग)',
+      animalEn: 'Spotted Deer',
       animalNe: 'चित्तल मृग (Spotted Deer)',
       dentitionEn: 'Flat, ridged grinding molars; sharp front incisors; diastema gap; NO tearing canines.',
       dentitionNe: 'घाँस काट्न अगाडिका दाँत र पिस्न पछाडिका फराकिला दाँत (Molars); बिचमा खाली ठाउँ (Diastema)।',
@@ -71,9 +71,9 @@ export const AnimalClassificationLabSim: React.FC<BaseSimulationProps> = ({
     },
     carnivore: {
       id: 'carnivore',
-      nameEn: 'Carnivore (मांसाहारी)',
+      nameEn: 'Carnivore',
       nameNe: 'मांसाहारी (Carnivore)',
-      animalEn: 'Royal Bengal Tiger (पाटे बाघ)',
+      animalEn: 'Royal Bengal Tiger',
       animalNe: 'पाटे बाघ (Royal Bengal Tiger)',
       dentitionEn: 'Long dagger-like canines to pierce prey; sharp carnassial teeth to shear flesh and bone.',
       dentitionNe: 'मासु च्यात्न लामा धारिला दाँत (Canines) र मासु काट्ने कैंची जस्ता दाँत।',
@@ -85,9 +85,9 @@ export const AnimalClassificationLabSim: React.FC<BaseSimulationProps> = ({
     },
     omnivore: {
       id: 'omnivore',
-      nameEn: 'Omnivore (सर्वहारी)',
+      nameEn: 'Omnivore',
       nameNe: 'सर्वहारी (Omnivore)',
-      animalEn: 'Himalayan Black Bear (हिमाली भालु)',
+      animalEn: 'Himalayan Black Bear',
       animalNe: 'हिमाली कालो भालु (Himalayan Bear)',
       dentitionEn: 'Versatile teeth: moderate incisors, gripping canines, and rounded flat grinding molars.',
       dentitionNe: 'सबै खानेकुरा खान मिल्ने मध्यम दाँत: फलफूल, मह, माछा र कीरा चपाउने फराकिला दाँत।',
@@ -445,7 +445,7 @@ export const AnimalClassificationLabSim: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Animal Classification Lab"
-      titleNe="जनावरहरूको वर्गीकरण २डी प्रयोगशाला"
+      titleNe="जनावरहरूको वर्गीकरण 2डी प्रयोगशाला"
       subject="Science"
       grade={6}
       chapter={3}
@@ -606,7 +606,7 @@ export const AnimalClassificationLabSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 {lang === 'ne'
-                  ? `अध्ययन गरिएका: ${inspectedCategories.length}/३`
+                  ? `अध्ययन गरिएका: ${inspectedCategories.length}/3`
                   : `Explored: ${inspectedCategories.length}/3`}
               </span>
             </div>

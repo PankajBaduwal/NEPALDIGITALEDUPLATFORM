@@ -20,7 +20,7 @@ const PRISM_TYPES: PrismTypeInfo[] = [
     id: 'triangular',
     nameNp: 'त्रिभुजाकार प्रिज्म (Triangular Prism)',
     nameEn: 'Triangular Prism',
-    baseShapeNp: 'त्रिभुज (२ वटा समानान्तर र सर्वसम)',
+    baseShapeNp: 'त्रिभुज (2 pcs समानान्तर र सर्वसम)',
     baseShapeEn: 'Triangle (2 parallel & congruent)',
     vertices: 6,
     edges: 9,
@@ -31,7 +31,7 @@ const PRISM_TYPES: PrismTypeInfo[] = [
     id: 'rectangular',
     nameNp: 'आयताकार प्रिज्म (Rectangular Prism / Cuboid)',
     nameEn: 'Rectangular Prism / Cuboid',
-    baseShapeNp: 'आयात (२ वटा समानान्तर र सर्वसम)',
+    baseShapeNp: 'आयात (2 pcs समानान्तर र सर्वसम)',
     baseShapeEn: 'Rectangle (2 parallel & congruent)',
     vertices: 8,
     edges: 12,
@@ -42,7 +42,7 @@ const PRISM_TYPES: PrismTypeInfo[] = [
     id: 'square',
     nameNp: 'वर्गाकार प्रिज्म / घन (Cube / Square Prism)',
     nameEn: 'Square-based Prism / Cube',
-    baseShapeNp: 'वर्ग (२ वटा सर्वसम वर्ग)',
+    baseShapeNp: 'वर्ग (2 pcs सर्वसम वर्ग)',
     baseShapeEn: 'Square (2 congruent squares)',
     vertices: 8,
     edges: 12,
@@ -67,21 +67,21 @@ const QUIZ_QUESTIONS = [
     np: 'प्रिज्म (Prism) को परिभाषा अनुसार यसका दुई विपरीत आधारहरू (Bases) कस्ता हुन्छन्?',
     en: 'According to the definition of a prism, how are its two opposite bases related?',
     options: [
-      { key: 'A', label: 'समानान्तर र सर्वसम (Parallel and Congruent)' },
-      { key: 'B', label: 'समानान्तर तर असमान आकारका' },
-      { key: 'C', label: 'एउटा बिन्दुमा जोडिएका' },
-      { key: 'D', label: 'सधैं वृत्ताकार' },
+      { key: 'A', label: 'Parallel and congruent' },
+      { key: 'B', label: 'Parallel but of unequal shapes' },
+      { key: 'C', label: 'Joined at a single point' },
+      { key: 'D', label: 'Always circular' },
     ],
     answer: 'A',
   },
   {
-    np: 'त्रिभुजाकार प्रिज्ममा कतिवटा शीर्षबिन्दु (Vertices), किनारा (Edges) र सतह (Faces) हुन्छन्?',
+    np: 'त्रिभुजाकार प्रिज्ममा कतिpcs शीर्षबिन्दु (Vertices), किनारा (Edges) र सतह (Faces) हुन्छन्?',
     en: 'How many vertices, edges, and faces does a triangular prism have?',
     options: [
-      { key: 'A', label: 'V = ६, E = ९, F = ५' },
-      { key: 'B', label: 'V = ८, E = १२, F = ६' },
-      { key: 'C', label: 'V = ५, E = ८, F = ५' },
-      { key: 'D', label: 'V = ४, E = ६, F = ४' },
+      { key: 'A', label: 'V = 6, E = 9, F = 5' },
+      { key: 'B', label: 'V = 8, E = 12, F = 6' },
+      { key: 'C', label: 'V = 5, E = 8, F = 5' },
+      { key: 'D', label: 'V = 4, E = 6, F = 4' },
     ],
     answer: 'A',
   },
@@ -89,10 +89,10 @@ const QUIZ_QUESTIONS = [
     np: 'ओयलरको सूत्र (Euler\'s Formula: V - E + F) प्रिज्मका लागि प्रमाणित गर्दा कति मान आउँछ?',
     en: 'What is the evaluated value of Euler\'s formula (V - E + F) for any prism?',
     options: [
-      { key: 'A', label: '०' },
-      { key: 'B', label: '१' },
-      { key: 'C', label: '२ (V - E + F = २)' },
-      { key: 'D', label: '४' },
+      { key: 'A', label: '0' },
+      { key: 'B', label: '1' },
+      { key: 'C', label: '2 (V - E + F = 2)' },
+      { key: 'D', label: '4' },
     ],
     answer: 'C',
   },
@@ -100,10 +100,10 @@ const QUIZ_QUESTIONS = [
     np: 'प्रिज्मको आधारसँग समानान्तर हुने गरी कुनै समतलले काट्दा बन्ने अनुप्रस्थ काट (Cross-section) कस्तो हुन्छ?',
     en: 'What is the cross-section formed when a prism is sliced by a plane parallel to its base?',
     options: [
-      { key: 'A', label: 'आधारसँग सर्वसम (Congruent to the base)' },
-      { key: 'B', label: 'आधारभन्दा सानो' },
-      { key: 'C', label: 'सधैं वृत्त' },
-      { key: 'D', label: 'अनियमित आकारको' },
+      { key: 'A', label: 'Congruent to the base' },
+      { key: 'B', label: 'Smaller than the base' },
+      { key: 'C', label: 'Always a circle' },
+      { key: 'D', label: 'Of irregular shape' },
     ],
     answer: 'A',
   },
@@ -137,7 +137,7 @@ export const ExploreBuildPrism: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! पाठ ६ प्रिज्म अन्तर्गत विभिन्न प्रकारका प्रिज्महरू, आधार, छड्के सतह, अनुप्रस्थ काट र ओयलरको सूत्र अन्वेषण गरौं!',
+        'नमस्ते! पाठ 6 प्रिज्म अन्तर्गत विभिन्न प्रकारका प्रिज्महरू, आधार, छड्के सतह, अनुप्रस्थ काट र ओयलरको सूत्र अन्वेषण गरौं!',
         'Welcome! Explore prism types, congruent bases, lateral faces, uniform cross-sections, and Euler\'s formula!'
       )}
     >
@@ -194,7 +194,7 @@ export const ExploreBuildPrism: React.FC<{
             <div>
               <div className="flex justify-between text-sm mb-1">
                 <span className="font-semibold text-gray-700 dark:text-gray-300">
-                  {L('३D अवलोकन कोण (View Angle):', 'View Tilt Angle:')}
+                  {L('3D अवलोकन कोण (View Angle):', 'View Tilt Angle:')}
                 </span>
                 <span className="font-mono font-bold text-blue-600 dark:text-blue-400">
                   {isNe ? toNp(rotationAngle) : rotationAngle}°
@@ -465,7 +465,7 @@ export const ExploreBuildPrism: React.FC<{
 
               <div className="space-y-2 text-xs">
                 <div className="flex items-start gap-2">
-                  <span className="text-emerald-600 font-bold">१.</span>
+                  <span className="text-emerald-600 font-bold">1.</span>
                   <div>
                     <strong>{L('दुई विपरीत आधारहरू सर्वसम र समानान्तर हुन्छन्:', 'Two Congruent & Parallel Bases:')}</strong>{' '}
                     {isNe ? selectedType.baseShapeNp : selectedType.baseShapeEn}
@@ -473,15 +473,15 @@ export const ExploreBuildPrism: React.FC<{
                 </div>
 
                 <div className="flex items-start gap-2">
-                  <span className="text-amber-600 font-bold">२.</span>
+                  <span className="text-amber-600 font-bold">2.</span>
                   <div>
                     <strong>{L('छड्के सतहहरू आयताकार हुन्छन् (Lateral Faces):', 'Rectangular Lateral Faces:')}</strong>{' '}
-                    {L(`यस प्रिज्ममा ${toNp(selectedType.lateralFaces)} वटा छड्के आयताकार सतहहरू छन्।`, `Contains ${selectedType.lateralFaces} rectangular lateral faces.`)}
+                    {L(`यस प्रिज्ममा ${toNp(selectedType.lateralFaces)} pcs छड्के आयताकार सतहहरू छन्।`, `Contains ${selectedType.lateralFaces} rectangular lateral faces.`)}
                   </div>
                 </div>
 
                 <div className="flex items-start gap-2">
-                  <span className="text-purple-600 font-bold">३.</span>
+                  <span className="text-purple-600 font-bold">3.</span>
                   <div>
                     <strong>{L('एकसमान अनुप्रस्थ काट (Uniform Cross-Section):', 'Uniform Cross-Section:')}</strong>{' '}
                     {L('आधारसँग समानान्तर हुने गरी जहाँ काटिए पनि बन्ने अनुप्रस्थ काटको आकार र क्षेत्रफल सधैं समान हुन्छ।', 'Cutting plane parallel to the base always produces an identical cross-sectional area.')}

@@ -1,6 +1,6 @@
 /**
- * Class 4 lesson 4 · Number sense (सङ्ख्याको ज्ञान)
- * LakhTowers — 7-digit place-value 2D pillars (दशलाख, लाख, दशहजार, हजार, सय, दशक, एकाइ).
+ * Class 4 lesson 4 · Number sense
+ * LakhTowers — 7-digit place-value 2D pillars.
  * RoundingLine — 2D interactive number line for rounding to the nearest 10, 100, or 1000.
  */
 import React, { useMemo, useState } from 'react';
@@ -16,7 +16,7 @@ export const LakhTowers: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G4-L4-01',
     chapter: 4,
-    titleNp: 'लाख टावर (७ अङ्कको स्थानीय मान)',
+    titleNp: 'लाख टावर (7 अङ्कको स्थानीय मान)',
     titleEn: 'Lakh Towers (7-Digit Place Value)',
   });
 
@@ -82,7 +82,7 @@ export const LakhTowers: React.FC<Props> = ({ onBackToLibrary }) => {
       kit={kit}
       onBack={onBackToLibrary}
       mascotGreeting={kit.t(
-        `७ अङ्कको सङ्ख्या: ${inl(kit.lang, n)}। नेपाली पद्धतिमा पहिलो ३ अङ्क, त्यसपछि २-२ अङ्कमा अल्पविराम लगाइन्छ।`,
+        `7 अङ्कको सङ्ख्या: ${inl(kit.lang, n)}। नेपाली पद्धतिमा पहिलो 3 अङ्क, त्यसपछि 2-2 अङ्कमा अल्पविराम लगाइन्छ।`,
         `7-Digit Number: ${indian(n)}. Commas: first 3 digits from the right, then every 2 digits.`
       )}
       questions={questions}
@@ -100,7 +100,7 @@ export const LakhTowers: React.FC<Props> = ({ onBackToLibrary }) => {
               cursor: 'pointer',
             }}
           >
-            ▲ {kit.t('अङ्क बढाऊ (+१)', 'Increase (+1)')}
+            ▲ {kit.t('अङ्क बढाऊ (+1)', 'Increase (+1)')}
           </button>
           <button
             onClick={() => bump(selPlace, -1)}
@@ -114,7 +114,7 @@ export const LakhTowers: React.FC<Props> = ({ onBackToLibrary }) => {
               cursor: 'pointer',
             }}
           >
-            ▼ {kit.t('अङ्क घटाऊ (-१)', 'Decrease (-1)')}
+            ▼ {kit.t('अङ्क घटाऊ (-1)', 'Decrease (-1)')}
           </button>
           <button
             onClick={fresh}

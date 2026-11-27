@@ -1,6 +1,6 @@
 /**
  * AlgebraicAddSubMulStudio.tsx
- * Grade 7 Mathematics – Lesson 11: ALGEBRAIC EXPRESSION (बीजगणितीय व्यञ्जक)
+ * Grade 7 Mathematics – Lesson 11: ALGEBRAIC EXPRESSION
  * Simulation 2: Algebraic Addition, Subtraction & Multiplication Studio (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 150-156)
  */
@@ -12,46 +12,46 @@ import { Plus, Minus, X, ArrowRight, Grid, Check } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: '(३x + २) + (५x + ४) लाई जोड्दा नतिजा कति हुन्छ?',
+    np: '(3x + 2) + (5x + 4) लाई जोड्दा नतिजा कति हुन्छ?',
     en: 'What is the sum of (3x + 2) + (5x + 4)?',
     options: [
-      { key: 'A', label: '८x + ६ [ (३x + ५x) + (२ + ४) = ८x + ६ ]' },
-      { key: 'B', label: '१४x' },
-      { key: 'C', label: '८x + ८' },
-      { key: 'D', label: '१५x² + ८' },
+      { key: 'A', label: '8x + 6 [ (3x + 5x) + (2 + 4) = 8x + 6 ]' },
+      { key: 'B', label: '14x' },
+      { key: 'C', label: '8x + 8' },
+      { key: 'D', label: '15x² + 8' },
     ],
     answer: 'A',
   },
   {
-    np: '(७x + ५) बाट (३x + २) घटाउँदा (ब्र्याकेट खोल्दा चिन्ह परिवर्तन भई) कति प्राप्त हुन्छ?',
+    np: '(7x + 5) बाट (3x + 2) घटाउँदा (ब्र्याकेट खोल्दा चिन्ह परिवर्तन भई) कति प्राप्त हुन्छ?',
     en: 'Subtracting (3x + 2) from (7x + 5) yields what result?',
     options: [
-      { key: 'A', label: '४x + ३ [ ७x + ५ - ३x - २ = ४x + ३ ]' },
-      { key: 'B', label: '४x + ७' },
-      { key: 'C', label: '१०x + ७' },
-      { key: 'D', label: '४x - ३' },
+      { key: 'A', label: '4x + 3 [ 7x + 5 - 3x - 2 = 4x + 3 ]' },
+      { key: 'B', label: '4x + 7' },
+      { key: 'C', label: '10x + 7' },
+      { key: 'D', label: '4x - 3' },
     ],
     answer: 'A',
   },
   {
-    np: 'एकपदीय पदहरूको गुणन ३x × २x को मान कति हुन्छ?',
+    np: 'एकपदीय पदहरूको गुणन 3x × 2x को मान कति हुन्छ?',
     en: 'What is the product of monomials 3x × 2x?',
     options: [
-      { key: 'A', label: '६x² (३ × २ = ६ र x × x = x²)' },
-      { key: 'B', label: '५x' },
-      { key: 'C', label: '६x' },
-      { key: 'D', label: '५x²' },
+      { key: 'A', label: '6x² (3 × 2 = 6 and x × x = x²)' },
+      { key: 'B', label: '5x' },
+      { key: 'C', label: '6x' },
+      { key: 'D', label: '5x²' },
     ],
     answer: 'A',
   },
   {
-    np: 'विस्तार गर्नुहोस्: (x + २)(x + ३) = ?',
+    np: 'विस्तार गर्नुहोस्: (x + 2)(x + 3) = ?',
     en: 'Expand: (x + 2)(x + 3) = ?',
     options: [
-      { key: 'A', label: 'x² + ५x + ६ [ x(x+३) + २(x+३) = x² + ३x + २x + ६ ]' },
-      { key: 'B', label: 'x² + ६' },
-      { key: 'C', label: 'x² + ६x + ५' },
-      { key: 'D', label: '२x + ५' },
+      { key: 'A', label: 'x² + 5x + 6 [ x(x+3) + 2(x+3) = x² + 3x + 2x + 6 ]' },
+      { key: 'B', label: 'x² + 6' },
+      { key: 'C', label: 'x² + 6x + 5' },
+      { key: 'D', label: '2x + 5' },
     ],
     answer: 'A',
   },
@@ -109,10 +109,10 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'add', np: '१. व्यञ्जकहरूको जोड (Addition)', en: '1. Addition' },
-            { id: 'sub', np: '२. व्यञ्जकहरूको घटाउ (Subtraction)', en: '2. Subtraction' },
-            { id: 'mul-mono', np: '३. एकपदी गुणन (3x × 2x)', en: '3. Monomial Mul' },
-            { id: 'mul-poly', np: '४. द्विपदी गुणन र आयत मोडल', en: '4. (x+2)(x+3) Area Model' },
+            { id: 'add', np: '1. व्यञ्जकहरूको जोड (Addition)', en: '1. Addition' },
+            { id: 'sub', np: '2. व्यञ्जकहरूको घटाउ (Subtraction)', en: '2. Subtraction' },
+            { id: 'mul-mono', np: '3. एकपदी गुणन (3x × 2x)', en: '3. Monomial Mul' },
+            { id: 'mul-poly', np: '4. द्विपदी गुणन र आयत मोडल', en: '4. (x+2)(x+3) Area Model' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -144,7 +144,7 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: (३x + २) र (५x + ४) लाई जोड्दा सजातीय पदहरू एक ठाउँमा ल्याइन्छ:',
+                'पाठ्यपुस्तक उदाहरण: (3x + 2) र (5x + 4) लाई जोड्दा सजातीय पदहरू एक ठाउँमा ल्याइन्छ:',
                 'Textbook Example: Adding (3x + 2) and (5x + 4) by grouping like terms:'
               )}
             </p>
@@ -152,7 +152,7 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1' }}>
-                  पहिलो व्यञ्जक: ({addA1}x + {addC1})
+                  First expression: ({addA1}x + {addC1})
                 </label>
                 <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
                   <input
@@ -176,7 +176,7 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D' }}>
-                  दोस्रो व्यञ्जक: ({addA2}x + {addC2})
+                  Second expression: ({addA2}x + {addC2})
                 </label>
                 <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
                   <input
@@ -210,10 +210,10 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
               }}
             >
               <div>
-                <strong>{L('१. जोड्ने रूप:', '1. Expression:')}</strong> ({addA1}x + {addC1}) + ({addA2}x + {addC2})
+                <strong>{L('1. जोड्ने रूप:', '1. Expression:')}</strong> ({addA1}x + {addC1}) + ({addA2}x + {addC2})
               </div>
               <div>
-                <strong>{L('२. सजातीय पदहरू एकै ठाउँमा राख्दा:', '2. Grouping like terms:')}</strong> ({addA1}x +{' '}
+                <strong>{L('2. सजातीय पदहरू एकै ठाउँमा राख्दा:', '2. Grouping like terms:')}</strong> ({addA1}x +{' '}
                 {addA2}x) + ({addC1} + {addC2})
               </div>
               <div
@@ -238,7 +238,7 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: (७x + ५) बाट (३x + २) घटाउँदा ब्र्याकेट खोल्दा चिन्ह बदलिन्छ (- ३x - २):',
+                'पाठ्यपुस्तक उदाहरण: (7x + 5) बाट (3x + 2) घटाउँदा ब्र्याकेट खोल्दा चिन्ह बदलिन्छ (- 3x - 2):',
                 'Textbook Example: Subtracting (3x + 2) flips signs when removing brackets (- 3x - 2):'
               )}
             </p>
@@ -254,14 +254,14 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
               }}
             >
               <div>
-                <strong>{L('१. घटाउ रूप:', '1. Subtraction Problem:')}</strong> ({subA1}x + {subC1}) - ({subA2}x + {subC2})
+                <strong>{L('1. घटाउ रूप:', '1. Subtraction Problem:')}</strong> ({subA1}x + {subC1}) - ({subA2}x + {subC2})
               </div>
               <div>
-                <strong>{L('२. ब्र्याकेट खोल्दा (चिन्ह परिवर्तन):', '2. Removing brackets (sign inversion):')}</strong>{' '}
+                <strong>{L('2. ब्र्याकेट खोल्दा (चिन्ह परिवर्तन):', '2. Removing brackets (sign inversion):')}</strong>{' '}
                 {subA1}x + {subC1} - {subA2}x - {subC2}
               </div>
               <div>
-                <strong>{L('३. सजातीय पदहरू मिलाउँदा:', '3. Grouping like terms:')}</strong> ({subA1}x - {subA2}x) + ({' '}
+                <strong>{L('3. सजातीय पदहरू मिलाउँदा:', '3. Grouping like terms:')}</strong> ({subA1}x - {subA2}x) + ({' '}
                 {subC1} - {subC2} )
               </div>
               <div
@@ -286,7 +286,7 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'गुणांकहरू आपसमा गुणन हुन्छन् र समान चलका घातहरू जोडिन्छन्: (३ × २) × (x × x) = ६x²।',
+                'गुणांकहरू आपसमा गुणन हुन्छन् र समान चलका घातहरू जोडिन्छन्: (3 × 2) × (x × x) = 6x²।',
                 'Coefficients multiply together, and powers of like variables add together.'
               )}
             </p>
@@ -294,7 +294,7 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1' }}>
-                  पहिलो गुणांक: {monoCoeff1}
+                  First coefficient: {monoCoeff1}
                 </label>
                 <input
                   type="range"
@@ -308,7 +308,7 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D' }}>
-                  दोस्रो गुणांक: {monoCoeff2}
+                  Second coefficient: {monoCoeff2}
                 </label>
                 <input
                   type="range"
@@ -358,7 +358,7 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: (x + २)(x + ३) लाई वितरण नियम वा आयताकार क्षेत्रफल मोडलबाट गुणन गर्दा:',
+                'पाठ्यपुस्तक उदाहरण: (x + 2)(x + 3) लाई वितरण नियम वा आयताकार क्षेत्रफल मोडलबाट गुणन गर्दा:',
                 'Textbook Example: (x + 2)(x + 3) via distributive law or rectangular area model:'
               )}
             </p>
@@ -366,7 +366,7 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1' }}>
-                  मान a: {polyA}
+                  Value of a: {polyA}
                 </label>
                 <input
                   type="range"
@@ -380,7 +380,7 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D' }}>
-                  मान b: {polyB}
+                  Value of b: {polyB}
                 </label>
                 <input
                   type="range"
@@ -404,7 +404,7 @@ export const AlgebraicAddSubMulStudio: React.FC<{ onBackToLibrary?: () => void; 
               }}
             >
               <div>
-                <strong>{L('१. वितरण नियम (Distributive Law):', '1. Distributive Law:')}</strong> (x + {polyA})(x +{' '}
+                <strong>{L('1. वितरण नियम (Distributive Law):', '1. Distributive Law:')}</strong> (x + {polyA})(x +{' '}
                 {polyB})
               </div>
               <div>

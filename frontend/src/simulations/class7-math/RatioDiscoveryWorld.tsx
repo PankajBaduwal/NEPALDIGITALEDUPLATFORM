@@ -1,6 +1,6 @@
 /**
  * RatioDiscoveryWorld.tsx
- * Grade 7 Mathematics – Lesson 6: RATIO AND PROPORTION (अनुपात र समानुपात)
+ * Grade 7 Mathematics – Lesson 6: RATIO AND PROPORTION
  * Simulation 1: Ratio Discovery and Comparison World (2D + Selective 3D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 87-92)
  */
@@ -12,46 +12,46 @@ import { Scale, Check, RefreshCw, ArrowRight, Sparkles, Layers, PieChart } from 
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एउटा झोलामा ४ रातो र ६ निलो बल छन् भने रातो र निलो बलको अनुपात (सरल रूपमा) कति हुन्छ?',
+    np: 'एउटा झोलामा 4 रातो र 6 निलो बल छन् भने रातो र निलो बलको अनुपात (सरल रूपमा) कति हुन्छ?',
     en: 'In a bag there are 4 red and 6 blue balls. What is the ratio of red to blue balls in simplest form?',
     options: [
-      { key: 'A', label: '२ : ३ (2 : 3)' },
-      { key: 'B', label: '३ : २ (3 : 2)' },
-      { key: 'C', label: '४ : १० (4 : 10)' },
-      { key: 'D', label: '१ : २ (1 : 2)' },
+      { key: 'A', label: '2 : 3 (2 : 3)' },
+      { key: 'B', label: '3 : 2 (3 : 2)' },
+      { key: 'C', label: '4 : 10 (4 : 10)' },
+      { key: 'D', label: '1 : 2 (1 : 2)' },
     ],
     answer: 'A',
   },
   {
-    np: '१८ सेमी र ६ मिमी को अनुपात निकाल्दा पहिले के गर्नुपर्छ?',
+    np: '18 cm र 6 मिमी को अनुपात निकाल्दा पहिले के गर्नुपर्छ?',
     en: 'What must be done first when finding the ratio of 18 cm and 6 mm?',
     options: [
-      { key: 'A', label: 'दुवैलाई एउटै एकाइ (मिमी) मा बदल्ने (१८ सेमी = १८० मिमी)' },
-      { key: 'B', label: 'सिधै १८ : ६ लेख्ने' },
-      { key: 'C', label: 'दुवैलाई जोड्ने' },
-      { key: 'D', label: '६ लाई १८ ले भाग गर्ने' },
+      { key: 'A', label: 'Convert both to the same unit (mm) (18 cm = 180 mm)' },
+      { key: 'B', label: 'Write 18 : 6 directly' },
+      { key: 'C', label: 'Add the two' },
+      { key: 'D', label: 'Divide 6 by 18' },
     ],
     answer: 'A',
   },
   {
-    np: '२४ : ३६ को सरल रूप (Simplest form) कुन हो?',
+    np: '24 : 36 को सरल रूप (Simplest form) कुन हो?',
     en: 'What is the simplest form of 24 : 36?',
     options: [
-      { key: 'A', label: '२ : ३ (HCF = १२ ले भाग गर्दा)' },
-      { key: 'B', label: '४ : ६' },
-      { key: 'C', label: '१२ : १८' },
-      { key: 'D', label: '१ : ३' },
+      { key: 'A', label: '2 : 3' },
+      { key: 'B', label: '4 : 6' },
+      { key: 'C', label: '12 : 18' },
+      { key: 'D', label: '1 : 3' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा वृत्तलाई ५ बराबर भागमा बाँडी ३ भाग रङ्ग्याइएको छ भने रङ्ग्याइएको र नरङ्ग्याइएको भागको अनुपात कति हुन्छ?',
+    np: 'एउटा वृत्तलाई 5 बराबर भागमा बाँडी 3 भाग रङ्ग्याइएको छ भने रङ्ग्याइएको र नरङ्ग्याइएको भागको अनुपात कति हुन्छ?',
     en: 'A circle is divided into 5 equal parts with 3 parts shaded. What is the ratio of shaded to unshaded parts?',
     options: [
-      { key: 'A', label: '३ : २' },
-      { key: 'B', label: '३ : ५' },
-      { key: 'C', label: '२ : ५' },
-      { key: 'D', label: '५ : ३' },
+      { key: 'A', label: '3 : 2' },
+      { key: 'B', label: '3 : 5' },
+      { key: 'C', label: '2 : 5' },
+      { key: 'D', label: '5 : 3' },
     ],
     answer: 'A',
   },
@@ -96,7 +96,7 @@ export const RatioDiscoveryWorld: React.FC<{ onBackToLibrary?: () => void; onBac
   const [selectedUnitScenario, setSelectedUnitScenario] = useState<number>(0);
   const UNIT_SCENARIOS = [
     {
-      labelNp: '१८ सेमी र ६ मिमी',
+      labelNp: '18 cm र 6 मिमी',
       labelEn: '18 cm and 6 mm',
       val1: 18,
       unit1: 'cm',
@@ -104,12 +104,12 @@ export const RatioDiscoveryWorld: React.FC<{ onBackToLibrary?: () => void; onBac
       unit2: 'mm',
       convertedVal1: 180,
       convertedUnit1: 'mm',
-      stepTextNp: '१ सेमी = १० मिमी हुन्छ। त्यसैले १८ सेमी = १८ × १० = १८० मिमी।',
+      stepTextNp: '1 cm = 10 मिमी हुन्छ। त्यसैले 18 cm = 18 × 10 = 180 मिमी।',
       stepTextEn: '1 cm = 10 mm. Therefore 18 cm = 18 × 10 = 180 mm.',
       ratioAns: '180 : 6 = 30 : 1',
     },
     {
-      labelNp: '२ केजी र ५०० ग्राम',
+      labelNp: '2 केजी र 500 g',
       labelEn: '2 kg and 500 g',
       val1: 2,
       unit1: 'kg',
@@ -117,12 +117,12 @@ export const RatioDiscoveryWorld: React.FC<{ onBackToLibrary?: () => void; onBac
       unit2: 'g',
       convertedVal1: 2000,
       convertedUnit1: 'g',
-      stepTextNp: '१ केजी = १००० ग्राम हुन्छ। त्यसैले २ केजी = २ × १००० = २००० ग्राम।',
+      stepTextNp: '1 केजी = 1000 g हुन्छ। त्यसैले 2 केजी = 2 × 1000 = 2000 g।',
       stepTextEn: '1 kg = 1000 g. Therefore 2 kg = 2 × 1000 = 2000 g.',
       ratioAns: '2000 : 500 = 4 : 1',
     },
     {
-      labelNp: '३ लिटर र ७५० मिलिलिटर',
+      labelNp: '3 litres र 750 मिलिlitres',
       labelEn: '3 L and 750 mL',
       val1: 3,
       unit1: 'L',
@@ -130,12 +130,12 @@ export const RatioDiscoveryWorld: React.FC<{ onBackToLibrary?: () => void; onBac
       unit2: 'mL',
       convertedVal1: 3000,
       convertedUnit1: 'mL',
-      stepTextNp: '१ लिटर = १००० मिलिलिटर हुन्छ। त्यसैले ३ लिटर = ३ × १००० = ३००० मिलिलिटर।',
+      stepTextNp: '1 litres = 1000 मिलिlitres हुन्छ। त्यसैले 3 litres = 3 × 1000 = 3000 मिलिlitres।',
       stepTextEn: '1 L = 1000 mL. Therefore 3 L = 3 × 1000 = 3000 mL.',
       ratioAns: '3000 : 750 = 4 : 1',
     },
     {
-      labelNp: 'रु ५ र ५० पैसा',
+      labelNp: 'Rs 5 र 50 पैसा',
       labelEn: 'Rs 5 and 50 Paisa',
       val1: 5,
       unit1: 'Rs',
@@ -143,7 +143,7 @@ export const RatioDiscoveryWorld: React.FC<{ onBackToLibrary?: () => void; onBac
       unit2: 'paisa',
       convertedVal1: 500,
       convertedUnit1: 'paisa',
-      stepTextNp: 'रु १ = १०० पैसा हुन्छ। त्यसैले रु ५ = ५ × १०० = ५०० पैसा।',
+      stepTextNp: 'Rs 1 = 100 पैसा हुन्छ। त्यसैले Rs 5 = 5 × 100 = 500 पैसा।',
       stepTextEn: 'Rs 1 = 100 paisa. Therefore Rs 5 = 5 × 100 = 500 paisa.',
       ratioAns: '500 : 50 = 10 : 1',
     },
@@ -169,10 +169,10 @@ export const RatioDiscoveryWorld: React.FC<{ onBackToLibrary?: () => void; onBac
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'visual', np: '१. अनुपात खोजी (बलहरूको तुलना)', en: '1. Discover Ratio (Balls)' },
-            { id: 'simplest', np: '२. सरल रूप (Simplest Form & HCF)', en: '2. Simplest Form & HCF' },
-            { id: 'units', np: '३. समान एकाइ रूपान्तरण', en: '3. Same Unit Challenge' },
-            { id: 'fraction', np: '४. भिन्न र अनुपात सम्बन्ध', en: '4. Ratio vs Fraction' },
+            { id: 'visual', np: '1. अनुपात खोजी (बलहरूको तुलना)', en: '1. Discover Ratio (Balls)' },
+            { id: 'simplest', np: '2. सरल रूप (Simplest Form & HCF)', en: '2. Simplest Form & HCF' },
+            { id: 'units', np: '3. समान एकाइ रूपान्तरण', en: '3. Same Unit Challenge' },
+            { id: 'fraction', np: '4. भिन्न र अनुपात सम्बन्ध', en: '4. Ratio vs Fraction' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -398,11 +398,11 @@ export const RatioDiscoveryWorld: React.FC<{ onBackToLibrary?: () => void; onBac
 
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '16px 0' }}>
               {[
-                { a: 18, b: 30, label: '१८ : ३० (पाठ्यपुस्तक उदाहरण)' },
-                { a: 24, b: 36, label: '२४ : ३६' },
-                { a: 15, b: 45, label: '१५ : ४५' },
-                { a: 14, b: 21, label: '१४ : २१' },
-                { a: 25, b: 100, label: '२५ : १००' },
+                { a: 18, b: 30, label: '18 : 30' },
+                { a: 24, b: 36, label: '24 : 36' },
+                { a: 15, b: 45, label: '15 : 45' },
+                { a: 14, b: 21, label: '14 : 21' },
+                { a: 25, b: 100, label: '25 : 100' },
               ].map((pair, idx) => (
                 <button
                   key={idx}
@@ -481,15 +481,15 @@ export const RatioDiscoveryWorld: React.FC<{ onBackToLibrary?: () => void; onBac
                 </h4>
                 <div style={{ fontSize: 14, color: '#1E1B4B', lineHeight: 1.8 }}>
                   <div>
-                    <strong>{L('१. दिइएको अनुपात:', '1. Given Ratio:')}</strong> {isNe ? toNp(termA) : termA} :{' '}
+                    <strong>{L('1. दिइएको अनुपात:', '1. Given Ratio:')}</strong> {isNe ? toNp(termA) : termA} :{' '}
                     {isNe ? toNp(termB) : termB} = {isNe ? toNp(termA) : termA} / {isNe ? toNp(termB) : termB}
                   </div>
                   <div>
-                    <strong>{L('२. म.स. (HCF):', '2. HCF:')}</strong> HCF({termA}, {termB}) ={' '}
+                    <strong>{L('2. म.स. (HCF):', '2. HCF:')}</strong> HCF({termA}, {termB}) ={' '}
                     <span style={{ color: '#4338CA', fontWeight: 800 }}>{isNe ? toNp(currentGcd) : currentGcd}</span>
                   </div>
                   <div>
-                    <strong>{L('३. म.स. ले दुवैलाई भाग गर्दा:', '3. Dividing both terms by HCF:')}</strong>
+                    <strong>{L('3. म.स. ले दुवैलाई भाग गर्दा:', '3. Dividing both terms by HCF:')}</strong>
                     <br />({isNe ? toNp(termA) : termA} ÷ {isNe ? toNp(currentGcd) : currentGcd}) / (
                     {isNe ? toNp(termB) : termB} ÷ {isNe ? toNp(currentGcd) : currentGcd})
                   </div>
@@ -592,12 +592,12 @@ export const RatioDiscoveryWorld: React.FC<{ onBackToLibrary?: () => void; onBac
                     }}
                   >
                     <div style={{ color: '#0369A1', fontWeight: 600, marginBottom: 6 }}>
-                      {L('चरण १: एउटै सानो एकाइमा रूपान्तरण गर्ने', 'Step 1: Convert into the same smaller unit')}
+                      {L('चरण 1: एउटै सानो एकाइमा रूपान्तरण गर्ने', 'Step 1: Convert into the same smaller unit')}
                     </div>
                     <div style={{ color: '#334155', fontSize: 14 }}>{L(cur.stepTextNp, cur.stepTextEn)}</div>
 
                     <div style={{ marginTop: 10, color: '#0369A1', fontWeight: 600 }}>
-                      {L('चरण २: अनुपात निकाली सरल रूपमा लैजाने', 'Step 2: Form ratio and simplify')}
+                      {L('चरण 2: अनुपात निकाली सरल रूपमा लैजाने', 'Step 2: Form ratio and simplify')}
                     </div>
                     <div style={{ fontSize: 16, fontWeight: 800, color: '#187C68', marginTop: 4 }}>
                       {cur.convertedVal1} {cur.convertedUnit1} : {cur.val2} {cur.unit2} = {cur.ratioAns}
@@ -617,7 +617,7 @@ export const RatioDiscoveryWorld: React.FC<{ onBackToLibrary?: () => void; onBac
                     💡{' '}
                     <strong>{L('स्मरण रहोस्:', 'Remember:')}</strong>{' '}
                     {L(
-                      'अनुपात शुद्ध सङ्ख्या हो, यसको पछाडि से.मी, ग्राम, रुपैयाँ आदि एकाइ लेखिँदैन!',
+                      'अनुपात शुद्ध सङ्ख्या हो, यसको पछाडि से.मी, g, rupees आदि एकाइ लेखिँदैन!',
                       'A ratio is a pure dimensionless number without any units (no cm, g, Rs, etc.)!'
                     )}
                   </div>
@@ -732,7 +732,7 @@ export const RatioDiscoveryWorld: React.FC<{ onBackToLibrary?: () => void; onBac
                   {isNe ? toNp(shadedParts) : shadedParts} / {isNe ? toNp(totalParts) : totalParts}
                 </div>
                 <div style={{ fontSize: 12, color: '#065F46', marginTop: 4 }}>
-                  {L('(रङ्ग्याइएको भाग / जम्मा भाग)', '(Shaded part / Total parts)')}
+                  {L('', '(Shaded part / Total parts)')}
                 </div>
               </div>
 

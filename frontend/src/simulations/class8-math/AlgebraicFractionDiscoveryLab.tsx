@@ -1,7 +1,7 @@
 /**
  * AlgebraicFractionDiscoveryLab.tsx
- * Grade 8 Mathematics – Unit 11: ALGEBRAIC FRACTION (बीजीय भिन्न)
- * Simulation 1: Algebraic Fraction Discovery Lab (बीजीय भिन्न खोजी प्रयोगशाला)
+ * Grade 8 Mathematics – Unit 11: ALGEBRAIC FRACTION
+ * Simulation 1: Algebraic Fraction Discovery Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 11)
  */
 import React, { useState } from 'react';
@@ -15,10 +15,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'बीजीय भिन्नको सरलीकरण गर्दा कुन प्रक्रिया अनिवार्य गर्नुपर्छ?',
     en: 'What process must be done before simplifying an algebraic fraction?',
     options: [
-      { key: 'A', label: 'पहिले अंश र हरको खण्डीकरण गर्ने (Factorize numerator and denominator)' },
-      { key: 'B', label: 'जोड वा घटाउमा रहेका पदहरू सिधै काट्ने' },
-      { key: 'C', label: 'अंश र हरलाई जोड्ने' },
-      { key: 'D', label: 'चलराशि हटाउने' },
+      { key: 'A', label: 'First factorize the numerator and denominator' },
+      { key: 'B', label: 'Cancel terms that are being added or subtracted directly' },
+      { key: 'C', label: 'Add the numerator and denominator' },
+      { key: 'D', label: 'Remove the variable' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: '(x + 5) / x मा x लाई x सँग काट्न किन मिल्दैन?',
     en: 'Why CANNOT x be cancelled with x in (x + 5) / x?',
     options: [
-      { key: 'A', label: 'किनकि अंशमा x गुणनखण्ड होइन, जोडिएको पद (Term) हो' },
-      { key: 'B', label: 'किनकि हरमा ५ छैन' },
-      { key: 'C', label: 'काट्न मिल्छ, उत्तर ५ हुन्छ' },
-      { key: 'D', label: 'किनकि x ऋणात्मक छ' },
+      { key: 'A', label: 'Because x is not a factor of the numerator, it is an added term' },
+      { key: 'B', label: 'Because there is no 5 in the denominator' },
+      { key: 'C', label: 'It can be cancelled, the answer is 5' },
+      { key: 'D', label: 'Because x is negative' },
     ],
     answer: 'A',
   },
@@ -59,7 +59,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: '3a² / 4a³ को सरलीकृत रूप के हुन्छ?',
     en: 'What is the simplified form of 3a² / 4a³?',
     options: [
-      { key: 'A', label: '3 / (4a) [ a² साझा काटिन्छ ]' },
+      { key: 'A', label: '3 / (4a) [ the common a² is cancelled ]' },
       { key: 'B', label: '3a / 4' },
       { key: 'C', label: '3 / 4' },
       { key: 'D', label: '3a⁵ / 4' },
@@ -71,7 +71,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
 const PRESET_FRACTIONS = [
   {
     id: 1,
-    titleNp: '(x² - 1) / (x² + x) [CDC उदाहरण १]',
+    titleNp: '(x² - 1) / (x² + x) [CDC उदाहरण 1]',
     titleEn: '(x² - 1) / (x² + x)',
     numExpr: 'x² - 1',
     denExpr: 'x² + x',
@@ -83,7 +83,7 @@ const PRESET_FRACTIONS = [
   },
   {
     id: 2,
-    titleNp: '(x² - 5x + 6) / (x² - 2x) [CDC उदाहरण २]',
+    titleNp: '(x² - 5x + 6) / (x² - 2x) [CDC उदाहरण 2]',
     titleEn: '(x² - 5x + 6) / (x² - 2x)',
     numExpr: 'x² - 5x + 6',
     denExpr: 'x² - 2x',
@@ -110,13 +110,13 @@ const PRESET_FRACTIONS = [
 const MISTAKE_CASES = [
   {
     expr: '(x + 5) / x',
-    wrong: '= 5 [x र x काटियो]',
+    wrong: '= 5 [x and x cancelled]',
     reasonNp: 'गल्ती: अंशमा x गुणनखण्ड (Factor) होइन, जोडिएको पद (Term) हो! पदहरूलाई काट्न मिल्दैन, केवल साझा गुणनखण्ड मात्र काट्न मिल्छ।',
     reasonEn: 'Error: x in the numerator is an added term, not a factor! Terms connected by + or - cannot be cancelled.',
   },
   {
     expr: '(x² + 4) / (x² + 2)',
-    wrong: '= 4 / 2 = 2 [x² र x² काटियो]',
+    wrong: '= 4 / 2 = 2 [x² and x² cancelled]',
     reasonNp: 'गल्ती: x² पदहरूलाई काट्न मिल्दैन किनकि तिनीहरू गुणनका रूपमा छैनन्। यो भिन्न थप सरल हुँदैन।',
     reasonEn: 'Error: You cannot cancel terms connected by addition. This fraction cannot be simplified further.',
   },
@@ -187,7 +187,7 @@ export const AlgebraicFractionDiscoveryLab: React.FC<{
             }`}
           >
             <Scissors className="w-4 h-4" />
-            {L('१. खण्डीकरण र सरलीकरण (Factorize & Cancel)', '1. Factorize & Cancel')}
+            {L('1. खण्डीकरण र सरलीकरण (Factorize & Cancel)', '1. Factorize & Cancel')}
           </button>
           <button
             onClick={() => setActiveTab('concept')}
@@ -196,7 +196,7 @@ export const AlgebraicFractionDiscoveryLab: React.FC<{
             }`}
           >
             <Divide className="w-4 h-4" />
-            {L('२. बीजीय भिन्नको अवधारणा (Concept)', '2. Concept')}
+            {L('2. बीजीय भिन्नको अवधारणा (Concept)', '2. Concept')}
           </button>
           <button
             onClick={() => setActiveTab('spot_mistake')}
@@ -205,7 +205,7 @@ export const AlgebraicFractionDiscoveryLab: React.FC<{
             }`}
           >
             <AlertTriangle className="w-4 h-4" />
-            {L('३. गल्ती पत्ता लगाउनुहोस् (Spot the Mistake)', '3. Spot the Mistake')}
+            {L('3. गल्ती पत्ता लगाउनुहोस् (Spot the Mistake)', '3. Spot the Mistake')}
           </button>
           <button
             onClick={() => setActiveTab('challenge')}
@@ -214,7 +214,7 @@ export const AlgebraicFractionDiscoveryLab: React.FC<{
             }`}
           >
             <Award className="w-4 h-4" />
-            {L('४. सरलीकरण चुनौती (Challenge)', '4. Simplification Challenge')}
+            {L('4. सरलीकरण चुनौती (Challenge)', '4. Simplification Challenge')}
           </button>
         </div>
 
@@ -254,7 +254,7 @@ export const AlgebraicFractionDiscoveryLab: React.FC<{
               {/* Step 1: Factorization */}
               <div className="bg-slate-800 p-5 rounded-2xl border border-slate-700 space-y-2">
                 <div className="text-xs font-bold text-amber-300 font-sans uppercase">
-                  {L('चरण १: अंश र हरलाई खण्डीकरण गर्ने (Factorize)', 'Step 1: Factorize Numerator and Denominator')}
+                  {L('चरण 1: अंश र हरलाई खण्डीकरण गर्ने (Factorize)', 'Step 1: Factorize Numerator and Denominator')}
                 </div>
                 <div className="text-xl text-white text-center py-2">
                   <span className="border-b-2 border-slate-500 px-4 pb-1 inline-block">
@@ -268,7 +268,7 @@ export const AlgebraicFractionDiscoveryLab: React.FC<{
               <div className="bg-slate-800 p-5 rounded-2xl border border-slate-700 space-y-3">
                 <div className="flex justify-between items-center">
                   <div className="text-xs font-bold text-emerald-400 font-sans uppercase">
-                    {L('चरण २: साझा गुणनखण्ड काट्ने (Cancel Common Factor)', 'Step 2: Cancel Common Factor')}
+                    {L('चरण 2: साझा गुणनखण्ड काट्ने (Cancel Common Factor)', 'Step 2: Cancel Common Factor')}
                   </div>
                   <button
                     onClick={() => setIsCancelled(!isCancelled)}
@@ -342,11 +342,11 @@ export const AlgebraicFractionDiscoveryLab: React.FC<{
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                 <div className="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl">
                   <div className="font-bold text-indigo-950 text-sm">{L('अंश (Numerator):', 'Numerator:')}</div>
-                  <div className="text-xs text-slate-700 mt-1">भिन्नको माथिल्लो भाग (जस्तै 3x² वा x² - 1)</div>
+                  <div className="text-xs text-slate-700 mt-1">The top part of the fraction (for example 3x² or x² - 1)</div>
                 </div>
                 <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl">
                   <div className="font-bold text-emerald-950 text-sm">{L('हर (Denominator):', 'Denominator:')}</div>
-                  <div className="text-xs text-slate-700 mt-1">भिन्नको तल्लो भाग (जस्तै x + 1 वा 4a³; यो कहिल्यै शून्य हुनुहुँदैन)</div>
+                  <div className="text-xs text-slate-700 mt-1">The bottom part of the fraction (for example x + 1 or 4a³; it must never be zero)</div>
                 </div>
               </div>
             </div>

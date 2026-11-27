@@ -85,7 +85,7 @@ export const LimitInfiniteSeriesLab: React.FC<SimProps> = ({ onBackToLibrary, on
               <span className="font-bold">{L('अनुक्रमको सीमा (Limit of Sequence):', 'Concept:')}</span>
               <p className="mt-1">
                 {L(
-                  'पाठ्यपुस्तकको अनुक्रम: १, १/२, १/३, १/४, ... मा n अनन्ततर्फ बढ्दै जाँदा (n → ∞), अनुक्रमको पद १/n शून्यको अझ नजिकिँदै जान्छ। यसलाई lim (n→∞) 1/n = 0 लेखिन्छ।',
+                  'पाठ्यपुस्तकको अनुक्रम: 1, 1/2, 1/3, 1/4, ... मा n अनन्ततर्फ बढ्दै जाँदा (n → ∞), अनुक्रमको पद 1/n शून्यको अझ नजिकिँदै जान्छ। यसलाई lim (n→∞) 1/n = 0 लेखिन्छ।',
                   'In the sequence 1, 1/2, 1/3, 1/4, ..., as n grows infinitely large (n → ∞), the term 1/n gets arbitrarily close to 0: lim 1/n = 0.'
                 )}
               </p>
@@ -194,13 +194,13 @@ export const LimitInfiniteSeriesLab: React.FC<SimProps> = ({ onBackToLibrary, on
                 <div className="p-3 bg-slate-50 border rounded-xl space-y-1">
                   <div className="text-xs text-slate-500">{L('बहुभुजको परिमिति (Polygon Perimeter):', 'Perimeter:')}</div>
                   <div className="text-indigo-900 font-bold">{fmt(polyPerimeter.toFixed(2))} px</div>
-                  <div className="text-xs text-amber-700">वृत्तको परिधि (Limit 2πr) = {fmt(circlePerimeter.toFixed(2))} px</div>
+                  <div className="text-xs text-amber-700">Circumference of the circle (limit 2πr) = {fmt(circlePerimeter.toFixed(2))} px</div>
                 </div>
 
                 <div className="p-3 bg-slate-50 border rounded-xl space-y-1">
                   <div className="text-xs text-slate-500">{L('बहुभुजको क्षेत्रफल (Polygon Area):', 'Area:')}</div>
                   <div className="text-indigo-900 font-bold">{fmt(polyArea.toFixed(1))} sq.px</div>
-                  <div className="text-xs text-amber-700">वृत्तको क्षेत्रफल (Limit πr²) = {fmt(circleArea.toFixed(1))} sq.px</div>
+                  <div className="text-xs text-amber-700">Area of the circle (limit πr²) = {fmt(circleArea.toFixed(1))} sq.px</div>
                 </div>
               </div>
             </div>
@@ -214,7 +214,7 @@ export const LimitInfiniteSeriesLab: React.FC<SimProps> = ({ onBackToLibrary, on
               <span className="font-bold">{L('अनन्त श्रेणीको आंशिक योग (Infinite Series Partial Sums):', 'Partial Sums:')}</span>
               <p className="mt-1">
                 {L(
-                  'पाठ्यपुस्तक उदाहरण: १/२ + १/४ + १/८ + १/१६ + ... श्रेणीका आंशिक योगहरू (Partial Sums Sₙ) निकाल्दै जाँदा S₁ = ०.५, S₂ = ०.७५, S₃ = ०.८७५ हुँदै १ तर्फ नजिकिन्छ। त्यसैले यस अनन्त श्रेणीको योग = १ हुन्छ!',
+                  'पाठ्यपुस्तक उदाहरण: 1/2 + 1/4 + 1/8 + 1/16 + ... श्रेणीका आंशिक योगहरू (Partial Sums Sₙ) निकाल्दै जाँदा S₁ = 0.5, S₂ = 0.75, S₃ = 0.875 हुँदै 1 तर्फ नजिकिन्छ। त्यसैले यस अनन्त श्रेणीको योग = 1 हुन्छ!',
                   'Textbook example: 1/2 + 1/4 + 1/8 + ... has partial sums S1=0.5, S2=0.75, S3=0.875 approaching 1. Hence the sum of this infinite series is 1.'
                 )}
               </p>

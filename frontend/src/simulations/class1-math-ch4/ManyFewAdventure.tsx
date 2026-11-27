@@ -1,8 +1,8 @@
 /**
  * ManyFewAdventure.tsx (Converted to 100% Pure 2D)
- * Simulation 01: Many and Few Adventure (धेरै र थोरै चिनौँ)
- * Class 1 Mathematics - Chapter 4: Numbers up to 9 (९ सम्मका सङ्ख्याहरू)
- * Nepal CDC Curriculum Aligned (मेरो गणित, कक्षा १)
+ * Simulation 01: Many and Few Adventure
+ * Class 1 Mathematics - Chapter 4: Numbers up to 9
+ * Nepal CDC Curriculum Aligned
  * 100% Pure 2D Vector & Canvas – Zero WebGL/Three.js.
  */
 import React, { useState } from 'react';
@@ -19,7 +19,7 @@ export const ManyFewAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G1-CH4-01',
     chapter: 4,
-    titleNp: 'धेरै र थोरै चिनौँ (९ सम्मका सङ्ख्याहरू)',
+    titleNp: 'धेरै र थोरै चिनौँ (9 सम्मका सङ्ख्याहरू)',
     titleEn: 'Many and Few (Numbers up to 9)',
   });
 
@@ -28,7 +28,7 @@ export const ManyFewAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
   const [itemType, setItemType] = useState<'apple' | 'flower' | 'mango'>('apple');
 
   const itemEmoji = itemType === 'apple' ? '🍎' : itemType === 'flower' ? '🌸' : '🥭';
-  const itemNameNp = itemType === 'apple' ? 'स्याउ' : itemType === 'flower' ? 'फूल' : 'आँप';
+  const itemNameNp = itemType === 'apple' ? 'Apple' : itemType === 'flower' ? 'Flower' : 'Mango';
   const itemNameEn = itemType === 'apple' ? 'Apple' : itemType === 'flower' ? 'Flower' : 'Mango';
 
   const isAMore = basketA > basketB;
@@ -37,25 +37,25 @@ export const ManyFewAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
 
   const questions: QuizQuestion[] = [
     {
-      np: 'एउटा टोकरीमा ७ वटा र अर्कोमा ३ वटा स्याउ छन् भने कुनमा धेरै छन्?',
+      np: 'एउटा टोकरीमा 7 वटा र अर्कोमा 3 वटा Apple छन् भने कुनमा धेरै छन्?',
       en: 'Basket A has 7 apples and Basket B has 3. Which has MORE?',
       options: [
-        { key: 'a', label: kit.t('७ वटा भएको टोकरी (Basket with 7)', 'Basket with 7 (Many)') },
-        { key: 'b', label: kit.t('३ वटा भएको टोकरी (Basket with 3)', 'Basket with 3 (Few)') },
+        { key: 'a', label: kit.t('7 वटा भएको टोकरी (Basket with 7)', 'Basket with 7 (Many)') },
+        { key: 'b', label: kit.t('3 वटा भएको टोकरी (Basket with 3)', 'Basket with 3 (Few)') },
       ],
       answer: 'a',
     },
     {
-      np: '२ र ८ मा कुन सङ्ख्या थोरै (Few) हो?',
+      np: '2 र 8 मा कुन सङ्ख्या थोरै (Few) हो?',
       en: 'Between 2 and 8, which number is FEW (less)?',
       options: [
-        { key: '2', label: kit.t('२ (Two)', '2 (Two)') },
-        { key: '8', label: kit.t('८ (Eight)', '8 (Eight)') },
+        { key: '2', label: kit.t('2 (Two)', '2 (Two)') },
+        { key: '8', label: kit.t('8 (Eight)', '8 (Eight)') },
       ],
       answer: '2',
     },
     {
-      np: '५ वटा चरा र ५ वटा माछा भएमा के भनिन्छ?',
+      np: '5 वटा चरा र 5 वटा माछा भएमा के भनिन्छ?',
       en: 'If there are 5 birds and 5 fish, how do they compare?',
       options: [
         { key: 'eq', label: kit.t('बराबर (Equal)', 'Equal') },
@@ -65,11 +65,11 @@ export const ManyFewAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
       answer: 'eq',
     },
     {
-      np: '९ वटा आँप र ४ वटा आँपमा कुन धेरै (Many) हो?',
+      np: '9 वटा Mango र 4 वटा Mangoमा कुन धेरै (Many) हो?',
       en: 'Between 9 mangoes and 4 mangoes, which is MANY (more)?',
       options: [
-        { key: '9', label: kit.t('९ वटा (Nine)', '9 (Nine)') },
-        { key: '4', label: kit.t('४ वटा (Four)', '4 (Four)') },
+        { key: '9', label: kit.t('9 वटा (Nine)', '9 (Nine)') },
+        { key: '4', label: kit.t('4 वटा (Four)', '4 (Four)') },
       ],
       answer: '9',
     },
@@ -106,7 +106,7 @@ export const ManyFewAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
                   boxShadow: itemType === type ? '0 2px 4px rgba(0,0,0,0.08)' : 'none',
                 }}
               >
-                {type === 'apple' ? '🍎 स्याउ' : type === 'mango' ? '🥭 आँप' : '🌸 फूल'}
+                {type === 'apple' ? '🍎 Apple' : type === 'mango' ? '🥭 Mango' : '🌸 Flower'}
               </button>
             ))}
           </div>

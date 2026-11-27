@@ -1,6 +1,6 @@
 /**
  * RationalNumberDiscoveryLab.tsx
- * Grade 7 Mathematics – Lesson 4: RATIONAL NUMBER (परिमेय सङ्ख्या)
+ * Grade 7 Mathematics – Lesson 4: RATIONAL NUMBER
  * Simulation 5: Rational Number Discovery Lab (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 67-71)
  */
@@ -12,24 +12,24 @@ import { Layers, Sparkles, Check, HelpCircle, ArrowRight } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'a/b को रूपमा लेख्न सकिने सङ्ख्यालाई के भनिन्छ, जहाँ a र b पूर्णाङ्क हुन् र b ≠ ०?',
+    np: 'a/b को रूपमा लेख्न सकिने सङ्ख्यालाई के भनिन्छ, जहाँ a र b पूर्णाङ्क हुन् र b ≠ 0?',
     en: 'What is a number called that can be expressed as a/b, where a and b are integers and b ≠ 0?',
     options: [
-      { key: 'A', label: 'परिमेय सङ्ख्या (Rational Number)' },
-      { key: 'B', label: 'अपरिमेय सङ्ख्या' },
-      { key: 'C', label: 'ऋणात्मक पूर्णाङ्क मात्र' },
-      { key: 'D', label: 'प्राकृतिक सङ्ख्या मात्र' },
+      { key: 'A', label: 'Rational number' },
+      { key: 'B', label: 'Irrational number' },
+      { key: 'C', label: 'Negative integers only' },
+      { key: 'D', label: 'Natural numbers only' },
     ],
     answer: 'A',
   },
   {
-    np: 'परिमेय सङ्ख्या a/b मा हर (Denominator: b) को मान किन शून्य (०) हुन सक्दैन?',
+    np: 'परिमेय सङ्ख्या a/b मा हर (Denominator: b) को मान किन शून्य (0) हुन सक्दैन?',
     en: 'Why can the denominator b never be zero (0) in a rational number a/b?',
     options: [
-      { key: 'A', label: 'शून्यले भाग गर्दा मान अनन्त/अपरिभाषित (Undefined) हुने हुनाले' },
-      { key: 'B', label: 'शून्य सानो सङ्ख्या भएकोले' },
-      { key: 'C', label: 'यो केवल नियम हो' },
-      { key: 'D', label: 'माथिका कुनै पनि होइन' },
+      { key: 'A', label: 'Because dividing by zero gives an infinite or undefined value' },
+      { key: 'B', label: 'Because zero is a small number' },
+      { key: 'C', label: 'It is just a rule' },
+      { key: 'D', label: 'None of the above' },
     ],
     answer: 'A',
   },
@@ -45,13 +45,13 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'के शून्य (०) एउटा परिमेय सङ्ख्या हो?',
+    np: 'के शून्य (0) एउटा परिमेय सङ्ख्या हो?',
     en: 'Is zero (0) a rational number?',
     options: [
-      { key: 'A', label: 'हो, किनभने ० = ०/१ लेख्न सकिन्छ (Yes, 0 = 0/1)' },
-      { key: 'B', label: 'होइन' },
-      { key: 'C', label: 'धनात्मक मात्र हो' },
-      { key: 'D', label: 'थाहा छैन' },
+      { key: 'A', label: 'Yes, because 0 can be written as 0/1' },
+      { key: 'B', label: 'No' },
+      { key: 'C', label: 'Only positive' },
+      { key: 'D', label: 'Do not know' },
     ],
     answer: 'A',
   },
@@ -85,7 +85,7 @@ export const RationalNumberDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'दुई पूर्णाङ्कहरूको भाग सधैं पूर्णाङ्क हुँदैन (जस्तै ३ ÷ ४ = ३/४), त्यसैले हामीलाई परिमेय सङ्ख्या (Q) चाहिन्छ!',
+        'दुई पूर्णाङ्कहरूको भाग सधैं पूर्णाङ्क हुँदैन (जस्तै 3 ÷ 4 = 3/4), त्यसैले हामीलाई rational numbers (Q) चाहिन्छ!',
         'Integer division does not always result in an integer (e.g., 3 ÷ 4 = 3/4). This introduces the set of Rational Numbers (Q)!'
       )}
     >
@@ -93,10 +93,10 @@ export const RationalNumberDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'why_needed', np: '१. परिमेय सङ्ख्या किन चाहियो?', en: '1. Why Rational Numbers?' },
-            { id: 'builder', np: '२. a/b निर्माणशाला (Builder)', en: '2. a/b Fraction Builder' },
-            { id: 'nested_sets', np: '३. सङ्ख्या प्रणाली सम्बन्ध (N ⊂ W ⊂ Z ⊂ Q)', en: '3. Number Systems (N ⊂ W ⊂ Z ⊂ Q)' },
-            { id: 'zero_rational', np: '४. शून्य र पूर्णाङ्कको परिमेय रूप', en: '4. Zero & Integers as Q' },
+            { id: 'why_needed', np: '1. परिमेय सङ्ख्या किन चाहियो?', en: '1. Why Rational Numbers?' },
+            { id: 'builder', np: '2. a/b निर्माणशाला (Builder)', en: '2. a/b Fraction Builder' },
+            { id: 'nested_sets', np: '3. सङ्ख्या प्रणाली सम्बन्ध (N ⊂ W ⊂ Z ⊂ Q)', en: '3. Number Systems (N ⊂ W ⊂ Z ⊂ Q)' },
+            { id: 'zero_rational', np: '4. शून्य र पूर्णाङ्कको परिमेय रूप', en: '4. Zero & Integers as Q' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -126,7 +126,7 @@ export const RationalNumberDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
         {activeTab === 'why_needed' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक पृष्ठभूमि (पृष्ठ ६७)', 'Textbook Background (Page 67)')}
+              {L('पाठ्यपुस्तक पृष्ठभूमि (पृष्ठ 67)', 'Textbook Background (Page 67)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
               {L('पूर्णाङ्कहरूको भाग र परिमेय सङ्ख्याको आवश्यकता', 'Integer Operations & The Need for Rational Numbers')}
@@ -134,36 +134,36 @@ export const RationalNumberDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
-                <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>जोड (Addition)</div>
-                <div style={{ fontSize: 16, fontWeight: 900, color: '#166534', marginTop: 4 }}>३ + (-४) = -१ ∈ ℤ</div>
-                <div style={{ fontSize: 11, color: '#16A34A', marginTop: 2 }}>✓ पूर्णाङ्क नै हो</div>
+                <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>Addition</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: '#166534', marginTop: 4 }}>3 + (-4) = -1 ∈ ℤ</div>
+                <div style={{ fontSize: 11, color: '#16A34A', marginTop: 2 }}>✓ It is an integer</div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
-                <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>घटाउ (Subtraction)</div>
-                <div style={{ fontSize: 16, fontWeight: 900, color: '#166534', marginTop: 4 }}>३ - (-४) = +७ ∈ ℤ</div>
-                <div style={{ fontSize: 11, color: '#16A34A', marginTop: 2 }}>✓ पूर्णाङ्क नै हो</div>
+                <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>Subtraction</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: '#166534', marginTop: 4 }}>3 - (-4) = +7 ∈ ℤ</div>
+                <div style={{ fontSize: 11, color: '#16A34A', marginTop: 2 }}>✓ It is an integer</div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
-                <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>गुणन (Multiplication)</div>
-                <div style={{ fontSize: 16, fontWeight: 900, color: '#166534', marginTop: 4 }}>३ × (-४) = -१२ ∈ ℤ</div>
-                <div style={{ fontSize: 11, color: '#16A34A', marginTop: 2 }}>✓ पूर्णाङ्क नै हो</div>
+                <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>Multiplication</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: '#166534', marginTop: 4 }}>3 × (-4) = -12 ∈ ℤ</div>
+                <div style={{ fontSize: 11, color: '#16A34A', marginTop: 2 }}>✓ It is an integer</div>
               </div>
 
               <div style={{ background: '#FEE2E2', padding: 16, borderRadius: 14, border: '2px solid #DC2626' }}>
-                <div style={{ fontSize: 13, fontWeight: 800, color: '#991B1B' }}>भाग (Division)</div>
-                <div style={{ fontSize: 16, fontWeight: 900, color: '#7F1D1D', marginTop: 4 }}>३ ÷ (-४) = -३/४ ∉ ℤ</div>
-                <div style={{ fontSize: 11, color: '#DC2626', fontWeight: 800, marginTop: 2 }}>✗ पूर्णाङ्क होइन! (परिमेय सङ्ख्या)</div>
+                <div style={{ fontSize: 13, fontWeight: 800, color: '#991B1B' }}>Division</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: '#7F1D1D', marginTop: 4 }}>3 ÷ (-4) = -3/4 ∉ ℤ</div>
+                <div style={{ fontSize: 11, color: '#DC2626', fontWeight: 800, marginTop: 2 }}>✗ Not an integer!</div>
               </div>
             </div>
 
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', padding: 18, borderRadius: 16 }}>
               <div style={{ fontSize: 14, fontWeight: 800, color: '#0F766E', marginBottom: 4 }}>
-                💡 निष्कर्ष:
+                💡 Conclusion:
               </div>
               <div style={{ fontSize: 14, color: '#334155', lineHeight: 1.6 }}>
-                दुई पूर्णाङ्कहरूको भाग सधैं पूर्णाङ्क हुँदैन। यस्ता सङ्ख्याहरूलाई व्यक्त गर्न <strong>परिमेय सङ्ख्या (Q)</strong> को आवश्यकता पर्दछ।
+                The quotient of two integers is not always an integer. To express such numbers, we need <strong>rational numbers (Q)</strong> .
               </div>
             </div>
           </div>
@@ -173,13 +173,13 @@ export const RationalNumberDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
         {activeTab === 'builder' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <h3 style={{ margin: '0 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('a/b परिमेय सङ्ख्या निर्माणशाला (जहाँ b ≠ ०)', 'Rational Number Builder: a/b (where b ≠ 0)')}
+              {L('a/b परिमेय सङ्ख्या निर्माणशाला (जहाँ b ≠ 0)', 'Rational Number Builder: a/b (where b ≠ 0)')}
             </h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 20 }}>
               <div style={{ background: '#F8FAFC', padding: 18, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                 <label style={{ fontSize: 13, fontWeight: 800, color: '#334155', display: 'block', marginBottom: 8 }}>
-                  अंश (Numerator a): <strong>{numA > 0 ? `+${isNe ? toNp(numA) : numA}` : isNe ? toNp(numA) : numA}</strong>
+                  Numerator (a): <strong>{numA > 0 ? `+${isNe ? toNp(numA) : numA}` : isNe ? toNp(numA) : numA}</strong>
                 </label>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                   {[-4, -3, -1, 0, 1, 3, 5].map((val) => (
@@ -205,7 +205,7 @@ export const RationalNumberDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
 
               <div style={{ background: '#F8FAFC', padding: 18, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                 <label style={{ fontSize: 13, fontWeight: 800, color: '#334155', display: 'block', marginBottom: 8 }}>
-                  हर (Denominator b ≠ 0): <strong>{denB > 0 ? `+${isNe ? toNp(denB) : denB}` : isNe ? toNp(denB) : denB}</strong>
+                  Denominator (b ≠ 0): <strong>{denB > 0 ? `+${isNe ? toNp(denB) : denB}` : isNe ? toNp(denB) : denB}</strong>
                 </label>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                   {[-5, -4, -2, 2, 3, 4, 7].map((val) => (
@@ -233,7 +233,7 @@ export const RationalNumberDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
             {/* Fraction result */}
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', borderRadius: 16, padding: 24, textAlign: 'center' }}>
               <div style={{ fontSize: 13, fontWeight: 800, color: '#0F766E', marginBottom: 8 }}>
-                {L('निर्मित परिमेय सङ्ख्या (Rational Number):', 'Formed Rational Number:')}
+                {L('निर्मित Rational number:', 'Formed Rational Number:')}
               </div>
               <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', fontSize: 28, fontWeight: 900, color: '#0F172A' }}>
                 <span>{numA > 0 ? `+${isNe ? toNp(numA) : numA}` : isNe ? toNp(numA) : numA}</span>
@@ -251,7 +251,7 @@ export const RationalNumberDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
         {activeTab === 'nested_sets' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक समावेशी सम्बन्ध (पृष्ठ ६९)', 'Textbook Inclusion Model (Page 69)')}
+              {L('पाठ्यपुस्तक समावेशी सम्बन्ध (पृष्ठ 69)', 'Textbook Inclusion Model (Page 69)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
               {L('सङ्ख्या प्रणालीहरूको सम्बन्ध: N ⊂ W ⊂ Z ⊂ Q', 'Number System Relation: N ⊂ W ⊂ Z ⊂ Q')}
@@ -260,19 +260,19 @@ export const RationalNumberDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
             {/* Visual Nested Boxes */}
             <div style={{ padding: 20, background: '#F0FDF4', border: '2px solid #86EFAC', borderRadius: 18 }}>
               <div style={{ fontSize: 14, fontWeight: 900, color: '#166534', marginBottom: 8 }}>
-                Q: परिमेय सङ्ख्याहरू (Rational Numbers: ..., -3/4, -1, 0, 1/2, 2, 5/3, ...)
+                Q: Rational numbers ( ..., -3/4, -1, 0, 1/2, 2, 5/3, ...)
               </div>
               <div style={{ padding: 16, background: '#EFF6FF', border: '2px solid #93C5FD', borderRadius: 14, marginLeft: 20 }}>
                 <div style={{ fontSize: 13, fontWeight: 900, color: '#1E40AF', marginBottom: 8 }}>
-                  Z: पूर्णाङ्कहरू (Integers: ..., -3, -2, -1, 0, 1, 2, 3, ...)
+                  Z: Integers ( ..., -3, -2, -1, 0, 1, 2, 3, ...)
                 </div>
                 <div style={{ padding: 14, background: '#FEF3C7', border: '2px solid #FDE68A', borderRadius: 12, marginLeft: 20 }}>
                   <div style={{ fontSize: 12, fontWeight: 900, color: '#92400E', marginBottom: 6 }}>
-                    W: पूर्ण सङ्ख्याहरू (Whole Numbers: 0, 1, 2, 3, ...)
+                    W: Whole numbers ( 0, 1, 2, 3, ...)
                   </div>
                   <div style={{ padding: 12, background: '#FFFFFF', border: '2px solid #CBD5E1', borderRadius: 10, marginLeft: 20 }}>
                     <div style={{ fontSize: 12, fontWeight: 900, color: '#0F172A' }}>
-                      N: प्राकृतिक सङ्ख्याहरू (Natural Numbers: 1, 2, 3, 4, ...)
+                      N: Natural numbers ( 1, 2, 3, 4, ...)
                     </div>
                   </div>
                 </div>
@@ -289,18 +289,18 @@ export const RationalNumberDiscoveryLab: React.FC<{ onBackToLibrary?: () => void
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14 }}>
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
-                <div style={{ fontSize: 16, fontWeight: 900, color: '#0F766E' }}>० = ०/१ (b ≠ ०)</div>
-                <div style={{ fontSize: 13, color: '#475569', marginTop: 4 }}>शून्यलाई ०/१, ०/२ लेख्न सकिने भएकाले यो परिमेय सङ्ख्या हो।</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: '#0F766E' }}>0 = 0/1 (b ≠ 0)</div>
+                <div style={{ fontSize: 13, color: '#475569', marginTop: 4 }}>Zero can be written as 0/1, 0/2, so it is a rational number.</div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
-                <div style={{ fontSize: 16, fontWeight: 900, color: '#0F766E' }}>५ = ५/१ (b ≠ ०)</div>
-                <div style={{ fontSize: 13, color: '#475569', marginTop: 4 }}>हरेक धनात्मक पूर्णाङ्कको हरमा १ लेख्न सकिन्छ।</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: '#0F766E' }}>5 = 5/1 (b ≠ 0)</div>
+                <div style={{ fontSize: 13, color: '#475569', marginTop: 4 }}>Every positive integer can be written with 1 in the denominator.</div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
-                <div style={{ fontSize: 16, fontWeight: 900, color: '#0F766E' }}>-७ = -७/१ (b ≠ ०)</div>
-                <div style={{ fontSize: 13, color: '#475569', marginTop: 4 }}>हरेक ऋणात्मक पूर्णाङ्क पनि परिमेय सङ्ख्या हो।</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: '#0F766E' }}>-7 = -7/1 (b ≠ 0)</div>
+                <div style={{ fontSize: 13, color: '#475569', marginTop: 4 }}>Every negative integer is also a rational number.</div>
               </div>
             </div>
           </div>

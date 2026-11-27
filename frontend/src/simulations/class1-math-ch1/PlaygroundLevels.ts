@@ -58,8 +58,8 @@ export const MODE_1_INSIDE_OUTSIDE_TASKS: SpatialPlaygroundTask[] = [
     mode: 1,
     titleEn: 'Cat Inside the House',
     titleNe: 'बिरालो घरभित्र',
-    instructionEn: 'Put the gentle cat INSIDE the village house! (भित्र)',
-    instructionNe: 'बिरालोलाई घरभित्र राख्नुहोस्! (भित्र)',
+    instructionEn: 'Put the gentle cat INSIDE the village house!',
+    instructionNe: 'बिरालोलाई घरभित्र राख्नुहोस्!',
     targetObject: 'cat',
     targetPosition: 'inside_house',
     targetZoneKey: 'house',
@@ -67,7 +67,7 @@ export const MODE_1_INSIDE_OUTSIDE_TASKS: SpatialPlaygroundTask[] = [
     hint1Ne: 'घरको ढोका खुल्ला छ। बिरालोलाई कोठाभित्र लैजानुहोस्।',
     hint2En: 'Move the cat past the doorway into the warm room.',
     hint2Ne: 'बिरालोलाई ढोकाबाट भित्र कोठाको गलैँचामा राख्नुहोस्।',
-    successMessageEn: 'Wonderful! The cat is resting safely inside the house (भित्र)!',
+    successMessageEn: 'Wonderful! The cat is resting safely inside the house!',
     successMessageNe: 'सबास! बिरालो सुरक्षित रूपमा घरभित्र (भित्र) बस्यो!',
   },
   {
@@ -75,8 +75,8 @@ export const MODE_1_INSIDE_OUTSIDE_TASKS: SpatialPlaygroundTask[] = [
     mode: 1,
     titleEn: 'Dog Outside on the Veranda',
     titleNe: 'कुकुर पिँढीमा बाहिर',
-    instructionEn: 'Put the friendly dog OUTSIDE on the veranda! (बाहिर)',
-    instructionNe: 'कुकुरलाई घरबाहिर पिँढीमा राख्नुहोस्! (बाहिर)',
+    instructionEn: 'Put the friendly dog OUTSIDE on the veranda!',
+    instructionNe: 'कुकुरलाई घरबाहिर पिँढीमा राख्नुहोस्!',
     targetObject: 'dog',
     targetPosition: 'outside_house',
     targetZoneKey: 'house',
@@ -84,7 +84,7 @@ export const MODE_1_INSIDE_OUTSIDE_TASKS: SpatialPlaygroundTask[] = [
     hint1Ne: 'बाहिर भनेको कोठाभित्र होइन, पिँढी वा हरियो बगैँचामा हो।',
     hint2En: 'Place the dog outside the front doorway.',
     hint2Ne: 'कुकुरलाई घरको ढोकाअगाडिको पिँढीमा राख्नुहोस्।',
-    successMessageEn: 'Great job! The faithful dog is sitting outside on the veranda (बाहिर)!',
+    successMessageEn: 'Great job! The faithful dog is sitting outside on the veranda!',
     successMessageNe: 'धेरै राम्रो! कुकुर घरबाहिर पिँढीमा (बाहिर) बसेको छ!',
   },
   {
@@ -92,8 +92,8 @@ export const MODE_1_INSIDE_OUTSIDE_TASKS: SpatialPlaygroundTask[] = [
     mode: 1,
     titleEn: 'Ball Inside the Basket',
     titleNe: 'बल टोकरीभित्र',
-    instructionEn: 'Put the red play ball INSIDE the woven bamboo basket (डोको)! (भित्र)',
-    instructionNe: 'रातो बललाई बाँसको टोकरीभित्र राख्नुहोस्! (भित्र)',
+    instructionEn: 'Put the red play ball INSIDE the woven bamboo basket!',
+    instructionNe: 'रातो बललाई बाँसको टोकरीभित्र राख्नुहोस्!',
     targetObject: 'ball',
     targetPosition: 'inside_basket',
     targetZoneKey: 'basket',
@@ -101,7 +101,7 @@ export const MODE_1_INSIDE_OUTSIDE_TASKS: SpatialPlaygroundTask[] = [
     hint1Ne: 'रातो बललाई बाँसको टोकरीको मुखभित्र हाल्नुहोस्।',
     hint2En: 'The basket sits in the garden. Drop the ball right inside.',
     hint2Ne: 'टोकरी बगैँचामा छ। बललाई टोकरीको भित्र खसाल्नुहोस्।',
-    successMessageEn: 'Excellent! The ball is stored inside the basket (भित्र)!',
+    successMessageEn: 'Excellent! The ball is stored inside the basket!',
     successMessageNe: 'उत्कृष्ट! बल बाँसको टोकरीभित्र (भित्र) राखियो!',
   },
   {
@@ -109,8 +109,8 @@ export const MODE_1_INSIDE_OUTSIDE_TASKS: SpatialPlaygroundTask[] = [
     mode: 1,
     titleEn: 'Teddy Bear Inside the Toy Box',
     titleNe: 'गुडिया बाकसभित्र',
-    instructionEn: 'Put the cuddly teddy bear INSIDE the wooden toy box! (भित्र)',
-    instructionNe: 'गुडियालाई काठको खेलौना बाकसभित्र राख्नुहोस्! (भित्र)',
+    instructionEn: 'Put the cuddly teddy bear INSIDE the wooden toy box!',
+    instructionNe: 'गुडियालाई काठको खेलौना बाकसभित्र राख्नुहोस्!',
     targetObject: 'teddy',
     targetPosition: 'inside_box',
     targetZoneKey: 'box',
@@ -118,7 +118,7 @@ export const MODE_1_INSIDE_OUTSIDE_TASKS: SpatialPlaygroundTask[] = [
     hint1Ne: 'काठको बाकसको ढक्कन खुल्छ। गुडियालाई बाकसभित्र हाल्नुहोस्।',
     hint2En: 'Move the teddy over the wooden box and drop it inside.',
     hint2Ne: 'गुडियालाई बाकसको भित्री भागमा राख्नुहोस्।',
-    successMessageEn: 'Well done! The teddy bear is neatly packed inside the toy box (भित्र)!',
+    successMessageEn: 'Well done! The teddy bear is neatly packed inside the toy box!',
     successMessageNe: 'सबास! गुडिया बाकसभित्र (भित्र) सुरक्षित भयो!',
   },
   {
@@ -126,8 +126,8 @@ export const MODE_1_INSIDE_OUTSIDE_TASKS: SpatialPlaygroundTask[] = [
     mode: 1,
     titleEn: 'Toy Car Outside on the Path',
     titleNe: 'खेलौना गाडी बाहिर बाटोमा',
-    instructionEn: 'Put the little toy car OUTSIDE on the grassy path! (बाहिर)',
-    instructionNe: 'खेलौना गाडीलाई बाकसबाहिर घाँसमा राख्नुहोस्! (बाहिर)',
+    instructionEn: 'Put the little toy car OUTSIDE on the grassy path!',
+    instructionNe: 'खेलौना गाडीलाई बाकसबाहिर घाँसमा राख्नुहोस्!',
     targetObject: 'toyCar',
     targetPosition: 'outside_box',
     targetZoneKey: 'box',
@@ -135,7 +135,7 @@ export const MODE_1_INSIDE_OUTSIDE_TASKS: SpatialPlaygroundTask[] = [
     hint1Ne: 'गाडीलाई कुनै बाकसमा नराखी बाहिर हरियो घाँसमा राख्नुहोस्।',
     hint2En: 'Outside means open ground in the sunny playground.',
     hint2Ne: 'बाहिर भनेको खुला जमिनमा हो।',
-    successMessageEn: 'Super! The toy car is zooming outside on the lawn (बाहिर)!',
+    successMessageEn: 'Super! The toy car is zooming outside on the lawn!',
     successMessageNe: 'अति राम्रो! गाडी बाहिर घाँसमा (बाहिर) गुड्न तयार छ!',
   },
 ];
@@ -146,8 +146,8 @@ export const MODE_2_ABOVE_BELOW_TASKS: SpatialPlaygroundTask[] = [
     mode: 2,
     titleEn: 'Bird Above the Pine Tree',
     titleNe: 'चरा रूखमाथि',
-    instructionEn: 'Fly the blue mountain bird ABOVE the tall pine tree! (माथि)',
-    instructionNe: 'नीलो चरालाई अग्लो सल्लाको रूखमाथि उडाउनुहोस्! (माथि)',
+    instructionEn: 'Fly the blue mountain bird ABOVE the tall pine tree!',
+    instructionNe: 'नीलो चरालाई अग्लो सल्लाको रूखमाथि उडाउनुहोस्!',
     targetObject: 'bird',
     targetPosition: 'above_tree',
     targetZoneKey: 'tree',
@@ -155,7 +155,7 @@ export const MODE_2_ABOVE_BELOW_TASKS: SpatialPlaygroundTask[] = [
     hint1Ne: 'माथि भनेको उचाइमा हो। चरालाई रूखको माथिल्लो हाँगातिर लैजानुहोस्।',
     hint2En: 'Perch the bird on top of the green pine tree.',
     hint2Ne: 'चरालाई रूखको टुप्पोमा माथि राख्नुहोस्।',
-    successMessageEn: 'Wonderful! The blue bird is singing high above the tree (माथि)!',
+    successMessageEn: 'Wonderful! The blue bird is singing high above the tree!',
     successMessageNe: 'सबास! नीलो चरा रूखको माथि (माथि) सुरिलो गाउँदै छ!',
   },
   {
@@ -163,8 +163,8 @@ export const MODE_2_ABOVE_BELOW_TASKS: SpatialPlaygroundTask[] = [
     mode: 2,
     titleEn: 'Rabbit Below the Tree',
     titleNe: 'खरायो रूखमुनि तल',
-    instructionEn: 'Put the white rabbit on the ground BELOW the tree! (तल)',
-    instructionNe: 'सेतो खरायोलाई रूखको छहारीमुनि तल राख्नुहोस्! (तल)',
+    instructionEn: 'Put the white rabbit on the ground BELOW the tree!',
+    instructionNe: 'सेतो खरायोलाई रूखको छहारीमुनि तल राख्नुहोस्!',
     targetObject: 'rabbit',
     targetPosition: 'below_tree',
     targetZoneKey: 'tree',
@@ -172,7 +172,7 @@ export const MODE_2_ABOVE_BELOW_TASKS: SpatialPlaygroundTask[] = [
     hint1Ne: 'तल भनेको जमिनमा छहारीमुनि हो। खरायोलाई रूखको फेदमा राख्नुहोस्।',
     hint2En: 'The rabbit rests beneath the tall branches on the ground.',
     hint2Ne: 'खरायो रूखमुनि घाँसमा बस्छ।',
-    successMessageEn: 'Perfect! The rabbit is resting coolly below the tree branches (तल)!',
+    successMessageEn: 'Perfect! The rabbit is resting coolly below the tree branches!',
     successMessageNe: 'धेरै राम्रो! खरायो रूखमुनि तल (तल) आनन्दले बस्यो!',
   },
   {
@@ -180,8 +180,8 @@ export const MODE_2_ABOVE_BELOW_TASKS: SpatialPlaygroundTask[] = [
     mode: 2,
     titleEn: 'Water Pitcher Above the Table',
     titleNe: 'गाग्री टेबलमाथि',
-    instructionEn: 'Place the brass water pitcher (गाग्री) ABOVE on the wooden table! (माथि)',
-    instructionNe: 'पित्तलको गाग्रीलाई काठको टेबलमाथि राख्नुहोस्! (माथि)',
+    instructionEn: 'Place the brass water pitcher ABOVE on the wooden table!',
+    instructionNe: 'पित्तलको गाग्रीलाई काठको टेबलमाथि राख्नुहोस्!',
     targetObject: 'waterPot',
     targetPosition: 'above_table',
     targetZoneKey: 'table_above',
@@ -189,7 +189,7 @@ export const MODE_2_ABOVE_BELOW_TASKS: SpatialPlaygroundTask[] = [
     hint1Ne: 'टेबलमाथि भनेको टेबलको माथिल्लो काठको सतहमा हो।',
     hint2En: 'Rest the pot right on top of the study table.',
     hint2Ne: 'गाग्रीलाई टेबलको माथि राख्नुहोस्।',
-    successMessageEn: 'Splendid! The traditional pitcher is proudly placed above the table (माथि)!',
+    successMessageEn: 'Splendid! The traditional pitcher is proudly placed above the table!',
     successMessageNe: 'उत्कृष्ट! गाग्री टेबलमाथि (माथि) सुरक्षित छ!',
   },
   {
@@ -197,8 +197,8 @@ export const MODE_2_ABOVE_BELOW_TASKS: SpatialPlaygroundTask[] = [
     mode: 2,
     titleEn: 'School Bag Below the Table',
     titleNe: 'झोला टेबलमुनि तल',
-    instructionEn: 'Put the blue school bag BELOW the study table! (तल)',
-    instructionNe: 'नीलो स्कुल झोलालाई टेबलमुनि तल राख्नुहोस्! (तल)',
+    instructionEn: 'Put the blue school bag BELOW the study table!',
+    instructionNe: 'नीलो स्कुल झोलालाई टेबलमुनि तल राख्नुहोस्!',
     targetObject: 'bag',
     targetPosition: 'below_table',
     targetZoneKey: 'table_below',
@@ -206,7 +206,7 @@ export const MODE_2_ABOVE_BELOW_TASKS: SpatialPlaygroundTask[] = [
     hint1Ne: 'तल भनेको टेबलको काठमुनि जमिनको भागमा हो।',
     hint2En: 'Slide the backpack underneath the four table legs.',
     hint2Ne: 'झोलालाई टेबलको मुनि जमिनमा राख्नुहोस्।',
-    successMessageEn: 'Great! The school bag is neatly stored below the table (तल)!',
+    successMessageEn: 'Great! The school bag is neatly stored below the table!',
     successMessageNe: 'सबास! स्कुल झोला टेबलमुनि तल (तल) राखियो!',
   },
   {
@@ -214,8 +214,8 @@ export const MODE_2_ABOVE_BELOW_TASKS: SpatialPlaygroundTask[] = [
     mode: 2,
     titleEn: 'Butterfly Above the Flower',
     titleNe: 'पुतली फूलमाथि',
-    instructionEn: 'Fly the bright butterfly ABOVE the yellow sunflower! (माथि)',
-    instructionNe: 'रङ्गीबिरङ्गी पुतलीलाई पहेँलो फूलमाथि उडाउनुहोस्! (माथि)',
+    instructionEn: 'Fly the bright butterfly ABOVE the yellow sunflower!',
+    instructionNe: 'रङ्गीबिरङ्गी पुतलीलाई पहेँलो फूलमाथि उडाउनुहोस्!',
     targetObject: 'butterfly',
     targetPosition: 'above_flower',
     targetZoneKey: 'flower',
@@ -223,7 +223,7 @@ export const MODE_2_ABOVE_BELOW_TASKS: SpatialPlaygroundTask[] = [
     hint1Ne: 'फूलमाथि भनेको फूलको पहेँलो पत्रदलभन्दा माथि हावामा हो।',
     hint2En: 'Fly the butterfly right above the blooming flower in the garden.',
     hint2Ne: 'पुतलीलाई बगैँचाको ठूलो फूलमाथि उडाउनुहोस्।',
-    successMessageEn: 'Magical! The colorful butterfly is dancing above the sunflower (माथि)!',
+    successMessageEn: 'Magical! The colorful butterfly is dancing above the sunflower!',
     successMessageNe: 'अति सुन्दर! पुतली पहेँलो फूलमाथि (माथि) उड्दै छ!',
   },
 ];
@@ -247,7 +247,7 @@ export const DISCOVERY_OBJECT_ITEMS = [
 ];
 
 export const PLAYGROUND_LEVELS: SimulationLevel[] = [
-  // ── LEVEL 1: INSIDE AND OUTSIDE (भित्र र बाहिर) ───────────────
+  // ── LEVEL 1: INSIDE AND OUTSIDE ───────────────
 
   {
     levelNumber: 1,
@@ -270,8 +270,8 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L1_S2',
-        instructionEn: 'Put the cat inside the house! (भित्र)',
-        instructionNe: 'बिरालोलाई घरभित्र राख्नुहोस्! (भित्र)',
+        instructionEn: 'Put the cat inside the house!',
+        instructionNe: 'बिरालोलाई घरभित्र राख्नुहोस्!',
         targetObject: 'cat',
         targetPosition: 'inside_house',
         hintEn: 'Click or drag the cat into the doorway of the house.',
@@ -279,8 +279,8 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L1_S3',
-        instructionEn: 'Put the dog outside on the veranda! (बाहिर)',
-        instructionNe: 'कुकुरलाई घरबाहिर पिँढीमा राख्नुहोस्! (बाहिर)',
+        instructionEn: 'Put the dog outside on the veranda!',
+        instructionNe: 'कुकुरलाई घरबाहिर पिँढीमा राख्नुहोस्!',
         targetObject: 'dog',
         targetPosition: 'outside_house',
         hintEn: 'Place the dog outside in the garden or veranda.',
@@ -288,8 +288,8 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L1_S4',
-        instructionEn: 'Put the red ball inside the basket! (भित्र)',
-        instructionNe: 'रातो बललाई टोकरीभित्र राख्नुहोस्! (भित्र)',
+        instructionEn: 'Put the red ball inside the basket!',
+        instructionNe: 'रातो बललाई टोकरीभित्र राख्नुहोस्!',
         targetObject: 'ball',
         targetPosition: 'inside_basket',
         hintEn: 'Move the ball into the woven bamboo basket.',
@@ -297,8 +297,8 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L1_S5',
-        instructionEn: 'Put the red ball outside on the grass! (बाहिर)',
-        instructionNe: 'रातो बललाई टोकरीबाहिर घाँसमा राख्नुहोस्! (बाहिर)',
+        instructionEn: 'Put the red ball outside on the grass!',
+        instructionNe: 'रातो बललाई टोकरीबाहिर घाँसमा राख्नुहोस्!',
         targetObject: 'ball',
         targetPosition: 'outside_basket',
         hintEn: 'Take the ball out of the basket onto the lawn.',
@@ -313,7 +313,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
         options: [
           {
             id: 'opt_in',
-            labelEn: 'Inside the house (घरभित्र)',
+            labelEn: 'Inside the house',
             labelNe: 'घरभित्र',
             isCorrect: true,
             explanationEn: 'Correct! The cat is inside the house.',
@@ -321,7 +321,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
           },
           {
             id: 'opt_out',
-            labelEn: 'Outside the house (घरबाहिर)',
+            labelEn: 'Outside the house',
             labelNe: 'घरबाहिर',
             isCorrect: false,
             explanationEn: 'The cat is protected inside the room, not outside.',
@@ -334,7 +334,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
     ],
   },
 
-  // ── LEVEL 2: ABOVE AND BELOW (माथि र तल) ─────────────────────
+  // ── LEVEL 2: ABOVE AND BELOW ─────────────────────
   {
     levelNumber: 2,
     titleEn: 'Above and Below',
@@ -356,8 +356,8 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L2_S2',
-        instructionEn: 'Fly the blue bird above the pine tree! (माथि)',
-        instructionNe: 'नीलो चरालाई रूखमाथि उडाउनुहोस्! (माथि)',
+        instructionEn: 'Fly the blue bird above the pine tree!',
+        instructionNe: 'नीलो चरालाई रूखमाथि उडाउनुहोस्!',
         targetObject: 'bird',
         targetPosition: 'above_tree',
         hintEn: 'Send the bird to perch high above the tree branches.',
@@ -365,8 +365,8 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L2_S3',
-        instructionEn: 'Put the play ball below the wooden table! (तल)',
-        instructionNe: 'बललाई काठको टेबलमुनि तल राख्नुहोस्! (तल)',
+        instructionEn: 'Put the play ball below the wooden table!',
+        instructionNe: 'बललाई काठको टेबलमुनि तल राख्नुहोस्!',
         targetObject: 'ball',
         targetPosition: 'below_table',
         hintEn: 'Roll the ball underneath the table.',
@@ -374,8 +374,8 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L2_S4',
-        instructionEn: 'Place the brass water pitcher above the table! (माथि)',
-        instructionNe: 'पित्तलको गाग्रीलाई टेबलमाथि राख्नुहोस्! (माथि)',
+        instructionEn: 'Place the brass water pitcher above the table!',
+        instructionNe: 'पित्तलको गाग्रीलाई टेबलमाथि राख्नुहोस्!',
         targetObject: 'waterPot',
         targetPosition: 'above_table',
         hintEn: 'Place the water pot on the top surface of the table.',
@@ -383,8 +383,8 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L2_S5',
-        instructionEn: 'Put the blue school bag below the table! (तल)',
-        instructionNe: 'नीलो स्कुल झोलालाई टेबलमुनि तल राख्नुहोस्! (तल)',
+        instructionEn: 'Put the blue school bag below the table!',
+        instructionNe: 'नीलो स्कुल झोलालाई टेबलमुनि तल राख्नुहोस्!',
         targetObject: 'bag',
         targetPosition: 'below_table',
         hintEn: 'Store the school bag on the ground under the table.',
@@ -393,7 +393,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
     ],
   },
 
-  // ── LEVEL 3: BIG AND SMALL, TALL AND SHORT (ठूलो र सानो, अग्लो र होचो) ──
+  // ── LEVEL 3: BIG AND SMALL, TALL AND SHORT ──
   {
     levelNumber: 3,
     titleEn: 'Big and Small, Tall and Short',
@@ -405,15 +405,15 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
     steps: [
       {
         id: 'L3_S1',
-        instructionEn: 'Which elephant is bigger in overall size? (ठूलो)',
-        instructionNe: 'कुन हात्ती आकारमा ठूलो छ? (ठूलो)',
+        instructionEn: 'Which elephant is bigger in overall size?',
+        instructionNe: 'कुन हात्ती आकारमा ठूलो छ?',
         targetObject: 'choice',
         targetPosition: 'choice',
         demoAction: 'elephants',
         options: [
           {
             id: 'opt_big_el',
-            labelEn: 'Big Mother Elephant (ठूलो हात्ती)',
+            labelEn: 'Big Mother Elephant',
             labelNe: 'ठूलो हात्ती',
             isCorrect: true,
             explanationEn: 'Correct! The mother elephant has a much bigger body and size.',
@@ -421,7 +421,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
           },
           {
             id: 'opt_small_el',
-            labelEn: 'Baby Elephant (सानो हात्ती)',
+            labelEn: 'Baby Elephant',
             labelNe: 'सानो हात्ती',
             isCorrect: false,
             explanationEn: 'The baby elephant is smaller in size.',
@@ -433,14 +433,14 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L3_S2',
-        instructionEn: 'Which object is smaller? (सानो)',
-        instructionNe: 'कुन वस्तु सानो छ? (सानो)',
+        instructionEn: 'Which object is smaller?',
+        instructionNe: 'कुन वस्तु सानो छ?',
         targetObject: 'choice',
         targetPosition: 'choice',
         options: [
           {
             id: 'opt_small_marble',
-            labelEn: 'Small Glass Marble (सानो गुच्चा)',
+            labelEn: 'Small Glass Marble',
             labelNe: 'सानो गुच्चा',
             isCorrect: true,
             explanationEn: 'Very good! The marble is much smaller than the football.',
@@ -448,7 +448,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
           },
           {
             id: 'opt_big_football',
-            labelEn: 'Large Football (ठूलो फुटबल)',
+            labelEn: 'Large Football',
             labelNe: 'ठूलो फुटबल',
             isCorrect: false,
             explanationEn: 'The football is big, not small.',
@@ -460,14 +460,14 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L3_S3',
-        instructionEn: 'Compare heights: which tree is TALLER? (अग्लो)',
-        instructionNe: 'उचाइ तुलना गर्नुहोस्: कुन रूख अग्लो छ? (अग्लो)',
+        instructionEn: 'Compare heights: which tree is TALLER?',
+        instructionNe: 'उचाइ तुलना गर्नुहोस्: कुन रूख अग्लो छ?',
         targetObject: 'choice',
         targetPosition: 'choice',
         options: [
           {
             id: 'opt_tall_pine',
-            labelEn: 'Tall Himalayan Pine Tree (अग्लो सल्लाको रूख)',
+            labelEn: 'Tall Himalayan Pine Tree',
             labelNe: 'अग्लो सल्लाको रूख',
             isCorrect: true,
             explanationEn: 'Excellent! The pine tree reaches high up into the sky.',
@@ -475,7 +475,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
           },
           {
             id: 'opt_short_bush',
-            labelEn: 'Short Marigold Bush (होचो फूलको बोट)',
+            labelEn: 'Short Marigold Bush',
             labelNe: 'होचो फूलको बोट',
             isCorrect: false,
             explanationEn: 'The flower bush is short and close to the ground.',
@@ -487,22 +487,22 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L3_S4',
-        instructionEn: 'Which building is SHORTER in height? (होचो)',
-        instructionNe: 'कुन घर उचाइमा होचो छ? (होचो)',
+        instructionEn: 'Which building is SHORTER in height?',
+        instructionNe: 'कुन घर उचाइमा होचो छ?',
         targetObject: 'choice',
         targetPosition: 'choice',
         options: [
           {
             id: 'opt_short_shed',
-            labelEn: 'Short Garden Shed (होचो छाप्रो)',
+            labelEn: 'Short Garden Shed',
             labelNe: 'होचो छाप्रो',
             isCorrect: true,
-            explanationEn: 'Correct! The small shed has low height (होचो).',
+            explanationEn: 'Correct! The small shed has low height.',
             explanationNe: 'सबास! छाप्रोको उचाइ कम छ, त्यसैले यो होचो छ।',
           },
           {
             id: 'opt_tall_house',
-            labelEn: 'Two-Storey Village House (अग्लो दुईतले घर)',
+            labelEn: 'Two-Storey Village House',
             labelNe: 'अग्लो दुईतले घर',
             isCorrect: false,
             explanationEn: 'The two-storey house is tall, not short.',
@@ -515,7 +515,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
     ],
   },
 
-  // ── LEVEL 4: LONG AND SHORT (लामो र छोटो) ────────────────────
+  // ── LEVEL 4: LONG AND SHORT ────────────────────
   {
     levelNumber: 4,
     titleEn: 'Long and Short',
@@ -527,15 +527,15 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
     steps: [
       {
         id: 'L4_S1',
-        instructionEn: 'Which wooden pencil is LONGER? (लामो)',
-        instructionNe: 'कुन सिसाकलम लामो छ? (लामो)',
+        instructionEn: 'Which wooden pencil is LONGER?',
+        instructionNe: 'कुन सिसाकलम लामो छ?',
         targetObject: 'choice',
         targetPosition: 'choice',
         demoAction: 'pencils',
         options: [
           {
             id: 'opt_long_pencil',
-            labelEn: 'Long Yellow Pencil (लामो पहेँलो सिसाकलम)',
+            labelEn: 'Long Yellow Pencil',
             labelNe: 'लामो पहेँलो सिसाकलम',
             isCorrect: true,
             explanationEn: 'Great job! The yellow pencil stretches farther in length.',
@@ -543,7 +543,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
           },
           {
             id: 'opt_short_pencil',
-            labelEn: 'Short Sharpened Pencil (छोटो सिसाकलम)',
+            labelEn: 'Short Sharpened Pencil',
             labelNe: 'छोटो सिसाकलम',
             isCorrect: false,
             explanationEn: 'This pencil is short in length.',
@@ -555,14 +555,14 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L4_S2',
-        instructionEn: 'Which jute rope is SHORTER? (छोटो)',
-        instructionNe: 'कुन डोरी छोटो छ? (छोटो)',
+        instructionEn: 'Which jute rope is SHORTER?',
+        instructionNe: 'कुन डोरी छोटो छ?',
         targetObject: 'choice',
         targetPosition: 'choice',
         options: [
           {
             id: 'opt_short_rope',
-            labelEn: 'Short Jump Rope (छोटो डोरी)',
+            labelEn: 'Short Jump Rope',
             labelNe: 'छोटो डोरी',
             isCorrect: true,
             explanationEn: 'Correct! This rope has a shorter length.',
@@ -570,7 +570,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
           },
           {
             id: 'opt_long_rope',
-            labelEn: 'Long Tug-of-War Rope (लामो डोरी)',
+            labelEn: 'Long Tug-of-War Rope',
             labelNe: 'लामो डोरी',
             isCorrect: false,
             explanationEn: 'This rope extends very far across the ground.',
@@ -589,7 +589,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
         options: [
           {
             id: 'opt_long_path',
-            labelEn: 'Winding Mountain Road (लामो डाँडाको बाटो)',
+            labelEn: 'Winding Mountain Road',
             labelNe: 'लामो डाँडाको बाटो',
             isCorrect: true,
             explanationEn: 'Correct! The winding path extends all the way through the village.',
@@ -597,7 +597,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
           },
           {
             id: 'opt_short_path',
-            labelEn: 'Short Garden Courtyard Path (छोटो आँगनको बाटो)',
+            labelEn: 'Short Garden Courtyard Path',
             labelNe: 'छोटो आँगनको बाटो',
             isCorrect: false,
             explanationEn: 'The courtyard path ends quickly.',
@@ -610,7 +610,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
     ],
   },
 
-  // ── LEVEL 5: DIRECTION AND DISTANCE (दायाँ, बायाँ, अगाडि, बिच, पछाडि, नजिक, टाढा) ──
+  // ── LEVEL 5: DIRECTION AND DISTANCE ──
   {
     levelNumber: 5,
     titleEn: 'Direction and Distance',
@@ -622,8 +622,8 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
     steps: [
       {
         id: 'L5_S1',
-        instructionEn: 'Guide the child to the RIGHT side! (दायाँ)',
-        instructionNe: 'बालकलाई दायाँतर्फ लैजानुहोस्! (दायाँ)',
+        instructionEn: 'Guide the child to the RIGHT side!',
+        instructionNe: 'बालकलाई दायाँतर्फ लैजानुहोस्!',
         targetObject: 'child',
         targetPosition: 'right',
         hintEn: 'Move towards the right side of your screen.',
@@ -631,8 +631,8 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L5_S2',
-        instructionEn: 'Guide the child to the LEFT side! (बायाँ)',
-        instructionNe: 'बालकलाई बायाँतर्फ लैजानुहोस्! (बायाँ)',
+        instructionEn: 'Guide the child to the LEFT side!',
+        instructionNe: 'बालकलाई बायाँतर्फ लैजानुहोस्!',
         targetObject: 'child',
         targetPosition: 'left',
         hintEn: 'Move towards the left side of your screen.',
@@ -640,15 +640,15 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L5_S3',
-        instructionEn: 'Three animals are standing in a line: Dog, Cat, and Rabbit. Which animal is in the MIDDLE? (बिच)',
-        instructionNe: 'तीन जनावरहरू लाइनमा छन्: कुकुर, बिरालो र खरायो। बिचमा कुन जनावर छ? (बिच)',
+        instructionEn: 'Three animals are standing in a line: Dog, Cat, and Rabbit. Which animal is in the MIDDLE?',
+        instructionNe: 'तीन जनावरहरू लाइनमा छन्: कुकुर, बिरालो र खरायो। बिचमा कुन जनावर छ?',
         targetObject: 'choice',
         targetPosition: 'choice',
         demoAction: 'animals_line',
         options: [
           {
             id: 'opt_cat_mid',
-            labelEn: 'Cat (बिरालो)',
+            labelEn: 'Cat',
             labelNe: 'बिरालो',
             isCorrect: true,
             explanationEn: 'Correct! The cat stands in the middle between the dog and rabbit.',
@@ -656,7 +656,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
           },
           {
             id: 'opt_dog_front',
-            labelEn: 'Dog in Front (कुकुर)',
+            labelEn: 'Dog in Front',
             labelNe: 'कुकुर',
             isCorrect: false,
             explanationEn: 'The dog is at the front of the line.',
@@ -664,7 +664,7 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
           },
           {
             id: 'opt_rabbit_behind',
-            labelEn: 'Rabbit Behind (खरायो)',
+            labelEn: 'Rabbit Behind',
             labelNe: 'खरायो',
             isCorrect: false,
             explanationEn: 'The rabbit is behind at the back.',
@@ -676,22 +676,22 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L5_S4',
-        instructionEn: 'Which animal is BEHIND the others? (पछाडि)',
-        instructionNe: 'सबैभन्दा पछाडि कुन जनावर छ? (पछाडि)',
+        instructionEn: 'Which animal is BEHIND the others?',
+        instructionNe: 'सबैभन्दा पछाडि कुन जनावर छ?',
         targetObject: 'choice',
         targetPosition: 'choice',
         options: [
           {
             id: 'opt_rab_behind',
-            labelEn: 'White Rabbit (सेतो खरायो)',
+            labelEn: 'White Rabbit',
             labelNe: 'सेतो खरायो',
             isCorrect: true,
-            explanationEn: 'Correct! The rabbit is at the very back (पछाडि).',
+            explanationEn: 'Correct! The rabbit is at the very back.',
             explanationNe: 'सबास! सेतो खरायो सबैभन्दा पछाडि छ।',
           },
           {
             id: 'opt_dog_f',
-            labelEn: 'Brown Dog (कुकुर)',
+            labelEn: 'Brown Dog',
             labelNe: 'कुकुर',
             isCorrect: false,
             explanationEn: 'The dog is standing in front.',
@@ -703,25 +703,25 @@ export const PLAYGROUND_LEVELS: SimulationLevel[] = [
       },
       {
         id: 'L5_S5',
-        instructionEn: 'Relative distance: which object is NEAR to the child? (नजिक)',
-        instructionNe: 'दूरी हेर्नुहोस्: बालकको नजिक कुन वस्तु छ? (नजिक)',
+        instructionEn: 'Relative distance: which object is NEAR to the child?',
+        instructionNe: 'दूरी हेर्नुहोस्: बालकको नजिक कुन वस्तु छ?',
         targetObject: 'choice',
         targetPosition: 'choice',
         options: [
           {
             id: 'opt_near_basket',
-            labelEn: 'Flower Basket right by the feet (नजिकैको टोकरी)',
+            labelEn: 'Flower Basket right by the feet',
             labelNe: 'नजिकैको टोकरी',
             isCorrect: true,
-            explanationEn: 'Excellent! The basket is just beside the child (नजिक).',
+            explanationEn: 'Excellent! The basket is just beside the child.',
             explanationNe: 'धेरै राम्रो! टोकरी बालकको छेवैमा नजिक छ।',
           },
           {
             id: 'opt_far_mountain',
-            labelEn: 'Snowy Mountain Peak (टाढाको हिमाल)',
+            labelEn: 'Snowy Mountain Peak',
             labelNe: 'टाढाको हिमाल',
             isCorrect: false,
-            explanationEn: 'The snowy mountain is very far away in the background (टाढा).',
+            explanationEn: 'The snowy mountain is very far away in the background.',
             explanationNe: 'हिमाल पृष्ठभूमिमा धेरै टाढा छ।',
           },
         ],
@@ -759,7 +759,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     options: [
       {
         id: 'q1_in',
-        labelEn: 'Inside the house (घरभित्र)',
+        labelEn: 'Inside the house',
         labelNe: 'घरभित्र',
         isCorrect: true,
         explanationEn: 'Correct! Inside the house provides shelter from the rain.',
@@ -767,7 +767,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
       },
       {
         id: 'q1_out',
-        labelEn: 'Outside in the open rain (खुला बाहिर)',
+        labelEn: 'Outside in the open rain',
         labelNe: 'खुला बाहिर',
         isCorrect: false,
         explanationEn: 'Outside in the rain would make the cat wet.',
@@ -784,7 +784,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     options: [
       {
         id: 'q2_in',
-        labelEn: 'Inside (भित्र)',
+        labelEn: 'Inside',
         labelNe: 'भित्र',
         isCorrect: true,
         explanationEn: 'Apples are placed inside the basket.',
@@ -792,7 +792,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
       },
       {
         id: 'q2_out',
-        labelEn: 'Outside (बाहिर)',
+        labelEn: 'Outside',
         labelNe: 'बाहिर',
         isCorrect: false,
         explanationEn: 'Apples left outside might roll away or spoil.',
@@ -809,7 +809,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     options: [
       {
         id: 'q3_above',
-        labelEn: 'Above (माथि)',
+        labelEn: 'Above',
         labelNe: 'माथि',
         isCorrect: true,
         explanationEn: 'The bird is high above the tree roots.',
@@ -817,7 +817,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
       },
       {
         id: 'q3_below',
-        labelEn: 'Below (तल)',
+        labelEn: 'Below',
         labelNe: 'तल',
         isCorrect: false,
         explanationEn: 'Roots are below; the bird is above.',
@@ -834,7 +834,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     options: [
       {
         id: 'q4_below',
-        labelEn: 'Below the table (टेबलमुनि तल)',
+        labelEn: 'Below the table',
         labelNe: 'टेबलमुनि तल',
         isCorrect: true,
         explanationEn: 'Correct! The floor under the table is below.',
@@ -842,7 +842,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
       },
       {
         id: 'q4_above',
-        labelEn: 'Above the table (टेबलमाथि)',
+        labelEn: 'Above the table',
         labelNe: 'टेबलमाथि',
         isCorrect: false,
         explanationEn: 'The pencil is on the floor, not on top of the table.',
@@ -854,12 +854,12 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     id: 'Q5',
     concept: 'Big & Small',
     conceptNe: 'ठूलो र सानो',
-    questionEn: 'Between an elephant and a mouse, which one is BIG? (ठूलो)',
-    questionNe: 'हात्ती र मुसोमध्ये कुन जनावर ठूलो हुन्छ? (ठूलो)',
+    questionEn: 'Between an elephant and a mouse, which one is BIG?',
+    questionNe: 'हात्ती र मुसोमध्ये कुन जनावर ठूलो हुन्छ?',
     options: [
       {
         id: 'q5_elephant',
-        labelEn: 'Elephant (हात्ती)',
+        labelEn: 'Elephant',
         labelNe: 'हात्ती',
         isCorrect: true,
         explanationEn: 'The elephant is very big in size.',
@@ -867,7 +867,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
       },
       {
         id: 'q5_mouse',
-        labelEn: 'Mouse (मुसो)',
+        labelEn: 'Mouse',
         labelNe: 'मुसो',
         isCorrect: false,
         explanationEn: 'The mouse is tiny and small.',
@@ -879,12 +879,12 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     id: 'Q6',
     concept: 'Big & Small',
     conceptNe: 'ठूलो र सानो',
-    questionEn: 'Between a pumpkin and a grape, which one is SMALL? (सानो)',
-    questionNe: 'फर्सी र अङ्गुरमध्ये कुन फल सानो हुन्छ? (सानो)',
+    questionEn: 'Between a pumpkin and a grape, which one is SMALL?',
+    questionNe: 'फर्सी र अङ्गुरमध्ये कुन फल सानो हुन्छ?',
     options: [
       {
         id: 'q6_grape',
-        labelEn: 'Grape (अङ्गुर)',
+        labelEn: 'Grape',
         labelNe: 'अङ्गुर',
         isCorrect: true,
         explanationEn: 'The grape is small and fits in your hand.',
@@ -892,7 +892,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
       },
       {
         id: 'q6_pumpkin',
-        labelEn: 'Pumpkin (फर्सी)',
+        labelEn: 'Pumpkin',
         labelNe: 'फर्सी',
         isCorrect: false,
         explanationEn: 'A pumpkin is heavy and big.',
@@ -904,12 +904,12 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     id: 'Q7',
     concept: 'Tall & Short',
     conceptNe: 'अग्लो र होचो',
-    questionEn: 'Between a high mountain and a small hill, which one is TALLER? (अग्लो)',
-    questionNe: 'हिमाल र सानो ढिस्कोमध्ये कुन अग्लो हुन्छ? (अग्लो)',
+    questionEn: 'Between a high mountain and a small hill, which one is TALLER?',
+    questionNe: 'हिमाल र सानो ढिस्कोमध्ये कुन अग्लो हुन्छ?',
     options: [
       {
         id: 'q7_mountain',
-        labelEn: 'High Snowy Mountain (अग्लो हिमाल)',
+        labelEn: 'High Snowy Mountain',
         labelNe: 'अग्लो हिमाल',
         isCorrect: true,
         explanationEn: 'Himalayan peaks are the tallest in the world!',
@@ -917,7 +917,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
       },
       {
         id: 'q7_hill',
-        labelEn: 'Small Hill (होचो ढिस्को)',
+        labelEn: 'Small Hill',
         labelNe: 'होचो ढिस्को',
         isCorrect: false,
         explanationEn: 'A small hill has much lower height.',
@@ -929,20 +929,20 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     id: 'Q8',
     concept: 'Tall & Short',
     conceptNe: 'अग्लो र होचो',
-    questionEn: 'Between an adult teacher and a Class 1 student, who is SHORTER in height? (होचो)',
-    questionNe: 'शिक्षक र कक्षा १ को विद्यार्थीमध्ये उचाइमा को होचो हुन्छ? (होचो)',
+    questionEn: 'Between an adult teacher and a Class 1 student, who is SHORTER in height?',
+    questionNe: 'शिक्षक र कक्षा 1 को विद्यार्थीमध्ये उचाइमा को होचो हुन्छ?',
     options: [
       {
         id: 'q8_student',
-        labelEn: 'Class 1 Student (कक्षा १ को विद्यार्थी)',
-        labelNe: 'कक्षा १ को विद्यार्थी',
+        labelEn: 'Class 1 Student',
+        labelNe: 'कक्षा 1 को विद्यार्थी',
         isCorrect: true,
-        explanationEn: 'Class 1 children have lower height (होचो).',
-        explanationNe: 'कक्षा १ का साना बालबालिकाको उचाइ होचो हुन्छ।',
+        explanationEn: 'Class 1 children have lower height.',
+        explanationNe: 'कक्षा 1 का साना बालबालिकाको उचाइ होचो हुन्छ।',
       },
       {
         id: 'q8_teacher',
-        labelEn: 'Adult Teacher (अग्लो शिक्षक)',
+        labelEn: 'Adult Teacher',
         labelNe: 'अग्लो शिक्षक',
         isCorrect: false,
         explanationEn: 'Adults are taller in height.',
@@ -955,19 +955,19 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     concept: 'Long & Short',
     conceptNe: 'लामो र छोटो',
     questionEn: 'A ruler of 30 cm is ____ than an eraser of 3 cm.',
-    questionNe: '३० सेन्टिमिटरको स्केल ३ सेन्टिमिटरको इरेजर भन्दा ____ हुन्छ।',
+    questionNe: '30 सेन्टिमिटरको स्केल 3 सेन्टिमिटरको इरेजर भन्दा ____ हुन्छ।',
     options: [
       {
         id: 'q9_longer',
-        labelEn: 'Longer (लामो)',
+        labelEn: 'Longer',
         labelNe: 'लामो',
         isCorrect: true,
         explanationEn: 'The 30 cm ruler has greater length.',
-        explanationNe: '३० से.मी. को स्केल लम्बाइमा लामो हुन्छ।',
+        explanationNe: '30 से.मी. को स्केल लम्बाइमा लामो हुन्छ।',
       },
       {
         id: 'q9_shorter',
-        labelEn: 'Shorter (छोटो)',
+        labelEn: 'Shorter',
         labelNe: 'छोटो',
         isCorrect: false,
         explanationEn: 'The ruler is longer, not shorter.',
@@ -984,7 +984,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     options: [
       {
         id: 'q10_right',
-        labelEn: 'Right Hand (दायाँ हात)',
+        labelEn: 'Right Hand',
         labelNe: 'दायाँ हात',
         isCorrect: true,
         explanationEn: 'Correct! The right hand is the "दायाँ हात".',
@@ -992,10 +992,10 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
       },
       {
         id: 'q10_left',
-        labelEn: 'Left Hand (बायाँ हात)',
+        labelEn: 'Left Hand',
         labelNe: 'बायाँ हात',
         isCorrect: false,
-        explanationEn: 'The other hand is the left hand (बायाँ हात).',
+        explanationEn: 'The other hand is the left hand.',
         explanationNe: 'अर्को हातलाई बायाँ हात भनिन्छ।',
       },
     ],
@@ -1005,19 +1005,19 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     concept: 'Front, Middle & Behind',
     conceptNe: 'अगाडि, बिच र पछाडि',
     questionEn: 'In a morning school assembly line, student B stands between student A (first) and student C (last). Where is student B?',
-    questionNe: 'बिहानको प्रार्थना लाइनमा विद्यार्थी B विद्यार्थी A (पहिलो) र विद्यार्थी C (अन्तिम) को बीचमा छ। विद्यार्थी B कहाँ छ?',
+    questionNe: 'बिहानको प्रार्थना लाइनमा विद्यार्थी B विद्यार्थी A र विद्यार्थी C को बीचमा छ। विद्यार्थी B कहाँ छ?',
     options: [
       {
         id: 'q11_middle',
-        labelEn: 'In the Middle (बिचमा)',
+        labelEn: 'In the Middle',
         labelNe: 'बिचमा',
         isCorrect: true,
-        explanationEn: 'Student B is in the middle (बिचमा).',
+        explanationEn: 'Student B is in the middle.',
         explanationNe: 'सबास! विद्यार्थी B दुई जनाको बिचमा छ।',
       },
       {
         id: 'q11_front',
-        labelEn: 'In Front (अगाडि)',
+        labelEn: 'In Front',
         labelNe: 'अगाडि',
         isCorrect: false,
         explanationEn: 'Student A is in front.',
@@ -1034,7 +1034,7 @@ export const ASSESSMENT_QUESTIONS: AssessmentQuestion[] = [
     options: [
       {
         id: 'q12_near_far',
-        labelEn: 'Blackboard is Near (नजिक); Mountains are Far (टाढा)',
+        labelEn: 'Blackboard is Near; Mountains are Far',
         labelNe: 'कालोपाटी नजिक; हिमाल टाढा',
         isCorrect: true,
         explanationEn: 'The board is nearby in the room, while mountains are far away.',

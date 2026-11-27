@@ -1,8 +1,8 @@
 /**
  * HumanGrowthSim.tsx
  * Master Interactive 2D Human Growth & Development Studio
- * (मानव वृद्धि तथा विकास - २डी अन्तरक्रियात्मक प्रयोगशाला)
- * Grade 4 Science • Chapter 5: Life Process (जीवन प्रक्रिया)
+ * (मानव वृद्धि तथा विकास - 2डी अन्तरक्रियात्मक प्रयोगशाला)
+ * Grade 4 Science • Chapter 5: Life Process
  *
  * 100% Native 2D Canvas & Vector Graphics (Zero WebGL/3D Dependencies)
  * - Continuous Human Age Scrubber: 0 to 80 Years with real-time stature scaling,
@@ -45,7 +45,7 @@ export const HumanGrowthSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -68,10 +68,10 @@ export const HumanGrowthSim: React.FC<BaseSimulationProps> = ({
   const stages: GrowthStage[] = [
     {
       id: 'infant',
-      nameEn: '1. Infancy (शिशु अवस्था)',
-      nameNe: '१. शिशु अवस्था (Infancy)',
+      nameEn: '1. Infancy',
+      nameNe: '1. शिशु अवस्था (Infancy)',
       ageRangeEn: '0 – 1 Year',
-      ageRangeNe: '० देखि १ वर्ष',
+      ageRangeNe: '0 देखि 1 वर्ष',
       heightCm: 65,
       milestonesEn: 'Rapid brain development, crawls, begins teething, drinks mother’s milk.',
       milestonesNe: 'छिटो शारीरिक विकास, बामे सर्ने, साना दाँत पलाउने र आमाको दूध पिउने।',
@@ -81,10 +81,10 @@ export const HumanGrowthSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'toddler',
-      nameEn: '2. Early Childhood (बाल्यावस्था)',
-      nameNe: '२. बाल्यावस्था (Toddlerhood)',
+      nameEn: '2. Early Childhood',
+      nameNe: '2. बाल्यावस्था (Toddlerhood)',
       ageRangeEn: '2 – 5 Years',
-      ageRangeNe: '२ देखि ५ वर्ष',
+      ageRangeNe: '2 देखि 5 वर्ष',
       heightCm: 100,
       milestonesEn: 'Learns walking, running, speaking full sentences, develops motor coordination.',
       milestonesNe: 'दौडन, खेल्न र स्पष्ट बोल्न सिक्ने; जिज्ञासु स्वभाव हुने।',
@@ -94,10 +94,10 @@ export const HumanGrowthSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'child',
-      nameEn: '3. Middle Childhood (कक्षा ४ को उमेर)',
-      nameNe: '३. विद्यालय जाने उमेर (School Age)',
+      nameEn: '3. Middle Childhood',
+      nameNe: '3. विद्यालय जाने उमेर (School Age)',
       ageRangeEn: '6 – 12 Years',
-      ageRangeNe: '६ देखि १२ वर्ष',
+      ageRangeNe: '6 देखि 12 वर्ष',
       heightCm: 135,
       milestonesEn: 'Permanent adult teeth replace milk teeth, school learning, sports, and social skills.',
       milestonesNe: 'दूधका दाँत झरेर स्थायी दाँत आउने, विद्यालय जाने, पढ्ने र खेलकुद खेल्ने।',
@@ -107,10 +107,10 @@ export const HumanGrowthSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'adult',
-      nameEn: '4. Adulthood (वयस्क अवस्था)',
-      nameNe: '४. वयस्क अवस्था (Adulthood)',
+      nameEn: '4. Adulthood',
+      nameNe: '4. वयस्क अवस्था (Adulthood)',
       ageRangeEn: '20 – 55 Years',
-      ageRangeNe: '२० देखि ५५ वर्ष',
+      ageRangeNe: '20 देखि 55 वर्ष',
       heightCm: 172,
       milestonesEn: 'Peak physical and intellectual maturity, independent career, raising healthy family.',
       milestonesNe: 'शारीरिक र मानसिक रूपमा पूर्ण परिपक्व, आत्मनिर्भर भएर काम गर्ने।',
@@ -120,10 +120,10 @@ export const HumanGrowthSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'elder',
-      nameEn: '5. Old Age / Senior (वृद्धावस्था)',
-      nameNe: '५. वृद्धावस्था (Old Age)',
+      nameEn: '5. Old Age / Senior',
+      nameNe: '5. वृद्धावस्था (Old Age)',
       ageRangeEn: '60+ Years',
-      ageRangeNe: '६० वर्षभन्दा माथि',
+      ageRangeNe: '60 वर्षभन्दा माथि',
       heightCm: 165,
       milestonesEn: 'Silver hair, skin wrinkling, slower reflexes, accompanied by deep life wisdom.',
       milestonesNe: 'कपाल फुल्ने, छाला चाउरी पर्ने, शरीर कमजोर हुने तर जीवनको धेरै अनुभव हुने।',
@@ -545,20 +545,20 @@ export const HumanGrowthSim: React.FC<BaseSimulationProps> = ({
         'Adulthood (35 years)',
       ],
       optionsNe: [
-        'बाल्यावस्था (विद्यालय जाने उमेर: ६ देखि १२ वर्ष)',
-        'शिशु अवस्थामा (पहिलो ३ महिनामा)',
-        'वृद्धावस्थामा (६५ वर्षपछि)',
-        'वयस्क अवस्थामा (३५ वर्षमा)',
+        'बाल्यावस्था (विद्यालय जाने उमेर: 6 देखि 12 वर्ष)',
+        'शिशु अवस्थामा (पहिलो 3 महिनामा)',
+        'वृद्धावस्थामा (65 वर्षपछि)',
+        'वयस्क अवस्थामा (35 वर्षमा)',
       ],
       correct: 0,
       expEn: 'Between ages 6 and 12, temporary milk teeth fall out and 32 permanent adult teeth emerge.',
-      expNe: '६ देखि १२ वर्षको उमेरमा दूधका दाँत झरेर स्थायी बलिया दाँतहरू आउँछन्।',
+      expNe: '6 देखि 12 वर्षको उमेरमा दूधका दाँत झरेर स्थायी बलिया दाँतहरू आउँछन्।',
     },
     {
       qEn: 'Which essential mineral is most critical for developing strong, elongated bones during human growth?',
       qNe: 'मानिसको हड्डीको वृद्धि र विकासका लागि सबैभन्दा महत्त्वपूर्ण खनिज कुन हो?',
       optionsEn: [
-        'Calcium and Vitamin D (क्याल्सियम र भिटामिन डी)',
+        'Calcium and Vitamin D',
         'Plastic polymer',
         'Rock salt only',
         'Lead and mercury',
@@ -574,7 +574,7 @@ export const HumanGrowthSim: React.FC<BaseSimulationProps> = ({
       expNe: 'क्याल्सियम र भिटामिन डीले हड्डी र दाँतलाई मजबुत र बलियो बनाउँछन्।',
     },
     {
-      qEn: 'Why is mother’s first milk (colostrum / बिगौते दूध) considered the most precious food for a newborn infant?',
+      qEn: 'Why is mother’s first milk considered the most precious food for a newborn infant?',
       qNe: 'नवजात शिशुका लागि आमाको बिगौते दूध (Colostrum) किन सबैभन्दा महत्त्वपूर्ण अमृत मानिन्छ?',
       optionsEn: [
         'It is rich in antibodies that shield the baby from dangerous diseases and infections',

@@ -1,7 +1,7 @@
 /**
  * PhotosynthesisLabSim.tsx
- * Simulation 12: Photosynthesis Laboratory & Cellular Starch Studio (प्रकाश संश्लेषण प्रयोगशाला)
- * Grade 6 Science • Unit 5: Life Process (जीवन प्रक्रिया)
+ * Simulation 12: Photosynthesis Laboratory & Cellular Starch Studio
+ * Grade 6 Science • Unit 5: Life Process
  *
  * 100% Native HTML5 Canvas 2D Interactive Botanical Laboratory.
  * Features:
@@ -56,7 +56,7 @@ export const PhotosynthesisLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -431,7 +431,7 @@ export const PhotosynthesisLabSim: React.FC<BaseSimulationProps> = ({
         ctx.fillRect(lx, ly, lw, 14);
         ctx.fillStyle = '#166534';
         ctx.font = 'bold 11px sans-serif';
-        ctx.fillText('Waxy Cuticle (पानी रोक्ने क्युटिकल)', lx + 12, ly + 11);
+        ctx.fillText('Waxy Cuticle', lx + 12, ly + 11);
 
         // 2. Upper Epidermis
         ctx.fillStyle = '#86efac';
@@ -609,7 +609,7 @@ export const PhotosynthesisLabSim: React.FC<BaseSimulationProps> = ({
       titleNepali="प्रकाश संश्लेषण प्रयोगशाला तथा अक्सिजन उत्पादन"
       chapterNumber={5}
       chapterTitle="Unit 5: Life Process"
-      chapterTitleNepali="एकाइ ५: जीवन प्रक्रिया"
+      chapterTitleNepali="एकाइ 5: जीवन प्रक्रिया"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -689,10 +689,10 @@ export const PhotosynthesisLabSim: React.FC<BaseSimulationProps> = ({
             >
               <Beaker size={14} color="#38bdf8" />
               {activeTab === 'hydrilla_apparatus'
-                ? (lang === 'ne' ? '१. हाइड्रिला अक्सिजन संकलन' : 'Hydrilla Oxygen Apparatus')
+                ? (lang === 'ne' ? '1. हाइड्रिला अक्सिजन संकलन' : 'Hydrilla Oxygen Apparatus')
                 : activeTab === 'leaf_anatomy'
-                  ? (lang === 'ne' ? '२. पातको कोषीय संरचना' : 'Leaf Cellular Anatomy')
-                  : (lang === 'ne' ? '३. स्टार्च आयोडिन परीक्षण' : 'Starch Iodine Test')}
+                  ? (lang === 'ne' ? '2. पातको कोषीय संरचना' : 'Leaf Cellular Anatomy')
+                  : (lang === 'ne' ? '3. स्टार्च आयोडिन परीक्षण' : 'Starch Iodine Test')}
             </span>
 
             <span

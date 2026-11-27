@@ -1,11 +1,11 @@
 /**
  * EverydayChemicalsSim.tsx
- * Simulation 38: 2D Everyday Chemicals Explorer (दैनिक जीवनका रसायनहरू)
- * Grade 6 Science • Unit 10: Materials in Daily Life (दैनिक जीवनमा प्रयोग हुने वस्तुहरू)
+ * Simulation 38: 2D Everyday Chemicals Explorer
+ * Grade 6 Science • Unit 10: Materials in Daily Life
  *
  * Full 2D Interactive Household Chemistry featuring:
  * 1. Safe everyday chemicals: Salt (NaCl), Sugar, Baking Soda (NaHCO3), Soap, Lemon (Citric Acid), Vinegar
- * 2. Natural Indicator Test (बेसार / Turmeric): Yellow in acid/neutral -> Deep reddish-brown in basic soap!
+ * 2. Natural Indicator Test: Yellow in acid/neutral -> Deep reddish-brown in basic soap!
  * 3. Litmus Paper pH indicator test (Blue to Red in acid, Red to Blue in base)
  * 4. CO2 Effervescence Reaction: Baking Soda + Vinegar fizzing bubbles!
  */
@@ -31,7 +31,7 @@ interface ChemicalItem {
 const CHEMICALS: ChemicalItem[] = [
   {
     id: 'salt',
-    nameEn: 'Common Salt (नुन)',
+    nameEn: 'Common Salt',
     nameNe: 'खाना नुन',
     formula: 'NaCl (Sodium Chloride)',
     nature: 'neutral',
@@ -42,7 +42,7 @@ const CHEMICALS: ChemicalItem[] = [
   },
   {
     id: 'lemon',
-    nameEn: 'Lemon Juice (कागती रस)',
+    nameEn: 'Lemon Juice',
     nameNe: 'कागतीको रस (सिट्रिक एसिड)',
     formula: 'C6H8O7 (Citric Acid)',
     nature: 'acidic',
@@ -53,7 +53,7 @@ const CHEMICALS: ChemicalItem[] = [
   },
   {
     id: 'baking_soda',
-    nameEn: 'Baking Soda (खाने सोडा)',
+    nameEn: 'Baking Soda',
     nameNe: 'खाने सोडा (बेकिङ सोडा)',
     formula: 'NaHCO3 (Sodium Bicarbonate)',
     nature: 'basic',
@@ -64,7 +64,7 @@ const CHEMICALS: ChemicalItem[] = [
   },
   {
     id: 'soap',
-    nameEn: 'Soap Water (साबुन पानी)',
+    nameEn: 'Soap Water',
     nameNe: 'साबुन पानी (क्षारीय)',
     formula: 'Sodium Stearate (Alkaline)',
     nature: 'basic',
@@ -75,7 +75,7 @@ const CHEMICALS: ChemicalItem[] = [
   },
   {
     id: 'vinegar',
-    nameEn: 'Vinegar (सिरका)',
+    nameEn: 'Vinegar',
     nameNe: 'सिरका (एसिटिक एसिड)',
     formula: 'CH3COOH (Acetic Acid)',
     nature: 'acidic',
@@ -92,7 +92,7 @@ export const EverydayChemicalsSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -436,7 +436,7 @@ export const EverydayChemicalsSim: React.FC<BaseSimulationProps> = ({
                 {[
                   { id: 'litmus_blue', en: 'Blue Litmus', ne: 'नीलो लिटमस', col: '#3b82f6' },
                   { id: 'litmus_red', en: 'Red Litmus', ne: 'रातो लिटमस', col: '#ef4444' },
-                  { id: 'turmeric', en: 'Turmeric (बेसार)', ne: 'बेसार सूचक', col: '#eab308' },
+                  { id: 'turmeric', en: 'Turmeric', ne: 'बेसार सूचक', col: '#eab308' },
                 ].map(ind => (
                   <button
                     key={ind.id}
@@ -535,11 +535,11 @@ export const EverydayChemicalsSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: Chemistry at Home' : '१. खोज: घरमै पाइने रसायन')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Natural Indicators' : '२. अन्वेषण: प्राकृतिक सूचक')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Acid vs Base' : '३. अवलोकन: अम्ल र क्षार')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Safety & Uses' : '४. बुझाइ: सुरक्षा र उपयोगिता')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Chemicals Quiz' : '५. चुनौती: रसायन प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: Chemistry at Home' : '1. खोज: घरमै पाइने रसायन')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Natural Indicators' : '2. अन्वेषण: प्राकृतिक सूचक')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Acid vs Base' : '3. अवलोकन: अम्ल र क्षार')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Safety & Uses' : '4. बुझाइ: सुरक्षा र उपयोगिता')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Chemicals Quiz' : '5. चुनौती: रसायन प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (

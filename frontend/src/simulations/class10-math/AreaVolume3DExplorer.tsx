@@ -12,7 +12,7 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
   const kit = useSimKit({
     code: 'SIM-MATH-G10-U5-01',
     chapter: 5,
-    titleNp: '३डी ज्यामिति: क्षेत्रफल तथा आयतन अन्वेषक',
+    titleNp: '3डी ज्यामिति: क्षेत्रफल तथा आयतन अन्वेषक',
     titleEn: '3D Geometry: Area and Volume Explorer',
   });
   const isNe = kit.lang === 'ne';
@@ -97,7 +97,7 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ ५: क्षेत्रफल र आयतन (Area and Volume) प्रयोगशालामा स्वागत छ! यहाँ पिरामिड र सोलीको ३डी मोडेल, जाली (Net) खोल्ने प्रक्रिया, र संयुक्त ठोस वस्तुहरूको आयतन तथा बाहिरी क्षेत्रफल अन्वेषण गर्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 5: क्षेत्रफल र आयतन (Area and Volume) प्रयोगशालामा स्वागत छ! यहाँ पिरामिड र सोलीको 3डी मोडेल, जाली (Net) खोल्ने प्रक्रिया, र संयुक्त ठोस वस्तुहरूको आयतन तथा बाहिरी क्षेत्रफल अन्वेषण गर्नुहोस्!',
         'Welcome to Grade 10 3D Geometry Laboratory! Manipulate 3D pyramids and cones, unfold their nets, and calculate volumes and exposed surface areas of combined solids!'
       )}
     >
@@ -134,7 +134,7 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
             <div className="md:col-span-6 bg-[#142D4E] p-4 rounded-2xl flex flex-col justify-between text-white shadow-md">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-xs font-bold text-cyan-300">
-                  {pyrUnfolded ? L('पिरामिडको जाली (Unfolded Net)', 'Unfolded Net') : L('३डी पिरामिड (3D Pyramid)', '3D Pyramid')}
+                  {pyrUnfolded ? L('पिरामिडको जाली (Unfolded Net)', 'Unfolded Net') : L('3डी पिरामिड (3D Pyramid)', '3D Pyramid')}
                 </span>
                 <button
                   onClick={() => {
@@ -143,7 +143,7 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
                   }}
                   className="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-slate-900 rounded-lg text-xs font-bold transition-all shadow-sm"
                 >
-                  {pyrUnfolded ? L('३डी मा पट्याउनुहोस् (Fold)', 'Fold into 3D') : L('जाली खोल्नुहोस् (Unfold Net)', 'Unfold Net')}
+                  {pyrUnfolded ? L('3डी मा पट्याउनुहोस् (Fold)', 'Fold into 3D') : L('जाली खोल्नुहोस् (Unfold Net)', 'Unfold Net')}
                 </button>
               </div>
 
@@ -208,9 +208,9 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
               </div>
 
               <div className="flex justify-between text-xs font-mono text-slate-300 mt-2">
-                <span>आधार भुजा a: {fmt(pyrBaseA)} cm</span>
-                <span>उचाइ h: {fmt(pyrHeightH)} cm</span>
-                <span>छड्के उचाइ l: {fmt(pyrSlantL.toFixed(2))} cm</span>
+                <span>Base side a: {fmt(pyrBaseA)} cm</span>
+                <span>Height h: {fmt(pyrHeightH)} cm</span>
+                <span>Slant height l: {fmt(pyrSlantL.toFixed(2))} cm</span>
               </div>
             </div>
 
@@ -221,14 +221,14 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
               <div className="space-y-3 text-xs">
                 <div>
                   <div className="flex justify-between font-bold text-slate-700 mb-1">
-                    <span>आधारको भुजा (Base Edge a): {fmt(pyrBaseA)} cm</span>
+                    <span>Base edge a: {fmt(pyrBaseA)} cm</span>
                   </div>
                   <input type="range" min="6" max="24" step="2" value={pyrBaseA} onChange={(e) => setPyrBaseA(parseInt(e.target.value))} className="w-full accent-blue-600" />
                 </div>
 
                 <div>
                   <div className="flex justify-between font-bold text-slate-700 mb-1">
-                    <span>ठाडो उचाइ (Vertical Height h): {fmt(pyrHeightH)} cm</span>
+                    <span>Vertical height h: {fmt(pyrHeightH)} cm</span>
                   </div>
                   <input type="range" min="4" max="20" step="1" value={pyrHeightH} onChange={(e) => setPyrHeightH(parseInt(e.target.value))} className="w-full accent-rose-600" />
                 </div>
@@ -237,23 +237,23 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
               {/* Formula & Breakdown Cards */}
               <div className="space-y-2 font-mono text-xs">
                 <div className="p-2.5 bg-amber-50 border border-amber-200 rounded-xl space-y-1 text-amber-950">
-                  <div className="font-bold">१) छड्के उचाइ (Slant Height l):</div>
+                  <div className="font-bold">1) Slant height l:</div>
                   <div>l² = h² + (a/2)² = {fmt(pyrHeightH)}² + ({fmt(pyrBaseA)}/2)² = {fmt(pyrHeightH ** 2)} + {fmt((pyrBaseA / 2) ** 2)}</div>
                   <div className="text-sm font-bold text-amber-900">➔ l = √{fmt(pyrHeightH ** 2 + (pyrBaseA / 2) ** 2)} = {fmt(pyrSlantL.toFixed(2))} cm</div>
                 </div>
 
                 <div className="p-2.5 bg-blue-50 border border-blue-200 rounded-xl space-y-1 text-blue-950">
-                  <div className="font-bold">२) छड्के सतहको क्षेत्रफल (LSA) = 2al:</div>
+                  <div className="font-bold">2) Lateral surface area (LSA) = 2al:</div>
                   <div>= 2 × {fmt(pyrBaseA)} × {fmt(pyrSlantL.toFixed(2))} = <span className="font-bold text-blue-900 text-sm">{fmt(pyrLSA.toFixed(1))} cm²</span></div>
                 </div>
 
                 <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1 text-emerald-950">
-                  <div className="font-bold">३) पूरा सतहको क्षेत्रफल (TSA) = a² + 2al:</div>
+                  <div className="font-bold">3) Total surface area (TSA) = a² + 2al:</div>
                   <div>= {fmt(pyrBaseA)}² + {fmt(pyrLSA.toFixed(1))} = <span className="font-bold text-emerald-900 text-sm">{fmt(pyrTSA.toFixed(1))} cm²</span></div>
                 </div>
 
                 <div className="p-2.5 bg-purple-50 border border-purple-200 rounded-xl space-y-1 text-purple-950">
-                  <div className="font-bold">४) पिरामिडको आयतन (Volume V) = ⅓ a²h:</div>
+                  <div className="font-bold">4) Volume of the pyramid (V) = ⅓ a²h:</div>
                   <div>= ⅓ × {fmt(pyrBaseA)}² × {fmt(pyrHeightH)} = <span className="font-bold text-purple-900 text-sm">{fmt(pyrVolume.toFixed(1))} cm³</span></div>
                 </div>
               </div>
@@ -267,7 +267,7 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
             <div className="md:col-span-6 bg-[#142D4E] p-4 rounded-2xl flex flex-col justify-between text-white shadow-md">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-xs font-bold text-cyan-300">
-                  {coneUnfolded ? L('सोलीको जाली (वृत्तांश Sector Net)', 'Cone Net (Sector)') : L('३डी सोली (3D Cone)', '3D Cone')}
+                  {coneUnfolded ? L('सोलीको जाली (वृत्तांश Sector Net)', 'Cone Net (Sector)') : L('3डी सोली (3D Cone)', '3D Cone')}
                 </span>
                 <button
                   onClick={() => {
@@ -276,7 +276,7 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
                   }}
                   className="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-slate-900 rounded-lg text-xs font-bold transition-all shadow-sm"
                 >
-                  {coneUnfolded ? L('३डी सोली बनाउनुहोस् (Fold)', 'Fold to Cone') : L('जाली खोल्नुहोस् (Unfold Net)', 'Unfold Net')}
+                  {coneUnfolded ? L('3डी सोली बनाउनुहोस् (Fold)', 'Fold to Cone') : L('जाली खोल्नुहोस् (Unfold Net)', 'Unfold Net')}
                 </button>
               </div>
 
@@ -324,9 +324,9 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
               </div>
 
               <div className="flex justify-between text-xs font-mono text-slate-300 mt-2">
-                <span>अर्धव्याव्यास r: {fmt(coneRadiusR)} cm</span>
-                <span>उचाइ h: {fmt(coneHeightH)} cm</span>
-                <span>छड्के उचाइ l: {fmt(coneSlantL.toFixed(2))} cm</span>
+                <span>Radius r: {fmt(coneRadiusR)} cm</span>
+                <span>Height h: {fmt(coneHeightH)} cm</span>
+                <span>Slant height l: {fmt(coneSlantL.toFixed(2))} cm</span>
               </div>
             </div>
 
@@ -336,14 +336,14 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
               <div className="space-y-3 text-xs">
                 <div>
                   <div className="flex justify-between font-bold text-emerald-700 mb-1">
-                    <span>आधार अर्धव्याव्यास (Radius r): {fmt(coneRadiusR)} cm</span>
+                    <span>Base radius r: {fmt(coneRadiusR)} cm</span>
                   </div>
                   <input type="range" min="3" max="14" step="1" value={coneRadiusR} onChange={(e) => setConeRadiusR(parseInt(e.target.value))} className="w-full accent-emerald-600" />
                 </div>
 
                 <div>
                   <div className="flex justify-between font-bold text-rose-700 mb-1">
-                    <span>ठाडो उचाइ (Height h): {fmt(coneHeightH)} cm</span>
+                    <span>Vertical height h: {fmt(coneHeightH)} cm</span>
                   </div>
                   <input type="range" min="6" max="30" step="1" value={coneHeightH} onChange={(e) => setConeHeightH(parseInt(e.target.value))} className="w-full accent-rose-600" />
                 </div>
@@ -351,22 +351,22 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
 
               <div className="space-y-2 font-mono text-xs">
                 <div className="p-2.5 bg-amber-50 border border-amber-200 rounded-xl space-y-1 text-amber-950">
-                  <div className="font-bold">१) छड्के उचाइ (Slant Height l) = √(r² + h²):</div>
+                  <div className="font-bold">1) Slant height l = √(r² + h²):</div>
                   <div className="text-sm font-bold text-amber-900">l = √({fmt(coneRadiusR)}² + {fmt(coneHeightH)}²) = {fmt(coneSlantL.toFixed(2))} cm</div>
                 </div>
 
                 <div className="p-2.5 bg-blue-50 border border-blue-200 rounded-xl space-y-1 text-blue-950">
-                  <div className="font-bold">२) वक्र सतहको क्षेत्रफल (CSA) = πrl:</div>
+                  <div className="font-bold">2) Curved surface area (CSA) = πrl:</div>
                   <div>= (22/7) × {fmt(coneRadiusR)} × {fmt(coneSlantL.toFixed(2))} = <span className="font-bold text-blue-900 text-sm">{fmt(coneCSA.toFixed(1))} cm²</span></div>
                 </div>
 
                 <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1 text-emerald-950">
-                  <div className="font-bold">३) पूरा सतहको क्षेत्रफल (TSA) = πr(r + l):</div>
+                  <div className="font-bold">3) Total surface area (TSA) = πr(r + l):</div>
                   <div>= <span className="font-bold text-emerald-900 text-sm">{fmt(coneTSA.toFixed(1))} cm²</span></div>
                 </div>
 
                 <div className="p-2.5 bg-purple-50 border border-purple-200 rounded-xl space-y-1 text-purple-950">
-                  <div className="font-bold">४) सोलीको आयतन (Volume V) = ⅓ πr²h:</div>
+                  <div className="font-bold">4) Volume of the cone (V) = ⅓ πr²h:</div>
                   <div>= <span className="font-bold text-purple-900 text-sm">{fmt(coneVolume.toFixed(1))} cm³</span></div>
                 </div>
               </div>
@@ -384,7 +384,7 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
                   combinedType === 'cyl_cone' ? 'bg-[#167C80] text-white border-[#167C80]' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('१) बेलना + सोली (Cylinder + Cone: पाल/मन्दिर)', '1) Cylinder + Cone (Tent)')}
+                {L('1) बेलना + सोली (Cylinder + Cone: पाल/मन्दिर)', '1) Cylinder + Cone (Tent)')}
               </button>
               <button
                 onClick={() => setCombinedType('cone_hemi')}
@@ -392,7 +392,7 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
                   combinedType === 'cone_hemi' ? 'bg-[#167C80] text-white border-[#167C80]' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('२) सोली + अर्धगोला (Cone + Hemisphere: लट्टू)', '2) Cone + Hemisphere (Top)')}
+                {L('2) सोली + अर्धगोला (Cone + Hemisphere: लट्टू)', '2) Cone + Hemisphere (Top)')}
               </button>
               <button
                 onClick={() => setCombinedType('cyl_hemi')}
@@ -400,7 +400,7 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
                   combinedType === 'cyl_hemi' ? 'bg-[#167C80] text-white border-[#167C80]' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('३) बेलना + अर्धगोला (Cylinder + Hemisphere: साइलो/ट्याङ्की)', '3) Cylinder + Hemisphere')}
+                {L('3) बेलना + अर्धगोला (Cylinder + Hemisphere: साइलो/ट्याङ्की)', '3) Cylinder + Hemisphere')}
               </button>
             </div>
 
@@ -427,13 +427,13 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
                       <line x1={170} y1={130} x2={170} y2={220} stroke="#38bdf8" strokeWidth={2} />
                       {/* Joining internal boundary (Dashed) */}
                       <ellipse cx={120} cy={130} rx={50} ry={16} fill="none" stroke="#f43f5e" strokeWidth={2} strokeDasharray="4" />
-                      <text x={180} y={135} fill="#f43f5e" fontSize="10">भित्री सतह (Excluded)</text>
+                      <text x={180} y={135} fill="#f43f5e" fontSize="10">Inner surface (excluded)</text>
 
                       {/* Cone Apex V(120, 30) */}
                       <line x1={70} y1={130} x2={120} y2={30} stroke="#fbbf24" strokeWidth={2.5} />
                       <line x1={170} y1={130} x2={120} y2={30} stroke="#fbbf24" strokeWidth={2.5} />
-                      <text x={120} y={20} fill="#fbbf24" fontSize="11" fontWeight="bold" textAnchor="middle">सोली (Cone)</text>
-                      <text x={120} y={180} fill="#38bdf8" fontSize="11" fontWeight="bold" textAnchor="middle">बेलना (Cylinder)</text>
+                      <text x={120} y={20} fill="#fbbf24" fontSize="11" fontWeight="bold" textAnchor="middle">Cone</text>
+                      <text x={120} y={180} fill="#38bdf8" fontSize="11" fontWeight="bold" textAnchor="middle">Cylinder</text>
                     </>
                   )}
 
@@ -471,10 +471,10 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
               {/* Formulas & Live Calculation */}
               <div className="md:col-span-6 space-y-3 font-mono text-xs">
                 <div className="p-3 bg-slate-50 border rounded-xl space-y-1">
-                  <div className="font-bold text-[#142D4E] text-sm">कुल बाहिरी सतहको क्षेत्रफल (Exposed Area):</div>
+                  <div className="font-bold text-[#142D4E] text-sm">Total exposed surface area:</div>
                   {combinedType === 'cyl_cone' && (
                     <>
-                      <div className="text-slate-600">सूत्र: आधार (πr²) + बेलना वक्र (2πrh₁) + सोली वक्र (πrl)</div>
+                      <div className="text-slate-600">Formula: base (πr²) + cylinder curved surface (2πrh₁) + cone curved surface (πrl)</div>
                       <div className="text-base font-bold text-emerald-700 pt-1">➔ TSA = {fmt(totalExposedArea.toFixed(1))} cm²</div>
                     </>
                   )}
@@ -493,8 +493,8 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
                 </div>
 
                 <div className="p-3 bg-purple-50 border border-purple-200 rounded-xl space-y-1">
-                  <div className="font-bold text-purple-950 text-sm">कुल आयतन (Total Volume):</div>
-                  <div className="text-slate-600">V_total = V₁ + V₂ (दुवै वस्तुको आयतनको जोड)</div>
+                  <div className="font-bold text-purple-950 text-sm">Total volume:</div>
+                  <div className="text-slate-600">V_total = V₁ + V₂ (sum of the volumes of both solids)</div>
                   <div className="text-base font-bold text-purple-900 pt-1">➔ V = {fmt(totalCombVolume.toFixed(1))} cm³</div>
                 </div>
               </div>
@@ -506,42 +506,42 @@ export const AreaVolume3DExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBa
         {activeTab === 'costCalc' && (
           <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
             <h3 className="font-bold text-[#142D4E] text-base">
-              {L('बेलनाकार पानी ट्याङ्की: आयतन (लिटर) र रंग लगाउने लागत', 'Cylindrical Water Tank Capacity & Painting Cost')}
+              {L('बेलनाकार पानी ट्याङ्की: आयतन (litres) र रंग लगाउने लागत', 'Cylindrical Water Tank Capacity & Painting Cost')}
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
               <div>
-                <span className="font-bold text-slate-700 block mb-1">अर्धव्याव्यास (Radius r मिटर):</span>
+                <span className="font-bold text-slate-700 block mb-1">Radius (r m):</span>
                 <input type="number" step="0.5" value={tankRadiusM} onChange={(e) => setTankRadiusM(parseFloat(e.target.value) || 1)} className="w-full p-2 border rounded-xl font-mono font-bold" />
               </div>
               <div>
-                <span className="font-bold text-slate-700 block mb-1">उचाइ (Height h मिटर):</span>
+                <span className="font-bold text-slate-700 block mb-1">Height (h m):</span>
                 <input type="number" step="0.5" value={tankHeightM} onChange={(e) => setTankHeightM(parseFloat(e.target.value) || 1)} className="w-full p-2 border rounded-xl font-mono font-bold" />
               </div>
               <div>
-                <span className="font-bold text-slate-700 block mb-1">रंग लगाउने दर (प्रति वर्ग मि. रु.):</span>
+                <span className="font-bold text-slate-700 block mb-1">Painting rate (Rs. per sq m):</span>
                 <input type="number" value={costPerSqM} onChange={(e) => setCostPerSqM(parseFloat(e.target.value) || 0)} className="w-full p-2 border rounded-xl font-mono font-bold" />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl font-mono text-xs space-y-1.5">
-                <span className="font-bold text-blue-900 text-sm block">१) ट्याङ्कीको पानी क्षमता (Water Capacity):</span>
-                <div>आयतन V = πr²h = (22/7) × {fmt(tankRadiusM)}² × {fmt(tankHeightM)}</div>
-                <div>= <span className="font-bold">{fmt(tankVolM3.toFixed(2))} घन मिटर (m³)</span></div>
-                <div className="text-slate-600">नियम: १ घन मिटर = १,००० लिटर पानी</div>
+                <span className="font-bold text-blue-900 text-sm block">1) Water capacity of the tank:</span>
+                <div>Volume V = πr²h = (22/7) × {fmt(tankRadiusM)}² × {fmt(tankHeightM)}</div>
+                <div>= <span className="font-bold">{fmt(tankVolM3.toFixed(2))} cu m (m³)</span></div>
+                <div className="text-slate-600">Rule: 1 cu m = 1,000 litres of water</div>
                 <div className="text-base font-bold text-blue-950 pt-1">
-                  ➔ कुल क्षमता = {fmt(Math.round(tankCapacityLitres).toLocaleString())} लिटर पानी
+                  ➔ Total capacity = {fmt(Math.round(tankCapacityLitres).toLocaleString())} litres of water
                 </div>
               </div>
 
               <div className="p-4 bg-teal-50 border border-teal-200 rounded-xl font-mono text-xs space-y-1.5">
-                <span className="font-bold text-[#167C80] text-sm block">२) बाहिरी भाग रंग लगाउने लागत (Painting Cost):</span>
-                <div>रंग लगाइने क्षेत्रफल (वक्र सतह + माथिल्लो ढक्कन)</div>
+                <span className="font-bold text-[#167C80] text-sm block">2) Cost of painting the outer part:</span>
+                <div>Area to be painted (curved surface + top cover)</div>
                 <div>A = 2πrh + πr² = <span className="font-bold">{fmt(tankPaintingArea.toFixed(2))} m²</span></div>
-                <div>लागत = क्षेत्रफल × दर = {fmt(tankPaintingArea.toFixed(2))} × रु. {fmt(costPerSqM)}</div>
+                <div>Cost = area × rate = {fmt(tankPaintingArea.toFixed(2))} × Rs. {fmt(costPerSqM)}</div>
                 <div className="text-base font-bold text-emerald-800 pt-1">
-                  ➔ कुल रंग लगाउने खर्च = रु. {fmt(Math.round(totalPaintingCost).toLocaleString())}
+                  ➔ Total painting cost = Rs. {fmt(Math.round(totalPaintingCost).toLocaleString())}
                 </div>
               </div>
             </div>

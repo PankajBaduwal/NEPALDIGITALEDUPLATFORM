@@ -19,7 +19,7 @@ const QUIZ_QUESTIONS = [
     np: 'हिरोनको सूत्र (Heron\'s Formula) अनुसार त्रिभुजको क्षेत्रफल कुन हो?',
     en: 'According to Heron\'s Formula, what is the area of a triangle?',
     options: [
-      { key: 'A', label: 'A = 1/2 × आधार × उचाइ' },
+      { key: 'A', label: 'A = 1/2 × base × height' },
       { key: 'B', label: 'A = √[s(s - a)(s - b)(s - c)]' },
       { key: 'C', label: 'A = s(s - a)(s - b)(s - c)' },
       { key: 'D', label: 'A = √[s + (s - a) + (s - b) + (s - c)]' },
@@ -27,13 +27,13 @@ const QUIZ_QUESTIONS = [
     answer: 'B',
   },
   {
-    np: 'त्रिभुजका भुजाहरू १३ सेमि, १४ सेमि र १५ सेमि भए अर्ध-परिमिति (s) कति हुन्छ?',
+    np: 'त्रिभुजका भुजाहरू 13 सेमि, 14 सेमि र 15 सेमि भए अर्ध-परिमिति (s) कति हुन्छ?',
     en: 'If triangle sides are 13 cm, 14 cm, and 15 cm, what is the semi-perimeter (s)?',
     options: [
-      { key: 'A', label: '२१ सेमि (21 cm)' },
-      { key: 'B', label: '४२ सेमि (42 cm)' },
-      { key: 'C', label: '२८ सेमि (28 cm)' },
-      { key: 'D', label: '३० सेमि (30 cm)' },
+      { key: 'A', label: '21 cm' },
+      { key: 'B', label: '42 cm' },
+      { key: 'C', label: '28 cm' },
+      { key: 'D', label: '30 cm' },
     ],
     answer: 'A',
   },
@@ -41,10 +41,10 @@ const QUIZ_QUESTIONS = [
     np: 'कुनै चतुर्भुजलाई विकर्ण (Diagonal) ले दुई त्रिभुजमा विभाजन गर्दा चतुर्भुजको कुल क्षेत्रफल कसरी निकालिन्छ?',
     en: 'When a quadrilateral is divided into two triangles by a diagonal, how is total area determined?',
     options: [
-      { key: 'A', label: 'दुई त्रिभुजको क्षेत्रफलको गुणनफल' },
-      { key: 'B', label: 'दुई त्रिभुजको क्षेत्रफलको अन्तर' },
-      { key: 'C', label: 'दुई त्रिभुजको क्षेत्रफलको जोडफल (A = A₁ + A₂)' },
-      { key: 'D', label: 'विकर्णको वर्ग' },
+      { key: 'A', label: 'Product of the areas of the two triangles' },
+      { key: 'B', label: 'Difference of the areas of the two triangles' },
+      { key: 'C', label: 'Sum of the areas of the two triangles (A = A₁ + A₂)' },
+      { key: 'D', label: 'Square of the diagonal' },
     ],
     answer: 'C',
   },
@@ -111,32 +111,32 @@ export const HeronsFormulaLandExplorer: React.FC<{
 
   const landProblems = [
     {
-      titleNp: 'समस्या १: त्रिकोणात्मक जग्गाको क्षेत्रफल',
+      titleNp: 'समस्या 1: त्रिकोणात्मक जग्गाको क्षेत्रफल',
       titleEn: 'Problem 1: Triangular Land Plot',
-      descNp: 'एउटा त्रिकोणात्मक जग्गाका भुजाहरू क्रमशः २५ मिटर, ३० मिटर र ३५ मिटर छन्। हिरोनको सूत्र प्रयोग गरी सो जग्गाको क्षेत्रफल (वर्ग मिटरमा) निकाल्नुहोस्।',
+      descNp: 'एउटा त्रिकोणात्मक जग्गाका भुजाहरू क्रमशः 25 m, 30 m र 35 m छन्। हिरोनको सूत्र प्रयोग गरी सो जग्गाको क्षेत्रफल (sq mमा) निकाल्नुहोस्।',
       descEn: 'A triangular plot has boundaries of 25m, 30m, and 35m. Calculate the area of the land plot using Heron\'s formula.',
       // s = (25+30+35)/2 = 45. s-a = 20, s-b = 15, s-c = 10. Product = 45 * 20 * 15 * 10 = 135000. sqrt(135000) = 367.42
       correct: 367.42,
-      solutionNp: 's = (२५ + ३० + ३५) / २ = ४५ मिटर। A = √[४५ × (४५-२५) × (४५-३०) × (४५-३५)] = √[४५ × २० × १५ × १०] = √१,३५,००० ≈ ३६७.४२ वर्ग मिटर।',
+      solutionNp: 's = (25 + 30 + 35) / 2 = 45 m। A = √[45 × (45-25) × (45-30) × (45-35)] = √[45 × 20 × 15 × 10] = √1,35,000 ≈ 367.42 sq m।',
       solutionEn: 's = (25 + 30 + 35) / 2 = 45 m. A = √[45 × 20 × 15 × 10] = √135,000 ≈ 367.42 sq. m.',
     },
     {
-      titleNp: 'समस्या २: समद्विबाहु त्रिभुजको जग्गा',
+      titleNp: 'समस्या 2: समद्विबाहु त्रिभुजको जग्गा',
       titleEn: 'Problem 2: Isosceles Triangular Field',
-      descNp: 'एउटा बारीका दुई समान भुजाहरू २० मिटर र आधार २४ मिटर छन्। सो बारीको क्षेत्रफल कति हुन्छ?',
+      descNp: 'एउटा बारीका दुई समान भुजाहरू 20 m र आधार 24 m छन्। सो बारीको क्षेत्रफल कति हुन्छ?',
       descEn: 'A farm has two equal sides of 20m each and a base of 24m. Find the total area of the field.',
       // s = (20+20+24)/2 = 32. s-a = 12, s-b = 12, s-c = 8. Product = 32 * 12 * 12 * 8 = 36864. sqrt(36864) = 192.
       correct: 192,
-      solutionNp: 's = (२० + २० + २४) / २ = ३२ मिटर। A = √[३२ × १२ × १२ × ८] = √३६,८६४ = १९२ वर्ग मिटर।',
+      solutionNp: 's = (20 + 20 + 24) / 2 = 32 m। A = √[32 × 12 × 12 × 8] = √36,864 = 192 sq m।',
       solutionEn: 's = (20 + 20 + 24) / 2 = 32 m. A = √[32 × 12 × 12 × 8] = √36,864 = 192 sq. m.',
     },
     {
-      titleNp: 'समस्या ३: चतुर्भुजाकार जग्गाको विभाजन',
+      titleNp: 'समस्या 3: चतुर्भुजाकार जग्गाको विभाजन',
       titleEn: 'Problem 3: Quadrilateral Land by Diagonal',
-      descNp: 'एउटा चतुर्भुजाकार घडेरीको विकर्ण ५० मिटर छ। सो विकर्णले बनाएका दुई त्रिभुजहरूको क्षेत्रफल क्रमशः २५० वर्ग मिटर र ३५० वर्ग मिटर छन् भने कुल घडेरीको क्षेत्रफल कति हुन्छ?',
+      descNp: 'एउटा चतुर्भुजाकार घडेरीको विकर्ण 50 m छ। सो विकर्णले बनाएका दुई त्रिभुजहरूको क्षेत्रफल क्रमशः 250 sq m र 350 sq m छन् भने कुल घडेरीको क्षेत्रफल कति हुन्छ?',
       descEn: 'A diagonal of a quadrilateral plot is 50m. The two divided triangles have areas 250 sq. m and 350 sq. m. What is the total area of the plot?',
       correct: 600,
-      solutionNp: 'कुल क्षेत्रफल = A₁ + A₂ = २५० + ३५० = ६०० वर्ग मिटर।',
+      solutionNp: 'कुल क्षेत्रफल = A₁ + A₂ = 250 + 350 = 600 sq m।',
       solutionEn: 'Total Area = A₁ + A₂ = 250 + 350 = 600 sq. m.',
     },
   ];
@@ -162,7 +162,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! पाठ ५ क्षेत्रफल अन्तर्गत हिरोनको सूत्रबाट विषमबाहु त्रिभुज र चतुर्भुजको क्षेत्रफल निकाल्न सिकौं!',
+        'नमस्ते! पाठ 5 क्षेत्रफल अन्तर्गत हिरोनको सूत्रबाट विषमबाहु त्रिभुज र चतुर्भुजको क्षेत्रफल निकाल्न सिकौं!',
         "Welcome! Explore Heron's formula for scalene triangles and quadrilateral land plots!"
       )}
     >
@@ -178,7 +178,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
             }`}
           >
             <span>📐</span>
-            <span>{L('१. हिरोनको सूत्र (त्रिभुज)', "1. Heron's Formula")}</span>
+            <span>{L('1. हिरोनको सूत्र (त्रिभुज)', "1. Heron's Formula")}</span>
           </button>
           <button
             onClick={() => setActiveTab('quadrilateral')}
@@ -189,7 +189,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
             }`}
           >
             <span>🔷</span>
-            <span>{L('२. चतुर्भुज विभाजन', '2. Quad Division')}</span>
+            <span>{L('2. चतुर्भुज विभाजन', '2. Quad Division')}</span>
           </button>
           <button
             onClick={() => setActiveTab('challenge')}
@@ -200,7 +200,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
             }`}
           >
             <span>🎯</span>
-            <span>{L('३. जग्गा समस्या चुनौती', '3. Land Problems')}</span>
+            <span>{L('3. जग्गा समस्या चुनौती', '3. Land Problems')}</span>
           </button>
         </div>
 
@@ -216,7 +216,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'विषमबाहु त्रिभुजमा उचाइ थाहा नभएको अवस्थामा तीनवटै भुजाहरू a, b, c को नाप प्रयोग गरी अर्ध-परिमिति s = (a + b + c)/२ निकालिन्छ। त्यसपछि हिरोनको सूत्र A = √[s(s - a)(s - b)(s - c)] बाट क्षेत्रफल पत्ता लगाइन्छ।',
+                  'विषमबाहु त्रिभुजमा उचाइ थाहा नभएको अवस्थामा तीनवटै भुजाहरू a, b, c को नाप प्रयोग गरी अर्ध-परिमिति s = (a + b + c)/2 निकालिन्छ। त्यसपछि हिरोनको सूत्र A = √[s(s - a)(s - b)(s - c)] बाट क्षेत्रफल पत्ता लगाइन्छ।',
                   "When the height is unknown, Heron's formula calculates triangle area from its three sides a, b, and c via semi-perimeter s = (a + b + c)/2."
                 )}
               </p>
@@ -393,7 +393,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
                   {/* Step 1: Perimeter and Semi-Perimeter */}
                   <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl space-y-1">
                     <div className="font-bold text-gray-800 dark:text-gray-200">
-                      {L('चरण १: परिमिति (P) र अर्ध-परिमिति (s) निकाल्ने', 'Step 1: Perimeter & Semi-Perimeter (s)')}
+                      {L('चरण 1: परिमिति (P) र अर्ध-परिमिति (s) निकाल्ने', 'Step 1: Perimeter & Semi-Perimeter (s)')}
                     </div>
                     <div className="text-xs text-gray-600 dark:text-gray-300 font-mono">
                       P = a + b + c = {isNe ? toNp(sideA) : sideA} + {isNe ? toNp(sideB) : sideB} + {isNe ? toNp(sideC) : sideC} = {isNe ? toNp(sideA + sideB + sideC) : sideA + sideB + sideC}
@@ -406,7 +406,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
                   {/* Step 2: Differences (s - a), (s - b), (s - c) */}
                   <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl space-y-1">
                     <div className="font-bold text-gray-800 dark:text-gray-200">
-                      {L('चरण २: प्रत्येक भुजा घटाउने (s - a, s - b, s - c)', 'Step 2: Subtractions (s - a, s - b, s - c)')}
+                      {L('चरण 2: प्रत्येक भुजा घटाउने (s - a, s - b, s - c)', 'Step 2: Subtractions (s - a, s - b, s - c)')}
                     </div>
                     <div className="grid grid-cols-3 gap-2 font-mono text-xs text-gray-700 dark:text-gray-300">
                       <div>(s - a) = {isNe ? toNp(semiPerimeter) : semiPerimeter} - {isNe ? toNp(sideA) : sideA} = <strong>{isNe ? toNp(sMinusA) : sMinusA}</strong></div>
@@ -418,7 +418,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
                   {/* Step 3: Heron's Formula Application */}
                   <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl space-y-2">
                     <div className="font-bold text-emerald-900 dark:text-emerald-200">
-                      {L("चरण ३: हिरोनको सूत्र प्रयोग गर्ने: A = √[s(s - a)(s - b)(s - c)]", "Step 3: Apply Heron's Formula: A = √[s(s - a)(s - b)(s - c)]")}
+                      {L("चरण 3: हिरोनको सूत्र प्रयोग गर्ने: A = √[s(s - a)(s - b)(s - c)]", "Step 3: Apply Heron's Formula: A = √[s(s - a)(s - b)(s - c)]")}
                     </div>
                     <div className="font-mono text-xs text-emerald-800 dark:text-emerald-300">
                       A = √[{isNe ? toNp(semiPerimeter) : semiPerimeter} × {isNe ? toNp(sMinusA) : sMinusA} × {isNe ? toNp(sMinusB) : sMinusB} × {isNe ? toNp(sMinusC) : sMinusC}]
@@ -448,7 +448,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'जग्गा नापी गर्दा अनियमित आकारको चतुर्भुजाकार जग्गालाई एउटा विकर्ण (Diagonal d) खिचेर दुईवटा त्रिभुज Δ१ र Δ२ मा विभाजन गरिन्छ। दुवै त्रिभुजको क्षेत्रफल हिरोनको सूत्रबाट निकाली जोड्दा कुल क्षेत्रफल आउँछ: कुल क्षेत्रफल = A₁ + A₂।',
+                  'जग्गा नापी गर्दा अनियमित आकारको चतुर्भुजाकार जग्गालाई एउटा विकर्ण (Diagonal d) खिचेर दुईpcs त्रिभुज Δ1 र Δ2 मा विभाजन गरिन्छ। दुवै त्रिभुजको क्षेत्रफल हिरोनको सूत्रबाट निकाली जोड्दा कुल क्षेत्रफल आउँछ: कुल क्षेत्रफल = A₁ + A₂।',
                   'In land surveys, an irregular quadrilateral is divided into two triangles by a diagonal d. The areas of both triangles are computed using Heron\'s formula and summed: Total Area = A₁ + A₂.'
                 )}
               </p>
@@ -464,7 +464,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
                 {/* Triangle 1 Inputs */}
                 <div className="p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl space-y-3 border border-blue-200 dark:border-blue-800">
                   <div className="font-bold text-blue-900 dark:text-blue-200 text-xs uppercase tracking-wide">
-                    {L('त्रिभुज १ (पहिलो भाग):', 'Triangle 1 (Top Part):')}
+                    {L('त्रिभुज 1:', 'Triangle 1 (Top Part):')}
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
@@ -511,7 +511,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
                 {/* Triangle 2 Inputs */}
                 <div className="p-3 bg-indigo-50 dark:bg-indigo-950/40 rounded-xl space-y-3 border border-indigo-200 dark:border-indigo-800">
                   <div className="font-bold text-indigo-900 dark:text-indigo-200 text-xs uppercase tracking-wide">
-                    {L('त्रिभुज २ (दोस्रो भाग):', 'Triangle 2 (Bottom Part):')}
+                    {L('त्रिभुज 2:', 'Triangle 2 (Bottom Part):')}
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
@@ -564,10 +564,10 @@ export const HeronsFormulaLandExplorer: React.FC<{
 
                     {/* Labels */}
                     <text x="200" y="80" textAnchor="middle" className="text-xs font-black fill-blue-700 dark:fill-blue-300">
-                      Δ१ = {isNe ? toNp(areaT1.toFixed(1)) : areaT1.toFixed(1)} m²
+                      Δ1 = {isNe ? toNp(areaT1.toFixed(1)) : areaT1.toFixed(1)} m²
                     </text>
                     <text x="200" y="165" textAnchor="middle" className="text-xs font-black fill-indigo-700 dark:fill-indigo-300">
-                      Δ२ = {isNe ? toNp(areaT2.toFixed(1)) : areaT2.toFixed(1)} m²
+                      Δ2 = {isNe ? toNp(areaT2.toFixed(1)) : areaT2.toFixed(1)} m²
                     </text>
                     <text x="200" y="115" textAnchor="middle" className="text-[11px] font-mono font-bold fill-amber-700 dark:fill-amber-300">
                       d = {isNe ? toNp(qDiag) : qDiag} m
@@ -583,7 +583,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
 
                   <div className="flex justify-between py-1.5 border-b border-gray-100 dark:border-gray-700">
                     <span className="text-blue-700 dark:text-blue-300 font-semibold">
-                      {L('१. त्रिभुज १ को क्षेत्रफल (A₁):', '1. Triangle 1 Area (A₁):')}
+                      {L('1. त्रिभुज 1 को क्षेत्रफल (A₁):', '1. Triangle 1 Area (A₁):')}
                     </span>
                     <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
                       {isNe ? toNp(areaT1.toFixed(2)) : areaT1.toFixed(2)} m²
@@ -592,7 +592,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
 
                   <div className="flex justify-between py-1.5 border-b border-gray-100 dark:border-gray-700">
                     <span className="text-indigo-700 dark:text-indigo-300 font-semibold">
-                      {L('२. त्रिभुज २ को क्षेत्रफल (A₂):', '2. Triangle 2 Area (A₂):')}
+                      {L('2. त्रिभुज 2 को क्षेत्रफल (A₂):', '2. Triangle 2 Area (A₂):')}
                     </span>
                     <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
                       {isNe ? toNp(areaT2.toFixed(2)) : areaT2.toFixed(2)} m²
@@ -653,7 +653,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
               {/* Input */}
               <div className="space-y-3">
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
-                  {L('तपाईंको उत्तर (वर्ग मिटरमा):', 'Your Answer (in sq. meters):')}
+                  {L('तपाईंको उत्तर (sq mमा):', 'Your Answer (in sq. meters):')}
                 </label>
                 <div className="flex gap-3">
                   <input
@@ -664,7 +664,7 @@ export const HeronsFormulaLandExplorer: React.FC<{
                       setUserAnswer(e.target.value);
                       setFeedback(null);
                     }}
-                    placeholder={L('उदा. ३६७.४२', 'e.g. 367.42')}
+                    placeholder={L('उदा. 367.42', 'e.g. 367.42')}
                     className="flex-1 px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 font-mono text-lg font-bold dark:bg-gray-700 dark:text-gray-100"
                   />
                   <button

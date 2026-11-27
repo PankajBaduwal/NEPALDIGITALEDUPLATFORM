@@ -1,7 +1,7 @@
 /**
  * TessellationDesignStudio.tsx
- * Grade 7 Mathematics – Lesson 18: SYMMETRY AND TESSELLATION (सममिति र टेसलेसन)
- * Simulation 3: Tessellation Design Studio (टेसलेसन डिजाइन स्टुडियो)
+ * Grade 7 Mathematics – Lesson 18: SYMMETRY AND TESSELLATION
+ * Simulation 3: Tessellation Design Studio
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 270-277)
  */
 import React, { useState } from 'react';
@@ -12,13 +12,13 @@ import { Grid, Check, RotateCcw, Palette, Layers, Sparkles } from 'lucide-react'
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'कुनै समतल सतहलाई कुनै पनि खाली ठाउँ (Gap) नछोडी र एकमाथि अर्को नखप्टिई (No Overlap) ज्यामितीय आकृतिहरूले भर्ने कार्यलाई के भनिन्छ?',
+    np: 'कुनै समतल सतहलाई कुनै पनि Gap (Gap) नछोडी र एकमाथि अर्को नखप्टिई (No Overlap) ज्यामितीय आकृतिहरूले भर्ने कार्यलाई के भनिन्छ?',
     en: 'What is the arrangement of geometrical shapes covering a plane surface without gaps or overlaps called?',
     options: [
-      { key: 'A', label: 'टेसलेसन (Tessellation / Tiling)' },
-      { key: 'B', label: 'सममिति' },
-      { key: 'C', label: 'रूपान्तरण' },
-      { key: 'D', label: 'दिगंश' },
+      { key: 'A', label: 'Tessellation (tiling)' },
+      { key: 'B', label: 'Symmetry' },
+      { key: 'C', label: 'Transformation' },
+      { key: 'D', label: 'Bearing' },
     ],
     answer: 'A',
   },
@@ -26,10 +26,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुन-कुन नियमित ज्यामितीय आकृतिहरूले मात्र नियमित टेसलेसन (Regular Tessellation) बनाउन सक्छन्?',
     en: 'Which regular polygons can form regular tessellations alone?',
     options: [
-      { key: 'A', label: 'समबाहु त्रिभुज, वर्ग र नियमित षट्कोण (Equilateral △, Square, Hexagon)' },
-      { key: 'B', label: 'पञ्चभुज र अष्टभुज' },
-      { key: 'C', label: 'वृत्त र अण्डाकार' },
-      { key: 'D', label: 'विषमबाहु त्रिभुज मात्र' },
+      { key: 'A', label: 'Equilateral triangle, square and regular hexagon' },
+      { key: 'B', label: 'Pentagon and octagon' },
+      { key: 'C', label: 'Circle and ellipse' },
+      { key: 'D', label: 'Scalene triangle only' },
     ],
     answer: 'A',
   },
@@ -37,21 +37,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'नेपाली गाउँघरमा प्रयोग हुने नाङ्लो (Nanglo) र डोको (Doko) को बुनाइ कुन गणितीय अवधारणाको उदाहरण हो?',
     en: 'Weaving of traditional Nepali Nanglo and Doko is a real-life example of which mathematical concept?',
     options: [
-      { key: 'A', label: 'टेसलेसन (Tessellation)' },
-      { key: 'B', label: 'वृत्तको परिधि' },
-      { key: 'C', label: 'घाताङ्क' },
-      { key: 'D', label: 'पाइथागोरस साध्य' },
+      { key: 'A', label: 'Tessellation' },
+      { key: 'B', label: 'Circumference of a circle' },
+      { key: 'C', label: 'Exponent' },
+      { key: 'D', label: 'Pythagoras theorem' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि कुनै सतहमा टायल बिछ्याउँदा बीचमा खाली ठाउँ वा खप्टिएको भाग रह्यो भने के त्यो सही टेसलेसन हो?',
+    np: 'यदि कुनै सतहमा टायल बिछ्याउँदा बीचमा Gap वा Overlapping भाग रह्यो भने के त्यो सही टेसलेसन हो?',
     en: 'If gaps or overlaps occur between tiles, is it a valid tessellation?',
     options: [
-      { key: 'A', label: 'होइन (टेसलेसनमा खाली ठाउँ वा खप्टिनु हुँदैन)' },
-      { key: 'B', label: 'हो, यो विशेष टेसलेसन हो' },
-      { key: 'C', label: 'जहिले पनि मान्य हुन्छ' },
-      { key: 'D', label: '५०% मात्र मान्य हुन्छ' },
+      { key: 'A', label: 'No (a tessellation must have no gaps or overlaps)' },
+      { key: 'B', label: 'Yes, it is a special tessellation' },
+      { key: 'C', label: 'It is always valid' },
+      { key: 'D', label: 'It is valid only 50% of the time' },
     ],
     answer: 'A',
   },
@@ -97,7 +97,7 @@ export const TessellationDesignStudio: React.FC<{ onBackToLibrary?: () => void; 
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! कुनै पनि खाली ठाउँ नछोडी र नखप्टिई सतहलाई टायलले भर्ने कला नै टेसलेसन हो। रङ्गीन प्याटर्न बनाऔँ!',
+        'नमस्ते! कुनै पनि Gap नछोडी र नखप्टिई सतहलाई टायलले भर्ने कला नै टेसलेसन हो। रङ्गीन प्याटर्न बनाऔँ!',
         'Hello! Tessellation is the art of completely covering a surface without gaps or overlaps. Let us create colorful patterns!'
       )}
     >
@@ -105,10 +105,10 @@ export const TessellationDesignStudio: React.FC<{ onBackToLibrary?: () => void; 
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 justify-center bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'interactive_tiling', np: '१. अन्तरक्रियात्मक टायलिङ (Interactive Studio)', en: '1. Interactive Studio' },
-            { id: 'triangular_builder', np: '२. त्रिकोणीय टेसलेसन (Triangular Tessellation)', en: '2. Triangular Tessellation' },
-            { id: 'validator', np: '३. टेसलेसन परीक्षण (Valid vs Invalid)', en: '3. Valid vs Invalid Tiling' },
-            { id: 'nepali_real_life', np: '४. नेपाली परिवेशका टेसलेसन (Real-life Nepali)', en: '4. Nepali Real-Life Patterns' },
+            { id: 'interactive_tiling', np: '1. अन्तरक्रियात्मक टायलिङ (Interactive Studio)', en: '1. Interactive Studio' },
+            { id: 'triangular_builder', np: '2. त्रिकोणीय टेसलेसन (Triangular Tessellation)', en: '2. Triangular Tessellation' },
+            { id: 'validator', np: '3. टेसलेसन परीक्षण (Valid vs Invalid)', en: '3. Valid vs Invalid Tiling' },
+            { id: 'nepali_real_life', np: '4. नेपाली परिवेशका टेसलेसन (Real-life Nepali)', en: '4. Nepali Real-Life Patterns' },
           ].map((item) => (
             <button
               key={item.id}
@@ -129,11 +129,11 @@ export const TessellationDesignStudio: React.FC<{ onBackToLibrary?: () => void; 
           <div className="bg-white rounded-3xl p-6 shadow-xl border border-indigo-100 space-y-6">
             <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-2xl">
               <h3 className="text-base font-bold text-blue-950" style={{ fontFamily: FONT_NP }}>
-                {L('टेसलेसन (Tessellation) को परिभाषा:', 'Definition of Tessellation:')}
+                {L('Tessellation को परिभाषा:', 'Definition of Tessellation:')}
               </h3>
               <p className="text-slate-700 text-xs md:text-sm mt-1">
                 {L(
-                  'कुनै समतल सतहलाई कुनै पनि ठाउँ खाली नछोडी (No gaps) र एकमाथि अर्को नखप्टिने गरी (No overlaps) ज्यामितीय आकृतिहरूले मिलाएर ढाक्ने व्यवस्थालाई टेसलेसन (Tessellation) भनिन्छ।',
+                  'कुनै समतल सतहलाई कुनै पनि ठाउँ खाली नछोडी (No gaps) र एकमाथि अर्को नखप्टिने गरी (No overlaps) ज्यामितीय आकृतिहरूले मिलाएर ढाक्ने व्यवस्थालाई Tessellation भनिन्छ।',
                   'A tessellation is the covering of a plane using one or more geometric shapes with no gaps and no overlaps.'
                 )}
               </p>
@@ -289,7 +289,7 @@ export const TessellationDesignStudio: React.FC<{ onBackToLibrary?: () => void; 
               </h3>
               <p className="text-slate-700 text-xs md:text-sm mt-1">
                 {L(
-                  'पाठ्यपुस्तक अनुसार समबाहु त्रिभुज र समकोणी त्रिभुज दुवैले कुनै खाली ठाउँ नछोडी टेसलेसन बनाउँछन्।',
+                  'पाठ्यपुस्तक अनुसार समबाहु त्रिभुज र समकोणी त्रिभुज दुवैले कुनै Gap नछोडी टेसलेसन बनाउँछन्।',
                   'Both equilateral triangles and right-angled triangles can tessellate seamlessly across a flat plane.'
                 )}
               </p>
@@ -299,7 +299,7 @@ export const TessellationDesignStudio: React.FC<{ onBackToLibrary?: () => void; 
               {/* Equilateral Triangle Tiling */}
               <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl flex flex-col items-center">
                 <div className="text-xs font-bold text-indigo-900 mb-2">
-                  {L('विधि १: समबाहु त्रिभुजहरूको टेसलेसन (Equilateral △)', 'Method 1: Equilateral Triangles')}
+                  {L('विधि 1: समबाहु त्रिभुजहरूको टेसलेसन (Equilateral △)', 'Method 1: Equilateral Triangles')}
                 </div>
                 <svg width="240" height="160" viewBox="0 0 240 160">
                   {Array.from({ length: 3 }).map((_, r) =>
@@ -325,14 +325,14 @@ export const TessellationDesignStudio: React.FC<{ onBackToLibrary?: () => void; 
                   )}
                 </svg>
                 <div className="text-[11px] text-slate-600 mt-2 text-center">
-                  {L('६ वटा समबाहु त्रिभुजहरू एउटा शीर्षमा भेटिँदा ६ × ६०° = ३६०° हुन्छ।', '6 equilateral triangles meet at each vertex (6 × 60° = 360°).')}
+                  {L('6 pcs समबाहु त्रिभुजहरू एउटा शीर्षमा भेटिँदा 6 × 60° = 360° हुन्छ।', '6 equilateral triangles meet at each vertex (6 × 60° = 360°).')}
                 </div>
               </div>
 
               {/* Right-angled Triangle Tiling */}
               <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl flex flex-col items-center">
                 <div className="text-xs font-bold text-indigo-900 mb-2">
-                  {L('विधि २: समकोणी त्रिभुजहरूको टेसलेसन (Right-angled △)', 'Method 2: Right-angled Triangles')}
+                  {L('विधि 2: समकोणी त्रिभुजहरूको टेसलेसन (Right-angled △)', 'Method 2: Right-angled Triangles')}
                 </div>
                 <svg width="240" height="160" viewBox="0 0 240 160">
                   {Array.from({ length: 3 }).map((_, r) =>
@@ -379,35 +379,35 @@ export const TessellationDesignStudio: React.FC<{ onBackToLibrary?: () => void; 
                   </div>
                 </div>
                 <p className="text-[11px] text-emerald-800 font-semibold">
-                  {L('कुनै खाली ठाउँ छैन र खप्टिएको पनि छैन। (No gaps, no overlaps)', 'No gaps and no overlaps. Perfect tiling.')}
+                  {L('कुनै Gap छैन र Overlapping पनि छैन। (No gaps, no overlaps)', 'No gaps and no overlaps. Perfect tiling.')}
                 </p>
               </div>
 
               {/* Example 2: Invalid (Gaps) */}
               <div className="p-4 rounded-2xl bg-rose-50 border-2 border-rose-300 text-center space-y-2">
-                <div className="text-xs font-bold text-rose-900 uppercase">✕ {L('गलत: खाली ठाउँ भएको (Gaps)', 'Invalid: Has Gaps')}</div>
+                <div className="text-xs font-bold text-rose-900 uppercase">✕ {L('गलत: Gap भएको (Gaps)', 'Invalid: Has Gaps')}</div>
                 <div className="h-28 flex items-center justify-center">
                   <svg width="100" height="90" viewBox="0 0 100 90">
                     <circle cx="25" cy="25" r="20" fill="#f87171" stroke="#b91c1c" strokeWidth="2" />
                     <circle cx="75" cy="25" r="20" fill="#f87171" stroke="#b91c1c" strokeWidth="2" />
                     <circle cx="50" cy="65" r="20" fill="#f87171" stroke="#b91c1c" strokeWidth="2" />
                     {/* Empty center gap */}
-                    <text x="50" y="42" textAnchor="middle" fontSize="10" fill="#7f1d1d" fontWeight="bold">खाली ठाउँ</text>
+                    <text x="50" y="42" textAnchor="middle" fontSize="10" fill="#7f1d1d" fontWeight="bold">Gap</text>
                   </svg>
                 </div>
                 <p className="text-[11px] text-rose-800 font-semibold">
-                  {L('वृत्तहरूलाई जोड्दा बीचमा खाली ठाउँ (Gap) छुट्छ, त्यसैले वृत्तले टेसलेसन बनाउँदैन।', 'Circles leave gaps when placed side by side.')}
+                  {L('वृत्तहरूलाई जोड्दा बीचमा Gap (Gap) छुट्छ, त्यसैले वृत्तले टेसलेसन बनाउँदैन।', 'Circles leave gaps when placed side by side.')}
                 </p>
               </div>
 
               {/* Example 3: Invalid (Overlaps) */}
               <div className="p-4 rounded-2xl bg-amber-50 border-2 border-amber-300 text-center space-y-2">
-                <div className="text-xs font-bold text-amber-900 uppercase">✕ {L('गलत: खप्टिएको (Overlaps)', 'Invalid: Overlapping')}</div>
+                <div className="text-xs font-bold text-amber-900 uppercase">✕ {L('गलत: Overlapping (Overlaps)', 'Invalid: Overlapping')}</div>
                 <div className="h-28 flex items-center justify-center">
                   <svg width="100" height="90" viewBox="0 0 100 90">
                     <rect x="15" y="15" width="45" height="45" fill="rgba(245, 158, 11, 0.5)" stroke="#b45309" strokeWidth="2" />
                     <rect x="40" y="25" width="45" height="45" fill="rgba(239, 68, 68, 0.5)" stroke="#b91c1c" strokeWidth="2" />
-                    <text x="50" y="42" textAnchor="middle" fontSize="10" fill="#b45309" fontWeight="bold">खप्टिएको</text>
+                    <text x="50" y="42" textAnchor="middle" fontSize="10" fill="#b45309" fontWeight="bold">Overlapping</text>
                   </svg>
                 </div>
                 <p className="text-[11px] text-amber-800 font-semibold">
@@ -426,32 +426,32 @@ export const TessellationDesignStudio: React.FC<{ onBackToLibrary?: () => void; 
                 {L('नेपाली जनजीवन र संस्कृतिका टेसलेसन उदाहरणहरू:', 'Real-Life Nepali Tessellation Examples:')}
               </h3>
               <p className="text-slate-700 text-xs mt-1">
-                {L('पाठ्यपुस्तक अनुसार हाम्रा परम्परागत सामान र वास्तुकलामा टेसलेसनको व्यापक प्रयोग पाइन्छ।', 'Textbook examples: Traditional Nepali household items and crafts reflect tessellation.')}
+                {L('पाठ्यपुस्तक अनुसार हाम्रा परम्परागत सामान र Architectureमा टेसलेसनको व्यापक प्रयोग पाइन्छ।', 'Textbook examples: Traditional Nepali household items and crafts reflect tessellation.')}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
                 {
-                  titleNp: '१. नाङ्लो र डोकोको बुनाइ',
+                  titleNp: '1. नाङ्लो र डोकोको बुनाइ',
                   titleEn: '1. Nanglo & Doko Weaving',
                   descNp: 'बाँस वा चोयालाई क्रस गरी त्रिकोणीय र समानान्तर टेसलेसन ढाँचामा बुनिन्छ।',
                   descEn: 'Bamboo strips woven in tight repeating triangular and diamond geometric patterns.',
-                  badge: 'परम्परागत शिल्प',
+                  badge: 'Traditional craft',
                 },
                 {
-                  titleNp: '२. ढुङ्गे पर्खाल र इँटाको गारो',
+                  titleNp: '2. ढुङ्गे पर्खाल र इँटाको गारो',
                   titleEn: '2. Stone & Brick Walls',
-                  descNp: 'इँटाहरूलाई आयताकार टेसलेसनमा बिना कुनै खाली ठाउँ मिलाएर पर्खाल बनाइन्छ।',
+                  descNp: 'इँटाहरूलाई आयताकार टेसलेसनमा बिना कुनै Gap मिलाएर पर्खाल बनाइन्छ।',
                   descEn: 'Rectangular bricks arranged seamlessly without gaps to create strong walls.',
-                  badge: 'वास्तुकला',
+                  badge: 'Architecture',
                 },
                 {
-                  titleNp: '३. नेपाली गलैंचा र कार्पेट',
+                  titleNp: '3. नेपाली गलैंचा र कार्पेट',
                   titleEn: '3. Nepali Carpet & Rugs',
                   descNp: 'उनका धागाहरूबाट ज्यामितीय सममितीय ढाँचाहरू मिलाएर सुन्दर टेसलेसन बनाइन्छ।',
                   descEn: 'Handwoven wool rugs featuring symmetrical geometric tile designs.',
-                  badge: 'हस्तकला',
+                  badge: 'Handicraft',
                 },
               ].map((item, idx) => (
                 <div key={idx} className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2">

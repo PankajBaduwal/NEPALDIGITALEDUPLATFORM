@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Bohr's Atomic Model (बोरको पारमाणविक नमुना) · नेपाल डिजिटल शिक्षा</title>
+  <title>Bohr's Atomic Model · Nepal Digital Education</title>
   <style>
     :root {
       --bg: #090d16;
@@ -120,7 +120,7 @@
   <header>
     <div>
       <span class="badge">Class 6–10 · Chemistry</span>
-      <h1>Bohr's Atomic Model Visualizer (बोरको पारमाणविक नमुना)</h1>
+      <h1>Bohr's Atomic Model Visualizer</h1>
       <div class="subtitle">Nepal CDC Curriculum · Elements H (1) to Ca (20) with K, L, M, N Shells</div>
     </div>
     <div style="display:flex; gap:8px;">
@@ -135,23 +135,23 @@
     </div>
 
     <div class="controls-panel">
-      <label style="font-weight:600; font-size:0.9rem;">Select Element (तत्व छान्नुहोस्):</label>
+      <label style="font-weight:600; font-size:0.9rem;">Select Element:</label>
       <select class="element-select" id="elemSelect" onchange="changeElement(this.value)">
-        <option value="1">1. Hydrogen (H) · हाइड्रोजन</option>
-        <option value="2">2. Helium (He) · हिलियम</option>
-        <option value="3">3. Lithium (Li) · लिथियम</option>
-        <option value="6" selected>6. Carbon (C) · कार्बन</option>
-        <option value="7">7. Nitrogen (N) · नाइट्रोजन</option>
-        <option value="8">8. Oxygen (O) · अक्सिजन</option>
-        <option value="10">10. Neon (Ne) · नियोन</option>
-        <option value="11">11. Sodium (Na) · सोडियम</option>
-        <option value="12">12. Magnesium (Mg) · म्याग्नेसियम</option>
-        <option value="13">13. Aluminium (Al) · एलुमिनियम</option>
-        <option value="15">15. Phosphorus (P) · फस्फोरस</option>
-        <option value="17">17. Chlorine (Cl) · क्लोरिन</option>
-        <option value="18">18. Argon (Ar) · आर्गन</option>
-        <option value="19">19. Potassium (K) · पोटासियम</option>
-        <option value="20">20. Calcium (Ca) · क्याल्सियम</option>
+        <option value="1">1. Hydrogen (H)</option>
+        <option value="2">2. Helium (He)</option>
+        <option value="3">3. Lithium (Li)</option>
+        <option value="6" selected>6. Carbon (C)</option>
+        <option value="7">7. Nitrogen (N)</option>
+        <option value="8">8. Oxygen (O)</option>
+        <option value="10">10. Neon (Ne)</option>
+        <option value="11">11. Sodium (Na)</option>
+        <option value="12">12. Magnesium (Mg)</option>
+        <option value="13">13. Aluminium (Al)</option>
+        <option value="15">15. Phosphorus (P)</option>
+        <option value="17">17. Chlorine (Cl)</option>
+        <option value="18">18. Argon (Ar)</option>
+        <option value="19">19. Potassium (K)</option>
+        <option value="20">20. Calcium (Ca)</option>
       </select>
 
       <div class="stats-card">
@@ -174,7 +174,7 @@
       </div>
 
       <div class="shell-config" id="shellBox">
-        <strong>Electronic Configuration (2n² नियम):</strong><br>
+        <strong>Electronic Configuration:</strong><br>
         K Shell: 2 | L Shell: 4<br>
         Valence Electrons: <strong>4</strong> (Valency: 4)
       </div>
@@ -183,21 +183,21 @@
 
   <script>
     const elementsData = {
-      1: { name: "Hydrogen", sym: "H", nepali: "हाइड्रोजन", z: 1, a: 1, shells: [1] },
-      2: { name: "Helium", sym: "He", nepali: "हिलियम", z: 2, a: 4, shells: [2] },
-      3: { name: "Lithium", sym: "Li", nepali: "लिथियम", z: 3, a: 7, shells: [2, 1] },
-      6: { name: "Carbon", sym: "C", nepali: "कार्बन", z: 6, a: 12, shells: [2, 4] },
-      7: { name: "Nitrogen", sym: "N", nepali: "नाइट्रोजन", z: 7, a: 14, shells: [2, 5] },
-      8: { name: "Oxygen", sym: "O", nepali: "अक्सिजन", z: 8, a: 16, shells: [2, 6] },
-      10: { name: "Neon", sym: "Ne", nepali: "नियोन", z: 10, a: 20, shells: [2, 8] },
-      11: { name: "Sodium", sym: "Na", nepali: "सोडियम", z: 11, a: 23, shells: [2, 8, 1] },
-      12: { name: "Magnesium", sym: "Mg", nepali: "म्याग्नेसियम", z: 12, a: 24, shells: [2, 8, 2] },
-      13: { name: "Aluminium", sym: "Al", nepali: "एलुमिनियम", z: 13, a: 27, shells: [2, 8, 3] },
-      15: { name: "Phosphorus", sym: "P", nepali: "फस्फोरस", z: 15, a: 31, shells: [2, 8, 5] },
-      17: { name: "Chlorine", sym: "Cl", nepali: "क्लोरिन", z: 17, a: 35, shells: [2, 8, 7] },
-      18: { name: "Argon", sym: "Ar", nepali: "आर्गन", z: 18, a: 40, shells: [2, 8, 8] },
-      19: { name: "Potassium", sym: "K", nepali: "पोटासियम", z: 19, a: 39, shells: [2, 8, 8, 1] },
-      20: { name: "Calcium", sym: "Ca", nepali: "क्याल्सियम", z: 20, a: 40, shells: [2, 8, 8, 2] }
+      1: { name: "Hydrogen", sym: "H", nepali: "", z: 1, a: 1, shells: [1] },
+      2: { name: "Helium", sym: "He", nepali: "", z: 2, a: 4, shells: [2] },
+      3: { name: "Lithium", sym: "Li", nepali: "", z: 3, a: 7, shells: [2, 1] },
+      6: { name: "Carbon", sym: "C", nepali: "", z: 6, a: 12, shells: [2, 4] },
+      7: { name: "Nitrogen", sym: "N", nepali: "", z: 7, a: 14, shells: [2, 5] },
+      8: { name: "Oxygen", sym: "O", nepali: "", z: 8, a: 16, shells: [2, 6] },
+      10: { name: "Neon", sym: "Ne", nepali: "", z: 10, a: 20, shells: [2, 8] },
+      11: { name: "Sodium", sym: "Na", nepali: "", z: 11, a: 23, shells: [2, 8, 1] },
+      12: { name: "Magnesium", sym: "Mg", nepali: "", z: 12, a: 24, shells: [2, 8, 2] },
+      13: { name: "Aluminium", sym: "Al", nepali: "", z: 13, a: 27, shells: [2, 8, 3] },
+      15: { name: "Phosphorus", sym: "P", nepali: "", z: 15, a: 31, shells: [2, 8, 5] },
+      17: { name: "Chlorine", sym: "Cl", nepali: "", z: 17, a: 35, shells: [2, 8, 7] },
+      18: { name: "Argon", sym: "Ar", nepali: "", z: 18, a: 40, shells: [2, 8, 8] },
+      19: { name: "Potassium", sym: "K", nepali: "", z: 19, a: 39, shells: [2, 8, 8, 1] },
+      20: { name: "Calcium", sym: "Ca", nepali: "", z: 20, a: 40, shells: [2, 8, 8, 2] }
     };
 
     let curZ = 6;
@@ -220,9 +220,9 @@
       const valElectrons = el.shells[el.shells.length - 1];
       const valency = valElectrons <= 4 ? valElectrons : 8 - valElectrons;
       document.getElementById('shellBox').innerHTML = `
-        <strong>Electronic Configuration (इलेक्ट्रोन विन्यास):</strong><br>
+        <strong>Electronic Configuration:</strong><br>
         ${shellText}<br>
-        Valence Electrons (संयोजकता इलेक्ट्रोन): <strong>${valElectrons}</strong> (Valency: ${valency})
+        Valence Electrons: <strong>${valElectrons}</strong> (Valency: ${valency})
       `;
     }
 

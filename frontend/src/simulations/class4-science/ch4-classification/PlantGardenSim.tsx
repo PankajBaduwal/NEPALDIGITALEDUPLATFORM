@@ -1,14 +1,14 @@
 /**
  * PlantGardenSim.tsx
  * Master Interactive 2D Botanical Garden: Herbs, Shrubs, and Trees
- * (वनस्पति बगैँचा: साना बिरुवा, बुट्यान र रूख - २डी अन्तरक्रियात्मक प्रयोगशाला)
- * Grade 4 Science • Chapter 4: Classification of Living Beings (जीवहरूको वर्गीकरण)
+ * (वनस्पति बगैँचा: साना बिरुवा, बुट्यान र रूख - 2डी अन्तरक्रियात्मक प्रयोगशाला)
+ * Grade 4 Science • Chapter 4: Classification of Living Beings
  *
  * 100% Native 2D Canvas & Vector Graphics (Zero WebGL/3D Dependencies)
  * - Ultra-Rich Natural Garden Panorama:
- *   1. Herbs (साना बिरुवा): Mint & Mustard with tender green fleshy stems, soft leaves, and yellow flowers (< 1 meter).
- *   2. Shrubs (बुट्यान): Bushy Rose & Hibiscus with multiple woody stems branching from soil level (1 – 3 meters).
- *   3. Trees (रूखहरू): Mighty Banyan / Mango Tree with thick woody bark trunk and sprawling leafy crown (> 10 meters).
+ *   1. Herbs: Mint & Mustard with tender green fleshy stems, soft leaves, and yellow flowers (< 1 meter).
+ *   2. Shrubs: Bushy Rose & Hibiscus with multiple woody stems branching from soil level (1 – 3 meters).
+ *   3. Trees: Mighty Banyan / Mango Tree with thick woody bark trunk and sprawling leafy crown (> 10 meters).
  * - Interactive Stem Anatomy Inspector: Magnifies the stem cross-section comparing non-woody soft vascular bundles
  *   with hardened concentric rings of secondary xylem wood!
  * - Interactive Height Comparison Ruler, Botanical Category Switcher, and CDC Science Quiz.
@@ -49,7 +49,7 @@ export const PlantGardenSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -68,44 +68,44 @@ export const PlantGardenSim: React.FC<BaseSimulationProps> = ({
   const categories: Record<PlantCategory, PlantData> = {
     herb: {
       id: 'herb',
-      nameEn: 'Herbs (साना बिरुवा)',
+      nameEn: 'Herbs',
       nameNe: 'साना बिरुवा (Herbs)',
-      examplesEn: 'Mint (पुदिना), Coriander (धनियाँ), Mustard (तोरी), Grass (घाँस)',
+      examplesEn: 'Mint, Coriander, Mustard, Grass',
       examplesNe: 'पुदिना, धनियाँ, तोरी, तुलसी र घाँस',
       stemEn: 'Soft, tender, green, non-woody stem containing chlorophyll.',
       stemNe: 'नरम, हरियो र काठ नभएको कमजोर काण्ड।',
       heightEn: 'Short stature (< 1 meter tall), easy to bend or break.',
-      heightNe: 'होचो (१ मिटरभन्दा कम), सजिलै हातले भाँच्न सकिने।',
+      heightNe: 'होचो (1 मिटरभन्दा कम), सजिलै हातले भाँच्न सकिने।',
       lifespanEn: 'Annual or biennial: 1 to 2 seasons life cycle.',
-      lifespanNe: 'छोटो आयु: १ देखि २ मौसममा जीवनचक्र पूरा हुने।',
+      lifespanNe: 'छोटो आयु: 1 देखि 2 मौसममा जीवनचक्र पूरा हुने।',
       themeColor: '#4ade80',
     },
     shrub: {
       id: 'shrub',
-      nameEn: 'Shrubs (बुट्यान)',
+      nameEn: 'Shrubs',
       nameNe: 'बुट्यान (Shrubs)',
-      examplesEn: 'Rose (गुलाब), Hibiscus (घण्टीफूल), Tea (चिया), Cotton (कपास)',
+      examplesEn: 'Rose, Hibiscus, Tea, Cotton',
       examplesNe: 'गुलाब, घण्टीफूल, चिया, कपास र मेहेन्दी',
       stemEn: 'Hard, thin, woody stems branching out profusely from near ground level without a single trunk.',
       stemNe: 'जमिन नजिकैबाट धेरै कडा काठका हाँगाबिँगा निस्कने झाडीदार काण्ड।',
       heightEn: 'Medium height (1 to 3 meters), bushy dome architecture.',
-      heightNe: 'मध्यम उचाइ (१ देखि ३ मिटर), झाडीजस्तो बाक्लो।',
+      heightNe: 'मध्यम उचाइ (1 देखि 3 मिटर), झाडीजस्तो बाक्लो।',
       lifespanEn: 'Perennial: survives for several years producing annual blossoms.',
       lifespanNe: 'धेरै वर्षसम्म बाँच्ने र प्रत्येक वर्ष फूल फुल्ने।',
       themeColor: '#f472b6',
     },
     tree: {
       id: 'tree',
-      nameEn: 'Trees (रूखहरू)',
+      nameEn: 'Trees',
       nameNe: 'रूखहरू (Trees)',
-      examplesEn: 'Mango (आँप), Banyan (बर), Peepal (पिपल), Pine (सल्ला)',
+      examplesEn: 'Mango, Banyan, Peepal, Pine',
       examplesNe: 'आँप, बर, पिपल, सल्ला, साल र चाँप',
       stemEn: 'Single, massive, thick woody stem called a Trunk covered with protective rough bark.',
       stemNe: 'मोटो, कडा काठको मुख्य काण्ड (Trunk) र बोक्राले ढाकिएको मजबुत डाँठ।',
       heightEn: 'Tall stature (> 3 meters to 30+ meters), expansive umbrella canopy.',
-      heightNe: 'अग्लो (३ मिटरदेखि ३० मिटरसम्म), विशाल छाता आकारको हाँगाबिँगा।',
+      heightNe: 'अग्लो (3 मिटरदेखि 30 मिटरसम्म), विशाल छाता आकारको हाँगाबिँगा।',
       lifespanEn: 'Perennial: survives for decades to centuries (Banyan live 300+ yrs).',
-      lifespanNe: 'दीर्घायु: दशौँदेखि सयौँ वर्षसम्म बाँच्ने (बर–पिपल ३००+ वर्ष बाँच्छन्)।',
+      lifespanNe: 'दीर्घायु: दशौँदेखि सयौँ वर्षसम्म बाँच्ने (बर–पिपल 300+ वर्ष बाँच्छन्)।',
       themeColor: '#22c55e',
     },
   };
@@ -478,7 +478,7 @@ export const PlantGardenSim: React.FC<BaseSimulationProps> = ({
       expNe: 'रूखको जमिनबाट एउटै बलियो ठूलो काण्ड हुन्छ भने बुट्यान जमिन नजिकैबाट धेरै हाँगा फैलिएर झाडी बन्छ।',
     },
     {
-      qEn: 'Why are herbs like Mint (पुदिना) and Coriander (धनियाँ) easily bendable by hand?',
+      qEn: 'Why are herbs like Mint and Coriander easily bendable by hand?',
       qNe: 'पुदिना र धनियाँजस्ता साना बिरुवा (Herbs) लाई हातले सजिलै किन दोब्य्राउन सकिन्छ?',
       optionsEn: [
         'Their stems are soft, tender, and green without rigid secondary woody tissue',
@@ -659,7 +659,7 @@ export const PlantGardenSim: React.FC<BaseSimulationProps> = ({
               {lang === 'en'
                 ? showStemZoom
                   ? 'Stem Microscope: ON'
-                  : 'Inspect Stem Wood (काण्डको भित्री भाग)'
+                  : 'Inspect Stem Wood'
                 : showStemZoom
                 ? 'काण्डको दृश्य: चालु'
                 : 'काण्डको भित्री काठ जाँच्नुहोस्'}
@@ -713,7 +713,7 @@ export const PlantGardenSim: React.FC<BaseSimulationProps> = ({
           >
             <div>
               <div style={{ fontSize: '11px', fontWeight: 800, color: '#facc15' }}>
-                {lang === 'en' ? 'STEM STRUCTURE (काण्डको बनोट)' : 'काण्डको बनोट'}
+                {lang === 'en' ? 'STEM STRUCTURE' : 'काण्डको बनोट'}
               </div>
               <div style={{ fontSize: '11px', color: '#0f172a', marginTop: '2px', lineHeight: 1.45 }}>
                 {lang === 'en' ? currentData.stemEn : currentData.stemNe}
@@ -722,7 +722,7 @@ export const PlantGardenSim: React.FC<BaseSimulationProps> = ({
 
             <div>
               <div style={{ fontSize: '11px', fontWeight: 800, color: '#38bdf8' }}>
-                {lang === 'en' ? 'HEIGHT PROFILE (उचाइ)' : 'उचाइ'}
+                {lang === 'en' ? 'HEIGHT PROFILE' : 'उचाइ'}
               </div>
               <div style={{ fontSize: '11px', color: '#0f172a', marginTop: '2px' }}>
                 {lang === 'en' ? currentData.heightEn : currentData.heightNe}
@@ -731,7 +731,7 @@ export const PlantGardenSim: React.FC<BaseSimulationProps> = ({
 
             <div>
               <div style={{ fontSize: '11px', fontWeight: 800, color: '#c084fc' }}>
-                {lang === 'en' ? 'LIFESPAN (आयु)' : 'आयु'}
+                {lang === 'en' ? 'LIFESPAN' : 'आयु'}
               </div>
               <div style={{ fontSize: '11px', color: '#0f172a', marginTop: '2px' }}>
                 {lang === 'en' ? currentData.lifespanEn : currentData.lifespanNe}

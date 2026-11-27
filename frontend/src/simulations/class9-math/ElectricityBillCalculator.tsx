@@ -6,46 +6,46 @@ import { Zap, Calendar, Receipt, Percent, CheckCircle2, RotateCcw } from 'lucide
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'विद्युत मिटरमा खपत युनिट (Units Consumed) कसरी निकालिन्छ?',
+    np: 'विद्युत mमा खपत units (Units Consumed) कसरी निकालिन्छ?',
     en: 'How is electricity unit consumption calculated?',
     options: [
-      { key: 'A', label: 'हालको रिडिङ − अघिल्लो रिडिङ (Current Reading − Previous Reading)' },
-      { key: 'B', label: 'हालको रिडिङ + अघिल्लो रिडिङ' },
-      { key: 'C', label: 'हालको रिडिङ × ३०' },
-      { key: 'D', label: 'न्यूनतम शुल्क' },
+      { key: 'A', label: 'Current reading − previous reading' },
+      { key: 'B', label: 'Current reading + previous reading' },
+      { key: 'C', label: 'Current reading × 30' },
+      { key: 'D', label: 'Minimum charge' },
     ],
     answer: 'A',
   },
   {
-    np: 'नेपाल विद्युत प्राधिकरणको नियम अनुसार मिटर रिडिङ भएको पहिलो ७ दिनभित्र महसुल बुझाउँदा कति छुट पाइन्छ?',
+    np: 'नेपाल विद्युत प्राधिकरणको नियम अनुसार m रिडिङ भएको पहिलो 7 दिनभित्र महसुल बुझाउँदा कति छुट पाइन्छ?',
     en: 'According to NEA rules, what discount is given if bill is paid within the first 7 days?',
     options: [
-      { key: 'A', label: '३% छुट (3% Rebate / Discount)' },
-      { key: 'B', label: '५% छुट' },
-      { key: 'C', label: '१०% छुट' },
-      { key: 'D', label: 'कुनै छुट पाइँदैन' },
+      { key: 'A', label: '3% Rebate (3% Rebate / Discount)' },
+      { key: 'B', label: '5% rebate' },
+      { key: 'C', label: '10% rebate' },
+      { key: 'D', label: 'No rebate is given' },
     ],
     answer: 'A',
   },
   {
-    np: 'मिटर रिडिङ भएको १६ औं दिनदेखि ३० औं दिनसम्म महसुल बुझाउँदा कति प्रतिशत थप जरिवाना लाग्छ?',
+    np: 'm रिडिङ भएको 16 th dayदेखि 30 th dayसम्म महसुल बुझाउँदा कति प्रतिशत थप जरिवाना लाग्छ?',
     en: 'What percentage penalty is charged if the bill is paid between 16th and 30th day?',
     options: [
-      { key: 'A', label: '५% जरिवाना (5% Late Penalty)' },
-      { key: 'B', label: '१०% जरिवाना' },
-      { key: 'C', label: '२५% जरिवाना' },
-      { key: 'D', label: '२% जरिवाना' },
+      { key: 'A', label: '5% late penalty' },
+      { key: 'B', label: '10% penalty' },
+      { key: 'C', label: '25% penalty' },
+      { key: 'D', label: '2% penalty' },
     ],
     answer: 'A',
   },
   {
-    np: '५ एम्पियर मिटरमा २० युनिटसम्म न्यूनतम शुल्क रु ३० छ भने सो अवधिको ऊर्जा शुल्क कति हुन्छ?',
+    np: '5 ampere meterमा 20 unitsसम्म Minimum charge Rs 30 छ भने सो अवधिको ऊर्जा शुल्क कति हुन्छ?',
     en: 'For 5A meter with Rs 30 minimum charge up to 20 units, what is the energy charge for lifeline users?',
     options: [
-      { key: 'A', label: 'रु ० (निःशुल्क ऊर्जा शुल्क / Free energy charge)' },
-      { key: 'B', label: 'रु ३०' },
-      { key: 'C', label: 'रु ५०' },
-      { key: 'D', label: 'रु १००' },
+      { key: 'A', label: 'Rs 0' },
+      { key: 'B', label: 'Rs 30' },
+      { key: 'C', label: 'Rs 50' },
+      { key: 'D', label: 'Rs 100' },
     ],
     answer: 'A',
   },
@@ -155,7 +155,7 @@ export const ElectricityBillCalculator: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! घरायसी अङ्कगणित अन्तर्गत विद्युत मिटर रिडिङ, खपत युनिट, स्ल्याब दर, न्यूनतम शुल्क र समयमै भुक्तानीको छुट/जरिवाना हिसाब सिकौं!',
+        'नमस्ते! घरायसी अङ्कगणित अन्तर्गत विद्युत m रिडिङ, खपत units, स्ल्याब दर, Minimum charge र समयमै भुक्तानीको छुट/जरिवाना हिसाब सिकौं!',
         'Welcome! Explore electricity meter readings, consumption units, tiered tariff slabs, and rebate/penalty rules!'
       )}
     >
@@ -168,7 +168,7 @@ export const ElectricityBillCalculator: React.FC<{
               activeTab === 'bill' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            ⚡ {L('१. विद्युत महसुल क्यालकुलेटर (Bill Calculator)', '1. Bill Calculator')}
+            ⚡ {L('1. विद्युत महसुल क्यालकुलेटर (Bill Calculator)', '1. Bill Calculator')}
           </button>
           <button
             onClick={() => setActiveTab('slabs')}
@@ -176,7 +176,7 @@ export const ElectricityBillCalculator: React.FC<{
               activeTab === 'slabs' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            📊 {L('२. महसुल दर स्ल्याब (Tariff Slabs)', '2. Tariff Slabs')}
+            📊 {L('2. महसुल दर स्ल्याब (Tariff Slabs)', '2. Tariff Slabs')}
           </button>
           <button
             onClick={() => setActiveTab('penalty')}
@@ -184,7 +184,7 @@ export const ElectricityBillCalculator: React.FC<{
               activeTab === 'penalty' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            ⏱️ {L('३. छुट र जरिवाना नियम (Rebate & Penalties)', '3. Rebates & Penalties')}
+            ⏱️ {L('3. छुट र जरिवाना नियम (Rebate & Penalties)', '3. Rebates & Penalties')}
           </button>
         </div>
 
@@ -195,25 +195,25 @@ export const ElectricityBillCalculator: React.FC<{
             <div className="lg:col-span-6 bg-white rounded-2xl shadow-lg p-5 border border-slate-200 space-y-4">
               <h3 className="font-extrabold text-slate-800 text-sm flex items-center gap-2">
                 <Zap className="w-5 h-5 text-amber-500" />
-                मिटर रिडिङ तथा भुक्तानी दिन
+                Meter reading and payment day
               </h3>
 
               {/* Digital Meter Simulation Display */}
               <div className="bg-slate-900 rounded-2xl p-4 text-center border-4 border-slate-700 shadow-inner">
                 <span className="text-[10px] text-slate-400 uppercase font-mono block mb-1">
-                  विद्युत मिटर (Single Phase 5A KWh)
+                  Electricity meter (single phase 5A kWh)
                 </span>
                 <div className="flex justify-center gap-1 font-mono text-2xl font-black text-amber-400 bg-slate-950 py-2 px-4 rounded-xl border border-slate-800 tracking-widest">
                   {currReading.toString().padStart(5, '0')} <span className="text-xs text-slate-500 self-end">kWh</span>
                 </div>
                 <div className="text-xs text-emerald-400 font-bold mt-2 font-mono">
-                  खपत युनिट = {currReading} − {prevReading} = {unitsConsumed} युनिट
+                  Units consumed = {currReading} − {prevReading} = {unitsConsumed} units
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3 text-xs">
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">अघिल्लो रिडिङ (Previous):</label>
+                  <label className="block font-bold text-slate-700 mb-1">Previous reading:</label>
                   <input
                     type="number"
                     value={prevReading}
@@ -223,7 +223,7 @@ export const ElectricityBillCalculator: React.FC<{
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">हालको रिडिङ (Current):</label>
+                  <label className="block font-bold text-slate-700 mb-1">Current reading:</label>
                   <input
                     type="number"
                     value={currReading}
@@ -236,9 +236,9 @@ export const ElectricityBillCalculator: React.FC<{
               {/* Payment Day Slider */}
               <div className="space-y-1 pt-1 border-t">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>भुक्तानी गरेको दिन (Payment Day):</span>
+                  <span>Payment day:</span>
                   <span className="font-mono text-amber-700 text-sm font-bold">
-                    {paymentDay} औं दिन {paymentDay <= 7 ? '(३% छुट)' : paymentDay <= 15 ? '(नियमित)' : '(जरिवाना लाग्ने)'}
+                    {paymentDay} th day {paymentDay <= 7 ? '' : paymentDay <= 15 ? '' : ''}
                   </span>
                 </div>
                 <input
@@ -256,56 +256,56 @@ export const ElectricityBillCalculator: React.FC<{
             <div className="lg:col-span-6 space-y-4">
               <div className="bg-slate-900 text-white rounded-2xl p-5 shadow-xl border border-slate-800 space-y-3 font-mono">
                 <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-                  <span className="text-xs uppercase text-slate-400 font-bold">नेपाल विद्युत प्राधिकरण महसुल बिल</span>
-                  <span className="text-xs text-amber-400 font-bold">५ एम्पियर मिटर</span>
+                  <span className="text-xs uppercase text-slate-400 font-bold">Nepal Electricity Authority tariff bill</span>
+                  <span className="text-xs text-amber-400 font-bold">5 ampere meter</span>
                 </div>
 
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between text-slate-400">
-                    <span>कुल खपत युनिट:</span>
+                    <span>Total units consumed:</span>
                     <span className="font-bold text-white">{unitsConsumed} kWh (Units)</span>
                   </div>
 
                   <div className="flex justify-between">
-                    <span className="text-slate-400">१. न्यूनतम सेवा शुल्क (Min Charge):</span>
-                    <span className="font-bold text-slate-200">रु. {tariffCalc.minCharge}</span>
+                    <span className="text-slate-400">1. Minimum service charge:</span>
+                    <span className="font-bold text-slate-200">Rs. {tariffCalc.minCharge}</span>
                   </div>
 
                   <div className="flex justify-between">
-                    <span className="text-slate-400">२. ऊर्जा शुल्क (Energy Charge):</span>
-                    <span className="font-bold text-slate-200">रु. {tariffCalc.energyCharge}</span>
+                    <span className="text-slate-400">2. Energy charge:</span>
+                    <span className="font-bold text-slate-200">Rs. {tariffCalc.energyCharge}</span>
                   </div>
 
                   <div className="flex justify-between pt-1 border-t border-slate-800 text-slate-300 font-bold">
-                    <span>जम्मा रकम (Subtotal):</span>
-                    <span>रु. {tariffCalc.subtotal}</span>
+                    <span>Subtotal:</span>
+                    <span>Rs. {tariffCalc.subtotal}</span>
                   </div>
 
                   {tariffCalc.rebateAmount > 0 && (
                     <div className="flex justify-between text-emerald-400">
-                      <span>छुट ({tariffCalc.rebatePct}% छुट - पहिलो ७ दिन):</span>
-                      <span>− रु. {tariffCalc.rebateAmount}</span>
+                      <span>Rebate ({tariffCalc.rebatePct}% rebate - first 7 days):</span>
+                      <span>− Rs. {tariffCalc.rebateAmount}</span>
                     </div>
                   )}
 
                   {tariffCalc.penaltyAmount > 0 && (
                     <div className="flex justify-between text-rose-400">
                       <span>ढिलो जरिवाना (+{tariffCalc.penaltyPct}%):</span>
-                      <span>+ रु. {tariffCalc.penaltyAmount}</span>
+                      <span>+ Rs. {tariffCalc.penaltyAmount}</span>
                     </div>
                   )}
 
                   <div className="flex justify-between pt-2 border-t-2 border-amber-500 font-black text-base text-amber-400">
-                    <span>बुझाउनुपर्ने कुल महसुल:</span>
-                    <span>रु. {tariffCalc.finalBill.toLocaleString()}</span>
+                    <span>Total bill payable:</span>
+                    <span>Rs. {tariffCalc.finalBill.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
 
               {/* Helpful note */}
               <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-950 font-semibold space-y-1">
-                <div>• कुल युनिट = हालको रिडिङ − अघिल्लो रिडिङ</div>
-                <div>• समयमै (७ दिनभित्र) तिर्दा ३% छुट पाइन्छ।</div>
+                <div>• Total units = current reading − previous reading</div>
+                <div>• A 3% rebate is given for paying on time (within 7 days).</div>
               </div>
             </div>
           </div>
@@ -315,48 +315,48 @@ export const ElectricityBillCalculator: React.FC<{
         {activeTab === 'slabs' && (
           <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-4">
             <h3 className="font-extrabold text-slate-800 text-sm text-center">
-              ५ एम्पियर घरायसी मिटरको महसुल दर (नेपाल विद्युत प्राधिकरण)
+              Tariff rates for a 5 ampere household meter (Nepal Electricity Authority)
             </h3>
 
             <div className="overflow-x-auto text-xs">
               <table className="w-full border border-slate-200 rounded-xl overflow-hidden text-left">
                 <thead className="bg-slate-100 font-bold text-slate-800 border-b">
                   <tr>
-                    <th className="p-2.5">खपत युनिट स्ल्याब</th>
-                    <th className="p-2.5 text-right">न्यूनतम शुल्क</th>
-                    <th className="p-2.5 text-right">ऊर्जा दर (प्रति युनिट)</th>
+                    <th className="p-2.5">Consumption unit slab</th>
+                    <th className="p-2.5 text-right">Minimum charge</th>
+                    <th className="p-2.5 text-right">Energy rate (per unit)</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 font-mono">
                   <tr>
-                    <td className="p-2.5">० देखि २० युनिटसम्म</td>
-                    <td className="p-2.5 text-right font-bold">रु. ३०</td>
-                    <td className="p-2.5 text-right text-emerald-700 font-bold">निःशुल्क (रु. ०)</td>
+                    <td className="p-2.5">0 to 20 units</td>
+                    <td className="p-2.5 text-right font-bold">Rs. 30</td>
+                    <td className="p-2.5 text-right text-emerald-700 font-bold">Free (Rs. 0)</td>
                   </tr>
                   <tr>
-                    <td className="p-2.5">२१ देखि ३० युनिटसम्म</td>
-                    <td className="p-2.5 text-right font-bold">रु. ५०</td>
-                    <td className="p-2.5 text-right text-slate-800">रु. ६.५०</td>
+                    <td className="p-2.5">21 to 30 units</td>
+                    <td className="p-2.5 text-right font-bold">Rs. 50</td>
+                    <td className="p-2.5 text-right text-slate-800">Rs. 6.50</td>
                   </tr>
                   <tr>
-                    <td className="p-2.5">३१ देखि ५० युनिटसम्म</td>
-                    <td className="p-2.5 text-right font-bold">रु. ५०</td>
-                    <td className="p-2.5 text-right text-slate-800">रु. ८.००</td>
+                    <td className="p-2.5">31 to 50 units</td>
+                    <td className="p-2.5 text-right font-bold">Rs. 50</td>
+                    <td className="p-2.5 text-right text-slate-800">Rs. 8.00</td>
                   </tr>
                   <tr>
-                    <td className="p-2.5">५१ देखि १५० युनिटसम्म</td>
-                    <td className="p-2.5 text-right font-bold">रु. ७५</td>
-                    <td className="p-2.5 text-right text-slate-800">रु. ९.५०</td>
+                    <td className="p-2.5">51 to 150 units</td>
+                    <td className="p-2.5 text-right font-bold">Rs. 75</td>
+                    <td className="p-2.5 text-right text-slate-800">Rs. 9.50</td>
                   </tr>
                   <tr>
-                    <td className="p-2.5">१५१ देखि २५० युनिटसम्म</td>
-                    <td className="p-2.5 text-right font-bold">रु. १००</td>
-                    <td className="p-2.5 text-right text-slate-800">रु. ९.५०</td>
+                    <td className="p-2.5">151 to 250 units</td>
+                    <td className="p-2.5 text-right font-bold">Rs. 100</td>
+                    <td className="p-2.5 text-right text-slate-800">Rs. 9.50</td>
                   </tr>
                   <tr>
-                    <td className="p-2.5">२५१ भन्दा माथि</td>
-                    <td className="p-2.5 text-right font-bold">रु. १२५</td>
-                    <td className="p-2.5 text-right text-slate-800">रु. ११.००</td>
+                    <td className="p-2.5">Above 251</td>
+                    <td className="p-2.5 text-right font-bold">Rs. 125</td>
+                    <td className="p-2.5 text-right text-slate-800">Rs. 11.00</td>
                   </tr>
                 </tbody>
               </table>
@@ -368,33 +368,33 @@ export const ElectricityBillCalculator: React.FC<{
         {activeTab === 'penalty' && (
           <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-4 text-xs">
             <h3 className="font-extrabold text-slate-800 text-sm text-center">
-              भुक्तानी समय अनुसार छुट तथा थप दस्तुर (NEA नियम)
+              Rebate and penalty by payment time (NEA rules)
             </h3>
 
             <div className="space-y-2">
               <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 flex justify-between items-center">
-                <span className="font-bold text-emerald-950">१ देखि ७ औं दिनभित्र</span>
-                <span className="font-bold text-emerald-700 font-mono">३% छुट (Rebate)</span>
+                <span className="font-bold text-emerald-950">Within the 1st to 7th day</span>
+                <span className="font-bold text-emerald-700 font-mono">3% Rebate (Rebate)</span>
               </div>
 
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
-                <span className="font-bold text-slate-800">८ देखि १५ औं दिनसम्म</span>
-                <span className="font-bold text-slate-600 font-mono">नियमित महसुल (०%)</span>
+                <span className="font-bold text-slate-800">8th to 15th day</span>
+                <span className="font-bold text-slate-600 font-mono">Regular bill (0%)</span>
               </div>
 
               <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 flex justify-between items-center">
-                <span className="font-bold text-amber-950">१६ देखि ३० औं दिनसम्म</span>
-                <span className="font-bold text-amber-700 font-mono">+५% थप दस्तुर (Penalty)</span>
+                <span className="font-bold text-amber-950">16th to 30th day</span>
+                <span className="font-bold text-amber-700 font-mono">+5% penalty</span>
               </div>
 
               <div className="p-3 bg-orange-50 rounded-xl border border-orange-200 flex justify-between items-center">
-                <span className="font-bold text-orange-950">३१ देखि ४० औं दिनसम्म</span>
-                <span className="font-bold text-orange-700 font-mono">+१०% थप दस्तुर (Penalty)</span>
+                <span className="font-bold text-orange-950">31st to 40th day</span>
+                <span className="font-bold text-orange-700 font-mono">+10% penalty</span>
               </div>
 
               <div className="p-3 bg-rose-50 rounded-xl border border-rose-200 flex justify-between items-center">
-                <span className="font-bold text-rose-950">४१ औं दिनभन्दा पछि</span>
-                <span className="font-bold text-rose-700 font-mono">+२५% थप दस्तुर (Penalty)</span>
+                <span className="font-bold text-rose-950">After the 41st day</span>
+                <span className="font-bold text-rose-700 font-mono">+25% penalty</span>
               </div>
             </div>
           </div>

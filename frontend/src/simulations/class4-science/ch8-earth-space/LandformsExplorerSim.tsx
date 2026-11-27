@@ -1,14 +1,14 @@
 /**
  * LandformsExplorerSim.tsx
- * Simulation 29: 2D Nepal Landforms Topographical Explorer (नेपालको धरातलीय स्वरूप)
- * Grade 4 Science • Chapter 8: The Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 29: 2D Nepal Landforms Topographical Explorer
+ * Grade 4 Science • Chapter 8: The Earth and Space
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
  * - Authentic topographical North-to-South cross-section of Nepal:
- *   1. Himal (हिमाली प्रदेश / 3,000m - 8,848m): Glaciers, snow peaks, cold alpine climate, Yak
- *   2. Pahad (पहाडी प्रदेश / 600m - 3,000m): Terraced hills, rhododendron forests, deep river gorges
- *   3. Terai (तराई प्रदेश / 60m - 600m): Flat fertile plains, dense Sal forests, paddy/mustard granary
+ *   1. Himal: Glaciers, snow peaks, cold alpine climate, Yak
+ *   2. Pahad: Terraced hills, rhododendron forests, deep river gorges
+ *   3. Terai: Flat fertile plains, dense Sal forests, paddy/mustard granary
  * - Interactive Belt Navigator (Himal / Pahad / Terai) with smooth camera pan & focus
  * - Altitude Elevation Scrubber (60m to 8,848m) with real-time temperature & vegetation readouts
  * - Bilingual EN/NE, nature audio, and curriculum quiz.
@@ -38,7 +38,7 @@ export const LandformsExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -54,38 +54,38 @@ export const LandformsExplorerSim: React.FC<BaseSimulationProps> = ({
   const belts: BeltData[] = [
     {
       id: 'himal',
-      nameEn: 'Himalayan Region (हिमाली प्रदेश)',
+      nameEn: 'Himalayan Region',
       nameNe: 'हिमाली प्रदेश (Himalayan Region)',
       altRange: '3,000m - 8,848.86m',
       climateEn: 'Sub-zero freezing alpine, glaciated',
       climateNe: 'अत्यधिक चिसो, हिमाली तथा तुषारयुक्त',
       descEn: 'Covers northern Nepal. Characterized by snow-capped peaks including Mt. Everest, glaciers, and rugged terrains. Yaks and sheep graze here.',
       descNe: 'नेपालको उत्तरी भूभाग। संसारकै सर्वोच्च शिखर सगरमाथा, हिमनदी र चट्टानी भीरपाखा। चौंरीगाई, भेडा र च्याङ्ग्रा पालिन्छ।',
-      produceEn: ['Apples (स्याउ)', 'Medicinal Herbs (जडीबुटी)', 'Yarshagumba'],
+      produceEn: ['Apples', 'Medicinal Herbs', 'Yarshagumba'],
       produceNe: ['स्याउ', 'यार्सागुम्बा', 'बहुमूल्य जडीबुटी'],
     },
     {
       id: 'pahad',
-      nameEn: 'Hilly Region (पहाडी प्रदेश)',
+      nameEn: 'Hilly Region',
       nameNe: 'पहाडी प्रदेश (Hilly Region)',
       altRange: '600m - 3,000m',
       climateEn: 'Temperate, mild and pleasant',
       climateNe: 'समशीतोष्ण, हावापानी रमाइलो र स्वस्थकर',
       descEn: 'Central belt with rolling hills, valleys (Kathmandu, Pokhara), terraced fields, and rhododendron / pine forests.',
       descNe: 'नेपालको मध्य भूभाग। मनोरम डाँडाकाँडा, उपत्यकाहरू, गह्रा खेती र लालीगुराँस तथा सल्लाका जंगल।',
-      produceEn: ['Maize & Millet (मकै, कोदो)', 'Oranges (सुन्तला)', 'Tea & Coffee (चिया, कफी)'],
+      produceEn: ['Maize & Millet', 'Oranges', 'Tea & Coffee'],
       produceNe: ['मकै र कोदो', 'सुन्तला र जुनार', 'चिया र कफी'],
     },
     {
       id: 'terai',
-      nameEn: 'Terai Region (तराई प्रदेश)',
+      nameEn: 'Terai Region',
       nameNe: 'तराई प्रदेश (Terai Region)',
       altRange: '60m - 600m',
       climateEn: 'Sub-tropical, hot and humid',
       climateNe: 'उष्ण प्रदेशीय, गर्मी र आर्द्र',
-      descEn: 'Southern flat plains with highly fertile alluvial soil. Known as the Granary of Nepal (अन्नको भण्डार).',
+      descEn: 'Southern flat plains with highly fertile alluvial soil. Known as the Granary of Nepal.',
       descNe: 'नेपालको दक्षिणी समथर भूभाग। मलिलो जलोढ माटोले भरिएको नेपालको मुख्य अन्न भण्डार।',
-      produceEn: ['Paddy & Wheat (धान, गहुँ)', 'Sugarcane (उखु)', 'Mustard (तोरी)'],
+      produceEn: ['Paddy & Wheat', 'Sugarcane', 'Mustard'],
       produceNe: ['धान र गहुँ', 'उखु र जुट', 'तोरी र दलहन'],
     },
   ];
@@ -273,7 +273,7 @@ export const LandformsExplorerSim: React.FC<BaseSimulationProps> = ({
     ctx.closePath();
     ctx.fill();
 
-    // Terraced Farming Step-lines (गह्रा खेती)
+    // Terraced Farming Step-lines
     ctx.strokeStyle = '#ca8a04';
     ctx.lineWidth = 2;
     for (let ty = 310; ty <= 420; ty += 18) {
@@ -382,21 +382,21 @@ export const LandformsExplorerSim: React.FC<BaseSimulationProps> = ({
     ctx.fillText('🌾 तराई (Terai)', 135, 520);
     ctx.font = '10px system-ui';
     ctx.fillStyle = '#fef08a';
-    ctx.fillText('६० मि. - ६०० मि.', 135, 536);
+    ctx.fillText('60 मि. - 600 मि.', 135, 536);
 
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 13px system-ui';
     ctx.fillText('🌄 पहाड (Pahad)', 415, 520);
     ctx.font = '10px system-ui';
     ctx.fillStyle = '#fef08a';
-    ctx.fillText('६०० मि. - ३,००० मि.', 415, 536);
+    ctx.fillText('600 मि. - 3,000 मि.', 415, 536);
 
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 13px system-ui';
     ctx.fillText('🏔️ हिमाल (Himal)', 720, 520);
     ctx.font = '10px system-ui';
     ctx.fillStyle = '#fef08a';
-    ctx.fillText('३,००० मि. - ८,८४८ मि.', 720, 536);
+    ctx.fillText('3,000 मि. - 8,848 मि.', 720, 536);
 
     ctx.restore();
   }
@@ -477,7 +477,7 @@ export const LandformsExplorerSim: React.FC<BaseSimulationProps> = ({
   const handleQuizAnswer = (choice: string) => {
     if (choice === 'terai') {
       ScienceAudio.playSuccess();
-      setQuizFeedback(lang === 'en' ? 'Correct! The Terai region is known as the Granary of Nepal (अन्न भण्डार).' : 'सबास! तराई प्रदेशलाई अत्यधिक अन्न फल्ने हुनाले नेपालको अन्न भण्डार भनिन्छ।');
+      setQuizFeedback(lang === 'en' ? 'Correct! The Terai region is known as the Granary of Nepal.' : 'सबास! तराई प्रदेशलाई अत्यधिक अन्न फल्ने हुनाले नेपालको अन्न भण्डार भनिन्छ।');
       setStars(3);
       setIsCompleted(true);
       setStage('understand');
@@ -493,7 +493,7 @@ export const LandformsExplorerSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 8: The Earth and Space'
-          : 'कक्षा ४ विज्ञान • एकाइ ८: पृथ्वी र अन्तरिक्ष'
+          : 'कक्षा 4 विज्ञान • एकाइ 8: पृथ्वी र अन्तरिक्ष'
       }
       currentStage={stage}
       onStageChange={setStage}
@@ -759,7 +759,7 @@ export const LandformsExplorerSim: React.FC<BaseSimulationProps> = ({
             </div>
             <p style={{ margin: '0 0 8px 0', fontSize: '11px', color: '#64748b' }}>
               {lang === 'en'
-                ? 'Which ecological belt of Nepal is famously known as the "Granary of Nepal" (अन्न भण्डार)?'
+                ? 'Which ecological belt of Nepal is famously known as the "Granary of Nepal"?'
                 : 'नेपालको कुन धरातलीय प्रदेशलाई "अन्नको भण्डार" भनिन्छ?'}
             </p>
 
@@ -822,7 +822,7 @@ export const LandformsExplorerSim: React.FC<BaseSimulationProps> = ({
             <p style={{ margin: 0, fontSize: '11px', color: '#475569', lineHeight: '1.45' }}>
               {lang === 'en'
                 ? 'Nepal rises from 60m above sea level in Jhapa to 8,848.86m at Mt. Everest, creating unparalleled climate and ecological diversity.'
-                : 'नेपाल ६० मिटर उचाइदेखि सगरमाथाको ८,८४८.८६ मिटरसम्म फैलिएको छ, जसले अनुपम जैविक र हावापानी विविधता दिएको छ।'}
+                : 'नेपाल 60 मिटर उचाइदेखि सगरमाथाको 8,848.86 मिटरसम्म फैलिएको छ, जसले अनुपम जैविक र हावापानी विविधता दिएको छ।'}
             </p>
           </div>
 

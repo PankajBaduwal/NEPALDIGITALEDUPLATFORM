@@ -1,7 +1,7 @@
 /**
  * ElectromagnetWorkshopSim.tsx
- * Simulation 28: 2D Electromagnet Workshop (विद्युत चुम्बक कार्यशाला)
- * Grade 6 Science • Unit 8: Electricity and Magnetism (विद्युत र चुम्बकत्व)
+ * Simulation 28: 2D Electromagnet Workshop
+ * Grade 6 Science • Unit 8: Electricity and Magnetism
  *
  * 100% Native HTML5 Canvas 2D Interactive Solenoid Electromagnetism.
  * Features:
@@ -24,7 +24,7 @@ export const ElectromagnetWorkshopSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -310,7 +310,7 @@ export const ElectromagnetWorkshopSim: React.FC<BaseSimulationProps> = ({
 
       ctx.fillStyle = '#fbbf24';
       ctx.fillText(
-        lang === 'ne' ? `भोल्टेज: ${batteryCount * 1.5}V (${batteryCount} ब्याट्री)` : `Voltage: ${batteryCount * 1.5}V (${batteryCount} Cells)`,
+        lang === 'ne' ? `भोल्टेज: ${batteryCount * 1.5}V` : `Voltage: ${batteryCount * 1.5}V (${batteryCount} Cells)`,
         hudX + 16,
         hudY + 95
       );
@@ -325,7 +325,7 @@ export const ElectromagnetWorkshopSim: React.FC<BaseSimulationProps> = ({
 
       ctx.fillStyle = '#94a3b8';
       ctx.font = '10px sans-serif';
-      ctx.fillText('B ∝ N × I (फन्को र करेन्ट)', hudX + 16, hudY + 165);
+      ctx.fillText('B ∝ N × I', hudX + 16, hudY + 165);
       ctx.fillText(
         lang === 'ne' ? '• अस्थायी चुम्बक: करेन्ट काट्दा हराउँछ।' : '• Temporary magnet: vanishes when off.',
         hudX + 16,
@@ -345,7 +345,7 @@ export const ElectromagnetWorkshopSim: React.FC<BaseSimulationProps> = ({
       titleNepali="विद्युत चुम्बक कार्यशाला तथा सोलेनोइड तार"
       chapterNumber={8}
       chapterTitle="Unit 8: Electricity and Magnetism"
-      chapterTitleNepali="एकाइ ८: विद्युत र चुम्बकत्व"
+      chapterTitleNepali="एकाइ 8: विद्युत र चुम्बकत्व"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -499,7 +499,7 @@ export const ElectromagnetWorkshopSim: React.FC<BaseSimulationProps> = ({
           {/* Coil Turns Selector */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. तारको फन्को संख्या (Coil Turns)' : '1. Solenoid Coil Turns'}
+              {lang === 'ne' ? '1. तारको फन्को संख्या (Coil Turns)' : '1. Solenoid Coil Turns'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
               {[10, 20, 40].map((t) => (
@@ -529,12 +529,12 @@ export const ElectromagnetWorkshopSim: React.FC<BaseSimulationProps> = ({
           {/* Battery Voltage Selector */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '२. ब्याट्री भोल्टेज (Current Strength)' : '2. Battery Potential (Voltage)'}
+              {lang === 'ne' ? '2. ब्याट्री भोल्टेज (Current Strength)' : '2. Battery Potential (Voltage)'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '6px' }}>
               {[
-                { count: 1, label: '1 Cell (1.5V)', labelNe: '१ सेल (१.५ भोल्ट)' },
-                { count: 2, label: '2 Cells (3.0V)', labelNe: '२ सेल (३.० भोल्ट)' },
+                { count: 1, label: '1 Cell (1.5V)', labelNe: '1 सेल (1.5 भोल्ट)' },
+                { count: 2, label: '2 Cells (3.0V)', labelNe: '2 सेल (3.0 भोल्ट)' },
               ].map((b) => (
                 <button
                   key={b.count}

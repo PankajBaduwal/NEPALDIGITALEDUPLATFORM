@@ -1,6 +1,6 @@
 /**
  * AlgebraicDivisionLab.tsx
- * Grade 7 Mathematics – Lesson 11: ALGEBRAIC EXPRESSION (बीजगणितीय व्यञ्जक)
+ * Grade 7 Mathematics – Lesson 11: ALGEBRAIC EXPRESSION
  * Simulation 3: Algebraic Division and Long Division Lab (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 157-160)
  */
@@ -12,24 +12,24 @@ import { Divide, Check, RefreshCw, ArrowRight, HelpCircle } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: '६x² ÷ ३x गर्दा भागफल (Quotient) कति हुन्छ?',
+    np: '6x² ÷ 3x गर्दा भागफल (Quotient) कति हुन्छ?',
     en: 'What is the quotient of 6x² ÷ 3x?',
     options: [
-      { key: 'A', label: '२x (६÷३ = २ र x²÷x = x)' },
-      { key: 'B', label: '२x²' },
-      { key: 'C', label: '३x' },
-      { key: 'D', label: '२' },
+      { key: 'A', label: '2x' },
+      { key: 'B', label: '2x²' },
+      { key: 'C', label: '3x' },
+      { key: 'D', label: '2' },
     ],
     answer: 'A',
   },
   {
-    np: '(२x² - ३x + ७) लाई (२x - १) ले लामो भाग (Long division) गर्दा भागफल र शेषफल कति हुन्छ?',
+    np: '(2x² - 3x + 7) लाई (2x - 1) ले लामो भाग (Long division) गर्दा भागफल र शेषफल कति हुन्छ?',
     en: 'Dividing (2x² - 3x + 7) by (2x - 1) gives what quotient and remainder?',
     options: [
-      { key: 'A', label: 'भागफल = x - १, शेषफल = ६ (Quotient = x - 1, Remainder = 6)' },
-      { key: 'B', label: 'भागफल = x + १, शेषफल = ०' },
-      { key: 'C', label: 'भागफल = २x, शेषफल = ७' },
-      { key: 'D', label: 'भागफल = x, शेषफल = ४' },
+      { key: 'A', label: 'Quotient = x - 1, Remainder = 6' },
+      { key: 'B', label: 'Quotient = x + 1, Remainder = 0' },
+      { key: 'C', label: 'Quotient = 2x, Remainder = 7' },
+      { key: 'D', label: 'Quotient = x, Remainder = 4' },
     ],
     answer: 'A',
   },
@@ -37,10 +37,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'भाज्य (Dividend), भाजक (Divisor), भागफल (Quotient) र शेषफल (Remainder) को सम्बन्ध कुन हो?',
     en: 'What is the division verification formula?',
     options: [
-      { key: 'A', label: 'भाज्य = भाजक × भागफल + शेषफल (Dividend = Divisor × Quotient + Remainder)' },
-      { key: 'B', label: 'भाज्य = भाजक + भागफल + शेषफल' },
-      { key: 'C', label: 'भाज्य = भाजक ÷ भागफल' },
-      { key: 'D', label: 'भाज्य = भागफल - शेषफल' },
+      { key: 'A', label: 'Dividend = Divisor × Quotient + Remainder' },
+      { key: 'B', label: 'Dividend = Divisor + Quotient + Remainder' },
+      { key: 'C', label: 'Dividend = Divisor ÷ Quotient' },
+      { key: 'D', label: 'Dividend = Quotient - Remainder' },
     ],
     answer: 'A',
   },
@@ -50,7 +50,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     options: [
       { key: 'A', label: 'x + y [ (x² - y²) ÷ (x - y) = x + y ]' },
       { key: 'B', label: 'x - y' },
-      { key: 'C', label: '२x + y' },
+      { key: 'C', label: '2x + y' },
       { key: 'D', label: 'xy' },
     ],
     answer: 'A',
@@ -81,7 +81,7 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'बीजगणितीय लामो भाग गर्दा पहिलो पदलाई मिलाएर भाग गरिन्छ, गुणा गरी घटाइन्छ, र भाज्य = भाजक × भागफल + शेषफल प्रमाणित गरिन्छ!',
+        'बीजगणितीय लामो भाग गर्दा पहिलो पदलाई मिलाएर भाग गरिन्छ, गुणा गरी घटाइन्छ, र भाज्य = Divisor × Quotient + Remainder प्रमाणित गरिन्छ!',
         'In polynomial long division, divide leading terms, subtract, and verify: Dividend = Divisor × Quotient + Remainder!'
       )}
     >
@@ -89,10 +89,10 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'mono', np: '१. एकपदीय भाग (6x² ÷ 3x)', en: '1. Monomial Division' },
-            { id: 'long-div', np: '२. बहुपद लामो भाग (2x² - 3x + 7) ÷ (2x - 1)', en: '2. Polynomial Long Div' },
-            { id: 'exact', np: '३. निःशेष भाग (x² + 7x + 10) ÷ (x + 2)', en: '3. Exact Division' },
-            { id: 'verify', np: '४. भाग परीक्षण र आयतको लम्बाइ', en: '4. Verification & Geometry' },
+            { id: 'mono', np: '1. एकपदीय भाग (6x² ÷ 3x)', en: '1. Monomial Division' },
+            { id: 'long-div', np: '2. बहुपद लामो भाग (2x² - 3x + 7) ÷ (2x - 1)', en: '2. Polynomial Long Div' },
+            { id: 'exact', np: '3. निःशेष भाग (x² + 7x + 10) ÷ (x + 2)', en: '3. Exact Division' },
+            { id: 'verify', np: '4. भाग परीक्षण र आयतको लम्बाइ', en: '4. Verification & Geometry' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -140,10 +140,10 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
               }}
             >
               <div>
-                <strong>{L('समस्या:', 'Problem:')}</strong> ६x² ÷ ३x
+                <strong>{L('समस्या:', 'Problem:')}</strong> 6x² ÷ 3x
               </div>
-              <div>= (६ ÷ ३) × (x² ÷ x¹)</div>
-              <div>= २ × x²⁻¹</div>
+              <div>= (6 ÷ 3) × (x² ÷ x¹)</div>
+              <div>= 2 × x²⁻¹</div>
               <div
                 style={{
                   marginTop: 6,
@@ -152,7 +152,7 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
                   color: '#166534',
                 }}
               >
-                = २x
+                = 2x
               </div>
             </div>
           </div>
@@ -166,7 +166,7 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ १५८ को लामो भागको तालिका र चरणहरू:',
+                'पाठ्यपुस्तक पृष्ठ 158 को लामो भागको तालिका र चरणहरू:',
                 'Step-by-step table from Textbook Page 158:'
               )}
             </p>
@@ -184,27 +184,27 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
               }}
             >
               <div style={{ color: '#0369A1', fontWeight: 'bold' }}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x - १ &nbsp;&nbsp;(भागफल / Quotient)
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x - 1 &nbsp;&nbsp;(Quotient)
               </div>
               <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_______________</div>
-              <div>२x - १ ) २x² - ३x + ७</div>
+              <div>2x - 1 ) 2x² - 3x + 7</div>
               <div style={{ color: '#DC2626' }}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;२x² - &nbsp;x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ x(२x - १) ]
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2x² - &nbsp;x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ x(2x - 1) ]
               </div>
               <div style={{ color: '#64748B' }}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(-) &nbsp;(+) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(घटाउँदा चिन्ह परिवर्तन)
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(-) &nbsp;(+) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sign changes on subtracting)
               </div>
               <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------</div>
-              <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-२x + ७ &nbsp;&nbsp;(तल झारियो)</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2x + 7 &nbsp;&nbsp;(bring down)</div>
               <div style={{ color: '#DC2626' }}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-२x + १ &nbsp;&nbsp;[ -१(२x - १) ]
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2x + 1 &nbsp;&nbsp;[ -1(2x - 1) ]
               </div>
               <div style={{ color: '#64748B' }}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+) &nbsp;(-) &nbsp;&nbsp;(चिन्ह परिवर्तन)
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+) &nbsp;(-) &nbsp;&nbsp;(sign change)
               </div>
               <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---------</div>
               <div style={{ color: '#166534', fontWeight: 'bold' }}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;६ &nbsp;&nbsp;(शेषफल / Remainder)
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6 &nbsp;&nbsp;(Remainder)
               </div>
             </div>
 
@@ -221,7 +221,7 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
                   {L('भागफल (Quotient - Q)', 'Quotient (Q)')}
                 </span>
                 <div style={{ fontSize: 24, fontWeight: 800, color: '#1E40AF', marginTop: 4 }}>
-                  x - १ (x - 1)
+                  x - 1 (x - 1)
                 </div>
               </div>
 
@@ -230,7 +230,7 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
                   {L('शेषफल (Remainder - R)', 'Remainder (R)')}
                 </span>
                 <div style={{ fontSize: 24, fontWeight: 800, color: '#16A34A', marginTop: 4 }}>
-                  ६ (6)
+                  6 (6)
                 </div>
               </div>
             </div>
@@ -245,7 +245,7 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: (x² + ७x + १०) लाई (x + २) ले भाग गर्दा शेषफल शून्य (०) आउँछ:',
+                'पाठ्यपुस्तक उदाहरण: (x² + 7x + 10) लाई (x + 2) ले भाग गर्दा शेषफल शून्य (0) आउँछ:',
                 'Textbook Example: (x² + 7x + 10) ÷ (x + 2) leaves Remainder = 0:'
               )}
             </p>
@@ -260,13 +260,13 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
               }}
             >
               <div>
-                <strong>{L('१. अंशको खण्डीकरण (Factoring):', '1. Factoring Numerator:')}</strong> x² + ७x + १० = (x + २)(x + ५)
+                <strong>{L('1. अंशको खण्डीकरण (Factoring):', '1. Factoring Numerator:')}</strong> x² + 7x + 10 = (x + 2)(x + 5)
               </div>
               <div>
-                <strong>{L('२. भाग गर्दा:', '2. Dividing:')}</strong> [ (x + २)(x + ५) ] ÷ (x + २)
+                <strong>{L('2. भाग गर्दा:', '2. Dividing:')}</strong> [ (x + 2)(x + 5) ] ÷ (x + 2)
               </div>
               <div>
-                <strong>{L('३. साझा (x + २) काट्दा:', '3. Cancelling (x + 2):')}</strong>
+                <strong>{L('3. साझा (x + 2) काट्दा:', '3. Cancelling (x + 2):')}</strong>
               </div>
               <div
                 style={{
@@ -276,7 +276,7 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
                   color: '#187C68',
                 }}
               >
-                {L('भागफल = x + ५, शेषफल = ०', 'Quotient = x + 5, Remainder = 0')}
+                {L('भागफल = x + 5, शेषफल = 0', 'Quotient = x + 5, Remainder = 0')}
               </div>
             </div>
           </div>
@@ -290,7 +290,7 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'भाज्य = भाजक × भागफल + शेषफल सुत्र प्रमाणित गरौँ:',
+                'भाज्य = Divisor × Quotient + Remainder सुत्र प्रमाणित गरौँ:',
                 'Verify Dividend = Divisor × Quotient + Remainder:'
               )}
             </p>
@@ -306,12 +306,12 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
               }}
             >
               <div>
-                <strong>{L('परीक्षण सूत्र:', 'Formula:')}</strong> भाजक × भागफल + शेषफल
+                <strong>{L('परीक्षण सूत्र:', 'Formula:')}</strong> Divisor × Quotient + Remainder
               </div>
-              <div>= (२x - १)(x - १) + ६</div>
-              <div>= [ २x(x - १) - १(x - १) ] + ६</div>
-              <div>= (२x² - २x - x + १) + ६</div>
-              <div>= २x² - ३x + १ + ६</div>
+              <div>= (2x - 1)(x - 1) + 6</div>
+              <div>= [ 2x(x - 1) - 1(x - 1) ] + 6</div>
+              <div>= (2x² - 2x - x + 1) + 6</div>
+              <div>= 2x² - 3x + 1 + 6</div>
               <div
                 style={{
                   marginTop: 6,
@@ -320,7 +320,7 @@ export const AlgebraicDivisionLab: React.FC<{ onBackToLibrary?: () => void; onBa
                   color: '#3730A3',
                 }}
               >
-                = २x² - ३x + ७ = भाज्य (प्रमाणित भयो / Verified!)
+                = 2x² - 3x + 7 = Dividend (Verified!)
               </div>
             </div>
 

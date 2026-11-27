@@ -1,11 +1,11 @@
 /**
  * SpringBalanceLabSim.tsx
- * Simulation 17: 2D Spring Balance Laboratory (कमानीदार तराजु प्रयोगशाला)
- * Grade 6 Science • Unit 6: Force and Motion (बल र गति)
+ * Simulation 17: 2D Spring Balance Laboratory
+ * Grade 6 Science • Unit 6: Force and Motion
  *
  * 100% Native HTML5 Canvas 2D Interactive Physics Balance.
  * Features:
- * 1. Hooke's Law: F = k * Δx (कमानीको लम्बाई प्रसार भारसँग समानुपातिक हुन्छ)
+ * 1. Hooke's Law: F = k * Δx
  * 2. Mass vs Weight: Mass (g/kg) is constant, Weight (W = mg in Newtons) changes with gravity
  * 3. Gravitational environments: Earth (g = 9.8 m/s²), Moon (g = 1.63 m/s²), Space Zero-G (g = 0)
  * 4. Procedural helical spring coils stretching dynamically with red pointer needle
@@ -25,7 +25,7 @@ export const SpringBalanceLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -35,9 +35,9 @@ export const SpringBalanceLabSim: React.FC<BaseSimulationProps> = ({
   const [gravityEnv, setGravityEnv] = useState<GravityPreset>('earth');
 
   const gMap: Record<GravityPreset, { g: number; nameEn: string; nameNe: string; icon: string }> = {
-    earth: { g: 9.8, nameEn: 'Earth (पृथ्वी)', nameNe: 'पृथ्वी (g = 9.8)', icon: '🌍' },
-    moon: { g: 1.63, nameEn: 'Moon (चन्द्रमा)', nameNe: 'चन्द्रमा (g = 1.63)', icon: '🌕' },
-    space: { g: 0, nameEn: 'Zero-G Space (अन्तरिक्ष)', nameNe: 'शून्य गुरुत्व (g = 0)', icon: '🚀' },
+    earth: { g: 9.8, nameEn: 'Earth', nameNe: 'पृथ्वी (g = 9.8)', icon: '🌍' },
+    moon: { g: 1.63, nameEn: 'Moon', nameNe: 'चन्द्रमा (g = 1.63)', icon: '🌕' },
+    space: { g: 0, nameEn: 'Zero-G Space', nameNe: 'शून्य गुरुत्व (g = 0)', icon: '🚀' },
   };
 
   const currentG = gMap[gravityEnv];
@@ -316,7 +316,7 @@ export const SpringBalanceLabSim: React.FC<BaseSimulationProps> = ({
       titleNepali="कमानीदार तराजु तथा हुकको नियम प्रयोगशाला"
       chapterNumber={6}
       chapterTitle="Unit 6: Force and Motion"
-      chapterTitleNepali="एकाइ ६: बल र गति"
+      chapterTitleNepali="एकाइ 6: बल र गति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -462,7 +462,7 @@ export const SpringBalanceLabSim: React.FC<BaseSimulationProps> = ({
           {/* Gravity Environment Selection */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. गुरुत्व वातावरण छान्नुहोस् (Gravity Field)' : '1. Gravity Field'}
+              {lang === 'ne' ? '1. गुरुत्व वातावरण छान्नुहोस् (Gravity Field)' : '1. Gravity Field'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
               {(['earth', 'moon', 'space'] as const).map((env) => (

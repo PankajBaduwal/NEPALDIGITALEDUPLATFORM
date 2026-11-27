@@ -1,12 +1,12 @@
 /**
  * DistillationSimulatorSim.tsx
- * Simulation 34: 2D Distillation Simulator (आसवन प्रक्रिया सिमुलेटर)
- * Grade 6 Science • Unit 9: Matter (पदार्थ)
+ * Simulation 34: 2D Distillation Simulator
+ * Grade 6 Science • Unit 9: Matter
  *
  * Full 2D Interactive Chemistry Distillation Apparatus featuring:
  * 1. Liebig Condenser Assembly: Round-bottom flask, wire gauze, tripod, burner,
  *    thermometer (100°C), water-jacketed condenser tube, receiver flask.
- * 2. Distillation Formula: Distillation = Evaporation + Condensation (आसवन = वाष्पीकरण + संघनन)
+ * 2. Distillation Formula: Distillation = Evaporation + Condensation
  * 3. Steam generation in boiling flask, vapor condensation, droplet flow, and pure distilled water collection.
  * 4. Coolant flow simulation (Cold water IN at bottom, Warm water OUT at top).
  */
@@ -21,7 +21,7 @@ export const DistillationSimulatorSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -401,9 +401,9 @@ export const DistillationSimulatorSim: React.FC<BaseSimulationProps> = ({
       // Labels on canvas
       ctx.fillStyle = '#f8fafc';
       ctx.font = 'bold 13px sans-serif';
-      ctx.fillText(lang === 'en' ? 'Boiling Flask (मिश्रण भएको भाँडो)' : 'उमाल्ने फ्लास्क', flaskX - 70, flaskY - flaskR - 15);
-      ctx.fillText(lang === 'en' ? 'Liebig Condenser (कन्डेन्सर)' : 'कन्डेन्सर नली', condStartX + 80, condStartY - 30);
-      ctx.fillText(lang === 'en' ? 'Distillate (शुद्ध पानी)' : 'आसवन पानी', recvX - 35, tableY + 15);
+      ctx.fillText(lang === 'en' ? 'Boiling Flask' : 'उमाल्ने फ्लास्क', flaskX - 70, flaskY - flaskR - 15);
+      ctx.fillText(lang === 'en' ? 'Liebig Condenser' : 'कन्डेन्सर नली', condStartX + 80, condStartY - 30);
+      ctx.fillText(lang === 'en' ? 'Distillate' : 'आसवन पानी', recvX - 35, tableY + 15);
 
       // Live metrics HUD in top-left
       ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
@@ -419,7 +419,7 @@ export const DistillationSimulatorSim: React.FC<BaseSimulationProps> = ({
       ctx.fillText(lang === 'en' ? 'Distillation Temperature:' : 'तापक्रम:', 38, 50);
       ctx.fillStyle = tempC >= 100 ? '#ef4444' : tempC >= 60 ? '#f59e0b' : '#38bdf8';
       ctx.font = 'bold 18px sans-serif';
-      ctx.fillText(`${tempC.toFixed(1)} °C ${tempC >= 100 ? '(Boiling / उम्लिरहेको)' : ''}`, 38, 72);
+      ctx.fillText(`${tempC.toFixed(1)} °C ${tempC >= 100 ? '' : ''}`, 38, 72);
 
       ctx.fillStyle = '#38bdf8';
       ctx.font = '12px sans-serif';
@@ -568,7 +568,7 @@ export const DistillationSimulatorSim: React.FC<BaseSimulationProps> = ({
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
             <h4 style={{ margin: '0 0 6px 0', fontSize: '13px', color: '#f59e0b', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <Sparkles size={16} />
-              {lang === 'en' ? 'Distillation Principle (आसवन सिद्धान्त)' : 'आसवन सिद्धान्त'}
+              {lang === 'en' ? 'Distillation Principle' : 'आसवन सिद्धान्त'}
             </h4>
             <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px', borderRadius: '8px', textAlign: 'center', margin: '8px 0', border: '1px solid rgba(245, 158, 11, 0.2)' }}>
               <span style={{ fontSize: '13px', fontWeight: 'bold', color: '#38bdf8' }}>
@@ -578,18 +578,18 @@ export const DistillationSimulatorSim: React.FC<BaseSimulationProps> = ({
             <p style={{ margin: 0, fontSize: '12px', color: '#475569', lineHeight: '1.5' }}>
               {lang === 'en'
                 ? 'When solution boils at 100°C, pure water turns into steam (evaporation). Inside the cold Liebig condenser, steam cools down into liquid droplets (condensation), leaving non-volatile impurities behind!'
-                : '१००°C मा घोल उम्लिँदा शुद्ध पानी बाफ बन्छ (वाष्पीकरण)। चिसो लाइबिग कन्डेन्सर भित्र बाफ पुनः तरल थोपामा परिणत हुन्छ (संघनन), र अशुद्धिहरू उमाल्ने फ्लास्कमा नै रहन्छन्!'}
+                : '100°C मा घोल उम्लिँदा शुद्ध पानी बाफ बन्छ (वाष्पीकरण)। चिसो लाइबिग कन्डेन्सर भित्र बाफ पुनः तरल थोपामा परिणत हुन्छ (संघनन), र अशुद्धिहरू उमाल्ने फ्लास्कमा नै रहन्छन्!'}
             </p>
           </div>
 
           {/* Inquiry Stage Guide */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: Apparatus Parts' : '१. खोज: उपकरणका भागहरू')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Heating & Steam' : '२. अन्वेषण: ताप र बाफ निर्माण')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Condensation Flow' : '३. अवलोकन: संघनन र थोपा प्रवाह')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Water Purity' : '४. बुझाइ: पानीको शुद्धता')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Check Knowledge' : '५. चुनौती: ज्ञान परीक्षण')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: Apparatus Parts' : '1. खोज: उपकरणका भागहरू')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Heating & Steam' : '2. अन्वेषण: ताप र बाफ निर्माण')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Condensation Flow' : '3. अवलोकन: संघनन र थोपा प्रवाह')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Water Purity' : '4. बुझाइ: पानीको शुद्धता')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Check Knowledge' : '5. चुनौती: ज्ञान परीक्षण')}
             </h4>
 
             {stage !== 'challenge' ? (
@@ -599,7 +599,7 @@ export const DistillationSimulatorSim: React.FC<BaseSimulationProps> = ({
                   : 'कन्डेन्सरको बाहिरी ज्याकेट सधैं भरिभराउ रहोस् भनेर चिसो पानी तल्लो मुखबाट हालिन्छ र तातो पानी माथिल्लो मुखबाट बाहिर निस्कन्छ।')}
                 {stage === 'explore' && (lang === 'en'
                   ? 'Ignite the Bunsen burner. Watch the mercury thread rise up the thermometer to 100°C as boiling begins.'
-                  : 'बन्सेन बर्नर बाल्नुहोस्। तापक्रम १००°C मा पुगेपछि पानी उम्लिन सुरु भएको अवलोकन गर्नुहोस्।')}
+                  : 'बन्सेन बर्नर बाल्नुहोस्। तापक्रम 100°C मा पुगेपछि पानी उम्लिन सुरु भएको अवलोकन गर्नुहोस्।')}
                 {stage === 'observe' && (lang === 'en'
                   ? 'Observe pure distilled water droplets forming in the inner condenser tube and collecting in the receiver.'
                   : 'कन्डेन्सरको भित्री नलीमा शुद्ध पानीका थोपा बनेर रिसिभर फ्लास्कमा जम्मा भएको हेर्नुहोस्।')}

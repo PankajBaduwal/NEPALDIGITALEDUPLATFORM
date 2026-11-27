@@ -1,14 +1,14 @@
 /**
  * SoundVibrationLabSim.tsx
- * Simulation 25: 2D Sound & Vibration Laboratory (ध्वनि र कम्पन प्रयोगशाला)
- * Grade 6 Science • Unit 7: Energy in Daily Life (दैनिक जीवनमा शक्ति)
+ * Simulation 25: 2D Sound & Vibration Laboratory
+ * Grade 6 Science • Unit 7: Energy in Daily Life
  *
  * 100% Native HTML5 Canvas 2D Interactive Acoustics Studio.
  * Features:
  * 1. Sound Origin: Mechanical vibration of matter produces sound waves
  * 2. Vibrating Steel Ruler on Desk:
- *    - Short length -> High frequency (Hz) -> High Pitch (तीखो / सुरिलो स्वर)
- *    - Long length -> Low frequency (Hz) -> Deep Low Pitch (गम्भीर स्वर)
+ *    - Short length -> High frequency (Hz) -> High Pitch
+ *    - Long length -> Low frequency (Hz) -> Deep Low Pitch
  * 3. Tuning Fork Water Splash: Vibrating prongs dipped into water generate splash droplets & ripples
  * 4. Real-time Oscilloscope Display: Live sine waveform showing Frequency (Pitch) and Amplitude (Loudness)
  * 5. Procedural Web Audio API sound synthesis matching physical vibration frequencies
@@ -27,7 +27,7 @@ export const SoundVibrationLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -375,7 +375,7 @@ export const SoundVibrationLabSim: React.FC<BaseSimulationProps> = ({
       titleNepali="ध्वनि र कम्पन प्रयोगशाला (आवृत्ति, स्वर, तरङ्ग)"
       chapterNumber={7}
       chapterTitle="Unit 7: Energy in Daily Life"
-      chapterTitleNepali="एकाइ ७: दैनिक जीवनमा शक्ति"
+      chapterTitleNepali="एकाइ 7: दैनिक जीवनमा शक्ति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -552,12 +552,12 @@ export const SoundVibrationLabSim: React.FC<BaseSimulationProps> = ({
           {/* Instrument Selector */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. ध्वनि उपकरण छान्नुहोस्' : '1. Acoustic Instrument'}
+              {lang === 'ne' ? '1. ध्वनि उपकरण छान्नुहोस्' : '1. Acoustic Instrument'}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {[
-                { id: 'ruler', nameEn: '1. Vibrating Steel Ruler', nameNe: '१. स्टिलको स्केल (Pitch vs Length)' },
-                { id: 'tuning_fork', nameEn: '2. Tuning Fork Splash', nameNe: '२. ट्युनिङ फोर्क र पानीका छिटा' },
+                { id: 'ruler', nameEn: '1. Vibrating Steel Ruler', nameNe: '1. स्टिलको स्केल (Pitch vs Length)' },
+                { id: 'tuning_fork', nameEn: '2. Tuning Fork Splash', nameNe: '2. ट्युनिङ फोर्क र पानीका छिटा' },
               ].map((m) => (
                 <button
                   key={m.id}

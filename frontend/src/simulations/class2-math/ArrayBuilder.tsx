@@ -1,5 +1,5 @@
 /**
- * Lesson 16 · Multiplication 2 (गुणन २)
+ * Lesson 16 · Multiplication 2
  * Array Builder — rows and columns build the multiplication tables; commutative property a × b = b × a.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -140,8 +140,8 @@ export const ArrayBuilder: React.FC<Props> = ({ onBackToLibrary }) => {
           <span style={{ fontSize: 13, fontWeight: 800, color: '#0284C7', alignSelf: 'center', marginRight: 4 }}>
             {kit.t('पङ्क्ति (Rows):', 'Rows:')}
           </span>
-          <CBtn color="#0284C7" disabled={rows >= 8} onClick={() => { setRows((r) => r + 1); setLitCount((rows + 1) * cols); }}>+१</CBtn>
-          <CBtn color="#0284C7" disabled={rows <= 1} onClick={() => { setRows((r) => r - 1); setLitCount((rows - 1) * cols); }}>-१</CBtn>
+          <CBtn color="#0284C7" disabled={rows >= 8} onClick={() => { setRows((r) => r + 1); setLitCount((rows + 1) * cols); }}>+1</CBtn>
+          <CBtn color="#0284C7" disabled={rows <= 1} onClick={() => { setRows((r) => r - 1); setLitCount((rows - 1) * cols); }}>-1</CBtn>
         </div>
 
         {/* Adjust Columns */}
@@ -149,8 +149,8 @@ export const ArrayBuilder: React.FC<Props> = ({ onBackToLibrary }) => {
           <span style={{ fontSize: 13, fontWeight: 800, color: '#E11D48', alignSelf: 'center', marginRight: 4 }}>
             {kit.t('स्तम्भ (Cols):', 'Cols:')}
           </span>
-          <CBtn color="#E11D48" disabled={cols >= 8} onClick={() => { setCols((c) => c + 1); setLitCount(rows * (cols + 1)); }}>+१</CBtn>
-          <CBtn color="#E11D48" disabled={cols <= 1} onClick={() => { setCols((c) => c - 1); setLitCount(rows * (cols - 1)); }}>-१</CBtn>
+          <CBtn color="#E11D48" disabled={cols >= 8} onClick={() => { setCols((c) => c + 1); setLitCount(rows * (cols + 1)); }}>+1</CBtn>
+          <CBtn color="#E11D48" disabled={cols <= 1} onClick={() => { setCols((c) => c - 1); setLitCount(rows * (cols - 1)); }}>-1</CBtn>
         </div>
 
         <CBtn color="#10B981" disabled={isCounting} onClick={countRowByRow}>

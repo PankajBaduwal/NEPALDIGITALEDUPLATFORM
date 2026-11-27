@@ -1,7 +1,7 @@
 /**
  * NumberSystemDiscoveryPlayground.tsx
- * Grade 8 Mathematics – Unit 2: WHOLE NUMBERS (पूर्ण सङ्ख्याहरू)
- * Simulation 1: Number System Discovery Playground (सङ्ख्या पद्धति खोजी खेलमैदान)
+ * Grade 8 Mathematics – Unit 2: WHOLE NUMBERS
+ * Simulation 1: Number System Discovery Playground
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 2)
  */
 import React, { useState } from 'react';
@@ -15,10 +15,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दशमलव सङ्ख्या पद्धति (Decimal System) को आधार (Base) कति हुन्छ र यसमा कुन-कुन अङ्कहरू प्रयोग गरिन्छन्?',
     en: 'What is the base of the Decimal Number System and which digits are used in it?',
     options: [
-      { key: 'A', label: 'आधार १०, अङ्कहरू ० देखि ९ सम्म (Base 10, digits 0–9)' },
-      { key: 'B', label: 'आधार २, अङ्कहरू ० र १' },
-      { key: 'C', label: 'आधार ५, अङ्कहरू ० देखि ४ सम्म' },
-      { key: 'D', label: 'आधार ८, अङ्कहरू ० देखि ७ सम्म' },
+      { key: 'A', label: 'Base 10, digits 0–9' },
+      { key: 'B', label: 'Base 2, digits 0 and 1' },
+      { key: 'C', label: 'Base 5, digits 0 to 4' },
+      { key: 'D', label: 'Base 8, digits 0 to 7' },
     ],
     answer: 'A',
   },
@@ -26,21 +26,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कम्प्युटर र विद्युतीय सर्किटमा स्विच अन (ON) र अफ (OFF) जनाउन कुन सङ्ख्या पद्धति प्रयोग गरिन्छ?',
     en: 'Which number system is used to represent switch ON and OFF in electrical circuits and computers?',
     options: [
-      { key: 'A', label: 'द्विआधार पद्धति (Binary System: ON = 1, OFF = 0)' },
-      { key: 'B', label: 'पञ्चआधार पद्धति (Quinary System)' },
-      { key: 'C', label: 'दशमलव पद्धति (Decimal System)' },
-      { key: 'D', label: 'रोमन पद्धति' },
+      { key: 'A', label: 'Binary system (ON = 1, OFF = 0)' },
+      { key: 'B', label: 'Quinary system' },
+      { key: 'C', label: 'Decimal system' },
+      { key: 'D', label: 'Roman system' },
     ],
     answer: 'A',
   },
   {
-    np: 'द्विआधार सङ्ख्या १०१०१₂ (10101₂) को दशमलव मान (Decimal Value) कति हुन्छ?',
+    np: 'द्विआधार सङ्ख्या 10101₂ (10101₂) को दशमलव मान (Decimal Value) कति हुन्छ?',
     en: 'What is the decimal equivalent of the binary number 10101₂?',
     options: [
-      { key: 'A', label: '२१ [ १६ + ० + ४ + ० + १ = २१ ]' },
-      { key: 'B', label: '१५' },
-      { key: 'C', label: '३१' },
-      { key: 'D', label: '१०' },
+      { key: 'A', label: '21 [ 16 + 0 + 4 + 0 + 1 = 21 ]' },
+      { key: 'B', label: '15' },
+      { key: 'C', label: '31' },
+      { key: 'D', label: '10' },
     ],
     answer: 'A',
   },
@@ -48,21 +48,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'पञ्चआधार सङ्ख्या पद्धति (Quinary System) मा कुन अङ्क प्रयोग गर्न पाइँदैन?',
     en: 'Which digit cannot be used in the Quinary (Base-5) number system?',
     options: [
-      { key: 'A', label: '५ (पञ्चआधारमा ०, १, २, ३, ४ मात्र हुन्छन्)' },
-      { key: 'B', label: '४' },
-      { key: 'C', label: '०' },
-      { key: 'D', label: '३' },
+      { key: 'A', label: '5' },
+      { key: 'B', label: '4' },
+      { key: 'C', label: '0' },
+      { key: 'D', label: '3' },
     ],
     answer: 'A',
   },
   {
-    np: 'पञ्चआधार सङ्ख्या २३४₅ (234₅) को विस्तारित रूप (Expanded Form) कुन हो?',
+    np: 'पञ्चआधार सङ्ख्या 234₅ (234₅) को विस्तारित रूप (Expanded Form) कुन हो?',
     en: 'What is the correct expanded form of the quinary number 234₅?',
     options: [
-      { key: 'A', label: '२ × ५² + ३ × ५¹ + ४ × ५⁰' },
-      { key: 'B', label: '२ × १०² + ३ × १०¹ + ४ × १०⁰' },
-      { key: 'C', label: '२ × २² + ३ × २¹ + ४ × २⁰' },
-      { key: 'D', label: '२३ × ५ + ४' },
+      { key: 'A', label: '2 × 5² + 3 × 5¹ + 4 × 5⁰' },
+      { key: 'B', label: '2 × 10² + 3 × 10¹ + 4 × 10⁰' },
+      { key: 'C', label: '2 × 2² + 3 × 2¹ + 4 × 2⁰' },
+      { key: 'D', label: '23 × 5 + 4' },
     ],
     answer: 'A',
   },
@@ -119,7 +119,7 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! सङ्ख्या पद्धति खोजी खेलमैदानमा स्वागत छ। दशमलव (१०), द्विआधार (२) र पञ्चआधार (५) पद्धति बुझौँ!',
+        'नमस्ते! सङ्ख्या पद्धति खोजी खेलमैदानमा स्वागत छ। दशमलव (10), द्विआधार (2) र पञ्चआधार (5) पद्धति बुझौँ!',
         'Hello! Welcome to Number System Discovery. Let us master Decimal (Base 10), Binary (Base 2), and Quinary (Base 5)!'
       )}
     >
@@ -127,10 +127,10 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'decimal', labelNp: '१. दशमलव पद्धति (Base 10)', labelEn: '1. Decimal System (Base 10)', icon: Layers },
-            { id: 'binary', labelNp: '२. द्विआधार पद्धति (Base 2)', labelEn: '2. Binary System (Base 2)', icon: Binary },
-            { id: 'quinary', labelNp: '३. पञ्चआधार पद्धति (Base 5)', labelEn: '3. Quinary System (Base 5)', icon: Power },
-            { id: 'compare', labelNp: '४. पद्धतिहरूको तुलना तालिम', labelEn: '4. System Comparison', icon: Sparkles },
+            { id: 'decimal', labelNp: '1. दशमलव पद्धति (Base 10)', labelEn: '1. Decimal System (Base 10)', icon: Layers },
+            { id: 'binary', labelNp: '2. द्विआधार पद्धति (Base 2)', labelEn: '2. Binary System (Base 2)', icon: Binary },
+            { id: 'quinary', labelNp: '3. पञ्चआधार पद्धति (Base 5)', labelEn: '3. Quinary System (Base 5)', icon: Power },
+            { id: 'compare', labelNp: '4. पद्धतिहरूको तुलना तालिम', labelEn: '4. System Comparison', icon: Sparkles },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -168,15 +168,15 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                 <h3 style={{ margin: 0, color: '#0369a1', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
                   <Layers size={20} />
-                  {L('दशमलव सङ्ख्या पद्धति (Decimal System - आधार १०)', 'Decimal Number System (Base 10)')}
+                  {L('दशमलव सङ्ख्या पद्धति (Decimal System - आधार 10)', 'Decimal Number System (Base 10)')}
                 </h3>
                 <span style={{ fontSize: 13, background: '#e0f2fe', color: '#0284c7', padding: '4px 10px', borderRadius: 20, fontWeight: 700 }}>
-                  {L('प्रयोग हुने १० अङ्कहरू: ०, १, २, ३, ४, ५, ६, ७, ८, ९', 'Digits used: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9')}
+                  {L('प्रयोग हुने 10 अङ्कहरू: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9', 'Digits used: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9')}
                 </span>
               </div>
               <p style={{ margin: '0 0 16px 0', fontSize: 14, color: '#475569', lineHeight: 1.6 }}>
                 {L(
-                  'हामीले दैनिक जीवनमा प्रयोग गर्ने हिन्दु-अरेबिक सङ्ख्या पद्धति नै दशमलव पद्धति हो। यसको प्रत्येक स्थानको मान १० को घात (Power of 10) मा बढ्छ।',
+                  'हामीले दैनिक जीवनमा प्रयोग गर्ने हिन्दु-अरेबिक सङ्ख्या पद्धति नै दशमलव पद्धति हो। यसको प्रत्येक स्थानको मान 10 को घात (Power of 10) मा बढ्छ।',
                   'The Hindu-Arabic system used in daily life is the decimal system. Each position value increases by powers of 10.'
                 )}
               </p>
@@ -187,10 +187,10 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
                   <thead>
                     <tr style={{ background: '#f1f5f9' }}>
                       <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('स्थान (Place)', 'Place')}</th>
-                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('हजार (Thousand: १०³)', '10³ (1000)')}</th>
-                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('सय (Hundred: १०²)', '10² (100)')}</th>
-                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('दश (Ten: १०¹)', '10¹ (10)')}</th>
-                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('एक (One: १०⁰)', '10⁰ (1)')}</th>
+                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('हजार (Thousand: 10³)', '10³ (1000)')}</th>
+                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('सय (Hundred: 10²)', '10² (100)')}</th>
+                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('दश (Ten: 10¹)', '10¹ (10)')}</th>
+                      <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('एक (One: 10⁰)', '10⁰ (1)')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -253,7 +253,7 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
                   {L('विस्तारित रूप (Expanded Form):', 'Expanded Form:')}
                 </div>
                 <div style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginTop: 6 }}>
-                  {isNe ? toNp(decValue) : decValue} = ({isNe ? toNp(decDigits[0]) : decDigits[0]} × १०³) + ({isNe ? toNp(decDigits[1]) : decDigits[1]} × १०²) + ({isNe ? toNp(decDigits[2]) : decDigits[2]} × १०¹) + ({isNe ? toNp(decDigits[3]) : decDigits[3]} × १०⁰)
+                  {isNe ? toNp(decValue) : decValue} = ({isNe ? toNp(decDigits[0]) : decDigits[0]} × 10³) + ({isNe ? toNp(decDigits[1]) : decDigits[1]} × 10²) + ({isNe ? toNp(decDigits[2]) : decDigits[2]} × 10¹) + ({isNe ? toNp(decDigits[3]) : decDigits[3]} × 10⁰)
                 </div>
                 <div style={{ fontSize: 14, color: '#0284c7', marginTop: 4 }}>
                   = {isNe ? toNp(decDigits[0] * 1000) : decDigits[0] * 1000} + {isNe ? toNp(decDigits[1] * 100) : decDigits[1] * 100} + {isNe ? toNp(decDigits[2] * 10) : decDigits[2] * 10} + {isNe ? toNp(decDigits[3]) : decDigits[3]} = {isNe ? toNp(decValue) : decValue}
@@ -270,15 +270,15 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                 <h3 style={{ margin: 0, color: '#16a34a', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
                   <Binary size={20} />
-                  {L('द्विआधार सङ्ख्या पद्धति (Binary Number System - आधार २)', 'Binary Number System (Base 2)')}
+                  {L('द्विआधार सङ्ख्या पद्धति (Binary Number System - आधार 2)', 'Binary Number System (Base 2)')}
                 </h3>
                 <span style={{ fontSize: 13, background: '#dcfce7', color: '#15803d', padding: '4px 10px', borderRadius: 20, fontWeight: 700 }}>
-                  {L('प्रयोग हुने २ अङ्कहरू: ० र १ (Bits)', 'Digits used: 0 and 1')}
+                  {L('प्रयोग हुने 2 अङ्कहरू: 0 र 1 (Bits)', 'Digits used: 0 and 1')}
                 </span>
               </div>
               <p style={{ margin: '0 0 14px 0', fontSize: 14, color: '#475569', lineHeight: 1.6 }}>
                 {L(
-                  'कम्प्युटर सर्किटमा करेन्ट प्रवाह हुनु (स्विच अन) लाई १ र नहुनु (स्विच अफ) लाई ० मानिन्छ। यसको प्रत्येक स्थानको मान २ को घात (२⁴, २³, २², २¹, २⁰) मा हुन्छ।',
+                  'कम्प्युटर सर्किटमा करेन्ट प्रवाह हुनु (स्विच अन) लाई 1 र नहुनु (स्विच अफ) लाई 0 मानिन्छ। यसको प्रत्येक स्थानको मान 2 को घात (2⁴, 2³, 2², 2¹, 2⁰) मा हुन्छ।',
                   'In digital electronics, switch ON is 1 and switch OFF is 0. Place values are powers of 2 (16, 8, 4, 2, 1).'
                 )}
               </p>
@@ -286,15 +286,15 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
               {/* Switches Interactive Circuit */}
               <div style={{ background: '#f8fafc', padding: 16, borderRadius: 12, border: '1px solid #cbd5e1', marginBottom: 16 }}>
                 <div style={{ fontSize: 13, fontWeight: 700, color: '#334155', marginBottom: 12 }}>
-                  {L('स्विच अन (१) / अफ (०) गरेर द्विआधार सङ्ख्या बनाउनुहोस्:', 'Toggle switches ON (1) / OFF (0) to build binary number:')}
+                  {L('स्विच अन (1) / अफ (0) गरेर द्विआधार सङ्ख्या बनाउनुहोस्:', 'Toggle switches ON (1) / OFF (0) to build binary number:')}
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, textAlign: 'center' }}>
                   {[
-                    { power: '२⁴ (16)', val: 16 },
-                    { power: '२³ (8)', val: 8 },
-                    { power: '२² (4)', val: 4 },
-                    { power: '२¹ (2)', val: 2 },
-                    { power: '२⁰ (1)', val: 1 },
+                    { power: '2⁴ (16)', val: 16 },
+                    { power: '2³ (8)', val: 8 },
+                    { power: '2² (4)', val: 4 },
+                    { power: '2¹ (2)', val: 2 },
+                    { power: '2⁰ (1)', val: 1 },
                   ].map((p, idx) => {
                     const isOn = binaryBits[idx] === 1;
                     return (
@@ -316,7 +316,7 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
                       >
                         <div style={{ fontSize: 11, fontWeight: 700, color: '#64748b' }}>{p.power}</div>
                         <div style={{ fontSize: 24, fontWeight: 900, color: isOn ? '#15803d' : '#94a3b8', margin: '6px 0' }}>
-                          {isOn ? '१ (ON)' : '० (OFF)'}
+                          {isOn ? '1 (ON)' : '0 (OFF)'}
                         </div>
                         <div style={{ fontSize: 12, color: isOn ? '#166534' : '#64748b', fontWeight: 700 }}>
                           {isOn ? `+${p.val}` : '+0'}
@@ -338,7 +338,7 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
                 <div style={{ fontSize: 13, color: '#064e3b', marginTop: 6, lineHeight: 1.6 }}>
                   {L('विस्तार:', 'Expanded calculation:')}{' '}
                   {binaryBits
-                    .map((b, i) => `(${b} × २^${4 - i})`)
+                    .map((b, i) => `(${b} × 2^${4 - i})`)
                     .join(' + ')}{' '}
                   = {binaryBits.map((b, i) => b * Math.pow(2, 4 - i)).join(' + ')} = {binaryValue}
                 </div>
@@ -354,15 +354,15 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                 <h3 style={{ margin: 0, color: '#ea580c', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
                   <Power size={20} />
-                  {L('पञ्चआधार सङ्ख्या पद्धति (Quinary System - आधार ५)', 'Quinary Number System (Base 5)')}
+                  {L('पञ्चआधार सङ्ख्या पद्धति (Quinary System - आधार 5)', 'Quinary Number System (Base 5)')}
                 </h3>
                 <span style={{ fontSize: 13, background: '#ffedd5', color: '#c2410c', padding: '4px 10px', borderRadius: 20, fontWeight: 700 }}>
-                  {L('प्रयोग हुने ५ अङ्कहरू: ०, १, २, ३, ४', 'Digits used: 0, 1, 2, 3, 4')}
+                  {L('प्रयोग हुने 5 अङ्कहरू: 0, 1, 2, 3, 4', 'Digits used: 0, 1, 2, 3, 4')}
                 </span>
               </div>
               <p style={{ margin: '0 0 14px 0', fontSize: 14, color: '#475569', lineHeight: 1.6 }}>
                 {L(
-                  '५ वटा वस्तुहरू (जस्तै कलम, गेडागुडी) को समूह बनाएर गणना गर्ने विधिलाई पञ्चआधार पद्धति भनिन्छ। यसमा ५ प्रयोग हुँदैन, ४ पछि सिधै १०₅ (पाँच) आउँछ।',
+                  '5 pcs वस्तुहरू (जस्तै कलम, गेडागुडी) को समूह बनाएर गणना गर्ने विधिलाई पञ्चआधार पद्धति भनिन्छ। यसमा 5 प्रयोग हुँदैन, 4 पछि सिधै 10₅ (पाँच) आउँछ।',
                   'Counting in bundles of five objects is the quinary system. Digit 5 is not allowed; after 4 comes 10₅ (representing 5).'
                 )}
               </p>
@@ -373,16 +373,16 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
                   <thead>
                     <tr style={{ background: '#fff7ed' }}>
                       <th style={{ padding: 10, border: '1px solid #fed7aa' }}>{L('स्थान (Place)', 'Place')}</th>
-                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>५³ (125)</th>
-                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>५² (25)</th>
-                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>५¹ (5)</th>
-                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>५⁰ (1)</th>
+                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>5³ (125)</th>
+                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>5² (25)</th>
+                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>5¹ (5)</th>
+                      <th style={{ padding: 10, border: '1px solid #fed7aa' }}>5⁰ (1)</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td style={{ padding: 10, border: '1px solid #fed7aa', fontWeight: 700, color: '#c2410c' }}>
-                        {L('अङ्क (०-४)', 'Digit (0-4)')}
+                        {L('अङ्क (0-4)', 'Digit (0-4)')}
                       </td>
                       {quinaryDigits.map((q, idx) => (
                         <td key={idx} style={{ padding: 10, border: '1px solid #fed7aa' }}>
@@ -442,7 +442,7 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
                   {quinaryDigits.join('')}₅ = {isNe ? toNp(quinaryValue) : quinaryValue}₁₀
                 </div>
                 <div style={{ fontSize: 13, color: '#7c2d12', marginTop: 6 }}>
-                  = ({quinaryDigits[0]} × १२५) + ({quinaryDigits[1]} × २५) + ({quinaryDigits[2]} × ५) + ({quinaryDigits[3]} × १) = {quinaryValue}
+                  = ({quinaryDigits[0]} × 125) + ({quinaryDigits[1]} × 25) + ({quinaryDigits[2]} × 5) + ({quinaryDigits[3]} × 1) = {quinaryValue}
                 </div>
               </div>
             </div>
@@ -489,7 +489,7 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
                 <div style={{ fontSize: 26, fontWeight: 900, color: '#0369a1', marginTop: 6 }}>
                   {isNe ? toNp(selectedCompDec) : selectedCompDec}₁₀
                 </div>
-                <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>{L('आधार १०', 'Base 10')}</div>
+                <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>{L('आधार 10', 'Base 10')}</div>
               </div>
 
               <div style={{ background: '#ecfdf5', padding: 16, borderRadius: 12, border: '1.5px solid #a7f3d0', textAlign: 'center' }}>
@@ -497,7 +497,7 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
                 <div style={{ fontSize: 26, fontWeight: 900, color: '#047857', marginTop: 6 }}>
                   {toBinaryString(selectedCompDec)}₂
                 </div>
-                <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>{L('आधार २', 'Base 2')}</div>
+                <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>{L('आधार 2', 'Base 2')}</div>
               </div>
 
               <div style={{ background: '#fff7ed', padding: 16, borderRadius: 12, border: '1.5px solid #fed7aa', textAlign: 'center' }}>
@@ -505,7 +505,7 @@ export const NumberSystemDiscoveryPlayground: React.FC<{
                 <div style={{ fontSize: 26, fontWeight: 900, color: '#c2410c', marginTop: 6 }}>
                   {toQuinaryString(selectedCompDec)}₅
                 </div>
-                <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>{L('आधार ५', 'Base 5')}</div>
+                <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>{L('आधार 5', 'Base 5')}</div>
               </div>
             </div>
           </div>

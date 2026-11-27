@@ -1,6 +1,6 @@
 /**
- * Chapter 15 · Numbers 21 to 100 (२१ देखि १०० सम्मका सङ्ख्या)
- * Sim 1: Hundred Village (१०० सम्मको गाउँ) — Pure 2D Edition
+ * Chapter 15 · Numbers 21 to 100
+ * Sim 1: Hundred Village — Pure 2D Edition
  * 100% 2D SVG / Interactive 100-Grid – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -17,7 +17,7 @@ export const HundredVillage: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G1-CH15-01',
     chapter: 15,
-    titleNp: '१०० सम्मका सङ्ख्या (दशक र एकाइ)',
+    titleNp: '100 सम्मका सङ्ख्या (दशक र एकाइ)',
     titleEn: 'Hundred Village (Numbers to 100)',
   });
 
@@ -43,32 +43,32 @@ export const HundredVillage: React.FC<Props> = ({ onBackToLibrary }) => {
   const quizQuestions: QuizQuestion[] = useMemo(
     () => [
       {
-        np: 'सङ्ख्या ४५ मा कति दशक (Tens) हुन्छन्?',
+        np: 'सङ्ख्या 45 मा कति दशक (Tens) हुन्छन्?',
         en: 'How many tens are in number 45?',
         options: [
-          { key: '4', label: isNe ? '४ दशक' : '4 tens' },
-          { key: '5', label: isNe ? '५ दशक' : '5 tens' },
-          { key: '40', label: isNe ? '४० दशक' : '40 tens' },
+          { key: '4', label: isNe ? '4 दशक' : '4 tens' },
+          { key: '5', label: isNe ? '5 दशक' : '5 tens' },
+          { key: '40', label: isNe ? '40 दशक' : '40 tens' },
         ],
         answer: '4',
       },
       {
-        np: 'सङ्ख्या ७२ मा कति एकाइ (Ones) हुन्छन्?',
+        np: 'सङ्ख्या 72 मा कति एकाइ (Ones) हुन्छन्?',
         en: 'How many ones are in number 72?',
         options: [
-          { key: '2', label: isNe ? '२ एकाइ' : '2 ones' },
-          { key: '7', label: isNe ? '७ एकाइ' : '7 ones' },
-          { key: '20', label: isNe ? '२० एकाइ' : '20 ones' },
+          { key: '2', label: isNe ? '2 एकाइ' : '2 ones' },
+          { key: '7', label: isNe ? '7 एकाइ' : '7 ones' },
+          { key: '20', label: isNe ? '20 एकाइ' : '20 ones' },
         ],
         answer: '2',
       },
       {
-        np: '३ दशक र ८ एकाइ मिलेर कुन सङ्ख्या बन्छ?',
+        np: '3 दशक र 8 एकाइ मिलेर कुन सङ्ख्या बन्छ?',
         en: 'Which number is formed by 3 tens and 8 ones?',
         options: [
-          { key: '38', label: isNe ? '३८' : '38' },
-          { key: '83', label: isNe ? '८३' : '83' },
-          { key: '30', label: isNe ? '३०' : '30' },
+          { key: '38', label: isNe ? '38' : '38' },
+          { key: '83', label: isNe ? '83' : '83' },
+          { key: '30', label: isNe ? '30' : '30' },
         ],
         answer: '38',
       },
@@ -110,7 +110,7 @@ export const HundredVillage: React.FC<Props> = ({ onBackToLibrary }) => {
         ) : (
           <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
             <span style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>
-              💡 {L('१०० को ग्रिडमा कुनै पनि सङ्ख्या छोएर दशक र एकाइ हेर्नुहोस्!', 'Tap any number in the 100-grid to see its tens and ones!')}
+              💡 {L('100 को ग्रिडमा कुनै पनि सङ्ख्या छोएर दशक र एकाइ हेर्नुहोस्!', 'Tap any number in the 100-grid to see its tens and ones!')}
             </span>
           </div>
         )
@@ -188,7 +188,7 @@ export const HundredVillage: React.FC<Props> = ({ onBackToLibrary }) => {
             🧱 {L(`स्थानमान प्रतिनिधित्व (${toNp(n)})`, `Place Value Representation (${n})`)}
           </div>
 
-          {/* Tens Rods (१० को मुठ्ठा) */}
+          {/* Tens Rods */}
           <div>
             <div style={{ fontSize: 13, fontWeight: 800, color: '#0369A1', marginBottom: 6 }}>
               📦 {L(`दशक (Tens): ${toNp(tens)} वटा मुठ्ठा (= ${toNp(tens * 10)})`, `Tens: ${tens} bundles (= ${tens * 10})`)}
@@ -211,16 +211,16 @@ export const HundredVillage: React.FC<Props> = ({ onBackToLibrary }) => {
                     fontSize: 10,
                     fontWeight: 900,
                   }}
-                  title="१० को मुठ्ठा"
+                  title="Bundle of 10"
                 >
-                  १०
+                  10
                 </div>
               ))}
-              {tens === 0 && <span style={{ color: '#94A3B8', fontSize: 12 }}>शून्य दशक</span>}
+              {tens === 0 && <span style={{ color: '#94A3B8', fontSize: 12 }}>Zero tens</span>}
             </div>
           </div>
 
-          {/* Ones Cubes (एकाइ) */}
+          {/* Ones Cubes */}
           <div>
             <div style={{ fontSize: 13, fontWeight: 800, color: '#D97706', marginBottom: 6 }}>
               🔶 {L(`एकाइ (Ones): ${toNp(ones)} वटा`, `Ones: ${ones} units`)}
@@ -237,10 +237,10 @@ export const HundredVillage: React.FC<Props> = ({ onBackToLibrary }) => {
                     border: '1px solid #D97706',
                     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
                   }}
-                  title="१ एकाइ"
+                  title="1 one"
                 />
               ))}
-              {ones === 0 && <span style={{ color: '#94A3B8', fontSize: 12 }}>शून्य एकाइ</span>}
+              {ones === 0 && <span style={{ color: '#94A3B8', fontSize: 12 }}>Zero ones</span>}
             </div>
           </div>
         </div>

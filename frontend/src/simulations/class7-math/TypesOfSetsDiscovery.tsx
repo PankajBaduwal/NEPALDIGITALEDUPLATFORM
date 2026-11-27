@@ -1,6 +1,6 @@
 /**
  * TypesOfSetsDiscovery.tsx
- * Grade 7 Mathematics – Lesson 1: SET (समूह)
+ * Grade 7 Mathematics – Lesson 1: SET
  * Simulation 2: Types of Sets – Discovery World (2D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S.)
  */
@@ -31,13 +31,13 @@ const SET_EXAMPLES: SetTypeExample[] = [
     id: 'null-1',
     type: 'NULL',
     titleEn: 'Natural numbers between 1 and 2',
-    titleNp: '१ र २ बीचका प्राकृतिक सङ्ख्याहरूको समूह',
+    titleNp: '1 र 2 बीचका Set of natural numbers',
     notationEn: 'A = { } or A = ∅',
     notationNp: 'A = { } वा A = ∅',
     cardinalityTextEn: 'n(A) = 0 (No elements exist)',
-    cardinalityTextNp: 'n(A) = ० (कुनै सदस्य छैनन्)',
+    cardinalityTextNp: 'n(A) = 0',
     explanationEn: 'There is no natural number between 1 and 2. Therefore, this set has zero elements and is called a Null or Empty set.',
-    explanationNp: '१ र २ बीचमा कुनै पनि प्राकृतिक सङ्ख्या पर्दैन। त्यसैले यसमा कुनै सदस्य हुँदैन र यो रिक्त समूह हो।',
+    explanationNp: '1 र 2 बीचमा कुनै पनि प्राकृतिक सङ्ख्या पर्दैन। त्यसैले यसमा कुनै सदस्य हुँदैन र यो Empty set हो।',
     elementsEn: [],
     elementsNp: [],
   },
@@ -45,13 +45,13 @@ const SET_EXAMPLES: SetTypeExample[] = [
     id: 'null-2',
     type: 'NULL',
     titleEn: 'Odd numbers divisible by 2',
-    titleNp: '२ ले भाग जाने बिजोर सङ्ख्याहरूको समूह',
+    titleNp: '2 ले भाग जाने बिSet of even numbers',
     notationEn: 'B = { } or B = ∅',
     notationNp: 'B = { } वा B = ∅',
     cardinalityTextEn: 'n(B) = 0 (Impossible event)',
-    cardinalityTextNp: 'n(B) = ० (असम्भव घटना)',
+    cardinalityTextNp: 'n(B) = 0',
     explanationEn: 'By definition, odd numbers leave a remainder of 1 when divided by 2. Hence no odd number is divisible by 2.',
-    explanationNp: 'बिजोर सङ्ख्यालाई २ ले भाग जाँदैन। त्यसैले यस्तो समूहमा कुनै पनि सदस्य हुन सक्दैन।',
+    explanationNp: 'बिजोर सङ्ख्यालाई 2 ले भाग जाँदैन। त्यसैले यस्तो समूहमा कुनै पनि सदस्य हुन सक्दैन।',
     elementsEn: [],
     elementsNp: [],
   },
@@ -59,13 +59,13 @@ const SET_EXAMPLES: SetTypeExample[] = [
     id: 'null-3',
     type: 'NULL',
     titleEn: 'Months of a year having 35 days',
-    titleNp: 'वर्षका ३५ दिन हुने महिनाहरूको समूह',
+    titleNp: 'वर्षका 35 दिन हुने महिनाहरूको समूह',
     notationEn: 'C = ∅',
     notationNp: 'C = ∅',
     cardinalityTextEn: 'n(C) = 0',
-    cardinalityTextNp: 'n(C) = ०',
+    cardinalityTextNp: 'n(C) = 0',
     explanationEn: 'No calendar month in the year has 35 days, so this set is empty.',
-    explanationNp: 'वर्षको कुनै पनि महिना ३५ दिनको हुँदैन, त्यसैले यो पूर्ण रूपमा रिक्त छ।',
+    explanationNp: 'वर्षको कुनै पनि महिना 35 दिनको हुँदैन, त्यसैले यो पूर्ण रूपमा रिक्त छ।',
     elementsEn: [],
     elementsNp: [],
   },
@@ -74,28 +74,28 @@ const SET_EXAMPLES: SetTypeExample[] = [
   {
     id: 'fin-1',
     type: 'FINITE',
-    titleEn: 'Factors of 24 (२४ का गुणनखण्डहरू)',
-    titleNp: '२४ का गुणनखण्डहरूको समूह',
+    titleEn: 'Factors of 24',
+    titleNp: 'Set of factors of 24',
     notationEn: 'F = { 1, 2, 3, 4, 6, 8, 12, 24 }',
-    notationNp: 'F = { १, २, ३, ४, ६, ८, १२, २४ }',
+    notationNp: 'F = { 1, 2, 3, 4, 6, 8, 12, 24 }',
     cardinalityTextEn: 'n(F) = 8 (Countable definite elements)',
-    cardinalityTextNp: 'n(F) = ८ (सीमित तथा गन्न सकिने)',
+    cardinalityTextNp: 'n(F) = 8',
     explanationEn: '24 has exactly 8 positive factors. Since the counting process comes to an end, it is a Finite set.',
-    explanationNp: '२४ का ठीक ८ वटा गुणनखण्डहरू छन्। यसका सदस्यहरू गनेर टुङ्ग्याउन सकिने भएकाले यो सीमित समूह हो।',
+    explanationNp: '24 का ठीक 8 pcs गुणनखण्डहरू छन्। यसका सदस्यहरू गनेर टुङ्ग्याउन सकिने भएकाले यो Finite set हो।',
     elementsEn: ['1', '2', '3', '4', '6', '8', '12', '24'],
-    elementsNp: ['१', '२', '३', '४', '६', '८', '१२', '२४'],
+    elementsNp: ['1', '2', '3', '4', '6', '8', '12', '24'],
   },
   {
     id: 'fin-2',
     type: 'FINITE',
-    titleEn: 'Seven Rainbow Colors (इन्द्रेणीका रङहरू)',
+    titleEn: 'Seven Rainbow Colors',
     titleNp: 'इन्द्रेणीका सात रङहरूको समूह',
     notationEn: 'R = { Violet, Indigo, Blue, Green, Yellow, Orange, Red }',
     notationNp: 'R = { बैजनी, गाढा नीलो, नीलो, हरियो, पहेंलो, सुन्तला, रातो }',
     cardinalityTextEn: 'n(R) = 7 (Definite fixed count)',
-    cardinalityTextNp: 'n(R) = ७ (निश्चित सङ्ख्या)',
+    cardinalityTextNp: 'n(R) = 7',
     explanationEn: 'The number of rainbow colours is fixed and finite: n(R) = 7.',
-    explanationNp: 'इन्द्रेणीका रङहरू निश्चित ७ वटा हुन्छन्।',
+    explanationNp: 'इन्द्रेणीका रङहरू निश्चित 7 pcs हुन्छन्।',
     elementsEn: ['Violet', 'Indigo', 'Blue', 'Green', 'Yellow', 'Orange', 'Red'],
     elementsNp: ['बैजनी', 'गाढा नीलो', 'नीलो', 'हरियो', 'पहेंलो', 'सुन्तला', 'रातो'],
   },
@@ -103,104 +103,104 @@ const SET_EXAMPLES: SetTypeExample[] = [
     id: 'fin-3',
     type: 'FINITE',
     titleEn: 'Whole numbers less than 10',
-    titleNp: '१० भन्दा साना पूर्ण सङ्ख्याहरूको समूह',
+    titleNp: '10 भन्दा साना पूर्ण सङ्ख्याहरूको समूह',
     notationEn: 'W₁₀ = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }',
-    notationNp: 'W₁₀ = { ०, १, २, ३, ४, ५, ६, ७, ८, ९ }',
+    notationNp: 'W₁₀ = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }',
     cardinalityTextEn: 'n(W₁₀) = 10',
-    cardinalityTextNp: 'n(W₁₀) = १०',
+    cardinalityTextNp: 'n(W₁₀) = 10',
     explanationEn: 'There are exactly 10 whole numbers less than 10 (from 0 to 9).',
-    explanationNp: '१० भन्दा साना पूर्ण सङ्ख्याहरू ठीक १० वटा हुन्छन् (० देखि ९ सम्म)।',
+    explanationNp: '10 भन्दा साना पूर्ण सङ्ख्याहरू ठीक 10 pcs हुन्छन् (0 देखि 9 सम्म)।',
     elementsEn: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-    elementsNp: ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'],
+    elementsNp: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
   },
 
   // ── Infinite Sets
   {
     id: 'inf-1',
     type: 'INFINITE',
-    titleEn: 'Set of Natural numbers (प्राकृतिक सङ्ख्याहरू)',
-    titleNp: 'प्राकृतिक सङ्ख्याहरूको समूह',
+    titleEn: 'Set of Natural numbers',
+    titleNp: 'Set of natural numbers',
     notationEn: 'N = { 1, 2, 3, 4, 5, 6, ... }',
-    notationNp: 'N = { १, २, ३, ४, ५, ६, ... }',
+    notationNp: 'N = { 1, 2, 3, 4, 5, 6, ... }',
     cardinalityTextEn: 'n(N) = ∞ (Cannot be counted to an end)',
     cardinalityTextNp: 'n(N) = असीमित (गनेर नसकिने)',
     explanationEn: 'No matter what number you think of, you can always add 1. There is no final or greatest natural number.',
-    explanationNp: 'तपाईंले जतिसुकै ठूलो सङ्ख्या सोचे पनि त्यसमा १ जोड्न सकिन्छ। यसको कुनै अन्तिम सदस्य हुँदैन।',
+    explanationNp: 'तपाईंले जतिसुकै ठूलो सङ्ख्या सोचे पनि त्यसमा 1 जोड्न सकिन्छ। यसको कुनै अन्तिम सदस्य हुँदैन।',
     elementsEn: ['1', '2', '3', '4', '5', '6', '7', '...'],
-    elementsNp: ['१', '२', '३', '४', '५', '६', '७', '...'],
+    elementsNp: ['1', '2', '3', '4', '5', '6', '7', '...'],
   },
   {
     id: 'inf-2',
     type: 'INFINITE',
-    titleEn: 'Set of Even numbers (जोर सङ्ख्याहरू)',
-    titleNp: 'जोर प्राकृतिक सङ्ख्याहरूको समूह',
+    titleEn: 'Set of Even numbers',
+    titleNp: 'जोर Set of natural numbers',
     notationEn: 'E = { 2, 4, 6, 8, 10, 12, ... }',
-    notationNp: 'E = { २, ४, ६, ८, १०, १२, ... }',
+    notationNp: 'E = { 2, 4, 6, 8, 10, 12, ... }',
     cardinalityTextEn: 'n(E) is infinite (no finite limit)',
     cardinalityTextNp: 'n(E) असीमित छ',
     explanationEn: 'The even numbers go on endlessly: 2, 4, 6, 8, 10... They cannot be listed completely.',
-    explanationNp: 'जोर सङ्ख्याहरू कहिल्यै अन्त्य नभई अनन्तसम्म जान्छन्।',
+    explanationNp: 'जोर सङ्ख्याहरू कहिल्यै अन्त्य नभई Infiniteसम्म जान्छन्।',
     elementsEn: ['2', '4', '6', '8', '10', '12', '14', '...'],
-    elementsNp: ['२', '४', '६', '८', '१०', '१२', '१४', '...'],
+    elementsNp: ['2', '4', '6', '8', '10', '12', '14', '...'],
   },
   {
     id: 'inf-3',
     type: 'INFINITE',
-    titleEn: 'Multiples of 5 (५ का अपवर्त्यहरू)',
-    titleNp: '५ का अपवर्त्यहरूको समूह',
+    titleEn: 'Multiples of 5',
+    titleNp: '5 का अपवर्त्यहरूको समूह',
     notationEn: 'M₅ = { 5, 10, 15, 20, 25, ... }',
-    notationNp: 'M₅ = { ५, १०, १५, २०, २५, ... }',
+    notationNp: 'M₅ = { 5, 10, 15, 20, 25, ... }',
     cardinalityTextEn: 'n(M₅) is infinite',
     cardinalityTextNp: 'n(M₅) असीमित छ',
     explanationEn: 'Multiplication by 5 never stops. The set extends infinitely.',
-    explanationNp: '५ का गुणनहरू अनन्तसम्म जान्छन्, त्यसैले यो असीमित समूह हो।',
+    explanationNp: '5 का गुणनहरू Infiniteसम्म जान्छन्, त्यसैले यो अFinite set हो।',
     elementsEn: ['5', '10', '15', '20', '25', '30', '...'],
-    elementsNp: ['५', '१०', '१५', '२०', '२५', '३०', '...'],
+    elementsNp: ['5', '10', '15', '20', '25', '30', '...'],
   },
 ];
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'रिक्त समूह (Null Set) मा कति वटा सदस्य हुन्छन्?',
+    np: 'Empty set (Null Set) मा कति pcs सदस्य हुन्छन्?',
     en: 'How many elements are in a Null Set?',
     options: [
-      { key: 'A', label: '१' },
-      { key: 'B', label: '० (कुनै सदस्य हुँदैन)' },
-      { key: 'C', label: 'अनन्त' },
-      { key: 'D', label: 'माथिका कुनै पनि होइन' },
+      { key: 'A', label: '1' },
+      { key: 'B', label: '0' },
+      { key: 'C', label: 'Infinite' },
+      { key: 'D', label: 'None of the above' },
     ],
     answer: 'B',
   },
   {
-    np: 'तलका मध्ये कुन समूह सीमित समूह (Finite Set) हो?',
+    np: 'तलका मध्ये कुन समूह Finite set (Finite Set) हो?',
     en: 'Which of the following is a Finite Set?',
     options: [
-      { key: 'A', label: 'प्राकृतिक सङ्ख्याहरूको समूह' },
-      { key: 'B', label: '२४ का गुणनखण्डहरूको समूह' },
-      { key: 'C', label: 'जोर सङ्ख्याहरूको समूह' },
-      { key: 'D', label: '३ का अपवर्त्यहरूको समूह' },
+      { key: 'A', label: 'Set of natural numbers' },
+      { key: 'B', label: 'Set of factors of 24' },
+      { key: 'C', label: 'Set of even numbers' },
+      { key: 'D', label: 'Set of multiples of 3' },
     ],
     answer: 'B',
   },
   {
-    np: 'N = {१, २, ३, ४, ५, ...} कस्तो प्रकारको समूह हो?',
+    np: 'N = {1, 2, 3, 4, 5, ...} कस्तो प्रकारको समूह हो?',
     en: 'What type of set is N = {1, 2, 3, 4, 5, ...}?',
     options: [
-      { key: 'A', label: 'रिक्त समूह' },
-      { key: 'B', label: 'सीमित समूह' },
-      { key: 'C', label: 'असीमित समूह (Infinite Set)' },
-      { key: 'D', label: 'बराबर समूह' },
+      { key: 'A', label: 'Empty set' },
+      { key: 'B', label: 'Finite set' },
+      { key: 'C', label: 'Infinite set' },
+      { key: 'D', label: 'Equal sets' },
     ],
     answer: 'C',
   },
   {
-    np: '५ र ६ बीचका प्राकृतिक सङ्ख्याहरूको समूह कुन हो?',
+    np: '5 र 6 बीचका Set of natural numbers कुन हो?',
     en: 'Which set represents natural numbers between 5 and 6?',
     options: [
-      { key: 'A', label: '{ ५, ६ }' },
-      { key: 'B', label: '{ ५.५ }' },
-      { key: 'C', label: '∅ (रिक्त समूह)' },
-      { key: 'D', label: '{ ० }' },
+      { key: 'A', label: '{ 5, 6 }' },
+      { key: 'B', label: '{ 5.5 }' },
+      { key: 'C', label: '∅ (Empty set)' },
+      { key: 'D', label: '{ 0 }' },
     ],
     answer: 'C',
   },
@@ -235,7 +235,7 @@ export const TypesOfSetsDiscovery: React.FC<{ onBackToLibrary?: () => void; onBa
       setInfiniteStep((prev) => prev + 2);
       kit.good('थप सङ्ख्याहरू थपिए! तर अन्त्य कहिल्यै हुँदैन।', 'More numbers generated! But an infinite set never ends.');
     } else {
-      kit.oops('अनन्त सङ्ख्याहरू छन् — तपाईं कहिल्यै अन्तिम सङ्ख्यामा पुग्न सक्नुहुन्न!', 'Infinite sequence! You can never reach the final element.');
+      kit.oops('Infinite सङ्ख्याहरू छन् — तपाईं कहिल्यै अन्तिम सङ्ख्यामा पुग्न सक्नुहुन्न!', 'Infinite sequence! You can never reach the final element.');
     }
   };
 
@@ -257,7 +257,7 @@ export const TypesOfSetsDiscovery: React.FC<{ onBackToLibrary?: () => void; onBa
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'समूह मुख्यतया ३ प्रकारका हुन्छन्: रिक्त समूह (Null Set), सीमित समूह (Finite Set) र असीमित समूह (Infinite Set)। आउनुहोस्, भिन्नता बुझौँ!',
+        'समूह मुख्यतया 3 प्रकारका हुन्छन्: Empty set (Null Set), Finite set (Finite Set) र Infinite set। आउनुहोस्, भिन्नता बुझौँ!',
         'Sets are primarily classified into: Null Set, Finite Set, and Infinite Set. Explore each zone!'
       )}
     >
@@ -265,10 +265,10 @@ export const TypesOfSetsDiscovery: React.FC<{ onBackToLibrary?: () => void; onBa
         {/* Zone Selector */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 10 }}>
           {[
-            { id: 'NULL', labelNp: '१. रिक्त समूह (Null Set)', labelEn: '1. Null Set (∅)', descNp: 'n = ०, कुनै सदस्य नभएको', descEn: 'Zero elements (∅)', color: '#EF4444', bg: '#FEF2F2' },
-            { id: 'FINITE', labelNp: '२. सीमित समूह (Finite Set)', labelEn: '2. Finite Set', descNp: 'गनेर सकिने निश्चित सदस्य', descEn: 'Countable definite elements', color: '#16A34A', bg: '#F0FDF4' },
-            { id: 'INFINITE', labelNp: '३. असीमित समूह (Infinite Set)', labelEn: '3. Infinite Set', descNp: 'अनन्तसम्म जाने, अन्त्य नहुने', descEn: 'Extends without end (...)', color: '#8B5CF6', bg: '#F5F3FF' },
-            { id: 'TEST', labelNp: '४. अभ्यास तथा चुनौती', labelEn: '4. Practice Challenge', descNp: 'आफ्नो ज्ञान परीक्षण गर्नुहोस्', descEn: 'Test your understanding', color: '#0EA5E9', bg: '#F0F9FF' },
+            { id: 'NULL', labelNp: '1. Empty set (Null Set)', labelEn: '1. Null Set (∅)', descNp: 'n = 0, कुनै सदस्य नभएको', descEn: 'Zero elements (∅)', color: '#EF4444', bg: '#FEF2F2' },
+            { id: 'FINITE', labelNp: '2. Finite set (Finite Set)', labelEn: '2. Finite Set', descNp: 'गनेर सकिने निश्चित सदस्य', descEn: 'Countable definite elements', color: '#16A34A', bg: '#F0FDF4' },
+            { id: 'INFINITE', labelNp: '3. Infinite set', labelEn: '3. Infinite Set', descNp: 'Infiniteसम्म जाने, अन्त्य नहुने', descEn: 'Extends without end (...)', color: '#8B5CF6', bg: '#F5F3FF' },
+            { id: 'TEST', labelNp: '4. अभ्यास तथा चुनौती', labelEn: '4. Practice Challenge', descNp: 'आफ्नो ज्ञान परीक्षण गर्नुहोस्', descEn: 'Test your understanding', color: '#0EA5E9', bg: '#F0F9FF' },
           ].map((zone) => {
             const isActive = activeZone === zone.id;
             return (
@@ -310,7 +310,7 @@ export const TypesOfSetsDiscovery: React.FC<{ onBackToLibrary?: () => void; onBa
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#FEE2E2', color: '#991B1B', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('रिक्त समूह (Empty Set)', 'Null Set')}
+                  {L('Empty set (Empty Set)', 'Null Set')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                   {isNe ? currentExample.titleNp : currentExample.titleEn}
@@ -384,7 +384,7 @@ export const TypesOfSetsDiscovery: React.FC<{ onBackToLibrary?: () => void; onBa
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('सीमित समूह (Finite Set)', 'Finite Set')}
+                  {L('Finite set (Finite Set)', 'Finite Set')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                   {isNe ? currentExample.titleNp : currentExample.titleEn}
@@ -471,7 +471,7 @@ export const TypesOfSetsDiscovery: React.FC<{ onBackToLibrary?: () => void; onBa
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#EDE9FE', color: '#6D28D9', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('असीमित समूह (Infinite Set)', 'Infinite Set')}
+                  {L('Infinite set', 'Infinite Set')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                   {isNe ? currentExample.titleNp : currentExample.titleEn}
@@ -568,7 +568,7 @@ export const TypesOfSetsDiscovery: React.FC<{ onBackToLibrary?: () => void; onBa
               </button>
 
               <div style={{ fontSize: 13, color: '#581C87', background: '#F3E8FF', padding: '8px 14px', borderRadius: 10, fontWeight: 700 }}>
-                ⚠️ {L('अन्तिम सदस्य कहिल्यै आउँदैन — असीमित समूहको अन्तिम सीमा हुँदैन!', 'No finite last element exists in an infinite set!')}
+                ⚠️ {L('अन्तिम सदस्य कहिल्यै आउँदैन — अFinite setको अन्तिम सीमा हुँदैन!', 'No finite last element exists in an infinite set!')}
               </div>
             </div>
           </div>
@@ -628,7 +628,7 @@ export const TypesOfSetsDiscovery: React.FC<{ onBackToLibrary?: () => void; onBa
                   cursor: 'pointer',
                 }}
               >
-                ∅ {L('रिक्त समूह (Null Set)', 'Null Set (∅)')}
+                ∅ {L('Empty set (Null Set)', 'Null Set (∅)')}
               </button>
 
               <button
@@ -644,7 +644,7 @@ export const TypesOfSetsDiscovery: React.FC<{ onBackToLibrary?: () => void; onBa
                   cursor: 'pointer',
                 }}
               >
-                🔢 {L('सीमित समूह (Finite Set)', 'Finite Set')}
+                🔢 {L('Finite set (Finite Set)', 'Finite Set')}
               </button>
 
               <button
@@ -660,7 +660,7 @@ export const TypesOfSetsDiscovery: React.FC<{ onBackToLibrary?: () => void; onBa
                   cursor: 'pointer',
                 }}
               >
-                ♾️ {L('असीमित समूह (Infinite Set)', 'Infinite Set')}
+                ♾️ {L('Infinite set', 'Infinite Set')}
               </button>
             </div>
 

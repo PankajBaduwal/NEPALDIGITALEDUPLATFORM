@@ -1,7 +1,7 @@
 /**
  * IndicesExponentPlayground.tsx
- * Grade 8 Mathematics – Unit 9: INDICES (घाताङ्क)
- * Simulation 1: Indices Discovery and Exponent Playground (घाताङ्क खोजी र गुणन खेलमैदान)
+ * Grade 8 Mathematics – Unit 9: INDICES
+ * Simulation 1: Indices Discovery and Exponent Playground
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 9)
  */
 import React, { useState } from 'react';
@@ -12,70 +12,70 @@ import { Zap, Activity, BarChart2, Award, CheckCircle, RefreshCw, Layers } from 
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'घाताङ्कीय रूप ५⁴ मा आधार (Base) र घाताङ्क (Index) क्रमशः के के हुन्?',
+    np: 'घाताङ्कीय रूप 5⁴ मा Base (Base) र घाताङ्क (Index) क्रमशः के के हुन्?',
     en: 'In the index form 5⁴, what are the base and index respectively?',
     options: [
-      { key: 'A', label: 'आधार = ५, घाताङ्क = ४ (Base = 5, Index = 4)' },
-      { key: 'B', label: 'आधार = ४, घाताङ्क = ५' },
-      { key: 'C', label: 'आधार = २०, घाताङ्क = १' },
-      { key: 'D', label: 'आधार = ९, घाताङ्क = ५' },
+      { key: 'A', label: 'Base = 5, Index = 4' },
+      { key: 'B', label: 'Base = 4, Index = 5' },
+      { key: 'C', label: 'Base = 20, Index = 1' },
+      { key: 'D', label: 'Base = 9, Index = 5' },
     ],
     answer: 'A',
   },
   {
-    np: 'पाठ्यपुस्तकको ब्याक्टेरिया वृद्धि उदाहरण अनुसार प्रत्येक २० मिनेटमा दोब्बर हुँदा १२० मिनेट (२ घण्टा) मा १ ब्याक्टेरिया कति पुग्छ?',
+    np: 'पाठ्यपुस्तकको ब्याक्टेरिया वृद्धि उदाहरण अनुसार प्रत्येक 20 minमा दोब्बर हुँदा 120 min (2 hours) मा 1 ब्याक्टेरिया कति पुग्छ?',
     en: 'According to the CDC bacteria doubling example, how many bacteria will 1 become in 120 minutes (doubling every 20 mins)?',
     options: [
-      { key: 'A', label: '६४ ओटा (२⁶ = ६४)' },
-      { key: 'B', label: '३२ ओटा' },
-      { key: 'C', label: '१२८ ओटा' },
-      { key: 'D', label: '४८ ओटा' },
+      { key: 'A', label: '64 (2⁶ = 64)' },
+      { key: 'B', label: '32' },
+      { key: 'C', label: '128' },
+      { key: 'D', label: '48' },
     ],
     answer: 'A',
   },
   {
-    np: '२⁵ र ५² मध्ये कुनको मान ठूलो हुन्छ?',
+    np: '2⁵ र 5² मध्ये कुनको मान ठूलो हुन्छ?',
     en: 'Which has a greater value: 2⁵ or 5²?',
     options: [
-      { key: 'A', label: '२⁵ ठूलो हुन्छ [ २⁵ = ३२, ५² = २५ ]' },
-      { key: 'B', label: '५² ठूलो हुन्छ' },
-      { key: 'C', label: 'दुवै बराबर हुन्' },
-      { key: 'D', label: 'भन्न सकिँदैन' },
+      { key: 'A', label: '2⁵ is larger [ 2⁵ = 32, 5² = 25 ]' },
+      { key: 'B', label: '5² is larger' },
+      { key: 'C', label: 'Both are equal' },
+      { key: 'D', label: 'Cannot be said' },
     ],
     answer: 'A',
   },
   {
-    np: '३ × ३ × ३ × ३ × ३ लाई घाताङ्कीय सङ्केतमा कसरी लेखिन्छ?',
+    np: '3 × 3 × 3 × 3 × 3 लाई घाताङ्कीय सङ्केतमा कसरी लेखिन्छ?',
     en: 'How is 3 × 3 × 3 × 3 × 3 written in index form?',
     options: [
-      { key: 'A', label: '३⁵ (3 to the power 5)' },
-      { key: 'B', label: '५³' },
-      { key: 'C', label: '१५' },
-      { key: 'D', label: '३ × ५' },
+      { key: 'A', label: '3⁵ (3 to the power 5)' },
+      { key: 'B', label: '5³' },
+      { key: 'C', label: '15' },
+      { key: 'D', label: '3 × 5' },
     ],
     answer: 'A',
   },
   {
-    np: '१०⁴ को मान कति हुन्छ?',
+    np: '10⁴ को मान कति हुन्छ?',
     en: 'What is the numerical value of 10⁴?',
     options: [
-      { key: 'A', label: '१०,००० (1 followed by 4 zeros)' },
-      { key: 'B', label: '४०' },
-      { key: 'C', label: '१,०००' },
-      { key: 'D', label: '१,००,०००' },
+      { key: 'A', label: '10,000 (1 followed by 4 zeros)' },
+      { key: 'B', label: '40' },
+      { key: 'C', label: '1,000' },
+      { key: 'D', label: '1,00,000' },
     ],
     answer: 'A',
   },
 ];
 
 const BACTERIA_DATA = [
-  { timeMins: 0, timeNp: 'सुरुमा (0 मिनेट)', count: 1, power: '२⁰ = १' },
-  { timeMins: 20, timeNp: '२० मिनेट', count: 2, power: '२¹ = २' },
-  { timeMins: 40, timeNp: '४० मिनेट', count: 4, power: '२² = ४' },
-  { timeMins: 60, timeNp: '६० मिनेट (१ घण्टा)', count: 8, power: '२³ = ८' },
-  { timeMins: 80, timeNp: '८० मिनेट', count: 16, power: '२⁴ = १६' },
-  { timeMins: 100, timeNp: '१०० मिनेट', count: 32, power: '२⁵ = ३२' },
-  { timeMins: 120, timeNp: '१२० मिनेट (२ घण्टा)', count: 64, power: '२⁶ = ६४' },
+  { timeMins: 0, timeNp: 'At the start (0 min)', count: 1, power: '2⁰ = 1' },
+  { timeMins: 20, timeNp: '20 min', count: 2, power: '2¹ = 2' },
+  { timeMins: 40, timeNp: '40 min', count: 4, power: '2² = 4' },
+  { timeMins: 60, timeNp: '60 min (1 hour)', count: 8, power: '2³ = 8' },
+  { timeMins: 80, timeNp: '80 min', count: 16, power: '2⁴ = 16' },
+  { timeMins: 100, timeNp: '100 min', count: 32, power: '2⁵ = 32' },
+  { timeMins: 120, timeNp: '120 min (2 hours)', count: 64, power: '2⁶ = 64' },
 ];
 
 export const IndicesExponentPlayground: React.FC<{
@@ -118,7 +118,7 @@ export const IndicesExponentPlayground: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! घाताङ्क भनेको एउटै सङ्ख्यालाई बारम्बार गुणन गर्दा छोटो रूपमा लेख्ने गणितीय नियम हो। आउनुहोस् आधार र घातको शक्ति बुझौं!',
+        'नमस्ते! घाताङ्क भनेको एउटै सङ्ख्यालाई बारम्बार गुणन गर्दा छोटो रूपमा लेख्ने गणितीय नियम हो। आउनुहोस् Base र घातको शक्ति बुझौं!',
         'Hello! Indices represent repeated multiplication in a compact mathematical form. Let us master Base and Exponent!'
       )}
     >
@@ -132,7 +132,7 @@ export const IndicesExponentPlayground: React.FC<{
             }`}
           >
             <Zap className="w-4 h-4" />
-            {L('१. दोहोरिएको गुणन र घाताङ्क (Repeated Multiplication)', '1. Repeated Multiplication')}
+            {L('1. दोहोरिएको गुणन र घाताङ्क (Repeated Multiplication)', '1. Repeated Multiplication')}
           </button>
           <button
             onClick={() => setActiveTab('bacteria')}
@@ -141,7 +141,7 @@ export const IndicesExponentPlayground: React.FC<{
             }`}
           >
             <Activity className="w-4 h-4" />
-            {L('२. ब्याक्टेरिया दोब्बर वृद्धि (CDC Bacteria Model)', '2. Bacteria Growth')}
+            {L('2. ब्याक्टेरिया दोब्बर वृद्धि (CDC Bacteria Model)', '2. Bacteria Growth')}
           </button>
           <button
             onClick={() => setActiveTab('compare_powers')}
@@ -150,7 +150,7 @@ export const IndicesExponentPlayground: React.FC<{
             }`}
           >
             <BarChart2 className="w-4 h-4" />
-            {L('३. घातहरूको तुलना (Compare Powers)', '3. Compare Powers')}
+            {L('3. घातहरूको तुलना (Compare Powers)', '3. Compare Powers')}
           </button>
         </div>
 
@@ -159,7 +159,7 @@ export const IndicesExponentPlayground: React.FC<{
           <div className="space-y-6">
             {/* Quick base selector */}
             <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center gap-3">
-              <span className="text-xs font-bold text-slate-600">{L('आधार सङ्ख्या छान्नुहोस्:', 'Choose Base:')}</span>
+              <span className="text-xs font-bold text-slate-600">{L('Base सङ्ख्या छान्नुहोस्:', 'Choose Base:')}</span>
               {[2, 3, 4, 5, 10].map((b) => (
                 <button
                   key={b}
@@ -168,7 +168,7 @@ export const IndicesExponentPlayground: React.FC<{
                     baseVal === b ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                   }`}
                 >
-                  आधार {toNp(b)}
+                  Base {toNp(b)}
                 </button>
               ))}
             </div>
@@ -204,7 +204,7 @@ export const IndicesExponentPlayground: React.FC<{
                   <span className="text-emerald-400 font-black">{toNp(computedVal.toLocaleString())}</span>
                 </div>
                 <div className="text-xs text-slate-400">
-                  आधार <b className="text-amber-400">{toNp(baseVal)}</b> लाई जम्मा <b className="text-sky-400">{toNp(expVal)} पटक</b> गुणन गरिएको छ।
+                  Base <b className="text-amber-400">{toNp(baseVal)}</b> is multiplied <b className="text-sky-400">{toNp(expVal)} times</b> in total.
                 </div>
               </div>
 
@@ -212,7 +212,7 @@ export const IndicesExponentPlayground: React.FC<{
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-bold text-amber-400 block mb-1">
-                    {L('आधार सङ्ख्या (Base a):', 'Base (a):')} {toNp(baseVal)}
+                    {L('Base सङ्ख्या (Base a):', 'Base (a):')} {toNp(baseVal)}
                   </label>
                   <input
                     type="range"
@@ -247,11 +247,11 @@ export const IndicesExponentPlayground: React.FC<{
             <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-6">
               <div className="border-b border-slate-100 pb-3">
                 <h3 className="text-lg font-bold text-slate-800">
-                  {L('ब्याक्टेरिया दोब्बर हुने तालिका (CDC पाठ्यपुस्तक पृष्ठ १-२ उदाहरण)', 'CDC Bacteria Doubling Population')}
+                  {L('ब्याक्टेरिया दोब्बर हुने तालिका (CDC पाठ्यपुस्तक पृष्ठ 1-2 उदाहरण)', 'CDC Bacteria Doubling Population')}
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
                   {L(
-                    'एउटा ब्याक्टेरिया प्रत्येक २० मिनेटमा टुक्रिएर दोब्बर हुन्छ। यसरी २ को घातमा घाताङ्कीय वृद्धि कसरी हुन्छ?',
+                    'एउटा ब्याक्टेरिया प्रत्येक 20 minमा टुक्रिएर दोब्बर हुन्छ। यसरी 2 को घातमा घाताङ्कीय वृद्धि कसरी हुन्छ?',
                     'A bacterium splits and doubles every 20 minutes. Observe how the population follows powers of 2!'
                   )}
                 </p>
@@ -275,7 +275,7 @@ export const IndicesExponentPlayground: React.FC<{
               {/* Bacteria Visual Dots */}
               <div className="bg-slate-900 text-white p-6 rounded-2xl flex flex-col items-center justify-center space-y-4">
                 <div className="text-xs font-bold text-amber-400 uppercase">
-                  {BACTERIA_DATA[bacteriaStep].timeNp} मा जम्मा ब्याक्टेरिया: {toNp(BACTERIA_DATA[bacteriaStep].count)}
+                  {BACTERIA_DATA[bacteriaStep].timeNp} Total bacteria at {toNp(BACTERIA_DATA[bacteriaStep].count)}
                 </div>
 
                 <div className="flex flex-wrap gap-2 max-w-lg justify-center p-3 max-h-48 overflow-y-auto">
@@ -290,7 +290,7 @@ export const IndicesExponentPlayground: React.FC<{
                 </div>
 
                 <div className="px-4 py-2 bg-slate-800 rounded-xl border border-indigo-500/50 text-indigo-300 font-mono font-bold text-sm">
-                  घात रूप: {BACTERIA_DATA[bacteriaStep].power}
+                  Power form: {BACTERIA_DATA[bacteriaStep].power}
                 </div>
               </div>
 
@@ -331,14 +331,14 @@ export const IndicesExponentPlayground: React.FC<{
                   {L('घातहरूको तुलना (Comparing Exponential Values)', 'Comparing Exponential Values')}
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
-                  {L('पाठ्यपुस्तक प्रश्न: २⁵ र ५² मध्ये कुन ठूलो हुन्छ?', 'Textbook Question: Which is greater: 2⁵ or 5²?')}
+                  {L('पाठ्यपुस्तक प्रश्न: 2⁵ र 5² मध्ये कुन ठूलो हुन्छ?', 'Textbook Question: Which is greater: 2⁵ or 5²?')}
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Expression 1 */}
                 <div className="bg-blue-50/70 p-5 rounded-2xl border border-blue-200 space-y-3">
-                  <div className="text-xs font-bold text-blue-900 uppercase">{L('अभिव्यक्ति १', 'Expression 1')}</div>
+                  <div className="text-xs font-bold text-blue-900 uppercase">{L('अभिव्यक्ति 1', 'Expression 1')}</div>
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-black text-blue-800">{toNp(compBase1)}</span>
                     <span className="text-2xl font-black text-blue-600 -translate-y-3">{toNp(compExp1)}</span>
@@ -346,11 +346,11 @@ export const IndicesExponentPlayground: React.FC<{
                   </div>
                   <div className="grid grid-cols-2 gap-2 pt-2">
                     <div>
-                      <label className="text-[11px] text-slate-500 block">आधार: {toNp(compBase1)}</label>
+                      <label className="text-[11px] text-slate-500 block">Base: {toNp(compBase1)}</label>
                       <input type="range" min="2" max="6" value={compBase1} onChange={(e) => setCompBase1(Number(e.target.value))} className="w-full accent-blue-600" />
                     </div>
                     <div>
-                      <label className="text-[11px] text-slate-500 block">घात: {toNp(compExp1)}</label>
+                      <label className="text-[11px] text-slate-500 block">Power: {toNp(compExp1)}</label>
                       <input type="range" min="1" max="6" value={compExp1} onChange={(e) => setCompExp1(Number(e.target.value))} className="w-full accent-blue-600" />
                     </div>
                   </div>
@@ -358,7 +358,7 @@ export const IndicesExponentPlayground: React.FC<{
 
                 {/* Expression 2 */}
                 <div className="bg-emerald-50/70 p-5 rounded-2xl border border-emerald-200 space-y-3">
-                  <div className="text-xs font-bold text-emerald-900 uppercase">{L('अभिव्यक्ति २', 'Expression 2')}</div>
+                  <div className="text-xs font-bold text-emerald-900 uppercase">{L('अभिव्यक्ति 2', 'Expression 2')}</div>
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-black text-emerald-800">{toNp(compBase2)}</span>
                     <span className="text-2xl font-black text-emerald-600 -translate-y-3">{toNp(compExp2)}</span>
@@ -366,11 +366,11 @@ export const IndicesExponentPlayground: React.FC<{
                   </div>
                   <div className="grid grid-cols-2 gap-2 pt-2">
                     <div>
-                      <label className="text-[11px] text-slate-500 block">आधार: {toNp(compBase2)}</label>
+                      <label className="text-[11px] text-slate-500 block">Base: {toNp(compBase2)}</label>
                       <input type="range" min="2" max="6" value={compBase2} onChange={(e) => setCompBase2(Number(e.target.value))} className="w-full accent-emerald-600" />
                     </div>
                     <div>
-                      <label className="text-[11px] text-slate-500 block">घात: {toNp(compExp2)}</label>
+                      <label className="text-[11px] text-slate-500 block">Power: {toNp(compExp2)}</label>
                       <input type="range" min="1" max="6" value={compExp2} onChange={(e) => setCompExp2(Number(e.target.value))} className="w-full accent-emerald-600" />
                     </div>
                   </div>

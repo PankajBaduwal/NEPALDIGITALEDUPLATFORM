@@ -18,7 +18,7 @@ interface PresetSystem {
 const PRESETS: PresetSystem[] = [
   {
     id: 'p1',
-    nameNp: 'पाठ्यपुस्तक उदाहरण १: x + y = ५ र x - y = १',
+    nameNp: 'पाठ्यपुस्तक उदाहरण 1: x + y = 5 र x - y = 1',
     nameEn: 'Textbook Example 1: x + y = 5 and x - y = 1',
     a1: 1,
     b1: 1,
@@ -29,7 +29,7 @@ const PRESETS: PresetSystem[] = [
   },
   {
     id: 'p2',
-    nameNp: 'पाठ्यपुस्तक उदाहरण २: २x + y = ७ र x - २y = १',
+    nameNp: 'पाठ्यपुस्तक उदाहरण 2: 2x + y = 7 र x - 2y = 1',
     nameEn: 'Textbook Example 2: 2x + y = 7 and x - 2y = 1',
     a1: 2,
     b1: 1,
@@ -40,7 +40,7 @@ const PRESETS: PresetSystem[] = [
   },
   {
     id: 'p3',
-    nameNp: 'समानान्तर रेखा (No Solution): २x + ३y = ६ र २x + ३y = १२',
+    nameNp: 'समानान्तर रेखा (No Solution): 2x + 3y = 6 र 2x + 3y = 12',
     nameEn: 'Parallel Lines (No Solution): 2x + 3y = 6 and 2x + 3y = 12',
     a1: 2,
     b1: 3,
@@ -51,7 +51,7 @@ const PRESETS: PresetSystem[] = [
   },
   {
     id: 'p4',
-    nameNp: 'संपाती रेखा (Infinite Solutions): x + २y = ४ र २x + ४y = ८',
+    nameNp: 'संपाती रेखा (Infinite Solutions): x + 2y = 4 र 2x + 4y = 8',
     nameEn: 'Coincident Lines (Infinite): x + 2y = 4 and 2x + 4y = 8',
     a1: 1,
     b1: 2,
@@ -67,32 +67,32 @@ const QUIZ_QUESTIONS = [
     np: 'दुई रैखिक समीकरणका रेखाहरूले एक अर्कालाई प्रतिच्छेदन गर्दा प्रतिच्छेदन बिन्दु (Intersection point) ले के जनाउँछ?',
     en: 'What does the intersection point of two linear graphs represent?',
     options: [
-      { key: 'A', label: 'समीकरणहरूको साझा एकल समाधान (Unique Solution: x, y)' },
-      { key: 'B', label: 'कुनै समाधान नभएको अवस्था' },
-      { key: 'C', label: 'अनन्त समाधान' },
-      { key: 'D', label: 'रेखाको झुकाव (Slope)' },
+      { key: 'A', label: 'Unique common solution of the equations (x, y)' },
+      { key: 'B', label: 'No solution case' },
+      { key: 'C', label: 'Infinitely many solutions' },
+      { key: 'D', label: 'Slope of the line' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि दुई रेखाहरू समानान्तर (Parallel) छन् भने तिनीहरूको कतिवटा साझा समाधान हुन्छ?',
+    np: 'यदि दुई रेखाहरू समानान्तर (Parallel) छन् भने तिनीहरूको कतिpcs साझा समाधान हुन्छ?',
     en: 'If two lines are parallel, how many shared solutions exist?',
     options: [
-      { key: 'A', label: 'कुनै पनि समाधान हुँदैन (No Solution)' },
-      { key: 'B', label: 'एकवटा समाधान' },
-      { key: 'C', label: 'अनन्त समाधान' },
-      { key: 'D', label: 'दुईवटा समाधान' },
+      { key: 'A', label: 'No solution' },
+      { key: 'B', label: 'One solution' },
+      { key: 'C', label: 'Infinitely many solutions' },
+      { key: 'D', label: 'Two solutions' },
     ],
     answer: 'A',
   },
   {
-    np: 'दुई रेखाहरू एकमाथि अर्को खप्टिएका (Coincident) छन् भने कतिवटा समाधान हुन्छन्?',
+    np: 'दुई रेखाहरू एकमाथि अर्को खप्टिएका (Coincident) छन् भने कतिpcs समाधान हुन्छन्?',
     en: 'If two lines are coincident (overlapping), how many solutions exist?',
     options: [
-      { key: 'A', label: 'अनन्त समाधान (Infinitely many solutions)' },
-      { key: 'B', label: 'एकवटा मात्र' },
-      { key: 'C', label: 'शून्य' },
-      { key: 'D', label: 'ऋणात्मक' },
+      { key: 'A', label: 'Infinitely many solutions (Infinitely many solutions)' },
+      { key: 'B', label: 'Only one' },
+      { key: 'C', label: 'Zero' },
+      { key: 'D', label: 'Negative' },
     ],
     answer: 'A',
   },
@@ -261,7 +261,7 @@ export const LinearEquationGraphLab: React.FC<{
                 }}
               />
               <strong style={{ fontSize: 14, color: '#1E40AF' }}>
-                {L('रेखा १ (Line 1):', 'Line 1:')}{' '}
+                {L('Line 1:', 'Line 1:')}{' '}
                 <span style={{ fontFamily: 'monospace' }}>
                   {a1}x {b1 >= 0 ? `+ ${b1}` : `- ${Math.abs(b1)}`}y = {c1}
                 </span>
@@ -310,7 +310,7 @@ export const LinearEquationGraphLab: React.FC<{
                 }}
               />
               <strong style={{ fontSize: 14, color: '#991B1B' }}>
-                {L('रेखा २ (Line 2):', 'Line 2:')}{' '}
+                {L('Line 2:', 'Line 2:')}{' '}
                 <span style={{ fontFamily: 'monospace' }}>
                   {a2}x {b2 >= 0 ? `+ ${b2}` : `- ${Math.abs(b2)}`}y = {c2}
                 </span>
@@ -494,7 +494,7 @@ export const LinearEquationGraphLab: React.FC<{
               )}
             </svg>
             <div style={{ marginTop: 6, fontSize: 11, color: '#64748B' }}>
-              {L('नीलो = रेखा १ | रातो = रेखा २ | हरियो बिन्दु = प्रतिच्छेदन बिन्दु', 'Blue = Line 1 | Red = Line 2 | Green dot = Intersection point')}
+              {L('नीलो = रेखा 1 | रातो = रेखा 2 | हरियो बिन्दु = प्रतिच्छेदन बिन्दु', 'Blue = Line 1 | Red = Line 2 | Green dot = Intersection point')}
             </div>
           </div>
 
@@ -567,7 +567,7 @@ export const LinearEquationGraphLab: React.FC<{
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                 {/* Table 1 */}
                 <div style={{ fontSize: 11, color: '#1E40AF' }}>
-                  <strong>रेखा १ (Line 1)</strong>
+                  <strong>Line 1</strong>
                   <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: 4 }}>
                     <thead>
                       <tr style={{ background: '#EFF6FF' }}>
@@ -588,7 +588,7 @@ export const LinearEquationGraphLab: React.FC<{
 
                 {/* Table 2 */}
                 <div style={{ fontSize: 11, color: '#991B1B' }}>
-                  <strong>रेखा २ (Line 2)</strong>
+                  <strong>Line 2</strong>
                   <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: 4 }}>
                     <thead>
                       <tr style={{ background: '#FEF2F2' }}>

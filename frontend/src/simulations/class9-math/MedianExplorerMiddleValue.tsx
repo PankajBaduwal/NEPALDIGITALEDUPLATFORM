@@ -217,7 +217,7 @@ export const MedianExplorerMiddleValue: React.FC<SimProps> = ({ onBackToLibrary,
                 <span>
                   {isSorted
                     ? L('आरोही क्रममा मिलाइएको छ (Sorted)', 'Sorted in Ascending Order')
-                    : L('चरण १: आरोही क्रममा मिलाउनुहोस् (Sort)', 'Step 1: Sort Ascending')}
+                    : L('चरण 1: आरोही क्रममा मिलाउनुहोस् (Sort)', 'Step 1: Sort Ascending')}
                 </span>
               </button>
             </div>
@@ -264,15 +264,15 @@ export const MedianExplorerMiddleValue: React.FC<SimProps> = ({ onBackToLibrary,
             <ul className="text-[11px] text-slate-700 space-y-1.5 list-disc pl-4 leading-relaxed">
               <li>
                 <strong>{L('विजोडी सङ्ख्या (Odd N):', 'Odd N:')}</strong>{' '}
-                M_d = \left(\frac&#123;N + 1&#125;&#123;2&#125;\right)\text&#123;-औं पद (ठ्याक्कै बिचको मान)&#125;
+                M_d = \left(\frac&#123;N + 1&#125;&#123;2&#125;\right)\text&#123;-th term (exact middle value)&#125;
               </li>
               <li>
                 <strong>{L('जोडी सङ्ख्या (Even N):', 'Even N:')}</strong>{' '}
-                \frac&#123;\frac&#123;N&#125;&#123;2&#125;\text&#123;-औं पद&#125; + (\frac&#123;N&#125;&#123;2&#125;+1)\text&#123;-औं पद&#125;&#125;&#123;2&#125;
+                \frac&#123;\frac&#123;N&#125;&#123;2&#125;\text&#123;-th term&#125; + (\frac&#123;N&#125;&#123;2&#125;+1)\text&#123;-th term&#125;&#125;&#123;2&#125;
               </li>
               <li>
                 <strong>{L('खण्डित श्रेणी:', 'Discrete Series:')}</strong>{' '}
-                \frac&#123;N+1&#125;&#123;2&#125;\text&#123;-औं पद बराबर वा सोभन्दा ठूलो पहिलो c.f. को सिधा अगाडिको मान X नै मध्यिका हुन्छ।&#125;
+                \frac&#123;N+1&#125;&#123;2&#125;\text&#123;-th term: the value X directly after the first c.f. equal to or greater than it is the median.&#125;
               </li>
             </ul>
           </div>
@@ -332,14 +332,14 @@ export const MedianExplorerMiddleValue: React.FC<SimProps> = ({ onBackToLibrary,
 
                 <div className="space-y-2">
                   <div className="p-2.5 bg-white rounded-lg border border-slate-200">
-                    <strong>{L('चरण १: तथ्याङ्कलाई आरोही क्रममा राख्दा (Arranging in Ascending Order):', 'Step 1: Arrange in ascending order:')}</strong>
+                    <strong>{L('चरण 1: तथ्याङ्कलाई आरोही क्रममा राख्दा (Arranging in Ascending Order):', 'Step 1: Arrange in ascending order:')}</strong>
                     <div className="font-mono text-indigo-700 font-semibold mt-1">
                       {sortedNumbers.join(', ')}
                     </div>
                   </div>
 
                   <div className="p-2.5 bg-white rounded-lg border border-slate-200">
-                    <strong>{L('चरण २: कुल पद सङ्ख्या (Number of terms, N):', 'Step 2: Total number of terms (N):')}</strong>
+                    <strong>{L('चरण 2: कुल पद सङ्ख्या (Number of terms, N):', 'Step 2: Total number of terms (N):')}</strong>
                     <div className="text-slate-700 mt-1">
                       N = <span className="font-mono font-bold text-slate-900">{fmt(nIndiv)}</span> (
                       {isOdd ? L('विजोडी सङ्ख्या / Odd', 'Odd number') : L('जोडी सङ्ख्या / Even', 'Even number')})
@@ -347,15 +347,15 @@ export const MedianExplorerMiddleValue: React.FC<SimProps> = ({ onBackToLibrary,
                   </div>
 
                   <div className="p-2.5 bg-white rounded-lg border border-slate-200">
-                    <strong>{L('चरण ३: मध्यिकाको स्थान (Median Position):', 'Step 3: Median Position:')}</strong>
+                    <strong>{L('चरण 3: मध्यिकाको स्थान (Median Position):', 'Step 3: Median Position:')}</strong>
                     <div className="text-slate-700 mt-1">
                       {isOdd ? (
                         <div>
-                          M_d = \left(\frac&#123;N + 1&#125;&#123;2&#125;\right)\text&#123;-औं पद&#125; = \left(\frac&#123;{fmt(nIndiv)} + 1&#125;&#123;2&#125;\right) = <span className="font-bold font-mono text-indigo-700">{fmt((nIndiv + 1) / 2)}</span>-औं पद।
+                          M_d = \left(\frac&#123;N + 1&#125;&#123;2&#125;\right)\text&#123;-th term&#125; = \left(\frac&#123;{fmt(nIndiv)} + 1&#125;&#123;2&#125;\right) = <span className="font-bold font-mono text-indigo-700">{fmt((nIndiv + 1) / 2)}</span>-th term.
                         </div>
                       ) : (
                         <div>
-                          M_d = \text&#123;औसत of &#125; \frac&#123;N&#125;&#123;2&#125;\text&#123; र &#125; (\frac&#123;N&#125;&#123;2&#125;+1)\text&#123;-औं पदहरू&#125; = {fmt(nIndiv / 2)}-औं र {fmt(nIndiv / 2 + 1)}-औं पदहरूको औसत।
+                          M_d = \text&#123;mean of &#125; \frac&#123;N&#125;&#123;2&#125;\text&#123; and &#125; (\frac&#123;N&#125;&#123;2&#125;+1)\text&#123;-th terms&#125; = {fmt(nIndiv / 2)}-औं र {fmt(nIndiv / 2 + 1)}-th termहरूको औसत।
                         </div>
                       )}
                     </div>
@@ -429,7 +429,7 @@ export const MedianExplorerMiddleValue: React.FC<SimProps> = ({ onBackToLibrary,
                 <div className="font-bold flex items-center justify-between">
                   <span>
                     {L('मध्यिका स्थिति:', 'Median Position:')}{' '}
-                    \frac&#123;N+1&#125;&#123;2&#125; = \frac&#123;{fmt(discreteAnalysis.totalN)}+1&#125;&#123;2&#125; = <span className="font-mono text-indigo-700">{fmt(discreteAnalysis.medianPos)}</span>-औं पद
+                    \frac&#123;N+1&#125;&#123;2&#125; = \frac&#123;{fmt(discreteAnalysis.totalN)}+1&#125;&#123;2&#125; = <span className="font-mono text-indigo-700">{fmt(discreteAnalysis.medianPos)}</span>-th term
                   </span>
                   <span className="text-base font-bold font-mono text-indigo-700">
                     M_d = {fmt(discreteAnalysis.medianVal)}

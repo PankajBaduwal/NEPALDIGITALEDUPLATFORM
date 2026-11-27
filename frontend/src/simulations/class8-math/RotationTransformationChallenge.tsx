@@ -20,13 +20,13 @@ interface ShapeDef {
 const PRESET_SHAPES: ShapeDef[] = [
   {
     type: 'point',
-    nameNp: 'बिन्दु P',
+    nameNp: 'Point P',
     nameEn: 'Point P',
     vertices: [{ name: 'P', x: 3, y: 2 }],
   },
   {
     type: 'segment',
-    nameNp: 'रेखाखण्ड AB',
+    nameNp: 'Line segment AB',
     nameEn: 'Line Segment AB',
     vertices: [
       { name: 'A', x: 2, y: 1 },
@@ -35,7 +35,7 @@ const PRESET_SHAPES: ShapeDef[] = [
   },
   {
     type: 'triangle',
-    nameNp: 'त्रिभुज ABC',
+    nameNp: 'Triangle ABC',
     nameEn: 'Triangle ABC',
     vertices: [
       { name: 'A', x: 2, y: 1 },
@@ -61,7 +61,7 @@ const ROTATION_RULES: RotationRule[] = [
   {
     key: 'ccw90',
     angleDeg: 90,
-    labelNp: '+९०° (घडीको उल्टो दिशा)',
+    labelNp: '+90° (anticlockwise)',
     labelEn: '+90° (Quarter Turn Anticlockwise)',
     directionNp: 'घडीको विपरित दिशा (Anticlockwise)',
     formulaNp: 'P(x, y) → P\'(-y, x)',
@@ -70,7 +70,7 @@ const ROTATION_RULES: RotationRule[] = [
   {
     key: 'cw90',
     angleDeg: -90,
-    labelNp: '-९०° (घडीको दिशा)',
+    labelNp: '-90° (clockwise)',
     labelEn: '-90° / 270° (Quarter Turn Clockwise)',
     directionNp: 'घडीको दिशा (Clockwise)',
     formulaNp: 'P(x, y) → P\'(y, -x)',
@@ -79,7 +79,7 @@ const ROTATION_RULES: RotationRule[] = [
   {
     key: '180',
     angleDeg: 180,
-    labelNp: '±१८०° (आधा घुमाइ / Half Turn)',
+    labelNp: '±180° (half turn)',
     labelEn: '±180° (Half Turn)',
     directionNp: 'घडीको दिशा वा विपरित दुवै समान',
     formulaNp: 'P(x, y) → P\'(-x, -y)',
@@ -88,9 +88,9 @@ const ROTATION_RULES: RotationRule[] = [
   {
     key: 'ccw270',
     angleDeg: 270,
-    labelNp: '+२७०° (घडीको उल्टो दिशा)',
+    labelNp: '+270° (anticlockwise)',
     labelEn: '+270° Anticlockwise (-90° Clockwise)',
-    directionNp: 'घडीको विपरित २७०° = घडीको दिशा ९०°',
+    directionNp: 'घडीको विपरित 270° = घडीको दिशा 90°',
     formulaNp: 'P(x, y) → P\'(y, -x)',
     calc: (x, y) => ({ x: y, y: -x }),
   },
@@ -112,7 +112,7 @@ const MYSTERY_CHALLENGES: MysteryChallenge[] = [
   {
     id: 1,
     type: 'rotation',
-    titleNp: 'रहस्यमय रूपान्तरण १',
+    titleNp: 'Mystery transformation 1',
     objVertices: [
       { x: 2, y: 1 },
       { x: 5, y: 2 },
@@ -124,14 +124,14 @@ const MYSTERY_CHALLENGES: MysteryChallenge[] = [
       { x: -5, y: 3 },
     ],
     correctType: 'rotation',
-    correctParam: '+90° (घडीको उल्टो)',
-    paramOptions: ['+90° (घडीको उल्टो)', '-90° (घडीको दिशा)', '180° घुमाइ'],
-    explanationNp: 'P(x, y) → P\'(-y, x) भएकोले यो उद्गमबिन्दु वरिपरि +90° को परिक्रमण हो।',
+    correctParam: '+90° (anticlockwise)',
+    paramOptions: ['+90° (anticlockwise)', '-90° (clockwise)', '180° turn'],
+    explanationNp: 'P(x, y) → P\'(-y, x) भएकोले यो उद्गमबिन्दु वरिपरि +90° को Rotation हो।',
   },
   {
     id: 2,
     type: 'reflection',
-    titleNp: 'रहस्यमय रूपान्तरण २',
+    titleNp: 'रहस्यमय रूपान्तरण 2',
     objVertices: [
       { x: 2, y: 1 },
       { x: 5, y: 2 },
@@ -143,14 +143,14 @@ const MYSTERY_CHALLENGES: MysteryChallenge[] = [
       { x: 3, y: -5 },
     ],
     correctType: 'reflection',
-    correctParam: 'X-अक्षमा परावर्तन (y = 0)',
-    paramOptions: ['X-अक्षमा परावर्तन (y = 0)', 'Y-अक्षमा परावर्तन (x = 0)', 'y = x रेखामा परावर्तन'],
-    explanationNp: 'P(x, y) → P\'(x, -y) भएकोले यो X-अक्षमा भएको परावर्तन हो।',
+    correctParam: 'X-अक्षमा Reflection (y = 0)',
+    paramOptions: ['X-अक्षमा Reflection (y = 0)', 'Y-अक्षमा Reflection (x = 0)', 'y = x रेखामा Reflection'],
+    explanationNp: 'P(x, y) → P\'(x, -y) भएकोले यो X-अक्षमा भएको Reflection हो।',
   },
   {
     id: 3,
     type: 'translation',
-    titleNp: 'रहस्यमय रूपान्तरण ३',
+    titleNp: 'रहस्यमय रूपान्तरण 3',
     objVertices: [
       { x: 1, y: 2 },
       { x: 4, y: 1 },
@@ -164,12 +164,12 @@ const MYSTERY_CHALLENGES: MysteryChallenge[] = [
     correctType: 'translation',
     correctParam: 'T = (4, 3) (दायाँ 4, माथि 3)',
     paramOptions: ['T = (4, 3) (दायाँ 4, माथि 3)', 'T = (-4, -3)', 'T = (3, 4)'],
-    explanationNp: 'प्रत्येक बिन्दु दायाँ 4 र माथि 3 सरेको छ, त्यसैले विस्थापन T = (4, 3) हो।',
+    explanationNp: 'प्रत्येक बिन्दु दायाँ 4 र माथि 3 सरेको छ, त्यसैले Translation T = (4, 3) हो।',
   },
   {
     id: 4,
     type: 'rotation',
-    titleNp: 'रहस्यमय रूपान्तरण ४',
+    titleNp: 'रहस्यमय रूपान्तरण 4',
     objVertices: [
       { x: 2, y: 3 },
       { x: 4, y: 1 },
@@ -181,15 +181,15 @@ const MYSTERY_CHALLENGES: MysteryChallenge[] = [
       { x: -5, y: -4 },
     ],
     correctType: 'rotation',
-    correctParam: '±180° घुमाइ (आधा परिक्रमण)',
-    paramOptions: ['±180° घुमाइ (आधा परिक्रमण)', '+90° घुमाइ', '-90° घुमाइ'],
-    explanationNp: 'P(x, y) → P\'(-x, -y) भएकोले यो उद्गमबिन्दु वरिपरि १८०° को परिक्रमण हो।',
+    correctParam: '±180° turn',
+    paramOptions: ['±180° turn', '+90° घुमाइ', '-90° घुमाइ'],
+    explanationNp: 'P(x, y) → P\'(-x, -y) भएकोले यो उद्गमबिन्दु वरिपरि 180° को Rotation हो।',
   },
 ];
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'उद्गमबिन्दु (0, 0) वरिपरि +९०° (घडीको उल्टो) परिक्रमण गर्दा बिन्दु P(x, y) को प्रतिबिम्ब के हुन्छ?',
+    np: 'उद्गमबिन्दु (0, 0) वरिपरि +90° (anticlockwise) Rotation गर्दा Point P(x, y) को प्रतिबिम्ब के हुन्छ?',
     en: 'Under a +90° anticlockwise rotation about origin (0, 0), what is the image of P(x, y)?',
     options: [
       { key: 'A', label: "P'(-y, x)" },
@@ -200,7 +200,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'बिन्दु A(3, -2) लाई उद्गमबिन्दु वरिपरि १८०° घुमाउँदा बन्ने प्रतिबिम्ब A\' को निर्देशांक कुन हो?',
+    np: 'बिन्दु A(3, -2) लाई उद्गमबिन्दु वरिपरि 180° घुमाउँदा बन्ने प्रतिबिम्ब A\' को निर्देशांक कुन हो?',
     en: 'What are the coordinates of image A\' when A(3, -2) is rotated 180° about the origin?',
     options: [
       { key: 'A', label: "(-3, 2) — P(-x, -y)" },
@@ -211,24 +211,24 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'उद्गमबिन्दु वरिपरि -९०° (घडीको दिशा) को परिक्रमण कुन परिक्रमणसँग बराबर हुन्छ?',
+    np: 'उद्गमबिन्दु वरिपरि -90° (clockwise) को Rotation कुन Rotationसँग बराबर हुन्छ?',
     en: 'A rotation of -90° (clockwise) about the origin is equivalent to which rotation?',
     options: [
-      { key: 'A', label: '+२७०° घडीको विपरित दिशा (+270° anticlockwise)' },
-      { key: 'B', label: '+९०° घडीको विपरित दिशा (+90° anticlockwise)' },
-      { key: 'C', label: '१८०° परिक्रमण' },
-      { key: 'D', label: '३६०° पूर्ण परिक्रमण' },
+      { key: 'A', label: '+270° anticlockwise' },
+      { key: 'B', label: '+90° anticlockwise' },
+      { key: 'C', label: '180° Rotation' },
+      { key: 'D', label: '360° full rotation' },
     ],
     answer: 'A',
   },
   {
-    np: 'परावर्तन, विस्थापन र परिक्रमण तीनवटै रूपान्तरणमा साझा हुने मुख्य समानता के हो?',
+    np: 'Reflection, Translation र Rotation तीनवटै रूपान्तरणमा साझा हुने मुख्य समानता के हो?',
     en: 'What is the key common property shared by Reflection, Translation, and Rotation?',
     options: [
-      { key: 'A', label: 'तीनैवटाले आकृति र नाप परिवर्तन गर्दैनन् - अनुरुप रहन्छन् (Congruent / Isometry)' },
-      { key: 'B', label: 'तीनैवटाले वस्तुको आकार दोब्बर बनाउँछन्' },
-      { key: 'C', label: 'तीनैवटामा वस्तुको अभिमुखिकरण उल्टिन्छ' },
-      { key: 'D', label: 'तीनैवटामा वस्तु उद्गमबिन्दुमा सर्छ' },
+      { key: 'A', label: 'All three keep the shape and size unchanged - they stay congruent (isometry)' },
+      { key: 'B', label: 'All three double the size of the object' },
+      { key: 'C', label: 'In all three the orientation of the object is reversed' },
+      { key: 'D', label: 'In all three the object moves to the origin' },
     ],
     answer: 'A',
   },
@@ -241,7 +241,7 @@ export const RotationTransformationChallenge: React.FC<{
   const kit = useSimKit({
     code: 'SIM-MATH-G8-U19-03',
     chapter: 19,
-    titleNp: 'परिक्रमण र रूपान्तरण चुनौती',
+    titleNp: 'Rotation र रूपान्तरण चुनौती',
     titleEn: 'Rotation & Transformation Challenge',
   });
   const isNe = kit.lang === 'ne';
@@ -315,7 +315,7 @@ export const RotationTransformationChallenge: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! उद्गमबिन्दु वरिपरि परिक्रमण (+९०°, -९०°, १८०°) र रहस्यमय रूपान्तरण पहिचान गर्ने अभ्यास गरौं!',
+        'नमस्ते! उद्गमबिन्दु वरिपरि Rotation (+90°, -90°, 180°) र रहस्यमय रूपान्तरण पहिचान गर्ने अभ्यास गरौं!',
         'Hello! Explore rotation about the origin (+90°, -90°, 180°) and solve transformation mystery challenges!'
       )}
     >
@@ -327,7 +327,7 @@ export const RotationTransformationChallenge: React.FC<{
             activeTab === 'rotation' ? 'bg-indigo-600 text-white shadow' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          🔄 परिक्रमण प्रयोगशाला (Rotation Lab)
+          🔄 Rotation Lab
         </button>
         <button
           onClick={() => setActiveTab('mystery')}
@@ -335,7 +335,7 @@ export const RotationTransformationChallenge: React.FC<{
             activeTab === 'mystery' ? 'bg-indigo-600 text-white shadow' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          🕵️ रहस्यमय रूपान्तरण पहिचान (Mystery Challenge)
+          🕵️ Mystery Challenge
         </button>
       </div>
 
@@ -509,15 +509,15 @@ export const RotationTransformationChallenge: React.FC<{
             <div className="flex flex-wrap gap-4 mt-3 text-xs font-semibold text-slate-700">
               <span className="flex items-center gap-1.5">
                 <span className="w-3.5 h-3.5 rounded-full bg-blue-600 inline-block"></span>
-                मूल वस्तु (Original Shape)
+                Original shape
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-3.5 h-3.5 rounded-full bg-emerald-600 inline-block"></span>
-                परिक्रमित प्रतिबिम्ब (Rotated Image)
+                Rotated image
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-3.5 h-3.5 rounded-full bg-red-600 inline-block"></span>
-                परिक्रमण केन्द्र O(0,0)
+                Centre of rotation O(0,0)
               </span>
             </div>
           </div>
@@ -527,7 +527,7 @@ export const RotationTransformationChallenge: React.FC<{
             {/* Shape selection */}
             <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-4">
               <h3 className="font-bold text-indigo-900 mb-2 text-xs uppercase tracking-wide">
-                आकृति छनोट (Select Shape)
+                Select shape
               </h3>
               <div className="grid grid-cols-3 gap-1.5">
                 {PRESET_SHAPES.map((shape, idx) => (
@@ -548,7 +548,7 @@ export const RotationTransformationChallenge: React.FC<{
 
             {/* Rotation Angle Selection */}
             <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm space-y-3">
-              <h3 className="font-bold text-slate-800 text-sm">परिक्रमण कोण (Rotation Angle about Origin)</h3>
+              <h3 className="font-bold text-slate-800 text-sm">Rotation angle about the origin</h3>
               <div className="space-y-2">
                 {ROTATION_RULES.map((rule) => (
                   <button
@@ -577,7 +577,7 @@ export const RotationTransformationChallenge: React.FC<{
                     onChange={(e) => setShowRays(e.target.checked)}
                     className="accent-indigo-600"
                   />
-                  <span>केन्द्र रेखा (Origin Rays)</span>
+                  <span>Origin rays</span>
                 </label>
                 <label className="flex items-center gap-1.5 cursor-pointer">
                   <input
@@ -586,7 +586,7 @@ export const RotationTransformationChallenge: React.FC<{
                     onChange={(e) => setShowArcs(e.target.checked)}
                     className="accent-indigo-600"
                   />
-                  <span>वृत्ताकार पथ (Rotation Path)</span>
+                  <span>Rotation path</span>
                 </label>
               </div>
             </div>
@@ -594,7 +594,7 @@ export const RotationTransformationChallenge: React.FC<{
             {/* Coordinate Transformation Display */}
             <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 shadow-sm">
               <h3 className="font-bold text-emerald-900 text-xs uppercase tracking-wider mb-2">
-                निर्देशाङ्क रूपान्तरण (Coordinate Mapping)
+                Coordinate mapping
               </h3>
               <div className="p-2 bg-white rounded border border-emerald-300 font-mono text-center text-sm font-bold text-emerald-800 mb-3">
                 {currentRule.formulaNp}
@@ -657,8 +657,8 @@ export const RotationTransformationChallenge: React.FC<{
               ))}
             </svg>
             <div className="flex gap-4 mt-2 text-xs font-semibold">
-              <span className="text-blue-600">■ मूल आकृति (Blue)</span>
-              <span className="text-emerald-600">■ रूपान्तरित प्रतिबिम्ब (Green)</span>
+              <span className="text-blue-600">■ Original shape (blue)</span>
+              <span className="text-emerald-600">■ Transformed image (green)</span>
             </div>
           </div>
 
@@ -666,20 +666,20 @@ export const RotationTransformationChallenge: React.FC<{
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
               <h3 className="font-bold text-amber-900 text-sm mb-2">{currentMystery.titleNp}</h3>
               <p className="text-xs text-amber-800 mb-3">
-                चित्रमा देखाइएको नीलो आकृतिबाट हरियो प्रतिबिम्ब बन्दा कुन रूपान्तरण भएको हो?
+                Which transformation turns the blue shape in the figure into the green image?
               </p>
 
               {/* Step 1: Select Type */}
               <div className="space-y-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    १. रूपान्तरणको प्रकार (Transformation Type):
+                    1. Type of transformation:
                   </label>
                   <div className="grid grid-cols-3 gap-1">
                     {[
-                      { key: 'reflection', label: 'परावर्तन' },
-                      { key: 'translation', label: 'विस्थापन' },
-                      { key: 'rotation', label: 'परिक्रमण' },
+                      { key: 'reflection', label: 'Reflection' },
+                      { key: 'translation', label: 'Translation' },
+                      { key: 'rotation', label: 'Rotation' },
                     ].map((t) => (
                       <button
                         key={t.key}
@@ -702,7 +702,7 @@ export const RotationTransformationChallenge: React.FC<{
                 {/* Step 2: Select Parameter */}
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    २. रूपान्तरणको विशेषता/पैमाना (Parameter):
+                    2. Parameter of the transformation:
                   </label>
                   <div className="space-y-1">
                     {currentMystery.paramOptions.map((opt) => (
@@ -731,7 +731,7 @@ export const RotationTransformationChallenge: React.FC<{
                   onClick={handleCheckMystery}
                   className="flex-1 py-2 bg-amber-600 hover:bg-amber-700 disabled:opacity-50 text-white font-bold rounded-lg text-xs shadow transition-all"
                 >
-                  जाँच गर्नुहोस् (Check)
+                  Check
                 </button>
                 {feedback && feedback.isCorrect && (
                   <button

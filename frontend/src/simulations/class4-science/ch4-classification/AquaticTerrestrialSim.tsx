@@ -1,7 +1,7 @@
 /**
  * AquaticTerrestrialSim.tsx
- * Simulation 13: 2D Aquatic and Terrestrial Biomes (जलचर र स्थलचर जीवहरू)
- * Grade 4 Science • Chapter 4: Classification of Living Beings (जीवहरूको वर्गीकरण)
+ * Simulation 13: 2D Aquatic and Terrestrial Biomes
+ * Grade 4 Science • Chapter 4: Classification of Living Beings
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
@@ -34,7 +34,7 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -45,7 +45,7 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
   const organisms: Organism[] = [
     {
       id: 'fish',
-      nameEn: 'Himalayan Trout (असला माछा)',
+      nameEn: 'Himalayan Trout',
       nameNe: 'असला माछा (Snow Trout)',
       habitat: 'aquatic',
       habitatNe: 'जलचर (Aquatic)',
@@ -54,14 +54,14 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
       adaptationEn: 'Streamlined torpedo body cuts water resistance. Red gills extract dissolved oxygen. Pectoral and caudal fins provide thrust and steering.',
       adaptationNe: 'पानी चिर्न डुङ्गा आकारको शरीर। पानीमा घुलेको अक्सिजन लिन फुल्का (Gills)। पौडिन र दिशा बदल्न पखेटा (Fins)।',
       keyFeatures: [
-        { en: 'Gills (फुल्का) for breathing dissolved oxygen', ne: 'अक्सिजन लिन राता फुल्काहरू' },
+        { en: 'Gills for breathing dissolved oxygen', ne: 'अक्सिजन लिन राता फुल्काहरू' },
         { en: 'Streamlined shape reduces drag', ne: 'पानी चिर्ने डुङ्गा आकारको शरीर' },
         { en: 'Lateral line senses water currents', ne: 'पानीको तरङ्ग थाहा पाउने रेखा' },
       ],
     },
     {
       id: 'deer',
-      nameEn: 'Musk Deer (कस्तुरी मृग)',
+      nameEn: 'Musk Deer',
       nameNe: 'कस्तुरी मृग (Musk Deer)',
       habitat: 'terrestrial',
       habitatNe: 'स्थलचर (Terrestrial)',
@@ -70,14 +70,14 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
       adaptationEn: 'Thick hollow fur insulates against sub-zero mountain cold. Sturdy hooves grip steep rocky cliffs. Lungs breathe atmospheric air.',
       adaptationNe: 'न्यानो राख्न बाक्लो भुत्ला। भीरपाखा चढ्न खुर र हिँड्न बलिया खुट्टा। वायुमण्डलीय हावाबाट सास फेर्न फोक्सो।',
       keyFeatures: [
-        { en: 'Lungs (फोक्सो) for atmospheric air', ne: 'खुला हावाबाट अक्सिजन लिन फोक्सो' },
+        { en: 'Lungs for atmospheric air', ne: 'खुला हावाबाट अक्सिजन लिन फोक्सो' },
         { en: 'Insulating fur against sub-zero freeze', ne: 'चिसोबाट जोगिने बाक्लो रौं' },
         { en: 'Sharp hooves for rocky mountain cliffs', ne: 'भीरमा नचिप्लिने दह्रा खुरहरू' },
       ],
     },
     {
       id: 'lotus',
-      nameEn: 'Lotus Flower (कमलको फूल)',
+      nameEn: 'Lotus Flower',
       nameNe: 'कमलको फूल (Lotus)',
       habitat: 'aquatic',
       habitatNe: 'जलचर (Aquatic)',
@@ -93,7 +93,7 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'pine',
-      nameEn: 'Himalayan Pine (सल्लाको रूख)',
+      nameEn: 'Himalayan Pine',
       nameNe: 'सल्लाको रूख (Himalayan Pine)',
       habitat: 'terrestrial',
       habitatNe: 'स्थलचर (Terrestrial)',
@@ -581,7 +581,7 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText(lang === 'en' ? 'Pine (सल्ला)' : 'सल्ला (Pine)', x, y + 175);
+    ctx.fillText(lang === 'en' ? 'Pine' : 'सल्ला (Pine)', x, y + 175);
     ctx.restore();
   }
 
@@ -712,7 +712,7 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText(lang === 'en' ? 'Musk Deer (मृग)' : 'कस्तुरी मृग (Deer)', x + 20, y + 90);
+    ctx.fillText(lang === 'en' ? 'Musk Deer' : 'कस्तुरी मृग (Deer)', x + 20, y + 90);
     ctx.restore();
   }
 
@@ -810,7 +810,7 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText(lang === 'en' ? 'Lotus (कमल)' : 'कमल (Lotus)', x, y + 55);
+    ctx.fillText(lang === 'en' ? 'Lotus' : 'कमल (Lotus)', x, y + 55);
     ctx.restore();
   }
 
@@ -936,7 +936,7 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText(lang === 'en' ? 'Trout (माछा)' : 'असला माछा (Trout)', x, y + 60);
+    ctx.fillText(lang === 'en' ? 'Trout' : 'असला माछा (Trout)', x, y + 60);
     ctx.restore();
   }
 
@@ -996,7 +996,7 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
     ctx.fillText(
-      currentLang === 'en' ? (isAq ? '💧 AQUATIC (जलचर)' : '🏔️ TERRESTRIAL (स्थलचर)') : org.habitatNe,
+      currentLang === 'en' ? (isAq ? '💧 AQUATIC' : '🏔️ TERRESTRIAL') : org.habitatNe,
       panelX + 79,
       panelY + 28
     );
@@ -1032,7 +1032,7 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 4: Classification of Living Beings'
-          : 'कक्षा ४ विज्ञान • एकाइ ४: जीवहरूको वर्गीकरण'
+          : 'कक्षा 4 विज्ञान • एकाइ 4: जीवहरूको वर्गीकरण'
       }
       currentStage={stage}
       onStageChange={setStage}
@@ -1294,7 +1294,7 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 <Droplets size={14} />
-                {lang === 'en' ? 'Aquatic (जलचर)' : 'जलचर (Aquatic)'}
+                {lang === 'en' ? 'Aquatic' : 'जलचर (Aquatic)'}
               </button>
 
               <button
@@ -1316,7 +1316,7 @@ export const AquaticTerrestrialSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 <Mountain size={14} />
-                {lang === 'en' ? 'Terrestrial (स्थलचर)' : 'स्थलचर (Terrestrial)'}
+                {lang === 'en' ? 'Terrestrial' : 'स्थलचर (Terrestrial)'}
               </button>
             </div>
 

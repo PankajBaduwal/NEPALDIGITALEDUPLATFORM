@@ -1,7 +1,7 @@
 /**
  * SimpleCellLabSim.tsx
- * Simulation 30: 2D Simple Voltaic Cell Laboratory (सरल सेल प्रयोगशाला)
- * Grade 6 Science • Unit 8: Electricity and Magnetism (विद्युत र चुम्बकत्व)
+ * Simulation 30: 2D Simple Voltaic Cell Laboratory
+ * Grade 6 Science • Unit 8: Electricity and Magnetism
  *
  * 100% Native HTML5 Canvas 2D Interactive Electrochemical Cell.
  * Features:
@@ -30,7 +30,7 @@ export const SimpleCellLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -312,7 +312,7 @@ export const SimpleCellLabSim: React.FC<BaseSimulationProps> = ({
 
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 11px sans-serif';
-      ctx.fillText(isLit ? 'LED LIT (चम्किलो)' : 'LED DIM / OFF', ledX, ledY + 30);
+      ctx.fillText(isLit ? 'LED LIT' : 'LED DIM / OFF', ledX, ledY + 30);
 
       animId = requestAnimationFrame(render);
     };
@@ -327,7 +327,7 @@ export const SimpleCellLabSim: React.FC<BaseSimulationProps> = ({
       titleNepali="सरल सेल तथा विद्युत-रसायन प्रयोगशाला"
       chapterNumber={8}
       chapterTitle="Unit 8: Electricity and Magnetism"
-      chapterTitleNepali="एकाइ ८: विद्युत र चुम्बकत्व"
+      chapterTitleNepali="एकाइ 8: विद्युत र चुम्बकत्व"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -340,7 +340,7 @@ export const SimpleCellLabSim: React.FC<BaseSimulationProps> = ({
       stars={stars}
       isCompleted={isCompleted}
       currentPromptEn="Observe how chemical reactions between Zinc, Copper, and H₂SO₄ generate 1.08V and learn about cell defects."
-      currentPromptNe="जिंक, तामा र सल्फ्युरिक एसिडबीचको रासायनिक प्रतिक्रियाबाट १.०८ भोल्ट विद्युत कसरी बन्छ हेर्नुहोस्।"
+      currentPromptNe="जिंक, तामा र सल्फ्युरिक एसिडबीचको रासायनिक प्रतिक्रियाबाट 1.08 भोल्ट विद्युत कसरी बन्छ हेर्नुहोस्।"
     >
       <div
         style={{
@@ -475,7 +475,7 @@ export const SimpleCellLabSim: React.FC<BaseSimulationProps> = ({
             </div>
             <p style={{ margin: '4px 0 0 0', fontSize: '11px', color: '#64748b', lineHeight: '1.4' }}>
               {lang === 'ne'
-                ? 'जिंक र तामाको पाताबाट १.०८ भोल्ट विद्युत उत्पादन गर्नुहोस् र सेलका कमजोरीहरू हटाउनुहोस्।'
+                ? 'जिंक र तामाको पाताबाट 1.08 भोल्ट विद्युत उत्पादन गर्नुहोस् र सेलका कमजोरीहरू हटाउनुहोस्।'
                 : 'Generate 1.08V electromotive force and investigate local action and polarization defects.'}
             </p>
           </div>
@@ -483,7 +483,7 @@ export const SimpleCellLabSim: React.FC<BaseSimulationProps> = ({
           {/* Cell Defects & Remedies Controls */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. सेलका कमजोरी र निवारण (Cell Defects)' : '1. Defects & Remediation'}
+              {lang === 'ne' ? '1. सेलका कमजोरी र निवारण (Cell Defects)' : '1. Defects & Remediation'}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <button
@@ -501,8 +501,8 @@ export const SimpleCellLabSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 {hasPolarization
-                  ? (lang === 'ne' ? '⚠️ ध्रुवीकरण सक्रिय (तामामा H₂ ग्यास - ०.३८V)' : '⚠️ Polarization Active (H₂ on Cu - 0.38V)')
-                  : (lang === 'ne' ? '✓ डि-पोलराइजर प्रयोग (१.०८V पूर्ण भोल्टेज)' : '✓ Depolarized (1.08V Full Voltage)')}
+                  ? (lang === 'ne' ? '⚠️ ध्रुवीकरण सक्रिय (तामामा H₂ ग्यास - 0.38V)' : '⚠️ Polarization Active (H₂ on Cu - 0.38V)')
+                  : (lang === 'ne' ? '✓ डि-पोलराइजर प्रयोग (1.08V पूर्ण भोल्टेज)' : '✓ Depolarized (1.08V Full Voltage)')}
               </button>
 
               <button
@@ -602,7 +602,7 @@ export const SimpleCellLabSim: React.FC<BaseSimulationProps> = ({
               {lang === 'ne' ? '📚 पाठ्यक्रम मुख्य बुँदा:' : '📚 Curriculum Takeaway:'}
             </div>
             {lang === 'ne'
-              ? 'सरल सेलले रासायनिक शक्तिलाई विद्युत शक्तिमा बदल्छ (१.०८ भोल्ट)। जिंकमा हुने स्थानीय असर रोक्न पारोको लेप (Amalgamation) लाइन्छ र ध्रुवीकरण हटाउन डि-पोलराइजर चाहिन्छ।'
+              ? 'सरल सेलले रासायनिक शक्तिलाई विद्युत शक्तिमा बदल्छ (1.08 भोल्ट)। जिंकमा हुने स्थानीय असर रोक्न पारोको लेप (Amalgamation) लाइन्छ र ध्रुवीकरण हटाउन डि-पोलराइजर चाहिन्छ।'
               : 'Simple voltaic cells convert chemical energy into electricity. Zinc local action is cured with mercury coating, and polarization with depolarizers.'}
           </div>
 

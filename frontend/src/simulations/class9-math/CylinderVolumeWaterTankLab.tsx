@@ -8,21 +8,21 @@ const QUIZ_QUESTIONS = [
     np: 'बेलनाको आयतन (Volume of a Cylinder) को सूत्र के हो?',
     en: 'What is the formula for the volume of a cylinder?',
     options: [
-      { key: 'A', label: 'V = πr²h (आधारको क्षेत्रफल × उचाइ)' },
-      { key: 'B', label: 'V = २πrh' },
-      { key: 'C', label: 'V = २πr(r + h)' },
-      { key: 'D', label: 'V = ४/३ πr³' },
+      { key: 'A', label: 'V = πr²h' },
+      { key: 'B', label: 'V = 2πrh' },
+      { key: 'C', label: 'V = 2πr(r + h)' },
+      { key: 'D', label: 'V = 4/3 πr³' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि एउटा बेलनाकार पानी ट्याङ्कीको अर्धव्यास १ मिटर र उचाइ १.४ मिटर छ भने यसमा कति लिटर पानी अटाउँछ? (π = २२/७)',
+    np: 'यदि एउटा बेलनाकार पानी ट्याङ्कीको अर्धव्यास 1 m र उचाइ 1.4 m छ भने यसमा कति litres पानी अटाउँछ? (π = 22/7)',
     en: 'If a cylindrical water tank has radius 1m and height 1.4m, what is its capacity in liters? (π = 22/7)',
     options: [
-      { key: 'A', label: '४,४०० लिटर (V = २२/७ × १² × १.४ = ४.४ m³ = ४,४०० L)' },
-      { key: 'B', label: '२,२०० लिटर' },
-      { key: 'C', label: '१,४०० लिटर' },
-      { key: 'D', label: '८,८०० लिटर' },
+      { key: 'A', label: '4,400 litres (V = 22/7 × 1² × 1.4 = 4.4 m³ = 4,400 L)' },
+      { key: 'B', label: '2,200 litres' },
+      { key: 'C', label: '1,400 litres' },
+      { key: 'D', label: '8,800 litres' },
     ],
     answer: 'A',
   },
@@ -41,10 +41,10 @@ const QUIZ_QUESTIONS = [
     np: 'यदि बेलनाको अर्धव्यासलाई दोब्बर (Double) बनाइयो र उचाइ उही राखियो भने आयतन कति गुणा बढ्छ?',
     en: 'If the radius of a cylinder is doubled while keeping height constant, how many times does volume increase?',
     options: [
-      { key: 'A', label: '२ गुणा' },
-      { key: 'B', label: '४ गुणा (r² हुनाले २² = ४ गुणा)' },
-      { key: 'C', label: '८ गुणा' },
-      { key: 'D', label: 'परिवर्तन हुँदैन' },
+      { key: 'A', label: '2 times' },
+      { key: 'B', label: '4 times (since it is r², 2² = 4 times)' },
+      { key: 'C', label: '8 times' },
+      { key: 'D', label: 'No change' },
     ],
     answer: 'B',
   },
@@ -105,7 +105,7 @@ export const CylinderVolumeWaterTankLab: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! बेलनाको आयतन V = πr²h, पानी ट्याङ्कीको लिटर क्षमता (१ m³ = १,००० लिटर) र भाँडाहरूको क्षमता तुलना गरौं!',
+        'नमस्ते! बेलनाको आयतन V = πr²h, पानी ट्याङ्कीको litres क्षमता (1 m³ = 1,000 litres) र भाँडाहरूको क्षमता तुलना गरौं!',
         'Welcome! Explore cylinder volume V = πr²h, water tank capacity in liters (1 m³ = 1,000 L), and container comparisons!'
       )}
     >
@@ -121,7 +121,7 @@ export const CylinderVolumeWaterTankLab: React.FC<{
             }`}
           >
             <span>🚰</span>
-            <span>{L('१. बेलनाकार ट्याङ्की', '1. Cylindrical Tank')}</span>
+            <span>{L('1. बेलनाकार ट्याङ्की', '1. Cylindrical Tank')}</span>
           </button>
           <button
             onClick={() => setActiveTab('compare')}
@@ -132,7 +132,7 @@ export const CylinderVolumeWaterTankLab: React.FC<{
             }`}
           >
             <span>⚖️</span>
-            <span>{L('२. दुई भाँडाको तुलना', '2. Container Comparison')}</span>
+            <span>{L('2. दुई भाँडाको तुलना', '2. Container Comparison')}</span>
           </button>
           <button
             onClick={() => setActiveTab('reverse')}
@@ -143,7 +143,7 @@ export const CylinderVolumeWaterTankLab: React.FC<{
             }`}
           >
             <span>🔍</span>
-            <span>{L('३. उल्टो हिसाब (Reverse)', '3. Reverse Solver')}</span>
+            <span>{L('3. उल्टो हिसाब (Reverse)', '3. Reverse Solver')}</span>
           </button>
         </div>
 
@@ -155,11 +155,11 @@ export const CylinderVolumeWaterTankLab: React.FC<{
             <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/40 dark:to-cyan-950/30 p-5 rounded-2xl border border-blue-200 dark:border-blue-800">
               <h2 className="text-xl font-bold text-blue-900 dark:text-blue-200 mb-2 flex items-center gap-2">
                 <span>🚰</span>
-                <span>{L('बेलनाकार पानी ट्याङ्कीको आयतन तथा लिटर क्षमता', 'Cylinder Volume & Water Capacity')}</span>
+                <span>{L('बेलनाकार पानी ट्याङ्कीको आयतन तथा litres क्षमता', 'Cylinder Volume & Water Capacity')}</span>
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'बेलनाको आयतन = आधारको क्षेत्रफल × उचाइ (V = πr²h)। १ घन मिटर (m³) = १,००० लिटर पानी र १ लिटर = १,००० घन सेन्टिमिटर (cm³) हुन्छ।',
+                  'बेलनाको आयतन = आधारको क्षेत्रफल × उचाइ (V = πr²h)। 1 cu m (m³) = 1,000 litres पानी र 1 litres = 1,000 घन सेन्टिm (cm³) हुन्छ।',
                   'Cylinder Volume = Base Area × Height (V = πr²h). 1 cubic meter (m³) equals 1,000 liters of water.'
                 )}
               </p>
@@ -306,7 +306,7 @@ export const CylinderVolumeWaterTankLab: React.FC<{
                       {baseAreaSqM.toFixed(2)} m²
                     </div>
                     <div className="text-[11px] text-gray-400 mt-1">
-                      (२२/७) × {tankRadiusM}²
+                      (22/7) × {tankRadiusM}²
                     </div>
                   </div>
 
@@ -316,7 +316,7 @@ export const CylinderVolumeWaterTankLab: React.FC<{
                       {isNe ? toNp(totalCapacityLiters) : totalCapacityLiters.toLocaleString()} L
                     </div>
                     <div className="text-[11px] text-gray-400 mt-1 font-mono">
-                      {totalVolumeCubicM.toFixed(2)} m³ × १,०००
+                      {totalVolumeCubicM.toFixed(2)} m³ × 1,000
                     </div>
                   </div>
                 </div>
@@ -337,7 +337,7 @@ export const CylinderVolumeWaterTankLab: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'अर्धव्यास दोब्बर गर्दा आयतन ४ गुणा बढ्छ तर उचाइ दोब्बर गर्दा आयतन २ गुणा मात्र बढ्छ (किनकि V = πr²h मा r को वर्ग हुन्छ)। दुई भाँडाहरूको तुलना गरी कुनमा बढी पानी अटाउँछ परीक्षण गर्नुहोस्।',
+                  'अर्धव्यास दोब्बर गर्दा आयतन 4 गुणा बढ्छ तर उचाइ दोब्बर गर्दा आयतन 2 times मात्र बढ्छ (किनकि V = πr²h मा r को वर्ग हुन्छ)। दुई भाँडाहरूको तुलना गरी कुनमा बढी पानी अटाउँछ परीक्षण गर्नुहोस्।',
                   'Doubling the radius quadruples the volume, whereas doubling the height only doubles it (since r is squared in V = πr²h).'
                 )}
               </p>
@@ -419,9 +419,9 @@ export const CylinderVolumeWaterTankLab: React.FC<{
             <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-2xl border text-center">
               <span className="text-base font-black text-gray-800 dark:text-gray-100">
                 {volA_liters > volB_liters
-                  ? L(`निष्कर्ष: भाँडो 'क' मा ${toNp(volA_liters - volB_liters)} लिटर बढी पानी अटाउँछ।`, `Result: Container A holds ${volA_liters - volB_liters} L more water.`)
+                  ? L(`निष्कर्ष: भाँडो 'क' मा ${toNp(volA_liters - volB_liters)} litres बढी पानी अटाउँछ।`, `Result: Container A holds ${volA_liters - volB_liters} L more water.`)
                   : volB_liters > volA_liters
-                  ? L(`निष्कर्ष: भाँडो 'ख' मा ${toNp(volB_liters - volA_liters)} लिटर बढी पानी अटाउँछ।`, `Result: Container B holds ${volB_liters - volA_liters} L more water.`)
+                  ? L(`निष्कर्ष: भाँडो 'ख' मा ${toNp(volB_liters - volA_liters)} litres बढी पानी अटाउँछ।`, `Result: Container B holds ${volB_liters - volA_liters} L more water.`)
                   : L('निष्कर्ष: दुवै भाँडोको क्षमता बराबर छ।', 'Result: Both containers have equal capacity.')}
               </span>
             </div>
@@ -440,7 +440,7 @@ export const CylinderVolumeWaterTankLab: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'यदि ट्याङ्कीको लिटर क्षमता र उचाइ थाहा छ भने: आधारको क्षेत्रफल A = V / h र अर्धव्यास r = √(A / π) हुन्छ।',
+                  'यदि ट्याङ्कीको litres क्षमता र उचाइ थाहा छ भने: आधारको क्षेत्रफल A = V / h र अर्धव्यास r = √(A / π) हुन्छ।',
                   'Given volume V and height h: Base Area A = V / h, and Radius r = √(A / π).'
                 )}
               </p>
@@ -472,15 +472,15 @@ export const CylinderVolumeWaterTankLab: React.FC<{
 
               <div className="p-4 bg-purple-50 dark:bg-purple-950/40 rounded-xl space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="font-semibold text-gray-700 dark:text-gray-300">{L('१. घन मिटरमा आयतन V:', '1. Volume in m³:')}</span>
+                  <span className="font-semibold text-gray-700 dark:text-gray-300">{L('1. cu mमा आयतन V:', '1. Volume in m³:')}</span>
                   <span className="font-mono font-bold">{reverseVolM3.toFixed(2)} m³</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-semibold text-gray-700 dark:text-gray-300">{L('२. आधारको क्षेत्रफल A = V / h:', '2. Base Area A = V / h:')}</span>
+                  <span className="font-semibold text-gray-700 dark:text-gray-300">{L('2. आधारको क्षेत्रफल A = V / h:', '2. Base Area A = V / h:')}</span>
                   <span className="font-mono font-bold text-purple-700 dark:text-purple-300">{reverseBaseArea.toFixed(2)} m²</span>
                 </div>
                 <div className="flex justify-between items-center pt-2 border-t">
-                  <span className="font-bold text-gray-800 dark:text-gray-100">{L('३. आधारको अर्धव्यास r = √(A / π):', '3. Radius r = √(A / π):')}</span>
+                  <span className="font-bold text-gray-800 dark:text-gray-100">{L('3. आधारको अर्धव्यास r = √(A / π):', '3. Radius r = √(A / π):')}</span>
                   <span className="text-xl font-mono font-black text-purple-600 dark:text-purple-400">{reverseRadiusM.toFixed(2)} m</span>
                 </div>
               </div>

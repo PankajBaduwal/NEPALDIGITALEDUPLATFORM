@@ -1,5 +1,5 @@
 /**
- * Lesson 12 · Fraction (भिन्न)
+ * Lesson 12 · Fraction
  * Fraction Pizza — cut a pizza into equal slices, shade/eat slices, and read the fraction (½, ⅓, ¼, ¾ …).
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -85,43 +85,43 @@ export const FractionPizza: React.FC<Props> = ({ onBackToLibrary }) => {
   // Quiz questions for Challenge Mode
   const questions: QuizQuestion[] = [
     {
-      np: 'पिज्जालाई २ बराबर भागमा बाँडेर १ भाग लिँदा कुन भिन्न बन्छ?',
+      np: 'पिज्जालाई 2 बराबर भागमा बाँडेर 1 भाग लिँदा कुन भिन्न बन्छ?',
       en: 'What fraction is 1 slice out of 2 equal slices?',
       answer: '1/2',
       options: [
-        { key: '1/2', label: '१/२ (आधा)' },
-        { key: '1/4', label: '१/४ (एक चौथाइ)' },
-        { key: '2/3', label: '२/३ (दुई तिहाइ)' },
+        { key: '1/2', label: '1/2' },
+        { key: '1/4', label: '1/4' },
+        { key: '2/3', label: '2/3' },
       ],
     },
     {
-      np: 'पिज्जालाई ४ बराबर भागमा बाँडेर १ भाग लिँदा के भनिन्छ?',
+      np: 'पिज्जालाई 4 बराबर भागमा बाँडेर 1 भाग लिँदा के भनिन्छ?',
       en: 'What is 1 slice out of 4 equal slices called?',
       answer: '1/4',
       options: [
-        { key: '1/4', label: '१/४ (एक चौथाइ)' },
-        { key: '1/2', label: '१/२ (आधा)' },
-        { key: '3/4', label: '३/४ (तीन चौथाइ)' },
+        { key: '1/4', label: '1/4' },
+        { key: '1/2', label: '1/2' },
+        { key: '3/4', label: '3/4' },
       ],
     },
     {
-      np: '४ बराबर भागमध्ये ३ भाग छायाँ पारिएको छ भने भिन्न कति हो?',
+      np: '4 बराबर भागमध्ये 3 भाग छायाँ पारिएको छ भने भिन्न कति हो?',
       en: 'If 3 out of 4 equal parts are shaded, what is the fraction?',
       answer: '3/4',
       options: [
-        { key: '3/4', label: '३/४' },
-        { key: '1/4', label: '१/४' },
-        { key: '2/4', label: '२/४' },
+        { key: '3/4', label: '3/4' },
+        { key: '1/4', label: '1/4' },
+        { key: '2/4', label: '2/4' },
       ],
     },
     {
-      np: '३ बराबर भागमध्ये २ भाग खाँदा बाँकी भाग कति रहन्छ?',
+      np: '3 बराबर भागमध्ये 2 भाग खाँदा बाँकी भाग कति रहन्छ?',
       en: 'If 2 out of 3 equal parts are eaten, how much remains?',
       answer: '1/3',
       options: [
-        { key: '1/3', label: '१/३' },
-        { key: '2/3', label: '२/३' },
-        { key: '3/3', label: '३/३' },
+        { key: '1/3', label: '1/3' },
+        { key: '2/3', label: '2/3' },
+        { key: '3/3', label: '3/3' },
       ],
     },
   ];
@@ -178,7 +178,7 @@ export const FractionPizza: React.FC<Props> = ({ onBackToLibrary }) => {
         ))}
 
         <CBtn color="#059669" onClick={() => setShaded(Array.from({ length: parts }, (_, i) => i))}>
-          🍕 {kit.t('सबै छान्ने (१ पूरा)', 'Select All')}
+          🍕 {kit.t('सबै छान्ने (1 पूरा)', 'Select All')}
         </CBtn>
         <CBtn color="#EF4444" onClick={() => setShaded([])}>
           ↺ {kit.t('खाली गरौँ', 'Clear')}

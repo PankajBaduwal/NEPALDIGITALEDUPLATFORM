@@ -1,7 +1,7 @@
 /**
  * CircleCircumferenceLab.tsx
- * Grade 8 Mathematics – Unit 8: AREA AND VOLUME (क्षेत्रफल र आयतन)
- * Simulation 2: Circle and Circumference Discovery Lab (वृत्त, परिधि र क्षेत्रफल प्रयोगशाला)
+ * Grade 8 Mathematics – Unit 8: AREA AND VOLUME
+ * Simulation 2: Circle and Circumference Discovery Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 8)
  */
 import React, { useState } from 'react';
@@ -15,21 +15,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'वृत्तको परिधि (C) र व्यास (d) बीचको अनुपात (C/d) लाई के भनिन्छ?',
     en: 'What is the ratio of circumference (C) to diameter (d) called?',
     options: [
-      { key: 'A', label: 'π (पाइ / Pi ≈ 22/7 वा 3.14)' },
-      { key: 'B', label: 'अर्धव्यास (Radius)' },
-      { key: 'C', label: 'क्षेत्रफल (Area)' },
-      { key: 'D', label: '२π' },
+      { key: 'A', label: 'π (Pi ≈ 22/7 or 3.14)' },
+      { key: 'B', label: 'Radius' },
+      { key: 'C', label: 'Area' },
+      { key: 'D', label: '2π' },
     ],
     answer: 'A',
   },
   {
-    np: 'वृत्तको क्षेत्रफल ५,५४४ वर्ग सेमी (π = २२/७) भए यसको अर्धव्यास (r) कति हुन्छ?',
+    np: 'वृत्तको क्षेत्रफल 5,544 sq cm (π = 22/7) भए यसको Radius (r) कति हुन्छ?',
     en: 'If the area of a circle is 5,544 cm² (π = 22/7), what is its radius (r)?',
     options: [
-      { key: 'A', label: '४२ सेमी [ r = √(५५४४ × ७ ÷ २२) = √१७६४ = ४२ ]' },
-      { key: 'B', label: '३६ सेमी' },
-      { key: 'C', label: '४९ सेमी' },
-      { key: 'D', label: '२१ सेमी' },
+      { key: 'A', label: '42 cm [ r = √(5544 × 7 ÷ 22) = √1764 = 42 ]' },
+      { key: 'B', label: '36 cm' },
+      { key: 'C', label: '49 cm' },
+      { key: 'D', label: '21 cm' },
     ],
     answer: 'A',
   },
@@ -37,32 +37,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कागज काटेर वृत्तका खण्डहरूलाई एकापसमा मिलाउँदा बन्ने समानान्तर चतुर्भुजको आधार कति हुन्छ?',
     en: 'When circle sectors are rearranged in the paper-cutting activity, what is the base of the resulting shape?',
     options: [
-      { key: 'A', label: 'आधा परिधि (πr)' },
-      { key: 'B', label: 'पूरा परिधि (२πr)' },
-      { key: 'C', label: 'अर्धव्यास (r)' },
-      { key: 'D', label: 'व्यास (2r)' },
+      { key: 'A', label: 'Half circumference (πr)' },
+      { key: 'B', label: 'Full circumference (2πr)' },
+      { key: 'C', label: 'Radius (r)' },
+      { key: 'D', label: 'Diameter (2r)' },
     ],
     answer: 'A',
   },
   {
-    np: 'व्यास d = १४ सेमी भएको वृत्तको परिधि कति हुन्छ (π = २२/७)?',
+    np: 'व्यास d = 14 cm भएको वृत्तको परिधि कति हुन्छ (π = 22/7)?',
     en: 'What is the circumference of a circle with diameter d = 14 cm (π = 22/7)?',
     options: [
-      { key: 'A', label: '४४ सेमी [ C = πd = २२/७ × १४ = ४४ ]' },
-      { key: 'B', label: '८८ सेमी' },
-      { key: 'C', label: '१५४ सेमी' },
-      { key: 'D', label: '२८ सेमी' },
+      { key: 'A', label: '44 cm [ C = πd = 22/7 × 14 = 44 ]' },
+      { key: 'B', label: '88 cm' },
+      { key: 'C', label: '154 cm' },
+      { key: 'D', label: '28 cm' },
     ],
     answer: 'A',
   },
   {
-    np: 'परिधि C = ८८ सेमी भएको वृत्तको क्षेत्रफल कति हुन्छ (π = २२/७)?',
+    np: 'परिधि C = 88 cm भएको वृत्तको क्षेत्रफल कति हुन्छ (π = 22/7)?',
     en: 'If the circumference is C = 88 cm, what is the area of the circle (π = 22/7)?',
     options: [
-      { key: 'A', label: '६१६ वर्ग सेमी [ r = १४ ⇒ A = २२/७ × १४² = ६१६ ]' },
-      { key: 'B', label: '३०८ वर्ग सेमी' },
-      { key: 'C', label: '५२८ वर्ग सेमी' },
-      { key: 'D', label: '१,२३२ वर्ग सेमी' },
+      { key: 'A', label: '616 sq cm [ r = 14 ⇒ A = 22/7 × 14² = 616 ]' },
+      { key: 'B', label: '308 sq cm' },
+      { key: 'C', label: '528 sq cm' },
+      { key: 'D', label: '1,232 sq cm' },
     ],
     answer: 'A',
   },
@@ -114,14 +114,14 @@ export const CircleCircumferenceLab: React.FC<{
 
   const CHALLENGES = [
     {
-      qNp: 'एउटा गोलाकार पोखरीको अर्धव्यास २१ मिटर छ। यसको वरिपरि १ फन्को लगाउँदा कति दूरी पार हुन्छ (परिधि C पत्ता लगाउनुहोस्, π = २२/७)?',
+      qNp: 'एउटा गोलाकार पोखरीको अर्धव्यास 21 m छ। यसको वरिपरि 1 फन्को लगाउँदा कति दूरी पार हुन्छ (परिधि C पत्ता लगाउनुहोस्, π = 22/7)?',
       qEn: 'A circular pond has radius 21 m. Find the distance around 1 round (circumference C, π = 22/7).',
       ans: 2 * (22 / 7) * 21, // 132 m
       unit: 'm',
       formula: 'C = 2πr = 2 × (22/7) × 21 = 132 m',
     },
     {
-      qNp: 'एउटा वृत्तको क्षेत्रफल ६१६ वर्ग सेमी भए यसको अर्धव्यास (r) कति हुन्छ?',
+      qNp: 'एउटा वृत्तको क्षेत्रफल 616 sq cm भए यसको Radius (r) कति हुन्छ?',
       qEn: 'If the area of a circle is 616 cm², what is its radius (r)?',
       ans: Math.sqrt((616 * 7) / 22), // 14 cm
       unit: 'cm',
@@ -168,7 +168,7 @@ export const CircleCircumferenceLab: React.FC<{
             }`}
           >
             <Circle className="w-4 h-4" />
-            {L('१. अर्धव्यास, परिधि र π (Radius & Pi)', '1. Radius, Circumference & Pi')}
+            {L('1. अर्धव्यास, परिधि र π (Radius & Pi)', '1. Radius, Circumference & Pi')}
           </button>
           <button
             onClick={() => setActiveTab('sector_derivation')}
@@ -177,7 +177,7 @@ export const CircleCircumferenceLab: React.FC<{
             }`}
           >
             <Scissors className="w-4 h-4" />
-            {L('२. खण्डीकरणबाट क्षेत्रफल प्रतिपादन (Area Derivation)', '2. Area Derivation Activity')}
+            {L('2. खण्डीकरणबाट क्षेत्रफल प्रतिपादन (Area Derivation)', '2. Area Derivation Activity')}
           </button>
           <button
             onClick={() => setActiveTab('reverse_solver')}
@@ -186,7 +186,7 @@ export const CircleCircumferenceLab: React.FC<{
             }`}
           >
             <Compass className="w-4 h-4" />
-            {L('३. क्षेत्रफलबाट अर्धव्यास (Reverse Solver)', '3. Reverse Solver (CDC 5544 cm²)')}
+            {L('3. क्षेत्रफलबाट अर्धव्यास (Reverse Solver)', '3. Reverse Solver (CDC 5544 cm²)')}
           </button>
           <button
             onClick={() => setActiveTab('challenge')}
@@ -195,7 +195,7 @@ export const CircleCircumferenceLab: React.FC<{
             }`}
           >
             <Award className="w-4 h-4" />
-            {L('४. वृत्त चुनौती (CDC Challenge)', '4. CDC Challenge')}
+            {L('4. वृत्त चुनौती (CDC Challenge)', '4. CDC Challenge')}
           </button>
         </div>
 
@@ -271,7 +271,7 @@ export const CircleCircumferenceLab: React.FC<{
 
                   {/* Circumference boundary indicator */}
                   <text x="130" y="245" fill="#a5b4fc" fontSize="10" textAnchor="middle" fontWeight="bold">
-                    {L('परिधि (Circumference C = २πr)', 'Circumference C = 2πr')}
+                    {L('परिधि (Circumference C = 2πr)', 'Circumference C = 2πr')}
                   </text>
                 </svg>
               </div>
@@ -298,7 +298,7 @@ export const CircleCircumferenceLab: React.FC<{
                   <div className="p-3 bg-slate-900 rounded-xl border border-indigo-500/40 text-xs font-mono">
                     <div className="text-amber-400 font-bold">{L('π को खोजी (Discovering π = C ÷ d):', 'Discovering π = C ÷ d:')}</div>
                     <div className="mt-1 text-slate-300">
-                      {toNp(circumference.toFixed(2))} ÷ {toNp(diameter)} = <b className="text-emerald-400 text-sm">≈ {toNp((circumference / diameter).toFixed(4))} (२२/७ वा ३.१४)</b>
+                      {toNp(circumference.toFixed(2))} ÷ {toNp(diameter)} = <b className="text-emerald-400 text-sm">≈ {toNp((circumference / diameter).toFixed(4))} (22/7 or 3.14)</b>
                     </div>
                   </div>
                 </div>
@@ -347,7 +347,7 @@ export const CircleCircumferenceLab: React.FC<{
                     sectorStep === 0 ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                   }`}
                 >
-                  {L('१. वृत्त र १२ खण्डहरू', '1. Intact Circle (12 Sectors)')}
+                  {L('1. वृत्त र 12 खण्डहरू', '1. Intact Circle (12 Sectors)')}
                 </button>
                 <button
                   onClick={() => setSectorStep(1)}
@@ -355,7 +355,7 @@ export const CircleCircumferenceLab: React.FC<{
                     sectorStep === 1 ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                   }`}
                 >
-                  {L('२. खण्डहरू छुट्याउने', '2. Separating Sectors')}
+                  {L('2. खण्डहरू छुट्याउने', '2. Separating Sectors')}
                 </button>
                 <button
                   onClick={() => setSectorStep(2)}
@@ -363,7 +363,7 @@ export const CircleCircumferenceLab: React.FC<{
                     sectorStep === 2 ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                   }`}
                 >
-                  {L('३. समानान्तर चतुर्भुज बनाउने', '3. Parallelogram Formed')}
+                  {L('3. समानान्तर चतुर्भुज बनाउने', '3. Parallelogram Formed')}
                 </button>
               </div>
 
@@ -440,10 +440,10 @@ export const CircleCircumferenceLab: React.FC<{
               {/* Mathematical Proof Card */}
               <div className="bg-indigo-50 p-6 rounded-2xl border border-indigo-200 text-sm space-y-2 text-indigo-950 font-mono">
                 <div className="font-bold text-base text-indigo-900 font-sans">{L('गणितीय प्रतिपादन निष्कर्ष:', 'Derivation Proof:')}</div>
-                <div>१. समानान्तर चतुर्भुजको आधार = आधा परिधि = (२πr) ÷ २ = <b>πr</b></div>
-                <div>२. समानान्तर चतुर्भुजको उचाइ = वृत्तको अर्धव्यास = <b>r</b></div>
+                <div>1. Base of the parallelogram = half the circumference = (2πr) ÷ 2 = <b>πr</b></div>
+                <div>2. Height of the parallelogram = radius of the circle = <b>r</b></div>
                 <div className="text-base text-emerald-800 font-bold pt-2 border-t border-indigo-200 font-sans">
-                  ३. क्षेत्रफल = आधार × उचाइ = πr × r = <span className="text-2xl text-emerald-700">πr²</span>
+                  3. Area = base × height = πr × r = <span className="text-2xl text-emerald-700">πr²</span>
                 </div>
               </div>
             </div>
@@ -460,7 +460,7 @@ export const CircleCircumferenceLab: React.FC<{
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
                   {L(
-                    'पाठ्यपुस्तक उदाहरण: वृत्तको क्षेत्रफल ५,५४४ वर्ग सेमी भए अर्धव्यास र परिधि कति हुन्छ?',
+                    'पाठ्यपुस्तक उदाहरण: वृत्तको क्षेत्रफल 5,544 sq cm भए अर्धव्यास र परिधि कति हुन्छ?',
                     'CDC Example: Area = 5,544 cm², find radius and circumference using π = 22/7.'
                   )}
                 </p>
@@ -492,13 +492,13 @@ export const CircleCircumferenceLab: React.FC<{
 
                 <div className="bg-slate-900 text-white p-5 rounded-2xl space-y-3 font-mono text-xs">
                   <div className="text-amber-400 font-bold uppercase">{L('चरणबद्ध समाधान:', 'Step-by-Step Working:')}</div>
-                  <div>१. सूत्र: A = πr² ⇒ {toNp(givenArea)} = (२२/७) × r²</div>
-                  <div>२. r² = ({toNp(givenArea)} × ७) ÷ २२ = {toNp((givenArea * 7 / 22).toFixed(1))}</div>
+                  <div>1. Formula: A = πr² ⇒ {toNp(givenArea)} = (22/7) × r²</div>
+                  <div>2. r² = ({toNp(givenArea)} × 7) ÷ 22 = {toNp((givenArea * 7 / 22).toFixed(1))}</div>
                   <div className="text-emerald-400 text-base font-bold font-sans">
-                    ३. अर्धव्यास r = √{toNp((givenArea * 7 / 22).toFixed(0))} = <b>{toNp(calculatedRadiusFromArea.toFixed(1))} cm</b>
+                    3. Radius r = √{toNp((givenArea * 7 / 22).toFixed(0))} = <b>{toNp(calculatedRadiusFromArea.toFixed(1))} cm</b>
                   </div>
                   <div className="text-sky-300 font-sans">
-                    ४. परिधि C = २πr = २ × (२२/७) × {toNp(calculatedRadiusFromArea.toFixed(1))} = <b>{toNp(calculatedCircumferenceFromArea.toFixed(1))} cm</b>
+                    4. Circumference C = 2πr = 2 × (22/7) × {toNp(calculatedRadiusFromArea.toFixed(1))} = <b>{toNp(calculatedCircumferenceFromArea.toFixed(1))} cm</b>
                   </div>
                 </div>
               </div>

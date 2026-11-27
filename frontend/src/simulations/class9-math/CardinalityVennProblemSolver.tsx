@@ -6,24 +6,24 @@ import { Calculator, Award, ArrowRight, CheckCircle2, RotateCcw, HelpCircle } fr
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'यदि n(A) = ३०, n(B) = २५ र n(A ∩ B) = १० भए n(A ∪ B) को मान कति हुन्छ?',
+    np: 'यदि n(A) = 30, n(B) = 25 र n(A ∩ B) = 10 भए n(A ∪ B) को मान कति हुन्छ?',
     en: 'If n(A) = 30, n(B) = 25, and n(A ∩ B) = 10, what is n(A ∪ B)?',
     options: [
-      { key: 'A', label: '४५ — (३० + २५ − १० = ४५)' },
-      { key: 'B', label: '५५' },
-      { key: 'C', label: '६५' },
-      { key: 'D', label: '३५' },
+      { key: 'A', label: '45 — (30 + 25 − 10 = 45)' },
+      { key: 'B', label: '55' },
+      { key: 'C', label: '65' },
+      { key: 'D', label: '35' },
     ],
     answer: 'A',
   },
   {
-    np: '५० जना विद्यार्थीमा ३० जनाले फुटबल र २५ जनाले भलिबल मन पराउँछन्। ५ जनाले दुवै खेल मन पराउँदैनन् भने दुवै खेल मन पराउने सङ्ख्या कति हुन्छ?',
+    np: '50 जना विद्यार्थीमा 30 जनाले फुटबल र 25 peopleले भलिबल मन पराउँछन्। 5 peopleले दुवै खेल मन पराउँदैनन् भने दुवै खेल मन पराउने सङ्ख्या कति हुन्छ?',
     en: 'In a group of 50 students, 30 like football, 25 like volleyball, and 5 like neither. How many like both?',
     options: [
-      { key: 'A', label: '१० जना — n(F ∪ V) = ४५, अतः ३० + २५ − ४५ = १०' },
-      { key: 'B', label: '१५ जना' },
-      { key: 'C', label: '५ जना' },
-      { key: 'D', label: '२० जना' },
+      { key: 'A', label: '10 people — n(F ∪ V) = 45, so 30 + 25 − 45 = 10' },
+      { key: 'B', label: '15 people' },
+      { key: 'C', label: '5 people' },
+      { key: 'D', label: '20 people' },
     ],
     answer: 'A',
   },
@@ -31,10 +31,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'n₀(A) ले कुन भागको सदस्य सङ्ख्या जनाउँछ?',
     en: 'What does n₀(A) represent?',
     options: [
-      { key: 'A', label: 'A मा मात्र पर्ने सदस्य सङ्ख्या: n(A − B) = n(A) − n(A ∩ B)' },
-      { key: 'B', label: 'A र B दुवैमा पर्ने सदस्य सङ्ख्या' },
-      { key: 'C', label: 'A बाहेकका सबै सदस्यहरू' },
-      { key: 'D', label: 'B मा मात्र पर्ने सदस्यहरू' },
+      { key: 'A', label: 'Number of members in A only: n(A − B) = n(A) − n(A ∩ B)' },
+      { key: 'B', label: 'Number of members in both A and B' },
+      { key: 'C', label: 'All members except those in A' },
+      { key: 'D', label: 'Members in B only' },
     ],
     answer: 'A',
   },
@@ -71,8 +71,8 @@ interface WordProblem {
 const WORD_PROBLEMS: WordProblem[] = [
   {
     id: 'sports',
-    titleNp: 'समस्या १: खेलकुद सर्वेक्षण (Sports Survey)',
-    scenarioNp: 'कक्षा ९ का ६० जना विद्यार्थीहरूमा गरिएको सर्वेक्षणमा ३५ जनाले फुटबल (F), ३० जनाले भलिबल (V) र ५ जनाले कुनै पनि खेल मन पराउँदैनन्।',
+    titleNp: 'Problem 1: Sports survey',
+    scenarioNp: 'In a survey of 60 Class 9 students, 35 like football (F), 30 like volleyball (V) and 5 like neither game.',
     scenarioEn: 'In a survey of 60 students, 35 like Football, 30 like Volleyball, and 5 like neither.',
     nU: 60,
     nA: 35,
@@ -80,16 +80,16 @@ const WORD_PROBLEMS: WordProblem[] = [
     nNeither: 5,
     labelA: 'फुटबल (F)',
     labelB: 'भलिबल (V)',
-    questionNp: 'दुवै खेल मन पराउने विद्यार्थी सङ्ख्या n(F ∩ V) कति होला?',
+    questionNp: 'How many students like both games, n(F ∩ V)?',
     correctAnswer: 10,
     type: 'find_both',
     explanationNp:
-      'n(F ∪ V) = n(U) − n(F ∪ V)\' = ६० − ५ = ५५। सूत्रानुसार: n(F ∩ V) = n(F) + n(V) − n(F ∪ V) = ३५ + ३० − ५५ = १० जना।',
+      'n(F ∪ V) = n(U) − n(F ∪ V)\' = 60 − 5 = 55। सूत्रानुसार: n(F ∩ V) = n(F) + n(V) − n(F ∪ V) = 35 + 30 − 55 = 10 जना।',
   },
   {
     id: 'exam',
-    titleNp: 'समस्या २: परीक्षा उत्तीर्ण तथ्याङ्क (Exam Results)',
-    scenarioNp: '१०० जना विद्यार्थीहरूमा ६५ जना गणितमा, ५५ जना विज्ञानमा र ४० जना दुवै विषयमा उत्तीर्ण भए।',
+    titleNp: 'Problem 2: Exam results',
+    scenarioNp: '100 जना विद्यार्थीहरूमा 65 people गणितमा, 55 people विज्ञानमा र 40 जना दुवै विषयमा उत्तीर्ण भए।',
     scenarioEn: 'Out of 100 students, 65 passed in Math, 55 in Science, and 40 in both.',
     nU: 100,
     nA: 65,
@@ -101,12 +101,12 @@ const WORD_PROBLEMS: WordProblem[] = [
     correctAnswer: 20,
     type: 'find_neither',
     explanationNp:
-      'n(M ∪ S) = n(M) + n(S) − n(M ∩ S) = ६५ + ५५ − ४० = ८०। अतः दुवैमा अनुत्तीर्ण = n(U) − n(M ∪ S) = १०० − ८० = २० जना।',
+      'n(M ∪ S) = n(M) + n(S) − n(M ∩ S) = 65 + 55 − 40 = 80। अतः दुवैमा अनुत्तीर्ण = n(U) − n(M ∪ S) = 100 − 80 = 20 people।',
   },
   {
     id: 'beverage',
-    titleNp: 'समस्या ३: चिया र कफी (Tea and Coffee)',
-    scenarioNp: '८० जनाको समूहमा ५० जनाले चिया (T), ४० जनाले कफी (C) र २० जनाले दुवै पेय मन पराउँछन्।',
+    titleNp: 'Problem 3: Tea and coffee',
+    scenarioNp: '80 जनाको समूहमा 50 जनाले चिया (T), 40 जनाले कफी (C) र 20 peopleले दुवै पेय मन पराउँछन्।',
     scenarioEn: 'In a group of 80 people, 50 like Tea, 40 like Coffee, and 20 like both.',
     nU: 80,
     nA: 50,
@@ -118,7 +118,7 @@ const WORD_PROBLEMS: WordProblem[] = [
     correctAnswer: 30, // 50 - 20 = 30
     type: 'find_onlyA',
     explanationNp:
-      'n₀(T) = n(T) − n(T ∩ C) = ५० − २० = ३० जना।',
+      'n₀(T) = n(T) − n(T ∩ C) = 50 − 20 = 30 जना।',
   },
 ];
 
@@ -194,7 +194,7 @@ export const CardinalityVennProblemSolver: React.FC<{
               activeTab === 'interactive' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🧮 {L('१. गणनात्मकता प्रयोगशाला (Cardinality Lab)', '1. Cardinality Lab')}
+            🧮 {L('1. गणनात्मकता प्रयोगशाला (Cardinality Lab)', '1. Cardinality Lab')}
           </button>
           <button
             onClick={() => setActiveTab('word_problems')}
@@ -202,7 +202,7 @@ export const CardinalityVennProblemSolver: React.FC<{
               activeTab === 'word_problems' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            📝 {L('२. शाब्दिक समस्या समाधान (Word Problems)', '2. Word Problems')}
+            📝 {L('2. शाब्दिक समस्या समाधान (Word Problems)', '2. Word Problems')}
           </button>
           <button
             onClick={() => setActiveTab('three_sets')}
@@ -210,7 +210,7 @@ export const CardinalityVennProblemSolver: React.FC<{
               activeTab === 'three_sets' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🔢 {L('३. तीन समूह सूत्र (3-Set Cardinality)', '3. 3-Set Cardinality')}
+            🔢 {L('3. तीन समूह सूत्र (3-Set Cardinality)', '3. 3-Set Cardinality')}
           </button>
         </div>
 
@@ -221,7 +221,7 @@ export const CardinalityVennProblemSolver: React.FC<{
             <div className="lg:col-span-7 bg-white rounded-2xl shadow-lg p-5 border border-slate-200 flex flex-col items-center">
               <div className="w-full flex justify-between items-center mb-2 px-1 text-xs">
                 <span className="font-bold text-slate-700">
-                  संख्यात्मक भेन चित्र (Numerical Venn Diagram)
+                  Numerical Venn diagram
                 </span>
                 <span className="font-mono bg-indigo-100 text-indigo-900 px-2.5 py-0.5 rounded-full font-bold">
                   n(U) = {nU}
@@ -246,10 +246,10 @@ export const CardinalityVennProblemSolver: React.FC<{
 
                 {/* Labels */}
                 <text x={120} y={75} fontSize="16" fontWeight="bold" fill="#1d4ed8">
-                  A (कुल {nA})
+                  A
                 </text>
                 <text x={360} y={75} fontSize="16" fontWeight="bold" fill="#047857">
-                  B (कुल {nB})
+                  B
                 </text>
 
                 {/* Region Numbers */}
@@ -289,7 +289,7 @@ export const CardinalityVennProblemSolver: React.FC<{
               {/* Formula Verification Cards */}
               <div className="w-full mt-4 grid grid-cols-2 gap-2 text-xs">
                 <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl space-y-1">
-                  <span className="font-bold text-blue-900 block">१. n(A ∪ B) को सूत्र:</span>
+                  <span className="font-bold text-blue-900 block">1. Formula for n(A ∪ B):</span>
                   <div className="font-mono text-blue-800 font-semibold">
                     n(A) + n(B) − n(A ∩ B)
                     <br />= {nA} + {nB} − {intersectVal} = <b className="text-sm text-blue-900">{nUnion}</b>
@@ -297,7 +297,7 @@ export const CardinalityVennProblemSolver: React.FC<{
                 </div>
 
                 <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
-                  <span className="font-bold text-emerald-900 block">२. सर्वव्यापक समूह n(U):</span>
+                  <span className="font-bold text-emerald-900 block">2. Universal set n(U):</span>
                   <div className="font-mono text-emerald-800 font-semibold">
                     n(A ∪ B) + n(A ∪ B)'
                     <br />= {nUnion} + {neitherVal} = <b className="text-sm text-emerald-900">{nU}</b>
@@ -309,13 +309,13 @@ export const CardinalityVennProblemSolver: React.FC<{
             {/* Slider / Value Adjusters */}
             <div className="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
               <h3 className="font-extrabold text-slate-800 text-sm">
-                भेन चित्रका खण्डहरूको मान परिवर्तन गर्नुहोस्:
+                Change the values of the Venn diagram regions:
               </h3>
 
               {/* Slider 1: Only A */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>A मात्र — n₀(A):</span>
+                  <span>A only — n₀(A):</span>
                   <span className="font-mono text-blue-600">{onlyAVal}</span>
                 </div>
                 <input
@@ -331,7 +331,7 @@ export const CardinalityVennProblemSolver: React.FC<{
               {/* Slider 2: Intersection */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>साझा भाग — n(A ∩ B):</span>
+                  <span>Common part — n(A ∩ B):</span>
                   <span className="font-mono text-amber-600">{intersectVal}</span>
                 </div>
                 <input
@@ -347,7 +347,7 @@ export const CardinalityVennProblemSolver: React.FC<{
               {/* Slider 3: Only B */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>B मात्र — n₀(B):</span>
+                  <span>B only — n₀(B):</span>
                   <span className="font-mono text-emerald-600">{onlyBVal}</span>
                 </div>
                 <input
@@ -363,7 +363,7 @@ export const CardinalityVennProblemSolver: React.FC<{
               {/* Slider 4: Neither */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>कुनै पनि नपर्ने — n(A ∪ B)':</span>
+                  <span>Neither — n(A ∪ B)':</span>
                   <span className="font-mono text-slate-600">{neitherVal}</span>
                 </div>
                 <input
@@ -425,7 +425,7 @@ export const CardinalityVennProblemSolver: React.FC<{
             <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="number"
-                placeholder="तपाईंको जवाफ (संख्यामा)..."
+                placeholder="Your answer (in numbers)..."
                 value={userAnswer}
                 onChange={(e) => {
                   setUserAnswer(e.target.value);
@@ -438,7 +438,7 @@ export const CardinalityVennProblemSolver: React.FC<{
                 disabled={!userAnswer}
                 className="py-3 px-6 bg-amber-600 hover:bg-amber-700 disabled:opacity-50 text-white font-bold rounded-xl text-xs shadow-md transition"
               >
-                जाँच गर्नुहोस् (Check Answer)
+                Check answer
               </button>
               {feedback?.isCorrect && (
                 <button
@@ -484,11 +484,11 @@ export const CardinalityVennProblemSolver: React.FC<{
         {activeTab === 'three_sets' && (
           <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-4 text-xs">
             <h3 className="font-extrabold text-slate-800 text-base text-center">
-              तीन समूहको गणनात्मकता सूत्र र सम्बन्ध
+              Cardinality formula and relations for three sets
             </h3>
 
             <div className="p-4 bg-indigo-50 border border-indigo-200 rounded-xl space-y-2 text-indigo-950">
-              <span className="font-bold block">मुख्य सूत्र (Fundamental Formula for 3 Sets):</span>
+              <span className="font-bold block">Fundamental formula for 3 sets:</span>
               <div className="p-3 bg-white rounded border border-indigo-200 font-mono text-center font-bold text-sm text-indigo-700">
                 n(A ∪ B ∪ C) = n(A) + n(B) + n(C)
                 <br />− n(A ∩ B) − n(B ∩ C) − n(C ∩ A)
@@ -498,7 +498,7 @@ export const CardinalityVennProblemSolver: React.FC<{
 
             <div className="space-y-2 text-slate-700 leading-relaxed">
               <p>
-                <b>१. केवल एउटा मात्र मन पराउने सदस्यहरूको सङ्ख्या:</b>
+                <b>1. Number of members who like only one:</b>
               </p>
               <ul className="list-disc list-inside space-y-1 font-mono text-[11px] bg-slate-50 p-2.5 rounded-lg border">
                 <li>n₀(A) = n(A) − n(A ∩ B) − n(A ∩ C) + n(A ∩ B ∩ C)</li>
@@ -507,7 +507,7 @@ export const CardinalityVennProblemSolver: React.FC<{
               </ul>
 
               <p className="pt-2">
-                <b>२. जम्मा सर्वव्यापक समूह n(U):</b>
+                <b>2. Total universal set n(U):</b>
               </p>
               <div className="p-2.5 bg-slate-50 rounded-lg border font-mono text-[11px]">
                 n(U) = n(A ∪ B ∪ C) + n(A ∪ B ∪ C)'

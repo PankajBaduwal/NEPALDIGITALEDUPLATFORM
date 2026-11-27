@@ -1,7 +1,7 @@
 /**
  * PlanetEarthSim.tsx
- * Simulation 28: 2D Explore Planet Earth (हाम्रो पृथ्वी - ग्लोब अन्वेषक)
- * Grade 4 Science • Chapter 8: The Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 28: 2D Explore Planet Earth
+ * Grade 4 Science • Chapter 8: The Earth and Space
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
@@ -11,7 +11,7 @@
  *   - Day/Night terminator line with glowing city lights on the night hemisphere
  *   - Atmospheric cyan scattering rim glow
  * - Nepal Location Pinpoint (28°N, 84°E): Mount Everest & Himalayan ridge highlighted
- * - Geographical reference overlays: Equator (भूमध्य रेखा), Axis of Rotation, North/South Poles
+ * - Geographical reference overlays: Equator, Axis of Rotation, North/South Poles
  * - Rotation speed controls, Bilingual EN/NE, and curriculum mastery quiz.
  */
 import React, { useState, useRef, useEffect } from 'react';
@@ -32,7 +32,7 @@ export const PlanetEarthSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -54,21 +54,21 @@ export const PlanetEarthSim: React.FC<BaseSimulationProps> = ({
   const landmarks: Landmark[] = [
     {
       id: 'nepal',
-      nameEn: 'Nepal & Himalayas (नेपाल र हिमालय)',
+      nameEn: 'Nepal & Himalayas',
       nameNe: 'नेपाल र हिमालय पर्वतमाला',
       descEn: 'Located at 28°N, 84°E in South Asia. Home to Mount Everest (8848.86m), the highest peak on Earth.',
-      descNe: 'दक्षिण एसियामा २८° उत्तर र ८४° पूर्वमा अवस्थित। यहाँ संसारकै सर्वोच्च शिखर सगरमाथा (८८४८.८६ मि.) पर्दछ।',
+      descNe: 'दक्षिण एसियामा 28° उत्तर र 84° पूर्वमा अवस्थित। यहाँ संसारकै सर्वोच्च शिखर सगरमाथा (8848.86 मि.) पर्दछ।',
     },
     {
       id: 'equator',
-      nameEn: 'Equator (भूमध्य रेखा / ०° अक्षांश)',
+      nameEn: 'Equator',
       nameNe: 'भूमध्य रेखा (Equator)',
       descEn: 'The imaginary line dividing Earth into Northern and Southern Hemispheres, receiving direct sunlight year-round.',
       descNe: 'पृथ्वीलाई उत्तरी र दक्षिणी गोलार्धमा विभाजन गर्ने शून्य डिग्री अक्षांश रेखा।',
     },
     {
       id: 'poles',
-      nameEn: 'Poles (उत्तरी र दक्षिणी ध्रुव)',
+      nameEn: 'Poles',
       nameNe: 'ध्रुवीय क्षेत्र (North & South Poles)',
       descEn: 'The northernmost and southernmost points around which Earth rotates, permanently covered with ice sheets.',
       descNe: 'पृथ्वीको अक्षका दुई छेउहरू, जहाँ अत्यधिक चिसो हुन्छ र बाह्रै महिना हिउँ जमेको हुन्छ।',
@@ -354,7 +354,7 @@ export const PlanetEarthSim: React.FC<BaseSimulationProps> = ({
       ctx.fillStyle = '#fde047';
       ctx.font = 'bold 11px system-ui';
       ctx.textAlign = 'left';
-      ctx.fillText('🇳🇵 Nepal (नेपाल)', pinX + 18, pinY + 3);
+      ctx.fillText('🇳🇵 Nepal', pinX + 18, pinY + 3);
     }
     ctx.restore();
   }
@@ -420,8 +420,8 @@ export const PlanetEarthSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText('North Pole (उत्तरी ध्रुव)', 0, -r - 46);
-    ctx.fillText('South Pole (दक्षिणी ध्रुव)', 0, r + 55);
+    ctx.fillText('North Pole', 0, -r - 46);
+    ctx.fillText('South Pole', 0, r + 55);
 
     ctx.restore();
   }
@@ -442,12 +442,12 @@ export const PlanetEarthSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 13px system-ui';
     ctx.textAlign = 'left';
-    ctx.fillText(currentLang === 'en' ? 'Planet Earth (हाम्रो पृथ्वी)' : 'हाम्रो पृथ्वी (Planet Earth)', px + 14, py + 24);
+    ctx.fillText(currentLang === 'en' ? 'Planet Earth' : 'हाम्रो पृथ्वी (Planet Earth)', px + 14, py + 24);
 
     ctx.fillStyle = '#38bdf8';
     ctx.font = '10px system-ui';
-    ctx.fillText(currentLang === 'en' ? '• Axial Tilt: 23.5° (अक्षीय झुकाव)' : '• अक्षीय झुकाव: २३.५ डिग्री', px + 14, py + 42);
-    ctx.fillText(currentLang === 'en' ? '• Rotation: West to East (24 Hours)' : '• परिक्रमण: पश्चिमबाट पूर्व (२४ घण्टा)', px + 14, py + 56);
+    ctx.fillText(currentLang === 'en' ? '• Axial Tilt: 23.5°' : '• अक्षीय झुकाव: 23.5 डिग्री', px + 14, py + 42);
+    ctx.fillText(currentLang === 'en' ? '• Rotation: West to East (24 Hours)' : '• परिक्रमण: पश्चिमबाट पूर्व (24 घण्टा)', px + 14, py + 56);
 
     ctx.restore();
   }
@@ -471,7 +471,7 @@ export const PlanetEarthSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 8: The Earth and Space'
-          : 'कक्षा ४ विज्ञान • एकाइ ८: पृथ्वी र अन्तरिक्ष'
+          : 'कक्षा 4 विज्ञान • एकाइ 8: पृथ्वी र अन्तरिक्ष'
       }
       currentStage={stage}
       onStageChange={setStage}
@@ -599,7 +599,7 @@ export const PlanetEarthSim: React.FC<BaseSimulationProps> = ({
                 <div style={{ fontSize: '11px', color: '#64748b' }}>
                   {lang === 'en'
                     ? '23.5° Axial Tilt • 24 Hours Rotation (Day/Night) • 365.25 Days Revolution'
-                    : '२३.५° को अक्षीय ढल्काइ • २४ घण्टामा एक परिक्रमण • ३६५ दिनमा एक वर्ष'}
+                    : '23.5° को अक्षीय ढल्काइ • 24 घण्टामा एक परिक्रमण • 365 दिनमा एक वर्ष'}
                 </div>
               </div>
             </div>

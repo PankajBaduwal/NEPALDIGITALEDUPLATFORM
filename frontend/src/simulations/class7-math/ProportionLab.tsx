@@ -1,6 +1,6 @@
 /**
  * ProportionLab.tsx
- * Grade 7 Mathematics – Lesson 6: RATIO AND PROPORTION (अनुपात र समानुपात)
+ * Grade 7 Mathematics – Lesson 6: RATIO AND PROPORTION
  * Simulation 2: Proportion and Cross-Multiplication Lab (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 93-97)
  */
@@ -15,32 +15,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समानुपात a : b :: c : d मा मध्यम पदहरू (Means) कुन-कुन हुन्?',
     en: 'In proportion a : b :: c : d, which terms are the Means?',
     options: [
-      { key: 'A', label: 'b र c (b and c)' },
-      { key: 'B', label: 'a र d (a and d)' },
-      { key: 'C', label: 'a र b' },
-      { key: 'D', label: 'c र d' },
+      { key: 'A', label: 'b and c' },
+      { key: 'B', label: 'a and d' },
+      { key: 'C', label: 'a and b' },
+      { key: 'D', label: 'c and d' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि ३ : ५ :: १२ : x समानुपातमा छन् भने x को मान कति हुन्छ?',
+    np: 'यदि 3 : 5 :: 12 : x समानुपातमा छन् भने x को मान कति हुन्छ?',
     en: 'If 3 : 5 :: 12 : x are in proportion, what is the value of x?',
     options: [
-      { key: 'A', label: '२० (३ × x = ५ × १२ => x = ६०/३ = २०)' },
-      { key: 'B', label: '१५' },
-      { key: 'C', label: '२५' },
-      { key: 'D', label: '३६' },
+      { key: 'A', label: '20 (3 × x = 5 × 12 => x = 60/3 = 20)' },
+      { key: 'B', label: '15' },
+      { key: 'C', label: '25' },
+      { key: 'D', label: '36' },
     ],
     answer: 'A',
   },
   {
-    np: 'दीपेन्द्रले ३० पूर्णाङ्कमा २५ र नर्मदाले २४ पूर्णाङ्कमा २० अङ्क प्राप्त गर्दा के तिनीहरूको प्राप्ताङ्कको अनुपात समानुपातिक छ?',
+    np: 'दीपेन्द्रले 30 पूर्णाङ्कमा 25 र नर्मदाले 24 पूर्णाङ्कमा 20 अङ्क प्राप्त गर्दा के तिनीहरूको प्राप्ताङ्कको अनुपात समानुपातिक छ?',
     en: 'Dipendra scored 25 out of 30, and Narmada scored 20 out of 24. Are their score ratios in proportion?',
     options: [
-      { key: 'A', label: 'हो, दुवै ५/६ बराबर हुन्छन् (२५/३० = २०/२४ = ५/६)' },
-      { key: 'B', label: 'होइन, प्राप्ताङ्क फरक छ' },
-      { key: 'C', label: 'दीपेन्द्रको मात्र बढी छ' },
-      { key: 'D', label: 'निर्णय गर्न सकिँदैन' },
+      { key: 'A', label: 'Yes, both equal 5/6 (25/30 = 20/24 = 5/6)' },
+      { key: 'B', label: 'No, the marks are different' },
+      { key: 'C', label: 'Only Dipendra’s is higher' },
+      { key: 'D', label: 'Cannot be decided' },
     ],
     answer: 'A',
   },
@@ -48,7 +48,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समानुपातको आधारभूत नियम कुन हो?',
     en: 'What is the fundamental law of proportion?',
     options: [
-      { key: 'A', label: 'चरम पदहरूको गुणनफल = मध्यम पदहरूको गुणनफल (a × d = b × c)' },
+      { key: 'A', label: 'Product of the extremes = product of the means (a × d = b × c)' },
       { key: 'B', label: 'a + d = b + c' },
       { key: 'C', label: 'a - d = b - c' },
       { key: 'D', label: 'a × b = c × d' },
@@ -116,10 +116,10 @@ export const ProportionLab: React.FC<{ onBackToLibrary?: () => void; onBack?: ()
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'concept', np: '१. समानुपातको अवधारणा', en: '1. Proportion Concept' },
-            { id: 'means-extremes', np: '२. चरम र मध्यम पद (Extremes & Means)', en: '2. Extremes & Means' },
-            { id: 'checker', np: '३. समानुपात परीक्षण (Proportion Checker)', en: '3. Proportion Checker' },
-            { id: 'solver', np: '४. अज्ञात पद पत्ता लगाउने (Solve for x)', en: '4. Find Missing Term (x)' },
+            { id: 'concept', np: '1. समानुपातको अवधारणा', en: '1. Proportion Concept' },
+            { id: 'means-extremes', np: '2. चरम र मध्यम पद (Extremes & Means)', en: '2. Extremes & Means' },
+            { id: 'checker', np: '3. समानुपात परीक्षण (Proportion Checker)', en: '3. Proportion Checker' },
+            { id: 'solver', np: '4. अज्ञात पद पत्ता लगाउने (Solve for x)', en: '4. Find Missing Term (x)' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -151,7 +151,7 @@ export const ProportionLab: React.FC<{ onBackToLibrary?: () => void; onBack?: ()
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'यदि a : b र c : d दुई बराबर अनुपातहरू हुन् भने, तिनीहरूको सम्बन्ध a : b :: c : d (पढ्दा: a का मुनि b समानुपात c का मुनि d) लेखिन्छ।',
+                'यदि a : b र c : d दुई बराबर अनुपातहरू हुन् भने, तिनीहरूको सम्बन्ध a : b :: c : d लेखिन्छ।',
                 'If two ratios a : b and c : d are equal, their relation is written as a : b :: c : d (read: a is to b as c is to d).'
               )}
             </p>
@@ -341,12 +341,12 @@ export const ProportionLab: React.FC<{ onBackToLibrary?: () => void; onBack?: ()
               </div>
               <div style={{ fontSize: 13, color: '#78350F', marginTop: 4 }}>
                 {L(
-                  'दीपेन्द्रले ३० पूर्णाङ्कमा २५ अङ्क ल्याए (२५ : ३० = ५ : ६)। नर्मदाले २४ पूर्णाङ्कमा २० अङ्क ल्याइन् (२० : २४ = ५ : ६)।',
+                  'दीपेन्द्रले 30 पूर्णाङ्कमा 25 अङ्क ल्याए (25 : 30 = 5 : 6)। नर्मदाले 24 पूर्णाङ्कमा 20 अङ्क ल्याइन् (20 : 24 = 5 : 6)।',
                   'Dipendra got 25 out of 30 (25 : 30 = 5 : 6). Narmada got 20 out of 24 (20 : 24 = 5 : 6).'
                 )}
                 <br />
                 {L(
-                  'यहाँ २५ : ३० :: २० : २४ एक समानुपात हो।',
+                  'यहाँ 25 : 30 :: 20 : 24 एक समानुपात हो।',
                   'Here 25 : 30 :: 20 : 24 forms a valid proportion.'
                 )}
               </div>
@@ -554,17 +554,17 @@ export const ProportionLab: React.FC<{ onBackToLibrary?: () => void; onBack?: ()
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'तलका अभ्यासका उदाहरणहरू परीक्षण गर्नुहोस् वा आफ्नै ४ सङ्ख्याहरू राख्नुहोस्:',
+                'तलका अभ्यासका उदाहरणहरू परीक्षण गर्नुहोस् वा आफ्नै 4 सङ्ख्याहरू राख्नुहोस्:',
                 'Test textbook exercises or enter any 4 numbers to check if they form a proportion:'
               )}
             </p>
 
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '14px 0' }}>
               {[
-                { terms: [3, 4, 9, 12] as [number, number, number, number], label: '३, ४, ९, १२ (पाठ्यपुस्तक क)' },
-                { terms: [7, 8, 14, 20] as [number, number, number, number], label: '७, ८, १४, २० (पाठ्यपुस्तक ख)' },
-                { terms: [5, 15, 8, 24] as [number, number, number, number], label: '५, १५, ८, २४' },
-                { terms: [12, 16, 18, 24] as [number, number, number, number], label: '१२, १६, १८, २४' },
+                { terms: [3, 4, 9, 12] as [number, number, number, number], label: '3, 4, 9, 12' },
+                { terms: [7, 8, 14, 20] as [number, number, number, number], label: '7, 8, 14, 20' },
+                { terms: [5, 15, 8, 24] as [number, number, number, number], label: '5, 15, 8, 24' },
+                { terms: [12, 16, 18, 24] as [number, number, number, number], label: '12, 16, 18, 24' },
               ].map((ex, i) => (
                 <button
                   key={i}
@@ -633,11 +633,11 @@ export const ProportionLab: React.FC<{ onBackToLibrary?: () => void; onBack?: ()
               }}
             >
               <div>
-                <strong>{L('१. चरम पदहरूको गुणनफल:', '1. Product of Extremes:')}</strong> {checkTerms[0]} ×{' '}
+                <strong>{L('1. चरम पदहरूको गुणनफल:', '1. Product of Extremes:')}</strong> {checkTerms[0]} ×{' '}
                 {checkTerms[3]} = <span style={{ fontWeight: 800, color: '#DC2626' }}>{checkExtremes}</span>
               </div>
               <div>
-                <strong>{L('२. मध्यम पदहरूको गुणनफल:', '2. Product of Means:')}</strong> {checkTerms[1]} ×{' '}
+                <strong>{L('2. मध्यम पदहरूको गुणनफल:', '2. Product of Means:')}</strong> {checkTerms[1]} ×{' '}
                 {checkTerms[2]} = <span style={{ fontWeight: 800, color: '#2563EB' }}>{checkMeans}</span>
               </div>
               <div
@@ -755,7 +755,7 @@ export const ProportionLab: React.FC<{ onBackToLibrary?: () => void; onBack?: ()
               <span style={{ fontSize: 24, fontWeight: 800, color: '#6366F1' }}>:</span>
 
               <div style={{ textAlign: 'center' }}>
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#DC2626' }}>x (चौथो पद)</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: '#DC2626' }}>x</span>
                 <div
                   style={{
                     width: 60,
@@ -786,16 +786,16 @@ export const ProportionLab: React.FC<{ onBackToLibrary?: () => void; onBack?: ()
               }}
             >
               <div>
-                <strong>{L('१. सुत्र:', '1. Formula:')}</strong> a × x = b × c (चरम पदहरूको गुणन = मध्यम पदहरूको गुणन)
+                <strong>{L('1. सुत्र:', '1. Formula:')}</strong> a × x = b × c
               </div>
               <div>
-                <strong>{L('२. मान राख्दा:', '2. Substituting values:')}</strong> {solveA} × x = {solveB} × {solveC}
+                <strong>{L('2. मान राख्दा:', '2. Substituting values:')}</strong> {solveA} × x = {solveB} × {solveC}
               </div>
               <div>
-                <strong>{L('३. गुणन गर्दा:', '3. Multiplying:')}</strong> {solveA}x = {solveB * solveC}
+                <strong>{L('3. गुणन गर्दा:', '3. Multiplying:')}</strong> {solveA}x = {solveB * solveC}
               </div>
               <div>
-                <strong>{L('४. बज्र गुणन र भाग गर्दा:', '4. Cross-dividing:')}</strong> x = {solveB * solveC} ÷ {solveA}
+                <strong>{L('4. बज्र गुणन र भाग गर्दा:', '4. Cross-dividing:')}</strong> x = {solveB * solveC} ÷ {solveA}
               </div>
               <div
                 style={{

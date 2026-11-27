@@ -1,9 +1,9 @@
 /**
  * LineColoringSimulation.tsx
- * Simulation 02: Colour the Lines (रेखाहरूमा रङ भरौँ)
- * Class 1 Mathematics - Chapter 2: Lines (रेखाहरू)
- * Based on Nepal CDC Curriculum (मेरो गणित, कक्षा १ - २०७६)
- * Core Rule: Straight Lines = BLUE (निलो), Curved Lines = RED (रातो)
+ * Simulation 02: Colour the Lines
+ * Class 1 Mathematics - Chapter 2: Lines
+ * Based on Nepal CDC Curriculum
+ * Core Rule: Straight Lines = BLUE, Curved Lines = RED
  */
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -57,7 +57,7 @@ export const LineColoringSimulation: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Language & Audio
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Selected tool
@@ -171,8 +171,8 @@ export const LineColoringSimulation: React.FC<Props> = ({
       instructionEn: 'Straight stick lines are BLUE, curved rope lines are RED.',
       instructionNp: 'सीधा लौरोमा निलो र बाङ्गो डोरीमा रातो रङ लगाउनुहोस्।',
       strokes: [
-        { id: 'm1', nameEn: 'Straight Stick 1', nameNp: 'सीधा लौरो १', type: 'straight', d: 'M 80,120 L 520,120', strokeWidth: 12, currentColor: null },
-        { id: 'm2', nameEn: 'Wavy Rope 1', nameNp: 'बाङ्गो डोरी १', type: 'curved', d: 'M 80,220 Q 180,150 280,220 T 480,220', strokeWidth: 10, currentColor: null },
+        { id: 'm1', nameEn: 'Straight Stick 1', nameNp: 'सीधा लौरो 1', type: 'straight', d: 'M 80,120 L 520,120', strokeWidth: 12, currentColor: null },
+        { id: 'm2', nameEn: 'Wavy Rope 1', nameNp: 'बाङ्गो डोरी 1', type: 'curved', d: 'M 80,220 Q 180,150 280,220 T 480,220', strokeWidth: 10, currentColor: null },
         { id: 'm3', nameEn: 'Slanted Stick', nameNp: 'छड्के लौरो', type: 'straight', d: 'M 120,480 L 300,280', strokeWidth: 12, currentColor: null },
         { id: 'm4', nameEn: 'Curved Snake Rope', nameNp: 'बाङ्गो घुमाउरो डोरी', type: 'curved', d: 'M 320,300 C 400,250 360,450 480,400', strokeWidth: 10, currentColor: null },
         { id: 'm5', nameEn: 'Straight Post', nameNp: 'सीधा खम्बा', type: 'straight', d: 'M 520,260 L 520,480', strokeWidth: 12, currentColor: null },
@@ -184,7 +184,7 @@ export const LineColoringSimulation: React.FC<Props> = ({
   const level3Scenes: PictureScene[] = [
     {
       id: 'l3_icecream',
-      titleEn: 'Delicious Ice Cream (आइसक्रिम)',
+      titleEn: 'Delicious Ice Cream',
       titleNp: 'मिठो आइसक्रिम',
       instructionEn: 'The cone has STRAIGHT edges (Blue). The scoops are CURVED (Red)!',
       instructionNp: 'आइसक्रिमको कोन सीधा रेखा (निलो) र माथिको गोलाकार बाङ्गो रेखा (रातो) हुन्छ!',
@@ -202,7 +202,7 @@ export const LineColoringSimulation: React.FC<Props> = ({
     },
     {
       id: 'l3_boat',
-      titleEn: 'Sailboat on Water (डुङ्गा र नदी)',
+      titleEn: 'Sailboat on Water',
       titleNp: 'तालमा डुङ्गा',
       instructionEn: 'Boat hull and mast have straight lines. Water waves are curved!',
       instructionNp: 'डुङ्गा र पालमा सीधा रेखा (निलो) र पानीको छालमा बाङ्गो रेखा (रातो) लगाउनुहोस्।',
@@ -223,7 +223,7 @@ export const LineColoringSimulation: React.FC<Props> = ({
     },
     {
       id: 'l3_house',
-      titleEn: 'Village House & Smoke (घर र धुवाँ)',
+      titleEn: 'Village House & Smoke',
       titleNp: 'गाउँको घर र धुवाँ',
       instructionEn: 'House walls & roof are STRAIGHT (Blue). Chimney smoke is CURVED (Red)!',
       instructionNp: 'घरको भित्ता र छाना सीधा रेखा (निलो) र धुवाँ बाङ्गो रेखा (रातो) हुन्छ!',
@@ -241,8 +241,8 @@ export const LineColoringSimulation: React.FC<Props> = ({
         { id: 'h_door_t', nameEn: 'Door Top', nameNp: 'ढोकाको माथिल्लो सीधा भाग', type: 'straight', d: 'M 270,320 L 330,320', strokeWidth: 8, currentColor: null },
         { id: 'h_door_r', nameEn: 'Door Right', nameNp: 'ढोकाको दाहिने सीधा भाग', type: 'straight', d: 'M 330,320 L 330,420', strokeWidth: 8, currentColor: null },
         // Smoke (Curved)
-        { id: 'h_smoke1', nameEn: 'Smoke Curve 1', nameNp: 'धुवाँको बाङ्गो रेखा १', type: 'curved', d: 'M 380,140 Q 420,110 390,80', strokeWidth: 8, currentColor: null },
-        { id: 'h_smoke2', nameEn: 'Smoke Curve 2', nameNp: 'धुवाँको बाङ्गो रेखा २', type: 'curved', d: 'M 390,80 Q 440,50 410,20', strokeWidth: 8, currentColor: null },
+        { id: 'h_smoke1', nameEn: 'Smoke Curve 1', nameNp: 'धुवाँको बाङ्गो रेखा 1', type: 'curved', d: 'M 380,140 Q 420,110 390,80', strokeWidth: 8, currentColor: null },
+        { id: 'h_smoke2', nameEn: 'Smoke Curve 2', nameNp: 'धुवाँको बाङ्गो रेखा 2', type: 'curved', d: 'M 390,80 Q 440,50 410,20', strokeWidth: 8, currentColor: null },
       ],
     },
   ];
@@ -467,7 +467,7 @@ export const LineColoringSimulation: React.FC<Props> = ({
               {language === 'np' ? 'रेखाहरूमा रङ भरौँ' : 'Colour the Lines'}
             </h1>
             <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
-              {language === 'np' ? 'कक्षा १ गणित • अध्याय २: रेखाहरू' : 'Class 1 Math • Chapter 2: Lines'}
+              {language === 'np' ? 'कक्षा 1 गणित • अध्याय 2: रेखाहरू' : 'Class 1 Math • Chapter 2: Lines'}
             </span>
           </div>
         </div>
@@ -519,21 +519,7 @@ export const LineColoringSimulation: React.FC<Props> = ({
           </div>
 
           {/* Language toggle */}
-          <button
-            onClick={() => setLanguage(language === 'np' ? 'en' : 'np')}
-            style={{
-              background: '#ede9fe',
-              color: '#6d28d9',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '13px',
-              cursor: 'pointer',
-            }}
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
 
           {/* Sound Toggle */}
           <button

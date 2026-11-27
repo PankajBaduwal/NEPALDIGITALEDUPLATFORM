@@ -1,7 +1,7 @@
 /**
  * AdditionChallengeWorld.tsx
- * Simulation 05: Addition Challenge World (जोड चुनौती संसार)
- * Class 1 Mathematics - Chapter 10: Addition up to 20 (योगफल २० सम्म आउने जोड)
+ * Simulation 05: Addition Challenge World
+ * Class 1 Mathematics - Chapter 10: Addition up to 20
  * Nepal Digital Education Platform
  */
 
@@ -29,10 +29,10 @@ interface Props {
 }
 
 const NEP_NUMERALS: Record<number, string> = {
-  0: '०', 1: '१', 2: '२', 3: '३', 4: '४', 5: '५',
-  6: '६', 7: '७', 8: '८', 9: '९', 10: '१०',
-  11: '११', 12: '१२', 13: '१३', 14: '१४', 15: '१५',
-  16: '१६', 17: '१७', 18: '१८', 19: '१९', 20: '२०',
+  0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5',
+  6: '6', 7: '7', 8: '8', 9: '9', 10: '10',
+  11: '11', 12: '12', 13: '13', 14: '14', 15: '15',
+  16: '16', 17: '17', 18: '18', 19: '19', 20: '20',
 };
 
 type VillageStation = 'FRUIT_SHOP' | 'BIRD_GARDEN' | 'TOY_HOUSE' | 'WORKSHOP' | 'MASTER_QUIZ';
@@ -53,7 +53,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Village Station
@@ -69,7 +69,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
         a: 8,
         b: 5,
         sum: 13,
-        storyNp: 'रामसँग ८ ओटा केरा थिए। बहिनीले थप ५ ओटा केरा दिइन्। अब रामसँग जम्मा कति ओटा केरा भए?',
+        storyNp: 'रामसँग 8 ओटा केरा थिए। बहिनीले थप 5 ओटा केरा दिइन्। अब रामसँग जम्मा कति ओटा केरा भए?',
         storyEn: 'Ram had 8 bananas. His sister gave him 5 more bananas. How many bananas does Ram have altogether?',
         options: [12, 13, 14],
       },
@@ -78,7 +78,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
         a: 9,
         b: 6,
         sum: 15,
-        storyNp: 'पसलमा ९ ओटा सुन्तला र ६ ओटा स्याउ छन्। दुवै मिलाउँदा जम्मा कति फलफूल छन्?',
+        storyNp: 'पसलमा 9 ओटा सुन्तला र 6 ओटा स्याउ छन्। दुवै मिलाउँदा जम्मा कति फलफूल छन्?',
         storyEn: 'There are 9 oranges and 6 apples in the shop. How many fruits are there in total?',
         options: [14, 15, 16],
       },
@@ -142,104 +142,104 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
     () => [
       {
         id: 1,
-        stationName: 'कथा जोड (Story Addition)',
-        questionNp: '८ ओटा केरा र ५ ओटा केरा जोड्दा जम्मा कति हुन्छ?',
+        stationName: 'Story Addition',
+        questionNp: '8 ओटा केरा र 5 ओटा केरा जोड्दा जम्मा कति हुन्छ?',
         questionEn: 'How many bananas altogether in 8 bananas + 5 bananas?',
         options: [12, 13, 14],
         correct: 13,
-        explanationNp: '८ + ५ = १३ (तेह्र) हुन्छ।',
+        explanationNp: '8 + 5 = 13 हुन्छ।',
         explanationEn: '8 + 5 = 13 (Thirteen).',
       },
       {
         id: 2,
         stationName: 'दश बनाउने विधि (Make Ten)',
-        questionNp: '९ + ६ लाई १० बनाएर जोड्दा कति हुन्छ?',
+        questionNp: '9 + 6 लाई 10 बनाएर जोड्दा कति हुन्छ?',
         questionEn: 'Solve 9 + 6 using make-10:',
         options: [14, 15, 16],
         correct: 15,
-        explanationNp: '९ + १ = १०, १० + ५ = १५ हुन्छ।',
+        explanationNp: '9 + 1 = 10, 10 + 5 = 15 हुन्छ।',
         explanationEn: '9 + 1 = 10, 10 + 5 = 15.',
       },
       {
         id: 3,
         stationName: 'तीन सङ्ख्याको जोड (3-Number)',
-        questionNp: '४ + ५ + ६ = कति हुन्छ?',
+        questionNp: '4 + 5 + 6 = कति हुन्छ?',
         questionEn: 'What is 4 + 5 + 6?',
         options: [14, 15, 16],
         correct: 15,
-        explanationNp: '४ + ६ = १०, १० + ५ = १५ हुन्छ।',
+        explanationNp: '4 + 6 = 10, 10 + 5 = 15 हुन्छ।',
         explanationEn: '4 + 6 = 10, 10 + 5 = 15.',
       },
       {
         id: 4,
         stationName: 'ठाडो जोड (Vertical Addition)',
         verticalFormat: { a: 8, b: 7 },
-        questionNp: '८ मा ७ जोड्दा कति हुन्छ?',
+        questionNp: '8 मा 7 जोड्दा कति हुन्छ?',
         questionEn: 'What is 8 + 7 vertically?',
         options: [14, 15, 16],
         correct: 15,
-        explanationNp: '८ + ७ = १५ हुन्छ।',
+        explanationNp: '8 + 7 = 15 हुन्छ।',
         explanationEn: '8 + 7 = 15.',
       },
       {
         id: 5,
         stationName: 'खाली ठाउँ भर्ने (Missing Addend)',
-        questionNp: '१२ + [ ? ] = १७ मा खाली ठाउँमा कुन सङ्ख्या हुन्छ?',
+        questionNp: '12 + [ ? ] = 17 मा खाली ठाउँमा कुन सङ्ख्या हुन्छ?',
         questionEn: 'In 12 + [ ? ] = 17, what is the missing number?',
         options: [4, 5, 6],
         correct: 5,
-        explanationNp: '१२ + ५ = १७ हुन्छ।',
+        explanationNp: '12 + 5 = 17 हुन्छ।',
         explanationEn: '12 + 5 = 17.',
       },
       {
         id: 6,
         stationName: 'योगफल बनाउने (Build Total)',
-        questionNp: 'कुन जोडी जोड्दा १५ बन्दछ?',
+        questionNp: 'कुन जोडी जोड्दा 15 बन्दछ?',
         questionEn: 'Which pair sums to 15?',
         options: [15, 14, 16], // represented as sum check
         correct: 15,
-        explanationNp: '१० + ५ = १५ हुन्छ।',
+        explanationNp: '10 + 5 = 15 हुन्छ।',
         explanationEn: '10 + 5 = 15.',
       },
       {
         id: 7,
         stationName: 'मिश्रित अभ्यास (Mixed Practice)',
-        questionNp: '१० + ९ को मान कति हुन्छ?',
+        questionNp: '10 + 9 को मान कति हुन्छ?',
         questionEn: 'What is 10 + 9?',
         options: [18, 19, 20],
         correct: 19,
-        explanationNp: '१० + ९ = १९ (उन्नाइस) हुन्छ।',
+        explanationNp: '10 + 9 = 19 हुन्छ।',
         explanationEn: '10 + 9 = 19 (Nineteen).',
       },
       {
         id: 8,
         stationName: 'ठाडो जोड (Vertical Addition)',
         verticalFormat: { a: 11, b: 5 },
-        questionNp: '११ मा ५ जोड्दा कति हुन्छ?',
+        questionNp: '11 मा 5 जोड्दा कति हुन्छ?',
         questionEn: 'What is 11 + 5 vertically?',
         options: [15, 16, 17],
         correct: 16,
-        explanationNp: '११ + ५ = १६ (सोह्र) हुन्छ।',
+        explanationNp: '11 + 5 = 16 हुन्छ।',
         explanationEn: '11 + 5 = 16 (Sixteen).',
       },
       {
         id: 9,
         stationName: 'तीन सङ्ख्याको जोड (3-Number)',
-        questionNp: '७ + ३ + ५ को जोडफल कति हुन्छ?',
+        questionNp: '7 + 3 + 5 को जोडफल कति हुन्छ?',
         questionEn: 'What is 7 + 3 + 5?',
         options: [14, 15, 16],
         correct: 15,
-        explanationNp: '७ + ३ = १०, १० + ५ = १५ हुन्छ।',
+        explanationNp: '7 + 3 = 10, 10 + 5 = 15 हुन्छ।',
         explanationEn: '7 + 3 = 10, 10 + 5 = 15.',
       },
       {
         id: 10,
         stationName: 'खाली ठाउँ भर्ने (Missing Addend)',
-        questionNp: '[ ? ] + ८ = १८ मा कुन सङ्ख्या हुनुपर्छ?',
+        questionNp: '[ ? ] + 8 = 18 मा कुन सङ्ख्या हुनुपर्छ?',
         questionEn: 'In [ ? ] + 8 = 18, what is the missing addend?',
         options: [8, 9, 10],
         correct: 10,
-        explanationNp: '१० + ८ = १८ हुन्छ।',
+        explanationNp: '10 + 8 = 18 हुन्छ।',
         explanationEn: '10 + 8 = 18.',
       },
     ],
@@ -372,7 +372,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
     setBirdSelected(opt);
     if (opt === currentBird.sum) {
       playSound('success');
-      speak('स्याबास! १० बनाएर सही जोडफल निकाल्नुभयो!', 'Great job! Make 10 addition is correct!');
+      speak('स्याबास! 10 बनाएर सही जोडफल निकाल्नुभयो!', 'Great job! Make 10 addition is correct!');
     } else {
       playSound('boop');
       speak('मिलेन, पुनः प्रयास गर्नुहोस्।', 'Try again.');
@@ -466,7 +466,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
               </span>
             </div>
             <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              {language === 'np' ? 'जोड चुनौती संसार (गाउँका ५ केन्द्रहरू)' : 'Addition Challenge World'}
+              {language === 'np' ? 'जोड चुनौती संसार (गाउँका 5 केन्द्रहरू)' : 'Addition Challenge World'}
             </h1>
           </div>
         </div>
@@ -483,7 +483,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
             }`}
           >
             <Store className="w-3.5 h-3.5" />
-            {language === 'np' ? '१. फलफूल पसल' : '1. Fruit Shop'}
+            {language === 'np' ? '1. फलफूल पसल' : '1. Fruit Shop'}
           </button>
           <button
             onClick={() => {
@@ -495,7 +495,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
             }`}
           >
             <Trees className="w-3.5 h-3.5" />
-            {language === 'np' ? '२. चरा बगैँचा' : '2. Bird Garden'}
+            {language === 'np' ? '2. चरा बगैँचा' : '2. Bird Garden'}
           </button>
           <button
             onClick={() => {
@@ -507,7 +507,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
             }`}
           >
             <Gamepad2 className="w-3.5 h-3.5" />
-            {language === 'np' ? '३. खेलौना घर' : '3. Toy House'}
+            {language === 'np' ? '3. खेलौना घर' : '3. Toy House'}
           </button>
           <button
             onClick={() => {
@@ -519,7 +519,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
             }`}
           >
             <Wrench className="w-3.5 h-3.5" />
-            {language === 'np' ? '४. ठाडो जोड' : '4. Vertical Add'}
+            {language === 'np' ? '4. ठाडो जोड' : '4. Vertical Add'}
           </button>
           <button
             onClick={() => {
@@ -531,7 +531,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
             }`}
           >
             <Trophy className="w-3.5 h-3.5" />
-            {language === 'np' ? '५. महा-परीक्षा' : '5. Master Quiz'}
+            {language === 'np' ? '5. महा-परीक्षा' : '5. Master Quiz'}
           </button>
         </div>
 
@@ -544,12 +544,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
           >
             {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            className="px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold shadow-sm transition"
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
@@ -564,7 +559,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-amber-700 tracking-wider">
-                    {language === 'np' ? 'केन्द्र १: फलफूल पसल (कथा जोड)' : 'Station 1: Fruit Shop (Story Addition)'}
+                    {language === 'np' ? 'केन्द्र 1: फलफूल पसल (कथा जोड)' : 'Station 1: Fruit Shop (Story Addition)'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? 'कथा पढेर जम्मा फलफूलको सङ्ख्या पत्ता लगाउनुहोस्!' : 'Read the story and find total fruits!'}
@@ -632,7 +627,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-emerald-700 tracking-wider">
-                    {language === 'np' ? 'केन्द्र २: चरा बगैँचा (दश बनाउने विधि)' : 'Station 2: Bird Garden (Make Ten)'}
+                    {language === 'np' ? 'केन्द्र 2: चरा बगैँचा (दश बनाउने विधि)' : 'Station 2: Bird Garden (Make Ten)'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {NEP_NUMERALS[currentBird.a]} + {NEP_NUMERALS[currentBird.b]} = ?
@@ -657,7 +652,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                   {language === 'np' ? 'दश बनाएर जोड्ने चरण:' : 'Make 10 Step:'}
                 </span>
                 <span className="text-2xl font-black text-emerald-700">
-                  {NEP_NUMERALS[currentBird.a]} + {NEP_NUMERALS[currentBird.need]} + {NEP_NUMERALS[currentBird.remain]} = १० + {NEP_NUMERALS[currentBird.remain]}
+                  {NEP_NUMERALS[currentBird.a]} + {NEP_NUMERALS[currentBird.need]} + {NEP_NUMERALS[currentBird.remain]} = 10 + {NEP_NUMERALS[currentBird.remain]}
                 </span>
               </div>
 
@@ -692,7 +687,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-sky-700 tracking-wider">
-                    {language === 'np' ? 'केन्द्र ३: खेलौना घर (तीन सङ्ख्याको जोड)' : 'Station 3: Toy House (3-Number)'}
+                    {language === 'np' ? 'केन्द्र 3: खेलौना घर (तीन सङ्ख्याको जोड)' : 'Station 3: Toy House (3-Number)'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {NEP_NUMERALS[currentToy.a]} + {NEP_NUMERALS[currentToy.b]} + {NEP_NUMERALS[currentToy.c]} = ?
@@ -755,7 +750,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-violet-400 tracking-wider">
-                    {language === 'np' ? 'केन्द्र ४: ठाडो जोड (Vertical Addition)' : 'Station 4: Vertical Addition'}
+                    {language === 'np' ? 'केन्द्र 4: ठाडो जोड (Vertical Addition)' : 'Station 4: Vertical Addition'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? 'ठाडो स्तम्भमा जोड गर्नुहोस्!' : 'Add the vertical column!'}
@@ -916,7 +911,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                   </h3>
                   <p className="text-slate-500 text-xs mt-1">
                     {language === 'np'
-                      ? 'तपाईंले कक्षा १ अध्याय १० (योगफल २० सम्म आउने जोड) सम्बन्धी सम्पूर्ण ज्ञान प्रमाणित गर्नुभयो।'
+                      ? 'तपाईंले कक्षा 1 अध्याय 10 सम्बन्धी सम्पूर्ण ज्ञान प्रमाणित गर्नुभयो।'
                       : 'You have mastered Addition up to 20 across all representations and strategies.'}
                   </p>
                 </div>

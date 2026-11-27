@@ -1,8 +1,8 @@
 /**
  * SubtractionPlayground.tsx (Converted to 100% Pure 2D)
- * Simulation 01: Subtraction Playground (घटाउ खेलमैदान)
- * Class 1 Mathematics - Chapter 8: Subtraction up to 10 (१० सम्मका सङ्ख्याहरूको घटाउ)
- * Nepal CDC Curriculum Aligned (मेरो गणित, कक्षा १)
+ * Simulation 01: Subtraction Playground
+ * Class 1 Mathematics - Chapter 8: Subtraction up to 10
+ * Nepal CDC Curriculum Aligned
  * 100% Pure 2D Vector & Canvas – Zero WebGL/Three.js.
  */
 import React, { useState } from 'react';
@@ -19,7 +19,7 @@ export const SubtractionPlayground: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G1-CH8-01',
     chapter: 8,
-    titleNp: 'घटाउ खेलमैदान (१० सम्मको घटाउ)',
+    titleNp: 'घटाउ खेलमैदान (10 सम्मको घटाउ)',
     titleEn: 'Subtraction Playground (Up to 10)',
   });
 
@@ -29,40 +29,40 @@ export const SubtractionPlayground: React.FC<Props> = ({ onBackToLibrary }) => {
 
   const questions: QuizQuestion[] = [
     {
-      np: '८ वटा चरामध्ये ३ वटा उडेर गए भने कति बाँकी रहन्छन्? (८ - ३ = ?)',
+      np: '8 वटा चरामध्ये 3 वटा उडेर गए भने कति बाँकी रहन्छन्? (8 - 3 = ?)',
       en: 'If 3 birds fly away from a group of 8, how many remain? (8 - 3 = ?)',
       options: [
-        { key: '5', label: kit.t('५ (पाँच - Five)', '5 (Five)') },
-        { key: '4', label: kit.t('४ (चार - Four)', '4 (Four)') },
-        { key: '6', label: kit.t('६ (छ - Six)', '6 (Six)') },
+        { key: '5', label: kit.t('5', '5 (Five)') },
+        { key: '4', label: kit.t('4', '4 (Four)') },
+        { key: '6', label: kit.t('6', '6 (Six)') },
       ],
       answer: '5',
     },
     {
-      np: '१० - ४ = ?',
+      np: '10 - 4 = ?',
       en: '10 - 4 = ?',
       options: [
-        { key: '6', label: kit.t('६ (छ)', '6 (Six)') },
-        { key: '5', label: kit.t('५ (पाँच)', '5 (Five)') },
-        { key: '7', label: kit.t('७ (सात)', '7 (Seven)') },
+        { key: '6', label: kit.t('6', '6 (Six)') },
+        { key: '5', label: kit.t('5', '5 (Five)') },
+        { key: '7', label: kit.t('7', '7 (Seven)') },
       ],
       answer: '6',
     },
     {
-      np: 'कुनै सङ्ख्याबाट सोही सङ्ख्या घटाउँदा के बाँकी हुन्छ? (५ - ५ = ?)',
+      np: 'कुनै सङ्ख्याबाट सोही सङ्ख्या घटाउँदा के बाँकी हुन्छ? (5 - 5 = ?)',
       en: 'What is left when a number is subtracted from itself? (5 - 5 = ?)',
       options: [
-        { key: '0', label: kit.t('० (शून्य - Zero)', '0 (Zero)') },
-        { key: '1', label: kit.t('१ (एक - One)', '1 (One)') },
+        { key: '0', label: kit.t('0', '0 (Zero)') },
+        { key: '1', label: kit.t('1', '1 (One)') },
       ],
       answer: '0',
     },
     {
-      np: '७ - ० = ?',
+      np: '7 - 0 = ?',
       en: '7 - 0 = ?',
       options: [
-        { key: '7', label: kit.t('७ (सात)', '7 (Seven)') },
-        { key: '0', label: kit.t('० (शून्य)', '0 (Zero)') },
+        { key: '7', label: kit.t('7', '7 (Seven)') },
+        { key: '0', label: kit.t('0', '0 (Zero)') },
       ],
       answer: '7',
     },
@@ -177,7 +177,7 @@ export const SubtractionPlayground: React.FC<Props> = ({ onBackToLibrary }) => {
                     opacity: isTakenAway ? 0.35 : 1,
                     transition: 'all 0.2s ease',
                   }}
-                  title={isTakenAway ? 'घटाइएको (Taken away)' : 'बाँकी (Remaining)'}
+                  title={isTakenAway ? 'Taken away' : 'Remaining'}
                 >
                   🎈
                   {isTakenAway && (

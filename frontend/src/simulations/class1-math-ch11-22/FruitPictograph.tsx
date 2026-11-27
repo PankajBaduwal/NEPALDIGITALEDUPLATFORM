@@ -1,6 +1,6 @@
 /**
- * Chapter 22 · Pictograph (चित्रचार्ट)
- * Sim 1: Fruit Pictograph (फलफूल चित्रचार्ट) — Pure 2D Edition
+ * Chapter 22 · Pictograph
+ * Sim 1: Fruit Pictograph — Pure 2D Edition
  * 100% 2D SVG / CSS Charts – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -74,9 +74,9 @@ export const FruitPictograph: React.FC<Props> = ({ onBackToLibrary }) => {
         np: 'स्याउको सङ्ख्या कति छ?',
         en: 'What is the count of apples on the chart?',
         options: [
-          { key: '5', label: isNe ? '५' : '5' },
-          { key: '4', label: isNe ? '४' : '4' },
-          { key: '6', label: isNe ? '६' : '6' },
+          { key: '5', label: isNe ? '5' : '5' },
+          { key: '4', label: isNe ? '4' : '4' },
+          { key: '6', label: isNe ? '6' : '6' },
         ],
         answer: '5',
       },

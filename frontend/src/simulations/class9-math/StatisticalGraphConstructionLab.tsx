@@ -16,7 +16,7 @@ const DATASETS: Dataset[] = [
   {
     id: 'marks',
     titleEn: 'Marks in Compulsory Math (50 Students)',
-    titleNp: 'अनिवार्य गणितमा प्राप्ताङ्क (५० विद्यार्थी)',
+    titleNp: 'अनिवार्य गणितमा प्राप्ताङ्क (50 विद्यार्थी)',
     xLabelEn: 'Marks Obtained',
     xLabelNp: 'प्राप्ताङ्क',
     classes: [
@@ -30,9 +30,9 @@ const DATASETS: Dataset[] = [
   {
     id: 'daily_wages',
     titleEn: 'Daily Wages of Workers (Rs. in Hundreds)',
-    titleNp: 'श्रमिकहरूको दैनिक ज्याला (रु. सयमा)',
+    titleNp: 'श्रमिकहरूको दैनिक ज्याला (Rs. सयमा)',
     xLabelEn: 'Wages (Rs. 100s)',
-    xLabelNp: 'दैनिक ज्याला (रु. सयमा)',
+    xLabelNp: 'दैनिक ज्याला (Rs. सयमा)',
     classes: [
       { lower: 4, upper: 6, f: 5 },
       { lower: 6, upper: 8, f: 12 },
@@ -44,7 +44,7 @@ const DATASETS: Dataset[] = [
   {
     id: 'weight_students',
     titleEn: 'Weight of Grade 9 Students (kg)',
-    titleNp: 'कक्षा ९ का विद्यार्थीहरूको तौल (कि.ग्रा.)',
+    titleNp: 'कक्षा 9 का विद्यार्थीहरूको तौल (कि.ग्रा.)',
     xLabelEn: 'Weight (kg)',
     xLabelNp: 'तौल (कि.ग्रा.)',
     classes: [
@@ -503,7 +503,7 @@ export const StatisticalGraphConstructionLab: React.FC<SimProps> = ({ onBackToLi
                         y={medianSvgY - 6}
                         className="text-[11px] font-bold fill-rose-700 font-mono"
                       >
-                        N/2 = {fmt(medianY)} {L('(मध्यिका बिन्दु)', '(Median point)')}
+                        N/2 = {fmt(medianY)} {L('', '(Median point)')}
                       </text>
                     </g>
                   )}
@@ -723,7 +723,7 @@ export const StatisticalGraphConstructionLab: React.FC<SimProps> = ({ onBackToLi
               <li>
                 <strong>{L('बारम्बारता बहुभुज (Polygon):', 'Frequency Polygon:')}</strong>{' '}
                 {L(
-                  'आयतचित्रका स्तम्भहरूको माथिल्लो भागको मध्यबिन्दुहरू जोडेर बनाइन्छ। सुरु र अन्त्यमा ० बारम्बारता हुने अघिल्लो र पछिल्लो वर्गान्तरमा जोडिन्छ।',
+                  'आयतचित्रका स्तम्भहरूको माथिल्लो भागको मध्यबिन्दुहरू जोडेर बनाइन्छ। सुRs र अन्त्यमा 0 बारम्बारता हुने अघिल्लो र पछिल्लो वर्गान्तरमा जोडिन्छ।',
                   'Formed by connecting the midpoints of the tops of the histogram rectangles. Anchored to 0 frequency at preceding & succeeding intervals.'
                 )}
               </li>

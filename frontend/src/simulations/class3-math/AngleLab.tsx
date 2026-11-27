@@ -1,5 +1,5 @@
 /**
- * Lesson 10 · Angles (कोण)
+ * Lesson 10 · Angles
  * Angle Lab — open and close two arms around a vertex; compare with a 90° right angle: acute, right or obtuse.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -14,7 +14,7 @@ interface Props { onBackToLibrary: () => void; userRole?: string }
 const kindOf = (a: number) => (a === 90 ? 'right' : a < 90 ? 'small' : 'large');
 
 const NAME = {
-  right: ['समकोण (९०°)', 'Right angle (90°)', '#16A34A'],
+  right: ['समकोण (90°)', 'Right angle (90°)', '#16A34A'],
   small: ['समकोणभन्दा सानो कोण (न्यूनकोण)', 'Smaller than a right angle (Acute)', '#0284C7'],
   large: ['समकोणभन्दा ठूलो कोण (अधिककोण)', 'Larger than a right angle (Obtuse)', '#F97316'],
 } as const;
@@ -57,7 +57,7 @@ export const AngleLab: React.FC<Props> = ({ onBackToLibrary }) => {
       kit.star();
       setTimeout(newTarget, 1400);
     } else {
-      kit.oops('९०° को समकोणसँग तुलना गरौँ', 'Compare with the 90° right angle.');
+      kit.oops('90° को समकोणसँग तुलना गरौँ', 'Compare with the 90° right angle.');
     }
   };
 
@@ -123,9 +123,9 @@ export const AngleLab: React.FC<Props> = ({ onBackToLibrary }) => {
         {/* Angle Presets */}
         <div style={{ display: 'inline-flex', gap: 6 }}>
           {[
-            [45, '४५° (सानो)', '45° (Acute)'],
-            [90, '९०° (समकोण)', '90° (Right)'],
-            [135, '१३५° (ठूलो)', '135° (Obtuse)'],
+            [45, '45° (सानो)', '45° (Acute)'],
+            [90, '90° (समकोण)', '90° (Right)'],
+            [135, '135° (ठूलो)', '135° (Obtuse)'],
           ].map(([deg, np, en]) => (
             <button
               key={deg as number}
@@ -203,7 +203,7 @@ export const AngleLab: React.FC<Props> = ({ onBackToLibrary }) => {
             {/* 90-degree ghost reference box */}
             <rect x="80" y="100" width="80" height="80" fill="#F0FDF4" stroke="#86EFAC" strokeWidth="2" strokeDasharray="4 4" />
             <text x="120" y="145" textAnchor="middle" fill="#16A34A" fontSize="12" fontWeight="800">
-              ९०° {kit.t('समकोण', 'Right')}
+              90° {kit.t('समकोण', 'Right')}
             </text>
 
             {/* Angle shaded sector */}

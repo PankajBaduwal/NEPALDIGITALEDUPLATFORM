@@ -1,14 +1,14 @@
 /**
  * FloweringPlantsSim.tsx
- * Simulation 14: 2D Flowering and Non-Flowering Plants (सपुष्पक र अपुष्पक वनस्पति)
- * Grade 4 Science • Chapter 4: Classification of Living Beings (जीवहरूको वर्गीकरण)
+ * Simulation 14: 2D Flowering and Non-Flowering Plants
+ * Grade 4 Science • Chapter 4: Classification of Living Beings
  *
  * 100% NATIVE 2D CANVAS & VECTOR BOTANICAL SIMULATION
  * Features:
  * - Full biological flower cutaway anatomy: Petals (Corolla), Sepals (Calyx), Stamen (Male anther + filament),
  *   Pistil/Carpel (Female stigma, style, ovary with ovules).
  * - Animated pollination & fertilization sequence: Pollen dust drifts, pollen tube grows down style into ovary!
- * - Non-flowering fern mode: Frond foliage, coiled fiddleheads (निउरो), underside sori clusters,
+ * - Non-flowering fern mode: Frond foliage, coiled fiddleheads, underside sori clusters,
  *   and interactive spore dispersal animation!
  * - Bilingual labels, interactive dissection explorer, and mastery quiz.
  */
@@ -36,7 +36,7 @@ export const FloweringPlantsSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -54,7 +54,7 @@ export const FloweringPlantsSim: React.FC<BaseSimulationProps> = ({
   const flowerParts: FlowerPart[] = [
     {
       id: 'petals',
-      nameEn: 'Petals (Corolla / दलपुञ्ज)',
+      nameEn: 'Petals',
       nameNe: 'दलपुञ्ज / फूलका पातहरू (Petals)',
       categoryEn: 'Attraction & Protection',
       categoryNe: 'आकर्षण र सुरक्षा',
@@ -65,7 +65,7 @@ export const FloweringPlantsSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'sepals',
-      nameEn: 'Sepals (Calyx / बाह्यदलपुञ्ज)',
+      nameEn: 'Sepals',
       nameNe: 'बाह्यदलपुञ्ज (Sepals)',
       categoryEn: 'Bud Protection',
       categoryNe: 'कोपिलाको सुरक्षा',
@@ -76,7 +76,7 @@ export const FloweringPlantsSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'stamen',
-      nameEn: 'Stamen (Male Organ / पुंकेसर)',
+      nameEn: 'Stamen',
       nameNe: 'पुंकेसर / भाले अङ्ग (Stamen)',
       categoryEn: 'Male Reproductive Unit',
       categoryNe: 'भाले प्रजनन अङ्ग',
@@ -87,7 +87,7 @@ export const FloweringPlantsSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'carpel',
-      nameEn: 'Pistil / Carpel (Female Organ / स्त्रीकेसर)',
+      nameEn: 'Pistil / Carpel',
       nameNe: 'स्त्रीकेसर / पोथी अङ्ग (Carpel)',
       categoryEn: 'Female Reproductive Unit',
       categoryNe: 'पोथी प्रजनन अङ्ग',
@@ -509,7 +509,7 @@ export const FloweringPlantsSim: React.FC<BaseSimulationProps> = ({
       ctx.restore();
     });
 
-    // Coiled fiddlehead / Crozier (निउरो) emerging at base
+    // Coiled fiddlehead / Crozier emerging at base
     ctx.save();
     ctx.strokeStyle = '#84cc16';
     ctx.lineWidth = 5;
@@ -598,7 +598,7 @@ export const FloweringPlantsSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText(lang === 'en' ? '🔬 Spore Sacs (Sori / सोरी)' : '🔬 सोरी (बीजाणु थैली)', lensX, lensY + lensR + 7);
+    ctx.fillText(lang === 'en' ? '🔬 Spore Sacs' : '🔬 सोरी (बीजाणु थैली)', lensX, lensY + lensR + 7);
     ctx.restore();
 
     // Spore Dispersal Billowing Animation
@@ -662,7 +662,7 @@ export const FloweringPlantsSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 4: Classification of Living Beings'
-          : 'कक्षा ४ विज्ञान • एकाइ ४: जीवहरूको वर्गीकरण'
+          : 'कक्षा 4 विज्ञान • एकाइ 4: जीवहरूको वर्गीकरण'
       }
       currentStage={stage}
       onStageChange={setStage}
@@ -783,10 +783,10 @@ export const FloweringPlantsSim: React.FC<BaseSimulationProps> = ({
                 <Sparkles size={16} />
                 {isPollinated
                   ? lang === 'en'
-                    ? 'Fertilized (डिम्बाशयमा पुग्यो)'
+                    ? 'Fertilized'
                     : 'परागसेचन सम्पन्न'
                   : lang === 'en'
-                  ? 'Pollinate (परागसेचन)'
+                  ? 'Pollinate'
                   : 'परागसेचन गराउनुहोस्'}
               </button>
             ) : (
@@ -809,7 +809,7 @@ export const FloweringPlantsSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 <Wind size={16} />
-                {lang === 'en' ? 'Disperse Spores (बीजाणु)' : 'बीजाणु छर्नुहोस्'}
+                {lang === 'en' ? 'Disperse Spores' : 'बीजाणु छर्नुहोस्'}
               </button>
             )}
           </div>

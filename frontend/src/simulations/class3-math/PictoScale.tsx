@@ -1,5 +1,5 @@
 /**
- * Lesson 21 · Pictograph (चित्रचार्ट)
+ * Lesson 21 · Pictograph
  * PictoScale — 2D interactive scaled pictograph where 1 icon stands for 2, 5, or 10 items.
  */
 import React, { useMemo, useState } from 'react';
@@ -47,7 +47,7 @@ export const PictoScale: React.FC<Props> = ({ onBackToLibrary }) => {
     setScale(newScale);
     setVals(genData(newScale));
     kit.tap();
-    kit.say(`स्केल: १ वृत्त = ${newScale}`, `Scale: 1 circle = ${newScale} items`);
+    kit.say(`स्केल: 1 वृत्त = ${newScale}`, `Scale: 1 circle = ${newScale} items`);
   };
 
   const fresh = () => {
@@ -92,7 +92,7 @@ export const PictoScale: React.FC<Props> = ({ onBackToLibrary }) => {
       kit={kit}
       onBack={onBackToLibrary}
       mascotGreeting={kit.t(
-        `१ वटा 🔵 चिन्ह = ${scale} वटा फल जनाउँछ। सबैभन्दा धेरै फल: ${CATS[bestIdx].np} (${vals[bestIdx]})`,
+        `1 वटा 🔵 चिन्ह = ${scale} वटा फल जनाउँछ। सबैभन्दा धेरै फल: ${CATS[bestIdx].np} (${vals[bestIdx]})`,
         `1 🔵 symbol = ${scale} fruits. Most frequent fruit: ${CATS[bestIdx].en} (${vals[bestIdx]})`
       )}
       questions={questions}
@@ -144,7 +144,7 @@ export const PictoScale: React.FC<Props> = ({ onBackToLibrary }) => {
         >
           <div style={{ fontSize: 20 }}>🔑</div>
           <div style={{ fontSize: 15, fontWeight: 900, color: '#92400E' }}>
-            {kit.t(`सङ्केत (Key): १ वटा 🔵 = ${scale} वटा फल`, `Key: 1 🔵 = ${scale} fruits`)}
+            {kit.t(`सङ्केत (Key): 1 वटा 🔵 = ${scale} वटा फल`, `Key: 1 🔵 = ${scale} fruits`)}
           </div>
         </div>
 

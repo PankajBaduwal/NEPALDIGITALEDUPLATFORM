@@ -18,7 +18,7 @@ interface TaskItem {
 const TASKS: TaskItem[] = [
   {
     id: 't1',
-    titleNp: 'चुनौती १: ४ भुजा र विकर्ण भएको चतुर्भुजको रचना',
+    titleNp: 'चुनौती 1: 4 भुजा र विकर्ण भएको चतुर्भुजको रचना',
     titleEn: 'Challenge 1: Quadrilateral with 4 Sides and 1 Diagonal',
     typeNp: 'विषमबाहु चतुर्भुज',
     typeEn: 'Scalene Quadrilateral',
@@ -35,7 +35,7 @@ const TASKS: TaskItem[] = [
   },
   {
     id: 't2',
-    titleNp: 'चुनौती २: २ भुजा र १ कोण भएको समानान्तर चतुर्भुज',
+    titleNp: 'चुनौती 2: 2 भुजा र 1 कोण भएको समानान्तर चतुर्भुज',
     titleEn: 'Challenge 2: Parallelogram with 2 Sides and 1 Angle',
     typeNp: 'समानान्तर चतुर्भुज',
     typeEn: 'Parallelogram',
@@ -52,7 +52,7 @@ const TASKS: TaskItem[] = [
   },
   {
     id: 't3',
-    titleNp: 'चुनौती ३: समलम्ब चतुर्भुजको रचना (Trapezium)',
+    titleNp: 'चुनौती 3: समलम्ब चतुर्भुजको रचना (Trapezium)',
     titleEn: 'Challenge 3: Construction of Trapezium',
     typeNp: 'समलम्ब चतुर्भुज',
     typeEn: 'Trapezium',
@@ -74,21 +74,21 @@ const QUIZ_QUESTIONS = [
     np: 'कुनै पनि ज्यामितीय रचनामा रुलर (Ruler) को मुख्य कार्य के हो?',
     en: 'What is the main function of a ruler in geometrical construction?',
     options: [
-      { key: 'A', label: 'सिधा रेखाखण्ड खिच्न र लम्बाइ नाप्न' },
-      { key: 'B', label: 'कोण मात्र नाप्न' },
-      { key: 'C', label: 'वृत्त बनाउन' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'To draw straight line segments and measure length' },
+      { key: 'B', label: 'To measure angles only' },
+      { key: 'C', label: 'To draw circles' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
   {
-    np: 'कम्पासको सहायताले ६०° को कोण बनाउँदा चापको अर्धव्यास के हुनुपर्छ?',
+    np: 'कम्पासको सहायताले 60° को कोण बनाउँदा चापको अर्धव्यास के हुनुपर्छ?',
     en: 'When constructing a 60° angle with a compass, what must be true about the arc radius?',
     options: [
-      { key: 'A', label: 'प्रारम्भिक चाप र काट्ने चापको अर्धव्यास उही (समान) हुनुपर्छ' },
-      { key: 'B', label: 'अर्धव्यास दोब्बर हुनुपर्छ' },
-      { key: 'C', label: 'अर्धव्यास आधा हुनुपर्छ' },
-      { key: 'D', label: 'जतिसुकै फरक भए पनि हुन्छ' },
+      { key: 'A', label: 'The radius of the initial arc and the cutting arc must be the same' },
+      { key: 'B', label: 'The radius must be doubled' },
+      { key: 'C', label: 'The radius must be halved' },
+      { key: 'D', label: 'Any difference is fine' },
     ],
     answer: 'A',
   },
@@ -96,10 +96,10 @@ const QUIZ_QUESTIONS = [
     np: 'समानान्तर चतुर्भुज रचना गर्दा यदि दुई आसन्न भुजाहरू AB र BC दिएका छन् भने सम्मुख भुजाहरू CD र DA को नाप कति हुन्छ?',
     en: 'In constructing a parallelogram with adjacent sides AB and BC, what are the lengths of opposite sides CD and DA?',
     options: [
-      { key: 'A', label: 'CD = AB र DA = BC' },
-      { key: 'B', label: 'CD = BC र DA = AB' },
-      { key: 'C', label: 'सबै फरक हुन्छन्' },
-      { key: 'D', label: 'शून्य हुन्छ' },
+      { key: 'A', label: 'CD = AB and DA = BC' },
+      { key: 'B', label: 'CD = BC and DA = AB' },
+      { key: 'C', label: 'All are different' },
+      { key: 'D', label: 'It is zero' },
     ],
     answer: 'A',
   },
@@ -154,7 +154,7 @@ export const CompleteGeometryConstructionChallenge: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! कक्षा ९ को पाठ्यपुस्तकका अभ्यासहरूबाट छानिएका चतुर्भुज, समानान्तर चतुर्भुज र समलम्ब चतुर्भुजका वास्तविक रचना चुनौतीहरू रुलर र कम्पास प्रयोग गरी पूरा गर्नुहोस्!',
+        'नमस्ते! कक्षा 9 को पाठ्यपुस्तकका अभ्यासहरूबाट छानिएका चतुर्भुज, समानान्तर चतुर्भुज र समलम्ब चतुर्भुजका वास्तविक रचना चुनौतीहरू रुलर र कम्पास प्रयोग गरी पूरा गर्नुहोस्!',
         'Welcome! Tackle authentic construction challenges from the Grade 9 textbook using virtual geometric instruments and verify your construction accuracy!'
       )}
     >
@@ -388,7 +388,7 @@ export const CompleteGeometryConstructionChallenge: React.FC<{
                 fontSize: 12,
               }}
             >
-              🔄 {L('पुन: सुरु गर्नुहोस्', 'Reset')}
+              🔄 {L('पुन: सुRs गर्नुहोस्', 'Reset')}
             </button>
 
             <button
@@ -430,7 +430,7 @@ export const CompleteGeometryConstructionChallenge: React.FC<{
                 🎉 {L('रचना शुद्धता जाँच सफल (All conditions satisfied)!', 'Construction accuracy verified (100%)!')}
               </span>
               <span style={{ fontSize: 16, fontWeight: 800, color: '#065F46' }}>
-                १००/१००
+                100/100
               </span>
             </div>
           )}

@@ -1,6 +1,6 @@
 /**
  * GeometricalIdentitiesSquareLab.tsx
- * Grade 7 Mathematics – Lesson 11: ALGEBRAIC EXPRESSION (बीजगणितीय व्यञ्जक)
+ * Grade 7 Mathematics – Lesson 11: ALGEBRAIC EXPRESSION
  * Simulation 4: Geometrical Identities – (a + b)² and (a - b)² (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 161-164)
  */
@@ -15,10 +15,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'ज्यामितीय रूपमा भुजा (a + b) भएको ठूलो वर्गको क्षेत्रफल कति बराबर हुन्छ?',
     en: 'Geometrically, what is the area of a large square with side (a + b)?',
     options: [
-      { key: 'A', label: 'a² + २ab + b² [ (a + b)² = a² + २ab + b² ]' },
+      { key: 'A', label: 'a² + 2ab + b² [ (a + b)² = a² + 2ab + b² ]' },
       { key: 'B', label: 'a² + b²' },
-      { key: 'C', label: 'a² - २ab + b²' },
-      { key: 'D', label: '४ab' },
+      { key: 'C', label: 'a² - 2ab + b²' },
+      { key: 'D', label: '4ab' },
     ],
     answer: 'A',
   },
@@ -26,32 +26,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'सर्वसमिका (a - b)² को विस्तार कुन हो?',
     en: 'What is the expansion of identity (a - b)²?',
     options: [
-      { key: 'A', label: 'a² - २ab + b²' },
+      { key: 'A', label: 'a² - 2ab + b²' },
       { key: 'B', label: 'a² - b²' },
-      { key: 'C', label: 'a² + २ab - b²' },
-      { key: 'D', label: 'a² - २ab - b²' },
+      { key: 'C', label: 'a² + 2ab - b²' },
+      { key: 'D', label: 'a² - 2ab - b²' },
     ],
     answer: 'A',
   },
   {
-    np: 'सर्वसमिका प्रयोग गरी १२² को मान सजिलै कसरी निकालिन्छ?',
+    np: 'सर्वसमिका प्रयोग गरी 12² को मान सजिलै कसरी निकालिन्छ?',
     en: 'How is 12² calculated conveniently using an identity?',
     options: [
-      { key: 'A', label: '(१० + २)² = १०० + ४० + ४ = १४४' },
-      { key: 'B', label: '१०² + २² = १०४' },
-      { key: 'C', label: '१२ × १२ = २४' },
-      { key: 'D', label: '(१५ - ३)² = २२५' },
+      { key: 'A', label: '(10 + 2)² = 100 + 40 + 4 = 144' },
+      { key: 'B', label: '10² + 2² = 104' },
+      { key: 'C', label: '12 × 12 = 24' },
+      { key: 'D', label: '(15 - 3)² = 225' },
     ],
     answer: 'A',
   },
   {
-    np: 'सर्वसमिका प्रयोग गरी ९८² को मान कसरी निकालिन्छ?',
+    np: 'सर्वसमिका प्रयोग गरी 98² को मान कसरी निकालिन्छ?',
     en: 'How is 98² calculated using an identity?',
     options: [
-      { key: 'A', label: '(१०० - २)² = १०,००० - ४०० + ४ = ९,६०४' },
-      { key: 'B', label: '१००² - २² = ९,९९६' },
-      { key: 'C', label: '९०² + ८² = ८,१६४' },
-      { key: 'D', label: '९,८००' },
+      { key: 'A', label: '(100 - 2)² = 10,000 - 400 + 4 = 9,604' },
+      { key: 'B', label: '100² - 2² = 9,996' },
+      { key: 'C', label: '90² + 8² = 8,164' },
+      { key: 'D', label: '9,800' },
     ],
     answer: 'A',
   },
@@ -94,7 +94,7 @@ export const GeometricalIdentitiesSquareLab: React.FC<{ onBackToLibrary?: () => 
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        '(a + b)² भनेको a² वर्ग, दुईओटा ab आयत र एउटा b² वर्ग मिलेर बनेको कुल क्षेत्रफल हो: a² + २ab + b²!',
+        '(a + b)² भनेको a² वर्ग, दुईओटा ab आयत र एउटा b² वर्ग मिलेर बनेको कुल क्षेत्रफल हो: a² + 2ab + b²!',
         '(a + b)² represents a large square split into 4 parts: square a², two rectangles ab, and square b²!'
       )}
     >
@@ -102,9 +102,9 @@ export const GeometricalIdentitiesSquareLab: React.FC<{ onBackToLibrary?: () => 
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'plus-square', np: '१. ज्यामितीय (a + b)²', en: '1. Geometric (a + b)²' },
-            { id: 'minus-square', np: '२. ज्यामितीय (a - b)²', en: '2. Geometric (a - b)²' },
-            { id: 'numerical', np: '३. सङ्ख्याको वर्ग गणना (12², 98²)', en: '3. Numerical Squares' },
+            { id: 'plus-square', np: '1. ज्यामितीय (a + b)²', en: '1. Geometric (a + b)²' },
+            { id: 'minus-square', np: '2. ज्यामितीय (a - b)²', en: '2. Geometric (a - b)²' },
+            { id: 'numerical', np: '3. सङ्ख्याको वर्ग गणना (12², 98²)', en: '3. Numerical Squares' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -136,14 +136,14 @@ export const GeometricalIdentitiesSquareLab: React.FC<{ onBackToLibrary?: () => 
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'भुजा (a + b) भएको ठूलो वर्ग ४ भागमा बाँडिन्छ: a² (वर्ग), ab (आयत), ab (आयत) र b² (वर्ग)।',
+                'भुजा (a + b) भएको ठूलो वर्ग 4 भागमा बाँडिन्छ: a² (वर्ग), ab, ab र b² (वर्ग)।',
                 'Square of side (a + b) is partitioned into 4 regions: a², ab, ab, and b².'
               )}
             </p>
 
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
-                <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1' }}>भुजा a: {valA}</label>
+                <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1' }}>Side a: {valA}</label>
                 <input
                   type="range"
                   min={2}
@@ -155,7 +155,7 @@ export const GeometricalIdentitiesSquareLab: React.FC<{ onBackToLibrary?: () => 
               </div>
 
               <div>
-                <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D' }}>भुजा b: {valB}</label>
+                <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D' }}>Side b: {valB}</label>
                 <input
                   type="range"
                   min={1}
@@ -227,10 +227,10 @@ export const GeometricalIdentitiesSquareLab: React.FC<{ onBackToLibrary?: () => 
                   marginTop: 4,
                 }}
               >
-                (a + b)² = a² + २ab + b²
+                (a + b)² = a² + 2ab + b²
               </div>
               <div style={{ color: '#047857', fontSize: 14 }}>
-                = {valA * valA} + २({valA * valB}) + {valB * valB} = {valA * valA + 2 * valA * valB + valB * valB}
+                = {valA * valA} + 2({valA * valB}) + {valB * valB} = {valA * valA + 2 * valA * valB + valB * valB}
               </div>
             </div>
           </div>
@@ -260,10 +260,10 @@ export const GeometricalIdentitiesSquareLab: React.FC<{ onBackToLibrary?: () => 
               }}
             >
               <div>
-                <strong>{L('सर्वसमिका:', 'Identity:')}</strong> (a - b)² = a² - २ab + b²
+                <strong>{L('सर्वसमिका:', 'Identity:')}</strong> (a - b)² = a² - 2ab + b²
               </div>
               <div style={{ fontSize: 14, color: '#991B1B' }}>
-                = {valA * valA} - २({valA * valB}) + {valB * valB} = {valA * valA - 2 * valA * valB + valB * valB}
+                = {valA * valA} - 2({valA * valB}) + {valB * valB} = {valA * valA - 2 * valA * valB + valB * valB}
               </div>
               <div
                 style={{
@@ -329,10 +329,10 @@ export const GeometricalIdentitiesSquareLab: React.FC<{ onBackToLibrary?: () => 
                   }}
                 >
                   <div>
-                    <strong>{L('१. रूपान्तरण:', '1. Split:')}</strong> {cur.num}² = {cur.formula}
+                    <strong>{L('1. रूपान्तरण:', '1. Split:')}</strong> {cur.num}² = {cur.formula}
                   </div>
                   <div>
-                    <strong>{L('२. विस्तार गर्दा:', '2. Expanding identity:')}</strong> {cur.expanded}
+                    <strong>{L('2. विस्तार गर्दा:', '2. Expanding identity:')}</strong> {cur.expanded}
                   </div>
                   <div
                     style={{

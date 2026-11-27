@@ -1,7 +1,7 @@
 /**
  * PointSymmetryRotationLab.tsx
- * Grade 7 Mathematics – Lesson 18: SYMMETRY AND TESSELLATION (सममिति र टेसलेसन)
- * Simulation 2: Point Symmetry and 180° Rotation Lab (बिन्दु सममिति र १८०° परिक्रमण प्रयोगशाला)
+ * Grade 7 Mathematics – Lesson 18: SYMMETRY AND TESSELLATION
+ * Simulation 2: Point Symmetry and 180° Rotation Lab
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 264-269)
  */
 import React, { useState } from 'react';
@@ -12,18 +12,18 @@ import { RotateCw, Check, CheckCircle2, RotateCcw, Shuffle, Sparkles } from 'luc
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'कुनै आकृतिलाई एउटा निश्चित बिन्दु वरिपरि कति डिग्री घुमाउँदा पहिलेकै अवस्थामा आइपुग्छ भने त्यसलाई बिन्दु सममिति (Point Symmetry) भनिन्छ?',
+    np: 'कुनै आकृतिलाई एउटा निश्चित बिन्दु वरिपरि कति degrees घुमाउँदा पहिलेकै अवस्थामा आइपुग्छ भने त्यसलाई बिन्दु सममिति (Point Symmetry) भनिन्छ?',
     en: 'When a figure rotated around a fixed point through what angle coincides with its original position, is it said to have point symmetry?',
     options: [
-      { key: 'A', label: '१८०° (आधा चक्कर / Half turn)' },
-      { key: 'B', label: '९०°' },
-      { key: 'C', label: '३६०°' },
-      { key: 'D', label: '४५°' },
+      { key: 'A', label: '180° (half turn)' },
+      { key: 'B', label: '90°' },
+      { key: 'C', label: '360°' },
+      { key: 'D', label: '45°' },
     ],
     answer: 'A',
   },
   {
-    np: 'अंग्रेजी वर्णमालाका कुन-कुन ठूला अक्षरहरूमा बिन्दु सममिति (Point Symmetry) हुन्छ?',
+    np: 'अंग्रेजी वर्णमालाका कुन-कुन ठूला अक्षरहरूमा बिन्दु सममिति (Point Symmetry) Yes?',
     en: 'Which English capital letters possess point symmetry?',
     options: [
       { key: 'A', label: 'H, I, N, O, S, X, Z' },
@@ -34,24 +34,24 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'समान्तर चतुर्भुज (Parallelogram) मा बिन्दु सममितिको केन्द्र कहाँ हुन्छ?',
+    np: 'समान्तर चतुर्भुज (Parallelogram) मा बिन्दु सममितिको केन्द्र कहाँ Yes?',
     en: 'Where is the centre of point symmetry located in a parallelogram?',
     options: [
-      { key: 'A', label: 'दुवै विकर्णहरू काटिएको बिन्दु (Intersection of diagonals)' },
-      { key: 'B', label: 'शीर्षबिन्दुमा' },
-      { key: 'C', label: 'कुनै एउटा भुजामा' },
-      { key: 'D', label: 'चतुर्भुज बाहिर' },
+      { key: 'A', label: 'The point where both diagonals cross' },
+      { key: 'B', label: 'At a vertex' },
+      { key: 'C', label: 'On one of the sides' },
+      { key: 'D', label: 'Outside the quadrilateral' },
     ],
     answer: 'A',
   },
   {
-    np: 'के समबाहु त्रिभुज (Equilateral Triangle) मा बिन्दु सममिति हुन्छ?',
+    np: 'के समबाहु त्रिभुज (Equilateral Triangle) मा बिन्दु सममिति Yes?',
     en: 'Does an equilateral triangle have point symmetry when rotated 180°?',
     options: [
-      { key: 'A', label: 'हुँदैन (१८०° घुमाउँदा शीर्ष तल फर्कन्छ र खप्टिँदैन)' },
-      { key: 'B', label: 'हुन्छ' },
-      { key: 'C', label: 'कहिलेकाहीँ हुन्छ' },
-      { key: 'D', label: 'केन्द्रमा मात्र हुन्छ' },
+      { key: 'A', label: 'No (when turned 180°, the vertex flips down and does not overlap)' },
+      { key: 'B', label: 'Yes' },
+      { key: 'C', label: 'Sometimes' },
+      { key: 'D', label: 'Only at the centre' },
     ],
     answer: 'A',
   },
@@ -66,7 +66,7 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
   const kit = useSimKit({
     code: 'SIM-MATH-G7-L18-02',
     chapter: 18,
-    titleNp: 'बिन्दु सममिति र १८०° परिक्रमण प्रयोगशाला (Point Symmetry Lab)',
+    titleNp: 'बिन्दु सममिति र 180° परिक्रमण प्रयोगशाला (Point Symmetry Lab)',
     titleEn: 'Point Symmetry and 180° Rotation Lab',
   });
   const isNe = kit.lang === 'ne';
@@ -106,7 +106,7 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! केन्द्र O वरिपरि १८०° घुमाउँदा दुरुस्त आफ्नै आकारमा खप्टिने आकृतिलाई बिन्दु सममिति भनिन्छ। घुमाएर हेरौँ!',
+        'नमस्ते! केन्द्र O वरिपरि 180° घुमाउँदा दुरुस्त आफ्नै आकारमा खप्टिने आकृतिलाई बिन्दु सममिति भनिन्छ। घुमाएर हेरौँ!',
         'Hello! When a figure rotated through 180° around center O looks identical to its original position, it has point symmetry!'
       )}
     >
@@ -114,10 +114,10 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 justify-center bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'rotation_studio', np: '१. १८०° परिक्रमण स्टुडियो (Rotation Studio)', en: '1. 180° Rotation Studio' },
-            { id: 'distance_midpoint', np: '२. केन्द्रबाट बराबर दूरी (Distance & Midpoint)', en: '2. Equal Distance from O' },
-            { id: 'alphabet_challenge', np: '३. अंग्रेजी वर्णमाला परीक्षण (Alphabet Test)', en: '3. Alphabet Point Symmetry' },
-            { id: 'figures_lab', np: '४. ज्यामितीय आकृति परीक्षण (Figures Lab)', en: '4. Geometric Figures Test' },
+            { id: 'rotation_studio', np: '1. 180° परिक्रमण स्टुडियो (Rotation Studio)', en: '1. 180° Rotation Studio' },
+            { id: 'distance_midpoint', np: '2. केन्द्रबाट बराबर दूरी (Distance & Midpoint)', en: '2. Equal Distance from O' },
+            { id: 'alphabet_challenge', np: '3. अंग्रेजी वर्णमाला परीक्षण (Alphabet Test)', en: '3. Alphabet Point Symmetry' },
+            { id: 'figures_lab', np: '4. ज्यामितीय आकृति परीक्षण (Figures Lab)', en: '4. Geometric Figures Test' },
           ].map((item) => (
             <button
               key={item.id}
@@ -145,7 +145,7 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
               </h3>
               <p className="text-slate-700 text-xs md:text-sm mt-1">
                 {L(
-                  'यदि कुनै आकृतिलाई यसको केन्द्रबिन्दु O वरिपरि १८०° (आधा चक्कर) घुमाउँदा सो आकृति सुरुको अवस्थासँग दुरुस्त खप्टिन्छ भने त्यसलाई बिन्दु सममिति भएको आकृति र बिन्दु O लाई सममितिको केन्द्र (Centre of Symmetry) भनिन्छ।',
+                  'यदि कुनै आकृतिलाई यसको केन्द्रबिन्दु O वरिपरि 180° (आधा चक्कर) घुमाउँदा सो आकृति सुरुको अवस्थासँग दुरुस्त खप्टिन्छ भने त्यसलाई बिन्दु सममिति भएको आकृति र बिन्दु O लाई सममितिको केन्द्र (Centre of Symmetry) भनिन्छ।',
                   'If rotating a figure 180° around point O causes it to coincide exactly with its initial position, the figure has point symmetry, and point O is its centre of symmetry.'
                 )}
               </p>
@@ -154,12 +154,12 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
             {/* Shape Buttons */}
             <div className="flex flex-wrap gap-2 justify-center">
               {[
-                { id: 'letter_S', label: 'अक्षर S (बिन्दु सममिति)', sym: true },
-                { id: 'letter_N', label: 'अक्षर N (बिन्दु सममिति)', sym: true },
-                { id: 'parallelogram', label: 'समान्तर चतुर्भुज (बिन्दु सममिति)', sym: true },
-                { id: 'rectangle', label: 'आयत (बिन्दु सममिति)', sym: true },
-                { id: 'letter_E', label: 'अक्षर E (छैन)', sym: false },
-                { id: 'triangle', label: 'त्रिभुज (छैन)', sym: false },
+                { id: 'letter_S', label: 'Letter S', sym: true },
+                { id: 'letter_N', label: 'Letter N', sym: true },
+                { id: 'parallelogram', label: 'Parallelogram (point symmetry)', sym: true },
+                { id: 'rectangle', label: 'Rectangle (point symmetry)', sym: true },
+                { id: 'letter_E', label: 'Letter E', sym: false },
+                { id: 'triangle', label: 'Triangle (none)', sym: false },
               ].map((s) => (
                 <button
                   key={s.id}
@@ -249,7 +249,7 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
                 </svg>
 
                 <div className="text-xs text-slate-500 mt-2">
-                  {L('खैरो धर्का = सुरुको अवस्था (Original) | रङ्गीन = घुमिरहेको अवस्था', 'Grey silhouette = original position | Colored = rotating position')}
+                  {L('रङ्गीन = घुमिरहेको अवस्था', 'Grey silhouette = original position | Colored = rotating position')}
                 </div>
               </div>
 
@@ -286,19 +286,19 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
                     onClick={() => setRotationAngle(0)}
                     className="flex-1 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl text-xs font-bold text-slate-700"
                   >
-                    0° {L('(सुरु)', '(Initial)')}
+                    0° {L('', '(Initial)')}
                   </button>
                   <button
                     onClick={() => setRotationAngle(90)}
                     className="flex-1 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl text-xs font-bold text-slate-700"
                   >
-                    90° {L('(चौथाइ)', '(Quarter)')}
+                    90° {L('', '(Quarter)')}
                   </button>
                   <button
                     onClick={() => setRotationAngle(180)}
                     className="flex-1 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-md"
                   >
-                    180° {L('(आधा चक्कर)', '(Half Turn)')}
+                    180° {L('', '(Half Turn)')}
                   </button>
                 </div>
 
@@ -317,7 +317,7 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
                       <div className="text-xs text-rose-800">
                         <b>✕ {L('बिन्दु सममिति छैन:', 'No Point Symmetry:')}</b>{' '}
                         {L(
-                          '१८०° मा घुमाउँदा आकृति उल्टो भई सुरुको अवस्थासँग खप्टिएन।',
+                          '180° मा घुमाउँदा आकृति उल्टो भई सुरुको अवस्थासँग खप्टिएन।',
                           'At 180°, the figure turns upside down and fails to overlap the initial shape.'
                         )}
                       </div>
@@ -325,14 +325,14 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
                       <div className="text-xs text-emerald-800">
                         <b>✓ {L('बिन्दु सममिति प्रमाणित भयो!', 'Point Symmetry Verified!')}</b>{' '}
                         {L(
-                          '१८०° घुमाउँदा दुरुस्त सुरुको अवस्थामा खप्टियो। अतः यसमा बिन्दु सममिति छ!',
+                          '180° घुमाउँदा दुरुस्त सुरुको अवस्थामा खप्टियो। अतः यसमा बिन्दु सममिति छ!',
                           'At 180°, it coincides identically with its original outline!'
                         )}
                       </div>
                     )
                   ) : (
                     <div className="text-xs text-slate-500 text-center">
-                      {L('बिन्दु सममिति जाँच्न कोणलाई १८०° मा लैजानुहोस्।', 'Slide the angle to 180° to test point symmetry.')}
+                      {L('बिन्दु सममिति जाँच्न कोणलाई 180° मा लैजानुहोस्।', 'Slide the angle to 180° to test point symmetry.')}
                     </div>
                   )}
                 </div>
@@ -350,7 +350,7 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
               </h3>
               <p className="text-slate-700 text-xs md:text-sm mt-1">
                 {L(
-                  'बिन्दु सममिति भएका आकृतिमा केन्द्रबिन्दु O बाट विपरित दुवैतिरका अनुरूप बिन्दुहरूको दूरी बराबर (OA = OA\') हुन्छ र O रेखाखण्ड AA\' को मध्यबिन्दु (Midpoint) हुन्छ।',
+                  'बिन्दु सममिति भएका आकृतिमा केन्द्रबिन्दु O बाट विपरित दुवैतिरका अनुरूप बिन्दुहरूको दूरी बराबर (OA = OA\') Yes र O रेखाखण्ड AA\' को मध्यबिन्दु (Midpoint) Yes।',
                   'In any figure with point symmetry, corresponding opposite points lie on a straight line passing through O at equal distances (OA = OA\'), so O is the midpoint.'
                 )}
               </p>
@@ -400,11 +400,11 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
                   <div className="text-xs text-slate-700 space-y-1">
                     <div className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-emerald-600" />
-                      <span>{L('दूरी OA = दूरी OC (कर्ण बिन्दुहरूको दूरी बराबर)', 'Distance OA = Distance OC')}</span>
+                      <span>{L('दूरी OA = दूरी OC', 'Distance OA = Distance OC')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-emerald-600" />
-                      <span>{L('दूरी OB = दूरी OD (दोस्रो विकर्णका बिन्दुहरू बराबर)', 'Distance OB = Distance OD')}</span>
+                      <span>{L('दूरी OB = दूरी OD', 'Distance OB = Distance OD')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-emerald-600" />
@@ -425,7 +425,7 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
                 {L('अंग्रेजी वर्णमालाका अक्षरहरूको बिन्दु सममिति परीक्षण:', 'English Alphabet Point Symmetry Test:')}
               </h3>
               <p className="text-xs text-indigo-800 mt-1">
-                {L('कुनै पनि अक्षर छान्नुहोस् र १८०° घुमाएर हेर्नुहोस्। कुन अक्षर दुरुस्त उस्तै देखिन्छ?', 'Select any letter and rotate it 180° to check if it looks identical.')}
+                {L('कुनै पनि अक्षर छान्नुहोस् र 180° घुमाएर हेर्नुहोस्। कुन अक्षर दुरुस्त उस्तै देखिन्छ?', 'Select any letter and rotate it 180° to check if it looks identical.')}
               </p>
             </div>
 
@@ -481,7 +481,7 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
                     className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-md text-sm"
                   >
                     <RotateCw className="w-4 h-4" />
-                    {letterRot === 180 ? L('सुरुमा फर्काउनुहोस् (0°)', 'Reset to 0°') : L('१८०° घुमाउनुहोस् (Rotate 180°)', 'Rotate 180°')}
+                    {letterRot === 180 ? L('सुरुमा फर्काउनुहोस् (0°)', 'Reset to 0°') : L('180° घुमाउनुहोस् (Rotate 180°)', 'Rotate 180°')}
                   </button>
                 </div>
 
@@ -506,8 +506,8 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
                     </div>
                     <p className="text-xs text-slate-600 mt-1">
                       {ALPHABET_LIST.find((x) => x.char === selectedLetter)?.hasSym
-                        ? L('१८०° घुमाउँदा पनि यो दुरुस्त उस्तै देखिन्छ।', 'It looks identical even when turned completely upside down (180°).')
-                        : L('१८०° घुमाउँदा यो उल्टो भई फरक देखिन्छ।', 'It turns upside down and changes appearance at 180°.')}
+                        ? L('180° घुमाउँदा पनि यो दुरुस्त उस्तै देखिन्छ।', 'It looks identical even when turned completely upside down (180°).')
+                        : L('180° घुमाउँदा यो उल्टो भई फरक देखिन्छ।', 'It turns upside down and changes appearance at 180°.')}
                     </p>
                   </div>
                 )}
@@ -540,19 +540,19 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
                     <td className="p-3 font-bold border-r border-slate-200">{L('समान्तर चतुर्भुज (Parallelogram)', 'Parallelogram')}</td>
                     <td className="p-3 font-bold text-emerald-600 border-r border-slate-200">✓ {L('छ (Yes)', 'Yes')}</td>
                     <td className="p-3 border-r border-slate-200">{L('विकर्णहरू काटिएको बिन्दु', 'Diagonal intersection')}</td>
-                    <td className="p-3 text-slate-600">{L('१८०° घुमाउँदा चारवटै शीर्ष दुरुस्त खप्टिन्छन्', 'Overlaps perfectly at 180°')}</td>
+                    <td className="p-3 text-slate-600">{L('180° घुमाउँदा चारवटै शीर्ष दुरुस्त खप्टिन्छन्', 'Overlaps perfectly at 180°')}</td>
                   </tr>
                   <tr className="hover:bg-indigo-50/50">
                     <td className="p-3 font-bold border-r border-slate-200">{L('आयत (Rectangle)', 'Rectangle')}</td>
                     <td className="p-3 font-bold text-emerald-600 border-r border-slate-200">✓ {L('छ (Yes)', 'Yes')}</td>
                     <td className="p-3 border-r border-slate-200">{L('विकर्णहरूको कटान बिन्दु', 'Diagonal intersection')}</td>
-                    <td className="p-3 text-slate-600">{L('१८०° मा आकार र कोण उस्तै रहन्छ', 'Matches position at 180°')}</td>
+                    <td className="p-3 text-slate-600">{L('180° मा आकार र कोण उस्तै रहन्छ', 'Matches position at 180°')}</td>
                   </tr>
                   <tr className="hover:bg-indigo-50/50">
                     <td className="p-3 font-bold border-r border-slate-200">{L('वर्ग (Square)', 'Square')}</td>
                     <td className="p-3 font-bold text-emerald-600 border-r border-slate-200">✓ {L('छ (Yes)', 'Yes')}</td>
                     <td className="p-3 border-r border-slate-200">{L('विकर्णहरूको केन्द्र', 'Centre of diagonals')}</td>
-                    <td className="p-3 text-slate-600">{L('९०° र १८०° दुवैमा खप्टिन्छ', 'Matches at 90° and 180°')}</td>
+                    <td className="p-3 text-slate-600">{L('90° र 180° दुवैमा खप्टिन्छ', 'Matches at 90° and 180°')}</td>
                   </tr>
                   <tr className="hover:bg-indigo-50/50">
                     <td className="p-3 font-bold border-r border-slate-200">{L('वृत्त (Circle)', 'Circle')}</td>
@@ -564,7 +564,7 @@ export const PointSymmetryRotationLab: React.FC<{ onBackToLibrary?: () => void; 
                     <td className="p-3 font-bold border-r border-slate-200">{L('समबाहु त्रिभुज (Equilateral △)', 'Equilateral Triangle')}</td>
                     <td className="p-3 font-bold text-rose-600 border-r border-slate-200">✕ {L('छैन (No)', 'No')}</td>
                     <td className="p-3 border-r border-slate-200">-</td>
-                    <td className="p-3 text-slate-600">{L('१८०° घुमाउँदा शीर्ष तल फर्कन्छ र खप्टिँदैन', 'Points downward at 180°')}</td>
+                    <td className="p-3 text-slate-600">{L('180° घुमाउँदा शीर्ष तल फर्कन्छ र खप्टिँदैन', 'Points downward at 180°')}</td>
                   </tr>
                 </tbody>
               </table>

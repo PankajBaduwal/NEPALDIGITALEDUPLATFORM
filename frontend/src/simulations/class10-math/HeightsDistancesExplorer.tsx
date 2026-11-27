@@ -71,54 +71,54 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
   const quizQuestions = [
     {
       id: 1,
-      qNp: '१.५ मिटर अग्लो एक व्यक्तिले ४० मिटर टाढा रहेको मन्दिरको गजुर हेर्दा उन्नतांश कोण ३०° पाउँछ। मन्दिरको कुल उचाइ कति होला? (tan ३०° = १/√३ ≈ ०.५७७)',
+      qNp: '1.5 m अग्लो एक व्यक्तिले 40 m टाढा रहेको मन्दिरको गजुर हेर्दा उन्नतांश कोण 30° पाउँछ। मन्दिरको कुल उचाइ कति होला? (tan 30° = 1/√3 ≈ 0.577)',
       qEn: 'An observer 1.5 m tall stands 40 m away from a temple and observes the top with an angle of elevation of 30°. What is the total height of the temple? (tan 30° = 1/√3 ≈ 0.577)',
       options: [
-        { np: '२४.५८ मिटर', en: '24.58 m', correct: true },
-        { np: '२३.०८ मिटर', en: '23.08 m', correct: false },
-        { np: '४१.५ मिटर', en: '41.5 m', correct: false },
-        { np: '३१.५ मिटर', en: '31.5 m', correct: false },
+        { np: '24.58 m', en: '24.58 m', correct: true },
+        { np: '23.08 m', en: '23.08 m', correct: false },
+        { np: '41.5 m', en: '41.5 m', correct: false },
+        { np: '31.5 m', en: '31.5 m', correct: false },
       ],
-      hintNp: 'h = d × tan(θ) + e = ४० × (१/√३) + १.५ = २३.०९ + १.५ = २४.५९ मिटर',
+      hintNp: 'h = d × tan(θ) + e = 40 × (1/√3) + 1.5 = 23.09 + 1.5 = 24.59 m',
       hintEn: 'h = d × tan(θ) + e = 40 × 0.5774 + 1.5 = 23.09 + 1.5 = 24.59 m',
     },
     {
       id: 2,
-      qNp: '६० मिटर अग्लो धरहराको टुप्पोबाट जमिनमा रहेको एक कारलाई हेर्दा अवनति कोण ४५° देखिन्छ। धरहराको फेदबाट कार कति टाढा छ?',
+      qNp: '60 m अग्लो धरहराको टुप्पोबाट जमिनमा रहेको एक कारलाई हेर्दा अवनति कोण 45° देखिन्छ। धरहराको फेदबाट कार कति टाढा छ?',
       qEn: 'From the top of a 60 m high tower, the angle of depression of a car on the ground is 45°. How far is the car from the base of the tower?',
       options: [
-        { np: '३० मिटर', en: '30 m', correct: false },
-        { np: '६० मिटर', en: '60 m', correct: true },
-        { np: '८४.८५ मिटर', en: '84.85 m', correct: false },
-        { np: '१२० मिटर', en: '120 m', correct: false },
+        { np: '30 m', en: '30 m', correct: false },
+        { np: '60 m', en: '60 m', correct: true },
+        { np: '84.85 m', en: '84.85 m', correct: false },
+        { np: '120 m', en: '120 m', correct: false },
       ],
-      hintNp: 'अवनति कोण = उन्नतांश कोण = ४५°। tan ४५° = १, त्यसैले दूरी = ६० / tan ४५° = ६० मिटर।',
+      hintNp: 'अवनति कोण = उन्नतांश कोण = 45°। tan 45° = 1, त्यसैले दूरी = 60 / tan 45° = 60 m।',
       hintEn: 'Angle of depression = Angle of elevation = 45°. tan 45° = 1, so distance = 60 / 1 = 60 m.',
     },
     {
       id: 3,
-      qNp: 'एउटा रुख हावाले भाँचिएर टुप्पोले फेदबाट १० मिटरको दूरीमा जमिन छुँदा ३०° को कोण बनाउँछ। रुखको कुल प्रारम्भिक उचाइ कति थियो? (tan ३०° = १/√३, cos ३०° = √३/२)',
+      qNp: 'एउटा रुख हावाले भाँचिएर टुप्पोले फेदबाट 10 mको दूरीमा जमिन छुँदा 30° को कोण बनाउँछ। रुखको कुल प्रारम्भिक उचाइ कति थियो? (tan 30° = 1/√3, cos 30° = √3/2)',
       qEn: 'A tree is broken by the wind such that its top touches the ground at a distance of 10 m from its base, making an angle of 30°. What was the original height of the tree?',
       options: [
-        { np: '१०√३ मिटर (१७.३२ मि)', en: '10√3 m (17.32 m)', correct: true },
-        { np: '१० मिटर', en: '10 m', correct: false },
-        { np: '२० मिटर', en: '20 m', correct: false },
-        { np: '१५.७७ मिटर', en: '15.77 m', correct: false },
+        { np: '10√3 m (17.32 m)', en: '10√3 m (17.32 m)', correct: true },
+        { np: '10 m', en: '10 m', correct: false },
+        { np: '20 m', en: '20 m', correct: false },
+        { np: '15.77 m', en: '15.77 m', correct: false },
       ],
-      hintNp: 'भाँचिएको रुख: उभिएको भाग x = १० tan ३०° = १०/√३, ढलेको भाग y = १० / cos ३०° = २०/√३। कुल उचाइ = (१० + २०)/√३ = ३०/√३ = १०√३ ≈ १७.३२ मि।',
+      hintNp: 'भाँचिएको रुख: उभिएको भाग x = 10 tan 30° = 10/√3, ढलेको भाग y = 10 / cos 30° = 20/√3। कुल उचाइ = (10 + 20)/√3 = 30/√3 = 10√3 ≈ 17.32 m।',
       hintEn: 'Broken tree: Trunk x = 10 tan 30° = 10/√3, fallen y = 10 / cos 30° = 20/√3. Total = 30/√3 = 10√3 ≈ 17.32 m.',
     },
     {
       id: 4,
-      qNp: 'एउटा वृत्ताकार पोखरीको केन्द्रमा स्तम्भ छ। पोखरीको व्यास २० मिटर छ र डिलबाट स्तम्भको टुप्पो हेर्दा ६०° को कोण बन्छ। स्तम्भको उचाइ कति?',
+      qNp: 'एउटा वृत्ताकार पोखरीको केन्द्रमा स्तम्भ छ। पोखरीको व्यास 20 m छ र डिलबाट स्तम्भको टुप्पो हेर्दा 60° को कोण बन्छ। स्तम्भको उचाइ कति?',
       qEn: 'A pillar is erected at the centre of a circular pond. The diameter of the pond is 20 m. If the angle of elevation of the top from the bank is 60°, what is the height of the pillar?',
       options: [
-        { np: '१०√३ मिटर (१७.३२ मि)', en: '10√3 m (17.32 m)', correct: true },
-        { np: '२०√३ मिटर (३४.६४ मि)', en: '20√3 m (34.64 m)', correct: false },
-        { np: '१० मिटर', en: '10 m', correct: false },
-        { np: '३० मिटर', en: '30 m', correct: false },
+        { np: '10√3 m (17.32 m)', en: '10√3 m (17.32 m)', correct: true },
+        { np: '20√3 m', en: '20√3 m (34.64 m)', correct: false },
+        { np: '10 m', en: '10 m', correct: false },
+        { np: '30 m', en: '30 m', correct: false },
       ],
-      hintNp: 'पोखरीको अर्धव्यास r = व्यास / २ = १० मि। उचाइ h = r × tan ६०° = १० × √३ = १७.३२ मिटर।',
+      hintNp: 'पोखरीको अर्धव्यास r = व्यास / 2 = 10 m। उचाइ h = r × tan 60° = 10 × √3 = 17.32 m।',
       hintEn: 'Radius r = Diameter / 2 = 10 m. Height h = r × tan 60° = 10 × √3 ≈ 17.32 m.',
     },
   ];
@@ -146,7 +146,7 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
           {[
             { id: 'elevation', labelNp: 'उन्नतांश कोण (Elevation)', labelEn: 'Angle of Elevation' },
             { id: 'depression', labelNp: 'अवनति कोण (Depression)', labelEn: 'Angle of Depression' },
-            { id: 'clinometer', labelNp: 'क्लाइनोमिटर (Clinometer)', labelEn: 'Virtual Clinometer' },
+            { id: 'clinometer', labelNp: 'क्लाइनोm (Clinometer)', labelEn: 'Virtual Clinometer' },
             { id: 'brokenTree', labelNp: 'भाँचिएको रुख (Broken Tree)', labelEn: 'Broken Tree Problem' },
             { id: 'circularPond', labelNp: 'वृत्ताकार पोखरी (Circular Pond)', labelEn: 'Circular Pond' },
             { id: 'challenge', labelNp: 'अभ्यास तथा मूल्याङ्कन', labelEn: 'Challenge & Quiz' },
@@ -360,8 +360,8 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
                     className="w-full accent-teal-600"
                   />
                   <div className="flex justify-between text-[10px] text-gray-400">
-                    <span>५ मि</span>
-                    <span>५० मि</span>
+                    <span>5 m</span>
+                    <span>50 m</span>
                   </div>
                 </div>
 
@@ -411,8 +411,8 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
                     className="w-full accent-amber-600"
                   />
                   <div className="flex justify-between text-[10px] text-gray-400">
-                    <span>० मि (जमिन)</span>
-                    <span>२ मि</span>
+                    <span>0 m (ground)</span>
+                    <span>2 m</span>
                   </div>
                 </div>
               </div>
@@ -584,8 +584,8 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
                     className="w-full accent-slate-800"
                   />
                   <div className="flex justify-between text-[10px] text-gray-400">
-                    <span>१० मि</span>
-                    <span>६० मि</span>
+                    <span>10 m</span>
+                    <span>60 m</span>
                   </div>
                 </div>
 
@@ -641,7 +641,7 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
             <div className="lg:col-span-8 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col items-center">
               <div className="w-full flex justify-between items-center mb-3">
                 <h3 className="font-bold text-[#142D4E] text-base sm:text-lg">
-                  {L('क्लाइनोमिटर (Clinometer) यन्त्र सिमुलेटर', 'Virtual Clinometer Sighting Simulator')}
+                  {L('क्लाइनोm (Clinometer) यन्त्र सिमुलेटर', 'Virtual Clinometer Sighting Simulator')}
                 </h3>
                 <span className="text-xs bg-amber-100 text-amber-900 px-3 py-1 rounded-full font-semibold">
                   θ = 90° - Plumb Angle
@@ -728,7 +728,7 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
               {/* EXPERIMENTAL PROCEDURE */}
               <div className="w-full mt-4 p-4 bg-white border border-gray-200 rounded-xl space-y-2 text-xs sm:text-sm">
                 <div className="font-bold text-[#142D4E]">
-                  {L('क्लाइनोमिटर प्रयोग विधि (Experimental Steps):', 'How to use a Clinometer in field:')}
+                  {L('क्लाइनोm प्रयोग विधि (Experimental Steps):', 'How to use a Clinometer in field:')}
                 </div>
                 <ol className="list-decimal list-inside space-y-1 text-gray-700">
                   <li>
@@ -739,7 +739,7 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
                   </li>
                   <li>
                     {L(
-                      'प्लम लाइन ठाडो रहँदा प्रोटेक्टरमा देखाएको कोण नोट गर्नुहोस् (उन्नतांश कोण = ९०° - प्लम लाइन कोण)।',
+                      'प्लम लाइन ठाडो रहँदा प्रोटेक्टरमा देखाएको कोण नोट गर्नुहोस् (उन्नतांश कोण = 90° - प्लम लाइन कोण)।',
                       'Read the plumb line angle (Angle of elevation θ = 90° - plumb line reading).'
                     )}
                   </li>
@@ -851,17 +851,17 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
                         {/* Tree Foot & Break Labels */}
                         <circle cx={footX} cy={groundY} r="4" fill="#000" />
                         <text x={footX - 14} y={groundY + 16} fill="#000" fontSize="12" fontWeight="bold">
-                          B (फेद)
+                          B
                         </text>
 
                         <circle cx={footX} cy={breakY} r="4" fill="#EF4444" />
                         <text x={footX - 20} y={breakY - 4} fill="#EF4444" fontSize="12" fontWeight="bold">
-                          C (भाँचिएको ठाउँ)
+                          C
                         </text>
 
                         <circle cx={tipX} cy={groundY} r="4" fill="#000" />
                         <text x={tipX + 8} y={groundY + 16} fill="#000" fontSize="12" fontWeight="bold">
-                          A (टुप्पो)
+                          A
                         </text>
 
                         {/* Angle Arc at tip A */}
@@ -912,15 +912,15 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
                 </div>
                 <div className="text-xs sm:text-sm text-gray-800 space-y-1 font-mono">
                   <div>
-                    १. उभिएको भाग (Trunk) x = d × tan({fmt(brokenAngle)}°) = {fmt(brokenDist)} × {fmt(Math.tan(brokenRad).toFixed(4))} ={' '}
+                    1. Standing part (trunk) x = d × tan({fmt(brokenAngle)}°) = {fmt(brokenDist)} × {fmt(Math.tan(brokenRad).toFixed(4))} ={' '}
                     <strong>{fmt(brokenTrunk.toFixed(2))} m</strong>
                   </div>
                   <div>
-                    २. ढलेको भाग (Fallen) y = d / cos({fmt(brokenAngle)}°) = {fmt(brokenDist)} / {fmt(Math.cos(brokenRad).toFixed(4))} ={' '}
+                    2. Fallen part y = d / cos({fmt(brokenAngle)}°) = {fmt(brokenDist)} / {fmt(Math.cos(brokenRad).toFixed(4))} ={' '}
                     <strong>{fmt(brokenPart.toFixed(2))} m</strong>
                   </div>
                   <div className="pt-1 text-[#142D4E] font-bold border-t border-emerald-200">
-                    ३. रुखको कुल प्रारम्भिक उचाइ (Total Height) H = x + y = {fmt(brokenTrunk.toFixed(2))} + {fmt(brokenPart.toFixed(2))} ={' '}
+                    3. Total original height of the tree H = x + y = {fmt(brokenTrunk.toFixed(2))} + {fmt(brokenPart.toFixed(2))} ={' '}
                     <span className="text-emerald-700 text-base font-extrabold">{fmt(brokenTotalH.toFixed(2))} m</span>
                   </div>
                 </div>
@@ -976,7 +976,7 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
                   <div className="font-bold">💡 {L('परीक्षामा सोधिने प्रश्न', 'SEE Exam Special')}</div>
                   <p className="text-[11px] leading-relaxed">
                     {L(
-                      'एसईई परीक्षामा रुख, बिजुलीको खम्बा वा झण्डाको खम्बा हावाले भाँचिएको प्रश्न बारम्बार सोधिने महत्वपूर्ण ४ अङ्कको प्रश्न हो।',
+                      'एसईई परीक्षामा रुख, बिजुलीको खम्बा वा झण्डाको खम्बा हावाले भाँचिएको प्रश्न बारम्बार सोधिने महत्वपूर्ण 4 अङ्कको प्रश्न हो।',
                       'This broken tree/pole problem is a classic high-yield 4-mark question frequently asked in SEE examinations.'
                     )}
                   </p>
@@ -1085,10 +1085,10 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
                 </div>
                 <div className="text-xs sm:text-sm text-gray-800 space-y-1">
                   <div>
-                    अर्धव्यास (Radius r) = व्यास / २ = {fmt(pondDiameter)} / २ = <strong>{fmt(pondRadius)} m</strong>
+                    Radius (r) = diameter / 2 = {fmt(pondDiameter)} / 2 = <strong>{fmt(pondRadius)} m</strong>
                   </div>
                   <div>
-                    स्तम्भको उचाइ (Height h) = r × tan(θ) = {fmt(pondRadius)} × tan({fmt(pondAngle)}°) ={' '}
+                    Height of the column (h) = r × tan(θ) = {fmt(pondRadius)} × tan({fmt(pondAngle)}°) ={' '}
                     <span className="text-cyan-800 font-extrabold text-base">{fmt(pondPoleHeight.toFixed(2))} m</span>
                   </div>
                 </div>
@@ -1163,7 +1163,7 @@ export const HeightsDistancesExplorer: React.FC<SimProps> = ({ onBackToLibrary, 
                   {L('उचाइ र दूरी अभ्यास प्रश्नहरू', 'Heights & Distances Practice Quiz')}
                 </h3>
                 <p className="text-xs text-gray-500">
-                  {L('पाठ्यक्रम विकास केन्द्रको पाठ्यपुस्तक अनुसार ४ महत्वपूर्ण प्रश्नहरू', '4 key textbook questions with full solutions')}
+                  {L('पाठ्यक्रम विकास केन्द्रको पाठ्यपुस्तक अनुसार 4 महत्वपूर्ण प्रश्नहरू', '4 key textbook questions with full solutions')}
                 </p>
               </div>
               <div className="flex items-center gap-2 bg-amber-50 px-4 py-2 rounded-xl border border-amber-200">

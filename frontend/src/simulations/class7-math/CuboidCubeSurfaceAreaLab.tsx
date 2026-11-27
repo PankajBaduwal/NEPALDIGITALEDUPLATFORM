@@ -1,6 +1,6 @@
 /**
  * CuboidCubeSurfaceAreaLab.tsx
- * Grade 7 Mathematics – Lesson 9: PERIMETER, AREA AND VOLUME (परिमिति, क्षेत्रफल र आयतन)
+ * Grade 7 Mathematics – Lesson 9: PERIMETER, AREA AND VOLUME
  * Simulation 2: Cuboid and Cube Surface Area Lab (3D + 2D Net Unfolding Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 118-124)
  */
@@ -12,13 +12,13 @@ import { Box, Layers, Maximize2, Calculator, RefreshCw, Check } from 'lucide-rea
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'घनाभ (Cuboid) को जम्मा कतिवटा सतहहरू (Faces) हुन्छन् र तिनीहरू कस्ता आकारका हुन्छन्?',
+    np: 'घनाभ (Cuboid) को जम्मा कतिpcs faces (Faces) हुन्छन् र तिनीहरू कस्ता आकारका हुन्छन्?',
     en: 'How many faces does a cuboid have, and what shape are they?',
     options: [
-      { key: 'A', label: '६ वटा आयताकार सतहहरू (6 rectangular faces)' },
-      { key: 'B', label: '६ वटा वर्गाकार सतहहरू' },
-      { key: 'C', label: '४ वटा आयताकार सतहहरू' },
-      { key: 'D', label: '८ वटा सतहहरू' },
+      { key: 'A', label: '6 pcs rectangular faces' },
+      { key: 'B', label: '6 pcs square faces' },
+      { key: 'C', label: '4 pcs rectangular faces' },
+      { key: 'D', label: '8 pcs faces' },
     ],
     answer: 'A',
   },
@@ -26,32 +26,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'लम्बाइ (l), चौडाइ (b) र उचाइ (h) भएको घनाभको जम्मा पृष्ठीय क्षेत्रफल (TSA) को सुत्र कुन हो?',
     en: 'What is the formula for the Total Surface Area (TSA) of a cuboid?',
     options: [
-      { key: 'A', label: 'TSA = २(lb + bh + lh)' },
+      { key: 'A', label: 'TSA = 2(lb + bh + lh)' },
       { key: 'B', label: 'TSA = l × b × h' },
-      { key: 'C', label: 'TSA = ६a²' },
-      { key: 'D', label: 'TSA = ४(l + b + h)' },
+      { key: 'C', label: 'TSA = 6a²' },
+      { key: 'D', label: 'TSA = 4(l + b + h)' },
     ],
     answer: 'A',
   },
   {
-    np: 'लम्बाइ ४ सेमी, चौडाइ ३ सेमी र उचाइ २ सेमी भएको घनाभको कुल पृष्ठीय क्षेत्रफल कति हुन्छ?',
+    np: 'लम्बाइ 4 cm, चौडाइ 3 cm र उचाइ 2 cm भएको घनाभको कुल पृष्ठीय क्षेत्रफल कति हुन्छ?',
     en: 'What is the total surface area of a cuboid with length 4 cm, breadth 3 cm, and height 2 cm?',
     options: [
-      { key: 'A', label: '५२ वर्ग सेमी [ २ × (१२ + ६ + ८) = ५२ cm² ]' },
-      { key: 'B', label: '२४ वर्ग सेमी' },
-      { key: 'C', label: '४८ वर्ग सेमी' },
-      { key: 'D', label: '६४ वर्ग सेमी' },
+      { key: 'A', label: '52 sq cm [ 2 × (12 + 6 + 8) = 52 cm² ]' },
+      { key: 'B', label: '24 sq cm' },
+      { key: 'C', label: '48 sq cm' },
+      { key: 'D', label: '64 sq cm' },
     ],
     answer: 'A',
   },
   {
-    np: 'भुजा ३.५ सेमी भएको एउटा घन (Cube) को जम्मा पृष्ठीय क्षेत्रफल कति हुन्छ?',
+    np: 'भुजा 3.5 cm भएको एउटा घन (Cube) को जम्मा पृष्ठीय क्षेत्रफल कति हुन्छ?',
     en: 'What is the total surface area of a cube with edge length 3.5 cm?',
     options: [
-      { key: 'A', label: '७३.५ वर्ग सेमी (६ × ३.५² = ६ × १२.२५ = ७३.५ cm²)' },
-      { key: 'B', label: '४२.८७५ वर्ग सेमी' },
-      { key: 'C', label: '८४ वर्ग सेमी' },
-      { key: 'D', label: '४९ वर्ग सेमी' },
+      { key: 'A', label: '73.5 sq cm (6 × 3.5² = 6 × 12.25 = 73.5 cm²)' },
+      { key: 'B', label: '42.875 sq cm' },
+      { key: 'C', label: '84 sq cm' },
+      { key: 'D', label: '49 sq cm' },
     ],
     answer: 'A',
   },
@@ -96,7 +96,7 @@ export const CuboidCubeSurfaceAreaLab: React.FC<{ onBackToLibrary?: () => void; 
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'घनाभमा ६ वटा आयताकार सतहहरू हुन्छन्: TSA = २(lb + bh + lh), र घनमा ६ वटा बराबर वर्गाकार सतहहरू: TSA = ६a²!',
+        'घनाभमा 6 pcs rectangular faces हुन्छन्: TSA = 2(lb + bh + lh), र घनमा 6 pcs बराबर square faces: TSA = 6a²!',
         'A cuboid has 6 rectangular faces: TSA = 2(lb + bh + lh); a cube has 6 equal squares: TSA = 6a²!'
       )}
     >
@@ -104,9 +104,9 @@ export const CuboidCubeSurfaceAreaLab: React.FC<{ onBackToLibrary?: () => void; 
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'cuboid', np: '१. घनाभको क्षेत्रफल (Cuboid TSA)', en: '1. Cuboid TSA' },
-            { id: 'net', np: '२. घनाभको जाली खोल्ने (2D Net Unfolding)', en: '2. 2D Net Unfolding' },
-            { id: 'cube', np: '३. घनको क्षेत्रफल (Cube TSA = 6a²)', en: '3. Cube TSA' },
+            { id: 'cuboid', np: '1. घनाभको क्षेत्रफल (Cuboid TSA)', en: '1. Cuboid TSA' },
+            { id: 'net', np: '2. घनाभको जाली खोल्ने (2D Net Unfolding)', en: '2. 2D Net Unfolding' },
+            { id: 'cube', np: '3. घनको क्षेत्रफल (Cube TSA = 6a²)', en: '3. Cube TSA' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -138,7 +138,7 @@ export const CuboidCubeSurfaceAreaLab: React.FC<{ onBackToLibrary?: () => void; 
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: लम्बाइ ४ सेमी, चौडाइ ३ सेमी र उचाइ २ सेमी भएको घनाभको कुल पृष्ठीय क्षेत्रफल निकाल्नुहोस्:',
+                'पाठ्यपुस्तक उदाहरण: लम्बाइ 4 cm, चौडाइ 3 cm र उचाइ 2 cm भएको घनाभको कुल पृष्ठीय क्षेत्रफल निकाल्नुहोस्:',
                 'Textbook Example: Find TSA of cuboid with length 4 cm, breadth 3 cm, and height 2 cm:'
               )}
             </p>
@@ -255,7 +255,7 @@ export const CuboidCubeSurfaceAreaLab: React.FC<{ onBackToLibrary?: () => void; 
                   {L('माथिल्लो र तल्लो सतह (Top & Bottom)', 'Top & Bottom (2 faces)')}
                 </span>
                 <div style={{ fontSize: 16, fontWeight: 800, color: '#166534', marginTop: 2 }}>
-                  २ × (l × b) = २ × {areaLB} = {2 * areaLB} cm²
+                  2 × (l × b) = 2 × {areaLB} = {2 * areaLB} cm²
                 </div>
               </div>
 
@@ -264,7 +264,7 @@ export const CuboidCubeSurfaceAreaLab: React.FC<{ onBackToLibrary?: () => void; 
                   {L('अगाडि र पछाडिको सतह (Front & Back)', 'Front & Back (2 faces)')}
                 </span>
                 <div style={{ fontSize: 16, fontWeight: 800, color: '#1E40AF', marginTop: 2 }}>
-                  २ × (l × h) = २ × {areaLH} = {2 * areaLH} cm²
+                  2 × (l × h) = 2 × {areaLH} = {2 * areaLH} cm²
                 </div>
               </div>
 
@@ -273,7 +273,7 @@ export const CuboidCubeSurfaceAreaLab: React.FC<{ onBackToLibrary?: () => void; 
                   {L('दायाँ र बायाँको सतह (Left & Right)', 'Left & Right (2 faces)')}
                 </span>
                 <div style={{ fontSize: 16, fontWeight: 800, color: '#92400E', marginTop: 2 }}>
-                  २ × (b × h) = २ × {areaBH} = {2 * areaBH} cm²
+                  2 × (b × h) = 2 × {areaBH} = {2 * areaBH} cm²
                 </div>
               </div>
             </div>
@@ -288,10 +288,10 @@ export const CuboidCubeSurfaceAreaLab: React.FC<{ onBackToLibrary?: () => void; 
               }}
             >
               <div>
-                <strong>{L('कुल पृष्ठीय क्षेत्रफल (TSA) सूत्र:', 'Total Surface Area Formula:')}</strong> TSA = २(lb + bh + lh)
+                <strong>{L('कुल पृष्ठीय क्षेत्रफल (TSA) सूत्र:', 'Total Surface Area Formula:')}</strong> TSA = 2(lb + bh + lh)
               </div>
               <div>
-                TSA = २ × ({areaLB} + {areaBH} + {areaLH}) = २ × {areaLB + areaBH + areaLH}
+                TSA = 2 × ({areaLB} + {areaBH} + {areaLH}) = 2 × {areaLB + areaBH + areaLH}
               </div>
               <div
                 style={{
@@ -311,11 +311,11 @@ export const CuboidCubeSurfaceAreaLab: React.FC<{ onBackToLibrary?: () => void; 
         {activeTab === 'net' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('घनाभको २D जाली (2D Net of Cuboid)', '2D Net Unfolding of Cuboid')}
+              {L('घनाभको 2D जाली (2D Net of Cuboid)', '2D Net Unfolding of Cuboid')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'घनाभलाई खोलेर समतलमा फैलाउँदा ६ वटा आयतहरू प्राप्त हुन्छन्। यी ६ वटै आयतको क्षेत्रफल जोड्दा जम्मा पृष्ठीय क्षेत्रफल प्राप्त हुन्छ।',
+                'घनाभलाई खोलेर समतलमा फैलाउँदा 6 pcs आयतहरू प्राप्त हुन्छन्। यी 6 वटै आयतको क्षेत्रफल जोड्दा जम्मा पृष्ठीय क्षेत्रफल प्राप्त हुन्छ।',
                 'Unfolding a cuboid yields 6 rectangular faces. Summing their areas gives the total surface area.'
               )}
             </p>
@@ -373,7 +373,7 @@ export const CuboidCubeSurfaceAreaLab: React.FC<{ onBackToLibrary?: () => void; 
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: भुजा ३.५ सेमी भएको घनको कुल पृष्ठीय क्षेत्रफल निकाल्नुहोस् (घनका सबै ६ वटा सतहहरू बराबर वर्ग हुन्छन्):',
+                'पाठ्यपुस्तक उदाहरण: भुजा 3.5 cm भएको घनको कुल पृष्ठीय क्षेत्रफल निकाल्नुहोस् (घनका सबै 6 pcs faces बराबर वर्ग हुन्छन्):',
                 'Textbook Example: Find TSA of a cube with side 3.5 cm (all 6 faces are equal squares of area a²):'
               )}
             </p>
@@ -407,11 +407,11 @@ export const CuboidCubeSurfaceAreaLab: React.FC<{ onBackToLibrary?: () => void; 
               }}
             >
               <div>
-                <strong>{L('१. एउटा वर्गाकार सतहको क्षेत्रफल:', '1. Area of 1 square face:')}</strong> a² = {cubeEdge} ×{' '}
+                <strong>{L('1. एउटा वर्गाकार सतहको क्षेत्रफल:', '1. Area of 1 square face:')}</strong> a² = {cubeEdge} ×{' '}
                 {cubeEdge} = <span style={{ fontWeight: 800, color: '#0369A1' }}>{oneFaceArea.toFixed(2)} cm²</span>
               </div>
               <div>
-                <strong>{L('२. जम्मा ६ वटा सतहको क्षेत्रफल:', '2. Area of 6 identical faces:')}</strong> ६ × a² = ६ ×{' '}
+                <strong>{L('2. जम्मा 6 pcs सतहको क्षेत्रफल:', '2. Area of 6 identical faces:')}</strong> 6 × a² = 6 ×{' '}
                 {oneFaceArea.toFixed(2)}
               </div>
               <div

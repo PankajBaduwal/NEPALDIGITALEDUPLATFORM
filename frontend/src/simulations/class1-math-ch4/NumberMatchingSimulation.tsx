@@ -1,8 +1,8 @@
 /**
  * NumberMatchingSimulation.tsx
- * Simulation 03: Number Matching World (वस्तु र सङ्ख्या मिलाऔँ)
- * Class 1 Mathematics - Chapter 4: Numbers up to 9 (९ सम्मका सङ्ख्याहरू)
- * Based on Nepal CDC Curriculum (मेरो गणित, कक्षा १ - २०७६)
+ * Simulation 03: Number Matching World
+ * Class 1 Mathematics - Chapter 4: Numbers up to 9
+ * Based on Nepal CDC Curriculum
  */
 
 import React, { useState, useEffect } from 'react';
@@ -36,7 +36,7 @@ export const NumberMatchingSimulation: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Language & Audio
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Rounds: 1 (1-3), 2 (4-6), 3 (7-9), 4 (Mixed 1-9)
@@ -45,15 +45,15 @@ export const NumberMatchingSimulation: React.FC<Props> = ({
 
   // Challenges pool
   const masterList: MatchChallenge[] = [
-    { quantity: 1, numNp: '१', nameEn: 'One', nameNp: 'एक', icon: '🍄' },
-    { quantity: 2, numNp: '२', nameEn: 'Two', nameNp: 'दुई', icon: '🦋' },
-    { quantity: 3, numNp: '३', nameEn: 'Three', nameNp: 'तीन', icon: '🐇' },
-    { quantity: 4, numNp: '४', nameEn: 'Four', nameNp: 'चार', icon: '🍎' },
-    { quantity: 5, numNp: '५', nameEn: 'Five', nameNp: 'पाँच', icon: '🎈' },
-    { quantity: 6, numNp: '६', nameEn: 'Six', nameNp: 'छ', icon: '🥭' },
-    { quantity: 7, numNp: '७', nameEn: 'Seven', nameNp: 'सात', icon: '🐟' },
-    { quantity: 8, numNp: '८', nameEn: 'Eight', nameNp: 'आठ', icon: '🐦' },
-    { quantity: 9, numNp: '९', nameEn: 'Nine', nameNp: 'नौ', icon: '🌸' },
+    { quantity: 1, numNp: '1', nameEn: 'One', nameNp: 'एक', icon: '🍄' },
+    { quantity: 2, numNp: '2', nameEn: 'Two', nameNp: 'दुई', icon: '🦋' },
+    { quantity: 3, numNp: '3', nameEn: 'Three', nameNp: 'तीन', icon: '🐇' },
+    { quantity: 4, numNp: '4', nameEn: 'Four', nameNp: 'चार', icon: '🍎' },
+    { quantity: 5, numNp: '5', nameEn: 'Five', nameNp: 'पाँच', icon: '🎈' },
+    { quantity: 6, numNp: '6', nameEn: 'Six', nameNp: 'छ', icon: '🥭' },
+    { quantity: 7, numNp: '7', nameEn: 'Seven', nameNp: 'सात', icon: '🐟' },
+    { quantity: 8, numNp: '8', nameEn: 'Eight', nameNp: 'आठ', icon: '🐦' },
+    { quantity: 9, numNp: '9', nameEn: 'Nine', nameNp: 'नौ', icon: '🌸' },
   ];
 
   // Active round items
@@ -251,7 +251,7 @@ export const NumberMatchingSimulation: React.FC<Props> = ({
               {language === 'np' ? 'वस्तु र सङ्ख्या मिलाऔँ' : 'Number Matching World'}
             </h1>
             <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
-              {language === 'np' ? 'कक्षा १ गणित • अध्याय ४: ९ सम्मका सङ्ख्याहरू' : 'Class 1 Math • Chapter 4: Numbers up to 9'}
+              {language === 'np' ? 'कक्षा 1 गणित • अध्याय 4: 9 सम्मका सङ्ख्याहरू' : 'Class 1 Math • Chapter 4: Numbers up to 9'}
             </span>
           </div>
         </div>
@@ -296,21 +296,7 @@ export const NumberMatchingSimulation: React.FC<Props> = ({
           </div>
 
           {/* Language Toggle */}
-          <button
-            onClick={() => setLanguage(language === 'np' ? 'en' : 'np')}
-            style={{
-              background: '#ede9fe',
-              color: '#6d28d9',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '13px',
-              cursor: 'pointer',
-            }}
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
 
           {/* Sound Toggle */}
           <button
@@ -434,7 +420,7 @@ export const NumberMatchingSimulation: React.FC<Props> = ({
             }}
           >
             <span style={{ fontSize: '13px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>
-              {language === 'np' ? '१. वस्तुहरूको समूह (Object Groups)' : '1. Object Groups'}
+              {language === 'np' ? '1. वस्तुहरूको समूह (Object Groups)' : '1. Object Groups'}
             </span>
 
             {activeChallenges.map((item) => {
@@ -498,7 +484,7 @@ export const NumberMatchingSimulation: React.FC<Props> = ({
             }}
           >
             <span style={{ fontSize: '13px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>
-              {language === 'np' ? '२. सङ्ख्या र नाम कार्ड (Numerals & Names)' : '2. Numerals & Names'}
+              {language === 'np' ? '2. सङ्ख्या र नाम कार्ड (Numerals & Names)' : '2. Numerals & Names'}
             </span>
 
             {/* Shuffled/ordered list of cards */}
@@ -534,7 +520,7 @@ export const NumberMatchingSimulation: React.FC<Props> = ({
                         {language === 'np' ? item.nameNp : item.nameEn}
                       </div>
                       <div style={{ fontSize: '12px', color: '#64748b' }}>
-                        {language === 'np' ? `अङ्ग्रेजी: ${item.quantity} (${item.nameEn})` : `Nepali: ${item.numNp} (${item.nameNp})`}
+                        {language === 'np' ? `अङ्ग्रेजी: ${item.quantity} (${item.nameEn})` : `Number: ${item.quantity} (${item.nameEn})`}
                       </div>
                     </div>
                   </div>

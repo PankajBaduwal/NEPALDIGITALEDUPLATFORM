@@ -17,36 +17,36 @@ const PROBLEMS: FourthDegreeProblem[] = [
   {
     id: 'p1',
     expr: 'y⁴ + y² + 1',
-    step1: '(y²)² + (१)² + y²',
-    step2: '[(y² + १)² - २(y²)(१)] + y²',
-    step3: '(y² + १)² - (y)²',
+    step1: '(y²)² + (1)² + y²',
+    step2: '[(y² + 1)² - 2(y²)(1)] + y²',
+    step3: '(y² + 1)² - (y)²',
     finalFactors: '(y² + y + 1)(y² - y + 1)',
     evaluateFn: (y) => Math.pow(y, 4) + Math.pow(y, 2) + 1,
   },
   {
     id: 'p2',
     expr: 'y⁴ + 64',
-    step1: '(y²)² + (८)²',
-    step2: '(y² + ८)² - २(y²)(८)',
-    step3: '(y² + ८)² - (४y)²',
+    step1: '(y²)² + (8)²',
+    step2: '(y² + 8)² - 2(y²)(8)',
+    step3: '(y² + 8)² - (4y)²',
     finalFactors: '(y² + 4y + 8)(y² - 4y + 8)',
     evaluateFn: (y) => Math.pow(y, 4) + 64,
   },
   {
     id: 'p3',
     expr: 'x⁴ + 4y⁴',
-    step1: '(x²)² + (२y²)²',
-    step2: '(x² + २y²)² - २(x²)(२y²)',
-    step3: '(x² + २y²)² - (२xy)²',
+    step1: '(x²)² + (2y²)²',
+    step2: '(x² + 2y²)² - 2(x²)(2y²)',
+    step3: '(x² + 2y²)² - (2xy)²',
     finalFactors: '(x² + 2xy + 2y²)(x² - 2xy + 2y²)',
     evaluateFn: (x) => Math.pow(x, 4) + 4 * 1, // with y=1
   },
   {
     id: 'p4',
     expr: 'a⁴ + a² + 1',
-    step1: '(a²)² + (१)² + a²',
-    step2: '(a² + १)² - २a² + a²',
-    step3: '(a² + १)² - (a)²',
+    step1: '(a²)² + (1)² + a²',
+    step2: '(a² + 1)² - 2a² + a²',
+    step3: '(a² + 1)² - (a)²',
     finalFactors: '(a² + a + 1)(a² - a + 1)',
     evaluateFn: (a) => Math.pow(a, 4) + Math.pow(a, 2) + 1,
   },
@@ -57,43 +57,43 @@ const QUIZ_QUESTIONS = [
     np: 'a⁴ + a²b² + b⁴ लाई खण्डीकरण गर्दा कुन सर्वसमिका (Identity) को रूपमा रूपान्तरण गरिन्छ?',
     en: 'When factorizing a⁴ + a²b² + b⁴, which identity form is it transformed into?',
     options: [
-      { key: 'A', label: 'दुई वर्गको अन्तर: (a² + b²)² - (ab)² [x² - y²]' },
-      { key: 'B', label: 'घनको जोड: x³ + y³' },
-      { key: 'C', label: 'वर्गको जोड: (x + y)²' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'Difference of two squares: (a² + b²)² - (ab)² [x² - y²]' },
+      { key: 'B', label: 'Sum of cubes: x³ + y³' },
+      { key: 'C', label: 'Square of a sum: (x + y)²' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
   {
-    np: 'y⁴ + y² + १ को सही खण्डीकरण कुन हो?',
+    np: 'y⁴ + y² + 1 को सही खण्डीकरण कुन हो?',
     en: 'What is the correct factorization of y⁴ + y² + 1?',
     options: [
-      { key: 'A', label: '(y² + y + १)(y² - y + १)' },
-      { key: 'B', label: '(y² + १)²' },
-      { key: 'C', label: '(y² - १)(y² + y + १)' },
-      { key: 'D', label: '(y² + y - १)(y² - y - १)' },
+      { key: 'A', label: '(y² + y + 1)(y² - y + 1)' },
+      { key: 'B', label: '(y² + 1)²' },
+      { key: 'C', label: '(y² - 1)(y² + y + 1)' },
+      { key: 'D', label: '(y² + y - 1)(y² - y - 1)' },
     ],
     answer: 'A',
   },
   {
-    np: 'y⁴ + ६४ लाई पूर्ण वर्ग बनाउँदा (y² + ८)² बाट कति घटाउनुपर्छ?',
+    np: 'y⁴ + 64 लाई पूर्ण वर्ग बनाउँदा (y² + 8)² बाट कति घटाउनुपर्छ?',
     en: 'To make y⁴ + 64 into a difference of squares from (y² + 8)², what must be subtracted?',
     options: [
-      { key: 'A', label: '(४y)² अर्थात् १६y²' },
-      { key: 'B', label: '८y²' },
-      { key: 'C', label: '६४y²' },
-      { key: 'D', label: '२y²' },
+      { key: 'A', label: '(4y)², that is 16y²' },
+      { key: 'B', label: '8y²' },
+      { key: 'C', label: '64y²' },
+      { key: 'D', label: '2y²' },
     ],
     answer: 'A',
   },
   {
-    np: 'x⁴ + ४y⁴ को खण्डीकरण कुन हो?',
+    np: 'x⁴ + 4y⁴ को खण्डीकरण कुन हो?',
     en: 'What is the factorization of x⁴ + 4y⁴?',
     options: [
-      { key: 'A', label: '(x² + २xy + २y²)(x² - २xy + २y²)' },
-      { key: 'B', label: '(x² + २y²)²' },
-      { key: 'C', label: '(x² - २y²)²' },
-      { key: 'D', label: '(x + २y)⁴' },
+      { key: 'A', label: '(x² + 2xy + 2y²)(x² - 2xy + 2y²)' },
+      { key: 'B', label: '(x² + 2y²)²' },
+      { key: 'C', label: '(x² - 2y²)²' },
+      { key: 'D', label: '(x + 2y)⁴' },
     ],
     answer: 'A',
   },
@@ -127,7 +127,7 @@ export const FourthDegreeFactorizationLab: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! a⁴ + a²b² + b⁴ स्वरूपका चौथो घातका अभिव्यक्तिलाई x² - y² = (x + y)(x - y) मा रूपान्तरण गरी खण्डीकरण गर्न सिकौं!',
+        'नमस्ते! Form a⁴ + a²b² + b⁴का चौथो घातका अभिव्यक्तिलाई x² - y² = (x + y)(x - y) मा रूपान्तरण गरी खण्डीकरण गर्न सिकौं!',
         'Welcome! Factorize fourth-degree expressions of the form a⁴ + a²b² + b⁴ by transforming into a difference of squares!'
       )}
     >
@@ -172,7 +172,7 @@ export const FourthDegreeFactorizationLab: React.FC<{
                 {activeProblem.expr}
               </div>
               <div className="text-xs text-gray-500 font-mono">
-                a⁴ + a²b² + b⁴ स्वरूप
+                Form a⁴ + a²b² + b⁴
               </div>
             </div>
 
@@ -199,7 +199,7 @@ export const FourthDegreeFactorizationLab: React.FC<{
                 {L('संख्यात्मक मान राखेर जाँच (Numerical Substitution):', 'Verify by Numerical Substitution:')}
               </div>
               <div className="flex items-center gap-2">
-                <span>चल (Variable) =</span>
+                <span>Variable =</span>
                 <input
                   type="number"
                   min="1"
@@ -209,7 +209,7 @@ export const FourthDegreeFactorizationLab: React.FC<{
                   className="w-16 px-2 py-1 rounded border font-mono font-bold dark:bg-gray-700 dark:text-gray-100"
                 />
                 <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 ml-auto">
-                  मान = {evalResult}
+                  Value = {evalResult}
                 </span>
               </div>
             </div>
@@ -227,7 +227,7 @@ export const FourthDegreeFactorizationLab: React.FC<{
                 revealedStep >= 1 ? 'bg-purple-50 dark:bg-purple-950/40 border-purple-200 text-purple-900 dark:text-purple-100' : 'opacity-40 bg-gray-50'
               }`}>
                 <div className="font-bold font-sans text-gray-700 dark:text-gray-300 mb-1">
-                  {L('चरण १: पहिलो र तेस्रो पदलाई वर्गको रूपमा मिलाउने', 'Step 1: Group into square terms')}
+                  {L('चरण 1: पहिलो र तेस्रो पदलाई वर्गको रूपमा मिलाउने', 'Step 1: Group into square terms')}
                 </div>
                 <div className="text-sm font-bold">= {activeProblem.step1}</div>
               </div>
@@ -237,7 +237,7 @@ export const FourthDegreeFactorizationLab: React.FC<{
                 revealedStep >= 2 ? 'bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200 text-indigo-900 dark:text-indigo-100' : 'opacity-40 bg-gray-50'
               }`}>
                 <div className="font-bold font-sans text-gray-700 dark:text-gray-300 mb-1">
-                  {L('चरण २: a² + b² = (a + b)² - २ab सूत्र प्रयोग गरी पूर्ण वर्ग बनाउने', 'Step 2: Complete square')}
+                  {L('चरण 2: a² + b² = (a + b)² - 2ab सूत्र प्रयोग गरी पूर्ण वर्ग बनाउने', 'Step 2: Complete square')}
                 </div>
                 <div className="text-sm font-bold">= {activeProblem.step2}</div>
               </div>
@@ -247,7 +247,7 @@ export const FourthDegreeFactorizationLab: React.FC<{
                 revealedStep >= 3 ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-200 text-blue-900 dark:text-blue-100' : 'opacity-40 bg-gray-50'
               }`}>
                 <div className="font-bold font-sans text-gray-700 dark:text-gray-300 mb-1">
-                  {L('चरण ३: दुई वर्गको अन्तर बनाउने: X² - Y²', 'Step 3: Difference of two squares')}
+                  {L('चरण 3: दुई वर्गको अन्तर बनाउने: X² - Y²', 'Step 3: Difference of two squares')}
                 </div>
                 <div className="text-sm font-bold">= {activeProblem.step3}</div>
               </div>
@@ -256,7 +256,7 @@ export const FourthDegreeFactorizationLab: React.FC<{
               {revealedStep >= 3 && (
                 <div className="p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 rounded-2xl">
                   <div className="font-sans font-bold text-xs text-emerald-800 dark:text-emerald-300">
-                    {L('चरण ४: X² - Y² = (X + Y)(X - Y) लागू गर्दा अन्तिम खण्डीकरण:', 'Step 4: Factored Result')}
+                    {L('चरण 4: X² - Y² = (X + Y)(X - Y) लागू गर्दा अन्तिम खण्डीकरण:', 'Step 4: Factored Result')}
                   </div>
                   <div className="text-lg font-black text-emerald-600 dark:text-emerald-400 mt-1 font-mono">
                     = {activeProblem.finalFactors}

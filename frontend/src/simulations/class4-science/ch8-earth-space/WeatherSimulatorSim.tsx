@@ -1,16 +1,16 @@
 /**
  * WeatherSimulatorSim.tsx
- * Simulation 32: 2D Weather Simulator & Climate Adaptation Lab (मौसम सिम्युलेटर)
- * Grade 4 Science • Chapter 8: The Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 32: 2D Weather Simulator & Climate Adaptation Lab
+ * Grade 4 Science • Chapter 8: The Earth and Space
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
  * - Dynamic Nepali valley landscape with traditional cottage and swaying pine trees
  * - 4 Rich weather systems:
- *   1. Sunny (घाम लागेको): Radiant sun, clear sky, children flying kites, cotton clothing
- *   2. Rainy / Monsoon (झरी परेको): Dark storm clouds, animated rain streaks, puddle ripples, umbrellas
- *   3. Snowy (हिउँ परेको): Alpine frost, drifting snowflakes accumulating on cottage roof, woolen clothes
- *   4. Windy (हावाहुरी): Wind streaks, swaying tree branches, soaring colorful Nepali kite (चङ्गा)
+ *   1. Sunny: Radiant sun, clear sky, children flying kites, cotton clothing
+ *   2. Rainy / Monsoon: Dark storm clouds, animated rain streaks, puddle ripples, umbrellas
+ *   3. Snowy: Alpine frost, drifting snowflakes accumulating on cottage roof, woolen clothes
+ *   4. Windy: Wind streaks, swaying tree branches, soaring colorful Nepali kite
  * - Interactive sliders: Temperature, Humidity, and Wind velocity
  * - Lifestyle & Clothing adaptation guidance, Bilingual EN/NE, and mastery quiz.
  */
@@ -35,7 +35,7 @@ export const WeatherSimulatorSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -362,7 +362,7 @@ export const WeatherSimulatorSim: React.FC<BaseSimulationProps> = ({
     ctx.restore();
   }
 
-  // Flying Nepali Kite (चङ्गा) in Windy mode
+  // Flying Nepali Kite in Windy mode
   function drawFlyingKite(ctx: CanvasRenderingContext2D, t: number, wind: number) {
     ctx.save();
     const kx = 680 + Math.sin(t * 2) * 35;
@@ -446,17 +446,17 @@ export const WeatherSimulatorSim: React.FC<BaseSimulationProps> = ({
     let title = '';
     let clothing = '';
     if (p === 'sunny') {
-      title = currentLang === 'en' ? '☀️ Sunny Weather (घाम लागेको)' : '☀️ घाम लागेको दिन (Sunny)';
+      title = currentLang === 'en' ? '☀️ Sunny Weather' : '☀️ घाम लागेको दिन (Sunny)';
       clothing = currentLang === 'en' ? 'Wear: Light cotton clothes, sunhat & drink water' : 'सुतीको कपडा, टोपी लगाउने र प्रशस्त पानी पिउने';
     } else if (p === 'rainy') {
-      title = currentLang === 'en' ? '🌧️ Rainy Monsoon (झरी परेको)' : '🌧️ झरी परेको दिन (Monsoon Rain)';
-      clothing = currentLang === 'en' ? 'Use: Umbrella (छाता), raincoat & waterproof boots' : 'छाता, रेनकोट र वाटरप्रूफ जुत्ता प्रयोग गर्ने';
+      title = currentLang === 'en' ? '🌧️ Rainy Monsoon' : '🌧️ झरी परेको दिन (Monsoon Rain)';
+      clothing = currentLang === 'en' ? 'Use: Umbrella, raincoat & waterproof boots' : 'छाता, रेनकोट र वाटरप्रूफ जुत्ता प्रयोग गर्ने';
     } else if (p === 'snowy') {
-      title = currentLang === 'en' ? '❄️ Snowy Alpine (हिमपात)' : '❄️ हिउँ परेको दिन (Snowfall)';
+      title = currentLang === 'en' ? '❄️ Snowy Alpine' : '❄️ हिउँ परेको दिन (Snowfall)';
       clothing = currentLang === 'en' ? 'Wear: Heavy woolen jacket, gloves & warm socks' : 'बाक्लो ऊनीको ज्याकेट, पन्जा र तातो कपडा लगाउने';
     } else {
-      title = currentLang === 'en' ? '💨 Windy Gale (हावाहुरी)' : '💨 तीव्र बतास चलेको दिन (Windy)';
-      clothing = currentLang === 'en' ? 'Fun: Great weather for flying kites (चङ्गा उडाउन)' : 'चङ्गा उडाउन अनुकूल, आँखामा धुलोबाट बच्ने';
+      title = currentLang === 'en' ? '💨 Windy Gale' : '💨 तीव्र बतास चलेको दिन (Windy)';
+      clothing = currentLang === 'en' ? 'Fun: Great weather for flying kites' : 'चङ्गा उडाउन अनुकूल, आँखामा धुलोबाट बच्ने';
     }
 
     ctx.fillStyle = '#ffffff';
@@ -494,7 +494,7 @@ export const WeatherSimulatorSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 8: The Earth and Space'
-          : 'कक्षा ४ विज्ञान • एकाइ ८: पृथ्वी र अन्तरिक्ष'
+          : 'कक्षा 4 विज्ञान • एकाइ 8: पृथ्वी र अन्तरिक्ष'
       }
       currentStage={stage}
       onStageChange={setStage}

@@ -1,8 +1,8 @@
 /**
  * ZeroDiscoveryPlayground.tsx (Converted to 100% Pure 2D)
- * Simulation 01: The Zero Discovery Playground (शून्य चिनौँ)
- * Class 1 Mathematics - Chapter 5: Zero (शून्य)
- * Nepal CDC Curriculum Aligned (मेरो गणित, कक्षा १)
+ * Simulation 01: The Zero Discovery Playground
+ * Class 1 Mathematics - Chapter 5: Zero
+ * Nepal CDC Curriculum Aligned
  * 100% Pure 2D Vector & Canvas – Zero WebGL/Three.js.
  */
 import React, { useState } from 'react';
@@ -20,7 +20,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
     code: 'SIM-MATH-G1-CH5-01',
     chapter: 5,
     titleNp: 'शून्य चिनौँ (Zero Discovery)',
-    titleEn: 'Discover Zero (० / 0)',
+    titleEn: 'Discover Zero (0 / 0)',
   });
 
   const [appleCount, setAppleCount] = useState<number>(3);
@@ -32,18 +32,18 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
       np: 'टोकरीमा भएका सबै स्याउ खाएपछि टोकरीमा कतिवटा स्याउ बाँकी रहन्छन्?',
       en: 'After eating all apples in a basket, how many apples remain?',
       options: [
-        { key: '0', label: kit.t('० (शून्य - Zero)', '0 (Zero)') },
-        { key: '1', label: kit.t('१ (एक - One)', '1 (One)') },
-        { key: '2', label: kit.t('२ (दुई - Two)', '2 (Two)') },
+        { key: '0', label: kit.t('0', '0 (Zero)') },
+        { key: '1', label: kit.t('1', '1 (One)') },
+        { key: '2', label: kit.t('2', '2 (Two)') },
       ],
       answer: '0',
     },
     {
-      np: 'रूखमा ३ वटा चरा थिए, ती तीनै वटा उडेर गए भने रूखमा कति चरा बाँकी छन्?',
+      np: 'रूखमा 3 वटा चरा थिए, ती तीनै वटा उडेर गए भने रूखमा कति चरा बाँकी छन्?',
       en: 'There were 3 birds on a tree. If all 3 flew away, how many remain?',
       options: [
-        { key: '0', label: kit.t('० (शून्य)', '0 (Zero)') },
-        { key: '3', label: kit.t('३ (तीन)', '3 (Three)') },
+        { key: '0', label: kit.t('0', '0 (Zero)') },
+        { key: '3', label: kit.t('3', '3 (Three)') },
       ],
       answer: '0',
     },
@@ -51,9 +51,9 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
       np: 'कुनै पनि वस्तु नहुनु वा खाली हुनुलाई कुन सङ्ख्याले जनाउँछ?',
       en: 'Which number represents having nothing or an empty set?',
       options: [
-        { key: '0', label: kit.t('० (शून्य)', '0 (Zero)') },
-        { key: '10', label: kit.t('१० (दश)', '10 (Ten)') },
-        { key: '1', label: kit.t('१ (एक)', '1 (One)') },
+        { key: '0', label: kit.t('0', '0 (Zero)') },
+        { key: '10', label: kit.t('10', '10 (Ten)') },
+        { key: '1', label: kit.t('1', '1 (One)') },
       ],
       answer: '0',
     },
@@ -65,7 +65,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
       onBack={onBackToLibrary}
       grade={1}
       mascotGreeting={kit.t(
-        'वस्तुहरू हटाएर हेर्नुहोस्। केही पनि बाँकी नरहेपछि त्यसलाई शून्य (०) भनिन्छ!',
+        'वस्तुहरू हटाएर हेर्नुहोस्। केही पनि बाँकी नरहेपछि त्यसलाई शून्य (0) भनिन्छ!',
         'Remove all items to see that when nothing remains, it is called Zero (0)!'
       )}
       questions={questions}
@@ -75,7 +75,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
             onClick={() => {
               setAppleCount(0);
               kit.tap();
-              kit.say('टोकरी रित्तो भयो! स्याउको सङ्ख्या ० (शून्य) हो।', 'Basket is empty! Apple count is 0 (Zero).');
+              kit.say('टोकरी रित्तो भयो! स्याउको सङ्ख्या 0 हो।', 'Basket is empty! Apple count is 0 (Zero).');
             }}
             style={{
               padding: '8px 16px',
@@ -95,7 +95,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
             onClick={() => {
               setBirdCount(0);
               kit.tap();
-              kit.say('सबै चरा उडे! रूखमा ० (शून्य) चरा छन्।', 'All birds flew away! 0 (Zero) birds on the tree.');
+              kit.say('सबै चरा उडे! रूखमा 0 चरा छन्।', 'All birds flew away! 0 (Zero) birds on the tree.');
             }}
             style={{
               padding: '8px 16px',
@@ -115,7 +115,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
             onClick={() => {
               setFishCount(0);
               kit.tap();
-              kit.say('पोखरीमा माछा छैनन्! माछाको सङ्ख्या ० हो।', 'No fish in the pond! Fish count is 0.');
+              kit.say('पोखरीमा माछा छैनन्! माछाको सङ्ख्या 0 हो।', 'No fish in the pond! Fish count is 0.');
             }}
             style={{
               padding: '8px 16px',
@@ -184,14 +184,14 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
               justifyContent: 'center',
             }}
           >
-            ०
+            0
           </div>
           <div>
             <div style={{ fontSize: 16, fontWeight: 800, color: '#0f172a' }}>
               {kit.t('शून्य (Zero): केही पनि छैन / रित्तो', 'Zero: Nothing / Empty Set')}
             </div>
             <div style={{ fontSize: 12, color: '#64748b', fontWeight: 600 }}>
-              {kit.t('जब कुनै वस्तु बाँकी रहँदैन, त्यसलाई ० (शून्य) ले जनाइन्छ।', 'When no items remain, we write 0 (Zero).')}
+              {kit.t('जब कुनै वस्तु बाँकी रहँदैन, त्यसलाई 0 ले जनाइन्छ।', 'When no items remain, we write 0 (Zero).')}
             </div>
           </div>
         </div>
@@ -224,7 +224,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
                 }}
                 style={{ padding: '4px 12px', borderRadius: 8, border: '1px solid #cbd5e1', cursor: appleCount <= 0 ? 'not-allowed' : 'pointer' }}
               >
-                ➖ १
+                ➖ 1
               </button>
               <button
                 disabled={appleCount >= 6}
@@ -234,7 +234,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
                 }}
                 style={{ padding: '4px 12px', borderRadius: 8, border: '1px solid #cbd5e1', cursor: appleCount >= 6 ? 'not-allowed' : 'pointer' }}
               >
-                ➕ १
+                ➕ 1
               </button>
             </div>
           </div>
@@ -265,7 +265,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
                 }}
                 style={{ padding: '4px 12px', borderRadius: 8, border: '1px solid #cbd5e1', cursor: birdCount <= 0 ? 'not-allowed' : 'pointer' }}
               >
-                ➖ १
+                ➖ 1
               </button>
               <button
                 disabled={birdCount >= 6}
@@ -275,7 +275,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
                 }}
                 style={{ padding: '4px 12px', borderRadius: 8, border: '1px solid #cbd5e1', cursor: birdCount >= 6 ? 'not-allowed' : 'pointer' }}
               >
-                ➕ १
+                ➕ 1
               </button>
             </div>
           </div>
@@ -306,7 +306,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
                 }}
                 style={{ padding: '4px 12px', borderRadius: 8, border: '1px solid #cbd5e1', cursor: fishCount <= 0 ? 'not-allowed' : 'pointer' }}
               >
-                ➖ १
+                ➖ 1
               </button>
               <button
                 disabled={fishCount >= 6}
@@ -316,7 +316,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({ onBackToLibrary }) =>
                 }}
                 style={{ padding: '4px 12px', borderRadius: 8, border: '1px solid #cbd5e1', cursor: fishCount >= 6 ? 'not-allowed' : 'pointer' }}
               >
-                ➕ १
+                ➕ 1
               </button>
             </div>
           </div>

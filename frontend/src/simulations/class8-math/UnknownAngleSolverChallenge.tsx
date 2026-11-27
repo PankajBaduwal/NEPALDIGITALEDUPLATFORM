@@ -27,7 +27,7 @@ const PROBLEMS: AngleProblem[] = [
     type: 'alternate',
     titleEn: 'Alternate Angles: Find x',
     titleNp: 'एकान्तर कोण: x को मान पत्ता लगाउनुहोस्',
-    category: 'Alternate Angles (एकान्तर कोण)',
+    category: 'Alternate Angles',
     contextEn: 'In the figure, line AB is parallel to CD. Given alternate angles are (3x - 50)° and (x + 10)°. Find the value of x.',
     contextNp: 'चित्रमा रेखा AB र CD समानान्तर छन्। एकान्तर कोणहरू (3x - 50)° र (x + 10)° दिइएका छन्। x को मान पत्ता लगाउनुहोस्।',
     equationEn: '3x - 50 = x + 10',
@@ -54,7 +54,7 @@ const PROBLEMS: AngleProblem[] = [
     type: 'cointerior',
     titleEn: 'Co-Interior Angles: Find x',
     titleNp: 'क्रमागत भित्री कोण: x को मान पत्ता लगाउनुहोस्',
-    category: 'Co-Interior Angles (क्रमागत भित्री कोण)',
+    category: 'Co-Interior Angles',
     contextEn: 'Two consecutive interior angles on the same side of a transversal are (2x + 10)° and (3x + 20)°. If lines are parallel, find x.',
     contextNp: 'छेदकको एकैतर्फका दुई क्रमागत भित्री कोणहरू (2x + 10)° र (3x + 20)° छन्। रेखाहरू समानान्तर भए x को मान निकाल्नुहोस्।',
     equationEn: '(2x + 10) + (3x + 20) = 180',
@@ -83,7 +83,7 @@ const PROBLEMS: AngleProblem[] = [
     type: 'corresponding',
     titleEn: 'Corresponding Angles: Find x',
     titleNp: 'संगत कोण: x को मान पत्ता लगाउनुहोस्',
-    category: 'Corresponding Angles (संगत कोण)',
+    category: 'Corresponding Angles',
     contextEn: 'In the figure, corresponding angles are given as (4x + 15)° and (2x + 55)°. Find the value of x.',
     contextNp: 'चित्रमा संगत कोणहरू (4x + 15)° र (2x + 55)° दिइएका छन्। x को मान पत्ता लगाउनुहोस्।',
     equationEn: '4x + 15 = 2x + 55',
@@ -110,7 +110,7 @@ const PROBLEMS: AngleProblem[] = [
     type: 'auxiliary',
     titleEn: 'Roof Truss / Zigzag Angle (Auxiliary Line)',
     titleNp: 'छानाको ट्रस / बाङ्गो कोण (सहायक रेखा)',
-    category: 'Real-Life / Auxiliary Line (सहायक रेखा विधि)',
+    category: 'Real-Life / Auxiliary Line',
     contextEn: 'In a bridge truss where top chord AB ∥ bottom chord CD, the inner angle at vertex P is x°. The upper arm makes 45° with AB and lower arm makes 35° with CD. Find x.',
     contextNp: 'एउटा पुलको ट्रसमा माथिल्लो रेखा AB ∥ तल्लो रेखा CD छ। बिन्दु P मा बन्ने कोण x° छ। माथिल्लो भागले AB सँग 45° र तल्लो भागले CD सँग 35° कोण बनाउँछ भने x को मान पत्ता लगाउनुहोस्।',
     equationEn: 'x = 45° + 35°',
@@ -150,10 +150,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दुई समानान्तर रेखाको बीचमा बनेको बाङ्गो (zigzag) कोणको शीर्षबिन्दुबाट सहायक समानान्तर रेखा किन खिचिएको हो?',
     en: 'Why do we draw an auxiliary parallel line through the vertex of a zigzag angle between two parallel lines?',
     options: [
-      { key: 'A', label: 'अज्ञात कोणलाई दुई एकान्तर कोण जोडीमा विभाजन गर्न' },
-      { key: 'B', label: 'त्रिभुज बनाउन' },
-      { key: 'C', label: 'स्केलले नाप्न' },
-      { key: 'D', label: 'अन्य रेखा मेटाउन' }
+      { key: 'A', label: 'To split the unknown angle into two pairs of alternate angles' },
+      { key: 'B', label: 'To make a triangle' },
+      { key: 'C', label: 'To measure with a ruler' },
+      { key: 'D', label: 'To erase the other lines' }
     ],
     answer: 'A'
   }

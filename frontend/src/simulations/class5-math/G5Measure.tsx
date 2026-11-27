@@ -97,16 +97,16 @@ export const timeCfg = (o: { code: string; chapter: number; titleNp: string; tit
     rod(g, [-1.2, 3.4, 0.5], [1.2, 3.4, 0.5], '#f59e0b', 0.14);
   },
   info: (p) => { const [eh, em] = addT(p.h, p.m, p.dh, p.dm); return bi(`${t24(p.h, p.m)} + ${p.dh} घण्टा ${p.dm} मिनेट = ${t24(eh, em)}\n${t12(p.h, p.m)} → ${t12(eh, em)}`, `${t24(p.h, p.m)} + ${p.dh} h ${p.dm} min = ${t24(eh, em)}\n${t12(p.h, p.m)} → ${t12(eh, em)}`); },
-  tip: bi('सुरु समय र अवधि थपेर अन्त्य समय हेरौँ (२४ घण्टे र १२ घण्टे)', 'Set a start time and a length of time, and read the end time in 24-hour and 12-hour form'),
+  tip: bi('सुरु समय र अवधि थपेर अन्त्य समय हेरौँ (24 घण्टे र 12 घण्टे)', 'Set a start time and a length of time, and read the end time in 24-hour and 12-hour form'),
   goal: () => { const h = rnd(0, 23), m = 5 * rnd(0, 11); return { p: { h, m }, np: `${t24(h, m)} (${t12(h, m)}) देखाऔँ`, en: `Show ${t24(h, m)} (${t12(h, m)})`, start: { h: 12, m: 0, dh: 0, dm: 0 } }; },
   quiz: (i) => {
     const h = rnd(1, 23), m = 5 * rnd(0, 11), dh = rnd(1, 5), dm = 5 * rnd(1, 11); const [eh, em] = addT(h, m, dh, dm);
-    if (i === 0) { const hh = rnd(13, 23); return choice(`${t24(hh, m)} लाई १२ घण्टे समयमा लेख्दा?`, `Write ${t24(hh, m)} in 12-hour time`, t12(hh, m), [t12(hh - 12 + 1, m), t12(hh - 12, m + 5 > 55 ? 0 : m + 5).replace('AM', 'PM'), t12((hh + 6) % 24, m)], i, { h: hh, m, dh: 0, dm: 0 }); }
-    if (i === 1) { const hh = rnd(1, 11); return choice(`${t12(hh + 12, m)} लाई २४ घण्टे समयमा लेख्दा?`, `Write ${t12(hh + 12, m)} in 24-hour time`, t24(hh + 12, m), [t24(hh, m), t24(hh + 12 === 23 ? 22 : hh + 13, m), t24((hh + 11) % 24, m)], i, { h: hh + 12, m, dh: 0, dm: 0 }); }
+    if (i === 0) { const hh = rnd(13, 23); return choice(`${t24(hh, m)} लाई 12 घण्टे समयमा लेख्दा?`, `Write ${t24(hh, m)} in 12-hour time`, t12(hh, m), [t12(hh - 12 + 1, m), t12(hh - 12, m + 5 > 55 ? 0 : m + 5).replace('AM', 'PM'), t12((hh + 6) % 24, m)], i, { h: hh, m, dh: 0, dm: 0 }); }
+    if (i === 1) { const hh = rnd(1, 11); return choice(`${t12(hh + 12, m)} लाई 24 घण्टे समयमा लेख्दा?`, `Write ${t12(hh + 12, m)} in 24-hour time`, t24(hh + 12, m), [t24(hh, m), t24(hh + 12 === 23 ? 22 : hh + 13, m), t24((hh + 11) % 24, m)], i, { h: hh + 12, m, dh: 0, dm: 0 }); }
     if (i === 2 || i === 3) return choice(`${t24(h, m)} बाट ${dh} घण्टा ${dm} मिनेटपछि कति बज्छ?`, `What is the time ${dh} h ${dm} min after ${t24(h, m)}?`, t24(eh, em), [t24(eh, (em + 5) % 60), t24((eh + 1) % 24, em), t24((eh + 23) % 24, em)], i, { h, m, dh, dm });
-    if (i === 4) { const a = 5 * rnd(0, 11); const d = rnd(30, 170); return numChoice(`${t24(rnd(6, 10), a)} देखि ${d} मिनेट कति घण्टा कति मिनेट हुन्छ? (मिनेट मात्र)`, `${d} minutes: how many minutes are left after taking out whole hours?`, d % 60, i, [5, -5, 10, 30, 15], 0); }
-    if (i === 5) return numChoice('१ घण्टा = कति मिनेट?', 'How many minutes in 1 hour?', 60, i, [30, 40, 100, -20, 20], 1);
-    if (i === 6) return numChoice('१ मिनेट = कति सेकेन्ड?', 'How many seconds in 1 minute?', 60, i, [30, 100, 10, -20, 20], 1);
+    if (i === 4) { const a = 5 * rnd(0, 11); const d = rnd(30, 170); return numChoice(`${t24(rnd(6, 10), a)} देखि ${d} मिनेट कति घण्टा कति मिनेट हुन्छ?`, `${d} minutes: how many minutes are left after taking out whole hours?`, d % 60, i, [5, -5, 10, 30, 15], 0); }
+    if (i === 5) return numChoice('1 घण्टा = कति मिनेट?', 'How many minutes in 1 hour?', 60, i, [30, 40, 100, -20, 20], 1);
+    if (i === 6) return numChoice('1 मिनेट = कति सेकेन्ड?', 'How many seconds in 1 minute?', 60, i, [30, 100, 10, -20, 20], 1);
     return numChoice('एक दिनमा कति घण्टा हुन्छन्?', 'How many hours are in one day?', 24, i, [12, 48, 10, -12, 6], 1);
   },
 });
@@ -134,7 +134,7 @@ export const perimeterCfg = (o: { code: string; chapter: number; titleNp: string
     if (i === 3) return numChoice(`भुजा ${s} भएको वर्गको क्षेत्रफल कति?`, `Area of a square of side ${s}?`, s * s, i, [s, -s, 4 * s, 2, 2 * s], 1, '', { l: s, b: s });
     if (i === 4) return numChoice(`आयतको क्षेत्रफल ${l * b} र लम्बाइ ${l} भए चौडाइ कति?`, `The area is ${l * b} and the length is ${l}. What is the breadth?`, b, i, [1, -1, 2, l, 3], 1, '', { l, b });
     if (i === 5) return numChoice(`आयतको परिमिति ${2 * (l + b)} र लम्बाइ ${l} भए चौडाइ कति?`, `The perimeter is ${2 * (l + b)} and the length is ${l}. What is the breadth?`, b, i, [1, -1, 2, l, 3], 1, '', { l, b });
-    if (i === 6) return numChoice(`${l} मि लम्बाइ र ${b} मि चौडाइको कोठामा १ वर्ग मिको टाइल कति चाहिन्छ?`, `A room is ${l} m by ${b} m. How many 1 m² tiles cover it?`, l * b, i, [l, 2 * (l + b), -b, 4, b], 1, '', { l, b });
+    if (i === 6) return numChoice(`${l} मि लम्बाइ र ${b} मि चौडाइको कोठामा 1 वर्ग मिको टाइल कति चाहिन्छ?`, `A room is ${l} m by ${b} m. How many 1 m² tiles cover it?`, l * b, i, [l, 2 * (l + b), -b, 4, b], 1, '', { l, b });
     return numChoice(`${l} मि लम्बाइ र ${b} मि चौडाइको खेतको वरिपरि तार लगाउन कति मिटर चाहिन्छ?`, `How much fence goes round a ${l} m by ${b} m field?`, 2 * (l + b), i, [l * b, 2, 4, l + b, -b], 1, '', { l, b });
   },
 });
@@ -157,10 +157,10 @@ export const volumeCfg = (o: { code: string; chapter: number; titleNp: string; t
     if (i === 0 || i === 1) return numChoice(`${l} सेमी × ${b} सेमी × ${h} सेमी घनाभको आयतन कति?`, `Volume of a ${l} × ${b} × ${h} cm cuboid?`, l * b * h, i, [l, -b, 2 * (l + b), l * b, h], 1, '', { l, b, h });
     if (i === 2) return numChoice(`भुजा ${s} सेमी भएको घनको आयतन कति?`, `Volume of a cube of side ${s} cm?`, s * s * s, i, [s, 3 * s, s * s, 6 * s, -s], 1, '', { l: s, b: s, h: s });
     if (i === 3) return numChoice(`घनाभको आयतन ${l * b * h}, लम्बाइ ${l}, चौडाइ ${b} भए उचाइ कति?`, `Volume ${l * b * h}, length ${l}, breadth ${b}. What is the height?`, h, i, [1, -1, 2, 3, b], 1, '', { l, b, h });
-    if (i === 4) return choice('१ लिटर = कति घन सेमी?', '1 litre = how many cm³?', '1000', ['100', '10', '10000'], i);
+    if (i === 4) return choice('1 लिटर = कति घन सेमी?', '1 litre = how many cm³?', '1000', ['100', '10', '10000'], i);
     if (i === 5) return numChoice(`${l * b * h} घन सेमी आयतनको ठोस वस्तुमा ${l * b} वर्ग सेमी आधार भए उचाइ कति?`, `Base area is ${l * b} cm² and volume ${l * b * h} cm³. Height?`, h, i, [1, -1, 2, 3, b], 1);
-    if (o.six) { if (i === 6) return numChoice(`${l} मि × ${b} मि × ${h} मि को ट्याङ्कीको आयतन कति घन मि?`, `A tank ${l} m × ${b} m × ${h} m holds how many m³?`, l * b * h, i, [l, b, 2 * (l + b), l * b, h], 1); return numChoice(`१० सेमी × १० सेमी × १० सेमीको भाँडामा कति लिटर पानी अट्छ?`, 'A 10 cm × 10 cm × 10 cm box holds how many litres?', 1, i, [10, 100, 2, 1000, 5], 1); }
-    if (i === 6) return numChoice(`१० सेमी × १० सेमी × १० सेमीको भाँडामा कति लिटर पानी अट्छ?`, 'A 10 cm × 10 cm × 10 cm box holds how many litres?', 1, i, [10, 100, 2, 1000, 5], 1);
+    if (o.six) { if (i === 6) return numChoice(`${l} मि × ${b} मि × ${h} मि को ट्याङ्कीको आयतन कति घन मि?`, `A tank ${l} m × ${b} m × ${h} m holds how many m³?`, l * b * h, i, [l, b, 2 * (l + b), l * b, h], 1); return numChoice(`10 सेमी × 10 सेमी × 10 सेमीको भाँडामा कति लिटर पानी अट्छ?`, 'A 10 cm × 10 cm × 10 cm box holds how many litres?', 1, i, [10, 100, 2, 1000, 5], 1); }
+    if (i === 6) return numChoice(`10 सेमी × 10 सेमी × 10 सेमीको भाँडामा कति लिटर पानी अट्छ?`, 'A 10 cm × 10 cm × 10 cm box holds how many litres?', 1, i, [10, 100, 2, 1000, 5], 1);
     return numChoice(`दुई घन (भुजा ${s} सेमी) जोड्दा आयतन कति हुन्छ?`, `Two cubes of side ${s} cm are joined. Total volume?`, 2 * s * s * s, i, [s * s * s, 6 * s, 3 * s, s * s, -s], 1);
   },
 });

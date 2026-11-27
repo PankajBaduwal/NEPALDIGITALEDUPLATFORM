@@ -1,14 +1,14 @@
 /**
  * SoilProfileExplorerSim.tsx
- * Simulation 44: 2D Soil Profile & Horizons Explorer (माटोको प्रोफाइल अन्वेषण)
- * Grade 6 Science • Unit 11: Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 44: 2D Soil Profile & Horizons Explorer
+ * Grade 6 Science • Unit 11: Earth and Space
  *
  * Full 2D Interactive Vertical Soil Pit featuring 5 distinct horizons:
- * 1. O Horizon: Organic litter & decomposed dark humus (जैविक तह, 0 - 5 cm)
- * 2. A Horizon: Topsoil rich in organic matter, microbes & plant roots (माथिल्लो माटो, 5 - 25 cm)
- * 3. B Horizon: Subsoil rich in clay, iron oxides & leached minerals (तल्लो माटो, 25 - 60 cm)
- * 4. C Horizon: Weathered parent rock fragments & gravel (टुक्रिएको चट्टानी तह, 60 - 100 cm)
- * 5. R Horizon: Solid unweathered bedrock base (मूल कडा चट्टान, 100+ cm)
+ * 1. O Horizon: Organic litter & decomposed dark humus
+ * 2. A Horizon: Topsoil rich in organic matter, microbes & plant roots
+ * 3. B Horizon: Subsoil rich in clay, iron oxides & leached minerals
+ * 4. C Horizon: Weathered parent rock fragments & gravel
+ * 5. R Horizon: Solid unweathered bedrock base
  */
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -109,7 +109,7 @@ export const SoilProfileExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -396,11 +396,11 @@ export const SoilProfileExplorerSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: What is a Soil Profile?' : '१. खोज: माटोको प्रोफाइल के हो?')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: The 5 Horizons (O,A,B,C,R)' : '२. अन्वेषण: ५ तहहरू (O,A,B,C,R)')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Topsoil vs Bedrock' : '३. अवलोकन: मलिलो माटो र कडा चट्टान')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Organic Humus' : '४. बुझाइ: ह्युमसको भूमिका')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Horizons Quiz' : '५. चुनौती: माटो तह प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: What is a Soil Profile?' : '1. खोज: माटोको प्रोफाइल के हो?')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: The 5 Horizons (O,A,B,C,R)' : '2. अन्वेषण: 5 तहहरू (O,A,B,C,R)')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Topsoil vs Bedrock' : '3. अवलोकन: मलिलो माटो र कडा चट्टान')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Organic Humus' : '4. बुझाइ: ह्युमसको भूमिका')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Horizons Quiz' : '5. चुनौती: माटो तह प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
@@ -426,7 +426,7 @@ export const SoilProfileExplorerSim: React.FC<BaseSimulationProps> = ({
                     : 'कुन चाहिँ माटोको तहमा बिरुवाका जरा, गँड्यौला र सबैभन्दा धेरै जैविक मलिलो पदार्थ हुन्छ?'}
                 </p>
                 {[
-                  { id: 1, en: 'A Horizon (Topsoil / माथिल्लो माटो)', ne: 'ए-तह: माथिल्लो माटो (Topsoil)' },
+                  { id: 1, en: 'A Horizon', ne: 'ए-तह: माथिल्लो माटो (Topsoil)' },
                   { id: 2, en: 'C Horizon (Parent Rock)', ne: 'सी-तह: चट्टानी तह' },
                   { id: 3, en: 'R Horizon (Bedrock)', ne: 'आर-तह: मूल चट्टान' },
                 ].map(opt => (

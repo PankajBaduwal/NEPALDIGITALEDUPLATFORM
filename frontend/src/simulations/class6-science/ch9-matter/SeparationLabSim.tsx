@@ -1,13 +1,13 @@
 /**
  * SeparationLabSim.tsx
- * Simulation 33: 2D Separation Laboratory (मिश्रण छुट्याउने विधिहरू)
- * Grade 6 Science • Unit 9: Matter (पदार्थ)
+ * Simulation 33: 2D Separation Laboratory
+ * Grade 6 Science • Unit 9: Matter
  *
  * Full 2D Interactive Separation Suite featuring 4 fundamental curriculum methods:
- * 1. Sedimentation & Decantation (थिग्राउने र खन्याउने): Heavy sand settles, clear water poured out
- * 2. Filtration (छान्ने विधि): Filter paper funnel separates chalk residue from clear filtrate
- * 3. Evaporation (वाष्पीकरण): Salt solution heated on tripod; steam rises, leaving salt crystals
- * 4. Magnetic Separation (चुम्बकीय विधि): Bar magnet extracts iron filings from sulfur/sand
+ * 1. Sedimentation & Decantation: Heavy sand settles, clear water poured out
+ * 2. Filtration: Filter paper funnel separates chalk residue from clear filtrate
+ * 3. Evaporation: Salt solution heated on tripod; steam rises, leaving salt crystals
+ * 4. Magnetic Separation: Bar magnet extracts iron filings from sulfur/sand
  */
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -22,7 +22,7 @@ export const SeparationLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -176,8 +176,8 @@ export const SeparationLabSim: React.FC<BaseSimulationProps> = ({
         // Labels
         ctx.fillStyle = '#f8fafc';
         ctx.font = 'bold 12px sans-serif';
-        ctx.fillText(lang === 'en' ? 'Insoluble Residue (अवशेष)' : 'कागजमा बाँकी अवशेष', cx + 60, funnelTopY + 20);
-        ctx.fillText(lang === 'en' ? 'Clear Filtrate (छानिएको तरल)' : 'छानिएको सफा झोल', cx + bkW / 2 + 15, tableY - 25);
+        ctx.fillText(lang === 'en' ? 'Insoluble Residue' : 'कागजमा बाँकी अवशेष', cx + 60, funnelTopY + 20);
+        ctx.fillText(lang === 'en' ? 'Clear Filtrate' : 'छानिएको सफा झोल', cx + bkW / 2 + 15, tableY - 25);
       } else if (method === 'evaporation') {
         // --- 2. EVAPORATION APPARATUS ---
         // Tripod Stand & Burner
@@ -269,8 +269,8 @@ export const SeparationLabSim: React.FC<BaseSimulationProps> = ({
         // Labels
         ctx.fillStyle = '#f8fafc';
         ctx.font = 'bold 12px sans-serif';
-        ctx.fillText(lang === 'en' ? 'Evaporating Dish (वाष्पीकरण कचौरा)' : 'वाष्पीकरण कचौरा', cx - 80, dishY - 25);
-        ctx.fillText(lang === 'en' ? 'White Salt Crystals Remain (नून)' : 'सुकेको नूनको कण', cx - 50, dishY + 38);
+        ctx.fillText(lang === 'en' ? 'Evaporating Dish' : 'वाष्पीकरण कचौरा', cx - 80, dishY - 25);
+        ctx.fillText(lang === 'en' ? 'White Salt Crystals Remain' : 'सुकेको नूनको कण', cx - 50, dishY + 38);
       } else if (method === 'magnetic') {
         // --- 3. MAGNETIC SEPARATION ---
         // Petri Dish with sulfur powder and iron filings
@@ -340,8 +340,8 @@ export const SeparationLabSim: React.FC<BaseSimulationProps> = ({
         // Labels
         ctx.fillStyle = '#f8fafc';
         ctx.font = 'bold 12px sans-serif';
-        ctx.fillText(lang === 'en' ? 'Iron Filings Attracted to Poles (फलामको धूलो)' : 'फलामको धूलो चुम्बकमा टाँसिएको', dishX - 110, magnetY - 15);
-        ctx.fillText(lang === 'en' ? 'Sulfur Powder Remains Behind (गन्धक)' : 'गन्धकको धूलो तलै बाँकी', dishX - 60, dishY + 40);
+        ctx.fillText(lang === 'en' ? 'Iron Filings Attracted to Poles' : 'फलामको धूलो चुम्बकमा टाँसिएको', dishX - 110, magnetY - 15);
+        ctx.fillText(lang === 'en' ? 'Sulfur Powder Remains Behind' : 'गन्धकको धूलो तलै बाँकी', dishX - 60, dishY + 40);
       } else if (method === 'decantation') {
         // --- 4. SEDIMENTATION & DECANTATION ---
         // Left Beaker (Mud settled at bottom)
@@ -390,8 +390,8 @@ export const SeparationLabSim: React.FC<BaseSimulationProps> = ({
         // Labels
         ctx.fillStyle = '#f8fafc';
         ctx.font = 'bold 12px sans-serif';
-        ctx.fillText(lang === 'en' ? 'Sediment (थिग्रिएको लेदो)' : 'थिग्रिएको लेदो/बालुवा', bk1X - 60, bk1Y + bkH + 18);
-        ctx.fillText(lang === 'en' ? 'Decanted Water (खन्याएको पानी)' : 'खन्याइएको सफा पानी', bk2X - 70, bk2Y + bkH + 18);
+        ctx.fillText(lang === 'en' ? 'Sediment' : 'थिग्रिएको लेदो/बालुवा', bk1X - 60, bk1Y + bkH + 18);
+        ctx.fillText(lang === 'en' ? 'Decanted Water' : 'खन्याइएको सफा पानी', bk2X - 70, bk2Y + bkH + 18);
       }
 
       // Live metrics HUD
@@ -436,10 +436,10 @@ export const SeparationLabSim: React.FC<BaseSimulationProps> = ({
   };
 
   const methodsList: Array<{ id: SepMethod; en: string; ne: string; icon: any }> = [
-    { id: 'filtration', en: 'Filtration (छान्ने विधि)', ne: 'छान्ने विधि (Filtration)', icon: Filter },
-    { id: 'evaporation', en: 'Evaporation (वाष्पीकरण)', ne: 'वाष्पीकरण विधि (Evaporation)', icon: Flame },
-    { id: 'magnetic', en: 'Magnetic Separation (चुम्बकीय)', ne: 'चुम्बकीय विधि (Magnetic)', icon: Magnet },
-    { id: 'decantation', en: 'Decantation (खन्याउने विधि)', ne: 'थिग्राउने र खन्याउने', icon: Sparkles },
+    { id: 'filtration', en: 'Filtration', ne: 'छान्ने विधि (Filtration)', icon: Filter },
+    { id: 'evaporation', en: 'Evaporation', ne: 'वाष्पीकरण विधि (Evaporation)', icon: Flame },
+    { id: 'magnetic', en: 'Magnetic Separation', ne: 'चुम्बकीय विधि (Magnetic)', icon: Magnet },
+    { id: 'decantation', en: 'Decantation', ne: 'थिग्राउने र खन्याउने', icon: Sparkles },
   ];
 
   return (
@@ -591,11 +591,11 @@ export const SeparationLabSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: Why Separate?' : '१. खोज: किन छुट्याउने?')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Method Mechanics' : '२. अन्वेषण: विधिको प्रक्रिया')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Products & Residue' : '३. अवलोकन: अवशेष र उत्पादन')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Physical Differences' : '४. बुझाइ: भौतिक भिन्नता')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Separation Quiz' : '५. चुनौती: विधि प्रश्नोत्तरी')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: Why Separate?' : '1. खोज: किन छुट्याउने?')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Method Mechanics' : '2. अन्वेषण: विधिको प्रक्रिया')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Products & Residue' : '3. अवलोकन: अवशेष र उत्पादन')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Physical Differences' : '4. बुझाइ: भौतिक भिन्नता')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Separation Quiz' : '5. चुनौती: विधि प्रश्नोत्तरी')}
             </h4>
 
             {stage !== 'challenge' ? (

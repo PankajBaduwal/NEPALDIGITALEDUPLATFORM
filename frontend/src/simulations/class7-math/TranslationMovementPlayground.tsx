@@ -1,7 +1,7 @@
 /**
  * TranslationMovementPlayground.tsx
- * Grade 7 Mathematics – Lesson 19: TRANSFORMATION (रूपान्तरण)
- * Simulation 2: Translation and Movement Playground (स्थानान्तरण र गति खेलमैदान)
+ * Grade 7 Mathematics – Lesson 19: TRANSFORMATION
+ * Simulation 2: Translation and Movement Playground
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 286-292)
  */
 import React, { useState } from 'react';
@@ -15,21 +15,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुनै वस्तुलाई यसको आकार र नाप नबदली निश्चित दिशा र परिमाणमा सार्ने क्रियालाई के भनिन्छ?',
     en: 'Moving an object in a fixed direction by a fixed distance without changing its size or shape is called:',
     options: [
-      { key: 'A', label: 'स्थानान्तरण (Translation)' },
-      { key: 'B', label: 'परावर्तन (Reflection)' },
-      { key: 'C', label: 'परिक्रमण (Rotation)' },
-      { key: 'D', label: 'सममिति' },
+      { key: 'A', label: 'Translation' },
+      { key: 'B', label: 'Reflection' },
+      { key: 'C', label: 'Rotation' },
+      { key: 'D', label: 'Symmetry' },
     ],
     answer: 'A',
   },
   {
-    np: 'बिन्दु P(२, ३) लाई ४ एकाइ दायाँ (Right) र ३ एकाइ माथि (Up) स्थानान्तरण गर्दा नयाँ बिन्दु P\' को निर्देशाङ्क कति हुन्छ?',
+    np: 'बिन्दु P(2, 3) लाई 4 एकाइ दायाँ (Right) र 3 एकाइ माथि (Up) स्थानान्तरण गर्दा नयाँ बिन्दु P\' को निर्देशाङ्क कति हुन्छ?',
     en: 'If point P(2, 3) is translated 4 units right and 3 units up, what is the new coordinate P\'?',
     options: [
-      { key: 'A', label: 'P\'(६, ६)' },
-      { key: 'B', label: 'P\'(२, ६)' },
-      { key: 'C', label: 'P\'(−२, ०)' },
-      { key: 'D', label: 'P\'(८, ९)' },
+      { key: 'A', label: 'P\'(6, 6)' },
+      { key: 'B', label: 'P\'(2, 6)' },
+      { key: 'C', label: 'P\'(−2, 0)' },
+      { key: 'D', label: 'P\'(8, 9)' },
     ],
     answer: 'A',
   },
@@ -37,10 +37,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'स्थानान्तरण गर्दा वस्तुका सबै बिन्दुहरू कस्तो दिशा र दूरीमा सर्दछन्?',
     en: 'During translation, all points of the object move:',
     options: [
-      { key: 'A', label: 'समान दिशा र समान दूरीमा (Same direction and distance)' },
-      { key: 'B', label: 'फरक फरक दिशामा' },
-      { key: 'C', label: 'विपरित दिशामा' },
-      { key: 'D', label: 'गोलाकार रूपमा' },
+      { key: 'A', label: 'In the same direction and the same distance' },
+      { key: 'B', label: 'In different directions' },
+      { key: 'C', label: 'In the opposite direction' },
+      { key: 'D', label: 'In a circular way' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'टेबुलमा इरेजरलाई सिधा रेखामा सार्नु वा चिप्लेटीमा बच्चा चिप्लिनु कुन रूपान्तरणको उदाहरण हो?',
     en: 'Sliding an eraser straight on a table or a child sliding down a slide is an example of:',
     options: [
-      { key: 'A', label: 'स्थानान्तरण (Translation)' },
-      { key: 'B', label: 'परावर्तन' },
-      { key: 'C', label: 'टेसलेसन' },
-      { key: 'D', label: 'दिगंश' },
+      { key: 'A', label: 'Translation' },
+      { key: 'B', label: 'Reflection' },
+      { key: 'C', label: 'Tessellation' },
+      { key: 'D', label: 'Bearing' },
     ],
     answer: 'A',
   },
@@ -114,10 +114,10 @@ export const TranslationMovementPlayground: React.FC<{ onBackToLibrary?: () => v
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 justify-center bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'vector_playground', np: '१. बिन्दु स्थानान्तरण (Translate Point)', en: '1. Translate Point' },
-            { id: 'segment_parallel', np: '२. रेखाखण्ड स्थानान्तरण (Translate Segment)', en: '2. Translate Line Segment' },
-            { id: 'polygon_trans', np: '३. त्रिभुज स्थानान्तरण (Translate Triangle)', en: '3. Translate Polygon' },
-            { id: 'real_life', np: '४. व्यावहारिक उदाहरण (Real-life Motion)', en: '4. Real-Life Examples' },
+            { id: 'vector_playground', np: '1. बिन्दु स्थानान्तरण (Translate Point)', en: '1. Translate Point' },
+            { id: 'segment_parallel', np: '2. रेखाखण्ड स्थानान्तरण (Translate Segment)', en: '2. Translate Line Segment' },
+            { id: 'polygon_trans', np: '3. त्रिभुज स्थानान्तरण (Translate Triangle)', en: '3. Translate Polygon' },
+            { id: 'real_life', np: '4. व्यावहारिक उदाहरण (Real-life Motion)', en: '4. Real-Life Examples' },
           ].map((t) => (
             <button
               key={t.id}
@@ -228,10 +228,10 @@ export const TranslationMovementPlayground: React.FC<{ onBackToLibrary?: () => v
                     {L('स्थानान्तरण गणना (Calculation):', 'Translation Steps:')}
                   </div>
                   <div className="text-xs text-slate-700 space-y-1">
-                    <div>सुरुको बिन्दु: A({startX}, {startY})</div>
-                    <div>स्थानान्तरण परिमाण: dx = {dx}, dy = {dy}</div>
+                    <div>Original point: A({startX}, {startY})</div>
+                    <div>Translation amount: dx = {dx}, dy = {dy}</div>
                     <div className="text-sm font-black text-indigo-700 pt-1 border-t border-slate-200">
-                      नयाँ बिन्दु A' = ({startX} + {dx}, {startY} + {dy}) = ({toNp(startX + dx)}, {toNp(startY + dy)})
+                      New point A' = ({startX} + {dx}, {startY} + {dy}) = ({toNp(startX + dx)}, {toNp(startY + dy)})
                     </div>
                   </div>
                 </div>
@@ -391,9 +391,9 @@ export const TranslationMovementPlayground: React.FC<{ onBackToLibrary?: () => v
                     {L('अनुरूपता (Congruence) प्रमाण:', 'Congruence Proof:')}
                   </div>
                   <div className="text-xs text-slate-700 space-y-1">
-                    <div>△PQR ≅ △P'Q'R' (आकार र नाप पूर्ण रूपमा बराबर)</div>
-                    <div>भुजाहरू: P'Q' = PQ, Q'R' = QR, P'R' = PR</div>
-                    <div>कोणहरू: ∠P = ∠P', ∠Q = ∠Q', ∠R = ∠R'</div>
+                    <div>△PQR ≅ △P'Q'R'</div>
+                    <div>Sides: P'Q' = PQ, Q'R' = QR, P'R' = PR</div>
+                    <div>Angles: ∠P = ∠P', ∠Q = ∠Q', ∠R = ∠R'</div>
                   </div>
                 </div>
               </div>
@@ -416,19 +416,19 @@ export const TranslationMovementPlayground: React.FC<{ onBackToLibrary?: () => v
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
                 {
-                  titleNp: '१. टेबुलमाथि इरेजर सार्नु',
+                  titleNp: '1. टेबुलमाथि इरेजर सार्नु',
                   titleEn: '1. Sliding Eraser on Desk',
                   descNp: 'कापीमा वा टेबुलमाथि इरेजरलाई सिधा तान्दा यसको आकार नबदली सबै भागहरू एकैसाथ सर्छन्।',
                   descEn: 'Moving an eraser across paper translates all its vertices identically.',
                 },
                 {
-                  titleNp: '२. चिप्लेटीमा बच्चा चिप्लिनु',
+                  titleNp: '2. चिप्लेटीमा बच्चा चिप्लिनु',
                   titleEn: '2. Child Sliding Down',
                   descNp: 'चिप्लेटीको सिधा भिरालो सतहबाट बच्चा तल झर्दा निश्चित दिशा र परिमाणमा स्थानान्तरण हुन्छ।',
                   descEn: 'Gliding down a playground slide represents consistent vector displacement.',
                 },
                 {
-                  titleNp: '३. दराज खोल्नु (Drawer)',
+                  titleNp: '3. दराज खोल्नु (Drawer)',
                   titleEn: '3. Opening a Drawer',
                   descNp: 'दराजलाई बाहिर तान्दा दराजका चारवटै कुनाहरू बराबर दूरी र समानान्तर दिशामा सर्छन्।',
                   descEn: 'Pulling a drawer outward moves all four corners by the exact same distance.',

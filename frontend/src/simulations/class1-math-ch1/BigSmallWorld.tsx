@@ -1,7 +1,7 @@
 /**
  * BigSmallWorld.tsx (Pure 2D Edition)
  * Grade 1 Mathematics • Chapter 1: आकारप्रकार र स्थान (Shapes & Position)
- * 2D Simulation: Big and Small World (ठूलो र सानो संसार)
+ * 2D Simulation: Big and Small World
  * 100% 2D SVG & Canvas – No Three.js/WebGL dependencies.
  */
 import React, { useState, useEffect } from 'react';
@@ -53,7 +53,7 @@ export const BigSmallWorld: React.FC<BigSmallWorldProps> = ({
   onBackToLibrary,
   initialLanguage = 'ne',
 }) => {
-  const [lang, setLang] = useState<'ne' | 'en'>(initialLanguage);
+  const [lang, setLang] = useState<'ne' | 'en'>('en');
   const [muted, setMuted] = useState(false);
   const [mode, setMode] = useState<Mode>('PAIRS');
   const [pairIdx, setPairIdx] = useState(0);
@@ -198,10 +198,10 @@ export const BigSmallWorld: React.FC<BigSmallWorldProps> = ({
           </button>
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#9FCBCD' }}>
-              {L('कक्षा १ • गणित • अध्याय १', 'Class 1 • Mathematics • Chapter 1')}
+              {L('कक्षा 1 • गणित • अध्याय 1', 'Class 1 • Mathematics • Chapter 1')}
             </div>
             <h1 style={{ margin: 0, fontSize: 18, fontWeight: 900 }}>
-              {L('ठूलो र सानो संसार (Big and Small World)', 'Big and Small World (ठूलो र सानो)')}
+              {L('ठूलो र सानो संसार (Big and Small World)', 'Big and Small World')}
             </h1>
           </div>
         </div>
@@ -223,21 +223,7 @@ export const BigSmallWorld: React.FC<BigSmallWorldProps> = ({
             <span>{isNe ? toNp(stars) : stars}</span>
           </div>
 
-          <button
-            onClick={() => setLang(isNe ? 'en' : 'ne')}
-            style={{
-              background: 'rgba(255,255,255,0.2)',
-              color: '#FFFFFF',
-              border: 'none',
-              padding: '8px 14px',
-              borderRadius: 12,
-              fontSize: 13,
-              fontWeight: 800,
-              cursor: 'pointer',
-            }}
-          >
-            {isNe ? 'English' : 'नेपाली'}
-          </button>
+          
 
           <button
             onClick={toggleSound}
@@ -557,7 +543,7 @@ export const BigSmallWorld: React.FC<BigSmallWorldProps> = ({
             >
               <div style={{ fontSize: 18, fontWeight: 900, color: '#92400E', display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span>🧺</span>
-                <span>{L('ठूला वस्तुहरूको डालो (BIG BASKET)', 'BIG BASKET (ठूलो डालो)')}</span>
+                <span>{L('ठूला वस्तुहरूको डालो (BIG BASKET)', 'BIG BASKET')}</span>
               </div>
               <div style={{ flex: 1, display: 'flex', gap: 10, flexWrap: 'wrap', padding: '14px 0', alignItems: 'center' }}>
                 {bigBasket.map((it) => (
@@ -594,7 +580,7 @@ export const BigSmallWorld: React.FC<BigSmallWorldProps> = ({
             >
               <div style={{ fontSize: 18, fontWeight: 900, color: '#1E3A8A', display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span>🧺</span>
-                <span>{L('साना वस्तुहरूको डालो (SMALL BASKET)', 'SMALL BASKET (सानो डालो)')}</span>
+                <span>{L('साना वस्तुहरूको डालो (SMALL BASKET)', 'SMALL BASKET')}</span>
               </div>
               <div style={{ flex: 1, display: 'flex', gap: 10, flexWrap: 'wrap', padding: '14px 0', alignItems: 'center' }}>
                 {smallBasket.map((it) => (

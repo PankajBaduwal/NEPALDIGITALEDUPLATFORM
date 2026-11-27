@@ -19,8 +19,8 @@ export const fractionCfg = (o: { code: string; chapter: number; titleNp: string;
   return {
     code: o.code, chapter: o.chapter, titleNp: o.titleNp, titleEn: o.titleEn, color: '#ef4444',
     params: [
-      { id: 'n1', np: 'अंश १', en: 'Top 1', min: 1, max: dmax, init: 1, color: COL[0] }, { id: 'd1', np: 'हर १', en: 'Bottom 1', min: 2, max: dmax, init: 2, color: COL[0] },
-      { id: 'n2', np: 'अंश २', en: 'Top 2', min: 1, max: dmax, init: 1, color: COL[1] }, { id: 'd2', np: 'हर २', en: 'Bottom 2', min: 2, max: dmax, init: 4, color: COL[1] },
+      { id: 'n1', np: 'अंश 1', en: 'Top 1', min: 1, max: dmax, init: 1, color: COL[0] }, { id: 'd1', np: 'हर 1', en: 'Bottom 1', min: 2, max: dmax, init: 2, color: COL[0] },
+      { id: 'n2', np: 'अंश 2', en: 'Top 2', min: 1, max: dmax, init: 1, color: COL[1] }, { id: 'd2', np: 'हर 2', en: 'Bottom 2', min: 2, max: dmax, init: 4, color: COL[1] },
       { id: 'op', np: 'क्रिया', en: 'Operation', min: 0, max: 1, init: 0, names: [{ np: 'जोड +', en: 'Add +' }, { np: 'घटाउ −', en: 'Subtract −' }] },
     ],
     stage: { camera: [0, 11, 12], target: [0, 0, 0], minDistance: 7, maxDistance: 26 },
@@ -96,12 +96,12 @@ export const decimalCfg = (o: { code: string; chapter: number; titleNp: string; 
     tag(g, dec(p.a), -10, 0.8, -4, 2, { px: 52, color: '#0369a1' }); tag(g, dec(p.b), -10, 0.8, 0, 2, { px: 52, color: '#15803d' }); tag(g, dec(r), -10, 0.8, 4, 2, { px: 52, color: '#6d28d9' });
   },
   info: (p) => { const r = p.op === 0 ? p.a + p.b : p.a - p.b; return bi(`${dec(p.a)} ${p.op ? '−' : '+'} ${dec(p.b)} = ${dec(r)}\nदशमलव बिन्दु मिलाएर एकाइबाट जोडघटाउ गरौँ`, `${dec(p.a)} ${p.op ? '−' : '+'} ${dec(p.b)} = ${dec(r)}\nLine up the decimal points and work from the right`); },
-  tip: bi('ब्लकले दशमलव देखाउँछ: घन = १, छड = ०.१, सानो घन = ०.०१', 'Blocks show decimals: cube = 1, rod = 0.1, small cube = 0.01'),
+  tip: bi('ब्लकले दशमलव देखाउँछ: घन = 1, छड = 0.1, सानो घन = 0.01', 'Blocks show decimals: cube = 1, rod = 0.1, small cube = 0.01'),
   goal: () => { const a = 5 * rnd(10, 150), b = 5 * rnd(10, 100); return { p: { a, b, op: 0 }, np: `${dec(a)} + ${dec(b)} बनाऔँ`, en: `Set up ${dec(a)} + ${dec(b)}`, start: { a: 0, b: 0, op: 0 } }; },
   quiz: (i) => {
     const a = 5 * rnd(20, 150), b = 5 * rnd(10, 90); const sub = i % 2 === 1; const hi = sub ? Math.max(a, b) : a, lo = sub ? Math.min(a, b) : b; const r = sub ? hi - lo : a + b;
     if (i === 6) { const x = rnd(11, 99) / 10; return choice(`${x} को दशांश स्थानको अङ्क?`, `Which digit is in the tenths place of ${x}?`, String(Math.round(x * 10) % 10), ['0', '5', '9'].filter((v) => v !== String(Math.round(x * 10) % 10)), i); }
-    if (i === 7) { const x = rnd(1, 9), y = rnd(1, 9); return choice(`${x}.${y} र ${x}.${y}0 मध्ये के सत्य?`, `${x}.${y} and ${x}.${y}0 are…`, 'बराबर | equal', ['पहिलो ठूलो | first is greater', 'दोस्रो ठूलो | second is greater'], i); }
+    if (i === 7) { const x = rnd(1, 9), y = rnd(1, 9); return choice(`${x}.${y} र ${x}.${y}0 मध्ये के सत्य?`, `${x}.${y} and ${x}.${y}0 are…`, 'equal', ['first is greater', 'second is greater'], i); }
     return choice(`${dec(hi)} ${sub ? '−' : '+'} ${dec(lo)} = ?`, `${dec(hi)} ${sub ? '−' : '+'} ${dec(lo)} = ?`, dec(r), [dec(r + 10), dec(Math.max(0, r - 10)), dec(r + 100), dec(r + 1)], i, { a: hi, b: lo, op: sub ? 1 : 0 });
   },
 });
@@ -120,10 +120,10 @@ export const percentCfg = (o: { code: string; chapter: number; titleNp: string; 
     const hi = Math.round((p.amt * p.pct) / 100);
     for (let k = 0; k < p.amt; k++) box(g, 0.34, 0.34, 0.34, 0.8 + (k % 20) * 0.4, 0.2 + Math.floor(k / 20) * 0.38, 2.8 - 0 * k, k < hi ? '#f59e0b' : '#cbd5e1', 0.5);
     tag(g, `${p.pct}%`, -7, 0.7, 4.8, 3, { px: 60, w: 320, h: 96, bg: '#fff', border: '#14b8a6' }); tag(g, `${hi} / ${p.amt}`, 5, 3.6, 2.8, 3, { px: 60, w: 400, h: 96, bg: '#fff', border: '#f59e0b' });
-    tag(g, lang === 'ne' ? '१०० मध्ये' : 'out of 100', -7, 0.4, -2, 2.2, { px: 40, w: 320, h: 80 });
+    tag(g, lang === 'ne' ? '100 मध्ये' : 'out of 100', -7, 0.4, -2, 2.2, { px: 40, w: 320, h: 80 });
   },
   info: (p) => { const hi = (p.amt * p.pct) / 100; const [n, d] = simp(p.pct, 100); return bi(`${p.pct}% = ${p.pct}/100 = ${n}/${d} = ${(p.pct / 100).toFixed(2)}\n${p.amt} को ${p.pct}% = ${hi}`, `${p.pct}% = ${p.pct}/100 = ${n}/${d} = ${(p.pct / 100).toFixed(2)}\n${p.pct}% of ${p.amt} = ${hi}`); },
-  tip: bi('१०० खानामा प्रतिशत रङ्ग्याऔँ र जम्माको कति भाग हुन्छ हेरौँ', 'Colour a percent of 100 squares and see what part of the total it is'),
+  tip: bi('100 खानामा प्रतिशत रङ्ग्याऔँ र जम्माको कति भाग हुन्छ हेरौँ', 'Colour a percent of 100 squares and see what part of the total it is'),
   goal: () => { const t = 5 * rnd(1, 19); return { p: { pct: t }, np: `${t}% रङ्ग्याऔँ`, en: `Colour ${t}%`, start: { pct: 0 } }; },
   quiz: (i) => {
     const fr = [[1, 2], [1, 4], [3, 4], [1, 5], [2, 5], [3, 10], [7, 20], [9, 25]][i]; const pc = (fr[0] * 100) / fr[1]; const amt = 20 * rnd(2, 10); const t = 5 * rnd(1, 19);
@@ -131,7 +131,7 @@ export const percentCfg = (o: { code: string; chapter: number; titleNp: string; 
     if (i === 3) { const x = rnd(1, 9); const v = x * 10 + 5; return numChoice(`0.${x}5 लाई प्रतिशतमा बदल्दा?`, `Change 0.${x}5 to a percent`, v, i, [5, -5, 10, 1, 20], 1, '%', { pct: v }); }
     if (i === 4 || i === 5) return numChoice(`${amt} को ${t}% कति हो?`, `What is ${t}% of ${amt}?`, (amt * t) / 100, i, [1, -1, 2, 5, 10], 0, '', { pct: t, amt });
     if (o.six) return numChoice(`${amt} मा ${t}% बढ्दा कति हुन्छ?`, `${amt} increased by ${t}% is…`, amt + (amt * t) / 100, i, [1, -1, 2, 5, 10], 0);
-    return numChoice(`एउटा कक्षामा ४० विद्यार्थीमध्ये ${t}% केटा छन् भने केटा कति?`, `In a class of 40, ${t}% are boys. How many boys?`, (40 * t) / 100, i, [1, -1, 2, 4, 5], 0);
+    return numChoice(`एउटा कक्षामा 40 विद्यार्थीमध्ये ${t}% केटा छन् भने केटा कति?`, `In a class of 40, ${t}% are boys. How many boys?`, (40 * t) / 100, i, [1, -1, 2, 4, 5], 0);
   },
 });
 export const PercentLab5 = makeLab(percentCfg({ code: 'SIM-MATH-G5-L7-01', chapter: 7, titleNp: 'प्रतिशत ग्रिड', titleEn: 'Percent Grid' }));

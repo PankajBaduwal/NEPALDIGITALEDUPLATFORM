@@ -1,6 +1,6 @@
 /**
  * SetBuilderClassificationLab.tsx
- * Grade 7 Mathematics – Lesson 1: SET (समूह)
+ * Grade 7 Mathematics – Lesson 1: SET
  * Simulation 1: Set Builder and Classification Lab (2D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S.)
  */
@@ -24,19 +24,19 @@ interface ElementItem {
 }
 
 const POOL_ITEMS: ElementItem[] = [
-  { id: 'n1', labelEn: '1', labelNp: '१', category: 'number', isOdd: true, isSquare: true, val: 1 },
-  { id: 'n2', labelEn: '2', labelNp: '२', category: 'number', isEven: true, isPrime: true, val: 2 },
-  { id: 'n3', labelEn: '3', labelNp: '३', category: 'number', isOdd: true, isPrime: true, val: 3 },
-  { id: 'n4', labelEn: '4', labelNp: '४', category: 'number', isEven: true, isSquare: true, val: 4 },
-  { id: 'n5', labelEn: '5', labelNp: '५', category: 'number', isOdd: true, isPrime: true, val: 5 },
-  { id: 'n6', labelEn: '6', labelNp: '६', category: 'number', isEven: true, val: 6 },
-  { id: 'n7', labelEn: '7', labelNp: '७', category: 'number', isOdd: true, isPrime: true, val: 7 },
-  { id: 'n8', labelEn: '8', labelNp: '८', category: 'number', isEven: true, val: 8 },
-  { id: 'n9', labelEn: '9', labelNp: '९', category: 'number', isOdd: true, isSquare: true, val: 9 },
-  { id: 'n10', labelEn: '10', labelNp: '१०', category: 'number', isEven: true, val: 10 },
-  { id: 'n11', labelEn: '11', labelNp: '११', category: 'number', isOdd: true, isPrime: true, val: 11 },
-  { id: 'n12', labelEn: '12', labelNp: '१२', category: 'number', isEven: true, val: 12 },
-  { id: 'n13', labelEn: '13', labelNp: '१३', category: 'number', isOdd: true, isPrime: true, val: 13 },
+  { id: 'n1', labelEn: '1', labelNp: '1', category: 'number', isOdd: true, isSquare: true, val: 1 },
+  { id: 'n2', labelEn: '2', labelNp: '2', category: 'number', isEven: true, isPrime: true, val: 2 },
+  { id: 'n3', labelEn: '3', labelNp: '3', category: 'number', isOdd: true, isPrime: true, val: 3 },
+  { id: 'n4', labelEn: '4', labelNp: '4', category: 'number', isEven: true, isSquare: true, val: 4 },
+  { id: 'n5', labelEn: '5', labelNp: '5', category: 'number', isOdd: true, isPrime: true, val: 5 },
+  { id: 'n6', labelEn: '6', labelNp: '6', category: 'number', isEven: true, val: 6 },
+  { id: 'n7', labelEn: '7', labelNp: '7', category: 'number', isOdd: true, isPrime: true, val: 7 },
+  { id: 'n8', labelEn: '8', labelNp: '8', category: 'number', isEven: true, val: 8 },
+  { id: 'n9', labelEn: '9', labelNp: '9', category: 'number', isOdd: true, isSquare: true, val: 9 },
+  { id: 'n10', labelEn: '10', labelNp: '10', category: 'number', isEven: true, val: 10 },
+  { id: 'n11', labelEn: '11', labelNp: '11', category: 'number', isOdd: true, isPrime: true, val: 11 },
+  { id: 'n12', labelEn: '12', labelNp: '12', category: 'number', isEven: true, val: 12 },
+  { id: 'n13', labelEn: '13', labelNp: '13', category: 'number', isOdd: true, isPrime: true, val: 13 },
   { id: 'la', labelEn: 'a', labelNp: 'a', category: 'letter', isVowel: true },
   { id: 'lb', labelEn: 'b', labelNp: 'b', category: 'letter' },
   { id: 'le', labelEn: 'e', labelNp: 'e', category: 'letter', isVowel: true },
@@ -61,20 +61,20 @@ const PROPERTY_CHALLENGES = [
   {
     id: 'p1',
     titleEn: 'Set of Prime numbers less than 15',
-    titleNp: '१५ भन्दा साना रुढ सङ्ख्याहरूको समूह',
+    titleNp: '15 भन्दा साना रुढ सङ्ख्याहरूको समूह',
     setName: 'P',
     expectedIds: ['n2', 'n3', 'n5', 'n7', 'n11', 'n13'],
     builderEn: '{ x : x is a prime number, x < 15 }',
-    builderNp: '{ x : x एउटा रुढ सङ्ख्या हो, x < १५ }',
+    builderNp: '{ x : x एउटा रुढ सङ्ख्या हो, x < 15 }',
   },
   {
     id: 'p2',
     titleEn: 'Set of Even numbers less than 12',
-    titleNp: '१२ भन्दा साना जोर सङ्ख्याहरूको समूह',
+    titleNp: '12 भन्दा साना जोर सङ्ख्याहरूको समूह',
     setName: 'E',
     expectedIds: ['n2', 'n4', 'n6', 'n8', 'n10'],
     builderEn: '{ x : x is an even natural number, x < 12 }',
-    builderNp: '{ x : x एउटा जोर प्राकृतिक सङ्ख्या हो, x < १२ }',
+    builderNp: '{ x : x एउटा जोर प्राकृतिक सङ्ख्या हो, x < 12 }',
   },
   {
     id: 'p3',
@@ -88,45 +88,45 @@ const PROPERTY_CHALLENGES = [
   {
     id: 'p4',
     titleEn: 'Set of Square numbers up to 10',
-    titleNp: '१० सम्मका पूर्ण वर्ग सङ्ख्याहरूको समूह',
+    titleNp: '10 सम्मका पूर्ण वर्ग सङ्ख्याहरूको समूह',
     setName: 'S',
     expectedIds: ['n1', 'n4', 'n9'],
     builderEn: '{ x : x is a square number, x ≤ 10 }',
-    builderNp: '{ x : x पूर्ण वर्ग सङ्ख्या हो, x ≤ १० }',
+    builderNp: '{ x : x पूर्ण वर्ग सङ्ख्या हो, x ≤ 10 }',
   },
 ];
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'यदि A = {१, २, ३, ४, ५} भए, तलका मध्ये कुन कथन सत्य हो?',
+    np: 'यदि A = {1, 2, 3, 4, 5} भए, तलका मध्ये कुन कथन सत्य हो?',
     en: 'If A = {1, 2, 3, 4, 5}, which of the following statements is true?',
     options: [
-      { key: 'A', label: '३ ∉ A' },
-      { key: 'B', label: '४ ∈ A' },
-      { key: 'C', label: '६ ∈ A' },
-      { key: 'D', label: '० ∈ A' },
+      { key: 'A', label: '3 ∉ A' },
+      { key: 'B', label: '4 ∈ A' },
+      { key: 'C', label: '6 ∈ A' },
+      { key: 'D', label: '0 ∈ A' },
     ],
     answer: 'B',
   },
   {
-    np: '१० भन्दा साना बिजोर सङ्ख्याहरूको समूहलाई सूचीकरण विधिमा कसरी लेखिन्छ?',
+    np: '10 भन्दा साना बिजोर सङ्ख्याहरूको समूहलाई सूचीकरण विधिमा कसरी लेखिन्छ?',
     en: 'How is the set of odd numbers less than 10 written in listing method?',
     options: [
-      { key: 'A', label: '{२, ४, ६, ८}' },
-      { key: 'B', label: '{१, ३, ५, ७, ९}' },
-      { key: 'C', label: '{१, ३, ५, ७}' },
-      { key: 'D', label: '{०, १, ३, ५, ७, ९}' },
+      { key: 'A', label: '{2, 4, 6, 8}' },
+      { key: 'B', label: '{1, 3, 5, 7, 9}' },
+      { key: 'C', label: '{1, 3, 5, 7}' },
+      { key: 'D', label: '{0, 1, 3, 5, 7, 9}' },
     ],
     answer: 'B',
   },
   {
-    np: 'समूह निर्माण विधि {x : x ≤ ५, x ∈ N} मा कुन कुन सदस्य पर्दछन्?',
+    np: 'समूह निर्माण विधि {x : x ≤ 5, x ∈ N} मा कुन कुन सदस्य पर्दछन्?',
     en: 'Which elements belong to the set-builder form {x : x ≤ 5, x ∈ N}?',
     options: [
-      { key: 'A', label: '{०, १, २, ३, ४, ५}' },
-      { key: 'B', label: '{१, २, ३, ४, ५}' },
-      { key: 'C', label: '{१, २, ३, ४}' },
-      { key: 'D', label: '{५}' },
+      { key: 'A', label: '{0, 1, 2, 3, 4, 5}' },
+      { key: 'B', label: '{1, 2, 3, 4, 5}' },
+      { key: 'C', label: '{1, 2, 3, 4}' },
+      { key: 'D', label: '{5}' },
     ],
     answer: 'B',
   },
@@ -134,10 +134,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'यदि B = {a, e, i, o, u} भए n(B) को मान कति हुन्छ?',
     en: 'If B = {a, e, i, o, u}, what is the value of n(B)?',
     options: [
-      { key: 'A', label: '४' },
-      { key: 'B', label: '५' },
-      { key: 'C', label: '६' },
-      { key: 'D', label: '२६' },
+      { key: 'A', label: '4' },
+      { key: 'B', label: '5' },
+      { key: 'C', label: '6' },
+      { key: 'D', label: '26' },
     ],
     answer: 'B',
   },
@@ -216,11 +216,11 @@ export const SetBuilderClassificationLab: React.FC<{ onBackToLibrary?: () => voi
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'create', np: 'क्रियाकलाप १: समूह बनाउने', en: 'Activity A: Create a Set' },
-            { id: 'property', np: 'क्रियाकलाप २: विशेषता पहिचान', en: 'Activity B: Find the Property' },
-            { id: 'listing', np: 'क्रियाकलाप ३: सूचीकरण विधि', en: 'Activity C: Listing Method' },
-            { id: 'builder', np: 'क्रियाकलाप ४: समूह निर्माण विधि', en: 'Activity D: Set-Builder Method' },
-            { id: 'membership', np: 'क्रियाकलाप ५: सदस्य पहिचान (∈, ∉)', en: 'Activity E: Membership (∈, ∉)' },
+            { id: 'create', np: 'क्रियाकलाप 1: समूह बनाउने', en: 'Activity A: Create a Set' },
+            { id: 'property', np: 'क्रियाकलाप 2: विशेषता पहिचान', en: 'Activity B: Find the Property' },
+            { id: 'listing', np: 'क्रियाकलाप 3: सूचीकरण विधि', en: 'Activity C: Listing Method' },
+            { id: 'builder', np: 'क्रियाकलाप 4: समूह निर्माण विधि', en: 'Activity D: Set-Builder Method' },
+            { id: 'membership', np: 'क्रियाकलाप 5: सदस्य पहिचान (∈, ∉)', en: 'Activity E: Membership (∈, ∉)' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -288,7 +288,7 @@ export const SetBuilderClassificationLab: React.FC<{ onBackToLibrary?: () => voi
             >
               <div style={{ fontSize: 20, fontWeight: 900, color: '#166534', textAlign: 'center', wordBreak: 'break-word', lineHeight: 1.6 }}>
                 {setName} = {'{ '}
-                <span style={{ color: '#0F172A', fontWeight: 700 }}>{listingString || L('(खाली समूह)', '(Empty Set)')}</span>
+                <span style={{ color: '#0F172A', fontWeight: 700 }}>{listingString || L('', '(Empty Set)')}</span>
                 {' }'}
               </div>
               <div style={{ marginTop: 8, fontSize: 13, fontWeight: 700, color: '#15803D' }}>
@@ -414,12 +414,12 @@ export const SetBuilderClassificationLab: React.FC<{ onBackToLibrary?: () => voi
                         const item = POOL_ITEMS.find((p) => p.id === id);
                         return isNe ? item?.labelNp : item?.labelEn;
                       }).join(', ')
-                    : L('(वस्तुहरू छान्नुहोस्)', '(Click items to add)')}
+                    : L('', '(Click items to add)')}
                 </span>
                 {' }'}
               </div>
               <div style={{ marginTop: 6, fontSize: 12, fontWeight: 700, color: '#64748B' }}>
-                {L(`छानिएका सदस्य: ${toNp(propertyPicks.length)} वटा`, `Selected elements: ${propertyPicks.length}`)}
+                {L(`छानिएका सदस्य: ${toNp(propertyPicks.length)} pcs`, `Selected elements: ${propertyPicks.length}`)}
               </div>
             </div>
 
@@ -517,31 +517,31 @@ export const SetBuilderClassificationLab: React.FC<{ onBackToLibrary?: () => voi
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
               {[
                 {
-                  titleNp: '१५ भन्दा साना रुढ सङ्ख्याहरू:',
+                  titleNp: '15 भन्दा साना रुढ सङ्ख्याहरू:',
                   titleEn: 'Prime numbers less than 15:',
                   code: 'P = { 2, 3, 5, 7, 11, 13 }',
-                  cardinalNp: 'जम्मा सदस्य n(P) = ६',
+                  cardinalNp: 'जम्मा सदस्य n(P) = 6',
                   cardinalEn: 'Cardinality n(P) = 6',
                 },
                 {
                   titleNp: 'अंग्रेजी वर्णमालाका स्वरवर्णहरू:',
                   titleEn: 'Vowels of English alphabet:',
                   code: 'V = { a, e, i, o, u }',
-                  cardinalNp: 'जम्मा सदस्य n(V) = ५',
+                  cardinalNp: 'जम्मा सदस्य n(V) = 5',
                   cardinalEn: 'Cardinality n(V) = 5',
                 },
                 {
-                  titleNp: '१० भन्दा साना जोर सङ्ख्याहरू:',
+                  titleNp: '10 भन्दा साना जोर सङ्ख्याहरू:',
                   titleEn: 'Even natural numbers less than 10:',
                   code: 'E = { 2, 4, 6, 8 }',
-                  cardinalNp: 'जम्मा सदस्य n(E) = ४',
+                  cardinalNp: 'जम्मा सदस्य n(E) = 4',
                   cardinalEn: 'Cardinality n(E) = 4',
                 },
                 {
-                  titleNp: '१२ का गुणनखण्डहरू (Factors of 12):',
+                  titleNp: '12 का गुणनखण्डहरू (Factors of 12):',
                   titleEn: 'Factors of 12:',
                   code: 'F = { 1, 2, 3, 4, 6, 12 }',
-                  cardinalNp: 'जम्मा सदस्य n(F) = ६',
+                  cardinalNp: 'जम्मा सदस्य n(F) = 6',
                   cardinalEn: 'Cardinality n(F) = 6',
                 },
               ].map((ex, idx) => (
@@ -579,23 +579,23 @@ export const SetBuilderClassificationLab: React.FC<{ onBackToLibrary?: () => voi
                 {
                   listing: 'A = { 1, 3, 5, 7, 9 }',
                   builderEn: 'A = { x : x is an odd natural number, x < 10 }',
-                  builderNp: 'A = { x : x एउटा १० भन्दा सानो बिजोर सङ्ख्या हो }',
+                  builderNp: 'A = { x : x एउटा 10 भन्दा सानो बिजोर सङ्ख्या हो }',
                   explEn: 'Read as: "A is the set of all x such that x is an odd natural number less than 10"',
-                  explNp: 'पढ्ने तरिका: "A भनेको सबै x हरूको समूह हो, यस्तो कि x, १० भन्दा सानो बिजोर सङ्ख्या हो"',
+                  explNp: 'पढ्ने तरिका: "A भनेको सबै x हरूको समूह हो, यस्तो कि x, 10 भन्दा सानो बिजोर सङ्ख्या हो"',
                 },
                 {
                   listing: 'P = { 2, 3, 5, 7, 11, 13 }',
                   builderEn: 'P = { x : x is a prime number, x < 15 }',
-                  builderNp: 'P = { x : x एउटा १५ भन्दा सानो रुढ सङ्ख्या हो }',
+                  builderNp: 'P = { x : x एउटा 15 भन्दा सानो रुढ सङ्ख्या हो }',
                   explEn: 'Read as: "P is the set of all x such that x is a prime number less than 15"',
-                  explNp: 'पढ्ने तरिका: "P भनेको १५ भन्दा साना रुढ सङ्ख्या x हरूको समूह हो"',
+                  explNp: 'पढ्ने तरिका: "P भनेको 15 भन्दा साना रुढ सङ्ख्या x हरूको समूह हो"',
                 },
                 {
                   listing: 'S = { 1, 4, 9, 16, 25 }',
                   builderEn: 'S = { x : x is a square number, x ≤ 25 }',
-                  builderNp: 'S = { x : x एउटा २५ सम्मको पूर्ण वर्ग सङ्ख्या हो }',
+                  builderNp: 'S = { x : x एउटा 25 सम्मको पूर्ण वर्ग सङ्ख्या हो }',
                   explEn: 'Read as: "S is the set of all square numbers up to 25"',
-                  explNp: 'पढ्ने तरिका: "S भनेको २५ सम्मका पूर्ण वर्ग सङ्ख्याहरूको समूह हो"',
+                  explNp: 'पढ्ने तरिका: "S भनेको 25 सम्मका पूर्ण वर्ग सङ्ख्याहरूको समूह हो"',
                 },
               ].map((row, idx) => (
                 <div key={idx} style={{ background: '#F8FAFC', border: '1px solid #CBD5E1', borderRadius: 14, padding: 16 }}>
@@ -626,7 +626,7 @@ export const SetBuilderClassificationLab: React.FC<{ onBackToLibrary?: () => voi
               {L('सदस्य पहिचान: ∈ (पर्दछ) र ∉ (पर्दैन)', 'Element Membership: ∈ (belongs to) and ∉ (does not belong to)')}
             </h3>
             <p style={{ fontSize: 14, color: '#475569', marginBottom: 18 }}>
-              {L('मानौँ A = {२, ३, ५, ७, ११} (१२ भन्दा साना रुढ सङ्ख्याहरू)। तलका कथनहरूको सत्यता जाँच गर्नुहोस्:', 'Given set A = {2, 3, 5, 7, 11}. Check membership for the test element:')}
+              {L('मानौँ A = {2, 3, 5, 7, 11} (12 भन्दा साना रुढ सङ्ख्याहरू)। तलका कथनहरूको सत्यता जाँच गर्नुहोस्:', 'Given set A = {2, 3, 5, 7, 11}. Check membership for the test element:')}
             </p>
 
             <div style={{ background: '#E6F3E9', border: '2px solid #187C68', borderRadius: 16, padding: 18, textAlign: 'center', marginBottom: 20 }}>

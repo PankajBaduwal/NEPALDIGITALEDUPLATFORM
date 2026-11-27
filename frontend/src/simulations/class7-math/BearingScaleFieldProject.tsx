@@ -1,7 +1,7 @@
 /**
  * BearingScaleFieldProject.tsx
- * Grade 7 Mathematics – Lesson 20: BEARING AND SCALE DRAWING (दिगंश र मापन चित्र)
- * Simulation 4: Bearing and Scale Drawing Field Project (दिगंश र मापन चित्र परियोजना कार्य)
+ * Grade 7 Mathematics – Lesson 20: BEARING AND SCALE DRAWING
+ * Simulation 4: Bearing and Scale Drawing Field Project
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 315-320)
  */
 import React, { useState } from 'react';
@@ -15,21 +15,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'परियोजना कार्यमा समुदाय वा विद्यालयको मापन चित्र तयार गर्दा सबैभन्दा महत्त्वपूर्ण पहिलो काम के हो?',
     en: 'In field planning and scale drawing, what is the most important initial step?',
     options: [
-      { key: 'A', label: 'उपयुक्त स्केल (Scale) र उत्तर दिशा (North) निर्धारण गर्नु' },
-      { key: 'B', label: 'चित्रमा रङ्ग भर्नु' },
-      { key: 'C', label: 'सिधै घर बनाउनु' },
-      { key: 'D', label: 'कागज च्यात्नु' },
+      { key: 'A', label: 'Choose a suitable scale and the North direction' },
+      { key: 'B', label: 'Colour the drawing' },
+      { key: 'C', label: 'Build the house directly' },
+      { key: 'D', label: 'Tear the paper' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि १ सेमी = ५ मिटर स्केल प्रयोग गरिएको छ र नक्सामा विद्यालयदेखि खेलमैदानसम्मको दूरी ६ सेमी छ भने वास्तविक दूरी कति हुन्छ?',
+    np: 'यदि 1 cm = 5 m स्केल प्रयोग गरिएको छ र नक्सामा विद्यालयदेखि खेलमैदानसम्मको दूरी 6 cm छ भने वास्तविक दूरी कति हुन्छ?',
     en: 'If scale 1 cm = 5 m is used and map distance is 6 cm, what is the actual ground distance?',
     options: [
-      { key: 'A', label: '३० मिटर (६ × ५)' },
-      { key: 'B', label: '११ मिटर' },
-      { key: 'C', label: '१ मिटर' },
-      { key: 'D', label: '६० मिटर' },
+      { key: 'A', label: '30 m (6 × 5)' },
+      { key: 'B', label: '11 m' },
+      { key: 'C', label: '1 m' },
+      { key: 'D', label: '60 m' },
     ],
     answer: 'A',
   },
@@ -37,21 +37,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'केन्द्रबिन्दुबाट ठीक दक्षिण-पूर्व (SE) दिशामा अवस्थित भवनको दिगंश कति हुन्छ?',
     en: 'What is the bearing of a building located exactly South-East (SE) from the center?',
     options: [
-      { key: 'A', label: '१३५° (135°)' },
-      { key: 'B', label: '०४५°' },
-      { key: 'C', label: '२२५°' },
-      { key: 'D', label: '३१५°' },
+      { key: 'A', label: '135° (135°)' },
+      { key: 'B', label: '045°' },
+      { key: 'C', label: '225°' },
+      { key: 'D', label: '315°' },
     ],
     answer: 'A',
   },
   {
-    np: 'सामुदायिक बस्ती योजना बनाउँदा ५ वटा परिवारको घरहरू बीच के व्यवस्था हुनु अनिवार्य छ?',
+    np: 'सामुदायिक बस्ती योजना बनाउँदा 5 pcs परिवारको घरहरू बीच के व्यवस्था हुनु अनिवार्य छ?',
     en: 'When planning a 5-family community settlement, what must be ensured?',
     options: [
-      { key: 'A', label: 'बाटो, पानीको स्रोत र उपयुक्त दूरी (Road and access)' },
-      { key: 'B', label: 'घरहरू खप्टिएको हुनुपर्छ' },
-      { key: 'C', label: 'दिशाको कुनै अर्थ छैन' },
-      { key: 'D', label: 'कुनै खाली ठाउँ नहुनु' },
+      { key: 'A', label: 'Roads, water sources and suitable distances' },
+      { key: 'B', label: 'Houses must overlap' },
+      { key: 'C', label: 'Direction has no meaning' },
+      { key: 'D', label: 'No empty space' },
     ],
     answer: 'A',
   },
@@ -139,7 +139,7 @@ export const BearingScaleFieldProject: React.FC<{ onBackToLibrary?: () => void; 
               {L('विद्यालय तथा समुदाय योजना मापन चित्र', 'School & Community Layout Master Plan')}
             </h2>
             <p className="text-xs text-emerald-100 max-w-lg">
-              {L('केन्द्रबिन्दु (झण्डा स्तम्भ) बाट विभिन्न पूर्वाधारहरूको दूरी र दिगंश नाप्नुहोस्।', 'Measure distances and bearings of facilities from the central flag pole.')}
+              {L('केन्द्रबिन्दु (Flag pole) बाट विभिन्न पूर्वाधारहरूको दूरी र दिगंश नाप्नुहोस्।', 'Measure distances and bearings of facilities from the central flag pole.')}
             </p>
           </div>
 
@@ -150,9 +150,9 @@ export const BearingScaleFieldProject: React.FC<{ onBackToLibrary?: () => void; 
               onChange={(e) => setScaleMeters(Number(e.target.value))}
               className="bg-transparent text-white font-black text-sm border-none focus:outline-none cursor-pointer mt-0.5"
             >
-              <option value={2} className="text-slate-900">१ सेमी = २ मिटर</option>
-              <option value={5} className="text-slate-900">१ सेमी = ५ मिटर</option>
-              <option value={10} className="text-slate-900">१ सेमी = १० मिटर</option>
+              <option value={2} className="text-slate-900">1 cm = 2 m</option>
+              <option value={5} className="text-slate-900">1 cm = 5 m</option>
+              <option value={10} className="text-slate-900">1 cm = 10 m</option>
             </select>
           </div>
         </div>
@@ -182,7 +182,7 @@ export const BearingScaleFieldProject: React.FC<{ onBackToLibrary?: () => void; 
                   strokeDasharray="4,2"
                 />
                 <text x={centerPoint.x + 4} y={centerPoint.y - 72} fontSize="11" fontWeight="black" fill="#ef4444">
-                  N (उत्तर)
+                  N
                 </text>
 
                 {/* Connecting Bearing Vector */}
@@ -215,7 +215,7 @@ export const BearingScaleFieldProject: React.FC<{ onBackToLibrary?: () => void; 
                 {/* Center Flag Pole */}
                 <circle cx={centerPoint.x} cy={centerPoint.y} r="8" fill="#d97706" stroke="#ffffff" strokeWidth="2" />
                 <text x={centerPoint.x} y={centerPoint.y + 18} textAnchor="middle" fontSize="10" fontWeight="black" fill="#b45309">
-                  झण्डा स्तम्भ
+                  Flag pole
                 </text>
 
                 {/* Facilities */}
@@ -263,7 +263,7 @@ export const BearingScaleFieldProject: React.FC<{ onBackToLibrary?: () => void; 
                 <div className="text-xs font-bold text-slate-500 uppercase">{L('योजना विश्लेषण (Field Analysis)', 'Field Analysis')}</div>
                 <div className="text-base font-bold text-slate-900" style={{ fontFamily: FONT_NP }}>
                   {isNe
-                    ? `झण्डा स्तम्भबाट ${selectedFacility.nameNp} को मापन:`
+                    ? `Flag poleबाट ${selectedFacility.nameNp} को मापन:`
                     : `Measurement to ${selectedFacility.nameEn} from Central Pole:`}
                 </div>
 
@@ -277,16 +277,16 @@ export const BearingScaleFieldProject: React.FC<{ onBackToLibrary?: () => void; 
                   <div className="bg-white p-3 rounded-xl border border-slate-200">
                     <div className="text-[11px] text-slate-500 font-semibold">{L('वास्तविक दूरी (Ground)', 'Ground Distance')}</div>
                     <div className="text-2xl font-black text-emerald-600 mt-1">
-                      {toNp(actualGroundMeters.toFixed(1))} मि
+                      {toNp(actualGroundMeters.toFixed(1))} m
                     </div>
                   </div>
                 </div>
 
                 <div className="text-xs text-slate-600 border-t border-slate-200 pt-2 space-y-1">
-                  <div>नक्साको दूरी = <b>{mapDistCm.toFixed(1)} सेमी</b></div>
-                  <div>स्केल = १ सेमी = {scaleMeters} मिटर</div>
+                  <div>Map distance = <b>{mapDistCm.toFixed(1)} cm</b></div>
+                  <div>Scale = 1 cm = {scaleMeters} m</div>
                   <div>
-                    वास्तविक दूरी = {mapDistCm.toFixed(1)} × {scaleMeters} = <b>{actualGroundMeters.toFixed(1)} मिटर</b>
+                    Actual distance = {mapDistCm.toFixed(1)} × {scaleMeters} = <b>{actualGroundMeters.toFixed(1)} m</b>
                   </div>
                 </div>
               </div>
@@ -327,9 +327,9 @@ export const BearingScaleFieldProject: React.FC<{ onBackToLibrary?: () => void; 
                         <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: fac.color }} />
                         {isNe ? fac.nameNp : fac.nameEn}
                       </td>
-                      <td className="p-2.5 text-center border-r border-slate-200">{toNp(mDist.toFixed(1))} सेमी</td>
+                      <td className="p-2.5 text-center border-r border-slate-200">{toNp(mDist.toFixed(1))} cm</td>
                       <td className="p-2.5 text-center border-r border-slate-200 font-bold text-emerald-700">
-                        {toNp(aDist.toFixed(1))} मिटर
+                        {toNp(aDist.toFixed(1))} m
                       </td>
                       <td className="p-2.5 text-center font-bold text-amber-600">{format3Digit(rBear)}</td>
                     </tr>

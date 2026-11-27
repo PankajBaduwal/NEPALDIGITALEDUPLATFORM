@@ -8,10 +8,10 @@ const QUIZ_QUESTIONS = [
     np: 'गोला (Sphere) को कुल सतहको क्षेत्रफल (Surface Area) को सूत्र के हो?',
     en: 'What is the formula for the surface area of a sphere?',
     options: [
-      { key: 'A', label: '४πr²' },
-      { key: 'B', label: '२πr²' },
-      { key: 'C', label: '४/३ πr³' },
-      { key: 'D', label: '३πr²' },
+      { key: 'A', label: '4πr²' },
+      { key: 'B', label: '2πr²' },
+      { key: 'C', label: '4/3 πr³' },
+      { key: 'D', label: '3πr²' },
     ],
     answer: 'A',
   },
@@ -19,10 +19,10 @@ const QUIZ_QUESTIONS = [
     np: 'अर्धगोला (Hemisphere) को कुल सतहको क्षेत्रफल (TSA) को सूत्र के हो?',
     en: 'What is the formula for the Total Surface Area (TSA) of a hemisphere?',
     options: [
-      { key: 'A', label: '२πr²' },
-      { key: 'B', label: '३πr² (वक्र सतह २πr² + वृत्ताकार सतह πr²)' },
-      { key: 'C', label: '४πr²' },
-      { key: 'D', label: '२/३ πr³' },
+      { key: 'A', label: '2πr²' },
+      { key: 'B', label: '3πr² (curved surface 2πr² + circular surface πr²)' },
+      { key: 'C', label: '4πr²' },
+      { key: 'D', label: '2/3 πr³' },
     ],
     answer: 'B',
   },
@@ -30,9 +30,9 @@ const QUIZ_QUESTIONS = [
     np: 'गोलाको आयतन (Volume of a Sphere) को सूत्र के हो?',
     en: 'What is the formula for the volume of a sphere?',
     options: [
-      { key: 'A', label: 'V = ४/३ πr³' },
-      { key: 'B', label: 'V = २/३ πr³' },
-      { key: 'C', label: 'V = ४πr²' },
+      { key: 'A', label: 'V = 4/3 πr³' },
+      { key: 'B', label: 'V = 2/3 πr³' },
+      { key: 'C', label: 'V = 4πr²' },
       { key: 'D', label: 'V = πr²h' },
     ],
     answer: 'A',
@@ -41,10 +41,10 @@ const QUIZ_QUESTIONS = [
     np: 'अर्धगोलाको आयतन गोलाको आयतनको कति भाग हुन्छ?',
     en: 'What fraction of a sphere\'s volume is a hemisphere\'s volume?',
     options: [
-      { key: 'A', label: 'बराबर' },
-      { key: 'B', label: 'आधा (१/२ भाग अर्थात् २/३ πr³)' },
-      { key: 'C', label: 'एक-चौथाइ (१/४ भाग)' },
-      { key: 'D', label: 'दुई गुणा' },
+      { key: 'A', label: 'Equal' },
+      { key: 'B', label: 'Half (1/2 part, that is 2/3 πr³)' },
+      { key: 'C', label: 'One quarter (1/4 part)' },
+      { key: 'D', label: 'Two times' },
     ],
     answer: 'B',
   },
@@ -57,7 +57,7 @@ export const SphereHemisphere3DLab: React.FC<{
   const kit = useSimKit({
     code: 'SIM-MATH-G9-U7-03',
     chapter: 7,
-    titleNp: 'गोला तथा अर्धगोला ३D प्रयोगशाला',
+    titleNp: 'गोला तथा अर्धगोला 3D प्रयोगशाला',
     titleEn: 'Sphere and Hemisphere 3D Laboratory',
   });
 
@@ -93,7 +93,7 @@ export const SphereHemisphere3DLab: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! गोला (४πr², ४/३ πr³) र अर्धगोला (वक्र २πr², कुल ३πr², आयतन २/३ πr³) को क्षेत्रफल, आयतन र विस्थापन प्रयोग सिकौं!',
+        'नमस्ते! गोला (4πr², 4/3 πr³) र अर्धगोला (वक्र 2πr², कुल 3πr², आयतन 2/3 πr³) को क्षेत्रफल, आयतन र विस्थापन प्रयोग सिकौं!',
         'Welcome! Explore sphere (4πr², 4/3 πr³) and hemisphere (CSA=2πr², TSA=3πr², Vol=2/3 πr³) areas, volumes and water displacement!'
       )}
     >
@@ -109,7 +109,7 @@ export const SphereHemisphere3DLab: React.FC<{
             }`}
           >
             <span>🌐</span>
-            <span>{L('१. गोला र अर्धगोला', '1. Sphere & Hemisphere')}</span>
+            <span>{L('1. गोला र अर्धगोला', '1. Sphere & Hemisphere')}</span>
           </button>
           <button
             onClick={() => setActiveTab('cut')}
@@ -120,7 +120,7 @@ export const SphereHemisphere3DLab: React.FC<{
             }`}
           >
             <span>✂️</span>
-            <span>{L('२. समतल काट विभाजन', '2. Slicing Plane')}</span>
+            <span>{L('2. समतल काट विभाजन', '2. Slicing Plane')}</span>
           </button>
           <button
             onClick={() => setActiveTab('displacement')}
@@ -131,7 +131,7 @@ export const SphereHemisphere3DLab: React.FC<{
             }`}
           >
             <span>🧪</span>
-            <span>{L('३. पानी विस्थापन प्रयोग', '3. Water Displacement')}</span>
+            <span>{L('3. पानी विस्थापन प्रयोग', '3. Water Displacement')}</span>
           </button>
         </div>
 
@@ -171,7 +171,7 @@ export const SphereHemisphere3DLab: React.FC<{
                   {L('समतलले बीचबाट काट्ने (Split Hemispheres):', 'Split into 2 Hemispheres:')}
                 </div>
                 <div className="text-xs text-gray-500 dark:text-gray-400">
-                  {L('गोलालाई दुई बराबर अर्धगोलामा विभाजन गर्छ', 'Divides sphere into 2 equal hemispheres')}
+                  {L('गोलालाई दुई Equal अर्धगोलामा विभाजन गर्छ', 'Divides sphere into 2 equal hemispheres')}
                 </div>
               </div>
               <input
@@ -236,7 +236,7 @@ export const SphereHemisphere3DLab: React.FC<{
                       r = {radiusCm} cm
                     </text>
                     <text x="230" y="255" textAnchor="middle" className="text-sm font-black fill-blue-900 dark:fill-blue-200">
-                      {L('गोला (Sphere): क्षेत्रफल = ४πr², आयतन = ४/३ πr³', 'Sphere: Area = 4πr², Volume = 4/3 πr³')}
+                      {L('गोला (Sphere): क्षेत्रफल = 4πr², आयतन = 4/3 πr³', 'Sphere: Area = 4πr², Volume = 4/3 πr³')}
                     </text>
                   </g>
                 ) : (
@@ -271,7 +271,7 @@ export const SphereHemisphere3DLab: React.FC<{
                     </g>
 
                     <text x="230" y="260" textAnchor="middle" className="text-xs font-black fill-emerald-900 dark:fill-emerald-200">
-                      {L('अर्धगोला (Hemisphere): वक्र = २πr², समतल = πr², कुल = ३πr²', 'Hemisphere: CSA = 2πr², Base = πr², TSA = 3πr²')}
+                      {L('अर्धगोला (Hemisphere): वक्र = 2πr², समतल = πr², कुल = 3πr²', 'Hemisphere: CSA = 2πr², Base = πr², TSA = 3πr²')}
                     </text>
                   </g>
                 )}
@@ -286,11 +286,11 @@ export const SphereHemisphere3DLab: React.FC<{
                   🌐 {L('गोलाको हिसाब (Sphere)', 'Sphere Calculations')}
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">{L('सतहको क्षेत्रफल (४πr²):', 'Surface Area (4πr²):')}</span>
+                  <span className="text-gray-500">{L('सतहको क्षेत्रफल (4πr²):', 'Surface Area (4πr²):')}</span>
                   <span className="font-mono font-bold text-blue-600 dark:text-blue-400">{sphereArea.toFixed(1)} cm²</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">{L('आयतन (४/३ πr³):', 'Volume (4/3 πr³):')}</span>
+                  <span className="text-gray-500">{L('आयतन (4/3 πr³):', 'Volume (4/3 πr³):')}</span>
                   <span className="font-mono font-bold text-blue-600 dark:text-blue-400">{sphereVolume.toFixed(1)} cm³</span>
                 </div>
               </div>
@@ -301,15 +301,15 @@ export const SphereHemisphere3DLab: React.FC<{
                   🌓 {L('अर्धगोलाको हिसाब (Hemisphere)', 'Hemisphere Calculations')}
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">{L('वक्र सतह CSA (२πr²):', 'Curved SA (2πr²):')}</span>
+                  <span className="text-gray-500">{L('वक्र सतह CSA (2πr²):', 'Curved SA (2πr²):')}</span>
                   <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">{hemiCSA.toFixed(1)} cm²</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">{L('कुल सतह TSA (३πr²):', 'Total SA (3πr²):')}</span>
+                  <span className="text-gray-500">{L('कुल सतह TSA (3πr²):', 'Total SA (3πr²):')}</span>
                   <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">{hemiTSA.toFixed(1)} cm²</span>
                 </div>
                 <div className="flex justify-between border-t pt-1">
-                  <span className="text-gray-500">{L('आयतन (२/३ πr³):', 'Volume (2/3 πr³):')}</span>
+                  <span className="text-gray-500">{L('आयतन (2/3 πr³):', 'Volume (2/3 πr³):')}</span>
                   <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">{hemiVolume.toFixed(1)} cm³</span>
                 </div>
               </div>

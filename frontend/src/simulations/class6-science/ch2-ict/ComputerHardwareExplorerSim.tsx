@@ -1,7 +1,7 @@
 /**
  * ComputerHardwareExplorerSim.tsx
- * Simulation 3: 2D Computer Hardware Workstation Explorer (कम्प्युटर हार्डवेयर अन्वेषण)
- * Grade 6 Science • Unit 2: Information & Communication Technology (सूचना तथा सञ्चार प्रविधि)
+ * Simulation 3: 2D Computer Hardware Workstation Explorer
+ * Grade 6 Science • Unit 2: Information & Communication Technology
  *
  * Full 2D Interactive Computer Workstation featuring:
  * 1. Monitor (Display unit - Output) with live active operating system screen
@@ -34,7 +34,7 @@ interface HardwarePart {
 const PARTS: HardwarePart[] = [
   {
     id: 'cpu',
-    nameEn: 'Microprocessor / CPU (केन्द्रीय प्रशोधन एकाइ)',
+    nameEn: 'Microprocessor / CPU',
     nameNe: 'सीपीयू (CPU - Central Processing Unit)',
     categoryEn: 'Processing',
     categoryNe: 'प्रशोधन (CPU)',
@@ -54,7 +54,7 @@ const PARTS: HardwarePart[] = [
   },
   {
     id: 'ssd',
-    nameEn: 'SSD / Hard Drive Storage (स्थायी भण्डारण)',
+    nameEn: 'SSD / Hard Drive Storage',
     nameNe: 'हार्ड ड्राइभ / एसएसडी (SSD/HDD)',
     categoryEn: 'Storage',
     categoryNe: 'भण्डारण (Storage)',
@@ -64,7 +64,7 @@ const PARTS: HardwarePart[] = [
   },
   {
     id: 'monitor',
-    nameEn: 'LED Monitor (मनिटर / डिस्प्ले)',
+    nameEn: 'LED Monitor',
     nameNe: 'मनिटर (LED Monitor)',
     categoryEn: 'Output',
     categoryNe: 'आउटपुट',
@@ -74,7 +74,7 @@ const PARTS: HardwarePart[] = [
   },
   {
     id: 'keyboard',
-    nameEn: 'Keyboard (किबोर्ड)',
+    nameEn: 'Keyboard',
     nameNe: 'किबोर्ड (Keyboard)',
     categoryEn: 'Input',
     categoryNe: 'इनपुट',
@@ -84,7 +84,7 @@ const PARTS: HardwarePart[] = [
   },
   {
     id: 'mouse',
-    nameEn: 'Optical Mouse (माउस)',
+    nameEn: 'Optical Mouse',
     nameNe: 'माउस (Optical Mouse)',
     categoryEn: 'Input',
     categoryNe: 'इनपुट',
@@ -98,7 +98,7 @@ export const ComputerHardwareExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -469,11 +469,11 @@ export const ComputerHardwareExplorerSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: What is Hardware?' : '१. खोज: कम्प्युटर हार्डवेयर के हो?')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Inside the CPU Tower' : '२. अन्वेषण: सीपीयू टावरको भित्री दृश्य')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Input vs Output' : '३. अवलोकन: इनपुट र आउटपुट')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: RAM vs Storage' : '४. बुझाइ: र्याम र स्टोरेज भिन्नता')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Hardware Quiz' : '५. चुनौती: हार्डवेयर प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: What is Hardware?' : '1. खोज: कम्प्युटर हार्डवेयर के हो?')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Inside the CPU Tower' : '2. अन्वेषण: सीपीयू टावरको भित्री दृश्य')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Input vs Output' : '3. अवलोकन: इनपुट र आउटपुट')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: RAM vs Storage' : '4. बुझाइ: र्याम र स्टोरेज भिन्नता')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Hardware Quiz' : '5. चुनौती: हार्डवेयर प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
@@ -499,9 +499,9 @@ export const ComputerHardwareExplorerSim: React.FC<BaseSimulationProps> = ({
                     : 'कम्प्युटरका सबै निर्देशनहरू प्रशोधन गर्ने "कम्प्युटरको मस्तिष्क" भनेर कुन अङ्गलाई चिनिन्छ?'}
                 </p>
                 {[
-                  { id: 1, en: 'CPU (Central Processing Unit / केन्द्रीय प्रशोधन एकाइ)', ne: 'सीपीयू (CPU - Central Processing Unit)' },
-                  { id: 2, en: 'Monitor (मनिटर)', ne: 'मनिटर (Monitor)' },
-                  { id: 3, en: 'Keyboard (किबोर्ड)', ne: 'किबोर्ड (Keyboard)' },
+                  { id: 1, en: 'CPU', ne: 'सीपीयू (CPU - Central Processing Unit)' },
+                  { id: 2, en: 'Monitor', ne: 'मनिटर (Monitor)' },
+                  { id: 3, en: 'Keyboard', ne: 'किबोर्ड (Keyboard)' },
                 ].map(opt => (
                   <button
                     key={opt.id}

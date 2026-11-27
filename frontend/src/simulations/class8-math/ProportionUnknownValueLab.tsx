@@ -1,7 +1,7 @@
 /**
  * ProportionUnknownValueLab.tsx
- * Grade 8 Mathematics – Unit 4: RATIO AND PROPORTION (अनुपात र समानुपात)
- * Simulation 10: Proportion and Unknown Value Lab (समानुपात र अज्ञात मान प्रयोगशाला)
+ * Grade 8 Mathematics – Unit 4: RATIO AND PROPORTION
+ * Simulation 10: Proportion and Unknown Value Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 4)
  */
 import React, { useState } from 'react';
@@ -12,13 +12,13 @@ import { Equal, ArrowRight, Check, Award, Layers, Sparkles, Scale } from 'lucide
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'दुईवटा बराबर अनुपातहरू बीचको सम्बन्धलाई के भनिन्छ?',
+    np: 'दुईpcs बराबर अनुपातहरू बीचको सम्बन्धलाई के भनिन्छ?',
     en: 'An equality between two ratios is called a:',
     options: [
-      { key: 'A', label: 'समानुपात (Proportion: a:b = c:d वा a:b :: c:d)' },
-      { key: 'B', label: 'असमानता (Inequality)' },
-      { key: 'C', label: 'प्रतिशत (Percentage)' },
-      { key: 'D', label: 'घाताङ्क' },
+      { key: 'A', label: 'Proportion (a:b = c:d or a:b :: c:d)' },
+      { key: 'B', label: 'Inequality' },
+      { key: 'C', label: 'Percentage' },
+      { key: 'D', label: 'Exponent' },
     ],
     answer: 'A',
   },
@@ -26,7 +26,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समानुपात a:b = c:d मा अन्तिम पदहरूको गुणनफल र मध्य पदहरूको गुणनफल बीच के सम्बन्ध हुन्छ?',
     en: 'In proportion a:b = c:d, what is the relation between product of extremes and product of means?',
     options: [
-      { key: 'A', label: 'अन्तिम पदहरूको गुणनफल = मध्य पदहरूको गुणनफल (a × d = b × c)' },
+      { key: 'A', label: 'Product of the extremes = product of the means (a × d = b × c)' },
       { key: 'B', label: 'a × b = c × d' },
       { key: 'C', label: 'a + d = b + c' },
       { key: 'D', label: 'a - d = b - c' },
@@ -34,35 +34,35 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'समानुपात ५:८ = १०:a मा अज्ञात पद a को मान कति हुन्छ?',
+    np: 'समानुपात 5:8 = 10:a मा अज्ञात पद a को मान कति हुन्छ?',
     en: 'In proportion 5:8 = 10:a, what is the missing term a?',
     options: [
-      { key: 'A', label: '१६ [ ५a = ८० ⇒ a = १६ ]' },
-      { key: 'B', label: '१२' },
-      { key: 'C', label: '२०' },
-      { key: 'D', label: '२५' },
+      { key: 'A', label: '16 [ 5a = 80 ⇒ a = 16 ]' },
+      { key: 'B', label: '12' },
+      { key: 'C', label: '20' },
+      { key: 'D', label: '25' },
     ],
     answer: 'A',
   },
   {
-    np: '४ र ५ मा कुन सङ्ख्या जोड्दा तिनीहरूको अनुपात ५:६ हुन्छ?',
+    np: '4 र 5 मा कुन सङ्ख्या जोड्दा तिनीहरूको अनुपात 5:6 हुन्छ?',
     en: 'What number must be added to 4 and 5 so that their ratio becomes 5:6?',
     options: [
-      { key: 'A', label: '१ [ (४+१)/(५+१) = ५/६ ]' },
-      { key: 'B', label: '२' },
-      { key: 'C', label: '३' },
-      { key: 'D', label: '०' },
+      { key: 'A', label: '1 [ (4+1)/(5+1) = 5/6 ]' },
+      { key: 'B', label: '2' },
+      { key: 'C', label: '3' },
+      { key: 'D', label: '0' },
     ],
     answer: 'A',
   },
   {
-    np: '१२ वटा केराको मूल्य रु. १५० पर्छ भने रु. ९०० मा कतिवटा केरा किन्न सकिन्छ?',
+    np: '12 pcs केराको मूल्य Rs. 150 पर्छ भने Rs. 900 मा कतिpcs केरा किन्न सकिन्छ?',
     en: 'If 12 bananas cost Rs. 150, how many bananas can be purchased for Rs. 900?',
     options: [
-      { key: 'A', label: '७२ वटा [ १२/१५० = x/९०० ⇒ x = ७२ ]' },
-      { key: 'B', label: '६० वटा' },
-      { key: 'C', label: '८४ वटा' },
-      { key: 'D', label: '५० वटा' },
+      { key: 'A', label: '72 pcs [ 12/150 = x/900 ⇒ x = 72 ]' },
+      { key: 'B', label: '60 pcs' },
+      { key: 'C', label: '84 pcs' },
+      { key: 'D', label: '50 pcs' },
     ],
     answer: 'A',
   },
@@ -118,12 +118,12 @@ export const ProportionUnknownValueLab: React.FC<{
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'paper', labelNp: '१. कागज पट्याएर समानुपात (१/३ = २/६)', labelEn: '1. Paper Folding (1/3=2/6)', icon: Layers },
-            { id: 'means_extremes', labelNp: '२. मध्य पद र अन्तिम पद नियम', labelEn: '2. Means & Extremes', icon: Scale },
-            { id: 'missing', labelNp: '३. अज्ञात पद पत्ता लगाउने (५:८ = १०:a)', labelEn: '3. Find Unknown Term', icon: ArrowRight },
-            { id: 'add_number', labelNp: '४. सङ्ख्या जोडेर समानुपात बनाउने', labelEn: '4. Add Number to Ratio', icon: Sparkles },
-            { id: 'bananas', labelNp: '५. केरा र मूल्य प्रत्यक्ष समानुपात', labelEn: '5. Bananas & Price', icon: Equal },
-            { id: 'challenge', labelNp: '६. अभ्यास चुनौती', labelEn: '6. Quiz Challenge', icon: Award },
+            { id: 'paper', labelNp: '1. कागज पट्याएर समानुपात (1/3 = 2/6)', labelEn: '1. Paper Folding (1/3=2/6)', icon: Layers },
+            { id: 'means_extremes', labelNp: '2. मध्य पद र अन्तिम पद नियम', labelEn: '2. Means & Extremes', icon: Scale },
+            { id: 'missing', labelNp: '3. अज्ञात पद पत्ता लगाउने (5:8 = 10:a)', labelEn: '3. Find Unknown Term', icon: ArrowRight },
+            { id: 'add_number', labelNp: '4. सङ्ख्या जोडेर समानुपात बनाउने', labelEn: '4. Add Number to Ratio', icon: Sparkles },
+            { id: 'bananas', labelNp: '5. केरा र मूल्य प्रत्यक्ष समानुपात', labelEn: '5. Bananas & Price', icon: Equal },
+            { id: 'challenge', labelNp: '6. अभ्यास चुनौती', labelEn: '6. Quiz Challenge', icon: Award },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -163,7 +163,7 @@ export const ProportionUnknownValueLab: React.FC<{
             </h3>
             <p style={{ margin: '0 0 16px 0', fontSize: 14, color: '#475569', lineHeight: 1.6 }}>
               {L(
-                'समान नापका दुईवटा आयताकार कागजका टुक्रा लिऔँ। पहिलोलाई ३ बराबर भाग लगाई १ भाग रङ्गाउँ (१:३)। दोस्रोलाई ६ बराबर भाग लगाई २ भाग रङ्गाउँ (२:६)।',
+                'समान नापका दुईpcs आयताकार कागजका टुक्रा लिऔँ। पहिलोलाई 3 बराबर भाग लगाई 1 भाग रङ्गाउँ (1:3)। दोस्रोलाई 6 बराबर भाग लगाई 2 भाग रङ्गाउँ (2:6)।',
                 'Take two identical rectangular papers. Divide first into 3 parts and color 1 (1:3). Divide second into 6 parts and color 2 (2:6).'
               )}
             </p>
@@ -172,7 +172,7 @@ export const ProportionUnknownValueLab: React.FC<{
               {/* Paper 1 */}
               <div style={{ background: '#f8fafc', padding: 14, borderRadius: 12, border: '1px solid #cbd5e1' }}>
                 <div style={{ fontSize: 14, fontWeight: 800, color: '#1e293b', marginBottom: 8 }}>
-                  {L('पहिलो कागज: ३ भागमा १ भाग रङ्ग्याइएको (१:३)', 'Paper 1: 1 out of 3 parts shaded (1:3)')}
+                  {L('पहिलो कागज: 3 भागमा 1 भाग रङ्ग्याइएको (1:3)', 'Paper 1: 1 out of 3 parts shaded (1:3)')}
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', height: 50, border: '2px solid #0284c7', borderRadius: 8, overflow: 'hidden' }}>
                   <div style={{ background: '#0284c7' }} />
@@ -180,14 +180,14 @@ export const ProportionUnknownValueLab: React.FC<{
                   <div style={{ background: '#ffffff', borderLeft: '1px dashed #cbd5e1' }} />
                 </div>
                 <div style={{ fontSize: 14, fontWeight: 800, color: '#0284c7', marginTop: 8, textAlign: 'center' }}>
-                  १ / ३ = १ : ३
+                  1 / 3 = 1 : 3
                 </div>
               </div>
 
               {/* Paper 2 */}
               <div style={{ background: '#f8fafc', padding: 14, borderRadius: 12, border: '1px solid #cbd5e1' }}>
                 <div style={{ fontSize: 14, fontWeight: 800, color: '#1e293b', marginBottom: 8 }}>
-                  {L('दोस्रो कागज: ६ भागमा २ भाग रङ्ग्याइएको (२:६)', 'Paper 2: 2 out of 6 parts shaded (2:6)')}
+                  {L('दोस्रो कागज: 6 भागमा 2 भाग रङ्ग्याइएको (2:6)', 'Paper 2: 2 out of 6 parts shaded (2:6)')}
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', height: 50, border: '2px solid #16a34a', borderRadius: 8, overflow: 'hidden' }}>
                   <div style={{ background: '#16a34a' }} />
@@ -198,7 +198,7 @@ export const ProportionUnknownValueLab: React.FC<{
                   <div style={{ background: '#ffffff', borderLeft: '1px dashed #cbd5e1' }} />
                 </div>
                 <div style={{ fontSize: 14, fontWeight: 800, color: '#16a34a', marginTop: 8, textAlign: 'center' }}>
-                  २ / ६ = २ : ६ = १ : ३
+                  2 / 6 = 2 : 6 = 1 : 3
                 </div>
               </div>
             </div>
@@ -208,7 +208,7 @@ export const ProportionUnknownValueLab: React.FC<{
                 {L('दुवै अनुपातहरू बराबर भएकाले यिनीहरू समानुपाती छन्:', 'Both ratios are equal, so they form a proportion:')}
               </div>
               <div style={{ fontSize: 28, fontWeight: 900, color: '#047857', marginTop: 4 }}>
-                १ : ३ = २ : ६  वा  १ : ३ :: २ : ६
+                1 : 3 = 2 : 6  or  1 : 3 :: 2 : 6
               </div>
             </div>
           </div>
@@ -249,7 +249,7 @@ export const ProportionUnknownValueLab: React.FC<{
           <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
             <h3 style={{ margin: '0 0 10px 0', color: '#0369a1', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
               <ArrowRight size={20} />
-              {L('पाठ्यपुस्तक उदाहरण: अज्ञात पद पत्ता लगाउने (५:८ = १०:a)', 'Textbook Example: Find Unknown Term (5:8 = 10:a)')}
+              {L('पाठ्यपुस्तक उदाहरण: अज्ञात पद पत्ता लगाउने (5:8 = 10:a)', 'Textbook Example: Find Unknown Term (5:8 = 10:a)')}
             </h3>
 
             <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 16 }}>
@@ -303,7 +303,7 @@ export const ProportionUnknownValueLab: React.FC<{
           <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
             <h3 style={{ margin: '0 0 10px 0', color: '#0369a1', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
               <Sparkles size={20} />
-              {L('पाठ्यपुस्तक उदाहरण: ४ र ५ मा कुन सङ्ख्या जोड्दा अनुपात ५:६ हुन्छ?', 'Textbook Example: What Number to Add to 4 & 5 for 5:6?')}
+              {L('पाठ्यपुस्तक उदाहरण: 4 र 5 मा कुन सङ्ख्या जोड्दा अनुपात 5:6 हुन्छ?', 'Textbook Example: What Number to Add to 4 & 5 for 5:6?')}
             </h3>
 
             <div style={{ background: '#fff7ed', padding: 18, borderRadius: 14, border: '1px solid #fed7aa', display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -311,16 +311,16 @@ export const ProportionUnknownValueLab: React.FC<{
                 {L('मानौँ, जोड्नुपर्ने सङ्ख्या y हो।', 'Let the required number to be added be y.')}
               </div>
               <div style={{ fontSize: 18, fontWeight: 900, color: '#c2410c' }}>
-                (४ + y) / (५ + y) = ५ / ६
+                (4 + y) / (5 + y) = 5 / 6
               </div>
               <div style={{ fontSize: 14, color: '#7c2d12', lineHeight: 1.6 }}>
-                ६(४ + y) = ५(५ + y)<br />
-                २४ + ६y = २५ + ५y<br />
-                ६y - ५y = २५ - २४<br />
-                <strong>y = १</strong>
+                6(4 + y) = 5(5 + y)<br />
+                24 + 6y = 25 + 5y<br />
+                6y - 5y = 25 - 24<br />
+                <strong>y = 1</strong>
               </div>
               <div style={{ background: '#ffffff', padding: 12, borderRadius: 8, border: '1px solid #fdba74', fontWeight: 800, color: '#9a3412' }}>
-                {L('जाँच: (४ + १) / (५ + १) = ५ / ६ (सत्य)', 'Verification: (4 + 1) / (5 + 1) = 5 / 6 (True)')}
+                {L('जाँच: (4 + 1) / (5 + 1) = 5 / 6', 'Verification: (4 + 1) / (5 + 1) = 5 / 6 (True)')}
               </div>
             </div>
           </div>
@@ -337,7 +337,7 @@ export const ProportionUnknownValueLab: React.FC<{
             <div style={{ background: '#f8fafc', padding: 16, borderRadius: 12, border: '1px solid #cbd5e1', marginBottom: 14 }}>
               <p style={{ margin: 0, fontSize: 14, color: '#334155' }}>
                 {L(
-                  '१२ वटा केराको मूल्य रु. १५० पर्छ भने रु. ९०० मा कतिवटा केरा किन्न सकिन्छ?',
+                  '12 pcs केराको मूल्य Rs. 150 पर्छ भने Rs. 900 मा कतिpcs केरा किन्न सकिन्छ?',
                   'If 12 bananas cost Rs. 150, how many bananas can be purchased for Rs. 900?'
                 )}
               </p>
@@ -345,12 +345,12 @@ export const ProportionUnknownValueLab: React.FC<{
 
             <div style={{ background: '#f0fdf4', padding: 18, borderRadius: 12, border: '1.5px solid #bbf7d0', display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{ fontSize: 15, color: '#166534' }}>
-                १२ / १५० = x / ९००<br />
-                १५० × x = १२ × ९००<br />
-                १५०x = १०,८००
+                12 / 150 = x / 900<br />
+                150 × x = 12 × 900<br />
+                150x = 10,800
               </div>
               <div style={{ fontSize: 26, fontWeight: 900, color: '#15803d', marginTop: 4 }}>
-                x = १०,८०० ÷ १५० = ७२ वटा केरा (72 Bananas)
+                x = 10,800 ÷ 150 = 72 bananas
               </div>
             </div>
           </div>
@@ -365,7 +365,7 @@ export const ProportionUnknownValueLab: React.FC<{
             </h3>
             <p style={{ margin: 0, fontSize: 14, color: '#475569' }}>
               {L(
-                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" ट्याबबाट ५ वटा आधिकारिक पाठ्यपुस्तकका प्रश्नहरू हल गरी ताराहरू कमाउनुहोस्!',
+                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" ट्याबबाट 5 pcs आधिकारिक पाठ्यपुस्तकका प्रश्नहरू हल गरी ताराहरू कमाउनुहोस्!',
                 'Click "Challenge" mode in the header to take the official CDC curriculum quiz and earn mastery stars!'
               )}
             </p>

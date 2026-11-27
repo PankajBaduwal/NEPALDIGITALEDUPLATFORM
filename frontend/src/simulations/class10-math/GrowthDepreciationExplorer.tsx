@@ -87,7 +87,7 @@ export const GrowthDepreciationExplorer: React.FC<SimProps> = ({ onBackToLibrary
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ ३: वृद्धि तथा ह्रास (Growth & Depreciation) अन्वेषकमा स्वागत छ! यहाँ जनसङ्ख्या वृद्धि, सामानको अवमूल्यन (Depreciation), बसाइँसराइ समायोजन र नाफा-नोक्सान अन्वेषण गर्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 3: वृद्धि तथा ह्रास (Growth & Depreciation) अन्वेषकमा स्वागत छ! यहाँ जनसङ्ख्या वृद्धि, सामानको अवमूल्यन (Depreciation), बसाइँसराइ समायोजन र नाफा-नोक्सान अन्वेषण गर्नुहोस्!',
         'Welcome to Grade 10 Growth and Depreciation Explorer! Investigate repeated percentage increase/decrease, migration adjustments, and asset depreciation!'
       )}
     >
@@ -149,8 +149,8 @@ export const GrowthDepreciationExplorer: React.FC<SimProps> = ({ onBackToLibrary
               </div>
 
               <div className="p-3 bg-slate-900/60 rounded-xl font-mono text-xs space-y-1">
-                <div>अन्तिम जनसङ्ख्या (Pₜ): <span className="text-emerald-400 font-bold text-sm">{fmt(finalPop)} जना</span></div>
-                <div>कुल वृद्धि (Total Growth): <span className="text-amber-400 font-bold">+ {fmt(totalPopGrowth)} जना</span></div>
+                <div>Final population (Pₜ): <span className="text-emerald-400 font-bold text-sm">{fmt(finalPop)} people</span></div>
+                <div>Total growth: <span className="text-amber-400 font-bold">+ {fmt(totalPopGrowth)} people</span></div>
               </div>
             </div>
 
@@ -158,28 +158,28 @@ export const GrowthDepreciationExplorer: React.FC<SimProps> = ({ onBackToLibrary
               <div className="space-y-3 text-xs">
                 <div>
                   <div className="flex justify-between font-bold text-slate-700 mb-1">
-                    <span>सुरुको जनसङ्ख्या (P): {fmt(initPop.toLocaleString())}</span>
+                    <span>Initial population (P): {fmt(initPop.toLocaleString())}</span>
                   </div>
                   <input type="range" min="10000" max="100000" step="5000" value={initPop} onChange={(e) => setInitPop(parseInt(e.target.value))} className="w-full accent-[#167C80]" />
                 </div>
 
                 <div>
                   <div className="flex justify-between font-bold text-emerald-700 mb-1">
-                    <span>वार्षिक वृद्धिदर (Growth Rate R): {fmt(growthRate)}%</span>
+                    <span>Annual growth rate (R): {fmt(growthRate)}%</span>
                   </div>
                   <input type="range" min="1" max="10" step="0.5" value={growthRate} onChange={(e) => setGrowthRate(parseFloat(e.target.value))} className="w-full accent-emerald-600" />
                 </div>
 
                 <div>
                   <div className="flex justify-between font-bold text-slate-700 mb-1">
-                    <span>समय (Time T): {fmt(growthYears)} वर्ष</span>
+                    <span>Time (T): {fmt(growthYears)} years</span>
                   </div>
                   <input type="range" min="1" max="5" value={growthYears} onChange={(e) => setGrowthYears(parseInt(e.target.value))} className="w-full accent-blue-600" />
                 </div>
               </div>
 
               <div className="p-3 bg-teal-50 border border-teal-200 rounded-xl font-mono text-xs text-teal-950 space-y-1">
-                <div className="font-bold">वृद्धि सूत्र: Pₜ = P(1 + R/100)ᵀ</div>
+                <div className="font-bold">Growth formula: Pₜ = P(1 + R/100)ᵀ</div>
                 <div>= {fmt(initPop)} × (1 + {fmt(growthRate)}/100)^{fmt(growthYears)} = <span className="font-bold text-[#167C80] text-sm">{fmt(finalPop)}</span></div>
               </div>
             </div>
@@ -200,7 +200,7 @@ export const GrowthDepreciationExplorer: React.FC<SimProps> = ({ onBackToLibrary
                   <div style={{ height: '110px', width: '38px' }} className="bg-rose-500 rounded-t flex items-center justify-center text-[10px] font-bold">
                     V₀
                   </div>
-                  <span className="text-[10px] text-slate-400 font-mono">रु. {fmt(initAssetVal)}</span>
+                  <span className="text-[10px] text-slate-400 font-mono">Rs. {fmt(initAssetVal)}</span>
                 </div>
 
                 {depBreakdown.map((row) => {
@@ -210,15 +210,15 @@ export const GrowthDepreciationExplorer: React.FC<SimProps> = ({ onBackToLibrary
                       <div style={{ height: `${h}px`, width: '38px' }} className="bg-rose-600 rounded-t flex items-center justify-center text-[10px] font-bold">
                         Y{fmt(row.year)}
                       </div>
-                      <span className="text-[10px] text-slate-400 font-mono">रु. {fmt(row.end)}</span>
+                      <span className="text-[10px] text-slate-400 font-mono">Rs. {fmt(row.end)}</span>
                     </div>
                   );
                 })}
               </div>
 
               <div className="p-3 bg-slate-800 rounded-xl font-mono text-xs space-y-1">
-                <div>ह्रास पछिको मूल्य (Vₜ): <span className="text-emerald-400 font-bold text-sm">रु. {fmt(finalAssetVal.toLocaleString())}</span></div>
-                <div>कुल ह्रास भएको रकम (Depreciation): <span className="text-rose-400 font-bold">- रु. {fmt(totalDepreciated.toLocaleString())}</span></div>
+                <div>Value after depreciation (Vₜ): <span className="text-emerald-400 font-bold text-sm">Rs. {fmt(finalAssetVal.toLocaleString())}</span></div>
+                <div>Total depreciation amount: <span className="text-rose-400 font-bold">- Rs. {fmt(totalDepreciated.toLocaleString())}</span></div>
               </div>
             </div>
 
@@ -226,29 +226,29 @@ export const GrowthDepreciationExplorer: React.FC<SimProps> = ({ onBackToLibrary
               <div className="space-y-3 text-xs">
                 <div>
                   <div className="flex justify-between font-bold text-slate-700 mb-1">
-                    <span>सुरुको मूल्य (V₀): रु. {fmt(initAssetVal.toLocaleString())}</span>
+                    <span>Initial value (V₀): Rs. {fmt(initAssetVal.toLocaleString())}</span>
                   </div>
                   <input type="range" min="10000" max="100000" step="5000" value={initAssetVal} onChange={(e) => setInitAssetVal(parseInt(e.target.value))} className="w-full accent-rose-600" />
                 </div>
 
                 <div>
                   <div className="flex justify-between font-bold text-rose-700 mb-1">
-                    <span>वार्षिक ह्रासदर (Depreciation Rate R): {fmt(depRate)}%</span>
+                    <span>Annual depreciation rate (R): {fmt(depRate)}%</span>
                   </div>
                   <input type="range" min="5" max="30" step="1" value={depRate} onChange={(e) => setDepRate(parseInt(e.target.value))} className="w-full accent-rose-600" />
                 </div>
 
                 <div>
                   <div className="flex justify-between font-bold text-slate-700 mb-1">
-                    <span>समय (T): {fmt(depYears)} वर्ष</span>
+                    <span>Time (T): {fmt(depYears)} years</span>
                   </div>
                   <input type="range" min="1" max="5" value={depYears} onChange={(e) => setDepYears(parseInt(e.target.value))} className="w-full accent-slate-700" />
                 </div>
               </div>
 
               <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl font-mono text-xs text-rose-950 space-y-1">
-                <div className="font-bold">ह्रास सूत्र: Vₜ = V₀(1 - R/100)ᵀ</div>
-                <div>= {fmt(initAssetVal)} × (1 - {fmt(depRate)}/100)^{fmt(depYears)} = <span className="font-bold text-sm text-rose-800">रु. {fmt(finalAssetVal.toLocaleString())}</span></div>
+                <div className="font-bold">Depreciation formula: Vₜ = V₀(1 - R/100)ᵀ</div>
+                <div>= {fmt(initAssetVal)} × (1 - {fmt(depRate)}/100)^{fmt(depYears)} = <span className="font-bold text-sm text-rose-800">Rs. {fmt(finalAssetVal.toLocaleString())}</span></div>
               </div>
             </div>
           </div>
@@ -269,29 +269,29 @@ export const GrowthDepreciationExplorer: React.FC<SimProps> = ({ onBackToLibrary
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
               <div>
-                <span className="font-bold text-slate-700 block">सुरुको जनसङ्ख्या:</span>
+                <span className="font-bold text-slate-700 block">Initial population:</span>
                 <input type="number" value={basePop} onChange={(e) => setBasePop(parseInt(e.target.value) || 0)} className="w-full p-1.5 border rounded font-mono font-bold" />
               </div>
               <div>
-                <span className="font-bold text-emerald-700 block">+ भित्र बसाइँसराइ:</span>
+                <span className="font-bold text-emerald-700 block">+ Immigration:</span>
                 <input type="number" value={inMigrants} onChange={(e) => setInMigrants(parseInt(e.target.value) || 0)} className="w-full p-1.5 border rounded font-mono font-bold text-emerald-700" />
               </div>
               <div>
-                <span className="font-bold text-amber-700 block">- बाहिर बसाइँसराइ:</span>
+                <span className="font-bold text-amber-700 block">- Emigration:</span>
                 <input type="number" value={outMigrants} onChange={(e) => setOutMigrants(parseInt(e.target.value) || 0)} className="w-full p-1.5 border rounded font-mono font-bold text-amber-700" />
               </div>
               <div>
-                <span className="font-bold text-rose-700 block">- मृत्यु संख्या:</span>
+                <span className="font-bold text-rose-700 block">- Number of deaths:</span>
                 <input type="number" value={deaths} onChange={(e) => setDeaths(parseInt(e.target.value) || 0)} className="w-full p-1.5 border rounded font-mono font-bold text-rose-700" />
               </div>
             </div>
 
             <div className="p-4 bg-slate-900 text-white rounded-xl font-mono text-xs space-y-1.5">
-              <div className="text-amber-400 font-bold">१ वर्षपछिको जनसङ्ख्या गणना:</div>
-              <div>१. प्राकृतिक वृद्धि (+ {fmt(migGrowthRate)}%): {fmt(basePop)} + {fmt(naturalInc)} = {fmt(popAfterNat)}</div>
-              <div>२. भित्र आएका मानिसहरू जोड्दा: {fmt(popAfterNat)} + {fmt(inMigrants)} = {fmt(popAfterIn)}</div>
-              <div>३. बाहिर गएका मानिसहरू घटाउँदा: {fmt(popAfterIn)} - {fmt(outMigrants)} = {fmt(popAfterOut)}</div>
-              <div>४. मृत्यु भएका मानिसहरू घटाउँदा: {fmt(popAfterOut)} - {fmt(deaths)} = <span className="text-emerald-400 font-bold text-sm">{fmt(finalAdjustedPop)} जना</span></div>
+              <div className="text-amber-400 font-bold">Population calculation after 1 year:</div>
+              <div>1. Natural growth (+ {fmt(migGrowthRate)}%): {fmt(basePop)} + {fmt(naturalInc)} = {fmt(popAfterNat)}</div>
+              <div>2. Adding the people who came in: {fmt(popAfterNat)} + {fmt(inMigrants)} = {fmt(popAfterIn)}</div>
+              <div>3. Subtracting the people who left: {fmt(popAfterIn)} - {fmt(outMigrants)} = {fmt(popAfterOut)}</div>
+              <div>4. Subtracting the people who died: {fmt(popAfterOut)} - {fmt(deaths)} = <span className="text-emerald-400 font-bold text-sm">{fmt(finalAdjustedPop)} people</span></div>
             </div>
           </div>
         )}
@@ -305,7 +305,7 @@ export const GrowthDepreciationExplorer: React.FC<SimProps> = ({ onBackToLibrary
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="p-4 bg-emerald-50 border border-emerald-300 rounded-xl space-y-2">
-                <span className="text-sm font-bold text-emerald-950 block">जनसङ्ख्या / मूल्य वृद्धि (Growth):</span>
+                <span className="text-sm font-bold text-emerald-950 block">Population / price growth:</span>
                 <div className="font-mono text-xs font-bold text-emerald-800">Pₜ = P(1 + R/100)ᵀ</div>
                 <p className="text-xs text-slate-600">
                   {L('कोष्ठकभित्र धनात्मक (+) चिन्ह हुन्छ किनभने प्रत्येक वर्ष मान बढ्दै जान्छ।', 'Uses positive (+) sign because quantity accumulates over time.')}
@@ -313,7 +313,7 @@ export const GrowthDepreciationExplorer: React.FC<SimProps> = ({ onBackToLibrary
               </div>
 
               <div className="p-4 bg-rose-50 border border-rose-300 rounded-xl space-y-2">
-                <span className="text-sm font-bold text-rose-950 block">सामानको अवमूल्यन (Depreciation):</span>
+                <span className="text-sm font-bold text-rose-950 block">Depreciation of goods:</span>
                 <div className="font-mono text-xs font-bold text-rose-800">Vₜ = V₀(1 - R/100)ᵀ</div>
                 <p className="text-xs text-slate-600">
                   {L('कोष्ठकभित्र ऋणात्मक (-) चिन्ह हुन्छ किनभने प्रत्येक वर्ष मान घट्दै जान्छ।', 'Uses negative (-) sign because asset value declines over time.')}
@@ -332,28 +332,28 @@ export const GrowthDepreciationExplorer: React.FC<SimProps> = ({ onBackToLibrary
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
               <div>
-                <span className="font-bold text-slate-700 block">खरिद मूल्य (Cost):</span>
+                <span className="font-bold text-slate-700 block">Purchase price (cost):</span>
                 <input type="number" value={purchaseCost} onChange={(e) => setPurchaseCost(parseInt(e.target.value) || 0)} className="w-full p-1.5 border rounded font-mono font-bold" />
               </div>
               <div>
-                <span className="font-bold text-slate-700 block">ह्रासदर (R%):</span>
+                <span className="font-bold text-slate-700 block">Depreciation rate (R%):</span>
                 <input type="number" value={plDepRate} onChange={(e) => setPlDepRate(parseInt(e.target.value) || 0)} className="w-full p-1.5 border rounded font-mono font-bold" />
               </div>
               <div>
-                <span className="font-bold text-slate-700 block">सञ्चालन आम्दानी:</span>
+                <span className="font-bold text-slate-700 block">Operating income:</span>
                 <input type="number" value={businessIncome} onChange={(e) => setBusinessIncome(parseInt(e.target.value) || 0)} className="w-full p-1.5 border rounded font-mono font-bold text-emerald-700" />
               </div>
               <div>
-                <span className="font-bold text-slate-700 block">बिक्री मूल्य (Sold):</span>
+                <span className="font-bold text-slate-700 block">Selling price (sold):</span>
                 <input type="number" value={sellingPrice} onChange={(e) => setSellingPrice(parseInt(e.target.value) || 0)} className="w-full p-1.5 border rounded font-mono font-bold text-blue-700" />
               </div>
             </div>
 
             <div className="p-4 bg-slate-50 border rounded-xl font-mono text-xs space-y-1">
-              <div>२ वर्षपछिको ह्रास मूल्य (V₂): रु. {fmt(depreciatedVal.toLocaleString())}</div>
-              <div>कुल प्राप्त आम्दानी (बिक्री + सञ्चालन): रु. {fmt(totalBenefits.toLocaleString())}</div>
+              <div>Depreciated value after 2 years (V₂): Rs. {fmt(depreciatedVal.toLocaleString())}</div>
+              <div>Total income received (sale + operation): Rs. {fmt(totalBenefits.toLocaleString())}</div>
               <div className={`text-base font-bold pt-1 ${netProfitOrLoss >= 0 ? 'text-emerald-700' : 'text-rose-700'}`}>
-                {netProfitOrLoss >= 0 ? `➔ कुल नाफा (Net Profit) = रु. ${fmt(netProfitOrLoss.toLocaleString())}` : `➔ कुल नोक्सान (Net Loss) = रु. ${fmt(Math.abs(netProfitOrLoss).toLocaleString())}`}
+                {netProfitOrLoss >= 0 ? `➔ Net profit = Rs. ${fmt(netProfitOrLoss.toLocaleString())}` : `➔ Net loss = Rs. ${fmt(Math.abs(netProfitOrLoss).toLocaleString())}`}
               </div>
             </div>
           </div>

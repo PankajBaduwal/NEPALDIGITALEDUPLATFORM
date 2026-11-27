@@ -27,17 +27,17 @@ const PROBLEMS: SimplificationProblem[] = [
     expectedAnswer: '1',
     steps: [
       {
-        ruleNp: '२^(x+१) लाई २^x × २¹ र २^(x+२) लाई २^x × २² मा टुक्राउने:',
+        ruleNp: '2^(x+1) लाई 2^x × 2¹ र 2^(x+2) लाई 2^x × 2² मा टुक्राउने:',
         ruleEn: 'Split 2^(x+1) into 2^x × 2¹ and 2^(x+2) into 2^x × 2²:',
         math: '= (2^x · 2 + 2^x · 1) / (2^x · 4 - 2^x · 1)',
       },
       {
-        ruleNp: 'अंश र हर दुवैबाट २^x साझा लिने:',
+        ruleNp: 'अंश र हर दुवैबाट 2^x साझा लिने:',
         ruleEn: 'Factor out common 2^x from both numerator and denominator:',
         math: '= [2^x (2 + 1)] / [2^x (4 - 1)]',
       },
       {
-        ruleNp: '२^x काट्ने र कोष्ठक भित्रको सरलीकरण गर्ने:',
+        ruleNp: '2^x काट्ने र कोष्ठक भित्रको सरलीकरण गर्ने:',
         ruleEn: 'Cancel 2^x and evaluate inside brackets:',
         math: '= 3 / 3 = 1',
       },
@@ -70,19 +70,19 @@ const PROBLEMS: SimplificationProblem[] = [
   },
   {
     id: 'pr3',
-    titleNp: 'आधार ३ मा रूपान्तरण गरी सरलीकरण (Base Reduction)',
+    titleNp: 'आधार 3 मा रूपान्तरण गरी सरलीकरण (Base Reduction)',
     titleEn: 'Base Reduction to Powers of 3',
     category: 'base_reduction',
     expr: '(3^(n+1) · 9^(n-1)) / 27^n',
     expectedAnswer: '1/3',
     steps: [
       {
-        ruleNp: '९ लाई ३² र २७ लाई ३³ को रूपमा लेख्ने:',
+        ruleNp: '9 लाई 3² र 27 लाई 3³ को रूपमा लेख्ने:',
         ruleEn: 'Express 9 as 3² and 27 as 3³:',
         math: '= [3^(n+1) · (3²)^(n-1)] / (3³)^n',
       },
       {
-        ruleNp: 'घातको घात नियम (३²)^(n-१) = ३^(२n-२) र (३³)^n = ३^(३n) लागू गर्ने:',
+        ruleNp: 'घातको घात नियम (3²)^(n-1) = 3^(2n-2) र (3³)^n = 3^(3n) लागू गर्ने:',
         ruleEn: 'Multiply exponents: (3²)^(n-1) = 3^(2n-2) and (3³)^n = 3^(3n):',
         math: '= [3^(n+1 + 2n-2)] / 3^(3n) = 3^(3n-1) / 3^(3n)',
       },
@@ -95,24 +95,24 @@ const PROBLEMS: SimplificationProblem[] = [
   },
   {
     id: 'pr4',
-    titleNp: 'आधार ५ को साझा घाताङ्क (Powers of 5 Common)',
+    titleNp: 'आधार 5 को साझा घाताङ्क (Powers of 5 Common)',
     titleEn: 'Taking Common Powers of 5',
     category: 'common_power',
     expr: '(5^(n+2) - 5^n) / (5^(n+1) + 5^n)',
     expectedAnswer: '4',
     steps: [
       {
-        ruleNp: '५^(n+२) = ५^n × २५ र ५^(n+१) = ५^n × ५ मा टुक्राउने:',
+        ruleNp: '5^(n+2) = 5^n × 25 र 5^(n+1) = 5^n × 5 मा टुक्राउने:',
         ruleEn: 'Split 5^(n+2) = 5^n × 25 and 5^(n+1) = 5^n × 5:',
         math: '= [5^n · 25 - 5^n · 1] / [5^n · 5 + 5^n · 1]',
       },
       {
-        ruleNp: '५^n साझा लिने:',
+        ruleNp: '5^n साझा लिने:',
         ruleEn: 'Factor out 5^n:',
         math: '= [5^n (25 - 1)] / [5^n (5 + 1)] = [5^n · 24] / [5^n · 6]',
       },
       {
-        ruleNp: '५^n काटेर २४ ÷ ६ = ४ निकाल्ने:',
+        ruleNp: '5^n काटेर 24 ÷ 6 = 4 निकाल्ने:',
         ruleEn: 'Cancel 5^n and divide 24 by 6:',
         math: '= 24 / 6 = 4',
       },
@@ -125,7 +125,7 @@ const QUIZ_QUESTIONS = [
     np: 'चक्रीय घाताङ्क अभिव्यक्ति (xᵃ/xᵇ)ᵃ⁺ᵇ · (xᵇ/xᶜ)ᵇ⁺ᶜ · (xᶜ/xᵃ)ᶜ⁺ᵃ को अन्तिम सरलीकृत मान कति हुन्छ?',
     en: 'What is the final simplified value of (xᵃ/xᵇ)ᵃ⁺ᵇ · (xᵇ/xᶜ)ᵇ⁺ᶜ · (xᶜ/xᵃ)ᶜ⁺ᵃ?',
     options: [
-      { key: 'A', label: '1 (किनकि x⁰ = 1)' },
+      { key: 'A', label: '1' },
       { key: 'B', label: '0' },
       { key: 'C', label: 'x' },
       { key: 'D', label: 'x^(2a+2b+2c)' },
@@ -133,7 +133,7 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: '२^(x+१) + २^x मा कुन पद साझा (common) लिन सकिन्छ?',
+    np: '2^(x+1) + 2^x मा कुन पद साझा (common) लिन सकिन्छ?',
     en: 'Which term can be factored out as common in 2^(x+1) + 2^x?',
     options: [
       { key: 'A', label: '2^x' },
@@ -144,10 +144,10 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: '३^(३n-१) ÷ ३^(३n) को मान कति हुन्छ?',
+    np: '3^(3n-1) ÷ 3^(3n) को मान कति हुन्छ?',
     en: 'What is the value of 3^(3n-1) ÷ 3^(3n)?',
     options: [
-      { key: 'A', label: '1/3 (३⁻¹ = १/३)' },
+      { key: 'A', label: '1/3 (3⁻¹ = 1/3)' },
       { key: 'B', label: '3' },
       { key: 'C', label: '-3' },
       { key: 'D', label: '1' },
@@ -202,7 +202,7 @@ export const IndicesSimplificationChallenge: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! कक्षा ९ को पाठ्यपुस्तकमा आधारित चक्रीय घाताङ्क र साझा पद लिने कठिन बीजीय घाताङ्क सरलीकरणहरूलाई चरणबद्ध रूपमा अभ्यास गरौं!',
+        'नमस्ते! कक्षा 9 को पाठ्यपुस्तकमा आधारित चक्रीय घाताङ्क र साझा पद लिने कठिन बीजीय घाताङ्क सरलीकरणहरूलाई चरणबद्ध रूपमा अभ्यास गरौं!',
         'Welcome! Tackle multi-law algebraic and cyclic indices simplifications from the Grade 9 curriculum step-by-step!'
       )}
     >
@@ -296,27 +296,27 @@ export const IndicesSimplificationChallenge: React.FC<{
             }}
           >
             <div>
-              <strong>गुणन नियम:</strong>
+              <strong>Product rule:</strong>
               <div style={{ fontFamily: 'monospace', color: '#1E40AF' }}>aᵐ × aⁿ = aᵐ⁺ⁿ</div>
             </div>
             <div>
-              <strong>भाग नियम:</strong>
+              <strong>Quotient rule:</strong>
               <div style={{ fontFamily: 'monospace', color: '#1E40AF' }}>aᵐ ÷ aⁿ = aᵐ⁻ⁿ</div>
             </div>
             <div>
-              <strong>घातको घात नियम:</strong>
+              <strong>Power of a power rule:</strong>
               <div style={{ fontFamily: 'monospace', color: '#1E40AF' }}>(aᵐ)ⁿ = aᵐⁿ</div>
             </div>
             <div>
-              <strong>शून्य घात नियम:</strong>
+              <strong>Zero power rule:</strong>
               <div style={{ fontFamily: 'monospace', color: '#1E40AF' }}>a⁰ = 1 (a ≠ 0)</div>
             </div>
             <div>
-              <strong>ऋणात्मक घात नियम:</strong>
+              <strong>Negative power rule:</strong>
               <div style={{ fontFamily: 'monospace', color: '#1E40AF' }}>a⁻ᵐ = 1 / aᵐ</div>
             </div>
             <div>
-              <strong>वर्गको अन्तर सर्वसमिका:</strong>
+              <strong>Difference of squares identity:</strong>
               <div style={{ fontFamily: 'monospace', color: '#1E40AF' }}>(a - b)(a + b) = a² - b²</div>
             </div>
           </div>

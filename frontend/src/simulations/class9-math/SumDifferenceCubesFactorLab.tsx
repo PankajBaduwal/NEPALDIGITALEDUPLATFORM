@@ -25,11 +25,11 @@ const TEXTBOOK_PROBLEMS: CubeProblem[] = [
     factor1: '(2x + y)',
     factor2: '(4x² - 2xy + y²)',
     stepsNp: [
-      '१. घन पदहरू पहिचान गर्ने: ८x³ = (२x)³ र y³ = (y)³',
-      '२. यहाँ a = २x र b = y छ',
-      '३. सूत्र: a³ + b³ = (a + b)(a² - ab + b²)',
-      '४. मान प्रतिस्थापन: (२x + y)[(२x)² - (२x)(y) + y²]',
-      '५. अन्तिम खण्डीकरण: (२x + y)(४x² - २xy + y²)',
+      '1. घन पदहरू पहिचान गर्ने: 8x³ = (2x)³ र y³ = (y)³',
+      '2. यहाँ a = 2x र b = y छ',
+      '3. सूत्र: a³ + b³ = (a + b)(a² - ab + b²)',
+      '4. मान प्रतिस्थापन: (2x + y)[(2x)² - (2x)(y) + y²]',
+      '5. अन्तिम खण्डीकरण: (2x + y)(4x² - 2xy + y²)',
     ],
     stepsEn: [
       '1. Identify cube bases: 8x³ = (2x)³ and y³ = (y)³',
@@ -48,11 +48,11 @@ const TEXTBOOK_PROBLEMS: CubeProblem[] = [
     factor1: '(x - 2)',
     factor2: '(x² + 2x + 4)',
     stepsNp: [
-      '१. घन पदहरू पहिचान गर्ने: x³ = (x)³ र ८ = (२)³',
-      '२. यहाँ a = x र b = २ छ',
-      '३. सूत्र: a³ - b³ = (a - b)(a² + ab + b²)',
-      '४. मान प्रतिस्थापन: (x - २)[(x)² + (x)(२) + २²]',
-      '५. अन्तिम खण्डीकरण: (x - २)(x² + २x + ४)',
+      '1. घन पदहरू पहिचान गर्ने: x³ = (x)³ र 8 = (2)³',
+      '2. यहाँ a = x र b = 2 छ',
+      '3. सूत्र: a³ - b³ = (a - b)(a² + ab + b²)',
+      '4. मान प्रतिस्थापन: (x - 2)[(x)² + (x)(2) + 2²]',
+      '5. अन्तिम खण्डीकरण: (x - 2)(x² + 2x + 4)',
     ],
     stepsEn: [
       '1. Identify cube bases: x³ = (x)³ and 8 = (2)³',
@@ -71,11 +71,11 @@ const TEXTBOOK_PROBLEMS: CubeProblem[] = [
     factor1: '(3a + 4b)',
     factor2: '(9a² - 12ab + 16b²)',
     stepsNp: [
-      '१. घन पदहरू पहिचान गर्ने: २७a³ = (३a)³ र ६४b³ = (४b)³',
-      '२. यहाँ a = ३a र b = ४b छ',
-      '३. सूत्र: (a + b)(a² - ab + b²)',
-      '४. मान प्रतिस्थापन: (३a + ४b)[(३a)² - (३a)(४b) + (४b)²]',
-      '५. अन्तिम खण्डीकरण: (३a + ४b)(९a² - १२ab + १६b²)',
+      '1. घन पदहरू पहिचान गर्ने: 27a³ = (3a)³ र 64b³ = (4b)³',
+      '2. यहाँ a = 3a र b = 4b छ',
+      '3. सूत्र: (a + b)(a² - ab + b²)',
+      '4. मान प्रतिस्थापन: (3a + 4b)[(3a)² - (3a)(4b) + (4b)²]',
+      '5. अन्तिम खण्डीकरण: (3a + 4b)(9a² - 12ab + 16b²)',
     ],
     stepsEn: [
       '1. Identify cube bases: 27a³ = (3a)³ and 64b³ = (4b)³',
@@ -94,11 +94,11 @@ const TEXTBOOK_PROBLEMS: CubeProblem[] = [
     factor1: '(5p - 2q)',
     factor2: '(25p² + 10pq + 4q²)',
     stepsNp: [
-      '१. घन पदहरू पहिचान गर्ने: १२५p³ = (५p)³ र ८q³ = (२q)³',
-      '२. यहाँ a = ५p र b = २q छ',
-      '३. सूत्र: a³ - b³ = (a - b)(a² + ab + b²)',
-      '४. मान प्रतिस्थापन: (५p - २q)[(५p)² + (५p)(२q) + (२q)²]',
-      '५. अन्तिम खण्डीकरण: (५p - २q)(२५p² + १०pq + ४q²)',
+      '1. घन पदहरू पहिचान गर्ने: 125p³ = (5p)³ र 8q³ = (2q)³',
+      '2. यहाँ a = 5p र b = 2q छ',
+      '3. सूत्र: a³ - b³ = (a - b)(a² + ab + b²)',
+      '4. मान प्रतिस्थापन: (5p - 2q)[(5p)² + (5p)(2q) + (2q)²]',
+      '5. अन्तिम खण्डीकरण: (5p - 2q)(25p² + 10pq + 4q²)',
     ],
     stepsEn: [
       '1. Identify cube bases: 125p³ = (5p)³ and 8q³ = (2q)³',
@@ -134,24 +134,24 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: 'अभिव्यक्ति ८x³ + २७ लाई खण्डीकरण गर्दा पहिलो खण्ड (a + b) के हुन्छ?',
+    np: 'अभिव्यक्ति 8x³ + 27 लाई खण्डीकरण गर्दा पहिलो खण्ड (a + b) के हुन्छ?',
     en: 'When factoring 8x³ + 27, what is the first factor (a + b)?',
     options: [
-      { key: 'A', label: '(२x + ३) [किनकि (२x)³ = ८x³ र ३³ = २७]' },
-      { key: 'B', label: '(८x + २७)' },
-      { key: 'C', label: '(४x + ९)' },
-      { key: 'D', label: '(२x - ३)' },
+      { key: 'A', label: '(2x + 3) [because (2x)³ = 8x³ and 3³ = 27]' },
+      { key: 'B', label: '(8x + 27)' },
+      { key: 'C', label: '(4x + 9)' },
+      { key: 'D', label: '(2x - 3)' },
     ],
     answer: 'A',
   },
   {
-    np: 'x³ - १ को खण्डीकरण कुन हो?',
+    np: 'x³ - 1 को खण्डीकरण कुन हो?',
     en: 'What is the factorization of x³ - 1?',
     options: [
-      { key: 'A', label: '(x - १)(x² + x + १)' },
-      { key: 'B', label: '(x + १)(x² - x + १)' },
-      { key: 'C', label: '(x - १)(x² - x + १)' },
-      { key: 'D', label: '(x - १)³' },
+      { key: 'A', label: '(x - 1)(x² + x + 1)' },
+      { key: 'B', label: '(x + 1)(x² - x + 1)' },
+      { key: 'C', label: '(x - 1)(x² - x + 1)' },
+      { key: 'D', label: '(x - 1)³' },
     ],
     answer: 'A',
   },
@@ -311,7 +311,7 @@ export const SumDifferenceCubesFactorLab: React.FC<{
                 <div>{activeProblem.factor1} × {activeProblem.factor2}</div>
                 <div>= {activeProblem.baseA}{activeProblem.factor2} {activeProblem.type === 'sum' ? '+' : '-'} {activeProblem.baseB}{activeProblem.factor2}</div>
                 <div className="text-emerald-600 dark:text-emerald-400 font-black pt-1">
-                  = {activeProblem.expr} (सत्य प्रमाणित भयो / Verified!) ✓
+                  = {activeProblem.expr} (Verified!) ✓
                 </div>
               </div>
             )}

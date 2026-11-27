@@ -1,7 +1,7 @@
 /**
  * VirtualComputerLab.tsx
- * Simulation 6: 2D Virtual Computer Laboratory (भर्चुअल कम्प्युटर २डी प्रयोगशाला)
- * Grade 4 Science • Chapter 2: Information & Communication Technology (सूचना तथा सञ्चार प्रविधि)
+ * Simulation 6: 2D Virtual Computer Laboratory
+ * Grade 4 Science • Chapter 2: Information & Communication Technology
  *
  * 100% Native 2D Mini-OS Educational Workstation.
  * Features:
@@ -26,7 +26,7 @@ export const VirtualComputerLab: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -43,7 +43,7 @@ export const VirtualComputerLab: React.FC<BaseSimulationProps> = ({
 
   // Writer App State
   const [writerText, setWriterText] = useState<string>(
-    'कक्षा ४ विज्ञान: कम्प्युटर एक विद्युतीय यन्त्र हो। यसले इनपुट लिन्छ, सिपियूमा प्रशोधन गर्छ र मोनिटरमा आउटपुट देखाउँछ।'
+    'Class 4 Science: A computer is an electronic device. It takes input, processes it in the CPU and shows output on the monitor.'
   );
 
   // Calculator App State
@@ -204,7 +204,7 @@ export const VirtualComputerLab: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Virtual Computer Laboratory"
-      titleNe="भर्चुअल कम्प्युटर २डी प्रयोगशाला"
+      titleNe="भर्चुअल कम्प्युटर 2डी प्रयोगशाला"
       subject="Science"
       grade={4}
       chapter={2}

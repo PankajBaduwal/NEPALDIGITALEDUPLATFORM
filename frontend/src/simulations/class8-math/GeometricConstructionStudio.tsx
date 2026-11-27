@@ -22,15 +22,15 @@ const CONSTRUCTIONS: ConstructionModeInfo[] = [
     id: 'rectangle',
     titleNp: 'आयतको रचना (Construction of Rectangle)',
     titleEn: 'Construction of Rectangle',
-    givenNp: 'दिइएको: भुजा AB = ६ सेमी र AD = ४ सेमी',
+    givenNp: 'दिइएको: भुजा AB = 6 cm र AD = 4 cm',
     givenEn: 'Given: Adjacent sides AB = 6 cm and AD = 4 cm',
     totalSteps: 5,
     stepsNp: [
-      '१. स्केलको सहायताले आधार रेखा खण्ड AB = ६ सेमी खिच्नुहोस्।',
-      '२. बिन्दु A मा कम्पासले ९०° को कोण बनाउने रेखा खिच्नुहोस्।',
-      '३. कम्पासलाई ४ सेमी फैलाई बिन्दु A बाट चाप काटी बिन्दु D पत्ता लगाउनुहोस् (AD = ४ सेमी)।',
-      '४. बिन्दु B मा पनि ९०° को कोण बनाई ४ सेमीको चाप काटी बिन्दु C पत्ता लगाउनुहोस् (BC = ४ सेमी)।',
-      '५. बिन्दु C र D लाई सीधा रेखाले जोड्नुहोस्। यसरी अभीष्ट आयत ABCD तयार हुन्छ।'
+      '1. स्केलको सहायताले आधार रेखा खण्ड AB = 6 cm खिच्नुहोस्।',
+      '2. बिन्दु A मा कम्पासले 90° को कोण बनाउने रेखा खिच्नुहोस्।',
+      '3. कम्पासलाई 4 cm फैलाई बिन्दु A बाट चाप काटी बिन्दु D पत्ता लगाउनुहोस् (AD = 4 cm)।',
+      '4. बिन्दु B मा पनि 90° को कोण बनाई 4 cmको चाप काटी बिन्दु C पत्ता लगाउनुहोस् (BC = 4 cm)।',
+      '5. बिन्दु C र D लाई सीधा रेखाले जोड्नुहोस्। यसरी अभीष्ट आयत ABCD तयार हुन्छ।'
     ],
     stepsEn: [
       '1. Using a ruler, draw the base line segment AB = 6 cm.',
@@ -44,14 +44,14 @@ const CONSTRUCTIONS: ConstructionModeInfo[] = [
     id: 'square',
     titleNp: 'वर्गको रचना (Construction of Square)',
     titleEn: 'Construction of Square',
-    givenNp: 'दिइएको: एउटा भुजा AB = ५ सेमी',
+    givenNp: 'दिइएको: एउटा भुजा AB = 5 cm',
     givenEn: 'Given: One side AB = 5 cm',
     totalSteps: 4,
     stepsNp: [
-      '१. स्केलले आधार रेखा खण्ड AB = ५ सेमी खिच्नुहोस्।',
-      '२. बिन्दु A र B दुवैमा कम्पासको सहायताले ९०° का लम्ब रेखाहरू खिच्नुहोस्।',
-      '३. कम्पासलाई ५ सेमी फैलाई A बाट चाप काटी D र B बाट चाप काटी C चिन्ह लगाउनुहोस्।',
-      '४. बिन्दु C र D लाई सीधा रेखाले जोड्नुहोस्। चारै भुजा ५ सेमी भएको वर्ग ABCD तयार हुन्छ।'
+      '1. स्केलले आधार रेखा खण्ड AB = 5 cm खिच्नुहोस्।',
+      '2. बिन्दु A र B दुवैमा कम्पासको सहायताले 90° का लम्ब रेखाहरू खिच्नुहोस्।',
+      '3. कम्पासलाई 5 cm फैलाई A बाट चाप काटी D र B बाट चाप काटी C चिन्ह लगाउनुहोस्।',
+      '4. बिन्दु C र D लाई सीधा रेखाले जोड्नुहोस्। चारै भुजा 5 cm भएको वर्ग ABCD तयार हुन्छ।'
     ],
     stepsEn: [
       '1. Using a ruler, draw base line segment AB = 5 cm.',
@@ -64,15 +64,15 @@ const CONSTRUCTIONS: ConstructionModeInfo[] = [
     id: 'parallelogram_angle',
     titleNp: 'समानान्तर चतुर्भुज: दुई भुजा र बीचको कोण',
     titleEn: 'Parallelogram: 2 Sides & Included Angle',
-    givenNp: 'दिइएको: AB = ६ सेमी, AD = ४ सेमी र बीचको कोण ∠A = ६०°',
+    givenNp: 'दिइएको: AB = 6 cm, AD = 4 cm र बीचको कोण ∠A = 60°',
     givenEn: 'Given: AB = 6 cm, AD = 4 cm, and included angle ∠A = 60°',
     totalSteps: 5,
     stepsNp: [
-      '१. आधार रेखा खण्ड AB = ६ सेमी खिच्नुहोस्।',
-      '२. बिन्दु A मा कम्पासले ६०° को कोण बनाउने किरण AX खिच्नुहोस्।',
-      '३. किरण AX मा कम्पासले ४ सेमीको चाप काटी शीर्षबिन्दु D पत्ता लगाउनुहोस् (AD = ४ सेमी)।',
-      '४. बिन्दु D बाट ६ सेमीको चाप र बिन्दु B बाट ४ सेमीको चाप खिच्दा आपसमा काटिने बिन्दु C पत्ता लगाउनुहोस्।',
-      '५. BC र CD जोड्नुहोस्। अभीष्ट समानान्तर चतुर्भुज ABCD तयार भयो।'
+      '1. आधार रेखा खण्ड AB = 6 cm खिच्नुहोस्।',
+      '2. बिन्दु A मा कम्पासले 60° को कोण बनाउने किरण AX खिच्नुहोस्।',
+      '3. किरण AX मा कम्पासले 4 cmको चाप काटी शीर्षबिन्दु D पत्ता लगाउनुहोस् (AD = 4 cm)।',
+      '4. बिन्दु D बाट 6 cmको चाप र बिन्दु B बाट 4 cmको चाप खिच्दा आपसमा काटिने बिन्दु C पत्ता लगाउनुहोस्।',
+      '5. BC र CD जोड्नुहोस्। अभीष्ट समानान्तर चतुर्भुज ABCD तयार भयो।'
     ],
     stepsEn: [
       '1. Draw the base segment AB = 6 cm.',
@@ -86,15 +86,15 @@ const CONSTRUCTIONS: ConstructionModeInfo[] = [
     id: 'parallelogram_diagonal',
     titleNp: 'समानान्तर चतुर्भुज: दुई भुजा र विकर्ण',
     titleEn: 'Parallelogram: 2 Sides & 1 Diagonal',
-    givenNp: 'दिइएको: AB = ६ सेमी, BC = ४ सेमी र विकर्ण AC = ८ सेमी',
+    givenNp: 'दिइएको: AB = 6 cm, BC = 4 cm र diagonal AC = 8 cm',
     givenEn: 'Given: AB = 6 cm, BC = 4 cm, and diagonal AC = 8 cm',
     totalSteps: 5,
     stepsNp: [
-      '१. आधार रेखा खण्ड AB = ६ सेमी खिच्नुहोस्।',
-      '२. बिन्दु A बाट ८ सेमीको चाप र बिन्दु B बाट ४ सेमीको चाप खिची काटिएको बिन्दु C पत्ता लगाउनुहोस् (त्रिभुज ABC बन्यो)।',
-      '३. समानान्तर चतुर्भुजको सम्मुख भुजा बराबर हुने भएकाले CD = ६ सेमी र AD = ४ सेमी हुन्छ।',
-      '४. बिन्दु C बाट ६ सेमीको चाप र बिन्दु A बाट ४ सेमीको चाप खिची प्रतिच्छेदन बिन्दु D पत्ता लगाउनुहोस्।',
-      '५. AD र CD लाई जोड्नुहोस्। अभीष्ट समानान्तर चतुर्भुज ABCD तयार भयो।'
+      '1. आधार रेखा खण्ड AB = 6 cm खिच्नुहोस्।',
+      '2. बिन्दु A बाट 8 cmको चाप र बिन्दु B बाट 4 cmको चाप खिची काटिएको बिन्दु C पत्ता लगाउनुहोस् (त्रिभुज ABC बन्यो)।',
+      '3. समानान्तर चतुर्भुजको सम्मुख भुजा बराबर हुने भएकाले CD = 6 cm र AD = 4 cm हुन्छ।',
+      '4. बिन्दु C बाट 6 cmको चाप र बिन्दु A बाट 4 cmको चाप खिची प्रतिच्छेदन बिन्दु D पत्ता लगाउनुहोस्।',
+      '5. AD र CD लाई जोड्नुहोस्। अभीष्ट समानान्तर चतुर्भुज ABCD तयार भयो।'
     ],
     stepsEn: [
       '1. Draw the base line segment AB = 6 cm.',
@@ -108,13 +108,13 @@ const CONSTRUCTIONS: ConstructionModeInfo[] = [
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'आयत (Rectangle) रचना गर्दा प्रत्येक भित्री कोण कति डिग्रीको बनाउनुपर्छ?',
+    np: 'आयत (Rectangle) रचना गर्दा प्रत्येक भित्री कोण कति degreesको बनाउनुपर्छ?',
     en: 'When constructing a rectangle, what measure must each interior angle have?',
     options: [
-      { key: 'A', label: '४५°' },
-      { key: 'B', label: '६०°' },
-      { key: 'C', label: '९०° (Right Angle)' },
-      { key: 'D', label: '१२०°' },
+      { key: 'A', label: '45°' },
+      { key: 'B', label: '60°' },
+      { key: 'C', label: '90° (Right Angle)' },
+      { key: 'D', label: '120°' },
     ],
     answer: 'C',
   },
@@ -122,21 +122,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समानान्तर चतुर्भुज (Parallelogram) का सम्मुख भुजाहरू कस्ता हुन्छन्?',
     en: 'What is true about the opposite sides of a parallelogram?',
     options: [
-      { key: 'A', label: 'बराबर र समानान्तर दुवै हुन्छन् (Both equal and parallel)' },
-      { key: 'B', label: 'असमान हुन्छन्' },
-      { key: 'C', label: 'लम्ब मात्र हुन्छन्' },
-      { key: 'D', label: 'काटिन्छन्' },
+      { key: 'A', label: 'They are both equal and parallel' },
+      { key: 'B', label: 'They are unequal' },
+      { key: 'C', label: 'They are only perpendicular' },
+      { key: 'D', label: 'They intersect' },
     ],
     answer: 'A',
   },
   {
-    np: 'कम्पासको सहायताले ६०° को कोण बनाउँदा पहिलो चापको अर्धव्यास कति हुनुपर्छ?',
+    np: 'कम्पासको सहायताले 60° को कोण बनाउँदा पहिलो चापको अर्धव्यास कति हुनुपर्छ?',
     en: 'When constructing a 60° angle using a compass, what must be true about the cutting arc radius?',
     options: [
-      { key: 'A', label: 'सुरुको चापकै बराबर अर्धव्यास (Same radius as the initial arc)' },
-      { key: 'B', label: 'दोब्बर हुनुपर्छ' },
-      { key: 'C', label: 'आधा हुनुपर्छ' },
-      { key: 'D', label: 'जति भए पनि हुन्छ' },
+      { key: 'A', label: 'The same radius as the initial arc' },
+      { key: 'B', label: 'It must be doubled' },
+      { key: 'C', label: 'It must be halved' },
+      { key: 'D', label: 'Any size will do' },
     ],
     answer: 'A',
   }
@@ -288,7 +288,7 @@ export const GeometricConstructionStudio: React.FC<{
                     <circle cx="340" cy="220" r="4" fill="#38bdf8" />
                     <text x="85" y="235" fill="#38bdf8" fontSize="13" fontWeight="bold">A</text>
                     <text x="345" y="235" fill="#38bdf8" fontSize="13" fontWeight="bold">B</text>
-                    <text x="220" y="240" fill="#94a3b8" fontSize="11" textAnchor="middle">6 cm (६ सेमी)</text>
+                    <text x="220" y="240" fill="#94a3b8" fontSize="11" textAnchor="middle">6 cm</text>
                   </g>
                 )}
 
@@ -495,7 +495,7 @@ export const GeometricConstructionStudio: React.FC<{
                     <line x1="320" y1="220" x2="360" y2="90" stroke="#06b6d4" strokeWidth="3" />
                     <circle cx="360" cy="90" r="4" fill="#22c55e" />
                     <text x="370" y="90" fill="#22c55e" fontSize="13" fontWeight="bold">C</text>
-                    <text x="210" y="145" fill="#f59e0b" fontSize="11">विकर्ण AC = 8 cm</text>
+                    <text x="210" y="145" fill="#f59e0b" fontSize="11">diagonal AC = 8 cm</text>
                   </g>
                 )}
 

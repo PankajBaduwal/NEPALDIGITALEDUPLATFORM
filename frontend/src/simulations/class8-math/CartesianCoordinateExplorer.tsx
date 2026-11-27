@@ -12,13 +12,13 @@ interface Point {
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'निर्देशाङ्क (-३, ४) समतलको कुन चतुर्थांश (Quadrant) मा पर्दछ?',
+    np: 'निर्देशाङ्क (-3, 4) समतलको कुन चतुर्थांश (Quadrant) मा पर्दछ?',
     en: 'In which quadrant does the point (-3, 4) lie?',
     options: [
-      { key: 'A', label: 'पहिलो (Quadrant I)' },
-      { key: 'B', label: 'दोस्रो (Quadrant II)' },
-      { key: 'C', label: 'तेस्रो (Quadrant III)' },
-      { key: 'D', label: 'चौथो (Quadrant IV)' },
+      { key: 'A', label: 'First (Quadrant I)' },
+      { key: 'B', label: 'Second (Quadrant II)' },
+      { key: 'C', label: 'Third (Quadrant III)' },
+      { key: 'D', label: 'Fourth (Quadrant IV)' },
     ],
     answer: 'B',
   },
@@ -26,10 +26,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'मूलबिन्दु (Origin) को निर्देशांक कुन हो?',
     en: 'What are the coordinates of the origin?',
     options: [
-      { key: 'A', label: '(०, ०) / (0, 0)' },
-      { key: 'B', label: '(१, १)' },
-      { key: 'C', label: '(०, १)' },
-      { key: 'D', label: '(१, ०)' },
+      { key: 'A', label: '(0, 0) / (0, 0)' },
+      { key: 'B', label: '(1, 1)' },
+      { key: 'C', label: '(0, 1)' },
+      { key: 'D', label: '(1, 0)' },
     ],
     answer: 'A',
   },
@@ -37,21 +37,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'X-अक्षमा पर्ने कुनै पनि बिन्दुको Y-निर्देशाङ्क कति हुन्छ?',
     en: 'What is the y-coordinate of any point lying on the x-axis?',
     options: [
-      { key: 'A', label: '० (Zero)' },
-      { key: 'B', label: '१' },
-      { key: 'C', label: '-१' },
-      { key: 'D', label: 'जुनसुकै' },
+      { key: 'A', label: '0 (Zero)' },
+      { key: 'B', label: '1' },
+      { key: 'C', label: '-1' },
+      { key: 'D', label: 'Any' },
     ],
     answer: 'A',
   },
   {
-    np: 'बिन्दु (४, -५) समतलको कुन चतुर्थांशमा पर्दछ?',
+    np: 'बिन्दु (4, -5) समतलको कुन चतुर्थांशमा पर्दछ?',
     en: 'In which quadrant does the point (4, -5) lie?',
     options: [
-      { key: 'A', label: 'पहिलो (I)' },
-      { key: 'B', label: 'दोस्रो (II)' },
-      { key: 'C', label: 'तेस्रो (III)' },
-      { key: 'D', label: 'चौथो (Quadrant IV)' },
+      { key: 'A', label: 'First (I)' },
+      { key: 'B', label: 'Second (II)' },
+      { key: 'C', label: 'Third (III)' },
+      { key: 'D', label: 'Fourth (Quadrant IV)' },
     ],
     answer: 'D',
   }
@@ -167,7 +167,7 @@ export const CartesianCoordinateExplorer: React.FC<{
               activeTab === 'explore' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('१. निर्देशांक अन्वेषक (Coordinate Explorer)', '1. Coordinate Explorer')}
+            {L('1. निर्देशांक अन्वेषक (Coordinate Explorer)', '1. Coordinate Explorer')}
           </button>
           <button
             onClick={() => setActiveTab('quadrants')}
@@ -175,7 +175,7 @@ export const CartesianCoordinateExplorer: React.FC<{
               activeTab === 'quadrants' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('२. चार चतुर्थांशहरू (Quadrants I - IV)', '2. Four Quadrants')}
+            {L('2. चार चतुर्थांशहरू (Quadrants I - IV)', '2. Four Quadrants')}
           </button>
           <button
             onClick={() => setActiveTab('hunt')}
@@ -183,7 +183,7 @@ export const CartesianCoordinateExplorer: React.FC<{
               activeTab === 'hunt' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('३. खजाना खोज खेल (Treasure Hunt)', '3. Treasure Hunt Game')}
+            {L('3. खजाना खोज खेल (Treasure Hunt)', '3. Treasure Hunt Game')}
           </button>
         </div>
 

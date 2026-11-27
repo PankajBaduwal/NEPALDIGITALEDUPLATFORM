@@ -1,7 +1,7 @@
 /**
  * QuadraticFactorizationLab.tsx
- * Grade 8 Mathematics – Unit 10: ALGEBRAIC EXPRESSION (बीजगणितीय व्यञ्जक)
- * Simulation 2: Quadratic Expression & Factorization Lab (वर्ग समीकरण र खण्डीकरण प्रयोगशाला)
+ * Grade 8 Mathematics – Unit 10: ALGEBRAIC EXPRESSION
+ * Simulation 2: Quadratic Expression & Factorization Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 10)
  */
 import React, { useState } from 'react';
@@ -12,13 +12,13 @@ import { Calculator, CheckCircle, RefreshCw, Award, ArrowRight, Grid } from 'luc
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'x² + 5x + 6 लाई खण्डीकरण गर्दा गुणनफल ६ र जोड ५ हुने दुई सङ्ख्याहरू कुन हुन्?',
+    np: 'x² + 5x + 6 लाई खण्डीकरण गर्दा गुणनफल 6 र जोड 5 हुने दुई सङ्ख्याहरू कुन हुन्?',
     en: 'When factorizing x² + 5x + 6, which two numbers have product 6 and sum 5?',
     options: [
-      { key: 'A', label: '२ र ३ [ २ × ३ = ६, २ + ३ = ५ ]' },
-      { key: 'B', label: '१ र ६' },
-      { key: 'C', label: '४ र १' },
-      { key: 'D', label: '-२ र -३' },
+      { key: 'A', label: '2 and 3 [ 2 × 3 = 6, 2 + 3 = 5 ]' },
+      { key: 'B', label: '1 and 6' },
+      { key: 'C', label: '4 and 1' },
+      { key: 'D', label: '-2 and -3' },
     ],
     answer: 'A',
   },
@@ -26,7 +26,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'x² + 5x - 6 को खण्डीकृत रूप के हुन्छ?',
     en: 'What is the factorized form of x² + 5x - 6?',
     options: [
-      { key: 'A', label: '(x + 6)(x - 1) [ ६ × (-१) = -६, ६ - १ = ५ ]' },
+      { key: 'A', label: '(x + 6)(x - 1) [ 6 × (-1) = -6, 6 - 1 = 5 ]' },
       { key: 'B', label: '(x + 2)(x + 3)' },
       { key: 'C', label: '(x - 6)(x + 1)' },
       { key: 'D', label: '(x - 2)(x - 3)' },
@@ -34,18 +34,18 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: '३x² + ११x + ६ मा गुणनफल ३ × ६ = १८ र जोड ११ हुने दुई सङ्ख्याहरू के हुन्?',
+    np: '3x² + 11x + 6 मा गुणनफल 3 × 6 = 18 र जोड 11 हुने दुई सङ्ख्याहरू के हुन्?',
     en: 'In 3x² + 11x + 6, what two numbers have product 18 and sum 11?',
     options: [
-      { key: 'A', label: '९ र २ [ ९ × २ = १८, ९ + २ = ११ ]' },
-      { key: 'B', label: '६ र ३' },
-      { key: 'C', label: '१८ र १' },
-      { key: 'D', label: '१० र १' },
+      { key: 'A', label: '9 and 2 [ 9 × 2 = 18, 9 + 2 = 11 ]' },
+      { key: 'B', label: '6 and 3' },
+      { key: 'C', label: '18 and 1' },
+      { key: 'D', label: '10 and 1' },
     ],
     answer: 'A',
   },
   {
-    np: '३x² + ११x + ६ को अन्तिम खण्डीकृत रूप के हो?',
+    np: '3x² + 11x + 6 को अन्तिम खण्डीकृत रूप के हो?',
     en: 'What is the final factorized form of 3x² + 11x + 6?',
     options: [
       { key: 'A', label: '(x + 3)(3x + 2)' },
@@ -59,7 +59,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'x² - 6x + 5 लाई खण्डीकरण गर्दा के आउँछ?',
     en: 'What is the factorized form of x² - 6x + 5?',
     options: [
-      { key: 'A', label: '(x - 1)(x - 5) [ (-१) × (-५) = ५, (-१) + (-५) = -६ ]' },
+      { key: 'A', label: '(x - 1)(x - 5) [ (-1) × (-5) = 5, (-1) + (-5) = -6 ]' },
       { key: 'B', label: '(x + 1)(x + 5)' },
       { key: 'C', label: '(x - 2)(x - 3)' },
       { key: 'D', label: '(x + 6)(x - 1)' },
@@ -71,54 +71,54 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
 const PRESET_QUADRATICS = [
   {
     id: 1,
-    nameNp: 'x² + 5x + 6 (CDC उदाहरण १: धनात्मक अचर)',
+    nameNp: 'x² + 5x + 6',
     nameEn: 'x² + 5x + 6 (Positive Constant)',
     a: 1, b: 5, c: 6,
     p: 2, q: 3,
     stepsNp: [
-      'गुणनफल = ६, जोड = ५ ⇒ सङ्ख्याहरू २ र ३',
-      'मध्यपद टुक्र्याउँदा: x² + 2x + 3x + 6',
-      'समूह बनाउँदा: x(x + 2) + 3(x + 2)',
-      'अन्तिम रूप: (x + 2)(x + 3)',
+      'Product = 6, sum = 5 ⇒ the numbers are 2 and 3',
+      'Splitting the middle term: x² + 2x + 3x + 6',
+      'Grouping: x(x + 2) + 3(x + 2)',
+      'Final form: (x + 2)(x + 3)',
     ],
   },
   {
     id: 2,
-    nameNp: 'x² + 5x - 6 (CDC उदाहरण २: ऋणात्मक अचर)',
+    nameNp: 'x² + 5x - 6',
     nameEn: 'x² + 5x - 6 (Negative Constant)',
     a: 1, b: 5, c: -6,
     p: 6, q: -1,
     stepsNp: [
-      'गुणनफल = -६, जोड = ५ ⇒ सङ्ख्याहरू ६ र -१',
-      'मध्यपद टुक्र्याउँदा: x² + 6x - x - 6',
-      'समूह बनाउँदा: x(x + 6) - 1(x + 6)',
-      'अन्तिम रूप: (x + 6)(x - 1)',
+      'गुणनफल = -6, जोड = 5 ⇒ सङ्ख्याहरू 6 र -1',
+      'Splitting the middle term: x² + 6x - x - 6',
+      'Grouping: x(x + 6) - 1(x + 6)',
+      'Final form: (x + 6)(x - 1)',
     ],
   },
   {
     id: 3,
-    nameNp: '3x² + 11x + 6 (CDC उदाहरण ३: x² को गुणाङ्क भएको)',
+    nameNp: '3x² + 11x + 6',
     nameEn: '3x² + 11x + 6 (Leading Coefficient > 1)',
     a: 3, b: 11, c: 6,
     p: 9, q: 2,
     stepsNp: [
-      'गुणनफल = ३ × ६ = १८, जोड = ११ ⇒ सङ्ख्याहरू ९ र २',
-      'मध्यपद टुक्र्याउँदा: 3x² + 9x + 2x + 6',
-      'समूह बनाउँदा: 3x(x + 3) + 2(x + 3)',
-      'अन्तिम रूप: (x + 3)(3x + 2)',
+      'गुणनफल = 3 × 6 = 18, जोड = 11 ⇒ सङ्ख्याहरू 9 र 2',
+      'Splitting the middle term: 3x² + 9x + 2x + 6',
+      'Grouping: 3x(x + 3) + 2(x + 3)',
+      'Final form: (x + 3)(3x + 2)',
     ],
   },
   {
     id: 4,
-    nameNp: 'x² - 6x + 5 (ऋणात्मक मध्यपद)',
+    nameNp: 'x² - 6x + 5',
     nameEn: 'x² - 6x + 5 (Negative Middle Term)',
     a: 1, b: -6, c: 5,
     p: -1, q: -5,
     stepsNp: [
-      'गुणनफल = ५, जोड = -६ ⇒ सङ्ख्याहरू -१ र -५',
-      'मध्यपद टुक्र्याउँदा: x² - x - 5x + 5',
-      'समूह बनाउँदा: x(x - 1) - 5(x - 1)',
-      'अन्तिम रूप: (x - 1)(x - 5)',
+      'गुणनफल = 5, जोड = -6 ⇒ सङ्ख्याहरू -1 र -5',
+      'Splitting the middle term: x² - x - 5x + 5',
+      'Grouping: x(x - 1) - 5(x - 1)',
+      'Final form: (x - 1)(x - 5)',
     ],
   },
 ];
@@ -212,7 +212,7 @@ export const QuadraticFactorizationLab: React.FC<{
             }`}
           >
             <Calculator className="w-4 h-4" />
-            {L('१. CDC पाठ्यपुस्तक केसहरू (CDC Cases)', '1. CDC Textbook Cases')}
+            {L('1. CDC पाठ्यपुस्तक केसहरू (CDC Cases)', '1. CDC Textbook Cases')}
           </button>
           <button
             onClick={() => setActiveTab('factor_pair_table')}
@@ -221,7 +221,7 @@ export const QuadraticFactorizationLab: React.FC<{
             }`}
           >
             <Grid className="w-4 h-4" />
-            {L('२. गुणनखण्ड जोडी तालिका (Factor Pairs Table)', '2. Factor Pair Table')}
+            {L('2. गुणनखण्ड जोडी तालिका (Factor Pairs Table)', '2. Factor Pair Table')}
           </button>
           <button
             onClick={() => setActiveTab('challenge')}
@@ -230,7 +230,7 @@ export const QuadraticFactorizationLab: React.FC<{
             }`}
           >
             <Award className="w-4 h-4" />
-            {L('३. मध्यपद खण्डीकरण चुनौती (Split Term Challenge)', '3. Split Term Challenge')}
+            {L('3. मध्यपद खण्डीकरण चुनौती (Split Term Challenge)', '3. Split Term Challenge')}
           </button>
         </div>
 
@@ -284,7 +284,7 @@ export const QuadraticFactorizationLab: React.FC<{
               {/* Expansion verification */}
               <div className="p-4 bg-slate-800/60 rounded-xl border border-slate-700 text-xs text-slate-400 space-y-1">
                 <div className="font-bold text-amber-300 font-sans">{L('उत्तरको सत्यता जाँच (Verification by Expansion):', 'Verification by Expansion:')}</div>
-                <div>(x + {toNp(selectedCase.p)})(... ) लाई गुणन गर्दा सुरुको व्यञ्जक प्राप्त हुन्छ।</div>
+                <div>(x + {toNp(selectedCase.p)})(... ) multiplied together gives the original expression.</div>
               </div>
             </div>
           </div>
@@ -333,8 +333,8 @@ export const QuadraticFactorizationLab: React.FC<{
                 <table className="w-full text-xs text-left font-mono">
                   <thead>
                     <tr className="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
-                      <th className="p-3">{L('गुणनखण्ड १ (f₁)', 'Factor 1')}</th>
-                      <th className="p-3">{L('गुणनखण्ड २ (f₂)', 'Factor 2')}</th>
+                      <th className="p-3">{L('गुणनखण्ड 1 (f₁)', 'Factor 1')}</th>
+                      <th className="p-3">{L('गुणनखण्ड 2 (f₂)', 'Factor 2')}</th>
                       <th className="p-3">{L('गुणनफल (f₁ × f₂)', 'Product')}</th>
                       <th className="p-3">{L('जोड (f₁ + f₂)', 'Sum')}</th>
                       <th className="p-3 text-right">{L('स्थिति (Match?)', 'Status')}</th>
@@ -355,7 +355,7 @@ export const QuadraticFactorizationLab: React.FC<{
                                 {L('सही जोडी (MATCH!)', 'MATCH!')}
                               </span>
                             ) : (
-                              <span className="text-slate-400">बेमेल</span>
+                              <span className="text-slate-400">No match</span>
                             )}
                           </td>
                         </tr>
@@ -377,7 +377,7 @@ export const QuadraticFactorizationLab: React.FC<{
                   {L('मध्यपद टुक्र्याउने दुई सङ्ख्या पत्ता लगाउनुहोस्', 'Find the Two Numbers to Split Middle Term')}
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
-                  व्यञ्जक: <b className="text-indigo-700 font-mono text-base">{selectedCase.nameNp.split(' ')[0]}</b>
+                  Expression: <b className="text-indigo-700 font-mono text-base">{selectedCase.nameNp.split(' ')[0]}</b>
                 </p>
               </div>
 

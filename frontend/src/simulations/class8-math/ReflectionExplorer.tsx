@@ -9,24 +9,24 @@ type ShapeType = 'point' | 'triangle' | 'rectangle';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'बिन्दु (३, ५) लाई X-अक्षमा परावर्तन गर्दा प्रतिबिम्बको निर्देशांक कति हुन्छ?',
+    np: 'बिन्दु (3, 5) लाई X-अक्षमा परावर्तन गर्दा प्रतिबिम्बको निर्देशांक कति हुन्छ?',
     en: 'What are the coordinates of the image when point (3, 5) is reflected in the x-axis?',
     options: [
-      { key: 'A', label: '(३, -५) / (3, -5)' },
-      { key: 'B', label: '(-३, ५)' },
-      { key: 'C', label: '(-३, -५)' },
-      { key: 'D', label: '(५, ३)' },
+      { key: 'A', label: '(3, -5) / (3, -5)' },
+      { key: 'B', label: '(-3, 5)' },
+      { key: 'C', label: '(-3, -5)' },
+      { key: 'D', label: '(5, 3)' },
     ],
     answer: 'A',
   },
   {
-    np: 'बिन्दु (-४, २) लाई Y-अक्षमा परावर्तन गर्दा प्रतिबिम्ब कुन हुन्छ?',
+    np: 'बिन्दु (-4, 2) लाई Y-अक्षमा परावर्तन गर्दा प्रतिबिम्ब कुन हुन्छ?',
     en: 'What is the image of point (-4, 2) when reflected in the y-axis?',
     options: [
-      { key: 'A', label: '(४, २) / (4, 2)' },
-      { key: 'B', label: '(-४, -२)' },
-      { key: 'C', label: '(४, -२)' },
-      { key: 'D', label: '(२, -४)' },
+      { key: 'A', label: '(4, 2) / (4, 2)' },
+      { key: 'B', label: '(-4, -2)' },
+      { key: 'C', label: '(4, -2)' },
+      { key: 'D', label: '(2, -4)' },
     ],
     answer: 'A',
   },
@@ -34,10 +34,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'परावर्तन (Reflection) मा वस्तु र प्रतिबिम्ब बीचको कुन दूरी ऐनाको अक्षसँग बराबर हुन्छ?',
     en: 'In reflection, what distance to the mirror line is equal for both object and image?',
     options: [
-      { key: 'A', label: 'लम्ब दूरी (Perpendicular distance)' },
-      { key: 'B', label: 'वक्र दूरी' },
-      { key: 'C', label: 'कुनै पनि होइन' },
-      { key: 'D', label: 'दोब्बर दूरी' },
+      { key: 'A', label: 'Perpendicular distance' },
+      { key: 'B', label: 'Curved distance' },
+      { key: 'C', label: 'None of these' },
+      { key: 'D', label: 'Double the distance' },
     ],
     answer: 'A',
   }
@@ -147,9 +147,9 @@ export const ReflectionExplorer: React.FC<{
 
             {/* Mirror Axis Indicator */}
             {axis === 'x_axis' ? (
-              <text x="360" y={cy - 8} fill="#f43f5e" fontSize="12" fontWeight="bold">ऐना (X-अक्ष)</text>
+              <text x="360" y={cy - 8} fill="#f43f5e" fontSize="12" fontWeight="bold">Mirror (X-axis)</text>
             ) : (
-              <text x={cx + 8} y="35" fill="#f43f5e" fontSize="12" fontWeight="bold">ऐना (Y-अक्ष)</text>
+              <text x={cx + 8} y="35" fill="#f43f5e" fontSize="12" fontWeight="bold">Mirror (Y-axis)</text>
             )}
 
             {/* Connecting Perpendicular Dotted Lines to Mirror Axis */}
@@ -190,19 +190,19 @@ export const ReflectionExplorer: React.FC<{
         {/* Transformation Coordinate Mapping Table */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div className="p-3 bg-slate-900 border border-slate-700 rounded-xl text-center">
-            <div className="text-xs text-slate-400">शीर्षबिन्दु A को प्रतिबिम्ब</div>
+            <div className="text-xs text-slate-400">Image of vertex A</div>
             <div className="font-mono font-bold text-sm text-slate-200 mt-1">
               A({triA.x}, {triA.y}) → <span className="text-amber-300">A'({refA.x}, {refA.y})</span>
             </div>
           </div>
           <div className="p-3 bg-slate-900 border border-slate-700 rounded-xl text-center">
-            <div className="text-xs text-slate-400">शीर्षबिन्दु B को प्रतिबिम्ब</div>
+            <div className="text-xs text-slate-400">Image of vertex B</div>
             <div className="font-mono font-bold text-sm text-slate-200 mt-1">
               B({triB.x}, {triB.y}) → <span className="text-amber-300">B'({refB.x}, {refB.y})</span>
             </div>
           </div>
           <div className="p-3 bg-slate-900 border border-slate-700 rounded-xl text-center">
-            <div className="text-xs text-slate-400">शीर्षबिन्दु C को प्रतिबिम्ब</div>
+            <div className="text-xs text-slate-400">Image of vertex C</div>
             <div className="font-mono font-bold text-sm text-slate-200 mt-1">
               C({triC.x}, {triC.y}) → <span className="text-amber-300">C'({refC.x}, {refC.y})</span>
             </div>

@@ -1,12 +1,12 @@
 /**
  * ShapeColoringSimulation.tsx
- * Simulation 03: Colour the Shapes (आकारहरूमा रङ भरौँ)
- * Class 1 Mathematics - Chapter 3: Geometrical Shapes (ज्यामितीय आकारहरू)
- * Based on Nepal CDC Curriculum (मेरो गणित, कक्षा १ - २०७६)
+ * Simulation 03: Colour the Shapes
+ * Class 1 Mathematics - Chapter 3: Geometrical Shapes
+ * Based on Nepal CDC Curriculum
  * Textbook Color Rules:
- *  - Triangle (त्रिभुज) = RED (रातो)
- *  - Quadrilateral (चतुर्भुज) = BLUE (निलो)
- *  - Circle (वृत्त) = GREEN (हरियो)
+ *  - Triangle = RED
+ *  - Quadrilateral = BLUE
+ *  - Circle = GREEN
  */
 
 import React, { useState, useEffect } from 'react';
@@ -57,7 +57,7 @@ export const ShapeColoringSimulation: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Language & Audio
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Selected coloring brush
@@ -137,11 +137,11 @@ export const ShapeColoringSimulation: React.FC<Props> = ({
       instructionEn: 'Color: Triangle = RED, Quadrilateral = BLUE, Circle = GREEN!',
       instructionNp: 'पाठ्यपुस्तक नियम: त्रिभुजमा रातो, चतुर्भुजमा निलो र वृत्तमा हरियो रङ भरौँ!',
       shapes: [
-        { id: 's1_tri1', nameEn: 'Equilateral Triangle', nameNp: 'त्रिभुज १', shapeType: 'triangle', d: 'M 140,80 L 220,220 L 60,220 Z', currentColor: null },
-        { id: 's1_circle1', nameEn: 'Circle', nameNp: 'वृत्त १', shapeType: 'circle', d: 'M 350,150 m -60,0 a 60,60 0 1,0 120,0 a 60,60 0 1,0 -120,0', currentColor: null },
-        { id: 's1_quad1', nameEn: 'Rectangle', nameNp: 'चतुर्भुज १', shapeType: 'quadrilateral', d: 'M 440,90 L 580,90 L 580,210 L 440,210 Z', currentColor: null },
-        { id: 's1_quad2', nameEn: 'Square', nameNp: 'चतुर्भुज २', shapeType: 'quadrilateral', d: 'M 90,290 L 210,290 L 210,410 L 90,410 Z', currentColor: null },
-        { id: 's1_tri2', nameEn: 'Right Triangle', nameNp: 'त्रिभुज २', shapeType: 'triangle', d: 'M 260,290 L 400,410 L 260,410 Z', currentColor: null },
+        { id: 's1_tri1', nameEn: 'Equilateral Triangle', nameNp: 'त्रिभुज 1', shapeType: 'triangle', d: 'M 140,80 L 220,220 L 60,220 Z', currentColor: null },
+        { id: 's1_circle1', nameEn: 'Circle', nameNp: 'वृत्त 1', shapeType: 'circle', d: 'M 350,150 m -60,0 a 60,60 0 1,0 120,0 a 60,60 0 1,0 -120,0', currentColor: null },
+        { id: 's1_quad1', nameEn: 'Rectangle', nameNp: 'चतुर्भुज 1', shapeType: 'quadrilateral', d: 'M 440,90 L 580,90 L 580,210 L 440,210 Z', currentColor: null },
+        { id: 's1_quad2', nameEn: 'Square', nameNp: 'चतुर्भुज 2', shapeType: 'quadrilateral', d: 'M 90,290 L 210,290 L 210,410 L 90,410 Z', currentColor: null },
+        { id: 's1_tri2', nameEn: 'Right Triangle', nameNp: 'त्रिभुज 2', shapeType: 'triangle', d: 'M 260,290 L 400,410 L 260,410 Z', currentColor: null },
         { id: 's1_circle2', nameEn: 'Small Circle', nameNp: 'सानो वृत्त', shapeType: 'circle', d: 'M 490,350 m -45,0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0', currentColor: null },
       ],
     },
@@ -174,7 +174,7 @@ export const ShapeColoringSimulation: React.FC<Props> = ({
     // Scene 3: School Bus
     {
       id: 'sc3_bus',
-      titleEn: 'School Bus (विद्यालय बस)',
+      titleEn: 'School Bus',
       titleNp: 'विद्यालय बस',
       instructionEn: 'Bus body/windows = BLUE, wheels = GREEN, front hood/flag = RED!',
       instructionNp: 'बसको शरीर/झ्याल (चतुर्भुज) = निलो, पाङ्ग्रा (वृत्त) = हरियो, झन्डा (त्रिभुज) = रातो!',
@@ -186,10 +186,10 @@ export const ShapeColoringSimulation: React.FC<Props> = ({
         // Front Hood (Triangle slope)
         { id: 'b_hood', nameEn: 'Front Hood Wedge', nameNp: 'अघिल्लो भाग (त्रिभुज)', shapeType: 'triangle', d: 'M 500,240 L 560,340 L 500,340 Z', currentColor: null },
         // Windows (Quadrilaterals)
-        { id: 'b_w1', nameEn: 'Window 1', nameNp: 'झ्याल १ (चतुर्भुज)', shapeType: 'quadrilateral', d: 'M 140,190 L 200,190 L 200,245 L 140,245 Z', currentColor: null },
-        { id: 'b_w2', nameEn: 'Window 2', nameNp: 'झ्याल २ (चतुर्भुज)', shapeType: 'quadrilateral', d: 'M 230,190 L 290,190 L 290,245 L 230,245 Z', currentColor: null },
-        { id: 'b_w3', nameEn: 'Window 3', nameNp: 'झ्याल ३ (चतुर्भुज)', shapeType: 'quadrilateral', d: 'M 320,190 L 380,190 L 380,245 L 320,245 Z', currentColor: null },
-        { id: 'b_w4', nameEn: 'Window 4', nameNp: 'झ्याल ४ (चतुर्भुज)', shapeType: 'quadrilateral', d: 'M 410,190 L 470,190 L 470,245 L 410,245 Z', currentColor: null },
+        { id: 'b_w1', nameEn: 'Window 1', nameNp: 'झ्याल 1', shapeType: 'quadrilateral', d: 'M 140,190 L 200,190 L 200,245 L 140,245 Z', currentColor: null },
+        { id: 'b_w2', nameEn: 'Window 2', nameNp: 'झ्याल 2', shapeType: 'quadrilateral', d: 'M 230,190 L 290,190 L 290,245 L 230,245 Z', currentColor: null },
+        { id: 'b_w3', nameEn: 'Window 3', nameNp: 'झ्याल 3', shapeType: 'quadrilateral', d: 'M 320,190 L 380,190 L 380,245 L 320,245 Z', currentColor: null },
+        { id: 'b_w4', nameEn: 'Window 4', nameNp: 'झ्याल 4', shapeType: 'quadrilateral', d: 'M 410,190 L 470,190 L 470,245 L 410,245 Z', currentColor: null },
         // Wheels (Circles)
         { id: 'b_wh1', nameEn: 'Front Wheel', nameNp: 'अघिल्लो पाङ्ग्रा (वृत्त)', shapeType: 'circle', d: 'M 440,360 m -40,0 a 40,40 0 1,0 80,0 a 40,40 0 1,0 -80,0', currentColor: null },
         { id: 'b_wh2', nameEn: 'Rear Wheel', nameNp: 'पछिल्लो पाङ्ग्रा (वृत्त)', shapeType: 'circle', d: 'M 200,360 m -40,0 a 40,40 0 1,0 80,0 a 40,40 0 1,0 -80,0', currentColor: null },
@@ -199,7 +199,7 @@ export const ShapeColoringSimulation: React.FC<Props> = ({
     // Scene 4: Friendly Robot
     {
       id: 'sc4_robot',
-      titleEn: 'Friendly Robot (रोबोट)',
+      titleEn: 'Friendly Robot',
       titleNp: 'रमाइलो रोबोट',
       instructionEn: 'Head/chest = BLUE, ears/feet = RED, round eyes/buttons = GREEN!',
       instructionNp: 'टाउको र छाती (चतुर्भुज) = निलो, कान र खुट्टा (त्रिभुज) = रातो, आँखा (वृत्त) = हरियो!',
@@ -411,7 +411,7 @@ export const ShapeColoringSimulation: React.FC<Props> = ({
               {language === 'np' ? 'आकारहरूमा रङ भरौँ' : 'Colour the Shapes'}
             </h1>
             <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
-              {language === 'np' ? 'कक्षा १ गणित • अध्याय ३: ज्यामितीय आकारहरू' : 'Class 1 Math • Chapter 3: Geometrical Shapes'}
+              {language === 'np' ? 'कक्षा 1 गणित • अध्याय 3: ज्यामितीय आकारहरू' : 'Class 1 Math • Chapter 3: Geometrical Shapes'}
             </span>
           </div>
         </div>
@@ -459,21 +459,7 @@ export const ShapeColoringSimulation: React.FC<Props> = ({
           </div>
 
           {/* Language Toggle */}
-          <button
-            onClick={() => setLanguage(language === 'np' ? 'en' : 'np')}
-            style={{
-              background: '#ede9fe',
-              color: '#6d28d9',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '13px',
-              cursor: 'pointer',
-            }}
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
 
           {/* Sound Toggle */}
           <button

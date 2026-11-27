@@ -209,14 +209,14 @@ export const FunctionLimitGraphLab: React.FC<SimProps> = ({ onBackToLibrary, onB
                 <div className="text-slate-600">x = {fmt(probeX.toFixed(3))}</div>
                 <div className="text-indigo-900 font-bold">
                   {currentEval.isUndefined
-                    ? 'f(x) = 0/0 (अपरिभाषित / Undefined at x=2)'
+                    ? 'f(x) = 0/0'
                     : `f(x) = ${fmt(currentEval.val!.toFixed(3))}`}
                 </div>
                 <div className="text-emerald-700 text-xs font-bold pt-1">
                   {funcChoice !== 'piecewise' ? (
-                    <span>lim (x → 2) f(x) = {fmt(targetLimit)} (सीमा अस्तित्वमा छ!)</span>
+                    <span>lim (x → 2) f(x) = {fmt(targetLimit)} (the limit exists!)</span>
                   ) : (
-                    <span className="text-rose-600">LHL ≠ RHL (सीमा अस्तित्वमा छैन)</span>
+                    <span className="text-rose-600">LHL ≠ RHL</span>
                   )}
                 </div>
               </div>
@@ -231,7 +231,7 @@ export const FunctionLimitGraphLab: React.FC<SimProps> = ({ onBackToLibrary, onB
               <span className="font-bold">{L('बायाँ सीमा (LHL) र दायाँ सीमा (RHL):', 'LHL and RHL Concepts:')}</span>
               <p className="mt-1">
                 {L(
-                  'बायाँ सीमा (Left-Hand Limit): x मान २ भन्दा साना मानहरूबाट २ तर्फ नजिकिँदा (x → 2⁻)। दायाँ सीमा (Right-Hand Limit): x मान २ भन्दा ठूला मानहरूबाट २ तर्फ नजिकिँदा (x → 2⁺)।',
+                  'बायाँ सीमा (Left-Hand Limit): x मान 2 भन्दा साना मानहरूबाट 2 तर्फ नजिकिँदा (x → 2⁻)। दायाँ सीमा (Right-Hand Limit): x मान 2 भन्दा ठूला मानहरूबाट 2 तर्फ नजिकिँदा (x → 2⁺)।',
                   'LHL: x approaches 2 from values strictly less than 2 (x → 2⁻). RHL: x approaches 2 from values strictly greater than 2 (x → 2⁺).'
                 )}
               </p>
@@ -241,7 +241,7 @@ export const FunctionLimitGraphLab: React.FC<SimProps> = ({ onBackToLibrary, onB
               {/* LHL Table */}
               <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl space-y-2">
                 <div className="font-bold text-blue-900 text-sm">
-                  बायाँ सीमा तालिका (x → 2⁻):
+                  Left-hand limit table (x → 2⁻):
                 </div>
                 <table className="w-full text-xs font-mono text-left">
                   <thead>
@@ -270,7 +270,7 @@ export const FunctionLimitGraphLab: React.FC<SimProps> = ({ onBackToLibrary, onB
               {/* RHL Table */}
               <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-2">
                 <div className="font-bold text-emerald-900 text-sm">
-                  दायाँ सीमा तालिका (x → 2⁺):
+                  Right-hand limit table (x → 2⁺):
                 </div>
                 <table className="w-full text-xs font-mono text-left">
                   <thead>
@@ -318,7 +318,7 @@ export const FunctionLimitGraphLab: React.FC<SimProps> = ({ onBackToLibrary, onB
               </div>
               <p className="text-xs text-slate-600 leading-relaxed">
                 {L(
-                  'f(x) = (x² - 4)/(x - 2) मा x = २ राख्दा f(२) अपरिभाषित (0/0) हुन्छ किनभने हर शून्य हुन्छ। तर २ को नजिकिँदा सीमा मान (Limit) भने ठ्याक्कै ४ हुन्छ! सीमाले बिन्दुमा के छ भन्दा पनि बिन्दुको नजिकिँदा के हुन्छ भनी देखाउँछ।',
+                  'f(x) = (x² - 4)/(x - 2) मा x = 2 राख्दा f(2) अपरिभाषित (0/0) हुन्छ किनभने हर शून्य हुन्छ। तर 2 को नजिकिँदा सीमा मान (Limit) भने ठ्याक्कै 4 हुन्छ! सीमाले बिन्दुमा के छ भन्दा पनि बिन्दुको नजिकिँदा के हुन्छ भनी देखाउँछ।',
                   'In f(x) = (x²-4)/(x-2), f(2) is undefined (0/0). However, the limiting value as x approaches 2 is 4! Limit describes the behavior near the point, not necessarily at the point itself.'
                 )}
               </p>

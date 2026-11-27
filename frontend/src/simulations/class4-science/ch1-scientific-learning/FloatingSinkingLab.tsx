@@ -1,7 +1,7 @@
 /**
  * FloatingSinkingLab.tsx
- * Simulation 1: Floating and Sinking 2D Laboratory (उत्रने र डुब्ने २डी प्रयोगशाला)
- * Grade 4 Science • Chapter 1: Scientific Learning (वैज्ञानिक सिकाइ)
+ * Simulation 1: Floating and Sinking 2D Laboratory
+ * Grade 4 Science • Chapter 1: Scientific Learning
  *
  * 100% Native HTML5 Canvas 2D Interactive Physics Simulation.
  * Features:
@@ -79,7 +79,7 @@ export const FloatingSinkingLab: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -1631,7 +1631,7 @@ export const FloatingSinkingLab: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="Floating and Sinking 2D Laboratory"
-      titleNe="उत्रने र डुब्ने २डी प्रयोगशाला"
+      titleNe="उत्रने र डुब्ने 2डी प्रयोगशाला"
       subject="Science"
       grade={4}
       chapter={1}
@@ -1716,12 +1716,12 @@ export const FloatingSinkingLab: React.FC<BaseSimulationProps> = ({
             >
               <Droplets size={13} />
               {liquidType === 'water'
-                ? (lang === 'ne' ? 'पानी: १.०० g/cm³' : 'Water: 1.00 g/cm³')
+                ? (lang === 'ne' ? 'पानी: 1.00 g/cm³' : 'Water: 1.00 g/cm³')
                 : liquidType === 'saltwater'
-                ? (lang === 'ne' ? 'नुन पानी: १.१५ g/cm³' : 'Saltwater: 1.15 g/cm³')
+                ? (lang === 'ne' ? 'नुन पानी: 1.15 g/cm³' : 'Saltwater: 1.15 g/cm³')
                 : liquidType === 'oil'
-                ? (lang === 'ne' ? 'तेल: ०.९१ g/cm³' : 'Oil: 0.91 g/cm³')
-                : (lang === 'ne' ? 'मह: १.४२ g/cm³' : 'Honey: 1.42 g/cm³')}
+                ? (lang === 'ne' ? 'तेल: 0.91 g/cm³' : 'Oil: 0.91 g/cm³')
+                : (lang === 'ne' ? 'मह: 1.42 g/cm³' : 'Honey: 1.42 g/cm³')}
             </span>
 
             <span
@@ -1928,7 +1928,7 @@ export const FloatingSinkingLab: React.FC<BaseSimulationProps> = ({
             </div>
             <div style={{ fontSize: '11px', color: '#475569', marginTop: '4px', lineHeight: 1.5 }}>
               {lang === 'ne'
-                ? 'पानीको घनत्व १.०० g/cm³ हुन्छ। तरलको घनत्व भन्दा कम घनत्व भएका वस्तु उत्रन्छन् र बढी भएका डुब्छन्।'
+                ? 'पानीको घनत्व 1.00 g/cm³ हुन्छ। तरलको घनत्व भन्दा कम घनत्व भएका वस्तु उत्रन्छन् र बढी भएका डुब्छन्।'
                 : 'Pure water has a density of 1.00 g/cm³. An object floats when its density is lower than the liquid and sinks when higher.'}
             </div>
           </div>
@@ -1955,7 +1955,7 @@ export const FloatingSinkingLab: React.FC<BaseSimulationProps> = ({
                   color: liquidType === 'water' ? '#0284c7' : '#334155',
                 }}
               >
-                💧 {lang === 'en' ? 'Pure Water (1.00)' : 'पानी (१.००)'}
+                💧 {lang === 'en' ? 'Pure Water (1.00)' : 'पानी (1.00)'}
               </button>
               <button
                 onClick={() => {
@@ -1973,7 +1973,7 @@ export const FloatingSinkingLab: React.FC<BaseSimulationProps> = ({
                   color: liquidType === 'saltwater' ? '#0369a1' : '#334155',
                 }}
               >
-                🧂 {lang === 'en' ? 'Saltwater (1.15)' : 'नुन पानी (१.१५)'}
+                🧂 {lang === 'en' ? 'Saltwater (1.15)' : 'नुन पानी (1.15)'}
               </button>
               <button
                 onClick={() => {
@@ -1991,7 +1991,7 @@ export const FloatingSinkingLab: React.FC<BaseSimulationProps> = ({
                   color: liquidType === 'oil' ? '#a16207' : '#334155',
                 }}
               >
-                🌻 {lang === 'en' ? 'Cooking Oil (0.91)' : 'तेल (०.९१)'}
+                🌻 {lang === 'en' ? 'Cooking Oil (0.91)' : 'तेल (0.91)'}
               </button>
               <button
                 onClick={() => {
@@ -2009,7 +2009,7 @@ export const FloatingSinkingLab: React.FC<BaseSimulationProps> = ({
                   color: liquidType === 'honey' ? '#c2410c' : '#334155',
                 }}
               >
-                🍯 {lang === 'en' ? 'Dense Honey (1.42)' : 'मह (१.४२)'}
+                🍯 {lang === 'en' ? 'Dense Honey (1.42)' : 'मह (1.42)'}
               </button>
             </div>
           </div>

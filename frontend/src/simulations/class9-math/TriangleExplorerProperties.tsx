@@ -37,10 +37,10 @@ const QUIZ_QUESTIONS = [
     np: 'त्रिभुजको कुनै एक बाहिरी कोण (Exterior angle) र यसका अनासन्न भित्री कोणहरू बीचको सम्बन्ध के हुन्छ?',
     en: 'What is the relation between an exterior angle of a triangle and its opposite interior angles?',
     options: [
-      { key: 'A', label: 'बाहिरी कोण अनासन्न भित्री कोणहरूको योगफल बराबर हुन्छ (Ext = Int₁ + Int₂)' },
-      { key: 'B', label: 'बाहिरी कोण भित्री कोण भन्दा सानो हुन्छ' },
-      { key: 'C', label: 'बाहिरी कोण र भित्री कोणको अन्तर बराबर हुन्छ' },
-      { key: 'D', label: 'कुनै सम्बन्ध हुँदैन' },
+      { key: 'A', label: 'The exterior angle equals the sum of the interior opposite angles (Ext = Int₁ + Int₂)' },
+      { key: 'B', label: 'The exterior angle is smaller than the interior angle' },
+      { key: 'C', label: 'The difference of the exterior and interior angles is equal' },
+      { key: 'D', label: 'There is no relation' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS = [
     np: 'त्रिभुजको असमानता नियम (Triangle Inequality) अनुसार कुनै दुई भुजाको योगफल तेस्रो भुजा भन्दा के हुनुपर्छ?',
     en: 'According to triangle inequality, the sum of any two sides of a triangle must be:',
     options: [
-      { key: 'A', label: 'तेस्रो भुजा भन्दा सधैं ठूलो (>)' },
-      { key: 'B', label: 'तेस्रो भुजा भन्दा सानो (<)' },
-      { key: 'C', label: 'तेस्रो भुजा बराबर (=)' },
-      { key: 'D', label: 'कुनै पनि' },
+      { key: 'A', label: 'Always greater than the third side (>)' },
+      { key: 'B', label: 'Less than the third side (<)' },
+      { key: 'C', label: 'Equal to the third side (=)' },
+      { key: 'D', label: 'Any' },
     ],
     answer: 'A',
   },
@@ -181,7 +181,7 @@ export const TriangleExplorerProperties: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! शीर्षबिन्दुहरूलाई तानेर विभिन्न त्रिभुजहरू (समबाहु, समद्विबाहु, समकोण आदि) बनाउनुहोस् र तीन भित्री कोणको योगफल १८०° तथा बाहिरी कोणको सम्बन्ध प्रत्यक्ष जाँच्नुहोस्!',
+        'नमस्ते! शीर्षबिन्दुहरूलाई तानेर विभिन्न त्रिभुजहरू (समबाहु, समद्विबाहु, समकोण आदि) बनाउनुहोस् र तीन भित्री कोणको योगफल 180° तथा बाहिरी कोणको सम्बन्ध प्रत्यक्ष जाँच्नुहोस्!',
         'Welcome! Drag the vertices to explore triangle classifications, side lengths, the 180° interior angle sum, and the exterior angle theorem!'
       )}
     >
@@ -508,13 +508,13 @@ export const TriangleExplorerProperties: React.FC<{
                     lineHeight: 1.5,
                   }}
                 >
-                  <div>बाहिरी ∠ACD = {fmt(exteriorAngleC.toFixed(0))}°</div>
+                  <div>Exterior ∠ACD = {fmt(exteriorAngleC.toFixed(0))}°</div>
                   <div>
-                    अनासन्न भित्री कोण (∠A + ∠B) = {fmt(angA.toFixed(0))}° + {fmt(angB.toFixed(0))}° ={' '}
+                    Sum of the interior opposite angles (∠A + ∠B) = {fmt(angA.toFixed(0))}° + {fmt(angB.toFixed(0))}° ={' '}
                     {fmt(remoteInteriorSum.toFixed(0))}°
                   </div>
                   <div style={{ color: '#047857', fontWeight: 700, marginTop: 2 }}>
-                    ✓ बाहिरी कोण = अनासन्न भित्री कोणहरूको योगफल!
+                    ✓ Exterior angle = sum of the interior opposite angles!
                   </div>
                 </div>
               )}

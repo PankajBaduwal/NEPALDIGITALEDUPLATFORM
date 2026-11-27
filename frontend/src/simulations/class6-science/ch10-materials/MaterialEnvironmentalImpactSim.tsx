@@ -1,13 +1,13 @@
 /**
  * MaterialEnvironmentalImpactSim.tsx
- * Simulation 39: 2D Material Environmental Impact & Degradation Timeline (सामग्री र वातावरणीय प्रभाव)
- * Grade 6 Science • Unit 10: Materials in Daily Life (दैनिक जीवनमा प्रयोग हुने वस्तुहरू)
+ * Simulation 39: 2D Material Environmental Impact & Degradation Timeline
+ * Grade 6 Science • Unit 10: Materials in Daily Life
  *
  * Full 2D Interactive Environmental Timeline Simulator:
  * 1. Decomposition Timeline Simulator:
  *    - Banana Peels (2-4 weeks) -> Rich Humus
  *    - Paper Notebook (2 months) -> Decomposed
- *    - Sal Leaf Tapari (सालको पातको दुना-टपरी, 3-6 weeks) -> 100% natural organic compost
+ *    - Sal Leaf Tapari -> 100% natural organic compost
  *    - Aluminium Can (100 years)
  *    - Single-use Plastic Bottle (450 years!) -> Toxic Microplastics
  * 2. Nepalese Sustainable Alternatives: Sal leaf tapari vs Styrofoam plate, Jute bag vs Polythene
@@ -37,17 +37,17 @@ const DEGRADATION_ITEMS: DegradationItem[] = [
     nameEn: 'Banana & Food Waste',
     nameNe: 'तरकारी र फलफूलको बोक्रा',
     timeEn: '2 to 4 weeks (Composts into rich soil)',
-    timeNe: '२ देखि ४ हप्ता (कुहिएर मल बन्छ)',
+    timeNe: '2 देखि 4 हप्ता (कुहिएर मल बन्छ)',
     maxYears: 0.08,
     isEco: true,
     color: '#ca8a04',
   },
   {
     id: 'sal_tapari',
-    nameEn: 'Sal Leaf Tapari (टपरी)',
+    nameEn: 'Sal Leaf Tapari',
     nameNe: 'सालको पातको दुना-टपरी',
     timeEn: '3 to 6 weeks (100% natural organic)',
-    timeNe: '३ देखि ६ हप्ता (प्राकृतिक जैविक)',
+    timeNe: '3 देखि 6 हप्ता (प्राकृतिक जैविक)',
     maxYears: 0.12,
     isEco: true,
     color: '#16a34a',
@@ -57,7 +57,7 @@ const DEGRADATION_ITEMS: DegradationItem[] = [
     nameEn: 'Paper & Cardboard',
     nameNe: 'कागज तथा कापीका पाना',
     timeEn: '1 to 2 months',
-    timeNe: '१ देखि २ महिना',
+    timeNe: '1 देखि 2 महिना',
     maxYears: 0.17,
     isEco: true,
     color: '#0f172a',
@@ -67,7 +67,7 @@ const DEGRADATION_ITEMS: DegradationItem[] = [
     nameEn: 'Aluminium Beverage Can',
     nameNe: 'आल्मुनियमको क्यान',
     timeEn: '80 to 100 years',
-    timeNe: '८० देखि १०० वर्ष',
+    timeNe: '80 देखि 100 वर्ष',
     maxYears: 90,
     isEco: false,
     color: '#64748b',
@@ -77,7 +77,7 @@ const DEGRADATION_ITEMS: DegradationItem[] = [
     nameEn: 'Plastic PET Water Bottle',
     nameNe: 'प्लास्टिकको पानी बोतल',
     timeEn: '450+ years! (Forms microplastics)',
-    timeNe: '४५०+ वर्ष! (माइक्रोप्लास्टिक बन्छ)',
+    timeNe: '450+ वर्ष!',
     maxYears: 450,
     isEco: false,
     color: '#38bdf8',
@@ -88,7 +88,7 @@ export const MaterialEnvironmentalImpactSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -194,7 +194,7 @@ export const MaterialEnvironmentalImpactSim: React.FC<BaseSimulationProps> = ({
       ctx.globalAlpha = objectAlpha;
 
       if (currentItem.id === 'sal_tapari') {
-        // Sal Leaf Tapari: Green plate stitched with bamboo pins (खिरोको सिन्का)
+        // Sal Leaf Tapari: Green plate stitched with bamboo pins
         ctx.fillStyle = degradationRatio > 0.6 ? '#78350f' : degradationRatio > 0.3 ? '#854d0e' : '#16a34a';
         ctx.beginPath();
         ctx.ellipse(0, 0, 70, 24, 0, 0, Math.PI * 2);
@@ -263,7 +263,7 @@ export const MaterialEnvironmentalImpactSim: React.FC<BaseSimulationProps> = ({
 
         ctx.fillStyle = '#34d399';
         ctx.font = 'bold 12px sans-serif';
-        ctx.fillText(lang === 'en' ? '🌱 Organic Compost (जैविक मल)' : '🌱 पूर्ण जैविक मल बन्यो', pitX - 75, pitY + 50);
+        ctx.fillText(lang === 'en' ? '🌱 Organic Compost' : '🌱 पूर्ण जैविक मल बन्यो', pitX - 75, pitY + 50);
       }
 
       // If plastic degrading after 100+ years, show microplastics spreading!
@@ -485,19 +485,19 @@ export const MaterialEnvironmentalImpactSim: React.FC<BaseSimulationProps> = ({
             </h4>
             <p style={{ margin: 0, fontSize: '11px', color: '#475569', lineHeight: '1.5' }}>
               {lang === 'en'
-                ? 'Nepal has centuries of eco-friendly traditions! Sal leaf Duna-Tapari (दुना-टपरी) completely biodegrades into natural fertilizer in just 4 weeks, unlike single-use Styrofoam plates which pollute the earth for 500+ years.'
-                : 'नेपालमा परापूर्वकालदेखि वातावरणमैत्री परम्परा छ! सालको पातबाट बनेका दुना-टपरी ४ हप्तामै कुहिएर प्राङ्गारिक मल बन्छन्, तर प्लास्टिक तथा थर्मोकोलका प्लेटहरू ५०० वर्षसम्म पनि सड्दैनन्।'}
+                ? 'Nepal has centuries of eco-friendly traditions! Sal leaf Duna-Tapari completely biodegrades into natural fertilizer in just 4 weeks, unlike single-use Styrofoam plates which pollute the earth for 500+ years.'
+                : 'नेपालमा परापूर्वकालदेखि वातावरणमैत्री परम्परा छ! सालको पातबाट बनेका दुना-टपरी 4 हप्तामै कुहिएर प्राङ्गारिक मल बन्छन्, तर प्लास्टिक तथा थर्मोकोलका प्लेटहरू 500 वर्षसम्म पनि सड्दैनन्।'}
             </p>
           </div>
 
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: Waste Persistence' : '१. खोज: फोहोरको आयु')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Decomposition Rate' : '२. अन्वेषण: कुहिने गति')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Microplastics Threat' : '३. अवलोकन: माइक्रोप्लास्टिक खतरा')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: 3R & Alternatives' : '४. बुझाइ: 3R र विकल्पहरू')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Ecology Quiz' : '५. चुनौती: वातावरण प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: Waste Persistence' : '1. खोज: फोहोरको आयु')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Decomposition Rate' : '2. अन्वेषण: कुहिने गति')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Microplastics Threat' : '3. अवलोकन: माइक्रोप्लास्टिक खतरा')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: 3R & Alternatives' : '4. बुझाइ: 3R र विकल्पहरू')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Ecology Quiz' : '5. चुनौती: वातावरण प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
@@ -507,7 +507,7 @@ export const MaterialEnvironmentalImpactSim: React.FC<BaseSimulationProps> = ({
                   : 'जैविक रूपमा सड्ने वस्तुहरू वनस्पति र जीवबाट बन्दछन् र सूक्ष्म जीवाणुहरूले तिनलाई सजिलै कुहाएर मल बनाउँछन्।')}
                 {stage === 'explore' && (lang === 'en'
                   ? 'Compare the timeline of a banana peel (4 weeks) versus a plastic bottle (450 years). Notice the astronomical difference!'
-                  : 'केराको बोक्रा (४ हप्ता) र प्लास्टिकको बोतल (४५० वर्ष) बीचको समय दाँज्नुहोस्। कति विशाल अन्तर छ!')}
+                  : 'केराको बोक्रा (4 हप्ता) र प्लास्टिकको बोतल (450 वर्ष) बीचको समय दाँज्नुहोस्। कति विशाल अन्तर छ!')}
                 {stage === 'observe' && (lang === 'en'
                   ? 'Plastics do not truly disappear; sunlight breaks them down into microscopic toxic beads called microplastics.'
                   : 'प्लास्टिक कहिल्यै पुरै नष्ट हुँदैन; घाम र हावाले यसलाई मसिना विषालु कण "माइक्रोप्लास्टिक" मा टुक्राउँछ।')}
@@ -523,9 +523,9 @@ export const MaterialEnvironmentalImpactSim: React.FC<BaseSimulationProps> = ({
                     : 'माटोमा फालिएको एउटा प्लास्टिकको पानी बोतल कुहिन लगभग कति वर्ष लाग्छ?'}
                 </p>
                 {[
-                  { id: 1, en: '450+ Years (४५०+ वर्ष)', ne: '४५०+ वर्ष' },
-                  { id: 2, en: '2 Years (२ वर्ष)', ne: '२ वर्ष' },
-                  { id: 3, en: '6 Months (६ महिना)', ne: '६ महिना' },
+                  { id: 1, en: '450+ Years', ne: '450+ वर्ष' },
+                  { id: 2, en: '2 Years', ne: '2 वर्ष' },
+                  { id: 3, en: '6 Months', ne: '6 महिना' },
                 ].map(opt => (
                   <button
                     key={opt.id}

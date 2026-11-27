@@ -25,7 +25,7 @@ const PATTERNS: TessPatternItem[] = [
     nameNp: 'नियमित षट्भुज (Hexagon 6.6.6)',
     nameEn: 'Hexagonal Regular (6.6.6)',
     notation: '6.6.6',
-    polygonsNp: '३ वटा नियमित षट्भुजहरू',
+    polygonsNp: '3 pcs नियमित षट्भुजहरू',
     polygonsEn: '3 Regular Hexagons',
     anglesFormula: '120° + 120° + 120° = 360°',
     svgType: 'hexagons'
@@ -36,7 +36,7 @@ const PATTERNS: TessPatternItem[] = [
     nameNp: 'वर्ग ग्रिड (Square 4.4.4.4)',
     nameEn: 'Square Grid (4.4.4.4)',
     notation: '4.4.4.4',
-    polygonsNp: '४ वटा वर्गहरू',
+    polygonsNp: '4 pcs वर्गहरू',
     polygonsEn: '4 Squares',
     anglesFormula: '90° + 90° + 90° + 90° = 360°',
     svgType: 'squares'
@@ -47,7 +47,7 @@ const PATTERNS: TessPatternItem[] = [
     nameNp: 'समबाहु त्रिभुज (Triangle 3.3.3.3.3.3)',
     nameEn: 'Triangular Regular (3.3.3.3.3.3)',
     notation: '3.3.3.3.3.3',
-    polygonsNp: '६ वटा समबाहु त्रिभुजहरू',
+    polygonsNp: '6 pcs समबाहु त्रिभुजहरू',
     polygonsEn: '6 Equilateral Triangles',
     anglesFormula: '60° × 6 = 360°',
     svgType: 'triangles'
@@ -58,7 +58,7 @@ const PATTERNS: TessPatternItem[] = [
     nameNp: 'अष्टभुज र वर्ग (Octagon & Square 8.8.4)',
     nameEn: 'Truncated Square (8.8.4)',
     notation: '8.8.4',
-    polygonsNp: '२ वटा अष्टभुज र १ वटा वर्ग',
+    polygonsNp: '2 pcs अष्टभुज र 1 pcs वर्ग',
     polygonsEn: '2 Regular Octagons and 1 Square',
     anglesFormula: '135° + 135° + 90° = 360°',
     svgType: 'octagons_square'
@@ -69,7 +69,7 @@ const PATTERNS: TessPatternItem[] = [
     nameNp: 'त्रिभुज र षट्भुज (Triangle & Hexagon 3.6.3.6)',
     nameEn: 'Tri-Hexagonal (3.6.3.6)',
     notation: '3.6.3.6',
-    polygonsNp: '२ वटा त्रिभुज र २ वटा षट्भुज',
+    polygonsNp: '2 pcs त्रिभुज र 2 pcs षट्भुज',
     polygonsEn: '2 Triangles and 2 Hexagons',
     anglesFormula: '60° + 120° + 60° + 120° = 360°',
     svgType: 'triangles_hexagons'
@@ -81,10 +81,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'नियमित टेसेलेसन (Regular Tessellation) मा कति प्रकारका नियमित बहुभुज प्रयोग हुन्छन्?',
     en: 'How many types of regular polygons are used in a regular tessellation?',
     options: [
-      { key: 'A', label: 'ठीक १ प्रकारको मात्र (Only 1 type)' },
-      { key: 'B', label: '२ प्रकारका' },
-      { key: 'C', label: '३ प्रकारका' },
-      { key: 'D', label: 'जति पनि' },
+      { key: 'A', label: 'Exactly 1 type only' },
+      { key: 'B', label: '2 types' },
+      { key: 'C', label: '3 types' },
+      { key: 'D', label: 'Any number' },
     ],
     answer: 'A',
   },
@@ -92,21 +92,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'अष्टभुज र वर्ग मिलेर बन्ने अर्ध-नियमित टेसेलेसनको सङ्केत कुन हो?',
     en: 'What is the vertex notation of the semi-regular tessellation of octagons and squares?',
     options: [
-      { key: 'A', label: '८.८.४ (8.8.4)' },
-      { key: 'B', label: '४.४.४' },
-      { key: 'C', label: '६.६.६' },
-      { key: 'D', label: '३.३.४.४' },
+      { key: 'A', label: '8.8.4 (8.8.4)' },
+      { key: 'B', label: '4.4.4' },
+      { key: 'C', label: '6.6.6' },
+      { key: 'D', label: '3.3.4.4' },
     ],
     answer: 'A',
   },
   {
-    np: 'संसारमा जम्मा कतिवटा मात्र नियमित टेसेलेसनहरू सम्भव छन्?',
+    np: 'संसारमा जम्मा कतिpcs मात्र नियमित टेसेलेसनहरू सम्भव छन्?',
     en: 'How many regular tessellations are mathematically possible?',
     options: [
-      { key: 'A', label: '३ वटा मात्र (3.3.3.3.3.3, 4.4.4.4, 6.6.6)' },
-      { key: 'B', label: '५ वटा' },
-      { key: 'C', label: '८ वटा' },
-      { key: 'D', label: 'असंख्य' },
+      { key: 'A', label: 'Only 3 (3.3.3.3.3.3, 4.4.4.4, 6.6.6)' },
+      { key: 'B', label: '5 pcs' },
+      { key: 'C', label: '8 pcs' },
+      { key: 'D', label: 'Countless' },
     ],
     answer: 'A',
   }
@@ -322,7 +322,7 @@ export const RegularSemiRegularTessellationLab: React.FC<{
           </div>
           <div>
             {L(
-              'शीर्षबिन्दु वरिपरि घडीको दिशामा घुम्दा भेटिने बहुभुजहरूका भुजाहरूको संख्यालाई थोप्लो (.) ले छुट्याएर लेखिन्छ। जस्तै "८.८.४" ले दुई अष्टभुज (८) र एक वर्ग (४) लाई जनाउँछ।',
+              'शीर्षबिन्दु वरिपरि घडीको दिशामा घुम्दा भेटिने बहुभुजहरूका भुजाहरूको संख्यालाई थोप्लो (.) ले छुट्याएर लेखिन्छ। जस्तै "8.8.4" ले दुई अष्टभुज (8) र एक वर्ग (4) लाई जनाउँछ।',
               'The notation lists the number of sides of each polygon around the vertex in cyclic order. For example, "8.8.4" means two octagons (8) and one square (4).'
             )}
           </div>

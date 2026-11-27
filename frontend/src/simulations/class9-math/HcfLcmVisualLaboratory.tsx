@@ -26,7 +26,7 @@ interface HcfLcmProblem {
 const PROBLEMS: HcfLcmProblem[] = [
   {
     id: 'p1',
-    nameNp: '२ अभिव्यक्तिको म.स. र ल.स. (वर्गको अन्तर र साझा)',
+    nameNp: '2 अभिव्यक्तिको म.स. र ल.स.',
     nameEn: 'HCF & LCM of 2 Expressions (Squares & Common)',
     numExpressions: 2,
     expressions: [
@@ -51,13 +51,13 @@ const PROBLEMS: HcfLcmProblem[] = [
     hcf: '(x - 2)',
     lcm: '(x - 2)(x + 2)(x - 3)',
     explanationNp:
-      'म.स. = साझा गुणनखण्ड = (x - २)\nल.स. = साझा गुणनखण्ड × बाँकी गुणनखण्डहरू = (x - २)(x + २)(x - ३)',
+      'म.स. = Common गुणनखण्ड = (x - 2)\nल.स. = Common गुणनखण्ड × बाँकी गुणनखण्डहरू = (x - 2)(x + 2)(x - 3)',
     explanationEn:
       'HCF = Common factors = (x - 2)\nLCM = Common factor × Remaining factors = (x - 2)(x + 2)(x - 3)',
   },
   {
     id: 'p2',
-    nameNp: '२ अभिव्यक्तिको म.स. र ल.स. (घन र वर्गको अन्तर)',
+    nameNp: '2 अभिव्यक्तिको म.स. र ल.स.',
     nameEn: 'HCF & LCM of 2 Expressions (Cubes & Squares)',
     numExpressions: 2,
     expressions: [
@@ -82,13 +82,13 @@ const PROBLEMS: HcfLcmProblem[] = [
     hcf: '(x - 2)',
     lcm: '(x - 2)(x + 2)(x² + 2x + 4)',
     explanationNp:
-      'म.स. = साझा गुणनखण्ड = (x - २)\nल.स. = (x - २)(x + २)(x² + २x + ४)',
+      'म.स. = Common गुणनखण्ड = (x - 2)\nल.स. = (x - 2)(x + 2)(x² + 2x + 4)',
     explanationEn:
       'HCF = Common factor = (x - 2)\nLCM = (x - 2)(x + 2)(x² + 2x + 4)',
   },
   {
     id: 'p3',
-    nameNp: '३ अभिव्यक्तिको म.स. र ल.स.',
+    nameNp: '3 अभिव्यक्तिको म.स. र ल.स.',
     nameEn: 'HCF & LCM of 3 Expressions',
     numExpressions: 3,
     expressions: [
@@ -120,7 +120,7 @@ const PROBLEMS: HcfLcmProblem[] = [
     hcf: '(x + 3)',
     lcm: '(x + 3)(x - 3)(x + 3)(x² - 3x + 9)',
     explanationNp:
-      'तीनवटैमा साझा गुणनखण्ड = (x + ३) → म.स. = (x + ३)\nल.स. = साझा × बाँकी = (x + ३)(x - ३)(x + ३)(x² - ३x + ९)',
+      'तीनवटैमा Common गुणनखण्ड = (x + 3) → म.स. = (x + 3)\nल.स. = Common × बाँकी = (x + 3)(x - 3)(x + 3)(x² - 3x + 9)',
     explanationEn:
       'Common to all 3 = (x + 3) → HCF = (x + 3)\nLCM = Common all × Remaining = (x + 3)(x - 3)(x + 3)(x² - 3x + 9)',
   },
@@ -152,7 +152,7 @@ const PROBLEMS: HcfLcmProblem[] = [
     hcf: '3(x - 2)',
     lcm: '18(x - 2)(x + 2)',
     explanationNp:
-      'गुणाङ्क ६ र ९ को म.स. = ३, बीजीय साझा = (x - २) → म.स. = ३(x - २)\nल.स. = १८(x - २)(x + २)',
+      'गुणाङ्क 6 र 9 को म.स. = 3, बीजीय Common = (x - 2) → म.स. = 3(x - 2)\nल.स. = 18(x - 2)(x + 2)',
     explanationEn:
       'HCF of 6 & 9 = 3, Common binomial = (x - 2) → HCF = 3(x - 2)\nLCM = 18(x - 2)(x + 2)',
   },
@@ -163,15 +163,15 @@ const QUIZ_QUESTIONS = [
     np: 'म.स. (HCF) र ल.स. (LCM) को सही परिभाषा कुन हो?',
     en: 'What is the correct mathematical definition of HCF and LCM?',
     options: [
-      { key: 'A', label: 'म.स. = साझा गुणनखण्डहरूको गुणनफल; ल.स. = साझा × बाँकी गुणनखण्डहरू' },
-      { key: 'B', label: 'म.स. = सबै गुणनखण्डहरूको जोड' },
-      { key: 'C', label: 'ल.स. = साझा गुणनखण्ड मात्र' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'HCF = product of common factors; LCM = common × remaining factors' },
+      { key: 'B', label: 'HCF = sum of all factors' },
+      { key: 'C', label: 'LCM = common factors only' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
   {
-    np: 'x² - ४ र x - २ को म.स. (HCF) कति हुन्छ?',
+    np: 'x² - 4 र x - 2 को म.स. (HCF) कति हुन्छ?',
     en: 'What is the HCF of x² - 4 and x - 2?',
     options: [
       { key: 'A', label: 'x - 2' },
@@ -185,10 +185,10 @@ const QUIZ_QUESTIONS = [
     np: 'दुई बीजीय अभिव्यक्तिको गुणनफल (A × B) र तिनीहरूको HCF तथा LCM बीचको सम्बन्ध के हो?',
     en: 'What is the relationship between product of two expressions (A × B) and their HCF & LCM?',
     options: [
-      { key: 'A', label: 'पहिलो अभिव्यक्ति × दोस्रो अभिव्यक्ति = म.स. × ल.स.' },
-      { key: 'B', label: 'पहिलो + दोस्रो = म.स. + ल.स.' },
-      { key: 'C', label: 'म.स. = ल.स.' },
-      { key: 'D', label: 'कुनै सम्बन्ध छैन' },
+      { key: 'A', label: 'First expression × second expression = HCF × LCM' },
+      { key: 'B', label: 'First + second = HCF + LCM' },
+      { key: 'C', label: 'HCF = LCM' },
+      { key: 'D', label: 'No relation' },
     ],
     answer: 'A',
   },
@@ -220,7 +220,7 @@ export const HcfLcmVisualLaboratory: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'स्वागत छ! यहाँ दुई वा तीन बीजीय अभिव्यक्तिहरूको खण्डीकरण गरी साझा (Common) र बाँकी (Remaining) गुणनखण्डहरू छुट्याएर म.स. र ल.स. पत्ता लगाउनुहोस्!',
+        'स्वागत छ! यहाँ दुई वा तीन बीजीय अभिव्यक्तिहरूको खण्डीकरण गरी Common (Common) र बाँकी (Remaining) गुणनखण्डहरू छुट्याएर म.स. र ल.स. पत्ता लगाउनुहोस्!',
         'Welcome! Factorize 2 or 3 algebraic expressions, isolate common and remaining factors, and derive HCF and LCM visually!'
       )}
     >
@@ -293,7 +293,7 @@ export const HcfLcmVisualLaboratory: React.FC<{
               cursor: 'pointer',
             }}
           >
-            {L('साझा गुणनखण्ड मात्र (HCF Focus)', 'Common Factors (HCF)')}
+            {L('Common गुणनखण्ड मात्र (HCF Focus)', 'Common Factors (HCF)')}
           </button>
           <button
             onClick={() => setHighlightMode('remaining')}
@@ -397,7 +397,7 @@ export const HcfLcmVisualLaboratory: React.FC<{
                             verticalAlign: 'middle',
                           }}
                         >
-                          साझा
+                          Common
                         </span>
                       )}
                     </div>
@@ -450,7 +450,7 @@ export const HcfLcmVisualLaboratory: React.FC<{
               </strong>
             </div>
             <div style={{ fontSize: 12, color: '#166534' }}>
-              {L('सबै अभिव्यक्तिहरूमा उपस्थित साझा गुणनखण्डहरूको गुणनफल:', 'Product of common factors occurring in all expressions:')}
+              {L('सबै अभिव्यक्तिहरूमा उपस्थित Common गुणनखण्डहरूको गुणनफल:', 'Product of common factors occurring in all expressions:')}
             </div>
             <div
               style={{
@@ -502,7 +502,7 @@ export const HcfLcmVisualLaboratory: React.FC<{
               </strong>
             </div>
             <div style={{ fontSize: 12, color: '#1E40AF' }}>
-              {L('साझा गुणनखण्ड × बाँकी सबै गुणनखण्डहरू:', 'Common factors × All remaining uncommon factors:')}
+              {L('Common गुणनखण्ड × बाँकी सबै गुणनखण्डहरू:', 'Common factors × All remaining uncommon factors:')}
             </div>
             <div
               style={{

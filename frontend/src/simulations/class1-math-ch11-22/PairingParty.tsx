@@ -1,6 +1,6 @@
 /**
- * Chapter 12 · Odd and Even numbers (जोर र बिजोर सङ्ख्या)
- * Sim 1: Pairing Party (जोडी बनाऔँ) — Pure 2D Edition
+ * Chapter 12 · Odd and Even numbers
+ * Sim 1: Pairing Party — Pure 2D Edition
  * 100% 2D SVG / CSS Animations – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -61,7 +61,7 @@ export const PairingParty: React.FC<Props> = ({ onBackToLibrary }) => {
   const quizQuestions: QuizQuestion[] = useMemo(
     () => [
       {
-        np: 'सङ्ख्या ८ जोर हो कि बिजोर? (८ मा जोडी बन्छ कि बन्दैन?)',
+        np: 'सङ्ख्या 8 जोर हो कि बिजोर?',
         en: 'Is number 8 Even or Odd?',
         options: [
           { key: 'even', label: isNe ? 'जोर (Even)' : 'Even' },
@@ -70,7 +70,7 @@ export const PairingParty: React.FC<Props> = ({ onBackToLibrary }) => {
         answer: 'even',
       },
       {
-        np: 'सङ्ख्या ९ जोर हो कि बिजोर?',
+        np: 'सङ्ख्या 9 जोर हो कि बिजोर?',
         en: 'Is number 9 Even or Odd?',
         options: [
           { key: 'odd', label: isNe ? 'बिजोर (Odd)' : 'Odd' },
@@ -79,7 +79,7 @@ export const PairingParty: React.FC<Props> = ({ onBackToLibrary }) => {
         answer: 'odd',
       },
       {
-        np: 'सङ्ख्या १२ जोर हो कि बिजोर?',
+        np: 'सङ्ख्या 12 जोर हो कि बिजोर?',
         en: 'Is number 12 Even or Odd?',
         options: [
           { key: 'even', label: isNe ? 'जोर (Even)' : 'Even' },
@@ -88,7 +88,7 @@ export const PairingParty: React.FC<Props> = ({ onBackToLibrary }) => {
         answer: 'even',
       },
       {
-        np: 'सङ्ख्या १५ जोर हो कि बिजोर?',
+        np: 'सङ्ख्या 15 जोर हो कि बिजोर?',
         en: 'Is number 15 Even or Odd?',
         options: [
           { key: 'odd', label: isNe ? 'बिजोर (Odd)' : 'Odd' },

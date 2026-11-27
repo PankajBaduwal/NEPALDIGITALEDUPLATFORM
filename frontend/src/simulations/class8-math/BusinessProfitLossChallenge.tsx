@@ -1,7 +1,7 @@
 /**
  * BusinessProfitLossChallenge.tsx
- * Grade 8 Mathematics – Unit 5: PROFIT AND LOSS (नाफा र नोक्सान)
- * Simulation 3: Business Profit and Loss Challenge (व्यापारिक नाफा-नोक्सान चुनौती)
+ * Grade 8 Mathematics – Unit 5: PROFIT AND LOSS
+ * Simulation 3: Business Profit and Loss Challenge
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 5)
  */
 import React, { useState } from 'react';
@@ -12,35 +12,35 @@ import { Briefcase, TrendingUp, TrendingDown, DollarSign, Award, ArrowRight, Sto
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एउटा वस्तुको क्रय मूल्य (CP) रु. २,००० छ। पसलेले २५% बढाएर अङ्कित मूल्य राख्यो र १०% छुट दियो भने बिक्री मूल्य (SP) कति हुन्छ?',
+    np: 'एउटा वस्तुको क्रय मूल्य (CP) Rs. 2,000 छ। पसलेले 25% बढाएर अङ्कित मूल्य राख्यो र 10% छुट दियो भने बिक्री मूल्य (SP) कति हुन्छ?',
     en: 'An article costs Rs. 2,000. The seller marks it up by 25% and gives a 10% discount. What is the selling price (SP)?',
     options: [
-      { key: 'A', label: 'रु. २,२५० [ MP = २५००, छुट = २५० ⇒ SP = २२५० ]' },
-      { key: 'B', label: 'रु. २,२००' },
-      { key: 'C', label: 'रु. २,३००' },
-      { key: 'D', label: 'रु. २,१५०' },
+      { key: 'A', label: 'Rs. 2,250 [ MP = 2500, Discount = 250 ⇒ SP = 2250 ]' },
+      { key: 'B', label: 'Rs. 2,200' },
+      { key: 'C', label: 'Rs. 2,300' },
+      { key: 'D', label: 'Rs. 2,150' },
     ],
     answer: 'A',
   },
   {
-    np: 'माथिको प्रश्नमा पसलेलाई कति प्रतिशत नाफा भयो?',
+    np: 'माथिको प्रश्नमा पसलेलाई कति प्रतिशत Profit भयो?',
     en: 'In the above question, what is the profit percentage earned by the seller?',
     options: [
-      { key: 'A', label: '१२.५% [ नाफा २५० ÷ २००० × १००% = १२.५% ]' },
-      { key: 'B', label: '१५%' },
-      { key: 'C', label: '१०%' },
-      { key: 'D', label: '१४.५%' },
+      { key: 'A', label: '12.5% [ Profit 250 ÷ 2000 × 100% = 12.5% ]' },
+      { key: 'B', label: '15%' },
+      { key: 'C', label: '10%' },
+      { key: 'D', label: '14.5%' },
     ],
     answer: 'A',
   },
   {
-    np: 'पसल ‘क’ ले ३०% बढाएर २०% छुट दिन्छ, पसल ‘ख’ ले २०% बढाएर १०% छुट दिन्छ। ग्राहकका लागि कुन पसल सस्तो?',
+    np: 'पसल ‘क’ ले 30% बढाएर 20% छुट दिन्छ, Shop B ले 20% बढाएर 10% छुट दिन्छ। ग्राहकका लागि कुन पसल सस्तो?',
     en: 'Shop A marks up 30% and gives 20% discount. Shop B marks up 20% and gives 10% discount. Which shop is cheaper for the buyer?',
     options: [
-      { key: 'A', label: 'पसल ‘क’ [ SP = १०४% of CP vs पसल ‘ख’ SP = १०८% of CP ]' },
-      { key: 'B', label: 'पसल ‘ख’' },
-      { key: 'C', label: 'दुवै बराबर' },
-      { key: 'D', label: 'भन्न सकिँदैन' },
+      { key: 'A', label: 'Shop A [ SP = 104% of CP vs Shop B SP = 108% of CP ]' },
+      { key: 'B', label: 'Shop B' },
+      { key: 'C', label: 'Both equal' },
+      { key: 'D', label: 'Cannot be said' },
     ],
     answer: 'A',
   },
@@ -50,19 +50,19 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     options: [
       { key: 'A', label: 'MP = CP + (CP × Markup % ÷ 100)' },
       { key: 'B', label: 'MP = SP + CP' },
-      { key: 'C', label: 'MP = CP - छुट' },
-      { key: 'D', label: 'MP = SP × १००' },
+      { key: 'C', label: 'MP = CP - discount' },
+      { key: 'D', label: 'MP = SP × 100' },
     ],
     answer: 'A',
   },
   {
-    np: '१०% नाफा गर्न २०% छुट दिँदा क्रय मूल्य रु. ४,००० भएको सामानको अङ्कित मूल्य कति हुनुपर्छ?',
+    np: '10% Profit गर्न 20% छुट दिँदा क्रय मूल्य Rs. 4,000 भएको सामानको अङ्कित मूल्य कति हुनुपर्छ?',
     en: 'To make a 10% profit after a 20% discount, what must be the marked price of an item costing Rs. 4,000?',
     options: [
-      { key: 'A', label: 'रु. ५,५०० [ SP = ४४००, MP = ४४०० ÷ ०.८ = ५५०० ]' },
-      { key: 'B', label: 'रु. ५,२००' },
-      { key: 'C', label: 'रु. ५,०००' },
-      { key: 'D', label: 'रु. ६,०००' },
+      { key: 'A', label: 'Rs. 5,500 [ SP = 4400, MP = 4400 ÷ 0.8 = 5500 ]' },
+      { key: 'B', label: 'Rs. 5,200' },
+      { key: 'C', label: 'Rs. 5,000' },
+      { key: 'D', label: 'Rs. 6,000' },
     ],
     answer: 'A',
   },
@@ -82,7 +82,7 @@ export const BusinessProfitLossChallenge: React.FC<{
   const kit = useSimKit({
     code: 'SIM-MATH-G8-U5-03',
     chapter: 5,
-    titleNp: 'व्यापारिक नाफा-नोक्सान चुनौती (Business Profit & Loss Challenge)',
+    titleNp: 'व्यापारिक Profit-नोक्सान चुनौती (Business Profit & Loss Challenge)',
     titleEn: 'Business Profit and Loss Challenge',
   });
   const isNe = kit.lang === 'ne';
@@ -138,9 +138,9 @@ export const BusinessProfitLossChallenge: React.FC<{
 
   const CHALLENGES = [
     {
-      titleNp: 'चुनौती १: टेलिभिजनको व्यापार (CDC पाठ्यपुस्तक उदाहरण)',
+      titleNp: 'चुनौती 1: टेलिभिजनको व्यापार (CDC पाठ्यपुस्तक उदाहरण)',
       titleEn: 'Challenge 1: Television Business (CDC Example)',
-      descNp: 'एउटा टेलिभिजनको क्रय मूल्य रु. २०,००० छ। व्यापारीले २५% मूल्य बढाएर अङ्कित मूल्य तोकी १०% छुट दिँदा बिक्री मूल्य (SP) र नाफा प्रतिशत पत्ता लगाउनुहोस्।',
+      descNp: 'एउटा टेलिभिजनको क्रय मूल्य Rs. 20,000 छ। व्यापारीले 25% मूल्य बढाएर अङ्कित मूल्य तोकी 10% छुट दिँदा बिक्री मूल्य (SP) र Profit प्रतिशत पत्ता लगाउनुहोस्।',
       descEn: 'A TV has CP = Rs. 20,000. The seller sets MP at 25% markup and gives a 10% discount. Find SP and Profit %.',
       cp: 2000,
       markup: 25,
@@ -149,9 +149,9 @@ export const BusinessProfitLossChallenge: React.FC<{
       targetProfitPct: 12.5,
     },
     {
-      titleNp: 'चुनौती २: कपडा पसलको हिसाब',
+      titleNp: 'चुनौती 2: कपडा पसलको हिसाब',
       titleEn: 'Challenge 2: Clothing Store Calculations',
-      descNp: 'एउटा स्विटरको क्रय मूल्य रु. १,२०० छ। पसलेले ५०% बढाएर अङ्कित मूल्य राखी २०% छुट दिँदा बिक्री मूल्य र नाफा प्रतिशत कति हुन्छ?',
+      descNp: 'एउटा स्विटरको क्रय मूल्य Rs. 1,200 छ। पसलेले 50% बढाएर अङ्कित मूल्य राखी 20% छुट दिँदा बिक्री मूल्य र Profit प्रतिशत कति हुन्छ?',
       descEn: 'A sweater CP = Rs. 1,200. Shopkeeper marks up 50% and offers 20% discount. Find SP and Profit %.',
       cp: 1200,
       markup: 50,
@@ -171,7 +171,7 @@ export const BusinessProfitLossChallenge: React.FC<{
       setChallengeFeedback({
         isCorrect: true,
         msg: L(
-          `उत्कृष्ट! बिक्री मूल्य रु. ${toNp(cur.targetSp)} र नाफा ${toNp(cur.targetProfitPct)}% सही छ!`,
+          `उत्कृष्ट! बिक्री मूल्य Rs. ${toNp(cur.targetSp)} र Profit ${toNp(cur.targetProfitPct)}% सही छ!`,
           `Excellent! SP = Rs. ${cur.targetSp} and Profit = ${cur.targetProfitPct}% are correct!`
         ),
       });
@@ -180,7 +180,7 @@ export const BusinessProfitLossChallenge: React.FC<{
       setChallengeFeedback({
         isCorrect: false,
         msg: L(
-          `प्रयास गर्नुहोस्! सूत्र: MP = CP + बढाएको %, SP = MP - छुट %, नाफा % = (SP - CP)/CP × १००%`,
+          `प्रयास गर्नुहोस्! सूत्र: MP = CP + बढाएको %, SP = MP - छुट %, Profit % = (SP - CP)/CP × 100%`,
           `Keep trying! Formula: MP = CP + Markup %, SP = MP - Disc %, Profit % = (SP - CP)/CP × 100%`
         ),
       });
@@ -194,7 +194,7 @@ export const BusinessProfitLossChallenge: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! व्यापारमा क्रय मूल्य, अङ्कित मूल्य, छुट र वास्तविक नाफा वा नोक्सानको चक्र बुझौं!',
+        'नमस्ते! व्यापारमा क्रय मूल्य, अङ्कित मूल्य, छुट र वास्तविक Profit वा नोक्सानको चक्र बुझौं!',
         'Hello! Let us explore the complete business cycle of Cost Price, Markup, Marked Price, Discount and Net Profit!'
       )}
     >
@@ -208,7 +208,7 @@ export const BusinessProfitLossChallenge: React.FC<{
             }`}
           >
             <Briefcase className="w-4 h-4" />
-            {L('१. पूर्ण व्यापार चक्र (Business Cycle)', '1. Complete Business Cycle')}
+            {L('1. पूर्ण व्यापार चक्र (Business Cycle)', '1. Complete Business Cycle')}
           </button>
           <button
             onClick={() => setActiveTab('duel')}
@@ -217,7 +217,7 @@ export const BusinessProfitLossChallenge: React.FC<{
             }`}
           >
             <Store className="w-4 h-4" />
-            {L('२. पसल रणनीति तुलना (Shop Comparison)', '2. Shop Duel Comparison')}
+            {L('2. पसल रणनीति तुलना (Shop Comparison)', '2. Shop Duel Comparison')}
           </button>
           <button
             onClick={() => setActiveTab('reverse')}
@@ -226,7 +226,7 @@ export const BusinessProfitLossChallenge: React.FC<{
             }`}
           >
             <DollarSign className="w-4 h-4" />
-            {L('३. मूल्य निर्धारण योजना (Target Pricing)', '3. Target Pricing Plan')}
+            {L('3. मूल्य निर्धारण योजना (Target Pricing)', '3. Target Pricing Plan')}
           </button>
           <button
             onClick={() => setActiveTab('challenges')}
@@ -235,7 +235,7 @@ export const BusinessProfitLossChallenge: React.FC<{
             }`}
           >
             <Award className="w-4 h-4" />
-            {L('४. पाठ्यपुस्तक अभ्यास (CDC Practice)', '4. CDC Textbook Challenge')}
+            {L('4. पाठ्यपुस्तक अभ्यास (CDC Practice)', '4. CDC Textbook Challenge')}
           </button>
         </div>
 
@@ -269,30 +269,30 @@ export const BusinessProfitLossChallenge: React.FC<{
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
                 {/* Step 1: CP */}
                 <div className="bg-slate-800/90 p-4 rounded-2xl border border-slate-700 text-center">
-                  <div className="text-xs text-slate-400 font-bold uppercase">{L('१. क्रय मूल्य (Cost Price)', '1. Cost Price (CP)')}</div>
-                  <div className="text-2xl font-black text-blue-400 my-2">रु. {toNp(cp.toLocaleString())}</div>
+                  <div className="text-xs text-slate-400 font-bold uppercase">{L('1. क्रय मूल्य (Cost Price)', '1. Cost Price (CP)')}</div>
+                  <div className="text-2xl font-black text-blue-400 my-2">Rs. {toNp(cp.toLocaleString())}</div>
                   <div className="text-xs text-slate-400">{L('थोक मूल्य / खरिद लागत', 'Wholesale Purchase Cost')}</div>
                 </div>
 
                 {/* Step 2: Markup to MP */}
                 <div className="bg-slate-800/90 p-4 rounded-2xl border border-indigo-700 text-center relative">
                   <div className="text-xs text-indigo-400 font-bold uppercase">
-                    {L('२. अङ्कित मूल्य (Marked Price)', '2. Marked Price (MP)')}
+                    {L('2. अङ्कित मूल्य (Marked Price)', '2. Marked Price (MP)')}
                   </div>
-                  <div className="text-2xl font-black text-indigo-300 my-2">रु. {toNp(mp.toLocaleString())}</div>
+                  <div className="text-2xl font-black text-indigo-300 my-2">Rs. {toNp(mp.toLocaleString())}</div>
                   <div className="text-xs text-emerald-400">
-                    +{toNp(markupPct)}% ({L('बढाएको', 'Markup')}: रु. {toNp(markupAmt.toLocaleString())})
+                    +{toNp(markupPct)}% ({L('बढाएको', 'Markup')}: Rs. {toNp(markupAmt.toLocaleString())})
                   </div>
                 </div>
 
                 {/* Step 3: Discount to SP */}
                 <div className="bg-slate-800/90 p-4 rounded-2xl border border-amber-700 text-center">
                   <div className="text-xs text-amber-400 font-bold uppercase">
-                    {L('३. बिक्री मूल्य (Selling Price)', '3. Selling Price (SP)')}
+                    {L('3. बिक्री मूल्य (Selling Price)', '3. Selling Price (SP)')}
                   </div>
-                  <div className="text-2xl font-black text-amber-300 my-2">रु. {toNp(sp.toLocaleString())}</div>
+                  <div className="text-2xl font-black text-amber-300 my-2">Rs. {toNp(sp.toLocaleString())}</div>
                   <div className="text-xs text-rose-400">
-                    -{toNp(discountPct)}% ({L('छुट रकम', 'Discount')}: रु. {toNp(discountAmt.toLocaleString())})
+                    -{toNp(discountPct)}% ({L('छुट रकम', 'Discount')}: Rs. {toNp(discountAmt.toLocaleString())})
                   </div>
                 </div>
 
@@ -304,13 +304,13 @@ export const BusinessProfitLossChallenge: React.FC<{
                 >
                   <div className="text-xs font-bold uppercase flex items-center justify-center gap-1">
                     {isProfit ? <TrendingUp className="w-4 h-4 text-emerald-400" /> : <TrendingDown className="w-4 h-4 text-rose-400" />}
-                    {isProfit ? L('नाफा (Net Profit)', 'Net Profit') : L('नोक्सान (Net Loss)', 'Net Loss')}
+                    {isProfit ? L('Profit (Net Profit)', 'Net Profit') : L('नोक्सान (Net Loss)', 'Net Loss')}
                   </div>
                   <div className={`text-2xl font-black my-2 ${isProfit ? 'text-emerald-400' : 'text-rose-400'}`}>
-                    रु. {toNp(profitLossAmt.toLocaleString())}
+                    Rs. {toNp(profitLossAmt.toLocaleString())}
                   </div>
                   <div className="text-xs font-bold text-slate-300">
-                    {isProfit ? L('नाफा', 'Profit') : L('नोक्सान', 'Loss')}: {toNp(profitLossPct.toFixed(2))}% (CP मा)
+                    {isProfit ? L('Profit', 'Profit') : L('नोक्सान', 'Loss')}: {toNp(profitLossPct.toFixed(2))}%
                   </div>
                 </div>
               </div>
@@ -318,12 +318,12 @@ export const BusinessProfitLossChallenge: React.FC<{
               {/* Formula Strip */}
               <div className="bg-slate-800 p-4 rounded-2xl text-xs space-y-1 text-slate-300">
                 <div className="font-semibold text-amber-300">{L('गणितीय कार्यविधि (Mathematical Steps):', 'Mathematical Steps:')}</div>
-                <div>१. MP = CP + (CP × Markup % ÷ 100) = {toNp(cp)} + ({toNp(cp)} × {toNp(markupPct)} ÷ १००) = रु. {toNp(mp)}</div>
-                <div>२. Discount = MP × Discount % ÷ 100 = {toNp(mp)} × {toNp(discountPct)} ÷ १०० = रु. {toNp(discountAmt)}</div>
-                <div>३. SP = MP - Discount = {toNp(mp)} - {toNp(discountAmt)} = रु. {toNp(sp)}</div>
+                <div>1. MP = CP + (CP × Markup % ÷ 100) = {toNp(cp)} + ({toNp(cp)} × {toNp(markupPct)} ÷ 100) = Rs. {toNp(mp)}</div>
+                <div>2. Discount = MP × Discount % ÷ 100 = {toNp(mp)} × {toNp(discountPct)} ÷ 100 = Rs. {toNp(discountAmt)}</div>
+                <div>3. SP = MP - Discount = {toNp(mp)} - {toNp(discountAmt)} = Rs. {toNp(sp)}</div>
                 <div>
-                  ४. {isProfit ? 'नाफा = SP - CP' : 'नोक्सान = CP - SP'} = रु. {toNp(profitLossAmt)} | {isProfit ? 'नाफा' : 'नोक्सान'} % = (
-                  {toNp(profitLossAmt)} ÷ {toNp(cp)}) × १००% = {toNp(profitLossPct.toFixed(2))}%
+                  4. {isProfit ? 'Profit = SP - CP' : 'नोक्सान = CP - SP'} = Rs. {toNp(profitLossAmt)} | {isProfit ? 'Profit' : 'नोक्सान'} % = (
+                  {toNp(profitLossAmt)} ÷ {toNp(cp)}) × 100% = {toNp(profitLossPct.toFixed(2))}%
                 </div>
               </div>
             </div>
@@ -332,7 +332,7 @@ export const BusinessProfitLossChallenge: React.FC<{
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className="block text-sm font-bold text-slate-700 mb-2">
-                  {L('क्रय मूल्य (Cost Price):', 'Cost Price (CP):')} रु. {toNp(cp)}
+                  {L('क्रय मूल्य (Cost Price):', 'Cost Price (CP):')} Rs. {toNp(cp)}
                 </label>
                 <input
                   type="range"
@@ -431,14 +431,14 @@ export const BusinessProfitLossChallenge: React.FC<{
                 <div className="bg-indigo-50/70 p-4 rounded-2xl space-y-2 text-sm border border-indigo-100">
                   <div className="flex justify-between">
                     <span className="text-slate-600">{L('अङ्कित मूल्य (MP):', 'Marked Price (MP):')}</span>
-                    <span className="font-bold text-slate-900">रु. {toNp(shopAMP.toFixed(0))}</span>
+                    <span className="font-bold text-slate-900">Rs. {toNp(shopAMP.toFixed(0))}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-600">{L('बिक्री मूल्य (SP):', 'Selling Price (SP):')}</span>
-                    <span className="font-black text-indigo-700">रु. {toNp(shopASP.toFixed(0))}</span>
+                    <span className="font-black text-indigo-700">Rs. {toNp(shopASP.toFixed(0))}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-600">{L('पसलेको नाफा %:', 'Shop Profit %:')}</span>
+                    <span className="text-slate-600">{L('पसलेको Profit %:', 'Shop Profit %:')}</span>
                     <span className={`font-black ${shopAProfit >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                       {toNp(shopAProfitPct.toFixed(1))}%
                     </span>
@@ -450,7 +450,7 @@ export const BusinessProfitLossChallenge: React.FC<{
               <div className="bg-white p-6 rounded-3xl shadow-sm border-2 border-emerald-200 space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-emerald-700 flex items-center gap-2">
-                    <Store className="w-5 h-5" /> {L('पसल ‘ख’ (Shop B)', 'Shop B')}
+                    <Store className="w-5 h-5" /> {L('Shop B (Shop B)', 'Shop B')}
                   </h3>
                   <span className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">
                     {toNp(shopBMarkup)}% {L('बढाएर', 'Markup')} | {toNp(shopBDiscount)}% {L('छुट', 'Disc')}
@@ -487,14 +487,14 @@ export const BusinessProfitLossChallenge: React.FC<{
                 <div className="bg-emerald-50/70 p-4 rounded-2xl space-y-2 text-sm border border-emerald-100">
                   <div className="flex justify-between">
                     <span className="text-slate-600">{L('अङ्कित मूल्य (MP):', 'Marked Price (MP):')}</span>
-                    <span className="font-bold text-slate-900">रु. {toNp(shopBMP.toFixed(0))}</span>
+                    <span className="font-bold text-slate-900">Rs. {toNp(shopBMP.toFixed(0))}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-600">{L('बिक्री मूल्य (SP):', 'Selling Price (SP):')}</span>
-                    <span className="font-black text-emerald-700">रु. {toNp(shopBSP.toFixed(0))}</span>
+                    <span className="font-black text-emerald-700">Rs. {toNp(shopBSP.toFixed(0))}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-600">{L('पसलेको नाफा %:', 'Shop Profit %:')}</span>
+                    <span className="text-slate-600">{L('पसलेको Profit %:', 'Shop Profit %:')}</span>
                     <span className={`font-black ${shopBProfit >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                       {toNp(shopBProfitPct.toFixed(1))}%
                     </span>
@@ -511,15 +511,15 @@ export const BusinessProfitLossChallenge: React.FC<{
                   {shopASP < shopBSP
                     ? L('ग्राहकका लागि पसल ‘क’ सस्तो छ!', 'Shop A is cheaper for customers!')
                     : shopASP > shopBSP
-                    ? L('ग्राहकका लागि पसल ‘ख’ सस्तो छ!', 'Shop B is cheaper for customers!')
+                    ? L('ग्राहकका लागि Shop B सस्तो छ!', 'Shop B is cheaper for customers!')
                     : L('दुवै पसलको बिक्री मूल्य ठ्याक्कै बराबर छ!', 'Both shops offer the exact same selling price!')}
                 </div>
                 <div className="text-sm text-slate-600">
                   {shopAProfitPct > shopBProfitPct
-                    ? L('पसलेका लागि पसल ‘क’ को रणनीतिले बढी नाफा दिन्छ।', 'Shop A strategy yields higher profit for merchant.')
+                    ? L('पसलेका लागि पसल ‘क’ को रणनीतिले बढी Profit दिन्छ।', 'Shop A strategy yields higher profit for merchant.')
                     : shopAProfitPct < shopBProfitPct
-                    ? L('पसलेका लागि पसल ‘ख’ को रणनीतिले बढी नाफा दिन्छ।', 'Shop B strategy yields higher profit for merchant.')
-                    : L('दुवै रणनीतिमा पसलेको नाफा समान छ।', 'Both strategies yield identical profit for merchant.')}
+                    ? L('पसलेका लागि Shop B को रणनीतिले बढी Profit दिन्छ।', 'Shop B strategy yields higher profit for merchant.')
+                    : L('दुवै रणनीतिमा पसलेको Profit समान छ।', 'Both strategies yield identical profit for merchant.')}
                 </div>
               </div>
             </div>
@@ -536,7 +536,7 @@ export const BusinessProfitLossChallenge: React.FC<{
                 </h3>
                 <p className="text-sm text-slate-600 mt-1">
                   {L(
-                    'यदि पसलेले ग्राहकलाई छुट पनि दिन चाहन्छ र आफूलाई चाहेको नाफा पनि सुरक्षित गर्न चाहन्छ भने अङ्कित मूल्य कति राख्नुपर्छ?',
+                    'यदि पसलेले ग्राहकलाई छुट पनि दिन चाहन्छ र आफूलाई चाहेको Profit पनि सुरक्षित गर्न चाहन्छ भने अङ्कित मूल्य कति राख्नुपर्छ?',
                     'If a merchant wants to give a certain discount while ensuring a desired profit, what MP should be set?'
                   )}
                 </p>
@@ -557,7 +557,7 @@ export const BusinessProfitLossChallenge: React.FC<{
 
                 <div>
                   <label className="block text-xs font-bold text-emerald-600 mb-1">
-                    {L('चाहिएको नाफा प्रतिशत (Target Profit %)', 'Desired Profit %')}
+                    {L('चाहिएको Profit प्रतिशत (Target Profit %)', 'Desired Profit %')}
                   </label>
                   <input
                     type="number"
@@ -588,25 +588,25 @@ export const BusinessProfitLossChallenge: React.FC<{
                   <div className="flex items-center gap-2">
                     <ArrowRight className="w-4 h-4 text-indigo-600" />
                     <span>
-                      {L('१. नाफा सहितको बिक्री मूल्य (Required SP) = ', '1. Required Selling Price (SP) = ')}
-                      <b>CP × (100 + P%) ÷ 100</b> = रु. {toNp(revCp)} × {toNp(100 + targetProfitPct)} ÷ १०० ={' '}
-                      <span className="font-bold text-indigo-800">रु. {toNp(reqSp.toFixed(2))}</span>
+                      {L('1. Profit सहितको बिक्री मूल्य (Required SP) = ', '1. Required Selling Price (SP) = ')}
+                      <b>CP × (100 + P%) ÷ 100</b> = Rs. {toNp(revCp)} × {toNp(100 + targetProfitPct)} ÷ 100 ={' '}
+                      <span className="font-bold text-indigo-800">Rs. {toNp(reqSp.toFixed(2))}</span>
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <ArrowRight className="w-4 h-4 text-indigo-600" />
                     <span>
-                      {L('२. अङ्कित मूल्य (Required MP) = ', '2. Required Marked Price (MP) = ')}
-                      <b>SP × 100 ÷ (100 - Discount %)</b> = रु. {toNp(reqSp.toFixed(2))} × १०० ÷ {toNp(100 - offerDiscountPct)} ={' '}
-                      <span className="font-black text-2xl text-emerald-700">रु. {toNp(reqMp.toFixed(2))}</span>
+                      {L('2. अङ्कित मूल्य (Required MP) = ', '2. Required Marked Price (MP) = ')}
+                      <b>SP × 100 ÷ (100 - Discount %)</b> = Rs. {toNp(reqSp.toFixed(2))} × 100 ÷ {toNp(100 - offerDiscountPct)} ={' '}
+                      <span className="font-black text-2xl text-emerald-700">Rs. {toNp(reqMp.toFixed(2))}</span>
                     </span>
                   </div>
                 </div>
 
                 <div className="p-3 bg-white rounded-xl border border-indigo-200 text-xs text-indigo-950 font-semibold">
                   {L(
-                    `पसलेले रु. ${toNp(reqMp.toFixed(0))} अङ्कित मूल्य टाँसेर ग्राहकलाई ${toNp(offerDiscountPct)}% छुट दिएमा ठ्याक्कै ${toNp(targetProfitPct)}% नाफा प्राप्त हुन्छ!`,
+                    `पसलेले Rs. ${toNp(reqMp.toFixed(0))} अङ्कित मूल्य टाँसेर ग्राहकलाई ${toNp(offerDiscountPct)}% छुट दिएमा ठ्याक्कै ${toNp(targetProfitPct)}% Profit प्राप्त हुन्छ!`,
                     `The merchant should mark the item at Rs. ${reqMp.toFixed(0)} and offer a ${offerDiscountPct}% discount to guarantee exactly ${targetProfitPct}% net profit!`
                   )}
                 </div>
@@ -641,14 +641,14 @@ export const BusinessProfitLossChallenge: React.FC<{
                     type="number"
                     value={userSpInput}
                     onChange={(e) => setUserSpInput(e.target.value)}
-                    placeholder={L('रु. लेख्नुहोस्...', 'Enter Rs...')}
+                    placeholder={L('Rs. लेख्नुहोस्...', 'Enter Rs...')}
                     className="w-full px-4 py-2.5 border rounded-xl font-bold text-slate-800"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">
-                    {L('तपाईंको नाफा प्रतिशत (Profit %):', 'Your Profit Percentage (%):')}
+                    {L('तपाईंको Profit प्रतिशत (Profit %):', 'Your Profit Percentage (%):')}
                   </label>
                   <input
                     type="number"

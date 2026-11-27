@@ -6,35 +6,35 @@ import { Award, Briefcase, GraduationCap, HeartPulse, PieChart, CheckCircle } fr
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एक परिवारको मासिक कुल खर्च रु ४०,००० मध्ये खानामा रु २०,००० खर्च हुन्छ भने वृत्तचित्रमा खानाको कोण कति डिग्री हुन्छ?',
+    np: 'एक परिवारको मासिक कुल खर्च Rs 40,000 मध्ये खानामा Rs 20,000 खर्च हुन्छ भने वृत्तचित्रमा खानाको कोण कति degrees हुन्छ?',
     en: 'Out of a family monthly budget of Rs 40,000, Rs 20,000 is spent on food. What is the central angle for food in a pie chart?',
     options: [
-      { key: 'A', label: '१८०° — (२०,००० ÷ ४०,०००) × ३६०° = १८०°' },
-      { key: 'B', label: '९०°' },
-      { key: 'C', label: '१२०°' },
-      { key: 'D', label: '३६०°' },
+      { key: 'A', label: '180° — (20,000 ÷ 40,000) × 360° = 180°' },
+      { key: 'B', label: '90°' },
+      { key: 'C', label: '120°' },
+      { key: 'D', label: '360°' },
     ],
     answer: 'A',
   },
   {
-    np: '५ जना बालबालिकाको तौल क्रमशः १२, १४, १२, १६, १८ केजी भए बहुलक (Mode) कति हुन्छ?',
+    np: '5 जना Childrenको तौल क्रमशः 12, 14, 12, 16, 18 kg भए बहुलक (Mode) कति हुन्छ?',
     en: 'If weights of 5 children are 12, 14, 12, 16, 18 kg, what is the mode?',
     options: [
-      { key: 'A', label: '१२ केजी (सबैभन्दा बढी पटक आएको)' },
-      { key: 'B', label: '१४ केजी' },
-      { key: 'C', label: '१६ केजी' },
-      { key: 'D', label: '१८ केजी' },
+      { key: 'A', label: '12 kg (the most frequent)' },
+      { key: 'B', label: '14 kg' },
+      { key: 'C', label: '16 kg' },
+      { key: 'D', label: '18 kg' },
     ],
     answer: 'A',
   },
   {
-    np: '६ जना विद्यार्थीले गणितमा प्राप्त गरेको प्राप्ताङ्क २०, २५, ३०, ३५, ४०, ५० भए औसत प्राप्ताङ्क कति हुन्छ?',
+    np: '6 जना Studentले गणितमा प्राप्त गरेको प्राप्ताङ्क 20, 25, 30, 35, 40, 50 भए औसत प्राप्ताङ्क कति हुन्छ?',
     en: 'If marks obtained by 6 students in math are 20, 25, 30, 35, 40, 50, what is the mean score?',
     options: [
-      { key: 'A', label: '३३.३३ — (२०० ÷ ६ = ३३.३३)' },
-      { key: 'B', label: '३०' },
-      { key: 'C', label: '३५' },
-      { key: 'D', label: '४०' },
+      { key: 'A', label: '33.33 — (200 ÷ 6 = 33.33)' },
+      { key: 'B', label: '30' },
+      { key: 'C', label: '35' },
+      { key: 'D', label: '40' },
     ],
     answer: 'A',
   },
@@ -42,10 +42,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुनै पनि तथ्याङ्कमा औसत (Mean) भन्दा मध्यिका (Median) कुन अवस्थामा बढी उपयुक्त मानिन्छ?',
     en: 'In what situation is the median generally preferred over the mean?',
     options: [
-      { key: 'A', label: 'अत्यधिक ठूला वा साना चरम मानहरू (Extreme outliers) भएको अवस्थामा' },
-      { key: 'B', label: 'सबै मान बराबर भएको अवस्थामा' },
-      { key: 'C', label: 'तथ्याङ्क धेरै सानो भएको अवस्थामा' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'When there are extremely large or small values (extreme outliers)' },
+      { key: 'B', label: 'When all values are equal' },
+      { key: 'C', label: 'When the data set is very small' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
@@ -70,65 +70,65 @@ interface Scenario {
 const SCENARIOS: Scenario[] = [
   {
     id: 'budget',
-    titleNp: 'परिवारको मासिक बजेट',
+    titleNp: 'Family monthly budget',
     titleEn: 'Family Monthly Budget',
     icon: '🏠',
-    descNp: 'एक परिवारको मासिक खर्च शीर्षक र रकम (हजारमा)',
+    descNp: 'A family’s monthly expense headings and amounts (in thousands)',
     descEn: 'Family monthly expenditure in thousands of Rupees',
-    tableHeaders: ['खर्च शीर्षक', 'रकम (हजार रु.)'],
+    tableHeaders: ['Expense heading', 'Amount (Rs. thousand)'],
     tableData: [
-      { label: 'खाना (Food)', val: 24 },
-      { label: 'शिक्षा (Education)', val: 12 },
-      { label: 'स्वास्थ्य (Health)', val: 6 },
-      { label: 'भाडा (Rent)', val: 18 },
+      { label: 'Food', val: 24 },
+      { label: 'Education', val: 12 },
+      { label: 'Health', val: 6 },
+      { label: 'Rent', val: 18 },
     ],
-    questionNp: 'यस परिवारको कुल खर्च रु ६० हजार छ भने वृत्तचित्रमा "खाना" को केन्द्रीय कोण कति डिग्री हुन्छ?',
+    questionNp: 'If this family’s total expense is Rs 60 thousand, what is the central angle of "Food" in the pie chart, in degrees?',
     questionEn: 'If total budget is 60 thousand, what is the central angle for "Food" in degrees?',
     correctAnswer: 144, // (24/60)*360 = 144
-    unit: 'डिग्री (°)',
-    explanationNp: 'केन्द्रीय कोण = (२४ ÷ ६०) × ३६०° = १४४° हुन्छ।',
+    unit: 'degrees (°)',
+    explanationNp: 'केन्द्रीय कोण = (24 ÷ 60) × 360° = 144° हुन्छ।',
   },
   {
     id: 'health',
-    titleNp: 'स्वास्थ्य चौकीमा बाल तौल',
+    titleNp: 'Child weights at a health post',
     titleEn: 'Health Post Child Weights',
     icon: '🩺',
-    descNp: 'स्वास्थ्य चौकीमा खोप लिन आएका बालबालिकाको तौल (केजीमा)',
+    descNp: 'Weight of children who came for vaccination at the health post (in kg)',
     descEn: 'Weights of children visiting health post (kg)',
-    tableHeaders: ['बालबालिका', 'तौल (केजी)'],
+    tableHeaders: ['Children', 'Weight (kg)'],
     tableData: [
-      { label: 'राम', val: 10 },
-      { label: 'सीता', val: 14 },
-      { label: 'हरि', val: 12 },
-      { label: 'गीता', val: 16 },
-      { label: 'गोपाल', val: 18 },
+      { label: 'Ram', val: 10 },
+      { label: 'Sita', val: 14 },
+      { label: 'Hari', val: 12 },
+      { label: 'Gita', val: 16 },
+      { label: 'Gopal', val: 18 },
     ],
-    questionNp: 'यी ५ जना बालबालिकाको मध्यिका तौल (Median Weight) कति केजी हुन्छ?',
+    questionNp: 'What is the median weight of these 5 children, in kg?',
     questionEn: 'What is the median weight of these 5 children in kg?',
     correctAnswer: 14, // sorted: 10, 12, 14, 16, 18 -> middle is 14
-    unit: 'केजी (kg)',
-    explanationNp: 'बढ्दो क्रममा मिलाउँदा (१०, १२, १४, १६, १८) भएकाले बीचको ३ औं मान १४ केजी हो।',
+    unit: 'kg',
+    explanationNp: 'बढ्दो क्रममा मिलाउँदा (10, 12, 14, 16, 18) भएकाले बीचको 3 औं मान 14 kg हो।',
   },
   {
     id: 'school',
-    titleNp: 'कक्षा परीक्षा प्राप्ताङ्क',
+    titleNp: 'Class test marks',
     titleEn: 'Class Exam Marks',
     icon: '📚',
-    descNp: 'गणित परीक्षामा ६ जना विद्यार्थीले प्राप्त गरेको प्राप्ताङ्क',
+    descNp: 'Marks obtained by 6 students in the maths test',
     descEn: 'Marks of 6 students in mathematics exam',
-    tableHeaders: ['विद्यार्थी', 'प्राप्ताङ्क (पूर्णाङ्क ५०)'],
+    tableHeaders: ['Student', 'Marks obtained (full marks 50)'],
     tableData: [
-      { label: 'रोहन', val: 35 },
-      { label: 'अञ्जना', val: 40 },
-      { label: 'विशाल', val: 45 },
-      { label: 'पूजा', val: 30 },
-      { label: 'सञ्जय', val: 50 },
+      { label: 'Rohan', val: 35 },
+      { label: 'Anjana', val: 40 },
+      { label: 'Bishal', val: 45 },
+      { label: 'Puja', val: 30 },
+      { label: 'Sanjay', val: 50 },
     ],
-    questionNp: 'यी विद्यार्थीहरूको औसत प्राप्ताङ्क (Mean Marks) कति हो?',
+    questionNp: 'What is the mean mark of these students?',
     questionEn: 'What is the arithmetic mean of these marks?',
     correctAnswer: 40, // (35+40+45+30+50) = 200 / 5 = 40
-    unit: 'अङ्क (marks)',
-    explanationNp: 'औसत = (३५ + ४० + ४५ + ३० + ५०) ÷ ५ = २०० ÷ ५ = ४० अङ्क।',
+    unit: 'marks',
+    explanationNp: 'औसत = (35 + 40 + 45 + 30 + 50) ÷ 5 = 200 ÷ 5 = 40 अङ्क।',
   },
 ];
 
@@ -243,7 +243,7 @@ export const RealLifeStatisticsChallengeWorld: React.FC<{
           <div className="md:col-span-6 bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
             <div className="bg-white p-3.5 rounded-xl border border-amber-200 shadow-sm">
               <span className="text-xs font-bold text-amber-800 uppercase tracking-wide block mb-1">
-                चुनौती प्रश्न (Challenge Question)
+                Challenge question
               </span>
               <p className="text-xs font-semibold text-slate-800 leading-relaxed">
                 {curScenario.questionNp}
@@ -253,7 +253,7 @@ export const RealLifeStatisticsChallengeWorld: React.FC<{
             <div className="flex gap-2">
               <input
                 type="number"
-                placeholder="तपाईंको उत्तर लेख्नुहोस्..."
+                placeholder="Write your answer..."
                 value={userAnswer}
                 onChange={(e) => {
                   setUserAnswer(e.target.value);
@@ -293,7 +293,7 @@ export const RealLifeStatisticsChallengeWorld: React.FC<{
             )}
 
             <div className="text-center text-[11px] font-semibold text-slate-500 pt-1">
-              समाधान गरिएका परिदृश्यहरू: <span className="text-amber-600 font-bold">{solvedCount}</span>
+              Scenarios solved: <span className="text-amber-600 font-bold">{solvedCount}</span>
             </div>
           </div>
         </div>

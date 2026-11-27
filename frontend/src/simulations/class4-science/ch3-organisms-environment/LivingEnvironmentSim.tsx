@@ -1,16 +1,16 @@
 /**
  * LivingEnvironmentSim.tsx
- * Simulation 7: 2D Explore a Living Environment (सजीव र वातावरण - २डी प्राकृतिक परिवेश)
- * Grade 4 Science • Chapter 3: Organisms and Environment (जीव र वातावरण)
+ * Simulation 7: 2D Explore a Living Environment
+ * Grade 4 Science • Chapter 3: Organisms and Environment
  *
  * Ultra-Realistic Himalayan Ecological Explorer with Core Biological Detailing.
  * Features:
  * - Ultra-realistic procedural vector artwork with natural color palettes:
- *   1. Himalayan Musk Deer (कस्तुरी मृग): realistic anatomy, grizzled coat, white throat bands, signature canine tusks, alert ears, animated breathing & grazing
- *   2. Danfe / Himalayan Monal (डाँफे चरा): 9-colored iridescent plumage, metallic emerald crest, sapphire wings, copper ruff, white rump, rufous fan tail
- *   3. Himalayan Asala Snow Trout (असला माछा): swimming dynamically in the clear glacial stream
- *   4. Himalayan Blue Pine & Deodar (सल्लाको रुख): furrowed cedar bark, tiered conifer needle boughs, hanging pine cones
- *   5. Rhododendron Arboreum (लालीगुराँस): realistic umbels of crimson bell blossoms, golden stamens, glossy lanceolate leaves
+ *   1. Himalayan Musk Deer: realistic anatomy, grizzled coat, white throat bands, signature canine tusks, alert ears, animated breathing & grazing
+ *   2. Danfe / Himalayan Monal: 9-colored iridescent plumage, metallic emerald crest, sapphire wings, copper ruff, white rump, rufous fan tail
+ *   3. Himalayan Asala Snow Trout: swimming dynamically in the clear glacial stream
+ *   4. Himalayan Blue Pine & Deodar: furrowed cedar bark, tiered conifer needle boughs, hanging pine cones
+ *   5. Rhododendron Arboreum: realistic umbels of crimson bell blossoms, golden stamens, glossy lanceolate leaves
  *   6. Majestic Himalayan Snow Range: Machapuchare / Annapurna ridgelines, warm sunlit snow slopes & cool periwinkle shadow crevasses
  *   7. Glacial Meltwater Stream: transparent turquoise water, riverbed pebbles, rapids foam, caustics
  *   8. Stratified Soil Profile & Granite Boulders: humus layer, root systems, angular granite with green moss & lichen
@@ -47,7 +47,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -66,7 +66,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
   const elements: EnvElement[] = [
     {
       id: 'sun',
-      nameEn: 'Sunlight (सूर्यको प्रकाश)',
+      nameEn: 'Sunlight',
       nameNe: 'सूर्यको प्रकाश (Sunlight)',
       category: 'Abiotic',
       categoryNe: 'निर्जीव',
@@ -81,7 +81,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'tree',
-      nameEn: 'Himalayan Pine (सल्लाको रुख)',
+      nameEn: 'Himalayan Pine',
       nameNe: 'सल्लाको रुख (Pine Tree)',
       category: 'Biotic',
       categoryNe: 'सजीव',
@@ -96,7 +96,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'deer',
-      nameEn: 'Musk Deer (कस्तुरी मृग)',
+      nameEn: 'Musk Deer',
       nameNe: 'कस्तुरी मृग (Musk Deer)',
       category: 'Biotic',
       categoryNe: 'सजीव',
@@ -111,7 +111,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'water',
-      nameEn: 'Mountain Stream (हिमालको खोला)',
+      nameEn: 'Mountain Stream',
       nameNe: 'खोलाको पानी (Stream Water)',
       category: 'Abiotic',
       categoryNe: 'निर्जीव',
@@ -126,7 +126,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'soil',
-      nameEn: 'Fertile Topsoil (मलिलो माटो)',
+      nameEn: 'Fertile Topsoil',
       nameNe: 'मलिलो माटो (Fertile Soil)',
       category: 'Abiotic',
       categoryNe: 'निर्जीव',
@@ -141,7 +141,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'flower',
-      nameEn: 'Rhododendron Bloom (लालीगुराँस)',
+      nameEn: 'Rhododendron Bloom',
       nameNe: 'लालीगुराँस (Rhododendron)',
       category: 'Biotic',
       categoryNe: 'सजीव',
@@ -156,7 +156,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'rock',
-      nameEn: 'Granite Rocks (ढुङ्गा/चट्टान)',
+      nameEn: 'Granite Rocks',
       nameNe: 'ढुङ्गा चट्टान (Granite Rock)',
       category: 'Abiotic',
       categoryNe: 'निर्जीव',
@@ -171,12 +171,12 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'bird',
-      nameEn: 'Danfe Bird (डाँफे चरा)',
+      nameEn: 'Danfe Bird',
       nameNe: 'डाँफे चरा (Danfe Bird)',
       category: 'Biotic',
       categoryNe: 'सजीव',
       descEn: 'National bird of Nepal (Himalayan Monal); living avian famed for its 9 metallic rainbow colors.',
-      descNe: 'नेपालको राष्ट्रिय चरा (Himalayan Monal); इन्द्रेणी जस्ता ९ रङ्गको चम्किलो प्वाँख भएको जीवित पन्छी।',
+      descNe: 'नेपालको राष्ट्रिय चरा (Himalayan Monal); इन्द्रेणी जस्ता 9 रङ्गको चम्किलो प्वाँख भएको जीवित पन्छी।',
       bioDetailEn: 'Features iridescent metallic sapphire wings, emerald crest, and copper neck ruff; digs with strong curved claws in alpine soil for tubers.',
       bioDetailNe: 'हरियो कल्की, निलो ढाड र तामा जस्तो रातो घाँटी भएको नौ-रङ्गी पन्छी जसले बलिया पञ्जाले माटो खोस्रेर जरा र किरा खान्छ।',
       x: 600,
@@ -482,7 +482,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
         ctx.stroke();
       }
 
-      // Native Himalayan Asala Snow Trout (असला माछा) swimming in river
+      // Native Himalayan Asala Snow Trout swimming in river
       const fishX = 520 + Math.sin(time * 2) * 20;
       const fishY = 445 + Math.cos(time * 2.5) * 6;
       ctx.save();
@@ -523,7 +523,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
       ctx.fill();
       ctx.restore();
 
-      // ── 5. GEOLOGICAL SOIL CROSS-SECTION (मलिलो माटो) ─────────────────────
+      // ── 5. GEOLOGICAL SOIL CROSS-SECTION ─────────────────────
       // Cutaway Embankment on Riverbank
       ctx.fillStyle = '#271202'; // Deep bedrock/humus
       ctx.beginPath();
@@ -568,7 +568,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
       ctx.arc(175, 472, 2, 0, Math.PI * 2);
       ctx.fill();
 
-      // ── 6. REALISTIC GRANITE ROCKS (ढुङ्गा चट्टान) ────────────────────────
+      // ── 6. REALISTIC GRANITE ROCKS ────────────────────────
       ctx.save();
       ctx.translate(690, 380);
       // Large Angular Granite Boulder
@@ -622,7 +622,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
       ctx.stroke();
       ctx.restore();
 
-      // ── 7. HIMALAYAN BLUE PINE & DEODAR (सल्लाको रुख) ─────────────────────
+      // ── 7. HIMALAYAN BLUE PINE & DEODAR ─────────────────────
       ctx.save();
       ctx.translate(160, 280);
 
@@ -707,7 +707,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
       });
       ctx.restore();
 
-      // ── 8. RHODODENDRON BLOOM BUSH (लालीगुराँस) ──────────────────────────
+      // ── 8. RHODODENDRON BLOOM BUSH ──────────────────────────
       ctx.save();
       ctx.translate(430, 325);
 
@@ -801,7 +801,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
       });
       ctx.restore();
 
-      // ── 9. ULTRA-REALISTIC HIMALAYAN MUSK DEER (कस्तुरी मृग) ──────────────
+      // ── 9. ULTRA-REALISTIC HIMALAYAN MUSK DEER ──────────────
       ctx.save();
       ctx.translate(320, 360);
 
@@ -974,7 +974,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
       ctx.restore();
       ctx.restore();
 
-      // ── 10. ULTRA-REALISTIC DANFE BIRD IN FLIGHT (डाँफे चरा) ──────────────
+      // ── 10. ULTRA-REALISTIC DANFE BIRD IN FLIGHT ──────────────
       // 9-Colored Himalayan Monal soaring over the valley
       ctx.save();
       const danfeFlyY = 155 + Math.sin(time * 3) * 12;
@@ -1129,7 +1129,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
       }
       ctx.restore();
 
-      // ── 11. SUNLIGHT CORONA & RAYS (सूर्यको प्रकाश) ───────────────────────
+      // ── 11. SUNLIGHT CORONA & RAYS ───────────────────────
       ctx.save();
       ctx.translate(770, 75);
 
@@ -1232,7 +1232,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Living Environment Explorer"
-      titleNe="सजीव र वातावरण २डी प्राकृतिक परिवेश"
+      titleNe="सजीव र वातावरण 2डी प्राकृतिक परिवेश"
       subject="Science"
       grade={4}
       chapter={3}
@@ -1525,7 +1525,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
                   color: filterMode === 'biotic' ? '#15803d' : '#334155',
                 }}
               >
-                🌲 {lang === 'en' ? 'Biotic (सजीव)' : 'सजीव प्राणी'}
+                🌲 {lang === 'en' ? 'Biotic' : 'सजीव प्राणी'}
               </button>
               <button
                 onClick={() => {
@@ -1543,7 +1543,7 @@ export const LivingEnvironmentSim: React.FC<BaseSimulationProps> = ({
                   color: filterMode === 'abiotic' ? '#0369a1' : '#334155',
                 }}
               >
-                ☀️ {lang === 'en' ? 'Abiotic (निर्जीव)' : 'निर्जीव तत्व'}
+                ☀️ {lang === 'en' ? 'Abiotic' : 'निर्जीव तत्व'}
               </button>
             </div>
           </div>

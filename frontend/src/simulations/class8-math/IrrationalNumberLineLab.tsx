@@ -1,7 +1,7 @@
 /**
  * IrrationalNumberLineLab.tsx
- * Grade 8 Mathematics – Unit 3: RATIONAL AND IRRATIONAL NUMBERS (परिमेय र अपरिमेय सङ्ख्याहरू)
- * Simulation 4: Irrational Numbers on the Number Line Lab (सङ्ख्या रेखामा अपरिमेय सङ्ख्या निर्माण प्रयोगशाला)
+ * Grade 8 Mathematics – Unit 3: RATIONAL AND IRRATIONAL NUMBERS
+ * Simulation 4: Irrational Numbers on the Number Line Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 3)
  */
 import React, { useState } from 'react';
@@ -12,57 +12,57 @@ import { Compass, Ruler, Triangle, RotateCw, Check, Sparkles } from 'lucide-reac
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'सङ्ख्या रेखामा √२ निर्माण गर्दा आधार १ एकाइ र लम्ब १ एकाइ भएको समकोण त्रिभुजको कर्ण (Hypotenuse) कति हुन्छ?',
+    np: 'सङ्ख्या रेखामा √2 निर्माण गर्दा आधार 1 एकाइ र लम्ब 1 एकाइ भएको समकोण त्रिभुजको कर्ण (Hypotenuse) कति हुन्छ?',
     en: 'When constructing √2 on a number line with base 1 and perpendicular 1, what is the hypotenuse?',
     options: [
-      { key: 'A', label: '√२ [ h = √(१² + १²) = √२ ]' },
-      { key: 'B', label: '२' },
-      { key: 'C', label: '√३' },
-      { key: 'D', label: '१' },
+      { key: 'A', label: '√2 [ h = √(1² + 1²) = √2 ]' },
+      { key: 'B', label: '2' },
+      { key: 'C', label: '√3' },
+      { key: 'D', label: '1' },
     ],
     answer: 'A',
   },
   {
-    np: 'कम्पासको सहायताले कर्णको नापलाई सङ्ख्या रेखामा काट्दा √२ को बिन्दु लगभग कति दशमलवमा पर्छ?',
+    np: 'कम्पासको सहायताले कर्णको नापलाई सङ्ख्या रेखामा काट्दा √2 को बिन्दु लगभग कति दशमलवमा पर्छ?',
     en: 'When transferring the hypotenuse to the number line with a compass, where does √2 lie approximately?',
     options: [
-      { key: 'A', label: 'लगभग १.४१४ (Between 1 and 2, closer to 1.4)' },
-      { key: 'B', label: 'लगभग २.५' },
-      { key: 'C', label: 'लगभग १.७३२' },
-      { key: 'D', label: 'ठ्याक्कै २' },
+      { key: 'A', label: 'About 1.414 (between 1 and 2, closer to 1.4)' },
+      { key: 'B', label: 'About 2.5' },
+      { key: 'C', label: 'About 1.732' },
+      { key: 'D', label: 'Exactly 2' },
     ],
     answer: 'A',
   },
   {
-    np: 'सङ्ख्या रेखामा √३ निर्माण गर्न कुन-कुन भुजाहरू भएको समकोण त्रिभुज बनाइन्छ?',
+    np: 'सङ्ख्या रेखामा √3 निर्माण गर्न कुन-कुन भुजाहरू भएको समकोण त्रिभुज बनाइन्छ?',
     en: 'To construct √3 on the number line, which perpendicular sides are used in the right triangle?',
     options: [
-      { key: 'A', label: 'आधार √२ र लम्ब १ एकाइ [ h = √((√२)² + १²) = √३ ]' },
-      { key: 'B', label: 'आधार २ र लम्ब १' },
-      { key: 'C', label: 'आधार १ र लम्ब १' },
-      { key: 'D', label: 'आधार ३ र लम्ब १' },
+      { key: 'A', label: 'Base √2 and perpendicular 1 unit [ h = √((√2)² + 1²) = √3 ]' },
+      { key: 'B', label: 'Base 2 and perpendicular 1' },
+      { key: 'C', label: 'Base 1 and perpendicular 1' },
+      { key: 'D', label: 'Base 3 and perpendicular 1' },
     ],
     answer: 'A',
   },
   {
-    np: 'आधार २ एकाइ र लम्ब १ एकाइ भएको समकोण त्रिभुजको कर्णले सङ्ख्या रेखामा कुन अपरिमेय सङ्ख्या दिन्छ?',
+    np: 'आधार 2 एकाइ र लम्ब 1 एकाइ भएको समकोण त्रिभुजको कर्णले सङ्ख्या रेखामा कुन अपरिमेय सङ्ख्या दिन्छ?',
     en: 'A right triangle with base 2 and perpendicular 1 yields which irrational number on the number line?',
     options: [
-      { key: 'A', label: '√५ [ h = √(२² + १²) = √(४ + १) = √५ ≈ २.२३६ ]' },
-      { key: 'B', label: '√६' },
-      { key: 'C', label: '√४ = २' },
-      { key: 'D', label: '√७' },
+      { key: 'A', label: '√5 [ h = √(2² + 1²) = √(4 + 1) = √5 ≈ 2.236 ]' },
+      { key: 'B', label: '√6' },
+      { key: 'C', label: '√4 = 2' },
+      { key: 'D', label: '√7' },
     ],
     answer: 'A',
   },
   {
-    np: 'के दशमलव १.४१४२... सङ्ख्या √२ को ठ्याक्कै मान (Exact Value) हो?',
+    np: 'के दशमलव 1.4142... सङ्ख्या √2 को ठ्याक्कै मान (Exact Value) हो?',
     en: 'Is the decimal 1.4142... the exact value of √2?',
     options: [
-      { key: 'A', label: 'होइन, यो केवल निकटीकरण (Approximation) हो, ठ्याक्कै मान √२ नै हो' },
-      { key: 'B', label: 'हो, यो ठ्याक्कै मान हो' },
-      { key: 'C', label: 'यो परिमेय सङ्ख्या हो' },
-      { key: 'D', label: 'यो पूर्णाङ्क हो' },
+      { key: 'A', label: 'No, this is only an approximation; the exact value is √2 itself' },
+      { key: 'B', label: 'Yes, this is the exact value' },
+      { key: 'C', label: 'It is a rational number' },
+      { key: 'D', label: 'It is an integer' },
     ],
     answer: 'A',
   },
@@ -98,40 +98,40 @@ export const IrrationalNumberLineLab: React.FC<{
 
   const rootConfig = {
     root2: {
-      nameNp: '√२ निर्माण',
+      nameNp: '√2 निर्माण',
       nameEn: 'Construct √2',
       base: 1,
       perp: 1,
       hypot: Math.SQRT2, // ~1.4142
-      hypotFormulaNp: 'h = √(१² + १²) = √२',
+      hypotFormulaNp: 'h = √(1² + 1²) = √2',
       hypotFormulaEn: 'h = √(1² + 1²) = √2',
-      approx: '१.४१४२',
+      approx: '1.4142',
       approxEn: '1.4142',
       baseLabel: '1',
       perpLabel: '1',
     },
     root3: {
-      nameNp: '√३ निर्माण',
+      nameNp: '√3 निर्माण',
       nameEn: 'Construct √3',
       base: Math.SQRT2, // ~1.4142
       perp: 1,
       hypot: Math.sqrt(3), // ~1.732
-      hypotFormulaNp: 'h = √((√२)² + १²) = √(२ + १) = √३',
+      hypotFormulaNp: 'h = √((√2)² + 1²) = √(2 + 1) = √3',
       hypotFormulaEn: 'h = √((√2)² + 1²) = √(2 + 1) = √3',
-      approx: '१.७३२०',
+      approx: '1.7320',
       approxEn: '1.7320',
       baseLabel: '√2',
       perpLabel: '1',
     },
     root5: {
-      nameNp: '√५ निर्माण',
+      nameNp: '√5 निर्माण',
       nameEn: 'Construct √5',
       base: 2,
       perp: 1,
       hypot: Math.sqrt(5), // ~2.236
-      hypotFormulaNp: 'h = √(२² + १²) = √(४ + १) = √५',
+      hypotFormulaNp: 'h = √(2² + 1²) = √(4 + 1) = √5',
       hypotFormulaEn: 'h = √(2² + 1²) = √(4 + 1) = √5',
-      approx: '२.२३६०',
+      approx: '2.2360',
       approxEn: '2.2360',
       baseLabel: '2',
       perpLabel: '1',
@@ -163,7 +163,7 @@ export const IrrationalNumberLineLab: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! पाइथागोरस साध्य र कम्पासको प्रयोग गरेर सङ्ख्या रेखामा √२, √३ र √५ निर्माण गरौँ!',
+        'नमस्ते! पाइथागोरस साध्य र कम्पासको प्रयोग गरेर सङ्ख्या रेखामा √2, √3 र √5 निर्माण गरौँ!',
         'Hello! Construct exact positions of √2, √3, and √5 on the number line using Pythagoras theorem and compass!'
       )}
     >
@@ -171,9 +171,9 @@ export const IrrationalNumberLineLab: React.FC<{
         {/* Navigation Selector */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'root2', labelNp: '१. सङ्ख्या रेखामा √२ निर्माण', labelEn: '1. Construct √2', value: 'root2' },
-            { id: 'root3', labelNp: '२. सङ्ख्या रेखामा √३ निर्माण', labelEn: '2. Construct √3', value: 'root3' },
-            { id: 'root5', labelNp: '३. सङ्ख्या रेखामा √५ निर्माण', labelEn: '3. Construct √5', value: 'root5' },
+            { id: 'root2', labelNp: '1. सङ्ख्या रेखामा √2 निर्माण', labelEn: '1. Construct √2', value: 'root2' },
+            { id: 'root3', labelNp: '2. सङ्ख्या रेखामा √3 निर्माण', labelEn: '2. Construct √3', value: 'root3' },
+            { id: 'root5', labelNp: '3. सङ्ख्या रेखामा √5 निर्माण', labelEn: '3. Construct √5', value: 'root5' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -314,22 +314,22 @@ export const IrrationalNumberLineLab: React.FC<{
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 14, lineHeight: 1.6, color: '#334155' }}>
                 <div style={{ background: '#ffffff', padding: 12, borderRadius: 8, borderLeft: '4px solid #0284c7' }}>
-                  <strong>{L('१. समकोण त्रिभुज रचना:', '1. Right Triangle Formation:')}</strong><br />
+                  <strong>{L('1. समकोण त्रिभुज रचना:', '1. Right Triangle Formation:')}</strong><br />
                   {L(
-                    `सङ्ख्या रेखामा आधार ${rootConfig.baseLabel} एकाइ र लम्ब १ एकाइ लिएर समकोण त्रिभुज बनाइन्छ।`,
+                    `सङ्ख्या रेखामा आधार ${rootConfig.baseLabel} एकाइ र लम्ब 1 एकाइ लिएर समकोण त्रिभुज बनाइन्छ।`,
                     `Construct right triangle with base = ${rootConfig.baseLabel} and perpendicular = 1 unit.`
                   )}
                 </div>
 
                 <div style={{ background: '#ffffff', padding: 12, borderRadius: 8, borderLeft: '4px solid #dc2626' }}>
-                  <strong>{L('२. पाइथागोरस साध्यबाट कर्ण (Hypotenuse):', '2. Pythagoras Theorem:')}</strong><br />
+                  <strong>{L('2. पाइथागोरस साध्यबाट कर्ण (Hypotenuse):', '2. Pythagoras Theorem:')}</strong><br />
                   <div style={{ fontSize: 16, fontWeight: 800, color: '#b91c1c', marginTop: 4 }}>
                     {isNe ? rootConfig.hypotFormulaNp : rootConfig.hypotFormulaEn}
                   </div>
                 </div>
 
                 <div style={{ background: '#ffffff', padding: 12, borderRadius: 8, borderLeft: '4px solid #16a34a' }}>
-                  <strong>{L('३. कम्पासद्वारा सङ्ख्या रेखामा स्थानान्तरण:', '3. Compass Arc Transfer:')}</strong><br />
+                  <strong>{L('3. कम्पासद्वारा सङ्ख्या रेखामा स्थानान्तरण:', '3. Compass Arc Transfer:')}</strong><br />
                   {L(
                     'उद्गम बिन्दु O मा कम्पासको चुच्चो राखी कर्णको नाप लिएर चापलाई सङ्ख्या रेखासम्म घुमाइन्छ। यसले सङ्ख्या रेखामा ठ्याक्कै अपरिमेय सङ्ख्याको विन्दु पत्ता लगाउँछ।',
                     'Place compass point at Origin O with radius equal to hypotenuse, sweep down to intersect the number line.'
@@ -343,7 +343,7 @@ export const IrrationalNumberLineLab: React.FC<{
                   {L('ठ्याक्कै मान (Exact) बनाम निकटीकरण (Approximation):', 'Exact Value vs Decimal Approximation:')}
                 </div>
                 <div style={{ fontSize: 18, fontWeight: 900, color: '#15803d', marginTop: 4 }}>
-                  {activeRoot === 'root2' ? '√२' : activeRoot === 'root3' ? '√३' : '√५'} ≈ {isNe ? toNp(rootConfig.approx) : rootConfig.approxEn}...
+                  {activeRoot === 'root2' ? '√2' : activeRoot === 'root3' ? '√3' : '√5'} ≈ {isNe ? toNp(rootConfig.approx) : rootConfig.approxEn}...
                 </div>
                 <div style={{ fontSize: 12, color: '#166534', marginTop: 4 }}>
                   {L(

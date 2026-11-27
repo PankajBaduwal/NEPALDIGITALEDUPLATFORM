@@ -1,6 +1,6 @@
 /**
  * SquareRootCalculationStudio.tsx
- * Grade 7 Mathematics – Lesson 2: WHOLE NUMBER (पूर्ण सङ्ख्या)
+ * Grade 7 Mathematics – Lesson 2: WHOLE NUMBER
  * Simulation 2: Square Root Calculation Studio (2D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 18-28)
  */
@@ -17,35 +17,35 @@ interface PrimeFactorPair {
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'लगातार बिजोर सङ्ख्या घटाउने विधिबाट √४९ पत्ता लगाउँदा कति पटक घटाउनुपर्छ?',
+    np: 'लगातार बिजोर सङ्ख्या घटाउने विधिबाट √49 पत्ता लगाउँदा कति times घटाउनुपर्छ?',
     en: 'How many continuous odd subtractions are required to find √49?',
     options: [
-      { key: 'A', label: '५ पटक' },
-      { key: 'B', label: '६ पटक' },
-      { key: 'C', label: '७ पटक (१+३+५+७+९+११+१३)' },
-      { key: 'D', label: '९ पटक' },
+      { key: 'A', label: '5 times' },
+      { key: 'B', label: '6 times' },
+      { key: 'C', label: '7 times (1+3+5+7+9+11+13)' },
+      { key: 'D', label: '9 times' },
     ],
     answer: 'C',
   },
   {
-    np: 'अभाज्य गुणनखण्ड विधिबाट √१२२५ को मान कति हुन्छ? (१२२५ = ५ × ५ × ७ × ७)',
+    np: 'अभाज्य गुणनखण्ड विधिबाट √1225 को मान कति हुन्छ? (1225 = 5 × 5 × 7 × 7)',
     en: 'What is √1225 using prime factorisation? (1225 = 5 × 5 × 7 × 7)',
     options: [
-      { key: 'A', label: '२५' },
-      { key: 'B', label: '३५ (५ × ७ = ३५)' },
-      { key: 'C', label: '४५' },
-      { key: 'D', label: '५५' },
+      { key: 'A', label: '25' },
+      { key: 'B', label: '35 (5 × 7 = 35)' },
+      { key: 'C', label: '45' },
+      { key: 'D', label: '55' },
     ],
     answer: 'B',
   },
   {
-    np: '१२६७५ = ३ × ५² × १३² लाई पूर्ण वर्ग बनाउन कुन सबैभन्दा सानो सङ्ख्याले भाग गर्नुपर्छ?',
+    np: '12675 = 3 × 5² × 13² लाई पूर्ण वर्ग बनाउन कुन सबैभन्दा सानो सङ्ख्याले भाग गर्नुपर्छ?',
     en: 'By what least number should 12675 = 3 × 5² × 13² be divided to make it a perfect square?',
     options: [
-      { key: 'A', label: '३ (३ को जोडी नभएकोले)' },
-      { key: 'B', label: '५' },
-      { key: 'C', label: '१३' },
-      { key: 'D', label: '१५' },
+      { key: 'A', label: '3' },
+      { key: 'B', label: '5' },
+      { key: 'C', label: '13' },
+      { key: 'D', label: '15' },
     ],
     answer: 'A',
   },
@@ -53,10 +53,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'भाग विधिबाट वर्गमूल निकाल्दा दायाँबाट कति-कति अङ्कको जोडी (Pair) बनाइन्छ?',
     en: 'When finding square root by division method, how many digits are paired from the right?',
     options: [
-      { key: 'A', label: '१ अङ्क' },
-      { key: 'B', label: '२ अङ्क (जोडी/Pairs)' },
-      { key: 'C', label: '३ अङ्क' },
-      { key: 'D', label: '४ अङ्क' },
+      { key: 'A', label: '1 digit' },
+      { key: 'B', label: '2 digits (pairs)' },
+      { key: 'C', label: '3 digits' },
+      { key: 'D', label: '4 digits' },
     ],
     answer: 'B',
   },
@@ -88,7 +88,7 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
   const handleNextSubStep = () => {
     const nextOdd = 2 * subStep + 1;
     if (currentVal < nextOdd) {
-      kit.oops(L('शेष ० भएन, यो पूर्ण वर्ग होइन!', 'Cannot reach 0, not a perfect square!'));
+      kit.oops(L('शेष 0 भएन, यो पूर्ण वर्ग होइन!', 'Cannot reach 0, not a perfect square!'));
       return;
     }
     kit.tap();
@@ -98,7 +98,7 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
     setSubStep((s) => s + 1);
 
     if (nextVal === 0) {
-      kit.good(L(`उत्कृष्ट! ${toNp(subStep + 1)} पटकमा शून्य आयो ⟹ √${toNp(subNumber)} = ${toNp(subStep + 1)}`, `Finished in ${subStep + 1} steps ⟹ √${subNumber} = ${subStep + 1}`));
+      kit.good(L(`उत्कृष्ट! ${toNp(subStep + 1)} timesमा शून्य आयो ⟹ √${toNp(subNumber)} = ${toNp(subStep + 1)}`, `Finished in ${subStep + 1} steps ⟹ √${subNumber} = ${subStep + 1}`));
     }
   };
 
@@ -141,53 +141,53 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
     }
   > = {
     1764: {
-      pairs: ['१७', '६४'],
+      pairs: ['17', '64'],
       finalRoot: 42,
       steps: [
         {
-          titleNp: 'चरण १: पहिलो जोडी (१७) को वर्गमूल अनुमान',
+          titleNp: 'चरण 1: पहिलो जोडी (17) को वर्गमूल अनुमान',
           titleEn: 'Step 1: Estimate root for first pair (17)',
-          quotient: '४',
-          divisor: '४',
-          subtraction: '१७ - १६ = १',
-          remainder: '१',
-          descNp: '१७ भन्दा नबढ्ने ठूलो पूर्ण वर्ग १६ हो (४ × ४ = १६)। भागफलमा ४ लेख्ने।',
+          quotient: '4',
+          divisor: '4',
+          subtraction: '17 - 16 = 1',
+          remainder: '1',
+          descNp: '17 भन्दा नबढ्ने ठूलो पूर्ण वर्ग 16 हो (4 × 4 = 16)। भागफलमा 4 लेख्ने।',
           descEn: 'Largest square ≤ 17 is 16 (4 × 4 = 16). Write 4 in quotient.',
         },
         {
-          titleNp: 'चरण २: अर्को जोडी (६४) तल झार्ने र भाजक दोब्बर गर्ने',
+          titleNp: 'चरण 2: अर्को जोडी (64) तल झार्ने र भाजक दोब्बर गर्ने',
           titleEn: 'Step 2: Bring down next pair (64) and double the divisor',
-          quotient: '४२',
-          divisor: '८२',
-          subtraction: '१६४ - १६४ = ०',
-          remainder: '०',
-          descNp: '६४ तल झार्दा १६४ भयो। ४ को दोब्बर ८ भयो। ८ को पछाडि २ राख्दा: ८२ × २ = १६४। शेष = ०।',
+          quotient: '42',
+          divisor: '82',
+          subtraction: '164 - 164 = 0',
+          remainder: '0',
+          descNp: '64 तल झार्दा 164 भयो। 4 को दोब्बर 8 भयो। 8 को पछाडि 2 राख्दा: 82 × 2 = 164। शेष = 0।',
           descEn: 'Bringing down 64 gives 164. 4 doubled is 8. Putting 2 gives 82 × 2 = 164. Remainder = 0.',
         },
       ],
     },
     2304: {
-      pairs: ['२३', '०४'],
+      pairs: ['23', '04'],
       finalRoot: 48,
       steps: [
         {
-          titleNp: 'चरण १: पहिलो जोडी (२३) हेर्ने',
+          titleNp: 'चरण 1: पहिलो जोडी (23) हेर्ने',
           titleEn: 'Step 1: Check first pair (23)',
-          quotient: '४',
-          divisor: '४',
-          subtraction: '२३ - १६ = ७',
-          remainder: '७',
-          descNp: '४ × ४ = १६ (५ × ५ = २५ बढी हुन्छ)। शेष ७ रह्यो।',
+          quotient: '4',
+          divisor: '4',
+          subtraction: '23 - 16 = 7',
+          remainder: '7',
+          descNp: '4 × 4 = 16। शेष 7 रह्यो।',
           descEn: '4 × 4 = 16 (5²=25 is too big). Remainder is 7.',
         },
         {
-          titleNp: 'चरण २: ०४ तल झार्ने र भाजक दोब्बर (८) बनाउने',
+          titleNp: 'चरण 2: 04 तल झार्ने र भाजक दोब्बर (8) बनाउने',
           titleEn: 'Step 2: Bring down 04, divisor becomes 88',
-          quotient: '४८',
-          divisor: '८८',
-          subtraction: '७०४ - ७०४ = ०',
-          remainder: '०',
-          descNp: '०४ झार्दा ७०४ भयो। ८ को पछाडि ८ राख्दा: ८८ × ८ = ७०४। शेष = ०।',
+          quotient: '48',
+          divisor: '88',
+          subtraction: '704 - 704 = 0',
+          remainder: '0',
+          descNp: '04 झार्दा 704 भयो। 8 को पछाडि 8 राख्दा: 88 × 8 = 704। शेष = 0।',
           descEn: 'Divisor 88 × 8 = 704. Remainder = 0. Therefore √2304 = 48.',
         },
       ],
@@ -204,7 +204,7 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'वर्गमूल निकाल्ने ३ वटा मुख्य विधिहरू छन्: लगातार बिजोर सङ्ख्या घटाउने, अभाज्य गुणनखण्ड, र भाग विधि। आउनुहोस् अभ्यास गरौँ!',
+        'वर्गमूल निकाल्ने 3 pcs मुख्य विधिहरू छन्: लगातार बिजोर सङ्ख्या घटाउने, अभाज्य गुणनखण्ड, र भाग विधि। आउनुहोस् अभ्यास गरौँ!',
         'There are 3 core square root methods: continuous subtraction, prime factorisation, and long division. Let us explore!'
       )}
     >
@@ -212,10 +212,10 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'subtraction', np: '१. लगातार घटाउ विधि (Continuous Subtraction)', en: '1. Continuous Subtraction' },
-            { id: 'prime', np: '२. अभाज्य गुणनखण्ड विधि (Prime Factorisation)', en: '2. Prime Factorisation' },
-            { id: 'division', np: '३. भाग विधि (Division Method)', en: '3. Division Method' },
-            { id: 'perfect_test', np: '४. पूर्ण वर्ग जाँच र न्यूनतम गुणन/भाग', en: '4. Perfect Square Test' },
+            { id: 'subtraction', np: '1. लगातार घटाउ विधि (Continuous Subtraction)', en: '1. Continuous Subtraction' },
+            { id: 'prime', np: '2. अभाज्य गुणनखण्ड विधि (Prime Factorisation)', en: '2. Prime Factorisation' },
+            { id: 'division', np: '3. भाग विधि (Division Method)', en: '3. Division Method' },
+            { id: 'perfect_test', np: '4. पूर्ण वर्ग जाँच र न्यूनतम गुणन/भाग', en: '4. Perfect Square Test' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -247,10 +247,10 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('पाठ्यपुस्तक विधि १ (पृष्ठ १८)', 'Textbook Method 1 (Page 18)')}
+                  {L('पाठ्यपुस्तक विधि 1', 'Textbook Method 1 (Page 18)')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-                  {L('लगातार १, ३, ५, ७, ९... बिजोर सङ्ख्याहरू घटाएर वर्गमूल पत्ता लगाउने', 'Find Square Root by Subtracting Consecutive Odd Numbers (1, 3, 5, 7...)')}
+                  {L('लगातार 1, 3, 5, 7, 9... बिजोर सङ्ख्याहरू घटाएर वर्गमूल पत्ता लगाउने', 'Find Square Root by Subtracting Consecutive Odd Numbers (1, 3, 5, 7...)')}
                 </h3>
               </div>
               <div style={{ display: 'flex', gap: 6 }}>
@@ -339,7 +339,7 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
                   {L('घटाउ गरिएका चरणहरूको सङ्ख्या (Number of Subtraction Steps):', 'Number of Subtraction Steps:')}
                 </div>
                 <div style={{ fontSize: 32, fontWeight: 900, color: '#0F766E', marginBottom: 8 }}>
-                  {isNe ? toNp(subStep) : subStep} {L('पटक', 'times')}
+                  {isNe ? toNp(subStep) : subStep} {L('times', 'times')}
                 </div>
                 {currentVal === 0 && (
                   <div style={{ fontSize: 15, fontWeight: 900, color: '#166534', background: '#DCFCE7', padding: '8px 14px', borderRadius: 10 }}>
@@ -374,7 +374,7 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('पाठ्यपुस्तक विधि २ (पृष्ठ १९-२१)', 'Textbook Method 2 (Pages 19-21)')}
+                  {L('पाठ्यपुस्तक विधि 2', 'Textbook Method 2 (Pages 19-21)')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                   {L('अभाज्य गुणनखण्ड गरी जोडी बनाएर वर्गमूल निकाल्ने', 'Prime Factorisation and Pairing Equal Factors')}
@@ -411,7 +411,7 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
                 {/* Step 1: Prime Factors List */}
                 <div style={{ background: '#F8FAFC', padding: 18, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                   <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B', marginBottom: 6 }}>
-                    १. {L('अभाज्य गुणनखण्डहरू (Prime Factors):', 'Prime Factors:')}
+                    1. {L('अभाज्य गुणनखण्डहरू (Prime Factors):', 'Prime Factors:')}
                   </div>
                   <div style={{ fontSize: 18, fontWeight: 900, color: '#0F172A', fontFamily: 'monospace' }}>
                     {isNe ? toNp(selectedPfNum) : selectedPfNum} = {PF_DATA[selectedPfNum].factors.map((f) => (isNe ? toNp(f) : f)).join(' × ')}
@@ -421,7 +421,7 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
                 {/* Step 2: Grouping into Pairs */}
                 <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', padding: 18, borderRadius: 14 }}>
                   <div style={{ fontSize: 13, fontWeight: 800, color: '#0F766E', marginBottom: 8 }}>
-                    २. {L('बराबर अभाज्य गुणनखण्डहरूलाई जोडी बनाउँदा (Grouping into pairs):', 'Grouping equal prime factors into pairs:')}
+                    2. {L('बराबर अभाज्य गुणनखण्डहरूलाई जोडी बनाउँदा (Grouping into pairs):', 'Grouping equal prime factors into pairs:')}
                   </div>
                   <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
                     <span style={{ fontSize: 16, fontWeight: 900 }}>√{isNe ? toNp(selectedPfNum) : selectedPfNum} = √[</span>
@@ -437,7 +437,7 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
                 {/* Step 3: Taking one factor from each pair */}
                 <div style={{ background: '#DCFCE7', border: '2px solid #16A34A', padding: 18, borderRadius: 14 }}>
                   <div style={{ fontSize: 13, fontWeight: 800, color: '#166534', marginBottom: 6 }}>
-                    ३. {L('प्रत्येक जोडीबाट एक-एक गुणनखण्ड लिई गुणन गर्दा:', 'Taking one factor from each pair and multiplying:')}
+                    3. {L('प्रत्येक जोडीबाट एक-एक गुणनखण्ड लिई गुणन गर्दा:', 'Taking one factor from each pair and multiplying:')}
                   </div>
                   <div style={{ fontSize: 22, fontWeight: 900, color: '#14532D' }}>
                     √{isNe ? toNp(selectedPfNum) : selectedPfNum} = {PF_DATA[selectedPfNum].paired.map((p) => (isNe ? toNp(p[0]) : p[0])).join(' × ')} = <strong>{isNe ? toNp(PF_DATA[selectedPfNum].root) : PF_DATA[selectedPfNum].root}</strong>
@@ -454,7 +454,7 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#FEF3C7', color: '#B45309', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('पाठ्यपुस्तक विधि ३ (पृष्ठ २२-२४)', 'Textbook Method 3 (Pages 22-24)')}
+                  {L('पाठ्यपुस्तक विधि 3', 'Textbook Method 3 (Pages 22-24)')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                   {L('भाग विधिबाट वर्गमूल निकाल्ने चरणबद्ध अभ्यास', 'Step-by-Step Square Root by Long Division')}
@@ -492,7 +492,7 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
                 {/* Pairs Header */}
                 <div style={{ background: '#F8FAFC', padding: 14, borderRadius: 12, border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', gap: 12 }}>
                   <span style={{ fontSize: 13, fontWeight: 800, color: '#475569' }}>
-                    {L('दायाँबाट २-२ अङ्कका जोडीहरू:', 'Pairs grouped from right:')}
+                    {L('दायाँबाट 2-2 अङ्कका जोडीहरू:', 'Pairs grouped from right:')}
                   </span>
                   <div style={{ display: 'flex', gap: 8 }}>
                     {LONG_DIV_EXAMPLES[selectedDivNum].pairs.map((p, idx) => (
@@ -565,14 +565,14 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
               {L('पूर्ण वर्ग बनाउन न्यूनतम गुणन वा भाग गर्नुपर्ने सङ्ख्या पत्ता लगाउने', 'Least Multiplier or Divisor to Form a Perfect Square')}
             </h3>
             <p style={{ margin: '0 0 16px', fontSize: 13, color: '#64748B' }}>
-              {L('पाठ्यपुस्तक पृष्ठ २४ उदाहरण: १२६७५ को अभाज्य गुणनखण्ड गरी जाँच गर्नुहोस्।', 'Textbook Page 24 Example: Factorize 12675 and find unpaired prime.')}
+              {L('पाठ्यपुस्तक पृष्ठ 24 उदाहरण: 12675 को अभाज्य गुणनखण्ड गरी जाँच गर्नुहोस्।', 'Textbook Page 24 Example: Factorize 12675 and find unpaired prime.')}
             </p>
 
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 20 }}>
               {[
-                { num: 12675, descNp: '१२६७५ = ३ × ५ × ५ × १३ × १३', descEn: '12675 = 3 × 5 × 5 × 13 × 13', unpaired: 3 },
-                { num: 180, descNp: '१८० = २ × २ × ३ × ३ × ५', descEn: '180 = 2 × 2 × 3 × 3 × 5', unpaired: 5 },
-                { num: 500, descNp: '५०० = २ × २ × ५ × ५ × ५', descEn: '500 = 2 × 2 × 5 × 5 × 5', unpaired: 5 },
+                { num: 12675, descNp: '12675 = 3 × 5 × 5 × 13 × 13', descEn: '12675 = 3 × 5 × 5 × 13 × 13', unpaired: 3 },
+                { num: 180, descNp: '180 = 2 × 2 × 3 × 3 × 5', descEn: '180 = 2 × 2 × 3 × 3 × 5', unpaired: 5 },
+                { num: 500, descNp: '500 = 2 × 2 × 5 × 5 × 5', descEn: '500 = 2 × 2 × 5 × 5 × 5', unpaired: 5 },
               ].map((item) => (
                 <button
                   key={item.num}
@@ -599,9 +599,9 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
             {/* Analysis Card */}
             <div style={{ background: '#FFFBEB', border: '2px solid #F59E0B', borderRadius: 16, padding: 20 }}>
               <div style={{ fontSize: 16, fontWeight: 900, color: '#92400E', marginBottom: 8 }}>
-                {testNumber === 12675 && '१२६७५ = ३ × (५ × ५) × (१३ × १३)'}
-                {testNumber === 180 && '१८० = (२ × २) × (३ × ३) × ५'}
-                {testNumber === 500 && '५०० = (२ × २) × (५ × ५) × ५'}
+                {testNumber === 12675 && '12675 = 3 × (5 × 5) × (13 × 13)'}
+                {testNumber === 180 && '180 = (2 × 2) × (3 × 3) × 5'}
+                {testNumber === 500 && '500 = (2 × 2) × (5 × 5) × 5'}
               </div>
 
               <div style={{ fontSize: 14, color: '#78350F', lineHeight: 1.6 }}>
@@ -610,13 +610,13 @@ export const SquareRootCalculationStudio: React.FC<{ onBackToLibrary?: () => voi
                 </div>
                 <div>
                   • {L('न्यूनतम गुणन गर्नुपर्ने सङ्ख्या (Least Multiplier):', 'Least number to multiply:')}{' '}
-                  <strong>{testNumber === 12675 ? (isNe ? '३' : '3') : isNe ? '५' : '5'}</strong>{' '}
-                  {L('(जोडी पुर्‍याउन)', '(to complete pair)')}
+                  <strong>{testNumber === 12675 ? (isNe ? '3' : '3') : isNe ? '5' : '5'}</strong>{' '}
+                  {L('', '(to complete pair)')}
                 </div>
                 <div>
                   • {L('न्यूनतम भाग गर्नुपर्ने सङ्ख्या (Least Divisor):', 'Least number to divide:')}{' '}
-                  <strong>{testNumber === 12675 ? (isNe ? '३' : '3') : isNe ? '५' : '5'}</strong>{' '}
-                  {L('(अतिरिक्त गुणनखण्ड हटाउन)', '(to remove unpaired factor)')}
+                  <strong>{testNumber === 12675 ? (isNe ? '3' : '3') : isNe ? '5' : '5'}</strong>{' '}
+                  {L('', '(to remove unpaired factor)')}
                 </div>
               </div>
             </div>

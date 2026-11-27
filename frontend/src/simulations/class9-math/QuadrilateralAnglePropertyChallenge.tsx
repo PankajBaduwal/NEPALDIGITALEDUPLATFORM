@@ -34,7 +34,7 @@ const CHALLENGES: QuadChallengeItem[] = [
     titleNp: 'चतुर्भुजको चौथो कोण पत्ता लगाउने',
     titleEn: 'Finding the 4th Angle of a Quadrilateral',
     storyNp:
-      'एउटा चतुर्भुज ABCD मा तीनवटा कोणहरू क्रमश: ∠A = ८५°, ∠B = १०५° र ∠C = ७५° छन्। चौथो कोण ∠D को मान कति डिग्री हुन्छ?',
+      'एउटा चतुर्भुज ABCD मा तीनpcs कोणहरू क्रमश: ∠A = 85°, ∠B = 105° र ∠C = 75° छन्। चौथो कोण ∠D को मान कति degrees हुन्छ?',
     storyEn:
       'In a quadrilateral ABCD, three angles are ∠A = 85°, ∠B = 105°, and ∠C = 75°. Find the value of fourth angle ∠D.',
     diagramSvg: {
@@ -44,13 +44,13 @@ const CHALLENGES: QuadChallengeItem[] = [
     },
     correctVal: 95,
     unit: '°',
-    hintNp: 'चतुर्भुजका चारवटै भित्री कोणहरूको योगफल ३६०° हुन्छ।',
+    hintNp: 'चतुर्भुजका चारवटै भित्री कोणहरूको योगफल 360° हुन्छ।',
     hintEn: 'The sum of all four interior angles in any quadrilateral is 360°.',
     solutionStepsNp: [
-      '१. ∠A + ∠B + ∠C + ∠D = ३६०° (चतुर्भुजको कोण योगफल)',
-      '२. ८५° + १०५° + ७५° + ∠D = ३६०°',
-      '३. २६५° + ∠D = ३६०°',
-      '४. ∠D = ३६०° - २६५° = ९५°',
+      '1. ∠A + ∠B + ∠C + ∠D = 360° (चतुर्भुजको कोण योगफल)',
+      '2. 85° + 105° + 75° + ∠D = 360°',
+      '3. 265° + ∠D = 360°',
+      '4. ∠D = 360° - 265° = 95°',
     ],
     solutionStepsEn: [
       '1. ∠A + ∠B + ∠C + ∠D = 360° (Angle sum property)',
@@ -67,7 +67,7 @@ const CHALLENGES: QuadChallengeItem[] = [
     titleNp: 'समानान्तर चतुर्भुजको आसन्न कोण',
     titleEn: 'Adjacent Angle of a Parallelogram',
     storyNp:
-      'समानान्तर चतुर्भुज PQRS मा ∠P = ६०° छ। यसको आसन्न कोण ∠Q को मान कति हुन्छ?',
+      'समानान्तर चतुर्भुज PQRS मा ∠P = 60° छ। यसको आसन्न कोण ∠Q को मान कति हुन्छ?',
     storyEn:
       'In a parallelogram PQRS, ∠P = 60°. Find the value of adjacent angle ∠Q.',
     diagramSvg: {
@@ -77,12 +77,12 @@ const CHALLENGES: QuadChallengeItem[] = [
     },
     correctVal: 120,
     unit: '°',
-    hintNp: 'समानान्तर चतुर्भुजका आसन्न कोणहरू संपूरक (१८०°) हुन्छन्।',
+    hintNp: 'समानान्तर चतुर्भुजका आसन्न कोणहरू संपूरक (180°) हुन्छन्।',
     hintEn: 'Adjacent angles of a parallelogram are supplementary (sum = 180°).',
     solutionStepsNp: [
-      '१. ∠P + ∠Q = १८०° (समानान्तर रेखाका क्रमागत भित्री कोणहरू)',
-      '२. ६०° + ∠Q = १८०°',
-      '३. ∠Q = १८०° - ६०° = १२०°',
+      '1. ∠P + ∠Q = 180° (समानान्तर रेखाका क्रमागत भित्री कोणहरू)',
+      '2. 60° + ∠Q = 180°',
+      '3. ∠Q = 180° - 60° = 120°',
     ],
     solutionStepsEn: [
       '1. ∠P + ∠Q = 180° (Consecutive interior angles)',
@@ -98,7 +98,7 @@ const CHALLENGES: QuadChallengeItem[] = [
     titleNp: 'समानान्तर चतुर्भुजमा बीजीय सम्मुख कोण',
     titleEn: 'Algebraic Opposite Angles in a Parallelogram',
     storyNp:
-      'समानान्तर चतुर्भुज ABCD मा सम्मुख कोणहरू ∠A = (३x + १०)° र ∠C = (२x + ४०)° छन्। x को मान पत्ता लगाउनुहोस्।',
+      'समानान्तर चतुर्भुज ABCD मा सम्मुख कोणहरू ∠A = (3x + 10)° र ∠C = (2x + 40)° छन्। x को मान पत्ता लगाउनुहोस्।',
     storyEn:
       'In a parallelogram ABCD, opposite angles are ∠A = (3x + 10)° and ∠C = (2x + 40)°. Find the value of x.',
     diagramSvg: {
@@ -111,10 +111,10 @@ const CHALLENGES: QuadChallengeItem[] = [
     hintNp: 'समानान्तर चतुर्भुजका सम्मुख कोणहरू आपसमा बराबर हुन्छन् (∠A = ∠C)।',
     hintEn: 'Opposite angles of a parallelogram are equal (∠A = ∠C).',
     solutionStepsNp: [
-      '१. ∠A = ∠C (समानान्तर चतुर्भुजका सम्मुख कोण)',
-      '२. ३x + १० = २x + ४०',
-      '३. ३x - २x = ४० - १०',
-      '४. x = ३०°',
+      '1. ∠A = ∠C',
+      '2. 3x + 10 = 2x + 40',
+      '3. 3x - 2x = 40 - 10',
+      '4. x = 30°',
     ],
     solutionStepsEn: [
       '1. ∠A = ∠C (Opposite angles of parallelogram)',
@@ -131,7 +131,7 @@ const CHALLENGES: QuadChallengeItem[] = [
     titleNp: 'अनुपातमा दिइएका चार कोणहरूको समस्या',
     titleEn: 'Four Angles in Ratio 2:3:4:6',
     storyNp:
-      'कुनै चतुर्भुजका चारवटै कोणहरू २:३:४:६ को अनुपातमा छन्। उक्त चतुर्भुजको सबैभन्दा सानो कोण कति डिग्रीको होला?',
+      'कुनै चतुर्भुजका चारवटै कोणहरू 2:3:4:6 को अनुपातमा छन्। उक्त चतुर्भुजको सबैभन्दा सानो कोण कति degreesको होला?',
     storyEn:
       'The four angles of a quadrilateral are in the ratio 2:3:4:6. Find the smallest angle in degrees.',
     diagramSvg: {
@@ -141,13 +141,13 @@ const CHALLENGES: QuadChallengeItem[] = [
     },
     correctVal: 48,
     unit: '°',
-    hintNp: 'कोणहरू २x, ३x, ४x, ६x मान्ने र जम्मा ३६०° सँग तुलना गर्ने।',
+    hintNp: 'कोणहरू 2x, 3x, 4x, 6x मान्ने र जम्मा 360° सँग तुलना गर्ने।',
     hintEn: 'Let angles be 2x, 3x, 4x, 6x. Their sum equals 360°.',
     solutionStepsNp: [
-      '१. २x + ३x + ४x + ६x = ३६०° (कोणहरूको योगफल)',
-      '२. १५x = ३६०°',
-      '३. x = ३६०° ÷ १५ = २४°',
-      '४. सबैभन्दा सानो कोण = २x = २ × २४° = ४८°',
+      '1. 2x + 3x + 4x + 6x = 360° (कोणहरूको योगफल)',
+      '2. 15x = 360°',
+      '3. x = 360° ÷ 15 = 24°',
+      '4. सबैभन्दा सानो कोण = 2x = 2 × 24° = 48°',
     ],
     solutionStepsEn: [
       '1. 2x + 3x + 4x + 6x = 360°',
@@ -160,10 +160,10 @@ const CHALLENGES: QuadChallengeItem[] = [
 
 const QUIZ_QUESTIONS = [
   {
-    np: 'चतुर्भुजका कोणहरूको अनुपात १:२:३:४ भए सबैभन्दा ठूलो कोण कति हुन्छ?',
+    np: 'चतुर्भुजका कोणहरूको अनुपात 1:2:3:4 भए सबैभन्दा ठूलो कोण कति हुन्छ?',
     en: 'If angles of a quadrilateral are in ratio 1:2:3:4, what is the largest angle?',
     options: [
-      { key: 'A', label: '144° (१०x = ३६०° ⇒ x = ३६°, ४x = १४४°)' },
+      { key: 'A', label: '144° (10x = 360° ⇒ x = 36°, 4x = 144°)' },
       { key: 'B', label: '108°' },
       { key: 'C', label: '72°' },
       { key: 'D', label: '180°' },
@@ -174,7 +174,7 @@ const QUIZ_QUESTIONS = [
     np: 'समलम्ब चतुर्भुज (Trapezium) मा समानान्तर भुजा बीचका दुई क्रमागत भित्री कोणहरूको योगफल कति हुन्छ?',
     en: 'In a trapezium, what is the sum of consecutive interior angles between parallel sides?',
     options: [
-      { key: 'A', label: '180° (क्रमागत भित्री कोणहरू)' },
+      { key: 'A', label: '180° (consecutive interior angles)' },
       { key: 'B', label: '360°' },
       { key: 'C', label: '90°' },
       { key: 'D', label: '270°' },
@@ -182,10 +182,10 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: 'रोम्बस (Rhombus) का विकर्णहरू परस्पर कति डिग्रीको कोणमा काटिन्छन्?',
+    np: 'रोम्बस (Rhombus) का विकर्णहरू परस्पर कति degreesको कोणमा काटिन्छन्?',
     en: 'At what angle do the diagonals of a rhombus intersect?',
     options: [
-      { key: 'A', label: '90° (समकोणमा लम्ब हुन्छन्)' },
+      { key: 'A', label: '90° (they are perpendicular at right angles)' },
       { key: 'B', label: '60°' },
       { key: 'C', label: '45°' },
       { key: 'D', label: '180°' },
@@ -245,7 +245,7 @@ export const QuadrilateralAnglePropertyChallenge: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! चतुर्भुजका कोणहरूको योगफल ३६०°, समानान्तर चतुर्भुजका सम्मुख र आसन्न कोणहरू, तथा अनुपातमा आधारित समस्याहरूलाई तीन कठिनाइ तहहरूमा समाधान गर्नुहोस्!',
+        'नमस्ते! चतुर्भुजका कोणहरूको योगफल 360°, समानान्तर चतुर्भुजका सम्मुख र आसन्न कोणहरू, तथा अनुपातमा आधारित समस्याहरूलाई तीन कठिनाइ तहहरूमा समाधान गर्नुहोस्!',
         'Welcome! Solve quadrilateral angle challenges across basic, intermediate, and challenge levels with step-by-step verified explanations!'
       )}
     >

@@ -1,7 +1,7 @@
 /**
  * CountTheVillage.tsx
- * Simulation 04: Count the Village (गाउँमा गनौँ)
- * Class 1 Mathematics - Chapter 5: Zero (शून्य)
+ * Simulation 04: Count the Village
+ * Class 1 Mathematics - Chapter 5: Zero
  * Nepal Digital Education Platform
  */
 
@@ -40,7 +40,7 @@ interface VillageSpot {
   bgGradient: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const NEP_NAMES = ['शून्य', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ'];
 const EN_NAMES = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
 
@@ -49,7 +49,7 @@ export const CountTheVillage: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Navigation & Settings
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Village locations list (mix of zero and non-zero counts)
@@ -63,7 +63,7 @@ export const CountTheVillage: React.FC<Props> = ({
       promptEn: 'How many birds are sitting on this Pipal tree?',
       actualCount: 3,
       options: [1, 3, 0],
-      explanationNp: 'रुखको हाँगामा ३ वटा चराहरू बसेका छन्।',
+      explanationNp: 'रुखको हाँगामा 3 वटा चराहरू बसेका छन्।',
       explanationEn: 'There are 3 birds sitting on the tree branches.',
       isZero: false,
       bgGradient: 'linear-gradient(135deg, #15803d, #166534)',
@@ -77,7 +77,7 @@ export const CountTheVillage: React.FC<Props> = ({
       promptEn: 'How many birds are on this tree branch?',
       actualCount: 0,
       options: [0, 2, 4],
-      explanationNp: 'यस रुखमा कुनै पनि चरा छैन, त्यसैले चराको सङ्ख्या शून्य (०) हो।',
+      explanationNp: 'यस रुखमा कुनै पनि चरा छैन, त्यसैले चराको सङ्ख्या शून्य (0) हो।',
       explanationEn: 'There are no birds on this tree, so the count is zero (0).',
       isZero: true,
       bgGradient: 'linear-gradient(135deg, #78350f, #451a03)',
@@ -91,7 +91,7 @@ export const CountTheVillage: React.FC<Props> = ({
       promptEn: 'How many ducks are swimming in the pond?',
       actualCount: 4,
       options: [2, 4, 0],
-      explanationNp: 'पोखरीमा ४ वटा हाँसहरू पौडिरहेका छन्।',
+      explanationNp: 'पोखरीमा 4 वटा हाँसहरू पौडिरहेका छन्।',
       explanationEn: 'There are 4 ducks swimming in the pond.',
       isZero: false,
       bgGradient: 'linear-gradient(135deg, #0284c7, #0369a1)',
@@ -105,7 +105,7 @@ export const CountTheVillage: React.FC<Props> = ({
       promptEn: 'How many ducks are around this well?',
       actualCount: 0,
       options: [0, 1, 3],
-      explanationNp: 'यहाँ कुनै पनि हाँस छैन, सङ्ख्या शून्य (०) हो।',
+      explanationNp: 'यहाँ कुनै पनि हाँस छैन, सङ्ख्या शून्य (0) हो।',
       explanationEn: 'There are no ducks here, the count is zero (0).',
       isZero: true,
       bgGradient: 'linear-gradient(135deg, #475569, #1e293b)',
@@ -119,7 +119,7 @@ export const CountTheVillage: React.FC<Props> = ({
       promptEn: 'How many people are sitting on the bench?',
       actualCount: 2,
       options: [0, 2, 3],
-      explanationNp: 'बेन्चमा २ जना बसिरहेका छन्।',
+      explanationNp: 'बेन्चमा 2 जना बसिरहेका छन्।',
       explanationEn: 'There are 2 people sitting on the bench.',
       isZero: false,
       bgGradient: 'linear-gradient(135deg, #b45309, #78350f)',
@@ -133,7 +133,7 @@ export const CountTheVillage: React.FC<Props> = ({
       promptEn: 'How many people are on this empty bench?',
       actualCount: 0,
       options: [0, 1, 4],
-      explanationNp: 'बेन्च खाली छ, कोही छैन, त्यसैले शून्य (०) जना छन्।',
+      explanationNp: 'बेन्च खाली छ, कोही छैन, त्यसैले शून्य (0) जना छन्।',
       explanationEn: 'The bench is empty, so there are zero (0) people.',
       isZero: true,
       bgGradient: 'linear-gradient(135deg, #334155, #0f172a)',
@@ -147,7 +147,7 @@ export const CountTheVillage: React.FC<Props> = ({
       promptEn: 'How many goats are inside the pen?',
       actualCount: 3,
       options: [3, 0, 5],
-      explanationNp: 'खोरभित्र ३ वटा बाख्राहरू छन्।',
+      explanationNp: 'खोरभित्र 3 वटा बाख्राहरू छन्।',
       explanationEn: 'There are 3 goats inside the pen.',
       isZero: false,
       bgGradient: 'linear-gradient(135deg, #ca8a04, #854d0e)',
@@ -161,7 +161,7 @@ export const CountTheVillage: React.FC<Props> = ({
       promptEn: 'How many goats are in this empty pen?',
       actualCount: 0,
       options: [1, 2, 0],
-      explanationNp: 'खोरभित्र कुनै पनि बाख्रा छैन, सङ्ख्या शून्य (०) हो।',
+      explanationNp: 'खोरभित्र कुनै पनि बाख्रा छैन, सङ्ख्या शून्य (0) हो।',
       explanationEn: 'There are no goats inside, the number is zero (0).',
       isZero: true,
       bgGradient: 'linear-gradient(135deg, #525252, #262626)',
@@ -321,11 +321,11 @@ export const CountTheVillage: React.FC<Props> = ({
 
           <div>
             <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
-              कक्षा १ • गणित • अध्याय ५ : शून्य (Zero)
+              Class 1 • Maths • Chapter 5 : Zero
             </div>
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
-                ? 'सिमुलेसन ०४: गाउँमा गनौँ (Count the Village)'
+                ? 'सिमुलेसन 04: गाउँमा गनौँ (Count the Village)'
                 : 'Simulation 04: Count the Village'}
             </h1>
           </div>
@@ -350,21 +350,7 @@ export const CountTheVillage: React.FC<Props> = ({
             <span>{stars} / 8 Stars</span>
           </div>
 
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            style={{
-              padding: '6px 12px',
-              background: '#FFFFFF',
-              border: '1px solid #DCE5DE',
-              borderRadius: '8px',
-              color: '#26332E',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '13px',
-            }}
-          >
-            {language === 'np' ? 'नेपाली | EN' : 'EN | नेपाली'}
-          </button>
+          
 
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}

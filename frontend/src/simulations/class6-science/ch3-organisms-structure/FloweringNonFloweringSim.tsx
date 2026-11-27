@@ -1,7 +1,7 @@
 /**
  * FloweringNonFloweringSim.tsx
- * Simulation 8: 2D Flowering and Non-Flowering Plants Botanical Explorer (फूल फुल्ने र नफुल्ने बिरुवाहरू)
- * Grade 6 Science • Unit 3: Organisms & Their Structure (जीवहरू र तिनीहरूको बनावट)
+ * Simulation 8: 2D Flowering and Non-Flowering Plants Botanical Explorer
+ * Grade 6 Science • Unit 3: Organisms & Their Structure
  *
  * 100% Native HTML5 Canvas 2D Botanical Laboratory.
  * Features:
@@ -34,7 +34,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -51,7 +51,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
   const floweringOrgans: PlantOrgan[] = [
     {
       id: 'flower',
-      nameEn: 'Mustard Flower (तोरीको फूल)',
+      nameEn: 'Mustard Flower',
       nameNe: 'फूल (प्रजनन अङ्ग)',
       roleEn: 'Reproductive organ with 4 bright yellow petals attracting bees; develops into fruit and mustard seeds.',
       roleNe: 'बिरुवाको मुख्य प्रजनन अङ्ग; परागसेचनपछि यसबाट तोरीको कोसा र बीउ बन्दछ।',
@@ -59,7 +59,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'leaves',
-      nameEn: 'Green Leaves (पातहरू)',
+      nameEn: 'Green Leaves',
       nameNe: 'पात (प्रकाश संश्लेषण)',
       roleEn: 'Broad leaves with reticulate venation and chlorophyll performing photosynthesis to generate food.',
       roleNe: 'क्लोरोफिलको मद्दतले सूर्यको प्रकाशमा खाना बनाउँछ, जालीदार नसा भएको हुन्छ।',
@@ -67,7 +67,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'stem',
-      nameEn: 'Erect Stem (काण्ड)',
+      nameEn: 'Erect Stem',
       nameNe: 'काण्ड (खम्बा र ढुवानी)',
       roleEn: 'Upright herbaceous stem with xylem and phloem transporting water and sap.',
       roleNe: 'बिरुवालाई सीधा अड्याउने र जराबाट पानी तथा पातबाट खाना ओसार्ने काण्ड।',
@@ -75,7 +75,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'root',
-      nameEn: 'Taproot System (मुल जरा प्रणाली)',
+      nameEn: 'Taproot System',
       nameNe: 'मुल जरा (माटो समाउने र पानी सोस्ने)',
       roleEn: 'Deep central primary taproot with lateral secondary root hairs absorbing water and minerals.',
       roleNe: 'माटोभित्र गहिरोसम्म जाने मुख्य जरा र पानी सोस्ने साना जराहरू।',
@@ -86,7 +86,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
   const nonFloweringOrgans: PlantOrgan[] = [
     {
       id: 'frond',
-      nameEn: 'Fern Frond / Pinna (उनिउको पात)',
+      nameEn: 'Fern Frond / Pinna',
       nameNe: 'उनिउको पात (Frond)',
       roleEn: 'Feathery pinnately compound leaves conducting photosynthesis; fiddlehead-coiled when young.',
       roleNe: 'प्वाँख जस्तै खण्ड-खण्ड परेको हरियो पात, कलिलो छँदा घुम्रिएको (Fiddlehead) हुन्छ।',
@@ -94,7 +94,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'sori',
-      nameEn: 'Sori / Spore Clusters (स्पोर पोकाहरू)',
+      nameEn: 'Sori / Spore Clusters',
       nameNe: 'स्पोर पोका (Sori)',
       roleEn: 'Brown reproductive spore capsules on the underside of mature fronds; disperses spores for reproduction.',
       roleNe: 'पातको पछाडिपट्टि रहने खैरा थोप्लाहरू जसमा बीउको सट्टा प्रजननका लागि स्पोर हुन्छन्।',
@@ -102,7 +102,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'rhizome',
-      nameEn: 'Underground Rhizome (भूमिगत काण्ड)',
+      nameEn: 'Underground Rhizome',
       nameNe: 'भूमिगत काण्ड (Rhizome)',
       roleEn: 'Horizontal underground modified stem storing food and anchoring adventitious roots.',
       roleNe: 'माटोमुनि तेर्सो परेर फैलिने काण्ड जसले खाना सञ्चय गर्छ र नयाँ पात निकाल्छ।',
@@ -110,7 +110,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'roots',
-      nameEn: 'Adventitious Roots (झुप्पा जरा)',
+      nameEn: 'Adventitious Roots',
       nameNe: 'झुप्पा जरा (Fibrous Roots)',
       roleEn: 'Fibrous cluster of adventitious roots absorbing moisture from damp mountain forest soil.',
       roleNe: 'काण्डबाट सिधै निस्केर ओसिलो माटोबाट पानी सोस्ने पातला झुप्पा जराहरू।',
@@ -382,7 +382,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
         drawCompRow(
           rightY + 55,
           '1. Flowers & Petals',
-          '१. फूल (Flowers)',
+          '1. फूल (Flowers)',
           lang === 'ne' ? '✓ आकर्षक फूलहरू फुल्दछन्' : '✓ Bright 4-petaled yellow flowers',
           lang === 'ne' ? '✕ कुनै फूल फुल्दैन' : '✕ Flowers completely absent'
         );
@@ -390,7 +390,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
         drawCompRow(
           rightY + 130,
           '2. Reproduction Method',
-          '२. प्रजनन विधि (Reproduction)',
+          '2. प्रजनन विधि (Reproduction)',
           lang === 'ne' ? '✓ फलभित्र बीउ (Seeds) बन्दछ' : '✓ Seeds produced inside pods',
           lang === 'ne' ? '✓ पातमुनि स्पोर (Spores) बन्दछ' : '✓ Microscopic spores in sori'
         );
@@ -398,7 +398,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
         drawCompRow(
           rightY + 205,
           '3. Root System',
-          '३. जरा प्रणाली (Roots)',
+          '3. जरा प्रणाली (Roots)',
           lang === 'ne' ? '✓ गहिरो मुल जरा (Taproot)' : '✓ Deep main taproot system',
           lang === 'ne' ? '✓ झुप्पा जरा (Adventitious roots)' : '✓ Fibrous adventitious roots'
         );
@@ -406,7 +406,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
         drawCompRow(
           rightY + 280,
           '4. Common Examples',
-          '४. नेपालका प्रमुख उदाहरणहरू',
+          '4. नेपालका प्रमुख उदाहरणहरू',
           lang === 'ne' ? 'तोरी, आँप, गुलाब, धान, मकै' : 'Mustard, Mango, Rose, Rice',
           lang === 'ne' ? 'उनिउ, झ्याउ, लेउ, च्याउ' : 'Fern, Moss, Marchantia, Algae'
         );
@@ -425,7 +425,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Flowering & Non-Flowering Plants Lab"
-      titleNe="फूल फुल्ने र नफुल्ने बिरुवाहरू २डी प्रयोगशाला"
+      titleNe="फूल फुल्ने र नफुल्ने बिरुवाहरू 2डी प्रयोगशाला"
       subject="Science"
       grade={6}
       chapter={3}
@@ -506,8 +506,8 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
               {activeCategory === 'flowering' ? <Flower2 size={14} color="#facc15" /> : <Trees size={14} color="#4ade80" />}
               <span>
                 {activeCategory === 'flowering'
-                  ? (lang === 'ne' ? '१. फूल फुल्ने (Mustard)' : '1. Flowering (Mustard)')
-                  : (lang === 'ne' ? '२. फूल नफुल्ने (Fern)' : '2. Non-Flowering (Fern)')}
+                  ? (lang === 'ne' ? '1. फूल फुल्ने (Mustard)' : '1. Flowering (Mustard)')
+                  : (lang === 'ne' ? '2. फूल नफुल्ने (Fern)' : '2. Non-Flowering (Fern)')}
               </span>
             </div>
 
@@ -596,7 +596,7 @@ export const FloweringNonFloweringSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 {lang === 'ne'
-                  ? `अन्वेषण: ${exploredBoth.length}/२`
+                  ? `अन्वेषण: ${exploredBoth.length}/2`
                   : `Explored: ${exploredBoth.length}/2`}
               </span>
             </div>

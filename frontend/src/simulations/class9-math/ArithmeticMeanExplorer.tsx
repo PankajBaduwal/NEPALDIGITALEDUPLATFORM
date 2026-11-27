@@ -393,18 +393,18 @@ export const ArithmeticMeanExplorer: React.FC<SimProps> = ({ onBackToLibrary, on
               <h4 className="text-xs font-bold text-slate-800">{L('गणनाको चरणबद्ध समाधान:', 'Step-by-Step Calculation:')}</h4>
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs space-y-2">
                 <div className="flex justify-between items-center pb-2 border-b border-slate-200">
-                  <span className="text-slate-600">{L('१. मानहरूको योगफल (Sum of all values, ∑X):', '1. Sum of all values (∑X):')}</span>
+                  <span className="text-slate-600">{L('1. मानहरूको योगफल (Sum of all values, ∑X):', '1. Sum of all values (∑X):')}</span>
                   <span className="font-mono font-bold text-slate-800">
                     {individualValues.join(' + ')} = <span className="text-indigo-700">{fmt(sumIndividual)}</span>
                   </span>
                 </div>
                 <div className="flex justify-between items-center pb-2 border-b border-slate-200">
-                  <span className="text-slate-600">{L('२. कुल पद सङ्ख्या (Number of terms, N):', '2. Total number of terms (N):')}</span>
+                  <span className="text-slate-600">{L('2. कुल पद सङ्ख्या (Number of terms, N):', '2. Total number of terms (N):')}</span>
                   <span className="font-mono font-bold text-slate-800">{fmt(countIndividual)}</span>
                 </div>
                 <div className="flex justify-between items-center pt-1 text-sm font-bold">
                   <span className="text-indigo-950">
-                    {L('३. अङ्कगणितीय मध्यक (\\bar{X} = ∑X / N):', '3. Arithmetic Mean (\\bar{X} = ∑X / N):')}
+                    {L('3. अङ्कगणितीय मध्यक (\\bar{X} = ∑X / N):', '3. Arithmetic Mean (\\bar{X} = ∑X / N):')}
                   </span>
                   <span className="font-mono text-indigo-700 text-base">
                     {fmt(sumIndividual)} / {fmt(countIndividual)} = {fmt(meanIndividual)}

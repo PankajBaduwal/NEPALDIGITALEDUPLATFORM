@@ -1,6 +1,6 @@
 /**
  * IndirectVariationWorkTimeLab.tsx
- * Grade 7 Mathematics – Lesson 8: UNITARY METHOD (एकाइ विधि)
+ * Grade 7 Mathematics – Lesson 8: UNITARY METHOD
  * Simulation 4: Indirect Variation & Work-Time Lab (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 107-108)
  */
@@ -12,40 +12,40 @@ import { Users, Clock, Utensils, HardHat, Check, ArrowRight } from 'lucide-react
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: '१२ जना मानिसले एउटा काम २० दिनमा सक्छन् भने ८ जना मानिसले सो काम कति दिनमा सक्लान्?',
+    np: '12 people मानिसले एउटा काम 20 daysमा सक्छन् भने 8 people मानिसले सो काम कति daysमा सक्लान्?',
     en: 'If 12 men can finish a piece of work in 20 days, in how many days can 8 men finish it?',
     options: [
-      { key: 'A', label: '३० दिन (१२ × २० = २४० श्रम-दिन => २४० ÷ ८ = ३० दिन)' },
-      { key: 'B', label: '२५ दिन' },
-      { key: 'C', label: '२४ दिन' },
-      { key: 'D', label: '१६ दिन' },
+      { key: 'A', label: '30 days (12 × 20 = 240 man-days => 240 ÷ 8 = 30 days)' },
+      { key: 'B', label: '25 days' },
+      { key: 'C', label: '24 days' },
+      { key: 'D', label: '16 days' },
     ],
     answer: 'A',
   },
   {
-    np: 'छात्रावासमा ५० जना विद्यार्थीलाई ५४ दिन पुग्ने खाना थियो। थप १० जना आउँदा उक्त खाना कति दिन पुग्छ?',
+    np: 'छात्रावासमा 50 people विद्यार्थीलाई 54 days पुग्ने खाना थियो। थप 10 people आउँदा उक्त खाना कति days पुग्छ?',
     en: 'A hostel had food for 50 students for 54 days. If 10 more join (total 60), how many days will it last?',
     options: [
-      { key: 'A', label: '४५ दिन (५० × ५४ = २७०० => २७०० ÷ ६० = ४५ दिन)' },
-      { key: 'B', label: '४० दिन' },
-      { key: 'C', label: '५० दिन' },
-      { key: 'D', label: '४८ दिन' },
+      { key: 'A', label: '45 days (50 × 54 = 2700 => 2700 ÷ 60 = 45 days)' },
+      { key: 'B', label: '40 days' },
+      { key: 'C', label: '50 days' },
+      { key: 'D', label: '48 days' },
     ],
     answer: 'A',
   },
   {
-    np: '३० जना कामदारले एउटा काम १७ दिनमा सक्छन्। सो काम १० दिनमै सम्पन्न गर्न थप कति जना कामदार चाहिन्छ?',
+    np: '30 people workersले एउटा काम 17 daysमा सक्छन्। सो काम 10 daysमै सम्पन्न गर्न थप कति people workers चाहिन्छ?',
     en: '30 workers finish a job in 17 days. How many additional workers are needed to finish it in 10 days?',
     options: [
-      { key: 'A', label: '२१ जना थप (जम्मा चाहिने = ५१, थप = ५१ - ३० = २१)' },
-      { key: 'B', label: '५१ जना' },
-      { key: 'C', label: '२० जना' },
-      { key: 'D', label: '१५ जना' },
+      { key: 'A', label: '21 more people (total needed = 51, extra = 51 - 30 = 21)' },
+      { key: 'B', label: '51 people' },
+      { key: 'C', label: '20 people' },
+      { key: 'D', label: '15 people' },
     ],
     answer: 'A',
   },
   {
-    np: 'अप्रत्यक्ष विचरणमा कामदार र दिनको सम्बन्ध कुन सुत्रले दिन्छ?',
+    np: 'अप्रत्यक्ष विचरणमा workers र daysको सम्बन्ध कुन सुत्रले days्छ?',
     en: 'In indirect variation, which formula relates workers and days?',
     options: [
       { key: 'A', label: 'M1 × D1 = M2 × D2' },
@@ -104,7 +104,7 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'काम र समयमा कामदार र दिनको गुणनफल सधैँ स्थिर रहन्छ: M1 × D1 = M2 × D2!',
+        'काम र समयमा workers र daysको गुणनफल सधैँ स्थिर रहन्छ: M1 × D1 = M2 × D2!',
         'In work and time, the product of workers and days remains constant: M1 × D1 = M2 × D2!'
       )}
     >
@@ -112,9 +112,9 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'work-time', np: '१. कामदार र दिन (Workers & Days)', en: '1. Workers & Days' },
-            { id: 'hostel', np: '२. छात्रावास खाद्यान्न (Hostel Food Ration)', en: '2. Food Ration' },
-            { id: 'deadline', np: '३. म्याद र थप कामदार (Deadline Challenge)', en: '3. Deadline Challenge' },
+            { id: 'work-time', np: '1. workers र days (Workers & Days)', en: '1. Workers & Days' },
+            { id: 'hostel', np: '2. छात्रावास खाद्यान्न (Hostel Food Ration)', en: '2. Food Ration' },
+            { id: 'deadline', np: '3. म्याद र थप workers (Deadline Challenge)', en: '3. Deadline Challenge' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -142,11 +142,11 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
         {activeTab === 'work-time' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('कामदार र दिन: अप्रत्यक्ष विचरण', 'Workers and Days (Indirect Variation)')}
+              {L('workers र days: अप्रत्यक्ष विचरण', 'Workers and Days (Indirect Variation)')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: १२ जना मानिसले एउटा काम २० दिनमा गर्न सक्छन् भने ८ जना मानिसले सो काम कति दिनमा सक्लान्?',
+                'पाठ्यपुस्तक उदाहरण: 12 people मानिसले एउटा काम 20 daysमा गर्न सक्छन् भने 8 people मानिसले सो काम कति daysमा सक्लान्?',
                 'Textbook Example: If 12 men can finish a work in 20 days, in how many days can 8 men finish it?'
               )}
             </p>
@@ -154,7 +154,7 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#334155', display: 'block', marginBottom: 4 }}>
-                  {L('पहिलो कामदार सङ्ख्या: ', 'First Worker Count: ')} {givenMen} जना
+                  {L('पहिलो workers सङ्ख्या: ', 'First Worker Count: ')} {givenMen} people
                 </label>
                 <input
                   type="range"
@@ -172,7 +172,7 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1', display: 'block', marginBottom: 4 }}>
-                  {L('लाग्ने दिन: ', 'Days Taken: ')} {givenDays} दिन
+                  {L('लाग्ने days: ', 'Days Taken: ')} {givenDays} days
                 </label>
                 <input
                   type="range"
@@ -190,7 +190,7 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D', display: 'block', marginBottom: 4 }}>
-                  {L('नयाँ कामदार सङ्ख्या: ', 'New Worker Count: ')} {targetMen} जना
+                  {L('नयाँ workers सङ्ख्या: ', 'New Worker Count: ')} {targetMen} people
                 </label>
                 <input
                   type="range"
@@ -218,16 +218,16 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('१. दिइएको:', '1. Given:')}</strong> {givenMen} जना मानिसलाई काम सक्न लाग्ने = {givenDays} दिन
+                <strong>{L('1. दिइएको:', '1. Given:')}</strong> {givenMen} people need to finish the work = {givenDays} days
               </div>
               <div>
-                <strong>{L('२. १ जना मानिसलाई लाग्ने दिन (गुणन गर्दा):', '2. Days for 1 man (Multiply):')}</strong>
-                <br />१ जनालाई धेरै दिन लाग्ने भएकोले: {givenMen} × {givenDays} ={' '}
-                <span style={{ fontWeight: 800, color: '#0369A1' }}>{totalManDays} श्रम-दिन (Man-Days)</span>
+                <strong>{L('2. 1 people मानिसलाई लाग्ने days:', '2. Days for 1 man (Multiply):')}</strong>
+                <br />One person needs many days, so: {givenMen} × {givenDays} ={' '}
+                <span style={{ fontWeight: 800, color: '#0369A1' }}>{totalManDays} man-days</span>
               </div>
               <div>
-                <strong>{L('३. नयाँ कामदारलाई लाग्ने दिन (भाग गर्दा):', '3. Days for target workers (Divide):')}</strong>
-                <br />{targetMen} जना मानिसलाई लाग्ने = {totalManDays} ÷ {targetMen}
+                <strong>{L('3. नयाँ workersलाई लाग्ने days:', '3. Days for target workers (Divide):')}</strong>
+                <br />{targetMen} people need = {totalManDays} ÷ {targetMen}
               </div>
               <div
                 style={{
@@ -237,8 +237,8 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
                   color: '#187C68',
                 }}
               >
-                {targetMen} जना {L('कामदारलाई लाग्ने समय = ', 'Workers will take = ')} {targetDays.toFixed(1)}{' '}
-                {L('दिन', 'Days')}
+                {targetMen} people {L('workersलाई लाग्ने समय = ', 'Workers will take = ')} {targetDays.toFixed(1)}{' '}
+                {L('days', 'Days')}
               </div>
             </div>
           </div>
@@ -252,7 +252,7 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: एउटा छात्रावासमा ५० जना विद्यार्थीलाई ५४ दिन पुग्ने खाना थियो। थप १० जना विद्यार्थी आउँदा उक्त खाना कति दिन पुग्छ?',
+                'पाठ्यपुस्तक उदाहरण: एउटा छात्रावासमा 50 people विद्यार्थीलाई 54 days पुग्ने खाना थियो। थप 10 people विद्यार्थी आउँदा उक्त खाना कति days पुग्छ?',
                 'Textbook Example: A hostel had food for 50 students for 54 days. If 10 more students join, how long will it last?'
               )}
             </p>
@@ -268,18 +268,18 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('१. दिइएको:', '1. Given:')}</strong> ५० जनालाई पुग्ने = ५४ दिन
+                <strong>{L('1. दिइएको:', '1. Given:')}</strong> Lasts 50 people = 54 days
               </div>
               <div>
-                <strong>{L('२. जम्मा रासन एकाइ:', '2. Total Food Units:')}</strong> ५० × ५४ ={' '}
-                <span style={{ fontWeight: 800, color: '#B45309' }}>२,७०० विद्यार्थी-दिन</span>
+                <strong>{L('2. जम्मा रासन एकाइ:', '2. Total Food Units:')}</strong> 50 × 54 ={' '}
+                <span style={{ fontWeight: 800, color: '#B45309' }}>2,700 student-days</span>
               </div>
               <div>
-                <strong>{L('३. थपिएपछिको जम्मा विद्यार्थी:', '3. Total Students:')}</strong> ५० + १० ={' '}
-                <span style={{ fontWeight: 800 }}>६० जना</span>
+                <strong>{L('3. थपिएपछिको जम्मा विद्यार्थी:', '3. Total Students:')}</strong> 50 + 10 ={' '}
+                <span style={{ fontWeight: 800 }}>60 people</span>
               </div>
               <div>
-                <strong>{L('४. ६० जनालाई पुग्ने दिन:', '4. Days for 60 students:')}</strong> २,७०० ÷ ६०
+                <strong>{L('4. 60 peopleलाई पुग्ने days:', '4. Days for 60 students:')}</strong> 2,700 ÷ 60
               </div>
               <div
                 style={{
@@ -289,7 +289,7 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
                   color: '#92400E',
                 }}
               >
-                {L('खाना पुग्ने दिन = ', 'Food will last for = ')} {foodDurationDays.toFixed(0)} {L('दिन', 'Days')}
+                {L('खाना पुग्ने days = ', 'Food will last for = ')} {foodDurationDays.toFixed(0)} {L('days', 'Days')}
               </div>
             </div>
           </div>
@@ -299,11 +299,11 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
         {activeTab === 'deadline' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('म्यादभित्र काम सक्न थप कामदार (Deadline Challenge)', 'Deadline Challenge: Extra Workers')}
+              {L('म्यादभित्र काम सक्न थप workers (Deadline Challenge)', 'Deadline Challenge: Extra Workers')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: ३० जना कामदारले एउटा काम १७ दिनमा सक्छन्। सो काम १० दिनमै सम्पन्न गर्न थप कति जना कामदार थप्नुपर्छ?',
+                'पाठ्यपुस्तक उदाहरण: 30 people workersले एउटा काम 17 daysमा सक्छन्। सो काम 10 daysमै सम्पन्न गर्न थप कति people workers थप्नुपर्छ?',
                 'Textbook Example: 30 workers complete work in 17 days. How many extra workers are needed to complete it in 10 days?'
               )}
             </p>
@@ -319,18 +319,18 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('१. जम्मा आवश्यक श्रम:', '1. Total Required Labor:')}</strong> ३० कामदार × १७ दिन ={' '}
-                <span style={{ fontWeight: 800, color: '#047857' }}>५१० श्रम-दिन (Man-Days)</span>
+                <strong>{L('1. जम्मा आवश्यक श्रम:', '1. Total Required Labor:')}</strong> 30 workers × 17 days ={' '}
+                <span style={{ fontWeight: 800, color: '#047857' }}>510 man-days</span>
               </div>
               <div>
-                <strong>{L('२. १० दिनमा सक्न चाहिने जम्मा कामदार:', '2. Total Workers for 10 Days:')}</strong> ५१० ÷ १० ={' '}
-                <span style={{ fontWeight: 800, color: '#065F46' }}>५१ जना कामदार</span>
+                <strong>{L('2. 10 daysमा सक्न चाहिने जम्मा workers:', '2. Total Workers for 10 Days:')}</strong> 510 ÷ 10 ={' '}
+                <span style={{ fontWeight: 800, color: '#065F46' }}>51 people workers</span>
               </div>
               <div>
-                <strong>{L('३. पहिले नै उपलब्ध कामदार:', '3. Available Workers:')}</strong> ३० जना
+                <strong>{L('3. पहिले नै उपलब्ध workers:', '3. Available Workers:')}</strong> 30 people
               </div>
               <div>
-                <strong>{L('४. थप्नुपर्ने कामदार:', '4. Additional Workers Needed:')}</strong> ५१ - ३०
+                <strong>{L('4. थप्नुपर्ने workers:', '4. Additional Workers Needed:')}</strong> 51 - 30
               </div>
               <div
                 style={{
@@ -340,7 +340,7 @@ export const IndirectVariationWorkTimeLab: React.FC<{ onBackToLibrary?: () => vo
                   color: '#047857',
                 }}
               >
-                {L('थप कामदार सङ्ख्या = ', 'Extra Workers Needed = ')} {extraWorkersNeeded} {L('जना', 'workers')}
+                {L('थप workers सङ्ख्या = ', 'Extra Workers Needed = ')} {extraWorkersNeeded} {L('people', 'workers')}
               </div>
             </div>
           </div>

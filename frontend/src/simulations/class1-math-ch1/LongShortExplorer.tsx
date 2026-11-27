@@ -1,7 +1,7 @@
 /**
  * LongShortExplorer.tsx
- * Simulation 04: Long and Short Explorer (लामो र छोटो अन्वेषक)
- * Grade 1 • Mathematics • Chapter 1 (आकारप्रकार र स्थान)
+ * Simulation 04: Long and Short Explorer
+ * Grade 1 • Mathematics • Chapter 1
  */
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Trophy } from 'lucide-react';
@@ -17,7 +17,7 @@ export const LongShortExplorer: React.FC<LongShortExplorerProps> = ({
   onBackToLibrary,
   initialLanguage = 'ne',
 }) => {
-  const [lang, setLang] = useState<'ne' | 'en'>(initialLanguage);
+  const [lang, setLang] = useState<'ne' | 'en'>('en');
   const [stepIdx, setStepIdx] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
   const [feedback, setFeedback] = useState<string>('');
@@ -25,8 +25,8 @@ export const LongShortExplorer: React.FC<LongShortExplorerProps> = ({
 
   const activities = [
     {
-      promptEn: 'Which wooden pencil is LONGER from start to end? (लामो सिसाकलम)',
-      promptNe: 'सुरुदेखि अन्त्यसम्म कुन सिसाकलम लामो छ? (लामो सिसाकलम)',
+      promptEn: 'Which wooden pencil is LONGER from start to end?',
+      promptNe: 'सुरुदेखि अन्त्यसम्म कुन सिसाकलम लामो छ?',
       itemA: { labelEn: 'Long Yellow Pencil', labelNe: 'लामो पहेँलो सिसाकलम', width: '320px' },
       itemB: { labelEn: 'Short Sharpened Pencil', labelNe: 'छोटो सिसाकलम', width: '140px' },
       correct: 'A',
@@ -34,8 +34,8 @@ export const LongShortExplorer: React.FC<LongShortExplorerProps> = ({
       explanationNe: 'सबास! पहेँलो सिसाकलम लम्बाइमा लामो छ।',
     },
     {
-      promptEn: 'Which climbing rope is SHORTER in length? (छोटो डोरी)',
-      promptNe: 'कुन डोरी लम्बाइमा छोटो छ? (छोटो डोरी)',
+      promptEn: 'Which climbing rope is SHORTER in length?',
+      promptNe: 'कुन डोरी लम्बाइमा छोटो छ?',
       itemA: { labelEn: 'Long Mountain Rope', labelNe: 'लामो डोरी', width: '340px' },
       itemB: { labelEn: 'Short Jump Rope', labelNe: 'छोटो डोरी', width: '150px' },
       correct: 'B',
@@ -43,8 +43,8 @@ export const LongShortExplorer: React.FC<LongShortExplorerProps> = ({
       explanationNe: 'सबास! यो डोरी लम्बाइमा छोटो छ।',
     },
     {
-      promptEn: 'Which village suspension bridge is LONGER? (लामो झोलुङ्गे पुल)',
-      promptNe: 'कुन झोलुङ्गे पुल लामो छ? (लामो पुल)',
+      promptEn: 'Which village suspension bridge is LONGER?',
+      promptNe: 'कुन झोलुङ्गे पुल लामो छ?',
       itemA: { labelEn: 'Long River Suspension Bridge', labelNe: 'लामो झोलुङ्गे पुल', width: '360px' },
       itemB: { labelEn: 'Short Stream Wooden Plank', labelNe: 'छोटो काठको साँघु', width: '160px' },
       correct: 'A',
@@ -100,9 +100,7 @@ export const LongShortExplorer: React.FC<LongShortExplorerProps> = ({
         <h2 style={{ margin: 0, fontSize: '18px', fontWeight: '800' }}>
           {lang === 'ne' ? 'लामो र छोटो अन्वेषक (Long & Short Explorer)' : 'Long and Short Explorer'}
         </h2>
-        <button onClick={() => setLang(lang === 'ne' ? 'en' : 'ne')} style={{ background: '#FFFFFF', border: 'none', color: '#26332E', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>
-          {lang === 'ne' ? 'English' : 'नेपाली'}
-        </button>
+        
       </div>
 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>

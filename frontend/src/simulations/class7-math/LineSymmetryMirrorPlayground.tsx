@@ -1,7 +1,7 @@
 /**
  * LineSymmetryMirrorPlayground.tsx
- * Grade 7 Mathematics – Lesson 18: SYMMETRY AND TESSELLATION (सममिति र टेसलेसन)
- * Simulation 1: Line Symmetry and Mirror Playground (रेखीय सममिति र ऐना खेलमैदान)
+ * Grade 7 Mathematics – Lesson 18: SYMMETRY AND TESSELLATION
+ * Simulation 1: Line Symmetry and Mirror Playground
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 255-263)
  */
 import React, { useState } from 'react';
@@ -15,43 +15,43 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुनै चित्रलाई एउटा सीधा रेखाले ठीक दुई बराबर र खप्टिने भागमा विभाजन गर्छ भने त्यस्तो रेखालाई के भनिन्छ?',
     en: 'If a straight line divides a figure into two identical matching halves that overlap, what is the line called?',
     options: [
-      { key: 'A', label: 'सममितिको अक्ष (Axis of Symmetry / Line of Symmetry)' },
-      { key: 'B', label: 'विकर्ण' },
-      { key: 'C', label: 'लम्ब' },
-      { key: 'D', label: 'व्यास' },
+      { key: 'A', label: 'Axis of symmetry (line of symmetry)' },
+      { key: 'B', label: 'Diagonal' },
+      { key: 'C', label: 'Perpendicular' },
+      { key: 'D', label: 'Diameter' },
     ],
     answer: 'A',
   },
   {
-    np: 'वर्ग (Square) मा कतिवटा सममितिका अक्षहरू (Axes of Symmetry) हुन्छन्?',
+    np: 'वर्ग (Square) मा कतिpcs सममितिका अक्षहरू (Axes of Symmetry) हुन्छन्?',
     en: 'How many axes of symmetry does a square have?',
     options: [
-      { key: 'A', label: '४ वटा (२ भुजाका मध्यबिन्दु जोड्ने र २ विकर्ण)' },
-      { key: 'B', label: '२ वटा' },
-      { key: 'C', label: '१ वटा' },
-      { key: 'D', label: 'असंख्य' },
+      { key: 'A', label: '4 (2 joining midpoints of sides and 2 diagonals)' },
+      { key: 'B', label: '2 pcs' },
+      { key: 'C', label: '1 pcs' },
+      { key: 'D', label: 'Countless' },
     ],
     answer: 'A',
   },
   {
-    np: 'समबाहु त्रिभुज (Equilateral Triangle) मा कतिवटा सममितिका अक्षहरू हुन्छन्?',
+    np: 'समबाहु त्रिभुज (Equilateral Triangle) मा कतिpcs सममितिका अक्षहरू हुन्छन्?',
     en: 'How many axes of symmetry does an equilateral triangle have?',
     options: [
-      { key: 'A', label: '३ वटा (प्रत्येक शीर्षबाट विपरित भुजाको मध्यबिन्दु)' },
-      { key: 'B', label: '१ वटा' },
-      { key: 'C', label: '२ वटा' },
-      { key: 'D', label: '४ वटा' },
+      { key: 'A', label: '3 (from each vertex to the midpoint of the opposite side)' },
+      { key: 'B', label: '1 pcs' },
+      { key: 'C', label: '2 pcs' },
+      { key: 'D', label: '4 pcs' },
     ],
     answer: 'A',
   },
   {
-    np: 'कुनै पनि वृत्त (Circle) मा कतिवटा सममितिका अक्षहरू खिच्न सकिन्छ?',
+    np: 'कुनै पनि वृत्त (Circle) मा कतिpcs सममितिका अक्षहरू खिच्न सकिन्छ?',
     en: 'How many axes of symmetry can be drawn in a circle?',
     options: [
-      { key: 'A', label: 'अनन्त / असंख्य (Infinite diameters)' },
-      { key: 'B', label: '४ वटा' },
-      { key: 'C', label: '२ वटा' },
-      { key: 'D', label: '१ वटा' },
+      { key: 'A', label: 'Infinite / Countless (Infinite diameters)' },
+      { key: 'B', label: '4 pcs' },
+      { key: 'C', label: '2 pcs' },
+      { key: 'D', label: '1 pcs' },
     ],
     answer: 'A',
   },
@@ -66,7 +66,7 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
   const kit = useSimKit({
     code: 'SIM-MATH-G7-L18-01',
     chapter: 18,
-    titleNp: 'रेखीय सममिति र ऐना खेलमैदान (Line Symmetry Playground)',
+    titleNp: 'रेखीय सममिति र Mirror खेलमैदान (Line Symmetry Playground)',
     titleEn: 'Line Symmetry and Mirror Playground',
   });
   const isNe = kit.lang === 'ne';
@@ -155,10 +155,10 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 justify-center bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'discover', np: '१. सममिति खोजी (Discover Symmetry)', en: '1. Discover Symmetry' },
-            { id: 'axes_counter', np: '२. सममिति अक्ष गणना (Count Axes)', en: '2. Count Symmetry Axes' },
-            { id: 'paper_folding', np: '३. कागज मोड्ने प्रयोग (Paper Folding)', en: '3. Paper Folding Lab' },
-            { id: 'mirror_complete', np: '४. आधा चित्र पूरा गर्ने (Grid Mirror)', en: '4. Complete Half-Figure' },
+            { id: 'discover', np: '1. सममिति खोजी (Discover Symmetry)', en: '1. Discover Symmetry' },
+            { id: 'axes_counter', np: '2. Axis of symmetry गणना (Count Axes)', en: '2. Count Symmetry Axes' },
+            { id: 'paper_folding', np: '3. कागज मोड्ने प्रयोग (Paper Folding)', en: '3. Paper Folding Lab' },
+            { id: 'mirror_complete', np: '4. आधा चित्र पूरा गर्ने (Grid Mirror)', en: '4. Complete Half-Figure' },
           ].map((t) => (
             <button
               key={t.id}
@@ -196,7 +196,7 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
                 { id: 'leaf', labelNp: 'पात (Leaf)', labelEn: 'Leaf', sym: true },
                 { id: 'heart', labelNp: 'मुटु आकार (Heart)', labelEn: 'Heart Shape', sym: true },
                 { id: 'letter_A', labelNp: 'अक्षर A', labelEn: 'Letter A', sym: true },
-                { id: 'letter_F', labelNp: 'अक्षर F (असममित)', labelEn: 'Letter F (Asymmetric)', sym: false },
+                { id: 'letter_F', labelNp: 'अक्षर F', labelEn: 'Letter F (Asymmetric)', sym: false },
                 { id: 'nepal_flag', labelNp: 'नेपालको झण्डा (असममित)', labelEn: 'Nepal Flag (Asymmetric)', sym: false },
               ].map((item) => (
                 <button
@@ -298,7 +298,7 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
                     <>
                       <line x1="140" y1="20" x2="140" y2="220" stroke="#ef4444" strokeWidth="2.5" strokeDasharray="6,4" />
                       <text x="145" y="30" fontSize="11" fontWeight="bold" fill="#dc2626">
-                        {selectedShape === 'letter_F' || selectedShape === 'nepal_flag' ? 'अक्ष बन्दैन' : 'सममिति अक्ष'}
+                        {selectedShape === 'letter_F' || selectedShape === 'nepal_flag' ? 'अक्ष बन्दैन' : 'Axis of symmetry'}
                       </text>
                     </>
                   )}
@@ -362,7 +362,7 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
                 {L('ज्यामितीय आकृतिहरूमा सममितिका अक्षहरूको संख्या:', 'Number of Axes of Symmetry in Geometrical Figures:')}
               </h3>
               <p className="text-xs text-indigo-800 mt-1">
-                {L('पाठ्यपुस्तक अनुसार वर्ग, आयत, समबाहु र समद्विबाहु त्रिभुजमा सममिति अक्षहरू पत्ता लगाउनुहोस्।', 'Identify and verify all axes of symmetry for regular and irregular shapes.')}
+                {L('पाठ्यपुस्तक अनुसार वर्ग, आयत, समबाहु र समद्विबाहु त्रिभुजमा Axis of symmetryहरू पत्ता लगाउनुहोस्।', 'Identify and verify all axes of symmetry for regular and irregular shapes.')}
               </p>
             </div>
 
@@ -374,7 +374,7 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
                 { id: 'equilateral', np: 'समबाहु त्रिभुज', en: 'Equilateral △', count: 3 },
                 { id: 'isosceles', np: 'समद्विबाहु त्रिभुज', en: 'Isosceles △', count: 1 },
                 { id: 'scalene', np: 'विषमबाहु त्रिभुज', en: 'Scalene △', count: 0 },
-                { id: 'circle', np: 'वृत्त (Circle)', en: 'Circle', count: 'अनन्त' },
+                { id: 'circle', np: 'वृत्त (Circle)', en: 'Circle', count: 'Infinite' },
               ].map((s) => (
                 <button
                   key={s.id}
@@ -389,7 +389,7 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
                   }`}
                 >
                   <div>{isNe ? s.np : s.en}</div>
-                  <div className="text-[10px] opacity-80 mt-0.5">({s.count} अक्ष)</div>
+                  <div className="text-[10px] opacity-80 mt-0.5">({s.count} axis)</div>
                 </button>
               ))}
             </div>
@@ -471,42 +471,42 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
               <div className="space-y-3">
                 <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
                   <div className="text-sm font-bold text-slate-900">
-                    {countShape === 'square' && L('वर्गका ४ वटा सममिति अक्षहरू:', 'Square: 4 Axes of Symmetry')}
-                    {countShape === 'rectangle' && L('आयतका २ वटा सममिति अक्षहरू:', 'Rectangle: 2 Axes of Symmetry')}
-                    {countShape === 'equilateral' && L('समबाहु त्रिभुजका ३ वटा अक्षहरू:', 'Equilateral Triangle: 3 Axes')}
-                    {countShape === 'isosceles' && L('समद्विबाहु त्रिभुजको १ अक्ष:', 'Isosceles Triangle: 1 Axis')}
+                    {countShape === 'square' && L('वर्गका 4 pcs Axis of symmetryहरू:', 'Square: 4 Axes of Symmetry')}
+                    {countShape === 'rectangle' && L('आयतका 2 pcs Axis of symmetryहरू:', 'Rectangle: 2 Axes of Symmetry')}
+                    {countShape === 'equilateral' && L('समबाहु त्रिभुजका 3 pcs अक्षहरू:', 'Equilateral Triangle: 3 Axes')}
+                    {countShape === 'isosceles' && L('समद्विबाहु त्रिभुजको 1 अक्ष:', 'Isosceles Triangle: 1 Axis')}
                     {countShape === 'scalene' && L('विषमबाहु त्रिभुज (कुनै अक्ष छैन):', 'Scalene Triangle: 0 Axes')}
-                    {countShape === 'circle' && L('वृत्त (अनन्त सममिति अक्षहरू):', 'Circle: Infinite Axes')}
+                    {countShape === 'circle' && L('वृत्त (Infinite Axis of symmetryहरू):', 'Circle: Infinite Axes')}
                   </div>
                   <div className="text-xs text-slate-600 mt-2 space-y-1">
                     {countShape === 'square' && (
                       <>
-                        <div>१. ठाडो अक्ष (Vertical midline)</div>
-                        <div>२. तेर्सो अक्ष (Horizontal midline)</div>
-                        <div>३. दुईवटै विकर्णहरू (२ Diagonal axes)</div>
-                        <div className="text-indigo-700 font-bold mt-1">जम्मा = ४ वटा अक्ष</div>
+                        <div>1. Vertical axis</div>
+                        <div>2. Horizontal axis</div>
+                        <div>3. Both diagonals (2 diagonal axes)</div>
+                        <div className="text-indigo-700 font-bold mt-1">Total = 4 axes</div>
                       </>
                     )}
                     {countShape === 'rectangle' && (
                       <>
-                        <div>१. लम्बाइको मध्यबिन्दु जोड्ने ठाडो अक्ष</div>
-                        <div>२. चौडाइको मध्यबिन्दु जोड्ने तेर्सो अक्ष</div>
+                        <div>1. Perpendicularाइको मध्यबिन्दु जोड्ने ठाडो अक्ष</div>
+                        <div>2. चौडाइको मध्यबिन्दु जोड्ने तेर्सो अक्ष</div>
                         <div className="text-rose-600 font-semibold mt-1">
-                          ⚠️ ध्यान दिनुहोस्: आयतको विकर्ण सममितिको अक्ष होइन किनकि विकर्णबाट मोड्दा कुनाहरू खप्टिँदैनन्!
+                          ⚠️ ध्यान दिनुहोस्: आयतको Diagonal सममितिको अक्ष होइन किनकि Diagonalबाट मोड्दा कुनाहरू खप्टिँदैनन्!
                         </div>
                       </>
                     )}
                     {countShape === 'equilateral' && (
-                      <div>प्रत्येक ३ वटै शीर्षबिन्दुबाट विपरित भुजाको मध्यबिन्दु जोड्ने ३ वटा मध्यक रेखा।</div>
+                      <div>प्रत्येक 3 वटै शीर्षबिन्दुबाट विपरित भुजाको मध्यबिन्दु जोड्ने 3 pcs मध्यक रेखा।</div>
                     )}
                     {countShape === 'isosceles' && (
-                      <div>दुई बराबर भुजाहरू बीचको शीर्षबाट आधार भुजाको मध्यबिन्दु जोड्ने १ मात्र रेखा।</div>
+                      <div>दुई बराबर भुजाहरू बीचको शीर्षबाट आधार भुजाको मध्यबिन्दु जोड्ने 1 मात्र रेखा।</div>
                     )}
                     {countShape === 'scalene' && (
-                      <div>तीनवटै भुजाहरू असमान भएकाले कुनै पनि रेखाबाट मोड्दा खप्टिँदैन (० अक्ष)।</div>
+                      <div>तीनवटै भुजाहरू असमान भएकाले कुनै पनि रेखाबाट मोड्दा खप्टिँदैन (0 axis)।</div>
                     )}
                     {countShape === 'circle' && (
-                      <div>केन्द्रबिन्दु भएर जाने कुनै पनि व्यास (Diameter) सममितिको अक्ष हुन्छ, त्यसैले अनन्त (Infinite) अक्ष हुन्छन्।</div>
+                      <div>केन्द्रबिन्दु भएर जाने कुनै पनि Diameter (Diameter) सममितिको अक्ष हुन्छ, त्यसैले Infinite (Infinite) अक्ष हुन्छन्।</div>
                     )}
                   </div>
                 </div>
@@ -534,12 +534,12 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
                   foldStep === 1 ? 'border-purple-600 bg-purple-50/50' : 'border-slate-200 bg-white'
                 }`}
               >
-                <div className="text-xs font-bold text-purple-700 uppercase">{L('चरण १: कागज मोड्ने', 'Step 1: Fold')}</div>
+                <div className="text-xs font-bold text-purple-700 uppercase">{L('चरण 1: कागज मोड्ने', 'Step 1: Fold')}</div>
                 <div className="h-32 flex items-center justify-center">
                   <div className="w-24 h-24 border-2 border-slate-700 bg-amber-50 relative flex">
                     <div className="w-1/2 h-full border-r-2 border-dashed border-red-500 bg-amber-100/60" />
                     <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[10px] text-red-600 font-bold">
-                      पट्याउने रेखा
+                      Fold line
                     </span>
                   </div>
                 </div>
@@ -557,7 +557,7 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
                   foldStep === 2 ? 'border-purple-600 bg-purple-50/50' : 'border-slate-200 bg-white'
                 }`}
               >
-                <div className="text-xs font-bold text-purple-700 uppercase">{L('चरण २: आधा आकृति काट्ने', 'Step 2: Cut Half')}</div>
+                <div className="text-xs font-bold text-purple-700 uppercase">{L('चरण 2: आधा आकृति काट्ने', 'Step 2: Cut Half')}</div>
                 <div className="h-32 flex items-center justify-center">
                   <div className="w-16 h-24 border-2 border-slate-700 bg-amber-100 relative">
                     <path d="" />
@@ -581,7 +581,7 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
                   foldStep === 3 ? 'border-purple-600 bg-purple-50/50' : 'border-slate-200 bg-white'
                 }`}
               >
-                <div className="text-xs font-bold text-purple-700 uppercase">{L('चरण ३: कागज खोल्ने', 'Step 3: Unfold')}</div>
+                <div className="text-xs font-bold text-purple-700 uppercase">{L('चरण 3: कागज खोल्ने', 'Step 3: Unfold')}</div>
                 <div className="h-32 flex items-center justify-center">
                   <div className="w-24 h-24 border-2 border-slate-700 bg-amber-50 relative flex items-center justify-center">
                     <line className="h-full border-r border-dashed border-red-500 absolute" />
@@ -617,7 +617,7 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
                   {L('आधा चित्र पूरा गर्ने ग्रिड चुनौती (Complete the Half Figure):', 'Complete the Symmetrical Figure on Grid:')}
                 </h3>
                 <p className="text-xs text-emerald-800 mt-1">
-                  {L('बायाँ भागको प्रतिविम्ब हुने गरी ऐना रेखा (Dotted Line) को दायाँतिरका कोठाहरूमा क्लिक गर्नुहोस्।', 'Click on the right grid cells to reflect the left pattern symmetrically across the mirror line.')}
+                  {L('बायाँ भागको प्रतिविम्ब हुने गरी Mirror रेखा (Dotted Line) को दायाँतिरका कोठाहरूमा क्लिक गर्नुहोस्।', 'Click on the right grid cells to reflect the left pattern symmetrically across the mirror line.')}
                 </p>
               </div>
               <button
@@ -649,7 +649,7 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
                 {/* Mirror Dotted Line Divider */}
                 <div className="h-full px-2 flex flex-col items-center justify-center">
                   <div className="w-0.5 h-64 border-r-2 border-dashed border-red-500" />
-                  <span className="text-[10px] text-red-600 font-bold mt-1">ऐना</span>
+                  <span className="text-[10px] text-red-600 font-bold mt-1">Mirror</span>
                 </div>
 
                 {/* Right Grid (Interactive) */}
@@ -689,7 +689,7 @@ export const LineSymmetryMirrorPlayground: React.FC<{ onBackToLibrary?: () => vo
                 >
                   {gridSuccess
                     ? L('सबास! दुवै भागहरू पूर्ण रूपमा सममितीय र बराबर छन्!', 'Excellent! Both halves match symmetrically and overlap perfectly!')
-                    : L('प्रयास राम्रो! केही कोठाहरू मिलेका छैनन्, ऐना रेखाबाट समान दूरीमा कोठाहरू भर्नुहोस्।', 'Good try! Some cells are incorrect. Fill cells at equal distance from the mirror line.')}
+                    : L('प्रयास राम्रो! केही कोठाहरू मिलेका छैनन्, Mirror रेखाबाट समान दूरीमा कोठाहरू भर्नुहोस्।', 'Good try! Some cells are incorrect. Fill cells at equal distance from the mirror line.')}
                 </div>
               )}
             </div>

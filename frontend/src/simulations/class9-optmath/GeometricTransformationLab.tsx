@@ -97,7 +97,7 @@ export const GeometricTransformationLab: React.FC<SimProps> = ({ onBackToLibrary
             }`}
           >
             <span>🪞</span>
-            <span>{L('१. परावर्तन (Reflection)', '1. Reflection')}</span>
+            <span>{L('1. परावर्तन (Reflection)', '1. Reflection')}</span>
           </button>
           <button
             onClick={() => setTransformationType('rotation')}
@@ -108,7 +108,7 @@ export const GeometricTransformationLab: React.FC<SimProps> = ({ onBackToLibrary
             }`}
           >
             <span>🔄</span>
-            <span>{L('२. परिक्रमण (Rotation)', '2. Rotation')}</span>
+            <span>{L('2. परिक्रमण (Rotation)', '2. Rotation')}</span>
           </button>
           <button
             onClick={() => setTransformationType('enlargement')}
@@ -119,7 +119,7 @@ export const GeometricTransformationLab: React.FC<SimProps> = ({ onBackToLibrary
             }`}
           >
             <span>🔍</span>
-            <span>{L('३. विस्तारण / सङ्कुचन (Enlargement)', '3. Enlargement')}</span>
+            <span>{L('3. विस्तारण / सङ्कुचन (Enlargement)', '3. Enlargement')}</span>
           </button>
         </div>
 
@@ -135,10 +135,10 @@ export const GeometricTransformationLab: React.FC<SimProps> = ({ onBackToLibrary
               <span className="font-bold text-slate-700 block">{L('परावर्तन रेखा (Axis of Reflection):', 'Axis of Reflection:')}</span>
               <div className="grid grid-cols-2 gap-2">
                 {[
-                  { key: 'x_axis', label: 'X-अक्ष (y = 0)', rule: '(x, −y)' },
-                  { key: 'y_axis', label: 'Y-अक्ष (x = 0)', rule: '(−x, y)' },
-                  { key: 'origin', label: 'मूलबिन्दु (Origin)', rule: '(−x, −y)' },
-                  { key: 'y_eq_x', label: 'रेखा y = x', rule: '(y, x)' },
+                  { key: 'x_axis', label: 'X-axis (y = 0)', rule: '(x, −y)' },
+                  { key: 'y_axis', label: 'Y-axis (x = 0)', rule: '(−x, y)' },
+                  { key: 'origin', label: 'Origin', rule: '(−x, −y)' },
+                  { key: 'y_eq_x', label: 'Line y = x', rule: '(y, x)' },
                 ].map(ax => (
                   <button
                     key={ax.key}
@@ -160,9 +160,9 @@ export const GeometricTransformationLab: React.FC<SimProps> = ({ onBackToLibrary
               <span className="font-bold text-slate-700 block">{L('मूलबिन्दु वरिपरि परिक्रमण कोण:', 'Rotation about Origin:')}</span>
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  { key: '+90', label: '+९०° (बायाँ)', rule: '(−y, x)' },
-                  { key: '-90', label: '−९०° (दायाँ)', rule: '(y, −x)' },
-                  { key: '180', label: '१८०° (आधा चक्र)', rule: '(−x, −y)' },
+                  { key: '+90', label: '+90° (anticlockwise)', rule: '(−y, x)' },
+                  { key: '-90', label: '−90° (clockwise)', rule: '(y, −x)' },
+                  { key: '180', label: '180° (half turn)', rule: '(−x, −y)' },
                 ].map(r => (
                   <button
                     key={r.key}

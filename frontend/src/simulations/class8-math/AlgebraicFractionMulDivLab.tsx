@@ -1,7 +1,7 @@
 /**
  * AlgebraicFractionMulDivLab.tsx
- * Grade 8 Mathematics – Unit 11: ALGEBRAIC FRACTION (बीजीय भिन्न)
- * Simulation 3: Algebraic Fraction Multiplication & Division Lab (बीजीय भिन्नको गुणन र भाग)
+ * Grade 8 Mathematics – Unit 11: ALGEBRAIC FRACTION
+ * Simulation 3: Algebraic Fraction Multiplication & Division Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 11)
  */
 import React, { useState } from 'react';
@@ -15,10 +15,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'बीजीय भिन्नको भाग (Division) गर्दा भाजक (Divisor) भिन्नलाई के गर्नुपर्छ?',
     en: 'When dividing algebraic fractions, what must be done to the divisor fraction?',
     options: [
-      { key: 'A', label: 'व्युत्क्रम (Reciprocal / उल्टो) गरी गुणन गर्ने' },
-      { key: 'B', label: 'सीधै अंशलाई अंशले गुणन गर्ने' },
-      { key: 'C', label: 'हरलाई अंशमा जोड्ने' },
-      { key: 'D', label: 'भिन्न हटाउने' },
+      { key: 'A', label: 'Multiply by the reciprocal (inverted fraction)' },
+      { key: 'B', label: 'Multiply numerator by numerator directly' },
+      { key: 'C', label: 'Add the denominator to the numerator' },
+      { key: 'D', label: 'Remove the fraction' },
     ],
     answer: 'A',
   },
@@ -59,10 +59,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'बीजीय भिन्नको गुणन गर्दा कुन नियम लागू हुन्छ?',
     en: 'Which rule applies when multiplying algebraic fractions?',
     options: [
-      { key: 'A', label: '(अंश × अंश) / (हर × हर) [ Numerator×Numerator / Denominator×Denominator ]' },
-      { key: 'B', label: '(अंश + अंश) / (हर + हर)' },
-      { key: 'C', label: 'साझा हर निकाल्नुपर्छ' },
-      { key: 'D', label: 'सधैं १ आउँछ' },
+      { key: 'A', label: ' / (denominator × denominator) [ Numerator×Numerator / Denominator×Denominator ]' },
+      { key: 'B', label: ' / (denominator + denominator)' },
+      { key: 'C', label: 'A common denominator must be found' },
+      { key: 'D', label: 'The answer is always 1' },
     ],
     answer: 'A',
   },
@@ -109,7 +109,7 @@ export const AlgebraicFractionMulDivLab: React.FC<{
             }`}
           >
             <X className="w-4 h-4" />
-            {L('१. बीजीय भिन्नको गुणन (CDC पाठ्यपुस्तक उदाहरण)', '1. Multiplication')}
+            {L('1. बीजीय भिन्नको गुणन (CDC पाठ्यपुस्तक उदाहरण)', '1. Multiplication')}
           </button>
           <button
             onClick={() => setActiveTab('division_reciprocal')}
@@ -118,7 +118,7 @@ export const AlgebraicFractionMulDivLab: React.FC<{
             }`}
           >
             <RotateCw className="w-4 h-4" />
-            {L('२. बीजीय भिन्नको भाग र व्युत्क्रम (Division & Reciprocal)', '2. Division & Reciprocal')}
+            {L('2. बीजीय भिन्नको भाग र व्युत्क्रम (Division & Reciprocal)', '2. Division & Reciprocal')}
           </button>
         </div>
 
@@ -128,7 +128,7 @@ export const AlgebraicFractionMulDivLab: React.FC<{
             <div className="bg-slate-900 text-white p-6 rounded-3xl shadow-xl space-y-6 font-mono">
               <div className="border-b border-slate-800 pb-3 text-center">
                 <span className="text-xs uppercase text-amber-400 font-bold font-sans">
-                  {L('CDC पाठ्यपुस्तक उदाहरण २: गुणन र खण्डीकरण', 'CDC Example 2: Multiplication')}
+                  {L('CDC पाठ्यपुस्तक उदाहरण 2: गुणन र खण्डीकरण', 'CDC Example 2: Multiplication')}
                 </span>
                 <div className="text-2xl font-black text-sky-300 mt-1">
                   [(a² - b²) / (a² + ab)] × [a² / (ab - b²)]
@@ -138,7 +138,7 @@ export const AlgebraicFractionMulDivLab: React.FC<{
               {/* Step by Step Expansion */}
               <div className="space-y-3 text-xs">
                 <div className="p-4 bg-slate-800 rounded-xl space-y-1">
-                  <div className="text-amber-400 font-bold font-sans">{L('चरण १: प्रत्येक व्यञ्जकको खण्डीकरण गर्ने', 'Step 1: Factorize')}</div>
+                  <div className="text-amber-400 font-bold font-sans">{L('चरण 1: प्रत्येक व्यञ्जकको खण्डीकरण गर्ने', 'Step 1: Factorize')}</div>
                   <div className="text-slate-300">
                     • a² - b² = <b>(a + b)(a - b)</b><br />
                     • a² + ab = <b>a(a + b)</b><br />
@@ -147,7 +147,7 @@ export const AlgebraicFractionMulDivLab: React.FC<{
                 </div>
 
                 <div className="p-4 bg-slate-800 rounded-xl space-y-2 text-center">
-                  <div className="text-sky-400 font-bold font-sans">{L('चरण २: खण्डीकृत रूपमा राख्ने', 'Step 2: Factorized Form')}</div>
+                  <div className="text-sky-400 font-bold font-sans">{L('चरण 2: खण्डीकृत रूपमा राख्ने', 'Step 2: Factorized Form')}</div>
                   <div className="text-lg py-2">
                     <span className="border-b border-slate-500 pb-1 px-2 inline-block">(a + b)(a - b)</span>
                     <span className="mx-2">×</span>
@@ -160,16 +160,16 @@ export const AlgebraicFractionMulDivLab: React.FC<{
                 </div>
 
                 <div className="p-4 bg-slate-800 rounded-xl space-y-1">
-                  <div className="text-emerald-400 font-bold font-sans">{L('चरण ३: साझा गुणनखण्डहरू काट्ने', 'Step 3: Cancel Common Factors')}</div>
+                  <div className="text-emerald-400 font-bold font-sans">{L('चरण 3: साझा गुणनखण्डहरू काट्ने', 'Step 3: Cancel Common Factors')}</div>
                   <div className="text-slate-300">
-                    • (a + b) सँग (a + b) काटियो<br />
-                    • (a - b) सँग (a - b) काटियो<br />
-                    • a सँग अंशको एउटा a काटियो
+                    • (a + b) with (a + b) cancelled<br />
+                    • (a - b) with (a - b) cancelled<br />
+                    • a with one a of the numerator cancelled
                   </div>
                 </div>
 
                 <div className="p-5 bg-emerald-950/90 border border-emerald-500 rounded-2xl text-center text-2xl font-black text-emerald-300 font-sans">
-                  अन्तिम सरलीकृत मान = a / b
+                  Final simplified value = a / b
                 </div>
               </div>
             </div>
@@ -220,7 +220,7 @@ export const AlgebraicFractionMulDivLab: React.FC<{
                   <div className="p-4 bg-slate-800 rounded-xl text-xs text-left space-y-2 text-slate-300 font-mono">
                     <div className="text-amber-400 font-bold font-sans">{L('खण्डीकरण र सरलीकरण:', 'Factorize and Cancel:')}</div>
                     <div>= [ (x + 1)(x + 2) / 4 ] × [ 2 / ((x + 1)(x - 1)) ]</div>
-                    <div>• (x + 1) साझा काटियो</div>
+                    <div>• (x + 1) साझा cancelled</div>
                     <div>• 2 ले 4 लाई काट्दा तल 2 बाँकी रह्यो</div>
                     <div className="text-emerald-400 text-xl font-bold font-sans pt-2 border-t border-slate-700 text-center">
                       = (x + 2) / [2(x - 1)]

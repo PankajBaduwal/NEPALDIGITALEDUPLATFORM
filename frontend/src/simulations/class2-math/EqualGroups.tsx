@@ -1,5 +1,5 @@
 /**
- * Lesson 11 · Multiplication 1 (गुणन १) — equal groups
+ * Lesson 11 · Multiplication 1 — equal groups
  * Equal Groups Garden — baskets with the same number of apples: 3 + 3 + 3 = 3 × 3 = 9.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -35,7 +35,7 @@ export const EqualGroups: React.FC<Props> = ({ onBackToLibrary }) => {
 
   const addGroup = () => {
     if (groups >= 8) {
-      kit.oops('८ टोकरीसम्म मात्र', 'Up to 8 baskets');
+      kit.oops('8 टोकरीसम्म मात्र', 'Up to 8 baskets');
       return;
     }
     kit.tap();
@@ -165,10 +165,10 @@ export const EqualGroups: React.FC<Props> = ({ onBackToLibrary }) => {
 
         {/* Group Adjusters */}
         <CBtn color="#059669" disabled={groups >= 8} onClick={addGroup}>
-          🧺 {kit.t('+१ टोकरी थपौँ', '+1 Basket')}
+          🧺 {kit.t('+1 टोकरी थपौँ', '+1 Basket')}
         </CBtn>
         <CBtn color="#DC2626" disabled={groups <= 1} onClick={delGroup}>
-          -१ {kit.t('टोकरी घटाऔँ', '-1 Basket')}
+          -1 {kit.t('टोकरी घटाऔँ', '-1 Basket')}
         </CBtn>
 
         {kit.mode === 'LEARN' && (

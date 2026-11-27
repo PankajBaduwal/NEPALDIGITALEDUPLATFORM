@@ -1,6 +1,6 @@
 /**
  * CostPriceSellingPriceStudio.tsx
- * Grade 7 Mathematics – Lesson 7: PROFIT AND LOSS (नाफा र नोक्सान)
+ * Grade 7 Mathematics – Lesson 7: PROFIT AND LOSS
  * Simulation 3: Cost Price & Selling Price Studio (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 100-102)
  */
@@ -12,46 +12,46 @@ import { Calculator, ShoppingCart, DollarSign, Check, RefreshCw } from 'lucide-r
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एउटा हिटर रु २,५०० मा किनेर १०% नाफामा बेच्दा विक्रय मूल्य (SP) कति हुन्छ?',
+    np: 'एउटा हिटर Rs 2,500 मा किनेर 10% नाफामा बेच्दा विक्रय मूल्य (SP) कति हुन्छ?',
     en: 'A heater is bought for Rs 2,500 and sold at 10% profit. What is the Selling Price (SP)?',
     options: [
-      { key: 'A', label: 'रु २,७५० (२५०० + २५० = रु २,७५०)' },
-      { key: 'B', label: 'रु २,६००' },
-      { key: 'C', label: 'रु ३,०००' },
-      { key: 'D', label: 'रु २,२५०' },
+      { key: 'A', label: 'Rs 2,750' },
+      { key: 'B', label: 'Rs 2,600' },
+      { key: 'C', label: 'Rs 3,000' },
+      { key: 'D', label: 'Rs 2,250' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा मोबाइल ५% नाफा खाएर रु २१,००० मा बेच्दा त्यसको क्रय मूल्य (CP) कति थियो?',
+    np: 'एउटा मोबाइल 5% नाफा खाएर Rs 21,000 मा बेच्दा त्यसको क्रय मूल्य (CP) कति थियो?',
     en: 'A mobile was sold for Rs 21,000 at a profit of 5%. What was its Cost Price (CP)?',
     options: [
-      { key: 'A', label: 'रु २०,००० [ (२१००० × १००) / १०५ = रु २०,००० ]' },
-      { key: 'B', label: 'रु १९,९५०' },
-      { key: 'C', label: 'रु १९,०००' },
-      { key: 'D', label: 'रु २२,०५०' },
+      { key: 'A', label: 'Rs 20,000 [ (21000 × 100) / 105 = Rs 20,000 ]' },
+      { key: 'B', label: 'Rs 19,950' },
+      { key: 'C', label: 'Rs 19,000' },
+      { key: 'D', label: 'Rs 22,050' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि क्रय मूल्य रु २०,००० भएको सामानमा १०% नाफा कमाउन नयाँ विक्रय मूल्य कति हुनुपर्छ?',
+    np: 'यदि क्रय मूल्य Rs 20,000 भएको सामानमा 10% नाफा कमाउन नयाँ विक्रय मूल्य कति हुनुपर्छ?',
     en: 'To make 10% profit on an item with Cost Price Rs 20,000, what must the new Selling Price be?',
     options: [
-      { key: 'A', label: 'रु २२,००० (२०,००० + २००० = रु २२,०००)' },
-      { key: 'B', label: 'रु २१,०००' },
-      { key: 'C', label: 'रु २४,०००' },
-      { key: 'D', label: 'रु २०,५००' },
+      { key: 'A', label: 'Rs 22,000' },
+      { key: 'B', label: 'Rs 21,000' },
+      { key: 'C', label: 'Rs 24,000' },
+      { key: 'D', label: 'Rs 20,500' },
     ],
     answer: 'A',
   },
   {
-    np: '५% नोक्सान हुँदा क्रय मूल्य (CP) बाट विक्रय मूल्य (SP) निकाल्ने सुत्र कुन हो?',
+    np: '5% नोक्सान हुँदा क्रय मूल्य (CP) बाट विक्रय मूल्य (SP) निकाल्ने सुत्र कुन हो?',
     en: 'Which is the formula to find Selling Price (SP) when there is a 5% loss?',
     options: [
-      { key: 'A', label: 'SP = CP - (५% × CP) वा CP × (९५/१००)' },
-      { key: 'B', label: 'SP = CP + (५% × CP)' },
-      { key: 'C', label: 'SP = CP / ५' },
-      { key: 'D', label: 'SP = CP × १०५/१००' },
+      { key: 'A', label: 'SP = CP - (5% × CP) or CP × (95/100)' },
+      { key: 'B', label: 'SP = CP + (5% × CP)' },
+      { key: 'C', label: 'SP = CP / 5' },
+      { key: 'D', label: 'SP = CP × 105/100' },
     ],
     answer: 'A',
   },
@@ -99,7 +99,7 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'क्रय मूल्य (CP) १००% हुन्छ! १०% नाफा हुँदा विक्रय मूल्य ११०% र ५% नोक्सान हुँदा ९५% हुन्छ।',
+        'क्रय मूल्य (CP) 100% हुन्छ! 10% नाफा हुँदा विक्रय मूल्य 110% र 5% नोक्सान हुँदा 95% .',
         'Cost Price (CP) is 100%! At 10% profit, SP is 110%; at 5% loss, SP is 95%.'
       )}
     >
@@ -107,9 +107,9 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'find-sp', np: '१. CP र नाफा% बाट SP पत्ता लगाउने', en: '1. Find SP (from CP & P%)' },
-            { id: 'find-cp', np: '२. SP र नाफा% बाट CP पत्ता लगाउने', en: '2. Find CP (from SP & P%)' },
-            { id: 'target-profit', np: '३. नयाँ नाफा% को लागि नयाँ SP', en: '3. Target Profit Strategy' },
+            { id: 'find-sp', np: '1. CP र नाफा% बाट SP पत्ता लगाउने', en: '1. Find SP (from CP & P%)' },
+            { id: 'find-cp', np: '2. SP र नाफा% बाट CP पत्ता लगाउने', en: '2. Find CP (from SP & P%)' },
+            { id: 'target-profit', np: '3. नयाँ नाफा% को लागि नयाँ SP', en: '3. Target Profit Strategy' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -141,7 +141,7 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: एउटा हिटर रु २,५०० मा किनेर १०% नाफा लिएर बेच्दा विक्रय मूल्य कति हुन्छ?',
+                'पाठ्यपुस्तक उदाहरण: एउटा हिटर Rs 2,500 मा किनेर 10% नाफा लिएर बेच्दा विक्रय मूल्य कति हुन्छ?',
                 'Textbook Example: A heater bought for Rs 2,500 is sold at 10% profit. Find the selling price.'
               )}
             </p>
@@ -149,7 +149,7 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1', display: 'block', marginBottom: 4 }}>
-                  {L('क्रय मूल्य (CP): ', 'Cost Price (CP): ')} रु {givenCp.toLocaleString()}
+                  {L('क्रय मूल्य (CP): ', 'Cost Price (CP): ')} Rs {givenCp.toLocaleString()}
                 </label>
                 <input
                   type="range"
@@ -195,13 +195,13 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
               }}
             >
               <div>
-                <strong>{L('१. नाफा रकम (Profit in Rs):', '1. Profit in Rs:')}</strong> CP को {profitPercent}% = (
-                {profitPercent} / १००) × रु {givenCp.toLocaleString()} ={' '}
-                <span style={{ fontWeight: 800, color: '#059669' }}>रु {profitRupees.toLocaleString()}</span>
+                <strong>{L('1. नाफा रकम (Profit in Rs):', '1. Profit in Rs:')}</strong> of CP {profitPercent}% = (
+                {profitPercent} / 100) × Rs {givenCp.toLocaleString()} ={' '}
+                <span style={{ fontWeight: 800, color: '#059669' }}>Rs {profitRupees.toLocaleString()}</span>
               </div>
               <div>
-                <strong>{L('२. विक्रय मूल्य (SP):', '2. Selling Price (SP):')}</strong> CP + नाफा रकम = रु{' '}
-                {givenCp.toLocaleString()} + रु {profitRupees.toLocaleString()}
+                <strong>{L('2. विक्रय मूल्य (SP):', '2. Selling Price (SP):')}</strong> CP + profit amount = Rs{' '}
+                {givenCp.toLocaleString()} + Rs {profitRupees.toLocaleString()}
               </div>
               <div
                 style={{
@@ -211,7 +211,7 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
                   color: '#187C68',
                 }}
               >
-                {L('विक्रय मूल्य (SP) = ', 'Selling Price (SP) = ')} रु {calculatedSp.toLocaleString()}
+                {L('विक्रय मूल्य (SP) = ', 'Selling Price (SP) = ')} Rs {calculatedSp.toLocaleString()}
               </div>
             </div>
           </div>
@@ -225,7 +225,7 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: एउटा मोबाइल फोन ५% नाफा खाएर रु २१,००० मा बेच्दा त्यसको क्रय मूल्य कति थियो?',
+                'पाठ्यपुस्तक उदाहरण: एउटा मोबाइल फोन 5% नाफा खाएर Rs 21,000 मा बेच्दा त्यसको क्रय मूल्य कति थियो?',
                 'Textbook Example: A mobile phone was sold at Rs 21,000 with a 5% profit. Find its Cost Price.'
               )}
             </p>
@@ -233,7 +233,7 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D', display: 'block', marginBottom: 4 }}>
-                  {L('विक्रय मूल्य (SP): ', 'Selling Price (SP): ')} रु {givenSp.toLocaleString()}
+                  {L('विक्रय मूल्य (SP): ', 'Selling Price (SP): ')} Rs {givenSp.toLocaleString()}
                 </label>
                 <input
                   type="range"
@@ -278,18 +278,18 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
               }}
             >
               <div>
-                <strong>{L('१. धारणा:', '1. Concept:')}</strong> मानौँ CP = १००%। नाफा {givenProfitPct}% भएपछि SP ={' '}
-                {100 + givenProfitPct}% हुन्छ।
+                <strong>{L('1. धारणा:', '1. Concept:')}</strong> Let CP = 100%. Profit {givenProfitPct}% gives SP ={' '}
+                {100 + givenProfitPct}% .
               </div>
               <div>
-                <strong>{L('२. सम्बन्ध:', '2. Relation:')}</strong> {100 + givenProfitPct}% of CP = रु{' '}
+                <strong>{L('2. सम्बन्ध:', '2. Relation:')}</strong> {100 + givenProfitPct}% of CP = Rs{' '}
                 {givenSp.toLocaleString()}
               </div>
               <div>
-                <strong>{L('३. सूत्र:', '3. Formula:')}</strong> CP = (SP × १००) / (१०० + P%)
+                <strong>{L('3. सूत्र:', '3. Formula:')}</strong> CP = (SP × 100) / (100 + P%)
               </div>
               <div>
-                CP = ({givenSp.toLocaleString()} × १००) / {100 + givenProfitPct}
+                CP = ({givenSp.toLocaleString()} × 100) / {100 + givenProfitPct}
               </div>
               <div
                 style={{
@@ -299,7 +299,7 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
                   color: '#3730A3',
                 }}
               >
-                {L('क्रय मूल्य (CP) = ', 'Cost Price (CP) = ')} रु {Math.round(calculatedCp).toLocaleString()}
+                {L('क्रय मूल्य (CP) = ', 'Cost Price (CP) = ')} Rs {Math.round(calculatedCp).toLocaleString()}
               </div>
             </div>
           </div>
@@ -313,7 +313,7 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: रु २०,००० मा किनेको मोबाइललाई १०% नाफा कमाउन कति मूल्यमा बेच्नुपर्छ?',
+                'पाठ्यपुस्तक उदाहरण: Rs 20,000 मा किनेको मोबाइललाई 10% नाफा कमाउन कति मूल्यमा बेच्नुपर्छ?',
                 'Textbook Example: At what price should a mobile bought for Rs 20,000 be sold to earn 10% profit?'
               )}
             </p>
@@ -321,7 +321,7 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1', display: 'block', marginBottom: 4 }}>
-                  {L('क्रय मूल्य (CP): ', 'Cost Price (CP): ')} रु {targetCp.toLocaleString()}
+                  {L('क्रय मूल्य (CP): ', 'Cost Price (CP): ')} Rs {targetCp.toLocaleString()}
                 </label>
                 <input
                   type="range"
@@ -366,12 +366,12 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
               }}
             >
               <div>
-                <strong>{L('नाफा रकम (Profit Amount):', 'Profit Amount:')}</strong> {desiredProfitPct}% of रु{' '}
-                {targetCp.toLocaleString()} = रु {targetProfitAmt.toLocaleString()}
+                <strong>{L('नाफा रकम (Profit Amount):', 'Profit Amount:')}</strong> {desiredProfitPct}% of Rs{' '}
+                {targetCp.toLocaleString()} = Rs {targetProfitAmt.toLocaleString()}
               </div>
               <div>
-                <strong>{L('नयाँ विक्रय मूल्य (New SP):', 'New Selling Price (SP):')}</strong> रु{' '}
-                {targetCp.toLocaleString()} + रु {targetProfitAmt.toLocaleString()}
+                <strong>{L('नयाँ विक्रय मूल्य (New SP):', 'New Selling Price (SP):')}</strong> Rs{' '}
+                {targetCp.toLocaleString()} + Rs {targetProfitAmt.toLocaleString()}
               </div>
               <div
                 style={{
@@ -381,7 +381,7 @@ export const CostPriceSellingPriceStudio: React.FC<{ onBackToLibrary?: () => voi
                   color: '#065F46',
                 }}
               >
-                {L('बेच्नुपर्ने मूल्य: ', 'Required Selling Price: ')} रु {targetSp.toLocaleString()}
+                {L('बेच्नुपर्ने मूल्य: ', 'Required Selling Price: ')} Rs {targetSp.toLocaleString()}
               </div>
             </div>
           </div>

@@ -114,7 +114,7 @@ export const AngleMeasurementConversionLab: React.FC<SimProps> = ({ onBackToLibr
 
               <div className="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
                 <div className="flex justify-between items-center text-xs font-bold text-slate-700">
-                  <span>{L('डिग्री (Degrees °):', 'Degrees (°):')}</span>
+                  <span>{L('degrees (Degrees °):', 'Degrees (°):')}</span>
                   <span className="font-mono text-indigo-700 text-base">{fmt(angleDeg)}°</span>
                 </div>
                 <input
@@ -213,15 +213,15 @@ export const AngleMeasurementConversionLab: React.FC<SimProps> = ({ onBackToLibr
                 \frac&#123;D&#125;&#123;180&#125; = \frac&#123;G&#125;&#123;200&#125; = \frac&#123;θ^c&#125;&#123;π&#125;
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-slate-700 text-[11px]">
-                <div>• १ समकोण = ९०° = १००ᵍ = π/२ रेडियन</div>
-                <div>• १° = ६०' (मिनेट), १' = ६०'' (सेकेन्ड)</div>
+                <div>• 1 right angle = 90° = 100ᵍ = π/2 radians</div>
+                <div>• 1° = 60', 1' = 60''</div>
               </div>
             </div>
 
             {/* Interactive Step-by-Step Converter */}
             <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
               <div className="flex items-center gap-3">
-                <span className="text-xs font-bold text-slate-700">{L('डिग्री मान राख्नुहोस् (Enter Degrees):', 'Enter Degrees:')}</span>
+                <span className="text-xs font-bold text-slate-700">{L('degrees मान राख्नुहोस् (Enter Degrees):', 'Enter Degrees:')}</span>
                 <input
                   type="number"
                   value={customDeg}
@@ -234,7 +234,7 @@ export const AngleMeasurementConversionLab: React.FC<SimProps> = ({ onBackToLibr
               {/* Conversion Steps */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <div className="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
-                  <span className="font-bold text-amber-900 block">{L('१. ग्रेडमा रूपान्तरण (To Grades):', 'To Grades (G):')}</span>
+                  <span className="font-bold text-amber-900 block">{L('1. ग्रेडमा रूपान्तरण (To Grades):', 'To Grades (G):')}</span>
                   <div className="font-mono text-slate-700">
                     G = \frac&#123;10&#125;&#123;9&#125; × D = \frac&#123;10&#125;&#123;9&#125; × {fmt(parsedCustomDeg)}
                   </div>
@@ -244,7 +244,7 @@ export const AngleMeasurementConversionLab: React.FC<SimProps> = ({ onBackToLibr
                 </div>
 
                 <div className="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
-                  <span className="font-bold text-emerald-900 block">{L('२. रेडियनमा रूपान्तरण (To Radians):', 'To Radians (θᶜ):')}</span>
+                  <span className="font-bold text-emerald-900 block">{L('2. रेडियनमा रूपान्तरण (To Radians):', 'To Radians (θᶜ):')}</span>
                   <div className="font-mono text-slate-700">
                     θᶜ = \frac&#123;π&#125;&#123;180&#125; × D = \frac&#123;π × {fmt(parsedCustomDeg)}&#125;&#123;180&#125;
                   </div>
@@ -304,13 +304,13 @@ export const AngleMeasurementConversionLab: React.FC<SimProps> = ({ onBackToLibr
                   {L('चापको लम्बाइ हिसाब (Arc Length Calculation):', 'Arc Length Calculation:')}
                 </div>
                 <div className="font-mono text-sm">
-                  l = r × θ (θ अनिवार्य रेडियनमा हुनुपर्छ)
+                  l = r × θ (θ must be in radians)
                 </div>
                 <div className="font-mono text-slate-700 pt-1">
                   l = {fmt(arcRadius)} × {fmt(angleRadian.toFixed(3))} = <span className="text-base font-bold text-emerald-700">{fmt(arcLength)} cm</span>
                 </div>
                 <div className="text-[11px] text-slate-500 pt-1">
-                  {L('जब चापको लम्बाइ अर्धव्याससँग बराबर हुन्छ (l = r), तब बनेको कोण १ रेडियन (१ᶜ ≈ ५७.३°) हुन्छ।', 'When arc length equals radius (l = r), the subtended central angle is exactly 1 radian (1ᶜ ≈ 57.3°).')}
+                  {L('जब चापको लम्बाइ अर्धव्याससँग बराबर हुन्छ (l = r), तब बनेको कोण 1 रेडियन (1ᶜ ≈ 57.3°) हुन्छ।', 'When arc length equals radius (l = r), the subtended central angle is exactly 1 radian (1ᶜ ≈ 57.3°).')}
                 </div>
               </div>
             </div>
@@ -329,12 +329,12 @@ export const AngleMeasurementConversionLab: React.FC<SimProps> = ({ onBackToLibr
                 <div className="font-bold text-indigo-950 text-sm">🎠 {L('पिङको विस्थापन (Swing Angular Motion)', 'Playground Swing')}</div>
                 <p className="text-slate-600 leading-relaxed">
                   {L(
-                    'यदि ३ मिटर लामो डोरी भएको पिङ ६०° को कोणमा हल्लिन्छ भने पिङले पार गरेको चापको दुरी:',
+                    'यदि 3 m लामो डोरी भएको पिङ 60° को कोणमा हल्लिन्छ भने पिङले पार गरेको चापको दुरी:',
                     'If a 3 m long swing swings through an angle of 60°, the arc distance travelled is:'
                   )}
                 </p>
                 <div className="font-mono bg-white p-2 rounded border border-slate-200 text-indigo-700 font-bold">
-                  l = r × θ = ३ × (π/३) = π ≈ ३.१४ मिटर
+                  l = r × θ = 3 × (π/3) = π ≈ 3.14 m
                 </div>
               </div>
 
@@ -342,12 +342,12 @@ export const AngleMeasurementConversionLab: React.FC<SimProps> = ({ onBackToLibr
                 <div className="font-bold text-indigo-950 text-sm">🕰️ {L('घडीको सुइ (Clock Hands Motion)', 'Clock Hand Movement')}</div>
                 <p className="text-slate-600 leading-relaxed">
                   {L(
-                    'घडीको मिनेट सुइले १ घण्टा (६० मिनेट) मा पूरा ३६०° (२π रेडियन) घुम्छ। १ मिनेटमा ६° (π/३० रेडियन) कोण बनाउँछ।',
+                    'घडीको min सुइले 1 घण्टा (60 min) मा पूरा 360° (2π रेडियन) घुम्छ। 1 minमा 6° (π/30 रेडियन) कोण बनाउँछ।',
                     'The minute hand of a clock completes 360° (2π radians) in 60 minutes, turning 6° per minute.'
                   )}
                 </p>
                 <div className="font-mono bg-white p-2 rounded border border-slate-200 text-indigo-700 font-bold">
-                  १५ मिनेटमा = ९०° = १००ᵍ = π/२ रेडियन
+                  In 15 min = 90° = 100ᵍ = π/2 radians
                 </div>
               </div>
             </div>

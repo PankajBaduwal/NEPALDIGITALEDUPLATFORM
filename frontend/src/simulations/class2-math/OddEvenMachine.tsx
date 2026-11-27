@@ -1,5 +1,5 @@
 /**
- * Lesson 5 · Odd and even numbers (जोर र बिजोर सङ्ख्या)
+ * Lesson 5 · Odd and even numbers
  * Odd-Even Machine — numbered crates ride a conveyor; inspect the last digit and sort into Even or Odd bin.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -57,7 +57,7 @@ export const OddEvenMachine: React.FC<Props> = ({ onBackToLibrary }) => {
       setTimeout(nextNumber, 1200);
     } else {
       kit.oops(
-        'अन्तिम अङ्क हेरौँ: ०, २, ४, ६, ८ भए जोर; १, ३, ५, ७, ९ भए बिजोर',
+        'अन्तिम अङ्क हेरौँ: 0, 2, 4, 6, 8 भए जोर; 1, 3, 5, 7, 9 भए बिजोर',
         'Look at the last digit: 0, 2, 4, 6, 8 = Even; 1, 3, 5, 7, 9 = Odd'
       );
       setStreak(0);
@@ -211,7 +211,7 @@ export const OddEvenMachine: React.FC<Props> = ({ onBackToLibrary }) => {
                 {kit.t('जोर (Even): अन्त्यमा', 'Even: Ends in')}
               </div>
               <div style={{ fontSize: 18, fontWeight: 900, color: '#15803D' }}>
-                {kit.lang === 'ne' ? '०, २, ४, ६, ८' : '0, 2, 4, 6, 8'}
+                {kit.lang === 'ne' ? '0, 2, 4, 6, 8' : '0, 2, 4, 6, 8'}
               </div>
             </div>
 
@@ -228,7 +228,7 @@ export const OddEvenMachine: React.FC<Props> = ({ onBackToLibrary }) => {
                 {kit.t('बिजोर (Odd): अन्त्यमा', 'Odd: Ends in')}
               </div>
               <div style={{ fontSize: 18, fontWeight: 900, color: '#EA580C' }}>
-                {kit.lang === 'ne' ? '१, ३, ५, ७, ९' : '1, 3, 5, 7, 9'}
+                {kit.lang === 'ne' ? '1, 3, 5, 7, 9' : '1, 3, 5, 7, 9'}
               </div>
             </div>
           </div>
@@ -315,7 +315,7 @@ export const OddEvenMachine: React.FC<Props> = ({ onBackToLibrary }) => {
                 {kit.t('जोर बाकस', 'Even Bin')}
               </div>
               <div style={{ fontSize: 11, color: '#15803D', fontWeight: 800 }}>
-                {kit.lang === 'ne' ? '०, २, ४, ६, ८' : '0, 2, 4, 6, 8'}
+                {kit.lang === 'ne' ? '0, 2, 4, 6, 8' : '0, 2, 4, 6, 8'}
               </div>
             </div>
 
@@ -335,7 +335,7 @@ export const OddEvenMachine: React.FC<Props> = ({ onBackToLibrary }) => {
                 {kit.t('बिजोर बाकस', 'Odd Bin')}
               </div>
               <div style={{ fontSize: 11, color: '#C2410C', fontWeight: 800 }}>
-                {kit.lang === 'ne' ? '१, ३, ५, ७, ९' : '1, 3, 5, 7, 9'}
+                {kit.lang === 'ne' ? '1, 3, 5, 7, 9' : '1, 3, 5, 7, 9'}
               </div>
             </div>
           </div>

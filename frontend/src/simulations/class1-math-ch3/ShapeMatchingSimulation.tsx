@@ -1,8 +1,8 @@
 /**
  * ShapeMatchingSimulation.tsx
- * Simulation 02: Match the Shape (वस्तु र आकार मिलाऔँ)
- * Class 1 Mathematics - Chapter 3: Geometrical Shapes (ज्यामितीय आकारहरू)
- * Based on Nepal CDC Curriculum (मेरो गणित, कक्षा १ - २०७६)
+ * Simulation 02: Match the Shape
+ * Class 1 Mathematics - Chapter 3: Geometrical Shapes
+ * Based on Nepal CDC Curriculum
  */
 
 import React, { useState, useEffect } from 'react';
@@ -47,7 +47,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Language & Audio
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Round Progression (1: 4 items, 2: 6 items, 3: 8 items)
@@ -107,7 +107,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
       categoryNp: 'त्रिभुज',
       icon: '⚠️',
       hintEn: 'Count the 3 straight edges of the sign.',
-      hintNp: 'यो ट्राफिक बोर्डमा ३ वटा सिधा किनारा छन्।',
+      hintNp: 'यो ट्राफिक बोर्डमा 3 वटा सिधा किनारा छन्।',
     },
     {
       id: 'roof',
@@ -117,7 +117,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
       categoryNp: 'त्रिभुज',
       icon: '🏠',
       hintEn: 'The roof gable forms a 3-cornered triangle.',
-      hintNp: 'घरको छाना ३ वटा कुना भएको त्रिभुज आकारको छ।',
+      hintNp: 'घरको छाना 3 वटा कुना भएको त्रिभुज आकारको छ।',
     },
     {
       id: 'pennant',
@@ -127,7 +127,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
       categoryNp: 'त्रिभुज',
       icon: '🚩',
       hintEn: 'The festive flag has 3 sides and 3 corners.',
-      hintNp: 'मेलाको ध्वजा ३ वटा किनारा भएको त्रिभुज हो।',
+      hintNp: 'मेलाको ध्वजा 3 वटा किनारा भएको त्रिभुज हो।',
     },
     {
       id: 'hanger',
@@ -159,7 +159,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
       categoryNp: 'चतुर्भुज',
       icon: '🚪',
       hintEn: 'The door has 4 straight sides and 4 corners.',
-      hintNp: 'ढोका ४ वटा सिधा किनारा भएको चतुर्भुज हो।',
+      hintNp: 'ढोका 4 वटा सिधा किनारा भएको चतुर्भुज हो।',
     },
     {
       id: 'window',
@@ -169,7 +169,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
       categoryNp: 'चतुर्भुज',
       icon: '🪟',
       hintEn: 'The square window frame has 4 corners.',
-      hintNp: 'झ्यालको फ्रेम ४ वटा कुना भएको चतुर्भुज हो।',
+      hintNp: 'झ्यालको फ्रेम 4 वटा कुना भएको चतुर्भुज हो।',
     },
     {
       id: 'gift',
@@ -391,7 +391,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
             </h1>
             <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
               {language === 'np'
-                ? 'कक्षा १ गणित • अध्याय ३: ज्यामितीय आकारहरू (Geometrical Shapes)'
+                ? 'कक्षा 1 गणित • अध्याय 3: ज्यामितीय आकारहरू (Geometrical Shapes)'
                 : 'Class 1 Math • Chapter 3: Geometrical Shapes'}
             </span>
           </div>
@@ -441,21 +441,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
           </div>
 
           {/* Language Toggle */}
-          <button
-            onClick={() => setLanguage(language === 'np' ? 'en' : 'np')}
-            style={{
-              background: '#ede9fe',
-              color: '#6d28d9',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '13px',
-              cursor: 'pointer',
-            }}
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
 
           {/* Sound Toggle */}
           <button
@@ -647,7 +633,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
             flex: 1,
           }}
         >
-          {/* Bin 1: Circle (वृत्त) */}
+          {/* Bin 1: Circle */}
           <div
             onClick={() => handlePlaceInBin('circle')}
             style={{
@@ -679,7 +665,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
               </div>
               <div>
                 <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 900, color: '#065f46' }}>
-                  {language === 'np' ? 'वृत्त (Circle)' : 'Circle (वृत्त)'}
+                  {language === 'np' ? 'वृत्त (Circle)' : 'Circle'}
                 </h3>
                 <span style={{ fontSize: '12px', color: '#059669', fontWeight: 600 }}>
                   {language === 'np' ? 'गोलो आकार' : 'Round, no corners'}
@@ -717,7 +703,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
             </div>
           </div>
 
-          {/* Bin 2: Triangle (त्रिभुज) */}
+          {/* Bin 2: Triangle */}
           <div
             onClick={() => handlePlaceInBin('triangle')}
             style={{
@@ -749,10 +735,10 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
               </div>
               <div>
                 <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 900, color: '#991b1b' }}>
-                  {language === 'np' ? 'त्रिभुज (Triangle)' : 'Triangle (त्रिभुज)'}
+                  {language === 'np' ? 'त्रिभुज (Triangle)' : 'Triangle'}
                 </h3>
                 <span style={{ fontSize: '12px', color: '#dc2626', fontWeight: 600 }}>
-                  {language === 'np' ? '३ वटा सिधा किनारा' : '3 straight sides, 3 corners'}
+                  {language === 'np' ? '3 वटा सिधा किनारा' : '3 straight sides, 3 corners'}
                 </span>
               </div>
             </div>
@@ -787,7 +773,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
             </div>
           </div>
 
-          {/* Bin 3: Quadrilateral (चतुर्भुज) */}
+          {/* Bin 3: Quadrilateral */}
           <div
             onClick={() => handlePlaceInBin('quadrilateral')}
             style={{
@@ -819,10 +805,10 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
               </div>
               <div>
                 <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 900, color: '#1e40af' }}>
-                  {language === 'np' ? 'चतुर्भुज (Quadrilateral)' : 'Quadrilateral (चतुर्भुज)'}
+                  {language === 'np' ? 'चतुर्भुज (Quadrilateral)' : 'Quadrilateral'}
                 </h3>
                 <span style={{ fontSize: '12px', color: '#2563eb', fontWeight: 600 }}>
-                  {language === 'np' ? '४ वटा सिधा किनारा' : '4 straight sides, 4 corners'}
+                  {language === 'np' ? '4 वटा सिधा किनारा' : '4 straight sides, 4 corners'}
                 </span>
               </div>
             </div>

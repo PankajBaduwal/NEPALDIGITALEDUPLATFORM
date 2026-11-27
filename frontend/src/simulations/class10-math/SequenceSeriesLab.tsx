@@ -87,35 +87,35 @@ export const SequenceSeriesLab: React.FC<SimProps> = ({ onBackToLibrary, onBack 
   const quizQuestions = [
     {
       qEn: 'In an AP, the first term is a = 5 and common difference d = 4. What is the 10th term (t₁₀)?',
-      qNp: 'एउटा समानान्तर श्रेणी (AP) मा पहिलो पद a = ५ र साझा अन्तर d = ४ छ। १० औँ पद (t₁₀) कति हुन्छ?',
+      qNp: 'एउटा समानान्तर श्रेणी (AP) मा पहिलो पद a = 5 र साझा अन्तर d = 4 छ। 10 औँ पद (t₁₀) कति हुन्छ?',
       options: ['37', '41', '45', '50'],
       correct: 1, // 5 + 9*4 = 41
       hintEn: 'Formula: t_n = a + (n - 1)d = 5 + (10 - 1) × 4 = 5 + 36 = 41.',
-      hintNp: 'सूत्र: t_n = a + (n - 1)d = ५ + (१० - १) × ४ = ५ + ३६ = ४१।',
+      hintNp: 'सूत्र: t_n = a + (n - 1)d = 5 + (10 - 1) × 4 = 5 + 36 = 41।',
     },
     {
       qEn: 'Insert 1 Arithmetic Mean (A.M.) between 12 and 28. What is the mean?',
-      qNp: '१२ र २८ को बीचमा १ वटा समानान्तर मध्यक (A.M.) पत्ता लगाउनुहोस्।',
+      qNp: '12 र 28 को बीचमा 1 pcs समानान्तर मध्यक (A.M.) पत्ता लगाउनुहोस्।',
       options: ['18', '20', '22', '24'],
       correct: 1, // (12+28)/2 = 20
       hintEn: 'Formula: A = (a + b) / 2 = (12 + 28) / 2 = 20.',
-      hintNp: 'सूत्र: A = (a + b) / २ = (१२ + २८) / २ = २०।',
+      hintNp: 'सूत्र: A = (a + b) / 2 = (12 + 28) / 2 = 20।',
     },
     {
       qEn: 'Find the sum of first 8 terms of the AP: 2, 5, 8, 11, ...',
-      qNp: 'समानान्तर श्रेणी: २, ५, ८, ११, ... को पहिलो ८ पदहरूको योगफल (S₈) निकाल्नुहोस्।',
+      qNp: 'समानान्तर श्रेणी: 2, 5, 8, 11, ... को पहिलो 8 पदहरूको योगफल (S₈) निकाल्नुहोस्।',
       options: ['96', '100', '104', '112'],
       correct: 1, // n/2 [2a + (n-1)d] = 4 * [4 + 7*3] = 4 * 25 = 100
       hintEn: 'S_n = (n/2)[2a + (n-1)d] = (8/2)[2(2) + 7(3)] = 4[4 + 21] = 4 × 25 = 100.',
-      hintNp: 'S_n = (n/२)[२a + (n-१)d] = (८/२)[२(२) + ७(३)] = ४[४ + २१] = ४ × २५ = १००।',
+      hintNp: 'S_n = (n/2)[2a + (n-1)d] = (8/2)[2(2) + 7(3)] = 4[4 + 21] = 4 × 25 = 100।',
     },
     {
       qEn: 'In a GP, the first term a = 3 and common ratio r = 2. What is the 5th term (t₅)?',
-      qNp: 'एउटा गुणोत्तर श्रेणी (GP) मा पहिलो पद a = ३ र साझा अनुपात r = २ छ। ५ औँ पद (t₅) कति हुन्छ?',
+      qNp: 'एउटा गुणोत्तर श्रेणी (GP) मा पहिलो पद a = 3 र साझा अनुपात r = 2 छ। 5 औँ पद (t₅) कति हुन्छ?',
       options: ['24', '36', '48', '96'],
       correct: 2, // 3 * 2^4 = 3 * 16 = 48
       hintEn: 'Formula: t_n = a * r^(n-1) = 3 * 2^(5-1) = 3 * 16 = 48.',
-      hintNp: 'सूत्र: t_n = a * r^(n-१) = ३ * २⁴ = ३ * १६ = ४८।',
+      hintNp: 'सूत्र: t_n = a * r^(n-1) = 3 * 2⁴ = 3 * 16 = 48।',
     },
   ];
 
@@ -145,7 +145,7 @@ export const SequenceSeriesLab: React.FC<SimProps> = ({ onBackToLibrary, onBack 
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ ६: अनुक्रम र श्रेणी (Sequence and Series) प्रयोगशालामा स्वागत छ! यहाँ समानान्तर र गुणोत्तर अनुक्रम, मध्यक र योगफल प्रत्यक्ष अन्वेषण गर्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 6: अनुक्रम र श्रेणी (Sequence and Series) प्रयोगशालामा स्वागत छ! यहाँ समानान्तर र गुणोत्तर अनुक्रम, मध्यक र योगफल प्रत्यक्ष अन्वेषण गर्नुहोस्!',
         'Welcome to Grade 10 Unit 6: Sequence and Series Pattern Laboratory! Explore Arithmetic and Geometric progressions, means, and series formulas interactively!'
       )}
     >
@@ -163,13 +163,13 @@ export const SequenceSeriesLab: React.FC<SimProps> = ({ onBackToLibrary, onBack 
         }}
       >
         {[
-          { id: 'arithmetic', np: '१. समानान्तर अनुक्रम (AP)', en: '1. Arithmetic AP' },
-          { id: 'arithMeans', np: '२. समानान्तर मध्यक (AM)', en: '2. Arithmetic Means' },
-          { id: 'arithSeries', np: '३. समानान्तर श्रेणी (Sum)', en: '3. AP Series Sum' },
-          { id: 'geometric', np: '४. गुणोत्तर अनुक्रम (GP)', en: '4. Geometric GP' },
-          { id: 'geomMeans', np: '५. गुणोत्तर मध्यक (GM)', en: '5. Geometric Means' },
-          { id: 'geomSeries', np: '६. गुणोत्तर श्रेणी (Sum)', en: '6. GP Series Sum' },
-          { id: 'challenge', np: '७. अभ्यास परीक्षा', en: '7. Practice Quiz' },
+          { id: 'arithmetic', np: '1. समानान्तर अनुक्रम (AP)', en: '1. Arithmetic AP' },
+          { id: 'arithMeans', np: '2. समानान्तर मध्यक (AM)', en: '2. Arithmetic Means' },
+          { id: 'arithSeries', np: '3. समानान्तर श्रेणी (Sum)', en: '3. AP Series Sum' },
+          { id: 'geometric', np: '4. गुणोत्तर अनुक्रम (GP)', en: '4. Geometric GP' },
+          { id: 'geomMeans', np: '5. गुणोत्तर मध्यक (GM)', en: '5. Geometric Means' },
+          { id: 'geomSeries', np: '6. गुणोत्तर श्रेणी (Sum)', en: '6. GP Series Sum' },
+          { id: 'challenge', np: '7. अभ्यास परीक्षा', en: '7. Practice Quiz' },
         ].map((tab) => {
           const isActive = activeTab === tab.id;
           return (
@@ -710,7 +710,7 @@ export const SequenceSeriesLab: React.FC<SimProps> = ({ onBackToLibrary, onBack 
                 {fmt(asSum)}
               </div>
               <div style={{ fontSize: 11, color: '#047857' }}>
-                S_{fmt(asN)} = ({fmt(asN)}/२) × [{fmt(asA)} + {fmt(asLastTerm)}] = {fmt(asSum)}
+                S_{fmt(asN)} = ({fmt(asN)}/2) × [{fmt(asA)} + {fmt(asLastTerm)}] = {fmt(asSum)}
               </div>
             </div>
           </div>
@@ -778,7 +778,7 @@ export const SequenceSeriesLab: React.FC<SimProps> = ({ onBackToLibrary, onBack 
                   {fmt(asA + asLastTerm)}
                 </div>
                 <span style={{ fontSize: 12, color: '#64748B' }}>
-                  ({fmt(asN / 2)} {L('वटा जोडीहरू', 'pairs')})
+                  ({fmt(asN / 2)} {L('pcs जोडीहरू', 'pairs')})
                 </span>
               </div>
             </div>
@@ -1122,7 +1122,7 @@ export const SequenceSeriesLab: React.FC<SimProps> = ({ onBackToLibrary, onBack 
                 r = (b / a)^(1 / (k + 1))
               </div>
               <div style={{ fontSize: 12, color: '#475569', marginTop: 4 }}>
-                r = ({fmt(gmB)} / {fmt(gmA)})^(१ / {fmt(gmK + 1)}) ={' '}
+                r = ({fmt(gmB)} / {fmt(gmA)})^(1 / {fmt(gmK + 1)}) ={' '}
                 <strong style={{ color: '#0F766E' }}>{fmt(gmRatio)}</strong>
               </div>
             </div>

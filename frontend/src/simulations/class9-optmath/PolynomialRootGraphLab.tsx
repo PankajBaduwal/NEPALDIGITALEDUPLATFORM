@@ -157,7 +157,7 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
               <div className="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
                 <div>
                   <div className="flex justify-between font-bold text-slate-700 mb-1">
-                    <span>a (x² को गुणाङ्क):</span>
+                    <span>a:</span>
                     <span className="font-mono text-indigo-700">{fmt(coeffA)}</span>
                   </div>
                   <input
@@ -173,7 +173,7 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
 
                 <div>
                   <div className="flex justify-between font-bold text-slate-700 mb-1">
-                    <span>b (x को गुणाङ्क):</span>
+                    <span>b:</span>
                     <span className="font-mono text-indigo-700">{fmt(coeffB)}</span>
                   </div>
                   <input
@@ -189,7 +189,7 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
 
                 <div>
                   <div className="flex justify-between font-bold text-slate-700 mb-1">
-                    <span>c (अचर पद, Constant):</span>
+                    <span>c:</span>
                     <span className="font-mono text-indigo-700">{fmt(coeffC)}</span>
                   </div>
                   <input
@@ -237,10 +237,10 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
                 </div>
                 <div className="text-[11px] text-slate-600">
                   {discriminant > 0
-                    ? L('b² − 4ac > ०: २ वटा भिन्न वास्तविक शून्यमानहरू (X-अक्षलाई २ बिन्दुमा काट्छ)', '2 distinct real roots (intersects X-axis twice)')
+                    ? L('b² − 4ac > 0: 2 pcs भिन्न वास्तविक शून्यमानहरू (X-अक्षलाई 2 बिन्दुमा काट्छ)', '2 distinct real roots (intersects X-axis twice)')
                     : discriminant === 0
-                    ? L('b² − 4ac = ०: १ वटा दोहोरिएको वास्तविक शून्यमान (X-अक्षलाई स्पर्श गर्छ)', '1 repeated real root (touches X-axis)')
-                    : L('b² − 4ac < ०: वास्तविक शून्यमान छैन (X-अक्षलाई छुँदैन)', 'No real roots (does not intersect X-axis)')}
+                    ? L('b² − 4ac = 0: 1 pcs दोहोरिएको वास्तविक शून्यमान (X-अक्षलाई स्पर्श गर्छ)', '1 repeated real root (touches X-axis)')
+                    : L('b² − 4ac < 0: वास्तविक शून्यमान छैन (X-अक्षलाई छुँदैन)', 'No real roots (does not intersect X-axis)')}
                 </div>
               </div>
             </div>
@@ -312,7 +312,7 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
             {/* Inputs: Polynomial coefficients and divisor */}
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs">
               <div className="bg-slate-50 p-2.5 rounded-lg border">
-                <span className="text-slate-500 block mb-1">x³ को गुणाङ्क (a):</span>
+                <span className="text-slate-500 block mb-1">Coefficient of x³ (a):</span>
                 <input
                   type="number"
                   value={synA}
@@ -321,7 +321,7 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
                 />
               </div>
               <div className="bg-slate-50 p-2.5 rounded-lg border">
-                <span className="text-slate-500 block mb-1">x² को गुणाङ्क (b):</span>
+                <span className="text-slate-500 block mb-1">Coefficient of x² (b):</span>
                 <input
                   type="number"
                   value={synB}
@@ -330,7 +330,7 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
                 />
               </div>
               <div className="bg-slate-50 p-2.5 rounded-lg border">
-                <span className="text-slate-500 block mb-1">x को गुणाङ्क (c):</span>
+                <span className="text-slate-500 block mb-1">Coefficient of x (c):</span>
                 <input
                   type="number"
                   value={synC}
@@ -339,7 +339,7 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
                 />
               </div>
               <div className="bg-slate-50 p-2.5 rounded-lg border">
-                <span className="text-slate-500 block mb-1">अचर पद (d):</span>
+                <span className="text-slate-500 block mb-1">Constant term (d):</span>
                 <input
                   type="number"
                   value={synD}
@@ -348,7 +348,7 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
                 />
               </div>
               <div className="bg-indigo-50 p-2.5 rounded-lg border border-indigo-200">
-                <span className="text-indigo-900 font-bold block mb-1">भाजक (x − r) मा r:</span>
+                <span className="text-indigo-900 font-bold block mb-1">r in the divisor (x − r):</span>
                 <input
                   type="number"
                   value={divisorR}
@@ -410,7 +410,7 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
               <div className="p-3 bg-white rounded-xl border border-slate-200">
                 <span className="font-bold text-slate-700 block mb-1">{L('शेषफल (Remainder R):', 'Remainder R:')}</span>
                 <span className={`font-mono text-sm font-bold ${synSteps.isFactor ? 'text-emerald-700' : 'text-rose-700'}`}>
-                  R = {fmt(synSteps.remainder)} {synSteps.isFactor ? L('(शून्य शेषफल ⇒ गुणनखण्ड हो)', '(Zero remainder ⇒ is a factor!)') : ''}
+                  R = {fmt(synSteps.remainder)} {synSteps.isFactor ? L('', '(Zero remainder ⇒ is a factor!)') : ''}
                 </span>
               </div>
             </div>
@@ -429,7 +429,7 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
               </div>
               <p className="leading-relaxed">
                 {L(
-                  'यदि कुनै बहुपद p(x) मा x = a राख्दा p(a) = ० हुन्छ भने (x − a) बहुपद p(x) को एउटा गुणनखण्ड (Factor) हुन्छ।',
+                  'यदि कुनै बहुपद p(x) मा x = a राख्दा p(a) = 0 हुन्छ भने (x − a) बहुपद p(x) को एउटा गुणनखण्ड (Factor) हुन्छ।',
                   'If evaluating a polynomial p(x) at x = a yields p(a) = 0, then (x − a) is a factor of p(x).'
                 )}
               </p>
@@ -440,10 +440,10 @@ export const PolynomialRootGraphLab: React.FC<SimProps> = ({ onBackToLibrary, on
                 p(x) = x³ − 2x² − 5x + 6
               </div>
               <div>
-                परीक्षण (Test x = 3): p(3) = (3)³ − 2(3)² − 5(3) + 6 = 27 − 18 − 15 + 6 = <span className="font-bold text-emerald-700">0</span>
+                Test (x = 3): p(3) = (3)³ − 2(3)² − 5(3) + 6 = 27 − 18 − 15 + 6 = <span className="font-bold text-emerald-700">0</span>
               </div>
               <div className="text-emerald-800 font-bold">
-                ⇒ (x − 3) बहुपद p(x) को गुणनखण्ड हो!
+                ⇒ (x − 3) is a factor of the polynomial p(x)!
               </div>
             </div>
           </div>

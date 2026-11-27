@@ -160,22 +160,7 @@ export const SimFrame2D: React.FC<SimFrame2DProps> = ({
           </div>
 
           {/* Language Switcher */}
-          <button
-            type="button"
-            onClick={() => kit.setLang(isNe ? 'en' : 'ne')}
-            style={{
-              background: '#167C80',
-              color: '#FFFFFF',
-              border: 'none',
-              padding: '7px 14px',
-              borderRadius: 10,
-              fontSize: 13,
-              fontWeight: 700,
-              cursor: 'pointer',
-            }}
-          >
-            {isNe ? 'English' : 'नेपाली'}
-          </button>
+          
 
           {/* Audio Mute Toggle */}
           <button

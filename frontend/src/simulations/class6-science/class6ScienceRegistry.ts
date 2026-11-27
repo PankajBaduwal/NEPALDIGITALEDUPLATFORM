@@ -1,6 +1,6 @@
 /**
  * class6ScienceRegistry.ts
- * Master Simulation Metadata Registry for Grade 6 Science & Technology (विज्ञान तथा प्रविधि - कक्षा ६)
+ * Master Simulation Metadata Registry for Grade 6 Science & Technology
  * Government of Nepal Curriculum Development Centre (CDC) Alignment
  */
 
@@ -64,7 +64,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'BEGINNER',
     estimatedMinutes: 20,
     description: 'Master the 7 steps of scientific inquiry by formulating hypotheses and experimenting on ice melting rates in sunlight versus shade.',
-    descriptionNepali: 'परिकल्पना निर्माण, घाम र छायाँमा बरफ पग्लने दरको परीक्षण र तथ्याङ्क विश्लेषण गरी वैज्ञानिक पद्धतिका ७ चरणहरू सिक्नुहोस्।',
+    descriptionNepali: 'परिकल्पना निर्माण, घाम र छायाँमा बरफ पग्लने दरको परीक्षण र तथ्याङ्क विश्लेषण गरी वैज्ञानिक पद्धतिका 7 चरणहरू सिक्नुहोस्।',
     tags: ['scientific inquiry', 'hypothesis', 'data collection', 'ice melting'],
   },
   {
@@ -106,7 +106,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'BEGINNER',
     estimatedMinutes: 20,
     description: 'Disassemble a virtual 3D PC workstation to explore Motherboard, CPU, RAM, SSD, and classify peripheral input/output devices.',
-    descriptionNepali: '३D कम्प्युटरका भित्री भागहरू खोल्नुहोस् र मदरबोर्ड, सीपीयू, र्याम, हार्डडिस्क तथा इनपुट/आउटपुट उपकरणहरूको काम बुझ्नुहोस्।',
+    descriptionNepali: '3D कम्प्युटरका भित्री भागहरू खोल्नुहोस् र मदरबोर्ड, सीपीयू, र्याम, हार्डडिस्क तथा इनपुट/आउटपुट उपकरणहरूको काम बुझ्नुहोस्।',
     tags: ['computer hardware', 'CPU', 'RAM', 'motherboard', 'input output'],
   },
   {
@@ -148,7 +148,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'BEGINNER',
     estimatedMinutes: 20,
     description: 'Explore structural adaptations of Himalayan Yak, Terai Elephant, and Aquatic Golden Mahseer across distinct climatic habitats.',
-    descriptionNepali: 'हिमाली याकको बाक्लो भुत्ला, तराईको हात्तीको ठूला कान र माछाको सुलुत्त परेको शरीरका अनुकूलन विशेषताहरू ३D मा हेर्नुहोस्।',
+    descriptionNepali: 'हिमाली याकको बाक्लो भुत्ला, तराईको हात्तीको ठूला कान र माछाको सुलुत्त परेको शरीरका अनुकूलन विशेषताहरू 3D मा हेर्नुहोस्।',
     tags: ['adaptation', 'yak', 'elephant', 'mahseer', 'habitat'],
   },
   {
@@ -188,7 +188,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'INTERMEDIATE',
     estimatedMinutes: 20,
     description: 'Examine 3D anatomical models with internal skeletal X-ray views to differentiate 5 vertebrate classes from major invertebrate phyla.',
-    descriptionNepali: 'एक्स-रे skeleton दृश्यसहित ५ ढाड भएका वर्गहरू र ढाड नभएका कीरा/चिप्लेकिराहरूको शरीरको बनावट अध्ययन गर्नुहोस्।',
+    descriptionNepali: 'एक्स-रे skeleton दृश्यसहित 5 ढाड भएका वर्गहरू र ढाड नभएका कीरा/चिप्लेकिराहरूको शरीरको बनावट अध्ययन गर्नुहोस्।',
     tags: ['vertebrates', 'invertebrates', 'skeleton', 'pisces', 'mammalia'],
   },
   {
@@ -250,7 +250,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'INTERMEDIATE',
     estimatedMinutes: 20,
     description: 'Follow energy flow from paddy to eagle via Lindeman’s 10% rule and test ecological balance by removing links in the food web.',
-    descriptionNepali: '१०% ऊर्जा स्थानान्तरण नियम, ५ पोषण तहहरू र कुनै एक जीव मासिएमा पूरै आहार जालोमा आउने असन्तुलन परीक्षण गर्नुहोस्।',
+    descriptionNepali: '10% ऊर्जा स्थानान्तरण नियम, 5 पोषण तहहरू र कुनै एक जीव मासिएमा पूरै आहार जालोमा आउने असन्तुलन परीक्षण गर्नुहोस्।',
     tags: ['food chain', 'energy pyramid', '10 percent law', 'trophic level', 'predator'],
   },
   {
@@ -270,7 +270,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'BEGINNER',
     estimatedMinutes: 20,
     description: 'Sort household refuse into 3 color-coded bins, apply the 3R framework, and simulate aerobic composting pit decomposition.',
-    descriptionNepali: 'कुहिने, नकुहिने र जोखिमयुक्त फोहोर ३ रङका बिनमा वर्गीकरण गर्नुहोस् र जैविक कम्पोस्ट मल बनाउने विधि सिक्नुहोस्।',
+    descriptionNepali: 'कुहिने, नकुहिने र जोखिमयुक्त फोहोर 3 रङका बिनमा वर्गीकरण गर्नुहोस् र जैविक कम्पोस्ट मल बनाउने विधि सिक्नुहोस्।',
     tags: ['waste management', 'biodegradable', 'recycling', 'compost pit', '3R'],
   },
 
@@ -312,7 +312,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'INTERMEDIATE',
     estimatedMinutes: 20,
     description: 'Follow an interactive food bolus from oral mastication down through oesophagus, stomach acid, and intestinal villi nutrient absorption.',
-    descriptionNepali: 'खाना मुखदेखि आमाशय, कलेजो, सानो आन्द्रा र भिल्लाइ हुँदै रगतमा पोषक तत्व सोसिने सम्पूर्ण प्रक्रिया ३D मा हेर्नुहोस्।',
+    descriptionNepali: 'खाना मुखदेखि आमाशय, कलेजो, सानो आन्द्रा र भिल्लाइ हुँदै रगतमा पोषक तत्व सोसिने सम्पूर्ण प्रक्रिया 3D मा हेर्नुहोस्।',
     tags: ['digestive system', 'stomach', 'enzymes', 'villi', 'intestine'],
   },
 
@@ -476,7 +476,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'INTERMEDIATE',
     estimatedMinutes: 20,
     description: 'Compare conduction with melting wax pins on metal rods, convection currents in water, and thermal radiation through vacuum.',
-    descriptionNepali: 'ठोसमा सञ्चालन (काँटी झर्ने), तरलमा संवहन (तरङ्ग चक्र) र अन्तरिक्षबाट आउने विकिरण विधि ३D मा हेर्नुहोस्।',
+    descriptionNepali: 'ठोसमा सञ्चालन (काँटी झर्ने), तरलमा संवहन (तरङ्ग चक्र) र अन्तरिक्षबाट आउने विकिरण विधि 3D मा हेर्नुहोस्।',
     tags: ['conduction', 'convection', 'radiation', 'heat transfer', 'thermal'],
   },
   {
@@ -516,7 +516,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'BEGINNER',
     estimatedMinutes: 20,
     description: 'Align pinhole cards to prove rectilinear light propagation, classify transparent/translucent/opaque media, and trace umbra/penumbra.',
-    descriptionNepali: 'प्रकाश सिधा रेखामा हिँड्ने ३ कार्डबोर्डको परीक्षण, पारदर्शी/अपारदर्शी वस्तु र गाढा तथा मधुरो छायाँको अध्ययन गर्नुहोस्।',
+    descriptionNepali: 'प्रकाश सिधा रेखामा हिँड्ने 3 कार्डबोर्डको परीक्षण, पारदर्शी/अपारदर्शी वस्तु र गाढा तथा मधुरो छायाँको अध्ययन गर्नुहोस्।',
     tags: ['rectilinear propagation', 'shadow', 'umbra', 'penumbra', 'optics'],
   },
   {
@@ -578,7 +578,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'BEGINNER',
     estimatedMinutes: 20,
     description: 'Map magnetic field vector loops around a 3D bar magnet, orient floating compasses, and sprinkle procedural iron filings.',
-    descriptionNepali: 'चुम्बकीय बलरेखाहरू, कम्पासको सुइको दिशा र फलामको धूलोको ढाँचा ३D मा अन्वेषण गर्नुहोस्।',
+    descriptionNepali: 'चुम्बकीय बलरेखाहरू, कम्पासको सुइको दिशा र फलामको धूलोको ढाँचा 3D मा अन्वेषण गर्नुहोस्।',
     tags: ['magnetic field', 'compass', 'iron filings', 'poles', 'attraction'],
   },
   {
@@ -658,7 +658,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'ADVANCED',
     estimatedMinutes: 20,
     description: 'Submerge Copper and Zinc plates in dilute H2SO4 to generate 1.08V EMF, watch H2 bubbles evolve, and manage polarization.',
-    descriptionNepali: 'तामा र जस्ताको पातालाई सल्फ्युरिक एसिडमा डुबाएर १.०८ भोल्ट निकाल्नुहोस् र ध्रुवीकरण दोष समाधान गर्नुहोस्।',
+    descriptionNepali: 'तामा र जस्ताको पातालाई सल्फ्युरिक एसिडमा डुबाएर 1.08 भोल्ट निकाल्नुहोस् र ध्रुवीकरण दोष समाधान गर्नुहोस्।',
     tags: ['simple cell', 'voltaic cell', 'copper', 'zinc', 'H2SO4', 'polarization'],
   },
 
@@ -780,7 +780,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'INTERMEDIATE',
     estimatedMinutes: 20,
     description: 'Spin a 4-tube balanced rotor up to 3000 RPM to separate dense bottom pellets from clear supernatant liquid.',
-    descriptionNepali: '३००० RPM को गतिमा टेस्टट्युब घुमाई रगत वा महीबाट भारी कणहरू तल थिग्र्याउने विधि सिक्नुहोस्।',
+    descriptionNepali: '3000 RPM को गतिमा टेस्टट्युब घुमाई रगत वा महीबाट भारी कणहरू तल थिग्र्याउने विधि सिक्नुहोस्।',
     tags: ['centrifugation', 'rotor', 'RPM', 'pellet', 'supernatant', 'blood plasma'],
   },
 
@@ -842,7 +842,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'BEGINNER',
     estimatedMinutes: 20,
     description: 'Accelerate centuries to compare decomposition of food waste and Sal leaf tapari versus 450-year plastic bottle pollution.',
-    descriptionNepali: 'जैविक पातको दुना-टपरी १ महिनामा कुहिने तर प्लास्टिकको बोतल ४५० वर्षसम्म नकुहिने वातावरणीय असर हेर्नुहोस्।',
+    descriptionNepali: 'जैविक पातको दुना-टपरी 1 महिनामा कुहिने तर प्लास्टिकको बोतल 450 वर्षसम्म नकुहिने वातावरणीय असर हेर्नुहोस्।',
     tags: ['decomposition', 'plastic pollution', 'microplastics', 'sal tapari', 'eco friendly'],
   },
 
@@ -884,7 +884,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'INTERMEDIATE',
     estimatedMinutes: 20,
     description: 'Simulate Earth orbiting the Sun with a constant 23.5° axial tilt, exploring Summer/Winter Solstices and Spring/Autumn Equinoxes.',
-    descriptionNepali: '२३.५° को कोणमा ढल्केर सूर्यको परिक्रमण गर्दा नेपालमा जाडो, गर्मी, दिन-रातको लम्बाइ र ऋतु परिवर्तन हुने कारण बुझ्नुहोस्।',
+    descriptionNepali: '23.5° को कोणमा ढल्केर सूर्यको परिक्रमण गर्दा नेपालमा जाडो, गर्मी, दिन-रातको लम्बाइ र ऋतु परिवर्तन हुने कारण बुझ्नुहोस्।',
     tags: ['seasons', 'revolution', 'axial tilt', 'solstice', 'equinox', 'sun earth'],
   },
   {
@@ -904,7 +904,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'BEGINNER',
     estimatedMinutes: 20,
     description: 'Fly through the Solar System to examine the Sun and 8 revolving planets with Saturn’s rings, moons, and astronomical distances.',
-    descriptionNepali: 'सूर्य र ८ वटा ग्रहहरू (बुध, शुक्र, पृथ्वी, मङ्गल, बृहस्पति, शनि, अरुण, वरुण) को परिक्रमण र चन्द्रमाहरू ३D मा हेर्नुहोस्।',
+    descriptionNepali: 'सूर्य र 8 वटा ग्रहहरू (बुध, शुक्र, पृथ्वी, मङ्गल, बृहस्पति, शनि, अरुण, वरुण) को परिक्रमण र चन्द्रमाहरू 3D मा हेर्नुहोस्।',
     tags: ['solar system', 'planets', 'sun', 'saturn rings', 'astronomy', 'orbits'],
   },
   {
@@ -924,7 +924,7 @@ export const GRADE_6_SCIENCE_SIMULATIONS: Grade6SimulationEntry[] = [
     difficulty: 'INTERMEDIATE',
     estimatedMinutes: 20,
     description: 'Simulate centuries of physical freeze-thaw wedging, chemical acid weathering, and biological lichen acids breaking rock into soil.',
-    descriptionNepali: 'चट्टानमा पानी जमेर फुट्ने, वर्षाको पानी र रूखका जराले चट्टान टुक्र्याई ५०० वर्षमा मलिलो माटो बन्ने प्रक्रिया हेर्नुहोस्।',
+    descriptionNepali: 'चट्टानमा पानी जमेर फुट्ने, वर्षाको पानी र रूखका जराले चट्टान टुक्र्याई 500 वर्षमा मलिलो माटो बन्ने प्रक्रिया हेर्नुहोस्।',
     tags: ['soil formation', 'weathering', 'frost wedging', 'humus', 'pedogenesis'],
   },
   {

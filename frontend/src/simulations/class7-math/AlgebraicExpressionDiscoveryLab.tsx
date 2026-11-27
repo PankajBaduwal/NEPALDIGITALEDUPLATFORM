@@ -1,6 +1,6 @@
 /**
  * AlgebraicExpressionDiscoveryLab.tsx
- * Grade 7 Mathematics – Lesson 11: ALGEBRAIC EXPRESSION (बीजगणितीय व्यञ्जक)
+ * Grade 7 Mathematics – Lesson 11: ALGEBRAIC EXPRESSION
  * Simulation 1: Algebraic Expression Discovery Lab (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 144-149)
  */
@@ -12,13 +12,13 @@ import { Box, Layers, Plus, Minus, ArrowRight, Check } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'बीजगणितीय व्यञ्जक ३x + ९ मा चल (Variable), अचर (Constant) र गुणांक (Coefficient) कुन-कुन हुन्?',
+    np: 'बीजगणितीय व्यञ्जक 3x + 9 मा चल (Variable), अचर (Constant) र गुणांक (Coefficient) कुन-कुन हुन्?',
     en: 'In algebraic expression 3x + 9, which are the variable, constant, and coefficient?',
     options: [
-      { key: 'A', label: 'चल = x, अचर = ९, गुणांक = ३ (Variable = x, Constant = 9, Coefficient = 3)' },
-      { key: 'B', label: 'चल = ३, अचर = x, गुणांक = ९' },
-      { key: 'C', label: 'चल = ९, अचर = ३, गुणांक = x' },
-      { key: 'D', label: 'सबै अचर हुन्' },
+      { key: 'A', label: 'Variable = x, Constant = 9, Coefficient = 3' },
+      { key: 'B', label: 'Variable = 3, Constant = x, Coefficient = 9' },
+      { key: 'C', label: 'Variable = 9, Constant = 3, Coefficient = x' },
+      { key: 'D', label: 'All are constants' },
     ],
     answer: 'A',
   },
@@ -26,32 +26,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'सजातीय पद (Like terms) भनेको कस्ता पदहरू हुन्?',
     en: 'What are like terms?',
     options: [
-      { key: 'A', label: 'एउटै चल र चलको घात पनि एउटै भएका पदहरू (Same variable and same power)' },
-      { key: 'B', label: 'एउटै गुणांक भएका पदहरू' },
-      { key: 'C', label: 'फरक चल भएका पदहरू' },
-      { key: 'D', label: 'अचर सङ्ख्याहरू मात्र' },
+      { key: 'A', label: 'Terms with the same variable and the same power' },
+      { key: 'B', label: 'Terms with the same coefficient' },
+      { key: 'C', label: 'Terms with different variables' },
+      { key: 'D', label: 'Constant numbers only' },
     ],
     answer: 'A',
   },
   {
-    np: '३x, ७x, ५y, २x² र ९ मध्ये सजातीय पदहरूको जोडी कुन हो?',
+    np: '3x, 7x, 5y, 2x² र 9 मध्ये सजातीय पदहरूको जोडी कुन हो?',
     en: 'Among 3x, 7x, 5y, 2x², and 9, which pair is like terms?',
     options: [
-      { key: 'A', label: '३x र ७x (3x and 7x)' },
-      { key: 'B', label: '३x र २x²' },
-      { key: 'C', label: '७x र ५y' },
-      { key: 'D', label: '५y र ९' },
+      { key: 'A', label: '3x and 7x' },
+      { key: 'B', label: '3x and 2x²' },
+      { key: 'C', label: '7x and 5y' },
+      { key: 'D', label: '5y and 9' },
     ],
     answer: 'A',
   },
   {
-    np: '३x + ५x लाई जोड्दा कति हुन्छ?',
+    np: '3x + 5x लाई जोड्दा कति हुन्छ?',
     en: 'What is 3x + 5x?',
     options: [
-      { key: 'A', label: '८x (गुणांक जोडिन्छ: ३ + ५ = ८)' },
-      { key: 'B', label: '८x²' },
-      { key: 'C', label: '१५x' },
-      { key: 'D', label: '१५x²' },
+      { key: 'A', label: '8x' },
+      { key: 'B', label: '8x²' },
+      { key: 'C', label: '15x' },
+      { key: 'D', label: '15x²' },
     ],
     answer: 'A',
   },
@@ -100,9 +100,9 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'parts', np: '१. व्यञ्जकका अङ्गहरू (Parts of Expression)', en: '1. Expression Parts' },
-            { id: 'like-terms', np: '२. सजातीय र विजातीय पद (Like/Unlike Terms)', en: '2. Like & Unlike Terms' },
-            { id: 'tiles', np: '३. अल्जेब्रा टायलबाट जोड (Algebra Tiles Addition)', en: '3. Algebra Tiles' },
+            { id: 'parts', np: '1. व्यञ्जकका अङ्गहरू (Parts of Expression)', en: '1. Expression Parts' },
+            { id: 'like-terms', np: '2. सजातीय र विजातीय पद (Like/Unlike Terms)', en: '2. Like & Unlike Terms' },
+            { id: 'tiles', np: '3. अल्जेब्रा टायलबाट जोड (Algebra Tiles Addition)', en: '3. Algebra Tiles' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -130,11 +130,11 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
         {activeTab === 'parts' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('व्यञ्जकका अङ्गहरू: ३x + ९ (Parts of 3x + 9)', 'Parts of Expression: 3x + 9')}
+              {L('व्यञ्जकका अङ्गहरू: 3x + 9 (Parts of 3x + 9)', 'Parts of Expression: 3x + 9')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'तलको व्यञ्जकमा ३x र ९ दुई पदहरू हुन्। फरक-फरक भाग थिचेर तिनीहरूको भूमिका बुझ्नुहोस्:',
+                'तलको व्यञ्जकमा 3x र 9 दुई पदहरू हुन्। फरक-फरक भाग थिचेर तिनीहरूको भूमिका बुझ्नुहोस्:',
                 'Click parts of the expression 3x + 9 to explore their roles:'
               )}
             </p>
@@ -169,7 +169,7 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
                   cursor: 'pointer',
                 }}
               >
-                ३
+                3
               </button>
 
               <button
@@ -209,7 +209,7 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
                   cursor: 'pointer',
                 }}
               >
-                ९
+                9
               </button>
             </div>
 
@@ -226,11 +226,11 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
               {selectedComponent === 'coeff' && (
                 <div>
                   <h4 style={{ margin: '0 0 6px 0', color: '#0369A1' }}>
-                    ३ = {L('गुणांक (Coefficient)', 'Coefficient')}
+                    3 = {L('गुणांक (Coefficient)', 'Coefficient')}
                   </h4>
                   <p style={{ margin: 0, fontSize: 14, color: '#0C4A6E' }}>
                     {L(
-                      'चल x को अगाडि गुणनको रूपमा आएको स्थिर सङ्ख्या ३ लाई गुणांक भनिन्छ। यसले x कति पटक आएको छ भन्ने जनाउँछ।',
+                      'चल x को अगाडि गुणनको रूपमा आएको स्थिर सङ्ख्या 3 लाई गुणांक भनिन्छ। यसले x कति पटक आएको छ भन्ने जनाउँछ।',
                       'The numerical multiplier 3 in front of variable x is the coefficient.'
                     )}
                   </p>
@@ -244,7 +244,7 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
                   </h4>
                   <p style={{ margin: 0, fontSize: 14, color: '#14532D' }}>
                     {L(
-                      'परिस्थिति अनुसार मान बदलिने अज्ञात प्रतीकलाई चल भनिन्छ। यहाँ x को मान १, २, ३ वा कुनै पनि सङ्ख्या हुन सक्छ।',
+                      'परिस्थिति अनुसार मान बदलिने अज्ञात प्रतीकलाई चल भनिन्छ। यहाँ x को मान 1, 2, 3 वा कुनै पनि सङ्ख्या हुन सक्छ।',
                       'A letter whose value can vary. Here x can represent any value.'
                     )}
                   </p>
@@ -254,11 +254,11 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
               {selectedComponent === 'const' && (
                 <div>
                   <h4 style={{ margin: '0 0 6px 0', color: '#D97706' }}>
-                    ९ = {L('अचर (Constant)', 'Constant')}
+                    9 = {L('अचर (Constant)', 'Constant')}
                   </h4>
                   <p style={{ margin: 0, fontSize: 14, color: '#78350F' }}>
                     {L(
-                      'निश्चित मान भएको र कहिल्यै नबदलिने सङ्ख्या ९ लाई अचर भनिन्छ।',
+                      'निश्चित मान भएको र कहिल्यै नबदलिने सङ्ख्या 9 लाई अचर भनिन्छ।',
                       'A fixed numerical quantity whose value never changes.'
                     )}
                   </p>
@@ -276,18 +276,18 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक सूची: ३x, ७x, ५y, २x², ९, ४x, १२y। समान चल र समान घात भएका पदहरू सजातीय पद हुन्:',
+                'पाठ्यपुस्तक सूची: 3x, 7x, 5y, 2x², 9, 4x, 12y। समान चल र समान घात भएका पदहरू सजातीय पद हुन्:',
                 'Terms with the same variable and same power are like terms:'
               )}
             </p>
 
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '14px 0' }}>
               {[
-                { id: 'all', label: 'सबै पदहरू (All)' },
-                { id: 'x', label: 'x का सजातीय पदहरू (३x, ७x, ४x)' },
-                { id: 'y', label: 'y का सजातीय पदहरू (५y, १२y)' },
-                { id: 'x2', label: 'x² पद (२x²)' },
-                { id: 'const', label: 'अचर पद (९)' },
+                { id: 'all', label: 'All terms' },
+                { id: 'x', label: 'Like terms of x (3x, 7x, 4x)' },
+                { id: 'y', label: 'Like terms of y (5y, 12y)' },
+                { id: 'x2', label: 'x² term (2x²)' },
+                { id: 'const', label: 'Constant term (9)' },
               ].map((filter) => (
                 <button
                   key={filter.id}
@@ -324,10 +324,10 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
                   {L('x का सजातीय पदहरू (Like terms with x)', 'Like terms with x')}
                 </span>
                 <div style={{ fontSize: 24, fontWeight: 800, color: '#1E40AF', marginTop: 6 }}>
-                  ३x, ७x, ४x
+                  3x, 7x, 4x
                 </div>
                 <div style={{ fontSize: 12, color: '#1E3A8A', marginTop: 4 }}>
-                  {L('चल x र घात १ दुवै समान छन्, त्यसैले जोड्न/घटाउन सकिन्छ', 'Same variable x^1')}
+                  {L('चल x र घात 1 दुवै समान छन्, त्यसैले जोड्न/घटाउन सकिन्छ', 'Same variable x^1')}
                 </div>
               </div>
 
@@ -336,22 +336,22 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
                   {L('y का सजातीय पदहरू (Like terms with y)', 'Like terms with y')}
                 </span>
                 <div style={{ fontSize: 24, fontWeight: 800, color: '#16A34A', marginTop: 6 }}>
-                  ५y, १२y
+                  5y, 12y
                 </div>
                 <div style={{ fontSize: 12, color: '#14532D', marginTop: 4 }}>
-                  {L('चल y र घात १ समान छन्', 'Same variable y^1')}
+                  {L('चल y र घात 1 समान छन्', 'Same variable y^1')}
                 </div>
               </div>
 
               <div style={{ background: '#FEF2F2', padding: 16, borderRadius: 10, border: '2px solid #FCA5A5' }}>
                 <span style={{ fontSize: 13, fontWeight: 700, color: '#DC2626' }}>
-                  {L('विजातीय पद (२x² र ३x किन विजातीय?)', 'Why are 2x² and 3x unlike?')}
+                  {L('विजातीय पद (2x² र 3x किन विजातीय?)', 'Why are 2x² and 3x unlike?')}
                 </span>
                 <div style={{ fontSize: 18, fontWeight: 800, color: '#B91C1C', marginTop: 6 }}>
-                  २x² र ३x विजातीय हुन्
+                  2x² and 3x are unlike terms
                 </div>
                 <div style={{ fontSize: 12, color: '#991B1B', marginTop: 4 }}>
-                  {L('चल x भए पनि २x² मा घात २ छ र ३x मा घात १ छ, घात फरक भएकाले विजातीय हुन्!', 'Powers differ (x² vs x¹)!')}
+                  {L('चल x भए पनि 2x² मा घात 2 छ र 3x मा घात 1 छ, घात फरक भएकाले विजातीय हुन्!', 'Powers differ (x² vs x¹)!')}
                 </div>
               </div>
             </div>
@@ -362,11 +362,11 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
         {activeTab === 'tiles' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('अल्जेब्रा टायलद्वारा सजातीय पदहरूको जोड (३x + ५x = ८x)', 'Algebra Tiles Addition')}
+              {L('अल्जेब्रा टायलद्वारा सजातीय पदहरूको जोड (3x + 5x = 8x)', 'Algebra Tiles Addition')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: ३ वटा x टायल र ५ वटा x टायल मिलाउँदा जम्मा ८ वटा x टायल बन्दछन्:',
+                'पाठ्यपुस्तक उदाहरण: 3 pcs x टायल र 5 pcs x टायल मिलाउँदा जम्मा 8 pcs x टायल बन्दछन्:',
                 'Textbook Example: Combining 3 x-tiles and 5 x-tiles yields 8 x-tiles:'
               )}
             </p>
@@ -374,7 +374,7 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1', display: 'block', marginBottom: 4 }}>
-                  पहिलो समूह x: {tileX1} वटा
+                  First group x: {tileX1} pcs
                 </label>
                 <input
                   type="range"
@@ -391,7 +391,7 @@ export const AlgebraicExpressionDiscoveryLab: React.FC<{ onBackToLibrary?: () =>
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D', display: 'block', marginBottom: 4 }}>
-                  दोस्रो समूह x: {tileX2} वटा
+                  Second group x: {tileX2} pcs
                 </label>
                 <input
                   type="range"

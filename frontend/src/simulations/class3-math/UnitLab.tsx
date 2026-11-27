@@ -116,7 +116,7 @@ export const makeUnitSim = (cfg: UnitCfg): React.FC<Props> => {
           };
         } else {
           return {
-            np: `१ ${sb('ne')} मा कति ${ss('ne')} हुन्छन्?`,
+            np: `1 ${sb('ne')} मा कति ${ss('ne')} हुन्छन्?`,
             en: `How many ${ss('en')} are in 1 ${sb('en')}?`,
             answer: String(p.factor),
             options: shuffle([p.factor, Math.floor(p.factor / 10), p.factor * 10].filter((x) => x >= 1), i + 9).map(lbl),
@@ -130,7 +130,7 @@ export const makeUnitSim = (cfg: UnitCfg): React.FC<Props> => {
         kit={kit}
         onBack={onBackToLibrary}
         mascotGreeting={kit.t(
-          `१ ${P.bigNp} = ${fmt('ne', P.factor)} ${P.smallNp}। मान परिवर्तन गरेर सम्बन्ध हेरौँ!`,
+          `1 ${P.bigNp} = ${fmt('ne', P.factor)} ${P.smallNp}। मान परिवर्तन गरेर सम्बन्ध हेरौँ!`,
           `1 ${P.bigEn} = ${P.factor} ${P.smallEn}. Adjust the values to see the conversion!`
         )}
         questions={questions}
@@ -207,7 +207,7 @@ export const makeUnitSim = (cfg: UnitCfg): React.FC<Props> => {
             }}
           >
             <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B' }}>
-              {kit.t(`१ ${P.bigNp} = ${fmt('ne', P.factor)} ${P.smallNp}`, `1 ${P.bigEn} = ${P.factor} ${P.smallEn}`)}
+              {kit.t(`1 ${P.bigNp} = ${fmt('ne', P.factor)} ${P.smallNp}`, `1 ${P.bigEn} = ${P.factor} ${P.smallEn}`)}
             </div>
             <div style={{ fontSize: 26, fontWeight: 900, color: '#1E293B', marginTop: 4 }}>
               {fmt(kit.lang, bigVal)} {asText(P, kit.lang, true)}
@@ -270,7 +270,7 @@ export const makeUnitSim = (cfg: UnitCfg): React.FC<Props> => {
                 {/* 1L Bottles Display */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <div style={{ fontSize: 13, fontWeight: 800, color: '#0369A1' }}>
-                    {kit.t(`${bigVal} वटा १ लिटरका बोतलहरू`, `${bigVal} × 1-Litre bottles`)}
+                    {kit.t(`${bigVal} वटा 1 लिटरका बोतलहरू`, `${bigVal} × 1-Litre bottles`)}
                   </div>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', maxWidth: 220 }}>
                     {Array.from({ length: bigVal }).map((_, bIdx) => (
@@ -429,7 +429,7 @@ export const makeUnitSim = (cfg: UnitCfg): React.FC<Props> => {
                 {/* Weights Display */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <div style={{ fontSize: 13, fontWeight: 800, color: '#A16207' }}>
-                    {kit.t(`${bigVal} वटा १ केजीका ढकहरू`, `${bigVal} × 1 kg weights`)}
+                    {kit.t(`${bigVal} वटा 1 केजीका ढकहरू`, `${bigVal} × 1 kg weights`)}
                   </div>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', maxWidth: 220 }}>
                     {Array.from({ length: bigVal }).map((_, wIdx) => (

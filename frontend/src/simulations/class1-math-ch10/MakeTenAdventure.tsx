@@ -1,7 +1,7 @@
 /**
  * MakeTenAdventure.tsx
- * Simulation 02: Make Ten Adventure (दश बनाएर जोडौँ)
- * Class 1 Mathematics - Chapter 10: Addition up to 20 (योगफल २० सम्म आउने जोड)
+ * Simulation 02: Make Ten Adventure
+ * Class 1 Mathematics - Chapter 10: Addition up to 20
  * Nepal Digital Education Platform
  */
 
@@ -27,10 +27,10 @@ interface Props {
 }
 
 const NEP_NUMERALS: Record<number, string> = {
-  0: '०', 1: '१', 2: '२', 3: '३', 4: '४', 5: '५',
-  6: '६', 7: '७', 8: '८', 9: '९', 10: '१०',
-  11: '११', 12: '१२', 13: '१३', 14: '१४', 15: '१५',
-  16: '१६', 17: '१७', 18: '१८', 19: '१९', 20: '२०',
+  0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5',
+  6: '6', 7: '7', 8: '8', 9: '9', 10: '10',
+  11: '11', 12: '12', 13: '13', 14: '14', 15: '15',
+  16: '16', 17: '17', 18: '18', 19: '19', 20: '20',
 };
 
 interface MakeTenProblem {
@@ -55,7 +55,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Mode: 'EXPLORE_STEPS' | 'SPLIT_PRACTICE' | 'QUIZ'
@@ -107,92 +107,92 @@ export const MakeTenAdventure: React.FC<Props> = ({
     () => [
       {
         id: 1,
-        questionNp: '८ लाई १० बनाउन कति चाहिन्छ? ८ + [ ? ] = १०',
+        questionNp: '8 लाई 10 बनाउन कति चाहिन्छ? 8 + [ ? ] = 10',
         questionEn: 'How much is needed to make 8 into 10? 8 + [ ? ] = 10',
         options: [1, 2, 3],
         correct: 2,
-        explanationNp: '८ मा २ जोड्दा १० हुन्छ (८ + २ = १०)।',
+        explanationNp: '8 मा 2 जोड्दा 10 हुन्छ (8 + 2 = 10)।',
         explanationEn: '8 + 2 = 10.',
       },
       {
         id: 2,
-        questionNp: '८ + ५ जोड्दा ५ लाई कुन दुई सङ्ख्यामा फुटाउनु पर्छ?',
+        questionNp: '8 + 5 जोड्दा 5 लाई कुन दुई सङ्ख्यामा फुटाउनु पर्छ?',
         questionEn: 'To solve 8 + 5 using make-10, split 5 into which two parts?',
         options: [2, 3, 4],
         correct: 2, // The needed part to make 10
-        explanationNp: '८ लाई १० बनाउन २ चाहिन्छ, त्यसैले ५ लाई २ र ३ मा फुटाइन्छ।',
+        explanationNp: '8 लाई 10 बनाउन 2 चाहिन्छ, त्यसैले 5 लाई 2 र 3 मा फुटाइन्छ।',
         explanationEn: '8 needs 2 to make 10, so 5 is split into 2 and 3.',
       },
       {
         id: 3,
-        questionNp: '९ लाई १० बनाउन कति चाहिन्छ?',
+        questionNp: '9 लाई 10 बनाउन कति चाहिन्छ?',
         questionEn: 'How much is needed to make 9 into 10?',
         options: [1, 2, 0],
         correct: 1,
-        explanationNp: '९ + १ = १० हुन्छ।',
+        explanationNp: '9 + 1 = 10 हुन्छ।',
         explanationEn: '9 + 1 = 10.',
       },
       {
         id: 4,
-        questionNp: '७ + ६ लाई दश बनाएर जोड्दा कुन रूप हुन्छ?',
+        questionNp: '7 + 6 लाई दश बनाएर जोड्दा कुन रूप हुन्छ?',
         questionEn: 'How is 7 + 6 written using make-10 strategy?',
         options: [12, 13, 14],
         correct: 13,
-        explanationNp: '७ + ३ + ३ = १० + ३ = १३ हुन्छ।',
+        explanationNp: '7 + 3 + 3 = 10 + 3 = 13 हुन्छ।',
         explanationEn: '7 + 3 + 3 = 10 + 3 = 13.',
       },
       {
         id: 5,
-        questionNp: '६ लाई १० बनाउन कति थप्नुपर्छ? ६ + [ ? ] = १०',
+        questionNp: '6 लाई 10 बनाउन कति थप्नुपर्छ? 6 + [ ? ] = 10',
         questionEn: 'How much must be added to 6 to make 10? 6 + [ ? ] = 10',
         options: [3, 4, 5],
         correct: 4,
-        explanationNp: '६ + ४ = १० हुन्छ।',
+        explanationNp: '6 + 4 = 10 हुन्छ।',
         explanationEn: '6 + 4 = 10.',
       },
       {
         id: 6,
-        questionNp: '१० + ४ को जोडफल कति हो?',
+        questionNp: '10 + 4 को जोडफल कति हो?',
         questionEn: 'What is 10 + 4?',
         options: [13, 14, 15],
         correct: 14,
-        explanationNp: '१० + ४ = १४ (चौध) हुन्छ।',
+        explanationNp: '10 + 4 = 14 हुन्छ।',
         explanationEn: '10 + 4 = 14 (Fourteen).',
       },
       {
         id: 7,
-        questionNp: '९ + ७ लाई १० बनाएर जोड्दा १० + कति हुन्छ?',
+        questionNp: '9 + 7 लाई 10 बनाएर जोड्दा 10 + कति हुन्छ?',
         questionEn: 'When solving 9 + 7 via make-10, it becomes 10 + what?',
         options: [5, 6, 7],
         correct: 6,
-        explanationNp: '९ + १ + ६ = १० + ६ = १६ हुन्छ।',
+        explanationNp: '9 + 1 + 6 = 10 + 6 = 16 हुन्छ।',
         explanationEn: '9 + 1 + 6 = 10 + 6 = 16.',
       },
       {
         id: 8,
-        questionNp: '८ + ८ को जोडफल दश बनाएर निकाल्दा कति आउँछ?',
+        questionNp: '8 + 8 को जोडफल दश बनाएर निकाल्दा कति आउँछ?',
         questionEn: 'What is 8 + 8 using the make-10 method?',
         options: [15, 16, 17],
         correct: 16,
-        explanationNp: '८ + २ + ६ = १० + ६ = १६ हुन्छ।',
+        explanationNp: '8 + 2 + 6 = 10 + 6 = 16 हुन्छ।',
         explanationEn: '8 + 2 + 6 = 10 + 6 = 16.',
       },
       {
         id: 9,
-        questionNp: '१० + ९ जोड्दा कति हुन्छ?',
+        questionNp: '10 + 9 जोड्दा कति हुन्छ?',
         questionEn: 'What is 10 + 9?',
         options: [18, 19, 20],
         correct: 19,
-        explanationNp: '१० + ९ = १९ (उन्नाइस) हुन्छ।',
+        explanationNp: '10 + 9 = 19 हुन्छ।',
         explanationEn: '10 + 9 = 19 (Nineteen).',
       },
       {
         id: 10,
-        questionNp: '७ लाई १० बनाउन कति चाहिन्छ? ७ + [ ? ] = १०',
+        questionNp: '7 लाई 10 बनाउन कति चाहिन्छ? 7 + [ ? ] = 10',
         questionEn: 'How much is needed to make 7 into 10? 7 + [ ? ] = 10',
         options: [2, 3, 4],
         correct: 3,
-        explanationNp: '७ + ३ = १० हुन्छ।',
+        explanationNp: '7 + 3 = 10 हुन्छ।',
         explanationEn: '7 + 3 = 10.',
       },
     ],
@@ -326,24 +326,24 @@ export const MakeTenAdventure: React.FC<Props> = ({
 
       if (nextStep === 2) {
         speak(
-          `चरण २: पहिलो समूहमा ${NEP_NUMERALS[currentProb.a]} छ। यसलाई १० बनाउन ${NEP_NUMERALS[currentProb.need]} चाहिन्छ।`,
+          `चरण 2: पहिलो समूहमा ${NEP_NUMERALS[currentProb.a]} छ। यसलाई 10 बनाउन ${NEP_NUMERALS[currentProb.need]} चाहिन्छ।`,
           `Step 2: Group 1 has ${currentProb.a}. We need ${currentProb.need} more to make 10.`
         );
       } else if (nextStep === 3) {
         playSound('split');
         speak(
-          `चरण ३: दोस्रो सङ्ख्या ${NEP_NUMERALS[currentProb.b]} लाई ${NEP_NUMERALS[currentProb.need]} र ${NEP_NUMERALS[currentProb.remain]} मा फुटाऔँ।`,
+          `चरण 3: दोस्रो सङ्ख्या ${NEP_NUMERALS[currentProb.b]} लाई ${NEP_NUMERALS[currentProb.need]} र ${NEP_NUMERALS[currentProb.remain]} मा फुटाऔँ।`,
           `Step 3: Split ${currentProb.b} into ${currentProb.need} and ${currentProb.remain}.`
         );
       } else if (nextStep === 4) {
         speak(
-          `चरण ४: त्यो ${NEP_NUMERALS[currentProb.need]} पहिलो समूहमा राख्दा पूरा १० बन्यो!`,
+          `चरण 4: त्यो ${NEP_NUMERALS[currentProb.need]} पहिलो समूहमा राख्दा पूरा 10 बन्यो!`,
           `Step 4: Move ${currentProb.need} to first group. Now we have a full 10!`
         );
       } else if (nextStep === 5) {
         playSound('success');
         speak(
-          `चरण ५: १० मा बाँकी ${NEP_NUMERALS[currentProb.remain]} जोड्दा ${NEP_NUMERALS[currentProb.sum]} हुन्छ!`,
+          `चरण 5: 10 मा बाँकी ${NEP_NUMERALS[currentProb.remain]} जोड्दा ${NEP_NUMERALS[currentProb.sum]} हुन्छ!`,
           `Step 5: 10 + ${currentProb.remain} = ${currentProb.sum}!`
         );
       }
@@ -373,7 +373,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
     } else {
       playSound('boop');
       setPracticeFeedback('incorrect');
-      speak('मिलेन, पहिलोलाई १० बनाउन कति चाहिन्छ ध्यान दिनुहोस्।', 'Not correct, check how much is needed to make 10.');
+      speak('मिलेन, पहिलोलाई 10 बनाउन कति चाहिन्छ ध्यान दिनुहोस्।', 'Not correct, check how much is needed to make 10.');
     }
   };
 
@@ -500,12 +500,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
           >
             {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            className="px-3 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold shadow-sm transition"
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
@@ -582,7 +577,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                       {language === 'np' ? 'पहिलो दश-कोठे घर (Ten-Frame A)' : 'Ten-Frame A'}
                     </span>
                     <span className="text-xs font-bold text-slate-900 bg-white px-2 py-0.5 rounded-full">
-                      {step >= 4 ? '१० / १० (पूरा)' : `${NEP_NUMERALS[currentProb.a]} / १०`}
+                      {step >= 4 ? '10 / 10' : `${NEP_NUMERALS[currentProb.a]} / 10`}
                     </span>
                   </div>
 
@@ -620,9 +615,9 @@ export const MakeTenAdventure: React.FC<Props> = ({
 
                   {/* Footnote */}
                   <span className="text-xs text-slate-500 mt-3 font-semibold text-center">
-                    {step === 1 && (language === 'np' ? `सुरुमा ${NEP_NUMERALS[currentProb.a]} ओटा वस्तु छन्।` : `Initially ${currentProb.a} items.`)}
-                    {step === 2 && (language === 'np' ? `१० बनाउन अझै ${NEP_NUMERALS[currentProb.need]} ओटा चाहिन्छ!` : `Needs ${currentProb.need} more to make 10!`)}
-                    {step >= 4 && (language === 'np' ? `स्याबास! १ पूरा दश (१०) बन्यो!` : `1 Complete Ten (10) formed!`)}
+                    {step === 1 && (language === 'np' ? `सुरुमा ${NEP_NUMERALS[currentProb.a]} items वस्तु छन्।` : `Initially ${currentProb.a} items.`)}
+                    {step === 2 && (language === 'np' ? `10 बनाउन अझै ${NEP_NUMERALS[currentProb.need]} items चाहिन्छ!` : `Needs ${currentProb.need} more to make 10!`)}
+                    {step >= 4 && (language === 'np' ? `स्याबास! 1 पूरा दश (10) बन्यो!` : `1 Complete Ten (10) formed!`)}
                   </span>
                 </div>
 
@@ -633,7 +628,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                       {language === 'np' ? 'दोस्रो समूह (Group B)' : 'Group B'}
                     </span>
                     <span className="text-xs font-bold text-slate-900 bg-white px-2 py-0.5 rounded-full">
-                      {NEP_NUMERALS[currentProb.b]} ओटा
+                      {NEP_NUMERALS[currentProb.b]} items
                     </span>
                   </div>
 
@@ -657,7 +652,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                         {/* Needed Part (Transfers to Ten-Frame) */}
                         <div className="flex-1 bg-amber-500/20 border border-amber-400 p-2.5 rounded-xl text-center">
                           <span className="text-[10px] font-bold text-amber-700 block mb-1">
-                            {language === 'np' ? `१० बनाउन जाने (${NEP_NUMERALS[currentProb.need]})` : `For 10 (${currentProb.need})`}
+                            {language === 'np' ? `10 बनाउन जाने (${NEP_NUMERALS[currentProb.need]})` : `For 10 (${currentProb.need})`}
                           </span>
                           <div className="flex justify-center gap-1.5">
                             {Array.from({ length: currentProb.need }).map((_, i) => (
@@ -713,7 +708,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                     {step === 1 && `${NEP_NUMERALS[currentProb.a]} + ${NEP_NUMERALS[currentProb.b]} = ?`}
                     {step === 2 && (
                       <>
-                        {NEP_NUMERALS[currentProb.a]} + <span className="text-rose-400">{NEP_NUMERALS[currentProb.need]}</span> = १०
+                        {NEP_NUMERALS[currentProb.a]} + <span className="text-rose-400">{NEP_NUMERALS[currentProb.need]}</span> = 10
                       </>
                     )}
                     {step === 3 && (
@@ -723,12 +718,12 @@ export const MakeTenAdventure: React.FC<Props> = ({
                     )}
                     {step === 4 && (
                       <>
-                        १० + {NEP_NUMERALS[currentProb.remain]} = ?
+                        10 + {NEP_NUMERALS[currentProb.remain]} = ?
                       </>
                     )}
                     {step === 5 && (
                       <>
-                        १० + {NEP_NUMERALS[currentProb.remain]} = <span className="text-amber-700">{NEP_NUMERALS[currentProb.sum]}</span> (स्याबास!)
+                        10 + {NEP_NUMERALS[currentProb.remain]} = <span className="text-amber-700">{NEP_NUMERALS[currentProb.sum]}</span> (स्याबास!)
                       </>
                     )}
                   </div>
@@ -773,7 +768,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                   <h3 className="text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? (
                       <>
-                        <span className="text-amber-700">{NEP_NUMERALS[practiceProb.a]}</span> लाई १० बनाउन{' '}
+                        <span className="text-amber-700">{NEP_NUMERALS[practiceProb.a]}</span> लाई 10 बनाउन{' '}
                         <span className="text-emerald-700">{NEP_NUMERALS[practiceProb.b]}</span> लाई फुटाउनुहोस्!
                       </>
                     ) : (
@@ -799,7 +794,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                 <div className="bg-slate-50 p-5 rounded-2xl border border-cyan-500/40 flex flex-col items-center">
                   <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-2">
                     {language === 'np'
-                      ? `${NEP_NUMERALS[practiceProb.a]} लाई १० बनाउन कति चाहिन्छ?`
+                      ? `${NEP_NUMERALS[practiceProb.a]} लाई 10 बनाउन कति चाहिन्छ?`
                       : `How much needed to make ${practiceProb.a} into 10?`}
                   </span>
 
@@ -880,7 +875,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                   <Sparkles className="w-5 h-5 text-emerald-700" />
                   <span>
                     {language === 'np'
-                      ? `स्याबास! १० + ${NEP_NUMERALS[practiceProb.remain]} = ${NEP_NUMERALS[practiceProb.sum]} हुन्छ!`
+                      ? `स्याबास! 10 + ${NEP_NUMERALS[practiceProb.remain]} = ${NEP_NUMERALS[practiceProb.sum]} हुन्छ!`
                       : `Excellent! 10 + ${practiceProb.remain} = ${practiceProb.sum}!`}
                   </span>
                 </div>
@@ -890,7 +885,7 @@ export const MakeTenAdventure: React.FC<Props> = ({
                   <Lightbulb className="w-5 h-5 text-rose-400" />
                   <span>
                     {language === 'np'
-                      ? 'मिलेन। पहिले १० बनाउन कति चाहिन्छ फेरि सोच्नुहोस्।'
+                      ? 'मिलेन। पहिले 10 बनाउन कति चाहिन्छ फेरि सोच्नुहोस्।'
                       : 'Not quite. Check how much is required to make ten.'}
                   </span>
                 </div>

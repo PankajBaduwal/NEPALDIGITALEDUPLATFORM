@@ -1,6 +1,6 @@
 /**
  * UnitaryMethodDiscoveryLab.tsx
- * Grade 7 Mathematics – Lesson 8: UNITARY METHOD (एकाइ विधि)
+ * Grade 7 Mathematics – Lesson 8: UNITARY METHOD
  * Simulation 1: Unitary Method Discovery Lab (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 104-106)
  */
@@ -12,46 +12,46 @@ import { ShoppingCart, Divide, X, ArrowRight, Check } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एकाइ विधि (Unitary Method) मा धेरै वस्तुको मूल्यबाट १ वस्तुको मूल्य पत्ता लगाउँदा कुन गणितीय क्रिया गरिन्छ?',
+    np: 'एकाइ विधि (Unitary Method) मा धेरै वस्तुprice ofबाट 1 वस्तुprice of पत्ता लगाउँदा कुन गणितीय क्रिया गरिन्छ?',
     en: 'In the unitary method, what mathematical operation is used to find the cost of 1 unit from multiple units?',
     options: [
-      { key: 'A', label: 'भाग (Division: मूल्य ÷ सङ्ख्या)' },
-      { key: 'B', label: 'गुणन (Multiplication)' },
-      { key: 'C', label: 'जोड (Addition)' },
-      { key: 'D', label: 'घटाउ (Subtraction)' },
+      { key: 'A', label: 'Division (price ÷ number)' },
+      { key: 'B', label: 'Multiplication' },
+      { key: 'C', label: 'Addition' },
+      { key: 'D', label: 'Subtraction' },
     ],
     answer: 'A',
   },
   {
-    np: '३० वटा केराको मूल्य रु २२५ पर्छ भने १ दर्जन (१२ वटा) केराको मूल्य कति पर्छ?',
+    np: '30 pcs bananasprice of Rs 225 पर्छ भने 1 दर्जन (12 pcs) bananasprice of कति पर्छ?',
     en: 'If 30 bananas cost Rs 225, what is the cost of 1 dozen (12) bananas?',
     options: [
-      { key: 'A', label: 'रु ९० (१ केरा = २२५/३० = रु ७.५० => १२ × ७.५० = रु ९०)' },
-      { key: 'B', label: 'रु १००' },
-      { key: 'C', label: 'रु ८०' },
-      { key: 'D', label: 'रु ७५' },
+      { key: 'A', label: 'Rs 90' },
+      { key: 'B', label: 'Rs 100' },
+      { key: 'C', label: 'Rs 80' },
+      { key: 'D', label: 'Rs 75' },
     ],
     answer: 'A',
   },
   {
-    np: '३ वटा कापीको मूल्य रु २७० पर्छ भने ५ वटा कापीको मूल्य कति पर्छ?',
+    np: 'Price of 3 copies Rs 270 पर्छ भने Price of 5 copies कति पर्छ?',
     en: 'If 3 notebooks cost Rs 270, what is the cost of 5 notebooks?',
     options: [
-      { key: 'A', label: 'रु ४५० (१ कापी = २७०/३ = रु ९० => ५ × ९० = रु ४५०)' },
-      { key: 'B', label: 'रु ४००' },
-      { key: 'C', label: 'रु ५००' },
-      { key: 'D', label: 'रु ५४०' },
+      { key: 'A', label: 'Rs 450' },
+      { key: 'B', label: 'Rs 400' },
+      { key: 'C', label: 'Rs 500' },
+      { key: 'D', label: 'Rs 540' },
     ],
     answer: 'A',
   },
   {
-    np: 'एकाइ विधि (Unitary Method) को सही २ चरण कुन हुन्?',
+    np: 'एकाइ विधि (Unitary Method) को सही 2 चरण कुन हुन्?',
     en: 'What are the correct 2 steps of the Unitary Method?',
     options: [
-      { key: 'A', label: '१. भाग गरी १ एकाइको मान निकाल्ने, २. गुणन गरी मागेको एकाइको मान निकाल्ने' },
-      { key: 'B', label: '१. पहिले गुणन गर्ने, २. पछि भाग गर्ने' },
-      { key: 'C', label: 'सिधै जोड्ने र घटाउने' },
-      { key: 'D', label: 'प्रतिशत निकाल्ने' },
+      { key: 'A', label: '1. Divide to find the value of 1 unit, 2. Multiply to find the value of the required units' },
+      { key: 'B', label: '1. Multiply first, 2. Divide afterwards' },
+      { key: 'C', label: 'Simply add and subtract' },
+      { key: 'D', label: 'Find the percentage' },
     ],
     answer: 'A',
   },
@@ -95,7 +95,7 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
     { nameNp: 'स्याउ (Apple)', nameEn: 'Apple', unitName: 'kg', baseQty: 5, baseCost: 750 },
     { nameNp: 'चामल (Rice)', nameEn: 'Rice', unitName: 'kg', baseQty: 10, baseCost: 1200 },
     { nameNp: 'दूध (Milk)', nameEn: 'Milk', unitName: 'L', baseQty: 2, baseCost: 180 },
-    { nameNp: 'कलम (Pen)', nameEn: 'Pen', unitName: 'वटा (pcs)', baseQty: 6, baseCost: 120 },
+    { nameNp: 'कलम (Pen)', nameEn: 'Pen', unitName: 'pcs (pcs)', baseQty: 6, baseCost: 120 },
   ];
 
   return (
@@ -105,7 +105,7 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'एकाइ विधिको २ नियम: धेरै एकाइबाट १ एकाइमा भाग (Divide) गर्ने, १ एकाइबाट धेरैमा गुणन (Multiply) गर्ने!',
+        'एकाइ विधिको 2 नियम: धेरै एकाइबाट 1 एकाइमा भाग (Divide) गर्ने, 1 एकाइबाट धेरैमा गुणन (Multiply) गर्ने!',
         '2 rules of Unitary Method: Divide to find 1 unit, Multiply to find target units!'
       )}
     >
@@ -113,9 +113,9 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'bananas', np: '१. केराको मूल्य (Textbook Banana Example)', en: '1. Banana Price Example' },
-            { id: 'matrix', np: '२. कापीको मूल्य र २-चरण ढाँचा', en: '2. 2-Step Pattern' },
-            { id: 'grocery', np: '३. किराना पसल एकाइ किनमेल', en: '3. Grocery Shopping' },
+            { id: 'bananas', np: '1. bananasprice of (Textbook Banana Example)', en: '1. Banana Price Example' },
+            { id: 'matrix', np: '2. कापीprice of र 2-चरण ढाँचा', en: '2. 2-Step Pattern' },
+            { id: 'grocery', np: '3. किराना पसल एकाइ किनमेल', en: '3. Grocery Shopping' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -143,11 +143,11 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
         {activeTab === 'bananas' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('केराको मूल्य: एकाइ विधिको व्यावहारिक प्रयोग', 'Banana Price: Unitary Method in Practice')}
+              {L('bananasprice of: एकाइ विधिको व्यावहारिक प्रयोग', 'Banana Price: Unitary Method in Practice')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ १०४ अनुसार: ३० वटा केराको मूल्य रु २२५ पर्छ भने १ दर्जन (१२ वटा) केराको मूल्य कति पर्छ?',
+                'पाठ्यपुस्तक पृष्ठ 104 अनुसार: 30 pcs bananasprice of Rs 225 पर्छ भने 1 दर्जन (12 pcs) bananasprice of कति पर्छ?',
                 'From Textbook Page 104: If 30 bananas cost Rs 225, how much does 1 dozen (12 bananas) cost?'
               )}
             </p>
@@ -155,7 +155,7 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#D97706', display: 'block', marginBottom: 4 }}>
-                  {L('दिइएको केरा सङ्ख्या: ', 'Given Bananas: ')} {givenBananas} वटा
+                  {L('दिइएको bananas सङ्ख्या: ', 'Given Bananas: ')} {givenBananas} pcs
                 </label>
                 <input
                   type="range"
@@ -173,7 +173,7 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D', display: 'block', marginBottom: 4 }}>
-                  {L('दिइएको मूल्य (रु): ', 'Given Cost (Rs): ')} रु {givenBananaCost}
+                  {L('दिइएprice of: ', 'Given Cost (Rs): ')} Rs {givenBananaCost}
                 </label>
                 <input
                   type="range"
@@ -191,7 +191,7 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#4338CA', display: 'block', marginBottom: 4 }}>
-                  {L('पत्ता लगाउनुपर्ने केरा: ', 'Target Bananas: ')} {targetBananas} वटा
+                  {L('पत्ता लगाउनुपर्ने bananas: ', 'Target Bananas: ')} {targetBananas} pcs
                 </label>
                 <input
                   type="range"
@@ -219,36 +219,36 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
               {/* Step 1 */}
               <div style={{ background: '#FFFBEB', padding: 16, borderRadius: 10, border: '1px solid #FDE68A' }}>
                 <span style={{ fontSize: 11, fontWeight: 700, color: '#B45309' }}>
-                  {L('चरण १: धेरै एकाइको मूल्य (Given)', 'Step 1: Multiple Units')}
+                  {L('चरण 1: धेरै एकाइprice of (Given)', 'Step 1: Multiple Units')}
                 </span>
                 <div style={{ fontSize: 18, fontWeight: 800, color: '#92400E', marginTop: 4 }}>
-                  {givenBananas} वटा केरा = रु {givenBananaCost}
+                  {givenBananas} pcs bananas = Rs {givenBananaCost}
                 </div>
               </div>
 
               {/* Step 2 */}
               <div style={{ background: '#EFF6FF', padding: 16, borderRadius: 10, border: '2px solid #3B82F6' }}>
                 <span style={{ fontSize: 11, fontWeight: 700, color: '#1D4ED8' }}>
-                  {L('चरण २: १ एकाइको मूल्य (भाग गर्ने - Divide)', 'Step 2: 1 Unit Cost (Divide)')}
+                  {L('चरण 2: 1 एकाइprice of', 'Step 2: 1 Unit Cost (Divide)')}
                 </span>
                 <div style={{ fontSize: 18, fontWeight: 800, color: '#1E40AF', marginTop: 4 }}>
-                  १ केरा = रु {givenBananaCost} ÷ {givenBananas}
+                  1 bananas = Rs {givenBananaCost} ÷ {givenBananas}
                 </div>
                 <div style={{ fontSize: 16, fontWeight: 800, color: '#2563EB', marginTop: 4 }}>
-                  = रु {unitBananaPrice.toFixed(2)}
+                  = Rs {unitBananaPrice.toFixed(2)}
                 </div>
               </div>
 
               {/* Step 3 */}
               <div style={{ background: '#ECFDF5', padding: 16, borderRadius: 10, border: '2px solid #10B981' }}>
                 <span style={{ fontSize: 11, fontWeight: 700, color: '#065F46' }}>
-                  {L('चरण ३: मागेको एकाइको मूल्य (गुणन - Multiply)', 'Step 3: Target Units (Multiply)')}
+                  {L('चरण 3: मागेको एकाइprice of', 'Step 3: Target Units (Multiply)')}
                 </span>
                 <div style={{ fontSize: 18, fontWeight: 800, color: '#047857', marginTop: 4 }}>
-                  {targetBananas} केरा = {targetBananas} × रु {unitBananaPrice.toFixed(2)}
+                  {targetBananas} bananas = {targetBananas} × Rs {unitBananaPrice.toFixed(2)}
                 </div>
                 <div style={{ fontSize: 20, fontWeight: 800, color: '#059669', marginTop: 4 }}>
-                  = रु {targetBananaCost.toFixed(2)}
+                  = Rs {targetBananaCost.toFixed(2)}
                 </div>
               </div>
             </div>
@@ -259,11 +259,11 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
         {activeTab === 'matrix' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('कापीको मूल्य: २-चरण ढाँचा (Notebook 2-Step Pattern)', 'Notebook 2-Step Pattern')}
+              {L('कापीprice of: 2-चरण ढाँचा (Notebook 2-Step Pattern)', 'Notebook 2-Step Pattern')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ १०५ अनुसार: ३ वटा कापीको मूल्य रु २७० पर्छ भने ५ वटा कापीको मूल्य कति पर्छ?',
+                'पाठ्यपुस्तक पृष्ठ 105 अनुसार: Price of 3 copies Rs 270 पर्छ भने Price of 5 copies कति पर्छ?',
                 'From Textbook Page 105: If 3 notebooks cost Rs 270, what is the cost of 5 notebooks?'
               )}
             </p>
@@ -279,17 +279,17 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
               }}
             >
               <div>
-                <strong>{L('१. दिइएको:', '1. Given:')}</strong> ३ वटा कापीको मूल्य = रु २७०
+                <strong>{L('1. दिइएको:', '1. Given:')}</strong> Price of 3 copies = Rs 270
               </div>
               <div>
-                <strong>{L('२. एकाइ मूल्य निकाल्न भाग गर्दा:', '2. Dividing to find unit cost:')}</strong>
-                <br />१ वटा कापीको मूल्य = रु २७० ÷ ३ ={' '}
-                <span style={{ fontWeight: 800, color: '#059669' }}>रु ९०</span>
+                <strong>{L('2. एकाइ मूल्य निकाल्न भाग गर्दा:', '2. Dividing to find unit cost:')}</strong>
+                <br />Price of 1 copy = Rs 270 ÷ 3 ={' '}
+                <span style={{ fontWeight: 800, color: '#059669' }}>Rs 90</span>
               </div>
               <div>
-                <strong>{L('३. ५ वटा कापीको मूल्य निकाल्न गुणन गर्दा:', '3. Multiplying to find 5 units:')}</strong>
-                <br />५ वटा कापीको मूल्य = ५ × रु ९० ={' '}
-                <span style={{ fontWeight: 800, color: '#187C68' }}>रु ४५०</span>
+                <strong>{L('3. Price of 5 copies निकाल्न गुणन गर्दा:', '3. Multiplying to find 5 units:')}</strong>
+                <br />Price of 5 copies = 5 × Rs 90 ={' '}
+                <span style={{ fontWeight: 800, color: '#187C68' }}>Rs 450</span>
               </div>
             </div>
           </div>
@@ -364,11 +364,11 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
 
                   <div style={{ lineHeight: 1.8, fontSize: 14 }}>
                     <div>
-                      {item.baseQty} {item.unitName} {L(item.nameNp, item.nameEn)} = रु {item.baseCost}
+                      {item.baseQty} {item.unitName} {L(item.nameNp, item.nameEn)} = Rs {item.baseCost}
                     </div>
                     <div>
-                      १ {item.unitName} को मूल्य = रु {item.baseCost} ÷ {item.baseQty} ={' '}
-                      <strong>रु {unitRate}</strong>
+                      1 {item.unitName} price of = Rs {item.baseCost} ÷ {item.baseQty} ={' '}
+                      <strong>Rs {unitRate}</strong>
                     </div>
                     <div
                       style={{
@@ -378,7 +378,7 @@ export const UnitaryMethodDiscoveryLab: React.FC<{ onBackToLibrary?: () => void;
                         color: '#187C68',
                       }}
                     >
-                      {groceryTargetQty} {item.unitName} को मूल्य = रु {totalCost.toLocaleString()}
+                      {groceryTargetQty} {item.unitName} price of = Rs {totalCost.toLocaleString()}
                     </div>
                   </div>
                 </div>

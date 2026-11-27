@@ -1,6 +1,6 @@
 /**
  * IntegerAddSubLab.tsx
- * Grade 7 Mathematics – Lesson 3: INTEGER (पूर्णाङ्क)
+ * Grade 7 Mathematics – Lesson 3: INTEGER
  * Simulation 2: Integer Addition and Subtraction Lab (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 51-57)
  */
@@ -12,24 +12,24 @@ import { Plus, Minus, ArrowRight, RotateCcw, Check, Sparkles, Navigation } from 
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: '(-५) + (+३) को मान कति हुन्छ? (+ र - जोडी रद्द गर्दा)',
+    np: '(-5) + (+3) को मान कति हुन्छ?',
     en: 'What is (-5) + (+3)? (By cancelling positive and negative pairs)',
     options: [
-      { key: 'A', label: '-२' },
-      { key: 'B', label: '+२' },
-      { key: 'C', label: '-८' },
-      { key: 'D', label: '+८' },
+      { key: 'A', label: '-2' },
+      { key: 'B', label: '+2' },
+      { key: 'C', label: '-8' },
+      { key: 'D', label: '+8' },
     ],
     answer: 'A',
   },
   {
-    np: 'बसपार्कबाट २० किमी पूर्व गई १३ किमी पश्चिम फर्किँदा हालको स्थान कति हुन्छ?',
+    np: 'बसपार्कबाट 20 km पूर्व गई 13 किमी पश्चिम फर्किँदा हालको स्थान कति हुन्छ?',
     en: 'Traveling 20 km East from bus park and returning 13 km West results in what position?',
     options: [
-      { key: 'A', label: '+७ किमी पूर्व (+7 km East)' },
-      { key: 'B', label: '-७ किमी पश्चिम' },
-      { key: 'C', label: '+३३ किमी' },
-      { key: 'D', label: '० किमी' },
+      { key: 'A', label: '+7 km east' },
+      { key: 'B', label: '-7 km west' },
+      { key: 'C', label: '+33 km' },
+      { key: 'D', label: '0 km' },
     ],
     answer: 'A',
   },
@@ -37,21 +37,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'a + b = b + a कुन गुण (Property) हो?',
     en: 'a + b = b + a demonstrates which property?',
     options: [
-      { key: 'A', label: 'क्रमविनिमेय गुण (Commutative Property)' },
-      { key: 'B', label: 'साहचर्य गुण (Associative Property)' },
-      { key: 'C', label: 'संवृत गुण (Closure Property)' },
-      { key: 'D', label: 'प्रतिलोम गुण (Additive Inverse)' },
+      { key: 'A', label: 'Commutative property' },
+      { key: 'B', label: 'Associative property' },
+      { key: 'C', label: 'Closure property' },
+      { key: 'D', label: 'Additive inverse property' },
     ],
     answer: 'A',
   },
   {
-    np: '(-४) - (-५) को मान कति हुन्छ? (घटाउलाई जोडमा बदल्दा: -४ + ५)',
+    np: '(-4) - (-5) को मान कति हुन्छ?',
     en: 'What is (-4) - (-5)? (Converting subtraction to addition: -4 + 5)',
     options: [
-      { key: 'A', label: '-९' },
-      { key: 'B', label: '+१' },
-      { key: 'C', label: '-१' },
-      { key: 'D', label: '+९' },
+      { key: 'A', label: '-9' },
+      { key: 'B', label: '+1' },
+      { key: 'C', label: '-1' },
+      { key: 'D', label: '+9' },
     ],
     answer: 'B',
   },
@@ -107,10 +107,10 @@ export const IntegerAddSubLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'counters', np: '१. कार्ड जोडी मोडल (+ र -)', en: '1. Counter Model (+ & -)' },
-            { id: 'numberline', np: '२. सङ्ख्यारेखाबाट जोड/घटाउ', en: '2. Number Line Add/Sub' },
-            { id: 'buspark', np: '३. व्यवहारिक बसपार्क पूर्व/पश्चिम', en: '3. Bus Park East/West' },
-            { id: 'properties', np: '४. जोडका गणितीय गुणहरू', en: '4. Properties of Addition' },
+            { id: 'counters', np: '1. कार्ड जोडी मोडल (+ र -)', en: '1. Counter Model (+ & -)' },
+            { id: 'numberline', np: '2. सङ्ख्यारेखाबाट जोड/घटाउ', en: '2. Number Line Add/Sub' },
+            { id: 'buspark', np: '3. व्यवहारिक बसपार्क पूर्व/पश्चिम', en: '3. Bus Park East/West' },
+            { id: 'properties', np: '4. जोडका गणितीय गुणहरू', en: '4. Properties of Addition' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -142,10 +142,10 @@ export const IntegerAddSubLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('पाठ्यपुस्तक मोडल (पृष्ठ ५१-५२)', 'Textbook Counter Model (Pages 51-52)')}
+                  {L('पाठ्यपुस्तक मोडल (पृष्ठ 51-52)', 'Textbook Counter Model (Pages 51-52)')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-                  {L('धनात्मक (+) र ऋणात्मक (-) कार्ड जोडी बनाएर शून्य (०) बनाउने विधि', 'Pairing Positive (+) & Negative (-) Counters to Cancel to Zero')}
+                  {L('धनात्मक (+) र ऋणात्मक (-) कार्ड जोडी बनाएर शून्य (0) बनाउने विधि', 'Pairing Positive (+) & Negative (-) Counters to Cancel to Zero')}
                 </h3>
               </div>
               <div style={{ fontSize: 18, fontWeight: 900, color: '#0F766E' }}>
@@ -184,7 +184,7 @@ export const IntegerAddSubLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
               {/* Cancelled Pairs */}
               <div style={{ background: '#F8FAFC', padding: 18, borderRadius: 14, border: '2px dashed #94A3B8' }}>
                 <div style={{ fontSize: 13, fontWeight: 800, color: '#475569', marginBottom: 10 }}>
-                  ⚡ {L(`रद्द भएका जोडीहरू (${toNp(cancelledPairs)} वटा = ०):`, `Cancelled Pairs (${cancelledPairs} pairs = 0):`)}
+                  ⚡ {L(`रद्द भएका जोडीहरू (${toNp(cancelledPairs)} pcs = 0):`, `Cancelled Pairs (${cancelledPairs} pairs = 0):`)}
                 </div>
                 {cancelledPairs > 0 ? (
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -219,7 +219,7 @@ export const IntegerAddSubLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
                       </span>
                     ))}
                   {remainingNeg === 0 && remainingPos === 0 && (
-                    <span style={{ fontSize: 18, fontWeight: 900, color: '#0F766E' }}>० (Zero)</span>
+                    <span style={{ fontSize: 18, fontWeight: 900, color: '#0F766E' }}>0 (Zero)</span>
                   )}
                 </div>
               </div>
@@ -268,10 +268,10 @@ export const IntegerAddSubLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
             {/* Steps Visual explanation */}
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', borderRadius: 14, padding: 18 }}>
               <div style={{ fontSize: 15, fontWeight: 900, color: '#0F766E', marginBottom: 6 }}>
-                १. सुरुवाती बिन्दु: {isNe ? toNp(lineStart) : lineStart}
+                1. Starting point: {isNe ? toNp(lineStart) : lineStart}
               </div>
               <div style={{ fontSize: 14, color: '#334155', lineHeight: 1.6 }}>
-                २. {lineDelta >= 0 ? `${isNe ? toNp(lineDelta) : lineDelta} एकाइ दायाँ (Right)` : `${isNe ? toNp(Math.abs(lineDelta)) : Math.abs(lineDelta)} एकाइ बायाँ (Left)`} सर्दा पुगिने स्थान: <strong>{isNe ? toNp(lineEnd) : lineEnd}</strong>
+                2. {lineDelta >= 0 ? `${isNe ? toNp(lineDelta) : lineDelta} units right` : `${isNe ? toNp(Math.abs(lineDelta)) : Math.abs(lineDelta)} units left`} Position reached after moving: <strong>{isNe ? toNp(lineEnd) : lineEnd}</strong>
               </div>
             </div>
           </div>
@@ -282,10 +282,10 @@ export const IntegerAddSubLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <div style={{ background: '#FEF3C7', border: '2px solid #F59E0B', borderRadius: 16, padding: 18, marginBottom: 20 }}>
               <div style={{ fontSize: 12, fontWeight: 800, color: '#B45309', textTransform: 'uppercase', marginBottom: 4 }}>
-                🚌 {L('पाठ्यपुस्तक व्यवहारिक उदाहरण (पृष्ठ ५०)', 'Textbook Practical Example (Page 50)')}
+                🚌 {L('पाठ्यपुस्तक व्यवहारिक उदाहरण (पृष्ठ 50)', 'Textbook Practical Example (Page 50)')}
               </div>
               <h3 style={{ margin: 0, fontSize: 16, fontWeight: 900, color: '#92400E', lineHeight: 1.5 }}>
-                "{L('एउटा बसपार्कलाई शून्य (०) मान्दा पूर्वतर्फ २० किमी यात्रा गरी फेरि पश्चिमतर्फ १३ किमी फर्किँदा हालको स्थान कति हुन्छ?', 'Taking the bus park as zero (0), a person travels 20 km East and then returns 13 km West. Find the position relative to bus park.')}"
+                "{L('एउटा बसपार्कलाई शून्य (0) मान्दा पूर्वतर्फ 20 km यात्रा गरी फेरि पश्चिमतर्फ 13 किमी फर्किँदा हालको स्थान कति हुन्छ?', 'Taking the bus park as zero (0), a person travels 20 km East and then returns 13 km West. Find the position relative to bus park.')}"
               </h3>
             </div>
 
@@ -298,7 +298,7 @@ export const IntegerAddSubLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
 
             <div style={{ background: '#DCFCE7', border: '2px solid #16A34A', padding: 18, borderRadius: 14 }}>
               <div style={{ fontSize: 16, fontWeight: 900, color: '#166534' }}>
-                हालको स्थान = (+२०) + (-१३) = <strong>+७ किमी (बसपार्कबाट पूर्वतर्फ ७ किमी)</strong>
+                Current position = (+20) + (-13) = <strong>+7 km (7 km east of the bus park)</strong>
               </div>
             </div>
           </div>
@@ -314,41 +314,41 @@ export const IntegerAddSubLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14 }}>
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#0F766E', marginBottom: 4 }}>
-                  १. संवृत गुण (Closure Property)
+                  1. Closure property
                 </div>
                 <div style={{ fontSize: 13, color: '#475569' }}>
-                  दुई पूर्णाङ्कहरूको जोड सधैं पूर्णाङ्क नै हुन्छ।<br />
-                  ३ + (-५) = -२ ∈ ℤ
+                  The sum of two integers is always an integer.<br />
+                  3 + (-5) = -2 ∈ ℤ
                 </div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#0F766E', marginBottom: 4 }}>
-                  २. क्रमविनिमेय गुण (Commutative)
+                  2. Commutative property
                 </div>
                 <div style={{ fontSize: 13, color: '#475569' }}>
                   a + b = b + a<br />
-                  ४ + (-२) = (-२) + ४ = २
+                  4 + (-2) = (-2) + 4 = 2
                 </div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#0F766E', marginBottom: 4 }}>
-                  ३. साहचर्य गुण (Associative)
+                  3. Associative property
                 </div>
                 <div style={{ fontSize: 13, color: '#475569' }}>
                   (a + b) + c = a + (b + c)<br />
-                  [२ + (-३)] + ४ = २ + [(-३) + ४] = ३
+                  [2 + (-3)] + 4 = 2 + [(-3) + 4] = 3
                 </div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#0F766E', marginBottom: 4 }}>
-                  ४. विपरीत/प्रतिलोम (Additive Inverse)
+                  4. Additive inverse
                 </div>
                 <div style={{ fontSize: 13, color: '#475569' }}>
-                  a + (-a) = ०<br />
-                  ७ + (-७) = ०
+                  a + (-a) = 0<br />
+                  7 + (-7) = 0
                 </div>
               </div>
             </div>

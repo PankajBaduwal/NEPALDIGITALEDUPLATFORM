@@ -1,7 +1,7 @@
 /**
  * PaperChromatographyLabSim.tsx
- * Simulation 35: 2D Paper Chromatography Laboratory (कागज क्रोमाटोग्राफी)
- * Grade 6 Science • Unit 9: Matter (पदार्थ)
+ * Simulation 35: 2D Paper Chromatography Laboratory
+ * Grade 6 Science • Unit 9: Matter
  *
  * Full 2D Interactive Chromatography featuring:
  * 1. Capillary Action: Solvent front ascending filter paper strip
@@ -24,7 +24,7 @@ export const PaperChromatographyLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -481,18 +481,18 @@ export const PaperChromatographyLabSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: What is Chromatography?' : '१. खोज: क्रोमाटोग्राफी के हो?')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Capillary Rise' : '२. अन्वेषण: केशिकत्व फैलावट')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Band Resolution' : '३. अवलोकन: रङ्ग छुट्टिने क्रम')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Relative Affinity' : '४. बुझाइ: आकर्षण र घुलनशीलता')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Rf Quiz' : '५. चुनौती: Rf प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: What is Chromatography?' : '1. खोज: क्रोमाटोग्राफी के हो?')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Capillary Rise' : '2. अन्वेषण: केशिकत्व फैलावट')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Band Resolution' : '3. अवलोकन: रङ्ग छुट्टिने क्रम')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Relative Affinity' : '4. बुझाइ: आकर्षण र घुलनशीलता')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Rf Quiz' : '5. चुनौती: Rf प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
               <p style={{ margin: 0, fontSize: '12px', color: '#64748b', lineHeight: '1.5' }}>
                 {stage === 'discover' && (lang === 'en'
                   ? 'Chromatography comes from the Greek words chroma (color) and graphein (to write). It separates complex mixtures based on solubility in a moving solvent.'
-                  : 'क्रोमाटोग्राफी ग्रीक शब्द "क्रोमा" (रङ्ग) र "ग्राफिन" (लेख्नु) बाट बनेको हो। यसले गतिशिल घोलकमा घुलनशीलताको आधारमा जटिल मिश्रण छुट्याउँछ।')}
+                  : 'क्रोमाटोग्राफी ग्रीक शब्द "क्रोमा" र "ग्राफिन" बाट बनेको हो। यसले गतिशिल घोलकमा घुलनशीलताको आधारमा जटिल मिश्रण छुट्याउँछ।')}
                 {stage === 'explore' && (lang === 'en'
                   ? 'Click "Start Run". Capillary action causes the liquid solvent to climb upwards through microscopic pores between cellulose fibers of the paper.'
                   : '"सुरु गर्नुहोस्" थिच्नुहोस्। फिल्टर कागजका मसिना छिद्रहरू हुँदै केशिकत्व बलले घोलकलाई बिस्तारै माथितिर तान्छ।')}
@@ -508,12 +508,12 @@ export const PaperChromatographyLabSim: React.FC<BaseSimulationProps> = ({
                 <p style={{ margin: '0 0 10px 0', fontSize: '12px', color: '#e2e8f0' }}>
                   {lang === 'en'
                     ? 'If a pigment spot travels 4 cm while the solvent front travels 8 cm, what is its Rf value?'
-                    : 'यदि रङ्गको थोपा ४ से.मी. र घोलक रेखा ८ से.मी. चढ्छ भने, यसको Rf मान कति हुन्छ?'}
+                    : 'यदि रङ्गको थोपा 4 से.मी. र घोलक रेखा 8 से.मी. चढ्छ भने, यसको Rf मान कति हुन्छ?'}
                 </p>
                 {[
-                  { id: 1, en: '0.50 (4 ÷ 8)', ne: '०.५० (४ ÷ ८)' },
-                  { id: 2, en: '2.00 (8 ÷ 4)', ne: '२.०० (८ ÷ ४)' },
-                  { id: 3, en: '32.0 (4 × 8)', ne: '३२.० (४ × ८)' },
+                  { id: 1, en: '0.50 (4 ÷ 8)', ne: '0.50 (4 ÷ 8)' },
+                  { id: 2, en: '2.00 (8 ÷ 4)', ne: '2.00 (8 ÷ 4)' },
+                  { id: 3, en: '32.0 (4 × 8)', ne: '32.0 (4 × 8)' },
                 ].map(opt => (
                   <button
                     key={opt.id}

@@ -1,6 +1,6 @@
 /**
- * Lesson 15 · Division (भाग)
- * Sharing Plates — 2D equal sharing of sweets among plates with remainder (भागफल र शेष).
+ * Lesson 15 · Division
+ * Sharing Plates — 2D equal sharing of sweets among plates with remainder.
  */
 import React, { useMemo, useState } from 'react';
 import { SimFrame2D } from '../class-math-2d-kit';

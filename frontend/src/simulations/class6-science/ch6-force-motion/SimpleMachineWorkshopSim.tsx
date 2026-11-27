@@ -1,16 +1,16 @@
 /**
  * SimpleMachineWorkshopSim.tsx
- * Simulation 18: 2D Simple Machine Workshop (सरल यन्त्र कार्यशाला)
- * Grade 6 Science • Unit 6: Force and Motion (बल र गति)
+ * Simulation 18: 2D Simple Machine Workshop
+ * Grade 6 Science • Unit 6: Force and Motion
  *
  * 100% Native HTML5 Canvas 2D Interactive Simple Machines Laboratory.
  * Features:
  * 1. Three Classes of Levers:
- *    - Class 1: Fulcrum in Middle (कैँची, सि-स, साबेल)
- *    - Class 2: Load in Middle (एकपाङ्ग्रे ठेला, कागती निचोर्ने, MA > 1)
- *    - Class 3: Effort in Middle (चिम्टा, बल्छी, झाडु, MA < 1)
+ *    - Class 1: Fulcrum in Middle
+ *    - Class 2: Load in Middle
+ *    - Class 3: Effort in Middle
  * 2. Pulley Systems: Fixed Pulley (MA = 1) vs Movable Pulley (MA = 2)
- * 3. Inclined Plane (छड्के सतह): MA = Length / Height (l / h)
+ * 3. Inclined Plane: MA = Length / Height (l / h)
  * 4. Real-time Mechanical Advantage (MA) and Required Effort (N) computation
  * 5. 5-Stage inquiry pedagogy, bilingual EN/NE, audio effects, and 3-star scoring.
  */
@@ -27,7 +27,7 @@ export const SimpleMachineWorkshopSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -121,7 +121,7 @@ export const SimpleMachineWorkshopSim: React.FC<BaseSimulationProps> = ({
         const fulcrumY = 320;
         const beamY = fulcrumY;
 
-        // Triangular Fulcrum (टेको)
+        // Triangular Fulcrum
         ctx.fillStyle = '#f59e0b';
         ctx.strokeStyle = '#b45309';
         ctx.lineWidth = 3;
@@ -138,7 +138,7 @@ export const SimpleMachineWorkshopSim: React.FC<BaseSimulationProps> = ({
         ctx.textAlign = 'center';
         ctx.fillText(lang === 'ne' ? 'टेको (Fulcrum, F)' : 'Fulcrum (F)', fulcrumX, fulcrumY + 68);
 
-        // Rigid Steel Beam Lever (उत्तोलकको डण्डी)
+        // Rigid Steel Beam Lever
         const beamStartX = 140;
         const beamEndX = 700;
         const beamGrad = ctx.createLinearGradient(0, beamY - 8, 0, beamY + 8);
@@ -153,7 +153,7 @@ export const SimpleMachineWorkshopSim: React.FC<BaseSimulationProps> = ({
         ctx.fill();
         ctx.stroke();
 
-        // Load Position (भार, L)
+        // Load Position
         let loadPosPix = 240;
         if (machine === 'class1_lever') loadPosPix = fulcrumX - loadArmM * 80;
         else if (machine === 'class2_lever') loadPosPix = fulcrumX + loadArmM * 80;
@@ -172,7 +172,7 @@ export const SimpleMachineWorkshopSim: React.FC<BaseSimulationProps> = ({
         ctx.fillText(`${loadWeightN} N`, loadPosPix, beamY - 28);
         ctx.fillText(lang === 'ne' ? 'भार (L)' : 'Load (L)', loadPosPix, beamY - 65);
 
-        // Effort Position (प्रयास बल, E)
+        // Effort Position
         let effortPosPix = 600;
         if (machine === 'class1_lever') effortPosPix = fulcrumX + effortArmM * 80;
         else if (machine === 'class2_lever') effortPosPix = fulcrumX + effortArmM * 80;
@@ -207,7 +207,7 @@ export const SimpleMachineWorkshopSim: React.FC<BaseSimulationProps> = ({
       }
 
       // ==========================================
-      // MACHINE 2: PULLEY SYSTEM (घिर्नी)
+      // MACHINE 2: PULLEY SYSTEM
       // ==========================================
       if (machine === 'pulley') {
         const topRigY = 90;
@@ -299,7 +299,7 @@ export const SimpleMachineWorkshopSim: React.FC<BaseSimulationProps> = ({
       }
 
       // ==========================================
-      // MACHINE 3: INCLINED PLANE (छड्के सतह)
+      // MACHINE 3: INCLINED PLANE
       // ==========================================
       if (machine === 'inclined_plane') {
         const rampBaseX = 180;
@@ -422,7 +422,7 @@ export const SimpleMachineWorkshopSim: React.FC<BaseSimulationProps> = ({
       titleNepali="सरल यन्त्र कार्यशाला (उत्तोलक, घिर्नी, छड्के सतह)"
       chapterNumber={6}
       chapterTitle="Unit 6: Force and Motion"
-      chapterTitleNepali="एकाइ ६: बल र गति"
+      chapterTitleNepali="एकाइ 6: बल र गति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -435,7 +435,7 @@ export const SimpleMachineWorkshopSim: React.FC<BaseSimulationProps> = ({
       stars={stars}
       isCompleted={isCompleted}
       currentPromptEn="Experiment with 3 classes of levers, fixed/movable pulleys, and inclined planes to calculate Mechanical Advantage."
-      currentPromptNe="उत्तोलकका ३ श्रेणी, घिर्नी र छड्के सतह प्रयोग गरी यान्त्रिक फाइदा (MA) गणना गर्नुहोस्।"
+      currentPromptNe="उत्तोलकका 3 श्रेणी, घिर्नी र छड्के सतह प्रयोग गरी यान्त्रिक फाइदा (MA) गणना गर्नुहोस्।"
     >
       <div
         style={{
@@ -572,7 +572,7 @@ export const SimpleMachineWorkshopSim: React.FC<BaseSimulationProps> = ({
           {/* Machine Selection Grid */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. यन्त्र चयन (Select Machine)' : '1. Machine Type'}
+              {lang === 'ne' ? '1. यन्त्र चयन (Select Machine)' : '1. Machine Type'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '6px' }}>
               {[
@@ -833,7 +833,7 @@ export const SimpleMachineWorkshopSim: React.FC<BaseSimulationProps> = ({
               {lang === 'ne' ? '📚 पाठ्यक्रम मुख्य बुँदा:' : '📚 Curriculum Takeaway:'}
             </div>
             {lang === 'ne'
-              ? 'सरल यन्त्रले काम सजिलो, छिटो र सुविधाजनक बनाउँछ। यान्त्रिक फाइदा (MA) १ भन्दा बढी भएमा थोरै बलले धेरै भार उठाउन सकिन्छ।'
+              ? 'सरल यन्त्रले काम सजिलो, छिटो र सुविधाजनक बनाउँछ। यान्त्रिक फाइदा (MA) 1 भन्दा बढी भएमा थोरै बलले धेरै भार उठाउन सकिन्छ।'
               : 'Simple machines multiply force or change direction. When MA > 1, less effort force is required to lift a heavier load.'}
           </div>
 

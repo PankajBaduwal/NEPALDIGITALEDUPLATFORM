@@ -11,10 +11,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समरूप त्रिभुजहरू (Similar Triangles) को मुख्य विशेषता कुन हो?',
     en: 'What is the primary characteristic of similar triangles?',
     options: [
-      { key: 'A', label: 'संगत कोण बराबर र संगत भुजाहरू समानुपातिक हुनु (Equal angles & proportional sides)' },
-      { key: 'B', label: 'क्षेत्रफल बराबर हुनु' },
-      { key: 'C', label: 'सबै भुजा बराबर हुनु' },
-      { key: 'D', label: 'दुवै समकोण हुनु' },
+      { key: 'A', label: 'Corresponding angles equal and corresponding sides proportional' },
+      { key: 'B', label: 'Having equal areas' },
+      { key: 'C', label: 'All sides being equal' },
+      { key: 'D', label: 'Both being right-angled' },
     ],
     answer: 'A',
   },
@@ -25,7 +25,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
       { key: 'A', label: 'AB/PQ = BC/QR = AC/PR' },
       { key: 'B', label: 'AB + PQ = BC + QR' },
       { key: 'C', label: 'AB × PQ = BC × QR' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
@@ -33,10 +33,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'के सबै सर्वाङ्गसम त्रिभुजहरू समरूप पनि हुन्छन्?',
     en: 'Are all congruent triangles also similar?',
     options: [
-      { key: 'A', label: 'हो, सबै सर्वाङ्गसम त्रिभुजहरू समरूप हुन्छन् (k = 1)' },
-      { key: 'B', label: 'होइन, कहिल्यै हुँदैनन्' },
-      { key: 'C', label: 'समबाहु त्रिभुजमा मात्र' },
-      { key: 'D', label: 'भन्न सकिँदैन' },
+      { key: 'A', label: 'Yes, all congruent triangles are similar (k = 1)' },
+      { key: 'B', label: 'No, they never are' },
+      { key: 'C', label: 'Only in an equilateral triangle' },
+      { key: 'D', label: 'Cannot be said' },
     ],
     answer: 'A',
   }
@@ -97,7 +97,7 @@ export const SimilarFiguresSimilarityLab: React.FC<{
               activeTab === 'discovery' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('१. समरूप आकृति खोजी (Scale Factor k)', '1. Similar Figures & Scale Factor')}
+            {L('1. समरूप आकृति खोजी (Scale Factor k)', '1. Similar Figures & Scale Factor')}
           </button>
           <button
             onClick={() => setActiveTab('congruent_vs_similar')}
@@ -105,7 +105,7 @@ export const SimilarFiguresSimilarityLab: React.FC<{
               activeTab === 'congruent_vs_similar' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('२. सर्वाङ्गसम vs समरूप (Comparison)', '2. Congruent vs Similar')}
+            {L('2. सर्वाङ्गसम vs समरूप (Comparison)', '2. Congruent vs Similar')}
           </button>
           <button
             onClick={() => setActiveTab('proportions')}
@@ -113,7 +113,7 @@ export const SimilarFiguresSimilarityLab: React.FC<{
               activeTab === 'proportions' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('३. संगत भुजाहरूको अनुपात (Side Ratios)', '3. Corresponding Side Ratios')}
+            {L('3. संगत भुजाहरूको अनुपात (Side Ratios)', '3. Corresponding Side Ratios')}
           </button>
           <button
             onClick={() => setActiveTab('unknown_solver')}
@@ -121,7 +121,7 @@ export const SimilarFiguresSimilarityLab: React.FC<{
               activeTab === 'unknown_solver' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('४. अज्ञात भुजा समाधान (Find Unknown Side)', '4. Solve Unknown Side')}
+            {L('4. अज्ञात भुजा समाधान (Find Unknown Side)', '4. Solve Unknown Side')}
           </button>
         </div>
 
@@ -160,9 +160,9 @@ export const SimilarFiguresSimilarityLab: React.FC<{
                 className="w-full accent-amber-500"
               />
               <div className="flex justify-between text-[11px] text-slate-400 mt-1">
-                <span>0.6x (Reduction / संकुचन)</span>
-                <span>1.0x (Exact Match / सर्वाङ्गसम)</span>
-                <span>2.0x (Enlargement / विस्तार)</span>
+                <span>0.6x</span>
+                <span>1.0x</span>
+                <span>2.0x</span>
               </div>
             </div>
 
@@ -183,9 +183,9 @@ export const SimilarFiguresSimilarityLab: React.FC<{
                   <text x="125" y="150" fill="#38bdf8" fontSize="12" fontWeight="bold">B</text>
                   <text x="35" y="20" fill="#38bdf8" fontSize="12" fontWeight="bold">C</text>
                   <text x="60" y="170" fill="#38bdf8" fontSize="12" fontWeight="bold" textAnchor="middle">
-                    △ABC (मूल त्रिकोण)
+                    △ABC
                   </text>
-                  <text x="60" y="130" fill="#94a3b8" fontSize="10" textAnchor="middle">आधार = ६ सेमी</text>
+                  <text x="60" y="130" fill="#94a3b8" fontSize="10" textAnchor="middle">Base = 6 cm</text>
                 </g>
 
                 {/* Scaled Triangle: △PQR (Scale k) */}
@@ -205,10 +205,10 @@ export const SimilarFiguresSimilarityLab: React.FC<{
                       <text x={bWidth + 5} y="150" fill="#f59e0b" fontSize="12" fontWeight="bold">Q</text>
                       <text x={topX} y={topY - 10} fill="#f59e0b" fontSize="12" fontWeight="bold">R</text>
                       <text x={bWidth / 2} y="170" fill="#f59e0b" fontSize="12" fontWeight="bold" textAnchor="middle">
-                        △PQR (समरूप: {scaleK.toFixed(1)}x)
+                        △PQR (similar: {scaleK.toFixed(1)}x)
                       </text>
                       <text x={bWidth / 2} y="130" fill="#94a3b8" fontSize="10" textAnchor="middle">
-                        आधार = {(6 * scaleK).toFixed(1)} सेमी
+                        Base = {(6 * scaleK).toFixed(1)} cm
                       </text>
                     </g>
                   );
@@ -272,15 +272,15 @@ export const SimilarFiguresSimilarityLab: React.FC<{
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="p-3 bg-slate-800 rounded-xl text-center">
                 <div className="text-xs text-slate-400">AB / PQ</div>
-                <div className="font-mono font-bold text-amber-300 mt-1">६ / ३ = २.०</div>
+                <div className="font-mono font-bold text-amber-300 mt-1">6 / 3 = 2.0</div>
               </div>
               <div className="p-3 bg-slate-800 rounded-xl text-center">
                 <div className="text-xs text-slate-400">BC / QR</div>
-                <div className="font-mono font-bold text-amber-300 mt-1">१० / ५ = २.०</div>
+                <div className="font-mono font-bold text-amber-300 mt-1">10 / 5 = 2.0</div>
               </div>
               <div className="p-3 bg-slate-800 rounded-xl text-center">
                 <div className="text-xs text-slate-400">AC / PR</div>
-                <div className="font-mono font-bold text-amber-300 mt-1">८ / ४ = २.०</div>
+                <div className="font-mono font-bold text-amber-300 mt-1">8 / 4 = 2.0</div>
               </div>
             </div>
           </div>
@@ -294,15 +294,15 @@ export const SimilarFiguresSimilarityLab: React.FC<{
             </h3>
             <p className="text-xs text-slate-300 mt-1">
               {L(
-                'दिइएको छ: △ABC ~ △PQR। भुजा AB = ६ सेमी, PQ = ३ सेमी र BC = १० सेमी छन् भने QR = x को मान कति हुन्छ?',
+                'दिइएको छ: △ABC ~ △PQR। भुजा AB = 6 cm, PQ = 3 cm र BC = 10 cm छन् भने QR = x को मान कति हुन्छ?',
                 'Given: △ABC ~ △PQR. Side AB = 6 cm, PQ = 3 cm, and BC = 10 cm. Find the value of QR = x cm.'
               )}
             </p>
 
             <div className="p-4 bg-slate-950 rounded-xl border border-slate-800 font-mono text-sm text-slate-200 space-y-2">
-              <div>१. समानुपात सूत्र: AB / PQ = BC / QR</div>
-              <div>२. मान राख्दा: ६ / ३ = १० / x</div>
-              <div>३. २ = १० / x ⇒ २x = १० ⇒ x = ?</div>
+              <div>1. Proportion formula: AB / PQ = BC / QR</div>
+              <div>2. Substituting the values: 6 / 3 = 10 / x</div>
+              <div>3. 2 = 10 / x ⇒ 2x = 10 ⇒ x = ?</div>
             </div>
 
             <div className="flex items-center gap-3">
@@ -314,7 +314,7 @@ export const SimilarFiguresSimilarityLab: React.FC<{
                 placeholder="5"
                 className="w-24 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-white font-mono text-sm focus:border-amber-400 outline-none"
               />
-              <span className="text-xs text-slate-400">सेमी (cm)</span>
+              <span className="text-xs text-slate-400">cm</span>
               <button
                 onClick={handleCheckUnknown}
                 className="px-4 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-semibold text-sm transition-all"
@@ -332,8 +332,8 @@ export const SimilarFiguresSimilarityLab: React.FC<{
                 }`}
               >
                 {solverVerdict === 'correct'
-                  ? L('🎉 सही उत्तर! x = ५ सेमी (किनकि ६/३ = १०/५ = २)', '🎉 Correct! x = 5 cm (since 6/3 = 10/5 = 2)')
-                  : L('❌ मिलेन! कृपया ६/३ = १०/x हल गर्नुहोस्: २x = १० ⇒ x = ५', '❌ Incorrect! Solve 2x = 10 => x = 5 cm')}
+                  ? L('🎉 सही उत्तर! x = 5 cm', '🎉 Correct! x = 5 cm (since 6/3 = 10/5 = 2)')
+                  : L('❌ मिलेन! कृपया 6/3 = 10/x हल गर्नुहोस्: 2x = 10 ⇒ x = 5', '❌ Incorrect! Solve 2x = 10 => x = 5 cm')}
               </div>
             )}
           </div>

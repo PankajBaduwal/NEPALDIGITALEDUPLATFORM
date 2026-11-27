@@ -1,8 +1,8 @@
 /**
  * ShapeDetectiveSimulation.tsx
- * Simulation 04: Shape Detective (आकार खोजौँ)
- * Class 1 Mathematics - Chapter 3: Geometrical Shapes (ज्यामितीय आकारहरू)
- * Based on Nepal CDC Curriculum (मेरो गणित, कक्षा १ - २०७६)
+ * Simulation 04: Shape Detective
+ * Class 1 Mathematics - Chapter 3: Geometrical Shapes
+ * Based on Nepal CDC Curriculum
  */
 
 import React, { useState, useEffect } from 'react';
@@ -55,7 +55,7 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Language & Audio
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Detective Location
@@ -68,8 +68,8 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
     // 1. Classroom
     {
       id: 'classroom',
-      titleEn: 'Location A: Classroom (कक्षाकोठा)',
-      titleNp: 'स्थान १: कक्षाकोठा',
+      titleEn: 'Location A: Classroom',
+      titleNp: 'स्थान 1: कक्षाकोठा',
       bgGradient: 'linear-gradient(180deg, #e0f2fe 0%, #f1f5f9 60%, #cbd5e1 100%)',
       items: [
         {
@@ -96,7 +96,7 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
           icon: '📋',
           discovered: false,
           explanationEn: 'The blackboard has 4 straight edges and 4 corners.',
-          explanationNp: 'कालोपाटी ४ वटा सीधा सिधा किनारा भएको चतुर्भुज (आयताकार) हो।',
+          explanationNp: 'कालोपाटी 4 वटा सीधा सिधा किनारा भएको चतुर्भुज (आयताकार) हो।',
         },
         {
           id: 'c_pennant',
@@ -109,7 +109,7 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
           icon: '🚩',
           discovered: false,
           explanationEn: 'The decorative flag has 3 sides and 3 corners.',
-          explanationNp: 'यो भित्ते झन्डा ३ वटा किनारा भएको त्रिभुज हो।',
+          explanationNp: 'यो भित्ते झन्डा 3 वटा किनारा भएको त्रिभुज हो।',
         },
         {
           id: 'c_book',
@@ -122,7 +122,7 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
           icon: '📕',
           discovered: false,
           explanationEn: 'The textbook cover has 4 straight sides.',
-          explanationNp: 'गणित किताबको कभर ४ वटा किनारा भएको चतुर्भुज हो।',
+          explanationNp: 'गणित किताबको कभर 4 वटा किनारा भएको चतुर्भुज हो।',
         },
         {
           id: 'c_ruler',
@@ -135,7 +135,7 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
           icon: '📐',
           discovered: false,
           explanationEn: 'This drafting ruler has 3 straight sides forming a triangle.',
-          explanationNp: 'यो ज्यामितीय रुलर ३ वटा सिधा किनारा मिलेर बनेको त्रिभुज हो।',
+          explanationNp: 'यो ज्यामितीय रुलर 3 वटा सिधा किनारा मिलेर बनेको त्रिभुज हो।',
         },
       ],
     },
@@ -143,8 +143,8 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
     // 2. Playground
     {
       id: 'playground',
-      titleEn: 'Location B: School Playground (खेलमैदान)',
-      titleNp: 'स्थान २: विद्यालय खेलमैदान',
+      titleEn: 'Location B: School Playground',
+      titleNp: 'स्थान 2: विद्यालय खेलमैदान',
       bgGradient: 'linear-gradient(180deg, #bae6fd 0%, #bbf7d0 50%, #86efac 100%)',
       items: [
         {
@@ -184,7 +184,7 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
           icon: '📦',
           discovered: false,
           explanationEn: 'The sandbox has 4 equal straight edges.',
-          explanationNp: 'बालुवाको बाकस ४ वटा बराबर सिधा किनारा भएको चतुर्भुज हो।',
+          explanationNp: 'बालुवाको बाकस 4 वटा बराबर सिधा किनारा भएको चतुर्भुज हो।',
         },
         {
           id: 'p_swing',
@@ -218,8 +218,8 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
     // 3. Nepalese Village
     {
       id: 'village',
-      titleEn: 'Location C: Nepalese Village (नेपाली गाउँ)',
-      titleNp: 'स्थान ३: नेपाली गाउँ',
+      titleEn: 'Location C: Nepalese Village',
+      titleNp: 'स्थान 3: नेपाली गाउँ',
       bgGradient: 'linear-gradient(180deg, #fef3c7 0%, #fed7aa 40%, #86efac 100%)',
       items: [
         {
@@ -237,7 +237,7 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
         },
         {
           id: 'v_drum',
-          nameEn: 'Village Madal (मादल)',
+          nameEn: 'Village Madal',
           nameNp: 'मादलको गोलो मुख',
           shape: 'circle',
           shapeNp: 'वृत्त',
@@ -272,7 +272,7 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
           icon: '🚪',
           discovered: false,
           explanationEn: 'The tall wooden door is a 4-sided rectangular quadrilateral.',
-          explanationNp: 'घरको काठको मूलढोका ४ वटा किनारा भएको चतुर्भुज हो।',
+          explanationNp: 'घरको काठको मूलढोका 4 वटा किनारा भएको चतुर्भुज हो।',
         },
         {
           id: 'v_well',
@@ -440,7 +440,7 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
             </h1>
             <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
               {language === 'np'
-                ? 'कक्षा १ गणित • अध्याय ३: ज्यामितीय आकारहरू (Geometrical Shapes)'
+                ? 'कक्षा 1 गणित • अध्याय 3: ज्यामितीय आकारहरू (Geometrical Shapes)'
                 : 'Class 1 Math • Chapter 3: Geometrical Shapes'}
             </span>
           </div>
@@ -486,21 +486,7 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
           </div>
 
           {/* Language Toggle */}
-          <button
-            onClick={() => setLanguage(language === 'np' ? 'en' : 'np')}
-            style={{
-              background: '#ede9fe',
-              color: '#6d28d9',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '13px',
-              cursor: 'pointer',
-            }}
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
 
           {/* Sound Toggle */}
           <button

@@ -1,7 +1,7 @@
 /**
  * AdditionEquationStudio.tsx
- * Simulation 03: Addition Equation Studio (जोड वाक्य निर्माण प्रयोगशाला)
- * Class 1 Mathematics - Chapter 10: Addition up to 20 (योगफल २० सम्म आउने जोड)
+ * Simulation 03: Addition Equation Studio
+ * Class 1 Mathematics - Chapter 10: Addition up to 20
  * Nepal Digital Education Platform
  */
 
@@ -27,10 +27,10 @@ interface Props {
 }
 
 const NEP_NUMERALS: Record<number, string> = {
-  0: '०', 1: '१', 2: '२', 3: '३', 4: '४', 5: '५',
-  6: '६', 7: '७', 8: '८', 9: '९', 10: '१०',
-  11: '११', 12: '१२', 13: '१३', 14: '१४', 15: '१५',
-  16: '१६', 17: '१७', 18: '१८', 19: '१९', 20: '२०',
+  0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5',
+  6: '6', 7: '7', 8: '8', 9: '9', 10: '10',
+  11: '11', 12: '12', 13: '13', 14: '14', 15: '15',
+  16: '16', 17: '17', 18: '18', 19: '19', 20: '20',
 };
 
 type StudioTab = 'PICTURE_EQUATION' | 'HORIZONTAL' | 'THREE_NUMBER' | 'MISSING_ADDEND' | 'QUIZ';
@@ -85,7 +85,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Tab
@@ -171,92 +171,92 @@ export const AdditionEquationStudio: React.FC<Props> = ({
     () => [
       {
         id: 1,
-        questionNp: '८ + ४ = कति हुन्छ?',
+        questionNp: '8 + 4 = कति हुन्छ?',
         questionEn: 'What is 8 + 4?',
         options: [11, 12, 13],
         correct: 12,
-        explanationNp: '८ + ४ = १२ (बाह्र) हुन्छ।',
+        explanationNp: '8 + 4 = 12 हुन्छ।',
         explanationEn: '8 + 4 = 12 (Twelve).',
       },
       {
         id: 2,
-        questionNp: '६ + ४ + ३ जोड्दा कति हुन्छ?',
+        questionNp: '6 + 4 + 3 जोड्दा कति हुन्छ?',
         questionEn: 'What is 6 + 4 + 3?',
         options: [12, 13, 14],
         correct: 13,
-        explanationNp: '६ र ४ जोड्दा १० हुन्छ, १० + ३ = १३।',
+        explanationNp: '6 र 4 जोड्दा 10 हुन्छ, 10 + 3 = 13।',
         explanationEn: '6 + 4 = 10, 10 + 3 = 13.',
       },
       {
         id: 3,
-        questionNp: '८ + [ ? ] = १२ मा खाली ठाउँमा के हुन्छ?',
+        questionNp: '8 + [ ? ] = 12 मा खाली ठाउँमा के हुन्छ?',
         questionEn: 'In 8 + [ ? ] = 12, what is the missing addend?',
         options: [3, 4, 5],
         correct: 4,
-        explanationNp: '८ मा ४ थप्दा १२ हुन्छ (८ + ४ = १२)।',
+        explanationNp: '8 मा 4 थप्दा 12 हुन्छ (8 + 4 = 12)।',
         explanationEn: 'Adding 4 to 8 yields 12 (8 + 4 = 12).',
       },
       {
         id: 4,
-        questionNp: '७ + ५ = कति हुन्छ?',
+        questionNp: '7 + 5 = कति हुन्छ?',
         questionEn: 'What is 7 + 5?',
         options: [11, 12, 13],
         correct: 12,
-        explanationNp: '७ + ५ = १२ हुन्छ।',
+        explanationNp: '7 + 5 = 12 हुन्छ।',
         explanationEn: '7 + 5 = 12.',
       },
       {
         id: 5,
-        questionNp: '८ + २ + ५ जोड्दा कति आउँछ?',
+        questionNp: '8 + 2 + 5 जोड्दा कति आउँछ?',
         questionEn: 'What is 8 + 2 + 5?',
         options: [14, 15, 16],
         correct: 15,
-        explanationNp: '८ + २ = १०, १० + ५ = १५।',
+        explanationNp: '8 + 2 = 10, 10 + 5 = 15।',
         explanationEn: '8 + 2 = 10, 10 + 5 = 15.',
       },
       {
         id: 6,
-        questionNp: '[ ? ] + ५ = १४ मा खाली ठाउँमा कुन सङ्ख्या हुन्छ?',
+        questionNp: '[ ? ] + 5 = 14 मा खाली ठाउँमा कुन सङ्ख्या हुन्छ?',
         questionEn: 'In [ ? ] + 5 = 14, what is the missing number?',
         options: [8, 9, 10],
         correct: 9,
-        explanationNp: '९ + ५ = १४ हुन्छ।',
+        explanationNp: '9 + 5 = 14 हुन्छ।',
         explanationEn: '9 + 5 = 14.',
       },
       {
         id: 7,
-        questionNp: '१० + ६ को मान कति हुन्छ?',
+        questionNp: '10 + 6 को मान कति हुन्छ?',
         questionEn: 'What is 10 + 6?',
         options: [15, 16, 17],
         correct: 16,
-        explanationNp: '१० + ६ = १६ (सोह्र) हुन्छ।',
+        explanationNp: '10 + 6 = 16 हुन्छ।',
         explanationEn: '10 + 6 = 16 (Sixteen).',
       },
       {
         id: 8,
-        questionNp: '७ + ३ + ६ जोड्दा कति हुन्छ?',
+        questionNp: '7 + 3 + 6 जोड्दा कति हुन्छ?',
         questionEn: 'What is 7 + 3 + 6?',
         options: [15, 16, 17],
         correct: 16,
-        explanationNp: '७ + ३ = १०, १० + ६ = १६।',
+        explanationNp: '7 + 3 = 10, 10 + 6 = 16।',
         explanationEn: '7 + 3 = 10, 10 + 6 = 16.',
       },
       {
         id: 9,
-        questionNp: '१० + [ ? ] = १६ मा खाली ठाउँ भर्नुहोस्।',
+        questionNp: '10 + [ ? ] = 16 मा खाली ठाउँ भर्नुहोस्।',
         questionEn: 'Fill in the blank: 10 + [ ? ] = 16.',
         options: [5, 6, 7],
         correct: 6,
-        explanationNp: '१० मा ६ जोड्दा १६ हुन्छ।',
+        explanationNp: '10 मा 6 जोड्दा 16 हुन्छ।',
         explanationEn: '10 + 6 = 16.',
       },
       {
         id: 10,
-        questionNp: '९ + १ + ८ को जोडफल कति हो?',
+        questionNp: '9 + 1 + 8 को जोडफल कति हो?',
         questionEn: 'What is the sum of 9 + 1 + 8?',
         options: [17, 18, 19],
         correct: 18,
-        explanationNp: '९ + १ = १०, १० + ८ = १८ (अठार)।',
+        explanationNp: '9 + 1 = 10, 10 + 8 = 18।',
         explanationEn: '9 + 1 = 10, 10 + 8 = 18 (Eighteen).',
       },
     ],
@@ -610,12 +610,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
           >
             {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            className="px-3 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold shadow-sm transition"
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
@@ -630,7 +625,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-violet-400 tracking-wider">
-                    {language === 'np' ? 'कार्य १: चित्र हेरी समीकरण बनाउनुहोस्' : 'Activity 1: Picture to Equation'}
+                    {language === 'np' ? 'कार्य 1: चित्र हेरी समीकरण बनाउनुहोस्' : 'Activity 1: Picture to Equation'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np'
@@ -652,7 +647,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                 {/* Group 1 */}
                 <div className="flex flex-col items-center p-3 bg-violet-950/40 rounded-xl border border-violet-500/40">
                   <span className="text-xs font-bold text-violet-300 uppercase mb-2">
-                    {language === 'np' ? `समूह १: ${NEP_NUMERALS[currentPic.count1]} ओटा` : `Group 1: ${currentPic.count1}`}
+                    {language === 'np' ? `समूह 1: ${NEP_NUMERALS[currentPic.count1]} ओटा` : `Group 1: ${currentPic.count1}`}
                   </span>
                   <div className="flex flex-wrap items-center justify-center gap-2 max-w-[200px]">
                     {Array.from({ length: currentPic.count1 }).map((_, i) => (
@@ -669,7 +664,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                 {/* Group 2 */}
                 <div className="flex flex-col items-center p-3 bg-amber-950/40 rounded-xl border border-amber-500/40">
                   <span className="text-xs font-bold text-amber-700 uppercase mb-2">
-                    {language === 'np' ? `समूह २: ${NEP_NUMERALS[currentPic.count2]} ओटा` : `Group 2: ${currentPic.count2}`}
+                    {language === 'np' ? `समूह 2: ${NEP_NUMERALS[currentPic.count2]} ओटा` : `Group 2: ${currentPic.count2}`}
                   </span>
                   <div className="flex flex-wrap items-center justify-center gap-2 max-w-[200px]">
                     {Array.from({ length: currentPic.count2 }).map((_, i) => (
@@ -766,7 +761,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-emerald-700 tracking-wider">
-                    {language === 'np' ? 'कार्य २: तेर्सो जोड' : 'Activity 2: Horizontal Addition'}
+                    {language === 'np' ? 'कार्य 2: तेर्सो जोड' : 'Activity 2: Horizontal Addition'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? 'सही जोडफल छान्नुहोस्!' : 'Choose the correct sum!'}
@@ -843,11 +838,11 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-amber-700 tracking-wider">
-                    {language === 'np' ? 'कार्य ३: तीन सङ्ख्याको जोड (दश बनाएर)' : 'Activity 3: Three-Number Addition'}
+                    {language === 'np' ? 'कार्य 3: तीन सङ्ख्याको जोड (दश बनाएर)' : 'Activity 3: Three-Number Addition'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np'
-                      ? 'पहिले १० बनाउने दुई सङ्ख्या जोड्नुहोस्, अनि तेस्रो सङ्ख्या थप्नुहोस्!'
+                      ? 'पहिले 10 बनाउने दुई सङ्ख्या जोड्नुहोस्, अनि तेस्रो सङ्ख्या थप्नुहोस्!'
                       : 'Make 10 first with a pair, then add the third number!'}
                   </h3>
                 </div>
@@ -885,17 +880,17 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                 <div className="w-full bg-white p-4 rounded-xl border border-slate-200 flex flex-col items-center">
                   <span className="text-xs text-slate-500 font-bold mb-1">
                     {language === 'np'
-                      ? `पहिले ${NEP_NUMERALS[currentThree.tenPairA]} र ${NEP_NUMERALS[currentThree.tenPairB]} जोड्दा १० बन्छ:`
+                      ? `पहिले ${NEP_NUMERALS[currentThree.tenPairA]} र ${NEP_NUMERALS[currentThree.tenPairB]} जोड्दा 10 बन्छ:`
                       : `First ${currentThree.tenPairA} + ${currentThree.tenPairB} makes 10:`}
                   </span>
                   <span className="text-xl font-black text-amber-700">
-                    ({NEP_NUMERALS[currentThree.tenPairA]} + {NEP_NUMERALS[currentThree.tenPairB]}) + {NEP_NUMERALS[currentThree.c]} = १० + {NEP_NUMERALS[currentThree.c]}
+                    ({NEP_NUMERALS[currentThree.tenPairA]} + {NEP_NUMERALS[currentThree.tenPairB]}) + {NEP_NUMERALS[currentThree.c]} = 10 + {NEP_NUMERALS[currentThree.c]}
                   </span>
                 </div>
 
                 {/* Step 2 -> 10 + C = Final */}
                 <div className="text-2xl font-black text-emerald-700">
-                  १० + {NEP_NUMERALS[currentThree.c]} = {NEP_NUMERALS[currentThree.sum]}
+                  10 + {NEP_NUMERALS[currentThree.c]} = {NEP_NUMERALS[currentThree.sum]}
                 </div>
               </div>
             </div>
@@ -911,7 +906,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-cyan-400 tracking-wider">
-                    {language === 'np' ? 'कार्य ४: खाली ठाउँको सङ्ख्या पत्ता लगाऔँ' : 'Activity 4: Find Missing Addend'}
+                    {language === 'np' ? 'कार्य 4: खाली ठाउँको सङ्ख्या पत्ता लगाऔँ' : 'Activity 4: Find Missing Addend'}
                   </span>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? 'खाली कोष्ठमा कुन सङ्ख्या हुन्छ?' : 'What number belongs in the box?'}

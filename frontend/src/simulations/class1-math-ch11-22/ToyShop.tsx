@@ -1,6 +1,6 @@
 /**
- * Chapter 20 · Coins and Notes (सिक्का र नोट - खेलौना पसल)
- * Sim 2: Toy Shop (खेलौना पसल) — Pure 2D Edition
+ * Chapter 20 · Coins and Notes
+ * Sim 2: Toy Shop — Pure 2D Edition
  * 100% 2D SVG / Interactive Shop – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -53,7 +53,7 @@ export const ToyShop: React.FC<Props> = ({ onBackToLibrary }) => {
     if (newPaid >= selectedToy.price) {
       const chg = newPaid - selectedToy.price;
       kit.good(
-        `खरिद सफल! खेलौनाको मूल्य रु ${toNp(selectedToy.price)}, फिर्ता रकम रु ${toNp(chg)}।`,
+        `खरिद सफल! खेलौनाको मूल्य Rs ${toNp(selectedToy.price)}, फिर्ता रकम Rs ${toNp(chg)}।`,
         `Purchase complete! Toy price Rs ${selectedToy.price}, change Rs ${chg}.`
       );
     }
@@ -73,22 +73,22 @@ export const ToyShop: React.FC<Props> = ({ onBackToLibrary }) => {
   const quizQuestions: QuizQuestion[] = useMemo(
     () => [
       {
-        np: 'रु १५ को फुटबल किन्न रु २० दिँदा कति फिर्ता आउँछ?',
+        np: 'Rs 15 को फुटबल किन्न Rs 20 दिँदा कति फिर्ता आउँछ?',
         en: 'A football costs Rs 15. You give Rs 20. How much is the change?',
         options: [
-          { key: '5', label: isNe ? 'रु ५' : 'Rs 5' },
-          { key: '10', label: isNe ? 'रु १०' : 'Rs 10' },
-          { key: '2', label: isNe ? 'रु २' : 'Rs 2' },
+          { key: '5', label: isNe ? 'Rs 5' : 'Rs 5' },
+          { key: '10', label: isNe ? 'Rs 10' : 'Rs 10' },
+          { key: '2', label: isNe ? 'Rs 2' : 'Rs 2' },
         ],
         answer: '5',
       },
       {
-        np: 'रु २५ को खेलौना किन्न रु ५० दिँदा कति फिर्ता आउँछ?',
+        np: 'Rs 25 को खेलौना किन्न Rs 50 दिँदा कति फिर्ता आउँछ?',
         en: 'A toy costs Rs 25. You pay Rs 50. How much is the change?',
         options: [
-          { key: '25', label: isNe ? 'रु २५' : 'Rs 25' },
-          { key: '20', label: isNe ? 'रु २०' : 'Rs 20' },
-          { key: '30', label: isNe ? 'रु ३०' : 'Rs 30' },
+          { key: '25', label: isNe ? 'Rs 25' : 'Rs 25' },
+          { key: '20', label: isNe ? 'Rs 20' : 'Rs 20' },
+          { key: '30', label: isNe ? 'Rs 30' : 'Rs 30' },
         ],
         answer: '25',
       },
@@ -114,10 +114,10 @@ export const ToyShop: React.FC<Props> = ({ onBackToLibrary }) => {
             color: '#187C68',
           }}
         >
-          🏷️ {L('मूल्य:', 'Price:')} रु {isNe ? toNp(selectedToy.price) : selectedToy.price} |{' '}
-          {L('तिरेको:', 'Paid:')} रु {isNe ? toNp(paid) : paid} |{' '}
+          🏷️ {L('मूल्य:', 'Price:')} Rs {isNe ? toNp(selectedToy.price) : selectedToy.price} |{' '}
+          {L('तिरेको:', 'Paid:')} Rs {isNe ? toNp(paid) : paid} |{' '}
           <span style={{ color: '#047857' }}>
-            {L('फिर्ता:', 'Change:')} रु {isNe ? toNp(change) : change}
+            {L('फिर्ता:', 'Change:')} Rs {isNe ? toNp(change) : change}
           </span>
         </div>
       }
@@ -144,7 +144,7 @@ export const ToyShop: React.FC<Props> = ({ onBackToLibrary }) => {
                   cursor: 'pointer',
                 }}
               >
-                + रु {isNe ? toNp(amt) : amt}
+                + Rs {isNe ? toNp(amt) : amt}
               </button>
             ))}
 
@@ -224,7 +224,7 @@ export const ToyShop: React.FC<Props> = ({ onBackToLibrary }) => {
                     {isNe ? toy.nameNp : toy.nameEn}
                   </div>
                   <div style={{ fontSize: 12, fontWeight: 800, color: '#D97706' }}>
-                    रु {isNe ? toNp(toy.price) : toy.price}
+                    Rs {isNe ? toNp(toy.price) : toy.price}
                   </div>
                 </div>
               );
@@ -251,7 +251,7 @@ export const ToyShop: React.FC<Props> = ({ onBackToLibrary }) => {
             {isNe ? selectedToy.nameNp : selectedToy.nameEn}
           </div>
           <div style={{ fontSize: 15, color: '#475569', fontWeight: 800 }}>
-            {L(`मूल्य: रु ${toNp(selectedToy.price)}`, `Price: Rs ${selectedToy.price}`)}
+            {L(`मूल्य: Rs ${toNp(selectedToy.price)}`, `Price: Rs ${selectedToy.price}`)}
           </div>
 
           {isPaidEnough ? (
@@ -268,12 +268,12 @@ export const ToyShop: React.FC<Props> = ({ onBackToLibrary }) => {
                 🎉 {L('रकम भुक्तानी भयो!', 'Payment Received!')}
               </div>
               <div style={{ fontSize: 14, fontWeight: 800, color: '#047857', marginTop: 4 }}>
-                {L(`फिर्ता रकम: रु ${toNp(change)}`, `Change to return: Rs ${change}`)}
+                {L(`फिर्ता रकम: Rs ${toNp(change)}`, `Change to return: Rs ${change}`)}
               </div>
             </div>
           ) : (
             <div style={{ color: '#D97706', fontSize: 13, fontWeight: 800 }}>
-              ⚠️ {L(`अझै रु ${toNp(selectedToy.price - paid)} तिर्न बाँकी`, `Rs ${selectedToy.price - paid} remaining to pay`)}
+              ⚠️ {L(`अझै Rs ${toNp(selectedToy.price - paid)} तिर्न बाँकी`, `Rs ${selectedToy.price - paid} remaining to pay`)}
             </div>
           )}
         </div>

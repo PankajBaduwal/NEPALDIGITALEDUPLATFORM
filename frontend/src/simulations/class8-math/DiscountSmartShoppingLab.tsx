@@ -1,7 +1,7 @@
 /**
  * DiscountSmartShoppingLab.tsx
- * Grade 8 Mathematics – Unit 5: PROFIT AND LOSS (नाफा र नोक्सान)
- * Simulation 2: Discount and Smart Shopping Lab (छुट र किनमेल प्रयोगशाला)
+ * Grade 8 Mathematics – Unit 5: PROFIT AND LOSS
+ * Simulation 2: Discount and Smart Shopping Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 5)
  */
 import React, { useState } from 'react';
@@ -15,54 +15,54 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'छुट रकम (Discount Amount) सधैं कुन मूल्यमा गणना गरिन्छ?',
     en: 'On which price is the discount amount always calculated?',
     options: [
-      { key: 'A', label: 'अङ्कित मूल्यमा (On Marked Price - MP)' },
-      { key: 'B', label: 'क्रय मूल्यमा (On CP)' },
-      { key: 'C', label: 'बिक्री मूल्यमा (On SP)' },
-      { key: 'D', label: 'नाफामा' },
+      { key: 'A', label: 'On marked price (MP)' },
+      { key: 'B', label: 'On cost price (CP)' },
+      { key: 'C', label: 'On selling price (SP)' },
+      { key: 'D', label: 'On profit' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा ज्याकेटको अङ्कित मूल्य रु. २,२०० र छुट १०% भए छुट पछिको बिक्री मूल्य (SP) कति हुन्छ?',
+    np: 'एउटा ज्याकेटको अङ्कित मूल्य Rs. 2,200 र छुट 10% भए छुट पछिको बिक्री मूल्य (SP) कति हुन्छ?',
     en: 'If a jacket has a marked price of Rs. 2,200 and a 10% discount, what is the selling price (SP)?',
     options: [
-      { key: 'A', label: 'रु. १,९८० [ छुट २२० ⇒ २२०० - २२० = १९८० ]' },
-      { key: 'B', label: 'रु. २,०००' },
-      { key: 'C', label: 'रु. १,८८०' },
-      { key: 'D', label: 'रु. २,१००' },
+      { key: 'A', label: 'Rs. 1,980 [ discount 220 ⇒ 2200 - 220 = 1980 ]' },
+      { key: 'B', label: 'Rs. 2,000' },
+      { key: 'C', label: 'Rs. 1,880' },
+      { key: 'D', label: 'Rs. 2,100' },
     ],
     answer: 'A',
   },
   {
-    np: '८% छुट दिएर एउटा मोबाइल रु. २२,०८० मा बेच्दा त्यसको सुरुको अङ्कित मूल्य (MP) कति थियो?',
+    np: '8% छुट दिएर एउटा मोबाइल Rs. 22,080 मा बेच्दा त्यसको सुरुको अङ्कित मूल्य (MP) कति थियो?',
     en: 'A mobile is sold for Rs. 22,080 after an 8% discount. What was its original marked price (MP)?',
     options: [
-      { key: 'A', label: 'रु. २४,००० [ MP = २२०८० × १०० ÷ ९२ = २४,००० ]' },
-      { key: 'B', label: 'रु. २३,०००' },
-      { key: 'C', label: 'रु. २५,०००' },
-      { key: 'D', label: 'रु. २६,५००' },
+      { key: 'A', label: 'Rs. 24,000 [ MP = 22080 × 100 ÷ 92 = 24,000 ]' },
+      { key: 'B', label: 'Rs. 23,000' },
+      { key: 'C', label: 'Rs. 25,000' },
+      { key: 'D', label: 'Rs. 26,500' },
     ],
     answer: 'A',
   },
   {
-    np: 'अङ्कित मूल्य रु. १,८०० भएको वस्तु रु. १,५३० मा बेच्दा छुट प्रतिशत कति हुन्छ?',
+    np: 'अङ्कित मूल्य Rs. 1,800 भएको वस्तु Rs. 1,530 मा बेच्दा छुट प्रतिशत कति हुन्छ?',
     en: 'If an item with marked price Rs. 1,800 is sold for Rs. 1,530, what is the discount percentage?',
     options: [
-      { key: 'A', label: '१५% [ छुट २७० ÷ १८०० × १००% = १५% ]' },
-      { key: 'B', label: '१०%' },
-      { key: 'C', label: '१२%' },
-      { key: 'D', label: '१८%' },
+      { key: 'A', label: '15% [ discount 270 ÷ 1800 × 100% = 15% ]' },
+      { key: 'B', label: '10%' },
+      { key: 'C', label: '12%' },
+      { key: 'D', label: '18%' },
     ],
     answer: 'A',
   },
   {
-    np: 'क्रय मूल्यभन्दा २५% बढाएर अङ्कित मूल्य तोकी पुनः २५% छुट दिँदा पसलेलाई के हुन्छ?',
+    np: 'क्रय मूल्यभन्दा 25% बढाएर अङ्कित मूल्य तोकी पुनः 25% छुट दिँदा पसलेलाई के हुन्छ?',
     en: 'If marked price is set 25% above CP and sold at a 25% discount, what is the net business result?',
     options: [
-      { key: 'A', label: '६.२५% नोक्सान (Net Loss of 6.25%)' },
-      { key: 'B', label: 'नाफा पनि होइन नोक्सान पनि होइन' },
-      { key: 'C', label: '६.२५% नाफा' },
-      { key: 'D', label: '२५% नाफा' },
+      { key: 'A', label: '6.25% loss (net loss of 6.25%)' },
+      { key: 'B', label: 'Neither profit nor loss' },
+      { key: 'C', label: '6.25% profit' },
+      { key: 'D', label: '25% profit' },
     ],
     answer: 'A',
   },
@@ -122,11 +122,11 @@ export const DiscountSmartShoppingLab: React.FC<{
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'calc_sp', labelNp: '१. छुट र बिक्री मूल्य गणना', labelEn: '1. Calculate SP', icon: Tag },
-            { id: 'find_mp', labelNp: '२. अङ्कित मूल्य (MP) पत्ता लगाउने', labelEn: '2. Find Marked Price', icon: ArrowRight },
-            { id: 'find_pct', labelNp: '३. छुट प्रतिशत निकाल्ने', labelEn: '3. Find Discount %', icon: Percent },
-            { id: 'discount_profit_trap', labelNp: '४. छुट र नाफा/नोक्सान संयोजन', labelEn: '4. Discount & Profit/Loss', icon: AlertTriangle },
-            { id: 'challenge', labelNp: '५. अभ्यास चुनौती', labelEn: '5. Quiz Challenge', icon: Award },
+            { id: 'calc_sp', labelNp: '1. छुट र बिक्री मूल्य गणना', labelEn: '1. Calculate SP', icon: Tag },
+            { id: 'find_mp', labelNp: '2. अङ्कित मूल्य (MP) पत्ता लगाउने', labelEn: '2. Find Marked Price', icon: ArrowRight },
+            { id: 'find_pct', labelNp: '3. छुट प्रतिशत निकाल्ने', labelEn: '3. Find Discount %', icon: Percent },
+            { id: 'discount_profit_trap', labelNp: '4. छुट र नाफा/नोक्सान संयोजन', labelEn: '4. Discount & Profit/Loss', icon: AlertTriangle },
+            { id: 'challenge', labelNp: '5. अभ्यास चुनौती', labelEn: '5. Quiz Challenge', icon: Award },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -187,13 +187,13 @@ export const DiscountSmartShoppingLab: React.FC<{
 
             <div style={{ background: '#f8fafc', padding: 18, borderRadius: 14, border: '1px solid #cbd5e1', display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{ fontSize: 15, color: '#334155' }}>
-                • <strong>{L('अङ्कित मूल्य (Marked Price - MP):', 'Marked Price (MP):')}</strong> रु. {isNe ? toNp(selectedProd.mp) : selectedProd.mp}
+                • <strong>{L('अङ्कित मूल्य (Marked Price - MP):', 'Marked Price (MP):')}</strong> Rs. {isNe ? toNp(selectedProd.mp) : selectedProd.mp}
               </div>
               <div style={{ fontSize: 15, color: '#334155' }}>
                 • <strong>{L('छुट प्रतिशत (Discount %):', 'Discount %:')}</strong> {selectedProd.discountPct}%
               </div>
               <div style={{ fontSize: 15, color: '#0284c7', fontWeight: 700 }}>
-                • <strong>{L('छुट रकम (Discount Amount):', 'Discount Amount:')}</strong> (रु. {selectedProd.mp} × {selectedProd.discountPct}) ÷ १०० = <strong>रु. {discAmount}</strong>
+                • <strong>{L('छुट रकम (Discount Amount):', 'Discount Amount:')}</strong> (Rs. {selectedProd.mp} × {selectedProd.discountPct}) ÷ 100 = <strong>Rs. {discAmount}</strong>
               </div>
 
               <div style={{ background: '#ecfdf5', padding: 14, borderRadius: 10, border: '1.5px solid #a7f3d0', marginTop: 6 }}>
@@ -201,7 +201,7 @@ export const DiscountSmartShoppingLab: React.FC<{
                   {L('छुटपछिको बिक्री मूल्य (SP = MP - Discount):', 'Final Selling Price (SP = MP - Discount):')}
                 </div>
                 <div style={{ fontSize: 28, fontWeight: 900, color: '#047857', marginTop: 4 }}>
-                  रु. {isNe ? toNp(spVal) : spVal}
+                  Rs. {isNe ? toNp(spVal) : spVal}
                 </div>
               </div>
             </div>
@@ -219,7 +219,7 @@ export const DiscountSmartShoppingLab: React.FC<{
             <div style={{ background: '#f8fafc', padding: 16, borderRadius: 12, border: '1px solid #cbd5e1', marginBottom: 14, lineHeight: 1.6 }}>
               <div style={{ fontSize: 14, color: '#1e293b' }}>
                 {L(
-                  '८% छुट दिएर एउटा मोबाइल रु. २२,०८० मा बेच्दा सुरुको अङ्कित मूल्य कति थियो?',
+                  '8% छुट दिएर एउटा मोबाइल Rs. 22,080 मा बेच्दा सुरुको अङ्कित मूल्य कति थियो?',
                   'A mobile was sold for Rs. 22,080 after an 8% discount. Find its original marked price:'
                 )}
               </div>
@@ -227,13 +227,13 @@ export const DiscountSmartShoppingLab: React.FC<{
 
             <div style={{ background: '#eff6ff', padding: 18, borderRadius: 14, border: '1px solid #bfdbfe', display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{ fontSize: 14, color: '#1e40af' }}>
-                मानौँ अङ्कित मूल्य = MP<br />
-                SP = MP × (१०० - छुट%) ÷ १००<br />
-                २२,०८० = MP × (१०० - ८) ÷ १००<br />
-                २२,०८० = MP × ९२ ÷ १००
+                Let the marked price = MP<br />
+                SP = MP × (100 - Discount%) ÷ 100<br />
+                22,080 = MP × (100 - 8) ÷ 100<br />
+                22,080 = MP × 92 ÷ 100
               </div>
               <div style={{ fontSize: 24, fontWeight: 900, color: '#1d4ed8', marginTop: 4 }}>
-                MP = (२२,०८० × १००) ÷ ९२ = रु. {calculatedMp.toLocaleString()}
+                MP = (22,080 × 100) ÷ 92 = Rs. {calculatedMp.toLocaleString()}
               </div>
             </div>
           </div>
@@ -248,13 +248,13 @@ export const DiscountSmartShoppingLab: React.FC<{
             </h3>
 
             <div style={{ background: '#f8fafc', padding: 16, borderRadius: 12, border: '1px solid #cbd5e1', display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <div>• <strong>अङ्कित मूल्य (MP):</strong> रु. {testMp}</div>
-              <div>• <strong>बिक्री मूल्य (SP):</strong> रु. {testSp}</div>
-              <div>• <strong>छुट रकम = MP - SP:</strong> रु. {testMp} - रु. {testSp} = रु. {calcDiscAmount}</div>
+              <div>• <strong>Marked price (MP):</strong> Rs. {testMp}</div>
+              <div>• <strong>Selling price (SP):</strong> Rs. {testSp}</div>
+              <div>• <strong>Discount amount = MP - SP:</strong> Rs. {testMp} - Rs. {testSp} = Rs. {calcDiscAmount}</div>
               <div style={{ background: '#ecfdf5', padding: 14, borderRadius: 10, border: '1.5px solid #a7f3d0' }}>
                 <div style={{ fontSize: 13, fontWeight: 700, color: '#065f46' }}>{L('छुट प्रतिशत सूत्र:', 'Discount % Formula:')}</div>
                 <div style={{ fontSize: 24, fontWeight: 900, color: '#047857', marginTop: 4 }}>
-                  (छुट रकम ÷ MP) × १००% = ({calcDiscAmount} ÷ {testMp}) × १००% = {calcDiscPct.toFixed(2)}%
+                  (Discount amount ÷ MP) × 100% = ({calcDiscAmount} ÷ {testMp}) × 100% = {calcDiscPct.toFixed(2)}%
                 </div>
               </div>
             </div>
@@ -272,19 +272,19 @@ export const DiscountSmartShoppingLab: React.FC<{
             <div style={{ background: '#fff7ed', padding: 16, borderRadius: 12, border: '1px solid #fed7aa', marginBottom: 14, lineHeight: 1.6 }}>
               <p style={{ margin: 0, fontSize: 14, color: '#9a3412' }}>
                 {L(
-                  'एउटा कम्प्युटर रु. ३६,००० मा किनियो (CP)। यसको अङ्कित मूल्य २५% बढाएर राखियो र पछि २५% छुटमा बेचियो। के पसलेलाई नाफा भयो?',
+                  'एउटा कम्प्युटर Rs. 36,000 मा किनियो (CP)। यसको अङ्कित मूल्य 25% बढाएर राखियो र पछि 25% छुटमा बेचियो। के पसलेलाई नाफा भयो?',
                   'A computer was bought for Rs. 36,000 (CP). Marked price was set 25% above CP, and then sold at a 25% discount. Did the shopkeeper earn a profit?'
                 )}
               </p>
             </div>
 
             <div style={{ background: '#fef2f2', padding: 18, borderRadius: 14, border: '1.5px solid #fecaca', display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <div>१. क्रय मूल्य (CP) = <strong>रु. ३६,०००</strong></div>
-              <div>२. अङ्कित मूल्य (२५% वृद्धि) = ३६००० + ९००० = <strong>रु. ४५,०००</strong></div>
-              <div>३. छुट (२५% of ४५,०००) = <strong>रु. ११,२५०</strong></div>
-              <div>४. बिक्री मूल्य (SP = ४५००० - ११२५०) = <strong>रु. ३३,७५०</strong></div>
+              <div>1. Cost price (CP) = <strong>Rs. 36,000</strong></div>
+              <div>2. Marked price (25% increase) = 36000 + 9000 = <strong>Rs. 45,000</strong></div>
+              <div>3. Discount (25% of 45,000) = <strong>Rs. 11,250</strong></div>
+              <div>4. Selling price (SP = 45000 - 11250) = <strong>Rs. 33,750</strong></div>
               <div style={{ fontSize: 20, fontWeight: 900, color: '#b91c1c', marginTop: 4 }}>
-                ५. SP (३३,७५०) &lt; CP (३६,०००) भएकाले नोक्सान भयो = रु. २,२५० (६.२५% नोक्सान)
+                5. Since SP (33,750) &lt; CP (36,000), there is a loss = Rs. 2,250
               </div>
             </div>
           </div>
@@ -299,7 +299,7 @@ export const DiscountSmartShoppingLab: React.FC<{
             </h3>
             <p style={{ margin: 0, fontSize: 14, color: '#475569' }}>
               {L(
-                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" ट्याबबाट ५ वटा आधिकारिक पाठ्यपुस्तकका प्रश्नहरू हल गरी ताराहरू जित्नुहोस्!',
+                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" ट्याबबाट 5 pcs आधिकारिक पाठ्यपुस्तकका प्रश्नहरू हल गरी ताराहरू जित्नुहोस्!',
                 'Click "Challenge" mode in the header to take the official CDC curriculum quiz and earn mastery stars!'
               )}
             </p>

@@ -1,7 +1,7 @@
 /**
  * PlaneFiguresDiscoveryChallenge.tsx
- * Grade 7 Mathematics – Lesson 14: PLANE FIGURES (समतलीय आकृतिहरू)
- * Simulation 4: Plane Figures Discovery and Mastery Challenge (समतलीय आकृतिहरूको खोज तथा चुनौती)
+ * Grade 7 Mathematics – Lesson 14: PLANE FIGURES
+ * Simulation 4: Plane Figures Discovery and Mastery Challenge
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 205-230)
  */
 import React, { useState } from 'react';
@@ -12,13 +12,13 @@ import { Trophy, CheckCircle2, XCircle, RotateCcw, Sparkles, Award } from 'lucid
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'कुनै त्रिभुजका सबै तीनवटा भुजाहरू असमान छन् भने त्यसलाई के भनिन्छ?',
+    np: 'कुनै Triangleका सबै तीनpcs भुजाहरू असमान छन् भने त्यसलाई के भनिन्छ?',
     en: 'If all three sides of a triangle are unequal in length, what is it called?',
     options: [
-      { key: 'A', label: 'विषमबाहु त्रिभुज (Scalene Triangle)' },
-      { key: 'B', label: 'समबाहु त्रिभुज (Equilateral)' },
-      { key: 'C', label: 'समद्विबाहु त्रिभुज (Isosceles)' },
-      { key: 'D', label: 'समकोण त्रिभुज' },
+      { key: 'A', label: 'Scalene triangle' },
+      { key: 'B', label: 'Equilateral triangle' },
+      { key: 'C', label: 'Isosceles triangle' },
+      { key: 'D', label: 'Right-angled triangle' },
     ],
     answer: 'A',
   },
@@ -26,10 +26,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुनै चतुर्भुजका चारवटै भित्री कोणहरूको योगफल कति हुन्छ?',
     en: 'What is the sum of all four interior angles of a quadrilateral?',
     options: [
-      { key: 'A', label: '३६०°' },
-      { key: 'B', label: '१८०°' },
-      { key: 'C', label: '२७०°' },
-      { key: 'D', label: '५४०°' },
+      { key: 'A', label: '360°' },
+      { key: 'B', label: '180°' },
+      { key: 'C', label: '270°' },
+      { key: 'D', label: '540°' },
     ],
     answer: 'A',
   },
@@ -37,21 +37,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'नेपाली क्यारमबोर्ड (Carrom board) र चेस बोर्ड (Chessboard) कुन समतलीय आकृतिका उदाहरण हुन्?',
     en: 'A Nepali carrom board and chessboard are real-life examples of which plane figure?',
     options: [
-      { key: 'A', label: 'वर्ग (Square)' },
-      { key: 'B', label: 'वृत्त' },
-      { key: 'C', label: 'समलम्ब चतुर्भुज' },
-      { key: 'D', label: 'त्रिभुज' },
+      { key: 'A', label: 'Square' },
+      { key: 'B', label: 'Circle' },
+      { key: 'C', label: 'Trapezium' },
+      { key: 'D', label: 'Triangle' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि चतुर्भुजका तीन कोणहरू ८०°, १००° र ११०° छन् भने चौथो कोण कति हुन्छ?',
+    np: 'यदि चतुर्भुजका तीन कोणहरू 80°, 100° र 110° छन् भने चौथो कोण कति हुन्छ?',
     en: 'If three angles of a quadrilateral are 80°, 100°, and 110°, what is the 4th angle?',
     options: [
-      { key: 'A', label: '७०° (३६०° - २९०°)' },
-      { key: 'B', label: '८०°' },
-      { key: 'C', label: '९०°' },
-      { key: 'D', label: '६०°' },
+      { key: 'A', label: '70° (360° - 290°)' },
+      { key: 'B', label: '80°' },
+      { key: 'C', label: '90°' },
+      { key: 'D', label: '60°' },
     ],
     answer: 'A',
   },
@@ -71,29 +71,29 @@ interface ChallengeCard {
 const CHALLENGES: ChallengeCard[] = [
   {
     id: 1,
-    questionNp: 'भुजाहरूको नाप ५ सेमी, ५ सेमी र ८ सेमी भएको त्रिभुज कुन प्रकारको हो?',
+    questionNp: 'भुजाहरूको नाप 5 cm, 5 cm र 8 cm भएको Triangle कुन प्रकारको हो?',
     questionEn: 'A triangle with side lengths 5 cm, 5 cm and 8 cm is classified as:',
     options: [
-      { key: 'A', labelNp: 'समद्विबाहु त्रिभुज (Isosceles)', labelEn: 'Isosceles Triangle' },
-      { key: 'B', labelNp: 'समबाहु त्रिभुज (Equilateral)', labelEn: 'Equilateral Triangle' },
-      { key: 'C', labelNp: 'विषमबाहु त्रिभुज (Scalene)', labelEn: 'Scalene Triangle' },
+      { key: 'A', labelNp: 'Isosceles triangle', labelEn: 'Isosceles Triangle' },
+      { key: 'B', labelNp: 'Equilateral triangle', labelEn: 'Equilateral Triangle' },
+      { key: 'C', labelNp: 'विषमबाहु Triangle (Scalene)', labelEn: 'Scalene Triangle' },
     ],
     correctKey: 'A',
-    explanationNp: 'दुईवटा भुजाहरू ५ सेमी = ५ सेमी बराबर भएकाले यो समद्विबाहु त्रिभुज हो।',
+    explanationNp: 'दुईpcs भुजाहरू 5 cm = 5 cm बराबर भएकाले यो समद्विबाहु Triangle हो।',
     explanationEn: 'Since two sides are equal (5 cm = 5 cm), it is an isosceles triangle.',
     shapeType: 'triangle',
   },
   {
     id: 2,
-    questionNp: 'कुनै समकोणी त्रिभुजमा आधार ४ सेमी र लम्ब ३ सेमी छन् भने कर्ण कति हुन्छ?',
+    questionNp: 'कुनै समकोणी Triangleमा आधार 4 cm र लम्ब 3 cm छन् भने कर्ण कति हुन्छ?',
     questionEn: 'In a right triangle with base 4 cm and perpendicular 3 cm, what is the hypotenuse?',
     options: [
-      { key: 'A', labelNp: '५ सेमी (√(३² + ४²))', labelEn: '5 cm (√(3² + 4²))' },
-      { key: 'B', labelNp: '७ सेमी', labelEn: '7 cm' },
-      { key: 'C', labelNp: '६ सेमी', labelEn: '6 cm' },
+      { key: 'A', labelNp: '5 cm (√(3² + 4²))', labelEn: '5 cm (√(3² + 4²))' },
+      { key: 'B', labelNp: '7 cm', labelEn: '7 cm' },
+      { key: 'C', labelNp: '6 cm', labelEn: '6 cm' },
     ],
     correctKey: 'A',
-    explanationNp: 'पाइथागोरस साध्य अनुसार: h = √(३² + ४²) = √(९ + १६) = √२५ = ५ सेमी।',
+    explanationNp: 'पाइथागोरस साध्य अनुसार: h = √(3² + 4²) = √(9 + 16) = √25 = 5 cm।',
     explanationEn: 'By Pythagoras theorem: h = √(9 + 16) = √25 = 5 cm.',
     shapeType: 'triangle',
   },
@@ -103,53 +103,53 @@ const CHALLENGES: ChallengeCard[] = [
     questionEn: 'Nepali textbooks, postage stamps, and photo frames are typical examples of:',
     options: [
       { key: 'A', labelNp: 'आयत (Rectangle)', labelEn: 'Rectangle' },
-      { key: 'B', labelNp: 'समबाहु त्रिभुज', labelEn: 'Equilateral Triangle' },
-      { key: 'C', labelNp: 'समलम्ब चतुर्भुज', labelEn: 'Trapezium' },
+      { key: 'B', labelNp: 'समबाहु Triangle', labelEn: 'Equilateral Triangle' },
+      { key: 'C', labelNp: 'Trapezium', labelEn: 'Trapezium' },
     ],
     correctKey: 'A',
-    explanationNp: 'आमने-सामनेका भुजाहरू बराबर र चारै कोणहरू ९०° हुने भएकाले यी आयत हुन्।',
+    explanationNp: 'आमने-सामनेका भुजाहरू बराबर र चारै कोणहरू 90° हुने भएकाले यी आयत हुन्।',
     explanationEn: 'Because opposite sides are equal and all angles are 90°, they are rectangles.',
     shapeType: 'real_life',
   },
   {
     id: 4,
-    questionNp: 'यदि समान्तर चतुर्भुजमा एउटा कोण ७०° छ भने यसको सम्मुख कोण (Opposite Angle) कति हुन्छ?',
+    questionNp: 'यदि समान्तर चतुर्भुजमा एउटा कोण 70° छ भने यसको सम्मुख कोण (Opposite Angle) कति हुन्छ?',
     questionEn: 'In a parallelogram, if one angle is 70°, what is its opposite angle?',
     options: [
-      { key: 'A', labelNp: '७०° (सम्मुख कोण बराबर)', labelEn: '70° (Opposite angles equal)' },
-      { key: 'B', labelNp: '११०°', labelEn: '110°' },
-      { key: 'C', labelNp: '२०°', labelEn: '20°' },
+      { key: 'A', labelNp: '70° (सम्मुख कोण बराबर)', labelEn: '70° (Opposite angles equal)' },
+      { key: 'B', labelNp: '110°', labelEn: '110°' },
+      { key: 'C', labelNp: '20°', labelEn: '20°' },
     ],
     correctKey: 'A',
-    explanationNp: 'समान्तर चतुर्भुजका सम्मुख कोणहरू बराबर हुन्छन्, त्यसैले अर्को कोण पनि ७०° नै हुन्छ।',
+    explanationNp: 'समान्तर चतुर्भुजका सम्मुख कोणहरू बराबर हुन्छन्, त्यसैले अर्को कोण पनि 70° नै हुन्छ।',
     explanationEn: 'Opposite angles of a parallelogram are equal, so it is also 70°.',
     shapeType: 'quad',
   },
   {
     id: 5,
-    questionNp: 'त्रिभुजका दुई कोणहरू ५०° र ६०° छन्। तेस्रो कोण कति हुन्छ?',
+    questionNp: 'Triangleका दुई कोणहरू 50° र 60° छन्। तेस्रो कोण कति हुन्छ?',
     questionEn: 'Two angles of a triangle are 50° and 60°. What is the third angle?',
     options: [
-      { key: 'A', labelNp: '७०° (१८०° - ११०°)', labelEn: '70° (180° - 110°)' },
-      { key: 'B', labelNp: '८०°', labelEn: '80°' },
-      { key: 'C', labelNp: '९०°', labelEn: '90°' },
+      { key: 'A', labelNp: '70° (180° - 110°)', labelEn: '70° (180° - 110°)' },
+      { key: 'B', labelNp: '80°', labelEn: '80°' },
+      { key: 'C', labelNp: '90°', labelEn: '90°' },
     ],
     correctKey: 'A',
-    explanationNp: 'त्रिभुजका तीनवटै कोणहरूको जोड १८०° हुन्छ। १८०° - (५०° + ६०°) = ७०°।',
+    explanationNp: 'Triangleका तीनवटै कोणहरूको जोड 180° हुन्छ। 180° - (50° + 60°) = 70°।',
     explanationEn: 'Sum of triangle angles is 180°. 180° - 110° = 70°.',
     shapeType: 'triangle',
   },
   {
     id: 6,
-    questionNp: 'कुन चतुर्भुजका विकर्णहरू बराबर हुन्छन् र ९०° मा समद्विभाजन गर्छन्?',
+    questionNp: 'कुन चतुर्भुजका विकर्णहरू बराबर हुन्छन् र 90° मा समद्विभाजन गर्छन्?',
     questionEn: 'Which quadrilateral has equal diagonals that bisect each other at 90°?',
     options: [
-      { key: 'A', labelNp: 'वर्ग (Square)', labelEn: 'Square' },
+      { key: 'A', labelNp: 'Square', labelEn: 'Square' },
       { key: 'B', labelNp: 'आयत (Rectangle)', labelEn: 'Rectangle' },
       { key: 'C', labelNp: 'समान्तर चतुर्भुज', labelEn: 'Parallelogram' },
     ],
     correctKey: 'A',
-    explanationNp: 'वर्गका विकर्णहरू बराबर हुन्छन् र एकअर्कालाई ९०° मा समद्विभाजन गर्छन्।',
+    explanationNp: 'वर्गका विकर्णहरू बराबर हुन्छन् र एकअर्कालाई 90° मा समद्विभाजन गर्छन्।',
     explanationEn: 'Square diagonals are equal and perpendicular bisectors (90°).',
     shapeType: 'quad',
   },
@@ -211,7 +211,7 @@ export const PlaneFiguresDiscoveryChallenge: React.FC<{ onBackToLibrary?: () => 
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'बधाई छ साथीहरू! समतलीय आकृतिहरू (त्रिभुज, चतुर्भुज र पाइथागोरस साध्य) को खोज र बृहत् चुनौतीमा भाग लिऔँ!',
+        'बधाई छ साथीहरू! समतलीय आकृतिहरू (Triangle, चतुर्भुज र पाइथागोरस साध्य) को खोज र बृहत् चुनौतीमा भाग लिऔँ!',
         'Congratulations friends! Participate in the comprehensive plane figures and geometry challenge!'
       )}
     >
@@ -241,7 +241,7 @@ export const PlaneFiguresDiscoveryChallenge: React.FC<{ onBackToLibrary?: () => 
             {/* Question Text */}
             <div className="space-y-2">
               <span className="inline-block px-3 py-1 rounded-full text-xs font-black uppercase bg-indigo-100 text-indigo-800">
-                {currentQ.shapeType === 'triangle' && L('त्रिभुज (Triangle)', 'Triangle')}
+                {currentQ.shapeType === 'triangle' && L('Triangle (Triangle)', 'Triangle')}
                 {currentQ.shapeType === 'quad' && L('चतुर्भुज (Quadrilateral)', 'Quadrilateral')}
                 {currentQ.shapeType === 'real_life' && L('व्यावहारिक ज्यामिति (Real-life)', 'Real-Life Geometry')}
               </span>

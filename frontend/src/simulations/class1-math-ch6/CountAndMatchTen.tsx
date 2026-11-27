@@ -1,7 +1,7 @@
 /**
  * CountAndMatchTen.tsx
- * Simulation 04: Count and Match Ten (गनेर दशसँग मिलाऔँ)
- * Class 1 Mathematics - Chapter 6: Ten (दश)
+ * Simulation 04: Count and Match Ten
+ * Class 1 Mathematics - Chapter 6: Ten
  * Nepal Digital Education Platform
  */
 
@@ -38,7 +38,7 @@ interface MatchScene {
   bgGradient: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 const NEP_NAMES = ['शून्य', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ', 'दश'];
 const EN_NAMES = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
 
@@ -47,7 +47,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Navigation & Settings
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Scenes to count and match
@@ -61,7 +61,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
       icon: '🌸',
       actualCount: 10,
       options: [8, 10, 6],
-      targetCardNp: '१० (दश)',
+      targetCardNp: '10',
       targetCardEn: '10 (Ten)',
       bgGradient: 'linear-gradient(135deg, #15803d, #166534)',
     },
@@ -74,7 +74,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
       icon: '🐟',
       actualCount: 10,
       options: [7, 10, 9],
-      targetCardNp: '१० (दश)',
+      targetCardNp: '10',
       targetCardEn: '10 (Ten)',
       bgGradient: 'linear-gradient(135deg, #0284c7, #0369a1)',
     },
@@ -87,7 +87,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
       icon: '✏️',
       actualCount: 10,
       options: [10, 8, 5],
-      targetCardNp: '१० (दश)',
+      targetCardNp: '10',
       targetCardEn: '10 (Ten)',
       bgGradient: 'linear-gradient(135deg, #b45309, #78350f)',
     },
@@ -100,7 +100,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
       icon: '🍎',
       actualCount: 10,
       options: [9, 10, 7],
-      targetCardNp: '१० (दश)',
+      targetCardNp: '10',
       targetCardEn: '10 (Ten)',
       bgGradient: 'linear-gradient(135deg, #dc2626, #991b1b)',
     },
@@ -113,7 +113,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
       icon: '🐦',
       actualCount: 10,
       options: [10, 6, 8],
-      targetCardNp: '१० (दश)',
+      targetCardNp: '10',
       targetCardEn: '10 (Ten)',
       bgGradient: 'linear-gradient(135deg, #0d9488, #115e59)',
     },
@@ -209,7 +209,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
     playTone(400 + count * 45, 'triangle', 0.2);
 
     if (count === activeScene.actualCount) {
-      speakText(`१० वटा पुग्यो! अब सङ्ख्या कार्ड छान्नुहोस्।`, `Ten reached! Now pick the number card.`);
+      speakText(`10 वटा पुग्यो! अब सङ्ख्या कार्ड छान्नुहोस्।`, `Ten reached! Now pick the number card.`);
     } else {
       speakText(`${formatNum(count)}`, `${count}`);
     }
@@ -227,7 +227,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
       setStars(ns);
       saveProgress(ns);
       speakText(
-        `अति राम्रो! ${activeScene.itemNameNp}को सङ्ख्या ठ्याक्कै १० हो!`,
+        `अति राम्रो! ${activeScene.itemNameNp}को सङ्ख्या ठ्याक्कै 10 हो!`,
         `Splendid! The count is exactly 10!`
       );
     } else {
@@ -292,11 +292,11 @@ export const CountAndMatchTen: React.FC<Props> = ({
 
           <div>
             <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
-              कक्षा १ • गणित • अध्याय ६ : दश (Ten)
+              Class 1 • Maths • Chapter 6 : Ten
             </div>
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
-                ? 'सिमुलेसन ०४: गनेर दशसँग मिलाऔँ (Count and Match Ten)'
+                ? 'सिमुलेसन 04: गनेर दशसँग मिलाऔँ (Count and Match Ten)'
                 : 'Simulation 04: Count and Match Ten'}
             </h1>
           </div>
@@ -321,21 +321,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
             <span>{stars} Stars</span>
           </div>
 
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            style={{
-              padding: '6px 12px',
-              background: '#FFFFFF',
-              border: '1px solid #DCE5DE',
-              borderRadius: '8px',
-              color: '#26332E',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '13px',
-            }}
-          >
-            {language === 'np' ? 'नेपाली | EN' : 'EN | नेपाली'}
-          </button>
+          
 
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
@@ -441,7 +427,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
             }}
           >
             {language === 'np'
-              ? `गनेको सङ्ख्या: ${formatNum(clickedItemIndices.length)} / १०`
+              ? `गनेको सङ्ख्या: ${formatNum(clickedItemIndices.length)} / 10`
               : `Counted: ${clickedItemIndices.length} / 10`}
           </div>
 
@@ -561,7 +547,7 @@ export const CountAndMatchTen: React.FC<Props> = ({
               >
                 {sceneFeedback
                   ? language === 'np'
-                    ? 'शानदार! सही जोडी मिल्यो (+१ तारा)'
+                    ? 'शानदार! सही जोडी मिल्यो (+1 तारा)'
                     : 'Splendid! Matched (+1 Star)'
                   : language === 'np'
                   ? 'पुनः प्रयास गर्नुहोस्!'

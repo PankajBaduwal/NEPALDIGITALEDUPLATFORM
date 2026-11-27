@@ -1,8 +1,8 @@
 /**
  * NumberGardenSimulation.tsx
- * Simulation 02: Number Garden 1–9 (१ देखि ९ सम्म गनौँ)
- * Class 1 Mathematics - Chapter 4: Numbers up to 9 (९ सम्मका सङ्ख्याहरू)
- * Based on Nepal CDC Curriculum (मेरो गणित, कक्षा १ - २०७६)
+ * Simulation 02: Number Garden 1–9
+ * Class 1 Mathematics - Chapter 4: Numbers up to 9
+ * Based on Nepal CDC Curriculum
  */
 
 import React, { useState, useEffect } from 'react';
@@ -48,7 +48,7 @@ export const NumberGardenSimulation: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Language & Audio
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Target Number (1 to 9)
@@ -67,15 +67,15 @@ export const NumberGardenSimulation: React.FC<Props> = ({
     icon: string;
     positions: { x: number; y: number }[];
   }> = {
-    1: { numNp: '१', nameEn: 'One', nameNp: 'एक', itemNameEn: 'Mushroom', itemNameNp: 'च्याउ', icon: '🍄', positions: [{ x: 50, y: 50 }] },
-    2: { numNp: '२', nameEn: 'Two', nameNp: 'दुई', itemNameEn: 'Butterflies', itemNameNp: 'पुतली', icon: '🦋', positions: [{ x: 35, y: 45 }, { x: 65, y: 55 }] },
-    3: { numNp: '३', nameEn: 'Three', nameNp: 'तीन', itemNameEn: 'Rabbits', itemNameNp: 'खरायो', icon: '🐇', positions: [{ x: 30, y: 60 }, { x: 50, y: 40 }, { x: 70, y: 60 }] },
-    4: { numNp: '४', nameEn: 'Four', nameNp: 'चार', itemNameEn: 'Apples', itemNameNp: 'स्याउ', icon: '🍎', positions: [{ x: 28, y: 35 }, { x: 45, y: 65 }, { x: 60, y: 35 }, { x: 75, y: 65 }] },
-    5: { numNp: '५', nameEn: 'Five', nameNp: 'पाँच', itemNameEn: 'Balloons', itemNameNp: 'बेलुन', icon: '🎈', positions: [{ x: 25, y: 40 }, { x: 40, y: 25 }, { x: 50, y: 60 }, { x: 65, y: 30 }, { x: 78, y: 50 }] },
-    6: { numNp: '६', nameEn: 'Six', nameNp: 'छ', itemNameEn: 'Mangoes', itemNameNp: 'आँप', icon: '🥭', positions: [{ x: 22, y: 35 }, { x: 36, y: 60 }, { x: 50, y: 30 }, { x: 64, y: 65 }, { x: 75, y: 35 }, { x: 50, y: 70 }] },
-    7: { numNp: '७', nameEn: 'Seven', nameNp: 'सात', itemNameEn: 'Fish', itemNameNp: 'माछा', icon: '🐟', positions: [{ x: 20, y: 50 }, { x: 32, y: 30 }, { x: 44, y: 65 }, { x: 56, y: 35 }, { x: 68, y: 60 }, { x: 80, y: 40 }, { x: 50, y: 50 }] },
-    8: { numNp: '८', nameEn: 'Eight', nameNp: 'आठ', itemNameEn: 'Birds', itemNameNp: 'चरा', icon: '🐦', positions: [{ x: 18, y: 35 }, { x: 30, y: 60 }, { x: 40, y: 30 }, { x: 50, y: 65 }, { x: 60, y: 35 }, { x: 70, y: 60 }, { x: 82, y: 30 }, { x: 50, y: 45 }] },
-    9: { numNp: '९', nameEn: 'Nine', nameNp: 'नौ', itemNameEn: 'Flowers', itemNameNp: 'फूल', icon: '🌸', positions: [{ x: 20, y: 30 }, { x: 35, y: 25 }, { x: 50, y: 20 }, { x: 65, y: 25 }, { x: 80, y: 30 }, { x: 28, y: 65 }, { x: 42, y: 70 }, { x: 58, y: 70 }, { x: 72, y: 65 }] },
+    1: { numNp: '1', nameEn: 'One', nameNp: 'एक', itemNameEn: 'Mushroom', itemNameNp: 'च्याउ', icon: '🍄', positions: [{ x: 50, y: 50 }] },
+    2: { numNp: '2', nameEn: 'Two', nameNp: 'दुई', itemNameEn: 'Butterflies', itemNameNp: 'पुतली', icon: '🦋', positions: [{ x: 35, y: 45 }, { x: 65, y: 55 }] },
+    3: { numNp: '3', nameEn: 'Three', nameNp: 'तीन', itemNameEn: 'Rabbits', itemNameNp: 'खरायो', icon: '🐇', positions: [{ x: 30, y: 60 }, { x: 50, y: 40 }, { x: 70, y: 60 }] },
+    4: { numNp: '4', nameEn: 'Four', nameNp: 'चार', itemNameEn: 'Apples', itemNameNp: 'स्याउ', icon: '🍎', positions: [{ x: 28, y: 35 }, { x: 45, y: 65 }, { x: 60, y: 35 }, { x: 75, y: 65 }] },
+    5: { numNp: '5', nameEn: 'Five', nameNp: 'पाँच', itemNameEn: 'Balloons', itemNameNp: 'बेलुन', icon: '🎈', positions: [{ x: 25, y: 40 }, { x: 40, y: 25 }, { x: 50, y: 60 }, { x: 65, y: 30 }, { x: 78, y: 50 }] },
+    6: { numNp: '6', nameEn: 'Six', nameNp: 'छ', itemNameEn: 'Mangoes', itemNameNp: 'आँप', icon: '🥭', positions: [{ x: 22, y: 35 }, { x: 36, y: 60 }, { x: 50, y: 30 }, { x: 64, y: 65 }, { x: 75, y: 35 }, { x: 50, y: 70 }] },
+    7: { numNp: '7', nameEn: 'Seven', nameNp: 'सात', itemNameEn: 'Fish', itemNameNp: 'माछा', icon: '🐟', positions: [{ x: 20, y: 50 }, { x: 32, y: 30 }, { x: 44, y: 65 }, { x: 56, y: 35 }, { x: 68, y: 60 }, { x: 80, y: 40 }, { x: 50, y: 50 }] },
+    8: { numNp: '8', nameEn: 'Eight', nameNp: 'आठ', itemNameEn: 'Birds', itemNameNp: 'चरा', icon: '🐦', positions: [{ x: 18, y: 35 }, { x: 30, y: 60 }, { x: 40, y: 30 }, { x: 50, y: 65 }, { x: 60, y: 35 }, { x: 70, y: 60 }, { x: 82, y: 30 }, { x: 50, y: 45 }] },
+    9: { numNp: '9', nameEn: 'Nine', nameNp: 'नौ', itemNameEn: 'Flowers', itemNameNp: 'फूल', icon: '🌸', positions: [{ x: 20, y: 30 }, { x: 35, y: 25 }, { x: 50, y: 20 }, { x: 65, y: 25 }, { x: 80, y: 30 }, { x: 28, y: 65 }, { x: 42, y: 70 }, { x: 58, y: 70 }, { x: 72, y: 65 }] },
   };
 
   const currentConfig = numberStages[activeNumber];
@@ -186,7 +186,7 @@ export const NumberGardenSimulation: React.FC<Props> = ({
     if (activeNumber < 9) {
       setActiveNumber((n) => n + 1);
     } else {
-      speakText('बधाई छ! तपाईंले १ देखि ९ सम्मका सबै वस्तुहरू गनिसक्नुभयो!', 'Congratulations! You counted all numbers 1 to 9!');
+      speakText('बधाई छ! तपाईंले 1 देखि 9 सम्मका सबै वस्तुहरू गनिसक्नुभयो!', 'Congratulations! You counted all numbers 1 to 9!');
     }
   };
 
@@ -252,10 +252,10 @@ export const NumberGardenSimulation: React.FC<Props> = ({
           </button>
           <div>
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#059669' }}>
-              {language === 'np' ? '१ देखि ९ सम्म गनौँ' : 'Number Garden 1–9'}
+              {language === 'np' ? '1 देखि 9 सम्म गनौँ' : 'Number Garden 1–9'}
             </h1>
             <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
-              {language === 'np' ? 'कक्षा १ गणित • अध्याय ४: ९ सम्मका सङ्ख्याहरू' : 'Class 1 Math • Chapter 4: Numbers up to 9'}
+              {language === 'np' ? 'कक्षा 1 गणित • अध्याय 4: 9 सम्मका सङ्ख्याहरू' : 'Class 1 Math • Chapter 4: Numbers up to 9'}
             </span>
           </div>
         </div>
@@ -301,21 +301,7 @@ export const NumberGardenSimulation: React.FC<Props> = ({
           </div>
 
           {/* Language Toggle */}
-          <button
-            onClick={() => setLanguage(language === 'np' ? 'en' : 'np')}
-            style={{
-              background: '#ede9fe',
-              color: '#6d28d9',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '13px',
-              cursor: 'pointer',
-            }}
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
 
           {/* Sound Toggle */}
           <button
@@ -372,7 +358,7 @@ export const NumberGardenSimulation: React.FC<Props> = ({
             <span style={{ fontSize: '13px', color: '#64748b', fontWeight: 600 }}>
               {language === 'np'
                 ? `अङ्ग्रेजी: ${activeNumber} (${currentConfig.nameEn})`
-                : `Nepali: ${currentConfig.numNp} (${currentConfig.nameNp})`}
+                : `Number: ${activeNumber} (${currentConfig.nameEn})`}
             </span>
 
             <div

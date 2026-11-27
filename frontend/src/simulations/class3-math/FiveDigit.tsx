@@ -1,5 +1,5 @@
 /**
- * Lesson 2 · Five-digit numbers (पाँच अङ्कका सङ्ख्या)
+ * Lesson 2 · Five-digit numbers
  * Five-Digit Towers — five columns of counters (ten-thousands, thousands, hundreds, tens, ones); build, read and write numbers up to 99,999.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -94,7 +94,7 @@ export const FiveDigit: React.FC<Props> = ({ onBackToLibrary }) => {
     .map((x, i) => x * 10 ** (4 - i))
     .filter((x) => x > 0)
     .map((x) => toNp(x.toLocaleString('en-US')))
-    .join(' + ') || '०';
+    .join(' + ') || '0';
 
   const hud = kit.mode === 'CHALLENGE' ? null : (
     <div

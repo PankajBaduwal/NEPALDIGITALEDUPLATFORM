@@ -1,6 +1,6 @@
 /**
- * Chapter 17 · Subtraction of numbers up to two digits (दुई अङ्कसम्मका सङ्ख्याको घटाउ)
- * Sim 1: Break and Take Away (फुकाऔँ र घटाऔँ) — Pure 2D Edition
+ * Chapter 17 · Subtraction of numbers up to two digits
+ * Sim 1: Break and Take Away — Pure 2D Edition
  * 100% 2D SVG / CSS Animations – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -40,7 +40,7 @@ export const BreakAndTakeAway: React.FC<Props> = ({ onBackToLibrary }) => {
     kit.tap();
     setIsBroken(true);
     kit.good(
-      '१ दशक फुकाएर १० एकाइ बनाइयो! अब सजिलै घटाउन सकिन्छ।',
+      '1 दशक फुकाएर 10 एकाइ बनाइयो! अब सजिलै घटाउन सकिन्छ।',
       'Unbundled 1 ten into 10 ones! Now we can subtract easily.'
     );
   };
@@ -67,32 +67,32 @@ export const BreakAndTakeAway: React.FC<Props> = ({ onBackToLibrary }) => {
   const quizQuestions: QuizQuestion[] = useMemo(
     () => [
       {
-        np: '३२ − १५ गर्दा कति बाँकी रहन्छ?',
+        np: '32 − 15 गर्दा कति बाँकी रहन्छ?',
         en: 'What is 32 − 15?',
         options: [
-          { key: '17', label: isNe ? '१७' : '17' },
-          { key: '18', label: isNe ? '१८' : '18' },
-          { key: '15', label: isNe ? '१५' : '15' },
+          { key: '17', label: isNe ? '17' : '17' },
+          { key: '18', label: isNe ? '18' : '18' },
+          { key: '15', label: isNe ? '15' : '15' },
         ],
         answer: '17',
       },
       {
-        np: '१ दशक फुकाउँदा कतिवटा एकाइ बन्छन्?',
+        np: '1 दशक फुकाउँदा कतिवटा एकाइ बन्छन्?',
         en: 'Unbundling 1 ten gives how many ones?',
         options: [
-          { key: '10', label: isNe ? '१० एकाइ' : '10 ones' },
-          { key: '5', label: isNe ? '५ एकाइ' : '5 ones' },
-          { key: '1', label: isNe ? '१ एकाइ' : '1 one' },
+          { key: '10', label: isNe ? '10 एकाइ' : '10 ones' },
+          { key: '5', label: isNe ? '5 एकाइ' : '5 ones' },
+          { key: '1', label: isNe ? '1 एकाइ' : '1 one' },
         ],
         answer: '10',
       },
       {
-        np: '४० − १३ को घटाउफल कति हुन्छ?',
+        np: '40 − 13 को घटाउफल कति हुन्छ?',
         en: 'What is 40 − 13?',
         options: [
-          { key: '27', label: isNe ? '२७' : '27' },
-          { key: '28', label: isNe ? '२८' : '28' },
-          { key: '37', label: isNe ? '३७' : '37' },
+          { key: '27', label: isNe ? '27' : '27' },
+          { key: '28', label: isNe ? '28' : '28' },
+          { key: '37', label: isNe ? '37' : '37' },
         ],
         answer: '27',
       },
@@ -144,7 +144,7 @@ export const BreakAndTakeAway: React.FC<Props> = ({ onBackToLibrary }) => {
                   boxShadow: '0 4px 10px rgba(217,119,6,0.25)',
                 }}
               >
-                🔓 {L('१ दशक फुकाऔँ (Unbundle 1 Ten to 10 Ones)', 'Unbundle 1 Ten')}
+                🔓 {L('1 दशक फुकाऔँ (Unbundle 1 Ten to 10 Ones)', 'Unbundle 1 Ten')}
               </button>
             )}
 
@@ -280,7 +280,7 @@ export const BreakAndTakeAway: React.FC<Props> = ({ onBackToLibrary }) => {
             <br />
             {initialOnes < take % 10 && (
               <span style={{ color: '#D97706', fontWeight: 800 }}>
-                ⚠️ {L('एकाइ नपुगेकाले १ दशक फुकाइयो (+१० एकाइ)', 'Not enough ones, unbundled 1 ten')}
+                ⚠️ {L('एकाइ नपुगेकाले 1 दशक फुकाइयो (+10 एकाइ)', 'Not enough ones, unbundled 1 ten')}
                 <br />
               </span>
             )}

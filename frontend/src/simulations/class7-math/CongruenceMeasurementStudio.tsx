@@ -1,7 +1,7 @@
 /**
  * CongruenceMeasurementStudio.tsx
- * Grade 7 Mathematics – Lesson 15: CONGRUENT FIGURES (अनुरूप आकृतिहरू)
- * Simulation 2: Congruence Measurement and Challenge Studio (अनुरूपता नाप तथा चुनौती स्टुडियो)
+ * Grade 7 Mathematics – Lesson 15: CONGRUENT FIGURES
+ * Simulation 2: Congruence Measurement and Challenge Studio
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 240-244)
  */
 import React, { useState } from 'react';
@@ -12,24 +12,24 @@ import { Ruler, Check, CheckCircle2, RotateCw, Shuffle, HelpCircle } from 'lucid
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'दुई त्रिभुजहरूका संगत भुजाहरू क्रमशः ३ सेमी, ४ सेमी र ५ सेमी छन् भने तिनीहरू के हुन्छन्?',
+    np: 'दुई त्रिभुजहरूका संगत भुजाहरू क्रमशः 3 cm, 4 cm र 5 cm छन् भने तिनीहरू के हुन्छन्?',
     en: 'If the corresponding sides of two triangles are 3 cm, 4 cm, and 5 cm respectively, they are:',
     options: [
-      { key: 'A', label: 'अनुरूप (Congruent)' },
-      { key: 'B', label: 'असमान' },
-      { key: 'C', label: 'समरूप मात्र तर अनुरूप होइन' },
-      { key: 'D', label: 'कुनै सम्बन्ध छैन' },
+      { key: 'A', label: 'Congruent' },
+      { key: 'B', label: 'Unequal' },
+      { key: 'C', label: 'Similar only, not congruent' },
+      { key: 'D', label: 'No relation' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि एउटा आयतको नाप ६ सेमी × ४ सेमी र अर्को आयतको नाप ४ सेमी × ६ सेमी छ भने के ती अनुरूप हुन्?',
+    np: 'यदि एउटा आयतको नाप 6 cm × 4 cm र अर्को आयतको नाप 4 cm × 6 cm छ भने के ती अनुरूप हुन्?',
     en: 'If one rectangle is 6 cm × 4 cm and another is 4 cm × 6 cm, are they congruent?',
     options: [
-      { key: 'A', label: 'हुन् (९०° घुमाउँदा दुरुस्त खप्टिन्छन्)' },
-      { key: 'B', label: 'होइनन्' },
-      { key: 'C', label: 'क्षेत्रफल मात्र बराबर हुन्छ' },
-      { key: 'D', label: 'कहिलेकाहीँ मात्र' },
+      { key: 'A', label: 'Yes, they are (they overlap exactly when turned by 90°)' },
+      { key: 'B', label: 'No, they are not' },
+      { key: 'C', label: 'Only the areas are equal' },
+      { key: 'D', label: 'Only sometimes' },
     ],
     answer: 'A',
   },
@@ -37,10 +37,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'एउटा त्रिभुजलाई ऐनामा हेर्दा बन्ने प्रतिबिम्ब र सुरुको त्रिभुज बीचको सम्बन्ध के हुन्छ?',
     en: 'What is the relationship between a triangle and its mirror reflection?',
     options: [
-      { key: 'A', label: 'अनुरूप (Congruent - आकार र नाप बराबर)' },
-      { key: 'B', label: 'असमान' },
-      { key: 'C', label: 'आकार फरक' },
-      { key: 'D', label: 'नाप फरक' },
+      { key: 'A', label: 'Congruent (equal in shape and size)' },
+      { key: 'B', label: 'Unequal' },
+      { key: 'C', label: 'Different shape' },
+      { key: 'D', label: 'Different size' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'अनुरूपता प्रमाणित गर्न दुई आकृतिहरूको कुन-कुन कुरा बराबर हुनुपर्छ?',
     en: 'To prove congruence, which properties of two figures must match?',
     options: [
-      { key: 'A', label: 'आकार र नाप दुवै (Both Shape and Size)' },
-      { key: 'B', label: 'आकार मात्र' },
-      { key: 'C', label: 'नाप मात्र' },
-      { key: 'D', label: 'रङ्ग मात्र' },
+      { key: 'A', label: 'Both shape and size' },
+      { key: 'B', label: 'Shape only' },
+      { key: 'C', label: 'Size only' },
+      { key: 'D', label: 'Colour only' },
     ],
     answer: 'A',
   },
@@ -89,24 +89,24 @@ export const CongruenceMeasurementStudio: React.FC<{ onBackToLibrary?: () => voi
 
   const CHALLENGE_ITEMS = [
     {
-      qNp: 'चित्र १: समकोण त्रिभुज (३ सेमी, ४ सेमी, ५ सेमी) र चित्र २: समकोण त्रिभुज (४ सेमी, ३ सेमी, ५ सेमी)',
+      qNp: 'चित्र 1: समकोण त्रिभुज (3 cm, 4 cm, 5 cm) र चित्र 2: समकोण त्रिभुज (4 cm, 3 cm, 5 cm)',
       qEn: 'Fig 1: Right △ (3cm, 4cm, 5cm) & Fig 2: Right △ (4cm, 3cm, 5cm)',
       isCong: true,
-      reasonNp: 'भुजाहरूको नाप ३, ४, ५ सेमी दुरुस्त बराबर भएकाले घुमाएर खप्ट्याउँदा अनुरूप हुन्छन्।',
+      reasonNp: 'भुजाहरूको नाप 3, 4, 5 cm दुरुस्त बराबर भएकाले घुमाएर खप्ट्याउँदा अनुरूप हुन्छन्।',
       reasonEn: 'All three sides match (3, 4, 5 cm); rotating aligns them congruently.',
     },
     {
-      qNp: 'चित्र १: वृत्त (अर्धव्याप्त r = ३ सेमी) र चित्र २: वृत्त (अर्धव्याप्त r = ४ सेमी)',
+      qNp: 'चित्र 1: वृत्त (अर्धव्याप्त r = 3 cm) र चित्र 2: वृत्त (अर्धव्याप्त r = 4 cm)',
       qEn: 'Fig 1: Circle (r = 3 cm) & Fig 2: Circle (r = 4 cm)',
       isCong: false,
-      reasonNp: 'दुवै वृत्त भए पनि अर्धव्यास फरक (३ सेमी र ४ सेमी) भएकाले आकार उस्तै तर नाप फरक छ।',
+      reasonNp: 'दुवै वृत्त भए पनि अर्धव्यास फरक (3 cm र 4 cm) भएकाले आकार उस्तै तर Different size छ।',
       reasonEn: 'Both are circles (same shape), but radii differ (3 cm vs 4 cm), so not congruent.',
     },
     {
-      qNp: 'चित्र १: समबाहु त्रिभुज (भुजा ५ सेमी) र चित्र २: वर्ग (भुजा ५ सेमी)',
+      qNp: 'चित्र 1: समबाहु त्रिभुज (भुजा 5 cm) र चित्र 2: वर्ग (भुजा 5 cm)',
       qEn: 'Fig 1: Equilateral △ (side 5 cm) & Fig 2: Square (side 5 cm)',
       isCong: false,
-      reasonNp: 'भुजा ५ सेमी भए पनि एउटा त्रिभुज र अर्को वर्ग भएकाले आकार नै फरक छ।',
+      reasonNp: 'भुजा 5 cm भए पनि एउटा त्रिभुज र अर्को वर्ग भएकाले आकार नै फरक छ।',
       reasonEn: 'One is a triangle and one is a square; shapes differ completely.',
     },
   ];
@@ -143,9 +143,9 @@ export const CongruenceMeasurementStudio: React.FC<{ onBackToLibrary?: () => voi
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 justify-center bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'side_measurement', np: '१. भुजा र कोण नाप तुलना (Measure Sides)', en: '1. Measure Sides' },
-            { id: 'find_matching', np: '२. अनुरूप आकृति पत्ता लगाउने (Find Match)', en: '2. Find Matching Shape' },
-            { id: 'congruence_challenge', np: '३. अनुरूपता चुनौती (Congruence Quiz)', en: '3. Congruence Challenge' },
+            { id: 'side_measurement', np: '1. भुजा र कोण नाप तुलना (Measure Sides)', en: '1. Measure Sides' },
+            { id: 'find_matching', np: '2. अनुरूप आकृति पत्ता लगाउने (Find Match)', en: '2. Find Matching Shape' },
+            { id: 'congruence_challenge', np: '3. अनुरूपता चुनौती (Congruence Quiz)', en: '3. Congruence Challenge' },
           ].map((t) => (
             <button
               key={t.id}
@@ -179,9 +179,9 @@ export const CongruenceMeasurementStudio: React.FC<{ onBackToLibrary?: () => voi
             {/* Side selector */}
             <div className="flex gap-2 justify-center">
               {[
-                { id: 'a', labelNp: 'भुजा AB र PQ (४ सेमी)', labelEn: 'Sides AB & PQ (4 cm)' },
-                { id: 'b', labelNp: 'भुजा BC र QR (५ सेमी)', labelEn: 'Sides BC & QR (5 cm)' },
-                { id: 'c', labelNp: 'भुजा AC र PR (३ सेमी)', labelEn: 'Sides AC & PR (3 cm)' },
+                { id: 'a', labelNp: 'भुजा AB र PQ', labelEn: 'Sides AB & PQ (4 cm)' },
+                { id: 'b', labelNp: 'भुजा BC र QR', labelEn: 'Sides BC & QR (5 cm)' },
+                { id: 'c', labelNp: 'भुजा AC र PR', labelEn: 'Sides AC & PR (3 cm)' },
               ].map((s) => (
                 <button
                   key={s.id}
@@ -218,24 +218,24 @@ export const CongruenceMeasurementStudio: React.FC<{ onBackToLibrary?: () => voi
                     <>
                       <line x1="40" y1="150" x2="140" y2="150" stroke="#ef4444" strokeWidth="4" />
                       <line x1="180" y1="150" x2="280" y2="150" stroke="#ef4444" strokeWidth="4" />
-                      <text x="90" y="140" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#dc2626">४ सेमी</text>
-                      <text x="230" y="140" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#dc2626">४ सेमी</text>
+                      <text x="90" y="140" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#dc2626">4 cm</text>
+                      <text x="230" y="140" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#dc2626">4 cm</text>
                     </>
                   )}
                   {activeSide === 'b' && (
                     <>
                       <line x1="40" y1="150" x2="140" y2="70" stroke="#f59e0b" strokeWidth="4" />
                       <line x1="180" y1="150" x2="280" y2="70" stroke="#f59e0b" strokeWidth="4" />
-                      <text x="80" y="100" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#d97706">५ सेमी</text>
-                      <text x="220" y="100" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#d97706">५ सेमी</text>
+                      <text x="80" y="100" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#d97706">5 cm</text>
+                      <text x="220" y="100" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#d97706">5 cm</text>
                     </>
                   )}
                   {activeSide === 'c' && (
                     <>
                       <line x1="140" y1="150" x2="140" y2="70" stroke="#7c3aed" strokeWidth="4" />
                       <line x1="280" y1="150" x2="280" y2="70" stroke="#7c3aed" strokeWidth="4" />
-                      <text x="155" y="115" fontSize="11" fontWeight="bold" fill="#7c3aed">३ सेमी</text>
-                      <text x="295" y="115" fontSize="11" fontWeight="bold" fill="#7c3aed">३ सेमी</text>
+                      <text x="155" y="115" fontSize="11" fontWeight="bold" fill="#7c3aed">3 cm</text>
+                      <text x="295" y="115" fontSize="11" fontWeight="bold" fill="#7c3aed">3 cm</text>
                     </>
                   )}
                 </svg>
@@ -248,11 +248,11 @@ export const CongruenceMeasurementStudio: React.FC<{ onBackToLibrary?: () => voi
                     {L('तीनवटै भुजाहरूको नाप तालिका:', 'Three Corresponding Side Measures:')}
                   </div>
                   <div className="text-xs text-slate-700 space-y-1">
-                    <div>१. AB = PQ = ४ सेमी (बराबर)</div>
-                    <div>२. BC = QR = ५ सेमी (बराबर)</div>
-                    <div>३. AC = PR = ३ सेमी (बराबर)</div>
+                    <div>1. AB = PQ = 4 cm (equal)</div>
+                    <div>2. BC = QR = 5 cm (equal)</div>
+                    <div>3. AC = PR = 3 cm (equal)</div>
                     <div className="text-sm font-black text-emerald-800 pt-2 border-t border-slate-200">
-                      ✓ △ABC ≅ △PQR (अनुरूप त्रिभुज प्रमाणित भयो)
+                      ✓ △ABC ≅ △PQR
                     </div>
                   </div>
                 </div>
@@ -269,7 +269,7 @@ export const CongruenceMeasurementStudio: React.FC<{ onBackToLibrary?: () => voi
                 {L('दिइएको आकृतिसँग दुरुस्त अनुरूप हुने आकृति पत्ता लगाउनुहोस्:', 'Find the Exactly Congruent Candidate:')}
               </h3>
               <p className="text-xs text-purple-800 mt-1">
-                {L('तलका ३ वटा विकल्पहरूमध्ये कुन आकृति सन्दर्भ आकृति (Reference) सँग ठ्याक्कै खप्टिन्छ?', 'Which of the 3 candidates coincides perfectly with the reference shape?')}
+                {L('तलका 3 pcs विकल्पहरूमध्ये कुन आकृति सन्दर्भ आकृति (Reference) सँग ठ्याक्कै खप्टिन्छ?', 'Which of the 3 candidates coincides perfectly with the reference shape?')}
               </p>
             </div>
 
@@ -280,14 +280,14 @@ export const CongruenceMeasurementStudio: React.FC<{ onBackToLibrary?: () => voi
                 <svg width="100" height="90" viewBox="0 0 100 90" className="mx-auto">
                   <polygon points="20,70 80,70 80,20" fill="rgba(99, 102, 241, 0.3)" stroke="#4f46e5" strokeWidth="2.5" />
                 </svg>
-                <div className="text-[10px] text-slate-500 mt-1 font-bold">नाप: ६ × ५ सेमी</div>
+                <div className="text-[10px] text-slate-500 mt-1 font-bold">Size: 6 × 5 cm</div>
               </div>
 
               {/* Candidate 1 (Different shape: acute triangle) */}
               <button
                 onClick={() => {
                   setMatchCandidate(1);
-                  setMatchFeedback(L('गलत! यो समकोण त्रिभुज होइन (आकार फरक)।', 'Incorrect! This is an acute triangle (different shape).'));
+                  setMatchFeedback(L('गलत! यो समकोण त्रिभुज होइन (Different shape)।', 'Incorrect! This is an acute triangle (different shape).'));
                 }}
                 className={`p-4 rounded-2xl border-2 text-center transition-all ${
                   matchCandidate === 1 ? 'border-rose-500 bg-rose-50' : 'border-slate-200 bg-white hover:border-indigo-300'

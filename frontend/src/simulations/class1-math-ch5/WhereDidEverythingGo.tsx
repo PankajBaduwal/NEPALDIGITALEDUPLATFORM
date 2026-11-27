@@ -1,7 +1,7 @@
 /**
  * WhereDidEverythingGo.tsx
- * Simulation 03: Where Did Everything Go? (वस्तुहरू कहाँ गए?)
- * Class 1 Mathematics - Chapter 5: Zero (शून्य)
+ * Simulation 03: Where Did Everything Go?
+ * Class 1 Mathematics - Chapter 5: Zero
  * Nepal Digital Education Platform
  */
 
@@ -38,7 +38,7 @@ interface SceneData {
   background: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const NEP_NAMES = ['शून्य', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ'];
 const EN_NAMES = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
 
@@ -47,7 +47,7 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Navigation & Settings
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Scenes list
@@ -199,7 +199,7 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
     if (remaining === 0) {
       playTone(880, 'sine', 0.6);
       speakText(
-        `सबै ${activeScene.itemNameNp} गए! अब त्यहाँ शून्य (०) बाँकी छन्।`,
+        `सबै ${activeScene.itemNameNp} गए! अब त्यहाँ शून्य (0) बाँकी छन्।`,
         `All ${activeScene.itemNameEn} are gone! Now zero (0) remain.`
       );
     } else {
@@ -221,12 +221,12 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
       setStars(ns);
       saveProgress(ns);
       speakText(
-        'शानदार! सबै वस्तुहरू गएपछि बाँकी सङ्ख्या शून्य (०) हुन्छ।',
+        'शानदार! सबै वस्तुहरू गएपछि बाँकी सङ्ख्या शून्य (0) हुन्छ।',
         'Splendid! When all objects are gone, the remaining count is zero (0).'
       );
     } else {
       playTone(280, 'sawtooth', 0.3);
-      speakText('गलत भयो, कुनै पनि वस्तु बाँकी छैन भने शून्य (०) हुन्छ।', 'Incorrect, when no objects remain it is zero (0).');
+      speakText('गलत भयो, कुनै पनि वस्तु बाँकी छैन भने शून्य (0) हुन्छ।', 'Incorrect, when no objects remain it is zero (0).');
     }
   };
 
@@ -286,11 +286,11 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
 
           <div>
             <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
-              कक्षा १ • गणित • अध्याय ५ : शून्य (Zero)
+              Class 1 • Maths • Chapter 5 : Zero
             </div>
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
-                ? 'सिमुलेसन ०३: वस्तुहरू कहाँ गए? (Where Did Everything Go?)'
+                ? 'सिमुलेसन 03: वस्तुहरू कहाँ गए? (Where Did Everything Go?)'
                 : 'Simulation 03: Where Did Everything Go?'}
             </h1>
           </div>
@@ -317,21 +317,7 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
           </div>
 
           {/* Language Switch */}
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            style={{
-              padding: '6px 12px',
-              background: '#FFFFFF',
-              border: '1px solid #DCE5DE',
-              borderRadius: '8px',
-              color: '#26332E',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '13px',
-            }}
-          >
-            {language === 'np' ? 'नेपाली | EN' : 'EN | नेपाली'}
-          </button>
+          
 
           {/* Sound Toggle */}
           <button
@@ -508,11 +494,11 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
               }}
             >
               <span style={{ fontSize: '48px', fontWeight: 900, color: '#26332E', lineHeight: 1 }}>
-                {language === 'np' ? '०' : '0'}
+                {language === 'np' ? '0' : '0'}
               </span>
               <span style={{ fontSize: '15px', fontWeight: 800, color: '#26332E', marginTop: '6px' }}>
                 {language === 'np'
-                  ? 'सबै वस्तुहरू गए! सङ्ख्या शून्य (०) भयो!'
+                  ? 'सबै वस्तुहरू गए! सङ्ख्या शून्य (0) भयो!'
                   : 'All objects left! Count is ZERO (0)!'}
               </span>
             </div>
@@ -585,12 +571,12 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
               <div>
                 <div style={{ fontWeight: 800, color: '#26332E', fontSize: '16px' }}>
                   {language === 'np'
-                    ? 'शानदार! तपाईंले शून्य (०) को अवधारणा बुझ्नुभयो!'
+                    ? 'शानदार! तपाईंले शून्य (0) को अवधारणा बुझ्नुभयो!'
                     : 'Splendid! You understood the concept of zero (0)!'}
                 </div>
                 <div style={{ fontSize: '12px', color: '#26332E' }}>
                   {language === 'np'
-                    ? 'कुनै पनि समूहबाट सबै वस्तु हटेपछि शून्य (०) बाँकी रहन्छ।'
+                    ? 'कुनै पनि समूहबाट सबै वस्तु हटेपछि शून्य (0) बाँकी रहन्छ।'
                     : 'When all objects leave a collection, zero (0) remains.'}
                 </div>
               </div>

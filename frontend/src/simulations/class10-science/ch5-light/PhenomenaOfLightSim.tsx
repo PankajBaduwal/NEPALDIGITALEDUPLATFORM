@@ -1,19 +1,19 @@
 /**
  * PhenomenaOfLightSim.tsx
- * Ultra-High-Definition Optical Laboratory Simulation: Phenomena of Light (प्रकाशका परिघटनाहरू)
- * Class 10 Science & Technology • Chapter 5: Light (प्रकाश)
+ * Ultra-High-Definition Optical Laboratory Simulation: Phenomena of Light
+ * Class 10 Science & Technology • Chapter 5: Light
  * Nepal Curriculum Development Centre (CDC) Alignment
  *
  * Implements 9 Optical Phenomena:
- * 1. Reflection (परावर्तन)
- * 2. Refraction (अपवर्तन) - Deep-Dive with Meaning, Causes, and Glass Slab Lateral Shift
- * 3. Dispersion (वर्ण विच्छेदन) - White Light through Prism to VIBGYOR with Explicit Wavelengths
- * 4. Diffraction (विवर्तन) - Single Slit Wave Bending & Fraunhofer Envelope
- * 5. Interference (व्यतिकरण) - Young's Double Slit & Fringe Spacing
- * 6. Polarization (ध्रुवीकरण) - 3D Transverse EM Waves & Malus's Law
- * 7. Total Internal Reflection - TIR (पूर्ण आन्तरिक परावर्तन) - Critical Angle θc & Grazing Ray
- * 8. Photoelectric Effect (फोटोइलेक्ट्रिक प्रभाव) - Vacuum Phototube & Analog Microammeter
- * 9. Compton Effect (कम्प्टोन प्रभाव) - Quantum Photon-Electron Scattering & Wavelength Shift
+ * 1. Reflection
+ * 2. Refraction - Deep-Dive with Meaning, Causes, and Glass Slab Lateral Shift
+ * 3. Dispersion - White Light through Prism to VIBGYOR with Explicit Wavelengths
+ * 4. Diffraction - Single Slit Wave Bending & Fraunhofer Envelope
+ * 5. Interference - Young's Double Slit & Fringe Spacing
+ * 6. Polarization - 3D Transverse EM Waves & Malus's Law
+ * 7. Total Internal Reflection - TIR - Critical Angle θc & Grazing Ray
+ * 8. Photoelectric Effect - Vacuum Phototube & Analog Microammeter
+ * 9. Compton Effect - Quantum Photon-Electron Scattering & Wavelength Shift
  *
  * Visual Engine:
  * - Pure White Laboratory Canvas Theme (#ffffff) without background clutter (protractor removed!)
@@ -85,7 +85,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
   initialLanguage = 'en',
 }) => {
   // Global Simulation State
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -254,7 +254,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
       // 2. Render Active Phenomenon Visuals
       switch (activePhenomenon) {
         // ====================================================================
-        // 1. REFLECTION (परावर्तन)
+        // 1. REFLECTION
         // ====================================================================
         case 'reflection': {
           const mirrorY = height * 0.64;
@@ -414,7 +414,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
         }
 
         // ====================================================================
-        // 2. REFRACTION (अपवर्तन) - DEEP DIVE WITH GLASS SLAB
+        // 2. REFRACTION - DEEP DIVE WITH GLASS SLAB
         // ====================================================================
         case 'refraction': {
           if (refractionSubMode === 'meaning') {
@@ -775,7 +775,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
                 anchorY: (laserY + o1Y) / 2 - 20,
                 badgeX: 130,
                 badgeY: 55,
-                textEn: 'Incident Ray (आपतित किरण)',
+                textEn: 'Incident Ray',
                 textNe: 'आपतित किरण',
                 value: `i = ${slabAngleDeg}°`,
                 color: beamColor,
@@ -804,7 +804,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
                 anchorY: (o1Y + o2Y) / 2,
                 badgeX: width - 140,
                 badgeY: (o1Y + o2Y) / 2,
-                textEn: 'Refracted Ray (अपवर्तित किरण)',
+                textEn: 'Refracted Ray',
                 textNe: 'अपवर्तित किरण',
                 value: `r = ${slabCalc.rDeg.toFixed(1)}°`,
                 color: '#16a34a',
@@ -819,7 +819,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
                 anchorY: o2Y + 60,
                 badgeX: width - 140,
                 badgeY: height - 60,
-                textEn: 'Emergent Ray (निर्गत किरण)',
+                textEn: 'Emergent Ray',
                 textNe: 'निर्गत किरण (समानान्तर)',
                 value: `e = i = ${slabAngleDeg}°`,
                 color: '#d97706',
@@ -834,7 +834,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
                 anchorY: height - 55,
                 badgeX: 130,
                 badgeY: height - 55,
-                textEn: 'Lateral Shift (पार्श्व विस्थापन d)',
+                textEn: 'Lateral Shift',
                 textNe: 'पार्श्व विस्थापन (d)',
                 value: `${slabCalc.lateralShiftMm.toFixed(1)} mm`,
                 color: '#d97706',
@@ -846,7 +846,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
         }
 
         // ====================================================================
-        // 3. DISPERSION (वर्ण विच्छेदन) - WITH EXPLICIT WAVELENGTH LABELS
+        // 3. DISPERSION - WITH EXPLICIT WAVELENGTH LABELS
         // ====================================================================
         case 'dispersion': {
           const prismApexX = width * 0.42;
@@ -1023,7 +1023,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
               badgeX: prismApexX,
               badgeY: 45,
               textEn: 'Glass Prism (A = 60°)',
-              textNe: 'काँचको प्रिज्म (A = ६०°)',
+              textNe: 'काँचको प्रिज्म (A = 60°)',
               color: '#0284c7',
               align: 'center',
             });
@@ -1036,7 +1036,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
               badgeX: width - 160,
               badgeY: 45,
               textEn: 'VIBGYOR (400 - 700 nm)',
-              textNe: 'वर्णक्रम (४०० - ७०० nm)',
+              textNe: 'वर्णक्रम (400 - 700 nm)',
               color: '#a855f7',
               align: 'right',
             });
@@ -1045,7 +1045,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
         }
 
         // ====================================================================
-        // 4. DIFFRACTION (विवर्तन)
+        // 4. DIFFRACTION
         // ====================================================================
         case 'diffraction': {
           const slitX = width * 0.38;
@@ -1145,7 +1145,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
         }
 
         // ====================================================================
-        // 5. INTERFERENCE (व्यतिकरण) - YOUNG'S DOUBLE SLIT
+        // 5. INTERFERENCE - YOUNG'S DOUBLE SLIT
         // ====================================================================
         case 'interference': {
           const slitX = width * 0.36;
@@ -1240,7 +1240,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
         }
 
         // ====================================================================
-        // 6. POLARIZATION (ध्रुवीकरण)
+        // 6. POLARIZATION
         // ====================================================================
         case 'polarization': {
           const centerY = height * 0.5;
@@ -1339,7 +1339,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
               badgeX: pol1X,
               badgeY: 45,
               textEn: 'Polarizer (Vertical 0°)',
-              textNe: 'पोलराइजर (ठाडो ०°)',
+              textNe: 'पोलराइजर (ठाडो 0°)',
               color: '#0284c7',
               align: 'center',
             });
@@ -1362,7 +1362,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
         }
 
         // ====================================================================
-        // 7. TOTAL INTERNAL REFLECTION (पूर्ण आन्तरिक परावर्तन) - WITH CRITICAL ANGLE
+        // 7. TOTAL INTERNAL REFLECTION - WITH CRITICAL ANGLE
         // ====================================================================
         case 'tir': {
           const centerX = width * 0.5;
@@ -1499,7 +1499,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
               anchorY: 45,
               badgeX: 130,
               badgeY: 45,
-              textEn: 'Critical Angle (क्रान्तिक कोण θc)',
+              textEn: 'Critical Angle',
               textNe: 'क्रान्तिक कोण (θc)',
               value: `${critAngleDeg.toFixed(1)}° (sin θc = 1/n)`,
               color: '#f59e0b',
@@ -1522,7 +1522,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
               textNe: isTir
                 ? 'पूर्ण आन्तरिक परावर्तन (i > θc)'
                 : isCriticalState
-                ? 'क्रान्तिक अवस्था: ९०° मा बाङ्गिने'
+                ? 'क्रान्तिक अवस्था: 90° मा बाङ्गिने'
                 : 'सामान्य अपवर्तन (i < θc)',
               value: `i = ${tirIncidentAngleDeg}°`,
               color: isTir ? '#16a34a' : isCriticalState ? '#f59e0b' : '#0284c7',
@@ -1533,7 +1533,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
         }
 
         // ====================================================================
-        // 8. PHOTOELECTRIC EFFECT (फोटोइलेक्ट्रिक प्रभाव)
+        // 8. PHOTOELECTRIC EFFECT
         // ====================================================================
         case 'photoelectric': {
           const tubeX = width * 0.44;
@@ -1654,7 +1654,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
         }
 
         // ====================================================================
-        // 9. COMPTON EFFECT (कम्प्टोन प्रभाव)
+        // 9. COMPTON EFFECT
         // ====================================================================
         case 'compton': {
           const centerX = width * 0.48;
@@ -1865,15 +1865,15 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
     labelNe: string;
     icon: string;
   }[] = [
-    { key: 'reflection', labelEn: '1. Reflection', labelNe: '१. परावर्तन', icon: '🪞' },
-    { key: 'refraction', labelEn: '2. Refraction', labelNe: '२. अपवर्तन', icon: '🔍' },
-    { key: 'dispersion', labelEn: '3. Dispersion', labelNe: '३. वर्ण विच्छेदन', icon: '🌈' },
-    { key: 'diffraction', labelEn: '4. Diffraction', labelNe: '४. विवर्तन', icon: '〰️' },
-    { key: 'interference', labelEn: '5. Interference', labelNe: '५. व्यतिकरण', icon: '🌊' },
-    { key: 'polarization', labelEn: '6. Polarization', labelNe: '६. ध्रुवीकरण', icon: '🕶️' },
-    { key: 'tir', labelEn: '7. Total Internal Refl.', labelNe: '७. पूर्ण आन्तरिक परावर्तन', icon: '💎' },
-    { key: 'photoelectric', labelEn: '8. Photoelectric', labelNe: '८. फोटोइलेक्ट्रिक प्रभाव', icon: '⚡' },
-    { key: 'compton', labelEn: '9. Compton Effect', labelNe: '९. कम्प्टोन प्रभाव', icon: '💥' },
+    { key: 'reflection', labelEn: '1. Reflection', labelNe: '1. परावर्तन', icon: '🪞' },
+    { key: 'refraction', labelEn: '2. Refraction', labelNe: '2. अपवर्तन', icon: '🔍' },
+    { key: 'dispersion', labelEn: '3. Dispersion', labelNe: '3. वर्ण विच्छेदन', icon: '🌈' },
+    { key: 'diffraction', labelEn: '4. Diffraction', labelNe: '4. विवर्तन', icon: '〰️' },
+    { key: 'interference', labelEn: '5. Interference', labelNe: '5. व्यतिकरण', icon: '🌊' },
+    { key: 'polarization', labelEn: '6. Polarization', labelNe: '6. ध्रुवीकरण', icon: '🕶️' },
+    { key: 'tir', labelEn: '7. Total Internal Refl.', labelNe: '7. पूर्ण आन्तरिक परावर्तन', icon: '💎' },
+    { key: 'photoelectric', labelEn: '8. Photoelectric', labelNe: '8. फोटोइलेक्ट्रिक प्रभाव', icon: '⚡' },
+    { key: 'compton', labelEn: '9. Compton Effect', labelNe: '9. कम्प्टोन प्रभाव', icon: '💥' },
   ];
 
   return (
@@ -1984,9 +1984,9 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
             >
               <div style={{ display: 'flex', gap: 6 }}>
                 {[
-                  { key: 'meaning' as RefractionSubMode, en: '1. Meaning', ne: '१. अर्थ तथा सिद्धान्त' },
-                  { key: 'causes' as RefractionSubMode, en: '2. Causes', ne: '२. कारण तथा गति' },
-                  { key: 'glass_slab' as RefractionSubMode, en: '3. Glass Slab Experiment', ne: '३. काँचको पाता प्रयोग' },
+                  { key: 'meaning' as RefractionSubMode, en: '1. Meaning', ne: '1. अर्थ तथा सिद्धान्त' },
+                  { key: 'causes' as RefractionSubMode, en: '2. Causes', ne: '2. कारण तथा गति' },
+                  { key: 'glass_slab' as RefractionSubMode, en: '3. Glass Slab Experiment', ne: '3. काँचको पाता प्रयोग' },
                 ].map((sub) => {
                   const isSel = refractionSubMode === sub.key;
                   return (
@@ -2418,7 +2418,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
 
               <div style={{ fontSize: 10, color: '#64748b', marginTop: 4 }}>
                 {lang === 'ne'
-                  ? 'कम तरङ्ग लम्बाइ (बैजनी ४०० nm) भएको प्रकाश काँचमा बढी बाङ्गिन्छ, र लामो तरङ्ग लम्बाइ (रातो ७०० nm) कम बाङ्गिन्छ।'
+                  ? 'कम तरङ्ग लम्बाइ (बैजनी 400 nm) भएको प्रकाश काँचमा बढी बाङ्गिन्छ, र लामो तरङ्ग लम्बाइ (रातो 700 nm) कम बाङ्गिन्छ।'
                   : 'Shorter wavelength (Violet 400 nm) bends most in glass, while longer wavelength (Red 700 nm) bends least.'}
               </div>
             </div>
@@ -2555,7 +2555,7 @@ export const PhenomenaOfLightSim: React.FC<BaseSimulationProps> = ({
                       : `Total Internal Reflection ACTIVE! (i = ${tirIncidentAngleDeg}° > θc = ${crit.toFixed(1)}°)`
                     : isCriticalState
                     ? lang === 'ne'
-                      ? `क्रान्तिक अवस्था: किरण ९०° मा सतह छोएर जान्छ (Grazing Ray)!`
+                      ? `क्रान्तिक अवस्था: किरण 90° मा सतह छोएर जान्छ (Grazing Ray)!`
                       : `CRITICAL STATE: Ray grazes interface at 90°!`
                     : lang === 'ne'
                       ? `सामान्य अपवर्तन (i = ${tirIncidentAngleDeg}° < θc = ${crit.toFixed(1)}°)`

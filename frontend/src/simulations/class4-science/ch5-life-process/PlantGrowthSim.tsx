@@ -1,12 +1,12 @@
 /**
  * PlantGrowthSim.tsx
  * Master Interactive 2D Botanical Laboratory: Plant Growth & Blooming Marigold (Sayapatri)
- * (बिरुवाको वृद्धि तथा सयपत्री फूल फुल्ने प्रक्रिया - २डी अन्तरक्रियात्मक प्रयोगशाला)
- * Grade 4 Science • Chapter 5: Life Process (जीवन प्रक्रिया)
+ * (बिरुवाको वृद्धि तथा सयपत्री फूल फुल्ने प्रक्रिया - 2डी अन्तरक्रियात्मक प्रयोगशाला)
+ * Grade 4 Science • Chapter 5: Life Process
  *
  * 100% Native 2D Canvas & Vector Graphics (Zero WebGL/3D Dependencies)
  * - Ultra-Rich Natural Colors: Terracotta garden pot, compost-rich black soil, lush green stems,
- *   radiant golden Marigold / Sayapatri (सयपत्री) petals, glowing sunlight corona, and falling raindrops.
+ *   radiant golden Marigold / Sayapatri petals, glowing sunlight corona, and falling raindrops.
  * - Continuous Organic Growth: Seedling (0%) -> Vegetative Foliage (40%) -> Budding (70%) -> Full Golden Blossom (100%).
  * - Interactive Lab Controls: Sunlight Slider (0-100%), Moisture Slider (0-100%), Fertilizer Toggle,
  *   Watering Can button (animates water stream and soil saturation), and Growth Score calculation.
@@ -32,7 +32,7 @@ export const PlantGrowthSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -445,14 +445,14 @@ export const PlantGrowthSim: React.FC<BaseSimulationProps> = ({
     {
       qEn: 'Which vascular tissue transports water and dissolved minerals from the roots up to the leaves?',
       qNe: 'जराले सोसेको पानी र खनिज मल पातसम्म पुर्याउने नलीलाई के भनिन्छ?',
-      optionsEn: ['Xylem (जाइलेम)', 'Phloem (फ्लोएम)', 'Stomata (स्टोमाटा)', 'Epidermis (छाला)'],
+      optionsEn: ['Xylem', 'Phloem', 'Stomata', 'Epidermis'],
       optionsNe: ['जाइलेम (Xylem)', 'फ्लोएम (Phloem)', 'स्टोमाटा (Stomata)', 'इपिडर्मिस (Epidermis)'],
       correct: 0,
       expEn: 'Xylem vessels carry water upwards from roots; Phloem transports synthesized sugar downwards to roots and fruits.',
       expNe: 'जाइलेमले जराबाट पानी माथि लैजान्छ र फ्लोएमले बनेको खाना बिरुवाभरि बाँड्छ।',
     },
     {
-      qEn: 'Why do marigold flowers (सयपत्री) develop bright golden-orange petals?',
+      qEn: 'Why do marigold flowers develop bright golden-orange petals?',
       qNe: 'सयपत्री फूलमा चम्किला पहेँला र सुन्तला रङ्गका दलहरू (Petals) किन हुन्छन्?',
       optionsEn: [
         'To attract pollinating bees and butterflies with vivid visual cues',
@@ -575,7 +575,7 @@ export const PlantGrowthSim: React.FC<BaseSimulationProps> = ({
               }}
             >
               <Droplets size={16} />
-              {lang === 'en' ? 'Water Pot (पानी हाल)' : 'पानी हाल्नुहोस्'}
+              {lang === 'en' ? 'Water Pot' : 'पानी हाल्नुहोस्'}
             </button>
           </div>
 
@@ -643,7 +643,7 @@ export const PlantGrowthSim: React.FC<BaseSimulationProps> = ({
                   <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>
                     {growthPercent >= 80
                       ? lang === 'en'
-                        ? 'Golden Bloom (सयपत्री फूल फुल्दै)'
+                        ? 'Golden Bloom'
                         : 'सुनौलो सयपत्री फूल'
                       : growthPercent >= 45
                       ? lang === 'en'
@@ -733,7 +733,7 @@ export const PlantGrowthSim: React.FC<BaseSimulationProps> = ({
             </div>
             <div style={{ fontSize: '11px', color: '#475569', marginTop: '6px', lineHeight: 1.5 }}>
               {lang === 'en'
-                ? 'Marigold (Tagetes erecta / सयपत्री) requires abundant warm sunlight, moist well-drained soil, and organic compost to bloom vigorously.'
+                ? 'Marigold requires abundant warm sunlight, moist well-drained soil, and organic compost to bloom vigorously.'
                 : 'सयपत्री फूल राम्रोसँग फुल्न प्रशस्त घाम, चिसो माटो र कम्पोस्ट मलको आवश्यकता पर्दछ।'}
             </div>
           </div>
@@ -754,7 +754,7 @@ export const PlantGrowthSim: React.FC<BaseSimulationProps> = ({
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#475569' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <Sun size={13} color="#facc15" />
-                  {lang === 'en' ? 'Sunlight (घामको प्रकाश)' : 'घामको प्रकाश'}
+                  {lang === 'en' ? 'Sunlight' : 'घामको प्रकाश'}
                 </span>
                 <strong style={{ color: '#facc15' }}>{sunlight}%</strong>
               </div>
@@ -772,7 +772,7 @@ export const PlantGrowthSim: React.FC<BaseSimulationProps> = ({
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#475569' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <Droplets size={13} color="#38bdf8" />
-                  {lang === 'en' ? 'Moisture (माटोको ओस)' : 'माटोको ओस'}
+                  {lang === 'en' ? 'Moisture' : 'माटोको ओस'}
                 </span>
                 <strong style={{ color: '#38bdf8' }}>{moisture}%</strong>
               </div>
@@ -788,7 +788,7 @@ export const PlantGrowthSim: React.FC<BaseSimulationProps> = ({
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '4px' }}>
               <span style={{ fontSize: '11px', color: '#475569' }}>
-                {lang === 'en' ? 'Organic Fertilizer (कम्पोस्ट मल)' : 'कम्पोस्ट मल'}
+                {lang === 'en' ? 'Organic Fertilizer' : 'कम्पोस्ट मल'}
               </span>
               <button
                 onClick={() => {

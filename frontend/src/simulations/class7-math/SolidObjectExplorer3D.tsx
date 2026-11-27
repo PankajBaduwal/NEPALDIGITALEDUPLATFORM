@@ -1,7 +1,7 @@
 /**
  * SolidObjectExplorer3D.tsx
- * Grade 7 Mathematics – Lesson 16: SOLID OBJECTS (ठोस वस्तुहरू)
- * Simulation 1: 3D Solid Object Explorer (३D ठोस वस्तु अन्वेषक)
+ * Grade 7 Mathematics – Lesson 16: SOLID OBJECTS
+ * Simulation 1: 3D Solid Object Explorer
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 245-250)
  */
 import React, { useEffect, useRef, useState } from 'react';
@@ -13,35 +13,35 @@ import { Box, Layers, Eye, RotateCw, Check, Sparkles, Orbit } from 'lucide-react
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'चतुष्फलक (Tetrahedron) मा कतिवटा समबाहु त्रिकोणीय पृष्ठहरू (Faces) हुन्छन्?',
+    np: 'Tetrahedron (Tetrahedron) मा कतिpcs समबाहु त्रिकोणीय पृष्ठहरू (Faces) हुन्छन्?',
     en: 'How many equilateral triangular faces does a tetrahedron have?',
     options: [
-      { key: 'A', label: '४ वटा (Four faces)' },
-      { key: 'B', label: '६ वटा' },
-      { key: 'C', label: '८ वटा' },
-      { key: 'D', label: '१२ वटा' },
+      { key: 'A', label: '4 faces' },
+      { key: 'B', label: '6 pcs' },
+      { key: 'C', label: '8 pcs' },
+      { key: 'D', label: '12 pcs' },
     ],
     answer: 'A',
   },
   {
-    np: 'अष्टफलक (Octahedron) मा कतिवटा किनाराहरू (Edges) हुन्छन्?',
+    np: 'अष्टफलक (Octahedron) मा कतिpcs किनाराहरू (Edges) हुन्छन्?',
     en: 'How many edges does an octahedron have?',
     options: [
-      { key: 'A', label: '१२ वटा (Twelve edges)' },
-      { key: 'B', label: '६ वटा' },
-      { key: 'C', label: '८ वटा' },
-      { key: 'D', label: '४ वटा' },
+      { key: 'A', label: '12 pcs (Twelve edges)' },
+      { key: 'B', label: '6 pcs' },
+      { key: 'C', label: '8 pcs' },
+      { key: 'D', label: '4 pcs' },
     ],
     answer: 'A',
   },
   {
-    np: 'ठोस वस्तुको दुईवटा पृष्ठहरू जहाँ आपसमा जोडिन्छन्, त्यस रेखालाई के भनिन्छ?',
+    np: 'ठोस वस्तुको दुईpcs पृष्ठहरू जहाँ आपसमा जोडिन्छन्, त्यस रेखालाई के भनिन्छ?',
     en: 'The line segment where two faces of a solid meet is called:',
     options: [
-      { key: 'A', label: 'किनारा (Edge)' },
-      { key: 'B', label: 'शीर्षबिन्दु (Vertex)' },
-      { key: 'C', label: 'व्यास' },
-      { key: 'D', label: 'आधार' },
+      { key: 'A', label: 'Edge' },
+      { key: 'B', label: 'Vertex' },
+      { key: 'C', label: 'Diameter' },
+      { key: 'D', label: 'Base' },
     ],
     answer: 'A',
   },
@@ -49,10 +49,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'सलाईको बाकस वा इँटा कुन प्रकारको ठोस वस्तुको वास्तविक उदाहरण हो?',
     en: 'A matchbox or brick is a real-life example of which solid object?',
     options: [
-      { key: 'A', label: 'षट्मुख / घनाकार (Cuboid / Cube)' },
-      { key: 'B', label: 'शङ्कु' },
-      { key: 'C', label: 'बेलना' },
-      { key: 'D', label: 'चतुष्फलक' },
+      { key: 'A', label: 'Cuboid / cube' },
+      { key: 'B', label: 'Cone' },
+      { key: 'C', label: 'Cylinder' },
+      { key: 'D', label: 'Tetrahedron' },
     ],
     answer: 'A',
   },
@@ -75,14 +75,14 @@ interface SolidMeta {
 const SOLIDS_DATA: Record<SolidType, SolidMeta> = {
   tetrahedron: {
     id: 'tetrahedron',
-    nameNp: 'चतुष्फलक (Tetrahedron)',
+    nameNp: 'Tetrahedron (Tetrahedron)',
     nameEn: 'Tetrahedron',
     faces: 4,
     edges: 6,
     vertices: 4,
-    faceShapeNp: 'समबाहु त्रिभुज (४ वटा)',
+    faceShapeNp: 'समबाहु त्रिभुज (4 pcs)',
     faceShapeEn: 'Equilateral Triangles (4)',
-    descNp: '४ वटा समबाहु त्रिकोणीय पृष्ठ, ६ वटा किनारा र ४ वटा शीर्षबिन्दु भएको नियमित ठोस।',
+    descNp: 'A regular solid with 4 equilateral triangular faces, 6 edges and 4 vertices.',
   },
   octahedron: {
     id: 'octahedron',
@@ -91,9 +91,9 @@ const SOLIDS_DATA: Record<SolidType, SolidMeta> = {
     faces: 8,
     edges: 12,
     vertices: 6,
-    faceShapeNp: 'समबाहु त्रिभुज (८ वटा)',
+    faceShapeNp: 'समबाहु त्रिभुज (8 pcs)',
     faceShapeEn: 'Equilateral Triangles (8)',
-    descNp: '८ वटा समबाहु त्रिकोणीय पृष्ठ, १२ वटा किनारा र ६ वटा शीर्षबिन्दु भएको नियमित ठोस।',
+    descNp: 'A regular solid with 8 equilateral triangular faces, 12 edges and 6 vertices.',
   },
   cube: {
     id: 'cube',
@@ -102,31 +102,31 @@ const SOLIDS_DATA: Record<SolidType, SolidMeta> = {
     faces: 6,
     edges: 12,
     vertices: 8,
-    faceShapeNp: 'वर्ग (६ वटा)',
+    faceShapeNp: 'वर्ग (6 pcs)',
     faceShapeEn: 'Squares (6)',
-    descNp: '६ वटा वर्गाकार पृष्ठ, १२ वटा किनारा र ८ वटा शीर्षबिन्दु भएको ठोस।',
+    descNp: 'A solid with 6 square faces, 12 edges and 8 vertices.',
   },
   cone: {
     id: 'cone',
-    nameNp: 'शङ्कु (Cone)',
+    nameNp: 'Cone (Cone)',
     nameEn: 'Cone',
     faces: 2, // 1 circular base + 1 curved
     edges: 1, // circular edge
     vertices: 1,
-    faceShapeNp: '१ वृत्ताकार आधार + १ वक्र सतह',
+    faceShapeNp: '1 वृत्ताकार Base + 1 वक्र सतह',
     faceShapeEn: '1 Circular Base + 1 Curved Surface',
-    descNp: '१ वृत्ताकार आधार, १ वक्र सतह र १ शीर्षबिन्दु भएको ठोस।',
+    descNp: 'A solid with 1 circular base, 1 curved surface and 1 vertex.',
   },
   cylinder: {
     id: 'cylinder',
-    nameNp: 'बेलना (Cylinder)',
+    nameNp: 'Cylinder (Cylinder)',
     nameEn: 'Cylinder',
     faces: 3, // 2 circular bases + 1 curved
     edges: 2, // 2 circular edges
     vertices: 0,
-    faceShapeNp: '२ समानान्तर वृत्ताकार आधार + १ वक्र सतह',
+    faceShapeNp: '2 समानान्तर वृत्ताकार Base + 1 वक्र सतह',
     faceShapeEn: '2 Parallel Circular Bases + 1 Curved Surface',
-    descNp: '२ समानान्तर वृत्ताकार आधार, १ वक्र सतह र ० शीर्षबिन्दु भएको ठोस।',
+    descNp: 'A solid with 2 parallel circular bases, 1 curved surface and 0 vertices.',
   },
 };
 
@@ -137,7 +137,7 @@ export const SolidObjectExplorer3D: React.FC<{ onBackToLibrary?: () => void; onB
   const kit = useSimKit({
     code: 'SIM-MATH-G7-L16-01',
     chapter: 16,
-    titleNp: '३D ठोस वस्तु अन्वेषक (3D Solid Explorer)',
+    titleNp: '3D ठोस वस्तु अन्वेषक (3D Solid Explorer)',
     titleEn: '3D Solid Object Explorer',
   });
   const isNe = kit.lang === 'ne';
@@ -271,7 +271,7 @@ export const SolidObjectExplorer3D: React.FC<{ onBackToLibrary?: () => void; onB
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! ठोस वस्तुहरू (Solid Objects) का पृष्ठ (Faces), किनारा (Edges) र शीर्षबिन्दु (Vertices) ३D मा प्रत्यक्ष हेरौँ र नापौँ!',
+        'नमस्ते! ठोस वस्तुहरू (Solid Objects) का पृष्ठ (Faces), किनारा (Edges) र शीर्षबिन्दु (Vertices) 3D मा प्रत्यक्ष हेरौँ र नापौँ!',
         'Hello! Explore 3D solid objects: count faces, edges, and vertices interactively with real 3D geometry!'
       )}
     >
@@ -294,7 +294,7 @@ export const SolidObjectExplorer3D: React.FC<{ onBackToLibrary?: () => void; onB
                 }`}
               >
                 <div>{isNe ? item.nameNp.split(' ')[0] : item.nameEn}</div>
-                <div className="text-[10px] opacity-80 mt-0.5">({item.faces} पृष्ठ)</div>
+                <div className="text-[10px] opacity-80 mt-0.5">({item.faces} face)</div>
               </button>
             );
           })}
@@ -312,13 +312,13 @@ export const SolidObjectExplorer3D: React.FC<{ onBackToLibrary?: () => void; onB
                 </span>
                 {isSkeletonMode && (
                   <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-amber-500/80 text-white backdrop-blur-md">
-                    कंकाल मोड (Skeleton)
+                    Skeleton mode
                   </span>
                 )}
               </div>
               <div className="text-[11px] text-slate-400 mt-2 flex items-center gap-1">
                 <Orbit className="w-3.5 h-3.5 text-indigo-400" />
-                {L('३D वस्तु स्वचालित घुमिरहेको छ', '3D model auto-rotating')}
+                {L('3D वस्तु स्वचालित घुमिरहेको छ', '3D model auto-rotating')}
               </div>
             </div>
 

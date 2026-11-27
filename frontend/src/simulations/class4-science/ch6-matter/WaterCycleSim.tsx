@@ -1,16 +1,16 @@
 /**
  * WaterCycleSim.tsx
- * Simulation 23: 2D Water Cycle Panoramic Himalayan Landscape (जलचक्र - हिमाली दृश्य)
- * Grade 4 Science • Chapter 6: Matter (पदार्थ)
+ * Simulation 23: 2D Water Cycle Panoramic Himalayan Landscape
+ * Grade 4 Science • Chapter 6: Matter
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
  * - Panoramic Nepali topography: Snow-capped Himalayan summits, terraced hills, pine forest, and mountain lake.
  * - Continuous 4-stage hydrological cycle:
- *   1. Evaporation (वाष्पीकरण): Rising vapor particles from lake and transpiration from forest trees
- *   2. Condensation (सङ्घनन): Water vapor cools in high altitude to form puffy white/grey storm clouds
- *   3. Precipitation (वर्षा तथा हिमपात): Rain plunging onto hills and snow replenishing high mountain glaciers
- *   4. Collection & Surface Runoff (संकलन तथा नदी प्रवाह): Meltwater streams and rivers flowing downhill back into the lake
+ *   1. Evaporation: Rising vapor particles from lake and transpiration from forest trees
+ *   2. Condensation: Water vapor cools in high altitude to form puffy white/grey storm clouds
+ *   3. Precipitation: Rain plunging onto hills and snow replenishing high mountain glaciers
+ *   4. Collection & Surface Runoff: Meltwater streams and rivers flowing downhill back into the lake
  * - Interactive stage focus buttons (All, Evaporation, Condensation, Precipitation, Collection)
  * - Play/Pause controls, weather sliders, bilingual EN/NE, and mastery quiz.
  */
@@ -42,7 +42,7 @@ export const WaterCycleSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -470,7 +470,7 @@ export const WaterCycleSim: React.FC<BaseSimulationProps> = ({
       ctx,
       710,
       360,
-      currentLang === 'en' ? '1. Evaporation (वाष्पीकरण)' : '१. वाष्पीकरण (Evaporation)',
+      currentLang === 'en' ? '1. Evaporation' : '1. वाष्पीकरण (Evaporation)',
       stg === 'evaporation' || stg === 'all',
       '#facc15'
     );
@@ -480,7 +480,7 @@ export const WaterCycleSim: React.FC<BaseSimulationProps> = ({
       ctx,
       500,
       80,
-      currentLang === 'en' ? '2. Condensation (सङ्घनन)' : '२. सङ्घनन (Condensation)',
+      currentLang === 'en' ? '2. Condensation' : '2. सङ्घनन (Condensation)',
       stg === 'condensation' || stg === 'all',
       '#38bdf8'
     );
@@ -490,7 +490,7 @@ export const WaterCycleSim: React.FC<BaseSimulationProps> = ({
       ctx,
       270,
       220,
-      currentLang === 'en' ? '3. Precipitation (वर्षा/हिमपात)' : '३. वर्षा र हिमपात (Precipitation)',
+      currentLang === 'en' ? '3. Precipitation' : '3. वर्षा र हिमपात (Precipitation)',
       stg === 'precipitation' || stg === 'all',
       '#60a5fa'
     );
@@ -500,7 +500,7 @@ export const WaterCycleSim: React.FC<BaseSimulationProps> = ({
       ctx,
       380,
       480,
-      currentLang === 'en' ? '4. Collection (संकलन र नदी)' : '४. जल संकलन र नदी (Collection)',
+      currentLang === 'en' ? '4. Collection' : '4. जल संकलन र नदी (Collection)',
       stg === 'collection' || stg === 'all',
       '#4ade80'
     );
@@ -550,7 +550,7 @@ export const WaterCycleSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 6: Matter'
-          : 'कक्षा ४ विज्ञान • एकाइ ६: पदार्थ'
+          : 'कक्षा 4 विज्ञान • एकाइ 6: पदार्थ'
       }
       currentStage={stage}
       onStageChange={setStage}
@@ -859,7 +859,7 @@ export const WaterCycleSim: React.FC<BaseSimulationProps> = ({
                   cursor: 'pointer',
                 }}
               >
-                {lang === 'en' ? 'Wind (हावा)' : 'हावा'}
+                {lang === 'en' ? 'Wind' : 'हावा'}
               </button>
 
               <button
@@ -875,7 +875,7 @@ export const WaterCycleSim: React.FC<BaseSimulationProps> = ({
                   cursor: 'pointer',
                 }}
               >
-                {lang === 'en' ? 'Sun (सूर्य)' : 'सूर्य'}
+                {lang === 'en' ? 'Sun' : 'सूर्य'}
               </button>
             </div>
 

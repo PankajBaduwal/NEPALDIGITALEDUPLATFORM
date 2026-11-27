@@ -98,30 +98,30 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
   const quizQuestions = [
     {
       qEn: 'If the central angle ∠AOB standing on arc AB is 110°, what is the measure of the inscribed angle ∠ACB on the same arc?',
-      qNp: 'यदि चाप AB मा बनेको केन्द्रीय कोण ∠AOB = ११०° भए सोही चापमा बनेको परिधि कोण ∠ACB को मान कति हुन्छ?',
+      qNp: 'यदि चाप AB मा बनेको केन्द्रीय कोण ∠AOB = 110° भए सोही चापमा बनेको परिधि कोण ∠ACB को मान कति हुन्छ?',
       options: ['55°', '110°', '220°', '70°'],
-      optionsNp: ['५५°', '११०°', '२२०°', '७०°'],
+      optionsNp: ['55°', '110°', '220°', '70°'],
       correct: 0, // 110 / 2 = 55
       hintEn: 'Theorem: Central angle is twice the inscribed angle standing on the same arc: ∠ACB = 1/2 × ∠AOB = 1/2 × 110° = 55°.',
-      hintNp: 'साध्य अनुसार: एउटै चापमा आधारित परिधि कोण केन्द्रीय कोणको आधा हुन्छ: ∠ACB = १/२ × ११०° = ५५°।',
+      hintNp: 'साध्य अनुसार: एउटै चापमा आधारित परिधि कोण केन्द्रीय कोणको आधा हुन्छ: ∠ACB = 1/2 × 110° = 55°।',
     },
     {
       qEn: 'In a circle with diameter AB, C is any point on the circumference. What is the value of ∠ACB?',
       qNp: 'व्यास AB भएको वृत्तमा C परिधिको कुनै बिन्दु हो। कोण ∠ACB को मान कति हुन्छ?',
       options: ['90° (Right angle)', '60°', '180°', '45°'],
-      optionsNp: ['९०° (एक समकोण)', '६०°', '१८०°', '४५°'],
+      optionsNp: ['90° (one right angle)', '60°', '180°', '45°'],
       correct: 0,
       hintEn: 'Theorem: Angle in a semicircle is a right angle (90°).',
-      hintNp: 'साध्य: अर्धवृत्तमा बनेको परिधिको कोण सधैँ एक समकोण (९०°) हुन्छ।',
+      hintNp: 'साध्य: अर्धवृत्तमा बनेको परिधिको कोण सधैँ एक समकोण (90°) हुन्छ।',
     },
     {
       qEn: 'In a cyclic quadrilateral ABCD, if ∠ABC = 75°, what is the measure of the opposite angle ∠ADC?',
-      qNp: 'चक्रीय चतुर्भुज ABCD मा यदि ∠ABC = ७५° भए यसको सम्मुख कोण ∠ADC को मान कति हुन्छ?',
+      qNp: 'चक्रीय चतुर्भुज ABCD मा यदि ∠ABC = 75° भए यसको सम्मुख कोण ∠ADC को मान कति हुन्छ?',
       options: ['105°', '75°', '180°', '115°'],
-      optionsNp: ['१०५°', '७५°', '१८०°', '११५°'],
+      optionsNp: ['105°', '75°', '180°', '115°'],
       correct: 0, // 180 - 75 = 105
       hintEn: 'Theorem: Opposite angles of a cyclic quadrilateral are supplementary (sum = 180°): ∠ADC = 180° - 75° = 105°.',
-      hintNp: 'साध्य: चक्रीय चतुर्भुजका सम्मुख कोणहरूको योगफल १८०° (परिपूरक) हुन्छ: ∠ADC = १८०° - ७५° = १०५°।',
+      hintNp: 'साध्य: चक्रीय चतुर्भुजका सम्मुख कोणहरूको योगफल 180° (परिपूरक) हुन्छ: ∠ADC = 180° - 75° = 105°।',
     },
     {
       qEn: 'If two inscribed angles ∠ACB and ∠ADB stand on the same chord AB in the same segment, what is their relationship?',
@@ -133,10 +133,10 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
         '∠ACB + ∠ADB = 90°',
       ],
       optionsNp: [
-        '∠ACB = ∠ADB (बराबर)',
-        '∠ACB + ∠ADB = १८०°',
-        '∠ACB = २ × ∠ADB',
-        '∠ACB + ∠ADB = ९०°',
+        '∠ACB = ∠ADB',
+        '∠ACB + ∠ADB = 180°',
+        '∠ACB = 2 × ∠ADB',
+        '∠ACB + ∠ADB = 90°',
       ],
       correct: 0,
       hintEn: 'Theorem: Inscribed angles standing on the same arc/segment are equal.',
@@ -170,7 +170,7 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ १२: वृत्त (Circle) साध्य प्रयोगशालामा स्वागत छ! यहाँ केन्द्रीय कोण, परिधि कोण, अर्धवृत्तको समकोण, र चक्रीय चतुर्भुजका साध्यहरू परिधिका बिन्दुहरू सारेर प्रत्यक्ष जाँच्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 12: वृत्त (Circle) साध्य प्रयोगशालामा स्वागत छ! यहाँ केन्द्रीय कोण, परिधि कोण, अर्धवृत्तको समकोण, र चक्रीय चतुर्भुजका साध्यहरू परिधिका बिन्दुहरू सारेर प्रत्यक्ष जाँच्नुहोस्!',
         'Welcome to Grade 10 Unit 12: Circle Theorem Explorer! Drag points along the circumference, investigate central vs. inscribed angles, verify right angles in semicircles, and master cyclic quadrilateral theorems!'
       )}
     >
@@ -178,10 +178,10 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 border-b pb-2">
           {[
-            { id: 'centralInscribed', labelNp: 'क) केन्द्रीय कोण र परिधि कोण (२:१)', labelEn: 'A) Central & Inscribed Angle' },
-            { id: 'semicircle', labelNp: 'ख) अर्धवृत्तको कोण (९०°)', labelEn: 'B) Angle in Semicircle (90°)' },
+            { id: 'centralInscribed', labelNp: 'क) केन्द्रीय कोण र परिधि कोण (2:1)', labelEn: 'A) Central & Inscribed Angle' },
+            { id: 'semicircle', labelNp: 'ख) अर्धवृत्तको कोण (90°)', labelEn: 'B) Angle in Semicircle (90°)' },
             { id: 'sameSegment', labelNp: 'ग) एउटै वृत्तखण्डका कोणहरू (बराबर)', labelEn: 'C) Angles in Same Segment' },
-            { id: 'cyclicQuad', labelNp: 'घ) चक्रीय चतुर्भुज (१८०°)', labelEn: 'D) Cyclic Quadrilateral' },
+            { id: 'cyclicQuad', labelNp: 'घ) चक्रीय चतुर्भुज (180°)', labelEn: 'D) Cyclic Quadrilateral' },
             { id: 'challenge', labelNp: 'ङ) अभ्यास चुनौती (Quiz)', labelEn: 'E) Practice Challenge' },
           ].map((tab) => (
             <button
@@ -208,7 +208,7 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
             <div className="md:col-span-7 bg-[#142D4E] p-4 rounded-2xl flex flex-col items-center justify-between text-white shadow-md">
               <div className="w-full flex justify-between text-xs font-bold text-slate-300 mb-2">
-                <span>{L('साध्य: केन्द्रीय कोण = २ × परिधि कोण', 'Theorem: Central Angle = 2 × Inscribed Angle')}</span>
+                <span>{L('साध्य: केन्द्रीय कोण = 2 × परिधि कोण', 'Theorem: Central Angle = 2 × Inscribed Angle')}</span>
                 <span className="text-amber-300 font-mono">
                   ∠AOB = 2 · ∠ACB
                 </span>
@@ -261,8 +261,8 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
               </div>
 
               <div className="w-full flex justify-between text-xs text-slate-300 mt-2">
-                <span>केन्द्रीय कोण ∠AOB: <strong className="text-teal-300">{fmt(centralAngleDeg)}°</strong></span>
-                <span>परिधि कोण ∠ACB: <strong className="text-amber-300">{fmt(inscribedAngleDeg)}°</strong> (ठिक आधा)</span>
+                <span>Central angle ∠AOB: <strong className="text-teal-300">{fmt(centralAngleDeg)}°</strong></span>
+                <span>Angle at the circumference ∠ACB: <strong className="text-amber-300">{fmt(inscribedAngleDeg)}°</strong> (exactly half)</span>
               </div>
             </div>
 
@@ -275,7 +275,7 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
 
                 <div>
                   <div className="flex justify-between text-xs font-semibold text-slate-700">
-                    <span>{L('केन्द्रीय कोण ∠AOB (चाप AB):', 'Central Angle ∠AOB (Arc AB):')}</span>
+                    <span>{L('Central angle ∠AOB:', 'Central Angle ∠AOB (Arc AB):')}</span>
                     <span className="text-teal-600 font-bold font-mono">{fmt(centralAngleDeg)}°</span>
                   </div>
                   <input
@@ -315,7 +315,7 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
                 </span>
 
                 <div className="p-3 bg-white rounded-xl border text-xs font-mono space-y-1">
-                  <div>∠AOB = २ × ∠ACB  ⟹  {fmt(centralAngleDeg)}° = २ × {fmt(inscribedAngleDeg)}°</div>
+                  <div>∠AOB = 2 × ∠ACB  ⟹  {fmt(centralAngleDeg)}° = 2 × {fmt(inscribedAngleDeg)}°</div>
                   <div>∠ACB = ½ × ∠AOB  ⟹  {fmt(inscribedAngleDeg)}° = ½ × {fmt(centralAngleDeg)}°</div>
                 </div>
 
@@ -386,14 +386,14 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
 
                   {/* Right Angle indicator at C */}
                   <text x={ptSemiC.x} y={ptSemiC.y + 18} textAnchor="middle" fill="#FDE68A" fontSize="11" fontWeight="bold">
-                    ∠ACB = ९०°
+                    ∠ACB = 90°
                   </text>
                 </svg>
               </div>
 
               <div className="w-full flex justify-between text-xs text-slate-300 mt-2">
-                <span>व्यास AB = २ × R</span>
-                <span>केन्द्रीय कोण ∠AOB = १८०° ⟹ परिधि कोण = ९०°</span>
+                <span>Diameter AB = 2 × R</span>
+                <span>Central angle ∠AOB = 180° ⟹ angle at the circumference = 90°</span>
               </div>
             </div>
 
@@ -427,12 +427,12 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
                 </span>
 
                 <div className="text-xs text-emerald-900 leading-relaxed font-sans space-y-1.5">
-                  <div>१) व्यास AB वृत्तको केन्द्र O बाट जाने सिधा रेखा हो, त्यसैले केन्द्रीय कोण ∠AOB = १८०° हुन्छ।</div>
-                  <div>२) साध्य १ अनुसार, एउटै चापमा बनेको परिधि कोण केन्द्रीय कोणको आधा हुन्छ:</div>
+                  <div>1) The diameter AB is a straight line through the centre O of the circle, so the central angle ∠AOB = 180°.</div>
+                  <div>2) By Theorem 1, the angle at the circumference on the same arc is half of the central angle:</div>
                   <div className="font-mono font-bold text-emerald-800 p-2 bg-white rounded border">
-                    ∠ACB = ½ × ∠AOB = ½ × १८०° = ९०° (एक समकोण)
+                    ∠ACB = ½ × ∠AOB = ½ × 180° = 90° (one right angle)
                   </div>
-                  <div>३) अतः C लाई अर्धवृत्तको परिधिमा जुनसुकै स्थानमा सारे पनि ∠ACB सधैँ ९०° नै रहन्छ।</div>
+                  <div>3) Therefore, wherever C is moved on the circumference of the semicircle, ∠ACB always stays 90°.</div>
                 </div>
               </div>
             </div>
@@ -488,7 +488,7 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
 
               <div className="w-full flex justify-between text-xs text-slate-300 mt-2">
                 <span>∠ACB = <strong className="text-teal-300">{fmt(sameSegmentAngleDeg.toFixed(1))}°</strong></span>
-                <span>∠ADB = <strong className="text-amber-300">{fmt(sameSegmentAngleDeg.toFixed(1))}°</strong> (सधैँ बराबर)</span>
+                <span>∠ADB = <strong className="text-amber-300">{fmt(sameSegmentAngleDeg.toFixed(1))}°</strong> (always equal)</span>
               </div>
             </div>
 
@@ -588,8 +588,8 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
               </div>
 
               <div className="w-full flex justify-between text-xs text-slate-300 mt-2">
-                <span>∠A + ∠C = {fmt(angleBad)}° + {fmt(angleBcd)}° = <strong className="text-amber-300">१८०°</strong></span>
-                <span>∠B + ∠D = {fmt(angleAbc)}° + {fmt(angleAdc)}° = <strong className="text-amber-300">१८०°</strong></span>
+                <span>∠A + ∠C = {fmt(angleBad)}° + {fmt(angleBcd)}° = <strong className="text-amber-300">180°</strong></span>
+                <span>∠B + ∠D = {fmt(angleAbc)}° + {fmt(angleAdc)}° = <strong className="text-amber-300">180°</strong></span>
               </div>
             </div>
 
@@ -635,7 +635,7 @@ export const CircleTheoremExplorer: React.FC<SimProps> = ({ onBackToLibrary, onB
                 <strong>{L('💡 साध्य निष्कर्ष (Cyclic Quad Theorem):', 'Cyclic Quad Theorem:')}</strong>
                 <p className="mt-1">
                   {L(
-                    'कुनै पनि चक्रीय चतुर्भुज (Cyclic Quadrilateral) मा सम्मुख कोणहरूको योगफल सधैँ १८०° (परिपूरक / Supplementary) हुन्छ: ∠A + ∠C = १८०° र ∠B + ∠D = १८०°।',
+                    'कुनै पनि चक्रीय चतुर्भुज (Cyclic Quadrilateral) मा सम्मुख कोणहरूको योगफल सधैँ 180° (परिपूरक / Supplementary) हुन्छ: ∠A + ∠C = 180° र ∠B + ∠D = 180°।',
                     'The opposite angles of a cyclic quadrilateral are always supplementary (sum to 180°).'
                   )}
                 </p>

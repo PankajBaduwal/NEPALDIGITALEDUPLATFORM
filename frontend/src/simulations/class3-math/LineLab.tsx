@@ -1,5 +1,5 @@
 /**
- * Lesson 9 · Lines (रेखा)
+ * Lesson 9 · Lines
  * Line Lab — horizontal, vertical, slanting, curved, parallel and intersecting lines with real-world analogies.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */

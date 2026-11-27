@@ -1,12 +1,12 @@
 /**
  * drawArchimedesExperiment.ts
  * Dedicated Ultra-Realistic HTML5 Canvas Rendering Engine for Archimedes' Principle Laboratory
- * Grade 10 Science & Technology • Chapter 2: Pressure (चाप)
+ * Grade 10 Science & Technology • Chapter 2: Pressure
  * Nepal CDC Aligned
  *
  * Implements:
  * 1. Dual Spring Balance Comparison: Weight in Air vs Apparent Weight in Liquid
- * 2. Glass Eureka Can (Overflow Can / विस्थापन क्यान) with angled spout & fluid meniscus
+ * 2. Glass Eureka Can with angled spout & fluid meniscus
  * 3. Animated liquid discharge stream flowing into collection beaker on an electronic digital scale
  * 4. Realistic textured physical objects (River stone, Iron, Aluminum, Gold, Pine wood, etc.)
  * 5. Dynamic vector force arrows (Upthrust ↑, Weight ↓)
@@ -297,7 +297,7 @@ export function drawPhysicalObject(
 }
 
 /**
- * Draw Glass Eureka Overflow Can (विस्थापन क्यान)
+ * Draw Glass Eureka Overflow Can
  */
 export function drawEurekaCan(
   ctx: CanvasRenderingContext2D,
@@ -390,7 +390,7 @@ export function drawEurekaCan(
   ctx.fillStyle = '#0f172a';
   ctx.font = 'bold 12px sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('Eureka Can (विस्थापन क्यान)', canX + canWidth / 2, canY + canHeight + 20);
+  ctx.fillText('Eureka Can', canX + canWidth / 2, canY + canHeight + 20);
 
   // 3. Spout Water Stream & Discharge Flow
   if (spoutDischarging) {
@@ -540,7 +540,7 @@ export function drawDigitalScaleWithBeaker(
   ctx.fillStyle = '#0f172a';
   ctx.font = 'bold 11px sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('Displaced Water (विस्थापित पानी)', scaleX, scaleY + scaleH + 20);
+  ctx.fillText('Displaced Water', scaleX, scaleY + scaleH + 20);
   ctx.fillStyle = '#0284c7';
   ctx.font = 'bold 13px monospace';
   ctx.fillText(`W = ${displacedWeightN.toFixed(2)} N`, scaleX, scaleY + scaleH + 36);
@@ -582,7 +582,7 @@ export function drawForceVectors(
     ctx.fillStyle = '#047857';
     ctx.font = 'bold 11px sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText(`Upthrust (उर्ध्वचाप) U = ${upthrustN.toFixed(2)} N`, x + 48, y - arrowLen / 2);
+    ctx.fillText(`Upthrust U = ${upthrustN.toFixed(2)} N`, x + 48, y - arrowLen / 2);
   }
 
   // 2. Weight in Air Arrow (Orange, Pointing DOWN ↓)
@@ -612,7 +612,7 @@ export function drawForceVectors(
 }
 
 /**
- * Draw 3-Block Demonstration Tank for Law of Floatation (प्लवनको नियम)
+ * Draw 3-Block Demonstration Tank for Law of Floatation
  */
 export function drawFloatationTank(
   ctx: CanvasRenderingContext2D,

@@ -8,13 +8,13 @@ type ShapeTab = 'triangle_sum' | 'equilateral' | 'isosceles' | 'right_isosceles'
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'कुनै पनि त्रिभुजका तीनवटै भित्री कोणहरूको जोड कति डिग्री हुन्छ?',
+    np: 'कुनै पनि त्रिभुजका तीनवटै भित्री कोणहरूको जोड कति degrees हुन्छ?',
     en: 'What is the sum of the three interior angles of any triangle?',
     options: [
-      { key: 'A', label: '९०° (90°)' },
-      { key: 'B', label: '१८०° (180°)' },
-      { key: 'C', label: '२७०° (270°)' },
-      { key: 'D', label: '३६०° (360°)' },
+      { key: 'A', label: '90° (90°)' },
+      { key: 'B', label: '180° (180°)' },
+      { key: 'C', label: '270° (270°)' },
+      { key: 'D', label: '360° (360°)' },
     ],
     answer: 'B',
   },
@@ -22,10 +22,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समबाहु त्रिभुज (Equilateral triangle) को प्रत्येक भित्री कोणको नाप कति हुन्छ?',
     en: 'What is the measure of each interior angle of an equilateral triangle?',
     options: [
-      { key: 'A', label: '४५° (45°)' },
-      { key: 'B', label: '६०° (60°)' },
-      { key: 'C', label: '९०° (90°)' },
-      { key: 'D', label: '१२०° (120°)' },
+      { key: 'A', label: '45° (45°)' },
+      { key: 'B', label: '60° (60°)' },
+      { key: 'C', label: '90° (90°)' },
+      { key: 'D', label: '120° (120°)' },
     ],
     answer: 'B',
   },
@@ -33,10 +33,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समचतुर्भुज (Rhombus) का विकर्णहरू (Diagonals) आपसमा कसरी काटिन्छन्?',
     en: 'How do the diagonals of a rhombus intersect each other?',
     options: [
-      { key: 'A', label: 'समकोणमा परस्पर समद्विभाजन हुन्छन् (Bisect at 90°)' },
-      { key: 'B', label: 'समानान्तर हुन्छन्' },
-      { key: 'C', label: 'बराबर लम्बाइका मात्र हुन्छन्' },
-      { key: 'D', label: 'काटिँदैनन्' },
+      { key: 'A', label: 'They bisect each other at right angles' },
+      { key: 'B', label: 'They are parallel' },
+      { key: 'C', label: 'They are only equal in length' },
+      { key: 'D', label: 'They do not intersect' },
     ],
     answer: 'A',
   },
@@ -44,10 +44,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'पतङ्गाकार चतुर्भुज (Kite) मा कुन विकर्णले अर्को विकर्णलाई लम्ब भएर आधा गर्दछ?',
     en: 'In a kite, which diagonal perpendicularly bisects the other?',
     options: [
-      { key: 'A', label: 'सानो विकर्णले ठूलोलाई' },
-      { key: 'B', label: 'लामो विकर्णले छोटो विकर्णलाई (Longer bisects shorter at 90°)' },
-      { key: 'C', label: 'दुवैले एकअर्कालाई' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'The shorter diagonal bisects the longer' },
+      { key: 'B', label: 'The longer diagonal bisects the shorter at 90°' },
+      { key: 'C', label: 'Each bisects the other' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'B',
   },
@@ -55,10 +55,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समलम्ब चतुर्भुज (Trapezium) को प्रमुख विशेषता के हो?',
     en: 'What is the defining characteristic of a trapezium?',
     options: [
-      { key: 'A', label: 'सबै भुजाहरू बराबर हुनु' },
-      { key: 'B', label: 'सम्मुख भुजाहरूको एक जोडी समानान्तर हुनु (Exactly 1 pair of parallel sides)' },
-      { key: 'C', label: 'सबै कोण ९०° हुनु' },
-      { key: 'D', label: 'विकर्णहरू बराबर हुनु' },
+      { key: 'A', label: 'All sides being equal' },
+      { key: 'B', label: 'Exactly one pair of opposite sides being parallel' },
+      { key: 'C', label: 'All angles being 90°' },
+      { key: 'D', label: 'The diagonals being equal' },
     ],
     answer: 'B',
   },
@@ -152,7 +152,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
               activeTab === 'triangle_sum' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('१. त्रिभुज कोण जोड (180°)', '1. Triangle Angle Sum')}
+            {L('1. त्रिभुज कोण जोड (180°)', '1. Triangle Angle Sum')}
           </button>
           <button
             onClick={() => setActiveTab('equilateral')}
@@ -160,7 +160,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
               activeTab === 'equilateral' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('२. समबाहु त्रिभुज (60°)', '2. Equilateral (60°)')}
+            {L('2. समबाहु त्रिभुज (60°)', '2. Equilateral (60°)')}
           </button>
           <button
             onClick={() => setActiveTab('isosceles')}
@@ -168,7 +168,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
               activeTab === 'isosceles' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('३. समद्विबाहु त्रिभुज', '3. Isosceles Base Angles')}
+            {L('3. समद्विबाहु त्रिभुज', '3. Isosceles Base Angles')}
           </button>
           <button
             onClick={() => setActiveTab('right_isosceles')}
@@ -176,7 +176,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
               activeTab === 'right_isosceles' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('४. समकोण समद्विबाहु (45°)', '4. Right Isosceles (45°)')}
+            {L('4. समकोण समद्विबाहु (45°)', '4. Right Isosceles (45°)')}
           </button>
           <button
             onClick={() => setActiveTab('rhombus')}
@@ -184,7 +184,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
               activeTab === 'rhombus' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('५. समचतुर्भुज (Rhombus)', '5. Rhombus')}
+            {L('5. समचतुर्भुज (Rhombus)', '5. Rhombus')}
           </button>
           <button
             onClick={() => setActiveTab('kite')}
@@ -192,7 +192,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
               activeTab === 'kite' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('६. पतङ्गाकार (Kite)', '6. Kite')}
+            {L('6. पतङ्गाकार (Kite)', '6. Kite')}
           </button>
           <button
             onClick={() => setActiveTab('trapezium')}
@@ -200,7 +200,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
               activeTab === 'trapezium' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('७. समलम्ब (Trapezium)', '7. Trapezium')}
+            {L('7. समलम्ब (Trapezium)', '7. Trapezium')}
           </button>
         </div>
 
@@ -210,10 +210,10 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
             <div className="p-4 bg-slate-900/90 rounded-2xl border border-slate-700 flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h3 className="font-bold text-amber-300 text-base flex items-center gap-2">
-                  <span>📐</span> {L('त्रिभुजका तीन भित्री कोणहरूको योगफल = १८०°', 'Sum of Interior Angles of a Triangle = 180°')}
+                  <span>📐</span> {L('त्रिभुजका तीन भित्री कोणहरूको योगफल = 180°', 'Sum of Interior Angles of a Triangle = 180°')}
                 </h3>
                 <p className="text-xs text-slate-300 mt-1">
-                  {L('शीर्षबिन्दु C लाई सार्नुहोस् र आकार जुनसुकै भए तापनि तीनवटै कोणको जोड सधैं १८०° रहने प्रमाण हेर्नुहोस्।', 'Drag vertex C. Regardless of how the triangle shifts, the sum of interior angles remains exactly 180°.')}
+                  {L('शीर्षबिन्दु C लाई सार्नुहोस् र आकार जुनसुकै भए तापनि तीनवटै कोणको जोड सधैं 180° रहने प्रमाण हेर्नुहोस्।', 'Drag vertex C. Regardless of how the triangle shifts, the sum of interior angles remains exactly 180°.')}
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -334,7 +334,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
                 {L('समबाहु त्रिभुजका गुणहरू (Equilateral Triangle Properties)', 'Equilateral Triangle Properties')}
               </h3>
               <p className="text-xs text-slate-300 mt-1">
-                {L('तीनवटै भुजाहरू बराबर हुन्छन् (AB = BC = CA) र तीनवटै कोणहरू बराबर भई प्रत्येक ६०° हुन्छन् (∠A = ∠B = ∠C = ६०°)।', 'All three sides are equal (AB = BC = CA) and all three angles are equal to 60° (∠A = ∠B = ∠C = 60°).')}
+                {L('तीनवटै भुजाहरू बराबर हुन्छन् (AB = BC = CA) र तीनवटै कोणहरू बराबर भई प्रत्येक 60° हुन्छन् (∠A = ∠B = ∠C = 60°)।', 'All three sides are equal (AB = BC = CA) and all three angles are equal to 60° (∠A = ∠B = ∠C = 60°).')}
               </p>
             </div>
 
@@ -354,7 +354,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
 
                 {/* Folding line of symmetry */}
                 <line x1="200" y1="45" x2="200" y2="225" stroke="#eab308" strokeWidth="2" strokeDasharray="5 4" />
-                <text x="210" y="140" fill="#eab308" fontSize="11" fontWeight="bold">सममिति अक्ष (Axis of Symmetry)</text>
+                <text x="210" y="140" fill="#eab308" fontSize="11" fontWeight="bold">Axis of symmetry</text>
               </svg>
             </div>
 
@@ -369,7 +369,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
               </div>
               <div className="p-3 bg-slate-900 border border-slate-700 rounded-xl text-center">
                 <div className="text-xs text-slate-400">{L('सममितिका अक्षहरू', 'Axes of Symmetry')}</div>
-                <div className="font-mono font-bold text-sky-300 mt-1">३ वटा (3 Axes)</div>
+                <div className="font-mono font-bold text-sky-300 mt-1">3 (3 axes)</div>
               </div>
             </div>
           </div>
@@ -383,7 +383,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
                 {L('समद्विबाहु त्रिभुजका गुणहरू (Isosceles Triangle Base Angles)', 'Isosceles Triangle Base Angles Theorem')}
               </h3>
               <p className="text-xs text-slate-300 mt-1">
-                {L('कुनै पनि त्रिभुजका दुई भुजाहरू बराबर भएमा तिनका सम्मुख कोणहरू (आधार कोणहरू / Base Angles) पनि बराबर हुन्छन्।', 'If two sides of a triangle are equal, the angles opposite to them (the base angles) are also equal.')}
+                {L('कुनै पनि त्रिभुजका दुई भुजाहरू बराबर भएमा तिनका सम्मुख कोणहरू (base anglesहरू / Base Angles) पनि बराबर हुन्छन्।', 'If two sides of a triangle are equal, the angles opposite to them (the base angles) are also equal.')}
               </p>
             </div>
 
@@ -410,7 +410,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
             </div>
 
             <div className="p-3 bg-emerald-950/40 border border-emerald-500/30 rounded-xl text-center font-mono text-sm text-emerald-300">
-              AC = BC ⇒ आधार कोण ∠A = ∠B = 68° | शीर्ष कोण ∠C = 180° - (68° + 68°) = 44°
+              AC = BC ⇒ base angles ∠A = ∠B = 68° | vertex angle ∠C = 180° - (68° + 68°) = 44°
             </div>
           </div>
         )}
@@ -423,7 +423,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
                 {L('समकोण समद्विबाहु त्रिभुज (Right-Angled Isosceles Triangle)', 'Right-Angled Isosceles Triangle')}
               </h3>
               <p className="text-xs text-slate-300 mt-1">
-                {L('एउटा कोण समकोण (९०°) र अन्य दुई भुजा बराबर भएको त्रिभुज। यसका दुई आधार कोणहरू बराबर भई प्रत्येक ४५° हुन्छन्: ९०° + ४५° + ४५° = १८०°।', 'A triangle with one right angle (90°) and two equal legs. Its remaining two base angles are equal and each measures exactly 45°: 90° + 45° + 45° = 180°.')}
+                {L('एउटा कोण समकोण (90°) र अन्य दुई भुजा बराबर भएको त्रिभुज। यसका दुई base anglesहरू बराबर भई प्रत्येक 45° हुन्छन्: 90° + 45° + 45° = 180°।', 'A triangle with one right angle (90°) and two equal legs. Its remaining two base angles are equal and each measures exactly 45°: 90° + 45° + 45° = 180°.')}
               </p>
             </div>
 
@@ -440,7 +440,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
                 <text x="60" y="235" fill="#22c55e" fontSize="13" fontWeight="bold">∠B = 90°</text>
                 <text x="70" y="45" fill="#38bdf8" fontSize="13" fontWeight="bold">∠A = 45°</text>
                 <text x="270" y="235" fill="#38bdf8" fontSize="13" fontWeight="bold">∠C = 45°</text>
-                <text x="190" y="125" fill="#e2e8f0" fontSize="12" fontWeight="bold">कर्ण (Hypotenuse)</text>
+                <text x="190" y="125" fill="#e2e8f0" fontSize="12" fontWeight="bold">Hypotenuse</text>
               </svg>
             </div>
 
@@ -459,7 +459,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
                   {L('समचतुर्भुजका गुणहरू (Properties of Rhombus)', 'Properties of a Rhombus')}
                 </h3>
                 <p className="text-xs text-slate-300 mt-1">
-                  {L('चारवटै भुजा बराबर (AB = BC = CD = DA), सम्मुख कोण बराबर, र विकर्णहरूले एकअर्कालाई समकोण (९०°) मा समद्विभाजन गर्छन्।', 'All 4 sides are equal, opposite angles are equal, and diagonals bisect each other perpendicularly at 90°.')}
+                  {L('चारवटै भुजा बराबर (AB = BC = CD = DA), सम्मुख कोण बराबर, र विकर्णहरूले एकअर्कालाई समकोण (90°) मा समद्विभाजन गर्छन्।', 'All 4 sides are equal, opposite angles are equal, and diagonals bisect each other perpendicularly at 90°.')}
                 </p>
               </div>
               <div className="flex items-center gap-3">
@@ -528,7 +528,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
             })()}
 
             <div className="p-3 bg-amber-950/40 border border-amber-500/30 rounded-xl text-center text-xs text-amber-200">
-              💡 {L('स्मरण रहोस्: वर्ग (Square) एउटा विशेष समचतुर्भुज हो जहाँ सबै कोण ९०° हुन्छन्। तर सबै समचतुर्भुज वर्ग होइनन्।', 'Note: A square is a special rhombus where all angles are 90°, but not every rhombus is a square.')}
+              💡 {L('स्मरण रहोस्: वर्ग (Square) एउटा विशेष समचतुर्भुज हो जहाँ सबै कोण 90° हुन्छन्। तर सबै समचतुर्भुज वर्ग होइनन्।', 'Note: A square is a special rhombus where all angles are 90°, but not every rhombus is a square.')}
             </div>
           </div>
         )}
@@ -579,7 +579,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
                 AB = AD &nbsp;|&nbsp; BC = CD &nbsp;|&nbsp; ∠B = ∠D
               </div>
               <div className="p-3 bg-slate-900 border border-slate-700 rounded-xl text-center font-mono text-xs text-amber-300">
-                लामो विकर्ण AC ⊥ छोटो विकर्ण BD (BD आधा हुन्छ)
+                Long diagonal AC ⊥ short diagonal BD
               </div>
             </div>
           </div>
@@ -593,7 +593,7 @@ export const TriangleQuadrilateralDiscoveryLab: React.FC<{
                 {L('समलम्ब चतुर्भुजका गुणहरू (Properties of Trapezium)', 'Properties of a Trapezium')}
               </h3>
               <p className="text-xs text-slate-300 mt-1">
-                {L('सम्मुख भुजाहरूको ठीक एक जोडी समानान्तर हुन्छ (AB ∥ CD)। असमानान्तर भुजामा पर्ने क्रमागत भित्री कोणहरूको जोड १८०° हुन्छ (∠A + ∠D = १८०° र ∠B + ∠C = १८०°)।', 'Exactly one pair of opposite sides is parallel (AB ∥ CD). Co-interior angles along the non-parallel sides add up to 180° (∠A + ∠D = 180° and ∠B + ∠C = 180°).')}
+                {L('सम्मुख भुजाहरूको ठीक एक जोडी समानान्तर हुन्छ (AB ∥ CD)। असमानान्तर भुजामा पर्ने क्रमागत भित्री कोणहरूको जोड 180° हुन्छ (∠A + ∠D = 180° र ∠B + ∠C = 180°)।', 'Exactly one pair of opposite sides is parallel (AB ∥ CD). Co-interior angles along the non-parallel sides add up to 180° (∠A + ∠D = 180° and ∠B + ∠C = 180°).')}
               </p>
             </div>
 

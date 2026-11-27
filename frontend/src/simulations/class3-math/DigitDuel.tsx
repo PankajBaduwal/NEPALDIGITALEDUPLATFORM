@@ -1,5 +1,5 @@
 /**
- * Lesson 3 · Comparison of numbers (सङ्ख्याको तुलना)
+ * Lesson 3 · Comparison of numbers
  * Digit Duel — two five-digit numbers compared place by place from left to right; choose >, < or =.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -229,7 +229,7 @@ export const DigitDuel: React.FC<Props> = ({ onBackToLibrary }) => {
           {/* Row A: First Number */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, width: '100%' }}>
             <span style={{ fontSize: 13, fontWeight: 900, color: '#0284C7', minWidth: 50 }}>
-              {kit.t('सङ्ख्या १:', 'Num 1:')}
+              {kit.t('सङ्ख्या 1:', 'Num 1:')}
             </span>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, flex: 1 }}>
               {da.map((digit, i) => (
@@ -275,7 +275,7 @@ export const DigitDuel: React.FC<Props> = ({ onBackToLibrary }) => {
           {/* Row B: Second Number */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, width: '100%' }}>
             <span style={{ fontSize: 13, fontWeight: 900, color: '#E11D48', minWidth: 50 }}>
-              {kit.t('सङ्ख्या २:', 'Num 2:')}
+              {kit.t('सङ्ख्या 2:', 'Num 2:')}
             </span>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, flex: 1 }}>
               {db.map((digit, i) => (

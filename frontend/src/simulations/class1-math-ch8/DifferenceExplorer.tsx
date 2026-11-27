@@ -1,7 +1,7 @@
 /**
  * DifferenceExplorer.tsx
- * Simulation 04: More or Less – Difference Explorer (बढी र कम पत्ता लगाऔँ)
- * Class 1 Mathematics - Chapter 8: Subtraction up to 10 (१० सम्मका सङ्ख्याहरूको घटाउ)
+ * Simulation 04: More or Less – Difference Explorer
+ * Class 1 Mathematics - Chapter 8: Subtraction up to 10
  * Nepal Digital Education Platform
  */
 
@@ -26,7 +26,7 @@ interface Props {
   userRole?: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
 interface ComparisonActivity {
   id: string;
@@ -84,7 +84,7 @@ export const DifferenceExplorer: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active comparison index
@@ -273,15 +273,7 @@ export const DifferenceExplorer: React.FC<Props> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              setLanguage((l) => (l === 'np' ? 'en' : 'np'));
-              playSound('click');
-            }}
-            className="px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition"
-          >
-            {language === 'np' ? 'EN' : 'नेपाली'}
-          </button>
+          
           <button
             onClick={() => setSoundEnabled((s) => !s)}
             className={`p-2 rounded-lg border transition ${

@@ -1,7 +1,7 @@
 /**
  * RatioDiscoveryPlayground.tsx
- * Grade 8 Mathematics – Unit 4: RATIO AND PROPORTION (अनुपात र समानुपात)
- * Simulation 8: Ratio Discovery and Comparison Playground (अनुपात खोजी र तुलना खेलमैदान)
+ * Grade 8 Mathematics – Unit 4: RATIO AND PROPORTION
+ * Simulation 8: Ratio Discovery and Comparison Playground
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 4)
  */
 import React, { useState } from 'react';
@@ -15,43 +15,43 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'एउटै एकाइ भएका दुई सजातीय परिमाणहरूको तुलनात्मक भागफललाई के भनिन्छ?',
     en: 'The comparison of two quantities of the same kind by division is called:',
     options: [
-      { key: 'A', label: 'अनुपात (Ratio: a/b वा a:b)' },
-      { key: 'B', label: 'समानुपात (Proportion)' },
-      { key: 'C', label: 'गुणांक (Coefficient)' },
-      { key: 'D', label: 'घाताङ्क (Exponent)' },
+      { key: 'A', label: 'Ratio (a/b or a:b)' },
+      { key: 'B', label: 'Proportion' },
+      { key: 'C', label: 'Coefficient' },
+      { key: 'D', label: 'Exponent' },
     ],
     answer: 'A',
   },
   {
-    np: 'पाठ्यपुस्तक अनुसार २५० ग्राम र २ किलोग्राम बीचको अनुपात कति हुन्छ?',
+    np: 'पाठ्यपुस्तक अनुसार 250 g र 2 kg बीचको अनुपात कति हुन्छ?',
     en: 'According to the textbook, what is the ratio of 250 g to 2 kg?',
     options: [
-      { key: 'A', label: '१:८ [ २ केजी = २००० ग्राम ⇒ २५०:२००० = १:८ ]' },
-      { key: 'B', label: '१२५:१' },
-      { key: 'C', label: '२:२५०' },
-      { key: 'D', label: '१:४' },
+      { key: 'A', label: '1:8 [ 2 kg = 2000 g ⇒ 250:2000 = 1:8 ]' },
+      { key: 'B', label: '125:1' },
+      { key: 'C', label: '2:250' },
+      { key: 'D', label: '1:4' },
     ],
     answer: 'A',
   },
   {
-    np: '४० मिनेट र १ घण्टा बीचको अनुपात निकाल्दा कुन मान प्राप्त हुन्छ?',
+    np: '40 min र 1 घण्टा बीचको अनुपात निकाल्दा कुन मान प्राप्त हुन्छ?',
     en: 'What is the ratio between 40 minutes and 1 hour?',
     options: [
-      { key: 'A', label: '२:३ [ १ घण्टा = ६० मिनेट ⇒ ४०:६० = २:३ ]' },
-      { key: 'B', label: '४०:१' },
-      { key: 'C', label: '४:१' },
-      { key: 'D', label: '३:२' },
+      { key: 'A', label: '2:3 [ 1 hour = 60 min ⇒ 40:60 = 2:3 ]' },
+      { key: 'B', label: '40:1' },
+      { key: 'C', label: '4:1' },
+      { key: 'D', label: '3:2' },
     ],
     answer: 'A',
   },
   {
-    np: '१२ वटा सिन्के सिसाकलम (Pencil) को रु. १२० र ६ वटा कलम (Pen) को रु. १५० पर्छ भने एउटा पेन्सिल र एउटा कलमको मूल्यको अनुपात कति हुन्छ?',
+    np: '12 pcs सिन्के सिसाकलम (Pencil) को Rs. 120 र 6 pcs कलम (Pen) को Rs. 150 पर्छ भने एउटा पेन्सिल र एउटा कलमको मूल्यको अनुपात कति हुन्छ?',
     en: 'If 12 pencils cost Rs. 120 and 6 pens cost Rs. 150, what is the ratio of the unit price of a pencil to a pen?',
     options: [
-      { key: 'A', label: '२:५ [ १ पेन्सिल = रु. १०, १ कलम = रु. २५ ⇒ १०:२५ = २:५ ]' },
-      { key: 'B', label: '१:२' },
-      { key: 'C', label: '५:२' },
-      { key: 'D', label: '४:५' },
+      { key: 'A', label: '2:5 [ 1 pencil = Rs. 10, 1 pen = Rs. 25 ⇒ 10:25 = 2:5 ]' },
+      { key: 'B', label: '1:2' },
+      { key: 'C', label: '5:2' },
+      { key: 'D', label: '4:5' },
     ],
     answer: 'A',
   },
@@ -59,21 +59,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'अनुपात a:b मा क्रम (Order) को के महत्त्व हुन्छ?',
     en: 'What is the importance of order in the ratio a:b?',
     options: [
-      { key: 'A', label: 'क्रम अति महत्वपूर्ण हुन्छ, किनकि a:b र b:a समान होइनन् (a:b ≠ b:a)' },
-      { key: 'B', label: 'क्रमले केही फरक पार्दैन' },
-      { key: 'C', label: 'a:b सधैं b:a सँग बराबर हुन्छ' },
-      { key: 'D', label: 'शून्य मात्र हुन्छ' },
+      { key: 'A', label: 'Order is very important, because a:b and b:a are not the same (a:b ≠ b:a)' },
+      { key: 'B', label: 'Order makes no difference' },
+      { key: 'C', label: 'a:b is always equal to b:a' },
+      { key: 'D', label: 'It is only zero' },
     ],
     answer: 'A',
   },
 ];
 
 const UNIT_CONVERSIONS = [
-  { itemNp: '२५० ग्राम र २ किलोग्राम', itemEn: '250 g and 2 kg', q1: '250 g', q2: '2000 g', ratio: '1:8', stepsNp: '२ केजी = २००० ग्राम ⇒ २५०/२००० = १/८ = १:८' },
-  { itemNp: '२ घण्टा र ४५ मिनेट', itemEn: '2 hours and 45 minutes', q1: '120 min', q2: '45 min', ratio: '8:3', stepsNp: '२ घण्टा = १२० मिनेट ⇒ १२०/४५ = ८/३ = ८:३' },
-  { itemNp: '४० मिनेट र १ घण्टा', itemEn: '40 minutes and 1 hour', q1: '40 min', q2: '60 min', ratio: '2:3', stepsNp: '१ घण्टा = ६० मिनेट ⇒ ४०/६० = २/३ = २:३' },
-  { itemNp: 'रु. ५ र ९० पैसा', itemEn: 'Rs. 5 and 90 paisa', q1: '500 paisa', q2: '90 paisa', ratio: '50:9', stepsNp: 'रु. ५ = ५०० पैसा ⇒ ५००/९० = ५०/९ = ५०:९' },
-  { itemNp: '२५० मिलिलिटर र २ लिटर', itemEn: '250 ml and 2 litres', q1: '250 ml', q2: '2000 ml', ratio: '1:8', stepsNp: '२ लिटर = २००० मिलिलिटर ⇒ २५०/२००० = १/८ = १:८' },
+  { itemNp: '250 g र 2 kg', itemEn: '250 g and 2 kg', q1: '250 g', q2: '2000 g', ratio: '1:8', stepsNp: '2 kg = 2000 g ⇒ 250/2000 = 1/8 = 1:8' },
+  { itemNp: '2 घण्टा र 45 min', itemEn: '2 hours and 45 minutes', q1: '120 min', q2: '45 min', ratio: '8:3', stepsNp: '2 घण्टा = 120 min ⇒ 120/45 = 8/3 = 8:3' },
+  { itemNp: '40 min र 1 घण्टा', itemEn: '40 minutes and 1 hour', q1: '40 min', q2: '60 min', ratio: '2:3', stepsNp: '1 घण्टा = 60 min ⇒ 40/60 = 2/3 = 2:3' },
+  { itemNp: 'Rs. 5 र 90 पैसा', itemEn: 'Rs. 5 and 90 paisa', q1: '500 paisa', q2: '90 paisa', ratio: '50:9', stepsNp: 'Rs. 5 = 500 पैसा ⇒ 500/90 = 50/9 = 50:9' },
+  { itemNp: '250 मिलिlitres र 2 litres', itemEn: '250 ml and 2 litres', q1: '250 ml', q2: '2000 ml', ratio: '1:8', stepsNp: '2 litres = 2000 मिलिlitres ⇒ 250/2000 = 1/8 = 1:8' },
 ];
 
 export const RatioDiscoveryPlayground: React.FC<{
@@ -128,11 +128,11 @@ export const RatioDiscoveryPlayground: React.FC<{
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'intro', labelNp: '१. अनुपात अवधारणा (रातो र नीलो बल)', labelEn: '1. Ratio Concept (Balls)', icon: Scale },
-            { id: 'pencils', labelNp: '२. पेन्सिल र कलमको दर तुलना', labelEn: '2. Pencils & Pens Unit Cost', icon: Sparkles },
-            { id: 'units', labelNp: '३. समान एकाइ रूपान्तरण (ग्राम, समय, पैसा)', labelEn: '3. Same-Unit Conversions', icon: Layers },
-            { id: 'simplify', labelNp: '४. अनुपात सरलीकरण ल्याब', labelEn: '4. Ratio Simplifier', icon: ArrowRight },
-            { id: 'challenge', labelNp: '५. अभ्यास चुनौती', labelEn: '5. Quiz Challenge', icon: Award },
+            { id: 'intro', labelNp: '1. अनुपात अवधारणा (रातो र नीलो बल)', labelEn: '1. Ratio Concept (Balls)', icon: Scale },
+            { id: 'pencils', labelNp: '2. पेन्सिल र कलमको दर तुलना', labelEn: '2. Pencils & Pens Unit Cost', icon: Sparkles },
+            { id: 'units', labelNp: '3. समान एकाइ रूपान्तरण (g, समय, पैसा)', labelEn: '3. Same-Unit Conversions', icon: Layers },
+            { id: 'simplify', labelNp: '4. अनुपात सरलीकरण ल्याब', labelEn: '4. Ratio Simplifier', icon: ArrowRight },
+            { id: 'challenge', labelNp: '5. अभ्यास चुनौती', labelEn: '5. Quiz Challenge', icon: Award },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -168,7 +168,7 @@ export const RatioDiscoveryPlayground: React.FC<{
           <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
             <h3 style={{ margin: '0 0 10px 0', color: '#0369a1', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
               <Scale size={20} />
-              {L('पाठ्यपुस्तक उदाहरण १: रातो बल र नीलो बलको अनुपात', 'Textbook Example 1: Red Balls vs Blue Balls Ratio')}
+              {L('पाठ्यपुस्तक उदाहरण 1: रातो बल र नीलो बलको अनुपात', 'Textbook Example 1: Red Balls vs Blue Balls Ratio')}
             </h3>
             <p style={{ margin: '0 0 16px 0', fontSize: 14, color: '#475569', lineHeight: 1.6 }}>
               {L(
@@ -216,21 +216,21 @@ export const RatioDiscoveryPlayground: React.FC<{
             {/* Three Ratios Explained */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
               <div style={{ background: '#f8fafc', padding: 12, borderRadius: 10, border: '1px solid #cbd5e1', textAlign: 'center' }}>
-                <div style={{ fontSize: 12, color: '#64748b' }}>{L('१. रातो : नीलो', '1. Red : Blue')}</div>
+                <div style={{ fontSize: 12, color: '#64748b' }}>{L('1. रातो : नीलो', '1. Red : Blue')}</div>
                 <div style={{ fontSize: 20, fontWeight: 900, color: '#dc2626', marginTop: 4 }}>
                   {redBalls}:{blueBalls} = {simpRed}:{simpBlue}
                 </div>
               </div>
 
               <div style={{ background: '#f8fafc', padding: 12, borderRadius: 10, border: '1px solid #cbd5e1', textAlign: 'center' }}>
-                <div style={{ fontSize: 12, color: '#64748b' }}>{L('२. नीलो : रातो', '2. Blue : Red')}</div>
+                <div style={{ fontSize: 12, color: '#64748b' }}>{L('2. नीलो : रातो', '2. Blue : Red')}</div>
                 <div style={{ fontSize: 20, fontWeight: 900, color: '#2563eb', marginTop: 4 }}>
                   {blueBalls}:{redBalls} = {simpBlue}:{simpRed}
                 </div>
               </div>
 
               <div style={{ background: '#f8fafc', padding: 12, borderRadius: 10, border: '1px solid #cbd5e1', textAlign: 'center' }}>
-                <div style={{ fontSize: 12, color: '#64748b' }}>{L('३. रातो : जम्मा बल', '3. Red : Total')}</div>
+                <div style={{ fontSize: 12, color: '#64748b' }}>{L('3. रातो : जम्मा बल', '3. Red : Total')}</div>
                 <div style={{ fontSize: 20, fontWeight: 900, color: '#0369a1', marginTop: 4 }}>
                   {redBalls}:{redBalls + blueBalls}
                 </div>
@@ -251,16 +251,16 @@ export const RatioDiscoveryPlayground: React.FC<{
               <div style={{ background: '#fef3c7', padding: 14, borderRadius: 12, border: '1px solid #fde68a' }}>
                 <div style={{ fontSize: 15, fontWeight: 800, color: '#b45309' }}>{L('सिन्के पेन्सिल (Pencils)', 'Pencils')}</div>
                 <div style={{ fontSize: 13, color: '#92400e', marginTop: 4 }}>
-                  • १२ वटा पेन्सिलको मूल्य = रु. १२०<br />
-                  • १ वटा पेन्सिलको मूल्य = १२० ÷ १२ = <strong>रु. १०</strong>
+                  • Price of 12 pencils = Rs. 120<br />
+                  • Price of 1 pencil = 120 ÷ 12 = <strong>Rs. 10</strong>
                 </div>
               </div>
 
               <div style={{ background: '#e0e7ff', padding: 14, borderRadius: 12, border: '1px solid #c7d2fe' }}>
                 <div style={{ fontSize: 15, fontWeight: 800, color: '#4338ca' }}>{L('कलम (Pens)', 'Pens')}</div>
                 <div style={{ fontSize: 13, color: '#3730a3', marginTop: 4 }}>
-                  • ६ वटा कलमको मूल्य = रु. १५०<br />
-                  • १ वटा कलमको मूल्य = १५० ÷ ६ = <strong>रु. २५</strong>
+                  • Price of 6 pens = Rs. 150<br />
+                  • Price of 1 pen = 150 ÷ 6 = <strong>Rs. 25</strong>
                 </div>
               </div>
             </div>
@@ -270,7 +270,7 @@ export const RatioDiscoveryPlayground: React.FC<{
                 {L('प्रति एकाइ मूल्यको अनुपात (Ratio of Unit Prices):', 'Ratio of Unit Prices (Pencil : Pen):')}
               </div>
               <div style={{ fontSize: 24, fontWeight: 900, color: '#047857', marginTop: 4 }}>
-                १० : २५ = २ : ५  [ ५ ले दुवै पदलाई भाग गर्दा ]
+                10 : 25 = 2 : 5  [ dividing both terms by 5 ]
               </div>
             </div>
           </div>
@@ -379,7 +379,7 @@ export const RatioDiscoveryPlayground: React.FC<{
             </h3>
             <p style={{ margin: 0, fontSize: 14, color: '#475569' }}>
               {L(
-                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" ट्याबबाट ५ वटा आधिकारिक पाठ्यपुस्तकका प्रश्नहरू हल गरी ताराहरू कमाउनुहोस्!',
+                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" ट्याबबाट 5 pcs आधिकारिक पाठ्यपुस्तकका प्रश्नहरू हल गरी ताराहरू कमाउनुहोस्!',
                 'Click "Challenge" mode in the header to take the official CDC curriculum quiz and earn mastery stars!'
               )}
             </p>

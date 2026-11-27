@@ -586,7 +586,7 @@ export const RelationFunctionVisualExplorer: React.FC<SimProps> = ({ onBackToLib
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
               <div className={`p-3 rounded-xl border ${isReflexive ? 'bg-emerald-50 border-emerald-300' : 'bg-rose-50 border-rose-300'}`}>
                 <div className="font-bold flex items-center justify-between">
-                  <span>{L('१. स्वपरावर्तक (Reflexive)', 'Reflexive')}</span>
+                  <span>{L('1. स्वपरावर्तक (Reflexive)', 'Reflexive')}</span>
                   <span>{isReflexive ? '✓' : '✗'}</span>
                 </div>
                 <div className="text-[10px] text-slate-600 mt-1">
@@ -596,7 +596,7 @@ export const RelationFunctionVisualExplorer: React.FC<SimProps> = ({ onBackToLib
 
               <div className={`p-3 rounded-xl border ${isSymmetric ? 'bg-emerald-50 border-emerald-300' : 'bg-rose-50 border-rose-300'}`}>
                 <div className="font-bold flex items-center justify-between">
-                  <span>{L('२. सममित (Symmetric)', 'Symmetric')}</span>
+                  <span>{L('2. सममित (Symmetric)', 'Symmetric')}</span>
                   <span>{isSymmetric ? '✓' : '✗'}</span>
                 </div>
                 <div className="text-[10px] text-slate-600 mt-1">
@@ -606,7 +606,7 @@ export const RelationFunctionVisualExplorer: React.FC<SimProps> = ({ onBackToLib
 
               <div className={`p-3 rounded-xl border ${isTransitive ? 'bg-emerald-50 border-emerald-300' : 'bg-rose-50 border-rose-300'}`}>
                 <div className="font-bold flex items-center justify-between">
-                  <span>{L('३. सङ्क्रामक (Transitive)', 'Transitive')}</span>
+                  <span>{L('3. सङ्क्रामक (Transitive)', 'Transitive')}</span>
                   <span>{isTransitive ? '✓' : '✗'}</span>
                 </div>
                 <div className="text-[10px] text-slate-600 mt-1">
@@ -673,8 +673,8 @@ export const RelationFunctionVisualExplorer: React.FC<SimProps> = ({ onBackToLib
                 </span>
                 <span className="text-[11px] font-normal text-slate-600">
                   {isFunction
-                    ? L('समूह A का सबै सदस्यको ठ्याक्कै १ वटा प्रतिबिम्ब छ।', 'Every element in A has exactly one output.')
-                    : L('समूह A को कुनै सदस्यको प्रतिबिम्ब छैन वा १ भन्दा बढी प्रतिबिम्ब छ।', 'Some element has 0 or >1 outputs.')}
+                    ? L('समूह A का सबै सदस्यको ठ्याक्कै 1 pcs प्रतिबिम्ब छ।', 'Every element in A has exactly one output.')
+                    : L('समूह A को कुनै सदस्यको प्रतिबिम्ब छैन वा 1 भन्दा बढी प्रतिबिम्ब छ।', 'Some element has 0 or >1 outputs.')}
                 </span>
               </div>
             </div>

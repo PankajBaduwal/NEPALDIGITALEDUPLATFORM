@@ -34,11 +34,11 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
   // ── 3. FRACTIONAL INDICES STATE ────────────────────────────────────────────
   const [fracPresetIdx, setFracPresetIdx] = useState<number>(0);
   const fracPresets = [
-    { base: 27, m: 2, n: 3, root: 3, final: 9, expr: '२७^(२/३) = (∛२७)² = ३² = ९' },
-    { base: 16, m: 3, n: 4, root: 2, final: 8, expr: '१६^(३/४) = (⁴√१६)³ = २³ = ८' },
-    { base: 64, m: 2, n: 3, root: 4, final: 16, expr: '६४^(२/३) = (∛६४)² = ४² = १६' },
-    { base: 32, m: 2, n: 5, root: 2, final: 4, expr: '३२^(२/५) = (⁵√३२)² = २² = ४' },
-    { base: 81, m: 3, n: 4, root: 3, final: 27, expr: '८१^(३/४) = (⁴√८१)³ = ३³ = २७' },
+    { base: 27, m: 2, n: 3, root: 3, final: 9, expr: '27^(2/3) = (∛27)² = 3² = 9' },
+    { base: 16, m: 3, n: 4, root: 2, final: 8, expr: '16^(3/4) = (⁴√16)³ = 2³ = 8' },
+    { base: 64, m: 2, n: 3, root: 4, final: 16, expr: '64^(2/3) = (∛64)² = 4² = 16' },
+    { base: 32, m: 2, n: 5, root: 2, final: 4, expr: '32^(2/5) = (⁵√32)² = 2² = 4' },
+    { base: 81, m: 3, n: 4, root: 3, final: 27, expr: '81^(3/4) = (⁴√81)³ = 3³ = 27' },
   ];
 
   // ── 4. EXPONENTIAL EQUATIONS STATE ─────────────────────────────────────────
@@ -46,63 +46,63 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
   const eqPresets = [
     {
       titleEn: '1. Single Base Matching: 3^(x - 1) = 81',
-      titleNp: '१. समान आधार बनाउने: ३^(x - १) = ८१',
-      eqStr: '३^(x - १) = ८१',
+      titleNp: '1. समान आधार बनाउने: 3^(x - 1) = 81',
+      eqStr: '3^(x - 1) = 81',
       step1En: 'Express 81 as a power of 3: 81 = 3⁴',
-      step1Np: '८१ लाई आधार ३ को घाताङ्कमा रूपान्तरण गर्दा: ८१ = ३⁴',
+      step1Np: '81 लाई आधार 3 को घाताङ्कमा रूपान्तरण गर्दा: 81 = 3⁴',
       step2En: '3^(x - 1) = 3⁴',
-      step2Np: '३^(x - १) = ३⁴',
+      step2Np: '3^(x - 1) = 3⁴',
       step3En: 'Equate exponents since bases are equal: x - 1 = 4',
-      step3Np: 'आधार समान भएकाले घाताङ्कहरू बराबर गर्दा: x - १ = ४',
+      step3Np: 'आधार समान भएकाले घाताङ्कहरू बराबर गर्दा: x - 1 = 4',
       finalEn: 'x = 4 + 1 = 5',
-      finalNp: 'x = ४ + १ = ५',
+      finalNp: 'x = 4 + 1 = 5',
       checkEn: 'Check: LHS = 3^(5 - 1) = 3⁴ = 81 = RHS (Verified)',
-      checkNp: 'परीक्षण: बायाँ पक्ष = ३^(५ - १) = ३⁴ = ८१ = दायाँ पक्ष (प्रमाणित)',
+      checkNp: 'परीक्षण: बायाँ पक्ष = 3^(5 - 1) = 3⁴ = 81 = दायाँ पक्ष (प्रमाणित)',
     },
     {
       titleEn: '2. Decimal Base Conversion: 4^(x - 2) = 0.25',
-      titleNp: '२. दशमलव रूपान्तरण: ४^(x - २) = ०.२५',
-      eqStr: '४^(x - २) = ०.२५',
+      titleNp: '2. दशमलव रूपान्तरण: 4^(x - 2) = 0.25',
+      eqStr: '4^(x - 2) = 0.25',
       step1En: 'Convert decimal 0.25 to fraction: 0.25 = 25/100 = 1/4 = 4⁻¹',
-      step1Np: '०.२५ लाई भिन्न र ऋणात्मक घाताङ्कमा बदल्दा: ०.२५ = २५/१०० = १/४ = ४⁻¹',
+      step1Np: '0.25 लाई भिन्न र ऋणात्मक घाताङ्कमा बदल्दा: 0.25 = 25/100 = 1/4 = 4⁻¹',
       step2En: '4^(x - 2) = 4⁻¹',
-      step2Np: '४^(x - २) = ४⁻¹',
+      step2Np: '4^(x - 2) = 4⁻¹',
       step3En: 'Equate exponents: x - 2 = -1',
-      step3Np: 'घाताङ्कहरू बराबर गर्दा: x - २ = -१',
+      step3Np: 'घाताङ्कहरू बराबर गर्दा: x - 2 = -1',
       finalEn: 'x = -1 + 2 = 1',
-      finalNp: 'x = -१ + २ = १',
+      finalNp: 'x = -1 + 2 = 1',
       checkEn: 'Check: LHS = 4^(1 - 2) = 4⁻¹ = 1/4 = 0.25 = RHS (Verified)',
-      checkNp: 'परीक्षण: बायाँ पक्ष = ४^(१ - २) = ४⁻¹ = १/४ = ०.२५ = दायाँ पक्ष',
+      checkNp: 'परीक्षण: बायाँ पक्ष = 4^(1 - 2) = 4⁻¹ = 1/4 = 0.25 = दायाँ पक्ष',
     },
     {
       titleEn: '3. Common Factor Extraction: 2^(x + 1) + 2^x = 24',
-      titleNp: '३. साझा खण्ड निकाल्ने: २^(x + १) + २^x = २४',
-      eqStr: '२^(x + १) + २^x = २४',
+      titleNp: '3. साझा खण्ड निकाल्ने: 2^(x + 1) + 2^x = 24',
+      eqStr: '2^(x + 1) + 2^x = 24',
       step1En: 'Split 2^(x + 1) as 2^x · 2¹: 2^x · 2 + 2^x · 1 = 24',
-      step1Np: '२^(x + १) लाई २^x · २¹ मा टुक्र्याउँदा: २^x · २ + २^x · १ = २४',
+      step1Np: '2^(x + 1) लाई 2^x · 2¹ मा टुक्र्याउँदा: 2^x · 2 + 2^x · 1 = 24',
       step2En: 'Factor out 2^x: 2^x (2 + 1) = 24  ⟹  2^x · 3 = 24',
-      step2Np: 'साझा २^x बाहिर निकाल्दा: २^x (२ + १) = २४  ⟹  २^x · ३ = २४',
+      step2Np: 'साझा 2^x बाहिर निकाल्दा: 2^x (2 + 1) = 24  ⟹  2^x · 3 = 24',
       step3En: 'Divide by 3: 2^x = 24 / 3 = 8 = 2³',
-      step3Np: '३ ले भाग गर्दा: २^x = २४ / ३ = ८ = २³',
+      step3Np: '3 ले भाग गर्दा: 2^x = 24 / 3 = 8 = 2³',
       finalEn: 'Equate exponents: x = 3',
-      finalNp: 'घाताङ्क बराबर गर्दा: x = ३',
+      finalNp: 'घाताङ्क बराबर गर्दा: x = 3',
       checkEn: 'Check: 2^(3 + 1) + 2³ = 2⁴ + 8 = 16 + 8 = 24 (Verified)',
-      checkNp: 'परीक्षण: २⁴ + २³ = १६ + ८ = २४ (प्रमाणित)',
+      checkNp: 'परीक्षण: 2⁴ + 2³ = 16 + 8 = 24',
     },
     {
       titleEn: '4. Quadratic Reducible Type: 2^x + 1/(2^x) = 2½',
-      titleNp: '४. वर्ग समीकरणमा रूपान्तरण हुने: २^x + १/(२^x) = २½',
-      eqStr: '२^x + १ / २^x = ५ / २',
+      titleNp: '4. वर्ग समीकरणमा रूपान्तरण हुने: 2^x + 1/(2^x) = 2½',
+      eqStr: '2^x + 1 / 2^x = 5 / 2',
       step1En: 'Let 2^x = y. Then: y + 1/y = 5/2',
-      step1Np: 'मानाैँ, २^x = y। त्यसो भए: y + १/y = ५/२',
+      step1Np: 'मानाैँ, 2^x = y। त्यसो भए: y + 1/y = 5/2',
       step2En: 'Multiply by 2y: 2y² + 2 = 5y  ⟹  2y² - 5y + 2 = 0',
-      step2Np: '२y ले गुणन गर्दा: २y² - ५y + २ = ०',
+      step2Np: '2y ले गुणन गर्दा: 2y² - 5y + 2 = 0',
       step3En: 'Factorize: (2y - 1)(y - 2) = 0  ⟹  y = 2 or y = 1/2',
-      step3Np: 'खण्डिकरण गर्दा: (२y - १)(y - २) = ०  ⟹  y = २ अथवा y = १/२',
+      step3Np: 'खण्डिकरण गर्दा: (2y - 1)(y - 2) = 0  ⟹  y = 2 अथवा y = 1/2',
       finalEn: 'When y = 2  ⟹  2^x = 2¹  ⟹  x = 1; When y = 1/2  ⟹  2^x = 2⁻¹  ⟹  x = -1',
-      finalNp: 'y = २ हुँदा २^x = २¹ ⟹ x = १; y = १/२ हुँदा २^x = २⁻¹ ⟹ x = -१',
+      finalNp: 'y = 2 हुँदा 2^x = 2¹ ⟹ x = 1; y = 1/2 हुँदा 2^x = 2⁻¹ ⟹ x = -1',
       checkEn: 'Both x = 1 and x = -1 satisfy the equation: 2 + 1/2 = 2.5 (Verified)',
-      checkNp: 'x = १ र x = -१ दुवैले समीकरण सन्तुष्ट गर्छन्: २ + १/२ = २.५',
+      checkNp: 'x = 1 र x = -1 दुवैले समीकरण सन्तुष्ट गर्छन्: 2 + 1/2 = 2.5',
     },
   ];
 
@@ -115,39 +115,39 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
   const quizQuestions = [
     {
       qEn: 'Simplify: 2³ × 2⁴. According to the Product Law of Indices, what is the result?',
-      qNp: 'सरल गर्नुहोस्: २³ × २⁴। घाताङ्कको गुणन नियम अनुसार यसको मान कति हुन्छ?',
+      qNp: 'सरल गर्नुहोस्: 2³ × 2⁴। घाताङ्कको गुणन नियम अनुसार यसको मान कति हुन्छ?',
       options: ['2⁷ = 128', '4⁷ = 16384', '2¹² = 4096', '2¹ = 2'],
-      optionsNp: ['२⁷ = १२८', '४⁷ = १६३८४', '२¹² = ४०९६', '२¹ = २'],
+      optionsNp: ['2⁷ = 128', '4⁷ = 16384', '2¹² = 4096', '2¹ = 2'],
       correct: 0,
       hintEn: 'Product Law: a^m × a^n = a^(m + n)  ⟹  2^(3 + 4) = 2⁷ = 128.',
-      hintNp: 'गुणन नियम: a^m × a^n = a^(m + n)  ⟹  २^(३ + ४) = २⁷ = १२८।',
+      hintNp: 'गुणन नियम: a^m × a^n = a^(m + n)  ⟹  2^(3 + 4) = 2⁷ = 128।',
     },
     {
       qEn: 'What is the value of 5⁰ and 4⁻²?',
-      qNp: '५⁰ र ४⁻² को मान कति हुन्छ?',
+      qNp: '5⁰ र 4⁻² को मान कति हुन्छ?',
       options: ['1 and 1/16', '0 and -8', '5 and -16', '1 and -8'],
-      optionsNp: ['१ र १/१६', '० र -८', '५ र -१६', '१ र -८'],
+      optionsNp: ['1 र 1/16', '0 र -8', '5 र -16', '1 र -8'],
       correct: 0,
       hintEn: 'a⁰ = 1 (for a ≠ 0) and a⁻ⁿ = 1/aⁿ. So 5⁰ = 1 and 4⁻² = 1/4² = 1/16.',
-      hintNp: 'a⁰ = १ (जहाँ a ≠ ०) र a⁻ⁿ = १/aⁿ। त्यसैले ५⁰ = १ र ४⁻² = १/४² = १/१६।',
+      hintNp: 'a⁰ = 1 र a⁻ⁿ = 1/aⁿ। त्यसैले 5⁰ = 1 र 4⁻² = 1/4² = 1/16।',
     },
     {
       qEn: 'Solve the exponential equation: 3^(x - 2) = 27. What is the value of x?',
-      qNp: 'घाताङ्कीय समीकरण हल गर्नुहोस्: ३^(x - २) = २७। x को मान कति हुन्छ?',
+      qNp: 'घाताङ्कीय समीकरण हल गर्नुहोस्: 3^(x - 2) = 27। x को मान कति हुन्छ?',
       options: ['x = 5', 'x = 3', 'x = 6', 'x = 1'],
-      optionsNp: ['x = ५', 'x = ३', 'x = ६', 'x = १'],
+      optionsNp: ['x = 5', 'x = 3', 'x = 6', 'x = 1'],
       correct: 0,
       hintEn: '3^(x - 2) = 27 = 3³  ⟹  x - 2 = 3  ⟹  x = 5.',
-      hintNp: '३^(x - २) = २७ = ३³  ⟹  x - २ = ३  ⟹  x = ५।',
+      hintNp: '3^(x - 2) = 27 = 3³  ⟹  x - 2 = 3  ⟹  x = 5।',
     },
     {
       qEn: 'Evaluate: 64^(2/3). What is the exact value?',
-      qNp: 'मान निकाल्नुहोस्: ६४^(२/३)। यसको मान कति हुन्छ?',
+      qNp: 'मान निकाल्नुहोस्: 64^(2/3)। यसको मान कति हुन्छ?',
       options: ['16', '8', '32', '4'],
-      optionsNp: ['१६', '८', '३२', '४'],
+      optionsNp: ['16', '8', '32', '4'],
       correct: 0,
       hintEn: '64^(2/3) = (∛64)² = 4² = 16.',
-      hintNp: '६४^(२/३) = (∛६४)² = ४² = १६।',
+      hintNp: '64^(2/3) = (∛64)² = 4² = 16।',
     },
   ];
 
@@ -177,7 +177,7 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ ९: घाताङ्क (Indices) प्रयोगशालामा स्वागत छ! यहाँ गुणन र भागका नियमहरू, शून्य र ऋणात्मक घाताङ्क, भिन्न घाताङ्क तथा घाताङ्कीय समीकरणहरू प्रत्यक्ष अन्वेषण गर्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 9: घाताङ्क (Indices) प्रयोगशालामा स्वागत छ! यहाँ गुणन र भागका नियमहरू, शून्य र ऋणात्मक घाताङ्क, भिन्न घाताङ्क तथा घाताङ्कीय समीकरणहरू प्रत्यक्ष अन्वेषण गर्नुहोस्!',
         'Welcome to Grade 10 Unit 9: Laws of Indices Interactive Explorer! Experiment with product & quotient laws, zero & negative powers, fractional roots, and step-by-step exponential equation solving!'
       )}
     >
@@ -216,10 +216,10 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
             {/* Law Buttons */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
               {[
-                { id: 'product', label: 'aᵐ × aⁿ = aᵐ⁺ⁿ', nameNp: '१. गुणन नियम (Product)', nameEn: '1. Product Law' },
-                { id: 'quotient', label: 'aᵐ ÷ aⁿ = aᵐ⁻ⁿ', nameNp: '२. भाग नियम (Quotient)', nameEn: '2. Quotient Law' },
-                { id: 'powerOfPower', label: '(aᵐ)ⁿ = aᵐⁿ', nameNp: '३. घातको घात (Power of Power)', nameEn: '3. Power of Power' },
-                { id: 'powerOfProduct', label: '(ab)ᵐ = aᵐ bᵐ', nameNp: '४. गुणनको घात (Power of Product)', nameEn: '4. Power of Product' },
+                { id: 'product', label: 'aᵐ × aⁿ = aᵐ⁺ⁿ', nameNp: '1. गुणन नियम (Product)', nameEn: '1. Product Law' },
+                { id: 'quotient', label: 'aᵐ ÷ aⁿ = aᵐ⁻ⁿ', nameNp: '2. भाग नियम (Quotient)', nameEn: '2. Quotient Law' },
+                { id: 'powerOfPower', label: '(aᵐ)ⁿ = aᵐⁿ', nameNp: '3. घातको घात (Power of Power)', nameEn: '3. Power of Power' },
+                { id: 'powerOfProduct', label: '(ab)ᵐ = aᵐ bᵐ', nameNp: '4. गुणनको घात (Power of Product)', nameEn: '4. Power of Product' },
               ].map((law) => (
                 <button
                   key={law.id}
@@ -250,14 +250,14 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
                 {selectedLaw === 'product' && (
                   <div className="my-4 space-y-4">
                     <div className="p-4 bg-slate-900/70 border border-slate-700 rounded-xl text-center">
-                      <div className="text-xs text-slate-400 mb-1">घाताङ्क पदहरू</div>
+                      <div className="text-xs text-slate-400 mb-1">Exponent terms</div>
                       <div className="text-2xl font-mono font-bold text-teal-300">
                         {fmt(baseA)}<sup className="text-amber-400 text-lg">{fmt(expM)}</sup> × {fmt(baseA)}<sup className="text-amber-400 text-lg">{fmt(expN)}</sup>
                       </div>
                     </div>
 
                     <div className="p-4 bg-slate-900/70 border border-slate-700 rounded-xl space-y-2">
-                      <div className="text-xs text-slate-400">विस्तारित गुणन रूप (Repeated Multiplication):</div>
+                      <div className="text-xs text-slate-400">Expanded multiplication form (repeated multiplication):</div>
                       <div className="text-sm font-mono text-slate-200 break-words">
                         = ({Array(expM).fill(fmt(baseA)).join(' × ')}) × ({Array(expN).fill(fmt(baseA)).join(' × ')})
                       </div>
@@ -267,7 +267,7 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
                     </div>
 
                     <div className="p-3 bg-teal-900/50 border border-teal-500/50 rounded-xl text-center">
-                      <span className="text-xs text-teal-200 block">अन्तिम संख्यात्मक मान:</span>
+                      <span className="text-xs text-teal-200 block">Final numerical value:</span>
                       <span className="text-2xl font-black font-mono text-teal-300">
                         {fmt(Math.pow(baseA, expM + expN))}
                       </span>
@@ -298,7 +298,7 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
                     </div>
 
                     <div className="p-3 bg-teal-900/50 border border-teal-500/50 rounded-xl text-center">
-                      <span className="text-xs text-teal-200 block">अन्तिम संख्यात्मक मान:</span>
+                      <span className="text-xs text-teal-200 block">Final numerical value:</span>
                       <span className="text-2xl font-black font-mono text-teal-300">
                         {fmt(Math.pow(baseA, expM - expN))}
                       </span>
@@ -324,7 +324,7 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
                     </div>
 
                     <div className="p-3 bg-teal-900/50 border border-teal-500/50 rounded-xl text-center">
-                      <span className="text-xs text-teal-200 block">अन्तिम संख्यात्मक मान:</span>
+                      <span className="text-xs text-teal-200 block">Final numerical value:</span>
                       <span className="text-2xl font-black font-mono text-teal-300">
                         {fmt(Math.pow(baseA, expM * expN))}
                       </span>
@@ -338,14 +338,14 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
                     <div className="p-4 bg-slate-900/70 border border-slate-700 rounded-xl text-center">
                       <div className="text-xs text-slate-400 mb-1">गुणनफलको घात</div>
                       <div className="text-2xl font-mono font-bold text-teal-300">
-                        ({fmt(baseA)} × ३)<sup className="text-amber-400 text-lg">{fmt(expM)}</sup>
+                        ({fmt(baseA)} × 3)<sup className="text-amber-400 text-lg">{fmt(expM)}</sup>
                       </div>
                     </div>
 
                     <div className="p-4 bg-slate-900/70 border border-slate-700 rounded-xl space-y-2">
                       <div className="text-xs text-slate-400">वित्तीय नियम अनुसार घात वितरण:</div>
                       <div className="text-sm font-mono text-slate-200">
-                        = {fmt(baseA)}<sup className="text-amber-300">{fmt(expM)}</sup> × ३<sup className="text-amber-300">{fmt(expM)}</sup>
+                        = {fmt(baseA)}<sup className="text-amber-300">{fmt(expM)}</sup> × 3<sup className="text-amber-300">{fmt(expM)}</sup>
                       </div>
                     </div>
 
@@ -449,7 +449,7 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
               </h4>
               <p className="text-xs text-slate-600">
                 {L(
-                  'घाताङ्क १ ले घट्दा अघिल्लो मानलाई आधारले भाग गरिन्छ। यस ढाँचाले किन a⁰ = १ र a⁻ⁿ = १/aⁿ हुन्छ भन्ने कुरा प्रत्यक्ष प्रमाणित गर्छ।',
+                  'घाताङ्क 1 ले घट्दा अघिल्लो मानलाई आधारले भाग गरिन्छ। यस ढाँचाले किन a⁰ = 1 र a⁻ⁿ = 1/aⁿ हुन्छ भन्ने कुरा प्रत्यक्ष प्रमाणित गर्छ।',
                   'As the exponent decreases by 1, the value is divided by the base. This pattern demonstrates why a⁰ = 1 and a⁻ⁿ = 1/aⁿ.'
                 )}
               </p>
@@ -480,9 +480,9 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
                 <table className="w-full text-xs font-mono">
                   <thead className="bg-[#142D4E] text-white font-sans">
                     <tr>
-                      <th className="p-2.5 text-left">घाताङ्क (Power)</th>
-                      <th className="p-2.5 text-left">सञ्चालन (Operation)</th>
-                      <th className="p-2.5 text-right">मान (Value)</th>
+                      <th className="p-2.5 text-left">Power</th>
+                      <th className="p-2.5 text-left">Operation</th>
+                      <th className="p-2.5 text-right">Value</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 bg-white">
@@ -504,17 +504,17 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
                     <tr className="bg-amber-50/80 font-bold">
                       <td className="p-2.5 text-amber-800">{fmt(descendingBase)}⁰</td>
                       <td className="p-2.5 text-amber-700">{fmt(descendingBase)} ÷ {fmt(descendingBase)}</td>
-                      <td className="p-2.5 text-right text-base text-amber-800">१ (1)</td>
+                      <td className="p-2.5 text-right text-base text-amber-800">1 (1)</td>
                     </tr>
                     <tr className="bg-rose-50/80 font-bold">
                       <td className="p-2.5 text-rose-800">{fmt(descendingBase)}⁻¹</td>
-                      <td className="p-2.5 text-rose-700">१ ÷ {fmt(descendingBase)}</td>
-                      <td className="p-2.5 text-right text-rose-800">१/{fmt(descendingBase)}</td>
+                      <td className="p-2.5 text-rose-700">1 ÷ {fmt(descendingBase)}</td>
+                      <td className="p-2.5 text-right text-rose-800">1/{fmt(descendingBase)}</td>
                     </tr>
                     <tr className="bg-rose-50/80 font-bold">
                       <td className="p-2.5 text-rose-800">{fmt(descendingBase)}⁻²</td>
-                      <td className="p-2.5 text-rose-700">(१/{fmt(descendingBase)}) ÷ {fmt(descendingBase)}</td>
-                      <td className="p-2.5 text-right text-rose-800">१/{fmt(descendingBase * descendingBase)}</td>
+                      <td className="p-2.5 text-rose-700">(1/{fmt(descendingBase)}) ÷ {fmt(descendingBase)}</td>
+                      <td className="p-2.5 text-right text-rose-800">1/{fmt(descendingBase * descendingBase)}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -524,12 +524,12 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
               <div className="space-y-3">
                 <div className="p-4 bg-amber-50 border border-amber-300 rounded-xl space-y-1">
                   <span className="text-xs font-bold text-amber-900 block font-sans">
-                    १. शून्य घाताङ्कको नियम (Zero Exponent Law)
+                    1. Zero exponent law
                   </span>
-                  <div className="text-lg font-mono font-black text-amber-800">a⁰ = १  (जहाँ a ≠ ०)</div>
+                  <div className="text-lg font-mono font-black text-amber-800">a⁰ = 1</div>
                   <p className="text-xs text-amber-900 font-sans mt-1">
                     {L(
-                      `कुनै पनि गैर-शून्य संख्याको घात ० हुँदा यसको मान सधैँ १ हुन्छ। जस्तै: ${fmt(descendingBase)}⁰ = १।`,
+                      `कुनै पनि गैर-शून्य संख्याको घात 0 हुँदा यसको मान सधैँ 1 हुन्छ। जस्तै: ${fmt(descendingBase)}⁰ = 1।`,
                       `Any non-zero base raised to the power of 0 equals 1.`
                     )}
                   </p>
@@ -537,12 +537,12 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
 
                 <div className="p-4 bg-rose-50 border border-rose-300 rounded-xl space-y-1">
                   <span className="text-xs font-bold text-rose-900 block font-sans">
-                    २. ऋणात्मक घाताङ्कको नियम (Negative Exponent Law)
+                    2. Negative exponent law
                   </span>
-                  <div className="text-lg font-mono font-black text-rose-800">a⁻ⁿ = १ / aⁿ  (जहाँ a ≠ ०)</div>
+                  <div className="text-lg font-mono font-black text-rose-800">a⁻ⁿ = 1 / aⁿ  (where a ≠ 0)</div>
                   <p className="text-xs text-rose-900 font-sans mt-1">
                     {L(
-                      `ऋणात्मक घाताङ्कले संख्याको व्युत्क्रम (Reciprocal) जनाउँछ। जस्तै: ${fmt(descendingBase)}⁻² = १/${fmt(descendingBase)}² = १/${fmt(descendingBase * descendingBase)}।`,
+                      `ऋणात्मक घाताङ्कले संख्याको व्युत्क्रम (Reciprocal) जनाउँछ। जस्तै: ${fmt(descendingBase)}⁻² = 1/${fmt(descendingBase)}² = 1/${fmt(descendingBase * descendingBase)}।`,
                       `A negative exponent denotes the reciprocal of the power.`
                     )}
                   </p>
@@ -597,21 +597,21 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-sans text-xs">
                 <div className="p-3 bg-white border border-teal-200 rounded-lg">
-                  <span className="text-slate-400 block text-xs">चरण १: हरले मूल (Root) जनाउँछ</span>
+                  <span className="text-slate-400 block text-xs">Step 1: The denominator indicates the root</span>
                   <div className="font-bold font-mono text-teal-800 text-sm mt-0.5">
                     {fmt(fracPresets[fracPresetIdx].n)}√{fmt(fracPresets[fracPresetIdx].base)} = {fmt(fracPresets[fracPresetIdx].root)}
                   </div>
                 </div>
 
                 <div className="p-3 bg-white border border-teal-200 rounded-lg">
-                  <span className="text-slate-400 block text-xs">चरण २: अंशले घात (Power) जनाउँछ</span>
+                  <span className="text-slate-400 block text-xs">Step 2: The numerator indicates the power</span>
                   <div className="font-bold font-mono text-teal-800 text-sm mt-0.5">
                     ({fmt(fracPresets[fracPresetIdx].root)})<sup className="text-amber-600">{fmt(fracPresets[fracPresetIdx].m)}</sup>
                   </div>
                 </div>
 
                 <div className="p-3 bg-teal-100 border border-teal-300 rounded-lg">
-                  <span className="text-teal-700 block text-xs font-bold">चरण ३: अन्तिम मान (Result)</span>
+                  <span className="text-teal-700 block text-xs font-bold">Step 3: Final result</span>
                   <div className="font-bold font-mono text-[#142D4E] text-base mt-0.5">
                     = {fmt(fracPresets[fracPresetIdx].final)}
                   </div>
@@ -632,7 +632,7 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
               </h4>
               <p className="text-xs text-slate-600">
                 {L(
-                  'यदि a^x = a^k (जहाँ a > ०, a ≠ १) भए, x = k हुन्छ। पाठ्यपुस्तकका विभिन्न प्रकारका घाताङ्कीय समीकरणहरू तल छानी चरणबद्ध समाधान हेर्नुहोस्।',
+                  'यदि a^x = a^k भए, x = k हुन्छ। पाठ्यपुस्तकका विभिन्न प्रकारका घाताङ्कीय समीकरणहरू तल छानी चरणबद्ध समाधान हेर्नुहोस्।',
                   'If a^x = a^k (where a > 0, a ≠ 1), then x = k. Select textbook equations below to study step-by-step solutions.'
                 )}
               </p>
@@ -670,22 +670,22 @@ export const IndicesExplorer: React.FC<SimProps> = ({ onBackToLibrary, onBack })
               </div>
 
               <div className="p-3 bg-white border rounded-lg">
-                <span className="text-slate-400 block text-xs font-sans">चरण १ (Step 1):</span>
+                <span className="text-slate-400 block text-xs font-sans">Step 1:</span>
                 <span>{isNe ? eqPresets[selectedEqIdx].step1Np : eqPresets[selectedEqIdx].step1En}</span>
               </div>
 
               <div className="p-3 bg-white border rounded-lg">
-                <span className="text-slate-400 block text-xs font-sans">चरण २ (Step 2):</span>
+                <span className="text-slate-400 block text-xs font-sans">Step 2:</span>
                 <span>{isNe ? eqPresets[selectedEqIdx].step2Np : eqPresets[selectedEqIdx].step2En}</span>
               </div>
 
               <div className="p-3 bg-white border rounded-lg">
-                <span className="text-slate-400 block text-xs font-sans">चरण ३ (Step 3):</span>
+                <span className="text-slate-400 block text-xs font-sans">Step 3:</span>
                 <span>{isNe ? eqPresets[selectedEqIdx].step3Np : eqPresets[selectedEqIdx].step3En}</span>
               </div>
 
               <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
-                <span className="text-emerald-700 block text-xs font-sans font-bold">समीकरण परीक्षण (Verification):</span>
+                <span className="text-emerald-700 block text-xs font-sans font-bold">Verification of the equation:</span>
                 <span className="text-emerald-800 font-bold">{isNe ? eqPresets[selectedEqIdx].checkNp : eqPresets[selectedEqIdx].checkEn}</span>
               </div>
             </div>

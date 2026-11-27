@@ -1,6 +1,6 @@
 /**
  * AlgebraicIdentitiesChallenge.tsx
- * Grade 7 Mathematics – Lesson 11: ALGEBRAIC EXPRESSION (बीजगणितीय व्यञ्जक)
+ * Grade 7 Mathematics – Lesson 11: ALGEBRAIC EXPRESSION
  * Simulation 5: Algebraic Identities & Simplification Challenge (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 164-167)
  */
@@ -12,35 +12,35 @@ import { Award, CheckCircle, HelpCircle, ArrowRight, Check } from 'lucide-react'
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: '(२a + b)² - (२a - b)² लाई सर्वसमिका प्रयोग गरी सरल गर्दा कति प्राप्त हुन्छ?',
+    np: '(2a + b)² - (2a - b)² लाई सर्वसमिका प्रयोग गरी सरल गर्दा कति प्राप्त हुन्छ?',
     en: 'Simplifying (2a + b)² - (2a - b)² using identities yields:',
     options: [
-      { key: 'A', label: '८ab [ (४a² + ४ab + b²) - (४a² - ४ab + b²) = ८ab ]' },
-      { key: 'B', label: '४ab' },
-      { key: 'C', label: '८a² + २b²' },
-      { key: 'D', label: '०' },
+      { key: 'A', label: '8ab [ (4a² + 4ab + b²) - (4a² - 4ab + b²) = 8ab ]' },
+      { key: 'B', label: '4ab' },
+      { key: 'C', label: '8a² + 2b²' },
+      { key: 'D', label: '0' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि a + b = ८ र ab = १२ भए a² + b² को मान कति हुन्छ?',
+    np: 'यदि a + b = 8 र ab = 12 भए a² + b² को मान कति हुन्छ?',
     en: 'If a + b = 8 and ab = 12, what is the value of a² + b²?',
     options: [
-      { key: 'A', label: '४० [ (a + b)² - २ab = ८² - २(१२) = ६४ - २४ = ४० ]' },
-      { key: 'B', label: '५२' },
-      { key: 'C', label: '६४' },
-      { key: 'D', label: '४८' },
+      { key: 'A', label: '40 [ (a + b)² - 2ab = 8² - 2(12) = 64 - 24 = 40 ]' },
+      { key: 'B', label: '52' },
+      { key: 'C', label: '64' },
+      { key: 'D', label: '48' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि x + १/x = ४ भए x² + १/x² को मान कति हुन्छ?',
+    np: 'यदि x + 1/x = 4 भए x² + 1/x² को मान कति हुन्छ?',
     en: 'If x + 1/x = 4, what is the value of x² + 1/x²?',
     options: [
-      { key: 'A', label: '१४ [ (x + १/x)² - २ = ४² - २ = १६ - २ = १४ ]' },
-      { key: 'B', label: '१६' },
-      { key: 'C', label: '१८' },
-      { key: 'D', label: '१२' },
+      { key: 'A', label: '14 [ (x + 1/x)² - 2 = 4² - 2 = 16 - 2 = 14 ]' },
+      { key: 'B', label: '16' },
+      { key: 'C', label: '18' },
+      { key: 'D', label: '12' },
     ],
     answer: 'A',
   },
@@ -48,8 +48,8 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'त्रिपदीय सर्वसमिका (a + b + c)² को सही विस्तार कुन हो?',
     en: 'What is the correct expansion of trinomial square (a + b + c)²?',
     options: [
-      { key: 'A', label: 'a² + b² + c² + २ab + २bc + २ca' },
-      { key: 'B', label: 'a² + b² + c² + ३abc' },
+      { key: 'A', label: 'a² + b² + c² + 2ab + 2bc + 2ca' },
+      { key: 'B', label: 'a² + b² + c² + 3abc' },
       { key: 'C', label: 'a² + b² + c²' },
       { key: 'D', label: 'a² + b² + c² + ab + bc + ca' },
     ],
@@ -90,7 +90,7 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'सर्वसमिका प्रयोग गरी ठूला हिसाबहरू चुट्कीमा हल हुन्छन्: a² + b² = (a+b)² - २ab र (x + १/x)² - २ = x² + १/x²!',
+        'सर्वसमिका प्रयोग गरी ठूला हिसाबहरू चुट्कीमा हल हुन्छन्: a² + b² = (a+b)² - 2ab र (x + 1/x)² - 2 = x² + 1/x²!',
         'Use identities for quick simplification: a² + b² = (a+b)² - 2ab and (x + 1/x)² - 2 = x² + 1/x²!'
       )}
     >
@@ -98,10 +98,10 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'simplify', np: '१. सर्वसमिका सरलीकरण (2a+b)² - (2a-b)²', en: '1. Simplification' },
-            { id: 'sum-prod', np: '२. योगफल र गुणनफलबाट a² + b²', en: '2. Sum & Product' },
-            { id: 'reciprocal', np: '३. व्युत्क्रम पद x² + 1/x²', en: '3. Reciprocal Identity' },
-            { id: 'expand', np: '४. त्रिपदीय विस्तार (a + b + c)²', en: '4. Trinomial Square' },
+            { id: 'simplify', np: '1. सर्वसमिका सरलीकरण (2a+b)² - (2a-b)²', en: '1. Simplification' },
+            { id: 'sum-prod', np: '2. योगफल र गुणनफलबाट a² + b²', en: '2. Sum & Product' },
+            { id: 'reciprocal', np: '3. व्युत्क्रम पद x² + 1/x²', en: '3. Reciprocal Identity' },
+            { id: 'expand', np: '4. त्रिपदीय विस्तार (a + b + c)²', en: '4. Trinomial Square' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -133,7 +133,7 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: (२a + b)² - (२a - b)² लाई सर्वसमिका प्रयोग गरी सरल गर्नुहोस्:',
+                'पाठ्यपुस्तक उदाहरण: (2a + b)² - (2a - b)² लाई सर्वसमिका प्रयोग गरी सरल गर्नुहोस्:',
                 'Textbook Example: Simplify (2a + b)² - (2a - b)² using identities:'
               )}
             </p>
@@ -149,17 +149,17 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('१. दिइएको:', '1. Given:')}</strong> (२a + b)² - (२a - b)²
+                <strong>{L('1. दिइएको:', '1. Given:')}</strong> (2a + b)² - (2a - b)²
               </div>
               <div>
-                <strong>{L('२. पहिलो पद विस्तार:', '2. Expand 1st term:')}</strong> (२a)² + २(२a)(b) + b² = ४a² + ४ab + b²
+                <strong>{L('2. पहिलो पद विस्तार:', '2. Expand 1st term:')}</strong> (2a)² + 2(2a)(b) + b² = 4a² + 4ab + b²
               </div>
               <div>
-                <strong>{L('३. दोस्रो पद विस्तार:', '3. Expand 2nd term:')}</strong> (२a)² - २(२a)(b) + b² = ४a² - ४ab + b²
+                <strong>{L('3. दोस्रो पद विस्तार:', '3. Expand 2nd term:')}</strong> (2a)² - 2(2a)(b) + b² = 4a² - 4ab + b²
               </div>
               <div>
-                <strong>{L('४. घटाउँदा (चिन्ह परिवर्तन):', '4. Subtracting:')}</strong> [ ४a² + ४ab + b² ] - [ ४a² - ४ab + b² ]
-                <br />= ४a² + ४ab + b² - ४a² + ४ab - b²
+                <strong>{L('4. घटाउँदा (चिन्ह परिवर्तन):', '4. Subtracting:')}</strong> [ 4a² + 4ab + b² ] - [ 4a² - 4ab + b² ]
+                <br />= 4a² + 4ab + b² - 4a² + 4ab - b²
               </div>
               <div
                 style={{
@@ -169,7 +169,7 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
                   color: '#166534',
                 }}
               >
-                = ८ab
+                = 8ab
               </div>
             </div>
           </div>
@@ -183,7 +183,7 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: यदि a + b = ८ र ab = १२ भए a² + b² को मान निकाल्नुहोस्:',
+                'पाठ्यपुस्तक उदाहरण: यदि a + b = 8 र ab = 12 भए a² + b² को मान निकाल्नुहोस्:',
                 'Textbook Example: If a + b = 8 and ab = 12, find a² + b²:'
               )}
             </p>
@@ -191,7 +191,7 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1', display: 'block', marginBottom: 4 }}>
-                  योगफल (a + b): {sumAB}
+                  Sum (a + b): {sumAB}
                 </label>
                 <input
                   type="range"
@@ -208,7 +208,7 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D', display: 'block', marginBottom: 4 }}>
-                  गुणनफल (ab): {prodAB}
+                  Product (ab): {prodAB}
                 </label>
                 <input
                   type="range"
@@ -235,13 +235,13 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('१. मूल सर्वसमिका:', '1. Fundamental Identity:')}</strong> (a + b)² = a² + २ab + b²
+                <strong>{L('1. मूल सर्वसमिका:', '1. Fundamental Identity:')}</strong> (a + b)² = a² + 2ab + b²
               </div>
               <div>
-                <strong>{L('२. पक्षान्तर गर्दा:', '2. Rearranging:')}</strong> a² + b² = (a + b)² - २ab
+                <strong>{L('2. पक्षान्तर गर्दा:', '2. Rearranging:')}</strong> a² + b² = (a + b)² - 2ab
               </div>
               <div>
-                <strong>{L('३. मान राख्दा:', '3. Substituting values:')}</strong> a² + b² = ({sumAB})² - २({prodAB})
+                <strong>{L('3. मान राख्दा:', '3. Substituting values:')}</strong> a² + b² = ({sumAB})² - 2({prodAB})
                 <br />= {sumAB * sumAB} - {2 * prodAB}
               </div>
               <div
@@ -266,14 +266,14 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: यदि x + १/x = ४ भए x² + १/x² को मान कति हुन्छ?',
+                'पाठ्यपुस्तक उदाहरण: यदि x + 1/x = 4 भए x² + 1/x² को मान कति हुन्छ?',
                 'Textbook Example: If x + 1/x = 4, find the value of x² + 1/x²:'
               )}
             </p>
 
             <div style={{ margin: '16px 0' }}>
               <label style={{ fontSize: 13, fontWeight: 700, color: '#334155', display: 'block', marginBottom: 4 }}>
-                x + १/x = {valXPlusInv}
+                x + 1/x = {valXPlusInv}
               </label>
               <input
                 type="range"
@@ -298,16 +298,16 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('१. दुवैतर्फ वर्ग गर्दा:', '1. Squaring both sides:')}</strong> (x + १/x)² = ({valXPlusInv})²
+                <strong>{L('1. दुवैतर्फ वर्ग गर्दा:', '1. Squaring both sides:')}</strong> (x + 1/x)² = ({valXPlusInv})²
               </div>
               <div>
-                x² + २(x)(१/x) + (१/x)² = {valXPlusInv * valXPlusInv}
+                x² + 2(x)(1/x) + (1/x)² = {valXPlusInv * valXPlusInv}
               </div>
               <div>
-                x² + २ + १/x² = {valXPlusInv * valXPlusInv}
+                x² + 2 + 1/x² = {valXPlusInv * valXPlusInv}
               </div>
               <div>
-                x² + १/x² = {valXPlusInv * valXPlusInv} - २
+                x² + 1/x² = {valXPlusInv * valXPlusInv} - 2
               </div>
               <div
                 style={{
@@ -317,7 +317,7 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
                   color: '#187C68',
                 }}
               >
-                x² + १/x² = {x2PlusInv2}
+                x² + 1/x² = {x2PlusInv2}
               </div>
             </div>
           </div>
@@ -331,7 +331,7 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ १६६ अनुसार: (a + b + c)² लाई विस्तार गर्दा तीन वर्गहरू र तीन जोडी गुणनहरू प्राप्त हुन्छन्:',
+                'पाठ्यपुस्तक पृष्ठ 166 अनुसार: (a + b + c)² लाई विस्तार गर्दा तीन वर्गहरू र तीन जोडी गुणनहरू प्राप्त हुन्छन्:',
                 'Textbook Page 166: Expanding (a + b + c)² produces 3 squares and 3 paired products:'
               )}
             </p>
@@ -347,11 +347,11 @@ export const AlgebraicIdentitiesChallenge: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div style={{ fontSize: 22, fontWeight: 800, color: '#065F46' }}>
-                (a + b + c)² = a² + b² + c² + २ab + २bc + २ca
+                (a + b + c)² = a² + b² + c² + 2ab + 2bc + 2ca
               </div>
               <div style={{ fontSize: 14, color: '#047857', marginTop: 8 }}>
                 {L(
-                  'प्रमाणीकरण: [ (a + b) + c ]² = (a + b)² + २(a + b)c + c² = a² + २ab + b² + २ac + २bc + c²',
+                  'प्रमाणीकरण: [ (a + b) + c ]² = (a + b)² + 2(a + b)c + c² = a² + 2ab + b² + 2ac + 2bc + c²',
                   'Derivation: [ (a + b) + c ]² = (a + b)² + 2(a + b)c + c² = a² + b² + c² + 2ab + 2bc + 2ca'
                 )}
               </div>

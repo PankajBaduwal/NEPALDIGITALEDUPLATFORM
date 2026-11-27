@@ -39,8 +39,8 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
     { code: 'GBP', nameEn: 'UK Pound Sterling', nameNp: 'युके पाउन्ड स्टर्लिङ', symbol: '£', unit: 1, buyRate: 166.40, sellRate: 167.15 },
     { code: 'AUD', nameEn: 'Australian Dollar', nameNp: 'अष्ट्रेलियन डलर', symbol: 'A$', unit: 1, buyRate: 86.80, sellRate: 87.20 },
     { code: 'CAD', nameEn: 'Canadian Dollar', nameNp: 'क्यानेडियन डलर', symbol: 'C$', unit: 1, buyRate: 97.50, sellRate: 97.95 },
-    { code: 'JPY', nameEn: 'Japanese Yen (10)', nameNp: 'जापानी येन (१०)', symbol: '¥', unit: 10, buyRate: 8.85, sellRate: 8.89 },
-    { code: 'INR', nameEn: 'Indian Rupee (100)', nameNp: 'भारतीय रुपैयाँ (१००)', symbol: '₹', unit: 100, buyRate: 160.00, sellRate: 160.15 },
+    { code: 'JPY', nameEn: 'Japanese Yen (10)', nameNp: 'जापानी येन (10)', symbol: '¥', unit: 10, buyRate: 8.85, sellRate: 8.89 },
+    { code: 'INR', nameEn: 'Indian Rupee (100)', nameNp: 'भारतीय rupees (100)', symbol: '₹', unit: 100, buyRate: 160.00, sellRate: 160.15 },
     { code: 'QAR', nameEn: 'Qatari Riyal', nameNp: 'कतारी रियाल', symbol: 'QR', unit: 1, buyRate: 36.35, sellRate: 36.52 },
   ]);
 
@@ -97,30 +97,30 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
 
   const quizQuestions = [
     {
-      qNp: 'यदि १ अमेरिकी डलरको खरिददर रु. १३२.५० र बिक्रीदर रु. १३३.१० छ भने, ५०० डलर बैंकमा साट्दा कति नेपाली रुपैयाँ पाइन्छ?',
+      qNp: 'यदि 1 अमेरिकी डलरको खरिददर Rs. 132.50 र बिक्रीदर Rs. 133.10 छ भने, 500 डलर बैंकमा साट्दा कति नेपाली rupees पाइन्छ?',
       qEn: 'If 1 USD has Buying rate Rs 132.50 and Selling rate Rs 133.10, how many NPR will you receive by selling 500 USD to the bank?',
-      opts: ['रु. ६६,२५०', 'रु. ६६,५५०', 'रु. ६६,०००', 'रु. ६५,८००'],
+      opts: ['Rs. 66,250', 'Rs. 66,550', 'Rs. 66,000', 'Rs. 65,800'],
       correct: 0,
-      expNp: 'बैंकले विदेशी मुद्रा किन्ने भएकोले खरिददर (Buying Rate) लाग्छ: ५०० × १३२.५० = रु. ६६,२५०',
+      expNp: 'बैंकले विदेशी मुद्रा किन्ने भएकोले खरिददर (Buying Rate) लाग्छ: 500 × 132.50 = Rs. 66,250',
       expEn: 'Bank purchases foreign currency at Buying Rate: 500 × 132.50 = NPR 66,250',
     },
     {
-      qNp: 'नेपाली रुपैयाँको अवमूल्यन (Depreciation) हुँदा विदेशी मुद्रा किन्ने नेपाली नागरिकलाई के असर पर्छ?',
+      qNp: 'नेपाली rupeesको अवमूल्यन (Depreciation) हुँदा विदेशी मुद्रा किन्ने नेपाली नागरिकलाई के असर पर्छ?',
       qEn: 'When Nepalese Rupee depreciates against foreign currency, how does it affect a Nepali citizen buying foreign currency?',
       opts: [
-        'विदेशी मुद्रा किन्न धेरै रुपैयाँ तिर्नुपर्छ (महङ्गो हुन्छ)',
-        'विदेशी मुद्रा किन्न थोरै रुपैयाँ तिरे पुग्छ (सस्तो हुन्छ)',
+        'विदेशी मुद्रा किन्न धेरै rupees तिर्नुपर्छ (महङ्गो हुन्छ)',
+        'विदेशी मुद्रा किन्न थोरै rupees तिरे पुग्छ (सस्तो हुन्छ)',
         'कुनै असर पर्दैन',
         'बैंकले ब्याज दिन्छ',
       ],
       correct: 0,
-      expNp: 'रुपैयाँको अवमूल्यन हुँदा १ डलर वा पाउन्ड किन्न पहिलेभन्दा बढी रुपैयाँ तिर्नुपर्दछ।',
+      expNp: 'rupeesको अवमूल्यन हुँदा 1 डलर वा पाउन्ड किन्न पहिलेभन्दा बढी rupees तिर्नुपर्दछ।',
       expEn: 'When domestic currency depreciates, purchasing foreign currency requires more domestic currency.',
     },
     {
-      qNp: 'चेन रुल (Chain Rule) अनुसार यदि A/B × B/C = A/C हुन्छ भने, १ क्यानेडियन डलरको जापानी येनसँगको विनिमय दर कुन मध्यवर्ती मुद्राबाट निकाल्न सकिन्छ?',
+      qNp: 'चेन रुल (Chain Rule) अनुसार यदि A/B × B/C = A/C हुन्छ भने, 1 क्यानेडियन डलरको जापानी येनसँगको विनिमय दर कुन मध्यवर्ती मुद्राबाट निकाल्न सकिन्छ?',
       qEn: 'By Chain Rule, which intermediate currency can convert Canadian Dollars (CAD) to Japanese Yen (JPY)?',
-      opts: ['नेपाली रुपैयाँ (NPR)', 'सुन', 'जग्गा', 'कुनै पनि होइन'],
+      opts: ['नेपाली rupees (NPR)', 'सुन', 'जग्गा', 'कुनै पनि होइन'],
       correct: 0,
       expNp: 'नेपालमा CAD बाट NPR र त्यसपछि NPR बाट JPY मा रूपान्तरण गरी चेन रुल लागू गरिन्छ।',
       expEn: 'In Nepal, CAD is converted to NPR, then NPR is converted to JPY using the chain rule.',
@@ -133,7 +133,7 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ ४: मुद्रा र विनिमय दर (Currency and Exchange Rate) प्रयोगशालामा स्वागत छ! यहाँ खरिददर, बिक्रीदर, चेन रुल, र अन्तर्राष्ट्रिय कारोबारको नाफा-नोक्सान अन्वेषण गर्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 4: मुद्रा र विनिमय दर (Currency and Exchange Rate) प्रयोगशालामा स्वागत छ! यहाँ खरिददर, बिक्रीदर, चेन रुल, र अन्तर्राष्ट्रिय कारोबारको नाफा-नोक्सान अन्वेषण गर्नुहोस्!',
         'Welcome to Grade 10 Currency Exchange and Conversion Laboratory! Explore bank buying/selling rates, chain rule cross-conversions, and international business transactions!'
       )}
     >
@@ -208,8 +208,8 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                             {c.code} - {isNe ? c.nameNp : c.nameEn}
                           </td>
                           <td className="py-1.5 font-mono">{fmt(c.unit)}</td>
-                          <td className="py-1.5 font-mono text-emerald-300">रु. {fmt(c.buyRate.toFixed(2))}</td>
-                          <td className="py-1.5 font-mono text-amber-300">रु. {fmt(c.sellRate.toFixed(2))}</td>
+                          <td className="py-1.5 font-mono text-emerald-300">Rs. {fmt(c.buyRate.toFixed(2))}</td>
+                          <td className="py-1.5 font-mono text-amber-300">Rs. {fmt(c.sellRate.toFixed(2))}</td>
                         </tr>
                       );
                     })}
@@ -234,11 +234,11 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                   }`}
                 >
                   <div className="flex justify-between">
-                    <span>{L('१) मसँग विदेशी मुद्रा छ, म साट्न चाहन्छु', '1) Customer Sells Foreign Currency to Bank')}</span>
-                    <span className="text-[10px] bg-emerald-200 text-emerald-800 px-1.5 py-0.5 rounded">खरिददर (Buy Rate)</span>
+                    <span>{L('1) मसँग विदेशी मुद्रा छ, म साट्न चाहन्छु', '1) Customer Sells Foreign Currency to Bank')}</span>
+                    <span className="text-[10px] bg-emerald-200 text-emerald-800 px-1.5 py-0.5 rounded">Buy rate</span>
                   </div>
                   <p className="text-[11px] text-slate-500 mt-1 font-normal">
-                    {L('बैंकले तपाईंबाट विदेशी मुद्रा किन्छ र नेपाली रुपैयाँ (NPR) दिन्छ।', 'Bank buys foreign currency from customer and pays NPR.')}
+                    {L('बैंकले तपाईंबाट विदेशी मुद्रा किन्छ र नेपाली rupees (NPR) दिन्छ।', 'Bank buys foreign currency from customer and pays NPR.')}
                   </p>
                 </button>
 
@@ -251,11 +251,11 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                   }`}
                 >
                   <div className="flex justify-between">
-                    <span>{L('२) मलाई विदेशी मुद्रा चाहिएको छ (किन्न चाहन्छु)', '2) Customer Buys Foreign Currency from Bank')}</span>
-                    <span className="text-[10px] bg-amber-200 text-amber-800 px-1.5 py-0.5 rounded">बिक्रीदर (Sell Rate)</span>
+                    <span>{L('2) मलाई विदेशी मुद्रा चाहिएको छ (किन्न चाहन्छु)', '2) Customer Buys Foreign Currency from Bank')}</span>
+                    <span className="text-[10px] bg-amber-200 text-amber-800 px-1.5 py-0.5 rounded">Sell rate</span>
                   </div>
                   <p className="text-[11px] text-slate-500 mt-1 font-normal">
-                    {L('बैंकले तपाईंलाई विदेशी मुद्रा बेच्छ, तपाईंले नेपाली रुपैयाँ तिर्नुपर्छ।', 'Bank sells foreign currency to customer for NPR.')}
+                    {L('बैंकले तपाईंलाई विदेशी मुद्रा बेच्छ, तपाईंले नेपाली rupees तिर्नुपर्छ।', 'Bank sells foreign currency to customer for NPR.')}
                   </p>
                 </button>
               </div>
@@ -265,7 +265,7 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                 <label className="text-xs font-bold text-slate-700 block mb-1">
                   {transactionType === 'sell_to_bank'
                     ? L(`विदेशी मुद्राको परिमाण (${activeCurrency.code}):`, `Foreign Amount (${activeCurrency.code}):`)
-                    : L('नेपाली रुपैयाँको परिमाण (NPR):', 'NPR Amount to Spend:')}
+                    : L('नेपाली rupeesको परिमाण (NPR):', 'NPR Amount to Spend:')}
                 </label>
                 <input
                   type="number"
@@ -284,16 +284,16 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
 
                 {transactionType === 'sell_to_bank' ? (
                   <div>
-                    <div>१ {activeCurrency.code} को खरिददर = रु. {fmt((activeCurrency.buyRate / activeCurrency.unit).toFixed(2))}</div>
-                    <div>प्राप्त हुने रकम = {fmt(inputAmount)} × {fmt((activeCurrency.buyRate / activeCurrency.unit).toFixed(2))}</div>
+                    <div>1 {activeCurrency.code} buy rate = Rs. {fmt((activeCurrency.buyRate / activeCurrency.unit).toFixed(2))}</div>
+                    <div>Amount received = {fmt(inputAmount)} × {fmt((activeCurrency.buyRate / activeCurrency.unit).toFixed(2))}</div>
                     <div className="text-sm font-bold text-[#142D4E] pt-1">
-                      ➔ कुल प्राप्त NPR = रु. {fmt(convertedResult.toFixed(2))}
+                      ➔ Total NPR received = Rs. {fmt(convertedResult.toFixed(2))}
                     </div>
                   </div>
                 ) : (
                   <div>
-                    <div>१ {activeCurrency.code} को बिक्रीदर = रु. {fmt((activeCurrency.sellRate / activeCurrency.unit).toFixed(2))}</div>
-                    <div>प्राप्त हुने मुद्रा = रु. {fmt(inputAmount)} ÷ {fmt((activeCurrency.sellRate / activeCurrency.unit).toFixed(2))}</div>
+                    <div>1 {activeCurrency.code} को बिक्रीदर = Rs. {fmt((activeCurrency.sellRate / activeCurrency.unit).toFixed(2))}</div>
+                    <div>प्राप्त हुने मुद्रा = Rs. {fmt(inputAmount)} ÷ {fmt((activeCurrency.sellRate / activeCurrency.unit).toFixed(2))}</div>
                     <div className="text-sm font-bold text-[#142D4E] pt-1">
                       ➔ कुल प्राप्त = {activeCurrency.symbol} {fmt(convertedResult.toFixed(2))} {activeCurrency.code}
                     </div>
@@ -311,7 +311,7 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
               <span className="font-bold">{L('चेन रुल (Chain Rule) को नियम:', 'Chain Rule Principle:')}</span>
               <p className="mt-1">
                 {L(
-                  'जब दुई विदेशी मुद्राहरू बीच सिधा विनिमय दर हुँदैन, तब मध्यवर्ती मुद्रा (नेपाली रुपैयाँ NPR) मार्फत चेन रुल प्रयोग गरिन्छ: सुरुको मुद्रा ➔ नेपाली रुपैयाँ (NPR) ➔ अन्तिम गन्तव्य मुद्रा।',
+                  'जब दुई विदेशी मुद्राहरू बीच सिधा विनिमय दर हुँदैन, तब मध्यवर्ती मुद्रा (नेपाली rupees NPR) मार्फत चेन रुल प्रयोग गरिन्छ: Starting currency ➔ नेपाली rupees (NPR) ➔ अन्तिम गन्तव्य मुद्रा।',
                   'When direct rates between two foreign currencies are unavailable, an intermediate currency (NPR) bridges the transaction: Source Currency ➔ NPR ➔ Destination Currency.'
                 )}
               </p>
@@ -319,7 +319,7 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <span className="text-xs font-bold text-slate-700 block mb-1">सुरुको मुद्रा (From):</span>
+                <span className="text-xs font-bold text-slate-700 block mb-1">From currency:</span>
                 <select
                   value={chainFrom}
                   onChange={(e) => setChainFrom(e.target.value)}
@@ -332,7 +332,7 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
               </div>
 
               <div>
-                <span className="text-xs font-bold text-slate-700 block mb-1">परिमाण (Amount):</span>
+                <span className="text-xs font-bold text-slate-700 block mb-1">Amount:</span>
                 <input
                   type="number"
                   value={chainAmount}
@@ -342,7 +342,7 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
               </div>
 
               <div>
-                <span className="text-xs font-bold text-slate-700 block mb-1">गन्तव्य मुद्रा (To):</span>
+                <span className="text-xs font-bold text-slate-700 block mb-1">To currency:</span>
                 <select
                   value={chainTo}
                   onChange={(e) => setChainTo(e.target.value)}
@@ -358,29 +358,29 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
             {/* Chain Visual Diagram */}
             <div className="p-4 bg-slate-900 text-white rounded-2xl flex flex-wrap items-center justify-around gap-2 text-center">
               <div className="p-3 bg-blue-600/30 border border-blue-400 rounded-xl">
-                <span className="text-xs text-blue-300 block">सुरुको मुद्रा</span>
+                <span className="text-xs text-blue-300 block">Starting currency</span>
                 <span className="text-base font-bold font-mono">{fmt(chainAmount)} {currFrom.code}</span>
               </div>
 
               <span className="text-xl text-amber-400 font-bold">➔</span>
 
               <div className="p-3 bg-amber-600/30 border border-amber-400 rounded-xl">
-                <span className="text-xs text-amber-300 block">मध्यवर्ती मुद्रा (NPR)</span>
-                <span className="text-base font-bold font-mono">रु. {fmt(step1NPR.toFixed(2))}</span>
+                <span className="text-xs text-amber-300 block">Intermediate currency (NPR)</span>
+                <span className="text-base font-bold font-mono">Rs. {fmt(step1NPR.toFixed(2))}</span>
               </div>
 
               <span className="text-xl text-emerald-400 font-bold">➔</span>
 
               <div className="p-3 bg-emerald-600/30 border border-emerald-400 rounded-xl">
-                <span className="text-xs text-emerald-300 block">अन्तिम प्राप्त मुद्रा</span>
+                <span className="text-xs text-emerald-300 block">Final currency received</span>
                 <span className="text-base font-bold font-mono">{currTo.symbol} {fmt(step2Final.toFixed(2))} {currTo.code}</span>
               </div>
             </div>
 
             <div className="p-3 bg-slate-50 border rounded-xl font-mono text-xs space-y-1">
-              <div className="font-bold text-[#142D4E]">चेन रुल समीकरण (Chain Rule Equation):</div>
-              <div>१) {fmt(chainAmount)} {currFrom.code} = रु. {fmt(chainAmount)} × ({fmt(currFrom.buyRate)} / {fmt(currFrom.unit)}) = रु. {fmt(step1NPR.toFixed(2))}</div>
-              <div>२) रु. {fmt(step1NPR.toFixed(2))} = रु. {fmt(step1NPR.toFixed(2))} ÷ ({fmt(currTo.sellRate)} / {fmt(currTo.unit)}) = <span className="font-bold text-emerald-700 text-sm">{fmt(step2Final.toFixed(2))} {currTo.code}</span></div>
+              <div className="font-bold text-[#142D4E]">Chain rule equation:</div>
+              <div>1) {fmt(chainAmount)} {currFrom.code} = Rs. {fmt(chainAmount)} × ({fmt(currFrom.buyRate)} / {fmt(currFrom.unit)}) = Rs. {fmt(step1NPR.toFixed(2))}</div>
+              <div>2) Rs. {fmt(step1NPR.toFixed(2))} = Rs. {fmt(step1NPR.toFixed(2))} ÷ ({fmt(currTo.sellRate)} / {fmt(currTo.unit)}) = <span className="font-bold text-emerald-700 text-sm">{fmt(step2Final.toFixed(2))} {currTo.code}</span></div>
             </div>
           </div>
         )}
@@ -395,7 +395,7 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                   scenarioType === 'travel' ? 'bg-[#167C80] text-white border-[#167C80]' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('१) विदेश अध्ययन / भ्रमण (Travel & Tuition)', '1) Travel & Tuition')}
+                {L('1) विदेश अध्ययन / भ्रमण (Travel & Tuition)', '1) Travel & Tuition')}
               </button>
               <button
                 onClick={() => setScenarioType('export_tax')}
@@ -403,7 +403,7 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                   scenarioType === 'export_tax' ? 'bg-[#167C80] text-white border-[#167C80]' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('२) निर्यात कर तथा नाफा-नोक्सान (Export Tax & Profit)', '2) Export Tax & Profit')}
+                {L('2) निर्यात कर तथा नाफा-नोक्सान (Export Tax & Profit)', '2) Export Tax & Profit')}
               </button>
             </div>
 
@@ -413,14 +413,14 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                   <span className="font-bold">{L('अष्ट्रेलिया अध्ययन शुल्क भुक्तानी:', 'Australian University Fee Payment:')}</span>
                   <p className="mt-1">
                     {L(
-                      'एक नेपाली विद्यार्थीले अष्ट्रेलियाको कलेजमा शुल्क बापत AUD 15,000 पठाउनुपर्नेछ। बैंकको बिक्रीदर A$ 1 = रु. 87.20 हुँदा कति नेपाली रुपैयाँ आवश्यक पर्छ?',
+                      'एक नेपाली विद्यार्थीले अष्ट्रेलियाको कलेजमा शुल्क बापत AUD 15,000 पठाउनुपर्नेछ। बैंकको बिक्रीदर A$ 1 = Rs. 87.20 हुँदा कति नेपाली rupees आवश्यक पर्छ?',
                       'A Nepali student needs to pay AUD 15,000 college fees in Australia. If bank selling rate is A$ 1 = NPR 87.20, how much NPR is needed?'
                     )}
                   </p>
                 </div>
 
                 <div className="flex gap-3 items-center">
-                  <span className="text-xs font-bold text-slate-700">कलेज शुल्क (AUD):</span>
+                  <span className="text-xs font-bold text-slate-700">College fee (AUD):</span>
                   <input
                     type="number"
                     value={tuitionAUD}
@@ -430,9 +430,9 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                 </div>
 
                 <div className="p-3 bg-slate-50 border rounded-xl font-mono text-xs space-y-1">
-                  <div>आवश्यक नेपाली रुपैयाँ = AUD {fmt(tuitionAUD)} × रु. ८७.२० (बिक्रीदर)</div>
+                  <div>Nepali rupees needed = AUD {fmt(tuitionAUD)} × Rs. 87.20</div>
                   <div className="text-base font-bold text-[#142D4E] pt-1">
-                    ➔ कुल भुक्तानी गर्नुपर्ने = रु. {fmt(tuitionNPR.toLocaleString())}
+                    ➔ Total payment required = Rs. {fmt(tuitionNPR.toLocaleString())}
                   </div>
                 </div>
               </div>
@@ -444,7 +444,7 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                   <span className="font-bold">{L('पश्मिना निर्यात कारोबार:', 'Pashmina Shawls Export Transaction:')}</span>
                   <p className="mt-1">
                     {L(
-                      'नेपाली व्यापारीले रु. ४,००,००० मा पश्मिना किनेर ५% निर्यात कर तिरी अमेरिकामा USD 3,800 मा बेचे। यदि डलरको खरिददर रु. 132.50 भए नाफा वा नोक्सान कति भयो?',
+                      'नेपाली व्यापारीले Rs. 4,00,000 मा पश्मिना किनेर 5% निर्यात कर तिरी अमेरिकामा USD 3,800 मा बेचे। यदि डलरको खरिददर Rs. 132.50 भए नाफा वा नोक्सान कति भयो?',
                       'A merchant bought pashmina for NPR 400,000, paid 5% export tax, and sold in USA for USD 3,800. With buy rate USD 1 = NPR 132.50, what is the profit/loss?'
                     )}
                   </p>
@@ -466,10 +466,10 @@ export const CurrencyExchangeLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                 </div>
 
                 <div className="p-3 bg-slate-50 border rounded-xl font-mono text-xs space-y-1">
-                  <div>१) करसहित कुल लागत = रु. {fmt(pashminaCostNPR)} + {fmt(exportTaxPercent)}% = रु. {fmt(totalCostWithTax.toLocaleString())}</div>
-                  <div>२) डलर साट्दा प्राप्त रकम = USD {fmt(sellingPriceUSD)} × रु. १३२.५० = रु. {fmt(earnedNPR.toLocaleString())}</div>
+                  <div>1) करसहित कुल लागत = Rs. {fmt(pashminaCostNPR)} + {fmt(exportTaxPercent)}% = Rs. {fmt(totalCostWithTax.toLocaleString())}</div>
+                  <div>2) डलर साट्दा प्राप्त रकम = USD {fmt(sellingPriceUSD)} × Rs. 132.50 = Rs. {fmt(earnedNPR.toLocaleString())}</div>
                   <div className={`text-base font-bold pt-1 ${netExportProfitNPR >= 0 ? 'text-emerald-700' : 'text-rose-700'}`}>
-                    ➔ {netExportProfitNPR >= 0 ? `खुद नाफा (Net Profit) = रु. ${fmt(netExportProfitNPR.toLocaleString())}` : `खुद नोक्सान (Net Loss) = रु. ${fmt(Math.abs(netExportProfitNPR).toLocaleString())}`}
+                    ➔ {netExportProfitNPR >= 0 ? `खुद नाफा (Net Profit) = Rs. ${fmt(netExportProfitNPR.toLocaleString())}` : `खुद नोक्सान (Net Loss) = Rs. ${fmt(Math.abs(netExportProfitNPR).toLocaleString())}`}
                   </div>
                 </div>
               </div>

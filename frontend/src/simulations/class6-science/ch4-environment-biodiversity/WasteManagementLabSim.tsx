@@ -1,14 +1,14 @@
 /**
  * WasteManagementLabSim.tsx
- * Simulation 11: Waste Management Laboratory & Compost Simulator (फोहोरमैला व्यवस्थापन)
- * Grade 6 Science • Unit 4: Environment and Biodiversity (वातावरण र जैविक विविधता)
+ * Simulation 11: Waste Management Laboratory & Compost Simulator
+ * Grade 6 Science • Unit 4: Environment and Biodiversity
  *
  * 100% Native HTML5 Canvas 2D Interactive Physics & Ecology Simulation.
  * Features:
  * 1. 3-Bin Color-Coded Segregation:
- *    - Green Bin (जैविक फोहोर / Biodegradable): Organic peels, food leftovers, garden leaves
- *    - Blue Bin (पुनर्चक्रण / Recyclable): Plastic bottles, aluminium cans, paper, cardboard
- *    - Red Bin (हानिकारक / Hazardous): Dry cell batteries, CFL bulbs, e-waste, toxic medicine
+ *    - Green Bin: Organic peels, food leftovers, garden leaves
+ *    - Blue Bin: Plastic bottles, aluminium cans, paper, cardboard
+ *    - Red Bin: Dry cell batteries, CFL bulbs, e-waste, toxic medicine
  * 2. 2D Parabolic projectile toss & particle effects on bin drop
  * 3. Aerobic Compost Pit Cross-Section Simulator:
  *    - Layering "Browns" (carbon) + "Greens" (nitrogen) + Soil inoculant
@@ -58,7 +58,7 @@ const WASTE_ITEMS: WasteItem[] = [
     nameNe: 'केरा र तरकारीको बोक्रा',
     category: 'biodegradable',
     tipEn: 'Organic kitchen waste. Decomposes into rich nutrient compost in 2-4 weeks.',
-    tipNe: 'जैविक वस्तु, जुन २-४ हप्तामा कुहिएर प्राङ्गारिक मल बन्छ।',
+    tipNe: 'जैविक वस्तु, जुन 2-4 हप्तामा कुहिएर प्राङ्गारिक मल बन्छ।',
     color: '#eab308',
     iconType: 'peel',
   },
@@ -68,7 +68,7 @@ const WASTE_ITEMS: WasteItem[] = [
     nameNe: 'प्लास्टिकको पानी बोतल',
     category: 'recyclable',
     tipEn: 'Takes 450 years to degrade; can be melted and spun into polyester fiber.',
-    tipNe: 'कुहिन ४५० वर्ष लाग्छ; यसलाई पुनर्चक्रण गरी नयाँ सामान बनाइन्छ।',
+    tipNe: 'कुहिन 450 वर्ष लाग्छ; यसलाई पुनर्चक्रण गरी नयाँ सामान बनाइन्छ।',
     color: '#38bdf8',
     iconType: 'bottle',
   },
@@ -149,7 +149,7 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -741,8 +741,8 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
         const cardH = 230;
         const cards = [
           {
-            titleEn: '1. REDUCE (घटाउने)',
-            titleNe: '१. न्यूनिकरण (Reduce)',
+            titleEn: '1. REDUCE',
+            titleNe: '1. न्यूनिकरण (Reduce)',
             color: '#10b981',
             icon: '📉',
             descEn: 'Avoid single-use plastics, excessive packaging, and purchase only needed supplies.',
@@ -750,8 +750,8 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
             stat: '-40% Waste',
           },
           {
-            titleEn: '2. REUSE (पुनः प्रयोग)',
-            titleNe: '२. पुनः प्रयोग (Reuse)',
+            titleEn: '2. REUSE',
+            titleNe: '2. पुनः प्रयोग (Reuse)',
             color: '#3b82f6',
             icon: '🔄',
             descEn: 'Use refillable glass bottles, cloth shopping bags, and repair appliances.',
@@ -759,8 +759,8 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
             stat: 'Longer Lifespan',
           },
           {
-            titleEn: '3. RECYCLE (पुनर्चक्रण)',
-            titleNe: '३. पुनर्चक्रण (Recycle)',
+            titleEn: '3. RECYCLE',
+            titleNe: '3. पुनर्चक्रण (Recycle)',
             color: '#f59e0b',
             icon: '♻️',
             descEn: 'Remelt aluminium, scrap metal, plastic granules, and repulp waste papers.',
@@ -856,7 +856,7 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
       titleNepali="फोहोरमैला व्यवस्थापन तथा कम्पोस्ट प्रयोगशाला"
       chapterNumber={4}
       chapterTitle="Unit 4: Environment and Biodiversity"
-      chapterTitleNepali="एकाइ ४: वातावरण र जैविक विविधता"
+      chapterTitleNepali="एकाइ 4: वातावरण र जैविक विविधता"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -869,7 +869,7 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
       stars={stars}
       isCompleted={isCompleted}
       currentPromptEn="Sort household waste into 3 color-coded bins or explore how organic matter transforms into nutrient-rich compost."
-      currentPromptNe="घरको फोहोरलाई ३ रङ्गका बिनहरूमा वर्गीकरण गर्नुहोस् वा जैविक फोहोर कसरी प्राङ्गारिक मल बन्छ हेर्नुहोस्।"
+      currentPromptNe="घरको फोहोरलाई 3 रङ्गका बिनहरूमा वर्गीकरण गर्नुहोस् वा जैविक फोहोर कसरी प्राङ्गारिक मल बन्छ हेर्नुहोस्।"
     >
       <div
         style={{
@@ -936,10 +936,10 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
             >
               <Trash2 size={14} color="#38bdf8" />
               {activeTab === 'segregation'
-                ? (lang === 'ne' ? '३-बिन वर्गीकरण' : '3-Bin Segregation')
+                ? (lang === 'ne' ? '3-बिन वर्गीकरण' : '3-Bin Segregation')
                 : activeTab === 'compost'
                   ? (lang === 'ne' ? 'कम्पोस्ट मल खाडल' : 'Compost Pit Simulator')
-                  : (lang === 'ne' ? '३R नीति' : '3R Principles')}
+                  : (lang === 'ne' ? '3R नीति' : '3R Principles')}
             </span>
 
             <span
@@ -1057,7 +1057,7 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
                 <span style={{ fontSize: '18px' }}>🌱</span>
                 <div>
                   <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>
-                    {lang === 'ne' ? `विघटन प्रगति: हप्ता ${compostWeek} / ८` : `Compost Maturation: Week ${compostWeek} of 8`}
+                    {lang === 'ne' ? `विघटन प्रगति: हप्ता ${compostWeek} / 8` : `Compost Maturation: Week ${compostWeek} of 8`}
                   </div>
                   <div style={{ fontSize: '11px', color: '#64748b' }}>
                     {lang === 'ne'
@@ -1069,7 +1069,7 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
             ) : (
               <div style={{ fontSize: '11px', color: '#475569' }}>
                 {lang === 'ne'
-                  ? 'काठमाडौँ उपत्यकाको ६५% फोहोर भान्साको जैविक फोहोर हो, जसलाई कम्पोस्ट बनाउन सकिन्छ।'
+                  ? 'काठमाडौँ उपत्यकाको 65% फोहोर भान्साको जैविक फोहोर हो, जसलाई कम्पोस्ट बनाउन सकिन्छ।'
                   : 'Over 65% of municipal waste in Nepal is compostable organic matter.'}
               </div>
             )}
@@ -1122,7 +1122,7 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
             </div>
             <div style={{ fontSize: '11px', color: '#64748b', lineHeight: 1.45 }}>
               {lang === 'ne'
-                ? '३-बिन वर्गीकरण अभ्यास गर्नुहोस्, जैविक फोहोरबाट कम्पोस्ट मल बनाउनुहोस् र ३R नीति बुझ्नुहोस्।'
+                ? '3-बिन वर्गीकरण अभ्यास गर्नुहोस्, जैविक फोहोरबाट कम्पोस्ट मल बनाउनुहोस् र 3R नीति बुझ्नुहोस्।'
                 : 'Master source segregation across 3 color-coded bins, simulate aerobic composting, and learn the 3R hierarchy.'}
             </div>
           </div>
@@ -1130,9 +1130,9 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
           {/* Mode Selector Tabs (3 Tabs) */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '4px' }}>
             {[
-              { id: 'segregation', icon: Trash2, labelEn: '3-Bin Sort', labelNe: '३-बिन वर्गीकरण' },
+              { id: 'segregation', icon: Trash2, labelEn: '3-Bin Sort', labelNe: '3-बिन वर्गीकरण' },
               { id: 'compost', icon: Leaf, labelEn: 'Compost Pit', labelNe: 'कम्पोस्ट मल' },
-              { id: 'policy', icon: Recycle, labelEn: '3R Principles', labelNe: '३R नीति' },
+              { id: 'policy', icon: Recycle, labelEn: '3R Principles', labelNe: '3R नीति' },
             ].map((tab) => {
               const active = activeTab === tab.id;
               const IconComp = tab.icon;
@@ -1200,7 +1200,7 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 <Leaf size={14} />
-                {lang === 'ne' ? '१. हरियो बिन (जैविक/कुहिने)' : '1. Green Bin (Organic / Compost)'}
+                {lang === 'ne' ? '1. हरियो बिन (जैविक/कुहिने)' : '1. Green Bin (Organic / Compost)'}
               </button>
 
               <button
@@ -1221,7 +1221,7 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 <Recycle size={14} />
-                {lang === 'ne' ? '२. नीलो बिन (पुनर्चक्रण/नकुहिने)' : '2. Blue Bin (Recyclable Paper/Plastic)'}
+                {lang === 'ne' ? '2. नीलो बिन (पुनर्चक्रण/नकुहिने)' : '2. Blue Bin (Recyclable Paper/Plastic)'}
               </button>
 
               <button
@@ -1242,7 +1242,7 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 <Trash2 size={14} />
-                {lang === 'ne' ? '३. रातो बिन (जोखिमयुक्त/ब्याट्री)' : '3. Red Bin (Hazardous E-Waste)'}
+                {lang === 'ne' ? '3. रातो बिन (जोखिमयुक्त/ब्याट्री)' : '3. Red Bin (Hazardous E-Waste)'}
               </button>
             </div>
           )}
@@ -1264,7 +1264,7 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
                   {lang === 'ne' ? 'विघटन समयावधि (Timeline):' : 'Compost Timeline:'}
                 </span>
                 <strong style={{ color: '#fbbf24' }}>
-                  {lang === 'ne' ? `हप्ता ${compostWeek} / ८` : `Week ${compostWeek} of 8`}
+                  {lang === 'ne' ? `हप्ता ${compostWeek} / 8` : `Week ${compostWeek} of 8`}
                 </strong>
               </div>
               <input
@@ -1344,11 +1344,11 @@ export const WasteManagementLabSim: React.FC<BaseSimulationProps> = ({
               }}
             >
               <div style={{ fontWeight: 800, color: '#38bdf8', marginBottom: '4px' }}>
-                🇳🇵 {lang === 'ne' ? '३R नीति र नेपालको अवस्था:' : 'The 3R Environmental Hierarchy:'}
+                🇳🇵 {lang === 'ne' ? '3R नीति र नेपालको अवस्था:' : 'The 3R Environmental Hierarchy:'}
               </div>
-              <div><strong>1. Reduce (घटाउने):</strong> {lang === 'ne' ? 'फोहोरको उत्पादन नै कम गर्ने।' : 'Minimize single-use plastics and packaging.'}</div>
-              <div style={{ marginTop: '4px' }}><strong>2. Reuse (पुनः प्रयोग):</strong> {lang === 'ne' ? 'वस्तुहरूलाई बारम्बार प्रयोग गर्ने।' : 'Repurpose glass jars and canvas shopping bags.'}</div>
-              <div style={{ marginTop: '4px' }}><strong>3. Recycle (पुनर्चक्रण):</strong> {lang === 'ne' ? 'कागज र धातुलाई नयाँ वस्तु बनाउने।' : 'Process paper, metals, and thermoplastics into raw goods.'}</div>
+              <div><strong>1. Reduce:</strong> {lang === 'ne' ? 'फोहोरको उत्पादन नै कम गर्ने।' : 'Minimize single-use plastics and packaging.'}</div>
+              <div style={{ marginTop: '4px' }}><strong>2. Reuse:</strong> {lang === 'ne' ? 'वस्तुहरूलाई बारम्बार प्रयोग गर्ने।' : 'Repurpose glass jars and canvas shopping bags.'}</div>
+              <div style={{ marginTop: '4px' }}><strong>3. Recycle:</strong> {lang === 'ne' ? 'कागज र धातुलाई नयाँ वस्तु बनाउने।' : 'Process paper, metals, and thermoplastics into raw goods.'}</div>
             </div>
           )}
 

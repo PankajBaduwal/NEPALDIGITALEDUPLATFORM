@@ -8,43 +8,43 @@ const QUIZ_QUESTIONS = [
     np: 'प्रिज्मको आयतन (Volume of a Prism) को सामान्य सूत्र के हो?',
     en: 'What is the general formula for the volume of a prism?',
     options: [
-      { key: 'A', label: 'V = आधारको परिमिति × उचाइ (P × h)' },
-      { key: 'B', label: 'V = आधारको क्षेत्रफल × उचाइ (A × h)' },
-      { key: 'C', label: 'V = २A + P × h' },
-      { key: 'D', label: 'V = १/३ × A × h' },
+      { key: 'A', label: 'V = perimeter of base × height (P × h)' },
+      { key: 'B', label: 'V = area of base × height (A × h)' },
+      { key: 'C', label: 'V = 2A + P × h' },
+      { key: 'D', label: 'V = 1/3 × A × h' },
     ],
     answer: 'B',
   },
   {
-    np: 'पाठ्यपुस्तक अनुसार १ घन मिटर (१ m³) मा कति लिटर पानी अटाउँछ?',
+    np: 'पाठ्यपुस्तक अनुसार 1 cu m (1 m³) मा कति litres पानी अटाउँछ?',
     en: 'According to the CDC textbook, how many liters of water are contained in 1 cubic meter (1 m³)?',
     options: [
-      { key: 'A', label: '१०० लिटर' },
-      { key: 'B', label: '५०० लिटर' },
-      { key: 'C', label: '१,००० लिटर (1,000 Liters)' },
-      { key: 'D', label: '१०,००० लिटर' },
+      { key: 'A', label: '100 litres' },
+      { key: 'B', label: '500 litres' },
+      { key: 'C', label: '1,000 litres (1,000 Liters)' },
+      { key: 'D', label: '10,000 litres' },
     ],
     answer: 'C',
   },
   {
-    np: 'कति घन सेन्टिमिटर (cm³) बराबर १ लिटर पानी हुन्छ?',
+    np: 'कति घन सेन्टिm (cm³) बराबर 1 litres पानी हुन्छ?',
     en: 'How many cubic centimeters (cm³) equal 1 liter of water?',
     options: [
-      { key: 'A', label: '१०० cm³' },
-      { key: 'B', label: '१,००० cm³ (1,000 cm³ = 1 L)' },
-      { key: 'C', label: '१०,००० cm³' },
-      { key: 'D', label: '५०० cm³' },
+      { key: 'A', label: '100 cm³' },
+      { key: 'B', label: '1,000 cm³ (1,000 cm³ = 1 L)' },
+      { key: 'C', label: '10,000 cm³' },
+      { key: 'D', label: '500 cm³' },
     ],
     answer: 'B',
   },
   {
-    np: '२ मिटर लम्बाइ, १.५ मिटर चौडाइ र १ मिटर उचाइ भएको आयताकार पानी ट्याङ्कीको कुल क्षमता कति लिटर हुन्छ?',
+    np: '2 m लम्बाइ, 1.5 m चौडाइ र 1 m उचाइ भएको आयताकार पानी ट्याङ्कीको कुल क्षमता कति litres हुन्छ?',
     en: 'What is the capacity in liters of a rectangular tank measuring 2m × 1.5m × 1m?',
     options: [
-      { key: 'A', label: '३,००० लिटर (२ × १.५ × १ = ३ m³ = ३,००० लिटर)' },
-      { key: 'B', label: '१,५०० लिटर' },
-      { key: 'C', label: '४,५०० लिटर' },
-      { key: 'D', label: '२,००० लिटर' },
+      { key: 'A', label: '3,000 litres (2 × 1.5 × 1 = 3 m³ = 3,000 litres)' },
+      { key: 'B', label: '1,500 litres' },
+      { key: 'C', label: '4,500 litres' },
+      { key: 'D', label: '2,000 litres' },
     ],
     answer: 'A',
   },
@@ -113,30 +113,30 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
 
   const tankProblems = [
     {
-      titleNp: 'समस्या १: छतको पानी ट्याङ्कीको लिटर क्षमता',
+      titleNp: 'समस्या 1: छतको पानी ट्याङ्कीको litres क्षमता',
       titleEn: 'Problem 1: Overhead Tank Liter Capacity',
-      descNp: 'एउटा घरको छतमा २.० मिटर लम्बाइ, १.२ मिटर चौडाइ र १.० मिटर उचाइ भएको आयताकार सिमेन्ट ट्याङ्की बनाइएको छ। सो ट्याङ्कीमा कति लिटर पानी अटाउँछ?',
+      descNp: 'एउटा घरको छतमा 2.0 m लम्बाइ, 1.2 m चौडाइ र 1.0 m उचाइ भएको आयताकार सिमेन्ट ट्याङ्की बनाइएको छ। सो ट्याङ्कीमा कति litres पानी अटाउँछ?',
       descEn: 'A rectangular rooftop tank measures 2.0m long, 1.2m wide, and 1.0m high. What is its water capacity in liters?',
       correct: 2400,
-      solutionNp: 'आयतन V = २.० × १.२ × १.० = २.४ m³। १ m³ = १,००० लिटर हुनाले कुल क्षमता = २.४ × १,००० = २,४०० लिटर।',
+      solutionNp: 'आयतन V = 2.0 × 1.2 × 1.0 = 2.4 m³। 1 m³ = 1,000 litres हुनाले कुल क्षमता = 2.4 × 1,000 = 2,400 litres।',
       solutionEn: 'Volume V = 2.0 × 1.2 × 1.0 = 2.4 m³. Since 1 m³ = 1,000 liters, capacity = 2.4 × 1,000 = 2,400 liters.',
     },
     {
-      titleNp: 'समस्या २: पानी भर्न लाग्ने समय',
+      titleNp: 'समस्या 2: पानी भर्न लाग्ने समय',
       titleEn: 'Problem 2: Time to Fill Tank with Pump',
-      descNp: '३,००० लिटर क्षमता भएको खाली ट्याङ्कीमा प्रति मिनेट ६० लिटर पानी तान्ने मोटर पम्पले पानी भर्दा ट्याङ्की भरिन कति मिनेट लाग्छ?',
+      descNp: '3,000 litres क्षमता भएको खाली ट्याङ्कीमा प्रति min 60 litres पानी तान्ने मोटर पम्पले पानी भर्दा ट्याङ्की भरिन कति min लाग्छ?',
       descEn: 'A 3,000 liter empty tank is filled by a pump with flow rate 60 liters/minute. How many minutes will it take to fill completely?',
       correct: 50,
-      solutionNp: 'समय = कुल लिटर / प्रवाह दर = ३,००० / ६० = ५० मिनेट।',
+      solutionNp: 'समय = कुल litres / प्रवाह दर = 3,000 / 60 = 50 min।',
       solutionEn: 'Time = Total Liters / Flow Rate = 3,000 / 60 = 50 minutes.',
     },
     {
-      titleNp: 'समस्या ३: परिवारको पानी उपभोग अवधि',
+      titleNp: 'समस्या 3: परिवारको पानी उपभोग अवधि',
       titleEn: 'Problem 3: Family Consumption Duration',
-      descNp: 'एउटा परिवारले दैनिक ५०० लिटर पानी खर्च गर्छ। २,००० लिटर पानी भएको ट्याङ्कीको पानी सो परिवारलाई कति दिन पुग्छ?',
+      descNp: 'एउटा परिवारले दैनिक 500 litres पानी खर्च गर्छ। 2,000 litres पानी भएको ट्याङ्कीको पानी सो परिवारलाई कति दिन पुग्छ?',
       descEn: 'A family consumes 500 liters of water daily. For how many days will 2,000 liters of water last?',
       correct: 4,
-      solutionNp: 'दिन संख्या = २,००० लिटर / ५०० लिटर = ४ दिन।',
+      solutionNp: 'दिन संख्या = 2,000 litres / 500 litres = 4 दिन।',
       solutionEn: 'Number of days = 2,000 liters / 500 liters = 4 days.',
     },
   ];
@@ -162,7 +162,7 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! प्रिज्मको आयतन (V = A × h), पानी ट्याङ्कीको लिटर क्षमता (१ m³ = १,००० लिटर) र पानीको स्तर सिमुलेशन सिकौं!',
+        'नमस्ते! प्रिज्मको आयतन (V = A × h), पानी ट्याङ्कीको litres क्षमता (1 m³ = 1,000 litres) र पानीको स्तर सिमुलेशन सिकौं!',
         'Welcome! Explore prism volume (V = A × h), tank capacity in liters (1 m³ = 1,000 L), and water fill simulation!'
       )}
     >
@@ -178,7 +178,7 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
             }`}
           >
             <span>🚰</span>
-            <span>{L('१. पानी ट्याङ्की डिजाइनर', '1. Tank Designer')}</span>
+            <span>{L('1. पानी ट्याङ्की डिजाइनर', '1. Tank Designer')}</span>
           </button>
           <button
             onClick={() => setActiveTab('flow')}
@@ -189,7 +189,7 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
             }`}
           >
             <span>⏱️</span>
-            <span>{L('२. मोटर पम्प तथा उपभोग', '2. Pump & Usage')}</span>
+            <span>{L('2. मोटर पम्प तथा उपभोग', '2. Pump & Usage')}</span>
           </button>
           <button
             onClick={() => setActiveTab('problems')}
@@ -200,7 +200,7 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
             }`}
           >
             <span>🎯</span>
-            <span>{L('३. पाठ्यपुस्तक समस्या चुनौती', '3. Word Problems')}</span>
+            <span>{L('3. पाठ्यपुस्तक समस्या चुनौती', '3. Word Problems')}</span>
           </button>
         </div>
 
@@ -216,7 +216,7 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'प्रिज्मको आयतन = आधारको क्षेत्रफल × उचाइ (V = A × h)। १ घन मिटर (m³) मा १,००० लिटर पानी अटाउँछ र १,००० घन सेन्टिमिटर (cm³) मा १ लिटर पानी अटाउँछ।',
+                  'प्रिज्मको आयतन = आधारको क्षेत्रफल × उचाइ (V = A × h)। 1 cu m (m³) मा 1,000 litres पानी अटाउँछ र 1,000 घन सेन्टिm (cm³) मा 1 litres पानी अटाउँछ।',
                   'Volume of a prism = Base Area × Height (V = A × h). 1 cubic meter (m³) contains 1,000 liters, and 1,000 cm³ equals 1 liter.'
                 )}
               </p>
@@ -327,7 +327,7 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
                     className="w-full accent-blue-600 cursor-pointer"
                   />
                   <div className="text-[11px] text-blue-700 dark:text-blue-300 font-mono">
-                    {L(`हाल पानी: ${toNp(currentWaterLiters)} लिटर / बाँकी: ${toNp(remainingLiters)} लिटर`, `Current: ${currentWaterLiters} L / Remaining: ${remainingLiters} L`)}
+                    {L(`हाल पानी: ${toNp(currentWaterLiters)} litres / बाँकी: ${toNp(remainingLiters)} litres`, `Current: ${currentWaterLiters} L / Remaining: ${remainingLiters} L`)}
                   </div>
                 </div>
               </div>
@@ -405,7 +405,7 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
                       {isNe ? toNp(totalCapacityLiters) : totalCapacityLiters.toLocaleString()} L
                     </div>
                     <div className="text-[11px] text-gray-400 mt-1 font-mono">
-                      {totalVolumeCubicM.toFixed(2)} × १,००० लिटर
+                      {totalVolumeCubicM.toFixed(2)} × 1,000 litres
                     </div>
                   </div>
                 </div>
@@ -426,7 +426,7 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'मोटर पम्पको पानी प्रवाह दर (प्रति मिनेट लिटर) र परिवारको दैनिक उपभोगको आधारमा ट्याङ्की भरिन लाग्ने समय र पानी पुग्ने दिन गणना गर्नुहोस्।',
+                  'मोटर पम्पको पानी प्रवाह दर (प्रति min litres) र परिवारको दैनिक उपभोगको आधारमा ट्याङ्की भरिन लाग्ने समय र पानी पुग्ने दिन गणना गर्नुहोस्।',
                   'Calculate pump fill duration and how many days water will last based on family usage.'
                 )}
               </p>
@@ -464,10 +464,10 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
 
                 <div className="p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl space-y-1">
                   <div className="font-bold text-blue-900 dark:text-blue-200">
-                    {L('१. बाँकी खाली भाग भरिन लाग्ने समय:', '1. Time to Fill Remaining Capacity:')}
+                    {L('1. बाँकी खाली भाग भरिन लाग्ने समय:', '1. Time to Fill Remaining Capacity:')}
                   </div>
                   <div className="text-xl font-black text-blue-600 dark:text-blue-400 font-mono">
-                    {isNe ? toNp(timeToFillRemainingMin) : timeToFillRemainingMin} {L('मिनेट', 'minutes')}
+                    {isNe ? toNp(timeToFillRemainingMin) : timeToFillRemainingMin} {L('min', 'minutes')}
                   </div>
                   <div className="text-xs text-gray-500 font-mono">
                     {remainingLiters} L / {pumpFlowLpm} L/min
@@ -476,13 +476,13 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
 
                 <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl space-y-1">
                   <div className="font-bold text-emerald-900 dark:text-emerald-200">
-                    {L('२. परिवारलाई पुग्ने अनुमानित दिन (दैनिक ४५० लिटर खर्चमा):', '2. Days Water Will Last (at 450 L/day):')}
+                    {L('2. परिवारलाई पुग्ने अनुमानित दिन (दैनिक 450 litres खर्चमा):', '2. Days Water Will Last (at 450 L/day):')}
                   </div>
                   <div className="text-xl font-black text-emerald-600 dark:text-emerald-400 font-mono">
                     {isNe ? toNp(daysOfWater) : daysOfWater} {L('दिन', 'days')}
                   </div>
                   <div className="text-xs text-gray-500 font-mono">
-                    {currentWaterLiters} L / ४५० L/दिन
+                    {currentWaterLiters} L / 450 L/day
                   </div>
                 </div>
               </div>
@@ -576,7 +576,7 @@ export const PrismVolumeWaterTankDesigner: React.FC<{
                     <span>{L('उत्तर मिलेन। पुनः प्रयास गर्नुहोस्।', 'Incorrect. Please try again!')}</span>
                   </div>
                   <div className="text-xs">
-                    {L('सुझाव: आयतन V = A × h निकाल्नुहोस् र १ m³ = १,००० लिटर सम्बन्ध प्रयोग गर्नुहोस्।', 'Hint: Calculate V = A × h and use 1 m³ = 1,000 L conversion.')}
+                    {L('सुझाव: आयतन V = A × h निकाल्नुहोस् र 1 m³ = 1,000 litres सम्बन्ध प्रयोग गर्नुहोस्।', 'Hint: Calculate V = A × h and use 1 m³ = 1,000 L conversion.')}
                   </div>
                 </div>
               )}

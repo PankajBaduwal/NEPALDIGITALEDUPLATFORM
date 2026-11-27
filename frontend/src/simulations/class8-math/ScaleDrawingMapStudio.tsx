@@ -6,35 +6,35 @@ import { MapPin, Ruler, Scaling, CheckCircle, Calculator, Building2 } from 'luci
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'यदि नक्साको मापन अनुपात १ सेमी = ५० मिटर छ र दुई स्थान बीचको दूरी ६ सेमी भए, वास्तविक दूरी कति हुन्छ?',
+    np: 'यदि नक्साको मापन अनुपात 1 cm = 50 m छ र दुई स्थान बीचको दूरी 6 cm भए, वास्तविक दूरी कति हुन्छ?',
     en: 'If map scale is 1 cm = 50 m and map distance is 6 cm, what is the actual distance?',
     options: [
-      { key: 'A', label: '३०० मिटर (6 × 50 = 300 m)' },
-      { key: 'B', label: '५६ मिटर' },
-      { key: 'C', label: '१५० मिटर' },
-      { key: 'D', label: '६०० मिटर' },
+      { key: 'A', label: '300 m (6 × 50 = 300 m)' },
+      { key: 'B', label: '56 m' },
+      { key: 'C', label: '150 m' },
+      { key: 'D', label: '600 m' },
     ],
     answer: 'A',
   },
   {
-    np: 'वास्तविक दूरी ४०० मिटर भएको बाटोलाई १ सेमी = १०० मिटरको मापन चित्रमा कति लम्बाइले जनाइन्छ?',
+    np: 'वास्तविक दूरी 400 m भएको बाटोलाई 1 cm = 100 mको मापन चित्रमा कति लम्बाइले जनाइन्छ?',
     en: 'A road of actual distance 400 m is represented on a scale of 1 cm = 100 m by what length?',
     options: [
-      { key: 'A', label: '४ सेमी (400 ÷ 100 = 4 cm)' },
-      { key: 'B', label: '४० सेमी' },
-      { key: 'C', label: '०.४ सेमी' },
-      { key: 'D', label: '४०० सेमी' },
+      { key: 'A', label: '4 cm (400 ÷ 100 = 4 cm)' },
+      { key: 'B', label: '40 cm' },
+      { key: 'C', label: '0.4 cm' },
+      { key: 'D', label: '400 cm' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि १ सेमी = ५०० मिटर छ भने, यस अनुपातको वास्तविक अर्थ के हो?',
+    np: 'यदि 1 cm = 500 m छ भने, यस अनुपातको वास्तविक अर्थ के हो?',
     en: 'What does the scale 1 cm = 500 m mathematically mean?',
     options: [
-      { key: 'A', label: 'नक्साको १ सेमीले जमिनको ५०० मिटर जनाउँछ' },
-      { key: 'B', label: 'जमिनको १ सेमीले नक्साको ५०० मिटर जनाउँछ' },
-      { key: 'C', label: 'दुवै स्थानको दूरी ५०० मिटर हो' },
-      { key: 'D', label: 'नक्साको क्षेत्रफल ५०० मिटर² हो' },
+      { key: 'A', label: '1 cm on the map represents 500 m on the ground' },
+      { key: 'B', label: '1 cm on the ground represents 500 m on the map' },
+      { key: 'C', label: 'The distance between both places is 500 m' },
+      { key: 'D', label: 'The area of the map is 500 m²' },
     ],
     answer: 'A',
   },
@@ -42,10 +42,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'ठूलो मापन अनुपात (Larger Scale) को नक्सामा वस्तुहरू कस्ता देखिन्छन्?',
     en: 'How do objects appear on a larger scale map?',
     options: [
-      { key: 'A', label: 'ठूला र विस्तृत (Larger and with more detail)' },
-      { key: 'B', label: 'अझ साना र अस्पष्ट' },
-      { key: 'C', label: 'कुनै परिवर्तन हुँदैन' },
-      { key: 'D', label: 'उल्टो देखिन्छन्' },
+      { key: 'A', label: 'Larger and with more detail' },
+      { key: 'B', label: 'Even smaller and unclear' },
+      { key: 'C', label: 'No change' },
+      { key: 'D', label: 'They look upside down' },
     ],
     answer: 'A',
   },
@@ -61,19 +61,19 @@ interface LocationItem {
 }
 
 const DEFAULT_LOCATIONS: LocationItem[] = [
-  { id: 'gate', nameNp: 'मूल ढोका', nameEn: 'Main Gate', icon: '🚪', x: 80, y: 320 },
-  { id: 'office', nameNp: 'प्रशासन कक्ष', nameEn: 'School Office', icon: '🏢', x: 180, y: 220 },
-  { id: 'class', nameNp: 'कक्षाकोठा', nameEn: 'Classroom', icon: '🏫', x: 380, y: 140 },
-  { id: 'library', nameNp: 'पुस्तकालय', nameEn: 'Library', icon: '📚', x: 420, y: 280 },
-  { id: 'ground', nameNp: 'खेलमैदान', nameEn: 'Playground', icon: '⚽', x: 220, y: 100 },
+  { id: 'gate', nameNp: 'Main gate', nameEn: 'Main Gate', icon: '🚪', x: 80, y: 320 },
+  { id: 'office', nameNp: 'Administration room', nameEn: 'School Office', icon: '🏢', x: 180, y: 220 },
+  { id: 'class', nameNp: 'Classroom', nameEn: 'Classroom', icon: '🏫', x: 380, y: 140 },
+  { id: 'library', nameNp: 'Library', nameEn: 'Library', icon: '📚', x: 420, y: 280 },
+  { id: 'ground', nameNp: 'Playground', nameEn: 'Playground', icon: '⚽', x: 220, y: 100 },
 ];
 
 const SCALES = [
-  { label: '१ सेमी = १० मिटर', factor: 10 },
-  { label: '१ सेमी = ५० मिटर', factor: 50 },
-  { label: '१ सेमी = १०० मिटर', factor: 100 },
-  { label: '१ सेमी = २०० मिटर', factor: 200 },
-  { label: '१ सेमी = ५०० मिटर', factor: 500 },
+  { label: '1 cm = 10 m', factor: 10 },
+  { label: '1 cm = 50 m', factor: 50 },
+  { label: '1 cm = 100 m', factor: 100 },
+  { label: '1 cm = 200 m', factor: 200 },
+  { label: '1 cm = 500 m', factor: 500 },
 ];
 
 export const ScaleDrawingMapStudio: React.FC<{
@@ -142,7 +142,7 @@ export const ScaleDrawingMapStudio: React.FC<{
       kit.oops();
       setChallengeFeedback(
         L(
-          `❌ मिलेन। सही उत्तर: ${challengeTargetMapCm} सेमी × ${challengeScaleFactor} = ${expected} मिटर हो।`,
+          `❌ मिलेन। सही उत्तर: ${challengeTargetMapCm} cm × ${challengeScaleFactor} = ${expected} m हो।`,
           `❌ Incorrect. The answer is ${challengeTargetMapCm} cm × ${challengeScaleFactor} = ${expected} m.`
         )
       );
@@ -179,7 +179,7 @@ export const ScaleDrawingMapStudio: React.FC<{
               activeTab === 'map' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🗺️ {L('१. विद्यालय नक्सा मापन स्टुडियो (Map Studio)', '1. School Map Studio')}
+            🗺️ {L('1. विद्यालय नक्सा मापन स्टुडियो (Map Studio)', '1. School Map Studio')}
           </button>
           <button
             onClick={() => setActiveTab('calc')}
@@ -187,7 +187,7 @@ export const ScaleDrawingMapStudio: React.FC<{
               activeTab === 'calc' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🧮 {L('२. मापन अनुपात क्यालकुलेटर (Scale Calculator)', '2. Scale Calculator')}
+            🧮 {L('2. मापन अनुपात क्यालकुलेटर (Scale Calculator)', '2. Scale Calculator')}
           </button>
           <button
             onClick={() => setActiveTab('challenge')}
@@ -195,7 +195,7 @@ export const ScaleDrawingMapStudio: React.FC<{
               activeTab === 'challenge' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🎯 {L('३. मापन चित्र चुनौती (Distance Challenge)', '3. Distance Challenge')}
+            🎯 {L('3. मापन चित्र चुनौती (Distance Challenge)', '3. Distance Challenge')}
           </button>
         </div>
 
@@ -207,7 +207,7 @@ export const ScaleDrawingMapStudio: React.FC<{
               <div className="w-full flex justify-between items-center text-xs font-bold text-slate-700 mb-2 px-1">
                 <span>{L('स्थानहरू तान्नुहोस् (Drag locations to customize map)', 'Drag locations on the map')}</span>
                 <span className="bg-amber-100 text-amber-900 px-2.5 py-1 rounded-lg border border-amber-300">
-                  मापन: १ सेमी = {scaleFactor} मिटर (४० px = १ सेमी)
+                  Scale: 1 cm = {scaleFactor} m (40 px = 1 cm)
                 </span>
               </div>
 
@@ -261,7 +261,7 @@ export const ScaleDrawingMapStudio: React.FC<{
                         fill="#fde047"
                         textAnchor="middle"
                       >
-                        {mapDistanceCm} सेमी ➜ {actualDistanceM} मिटर
+                        {mapDistanceCm} cm ➜ {actualDistanceM} m
                       </text>
                     </g>
                   );
@@ -311,7 +311,7 @@ export const ScaleDrawingMapStudio: React.FC<{
 
               {/* Scale selector buttons */}
               <div className="w-full flex flex-wrap justify-center items-center gap-2 mt-3 pt-2 border-t">
-                <span className="text-xs font-bold text-slate-600">मापन अनुपात छान्नुहोस्:</span>
+                <span className="text-xs font-bold text-slate-600">Choose the scale:</span>
                 {SCALES.map((s) => (
                   <button
                     key={s.factor}
@@ -339,7 +339,7 @@ export const ScaleDrawingMapStudio: React.FC<{
                 {/* Point selectors */}
                 <div className="space-y-2 text-xs">
                   <div>
-                    <label className="block text-slate-750 font-bold mb-1">स्थान १ (पहिलो बिन्दु):</label>
+                    <label className="block text-slate-750 font-bold mb-1">Place 1:</label>
                     <select
                       value={selectedLocA}
                       onChange={(e) => setSelectedLocA(e.target.value)}
@@ -354,7 +354,7 @@ export const ScaleDrawingMapStudio: React.FC<{
                   </div>
 
                   <div>
-                    <label className="block text-slate-700 font-bold mb-1">स्थान २ (दोस्रो बिन्दु):</label>
+                    <label className="block text-slate-700 font-bold mb-1">Place 2:</label>
                     <select
                       value={selectedLocB}
                       onChange={(e) => setSelectedLocB(e.target.value)}
@@ -372,23 +372,23 @@ export const ScaleDrawingMapStudio: React.FC<{
                 {/* Computed Output Cards */}
                 <div className="bg-white rounded-xl p-3 border border-amber-200 space-y-2 text-xs">
                   <div className="flex justify-between items-center">
-                    <span className="text-slate-500 font-medium">नक्सामा दूरी (Map Distance):</span>
-                    <span className="text-amber-600 font-extrabold text-sm font-mono">{mapDistanceCm} सेमी</span>
+                    <span className="text-slate-500 font-medium">Map distance:</span>
+                    <span className="text-amber-600 font-extrabold text-sm font-mono">{mapDistanceCm} cm</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-slate-500 font-medium">मापन गुणक (Scale Factor):</span>
-                    <span className="text-slate-800 font-bold">{scaleFactor} मिटर/सेमी</span>
+                    <span className="text-slate-500 font-medium">Scale factor:</span>
+                    <span className="text-slate-800 font-bold">{scaleFactor} m/cm</span>
                   </div>
                   <div className="pt-2 border-t flex justify-between items-center">
-                    <span className="text-indigo-900 font-bold">वास्तविक दूरी (Actual):</span>
-                    <span className="text-indigo-700 font-extrabold text-lg font-mono">{actualDistanceM} मिटर</span>
+                    <span className="text-indigo-900 font-bold">Actual distance:</span>
+                    <span className="text-indigo-700 font-extrabold text-lg font-mono">{actualDistanceM} m</span>
                   </div>
                 </div>
 
                 <div className="p-2.5 bg-amber-100/70 rounded-lg text-xs text-amber-950 font-semibold leading-relaxed">
-                  💡 <b>सूत्र:</b> वास्तविक दूरी = नक्साको दूरी × मापन अनुपात
+                  💡 <b>Formula:</b> Actual distance = map distance × scale
                   <div className="font-mono mt-0.5 text-amber-900 font-bold">
-                    = {mapDistanceCm} × {scaleFactor} = {actualDistanceM} मिटर
+                    = {mapDistanceCm} × {scaleFactor} = {actualDistanceM} m
                   </div>
                 </div>
               </div>
@@ -408,10 +408,10 @@ export const ScaleDrawingMapStudio: React.FC<{
               {/* Box 1: Map Distance -> Actual Distance */}
               <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-4 space-y-3">
                 <span className="text-xs font-bold text-indigo-900 uppercase">
-                  १. नक्साको दूरी ➜ वास्तविक दूरी
+                  1. Map distance ➜ actual distance
                 </span>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">नक्सामा दूरी (सेमी):</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Distance on map (cm):</label>
                   <input
                     type="number"
                     min="0.1"
@@ -422,9 +422,9 @@ export const ScaleDrawingMapStudio: React.FC<{
                   />
                 </div>
                 <div className="p-3 bg-white rounded border border-indigo-200 text-xs">
-                  <span className="text-slate-500 block">१ सेमी = {scaleFactor} मिटर मापनमा:</span>
+                  <span className="text-slate-500 block">1 cm = {scaleFactor} m scale:</span>
                   <div className="text-xl font-extrabold text-indigo-700 font-mono mt-1">
-                    {Math.round(calcMapCm * scaleFactor)} मिटर
+                    {Math.round(calcMapCm * scaleFactor)} m
                   </div>
                   <span className="text-[11px] text-slate-600 font-mono block mt-0.5">
                     ({calcMapCm} × {scaleFactor} = {Math.round(calcMapCm * scaleFactor)})
@@ -435,10 +435,10 @@ export const ScaleDrawingMapStudio: React.FC<{
               {/* Box 2: Actual Distance -> Map Distance */}
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-3">
                 <span className="text-xs font-bold text-amber-900 uppercase">
-                  २. वास्तविक दूरी ➜ नक्साको दूरी
+                  2. Actual distance ➜ map distance
                 </span>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">वास्तविक दूरी (मिटर):</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Actual distance (m):</label>
                   <input
                     type="number"
                     min="1"
@@ -449,9 +449,9 @@ export const ScaleDrawingMapStudio: React.FC<{
                   />
                 </div>
                 <div className="p-3 bg-white rounded border border-amber-200 text-xs">
-                  <span className="text-slate-500 block">१ सेमी = {scaleFactor} मिटर मापनमा:</span>
+                  <span className="text-slate-500 block">1 cm = {scaleFactor} m scale:</span>
                   <div className="text-xl font-extrabold text-amber-700 font-mono mt-1">
-                    {(calcActualM / scaleFactor).toFixed(2)} सेमी
+                    {(calcActualM / scaleFactor).toFixed(2)} cm
                   </div>
                   <span className="text-[11px] text-slate-600 font-mono block mt-0.5">
                     ({calcActualM} ÷ {scaleFactor} = {(calcActualM / scaleFactor).toFixed(2)})
@@ -471,7 +471,7 @@ export const ScaleDrawingMapStudio: React.FC<{
               </span>
               <h3 className="text-lg font-extrabold text-slate-800 mt-1">
                 {L(
-                  `नक्साको दूरी = ${challengeTargetMapCm} सेमी र मापन १ सेमी = ${challengeScaleFactor} मिटर भए वास्तविक दूरी कति होला?`,
+                  `नक्साको दूरी = ${challengeTargetMapCm} cm र मापन 1 cm = ${challengeScaleFactor} m भए वास्तविक दूरी कति होला?`,
                   `If map distance = ${challengeTargetMapCm} cm and scale is 1 cm = ${challengeScaleFactor} m, what is the actual distance?`
                 )}
               </h3>
@@ -480,7 +480,7 @@ export const ScaleDrawingMapStudio: React.FC<{
             <div className="flex gap-2 max-w-sm mx-auto">
               <input
                 type="number"
-                placeholder="वास्तविक दूरी मिटरमा..."
+                placeholder="Actual distance in metres..."
                 value={userGuessMeters}
                 onChange={(e) => {
                   setUserGuessMeters(e.target.value);
@@ -488,7 +488,7 @@ export const ScaleDrawingMapStudio: React.FC<{
                 }}
                 className="flex-1 p-2.5 rounded-xl border border-slate-300 font-mono text-sm"
               />
-              <span className="self-center font-bold text-slate-700 text-sm">मिटर</span>
+              <span className="self-center font-bold text-slate-700 text-sm">m</span>
             </div>
 
             <div className="flex justify-center gap-3">

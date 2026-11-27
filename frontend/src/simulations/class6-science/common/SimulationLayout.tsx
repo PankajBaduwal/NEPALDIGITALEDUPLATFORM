@@ -31,6 +31,11 @@ export interface SimulationLayoutProps {
   learningAreaEn?: string;
   learningAreaNe?: string;
   chapterNumber?: number;
+  subjectCode?: string;
+  gradeLevel?: number;
+  currentLanguage?: string;
+  starsEarned?: number;
+  totalStars?: number;
   chapter?: number;
   chapterTitle?: string;
   chapterTitleNepali?: string;
@@ -64,14 +69,14 @@ export const SimulationLayout: React.FC<SimulationLayoutProps> = (props) => {
   // Normalize Props
   const effGrade = props.grade ?? 6;
   const effTitle = props.title || props.titleEn || `Class ${effGrade} Science Laboratory`;
-  const effTitleNe = props.titleNepali || props.titleNe || `कक्षा ${effGrade === 10 ? '१०' : effGrade} विज्ञान प्रयोगशाला`;
+  const effTitleNe = props.titleNepali || props.titleNe || `कक्षा ${effGrade === 10 ? '10' : effGrade} विज्ञान प्रयोगशाला`;
   const effChapterNum = props.chapterNumber ?? props.chapter ?? 1;
   const effChapterTitle = props.chapterTitle || `Unit ${effChapterNum}: Science & Technology`;
   const effChapterTitleNe = props.chapterTitleNepali || `एकाइ ${effChapterNum}: विज्ञान तथा प्रविधि`;
   const effStage: SimulationStage = props.currentStage || props.stage || 'discover';
-  const effLang: Language = props.lang || (props as any).language || 'en';
-  const effStars = props.stars ?? 0;
-  const effMaxStars = props.maxStars ?? 3;
+  const effLang = 'en' as Language;
+  const effStars = props.stars ?? props.starsEarned ?? 0;
+  const effMaxStars = props.maxStars ?? props.totalStars ?? 3;
   const effIsCompleted = props.isCompleted ?? false;
   const effBadgeTitleEn = props.badgeTitleEn || 'Junior Scientist';
   const effBadgeTitleNe = props.badgeTitleNe || 'युवा वैज्ञानिक';
@@ -84,7 +89,7 @@ export const SimulationLayout: React.FC<SimulationLayoutProps> = (props) => {
   const defaultPrompts: Record<SimulationStage, { en: string; ne: string }> = {
     discover: {
       en: 'Observe the interactive 2D simulation and identify the core components.',
-      ne: 'यो २डी अन्तरक्रियात्मक सिमुलेसन हेर्नुहोस् र मुख्य भागहरू पहिचान गर्नुहोस्।',
+      ne: 'यो 2डी अन्तरक्रियात्मक सिमुलेसन हेर्नुहोस् र मुख्य भागहरू पहिचान गर्नुहोस्।',
     },
     explore: {
       en: 'Interact with the controls, drag items, and observe the live scientific response.',
@@ -100,7 +105,7 @@ export const SimulationLayout: React.FC<SimulationLayoutProps> = (props) => {
     },
     challenge: {
       en: 'Test your scientific knowledge and solve the interactive challenge to earn 3 stars!',
-      ne: 'आफ्नो वैज्ञानिक ज्ञान परीक्षण गर्नुहोस् र ३ तारा जित्न चुनौती पूरा गर्नुहोस्!',
+      ne: 'आफ्नो वैज्ञानिक ज्ञान परीक्षण गर्नुहोस् र 3 तारा जित्न चुनौती पूरा गर्नुहोस्!',
     },
   };
 
@@ -143,11 +148,11 @@ export const SimulationLayout: React.FC<SimulationLayoutProps> = (props) => {
   };
 
   const stages: { key: SimulationStage; labelEn: string; labelNe: string; icon: string }[] = [
-    { key: 'discover', labelEn: '1. Discover', labelNe: '१. खोज', icon: '🔍' },
-    { key: 'explore', labelEn: '2. Explore', labelNe: '२. अन्वेषण', icon: '🧪' },
-    { key: 'observe', labelEn: '3. Observe', labelNe: '३. अवलोकन', icon: '👀' },
-    { key: 'understand', labelEn: '4. Understand', labelNe: '४. बुझाइ', icon: '💡' },
-    { key: 'challenge', labelEn: '5. Challenge', labelNe: '५. चुनौती', icon: '🎯' },
+    { key: 'discover', labelEn: '1. Discover', labelNe: '1. खोज', icon: '🔍' },
+    { key: 'explore', labelEn: '2. Explore', labelNe: '2. अन्वेषण', icon: '🧪' },
+    { key: 'observe', labelEn: '3. Observe', labelNe: '3. अवलोकन', icon: '👀' },
+    { key: 'understand', labelEn: '4. Understand', labelNe: '4. बुझाइ', icon: '💡' },
+    { key: 'challenge', labelEn: '5. Challenge', labelNe: '5. चुनौती', icon: '🎯' },
   ];
 
   return (
@@ -223,7 +228,7 @@ export const SimulationLayout: React.FC<SimulationLayoutProps> = (props) => {
                   letterSpacing: '0.5px',
                 }}
               >
-                {effLang === 'ne' ? `कक्षा ${effGrade === 10 ? '१०' : effGrade} विज्ञान` : `Grade ${effGrade} Science`}
+                {effLang === 'ne' ? `कक्षा ${effGrade === 10 ? '10' : effGrade} विज्ञान` : `Grade ${effGrade} Science`}
               </span>
               <h2
                 style={{
@@ -235,9 +240,6 @@ export const SimulationLayout: React.FC<SimulationLayoutProps> = (props) => {
                 }}
               >
                 {effLang === 'ne' ? effTitleNe : effTitle}{' '}
-                <span style={{ fontSize: '12px', fontWeight: '500', color: '#64748b' }}>
-                  ({effLang === 'ne' ? effTitle : effTitleNe})
-                </span>
               </h2>
             </div>
             <p style={{ margin: '2px 0 0 0', fontSize: '11px', color: '#0284c7', fontWeight: '600' }}>
@@ -266,49 +268,6 @@ export const SimulationLayout: React.FC<SimulationLayoutProps> = (props) => {
             </span>
           </div>
 
-          {/* Bilingual Switch */}
-          <div
-            style={{
-              display: 'flex',
-              background: '#f1f5f9',
-              borderRadius: '10px',
-              padding: '2px',
-              border: '1px solid #cbd5e1',
-            }}
-          >
-            <button
-              onClick={() => handleLanguageToggle('en')}
-              style={{
-                background: effLang === 'en' ? '#0284c7' : 'transparent',
-                border: 'none',
-                color: effLang === 'en' ? '#ffffff' : '#475569',
-                padding: '4px 10px',
-                borderRadius: '8px',
-                fontSize: '11px',
-                fontWeight: '700',
-                cursor: 'pointer',
-                transition: 'all 0.15s',
-              }}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => handleLanguageToggle('ne')}
-              style={{
-                background: effLang === 'ne' ? '#0284c7' : 'transparent',
-                border: 'none',
-                color: effLang === 'ne' ? '#ffffff' : '#475569',
-                padding: '4px 10px',
-                borderRadius: '8px',
-                fontSize: '11px',
-                fontWeight: '700',
-                cursor: 'pointer',
-                transition: 'all 0.15s',
-              }}
-            >
-              नेपाली
-            </button>
-          </div>
 
           {/* Audio Mute/Unmute */}
           <button

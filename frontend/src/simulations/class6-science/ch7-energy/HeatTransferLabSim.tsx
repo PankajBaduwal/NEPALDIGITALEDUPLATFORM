@@ -1,16 +1,16 @@
 /**
  * HeatTransferLabSim.tsx
- * Simulation 21: 2D Heat Transfer Laboratory (ताप सञ्चालन प्रयोगशाला)
- * Grade 6 Science • Unit 7: Energy in Daily Life (दैनिक जीवनमा शक्ति)
+ * Simulation 21: 2D Heat Transfer Laboratory
+ * Grade 6 Science • Unit 7: Energy in Daily Life
  *
  * 100% Native HTML5 Canvas 2D Interactive Thermodynamics Laboratory.
  * Features:
- * 1. Conduction (सञ्चालन):
+ * 1. Conduction:
  *    - Metal Rod (Copper vs Iron vs Glass insulator) heated by Bunsen burner
  *    - Thermal gradient propagation melting wax droplets and dropping metal pins sequentially
- * 2. Convection (संवहन):
+ * 2. Convection:
  *    - Liquid convection in beaker with Potassium Permanganate (KMnO₄) purple circulating convection currents
- * 3. Radiation (विकिरण):
+ * 3. Radiation:
  *    - Infrared electromagnetic waves traveling across vacuum directly from heat source
  * 4. 5-Stage inquiry pedagogy, bilingual EN/NE, audio effects, and 3-star scoring.
  */
@@ -27,7 +27,7 @@ export const HeatTransferLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -114,7 +114,7 @@ export const HeatTransferLabSim: React.FC<BaseSimulationProps> = ({
       ctx.stroke();
 
       // ==========================================
-      // MODE 1: CONDUCTION (सञ्चालन)
+      // MODE 1: CONDUCTION
       // ==========================================
       if (mode === 'conduction') {
         const rodStartX = 200;
@@ -232,7 +232,7 @@ export const HeatTransferLabSim: React.FC<BaseSimulationProps> = ({
       }
 
       // ==========================================
-      // MODE 2: CONVECTION (संवहन)
+      // MODE 2: CONVECTION
       // ==========================================
       if (mode === 'convection') {
         const beakerX = 440;
@@ -319,7 +319,7 @@ export const HeatTransferLabSim: React.FC<BaseSimulationProps> = ({
       }
 
       // ==========================================
-      // MODE 3: RADIATION (विकिरण)
+      // MODE 3: RADIATION
       // ==========================================
       if (mode === 'radiation') {
         const srcX = 220;
@@ -397,7 +397,7 @@ export const HeatTransferLabSim: React.FC<BaseSimulationProps> = ({
       titleNepali="ताप सञ्चालन प्रयोगशाला (सञ्चालन, संवहन, विकिरण)"
       chapterNumber={7}
       chapterTitle="Unit 7: Energy in Daily Life"
-      chapterTitleNepali="एकाइ ७: दैनिक जीवनमा शक्ति"
+      chapterTitleNepali="एकाइ 7: दैनिक जीवनमा शक्ति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -575,13 +575,13 @@ export const HeatTransferLabSim: React.FC<BaseSimulationProps> = ({
           {/* Mode Selector Buttons */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. ताप सर्ने तरिका छान्नुहोस् (Transfer Mode)' : '1. Heat Transfer Mode'}
+              {lang === 'ne' ? '1. ताप सर्ने तरिका छान्नुहोस् (Transfer Mode)' : '1. Heat Transfer Mode'}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {[
-                { id: 'conduction', nameEn: '1. Conduction (सञ्चालन)', nameNe: '१. सञ्चालन (ठोस पदार्थ)' },
-                { id: 'convection', nameEn: '2. Convection (संवहन)', nameNe: '२. संवहन (तरल/ग्यास)' },
-                { id: 'radiation', nameEn: '3. Radiation (विकिरण)', nameNe: '३. विकिरण (शून्य माध्यम)' },
+                { id: 'conduction', nameEn: '1. Conduction', nameNe: '1. सञ्चालन (ठोस पदार्थ)' },
+                { id: 'convection', nameEn: '2. Convection', nameNe: '2. संवहन (तरल/ग्यास)' },
+                { id: 'radiation', nameEn: '3. Radiation', nameNe: '3. विकिरण (शून्य माध्यम)' },
               ].map((m) => (
                 <button
                   key={m.id}
@@ -611,7 +611,7 @@ export const HeatTransferLabSim: React.FC<BaseSimulationProps> = ({
           {mode === 'conduction' && (
             <div>
               <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-                {lang === 'ne' ? '२. डण्डीको धातु (Rod Material)' : '2. Rod Material'}
+                {lang === 'ne' ? '2. डण्डीको धातु (Rod Material)' : '2. Rod Material'}
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
                 {[

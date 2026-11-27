@@ -22,34 +22,34 @@ const NETS_INFO: Record<NetType, NetMeta> = {
     id: 'cube',
     nameNp: 'घनको जालो (Cube Net)',
     nameEn: 'Cube Net',
-    facesNp: '६ वटा बराबर वर्गहरू (६ पृष्ठ, १२ किनारा, ८ शीर्षबिन्दु)',
+    facesNp: '6 pcs बराबर वर्गहरू (6 पृष्ठ, 12 किनारा, 8 शीर्षबिन्दु)',
     facesEn: '6 Equal Squares (6 faces, 12 edges, 8 vertices)',
-    descNp: '६ वटा वर्गाकार पृष्ठहरू जोडिएर घन बन्दछ। यसका ११ वटा फरक-फरक मान्य जालोहरू (valid nets) हुन सक्छन्।',
+    descNp: '6 pcs वर्गाकार पृष्ठहरू जोडिएर घन बन्दछ। यसका 11 pcs फरक-फरक मान्य जालोहरू (valid nets) हुन सक्छन्।',
     descEn: '6 square faces fold together at 90° angles to form a closed cube.'
   },
   cuboid: {
     id: 'cuboid',
     nameNp: 'घनाभको जालो (Cuboid Net)',
     nameEn: 'Cuboid Net',
-    facesNp: '६ वटा आयताकार पृष्ठहरू (सम्मुख पृष्ठहरू बराबर)',
+    facesNp: '6 pcs आयताकार पृष्ठहरू (सम्मुख पृष्ठहरू बराबर)',
     facesEn: '6 Rectangular Faces (opposite faces congruent)',
-    descNp: '६ वटा आयतहरू मिलेर घनाभ बन्दछ। सम्मुख पृष्ठहरू एकअर्कासँग समानान्तर र बराबर हुन्छन्।',
+    descNp: '6 pcs आयतहरू मिलेर घनाभ बन्दछ। सम्मुख पृष्ठहरू एकअर्कासँग समानान्तर र बराबर हुन्छन्।',
     descEn: '6 rectangular faces with opposite faces congruent fold into a cuboid.'
   },
   tetrahedron: {
     id: 'tetrahedron',
     nameNp: 'चतुष्फलकको जालो (Tetrahedron Net)',
     nameEn: 'Tetrahedron Net',
-    facesNp: '४ वटा समबाहु त्रिभुजहरू (४ पृष्ठ, ६ किनारा, ४ शीर्षबिन्दु)',
+    facesNp: '4 pcs समबाहु त्रिभुजहरू (4 पृष्ठ, 6 किनारा, 4 शीर्षबिन्दु)',
     facesEn: '4 Equilateral Triangles (4 faces, 6 edges, 4 vertices)',
-    descNp: '४ वटा त्रिकोणीय पृष्ठहरू मिलेर बन्द त्रिकोणीय पिरामिड (चतुष्फलक) बन्दछ।',
+    descNp: '4 pcs त्रिकोणीय पृष्ठहरू मिलेर बन्द त्रिकोणीय पिरामिड (चतुष्फलक) बन्दछ।',
     descEn: '4 equilateral triangular faces fold up into a regular tetrahedron.'
   },
   cone: {
     id: 'cone',
     nameNp: 'शङ्कुको जालो (Cone Net)',
     nameEn: 'Cone Net',
-    facesNp: '१ वृत्ताकार आधार + १ वृत्तखण्ड (Sector)',
+    facesNp: '1 वृत्ताकार आधार + 1 वृत्तखण्ड (Sector)',
     facesEn: '1 Circular Base + 1 Circular Sector',
     descNp: 'एउटा वृत्तखण्ड बेरिएर छड्के सतह र एउटा वृत्तले आधार बनाई शङ्कु बन्दछ।',
     descEn: 'One circular sector rolls up to form the conical lateral surface over one circular base.'
@@ -58,22 +58,22 @@ const NETS_INFO: Record<NetType, NetMeta> = {
     id: 'cylinder',
     nameNp: 'बेलनको जालो (Cylinder Net)',
     nameEn: 'Cylinder Net',
-    facesNp: '२ वृत्ताकार आधारहरू + १ आयताकार छड्के सतह',
+    facesNp: '2 वृत्ताकार आधारहरू + 1 आयताकार छड्के सतह',
     facesEn: '2 Circular Bases + 1 Rectangular Lateral Surface',
-    descNp: 'एउटा आयतलाई बेरेर वक्र सतह बनाइन्छ र माथि तथा तल दुईवटा वृत्तहरू जोडिन्छन्।',
+    descNp: 'एउटा आयतलाई बेरेर वक्र सतह बनाइन्छ र माथि तथा तल Two circlesहरू जोडिन्छन्।',
     descEn: 'One rectangle rolls up into the curved lateral cylinder surface capped by two circular bases.'
   }
 };
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'घन (Cube) को जालोमा कतिवटा वर्गाकार पृष्ठहरू हुनुपर्छ?',
+    np: 'घन (Cube) को जालोमा कतिpcs वर्गाकार पृष्ठहरू हुनुपर्छ?',
     en: 'How many square faces must the net of a cube have?',
     options: [
-      { key: 'A', label: '६ वटा (Six squares)' },
-      { key: 'B', label: '४ वटा' },
-      { key: 'C', label: '८ वटा' },
-      { key: 'D', label: '१२ वटा' },
+      { key: 'A', label: '6 (six squares)' },
+      { key: 'B', label: '4 pcs' },
+      { key: 'C', label: '8 pcs' },
+      { key: 'D', label: '12 pcs' },
     ],
     answer: 'A',
   },
@@ -81,21 +81,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'बेलन (Cylinder) को छड्के सतह (Curved surface) लाई फिँजाउँदा कुन आकार बन्दछ?',
     en: 'When the curved surface of a cylinder is unrolled flat, what shape does it form?',
     options: [
-      { key: 'A', label: 'आयत (Rectangle)' },
-      { key: 'B', label: 'वृत्त (Circle)' },
-      { key: 'C', label: 'त्रिभुज (Triangle)' },
-      { key: 'D', label: 'शङ्कु (Cone)' },
+      { key: 'A', label: 'Rectangle' },
+      { key: 'B', label: 'Circle' },
+      { key: 'C', label: 'Triangle' },
+      { key: 'D', label: 'Cone' },
     ],
     answer: 'A',
   },
   {
-    np: 'शङ्कु (Cone) को जालोमा कुन-कुन दुईवटा भागहरू हुन्छन्?',
+    np: 'Cone को जालोमा कुन-कुन दुईpcs भागहरू हुन्छन्?',
     en: 'Which two 2D components comprise the net of a cone?',
     options: [
-      { key: 'A', label: 'एउटा वृत्त र एउटा वृत्तखण्ड (Circle and Sector)' },
-      { key: 'B', label: 'दुईवटा वृत्त' },
-      { key: 'C', label: 'एउटा आयत र दुईवटा वृत्त' },
-      { key: 'D', label: 'तीनवटा त्रिभुज' },
+      { key: 'A', label: 'One circle and one sector' },
+      { key: 'B', label: 'Two circles' },
+      { key: 'C', label: 'एउटा आयत र Two circles' },
+      { key: 'D', label: 'Three triangles' },
     ],
     answer: 'A',
   }
@@ -108,7 +108,7 @@ export const SolidNetBuilderFoldingLab3D: React.FC<{
   const kit = useSimKit({
     code: 'SIM-MATH-G8-U16-02',
     chapter: 16,
-    titleNp: '३D ठोस वस्तु जालो र पट्याउने प्रयोगशाला',
+    titleNp: '3D ठोस वस्तु जालो र पट्याउने प्रयोगशाला',
     titleEn: '3D Solid Net Builder and Folding Lab',
   });
   const isNe = kit.lang === 'ne';
@@ -285,7 +285,7 @@ export const SolidNetBuilderFoldingLab3D: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! २D जालोलाई पट्याएर ३D ठोस वस्तु बनाउने र खोल्ने रोचक प्रक्रिया सिक्नुहोस्!',
+        'नमस्ते! 2D जालोलाई पट्याएर 3D ठोस वस्तु बनाउने र खोल्ने रोचक प्रक्रिया सिक्नुहोस्!',
         'Hello! Learn how 2D nets fold into 3D solid objects and unfold back into plane nets!'
       )}
     >
@@ -318,7 +318,7 @@ export const SolidNetBuilderFoldingLab3D: React.FC<{
                 {L('पट्याउने / खोल्ने नियन्त्रण (Fold / Unfold Progress):', 'Fold / Unfold Progress:')}
               </span>
               <span className="font-mono text-sm font-bold text-amber-300">
-                {foldProgress}% {foldProgress === 100 ? L('(पूरा पट्याइएको ३D ठोस)', '(Full 3D Solid)') : foldProgress === 0 ? L('(फिँजाइएको २D जालो)', '(Flat 2D Net)') : ''}
+                {foldProgress}% {foldProgress === 100 ? L('', '(Full 3D Solid)') : foldProgress === 0 ? L('', '(Flat 2D Net)') : ''}
               </span>
             </div>
             <input
@@ -330,9 +330,9 @@ export const SolidNetBuilderFoldingLab3D: React.FC<{
               className="w-full accent-amber-500"
             />
             <div className="flex justify-between text-[11px] text-slate-400 mt-1">
-              <span>0% (२D जालो / Flat Net)</span>
-              <span>५०% (पट्याउँदै / Folding)</span>
-              <span>100% (३D ठोस / Closed Solid)</span>
+              <span>0%</span>
+              <span>50%</span>
+              <span>100%</span>
             </div>
           </div>
 
@@ -356,7 +356,7 @@ export const SolidNetBuilderFoldingLab3D: React.FC<{
         <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 flex justify-center relative">
           <canvas ref={canvasRef} className="w-full max-w-2xl h-72 cursor-grab active:cursor-grabbing rounded-xl" />
           <div className="absolute top-6 left-6 text-xs text-slate-400 bg-slate-900/80 px-2.5 py-1 rounded-md border border-slate-700 pointer-events-none">
-            🖱️ {L('माउसले ३D जालोलाई चारैतिर घुमाउनुहोस्', 'Drag to rotate 3D folding solid')}
+            🖱️ {L('माउसले 3D जालोलाई चारैतिर घुमाउनुहोस्', 'Drag to rotate 3D folding solid')}
           </div>
         </div>
 

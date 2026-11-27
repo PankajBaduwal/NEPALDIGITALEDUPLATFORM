@@ -111,16 +111,16 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
   const quizQuestions = [
     {
       qEn: 'For a continuous frequency distribution with N = 40, which cumulative frequency (cf) is used to find the Median class position (N/2)?',
-      qNp: 'कुल आवृत्ति N = ४० भएको निरन्तर श्रेणीमा मध्यिकाको स्थान (N/२) पत्ता लगाउन कुन सञ्चित आवृत्ति (cf) हेरिन्छ?',
+      qNp: 'कुल आवृत्ति N = 40 भएको निरन्तर श्रेणीमा मध्यिकाको स्थान (N/2) पत्ता लगाउन कुन सञ्चित आवृत्ति (cf) हेरिन्छ?',
       options: ['cf ≥ 20', 'cf ≥ 10', 'cf ≥ 30', 'cf ≥ 40'],
-      optionsNp: ['cf ≥ २०', 'cf ≥ १०', 'cf ≥ ३०', 'cf ≥ ४०'],
+      optionsNp: ['cf ≥ 20', 'cf ≥ 10', 'cf ≥ 30', 'cf ≥ 40'],
       correct: 0, // N/2 = 20
       hintEn: 'Position of Median = N/2 = 40/2 = 20. The median class is the first class interval whose cf is greater than or equal to 20.',
-      hintNp: 'मध्यिकाको स्थान = N/२ = ४०/२ = २०। cf को मान २० वा २० भन्दा ठिक ठूलो भएको वर्ग नै मध्यिका वर्ग हुन्छ।',
+      hintNp: 'मध्यिकाको Position = N/2 = 40/2 = 20। cf को मान 20 वा 20 भन्दा ठिक ठूलो भएको वर्ग नै मध्यिका वर्ग हुन्छ।',
     },
     {
       qEn: 'In the grouped median formula Md = L + [(N/2 - cf)/f] × h, what does the symbol "cf" represent?',
-      qNp: 'मध्यिका सूत्र Md = L + [(N/२ - cf)/f] × h मा "cf" ले के जनाउँछ?',
+      qNp: 'मध्यिका सूत्र Md = L + [(N/2 - cf)/f] × h मा "cf" ले के जनाउँछ?',
       options: [
         'Cumulative frequency of the class preceding the median class',
         'Frequency of the median class',
@@ -139,7 +139,7 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
     },
     {
       qEn: 'What is the relationship between the first quartile Q1, median Q2, and third quartile Q3?',
-      qNp: 'पहिलो चतुर्थांश Q1, मध्यिका Q2 (दोस्रो चतुर्थांश), र तेस्रो चतुर्थांश Q3 बीचको सम्बन्ध के हो?',
+      qNp: 'पहिलो चतुर्थांश Q1, मध्यिका Q2, र तेस्रो चतुर्थांश Q3 बीचको सम्बन्ध के हो?',
       options: [
         'Q1 divides lower 25%, Q2 is 50% (Median), Q3 marks 75%',
         'Q1 + Q3 = Q2 always',
@@ -147,19 +147,19 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
         'They are always equally spaced from zero',
       ],
       optionsNp: [
-        'Q1 ले तल्लो २५%, Q2 ले ५०% (मध्यिका), र Q3 ले ७५% तथ्याङ्क छुट्याउँछ',
+        'Q1 ले तल्लो 25%, Q2 ले 50%, र Q3 ले 75% तथ्याङ्क छुट्याउँछ',
         'सधैँ Q1 + Q3 = Q2 हुन्छ',
-        'Q3 सधैँ Q1 को ३ गुणा हुन्छ',
+        'Q3 सधैँ Q1 को 3 गुणा हुन्छ',
         'ती सधैँ शून्यबाट समान दूरीमा हुन्छन्',
       ],
       correct: 0,
       hintEn: 'Quartiles divide an ordered dataset into 4 equal quarters: Q1 at 25%, Q2 (median) at 50%, and Q3 at 75%.',
-      hintNp: 'चतुर्थांशहरूले तथ्याङ्कलाई चार बराबर भागमा बाँड्छन्: Q1 ले २५%, Q2 (मध्यिका) ले ५०%, र Q3 ले ७५%।',
+      hintNp: 'चतुर्थांशहरूले तथ्याङ्कलाई चार बराबर भागमा बाँड्छन्: Q1 ले 25%, Q2 ले 50%, र Q3 ले 75%।',
     },
     {
       qEn: 'Which measure of central tendency corresponds to the class with the highest frequency?',
       qNp: 'सबैभन्दा बढी आवृत्ति (Maximum Frequency) भएको वर्गसँग कुन केन्द्रीय प्रवृत्तिको नाप सम्बन्धित हुन्छ?',
-      options: ['Mode (बहुलक)', 'Mean (मध्यक)', 'Median (मध्यिका)', 'Quartile (चतुर्थांश)'],
+      options: ['Mode', 'Mean', 'Median', 'Quartile'],
       optionsNp: ['बहुलक (Mode)', 'मध्यक (Mean)', 'मध्यिका (Median)', 'चतुर्थांश (Quartile)'],
       correct: 0,
       hintEn: 'The modal class is the class interval containing the highest frequency f1.',
@@ -193,7 +193,7 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ १३: तथ्याङ्क शास्त्र (Statistics) प्रयोगशालामा स्वागत छ! यहाँ निरन्तर श्रेणीको मध्यक, मध्यिका, बहुलक, चतुर्थांशहरू (Q₁, Q₃) तथा आयतचित्र (Histogram) प्रत्यक्ष अन्वेषण गर्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 13: तथ्याङ्क शास्त्र (Statistics) प्रयोगशालामा स्वागत छ! यहाँ निरन्तर श्रेणीको मध्यक, मध्यिका, बहुलक, चतुर्थांशहरू (Q₁, Q₃) तथा आयतचित्र (Histogram) प्रत्यक्ष अन्वेषण गर्नुहोस्!',
         'Welcome to Grade 10 Unit 13: Interactive Statistics Laboratory! Explore continuous frequency distributions, compute Mean, Median, Mode, Quartiles (Q₁, Q₃), and visualize dynamic histograms!'
       )}
     >
@@ -298,7 +298,7 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
               {/* Direct Method */}
               <div className="p-4 bg-teal-50 border border-teal-200 rounded-2xl shadow-sm space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-teal-800 block">
-                  {L('१. प्रत्यक्ष विधि (Direct Method)', '1. Direct Method')}
+                  {L('1. प्रत्यक्ष विधि (Direct Method)', '1. Direct Method')}
                 </span>
                 <div className="text-sm font-mono font-bold text-[#142D4E]">
                   X̄ = ∑fm / N = {fmt(sumFm)} / {fmt(N)} ={' '}
@@ -312,10 +312,10 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
               {/* Assumed Mean Method */}
               <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl shadow-sm space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-amber-900 block">
-                  {L('२. कल्पित मध्यक विधि (Assumed Mean Method)', '2. Assumed Mean Method')}
+                  {L('2. कल्पित मध्यक विधि (Assumed Mean Method)', '2. Assumed Mean Method')}
                 </span>
                 <div className="text-xs text-slate-600 font-sans">
-                  {L(`कल्पित मध्यक A = ${fmt(assumedMeanA)} (वर्ग ३०–४० को मध्यमान)`, `Assumed Mean A = ${assumedMeanA}`)}
+                  {L(`कल्पित मध्यक A = ${fmt(assumedMeanA)} (वर्ग 30–40 को मध्यमान)`, `Assumed Mean A = ${assumedMeanA}`)}
                 </div>
                 <div className="text-sm font-mono font-bold text-amber-900">
                   X̄ = A + (∑fd / N) = {fmt(assumedMeanA)} + ({fmt(sumFd)} / {fmt(N)}) ={' '}
@@ -341,23 +341,23 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
               </span>
               <div className="grid grid-cols-4 gap-2 text-center text-xs font-mono">
                 <div className="p-3 bg-teal-800/60 rounded-xl border border-teal-500/40">
-                  <div className="text-slate-400 text-xs">पहिलो २५%</div>
+                  <div className="text-slate-400 text-xs">First 25%</div>
                   <div className="text-base font-bold text-teal-300">Q₁ = {fmt(q1Val.toFixed(2))}</div>
-                  <div className="text-xs text-slate-300">N/४ = {fmt(q1Pos.toFixed(1))}</div>
+                  <div className="text-xs text-slate-300">N/4 = {fmt(q1Pos.toFixed(1))}</div>
                 </div>
                 <div className="p-3 bg-emerald-800/60 rounded-xl border border-emerald-500/40">
-                  <div className="text-slate-400 text-xs">दोस्रो ५०% (मध्यिका)</div>
+                  <div className="text-slate-400 text-xs">Second 50%</div>
                   <div className="text-base font-bold text-emerald-300">Md = {fmt(medianVal.toFixed(2))}</div>
-                  <div className="text-xs text-slate-300">N/२ = {fmt(medPos.toFixed(1))}</div>
+                  <div className="text-xs text-slate-300">N/2 = {fmt(medPos.toFixed(1))}</div>
                 </div>
                 <div className="p-3 bg-amber-800/60 rounded-xl border border-amber-500/40">
-                  <div className="text-slate-400 text-xs">तेस्रो ७५%</div>
+                  <div className="text-slate-400 text-xs">Third 75%</div>
                   <div className="text-base font-bold text-amber-300">Q₃ = {fmt(q3Val.toFixed(2))}</div>
-                  <div className="text-xs text-slate-300">३N/४ = {fmt(q3Pos.toFixed(1))}</div>
+                  <div className="text-xs text-slate-300">3N/4 = {fmt(q3Pos.toFixed(1))}</div>
                 </div>
                 <div className="p-3 bg-indigo-800/60 rounded-xl border border-indigo-500/40">
-                  <div className="text-slate-400 text-xs">चौथो १००%</div>
-                  <div className="text-base font-bold text-indigo-300">Max = ६०</div>
+                  <div className="text-slate-400 text-xs">Fourth 100%</div>
+                  <div className="text-base font-bold text-indigo-300">Max = 60</div>
                   <div className="text-xs text-slate-300">N = {fmt(N)}</div>
                 </div>
               </div>
@@ -371,7 +371,7 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
                   {L('पहिलो चतुर्थांश (First Quartile Q₁)', 'First Quartile Q₁')}
                 </span>
                 <div className="text-xs font-mono text-slate-600">
-                  स्थान = N/४ = {fmt(q1Pos.toFixed(1))} ⟹ वर्ग: <strong className="text-teal-800">{q1Class.label}</strong>
+                  Position = N/4 = {fmt(q1Pos.toFixed(1))} ⟹ Class: <strong className="text-teal-800">{q1Class.label}</strong>
                 </div>
                 <div className="p-2.5 bg-slate-50 rounded border text-xs font-mono space-y-1">
                   <div>L = {fmt(q1L)}, cf = {fmt(q1CfPrev)}, f = {fmt(q1F)}, h = {fmt(h)}</div>
@@ -387,7 +387,7 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
                   {L('मध्यिका (Median Md = Q₂)', 'Median Md (Q₂)')}
                 </span>
                 <div className="text-xs font-mono text-slate-600">
-                  स्थान = N/२ = {fmt(medPos.toFixed(1))} ⟹ वर्ग: <strong className="text-emerald-800">{medClass.label}</strong>
+                  Position = N/2 = {fmt(medPos.toFixed(1))} ⟹ Class: <strong className="text-emerald-800">{medClass.label}</strong>
                 </div>
                 <div className="p-2.5 bg-emerald-50 rounded border border-emerald-200 text-xs font-mono space-y-1">
                   <div>L = {fmt(medL)}, cf = {fmt(medCfPrev)}, f = {fmt(medF)}, h = {fmt(h)}</div>
@@ -403,7 +403,7 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
                   {L('तेस्रो चतुर्थांश (Third Quartile Q₃)', 'Third Quartile Q₃')}
                 </span>
                 <div className="text-xs font-mono text-slate-600">
-                  स्थान = ३N/४ = {fmt(q3Pos.toFixed(1))} ⟹ वर्ग: <strong className="text-amber-800">{q3Class.label}</strong>
+                  Position = 3N/4 = {fmt(q3Pos.toFixed(1))} ⟹ Class: <strong className="text-amber-800">{q3Class.label}</strong>
                 </div>
                 <div className="p-2.5 bg-slate-50 rounded border text-xs font-mono space-y-1">
                   <div>L = {fmt(q3L)}, cf = {fmt(q3CfPrev)}, f = {fmt(q3F)}, h = {fmt(h)}</div>
@@ -439,12 +439,12 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
                 <span className="font-bold text-slate-800 font-sans block text-sm mb-2">
                   {L('बहुलक सूत्रका अवयवहरू:', 'Formula Components:')}
                 </span>
-                <div>बहुलक वर्ग (Modal Class) = <strong className="text-teal-700">{modalClass.label}</strong></div>
-                <div>L (तल्लो सीमा / Lower boundary) = {fmt(modeL)}</div>
-                <div>f₁ (बहुलक वर्गको आवृत्ति / Modal freq) = <strong className="text-teal-700">{fmt(f1)}</strong></div>
-                <div>f₀ (अघिल्लो वर्गको आवृत्ति / Preceding freq) = {fmt(f0)}</div>
-                <div>f₂ (पछिल्लो वर्गको आवृत्ति / Succeeding freq) = {fmt(f2)}</div>
-                <div>h (वर्गान्तर / Class width) = {fmt(h)}</div>
+                <div>Modal class = <strong className="text-teal-700">{modalClass.label}</strong></div>
+                <div>L = {fmt(modeL)}</div>
+                <div>f₁ (frequency of the modal class) = <strong className="text-teal-700">{fmt(f1)}</strong></div>
+                <div>f₀ (frequency of the preceding class) = {fmt(f0)}</div>
+                <div>f₂ (frequency of the succeeding class) = {fmt(f2)}</div>
+                <div>h = {fmt(h)}</div>
               </div>
 
               {/* Mode Calculation */}
@@ -453,10 +453,10 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
                   {L('पाठ्यपुस्तक बहुलक सूत्र (Textbook Mode Formula):', 'Textbook Mode Formula:')}
                 </span>
                 <div className="text-sm font-bold text-amber-900">
-                  Mode = L + [(f₁ - f₀) / (२f₁ - f₀ - f₂)] × h
+                  Mode = L + [(f₁ - f₀) / (2f₁ - f₀ - f₂)] × h
                 </div>
                 <div className="p-3 bg-white rounded border text-xs text-slate-700 space-y-1">
-                  <div>= {fmt(modeL)} + [({fmt(f1)} - {fmt(f0)}) / (२({fmt(f1)}) - {fmt(f0)} - {fmt(f2)})] × {fmt(h)}</div>
+                  <div>= {fmt(modeL)} + [({fmt(f1)} - {fmt(f0)}) / (2({fmt(f1)}) - {fmt(f0)} - {fmt(f2)})] × {fmt(h)}</div>
                   <div>= {fmt(modeL)} + [{fmt(f1 - f0)} / {fmt(modeDenom)}] × {fmt(h)}</div>
                   <div className="text-base font-black text-amber-800 mt-1">
                     = {fmt(modeVal.toFixed(2))}
@@ -477,9 +477,9 @@ export const InteractiveStatisticsLab: React.FC<SimProps> = ({ onBackToLibrary, 
                 {L('आयतचित्र र केन्द्रीय प्रवृत्तिको तुलना (Histogram & Comparison)', 'Histogram & Comparison')}
               </h4>
               <div className="flex gap-3 text-xs font-mono font-bold">
-                <span className="text-teal-600">मध्यक X̄ = {fmt(meanVal.toFixed(1))}</span>
-                <span className="text-emerald-600">मध्यिका Md = {fmt(medianVal.toFixed(1))}</span>
-                <span className="text-amber-600">बहुलक Mode = {fmt(modeVal.toFixed(1))}</span>
+                <span className="text-teal-600">Mean X̄ = {fmt(meanVal.toFixed(1))}</span>
+                <span className="text-emerald-600">Median Md = {fmt(medianVal.toFixed(1))}</span>
+                <span className="text-amber-600">Mode = {fmt(modeVal.toFixed(1))}</span>
               </div>
             </div>
 

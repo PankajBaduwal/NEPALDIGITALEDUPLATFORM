@@ -6,46 +6,46 @@ import { Award, CheckCircle2, RotateCcw, ArrowRight, HelpCircle, Briefcase } fro
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'कुनै घडीको अङ्कित मूल्य रु २,५०० छ। १०% छुट दिएर १३% भ्याट लगाउँदा घडीको मूल्य कति हुन्छ?',
+    np: 'कुनै घडीको अङ्कित मूल्य Rs 2,500 छ। 10% छुट दिएर 13% भ्याट लगाउँदा घडीको मूल्य कति हुन्छ?',
     en: 'A watch marked at Rs 2,500 is sold with 10% discount and 13% VAT. What is its selling price?',
     options: [
-      { key: 'A', label: 'रु २,५४२.५० — (२२५० + २९२.५०)' },
-      { key: 'B', label: 'रु २,५००' },
-      { key: 'C', label: 'रु २,४००' },
-      { key: 'D', label: 'रु २,६५०' },
+      { key: 'A', label: 'Rs 2,542.50 — (2250 + 292.50)' },
+      { key: 'B', label: 'Rs 2,500' },
+      { key: 'C', label: 'Rs 2,400' },
+      { key: 'D', label: 'Rs 2,650' },
     ],
     answer: 'A',
   },
   {
-    np: 'एक व्यक्तिले वार्षिक रु ६,००,००० कमाउँछन्। पहिलो ५ लाखमा १% र त्यसपछिको १ लाखमा १०% कर लाग्दा कुल आयकर कति हुन्छ?',
+    np: 'एक व्यक्तिले वार्षिक Rs 6,00,000 कमाउँछन्। पहिलो 5 लाखमा 1% र त्यसपछिको 1 लाखमा 10% कर लाग्दा कुल आयकर कति हुन्छ?',
     en: 'A person earns Rs 6,00,000 annually. With 1% on first 5 lakh and 10% on the next 1 lakh, what is total tax?',
     options: [
-      { key: 'A', label: 'रु १५,००० — (५,००० + १०,००० = १५,०००)' },
-      { key: 'B', label: 'रु १०,०००' },
-      { key: 'C', label: 'रु ६,०००' },
-      { key: 'D', label: 'रु २०,०००' },
+      { key: 'A', label: 'Rs 15,000 — (5,000 + 10,000 = 15,000)' },
+      { key: 'B', label: 'Rs 10,000' },
+      { key: 'C', label: 'Rs 6,000' },
+      { key: 'D', label: 'Rs 20,000' },
     ],
     answer: 'A',
   },
   {
-    np: 'एक खुद्रा बिक्रेताले रु ८,००० मा किनेको सामान रु १०,००० मा बेच्दा १३% का दरले सरकारलाई दाखिला गर्ने खुद भ्याट कति हुन्छ?',
+    np: 'एक खुद्रा बिक्रेताले Rs 8,000 मा किनेको सामान Rs 10,000 मा बेच्दा 13% का दरले सरकारलाई दाखिला गर्ने खुद भ्याट कति हुन्छ?',
     en: 'A retailer buys goods for Rs 8,000 and sells for Rs 10,000. At 13% VAT, what is the net VAT deposited to the government?',
     options: [
-      { key: 'A', label: 'रु २६० — (१३०० − १०४० = २६०)' },
-      { key: 'B', label: 'रु १,३००' },
-      { key: 'C', label: 'रु १,०४०' },
-      { key: 'D', label: 'रु ५००' },
+      { key: 'A', label: 'Rs 260 — (1300 − 1040 = 260)' },
+      { key: 'B', label: 'Rs 1,300' },
+      { key: 'C', label: 'Rs 1,040' },
+      { key: 'D', label: 'Rs 500' },
     ],
     answer: 'A',
   },
   {
-    np: 'भ्याटसहित रु ११,३०० मा बेचिएको साइकलको भ्याट रकम कति हो (भ्याट दर १३%)?',
+    np: 'भ्याटसहित Rs 11,300 मा बेचिएको साइकलको भ्याट रकम कति हो (भ्याट दर 13%)?',
     en: 'What is the VAT amount of a bicycle sold for Rs 11,300 including 13% VAT?',
     options: [
-      { key: 'A', label: 'रु १,३०० — (११३०० − १०००० = १३००)' },
-      { key: 'B', label: 'रु १,०००' },
-      { key: 'C', label: 'रु १,४६९' },
-      { key: 'D', label: 'रु १,५००' },
+      { key: 'A', label: 'Rs 1,300 — (11300 − 10000 = 1300)' },
+      { key: 'B', label: 'Rs 1,000' },
+      { key: 'C', label: 'Rs 1,469' },
+      { key: 'D', label: 'Rs 1,500' },
     ],
     answer: 'A',
   },
@@ -68,38 +68,38 @@ const CHALLENGES: ChallengeItem[] = [
   {
     id: 'ch1',
     level: 'easy',
-    levelLabelNp: 'तह १: सामान्य (Easy)',
-    titleNp: 'ल्यापटप खरिदमा भ्याट गणना',
-    questionNp: 'अङ्कित मूल्य रु ५०,००० भएको ल्यापटपमा १०% छुट दिएपछि १३% भ्याट जोड्दा ग्राहकले कति रकम तिर्नुपर्छ?',
+    levelLabelNp: 'Level 1: Easy',
+    titleNp: 'VAT calculation on buying a laptop',
+    questionNp: 'A laptop has a marked price of Rs 50,000. After a 10% discount and adding 13% VAT, how much must the customer pay?',
     questionEn: 'A laptop with MP Rs 50,000 has 10% discount and 13% VAT. What is the final amount payable?',
     correctAnswer: 50850,
-    unit: 'रु.',
-    hintNp: 'पहिले १०% छुट घटाउनुहोस् (रु ४५,०००), अनि त्यसमा १३% भ्याट जोड्नुहोस्।',
-    solutionNp: 'छुट = ५०,००० × १०% = रु ५,०००। SP = रु ४५,०००। भ्याट = ४५,००० × १३% = रु ५,८५०। अन्तिम मूल्य = ४५,००० + ५,८५० = रु ५०,८५०।',
+    unit: 'Rs.',
+    hintNp: 'पहिले 10% छुट घटाउनुहोस् (Rs 45,000), अनि त्यसमा 13% भ्याट जोड्नुहोस्।',
+    solutionNp: 'छुट = 50,000 × 10% = Rs 5,000। SP = Rs 45,000। भ्याट = 45,000 × 13% = Rs 5,850। अन्तिम मूल्य = 45,000 + 5,850 = Rs 50,850।',
   },
   {
     id: 'ch2',
     level: 'medium',
-    levelLabelNp: 'तह २: मध्यम (Medium)',
-    titleNp: 'वार्षिक तलबमा आयकर गणना',
-    questionNp: 'एक अविवाहित अधिकृतको मासिक तलब रु ५०,००० छ (दशैं खर्चसहित १३ महिना)। पहिलो ५ लाखमा १% र त्यसपछिको रकममा १०% कर लाग्छ भने वार्षिक आयकर कति हुन्छ?',
+    levelLabelNp: 'Level 2: Medium',
+    titleNp: 'Income tax calculation on annual salary',
+    questionNp: 'A single officer’s monthly salary is Rs 50,000 (13 months including Dashain allowance). If tax is 1% on the first 5 lakh and 10% on the remaining amount, what is the annual income tax?',
     questionEn: 'An officer earns Rs 50,000/mo (13 months). First 5 lakh @ 1%, next @ 10%. Find annual income tax.',
     correctAnswer: 20000,
-    unit: 'रु.',
-    hintNp: 'वार्षिक आम्दानी = ५०,००० × १३ = रु ६,५०,०००। पहिलो ५ लाखमा १% (५,०००) र बाँकी १.५ लाखमा १०% (१५,०००)।',
-    solutionNp: 'कुल आय = रु ६,५०,०००। पहिलो स्ल्याब कर = ५,००,००० × १% = रु ५,०००। दोस्रो स्ल्याब कर = १,५०,००० × १०% = रु १५,०००। कुल आयकर = रु २०,०००।',
+    unit: 'Rs.',
+    hintNp: 'वार्षिक आम्दानी = 50,000 × 13 = Rs 6,50,000। पहिलो 5 लाखमा 1% (5,000) र बाँकी 1.5 लाखमा 10% (15,000)।',
+    solutionNp: 'कुल आय = Rs 6,50,000। पहिलो स्ल्याब कर = 5,00,000 × 1% = Rs 5,000। दोस्रो स्ल्याब कर = 1,50,000 × 10% = Rs 15,000। कुल आयकर = Rs 20,000।',
   },
   {
     id: 'ch3',
     level: 'hard',
-    levelLabelNp: 'तह ३: चुनौतीपूर्ण (Hard)',
-    titleNp: 'खुद भ्याट दाखिला गणना',
-    questionNp: 'एक थोक बिक्रेताले कारखानाबाट रु २०,००० मा सामान किनेर रु ४,००० नाफा राखी डिलरलाई बेच्दा १३% का दरले सरकारलाई कति खुद भ्याट दाखिला गर्नुपर्छ?',
+    levelLabelNp: 'Level 3: Hard',
+    titleNp: 'Net VAT payment calculation',
+    questionNp: 'A wholesaler buys goods from a factory for Rs 20,000 and sells them to a dealer at a profit of Rs 4,000. At the rate of 13%, how much net VAT must be paid to the government?',
     questionEn: 'A wholesaler buys for Rs 20,000, adds Rs 4,000 profit and sells. How much net VAT is deposited?',
     correctAnswer: 520,
-    unit: 'रु.',
-    hintNp: 'व्यापारीले नाफा रकममा मात्र १३% भ्याट दाखिला गर्दछ (४००० × १३%)।',
-    solutionNp: 'खरिद भ्याट = २०,००० × १३% = रु २,६००। बिक्री मूल्य = रु २४,०००। बिक्री भ्याट = २४,००० × १३% = रु ३,१२०। दाखिला गर्ने खुद भ्याट = ३,१२० − २,६०० = रु ५२०।',
+    unit: 'Rs.',
+    hintNp: 'व्यापारीले नाफा रकममा मात्र 13% भ्याट दाखिला गर्दछ (4000 × 13%)।',
+    solutionNp: 'खरिद भ्याट = 20,000 × 13% = Rs 2,600। बिक्री मूल्य = Rs 24,000। बिक्री भ्याट = 24,000 × 13% = Rs 3,120। दाखिला गर्ने खुद भ्याट = 3,120 − 2,600 = Rs 520।',
   },
 ];
 
@@ -185,7 +185,7 @@ export const TaxProblemSolvingChallenge: React.FC<{
               <h3 className="text-base font-extrabold text-slate-900 mt-0.5">{cur.titleNp}</h3>
             </div>
             <div className="text-right">
-              <span className="text-xs text-slate-500 font-semibold block">अङ्क (Score)</span>
+              <span className="text-xs text-slate-500 font-semibold block">Score</span>
               <span className="text-lg font-black text-amber-600 font-mono">{score}</span>
             </div>
           </div>
@@ -199,7 +199,7 @@ export const TaxProblemSolvingChallenge: React.FC<{
             <div className="flex-1 flex items-center gap-2">
               <input
                 type="number"
-                placeholder="तपाईंको उत्तर लेख्नुहोस्..."
+                placeholder="Write your answer..."
                 value={userAnswer}
                 onChange={(e) => {
                   setUserAnswer(e.target.value);
@@ -215,7 +215,7 @@ export const TaxProblemSolvingChallenge: React.FC<{
               disabled={!userAnswer}
               className="py-3 px-6 bg-amber-600 hover:bg-amber-700 disabled:opacity-50 text-white font-bold rounded-xl text-xs shadow-md transition"
             >
-              जाँच गर्नुहोस् (Check Answer)
+              Check answer
             </button>
 
             {feedback?.isCorrect && (

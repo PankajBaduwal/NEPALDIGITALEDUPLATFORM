@@ -6,24 +6,24 @@ import { BarChart3, PieChart, LineChart, Table2, Plus, Trash2 } from 'lucide-rea
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'वृत्तचित्र (Pie Chart) मा कुनै समूहको केन्द्रीय कोण (Central Sector Angle) निकाल्ने सूत्र कुन हो?',
+    np: 'वृत्तचित्र (Pie Chart) मा कुनै समूहको Central angle (Central Sector Angle) निकाल्ने सूत्र कुन हो?',
     en: 'What is the formula to calculate the central sector angle in a pie chart?',
     options: [
-      { key: 'A', label: '(समूहको मान ÷ जम्मा मान) × ३६०°' },
-      { key: 'B', label: '(समूहको मान ÷ १००) × ३६०°' },
-      { key: 'C', label: '(जम्मा मान ÷ समूहको मान) × १८०°' },
-      { key: 'D', label: 'समूहको मान × ३६०°' },
+      { key: 'A', label: ' × 360°' },
+      { key: 'B', label: ' × 360°' },
+      { key: 'C', label: ' × 180°' },
+      { key: 'D', label: 'Group value × 360°' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि जम्मा ४० जना विद्यार्थीमध्ये १० जनाले फुटबल मन पराउँछन् भने वृत्तचित्रमा फुटबलको कोण कति हुन्छ?',
+    np: 'यदि जम्मा 40 जना विद्यार्थीमध्ये 10 जनाले Football मन पराउँछन् भने वृत्तचित्रमा Footballको कोण कति हुन्छ?',
     en: 'If 10 out of 40 students like football, what is the central angle for football in a pie chart?',
     options: [
-      { key: 'A', label: '९०° — (१०/४०) × ३६०° = ९०°' },
-      { key: 'B', label: '४५°' },
-      { key: 'C', label: '१२०°' },
-      { key: 'D', label: '६०°' },
+      { key: 'A', label: '90° — (10/40) × 360° = 90°' },
+      { key: 'B', label: '45°' },
+      { key: 'C', label: '120°' },
+      { key: 'D', label: '60°' },
     ],
     answer: 'A',
   },
@@ -31,10 +31,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुनै स्तम्भ चित्र (Bar Graph) मा स्तम्भको उचाइले के जनाउँछ?',
     en: 'What does the height of a bar represent in a bar graph?',
     options: [
-      { key: 'A', label: 'सम्बन्धित समूहको बारम्बारता वा मान (Frequency / Value)' },
-      { key: 'B', label: 'स्तम्भको चौडाइ' },
-      { key: 'C', label: 'जम्मा योगफल' },
-      { key: 'D', label: 'केन्द्रीय कोण' },
+      { key: 'A', label: 'Frequency or value of the group' },
+      { key: 'B', label: 'Width of the bar' },
+      { key: 'C', label: 'Total sum' },
+      { key: 'D', label: 'Central angle' },
     ],
     answer: 'A',
   },
@@ -42,10 +42,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समय अनुसार परिवर्तन हुने तथ्याङ्क देखाउन सबैभन्दा उपयुक्त चित्र कुन हो?',
     en: 'Which chart is best suited to display data changing over time?',
     options: [
-      { key: 'A', label: 'रेखाचित्र (Line Graph)' },
-      { key: 'B', label: 'वृत्तचित्र मात्र' },
-      { key: 'C', label: 'स्तम्भ चित्र मात्र' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'Line graph' },
+      { key: 'B', label: 'Pie chart only' },
+      { key: 'C', label: 'Bar graph only' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
@@ -61,36 +61,36 @@ interface DataRow {
 
 const PRESET_DATASETS: { nameNp: string; nameEn: string; data: DataRow[] }[] = [
   {
-    nameNp: 'विद्यार्थीहरूको मनपर्ने खेल',
+    nameNp: 'Students’ favourite sport',
     nameEn: 'Favourite Games of Students',
     data: [
-      { id: '1', categoryNp: 'फुटबल', categoryEn: 'Football', value: 20, color: '#3b82f6' },
-      { id: '2', categoryNp: 'भलिबल', categoryEn: 'Volleyball', value: 15, color: '#10b981' },
-      { id: '3', categoryNp: 'क्रिकेट', categoryEn: 'Cricket', value: 25, color: '#f59e0b' },
-      { id: '4', categoryNp: 'ब्याडमिन्टन', categoryEn: 'Badminton', value: 10, color: '#8b5cf6' },
-      { id: '5', categoryNp: 'बास्केटबल', categoryEn: 'Basketball', value: 10, color: '#ec4899' },
+      { id: '1', categoryNp: 'Football', categoryEn: 'Football', value: 20, color: '#3b82f6' },
+      { id: '2', categoryNp: 'Volleyball', categoryEn: 'Volleyball', value: 15, color: '#10b981' },
+      { id: '3', categoryNp: 'Cricket', categoryEn: 'Cricket', value: 25, color: '#f59e0b' },
+      { id: '4', categoryNp: 'Badminton', categoryEn: 'Badminton', value: 10, color: '#8b5cf6' },
+      { id: '5', categoryNp: 'Basketball', categoryEn: 'Basketball', value: 10, color: '#ec4899' },
     ],
   },
   {
-    nameNp: 'कक्षा अनुसार विद्यार्थी सङ्ख्या',
+    nameNp: 'Number of students by class',
     nameEn: 'Students by Grade Level',
     data: [
-      { id: '1', categoryNp: 'कक्षा ६', categoryEn: 'Grade 6', value: 45, color: '#3b82f6' },
-      { id: '2', categoryNp: 'कक्षा ७', categoryEn: 'Grade 7', value: 50, color: '#10b981' },
-      { id: '3', categoryNp: 'कक्षा ८', categoryEn: 'Grade 8', value: 40, color: '#f59e0b' },
-      { id: '4', categoryNp: 'कक्षा ९', categoryEn: 'Grade 9', value: 35, color: '#8b5cf6' },
-      { id: '5', categoryNp: 'कक्षा १०', categoryEn: 'Grade 10', value: 30, color: '#ec4899' },
+      { id: '1', categoryNp: 'कक्षा 6', categoryEn: 'Grade 6', value: 45, color: '#3b82f6' },
+      { id: '2', categoryNp: 'कक्षा 7', categoryEn: 'Grade 7', value: 50, color: '#10b981' },
+      { id: '3', categoryNp: 'कक्षा 8', categoryEn: 'Grade 8', value: 40, color: '#f59e0b' },
+      { id: '4', categoryNp: 'कक्षा 9', categoryEn: 'Grade 9', value: 35, color: '#8b5cf6' },
+      { id: '5', categoryNp: 'कक्षा 10', categoryEn: 'Grade 10', value: 30, color: '#ec4899' },
     ],
   },
   {
-    nameNp: 'परिवारको मासिक खर्च (हजारमा)',
+    nameNp: 'Family monthly expenses (in thousands)',
     nameEn: 'Family Monthly Expenditure',
     data: [
-      { id: '1', categoryNp: 'खाना (Food)', categoryEn: 'Food', value: 20, color: '#ef4444' },
-      { id: '2', categoryNp: 'शिक्षा (Education)', categoryEn: 'Education', value: 15, color: '#3b82f6' },
-      { id: '3', categoryNp: 'भाडा (Rent)', categoryEn: 'Rent', value: 12, color: '#10b981' },
-      { id: '4', categoryNp: 'स्वास्थ्य (Health)', categoryEn: 'Health', value: 5, color: '#f59e0b' },
-      { id: '5', categoryNp: 'यातायात (Transport)', categoryEn: 'Transport', value: 8, color: '#8b5cf6' },
+      { id: '1', categoryNp: 'Food', categoryEn: 'Food', value: 20, color: '#ef4444' },
+      { id: '2', categoryNp: 'Education', categoryEn: 'Education', value: 15, color: '#3b82f6' },
+      { id: '3', categoryNp: 'Rent', categoryEn: 'Rent', value: 12, color: '#10b981' },
+      { id: '4', categoryNp: 'Health', categoryEn: 'Health', value: 5, color: '#f59e0b' },
+      { id: '5', categoryNp: 'Transport', categoryEn: 'Transport', value: 8, color: '#8b5cf6' },
     ],
   },
 ];
@@ -169,7 +169,7 @@ export const StatisticalDataVisualizationLab: React.FC<{
               activeTab === 'bar' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            📊 {L('१. स्तम्भ चित्र (Bar Graph)', '1. Bar Graph')}
+            📊 {L('1. स्तम्भ चित्र (Bar Graph)', '1. Bar Graph')}
           </button>
           <button
             onClick={() => setActiveTab('pie')}
@@ -177,7 +177,7 @@ export const StatisticalDataVisualizationLab: React.FC<{
               activeTab === 'pie' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🥧 {L('२. वृत्तचित्र (Pie Chart)', '2. Pie Chart')}
+            🥧 {L('2. वृत्तचित्र (Pie Chart)', '2. Pie Chart')}
           </button>
           <button
             onClick={() => setActiveTab('line')}
@@ -185,7 +185,7 @@ export const StatisticalDataVisualizationLab: React.FC<{
               activeTab === 'line' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            📈 {L('३. रेखाचित्र (Line Graph)', '3. Line Graph')}
+            📈 {L('3. Line graph', '3. Line Graph')}
           </button>
           <button
             onClick={() => setActiveTab('table')}
@@ -193,13 +193,13 @@ export const StatisticalDataVisualizationLab: React.FC<{
               activeTab === 'table' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            📋 {L('४. तालिका सम्पादन (Data Table Editor)', '4. Data Table')}
+            📋 {L('4. तालिका सम्पादन (Data Table Editor)', '4. Data Table')}
           </button>
         </div>
 
         {/* Dataset Quick Selection Pills */}
         <div className="flex flex-wrap items-center gap-2 bg-slate-100 p-2.5 rounded-xl border border-slate-300">
-          <span className="text-xs font-bold text-slate-600">तथ्याङ्क नमुना (Dataset):</span>
+          <span className="text-xs font-bold text-slate-600">Dataset:</span>
           {PRESET_DATASETS.map((ds, idx) => (
             <button
               key={ds.nameNp}
@@ -214,7 +214,7 @@ export const StatisticalDataVisualizationLab: React.FC<{
             </button>
           ))}
           <span className="ml-auto text-xs font-bold bg-indigo-100 text-indigo-900 px-2.5 py-1 rounded-lg">
-            जम्मा योगफल (N): {totalN}
+            Total (N): {totalN}
           </span>
         </div>
 
@@ -222,7 +222,7 @@ export const StatisticalDataVisualizationLab: React.FC<{
         {activeTab === 'bar' && (
           <div className="bg-white rounded-2xl shadow-lg p-5 border border-slate-200">
             <h3 className="font-extrabold text-slate-800 text-sm mb-4 text-center">
-              {PRESET_DATASETS[datasetIndex].nameNp} — स्तम्भ चित्र (Bar Graph)
+              {PRESET_DATASETS[datasetIndex].nameNp} — Bar graph
             </h3>
 
             <div className="flex justify-center">
@@ -299,7 +299,7 @@ export const StatisticalDataVisualizationLab: React.FC<{
             {/* SVG Pie Chart */}
             <div className="lg:col-span-6 bg-white rounded-2xl shadow-lg p-5 border border-slate-200 flex flex-col items-center">
               <h3 className="font-extrabold text-slate-800 text-sm mb-3">
-                {PRESET_DATASETS[datasetIndex].nameNp} — वृत्तचित्र (Pie Chart)
+                {PRESET_DATASETS[datasetIndex].nameNp} — Pie chart
               </h3>
 
               <svg width={300} height={300} className="select-none">
@@ -355,7 +355,7 @@ export const StatisticalDataVisualizationLab: React.FC<{
             {/* Central Angle Calculation Breakdown Table */}
             <div className="lg:col-span-6 bg-amber-50 border border-amber-200 rounded-2xl p-4 shadow-sm">
               <h4 className="font-extrabold text-amber-950 text-xs uppercase tracking-wider mb-2">
-                केन्द्रीय कोण गणना (Central Angle Formula: θ = (f ÷ N) × ३६०°)
+                Central angle formula: θ = (f ÷ N) × 360°
               </h4>
 
               <div className="space-y-2 max-h-72 overflow-y-auto">
@@ -375,7 +375,7 @@ export const StatisticalDataVisualizationLab: React.FC<{
                       <div className="text-right">
                         <span className="font-mono font-bold text-amber-700">{deg}°</span>
                         <span className="text-[10px] text-slate-500 block">
-                          ({row.value}/{totalN}) × ३६०° = {pct}%
+                          ({row.value}/{totalN}) × 360° = {pct}%
                         </span>
                       </div>
                     </div>
@@ -384,7 +384,7 @@ export const StatisticalDataVisualizationLab: React.FC<{
               </div>
 
               <div className="mt-3 p-2 bg-white rounded-lg border border-amber-200 text-center font-bold text-xs text-amber-900">
-                कुल कोण योग = ३६०° (१००%)
+                Total of all angles = 360° (100%)
               </div>
             </div>
           </div>
@@ -394,7 +394,7 @@ export const StatisticalDataVisualizationLab: React.FC<{
         {activeTab === 'line' && (
           <div className="bg-white rounded-2xl shadow-lg p-5 border border-slate-200">
             <h3 className="font-extrabold text-slate-800 text-sm mb-4 text-center">
-              {PRESET_DATASETS[datasetIndex].nameNp} — बिन्दु रेखाचित्र (Line Graph)
+              {PRESET_DATASETS[datasetIndex].nameNp} — Line graph
             </h3>
 
             <div className="flex justify-center">
@@ -456,14 +456,14 @@ export const StatisticalDataVisualizationLab: React.FC<{
           <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-5 border border-slate-200 space-y-4">
             <div className="flex justify-between items-center">
               <h3 className="font-extrabold text-slate-800 text-sm">
-                तथ्याङ्क तालिका सम्पादन (Data Table Editor)
+                Data table editor
               </h3>
               <button
                 onClick={handleAddRow}
                 className="py-1.5 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold flex items-center gap-1 shadow"
               >
                 <Plus className="w-3.5 h-3.5" />
-                पङ्क्ति थप्नुहोस् (Add Row)
+                Add row
               </button>
             </div>
 
@@ -504,7 +504,7 @@ export const StatisticalDataVisualizationLab: React.FC<{
             </div>
 
             <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 flex justify-between text-xs font-bold text-amber-900">
-              <span>जम्मा बारम्बारता (Total Frequency N):</span>
+              <span>Total frequency (N):</span>
               <span className="font-mono text-sm text-amber-700">{totalN}</span>
             </div>
           </div>

@@ -307,7 +307,7 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
                 cursor: 'pointer',
               }}
             >
-              {currentClassObject?.className || `Class ${selectedClass}`} ({currentClassObject?.classNameNepali || ''})
+              {currentClassObject?.className || `Class ${selectedClass}`}{selectedClass && selectedClass > 10 ? ` (${currentClassObject?.classNameNepali || ''})` : ''}
             </button>
           </>
         )}
@@ -537,7 +537,7 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
                           {cls.className}
                         </h4>
                         <div style={{ fontSize: '13px', color: '#117a6b', fontWeight: '700', marginBottom: '12px' }}>
-                          {cls.classNameNepali}
+                          {cls.grade > 10 ? cls.classNameNepali : ''}
                         </div>
 
                         <div style={{ fontSize: '12px', color: '#64748b', marginBottom: '16px' }}>
@@ -582,7 +582,7 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#0e3e3b', margin: '0 0 4px 0' }}>
-                {currentClassObject?.className} ({currentClassObject?.classNameNepali}) — Available Subjects
+                {currentClassObject?.className}{selectedClass && selectedClass > 10 ? ` (${currentClassObject?.classNameNepali})` : ''} — Available Subjects
               </h3>
               <p style={{ margin: 0, fontSize: '13px', color: '#64748b' }}>
                 Select a curriculum subject to explore chapter-wise interactive simulations.
@@ -677,7 +677,7 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
                     {sub.name}
                   </h4>
                   <div style={{ fontSize: '14px', color: '#117a6b', fontWeight: '700', marginBottom: '10px' }}>
-                    {sub.nameNepali}
+                    {selectedClass && selectedClass > 10 ? sub.nameNepali : ''}
                   </div>
 
                   <p style={{ fontSize: '12px', color: '#64748b', margin: '0 0 16px 0', lineHeight: 1.5 }}>
@@ -719,7 +719,7 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#0e3e3b', margin: '0 0 4px 0' }}>
-                Class {selectedClass} • {currentSubjectObject?.name || selectedSubject.name} ({currentSubjectObject?.nameNepali || ''})
+                Class {selectedClass} • {currentSubjectObject?.name || selectedSubject.name}{selectedClass && selectedClass > 10 ? ` (${currentSubjectObject?.nameNepali || ''})` : ''}
               </h3>
               <p style={{ margin: 0, fontSize: '13px', color: '#64748b' }}>
                 Browse chapter-wise simulations or launch directly into the interactive learning player.
@@ -784,7 +784,7 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
                         {ch.title}
                       </h4>
                       <div style={{ fontSize: '13px', color: '#167C80', fontWeight: '700' }}>
-                        {ch.titleNepali}
+                        {selectedClass && selectedClass > 10 ? ch.titleNepali : ''}
                       </div>
                     </div>
                   </div>
@@ -864,7 +864,7 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
                           <h5 style={{ fontSize: '15.5px', fontWeight: '800', color: '#142D4E', margin: '0 0 3px 0', lineHeight: 1.3 }}>
                             {sim.title}
                           </h5>
-                          {sim.titleNepali && (
+                          {sim.titleNepali && !(sim.gradeLevels?.length && Math.max(...sim.gradeLevels) <= 10) && (
                             <div style={{ fontSize: '12.5px', color: '#167C80', fontWeight: '700', marginBottom: '8px' }}>
                               {sim.titleNepali}
                             </div>

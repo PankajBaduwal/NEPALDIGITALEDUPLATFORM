@@ -1,7 +1,7 @@
 /**
  * MakeAGroupOfTen.tsx
- * Simulation 02: Make a Group of Ten (दशको समूह बनाऔँ)
- * Class 1 Mathematics - Chapter 9: Numbers 11 to 20 (११ देखि २० सम्मका सङ्ख्याहरू)
+ * Simulation 02: Make a Group of Ten
+ * Class 1 Mathematics - Chapter 9: Numbers 11 to 20
  * Nepal Digital Education Platform
  */
 
@@ -28,14 +28,14 @@ interface Props {
 }
 
 const NEP_NUMERALS: Record<number, string> = {
-  0: '०', 1: '१', 2: '२', 3: '३', 4: '४', 5: '५',
-  6: '६', 7: '७', 8: '८', 9: '९', 10: '१०',
-  11: '११', 12: '१२', 13: '१३', 14: '१४', 15: '१५',
-  16: '१६', 17: '१७', 18: '१८', 19: '१९', 20: '२०',
+  0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5',
+  6: '6', 7: '7', 8: '8', 9: '9', 10: '10',
+  11: '11', 12: '12', 13: '13', 14: '14', 15: '15',
+  16: '16', 17: '17', 18: '18', 19: '19', 20: '20',
 };
 
 const NEP_NAMES: Record<number, string> = {
-  11: 'एघार', 12: 'बाह्र', 13: 'तेह्र', 14: 'चौध', 15: 'पन्ध्र',
+  11: 'एघार', 12: 'बाह्र', 13: 'तेह्र', 14: 'Fourteen', 15: 'पन्ध्र',
   16: 'सोह्र', 17: 'सत्र', 18: 'अठार', 19: 'उन्नाइस', 20: 'बीस',
 };
 
@@ -59,7 +59,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Modes: 'EXPLORE' (learn 11-20 grouping), 'PRACTICE' (interactive grouping puzzle), 'QUIZ' (evaluation)
@@ -86,102 +86,102 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
     () => [
       {
         id: 1,
-        questionNp: '१० वटाको १ समूह र ३ वटा छुट्टै एकाइ मिलेर कुन सङ्ख्या बन्छ?',
+        questionNp: '10 वटाको 1 समूह र 3 वटा छुट्टै एकाइ मिलेर कुन सङ्ख्या बन्छ?',
         questionEn: 'What number is formed by 1 group of 10 and 3 loose ones?',
         targetNumber: 13,
         options: [12, 13, 14],
         correct: 13,
-        explanationNp: '१० + ३ = १३ (तेह्र) हुन्छ।',
+        explanationNp: '10 + 3 = 13 हुन्छ।',
         explanationEn: '10 + 3 = 13 (Thirteen).',
       },
       {
         id: 2,
-        questionNp: 'सङ्ख्या १५ मा १० को समूह बनाएपछि कति वटा एकाइ बाँकी रहन्छन्?',
+        questionNp: 'सङ्ख्या 15 मा 10 को समूह बनाएपछि कति वटा एकाइ बाँकी रहन्छन्?',
         questionEn: 'In number 15, how many ones are left after making a group of 10?',
         targetNumber: 15,
         options: [4, 5, 6],
         correct: 5,
-        explanationNp: '१५ मा १ दश र ५ एकाइ हुन्छन्, त्यसैले ५ वटा बाँकी रहन्छन्।',
+        explanationNp: '15 मा 1 दश र 5 एकाइ हुन्छन्, त्यसैले 5 वटा बाँकी रहन्छन्।',
         explanationEn: 'In 15, there is 1 ten and 5 ones, so 5 remain.',
       },
       {
         id: 3,
-        questionNp: '१० + ८ मिलेर कुन सङ्ख्या बन्छ?',
+        questionNp: '10 + 8 मिलेर कुन सङ्ख्या बन्छ?',
         questionEn: 'What number is formed by 10 + 8?',
         targetNumber: 18,
         options: [17, 18, 19],
         correct: 18,
-        explanationNp: '१० + ८ = १८ (अठार) हुन्छ।',
+        explanationNp: '10 + 8 = 18 हुन्छ।',
         explanationEn: '10 + 8 = 18 (Eighteen).',
       },
       {
         id: 4,
-        questionNp: 'सङ्ख्या २० मा १० का कति वटा पूरा समूह हुन्छन्?',
+        questionNp: 'सङ्ख्या 20 मा 10 का कति वटा पूरा समूह हुन्छन्?',
         questionEn: 'How many full groups of 10 are there in 20?',
         targetNumber: 20,
         options: [1, 2, 3],
         correct: 2,
-        explanationNp: '२० मा १० का २ वटा पूरा समूह (२ दश) हुन्छन्।',
+        explanationNp: '20 मा 10 का 2 वटा पूरा समूह (2 दश) हुन्छन्।',
         explanationEn: 'In 20, there are 2 complete groups of 10 (2 tens).',
       },
       {
         id: 5,
-        questionNp: '१० को १ समूह र १ एकाइ मिलेर बन्ने सङ्ख्या कुन हो?',
+        questionNp: '10 को 1 समूह र 1 एकाइ मिलेर बन्ने सङ्ख्या कुन हो?',
         questionEn: 'What number is 1 group of ten and 1 one?',
         targetNumber: 11,
         options: [11, 12, 21],
         correct: 11,
-        explanationNp: '१० + १ = ११ (एघार) बन्दछ।',
+        explanationNp: '10 + 1 = 11 बन्दछ।',
         explanationEn: '10 + 1 = 11 (Eleven).',
       },
       {
         id: 6,
-        questionNp: '१७ बनाउन १० मा कति थप्नुपर्छ?',
+        questionNp: '17 बनाउन 10 मा कति थप्नुपर्छ?',
         questionEn: 'How many ones must be added to 10 to make 17?',
         targetNumber: 17,
         options: [6, 7, 8],
         correct: 7,
-        explanationNp: '१० + ७ = १७ हुन्छ।',
+        explanationNp: '10 + 7 = 17 हुन्छ।',
         explanationEn: '10 + 7 = 17.',
       },
       {
         id: 7,
-        questionNp: '१ दश र ९ एकाइ मिलेर बन्ने सङ्ख्या के हो?',
+        questionNp: '1 दश र 9 एकाइ मिलेर बन्ने सङ्ख्या के हो?',
         questionEn: 'What number is formed by 1 ten and 9 ones?',
         targetNumber: 19,
         options: [18, 19, 20],
         correct: 19,
-        explanationNp: '१ दश र ९ एकाइ मिलेर १९ (उन्नाइस) बन्छ।',
+        explanationNp: '1 दश र 9 एकाइ मिलेर 19 बन्छ।',
         explanationEn: '1 ten and 9 ones make 19 (Nineteen).',
       },
       {
         id: 8,
-        questionNp: 'सङ्ख्या १४ लाई कसरी लेख्न सकिन्छ?',
+        questionNp: 'सङ्ख्या 14 लाई कसरी लेख्न सकिन्छ?',
         questionEn: 'How can number 14 be represented?',
         targetNumber: 14,
         options: [14, 15, 13],
         correct: 14,
-        explanationNp: '१० + ४ = १४ (१ दश र ४ एकाइ)।',
+        explanationNp: '10 + 4 = 14।',
         explanationEn: '10 + 4 = 14 (1 ten and 4 ones).',
       },
       {
         id: 9,
-        questionNp: 'सङ्ख्या १२ मा कति वटा दश र कति वटा एकाइ छन्?',
+        questionNp: 'सङ्ख्या 12 मा कति वटा दश र कति वटा एकाइ छन्?',
         questionEn: 'In number 12, how many tens and how many ones are there?',
         targetNumber: 12,
         options: [12, 21, 10],
         correct: 12,
-        explanationNp: '१२ मा १ दश र २ एकाइ हुन्छन्।',
+        explanationNp: '12 मा 1 दश र 2 एकाइ हुन्छन्।',
         explanationEn: '12 has 1 ten and 2 ones.',
       },
       {
         id: 10,
-        questionNp: '१० + ६ को मान कति हुन्छ?',
+        questionNp: '10 + 6 को मान कति हुन्छ?',
         questionEn: 'What is the sum of 10 + 6?',
         targetNumber: 16,
         options: [15, 16, 17],
         correct: 16,
-        explanationNp: '१० + ६ = १६ (सोह्र) हुन्छ।',
+        explanationNp: '10 + 6 = 16 हुन्छ।',
         explanationEn: '10 + 6 = 16 (Sixteen).',
       },
     ],
@@ -312,7 +312,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
     const tens = num === 20 ? 2 : 1;
     const ones = num === 20 ? 0 : num - 10;
     speak(
-      `${nepNum}, ${nepName}! ${tens === 1 ? '१ दश' : '२ दश'} र ${NEP_NUMERALS[ones]} एकाइ।`,
+      `${nepNum}, ${nepName}! ${tens === 1 ? '1 दश' : '2 दश'} र ${NEP_NUMERALS[ones]} एकाइ।`,
       `${num}, ${enName}! ${tens} ten and ${ones} ones.`
     );
   };
@@ -422,7 +422,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
               </span>
             </div>
             <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              {language === 'np' ? 'दशको समूह बनाऔँ (१० + क = ११ देखि २०)' : 'Make a Group of Ten (10 + N)'}
+              {language === 'np' ? 'दशको समूह बनाऔँ (10 + क = 11 देखि 20)' : 'Make a Group of Ten (10 + N)'}
             </h1>
           </div>
         </div>
@@ -477,19 +477,14 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
             {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
 
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-sm transition"
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
       {/* Main Workspace Area */}
       <main className="flex-1 flex flex-col md:flex-row overflow-hidden relative">
         {/* ========================================================================= */}
-        {/* MODE 1: EXPLORE BUNDLING (१० + क = ११ देखि २०) */}
+        {/* MODE 1: EXPLORE BUNDLING */}
         {/* ========================================================================= */}
         {mode === 'EXPLORE' && (
           <div className="flex-1 flex flex-col p-4 md:p-6 overflow-y-auto">
@@ -535,10 +530,10 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                     <p className="text-xs text-slate-500 mt-0.5">
                       {selectedNum === 20
                         ? language === 'np'
-                          ? '२० मा १० का २ वटा पूरा समूह (दहाइ) हुन्छन् र एकाइ शून्य रहन्छ।'
+                          ? '20 मा 10 का 2 वटा पूरा समूह (दहाइ) हुन्छन् र एकाइ शून्य रहन्छ।'
                           : '20 consists of 2 complete bundles of ten with zero ones.'
                         : language === 'np'
-                        ? `१० वटाको १ समूह (दहाइ) र थप ${NEP_NUMERALS[onesCount]} वटा छुट्टाछुट्टै एकाइ।`
+                        ? `10 वटाको 1 समूह (दहाइ) र थप ${NEP_NUMERALS[onesCount]} वटा छुट्टाछुट्टै एकाइ।`
                         : `1 bundle of ten and ${onesCount} loose unit blocks.`}
                     </p>
                   </div>
@@ -557,18 +552,18 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                         ? 'समूह खोल्नुहोस्'
                         : 'Unbundle'
                       : language === 'np'
-                      ? '१० को समूह बाँध्नुहोस्'
+                      ? '10 को समूह बाँध्नुहोस्'
                       : 'Bundle 10'}
                   </button>
                 </div>
 
                 {/* Interactive Visual Display: Tens Bundle vs Ones Blocks */}
                 <div className="flex-1 flex flex-col md:flex-row items-center justify-around gap-6 py-6">
-                  {/* TENS COLUMN (दहाइ) */}
+                  {/* TENS COLUMN */}
                   <div className="flex-1 w-full flex flex-col items-center bg-slate-50 p-4 rounded-2xl border border-emerald-500/30">
                     <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5 mb-3">
                       <Package className="w-4 h-4" />
-                      {language === 'np' ? `दहाइ (१० को समूह: ${NEP_NUMERALS[tensCount]})` : `Tens (Groups of 10: ${tensCount})`}
+                      {language === 'np' ? `दहाइ (10 को समूह: ${NEP_NUMERALS[tensCount]})` : `Tens (Groups of 10: ${tensCount})`}
                     </div>
 
                     <div className="flex flex-wrap items-center justify-center gap-4 min-h-[160px]">
@@ -584,7 +579,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                           {/* Bundle ribbon tag */}
                           {isBundled && (
                             <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-full shadow">
-                              १० को समूह (10)
+                              Group of 10
                             </div>
                           )}
 
@@ -608,7 +603,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                     </div>
 
                     <span className="mt-3 text-xs font-semibold text-emerald-700">
-                      {tensCount === 1 ? '१ दश = १०' : '२ दश = २०'}
+                      {tensCount === 1 ? '1 ten = 10' : '2 दश = 20'}
                     </span>
                   </div>
 
@@ -617,7 +612,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                     <span className="text-3xl font-black text-amber-700">+</span>
                   </div>
 
-                  {/* ONES COLUMN (एकाइ) */}
+                  {/* ONES COLUMN */}
                   <div className="flex-1 w-full flex flex-col items-center bg-slate-50 p-4 rounded-2xl border border-sky-500/30">
                     <div className="text-xs font-bold uppercase tracking-wider text-sky-700 flex items-center gap-1.5 mb-3">
                       <Boxes className="w-4 h-4" />
@@ -658,11 +653,11 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                     <span className="text-xl md:text-2xl font-black text-slate-900 tracking-wide">
                       {tensCount === 2 ? (
                         <>
-                          १० + १० = <span className="text-amber-700">२०</span> (बीस)
+                          10 + 10 = <span className="text-amber-700">20</span> (बीस)
                         </>
                       ) : (
                         <>
-                          १० + {NEP_NUMERALS[onesCount]} ={' '}
+                          10 + {NEP_NUMERALS[onesCount]} ={' '}
                           <span className="text-amber-700">{NEP_NUMERALS[selectedNum]}</span> ({NEP_NAMES[selectedNum]})
                         </>
                       )}
@@ -671,10 +666,10 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
 
                   <div className="flex items-center gap-2 text-xs text-slate-600">
                     <span className="px-2.5 py-1 bg-emerald-500/20 text-emerald-700 rounded-lg font-bold">
-                      दहाइ = {NEP_NUMERALS[tensCount]}
+                      Tens = {NEP_NUMERALS[tensCount]}
                     </span>
                     <span className="px-2.5 py-1 bg-sky-500/20 text-sky-700 rounded-lg font-bold">
-                      एकाइ = {NEP_NUMERALS[onesCount]}
+                      Ones = {NEP_NUMERALS[onesCount]}
                     </span>
                   </div>
                 </div>
@@ -682,7 +677,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
 
               {/* Right: Place Value Table & Audio Guide (4 cols) */}
               <div className="lg:col-span-4 flex flex-col gap-4">
-                {/* Place Value Table (स्थानमान तालिका) */}
+                {/* Place Value Table */}
                 <div className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-xl flex flex-col justify-between">
                   <div>
                     <h3 className="text-sm font-bold text-amber-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
@@ -724,7 +719,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                         <Lightbulb className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
                         <p>
                           {language === 'np'
-                            ? '११ देखि १९ सम्मका प्रत्येक सङ्ख्यामा सधैँ १ दश र बाँकी एकाइ हुन्छन्।'
+                            ? '11 देखि 19 सम्मका प्रत्येक सङ्ख्यामा सधैँ 1 दश र बाँकी एकाइ हुन्छन्।'
                             : 'Every number from 11 to 19 has exactly 1 ten and additional ones.'}
                         </p>
                       </div>
@@ -732,7 +727,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                         <Lightbulb className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
                         <p>
                           {language === 'np'
-                            ? '२० मा १० का २ पूरा समूह हुन्छन्, त्यसैले २ दहाइ र ० एकाइ हुन्छ।'
+                            ? '20 मा 10 का 2 पूरा समूह हुन्छन्, त्यसैले 2 दहाइ र 0 एकाइ हुन्छ।'
                             : '20 has 2 full tens bundles, which means 2 tens and 0 ones.'}
                         </p>
                       </div>
@@ -742,7 +737,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                   <button
                     onClick={() =>
                       speak(
-                        `${NEP_NUMERALS[selectedNum]} मा ${tensCount === 1 ? '१ दश' : '२ दश'} र ${NEP_NUMERALS[onesCount]} एकाइ छन्। १० र ${NEP_NUMERALS[onesCount]} मिलेर ${NEP_NUMERALS[selectedNum]} बन्दछ।`,
+                        `${NEP_NUMERALS[selectedNum]} मा ${tensCount === 1 ? '1 दश' : '2 दश'} र ${NEP_NUMERALS[onesCount]} एकाइ छन्। 10 र ${NEP_NUMERALS[onesCount]} मिलेर ${NEP_NUMERALS[selectedNum]} बन्दछ।`,
                         `In ${selectedNum}, there is ${tensCount} ten and ${onesCount} ones. 10 and ${onesCount} make ${selectedNum}.`
                       )
                     }
@@ -781,7 +776,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
         )}
 
         {/* ========================================================================= */}
-        {/* MODE 2: PRACTICE BUILDER (प्रयोगशाला) */}
+        {/* MODE 2: PRACTICE BUILDER */}
         {/* ========================================================================= */}
         {mode === 'PRACTICE' && (
           <div className="flex-1 flex flex-col p-6 overflow-y-auto max-w-5xl mx-auto w-full">
@@ -819,7 +814,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                 {/* Pre-bundled 10 */}
                 <div className="bg-slate-50 p-5 rounded-2xl border border-amber-500/40 flex flex-col items-center justify-between min-h-[220px]">
                   <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
-                    {language === 'np' ? '१ दशको समूह (सधैँ तयार १०)' : '1 Group of Ten (Ready 10)'}
+                    {language === 'np' ? '1 दशको समूह (सधैँ तयार 10)' : '1 Group of Ten (Ready 10)'}
                   </span>
                   <div className="p-4 bg-amber-500/10 rounded-2xl border border-amber-400/50 flex flex-wrap gap-2 justify-center max-w-[200px]">
                     {Array.from({ length: 10 }).map((_, i) => (
@@ -832,7 +827,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                     ))}
                   </div>
                   <span className="text-xs font-bold text-amber-700">
-                    {language === 'np' ? 'आधार = १०' : 'Base = 10'}
+                    {language === 'np' ? 'आधार = 10' : 'Base = 10'}
                   </span>
                 </div>
 
@@ -873,7 +868,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                       }}
                       className="flex-1 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs transition"
                     >
-                      + {language === 'np' ? '१ एकाइ थप्नुहोस्' : 'Add 1 Unit'}
+                      + {language === 'np' ? '1 एकाइ थप्नुहोस्' : 'Add 1 Unit'}
                     </button>
                     <button
                       onClick={handlePracticeReset}
@@ -893,7 +888,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                     {language === 'np' ? 'तपाईंले बनाएको जम्मा सङ्ख्या:' : 'Current Total Built:'}
                   </span>
                   <div className="text-2xl font-black text-amber-700">
-                    १० + {NEP_NUMERALS[Math.max(0, selectedUnitsCount - 10)]} ={' '}
+                    10 + {NEP_NUMERALS[Math.max(0, selectedUnitsCount - 10)]} ={' '}
                     {NEP_NUMERALS[selectedUnitsCount || 10]}
                   </div>
                 </div>
@@ -913,7 +908,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
                   <Sparkles className="w-5 h-5 text-emerald-700 shrink-0" />
                   <div>
                     {language === 'np'
-                      ? `स्याबास! १० र ${NEP_NUMERALS[practiceTarget - 10]} मिलेर ठीक ${NEP_NUMERALS[practiceTarget]} बन्यो!`
+                      ? `स्याबास! 10 र ${NEP_NUMERALS[practiceTarget - 10]} मिलेर ठीक ${NEP_NUMERALS[practiceTarget]} बन्यो!`
                       : `Well done! 10 and ${practiceTarget - 10} equals exactly ${practiceTarget}!`}
                   </div>
                 </div>
@@ -933,7 +928,7 @@ export const MakeAGroupOfTen: React.FC<Props> = ({
         )}
 
         {/* ========================================================================= */}
-        {/* MODE 3: QUIZ EVALUATION (१० प्रश्नहरूको परीक्षा) */}
+        {/* MODE 3: QUIZ EVALUATION */}
         {/* ========================================================================= */}
         {mode === 'QUIZ' && (
           <div className="flex-1 flex flex-col p-6 overflow-y-auto max-w-3xl mx-auto w-full justify-center">

@@ -1,13 +1,13 @@
 /**
  * VirtualElectricityLab.tsx
- * Simulation 26: 2D Virtual Electricity Circuit Laboratory (विद्युत परिपथ प्रयोगशाला)
- * Grade 4 Science • Chapter 7: Energy (ऊर्जा)
+ * Simulation 26: 2D Virtual Electricity Circuit Laboratory
+ * Grade 4 Science • Chapter 7: Energy
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
  * - Complete breadboard / test bench electric circuit:
  *   1. Dry Cell Battery pack (1.5V, 3.0V, 4.5V series cells) with brass terminals
- *   2. Single-Pole Knife Switch (चिम्टीदार स्विच) with flip animation & click sound
+ *   2. Single-Pole Knife Switch with flip animation & click sound
  *   3. Porcelain Holder Filament Bulb with dynamic voltage-proportional glow & aura
  *   4. Heavy insulated copper wires with animated circulating electron particles (drift velocity)
  *   5. Material Conductor vs. Insulator tester: Iron nail, Plastic ruler, Copper coin, Eraser
@@ -25,7 +25,7 @@ export const VirtualElectricityLab: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -362,7 +362,7 @@ export const VirtualElectricityLab: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = closed ? '#4ade80' : '#f87171';
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText(closed ? 'Switch Closed (बन्द)' : 'Switch Open (खुला)', sx, sy + 58);
+    ctx.fillText(closed ? 'Switch Closed' : 'Switch Open', sx, sy + 58);
 
     ctx.restore();
   }
@@ -422,10 +422,10 @@ export const VirtualElectricityLab: React.FC<BaseSimulationProps> = ({
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
     let matLabel = '';
-    if (mat === 'wire') matLabel = 'Copper Wire (सुचालक - Conductor)';
-    else if (mat === 'nail') matLabel = 'Iron Nail (सुचालक - Conductor)';
-    else if (mat === 'plastic') matLabel = 'Plastic (कुचालक - Insulator)';
-    else matLabel = 'Wood (कुचालक - Insulator)';
+    if (mat === 'wire') matLabel = 'Copper Wire';
+    else if (mat === 'nail') matLabel = 'Iron Nail';
+    else if (mat === 'plastic') matLabel = 'Plastic';
+    else matLabel = 'Wood';
 
     ctx.fillText(matLabel, gx, gy - 22);
 
@@ -570,7 +570,7 @@ export const VirtualElectricityLab: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 7: Energy'
-          : 'कक्षा ४ विज्ञान • एकाइ ७: ऊर्जा'
+          : 'कक्षा 4 विज्ञान • एकाइ 7: ऊर्जा'
       }
       currentStage={stage}
       onStageChange={setStage}
@@ -708,7 +708,7 @@ export const VirtualElectricityLab: React.FC<BaseSimulationProps> = ({
                   {lang === 'en' ? 'Circuit Status' : 'परिपथ अवस्था'}
                 </div>
                 <div style={{ fontSize: '13px', fontWeight: '700', color: isSwitchClosed ? '#10b981' : '#f43f5e' }}>
-                  {isSwitchClosed ? (lang === 'en' ? 'Closed (बन्द)' : 'बन्द') : (lang === 'en' ? 'Open (खुला)' : 'खुला')}
+                  {isSwitchClosed ? (lang === 'en' ? 'Closed' : 'बन्द') : (lang === 'en' ? 'Open' : 'खुला')}
                 </div>
               </div>
               <div style={{ textAlign: 'right' }}>
@@ -785,8 +785,8 @@ export const VirtualElectricityLab: React.FC<BaseSimulationProps> = ({
               <Power size={14} />
               <span>
                 {isSwitchClosed
-                  ? lang === 'en' ? '🟢 Switch CLOSED (बन्द परिपथ)' : '🟢 स्विच बन्द छ (बत्ती बल्छ)'
-                  : lang === 'en' ? '🔴 Switch OPEN (खुला परिपथ)' : '🔴 स्विच खुला छ (बत्ती बल्दैन)'}
+                  ? lang === 'en' ? '🟢 Switch CLOSED' : '🟢 स्विच बन्द छ (बत्ती बल्छ)'
+                  : lang === 'en' ? '🔴 Switch OPEN' : '🔴 स्विच खुला छ (बत्ती बल्दैन)'}
               </span>
             </button>
           </div>

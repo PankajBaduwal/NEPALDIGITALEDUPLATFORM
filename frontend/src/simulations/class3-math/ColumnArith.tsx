@@ -1,5 +1,5 @@
 /**
- * Lessons 12 and 13 · Addition and subtraction of five-digit numbers (जोड र घटाउ)
+ * Lessons 12 and 13 · Addition and subtraction of five-digit numbers
  * Column Towers & Tablet — step-by-step column addition with carry and subtraction with borrowing.
  */
 import React, { useMemo, useState } from 'react';
@@ -51,7 +51,7 @@ const getSteps = (a: number, b: number, op: Op): Step[] => {
         cin: carry,
         res,
         cout,
-        np: `${x} + ${y}${carry ? ` + ${carry} (हातमा)` : ''} = ${sum}${cout ? ` → ${res} लेख्ने, १ हातमा` : ` → ${res} लेख्ने`}`,
+        np: `${x} + ${y}${carry ? ` + ${carry} (हातमा)` : ''} = ${sum}${cout ? ` → ${res} लेख्ने, 1 हातमा` : ` → ${res} लेख्ने`}`,
         en: `${x} + ${y}${carry ? ` + ${carry} (carry)` : ''} = ${sum}${cout ? ` → write ${res}, carry ${cout}` : ` → write ${res}`}`,
       });
       carry = cout;
@@ -66,7 +66,7 @@ const getSteps = (a: number, b: number, op: Op): Step[] => {
         cin: carry,
         res,
         cout: borrow,
-        np: `${top < 0 ? top : x}${carry ? ` − १ (सापटी दिएको) = ${top}` : ''}${borrow ? `; ${top} < ${y} त्यसैले १० सापट लिने → ${top + 10} − ${y} = ${res}` : ` − ${y} = ${res}`}`,
+        np: `${top < 0 ? top : x}${carry ? ` − 1 = ${top}` : ''}${borrow ? `; ${top} < ${y} त्यसैले 10 सापट लिने → ${top + 10} − ${y} = ${res}` : ` − ${y} = ${res}`}`,
         en: `${x}${carry ? ` − 1 (lent) = ${top}` : ''}${borrow ? `; ${top} < ${y} so borrow 10 → ${top + 10} − ${y} = ${res}` : ` − ${y} = ${res}`}`,
       });
       carry = borrow;
@@ -244,7 +244,7 @@ const makeSim = (
             {/* Carry / Borrow Row */}
             <div style={{ display: 'grid', gridTemplateColumns: '40px repeat(5, 1fr)', gap: 8, textAlign: 'center', minHeight: 32 }}>
               <div style={{ fontSize: 12, color: '#DC2626', fontWeight: 800, alignSelf: 'center' }}>
-                {op === 'add' ? 'हातमा' : 'सापट'}
+                {op === 'add' ? 'Carry' : 'Borrow'}
               </div>
               {[0, 1, 2, 3, 4].map((c) => {
                 // Find if there was a carry/borrow for this column

@@ -15,7 +15,7 @@ export const Base10Blocks2D: React.FC<Base10Blocks2DProps> = ({
   hundreds,
   tens,
   ones,
-  lang = 'ne',
+  lang = 'en',
   title,
   color = '#187C68',
   compact = false,

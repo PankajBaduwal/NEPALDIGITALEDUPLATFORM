@@ -304,7 +304,7 @@ export const QuadraticEquationFactorizationLab: React.FC<{
                   </h3>
                   <p className="text-xs text-slate-300 mt-1">
                     {L(
-                      'प्रमाणिक रूप: ax² + bx + c = 0 (जहाँ a ≠ 0)। यदि A × B = 0 हुन्छ भने A = 0 वा B = 0 हुन्छ।',
+                      'प्रमाणिक रूप: ax² + bx + c = 0। यदि A × B = 0 हुन्छ भने A = 0 वा B = 0 हुन्छ।',
                       'Standard form: ax² + bx + c = 0 (where a ≠ 0). If A × B = 0, then A = 0 or B = 0.'
                     )}
                   </p>
@@ -474,7 +474,7 @@ export const QuadraticEquationFactorizationLab: React.FC<{
                   <div className="font-bold text-sm">
                     {testResult.isRoot
                       ? L('✅ सही! यो मान समीकरणको वास्तविक मूल (Root) हो!', '✅ Correct! This value is a valid root!')
-                      : L('❌ गलत! समीकरणको मान ० भएन (Not equal to 0)', '❌ Incorrect! The expression does not equal 0')}
+                      : L('❌ गलत! समीकरणको मान 0 भएन (Not equal to 0)', '❌ Incorrect! The expression does not equal 0')}
                   </div>
                   <div className="font-mono text-xs mt-1 text-slate-300">
                     LHS = {activePreset.a} × ({testRootInput})² + ({activePreset.b}) × ({testRootInput}) + ({activePreset.c}) ={' '}

@@ -1,11 +1,11 @@
 /**
  * SpeedMotionLabSim.tsx
- * Simulation 16: 2D Speed and Motion Laboratory (चाल र गति प्रयोगशाला)
- * Grade 6 Science • Unit 6: Force and Motion (बल र गति)
+ * Simulation 16: 2D Speed and Motion Laboratory
+ * Grade 6 Science • Unit 6: Force and Motion
  *
  * 100% Native HTML5 Canvas 2D Interactive Kinematics Laboratory.
  * Features:
- * 1. Speed Formula: v = d / t (चाल = दूरी / समय) with SI unit (m/s) and km/h conversions
+ * 1. Speed Formula: v = d / t with SI unit (m/s) and km/h conversions
  * 2. 2D Race Track with selectable vehicles: Bicycle (5 m/s), Motorbike (15 m/s), Electric Car (25 m/s)
  * 3. Digital Stopwatch, Dynamic Speedometer Gauge, and live Distance-Time (d-t) Graph Plotter
  * 4. 5-Stage inquiry pedagogy, bilingual EN/NE, audio effects, and 3-star scoring.
@@ -23,7 +23,7 @@ export const SpeedMotionLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -36,9 +36,9 @@ export const SpeedMotionLabSim: React.FC<BaseSimulationProps> = ({
 
   // Vehicle Speeds in m/s
   const speedMap: Record<VehicleType, { speedMs: number; nameEn: string; nameNe: string; color: string }> = {
-    bicycle: { speedMs: 5, nameEn: 'Bicycle (साइकल)', nameNe: 'साइकल', color: '#10b981' },
-    motorbike: { speedMs: 15, nameEn: 'Motorbike (मोटरसाइकल)', nameNe: 'मोटरसाइकल', color: '#f59e0b' },
-    car: { speedMs: 25, nameEn: 'Electric Car (कार)', nameNe: 'विद्युतीय कार', color: '#38bdf8' },
+    bicycle: { speedMs: 5, nameEn: 'Bicycle', nameNe: 'साइकल', color: '#10b981' },
+    motorbike: { speedMs: 15, nameEn: 'Motorbike', nameNe: 'मोटरसाइकल', color: '#f59e0b' },
+    car: { speedMs: 25, nameEn: 'Electric Car', nameNe: 'विद्युतीय कार', color: '#38bdf8' },
   };
 
   const currentVeh = speedMap[vehicle];
@@ -347,7 +347,7 @@ export const SpeedMotionLabSim: React.FC<BaseSimulationProps> = ({
       titleNepali="चाल, दूरी र समय प्रयोगशाला"
       chapterNumber={6}
       chapterTitle="Unit 6: Force and Motion"
-      chapterTitleNepali="एकाइ ६: बल र गति"
+      chapterTitleNepali="एकाइ 6: बल र गति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -531,7 +531,7 @@ export const SpeedMotionLabSim: React.FC<BaseSimulationProps> = ({
           {/* Vehicle Selection Grid */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. सवारी साधन रोज्नुहोस् (Vehicle)' : '1. Select Vehicle'}
+              {lang === 'ne' ? '1. सवारी साधन रोज्नुहोस् (Vehicle)' : '1. Select Vehicle'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
               {(['bicycle', 'motorbike', 'car'] as const).map((v) => (

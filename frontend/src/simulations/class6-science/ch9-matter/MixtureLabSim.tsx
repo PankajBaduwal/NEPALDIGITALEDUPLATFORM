@@ -1,11 +1,11 @@
 /**
  * MixtureLabSim.tsx
- * Simulation 31: 2D Mixture Laboratory (मिश्रण प्रयोगशाला)
- * Grade 6 Science • Unit 9: Matter (पदार्थ)
+ * Simulation 31: 2D Mixture Laboratory
+ * Grade 6 Science • Unit 9: Matter
  *
  * Full 2D Interactive Chemistry Laboratory featuring:
- * 1. Homogeneous Mixtures (सजातीय मिश्रण): Uniform composition (Salt in water, Sugar solution)
- * 2. Heterogeneous Mixtures (विजातीय मिश्रण): Visible phase separation (Sand in water, Oil-water, Chalk suspension)
+ * 1. Homogeneous Mixtures: Uniform composition (Salt in water, Sugar solution)
+ * 2. Heterogeneous Mixtures: Visible phase separation (Sand in water, Oil-water, Chalk suspension)
  * 3. Interactive Stirring Rod & Particle Dispersion Dynamics
  * 4. Tyndall Effect Laser Scattering Test: True solution vs Colloidal suspension
  */
@@ -31,7 +31,7 @@ export const MixtureLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -319,11 +319,11 @@ export const MixtureLabSim: React.FC<BaseSimulationProps> = ({
       ctx.font = 'bold 12px sans-serif';
       ctx.textAlign = 'center';
       const sampleNames: Record<MixtureSample, { en: string; ne: string }> = {
-        salt: { en: 'Salt in Water (नून र पानी)', ne: 'नून र पानीको घोल' },
-        sugar: { en: 'Sugar in Water (चिनी र पानी)', ne: 'चिनी र पानीको घोल' },
-        sand: { en: 'Sand in Water (बालुवा र पानी)', ne: 'बालुवा र पानीको मिश्रण' },
-        oil: { en: 'Oil in Water (तेल र पानी)', ne: 'तेल र पानीको मिश्रण' },
-        chalk: { en: 'Chalk in Water (चक र पानी)', ne: 'चकको धूलो र पानी' },
+        salt: { en: 'Salt in Water', ne: 'नून र पानीको घोल' },
+        sugar: { en: 'Sugar in Water', ne: 'चिनी र पानीको घोल' },
+        sand: { en: 'Sand in Water', ne: 'बालुवा र पानीको मिश्रण' },
+        oil: { en: 'Oil in Water', ne: 'तेल र पानीको मिश्रण' },
+        chalk: { en: 'Chalk in Water', ne: 'चकको धूलो र पानी' },
       };
       ctx.fillText(lang === 'en' ? sampleNames[sample].en : sampleNames[sample].ne, bx, by - 19);
       ctx.textAlign = 'left';
@@ -340,7 +340,7 @@ export const MixtureLabSim: React.FC<BaseSimulationProps> = ({
 
         ctx.fillStyle = '#ef4444';
         ctx.font = 'bold 12px sans-serif';
-        ctx.fillText(lang === 'en' ? 'Tyndall Test (टिण्डल प्रभाव):' : 'टिण्डल प्रभाव परीक्षण:', 35, 45);
+        ctx.fillText(lang === 'en' ? 'Tyndall Test:' : 'टिण्डल प्रभाव परीक्षण:', 35, 45);
         ctx.fillStyle = '#f8fafc';
         ctx.font = '11px sans-serif';
         if (isHomogeneous) {
@@ -509,8 +509,8 @@ export const MixtureLabSim: React.FC<BaseSimulationProps> = ({
             <h4 style={{ margin: '0 0 6px 0', fontSize: '13px', color: isHomogeneous ? '#34d399' : '#fbbf24', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <Sparkles size={16} />
               {isHomogeneous
-                ? (lang === 'en' ? 'Homogeneous Mixture (सजातीय मिश्रण)' : 'सजातीय मिश्रण')
-                : (lang === 'en' ? 'Heterogeneous Mixture (विजातीय मिश्रण)' : 'विजातीय मिश्रण')}
+                ? (lang === 'en' ? 'Homogeneous Mixture' : 'सजातीय मिश्रण')
+                : (lang === 'en' ? 'Heterogeneous Mixture' : 'विजातीय मिश्रण')}
             </h4>
             <p style={{ margin: 0, fontSize: '12px', color: '#475569', lineHeight: '1.5' }}>
               {isHomogeneous
@@ -526,11 +526,11 @@ export const MixtureLabSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: Types of Mixtures' : '१. खोज: मिश्रणका प्रकार')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Stirring & Dispersion' : '२. अन्वेषण: घोल्ने र फैलावट')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Tyndall Effect' : '३. अवलोकन: टिण्डल प्रभाव')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: True Solution' : '४. बुझाइ: वास्तविक घोल')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Mixture Quiz' : '५. चुनौती: मिश्रण प्रश्नोत्तरी')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: Types of Mixtures' : '1. खोज: मिश्रणका प्रकार')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Stirring & Dispersion' : '2. अन्वेषण: घोल्ने र फैलावट')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Tyndall Effect' : '3. अवलोकन: टिण्डल प्रभाव')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: True Solution' : '4. बुझाइ: वास्तविक घोल')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Mixture Quiz' : '5. चुनौती: मिश्रण प्रश्नोत्तरी')}
             </h4>
 
             {stage !== 'challenge' ? (
@@ -546,7 +546,7 @@ export const MixtureLabSim: React.FC<BaseSimulationProps> = ({
                   : 'रातो लेजर बटन थिच्नुहोस्। नूनको घोलमा र चकको धूलो भएको पानीमा लेजरको किरण कस्तो देखिन्छ दाँज्नुहोस्।')}
                 {stage === 'understand' && (lang === 'en'
                   ? 'In true solutions, solute particles are smaller than 1 nanometer and cannot scatter visible light rays.'
-                  : 'सजातीय वास्तविक घोलमा घुल्यका कणहरू १ नानोमिटर भन्दा साना हुने भएकाले तिनले प्रकाश छर्न सक्दैनन्।')}
+                  : 'सजातीय वास्तविक घोलमा घुल्यका कणहरू 1 नानोमिटर भन्दा साना हुने भएकाले तिनले प्रकाश छर्न सक्दैनन्।')}
               </p>
             ) : (
               <div>

@@ -26,35 +26,35 @@ const LANDMARKS: Landmark[] = [
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'घर (०, ०) बाट विद्यालय (४, ३) सम्मको सीधा दूरी कति एकाइ हुन्छ?',
+    np: 'घर (0, 0) बाट विद्यालय (4, 3) सम्मको सीधा दूरी कति units हुन्छ?',
     en: 'What is the straight-line distance from Home (0, 0) to School (4, 3)?',
     options: [
-      { key: 'A', label: '५ एकाइ (5 units: √(4²+3²))' },
-      { key: 'B', label: '७ एकाइ' },
-      { key: 'C', label: '१२ एकाइ' },
-      { key: 'D', label: '२५ एकाइ' },
+      { key: 'A', label: '5 units (5 units: √(4²+3²))' },
+      { key: 'B', label: '7 units' },
+      { key: 'C', label: '12 units' },
+      { key: 'D', label: '25 units' },
     ],
     answer: 'A',
   },
   {
-    np: 'अस्पतालको स्थान (-३, ४) समतलको कुन चतुर्थांशमा पर्दछ?',
+    np: 'अस्पतालको स्थान (-3, 4) समतलको कुन चतुर्थांशमा पर्दछ?',
     en: 'In which quadrant is the Hospital located at (-3, 4)?',
     options: [
-      { key: 'A', label: 'दोस्रो चतुर्थांश (Quadrant II)' },
-      { key: 'B', label: 'पहिलो चतुर्थांश' },
-      { key: 'C', label: 'तेस्रो चतुर्थांश' },
-      { key: 'D', label: 'चौथो चतुर्थांश' },
+      { key: 'A', label: 'Second quadrant (II)' },
+      { key: 'B', label: 'First quadrant' },
+      { key: 'C', label: 'Third quadrant' },
+      { key: 'D', label: 'Fourth quadrant' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि वृत्तको केन्द्र (०, ०) मा छ र परिधिको बिन्दु (३, ४) भए वृत्तको अर्धव्यास (Radius) कति हुन्छ?',
+    np: 'यदि वृत्तको केन्द्र (0, 0) मा छ र परिधिको बिन्दु (3, 4) भए वृत्तको अर्धव्यास (Radius) कति हुन्छ?',
     en: 'If a circle has its center at (0, 0) and passes through (3, 4), what is its radius?',
     options: [
-      { key: 'A', label: '५ एकाइ (r = √(3²+4²))' },
-      { key: 'B', label: '७ एकाइ' },
-      { key: 'C', label: '२५ एकाइ' },
-      { key: 'D', label: '१० एकाइ' },
+      { key: 'A', label: '5 units (r = √(3²+4²))' },
+      { key: 'B', label: '7 units' },
+      { key: 'C', label: '25 units' },
+      { key: 'D', label: '10 units' },
     ],
     answer: 'A',
   }
@@ -125,7 +125,7 @@ export const CoordinateGeometryChallengeWorld: React.FC<{
               activeTab === 'map' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('१. नक्सा र स्थान खोज (Town Map)', '1. Town Map & Locations')}
+            {L('1. नक्सा र स्थान खोज (Town Map)', '1. Town Map & Locations')}
           </button>
           <button
             onClick={() => setActiveTab('shortest_distance')}
@@ -133,7 +133,7 @@ export const CoordinateGeometryChallengeWorld: React.FC<{
               activeTab === 'shortest_distance' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('२. छोटो सीधा दूरी (Shortest Distance)', '2. Shortest Distance')}
+            {L('2. छोटो सीधा दूरी (Shortest Distance)', '2. Shortest Distance')}
           </button>
           <button
             onClick={() => setActiveTab('circle_radius')}
@@ -141,7 +141,7 @@ export const CoordinateGeometryChallengeWorld: React.FC<{
               activeTab === 'circle_radius' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('३. वृत्तको अर्धव्यास चुनौती (Circle Radius)', '3. Circle Radius Challenge')}
+            {L('3. वृत्तको अर्धव्यास चुनौती (Circle Radius)', '3. Circle Radius Challenge')}
           </button>
         </div>
 
@@ -231,7 +231,7 @@ export const CoordinateGeometryChallengeWorld: React.FC<{
 
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-300">{L('सुरु स्थान:', 'From:')}</span>
+                <span className="text-xs text-slate-300">{L('सुRs स्थान:', 'From:')}</span>
                 <select
                   value={selectedFrom}
                   onChange={(e) => setSelectedFrom(e.target.value)}
@@ -263,7 +263,7 @@ export const CoordinateGeometryChallengeWorld: React.FC<{
 
             <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 font-mono text-xs text-slate-200">
               d = √[({locTo.x} - ({locFrom.x}))² + ({locTo.y} - ({locFrom.y}))²] = √[({dx})² + ({dy})²] ={' '}
-              <span className="text-emerald-400 font-bold text-sm">{directDist.toFixed(2)} एकाइ (Units)</span>
+              <span className="text-emerald-400 font-bold text-sm">{directDist.toFixed(2)} Units</span>
             </div>
           </div>
         )}
@@ -276,7 +276,7 @@ export const CoordinateGeometryChallengeWorld: React.FC<{
             </div>
             <p className="text-xs text-slate-300">
               {L(
-                'एउटा वृत्तको केन्द्र घर O(०, ०) मा छ र यसको परिधि विद्यालय (४, ३) भएर जान्छ। यस वृत्तको अर्धव्यास r कति होला?',
+                'एउटा वृत्तको केन्द्र घर O(0, 0) मा छ र यसको परिधि विद्यालय (4, 3) भएर जान्छ। यस वृत्तको अर्धव्यास r कति होला?',
                 'A circle has its center at Home O(0, 0) and passes through School (4, 3). What is its radius r?'
               )}
             </p>
@@ -307,8 +307,8 @@ export const CoordinateGeometryChallengeWorld: React.FC<{
                 }`}
               >
                 {radiusFeedback === 'correct'
-                  ? L('🎉 सही उत्तर! अर्धव्यास r = √[(४-०)² + (३-०)²] = √(१६+९) = ५ एकाइ', '🎉 Correct! Radius r = √(4² + 3²) = 5 units!')
-                  : L('❌ मिलेन! केन्द्र (०,०) देखि परिधि (४,३) को दूरी निकाल्नुहोस्: r = ५', '❌ Incorrect. Solve r = √(4² + 3²) = 5 units')}
+                  ? L('🎉 सही उत्तर! अर्धव्यास r = √[(4-0)² + (3-0)²] = √(16+9) = 5 units', '🎉 Correct! Radius r = √(4² + 3²) = 5 units!')
+                  : L('❌ मिलेन! केन्द्र (0,0) देखि परिधि (4,3) को दूरी निकाल्नुहोस्: r = 5', '❌ Incorrect. Solve r = √(4² + 3²) = 5 units')}
               </div>
             )}
           </div>

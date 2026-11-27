@@ -1,6 +1,6 @@
 /**
  * SubsetBuilderLab.tsx
- * Grade 7 Mathematics – Lesson 1: SET (समूह)
+ * Grade 7 Mathematics – Lesson 1: SET
  * Simulation 5: Subset and Subset Builder Lab (2D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S.)
  */
@@ -28,25 +28,25 @@ const THREE_ELEMENT_SET = [1, 2, 3];
 
 // All 2^3 = 8 subsets of {1, 2, 3}
 const ALL_SUBSETS_OF_123: { label: string; elements: number[]; isProper: boolean; descNp: string; descEn: string }[] = [
-  { label: '∅', elements: [], isProper: true, descNp: 'रिक्त उपसमूह (० सदस्य)', descEn: 'Empty subset (0 elements)' },
+  { label: '∅', elements: [], isProper: true, descNp: 'Empty subset', descEn: 'Empty subset (0 elements)' },
   { label: '{ 1 }', elements: [1], isProper: true, descNp: 'एकल उपसमूह', descEn: 'Single-element subset' },
   { label: '{ 2 }', elements: [2], isProper: true, descNp: 'एकल उपसमूह', descEn: 'Single-element subset' },
   { label: '{ 3 }', elements: [3], isProper: true, descNp: 'एकल उपसमूह', descEn: 'Single-element subset' },
   { label: '{ 1, 2 }', elements: [1, 2], isProper: true, descNp: 'दुई सदस्यीय उपसमूह', descEn: 'Two-element subset' },
   { label: '{ 1, 3 }', elements: [1, 3], isProper: true, descNp: 'दुई सदस्यीय उपसमूह', descEn: 'Two-element subset' },
   { label: '{ 2, 3 }', elements: [2, 3], isProper: true, descNp: 'दुई सदस्यीय उपसमूह', descEn: 'Two-element subset' },
-  { label: '{ 1, 2, 3 }', elements: [1, 2, 3], isProper: false, descNp: 'अनुचित उपसमूह (सबै सदस्य)', descEn: 'Improper subset (all elements)' },
+  { label: '{ 1, 2, 3 }', elements: [1, 2, 3], isProper: false, descNp: 'Improper subset', descEn: 'Improper subset (all elements)' },
 ];
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'यदि समूह A मा ३ वटा सदस्य छन् भने A का सम्भावित जम्मा उपसमूहहरूको सङ्ख्या कति हुन्छ?',
+    np: 'यदि समूह A मा 3 pcs सदस्य छन् भने A का सम्भावित जम्मा उपसमूहहरूको सङ्ख्या कति हुन्छ?',
     en: 'If a set A has 3 elements, what is the total number of possible subsets?',
     options: [
-      { key: 'A', label: '३' },
-      { key: 'B', label: '६' },
-      { key: 'C', label: '८ (२³ = ८)' },
-      { key: 'D', label: '९' },
+      { key: 'A', label: '3' },
+      { key: 'B', label: '6' },
+      { key: 'C', label: '8 (2³ = 8)' },
+      { key: 'D', label: '9' },
     ],
     answer: 'C',
   },
@@ -54,10 +54,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'रिक्त समूह ∅ कुनै पनि अरिक्त समूहको कस्तो उपसमूह हो?',
     en: 'The empty set ∅ is what type of subset of every non-empty set?',
     options: [
-      { key: 'A', label: 'उचित उपसमूह (Proper Subset, ⊂)' },
-      { key: 'B', label: 'अनुचित उपसमूह' },
-      { key: 'C', label: 'सर्वव्यापक समूह' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'Proper subset (⊂)' },
+      { key: 'B', label: 'Improper subset' },
+      { key: 'C', label: 'Universal set' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
@@ -65,10 +65,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'प्रत्येक समूह आफ्नै कस्तो उपसमूह हुन्छ?',
     en: 'Every set is what type of subset of itself?',
     options: [
-      { key: 'A', label: 'उचित उपसमूह' },
-      { key: 'B', label: 'अनुचित उपसमूह (Improper Subset, ⊆)' },
-      { key: 'C', label: 'रिक्त उपसमूह' },
-      { key: 'D', label: 'असीमित उपसमूह' },
+      { key: 'A', label: 'Proper subset' },
+      { key: 'B', label: 'Improper subset (⊆)' },
+      { key: 'C', label: 'Empty subset' },
+      { key: 'D', label: 'Infinite subset' },
     ],
     answer: 'B',
   },
@@ -118,7 +118,7 @@ export const SubsetBuilderLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'यदि समूह B का सबै सदस्यहरू समूह A मा पर्दछन् भने B लाई A को उपसमूह भनिन्छ। २ⁿ सूत्रबाट सबै उपसमूह बनाउन सकिन्छ!',
+        'यदि समूह B का सबै सदस्यहरू समूह A मा पर्दछन् भने B लाई A को उपसमूह भनिन्छ। 2ⁿ सूत्रबाट सबै उपसमूह बनाउन सकिन्छ!',
         'If every element of Set B is in Set A, then B is a subset of A. Explore proper and improper subsets!'
       )}
     >
@@ -126,9 +126,9 @@ export const SubsetBuilderLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'instruments', np: 'क्रियाकलाप १: ज्यामिति बक्सबाट उपसमूह', en: 'Activity 1: Geometry Box Subsets' },
-            { id: 'proper_improper', np: 'क्रियाकलाप २: उचित र अनुचित उपसमूह', en: 'Activity 2: Proper vs Improper' },
-            { id: 'all_subsets', np: 'क्रियाकलाप ३: सबै ८ उपसमूहहरू (२ⁿ सूत्र)', en: 'Activity 3: All 8 Subsets (2ⁿ Rule)' },
+            { id: 'instruments', np: 'क्रियाकलाप 1: ज्यामिति बक्सबाट उपसमूह', en: 'Activity 1: Geometry Box Subsets' },
+            { id: 'proper_improper', np: 'क्रियाकलाप 2: उचित र Improper subset', en: 'Activity 2: Proper vs Improper' },
+            { id: 'all_subsets', np: 'क्रियाकलाप 3: सबै 8 उपसमूहहरू (2ⁿ सूत्र)', en: 'Activity 3: All 8 Subsets (2ⁿ Rule)' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -160,14 +160,14 @@ export const SubsetBuilderLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#E0F2FE', color: '#0369A1', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('पाठ्यपुस्तकको मुख्य उदाहरण (पृष्ठ ११)', 'Textbook Main Example (Page 11)')}
+                  {L('पाठ्यपुस्तकको मुख्य उदाहरण (पृष्ठ 11)', 'Textbook Main Example (Page 11)')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                   {L('ज्यामिति बाकसका सामग्रीहरूको समूह र उपसमूह', 'Geometry Box: Subsets Construction')}
                 </h3>
               </div>
               <div style={{ fontSize: 13, fontWeight: 800, color: '#187C68' }}>
-                U = {'{ कम्पास, प्रोट्याक्टर, सेट स्क्वायर, रुलर }'}
+                U = {'{ Compass, Protractor, Set square, Ruler }'}
               </div>
             </div>
 
@@ -229,17 +229,17 @@ export const SubsetBuilderLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
                         return isNe ? it.nameNp : it.nameEn;
                       })
                       .join(', ')
-                  : L('(खाली उपसमूह ∅)', '(Empty subset ∅)')}
+                  : L('', '(Empty subset ∅)')}
                 {' }'}
               </div>
 
               <div style={{ fontSize: 14, fontWeight: 800, color: isFullSet ? '#B45309' : '#15803D' }}>
                 {isEmptySet ? (
-                  <span>∅ ⊂ U &nbsp; {L('(रिक्त समूह, U को उचित उपसमूह हो)', '(Empty set is a proper subset of U)')}</span>
+                  <span>∅ ⊂ U &nbsp; {L('', '(Empty set is a proper subset of U)')}</span>
                 ) : isFullSet ? (
-                  <span>S ⊆ U &nbsp; {L('(S र U बराबर छन्, त्यसैले यो अनुचित उपसमूह हो)', '(S equals U, making it an improper subset)')}</span>
+                  <span>S ⊆ U &nbsp; {L('', '(S equals U, making it an improper subset)')}</span>
                 ) : (
-                  <span>S ⊂ U &nbsp; {L(`(S, U को उचित उपसमूह हो, n(S) = ${toNp(selectedInstruments.length)})`, `(S is a proper subset of U, n(S) = ${selectedInstruments.length})`)}</span>
+                  <span>S ⊂ U &nbsp; {L(`(S, U को Proper subset हो, n(S) = ${toNp(selectedInstruments.length)})`, `(S is a proper subset of U, n(S) = ${selectedInstruments.length})`)}</span>
                 )}
               </div>
             </div>
@@ -250,43 +250,43 @@ export const SubsetBuilderLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
         {activeTab === 'proper_improper' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 900, color: '#0F172A', marginBottom: 12 }}>
-              {L('उचित उपसमूह (⊂) र अनुचित उपसमूह (⊆) को भिन्नता', 'Proper Subsets (⊂) vs Improper Subsets (⊆)')}
+              {L('Proper subset (⊂) र Improper subset (⊆) को भिन्नता', 'Proper Subsets (⊂) vs Improper Subsets (⊆)')}
             </h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16, marginBottom: 20 }}>
               {/* Proper Subset Rule */}
               <div style={{ background: '#F0FDF4', border: '2px solid #16A34A', borderRadius: 16, padding: 18 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#166534', fontWeight: 900, fontSize: 16, marginBottom: 8 }}>
-                  <Check size={20} /> {L('उचित उपसमूह (Proper Subset: ⊂)', 'Proper Subset (⊂)')}
+                  <Check size={20} /> {L('Proper subset (Proper Subset: ⊂)', 'Proper Subset (⊂)')}
                 </div>
                 <p style={{ margin: '0 0 12px', fontSize: 13, color: '#334155', lineHeight: 1.6 }}>
                   {L(
-                    'यदि समूह B का सबै सदस्यहरू A मा पर्दछन् तर A मा कम्तीमा एउटा यस्तो सदस्य छ जो B मा पर्दैन भने, B लाई A को उचित उपसमूह (B ⊂ A) भनिन्छ।',
+                    'यदि समूह B का सबै सदस्यहरू A मा पर्दछन् तर A मा कम्तीमा एउटा यस्तो सदस्य छ जो B मा पर्दैन भने, B लाई A को Proper subset (B ⊂ A) भनिन्छ।',
                     'If all elements of B are in A, but A contains at least one element not in B, then B is a proper subset of A (B ⊂ A).'
                   )}
                 </p>
                 <div style={{ background: '#FFFFFF', padding: 12, borderRadius: 10, border: '1px solid #86EFAC', fontSize: 13, fontWeight: 800, color: '#166534' }}>
                   {L('नमुना: U = {a, e, i, o, u} र A = {a, e}', 'Example: U = {a, e, i, o, u} and A = {a, e}')}
                   <br />
-                  ⟹ A ⊂ U {L('(उचित उपसमूह)', '(Proper subset)')}
+                  ⟹ A ⊂ U {L('', '(Proper subset)')}
                 </div>
               </div>
 
               {/* Improper Subset Rule */}
               <div style={{ background: '#FEF3C7', border: '2px solid #F59E0B', borderRadius: 16, padding: 18 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#92400E', fontWeight: 900, fontSize: 16, marginBottom: 8 }}>
-                  <Layers size={20} /> {L('अनुचित उपसमूह (Improper Subset: ⊆)', 'Improper Subset (⊆)')}
+                  <Layers size={20} /> {L('Improper subset (Improper Subset: ⊆)', 'Improper Subset (⊆)')}
                 </div>
                 <p style={{ margin: '0 0 12px', fontSize: 13, color: '#334155', lineHeight: 1.6 }}>
                   {L(
-                    'यदि कुनै समूहले अर्को समूहका सबै सदस्यहरू समेट्छ (अर्थात् दुवै समूह बराबर छन्) भने, त्यसलाई अनुचित उपसमूह (⊆) भनिन्छ। प्रत्येक समूह आफ्नै अनुचित उपसमूह हुन्छ (A ⊆ A)।',
+                    'यदि कुनै समूहले अर्को समूहका सबै सदस्यहरू समेट्छ (अर्थात् दुवै समूह बराबर छन्) भने, त्यसलाई Improper subset (⊆) भनिन्छ। प्रत्येक समूह आफ्नै Improper subset हुन्छ (A ⊆ A)।',
                     'If a subset contains all elements of the original set (i.e. they are equal), it is called an improper subset (⊆). Every set is an improper subset of itself (A ⊆ A).'
                   )}
                 </p>
                 <div style={{ background: '#FFFFFF', padding: 12, borderRadius: 10, border: '1px solid #FDE68A', fontSize: 13, fontWeight: 800, color: '#92400E' }}>
                   {L('नमुना: U = {a, e, i, o, u} र C = {a, e, i, o, u}', 'Example: U = {a, e, i, o, u} and C = {a, e, i, o, u}')}
                   <br />
-                  ⟹ C ⊆ U {L('(अनुचित उपसमूह, किनकि C = U)', '(Improper subset since C = U)')}
+                  ⟹ C ⊆ U {L('', '(Improper subset since C = U)')}
                 </div>
               </div>
             </div>
@@ -298,7 +298,7 @@ export const SubsetBuilderLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
               </div>
               <p style={{ margin: 0, fontSize: 13, color: '#334155', lineHeight: 1.6 }}>
                 {L(
-                  'रिक्त समूह ∅ प्रत्येक अरिक्त समूहको उचित उपसमूह (Proper Subset) हुन्छ। त्यसैले ∅ ⊂ A सधैँ सत्य हुन्छ।',
+                  'रिक्त समूह ∅ प्रत्येक अरिक्त समूहको Proper subset (Proper Subset) हुन्छ। त्यसैले ∅ ⊂ A सधैँ सत्य हुन्छ।',
                   'The empty set ∅ is a proper subset of every non-empty set. Therefore, ∅ ⊂ A is always true.'
                 )}
               </p>
@@ -312,14 +312,14 @@ export const SubsetBuilderLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('सूत्र: जम्मा उपसमूह = २ⁿ', 'Formula: Total Subsets = 2ⁿ')}
+                  {L('सूत्र: जम्मा उपसमूह = 2ⁿ', 'Formula: Total Subsets = 2ⁿ')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-                  {L('A = {१, २, ३} का सम्भावित सबै ८ वटा उपसमूहहरू निर्माण गर्नुहोस्', 'Generate All 8 Subsets of A = {1, 2, 3}')}
+                  {L('A = {1, 2, 3} का सम्भावित सबै 8 pcs उपसमूहहरू निर्माण गर्नुहोस्', 'Generate All 8 Subsets of A = {1, 2, 3}')}
                 </h3>
               </div>
               <div style={{ fontSize: 14, fontWeight: 800, color: '#187C68', background: '#F0FDF4', padding: '6px 14px', borderRadius: 10 }}>
-                n = {isNe ? '३' : '3'} ⟹ २³ = {isNe ? '८' : '8'} {L('उपसमूहहरू', 'subsets')}
+                n = {isNe ? '3' : '3'} ⟹ 2³ = {isNe ? '8' : '8'} {L('उपसमूहहरू', 'subsets')}
               </div>
             </div>
 
@@ -377,7 +377,7 @@ export const SubsetBuilderLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
                 onClick={() => {
                   kit.tap();
                   setDiscoveredSubsets([0, 1, 2, 3, 4, 5, 6, 7]);
-                  kit.good(L('सबै ८ उपसमूहहरू देखाइए!', 'All 8 subsets revealed!'));
+                  kit.good(L('सबै 8 उपसमूहहरू देखाइए!', 'All 8 subsets revealed!'));
                 }}
                 style={{
                   padding: '10px 18px',
@@ -390,11 +390,11 @@ export const SubsetBuilderLab: React.FC<{ onBackToLibrary?: () => void; onBack?:
                   cursor: 'pointer',
                 }}
               >
-                {L('सबै ८ उपसमूहहरू खोल्नुहोस्', 'Reveal All 8 Subsets')}
+                {L('सबै 8 उपसमूहहरू खोल्नुहोस्', 'Reveal All 8 Subsets')}
               </button>
 
               <div style={{ fontSize: 13, fontWeight: 700, color: '#334155' }}>
-                {L(`पत्ता लागेका: ${toNp(discoveredSubsets.length)} / ८`, `Discovered: ${discoveredSubsets.length} / 8`)}
+                {L(`पत्ता लागेका: ${toNp(discoveredSubsets.length)} / 8`, `Discovered: ${discoveredSubsets.length} / 8`)}
               </div>
             </div>
           </div>

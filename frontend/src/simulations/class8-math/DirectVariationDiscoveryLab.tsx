@@ -1,7 +1,7 @@
 /**
  * DirectVariationDiscoveryLab.tsx
- * Grade 8 Mathematics – Unit 6: UNITARY METHOD (एकाइ विधि)
- * Simulation 1: Direct Variation Discovery Lab (प्रत्यक्ष विचरण अन्वेषण प्रयोगशाला)
+ * Grade 8 Mathematics – Unit 6: UNITARY METHOD
+ * Simulation 1: Direct Variation Discovery Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 6)
  */
 import React, { useState } from 'react';
@@ -15,54 +15,54 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'प्रत्यक्ष विचरण (Direct Variation) मा दुई चलराशि x र y बीचको सम्बन्ध कस्तो हुन्छ?',
     en: 'In direct variation, what is the mathematical relation between two variables x and y?',
     options: [
-      { key: 'A', label: 'y / x = k (अनुपात स्थिर रहन्छ / Ratio is constant)' },
-      { key: 'B', label: 'x × y = k (गुणनफल स्थिर रहन्छ)' },
+      { key: 'A', label: 'y / x = k' },
+      { key: 'B', label: 'x × y = k' },
       { key: 'C', label: 'x + y = k' },
       { key: 'D', label: 'x - y = k' },
     ],
     answer: 'A',
   },
   {
-    np: '१० केजी स्याउको मूल्य रु. ९५० पर्छ भने ३ केजी स्याउको मूल्य कति पर्ला?',
+    np: '10 केजी स्याउको मूल्य Rs. 950 पर्छ भने 3 केजी स्याउको मूल्य कति पर्ला?',
     en: 'If 10 kg of apples cost Rs. 950, what will 3 kg of apples cost?',
     options: [
-      { key: 'A', label: 'रु. २८५ [ १ केजी = ९५ ⇒ ३ केजी = २८५ ]' },
-      { key: 'B', label: 'रु. ३००' },
-      { key: 'C', label: 'रु. २७०' },
-      { key: 'D', label: 'रु. ३१५' },
+      { key: 'A', label: 'Rs. 285 [ 1 kg = 95 ⇒ 3 kg = 285 ]' },
+      { key: 'B', label: 'Rs. 300' },
+      { key: 'C', label: 'Rs. 270' },
+      { key: 'D', label: 'Rs. 315' },
     ],
     answer: 'A',
   },
   {
-    np: '१० जना कामदारले २० दिनमा रु. १,६०,००० ज्याला पाउँछन् भने १ जनाले १ दिनमा कति पाउँछन्?',
+    np: '10 जना कामदारले 20 दिनमा Rs. 1,60,000 ज्याला पाउँछन् भने 1 people 1 दिनमा कति पाउँछन्?',
     en: 'If 10 workers earn Rs. 1,60,000 in 20 days, how much does 1 worker earn in 1 day?',
     options: [
-      { key: 'A', label: 'रु. ८०० [ १,६०,००० ÷ (१० × २०) = ८०० ]' },
-      { key: 'B', label: 'रु. ६००' },
-      { key: 'C', label: 'रु. १,०००' },
-      { key: 'D', label: 'रु. ७५०' },
+      { key: 'A', label: 'Rs. 800 [ 1,60,000 ÷ (10 × 20) = 800 ]' },
+      { key: 'B', label: 'Rs. 600' },
+      { key: 'C', label: 'Rs. 1,000' },
+      { key: 'D', label: 'Rs. 750' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा गाडी ५० किमी/घण्टाको समान गतिमा गुड्दा ३.५ घण्टामा कति दूरी पार गर्छ?',
+    np: 'एउटा गाडी 50 किमी/घण्टाको समान गतिमा गुड्दा 3.5 घण्टामा कति दूरी पार गर्छ?',
     en: 'A vehicle travelling at a constant speed of 50 km/h covers what distance in 3.5 hours?',
     options: [
-      { key: 'A', label: '१७५ किमी [ ५० × ३.५ = १७५ किमी ]' },
-      { key: 'B', label: '१५० किमी' },
-      { key: 'C', label: '२०० किमी' },
-      { key: 'D', label: '१६५ किमी' },
+      { key: 'A', label: '175 km [ 50 × 3.5 = 175 km ]' },
+      { key: 'B', label: '150 km' },
+      { key: 'C', label: '200 km' },
+      { key: 'D', label: '165 km' },
     ],
     answer: 'A',
   },
   {
-    np: '३० जना मानिसले २० दिनमा ६०० मिटर पर्खाल बनाउन सक्छन् भने १५ जनाले १८ दिनमा कति मिटर बनाउलान्?',
+    np: '30 जना मानिसले 20 दिनमा 600 m पर्खाल बनाउन सक्छन् भने 15 people 18 दिनमा कति m बनाउलान्?',
     en: 'If 30 people build a 600 m wall in 20 days, how many meters can 15 people build in 18 days?',
     options: [
-      { key: 'A', label: '२७० मिटर [ दर = १ मिटर/मानिस-दिन ⇒ १५ × १८ = २७० ]' },
-      { key: 'B', label: '३०० मिटर' },
-      { key: 'C', label: '२५० मिटर' },
-      { key: 'D', label: '२४० मिटर' },
+      { key: 'A', label: '270 m [ rate = 1 m/person-day ⇒ 15 × 18 = 270 ]' },
+      { key: 'B', label: '300 m' },
+      { key: 'C', label: '250 m' },
+      { key: 'D', label: '240 m' },
     ],
     answer: 'A',
   },
@@ -72,7 +72,7 @@ const PRESET_SCENARIOS = [
   { nameNp: 'कलम खरिद (Pencils)', nameEn: 'Pencils', unitNameNp: 'कलम संख्या', unitNameEn: 'Pencils', rate: 15, baseQty: 1 },
   { nameNp: 'स्याउको तौल (Apples)', nameEn: 'Apples', unitNameNp: 'केजी (kg)', unitNameEn: 'kg', rate: 95, baseQty: 10 },
   { nameNp: 'बस यात्रा दूरी (Bus Travel)', nameEn: 'Bus Distance', unitNameNp: 'घण्टा (Hours)', unitNameEn: 'Hours', rate: 50, baseQty: 1 },
-  { nameNp: 'पेट्रोल खरिद (Petrol)', nameEn: 'Petrol', unitNameNp: 'लिटर (Liters)', unitNameEn: 'Liters', rate: 175, baseQty: 5 },
+  { nameNp: 'पेट्रोल खरिद (Petrol)', nameEn: 'Petrol', unitNameNp: 'litres (Liters)', unitNameEn: 'Liters', rate: 175, baseQty: 5 },
 ];
 
 export const DirectVariationDiscoveryLab: React.FC<{
@@ -121,19 +121,19 @@ export const DirectVariationDiscoveryLab: React.FC<{
 
   const CHALLENGE_ITEMS = [
     {
-      qNp: 'एउटा कारले ३ घण्टामा १५० किमी पार गर्छ भने ५ घण्टामा कति किमी पार गर्छ?',
+      qNp: 'एउटा कारले 3 घण्टामा 150 km पार गर्छ भने 5 घण्टामा कति किमी पार गर्छ?',
       qEn: 'If a car travels 150 km in 3 hours, how many km will it travel in 5 hours at uniform speed?',
       ans: 250,
-      unit: 'किमी (km)',
-      stepsNp: '१ घण्टामा पार गर्ने दूरी = १५० ÷ ३ = ५० किमी। ५ घण्टामा = ५० × ५ = २५० किमी।',
+      unit: 'km',
+      stepsNp: '1 घण्टामा पार गर्ने दूरी = 150 ÷ 3 = 50 किमी। 5 घण्टामा = 50 × 5 = 250 किमी।',
       stepsEn: 'Distance in 1 hour = 150 ÷ 3 = 50 km. In 5 hours = 50 × 5 = 250 km.',
     },
     {
-      qNp: '१२ ओटा कापीको मूल्य रु. ५४० पर्छ भने ७ ओटा कापीको मूल्य कति पर्ला?',
+      qNp: '12 ओटा कापीको मूल्य Rs. 540 पर्छ भने 7 ओटा कापीको मूल्य कति पर्ला?',
       qEn: 'If 12 notebooks cost Rs. 540, what will be the cost of 7 notebooks?',
       ans: 315,
-      unit: 'रु. (Rs.)',
-      stepsNp: '१ कापीको मूल्य = ५४० ÷ १२ = रु. ४५। ७ कापीको मूल्य = ४५ × ७ = रु. ३१५।',
+      unit: 'Rs. (Rs.)',
+      stepsNp: '1 कापीको मूल्य = 540 ÷ 12 = Rs. 45। 7 कापीको मूल्य = 45 × 7 = Rs. 315।',
       stepsEn: 'Cost of 1 notebook = 540 ÷ 12 = Rs. 45. Cost of 7 notebooks = 45 × 7 = Rs. 315.',
     },
   ];
@@ -177,7 +177,7 @@ export const DirectVariationDiscoveryLab: React.FC<{
             }`}
           >
             <Compass className="w-4 h-4" />
-            {L('१. विचरण अवधारणा र अचर k (Concept & Constant k)', '1. Direct Variation & Constant k')}
+            {L('1. विचरण अवधारणा र अचर k (Concept & Constant k)', '1. Direct Variation & Constant k')}
           </button>
           <button
             onClick={() => setActiveTab('single_unitary')}
@@ -186,7 +186,7 @@ export const DirectVariationDiscoveryLab: React.FC<{
             }`}
           >
             <Calculator className="w-4 h-4" />
-            {L('२. एक-चर एकाइ विधि (Single Unitary Method)', '2. Single Unitary Solver')}
+            {L('2. एक-चर एकाइ विधि (Single Unitary Method)', '2. Single Unitary Solver')}
           </button>
           <button
             onClick={() => setActiveTab('compound')}
@@ -195,7 +195,7 @@ export const DirectVariationDiscoveryLab: React.FC<{
             }`}
           >
             <Layers className="w-4 h-4" />
-            {L('३. मिश्रित विचरण (Compound Direct Variation)', '3. Compound Direct Variation')}
+            {L('3. मिश्रित विचरण (Compound Direct Variation)', '3. Compound Direct Variation')}
           </button>
           <button
             onClick={() => setActiveTab('challenge')}
@@ -204,7 +204,7 @@ export const DirectVariationDiscoveryLab: React.FC<{
             }`}
           >
             <TrendingUp className="w-4 h-4" />
-            {L('४. पाठ्यपुस्तक अभ्यास (CDC Practice)', '4. CDC Challenge')}
+            {L('4. पाठ्यपुस्तक अभ्यास (CDC Practice)', '4. CDC Challenge')}
           </button>
         </div>
 
@@ -268,8 +268,8 @@ export const DirectVariationDiscoveryLab: React.FC<{
 
                   <div className="bg-slate-800/80 p-4 rounded-2xl border border-slate-700 space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-slate-400">{L('१ एकाइको दर (Unit Rate):', 'Unit Rate (k):')}</span>
-                      <span className="font-bold text-white">रु. {toNp(constantK)}</span>
+                      <span className="text-slate-400">{L('1 एकाइको दर (Unit Rate):', 'Unit Rate (k):')}</span>
+                      <span className="font-bold text-white">Rs. {toNp(constantK)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-slate-400">{L('जम्मा परिमाण (Quantity x):', 'Quantity (x):')}</span>
@@ -277,7 +277,7 @@ export const DirectVariationDiscoveryLab: React.FC<{
                     </div>
                     <div className="flex justify-between text-base border-t border-slate-700 pt-2 font-black">
                       <span className="text-amber-400">{L('जम्मा मूल्य (Total y = k · x):', 'Total Value (y = k · x):')}</span>
-                      <span className="text-emerald-400">रु. {toNp(totalCost)}</span>
+                      <span className="text-emerald-400">Rs. {toNp(totalCost)}</span>
                     </div>
                   </div>
                 </div>
@@ -299,7 +299,7 @@ export const DirectVariationDiscoveryLab: React.FC<{
                       {[1, 2, 4, 8, quantity].map((q, idx) => (
                         <tr key={idx} className={q === quantity ? 'bg-indigo-900/40 font-bold text-indigo-300' : 'text-slate-300'}>
                           <td className="py-1.5">{toNp(q)}</td>
-                          <td className="py-1.5">रु. {toNp(q * constantK)}</td>
+                          <td className="py-1.5">Rs. {toNp(q * constantK)}</td>
                           <td className="py-1.5 text-right font-mono text-emerald-400">
                             {toNp(q * constantK)} ÷ {toNp(q)} = <b>{toNp(constantK)}</b>
                           </td>
@@ -322,14 +322,14 @@ export const DirectVariationDiscoveryLab: React.FC<{
                   {L('दुई-चर प्रत्यक्ष एकाइ विधि (Standard Unitary Method Solver)', 'Standard Unitary Method Solver')}
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  {L('दिइएको परिमाणबाट १ एकाइको मान निकाल्ने, अनि सोधिएको परिमाणको मान गुणन गर्ने।', 'Step 1: Divide to find 1 unit. Step 2: Multiply to find target quantity.')}
+                  {L('दिइएको परिमाणबाट 1 एकाइको मान निकाल्ने, अनि सोधिएको परिमाणको मान गुणन गर्ने।', 'Step 1: Divide to find 1 unit. Step 2: Multiply to find target quantity.')}
                 </p>
               </div>
 
               {/* Input grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-indigo-50 p-4 rounded-2xl border border-indigo-100 space-y-3">
-                  <span className="text-xs font-bold text-indigo-900 uppercase">{L('चरण १: दिइएको अवस्था', 'Given State')}</span>
+                  <span className="text-xs font-bold text-indigo-900 uppercase">{L('चरण 1: दिइएको अवस्था', 'Given State')}</span>
                   <div>
                     <label className="text-xs text-slate-600 block mb-1">{L('दिइएको परिमाण (Quantity 1):', 'Given Quantity 1:')}</label>
                     <input
@@ -353,11 +353,11 @@ export const DirectVariationDiscoveryLab: React.FC<{
                 {/* Intermediate Unit Calculation */}
                 <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200 flex flex-col justify-center items-center text-center space-y-2">
                   <div className="w-10 h-10 rounded-full bg-amber-200 flex items-center justify-center font-bold text-amber-800 text-lg">
-                    १
+                    1
                   </div>
-                  <div className="text-xs font-bold uppercase text-amber-800">{L('१ एकाइको मान (Unit Value)', 'Unit Value')}</div>
+                  <div className="text-xs font-bold uppercase text-amber-800">{L('1 एकाइको मान (Unit Value)', 'Unit Value')}</div>
                   <div className="text-2xl font-black text-amber-900">
-                    रु. {toNp(unitRate.toFixed(2))}
+                    Rs. {toNp(unitRate.toFixed(2))}
                   </div>
                   <div className="text-xs text-slate-600">
                     {toNp(givenVal1)} ÷ {toNp(givenQty1)} = {toNp(unitRate.toFixed(2))}
@@ -366,7 +366,7 @@ export const DirectVariationDiscoveryLab: React.FC<{
 
                 {/* Target Output */}
                 <div className="bg-emerald-50 p-4 rounded-2xl border border-emerald-200 space-y-3">
-                  <span className="text-xs font-bold text-emerald-900 uppercase">{L('चरण २: सोधिएको अवस्था', 'Target State')}</span>
+                  <span className="text-xs font-bold text-emerald-900 uppercase">{L('चरण 2: सोधिएको अवस्था', 'Target State')}</span>
                   <div>
                     <label className="text-xs text-slate-600 block mb-1">{L('सोधिएको परिमाण (Target Quantity 2):', 'Target Quantity 2:')}</label>
                     <input
@@ -379,7 +379,7 @@ export const DirectVariationDiscoveryLab: React.FC<{
                   <div className="pt-2 border-t border-emerald-200">
                     <div className="text-xs text-slate-500">{L('अन्तिम मूल्य (Target Value):', 'Target Value:')}</div>
                     <div className="text-2xl font-black text-emerald-700">
-                      रु. {toNp(targetVal2.toFixed(2))}
+                      Rs. {toNp(targetVal2.toFixed(2))}
                     </div>
                   </div>
                 </div>
@@ -388,9 +388,9 @@ export const DirectVariationDiscoveryLab: React.FC<{
               {/* Procedural Explanation Box */}
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-sm space-y-2 text-slate-700">
                 <div className="font-bold text-indigo-900">{L('पाठ्यपुस्तक कार्यविधि (Curriculum Procedure):', 'CDC Step Procedure:')}</div>
-                <div>१. {toNp(givenQty1)} एकाइको मूल्य = रु. {toNp(givenVal1)}</div>
-                <div>२. १ एकाइको मूल्य = रु. {toNp(givenVal1)} ÷ {toNp(givenQty1)} = रु. {toNp(unitRate.toFixed(2))}</div>
-                <div>३. {toNp(targetQty2)} एकाइको मूल्य = रु. {toNp(unitRate.toFixed(2))} × {toNp(targetQty2)} = <b className="text-emerald-700">रु. {toNp(targetVal2.toFixed(2))}</b></div>
+                <div>1. {toNp(givenQty1)} Price of the unit = Rs. {toNp(givenVal1)}</div>
+                <div>2. 1 Price of the unit = Rs. {toNp(givenVal1)} ÷ {toNp(givenQty1)} = Rs. {toNp(unitRate.toFixed(2))}</div>
+                <div>3. {toNp(targetQty2)} Price of the unit = Rs. {toNp(unitRate.toFixed(2))} × {toNp(targetQty2)} = <b className="text-emerald-700">Rs. {toNp(targetVal2.toFixed(2))}</b></div>
               </div>
             </div>
           </div>
@@ -405,7 +405,7 @@ export const DirectVariationDiscoveryLab: React.FC<{
                   {L('मिश्रित प्रत्यक्ष एकाइ विधि (कामदार, दिन र ज्याला/काम)', 'Compound Unitary Method (Workers, Days & Earnings/Work)')}
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  {L('CDC पाठ्यपुस्तक उदाहरण: १० जनाले २० दिनमा रु. १,६०,००० पाउँछन् भने १५ जनाले १० दिनमा कति पाउँछन्?', 'CDC Example: 10 workers earn Rs. 160,000 in 20 days. How much do 15 workers earn in 10 days?')}
+                  {L('CDC पाठ्यपुस्तक उदाहरण: 10 people 20 दिनमा Rs. 1,60,000 पाउँछन् भने 15 people 10 दिनमा कति पाउँछन्?', 'CDC Example: 10 workers earn Rs. 160,000 in 20 days. How much do 15 workers earn in 10 days?')}
                 </p>
               </div>
 
@@ -475,7 +475,7 @@ export const DirectVariationDiscoveryLab: React.FC<{
                   </div>
                   <div className="p-3 bg-white rounded-xl border border-emerald-300">
                     <div className="text-xs text-slate-500">{L('नयाँ जम्मा ज्याला (New Earning):', 'New Total Earning:')}</div>
-                    <div className="text-2xl font-black text-emerald-700">रु. {toNp(targetEarning2.toLocaleString())}</div>
+                    <div className="text-2xl font-black text-emerald-700">Rs. {toNp(targetEarning2.toLocaleString())}</div>
                   </div>
                 </div>
               </div>
@@ -483,14 +483,14 @@ export const DirectVariationDiscoveryLab: React.FC<{
               {/* Step-by-Step Derivation */}
               <div className="bg-slate-900 text-white p-5 rounded-2xl space-y-3 font-mono text-xs">
                 <div className="text-amber-400 font-bold uppercase">{L('एकाइ विधिको विस्तृत चरणहरू:', 'Detailed Step Breakdown:')}</div>
-                <div>१. {toNp(workers1)} जनाले {toNp(days1)} दिनमा पाउने ज्याला = रु. {toNp(earning1.toLocaleString())}</div>
-                <div>२. १ जनाले {toNp(days1)} दिनमा पाउने ज्याला = रु. {toNp(earning1)} ÷ {toNp(workers1)} = रु. {toNp((earning1 / workers1).toFixed(0))}</div>
+                <div>1. {toNp(workers1)} people {toNp(days1)} wage earned in a day = Rs. {toNp(earning1.toLocaleString())}</div>
+                <div>2. 1 people {toNp(days1)} wage earned in a day = Rs. {toNp(earning1)} ÷ {toNp(workers1)} = Rs. {toNp((earning1 / workers1).toFixed(0))}</div>
                 <div className="text-emerald-300">
-                  ३. १ जनाले १ दिनमा पाउने ज्याला (एकाइ दर) = रु. {toNp(earning1)} ÷ ({toNp(workers1)} × {toNp(days1)}) = रु. {toNp(ratePerPersonDay.toFixed(0))}
+                  3. Wage earned by 1 person in 1 day (unit rate) = Rs. {toNp(earning1)} ÷ ({toNp(workers1)} × {toNp(days1)}) = Rs. {toNp(ratePerPersonDay.toFixed(0))}
                 </div>
-                <div>४. {toNp(workers2)} जनाले १ दिनमा पाउने ज्याला = रु. {toNp(ratePerPersonDay)} × {toNp(workers2)} = रु. {toNp((ratePerPersonDay * workers2).toFixed(0))}</div>
+                <div>4. {toNp(workers2)} people 1 wage earned in a day = Rs. {toNp(ratePerPersonDay)} × {toNp(workers2)} = Rs. {toNp((ratePerPersonDay * workers2).toFixed(0))}</div>
                 <div className="text-amber-300 font-bold">
-                  ५. {toNp(workers2)} जनाले {toNp(days2)} दिनमा पाउने ज्याला = रु. {toNp(ratePerPersonDay * workers2)} × {toNp(days2)} = रु. {toNp(targetEarning2.toLocaleString())}
+                  5. {toNp(workers2)} people {toNp(days2)} wage earned in a day = Rs. {toNp(ratePerPersonDay * workers2)} × {toNp(days2)} = Rs. {toNp(targetEarning2.toLocaleString())}
                 </div>
               </div>
             </div>

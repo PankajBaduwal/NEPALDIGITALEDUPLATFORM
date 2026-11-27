@@ -1,5 +1,5 @@
 /**
- * Lesson 6 · Local numerals up to 20 (स्थानीय अङ्क प्रणाली)
+ * Lesson 6 · Local numerals up to 20
  * Numeral Street — signboards for 1 to 20 in Hindu-Arabic, Devanagari and Roman numerals.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -63,7 +63,7 @@ export const NumeralSigns: React.FC<Props> = ({ onBackToLibrary }) => {
       } else {
         setTimeout(() => {
           setIsTouring(false);
-          kit.good('१ देखि २० सम्मका सबै अङ्कहरू भ्रमण गरियो!', 'Completed tour of numerals 1 to 20!');
+          kit.good('1 देखि 20 सम्मका सबै अङ्कहरू भ्रमण गरियो!', 'Completed tour of numerals 1 to 20!');
           kit.star();
         }, 800);
       }
@@ -140,13 +140,13 @@ export const NumeralSigns: React.FC<Props> = ({ onBackToLibrary }) => {
     <Controls>
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
         <CBtn color="#187C68" disabled={isTouring} onClick={handleStartTour}>
-          🚀 {kit.t('१–२० सडक भ्रमण', 'Tour 1–20')}
+          🚀 {kit.t('1–20 सडक भ्रमण', 'Tour 1–20')}
         </CBtn>
         <CBtn color="#0284C7" onClick={() => chooseNumber(Math.min(20, selectedNum + 1))}>
-          +१ {kit.t('अर्को अङ्क', 'Next')}
+          +1 {kit.t('अर्को अङ्क', 'Next')}
         </CBtn>
         <CBtn color="#64748B" onClick={() => chooseNumber(Math.max(1, selectedNum - 1))}>
-          -१ {kit.t('अघिल्लो अङ्क', 'Prev')}
+          -1 {kit.t('अघिल्लो अङ्क', 'Prev')}
         </CBtn>
       </div>
     </Controls>

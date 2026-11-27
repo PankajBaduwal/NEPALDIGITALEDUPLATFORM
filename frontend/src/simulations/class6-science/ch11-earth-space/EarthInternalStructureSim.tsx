@@ -1,14 +1,14 @@
 /**
  * EarthInternalStructureSim.tsx
- * Simulation 40: 2D Earth's Internal Structure Explorer (पृथ्वीको आन्तरिक बनावट)
- * Grade 6 Science • Unit 11: Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 40: 2D Earth's Internal Structure Explorer
+ * Grade 6 Science • Unit 11: Earth and Space
  *
  * Full 2D Interactive Geosphere Cutaway featuring:
  * 1. 4 Concentric Layers:
- *    - Crust (क्रस्ट / भू-सतह): Solid rock (0 - 35 km)
- *    - Mantle (मेन्टल): Semi-molten magma mantle (2,900 km, ~2000°C) with convection loops
- *    - Outer Core (बाह्य कोर): Liquid molten Iron & Nickel (2,200 km, ~4500°C) generating magnetic dynamo
- *    - Inner Core (भित्री कोर): Solid Iron-Nickel NiFe sphere (1,200 km radius, ~5500°C)
+ *    - Crust: Solid rock (0 - 35 km)
+ *    - Mantle: Semi-molten magma mantle (2,900 km, ~2000°C) with convection loops
+ *    - Outer Core: Liquid molten Iron & Nickel (2,200 km, ~4500°C) generating magnetic dynamo
+ *    - Inner Core: Solid Iron-Nickel NiFe sphere (1,200 km radius, ~5500°C)
  * 2. Cutaway Quarter Shell & Exploded View expansion slider
  * 3. Deep geological metrics: Temperature, Depth, Chemical Composition
  * 4. Geomagnetic field lines toggle
@@ -37,8 +37,8 @@ interface EarthLayer {
 const EARTH_LAYERS: EarthLayer[] = [
   {
     id: 'crust',
-    nameEn: '1. Crust (भू-सतह / क्रस्ट)',
-    nameNe: '१. भू-सतह (क्रस्ट)',
+    nameEn: '1. Crust',
+    nameNe: '1. भू-सतह (क्रस्ट)',
     depthKm: '0 – 35 km (Continents) / 5 – 10 km (Oceans)',
     tempC: 'Ambient to 400°C',
     compositionEn: 'Silica, Aluminium, Magnesium (Sial & Sima)',
@@ -50,8 +50,8 @@ const EARTH_LAYERS: EarthLayer[] = [
   },
   {
     id: 'mantle',
-    nameEn: '2. Mantle (मेन्टल)',
-    nameNe: '२. मेन्टल (Mantle)',
+    nameEn: '2. Mantle',
+    nameNe: '2. मेन्टल (Mantle)',
     depthKm: '35 km – 2,900 km',
     tempC: '1,000°C – 3,000°C',
     compositionEn: 'Silicate rocks rich in Iron & Magnesium (Peridotite)',
@@ -63,8 +63,8 @@ const EARTH_LAYERS: EarthLayer[] = [
   },
   {
     id: 'outer_core',
-    nameEn: '3. Outer Core (बाह्य कोर)',
-    nameNe: '३. बाह्य कोर (Outer Core)',
+    nameEn: '3. Outer Core',
+    nameNe: '3. बाह्य कोर (Outer Core)',
     depthKm: '2,900 km – 5,100 km',
     tempC: '4,000°C – 5,000°C',
     compositionEn: 'Liquid Molten Iron (Fe) & Nickel (Ni)',
@@ -76,8 +76,8 @@ const EARTH_LAYERS: EarthLayer[] = [
   },
   {
     id: 'inner_core',
-    nameEn: '4. Inner Core (भित्री कोर)',
-    nameNe: '४. भित्री कोर (Inner Core)',
+    nameEn: '4. Inner Core',
+    nameNe: '4. भित्री कोर (Inner Core)',
     depthKm: '5,100 km – 6,371 km (Center)',
     tempC: '5,500°C (Hot as the surface of the Sun!)',
     compositionEn: 'Solid Metallic Iron & Nickel (NiFe alloy)',
@@ -93,7 +93,7 @@ export const EarthInternalStructureSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -310,7 +310,7 @@ export const EarthInternalStructureSim: React.FC<BaseSimulationProps> = ({
 
       ctx.fillStyle = '#38bdf8';
       ctx.font = 'bold 11px sans-serif';
-      ctx.fillText(lang === 'en' ? 'Earth Radius: 6,371 km' : 'पृथ्वीको अर्धव्यास: ६,३७१ कि.मी.', 32, 102);
+      ctx.fillText(lang === 'en' ? 'Earth Radius: 6,371 km' : 'पृथ्वीको अर्धव्यास: 6,371 कि.मी.', 32, 102);
 
       animFrameRef.current = requestAnimationFrame(render);
     };
@@ -468,24 +468,24 @@ export const EarthInternalStructureSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: Deep Earth' : '१. खोज: पृथ्वीको गहिराइ')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: The 4 Layers' : '२. अन्वेषण: ४ तहहरू')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Temperature & Pressure' : '३. अवलोकन: ताप र दबाब')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: The Geodynamo' : '४. बुझाइ: चुम्बकीय ढाल')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Geosphere Quiz' : '५. चुनौती: भू-तह प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: Deep Earth' : '1. खोज: पृथ्वीको गहिराइ')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: The 4 Layers' : '2. अन्वेषण: 4 तहहरू')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Temperature & Pressure' : '3. अवलोकन: ताप र दबाब')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: The Geodynamo' : '4. बुझाइ: चुम्बकीय ढाल')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Geosphere Quiz' : '5. चुनौती: भू-तह प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
               <p style={{ margin: 0, fontSize: '12px', color: '#64748b', lineHeight: '1.5' }}>
                 {stage === 'discover' && (lang === 'en'
                   ? 'Humans have only drilled ~12 km deep (Kola Superdeep Borehole). We know Earth’s deeper layers via seismic earthquake waves (P and S waves).'
-                  : 'मानवले अहिलेसम्म केवल १२ कि.मी. सम्म मात्र खन्न सकेको छ। भूकम्पका तरङ्गहरू (P र S तरङ्ग) को अध्ययनबाट हामीले पृथ्वीको भित्री तहहरू पत्ता लगाएका हौं।')}
+                  : 'मानवले अहिलेसम्म केवल 12 कि.मी. सम्म मात्र खन्न सकेको छ। भूकम्पका तरङ्गहरू (P र S तरङ्ग) को अध्ययनबाट हामीले पृथ्वीको भित्री तहहरू पत्ता लगाएका हौं।')}
                 {stage === 'explore' && (lang === 'en'
                   ? 'Click through each layer to compare thickness: Mantle makes up 84% of Earth’s volume, while Crust is as thin as an apple skin!'
-                  : 'तहहरू छान्नुहोस्: मेन्टलले पृथ्वीको कुल आयतनको ८४% ओगट्छ, जबकि हामी बस्ने क्रस्ट स्याउको बोक्रा जत्तिकै पातलो हुन्छ!')}
+                  : 'तहहरू छान्नुहोस्: मेन्टलले पृथ्वीको कुल आयतनको 84% ओगट्छ, जबकि हामी बस्ने क्रस्ट स्याउको बोक्रा जत्तिकै पातलो हुन्छ!')}
                 {stage === 'observe' && (lang === 'en'
                   ? 'Notice how temperature surges from 25°C on the surface to 5,500°C in the Inner Core—hotter than the surface of our Sun!'
-                  : 'सतहमा २५°C रहेको तापक्रम भित्री कोरमा पुग्दा ५,५००°C सम्म पुग्छ, जुन सूर्यको सतह जत्तिकै तातो हो!')}
+                  : 'सतहमा 25°C रहेको तापक्रम भित्री कोरमा पुग्दा 5,500°C सम्म पुग्छ, जुन सूर्यको सतह जत्तिकै तातो हो!')}
                 {stage === 'understand' && (lang === 'en'
                   ? 'The Outer Core is liquid iron churning in massive convection currents, which generates the geomagnetic field protecting life from harmful solar radiation.'
                   : 'बाह्य कोरमा रहेको पग्लिएको तरल फलामको घुमाइले पृथ्वीभरि चुम्बकीय ढाल बनाउँछ, जसले सूर्यको हानिकारक विकिरणबाट जीवन बचाउँछ।')}
@@ -498,9 +498,9 @@ export const EarthInternalStructureSim: React.FC<BaseSimulationProps> = ({
                     : 'पृथ्वीको कुन चाहिँ तह तरल फलामले बनेको हुन्छ र यसले चुम्बकीय क्षेत्र उत्पन्न गर्छ?'}
                 </p>
                 {[
-                  { id: 1, en: 'Outer Core (बाह्य कोर)', ne: 'बाह्य कोर (Outer Core)' },
-                  { id: 2, en: 'Crust (भू-सतह)', ne: 'भू-सतह (Crust)' },
-                  { id: 3, en: 'Inner Core (भित्री कोर)', ne: 'भित्री कोर (Inner Core)' },
+                  { id: 1, en: 'Outer Core', ne: 'बाह्य कोर (Outer Core)' },
+                  { id: 2, en: 'Crust', ne: 'भू-सतह (Crust)' },
+                  { id: 3, en: 'Inner Core', ne: 'भित्री कोर (Inner Core)' },
                 ].map(opt => (
                   <button
                     key={opt.id}

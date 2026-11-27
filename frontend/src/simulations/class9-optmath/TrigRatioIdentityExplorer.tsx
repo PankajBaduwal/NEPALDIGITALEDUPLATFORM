@@ -47,7 +47,7 @@ export const TrigRatioIdentityExplorer: React.FC<SimProps> = ({ onBackToLibrary,
         'बायाँ पक्ष (LHS) = sin² θ + cos² θ',
         '= (p / h)² + (b / h)² = p² / h² + b² / h²',
         '= (p² + b²) / h²',
-        'पाइथागोरस साध्य अनुसार p² + b² = h² राख्दा: = h² / h² = १ = दायाँ पक्ष (RHS) [प्रमाणित]',
+        'पाइथागोरस साध्य अनुसार p² + b² = h² राख्दा: = h² / h² = 1 = दायाँ पक्ष (RHS) [प्रमाणित]',
       ],
       stepsEn: [
         'LHS = sin² θ + cos² θ',
@@ -62,7 +62,7 @@ export const TrigRatioIdentityExplorer: React.FC<SimProps> = ({ onBackToLibrary,
         'बायाँ पक्ष (LHS) = sec² θ − tan² θ',
         '= (h / b)² − (p / b)² = h² / b² − p² / b²',
         '= (h² − p²) / b²',
-        'पाइथागोरस साध्य अनुसार h² − p² = b² राख्दा: = b² / b² = १ = दायाँ पक्ष (RHS) [प्रमाणित]',
+        'पाइथागोरस साध्य अनुसार h² − p² = b² राख्दा: = b² / b² = 1 = दायाँ पक्ष (RHS) [प्रमाणित]',
       ],
       stepsEn: [
         'LHS = sec² θ − tan² θ',
@@ -111,7 +111,7 @@ export const TrigRatioIdentityExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            1. {L('६ वटा अनुपातहरू (6 Ratios)', '6 Ratios')}
+            1. {L('6 pcs अनुपातहरू (6 Ratios)', '6 Ratios')}
           </button>
           <button
             onClick={() => setActiveTab('reciprocals')}
@@ -185,7 +185,7 @@ export const TrigRatioIdentityExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                 </div>
 
                 <div className="pt-2 border-t border-slate-200 flex justify-between font-mono font-bold text-emerald-800">
-                  <span>कर्ण (Hypotenuse, h):</span>
+                  <span>Hypotenuse (h):</span>
                   <span>{fmt(hypH.toFixed(2))} cm</span>
                 </div>
               </div>
@@ -374,7 +374,7 @@ export const TrigRatioIdentityExplorer: React.FC<SimProps> = ({ onBackToLibrary,
             {/* Proof Steps Container */}
             <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3 font-mono text-xs">
               <h5 className="font-bold text-indigo-900 text-sm">
-                प्रमाण (Proof of {currentProof.title}):
+                Proof ( {currentProof.title}):
               </h5>
               <div className="space-y-2">
                 {(isNe ? currentProof.stepsNp : currentProof.stepsEn).slice(0, proofStep + 1).map((step, i) => (

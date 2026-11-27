@@ -27,8 +27,8 @@ export const indicesCfg: LabCfg = {
     if (i === 2) return choice(`${b}^${m} × ${b}^${n} = ?`, `${b}^${m} × ${b}^${n} = ?`, `${b}^${m + n}`, [`${b}^${m * n}`, `${b * b}^${m + n}`, `${b}^${Math.abs(m - n) || 1}`], i);
     if (i === 3) return choice(`${b}^${m + n} ÷ ${b}^${n} = ?`, `${b}^${m + n} ÷ ${b}^${n} = ?`, `${b}^${m}`, [`${b}^${m + 2 * n}`, `${b}^${m * n}`, `1^${m}`], i);
     if (i === 4) return choice(`(${b}^${m})^${n} = ?`, `(${b}^${m})^${n} = ?`, `${b}^${m * n}`, [`${b}^${m + n}`, `${b}^${m ** n}`, `${b * n}^${m}`], i);
-    if (i === 5) return choice(`${b}⁰ = ?`, `${b}⁰ = ?`, '1', ['0', String(b), 'परिभाषित छैन | undefined'], i);
-    if (i === 6) return numChoice(`१०^${n} मा कतिवटा शून्य हुन्छन्?`, `How many zeros are in 10^${n}?`, n, i, [1, -1, 2, 10, -2], 1);
+    if (i === 5) return choice(`${b}⁰ = ?`, `${b}⁰ = ?`, '1', ['0', String(b), 'undefined'], i);
+    if (i === 6) return numChoice(`10^${n} मा कतिवटा शून्य हुन्छन्?`, `How many zeros are in 10^${n}?`, n, i, [1, -1, 2, 10, -2], 1);
     return choice(`${b}×${b}×${b}×${b} लाई घाताङ्कमा लेख्दा?`, `Write ${b}×${b}×${b}×${b} using an index`, `${b}^4`, [`${b}^3`, `4^${b}`, `${b}×4`], i);
   },
 };
@@ -122,8 +122,8 @@ export const inequalityCfg: LabCfg = {
   goal: () => { const ty = rnd(0, 3), k = rnd(-4, 8); const t = ty < 2 ? k + 2 : k - 2; return { p: { ty, k, t }, np: `x ${INEQ[ty].s} ${k} बनाई ${t} हल हुने बनाऔँ`, en: `Set x ${INEQ[ty].s} ${k} so that ${t} is a solution`, start: { ty: (ty + 1) % 4, k: 0, t: 0 } }; },
   quiz: (i) => {
     const ty = rnd(0, 3), k = rnd(-3, 8); const t = rnd(k - 3, k + 3); const ok = holds(t, k, ty);
-    if (i < 3) return choice(`x ${INEQ[ty].s} ${k} मा ${t} हल हो?`, `Is ${t} a solution of x ${INEQ[ty].s} ${k}?`, ok ? 'हो | Yes' : 'होइन | No', [ok ? 'होइन | No' : 'हो | Yes'], i, { ty, k, t });
-    if (i === 3) return choice('रेखामा भरिएको बिन्दुले के जनाउँछ?', 'What does a filled dot on the line mean?', 'k समावेश | k is included', ['k समावेश छैन | k is not included', 'सङ्ख्या ऋणात्मक | the number is negative'], i, { ty: 1, k, t: k });
+    if (i < 3) return choice(`x ${INEQ[ty].s} ${k} मा ${t} हल हो?`, `Is ${t} a solution of x ${INEQ[ty].s} ${k}?`, ok ? 'Yes' : 'No', [ok ? 'No' : 'Yes'], i, { ty, k, t });
+    if (i === 3) return choice('रेखामा भरिएको बिन्दुले के जनाउँछ?', 'What does a filled dot on the line mean?', 'k is included', ['k is not included', 'the number is negative'], i, { ty: 1, k, t: k });
     if (i === 4) return choice(`तल देखाइएको असमानता कुन हो?`, 'Which inequality is shown on the line?', `x ${INEQ[ty].s} ${k}`, INEQ.filter((_x, j) => j !== ty).map((x) => `x ${x.s} ${k}`), i, { ty, k, t });
     if (i === 5) return numChoice(`x > ${k} मा सबैभन्दा सानो पूर्ण सङ्ख्या कति?`, `Smallest whole-number solution of x > ${k}?`, k + 1, i, [1, -1, 2, -2, 0], -20, '', { ty: 0, k, t: k + 1 });
     if (i === 6) return numChoice(`x ≤ ${k} मा सबैभन्दा ठूलो पूर्ण सङ्ख्या कति?`, `Largest whole-number solution of x ≤ ${k}?`, k, i, [1, -1, 2, -2, 0], -20, '', { ty: 3, k, t: k });
@@ -144,7 +144,7 @@ export const graphCfg: LabCfg = {
     for (let x = 0; x <= 5; x++) { const y = p.m * x + p.c; rod(g, [X(x), Y(y), 0], [X(x + 1), Y(p.m * (x + 1) + p.c), 0], '#ec4899', 0.1); disc(g, 0.28, '#f59e0b', X(x), Y(y), 0); tag(g, `(${x}, ${y})`, X(x) + 0.2, Y(y) + 0.6, 0, 1.7, { px: 40, w: 192, h: 64 }); }
     tag(g, `y = ${p.m}x + ${p.c}`, 3.5, 9, 0, 4.4, { px: 62, w: 460, h: 96, bg: '#fff', border: '#ec4899' }); void lang;
   },
-  info: (p) => bi(`y = ${p.m}x + ${p.c}\nx = 0,1,2,3 हुँदा y = ${[0, 1, 2, 3].map((x) => p.m * x + p.c).join(', ')}\nx १ ले बढ्दा y ${p.m} ले बढ्छ`, `y = ${p.m}x + ${p.c}\nWhen x = 0,1,2,3, y = ${[0, 1, 2, 3].map((x) => p.m * x + p.c).join(', ')}\nEvery time x goes up by 1, y goes up by ${p.m}`),
+  info: (p) => bi(`y = ${p.m}x + ${p.c}\nx = 0,1,2,3 हुँदा y = ${[0, 1, 2, 3].map((x) => p.m * x + p.c).join(', ')}\nx 1 ले बढ्दा y ${p.m} ले बढ्छ`, `y = ${p.m}x + ${p.c}\nWhen x = 0,1,2,3, y = ${[0, 1, 2, 3].map((x) => p.m * x + p.c).join(', ')}\nEvery time x goes up by 1, y goes up by ${p.m}`),
   tip: bi('समीकरणका बिन्दु ग्राफमा राखेर सिधा रेखा बन्छ हेरौँ', 'Plot the points of the equation: they make a straight line'),
   goal: () => { const m = rnd(1, 3), c = rnd(0, 4); return { p: { m, c }, np: `(0, ${c}) र (1, ${m + c}) हुने रेखा बनाऔँ`, en: `Make the line through (0, ${c}) and (1, ${m + c})`, start: { m: 1, c: 0 } }; },
   quiz: (i) => {
@@ -152,8 +152,8 @@ export const graphCfg: LabCfg = {
     if (i < 3) return numChoice(`y = ${m}x + ${c} मा x = ${x} हुँदा y = ?`, `In y = ${m}x + ${c}, y = ? when x = ${x}`, m * x + c, i, [1, -1, m, c, 2], 0, '', { m, c });
     if (i < 5) return numChoice(`y = ${m}x + ${c} मा y = ${m * x + c} हुँदा x = ?`, `In y = ${m}x + ${c}, x = ? when y = ${m * x + c}`, x, i, [1, -1, 2, m, 3], 0, '', { m, c });
     if (i === 5) return choice(`x = 0 हुँदा y = ${c} भए रेखाले y-अक्षलाई कहाँ काट्छ?`, `At x = 0, y = ${c}. Where does the line cut the y-axis?`, `(0, ${c})`, [`(${c}, 0)`, `(0, ${c + 1})`, `(${c + 1}, ${c})`], i, { m, c });
-    if (i === 6) return choice(`x १ ले बढ्दा y ${m} ले बढ्छ भने समीकरण?`, `y goes up by ${m} each time x goes up by 1. Which equation?`, `y = ${m}x + ${c}`, [`y = x + ${m}`, `y = ${m + c}x`, `y = ${c}x + ${m}`], i, { m, c });
-    return choice('y = 2x + 1 को ग्राफ कस्तो हुन्छ?', 'The graph of y = 2x + 1 is…', 'सिधा रेखा | a straight line', ['वक्र रेखा | a curve', 'वृत्त | a circle'], i, { m: 2, c: 1 });
+    if (i === 6) return choice(`x 1 ले बढ्दा y ${m} ले बढ्छ भने समीकरण?`, `y goes up by ${m} each time x goes up by 1. Which equation?`, `y = ${m}x + ${c}`, [`y = x + ${m}`, `y = ${m + c}x`, `y = ${c}x + ${m}`], i, { m, c });
+    return choice('y = 2x + 1 को ग्राफ कस्तो हुन्छ?', 'The graph of y = 2x + 1 is…', 'a straight line', ['a curve', 'a circle'], i, { m: 2, c: 1 });
   },
 };
 export const GraphLab6 = makeLab(graphCfg);

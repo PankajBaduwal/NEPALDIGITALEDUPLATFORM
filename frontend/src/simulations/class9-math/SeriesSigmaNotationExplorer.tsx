@@ -16,7 +16,7 @@ interface SigmaPreset {
 const SIGMA_PRESETS: SigmaPreset[] = [
   {
     id: 'linear1',
-    titleNp: 'Σ (२i + ३) — पाठ्यपुस्तक उदाहरण',
+    titleNp: 'Σ (2i + 3) — पाठ्यपुस्तक उदाहरण',
     titleEn: 'Σ (2i + 3) — Textbook Example',
     formulaStr: '2i + 3',
     fn: (i) => 2 * i + 3,
@@ -34,7 +34,7 @@ const SIGMA_PRESETS: SigmaPreset[] = [
   },
   {
     id: 'linear2',
-    titleNp: 'Σ (३i - १) — ३ को फरक भएको श्रेणी',
+    titleNp: 'Σ (3i - 1) — 3 को फरक भएको श्रेणी',
     titleEn: 'Σ (3i - 1) — Linear series',
     formulaStr: '3i - 1',
     fn: (i) => 3 * i - 1,
@@ -43,7 +43,7 @@ const SIGMA_PRESETS: SigmaPreset[] = [
   },
   {
     id: 'powers',
-    titleNp: 'Σ २ⁱ — २ को घातांक श्रेणी',
+    titleNp: 'Σ 2ⁱ — 2 को घातांक श्रेणी',
     titleEn: 'Σ 2ⁱ — Powers of 2',
     formulaStr: '2ⁱ',
     fn: (i) => Math.pow(2, i),
@@ -57,10 +57,10 @@ const QUIZ_QUESTIONS = [
     np: 'अनुक्रमका पदहरूलाई जोड चिन्ह (+) ले जोडेर लेखिएको गणितीय अभिव्यक्तिलाई के भनिन्छ?',
     en: 'What is a mathematical expression called when terms of a sequence are connected by plus (+) signs?',
     options: [
-      { key: 'A', label: 'श्रेणी (Series)' },
-      { key: 'B', label: 'अनुक्रम (Sequence)' },
-      { key: 'C', label: 'समीकरण (Equation)' },
-      { key: 'D', label: 'भिन्न (Fraction)' },
+      { key: 'A', label: 'Series' },
+      { key: 'B', label: 'Sequence' },
+      { key: 'C', label: 'Equation' },
+      { key: 'D', label: 'Fraction' },
     ],
     answer: 'A',
   },
@@ -68,32 +68,32 @@ const QUIZ_QUESTIONS = [
     np: 'ग्रीक अक्षर सिग्मा (Σ - Sigma) ले गणितमा कुन क्रियालाई जनाउँछ?',
     en: 'What mathematical operation does the Greek letter Sigma (Σ) represent?',
     options: [
-      { key: 'A', label: 'जोडफल (Summation)' },
-      { key: 'B', label: 'गुणनफल (Product)' },
-      { key: 'C', label: 'भागफल (Division)' },
-      { key: 'D', label: 'वर्गमूल (Square root)' },
+      { key: 'A', label: 'Summation' },
+      { key: 'B', label: 'Product' },
+      { key: 'C', label: 'Division' },
+      { key: 'D', label: 'Square root' },
     ],
     answer: 'A',
   },
   {
-    np: 'Σ (i = १ देखि ३ सम्म) २i को मान कति हुन्छ?',
+    np: 'Σ (i = 1 देखि 3 सम्म) 2i को मान कति हुन्छ?',
     en: 'What is the evaluated sum of Σ (from i = 1 to 3) of 2i?',
     options: [
-      { key: 'A', label: '६' },
-      { key: 'B', label: '१२ (२×१ + २×२ + २×३ = २ + ४ + ६ = १२)' },
-      { key: 'C', label: '१४' },
-      { key: 'D', label: '८' },
+      { key: 'A', label: '6' },
+      { key: 'B', label: '12 (2×1 + 2×2 + 2×3 = 2 + 4 + 6 = 12)' },
+      { key: 'C', label: '14' },
+      { key: 'D', label: '8' },
     ],
     answer: 'B',
   },
   {
-    np: 'श्रेणी १ + ३ + ५ + ७ + ९ लाई सिग्मा सङ्केतमा कसरी लेखिन्छ?',
+    np: 'श्रेणी 1 + 3 + 5 + 7 + 9 लाई सिग्मा सङ्केतमा कसरी लेखिन्छ?',
     en: 'How is the series 1 + 3 + 5 + 7 + 9 expressed in Sigma notation?',
     options: [
-      { key: 'A', label: 'Σ (i = १ देखि ५) (२i - १)' },
-      { key: 'B', label: 'Σ (i = १ देखि ५) २i' },
-      { key: 'C', label: 'Σ (i = १ देखि ५) i²' },
-      { key: 'D', label: 'Σ (i = १ देखि ९) i' },
+      { key: 'A', label: 'Σ (i = 1 to 5) (2i - 1)' },
+      { key: 'B', label: 'Σ (i = 1 to 5) 2i' },
+      { key: 'C', label: 'Σ (i = 1 to 5) i²' },
+      { key: 'D', label: 'Σ (i = 1 to 9) i' },
     ],
     answer: 'A',
   },
@@ -288,12 +288,12 @@ export const SeriesSigmaNotationExplorer: React.FC<{
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <strong className="text-blue-600 dark:text-blue-400">{L('अनुक्रम (Sequence):', 'Sequence:')}</strong>
+                  <strong className="text-blue-600 dark:text-blue-400">{L('Sequence:', 'Sequence:')}</strong>
                   <div className="font-mono mt-0.5">{terms.map((t) => t.val).join(', ')}</div>
                   <div className="text-gray-500 text-[10px] mt-0.5">{L('संख्याहरूको अल्पविराम (,) ले छुट्याइएको सूची', 'Ordered list separated by commas')}</div>
                 </div>
                 <div>
-                  <strong className="text-purple-600 dark:text-purple-400">{L('श्रेणी (Series):', 'Series:')}</strong>
+                  <strong className="text-purple-600 dark:text-purple-400">{L('Series:', 'Series:')}</strong>
                   <div className="font-mono mt-0.5">{terms.map((t) => t.val).join(' + ')}</div>
                   <div className="text-gray-500 text-[10px] mt-0.5">{L('अनुक्रमका पदहरूलाई जोड चिन्ह (+) ले जोडेको रूप', 'Indicated sum of the terms')}</div>
                 </div>

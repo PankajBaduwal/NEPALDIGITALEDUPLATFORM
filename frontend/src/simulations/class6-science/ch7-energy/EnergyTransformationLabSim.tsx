@@ -1,7 +1,7 @@
 /**
  * EnergyTransformationLabSim.tsx
- * Simulation 20: 2D Energy Transformation Laboratory (शक्ति रूपान्तरण प्रयोगशाला)
- * Grade 6 Science • Unit 7: Energy in Daily Life (दैनिक जीवनमा शक्ति)
+ * Simulation 20: 2D Energy Transformation Laboratory
+ * Grade 6 Science • Unit 7: Energy in Daily Life
  *
  * 100% Native HTML5 Canvas 2D Interactive Energy Conversion Studio.
  * Features:
@@ -27,7 +27,7 @@ export const EnergyTransformationLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -389,7 +389,7 @@ export const EnergyTransformationLabSim: React.FC<BaseSimulationProps> = ({
       titleNepali="शक्ति रूपान्तरण चक्र प्रयोगशाला"
       chapterNumber={7}
       chapterTitle="Unit 7: Energy in Daily Life"
-      chapterTitleNepali="एकाइ ७: दैनिक जीवनमा शक्ति"
+      chapterTitleNepali="एकाइ 7: दैनिक जीवनमा शक्ति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -556,7 +556,7 @@ export const EnergyTransformationLabSim: React.FC<BaseSimulationProps> = ({
           {/* Energy Sources Selector */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. शक्तिको स्रोत छान्नुहोस् (Source)' : '1. Select Energy Source'}
+              {lang === 'ne' ? '1. शक्तिको स्रोत छान्नुहोस् (Source)' : '1. Select Energy Source'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
               {[
@@ -587,7 +587,7 @@ export const EnergyTransformationLabSim: React.FC<BaseSimulationProps> = ({
           {/* Energy Output Devices Selector */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '२. उपयोग गर्ने उपकरण (Output Device)' : '2. Select Output Device'}
+              {lang === 'ne' ? '2. उपयोग गर्ने उपकरण (Output Device)' : '2. Select Output Device'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
               {[
@@ -630,7 +630,7 @@ export const EnergyTransformationLabSim: React.FC<BaseSimulationProps> = ({
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '11px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ padding: '2px 6px', borderRadius: '4px', background: 'rgba(245, 158, 11, 0.2)', color: '#fbbf24', fontWeight: 700 }}>
-                  {lang === 'ne' ? '१. इनपुट' : '1. Input'}
+                  {lang === 'ne' ? '1. इनपुट' : '1. Input'}
                 </span>
                 <span style={{ color: '#0f172a' }}>
                   {source === 'sun' && (lang === 'ne' ? 'सूर्यको प्रकाश (Light Energy)' : 'Solar Light Photons')}
@@ -640,7 +640,7 @@ export const EnergyTransformationLabSim: React.FC<BaseSimulationProps> = ({
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ padding: '2px 6px', borderRadius: '4px', background: 'rgba(56, 189, 248, 0.2)', color: '#38bdf8', fontWeight: 700 }}>
-                  {lang === 'ne' ? '२. प्रसारण' : '2. Channel'}
+                  {lang === 'ne' ? '2. प्रसारण' : '2. Channel'}
                 </span>
                 <span style={{ color: '#475569' }}>
                   {lang === 'ne' ? 'विद्युत करेन्ट (Electrical Energy)' : 'Flowing Electrons (Electrical)'}
@@ -648,7 +648,7 @@ export const EnergyTransformationLabSim: React.FC<BaseSimulationProps> = ({
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ padding: '2px 6px', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', fontWeight: 700 }}>
-                  {lang === 'ne' ? '३. आउटपुट' : '3. Final'}
+                  {lang === 'ne' ? '3. आउटपुट' : '3. Final'}
                 </span>
                 <span style={{ color: '#4ade80', fontWeight: 700 }}>
                   {output === 'bulb' && (lang === 'ne' ? 'उज्यालो र न्यानो (Light & Heat)' : 'Photons & Thermal Glow')}

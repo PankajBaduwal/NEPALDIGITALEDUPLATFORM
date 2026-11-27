@@ -9,32 +9,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दिगंश (Bearing) मापन गर्दा कुन दिशाबाट कुन दिशातर्फ कोण नापिन्छ?',
     en: 'From which direction and in which way is bearing measured?',
     options: [
-      { key: 'A', label: 'उत्तर दिशाबाट घडीको दिशामा (Clockwise from North)' },
-      { key: 'B', label: 'पूर्व दिशाबाट घडीको विपरित दिशामा' },
-      { key: 'C', label: 'दक्षिण दिशाबाट घडीको दिशामा' },
-      { key: 'D', label: 'उत्तर दिशाबाट घडीको विपरित दिशामा' },
+      { key: 'A', label: 'Clockwise from North' },
+      { key: 'B', label: 'Anticlockwise from East' },
+      { key: 'C', label: 'Clockwise from South' },
+      { key: 'D', label: 'Anticlockwise from North' },
     ],
     answer: 'A',
   },
   {
-    np: 'पूर्व (East) दिशाको ३-अङ्कीय दिगंश (Three-figure bearing) कति हुन्छ?',
+    np: 'पूर्व (East) दिशाको 3-अङ्कीय दिगंश (Three-figure bearing) कति हुन्छ?',
     en: 'What is the three-figure bearing of East?',
     options: [
-      { key: 'A', label: '०९०° (090°)' },
-      { key: 'B', label: '९०° (90°)' },
-      { key: 'C', label: '१८०° (180°)' },
-      { key: 'D', label: '०४५° (045°)' },
+      { key: 'A', label: '090° (090°)' },
+      { key: 'B', label: '90° (90°)' },
+      { key: 'C', label: '180° (180°)' },
+      { key: 'D', label: '045° (045°)' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि बिन्दु A बाट B को दिगंश ०६०° (060°) भए, B बाट A को विपरित दिगंश (Reverse Bearing) कति हुन्छ?',
+    np: 'यदि बिन्दु A बाट B को दिगंश 060° (060°) भए, B बाट A को विपरित दिगंश (Reverse Bearing) कति हुन्छ?',
     en: 'If the bearing of B from A is 060°, what is the reverse bearing of A from B?',
     options: [
-      { key: 'A', label: '२४०° (060° + 180° = 240°)' },
-      { key: 'B', label: '१२०°' },
-      { key: 'C', label: '३००°' },
-      { key: 'D', label: '०६०°' },
+      { key: 'A', label: '240° (060° + 180° = 240°)' },
+      { key: 'B', label: '120°' },
+      { key: 'C', label: '300°' },
+      { key: 'D', label: '060°' },
     ],
     answer: 'A',
   },
@@ -42,10 +42,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दक्षिण-पश्चिम (South-West) दिशाको दिगंश कति हुन्छ?',
     en: 'What is the bearing of South-West (SW)?',
     options: [
-      { key: 'A', label: '२२५° (180° + 45° = 225°)' },
-      { key: 'B', label: '१३५°' },
-      { key: 'C', label: '३१५°' },
-      { key: 'D', label: '०४५°' },
+      { key: 'A', label: '225° (180° + 45° = 225°)' },
+      { key: 'B', label: '135°' },
+      { key: 'C', label: '315°' },
+      { key: 'D', label: '045°' },
     ],
     answer: 'A',
   },
@@ -170,7 +170,7 @@ export const InteractiveCompassBearingExplorer: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! उत्तर दिशाबाट घडीको दिशामा ३-अङ्क दिगंश (Three-digit Bearing) र विपरित दिगंशको हिसाब सिकौं!',
+        'नमस्ते! उत्तर दिशाबाट घडीको दिशामा 3-अङ्क दिगंश (Three-digit Bearing) र विपरित दिगंशको हिसाब सिकौं!',
         'Hello! Explore clockwise three-digit bearings from North and master reverse bearings!'
       )}
     >
@@ -183,7 +183,7 @@ export const InteractiveCompassBearingExplorer: React.FC<{
               activeTab === 'compass' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🧭 {L('१. कम्पास दिगंश अन्वेषक (Compass Explorer)', '1. Compass Explorer')}
+            🧭 {L('1. कम्पास दिगंश अन्वेषक (Compass Explorer)', '1. Compass Explorer')}
           </button>
           <button
             onClick={() => setActiveTab('two_point')}
@@ -191,7 +191,7 @@ export const InteractiveCompassBearingExplorer: React.FC<{
               activeTab === 'two_point' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            📍 {L('२. दुई स्थान बीचको दिगंश (Two-Point Bearing & Reverse)', '2. Point-to-Point Bearing')}
+            📍 {L('2. दुई स्थान बीचको दिगंश (Two-Point Bearing & Reverse)', '2. Point-to-Point Bearing')}
           </button>
           <button
             onClick={() => setActiveTab('challenge')}
@@ -199,7 +199,7 @@ export const InteractiveCompassBearingExplorer: React.FC<{
               activeTab === 'challenge' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🎯 {L('३. दिगंश चुनौती (Bearing Challenge)', '3. Bearing Challenge')}
+            🎯 {L('3. दिगंश चुनौती (Bearing Challenge)', '3. Bearing Challenge')}
           </button>
         </div>
 
@@ -258,16 +258,16 @@ export const InteractiveCompassBearingExplorer: React.FC<{
 
                 {/* Cardinal direction labels */}
                 <text x={180} y={35} fontSize="18" fontWeight="900" fill="#ef4444" textAnchor="middle">
-                  N (उत्तर)
+                  N
                 </text>
                 <text x={325} y={186} fontSize="16" fontWeight="bold" fill="#38bdf8" textAnchor="middle">
-                  E (पूर्व)
+                  E
                 </text>
                 <text x={180} y={335} fontSize="16" fontWeight="bold" fill="#38bdf8" textAnchor="middle">
-                  S (दक्षिण)
+                  S
                 </text>
                 <text x={35} y={186} fontSize="16" fontWeight="bold" fill="#38bdf8" textAnchor="middle">
-                  W (पश्चिम)
+                  W
                 </text>
 
                 {/* Clockwise angle sector arc from North (0 deg) to bearingAngle */}
@@ -331,9 +331,9 @@ export const InteractiveCompassBearingExplorer: React.FC<{
               {/* Angle slider control */}
               <div className="w-full mt-4 max-w-sm">
                 <div className="flex justify-between text-xs font-bold text-slate-600 mb-1">
-                  <span>०° (North)</span>
+                  <span>0° (North)</span>
                   <span className="text-amber-600 font-extrabold text-sm font-mono">{formatBearing(bearingAngle)}</span>
-                  <span>३६०°</span>
+                  <span>360°</span>
                 </div>
                 <input
                   type="range"
@@ -348,13 +348,13 @@ export const InteractiveCompassBearingExplorer: React.FC<{
               {/* Preset buttons */}
               <div className="flex flex-wrap justify-center gap-1.5 mt-3">
                 {[
-                  { label: '०४५° (NE)', deg: 45 },
-                  { label: '०९०° (E)', deg: 90 },
-                  { label: '१३५° (SE)', deg: 135 },
-                  { label: '१८०° (S)', deg: 180 },
-                  { label: '२२५° (SW)', deg: 225 },
-                  { label: '२७०° (W)', deg: 270 },
-                  { label: '३१५° (NW)', deg: 315 },
+                  { label: '045° (NE)', deg: 45 },
+                  { label: '090° (E)', deg: 90 },
+                  { label: '135° (SE)', deg: 135 },
+                  { label: '180° (S)', deg: 180 },
+                  { label: '225° (SW)', deg: 225 },
+                  { label: '270° (W)', deg: 270 },
+                  { label: '315° (NW)', deg: 315 },
                 ].map((item) => (
                   <button
                     key={item.deg}
@@ -394,7 +394,7 @@ export const InteractiveCompassBearingExplorer: React.FC<{
                 <div className="space-y-2 text-xs text-slate-700 bg-white/70 p-3 rounded-xl border border-amber-100">
                   <div className="flex justify-between">
                     <span className="font-semibold">{L('उत्तरबाट कोण (Angle from North):', 'Angle from North:')}</span>
-                    <span className="font-bold text-slate-900">{bearingAngle}° (घडीको दिशा)</span>
+                    <span className="font-bold text-slate-900">{bearingAngle}° (clockwise)</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-semibold">{L('विपरित दिगंश (Reverse Bearing):', 'Reverse Bearing:')}</span>
@@ -409,17 +409,17 @@ export const InteractiveCompassBearingExplorer: React.FC<{
               <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm text-xs space-y-2.5">
                 <h4 className="font-bold text-slate-800 text-sm flex items-center gap-1.5">
                   <Navigation className="w-4 h-4 text-indigo-600" />
-                  {L('दिगंशका मुख्य ३ नियमहरू (3 Key Rules of Bearing)', '3 Key Rules of Bearing')}
+                  {L('दिगंशका मुख्य 3 नियमहरू (3 Key Rules of Bearing)', '3 Key Rules of Bearing')}
                 </h4>
                 <div className="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1.5">
                   <p className="font-medium text-slate-800">
-                    <span className="font-bold text-indigo-600">१.</span> सधैं <b>उत्तर दिशा (North)</b> बाट सुरु गरिन्छ।
+                    <span className="font-bold text-indigo-600">1.</span> Always <b>North</b> start from.
                   </p>
                   <p className="font-medium text-slate-800">
-                    <span className="font-bold text-indigo-600">२.</span> सधैं <b>घडीको दिशा (Clockwise)</b> मा नापिन्छ।
+                    <span className="font-bold text-indigo-600">2.</span> Always <b>clockwise</b> measured
                   </p>
                   <p className="font-medium text-slate-800">
-                    <span className="font-bold text-indigo-600">३.</span> सधैं <b>३ अङ्क (Three Digits)</b> मा लेखिन्छ (जस्तै ३०° लाई <b>०३०°</b>)।
+                    <span className="font-bold text-indigo-600">3.</span> Always <b>3 digits</b> written (for example 30° as <b>030°</b>).
                   </p>
                 </div>
               </div>
@@ -433,9 +433,9 @@ export const InteractiveCompassBearingExplorer: React.FC<{
             {/* Interactive Canvas for point A and B */}
             <div className="lg:col-span-8 bg-white rounded-2xl shadow-lg p-4 border border-slate-200 flex flex-col items-center">
               <div className="w-full flex justify-between items-center text-xs font-bold text-slate-600 mb-2 px-2">
-                <span>{L('बिन्दु A (सुरुवात) वा B (गन्तव्य) लाई तान्नुहोस् (Drag Point A or B)', 'Drag Point A or Point B')}</span>
+                <span>{L('बिन्दु A वा B लाई तान्नुहोस् (Drag Point A or B)', 'Drag Point A or Point B')}</span>
                 <span className="bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded">
-                  दूरी: {distancePx} px
+                  Distance: {distancePx} px
                 </span>
               </div>
 
@@ -472,7 +472,7 @@ export const InteractiveCompassBearingExplorer: React.FC<{
                   markerEnd="url(#arrow-north)"
                 />
                 <text x={pointA.x + 8} y={pointA.y - 80} fontSize="13" fontWeight="900" fill="#ef4444">
-                  N (उत्तर)
+                  N
                 </text>
 
                 {/* North line at Point B (for reverse bearing) */}
@@ -487,7 +487,7 @@ export const InteractiveCompassBearingExplorer: React.FC<{
                   markerEnd="url(#arrow-north)"
                 />
                 <text x={pointB.x + 8} y={pointB.y - 60} fontSize="11" fontWeight="bold" fill="#ef4444">
-                  N (उत्तर)
+                  N
                 </text>
 
                 {/* Direct line from A to B */}
@@ -536,7 +536,7 @@ export const InteractiveCompassBearingExplorer: React.FC<{
                     A
                   </text>
                   <text x={pointA.x - 25} y={pointA.y + 28} fontSize="11" fontWeight="bold" fill="#60a5fa">
-                    सुरुवात (Start A)
+                    Start (A)
                   </text>
                 </g>
 
@@ -550,7 +550,7 @@ export const InteractiveCompassBearingExplorer: React.FC<{
                     B
                   </text>
                   <text x={pointB.x - 30} y={pointB.y + 28} fontSize="11" fontWeight="bold" fill="#34d399">
-                    गन्तव्य (Target B)
+                    Destination (B)
                   </text>
                 </g>
               </svg>
@@ -561,35 +561,35 @@ export const InteractiveCompassBearingExplorer: React.FC<{
               {/* Forward Bearing Card */}
               <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 shadow-sm">
                 <span className="text-xs font-bold text-amber-800 uppercase tracking-wide">
-                  १. A बाट B को दिगंश (Bearing of B from A)
+                  1. Bearing of B from A
                 </span>
                 <div className="text-3xl font-extrabold text-amber-600 font-mono my-1">
                   {formatBearing(forwardBearing)}
                 </div>
                 <p className="text-xs text-amber-900">
-                  बिन्दु A को उत्तर दिशा रेखाबाट घडीको दिशामा नाप्दा।
+                  Measured clockwise from the north line at point A.
                 </p>
               </div>
 
               {/* Reverse Bearing Card */}
               <div className="bg-indigo-50 border border-indigo-200 rounded-2xl p-4 shadow-sm">
                 <span className="text-xs font-bold text-indigo-800 uppercase tracking-wide">
-                  २. B बाट A को विपरित दिगंश (Reverse Bearing of A from B)
+                  2. Reverse bearing of A from B
                 </span>
                 <div className="text-3xl font-extrabold text-indigo-600 font-mono my-1">
                   {formatBearing(reverseBearing)}
                 </div>
                 <div className="mt-2 text-xs text-indigo-950 bg-white/80 p-2.5 rounded-lg border border-indigo-200">
-                  <span className="font-bold">गणितीय हिसाब:</span>
+                  <span className="font-bold">Calculation:</span>
                   <div className="font-mono mt-1 font-semibold text-indigo-900">
                     {forwardBearing < 180 ? (
-                      <span>{formatBearing(forwardBearing)} + १८०° = {formatBearing(reverseBearing)}</span>
+                      <span>{formatBearing(forwardBearing)} + 180° = {formatBearing(reverseBearing)}</span>
                     ) : (
-                      <span>{formatBearing(forwardBearing)} - १८०° = {formatBearing(reverseBearing)}</span>
+                      <span>{formatBearing(forwardBearing)} - 180° = {formatBearing(reverseBearing)}</span>
                     )}
                   </div>
                   <div className="text-[11px] text-slate-600 mt-1">
-                    {forwardBearing < 180 ? '१८०° भन्दा सानो भएमा १८०° जोडिन्छ।' : '१८०° वा सोभन्दा ठूलो भएमा १८०° घटाइन्छ।'}
+                    {forwardBearing < 180 ? 'If it is less than 180°, add 180°.' : '180° वा सोभन्दा ठूलो भएमा 180° घटाइन्छ।'}
                   </div>
                 </div>
               </div>
@@ -614,7 +614,7 @@ export const InteractiveCompassBearingExplorer: React.FC<{
 
             <div className="flex flex-col items-center">
               <div className="text-3xl font-mono font-black text-indigo-700 bg-indigo-50 border border-indigo-200 px-6 py-2 rounded-xl mb-4">
-                तपाईंको कोण: {formatBearing(bearingAngle)}
+                Your angle: {formatBearing(bearingAngle)}
               </div>
 
               <input
@@ -661,7 +661,7 @@ export const InteractiveCompassBearingExplorer: React.FC<{
             )}
 
             <div className="text-center text-xs font-semibold text-slate-500">
-              सफल प्रयासहरू: <span className="text-amber-600 font-bold">{challengeScore}</span>
+              Successful attempts: <span className="text-amber-600 font-bold">{challengeScore}</span>
             </div>
           </div>
         )}

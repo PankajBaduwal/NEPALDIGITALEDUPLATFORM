@@ -99,7 +99,7 @@ export const VectorMagnitudeDirectionUnitLab: React.FC<SimProps> = ({ onBackToLi
         {activeTab !== 'challenge' && (
           <div className="bg-slate-50 border p-3 rounded-xl flex flex-wrap gap-4 items-center justify-between text-sm">
             <div className="flex items-center gap-2">
-              <span className="font-bold text-amber-700">X-कम्पोनेन्ट:</span>
+              <span className="font-bold text-amber-700">X-component:</span>
               <input
                 type="range"
                 min="-6"
@@ -112,7 +112,7 @@ export const VectorMagnitudeDirectionUnitLab: React.FC<SimProps> = ({ onBackToLi
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="font-bold text-emerald-700">Y-कम्पोनेन्ट:</span>
+              <span className="font-bold text-emerald-700">Y-component:</span>
               <input
                 type="range"
                 min="-6"
@@ -279,9 +279,9 @@ export const VectorMagnitudeDirectionUnitLab: React.FC<SimProps> = ({ onBackToLi
                 </div>
                 <div className="text-xs text-slate-500">
                   {quadrant === 'I' && L('पहिलो चरण: θ = α', 'Quadrant I: θ = α')}
-                  {quadrant === 'II' && L('दोस्रो चरण: θ = १८०° - α', 'Quadrant II: θ = 180° - α')}
-                  {quadrant === 'III' && L('तेस्रो चरण: θ = १८०° + α', 'Quadrant III: θ = 180° + α')}
-                  {quadrant === 'IV' && L('चौथो चरण: θ = ३६०° - α', 'Quadrant IV: θ = 360° - α')}
+                  {quadrant === 'II' && L('दोस्रो चरण: θ = 180° - α', 'Quadrant II: θ = 180° - α')}
+                  {quadrant === 'III' && L('तेस्रो चरण: θ = 180° + α', 'Quadrant III: θ = 180° + α')}
+                  {quadrant === 'IV' && L('चौथो चरण: θ = 360° - α', 'Quadrant IV: θ = 360° - α')}
                 </div>
               </div>
             </div>
@@ -329,7 +329,7 @@ export const VectorMagnitudeDirectionUnitLab: React.FC<SimProps> = ({ onBackToLi
                   strokeWidth={4}
                   markerEnd="url(#u-small)"
                 />
-                <text x={origin + uX * (scale * 2) + 8} y={origin - uY * (scale * 2) - 8} fill="#fbbf24" fontSize="12" fontWeight="bold">â (एकाइ १)</text>
+                <text x={origin + uX * (scale * 2) + 8} y={origin - uY * (scale * 2) - 8} fill="#fbbf24" fontSize="12" fontWeight="bold">â (unit 1)</text>
               </svg>
             </div>
 
@@ -338,7 +338,7 @@ export const VectorMagnitudeDirectionUnitLab: React.FC<SimProps> = ({ onBackToLi
                 <span className="font-bold">{L('एकाइ भेक्टर (Unit Vector):', 'Unit Vector Definition:')}</span>
                 <p className="mt-1">
                   {L(
-                    'परिमाण १ भएको भेक्टरलाई एकाइ भेक्टर (Unit Vector) भनिन्छ। a⃗ को दिशामा रहेको एकाइ भेक्टर â = a⃗ / |a⃗| हुन्छ। X-अक्षको एकाइ भेक्टर i⃗ = (1, 0) र Y-अक्षको j⃗ = (0, 1) हुन्छ।',
+                    'परिमाण 1 भएको भेक्टरलाई एकाइ भेक्टर (Unit Vector) भनिन्छ। a⃗ को दिशामा रहेको एकाइ भेक्टर â = a⃗ / |a⃗| हुन्छ। X-अक्षको एकाइ भेक्टर i⃗ = (1, 0) र Y-अक्षको j⃗ = (0, 1) हुन्छ।',
                     'A vector with magnitude 1 is a unit vector. The unit vector in the direction of a⃗ is â = a⃗ / |a⃗|. Along X-axis: i⃗ = (1, 0), along Y-axis: j⃗ = (0, 1).'
                   )}
                 </p>

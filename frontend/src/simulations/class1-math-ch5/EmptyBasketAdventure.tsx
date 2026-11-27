@@ -1,7 +1,7 @@
 /**
  * EmptyBasketAdventure.tsx
- * Simulation 02: Empty Basket Adventure (खाली टोकरी चिनौँ)
- * Class 1 Mathematics - Chapter 5: Zero (शून्य)
+ * Simulation 02: Empty Basket Adventure
+ * Class 1 Mathematics - Chapter 5: Zero
  * Nepal Digital Education Platform
  */
 
@@ -37,7 +37,7 @@ interface ContainerItem {
   capacity: number;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const NEP_NAMES = ['शून्य', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ'];
 const EN_NAMES = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
 
@@ -46,10 +46,10 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Navigation & Settings
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
-  // Active activity tab: 1 (Find Empty), 2 (Move In/Out), 3 (Match ०), 4 (Market Stall)
+  // Active activity tab: 1 (Find Empty), 2 (Move In/Out), 3 (Match 0), 4 (Market Stall)
   const [activeTab, setActiveTab] = useState<'FIND_EMPTY' | 'MOVE_OBJECTS' | 'MATCH_ZERO' | 'MARKET_STALL'>('FIND_EMPTY');
 
   // Overall Stars
@@ -61,7 +61,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
   const [emptyRoundIndex, setEmptyRoundIndex] = useState(0);
   const emptyChallenges = [
     {
-      promptNp: 'कुन टोकरी खाली छ? (शून्य स्याउ भएको टोकरी छान्नुहोस्)',
+      promptNp: 'कुन टोकरी खाली छ?',
       promptEn: 'Which basket is empty? (Select the basket with zero apples)',
       containers: [
         { id: 'c1', labelNp: 'टोकरी क', labelEn: 'Basket A', count: 3, icon: '🍎' },
@@ -71,7 +71,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
       correctId: 'c2',
     },
     {
-      promptNp: 'कुन गमलामा शून्य (०) फूल छ? (खाली गमला छान्नुहोस्)',
+      promptNp: 'कुन गमलामा शून्य (0) फूल छ?',
       promptEn: 'Which pot has zero (0) flowers? (Select the empty pot)',
       containers: [
         { id: 'p1', labelNp: 'गमला क (खाली)', labelEn: 'Pot A (Empty)', count: 0, icon: '🌸' },
@@ -81,7 +81,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
       correctId: 'p1',
     },
     {
-      promptNp: 'कुन ट्रेमा शून्य (०) आँप छन्? (खाली ट्रे छान्नुहोस्)',
+      promptNp: 'कुन ट्रेमा शून्य (0) आँप छन्?',
       promptEn: 'Which tray has zero (0) mangoes? (Select the empty tray)',
       containers: [
         { id: 't1', labelNp: 'ट्रे क', labelEn: 'Tray A', count: 5, icon: '🥭' },
@@ -91,7 +91,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
       correctId: 't3',
     },
     {
-      promptNp: 'कुन बक्समा शून्य (०) खेलौना छन्? (खाली बक्स छान्नुहोस्)',
+      promptNp: 'कुन बक्समा शून्य (0) खेलौना छन्?',
       promptEn: 'Which box has zero (0) toys? (Select the empty box)',
       containers: [
         { id: 'b1', labelNp: 'बक्स क', labelEn: 'Box A', count: 3, icon: '🧸' },
@@ -111,15 +111,15 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
   const [moveItemType, setMoveItemType] = useState<'APPLE' | 'FLOWER' | 'BALL'>('APPLE');
 
   // ==========================================
-  // TAB 3: MATCH EMPTY GROUP WITH ०
+  // TAB 3: MATCH EMPTY GROUP WITH 0
   // ==========================================
   const [matchSelectedPair, setMatchSelectedPair] = useState<string | null>(null);
   const [matchDoneIds, setMatchDoneIds] = useState<string[]>([]);
   const matchCards = [
-    { id: 'M1', labelNp: 'खाली टोकरी', labelEn: 'Empty Basket', count: 0, icon: '🧺', targetNumeral: '०' },
-    { id: 'M2', labelNp: '३ स्याउ भएको टोकरी', labelEn: '3 Apples', count: 3, icon: '🍎🍎🍎', targetNumeral: '३' },
-    { id: 'M3', labelNp: 'खाली गमला', labelEn: 'Empty Pot', count: 0, icon: '🪴', targetNumeral: '०' },
-    { id: 'M4', labelNp: '५ फूल भएको गमला', labelEn: '5 Flowers', count: 5, icon: '🌸🌸🌸🌸🌸', targetNumeral: '५' },
+    { id: 'M1', labelNp: 'खाली टोकरी', labelEn: 'Empty Basket', count: 0, icon: '🧺', targetNumeral: '0' },
+    { id: 'M2', labelNp: '3 स्याउ भएको टोकरी', labelEn: '3 Apples', count: 3, icon: '🍎🍎🍎', targetNumeral: '3' },
+    { id: 'M3', labelNp: 'खाली गमला', labelEn: 'Empty Pot', count: 0, icon: '🪴', targetNumeral: '0' },
+    { id: 'M4', labelNp: '5 फूल भएको गमला', labelEn: '5 Flowers', count: 5, icon: '🌸🌸🌸🌸🌸', targetNumeral: '5' },
   ];
 
   // Helper formatting
@@ -191,7 +191,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
       setStars(ns);
       saveProgress(ns);
       speakText(
-        'अति उत्तम! यो टोकरी खाली छ। यसमा शून्य (०) वस्तु छन्।',
+        'अति उत्तम! यो टोकरी खाली छ। यसमा शून्य (0) वस्तु छन्।',
         'Excellent! This container is empty. There are zero (0) objects.'
       );
     } else {
@@ -224,7 +224,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
       setStars(ns);
       saveProgress(ns);
       speakText(
-        'टोकरी पूर्ण रूपमा खाली भयो! गणना: शून्य (०)',
+        'टोकरी पूर्ण रूपमा खाली भयो! गणना: शून्य (0)',
         'Container is completely empty! Count: Zero (0)'
       );
     } else {
@@ -232,7 +232,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
     }
   };
 
-  // Tab 3 Handler: Match with Numeral ०
+  // Tab 3 Handler: Match with Numeral 0
   const handleMatchCard = (card: typeof matchCards[0]) => {
     if (matchDoneIds.includes(card.id)) return;
     playTone(587.33, 'triangle', 0.25);
@@ -242,7 +242,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
 
     if (card.count === 0) {
       speakText(
-        `सही मिल्यो! ${card.labelNp} सङ्ख्या ० (शून्य) सँग जोडिन्छ।`,
+        `सही मिल्यो! ${card.labelNp} सङ्ख्या 0 सँग जोडिन्छ।`,
         `Matched! ${card.labelEn} connects to numeral 0 (Zero).`
       );
     } else {
@@ -311,11 +311,11 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
 
           <div>
             <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
-              कक्षा १ • गणित • अध्याय ५ : शून्य (Zero)
+              Class 1 • Maths • Chapter 5 : Zero
             </div>
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
-                ? 'सिमुलेसन ०२: खाली टोकरी चिनौँ (Empty Basket Adventure)'
+                ? 'सिमुलेसन 02: खाली टोकरी चिनौँ (Empty Basket Adventure)'
                 : 'Simulation 02: Empty Basket Adventure'}
             </h1>
           </div>
@@ -342,21 +342,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
           </div>
 
           {/* Language Switch */}
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            style={{
-              padding: '6px 12px',
-              background: '#FFFFFF',
-              border: '1px solid #DCE5DE',
-              borderRadius: '8px',
-              color: '#26332E',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '13px',
-            }}
-          >
-            {language === 'np' ? 'नेपाली | EN' : 'EN | नेपाली'}
-          </button>
+          
 
           {/* Sound Toggle */}
           <button
@@ -387,9 +373,9 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
         }}
       >
         {[
-          { key: 'FIND_EMPTY', np: '१. खाली भाँडो छान्नुहोस् (Find Empty)', en: '1. Find Empty' },
-          { key: 'MOVE_OBJECTS', np: '२. वस्तुहरू राख्ने र निकाल्ने (Move In/Out)', en: '2. Move In/Out' },
-          { key: 'MATCH_ZERO', np: '३. शून्य (०) जोडी मिलाऔँ (Match 0)', en: '3. Match Zero' },
+          { key: 'FIND_EMPTY', np: '1. खाली भाँडो छान्नुहोस् (Find Empty)', en: '1. Find Empty' },
+          { key: 'MOVE_OBJECTS', np: '2. वस्तुहरू राख्ने र निकाल्ने (Move In/Out)', en: '2. Move In/Out' },
+          { key: 'MATCH_ZERO', np: '3. शून्य (0) जोडी मिलाऔँ (Match 0)', en: '3. Match Zero' },
         ].map((tab) => {
           const isSelected = activeTab === tab.key;
           return (
@@ -512,7 +498,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                             fontStyle: 'italic',
                           }}
                         >
-                          {language === 'np' ? 'खाली (०)' : 'Empty (0)'}
+                          {language === 'np' ? 'खाली (0)' : 'Empty (0)'}
                         </div>
                       ) : (
                         <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', justifyContent: 'center', padding: '8px' }}>
@@ -547,7 +533,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                 >
                   {emptyFeedback
                     ? language === 'np'
-                      ? 'शानदार! यो भाँडो खाली छ, अर्थात् यसमा शून्य (०) वस्तु छन्!'
+                      ? 'शानदार! यो भाँडो खाली छ, अर्थात् यसमा शून्य (0) वस्तु छन्!'
                       : 'Splendid! This container is empty, meaning zero (0) objects!'
                     : language === 'np'
                     ? 'पुनः प्रयास गर्नुहोस्! खाली भाँडो छान्नुहोस्।'
@@ -595,7 +581,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
             <div style={{ textAlign: 'center' }}>
               <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 900, color: '#26332E' }}>
                 {language === 'np'
-                  ? 'वस्तुहरू निकाल्दै टोकरीलाई खाली (०) बनाऔँ'
+                  ? 'वस्तुहरू निकाल्दै टोकरीलाई खाली (0) बनाऔँ'
                   : 'Remove objects until the basket becomes empty (0)'}
               </h2>
               <p style={{ margin: '6px 0 0', fontSize: '13px', color: '#26332E' }}>
@@ -650,7 +636,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                 {moveItemCount === 0 ? (
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '42px', fontWeight: 900, color: '#26332E' }}>
-                      {language === 'np' ? '०' : '0'}
+                      {language === 'np' ? '0' : '0'}
                     </div>
                     <div style={{ fontSize: '12px', color: '#26332E', fontWeight: 800 }}>
                       {language === 'np' ? 'कुनै वस्तु छैन (Zero)' : 'No objects (Zero)'}
@@ -681,7 +667,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                     opacity: moveItemCount === 0 ? 0.4 : 1,
                   }}
                 >
-                  {language === 'np' ? '- १ स्याउ निकाल्नुहोस्' : '- Remove 1'}
+                  {language === 'np' ? '- 1 स्याउ निकाल्नुहोस्' : '- Remove 1'}
                 </button>
 
                 <button
@@ -698,7 +684,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                     opacity: moveItemCount >= 6 ? 0.4 : 1,
                   }}
                 >
-                  {language === 'np' ? '+ १ स्याउ थप्नुहोस्' : '+ Add 1'}
+                  {language === 'np' ? '+ 1 स्याउ थप्नुहोस्' : '+ Add 1'}
                 </button>
               </div>
             </div>
@@ -706,7 +692,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
         )}
 
         {/* ======================================================== */}
-        {/* TAB 3: MATCH EMPTY GROUP WITH NUMERAL ०                  */}
+        {/* TAB 3: MATCH EMPTY GROUP WITH NUMERAL 0                  */}
         {/* ======================================================== */}
         {activeTab === 'MATCH_ZERO' && (
           <div
@@ -721,7 +707,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
             <div style={{ textAlign: 'center' }}>
               <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 900, color: '#26332E' }}>
                 {language === 'np'
-                  ? 'खाली भाँडोलाई सङ्ख्या ० सँग मिलाऔँ'
+                  ? 'खाली भाँडोलाई सङ्ख्या 0 सँग मिलाऔँ'
                   : 'Match empty containers with numeral 0'}
               </h2>
               <p style={{ margin: '6px 0 0', fontSize: '13px', color: '#26332E' }}>
@@ -757,7 +743,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                           {language === 'np' ? card.labelNp : card.labelEn}
                         </div>
                         <div style={{ fontSize: '11px', color: '#26332E' }}>
-                          {card.count === 0 ? 'कुनै वस्तु छैन' : `${card.count} Items`}
+                          {card.count === 0 ? 'No items' : `${card.count} Items`}
                         </div>
                       </div>
                     </div>
@@ -791,7 +777,7 @@ export const EmptyBasketAdventure: React.FC<Props> = ({
                 <Trophy size={32} color="#fbbf24" />
                 <span style={{ fontWeight: 800, color: '#26332E', fontSize: '15px' }}>
                   {language === 'np'
-                    ? 'शानदार! सबै भाँडाहरू सही सङ्ख्यासँग मिले! (+३ ताराहरू)'
+                    ? 'शानदार! सबै भाँडाहरू सही सङ्ख्यासँग मिले!'
                     : 'Splendid! All containers matched successfully! (+3 Stars)'}
                 </span>
               </div>

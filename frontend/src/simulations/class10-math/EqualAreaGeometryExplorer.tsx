@@ -69,7 +69,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
   const [proofStep, setProofStep] = useState<number>(0);
   const proofSteps = [
     {
-      titleNp: 'साध्य १: एउटै आधार र उही समानान्तर रेखाहरू बीचका समानान्तर चतुर्भुजहरू क्षेत्रफलमा बराबर हुन्छन्।',
+      titleNp: 'साध्य 1: एउटै आधार र उही समानान्तर रेखाहरू बीचका समानान्तर चतुर्भुजहरू क्षेत्रफलमा बराबर हुन्छन्।',
       titleEn: 'Theorem 1: Parallelograms on the same base and between the same parallels are equal in area.',
       givenNp: 'दिइएको: स.च. ABCD र स.च. ABEF एउटै आधार AB र उही समानान्तर रेखाहरू AB र FC बीच रहेका छन्।',
       givenEn: 'Given: Parallelograms ABCD and ABEF on the same base AB and between same parallels AB || FC.',
@@ -77,35 +77,35 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
       toProveEn: 'To Prove: Area of Parallelogram ABCD = Area of Parallelogram ABEF.',
       steps: [
         {
-          statementNp: '१. ∆ADF र ∆BCE मा: (i) ∠ADF = ∠BCE (सङ्गत कोण, AD || BC), (ii) ∠AFD = ∠BEC (सङ्गत कोण, AF || BE), (iii) AD = BC (स.च. ABCD का सम्मुख भुजा)।',
+          statementNp: '1. ∆ADF र ∆BCE मा: (i) ∠ADF = ∠BCE, (ii) ∠AFD = ∠BEC, (iii) AD = BC।',
           statementEn: '1. In ∆ADF and ∆BCE: (i) ∠ADF = ∠BCE (corr. angles, AD || BC), (ii) ∠AFD = ∠BEC (corr. angles, AF || BE), (iii) AD = BC (opp. sides of ||gm ABCD).',
           reasonNp: 'कोण-कोण-भुजा (को.को.भु. वा को.भु.को.) अनुरूपता तथ्य।',
           reasonEn: 'Angle-Angle-Side (AAS) congruency axiom.',
           highlight: 'triangles',
         },
         {
-          statementNp: '२. ∆ADF ≅ ∆BCE',
+          statementNp: '2. ∆ADF ≅ ∆BCE',
           statementEn: '2. ∆ADF ≅ ∆BCE',
-          reasonNp: 'तथ्य १ अनुसार दुई त्रिभुजहरू अनुरूप भएकाले।',
+          reasonNp: 'तथ्य 1 अनुसार दुई त्रिभुजहरू अनुरूप भएकाले।',
           reasonEn: 'Triangles are congruent by statement 1.',
           highlight: 'triangles',
         },
         {
-          statementNp: '३. ∆ADF को क्षे. = ∆BCE को क्षे.',
+          statementNp: '3. ∆ADF को क्षे. = ∆BCE को क्षे.',
           statementEn: '3. Area of ∆ADF = Area of ∆BCE',
           reasonNp: 'अनुरूप त्रिभुजहरूको क्षेत्रफल बराबर हुन्छ।',
           reasonEn: 'Congruent triangles are equal in area.',
           highlight: 'triangles',
         },
         {
-          statementNp: '४. चतुर्भुज ABED को क्षे. + ∆ADF को क्षे. = चतुर्भुज ABED को क्षे. + ∆BCE को क्षे.',
+          statementNp: '4. चतुर्भुज ABED को क्षे. + ∆ADF को क्षे. = चतुर्भुज ABED को क्षे. + ∆BCE को क्षे.',
           statementEn: '4. Trapezium ABED + ∆ADF = Trapezium ABED + ∆BCE',
-          reasonNp: 'तथ्य ३ को दुवैतर्फ साझा भाग चतुर्भुज ABED को क्षेत्रफल जोड्दा।',
+          reasonNp: 'तथ्य 3 को दुवैतर्फ साझा भाग चतुर्भुज ABED को क्षेत्रफल जोड्दा।',
           reasonEn: 'Adding common area of Trapezium ABED to both sides of statement 3.',
           highlight: 'trapezium',
         },
         {
-          statementNp: '५. अतः स.च. ABEF को क्षे. = स.च. ABCD को क्षे. (प्रमाणित)',
+          statementNp: '5. अतः स.च. ABEF को क्षे. = स.च. ABCD को क्षे.',
           statementEn: '5. Therefore, Area of ||gm ABEF = Area of ||gm ABCD (Proved).',
           reasonNp: 'अखण्ड योग तथ्य अनुसार।',
           reasonEn: 'Whole part axiom (sum of parts equals whole).',
@@ -124,30 +124,30 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
   const quizQuestions = [
     {
       qEn: 'If a parallelogram and a triangle stand on the same base of 8 cm and between the same parallels of height 6 cm, what is the area of the triangle?',
-      qNp: 'यदि एउटा समानान्तर चतुर्भुज र त्रिभुज एउटै आधार ८ से.मी. र उही समानान्तर रेखाहरू बीच ६ से.मी. उचाइमा छन् भने त्रिभुजको क्षेत्रफल कति हुन्छ?',
+      qNp: 'यदि एउटा समानान्तर चतुर्भुज र त्रिभुज एउटै आधार 8 से.मी. र उही समानान्तर रेखाहरू बीच 6 से.मी. उचाइमा छन् भने त्रिभुजको क्षेत्रफल कति हुन्छ?',
       options: ['24 cm²', '48 cm²', '16 cm²', '32 cm²'],
-      optionsNp: ['२४ वर्ग से.मी.', '४८ वर्ग से.मी.', '१६ वर्ग से.मी.', '३२ वर्ग से.मी.'],
+      optionsNp: ['24 वर्ग से.मी.', '48 वर्ग से.मी.', '16 वर्ग से.मी.', '32 वर्ग से.मी.'],
       correct: 0, // 0.5 * 8 * 6 = 24
       hintEn: 'Area of triangle = 1/2 × base × height = 1/2 × 8 × 6 = 24 cm² (Half of parallelogram area = 48 cm²).',
-      hintNp: 'त्रिभुजको क्षेत्रफल = १/२ × आधार × उचाइ = १/२ × ८ × ६ = २४ वर्ग से.मी. (स.च. को क्षेत्रफल ४८ को आधा)।',
+      hintNp: 'त्रिभुजको क्षेत्रफल = 1/2 × आधार × उचाइ = 1/2 × 8 × 6 = 24 वर्ग से.मी.।',
     },
     {
       qEn: 'In ∆ABC, AD is a median bisecting BC at D. If Area of ∆ABC = 60 cm², what is the Area of ∆ABD?',
-      qNp: '∆ABC मा AD एउटा मध्यिका हो जसले BC लाई D मा बराबर भाग गर्छ। यदि ∆ABC को क्षेत्रफल ६० वर्ग से.मी. भए ∆ABD को क्षेत्रफल कति हुन्छ?',
+      qNp: '∆ABC मा AD एउटा मध्यिका हो जसले BC लाई D मा बराबर भाग गर्छ। यदि ∆ABC को क्षेत्रफल 60 वर्ग से.मी. भए ∆ABD को क्षेत्रफल कति हुन्छ?',
       options: ['30 cm²', '40 cm²', '20 cm²', '45 cm²'],
-      optionsNp: ['३० वर्ग से.मी.', '४० वर्ग से.मी.', '२० वर्ग से.मी.', '४५ वर्ग से.मी.'],
+      optionsNp: ['30 वर्ग से.मी.', '40 वर्ग से.मी.', '20 वर्ग से.मी.', '45 वर्ग से.मी.'],
       correct: 0,
       hintEn: 'A median of a triangle divides it into two triangles of equal area. Hence, Area(∆ABD) = 60 / 2 = 30 cm².',
-      hintNp: 'त्रिभुजको मध्यिकाले त्रिभुजलाई दुई बराबर क्षेत्रफल भएका त्रिभुजहरूमा विभाजन गर्छ। अतः क्षे(∆ABD) = ६० / २ = ३० वर्ग से.मी.।',
+      hintNp: 'त्रिभुजको मध्यिकाले त्रिभुजलाई दुई बराबर क्षेत्रफल भएका त्रिभुजहरूमा विभाजन गर्छ। अतः क्षे(∆ABD) = 60 / 2 = 30 वर्ग से.मी.।',
     },
     {
       qEn: 'Two parallelograms ABCD and ABEF stand on the same base AB. If Area of ABCD = 42 cm², what is Area of ABEF if both lie between AB and CD?',
-      qNp: 'दुई स.च. ABCD र ABEF एउटै आधार AB मा छन्। यदि दुवै AB र CD बीच रहेका छन् र ABCD को क्षेत्रफल ४२ वर्ग से.मी. छ भने ABEF को क्षेत्रफल कति हुन्छ?',
+      qNp: 'दुई स.च. ABCD र ABEF एउटै आधार AB मा छन्। यदि दुवै AB र CD बीच रहेका छन् र ABCD को क्षेत्रफल 42 वर्ग से.मी. छ भने ABEF को क्षेत्रफल कति हुन्छ?',
       options: ['42 cm²', '21 cm²', '84 cm²', '36 cm²'],
-      optionsNp: ['४२ वर्ग से.मी.', '२१ वर्ग से.मी.', '८४ वर्ग से.मी.', '३६ वर्ग से.मी.'],
+      optionsNp: ['42 वर्ग से.मी.', '21 वर्ग से.मी.', '84 वर्ग से.मी.', '36 वर्ग से.मी.'],
       correct: 0,
       hintEn: 'Theorem: Parallelograms on the same base and between the same parallels are equal in area. Therefore Area(ABEF) = 42 cm².',
-      hintNp: 'साध्य अनुसार: एउटै आधार र उही समानान्तर रेखाहरू बीचका समानान्तर चतुर्भुजहरू क्षेत्रफलमा बराबर हुन्छन्। अतः क्षे(ABEF) = ४२ वर्ग से.मी.।',
+      hintNp: 'साध्य अनुसार: एउटै आधार र उही समानान्तर रेखाहरू बीचका समानान्तर चतुर्भुजहरू क्षेत्रफलमा बराबर हुन्छन्। अतः क्षे(ABEF) = 42 वर्ग से.मी.।',
     },
     {
       qEn: 'If a vertex of a triangle moves along a line parallel to its base, what happens to its area?',
@@ -166,7 +166,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
       ],
       correct: 0,
       hintEn: 'Since base and perpendicular distance (height) between parallels remain unchanged, Area = 1/2 × b × h remains strictly constant.',
-      hintNp: 'आधार र समानान्तर रेखाहरू बीचको लम्ब उचाइ स्थिर रहने हुनाले १/२ × आधार × उचाइ को मान सधैँ समान रहन्छ।',
+      hintNp: 'आधार र समानान्तर रेखाहरू बीचको लम्ब उचाइ स्थिर रहने हुनाले 1/2 × आधार × उचाइ को मान सधैँ समान रहन्छ।',
     },
   ];
 
@@ -196,7 +196,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ १०: त्रिभुज र चतुर्भुजहरू (Triangles and Quadrilaterals) समान क्षेत्रफल प्रयोगशालामा स्वागत छ! यहाँ शीर्षबिन्दुहरू सार्नुहोस्, समानान्तर रेखाहरू बीच क्षेत्रफल बराबर हुने साध्यहरू प्रत्यक्ष जाँच्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 10: त्रिभुज र चतुर्भुजहरू (Triangles and Quadrilaterals) समान क्षेत्रफल प्रयोगशालामा स्वागत छ! यहाँ शीर्षबिन्दुहरू सार्नुहोस्, समानान्तर रेखाहरू बीच क्षेत्रफल बराबर हुने साध्यहरू प्रत्यक्ष जाँच्नुहोस्!',
         'Welcome to Grade 10 Unit 10: Equal-Area Geometry Explorer! Slide vertices along parallel lines, verify equal area theorems dynamically, and follow step-by-step geometric proofs!'
       )}
     >
@@ -204,9 +204,9 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 border-b pb-2">
           {[
-            { id: 'parallelograms', labelNp: 'क) स.च. हरूको समान क्षेत्रफल (साध्य १)', labelEn: 'A) Equal Parallelograms (Thm 1)' },
-            { id: 'triangleParallelogram', labelNp: 'ख) त्रिभुज र स.च. को सम्बन्ध (साध्य २)', labelEn: 'B) Triangle & Parallelogram (Thm 2)' },
-            { id: 'triangles', labelNp: 'ग) समान त्रिभुज तथा मध्यिका (साध्य ३)', labelEn: 'C) Equal Triangles & Median (Thm 3)' },
+            { id: 'parallelograms', labelNp: 'क) स.च. हरूको समान क्षेत्रफल (साध्य 1)', labelEn: 'A) Equal Parallelograms (Thm 1)' },
+            { id: 'triangleParallelogram', labelNp: 'ख) त्रिभुज र स.च. को सम्बन्ध (साध्य 2)', labelEn: 'B) Triangle & Parallelogram (Thm 2)' },
+            { id: 'triangles', labelNp: 'ग) समान त्रिभुज तथा मध्यिका (साध्य 3)', labelEn: 'C) Equal Triangles & Median (Thm 3)' },
             { id: 'proof', labelNp: 'घ) अन्तरक्रियात्मक सैद्धान्तिक प्रमाण', labelEn: 'D) Interactive Formal Proof' },
             { id: 'challenge', labelNp: 'ङ) अभ्यास चुनौती (Quiz)', labelEn: 'E) Practice Challenge' },
           ].map((tab) => (
@@ -235,7 +235,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
             {/* Visual SVG Canvas */}
             <div className="md:col-span-7 bg-[#142D4E] p-4 rounded-2xl flex flex-col items-center justify-between text-white shadow-md">
               <div className="w-full flex justify-between text-xs font-bold text-slate-300 mb-2">
-                <span>{L('साध्य १: एउटै आधार र उही समानान्तर रेखाहरू बीच', 'Theorem 1: Same Base & Same Parallels')}</span>
+                <span>{L('साध्य 1: एउटै आधार र उही समानान्तर रेखाहरू बीच', 'Theorem 1: Same Base & Same Parallels')}</span>
                 <span className="text-amber-300 font-mono">
                   {L('उचाइ h = ' + fmt(heightVal) + ' cm', 'Height h = ' + fmt(heightVal) + ' cm')}
                 </span>
@@ -319,8 +319,8 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
               </div>
 
               <div className="w-full flex justify-between text-xs text-slate-300 mt-2">
-                <span>स.च. ABCD को क्षे.: <strong className="text-teal-300">{fmt(areaP1)} cm²</strong></span>
-                <span>स.च. ABEF को क्षे.: <strong className="text-amber-300">{fmt(areaP2)} cm²</strong></span>
+                <span>Area of parallelogram ABCD: <strong className="text-teal-300">{fmt(areaP1)} cm²</strong></span>
+                <span>Area of parallelogram ABEF: <strong className="text-amber-300">{fmt(areaP2)} cm²</strong></span>
               </div>
             </div>
 
@@ -365,7 +365,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
 
                 <div>
                   <div className="flex justify-between text-xs font-semibold text-slate-700">
-                    <span>{L('स.च. १ (ABCD) को झुकाव (Top Shift):', '||gm 1 Inclination (Shift):')}</span>
+                    <span>{L('स.च. 1 (ABCD) को झुकाव (Top Shift):', '||gm 1 Inclination (Shift):')}</span>
                     <span className="text-teal-600 font-bold font-mono">+{fmt(p1Shift)} cm</span>
                   </div>
                   <input
@@ -381,7 +381,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
 
                 <div>
                   <div className="flex justify-between text-xs font-semibold text-slate-700">
-                    <span>{L('स.च. २ (ABEF) को झुकाव (Top Shift):', '||gm 2 Inclination (Shift):')}</span>
+                    <span>{L('स.च. 2 (ABEF) को झुकाव (Top Shift):', '||gm 2 Inclination (Shift):')}</span>
                     <span className="text-amber-600 font-bold font-mono">+{fmt(p2Shift)} cm</span>
                   </div>
                   <input
@@ -415,15 +415,15 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                 </span>
 
                 <div className="p-2.5 bg-white rounded-xl border text-xs font-mono space-y-1">
-                  <div>क्षे(ABCD) = आधार × उचाइ = {fmt(baseLen)} × {fmt(heightVal)} = <strong className="text-teal-700">{fmt(areaP1)} cm²</strong></div>
-                  <div>क्षे(ABEF) = आधार × उचाइ = {fmt(baseLen)} × {fmt(heightVal)} = <strong className="text-amber-700">{fmt(areaP2)} cm²</strong></div>
+                  <div>Area(ABCD) = base × height = {fmt(baseLen)} × {fmt(heightVal)} = <strong className="text-teal-700">{fmt(areaP1)} cm²</strong></div>
+                  <div>Area(ABEF) = base × height = {fmt(baseLen)} × {fmt(heightVal)} = <strong className="text-amber-700">{fmt(areaP2)} cm²</strong></div>
                   {showRectangleCompare && (
                     <div>क्षे(आयतः ABR₁R₂) = {fmt(baseLen)} × {fmt(heightVal)} = <strong className="text-pink-700">{fmt(areaRect)} cm²</strong></div>
                   )}
                 </div>
 
                 <div className="text-xs text-emerald-900 leading-relaxed font-sans">
-                  <strong>💡 {L('साध्य १ निष्कर्ष:', 'Theorem 1 Conclusion:')}</strong>{' '}
+                  <strong>💡 {L('साध्य 1 निष्कर्ष:', 'Theorem 1 Conclusion:')}</strong>{' '}
                   {L(
                     'समानान्तर चतुर्भुजको आकार र झुकाव जतिसुकै परिवर्तन भए पनि आधार र उचाइ स्थिर रहेसम्म तिनीहरूको क्षेत्रफल सधैँ बराबर हुन्छ।',
                     'Regardless of how much the shape or inclination changes, as long as base and height remain constant, their areas are strictly equal.'
@@ -441,7 +441,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
             <div className="md:col-span-7 bg-[#142D4E] p-4 rounded-2xl flex flex-col items-center justify-between text-white shadow-md">
               <div className="w-full flex justify-between text-xs font-bold text-slate-300 mb-2">
-                <span>{L('साध्य २: त्रिभुज र समानान्तर चतुर्भुजको क्षेत्रफल सम्बन्ध', 'Theorem 2: Triangle & Parallelogram Area')}</span>
+                <span>{L('साध्य 2: त्रिभुज र समानान्तर चतुर्भुजको क्षेत्रफल सम्बन्ध', 'Theorem 2: Triangle & Parallelogram Area')}</span>
                 <span className="text-amber-300 font-mono">
                   Area(∆) = ½ × Area(||gm)
                 </span>
@@ -498,8 +498,8 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
               </div>
 
               <div className="w-full flex justify-between text-xs text-slate-300 mt-2">
-                <span>स.च. ABCD को क्षे.: <strong className="text-teal-300">{fmt(areaP1)} cm²</strong></span>
-                <span>∆ ABE को क्षे.: <strong className="text-amber-300">{fmt(areaTriangle)} cm²</strong> (ठिक आधा)</span>
+                <span>Area of parallelogram ABCD: <strong className="text-teal-300">{fmt(areaP1)} cm²</strong></span>
+                <span>Area of ∆ ABE: <strong className="text-amber-300">{fmt(areaTriangle)} cm²</strong> (exactly half)</span>
               </div>
             </div>
 
@@ -532,20 +532,20 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
 
               <div className="p-4 bg-teal-50 border border-teal-300 rounded-2xl shadow-sm space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-teal-800 block">
-                  {L('साध्य २ सूत्र तथा विश्लेषण (Theorem 2 Verification)', 'Theorem 2 Verification')}
+                  {L('साध्य 2 सूत्र तथा विश्लेषण (Theorem 2 Verification)', 'Theorem 2 Verification')}
                 </span>
 
                 <div className="p-3 bg-white rounded-xl border text-xs font-mono space-y-1.5">
                   <div className="text-slate-600">
-                    १) स.च. ABCD को क्षे. = आधार × उचाइ = {fmt(baseLen)} × {fmt(heightVal)} ={' '}
+                    1) Area of parallelogram ABCD = base × height = {fmt(baseLen)} × {fmt(heightVal)} ={' '}
                     <strong className="text-teal-700">{fmt(areaP1)} cm²</strong>
                   </div>
                   <div className="text-slate-600">
-                    २) ∆ ABE को क्षे. = ½ × आधार × उचाइ = ½ × {fmt(baseLen)} × {fmt(heightVal)} ={' '}
+                    2) Area of ∆ ABE = ½ × base × height = ½ × {fmt(baseLen)} × {fmt(heightVal)} ={' '}
                     <strong className="text-amber-700">{fmt(areaTriangle)} cm²</strong>
                   </div>
                   <div className="text-xs font-bold text-teal-900 pt-1 border-t">
-                    ∆ ABE = ½ × स.च. ABCD = ½ × {fmt(areaP1)} = {fmt(areaTriangle)} cm²
+                    ∆ ABE = ½ × parallelogram ABCD = ½ × {fmt(areaP1)} = {fmt(areaTriangle)} cm²
                   </div>
                 </div>
               </div>
@@ -563,7 +563,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                 <span>
                   {showMedianView
                     ? L('मध्यिकाले त्रिभुजलाई दुई बराबर क्षेत्रफलमा बाँड्छ', 'Median bisects triangle into equal areas')
-                    : L('साध्य ३: एउटै आधार र उही समानान्तर रेखाहरू बीचका त्रिभुजहरू', 'Theorem 3: Triangles on Same Base')}
+                    : L('साध्य 3: एउटै आधार र उही समानान्तर रेखाहरू बीचका त्रिभुजहरू', 'Theorem 3: Triangles on Same Base')}
                 </span>
                 <span className="text-amber-300 font-mono">
                   Area(∆₁) = Area(∆₂)
@@ -662,7 +662,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                             <text x={ptC.x + 8} y={ptC.y + 16} fill="#FFFFFF" fontSize="12" fontWeight="bold">C</text>
 
                             <circle cx={ptM.x} cy={ptM.y} r={5} fill="#EF4444" />
-                            <text x={ptM.x} y={ptM.y + 18} textAnchor="middle" fill="#FCA5A5" fontSize="11" fontWeight="bold">M (मध्यबिन्दु)</text>
+                            <text x={ptM.x} y={ptM.y + 18} textAnchor="middle" fill="#FCA5A5" fontSize="11" fontWeight="bold">M</text>
 
                             {/* Equal base markings */}
                             <text x={(ptB.x + ptM.x) / 2} y={baseY + 14} textAnchor="middle" fill="#5EEAD4" fontSize="10">BM = ½ BC</text>
@@ -678,8 +678,8 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
               <div className="w-full flex justify-between text-xs text-slate-300 mt-2">
                 {!showMedianView ? (
                   <>
-                    <span>∆ ABC को क्षे.: <strong className="text-teal-300">{fmt(areaTriangle)} cm²</strong></span>
-                    <span>∆ ABD को क्षे.: <strong className="text-amber-300">{fmt(areaTriangle)} cm²</strong> (बराबर)</span>
+                    <span>Area of ∆ ABC: <strong className="text-teal-300">{fmt(areaTriangle)} cm²</strong></span>
+                    <span>Area of ∆ ABD: <strong className="text-amber-300">{fmt(areaTriangle)} cm²</strong> (equal)</span>
                   </>
                 ) : (
                   <>
@@ -700,7 +700,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                       !showMedianView ? 'bg-[#167C80] text-white border-[#167C80]' : 'bg-slate-50 text-slate-700'
                     }`}
                   >
-                    {L('साध्य ३: समान आधार', 'Thm 3: Same Base')}
+                    {L('साध्य 3: समान आधार', 'Thm 3: Same Base')}
                   </button>
                   <button
                     onClick={() => setShowMedianView(true)}
@@ -716,7 +716,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                   <>
                     <div>
                       <div className="flex justify-between text-xs font-semibold text-slate-700">
-                        <span>{L('त्रिभुज १ (∆ABC) को शीर्षबिन्दु C:', '∆ABC Apex C Position:')}</span>
+                        <span>{L('त्रिभुज 1 (∆ABC) को शीर्षबिन्दु C:', '∆ABC Apex C Position:')}</span>
                         <span className="text-teal-600 font-bold font-mono">+{fmt(tri1Shift)} cm</span>
                       </div>
                       <input
@@ -732,7 +732,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
 
                     <div>
                       <div className="flex justify-between text-xs font-semibold text-slate-700">
-                        <span>{L('त्रिभुज २ (∆ABD) को शीर्षबिन्दु D:', '∆ABD Apex D Position:')}</span>
+                        <span>{L('त्रिभुज 2 (∆ABD) को शीर्षबिन्दु D:', '∆ABD Apex D Position:')}</span>
                         <span className="text-amber-600 font-bold font-mono">+{fmt(tri2Shift)} cm</span>
                       </div>
                       <input
@@ -757,7 +757,7 @@ export const EqualAreaGeometryExplorer: React.FC<SimProps> = ({ onBackToLibrary,
               </div>
 
               <div className="p-4 bg-emerald-50 border border-emerald-300 rounded-2xl shadow-sm text-xs text-emerald-900 leading-relaxed space-y-1">
-                <strong>{L('💡 साध्य ३ निष्कर्ष (Theorem 3 Statement):', 'Theorem 3 Statement:')}</strong>
+                <strong>{L('💡 साध्य 3 निष्कर्ष (Theorem 3 Statement):', 'Theorem 3 Statement:')}</strong>
                 <p>
                   {L(
                     'एउटै आधार र उही समानान्तर रेखाहरू बीच बनेका त्रिभुजहरूको क्षेत्रफल सधैँ बराबर हुन्छ (∆ABC = ∆ABD = ½ × b × h)।',

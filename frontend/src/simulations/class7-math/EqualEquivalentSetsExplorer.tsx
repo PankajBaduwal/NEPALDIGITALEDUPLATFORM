@@ -1,6 +1,6 @@
 /**
  * EqualEquivalentSetsExplorer.tsx
- * Grade 7 Mathematics – Lesson 1: SET (समूह)
+ * Grade 7 Mathematics – Lesson 1: SET
  * Simulation 3: Equal and Equivalent Sets Explorer (2D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S.)
  */
@@ -32,7 +32,7 @@ const PRESETS: ComparePreset[] = [
     isEqual: false,
     isEquivalent: true,
     reasonEn: 'n(A) = 3 and n(B) = 3, so A ~ B (Equivalent). But elements are completely different, so A ≠ B.',
-    reasonNp: 'दुवै समूहमा ३-३ वटा सदस्य छन् [n(A)=n(B)=३], त्यसैले यी समतुल्य (A ~ B) हुन्। तर सदस्यहरू फरक भएकाले बराबर होइनन् (A ≠ B)।',
+    reasonNp: 'दुवै समूहमा 3-3 pcs सदस्य छन् [n(A)=n(B)=3], त्यसैले यी समतुल्य (A ~ B) हुन्। तर सदस्यहरू फरक भएकाले बराबर होइनन् (A ≠ B)।',
   },
   {
     id: 'p2',
@@ -43,7 +43,7 @@ const PRESETS: ComparePreset[] = [
     isEqual: true,
     isEquivalent: true,
     reasonEn: 'Both sets have identical elements {1, 2, 3}. Order does not matter in sets! A = B and A ~ B.',
-    reasonNp: 'दुवै समूहमा ठीक उही सदस्यहरू १, २ र ३ छन्। समूहमा क्रमले फरक पार्दैन! त्यसैले A = B र A ~ B दुवै हो।',
+    reasonNp: 'दुवै समूहमा ठीक उही सदस्यहरू 1, 2 र 3 छन्। समूहमा क्रमले फरक पार्दैन! त्यसैले A = B र A ~ B दुवै हो।',
   },
   {
     id: 'p3',
@@ -54,7 +54,7 @@ const PRESETS: ComparePreset[] = [
     isEqual: false,
     isEquivalent: false,
     reasonEn: 'n(A) = 2 while n(B) = 3. Since counts differ and elements are not identical, sets are neither equal nor equivalent.',
-    reasonNp: 'n(A) = २ र n(B) = ३। सदस्य सङ्ख्या बराबर नभएकाले यी समूहहरू न बराबर हुन् न त समतुल्य नै।',
+    reasonNp: 'n(A) = 2 and n(B) = 3। सदस्य सङ्ख्या बराबर नभएकाले यी समूहहरू न बराबर हुन् न त समतुल्य नै।',
   },
   {
     id: 'p4',
@@ -65,19 +65,19 @@ const PRESETS: ComparePreset[] = [
     isEqual: false,
     isEquivalent: true,
     reasonEn: 'n(A) = 4 and n(B) = 4. They form a 1-to-1 correspondence. A ~ B, but A ≠ B.',
-    reasonNp: 'n(A) = ४ र n(B) = ४। १-का-लागि-१ जोडा मिलाउन सकिन्छ। त्यसैले A ~ B तर A ≠ B।',
+    reasonNp: 'n(A) = 4 and n(B) = 4। 1-का-लागि-1 जोडा मिलाउन सकिन्छ। त्यसैले A ~ B तर A ≠ B।',
   },
 ];
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'यदि A = {a, b, c} र B = {१, २, ३} भए तलका मध्ये कुन सम्बन्ध सही हो?',
+    np: 'यदि A = {a, b, c} र B = {1, 2, 3} भए तलका मध्ये कुन सम्बन्ध सही हो?',
     en: 'If A = {a, b, c} and B = {1, 2, 3}, which relationship is true?',
     options: [
-      { key: 'A', label: 'A = B (बराबर)' },
-      { key: 'B', label: 'A ~ B (समतुल्य)' },
+      { key: 'A', label: 'A = B' },
+      { key: 'B', label: 'A ~ B' },
       { key: 'C', label: 'A = ∅' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'B',
   },
@@ -85,10 +85,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'बराबर समूह (Equal Sets) हुनको लागि के हुनुपर्छ?',
     en: 'What is required for two sets to be Equal Sets?',
     options: [
-      { key: 'A', label: 'सदस्य सङ्ख्या मात्र बराबर हुनुपर्छ' },
-      { key: 'B', label: 'ठ्याक्कै उही सदस्यहरू हुनुपर्छ (क्रम फरक भए पनि)' },
-      { key: 'C', label: 'सदस्यहरू १, २, ३ नै हुनुपर्छ' },
-      { key: 'D', label: 'कुनै सदस्य हुनुहुँदैन' },
+      { key: 'A', label: 'Only the number of members must be equal' },
+      { key: 'B', label: 'They must have exactly the same members (even if the order differs)' },
+      { key: 'C', label: 'The members must be 1, 2, 3' },
+      { key: 'D', label: 'There must be no members' },
     ],
     answer: 'B',
   },
@@ -96,10 +96,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: '"सबै बराबर समूहहरू समतुल्य हुन्छन्, तर सबै समतुल्य समूहहरू बराबर हुँदैनन्।" यो भनाइ:',
     en: '"All equal sets are equivalent, but not all equivalent sets are equal." This statement is:',
     options: [
-      { key: 'A', label: 'सधैँ सत्य (Always True)' },
-      { key: 'B', label: 'सधैँ असत्य (Always False)' },
-      { key: 'C', label: 'कहिलेकाहीँ मात्र सत्य' },
-      { key: 'D', label: 'भन्न सकिँदैन' },
+      { key: 'A', label: 'Always true' },
+      { key: 'B', label: 'Always false' },
+      { key: 'C', label: 'True only sometimes' },
+      { key: 'D', label: 'Cannot be said' },
     ],
     answer: 'A',
   },
@@ -184,10 +184,10 @@ export const EqualEquivalentSetsExplorer: React.FC<{ onBackToLibrary?: () => voi
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'interactive', np: 'क्रियाकलाप १: अन्तरक्रियात्मक प्रयोगशाला', en: 'Activity 1: Interactive Lab' },
-            { id: 'learn_equiv', np: 'क्रियाकलाप २: समतुल्य समूह (A ~ B)', en: 'Activity 2: Equivalent Sets (A ~ B)' },
-            { id: 'learn_equal', np: 'क्रियाकलाप ३: बराबर समूह (A = B)', en: 'Activity 3: Equal Sets (A = B)' },
-            { id: 'master_proof', np: 'क्रियाकलाप ४: मुख्य नियम तथा चुनौती', en: 'Activity 4: Golden Rule & Proof' },
+            { id: 'interactive', np: 'क्रियाकलाप 1: अन्तरक्रियात्मक प्रयोगशाला', en: 'Activity 1: Interactive Lab' },
+            { id: 'learn_equiv', np: 'क्रियाकलाप 2: समतुल्य समूह (A ~ B)', en: 'Activity 2: Equivalent Sets (A ~ B)' },
+            { id: 'learn_equal', np: 'क्रियाकलाप 3: बराबर समूह (A = B)', en: 'Activity 3: Equal Sets (A = B)' },
+            { id: 'master_proof', np: 'क्रियाकलाप 4: मुख्य नियम तथा चुनौती', en: 'Activity 4: Golden Rule & Proof' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -269,7 +269,7 @@ export const EqualEquivalentSetsExplorer: React.FC<{ onBackToLibrary?: () => voi
 
                 <div style={{ minHeight: 90, display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginBottom: 12 }}>
                   {customA.length === 0 ? (
-                    <span style={{ color: '#94A3B8', fontSize: 13, fontStyle: 'italic' }}>{L('(खाली समूह ∅)', '(Empty set ∅)')}</span>
+                    <span style={{ color: '#94A3B8', fontSize: 13, fontStyle: 'italic' }}>{L('', '(Empty set ∅)')}</span>
                   ) : (
                     customA.map((item) => (
                       <span
@@ -331,7 +331,7 @@ export const EqualEquivalentSetsExplorer: React.FC<{ onBackToLibrary?: () => voi
 
                 <div style={{ minHeight: 90, display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginBottom: 12 }}>
                   {customB.length === 0 ? (
-                    <span style={{ color: '#94A3B8', fontSize: 13, fontStyle: 'italic' }}>{L('(खाली समूह ∅)', '(Empty set ∅)')}</span>
+                    <span style={{ color: '#94A3B8', fontSize: 13, fontStyle: 'italic' }}>{L('', '(Empty set ∅)')}</span>
                   ) : (
                     customB.map((item) => (
                       <span
@@ -393,11 +393,11 @@ export const EqualEquivalentSetsExplorer: React.FC<{ onBackToLibrary?: () => voi
             >
               <div style={{ fontSize: 24, fontWeight: 900, color: '#0F172A', marginBottom: 8 }}>
                 {isEqual ? (
-                  <span style={{ color: '#166534' }}>A = B &nbsp; {L('(बराबर समूह र समतुल्य समूह दुवै)', '(Equal & Equivalent Sets)')}</span>
+                  <span style={{ color: '#166534' }}>A = B &nbsp; {L('', '(Equal & Equivalent Sets)')}</span>
                 ) : isEquivalent ? (
-                  <span style={{ color: '#854D0E' }}>A ~ B &nbsp; {L('(समतुल्य समूह, तर बराबर होइन)', '(Equivalent but NOT Equal)')}</span>
+                  <span style={{ color: '#854D0E' }}>A ~ B &nbsp; {L('', '(Equivalent but NOT Equal)')}</span>
                 ) : (
-                  <span style={{ color: '#475569' }}>A ≠ B &nbsp; {L('(न बराबर, न समतुल्य समूह)', '(Neither Equal nor Equivalent)')}</span>
+                  <span style={{ color: '#475569' }}>A ≠ B &nbsp; {L('', '(Neither Equal nor Equivalent)')}</span>
                 )}
               </div>
 
@@ -437,7 +437,7 @@ export const EqualEquivalentSetsExplorer: React.FC<{ onBackToLibrary?: () => voi
             {/* 1-to-1 Correspondence Graphic */}
             <div style={{ background: '#F8FAFC', border: '2px solid #E2E8F0', borderRadius: 16, padding: 24, marginBottom: 20 }}>
               <div style={{ fontSize: 13, fontWeight: 800, color: '#187C68', textAlign: 'center', marginBottom: 16 }}>
-                {L('१-का-लागि-१ जोडा (One-to-One Correspondence):', 'One-to-One Correspondence:')}
+                {L('1-का-लागि-1 जोडा (One-to-One Correspondence):', 'One-to-One Correspondence:')}
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', maxWidth: 500, margin: '0 auto' }}>
@@ -469,7 +469,7 @@ export const EqualEquivalentSetsExplorer: React.FC<{ onBackToLibrary?: () => voi
             </div>
 
             <div style={{ fontSize: 14, fontWeight: 800, color: '#166534', background: '#DCFCE7', padding: '12px 18px', borderRadius: 12, textAlign: 'center' }}>
-              n(A) = {isNe ? '३' : '3'} &nbsp; र &nbsp; n(B) = {isNe ? '३' : '3'} &nbsp; ⟹ &nbsp; A ~ B
+              n(A) = {isNe ? '3' : '3'} &nbsp; and &nbsp; n(B) = {isNe ? '3' : '3'} &nbsp; ⟹ &nbsp; A ~ B
             </div>
           </div>
         )}
@@ -490,25 +490,25 @@ export const EqualEquivalentSetsExplorer: React.FC<{ onBackToLibrary?: () => voi
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
               <div style={{ background: '#F0FDF4', border: '2px solid #16A34A', borderRadius: 14, padding: 18 }}>
                 <div style={{ fontSize: 14, fontWeight: 800, color: '#166534', marginBottom: 6 }}>
-                  {L('उदाहरण १: सङ्ख्याको क्रम परिवर्तन', 'Example 1: Order permutation')}
+                  {L('उदाहरण 1: सङ्ख्याको क्रम परिवर्तन', 'Example 1: Order permutation')}
                 </div>
                 <div style={{ fontSize: 18, fontWeight: 900, color: '#0F172A', fontFamily: 'monospace', marginBottom: 6 }}>
                   A = {'{ 1, 2, 3 }'}, &nbsp; B = {'{ 3, 2, 1 }'}
                 </div>
                 <div style={{ fontSize: 13, color: '#15803D', fontWeight: 700 }}>
-                  ✓ A = B {L('(क्रमले फरक पार्दैन)', '(Order does not matter)')}
+                  ✓ A = B {L('', '(Order does not matter)')}
                 </div>
               </div>
 
               <div style={{ background: '#F0FDF4', border: '2px solid #16A34A', borderRadius: 14, padding: 18 }}>
                 <div style={{ fontSize: 14, fontWeight: 800, color: '#166534', marginBottom: 6 }}>
-                  {L('उदाहरण २: शब्दका अक्षरहरू', 'Example 2: Letters of Words')}
+                  {L('उदाहरण 2: शब्दका अक्षरहरू', 'Example 2: Letters of Words')}
                 </div>
                 <div style={{ fontSize: 18, fontWeight: 900, color: '#0F172A', fontFamily: 'monospace', marginBottom: 6 }}>
                   A = {'{ E, A, T }'}, &nbsp; B = {'{ T, E, A }'}
                 </div>
                 <div style={{ fontSize: 13, color: '#15803D', fontWeight: 700 }}>
-                  ✓ A = B {L('(ठ्याक्कै उही अक्षरहरू)', '(Exactly the same letters)')}
+                  ✓ A = B {L('', '(Exactly the same letters)')}
                 </div>
               </div>
             </div>
@@ -531,7 +531,7 @@ export const EqualEquivalentSetsExplorer: React.FC<{ onBackToLibrary?: () => voi
               {/* Part 1 */}
               <div style={{ background: '#F0FDF4', border: '1px solid #86EFAC', borderRadius: 14, padding: 18 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#166534', fontWeight: 900, fontSize: 15, marginBottom: 8 }}>
-                  <Check size={18} /> {L('पहिलो भाग: सधैँ सत्य (Always True)', 'Part 1: Always True')}
+                  <Check size={18} /> {L('पहिलो भाग: Always true', 'Part 1: Always True')}
                 </div>
                 <p style={{ margin: 0, fontSize: 13, color: '#334155', lineHeight: 1.6 }}>
                   {L(
@@ -548,7 +548,7 @@ export const EqualEquivalentSetsExplorer: React.FC<{ onBackToLibrary?: () => voi
                 </div>
                 <p style={{ margin: 0, fontSize: 13, color: '#334155', lineHeight: 1.6 }}>
                   {L(
-                    'मानौँ A = {१, २, ३} र B = {a, b, c}। यहाँ n(A) = n(B) = ३ भएकोले A ~ B हो। तर सदस्यहरू फरक भएकाले A ≠ B हो। त्यसैले सबै समतुल्य समूहहरू बराबर हुँदैनन्!',
+                    'मानौँ A = {1, 2, 3} र B = {a, b, c}। यहाँ n(A) = n(B) = 3 भएकोले A ~ B हो। तर सदस्यहरू फरक भएकाले A ≠ B हो। त्यसैले सबै समतुल्य समूहहरू बराबर हुँदैनन्!',
                     'For example, A = {1, 2, 3} and B = {a, b, c}. Here n(A) = n(B) = 3, so A ~ B. But the elements are completely different, so A ≠ B. Thus, equivalent sets are NOT necessarily equal.'
                   )}
                 </p>

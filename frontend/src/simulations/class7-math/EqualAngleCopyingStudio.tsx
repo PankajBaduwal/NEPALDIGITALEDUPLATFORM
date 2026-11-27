@@ -1,6 +1,6 @@
 /**
  * EqualAngleCopyingStudio.tsx
- * Grade 7 Mathematics – Lesson 13: LINES AND ANGLES (रेखाहरू र कोणहरू)
+ * Grade 7 Mathematics – Lesson 13: LINES AND ANGLES
  * Simulation 2: Equal Angle Construction and Copying Studio (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 193-195)
  */
@@ -15,10 +15,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दिइएको कोणसँग बराबर हुने गरी अर्को कोण रचना गर्दा कुन ज्यामितीय उपकरण प्रयोग गरिन्छ?',
     en: 'Which geometric instrument is used to copy a given angle without measuring degrees directly?',
     options: [
-      { key: 'A', label: 'कम्पास र स्केल (Compass and Ruler)' },
-      { key: 'B', label: 'प्रोटेक्टर मात्र' },
-      { key: 'C', label: 'सेटस्क्वायर' },
-      { key: 'D', label: 'कागज मोडेर' },
+      { key: 'A', label: 'Compass and ruler' },
+      { key: 'B', label: 'Protractor only' },
+      { key: 'C', label: 'Set square' },
+      { key: 'D', label: 'By folding paper' },
     ],
     answer: 'A',
   },
@@ -26,21 +26,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दिइएको कोणको भुजामा काटिएको चापको लम्बाइ नापेर नयाँ शीर्षबाट चाप काट्दा के निश्चित हुन्छ?',
     en: 'Measuring the distance between arc intersections ensures what?',
     options: [
-      { key: 'A', label: 'नयाँ कोण दिइएको कोणसँग बराबर (Equal) हुन्छ' },
-      { key: 'B', label: 'नयाँ कोण ९०° हुन्छ' },
-      { key: 'C', label: 'कोण दोब्बर हुन्छ' },
-      { key: 'D', label: 'भुजा लामो हुन्छ' },
+      { key: 'A', label: 'The new angle is equal to the given angle' },
+      { key: 'B', label: 'The new angle becomes 90°' },
+      { key: 'C', label: 'The angle doubles' },
+      { key: 'D', label: 'The arm becomes longer' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि ∠PQR = ५०° छ भने कम्पासद्वारा रचना गरिएको बराबर कोणको नाप कति हुन्छ?',
+    np: 'यदि ∠PQR = 50° छ भने कम्पासद्वारा रचना गरिएको बराबर कोणको नाप कति हुन्छ?',
     en: 'If ∠PQR = 50°, what is the measure of the copied angle using compass?',
     options: [
-      { key: 'A', label: '५०° (बराबर नाप)' },
-      { key: 'B', label: '२५°' },
-      { key: 'C', label: '१००°' },
-      { key: 'D', label: '१३०°' },
+      { key: 'A', label: '50° (equal measure)' },
+      { key: 'B', label: '25°' },
+      { key: 'C', label: '100°' },
+      { key: 'D', label: '130°' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'बराबर कोण रचनाको अन्तिम प्रमाणीकरण कुन उपकरणले नापेर गरिन्छ?',
     en: 'Which instrument is used to verify that the copied angle is equal?',
     options: [
-      { key: 'A', label: 'प्रोटेक्टर (Protractor)' },
-      { key: 'B', label: 'थर्मामिटर' },
-      { key: 'C', label: 'स्केल मात्र' },
-      { key: 'D', label: 'घडी' },
+      { key: 'A', label: 'Protractor' },
+      { key: 'B', label: 'Thermometer' },
+      { key: 'C', label: 'Ruler only' },
+      { key: 'D', label: 'Clock' },
     ],
     answer: 'A',
   },

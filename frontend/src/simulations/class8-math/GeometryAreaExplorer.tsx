@@ -1,7 +1,7 @@
 /**
  * GeometryAreaExplorer.tsx
- * Grade 8 Mathematics – Unit 8: AREA AND VOLUME (क्षेत्रफल र आयतन)
- * Simulation 1: Geometry Area Explorer (ज्यामितीय क्षेत्रफल अन्वेषक)
+ * Grade 8 Mathematics – Unit 8: AREA AND VOLUME
+ * Simulation 1: Geometry Area Explorer
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 8)
  */
 import React, { useState } from 'react';
@@ -34,13 +34,13 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'समचतुर्भुज (Rhombus) का दुई विकर्णहरू d₁ = ८ सेमी र d₂ = ६ सेमी भए क्षेत्रफल कति हुन्छ?',
+    np: 'समचतुर्भुज (Rhombus) का दुई विकर्णहरू d₁ = 8 cm र d₂ = 6 cm भए क्षेत्रफल कति हुन्छ?',
     en: 'If the diagonals of a rhombus are d₁ = 8 cm and d₂ = 6 cm, what is its area?',
     options: [
-      { key: 'A', label: '२४ वर्ग सेमी [ A = 1/2 × ८ × ६ = २४ ]' },
-      { key: 'B', label: '४८ वर्ग सेमी' },
-      { key: 'C', label: '१४ वर्ग सेमी' },
-      { key: 'D', label: '२८ वर्ग सेमी' },
+      { key: 'A', label: '24 sq cm [ A = 1/2 × 8 × 6 = 24 ]' },
+      { key: 'B', label: '48 sq cm' },
+      { key: 'C', label: '14 sq cm' },
+      { key: 'D', label: '28 sq cm' },
     ],
     answer: 'A',
   },
@@ -48,21 +48,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुनै त्रिभुजको शीर्षबिन्दु आधारसँग समानान्तर रेखामा सारेमा त्यसको क्षेत्रफलमा के परिवर्तन आउँछ?',
     en: 'If the vertex of a triangle moves along a line parallel to its base, what happens to its area?',
     options: [
-      { key: 'A', label: 'क्षेत्रफल स्थिर रहन्छ (आधार र लम्ब उचाइ समान भएकोले)' },
-      { key: 'B', label: 'क्षेत्रफल बढ्छ' },
-      { key: 'C', label: 'क्षेत्रफल घट्छ' },
-      { key: 'D', label: 'शून्य हुन्छ' },
+      { key: 'A', label: 'The area stays constant (because the base and perpendicular height are the same)' },
+      { key: 'B', label: 'The area increases' },
+      { key: 'C', label: 'The area decreases' },
+      { key: 'D', label: 'It becomes zero' },
     ],
     answer: 'A',
   },
   {
-    np: 'चतुर्भुजको विकर्ण d = १० सेमी र विपरीत शीर्षहरूबाट खिचिएका लम्बहरू h₁ = ४ सेमी र h₂ = ३ सेमी भए क्षेत्रफल कति हुन्छ?',
+    np: 'चतुर्भुजको विकर्ण d = 10 cm र विपरीत शीर्षहरूबाट खिचिएका लम्बहरू h₁ = 4 cm र h₂ = 3 cm भए क्षेत्रफल कति हुन्छ?',
     en: 'If diagonal d = 10 cm and perpendicular offsets are h₁ = 4 cm and h₂ = 3 cm, what is the area?',
     options: [
-      { key: 'A', label: '३५ वर्ग सेमी [ 1/2 × १० × (४ + ३) = ३५ ]' },
-      { key: 'B', label: '७० वर्ग सेमी' },
-      { key: 'C', label: '४० वर्ग सेमी' },
-      { key: 'D', label: '३० वर्ग सेमी' },
+      { key: 'A', label: '35 sq cm [ 1/2 × 10 × (4 + 3) = 35 ]' },
+      { key: 'B', label: '70 sq cm' },
+      { key: 'C', label: '40 sq cm' },
+      { key: 'D', label: '30 sq cm' },
     ],
     answer: 'A',
   },
@@ -130,7 +130,7 @@ export const GeometryAreaExplorer: React.FC<{
     {
       titleNp: 'समबाहु त्रिभुज (CDC उदाहरण)',
       titleEn: 'Equilateral Triangle',
-      descNp: 'एउटा समबाहु त्रिभुजको प्रत्येक भुजा ८ सेमी छ। यसको क्षेत्रफल पत्ता लगाउनुहोस्। [सूत्र: A = (√3/4) a²; √3 ≈ 1.732]',
+      descNp: 'एउटा समबाहु त्रिभुजको प्रत्येक भुजा 8 cm छ। यसको क्षेत्रफल पत्ता लगाउनुहोस्। [सूत्र: A = (√3/4) a²; √3 ≈ 1.732]',
       descEn: 'Each side of an equilateral triangle is 8 cm. Find its area [A = (√3/4) a²; √3 ≈ 1.732].',
       target: ((Math.sqrt(3) / 4) * 64),
       unit: 'cm²',
@@ -139,7 +139,7 @@ export const GeometryAreaExplorer: React.FC<{
     {
       titleNp: 'समलम्ब चतुर्भुज (CDC उदाहरण)',
       titleEn: 'Trapezium',
-      descNp: 'समानान्तर भुजाहरू १५ सेमी र ९ सेमी तथा उचाइ ६ सेमी भएको समलम्ब चतुर्भुजको क्षेत्रफल पत्ता लगाउनुहोस्।',
+      descNp: 'समानान्तर भुजाहरू 15 cm र 9 cm तथा उचाइ 6 cm भएको समलम्ब चतुर्भुजको क्षेत्रफल पत्ता लगाउनुहोस्।',
       descEn: 'Find the area of a trapezium with parallel sides 15 cm and 9 cm and height 6 cm.',
       target: 0.5 * (15 + 9) * 6,
       unit: 'cm²',
@@ -148,7 +148,7 @@ export const GeometryAreaExplorer: React.FC<{
     {
       titleNp: 'समचतुर्भुज (Rhombus)',
       titleEn: 'Rhombus',
-      descNp: 'एउटा समचतुर्भुजका विकर्णहरू १२ सेमी र १० सेमी छन् भने यसको क्षेत्रफल कति हुन्छ?',
+      descNp: 'एउटा समचतुर्भुजका विकर्णहरू 12 cm र 10 cm छन् भने यसको क्षेत्रफल कति हुन्छ?',
       descEn: 'The diagonals of a rhombus are 12 cm and 10 cm. Find its area.',
       target: 0.5 * 12 * 10,
       unit: 'cm²',
@@ -195,7 +195,7 @@ export const GeometryAreaExplorer: React.FC<{
             }`}
           >
             <Triangle className="w-4 h-4" />
-            {L('१. त्रिभुजहरूको क्षेत्रफल (Triangles)', '1. Triangle Types & Derivations')}
+            {L('1. त्रिभुजहरूको क्षेत्रफल (Triangles)', '1. Triangle Types & Derivations')}
           </button>
           <button
             onClick={() => setActiveTab('quadrilaterals')}
@@ -204,7 +204,7 @@ export const GeometryAreaExplorer: React.FC<{
             }`}
           >
             <Square className="w-4 h-4" />
-            {L('२. चतुर्भुजहरूको क्षेत्रफल (Quadrilaterals)', '2. Quadrilateral Family')}
+            {L('2. चतुर्भुजहरूको क्षेत्रफल (Quadrilaterals)', '2. Quadrilateral Family')}
           </button>
           <button
             onClick={() => setActiveTab('vertex_shear')}
@@ -213,7 +213,7 @@ export const GeometryAreaExplorer: React.FC<{
             }`}
           >
             <Move className="w-4 h-4" />
-            {L('३. शीर्षबिन्दु सार्दा क्षेत्रफल (Constant Area Demo)', '3. Vertex Shear Principle')}
+            {L('3. शीर्षबिन्दु सार्दा क्षेत्रफल (Constant Area Demo)', '3. Vertex Shear Principle')}
           </button>
           <button
             onClick={() => setActiveTab('challenge')}
@@ -222,7 +222,7 @@ export const GeometryAreaExplorer: React.FC<{
             }`}
           >
             <Award className="w-4 h-4" />
-            {L('४. पाठ्यपुस्तक चुनौती (CDC Challenge)', '4. CDC Challenge')}
+            {L('4. पाठ्यपुस्तक चुनौती (CDC Challenge)', '4. CDC Challenge')}
           </button>
         </div>
 
@@ -289,7 +289,7 @@ export const GeometryAreaExplorer: React.FC<{
                       <line x1="150" y1="35" x2="150" y2="185" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4,4" />
                       <rect x="150" y="173" width="12" height="12" fill="none" stroke="#f59e0b" strokeWidth="1.5" />
                       <text x="150" y="205" fill="#e2e8f0" fontSize="11" textAnchor="middle" fontWeight="bold">
-                        b = {toNp(isoBase)} cm (आधार)
+                        b = {toNp(isoBase)} cm
                       </text>
                       <text x="155" y="110" fill="#fbbf24" fontSize="11" fontWeight="bold">
                         h = {toNp(calcIsoHeight.toFixed(1))} cm
@@ -308,10 +308,10 @@ export const GeometryAreaExplorer: React.FC<{
                       <polygon points="60,40 60,180 240,180" fill="rgba(244, 63, 94, 0.35)" stroke="#f43f5e" strokeWidth="3" />
                       <rect x="60" y="165" width="15" height="15" fill="none" stroke="#f59e0b" strokeWidth="1.5" />
                       <text x="150" y="202" fill="#e2e8f0" fontSize="11" textAnchor="middle" fontWeight="bold">
-                        b = {toNp(baseB)} cm (आधार)
+                        b = {toNp(baseB)} cm
                       </text>
                       <text x="45" y="115" fill="#e2e8f0" fontSize="11" textAnchor="end" fontWeight="bold">
-                        h = {toNp(heightH)} cm (उचाइ)
+                        h = {toNp(heightH)} cm
                       </text>
                       <text x="170" y="100" fill="#fda4af" fontSize="10">
                         {L('आयातको आधा (Half Rect)', 'Half Rectangle')}
@@ -326,7 +326,7 @@ export const GeometryAreaExplorer: React.FC<{
                       <line x1="120" y1="40" x2="120" y2="180" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4,4" />
                       <rect x="120" y="168" width="12" height="12" fill="none" stroke="#f59e0b" strokeWidth="1.5" />
                       <text x="145" y="202" fill="#e2e8f0" fontSize="11" textAnchor="middle" fontWeight="bold">
-                        b = {toNp(baseB)} cm (आधार)
+                        b = {toNp(baseB)} cm
                       </text>
                       <text x="125" y="110" fill="#fbbf24" fontSize="11" fontWeight="bold">
                         h = {toNp(heightH)} cm
@@ -344,9 +344,9 @@ export const GeometryAreaExplorer: React.FC<{
                   {triType === 'equilateral' && (
                     <div className="space-y-2 mt-2 text-xs text-slate-300 font-mono">
                       <div className="text-base font-black text-indigo-400">A = (√3 / 4) a²</div>
-                      <div>१. लम्बले आधारलाई आधा गर्छ: b/2 = a/2</div>
-                      <div>२. पाइथागोरस साध्य: h = √(a² - (a/2)²) = √(3a²/4) = (√3/2)a</div>
-                      <div>३. क्षेत्रफल A = 1/2 × a × (√3/2)a = <b className="text-emerald-400">(√3/4)a²</b></div>
+                      <div>1. The perpendicular halves the base: b/2 = a/2</div>
+                      <div>2. Pythagoras theorem: h = √(a² - (a/2)²) = √(3a²/4) = (√3/2)a</div>
+                      <div>3. Area A = 1/2 × a × (√3/2)a = <b className="text-emerald-400">(√3/4)a²</b></div>
                       <div className="text-emerald-300 text-sm font-bold pt-2 border-t border-slate-700 font-sans">
                         = (1.732 / 4) × {toNp(sideA)}² = <span className="text-xl">{toNp(calcEquiArea.toFixed(2))}</span> cm²
                       </div>
@@ -356,8 +356,8 @@ export const GeometryAreaExplorer: React.FC<{
                   {triType === 'isosceles' && (
                     <div className="space-y-2 mt-2 text-xs text-slate-300 font-mono">
                       <div className="text-base font-black text-emerald-400">A = (b / 4) √(4a² - b²)</div>
-                      <div>१. शीर्षलम्ब h = √(a² - (b/2)²) = √(4a² - b²) / 2</div>
-                      <div>२. क्षेत्रफल A = 1/2 × b × h = <b className="text-emerald-400">b/4 √(4a² - b²)</b></div>
+                      <div>1. शीर्षलम्ब h = √(a² - (b/2)²) = √(4a² - b²) / 2</div>
+                      <div>2. Area A = 1/2 × b × h = <b className="text-emerald-400">b/4 √(4a² - b²)</b></div>
                       <div className="text-emerald-300 text-sm font-bold pt-2 border-t border-slate-700 font-sans">
                         h = {toNp(calcIsoHeight.toFixed(2))} cm | क्षेत्रफल = <span className="text-xl">{toNp(calcIsoArea.toFixed(2))}</span> cm²
                       </div>
@@ -367,8 +367,8 @@ export const GeometryAreaExplorer: React.FC<{
                   {triType === 'right' && (
                     <div className="space-y-2 mt-2 text-xs text-slate-300 font-mono">
                       <div className="text-base font-black text-rose-400">A = 1/2 × b × h</div>
-                      <div>१. आयतको क्षेत्रफल = b × h</div>
-                      <div>२. विकर्णले २ बराबर समकोण त्रिभुज बनाउँछ।</div>
+                      <div>1. आयतको क्षेत्रफल = b × h</div>
+                      <div>2. विकर्णले 2 बराबर समकोण त्रिभुज बनाउँछ।</div>
                       <div className="text-emerald-300 text-sm font-bold pt-2 border-t border-slate-700 font-sans">
                         क्षेत्रफल = 1/2 × {toNp(baseB)} × {toNp(heightH)} = <span className="text-xl">{toNp(calcRightTriArea.toFixed(2))}</span> cm²
                       </div>
@@ -378,8 +378,8 @@ export const GeometryAreaExplorer: React.FC<{
                   {triType === 'general' && (
                     <div className="space-y-2 mt-2 text-xs text-slate-300 font-mono">
                       <div className="text-base font-black text-blue-400">A = 1/2 × आधार × लम्ब उचाइ</div>
-                      <div>१. आधार (b) = {toNp(baseB)} cm</div>
-                      <div>२. ठाडो उचाइ (h) = {toNp(heightH)} cm</div>
+                      <div>1. आधार (b) = {toNp(baseB)} cm</div>
+                      <div>2. ठाडो उचाइ (h) = {toNp(heightH)} cm</div>
                       <div className="text-emerald-300 text-sm font-bold pt-2 border-t border-slate-700 font-sans">
                         क्षेत्रफल = 1/2 × {toNp(baseB)} × {toNp(heightH)} = <span className="text-xl">{toNp(calcGeneralTriArea.toFixed(2))}</span> cm²
                       </div>
@@ -505,7 +505,7 @@ export const GeometryAreaExplorer: React.FC<{
                       <line x1="110" y1="50" x2="110" y2="170" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4,4" />
                       <rect x="110" y="158" width="12" height="12" fill="none" stroke="#f59e0b" strokeWidth="1.5" />
                       <text x="120" y="195" fill="#e2e8f0" fontSize="11" textAnchor="middle" fontWeight="bold">
-                        b = {toNp(pBase)} cm (आधार)
+                        b = {toNp(pBase)} cm
                       </text>
                       <text x="115" y="115" fill="#fbbf24" fontSize="11" fontWeight="bold">
                         h = {toNp(pHeight)} cm
@@ -570,9 +570,9 @@ export const GeometryAreaExplorer: React.FC<{
                 <div className="bg-slate-800 p-4 rounded-2xl border border-slate-700 text-xs font-mono space-y-2 text-slate-300">
                   {quadType === 'parallelogram' && (
                     <div>
-                      <div className="text-sm font-bold text-sky-400">क्षेत्रफल A = b × h</div>
+                      <div className="text-sm font-bold text-sky-400">Area A = b × h</div>
                       <p className="font-sans text-slate-400 text-[11px]">
-                        त्रिभुज काटेर अर्को छेउमा सार्दा आयत बन्छ (A = आधार × उचाइ)।
+                        Cutting the triangle and moving it to the other end forms a rectangle (A = base × height).
                       </p>
                       <div className="text-emerald-400 text-base font-bold font-sans pt-2 border-t border-slate-700">
                         = {toNp(pBase)} × {toNp(pHeight)} = <span className="text-xl">{toNp(calcParaArea)}</span> cm²
@@ -582,9 +582,9 @@ export const GeometryAreaExplorer: React.FC<{
 
                   {quadType === 'rhombus' && (
                     <div>
-                      <div className="text-sm font-bold text-purple-400">क्षेत्रफल A = 1/2 × d₁ × d₂</div>
+                      <div className="text-sm font-bold text-purple-400">Area A = 1/2 × d₁ × d₂</div>
                       <p className="font-sans text-slate-400 text-[11px]">
-                        विकर्णहरूले ४ ओटा बराबर समकोण त्रिभुजमा विभाजन गर्छन्।
+                        विकर्णहरूले 4 ओटा बराबर समकोण त्रिभुजमा विभाजन गर्छन्।
                       </p>
                       <div className="text-emerald-400 text-base font-bold font-sans pt-2 border-t border-slate-700">
                         = 1/2 × {toNp(diag1)} × {toNp(diag2)} = <span className="text-xl">{toNp(calcRhombusArea)}</span> cm²
@@ -594,9 +594,9 @@ export const GeometryAreaExplorer: React.FC<{
 
                   {quadType === 'trapezium' && (
                     <div>
-                      <div className="text-sm font-bold text-amber-400">क्षेत्रफल A = 1/2 × (a + b) × h</div>
+                      <div className="text-sm font-bold text-amber-400">Area A = 1/2 × (a + b) × h</div>
                       <p className="font-sans text-slate-400 text-[11px]">
-                        समानान्तर भुजाहरूको योगफल × ठाडो उचाइ ÷ २।
+                        समानान्तर भुजाहरूको योगफल × ठाडो उचाइ ÷ 2।
                       </p>
                       <div className="text-emerald-400 text-base font-bold font-sans pt-2 border-t border-slate-700">
                         = 1/2 × ({toNp(trapA)} + {toNp(trapB)}) × {toNp(trapH)} = <span className="text-xl">{toNp(calcTrapArea)}</span> cm²
@@ -606,9 +606,9 @@ export const GeometryAreaExplorer: React.FC<{
 
                   {quadType === 'general_quad' && (
                     <div>
-                      <div className="text-sm font-bold text-pink-400">क्षेत्रफल A = 1/2 × d × (h₁ + h₂)</div>
+                      <div className="text-sm font-bold text-pink-400">Area A = 1/2 × d × (h₁ + h₂)</div>
                       <p className="font-sans text-slate-400 text-[11px]">
-                        विकर्णले चतुर्भुजलाई २ त्रिभुजहरूमा बाँड्छ।
+                        विकर्णले चतुर्भुजलाई 2 त्रिभुजहरूमा बाँड्छ।
                       </p>
                       <div className="text-emerald-400 text-base font-bold font-sans pt-2 border-t border-slate-700">
                         = 1/2 × {toNp(gDiag)} × ({toNp(gh1)} + {toNp(gh2)}) = <span className="text-xl">{toNp(calcGeneralQuadArea)}</span> cm²
@@ -622,11 +622,11 @@ export const GeometryAreaExplorer: React.FC<{
                   {quadType === 'parallelogram' && (
                     <>
                       <div>
-                        <label className="text-[11px] text-slate-300 block mb-1">आधार (b): {toNp(pBase)} cm</label>
+                        <label className="text-[11px] text-slate-300 block mb-1">Base (b): {toNp(pBase)} cm</label>
                         <input type="range" min="6" max="24" value={pBase} onChange={(e) => setPBase(Number(e.target.value))} className="w-full accent-sky-500" />
                       </div>
                       <div>
-                        <label className="text-[11px] text-slate-300 block mb-1">उचाइ (h): {toNp(pHeight)} cm</label>
+                        <label className="text-[11px] text-slate-300 block mb-1">Height (h): {toNp(pHeight)} cm</label>
                         <input type="range" min="4" max="15" value={pHeight} onChange={(e) => setPHeight(Number(e.target.value))} className="w-full accent-sky-500" />
                       </div>
                     </>
@@ -635,11 +635,11 @@ export const GeometryAreaExplorer: React.FC<{
                   {quadType === 'rhombus' && (
                     <>
                       <div>
-                        <label className="text-[11px] text-slate-300 block mb-1">विकर्ण १ (d₁): {toNp(diag1)} cm</label>
+                        <label className="text-[11px] text-slate-300 block mb-1">विकर्ण 1 (d₁): {toNp(diag1)} cm</label>
                         <input type="range" min="4" max="20" value={diag1} onChange={(e) => setDiag1(Number(e.target.value))} className="w-full accent-purple-500" />
                       </div>
                       <div>
-                        <label className="text-[11px] text-slate-300 block mb-1">विकर्ण २ (d₂): {toNp(diag2)} cm</label>
+                        <label className="text-[11px] text-slate-300 block mb-1">विकर्ण 2 (d₂): {toNp(diag2)} cm</label>
                         <input type="range" min="4" max="20" value={diag2} onChange={(e) => setDiag2(Number(e.target.value))} className="w-full accent-purple-500" />
                       </div>
                     </>
@@ -709,7 +709,7 @@ export const GeometryAreaExplorer: React.FC<{
                   {/* Fixed base line */}
                   <line x1="80" y1="160" x2="220" y2="160" stroke="#38bdf8" strokeWidth="4" />
                   <text x="150" y="180" fill="#38bdf8" fontSize="11" textAnchor="middle" fontWeight="bold">
-                    {L('स्थिर आधार b = १० सेमी', 'Fixed Base b = 10 cm')}
+                    {L('स्थिर आधार b = 10 cm', 'Fixed Base b = 10 cm')}
                   </text>
 
                   {/* The triangle */}
@@ -724,7 +724,7 @@ export const GeometryAreaExplorer: React.FC<{
                   <line x1={`${40 + vertexX * 16}`} y1="50" x2={`${40 + vertexX * 16}`} y2="160" stroke="#ef4444" strokeWidth="2" strokeDasharray="3,3" />
                   <rect x={`${40 + vertexX * 16}`} y="148" width="12" height="12" fill="none" stroke="#ef4444" strokeWidth="1" />
                   <text x={`${48 + vertexX * 16}`} y="110" fill="#ef4444" fontSize="11" fontWeight="bold">
-                    h = ८ सेमी
+                    h = 8 cm
                   </text>
 
                   {/* Draggable Vertex Point C */}
@@ -752,7 +752,7 @@ export const GeometryAreaExplorer: React.FC<{
 
                 <div className="p-4 bg-white rounded-xl border border-indigo-300 flex justify-between items-center">
                   <div className="text-xs text-slate-600">
-                    <div>{L('आधार (b): १० सेमी | ठाडो लम्ब उचाइ (h): ८ सेमी', 'Base (b): 10 cm | Perpendicular Height (h): 8 cm')}</div>
+                    <div>{L('Base (b): 10 cm | ठाडो लम्ब Height (h): 8 cm', 'Base (b): 10 cm | Perpendicular Height (h): 8 cm')}</div>
                     <div className="text-[11px] text-slate-400 mt-0.5">{L('सूत्र: A = 1/2 × आधार × लम्ब उचाइ', 'Formula: A = 1/2 × b × h')}</div>
                   </div>
                   <div className="text-2xl font-black text-emerald-600">

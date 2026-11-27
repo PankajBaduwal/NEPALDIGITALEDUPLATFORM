@@ -1,7 +1,7 @@
 /**
  * MakeTenChallenge.tsx
- * Simulation 03: Make Ten Challenge (दश बनाऔँ)
- * Class 1 Mathematics - Chapter 6: Ten (दश)
+ * Simulation 03: Make Ten Challenge
+ * Class 1 Mathematics - Chapter 6: Ten
  * Nepal Digital Education Platform
  */
 
@@ -25,7 +25,7 @@ interface Props {
   userRole?: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 const NEP_NAMES = ['शून्य', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ', 'दश'];
 const EN_NAMES = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
 
@@ -41,7 +41,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Navigation & Settings
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Mode: 'EXPLORE_PAIRS' or 'SOLVE_PUZZLE'
@@ -132,7 +132,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
       setBasketACount(nextA);
       playTone(450 + nextA * 30, 'triangle', 0.2);
       speakText(
-        `टोकरी १ मा ${formatNum(nextA)}, टोकरी २ मा ${formatNum(10 - nextA)}, जम्मा १०`,
+        `टोकरी 1 मा ${formatNum(nextA)}, टोकरी 2 मा ${formatNum(10 - nextA)}, जम्मा 10`,
         `Basket 1 has ${nextA}, Basket 2 has ${10 - nextA}, Total is 10`
       );
     }
@@ -144,7 +144,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
       setBasketACount(nextA);
       playTone(450 + nextA * 30, 'triangle', 0.2);
       speakText(
-        `टोकरी १ मा ${formatNum(nextA)}, टोकरी २ मा ${formatNum(10 - nextA)}, जम्मा १०`,
+        `टोकरी 1 मा ${formatNum(nextA)}, टोकरी 2 मा ${formatNum(10 - nextA)}, जम्मा 10`,
         `Basket 1 has ${nextA}, Basket 2 has ${10 - nextA}, Total is 10`
       );
     }
@@ -155,7 +155,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
     setBasketACount(a);
     playTone(659.25, 'triangle', 0.3);
     speakText(
-      `${formatNum(a)} र ${formatNum(10 - a)} मिलेर १० बन्छ।`,
+      `${formatNum(a)} र ${formatNum(10 - a)} मिलेर 10 बन्छ।`,
       `${a} and ${10 - a} together make 10.`
     );
   };
@@ -173,7 +173,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
       setStars(ns);
       saveProgress(ns);
       speakText(
-        `सबास! ${formatNum(p.givenA)} र ${formatNum(choice)} मिलेर १० हुन्छ!`,
+        `सबास! ${formatNum(p.givenA)} र ${formatNum(choice)} मिलेर 10 हुन्छ!`,
         `Splendid! ${p.givenA} and ${choice} together make 10!`
       );
     } else {
@@ -193,7 +193,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
 
   useEffect(() => {
     speakText(
-      'दश बनाऔँ सिमुलेसनमा स्वागत छ! दुई समूहका वस्तुहरू जोडेर १० बनाउने तरिका सिकौँ।',
+      'दश बनाऔँ सिमुलेसनमा स्वागत छ! दुई समूहका वस्तुहरू जोडेर 10 बनाउने तरिका सिकौँ।',
       'Welcome to Make Ten Challenge! Learn how two groups of objects combine to make 10.'
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -244,11 +244,11 @@ export const MakeTenChallenge: React.FC<Props> = ({
 
           <div>
             <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
-              कक्षा १ • गणित • अध्याय ६ : दश (Ten)
+              Class 1 • Maths • Chapter 6 : Ten
             </div>
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
-                ? 'सिमुलेसन ०३: दश बनाऔँ (Make Ten Challenge)'
+                ? 'सिमुलेसन 03: दश बनाऔँ (Make Ten Challenge)'
                 : 'Simulation 03: Make Ten Challenge'}
             </h1>
           </div>
@@ -273,21 +273,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
             <span>{stars} Stars</span>
           </div>
 
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            style={{
-              padding: '6px 12px',
-              background: '#FFFFFF',
-              border: '1px solid #DCE5DE',
-              borderRadius: '8px',
-              color: '#26332E',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '13px',
-            }}
-          >
-            {language === 'np' ? 'नेपाली | EN' : 'EN | नेपाली'}
-          </button>
+          
 
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
@@ -329,7 +315,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
             cursor: 'pointer',
           }}
         >
-          {language === 'np' ? '१. दुई समूहमा बाँडौँ (Distribute Ten)' : '1. Distribute Ten'}
+          {language === 'np' ? '1. दुई समूहमा बाँडौँ (Distribute Ten)' : '1. Distribute Ten'}
         </button>
 
         <button
@@ -345,7 +331,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
             cursor: 'pointer',
           }}
         >
-          {language === 'np' ? '२. १० बनाउने खेल (Make Ten Quiz)' : '2. Make Ten Quiz'}
+          {language === 'np' ? '2. 10 बनाउने खेल (Make Ten Quiz)' : '2. Make Ten Quiz'}
         </button>
       </div>
 
@@ -419,7 +405,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                 }}
               >
                 <div style={{ fontSize: '16px', fontWeight: 800, color: '#26332E' }}>
-                  {language === 'np' ? `टोकरी १: ${formatNum(basketACount)} स्याउ` : `Basket 1: ${basketACount} Apples`}
+                  {language === 'np' ? `टोकरी 1: ${formatNum(basketACount)} स्याउ` : `Basket 1: ${basketACount} Apples`}
                 </div>
 
                 {/* Apples inside Basket A */}
@@ -454,7 +440,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                     alignItems: 'center',
                     gap: '6px',
                   }}
-                  title={language === 'np' ? '१ स्याउ दायाँ सार्नुहोस्' : 'Move 1 Apple Right'}
+                  title={language === 'np' ? '1 स्याउ दायाँ सार्नुहोस्' : 'Move 1 Apple Right'}
                 >
                   <span>→</span>
                 </button>
@@ -475,7 +461,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                     alignItems: 'center',
                     gap: '6px',
                   }}
-                  title={language === 'np' ? '१ स्याउ बायाँ सार्नुहोस्' : 'Move 1 Apple Left'}
+                  title={language === 'np' ? '1 स्याउ बायाँ सार्नुहोस्' : 'Move 1 Apple Left'}
                 >
                   <span>←</span>
                 </button>
@@ -498,7 +484,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                 }}
               >
                 <div style={{ fontSize: '16px', fontWeight: 800, color: '#f472b6' }}>
-                  {language === 'np' ? `टोकरी २: ${formatNum(basketBCount)} स्याउ` : `Basket 2: ${basketBCount} Apples`}
+                  {language === 'np' ? `टोकरी 2: ${formatNum(basketBCount)} स्याउ` : `Basket 2: ${basketBCount} Apples`}
                 </div>
 
                 {/* Apples inside Basket B */}
@@ -519,15 +505,15 @@ export const MakeTenChallenge: React.FC<Props> = ({
             {/* Quick Combination Presets Strip */}
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
               {[
-                { a: 1, label: '१ + ९' },
-                { a: 2, label: '२ + ८' },
-                { a: 3, label: '३ + ७' },
-                { a: 4, label: '४ + ६' },
-                { a: 5, label: '५ + ५' },
-                { a: 6, label: '६ + ४' },
-                { a: 7, label: '७ + ३' },
-                { a: 8, label: '८ + २' },
-                { a: 9, label: '९ + १' },
+                { a: 1, label: '1 + 9' },
+                { a: 2, label: '2 + 8' },
+                { a: 3, label: '3 + 7' },
+                { a: 4, label: '4 + 6' },
+                { a: 5, label: '5 + 5' },
+                { a: 6, label: '6 + 4' },
+                { a: 7, label: '7 + 3' },
+                { a: 8, label: '8 + 2' },
+                { a: 9, label: '9 + 1' },
               ].map((p) => (
                 <button
                   key={p.a}
@@ -566,7 +552,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
             <div style={{ textAlign: 'center' }}>
               <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 900, color: '#26332E' }}>
                 {language === 'np'
-                  ? `${formatNum(puzzles[puzzleIndex].givenA)} मा कति जोड्दा १० हुन्छ?`
+                  ? `${formatNum(puzzles[puzzleIndex].givenA)} मा कति जोड्दा 10 हुन्छ?`
                   : `What number added to ${puzzles[puzzleIndex].givenA} makes 10?`}
               </h2>
               <p style={{ margin: '6px 0 0', fontSize: '13px', color: '#26332E' }}>
@@ -650,7 +636,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                 >
                   {puzzleFeedback
                     ? language === 'np'
-                      ? 'शानदार! सही उत्तर (+१ तारा)'
+                      ? 'शानदार! सही उत्तर (+1 तारा)'
                       : 'Splendid! Correct (+1 Star)'
                     : language === 'np'
                     ? 'पुनः प्रयास गर्नुहोस्!'

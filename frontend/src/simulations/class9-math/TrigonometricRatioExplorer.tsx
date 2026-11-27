@@ -71,7 +71,7 @@ export const TrigonometricRatioExplorer: React.FC<SimProps> = ({ onBackToLibrary
       onBack={handleBack}
       grade={9}
       mascotGreeting={L(
-        'नमस्ते! समकोणी त्रिभुजमा सम्मुख भुजा (Perpendicular), आसन्न भुजा (Base) र कर्ण (Hypotenuse) को सम्बन्ध तथा ६ वटा त्रिकोणमितीय अनुपातहरू अन्वेषण गर्नुहोस्!',
+        'नमस्ते! समकोणी त्रिभुजमा सम्मुख भुजा (Perpendicular), आसन्न भुजा (Base) र कर्ण (Hypotenuse) को सम्बन्ध तथा 6 pcs त्रिकोणमितीय अनुपातहरू अन्वेषण गर्नुहोस्!',
         'Welcome! Explore Opposite (p), Adjacent (b), and Hypotenuse (h) in a right triangle, and discover all six trigonometric ratios!'
       )}
     >
@@ -81,7 +81,7 @@ export const TrigonometricRatioExplorer: React.FC<SimProps> = ({ onBackToLibrary
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
             <div>
               <h4 className="font-bold text-slate-800 text-sm">
-                {L('समकोणी त्रिभुज ABC (∠B = ९०°)', 'Right-Angled Triangle ABC (∠B = 90°)')}
+                {L('समकोणी त्रिभुज ABC (∠B = 90°)', 'Right-Angled Triangle ABC (∠B = 90°)')}
               </h4>
               <p className="text-xs text-slate-500">
                 {L('सन्दर्भ कोण परिवर्तन गर्दा सम्मुख र आसन्न भुजाहरू बदलिन्छन्।', 'Changing reference angle swaps Opposite and Adjacent sides.')}
@@ -251,7 +251,7 @@ export const TrigonometricRatioExplorer: React.FC<SimProps> = ({ onBackToLibrary
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              {L('६ वटा अनुपात (6 Ratios)', '6 Ratios')}
+              {L('6 pcs अनुपात (6 Ratios)', '6 Ratios')}
             </button>
             <button
               onClick={() => setActiveTab('identities')}
@@ -343,7 +343,7 @@ export const TrigonometricRatioExplorer: React.FC<SimProps> = ({ onBackToLibrary
               <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-[11px] text-amber-950">
                 <strong>💡 {L('स्मरण सूत्र (Mnemonic):', 'Formula Rule:')}</strong>{' '}
                 {L(
-                  'सम्मुख भुजा (p) = कोणको सिधा अगाडिको भुजा, आसन्न भुजा (b) = कोण जोडिएको भुजा, कर्ण (h) = समकोण (९०°) को सिधा अगाडिको सबैभन्दा लामो भुजा।',
+                  'सम्मुख भुजा (p) = कोणको सिधा अगाडिको भुजा, आसन्न भुजा (b) = कोण जोडिएको भुजा, कर्ण (h) = समकोण (90°) को सिधा अगाडिको सबैभन्दा लामो भुजा।',
                   'Opposite (p) is opposite the angle, Adjacent (b) is next to it, and Hypotenuse (h) is always opposite the 90° angle.'
                 )}
               </div>

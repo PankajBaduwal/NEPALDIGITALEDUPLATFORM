@@ -13,53 +13,53 @@ interface ProofStep {
 
 const THEOREM_1_STEPS: ProofStep[] = [
   {
-    statement: 'रचना: OA र OB जोडौँ।',
-    reason: 'रचना अनुसार (By construction)',
+    statement: 'Construction: join OA and OB.',
+    reason: 'By construction',
     missing: false,
   },
   {
-    statement: 'समकोणी त्रिभुजहरू △OMA र △OMB मा:',
-    reason: 'तुलना गर्दा (In right triangles △OMA and △OMB)',
+    statement: 'In right triangles △OMA and △OMB:',
+    reason: 'Comparing (in right triangles △OMA and △OMB)',
     missing: false,
   },
   {
-    statement: '(i) कर्ण OA = कर्ण OB',
-    reason: 'एउटै वृत्तका अर्धव्यासहरू (Radii of the same circle)',
+    statement: '(i) Hypotenuse OA = hypotenuse OB',
+    reason: 'Radii of the same circle',
     missing: true,
     options: [
-      'एउटै वृत्तका अर्धव्यासहरू (Radii of the same circle)',
-      'साझा भुजाहरू',
-      'व्यासहरू',
+      'Radii of the same circle',
+      'Common sides',
+      'Diameters',
     ],
-    correctAnswer: 'एउटै वृत्तका अर्धव्यासहरू (Radii of the same circle)',
+    correctAnswer: 'Radii of the same circle',
   },
   {
     statement: '(ii) OM = OM',
-    reason: 'साझा भुजा (Common side)',
+    reason: 'Common side',
     missing: false,
   },
   {
-    statement: '(iii) ∠OMA = ∠OMB = ९०°',
-    reason: 'OM ⊥ AB दिएको (Given perpendicular)',
+    statement: '(iii) ∠OMA = ∠OMB = 90°',
+    reason: 'OM ⊥ AB given (perpendicular)',
     missing: false,
   },
   {
     statement: '△OMA ≅ △OMB',
     reason: 'क.भु.स. (R.H.S.) अनुरुपता सर्त अनुसार',
     missing: true,
-    options: ['क.भु.स. (R.H.S.) सर्त', 'भु.भु.भु. (S.S.S.) सर्त', 'को.को.को. (A.A.A.) सर्त'],
-    correctAnswer: 'क.भु.स. (R.H.S.) सर्त',
+    options: ['R.H.S. condition', 'S.S.S. condition', 'A.A.A. condition'],
+    correctAnswer: 'R.H.S. condition',
   },
   {
-    statement: 'अतः AM = MB (अर्थात् OM ले जीवा AB लाई समद्विभाजित गर्छ)',
-    reason: 'अनुरुप त्रिभुजका अनुरुप भुजाहरू (Corresponding sides of congruent triangles)',
+    statement: 'Therefore AM = MB',
+    reason: 'Corresponding sides of congruent triangles',
     missing: true,
     options: [
-      'अनुरुप त्रिभुजका अनुरुप भुजाहरू (Corresponding sides of congruent triangles)',
-      'शीर्षाभिमुख भुजाहरू',
-      'थाहा दिएको अनुसार',
+      'Corresponding sides of congruent triangles',
+      'Vertically opposite sides',
+      'As given',
     ],
-    correctAnswer: 'अनुरुप त्रिभुजका अनुरुप भुजाहरू (Corresponding sides of congruent triangles)',
+    correctAnswer: 'Corresponding sides of congruent triangles',
   },
 ];
 
@@ -68,10 +68,10 @@ const QUIZ_QUESTIONS = [
     np: 'वृत्तको केन्द्रबाट कुनै जीवामा खिचिएको लम्बले उक्त जीवालाई के गर्छ?',
     en: 'What does the perpendicular drawn from the centre of a circle to a chord do?',
     options: [
-      { key: 'A', label: 'जीवालाई बराबर दुई भागमा समद्विभाजित गर्दछ (Bisects the chord)' },
-      { key: 'B', label: 'जीवालाई दोब्बर बनाउँछ' },
-      { key: 'C', label: 'जीवालाई काट्दैन' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'Bisects the chord into two equal parts' },
+      { key: 'B', label: 'Doubles the chord' },
+      { key: 'C', label: 'Does not cut the chord' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
@@ -79,10 +79,10 @@ const QUIZ_QUESTIONS = [
     np: 'एउटै वृत्तका बराबर लम्बाइ भएका दुई जीवाहरू केन्द्रबाट कस्तो दुरीमा रहन्छन्?',
     en: 'Equal chords of a circle are at what distance from the centre?',
     options: [
-      { key: 'A', label: 'बराबर दुरीमा (Equidistant from the centre)' },
-      { key: 'B', label: 'फरक फरक दुरीमा' },
-      { key: 'C', label: 'सधैं केन्द्रमै' },
-      { key: 'D', label: 'अनन्त दुरीमा' },
+      { key: 'A', label: 'At equal distance (equidistant from the centre)' },
+      { key: 'B', label: 'At different distances' },
+      { key: 'C', label: 'Always at the centre' },
+      { key: 'D', label: 'At infinite distance' },
     ],
     answer: 'A',
   },
@@ -90,10 +90,10 @@ const QUIZ_QUESTIONS = [
     np: 'यदि केन्द्रबाट दुई जीवाहरूको लम्ब दुरी बराबर (OM = ON) छ भने जीवाहरूको लम्बाइ कस्तो हुन्छ?',
     en: 'If the perpendicular distances of two chords from the centre are equal (OM = ON), what is true of the chords?',
     options: [
-      { key: 'A', label: 'दुवै जीवाहरू बराबर हुन्छन् (Chords are equal)' },
-      { key: 'B', label: 'एउटा दोब्बर हुन्छ' },
-      { key: 'C', label: 'दुवै लम्ब हुन्छन्' },
-      { key: 'D', label: 'कुनै सम्बन्ध हुँदैन' },
+      { key: 'A', label: 'Both chords are equal' },
+      { key: 'B', label: 'One is double the other' },
+      { key: 'C', label: 'Both are perpendicular' },
+      { key: 'D', label: 'There is no relation' },
     ],
     answer: 'A',
   },
@@ -164,7 +164,7 @@ export const CircleTheoremInvestigationLab: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! वृत्तका दुई सर्वोत्कृष्ट साध्यहरू: १) केन्द्रबाट जीवामा खिचिएको लम्बले जीवालाई समद्विभाजित गर्छ (AM = MB) र २) बराबर जीवाहरू केन्द्रबाट बराबर दुरीमा हुन्छन् (AB = CD ⇔ OM = ON) लाई प्रत्यक्ष अन्वेषण गर्नुहोस्!',
+        'नमस्ते! वृत्तका दुई सर्वोत्कृष्ट साध्यहरू: 1) केन्द्रबाट जीवामा खिचिएको लम्बले जीवालाई समद्विभाजित गर्छ (AM = MB) र 2) बराबर जीवाहरू केन्द्रबाट बराबर दुरीमा हुन्छन् (AB = CD ⇔ OM = ON) लाई प्रत्यक्ष अन्वेषण गर्नुहोस्!',
         'Welcome! Explore the core circle theorems: perpendicular from center bisects chord (AM = MB) and equal chords are equidistant from center (AB = CD ⇔ OM = ON)!'
       )}
     >
@@ -184,7 +184,7 @@ export const CircleTheoremInvestigationLab: React.FC<{
               fontSize: 13,
             }}
           >
-            📏 {L('साध्य १: लम्ब र समद्विभाजन (Perpendicular Bisection)', 'Perpendicular Bisection')}
+            📏 {L('साध्य 1: लम्ब र समद्विभाजन (Perpendicular Bisection)', 'Perpendicular Bisection')}
           </button>
           <button
             onClick={() => setActiveTab('equidistant')}
@@ -199,7 +199,7 @@ export const CircleTheoremInvestigationLab: React.FC<{
               fontSize: 13,
             }}
           >
-            ⚖️ {L('साध्य २: बराबर जीवा र समान दुरी (Equal Chords Equidistant)', 'Equal Chords Equidistant')}
+            ⚖️ {L('साध्य 2: बराबर जीवा र समान दुरी (Equal Chords Equidistant)', 'Equal Chords Equidistant')}
           </button>
           <button
             onClick={() => setActiveTab('proof')}
@@ -214,7 +214,7 @@ export const CircleTheoremInvestigationLab: React.FC<{
               fontSize: 13,
             }}
           >
-            📜 {L('साध्य १ को सैद्धान्तिक प्रमाण (Proof)', 'Theorem 1 Formal Proof')}
+            📜 {L('साध्य 1 को सैद्धान्तिक प्रमाण (Proof)', 'Theorem 1 Formal Proof')}
           </button>
         </div>
 
@@ -335,10 +335,10 @@ export const CircleTheoremInvestigationLab: React.FC<{
               }}
             >
               <strong style={{ fontSize: 13, color: '#065F46' }}>
-                {L('साध्य १ को निष्कर्ष (Theorem 1 Conclusion):', 'Theorem 1 Conclusion:')}
+                {L('साध्य 1 को निष्कर्ष (Theorem 1 Conclusion):', 'Theorem 1 Conclusion:')}
               </strong>
               <div style={{ fontFamily: 'monospace', fontSize: 15, color: '#065F46' }}>
-                AM = {fmt(halfCm)} cm र MB = {fmt(halfCm)} cm ⇒ <strong>AM = MB</strong>
+                AM = {fmt(halfCm)} cm and MB = {fmt(halfCm)} cm ⇒ <strong>AM = MB</strong>
               </div>
               <div style={{ fontSize: 12, color: '#166534' }}>
                 ✓ {L('प्रमाणित: वृत्तको केन्द्र O बाट जीवा AB मा खिचिएको लम्ब OM ले जीवालाई ठ्याक्कै दुई बराबर भागमा बाँड्दछ (AM = MB)।', 'Verified: Perpendicular OM from centre O bisects chord AB equally (AM = MB).')}
@@ -428,28 +428,28 @@ export const CircleTheoremInvestigationLab: React.FC<{
             >
               <strong style={{ fontSize: 14, color: chord1LenCm === chord2LenCm ? '#065F46' : '#92400E' }}>
                 {chord1LenCm === chord2LenCm
-                  ? L('साध्य २ प्रमाणित: बराबर जीवाहरू केन्द्रबाट बराबर दुरीमा हुन्छन्!', 'Theorem 2 Verified: Equal chords are equidistant from centre!')
+                  ? L('साध्य 2 प्रमाणित: बराबर जीवाहरू केन्द्रबाट बराबर दुरीमा हुन्छन्!', 'Theorem 2 Verified: Equal chords are equidistant from centre!')
                   : L('जीवाहरूको लम्बाइ फरक हुँदा केन्द्रबाट दुरी पनि फरक हुन्छ:', 'Different chord lengths have different distances from centre:')}
               </strong>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, fontSize: 13, marginTop: 4 }}>
                 <div style={{ backgroundColor: '#FFFFFF', padding: 10, borderRadius: 8 }}>
-                  <div>जीवा AB = {fmt(chord1LenCm)} cm</div>
+                  <div>Chord AB = {fmt(chord1LenCm)} cm</div>
                   <div style={{ color: '#1D4ED8', fontWeight: 700, marginTop: 2 }}>
-                    केन्द्रबाट दुरी OM = {fmt(dist1Cm)} cm
+                    Distance from centre OM = {fmt(dist1Cm)} cm
                   </div>
                 </div>
                 <div style={{ backgroundColor: '#FFFFFF', padding: 10, borderRadius: 8 }}>
-                  <div>जीवा CD = {fmt(chord2LenCm)} cm</div>
+                  <div>Chord CD = {fmt(chord2LenCm)} cm</div>
                   <div style={{ color: '#1D4ED8', fontWeight: 700, marginTop: 2 }}>
-                    केन्द्रबाट दुरी ON = {fmt(dist2Cm)} cm
+                    Distance from centre ON = {fmt(dist2Cm)} cm
                   </div>
                 </div>
               </div>
 
               {chord1LenCm === chord2LenCm && (
                 <div style={{ color: '#166534', fontWeight: 700, fontSize: 12 }}>
-                  ✓ AB = CD ({fmt(chord1LenCm)} cm) भएकाले दुवैको केन्द्रबाट लम्ब दुरी बराबर छ: OM = ON = {fmt(dist1Cm)} cm!
+                  ✓ AB = CD ({fmt(chord1LenCm)} cm), so both are at equal perpendicular distance from the centre: OM = ON = {fmt(dist1Cm)} cm!
                 </div>
               )}
             </div>
@@ -471,7 +471,7 @@ export const CircleTheoremInvestigationLab: React.FC<{
           >
             <div style={{ fontSize: 13, fontWeight: 700, color: '#1E293B' }}>
               {L(
-                'साध्य १: वृत्तको केन्द्रबाट जीवामा खिचिएको लम्बले उक्त जीवालाई समद्विभाजित गर्छ।',
+                'साध्य 1: वृत्तको केन्द्रबाट जीवामा खिचिएको लम्बले उक्त जीवालाई समद्विभाजित गर्छ।',
                 'Theorem 1: The perpendicular drawn from the centre of a circle to a chord bisects the chord.'
               )}
             </div>

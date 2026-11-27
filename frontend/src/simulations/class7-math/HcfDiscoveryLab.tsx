@@ -1,6 +1,6 @@
 /**
  * HcfDiscoveryLab.tsx
- * Grade 7 Mathematics – Lesson 2: WHOLE NUMBER (पूर्ण सङ्ख्या)
+ * Grade 7 Mathematics – Lesson 2: WHOLE NUMBER
  * Simulation 4: HCF Discovery and Problem-Solving Lab (2D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 30-36)
  */
@@ -15,43 +15,43 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दुई वा दुईभन्दा बढी सङ्ख्याहरूलाई निःशेष भाग जाने सबैभन्दा ठूलो साझा गुणनखण्डलाई के भनिन्छ?',
     en: 'What is the greatest common factor that divides two or more numbers without remainder?',
     options: [
-      { key: 'A', label: 'लघुत्तम समापवर्त्य (LCM)' },
-      { key: 'B', label: 'महत्तम समापवर्तक (HCF / म.स.)' },
-      { key: 'C', label: 'पूर्ण वर्ग सङ्ख्या' },
-      { key: 'D', label: 'अभाज्य सङ्ख्या' },
+      { key: 'A', label: 'Lowest common multiple (LCM)' },
+      { key: 'B', label: 'Highest common factor (HCF)' },
+      { key: 'C', label: 'Perfect square number' },
+      { key: 'D', label: 'Prime number' },
     ],
     answer: 'B',
   },
   {
-    np: '२० र ३५ को साझा गुणनखण्डहरू {१, ५} भए यिनीहरूको म.स. (HCF) कति हुन्छ?',
+    np: '20 र 35 को साझा गुणनखण्डहरू {1, 5} भए यिनीहरूको म.स. (HCF) कति हुन्छ?',
     en: 'If common factors of 20 and 35 are {1, 5}, what is their HCF?',
     options: [
-      { key: 'A', label: '१' },
-      { key: 'B', label: '५' },
-      { key: 'C', label: '२०' },
-      { key: 'D', label: '३५' },
+      { key: 'A', label: '1' },
+      { key: 'B', label: '5' },
+      { key: 'C', label: '20' },
+      { key: 'D', label: '35' },
     ],
     answer: 'B',
   },
   {
-    np: 'हरिमायाले ३० वटा स्याउ र ४० वटा केरा बढीमा कति जनालाई बराबर भाग लगाउन सक्छिन्?',
+    np: 'हरिमायाले 30 pcs स्याउ र 40 pcs केरा बढीमा कति जनालाई बराबर भाग लगाउन सक्छिन्?',
     en: 'Harimaya has 30 apples and 40 bananas. Among at most how many people can she distribute them equally?',
     options: [
-      { key: 'A', label: '५ जना' },
-      { key: 'B', label: '१० जना (म.स. = १०)' },
-      { key: 'C', label: '१५ जना' },
-      { key: 'D', label: '२० जना' },
+      { key: 'A', label: '5 people' },
+      { key: 'B', label: '10 people (HCF = 10)' },
+      { key: 'C', label: '15 people' },
+      { key: 'D', label: '20 people' },
     ],
     answer: 'B',
   },
   {
-    np: '१०० र १२५ को भाग विधिबाट म.स. निकाल्दा अन्तिम भाजक कति हुन्छ? (१२५ ÷ १०० = १ शेष २५, १०० ÷ २५ = ४ शेष ०)',
+    np: '100 र 125 को भाग विधिबाट म.स. निकाल्दा अन्तिम भाजक कति हुन्छ?',
     en: 'By division method, what is the final divisor giving remainder 0 for 100 and 125?',
     options: [
-      { key: 'A', label: '५' },
-      { key: 'B', label: '२०' },
-      { key: 'C', label: '२५' },
-      { key: 'D', label: '५०' },
+      { key: 'A', label: '5' },
+      { key: 'B', label: '20' },
+      { key: 'C', label: '25' },
+      { key: 'D', label: '50' },
     ],
     answer: 'C',
   },
@@ -94,23 +94,23 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
   const [divStepIndex, setDivStepIndex] = useState<number>(1);
   const DIV_STEPS = [
     {
-      titleNp: 'चरण १: ठूलो सङ्ख्या (१२५) लाई सानो सङ्ख्या (१००) ले भाग गर्ने',
+      titleNp: 'चरण 1: ठूलो सङ्ख्या (125) लाई सानो सङ्ख्या (100) ले भाग गर्ने',
       titleEn: 'Step 1: Divide larger number (125) by smaller number (100)',
       dividend: 125,
       divisor: 100,
       quotient: 1,
       remainder: 25,
-      descNp: '१२५ ÷ १०० = १ पटक गयो, शेष २५ आयो। (शेष ० नभएकाले अघि बढ्ने)',
+      descNp: '125 ÷ 100 = 1 पटक गयो, शेष 25 आयो। (शेष 0 नभएकाले अघि बढ्ने)',
       descEn: '125 ÷ 100 = 1, remainder 25. (Remainder is not 0, continue)',
     },
     {
-      titleNp: 'चरण २: अघिल्लो भाजक (१००) लाई शेष (२५) ले भाग गर्ने',
+      titleNp: 'चरण 2: अघिल्लो भाजक (100) लाई शेष (25) ले भाग गर्ने',
       titleEn: 'Step 2: Divide previous divisor (100) by remainder (25)',
       dividend: 100,
       divisor: 25,
       quotient: 4,
       remainder: 0,
-      descNp: '१०० ÷ २५ = ४ पटक गयो, शेष ० आयो! अन्तिम भाजक २५ नै म.स. हो।',
+      descNp: '100 ÷ 25 = 4 पटक गयो, शेष 0 आयो! अन्तिम भाजक 25 नै म.स. हो।',
       descEn: '100 ÷ 25 = 4, remainder 0! Final divisor 25 is the HCF.',
     },
   ];
@@ -129,7 +129,7 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'महत्तम समापवर्तक (HCF / म.स.) भनेको दिइएका सङ्ख्याहरूलाई निःशेष भाग जाने सबैभन्दा ठूलो साझा गुणनखण्ड हो। आउनुहोस् व्यवहारिक प्रयोग सिकौँ!',
+        'Highest common factor (HCF) भनेको दिइएका सङ्ख्याहरूलाई निःशेष भाग जाने सबैभन्दा ठूलो साझा गुणनखण्ड हो। आउनुहोस् व्यवहारिक प्रयोग सिकौँ!',
         'Highest Common Factor (HCF) is the greatest common factor that divides all numbers without a remainder. Let us discover!'
       )}
     >
@@ -137,10 +137,10 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'factor_list', np: '१. साझा गुणनखण्ड सूची विधि', en: '1. Factor Listing Method' },
-            { id: 'prime_hcf', np: '२. अभाज्य गुणनखण्डबाट म.स.', en: '2. HCF by Prime Factorisation' },
-            { id: 'division_hcf', np: '३. निरन्तर भाग विधि', en: '3. Continuous Division Method' },
-            { id: 'distribution', np: '४. व्यवहारिक फलफूल बाँडफाँड (हरिमाया)', en: '4. Equal Distribution Challenge' },
+            { id: 'factor_list', np: '1. साझा गुणनखण्ड सूची विधि', en: '1. Factor Listing Method' },
+            { id: 'prime_hcf', np: '2. अभाज्य गुणनखण्डबाट म.स.', en: '2. HCF by Prime Factorisation' },
+            { id: 'division_hcf', np: '3. निरन्तर भाग विधि', en: '3. Continuous Division Method' },
+            { id: 'distribution', np: '4. व्यवहारिक फलफूल बाँडफाँड (हरिमाया)', en: '4. Equal Distribution Challenge' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -172,7 +172,7 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('पाठ्यपुस्तक पृष्ठ ३०-३१', 'Textbook Pages 30-31')}
+                  {L('पाठ्यपुस्तक पृष्ठ 30-31', 'Textbook Pages 30-31')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                   {L('सबै गुणनखण्डहरू सूचीकरण गरी सबैभन्दा ठूलो साझा गुणनखण्ड छान्ने', 'List All Factors and Find the Highest Common Factor')}
@@ -268,7 +268,7 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
                 {commonFactors.map((f) => (isNe ? toNp(f) : f)).join(', ')} {' }'}
               </div>
               <div style={{ fontSize: 22, fontWeight: 900, color: '#166534' }}>
-                {L('महत्तम समापवर्तक (HCF / म.स.) =', 'Highest Common Factor (HCF) =')}{' '}
+                {L('Highest common factor (HCF) =', 'Highest Common Factor (HCF) =')}{' '}
                 <strong style={{ color: '#0F766E' }}>{isNe ? toNp(hcfValue) : hcfValue}</strong>
               </div>
             </div>
@@ -279,30 +279,30 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
         {activeTab === 'prime_hcf' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक उदाहरण (पृष्ठ ३२)', 'Textbook Example (Page 32)')}
+              {L('पाठ्यपुस्तक उदाहरण (पृष्ठ 32)', 'Textbook Example (Page 32)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('१००, १२५ र २०० को अभाज्य गुणनखण्डबाट म.स. निकाल्ने', 'Find HCF of 100, 125 and 200 by Prime Factorisation')}
+              {L('100, 125 र 200 को अभाज्य गुणनखण्डबाट म.स. निकाल्ने', 'Find HCF of 100, 125 and 200 by Prime Factorisation')}
             </h3>
 
             {/* Ladder displays */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14, marginBottom: 20 }}>
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
-                <div style={{ fontSize: 15, fontWeight: 900, color: '#0F172A', marginBottom: 6 }}>१०० (100)</div>
+                <div style={{ fontSize: 15, fontWeight: 900, color: '#0F172A', marginBottom: 6 }}>100 (100)</div>
                 <div style={{ fontSize: 14, fontFamily: 'monospace', color: '#334155' }}>
                   = 2 × 2 × <strong style={{ color: '#0F766E', background: '#CCFBF1', padding: '2px 4px', borderRadius: 4 }}>5</strong> × <strong style={{ color: '#0F766E', background: '#CCFBF1', padding: '2px 4px', borderRadius: 4 }}>5</strong>
                 </div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
-                <div style={{ fontSize: 15, fontWeight: 900, color: '#0F172A', marginBottom: 6 }}>१२५ (125)</div>
+                <div style={{ fontSize: 15, fontWeight: 900, color: '#0F172A', marginBottom: 6 }}>125 (125)</div>
                 <div style={{ fontSize: 14, fontFamily: 'monospace', color: '#334155' }}>
                   = <strong style={{ color: '#0F766E', background: '#CCFBF1', padding: '2px 4px', borderRadius: 4 }}>5</strong> × <strong style={{ color: '#0F766E', background: '#CCFBF1', padding: '2px 4px', borderRadius: 4 }}>5</strong> × 5
                 </div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
-                <div style={{ fontSize: 15, fontWeight: 900, color: '#0F172A', marginBottom: 6 }}>२०० (200)</div>
+                <div style={{ fontSize: 15, fontWeight: 900, color: '#0F172A', marginBottom: 6 }}>200 (200)</div>
                 <div style={{ fontSize: 14, fontFamily: 'monospace', color: '#334155' }}>
                   = 2 × 2 × 2 × <strong style={{ color: '#0F766E', background: '#CCFBF1', padding: '2px 4px', borderRadius: 4 }}>5</strong> × <strong style={{ color: '#0F766E', background: '#CCFBF1', padding: '2px 4px', borderRadius: 4 }}>5</strong>
                 </div>
@@ -312,13 +312,13 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
             {/* Common Primes Highlight */}
             <div style={{ background: '#DCFCE7', border: '2px solid #16A34A', padding: 20, borderRadius: 16 }}>
               <div style={{ fontSize: 14, fontWeight: 800, color: '#166534', marginBottom: 4 }}>
-                {L('तीनै वटा सङ्ख्यामा साझा अभाज्य गुणनखण्डहरू (Common prime factors in all three):', 'Common prime factors in all three:')}
+                {L('तीनै pcs सङ्ख्यामा साझा अभाज्य गुणनखण्डहरू (Common prime factors in all three):', 'Common prime factors in all three:')}
               </div>
               <div style={{ fontSize: 24, fontWeight: 900, color: '#14532D' }}>
-                ५ × ५ = {isNe ? toNp(25) : 25}
+                5 × 5 = {isNe ? toNp(25) : 25}
               </div>
               <div style={{ fontSize: 14, fontWeight: 800, color: '#166534', marginTop: 4 }}>
-                ⟹ {L('म.स. (HCF) = २५', 'HCF = 25')}
+                ⟹ {L('HCF = 25', 'HCF = 25')}
               </div>
             </div>
           </div>
@@ -328,10 +328,10 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
         {activeTab === 'division_hcf' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#FEF3C7', color: '#B45309', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक विधि (पृष्ठ ३३)', 'Textbook Method (Page 33)')}
+              {L('पाठ्यपुस्तक विधि (पृष्ठ 33)', 'Textbook Method (Page 33)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('१०० र १२५ को भाग विधिबाट म.स. निकाल्ने (शेष ० नआएसम्म निरन्तर भाग)', 'HCF of 100 & 125 by Continuous Division until Remainder = 0')}
+              {L('100 र 125 को भाग विधिबाट म.स. निकाल्ने (शेष 0 नआएसम्म निरन्तर भाग)', 'HCF of 100 & 125 by Continuous Division until Remainder = 0')}
             </h3>
 
             {/* Division Steps Cards */}
@@ -345,11 +345,11 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
                     {isNe ? step.descNp : step.descEn}
                   </p>
                   <div style={{ display: 'flex', gap: 12, fontSize: 13, fontWeight: 800, flexWrap: 'wrap' }}>
-                    <span style={{ background: '#CCFBF1', padding: '3px 8px', borderRadius: 6 }}>भाजक: {isNe ? toNp(step.divisor) : step.divisor}</span>
-                    <span style={{ background: '#E2E8F0', padding: '3px 8px', borderRadius: 6 }}>भाज्य: {isNe ? toNp(step.dividend) : step.dividend}</span>
-                    <span style={{ background: '#FEF3C7', padding: '3px 8px', borderRadius: 6 }}>भागफल: {isNe ? toNp(step.quotient) : step.quotient}</span>
+                    <span style={{ background: '#CCFBF1', padding: '3px 8px', borderRadius: 6 }}>Divisor: {isNe ? toNp(step.divisor) : step.divisor}</span>
+                    <span style={{ background: '#E2E8F0', padding: '3px 8px', borderRadius: 6 }}>Dividend: {isNe ? toNp(step.dividend) : step.dividend}</span>
+                    <span style={{ background: '#FEF3C7', padding: '3px 8px', borderRadius: 6 }}>Quotient: {isNe ? toNp(step.quotient) : step.quotient}</span>
                     <span style={{ background: step.remainder === 0 ? '#DCFCE7' : '#FEE2E2', color: step.remainder === 0 ? '#166534' : '#DC2626', padding: '3px 8px', borderRadius: 6 }}>
-                      शेष: {isNe ? toNp(step.remainder) : step.remainder}
+                      Remainder: {isNe ? toNp(step.remainder) : step.remainder}
                     </span>
                   </div>
                 </div>
@@ -364,7 +364,7 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
                   if (divStepIndex < DIV_STEPS.length) {
                     setDivStepIndex((i) => i + 1);
                   } else {
-                    kit.good(L('भाग विधिबाट म.स. = २५ पत्ता लाग्यो!', 'HCF = 25 reached!'));
+                    kit.good(L('भाग विधिबाट म.स. = 25 पत्ता लाग्यो!', 'HCF = 25 reached!'));
                   }
                 }}
                 style={{
@@ -382,7 +382,7 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
               </button>
 
               <div style={{ fontSize: 16, fontWeight: 900, color: '#166534' }}>
-                म.स. (HCF) = {isNe ? '२५' : '25'}
+                HCF = {isNe ? '25' : '25'}
               </div>
             </div>
           </div>
@@ -393,10 +393,10 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <div style={{ background: '#FEF3C7', border: '2px solid #F59E0B', borderRadius: 16, padding: 18, marginBottom: 20 }}>
               <div style={{ fontSize: 12, fontWeight: 800, color: '#B45309', textTransform: 'uppercase', marginBottom: 4 }}>
-                🍎 {L('पाठ्यपुस्तक व्यवहारिक समस्या (पृष्ठ ३३)', 'Textbook Practical Problem (Page 33)')}
+                🍎 {L('पाठ्यपुस्तक व्यवहारिक समस्या (पृष्ठ 33)', 'Textbook Practical Problem (Page 33)')}
               </div>
               <h3 style={{ margin: 0, fontSize: 16, fontWeight: 900, color: '#92400E', lineHeight: 1.5 }}>
-                "{L('हरिमायासँग ३० वटा स्याउ र ४० वटा केरा छन्। ती फलफूलहरू बढीमा कति जनालाई बराबर भाग लगाउन सकिन्छ र प्रत्येकले कति-कति पाउँछन्?', 'Harimaya has 30 apples and 40 bananas. Among the greatest number of people, how many can receive an equal share without remainder?')}"
+                "{L('हरिमायासँग 30 pcs स्याउ र 40 pcs केरा छन्। ती फलफूलहरू बढीमा कति जनालाई बराबर भाग लगाउन सकिन्छ र प्रत्येकले कति-कति पाउँछन्?', 'Harimaya has 30 apples and 40 bananas. Among the greatest number of people, how many can receive an equal share without remainder?')}"
               </h3>
             </div>
 
@@ -413,7 +413,7 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
                       kit.tap();
                       setPeopleCount(cnt);
                       if (cnt === 10) {
-                        kit.good(L('उत्कृष्ट! १० जना नै अधिकतम सम्भावित सङ्ख्या हो (म.स. = १०)', 'Optimal! 10 people is the HCF'));
+                        kit.good(L('उत्कृष्ट! 10 जना नै अधिकतम सम्भावित सङ्ख्या हो (म.स. = 10)', 'Optimal! 10 people is the HCF'));
                       }
                     }}
                     style={{
@@ -445,15 +445,15 @@ export const HcfDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; onBack?: 
               <div style={{ fontSize: 16, fontWeight: 900, color: canDivideEvenly ? '#166534' : '#DC2626', marginBottom: 8 }}>
                 {canDivideEvenly
                   ? isOptimalPeople
-                    ? L('✓ अधिकतम सम्भावित मानिस सङ्ख्या: १० जना (म.स. = १०)', '✓ Greatest Possible Number of People: 10 (HCF = 10)')
+                    ? L('✓ अधिकतम सम्भावित मानिस सङ्ख्या: 10 people (HCF = 10)', '✓ Greatest Possible Number of People: 10 (HCF = 10)')
                     : L(`बराबर बाँड्न मिल्छ तर यो अधिकतम (म.स.) होइन।`, `Even distribution, but not the maximum (HCF).`)
                   : L('✗ यो सङ्ख्यामा सबै फलफूल बराबर बाँड्न मिल्दैन!', '✗ Cannot divide all fruits evenly!')}
               </div>
 
               {canDivideEvenly && (
                 <div style={{ fontSize: 14, color: '#1E293B', lineHeight: 1.6 }}>
-                  <div>• {L('प्रत्येक व्यक्तिले पाउने स्याउ:', 'Apples received by each person:')} ३० ÷ {isNe ? toNp(peopleCount) : peopleCount} = <strong>{isNe ? toNp(applesTotal / peopleCount) : applesTotal / peopleCount} {L('वटा', 'apples')}</strong></div>
-                  <div>• {L('प्रत्येक व्यक्तिले पाउने केरा:', 'Bananas received by each person:')} ४० ÷ {isNe ? toNp(peopleCount) : peopleCount} = <strong>{isNe ? toNp(bananasTotal / peopleCount) : bananasTotal / peopleCount} {L('वटा', 'bananas')}</strong></div>
+                  <div>• {L('प्रत्येक व्यक्तिले पाउने स्याउ:', 'Apples received by each person:')} 30 ÷ {isNe ? toNp(peopleCount) : peopleCount} = <strong>{isNe ? toNp(applesTotal / peopleCount) : applesTotal / peopleCount} {L('pcs', 'apples')}</strong></div>
+                  <div>• {L('प्रत्येक व्यक्तिले पाउने केरा:', 'Bananas received by each person:')} 40 ÷ {isNe ? toNp(peopleCount) : peopleCount} = <strong>{isNe ? toNp(bananasTotal / peopleCount) : bananasTotal / peopleCount} {L('pcs', 'bananas')}</strong></div>
                 </div>
               )}
             </div>

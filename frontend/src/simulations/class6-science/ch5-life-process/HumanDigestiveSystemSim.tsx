@@ -1,19 +1,19 @@
 /**
  * HumanDigestiveSystemSim.tsx
- * Simulation 13: 2D Human Digestive System Explorer (मानव पाचन प्रणाली)
- * Grade 6 Science • Unit 5: Life Process (जीवन प्रक्रिया)
+ * Simulation 13: 2D Human Digestive System Explorer
+ * Grade 6 Science • Unit 5: Life Process
  *
  * 100% Native HTML5 Canvas 2D Interactive Anatomical Simulation.
  * Features:
  * 1. 8 Major Anatomical Milestones:
- *    - Mouth & Salivary Glands (मुख र र्‍याल ग्रन्थी, pH 6.8, Ptyalin/Amylase)
- *    - Oesophagus & Peristalsis (पेरिस्टाल्सिस तरङ्गद्वारा खाना आमाशय पुग्ने)
- *    - Stomach (आमाशय, HCl, Pepsin, pH 2.0, Chyme formation)
- *    - Liver & Gallbladder (कलेजो र पित्तथैली, Bile emulsification of fats)
- *    - Pancreas (अग्नाशय, Amylase, Trypsin, Lipase, pH 7.8)
- *    - Small Intestine & Villi (सानो आन्द्रा, पोषक तत्व शोषण / Microvilli blood uptake)
- *    - Large Intestine (ठूलो आन्द्रा, पानी तथा खनिज पुनर्शोषण)
- *    - Rectum & Anus (मलद्वार, विसर्जन / Egestion)
+ *    - Mouth & Salivary Glands
+ *    - Oesophagus & Peristalsis
+ *    - Stomach
+ *    - Liver & Gallbladder
+ *    - Pancreas
+ *    - Small Intestine & Villi
+ *    - Large Intestine
+ *    - Rectum & Anus
  * 2. Real-time traveling Food Bolus journey with interactive step controls
  * 3. Microscopic Villi Inset: Zoom view into intestinal villi capillaries
  * 4. 5-Stage inquiry pedagogy, bilingual EN/NE, audio effects, and 3-star scoring.
@@ -162,7 +162,7 @@ export const HumanDigestiveSystemSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -573,7 +573,7 @@ export const HumanDigestiveSystemSim: React.FC<BaseSimulationProps> = ({
       titleNepali="मानव पाचन प्रणाली तथा पोषक तत्व शोषण"
       chapterNumber={5}
       chapterTitle="Unit 5: Life Process"
-      chapterTitleNepali="एकाइ ५: जीवन प्रक्रिया"
+      chapterTitleNepali="एकाइ 5: जीवन प्रक्रिया"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);

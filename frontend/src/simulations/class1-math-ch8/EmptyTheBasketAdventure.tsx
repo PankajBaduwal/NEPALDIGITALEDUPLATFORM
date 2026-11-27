@@ -1,7 +1,7 @@
 /**
  * EmptyTheBasketAdventure.tsx
- * Simulation 02: Empty the Basket Adventure (टोकरी खाली गर्ने साहसिक खेल)
- * Class 1 Mathematics - Chapter 8: Subtraction up to 10 (१० सम्मका सङ्ख्याहरूको घटाउ)
+ * Simulation 02: Empty the Basket Adventure
+ * Class 1 Mathematics - Chapter 8: Subtraction up to 10
  * Nepal Digital Education Platform
  */
 
@@ -25,7 +25,7 @@ interface Props {
   userRole?: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
 interface ContainerActivity {
   id: string;
@@ -50,7 +50,7 @@ const CONTAINER_ACTIVITIES: ContainerActivity[] = [
     itemNameEn: 'Apples',
     initialCount: 8,
     takeAwayTarget: 3,
-    descriptionNp: 'टोकरीमा ८ वटा स्याउ छन्। ३ वटा स्याउ बाहिर निकाल्नुहोस्।',
+    descriptionNp: 'टोकरीमा 8 वटा स्याउ छन्। 3 वटा स्याउ बाहिर निकाल्नुहोस्।',
     descriptionEn: 'The basket contains 8 apples. Take away 3 apples.',
   },
   {
@@ -62,7 +62,7 @@ const CONTAINER_ACTIVITIES: ContainerActivity[] = [
     itemNameEn: 'Toys',
     initialCount: 7,
     takeAwayTarget: 4,
-    descriptionNp: 'बाकसमा ७ वटा खेलौना छन्। ४ वटा खेलौना साथीलाई दिनुहोस्।',
+    descriptionNp: 'बाकसमा 7 वटा खेलौना छन्। 4 वटा खेलौना साथीलाई दिनुहोस्।',
     descriptionEn: 'The box contains 7 toys. Give away 4 toys to friends.',
   },
   {
@@ -74,7 +74,7 @@ const CONTAINER_ACTIVITIES: ContainerActivity[] = [
     itemNameEn: 'Birds',
     initialCount: 6,
     takeAwayTarget: 2,
-    descriptionNp: 'गुँडमा ६ वटा चरा छन्। २ वटा चरा उडेर गए। बाँकी कति रह्यो?',
+    descriptionNp: 'गुँडमा 6 वटा चरा छन्। 2 वटा चरा उडेर गए। बाँकी कति रह्यो?',
     descriptionEn: 'A nest contains 6 birds. 2 birds fly away. How many remain?',
   },
   {
@@ -86,7 +86,7 @@ const CONTAINER_ACTIVITIES: ContainerActivity[] = [
     itemNameEn: 'Flowers',
     initialCount: 5,
     takeAwayTarget: 0,
-    descriptionNp: 'गमलामा ५ वटा फूल छन्। शून्य (०) फूल हटाउँदा कति बाँकी रहन्छ?',
+    descriptionNp: 'गमलामा 5 वटा फूल छन्। शून्य (0) फूल हटाउँदा कति बाँकी रहन्छ?',
     descriptionEn: 'The pot has 5 flowers. Take away 0 flowers. How many remain?',
   },
   {
@@ -98,7 +98,7 @@ const CONTAINER_ACTIVITIES: ContainerActivity[] = [
     itemNameEn: 'Carrots',
     initialCount: 9,
     takeAwayTarget: 5,
-    descriptionNp: 'टोकरीमा ९ वटा गाँजर छन्। खरायोले ५ वटा गाँजर खायो।',
+    descriptionNp: 'टोकरीमा 9 वटा गाँजर छन्। खरायोले 5 वटा गाँजर खायो।',
     descriptionEn: 'The basket has 9 carrots. The rabbit ate 5 carrots.',
   },
   {
@@ -110,7 +110,7 @@ const CONTAINER_ACTIVITIES: ContainerActivity[] = [
     itemNameEn: 'Marbles',
     initialCount: 10,
     takeAwayTarget: 6,
-    descriptionNp: 'भाँडोमा १० वटा गोली छन्। ६ वटा बाहिर निकाल्नुहोस्।',
+    descriptionNp: 'भाँडोमा 10 वटा गोली छन्। 6 वटा बाहिर निकाल्नुहोस्।',
     descriptionEn: 'The jar has 10 marbles. Take out 6 marbles.',
   },
 ];
@@ -119,7 +119,7 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active activity index
@@ -277,15 +277,7 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              setLanguage((l) => (l === 'np' ? 'en' : 'np'));
-              playSound('click');
-            }}
-            className="px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition"
-          >
-            {language === 'np' ? 'EN' : 'नेपाली'}
-          </button>
+          
           <button
             onClick={() => setSoundEnabled((s) => !s)}
             className={`p-2 rounded-lg border transition ${
@@ -379,7 +371,7 @@ export const EmptyTheBasketAdventure: React.FC<Props> = ({
                 <div className="flex flex-wrap gap-2 justify-center items-center py-4">
                   {removedIndices.size === 0 ? (
                     <span className="text-xs text-slate-500 italic">
-                      {language === 'np' ? '(कुनै वस्तु हटाइएको छैन)' : '(No items removed yet)'}
+                      {language === 'np' ? '' : '(No items removed yet)'}
                     </span>
                   ) : (
                     Array.from(removedIndices).map((idx) => (

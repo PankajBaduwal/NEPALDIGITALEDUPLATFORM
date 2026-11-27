@@ -26,7 +26,7 @@ const CHALLENGES: WordChallenge[] = [
     categoryNp: 'उमेर सम्बन्धी समस्या (Age Problem)',
     categoryEn: 'Age Problem',
     storyNp:
-      'हाल बाबुको उमेर छोराको उमेरको ३ गुणा छ। १० वर्षपछि बाबुको उमेर छोराको उमेरको २ गुणा भन्दा १० वर्ष बढी हुनेछ। दुवैको हालको उमेर पत्ता लगाउनुहोस्।',
+      'हाल बाबुको उमेर छोराको उमेरको 3 गुणा छ। 10 वर्षपछि बाबुको उमेर छोराको उमेरको 2 गुणा भन्दा 10 वर्ष बढी हुनेछ। दुवैको हालको उमेर पत्ता लगाउनुहोस्।',
     storyEn:
       "Presently, a father's age is 3 times his son's age. After 10 years, the father's age will be 10 years more than twice the son's age. Find their present ages.",
     varXNp: 'बाबुको हालको उमेर (Father’s Age)',
@@ -38,14 +38,14 @@ const CHALLENGES: WordChallenge[] = [
     solution: {
       x: 60,
       y: 20,
-      answerNp: 'बाबुको उमेर = ६० वर्ष, छोराको उमेर = २० वर्ष',
+      answerNp: 'बाबुको उमेर = 60 वर्ष, छोराको उमेर = 20 वर्ष',
       answerEn: 'Father is 60 years old, Son is 20 years old',
     },
     hintsNp: [
       'पहिचान: बाबुको उमेर x र छोराको उमेर y मान्ने।',
-      'सर्त १: x = ३y अर्थात् x - ३y = ०',
-      'सर्त २: १० वर्षपछि बाबु = (x + १०), छोरा = (y + १०)। अतः (x + १०) = २(y + १०) + १०',
-      'समीकरण समाधान गर्दा y = २० र x = ६० आउँछ।',
+      'सर्त 1: x = 3y अर्थात् x - 3y = 0',
+      'सर्त 2: 10 वर्षपछि बाबु = (x + 10), छोरा = (y + 10)। अतः (x + 10) = 2(y + 10) + 10',
+      'समीकरण समाधान गर्दा y = 20 र x = 60 आउँछ।',
     ],
     hintsEn: [
       'Define: Father’s age = x, Son’s age = y.',
@@ -59,7 +59,7 @@ const CHALLENGES: WordChallenge[] = [
     categoryNp: 'वस्तुको मूल्य सम्बन्धी (Shopping / Cost)',
     categoryEn: 'Goods & Cost Problem',
     storyNp:
-      '५ वटा कलम र ३ वटा कापीको जम्मा मूल्य रु. १७५ पर्दछ। त्यस्तै २ वटा कलम र ४ वटा कापीको जम्मा मूल्य रु. १४० पर्दछ। एउटा कलम र एउटा कापीको मूल्य कति-कति पर्ला?',
+      '5 pcs कलम र 3 pcs कापीको जम्मा मूल्य Rs. 175 पर्दछ। त्यस्तै 2 pcs कलम र 4 pcs कापीको जम्मा मूल्य Rs. 140 पर्दछ। एउटा कलम र एउटा कापीको मूल्य कति-कति पर्ला?',
     storyEn:
       'The cost of 5 pens and 3 notebooks is Rs. 175. The cost of 2 pens and 4 notebooks is Rs. 140. Find the individual price of one pen and one notebook.',
     varXNp: 'एउटा कलमको मूल्य (Cost of 1 Pen)',
@@ -71,14 +71,14 @@ const CHALLENGES: WordChallenge[] = [
     solution: {
       x: 20,
       y: 25,
-      answerNp: '१ कलमको मूल्य = रु. २०, १ कापीको मूल्य = रु. २५',
+      answerNp: '1 कलमको मूल्य = Rs. 20, 1 कापीको मूल्य = Rs. 25',
       answerEn: '1 Pen = Rs. 20, 1 Notebook = Rs. 25',
     },
     hintsNp: [
-      'कलमको मूल्य = रु. x, कापीको मूल्य = रु. y मान्ने।',
-      'पहिलो अवस्था: ५x + ३y = १७५',
-      'दोस्रो अवस्था: २x + ४y = १४० ⇒ x = ७० - २y',
-      'प्रतिस्थापन गर्दा: ५(७० - २y) + ३y = १७५ ⇒ ३५० - ७y = १७५ ⇒ y = २५, x = २०',
+      'कलमको मूल्य = Rs. x, कापीको मूल्य = Rs. y मान्ने।',
+      'पहिलो अवस्था: 5x + 3y = 175',
+      'दोस्रो अवस्था: 2x + 4y = 140 ⇒ x = 70 - 2y',
+      'प्रतिस्थापन गर्दा: 5(70 - 2y) + 3y = 175 ⇒ 350 - 7y = 175 ⇒ y = 25, x = 20',
     ],
     hintsEn: [
       'Let cost of pen = x, cost of notebook = y.',
@@ -92,7 +92,7 @@ const CHALLENGES: WordChallenge[] = [
     categoryNp: 'दुई अङ्कको संख्या सम्बन्धी (Two-Digit Number)',
     categoryEn: 'Two-Digit Number Problem',
     storyNp:
-      'एउटा दुई अङ्कको संख्यामा अङ्कहरूको योगफल ९ छ। यदि अङ्कहरूको स्थान उल्ट्याउँदा बन्ने नयाँ संख्या मूल संख्या भन्दा २७ ले बढी हुन्छ भने, उक्त संख्या पत्ता लगाउनुहोस्।',
+      'एउटा दुई अङ्कको संख्यामा अङ्कहरूको योगफल 9 छ। यदि अङ्कहरूको स्थान उल्ट्याउँदा बन्ने नयाँ संख्या मूल संख्या भन्दा 27 ले बढी हुन्छ भने, उक्त संख्या पत्ता लगाउनुहोस्।',
     storyEn:
       'A two-digit number has digits summing to 9. When digits are reversed, the new number exceeds the original number by 27. Find the number.',
     varXNp: 'दश स्थानको अङ्क (Tens digit x)',
@@ -104,14 +104,14 @@ const CHALLENGES: WordChallenge[] = [
     solution: {
       x: 3,
       y: 6,
-      answerNp: 'संख्या = १०(३) + ६ = ३६',
+      answerNp: 'संख्या = 10(3) + 6 = 36',
       answerEn: 'Original Number = 10(3) + 6 = 36',
     },
     hintsNp: [
-      'संख्या = १०x + y र स्थान उल्ट्याउँदा = १०y + x',
-      'सर्त १: x + y = ९',
-      'सर्त २: (१०y + x) - (१०x + y) = २७ ⇒ ९y - ९x = २७ ⇒ y - x = ३',
-      'दुवै समीकरण जोड्दा: २y = १२ ⇒ y = ६, x = ३। अतः संख्या = ३६',
+      'संख्या = 10x + y र स्थान उल्ट्याउँदा = 10y + x',
+      'सर्त 1: x + y = 9',
+      'सर्त 2: (10y + x) - (10x + y) = 27 ⇒ 9y - 9x = 27 ⇒ y - x = 3',
+      'दुवै समीकरण जोड्दा: 2y = 12 ⇒ y = 6, x = 3। अतः संख्या = 36',
     ],
     hintsEn: [
       'Number = 10x + y, Reversed = 10y + x',
@@ -135,18 +135,18 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: 'यदि ५ कलम र ३ कापीको मूल्य रु. १७५ र कलमको मूल्य रु. २० भए, १ कापीको मूल्य कति हुन्छ?',
+    np: 'यदि 5 कलम र 3 कापीको मूल्य Rs. 175 र कलमको मूल्य Rs. 20 भए, 1 कापीको मूल्य कति हुन्छ?',
     en: 'If 5 pens and 3 copies cost Rs. 175 and 1 pen costs Rs. 20, what is 1 copy cost?',
     options: [
-      { key: 'A', label: 'रु. २५ (Rs. 25)' },
-      { key: 'B', label: 'रु. ३०' },
-      { key: 'C', label: 'रु. १५' },
-      { key: 'D', label: 'रु. २०' },
+      { key: 'A', label: 'Rs. 25 (Rs. 25)' },
+      { key: 'B', label: 'Rs. 30' },
+      { key: 'C', label: 'Rs. 15' },
+      { key: 'D', label: 'Rs. 20' },
     ],
     answer: 'A',
   },
   {
-    np: 'बाबुको हालको उमेर x वर्ष भए ५ वर्ष अघि बाबुको उमेर कति थियो?',
+    np: 'बाबुको हालको उमेर x वर्ष भए 5 वर्ष अघि बाबुको उमेर कति थियो?',
     en: "If father's present age is x years, what was his age 5 years ago?",
     options: [
       { key: 'A', label: 'x - 5' },
@@ -291,13 +291,13 @@ export const SimultaneousEquationChallenge: React.FC<{
             <div style={{ backgroundColor: '#F0FDFA', padding: 10, borderRadius: 8 }}>
               <strong>x = </strong> {L(ch.varXNp, ch.varXEn)}
               <div style={{ fontFamily: 'monospace', color: '#0F766E', marginTop: 4 }}>
-                समीकरण (i): {ch.eq1Model}
+                Equation (i): {ch.eq1Model}
               </div>
             </div>
             <div style={{ backgroundColor: '#F0FDFA', padding: 10, borderRadius: 8 }}>
               <strong>y = </strong> {L(ch.varYNp, ch.varYEn)}
               <div style={{ fontFamily: 'monospace', color: '#0F766E', marginTop: 4 }}>
-                समीकरण (ii): {ch.eq2Model}
+                Equation (ii): {ch.eq2Model}
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 /**
  * AngleConstructionCompassLab.tsx
- * Grade 7 Mathematics – Lesson 13: LINES AND ANGLES (रेखाहरू र कोणहरू)
+ * Grade 7 Mathematics – Lesson 13: LINES AND ANGLES
  * Simulation 1: Angle Construction Compass Lab (2D Interactive Compass Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 187-193)
  */
@@ -12,46 +12,46 @@ import { Compass, PenTool, Check, RefreshCw } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'कम्पास र पेन्सिलको प्रयोग गरी रेखाखण्डको सुरु बिन्दुबाट कुनै नबदली चाप खिच्दा बन्ने पहिलो कोण कति डिग्रीको हुन्छ?',
+    np: 'कम्पास र पेन्सिलको प्रयोग गरी रेखाखण्डको सुRs बिन्दुबाट कुनै नबदली चाप खिच्दा बन्ने पहिलो कोण कति degreesको हुन्छ?',
     en: 'When drawing an arc with an unchanged compass radius from a vertex, what angle is formed by the first arc intersection?',
     options: [
-      { key: 'A', label: '६०° (60°)' },
-      { key: 'B', label: '९०°' },
-      { key: 'C', label: '४५°' },
-      { key: 'D', label: '३०°' },
+      { key: 'A', label: '60° (60°)' },
+      { key: 'B', label: '90°' },
+      { key: 'C', label: '45°' },
+      { key: 'D', label: '30°' },
     ],
     answer: 'A',
   },
   {
-    np: '६०° को कोणलाई आधा (समद्विभाजन / Bisect) गर्दा कति डिग्रीको कोण बन्छ?',
+    np: '60° को कोणलाई आधा (समद्विभाजन / Bisect) गर्दा कति degreesको कोण बन्छ?',
     en: 'Bisecting a 60° angle creates what angle?',
     options: [
-      { key: 'A', label: '३०° (३०° लाई फेरि आधा गर्दा १५° बन्छ)' },
-      { key: 'B', label: '४५°' },
-      { key: 'C', label: '१५°' },
-      { key: 'D', label: '२०°' },
+      { key: 'A', label: '30° (halving 30° again gives 15°)' },
+      { key: 'B', label: '45°' },
+      { key: 'C', label: '15°' },
+      { key: 'D', label: '20°' },
     ],
     answer: 'A',
   },
   {
-    np: '९०° को कोणलाई समद्विभाजन (Bisect) गर्दा कति डिग्रीको कोण बन्दछ?',
+    np: '90° को कोणलाई समद्विभाजन (Bisect) गर्दा कति degreesको कोण बन्दछ?',
     en: 'Bisecting a 90° angle produces what angle?',
     options: [
-      { key: 'A', label: '४५° (४५°)' },
-      { key: 'B', label: '३०°' },
-      { key: 'C', label: '६०°' },
-      { key: 'D', label: '७५°' },
+      { key: 'A', label: '45° (45°)' },
+      { key: 'B', label: '30°' },
+      { key: 'C', label: '60°' },
+      { key: 'D', label: '75°' },
     ],
     answer: 'A',
   },
   {
-    np: '६०° र ९०° को बीचको कोणलाई समद्विभाजन गर्दा कुन कोण प्राप्त हुन्छ?',
+    np: '60° र 90° को बीचको कोणलाई समद्विभाजन गर्दा कुन कोण प्राप्त हुन्छ?',
     en: 'Bisecting the angle between 60° and 90° results in which angle?',
     options: [
-      { key: 'A', label: '७५° [ ६०° + (३०°/२) = ७५° ]' },
-      { key: 'B', label: '१०५°' },
-      { key: 'C', label: '१२०°' },
-      { key: 'D', label: '१३५°' },
+      { key: 'A', label: '75° [ 60° + (30°/2) = 75° ]' },
+      { key: 'B', label: '105°' },
+      { key: 'C', label: '120°' },
+      { key: 'D', label: '135°' },
     ],
     answer: 'A',
   },
@@ -76,13 +76,13 @@ export const AngleConstructionCompassLab: React.FC<{ onBackToLibrary?: () => voi
   const [constructStep, setConstructStep] = useState<number>(3);
 
   const CONSTRUCTIBLE = [
-    { deg: 60, np: '६०° (मूल चाप)', stepsNp: '१. रेखा खिच्ने, २. शीर्षबाट चाप घुमाउने, ३. सोही नापले चाप काट्ने = ६०°' },
-    { deg: 30, np: '३०° (६०° को आधा)', stepsNp: '१. ६०° बनाउने, २. ०° र ६०° बाट दुई चाप काट्ने = ३०°' },
-    { deg: 15, np: '१५° (३०° को आधा)', stepsNp: '१. ३०° बनाउने, २. ०° र ३०° बाट दुई चाप काटी जोड्ने = १५°' },
-    { deg: 90, np: '९०° (लम्ब रचना)', stepsNp: '१. ६०° र १२०° का चाप काट्ने, २. दुवैबाट माथि चाप काटी जोड्ने = ९०°' },
-    { deg: 45, np: '४५° (९०° को आधा)', stepsNp: '१. ९०° बनाउने, २. ०° र ९०° बाट दुई चाप काटी समद्विभाजन गर्ने = ४५°' },
-    { deg: 75, np: '७५° (६०° र ९०° को बीच)', stepsNp: '१. ६०° र ९०° बनाउने, २. दुवैको बीचबाट चाप काटी जोड्ने = ७५°' },
-    { deg: 120, np: '१२०° (दोस्रो चाप)', stepsNp: '१. ६०° को बिन्दुबाट फेरि सोही नापले दोस्रो चाप काट्ने = १२०°' },
+    { deg: 60, np: '60° (मूल चाप)', stepsNp: '1. Draw a line, 2. Swing an arc from the vertex, 3. Cut the arc with the same radius = 60°' },
+    { deg: 30, np: '30° (60° को आधा)', stepsNp: '1. Construct 60°, 2. Cut two arcs from 0° and 60° = 30°' },
+    { deg: 15, np: '15° (30° को आधा)', stepsNp: '1. Construct 30°, 2. Cut two arcs from 0° and 30° and join = 15°' },
+    { deg: 90, np: '90° (लम्ब रचना)', stepsNp: '1. Mark the 60° and 120° arcs, 2. Cut arcs above from both and join = 90°' },
+    { deg: 45, np: '45° (90° को आधा)', stepsNp: '1. Construct 90°, 2. Cut two arcs from 0° and 90° to bisect = 45°' },
+    { deg: 75, np: '75° (60° र 90° को बीच)', stepsNp: '1. Construct 60° and 90°, 2. Cut arcs between the two and join = 75°' },
+    { deg: 120, np: '120° (दोस्रो चाप)', stepsNp: '1. From the 60° point cut a second arc with the same radius = 120°' },
   ];
 
   return (
@@ -92,7 +92,7 @@ export const AngleConstructionCompassLab: React.FC<{ onBackToLibrary?: () => voi
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'कम्पासको नाप नबदली पहिलो चाप काट्दा ६०°, दोस्रो चापमा १२०°, र बीचमा समद्विभाजन गर्दा ९०°, ४५°, ३०°, १५°, ७५° बन्छन्!',
+        'कम्पासको नाप नबदली पहिलो चाप काट्दा 60°, दोस्रो चापमा 120°, र बीचमा समद्विभाजन गर्दा 90°, 45°, 30°, 15°, 75° बन्छन्!',
         'Compass radius unchanged makes 60° on first cut, 120° on second, and bisection yields 90°, 45°, 30°, 15°, 75°!'
       )}
     >
@@ -189,7 +189,7 @@ export const AngleConstructionCompassLab: React.FC<{ onBackToLibrary?: () => voi
 
               {/* Intersection Points */}
               <circle cx="160" cy="180" r="3" fill="#DC2626" />
-              <text x="160" y="195" fontSize="10" fill="#DC2626">०° बिन्दु</text>
+              <text x="160" y="195" fontSize="10" fill="#DC2626">0° point</text>
             </svg>
           </div>
 

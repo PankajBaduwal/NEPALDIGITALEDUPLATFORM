@@ -109,7 +109,7 @@ export const SimulationPreviewModal: React.FC<SimulationPreviewModalProps> = ({
           <h2 style={{ fontSize: '20px', fontWeight: '800', margin: '0 0 4px 0' }}>
             {simulation.title}
           </h2>
-          {simulation.titleNepali && (
+          {simulation.titleNepali && !(simulation.gradeLevels?.length && Math.max(...simulation.gradeLevels) <= 10) && (
             <p style={{ margin: 0, fontSize: '14px', color: '#bbf7d0', fontWeight: '600' }}>
               {simulation.titleNepali}
             </p>

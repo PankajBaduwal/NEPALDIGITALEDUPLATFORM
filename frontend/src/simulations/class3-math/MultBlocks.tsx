@@ -1,5 +1,5 @@
 /**
- * Lesson 14 · Multiplication (गुणन)
+ * Lesson 14 · Multiplication
  * MultTrays — 2D equal trays with tens-rods and ones-units to multiply 2-digit by 1-digit.
  * TimesWall — 2D 10×10 interactive array wall for multiplication tables.
  */
@@ -253,7 +253,7 @@ export const TimesWall: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G3-L14-02',
     chapter: 14,
-    titleNp: 'पहाडा पर्खाल (१०×१०)',
+    titleNp: 'पहाडा पर्खाल (10×10)',
     titleEn: 'Times-Table Wall (10×10)',
   });
 

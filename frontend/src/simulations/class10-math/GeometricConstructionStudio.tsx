@@ -96,12 +96,12 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
     },
     {
       qEn: 'What compass angle is constructed by drawing an arc of radius r and cutting it with the same radius r from the initial point?',
-      qNp: 'कम्पासको निश्चित अर्धव्यास r ले चाप खिचेर सोही अर्धव्यासले पहिलो पटक काट्दा कति डिग्रीको कोण बन्छ?',
+      qNp: 'कम्पासको निश्चित अर्धव्यास r ले चाप खिचेर सोही अर्धव्यासले पहिलो पटक काट्दा कति degreesको कोण बन्छ?',
       options: ['60°', '90°', '45°', '120°'],
-      optionsNp: ['६०°', '९०°', '४५°', '१२०°'],
+      optionsNp: ['60°', '90°', '45°', '120°'],
       correct: 0,
       hintEn: 'Cutting a circular arc with its own radius forms an equilateral triangle sector, which measures exactly 60°.',
-      hintNp: 'चापलाई आफ्नै अर्धव्यासले एकपटक काट्दा बन्ने कोण ठिक ६०° हुन्छ (दुईपटक काट्दा १२०°)।',
+      hintNp: 'चापलाई आफ्नै अर्धव्यासले एकपटक काट्दा बन्ने कोण ठिक 60° हुन्छ (दुईपटक काट्दा 120°)।',
     },
     {
       qEn: 'When constructing a parallelogram of equal area to a given parallelogram on the same base, which line must contain the top vertices?',
@@ -133,8 +133,8 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
       ],
       optionsNp: [
         'क्षे(ADE) = क्षे(ABCD)',
-        'क्षे(ADE) = २ × क्षे(ABCD)',
-        'क्षे(ADE) = १/२ × क्षे(ABCD)',
+        'क्षे(ADE) = 2 × क्षे(ABCD)',
+        'क्षे(ADE) = 1/2 × क्षे(ABCD)',
         'परिमिति(ADE) = परिमिति(ABCD)',
       ],
       correct: 0,
@@ -169,7 +169,7 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ ११: रचना (Construction) स्टुडियोमा स्वागत छ! यहाँ कम्पास र स्केलका चरणहरू प्रत्यक्ष हेर्नुहोस्, बराबर क्षेत्रफल हुने समानान्तर चतुर्भुज, त्रिभुज र चतुर्भुजबाट त्रिभुज बनाउने रचनाहरू सिक्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 11: रचना (Construction) स्टुडियोमा स्वागत छ! यहाँ कम्पास र स्केलका चरणहरू प्रत्यक्ष हेर्नुहोस्, बराबर क्षेत्रफल हुने समानान्तर चतुर्भुज, त्रिभुज र चतुर्भुजबाट त्रिभुज बनाउने रचनाहरू सिक्नुहोस्!',
         'Welcome to Grade 10 Unit 11: Interactive Geometric Construction Studio! Follow authentic step-by-step compass and ruler constructions to create equal-area parallelograms, triangles, and transform quadrilaterals into triangles!'
       )}
     >
@@ -207,7 +207,7 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
             {/* Visual Drawing Board */}
             <div className="md:col-span-7 bg-[#142D4E] p-4 rounded-2xl flex flex-col items-center justify-between text-white shadow-md">
               <div className="w-full flex justify-between text-xs font-bold text-slate-300 mb-2">
-                <span>{L('रचना १: दिइएको स.च. सँग बराबर क्षेत्रफल हुने स.च.', 'Construction 1: Equal-Area Parallelogram')}</span>
+                <span>{L('रचना 1: दिइएको स.च. सँग बराबर क्षेत्रफल हुने स.च.', 'Construction 1: Equal-Area Parallelogram')}</span>
                 <span className="text-amber-300 font-mono">
                   {L(`चरण ${fmt(pStep + 1)} / ${fmt(pTotalSteps)}`, `Step ${fmt(pStep + 1)} of ${fmt(pTotalSteps)}`)}
                 </span>
@@ -238,7 +238,7 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
                         strokeDasharray="3,2"
                       />
                       <circle cx={pB.x - 20} cy={pB.y - 34.6} r={3} fill="#F59E0B" />
-                      <text x={pB.x - 42} y={pB.y - 12} fill="#FDE68A" fontSize="9">६०°</text>
+                      <text x={pB.x - 42} y={pB.y - 12} fill="#FDE68A" fontSize="9">60°</text>
                     </g>
                   )}
 
@@ -277,7 +277,7 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
                         strokeWidth={1.5}
                         strokeDasharray="2,2"
                       />
-                      <text x={pA.x + 10} y={pA.y - 14} fill="#F472B6" fontSize="9">१२०°</text>
+                      <text x={pA.x + 10} y={pA.y - 14} fill="#F472B6" fontSize="9">120°</text>
                     </g>
                   )}
 
@@ -337,12 +337,12 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
 
                 <div className="space-y-2 text-xs">
                   {[
-                    L('१. आधार रेखाखण्ड AB = ४.५ से.मी. खिच्नुहोस्।', '1. Draw base line segment AB = 4.5 cm.'),
-                    L('२. बिन्दु B मा कम्पासको सहायताले ∠ABC = ६०° को कोण बनाउनुहोस्।', '2. Construct ∠ABC = 60° at B using compass.'),
-                    L('३. BC = ५.५ से.मी. र AD = ५.५ से.मी. चाप खिची स.च. ABCD पूरा गर्नुहोस्।', '3. Cut arcs of 5.5 cm to complete original ||gm ABCD.'),
-                    L('४. शीर्ष भुजा DC लाई दायाँ-बायाँ दुवैतर्फ समानान्तर रूपमा लम्ब्याउनुहोस्।', '4. Extend top side DC parallel to base AB.'),
-                    L('५. तोकिएको नयाँ कोण १२०° (वा नयाँ भुजा ६ से.मी.) को चाप खिच्नुहोस्।', '5. Construct specified new angle 120° (or side 6 cm).'),
-                    L('६. बिन्दुहरू P र Q जोडी नयाँ स.च. ABQP पूरा गर्नुहोस्।', '6. Join vertices to complete equal-area ||gm ABQP.'),
+                    L('1. आधार रेखाखण्ड AB = 4.5 से.मी. खिच्नुहोस्।', '1. Draw base line segment AB = 4.5 cm.'),
+                    L('2. बिन्दु B मा कम्पासको सहायताले ∠ABC = 60° को कोण बनाउनुहोस्।', '2. Construct ∠ABC = 60° at B using compass.'),
+                    L('3. BC = 5.5 से.मी. र AD = 5.5 से.मी. चाप खिची स.च. ABCD पूरा गर्नुहोस्।', '3. Cut arcs of 5.5 cm to complete original ||gm ABCD.'),
+                    L('4. शीर्ष भुजा DC लाई दायाँ-बायाँ दुवैतर्फ समानान्तर रूपमा लम्ब्याउनुहोस्।', '4. Extend top side DC parallel to base AB.'),
+                    L('5. तोकिएको नयाँ कोण 120° (वा नयाँ भुजा 6 से.मी.) को चाप खिच्नुहोस्।', '5. Construct specified new angle 120° (or side 6 cm).'),
+                    L('6. बिन्दुहरू P र Q जोडी नयाँ स.च. ABQP पूरा गर्नुहोस्।', '6. Join vertices to complete equal-area ||gm ABQP.'),
                   ].map((inst, i) => (
                     <div
                       key={i}
@@ -378,7 +378,7 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
             <div className="md:col-span-7 bg-[#142D4E] p-4 rounded-2xl flex flex-col items-center justify-between text-white shadow-md">
               <div className="w-full flex justify-between text-xs font-bold text-slate-300 mb-2">
-                <span>{L('रचना २: दिइएको त्रिभुजसँग बराबर क्षेत्रफल हुने त्रिभुज', 'Construction 2: Equal-Area Triangle')}</span>
+                <span>{L('रचना 2: दिइएको त्रिभुजसँग बराबर क्षेत्रफल हुने त्रिभुज', 'Construction 2: Equal-Area Triangle')}</span>
                 <span className="text-amber-300 font-mono">
                   {L(`चरण ${fmt(tStep + 1)} / ${fmt(tTotalSteps)}`, `Step ${fmt(tStep + 1)} of ${fmt(tTotalSteps)}`)}
                 </span>
@@ -486,11 +486,11 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
 
                 <div className="space-y-2 text-xs">
                   {[
-                    L('१. आधार रेखाखण्ड BC खिच्नुहोस्।', '1. Draw base line BC.'),
-                    L('२. दिइएको कोण र भुजाका आधारमा मूल त्रिभुज ABC पूरा गर्नुहोस्।', '2. Complete original ∆ABC.'),
-                    L('३. शीर्षबिन्दु A बाट आधार BC सँग समानान्तर हुने रेखा कोर्नुहोस्।', '3. Construct parallel line through A parallel to BC.'),
-                    L('४. तोकिएको भुजाको नाप लिएर कम्पासले समानान्तर रेखामा काट्नुहोस् (बिन्दु D)।', '4. Cut arc of specified side length at D.'),
-                    L('५. D लाई B र C सँग जोडी नयाँ समान क्षेत्रफलको त्रिभुज DBC बनाउनुहोस्।', '5. Join D to B and C to form equal-area ∆DBC.'),
+                    L('1. आधार रेखाखण्ड BC खिच्नुहोस्।', '1. Draw base line BC.'),
+                    L('2. दिइएको कोण र भुजाका आधारमा मूल त्रिभुज ABC पूरा गर्नुहोस्।', '2. Complete original ∆ABC.'),
+                    L('3. शीर्षबिन्दु A बाट आधार BC सँग समानान्तर हुने रेखा कोर्नुहोस्।', '3. Construct parallel line through A parallel to BC.'),
+                    L('4. तोकिएको भुजाको नाप लिएर कम्पासले समानान्तर रेखामा काट्नुहोस् (बिन्दु D)।', '4. Cut arc of specified side length at D.'),
+                    L('5. D लाई B र C सँग जोडी नयाँ समान क्षेत्रफलको त्रिभुज DBC बनाउनुहोस्।', '5. Join D to B and C to form equal-area ∆DBC.'),
                   ].map((inst, i) => (
                     <div
                       key={i}
@@ -518,7 +518,7 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
             <div className="md:col-span-7 bg-[#142D4E] p-4 rounded-2xl flex flex-col items-center justify-between text-white shadow-md">
               <div className="w-full flex justify-between text-xs font-bold text-slate-300 mb-2">
-                <span>{L('रचना ३: चतुर्भुज बराबर क्षेत्रफल हुने त्रिभुज', 'Construction 3: Quadrilateral to Triangle')}</span>
+                <span>{L('रचना 3: चतुर्भुज बराबर क्षेत्रफल हुने त्रिभुज', 'Construction 3: Quadrilateral to Triangle')}</span>
                 <span className="text-amber-300 font-mono">
                   {L(`चरण ${fmt(qStep + 1)} / ${fmt(qTotalSteps)}`, `Step ${fmt(qStep + 1)} of ${fmt(qTotalSteps)}`)}
                 </span>
@@ -590,7 +590,7 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
                         strokeWidth={3}
                       />
                       <text x={(qA.x + qE.x + qD.x) / 3} y={(qA.y + qE.y + qD.y) / 3 + 10} textAnchor="middle" fill="#FFFFFF" fontSize="12" fontWeight="bold">
-                        ∆ ADE (क्षेत्रफल = चतुर्भुज ABCD)
+                        ∆ ADE
                       </text>
                     </g>
                   )}
@@ -634,12 +634,12 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
 
                 <div className="space-y-2 text-xs">
                   {[
-                    L('१. दिइएको नाप अनुसार चतुर्भुज ABCD कोर्नुहोस्।', '1. Draw given quadrilateral ABCD.'),
-                    L('२. कर्ण BD जोड्नुहोस्।', '2. Join diagonal BD.'),
-                    L('३. आधार AB लाई दायाँतर्फ लम्ब्याउनुहोस्।', '3. Extend side AB to the right.'),
-                    L('४. शीर्षबिन्दु C बाट कर्ण BD सँग समानान्तर हुने रेखा खिच्नुहोस्, जसले लम्ब्याइएको रेखालाई E मा काट्छ।', '4. Draw line through C parallel to BD meeting extended AB at E.'),
-                    L('५. शीर्षबिन्दु D र E जोड्नुहोस्।', '5. Join vertices D and E.'),
-                    L('६. यसरी बनेको ∆ADE को क्षेत्रफल चतुर्भुज ABCD सँग बराबर हुन्छ।', '6. Resulting ∆ADE has identical area to ABCD.'),
+                    L('1. दिइएको नाप अनुसार चतुर्भुज ABCD कोर्नुहोस्।', '1. Draw given quadrilateral ABCD.'),
+                    L('2. कर्ण BD जोड्नुहोस्।', '2. Join diagonal BD.'),
+                    L('3. आधार AB लाई दायाँतर्फ लम्ब्याउनुहोस्।', '3. Extend side AB to the right.'),
+                    L('4. शीर्षबिन्दु C बाट कर्ण BD सँग समानान्तर हुने रेखा खिच्नुहोस्, जसले लम्ब्याइएको रेखालाई E मा काट्छ।', '4. Draw line through C parallel to BD meeting extended AB at E.'),
+                    L('5. शीर्षबिन्दु D र E जोड्नुहोस्।', '5. Join vertices D and E.'),
+                    L('6. यसरी बनेको ∆ADE को क्षेत्रफल चतुर्भुज ABCD सँग बराबर हुन्छ।', '6. Resulting ∆ADE has identical area to ABCD.'),
                   ].map((inst, i) => (
                     <div
                       key={i}
@@ -661,7 +661,7 @@ export const GeometricConstructionStudio: React.FC<SimProps> = ({ onBackToLibrar
                 <strong>{L('💡 साध्य प्रमाण (Why areas are equal):', 'Why areas are equal:')}</strong>
                 <p className="mt-1">
                   {L(
-                    '∆BCD र ∆BDE एउटै आधार BD र समानान्तर रेखाहरू BD || CE बीच छन्, त्यसैले क्षे(∆BCD) = क्षे(∆BDE)। दुवैतर्फ साझा ∆ABD जोड्दा: चतुर्भुज ABCD = ∆ADE (प्रमाणित)।',
+                    '∆BCD र ∆BDE एउटै आधार BD र समानान्तर रेखाहरू BD || CE बीच छन्, त्यसैले क्षे(∆BCD) = क्षे(∆BDE)। दुवैतर्फ साझा ∆ABD जोड्दा: चतुर्भुज ABCD = ∆ADE।',
                     'Triangles BCD and BDE share base BD between parallels BD || CE, so Area(BCD) = Area(BDE). Adding common ∆ABD yields Area(ABCD) = Area(ADE).'
                   )}
                 </p>

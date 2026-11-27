@@ -1,7 +1,7 @@
 /**
  * RecurringDecimalFractionStudio.tsx
- * Grade 8 Mathematics – Unit 3: RATIONAL AND IRRATIONAL NUMBERS (परिमेय र अपरिमेय सङ्ख्याहरू)
- * Simulation 5: Recurring Decimal to Fraction Conversion Studio (दोहोरिने दशमलवलाई भिन्नमा रूपान्तरण स्टुडियो)
+ * Grade 8 Mathematics – Unit 3: RATIONAL AND IRRATIONAL NUMBERS
+ * Simulation 5: Recurring Decimal to Fraction Conversion Studio
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 3)
  */
 import React, { useState } from 'react';
@@ -12,46 +12,46 @@ import { Calculator, ArrowRight, Check, Award, RotateCcw, Layers } from 'lucide-
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'दोहोरिने दशमलव ०.३३३३... (0.3̄) लाई भिन्न (Fraction a/b) मा रूपान्तरण गर्दा कति हुन्छ?',
+    np: 'दोहोरिने दशमलव 0.3333... (0.3̄) लाई भिन्न (Fraction a/b) मा रूपान्तरण गर्दा कति हुन्छ?',
     en: 'Converting recurring decimal 0.3333... (0.3̄) into a fraction yields:',
     options: [
-      { key: 'A', label: '१/३ [ ९x = ३ ⇒ x = ३/९ = १/३ ]' },
-      { key: 'B', label: '३/१०' },
-      { key: 'C', label: '३/१००' },
-      { key: 'D', label: '१/९' },
+      { key: 'A', label: '1/3 [ 9x = 3 ⇒ x = 3/9 = 1/3 ]' },
+      { key: 'B', label: '3/10' },
+      { key: 'C', label: '3/100' },
+      { key: 'D', label: '1/9' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि दशमलवमा दुईवटा अङ्कहरू दोहोरिएका छन् (जस्तै ०.४१४१४१...) भने समीकरणलाई कतिले गुणन गर्नुपर्छ?',
+    np: 'यदि दशमलवमा दुईpcs अङ्कहरू दोहोरिएका छन् (जस्तै 0.414141...) भने समीकरणलाई कतिले गुणन गर्नुपर्छ?',
     en: 'If two digits repeat in a recurring decimal (like 0.4141...), which multiplier is used?',
     options: [
-      { key: 'A', label: '१०० ले (१०² = १००, किनकि दुई अङ्क दोहोरिएका छन्)' },
-      { key: 'B', label: '१० ले' },
-      { key: 'C', label: '१००० ले' },
-      { key: 'D', label: '५ ले' },
+      { key: 'A', label: 'By 100 (10² = 100, because two digits repeat)' },
+      { key: 'B', label: 'By 10' },
+      { key: 'C', label: 'By 1000' },
+      { key: 'D', label: 'By 5' },
     ],
     answer: 'A',
   },
   {
-    np: 'दोहोरिने दशमलव ०.४१४१४१... (0.41̄) को भिन्न रूप कुन हो?',
+    np: 'दोहोरिने दशमलव 0.414141... (0.41̄) को भिन्न रूप कुन हो?',
     en: 'What is the fractional form of recurring decimal 0.414141... (0.41̄)?',
     options: [
-      { key: 'A', label: '४१/९९ (41/99)' },
-      { key: 'B', label: '४१/१००' },
-      { key: 'C', label: '४१/९०' },
-      { key: 'D', label: '१४/९९' },
+      { key: 'A', label: '41/99 (41/99)' },
+      { key: 'B', label: '41/100' },
+      { key: 'C', label: '41/90' },
+      { key: 'D', label: '14/99' },
     ],
     answer: 'A',
   },
   {
-    np: 'दोहोरिने दशमलव ०.६६६६... (0.6̄) लाई सरल भिन्नमा रूपान्तरण गर्दा कति आउँछ?',
+    np: 'दोहोरिने दशमलव 0.6666... (0.6̄) लाई सरल भिन्नमा रूपान्तरण गर्दा कति आउँछ?',
     en: 'Converting 0.6666... (0.6̄) into lowest terms gives:',
     options: [
-      { key: 'A', label: '२/३ [ ९x = ६ ⇒ x = ६/९ = २/३ ]' },
-      { key: 'B', label: '६/१०' },
-      { key: 'C', label: '३/५' },
-      { key: 'D', label: '१/६' },
+      { key: 'A', label: '2/3 [ 9x = 6 ⇒ x = 6/9 = 2/3 ]' },
+      { key: 'B', label: '6/10' },
+      { key: 'C', label: '3/5' },
+      { key: 'D', label: '1/6' },
     ],
     answer: 'A',
   },
@@ -59,10 +59,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'के प्रत्येक दोहोरिने दशमलव (Recurring Decimal) एक परिमेय सङ्ख्या (Rational Number) हो?',
     en: 'Is every recurring decimal a rational number?',
     options: [
-      { key: 'A', label: 'हो, किनकि यसलाई सधैं a/b भिन्नको रूपमा रूपान्तरण गर्न सकिन्छ' },
-      { key: 'B', label: 'होइन, यो अपरिमेय हो' },
-      { key: 'C', label: 'शून्य मात्र' },
-      { key: 'D', label: 'पूर्णाङ्क मात्र' },
+      { key: 'A', label: 'Yes, because it can always be converted to a fraction a/b' },
+      { key: 'B', label: 'No, it is irrational' },
+      { key: 'C', label: 'Zero only' },
+      { key: 'D', label: 'Integers only' },
     ],
     answer: 'A',
   },
@@ -126,10 +126,10 @@ export const RecurringDecimalFractionStudio: React.FC<{
   const checkMissingStep = () => {
     if (missingStep.mult.trim() === '10' && missingStep.sub.trim() === '9') {
       kit.good();
-      setMissingFeedback(L('स्याबास! १० ले गुणन गर्दा १०x = ३.३३३... र घटाउँदा ९x = ३ हुन्छ।', 'Correct! Multiplying by 10 gives 10x = 3.333... and subtracting gives 9x = 3.'));
+      setMissingFeedback(L('स्याबास! By 10 गुणन गर्दा 10x = 3.333... र घटाउँदा 9x = 3 हुन्छ।', 'Correct! Multiplying by 10 gives 10x = 3.333... and subtracting gives 9x = 3.'));
     } else {
       kit.oops();
-      setMissingFeedback(L('मिलेन! १ अङ्क दोहोरिँदा १० ले गुणन गर्नुपर्छ र १०x - x = ९x हुन्छ।', 'Incorrect! For 1 repeating digit, multiply by 10; 10x - x = 9x.'));
+      setMissingFeedback(L('मिलेन! 1 अङ्क दोहोरिँदा By 10 गुणन गर्नुपर्छ र 10x - x = 9x हुन्छ।', 'Incorrect! For 1 repeating digit, multiply by 10; 10x - x = 9x.'));
     }
   };
 
@@ -148,10 +148,10 @@ export const RecurringDecimalFractionStudio: React.FC<{
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'walkthrough', labelNp: '१. पाठ्यपुस्तकका उदाहरणहरू (Step-by-Step)', labelEn: '1. Textbook Walkthrough', icon: Calculator },
-            { id: 'interactive', labelNp: '२. विद्यार्थी नियन्त्रित रूपान्तरक', labelEn: '2. Interactive Converter', icon: ArrowRight },
-            { id: 'missing', labelNp: '३. हराएको चरण भर्ने तालिम', labelEn: '3. Find Missing Step', icon: Layers },
-            { id: 'challenge', labelNp: '४. अभ्यास चुनौती', labelEn: '4. Conversion Quiz', icon: Award },
+            { id: 'walkthrough', labelNp: '1. पाठ्यपुस्तकका उदाहरणहरू (Step-by-Step)', labelEn: '1. Textbook Walkthrough', icon: Calculator },
+            { id: 'interactive', labelNp: '2. विद्यार्थी नियन्त्रित रूपान्तरक', labelEn: '2. Interactive Converter', icon: ArrowRight },
+            { id: 'missing', labelNp: '3. हराएको चरण भर्ने तालिम', labelEn: '3. Find Missing Step', icon: Layers },
+            { id: 'challenge', labelNp: '4. अभ्यास चुनौती', labelEn: '4. Conversion Quiz', icon: Award },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -216,23 +216,23 @@ export const RecurringDecimalFractionStudio: React.FC<{
             {/* Step-by-Step Algebraic Box */}
             <div style={{ background: '#f8fafc', padding: 18, borderRadius: 14, border: '1px solid #cbd5e1', display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div style={{ fontSize: 14, color: '#475569' }}>
-                {L(`मानौँ, x = ०.${walkthroughPreset.repeat}${walkthroughPreset.repeat}... ------- (समीकरण १)`, `Let x = 0.${walkthroughPreset.repeat}${walkthroughPreset.repeat}... ------- (Equation 1)`)}
+                {L(`मानौँ, x = 0.${walkthroughPreset.repeat}${walkthroughPreset.repeat}... ------- (समीकरण 1)`, `Let x = 0.${walkthroughPreset.repeat}${walkthroughPreset.repeat}... ------- (Equation 1)`)}
               </div>
 
               <div style={{ fontSize: 14, color: '#475569' }}>
                 {L(
-                  `यहाँ ${toNp(currentWalk.k)} वटा अङ्क दोहोरिएकाले दुवैतर्फ १०^${toNp(currentWalk.k)} = ${toNp(currentWalk.power)} ले गुणन गर्दा:`,
+                  `यहाँ ${toNp(currentWalk.k)} pcs अङ्क दोहोरिएकाले दुवैतर्फ 10^${toNp(currentWalk.k)} = ${toNp(currentWalk.power)} ले गुणन गर्दा:`,
                   `Since ${currentWalk.k} digit(s) repeat, multiplying both sides by 10^${currentWalk.k} = ${currentWalk.power}:`
                 )}
                 <div style={{ fontWeight: 800, color: '#0369a1', marginTop: 4 }}>
-                  {currentWalk.power}x = {walkthroughPreset.repeat}.{walkthroughPreset.repeat}{walkthroughPreset.repeat}... ------- {L('(समीकरण २)', '(Equation 2)')}
+                  {currentWalk.power}x = {walkthroughPreset.repeat}.{walkthroughPreset.repeat}{walkthroughPreset.repeat}... ------- {L('', '(Equation 2)')}
                 </div>
               </div>
 
               <div style={{ fontSize: 14, color: '#475569' }}>
-                {L('समीकरण (२) बाट समीकरण (१) घटाउँदा:', 'Subtracting Equation (1) from Equation (2):')}
+                {L('समीकरण (2) बाट समीकरण (1) घटाउँदा:', 'Subtracting Equation (1) from Equation (2):')}
                 <div style={{ fontWeight: 800, color: '#16a34a', marginTop: 4 }}>
-                  {currentWalk.power}x - x = {walkthroughPreset.repeat}.{walkthroughPreset.repeat}... - ०.{walkthroughPreset.repeat}...
+                  {currentWalk.power}x - x = {walkthroughPreset.repeat}.{walkthroughPreset.repeat}... - 0.{walkthroughPreset.repeat}...
                 </div>
                 <div style={{ fontWeight: 800, color: '#15803d', marginTop: 2 }}>
                   {currentWalk.rawDen}x = {currentWalk.rawNum}
@@ -245,7 +245,7 @@ export const RecurringDecimalFractionStudio: React.FC<{
                 </div>
                 <div style={{ fontSize: 24, fontWeight: 900, color: '#047857', marginTop: 4 }}>
                   x = {isNe ? toNp(currentWalk.simplifiedNum) : currentWalk.simplifiedNum} / {isNe ? toNp(currentWalk.simplifiedDen) : currentWalk.simplifiedDen}
-                  {currentWalk.simplifiedDen !== currentWalk.rawDen && `  [ ${currentWalk.rawNum}/${currentWalk.rawDen} लाई सरलीकरण गर्दा ]`}
+                  {currentWalk.simplifiedDen !== currentWalk.rawDen && `  [ simplifying ${currentWalk.rawNum}/${currentWalk.rawDen} ]`}
                 </div>
               </div>
             </div>
@@ -277,7 +277,7 @@ export const RecurringDecimalFractionStudio: React.FC<{
             {customRepeat.length > 0 && (
               <div style={{ background: '#f0fdf4', padding: 16, borderRadius: 12, border: '1.5px solid #bbf7d0' }}>
                 <div style={{ fontSize: 16, fontWeight: 800, color: '#166534' }}>
-                  ०.{customRepeat}{customRepeat}... = {isNe ? toNp(currentCustom.simplifiedNum) : currentCustom.simplifiedNum} / {isNe ? toNp(currentCustom.simplifiedDen) : currentCustom.simplifiedDen}
+                  0.{customRepeat}{customRepeat}... = {isNe ? toNp(currentCustom.simplifiedNum) : currentCustom.simplifiedNum} / {isNe ? toNp(currentCustom.simplifiedDen) : currentCustom.simplifiedDen}
                 </div>
                 <div style={{ fontSize: 13, color: '#15803d', marginTop: 6 }}>
                   {currentCustom.power}x - x = {currentCustom.rawNum} ⇒ {currentCustom.rawDen}x = {currentCustom.rawNum}
@@ -292,13 +292,13 @@ export const RecurringDecimalFractionStudio: React.FC<{
           <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
             <h3 style={{ margin: '0 0 10px 0', color: '#0369a1', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
               <Layers size={20} />
-              {L('हराएको चरण भर्ने तालिम: ०.३३३... = ?', 'Fill in the Missing Steps: 0.333... = ?')}
+              {L('हराएको चरण भर्ने तालिम: 0.333... = ?', 'Fill in the Missing Steps: 0.333... = ?')}
             </h3>
 
             <div style={{ background: '#f8fafc', padding: 16, borderRadius: 12, border: '1px solid #cbd5e1', display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <div>१. x = ०.३३३३... (समीकरण १)</div>
+              <div>1. x = 0.3333...</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                २. दुवैतर्फ गुणन गर्ने अङ्क:{' '}
+                2. Number to multiply both sides by:{' '}
                 <input
                   type="text"
                   value={missingStep.mult}
@@ -306,10 +306,10 @@ export const RecurringDecimalFractionStudio: React.FC<{
                   placeholder="?"
                   style={{ width: 50, padding: '4px 8px', borderRadius: 6, border: '1px solid #cbd5e1', textAlign: 'center', fontWeight: 800 }}
                 />{' '}
-                [ १०x = ३.३३३... ]
+                [ 10x = 3.333... ]
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                ३. घटाउँदा:{' '}
+                3. Subtracting:{' '}
                 <input
                   type="text"
                   value={missingStep.sub}
@@ -317,7 +317,7 @@ export const RecurringDecimalFractionStudio: React.FC<{
                   placeholder="?"
                   style={{ width: 50, padding: '4px 8px', borderRadius: 6, border: '1px solid #cbd5e1', textAlign: 'center', fontWeight: 800 }}
                 />{' '}
-                x = ३
+                x = 3
               </div>
 
               <button
@@ -355,8 +355,8 @@ export const RecurringDecimalFractionStudio: React.FC<{
             </h3>
             <p style={{ margin: 0, fontSize: 14, color: '#475569' }}>
               {L(
-                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" ट्याबबाट ५ वटा आधिकारिक पाठ्यपुस्तकका बहु-वैकल्पिक प्रश्नहरू हल गर्नुहोस् र ताराहरू कमाउनुहोस्!',
-                'Click the "Challenge (चुनौती)" mode in the top header to take the official CDC curriculum quiz and earn mastery stars!'
+                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" ट्याबबाट 5 pcs आधिकारिक पाठ्यपुस्तकका बहु-वैकल्पिक प्रश्नहरू हल गर्नुहोस् र ताराहरू कमाउनुहोस्!',
+                'Click the "Challenge" mode in the top header to take the official CDC curriculum quiz and earn mastery stars!'
               )}
             </p>
           </div>

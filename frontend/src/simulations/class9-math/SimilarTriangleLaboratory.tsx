@@ -8,10 +8,10 @@ const QUIZ_QUESTIONS = [
     np: 'दुई त्रिभुजहरू समरूप (Similar) हुनका लागि कुन सर्त पूरा हुनुपर्छ?',
     en: 'Which condition must be met for two triangles to be similar?',
     options: [
-      { key: 'A', label: 'अनुरुप कोणहरू बराबर र अनुरुप भुजाहरू समानुपातिक हुनुपर्छ' },
-      { key: 'B', label: 'भुजाहरूको नाप बराबर हुनुपर्छ' },
-      { key: 'C', label: 'क्षेत्रफल बराबर हुनुपर्छ' },
-      { key: 'D', label: 'कुनै सर्त आवश्यक छैन' },
+      { key: 'A', label: 'Corresponding angles must be equal and corresponding sides proportional' },
+      { key: 'B', label: 'The sides must be equal in length' },
+      { key: 'C', label: 'The areas must be equal' },
+      { key: 'D', label: 'No condition is needed' },
     ],
     answer: 'A',
   },
@@ -27,13 +27,13 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: 'यदि २ मिटर अग्लो खम्बाको छायाँ ३ मिटर पर्छ भने, सोही समयमा १५ मिटर छायाँ पर्ने रुखको उचाइ कति होला?',
+    np: 'यदि 2 m अग्लो खम्बाको छायाँ 3 m पर्छ भने, सोही समयमा 15 m छायाँ पर्ने रुखको उचाइ कति होला?',
     en: "If a 2m high pole casts a 3m shadow, what is the height of a tree casting a 15m shadow at the same time?",
     options: [
-      { key: 'A', label: '10 मिटर (10m)' },
-      { key: 'B', label: '12 मिटर' },
-      { key: 'C', label: '8 मिटर' },
-      { key: 'D', label: '15 मिटर' },
+      { key: 'A', label: '10 m (10m)' },
+      { key: 'B', label: '12 m' },
+      { key: 'C', label: '8 m' },
+      { key: 'D', label: '15 m' },
     ],
     answer: 'A',
   },
@@ -261,7 +261,7 @@ export const SimilarTriangleLaboratory: React.FC<{
                 {L('अनुरुप भुजाहरूको समानुपातिकता (Side Proportionality):', 'Side Proportionality Ratio:')}
               </strong>
               <div style={{ fontFamily: 'monospace', fontSize: 15, color: '#065F46' }}>
-                DE/AB = {fmt(scaledSides.c)}/६ = {fmt(scaleK.toFixed(1))} | EF/BC = {fmt(scaledSides.a)}/४ = {fmt(scaleK.toFixed(1))} | DF/AC = {fmt(scaledSides.b)}/५ = {fmt(scaleK.toFixed(1))}
+                DE/AB = {fmt(scaledSides.c)}/6 = {fmt(scaleK.toFixed(1))} | EF/BC = {fmt(scaledSides.a)}/4 = {fmt(scaleK.toFixed(1))} | DF/AC = {fmt(scaledSides.b)}/5 = {fmt(scaleK.toFixed(1))}
               </div>
               <div style={{ fontSize: 12, color: '#166534', fontWeight: 700 }}>
                 ✓ {L('सबै अनुरुप भुजाहरूको अनुपात बराबर छ (समानुपातिक): DE/AB = EF/BC = DF/AC = k', 'All corresponding sides are proportional: DE/AB = EF/BC = DF/AC = k')}
@@ -379,7 +379,7 @@ export const SimilarTriangleLaboratory: React.FC<{
             </div>
 
             <div style={{ padding: '8px 12px', backgroundColor: '#ECFDF5', borderRadius: 8, color: '#065F46', fontSize: 12, fontWeight: 700 }}>
-              ✓ {L('प्रमाणित: AE / EB = AF / FC (थाल्सको साध्य अनुसार भुजालाई समान अनुपातमा विभाजन गर्दछ)।', 'Verified: AE / EB = AF / FC (Thales theorem proves line parallel to base divides other sides proportionally).')}
+              ✓ {L('प्रमाणित: AE / EB = AF / FC।', 'Verified: AE / EB = AF / FC (Thales theorem proves line parallel to base divides other sides proportionally).')}
             </div>
           </div>
         )}
@@ -520,11 +520,11 @@ export const SimilarTriangleLaboratory: React.FC<{
                 {L('समरूप त्रिभुजद्वारा रुखको उचाइ गणना:', 'Tree Height Calculation via Similar Triangles:')}
               </div>
               <div style={{ fontFamily: 'monospace', fontSize: 16, color: '#B45309' }}>
-                रुखको उचाइ (H) / खम्बाको उचाइ = रुखको छायाँ / खम्बाको छायाँ
+                Height of tree (H) / height of pole = shadow of tree / shadow of pole
               </div>
               <div style={{ fontFamily: 'monospace', fontSize: 18, fontWeight: 800, color: '#B45309' }}>
                 H = ({fmt(poleHeight)} × {fmt(treeShadow)}) ÷ {fmt(poleShadow)} ={' '}
-                <span style={{ color: '#047857', fontSize: 22 }}>{fmt(treeHeight)} मिटर (m)</span>
+                <span style={{ color: '#047857', fontSize: 22 }}>{fmt(treeHeight)} m (m)</span>
               </div>
             </div>
           </div>

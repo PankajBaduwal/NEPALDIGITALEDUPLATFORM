@@ -1,5 +1,5 @@
 /**
- * Lesson 10 · Area (क्षेत्रफल)
+ * Lesson 10 · Area
  * Tile the Floor — cover a shape with square unit tiles and count them; compare areas.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -27,11 +27,11 @@ const rect = (w: number, h: number, ox = 1, oy = 1): Shape => {
 };
 
 const SHAPES: { np: string; en: string; cells: Shape }[] = [
-  { np: 'आयत ३×४ (१२ एकाइ)', en: 'Rectangle 3×4 (12 units)', cells: rect(4, 3, 1, 1) },
-  { np: 'वर्ग ३×३ (९ एकाइ)', en: 'Square 3×3 (9 units)', cells: rect(3, 3, 2, 1) },
-  { np: 'L आकार (१० एकाइ)', en: 'L Shape (10 units)', cells: [...rect(2, 4, 1, 0), ...rect(2, 1, 3, 3)] },
-  { np: 'T आकार (८ एकाइ)', en: 'T Shape (8 units)', cells: [...rect(5, 1, 1, 0), ...rect(1, 3, 3, 1)] },
-  { np: 'आयत २×५ (१० एकाइ)', en: 'Rectangle 2×5 (10 units)', cells: rect(5, 2, 1, 1) },
+  { np: 'आयत 3×4', en: 'Rectangle 3×4 (12 units)', cells: rect(4, 3, 1, 1) },
+  { np: 'वर्ग 3×3', en: 'Square 3×3 (9 units)', cells: rect(3, 3, 2, 1) },
+  { np: 'L आकार (10 एकाइ)', en: 'L Shape (10 units)', cells: [...rect(2, 4, 1, 0), ...rect(2, 1, 3, 3)] },
+  { np: 'T आकार (8 एकाइ)', en: 'T Shape (8 units)', cells: [...rect(5, 1, 1, 0), ...rect(1, 3, 3, 1)] },
+  { np: 'आयत 2×5', en: 'Rectangle 2×5 (10 units)', cells: rect(5, 2, 1, 1) },
 ];
 
 export const TileTheFloor: React.FC<Props> = ({ onBackToLibrary }) => {
@@ -115,7 +115,7 @@ export const TileTheFloor: React.FC<Props> = ({ onBackToLibrary }) => {
 
   // Quiz Questions for Challenge Mode
   const questions: QuizQuestion[] = SHAPES.map((sh, i) => ({
-    np: `${sh.np.split(' (')[0]}लाई पूरै ढाक्न कतिवटा १ वर्ग एकाइका टाइल चाहिन्छ?`,
+    np: `${sh.np.split(' (')[0]}लाई पूरै ढाक्न कतिवटा 1 वर्ग एकाइका टाइल चाहिन्छ?`,
     en: `How many 1-unit square tiles are needed to completely cover ${sh.en.split(' (')[0]}?`,
     answer: String(sh.cells.length),
     options: numChoices(sh.cells.length, i * 11 + 2, [1, -1, 2, -2]).map((v) => ({
@@ -254,7 +254,7 @@ export const TileTheFloor: React.FC<Props> = ({ onBackToLibrary }) => {
           </div>
 
           <div style={{ fontSize: 13, color: '#64748B', fontWeight: 700 }}>
-            {kit.t('नीलो घेराभित्र छोएर १ वर्ग एकाइ टाइल बिछ्याउनुहोस्', 'Tap inside the blue outline to place 1 sq-unit tiles')}
+            {kit.t('नीलो घेराभित्र छोएर 1 वर्ग एकाइ टाइल बिछ्याउनुहोस्', 'Tap inside the blue outline to place 1 sq-unit tiles')}
           </div>
         </div>
       </div>

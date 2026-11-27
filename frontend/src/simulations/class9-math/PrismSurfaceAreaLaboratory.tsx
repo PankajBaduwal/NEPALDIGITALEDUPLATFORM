@@ -8,10 +8,10 @@ const QUIZ_QUESTIONS = [
     np: 'प्रिज्मको छड्के सतहको क्षेत्रफल (Lateral Surface Area - LSA) को सामान्य सूत्र के हो?',
     en: 'What is the general formula for the Lateral Surface Area (LSA) of a prism?',
     options: [
-      { key: 'A', label: 'LSA = आधारको परिमिति × उचाइ (P × h)' },
-      { key: 'B', label: 'LSA = आधारको क्षेत्रफल × उचाइ (A × h)' },
-      { key: 'C', label: 'LSA = २A + P × h' },
-      { key: 'D', label: 'LSA = २(l + b)' },
+      { key: 'A', label: 'LSA = perimeter of base × height (P × h)' },
+      { key: 'B', label: 'LSA = area of base × height (A × h)' },
+      { key: 'C', label: 'LSA = 2A + P × h' },
+      { key: 'D', label: 'LSA = 2(l + b)' },
     ],
     answer: 'A',
   },
@@ -19,21 +19,21 @@ const QUIZ_QUESTIONS = [
     np: 'प्रिज्मको कुल सतहको क्षेत्रफल (Total Surface Area - TSA) को सूत्र के हो?',
     en: 'What is the formula for the Total Surface Area (TSA) of a prism?',
     options: [
-      { key: 'A', label: 'TSA = २A + P × h (दुई आधारको क्षेत्रफल + छड्के सतह)' },
+      { key: 'A', label: 'TSA = 2A + P × h' },
       { key: 'B', label: 'TSA = A × h' },
       { key: 'C', label: 'TSA = P × h' },
-      { key: 'D', label: 'TSA = ४a²' },
+      { key: 'D', label: 'TSA = 4a²' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा त्रिभुजाकार प्रिज्मका आधारका भुजाहरू ६ सेमि, ८ सेमि र १० सेमि छन् र प्रिज्मको लम्बाइ १५ सेमि भए LSA कति हुन्छ?',
+    np: 'एउटा त्रिभुजाकार प्रिज्मका आधारका भुजाहरू 6 सेमि, 8 सेमि र 10 सेमि छन् र प्रिज्मको लम्बाइ 15 सेमि भए LSA कति हुन्छ?',
     en: 'If a triangular prism has base sides 6cm, 8cm, 10cm and length 15cm, what is its LSA?',
     options: [
-      { key: 'A', label: '३६० वर्ग सेमि (P = २४, LSA = २४ × १५ = ३६०)' },
-      { key: 'B', label: '२४० वर्ग सेमि' },
-      { key: 'C', label: '४०८ वर्ग सेमि' },
-      { key: 'D', label: '१२० वर्ग सेमि' },
+      { key: 'A', label: '360 sq cm (P = 24, LSA = 24 × 15 = 360)' },
+      { key: 'B', label: '240 sq cm' },
+      { key: 'C', label: '408 sq cm' },
+      { key: 'D', label: '120 sq cm' },
     ],
     answer: 'A',
   },
@@ -41,9 +41,9 @@ const QUIZ_QUESTIONS = [
     np: 'a भुजा भएको घनाकार प्रिज्म (Cube) को कुल सतहको क्षेत्रफल (TSA) कति हुन्छ?',
     en: 'What is the Total Surface Area (TSA) of a cube with edge a?',
     options: [
-      { key: 'A', label: '४a²' },
-      { key: 'B', label: '५a²' },
-      { key: 'C', label: '६a² (६ वटा वर्गाकार सतहहरूको योगफल)' },
+      { key: 'A', label: '4a²' },
+      { key: 'B', label: '5a²' },
+      { key: 'C', label: '6a² (sum of 6 square faces)' },
       { key: 'D', label: 'a³' },
     ],
     answer: 'C',
@@ -128,7 +128,7 @@ export const PrismSurfaceAreaLaboratory: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! प्रिज्मको आधारको परिमिति P, आधारको क्षेत्रफल A र लम्बाइ h बाट छड्के सतह (LSA = P × h) र कुल सतह (TSA = २A + P × h) को हिसाब र २D नेटको अन्वेषण गरौं!',
+        'नमस्ते! प्रिज्मको आधारको परिमिति P, आधारको क्षेत्रफल A र लम्बाइ h बाट छड्के सतह (LSA = P × h) र कुल सतह (TSA = 2A + P × h) को हिसाब र 2D नेटको अन्वेषण गरौं!',
         'Welcome! Explore base perimeter P, base area A, height h to calculate LSA = P × h and TSA = 2A + P × h with 2D net unfolding!'
       )}
     >
@@ -181,8 +181,8 @@ export const PrismSurfaceAreaLaboratory: React.FC<{
             {/* Unfold Slider (0% 3D to 100% 2D Net) */}
             <div className="p-3 bg-purple-50 dark:bg-purple-950/40 rounded-xl border border-purple-200 dark:border-purple-800 space-y-2">
               <div className="flex justify-between text-xs font-bold text-purple-900 dark:text-purple-200">
-                <span>{L('२D नेट फुकाउने (Unfold to Net):', 'Unfold to 2D Net:')}</span>
-                <span className="font-mono">{unfoldProgress}% ({unfoldProgress > 50 ? L('नेट खुल्यो', 'Net Opened') : L('३D ठोस', '3D Solid')})</span>
+                <span>{L('2D नेट फुकाउने (Unfold to Net):', 'Unfold to 2D Net:')}</span>
+                <span className="font-mono">{unfoldProgress}% ({unfoldProgress > 50 ? L('नेट खुल्यो', 'Net Opened') : L('3D ठोस', '3D Solid')})</span>
               </div>
               <input
                 type="range"
@@ -193,8 +193,8 @@ export const PrismSurfaceAreaLaboratory: React.FC<{
                 className="w-full accent-purple-600 cursor-pointer"
               />
               <div className="flex justify-between text-[10px] text-gray-500">
-                <span>३D ठोस (Solid)</span>
-                <span>२D नेट (Unfolded Net)</span>
+                <span>3D solid</span>
+                <span>2D net (unfolded)</span>
               </div>
             </div>
 
@@ -388,13 +388,13 @@ export const PrismSurfaceAreaLaboratory: React.FC<{
                     {/* Top Base Triangle attached to Face 2 */}
                     <polygon points="140,90 240,90 190,25" className="fill-emerald-300/80 stroke-emerald-700 stroke-2" />
                     <text x="190" y="65" textAnchor="middle" className="text-xs font-black fill-emerald-950">
-                      {L('आधार १ (Base 1)', 'Base 1')}
+                      {L('आधार 1 (Base 1)', 'Base 1')}
                     </text>
 
                     {/* Bottom Base Triangle attached to Face 2 */}
                     <polygon points="140,170 240,170 190,235" className="fill-emerald-300/80 stroke-emerald-700 stroke-2" />
                     <text x="190" y="200" textAnchor="middle" className="text-xs font-black fill-emerald-950">
-                      {L('आधार २ (Base 2)', 'Base 2')}
+                      {L('आधार 2 (Base 2)', 'Base 2')}
                     </text>
 
                     {/* Label for entire LSA rectangle */}
@@ -416,7 +416,7 @@ export const PrismSurfaceAreaLaboratory: React.FC<{
               <div className="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl space-y-1">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-amber-900 dark:text-amber-200">
-                    {L('१. छड्के सतहको क्षेत्रफल (LSA = P × h):', '1. Lateral Surface Area (LSA = P × h):')}
+                    {L('1. छड्के सतहको क्षेत्रफल (LSA = P × h):', '1. Lateral Surface Area (LSA = P × h):')}
                   </span>
                   <span className="text-base font-black text-amber-700 dark:text-amber-300 font-mono">
                     {isNe ? toNp(curLSA.toFixed(1)) : curLSA.toFixed(1)} cm²
@@ -431,14 +431,14 @@ export const PrismSurfaceAreaLaboratory: React.FC<{
               <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl space-y-1">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-emerald-900 dark:text-emerald-200">
-                    {L('२. दुई आधारको क्षेत्रफल (२ × Base Area):', '2. Area of Two Bases (2 × A):')}
+                    {L('2. दुई आधारको क्षेत्रफल (2 × Base Area):', '2. Area of Two Bases (2 × A):')}
                   </span>
                   <span className="text-base font-black text-emerald-700 dark:text-emerald-300 font-mono">
                     {isNe ? toNp((2 * curBaseArea).toFixed(1)) : (2 * curBaseArea).toFixed(1)} cm²
                   </span>
                 </div>
                 <div className="text-xs text-gray-500 font-mono">
-                  २ × {curBaseArea.toFixed(1)} cm² = {(2 * curBaseArea).toFixed(1)} cm²
+                  2 × {curBaseArea.toFixed(1)} cm² = {(2 * curBaseArea).toFixed(1)} cm²
                 </div>
               </div>
 
@@ -446,7 +446,7 @@ export const PrismSurfaceAreaLaboratory: React.FC<{
               <div className="p-3.5 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 rounded-xl space-y-1">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-blue-900 dark:text-blue-200 text-base">
-                    {L('३. कुल सतहको क्षेत्रफल (TSA = २A + LSA):', '3. Total Surface Area (TSA = 2A + LSA):')}
+                    {L('3. कुल सतहको क्षेत्रफल (TSA = 2A + LSA):', '3. Total Surface Area (TSA = 2A + LSA):')}
                   </span>
                   <span className="text-xl font-black text-blue-600 dark:text-blue-400 font-mono">
                     {isNe ? toNp(curTSA.toFixed(1)) : curTSA.toFixed(1)} cm²

@@ -1,17 +1,17 @@
 /**
  * ButterflyLifeCycleSim.tsx
  * Master Interactive 2D Metamorphosis Simulation: Butterfly Life Cycle
- * (पुतलीको जीवनचक्र - २डी अन्तरक्रियात्मक रूपान्तरण प्रयोगशाला)
- * Grade 4 Science • Chapter 5: Life Process (जीवन प्रक्रिया)
+ * (पुतलीको जीवनचक्र - 2डी अन्तरक्रियात्मक रूपान्तरण प्रयोगशाला)
+ * Grade 4 Science • Chapter 5: Life Process
  *
  * 100% Native 2D Canvas & Vector Graphics (Zero WebGL/3D Dependencies)
  * - Ultra-Rich Natural Color Palette: Lush garden foliage, dew-kissed milkweed leaves,
  *   banded tiger caterpillar, jade chrysalis with gold crown studs, and brilliant Monarch wings.
- * - 4-Stage Complete Metamorphosis (पूर्ण रूपान्तरण):
- *   1. Egg (अण्डा): Pearl-ribbed translucent eggs on leaf underside with dewdrops and embryo silhouette.
- *   2. Caterpillar / Larva (झुसिल्किरा): Realistic undulating crawling body, chewing leaves with bite marks!
- *   3. Chrysalis / Pupa (प्युपा): Jade-green pupa hanging from a silk button, becoming translucent with wing preview.
- *   4. Adult Butterfly (वयस्क पुतली): Flying Monarch with delicate wing veins, flapping animation, and nectar sipping!
+ * - 4-Stage Complete Metamorphosis:
+ *   1. Egg: Pearl-ribbed translucent eggs on leaf underside with dewdrops and embryo silhouette.
+ *   2. Caterpillar / Larva: Realistic undulating crawling body, chewing leaves with bite marks!
+ *   3. Chrysalis / Pupa: Jade-green pupa hanging from a silk button, becoming translucent with wing preview.
+ *   4. Adult Butterfly: Flying Monarch with delicate wing veins, flapping animation, and nectar sipping!
  * - Interactive Lab Controls: Metamorphosis Stage selector, Continuous Scrubbing Timeline,
  *   Feed Caterpillar button (adds bite marks & grows caterpillar), Flap Wings button, and Anatomy Callouts.
  */
@@ -55,7 +55,7 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -82,10 +82,10 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'egg',
       stepNum: 1,
-      nameEn: '1. Egg Stage (अण्डा)',
-      nameNe: '१. अण्डा (Egg Stage)',
+      nameEn: '1. Egg Stage',
+      nameNe: '1. अण्डा (Egg Stage)',
       durationEn: '3 to 5 days',
-      durationNe: '३ देखि ५ दिन',
+      durationNe: '3 देखि 5 दिन',
       primaryActionEn: 'Protected inside tiny pearl egg shell',
       primaryActionNe: 'पातको पछाडि सुरक्षित रूपमा रहन्छ',
       descriptionEn: 'The female butterfly deposits microscopic, translucent ribbed eggs on the underside of nutritious milkweed leaves.',
@@ -96,24 +96,24 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'caterpillar',
       stepNum: 2,
-      nameEn: '2. Caterpillar / Larva (झुसिल्किरा)',
-      nameNe: '२. झुसिल्किरा (Larva Stage)',
+      nameEn: '2. Caterpillar / Larva',
+      nameNe: '2. झुसिल्किरा (Larva Stage)',
       durationEn: '10 to 14 days',
-      durationNe: '१० देखि १४ दिन',
+      durationNe: '10 देखि 14 दिन',
       primaryActionEn: 'Eating leaf voraciously to grow 2000x in size',
-      primaryActionNe: 'पातहरू खाएर शरीर २,००० गुणा ठूलो बनाउँछ',
+      primaryActionNe: 'पातहरू खाएर शरीर 2,000 गुणा ठूलो बनाउँछ',
       descriptionEn: 'The caterpillar hatches hungry! It munches leaves non-stop, molting its skin 5 times (instars) to accommodate rapid growth.',
-      descriptionNe: 'अण्डाबाट निस्किएपछि झुसिल्किराले दिनरात पात खान्छ र ५ पटकसम्म आफ्नो पुरानो छाला फेर्छ।',
+      descriptionNe: 'अण्डाबाट निस्किएपछि झुसिल्किराले दिनरात पात खान्छ र 5 पटकसम्म आफ्नो पुरानो छाला फेर्छ।',
       scientificFactEn: 'The caterpillar possesses 6 true jointed legs in front and 10 fleshy suction prolegs along its abdomen.',
-      scientificFactNe: 'यसका अगाडि ६ वटा वास्तविक खुट्टा र पछाडि १० वटा समात्ने नक्कली खुट्टाहरू हुन्छन्।',
+      scientificFactNe: 'यसका अगाडि 6 वटा वास्तविक खुट्टा र पछाडि 10 वटा समात्ने नक्कली खुट्टाहरू हुन्छन्।',
     },
     {
       id: 'pupa',
       stepNum: 3,
-      nameEn: '3. Chrysalis / Pupa (प्युपा)',
-      nameNe: '३. प्युपा (Chrysalis Stage)',
+      nameEn: '3. Chrysalis / Pupa',
+      nameNe: '3. प्युपा (Chrysalis Stage)',
       durationEn: '9 to 14 days',
-      durationNe: '९ देखि १४ दिन',
+      durationNe: '9 देखि 14 दिन',
       primaryActionEn: 'Complete metamorphosis inside silk chrysalis',
       primaryActionNe: 'भित्रभित्रै पुतली बन्ने अद्भुत रूपान्तरण',
       descriptionEn: 'The caterpillar anchors itself upside down with silk in a "J" shape, shedding its skin to form a jade-green chrysalis with gold rim studs.',
@@ -124,10 +124,10 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'butterfly',
       stepNum: 4,
-      nameEn: '4. Adult Butterfly (वयस्क पुतली)',
-      nameNe: '४. वयस्क पुतली (Adult Stage)',
+      nameEn: '4. Adult Butterfly',
+      nameNe: '4. वयस्क पुतली (Adult Stage)',
       durationEn: '2 to 6 weeks',
-      durationNe: '२ देखि ६ हप्ता',
+      durationNe: '2 देखि 6 हप्ता',
       primaryActionEn: 'Flying, pollinating flowers & sipping nectar',
       primaryActionNe: 'उड्ने, फूलको रस पिउने र परागसेचन गर्ने',
       descriptionEn: 'The adult butterfly pumps fluid into its damp wings to expand them, basking in warm sunlight before taking flight to sip nectar.',
@@ -419,7 +419,7 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
         ctx.fillStyle = '#38bdf8';
         ctx.font = 'bold 11px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(lang === 'en' ? '🥚 Butterfly Eggs (अण्डा)' : '🥚 पुतलीका अण्डाहरू', clusterX, clusterY - 43);
+        ctx.fillText(lang === 'en' ? '🥚 Butterfly Eggs' : '🥚 पुतलीका अण्डाहरू', clusterX, clusterY - 43);
       }
       ctx.restore();
     }
@@ -510,7 +510,7 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
         ctx.fillStyle = '#facc15';
         ctx.font = 'bold 11px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(lang === 'en' ? '🐛 Caterpillar (झुसिल्किरा)' : '🐛 भोको झुसिल्किरा', headX + 15, headY - 48);
+        ctx.fillText(lang === 'en' ? '🐛 Caterpillar' : '🐛 भोको झुसिल्किरा', headX + 15, headY - 48);
       }
       ctx.restore();
     }
@@ -613,7 +613,7 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
         ctx.fillStyle = '#4ade80';
         ctx.font = 'bold 11px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(lang === 'en' ? '💎 Chrysalis (प्युपा)' : '💎 चम्किलो प्युपा', twigX + 105, chrysalisY + 37);
+        ctx.fillText(lang === 'en' ? '💎 Chrysalis' : '💎 चम्किलो प्युपा', twigX + 105, chrysalisY + 37);
       }
       ctx.restore();
     }
@@ -790,7 +790,7 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
         ctx.fillStyle = '#f97316';
         ctx.font = 'bold 11px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(lang === 'en' ? '🦋 Adult Butterfly (वयस्क पुतली)' : '🦋 वयस्क पुतली', bflyX, bflyY - 53);
+        ctx.fillText(lang === 'en' ? '🦋 Adult Butterfly' : '🦋 वयस्क पुतली', bflyX, bflyY - 53);
       }
       ctx.restore();
     }
@@ -904,7 +904,7 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
       stars={stars}
       isCompleted={isCompleted}
       currentPromptEn="Follow the 4 miraculous stages of complete metamorphosis! Scrub the timeline, feed the caterpillar, and fly the butterfly."
-      currentPromptNe="पुतलीको पूर्ण रूपान्तरणका ४ अद्भुत चरणहरू हेर्नुहोस्! समयरेखा सार्नुहोस्, झुसिल्किरालाई पात खुवाउनुहोस् र पुतली उडाउनुहोस्।"
+      currentPromptNe="पुतलीको पूर्ण रूपान्तरणका 4 अद्भुत चरणहरू हेर्नुहोस्! समयरेखा सार्नुहोस्, झुसिल्किरालाई पात खुवाउनुहोस् र पुतली उडाउनुहोस्।"
     >
       <div
         style={{
@@ -1007,7 +1007,7 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 <Leaf size={15} />
-                {lang === 'en' ? `Feed Leaf (पात खुवाउनुहोस्: ${leafBites}/8)` : `पात खुवाउनुहोस् (${leafBites}/८)`}
+                {lang === 'en' ? `Feed Leaf` : `पात खुवाउनुहोस् (${leafBites}/8)`}
               </button>
             )}
 
@@ -1033,7 +1033,7 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 <Wind size={15} />
-                {lang === 'en' ? (isFlapping ? 'Rest Wings' : 'Flap Wings (पखेटा चलाउ)') : 'पखेटा चलाउनुहोस्'}
+                {lang === 'en' ? (isFlapping ? 'Rest Wings' : 'Flap Wings') : 'पखेटा चलाउनुहोस्'}
               </button>
             )}
           </div>
@@ -1121,7 +1121,7 @@ export const ButterflyLifeCycleSim: React.FC<BaseSimulationProps> = ({
                   fontWeight: 800,
                 }}
               >
-                {lang === 'en' ? `Stage ${currentStageIndex + 1} of 4` : `चरण ${currentStageIndex + 1} / ४`}
+                {lang === 'en' ? `Stage ${currentStageIndex + 1} of 4` : `चरण ${currentStageIndex + 1} / 4`}
               </span>
             </div>
 

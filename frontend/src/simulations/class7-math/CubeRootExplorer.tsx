@@ -1,6 +1,6 @@
 /**
  * CubeRootExplorer.tsx
- * Grade 7 Mathematics – Lesson 2: WHOLE NUMBER (पूर्ण सङ्ख्या)
+ * Grade 7 Mathematics – Lesson 2: WHOLE NUMBER
  * Simulation 3: Cube and Cube Root Explorer (2D + 3D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 25-32)
  */
@@ -12,46 +12,46 @@ import { toNp, FONT_NP } from '../class1-math-kit/nepali';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'कुनै सङ्ख्यालाई सोही सङ्ख्याले ३ पटक लगातार गुणन गर्दा आउने गुणनफललाई के भनिन्छ?',
+    np: 'कुनै सङ्ख्यालाई सोही सङ्ख्याले 3 पटक लगातार गुणन गर्दा आउने गुणनफललाई के भनिन्छ?',
     en: 'What is the product called when a number is multiplied by itself three times?',
     options: [
-      { key: 'A', label: 'वर्ग सङ्ख्या' },
-      { key: 'B', label: 'घन सङ्ख्या (Cube Number)' },
-      { key: 'C', label: 'ऋणात्मक सङ्ख्या' },
-      { key: 'D', label: 'भिन्न' },
+      { key: 'A', label: 'Square number' },
+      { key: 'B', label: 'Cube number' },
+      { key: 'C', label: 'Negative number' },
+      { key: 'D', label: 'Fraction' },
     ],
     answer: 'B',
   },
   {
-    np: '५१२ को घनमूल (∛५१२) को मान कति हुन्छ? (५१२ = २³ × २³ × २³)',
+    np: '512 को घनमूल (∛512) को मान कति हुन्छ? (512 = 2³ × 2³ × 2³)',
     en: 'What is the cube root of 512 (∛512)? (512 = 2³ × 2³ × 2³)',
     options: [
-      { key: 'A', label: '६' },
-      { key: 'B', label: '७' },
-      { key: 'C', label: '८ (२ × २ × २ = ८)' },
-      { key: 'D', label: '१६' },
+      { key: 'A', label: '6' },
+      { key: 'B', label: '7' },
+      { key: 'C', label: '8 (2 × 2 × 2 = 8)' },
+      { key: 'D', label: '16' },
     ],
     answer: 'C',
   },
   {
-    np: 'एउटा घनाकार पानी ट्यांकीको आयतन ४०९६ घन मिटर छ भने त्यसको लम्बाइ कति हुन्छ?',
+    np: 'एउटा घनाकार पानी ट्यांकीको आयतन 4096 cu m छ भने त्यसको लम्बाइ कति हुन्छ?',
     en: 'If the volume of a cubical water tank is 4096 cu. m, what is its side length?',
     options: [
-      { key: 'A', label: '१४ मिटर' },
-      { key: 'B', label: '१६ मिटर (∛४०९६ = १६)' },
-      { key: 'C', label: '१८ मिटर' },
-      { key: 'D', label: '२४ मिटर' },
+      { key: 'A', label: '14 m' },
+      { key: 'B', label: '16 m (∛4096 = 16)' },
+      { key: 'C', label: '18 m' },
+      { key: 'D', label: '24 m' },
     ],
     answer: 'B',
   },
   {
-    np: '१३२३ = ३³ × ७² लाई पूर्ण घन बनाउन कुन सानो सङ्ख्याले गुणन गर्नुपर्छ?',
+    np: '1323 = 3³ × 7² लाई पूर्ण घन बनाउन कुन सानो सङ्ख्याले गुणन गर्नुपर्छ?',
     en: 'By what least number should 1323 = 3³ × 7² be multiplied to make it a perfect cube?',
     options: [
-      { key: 'A', label: '३' },
-      { key: 'B', label: '७ (७ को त्रिक पुर्‍याउन)' },
-      { key: 'C', label: '२१' },
-      { key: 'D', label: '४९' },
+      { key: 'A', label: '3' },
+      { key: 'B', label: '7' },
+      { key: 'C', label: '21' },
+      { key: 'D', label: '49' },
     ],
     answer: 'B',
   },
@@ -318,30 +318,16 @@ export const CubeRootExplorer: React.FC<{ onBackToLibrary?: () => void; onBack?:
           </button>
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#BAE6FD' }}>
-              {L('कक्षा ७ • गणित • अध्याय २: पूर्ण सङ्ख्या', 'Class 7 • Math • Chapter 2: Whole Number')}
+              {L('कक्षा 7 • गणित • अध्याय 2: पूर्ण सङ्ख्या', 'Class 7 • Math • Chapter 2: Whole Number')}
             </div>
             <h1 style={{ margin: 0, fontSize: 18, fontWeight: 900 }}>
-              {isNe ? 'घन र घनमूल खोजी संसार (२D + ३D)' : 'Cube & Cube Root Explorer (2D + 3D)'}
+              {isNe ? 'घन र घनमूल खोजी संसार (2D + 3D)' : 'Cube & Cube Root Explorer (2D + 3D)'}
             </h1>
           </div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button
-            onClick={() => kit.setLang(isNe ? 'en' : 'ne')}
-            style={{
-              padding: '6px 12px',
-              borderRadius: 8,
-              border: '1px solid rgba(255,255,255,0.3)',
-              background: 'rgba(255,255,255,0.12)',
-              color: '#FFFFFF',
-              fontWeight: 800,
-              fontSize: 12,
-              cursor: 'pointer',
-            }}
-          >
-            {isNe ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
@@ -350,11 +336,11 @@ export const CubeRootExplorer: React.FC<{ onBackToLibrary?: () => void; onBack?:
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0' }}>
           {[
-            { id: 'build3d', np: '१. ३D एकाइ घन निर्माण (Unit Cubes)', en: '1. 3D Unit Cube Builder' },
-            { id: 'root_concept', np: '२. घनमूलको अवधारणा (∛)', en: '2. Cube Root Concept (∛)' },
-            { id: 'prime3', np: '३. अभाज्य गुणनखण्डबाट घनमूल (त्रिक)', en: '3. Cube Root by Prime Factorisation' },
-            { id: 'tank3d', np: '४. ३D घनाकार पानी ट्यांकी (आयतन = L³)', en: '4. 3D Water Tank Volume' },
-            { id: 'perfect_cube', np: '५. पूर्ण घन जाँच र प्रश्नोत्तर', en: '5. Perfect Cube Test & Quiz' },
+            { id: 'build3d', np: '1. 3D एकाइ घन निर्माण (Unit Cubes)', en: '1. 3D Unit Cube Builder' },
+            { id: 'root_concept', np: '2. घनमूलको अवधारणा (∛)', en: '2. Cube Root Concept (∛)' },
+            { id: 'prime3', np: '3. अभाज्य गुणनखण्डबाट घनमूल (त्रिक)', en: '3. Cube Root by Prime Factorisation' },
+            { id: 'tank3d', np: '4. 3D घनाकार पानी ट्यांकी (आयतन = L³)', en: '4. 3D Water Tank Volume' },
+            { id: 'perfect_cube', np: '5. पूर्ण घन जाँच र प्रश्नोत्तर', en: '5. Perfect Cube Test & Quiz' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -386,7 +372,7 @@ export const CubeRootExplorer: React.FC<{ onBackToLibrary?: () => void; onBack?:
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#E0F2FE', color: '#0369A1', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('पाठ्यपुस्तक पृष्ठ २५-२६', 'Textbook Pages 25-26')}
+                  {L('पाठ्यपुस्तक पृष्ठ 25-26', 'Textbook Pages 25-26')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                   {L('एकाइ घनहरू मिलाएर घनाकार ठोस बनाउने (लम्बाइ × चौडाइ × उचाइ)', 'Assemble Unit Cubes: Length × Breadth × Height = Side³')}
@@ -458,12 +444,12 @@ export const CubeRootExplorer: React.FC<{ onBackToLibrary?: () => void; onBack?:
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14 }}>
               {[
-                { n: 8, rt: 2, mult: '२ × २ × २' },
-                { n: 27, rt: 3, mult: '३ × ३ × ३' },
-                { n: 64, rt: 4, mult: '४ × ४ × ४' },
-                { n: 125, rt: 5, mult: '५ × ५ × ५' },
-                { n: 216, rt: 6, mult: '६ × ६ × ६' },
-                { n: 512, rt: 8, mult: '८ × ८ × ८' },
+                { n: 8, rt: 2, mult: '2 × 2 × 2' },
+                { n: 27, rt: 3, mult: '3 × 3 × 3' },
+                { n: 64, rt: 4, mult: '4 × 4 × 4' },
+                { n: 125, rt: 5, mult: '5 × 5 × 5' },
+                { n: 216, rt: 6, mult: '6 × 6 × 6' },
+                { n: 512, rt: 8, mult: '8 × 8 × 8' },
               ].map((item) => (
                 <div key={item.n} style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: 14, padding: 16 }}>
                   <div style={{ fontSize: 20, fontWeight: 900, color: '#0284C7', marginBottom: 4 }}>
@@ -484,10 +470,10 @@ export const CubeRootExplorer: React.FC<{ onBackToLibrary?: () => void; onBack?:
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('पाठ्यपुस्तक पृष्ठ २७-२८', 'Textbook Pages 27-28')}
+                  {L('पाठ्यपुस्तक पृष्ठ 27-28', 'Textbook Pages 27-28')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-                  {L('अभाज्य गुणनखण्ड गरी ३-३ वटाको त्रिक (Triplets) बनाएर घनमूल निकाल्ने', 'Cube Root by Prime Factorisation & Triplet Grouping')}
+                  {L('अभाज्य गुणनखण्ड गरी 3-3 pcsको त्रिक (Triplets) बनाएर घनमूल निकाल्ने', 'Cube Root by Prime Factorisation & Triplet Grouping')}
                 </h3>
               </div>
               <div style={{ display: 'flex', gap: 6 }}>
@@ -520,7 +506,7 @@ export const CubeRootExplorer: React.FC<{ onBackToLibrary?: () => void; onBack?:
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                 <div style={{ background: '#F8FAFC', padding: 18, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                   <div style={{ fontSize: 13, fontWeight: 800, color: '#64748B', marginBottom: 6 }}>
-                    १. {L('अभाज्य गुणनखण्डहरू:', 'Prime Factors:')}
+                    1. {L('अभाज्य गुणनखण्डहरू:', 'Prime Factors:')}
                   </div>
                   <div style={{ fontSize: 18, fontWeight: 900, color: '#0F172A', fontFamily: 'monospace' }}>
                     {isNe ? toNp(selectedCubePf) : selectedCubePf} = {CUBE_PF_DATA[selectedCubePf].factors.map((f) => (isNe ? toNp(f) : f)).join(' × ')}
@@ -529,7 +515,7 @@ export const CubeRootExplorer: React.FC<{ onBackToLibrary?: () => void; onBack?:
 
                 <div style={{ background: '#F0F9FF', border: '2px solid #BAE6FD', padding: 18, borderRadius: 14 }}>
                   <div style={{ fontSize: 13, fontWeight: 800, color: '#0284C7', marginBottom: 8 }}>
-                    २. {L('तीन-तीन बराबर गुणनखण्डहरूको त्रिक (Triplets) बनाउँदा:', 'Grouping into triplets of three identical factors:')}
+                    2. {L('तीन-तीन बराबर गुणनखण्डहरूको त्रिक (Triplets) बनाउँदा:', 'Grouping into triplets of three identical factors:')}
                   </div>
                   <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
                     <span style={{ fontSize: 16, fontWeight: 900 }}>∛{isNe ? toNp(selectedCubePf) : selectedCubePf} = ∛[</span>
@@ -544,7 +530,7 @@ export const CubeRootExplorer: React.FC<{ onBackToLibrary?: () => void; onBack?:
 
                 <div style={{ background: '#DCFCE7', border: '2px solid #16A34A', padding: 18, borderRadius: 14 }}>
                   <div style={{ fontSize: 13, fontWeight: 800, color: '#166534', marginBottom: 6 }}>
-                    ३. {L('प्रत्येक त्रिकबाट एक-एक गुणनखण्ड लिएर गुणन गर्दा:', 'Taking one factor from each triplet and multiplying:')}
+                    3. {L('प्रत्येक त्रिकबाट एक-एक गुणनखण्ड लिएर गुणन गर्दा:', 'Taking one factor from each triplet and multiplying:')}
                   </div>
                   <div style={{ fontSize: 22, fontWeight: 900, color: '#14532D' }}>
                     ∛{isNe ? toNp(selectedCubePf) : selectedCubePf} = {CUBE_PF_DATA[selectedCubePf].triplets.map((t) => (isNe ? toNp(t[0]) : t[0])).join(' × ')} = <strong>{isNe ? toNp(CUBE_PF_DATA[selectedCubePf].root) : CUBE_PF_DATA[selectedCubePf].root}</strong>
@@ -561,7 +547,7 @@ export const CubeRootExplorer: React.FC<{ onBackToLibrary?: () => void; onBack?:
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#BAE6FD', color: '#0369A1', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('पाठ्यपुस्तक व्यवहारिक समस्या (पृष्ठ २९)', 'Textbook Real-Life Application (Page 29)')}
+                  {L('पाठ्यपुस्तक व्यवहारिक समस्या (पृष्ठ 29)', 'Textbook Real-Life Application (Page 29)')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                   {L('घनाकार पानी ट्यांकीको आयतन र लम्बाइ सम्बन्ध (आयतन = L³ ⟹ L = ∛आयतन)', 'Cubical Water Tank Volume and Side Length (V = L³ ⟹ L = ∛V)')}
@@ -608,7 +594,7 @@ export const CubeRootExplorer: React.FC<{ onBackToLibrary?: () => void; onBack?:
               </div>
               <div style={{ fontSize: 14, color: '#0F172A', lineHeight: 1.6 }}>
                 <div>• {L('सूत्र:', 'Formula:')} V = L³ ⟹ {isNe ? toNp(tankSide ** 3) : tankSide ** 3} = L³</div>
-                <div>• L = ∛{isNe ? toNp(tankSide ** 3) : tankSide ** 3} = <strong>{isNe ? toNp(tankSide) : tankSide} {L('मिटर', 'meters')}</strong></div>
+                <div>• L = ∛{isNe ? toNp(tankSide ** 3) : tankSide ** 3} = <strong>{isNe ? toNp(tankSide) : tankSide} {L('m', 'meters')}</strong></div>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 /**
- * Chapter 18 · Devanagari numerals up to 100 (१०० सम्मका देवनागरी अङ्क)
- * Sim 1: Nepali Number Cards (नेपाली अङ्क कार्ड) — Pure 2D Edition
+ * Chapter 18 · Devanagari numerals up to 100
+ * Sim 1: Nepali Number Cards — Pure 2D Edition
  * 100% 2D Interactive Memory Cards – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -97,8 +97,8 @@ export const NepaliNumberCards: React.FC<Props> = ({ onBackToLibrary }) => {
   const quizQuestions: QuizQuestion[] = useMemo(
     () => [
       {
-        np: 'अङ्क ३७ लाई अङ्ग्रेजीमा कुन अङ्क लेखिन्छ?',
-        en: 'Which English numeral represents ३७?',
+        np: 'अङ्क 37 लाई अङ्ग्रेजीमा कुन अङ्क लेखिन्छ?',
+        en: 'Which English numeral represents 37?',
         options: [
           { key: '37', label: '37' },
           { key: '73', label: '73' },
@@ -107,12 +107,12 @@ export const NepaliNumberCards: React.FC<Props> = ({ onBackToLibrary }) => {
         answer: '37',
       },
       {
-        np: '५० (पचास) लाई देवनागरीमा कुन अङ्क लेखिन्छ?',
+        np: '50 लाई देवनागरीमा कुन अङ्क लेखिन्छ?',
         en: 'Which Devanagari numeral is 50?',
         options: [
-          { key: '50', label: '५०' },
-          { key: '05', label: '०५' },
-          { key: '15', label: '१५' },
+          { key: '50', label: '50' },
+          { key: '05', label: '05' },
+          { key: '15', label: '15' },
         ],
         answer: '50',
       },

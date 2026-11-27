@@ -1,16 +1,16 @@
 /**
  * AtmosphereExplorerSim.tsx
- * Simulation 31: 2D Atmosphere Stratified Layers Explorer (वायुमण्डलका तहहरू - अन्तरिक्ष उडान)
- * Grade 4 Science • Chapter 8: The Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 31: 2D Atmosphere Stratified Layers Explorer
+ * Grade 4 Science • Chapter 8: The Earth and Space
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
  * - Full vertical atmospheric column explorer with interactive Rocket Probe:
- *   1. Troposphere (क्षोभमण्डल / 0 - 12 km): Clouds, weather, Mount Everest (8848.86m), rain & birds
- *   2. Stratosphere (समतापमण्डल / 12 - 50 km): Supersonic aircraft & protective Ozone Layer (ओजोन तह) blocking UV rays
- *   3. Mesosphere (मध्यमण्डल / 50 - 85 km): Burning meteor trails (उल्कापिण्ड) disintegrating in cold thin air
- *   4. Thermosphere (तापमण्डल / 85 - 600 km): Glowing Aurora Borealis curtains & orbiting communication satellites
- *   5. Exosphere (बहिर्मण्डल / >600 km): Deep space threshold
+ *   1. Troposphere: Clouds, weather, Mount Everest (8848.86m), rain & birds
+ *   2. Stratosphere: Supersonic aircraft & protective Ozone Layer blocking UV rays
+ *   3. Mesosphere: Burning meteor trails disintegrating in cold thin air
+ *   4. Thermosphere: Glowing Aurora Borealis curtains & orbiting communication satellites
+ *   5. Exosphere: Deep space threshold
  * - Interactive Altitude Scrubber (0 to 600 km) with animated rocket flight
  * - Dynamic Atmospheric Pressure & Temperature graphs
  * - Bilingual EN/NE, atmospheric sounds, and mastery challenge.
@@ -36,7 +36,7 @@ export const AtmosphereExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -52,18 +52,18 @@ export const AtmosphereExplorerSim: React.FC<BaseSimulationProps> = ({
   const layers: AtmoLayer[] = [
     {
       id: 'troposphere',
-      nameEn: '1. Troposphere (क्षोभमण्डल)',
-      nameNe: '१. क्षोभमण्डल (Troposphere)',
+      nameEn: '1. Troposphere',
+      nameNe: '1. क्षोभमण्डल (Troposphere)',
       altMin: 0,
       altMax: 12,
       tempRange: '15°C to -55°C',
       featuresEn: ['Contains 75% of atmospheric mass', 'All weather (rain, clouds, wind) occurs here', 'Mount Everest (8,848.86m) stands inside this layer'],
-      featuresNe: ['वायुमण्डलको ७५% हावा यसै तहमा हुन्छ', 'बादल, वर्षा, हावाहुरी आदि मौसम यहीँ हुन्छ', 'सगरमाथा (८,८४८.८६ मि.) यसै तहमा पर्दछ'],
+      featuresNe: ['वायुमण्डलको 75% हावा यसै तहमा हुन्छ', 'बादल, वर्षा, हावाहुरी आदि मौसम यहीँ हुन्छ', 'सगरमाथा (8,848.86 मि.) यसै तहमा पर्दछ'],
     },
     {
       id: 'stratosphere',
-      nameEn: '2. Stratosphere (समतापमण्डल)',
-      nameNe: '२. समतापमण्डल (Stratosphere)',
+      nameEn: '2. Stratosphere',
+      nameNe: '2. समतापमण्डल (Stratosphere)',
       altMin: 12,
       altMax: 50,
       tempRange: '-55°C to 0°C',
@@ -72,18 +72,18 @@ export const AtmosphereExplorerSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'mesosphere',
-      nameEn: '3. Mesosphere (मध्यमण्डल)',
-      nameNe: '३. मध्यमण्डल (Mesosphere)',
+      nameEn: '3. Mesosphere',
+      nameNe: '3. मध्यमण्डल (Mesosphere)',
       altMin: 50,
       altMax: 85,
       tempRange: '0°C to -90°C',
       featuresEn: ['Coldest layer of Earth\'s atmosphere (-90°C)', 'Meteors burn up from friction creating shooting stars', 'Protects Earth from space debris strikes'],
-      featuresNe: ['वायुमण्डलको सबैभन्दा चिसो तह (-९०°C सम्म)', 'अन्तरिक्षबाट आउने उल्कापिण्डहरू यहाँ जलेर नष्ट हुन्छन्', 'पृथ्वीलाई अन्तरिक्षका चट्टानहरूबाट जोगाउँछ'],
+      featuresNe: ['वायुमण्डलको सबैभन्दा चिसो तह (-90°C सम्म)', 'अन्तरिक्षबाट आउने उल्कापिण्डहरू यहाँ जलेर नष्ट हुन्छन्', 'पृथ्वीलाई अन्तरिक्षका चट्टानहरूबाट जोगाउँछ'],
     },
     {
       id: 'thermosphere',
-      nameEn: '4. Thermosphere (तापमण्डल)',
-      nameNe: '४. तापमण्डल (Thermosphere)',
+      nameEn: '4. Thermosphere',
+      nameNe: '4. तापमण्डल (Thermosphere)',
       altMin: 85,
       altMax: 600,
       tempRange: '-90°C to 1500°C',
@@ -241,7 +241,7 @@ export const AtmosphereExplorerSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#f8fafc';
     ctx.font = 'bold 10px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText('Mt. Everest (८,८४८.८६ मि.)', 290, 435);
+    ctx.fillText('Mt. Everest', 290, 435);
 
     // Fluffy cumulus rain cloud
     drawCloudShape(ctx, 520, 470, 45);
@@ -287,7 +287,7 @@ export const AtmosphereExplorerSim: React.FC<BaseSimulationProps> = ({
       ctx.fillStyle = '#2dd4bf';
       ctx.font = 'bold 11px system-ui';
       ctx.textAlign = 'right';
-      ctx.fillText('🛡️ Protective Ozone Layer (ओजोन तह)', 860, 370);
+      ctx.fillText('🛡️ Protective Ozone Layer', 860, 370);
 
       // Solar UV rays bouncing off the Ozone layer
       ctx.strokeStyle = '#facc15';
@@ -354,7 +354,7 @@ export const AtmosphereExplorerSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#fdba74';
     ctx.font = 'bold 10px system-ui';
     ctx.textAlign = 'right';
-    ctx.fillText('☄️ Burning Meteor (उल्कापिण्ड)', 860, 245);
+    ctx.fillText('☄️ Burning Meteor', 860, 245);
 
     ctx.restore();
   }
@@ -407,7 +407,7 @@ export const AtmosphereExplorerSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#93c5fd';
     ctx.font = 'bold 10px system-ui';
     ctx.textAlign = 'right';
-    ctx.fillText('🛰️ Satellite (भूउपग्रह)', 860, 70);
+    ctx.fillText('🛰️ Satellite', 860, 70);
 
     ctx.restore();
   }
@@ -570,7 +570,7 @@ export const AtmosphereExplorerSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 8: The Earth and Space'
-          : 'कक्षा ४ विज्ञान • एकाइ ८: पृथ्वी र अन्तरिक्ष'
+          : 'कक्षा 4 विज्ञान • एकाइ 8: पृथ्वी र अन्तरिक्ष'
       }
       currentStage={stage}
       onStageChange={setStage}
@@ -846,7 +846,7 @@ export const AtmosphereExplorerSim: React.FC<BaseSimulationProps> = ({
             <p style={{ margin: 0, fontSize: '11px', color: '#64748b', lineHeight: '1.4' }}>
               {lang === 'en'
                 ? 'The ozone layer in the stratosphere absorbs 98% of solar ultraviolet radiation.'
-                : 'समतापमण्डलमा रहेको ओजोन तहले सूर्यको ९८% हानिकारक परावैजनी किरण सोस्छ।'}
+                : 'समतापमण्डलमा रहेको ओजोन तहले सूर्यको 98% हानिकारक परावैजनी किरण सोस्छ।'}
             </p>
             <button
               onClick={() => setShowOzoneShield(!showOzoneShield)}

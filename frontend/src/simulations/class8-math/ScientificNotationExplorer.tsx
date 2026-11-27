@@ -1,7 +1,7 @@
 /**
  * ScientificNotationExplorer.tsx
- * Grade 8 Mathematics – Unit 3: RATIONAL AND IRRATIONAL NUMBERS (परिमेय र अपरिमेय सङ्ख्याहरू)
- * Simulation 6: Scientific Notation Explorer (वैज्ञानिक सङ्केतन अन्वेषक)
+ * Grade 8 Mathematics – Unit 3: RATIONAL AND IRRATIONAL NUMBERS
+ * Simulation 6: Scientific Notation Explorer
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 3)
  */
 import React, { useState } from 'react';
@@ -15,54 +15,54 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'वैज्ञानिक सङ्केतन (Scientific Notation) मा सङ्ख्यालाई कुन स्वरूपमा लेखिन्छ?',
     en: 'In which standard form is a number written in scientific notation?',
     options: [
-      { key: 'A', label: 'a × १०ⁿ (जहाँ १ ≤ |a| < १० र n पूर्णाङ्क हो)' },
-      { key: 'B', label: 'a × १०ⁿ (जहाँ a जुनसुकै सङ्ख्या)' },
-      { key: 'C', label: 'a × ५ⁿ' },
-      { key: 'D', label: '१० × aⁿ' },
+      { key: 'A', label: 'a × 10ⁿ (where 1 ≤ |a| < 10 and n is an integer)' },
+      { key: 'B', label: 'a × 10ⁿ (where a is any number)' },
+      { key: 'C', label: 'a × 5ⁿ' },
+      { key: 'D', label: '10 × aⁿ' },
     ],
     answer: 'A',
   },
   {
-    np: 'सङ्ख्या ३९००० (39,000) लाई वैज्ञानिक सङ्केतनमा लेख्दा कुन मान सही हुन्छ?',
+    np: 'सङ्ख्या 39000 (39,000) लाई वैज्ञानिक सङ्केतनमा लेख्दा कुन मान सही हुन्छ?',
     en: 'What is the correct scientific notation for 39,000?',
     options: [
-      { key: 'A', label: '३.९ × १०⁴ (3.9 × 10⁴)' },
-      { key: 'B', label: '३९ × १०³' },
-      { key: 'C', label: '०.३९ × १०⁵' },
-      { key: 'D', label: '३.९ × १०⁻⁴' },
+      { key: 'A', label: '3.9 × 10⁴ (3.9 × 10⁴)' },
+      { key: 'B', label: '39 × 10³' },
+      { key: 'C', label: '0.39 × 10⁵' },
+      { key: 'D', label: '3.9 × 10⁻⁴' },
     ],
     answer: 'A',
   },
   {
-    np: 'अति सानो सङ्ख्या ०.०००३७ (0.00037) लाई वैज्ञानिक सङ्केतनमा बदल्दा १० को घात कति हुन्छ?',
+    np: 'अति सानो सङ्ख्या 0.00037 (0.00037) लाई वैज्ञानिक सङ्केतनमा बदल्दा 10 को घात कति हुन्छ?',
     en: 'What is the exponent of 10 when converting 0.00037 into scientific notation?',
     options: [
-      { key: 'A', label: '-४ [ ३.७ × १०⁻⁴ ]' },
-      { key: 'B', label: '+४' },
-      { key: 'C', label: '-५' },
-      { key: 'D', label: '-३' },
+      { key: 'A', label: '-4 [ 3.7 × 10⁻⁴ ]' },
+      { key: 'B', label: '+4' },
+      { key: 'C', label: '-5' },
+      { key: 'D', label: '-3' },
     ],
     answer: 'A',
   },
   {
-    np: 'पाठ्यपुस्तक अनुसार सूर्यबाट वरुण ग्रह (Neptune) को दुरी ४,४९५,०६०,००० किमी को वैज्ञानिक सङ्केतन कुन हो?',
+    np: 'पाठ्यपुस्तक अनुसार सूर्यबाट वरुण ग्रह (Neptune) को दुरी 4,495,060,000 किमी को वैज्ञानिक सङ्केतन कुन हो?',
     en: 'According to the textbook planetary distance table, what is the scientific notation for Neptune\'s distance (4,495,060,000 km)?',
     options: [
-      { key: 'A', label: '४.४९५०६ × १०⁹ किमी (4.49506 × 10⁹ km)' },
-      { key: 'B', label: '४४.९५०६ × १०⁸ किमी' },
-      { key: 'C', label: '४.४९५०६ × १०⁷ किमी' },
-      { key: 'D', label: '०.४४९५०६ × १०¹⁰ किमी' },
+      { key: 'A', label: '4.49506 × 10⁹ km' },
+      { key: 'B', label: '44.9506 × 10⁸ km' },
+      { key: 'C', label: '4.49506 × 10⁷ km' },
+      { key: 'D', label: '0.449506 × 10¹⁰ km' },
     ],
     answer: 'A',
   },
   {
-    np: '६.३ × १०³ (6.3 × 10³) लाई सामान्य दशमलव सङ्ख्यामा रूपान्तरण गर्दा कति हुन्छ?',
+    np: '6.3 × 10³ (6.3 × 10³) लाई सामान्य दशमलव सङ्ख्यामा रूपान्तरण गर्दा कति हुन्छ?',
     en: 'Converting 6.3 × 10³ to standard decimal form gives:',
     options: [
-      { key: 'A', label: '६३०० (6300)' },
-      { key: 'B', label: '६३०' },
-      { key: 'C', label: '६३०००' },
-      { key: 'D', label: '०.०६३' },
+      { key: 'A', label: '6300 (6300)' },
+      { key: 'B', label: '630' },
+      { key: 'C', label: '63000' },
+      { key: 'D', label: '0.063' },
     ],
     answer: 'A',
   },
@@ -122,7 +122,7 @@ export const ScientificNotationExplorer: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! अति ठूला र अति साना सङ्ख्याहरूलाई १० को घात a × १०ⁿ रूपमा वैज्ञानिक सङ्केतन गर्न सिकौँ!',
+        'नमस्ते! अति ठूला र अति साना सङ्ख्याहरूलाई 10 को घात a × 10ⁿ रूपमा वैज्ञानिक सङ्केतन गर्न सिकौँ!',
         'Hello! Represent very large and tiny quantities conveniently as a × 10ⁿ in scientific notation!'
       )}
     >
@@ -130,11 +130,11 @@ export const ScientificNotationExplorer: React.FC<{
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'basics', labelNp: '१. वैज्ञानिक सङ्केतन अवधारणा', labelEn: '1. Concept & Move Dot', icon: MoveHorizontal },
-            { id: 'planets', labelNp: '२. ग्रहहरूको दुरी (पाठ्यपुस्तक तालिका)', labelEn: '2. Planetary Distances', icon: Globe },
-            { id: 'small', labelNp: '३. अति साना सङ्ख्याहरू (१०⁻ⁿ)', labelEn: '3. Tiny Numbers (10⁻ⁿ)', icon: Sparkles },
-            { id: 'reverse', labelNp: '४. सामान्य दशमलवमा रूपान्तरण', labelEn: '4. Scientific to Decimal', icon: ArrowRight },
-            { id: 'challenge', labelNp: '५. अभ्यास चुनौती', labelEn: '5. Quiz Challenge', icon: Award },
+            { id: 'basics', labelNp: '1. वैज्ञानिक सङ्केतन अवधारणा', labelEn: '1. Concept & Move Dot', icon: MoveHorizontal },
+            { id: 'planets', labelNp: '2. ग्रहहरूको दुरी (पाठ्यपुस्तक तालिका)', labelEn: '2. Planetary Distances', icon: Globe },
+            { id: 'small', labelNp: '3. अति साना सङ्ख्याहरू (10⁻ⁿ)', labelEn: '3. Tiny Numbers (10⁻ⁿ)', icon: Sparkles },
+            { id: 'reverse', labelNp: '4. सामान्य दशमलवमा रूपान्तरण', labelEn: '4. Scientific to Decimal', icon: ArrowRight },
+            { id: 'challenge', labelNp: '5. अभ्यास चुनौती', labelEn: '5. Quiz Challenge', icon: Award },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -170,11 +170,11 @@ export const ScientificNotationExplorer: React.FC<{
           <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
             <h3 style={{ margin: '0 0 10px 0', color: '#0369a1', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
               <MoveHorizontal size={20} />
-              {L('वैज्ञानिक सङ्केतन: a × १०ⁿ (जहाँ १ ≤ a < १०)', 'Scientific Notation: a × 10ⁿ (where 1 ≤ a < 10)')}
+              {L('वैज्ञानिक सङ्केतन: a × 10ⁿ (जहाँ 1 ≤ a < 10)', 'Scientific Notation: a × 10ⁿ (where 1 ≤ a < 10)')}
             </h3>
             <p style={{ margin: '0 0 14px 0', fontSize: 14, color: '#475569', lineHeight: 1.6 }}>
               {L(
-                'दशमलव बिन्दुलाई सारेर बायाँतर्फ ठ्याक्कै एउटा गैर-शून्य अङ्क (१ देखि ९ सम्म) मात्र राखिन्छ। दशमलव बिन्दु बायाँ सार्दा १० को घात धनात्मक (+n) र दायाँ सार्दा ऋणात्मक (-n) हुन्छ।',
+                'दशमलव बिन्दुलाई सारेर बायाँतर्फ ठ्याक्कै एउटा गैर-शून्य अङ्क (1 देखि 9 सम्म) मात्र राखिन्छ। दशमलव बिन्दु बायाँ सार्दा 10 को घात धनात्मक (+n) र दायाँ सार्दा ऋणात्मक (-n) हुन्छ।',
                 'Move the decimal point until exactly one non-zero digit (1-9) is to its left. Moving left yields positive exponent (+n); moving right yields negative exponent (-n).'
               )}
             </p>
@@ -205,7 +205,7 @@ export const ScientificNotationExplorer: React.FC<{
 
               <div style={{ fontSize: 13, color: '#0284c7', fontWeight: 700, marginTop: 10 }}>{L('वैज्ञानिक सङ्केतन (Scientific Notation):', 'Scientific Notation:')}</div>
               <div style={{ fontSize: 32, fontWeight: 900, color: '#0284c7', marginTop: 4 }}>
-                {sci.a} × १०{isNe ? toNp(sci.n) : sci.n}
+                {sci.a} × 10{isNe ? toNp(sci.n) : sci.n}
               </div>
               <div style={{ fontSize: 13, color: '#0369a1', marginTop: 6 }}>
                 {sci.n >= 0
@@ -230,7 +230,7 @@ export const ScientificNotationExplorer: React.FC<{
                   <tr style={{ background: '#f1f5f9' }}>
                     <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('ग्रहको नाम (Planet)', 'Planet')}</th>
                     <th style={{ padding: 10, border: '1px solid #cbd5e1' }}>{L('दुरी (किमीमा)', 'Distance (km)')}</th>
-                    <th style={{ padding: 10, border: '1px solid #cbd5e1', color: '#0284c7' }}>{L('वैज्ञानिक सङ्केतन (a × १०ⁿ)', 'Scientific Notation')}</th>
+                    <th style={{ padding: 10, border: '1px solid #cbd5e1', color: '#0284c7' }}>{L('वैज्ञानिक सङ्केतन (a × 10ⁿ)', 'Scientific Notation')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -261,20 +261,20 @@ export const ScientificNotationExplorer: React.FC<{
               <div style={{ background: '#eff6ff', padding: 16, borderRadius: 12, border: '1.5px solid #bfdbfe' }}>
                 <div style={{ fontSize: 14, fontWeight: 800, color: '#1e40af' }}>{L('पृथ्वीको पिण्ड (Mass of Earth)', 'Mass of Earth')}</div>
                 <div style={{ fontSize: 22, fontWeight: 900, color: '#1d4ed8', marginTop: 4 }}>
-                  ५.९७२ × १०²⁴ केजी (kg)
+                  5.972 × 10²⁴ kg
                 </div>
                 <div style={{ fontSize: 12, color: '#1e3a8a', marginTop: 6 }}>
-                  {L('५,९७२,०००,०००,०००,०००,०००,०००,००० केजी (२४ वटा स्थान बायाँ)', '5,972,000,000,000,000,000,000,000 kg')}
+                  {L('5,972,000,000,000,000,000,000,000 केजी (24 pcs स्थान बायाँ)', '5,972,000,000,000,000,000,000,000 kg')}
                 </div>
               </div>
 
               <div style={{ background: '#fef2f2', padding: 16, borderRadius: 12, border: '1.5px solid #fecaca' }}>
                 <div style={{ fontSize: 14, fontWeight: 800, color: '#991b1b' }}>{L('हाइड्रोजन परमाणुको पिण्ड (Hydrogen Atom)', 'Mass of Hydrogen Atom')}</div>
                 <div style={{ fontSize: 22, fontWeight: 900, color: '#dc2626', marginTop: 4 }}>
-                  १.६७ × १०⁻²⁷ केजी (kg)
+                  1.67 × 10⁻²⁷ kg
                 </div>
                 <div style={{ fontSize: 12, color: '#991b1b', marginTop: 6 }}>
-                  {L('०.००००००००००००००००००००००००००१६७ केजी (२७ स्थान दायाँ)', '0.00000000000000000000000000167 kg')}
+                  {L('0.00000000000000000000000000167 केजी (27 स्थान दायाँ)', '0.00000000000000000000000000167 kg')}
                 </div>
               </div>
             </div>
@@ -292,7 +292,7 @@ export const ScientificNotationExplorer: React.FC<{
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 16 }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#334155' }}>
-                  {L('गुणांक a (१ ≤ a < १०):', 'Coefficient a (1 ≤ a < 10):')} {reverseCoeff}
+                  {L('गुणांक a (1 ≤ a < 10):', 'Coefficient a (1 ≤ a < 10):')} {reverseCoeff}
                 </label>
                 <input
                   type="range"
@@ -323,7 +323,7 @@ export const ScientificNotationExplorer: React.FC<{
 
             <div style={{ background: '#f8fafc', padding: 18, borderRadius: 14, border: '1.5px solid #cbd5e1', textAlign: 'center' }}>
               <div style={{ fontSize: 24, fontWeight: 900, color: '#0369a1' }}>
-                {reverseCoeff} × १०{isNe ? toNp(reverseExp) : reverseExp}
+                {reverseCoeff} × 10{isNe ? toNp(reverseExp) : reverseExp}
               </div>
               <div style={{ fontSize: 18, color: '#64748b', margin: '8px 0' }}>▼ {L('सामान्य रूपमा बदल्दा:', 'Standard Form:')}</div>
               <div style={{ fontSize: 32, fontWeight: 900, color: '#16a34a' }}>
@@ -342,7 +342,7 @@ export const ScientificNotationExplorer: React.FC<{
             </h3>
             <p style={{ margin: 0, fontSize: 14, color: '#475569' }}>
               {L(
-                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" ट्याबबाट ५ वटा आधिकारिक पाठ्यपुस्तकका प्रश्नहरू हल गरी ताराहरू कमाउनुहोस्!',
+                'माथि दायाँ कुनामा रहेको "चुनौती (Challenge)" ट्याबबाट 5 pcs आधिकारिक पाठ्यपुस्तकका प्रश्नहरू हल गरी ताराहरू कमाउनुहोस्!',
                 'Click "Challenge" mode in the header to take the official CDC curriculum quiz and earn mastery stars!'
               )}
             </p>

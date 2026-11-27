@@ -1,7 +1,7 @@
 /**
  * ThermalExpansionSim.tsx
- * Simulation 22: 2D Thermal Expansion Laboratory (ताप र वस्तुको प्रसार)
- * Grade 6 Science • Unit 7: Energy in Daily Life (दैनिक जीवनमा शक्ति)
+ * Simulation 22: 2D Thermal Expansion Laboratory
+ * Grade 6 Science • Unit 7: Energy in Daily Life
  *
  * 100% Native HTML5 Canvas 2D Interactive Thermodynamics Laboratory.
  * Features:
@@ -26,7 +26,7 @@ export const ThermalExpansionSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -270,7 +270,7 @@ export const ThermalExpansionSim: React.FC<BaseSimulationProps> = ({
         ctx.fillStyle = '#475569';
         ctx.fillRect(stripStartX - 30, stripY - 30, 30, 60);
 
-        // Layer 1: Iron (फलाम, Low expansion, Silver Top)
+        // Layer 1: Iron
         ctx.strokeStyle = '#94a3b8';
         ctx.lineWidth = 6;
         ctx.beginPath();
@@ -278,7 +278,7 @@ export const ThermalExpansionSim: React.FC<BaseSimulationProps> = ({
         ctx.quadraticCurveTo(stripStartX + stripLength / 2, stripY - 3 - bendAmountPix, stripStartX + stripLength, stripY - 3 - bendAmountPix * 1.5);
         ctx.stroke();
 
-        // Layer 2: Brass (तामा/पित्तल, High expansion, Gold Bottom)
+        // Layer 2: Brass
         ctx.strokeStyle = '#f59e0b';
         ctx.lineWidth = 6;
         ctx.beginPath();
@@ -338,7 +338,7 @@ export const ThermalExpansionSim: React.FC<BaseSimulationProps> = ({
       titleNepali="ताप र वस्तुको प्रसार प्रयोगशाला (रिङ र गोला, द्वि-धातु पत्ती)"
       chapterNumber={7}
       chapterTitle="Unit 7: Energy in Daily Life"
-      chapterTitleNepali="एकाइ ७: दैनिक जीवनमा शक्ति"
+      chapterTitleNepali="एकाइ 7: दैनिक जीवनमा शक्ति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -507,12 +507,12 @@ export const ThermalExpansionSim: React.FC<BaseSimulationProps> = ({
           {/* Mode Selector Buttons */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. प्रयोग छान्नुहोस् (Experiment Mode)' : '1. Select Experiment'}
+              {lang === 'ne' ? '1. प्रयोग छान्नुहोस् (Experiment Mode)' : '1. Select Experiment'}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {[
-                { id: 'ring_and_ball', nameEn: "1. Gravesande's Ring & Ball", nameNe: '१. रिङ र गोलाको प्रयोग' },
-                { id: 'bimetallic_strip', nameEn: '2. Bimetallic Strip Alarm', nameNe: '२. द्वि-धातु पत्ती (फायर अलार्म)' },
+                { id: 'ring_and_ball', nameEn: "1. Gravesande's Ring & Ball", nameNe: '1. रिङ र गोलाको प्रयोग' },
+                { id: 'bimetallic_strip', nameEn: '2. Bimetallic Strip Alarm', nameNe: '2. द्वि-धातु पत्ती (फायर अलार्म)' },
               ].map((m) => (
                 <button
                   key={m.id}
@@ -551,7 +551,7 @@ export const ThermalExpansionSim: React.FC<BaseSimulationProps> = ({
             }}
           >
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#38bdf8' }}>
-              {lang === 'ne' ? '२. तापक्रम नियन्त्रक (Thermal Modulation)' : '2. Thermal Modulation'}
+              {lang === 'ne' ? '2. तापक्रम नियन्त्रक (Thermal Modulation)' : '2. Thermal Modulation'}
             </div>
             <button
               onClick={() => {

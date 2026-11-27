@@ -1,15 +1,15 @@
 /**
  * WaterBodiesExplorerSim.tsx
- * Simulation 30: 2D Water Bodies Hydrological Explorer (नेपालका पानीका स्वरूपहरू)
- * Grade 4 Science • Chapter 8: The Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 30: 2D Water Bodies Hydrological Explorer
+ * Grade 4 Science • Chapter 8: The Earth and Space
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
  * - 4 Authentic Natural Freshwater Bodies of Nepal:
- *   1. Waterfall (झरना - Hyatung / Davis Fall): Vertical cascade with billowy mist spray & rainbow
- *   2. Alpine Lake (ताल / दह - Rara, Fewa): Deep tranquil turquoise waters with Annapurna reflection & boat
- *   3. Major River (नदी - Koshi, Gandaki, Karnali): Broad flowing perennial river with current lines
- *   4. Mountain Stream (खोला / खोल्सी): Shallow rapid rocky brook with pebbles and mossy banks
+ *   1. Waterfall: Vertical cascade with billowy mist spray & rainbow
+ *   2. Alpine Lake: Deep tranquil turquoise waters with Annapurna reflection & boat
+ *   3. Major River: Broad flowing perennial river with current lines
+ *   4. Mountain Stream: Shallow rapid rocky brook with pebbles and mossy banks
  * - Interactive water ripples, current velocity slider, water characteristics inspector
  * - Bilingual EN/NE, realistic water sounds, and curriculum quiz.
  */
@@ -39,7 +39,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -55,7 +55,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
   const bodies: WaterBodyInfo[] = [
     {
       id: 'waterfall',
-      nameEn: 'Waterfall (झरना)',
+      nameEn: 'Waterfall',
       nameNe: 'झरना (Waterfall)',
       typeEn: 'Vertical Falling Water',
       typeNe: 'भीरबाट सिधै तल खस्ने पानी',
@@ -68,7 +68,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'lake',
-      nameEn: 'Lake (ताल तथा दह)',
+      nameEn: 'Lake',
       nameNe: 'ताल तथा दह (Lake)',
       typeEn: 'Enclosed Still Freshwater',
       typeNe: 'चारैतिर जमिनले घेरिएको स्थिर पानी',
@@ -81,7 +81,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'river',
-      nameEn: 'River (नदी)',
+      nameEn: 'River',
       nameNe: 'नदी (River)',
       typeEn: 'Large Flowing Freshwater',
       typeNe: 'ठूलो प्राकृतिक जलप्रवाह',
@@ -94,7 +94,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'stream',
-      nameEn: 'Mountain Stream (खोला / खोल्सा)',
+      nameEn: 'Mountain Stream',
       nameNe: 'खोला तथा खोल्सी (Stream)',
       typeEn: 'Shallow Rocky Channel',
       typeNe: 'सानो, ढुङ्गेयान जलप्रवाह',
@@ -175,7 +175,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
     };
   }, [activeBody, flowSpeed, currentInfo, lang]);
 
-  // SCENE 1: WATERFALL (झरना)
+  // SCENE 1: WATERFALL
   function renderWaterfallScene(ctx: CanvasRenderingContext2D, t: number) {
     // Sky
     const sky = ctx.createLinearGradient(0, 0, 0, 300);
@@ -273,7 +273,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
     ctx.stroke();
   }
 
-  // SCENE 2: ALPINE LAKE (ताल तथा दह - Fewa / Rara)
+  // SCENE 2: ALPINE LAKE
   function renderLakeScene(ctx: CanvasRenderingContext2D, t: number) {
     // Sky
     const sky = ctx.createLinearGradient(0, 0, 0, 260);
@@ -343,7 +343,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
       ctx.stroke();
     }
 
-    // Traditional Wooden Canoe / Paddleboat (डुङ्गा)
+    // Traditional Wooden Canoe / Paddleboat
     const boatX = 350 + Math.sin(t * 0.8) * 25;
     const boatY = 380 + Math.sin(t * 2) * 3;
     drawPaddleBoat(ctx, boatX, boatY);
@@ -366,7 +366,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // Wooden Oar (हलो / खियाउने काठ)
+    // Wooden Oar
     ctx.strokeStyle = '#d97706';
     ctx.lineWidth = 2.5;
     ctx.beginPath();
@@ -377,7 +377,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
     ctx.restore();
   }
 
-  // SCENE 3: MAJOR FLOWING RIVER (नदी)
+  // SCENE 3: MAJOR FLOWING RIVER
   function renderRiverScene(ctx: CanvasRenderingContext2D, t: number) {
     // Green Riverbank Sky
     ctx.fillStyle = '#7dd3fc';
@@ -435,7 +435,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
     });
   }
 
-  // SCENE 4: MOUNTAIN STREAM (खोला / खोल्सी)
+  // SCENE 4: MOUNTAIN STREAM
   function renderStreamScene(ctx: CanvasRenderingContext2D, t: number) {
     // Forest background
     ctx.fillStyle = '#0f172a';
@@ -547,7 +547,7 @@ export const WaterBodiesExplorerSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 8: The Earth and Space'
-          : 'कक्षा ४ विज्ञान • एकाइ ८: पृथ्वी र अन्तरिक्ष'
+          : 'कक्षा 4 विज्ञान • एकाइ 8: पृथ्वी र अन्तरिक्ष'
       }
       currentStage={stage}
       onStageChange={setStage}

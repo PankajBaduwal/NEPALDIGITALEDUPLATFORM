@@ -161,25 +161,25 @@ export interface PhotoelectricMetal {
 
 export const PHOTOELECTRIC_METALS: Record<string, PhotoelectricMetal> = {
   cesium: {
-    nameEn: 'Cesium (सिजियम)',
+    nameEn: 'Cesium',
     nameNe: 'सिजियम (Cs)',
     symbol: 'Cs',
     workFunctionEv: 2.14,
   },
   potassium: {
-    nameEn: 'Potassium (पोटासियम)',
+    nameEn: 'Potassium',
     nameNe: 'पोटासियम (K)',
     symbol: 'K',
     workFunctionEv: 2.30,
   },
   sodium: {
-    nameEn: 'Sodium (सोडियम)',
+    nameEn: 'Sodium',
     nameNe: 'सोडियम (Na)',
     symbol: 'Na',
     workFunctionEv: 2.36,
   },
   zinc: {
-    nameEn: 'Zinc (जस्ता)',
+    nameEn: 'Zinc',
     nameNe: 'जस्ता (Zn)',
     symbol: 'Zn',
     workFunctionEv: 4.31,

@@ -1,16 +1,16 @@
 /**
  * ScientificMethodLab.tsx
- * Simulation 1: 2D Scientific Method Laboratory (वैज्ञानिक पद्धति प्रयोगशाला)
- * Grade 6 Science • Unit 1: Scientific Learning (वैज्ञानिक सिकाइ)
+ * Simulation 1: 2D Scientific Method Laboratory
+ * Grade 6 Science • Unit 1: Scientific Learning
  *
  * Implements the rigorous 7-stage empirical scientific inquiry cycle:
- * 1. Observation (अवलोकन)
- * 2. Question (जिज्ञासा)
- * 3. Hypothesis / Prediction (परिकल्पना / अनुमान)
- * 4. Controlled Experiment (नियन्त्रित प्रयोग): Direct Sunlight vs Shaded Canopy Ice Melting
- * 5. Data Collection & Graphing (तथ्याङ्क सङ्कलन)
- * 6. Conclusion (निष्कर्ष)
- * 7. Communication (सञ्चार तथा प्रतिवेदन)
+ * 1. Observation
+ * 2. Question
+ * 3. Hypothesis / Prediction
+ * 4. Controlled Experiment: Direct Sunlight vs Shaded Canopy Ice Melting
+ * 5. Data Collection & Graphing
+ * 6. Conclusion
+ * 7. Communication
  */
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -23,7 +23,7 @@ export const ScientificMethodLab: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -230,13 +230,13 @@ export const ScientificMethodLab: React.FC<BaseSimulationProps> = ({
       // Left Setup
       ctx.fillStyle = '#fef08a';
       ctx.font = 'bold 13px sans-serif';
-      ctx.fillText(lang === 'en' ? 'Setup A: Direct Sunlight (घाम)' : 'प्रयोग क: सिधा घाम लागेको ठाउँ', dish1X - 90, tableY + 16);
+      ctx.fillText(lang === 'en' ? 'Setup A: Direct Sunlight' : 'प्रयोग क: सिधा घाम लागेको ठाउँ', dish1X - 90, tableY + 16);
       ctx.fillStyle = '#38bdf8';
       ctx.fillText(`${lang === 'en' ? 'Melted:' : 'पग्लिएको:'} ${sunMeltPercent}% (Temp: 28°C)`, dish1X - 80, tableY + 34);
 
       // Right Setup
       ctx.fillStyle = '#94a3b8';
-      ctx.fillText(lang === 'en' ? 'Setup B: Shaded Canopy (छायाँ)' : 'प्रयोग ख: छायाँ परेको ठाउँ', dish2X - 85, tableY + 16);
+      ctx.fillText(lang === 'en' ? 'Setup B: Shaded Canopy' : 'प्रयोग ख: छायाँ परेको ठाउँ', dish2X - 85, tableY + 16);
       ctx.fillStyle = '#38bdf8';
       ctx.fillText(`${lang === 'en' ? 'Melted:' : 'पग्लिएको:'} ${shadeMeltPercent}% (Temp: 16°C)`, dish2X - 75, tableY + 34);
 
@@ -254,7 +254,7 @@ export const ScientificMethodLab: React.FC<BaseSimulationProps> = ({
       ctx.fillText(lang === 'en' ? 'Scientific Variable Control:' : 'वैज्ञानिक चर नियन्त्रण:', 32, 40);
       ctx.fillStyle = '#38bdf8';
       ctx.font = 'bold 13px sans-serif';
-      ctx.fillText(`Independent: Solar Radiation (घाम vs छायाँ)`, 32, 60);
+      ctx.fillText(`Independent: Solar Radiation`, 32, 60);
 
       ctx.fillStyle = '#f59e0b';
       ctx.font = '11px sans-serif';
@@ -321,13 +321,13 @@ export const ScientificMethodLab: React.FC<BaseSimulationProps> = ({
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '16px', border: '1px solid #e2e8f0' }}>
             <h3 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Sparkles size={18} />
-              {lang === 'en' ? 'Step 3: State Your Hypothesis' : 'चरण ३: आफ्नो परिकल्पना छान्नुहोस्'}
+              {lang === 'en' ? 'Step 3: State Your Hypothesis' : 'चरण 3: आफ्नो परिकल्पना छान्नुहोस्'}
             </h3>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '14px' }}>
               {[
-                { id: 'sunlight_faster', en: 'Hypothesis A: Sunlight melts ice faster (घाममा छिटो पग्लन्छ)', ne: 'परिकल्पना क: घाममा बरफ छिटो पग्लन्छ' },
-                { id: 'shade_faster', en: 'Hypothesis B: Shade melts ice faster (छायाँमा छिटो पग्लन्छ)', ne: 'परिकल्पना ख: छायाँमा बरफ छिटो पग्लन्छ' },
+                { id: 'sunlight_faster', en: 'Hypothesis A: Sunlight melts ice faster', ne: 'परिकल्पना क: घाममा बरफ छिटो पग्लन्छ' },
+                { id: 'shade_faster', en: 'Hypothesis B: Shade melts ice faster', ne: 'परिकल्पना ख: छायाँमा बरफ छिटो पग्लन्छ' },
               ].map(h => (
                 <button
                   key={h.id}
@@ -407,27 +407,27 @@ export const ScientificMethodLab: React.FC<BaseSimulationProps> = ({
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
             <h4 style={{ margin: '0 0 6px 0', fontSize: '13px', color: '#10b981', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <BarChart2 size={16} />
-              {lang === 'en' ? '7 Steps of the Scientific Method' : 'वैज्ञानिक पद्धतिका ७ चरणहरू'}
+              {lang === 'en' ? '7 Steps of the Scientific Method' : 'वैज्ञानिक पद्धतिका 7 चरणहरू'}
             </h4>
             <div style={{ fontSize: '11px', color: '#475569', lineHeight: '1.6' }}>
-              <div>1. Observation (अवलोकन)</div>
-              <div>2. Question (जिज्ञासा)</div>
-              <div>3. Hypothesis (परिकल्पना)</div>
-              <div>4. Controlled Experiment (नियन्त्रित प्रयोग)</div>
-              <div>5. Data Collection & Graphing (तथ्याङ्क सङ्कलन)</div>
-              <div>6. Conclusion (निष्कर्ष)</div>
-              <div>7. Communication (सञ्चार)</div>
+              <div>1. Observation</div>
+              <div>2. Question</div>
+              <div>3. Hypothesis</div>
+              <div>4. Controlled Experiment</div>
+              <div>5. Data Collection & Graphing</div>
+              <div>6. Conclusion</div>
+              <div>7. Communication</div>
             </div>
           </div>
 
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: What is Science?' : '१. खोज: विज्ञान के हो?')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Testing the Hypothesis' : '२. अन्वेषण: परिकल्पना परीक्षण')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Rates of Melting' : '३. अवलोकन: पग्लने गति')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Heat Transfer' : '४. बुझाइ: ताप स्थानान्तरण')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Method Quiz' : '५. चुनौती: वैज्ञानिक पद्धति प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: What is Science?' : '1. खोज: विज्ञान के हो?')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Testing the Hypothesis' : '2. अन्वेषण: परिकल्पना परीक्षण')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Rates of Melting' : '3. अवलोकन: पग्लने गति')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Heat Transfer' : '4. बुझाइ: ताप स्थानान्तरण')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Method Quiz' : '5. चुनौती: वैज्ञानिक पद्धति प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
@@ -440,7 +440,7 @@ export const ScientificMethodLab: React.FC<BaseSimulationProps> = ({
                   : 'निष्पक्ष प्रयोगका लागि केवल एउटा मात्र चर परिवर्तन गरिन्छ (घाम र छायाँ)। बरफको आकार र भाँडो जस्ता अन्य सबै चरहरू ठ्याक्कै बराबर राखिन्छ।')}
                 {stage === 'observe' && (lang === 'en'
                   ? 'Notice how the ice in sunlight reaches 100% melted while the ice in the shade is only ~36% melted.'
-                  : 'घाममा राखिएको बरफ १००% पग्लिँदा छायाँमा राखिएको बरफ जम्मा ३६% मात्र पग्लिएको हेर्नुहोस्।')}
+                  : 'घाममा राखिएको बरफ 100% पग्लिँदा छायाँमा राखिएको बरफ जम्मा 36% मात्र पग्लिएको हेर्नुहोस्।')}
                 {stage === 'understand' && (lang === 'en'
                   ? 'Conclusion: Sunlight carries radiant thermal energy, speeding up heat transfer and melting the ice faster. Hypothesis supported!'
                   : 'निष्कर्ष: सूर्यको किरणमा विकिरण ताप ऊर्जा हुने हुनाले घाममा बरफ छिटो पग्लन्छ। हाम्रो परिकल्पना सही प्रमाणित भयो!')}
@@ -453,9 +453,9 @@ export const ScientificMethodLab: React.FC<BaseSimulationProps> = ({
                     : 'नियन्त्रित वैज्ञानिक प्रयोगमा वैज्ञानिकले जानीजानी परिवर्तन गर्ने चरलाई के भनिन्छ?'}
                 </p>
                 {[
-                  { id: 1, en: 'Independent Variable (स्वतन्त्र चर)', ne: 'स्वतन्त्र चर (Independent Variable)' },
-                  { id: 2, en: 'Controlled Variable (नियन्त्रित चर)', ne: 'नियन्त्रित चर (Controlled Variable)' },
-                  { id: 3, en: 'Dependent Variable (आश्रित चर)', ne: 'आश्रित चर (Dependent Variable)' },
+                  { id: 1, en: 'Independent Variable', ne: 'स्वतन्त्र चर (Independent Variable)' },
+                  { id: 2, en: 'Controlled Variable', ne: 'नियन्त्रित चर (Controlled Variable)' },
+                  { id: 3, en: 'Dependent Variable', ne: 'आश्रित चर (Dependent Variable)' },
                 ].map(opt => (
                   <button
                     key={opt.id}

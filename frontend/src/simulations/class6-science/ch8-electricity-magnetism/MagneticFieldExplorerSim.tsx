@@ -1,7 +1,7 @@
 /**
  * MagneticFieldExplorerSim.tsx
- * Simulation 26: 2D Magnetic Field & Compass Explorer (चुम्बकीय क्षेत्र अन्वेषण)
- * Grade 6 Science • Unit 8: Electricity and Magnetism (विद्युत र चुम्बकत्व)
+ * Simulation 26: 2D Magnetic Field & Compass Explorer
+ * Grade 6 Science • Unit 8: Electricity and Magnetism
  *
  * 100% Native HTML5 Canvas 2D Interactive Magnetic Field Simulator.
  * Features:
@@ -24,7 +24,7 @@ export const MagneticFieldExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -409,7 +409,7 @@ export const MagneticFieldExplorerSim: React.FC<BaseSimulationProps> = ({
       titleNepali="चुम्बकीय क्षेत्र तथा कम्पास अन्वेषण प्रयोगशाला"
       chapterNumber={8}
       chapterTitle="Unit 8: Electricity and Magnetism"
-      chapterTitleNepali="एकाइ ८: विद्युत र चुम्बकत्व"
+      chapterTitleNepali="एकाइ 8: विद्युत र चुम्बकत्व"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -575,13 +575,13 @@ export const MagneticFieldExplorerSim: React.FC<BaseSimulationProps> = ({
           {/* Magnet Pole Configuration Buttons */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. चुम्बक विन्यास (Configuration)' : '1. Magnet Configuration'}
+              {lang === 'ne' ? '1. चुम्बक विन्यास (Configuration)' : '1. Magnet Configuration'}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {[
-                { id: 'single', nameEn: 'Single Bar Magnet', nameNe: '१. एक्लो बार चुम्बक' },
-                { id: 'two_attract', nameEn: 'Opposite Poles (Attraction)', nameNe: '२. असमान ध्रुव (आकर्षण)' },
-                { id: 'two_repel', nameEn: 'Like Poles (Repulsion)', nameNe: '३. समान ध्रुव (विकर्षण)' },
+                { id: 'single', nameEn: 'Single Bar Magnet', nameNe: '1. एक्लो बार चुम्बक' },
+                { id: 'two_attract', nameEn: 'Opposite Poles (Attraction)', nameNe: '2. असमान ध्रुव (आकर्षण)' },
+                { id: 'two_repel', nameEn: 'Like Poles (Repulsion)', nameNe: '3. समान ध्रुव (विकर्षण)' },
               ].map((m) => (
                 <button
                   key={m.id}

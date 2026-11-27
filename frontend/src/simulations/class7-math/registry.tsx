@@ -67,7 +67,7 @@ export const CLASS7_MATH = [
     titleNp: 'मेरो कक्षाकोठा – वास्तविक वस्तुबाट समूह निर्माण',
     Component: L(() => import('./ClassroomSetFormation3D'), 'ClassroomSetFormation3D'),
   },
-  // ── LESSON 2: WHOLE NUMBER (पूर्ण सङ्ख्या) ──────────────────────────
+  // ── LESSON 2: WHOLE NUMBER ──────────────────────────
   {
     code: 'SIM-MATH-G7-L2-01',
     key: 'class7-math-l2-square-root-discovery',
@@ -108,7 +108,7 @@ export const CLASS7_MATH = [
     titleNp: 'लघुत्तम समापवर्त्य (ल.स.) खोजी प्रयोगशाला',
     Component: L(() => import('./LcmDiscoveryLab'), 'LcmDiscoveryLab'),
   },
-  // ── LESSON 3: INTEGER (पूर्णाङ्क) ───────────────────────────────────
+  // ── LESSON 3: INTEGER ───────────────────────────────────
   {
     code: 'SIM-MATH-G7-L3-01',
     key: 'class7-math-l3-number-line',
@@ -141,7 +141,7 @@ export const CLASS7_MATH = [
     titleNp: 'पूर्णाङ्कको व्यवहारिक प्रयोग र सरलीकरण',
     Component: L(() => import('./IntegerApplicationChallenge'), 'IntegerApplicationChallenge'),
   },
-  // ── LESSON 4: RATIONAL NUMBER (परिमेय सङ्ख्या) ────────────────────────
+  // ── LESSON 4: RATIONAL NUMBER ────────────────────────
   {
     code: 'SIM-MATH-G7-L4-01',
     key: 'class7-math-l4-discovery',
@@ -166,7 +166,7 @@ export const CLASS7_MATH = [
     titleNp: 'भिन्न र दशमलव रूपान्तरण प्रयोगशाला',
     Component: L(() => import('./FractionDecimalConversionStudio'), 'FractionDecimalConversionStudio'),
   },
-  // ── LESSON 5: FRACTION AND DECIMAL (भिन्न र दशमलव) ──────────────────
+  // ── LESSON 5: FRACTION AND DECIMAL ──────────────────
   {
     code: 'SIM-MATH-G7-L5-01',
     key: 'class7-math-l5-fraction-vis',
@@ -199,7 +199,7 @@ export const CLASS7_MATH = [
     titleNp: 'दशमलव नाप र ज्यामिति प्रयोगशाला',
     Component: L(() => import('./DecimalMeasurementGeometryLab'), 'DecimalMeasurementGeometryLab'),
   },
-  // ── LESSON 6: RATIO AND PROPORTION (अनुपात र समानुपात) ─────────────
+  // ── LESSON 6: RATIO AND PROPORTION ─────────────
   {
     code: 'SIM-MATH-G7-L6-01',
     key: 'class7-math-l6-ratio-discovery',
@@ -224,7 +224,7 @@ export const CLASS7_MATH = [
     titleNp: 'अनुपात र समानुपातको व्यवहारिक प्रयोग',
     Component: L(() => import('./RatioProportionRealLife'), 'RatioProportionRealLife'),
   },
-  // ── LESSON 7: PROFIT AND LOSS (नाफा र नोक्सान) ──────────────────────
+  // ── LESSON 7: PROFIT AND LOSS ──────────────────────
   {
     code: 'SIM-MATH-G7-L7-01',
     key: 'class7-math-l7-market-pl',
@@ -257,7 +257,7 @@ export const CLASS7_MATH = [
     titleNp: 'व्यवहारिक व्यापार र अतिरिक्त खर्च',
     Component: L(() => import('./RealLifeBusinessChallenge'), 'RealLifeBusinessChallenge'),
   },
-  // ── LESSON 8: UNITARY METHOD (एकाइ विधि) ───────────────────────────
+  // ── LESSON 8: UNITARY METHOD ───────────────────────────
   {
     code: 'SIM-MATH-G7-L8-01',
     key: 'class7-math-l8-unitary-discovery',
@@ -290,7 +290,7 @@ export const CLASS7_MATH = [
     titleNp: 'अप्रत्यक्ष विचरण र काम-समय प्रयोगशाला',
     Component: L(() => import('./IndirectVariationWorkTimeLab'), 'IndirectVariationWorkTimeLab'),
   },
-  // ── LESSON 9: PERIMETER, AREA AND VOLUME (परिमिति, क्षेत्रफल र आयतन)
+  // ── LESSON 9: PERIMETER, AREA AND VOLUME
   {
     code: 'SIM-MATH-G7-L9-01',
     key: 'class7-math-l9-perimeter-triangle',
@@ -323,7 +323,7 @@ export const CLASS7_MATH = [
     titleNp: 'वृत्तको परिधि र पाङ्ग्रा यात्रा',
     Component: L(() => import('./CircleCircumferenceAdventure'), 'CircleCircumferenceAdventure'),
   },
-  // ── LESSON 10: INDICES (घाताङ्क) ────────────────────────────────────
+  // ── LESSON 10: INDICES ────────────────────────────────────
   {
     code: 'SIM-MATH-G7-L10-01',
     key: 'class7-math-l10-indices-discovery',
@@ -340,7 +340,7 @@ export const CLASS7_MATH = [
     titleNp: 'घाताङ्कका नियमहरू र सरलीकरण प्रयोगशाला',
     Component: L(() => import('./LawsOfIndicesStudio'), 'LawsOfIndicesStudio'),
   },
-  // ── LESSON 11: ALGEBRAIC EXPRESSION (बीजगणितीय व्यञ्जक) ────────────
+  // ── LESSON 11: ALGEBRAIC EXPRESSION ────────────
   {
     code: 'SIM-MATH-G7-L11-01',
     key: 'class7-math-l11-expression-discovery',
@@ -381,7 +381,7 @@ export const CLASS7_MATH = [
     titleNp: 'सर्वसमिका प्रयोग र सरलीकरण चुनौती',
     Component: L(() => import('./AlgebraicIdentitiesChallenge'), 'AlgebraicIdentitiesChallenge'),
   },
-  // ── LESSON 12: EQUATION, INEQUALITY AND GRAPH (समीकरण, असमानता र ग्राफ) ────────────
+  // ── LESSON 12: EQUATION, INEQUALITY AND GRAPH ────────────
   {
     code: 'SIM-MATH-G7-L12-01',
     key: 'class7-math-l12-linear-equation',
@@ -406,7 +406,7 @@ export const CLASS7_MATH = [
     titleNp: 'निर्देशाङ्क र ग्राफ निर्माणशाला',
     Component: L(() => import('./CoordinateGraphBuilder'), 'CoordinateGraphBuilder'),
   },
-  // ── LESSON 13: LINES AND ANGLES (रेखाहरू र कोणहरू) ────────────
+  // ── LESSON 13: LINES AND ANGLES ────────────
   {
     code: 'SIM-MATH-G7-L13-01',
     key: 'class7-math-l13-angle-construction',
@@ -439,7 +439,7 @@ export const CLASS7_MATH = [
     titleNp: 'कोणको प्रयोगात्मक परीक्षण प्रयोगशाला',
     Component: L(() => import('./AngleExperimentVerificationLab'), 'AngleExperimentVerificationLab'),
   },
-  // ── LESSON 14: PLANE FIGURES (समतलीय आकृतिहरू) ────────────
+  // ── LESSON 14: PLANE FIGURES ────────────
   {
     code: 'SIM-MATH-G7-L14-01',
     key: 'class7-math-l14-triangle-construction',
@@ -472,7 +472,7 @@ export const CLASS7_MATH = [
     titleNp: 'समतलीय आकृतिहरूको खोज तथा चुनौती',
     Component: L(() => import('./PlaneFiguresDiscoveryChallenge'), 'PlaneFiguresDiscoveryChallenge'),
   },
-  // ── LESSON 15: CONGRUENT FIGURES (अनुरूप आकृतिहरू) ────────────
+  // ── LESSON 15: CONGRUENT FIGURES ────────────
   {
     code: 'SIM-MATH-G7-L15-01',
     key: 'class7-math-l15-congruent-discovery',
@@ -489,13 +489,13 @@ export const CLASS7_MATH = [
     titleNp: 'अनुरूपता नाप तथा चुनौती स्टुडियो',
     Component: L(() => import('./CongruenceMeasurementStudio'), 'CongruenceMeasurementStudio'),
   },
-  // ── LESSON 16: SOLID OBJECTS (ठोस वस्तुहरू) ────────────
+  // ── LESSON 16: SOLID OBJECTS ────────────
   {
     code: 'SIM-MATH-G7-L16-01',
     key: 'class7-math-l16-solid-objects-3d',
     lesson: 16,
     titleEn: '3D Solid Object Explorer',
-    titleNp: '३D ठोस वस्तु अन्वेषक',
+    titleNp: '3D ठोस वस्तु अन्वेषक',
     Component: L(() => import('./SolidObjectExplorer3D'), 'SolidObjectExplorer3D'),
   },
   {
@@ -514,7 +514,7 @@ export const CLASS7_MATH = [
     titleNp: 'सोली र बेलना खोजी प्रयोगशाला',
     Component: L(() => import('./ConeCylinderDiscoveryLab'), 'ConeCylinderDiscoveryLab'),
   },
-  // ── LESSON 17: COORDINATES (निर्देशाङ्कहरू) ────────────
+  // ── LESSON 17: COORDINATES ────────────
   {
     code: 'SIM-MATH-G7-L17-01',
     key: 'class7-math-l17-coordinate-playground',
@@ -531,7 +531,7 @@ export const CLASS7_MATH = [
     titleNp: 'निर्देशाङ्क ज्यामिति र आकृति निर्माण',
     Component: L(() => import('./CoordinateGeometryBuilder'), 'CoordinateGeometryBuilder'),
   },
-  // ── LESSON 18: SYMMETRY AND TESSELLATION (सममिति र टेसलेसन) ────────────
+  // ── LESSON 18: SYMMETRY AND TESSELLATION ────────────
   {
     code: 'SIM-MATH-G7-L18-01',
     key: 'class7-math-l18-line-symmetry',
@@ -545,7 +545,7 @@ export const CLASS7_MATH = [
     key: 'class7-math-l18-point-symmetry',
     lesson: 18,
     titleEn: 'Point Symmetry and 180° Rotation Lab',
-    titleNp: 'बिन्दु सममिति र १८०° परिक्रमण प्रयोगशाला',
+    titleNp: 'बिन्दु सममिति र 180° परिक्रमण प्रयोगशाला',
     Component: L(() => import('./PointSymmetryRotationLab'), 'PointSymmetryRotationLab'),
   },
   {
@@ -556,7 +556,7 @@ export const CLASS7_MATH = [
     titleNp: 'टेसलेसन डिजाइन स्टुडियो',
     Component: L(() => import('./TessellationDesignStudio'), 'TessellationDesignStudio'),
   },
-  // ── LESSON 19: TRANSFORMATION (रूपान्तरण) ────────────
+  // ── LESSON 19: TRANSFORMATION ────────────
   {
     code: 'SIM-MATH-G7-L19-01',
     key: 'class7-math-l19-reflection-lab',
@@ -573,7 +573,7 @@ export const CLASS7_MATH = [
     titleNp: 'स्थानान्तरण र गति खेलमैदान',
     Component: L(() => import('./TranslationMovementPlayground'), 'TranslationMovementPlayground'),
   },
-  // ── LESSON 20: BEARING AND SCALE DRAWING (दिगंश र मापन चित्र) ────────────
+  // ── LESSON 20: BEARING AND SCALE DRAWING ────────────
   {
     code: 'SIM-MATH-G7-L20-01',
     key: 'class7-math-l20-compass-bearing',

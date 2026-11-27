@@ -1,7 +1,7 @@
 /**
  * UniversalGravitationSim.tsx
- * Simulation: Newton's Universal Law of Gravitation (न्युटनको विश्वव्यापी गुरुत्वाकर्षणको नियम)
- * Grade 10 Science • Chapter 1: Force & Gravitation (बल र गुरुत्वाकर्षण)
+ * Simulation: Newton's Universal Law of Gravitation
+ * Grade 10 Science • Chapter 1: Force & Gravitation
  *
  * 100% Native HTML5 Canvas 2D Interactive Cartoon Simulation.
  * Features:
@@ -54,7 +54,7 @@ export const UniversalGravitationSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -90,7 +90,7 @@ export const UniversalGravitationSim: React.FC<BaseSimulationProps> = ({
   const presets: Preset[] = [
     {
       id: 'cartoon',
-      nameEn: 'Cartoon Lab (कार्टुन प्रयोगशाला)',
+      nameEn: 'Cartoon Lab',
       nameNe: 'कार्टुन प्रयोगशाला (Custom)',
       m1: 30,
       m2: 20,
@@ -102,7 +102,7 @@ export const UniversalGravitationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'students',
-      nameEn: 'Classroom Objects (कक्षाका वस्तुहरू)',
+      nameEn: 'Classroom Objects',
       nameNe: 'कक्षाकोठाका विद्यार्थी / बल',
       m1: 50,
       m2: 50,
@@ -110,11 +110,11 @@ export const UniversalGravitationSim: React.FC<BaseSimulationProps> = ({
       scaleLabel: 'kg & meters',
       icon: '🎒',
       descEn: 'Two 50 kg students sitting 2 meters apart. Gravitational force is tiny (~4.2 × 10⁻⁸ N).',
-      descNe: '५० केजीका दुई विद्यार्थी २ मिटर पर बस्दा बल ज्यादै नगन्य हुन्छ (~४.२ × १०⁻⁸ N)।',
+      descNe: '50 केजीका दुई विद्यार्थी 2 मिटर पर बस्दा बल ज्यादै नगन्य हुन्छ (~4.2 × 10⁻⁸ N)।',
     },
     {
       id: 'earth_moon',
-      nameEn: 'Earth & Moon (पृथ्वी र चन्द्रमा)',
+      nameEn: 'Earth & Moon',
       nameNe: 'पृथ्वी र चन्द्रमा (Earth-Moon)',
       m1: 80,
       m2: 15,
@@ -126,7 +126,7 @@ export const UniversalGravitationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'sun_earth',
-      nameEn: 'Sun & Earth (सूर्य र पृथ्वी)',
+      nameEn: 'Sun & Earth',
       nameNe: 'सूर्य र पृथ्वी (Sun-Earth)',
       m1: 100,
       m2: 30,
@@ -134,7 +134,7 @@ export const UniversalGravitationSim: React.FC<BaseSimulationProps> = ({
       scaleLabel: 'Solar scale',
       icon: '☀️',
       descEn: 'Colossal solar gravity guides Earth in its 365-day journey around the Sun.',
-      descNe: 'सूर्यको विशाल आकर्षणले पृथ्वीलाई ३६५ दिनको परिक्रमा पथमा बाँधिराख्छ।',
+      descNe: 'सूर्यको विशाल आकर्षणले पृथ्वीलाई 365 दिनको परिक्रमा पथमा बाँधिराख्छ।',
     },
   ];
 
@@ -162,7 +162,7 @@ export const UniversalGravitationSim: React.FC<BaseSimulationProps> = ({
       ],
       correct: 2,
       expEn: "Because F is inversely proportional to the square of distance (F ∝ 1/d²). When d is doubled, (2d)² = 4d², so the force becomes 1/4th of the initial force.",
-      expNe: "किनकि गुरुत्वाकर्षण बल दूरीको वर्गसँग व्युत्क्रमानुपातिक हुन्छ (F ∝ 1/d²)। दूरी २ गुणा हुँदा २² = ४, त्यसैले बल घटेर १/४ हुन्छ।",
+      expNe: "किनकि गुरुत्वाकर्षण बल दूरीको वर्गसँग व्युत्क्रमानुपातिक हुन्छ (F ∝ 1/d²)। दूरी 2 गुणा हुँदा 2² = 4, त्यसैले बल घटेर 1/4 हुन्छ।",
     },
     {
       qEn: "What is the SI unit and value of the Universal Gravitational Constant (G)?",
@@ -174,14 +174,14 @@ export const UniversalGravitationSim: React.FC<BaseSimulationProps> = ({
         'D. 6.4 × 10⁶ m',
       ],
       optionsNe: [
-        'A. ६.६७ × १०⁻¹¹ N·m²/kg²',
-        'B. ९.८ m/s²',
-        'C. ६.६७ × १०¹¹ N/kg',
-        'D. ६.४ × १०⁶ m',
+        'A. 6.67 × 10⁻¹¹ N·m²/kg²',
+        'B. 9.8 m/s²',
+        'C. 6.67 × 10¹¹ N/kg',
+        'D. 6.4 × 10⁶ m',
       ],
       correct: 0,
       expEn: "The value of G was determined experimentally by Henry Cavendish as 6.67 × 10⁻¹¹ N·m²/kg² and is constant throughout the entire universe.",
-      expNe: "हेनरी क्याभेन्डिसले परीक्षणद्वारा G को मान ६.६७ × १०⁻¹¹ N·m²/kg² पत्ता लगाएका हुन्, जुन ब्रह्माण्डभरि स्थिर रहन्छ।",
+      expNe: "हेनरी क्याभेन्डिसले परीक्षणद्वारा G को मान 6.67 × 10⁻¹¹ N·m²/kg² पत्ता लगाएका हुन्, जुन ब्रह्माण्डभरि स्थिर रहन्छ।",
     },
     {
       qEn: "If the mass of the first body is doubled (2m₁) and the mass of the second body is tripled (3m₂), how many times does the force increase?",
@@ -193,14 +193,14 @@ export const UniversalGravitationSim: React.FC<BaseSimulationProps> = ({
         'D. 2.5 times',
       ],
       optionsNe: [
-        'A. ५ गुणा',
-        'B. ६ गुणा',
-        'C. ९ गुणा',
-        'D. २.५ गुणा',
+        'A. 5 गुणा',
+        'B. 6 गुणा',
+        'C. 9 गुणा',
+        'D. 2.5 गुणा',
       ],
       correct: 1,
       expEn: "Force is directly proportional to the product of masses (F ∝ m₁·m₂). New Force = G·(2m₁·3m₂)/d² = 6 × F (6 times greater!).",
-      expNe: "गुरुत्वाकर्षण बल पिण्डहरूको गुणनफलसँग समानुपातिक हुन्छ (F ∝ m₁·m₂)। त्यसैले (२ × ३) = ६ गुणा बढी हुन्छ।",
+      expNe: "गुरुत्वाकर्षण बल पिण्डहरूको गुणनफलसँग समानुपातिक हुन्छ (F ∝ m₁·m₂)। त्यसैले (2 × 3) = 6 गुणा बढी हुन्छ।",
     },
   ];
 
@@ -1085,7 +1085,7 @@ export const UniversalGravitationSim: React.FC<BaseSimulationProps> = ({
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <div>{lang === 'ne' ? '• पिण्डको गुणनफल (m₁·m₂) बढेमा गुरुत्वाकर्षण बल सिधा बढ्छ।' : '• Force is directly proportional to mass product (F ∝ m₁·m₂).'}</div>
-              <div>{lang === 'ne' ? '• दूरी दोब्बर हुँदा बल ४ गुणा घट्छ (F ∝ 1/d²)।' : '• Force obeys the Inverse Square Law: doubling distance cuts force by 4x.'}</div>
+              <div>{lang === 'ne' ? '• दूरी दोब्बर हुँदा बल 4 गुणा घट्छ (F ∝ 1/d²)।' : '• Force obeys the Inverse Square Law: doubling distance cuts force by 4x.'}</div>
               <div>{lang === 'ne' ? '• दुवै वस्तुले एक अर्कालाई बराबर तर विपरीत बलले तान्छन् (Newton’s 3rd Law)।' : '• Both masses experience mutually equal and opposite force vectors.'}</div>
             </div>
           </div>

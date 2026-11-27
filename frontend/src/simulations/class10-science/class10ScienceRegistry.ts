@@ -1,6 +1,6 @@
 /**
  * class10ScienceRegistry.ts
- * Master Simulation Metadata Registry for Grade 10 Science & Technology (विज्ञान तथा प्रविधि - कक्षा १०)
+ * Master Simulation Metadata Registry for Grade 10 Science & Technology
  * Government of Nepal Curriculum Development Centre (CDC) Alignment
  */
 
@@ -116,7 +116,7 @@ export const GRADE_10_SCIENCE_SIMULATIONS: Grade10SimulationEntry[] = [
     difficulty: 'INTERMEDIATE',
     estimatedMinutes: 20,
     description: "Interactive cartoon demonstration of Robert Boyle's 1660 Coin and Feather experiment. Compare free fall in air (aerodynamic drag opposes feather) vs vacuum (air pumped out: coin and feather fall simultaneously with acceleration a = g).",
-    descriptionNepali: 'रोबर्ट बोयलको १६६० को गिनी र प्वाँखको ऐतिहासिक अन्तरक्रियात्मक प्रयोगशाला। हावा भएको नली (हावाको अवरोधले प्वाँख ढिलो खस्ने) र शुन्य नली (हावा पम्प गरी फालिएको: दुवै वस्तु समान प्रवेग a = g ले सँगै खस्ने) को प्रत्यक्ष तुलना र अध्ययन गर्नुहोस्।',
+    descriptionNepali: 'रोबर्ट बोयलको 1660 को गिनी र प्वाँखको ऐतिहासिक अन्तरक्रियात्मक प्रयोगशाला। हावा भएको नली (हावाको अवरोधले प्वाँख ढिलो खस्ने) र शुन्य नली (हावा पम्प गरी फालिएको: दुवै वस्तु समान प्रवेग a = g ले सँगै खस्ने) को प्रत्यक्ष तुलना र अध्ययन गर्नुहोस्।',
     tags: ['coin and feather', 'boyle experiment', 'vacuum tube', 'free fall', 'acceleration due to gravity', 'air resistance', 'class 10 science', 'see exam'],
   },
   // ── CHAPTER 2: PRESSURE ──────────────────────────────────────────────
@@ -178,7 +178,7 @@ export const GRADE_10_SCIENCE_SIMULATIONS: Grade10SimulationEntry[] = [
     difficulty: 'INTERMEDIATE',
     estimatedMinutes: 30,
     description: 'All-in-one comprehensive optical laboratory demonstrating 9 phenomena: Reflection, Refraction (meaning, causes, glass slab lateral shift), Dispersion (VIBGYOR), Diffraction, Interference (YDSE), Polarization (Malus Law), Total Internal Reflection (TIR), Photoelectric Effect, and Compton Scattering with slow laser beam tracing.',
-    descriptionNepali: 'प्रकाशका ९ मुख्य परिघटनाहरूको बृहत् प्रयोगशाला: परावर्तन, अपवर्तन (अर्थ, कारण, काँचको पाताबाट पार्श्व विस्थापन), वर्ण विच्छेदन (VIBGYOR), विवर्तन, व्यतिकरण, ध्रुवीकरण (मालसको नियम), पूर्ण आन्तरिक परावर्तन, फोटोइलेक्ट्रिक प्रभाव र कम्प्टोन प्रभावको सुस्त लेजर किरण सहितको विस्तृत अनुसन्धान।',
+    descriptionNepali: 'प्रकाशका 9 मुख्य परिघटनाहरूको बृहत् प्रयोगशाला: परावर्तन, अपवर्तन (अर्थ, कारण, काँचको पाताबाट पार्श्व विस्थापन), वर्ण विच्छेदन (VIBGYOR), विवर्तन, व्यतिकरण, ध्रुवीकरण (मालसको नियम), पूर्ण आन्तरिक परावर्तन, फोटोइलेक्ट्रिक प्रभाव र कम्प्टोन प्रभावको सुस्त लेजर किरण सहितको विस्तृत अनुसन्धान।',
     tags: ['light', 'reflection', 'refraction', 'glass slab', 'lateral displacement', 'dispersion', 'diffraction', 'interference', 'polarization', 'TIR', 'photoelectric', 'compton', 'class 10 science', 'see exam'],
   },
 ];

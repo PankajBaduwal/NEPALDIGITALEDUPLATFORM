@@ -1,7 +1,7 @@
 /**
  * NumberLineAdventure.tsx
- * Simulation 04: Number Line Adventure (सङ्ख्यारेखाको साहसिक यात्रा)
- * Class 1 Mathematics - Chapter 9: Numbers 11 to 20 (११ देखि २० सम्मका सङ्ख्याहरू)
+ * Simulation 04: Number Line Adventure
+ * Class 1 Mathematics - Chapter 9: Numbers 11 to 20
  * Nepal Digital Education Platform
  */
 
@@ -28,10 +28,10 @@ interface Props {
 }
 
 const NEP_NUMERALS: Record<number, string> = {
-  0: '०', 1: '१', 2: '२', 3: '३', 4: '४', 5: '५',
-  6: '६', 7: '७', 8: '८', 9: '९', 10: '१०',
-  11: '११', 12: '१२', 13: '१३', 14: '१४', 15: '१५',
-  16: '१६', 17: '१७', 18: '१८', 19: '१९', 20: '२०',
+  0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5',
+  6: '6', 7: '7', 8: '8', 9: '9', 10: '10',
+  11: '11', 12: '12', 13: '13', 14: '14', 15: '15',
+  16: '16', 17: '17', 18: '18', 19: '19', 20: '20',
 };
 
 const NEP_NAMES: Record<number, string> = {
@@ -62,7 +62,7 @@ export const NumberLineAdventure: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Mode: 'EXPLORE_LINE' | 'ADVENTURE' | 'QUIZ'
@@ -77,124 +77,124 @@ export const NumberLineAdventure: React.FC<Props> = ({
       {
         id: 1,
         type: 'BEFORE',
-        questionNp: '१५ को ठीक अगाडि कुन सङ्ख्या आउँछ? [ ? ] १५',
+        questionNp: '15 को ठीक अगाडि कुन सङ्ख्या आउँछ? [ ? ] 15',
         questionEn: 'Which number comes just before 15? [ ? ] 15',
         contextNum1: 15,
         targetNum: 14,
         options: [13, 14, 16],
         correct: 14,
-        explanationNp: '१५ को ठीक अघिल्लो सङ्ख्या १४ (चौध) हो।',
+        explanationNp: '15 को ठीक अघिल्लो सङ्ख्या 14 हो।',
         explanationEn: 'The number just before 15 is 14 (Fourteen).',
       },
       {
         id: 2,
         type: 'AFTER',
-        questionNp: '१७ को ठीक पछाडि कुन सङ्ख्या आउँछ? १७ [ ? ]',
+        questionNp: '17 को ठीक पछाडि कुन सङ्ख्या आउँछ? 17 [ ? ]',
         questionEn: 'Which number comes just after 17? 17 [ ? ]',
         contextNum1: 17,
         targetNum: 18,
         options: [16, 18, 19],
         correct: 18,
-        explanationNp: '१७ को ठीक पछिल्लो सङ्ख्या १८ (अठार) हो।',
+        explanationNp: '17 को ठीक पछिल्लो सङ्ख्या 18 हो।',
         explanationEn: 'The number just after 17 is 18 (Eighteen).',
       },
       {
         id: 3,
         type: 'BETWEEN',
-        questionNp: '१२ र १४ को ठीक बीचमा कुन सङ्ख्या पर्दछ? १२ [ ? ] १४',
+        questionNp: '12 र 14 को ठीक बीचमा कुन सङ्ख्या पर्दछ? 12 [ ? ] 14',
         questionEn: 'Which number lies between 12 and 14? 12 [ ? ] 14',
         contextNum1: 12,
         contextNum2: 14,
         targetNum: 13,
         options: [11, 13, 15],
         correct: 13,
-        explanationNp: '१२ र १४ को बीचमा १३ (तेह्र) पर्दछ।',
+        explanationNp: '12 र 14 को बीचमा 13 पर्दछ।',
         explanationEn: 'Between 12 and 14 lies 13 (Thirteen).',
       },
       {
         id: 4,
         type: 'MISSING',
-        questionNp: 'क्रम पूरा गर्नुहोस्: १६, १७, [ ? ], १९',
+        questionNp: 'क्रम पूरा गर्नुहोस्: 16, 17, [ ? ], 19',
         questionEn: 'Complete the sequence: 16, 17, [ ? ], 19',
         contextNum1: 17,
         targetNum: 18,
         options: [15, 18, 20],
         correct: 18,
-        explanationNp: '१६, १७ पछि १८ (अठार) आउँछ।',
+        explanationNp: '16, 17 पछि 18 आउँछ।',
         explanationEn: '16, 17 is followed by 18 (Eighteen).',
       },
       {
         id: 5,
         type: 'BEFORE',
-        questionNp: '२० को ठीक अगाडि कुन सङ्ख्या आउँछ? [ ? ] २०',
+        questionNp: '20 को ठीक अगाडि कुन सङ्ख्या आउँछ? [ ? ] 20',
         questionEn: 'Which number comes just before 20? [ ? ] 20',
         contextNum1: 20,
         targetNum: 19,
         options: [18, 19, 21],
         correct: 19,
-        explanationNp: '२० को ठीक अगाडि १९ (उन्नाइस) हुन्छ।',
+        explanationNp: '20 को ठीक अगाडि 19 हुन्छ।',
         explanationEn: 'Just before 20 comes 19 (Nineteen).',
       },
       {
         id: 6,
         type: 'BETWEEN',
-        questionNp: '१८ र २० को ठीक बीचमा कुन सङ्ख्या पर्दछ? १८ [ ? ] २०',
+        questionNp: '18 र 20 को ठीक बीचमा कुन सङ्ख्या पर्दछ? 18 [ ? ] 20',
         questionEn: 'Which number lies between 18 and 20? 18 [ ? ] 20',
         contextNum1: 18,
         contextNum2: 20,
         targetNum: 19,
         options: [17, 19, 21],
         correct: 19,
-        explanationNp: '१८ र २० को बीचमा १९ (उन्नाइस) पर्दछ।',
+        explanationNp: '18 र 20 को बीचमा 19 पर्दछ।',
         explanationEn: 'Between 18 and 20 lies 19 (Nineteen).',
       },
       {
         id: 7,
         type: 'AFTER',
-        questionNp: '११ को ठीक पछाडि कुन सङ्ख्या आउँछ? ११ [ ? ]',
+        questionNp: '11 को ठीक पछाडि कुन सङ्ख्या आउँछ? 11 [ ? ]',
         questionEn: 'Which number comes just after 11? 11 [ ? ]',
         contextNum1: 11,
         targetNum: 12,
         options: [10, 12, 13],
         correct: 12,
-        explanationNp: '११ पछि १२ (बाह्र) आउँछ।',
+        explanationNp: '11 पछि 12 आउँछ।',
         explanationEn: 'After 11 comes 12 (Twelve).',
       },
       {
         id: 8,
         type: 'MISSING',
-        questionNp: 'क्रम पूरा गर्नुहोस्: १३, १४, १५, [ ? ]',
+        questionNp: 'क्रम पूरा गर्नुहोस्: 13, 14, 15, [ ? ]',
         questionEn: 'Complete the sequence: 13, 14, 15, [ ? ]',
         contextNum1: 15,
         targetNum: 16,
         options: [16, 17, 12],
         correct: 16,
-        explanationNp: '१५ पछि १६ (सोह्र) आउँछ।',
+        explanationNp: '15 पछि 16 आउँछ।',
         explanationEn: 'After 15 comes 16 (Sixteen).',
       },
       {
         id: 9,
         type: 'BEFORE',
-        questionNp: '११ को ठीक अगाडि कुन सङ्ख्या आउँछ? [ ? ] ११',
+        questionNp: '11 को ठीक अगाडि कुन सङ्ख्या आउँछ? [ ? ] 11',
         questionEn: 'Which number comes just before 11? [ ? ] 11',
         contextNum1: 11,
         targetNum: 10,
         options: [9, 10, 12],
         correct: 10,
-        explanationNp: '११ को ठीक अगाडि १० (दश) हुन्छ।',
+        explanationNp: '11 को ठीक अगाडि 10 हुन्छ।',
         explanationEn: 'Just before 11 comes 10 (Ten).',
       },
       {
         id: 10,
         type: 'BETWEEN',
-        questionNp: '१४ र १६ को ठीक बीचमा कुन सङ्ख्या पर्दछ? १४ [ ? ] १६',
+        questionNp: '14 र 16 को ठीक बीचमा कुन सङ्ख्या पर्दछ? 14 [ ? ] 16',
         questionEn: 'Which number lies between 14 and 16? 14 [ ? ] 16',
         contextNum1: 14,
         contextNum2: 16,
         targetNum: 15,
         options: [13, 15, 17],
         correct: 15,
-        explanationNp: '१४ र १६ को बीचमा १५ (पन्ध्र) पर्दछ।',
+        explanationNp: '14 र 16 को बीचमा 15 पर्दछ।',
         explanationEn: 'Between 14 and 16 lies 15 (Fifteen).',
       },
     ],
@@ -373,7 +373,7 @@ export const NumberLineAdventure: React.FC<Props> = ({
               </span>
             </div>
             <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              {language === 'np' ? 'सङ्ख्यारेखाको साहसिक यात्रा (० देखि २०)' : 'Number Line Adventure (0 to 20)'}
+              {language === 'np' ? 'सङ्ख्यारेखाको साहसिक यात्रा (0 देखि 20)' : 'Number Line Adventure (0 to 20)'}
             </h1>
           </div>
         </div>
@@ -415,12 +415,7 @@ export const NumberLineAdventure: React.FC<Props> = ({
           >
             {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            className="px-3 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold shadow-sm transition"
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
@@ -456,14 +451,14 @@ export const NumberLineAdventure: React.FC<Props> = ({
                   className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 text-xs font-bold text-slate-900 transition flex items-center gap-1"
                 >
                   <ChevronLeft className="w-4 h-4" />
-                  {language === 'np' ? 'अघिल्लो (-१)' : 'Previous'}
+                  {language === 'np' ? 'अघिल्लो (-1)' : 'Previous'}
                 </button>
                 <button
                   disabled={currentPos >= 20}
                   onClick={() => handleHopTo(currentPos + 1)}
                   className="px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 disabled:opacity-40 text-xs font-bold text-white transition flex items-center gap-1 shadow-lg shadow-teal-500/20"
                 >
-                  {language === 'np' ? 'पछिल्लो (+१)' : 'Next'}
+                  {language === 'np' ? 'पछिल्लो (+1)' : 'Next'}
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
@@ -522,8 +517,8 @@ export const NumberLineAdventure: React.FC<Props> = ({
                 </span>
                 <span className="text-xs text-slate-500">
                   {currentPos > 0
-                    ? `${NEP_NUMERALS[currentPos]} भन्दा १ कम = ${NEP_NUMERALS[currentPos - 1]}`
-                    : 'कुनै छैन'}
+                    ? `1 less than ${NEP_NUMERALS[currentPos]} = ${NEP_NUMERALS[currentPos - 1]}`
+                    : 'None'}
                 </span>
               </div>
 
@@ -550,8 +545,8 @@ export const NumberLineAdventure: React.FC<Props> = ({
                 </span>
                 <span className="text-xs text-slate-500">
                   {currentPos < 20
-                    ? `${NEP_NUMERALS[currentPos]} भन्दा १ बढी = ${NEP_NUMERALS[currentPos + 1]}`
-                    : 'कुनै छैन'}
+                    ? `1 more than ${NEP_NUMERALS[currentPos]} = ${NEP_NUMERALS[currentPos + 1]}`
+                    : 'None'}
                 </span>
               </div>
             </div>

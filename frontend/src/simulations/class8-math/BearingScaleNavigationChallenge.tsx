@@ -6,35 +6,35 @@ import { Compass, Navigation, Map, Award, CheckCircle, RotateCcw } from 'lucide-
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एक व्यक्ति बिन्दु A बाट १२०° को दिगंशमा ५०० मिटर हिँडेर बिन्दु B मा पुग्छ। B बाट A फर्कन कुन दिगंशमा हिँड्नुपर्छ?',
+    np: 'एक व्यक्ति बिन्दु A बाट 120° को दिगंशमा 500 m हिँडेर बिन्दु B मा पुग्छ। B बाट A फर्कन कुन दिगंशमा हिँड्नुपर्छ?',
     en: 'A person walks 500 m on bearing 120° from A to B. On what bearing should they return from B to A?',
     options: [
-      { key: 'A', label: '३००° (120° + 180° = 300°)' },
-      { key: 'B', label: '०६०°' },
-      { key: 'C', label: '२४०°' },
-      { key: 'D', label: '१८०°' },
+      { key: 'A', label: '300° (120° + 180° = 300°)' },
+      { key: 'B', label: '060°' },
+      { key: 'C', label: '240°' },
+      { key: 'D', label: '180°' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि १ सेमी = ५० मिटर मापनमा नक्सा बनाउँदा ३०० मिटर दूरी कति लामो रेखाले खिच्नुपर्छ?',
+    np: 'यदि 1 cm = 50 m मापनमा नक्सा बनाउँदा 300 m दूरी कति लामो रेखाले खिच्नुपर्छ?',
     en: 'On a scale of 1 cm = 50 m, what length line represents 300 m on the map?',
     options: [
-      { key: 'A', label: '६ सेमी (300 ÷ 50 = 6 cm)' },
-      { key: 'B', label: '१५ सेमी' },
-      { key: 'C', label: '३ सेमी' },
-      { key: 'D', label: '३० सेमी' },
+      { key: 'A', label: '6 cm (300 ÷ 50 = 6 cm)' },
+      { key: 'B', label: '15 cm' },
+      { key: 'C', label: '3 cm' },
+      { key: 'D', label: '30 cm' },
     ],
     answer: 'A',
   },
   {
-    np: 'कुनै स्थान मूलबिन्दुबाट ०४५° को दिगंशमा छ भने त्यो कुन दिशामा पर्दछ?',
+    np: 'कुनै स्थान मूलबिन्दुबाट 045° को दिगंशमा छ भने त्यो कुन दिशामा पर्दछ?',
     en: 'If a place is on a bearing of 045° from the origin, in which direction does it lie?',
     options: [
-      { key: 'A', label: 'उत्तर-पूर्व (North-East / NE)' },
-      { key: 'B', label: 'दक्षिण-पूर्व' },
-      { key: 'C', label: 'उत्तर-पश्चिम' },
-      { key: 'D', label: 'पूर्व' },
+      { key: 'A', label: 'North-East (NE)' },
+      { key: 'B', label: 'South-East' },
+      { key: 'C', label: 'North-West' },
+      { key: 'D', label: 'East' },
     ],
     answer: 'A',
   },
@@ -42,10 +42,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'यदि यात्रा A बाट B र त्यसपछि B बाट C गरिन्छ भने यसलाई के भनिन्छ?',
     en: 'When a journey proceeds from A to B and then B to C, what is this called?',
     options: [
-      { key: 'A', label: 'बहु-चरणे यात्रा / मार्ग रेखाङ्कन (Multi-leg Navigation)' },
-      { key: 'B', label: 'सीधा विस्थापन' },
-      { key: 'C', label: 'परिक्रमण' },
-      { key: 'D', label: 'परावर्तन' },
+      { key: 'A', label: 'Multi-leg navigation' },
+      { key: 'B', label: 'Direct displacement' },
+      { key: 'C', label: 'Rotation' },
+      { key: 'D', label: 'Reflection' },
     ],
     answer: 'A',
   },
@@ -60,11 +60,11 @@ interface Waypoint {
 }
 
 const VILLAGE_DESTINATIONS: Waypoint[] = [
-  { nameNp: 'विद्यालय', nameEn: 'School', icon: '🏫', bearingDeg: 60, distanceM: 300 },
-  { nameNp: 'स्वास्थ्य चौकी', nameEn: 'Health Post', icon: '🏥', bearingDeg: 135, distanceM: 400 },
-  { nameNp: 'मन्दिर', nameEn: 'Temple', icon: '🛕', bearingDeg: 210, distanceM: 250 },
-  { nameNp: 'बसपार्क', nameEn: 'Bus Park', icon: '🚌', bearingDeg: 300, distanceM: 350 },
-  { nameNp: 'पानीको मुहान', nameEn: 'Water Spring', icon: '💧', bearingDeg: 345, distanceM: 200 },
+  { nameNp: 'School', nameEn: 'School', icon: '🏫', bearingDeg: 60, distanceM: 300 },
+  { nameNp: 'Health post', nameEn: 'Health Post', icon: '🏥', bearingDeg: 135, distanceM: 400 },
+  { nameNp: 'Temple', nameEn: 'Temple', icon: '🛕', bearingDeg: 210, distanceM: 250 },
+  { nameNp: 'Bus park', nameEn: 'Bus Park', icon: '🚌', bearingDeg: 300, distanceM: 350 },
+  { nameNp: 'Water source', nameEn: 'Water Spring', icon: '💧', bearingDeg: 345, distanceM: 200 },
 ];
 
 export const BearingScaleNavigationChallenge: React.FC<{
@@ -159,7 +159,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
       kit.oops();
       setMissionFeedback(
         L(
-          `❌ मिलेन। सुरु दिगंश ${formatBearing(missionTargetBearing)} भएकोले फर्कने दिगंश ${formatBearing(expectedReturn)} हो।`,
+          `❌ मिलेन। सुRs दिगंश ${formatBearing(missionTargetBearing)} भएकोले फर्कने दिगंश ${formatBearing(expectedReturn)} हो।`,
           `❌ Incorrect. For forward bearing ${formatBearing(missionTargetBearing)}, reverse bearing is ${formatBearing(expectedReturn)}.`
         )
       );
@@ -186,7 +186,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
               activeTab === 'village' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🏘️ {L('१. गाउँको नक्सा नेभिगेसन (Village Map)', '1. Village Map Navigation')}
+            🏘️ {L('1. गाउँको नक्सा नेभिगेसन (Village Map)', '1. Village Map Navigation')}
           </button>
           <button
             onClick={() => setActiveTab('free_nav')}
@@ -194,7 +194,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
               activeTab === 'free_nav' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🧭 {L('२. २-चरणे बहु-मार्ग यात्रा (2-Leg Navigation)', '2. Multi-Leg Navigation')}
+            🧭 {L('2. 2-चरणे बहु-मार्ग यात्रा (2-Leg Navigation)', '2. Multi-Leg Navigation')}
           </button>
           <button
             onClick={() => setActiveTab('mission')}
@@ -202,7 +202,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
               activeTab === 'mission' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🎯 {L('३. फिर्ती यात्रा चुनौती (Return Mission)', '3. Return Mission')}
+            🎯 {L('3. फिर्ती यात्रा चुनौती (Return Mission)', '3. Return Mission')}
           </button>
         </div>
 
@@ -211,9 +211,9 @@ export const BearingScaleNavigationChallenge: React.FC<{
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             <div className="lg:col-span-8 bg-white rounded-2xl shadow-lg p-4 border border-slate-200 flex flex-col items-center">
               <div className="w-full flex justify-between items-center text-xs font-bold text-slate-700 mb-2 px-1">
-                <span>{L('घर (Home) बाट गन्तव्य छान्नुहोस्', 'Select destination from Home')}</span>
+                <span>{L('Home बाट गन्तव्य छान्नुहोस्', 'Select destination from Home')}</span>
                 <span className="bg-amber-100 text-amber-900 px-2 py-0.5 rounded">
-                  मापन: १ सेमी = ५० मिटर
+                  Scale: 1 cm = 50 m
                 </span>
               </div>
 
@@ -247,7 +247,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
                   markerEnd="url(#arrow-n)"
                 />
                 <text x={startPoint.x + 8} y={startPoint.y - 70} fontSize="12" fontWeight="900" fill="#ef4444">
-                  N (उत्तर)
+                  N
                 </text>
 
                 {/* Destinations */}
@@ -327,7 +327,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
                   🏠
                 </text>
                 <text x={startPoint.x} y={startPoint.y + 32} fontSize="12" fontWeight="900" fill="#60a5fa" textAnchor="middle">
-                  घर (Home)
+                  Home
                 </text>
               </svg>
 
@@ -368,21 +368,21 @@ export const BearingScaleNavigationChallenge: React.FC<{
 
                     <div className="bg-white rounded-xl p-3 border border-amber-200 space-y-2 text-xs">
                       <div className="flex justify-between items-center">
-                        <span className="text-slate-500 font-semibold">घरबाट दिगंश (Bearing):</span>
+                        <span className="text-slate-500 font-semibold">Bearing from home:</span>
                         <span className="text-amber-600 font-extrabold text-sm font-mono">
                           {formatBearing(cur.bearingDeg)}
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-slate-500 font-semibold">वास्तविक दूरी:</span>
-                        <span className="text-slate-800 font-bold">{cur.distanceM} मिटर</span>
+                        <span className="text-slate-500 font-semibold">Actual distance:</span>
+                        <span className="text-slate-800 font-bold">{cur.distanceM} m</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-slate-500 font-semibold">नक्सामा दूरी (१:५०):</span>
-                        <span className="text-indigo-700 font-bold font-mono">{mapCm} सेमी</span>
+                        <span className="text-slate-500 font-semibold">Distance on map (1:50):</span>
+                        <span className="text-indigo-700 font-bold font-mono">{mapCm} cm</span>
                       </div>
                       <div className="pt-2 border-t flex justify-between items-center">
-                        <span className="text-emerald-800 font-bold">घर फर्कने दिगंश:</span>
+                        <span className="text-emerald-800 font-bold">Bearing back home:</span>
                         <span className="text-emerald-700 font-extrabold text-sm font-mono">
                           {formatBearing(revBearing)}
                         </span>
@@ -390,7 +390,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
                     </div>
 
                     <p className="text-[11px] text-amber-900 leading-relaxed bg-amber-100/60 p-2.5 rounded-lg">
-                      💡 <b>फर्कने दिगंश:</b> {cur.bearingDeg < 180 ? `${formatBearing(cur.bearingDeg)} + १८०° = ${formatBearing(revBearing)}` : `${formatBearing(cur.bearingDeg)} - १८०° = ${formatBearing(revBearing)}`}
+                      💡 <b>Return bearing:</b> {cur.bearingDeg < 180 ? `${formatBearing(cur.bearingDeg)} + 180° = ${formatBearing(revBearing)}` : `${formatBearing(cur.bearingDeg)} - 180° = ${formatBearing(revBearing)}`}
                     </p>
                   </div>
                 );
@@ -413,7 +413,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
                 {/* Leg 1: A -> B */}
                 <line x1={startPoint.x} y1={startPoint.y} x2={pointB.x} y2={pointB.y} stroke="#f59e0b" strokeWidth="3" />
                 <circle cx={startPoint.x} cy={startPoint.y} r={8} fill="#3b82f6" stroke="#fff" strokeWidth="2" />
-                <text x={startPoint.x - 15} y={startPoint.y + 18} fontSize="11" fontWeight="bold" fill="#60a5fa">A (सुरुवात)</text>
+                <text x={startPoint.x - 15} y={startPoint.y + 18} fontSize="11" fontWeight="bold" fill="#60a5fa">A</text>
 
                 <circle cx={pointB.x} cy={pointB.y} r={8} fill="#f59e0b" stroke="#fff" strokeWidth="2" />
                 <text x={pointB.x + 10} y={pointB.y + 5} fontSize="11" fontWeight="bold" fill="#fbbf24">B</text>
@@ -427,7 +427,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
                     {/* Leg 2: B -> C */}
                     <line x1={pointB.x} y1={pointB.y} x2={pointC.x} y2={pointC.y} stroke="#10b981" strokeWidth="3" />
                     <circle cx={pointC.x} cy={pointC.y} r={8} fill="#10b981" stroke="#fff" strokeWidth="2" />
-                    <text x={pointC.x + 10} y={pointC.y + 5} fontSize="11" fontWeight="bold" fill="#34d399">C (अन्तिम)</text>
+                    <text x={pointC.x + 10} y={pointC.y + 5} fontSize="11" fontWeight="bold" fill="#34d399">C</text>
 
                     {/* Return direct line C -> A (Dashed) */}
                     <line x1={pointC.x} y1={pointC.y} x2={startPoint.x} y2={startPoint.y} stroke="#a855f7" strokeWidth="2" strokeDasharray="4 3" />
@@ -440,10 +440,10 @@ export const BearingScaleNavigationChallenge: React.FC<{
             <div className="lg:col-span-4 space-y-4">
               {/* Leg 1 Controls */}
               <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-2 text-xs">
-                <span className="font-bold text-amber-900 block">पहिलो चरण (Leg 1: A ➜ B)</span>
+                <span className="font-bold text-amber-900 block">Leg 1: A ➜ B</span>
                 <div>
                   <div className="flex justify-between font-semibold">
-                    <span>दिगंश (Bearing):</span>
+                    <span>Bearing:</span>
                     <span className="font-mono text-amber-700 font-bold">{formatBearing(leg1Bearing)}</span>
                   </div>
                   <input
@@ -457,8 +457,8 @@ export const BearingScaleNavigationChallenge: React.FC<{
                 </div>
                 <div>
                   <div className="flex justify-between font-semibold">
-                    <span>दूरी (Distance):</span>
-                    <span className="font-mono text-amber-700 font-bold">{leg1DistM} मिटर</span>
+                    <span>Distance:</span>
+                    <span className="font-mono text-amber-700 font-bold">{leg1DistM} m</span>
                   </div>
                   <input
                     type="range"
@@ -475,7 +475,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
               {/* Leg 2 Controls */}
               <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-2 text-xs">
                 <div className="flex justify-between items-center">
-                  <span className="font-bold text-emerald-900">दोस्रो चरण (Leg 2: B ➜ C)</span>
+                  <span className="font-bold text-emerald-900">Leg 2: B ➜ C</span>
                   <label className="flex items-center gap-1 cursor-pointer">
                     <input
                       type="checkbox"
@@ -483,14 +483,14 @@ export const BearingScaleNavigationChallenge: React.FC<{
                       onChange={(e) => setShowLeg2(e.target.checked)}
                       className="accent-emerald-600"
                     />
-                    <span>सक्रिय</span>
+                    <span>Active</span>
                   </label>
                 </div>
                 {showLeg2 && (
                   <>
                     <div>
                       <div className="flex justify-between font-semibold">
-                        <span>दिगंश (Bearing):</span>
+                        <span>Bearing:</span>
                         <span className="font-mono text-emerald-700 font-bold">{formatBearing(leg2Bearing)}</span>
                       </div>
                       <input
@@ -504,8 +504,8 @@ export const BearingScaleNavigationChallenge: React.FC<{
                     </div>
                     <div>
                       <div className="flex justify-between font-semibold">
-                        <span>दूरी (Distance):</span>
-                        <span className="font-mono text-emerald-700 font-bold">{leg2DistM} मिटर</span>
+                        <span>Distance:</span>
+                        <span className="font-mono text-emerald-700 font-bold">{leg2DistM} m</span>
                       </div>
                       <input
                         type="range"
@@ -524,14 +524,14 @@ export const BearingScaleNavigationChallenge: React.FC<{
               {/* Summary */}
               {showLeg2 && (
                 <div className="bg-purple-50 border border-purple-200 rounded-xl p-3 text-xs space-y-1">
-                  <div className="font-bold text-purple-900">अन्तिम स्थिति C बाट सुरु A फर्कने:</div>
+                  <div className="font-bold text-purple-900">Returning to A from the final position C:</div>
                   <div className="flex justify-between text-purple-800">
-                    <span>सीधा फर्कने दिगंश:</span>
+                    <span>Direct return bearing:</span>
                     <span className="font-mono font-bold">{formatBearing(returnAngle)}</span>
                   </div>
                   <div className="flex justify-between text-purple-800">
-                    <span>सीधा दूरी (विस्थापन):</span>
-                    <span className="font-mono font-bold">~{totalDirectDistM} मिटर</span>
+                    <span>Direct distance (displacement):</span>
+                    <span className="font-mono font-bold">~{totalDirectDistM} m</span>
                   </div>
                 </div>
               )}
@@ -548,7 +548,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
               </span>
               <h3 className="text-base font-extrabold text-slate-800 mt-1">
                 {L(
-                  `एक यात्रु बिन्दु A बाट ${formatBearing(missionTargetBearing)} को दिगंशमा ${missionTargetDistM} मिटर हिँडेर B मा पुग्छ। B बाट A फर्कन कुन दिगंशमा हिँड्नुपर्छ?`,
+                  `एक यात्Rs बिन्दु A बाट ${formatBearing(missionTargetBearing)} को दिगंशमा ${missionTargetDistM} m हिँडेर B मा पुग्छ। B बाट A फर्कन कुन दिगंशमा हिँड्नुपर्छ?`,
                   `A traveler walks on bearing ${formatBearing(missionTargetBearing)} for ${missionTargetDistM} m from A to B. On what bearing should they walk back from B to A?`
                 )}
               </h3>
@@ -557,7 +557,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
             <div className="flex gap-2 max-w-sm mx-auto">
               <input
                 type="number"
-                placeholder="फर्कने दिगंश कोण (डिग्री)..."
+                placeholder="Return bearing angle (degrees)..."
                 value={userReturnBearing}
                 onChange={(e) => {
                   setUserReturnBearing(e.target.value);
@@ -565,7 +565,7 @@ export const BearingScaleNavigationChallenge: React.FC<{
                 }}
                 className="flex-1 p-2.5 rounded-xl border border-slate-300 font-mono text-sm"
               />
-              <span className="self-center font-bold text-slate-700 text-sm">डिग्री (°)</span>
+              <span className="self-center font-bold text-slate-700 text-sm">degrees (°)</span>
             </div>
 
             <div className="flex justify-center gap-3">

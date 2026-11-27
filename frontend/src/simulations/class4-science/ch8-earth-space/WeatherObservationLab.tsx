@@ -1,15 +1,15 @@
 /**
  * WeatherObservationLab.tsx
- * Simulation 33: 2D Weather Observation Laboratory (मौसम मापन प्रयोगशाला)
- * Grade 4 Science • Chapter 8: The Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 33: 2D Weather Observation Laboratory
+ * Grade 4 Science • Chapter 8: The Earth and Space
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
  * - 4 Full Interactive Meteorological Instruments:
- *   1. Cup Anemometer (वायु गति मापक - Anemometer): 3 spinning cups with dynamic km/h tachometer
- *   2. Wind Vane (वायु दिशा सूचक - Wind Vane): Pivoting directional arrow with 8 compass compass directions
- *   3. Rain Gauge (वर्षा मापक यन्त्र - Rain Gauge): Graduated cylinder measuring rainfall in mm
- *   4. Standard Thermometer (तापमान मापक - Thermometer): Mercury tube reading ambient air temp in °C
+ *   1. Cup Anemometer: 3 spinning cups with dynamic km/h tachometer
+ *   2. Wind Vane: Pivoting directional arrow with 8 compass compass directions
+ *   3. Rain Gauge: Graduated cylinder measuring rainfall in mm
+ *   4. Standard Thermometer: Mercury tube reading ambient air temp in °C
  * - Real-time animated outdoor weather environment with interactive Wind & Rain sliders
  * - Meteorological Logbook: Record weather observations into a digital notebook
  * - Bilingual EN/NE, audio feedback, and mastery challenge.
@@ -32,7 +32,7 @@ export const WeatherObservationLab: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -45,8 +45,8 @@ export const WeatherObservationLab: React.FC<BaseSimulationProps> = ({
 
   const [activeTab, setActiveTab] = useState<'station' | 'log'>('station');
   const [logBook, setLogBook] = useState<WeatherLogEntry[]>([
-    { day: 'Day 1 (आइतबार)', temp: 22, rain: 15, windSpeed: 25, windDir: 'NE' },
-    { day: 'Day 2 (सोमबार)', temp: 26, rain: 40, windSpeed: 45, windDir: 'N' },
+    { day: 'Day 1', temp: 22, rain: 15, windSpeed: 25, windDir: 'NE' },
+    { day: 'Day 2', temp: 26, rain: 40, windSpeed: 45, windDir: 'N' },
   ]);
   const [quizFeedback, setQuizFeedback] = useState<string | null>(null);
 
@@ -79,7 +79,7 @@ export const WeatherObservationLab: React.FC<BaseSimulationProps> = ({
     setWindKmh(35);
     setWindAngleDeg(45);
     setLogBook([
-      { day: 'Day 1 (आइतबार)', temp: 22, rain: 15, windSpeed: 25, windDir: 'NE' },
+      { day: 'Day 1', temp: 22, rain: 15, windSpeed: 25, windDir: 'NE' },
     ]);
     setStars(0);
     setIsCompleted(false);
@@ -256,7 +256,7 @@ export const WeatherObservationLab: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#f8fafc';
     ctx.font = 'bold 12px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText(currentLang === 'en' ? 'Anemometer (वायु गति)' : 'वायु गति मापक (Anemometer)', cx, cy - 58);
+    ctx.fillText(currentLang === 'en' ? 'Anemometer' : 'वायु गति मापक (Anemometer)', cx, cy - 58);
 
     ctx.fillStyle = '#38bdf8';
     ctx.font = 'bold 14px monospace';
@@ -329,13 +329,13 @@ export const WeatherObservationLab: React.FC<BaseSimulationProps> = ({
     ctx.restore();
 
     // Title & Direction Name
-    const directions = ['N (उत्तर)', 'NE (उत्तर-पूर्व)', 'E (पूर्व)', 'SE (दक्षिण-पूर्व)', 'S (दक्षिण)', 'SW (दक्षिण-पश्चिम)', 'W (पश्चिम)', 'NW (उत्तर-पश्चिम)'];
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
     const dirIdx = Math.round((deg % 360) / 45) % 8;
 
     ctx.fillStyle = '#f8fafc';
     ctx.font = 'bold 12px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText(currentLang === 'en' ? 'Wind Vane (वायु दिशा)' : 'वायु दिशा सूचक (Wind Vane)', cx, cy - 58);
+    ctx.fillText(currentLang === 'en' ? 'Wind Vane' : 'वायु दिशा सूचक (Wind Vane)', cx, cy - 58);
 
     ctx.fillStyle = '#facc15';
     ctx.font = 'bold 13px system-ui';
@@ -399,7 +399,7 @@ export const WeatherObservationLab: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#f8fafc';
     ctx.font = 'bold 12px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText(currentLang === 'en' ? 'Thermometer (तापक्रम)' : 'तापमान मापक (Thermometer)', cx, cy - 50);
+    ctx.fillText(currentLang === 'en' ? 'Thermometer' : 'तापमान मापक (Thermometer)', cx, cy - 50);
 
     ctx.fillStyle = '#ef4444';
     ctx.font = 'bold 16px monospace';
@@ -428,7 +428,7 @@ export const WeatherObservationLab: React.FC<BaseSimulationProps> = ({
     ctx.fill();
     ctx.stroke();
 
-    // Funnel & Cylinder (रेन गज)
+    // Funnel & Cylinder
     const gx = cx - 45;
     const gy = cy - 45;
     const gw = 28;
@@ -470,7 +470,7 @@ export const WeatherObservationLab: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#f8fafc';
     ctx.font = 'bold 12px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText(currentLang === 'en' ? 'Rain Gauge (वर्षा मापक)' : 'वर्षा मापक (Rain Gauge)', cx, cy - 50);
+    ctx.fillText(currentLang === 'en' ? 'Rain Gauge' : 'वर्षा मापक (Rain Gauge)', cx, cy - 50);
 
     ctx.fillStyle = '#38bdf8';
     ctx.font = 'bold 16px monospace';
@@ -533,7 +533,7 @@ export const WeatherObservationLab: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 8: The Earth and Space'
-          : 'कक्षा ४ विज्ञान • एकाइ ८: पृथ्वी र अन्तरिक्ष'
+          : 'कक्षा 4 विज्ञान • एकाइ 8: पृथ्वी र अन्तरिक्ष'
       }
       currentStage={stage}
       onStageChange={setStage}

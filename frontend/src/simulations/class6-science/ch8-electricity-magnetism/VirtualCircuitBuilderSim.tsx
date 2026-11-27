@@ -1,11 +1,11 @@
 /**
  * VirtualCircuitBuilderSim.tsx
- * Simulation 29: 2D Virtual Circuit Builder & Tester (भर्चुअल परिपथ निर्माण)
- * Grade 6 Science • Unit 8: Electricity and Magnetism (विद्युत र चुम्बकत्व)
+ * Simulation 29: 2D Virtual Circuit Builder & Tester
+ * Grade 6 Science • Unit 8: Electricity and Magnetism
  *
  * 100% Native HTML5 Canvas 2D Interactive Circuit Laboratory.
  * Features:
- * 1. Complete vs Incomplete Circuits (बन्द र खुला परिपथ)
+ * 1. Complete vs Incomplete Circuits
  * 2. Series vs Parallel Circuit Wiring Comparisons (Dimmer shared voltage vs Independent full brightness)
  * 3. Conductor vs Insulator Material Tester: Copper, Iron, Graphite, Rubber, Wood
  * 4. Animated flowing yellow electron dots along wires
@@ -25,7 +25,7 @@ export const VirtualCircuitBuilderSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -151,7 +151,7 @@ export const VirtualCircuitBuilderSim: React.FC<BaseSimulationProps> = ({
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 10px sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(isSwitchClosed ? 'Closed (बन्द)' : 'Open (खुला)', swX, swY + 24);
+      ctx.fillText(isSwitchClosed ? 'Closed' : 'Open', swX, swY + 24);
 
       // ==========================================
       // 3. CIRCUIT LOOPS & LOAD BULBS
@@ -425,7 +425,7 @@ export const VirtualCircuitBuilderSim: React.FC<BaseSimulationProps> = ({
       titleNepali="भर्चुअल विद्युत परिपथ निर्माण तथा परीक्षण"
       chapterNumber={8}
       chapterTitle="Unit 8: Electricity and Magnetism"
-      chapterTitleNepali="एकाइ ८: विद्युत र चुम्बकत्व"
+      chapterTitleNepali="एकाइ 8: विद्युत र चुम्बकत्व"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -494,7 +494,7 @@ export const VirtualCircuitBuilderSim: React.FC<BaseSimulationProps> = ({
           >
             <Zap style={{ width: '14px', height: '14px', color: isCircuitActive ? '#facc15' : '#94a3b8' }} />
             <span>
-              {circuitMode === 'simple' && (lang === 'ne' ? 'सरल परिपथ (१ बत्ती)' : 'Simple Circuit (1 Bulb)')}
+              {circuitMode === 'simple' && (lang === 'ne' ? 'सरल परिपथ (1 बत्ती)' : 'Simple Circuit (1 Bulb)')}
               {circuitMode === 'series' && (lang === 'ne' ? 'श्रेणीक्रम परिपथ (दुबै बत्ती मधुरो)' : 'Series Wiring (Dimmer Bulbs)')}
               {circuitMode === 'parallel' && (lang === 'ne' ? 'समानान्तरक्रम परिपथ (दुबै पूरा चम्किलो)' : 'Parallel Wiring (Full Brightness)')}
               {circuitMode === 'conductor_test' && (lang === 'ne' ? `सुचालक परीक्षण: ${testMaterial.toUpperCase()}` : `Conductor Test: ${testMaterial.toUpperCase()}`)}
@@ -587,7 +587,7 @@ export const VirtualCircuitBuilderSim: React.FC<BaseSimulationProps> = ({
           {/* Circuit Mode Selector */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. परिपथ प्रकार छान्नुहोस्' : '1. Circuit Topology'}
+              {lang === 'ne' ? '1. परिपथ प्रकार छान्नुहोस्' : '1. Circuit Topology'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '6px' }}>
               {[
@@ -624,15 +624,15 @@ export const VirtualCircuitBuilderSim: React.FC<BaseSimulationProps> = ({
           {circuitMode === 'conductor_test' && (
             <div>
               <div style={{ fontSize: '11px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', marginBottom: '8px' }}>
-                {lang === 'ne' ? '२. परीक्षणका लागि वस्तु छान्नुहोस्:' : '2. Test Material Sample:'}
+                {lang === 'ne' ? '2. परीक्षणका लागि वस्तु छान्नुहोस्:' : '2. Test Material Sample:'}
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {[
-                  { id: 'copper', nameEn: 'Copper Wire (सुचालक - Metal)', isCond: true },
-                  { id: 'iron_nail', nameEn: 'Iron Nail (सुचालक - Metal)', isCond: true },
-                  { id: 'pencil_lead', nameEn: 'Graphite Pencil (सुचालक - Non-metal)', isCond: true },
-                  { id: 'rubber', nameEn: 'Rubber Eraser (कुचालक - Insulator)', isCond: false },
-                  { id: 'dry_wood', nameEn: 'Dry Wood (कुचालक - Insulator)', isCond: false },
+                  { id: 'copper', nameEn: 'Copper Wire', isCond: true },
+                  { id: 'iron_nail', nameEn: 'Iron Nail', isCond: true },
+                  { id: 'pencil_lead', nameEn: 'Graphite Pencil', isCond: true },
+                  { id: 'rubber', nameEn: 'Rubber Eraser', isCond: false },
+                  { id: 'dry_wood', nameEn: 'Dry Wood', isCond: false },
                 ].map((item) => (
                   <button
                     key={item.id}
@@ -716,7 +716,7 @@ export const VirtualCircuitBuilderSim: React.FC<BaseSimulationProps> = ({
               {lang === 'ne' ? '📚 पाठ्यक्रम मुख्य बुँदा:' : '📚 Curriculum Takeaway:'}
             </div>
             {lang === 'ne'
-              ? 'घरायसी विद्युत वायरिङ सधैं समानान्तरक्रम (Parallel) मा गरिन्छ किनकि प्रत्येक उपकरणले पूर्ण २२० भोल्ट पाउँछन् र छुट्टाछुट्टै नियन्त्रण गर्न सकिन्छ।'
+              ? 'घरायसी विद्युत वायरिङ सधैं समानान्तरक्रम (Parallel) मा गरिन्छ किनकि प्रत्येक उपकरणले पूर्ण 220 भोल्ट पाउँछन् र छुट्टाछुट्टै नियन्त्रण गर्न सकिन्छ।'
               : 'Domestic wiring uses parallel circuits so that each appliance receives full voltage and can operate independently.'}
           </div>
 

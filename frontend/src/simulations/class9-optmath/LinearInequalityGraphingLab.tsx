@@ -380,7 +380,7 @@ export const LinearInequalityGraphingLab: React.FC<SimProps> = ({ onBackToLibrar
         {activeTab === 'test_point' && (
           <div className="lg:col-span-12 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
             <h4 className="font-bold text-slate-800 text-sm">
-              {L('परीक्षण बिन्दु विधि (Test Point Method: मूलबिन्दु (०, ०) वा कुनै बिन्दु)', 'Test Point Verification')}
+              {L('परीक्षण बिन्दु विधि (Test Point Method: मूलबिन्दु (0, 0) वा कुनै बिन्दु)', 'Test Point Verification')}
             </h4>
 
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-2">
@@ -391,7 +391,7 @@ export const LinearInequalityGraphingLab: React.FC<SimProps> = ({ onBackToLibrar
                 {L('परीक्षण गरिएको बिन्दु:', 'Tested Point:')} <span className="font-mono text-indigo-700">({testPoint.x}, {testPoint.y})</span>
               </div>
               <div className="font-mono text-slate-700 pt-1">
-                x = {testPoint.x}, y = {testPoint.y} राख्दा:{' '}
+                x = {testPoint.x}, y = {testPoint.y} Substituting:{' '}
                 {testPoint.y} {ineqOp} {slopeM}({testPoint.x}) + {interceptC} ⇒ {testPoint.y} {ineqOp} {boundaryValAtTest}
               </div>
             </div>
@@ -413,7 +413,7 @@ export const LinearInequalityGraphingLab: React.FC<SimProps> = ({ onBackToLibrar
               </h4>
               <p className="text-xs text-slate-500">
                 {L(
-                  'विद्यार्थीसँग कुल रु. ३० छ। रु. ५ पर्ने चकलेट (x) र रु. १० पर्ने चकलेट (y) खरिद गर्दा असमानता: 5x + 10y ≤ 30',
+                  'विद्यार्थीसँग कुल Rs. 30 छ। Rs. 5 पर्ने चकलेट (x) र Rs. 10 पर्ने चकलेट (y) खरिद गर्दा असमानता: 5x + 10y ≤ 30',
                   'A student has Rs. 30. Chocolates cost Rs. 5 (x) and Rs. 10 (y). Inequality: 5x + 10y ≤ 30'
                 )}
               </p>
@@ -422,7 +422,7 @@ export const LinearInequalityGraphingLab: React.FC<SimProps> = ({ onBackToLibrar
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>🍫 {L('रु. ५ पर्ने चकलेट (x):', 'Rs. 5 Chocolates (x):')}</span>
+                  <span>🍫 {L('Rs. 5 पर्ने चकलेट (x):', 'Rs. 5 Chocolates (x):')}</span>
                   <span className="font-mono text-indigo-700 font-bold">{fmt(choc5Count)}</span>
                 </div>
                 <input
@@ -437,7 +437,7 @@ export const LinearInequalityGraphingLab: React.FC<SimProps> = ({ onBackToLibrar
 
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>🍫 {L('रु. १० पर्ने चकलेट (y):', 'Rs. 10 Chocolates (y):')}</span>
+                  <span>🍫 {L('Rs. 10 पर्ने चकलेट (y):', 'Rs. 10 Chocolates (y):')}</span>
                   <span className="font-mono text-indigo-700 font-bold">{fmt(choc10Count)}</span>
                 </div>
                 <input
@@ -455,14 +455,14 @@ export const LinearInequalityGraphingLab: React.FC<SimProps> = ({ onBackToLibrar
             <div className="p-4 bg-indigo-50/70 border border-indigo-200 rounded-xl space-y-2 text-xs">
               <div className="flex justify-between items-center font-mono text-sm">
                 <span className="font-bold text-slate-800">
-                  ५({fmt(choc5Count)}) + १०({fmt(choc10Count)}) = रु. {fmt(totalCost)}
+                  5({fmt(choc5Count)}) + 10({fmt(choc10Count)}) = Rs. {fmt(totalCost)}
                 </span>
-                <span className="font-bold text-slate-600">बजेट = रु. ३०</span>
+                <span className="font-bold text-slate-600">Budget = Rs. 30</span>
               </div>
               <div className={`p-3 rounded-lg border font-bold ${isBudgetOk ? 'bg-emerald-50 border-emerald-300 text-emerald-950' : 'bg-rose-50 border-rose-300 text-rose-950'}`}>
                 {isBudgetOk
-                  ? L(`✅ मान्य खरिद! कुल खर्च रु. ${fmt(totalCost)} बजेट रु. ३० भित्र छ (5x + 10y ≤ 30 सन्तुष्ट भयो)।`, `✅ Valid! Total cost Rs. ${totalCost} is within budget Rs. 30.`)
-                  : L(`❌ बजेट नाघ्यो! कुल खर्च रु. ${fmt(totalCost)} उपलब्ध रु. ३० भन्दा बढी भयो।`, `❌ Exceeds budget! Total cost Rs. ${totalCost} is greater than Rs. 30.`)}
+                  ? L(`✅ मान्य खरिद! कुल खर्च Rs. ${fmt(totalCost)} बजेट Rs. 30 भित्र छ (5x + 10y ≤ 30 सन्तुष्ट भयो)।`, `✅ Valid! Total cost Rs. ${totalCost} is within budget Rs. 30.`)
+                  : L(`❌ बजेट नाघ्यो! कुल खर्च Rs. ${fmt(totalCost)} उपलब्ध Rs. 30 भन्दा बढी भयो।`, `❌ Exceeds budget! Total cost Rs. ${totalCost} is greater than Rs. 30.`)}
               </div>
             </div>
           </div>

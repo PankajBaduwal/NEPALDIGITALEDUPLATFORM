@@ -1,16 +1,16 @@
 /**
  * archimedesTypes.ts
  * Type definitions, material catalogs, and quiz presets for Archimedes' Principle Simulation
- * Class 10 Science & Technology • Chapter 2: Pressure (चाप)
+ * Class 10 Science & Technology • Chapter 2: Pressure
  * Nepal Curriculum Development Centre (CDC) Alignment
  */
 
 export type ArchimedesMode =
-  | 'eureka_experiment'  // Classic Eureka Overflow Can & Spring Balance Experiment (विस्थापन क्यान प्रयोग)
-  | 'density_lab'        // Controllable Weights & Density Exploration (तौल र घनत्व नियन्त्रण)
-  | 'floatation_laws'    // Law of Floatation & Hydrometer (प्लवनको नियम)
-  | 'see_solver'         // SEE Numerical Problem Solver (SEE गणितीय समाधान)
-  | 'concept_quiz';      // Interactive SEE Concept Quiz (प्रश्नोत्तरी)
+  | 'eureka_experiment'  // Classic Eureka Overflow Can & Spring Balance Experiment
+  | 'density_lab'        // Controllable Weights & Density Exploration
+  | 'floatation_laws'    // Law of Floatation & Hydrometer
+  | 'see_solver'         // SEE Numerical Problem Solver
+  | 'concept_quiz';      // Interactive SEE Concept Quiz
 
 export interface SolidMaterial {
   id: string;
@@ -87,7 +87,7 @@ export const ARCHIMEDES_QUIZ: ArchimedesQuizQuestion[] = [
   {
     id: 2,
     questionEn: "An object weighs 5 N in air. When completely immersed in water, it displaces 2 N of water. What is its apparent weight in water?",
-    questionNe: "एउटा वस्तुको हावामा तौल ५ N छ। यसलाई पानीमा पूर्ण डुबाउँदा २ N पानी विस्थापित गर्छ भने पानीमा यसको तौल (Apparent Weight) कति हुन्छ?",
+    questionNe: "एउटा वस्तुको हावामा तौल 5 N छ। यसलाई पानीमा पूर्ण डुबाउँदा 2 N पानी विस्थापित गर्छ भने पानीमा यसको तौल (Apparent Weight) कति हुन्छ?",
     optionsEn: [
       "7 N (5 N + 2 N)",
       "3 N (5 N - 2 N)",
@@ -95,14 +95,14 @@ export const ARCHIMEDES_QUIZ: ArchimedesQuizQuestion[] = [
       "0 N (weightless)",
     ],
     optionsNe: [
-      "७ N (५ N + २ N)",
-      "३ N (५ N - २ N)",
-      "२ N (विस्थापित पानी बराबर)",
-      "० N (तौलविहीन)",
+      "7 N (5 N + 2 N)",
+      "3 N (5 N - 2 N)",
+      "2 N",
+      "0 N",
     ],
     correctIndex: 1,
     explanationEn: "Apparent weight in water = Weight in air - Upthrust = 5 N - 2 N = 3 N.",
-    explanationNe: "पानीमा तौल = हावामा तौल - उर्ध्वचाप = ५ N - २ N = ३ N हुन्छ।",
+    explanationNe: "पानीमा तौल = हावामा तौल - उर्ध्वचाप = 5 N - 2 N = 3 N हुन्छ।",
   },
   {
     id: 3,
@@ -201,12 +201,12 @@ export const ARCHIMEDES_SEE_PROBLEMS: ArchimedesProblem[] = [
       'Weight of displaced water = Upthrust = 2.0 N',
     ],
     stepsNe: [
-      'दिइएको: हावामा ढुङ्गाको तौल (W₁) = ५.० N',
-      'पानीमा ढुङ्गाको तौल (W₂) = ३.० N',
+      'दिइएको: हावामा ढुङ्गाको तौल (W₁) = 5.0 N',
+      'पानीमा ढुङ्गाको तौल (W₂) = 3.0 N',
       'आर्किमिडिजको सिद्धान्त अनुसार: उर्ध्वचाप (U) = ढुङ्गाको तौलमा भएको कमी',
       'सूत्र: U = W₁ - W₂',
-      'गणना: U = ५.० N - ३.० N = २.० N',
-      'विस्थापित पानीको तौल = उर्ध्वचाप = २.० N',
+      'गणना: U = 5.0 N - 3.0 N = 2.0 N',
+      'विस्थापित पानीको तौल = उर्ध्वचाप = 2.0 N',
     ],
     resultFormatted: 'Upthrust U = 2.0 N, Weight of Displaced Water = 2.0 N',
   },
@@ -225,11 +225,11 @@ export const ARCHIMEDES_SEE_PROBLEMS: ArchimedesProblem[] = [
       'Therefore, the volume of the body is 510 cm³.',
     ],
     stepsNe: [
-      'उर्ध्वचाप U = W_हावा - W_पानी = १५ N - १० N = ५ N',
+      'उर्ध्वचाप U = W_हावा - W_पानी = 15 N - 10 N = 5 N',
       'सूत्र: U = V × ρ × g',
       'आयतन V = U / (ρ × g)',
-      'V = ५ N / (१००० kg/m³ × ९.८ m/s²) = ०.०००५१ m³ = ५१० cm³',
-      'अतः वस्तुको आयतन ५१० cm³ हुन्छ।',
+      'V = 5 N / (1000 kg/m³ × 9.8 m/s²) = 0.00051 m³ = 510 cm³',
+      'अतः वस्तुको आयतन 510 cm³ हुन्छ।',
     ],
     resultFormatted: 'Volume V = 510 cm³',
   },

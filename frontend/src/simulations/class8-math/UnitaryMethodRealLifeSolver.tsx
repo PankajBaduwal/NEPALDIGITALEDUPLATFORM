@@ -1,7 +1,7 @@
 /**
  * UnitaryMethodRealLifeSolver.tsx
- * Grade 8 Mathematics – Unit 6: UNITARY METHOD (एकाइ विधि)
- * Simulation 3: Real-Life Unitary Method Solver & Arrow Method (व्यावहारिक एकाइ विधि र तीर विधि)
+ * Grade 8 Mathematics – Unit 6: UNITARY METHOD
+ * Simulation 3: Real-Life Unitary Method Solver & Arrow Method
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 6)
  */
 import React, { useState } from 'react';
@@ -12,46 +12,46 @@ import { ArrowUp, ArrowDown, HelpCircle, CheckCircle, RefreshCw, Award, Utensils
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एउटा छाउनीमा १२० जना सैनिकलाई ३० दिन पुग्ने खाना थियो। १० दिनपछि ३० जना नयाँ सैनिक थपिँदा बाँकी खाना कति दिन पुग्ला?',
+    np: 'एउटा छाउनीमा 120 जना सैनिकलाई 30 days of food थियो। 10 daysपछि 30 जना नयाँ सैनिक थपिँदा बाँकी खाना कति days पुग्ला?',
     en: 'A camp had food for 120 soldiers for 30 days. After 10 days, 30 new soldiers arrived. How many days will the remaining food last?',
     options: [
-      { key: 'A', label: '१६ दिन [ १२० × २० ÷ १५० = २४०० ÷ १५० = १६ ]' },
-      { key: 'B', label: '२० दिन' },
-      { key: 'C', label: '१८ दिन' },
-      { key: 'D', label: '१५ दिन' },
+      { key: 'A', label: '16 days [ 120 × 20 ÷ 150 = 2400 ÷ 150 = 16 ]' },
+      { key: 'B', label: '20 days' },
+      { key: 'C', label: '18 days' },
+      { key: 'D', label: '15 days' },
     ],
     answer: 'A',
   },
   {
-    np: 'तीर विधि (Arrow Method) मा प्रत्यक्ष विचरण (Direct Variation) हुँदा तीरहरू कता फर्किन्छन्?',
+    np: 'तीर विधि (Arrow Method) मा Direct variation हुँदा तीरहरू कता फर्किन्छन्?',
     en: 'In the Arrow Method, what direction do arrows point for Direct Variation?',
     options: [
-      { key: 'A', label: 'दुवै तीर एउटै दिशामा (Same Direction: ↑ ↑ वा ↓ ↓)' },
-      { key: 'B', label: 'विपरीत दिशामा (Opposite Direction: ↑ ↓)' },
-      { key: 'C', label: 'तेर्सो दिशामा' },
-      { key: 'D', label: 'गोलो घुम्छन्' },
+      { key: 'A', label: 'Both arrows in the same direction (↑ ↑ or ↓ ↓)' },
+      { key: 'B', label: 'In opposite directions (↑ ↓)' },
+      { key: 'C', label: 'In the horizontal direction' },
+      { key: 'D', label: 'They go round in circles' },
     ],
     answer: 'A',
   },
   {
-    np: 'कामदार संख्या र काम सम्पन्न गर्न लाग्ने दिन बीच कुन विचरण हुन्छ?',
+    np: 'कामदार संख्या र काम सम्पन्न गर्न लाग्ने days बीच कुन विचरण हुन्छ?',
     en: 'What variation exists between number of workers and days to complete a job?',
     options: [
-      { key: 'A', label: 'अप्रत्यक्ष विचरण (Indirect Variation: कामदार बढे दिन घट्छ)' },
-      { key: 'B', label: 'प्रत्यक्ष विचरण (Direct Variation)' },
-      { key: 'C', label: 'कुनै विचरण हुँदैन' },
-      { key: 'D', label: 'सधैं शून्य विचरण' },
+      { key: 'A', label: 'Indirect variation (more workers means fewer days)' },
+      { key: 'B', label: 'Direct variation' },
+      { key: 'C', label: 'No variation' },
+      { key: 'D', label: 'Always zero variation' },
     ],
     answer: 'A',
   },
   {
-    np: '४ ओटा छापाखाना मेसिनले ५ दिनमा १२,००० किताब छाप्छन् भने ६ ओटा मेसिनले ८ दिनमा कति किताब छाप्लान्?',
+    np: '4 ओटा छापाखाना मेसिनले 5 daysमा 12,000 किताब छाप्छन् भने 6 ओटा मेसिनले 8 daysमा कति किताब छाप्लान्?',
     en: 'If 4 printing presses print 12,000 books in 5 days, how many books will 6 presses print in 8 days?',
     options: [
-      { key: 'A', label: '२८,८०० किताब [ १२,००० × (६/४) × (८/५) = २८,८०० ]' },
-      { key: 'B', label: '२४,००० किताब' },
-      { key: 'C', label: '३०,००० किताब' },
-      { key: 'D', label: '२६,५०० किताब' },
+      { key: 'A', label: '28,800 books [ 12,000 × (6/4) × (8/5) = 28,800 ]' },
+      { key: 'B', label: '24,000 books' },
+      { key: 'C', label: '30,000 books' },
+      { key: 'D', label: '26,500 books' },
     ],
     answer: 'A',
   },
@@ -59,10 +59,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'वस्तुको संख्या र जम्मा मूल्य बीच कुन विचरण सम्बन्ध हुन्छ?',
     en: 'What variation relationship exists between quantity of items and their total cost?',
     options: [
-      { key: 'A', label: 'प्रत्यक्ष विचरण (Direct Variation)' },
-      { key: 'B', label: 'अप्रत्यक्ष विचरण (Indirect Variation)' },
-      { key: 'C', label: 'समानुपात होइन' },
-      { key: 'D', label: 'स्थिर सम्बन्ध' },
+      { key: 'A', label: 'Direct variation' },
+      { key: 'B', label: 'Indirect variation' },
+      { key: 'C', label: 'Not proportional' },
+      { key: 'D', label: 'Constant relation' },
     ],
     answer: 'A',
   },
@@ -114,7 +114,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
       userChoice: null as 'direct' | 'indirect' | null,
     },
     {
-      qNp: 'कामदार संख्या र लाग्ने दिन (Number of workers & Days to finish)',
+      qNp: 'कामदार संख्या र लाग्ने days (Number of workers & Days to finish)',
       qEn: 'Number of workers & Days to finish',
       type: 'indirect',
       userChoice: null as 'direct' | 'indirect' | null,
@@ -132,7 +132,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
       userChoice: null as 'direct' | 'indirect' | null,
     },
     {
-      qNp: 'विद्यार्थी संख्या र खाद्यान्न पुग्ने दिन (Students & Days food lasts)',
+      qNp: 'विद्यार्थी संख्या र खाद्यान्न पुग्ने days (Students & Days food lasts)',
       qEn: 'Students & Days food lasts',
       type: 'indirect',
       userChoice: null as 'direct' | 'indirect' | null,
@@ -154,7 +154,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
   const [var1Name, setVar1Name] = useState('कामदार (Workers)');
   const [var1Val1, setVar1Val1] = useState(12);
   const [var1Val2, setVar1Val2] = useState(18);
-  const [var2Name, setVar2Name] = useState('दिन (Days)');
+  const [var2Name, setVar2Name] = useState('days (Days)');
   const [var2Val1, setVar2Val1] = useState(15);
   const [isDirectArrow, setIsDirectArrow] = useState(false); // workers vs days is indirect
   const calculatedX = isDirectArrow
@@ -203,7 +203,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
             }`}
           >
             <HelpCircle className="w-4 h-4" />
-            {L('१. विचरण पहिचान (Variation Classifier)', '1. Variation Classifier')}
+            {L('1. विचरण पहिचान (Variation Classifier)', '1. Variation Classifier')}
           </button>
           <button
             onClick={() => setActiveTab('arrow_method')}
@@ -212,7 +212,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
             }`}
           >
             <Zap className="w-4 h-4" />
-            {L('२. तीर विधि प्रयोगशाला (Arrow Method Lab)', '2. Arrow Method Lab')}
+            {L('2. तीर विधि प्रयोगशाला (Arrow Method Lab)', '2. Arrow Method Lab')}
           </button>
           <button
             onClick={() => setActiveTab('food_provisions')}
@@ -221,7 +221,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
             }`}
           >
             <Utensils className="w-4 h-4" />
-            {L('३. खाद्यान्न मौज्दात समस्या (Food Provisions)', '3. Food Provisions')}
+            {L('3. खाद्यान्न मौज्दात समस्या (Food Provisions)', '3. Food Provisions')}
           </button>
           <button
             onClick={() => setActiveTab('multi_solver')}
@@ -230,7 +230,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
             }`}
           >
             <Briefcase className="w-4 h-4" />
-            {L('४. बहु-चलराशि हलकर्ता (Multi-Variable Solver)', '4. Multi-Variable Solver')}
+            {L('4. बहु-चलराशि हलकर्ता (Multi-Variable Solver)', '4. Multi-Variable Solver')}
           </button>
         </div>
 
@@ -340,7 +340,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 {/* Column 1: Variable 1 */}
                 <div className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4 text-center">
-                  <div className="text-sm font-bold text-indigo-400">{L('चलराशि १ (Variable 1)', 'Variable 1')}</div>
+                  <div className="text-sm font-bold text-indigo-400">{L('चलराशि 1 (Variable 1)', 'Variable 1')}</div>
                   <div className="flex justify-around items-center py-2">
                     <div className="space-y-1">
                       <div className="text-xs text-slate-400">{L('सुरुको मान (Initial)', 'Initial')}</div>
@@ -363,7 +363,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
 
                 {/* Column 2: Variable 2 with Unknown X */}
                 <div className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4 text-center">
-                  <div className="text-sm font-bold text-emerald-400">{L('चलराशि २ (Variable 2 / Unknown x)', 'Variable 2 (x)')}</div>
+                  <div className="text-sm font-bold text-emerald-400">{L('चलराशि 2 (Variable 2 / Unknown x)', 'Variable 2 (x)')}</div>
                   <div className="flex justify-around items-center py-2">
                     <div className="space-y-1">
                       <div className="text-xs text-slate-400">{L('सुरुको मान', 'Initial')}</div>
@@ -419,7 +419,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
                   {L(
-                    'CDC पाठ्यपुस्तक: १२० सैनिकलाई ३० दिन पुग्ने खाना थियो। १० दिनपछि ३० जना नयाँ सैनिक थपिँदा बाँकी खाना कति दिन पुग्ला?',
+                    'CDC पाठ्यपुस्तक: 120 सैनिकलाई 30 days of food थियो। 10 daysपछि 30 जना नयाँ सैनिक थपिँदा बाँकी खाना कति days पुग्ला?',
                     'CDC Example: 120 soldiers have food for 30 days. After 10 days, 30 new soldiers join. How many days does the remaining food last?'
                   )}
                 </p>
@@ -436,7 +436,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-600 block mb-1">{L('जम्मा दिन (Total Days):', 'Initial Days:')}</label>
+                  <label className="text-xs font-bold text-slate-600 block mb-1">{L('जम्मा days (Total Days):', 'Initial Days:')}</label>
                   <input
                     type="number"
                     value={customInitialDays}
@@ -445,7 +445,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-amber-600 block mb-1">{L('बितेको दिन (Days Elapsed):', 'Days Passed:')}</label>
+                  <label className="text-xs font-bold text-amber-600 block mb-1">{L('बितेको days (Days Elapsed):', 'Days Passed:')}</label>
                   <input
                     type="number"
                     value={customDaysPassed}
@@ -470,15 +470,15 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-white p-4 rounded-xl border border-indigo-200">
-                    <div className="text-xs text-slate-500">{L('१. बाँकी दिन (Remaining Days):', 'Remaining Days:')}</div>
+                    <div className="text-xs text-slate-500">{L('1. बाँकी days (Remaining Days):', 'Remaining Days:')}</div>
                     <div className="text-xl font-black text-slate-800">
-                      {toNp(customInitialDays)} - {toNp(customDaysPassed)} = {toNp(remInitialDays)} {L('दिन', 'days')}
+                      {toNp(customInitialDays)} - {toNp(customDaysPassed)} = {toNp(remInitialDays)} {L('days', 'days')}
                     </div>
-                    <div className="text-[10px] text-slate-400 mt-1">{L('१२० सैनिकका लागि बाँकी दिन', 'For original soldiers')}</div>
+                    <div className="text-[10px] text-slate-400 mt-1">{L('120 सैनिकका लागि बाँकी days', 'For original soldiers')}</div>
                   </div>
 
                   <div className="bg-white p-4 rounded-xl border border-indigo-200">
-                    <div className="text-xs text-slate-500">{L('२. नयाँ जम्मा संख्या (Total Soldiers):', 'Total Soldiers:')}</div>
+                    <div className="text-xs text-slate-500">{L('2. नयाँ जम्मा संख्या (Total Soldiers):', 'Total Soldiers:')}</div>
                     <div className="text-xl font-black text-slate-800">
                       {toNp(customPeople)} + {toNp(customPeopleAdded)} = {toNp(newTotalPeople)} {L('जना', 'people')}
                     </div>
@@ -486,9 +486,9 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
                   </div>
 
                   <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-300">
-                    <div className="text-xs text-emerald-800 font-bold">{L('३. खाना पुग्ने दिन (Food Lasts):', 'Food Lasts:')}</div>
+                    <div className="text-xs text-emerald-800 font-bold">{L('3. खाना पुग्ने days (Food Lasts):', 'Food Lasts:')}</div>
                     <div className="text-2xl font-black text-emerald-700">
-                      {toNp(foodLastsDays.toFixed(1))} {L('दिन', 'days')}
+                      {toNp(foodLastsDays.toFixed(1))} {L('days', 'days')}
                     </div>
                     <div className="text-[10px] text-emerald-600 mt-1">
                       {toNp(customPeople)} × {toNp(remInitialDays)} ÷ {toNp(newTotalPeople)}
@@ -497,7 +497,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
                 </div>
 
                 <div className="p-3 bg-white rounded-xl border border-indigo-100 text-xs text-slate-700">
-                  <b>{L('सूत्र निष्कर्ष:', 'Conclusion:')}</b> {toNp(customPeople)} जनालाई {toNp(remInitialDays)} दिन पुग्ने खाना {toNp(newTotalPeople)} जनालाई <b>{toNp(foodLastsDays.toFixed(1))} दिन</b> मात्र पुग्छ किनभने सैनिक संख्या र खाना पुग्ने दिनबीच अप्रत्यक्ष विचरण हुन्छ।
+                  <b>{L('सूत्र निष्कर्ष:', 'Conclusion:')}</b> {toNp(customPeople)} people {toNp(remInitialDays)} days of food {toNp(newTotalPeople)} people <b>{toNp(foodLastsDays.toFixed(1))} days</b> lasts only, because the number of soldiers and the days the food lasts are in indirect variation.
                 </div>
               </div>
             </div>
@@ -514,7 +514,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
                   {L(
-                    'CDC पाठ्यपुस्तक: ४ ओटा मेसिनले ५ दिनमा १२,००० किताब छाप्छन् भने ६ ओटा मेसिनले ८ दिनमा कति किताब छाप्लान्?',
+                    'CDC पाठ्यपुस्तक: 4 ओटा मेसिनले 5 daysमा 12,000 किताब छाप्छन् भने 6 ओटा मेसिनले 8 daysमा कति किताब छाप्लान्?',
                     'CDC Example: 4 machines print 12,000 books in 5 days. How many will 6 machines print in 8 days?'
                   )}
                 </p>
@@ -534,7 +534,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
                       />
                     </div>
                     <div>
-                      <label className="text-[11px] text-slate-500 block mb-1">{L('दिन:', 'Days:')}</label>
+                      <label className="text-[11px] text-slate-500 block mb-1">{L('days:', 'Days:')}</label>
                       <input
                         type="number"
                         value={mDays1}
@@ -553,7 +553,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
                     </div>
                   </div>
                   <div className="text-xs text-slate-600 pt-2 border-t border-slate-200">
-                    {L('१ मेसिनले १ दिनमा छाप्ने दर:', 'Rate per machine-day:')}{' '}
+                    {L('1 मेसिनले 1 daysमा छाप्ने दर:', 'Rate per machine-day:')}{' '}
                     <b className="text-indigo-700">{toNp(ratePerMachineDay.toFixed(0))} {L('किताब', 'books')}</b>
                   </div>
                 </div>
@@ -571,7 +571,7 @@ export const UnitaryMethodRealLifeSolver: React.FC<{
                       />
                     </div>
                     <div>
-                      <label className="text-[11px] text-slate-600 block mb-1">{L('नयाँ दिन:', 'New Days:')}</label>
+                      <label className="text-[11px] text-slate-600 block mb-1">{L('नयाँ days:', 'New Days:')}</label>
                       <input
                         type="number"
                         value={mDays2}

@@ -1,7 +1,7 @@
 /**
  * EcosystemSimulatorSim.tsx
- * Simulation 9: 2D Ecosystem Simulator (पारिस्थितिक प्रणाली २डी सिमुलेटर)
- * Grade 6 Science • Unit 4: Environment and Biodiversity (वातावरण र जैविक विविधता)
+ * Simulation 9: 2D Ecosystem Simulator
+ * Grade 6 Science • Unit 4: Environment and Biodiversity
  *
  * 100% Native HTML5 Canvas 2D Ecological Simulator.
  * Features:
@@ -24,7 +24,7 @@ export const EcosystemSimulatorSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -404,7 +404,7 @@ export const EcosystemSimulatorSim: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Ecosystem Simulator"
-      titleNe="पारिस्थितिक प्रणाली २डी सिमुलेटर"
+      titleNe="पारिस्थितिक प्रणाली 2डी सिमुलेटर"
       subject="Science"
       grade={6}
       chapter={4}
@@ -481,7 +481,7 @@ export const EcosystemSimulatorSim: React.FC<BaseSimulationProps> = ({
               }}
             >
               <Activity size={14} color="#38bdf8" />
-              {lang === 'ne' ? 'पारिस्थितिक प्रणाली २डी' : 'Ecosystem Web & Trophic Levels'}
+              {lang === 'ne' ? 'पारिस्थितिक प्रणाली 2डी' : 'Ecosystem Web & Trophic Levels'}
             </span>
 
             <button

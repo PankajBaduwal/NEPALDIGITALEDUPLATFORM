@@ -1,12 +1,12 @@
 /**
  * PinholeCameraSim.tsx
- * Simulation 24: 2D Pinhole Camera Laboratory (पिनहोल क्यामेरा)
- * Grade 6 Science • Unit 7: Energy in Daily Life (दैनिक जीवनमा शक्ति)
+ * Simulation 24: 2D Pinhole Camera Laboratory
+ * Grade 6 Science • Unit 7: Energy in Daily Life
  *
  * 100% Native HTML5 Canvas 2D Interactive Pinhole Optics.
  * Features:
  * 1. Ray Tracing Crossover: Rays from candle flame tip and base intersect at pinhole aperture
- * 2. Inverted Real Image: Upside down image formed on translucent tracing screen (उल्टो वास्तविक आकृति)
+ * 2. Inverted Real Image: Upside down image formed on translucent tracing screen
  * 3. Magnification Dynamics: m = v / u (Screen distance / Object distance)
  * 4. Aperture Dynamics: Tiny pinhole (Sharp & clear) vs Large hole (Blurred overlapping circles)
  * 5. 5-Stage inquiry pedagogy, bilingual EN/NE, audio effects, and 3-star scoring.
@@ -22,7 +22,7 @@ export const PinholeCameraSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -237,7 +237,7 @@ export const PinholeCameraSim: React.FC<BaseSimulationProps> = ({
       titleNepali="पिनहोल क्यामेरा तथा उल्टो आकृति निर्माण"
       chapterNumber={7}
       chapterTitle="Unit 7: Energy in Daily Life"
-      chapterTitleNepali="एकाइ ७: दैनिक जीवनमा शक्ति"
+      chapterTitleNepali="एकाइ 7: दैनिक जीवनमा शक्ति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -307,7 +307,7 @@ export const PinholeCameraSim: React.FC<BaseSimulationProps> = ({
             <Camera style={{ width: '14px', height: '14px' }} />
             <span>
               {lang === 'ne'
-                ? `उल्टो र वास्तविक आकृति (Inverted & Real) | आवर्धन (m): ${magnification.toFixed(2)}x`
+                ? `आवर्धन (m): ${magnification.toFixed(2)}x`
                 : `Inverted & Real Image | Magnification (m): ${magnification.toFixed(2)}x`}
             </span>
           </div>
@@ -379,7 +379,7 @@ export const PinholeCameraSim: React.FC<BaseSimulationProps> = ({
           {/* Aperture Size Selector */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. प्वालको आकार (Aperture)' : '1. Pinhole Aperture'}
+              {lang === 'ne' ? '1. प्वालको आकार (Aperture)' : '1. Pinhole Aperture'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
               {[

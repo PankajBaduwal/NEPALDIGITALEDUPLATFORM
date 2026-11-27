@@ -1,7 +1,7 @@
 /**
  * AlgebraicTilesFactorizationPlayground.tsx
- * Grade 8 Mathematics – Unit 10: ALGEBRAIC EXPRESSION (बीजगणितीय व्यञ्जक)
- * Simulation 1: Algebraic Tiles and Factorization Playground (बीजगणितीय टायल र खण्डीकरण)
+ * Grade 8 Mathematics – Unit 10: ALGEBRAIC EXPRESSION
+ * Simulation 1: Algebraic Tiles and Factorization Playground
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 10)
  */
 import React, { useState } from 'react';
@@ -12,13 +12,13 @@ import { Square, Grid, Layers, Award, CheckCircle, RefreshCw, Scissors } from 'l
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'x² + ३x लाई बीजगणितीय टायलबाट आयत बनाउँदा लम्बाइ र चौडाइ के हुन्छ?',
+    np: 'x² + 3x लाई बीजगणितीय टायलबाट आयत बनाउँदा लम्बाइ र चौडाइ के हुन्छ?',
     en: 'When x² + 3x is arranged into a rectangle using algebra tiles, what are its length and breadth?',
     options: [
-      { key: 'A', label: 'लम्बाइ = x + ३, चौडाइ = x [ x(x + ३) ]' },
-      { key: 'B', label: 'लम्बाइ = x, चौडाइ = ३' },
-      { key: 'C', label: 'लम्बाइ = x², चौडाइ = ३x' },
-      { key: 'D', label: 'लम्बाइ = x + १, चौडाइ = x + २' },
+      { key: 'A', label: 'Length = x + 3, Breadth = x [ x(x + 3) ]' },
+      { key: 'B', label: 'Length = x, Breadth = 3' },
+      { key: 'C', label: 'Length = x², Breadth = 3x' },
+      { key: 'D', label: 'Length = x + 1, Breadth = x + 2' },
     ],
     answer: 'A',
   },
@@ -56,7 +56,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: '2x² + 4x बाट साझा गुणनखण्ड (Common Factor) २x लिँदा बाँकी के रहन्छ?',
+    np: '2x² + 4x बाट साझा गुणनखण्ड (Common Factor) 2x लिँदा बाँकी के रहन्छ?',
     en: 'Taking common factor 2x from 2x² + 4x leaves what expression?',
     options: [
       { key: 'A', label: 'x + 2 [ 2x(x + 2) ]' },
@@ -112,7 +112,7 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
             }`}
           >
             <Square className="w-4 h-4" />
-            {L('१. टायलबाट आयत (x² + bx = x(x+b))', '1. Tiles to Rectangle')}
+            {L('1. टायलबाट आयत (x² + bx = x(x+b))', '1. Tiles to Rectangle')}
           </button>
           <button
             onClick={() => setActiveTab('common_factor')}
@@ -121,7 +121,7 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
             }`}
           >
             <Grid className="w-4 h-4" />
-            {L('२. साझा गुणनखण्ड (Common Factor)', '2. Common Factor')}
+            {L('2. साझा गुणनखण्ड (Common Factor)', '2. Common Factor')}
           </button>
           <button
             onClick={() => setActiveTab('grouping')}
@@ -130,7 +130,7 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
             }`}
           >
             <Layers className="w-4 h-4" />
-            {L('३. समूह मिलान विधि (Grouping Terms)', '3. Grouping Terms')}
+            {L('3. समूह मिलान विधि (Grouping Terms)', '3. Grouping Terms')}
           </button>
           <button
             onClick={() => setActiveTab('diff_squares')}
@@ -139,7 +139,7 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
             }`}
           >
             <Scissors className="w-4 h-4" />
-            {L('४. दुई वर्गको अन्तर (a² - b²)', '4. Difference of Squares')}
+            {L('4. दुई वर्गको अन्तर (a² - b²)', '4. Difference of Squares')}
           </button>
           <button
             onClick={() => setActiveTab('perfect_square')}
@@ -148,7 +148,7 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
             }`}
           >
             <Award className="w-4 h-4" />
-            {L('५. पूर्ण वर्ग (Perfect Square)', '5. Perfect Square')}
+            {L('5. पूर्ण वर्ग (Perfect Square)', '5. Perfect Square')}
           </button>
         </div>
 
@@ -170,7 +170,7 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
                 <div className="flex items-center">
                   {/* Left Label: Breadth = x */}
                   <div className="text-xs font-bold text-sky-400 -rotate-90 pr-2">
-                    चौडाइ = x
+                    Breadth = x
                   </div>
 
                   {/* Tile Grid */}
@@ -196,7 +196,7 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
 
                 {/* Top/Bottom Dimension Label: Length = x + numXTiles */}
                 <div className="text-center font-mono text-xs font-bold text-amber-400">
-                  लम्बाइ = x + {toNp(numXTiles)} (१ ओटा x टायल + {toNp(numXTiles)} ओटा एकाइ पट्टी)
+                  Length = x + {toNp(numXTiles)} (1 x-tile + {toNp(numXTiles)} unit strips)
                 </div>
               </div>
 
@@ -234,10 +234,10 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
               <div className="p-6 bg-slate-900 text-white rounded-2xl font-mono text-sm space-y-4">
                 <div className="text-amber-400 font-bold uppercase">{L('चरणबद्ध खण्डीकरण:', 'Step-by-Step Breakdown:')}</div>
                 <div className="space-y-2">
-                  <div>१. पहिलो पद: 2x² = <span className="text-emerald-400 font-bold">2 · x</span> · x</div>
-                  <div>२. दोस्रो पद: 4x = <span className="text-emerald-400 font-bold">2 · x</span> · 2</div>
+                  <div>1. First term: 2x² = <span className="text-emerald-400 font-bold">2 · x</span> · x</div>
+                  <div>2. Second term: 4x = <span className="text-emerald-400 font-bold">2 · x</span> · 2</div>
                   <div className="p-3 bg-slate-800 rounded-xl text-emerald-300 font-bold text-base border border-slate-700">
-                    ३. दुवैमा साझा गुणनखण्ड = <span className="text-amber-400">2x</span>
+                    3. Common factor of both = <span className="text-amber-400">2x</span>
                   </div>
                   <div className="p-4 bg-emerald-950/80 border border-emerald-500 rounded-xl text-xl font-black text-emerald-300 text-center">
                     2x² + 4x = 2x(x + 2)
@@ -264,10 +264,10 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
               <div className="p-6 bg-slate-900 text-white rounded-2xl font-mono text-sm space-y-4">
                 <div className="text-amber-400 font-bold uppercase">{L('समूह मिलान प्रक्रिया:', 'Grouping Procedure:')}</div>
                 <div className="space-y-2">
-                  <div>१. दिएको व्यञ्जक: ax + bx + ay + by</div>
-                  <div>२. दुई-दुई पदको समूह बनाउँदा: <span className="text-sky-300">(ax + bx)</span> + <span className="text-purple-300">(ay + by)</span></div>
-                  <div>३. प्रत्येक समूहबाट साझा लिँदा: <span className="text-sky-400">x(a + b)</span> + <span className="text-purple-400">y(a + b)</span></div>
-                  <div className="text-amber-300">४. साझा द्विपदीय पद (a + b) बाहिर निकाल्दा:</div>
+                  <div>1. Given expression: ax + bx + ay + by</div>
+                  <div>2. Grouping the terms in pairs: <span className="text-sky-300">(ax + bx)</span> + <span className="text-purple-300">(ay + by)</span></div>
+                  <div>3. Taking out the common factor from each group: <span className="text-sky-400">x(a + b)</span> + <span className="text-purple-400">y(a + b)</span></div>
+                  <div className="text-amber-300">4. Taking out the common binomial (a + b):</div>
                   <div className="p-4 bg-emerald-950/90 border border-emerald-500 rounded-xl text-center text-2xl font-black text-emerald-300">
                     = (a + b)(x + y)
                   </div>
@@ -298,7 +298,7 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
                     <rect x="20" y="20" width="160" height="160" fill="#3b82f6" stroke="#60a5fa" strokeWidth="2" />
                     {/* Cut out square b in corner */}
                     <rect x="120" y="20" width="60" height="60" fill="#0f172a" stroke="#ef4444" strokeWidth="2" strokeDasharray="3,3" />
-                    <text x="150" y="55" fill="#ef4444" fontSize="10" textAnchor="middle" fontWeight="bold">b² हटाइयो</text>
+                    <text x="150" y="55" fill="#ef4444" fontSize="10" textAnchor="middle" fontWeight="bold">b² removed</text>
                     <text x="70" y="110" fill="#ffffff" fontSize="12" fontWeight="bold">a² - b²</text>
                   </svg>
                 </div>
@@ -317,11 +317,11 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
               {/* Sliders */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-600 block mb-1">ठूलो भुजा a: {toNp(sideBigA)}</label>
+                  <label className="text-xs font-bold text-slate-600 block mb-1">Larger side a: {toNp(sideBigA)}</label>
                   <input type="range" min="5" max="15" value={sideBigA} onChange={(e) => setSideBigA(Number(e.target.value))} className="w-full accent-blue-600" />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-600 block mb-1">सानो भुजा b: {toNp(sideSmallB)}</label>
+                  <label className="text-xs font-bold text-slate-600 block mb-1">Smaller side b: {toNp(sideSmallB)}</label>
                   <input type="range" min="1" max={sideBigA - 1} value={sideSmallB} onChange={(e) => setSideSmallB(Number(e.target.value))} className="w-full accent-rose-600" />
                 </div>
               </div>
@@ -338,7 +338,7 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
                   {L('पूर्ण वर्ग सूत्र: a² + 2ab + b² = (a + b)²', 'Perfect Square: a² + 2ab + b² = (a + b)²')}
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
-                  {L('भुजा (a + b) भएको ठूलो वर्ग ४ भागमा विभाजित हुन्छ: एउटा a², दुईवटा ab, र एउटा b²।', 'A square of side (a+b) splits into 4 regions: one a², two ab, and one b².')}
+                  {L('भुजा (a + b) भएको ठूलो वर्ग 4 भागमा विभाजित हुन्छ: एउटा a², दुईpcs ab, र एउटा b²।', 'A square of side (a+b) splits into 4 regions: one a², two ab, and one b².')}
                 </p>
               </div>
 
@@ -353,7 +353,7 @@ export const AlgebraicTilesFactorizationPlayground: React.FC<{
                 </div>
 
                 <div className="text-center text-lg font-bold text-emerald-400 font-sans">
-                  क्षेत्रफलहरूको जोड = a² + ab + ab + b² = <span className="text-amber-300">a² + 2ab + b² = (a + b)²</span>
+                  Sum of the areas = a² + ab + ab + b² = <span className="text-amber-300">a² + 2ab + b² = (a + b)²</span>
                 </div>
               </div>
             </div>

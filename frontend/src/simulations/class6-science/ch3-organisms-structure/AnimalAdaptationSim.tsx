@@ -1,7 +1,7 @@
 /**
  * AnimalAdaptationSim.tsx
- * Master Interactive 2D Wildlife & Adaptation Studio (जनावरको अनुकूलन - २डी जीव विज्ञान प्रयोगशाला)
- * Grade 6 Science • Unit 3: Organisms & Their Structure (जीवहरू र तिनीहरूको बनावट)
+ * Master Interactive 2D Wildlife & Adaptation Studio
+ * Grade 6 Science • Unit 3: Organisms & Their Structure
  *
  * 100% Native 2D Canvas & Vector Graphics (Zero WebGL/3D Dependencies)
  * - Ultra-Rich Natural Color Palettes across 3 iconic Nepalese Habitats:
@@ -53,7 +53,7 @@ export const AnimalAdaptationSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -89,13 +89,13 @@ export const AnimalAdaptationSim: React.FC<BaseSimulationProps> = ({
     }
   > = {
     himalayan: {
-      titleEn: 'Himalayan Alpine Tundra (हिमाली प्रदेश)',
+      titleEn: 'Himalayan Alpine Tundra',
       titleNe: 'उच्च हिमाली बासस्थान (Alpine Habitat)',
-      organismEn: 'Himalayan Yak (याक / चौँरी)',
+      organismEn: 'Himalayan Yak',
       organismNe: 'हिमाली याक (Bos grunniens)',
       scientificName: 'Bos grunniens',
       altitudeEn: '3,000m – 5,500m Altitude',
-      altitudeNe: '३,००० देखि ५,५०० मिटर उचाइ',
+      altitudeNe: '3,000 देखि 5,500 मिटर उचाइ',
       spots: [
         {
           id: 'wool',
@@ -106,7 +106,7 @@ export const AnimalAdaptationSim: React.FC<BaseSimulationProps> = ({
           roleEn: 'Under-wool traps dead air as an insulator; long skirt fleece shields belly from deep snow.',
           roleNe: 'भित्री मसिनो ऊनले न्यानो हावा थुनेर राख्छ र लामो भुत्लाले हिउँको चिसोबाट बचाउँछ।',
           scientificConceptEn: 'Thermal insulation reduces conductive and convective body heat dissipation in -40°C blizzards.',
-          scientificConceptNe: 'यसले -४०°C को चिसोमा पनि शरीरको तापक्रम घट्न दिँदैन।',
+          scientificConceptNe: 'यसले -40°C को चिसोमा पनि शरीरको तापक्रम घट्न दिँदैन।',
         },
         {
           id: 'lungs',
@@ -144,13 +144,13 @@ export const AnimalAdaptationSim: React.FC<BaseSimulationProps> = ({
       ],
     },
     terai: {
-      titleEn: 'Terai Subtropical Grassland (तराई प्रदेश)',
+      titleEn: 'Terai Subtropical Grassland',
       titleNe: 'तराईको साल वन तथा घाँसे मैदान',
-      organismEn: 'Asian Wild Elephant (जङ्गली हात्ती)',
+      organismEn: 'Asian Wild Elephant',
       organismNe: 'एसियाली हात्ती (Elephas maximus)',
       scientificName: 'Elephas maximus',
       altitudeEn: '60m – 300m Tropical Lowland',
-      altitudeNe: '६० देखि ३०० मिटर तराई',
+      altitudeNe: '60 देखि 300 मिटर तराई',
       spots: [
         {
           id: 'ears',
@@ -170,7 +170,7 @@ export const AnimalAdaptationSim: React.FC<BaseSimulationProps> = ({
           nameEn: 'Prehensile Muscular Trunk (Proboscis)',
           nameNe: 'बलियो बहुउपयोगी सुँड (Trunk)',
           roleEn: 'Fleshy fusion of nose and upper lip with 40,000 muscles: breathes, rips branches, sprays water, and trumpets.',
-          roleNe: '४०,००० भन्दा बढी मांसपेशी मिलेर बनेको सुँडले घाँस टिप्न, पानी पिउन, नुहाउन र सुँघ्न मद्दत गर्छ।',
+          roleNe: '40,000 भन्दा बढी मांसपेशी मिलेर बनेको सुँडले घाँस टिप्न, पानी पिउन, नुहाउन र सुँघ्न मद्दत गर्छ।',
           scientificConceptEn: 'Extreme dexterity replaces the absence of hands in quadrupeds.',
           scientificConceptNe: 'सुँडले हात्तीलाई हात र नाक दुवैको काम एकसाथ गर्न सघाउँछ।',
         },
@@ -181,7 +181,7 @@ export const AnimalAdaptationSim: React.FC<BaseSimulationProps> = ({
           nameEn: 'Spongy Cushioned Footpads',
           nameNe: 'कुसनयुक्त चौडा पैताला',
           roleEn: 'Thick elastic fibro-fatty cushions absorb the 4,000 kg impact shock and expand to distribute ground pressure.',
-          roleNe: 'पैतालामुनिको नरम कुसनले ४ टन तौलको भार थाम्छ र हिँड्दा आवाज आउन दिँदैन।',
+          roleNe: 'पैतालामुनिको नरम कुसनले 4 टन तौलको भार थाम्छ र हिँड्दा आवाज आउन दिँदैन।',
           scientificConceptEn: 'Acoustic dampening and terrain shock absorption enable stealthy, silent movement.',
           scientificConceptNe: 'यसले हात्तीलाई जंगलमा हिँड्दा कुनै आवाज ननिकाली हिँड्न मद्दत गर्छ।',
         },
@@ -199,9 +199,9 @@ export const AnimalAdaptationSim: React.FC<BaseSimulationProps> = ({
       ],
     },
     aquatic: {
-      titleEn: 'Karnali Freshwater River (जलिय बासस्थान)',
+      titleEn: 'Karnali Freshwater River',
       titleNe: 'कर्णाली नदीको जलिय बासस्थान',
-      organismEn: 'Golden Himalayan Mahseer (सहर माछा)',
+      organismEn: 'Golden Himalayan Mahseer',
       organismNe: 'गोल्डेन महासीर माछा (Tor putitora)',
       scientificName: 'Tor putitora',
       altitudeEn: 'Fast-flowing Himalayan Rivers',

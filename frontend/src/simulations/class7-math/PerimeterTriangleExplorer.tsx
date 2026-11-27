@@ -1,6 +1,6 @@
 /**
  * PerimeterTriangleExplorer.tsx
- * Grade 7 Mathematics – Lesson 9: PERIMETER, AREA AND VOLUME (परिमिति, क्षेत्रफल र आयतन)
+ * Grade 7 Mathematics – Lesson 9: PERIMETER, AREA AND VOLUME
  * Simulation 1: Perimeter and Triangle Explorer (2D + Interactive Triangle Geometry)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 112-117)
  */
@@ -15,43 +15,43 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'त्रिभुजको परिमिति (Perimeter of a Triangle) निकाल्ने सुत्र कुन हो?',
     en: 'What is the formula for the perimeter of a triangle?',
     options: [
-      { key: 'A', label: 'तीनओटै भुजाहरूको जोड (P = a + b + c)' },
-      { key: 'B', label: '२ × (लम्बाइ + चौडाइ)' },
-      { key: 'C', label: 'लम्बाइ × चौडाइ' },
-      { key: 'D', label: '१/२ × आधार × उचाइ' },
+      { key: 'A', label: 'Sum of all three sides (P = a + b + c)' },
+      { key: 'B', label: '2 × (length + breadth)' },
+      { key: 'C', label: 'length × breadth' },
+      { key: 'D', label: '1/2 × base × height' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा त्रिभुजका भुजाहरू ८ सेमी, १२ सेमी र ६ सेमी छन् भने यसको परिमिति कति हुन्छ?',
+    np: 'एउटा त्रिभुजका भुजाहरू 8 cm, 12 cm र 6 cm छन् भने यसको परिमिति कति हुन्छ?',
     en: 'The sides of a triangle are 8 cm, 12 cm, and 6 cm. What is its perimeter?',
     options: [
-      { key: 'A', label: '२६ सेमी (८ + १२ + ६ = २६ सेमी)' },
-      { key: 'B', label: '२४ सेमी' },
-      { key: 'C', label: '२८ सेमी' },
-      { key: 'D', label: '३० सेमी' },
+      { key: 'A', label: '26 cm (8 + 12 + 6 = 26 cm)' },
+      { key: 'B', label: '24 cm' },
+      { key: 'C', label: '28 cm' },
+      { key: 'D', label: '30 cm' },
     ],
     answer: 'A',
   },
   {
-    np: 'त्रिभुजाकार जग्गाको परिमिति ४०० मिटर छ। दुई भुजाहरू १२० मिटर र १८० मिटर भए तेस्रो भुजा कति हुन्छ?',
+    np: 'त्रिभुजाकार जग्गाको परिमिति 400 m छ। दुई भुजाहरू 120 m र 180 m भए तेस्रो भुजा कति हुन्छ?',
     en: 'The perimeter of triangular land is 400 m. If two sides are 120 m and 180 m, what is the third side?',
     options: [
-      { key: 'A', label: '१०० मिटर [ ४०० - (१२० + १८०) = १०० मिटर ]' },
-      { key: 'B', label: '१५० मिटर' },
-      { key: 'C', label: '८० मिटर' },
-      { key: 'D', label: '१२० मिटर' },
+      { key: 'A', label: '100 m [ 400 - (120 + 180) = 100 m ]' },
+      { key: 'B', label: '150 m' },
+      { key: 'C', label: '80 m' },
+      { key: 'D', label: '120 m' },
     ],
     answer: 'A',
   },
   {
-    np: '१० मि, १२ मि र १४ मि भुजाहरू भएको खेतलाई ५ फेरो काँडेतारले घेर्न कति तार र प्रति मिटर रु २० का दरले कति खर्च लाग्छ?',
+    np: '10 मि, 12 मि र 14 मि भुजाहरू भएको खेतलाई 5 Perimeter काँडेतारले घेर्न कति तार र प्रति m Rs 20 का दरले कति खर्च लाग्छ?',
     en: 'A triangular field (10m, 12m, 14m) is fenced 5 times. Wire needed and cost at Rs 20/m are:',
     options: [
-      { key: 'A', label: '१८० मिटर तार र रु ३,६०० खर्च (P = ३६m, तार = ३६×५ = १८०m, खर्च = १८०×२० = रु ३,६००)' },
-      { key: 'B', label: '३६ मिटर तार र रु ७२० खर्च' },
-      { key: 'C', label: '१५० मिटर तार र रु ३,००० खर्च' },
-      { key: 'D', label: '२०० मिटर तार र रु ४,००० खर्च' },
+      { key: 'A', label: '180 m of wire and Rs 3,600 cost (P = 36 m, wire = 36×5 = 180 m, cost = 180×20 = Rs 3,600)' },
+      { key: 'B', label: '36 m of wire and Rs 720 cost' },
+      { key: 'C', label: '150 m of wire and Rs 3,000 cost' },
+      { key: 'D', label: '200 m of wire and Rs 4,000 cost' },
     ],
     answer: 'A',
   },
@@ -115,9 +115,9 @@ export const PerimeterTriangleExplorer: React.FC<{ onBackToLibrary?: () => void;
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'discover', np: '१. परिमिति खोजी (P = a + b + c)', en: '1. Discover Perimeter' },
-            { id: 'missing-side', np: '२. अज्ञात भुजा पत्ता लगाउने (Missing Side)', en: '2. Find Missing Side' },
-            { id: 'fencing', np: '३. तरकारी बारी काँडेतार घेराबन्दी (Field Fencing)', en: '3. Fencing & Cost' },
+            { id: 'discover', np: '1. परिमिति खोजी (P = a + b + c)', en: '1. Discover Perimeter' },
+            { id: 'missing-side', np: '2. अज्ञात भुजा पत्ता लगाउने (Missing Side)', en: '2. Find Missing Side' },
+            { id: 'fencing', np: '3. तरकारी बारी काँडेतार घेराबन्दी (Field Fencing)', en: '3. Fencing & Cost' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -149,7 +149,7 @@ export const PerimeterTriangleExplorer: React.FC<{ onBackToLibrary?: () => void;
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: त्रिभुज ABC मा AB = ८ सेमी, BC = १२ सेमी र CA = ६ सेमी छन्। तीन भुजाहरू परिवर्तन गरी परिमिति हेर्नुहोस्:',
+                'पाठ्यपुस्तक उदाहरण: त्रिभुज ABC मा AB = 8 cm, BC = 12 cm र CA = 6 cm छन्। तीन भुजाहरू परिवर्तन गरी परिमिति हेर्नुहोस्:',
                 'Textbook Example: In triangle ABC, AB = 8 cm, BC = 12 cm, and CA = 6 cm. Adjust sides to explore perimeter:'
               )}
             </p>
@@ -288,7 +288,7 @@ export const PerimeterTriangleExplorer: React.FC<{ onBackToLibrary?: () => void;
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: त्रिभुजाकार जग्गाको परिमिति ४०० मिटर छ। दुई भुजाहरू १२० मिटर र १८० मिटर भए तेस्रो भुजा पत्ता लगाउनुहोस्:',
+                'पाठ्यपुस्तक उदाहरण: त्रिभुजाकार जग्गाको परिमिति 400 m छ। दुई भुजाहरू 120 m र 180 m भए तेस्रो भुजा पत्ता लगाउनुहोस्:',
                 'Textbook Example: Triangular land perimeter = 400 m. If two sides are 120 m and 180 m, find the third side:'
               )}
             </p>
@@ -360,16 +360,16 @@ export const PerimeterTriangleExplorer: React.FC<{ onBackToLibrary?: () => void;
               }}
             >
               <div>
-                <strong>{L('१. सम्बन्ध:', '1. Relation:')}</strong> P = a + b + c
+                <strong>{L('1. सम्बन्ध:', '1. Relation:')}</strong> P = a + b + c
               </div>
               <div>
-                <strong>{L('२. मान राख्दा:', '2. Substituting values:')}</strong> {totalP} = {knownA} + b + {knownC}
+                <strong>{L('2. मान राख्दा:', '2. Substituting values:')}</strong> {totalP} = {knownA} + b + {knownC}
               </div>
               <div>
-                <strong>{L('३. जोड्दा:', '3. Adding known sides:')}</strong> {totalP} = b + {knownA + knownC}
+                <strong>{L('3. जोड्दा:', '3. Adding known sides:')}</strong> {totalP} = b + {knownA + knownC}
               </div>
               <div>
-                <strong>{L('४. पक्षान्तर गर्दा:', '4. Solving for b:')}</strong> b = {totalP} - {knownA + knownC}
+                <strong>{L('4. पक्षान्तर गर्दा:', '4. Solving for b:')}</strong> b = {totalP} - {knownA + knownC}
               </div>
               <div
                 style={{
@@ -395,7 +395,7 @@ export const PerimeterTriangleExplorer: React.FC<{ onBackToLibrary?: () => void;
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: १० मि, १२ मि र १४ मि भुजाहरू भएको त्रिभुजाकार तरकारी खेतलाई ५ फेरो काँडेतारले घेर्न कति तार र प्रति मिटर रु २० का दरले कति खर्च लाग्छ?',
+                'पाठ्यपुस्तक उदाहरण: 10 मि, 12 मि र 14 मि भुजाहरू भएको त्रिभुजाकार तरकारी खेतलाई 5 Perimeter काँडेतारले घेर्न कति तार र प्रति m Rs 20 का दरले कति खर्च लाग्छ?',
                 'Textbook Example: A vegetable plot (10m, 12m, 14m) is fenced 5 rounds. Find total wire needed and cost at Rs 20/m:'
               )}
             </p>
@@ -403,7 +403,7 @@ export const PerimeterTriangleExplorer: React.FC<{ onBackToLibrary?: () => void;
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#475569', display: 'block', marginBottom: 4 }}>
-                  {L('फेरो सङ्ख्या (Fencing Rounds): ', 'Rounds: ')} {rounds} फेरो
+                  {L('Perimeter सङ्ख्या (Fencing Rounds): ', 'Rounds: ')} {rounds} Perimeter
                 </label>
                 <input
                   type="range"
@@ -420,7 +420,7 @@ export const PerimeterTriangleExplorer: React.FC<{ onBackToLibrary?: () => void;
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#D97706', display: 'block', marginBottom: 4 }}>
-                  {L('प्रति मिटर दर (Rate per m): ', 'Rate per m: ')} रु {costPerMeter}
+                  {L('प्रति m दर (Rate per m): ', 'Rate per m: ')} Rs {costPerMeter}
                 </label>
                 <input
                   type="range"
@@ -448,37 +448,37 @@ export const PerimeterTriangleExplorer: React.FC<{ onBackToLibrary?: () => void;
             >
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 10, border: '1px solid #CBD5E1' }}>
                 <span style={{ fontSize: 12, fontWeight: 700, color: '#334155' }}>
-                  {L('१. खेतको परिमिति (१ फेरो तार)', '1. Perimeter (1 Round Wire)')}
+                  {L('1. खेतको परिमिति (1 Perimeter तार)', '1. Perimeter (1 Round Wire)')}
                 </span>
                 <div style={{ fontSize: 22, fontWeight: 800, color: '#0F172A', marginTop: 4 }}>
                   {fieldPerimeter} m
                 </div>
                 <div style={{ fontSize: 12, color: '#64748B', marginTop: 2 }}>
-                  १०m + १२m + १४m = ३६m
+                  10m + 12m + 14m = 36m
                 </div>
               </div>
 
               <div style={{ background: '#EFF6FF', padding: 16, borderRadius: 10, border: '1px solid #BFDBFE' }}>
                 <span style={{ fontSize: 12, fontWeight: 700, color: '#1E40AF' }}>
-                  {L(`२. ${rounds} फेरोका लागि आवश्यक तार`, `2. Wire for ${rounds} Rounds`)}
+                  {L(`2. ${rounds} Perimeterका लागि आवश्यक तार`, `2. Wire for ${rounds} Rounds`)}
                 </span>
                 <div style={{ fontSize: 22, fontWeight: 800, color: '#2563EB', marginTop: 4 }}>
                   {totalWireNeeded} m
                 </div>
                 <div style={{ fontSize: 12, color: '#1E3A8A', marginTop: 2 }}>
-                  {fieldPerimeter}m × {rounds} फेरो
+                  {fieldPerimeter}m × {rounds} Perimeter
                 </div>
               </div>
 
               <div style={{ background: '#ECFDF5', padding: 16, borderRadius: 10, border: '2px solid #10B981' }}>
                 <span style={{ fontSize: 12, fontWeight: 700, color: '#065F46' }}>
-                  {L('३. जम्मा घेराबन्दी खर्च (Total Cost)', '3. Total Cost')}
+                  {L('3. जम्मा घेराबन्दी खर्च (Total Cost)', '3. Total Cost')}
                 </span>
                 <div style={{ fontSize: 22, fontWeight: 800, color: '#047857', marginTop: 4 }}>
-                  रु {totalFencingCost.toLocaleString()}
+                  Rs {totalFencingCost.toLocaleString()}
                 </div>
                 <div style={{ fontSize: 12, color: '#065F46', marginTop: 2 }}>
-                  {totalWireNeeded}m × रु {costPerMeter}
+                  {totalWireNeeded}m × Rs {costPerMeter}
                 </div>
               </div>
             </div>

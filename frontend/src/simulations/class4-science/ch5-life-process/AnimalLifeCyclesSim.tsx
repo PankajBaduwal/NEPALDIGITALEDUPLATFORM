@@ -1,17 +1,17 @@
 /**
  * AnimalLifeCyclesSim.tsx
  * Master Interactive 2D Amphibian Metamorphosis: Frog Life Cycle
- * (भ्यागुतोको पूर्ण रूपान्तरण जीवनचक्र - २डी अन्तरक्रियात्मक प्रयोगशाला)
- * Grade 4 Science • Chapter 5: Life Process (जीवन प्रक्रिया)
+ * (भ्यागुतोको पूर्ण रूपान्तरण जीवनचक्र - 2डी अन्तरक्रियात्मक प्रयोगशाला)
+ * Grade 4 Science • Chapter 5: Life Process
  *
  * 100% Native 2D Canvas & Vector Graphics (Zero WebGL/3D Dependencies)
  * - Ultra-Rich Natural Colors: Lush lotus pond, floating green lily pads, clear blue water cross-section,
  *   translucent jelly eggs (frog spawn), swimming tadpole, and bright green leopard-spotted adult frog.
  * - 4-Stage Complete Amphibian Metamorphosis:
- *   1. Frog Spawn (अण्डा): Floating gelatinous egg mass with dark embryos inside.
- *   2. Aquatic Tadpole (चेपागाँडा): Swishing swimming tail, external feathery gills, grazing on algae.
- *   3. Froglet with Limbs (खुट्टा पलाएको चेपागाँडा): Hind and forelimbs developing, tail being absorbed, lungs forming.
- *   4. Adult Amphibian Frog (वयस्क भ्यागुतो): Breathing on lily pad, croaking vocal sac, webbed feet, and insect catching!
+ *   1. Frog Spawn: Floating gelatinous egg mass with dark embryos inside.
+ *   2. Aquatic Tadpole: Swishing swimming tail, external feathery gills, grazing on algae.
+ *   3. Froglet with Limbs: Hind and forelimbs developing, tail being absorbed, lungs forming.
+ *   4. Adult Amphibian Frog: Breathing on lily pad, croaking vocal sac, webbed feet, and insect catching!
  * - Interactive Controls: Metamorphosis Scrubber, Stage buttons, "Shoot Tongue / Catch Fly" action, and Audio FX.
  */
 import React, { useState, useRef, useEffect, useCallback } from 'react';
@@ -49,7 +49,7 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -70,8 +70,8 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'egg',
       stepNum: 1,
-      nameEn: '1. Frog Spawn / Egg Mass (अण्डाको थुप्रो)',
-      nameNe: '१. अण्डाको थुप्रो (Frog Spawn)',
+      nameEn: '1. Frog Spawn / Egg Mass',
+      nameNe: '1. अण्डाको थुप्रो (Frog Spawn)',
       habitatEn: 'Calm shallow pond attached to aquatic weeds',
       habitatNe: 'पोखरीको शान्त पानीमा लेउ र झारमा टाँसिएको',
       breathingEn: 'Oxygen diffuses directly through jelly sphere',
@@ -84,8 +84,8 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'tadpole',
       stepNum: 2,
-      nameEn: '2. Swimming Tadpole (चेपागाँडा)',
-      nameNe: '२. चेपागाँडा (Aquatic Tadpole)',
+      nameEn: '2. Swimming Tadpole',
+      nameNe: '2. चेपागाँडा (Aquatic Tadpole)',
       habitatEn: 'Exclusively underwater with fish-like swimming',
       habitatNe: 'माछाझैँ पानीभित्र मात्र पौडिएर बस्छ',
       breathingEn: 'External and internal feathery gills',
@@ -98,8 +98,8 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'froglet',
       stepNum: 3,
-      nameEn: '3. Froglet with Limbs (खुट्टा पलाएको चेपागाँडा)',
-      nameNe: '३. खुट्टा पलाएको चेपागाँडा (Froglet)',
+      nameEn: '3. Froglet with Limbs',
+      nameNe: '3. खुट्टा पलाएको चेपागाँडा (Froglet)',
       habitatEn: 'Shallow pond edge transitioning to land',
       habitatNe: 'पोखरीको छेउ र जमिनको बीचमा',
       breathingEn: 'Developing internal lungs & moist skin',
@@ -112,8 +112,8 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'adult',
       stepNum: 4,
-      nameEn: '4. Adult Amphibian Frog (वयस्क भ्यागुतो)',
-      nameNe: '४. वयस्क भ्यागुतो (Adult Amphibian)',
+      nameEn: '4. Adult Amphibian Frog',
+      nameNe: '4. वयस्क भ्यागुतो (Adult Amphibian)',
       habitatEn: 'Dual amphibious life: both land and freshwater',
       habitatNe: 'उभयचर: जमिन र पानी दुवै ठाउँमा',
       breathingEn: 'Lungs on land & moist cutaneous skin underwater',
@@ -358,7 +358,7 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
       ctx.fillStyle = '#38bdf8';
       ctx.font = 'bold 11px Inter, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(lang === 'en' ? '🥚 Frog Spawn (अण्डा)' : '🥚 अण्डाको थुप्रो', spawnX, spawnY - 48);
+      ctx.fillText(lang === 'en' ? '🥚 Frog Spawn' : '🥚 अण्डाको थुप्रो', spawnX, spawnY - 48);
       ctx.restore();
     }
 
@@ -423,7 +423,7 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
       ctx.fillStyle = '#4ade80';
       ctx.font = 'bold 11px Inter, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(lang === 'en' ? '🐟 Tadpole (चेपागाँडा)' : '🐟 चेपागाँडा (Tadpole)', tadX, tadY - 38);
+      ctx.fillText(lang === 'en' ? '🐟 Tadpole' : '🐟 चेपागाँडा (Tadpole)', tadX, tadY - 38);
       ctx.restore();
     }
 
@@ -481,7 +481,7 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
       ctx.fillStyle = '#4ade80';
       ctx.font = 'bold 11px Inter, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(lang === 'en' ? '🐸 Froglet (खुट्टा पलाएको)' : '🐸 खुट्टा पलाएको चेपागाँडा', fletX, fletY - 38);
+      ctx.fillText(lang === 'en' ? '🐸 Froglet' : '🐸 खुट्टा पलाएको चेपागाँडा', fletX, fletY - 38);
       ctx.restore();
     }
 
@@ -605,7 +605,7 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
       ctx.fillStyle = '#4ade80';
       ctx.font = 'bold 11px Inter, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(lang === 'en' ? '🐸 Adult Frog (वयस्क भ्यागुतो)' : '🐸 वयस्क भ्यागुतो', frogX, frogY - 43);
+      ctx.fillText(lang === 'en' ? '🐸 Adult Frog' : '🐸 वयस्क भ्यागुतो', frogX, frogY - 43);
       ctx.restore();
     }
   }, [metaProgress, showTongue, lang]);
@@ -626,7 +626,7 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
       qEn: 'Which breathing organ does a tadpole use while swimming underwater?',
       qNe: 'पानीभित्र पौडिँदा चेपागाँडाले कुन अङ्गबाट सास फेर्छ?',
       optionsEn: [
-        'External and internal feathery gills (फुल्का)',
+        'External and internal feathery gills',
         'Lungs like human beings',
         'Large wings',
         'Sharp pointed horns',
@@ -661,7 +661,7 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
       expNe: 'पुच्छरको कोषहरू शरीरभित्रै घुलेर नयाँ अङ्गहरूको विकासमा प्रयोग हुन्छ।',
     },
     {
-      qEn: 'Why is an adult frog classified as an "amphibian" (उभयचर)?',
+      qEn: 'Why is an adult frog classified as an "amphibian"?',
       qNe: 'वयस्क भ्यागुतोलाई किन "उभयचर" (Amphibian) भनिन्छ?',
       optionsEn: [
         'It can live both on terrestrial land and in freshwater aquatic habitats',
@@ -820,7 +820,7 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
                   boxShadow: '0 4px 15px rgba(244, 63, 94, 0.45)',
                 }}
               >
-                👅 {lang === 'en' ? 'Catch Insect (जिब्रोले किरा समात)' : 'किरा समात्नुहोस्'}
+                👅 {lang === 'en' ? 'Catch Insect' : 'किरा समात्नुहोस्'}
               </button>
             </div>
           )}
@@ -905,7 +905,7 @@ export const AnimalLifeCyclesSim: React.FC<BaseSimulationProps> = ({
                   fontWeight: 800,
                 }}
               >
-                {lang === 'en' ? `Stage ${currentStageIndex + 1} of 4` : `चरण ${currentStageIndex + 1} / ४`}
+                {lang === 'en' ? `Stage ${currentStageIndex + 1} of 4` : `चरण ${currentStageIndex + 1} / 4`}
               </span>
             </div>
 

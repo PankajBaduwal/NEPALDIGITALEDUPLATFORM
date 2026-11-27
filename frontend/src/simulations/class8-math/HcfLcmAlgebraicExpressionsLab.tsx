@@ -1,7 +1,7 @@
 /**
  * HcfLcmAlgebraicExpressionsLab.tsx
- * Grade 8 Mathematics – Unit 10: ALGEBRAIC EXPRESSION (बीजगणितीय व्यञ्जक)
- * Simulation 3: HCF and LCM of Algebraic Expressions Lab (बीजीय व्यञ्जकहरूको म.स. र ल.स. प्रयोगशाला)
+ * Grade 8 Mathematics – Unit 10: ALGEBRAIC EXPRESSION
+ * Simulation 3: HCF and LCM of Algebraic Expressions Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 10)
  */
 import React, { useState } from 'react';
@@ -15,7 +15,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'x² + 2xy + y² र x² - y² को महत्तम समापवर्तक (HCF) के हुन्छ?',
     en: 'What is the HCF of x² + 2xy + y² and x² - y²?',
     options: [
-      { key: 'A', label: 'x + y [ (x+y)² र (x+y)(x-y) को साझा ]' },
+      { key: 'A', label: 'x + y [ common to (x+y)² and (x+y)(x-y) ]' },
       { key: 'B', label: 'x - y' },
       { key: 'C', label: '(x + y)²' },
       { key: 'D', label: 'x² + y²' },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'ल.स. (LCM) निकाल्ने सही सूत्र कुन हो?',
     en: 'Which is the correct principle to find LCM of expressions?',
     options: [
-      { key: 'A', label: 'साझा गुणनखण्डहरू × बाँकी गुणनखण्डहरू (Common × Remaining Factors)' },
-      { key: 'B', label: 'साझा गुणनखण्डहरू मात्र (Only Common Factors)' },
-      { key: 'C', label: 'बाँकी गुणनखण्डहरू मात्र' },
-      { key: 'D', label: 'दुवै व्यञ्जकको जोड' },
+      { key: 'A', label: 'Common factors × remaining factors' },
+      { key: 'B', label: 'Common factors only' },
+      { key: 'C', label: 'Remaining factors only' },
+      { key: 'D', label: 'Sum of both expressions' },
     ],
     answer: 'A',
   },
@@ -71,7 +71,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
 const PRESET_CASES = [
   {
     id: 1,
-    titleNp: 'केस १: दुई द्विपदीय/त्रिपदीय व्यञ्जक (CDC पाठ्यपुस्तक उदाहरण ३)',
+    titleNp: 'केस 1: दुई द्विपदीय/त्रिपदीय व्यञ्जक (CDC पाठ्यपुस्तक उदाहरण 3)',
     titleEn: 'Case 1: Two Expressions (CDC Example 3)',
     e1Name: 'x² + 2xy + y²',
     e1Factors: '(x + y)(x + y)',
@@ -84,7 +84,7 @@ const PRESET_CASES = [
   },
   {
     id: 2,
-    titleNp: 'केस २: तीन त्रिपदीय व्यञ्जकहरू (CDC पाठ्यपुस्तक उदाहरण ४)',
+    titleNp: 'केस 2: तीन त्रिपदीय व्यञ्जकहरू (CDC पाठ्यपुस्तक उदाहरण 4)',
     titleEn: 'Case 2: Three Expressions (CDC Example 4)',
     e1Name: 'x² + 6x + 8',
     e1Factors: '(x + 4)(x + 2)',
@@ -99,7 +99,7 @@ const PRESET_CASES = [
   },
   {
     id: 3,
-    titleNp: 'केस ३: संख्यात्मक र एकपदीय (Monomials)',
+    titleNp: 'केस 3: संख्यात्मक र एकपदीय (Monomials)',
     titleEn: 'Case 3: Numeric & Monomials',
     e1Name: '12x²',
     e1Factors: '2 × 2 × 3 × x × x',
@@ -156,7 +156,7 @@ export const HcfLcmAlgebraicExpressionsLab: React.FC<{
             }`}
           >
             <GitMerge className="w-4 h-4" />
-            {L('१. CDC पाठ्यपुस्तक उदाहरणहरू (CDC Cases)', '1. CDC Textbook Cases')}
+            {L('1. CDC पाठ्यपुस्तक उदाहरणहरू (CDC Cases)', '1. CDC Textbook Cases')}
           </button>
           <button
             onClick={() => setActiveTab('concept_venn')}
@@ -165,7 +165,7 @@ export const HcfLcmAlgebraicExpressionsLab: React.FC<{
             }`}
           >
             <ListFilter className="w-4 h-4" />
-            {L('२. म.स. र ल.स. सिद्धान्त (HCF vs LCM Principle)', '2. HCF vs LCM Principle')}
+            {L('2. म.स. र ल.स. सिद्धान्त (HCF vs LCM Principle)', '2. HCF vs LCM Principle')}
           </button>
         </div>
 
@@ -231,7 +231,7 @@ export const HcfLcmAlgebraicExpressionsLab: React.FC<{
                     {selectedCase.hcf}
                   </div>
                   <div className="text-xs text-blue-300/80 mt-1">
-                    साझा गुणनखण्ड: {selectedCase.common}
+                    Common factor: {selectedCase.common}
                   </div>
                 </div>
 
@@ -244,7 +244,7 @@ export const HcfLcmAlgebraicExpressionsLab: React.FC<{
                     {selectedCase.lcm}
                   </div>
                   <div className="text-xs text-emerald-300/80 mt-1">
-                    साझा × बाँकी गुणनखण्डहरू
+                    Common × remaining factors
                   </div>
                 </div>
               </div>
@@ -274,9 +274,9 @@ export const HcfLcmAlgebraicExpressionsLab: React.FC<{
                     {L('म.स. (Highest Common Factor - HCF)', 'Highest Common Factor (HCF)')}
                   </h4>
                   <ul className="text-xs space-y-1.5 text-slate-700">
-                    <li>• केवल सबै व्यञ्जकहरूमा रहेका <b>साझा गुणनखण्डहरू</b> मात्र लिइन्छ।</li>
-                    <li>• समान आधार भएका पदहरूमा <b>न्यूनतम घाताङ्क</b> छानिन्छ (जस्तै x² र x³ मा HCF = x²)।</li>
-                    <li>• यो दुवै व्यञ्जकभन्दा सानो वा बराबर हुन्छ।</li>
+                    <li>• Only the factors present in all expressions <b>common factors</b> are taken.</li>
+                    <li>• For terms with the same base, <b>the lowest exponent</b> is chosen (for example, for x² and x³, HCF = x²).</li>
+                    <li>• It is less than or equal to both expressions.</li>
                   </ul>
                 </div>
 
@@ -285,9 +285,9 @@ export const HcfLcmAlgebraicExpressionsLab: React.FC<{
                     {L('ल.स. (Lowest Common Multiple - LCM)', 'Lowest Common Multiple (LCM)')}
                   </h4>
                   <ul className="text-xs space-y-1.5 text-slate-700">
-                    <li>• <b>साझा गुणनखण्डहरू</b> का साथै बाँकी रहेका <b>सबै गुणनखण्डहरू</b> गुणन गरिन्छ।</li>
-                    <li>• समान आधार भएका पदहरूमा <b>अधिकतम घाताङ्क</b> छानिन्छ (जस्तै x² र x³ मा LCM = x³)।</li>
-                    <li>• यो दुवै व्यञ्जकभन्दा ठूलो वा बराबर हुन्छ।</li>
+                    <li>• <b>common factors</b> together with the remaining <b>all factors</b> are multiplied.</li>
+                    <li>• For terms with the same base, <b>the highest exponent</b> is chosen (for example, for x² and x³, LCM = x³).</li>
+                    <li>• It is greater than or equal to both expressions.</li>
                   </ul>
                 </div>
               </div>

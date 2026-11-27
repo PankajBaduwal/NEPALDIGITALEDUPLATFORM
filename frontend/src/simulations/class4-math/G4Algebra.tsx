@@ -1,5 +1,5 @@
 /**
- * Class 4 lesson 15 · Algebra (बीजगणित)
+ * Class 4 lesson 15 · Algebra
  * BalanceAlgebra — 2D Interactive algebraic balance scale (x + a = b or a·x = b).
  */
 import React, { useMemo, useState } from 'react';

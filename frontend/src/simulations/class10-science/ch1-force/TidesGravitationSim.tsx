@@ -1,7 +1,7 @@
 /**
  * TidesGravitationSim.tsx
- * Simulation: Ocean Tides & Lunar Gravitation (समुद्री ज्वारभाटा र चन्द्रमाको गुरुत्वाकर्षण बल)
- * Grade 10 Science • Chapter 1: Force & Gravitation (बल र गुरुत्वाकर्षण)
+ * Simulation: Ocean Tides & Lunar Gravitation
+ * Grade 10 Science • Chapter 1: Force & Gravitation
  *
  * 100% Native HTML5 Canvas 2D Interactive Cartoon Simulation.
  * Recreates the user's reference illustration with vivid cartoon aesthetics, rich physics,
@@ -48,7 +48,7 @@ export const TidesGravitationSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -128,7 +128,7 @@ export const TidesGravitationSim: React.FC<BaseSimulationProps> = ({
       moonXRel: 0.6,
       icon: '🌓',
       descEn: 'Sun and Moon at 90° right angle: solar gravity opposes lunar gravity, producing milder tides.',
-      descNe: 'सूर्य र चन्द्रमा ९० डिग्रीको समकोणमा हुँदा एकअर्काको बल घटाई न्यून वा लघु ज्वार ल्याउँछन्।',
+      descNe: 'सूर्य र चन्द्रमा 90 डिग्रीको समकोणमा हुँदा एकअर्काको बल घटाई न्यून वा लघु ज्वार ल्याउँछन्।',
     },
     {
       id: 'high-sky-normal',
@@ -192,7 +192,7 @@ export const TidesGravitationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       qEn: 'Although the Sun is 27 million times more massive than the Moon, the Moon causes ~2.17 times stronger tides on Earth. Why?',
-      qNe: 'सूर्य चन्द्रमाभन्दा करिब २ करोड ७० लाख गुणा ठूलो भए पनि चन्द्रमाले नै किन दोब्बरभन्दा बढी (२.१७ गुणा) शक्तिशाली ज्वारभाटा ल्याउँछ?',
+      qNe: 'सूर्य चन्द्रमाभन्दा करिब 2 करोड 70 लाख गुणा ठूलो भए पनि चन्द्रमाले नै किन दोब्बरभन्दा बढी (2.17 गुणा) शक्तिशाली ज्वारभाटा ल्याउँछ?',
       optsEn: [
         'Because tidal differential gravitational force depends inversely on the CUBE of distance (1/d³), and the Moon is ~390 times closer',
         'Because the Moon has stronger magnetic fields than the Sun',
@@ -200,7 +200,7 @@ export const TidesGravitationSim: React.FC<BaseSimulationProps> = ({
         'Because the Moon orbits Earth directly, while the Sun does not',
       ],
       optsNe: [
-        'किनभने ज्वारीय विभेदक बल दूरीको घनको व्युत्क्रमानुपातिक (१/d³) हुन्छ र चन्द्रमा सूर्यभन्दा करिब ३९० गुणा नजिक छ',
+        'किनभने ज्वारीय विभेदक बल दूरीको घनको व्युत्क्रमानुपातिक (1/d³) हुन्छ र चन्द्रमा सूर्यभन्दा करिब 390 गुणा नजिक छ',
         'किनभने चन्द्रमामा सूर्यभन्दा शक्तिशाली चुम्बकीय क्षेत्र हुन्छ',
         'किनभने सूर्य दिनमा मात्र उदाउँछ र राति गुरुत्वाकर्षण हुँदैन',
         'किनभने चन्द्रमा पृथ्वीको उपग्रह हो तर सूर्य होइन',
@@ -209,21 +209,21 @@ export const TidesGravitationSim: React.FC<BaseSimulationProps> = ({
       explEn:
         'Tidal force is a DIFFERENTIAL gravity gradient: F_tide ∝ M/d³. Because the Moon is 390 times closer to Earth than the Sun, the (1/d³) factor dominates over mass, making lunar tides 2.17× stronger than solar tides.',
       explNe:
-        'ज्वारीय बल विभेदक गुरुत्वाकर्षण बल हो, जुन दूरीको तेस्रो घात वा घनको व्युत्क्रमानुपातिक (F_tide ∝ M/d³) हुन्छ। चन्द्रमा सूर्यभन्दा करिब ३९० गुणा नजिक भएकाले दूरीको प्रभावले चन्द्रमाको ज्वारीय प्रभाव सूर्यभन्दा २.१७ गुणा बढी हुन्छ।',
+        'ज्वारीय बल विभेदक गुरुत्वाकर्षण बल हो, जुन दूरीको तेस्रो घात वा घनको व्युत्क्रमानुपातिक (F_tide ∝ M/d³) हुन्छ। चन्द्रमा सूर्यभन्दा करिब 390 गुणा नजिक भएकाले दूरीको प्रभावले चन्द्रमाको ज्वारीय प्रभाव सूर्यभन्दा 2.17 गुणा बढी हुन्छ।',
     },
     {
-      qEn: 'During which lunar phases do maximum "Spring Tides" (बृहत् ज्वार) occur?',
+      qEn: 'During which lunar phases do maximum "Spring Tides" occur?',
       qNe: 'कुन तिथि वा चन्द्रमाको अवस्थामा सबैभन्दा अग्लो "बृहत् ज्वार" (Spring Tide) आउँछ?',
       optsEn: [
-        'At New Moon (औंसी) and Full Moon (पूर्णिमा) when Sun, Earth, and Moon are aligned in a straight line (Syzygy)',
-        'At First Quarter and Last Quarter Moon (अष्टमी) when Sun and Moon are perpendicular',
+        'At New Moon and Full Moon when Sun, Earth, and Moon are aligned in a straight line (Syzygy)',
+        'At First Quarter and Last Quarter Moon when Sun and Moon are perpendicular',
         'Only during solar eclipses once a decade',
         'Every single day at midnight',
       ],
       optsNe: [
         'औंसी र पूर्णिमामा जब सूर्य, पृथ्वी र चन्द्रमा एउटै सरल रेखामा (सिजिगी) पर्दछन्',
-        'अष्टमी तिथिमा जब सूर्य र चन्द्रमा ९० डिग्रीको समकोणमा हुन्छन्',
-        'प्रत्येक १० वर्षमा एकपटक सूर्यग्रहण लाग्दा मात्र',
+        'अष्टमी तिथिमा जब सूर्य र चन्द्रमा 90 डिग्रीको समकोणमा हुन्छन्',
+        'प्रत्येक 10 वर्षमा एकपटक सूर्यग्रहण लाग्दा मात्र',
         'हरेक दिन मध्यरातमा मात्र',
       ],
       correct: 0,
@@ -234,7 +234,7 @@ export const TidesGravitationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       qEn: 'Why do most coastlines experience TWO high tides and TWO low tides approximately every 24 hours 50 minutes?',
-      qNe: 'अधिकांश समुद्र किनारमा प्रत्येक २४ घण्टा ५० मिनेटमा दुई पटक उच्च ज्वार र दुई पटक न्यून ज्वार किन आउँछ?',
+      qNe: 'अधिकांश समुद्र किनारमा प्रत्येक 24 घण्टा 50 मिनेटमा दुई पटक उच्च ज्वार र दुई पटक न्यून ज्वार किन आउँछ?',
       optsEn: [
         'Because Earth rotates through TWO bulges: one facing the Moon (direct pull) and one on the opposite side (antipodal differential inertia)',
         'Because ocean waves bounce back and forth from continents',

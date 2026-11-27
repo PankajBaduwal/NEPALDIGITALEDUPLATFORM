@@ -1,5 +1,5 @@
 /**
- * Lesson 2 · Time (समय) — week, months and the year
+ * Lesson 2 · Time — week, months and the year
  * Calendar Town — twelve month houses: how many days, which month comes next, which season.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -59,7 +59,7 @@ export const CalendarTown: React.FC<Props> = ({ onBackToLibrary }) => {
       } else {
         setTimeout(() => {
           setIsTouring(false);
-          kit.good('वर्षमा १२ महिना पूरा घुमियो!', 'Completed the 12-month year tour!');
+          kit.good('वर्षमा 12 महिना पूरा घुमियो!', 'Completed the 12-month year tour!');
           kit.star();
         }, 1200);
       }
@@ -70,7 +70,7 @@ export const CalendarTown: React.FC<Props> = ({ onBackToLibrary }) => {
   useEffect(() => {
     if (kit.mode === 'LEARN') {
       chooseMonth(0);
-      kit.say('वर्षमा १२ महिना हुन्छन्। कुनै पनि महिना छोएर जानकारी हेरौँ।', 'There are 12 months in a year. Tap any month card to explore.');
+      kit.say('वर्षमा 12 महिना हुन्छन्। कुनै पनि महिना छोएर जानकारी हेरौँ।', 'There are 12 months in a year. Tap any month card to explore.');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kit.mode]);
@@ -109,7 +109,7 @@ export const CalendarTown: React.FC<Props> = ({ onBackToLibrary }) => {
     });
 
     qs.push({
-      np: 'कुन महिनामा सबैभन्दा कम दिन (२८ वा २९ दिन) हुन्छन्?',
+      np: 'कुन महिनामा सबैभन्दा कम दिन (28 वा 29 दिन) हुन्छन्?',
       en: 'Which month has the fewest days (28 or 29 days)?',
       ans: 'February',
       opts: ['February', 'April', 'August'],

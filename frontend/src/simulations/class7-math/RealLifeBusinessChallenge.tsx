@@ -1,6 +1,6 @@
 /**
  * RealLifeBusinessChallenge.tsx
- * Grade 7 Mathematics – Lesson 7: PROFIT AND LOSS (नाफा र नोक्सान)
+ * Grade 7 Mathematics – Lesson 7: PROFIT AND LOSS
  * Simulation 4: Real-Life Business and Overhead Expenses (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 101-103)
  */
@@ -15,43 +15,43 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'सामान किन्दा लागेको ढुवानी, मर्मत वा कर खर्चलाई के भनिन्छ र यो कहाँ जोडिन्छ?',
     en: 'What is transportation, repair, or tax called, and where is it added?',
     options: [
-      { key: 'A', label: 'अतिरिक्त खर्च (Overhead Expenses), यो क्रय मूल्य (CP) मा जोडिन्छ' },
-      { key: 'B', label: 'विक्रय मूल्य (SP) मा जोडिन्छ' },
-      { key: 'C', label: 'नाफाबाट घटाइन्छ' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'Overhead expenses, which are added to the cost price (CP)' },
+      { key: 'B', label: 'Added to the selling price (SP)' },
+      { key: 'C', label: 'Subtracted from the profit' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा फ्रिज रु ३२,५०० मा किनेर रु ५०० ढुवानी खर्च लाग्यो र रु ३३,५०० मा बेचियो भने नाफा कति हुन्छ?',
+    np: 'एउटा फ्रिज Rs 32,500 मा किनेर Rs 500 ढुवानी खर्च लाग्यो र Rs 33,500 मा बेचियो भने नाफा कति हुन्छ?',
     en: 'A fridge was bought for Rs 32,500 with Rs 500 transport and sold for Rs 33,500. What is the profit?',
     options: [
-      { key: 'A', label: 'रु ५०० (जम्मा CP = ३३,०००, SP = ३३,५०० => नाफा = रु ५००)' },
-      { key: 'B', label: 'रु १,०००' },
-      { key: 'C', label: 'रु १,५००' },
-      { key: 'D', label: 'नोक्सान रु ५००' },
+      { key: 'A', label: 'Rs 500' },
+      { key: 'B', label: 'Rs 1,000' },
+      { key: 'C', label: 'Rs 1,500' },
+      { key: 'D', label: 'Loss Rs 500' },
     ],
     answer: 'A',
   },
   {
-    np: '५० वटा चिम प्रतिगोटा रु ४० का दरले किन्दा १५ वटा फुट्यो। बाँकी ३५ वटा प्रतिगोटा रु ५० मा बेच्दा के हुन्छ?',
+    np: '50 pcs चिम प्रतिगोटा Rs 40 का दरले किन्दा 15 pcs फुट्यो। बाँकी 35 pcs प्रतिगोटा Rs 50 मा बेच्दा के हुन्छ?',
     en: '50 bulbs were bought at Rs 40 each, 15 were broken. The remaining 35 were sold at Rs 50 each. What is the result?',
     options: [
-      { key: 'A', label: 'रु २५० नोक्सान (CP = २०००, SP = १७५० => नोक्सान = रु २५०)' },
-      { key: 'B', label: 'रु २५० नाफा' },
-      { key: 'C', label: 'रु ५०० नाफा' },
-      { key: 'D', label: 'नाफा न नोक्सान' },
+      { key: 'A', label: 'Rs 250 loss (CP = 2000, SP = 1750 => loss = Rs 250)' },
+      { key: 'B', label: 'Rs 250 profit' },
+      { key: 'C', label: 'Rs 500 profit' },
+      { key: 'D', label: 'Neither profit nor loss' },
     ],
     answer: 'A',
   },
   {
-    np: 'घर रु ९५,००,००० मा किनेर मर्मतमा रु २,००,००० खर्च गरी रु १,१०,००,००० मा बेच्दा नाफा कति हुन्छ?',
+    np: 'घर Rs 95,00,000 मा किनेर मर्मतमा Rs 2,00,000 खर्च गरी Rs 1,10,00,000 मा बेच्दा नाफा कति हुन्छ?',
     en: 'A house was bought for Rs 95,00,000, Rs 2,00,000 spent on repair, and sold for Rs 1,10,00,000. What is the profit?',
     options: [
-      { key: 'A', label: 'रु १३,००,००० (जम्मा CP = ९७ लाख, SP = १ करोड १० लाख)' },
-      { key: 'B', label: 'रु १५,००,०००' },
-      { key: 'C', label: 'रु १०,००,०००' },
-      { key: 'D', label: 'रु १२,००,०००' },
+      { key: 'A', label: 'Rs 13,00,000' },
+      { key: 'B', label: 'Rs 15,00,000' },
+      { key: 'C', label: 'Rs 10,00,000' },
+      { key: 'D', label: 'Rs 12,00,000' },
     ],
     answer: 'A',
   },
@@ -113,9 +113,9 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'overhead', np: '१. ढुवानी खर्च (Overhead Expenses)', en: '1. Overhead Expenses' },
-            { id: 'damaged', np: '२. फुटेको सामान (Damaged Goods)', en: '2. Damaged Goods' },
-            { id: 'real-estate', np: '३. घर मर्मत र बिक्री (House Repair)', en: '3. House Repair' },
+            { id: 'overhead', np: '1. ढुवानी खर्च (Overhead Expenses)', en: '1. Overhead Expenses' },
+            { id: 'damaged', np: '2. फुटेको सामान (Damaged Goods)', en: '2. Damaged Goods' },
+            { id: 'real-estate', np: '3. घर मर्मत र बिक्री (House Repair)', en: '3. House Repair' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -147,7 +147,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: एउटा फ्रिज रु ३२,५०० मा किनेर घर ल्याउँदा रु ५०० ढुवानी खर्च लाग्यो र रु ३३,५०० मा बेचियो।',
+                'पाठ्यपुस्तक उदाहरण: एउटा फ्रिज Rs 32,500 मा किनेर घर ल्याउँदा Rs 500 ढुवानी खर्च लाग्यो र Rs 33,500 मा बेचियो।',
                 'Textbook Example: A refrigerator bought for Rs 32,500 had Rs 500 transport cost, then was sold for Rs 33,500.'
               )}
             </p>
@@ -155,7 +155,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1', display: 'block', marginBottom: 4 }}>
-                  {L('खरिद मूल्य: ', 'Purchase Price: ')} रु {fridgeBuyPrice.toLocaleString()}
+                  {L('खरिद मूल्य: ', 'Purchase Price: ')} Rs {fridgeBuyPrice.toLocaleString()}
                 </label>
                 <input
                   type="range"
@@ -173,7 +173,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#D97706', display: 'block', marginBottom: 4 }}>
-                  {L('ढुवानी खर्च: ', 'Transport Cost: ')} रु {transportCost.toLocaleString()}
+                  {L('ढुवानी खर्च: ', 'Transport Cost: ')} Rs {transportCost.toLocaleString()}
                 </label>
                 <input
                   type="range"
@@ -191,7 +191,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D', display: 'block', marginBottom: 4 }}>
-                  {L('विक्रय मूल्य (SP): ', 'Selling Price: ')} रु {fridgeSp.toLocaleString()}
+                  {L('विक्रय मूल्य (SP): ', 'Selling Price: ')} Rs {fridgeSp.toLocaleString()}
                 </label>
                 <input
                   type="range"
@@ -222,7 +222,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
                   {L('जम्मा क्रय मूल्य (Total CP)', 'Total Cost Price (CP)')}
                 </span>
                 <div style={{ fontSize: 24, fontWeight: 800, color: '#2563EB', marginTop: 4 }}>
-                  रु {totalFridgeCp.toLocaleString()}
+                  Rs {totalFridgeCp.toLocaleString()}
                 </div>
                 <div style={{ fontSize: 12, color: '#1E3A8A', marginTop: 4 }}>
                   {L('खरिद मूल्य + ढुवानी खर्च', 'Purchase Price + Transportation')}
@@ -234,7 +234,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
                   {L('विक्रय मूल्य (SP)', 'Selling Price (SP)')}
                 </span>
                 <div style={{ fontSize: 24, fontWeight: 800, color: '#16A34A', marginTop: 4 }}>
-                  रु {fridgeSp.toLocaleString()}
+                  Rs {fridgeSp.toLocaleString()}
                 </div>
                 <div style={{ fontSize: 12, color: '#14532D', marginTop: 4 }}>
                   {L('ग्राहकलाई बेचेको मूल्य', 'Price paid by customer')}
@@ -260,7 +260,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
                     marginTop: 4,
                   }}
                 >
-                  रु {Math.abs(fridgeProfit).toLocaleString()}
+                  Rs {Math.abs(fridgeProfit).toLocaleString()}
                 </div>
                 <div style={{ fontSize: 12, color: fridgeProfit >= 0 ? '#047857' : '#B91C1C', marginTop: 4 }}>
                   {fridgeProfit >= 0 ? `SP - Total CP` : `Total CP - SP`}
@@ -278,7 +278,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: ५० वटा चिम प्रतिगोटा रु ४० का दरले किन्दा बाटोमा १५ वटा फुट्यो। बाँकी ३५ वटा प्रतिगोटा रु ५० मा बेच्दा के हुन्छ?',
+                'पाठ्यपुस्तक उदाहरण: 50 pcs चिम प्रतिगोटा Rs 40 का दरले किन्दा बाटोमा 15 pcs फुट्यो। बाँकी 35 pcs प्रतिगोटा Rs 50 मा बेच्दा के हुन्छ?',
                 'Textbook Example: 50 bulbs bought at Rs 40 each; 15 broke. The remaining 35 were sold at Rs 50 each.'
               )}
             </p>
@@ -286,7 +286,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#334155', display: 'block', marginBottom: 4 }}>
-                  {L('जम्मा किनेको चिम: ', 'Total Bulbs Bought: ')} {totalBulbs} वटा
+                  {L('जम्मा किनेको चिम: ', 'Total Bulbs Bought: ')} {totalBulbs} pcs
                 </label>
                 <input
                   type="range"
@@ -306,7 +306,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#DC2626', display: 'block', marginBottom: 4 }}>
-                  {L('फुटेका चिमहरू: ', 'Broken Bulbs: ')} {brokenBulbs} वटा
+                  {L('फुटेका चिमहरू: ', 'Broken Bulbs: ')} {brokenBulbs} pcs
                 </label>
                 <input
                   type="range"
@@ -323,7 +323,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D', display: 'block', marginBottom: 4 }}>
-                  {L('बिक्री दर (प्रतिगोटा): ', 'Selling Rate (each): ')} रु {sellingBulbRate}
+                  {L('बिक्री दर (प्रतिगोटा): ', 'Selling Rate (each): ')} Rs {sellingBulbRate}
                 </label>
                 <input
                   type="range"
@@ -351,16 +351,16 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
               }}
             >
               <div>
-                <strong>{L('१. जम्मा क्रय मूल्य (Total CP):', '1. Total CP:')}</strong> {totalBulbs} वटा × रु{' '}
-                {bulbRate} = <span style={{ fontWeight: 800 }}>रु {totalBulbCp.toLocaleString()}</span>
+                <strong>{L('1. जम्मा क्रय मूल्य (Total CP):', '1. Total CP:')}</strong> {totalBulbs} pcs × Rs{' '}
+                {bulbRate} = <span style={{ fontWeight: 800 }}>Rs {totalBulbCp.toLocaleString()}</span>
               </div>
               <div>
-                <strong>{L('२. बेच्न मिल्ने बाँकी चिम:', '2. Salable Bulbs:')}</strong> {totalBulbs} - {brokenBulbs} ={' '}
-                <span style={{ fontWeight: 800, color: '#0369A1' }}>{remainingBulbs} वटा</span>
+                <strong>{L('2. बेच्न मिल्ने बाँकी चिम:', '2. Salable Bulbs:')}</strong> {totalBulbs} - {brokenBulbs} ={' '}
+                <span style={{ fontWeight: 800, color: '#0369A1' }}>{remainingBulbs} pcs</span>
               </div>
               <div>
-                <strong>{L('३. जम्मा विक्रय मूल्य (Total SP):', '3. Total SP:')}</strong> {remainingBulbs} वटा × रु{' '}
-                {sellingBulbRate} = <span style={{ fontWeight: 800 }}>रु {totalBulbSp.toLocaleString()}</span>
+                <strong>{L('3. जम्मा विक्रय मूल्य (Total SP):', '3. Total SP:')}</strong> {remainingBulbs} pcs × Rs{' '}
+                {sellingBulbRate} = <span style={{ fontWeight: 800 }}>Rs {totalBulbSp.toLocaleString()}</span>
               </div>
               <div
                 style={{
@@ -372,11 +372,11 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
               >
                 {bulbDiff >= 0
                   ? L(
-                      `नतिजा: रु ${bulbDiff} नाफा (Profit)`,
+                      `नतिजा: Rs ${bulbDiff} नाफा (Profit)`,
                       `Result: Rs ${bulbDiff} Profit`
                     )
                   : L(
-                      `नतिजा: रु ${Math.abs(bulbDiff)} नोक्सान (Loss)`,
+                      `नतिजा: Rs ${Math.abs(bulbDiff)} नोक्सान (Loss)`,
                       `Result: Rs ${Math.abs(bulbDiff)} Loss`
                     )}
               </div>
@@ -392,7 +392,7 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ १०२ अनुसार: एउटा घर रु ९५,००,००० मा किनेर मर्मत गर्न रु २,००,००० खर्च गरियो र रु १,१०,००,००० मा बेचियो।',
+                'पाठ्यपुस्तक पृष्ठ 102 अनुसार: एउटा घर Rs 95,00,000 मा किनेर मर्मत गर्न Rs 2,00,000 खर्च गरियो र Rs 1,10,00,000 मा बेचियो।',
                 'Textbook Page 102: A house bought for Rs 95,00,000, Rs 2,00,000 spent on repair, and sold for Rs 1,10,00,000.'
               )}
             </p>
@@ -407,37 +407,37 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
             >
               <div style={{ background: '#EEF2FF', padding: 16, borderRadius: 10, border: '1px solid #C7D2FE' }}>
                 <span style={{ fontSize: 12, fontWeight: 700, color: '#4338CA' }}>
-                  {L('१. खरिद मूल्य (Purchase)', 'Purchase Price')}
+                  {L('1. खरिद मूल्य (Purchase)', 'Purchase Price')}
                 </span>
                 <div style={{ fontSize: 20, fontWeight: 800, color: '#3730A3', marginTop: 4 }}>
-                  रु ९५,००,००० (95 Lakhs)
+                  Rs 95,00,000 (95 Lakhs)
                 </div>
               </div>
 
               <div style={{ background: '#FEF3C7', padding: 16, borderRadius: 10, border: '1px solid #FDE68A' }}>
                 <span style={{ fontSize: 12, fontWeight: 700, color: '#B45309' }}>
-                  {L('२. मर्मत खर्च (Repair)', 'Repair Expense')}
+                  {L('2. मर्मत खर्च (Repair)', 'Repair Expense')}
                 </span>
                 <div style={{ fontSize: 20, fontWeight: 800, color: '#92400E', marginTop: 4 }}>
-                  रु २,००,००० (2 Lakhs)
+                  Rs 2,00,000 (2 Lakhs)
                 </div>
               </div>
 
               <div style={{ background: '#ECFDF5', padding: 16, borderRadius: 10, border: '1px solid #6EE7B7' }}>
                 <span style={{ fontSize: 12, fontWeight: 700, color: '#065F46' }}>
-                  {L('३. जम्मा लागत (Total CP)', 'Total Cost Price')}
+                  {L('3. जम्मा लागत (Total CP)', 'Total Cost Price')}
                 </span>
                 <div style={{ fontSize: 20, fontWeight: 800, color: '#047857', marginTop: 4 }}>
-                  रु ९७,००,००० (97 Lakhs)
+                  Rs 97,00,000 (97 Lakhs)
                 </div>
               </div>
 
               <div style={{ background: '#F0FDF4', padding: 16, borderRadius: 10, border: '1px solid #86EFAC' }}>
                 <span style={{ fontSize: 12, fontWeight: 700, color: '#15803D' }}>
-                  {L('४. विक्रय मूल्य (SP)', 'Selling Price')}
+                  {L('4. विक्रय मूल्य (SP)', 'Selling Price')}
                 </span>
                 <div style={{ fontSize: 20, fontWeight: 800, color: '#16A34A', marginTop: 4 }}>
-                  रु १,१०,००,००० (1.1 Crore)
+                  Rs 1,10,00,000 (1.1 Crore)
                 </div>
               </div>
             </div>
@@ -455,10 +455,10 @@ export const RealLifeBusinessChallenge: React.FC<{ onBackToLibrary?: () => void;
                 {L('प्राप्त खुद नाफा (Net Profit)', 'Net Profit Earned')}
               </div>
               <div style={{ fontSize: 28, fontWeight: 800, color: '#047857', marginTop: 4 }}>
-                रु {houseProfit.toLocaleString()} ({L('तेह्र लाख रुपैयाँ', '13 Lakhs')})
+                Rs {houseProfit.toLocaleString()} ({L('तेह्र लाख rupees', '13 Lakhs')})
               </div>
               <div style={{ fontSize: 13, color: '#059669', marginTop: 4 }}>
-                नाफा प्रतिशत = (१३,००,००० / ९७,००,०००) × १००% = {((houseProfit / totalHouseCp) * 100).toFixed(2)}%
+                Profit percentage = (13,00,000 / 97,00,000) × 100% = {((houseProfit / totalHouseCp) * 100).toFixed(2)}%
               </div>
             </div>
           </div>

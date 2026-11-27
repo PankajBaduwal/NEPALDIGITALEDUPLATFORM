@@ -1,7 +1,7 @@
 /**
  * QuadPropertiesLab.tsx
- * Grade 7 Mathematics – Lesson 14: PLANE FIGURES (समतलीय आकृतिहरू)
- * Simulation 2: Quadrilateral Properties Laboratory (चतुर्भुजका गुणहरूको प्रयोगशाला)
+ * Grade 7 Mathematics – Lesson 14: PLANE FIGURES
+ * Simulation 2: Quadrilateral Properties Laboratory
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 213-222)
  */
 import React, { useState } from 'react';
@@ -12,46 +12,46 @@ import { Check, ShieldCheck, HelpCircle, Sparkles } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'कुन चतुर्भुजका चारवटै भुजाहरू बराबर र चारवटै कोणहरू ९०° (समकोण) हुन्छन्?',
+    np: 'कुन चतुर्भुजका चारवटै भुजाहरू बराबर र चारवटै कोणहरू 90° (समकोण) हुन्छन्?',
     en: 'Which quadrilateral has all four sides equal and all four angles 90° (Right angles)?',
     options: [
-      { key: 'A', label: 'वर्ग (Square)' },
-      { key: 'B', label: 'आयत (Rectangle)' },
-      { key: 'C', label: 'समान्तर चतुर्भुज' },
-      { key: 'D', label: 'समलम्ब चतुर्भुज' },
+      { key: 'A', label: 'Square' },
+      { key: 'B', label: 'Rectangle' },
+      { key: 'C', label: 'Parallelogram' },
+      { key: 'D', label: 'Trapezium' },
     ],
     answer: 'A',
   },
   {
-    np: 'समान्तर चतुर्भुज (Parallelogram) का विकर्णहरू (Diagonals) को मुख्य गुण के हो?',
+    np: 'Parallelogram (Parallelogram) का विकर्णहरू (Diagonals) को मुख्य गुण के हो?',
     en: 'What is the key property of the diagonals of a parallelogram?',
     options: [
-      { key: 'A', label: 'एकआपसमा समद्विभाजन (Bisect each other) गर्छन्' },
-      { key: 'B', label: 'सधैं बराबर लम्बाइका हुन्छन्' },
-      { key: 'C', label: 'सधैं ९०° मा काटिन्छन्' },
-      { key: 'D', label: 'कहिल्यै काटिँदैनन्' },
+      { key: 'A', label: 'They bisect each other' },
+      { key: 'B', label: 'They are always equal in length' },
+      { key: 'C', label: 'They always cross at 90°' },
+      { key: 'D', label: 'They never cross' },
     ],
     answer: 'A',
   },
   {
-    np: 'आयत (Rectangle) का विकर्णहरूको सम्बन्धमा कुन भनाइ सत्य छ?',
+    np: 'Rectangle का विकर्णहरूको सम्बन्धमा कुन भनाइ सत्य छ?',
     en: 'Which statement is TRUE regarding the diagonals of a rectangle?',
     options: [
-      { key: 'A', label: 'विकर्णहरू लम्बाइमा बराबर हुन्छन् (AC = BD)' },
-      { key: 'B', label: 'विकर्णहरू सधैं असमानान्तर हुन्छन्' },
-      { key: 'C', label: 'विकर्णहरू ९०° मा मात्र काटिन्छन्' },
-      { key: 'D', label: 'विकर्णहरू असमान हुन्छन्' },
+      { key: 'A', label: 'The diagonals are equal in length (AC = BD)' },
+      { key: 'B', label: 'The diagonals are always non-parallel' },
+      { key: 'C', label: 'The diagonals cross only at 90°' },
+      { key: 'D', label: 'The diagonals are unequal' },
     ],
     answer: 'A',
   },
   {
-    np: 'कुन दुई चतुर्भुजहरूका विकर्णहरू आपसमा ९०° (समकोण) मा काटिन्छन्?',
+    np: 'कुन दुई चतुर्भुजहरूका विकर्णहरू आपसमा 90° (समकोण) मा काटिन्छन्?',
     en: 'In which two quadrilaterals do the diagonals bisect each other at 90° (Right angles)?',
     options: [
-      { key: 'A', label: 'वर्ग र समबाहु चतुर्भुज (Square and Rhombus)' },
-      { key: 'B', label: 'आयत र समान्तर चतुर्भुज' },
-      { key: 'C', label: 'समलम्ब र चङ्गा' },
-      { key: 'D', label: 'आयत र वर्ग' },
+      { key: 'A', label: 'Square and rhombus' },
+      { key: 'B', label: 'Rectangle and parallelogram' },
+      { key: 'C', label: 'Trapezium and kite' },
+      { key: 'D', label: 'Rectangle and square' },
     ],
     answer: 'A',
   },
@@ -83,7 +83,7 @@ export const QuadPropertiesLab: React.FC<{ onBackToLibrary?: () => void; onBack?
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! समान्तर चतुर्भुज, आयत, वर्ग र समबाहु चतुर्भुजका भुजाहरू, कोणहरू र विकर्णहरूको जादुमयी गुणहरू हेरौँ!',
+        'नमस्ते! Parallelogram, आयत, वर्ग र समबाहु चतुर्भुजका भुजाहरू, कोणहरू र विकर्णहरूको जादुमयी गुणहरू हेरौँ!',
         'Hello! Explore the sides, angles, and diagonal properties of parallelograms, rectangles, squares, and rhombuses!'
       )}
     >
@@ -91,9 +91,9 @@ export const QuadPropertiesLab: React.FC<{ onBackToLibrary?: () => void; onBack?
         {/* Quad Type Selector */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'parallelogram', np: 'समान्तर चतुर्भुज (Parallelogram)', en: 'Parallelogram' },
-            { id: 'rectangle', np: 'आयत (Rectangle)', en: 'Rectangle' },
-            { id: 'square', np: 'वर्ग (Square)', en: 'Square' },
+            { id: 'parallelogram', np: 'Parallelogram (Parallelogram)', en: 'Parallelogram' },
+            { id: 'rectangle', np: 'Rectangle', en: 'Rectangle' },
+            { id: 'square', np: 'Square', en: 'Square' },
             { id: 'rhombus', np: 'समबाहु चतुर्भुज (Rhombus)', en: 'Rhombus' },
           ].map((item) => (
             <button
@@ -246,9 +246,9 @@ export const QuadPropertiesLab: React.FC<{ onBackToLibrary?: () => void; onBack?
               <div className="bg-indigo-50/70 p-4 rounded-2xl border border-indigo-200">
                 <div className="text-base font-bold text-indigo-950 flex items-center gap-2" style={{ fontFamily: FONT_NP }}>
                   <ShieldCheck className="w-5 h-5 text-indigo-600" />
-                  {selectedQuad === 'parallelogram' && L('समान्तर चतुर्भुज (Parallelogram) का विशेषताहरू:', 'Parallelogram Properties:')}
-                  {selectedQuad === 'rectangle' && L('आयत (Rectangle) का मुख्य विशेषताहरू:', 'Rectangle Properties:')}
-                  {selectedQuad === 'square' && L('वर्ग (Square) का मुख्य विशेषताहरू:', 'Square Properties:')}
+                  {selectedQuad === 'parallelogram' && L('Parallelogram (Parallelogram) का विशेषताहरू:', 'Parallelogram Properties:')}
+                  {selectedQuad === 'rectangle' && L('Rectangle का मुख्य विशेषताहरू:', 'Rectangle Properties:')}
+                  {selectedQuad === 'square' && L('Square का मुख्य विशेषताहरू:', 'Square Properties:')}
                   {selectedQuad === 'rhombus' && L('समबाहु चतुर्भुज (Rhombus) का मुख्य विशेषताहरू:', 'Rhombus Properties:')}
                 </div>
 
@@ -257,15 +257,15 @@ export const QuadPropertiesLab: React.FC<{ onBackToLibrary?: () => void; onBack?
                     <>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('१. सम्मुख भुजाहरू समान्तर र बराबर हुन्छन् (AB = DC, AD = BC)।', '1. Opposite sides are parallel and equal.')}</span>
+                        <span>{L('1. सम्मुख भुजाहरू समान्तर र बराबर हुन्छन् (AB = DC, AD = BC)।', '1. Opposite sides are parallel and equal.')}</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('२. सम्मुख कोणहरू बराबर हुन्छन् (∠A = ∠C, ∠B = ∠D)।', '2. Opposite angles are equal.')}</span>
+                        <span>{L('2. सम्मुख कोणहरू बराबर हुन्छन् (∠A = ∠C, ∠B = ∠D)।', '2. Opposite angles are equal.')}</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('३. विकर्णहरूले एकअर्कालाई समद्विभाजन गर्छन् (AO = OC, BO = OD)।', '3. Diagonals bisect each other.')}</span>
+                        <span>{L('3. विकर्णहरूले एकअर्कालाई समद्विभाजन गर्छन् (AO = OC, BO = OD)।', '3. Diagonals bisect each other.')}</span>
                       </li>
                     </>
                   )}
@@ -274,15 +274,15 @@ export const QuadPropertiesLab: React.FC<{ onBackToLibrary?: () => void; onBack?
                     <>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('१. सम्मुख भुजाहरू बराबर र समानान्तर हुन्छन्।', '1. Opposite sides are equal and parallel.')}</span>
+                        <span>{L('1. सम्मुख भुजाहरू बराबर र समानान्तर हुन्छन्।', '1. Opposite sides are equal and parallel.')}</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('२. चारवटै कोणहरू समकोण (९०°) हुन्छन्।', '2. All four angles are right angles (90°).')}</span>
+                        <span>{L('2. चारवटै कोणहरू समकोण (90°) हुन्छन्।', '2. All four angles are right angles (90°).')}</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('३. दुवै विकर्णहरू लम्बाइमा बराबर हुन्छन् (AC = BD) र समद्विभाजन गर्छन्।', '3. Diagonals are equal (AC = BD) and bisect each other.')}</span>
+                        <span>{L('3. दुवै The diagonals are equal in length (AC = BD) र समद्विभाजन गर्छन्।', '3. Diagonals are equal (AC = BD) and bisect each other.')}</span>
                       </li>
                     </>
                   )}
@@ -291,15 +291,15 @@ export const QuadPropertiesLab: React.FC<{ onBackToLibrary?: () => void; onBack?
                     <>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('१. चारवटै भुजाहरू लम्बाइमा बराबर हुन्छन् (AB = BC = CD = DA)।', '1. All four sides are equal.')}</span>
+                        <span>{L('1. चारवटै भुजाहरू लम्बाइमा बराबर हुन्छन् (AB = BC = CD = DA)।', '1. All four sides are equal.')}</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('२. चारवटै भित्री कोणहरू ९०° का हुन्छन्।', '2. All four interior angles are 90°.')}</span>
+                        <span>{L('2. चारवटै भित्री कोणहरू 90° का हुन्छन्।', '2. All four interior angles are 90°.')}</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('३. विकर्णहरू बराबर हुन्छन् र ९०° मा समद्विभाजन गर्छन् (AC ⊥ BD)।', '3. Diagonals are equal and perpendicular bisectors (90°).')}</span>
+                        <span>{L('3. विकर्णहरू बराबर हुन्छन् र 90° मा समद्विभाजन गर्छन् (AC ⊥ BD)।', '3. Diagonals are equal and perpendicular bisectors (90°).')}</span>
                       </li>
                     </>
                   )}
@@ -308,15 +308,15 @@ export const QuadPropertiesLab: React.FC<{ onBackToLibrary?: () => void; onBack?
                     <>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('१. चारवटै भुजाहरू बराबर हुन्छन्।', '1. All four sides are equal.')}</span>
+                        <span>{L('1. चारवटै भुजाहरू बराबर हुन्छन्।', '1. All four sides are equal.')}</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('२. सम्मुख कोणहरू बराबर हुन्छन्।', '2. Opposite angles are equal.')}</span>
+                        <span>{L('2. सम्मुख कोणहरू बराबर हुन्छन्।', '2. Opposite angles are equal.')}</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span>{L('३. विकर्णहरू असमान हुन्छन् तर एकअर्कालाई ९०° मा समद्विभाजन गर्छन्।', '3. Diagonals bisect each other at right angles (90°).')}</span>
+                        <span>{L('3. The diagonals are unequal तर एकअर्कालाई 90° मा समद्विभाजन गर्छन्।', '3. Diagonals bisect each other at right angles (90°).')}</span>
                       </li>
                     </>
                   )}
@@ -331,9 +331,9 @@ export const QuadPropertiesLab: React.FC<{ onBackToLibrary?: () => void; onBack?
               <thead className="bg-slate-200 text-slate-800 font-bold">
                 <tr>
                   <th className="p-2.5 text-left border-r border-slate-300">{L('गुण / विशेषता (Properties)', 'Properties')}</th>
-                  <th className="p-2.5 border-r border-slate-300">{L('समान्तर चतुर्भुज', 'Parallelogram')}</th>
-                  <th className="p-2.5 border-r border-slate-300">{L('आयत (Rectangle)', 'Rectangle')}</th>
-                  <th className="p-2.5 border-r border-slate-300">{L('वर्ग (Square)', 'Square')}</th>
+                  <th className="p-2.5 border-r border-slate-300">{L('Parallelogram', 'Parallelogram')}</th>
+                  <th className="p-2.5 border-r border-slate-300">{L('Rectangle', 'Rectangle')}</th>
+                  <th className="p-2.5 border-r border-slate-300">{L('Square', 'Square')}</th>
                   <th className="p-2.5">{L('समबाहु चतुर्भुज (Rhombus)', 'Rhombus')}</th>
                 </tr>
               </thead>
@@ -346,7 +346,7 @@ export const QuadPropertiesLab: React.FC<{ onBackToLibrary?: () => void; onBack?
                   <td className="p-2.5 text-emerald-600 font-bold">✓</td>
                 </tr>
                 <tr>
-                  <td className="p-2.5 text-left font-semibold border-r border-slate-200">{L('सबै कोण ९०°', 'All angles 90°')}</td>
+                  <td className="p-2.5 text-left font-semibold border-r border-slate-200">{L('सबै कोण 90°', 'All angles 90°')}</td>
                   <td className="p-2.5 border-r border-slate-200 text-rose-500 font-bold">✕</td>
                   <td className="p-2.5 border-r border-slate-200 text-emerald-600 font-bold">✓</td>
                   <td className="p-2.5 border-r border-slate-200 text-emerald-600 font-bold">✓</td>
@@ -360,7 +360,7 @@ export const QuadPropertiesLab: React.FC<{ onBackToLibrary?: () => void; onBack?
                   <td className="p-2.5 text-rose-500 font-bold">✕</td>
                 </tr>
                 <tr>
-                  <td className="p-2.5 text-left font-semibold border-r border-slate-200">{L('विकर्ण ९०° मा काटिने', 'Diagonals ⊥ at 90°')}</td>
+                  <td className="p-2.5 text-left font-semibold border-r border-slate-200">{L('विकर्ण 90° मा काटिने', 'Diagonals ⊥ at 90°')}</td>
                   <td className="p-2.5 border-r border-slate-200 text-rose-500 font-bold">✕</td>
                   <td className="p-2.5 border-r border-slate-200 text-rose-500 font-bold">✕</td>
                   <td className="p-2.5 border-r border-slate-200 text-emerald-600 font-bold">✓</td>

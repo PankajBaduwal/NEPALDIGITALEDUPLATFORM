@@ -1,7 +1,7 @@
 /**
  * DirectionDistanceAdventure.tsx
- * Simulation 05: Direction and Distance Adventure (दिशा र दूरी साहसिक यात्रा)
- * Grade 1 • Mathematics • Chapter 1 (दायाँ, बायाँ, अगाडि, बिच, पछाडि, नजिक, टाढा)
+ * Simulation 05: Direction and Distance Adventure
+ * Grade 1 • Mathematics • Chapter 1
  */
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Trophy, Compass } from 'lucide-react';
@@ -17,7 +17,7 @@ export const DirectionDistanceAdventure: React.FC<DirectionDistanceAdventureProp
   onBackToLibrary,
   initialLanguage = 'ne',
 }) => {
-  const [lang, setLang] = useState<'ne' | 'en'>(initialLanguage);
+  const [lang, setLang] = useState<'ne' | 'en'>('en');
   const [stepIdx, setStepIdx] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
   const [feedback, setFeedback] = useState<string>('');
@@ -25,40 +25,40 @@ export const DirectionDistanceAdventure: React.FC<DirectionDistanceAdventureProp
 
   const missions = [
     {
-      category: 'Right & Left (दायाँ र बायाँ)',
-      promptEn: 'Which animal is standing on the RIGHT side of the path? (दायाँ)',
-      promptNe: 'बाटोको दायाँतर्फ कुन जनावर उभिएको छ? (दायाँ)',
+      category: 'Right & Left',
+      promptEn: 'Which animal is standing on the RIGHT side of the path?',
+      promptNe: 'बाटोको दायाँतर्फ कुन जनावर उभिएको छ?',
       options: [
-        { id: 'R', labelEn: 'Friendly Dog on the Right (दायाँ)', labelNe: 'दायाँतर्फ कुकुर', isCorrect: true, expEn: 'Correct! The dog is on the right side.', expNe: 'सबास! कुकुर दायाँतर्फ छ।' },
-        { id: 'L', labelEn: 'Cat on the Left (बायाँ)', labelNe: 'बायाँतर्फ बिरालो', isCorrect: false, expEn: 'The cat is on the left side.', expNe: 'बिरालो बायाँतर्फ छ।' },
+        { id: 'R', labelEn: 'Friendly Dog on the Right', labelNe: 'दायाँतर्फ कुकुर', isCorrect: true, expEn: 'Correct! The dog is on the right side.', expNe: 'सबास! कुकुर दायाँतर्फ छ।' },
+        { id: 'L', labelEn: 'Cat on the Left', labelNe: 'बायाँतर्फ बिरालो', isCorrect: false, expEn: 'The cat is on the left side.', expNe: 'बिरालो बायाँतर्फ छ।' },
       ],
     },
     {
-      category: 'Front, Middle & Behind (अगाडि, बिच र पछाडि)',
-      promptEn: 'Three animals are walking in a line: Dog (1st), Cat (2nd), Rabbit (3rd). Which animal is in the MIDDLE? (बिच)',
-      promptNe: 'तीन जनावरहरू लाइनमा छन्: कुकुर (पहिलो), बिरालो (दोस्रो), खरायो (तेस्रो)। बिचमा कुन जनावर छ? (बिच)',
+      category: 'Front, Middle & Behind',
+      promptEn: 'Three animals are walking in a line: Dog (1st), Cat (2nd), Rabbit (3rd). Which animal is in the MIDDLE?',
+      promptNe: 'तीन जनावरहरू लाइनमा छन्: कुकुर (पहिलो), बिरालो (दोस्रो), खरायो (तेस्रो)। बिचमा कुन जनावर छ?',
       options: [
-        { id: 'MID', labelEn: 'Cat in the Middle (बिचमा बिरालो)', labelNe: 'बिचमा बिरालो', isCorrect: true, expEn: 'Correct! The cat is in the middle.', expNe: 'सबास! बिरालो बिचमा छ।' },
-        { id: 'FRT', labelEn: 'Dog in Front (अगाडि कुकुर)', labelNe: 'अगाडि कुकुर', isCorrect: false, expEn: 'The dog is in front.', expNe: 'कुकुर अगाडि छ।' },
-        { id: 'BHD', labelEn: 'Rabbit Behind (पछाडि खरायो)', labelNe: 'पछाडि खरायो', isCorrect: false, expEn: 'The rabbit is behind.', expNe: 'खरायो पछाडि छ।' },
+        { id: 'MID', labelEn: 'Cat in the Middle', labelNe: 'बिचमा बिरालो', isCorrect: true, expEn: 'Correct! The cat is in the middle.', expNe: 'सबास! बिरालो बिचमा छ।' },
+        { id: 'FRT', labelEn: 'Dog in Front', labelNe: 'अगाडि कुकुर', isCorrect: false, expEn: 'The dog is in front.', expNe: 'कुकुर अगाडि छ।' },
+        { id: 'BHD', labelEn: 'Rabbit Behind', labelNe: 'पछाडि खरायो', isCorrect: false, expEn: 'The rabbit is behind.', expNe: 'खरायो पछाडि छ।' },
       ],
     },
     {
-      category: 'Front, Middle & Behind (अगाडि, बिच र पछाडि)',
-      promptEn: 'Which animal is standing at the very BACK / BEHIND? (पछाडि)',
-      promptNe: 'सबैभन्दा पछाडि कुन जनावर छ? (पछाडि)',
+      category: 'Front, Middle & Behind',
+      promptEn: 'Which animal is standing at the very BACK / BEHIND?',
+      promptNe: 'सबैभन्दा पछाडि कुन जनावर छ?',
       options: [
-        { id: 'BHD', labelEn: 'Rabbit Behind (खरायो)', labelNe: 'खरायो (पछाडि)', isCorrect: true, expEn: 'Correct! The rabbit is at the back (पछाडि).', expNe: 'सबास! खरायो सबैभन्दा पछाडि छ।' },
-        { id: 'FRT', labelEn: 'Dog in Front (कुकुर)', labelNe: 'कुकुर (अगाडि)', isCorrect: false, expEn: 'The dog is in front.', expNe: 'कुकुर अगाडि छ।' },
+        { id: 'BHD', labelEn: 'Rabbit Behind', labelNe: 'खरायो (पछाडि)', isCorrect: true, expEn: 'Correct! The rabbit is at the back.', expNe: 'सबास! खरायो सबैभन्दा पछाडि छ।' },
+        { id: 'FRT', labelEn: 'Dog in Front', labelNe: 'कुकुर (अगाडि)', isCorrect: false, expEn: 'The dog is in front.', expNe: 'कुकुर अगाडि छ।' },
       ],
     },
     {
-      category: 'Near & Far (नजिक र टाढा)',
-      promptEn: 'Relative distance: Which object is NEAR to you? (नजिक)',
-      promptNe: 'तपाईंको नजिक कुन वस्तु छ? (नजिक)',
+      category: 'Near & Far',
+      promptEn: 'Relative distance: Which object is NEAR to you?',
+      promptNe: 'तपाईंको नजिक कुन वस्तु छ?',
       options: [
-        { id: 'NR', labelEn: 'Desk right in front of you (नजिकैको डेस्क)', labelNe: 'नजिकैको डेस्क', isCorrect: true, expEn: 'Correct! The desk is right by your hands.', expNe: 'सबास! डेस्क तपाईंकै अगाडि नजिक छ।' },
-        { id: 'FR', labelEn: 'Distant Snowy Mountain (टाढाको हिमाल)', labelNe: 'टाढाको हिमाल', isCorrect: false, expEn: 'Mountains are miles away in the distance (टाढा).', expNe: 'हिमाल धेरै टाढा हुन्छ।' },
+        { id: 'NR', labelEn: 'Desk right in front of you', labelNe: 'नजिकैको डेस्क', isCorrect: true, expEn: 'Correct! The desk is right by your hands.', expNe: 'सबास! डेस्क तपाईंकै अगाडि नजिक छ।' },
+        { id: 'FR', labelEn: 'Distant Snowy Mountain', labelNe: 'टाढाको हिमाल', isCorrect: false, expEn: 'Mountains are miles away in the distance.', expNe: 'हिमाल धेरै टाढा हुन्छ।' },
       ],
     },
   ];
@@ -110,9 +110,7 @@ export const DirectionDistanceAdventure: React.FC<DirectionDistanceAdventureProp
         <h2 style={{ margin: 0, fontSize: '18px', fontWeight: '800' }}>
           {lang === 'ne' ? 'दिशा र दूरी साहसिक यात्रा' : 'Direction and Distance Adventure'}
         </h2>
-        <button onClick={() => setLang(lang === 'ne' ? 'en' : 'ne')} style={{ background: '#FFFFFF', border: 'none', color: '#26332E', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>
-          {lang === 'ne' ? 'English' : 'नेपाली'}
-        </button>
+        
       </div>
 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>

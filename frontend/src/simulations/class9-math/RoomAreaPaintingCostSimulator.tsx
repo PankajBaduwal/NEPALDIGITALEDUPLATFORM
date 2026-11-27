@@ -8,10 +8,10 @@ const QUIZ_QUESTIONS = [
     np: 'एउटा कोठाको लम्बाइ l, चौडाइ b र उचाइ h भए चार भित्ताको क्षेत्रफल (Area of four walls) को सूत्र के हो?',
     en: 'If l, b, and h are length, breadth, and height of a room, what is the formula for area of four walls?',
     options: [
-      { key: 'A', label: '२(l + b)h वा २h(l + b)' },
+      { key: 'A', label: '2(l + b)h or 2h(l + b)' },
       { key: 'B', label: 'l × b × h' },
-      { key: 'C', label: '२(lb + bh + hl)' },
-      { key: 'D', label: '२(l + h)' },
+      { key: 'C', label: '2(lb + bh + hl)' },
+      { key: 'D', label: '2(l + h)' },
     ],
     answer: 'A',
   },
@@ -19,10 +19,10 @@ const QUIZ_QUESTIONS = [
     np: 'भुइँमा कार्पेट बिछ्याउँदा कुन सतहको क्षेत्रफल हिसाब गरिन्छ?',
     en: 'When laying carpet on the floor, which surface area is calculated?',
     options: [
-      { key: 'A', label: 'चार भित्ताको क्षेत्रफल [२h(l + b)]' },
-      { key: 'B', label: 'भुइँको क्षेत्रफल (l × b)' },
-      { key: 'C', label: 'भुइँ र सिलिङ दुवै (२lb)' },
-      { key: 'D', label: 'कोठाको आयतन (lbh)' },
+      { key: 'A', label: 'Area of the four walls [2h(l + b)]' },
+      { key: 'B', label: 'Area of the floor (l × b)' },
+      { key: 'C', label: 'Both floor and ceiling (2lb)' },
+      { key: 'D', label: 'Volume of the room (lbh)' },
     ],
     answer: 'B',
   },
@@ -30,21 +30,21 @@ const QUIZ_QUESTIONS = [
     np: 'भित्तामा रङ लगाउँदा ढोका र झ्यालको क्षेत्रफललाई चार भित्ताको कुल क्षेत्रफलबाट के गर्नुपर्छ?',
     en: 'When painting the walls, what must be done with the area of doors and windows?',
     options: [
-      { key: 'A', label: 'जोड्नुपर्छ (Add)' },
-      { key: 'B', label: 'घटाउनुपर्छ (Subtract)' },
-      { key: 'C', label: 'गुणा गर्नुपर्छ (Multiply)' },
-      { key: 'D', label: 'कुनै फरक पर्दैन' },
+      { key: 'A', label: 'Add' },
+      { key: 'B', label: 'Subtract' },
+      { key: 'C', label: 'Multiply' },
+      { key: 'D', label: 'It makes no difference' },
     ],
     answer: 'B',
   },
   {
-    np: 'एउटा वर्गाकार कोठा (Cubical Room) को प्रत्येक भुजा ४ मिटर भए चार भित्ताको क्षेत्रफल कति हुन्छ?',
+    np: 'एउटा वर्गाकार कोठा (Cubical Room) को प्रत्येक भुजा 4 m भए चार भित्ताको क्षेत्रफल कति हुन्छ?',
     en: 'If each side of a cubical room is 4m, what is the area of its four walls?',
     options: [
-      { key: 'A', label: '१६ वर्ग मिटर' },
-      { key: 'B', label: '४८ वर्ग मिटर' },
-      { key: 'C', label: '६४ वर्ग मिटर (४a² = ४ × ४² = ६४)' },
-      { key: 'D', label: '९६ वर्ग मिटर' },
+      { key: 'A', label: '16 sq m' },
+      { key: 'B', label: '48 sq m' },
+      { key: 'C', label: '64 sq m (4a² = 4 × 4² = 64)' },
+      { key: 'D', label: '96 sq m' },
     ],
     answer: 'C',
   },
@@ -141,7 +141,7 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
             }`}
           >
             <span>🏠</span>
-            <span>{L('१. कोठा तथा भित्ता क्षेत्रफल', '1. Room Surfaces')}</span>
+            <span>{L('1. कोठा तथा भित्ता क्षेत्रफल', '1. Room Surfaces')}</span>
           </button>
           <button
             onClick={() => setActiveTab('cost')}
@@ -152,7 +152,7 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
             }`}
           >
             <span>🎨</span>
-            <span>{L('२. रङ तथा कार्पेट खर्च', '2. Paint & Carpet Cost')}</span>
+            <span>{L('2. रङ तथा कार्पेट खर्च', '2. Paint & Carpet Cost')}</span>
           </button>
           <button
             onClick={() => setActiveTab('cubical')}
@@ -163,7 +163,7 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
             }`}
           >
             <span>📦</span>
-            <span>{L('३. घनाकार कोठा (Cube)', '3. Cubical Room')}</span>
+            <span>{L('3. घनाकार कोठा (Cube)', '3. Cubical Room')}</span>
           </button>
         </div>
 
@@ -179,7 +179,7 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'कोठाको चार भित्ताको क्षेत्रफल = २h(l + b), भुइँको क्षेत्रफल = l × b, सिलिङको क्षेत्रफल = l × b। भित्तामा रङ लगाउँदा ढोका र झ्यालको क्षेत्रफल घटाइन्छ।',
+                  'कोठाको चार भित्ताको क्षेत्रफल = 2h(l + b), भुइँको क्षेत्रफल = l × b, सिलिङको क्षेत्रफल = l × b। भित्तामा रङ लगाउँदा ढोका र झ्यालको क्षेत्रफल घटाइन्छ।',
                   'Four walls area = 2h(l + b), Floor = l × b, Ceiling = l × b. Doors and windows are subtracted when painting.'
                 )}
               </p>
@@ -295,7 +295,7 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
                       onClick={() => setHighlightSurface('walls')}
                       className={`p-2 rounded-lg border ${highlightSurface === 'walls' ? 'bg-blue-600 text-white' : 'bg-gray-50 dark:bg-gray-700'}`}
                     >
-                      {L('४ भित्ता', 'Walls')}
+                      {L('4 भित्ता', 'Walls')}
                     </button>
                     <button
                       onClick={() => setHighlightSurface('floor')}
@@ -406,12 +406,12 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
                 {/* Calculation Cards */}
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow border border-gray-200 dark:border-gray-700">
-                    <div className="text-xs text-gray-500">{L('चार भित्ताको क्षेत्रफल [२h(l + b)]:', 'Four Walls Area:')}</div>
+                    <div className="text-xs text-gray-500">{L('Area of the four walls [2h(l + b)]:', 'Four Walls Area:')}</div>
                     <div className="text-xl font-black text-blue-600 dark:text-blue-400 font-mono mt-1">
                       {isNe ? toNp(fourWallsArea.toFixed(1)) : fourWallsArea.toFixed(1)} m²
                     </div>
                     <div className="text-[11px] text-gray-400 mt-1">
-                      २ × {heightM} × ({lengthM} + {breadthM})
+                      2 × {heightM} × ({lengthM} + {breadthM})
                     </div>
                   </div>
 
@@ -462,7 +462,7 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'रङ लगाउने कुल क्षेत्रफल = चार भित्ता (झ्याल-ढोका बाहेक) + सिलिङ। भुइँमा कार्पेटको क्षेत्रफल = l × b। लागत = क्षेत्रफल × प्रति वर्ग मिटर दर।',
+                  'रङ लगाउने कुल क्षेत्रफल = चार भित्ता (झ्याल-ढोका बाहेक) + सिलिङ। भुइँमा कार्पेटको क्षेत्रफल = l × b। लागत = क्षेत्रफल × प्रति sq m दर।',
                   'Total painting area = Net walls + Ceiling. Carpet area = Floor area (l × b). Cost = Area × Rate per sq. meter.'
                 )}
               </p>
@@ -472,7 +472,7 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
               {/* Cost Rate Inputs */}
               <div className="lg:col-span-5 bg-white dark:bg-gray-800 p-5 rounded-2xl shadow border border-gray-200 dark:border-gray-700 space-y-4">
                 <h3 className="font-bold text-gray-800 dark:text-gray-100 text-lg border-b pb-2">
-                  {L('प्रति वर्ग मिटर लागत दरहरू', 'Cost Rates per sq. meter')}
+                  {L('प्रति sq m लागत दरहरू', 'Cost Rates per sq. meter')}
                 </h3>
 
                 <div>
@@ -526,14 +526,14 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
                   <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-700">
                     <div>
                       <div className="font-semibold text-gray-800 dark:text-gray-200">
-                        {L('१. चार भित्ता रङरोगन (झ्याल/ढोका बाहेक):', '1. Four Walls Painting (Net):')}
+                        {L('1. चार भित्ता रङरोगन (झ्याल/ढोका बाहेक):', '1. Four Walls Painting (Net):')}
                       </div>
                       <div className="text-xs text-gray-500">
-                        {netWallPaintArea.toFixed(1)} m² × रु. {paintRatePerSqM}
+                        {netWallPaintArea.toFixed(1)} m² × Rs. {paintRatePerSqM}
                       </div>
                     </div>
                     <span className="font-mono font-bold text-gray-900 dark:text-gray-100">
-                      रु. {isNe ? toNp(wallPaintingCost) : wallPaintingCost.toLocaleString()}
+                      Rs. {isNe ? toNp(wallPaintingCost) : wallPaintingCost.toLocaleString()}
                     </span>
                   </div>
 
@@ -541,14 +541,14 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
                   <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-700">
                     <div>
                       <div className="font-semibold text-gray-800 dark:text-gray-200">
-                        {L('२. सिलिङ रङरोगन (Ceiling Paint):', '2. Ceiling Painting:')}
+                        {L('2. सिलिङ रङरोगन (Ceiling Paint):', '2. Ceiling Painting:')}
                       </div>
                       <div className="text-xs text-gray-500">
-                        {ceilingArea.toFixed(1)} m² × रु. {paintRatePerSqM}
+                        {ceilingArea.toFixed(1)} m² × Rs. {paintRatePerSqM}
                       </div>
                     </div>
                     <span className="font-mono font-bold text-gray-900 dark:text-gray-100">
-                      रु. {isNe ? toNp(ceilingPaintingCost) : ceilingPaintingCost.toLocaleString()}
+                      Rs. {isNe ? toNp(ceilingPaintingCost) : ceilingPaintingCost.toLocaleString()}
                     </span>
                   </div>
 
@@ -556,14 +556,14 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
                   <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-700">
                     <div>
                       <div className="font-semibold text-gray-800 dark:text-gray-200">
-                        {L('३. भुइँमा कार्पेट बिछ्याउने खर्च (Carpet):', '3. Carpet Flooring:')}
+                        {L('3. भुइँमा कार्पेट बिछ्याउने खर्च (Carpet):', '3. Carpet Flooring:')}
                       </div>
                       <div className="text-xs text-gray-500">
-                        {floorArea.toFixed(1)} m² × रु. {carpetRatePerSqM}
+                        {floorArea.toFixed(1)} m² × Rs. {carpetRatePerSqM}
                       </div>
                     </div>
                     <span className="font-mono font-bold text-gray-900 dark:text-gray-100">
-                      रु. {isNe ? toNp(carpetFlooringCost) : carpetFlooringCost.toLocaleString()}
+                      Rs. {isNe ? toNp(carpetFlooringCost) : carpetFlooringCost.toLocaleString()}
                     </span>
                   </div>
 
@@ -578,7 +578,7 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
                       </div>
                     </div>
                     <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 font-mono">
-                      रु. {isNe ? toNp(totalRenovationCost) : totalRenovationCost.toLocaleString()}
+                      Rs. {isNe ? toNp(totalRenovationCost) : totalRenovationCost.toLocaleString()}
                     </div>
                   </div>
                 </div>
@@ -599,7 +599,7 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'घनाकार कोठामा लम्बाइ, चौडाइ र उचाइ सबै बराबर हुन्छन् (l = b = h = a)। यसका चार भित्ताको क्षेत्रफल = ४a², भुइँ = a², र कुल सतहको क्षेत्रफल TSA = ६a² हुन्छ।',
+                  'घनाकार कोठामा लम्बाइ, चौडाइ र उचाइ सबै बराबर हुन्छन् (l = b = h = a)। यसका चार भित्ताको क्षेत्रफल = 4a², भुइँ = a², र कुल सतहको क्षेत्रफल TSA = 6a² हुन्छ।',
                   'In a cubical room, length, breadth and height are equal (a). Four walls = 4a², Floor = a², and Total surface area = 6a².'
                 )}
               </p>
@@ -635,16 +635,16 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
 
                 <div className="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl space-y-1">
                   <div className="font-bold text-amber-900 dark:text-amber-200">
-                    {L('१. चार भित्ताको क्षेत्रफल = ४a²', '1. Four Walls Area = 4a²')}
+                    {L('1. चार भित्ताको क्षेत्रफल = 4a²', '1. Four Walls Area = 4a²')}
                   </div>
                   <div className="font-mono text-sm text-amber-800 dark:text-amber-300">
-                    ४ × {cubeSide}² = ४ × {cubeSide * cubeSide} = <strong>{isNe ? toNp(cubeFourWalls) : cubeFourWalls} m²</strong>
+                    4 × {cubeSide}² = 4 × {cubeSide * cubeSide} = <strong>{isNe ? toNp(cubeFourWalls) : cubeFourWalls} m²</strong>
                   </div>
                 </div>
 
                 <div className="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl space-y-1">
                   <div className="font-bold text-amber-900 dark:text-amber-200">
-                    {L('२. भुइँ वा सिलिङको क्षेत्रफल = a²', '2. Floor or Ceiling = a²')}
+                    {L('2. भुइँ वा सिलिङको क्षेत्रफल = a²', '2. Floor or Ceiling = a²')}
                   </div>
                   <div className="font-mono text-sm text-amber-800 dark:text-amber-300">
                     {cubeSide}² = <strong>{isNe ? toNp(cubeFloor) : cubeFloor} m²</strong>
@@ -653,10 +653,10 @@ export const RoomAreaPaintingCostSimulator: React.FC<{
 
                 <div className="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl space-y-1">
                   <div className="font-bold text-amber-900 dark:text-amber-200">
-                    {L('३. कुल सतहको क्षेत्रफल (६ वटै सतह) = ६a²', '3. Total Surface Area (TSA) = 6a²')}
+                    {L('3. कुल सतहको क्षेत्रफल (6 वटै सतह) = 6a²', '3. Total Surface Area (TSA) = 6a²')}
                   </div>
                   <div className="font-mono text-sm text-amber-800 dark:text-amber-300">
-                    ६ × {cubeSide}² = ६ × {cubeSide * cubeSide} = <strong>{isNe ? toNp(cubeTSA) : cubeTSA} m²</strong>
+                    6 × {cubeSide}² = 6 × {cubeSide * cubeSide} = <strong>{isNe ? toNp(cubeTSA) : cubeTSA} m²</strong>
                   </div>
                 </div>
               </div>

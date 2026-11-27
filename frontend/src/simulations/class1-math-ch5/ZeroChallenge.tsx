@@ -1,7 +1,7 @@
 /**
  * ZeroChallenge.tsx
- * Simulation 05: Zero Challenge (शून्यको खेल)
- * Class 1 Mathematics - Chapter 5: Zero (शून्य)
+ * Simulation 05: Zero Challenge
+ * Class 1 Mathematics - Chapter 5: Zero
  * Nepal Digital Education Platform
  */
 
@@ -37,7 +37,7 @@ interface ChallengeQuestion {
   explanationEn: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const NEP_NAMES = ['शून्य', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ'];
 const EN_NAMES = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
 
@@ -46,7 +46,7 @@ export const ZeroChallenge: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Navigation & Settings
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Progressive Levels: 1 to 5
@@ -63,68 +63,68 @@ export const ZeroChallenge: React.FC<Props> = ({
   const challenges: ChallengeQuestion[] = [
     {
       level: 1,
-      titleNp: 'तह १: खाली भाँडो पहिचान',
+      titleNp: 'तह 1: खाली भाँडो पहिचान',
       titleEn: 'Level 1: Identify Empty Container',
-      promptNp: 'कुन टोकरी खाली छ? (० वस्तु भएको छान्नुहोस्)',
+      promptNp: 'कुन टोकरी खाली छ?',
       promptEn: 'Which basket is empty? (Select the one with 0 items)',
       options: [
-        { labelNp: 'टोकरी क (३ स्याउ)', labelEn: 'Basket A (3)', value: 3, icon: '🍎🍎🍎' },
+        { labelNp: 'टोकरी क (3 स्याउ)', labelEn: 'Basket A (3)', value: 3, icon: '🍎🍎🍎' },
         { labelNp: 'टोकरी ख (खाली)', labelEn: 'Basket B (Empty)', value: 0, icon: '🧺' },
-        { labelNp: 'टोकरी ग (१ स्याउ)', labelEn: 'Basket C (1)', value: 1, icon: '🍎' },
+        { labelNp: 'टोकरी ग (1 स्याउ)', labelEn: 'Basket C (1)', value: 1, icon: '🍎' },
       ],
       correctValue: 0,
-      explanationNp: 'टोकरी ख खाली छ, यसमा शून्य (०) स्याउ छन्।',
+      explanationNp: 'टोकरी ख खाली छ, यसमा शून्य (0) स्याउ छन्।',
       explanationEn: 'Basket B is empty, containing zero (0) apples.',
     },
     {
       level: 2,
-      titleNp: 'तह २: खाली र भरिएको तुलना',
+      titleNp: 'तह 2: खाली र भरिएको तुलना',
       titleEn: 'Level 2: Compare Empty vs Occupied',
-      promptNp: 'शून्य (०) फूल भएको गमला कुन हो?',
+      promptNp: 'शून्य (0) फूल भएको गमला कुन हो?',
       promptEn: 'Which pot has zero (0) flowers?',
       options: [
         { labelNp: 'गमला क (खाली)', labelEn: 'Pot A (Empty)', value: 0, icon: '🪴' },
-        { labelNp: 'गमला ख (४ फूल)', labelEn: 'Pot B (4)', value: 4, icon: '🌸🌸🌸🌸' },
+        { labelNp: 'गमला ख (4 फूल)', labelEn: 'Pot B (4)', value: 4, icon: '🌸🌸🌸🌸' },
       ],
       correctValue: 0,
-      explanationNp: 'गमला क खाली छ, यसमा कुनै फूल छैन (० फूल)।',
+      explanationNp: 'गमला क खाली छ, यसमा कुनै फूल छैन (0 फूल)।',
       explanationEn: 'Pot A is empty, it has no flowers (0 flowers).',
     },
     {
       level: 3,
-      titleNp: 'तह ३: दृश्यमा सङ्ख्या गणना',
+      titleNp: 'तह 3: दृश्यमा सङ्ख्या गणना',
       titleEn: 'Level 3: Count Objects in Scene',
       promptNp: 'यस खाली पोखरीमा कति वटा हाँस पौडिरहेका छन्?',
       promptEn: 'How many ducks are swimming in this empty pond?',
       options: [
-        { labelNp: 'शून्य (०)', labelEn: 'Zero (0)', value: 0, icon: '🌊' },
-        { labelNp: 'दुई (२)', labelEn: 'Two (2)', value: 2, icon: '🦆🦆' },
-        { labelNp: 'चार (४)', labelEn: 'Four (4)', value: 4, icon: '🦆🦆🦆🦆' },
+        { labelNp: 'शून्य (0)', labelEn: 'Zero (0)', value: 0, icon: '🌊' },
+        { labelNp: 'दुई (2)', labelEn: 'Two (2)', value: 2, icon: '🦆🦆' },
+        { labelNp: 'चार (4)', labelEn: 'Four (4)', value: 4, icon: '🦆🦆🦆🦆' },
       ],
       correctValue: 0,
-      explanationNp: 'पोखरीमा कुनै पनि हाँस छैन, त्यसैले शून्य (०) हाँस छन्।',
+      explanationNp: 'पोखरीमा कुनै पनि हाँस छैन, त्यसैले शून्य (0) हाँस छन्।',
       explanationEn: 'There are no ducks in the pond, so the count is zero (0).',
     },
     {
       level: 4,
-      titleNp: 'तह ४: वस्तु हटाएपछिको बाँकी',
+      titleNp: 'तह 4: वस्तु हटाएपछिको बाँकी',
       titleEn: 'Level 4: Remainder after Removal',
-      promptNp: 'रुखमा २ वटा चरा थिए, ती दुवै उडेपछि कति चरा बाँकी रहन्छन्?',
+      promptNp: 'रुखमा 2 वटा चरा थिए, ती दुवै उडेपछि कति चरा बाँकी रहन्छन्?',
       promptEn: 'There were 2 birds on a tree. After both fly away, how many birds remain?',
       options: [
-        { labelNp: 'शून्य (०)', labelEn: 'Zero (0)', value: 0, icon: '🪵' },
-        { labelNp: 'एक (१)', labelEn: 'One (1)', value: 1, icon: '🐦' },
-        { labelNp: 'दुई (२)', labelEn: 'Two (2)', value: 2, icon: '🐦🐦' },
+        { labelNp: 'शून्य (0)', labelEn: 'Zero (0)', value: 0, icon: '🪵' },
+        { labelNp: 'एक (1)', labelEn: 'One (1)', value: 1, icon: '🐦' },
+        { labelNp: 'दुई (2)', labelEn: 'Two (2)', value: 2, icon: '🐦🐦' },
       ],
       correctValue: 0,
-      explanationNp: 'दुवै चरा उडेपछि हाँगा खाली हुन्छ र शून्य (०) बाँकी रहन्छन्।',
+      explanationNp: 'दुवै चरा उडेपछि हाँगा खाली हुन्छ र शून्य (0) बाँकी रहन्छन्।',
       explanationEn: 'After both fly away, zero (0) birds remain.',
     },
     {
       level: 5,
-      titleNp: 'तह ५: मिश्रित शून्य ज्ञान',
+      titleNp: 'तह 5: मिश्रित शून्य ज्ञान',
       titleEn: 'Level 5: Mixed Zero Mastery',
-      promptNp: 'सङ्ख्या "०" ले के जनाउँछ?',
+      promptNp: 'सङ्ख्या "0" ले के जनाउँछ?',
       promptEn: 'What does the numeral "0" represent?',
       options: [
         { labelNp: 'कुनै वस्तु नभएको (Empty / None)', labelEn: 'No objects (Empty / None)', value: 0, icon: '⭐' },
@@ -132,7 +132,7 @@ export const ZeroChallenge: React.FC<Props> = ({
         { labelNp: 'एक मात्र वस्तु (Only one)', labelEn: 'Only one', value: 1, icon: '🍎' },
       ],
       correctValue: 0,
-      explanationNp: 'शून्य (०) ले कुनै समूहमा कुनै पनि वस्तु नभएको अवस्था जनाउँछ।',
+      explanationNp: 'शून्य (0) ले कुनै समूहमा कुनै पनि वस्तु नभएको अवस्था जनाउँछ।',
       explanationEn: 'Zero (0) represents the absence of any objects in a group.',
     },
   ];
@@ -236,7 +236,7 @@ export const ZeroChallenge: React.FC<Props> = ({
 
   useEffect(() => {
     speakText(
-      'शून्यको खेल चुनौतीमा स्वागत छ! ५ तहका चुनौतीहरू पूरा गरौँ।',
+      'शून्यको खेल चुनौतीमा स्वागत छ! 5 तहका चुनौतीहरू पूरा गरौँ।',
       'Welcome to Zero Challenge! Let us conquer all 5 levels.'
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -287,11 +287,11 @@ export const ZeroChallenge: React.FC<Props> = ({
 
           <div>
             <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
-              कक्षा १ • गणित • अध्याय ५ : शून्य (Zero)
+              Class 1 • Maths • Chapter 5 : Zero
             </div>
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
-                ? 'सिमुलेसन ०५: शून्यको खेल (Zero Challenge)'
+                ? 'सिमुलेसन 05: शून्यको खेल (Zero Challenge)'
                 : 'Simulation 05: Zero Challenge'}
             </h1>
           </div>
@@ -316,21 +316,7 @@ export const ZeroChallenge: React.FC<Props> = ({
             <span>{stars} / 5 Stars</span>
           </div>
 
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            style={{
-              padding: '6px 12px',
-              background: '#FFFFFF',
-              border: '1px solid #DCE5DE',
-              borderRadius: '8px',
-              color: '#26332E',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '13px',
-            }}
-          >
-            {language === 'np' ? 'नेपाली | EN' : 'EN | नेपाली'}
-          </button>
+          
 
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
@@ -379,7 +365,7 @@ export const ZeroChallenge: React.FC<Props> = ({
                 fontSize: '12px',
               }}
             >
-              <span>{isPassed ? '✓' : `तह ${formatNum(c.level)}`}</span>
+              <span>{isPassed ? '✓' : `Level ${formatNum(c.level)}`}</span>
             </div>
           );
         })}
@@ -526,7 +512,7 @@ export const ZeroChallenge: React.FC<Props> = ({
             </h2>
             <p style={{ margin: 0, fontSize: '14px', color: '#26332E' }}>
               {language === 'np'
-                ? 'तपाईंले शून्य (०) को अवधारणा सम्पूर्ण रूपमा सिक्नुभयो।'
+                ? 'तपाईंले शून्य (0) को अवधारणा सम्पूर्ण रूपमा सिक्नुभयो।'
                 : 'You have completely mastered the concept of Zero (0).'}
             </p>
 

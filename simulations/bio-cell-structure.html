@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Cell Structure Virtual Microscope · नेपाल डिजिटल शिक्षा</title>
+  <title>Cell Structure Virtual Microscope · Nepal Digital Education</title>
   <style>
     :root {
       --bg: #090d16;
@@ -119,8 +119,8 @@
   <header>
     <div>
       <span class="badge">Class 6–10 · Biology</span>
-      <h1>Virtual Microscope: Cell Structure (कोषको संरचना)</h1>
-      <div class="subtitle">Nepal National Curriculum · Plant Cell (वनस्पति कोष) vs Animal Cell (जनावर कोष)</div>
+      <h1>Virtual Microscope: Cell Structure</h1>
+      <div class="subtitle">Nepal National Curriculum · Plant Cell vs Animal Cell</div>
     </div>
     <div style="display:flex; gap:8px;">
       <button class="btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
@@ -144,24 +144,24 @@
       <div style="font-size:0.85rem; font-weight:600; color:#cbd5e1;">Click Organelle to Inspect:</div>
       <div style="display:flex; flex-direction:column; gap:6px;">
         <div class="organelle-item" onclick="selectOrganelle('NUCLEUS')">
-          <span>🧠 Nucleus (केन्द्रक)</span> <span>Master Control</span>
+          <span>🧠 Nucleus</span> <span>Master Control</span>
         </div>
         <div class="organelle-item" onclick="selectOrganelle('MITOCHONDRIA')">
-          <span>⚡ Mitochondria (माइटोकोन्ड्रिया)</span> <span>Powerhouse</span>
+          <span>⚡ Mitochondria</span> <span>Powerhouse</span>
         </div>
         <div class="organelle-item" id="organelleChloro" onclick="selectOrganelle('CHLOROPLAST')">
-          <span>🍃 Chloroplast (हरितकण)</span> <span>Photosynthesis</span>
+          <span>🍃 Chloroplast</span> <span>Photosynthesis</span>
         </div>
         <div class="organelle-item" id="organelleWall" onclick="selectOrganelle('CELL_WALL')">
-          <span>🧱 Cell Wall (कोष भित्ति)</span> <span>Rigid Protection</span>
+          <span>🧱 Cell Wall</span> <span>Rigid Protection</span>
         </div>
         <div class="organelle-item" onclick="selectOrganelle('VACUOLE')">
-          <span>💧 Vacuole (रसधानी)</span> <span>Storage & Turgor</span>
+          <span>💧 Vacuole</span> <span>Storage & Turgor</span>
         </div>
       </div>
 
       <div class="info-card" id="infoCard">
-        <strong>Plant Cell (वनस्पति कोष):</strong> Has a rigid outer Cell Wall made of cellulose, large central vacuole, and Chloroplasts for photosynthesis.
+        <strong>Plant Cell:</strong> Has a rigid outer Cell Wall made of cellulose, large central vacuole, and Chloroplasts for photosynthesis.
       </div>
     </div>
   </div>
@@ -176,23 +176,23 @@
 
     const organelleInfo = {
       NUCLEUS: {
-        title: "🧠 Nucleus (केन्द्रक)",
+        title: "🧠 Nucleus",
         desc: "The information center of the cell containing genetic material (DNA/Chromosomes) that controls all cellular activities and cell division."
       },
       MITOCHONDRIA: {
-        title: "⚡ Mitochondria (माइटोकोन्ड्रिया)",
-        desc: "Known as the powerhouse of the cell (कोषको शक्तिगृह). Generates ATP energy through cellular respiration from glucose and oxygen."
+        title: "⚡ Mitochondria",
+        desc: "Known as the powerhouse of the cell. Generates ATP energy through cellular respiration from glucose and oxygen."
       },
       CHLOROPLAST: {
-        title: "🍃 Chloroplast (हरितकण)",
+        title: "🍃 Chloroplast",
         desc: "Found only in plant cells. Contains green chlorophyll pigment that absorbs sunlight to synthesize food via photosynthesis."
       },
       CELL_WALL: {
-        title: "🧱 Cell Wall (कोष भित्ति)",
+        title: "🧱 Cell Wall",
         desc: "A tough, flexible and rigid layer made of cellulose surrounding plant cells to provide structural support, shape, and protection."
       },
       VACUOLE: {
-        title: "💧 Vacuole (रसधानी)",
+        title: "💧 Vacuole",
         desc: "Stores water, enzymes, nutrients, and waste. Plant cells feature one enormous central vacuole maintaining turgor pressure; animal cells have small, temporary vacuoles."
       }
     };

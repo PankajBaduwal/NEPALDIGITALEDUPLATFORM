@@ -99,12 +99,12 @@ export const SlopeStraightLineGraphLab: React.FC<SimProps> = ({ onBackToLibrary,
           <>
             <div className="lg:col-span-5 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
               <h4 className="font-bold text-slate-800 text-sm">
-                {L('२ बिन्दुहरू बीचको झुकाव (Slope m = tan θ):', 'Slope between 2 Points:')}
+                {L('2 बिन्दुहरू बीचको झुकाव (Slope m = tan θ):', 'Slope between 2 Points:')}
               </h4>
 
               <div className="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
                 <div>
-                  <span className="font-bold text-slate-700 block mb-1">बिन्दु P(x₁, y₁):</span>
+                  <span className="font-bold text-slate-700 block mb-1">Point P(x₁, y₁):</span>
                   <div className="flex gap-2">
                     <input
                       type="number"
@@ -122,7 +122,7 @@ export const SlopeStraightLineGraphLab: React.FC<SimProps> = ({ onBackToLibrary,
                 </div>
 
                 <div>
-                  <span className="font-bold text-slate-700 block mb-1">बिन्दु Q(x₂, y₂):</span>
+                  <span className="font-bold text-slate-700 block mb-1">Point Q(x₂, y₂):</span>
                   <div className="flex gap-2">
                     <input
                       type="number"
@@ -143,16 +143,16 @@ export const SlopeStraightLineGraphLab: React.FC<SimProps> = ({ onBackToLibrary,
               {/* Slope Math Breakdown */}
               <div className="p-4 bg-indigo-50/70 border border-indigo-200 rounded-xl space-y-2 text-xs font-mono">
                 <div className="font-bold text-indigo-950 text-sm">
-                  m = \frac&#123;y₂ − y₁&#125;&#123;x₂ − x₁&#125; = \frac&#123;उचाइ वृद्धि (Rise)&#125;&#123;तेर्सो वृद्धि (Run)&#125;
+                  m = \frac&#123;y₂ − y₁&#125;&#123;x₂ − x₁&#125; = \frac&#123;rise&#125;&#123;run&#125;
                 </div>
                 <div className="text-slate-700">
                   m = \frac&#123;{fmt(ptQ.y)} − ({fmt(ptP.y)})&#125;&#123;{fmt(ptQ.x)} − ({fmt(ptP.x)})&#125; = \frac&#123;{fmt(deltaY)}&#125;&#123;{fmt(deltaX)}&#125;
                 </div>
                 <div className="text-base font-bold text-indigo-700 pt-1">
-                  m = {slopeM !== null ? fmt(slopeM.toFixed(2)) : 'Undefined (लम्ब)'}
+                  m = {slopeM !== null ? fmt(slopeM.toFixed(2)) : 'Undefined'}
                 </div>
                 <div className="text-slate-600 text-[11px]">
-                  धनात्मक X-अक्षसँगको झुकाव कोण: θ = {fmt(angleThetaDeg.toFixed(1))}°
+                  Angle of inclination with the positive X-axis: θ = {fmt(angleThetaDeg.toFixed(1))}°
                 </div>
               </div>
             </div>
@@ -258,14 +258,14 @@ export const SlopeStraightLineGraphLab: React.FC<SimProps> = ({ onBackToLibrary,
               {/* Intercepts Card */}
               <div className="p-4 bg-indigo-50/70 border border-indigo-200 rounded-xl space-y-2 text-xs font-mono">
                 <div className="font-bold text-indigo-950 text-sm">
-                  समीकरण: y = {lineM}x {lineC >= 0 ? `+ ${lineC}` : lineC}
+                  Equation: y = {lineM}x {lineC >= 0 ? `+ ${lineC}` : lineC}
                 </div>
                 <div className="p-2 bg-white rounded border border-indigo-100 flex justify-between">
-                  <span>Y-अन्तःखण्ड (y = 0 हुँदा):</span>
+                  <span>Y-intercept (when x = 0):</span>
                   <span className="font-bold text-indigo-700">(0, {fmt(interceptB)})</span>
                 </div>
                 <div className="p-2 bg-white rounded border border-indigo-100 flex justify-between">
-                  <span>X-अन्तःखण्ड (x = -c/m):</span>
+                  <span>X-intercept (x = -c/m):</span>
                   <span className="font-bold text-emerald-700">
                     {interceptA !== null ? `(${fmt(interceptA.toFixed(1))}, 0)` : L('समानान्तर (छैन)', 'None (Parallel)')}
                   </span>
@@ -316,21 +316,21 @@ export const SlopeStraightLineGraphLab: React.FC<SimProps> = ({ onBackToLibrary,
             {/* Form Conversions */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
               <div className="p-3 bg-indigo-50 border border-indigo-200 rounded-xl space-y-1">
-                <span className="font-bold text-indigo-950 block">{L('१. साधारण रूप (General Form):', 'General Form:')}</span>
+                <span className="font-bold text-indigo-950 block">{L('1. साधारण रूप (General Form):', 'General Form:')}</span>
                 <div className="text-sm font-bold text-indigo-800">
                   {fmt(coeffA)}x {coeffB >= 0 ? `+ ${fmt(coeffB)}y` : `${fmt(coeffB)}y`} {coeffC >= 0 ? `+ ${fmt(coeffC)}` : `${fmt(coeffC)}`} = 0
                 </div>
               </div>
 
               <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl space-y-1">
-                <span className="font-bold text-blue-950 block">{L('२. झुकाव-अन्तःखण्ड रूप (y = mx + c):', 'Slope-Intercept Form:')}</span>
+                <span className="font-bold text-blue-950 block">{L('2. झुकाव-अन्तःखण्ड रूप (y = mx + c):', 'Slope-Intercept Form:')}</span>
                 <div className="text-sm font-bold text-blue-800">
                   y = {(-coeffA / coeffB).toFixed(2)}x {(-coeffC / coeffB) >= 0 ? `+ ${(-coeffC / coeffB).toFixed(2)}` : `${(-coeffC / coeffB).toFixed(2)}`}
                 </div>
               </div>
 
               <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
-                <span className="font-bold text-emerald-950 block">{L('३. दुई-अन्तःखण्ड रूप (x/a + y/b = 1):', 'Double Intercept Form:')}</span>
+                <span className="font-bold text-emerald-950 block">{L('3. दुई-अन्तःखण्ड रूप (x/a + y/b = 1):', 'Double Intercept Form:')}</span>
                 <div className="text-sm font-bold text-emerald-800">
                   \frac&#123;x&#125;&#123;{(-coeffC / coeffA).toFixed(1)}&#125; + \frac&#123;y&#125;&#123;{(-coeffC / coeffB).toFixed(1)}&#125; = 1
                 </div>

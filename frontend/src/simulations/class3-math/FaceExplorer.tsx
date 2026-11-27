@@ -1,5 +1,5 @@
 /**
- * Lesson 11 · Geometrical shapes (ज्यामितीय आकार)
+ * Lesson 11 · Geometrical shapes
  * Face Explorer — 2D Interactive Solid & Net Unfolder.
  * Explore Cube, Cuboid, Cylinder, Cone, and Pyramid with interactive 2D nets, faces, vertices, and edges.
  */
@@ -47,7 +47,7 @@ const SOLIDS: SolidDef[] = [
     faces: 6,
     edges: 12,
     vertices: 8,
-    infoNp: '६ वटा बराबर वर्गाकार सतहहरू',
+    infoNp: '6 वटा बराबर वर्गाकार सतहहरू',
     infoEn: '6 identical square faces',
     netShapes: '6 Squares',
     netPieces: [
@@ -66,7 +66,7 @@ const SOLIDS: SolidDef[] = [
     faces: 6,
     edges: 12,
     vertices: 8,
-    infoNp: '६ वटा आयताकार सतहहरू (विपरीत सतह बराबर)',
+    infoNp: '6 वटा आयताकार सतहहरू (विपरीत सतह बराबर)',
     infoEn: '6 rectangular faces (opposite faces equal)',
     netShapes: '6 Rectangles',
     netPieces: [
@@ -85,7 +85,7 @@ const SOLIDS: SolidDef[] = [
     faces: 3,
     edges: 2,
     vertices: 0,
-    infoNp: '२ वटा गोलो समतल र १ वटा घुमाउरो (आयताकार) सतह',
+    infoNp: '2 वटा गोलो समतल र 1 वटा घुमाउरो (आयताकार) सतह',
     infoEn: '2 circular flat faces and 1 curved unrolled rectangular face',
     netShapes: '2 Circles + 1 Rectangle',
     netPieces: [
@@ -101,7 +101,7 @@ const SOLIDS: SolidDef[] = [
     faces: 2,
     edges: 1,
     vertices: 1,
-    infoNp: '१ वटा गोलो पिँध र १ वटा घुमाउरो सतह (वृत्तखण्ड)',
+    infoNp: '1 वटा गोलो पिँध र 1 वटा घुमाउरो सतह (वृत्तखण्ड)',
     infoEn: '1 circular base and 1 curved sector face with apex',
     netShapes: '1 Circle + 1 Sector',
     netPieces: [
@@ -116,7 +116,7 @@ const SOLIDS: SolidDef[] = [
     faces: 5,
     edges: 8,
     vertices: 5,
-    infoNp: '१ वटा वर्गाकार पिँध र ४ वटा त्रिभुजाकार सतहहरू',
+    infoNp: '1 वटा वर्गाकार पिँध र 4 वटा त्रिभुजाकार सतहहरू',
     infoEn: '1 square base and 4 triangular faces meeting at the apex',
     netShapes: '1 Square + 4 Triangles',
     netPieces: [
@@ -223,7 +223,7 @@ export const FaceExplorer: React.FC<Props> = ({ onBackToLibrary }) => {
               onClick={() => {
                 setUnfold(0);
                 kit.tap();
-                kit.say('बन्द अवस्था (३D आकार)', 'Folded 3D shape view');
+                kit.say('बन्द अवस्था (3D आकार)', 'Folded 3D shape view');
               }}
               style={{
                 padding: '8px 16px',
@@ -236,13 +236,13 @@ export const FaceExplorer: React.FC<Props> = ({ onBackToLibrary }) => {
                 cursor: 'pointer',
               }}
             >
-              📦 {kit.t('बन्द आकार (३D)', 'Folded Solid')}
+              📦 {kit.t('बन्द आकार (3D)', 'Folded Solid')}
             </button>
             <button
               onClick={() => {
                 setUnfold(1);
                 kit.tap();
-                kit.say('खोलेको अवस्था (२D जाली / Net)', 'Unfolded 2D net view');
+                kit.say('खोलेको अवस्था (2D जाली / Net)', 'Unfolded 2D net view');
               }}
               style={{
                 padding: '8px 16px',
@@ -255,7 +255,7 @@ export const FaceExplorer: React.FC<Props> = ({ onBackToLibrary }) => {
                 cursor: 'pointer',
               }}
             >
-              📄 {kit.t('खोलेको जाली (२D Net)', 'Unfolded Net')}
+              📄 {kit.t('खोलेको जाली (2D Net)', 'Unfolded Net')}
             </button>
           </div>
         </div>

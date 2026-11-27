@@ -1,11 +1,11 @@
 /**
  * MeltingFreezingSim.tsx
- * Simulation 21: 2D Melting and Freezing Thermal Lab (पग्लने र जम्ने भौतिक प्रयोगशाला)
- * Grade 4 Science • Chapter 6: Matter (पदार्थ)
+ * Simulation 21: 2D Melting and Freezing Thermal Lab
+ * Grade 4 Science • Chapter 6: Matter
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
- * - Dual process modes: Melting (ठोसबाट तरल) and Freezing (तरलबाट ठोस)
+ * - Dual process modes: Melting and Freezing
  * - Realistic crystal physics:
  *   - Melting: Translucent faceted ice cubes soften, droplets trickle down, water pool rises
  *   - Freezing: Sub-zero cryo cooling, dendritic ice needles branch across water, solidifying into ice
@@ -24,7 +24,7 @@ export const MeltingFreezingSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -486,13 +486,13 @@ export const MeltingFreezingSim: React.FC<BaseSimulationProps> = ({
       phaseName = pct < 20
         ? currentLang === 'en' ? 'Phase: Solid Ice Warming' : 'अवस्था: ठोस हिउँ तात्दैछ'
         : pct <= 80
-        ? currentLang === 'en' ? 'Phase: Melting at 0°C (Latent Heat)' : 'अवस्था: ०°C मा पग्लने प्रक्रिया जारी'
+        ? currentLang === 'en' ? 'Phase: Melting at 0°C (Latent Heat)' : 'अवस्था: 0°C मा पग्लने प्रक्रिया जारी'
         : currentLang === 'en' ? 'Phase: Liquid Water Warming' : 'अवस्था: तरल पानी तात्दैछ';
     } else {
       phaseName = pct < 30
         ? currentLang === 'en' ? 'Phase: Liquid Water Cooling' : 'अवस्था: तरल पानी चिसिँदैछ'
         : pct <= 85
-        ? currentLang === 'en' ? 'Phase: Freezing into Ice at 0°C' : 'अवस्था: ०°C मा हिउँ जम्दैछ'
+        ? currentLang === 'en' ? 'Phase: Freezing into Ice at 0°C' : 'अवस्था: 0°C मा हिउँ जम्दैछ'
         : currentLang === 'en' ? 'Phase: Solid Ice Sub-zero' : 'अवस्था: ठोस हिउँ थप चिसियो';
     }
 
@@ -511,12 +511,12 @@ export const MeltingFreezingSim: React.FC<BaseSimulationProps> = ({
     setQuizAnswered(true);
     if (tempChoice === '0') {
       ScienceAudio.playSuccess();
-      setQuizFeedback(lang === 'en' ? 'Correct! Pure water freezes and melts at 0°C.' : 'सबास! शुद्ध पानी ०°C मा पग्लन्छ र जम्छ।');
+      setQuizFeedback(lang === 'en' ? 'Correct! Pure water freezes and melts at 0°C.' : 'सबास! शुद्ध पानी 0°C मा पग्लन्छ र जम्छ।');
       setStars(3);
       setIsCompleted(true);
     } else {
       ScienceAudio.playBeep(220, 0.2);
-      setQuizFeedback(lang === 'en' ? 'Incorrect. The melting and freezing point of water is 0°C.' : 'मिलेन। पानीको पग्लने र जम्ने बिन्दु ०°C हो।');
+      setQuizFeedback(lang === 'en' ? 'Incorrect. The melting and freezing point of water is 0°C.' : 'मिलेन। पानीको पग्लने र जम्ने बिन्दु 0°C हो।');
     }
   };
 
@@ -526,7 +526,7 @@ export const MeltingFreezingSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 6: Matter'
-          : 'कक्षा ४ विज्ञान • एकाइ ६: पदार्थ'
+          : 'कक्षा 4 विज्ञान • एकाइ 6: पदार्थ'
       }
       currentStage={stage}
       onStageChange={setStage}
@@ -651,8 +651,8 @@ export const MeltingFreezingSim: React.FC<BaseSimulationProps> = ({
               <div>
                 <div style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>
                   {mode === 'melting'
-                    ? lang === 'en' ? 'Phase Transition: Melting (0°C)' : 'अवस्था परिवर्तन: पग्लने क्रिया (०°C)'
-                    : lang === 'en' ? 'Phase Transition: Freezing (0°C)' : 'अवस्था परिवर्तन: जम्ने क्रिया (०°C)'}
+                    ? lang === 'en' ? 'Phase Transition: Melting (0°C)' : 'अवस्था परिवर्तन: पग्लने क्रिया (0°C)'
+                    : lang === 'en' ? 'Phase Transition: Freezing (0°C)' : 'अवस्था परिवर्तन: जम्ने क्रिया (0°C)'}
                 </div>
                 <div style={{ fontSize: '11px', color: '#64748b' }}>
                   {mode === 'melting'
@@ -707,7 +707,7 @@ export const MeltingFreezingSim: React.FC<BaseSimulationProps> = ({
             <p style={{ margin: 0, fontSize: '12px', color: '#64748b', lineHeight: '1.5' }}>
               {lang === 'en'
                 ? 'Observe the reversible phase change of pure water: Melting absorbs heat at 0°C, while Freezing releases heat at 0°C.'
-                : 'पानीको उल्टिन सक्ने अवस्था परिवर्तन हेर्नुहोस्: ०°C मा ताप पाएर हिउँ पग्लन्छ र ताप गुमाएर पानी जम्छ।'}
+                : 'पानीको उल्टिन सक्ने अवस्था परिवर्तन हेर्नुहोस्: 0°C मा ताप पाएर हिउँ पग्लन्छ र ताप गुमाएर पानी जम्छ।'}
             </p>
           </div>
 
@@ -734,7 +734,7 @@ export const MeltingFreezingSim: React.FC<BaseSimulationProps> = ({
               >
                 <span style={{ fontSize: '20px' }}>🔥</span>
                 <span style={{ fontSize: '11px', fontWeight: '700', color: mode === 'melting' ? '#fb923c' : '#e2e8f0' }}>
-                  {lang === 'en' ? 'Melting (पग्लने)' : 'पग्लने प्रक्रिया'}
+                  {lang === 'en' ? 'Melting' : 'पग्लने प्रक्रिया'}
                 </span>
               </button>
 
@@ -755,7 +755,7 @@ export const MeltingFreezingSim: React.FC<BaseSimulationProps> = ({
               >
                 <span style={{ fontSize: '20px' }}>❄️</span>
                 <span style={{ fontSize: '11px', fontWeight: '700', color: mode === 'freezing' ? '#38bdf8' : '#e2e8f0' }}>
-                  {lang === 'en' ? 'Freezing (जम्ने)' : 'जम्ने प्रक्रिया'}
+                  {lang === 'en' ? 'Freezing' : 'जम्ने प्रक्रिया'}
                 </span>
               </button>
             </div>
@@ -902,7 +902,7 @@ export const MeltingFreezingSim: React.FC<BaseSimulationProps> = ({
             <p style={{ margin: 0, fontSize: '11px', color: '#475569', lineHeight: '1.45' }}>
               {lang === 'en'
                 ? 'Water changes from solid to liquid at 0°C (melting point) and freezes back from liquid to solid at 0°C (freezing point).'
-                : '०°C मा हिउँ पग्लिएर पानी बन्छ (पग्लने बिन्दु) र ०°C मा नै पानी जमेर हिउँ बन्छ (जम्ने बिन्दु)।'}
+                : '0°C मा हिउँ पग्लिएर पानी बन्छ (पग्लने बिन्दु) र 0°C मा नै पानी जमेर हिउँ बन्छ (जम्ने बिन्दु)।'}
             </p>
           </div>
 

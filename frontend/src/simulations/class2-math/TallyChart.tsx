@@ -1,5 +1,5 @@
 /**
- * Lesson 14 · Pictograph and table (चित्रचार्ट र तालिका)
+ * Lesson 14 · Pictograph and table
  * Tally & Pictograph — children vote for pets; tally marks (bundles of 5), table and pictograph row grow together.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -55,7 +55,7 @@ export const TallyChart: React.FC<Props> = ({ onBackToLibrary }) => {
   useEffect(() => {
     if (kit.mode === 'LEARN') {
       kit.say(
-        'हरेक ५ वटा गन्दा १ समूह बन्छ — ४ वटा ठाडो धर्को र १ छड्के धर्को।',
+        'हरेक 5 वटा गन्दा 1 समूह बन्छ — 4 वटा ठाडो धर्को र 1 छड्के धर्को।',
         'Every 5 counts form a bundle: 4 vertical lines and 1 diagonal slash.'
       );
     }
@@ -84,13 +84,13 @@ export const TallyChart: React.FC<Props> = ({ onBackToLibrary }) => {
       })),
     },
     {
-      np: 'ट्याली चिन्हमा १ समूह (बन्डल) ले कति सङ्ख्या बुझाउँछ?',
+      np: 'ट्याली चिन्हमा 1 समूह (बन्डल) ले कति सङ्ख्या बुझाउँछ?',
       en: 'How much does one complete tally bundle represent?',
       answer: '5',
       options: [
-        { key: '5', label: '५' },
-        { key: '10', label: '१०' },
-        { key: '4', label: '४' },
+        { key: '5', label: '5' },
+        { key: '10', label: '10' },
+        { key: '4', label: '4' },
       ],
     },
   ];
@@ -125,7 +125,7 @@ export const TallyChart: React.FC<Props> = ({ onBackToLibrary }) => {
         </span>
         {PETS.map((p, i) => (
           <CBtn key={p.en} color={p.color} onClick={() => handleVote(i)}>
-            {p.emoji} +१ {kit.t(p.np, p.en)}
+            {p.emoji} +1 {kit.t(p.np, p.en)}
           </CBtn>
         ))}
 
@@ -173,7 +173,7 @@ export const TallyChart: React.FC<Props> = ({ onBackToLibrary }) => {
             ))}
           </svg>
         )}
-        {n === 0 && <span style={{ fontSize: 13, color: '#94A3B8', fontStyle: 'italic' }}>०</span>}
+        {n === 0 && <span style={{ fontSize: 13, color: '#94A3B8', fontStyle: 'italic' }}>0</span>}
       </div>
     );
   };

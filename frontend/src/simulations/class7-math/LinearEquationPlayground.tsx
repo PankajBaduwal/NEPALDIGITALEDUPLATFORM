@@ -1,6 +1,6 @@
 /**
  * LinearEquationPlayground.tsx
- * Grade 7 Mathematics – Lesson 12: EQUATION, INEQUALITY AND GRAPH (समीकरण, असमानता र ग्राफ)
+ * Grade 7 Mathematics – Lesson 12: EQUATION, INEQUALITY AND GRAPH
  * Simulation 1: Linear Equation Discovery Playground (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 168-173)
  */
@@ -12,35 +12,35 @@ import { Scale, ShoppingBag, Table, ArrowRight, Check } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'हरिले x केजी आलु र गीताले y केजी प्याज किन्दा जम्मा तौल ३० केजी (x + y = ३०) भयो। यदि x = २० भए y को मान कति हुन्छ?',
+    np: 'हरिले x kg आलु र गीताले y kg प्याज किन्दा जम्मा तौल 30 kg (x + y = 30) भयो। यदि x = 20 भए y को मान कति हुन्छ?',
     en: 'Hari buys x kg potatoes and Gita buys y kg onions totaling 30 kg (x + y = 30). If x = 20, what is y?',
     options: [
-      { key: 'A', label: '१० केजी (y = ३० - २० = १०)' },
-      { key: 'B', label: '२० केजी' },
-      { key: 'C', label: '१५ केजी' },
-      { key: 'D', label: '५० केजी' },
+      { key: 'A', label: '10 kg (y = 30 - 20 = 10)' },
+      { key: 'B', label: '20 kg' },
+      { key: 'C', label: '15 kg' },
+      { key: 'D', label: '50 kg' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा कक्षामा रातो कलम x वटा र कालो कलम y वटा गरी जम्मा १७ वटा कलम छन्। यसको समीकरण कुन हो?',
+    np: 'एउटा कक्षामा रातो कलम x pcs र Black pen y pcs गरी जम्मा 17 pcs कलम छन्। यसको समीकरण कुन हो?',
     en: 'There are x red pens and y black pens totaling 17 pens. Which equation represents this?',
     options: [
-      { key: 'A', label: 'x + y = १७' },
-      { key: 'B', label: 'x - y = १७' },
-      { key: 'C', label: 'xy = १७' },
-      { key: 'D', label: 'x/y = १७' },
+      { key: 'A', label: 'x + y = 17' },
+      { key: 'B', label: 'x - y = 17' },
+      { key: 'C', label: 'xy = 17' },
+      { key: 'D', label: 'x/y = 17' },
     ],
     answer: 'A',
   },
   {
-    np: 'समीकरण x + y = ११ मा यदि x = ४ भए y को मान कति हुन्छ?',
+    np: 'समीकरण x + y = 11 मा यदि x = 4 भए y को मान कति हुन्छ?',
     en: 'In equation x + y = 11, if x = 4, what is the value of y?',
     options: [
-      { key: 'A', label: '७ (४ + ७ = ११)' },
-      { key: 'B', label: '१५' },
-      { key: 'C', label: '४' },
-      { key: 'D', label: '८' },
+      { key: 'A', label: '7 (4 + 7 = 11)' },
+      { key: 'B', label: '15' },
+      { key: 'C', label: '4' },
+      { key: 'D', label: '8' },
     ],
     answer: 'A',
   },
@@ -48,8 +48,8 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दुई चलयुक्त रेखीय समीकरण (Linear Equation in Two Variables) को सामान्य रूप कुन हो?',
     en: 'What is the standard form of a linear equation in two variables?',
     options: [
-      { key: 'A', label: 'ax + by + c = ० (जहाँ a, b दुवै शून्य होइनन्)' },
-      { key: 'B', label: 'ax² + bx + c = ०' },
+      { key: 'A', label: 'ax + by + c = 0' },
+      { key: 'B', label: 'ax² + bx + c = 0' },
       { key: 'C', label: 'x/y = c' },
       { key: 'D', label: 'a + b = c' },
     ],
@@ -103,9 +103,9 @@ export const LinearEquationPlayground: React.FC<{ onBackToLibrary?: () => void; 
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'baskets', np: '१. तरकारीको तौल (x + y = 30)', en: '1. Vegetables (x+y=30)' },
-            { id: 'pens', np: '२. कलम सङ्ख्या (x + y = 17)', en: '2. Pens (x+y=17)' },
-            { id: 'table-pairs', np: '३. मान तालिका (x + y = 11)', en: '3. Table of Values' },
+            { id: 'baskets', np: '1. तरकारीको तौल (x + y = 30)', en: '1. Vegetables (x+y=30)' },
+            { id: 'pens', np: '2. कलम सङ्ख्या (x + y = 17)', en: '2. Pens (x+y=17)' },
+            { id: 'table-pairs', np: '3. मान तालिका (x + y = 11)', en: '3. Table of Values' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -133,11 +133,11 @@ export const LinearEquationPlayground: React.FC<{ onBackToLibrary?: () => void; 
         {activeTab === 'baskets' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('हरि र गीताको तरकारी: x + y = ३० केजी', 'Vegetables Weight: x + y = 30 kg')}
+              {L('हरि र गीताको तरकारी: x + y = 30 kg', 'Vegetables Weight: x + y = 30 kg')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: हरिले x केजी आलु र गीताले y केजी प्याज किन्दा जम्मा तौल ३० केजी भयो। आलुको तौल बदल्दा प्याजको तौल हेर्नुहोस्:',
+                'पाठ्यपुस्तक उदाहरण: हरिले x kg आलु र गीताले y kg प्याज किन्दा जम्मा तौल 30 kg भयो। आलुको तौल बदल्दा प्याजको तौल हेर्नुहोस्:',
                 'Textbook Example: Hari buys x kg potatoes and Gita buys y kg onions totaling 30 kg. Adjust x to see y:'
               )}
             </p>
@@ -185,7 +185,7 @@ export const LinearEquationPlayground: React.FC<{ onBackToLibrary?: () => void; 
                   y = {onionKg} kg
                 </div>
                 <div style={{ fontSize: 12, color: '#831843', marginTop: 2 }}>
-                  y = ३० - {potatoKg} = {onionKg}
+                  y = 30 - {potatoKg} = {onionKg}
                 </div>
               </div>
             </div>
@@ -204,7 +204,7 @@ export const LinearEquationPlayground: React.FC<{ onBackToLibrary?: () => void; 
                 {L('समीकरण सन्तुष्टि (Equation Verified)', 'Equation Verified')}
               </div>
               <div style={{ fontSize: 28, fontWeight: 800, color: '#047857', marginTop: 4 }}>
-                {potatoKg} + {onionKg} = ३० kg
+                {potatoKg} + {onionKg} = 30 kg
               </div>
             </div>
           </div>
@@ -214,18 +214,18 @@ export const LinearEquationPlayground: React.FC<{ onBackToLibrary?: () => void; 
         {activeTab === 'pens' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('रातो र कालो कलम: x + y = १७', 'Red & Black Pens: x + y = 17')}
+              {L('रातो र Black pen: x + y = 17', 'Red & Black Pens: x + y = 17')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: जम्मा १७ वटा कलममा रातो कलम x र कालो कलम y वटा छन्:',
+                'पाठ्यपुस्तक उदाहरण: जम्मा 17 pcs कलममा रातो कलम x र Black pen y pcs छन्:',
                 'Textbook Example: Total 17 pens consisting of x red pens and y black pens:'
               )}
             </p>
 
             <div style={{ margin: '16px 0' }}>
               <label style={{ fontSize: 13, fontWeight: 700, color: '#DC2626', display: 'block', marginBottom: 4 }}>
-                {L('रातो कलम (x): ', 'Red Pens (x): ')} {redPens} वटा
+                {L('रातो कलम (x): ', 'Red Pens (x): ')} {redPens} pcs
               </label>
               <input
                 type="range"
@@ -251,11 +251,11 @@ export const LinearEquationPlayground: React.FC<{ onBackToLibrary?: () => void; 
               }}
             >
               <div>
-                <strong>{L('समीकरण:', 'Equation:')}</strong> x + y = १७
+                <strong>{L('समीकरण:', 'Equation:')}</strong> x + y = 17
               </div>
               <div>
-                <strong>{L('y को मान निकाल्दा:', 'Solving for y:')}</strong> y = १७ - x = १७ - {redPens} ={' '}
-                <span style={{ fontWeight: 800, color: '#1E293B' }}>{blackPens} कालो कलम</span>
+                <strong>{L('y को मान निकाल्दा:', 'Solving for y:')}</strong> y = 17 - x = 17 - {redPens} ={' '}
+                <span style={{ fontWeight: 800, color: '#1E293B' }}>{blackPens} Black pen</span>
               </div>
               <div
                 style={{
@@ -279,7 +279,7 @@ export const LinearEquationPlayground: React.FC<{ onBackToLibrary?: () => void; 
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ १७१ अनुसार: x + y = ११ का विभिन्न क्रमित युग्म (x, y) हरू:',
+                'पाठ्यपुस्तक पृष्ठ 171 अनुसार: x + y = 11 का विभिन्न क्रमित युग्म (x, y) हरू:',
                 'Textbook Page 171: Ordered pairs (x, y) satisfying x + y = 11:'
               )}
             </p>

@@ -51,27 +51,27 @@ export const LocusCoordinateGeometryLab: React.FC<SimProps> = ({ onBackToLibrary
 
   const CHALLENGES = [
     {
-      qNp: 'मूलबिन्दु (०, ०) बाट सधैं ५ एकाइ दुरीमा रहने बिन्दु P(x, y) को बिन्दुपथको समीकरण के हुन्छ?',
+      qNp: 'मूलबिन्दु (0, 0) बाट सधैं 5 एकाइ दुरीमा रहने बिन्दु P(x, y) को बिन्दुपथको समीकरण के हुन्छ?',
       qEn: 'What is the equation of the locus of a point P(x, y) which is always at a distance of 5 units from the origin (0, 0)?',
       opts: ['x² + y² = 25', 'x + y = 5', 'x² − y² = 25', 'x² + y² = 5'],
       correct: 0,
-      expNp: 'दुरी सूत्र अनुसार: √(x² + y²) = ५ ⇒ x² + y² = २५ (वृत्तको समीकरण)।',
+      expNp: 'दुरी सूत्र अनुसार: √(x² + y²) = 5 ⇒ x² + y² = 25।',
       expEn: 'By distance formula: √(x² + y²) = 5 => x² + y² = 25.',
     },
     {
-      qNp: 'बिन्दुहरू A(२, ३) र B(६, ७) लाई जोड्ने रेखाखण्डको मध्यबिन्दु M का निर्देशाङ्क कति हुन्छन्?',
+      qNp: 'बिन्दुहरू A(2, 3) र B(6, 7) लाई जोड्ने रेखाखण्डको मध्यबिन्दु M का निर्देशाङ्क कति हुन्छन्?',
       qEn: 'Find the coordinates of the midpoint M of the line segment joining A(2, 3) and B(6, 7):',
-      opts: ['(४, ५)', '(८, १०)', '(३, ४)', '(२, २)'],
+      opts: ['(4, 5)', '(8, 10)', '(3, 4)', '(2, 2)'],
       correct: 0,
-      expNp: 'मध्यबिन्दु = ((x₁ + x₂)/२, (y₁ + y₂)/२) = ((२ + ६)/२, (३ + ७)/२) = (४, ५)।',
+      expNp: 'मध्यबिन्दु = ((x₁ + x₂)/2, (y₁ + y₂)/2) = ((2 + 6)/2, (3 + 7)/2) = (4, 5)।',
       expEn: 'Midpoint = ((2 + 6)/2, (3 + 7)/2) = (4, 5).',
     },
     {
-      qNp: 'बिन्दुहरू P(१, २) र Q(४, ५) लाई १:२ को अनुपातमा आन्तरिक विभाजन गर्ने बिन्दुको x-निर्देशाङ्क कति हुन्छ?',
+      qNp: 'बिन्दुहरू P(1, 2) र Q(4, 5) लाई 1:2 को अनुपातमा आन्तरिक विभाजन गर्ने बिन्दुको x-निर्देशाङ्क कति हुन्छ?',
       qEn: 'What is the x-coordinate of the point dividing P(1, 2) and Q(4, 5) internally in the ratio 1:2?',
-      opts: ['x = २', 'x = ३', 'x = २.५', 'x = १'],
+      opts: ['x = 2', 'x = 3', 'x = 2.5', 'x = 1'],
       correct: 0,
-      expNp: 'x = (m₁x₂ + m₂x₁)/(m₁ + m₂) = (१×४ + २×१)/(१ + २) = ६/३ = २।',
+      expNp: 'x = (m₁x₂ + m₂x₁)/(m₁ + m₂) = (1×4 + 2×1)/(1 + 2) = 6/3 = 2।',
       expEn: 'x = (1×4 + 2×1)/(1 + 2) = 6/3 = 2.',
     },
   ];
@@ -208,7 +208,7 @@ export const LocusCoordinateGeometryLab: React.FC<SimProps> = ({ onBackToLibrary
                   (x {centerH >= 0 ? `− ${centerH}` : `+ ${-centerH}`})² + (y {centerK >= 0 ? `− ${centerK}` : `+ ${-centerK}`})² = {locusRadius * locusRadius}
                 </div>
                 <div className="text-[11px] text-slate-600 pt-1">
-                  P को निर्देशाङ्क: ({movingX.toFixed(2)}, {movingY.toFixed(2)})
+                  Coordinates of P: ({movingX.toFixed(2)}, {movingY.toFixed(2)})
                 </div>
               </div>
             </div>
@@ -361,7 +361,7 @@ export const LocusCoordinateGeometryLab: React.FC<SimProps> = ({ onBackToLibrary
             {/* Calculated Point */}
             <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex flex-col sm:flex-row justify-between items-center text-xs font-mono gap-2">
               <span className="font-bold text-emerald-950 text-sm">
-                विभाजन बिन्दु P का निर्देशाङ्क:
+                Coordinates of the dividing point P:
               </span>
               <span className="text-base font-bold text-emerald-700 bg-white px-4 py-1.5 rounded-lg border border-emerald-300">
                 P({fmt(divX.toFixed(2))}, {fmt(divY.toFixed(2))})

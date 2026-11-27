@@ -27,24 +27,24 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: 'अनुक्रम २, ६, १८, ५४, ... कस्तो प्रकारको अनुक्रम हो?',
+    np: 'अनुक्रम 2, 6, 18, 54, ... कस्तो प्रकारको अनुक्रम हो?',
     en: 'What type of sequence is 2, 6, 18, 54, ...?',
     options: [
-      { key: 'A', label: 'समान्तर अनुक्रम (AP)' },
-      { key: 'B', label: 'गुणोत्तर अनुक्रम (GP, साझा अनुपात r = ३)' },
-      { key: 'C', label: 'बिजोर संख्याको अनुक्रम' },
-      { key: 'D', label: 'सिमित अनुक्रम' },
+      { key: 'A', label: 'Arithmetic sequence (AP)' },
+      { key: 'B', label: 'Geometric sequence (GP, common ratio r = 3)' },
+      { key: 'C', label: 'Sequence of odd numbers' },
+      { key: 'D', label: 'Finite sequence' },
     ],
     answer: 'B',
   },
   {
-    np: 'समान्तर अनुक्रम ५, ८, ११, १४, ... मा साझा अन्तर (Common Difference d) कति हुन्छ?',
+    np: 'समान्तर अनुक्रम 5, 8, 11, 14, ... मा साझा अन्तर (Common Difference d) कति हुन्छ?',
     en: 'In the arithmetic sequence 5, 8, 11, 14, ..., what is the common difference (d)?',
     options: [
-      { key: 'A', label: '२' },
-      { key: 'B', label: '३ (८ - ५ = ३)' },
-      { key: 'C', label: '५' },
-      { key: 'D', label: '११' },
+      { key: 'A', label: '2' },
+      { key: 'B', label: '3 (8 - 5 = 3)' },
+      { key: 'C', label: '5' },
+      { key: 'D', label: '11' },
     ],
     answer: 'B',
   },
@@ -101,7 +101,7 @@ export const ArithmeticGeometricSequenceLab: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! समान्तर अनुक्रम (AP: tₙ = a + (n-१)d) र गुणोत्तर अनुक्रम (GP: tₙ = arⁿ⁻¹) को पद निकाल्ने र तुलना गर्ने अभ्यास गरौं!',
+        'नमस्ते! समान्तर अनुक्रम (AP: tₙ = a + (n-1)d) र गुणोत्तर अनुक्रम (GP: tₙ = arⁿ⁻¹) को पद निकाल्ने र तुलना गर्ने अभ्यास गरौं!',
         'Welcome! Explore Arithmetic Progression (AP: tₙ = a + (n-1)d) and Geometric Progression (GP: tₙ = arⁿ⁻¹)!'
       )}
     >
@@ -117,7 +117,7 @@ export const ArithmeticGeometricSequenceLab: React.FC<{
             }`}
           >
             <span>➕</span>
-            <span>{L('१. समान्तर अनुक्रम (AP)', '1. Arithmetic (AP)')}</span>
+            <span>{L('1. Arithmetic sequence (AP)', '1. Arithmetic (AP)')}</span>
           </button>
           <button
             onClick={() => setActiveTab('gp')}
@@ -128,7 +128,7 @@ export const ArithmeticGeometricSequenceLab: React.FC<{
             }`}
           >
             <span>✖️</span>
-            <span>{L('२. गुणोत्तर अनुक्रम (GP)', '2. Geometric (GP)')}</span>
+            <span>{L('2. गुणोत्तर अनुक्रम (GP)', '2. Geometric (GP)')}</span>
           </button>
           <button
             onClick={() => setActiveTab('compare')}
@@ -139,7 +139,7 @@ export const ArithmeticGeometricSequenceLab: React.FC<{
             }`}
           >
             <span>⚖️</span>
-            <span>{L('३. तुलनात्मक अभ्यास', '3. Compare AP & GP')}</span>
+            <span>{L('3. तुलनात्मक अभ्यास', '3. Compare AP & GP')}</span>
           </button>
         </div>
 
@@ -155,7 +155,7 @@ export const ArithmeticGeometricSequenceLab: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'लगातार दुई पदहरू बीचको अन्तर समान (d = tₙ - tₙ₋₁) भएको अनुक्रमलाई समान्तर अनुक्रम भनिन्छ। सामान्य पद: tₙ = a + (n - १)d।',
+                  'लगातार दुई पदहरू बीचको अन्तर समान (d = tₙ - tₙ₋₁) भएको अनुक्रमलाई समान्तर अनुक्रम भनिन्छ। सामान्य पद: tₙ = a + (n - 1)d।',
                   'A sequence with a constant difference between consecutive terms is an Arithmetic Sequence. General term: tₙ = a + (n - 1)d.'
                 )}
               </p>
@@ -257,13 +257,13 @@ export const ArithmeticGeometricSequenceLab: React.FC<{
                 {/* Formula Breakdown Card */}
                 <div className="p-4 bg-blue-50 dark:bg-blue-950/30 rounded-2xl border border-blue-200 dark:border-blue-800 space-y-2 text-sm">
                   <div className="font-bold text-blue-900 dark:text-blue-200">
-                    {L('AP सामान्य पदको सूत्र: tₙ = a + (n - १)d', 'General Term Formula: tₙ = a + (n - 1)d')}
+                    {L('AP सामान्य पदको सूत्र: tₙ = a + (n - 1)d', 'General Term Formula: tₙ = a + (n - 1)d')}
                   </div>
                   <div className="text-xs text-gray-700 dark:text-gray-300 font-mono space-y-1">
                     <div>t₁ = {apFirstTerm}</div>
-                    <div>t₂ = {apFirstTerm} + (२ - १) × {apDiff} = {apFirstTerm + apDiff}</div>
-                    <div>t₃ = {apFirstTerm} + (३ - १) × {apDiff} = {apFirstTerm + 2 * apDiff}</div>
-                    <div>t₄ = {apFirstTerm} + (४ - १) × {apDiff} = {apFirstTerm + 3 * apDiff}</div>
+                    <div>t₂ = {apFirstTerm} + (2 - 1) × {apDiff} = {apFirstTerm + apDiff}</div>
+                    <div>t₃ = {apFirstTerm} + (3 - 1) × {apDiff} = {apFirstTerm + 2 * apDiff}</div>
+                    <div>t₄ = {apFirstTerm} + (4 - 1) × {apDiff} = {apFirstTerm + 3 * apDiff}</div>
                   </div>
                 </div>
               </div>
@@ -383,13 +383,13 @@ export const ArithmeticGeometricSequenceLab: React.FC<{
             <div className="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow border border-blue-200 dark:border-blue-800 space-y-3 text-sm">
               <h3 className="font-bold text-blue-900 dark:text-blue-300 text-base border-b pb-2 flex items-center gap-2">
                 <span>➕</span>
-                <span>{L('समान्तर अनुक्रम (AP)', 'Arithmetic Progression')}</span>
+                <span>{L('Arithmetic sequence (AP)', 'Arithmetic Progression')}</span>
               </h3>
               <ul className="space-y-2 text-xs text-gray-700 dark:text-gray-300">
                 <li>• <strong>{L('परिभाषा:', 'Definition:')}</strong> {L('लगातार दुई पदहरू बीचको अन्तर सधैं समान हुन्छ।', 'Constant difference between terms.')}</li>
                 <li>• <strong>{L('साझा अन्तर:', 'Difference:')}</strong> d = t₂ - t₁ = t₃ - t₂</li>
-                <li>• <strong>{L('सामान्य पद:', 'General Term:')}</strong> tₙ = a + (n - १)d</li>
-                <li>• <strong>{L('उदाहरण:', 'Example:')}</strong> ५, १०, १५, २०, २५, ... (d = ५)</li>
+                <li>• <strong>{L('सामान्य पद:', 'General Term:')}</strong> tₙ = a + (n - 1)d</li>
+                <li>• <strong>{L('उदाहरण:', 'Example:')}</strong> 5, 10, 15, 20, 25, ... (d = 5)</li>
               </ul>
             </div>
 
@@ -402,7 +402,7 @@ export const ArithmeticGeometricSequenceLab: React.FC<{
                 <li>• <strong>{L('परिभाषा:', 'Definition:')}</strong> {L('लगातार दुई पदहरू बीचको अनुपात सधैं समान हुन्छ।', 'Constant ratio between terms.')}</li>
                 <li>• <strong>{L('साझा अनुपात:', 'Ratio:')}</strong> r = t₂ / t₁ = t₃ / t₂</li>
                 <li>• <strong>{L('सामान्य पद:', 'General Term:')}</strong> tₙ = a × rⁿ⁻¹</li>
-                <li>• <strong>{L('उदाहरण:', 'Example:')}</strong> ३, ६, १२, २४, ४८, ... (r = २)</li>
+                <li>• <strong>{L('उदाहरण:', 'Example:')}</strong> 3, 6, 12, 24, 48, ... (r = 2)</li>
               </ul>
             </div>
           </div>

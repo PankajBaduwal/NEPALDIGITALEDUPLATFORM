@@ -10,21 +10,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दुई समानान्तर रेखाहरूलाई एक छेदकले काट्दा एकान्तर कोण (Alternate angles) चिन्न कुन अक्षरको आकार सहयोगी हुन्छ?',
     en: 'When two parallel lines are cut by a transversal, which letter shape helps identify alternate angles?',
     options: [
-      { key: 'A', label: 'अक्षर "F"' },
-      { key: 'B', label: 'अक्षर "Z"' },
-      { key: 'C', label: 'अक्षर "C"' },
-      { key: 'D', label: 'अक्षर "X"' }
+      { key: 'A', label: 'Letter "F"' },
+      { key: 'B', label: 'Letter "Z"' },
+      { key: 'C', label: 'Letter "C"' },
+      { key: 'D', label: 'Letter "X"' }
     ],
     answer: 'B'
   },
   {
-    np: 'यदि दुई समानान्तर रेखाभित्रका एकैतिरका क्रमागत भित्री कोण (Co-interior angles) x र ११०° भए x को मान कति हुन्छ?',
+    np: 'यदि दुई समानान्तर रेखाभित्रका एकैतिरका क्रमागत भित्री कोण (Co-interior angles) x र 110° भए x को मान कति हुन्छ?',
     en: 'If one pair of co-interior angles is x and 110°, what is the value of x if lines are parallel?',
     options: [
-      { key: 'A', label: '११०°' },
-      { key: 'B', label: '७०°' },
-      { key: 'C', label: '९०°' },
-      { key: 'D', label: '२०°' }
+      { key: 'A', label: '110°' },
+      { key: 'B', label: '70°' },
+      { key: 'C', label: '90°' },
+      { key: 'D', label: '20°' }
     ],
     answer: 'B'
   },
@@ -32,10 +32,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समानान्तर रेखामा संगत कोणहरू (Corresponding angles) कुन अक्षर आकारमा बन्दछन्?',
     en: 'Corresponding angles on parallel lines form which characteristic letter shape?',
     options: [
-      { key: 'A', label: 'अक्षर "Z"' },
-      { key: 'B', label: 'अक्षर "F"' },
-      { key: 'C', label: 'अक्षर "C"' },
-      { key: 'D', label: 'अक्षर "V"' }
+      { key: 'A', label: 'Letter "Z"' },
+      { key: 'B', label: 'Letter "F"' },
+      { key: 'C', label: 'Letter "C"' },
+      { key: 'D', label: 'Letter "V"' }
     ],
     answer: 'B'
   }
@@ -118,7 +118,7 @@ export const LinesAnglesTransversalExplorer: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! दुई समानान्तर रेखाहरूलाई छेदक (Transversal) ले काट्दा बन्ने ८ वटा कोणहरू र तिनका सम्बन्धहरू पत्ता लगाउनुहोस्!',
+        'नमस्ते! दुई समानान्तर रेखाहरूलाई छेदक (Transversal) ले काट्दा बन्ने 8 pcs कोणहरू र तिनका सम्बन्धहरू पत्ता लगाउनुहोस्!',
         'Hello! Explore the 8 angles formed when a transversal intersects two parallel lines and discover their geometric relationships!'
       )}
     >
@@ -363,7 +363,7 @@ export const LinesAnglesTransversalExplorer: React.FC<{
               </div>
               <p className="text-sm text-slate-300 mt-2">
                 {L(
-                  'समानान्तर रेखाहरूको बीचमा र छेदकको एकैतिर पर्ने कोणहरू क्रमागत भित्री कोण हुन्। यिनको जोड सधैं १८०° (परिपूरक/Supplementary) हुन्छ।',
+                  'समानान्तर रेखाहरूको बीचमा र छेदकको एकैतिर पर्ने कोणहरू क्रमागत भित्री कोण हुन्। यिनको जोड सधैं 180° (परिपूरक/Supplementary) हुन्छ।',
                   'Consecutive interior angles lie between the parallel lines on the same side of the transversal. Their sum is always 180° (supplementary).'
                 )}
               </p>
@@ -400,7 +400,7 @@ export const LinesAnglesTransversalExplorer: React.FC<{
               </div>
               <p className="text-sm text-slate-300 mt-2">
                 {L(
-                  'एउटै सरल रेखामा एउटा साझा भुजा भई बन्ने दुई कोणहरूको जोड १८०° हुन्छ (एक सरल कोण)।',
+                  'एउटै सरल रेखामा एउटा साझा भुजा भई बन्ने दुई कोणहरूको जोड 180° हुन्छ (एक सरल कोण)।',
                   'Two adjacent angles that form a straight line add up to 180°.'
                 )}
               </p>

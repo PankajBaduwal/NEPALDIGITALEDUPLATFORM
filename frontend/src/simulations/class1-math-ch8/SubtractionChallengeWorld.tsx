@@ -1,7 +1,7 @@
 /**
  * SubtractionChallengeWorld.tsx
- * Simulation 05: Subtraction Challenge World (घटाउ चुनौती संसार)
- * Class 1 Mathematics - Chapter 8: Subtraction up to 10 (१० सम्मका सङ्ख्याहरूको घटाउ)
+ * Simulation 05: Subtraction Challenge World
+ * Class 1 Mathematics - Chapter 8: Subtraction up to 10
  * Nepal Digital Education Platform
  */
 
@@ -29,7 +29,7 @@ interface Props {
   userRole?: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
 interface VillageStation {
   id: string;
@@ -58,11 +58,11 @@ const VILLAGE_STATIONS: VillageStation[] = [
     itemEmoji: '🍎',
     total: 9,
     takeAway: 4,
-    questionNp: 'पसलमा ९ वटा फलफूल छन्। ४ वटा बिक्री भएपछि कति बाँकी रहन्छन्?',
+    questionNp: 'पसलमा 9 वटा फलफूल छन्। 4 वटा बिक्री भएपछि कति बाँकी रहन्छन्?',
     questionEn: 'There are 9 fruits in the shop. 4 are sold. How many remain?',
     options: [4, 5, 6],
     correctAnswer: 5,
-    explanationNp: '९ − ४ = ५ हुन्छ।',
+    explanationNp: '9 − 4 = 5 हुन्छ।',
     explanationEn: '9 − 4 = 5.',
   },
   {
@@ -74,11 +74,11 @@ const VILLAGE_STATIONS: VillageStation[] = [
     itemEmoji: '🐦',
     total: 7,
     takeAway: 3,
-    questionNp: 'रुखमा ७ वटा चरा थिए। ३ वटा चरा उडेर गए। कति चरा बाँकी छन्?',
+    questionNp: 'रुखमा 7 वटा चरा थिए। 3 वटा चरा उडेर गए। कति चरा बाँकी छन्?',
     questionEn: 'There were 7 birds on the tree. 3 flew away. How many remain?',
     options: [3, 4, 5],
     correctAnswer: 4,
-    explanationNp: '७ − ३ = ४ हुन्छ।',
+    explanationNp: '7 − 3 = 4 हुन्छ।',
     explanationEn: '7 − 3 = 4.',
   },
   {
@@ -90,11 +90,11 @@ const VILLAGE_STATIONS: VillageStation[] = [
     itemEmoji: '🧸',
     total: 9,
     takeAway: 5,
-    questionNp: 'ठाडो घटाउ गर्नुहोस्: ९ बाट ५ घटाउँदा कति हुन्छ?',
+    questionNp: 'ठाडो घटाउ गर्नुहोस्: 9 बाट 5 घटाउँदा कति हुन्छ?',
     questionEn: 'Perform vertical subtraction: 9 minus 5 = ?',
     options: [3, 4, 5],
     correctAnswer: 4,
-    explanationNp: '९ − ५ = ४ हुन्छ।',
+    explanationNp: '9 − 5 = 4 हुन्छ।',
     explanationEn: '9 − 5 = 4.',
   },
   {
@@ -106,11 +106,11 @@ const VILLAGE_STATIONS: VillageStation[] = [
     itemEmoji: '🌸',
     total: 8,
     takeAway: 0,
-    questionNp: 'फूलबारीमा ८ वटा फूल छन्। शून्य (०) फूल टिप्दा कति बाँकी रहन्छन्?',
+    questionNp: 'फूलबारीमा 8 वटा फूल छन्। शून्य (0) फूल टिप्दा कति बाँकी रहन्छन्?',
     questionEn: 'There are 8 flowers. Taking away 0 leaves how many flowers?',
     options: [0, 7, 8],
     correctAnswer: 8,
-    explanationNp: 'शून्य घटाउँदा सङ्ख्या उही रहन्छ: ८ − ० = ८।',
+    explanationNp: 'शून्य घटाउँदा सङ्ख्या उही रहन्छ: 8 − 0 = 8।',
     explanationEn: 'Subtracting zero leaves the count unchanged: 8 − 0 = 8.',
   },
   {
@@ -122,11 +122,11 @@ const VILLAGE_STATIONS: VillageStation[] = [
     itemEmoji: '⭐',
     total: 7,
     takeAway: 3,
-    questionNp: 'खाली ठाउँ भर्नुहोस्: ७ − [ ? ] = ४',
+    questionNp: 'खाली ठाउँ भर्नुहोस्: 7 − [ ? ] = 4',
     questionEn: 'Find the missing number: 7 − [ ? ] = 4',
     options: [2, 3, 4],
     correctAnswer: 3,
-    explanationNp: '७ बाट ३ घटाउँदा ४ हुन्छ।',
+    explanationNp: '7 बाट 3 घटाउँदा 4 हुन्छ।',
     explanationEn: '7 minus 3 equals 4.',
   },
 ];
@@ -135,7 +135,7 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active station index
@@ -293,15 +293,7 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              setLanguage((l) => (l === 'np' ? 'en' : 'np'));
-              playSound('click');
-            }}
-            className="px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition"
-          >
-            {language === 'np' ? 'EN' : 'नेपाली'}
-          </button>
+          
           <button
             onClick={() => setSoundEnabled((s) => !s)}
             className={`p-2 rounded-lg border transition ${
@@ -344,7 +336,7 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center">
               <span className="text-xs font-bold text-amber-700 uppercase tracking-wider block mb-1">
                 {language === 'np'
-                  ? `केन्द्र ${NEP_DIGITS[activeStationIdx + 1]} / ५: ${currentStation.nameNp}`
+                  ? `केन्द्र ${NEP_DIGITS[activeStationIdx + 1]} / 5: ${currentStation.nameNp}`
                   : `Station ${activeStationIdx + 1} of 5: ${currentStation.nameEn}`}
               </span>
               <h2 className="text-base md:text-lg font-bold text-slate-900">
@@ -464,7 +456,7 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
             </h2>
             <p className="text-xs text-slate-500">
               {language === 'np'
-                ? 'तपाईंले कक्षा १ को १० सम्मका सङ्ख्याहरूको घटाउ सम्बन्धी सबै अभ्यासहरू पूरा गर्नुभयो।'
+                ? 'तपाईंले कक्षा 1 को 10 सम्मका सङ्ख्याहरूको घटाउ सम्बन्धी सबै अभ्यासहरू पूरा गर्नुभयो।'
                 : 'You mastered all subtraction concepts up to 10 in Class 1 Mathematics.'}
             </p>
             <div className="w-full bg-white border border-slate-200 rounded-2xl p-4 flex justify-around">
@@ -472,7 +464,7 @@ export const SubtractionChallengeWorld: React.FC<Props> = ({
                 <span className="text-xs text-slate-500 block">
                   {language === 'np' ? 'केन्द्रहरू' : 'Stations'}
                 </span>
-                <span className="text-xl font-bold text-slate-900">५ / 5</span>
+                <span className="text-xl font-bold text-slate-900">5 / 5</span>
               </div>
               <div className="w-px bg-slate-100" />
               <div>

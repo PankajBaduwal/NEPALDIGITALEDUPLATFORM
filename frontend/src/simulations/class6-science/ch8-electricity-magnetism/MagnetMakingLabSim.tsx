@@ -1,7 +1,7 @@
 /**
  * MagnetMakingLabSim.tsx
- * Simulation 27: 2D Magnet Making Laboratory (चुम्बक निर्माण प्रयोगशाला)
- * Grade 6 Science • Unit 8: Electricity and Magnetism (विद्युत र चुम्बकत्व)
+ * Simulation 27: 2D Magnet Making Laboratory
+ * Grade 6 Science • Unit 8: Electricity and Magnetism
  *
  * 100% Native HTML5 Canvas 2D Interactive Magnetization Studio.
  * Features:
@@ -22,7 +22,7 @@ export const MagnetMakingLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -287,7 +287,7 @@ export const MagnetMakingLabSim: React.FC<BaseSimulationProps> = ({
       titleNepali="चुम्बक निर्माण प्रयोगशाला (एकल स्पर्श विधि र डोमेन)"
       chapterNumber={8}
       chapterTitle="Unit 8: Electricity and Magnetism"
-      chapterTitleNepali="एकाइ ८: विद्युत र चुम्बकत्व"
+      chapterTitleNepali="एकाइ 8: विद्युत र चुम्बकत्व"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -458,7 +458,7 @@ export const MagnetMakingLabSim: React.FC<BaseSimulationProps> = ({
             }}
           >
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#fbbf24', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. एकल स्पर्श विधि (Single Touch Method)' : '1. Single Touch Stroking'}
+              {lang === 'ne' ? '1. एकल स्पर्श विधि (Single Touch Method)' : '1. Single Touch Stroking'}
             </div>
             <button
               onClick={handleStroke}
@@ -498,7 +498,7 @@ export const MagnetMakingLabSim: React.FC<BaseSimulationProps> = ({
             }}
           >
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#f87171', marginBottom: '8px' }}>
-              {lang === 'ne' ? '२. विचुम्बकन विधि (Demagnetize)' : '2. Demagnetization Methods'}
+              {lang === 'ne' ? '2. विचुम्बकन विधि (Demagnetize)' : '2. Demagnetization Methods'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '6px' }}>
               <button

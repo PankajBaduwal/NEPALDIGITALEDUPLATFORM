@@ -1,7 +1,7 @@
 /**
  * PotentialKineticEnergySim.tsx
- * Simulation 19: 2D Potential & Kinetic Energy Conservation (स्थिति र गति शक्ति)
- * Grade 6 Science • Unit 7: Energy in Daily Life (दैनिक जीवनमा शक्ति)
+ * Simulation 19: 2D Potential & Kinetic Energy Conservation
+ * Grade 6 Science • Unit 7: Energy in Daily Life
  *
  * 100% Native HTML5 Canvas 2D Interactive Energy Conservation Physics.
  * Features:
@@ -23,7 +23,7 @@ export const PotentialKineticEnergySim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -214,7 +214,7 @@ export const PotentialKineticEnergySim: React.FC<BaseSimulationProps> = ({
       const pePercent = totalEnergy > 0 ? currentPE / totalEnergy : 0;
       ctx.fillStyle = '#38bdf8';
       ctx.font = 'bold 11px sans-serif';
-      ctx.fillText(lang === 'ne' ? `स्थिति शक्ति (PE = mgh): ${currentPE} J` : `Potential (PE): ${currentPE} J`, hudX + 16, hudY + 105);
+      ctx.fillText(lang === 'ne' ? `Potential energy (PE = mgh): ${currentPE} J` : `Potential (PE): ${currentPE} J`, hudX + 16, hudY + 105);
 
       ctx.fillStyle = '#1e293b';
       ctx.beginPath();
@@ -229,7 +229,7 @@ export const PotentialKineticEnergySim: React.FC<BaseSimulationProps> = ({
       const kePercent = totalEnergy > 0 ? currentKE / totalEnergy : 0;
       ctx.fillStyle = '#10b981';
       ctx.font = 'bold 11px sans-serif';
-      ctx.fillText(lang === 'ne' ? `गति शक्ति (KE = ½mv²): ${currentKE} J` : `Kinetic (KE): ${currentKE} J`, hudX + 16, hudY + 165);
+      ctx.fillText(lang === 'ne' ? `Kinetic energy (KE = ½mv²): ${currentKE} J` : `Kinetic (KE): ${currentKE} J`, hudX + 16, hudY + 165);
 
       ctx.fillStyle = '#1e293b';
       ctx.beginPath();
@@ -270,7 +270,7 @@ export const PotentialKineticEnergySim: React.FC<BaseSimulationProps> = ({
         hudY + 330
       );
       ctx.fillStyle = '#a7f3d0';
-      ctx.fillText('PE + KE = Constant (अपरिवर्तनीय)', hudX + 16, hudY + 355);
+      ctx.fillText('PE + KE = Constant', hudX + 16, hudY + 355);
 
       animId = requestAnimationFrame(render);
     };
@@ -285,7 +285,7 @@ export const PotentialKineticEnergySim: React.FC<BaseSimulationProps> = ({
       titleNepali="स्थिति तथा गति शक्ति संरक्षण प्रयोगशाला"
       chapterNumber={7}
       chapterTitle="Unit 7: Energy in Daily Life"
-      chapterTitleNepali="एकाइ ७: दैनिक जीवनमा शक्ति"
+      chapterTitleNepali="एकाइ 7: दैनिक जीवनमा शक्ति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -532,15 +532,15 @@ export const PotentialKineticEnergySim: React.FC<BaseSimulationProps> = ({
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '11px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#fbbf24', fontWeight: 600 }}>स्थिति शक्ति (PE = mgh):</span>
+                <span style={{ color: '#fbbf24', fontWeight: 600 }}>Potential energy (PE = mgh):</span>
                 <span style={{ fontFamily: 'monospace', color: '#fbbf24' }}>{massKg}×9.8×{releaseHeightM} J</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#34d399', fontWeight: 600 }}>गति शक्ति (KE = ½mv²):</span>
+                <span style={{ color: '#34d399', fontWeight: 600 }}>Kinetic energy (KE = ½mv²):</span>
                 <span style={{ fontFamily: 'monospace', color: '#34d399' }}>0 at top ➔ Max at bottom</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '4px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-                <span style={{ color: '#0f172a', fontWeight: 700 }}>कुल शक्ति (Total E):</span>
+                <span style={{ color: '#0f172a', fontWeight: 700 }}>Total energy (E):</span>
                 <span style={{ fontFamily: 'monospace', color: '#0f172a', fontWeight: 700 }}>{(massKg * 9.8 * releaseHeightM).toFixed(1)} J</span>
               </div>
             </div>

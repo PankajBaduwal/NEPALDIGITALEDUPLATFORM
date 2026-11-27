@@ -6,13 +6,13 @@ import { ShoppingCart, Percent, TrendingUp, Building, ArrowRight, RotateCcw } fr
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'अङ्कित मूल्य रु १०,००० भएको सामानमा २०% छुट दिएपछि १३% भ्याट जोड्दा ग्राहकले तिर्नुपर्ने अन्तिम मूल्य कति हुन्छ?',
+    np: 'अङ्कित मूल्य Rs 10,000 भएको सामानमा 20% छुट दिएपछि 13% भ्याट जोड्दा ग्राहकले तिर्नुपर्ने अन्तिम मूल्य कति हुन्छ?',
     en: 'If a goods marked Rs 10,000 has 20% discount and 13% VAT is added, what is the final price paid by customer?',
     options: [
-      { key: 'A', label: 'रु ९,०४० — छुट पछिको रु ८,००० मा १३% भ्याट (१०४०) जोड्दा ९,०४०' },
-      { key: 'B', label: 'रु ९,३००' },
-      { key: 'C', label: 'रु ८,०००' },
-      { key: 'D', label: 'रु १०,०४०' },
+      { key: 'A', label: 'Rs 9,040 — adding 13% VAT (1040) to Rs 8,000 after discount gives 9,040' },
+      { key: 'B', label: 'Rs 9,300' },
+      { key: 'C', label: 'Rs 8,000' },
+      { key: 'D', label: 'Rs 10,040' },
     ],
     answer: 'A',
   },
@@ -20,32 +20,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'मूल्य अभिवृद्धि कर (VAT) सधैं कुन मूल्यमा गणना गरिन्छ?',
     en: 'On which price is Value Added Tax (VAT) always calculated?',
     options: [
-      { key: 'A', label: 'छुट पछिको वास्तविक बिक्री मूल्य (SP after discount)' },
-      { key: 'B', label: 'अङ्कित मूल्य (Marked Price)' },
-      { key: 'C', label: 'छुट रकममा मात्र' },
-      { key: 'D', label: 'नाफा रकममा मात्र' },
+      { key: 'A', label: 'Actual selling price after discount (SP after discount)' },
+      { key: 'B', label: 'Marked price' },
+      { key: 'C', label: 'On the discount amount only' },
+      { key: 'D', label: 'On the profit amount only' },
     ],
     answer: 'A',
   },
   {
-    np: 'बहु-चरणे व्यापारमा कुनै व्यापारीले सरकारलाई दाखिला गर्ने वास्तविक भ्याट कति हुन्छ?',
+    np: 'बहु-चरणे व्यापारमा कुनै व्यापारीले Paid to the government गर्ने वास्तविक भ्याट कति हुन्छ?',
     en: 'In multi-stage trading, how much net VAT does a trader deposit to the government?',
     options: [
-      { key: 'A', label: 'बिक्री गर्दा उठाएको भ्याट − किन्दा तिरेको भ्याट (Output VAT − Input VAT)' },
-      { key: 'B', label: 'उठाएको सम्पूर्ण भ्याट' },
-      { key: 'C', label: 'किन्दा तिरेको भ्याट मात्र' },
-      { key: 'D', label: 'नाफाको १३%' },
+      { key: 'A', label: 'VAT collected on sale − VAT paid on purchase (output VAT − input VAT)' },
+      { key: 'B', label: 'All the VAT collected' },
+      { key: 'C', label: 'Only the VAT paid on purchase' },
+      { key: 'D', label: '13% of the profit' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि १३% भ्याटसहितको मूल्य रु ५,६५० भए, भ्याट अघिको मूल्य कति थियो?',
+    np: 'यदि 13% भ्याटसहितको मूल्य Rs 5,650 भए, भ्याट अघिको मूल्य कति थियो?',
     en: 'If price with 13% VAT is Rs 5,650, what was the price before VAT?',
     options: [
-      { key: 'A', label: 'रु ५,००० — (५६५० ÷ १.१३ = ५०००)' },
-      { key: 'B', label: 'रु ४,९००' },
-      { key: 'C', label: 'रु ५,२००' },
-      { key: 'D', label: 'रु ५,५००' },
+      { key: 'A', label: 'Rs 5,000 — (5650 ÷ 1.13 = 5000)' },
+      { key: 'B', label: 'Rs 4,900' },
+      { key: 'C', label: 'Rs 5,200' },
+      { key: 'D', label: 'Rs 5,500' },
     ],
     answer: 'A',
   },
@@ -60,11 +60,11 @@ interface ProductItem {
 }
 
 const PRODUCTS: ProductItem[] = [
-  { id: 'mobile', nameNp: 'स्मार्टफोन (Smartphone)', nameEn: 'Smartphone', icon: '📱', defaultMp: 20000 },
-  { id: 'fridge', nameNp: 'रेफ्रिजरेटर (Refrigerator)', nameEn: 'Refrigerator', icon: '🧊', defaultMp: 45000 },
-  { id: 'cycle', nameNp: 'साइकल (Bicycle)', nameEn: 'Bicycle', icon: '🚲', defaultMp: 12000 },
-  { id: 'watch', nameNp: 'घडी (Watch)', nameEn: 'Watch', icon: '⌚', defaultMp: 6000 },
-  { id: 'tv', nameNp: 'टेलिभिजन (Smart TV)', nameEn: 'Smart TV', icon: '📺', defaultMp: 50000 },
+  { id: 'mobile', nameNp: 'Smartphone', nameEn: 'Smartphone', icon: '📱', defaultMp: 20000 },
+  { id: 'fridge', nameNp: 'Refrigerator (Refrigerator)', nameEn: 'Refrigerator', icon: '🧊', defaultMp: 45000 },
+  { id: 'cycle', nameNp: 'Bicycle (Bicycle)', nameEn: 'Bicycle', icon: '🚲', defaultMp: 12000 },
+  { id: 'watch', nameNp: 'Watch (Watch)', nameEn: 'Watch', icon: '⌚', defaultMp: 6000 },
+  { id: 'tv', nameNp: 'Television (Smart TV)', nameEn: 'Smart TV', icon: '📺', defaultMp: 50000 },
 ];
 
 export const VatDiscountSellingPriceLab: React.FC<{
@@ -74,7 +74,7 @@ export const VatDiscountSellingPriceLab: React.FC<{
   const kit = useSimKit({
     code: 'SIM-MATH-G9-U2-02',
     chapter: 2,
-    titleNp: 'भ्याट, छुट र बिक्री मूल्य प्रयोगशाला',
+    titleNp: 'भ्याट, छुट र Selling price प्रयोगशाला',
     titleEn: 'VAT, Discount & Selling Price Lab',
   });
   const isNe = kit.lang === 'ne';
@@ -114,7 +114,7 @@ export const VatDiscountSellingPriceLab: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! अङ्कित मूल्य, छुट, करयोग्य मूल्य र १३% मूल्य अभिवृद्धि कर (VAT) को चरणबद्ध हिसाब प्रयोगशालामा स्वागत छ!',
+        'नमस्ते! अङ्कित मूल्य, छुट, करयोग्य मूल्य र 13% मूल्य अभिवृद्धि कर (VAT) को चरणबद्ध हिसाब प्रयोगशालामा स्वागत छ!',
         'Welcome! Explore Marked Price, Discount, Taxable Amount, and 13% Value Added Tax (VAT) step by step!'
       )}
     >
@@ -127,7 +127,7 @@ export const VatDiscountSellingPriceLab: React.FC<{
               activeTab === 'shop' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🛒 {L('१. भर्चुअल सपिङ प्रयोगशाला (Shopping Lab)', '1. Shopping Lab')}
+            🛒 {L('1. भर्चुअल सपिङ प्रयोगशाला (Shopping Lab)', '1. Shopping Lab')}
           </button>
           <button
             onClick={() => setActiveTab('chain')}
@@ -135,7 +135,7 @@ export const VatDiscountSellingPriceLab: React.FC<{
               activeTab === 'chain' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🏭 {L('२. बहु-चरणे भ्याट वितरण (Supply Chain VAT)', '2. Supply Chain VAT')}
+            🏭 {L('2. बहु-चरणे भ्याट वितरण (Supply Chain VAT)', '2. Supply Chain VAT')}
           </button>
           <button
             onClick={() => setActiveTab('reverse')}
@@ -143,7 +143,7 @@ export const VatDiscountSellingPriceLab: React.FC<{
               activeTab === 'reverse' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🔄 {L('३. उल्टो हिसाब क्यालकुलेटर (Reverse Calculator)', '3. Reverse Calculator')}
+            🔄 {L('3. उल्टो हिसाब क्यालकुलेटर (Reverse Calculator)', '3. Reverse Calculator')}
           </button>
         </div>
 
@@ -181,9 +181,9 @@ export const VatDiscountSellingPriceLab: React.FC<{
               {/* Marked Price Slider */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>अङ्कित मूल्य (Marked Price MP):</span>
+                  <span>Marked price (MP):</span>
                   <span className="font-mono text-indigo-700 text-sm">
-                    रु. {markedPrice.toLocaleString()}
+                    Rs. {markedPrice.toLocaleString()}
                   </span>
                 </div>
                 <input
@@ -200,7 +200,7 @@ export const VatDiscountSellingPriceLab: React.FC<{
               {/* Discount Slider */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>छुट प्रतिशत (Discount %):</span>
+                  <span>Discount %:</span>
                   <span className="font-mono text-emerald-700 text-sm">{discountPct}%</span>
                 </div>
                 <input
@@ -217,8 +217,8 @@ export const VatDiscountSellingPriceLab: React.FC<{
               {/* VAT Slider */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>मूल्य अभिवृद्धि कर (VAT %):</span>
-                  <span className="font-mono text-amber-700 text-sm">{vatPct}% (मानक १३%)</span>
+                  <span>Value added tax (VAT %):</span>
+                  <span className="font-mono text-amber-700 text-sm">{vatPct}%</span>
                 </div>
                 <input
                   type="range"
@@ -236,45 +236,45 @@ export const VatDiscountSellingPriceLab: React.FC<{
             <div className="lg:col-span-6 space-y-4">
               <div className="bg-slate-900 text-white rounded-2xl p-5 shadow-xl border border-slate-800 space-y-3 font-mono">
                 <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-                  <span className="text-xs uppercase text-slate-400 font-bold">खरिद बिल (Bill Receipt)</span>
+                  <span className="text-xs uppercase text-slate-400 font-bold">Purchase bill (receipt)</span>
                   <span className="text-xs text-amber-400">{selectedProduct.icon} {selectedProduct.nameNp}</span>
                 </div>
 
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-slate-400">१. अङ्कित मूल्य (MP):</span>
-                    <span className="font-bold text-slate-200">रु. {markedPrice.toLocaleString()}</span>
+                    <span className="text-slate-400">1. Marked price (MP):</span>
+                    <span className="font-bold text-slate-200">Rs. {markedPrice.toLocaleString()}</span>
                   </div>
 
                   <div className="flex justify-between text-emerald-400">
-                    <span>२. छुट ({discountPct}%):</span>
-                    <span>− रु. {discountAmount.toLocaleString()}</span>
+                    <span>2. Discount ({discountPct}%):</span>
+                    <span>− Rs. {discountAmount.toLocaleString()}</span>
                   </div>
 
                   <div className="flex justify-between pt-1 border-t border-slate-800 font-bold text-slate-300">
-                    <span>३. छुट पछिको मूल्य (करयोग्य SP):</span>
-                    <span>रु. {priceAfterDiscount.toLocaleString()}</span>
+                    <span>3. Price after discount (taxable SP):</span>
+                    <span>Rs. {priceAfterDiscount.toLocaleString()}</span>
                   </div>
 
                   <div className="flex justify-between text-amber-400">
-                    <span>४. भ्याट रकम ({vatPct}% on SP):</span>
-                    <span>+ रु. {vatAmount.toLocaleString()}</span>
+                    <span>4. VAT amount ({vatPct}% on SP):</span>
+                    <span>+ Rs. {vatAmount.toLocaleString()}</span>
                   </div>
 
                   <div className="flex justify-between pt-2 border-t-2 border-amber-500 font-black text-base text-amber-400">
-                    <span>ग्राहकले तिर्नुपर्ने कुल रकम:</span>
-                    <span>रु. {finalPrice.toLocaleString()}</span>
+                    <span>Total amount payable by the customer:</span>
+                    <span>Rs. {finalPrice.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
 
               {/* Explanatory Formulas */}
               <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-950 space-y-1.5">
-                <span className="font-bold block">💡 गणितीय सूत्रहरू (Formulas):</span>
-                <div>• छुट रकम = MP × D% = {markedPrice} × {discountPct}% = रु. {discountAmount}</div>
-                <div>• छुट पछिको मूल्य (SP) = MP − छुट = रु. {priceAfterDiscount}</div>
-                <div>• भ्याट रकम = SP × VAT% = {priceAfterDiscount} × {vatPct}% = रु. {vatAmount}</div>
-                <div>• भ्याटसहितको मूल्य = SP + VAT = रु. {finalPrice}</div>
+                <span className="font-bold block">💡 Formulas:</span>
+                <div>• Discount amount = MP × D% = {markedPrice} × {discountPct}% = Rs. {discountAmount}</div>
+                <div>• Price after discount (SP) = MP − discount = Rs. {priceAfterDiscount}</div>
+                <div>• VAT amount = SP × VAT% = {priceAfterDiscount} × {vatPct}% = Rs. {vatAmount}</div>
+                <div>• Price including VAT = SP + VAT = Rs. {finalPrice}</div>
               </div>
             </div>
           </div>
@@ -284,7 +284,7 @@ export const VatDiscountSellingPriceLab: React.FC<{
         {activeTab === 'chain' && (
           <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-5">
             <h3 className="font-extrabold text-slate-800 text-sm text-center">
-              बहु-चरणे व्यापारमा भ्याट सङ्कलन (उत्पादक ➜ डिलर ➜ खुद्रा बिक्रेता ➜ उपभोक्ता)
+              VAT collection in multi-stage trade (manufacturer ➜ dealer ➜ retailer ➜ consumer)
             </h3>
 
             {/* Stages Table */}
@@ -292,45 +292,45 @@ export const VatDiscountSellingPriceLab: React.FC<{
               <table className="w-full text-xs text-left border border-slate-200 rounded-xl overflow-hidden">
                 <thead className="bg-slate-100 text-slate-800 font-bold border-b">
                   <tr>
-                    <th className="p-2.5">तह (Stage)</th>
-                    <th className="p-2.5 text-right">खरिद मूल्य</th>
-                    <th className="p-2.5 text-right">नाफा</th>
-                    <th className="p-2.5 text-right">बिक्री मूल्य</th>
-                    <th className="p-2.5 text-right">उठाएको भ्याट (१३%)</th>
-                    <th className="p-2.5 text-right">सरकारलाई दाखिला</th>
+                    <th className="p-2.5">Stage</th>
+                    <th className="p-2.5 text-right">Purchase price</th>
+                    <th className="p-2.5 text-right">Profit</th>
+                    <th className="p-2.5 text-right">Selling price</th>
+                    <th className="p-2.5 text-right">VAT collected (13%)</th>
+                    <th className="p-2.5 text-right">Paid to the government</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 font-mono">
                   <tr>
-                    <td className="p-2.5 font-bold">१. उत्पादक (Manufacturer)</td>
+                    <td className="p-2.5 font-bold">1. Manufacturer</td>
                     <td className="p-2.5 text-right text-slate-400">—</td>
                     <td className="p-2.5 text-right">—</td>
-                    <td className="p-2.5 text-right font-bold text-slate-800">रु. १०,०००</td>
-                    <td className="p-2.5 text-right text-amber-700">रु. १,३००</td>
-                    <td className="p-2.5 text-right font-bold text-emerald-700">रु. १,३००</td>
+                    <td className="p-2.5 text-right font-bold text-slate-800">Rs. 10,000</td>
+                    <td className="p-2.5 text-right text-amber-700">Rs. 1,300</td>
+                    <td className="p-2.5 text-right font-bold text-emerald-700">Rs. 1,300</td>
                   </tr>
                   <tr>
-                    <td className="p-2.5 font-bold">२. डिलर (Dealer)</td>
-                    <td className="p-2.5 text-right">रु. १०,०००</td>
-                    <td className="p-2.5 text-right">+ रु. २,०००</td>
-                    <td className="p-2.5 text-right font-bold text-slate-800">रु. १२,०००</td>
-                    <td className="p-2.5 text-right text-amber-700">रु. १,५६०</td>
-                    <td className="p-2.5 text-right font-bold text-emerald-700">रु. २६० (१५६०−१३००)</td>
+                    <td className="p-2.5 font-bold">2. Dealer</td>
+                    <td className="p-2.5 text-right">Rs. 10,000</td>
+                    <td className="p-2.5 text-right">+ Rs. 2,000</td>
+                    <td className="p-2.5 text-right font-bold text-slate-800">Rs. 12,000</td>
+                    <td className="p-2.5 text-right text-amber-700">Rs. 1,560</td>
+                    <td className="p-2.5 text-right font-bold text-emerald-700">Rs. 260 (1560−1300)</td>
                   </tr>
                   <tr>
-                    <td className="p-2.5 font-bold">३. खुद्रा बिक्रेता (Retailer)</td>
-                    <td className="p-2.5 text-right">रु. १२,०००</td>
-                    <td className="p-2.5 text-right">+ रु. ३,०००</td>
-                    <td className="p-2.5 text-right font-bold text-slate-800">रु. १५,०००</td>
-                    <td className="p-2.5 text-right text-amber-700">रु. १,९५०</td>
-                    <td className="p-2.5 text-right font-bold text-emerald-700">रु. ३९० (१९५०−१५६०)</td>
+                    <td className="p-2.5 font-bold">3. Retailer</td>
+                    <td className="p-2.5 text-right">Rs. 12,000</td>
+                    <td className="p-2.5 text-right">+ Rs. 3,000</td>
+                    <td className="p-2.5 text-right font-bold text-slate-800">Rs. 15,000</td>
+                    <td className="p-2.5 text-right text-amber-700">Rs. 1,950</td>
+                    <td className="p-2.5 text-right font-bold text-emerald-700">Rs. 390 (1950−1560)</td>
                   </tr>
                 </tbody>
                 <tfoot className="bg-amber-50 font-bold text-amber-950 border-t-2 border-amber-300">
                   <tr>
-                    <td colSpan={4} className="p-2.5 text-right">सरकारले प्राप्त गरेको कुल भ्याट:</td>
+                    <td colSpan={4} className="p-2.5 text-right">Total VAT received by the government:</td>
                     <td colSpan={2} className="p-2.5 text-right font-mono text-base text-amber-800">
-                      रु. १,९५० (१३०० + २६० + ३९०)
+                      Rs. 1,950 (1300 + 260 + 390)
                     </td>
                   </tr>
                 </tfoot>
@@ -338,7 +338,7 @@ export const VatDiscountSellingPriceLab: React.FC<{
             </div>
 
             <p className="text-xs text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200">
-              💡 <b>महत्त्वपूर्ण निष्कर्ष:</b> प्रत्येक तहमा व्यापारीले केवल आफ्नो मूल्य अभिवृद्धि (नाफा) मा मात्र भ्याट दाखिला गर्दछन्, र कुल सङ्कलन उपभोक्ताले तिरेको अन्तिम भ्याट (रु. १५,००० को १३% = रु. १,९५०) सँग बराबर हुन्छ।
+              💡 <b>Important conclusion:</b> At each stage the trader pays VAT only on their own value added (profit), and the total collected equals the final VAT paid by the consumer (13% of Rs. 15,000 = Rs. 1,950).
             </p>
           </div>
         )}
@@ -347,12 +347,12 @@ export const VatDiscountSellingPriceLab: React.FC<{
         {activeTab === 'reverse' && (
           <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-5">
             <h3 className="font-extrabold text-slate-800 text-sm text-center">
-              अन्तिम भ्याटसहितको मूल्यबाट अङ्कित मूल्य (MP) पत्ता लगाउने उल्टो हिसाब
+              Reverse calculation: finding the marked price (MP) from the final price including VAT
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">अन्तिम मूल्य (रु):</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Final price (Rs):</label>
                 <input
                   type="number"
                   value={revFinalPrice}
@@ -362,7 +362,7 @@ export const VatDiscountSellingPriceLab: React.FC<{
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">भ्याट प्रतिशत (%):</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">VAT percentage (%):</label>
                 <input
                   type="number"
                   value={revVatPct}
@@ -372,7 +372,7 @@ export const VatDiscountSellingPriceLab: React.FC<{
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">छुट प्रतिशत (%):</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Discount percentage (%):</label>
                 <input
                   type="number"
                   value={revDiscountPct}
@@ -385,21 +385,21 @@ export const VatDiscountSellingPriceLab: React.FC<{
             {/* Result Box */}
             <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-2 text-xs text-emerald-950">
               <div className="flex justify-between">
-                <span>१. भ्याट अघिको मूल्य (SP after Discount):</span>
+                <span>1. Price before VAT (SP after discount):</span>
                 <span className="font-mono font-bold text-sm text-emerald-800">
-                  रु. {revSpAfterDisc.toLocaleString()}
+                  Rs. {revSpAfterDisc.toLocaleString()}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span>२. भ्याट रकम (VAT Amount):</span>
+                <span>2. VAT amount:</span>
                 <span className="font-mono font-bold text-sm text-emerald-800">
-                  रु. {revVatAmt.toLocaleString()}
+                  Rs. {revVatAmt.toLocaleString()}
                 </span>
               </div>
               <div className="flex justify-between pt-2 border-t border-emerald-200 font-extrabold text-sm text-indigo-900">
-                <span>३. सुरुको अङ्कित मूल्य (Original MP):</span>
+                <span>3. Original marked price (MP):</span>
                 <span className="font-mono text-lg text-indigo-700">
-                  रु. {revMp.toLocaleString()}
+                  Rs. {revMp.toLocaleString()}
                 </span>
               </div>
             </div>

@@ -1,5 +1,5 @@
 /**
- * Lesson 9 · Length (लम्बाइ)
+ * Lesson 9 · Length
  * Ruler Workshop — read centimetres on a 2D ruler; start from 0 or any mark; compare lengths.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -45,7 +45,7 @@ export const RulerWorkshop: React.FC<Props> = ({ onBackToLibrary }) => {
     setCompareIndex(null);
     const item = THINGS[nextIdx];
     kit.say(
-      `${item.np}को लम्बाइ नापौँ — ० देखि ${toNp(item.cm)} सम्म, अर्थात् ${toNp(item.cm)} से.मी.।`,
+      `${item.np}को लम्बाइ नापौँ — 0 देखि ${toNp(item.cm)} सम्म, अर्थात् ${toNp(item.cm)} से.मी.।`,
       `Measure the ${item.en}: from 0 to ${item.cm}, exactly ${item.cm} cm.`
     );
   };
@@ -56,7 +56,7 @@ export const RulerWorkshop: React.FC<Props> = ({ onBackToLibrary }) => {
       setShift(0);
       setCompareIndex(null);
       kit.say(
-        'वस्तुलाई रुलरको ० अङ्कमा राखेर अन्तिम छेउ कुन अङ्कमा पुगेको छ हेरौँ।',
+        'वस्तुलाई रुलरको 0 अङ्कमा राखेर अन्तिम छेउ कुन अङ्कमा पुगेको छ हेरौँ।',
         'Line up the item at 0 and see where the other end points.'
       );
     } else if (kit.mode === 'PLAY') {
@@ -68,7 +68,7 @@ export const RulerWorkshop: React.FC<Props> = ({ onBackToLibrary }) => {
 
   // Quiz Questions for Challenge Mode
   const questions: QuizQuestion[] = THINGS.map((it, i) => ({
-    np: `रुलरमा ० देखि ${toNp(it.cm)} से.मी. सम्म फैलिएको ${it.np}को लम्बाइ कति हो?`,
+    np: `रुलरमा 0 देखि ${toNp(it.cm)} से.मी. सम्म फैलिएको ${it.np}को लम्बाइ कति हो?`,
     en: `What is the length of a ${it.en} that stretches from 0 to ${it.cm} cm on the ruler?`,
     answer: String(it.cm),
     options: numChoices(it.cm, i * 13 + 3, [1, -1, 2, -2]).map((v) => ({

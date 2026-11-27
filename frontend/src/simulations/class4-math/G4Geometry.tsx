@@ -83,7 +83,7 @@ export const ProtractorLab: React.FC<Props> = ({ onBackToLibrary }) => {
       kit={kit}
       onBack={onBackToLibrary}
       mascotGreeting={kit.t(
-        `कोण: ${angle}° — ${kObj.np}। ०° देखि १८०° सम्म हातले मिलाएर हेरौँ!`,
+        `कोण: ${angle}° — ${kObj.np}। 0° देखि 180° सम्म हातले मिलाएर हेरौँ!`,
         `Angle: ${angle}° — ${kObj.en}. Drag or adjust to measure with the protractor!`
       )}
       questions={questions}
@@ -237,14 +237,14 @@ interface Sh {
 }
 
 const SHAPES: Sh[] = [
-  { np: 'समबाहु त्रिभुज', en: 'Equilateral Triangle', sides: 3, color: '#EF4444', factNp: 'तीनै भुजा बराबर (६०° कोण)', factEn: 'All 3 sides equal (60° angles)', pts: '150,30 60,180 240,180' },
-  { np: 'समद्विबाहु त्रिभुज', en: 'Isosceles Triangle', sides: 3, color: '#F97316', factNp: '२ भुजा बराबर', factEn: '2 sides are equal', pts: '150,40 80,180 220,180' },
+  { np: 'समबाहु त्रिभुज', en: 'Equilateral Triangle', sides: 3, color: '#EF4444', factNp: 'तीनै भुजा बराबर (60° कोण)', factEn: 'All 3 sides equal (60° angles)', pts: '150,30 60,180 240,180' },
+  { np: 'समद्विबाहु त्रिभुज', en: 'Isosceles Triangle', sides: 3, color: '#F97316', factNp: '2 भुजा बराबर', factEn: '2 sides are equal', pts: '150,40 80,180 220,180' },
   { np: 'विषमबाहु त्रिभुज', en: 'Scalene Triangle', sides: 3, color: '#EAB308', factNp: 'कुनै भुजा बराबर छैन', factEn: 'No two sides equal', pts: '120,40 50,180 250,180' },
-  { np: 'समकोणी त्रिभुज', en: 'Right Triangle', sides: 3, color: '#10B981', factNp: 'एउटा कोण ९०° (समकोण)', factEn: 'One angle is 90°', pts: '70,40 70,180 230,180' },
-  { np: 'वर्ग', en: 'Square', sides: 4, color: '#0EA5E9', factNp: '४ बराबर भुजा र ४ समकोण', factEn: '4 equal sides and 4 right angles', pts: '80,50 220,50 220,190 80,190' },
-  { np: 'आयत', en: 'Rectangle', sides: 4, color: '#8B5CF6', factNp: 'सम्मुख भुजा बराबर, ४ समकोण', factEn: 'Opposite sides equal, 4 right angles', pts: '50,65 250,65 250,175 50,175' },
+  { np: 'समकोणी त्रिभुज', en: 'Right Triangle', sides: 3, color: '#10B981', factNp: 'एउटा कोण 90° (समकोण)', factEn: 'One angle is 90°', pts: '70,40 70,180 230,180' },
+  { np: 'वर्ग', en: 'Square', sides: 4, color: '#0EA5E9', factNp: '4 बराबर भुजा र 4 समकोण', factEn: '4 equal sides and 4 right angles', pts: '80,50 220,50 220,190 80,190' },
+  { np: 'आयत', en: 'Rectangle', sides: 4, color: '#8B5CF6', factNp: 'सम्मुख भुजा बराबर, 4 समकोण', factEn: 'Opposite sides equal, 4 right angles', pts: '50,65 250,65 250,175 50,175' },
   { np: 'समानान्तर चतुर्भुज', en: 'Parallelogram', sides: 4, color: '#EC4899', factNp: 'सम्मुख भुजा बराबर र समानान्तर', factEn: 'Opposite sides equal and parallel', pts: '90,65 260,65 210,175 40,175' },
-  { np: 'समचतुर्भुज', en: 'Rhombus', sides: 4, color: '#14B8A6', factNp: '४ बराबर भुजा', factEn: '4 equal sides', pts: '150,35 235,120 150,205 65,120' },
+  { np: 'समचतुर्भुज', en: 'Rhombus', sides: 4, color: '#14B8A6', factNp: '4 बराबर भुजा', factEn: '4 equal sides', pts: '150,35 235,120 150,205 65,120' },
 ];
 
 export const ShapeBuilder: React.FC<Props> = ({ onBackToLibrary }) => {
@@ -386,13 +386,13 @@ interface So {
 }
 
 const SOLIDS: So[] = [
-  { np: 'घन', en: 'Cube', f: 6, e: 12, v: 8, color: '#EF4444', noteNp: '६ वटा वर्गाकार सतह', noteEn: '6 square faces' },
-  { np: 'घनाभ', en: 'Cuboid', f: 6, e: 12, v: 8, color: '#F97316', noteNp: '६ वटा आयताकार सतह', noteEn: '6 rectangular faces' },
-  { np: 'पिरामिड', en: 'Square Pyramid', f: 5, e: 8, v: 5, color: '#EAB308', noteNp: '१ वर्ग र ४ त्रिभुज', noteEn: '1 square and 4 triangles' },
-  { np: 'त्रिभुजाकार प्रिज्म', en: 'Triangular Prism', f: 5, e: 9, v: 6, color: '#10B981', noteNp: '२ त्रिभुज र ३ आयत', noteEn: '2 triangles and 3 rectangles' },
-  { np: 'बेलना', en: 'Cylinder', f: 3, e: 2, v: 0, color: '#0EA5E9', noteNp: '२ समतल र १ वक्र सतह', noteEn: '2 flat and 1 curved face' },
-  { np: 'शङ्कु', en: 'Cone', f: 2, e: 1, v: 1, color: '#8B5CF6', noteNp: '१ समतल र १ वक्र सतह', noteEn: '1 flat and 1 curved face' },
-  { np: 'गोला', en: 'Sphere', f: 1, e: 0, v: 0, color: '#EC4899', noteNp: '१ वक्र सतह मात्र', noteEn: '1 continuous curved surface' },
+  { np: 'घन', en: 'Cube', f: 6, e: 12, v: 8, color: '#EF4444', noteNp: '6 वटा वर्गाकार सतह', noteEn: '6 square faces' },
+  { np: 'घनाभ', en: 'Cuboid', f: 6, e: 12, v: 8, color: '#F97316', noteNp: '6 वटा आयताकार सतह', noteEn: '6 rectangular faces' },
+  { np: 'पिरामिड', en: 'Square Pyramid', f: 5, e: 8, v: 5, color: '#EAB308', noteNp: '1 वर्ग र 4 त्रिभुज', noteEn: '1 square and 4 triangles' },
+  { np: 'त्रिभुजाकार प्रिज्म', en: 'Triangular Prism', f: 5, e: 9, v: 6, color: '#10B981', noteNp: '2 त्रिभुज र 3 आयत', noteEn: '2 triangles and 3 rectangles' },
+  { np: 'बेलना', en: 'Cylinder', f: 3, e: 2, v: 0, color: '#0EA5E9', noteNp: '2 समतल र 1 वक्र सतह', noteEn: '2 flat and 1 curved face' },
+  { np: 'शङ्कु', en: 'Cone', f: 2, e: 1, v: 1, color: '#8B5CF6', noteNp: '1 समतल र 1 वक्र सतह', noteEn: '1 flat and 1 curved face' },
+  { np: 'गोला', en: 'Sphere', f: 1, e: 0, v: 0, color: '#EC4899', noteNp: '1 वक्र सतह मात्र', noteEn: '1 continuous curved surface' },
 ];
 
 export const SolidExplorer: React.FC<Props> = ({ onBackToLibrary }) => {

@@ -69,7 +69,7 @@ export const CompoundInterestLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ २: चक्रीय ब्याज (Compound Interest) प्रयोगशालामा स्वागत छ! यहाँ ब्याजमाथि ब्याज कसरी थपिन्छ, वार्षिक, अर्धवार्षिक र त्रैमासिक ब्याज, तथा साधारण र चक्रीय ब्याजको भिन्नता हेर्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 2: चक्रीय ब्याज (Compound Interest) प्रयोगशालामा स्वागत छ! यहाँ ब्याजमाथि ब्याज कसरी थपिन्छ, वार्षिक, अर्धवार्षिक र त्रैमासिक ब्याज, तथा साधारण र चक्रीय ब्याजको भिन्नता हेर्नुहोस्!',
         'Welcome to Grade 10 Compound Interest Laboratory! Visually observe interest on interest, compare Simple vs Compound Interest, and explore compounding frequencies!'
       )}
     >
@@ -105,7 +105,7 @@ export const CompoundInterestLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
             <div>
               <div className="flex justify-between font-bold text-slate-200 mb-1">
                 <span>{L('सावाँ (Principal P):', 'Principal P:')}</span>
-                <span className="text-amber-400 font-mono">रु. {fmt(principal.toLocaleString())}</span>
+                <span className="text-amber-400 font-mono">Rs. {fmt(principal.toLocaleString())}</span>
               </div>
               <input
                 type="range"
@@ -202,12 +202,12 @@ export const CompoundInterestLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
               {/* Total Summary */}
               <div className="mt-3 flex justify-between text-xs font-mono">
                 <div>
-                  <span className="text-slate-400">कुल चक्रीय मिश्रधन (CA):</span>
-                  <div className="text-sm font-bold text-emerald-400">रु. {fmt(Math.round(finalAnnualAmount).toLocaleString())}</div>
+                  <span className="text-slate-400">Total compound amount (CA):</span>
+                  <div className="text-sm font-bold text-emerald-400">Rs. {fmt(Math.round(finalAnnualAmount).toLocaleString())}</div>
                 </div>
                 <div className="text-right">
-                  <span className="text-slate-400">कुल चक्रीय ब्याज (CI):</span>
-                  <div className="text-sm font-bold text-amber-400">रु. {fmt(Math.round(totalAnnualCI).toLocaleString())}</div>
+                  <span className="text-slate-400">Total compound interest (CI):</span>
+                  <div className="text-sm font-bold text-amber-400">Rs. {fmt(Math.round(totalAnnualCI).toLocaleString())}</div>
                 </div>
               </div>
             </div>
@@ -228,19 +228,19 @@ export const CompoundInterestLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                 <table className="w-full text-left border-collapse text-xs">
                   <thead>
                     <tr className="bg-slate-100 border-b">
-                      <th className="p-2 font-bold text-slate-700">वर्ष</th>
-                      <th className="p-2 font-bold text-slate-700">सुरुको सावाँ (P)</th>
-                      <th className="p-2 font-bold text-slate-700">ब्याज (I = P·R/100)</th>
-                      <th className="p-2 font-bold text-slate-700">अन्तिम मिश्रधन (A)</th>
+                      <th className="p-2 font-bold text-slate-700">years</th>
+                      <th className="p-2 font-bold text-slate-700">Initial principal (P)</th>
+                      <th className="p-2 font-bold text-slate-700">Interest (I = P·R/100)</th>
+                      <th className="p-2 font-bold text-slate-700">Final amount (A)</th>
                     </tr>
                   </thead>
                   <tbody>
                     {yearlyBreakdown.map((row) => (
                       <tr key={row.year} className="border-b font-mono">
                         <td className="p-2 font-bold text-slate-800">Y{fmt(row.year)}</td>
-                        <td className="p-2">रु. {fmt(Math.round(row.startP).toLocaleString())}</td>
-                        <td className="p-2 text-amber-700 font-bold">+ रु. {fmt(Math.round(row.interest).toLocaleString())}</td>
-                        <td className="p-2 text-emerald-800 font-bold">रु. {fmt(Math.round(row.endAmount).toLocaleString())}</td>
+                        <td className="p-2">Rs. {fmt(Math.round(row.startP).toLocaleString())}</td>
+                        <td className="p-2 text-amber-700 font-bold">+ Rs. {fmt(Math.round(row.interest).toLocaleString())}</td>
+                        <td className="p-2 text-emerald-800 font-bold">Rs. {fmt(Math.round(row.endAmount).toLocaleString())}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -248,9 +248,9 @@ export const CompoundInterestLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
               </div>
 
               <div className="p-3 bg-slate-50 border rounded-xl font-mono text-xs space-y-1">
-                <div className="font-bold text-[#142D4E]">वार्षिक चक्रीय मिश्रधन सूत्र (Formula):</div>
+                <div className="font-bold text-[#142D4E]">Annual compound amount formula:</div>
                 <div className="text-slate-700">CA = P(1 + R/100)ᵀ = {fmt(principal)} × (1 + {fmt(rate)}/100)^{fmt(years)}</div>
-                <div className="font-bold text-[#167C80] text-sm">= रु. {fmt(Math.round(finalAnnualAmount).toLocaleString())}</div>
+                <div className="font-bold text-[#167C80] text-sm">= Rs. {fmt(Math.round(finalAnnualAmount).toLocaleString())}</div>
               </div>
             </div>
           </div>
@@ -265,31 +265,31 @@ export const CompoundInterestLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl space-y-2">
-                <span className="font-bold text-blue-900 text-sm block">{L('१) साधारण ब्याज (Simple Interest):', '1) Simple Interest (SI):')}</span>
+                <span className="font-bold text-blue-900 text-sm block">{L('1) साधारण ब्याज (Simple Interest):', '1) Simple Interest (SI):')}</span>
                 <div className="font-mono text-xs text-slate-600">SI = (P × T × R) / 100</div>
                 <div className="font-mono text-xs text-slate-600">= ({fmt(principal)} × {fmt(years)} × {fmt(rate)}) / 100</div>
                 <div className="text-lg font-bold text-blue-950 font-mono">
-                  SI = रु. {fmt(totalSI.toLocaleString())}
+                  SI = Rs. {fmt(totalSI.toLocaleString())}
                 </div>
-                <div className="text-xs text-slate-500">कुल मिश्रधन = रु. {fmt(finalSIAmount.toLocaleString())}</div>
+                <div className="text-xs text-slate-500">Total amount = Rs. {fmt(finalSIAmount.toLocaleString())}</div>
               </div>
 
               <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-2">
-                <span className="font-bold text-emerald-900 text-sm block">{L('२) चक्रीय ब्याज (Compound Interest):', '2) Compound Interest (CI):')}</span>
+                <span className="font-bold text-emerald-900 text-sm block">{L('2) चक्रीय ब्याज (Compound Interest):', '2) Compound Interest (CI):')}</span>
                 <div className="font-mono text-xs text-slate-600">CI = P[(1 + R/100)ᵀ - 1]</div>
                 <div className="font-mono text-xs text-slate-600">= {fmt(principal)} × [(1.{fmt(rate)})^{fmt(years)} - 1]</div>
                 <div className="text-lg font-bold text-emerald-950 font-mono">
-                  CI = रु. {fmt(Math.round(totalAnnualCI).toLocaleString())}
+                  CI = Rs. {fmt(Math.round(totalAnnualCI).toLocaleString())}
                 </div>
-                <div className="text-xs text-slate-500">कुल मिश्रधन = रु. {fmt(Math.round(finalAnnualAmount).toLocaleString())}</div>
+                <div className="text-xs text-slate-500">Total amount = Rs. {fmt(Math.round(finalAnnualAmount).toLocaleString())}</div>
               </div>
 
               <div className="p-4 bg-amber-50 border border-amber-300 rounded-xl space-y-2">
-                <span className="font-bold text-amber-900 text-sm block">{L('३) ब्याजको भिन्नता (Difference CI - SI):', '3) Difference (CI - SI):')}</span>
-                <div className="font-mono text-xs text-slate-600">अन्तर = CI - SI</div>
-                <div className="font-mono text-xs text-slate-600">रु. {fmt(Math.round(totalAnnualCI).toLocaleString())} - रु. {fmt(totalSI.toLocaleString())}</div>
+                <span className="font-bold text-amber-900 text-sm block">{L('3) ब्याजको भिन्नता (Difference CI - SI):', '3) Difference (CI - SI):')}</span>
+                <div className="font-mono text-xs text-slate-600">Difference = CI - SI</div>
+                <div className="font-mono text-xs text-slate-600">Rs. {fmt(Math.round(totalAnnualCI).toLocaleString())} - Rs. {fmt(totalSI.toLocaleString())}</div>
                 <div className="text-xl font-bold text-amber-950 font-mono">
-                  = रु. {fmt(Math.round(diffCISI).toLocaleString())}
+                  = Rs. {fmt(Math.round(diffCISI).toLocaleString())}
                 </div>
                 <div className="text-[11px] text-amber-800">
                   {L('समय जति लामो हुन्छ, चक्रीय ब्याज र साधारण ब्याज बीचको अन्तर उति नै ठूलो हुन्छ!', 'The longer the duration, the faster the gap between CI and SI expands!')}
@@ -315,36 +315,36 @@ export const CompoundInterestLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
             {/* Comparison Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="p-3 bg-slate-50 border rounded-xl space-y-1">
-                <span className="font-bold text-slate-800 text-xs block">वार्षिक (Annually)</span>
+                <span className="font-bold text-slate-800 text-xs block">Annually</span>
                 <div className="font-mono text-[11px] text-slate-500">A = P(1 + R/100)ᵀ</div>
-                <div className="text-base font-bold text-slate-900 font-mono">रु. {fmt(Math.round(caAnnual).toLocaleString())}</div>
-                <div className="text-xs text-amber-700 font-bold">CI = रु. {fmt(Math.round(ciAnnual).toLocaleString())}</div>
+                <div className="text-base font-bold text-slate-900 font-mono">Rs. {fmt(Math.round(caAnnual).toLocaleString())}</div>
+                <div className="text-xs text-amber-700 font-bold">CI = Rs. {fmt(Math.round(ciAnnual).toLocaleString())}</div>
               </div>
 
               <div className="p-3 bg-indigo-50 border border-indigo-200 rounded-xl space-y-1">
-                <span className="font-bold text-indigo-900 text-xs block">अर्धवार्षिक (Half-yearly)</span>
+                <span className="font-bold text-indigo-900 text-xs block">Half-yearly</span>
                 <div className="font-mono text-[11px] text-slate-500">A = P(1 + R/200)²ᵀ</div>
-                <div className="text-base font-bold text-indigo-950 font-mono">रु. {fmt(Math.round(caSemi).toLocaleString())}</div>
-                <div className="text-xs text-amber-700 font-bold">CI = रु. {fmt(Math.round(ciSemi).toLocaleString())}</div>
+                <div className="text-base font-bold text-indigo-950 font-mono">Rs. {fmt(Math.round(caSemi).toLocaleString())}</div>
+                <div className="text-xs text-amber-700 font-bold">CI = Rs. {fmt(Math.round(ciSemi).toLocaleString())}</div>
               </div>
 
               <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
-                <span className="font-bold text-emerald-900 text-xs block">त्रैमासिक (Quarterly)</span>
+                <span className="font-bold text-emerald-900 text-xs block">Quarterly</span>
                 <div className="font-mono text-[11px] text-slate-500">A = P(1 + R/400)⁴ᵀ</div>
-                <div className="text-base font-bold text-emerald-950 font-mono">रु. {fmt(Math.round(caQuarterly).toLocaleString())}</div>
-                <div className="text-xs text-amber-700 font-bold">CI = रु. {fmt(Math.round(ciQuarterly).toLocaleString())}</div>
+                <div className="text-base font-bold text-emerald-950 font-mono">Rs. {fmt(Math.round(caQuarterly).toLocaleString())}</div>
+                <div className="text-xs text-amber-700 font-bold">CI = Rs. {fmt(Math.round(ciQuarterly).toLocaleString())}</div>
               </div>
             </div>
 
             {/* Textbook Benchmark Example */}
             <div className="p-4 bg-slate-900 text-white rounded-xl font-mono text-xs space-y-2">
               <div className="text-amber-400 font-bold text-sm">
-                {L('पाठ्यपुस्तकको प्रमाणिक उदाहरण (रु. १,००,०००, १५% वार्षिक दर, १ वर्ष):', 'CDC Textbook Benchmark Example (Rs. 100,000 at 15% for 1 year):')}
+                {L('पाठ्यपुस्तकको प्रमाणिक उदाहरण (Rs. 1,00,000, 15% वार्षिक दर, 1 वर्ष):', 'CDC Textbook Benchmark Example (Rs. 100,000 at 15% for 1 year):')}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-slate-300">
-                <div>• वार्षिक: रु. १,१५,०००.००</div>
-                <div>• अर्धवार्षिक: रु. १,१५,५६२.५० (+ रु. ५६२.५०)</div>
-                <div>• त्रैमासिक: रु. १,१५,८६५.०४ (+ रु. ८६५.०४)</div>
+                <div>• Annual: Rs. 1,15,000.00</div>
+                <div>• Half-yearly: Rs. 1,15,562.50</div>
+                <div>• Quarterly: Rs. 1,15,865.04</div>
               </div>
             </div>
           </div>
@@ -359,7 +359,7 @@ export const CompoundInterestLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <span className="text-xs font-bold text-slate-700 block mb-1">दिइएको मिश्रधन (CA):</span>
+                <span className="text-xs font-bold text-slate-700 block mb-1">Given amount (CA):</span>
                 <input
                   type="number"
                   value={revKnownA}
@@ -369,7 +369,7 @@ export const CompoundInterestLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
               </div>
 
               <div>
-                <span className="text-xs font-bold text-slate-700 block mb-1">वार्षिक दर (R%):</span>
+                <span className="text-xs font-bold text-slate-700 block mb-1">Annual rate (R%):</span>
                 <input
                   type="number"
                   value={revR}
@@ -379,7 +379,7 @@ export const CompoundInterestLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
               </div>
 
               <div>
-                <span className="text-xs font-bold text-slate-700 block mb-1">समय (T वर्ष):</span>
+                <span className="text-xs font-bold text-slate-700 block mb-1">Time (T years):</span>
                 <input
                   type="number"
                   value={revT}
@@ -391,13 +391,13 @@ export const CompoundInterestLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
 
             <div className="p-4 bg-teal-50 border border-teal-200 rounded-xl font-mono text-xs space-y-2">
               <div className="font-bold text-[#167C80] text-sm">
-                सूत्र: P = CA / (1 + R/100)ᵀ
+                Formula: P = CA / (1 + R/100)ᵀ
               </div>
               <div className="text-slate-700">
                 = {fmt(revKnownA)} / (1 + {fmt(revR)}/100)^{fmt(revT)}
               </div>
               <div className="text-xl font-bold text-emerald-900 pt-1">
-                सावाँ (P) = रु. {fmt(Math.round(revCalculatedP).toLocaleString())}
+                Principal (P) = Rs. {fmt(Math.round(revCalculatedP).toLocaleString())}
               </div>
             </div>
           </div>

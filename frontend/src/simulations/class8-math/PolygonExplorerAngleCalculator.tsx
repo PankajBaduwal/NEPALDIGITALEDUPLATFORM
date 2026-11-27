@@ -24,13 +24,13 @@ const POLYGONS: PolygonMeta[] = [
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'n वटा भुजा भएको बहुभुजका भित्री कोणहरूको योगफल निकाल्ने सूत्र कुन हो?',
+    np: 'n pcs भुजा भएको बहुभुजका भित्री कोणहरूको योगफल निकाल्ने सूत्र कुन हो?',
     en: 'What is the formula for the sum of interior angles of an n-sided polygon?',
     options: [
-      { key: 'A', label: '(n - 2) × १८०°' },
-      { key: 'B', label: 'n × १८०°' },
-      { key: 'C', label: '(n + 2) × १८०°' },
-      { key: 'D', label: '३६०° ÷ n' },
+      { key: 'A', label: '(n - 2) × 180°' },
+      { key: 'B', label: 'n × 180°' },
+      { key: 'C', label: '(n + 2) × 180°' },
+      { key: 'D', label: '360° ÷ n' },
     ],
     answer: 'A',
   },
@@ -38,32 +38,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुनै पनि बहुभुजका बाह्य कोणहरू (Exterior angles) को जम्मा योगफल कति हुन्छ?',
     en: 'What is the sum of exterior angles of any convex polygon?',
     options: [
-      { key: 'A', label: '१८०°' },
-      { key: 'B', label: '३६०° (Always 360°)' },
-      { key: 'C', label: '५४०°' },
-      { key: 'D', label: 'भुजाको संख्यामा भर पर्छ' },
+      { key: 'A', label: '180°' },
+      { key: 'B', label: '360° (Always 360°)' },
+      { key: 'C', label: '540°' },
+      { key: 'D', label: 'It depends on the number of sides' },
     ],
     answer: 'B',
   },
   {
-    np: 'नियमित षट्भुज (Regular Hexagon, n = ६) को प्रत्येक भित्री कोण कति डिग्रीको हुन्छ?',
+    np: 'नियमित षट्भुज (Regular Hexagon, n = 6) को प्रत्येक भित्री कोण कति degreesको हुन्छ?',
     en: 'What is the measure of each interior angle of a regular hexagon (n = 6)?',
     options: [
-      { key: 'A', label: '९०°' },
-      { key: 'B', label: '१०८°' },
-      { key: 'C', label: '१२०° ((6-2)×180° / 6)' },
-      { key: 'D', label: '१३५°' },
+      { key: 'A', label: '90°' },
+      { key: 'B', label: '108°' },
+      { key: 'C', label: '120° ((6-2)×180° / 6)' },
+      { key: 'D', label: '135°' },
     ],
     answer: 'C',
   },
   {
-    np: 'नियमित अष्टभुज (Regular Octagon, n = ८) को प्रत्येक बाह्य कोण कति हुन्छ?',
+    np: 'नियमित अष्टभुज (Regular Octagon, n = 8) को प्रत्येक बाह्य कोण कति हुन्छ?',
     en: 'What is each exterior angle of a regular octagon (n = 8)?',
     options: [
-      { key: 'A', label: '४५° (360° ÷ 8)' },
-      { key: 'B', label: '६०°' },
-      { key: 'C', label: '९०°' },
-      { key: 'D', label: '१३५°' },
+      { key: 'A', label: '45° (360° ÷ 8)' },
+      { key: 'B', label: '60°' },
+      { key: 'C', label: '90°' },
+      { key: 'D', label: '135°' },
     ],
     answer: 'A',
   }
@@ -141,7 +141,7 @@ export const PolygonExplorerAngleCalculator: React.FC<{
               activeTab === 'triangulation' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('१. त्रिभुजीकरण विधि (Triangulation: n - 2)', '1. Interior Triangulation')}
+            {L('1. त्रिभुजीकरण विधि (Triangulation: n - 2)', '1. Interior Triangulation')}
           </button>
           <button
             onClick={() => setActiveTab('interior')}
@@ -149,7 +149,7 @@ export const PolygonExplorerAngleCalculator: React.FC<{
               activeTab === 'interior' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('२. भित्री कोण गणना (Interior Angles)', '2. Interior Angle Calculator')}
+            {L('2. भित्री कोण गणना (Interior Angles)', '2. Interior Angle Calculator')}
           </button>
           <button
             onClick={() => setActiveTab('exterior')}
@@ -157,7 +157,7 @@ export const PolygonExplorerAngleCalculator: React.FC<{
               activeTab === 'exterior' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('३. बाह्य कोण अन्वेषक (Exterior Angles: 360°)', '3. Exterior Angles (360°)')}
+            {L('3. बाह्य कोण अन्वेषक (Exterior Angles: 360°)', '3. Exterior Angles (360°)')}
           </button>
         </div>
 
@@ -218,7 +218,7 @@ export const PolygonExplorerAngleCalculator: React.FC<{
                 ))}
                 {/* Center label */}
                 <text x={cx} y={cy + 10} fill="#38bdf8" fontSize="13" fontWeight="bold" textAnchor="middle">
-                  {triangleCount} वटा त्रिभुज ({triangleCount} Triangles)
+                  {triangleCount} triangles ({triangleCount} Triangles)
                 </text>
               </g>
             )}
@@ -235,7 +235,7 @@ export const PolygonExplorerAngleCalculator: React.FC<{
                   </g>
                 ))}
                 <text x={cx} y={cy + 10} fill="#f43f5e" fontSize="13" fontWeight="bold" textAnchor="middle">
-                  जम्मा बाह्य कोण = ३६०°
+                  Total exterior angle = 360°
                 </text>
               </g>
             )}
@@ -288,7 +288,7 @@ export const PolygonExplorerAngleCalculator: React.FC<{
               360° ÷ {sides} = {eachExterior}°
             </div>
             <p className="text-xs text-slate-400">
-              {L(`भित्री + बाह्य = ${eachInterior}° + ${eachExterior}° = १८०° (रेखीय जोडी)`, `Interior + Exterior = ${eachInterior}° + ${eachExterior}° = 180°`)}
+              {L(`भित्री + बाह्य = ${eachInterior}° + ${eachExterior}° = 180° (रेखीय जोडी)`, `Interior + Exterior = ${eachInterior}° + ${eachExterior}° = 180°`)}
             </p>
           </div>
         </div>

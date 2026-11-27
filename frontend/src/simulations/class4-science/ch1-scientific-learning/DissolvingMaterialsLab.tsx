@@ -1,15 +1,15 @@
 /**
  * DissolvingMaterialsLab.tsx
- * Simulation 2: Digital Dissolving Laboratory (घुलनशील र अघुलनशील वस्तुहरूको डिजिटल प्रयोगशाला)
- * Grade 4 Science • Chapter 1: Scientific Learning (वैज्ञानिक सिकाइ)
+ * Simulation 2: Digital Dissolving Laboratory
+ * Grade 4 Science • Chapter 1: Scientific Learning
  *
  * 100% Native HTML5 Canvas 2D Interactive Physics & Chemistry Simulation.
  * Designed specifically for young learners with rich visuals, friendly aesthetics,
  * tangible drag-and-drop mechanics, and deep pedagogical engagement:
  *
- * 1. Material Selection (विलेय र विलायक छनोट):
- *    - Solutes: Sugar (चिनी), Salt (नुन), Sand (बालुवा), Chalk Powder (चक)
- *    - Solvents: Water ($H_2O$, पानी), Milk (दूध), Cooking Oil (तेल)
+ * 1. Material Selection:
+ *    - Solutes: Sugar, Salt, Sand, Chalk Powder
+ *    - Solvents: Water, Milk, Cooking Oil
  * 2. Tangible Drag-and-Drop Interaction:
  *    - Students can physically drag sugar cubes, salt spoon, sand scoop, or chalk stick directly into the beaker!
  *    - Dynamic water splash droplets, surface ripple rings, and sound effects!
@@ -19,7 +19,7 @@
  *    - Realistic mercury thermometer with animated column
  *    - Heating coaster thermal glow & rising steam particles
  *    - Higher heat speeds up dissolution exponentially!
- * 5. Microscopic Molecular Dynamics View (अणु संरचना अवलोकन):
+ * 5. Microscopic Molecular Dynamics View:
  *    - Real-time crystal lattice spheres of the solute
  *    - Solvent ($H_2O$) molecules vibrating with kinetic temperature energy
  *    - Animated dissolution arrows showing molecules being pulled apart
@@ -94,7 +94,7 @@ export const DissolvingMaterialsLab: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -1355,7 +1355,7 @@ export const DissolvingMaterialsLab: React.FC<BaseSimulationProps> = ({
           {/* 2. Solute Selection Cards */}
           <div>
             <div style={{ fontSize: '11px', textTransform: 'uppercase', color: '#64748b', fontWeight: '800', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. विलेय वस्तु छनोट (Solutes)' : '1. Select Solute'}
+              {lang === 'ne' ? '1. विलेय वस्तु छनोट (Solutes)' : '1. Select Solute'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
               {(['sugar', 'salt', 'sand', 'chalk'] as SoluteType[]).map((key) => {
@@ -1394,7 +1394,7 @@ export const DissolvingMaterialsLab: React.FC<BaseSimulationProps> = ({
           {/* 3. Solvent Selection Tabs */}
           <div>
             <div style={{ fontSize: '11px', textTransform: 'uppercase', color: '#64748b', fontWeight: '800', marginBottom: '8px' }}>
-              {lang === 'ne' ? '२. विलायक माध्यम (Solvents)' : '2. Select Solvent'}
+              {lang === 'ne' ? '2. विलायक माध्यम (Solvents)' : '2. Select Solvent'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
               {(['water', 'milk', 'oil'] as SolventType[]).map((key) => {

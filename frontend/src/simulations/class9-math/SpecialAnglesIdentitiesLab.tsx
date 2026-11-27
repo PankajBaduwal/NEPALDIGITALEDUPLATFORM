@@ -27,11 +27,11 @@ export const SpecialAnglesIdentitiesLab: React.FC<SimProps> = ({ onBackToLibrary
   const specialAngles = [0, 30, 45, 60, 90];
 
   const angleValues: Record<number, { sin: string; cos: string; tan: string; cosec: string; sec: string; cot: string }> = {
-    0: { sin: '0', cos: '1', tan: '0', cosec: 'Undefined (अपरिभाषित)', sec: '1', cot: 'Undefined (अपरिभाषित)' },
+    0: { sin: '0', cos: '1', tan: '0', cosec: 'Undefined', sec: '1', cot: 'Undefined' },
     30: { sin: '1/2', cos: '√3/2', tan: '1/√3', cosec: '2', sec: '2/√3', cot: '√3' },
     45: { sin: '1/√2', cos: '1/√2', tan: '1', cosec: '√2', sec: '√2', cot: '1' },
     60: { sin: '√3/2', cos: '1/2', tan: '√3', cosec: '2/√3', sec: '2', cot: '1/√3' },
-    90: { sin: '1', cos: '0', tan: 'Undefined (अपरिभाषित)', cosec: '1', sec: 'Undefined (अपरिभाषित)', cot: '0' },
+    90: { sin: '1', cos: '0', tan: 'Undefined', cosec: '1', sec: 'Undefined', cot: '0' },
   };
 
   const toggleHide = (key: string) => {
@@ -65,28 +65,28 @@ export const SpecialAnglesIdentitiesLab: React.FC<SimProps> = ({ onBackToLibrary
       expr: 'sin² 45° + cos² 45° = ?',
       opts: ['1/2', '1', '√2', '2'],
       correct: 1,
-      expNp: 'सर्वसमिका अनुसार sin² θ + cos² θ = १ हुन्छ। (१/√२)² + (१/√२)² = १/२ + १/२ = १।',
+      expNp: 'सर्वसमिका अनुसार sin² θ + cos² θ = 1 हुन्छ। (1/√2)² + (1/√2)² = 1/2 + 1/2 = 1।',
       expEn: 'Identity sin² θ + cos² θ = 1. (1/√2)² + (1/√2)² = 1/2 + 1/2 = 1.',
     },
     {
       expr: 'tan 45° × cot 45° = ?',
       opts: ['0', '1/2', '1', '2'],
       correct: 2,
-      expNp: 'tan 45° = १ र cot 45° = १। अतः १ × १ = १। (tan θ × cot θ = १)',
+      expNp: 'tan 45° = 1 र cot 45° = 1। अतः 1 × 1 = 1। (tan θ × cot θ = 1)',
       expEn: 'tan 45° = 1 and cot 45° = 1. Thus 1 × 1 = 1.',
     },
     {
       expr: 'sin 30° / cos 60° = ?',
       opts: ['1/4', '1/2', '1', '√3'],
       correct: 2,
-      expNp: 'sin 30° = १/२ र cos 60° = १/२। अतः (१/२) / (१/२) = १।',
+      expNp: 'sin 30° = 1/2 र cos 60° = 1/2। अतः (1/2) / (1/2) = 1।',
       expEn: 'sin 30° = 1/2 and cos 60° = 1/2. Thus (1/2) / (1/2) = 1.',
     },
     {
       expr: '1 − sin² 60° = ?',
       opts: ['sin² 60°', 'cos² 60° (अर्थात् 1/4)', 'tan² 60°', '1'],
       correct: 1,
-      expNp: '1 − sin² θ = cos² θ। cos 60° = १/२ भएकाले cos² 60° = (१/२)² = १/४।',
+      expNp: '1 − sin² θ = cos² θ। cos 60° = 1/2 भएकाले cos² 60° = (1/2)² = 1/4।',
       expEn: '1 − sin² θ = cos² θ. Since cos 60° = 1/2, (1/2)² = 1/4.',
     },
   ];
@@ -97,7 +97,7 @@ export const SpecialAnglesIdentitiesLab: React.FC<SimProps> = ({ onBackToLibrary
       onBack={handleBack}
       grade={9}
       mascotGreeting={L(
-        'नमस्ते! विशिष्ट कोणहरू (०°, ३०°, ४५°, ६०°, ९०°) का त्रिकोणमितीय मानहरू, ४५° र ३०°-६०° ज्यामितीय त्रिभुज र पूरक कोण सम्बन्ध अन्वेषण गर्नुहोस्!',
+        'नमस्ते! विशिष्ट कोणहरू (0°, 30°, 45°, 60°, 90°) का त्रिकोणमितीय मानहरू, 45° र 30°-60° ज्यामितीय त्रिभुज र पूरक कोण सम्बन्ध अन्वेषण गर्नुहोस्!',
         'Welcome! Master special trigonometric angles (0°, 30°, 45°, 60°, 90°), geometric triangle derivations, and complementary relationships!'
       )}
     >
@@ -122,7 +122,7 @@ export const SpecialAnglesIdentitiesLab: React.FC<SimProps> = ({ onBackToLibrary
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            2. {L('४५° त्रिभुज प्रयोगशाला (45° Lab)', '45° Triangle Lab')}
+            2. {L('45° त्रिभुज प्रयोगशाला (45° Lab)', '45° Triangle Lab')}
           </button>
           <button
             onClick={() => setActiveTab('tri3060')}
@@ -132,7 +132,7 @@ export const SpecialAnglesIdentitiesLab: React.FC<SimProps> = ({ onBackToLibrary
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            3. {L('३०° र ६०° समबाहु त्रिभुज (30°/60°)', '30° & 60° Lab')}
+            3. {L('30° र 60° समबाहु त्रिभुज (30°/60°)', '30° & 60° Lab')}
           </button>
           <button
             onClick={() => setActiveTab('complementary')}
@@ -243,7 +243,7 @@ export const SpecialAnglesIdentitiesLab: React.FC<SimProps> = ({ onBackToLibrary
         {activeTab === 'tri45' && (
           <div className="lg:col-span-12 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
             <h4 className="font-bold text-slate-800 text-sm">
-              {L('४५° कोणको त्रिकोणमितीय अनुपात ज्यामितीय उत्पत्ति', 'Geometric Derivation of 45° Trigonometric Ratios')}
+              {L('45° कोणको त्रिकोणमितीय अनुपात ज्यामितीय उत्पत्ति', 'Geometric Derivation of 45° Trigonometric Ratios')}
             </h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
@@ -273,7 +273,7 @@ export const SpecialAnglesIdentitiesLab: React.FC<SimProps> = ({ onBackToLibrary
                   {L('समद्विबाहु समकोणी त्रिभुजमा (Isosceles Right Triangle):', 'Derivation Steps:')}
                 </h5>
                 <ul className="space-y-1.5 list-disc pl-4 text-slate-700 font-mono text-[11px] leading-relaxed">
-                  <li>AB = BC = a (बराबर भुजाहरू)</li>
+                  <li>AB = BC = a</li>
                   <li>AC² = AB² + BC² = a² + a² = 2a² ⇒ AC = a√2</li>
                   <li className="font-bold text-indigo-900">
                     sin 45° = p / h = a / (a√2) = 1/√2
@@ -294,7 +294,7 @@ export const SpecialAnglesIdentitiesLab: React.FC<SimProps> = ({ onBackToLibrary
         {activeTab === 'tri3060' && (
           <div className="lg:col-span-12 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
             <h4 className="font-bold text-slate-800 text-sm">
-              {L('३०° र ६०° कोणको ज्यामितीय उत्पत्ति (Equilateral Triangle Altitude)', 'Derivation of 30° and 60° Ratios')}
+              {L('30° र 60° कोणको ज्यामितीय उत्पत्ति (Equilateral Triangle Altitude)', 'Derivation of 30° and 60° Ratios')}
             </h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
@@ -326,13 +326,13 @@ export const SpecialAnglesIdentitiesLab: React.FC<SimProps> = ({ onBackToLibrary
                 </h5>
                 <div className="space-y-1.5 font-mono text-[11px] text-slate-800">
                   <div className="p-2 bg-white rounded border border-indigo-100">
-                    <strong>३०° का लागि (For 30°):</strong> सम्मुख = a, कर्ण = 2a, आसन्न = a√3
+                    <strong>For 30°:</strong> Opposite = a, hypotenuse = 2a, adjacent = a√3
                     <div className="text-indigo-700 font-bold mt-0.5">
                       sin 30° = 1/2, cos 30° = √3/2, tan 30° = 1/√3
                     </div>
                   </div>
                   <div className="p-2 bg-white rounded border border-indigo-100">
-                    <strong>६०° का लागि (For 60°):</strong> सम्मुख = a√3, कर्ण = 2a, आसन्न = a
+                    <strong>For 60°:</strong> Opposite = a√3, hypotenuse = 2a, adjacent = a
                     <div className="text-indigo-700 font-bold mt-0.5">
                       sin 60° = √3/2, cos 60° = 1/2, tan 60° = √3
                     </div>

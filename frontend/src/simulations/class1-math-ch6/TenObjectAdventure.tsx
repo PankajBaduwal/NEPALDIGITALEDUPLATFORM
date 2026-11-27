@@ -1,8 +1,8 @@
 /**
  * TenObjectAdventure.tsx (Converted to 100% Pure 2D)
- * Simulation 01: Ten Object Adventure (दश वस्तुहरू गनौँ)
- * Class 1 Mathematics - Chapter 6: Ten (दश)
- * Nepal CDC Curriculum Aligned (मेरो गणित, कक्षा १)
+ * Simulation 01: Ten Object Adventure
+ * Class 1 Mathematics - Chapter 6: Ten
+ * Nepal CDC Curriculum Aligned
  * 100% Pure 2D Vector & Canvas – Zero WebGL/Three.js.
  */
 import React, { useState } from 'react';
@@ -19,7 +19,7 @@ export const TenObjectAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G1-CH6-01',
     chapter: 6,
-    titleNp: 'दश वस्तुहरू गनौँ (१० - Ten)',
+    titleNp: 'दश वस्तुहरू गनौँ (10 - Ten)',
     titleEn: 'Count Ten Objects (10)',
   });
 
@@ -27,22 +27,22 @@ export const TenObjectAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
 
   const questions: QuizQuestion[] = [
     {
-      np: '९ पछि आउने पहिलो दुई अङ्कको सङ्ख्या कुन हो?',
+      np: '9 पछि आउने पहिलो दुई अङ्कको सङ्ख्या कुन हो?',
       en: 'What is the first 2-digit number that comes right after 9?',
       options: [
-        { key: '10', label: kit.t('१० (दश - Ten)', '10 (Ten)') },
-        { key: '8', label: kit.t('८ (आठ)', '8 (Eight)') },
-        { key: '11', label: kit.t('११ (एघार)', '11 (Eleven)') },
+        { key: '10', label: kit.t('10', '10 (Ten)') },
+        { key: '8', label: kit.t('8', '8 (Eight)') },
+        { key: '11', label: kit.t('11', '11 (Eleven)') },
       ],
       answer: '10',
     },
     {
-      np: '१० बनाउन ७ मा कति जोड्नुपर्छ?',
+      np: '10 बनाउन 7 मा कति जोड्नुपर्छ?',
       en: 'How many more are needed with 7 to make 10?',
       options: [
-        { key: '3', label: kit.t('३ (तीन)', '3 (Three)') },
-        { key: '2', label: kit.t('२ (दुई)', '2 (Two)') },
-        { key: '4', label: kit.t('४ (चार)', '4 (Four)') },
+        { key: '3', label: kit.t('3', '3 (Three)') },
+        { key: '2', label: kit.t('2', '2 (Two)') },
+        { key: '4', label: kit.t('4', '4 (Four)') },
       ],
       answer: '3',
     },
@@ -50,17 +50,17 @@ export const TenObjectAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
       np: 'हाम्रो दुवै हातमा जम्मा कतिवटा औँलाहरू हुन्छन्?',
       en: 'How many fingers do we have in total on both hands?',
       options: [
-        { key: '10', label: kit.t('१० वटा (Ten fingers)', '10 fingers') },
-        { key: '5', label: kit.t('५ वटा (Five fingers)', '5 fingers') },
+        { key: '10', label: kit.t('10 वटा (Ten fingers)', '10 fingers') },
+        { key: '5', label: kit.t('5 वटा (Five fingers)', '5 fingers') },
       ],
       answer: '10',
     },
     {
-      np: 'दश (१०) मा कतिवटा दश र कतिवटा एक हुन्छन्?',
+      np: 'दश (10) मा कतिवटा दश र कतिवटा एक हुन्छन्?',
       en: 'In the number 10, how many tens and ones are there?',
       options: [
-        { key: 't1', label: kit.t('१ दश र ० एक (1 Ten, 0 Ones)', '1 Ten, 0 Ones') },
-        { key: 't0', label: kit.t('० दश र १ एक', '0 Tens, 1 One') },
+        { key: 't1', label: kit.t('1 दश र 0 एक (1 Ten, 0 Ones)', '1 Ten, 0 Ones') },
+        { key: 't0', label: kit.t('0 दश र 1 एक', '0 Tens, 1 One') },
       ],
       answer: 't1',
     },
@@ -72,7 +72,7 @@ export const TenObjectAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
       onBack={onBackToLibrary}
       grade={1}
       mascotGreeting={kit.t(
-        'फ्रेममा १० वटासम्म वस्तुहरू थप्नुहोस् र १ दश (१०) पूरा बनाऔँ!',
+        'फ्रेममा 10 वटासम्म वस्तुहरू थप्नुहोस् र 1 दश (10) पूरा बनाऔँ!',
         'Add items to the ten-frame to complete 1 group of Ten (10)!'
       )}
       questions={questions}
@@ -82,7 +82,7 @@ export const TenObjectAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
             onClick={() => {
               setActiveCount(10);
               kit.tap();
-              kit.say('स्याबास! १० वटा पूरा भयो, यो १ दश हो।', 'Great! 10 objects filled, making 1 Ten.');
+              kit.say('स्याबास! 10 वटा पूरा भयो, यो 1 दश हो।', 'Great! 10 objects filled, making 1 Ten.');
               kit.star();
             }}
             style={{
@@ -97,7 +97,7 @@ export const TenObjectAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
               boxShadow: '0 4px 12px rgba(22,163,74,0.2)',
             }}
           >
-            ⭐ {kit.t('१० वटा पूरा गरौँ (Make 10)', 'Fill All 10')}
+            ⭐ {kit.t('10 वटा पूरा गरौँ (Make 10)', 'Fill All 10')}
           </button>
 
           <button
@@ -134,16 +134,16 @@ export const TenObjectAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
           }}
         >
           <div style={{ fontSize: 32, fontWeight: 900, color: activeCount === 10 ? '#15803d' : '#0284c7' }}>
-            {toNp(activeCount)} <span style={{ fontSize: 16, fontWeight: 700, color: '#64748b' }}>/ १० ({activeCount} / 10)</span>
+            {toNp(activeCount)} <span style={{ fontSize: 16, fontWeight: 700, color: '#64748b' }}>/ 10 ({activeCount} / 10)</span>
           </div>
           <div style={{ fontSize: 13, fontWeight: 700, color: activeCount === 10 ? '#166534' : '#475569' }}>
             {activeCount === 10
-              ? kit.t('🎉 १ दश (One Ten) पूरा भयो!', '🎉 1 Ten is complete!')
-              : kit.t(`१० बनाउन अझै ${toNp(10 - activeCount)} वटा चाहिन्छ।`, `Need ${10 - activeCount} more to make 10.`)}
+              ? kit.t('🎉 1 दश (One Ten) पूरा भयो!', '🎉 1 Ten is complete!')
+              : kit.t(`10 बनाउन अझै ${toNp(10 - activeCount)} वटा चाहिन्छ।`, `Need ${10 - activeCount} more to make 10.`)}
           </div>
         </div>
 
-        {/* Classroom 10-Frame (५ र ५ गरी १०) */}
+        {/* Classroom 10-Frame */}
         <div
           style={{
             background: '#ffffff',
@@ -156,7 +156,7 @@ export const TenObjectAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
           }}
         >
           <div style={{ fontSize: 13, fontWeight: 800, color: '#475569', marginBottom: 12, textAlign: 'center', textTransform: 'uppercase' }}>
-            {kit.t('१०-को कोठा (Ten-Frame Grid)', 'Ten-Frame Grid')}
+            {kit.t('10-को Box (Ten-Frame Grid)', 'Ten-Frame Grid')}
           </div>
 
           <div
@@ -192,7 +192,7 @@ export const TenObjectAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
                     cursor: 'pointer',
                     transition: 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   }}
-                  title={`कोठा ${idx + 1}`}
+                  title={`Box ${idx + 1}`}
                 >
                   {isFilled ? '⭐' : <span style={{ fontSize: 13, color: '#94a3b8', fontWeight: 700 }}>{toNp(idx + 1)}</span>}
                 </div>
@@ -219,7 +219,7 @@ export const TenObjectAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
                 color: '#dc2626',
               }}
             >
-              ➖ १ {kit.t('घटाऔँ', 'Remove')}
+              ➖ 1 {kit.t('घटाऔँ', 'Remove')}
             </button>
             <button
               disabled={activeCount >= 10}
@@ -239,7 +239,7 @@ export const TenObjectAdventure: React.FC<Props> = ({ onBackToLibrary }) => {
                 color: '#16a34a',
               }}
             >
-              ➕ १ {kit.t('थपौँ', 'Add')}
+              ➕ 1 {kit.t('थपौँ', 'Add')}
             </button>
           </div>
         </div>

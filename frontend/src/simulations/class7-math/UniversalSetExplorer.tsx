@@ -1,6 +1,6 @@
 /**
  * UniversalSetExplorer.tsx
- * Grade 7 Mathematics – Lesson 1: SET (समूह)
+ * Grade 7 Mathematics – Lesson 1: SET
  * Simulation 4: Universal Set Explorer (2D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S.)
  */
@@ -17,7 +17,7 @@ const SUBSET_PRESETS = [
     id: 'even',
     name: 'A',
     titleEn: 'Even numbers less than 15',
-    titleNp: '१५ भन्दा साना जोर सङ्ख्याहरू',
+    titleNp: '15 भन्दा साना जोर सङ्ख्याहरू',
     elements: [2, 4, 6, 8, 10, 12, 14],
     color: '#3B82F6',
     bg: '#EFF6FF',
@@ -26,7 +26,7 @@ const SUBSET_PRESETS = [
     id: 'prime',
     name: 'B',
     titleEn: 'Prime numbers less than 15',
-    titleNp: '१५ भन्दा साना रुढ सङ्ख्याहरू',
+    titleNp: '15 भन्दा साना रुढ सङ्ख्याहरू',
     elements: [2, 3, 5, 7, 11, 13],
     color: '#10B981',
     bg: '#ECFDF5',
@@ -35,7 +35,7 @@ const SUBSET_PRESETS = [
     id: 'odd',
     name: 'C',
     titleEn: 'Odd numbers less than 15',
-    titleNp: '१५ भन्दा साना बिजोर सङ्ख्याहरू',
+    titleNp: '15 भन्दा साना बिजोर सङ्ख्याहरू',
     elements: [1, 3, 5, 7, 9, 11, 13],
     color: '#F59E0B',
     bg: '#FFFBEB',
@@ -53,7 +53,7 @@ const SUBSET_PRESETS = [
     id: 'composite',
     name: 'E',
     titleEn: 'Composite numbers less than 15',
-    titleNp: '१५ भन्दा साना संयुक्त सङ्ख्याहरू',
+    titleNp: '15 भन्दा साना संयुक्त सङ्ख्याहरू',
     elements: [4, 6, 8, 9, 10, 12, 14],
     color: '#EC4899',
     bg: '#FDF2F8',
@@ -62,7 +62,7 @@ const SUBSET_PRESETS = [
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'सर्वव्यापक समूह (Universal Set) लाई कुन संकेतले जनाइन्छ?',
+    np: 'Universal set (Universal Set) लाई कुन संकेतले जनाइन्छ?',
     en: 'Which symbol denotes a Universal Set?',
     options: [
       { key: 'A', label: 'U' },
@@ -73,24 +73,24 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'यदि U = {१, २, ३, ..., १०} र A = {२, ४, ६, ८, १०} भए, A कुन समूह हो?',
+    np: 'यदि U = {1, 2, 3, ..., 10} र A = {2, 4, 6, 8, 10} भए, A कुन समूह हो?',
     en: 'If U = {1, 2, 3, ..., 10} and A = {2, 4, 6, 8, 10}, what is A?',
     options: [
-      { key: 'A', label: 'U को उपसमूह (Subset of U)' },
-      { key: 'B', label: 'सर्वव्यापक समूह' },
-      { key: 'C', label: 'रिक्त समूह' },
-      { key: 'D', label: 'असीमित समूह' },
+      { key: 'A', label: 'Subset of U' },
+      { key: 'B', label: 'Universal set' },
+      { key: 'C', label: 'Empty set' },
+      { key: 'D', label: 'Infinite set' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि A = {१, २} र B = {३, ४} भए, यिनीहरूका लागि उपयुक्त सर्वव्यापक समूह कुन हुन सक्छ?',
+    np: 'यदि A = {1, 2} र B = {3, 4} भए, यिनीहरूका लागि उपयुक्त Universal set कुन हुन सक्छ?',
     en: 'If A = {1, 2} and B = {3, 4}, which can be a suitable Universal Set?',
     options: [
-      { key: 'A', label: 'U = {१, २, ३, ४, ५}' },
-      { key: 'B', label: 'U = {१, २}' },
-      { key: 'C', label: 'U = {३, ४}' },
-      { key: 'D', label: 'U = {५, ६}' },
+      { key: 'A', label: 'U = {1, 2, 3, 4, 5}' },
+      { key: 'B', label: 'U = {1, 2}' },
+      { key: 'C', label: 'U = {3, 4}' },
+      { key: 'D', label: 'U = {5, 6}' },
     ],
     answer: 'A',
   },
@@ -101,7 +101,7 @@ export const UniversalSetExplorer: React.FC<{ onBackToLibrary?: () => void; onBa
   const kit = useSimKit({
     code: 'SIM-MATH-G7-L1-04',
     titleEn: 'Universal Set Explorer',
-    titleNp: 'सर्वव्यापक समूह अन्वेषक',
+    titleNp: 'Universal set अन्वेषक',
     chapter: 1,
   });
 
@@ -136,7 +136,7 @@ export const UniversalSetExplorer: React.FC<{ onBackToLibrary?: () => void; onBa
   const CHALLENGE_CASES = [
     {
       givenEn: 'A = {2, 4, 6}, B = {1, 3, 5}',
-      givenNp: 'A = {२, ४, ६}, B = {१, ३, ५}',
+      givenNp: 'A = {2, 4, 6}, B = {1, 3, 5}',
       options: [
         '{ 1, 2, 3, 4, 5, 6, 7 }',
         '{ 1, 3, 5 }',
@@ -145,7 +145,7 @@ export const UniversalSetExplorer: React.FC<{ onBackToLibrary?: () => void; onBa
       ],
       correct: 0,
       reasonEn: 'U = {1, 2, 3, 4, 5, 6, 7} contains all elements of both A and B.',
-      reasonNp: 'U = {१, २, ३, ४, ५, ६, ७} मा A र B दुवैका सबै सदस्यहरू पर्दछन्।',
+      reasonNp: 'U = {1, 2, 3, 4, 5, 6, 7} मा A र B दुवैका सबै सदस्यहरू पर्दछन्।',
     },
     {
       givenEn: 'P = {Apple, Banana}, Q = {Mango, Orange}',
@@ -158,7 +158,7 @@ export const UniversalSetExplorer: React.FC<{ onBackToLibrary?: () => void; onBa
       ],
       correct: 0,
       reasonEn: 'All given items are fruits, so "Set of all fruits" is the natural universal set.',
-      reasonNp: 'सबै वस्तुहरू फलफूल भएकाले "फलफूलहरूको समूह" उपयुक्त सर्वव्यापक समूह हो।',
+      reasonNp: 'सबै वस्तुहरू फलफूल भएकाले "फलफूलहरूको समूह" उपयुक्त Universal set हो।',
     },
   ];
 
@@ -169,7 +169,7 @@ export const UniversalSetExplorer: React.FC<{ onBackToLibrary?: () => void; onBa
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'सर्वव्यापक समूह (Universal Set, U) भनेको कुनै निश्चित सन्दर्भमा छलफल गरिएका सबै सदस्यहरू समेट्ने ठूलो समूह हो।',
+        'Universal set (Universal Set, U) भनेको कुनै निश्चित सन्दर्भमा छलफल गरिएका सबै सदस्यहरू समेट्ने ठूलो समूह हो।',
         'A Universal Set (U) is the comprehensive master set containing all objects under consideration.'
       )}
     >
@@ -177,9 +177,9 @@ export const UniversalSetExplorer: React.FC<{ onBackToLibrary?: () => void; onBa
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'diagram', np: 'क्रियाकलाप १: सर्वव्यापक भेन रेखाचित्र', en: 'Activity 1: Universal Set Diagram' },
-            { id: 'builder', np: 'क्रियाकलाप २: U भित्र नयाँ उपसमूह बनाउने', en: 'Activity 2: Build Subsets Inside U' },
-            { id: 'challenge', np: 'क्रियाकलाप ३: उपयुक्त सर्वव्यापक समूह छान्ने', en: 'Activity 3: Universal Set Challenge' },
+            { id: 'diagram', np: 'क्रियाकलाप 1: सर्वव्यापक भेन रेखाचित्र', en: 'Activity 1: Universal Set Diagram' },
+            { id: 'builder', np: 'क्रियाकलाप 2: U भित्र नयाँ उपसमूह बनाउने', en: 'Activity 2: Build Subsets Inside U' },
+            { id: 'challenge', np: 'क्रियाकलाप 3: उपयुक्त Universal set छान्ने', en: 'Activity 3: Universal Set Challenge' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -211,10 +211,10 @@ export const UniversalSetExplorer: React.FC<{ onBackToLibrary?: () => void; onBa
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <h3 style={{ margin: 0, fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-                  {L('पाठ्यपुस्तक नमुना: U = {१ देखि १४ सम्मका प्राकृतिक सङ्ख्याहरू}', 'Textbook Example: U = {1, 2, 3, ... 14}')}
+                  {L('पाठ्यपुस्तक नमुना: U = {1 देखि 14 सम्मका प्राकृतिक सङ्ख्याहरू}', 'Textbook Example: U = {1, 2, 3, ... 14}')}
                 </h3>
                 <p style={{ margin: '4px 0 0', fontSize: 13, color: '#64748B' }}>
-                  {L('बाहिरी आयताकार क्षेत्रले सर्वव्यापक समूह U जनाउँछ। यसभित्रका उपसमूहहरू हेर्नुहोस्:', 'The outer rectangle represents Universal set U. Subsets A and B reside inside U:')}
+                  {L('बाहिरी आयताकार क्षेत्रले Universal set U जनाउँछ। यसभित्रका उपसमूहहरू हेर्नुहोस्:', 'The outer rectangle represents Universal set U. Subsets A and B reside inside U:')}
                 </p>
               </div>
 
@@ -365,7 +365,7 @@ export const UniversalSetExplorer: React.FC<{ onBackToLibrary?: () => void; onBa
                   {L('U बाट सदस्यहरू छानेर आफ्नो उपसमूह बनाउनुहोस्', 'Build Custom Subsets from U')}
                 </h3>
                 <p style={{ margin: '4px 0 0', fontSize: 13, color: '#64748B' }}>
-                  {L('सर्वव्यापक समूह U बाट कुनै पनि सङ्ख्याहरू छानेर उपसमूह तयार गर्नुहोस्।', 'Select elements from U to form a valid subset. Notice all elements stay strictly inside U.')}
+                  {L('Universal set U बाट कुनै पनि सङ्ख्याहरू छानेर उपसमूह तयार गर्नुहोस्।', 'Select elements from U to form a valid subset. Notice all elements stay strictly inside U.')}
                 </p>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -387,7 +387,7 @@ export const UniversalSetExplorer: React.FC<{ onBackToLibrary?: () => void; onBa
                 <span style={{ color: '#0F172A' }}>
                   {customSubset.length > 0
                     ? [...customSubset].sort((a, b) => a - b).map((e) => (isNe ? toNp(e) : e)).join(', ')
-                    : L('(कुनै सदस्य छानिएको छैन ∅)', '(Empty set ∅)')}
+                    : L('', '(Empty set ∅)')}
                 </span>
                 {' }'}
               </div>
@@ -457,7 +457,7 @@ export const UniversalSetExplorer: React.FC<{ onBackToLibrary?: () => void; onBa
 
             <div style={{ background: '#F8FAFC', border: '2px solid #E2E8F0', borderRadius: 16, padding: 20, textAlign: 'center', marginBottom: 20 }}>
               <div style={{ fontSize: 13, color: '#64748B', fontWeight: 700, marginBottom: 6 }}>
-                {L('दिइएका समूहहरूका लागि कुन समूह उपयुक्त सर्वव्यापक समूह (U) हुन सक्छ?', 'Which is a suitable Universal Set (U) for the given groups?')}
+                {L('दिइएका समूहहरूका लागि कुन समूह उपयुक्त Universal set (U) हुन सक्छ?', 'Which is a suitable Universal Set (U) for the given groups?')}
               </div>
               <div style={{ fontSize: 20, fontWeight: 900, color: '#0F172A' }}>
                 {isNe ? CHALLENGE_CASES[challengeIdx].givenNp : CHALLENGE_CASES[challengeIdx].givenEn}
@@ -472,7 +472,7 @@ export const UniversalSetExplorer: React.FC<{ onBackToLibrary?: () => void; onBa
                   onClick={() => {
                     const isCorrect = i === CHALLENGE_CASES[challengeIdx].correct;
                     if (isCorrect) {
-                      kit.good('उत्कृष्ट! सही सर्वव्यापक समूह छनोट भयो।', 'Correct! That covers all elements.');
+                      kit.good('उत्कृष्ट! सही Universal set छनोट भयो।', 'Correct! That covers all elements.');
                       setChallengeAnswer(i);
                     } else {
                       kit.oops('गलत! यसमा सबै सदस्यहरू अटाउँदैनन्।', 'Incorrect! Does not contain all elements.');

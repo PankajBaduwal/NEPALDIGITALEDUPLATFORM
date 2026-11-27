@@ -1,7 +1,7 @@
 /**
  * SimpleInterestBankingPlayground.tsx
- * Grade 8 Mathematics – Unit 7: SIMPLE INTEREST (साधारण ब्याज)
- * Simulation 1: Simple Interest Banking Playground (साधारण ब्याज र बैंकिङ खेलमैदान)
+ * Grade 8 Mathematics – Unit 7: SIMPLE INTEREST
+ * Simulation 1: Simple Interest Banking Playground
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 7)
  */
 import React, { useState } from 'react';
@@ -23,35 +23,35 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'ब्याजदर ८% प्रतिवर्ष भन्नाले के बुझिन्छ?',
+    np: 'ब्याजदर 8% प्रतिवर्ष भन्नाले के बुझिन्छ?',
     en: 'What does an interest rate of 8% per annum mean?',
     options: [
-      { key: 'A', label: 'रु. १०० को १ वर्षको ब्याज रु. ८ (Rs. 8 on Rs. 100 for 1 year)' },
-      { key: 'B', label: 'रु. १००० को १ वर्षको ब्याज रु. ८' },
-      { key: 'C', label: 'रु. १०० को १ महिनाको ब्याज रु. ८' },
-      { key: 'D', label: 'रु. ८ को १ वर्षको ब्याज रु. १००' },
+      { key: 'A', label: 'Rs. 8 interest on Rs. 100 for 1 year' },
+      { key: 'B', label: 'Rs. 8 interest on Rs. 1000 for 1 year' },
+      { key: 'C', label: 'Rs. 8 interest on Rs. 100 for 1 month' },
+      { key: 'D', label: 'Rs. 100 interest on Rs. 8 for 1 year' },
     ],
     answer: 'A',
   },
   {
-    np: 'भूमिकाले रु. ५,००० बैंकमा २ वर्ष राख्दा बैंकले रु. ५,८०० फिर्ता दियो भने ब्याज रकम (I) कति हो?',
+    np: 'भूमिकाले Rs. 5,000 बैंकमा 2 वर्ष राख्दा बैंकले Rs. 5,800 फिर्ता दियो भने ब्याज रकम (I) कति हो?',
     en: 'Bhumika deposited Rs. 5,000 for 2 years and received Rs. 5,800. What is the interest amount (I)?',
     options: [
-      { key: 'A', label: 'रु. ८०० [ I = A - P = ५८०० - ५००० = ८०० ]' },
-      { key: 'B', label: 'रु. ५,८००' },
-      { key: 'C', label: 'रु. ४००' },
-      { key: 'D', label: 'रु. १,०००' },
+      { key: 'A', label: 'Rs. 800 [ I = A - P = 5800 - 5000 = 800 ]' },
+      { key: 'B', label: 'Rs. 5,800' },
+      { key: 'C', label: 'Rs. 400' },
+      { key: 'D', label: 'Rs. 1,000' },
     ],
     answer: 'A',
   },
   {
-    np: 'सावाँ (P) रु. १०,००० को १०% का दरले ३ वर्षको साधारण ब्याज कति हुन्छ?',
+    np: 'सावाँ (P) Rs. 10,000 को 10% का दरले 3 वर्षको साधारण ब्याज कति हुन्छ?',
     en: 'What is the simple interest on a principal of Rs. 10,000 at 10% per annum for 3 years?',
     options: [
-      { key: 'A', label: 'रु. ३,००० [ (१०००० × ३ × १०) ÷ १०० = ३००० ]' },
-      { key: 'B', label: 'रु. ३,५००' },
-      { key: 'C', label: 'रु. २,५००' },
-      { key: 'D', label: 'रु. १,०००' },
+      { key: 'A', label: 'Rs. 3,000 [ (10000 × 3 × 10) ÷ 100 = 3000 ]' },
+      { key: 'B', label: 'Rs. 3,500' },
+      { key: 'C', label: 'Rs. 2,500' },
+      { key: 'D', label: 'Rs. 1,000' },
     ],
     answer: 'A',
   },
@@ -59,7 +59,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'मिश्रधन (Amount - A) को सूत्र कुन हो?',
     en: 'Which is the correct formula for Amount (A)?',
     options: [
-      { key: 'A', label: 'A = P + I (सावाँ + ब्याज)' },
+      { key: 'A', label: 'A = P + I' },
       { key: 'B', label: 'A = P - I' },
       { key: 'C', label: 'A = P × I' },
       { key: 'D', label: 'A = I / P' },
@@ -120,7 +120,7 @@ export const SimpleInterestBankingPlayground: React.FC<{
             }`}
           >
             <Landmark className="w-4 h-4" />
-            {L('१. बैंकिङ भल्ट र ब्याज (Banking Vault & Interest)', '1. Banking Vault & Interest')}
+            {L('1. बैंकिङ भल्ट र ब्याज (Banking Vault & Interest)', '1. Banking Vault & Interest')}
           </button>
           <button
             onClick={() => setActiveTab('rate_meaning')}
@@ -129,7 +129,7 @@ export const SimpleInterestBankingPlayground: React.FC<{
             }`}
           >
             <Percent className="w-4 h-4" />
-            {L('२. ब्याजदरको वास्तविक अर्थ (Rate % Meaning)', '2. Meaning of Rate %')}
+            {L('2. ब्याजदरको वास्तविक अर्थ (Rate % Meaning)', '2. Meaning of Rate %')}
           </button>
           <button
             onClick={() => setActiveTab('linear_timeline')}
@@ -138,7 +138,7 @@ export const SimpleInterestBankingPlayground: React.FC<{
             }`}
           >
             <TrendingUp className="w-4 h-4" />
-            {L('३. वार्षिक वृद्धि टाइमलाइन (Linear Timeline)', '3. Growth Timeline')}
+            {L('3. वार्षिक वृद्धि टाइमलाइन (Linear Timeline)', '3. Growth Timeline')}
           </button>
           <button
             onClick={() => setActiveTab('presets')}
@@ -147,7 +147,7 @@ export const SimpleInterestBankingPlayground: React.FC<{
             }`}
           >
             <PiggyBank className="w-4 h-4" />
-            {L('४. पाठ्यपुस्तक परिदृश्य (CDC Scenarios)', '4. CDC Scenarios')}
+            {L('4. पाठ्यपुस्तक परिदृश्य (CDC Scenarios)', '4. CDC Scenarios')}
           </button>
         </div>
 
@@ -169,23 +169,23 @@ export const SimpleInterestBankingPlayground: React.FC<{
                 {/* Principal */}
                 <div className="bg-slate-800/90 p-5 rounded-2xl border border-slate-700 text-center">
                   <div className="text-xs text-slate-400 font-bold uppercase">{L('सावाँ (Principal - P)', 'Principal (P)')}</div>
-                  <div className="text-3xl font-black text-blue-400 my-2">रु. {toNp(p.toLocaleString())}</div>
+                  <div className="text-3xl font-black text-blue-400 my-2">Rs. {toNp(p.toLocaleString())}</div>
                   <div className="text-xs text-slate-500">{L('सुरुमा जम्मा गरिएको रकम', 'Initial deposited money')}</div>
                 </div>
 
                 {/* Interest */}
                 <div className="bg-slate-800/90 p-5 rounded-2xl border border-amber-600/60 text-center">
                   <div className="text-xs text-amber-400 font-bold uppercase">{L('साधारण ब्याज (Interest - I)', 'Interest (I)')}</div>
-                  <div className="text-3xl font-black text-amber-300 my-2">रु. {toNp(interest.toLocaleString())}</div>
+                  <div className="text-3xl font-black text-amber-300 my-2">Rs. {toNp(interest.toLocaleString())}</div>
                   <div className="text-xs text-amber-400/80">
-                    I = (P × T × R) ÷ 100 = ({toNp(p)} × {toNp(t)} × {toNp(r)}) ÷ १००
+                    I = (P × T × R) ÷ 100 = ({toNp(p)} × {toNp(t)} × {toNp(r)}) ÷ 100
                   </div>
                 </div>
 
                 {/* Amount */}
                 <div className="bg-emerald-950/80 p-5 rounded-2xl border border-emerald-500 text-center">
                   <div className="text-xs text-emerald-400 font-bold uppercase">{L('मिश्रधन (Amount - A)', 'Amount (A = P + I)')}</div>
-                  <div className="text-3xl font-black text-emerald-300 my-2">रु. {toNp(amount.toLocaleString())}</div>
+                  <div className="text-3xl font-black text-emerald-300 my-2">Rs. {toNp(amount.toLocaleString())}</div>
                   <div className="text-xs text-emerald-400/80">{toNp(p.toLocaleString())} + {toNp(interest.toLocaleString())}</div>
                 </div>
               </div>
@@ -193,8 +193,8 @@ export const SimpleInterestBankingPlayground: React.FC<{
               {/* Formula details */}
               <div className="bg-slate-800 p-4 rounded-2xl text-xs font-mono space-y-1 text-slate-300">
                 <div className="text-amber-400 font-bold">{L('गणितीय कार्यविधि (CDC Method):', 'Mathematical Formula:')}</div>
-                <div>१. ब्याज (I) = P × T × R ÷ १०० = {toNp(p)} × {toNp(t)} × {toNp(r)} ÷ १०० = रु. {toNp(interest)}</div>
-                <div>२. मिश्रधन (A) = P + I = {toNp(p)} + {toNp(interest)} = रु. {toNp(amount)}</div>
+                <div>1. Interest (I) = P × T × R ÷ 100 = {toNp(p)} × {toNp(t)} × {toNp(r)} ÷ 100 = Rs. {toNp(interest)}</div>
+                <div>2. Amount (A) = P + I = {toNp(p)} + {toNp(interest)} = Rs. {toNp(amount)}</div>
               </div>
             </div>
 
@@ -202,7 +202,7 @@ export const SimpleInterestBankingPlayground: React.FC<{
             <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className="block text-xs font-bold text-slate-600 mb-2">
-                  {L('सावाँ (Principal P):', 'Principal (P):')} <span className="text-indigo-600 text-base">रु. {toNp(p)}</span>
+                  {L('सावाँ (Principal P):', 'Principal (P):')} <span className="text-indigo-600 text-base">Rs. {toNp(p)}</span>
                 </label>
                 <input
                   type="range"
@@ -258,7 +258,7 @@ export const SimpleInterestBankingPlayground: React.FC<{
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
                   {L(
-                    'पाठ्यपुस्तक स्पष्टीकरण: ब्याजदर ८% प्रतिवर्ष भन्नाले रु. १०० को १ वर्षमा आउने ब्याज रु. ८ हो।',
+                    'पाठ्यपुस्तक स्पष्टीकरण: ब्याजदर 8% प्रतिवर्ष भन्नाले Rs. 100 को 1 वर्षमा आउने ब्याज Rs. 8 हो।',
                     'CDC Textbook concept: 8% per annum means Rs. 100 earns Rs. 8 interest in 1 year.'
                   )}
                 </p>
@@ -267,38 +267,38 @@ export const SimpleInterestBankingPlayground: React.FC<{
               {/* Visual 100 blocks metaphor */}
               <div className="bg-amber-50/60 p-6 rounded-2xl border border-amber-200 space-y-4">
                 <div className="text-sm font-bold text-amber-950">
-                  {L(`रु. १०० सावाँ मा ${toNp(r)}% दरले वार्षिक ब्याज प्रदर्शन:`, `Visualization of ${r}% on Rs. 100 base:`)}
+                  {L(`Rs. 100 सावाँ मा ${toNp(r)}% दरले वार्षिक ब्याज प्रदर्शन:`, `Visualization of ${r}% on Rs. 100 base:`)}
                 </div>
 
                 <div className="flex flex-wrap items-center gap-4">
                   <div className="p-4 bg-white rounded-2xl border border-amber-300 text-center shadow-sm">
                     <div className="text-xs text-slate-500 font-bold uppercase">{L('सावाँ (Base)', 'Base Money')}</div>
-                    <div className="text-2xl font-black text-blue-600 my-1">रु. १००</div>
-                    <div className="text-[11px] text-slate-400">{L('१ वर्षको लागि', 'For 1 year')}</div>
+                    <div className="text-2xl font-black text-blue-600 my-1">Rs. 100</div>
+                    <div className="text-[11px] text-slate-400">{L('1 वर्षको लागि', 'For 1 year')}</div>
                   </div>
 
                   <ArrowRight className="w-6 h-6 text-amber-600 hidden md:block" />
 
                   <div className="p-4 bg-white rounded-2xl border border-emerald-300 text-center shadow-sm">
-                    <div className="text-xs text-emerald-700 font-bold uppercase">{L('१ वर्षको ब्याज (Interest)', 'Annual Interest')}</div>
-                    <div className="text-2xl font-black text-emerald-600 my-1">रु. {toNp(r)}</div>
+                    <div className="text-xs text-emerald-700 font-bold uppercase">{L('1 वर्षको ब्याज (Interest)', 'Annual Interest')}</div>
+                    <div className="text-2xl font-black text-emerald-600 my-1">Rs. {toNp(r)}</div>
                     <div className="text-[11px] text-emerald-500 font-semibold">{toNp(r)}% {L('दर अनुसार', 'at this rate')}</div>
                   </div>
 
                   <ArrowRight className="w-6 h-6 text-amber-600 hidden md:block" />
 
                   <div className="p-4 bg-white rounded-2xl border border-indigo-300 text-center shadow-sm">
-                    <div className="text-xs text-indigo-700 font-bold uppercase">{L('१ वर्षपछिको मिश्रधन', '1-Yr Amount')}</div>
-                    <div className="text-2xl font-black text-indigo-700 my-1">रु. {toNp(100 + r)}</div>
-                    <div className="text-[11px] text-slate-400">१०० + {toNp(r)}</div>
+                    <div className="text-xs text-indigo-700 font-bold uppercase">{L('1 वर्षपछिको मिश्रधन', '1-Yr Amount')}</div>
+                    <div className="text-2xl font-black text-indigo-700 my-1">Rs. {toNp(100 + r)}</div>
+                    <div className="text-[11px] text-slate-400">100 + {toNp(r)}</div>
                   </div>
                 </div>
 
                 <div className="bg-white p-4 rounded-xl border border-amber-200 text-xs text-slate-700 space-y-1">
-                  <div>• रु. १०० को १ वर्षको ब्याज = रु. {toNp(r)}</div>
-                  <div>• रु. १ को १ वर्षको ब्याज = रु. {toNp(r)} / १००</div>
-                  <div>• रु. P को १ वर्षको ब्याज = रु. (P × {toNp(r)}) / १००</div>
-                  <div className="font-bold text-indigo-900">• रु. P को T वर्षको ब्याज = रु. (P × T × R) / १००</div>
+                  <div>• Rs. 100 interest for 1 year = Rs. {toNp(r)}</div>
+                  <div>• Rs. 1 interest for 1 year = Rs. {toNp(r)} / 100</div>
+                  <div>• Rs. P interest for 1 year = Rs. (P × {toNp(r)}) / 100</div>
+                  <div className="font-bold text-indigo-900">• Rs. P interest for T years = Rs. (P × T × R) / 100</div>
                 </div>
               </div>
             </div>
@@ -341,10 +341,10 @@ export const SimpleInterestBankingPlayground: React.FC<{
                       return (
                         <tr key={yr} className={yr === t ? 'bg-indigo-50 font-bold text-indigo-900' : 'text-slate-700'}>
                           <td className="p-3">{toNp(yr)} {L('वर्ष', 'Year')}</td>
-                          <td className="p-3">रु. {toNp(p.toLocaleString())}</td>
-                          <td className="p-3 text-emerald-600">+रु. {toNp(yrInt.toLocaleString())}</td>
-                          <td className="p-3 text-amber-600 font-bold">रु. {toNp(curInt.toLocaleString())}</td>
-                          <td className="p-3 text-right font-black text-indigo-700">रु. {toNp(curAmt.toLocaleString())}</td>
+                          <td className="p-3">Rs. {toNp(p.toLocaleString())}</td>
+                          <td className="p-3 text-emerald-600">+Rs. {toNp(yrInt.toLocaleString())}</td>
+                          <td className="p-3 text-amber-600 font-bold">Rs. {toNp(curInt.toLocaleString())}</td>
+                          <td className="p-3 text-right font-black text-indigo-700">Rs. {toNp(curAmt.toLocaleString())}</td>
                         </tr>
                       );
                     })}
@@ -372,7 +372,7 @@ export const SimpleInterestBankingPlayground: React.FC<{
                 >
                   <div className="font-bold text-slate-800 text-sm">{isNe ? item.nameNp : item.nameEn}</div>
                   <div className="flex gap-4 text-xs text-slate-500">
-                    <span>P: रु. {toNp(item.p.toLocaleString())}</span>
+                    <span>P: Rs. {toNp(item.p.toLocaleString())}</span>
                     <span>T: {toNp(item.t)} {L('वर्ष', 'yrs')}</span>
                     <span>R: {toNp(item.r)}%</span>
                   </div>

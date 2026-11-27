@@ -179,14 +179,14 @@ export const VectorOperationsLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                 <span className="font-bold">{L('त्रिभुजको नियम (Triangle Law):', 'Triangle Law of Addition:')}</span>
                 <p className="mt-1">
                   {L(
-                    'यदि दुईवटा भेक्टरहरूलाई एउटा त्रिभुजका दुई क्रमिक भुजाहरू (पहिलोको टुप्पामा दोस्रोको पुच्छर) ले जनाइन्छ भने, विपरित क्रममा रहेको तेस्रो भुजाले तिनीहरूको जोड (नतिजामूलक भेक्टर) लाई जनाउँछ: AB⃗ + BC⃗ = AC⃗।',
+                    'यदि दुईpcs भेक्टरहरूलाई एउटा त्रिभुजका दुई क्रमिक भुजाहरू (पहिलोको टुप्पामा दोस्रोको पुच्छर) ले जनाइन्छ भने, विपरित क्रममा रहेको तेस्रो भुजाले तिनीहरूको जोड (नतिजामूलक भेक्टर) लाई जनाउँछ: AB⃗ + BC⃗ = AC⃗।',
                     'If two vectors are represented by two sides of a triangle in sequence (head-to-tail), the third side taken in reverse order represents their resultant sum: AB⃗ + BC⃗ = AC⃗.'
                   )}
                 </p>
               </div>
 
               <div>
-                <label className="text-xs font-bold text-blue-700 block mb-1">भेक्टर AB⃗ (x, y):</label>
+                <label className="text-xs font-bold text-blue-700 block mb-1">Vector AB⃗ (x, y):</label>
                 <div className="flex gap-2">
                   <input type="number" min="-2" max="6" value={vecA.x} onChange={(e) => setVecA({ ...vecA, x: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />
                   <input type="number" min="-2" max="6" value={vecA.y} onChange={(e) => setVecA({ ...vecA, y: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />
@@ -194,7 +194,7 @@ export const VectorOperationsLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
               </div>
 
               <div>
-                <label className="text-xs font-bold text-emerald-700 block mb-1">भेक्टर BC⃗ (x, y):</label>
+                <label className="text-xs font-bold text-emerald-700 block mb-1">Vector BC⃗ (x, y):</label>
                 <div className="flex gap-2">
                   <input type="number" min="-2" max="6" value={vecB.x} onChange={(e) => setVecB({ ...vecB, x: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />
                   <input type="number" min="-2" max="6" value={vecB.y} onChange={(e) => setVecB({ ...vecB, y: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />
@@ -203,13 +203,13 @@ export const VectorOperationsLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
 
               <div className="p-3 bg-slate-50 border rounded-xl font-mono text-sm space-y-1">
                 <div className="font-bold text-slate-800">
-                  नतिजामूलक भेक्टर (Resultant AC⃗):
+                  Resultant vector (AC⃗):
                 </div>
                 <div className="text-indigo-900 font-bold">
                   AC⃗ = AB⃗ + BC⃗ = ({fmt(vecA.x)} + {fmt(vecB.x)}, {fmt(vecA.y)} + {fmt(vecB.y)}) = ({fmt(vecA.x + vecB.x)}, {fmt(vecA.y + vecB.y)})
                 </div>
                 <div className="text-xs text-slate-500">
-                  परिमाण |AC⃗| = √({fmt(vecA.x + vecB.x)}² + {fmt(vecA.y + vecB.y)}²) = {fmt(Math.sqrt((vecA.x + vecB.x) ** 2 + (vecA.y + vecB.y) ** 2).toFixed(2))}
+                  Magnitude |AC⃗| = √({fmt(vecA.x + vecB.x)}² + {fmt(vecA.y + vecB.y)}²) = {fmt(Math.sqrt((vecA.x + vecB.x) ** 2 + (vecA.y + vecB.y) ** 2).toFixed(2))}
                 </div>
               </div>
             </div>
@@ -297,17 +297,17 @@ export const VectorOperationsLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
                       <div className="font-bold text-rose-700">बन्द बहुभुज (Closed Polygon ABCD):</div>
                       <div className="font-mono text-sm mt-1">AB⃗ + BC⃗ + CD⃗ + DA⃗ = 0⃗</div>
                       <p className="text-xs text-slate-500 mt-1">
-                        शुरु गरेको बिन्दु A मै फर्किने भएकाले विस्थापन शून्य हुन्छ।
+                        शुRs गरेको बिन्दु A मै फर्किने भएकाले विस्थापन शून्य हुन्छ।
                       </p>
                     </div>
                   ) : (
                     <div>
-                      <div className="font-bold text-amber-800">नतिजामूलक भेक्टर (Resultant R⃗):</div>
+                      <div className="font-bold text-amber-800">Resultant vector (R⃗):</div>
                       <div className="font-mono text-sm mt-1 text-indigo-900 font-bold">
                         R⃗ = AB⃗ + BC⃗ + CD⃗ = AD⃗
                       </div>
                       <p className="text-xs text-slate-500 mt-1">
-                        पहिलो भेक्टरको शुरुवात A देखि अन्तिम भेक्टरको टुप्पो D सम्म।
+                        From the start A of the first vector to the tip D of the last vector.
                       </p>
                     </div>
                   )}
@@ -337,14 +337,14 @@ export const VectorOperationsLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl">
-                <span className="text-xs font-bold text-blue-900">भेक्टर a⃗ (x₁, y₁):</span>
+                <span className="text-xs font-bold text-blue-900">Vector a⃗ (x₁, y₁):</span>
                 <div className="flex gap-2 mt-2">
                   <input type="number" min="-6" max="6" value={v1.x} onChange={(e) => setV1({ ...v1, x: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />
                   <input type="number" min="-6" max="6" value={v1.y} onChange={(e) => setV1({ ...v1, y: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />
                 </div>
               </div>
               <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl">
-                <span className="text-xs font-bold text-emerald-900">भेक्टर b⃗ (x₂, y₂):</span>
+                <span className="text-xs font-bold text-emerald-900">Vector b⃗ (x₂, y₂):</span>
                 <div className="flex gap-2 mt-2">
                   <input type="number" min="-6" max="6" value={v2.x} onChange={(e) => setV2({ ...v2, x: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />
                   <input type="number" min="-6" max="6" value={v2.y} onChange={(e) => setV2({ ...v2, y: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />
@@ -380,7 +380,7 @@ export const VectorOperationsLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
               <span className="font-bold">{L('स्केलर गुणन (Scalar Multiplication):', 'Scalar Multiplication (ka⃗):')}</span>
               <p className="mt-1">
                 {L(
-                  'यदि a⃗ = (x, y) र k एउटा वास्तविक संख्या हो भने ka⃗ = (kx, ky) हुन्छ। k > ० भए दिशा उही रहन्छ, k < ० भए दिशा उल्टिन्छ, र k = ० भए शून्य भेक्टर 0⃗ बन्दछ।',
+                  'यदि a⃗ = (x, y) र k एउटा वास्तविक संख्या हो भने ka⃗ = (kx, ky) हुन्छ। k > 0 भए दिशा उही रहन्छ, k < 0 भए दिशा उल्टिन्छ, र k = 0 भए शून्य भेक्टर 0⃗ बन्दछ।',
                   'For vector a⃗ = (x, y) and scalar k, ka⃗ = (kx, ky). If k > 0 direction is unchanged; if k < 0 direction reverses; if k = 0 it becomes 0⃗.'
                 )}
               </p>
@@ -432,7 +432,7 @@ export const VectorOperationsLab: React.FC<SimProps> = ({ onBackToLibrary, onBac
 
               <div className="md:col-span-6 space-y-3">
                 <div>
-                  <span className="text-xs font-bold text-slate-700">स्केलर मान k: {fmt(scalarK)}</span>
+                  <span className="text-xs font-bold text-slate-700">Scalar value k: {fmt(scalarK)}</span>
                   <input
                     type="range"
                     min="-3"

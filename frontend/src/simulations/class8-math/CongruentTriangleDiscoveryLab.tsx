@@ -11,10 +11,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'सर्वाङ्गसम त्रिभुजहरू (Congruent Triangles) को मुख्य विशेषता कुन हो?',
     en: 'What is the primary characteristic of congruent triangles?',
     options: [
-      { key: 'A', label: 'उही आकार (Shape) र उही नाप (Size) हुनु' },
-      { key: 'B', label: 'क्षेत्रफल मात्र बराबर हुनु' },
-      { key: 'C', label: 'कोण मात्र बराबर हुनु' },
-      { key: 'D', label: 'समानान्तर हुनु' },
+      { key: 'A', label: 'Having the same shape and the same size' },
+      { key: 'B', label: 'Only the areas being equal' },
+      { key: 'C', label: 'Only the angles being equal' },
+      { key: 'D', label: 'Being parallel' },
     ],
     answer: 'A',
   },
@@ -22,10 +22,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'यदि △ABC ≅ △PQR भए, भुजा AB को संगत भुजा (Corresponding side) कुन हुन्छ?',
     en: 'If △ABC ≅ △PQR, which side corresponds to AB?',
     options: [
-      { key: 'A', label: 'भुजा PQ' },
-      { key: 'B', label: 'भुजा QR' },
-      { key: 'C', label: 'भुजा PR' },
-      { key: 'D', label: 'कुनै पनि' },
+      { key: 'A', label: 'Side PQ' },
+      { key: 'B', label: 'Side QR' },
+      { key: 'C', label: 'Side PR' },
+      { key: 'D', label: 'Any' },
     ],
     answer: 'A',
   },
@@ -87,7 +87,7 @@ export const CongruentTriangleDiscoveryLab: React.FC<{
               activeTab === 'overlay' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('१. खप्ट्याएर परीक्षण (Overlay & Match)', '1. Overlay Matching')}
+            {L('1. खप्ट्याएर परीक्षण (Overlay & Match)', '1. Overlay Matching')}
           </button>
           <button
             onClick={() => setActiveTab('angles')}
@@ -95,7 +95,7 @@ export const CongruentTriangleDiscoveryLab: React.FC<{
               activeTab === 'angles' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('२. संगत कोणहरू (Corresponding Angles)', '2. Corresponding Angles')}
+            {L('2. संगत कोणहरू (Corresponding Angles)', '2. Corresponding Angles')}
           </button>
           <button
             onClick={() => setActiveTab('sides')}
@@ -103,7 +103,7 @@ export const CongruentTriangleDiscoveryLab: React.FC<{
               activeTab === 'sides' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('३. संगत भुजाहरू (Corresponding Sides)', '3. Corresponding Sides')}
+            {L('3. संगत भुजाहरू (Corresponding Sides)', '3. Corresponding Sides')}
           </button>
           <button
             onClick={() => setActiveTab('notation')}
@@ -111,7 +111,7 @@ export const CongruentTriangleDiscoveryLab: React.FC<{
               activeTab === 'notation' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('४. सर्वाङ्गसम सङ्केत (Congruency Notation)', '4. Notation (△ABC ≅ △PQR)')}
+            {L('4. सर्वाङ्गसम सङ्केत (Congruency Notation)', '4. Notation (△ABC ≅ △PQR)')}
           </button>
         </div>
 
@@ -234,7 +234,7 @@ export const CongruentTriangleDiscoveryLab: React.FC<{
                 onClick={() => { setPosX(240); setPosY(40); setRotation(0); }}
                 className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs"
               >
-                {L('पुनः सुरु गर्नुहोस् (Separate)', 'Separate Triangles')}
+                {L('पुनः सुRs गर्नुहोस् (Separate)', 'Separate Triangles')}
               </button>
             </div>
           </div>
@@ -259,7 +259,7 @@ export const CongruentTriangleDiscoveryLab: React.FC<{
                   highlightPart === 'A' ? 'bg-amber-600 border-amber-400 text-white' : 'bg-slate-800 border-slate-700 text-slate-300'
                 }`}
               >
-                ∠A ↔ ∠P (६०° = ६०°)
+                ∠A ↔ ∠P (60° = 60°)
               </button>
               <button
                 onClick={() => setHighlightPart('B')}
@@ -267,7 +267,7 @@ export const CongruentTriangleDiscoveryLab: React.FC<{
                   highlightPart === 'B' ? 'bg-amber-600 border-amber-400 text-white' : 'bg-slate-800 border-slate-700 text-slate-300'
                 }`}
               >
-                ∠B ↔ ∠Q (७०° = ७०°)
+                ∠B ↔ ∠Q (70° = 70°)
               </button>
               <button
                 onClick={() => setHighlightPart('C')}
@@ -275,7 +275,7 @@ export const CongruentTriangleDiscoveryLab: React.FC<{
                   highlightPart === 'C' ? 'bg-amber-600 border-amber-400 text-white' : 'bg-slate-800 border-slate-700 text-slate-300'
                 }`}
               >
-                ∠C ↔ ∠R (५०° = ५०°)
+                ∠C ↔ ∠R (50° = 50°)
               </button>
             </div>
 
@@ -325,15 +325,15 @@ export const CongruentTriangleDiscoveryLab: React.FC<{
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="p-3 bg-slate-900 border border-slate-700 rounded-xl text-center">
                 <div className="text-xs text-slate-400">AB ↔ PQ</div>
-                <div className="font-mono font-bold text-amber-300 text-base mt-1">६ सेमी = ६ सेमी</div>
+                <div className="font-mono font-bold text-amber-300 text-base mt-1">6 cm = 6 cm</div>
               </div>
               <div className="p-3 bg-slate-900 border border-slate-700 rounded-xl text-center">
                 <div className="text-xs text-slate-400">BC ↔ QR</div>
-                <div className="font-mono font-bold text-emerald-300 text-base mt-1">५ सेमी = ५ सेमी</div>
+                <div className="font-mono font-bold text-emerald-300 text-base mt-1">5 cm = 5 cm</div>
               </div>
               <div className="p-3 bg-slate-900 border border-slate-700 rounded-xl text-center">
                 <div className="text-xs text-slate-400">CA ↔ RP</div>
-                <div className="font-mono font-bold text-sky-300 text-base mt-1">४ सेमी = ४ सेमी</div>
+                <div className="font-mono font-bold text-sky-300 text-base mt-1">4 cm = 4 cm</div>
               </div>
             </div>
           </div>

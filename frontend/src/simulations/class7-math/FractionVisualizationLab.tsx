@@ -1,6 +1,6 @@
 /**
  * FractionVisualizationLab.tsx
- * Grade 7 Mathematics – Lesson 5: FRACTION AND DECIMAL (भिन्न र दशमलव)
+ * Grade 7 Mathematics – Lesson 5: FRACTION AND DECIMAL
  * Simulation 8: Fraction Visualization and Simplification Lab (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 77-81)
  */
@@ -12,46 +12,46 @@ import { Sparkles, HelpCircle, ArrowRight, RotateCcw, PieChart } from 'lucide-re
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: '१२/१८ लाई सरलतम रूप (Lowest terms) मा रूपान्तरण गर्दा कति हुन्छ?',
+    np: '12/18 लाई सरलतम रूप (Lowest terms) मा रूपान्तरण गर्दा कति हुन्छ?',
     en: 'What is 12/18 in its lowest terms (simplified fraction)?',
     options: [
-      { key: 'A', label: '२/३ (६ ले भाग गर्दा)' },
-      { key: 'B', label: '३/४' },
-      { key: 'C', label: '४/६' },
-      { key: 'D', label: '१/२' },
+      { key: 'A', label: '2/3' },
+      { key: 'B', label: '3/4' },
+      { key: 'C', label: '4/6' },
+      { key: 'D', label: '1/2' },
     ],
     answer: 'A',
   },
   {
-    np: '१/३ + १/२ जोड्दा हर (Denominator) समान बनाउन कति बनाउनुपर्छ?',
+    np: '1/3 + 1/2 जोड्दा हर (Denominator) समान बनाउन कति बनाउनुपर्छ?',
     en: 'To add 1/3 + 1/2, what is the common denominator required?',
     options: [
-      { key: 'A', label: '५' },
-      { key: 'B', label: '६ (ल.स. = ६)' },
-      { key: 'C', label: '३' },
-      { key: 'D', label: '२' },
+      { key: 'A', label: '5' },
+      { key: 'B', label: '6' },
+      { key: 'C', label: '3' },
+      { key: 'D', label: '2' },
     ],
     answer: 'B',
   },
   {
-    np: 'कृपाले केकको १/२ भाग, अमनले १/३ भाग र सन्दिपले १/६ भाग खाए भने कसले सबैभन्दा धेरै खायो?',
+    np: 'कृपाले केकको 1/2 भाग, अमनले 1/3 भाग र सन्दिपले 1/6 भाग खाए भने कसले सबैभन्दा धेरै खायो?',
     en: 'Kripa ate 1/2 of a cake, Aman ate 1/3, and Sandeep ate 1/6. Who ate the largest portion?',
     options: [
-      { key: 'A', label: 'कृपाले (१/२ = ३/६)' },
-      { key: 'B', label: 'अमनले (१/३ = २/६)' },
-      { key: 'C', label: 'सन्दिपले (१/६)' },
-      { key: 'D', label: 'सबैले बराबर खाए' },
+      { key: 'A', label: 'Kripa (1/2 = 3/6)' },
+      { key: 'B', label: 'Aman (1/3 = 2/6)' },
+      { key: 'C', label: 'Sandeep (1/6)' },
+      { key: 'D', label: 'Everyone ate equally' },
     ],
     answer: 'A',
   },
   {
-    np: 'तलका मध्ये १/२ सँग तुल्य भिन्न (Equivalent Fraction) कुन हो?',
+    np: 'तलका मध्ये 1/2 सँग तुल्य भिन्न (Equivalent Fraction) कुन हो?',
     en: 'Which of the following is equivalent to 1/2?',
     options: [
-      { key: 'A', label: '२/४' },
-      { key: 'B', label: '३/६' },
-      { key: 'C', label: '४/८' },
-      { key: 'D', label: 'माथिका सबै (All of the above)' },
+      { key: 'A', label: '2/4' },
+      { key: 'B', label: '3/6' },
+      { key: 'C', label: '4/8' },
+      { key: 'D', label: 'All of the above' },
     ],
     answer: 'D',
   },
@@ -93,11 +93,11 @@ export const FractionVisualizationLab: React.FC<{ onBackToLibrary?: () => void; 
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'bars', np: '१. भिन्न पट्टी मोडल (Fraction Bar)', en: '1. Fraction Bar' },
-            { id: 'equivalent', np: '२. तुल्य भिन्न (Equivalent: 1/2=2/4)', en: '2. Equivalent Fractions' },
-            { id: 'simplify', np: '३. सरलतम रूप (Simplification: 12/18)', en: '3. Simplification' },
-            { id: 'add_sub', np: '४. समान हर बनाई जोडघटाउ', en: '4. Common Denominator' },
-            { id: 'cake_compare', np: '५. केक बाँडफाँड तुलना (कृपा, अमन, सन्दिप)', en: '5. Cake Sharing Comparison' },
+            { id: 'bars', np: '1. भिन्न पट्टी मोडल (Fraction Bar)', en: '1. Fraction Bar' },
+            { id: 'equivalent', np: '2. तुल्य भिन्न (Equivalent: 1/2=2/4)', en: '2. Equivalent Fractions' },
+            { id: 'simplify', np: '3. सरलतम रूप (Simplification: 12/18)', en: '3. Simplification' },
+            { id: 'add_sub', np: '4. समान हर बनाई जोडघटाउ', en: '4. Common Denominator' },
+            { id: 'cake_compare', np: '5. केक बाँडफाँड तुलना (कृपा, अमन, सन्दिप)', en: '5. Cake Sharing Comparison' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -129,7 +129,7 @@ export const FractionVisualizationLab: React.FC<{ onBackToLibrary?: () => void; 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <span style={{ fontSize: 11, fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '3px 8px', borderRadius: 6 }}>
-                  {L('पाठ्यपुस्तक अवधारणा (पृष्ठ ७७)', 'Textbook Concept (Page 77)')}
+                  {L('पाठ्यपुस्तक अवधारणा (पृष्ठ 77)', 'Textbook Concept (Page 77)')}
                 </span>
                 <h3 style={{ margin: '6px 0 0', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
                   {L('इन्टरएक्टिभ भिन्न पट्टी: छायाँ पारिएका भागहरू छान्नुहोस्', 'Interactive Fraction Bar: Select Shaded Parts')}
@@ -143,7 +143,7 @@ export const FractionVisualizationLab: React.FC<{ onBackToLibrary?: () => void; 
             {/* Total Parts Selector */}
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 20 }}>
               <span style={{ fontSize: 13, fontWeight: 800, color: '#64748B', alignSelf: 'center' }}>
-                जम्मा बराबर भागहरू (हर / Denominator):
+                Total equal parts (denominator):
               </span>
               {[2, 3, 4, 6, 8, 10].map((tp) => (
                 <button
@@ -195,7 +195,7 @@ export const FractionVisualizationLab: React.FC<{ onBackToLibrary?: () => void; 
                         transition: 'all 0.15s ease',
                       }}
                     >
-                      १/{isNe ? toNp(totalParts) : totalParts}
+                      1/{isNe ? toNp(totalParts) : totalParts}
                     </div>
                   );
                 })}
@@ -211,15 +211,15 @@ export const FractionVisualizationLab: React.FC<{ onBackToLibrary?: () => void; 
         {activeTab === 'equivalent' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <h3 style={{ margin: '0 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('तुल्य भिन्नहरू (Equivalent Fractions): १/२ = २/४ = ३/६ = ४/८', 'Equivalent Fractions: 1/2 = 2/4 = 3/6 = 4/8')}
+              {L('तुल्य भिन्नहरू (Equivalent Fractions): 1/2 = 2/4 = 3/6 = 4/8', 'Equivalent Fractions: 1/2 = 2/4 = 3/6 = 4/8')}
             </h3>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {[
-                { n: 1, d: 2, label: '१/२' },
-                { n: 2, d: 4, label: '२/४' },
-                { n: 3, d: 6, label: '३/६' },
-                { n: 4, d: 8, label: '४/८' },
+                { n: 1, d: 2, label: '1/2' },
+                { n: 2, d: 4, label: '2/4' },
+                { n: 3, d: 6, label: '3/6' },
+                { n: 4, d: 8, label: '4/8' },
               ].map((frac, idx) => (
                 <div key={idx} style={{ background: '#F8FAFC', padding: 14, borderRadius: 12, border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', gap: 14 }}>
                   <span style={{ width: 60, fontSize: 16, fontWeight: 900, color: '#0F766E' }}>{frac.label}</span>
@@ -235,7 +235,7 @@ export const FractionVisualizationLab: React.FC<{ onBackToLibrary?: () => void; 
                       />
                     ))}
                   </div>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#166534' }}>= ५०%</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#166534' }}>= 50%</span>
                 </div>
               ))}
             </div>
@@ -246,21 +246,21 @@ export const FractionVisualizationLab: React.FC<{ onBackToLibrary?: () => void; 
         {activeTab === 'simplify' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक उदाहरण (पृष्ठ ७८)', 'Textbook Example (Page 78)')}
+              {L('पाठ्यपुस्तक उदाहरण (पृष्ठ 78)', 'Textbook Example (Page 78)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('१२/१८ लाई म.स. (६) ले भाग गरी सरलतम रूप (२/३) मा ल्याउने', 'Simplifying 12/18 to Lowest Terms (2/3) using HCF 6')}
+              {L('12/18 लाई म.स. (6) ले भाग गरी सरलतम रूप (2/3) मा ल्याउने', 'Simplifying 12/18 to Lowest Terms (2/3) using HCF 6')}
             </h3>
 
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', borderRadius: 16, padding: 20 }}>
               <div style={{ fontSize: 15, color: '#134E4A', lineHeight: 2 }}>
-                <div>१. अंश १२ र हर १८ को साझा गुणनखण्डहरू: १, २, ३, ६</div>
-                <div>२. सबैभन्दा ठूलो साझा गुणनखण्ड (म.स. / HCF) = ६</div>
-                <div>३. अंश र हर दुवैलाई ६ ले भाग गर्दा:</div>
+                <div>1. Common factors of numerator 12 and denominator 18: 1, 2, 3, 6</div>
+                <div>2. Highest common factor (HCF) = 6</div>
+                <div>3. Dividing both numerator and denominator by 6:</div>
                 <div style={{ fontSize: 24, fontWeight: 900, color: '#0F766E', margin: '8px 0' }}>
-                  (१२ ÷ ६) / (१८ ÷ ६) = <strong>२/३</strong>
+                  (12 ÷ 6) / (18 ÷ 6) = <strong>2/3</strong>
                 </div>
-                <div>✓ २ र ३ को अब १ बाहेक अरु कुनै साझा गुणनखण्ड छैन। त्यसैले २/३ सरलतम भिन्न हो।</div>
+                <div>✓ 2 and 3 now have no common factor other than 1, so 2/3 is the simplest fraction.</div>
               </div>
             </div>
           </div>
@@ -270,19 +270,19 @@ export const FractionVisualizationLab: React.FC<{ onBackToLibrary?: () => void; 
         {activeTab === 'add_sub' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#FEF3C7', color: '#B45309', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक उदाहरण: १/३ + १/२', 'Textbook Example: 1/3 + 1/2')}
+              {L('पाठ्यपुस्तक उदाहरण: 1/3 + 1/2', 'Textbook Example: 1/3 + 1/2')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('असमान हर भएका भिन्नहरूको जोड (समान हर ६ बनाएर)', 'Adding Unlike Fractions by Converting to Common Denominator 6')}
+              {L('असमान हर भएका भिन्नहरूको जोड (समान हर 6 बनाएर)', 'Adding Unlike Fractions by Converting to Common Denominator 6')}
             </h3>
 
             <div style={{ background: '#F8FAFC', padding: 20, borderRadius: 16, border: '1px solid #E2E8F0' }}>
               <div style={{ fontSize: 15, color: '#1E293B', lineHeight: 2 }}>
-                <div>• हर ३ र २ को ल.स. (LCM) = ६</div>
-                <div>• १/३ लाई हर ६ बनाउँदा: (१ × २) / (३ × २) = <strong>२/६</strong></div>
-                <div>• १/२ लाई हर ६ बनाउँदा: (१ × ३) / (२ × ३) = <strong>३/६</strong></div>
+                <div>• LCM of denominators 3 and 2 = 6</div>
+                <div>• Making the denominator of 1/3 equal to 6: (1 × 2) / (3 × 2) = <strong>2/6</strong></div>
+                <div>• Making the denominator of 1/2 equal to 6: (1 × 3) / (2 × 3) = <strong>3/6</strong></div>
                 <div style={{ fontSize: 20, fontWeight: 900, color: '#0F766E', marginTop: 10 }}>
-                  ⟹ २/६ + ३/६ = (२ + ३) / ६ = <strong>५/६</strong>
+                  ⟹ 2/6 + 3/6 = (2 + 3) / 6 = <strong>5/6</strong>
                 </div>
               </div>
             </div>
@@ -294,33 +294,33 @@ export const FractionVisualizationLab: React.FC<{ onBackToLibrary?: () => void; 
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <div style={{ background: '#FEF3C7', border: '2px solid #F59E0B', borderRadius: 16, padding: 18, marginBottom: 20 }}>
               <div style={{ fontSize: 12, fontWeight: 800, color: '#B45309', textTransform: 'uppercase', marginBottom: 4 }}>
-                🎂 {L('पाठ्यपुस्तक केक समस्या (पृष्ठ ८०)', 'Textbook Cake Problem (Page 80)')}
+                🎂 {L('पाठ्यपुस्तक केक समस्या (पृष्ठ 80)', 'Textbook Cake Problem (Page 80)')}
               </div>
               <h3 style={{ margin: 0, fontSize: 16, fontWeight: 900, color: '#92400E', lineHeight: 1.5 }}>
-                "{L('कृपाले केकको १/२ भाग, अमनले १/३ भाग र सन्दिपले १/६ भाग खाए। समान हर बनाई कसले सबैभन्दा धेरै खायो तुलना गर्नुहोस्।', 'Kripa ate 1/2, Aman ate 1/3, and Sandeep ate 1/6 of a cake. Convert to common denominator and compare.')}"
+                "{L('कृपाले केकको 1/2 भाग, अमनले 1/3 भाग र सन्दिपले 1/6 भाग खाए। समान हर बनाई कसले सबैभन्दा धेरै खायो तुलना गर्नुहोस्।', 'Kripa ate 1/2, Aman ate 1/3, and Sandeep ate 1/6 of a cake. Convert to common denominator and compare.')}"
               </h3>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
               <div style={{ background: '#DCFCE7', border: '2px solid #16A34A', padding: 16, borderRadius: 14 }}>
-                <div style={{ fontSize: 15, fontWeight: 900, color: '#166534' }}>कृपा (Kripa): १/२</div>
-                <div style={{ fontSize: 16, fontWeight: 900, color: '#14532D', marginTop: 4 }}>= ३/६ भाग (सबैभन्दा धेरै! 👑)</div>
+                <div style={{ fontSize: 15, fontWeight: 900, color: '#166534' }}>Kripa: 1/2</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: '#14532D', marginTop: 4 }}>= 3/6 part (the most! 👑)</div>
               </div>
 
               <div style={{ background: '#F8FAFC', border: '1px solid #CBD5E1', padding: 16, borderRadius: 14 }}>
-                <div style={{ fontSize: 15, fontWeight: 900, color: '#0F172A' }}>अमन (Aman): १/३</div>
-                <div style={{ fontSize: 16, fontWeight: 900, color: '#475569', marginTop: 4 }}>= २/६ भाग</div>
+                <div style={{ fontSize: 15, fontWeight: 900, color: '#0F172A' }}>Aman: 1/3</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: '#475569', marginTop: 4 }}>= 2/6 part</div>
               </div>
 
               <div style={{ background: '#F8FAFC', border: '1px solid #CBD5E1', padding: 16, borderRadius: 14 }}>
-                <div style={{ fontSize: 15, fontWeight: 900, color: '#0F172A' }}>सन्दिप (Sandeep): १/६</div>
-                <div style={{ fontSize: 16, fontWeight: 900, color: '#475569', marginTop: 4 }}>= १/६ भाग (सबैभन्दा थोरै)</div>
+                <div style={{ fontSize: 15, fontWeight: 900, color: '#0F172A' }}>Sandeep: 1/6</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: '#475569', marginTop: 4 }}>= 1/6 part (the least)</div>
               </div>
             </div>
 
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', padding: 16, borderRadius: 14 }}>
               <div style={{ fontSize: 14, fontWeight: 800, color: '#0F766E' }}>
-                {L('तुलना: ३/६ > २/६ > १/६ ⟹ कृपाले सबैभन्दा ठूलो भाग खाइन्!', 'Comparison: 3/6 > 2/6 > 1/6 ⟹ Kripa ate the largest portion!')}
+                {L('तुलना: 3/6 > 2/6 > 1/6 ⟹ कृपाले सबैभन्दा ठूलो भाग खाइन्!', 'Comparison: 3/6 > 2/6 > 1/6 ⟹ Kripa ate the largest portion!')}
               </div>
             </div>
           </div>

@@ -6,46 +6,46 @@ import { UserCheck, Home, DollarSign, Percent, PieChart, CheckCircle2 } from 'lu
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एक एजेन्टले रु ५०,००,००० मा जग्गा बिक्री गर्दा २% कमिशन पाउँछ भने उसको कमिशन रकम कति हुन्छ?',
+    np: 'एक एजेन्टले Rs 50,00,000 मा जग्गा बिक्री गर्दा 2% कमिशन पाउँछ भने उसको कमिशन रकम कति हुन्छ?',
     en: 'An agent receives 2% commission on selling land for Rs 50,00,000. What is the commission amount?',
     options: [
-      { key: 'A', label: 'रु १,००,००० — (५०,००,००० × २% = १,००,०००)' },
-      { key: 'B', label: 'रु ५०,०००' },
-      { key: 'C', label: 'रु २,००,०००' },
-      { key: 'D', label: 'रु १,५०,०००' },
+      { key: 'A', label: 'Rs 1,00,000 — (50,00,000 × 2% = 1,00,000)' },
+      { key: 'B', label: 'Rs 50,000' },
+      { key: 'C', label: 'Rs 2,00,000' },
+      { key: 'D', label: 'Rs 1,50,000' },
     ],
     answer: 'A',
   },
   {
-    np: 'कमिशन कटाएर जग्गाधनी (Owner) ले प्राप्त गर्ने खुद रकम कसरी निकालिन्छ?',
+    np: 'कमिशन कटाएर जग्गाOwner (Owner) ले प्राप्त गर्ने खुद रकम कसरी निकालिन्छ?',
     en: 'How is the net amount received by the owner calculated after paying commission?',
     options: [
-      { key: 'A', label: 'बिक्री मूल्य − कमिशन रकम (Selling Price − Commission)' },
-      { key: 'B', label: 'बिक्री मूल्य + कमिशन रकम' },
-      { key: 'C', label: 'कमिशन रकम × १००' },
-      { key: 'D', label: 'बिक्री मूल्य ÷ २' },
+      { key: 'A', label: 'Selling price − commission amount' },
+      { key: 'B', label: 'Selling price + commission amount' },
+      { key: 'C', label: 'Commission amount × 100' },
+      { key: 'D', label: 'Selling price ÷ 2' },
     ],
     answer: 'A',
   },
   {
-    np: 'स्ल्याबमा आधारित कमिशनमा रु २ लाखसम्म ५% र सोभन्दा माथि ३% दर भए रु ३ लाखको बिक्रीमा कुल कमिशन कति हुन्छ?',
+    np: 'स्ल्याबमा आधारित कमिशनमा Rs 2 लाखसम्म 5% र सोभन्दा माथि 3% दर भए Rs 3 लाखको बिक्रीमा कुल कमिशन कति हुन्छ?',
     en: 'In slab commission with 5% up to 2 lakh and 3% above, what is the commission on 3 lakh sale?',
     options: [
-      { key: 'A', label: 'रु १३,००० — (१०,००० + ३,००० = १३,०००)' },
-      { key: 'B', label: 'रु १५,०००' },
-      { key: 'C', label: 'रु ९,०००' },
-      { key: 'D', label: 'रु १२,०००' },
+      { key: 'A', label: 'Rs 13,000 — (10,000 + 3,000 = 13,000)' },
+      { key: 'B', label: 'Rs 15,000' },
+      { key: 'C', label: 'Rs 9,000' },
+      { key: 'D', label: 'Rs 12,000' },
     ],
     answer: 'A',
   },
   {
-    np: 'कुनै प्रतिनिधिले मासिक तलब रु २०,००० र बिक्रीको १% कमिशन पाउँछन्। रु १० लाखको बिक्री हुँदा उनको कुल मासिक आम्दानी कति हुन्छ?',
+    np: 'कुनै प्रतिनिधिले मासिक तलब Rs 20,000 र बिक्रीको 1% कमिशन पाउँछन्। Rs 10 लाखको बिक्री हुँदा उनको कुल मासिक आम्दानी कति हुन्छ?',
     en: 'A representative earns Rs 20,000 monthly salary plus 1% sales commission. On Rs 10 lakh sales, what is total monthly income?',
     options: [
-      { key: 'A', label: 'रु ३०,००० — (२०,००० + १०,००० = ३०,०००)' },
-      { key: 'B', label: 'रु २०,०००' },
-      { key: 'C', label: 'रु २५,०००' },
-      { key: 'D', label: 'रु ४०,०००' },
+      { key: 'A', label: 'Rs 30,000 — (20,000 + 10,000 = 30,000)' },
+      { key: 'B', label: 'Rs 20,000' },
+      { key: 'C', label: 'Rs 25,000' },
+      { key: 'D', label: 'Rs 40,000' },
     ],
     answer: 'A',
   },
@@ -61,10 +61,10 @@ interface PropertyPreset {
 }
 
 const PROPERTY_PRESETS: PropertyPreset[] = [
-  { id: 'land', nameNp: 'घडेरी जग्गा (Land Plot)', nameEn: 'Land Plot', icon: '🏞️', defaultPrice: 4000000, defaultRate: 2 },
-  { id: 'house', nameNp: 'आवासीय घर (Residential House)', nameEn: 'House', icon: '🏡', defaultPrice: 8500000, defaultRate: 1.5 },
-  { id: 'car', nameNp: 'सवारी साधन (Vehicle)', nameEn: 'Vehicle', icon: '🚗', defaultPrice: 1500000, defaultRate: 3 },
-  { id: 'goods', nameNp: 'थोक सामान (Wholesale Goods)', nameEn: 'Wholesale Goods', icon: '📦', defaultPrice: 500000, defaultRate: 5 },
+  { id: 'land', nameNp: 'Plot of land जग्गा (Land Plot)', nameEn: 'Land Plot', icon: '🏞️', defaultPrice: 4000000, defaultRate: 2 },
+  { id: 'house', nameNp: 'Residential घर (Residential House)', nameEn: 'House', icon: '🏡', defaultPrice: 8500000, defaultRate: 1.5 },
+  { id: 'car', nameNp: 'Vehicle साधन (Vehicle)', nameEn: 'Vehicle', icon: '🚗', defaultPrice: 1500000, defaultRate: 3 },
+  { id: 'goods', nameNp: 'Wholesale सामान (Wholesale Goods)', nameEn: 'Wholesale Goods', icon: '📦', defaultPrice: 500000, defaultRate: 5 },
 ];
 
 export const CommissionSalesAgentSimulator: React.FC<{
@@ -134,7 +134,7 @@ export const CommissionSalesAgentSimulator: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! कक्षा ९ एकाइ ३ "कमिशन र लाभांश" मा स्वागत छ। बिक्री प्रतिनिधि, कमिशन दर, धनीले पाउने रकम र स्ल्याब कमिशनको हिसाब सिकौं!',
+        'नमस्ते! कक्षा 9 एकाइ 3 "कमिशन र लाभांश" मा स्वागत छ। बिक्री प्रतिनिधि, कमिशन दर, धनीले पाउने रकम र स्ल्याब कमिशनको हिसाब सिकौं!',
         'Welcome to Unit 3: Commission and Dividend! Simulate sales agent commissions, owner proceeds, and tiered commission slabs!'
       )}
     >
@@ -147,7 +147,7 @@ export const CommissionSalesAgentSimulator: React.FC<{
               activeTab === 'flat' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🤝 {L('१. निश्चित दर कमिशन (Flat Commission)', '1. Flat Commission')}
+            🤝 {L('1. निश्चित दर कमिशन (Flat Commission)', '1. Flat Commission')}
           </button>
           <button
             onClick={() => setActiveTab('slabs')}
@@ -155,7 +155,7 @@ export const CommissionSalesAgentSimulator: React.FC<{
               activeTab === 'slabs' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            📊 {L('२. स्ल्याब कमिशन (Tiered Commission)', '2. Slab Commission')}
+            📊 {L('2. स्ल्याब कमिशन (Tiered Commission)', '2. Slab Commission')}
           </button>
           <button
             onClick={() => setActiveTab('salary_plus')}
@@ -163,7 +163,7 @@ export const CommissionSalesAgentSimulator: React.FC<{
               activeTab === 'salary_plus' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            💼 {L('३. तलब + कमिशन (Salary + Commission)', '3. Salary + Commission')}
+            💼 {L('3. तलब + कमिशन (Salary + Commission)', '3. Salary + Commission')}
           </button>
         </div>
 
@@ -174,7 +174,7 @@ export const CommissionSalesAgentSimulator: React.FC<{
             <div className="lg:col-span-6 bg-white rounded-2xl shadow-lg p-5 border border-slate-200 space-y-4">
               <h3 className="font-extrabold text-slate-800 text-sm flex items-center gap-2">
                 <UserCheck className="w-5 h-5 text-amber-600" />
-                बिक्री तथा कमिशन दर विवरण
+                Sales and commission rate details
               </h3>
 
               {/* Presets */}
@@ -202,9 +202,9 @@ export const CommissionSalesAgentSimulator: React.FC<{
               {/* Selling Price Slider */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>बिक्री मूल्य (Selling Price):</span>
+                  <span>Selling price:</span>
                   <span className="font-mono text-indigo-700 text-sm">
-                    रु. {sellingPrice.toLocaleString()}
+                    Rs. {sellingPrice.toLocaleString()}
                   </span>
                 </div>
                 <input
@@ -221,7 +221,7 @@ export const CommissionSalesAgentSimulator: React.FC<{
               {/* Commission Rate Slider */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>कमिशन दर (Commission Rate):</span>
+                  <span>Commission rate:</span>
                   <span className="font-mono text-emerald-700 text-sm">{commissionRate}%</span>
                 </div>
                 <input
@@ -240,7 +240,7 @@ export const CommissionSalesAgentSimulator: React.FC<{
             <div className="lg:col-span-6 space-y-4">
               <div className="bg-white rounded-2xl shadow-lg p-5 border border-slate-200 space-y-4">
                 <h4 className="font-extrabold text-slate-800 text-sm">
-                  रकम बाँडफाँड (Proceeds Distribution)
+                  Distribution of proceeds
                 </h4>
 
                 {/* Progress bar visualizer */}
@@ -249,7 +249,7 @@ export const CommissionSalesAgentSimulator: React.FC<{
                     style={{ width: `${100 - commissionRate}%` }}
                     className="bg-blue-600 flex items-center justify-center text-white text-[11px] font-bold"
                   >
-                    धनी ({(100 - commissionRate).toFixed(1)}%)
+                    Owner ({(100 - commissionRate).toFixed(1)}%)
                   </div>
                   <div
                     style={{ width: `${commissionRate}%` }}
@@ -262,9 +262,9 @@ export const CommissionSalesAgentSimulator: React.FC<{
                 {/* Detailed Cards */}
                 <div className="grid grid-cols-2 gap-3 text-xs">
                   <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
-                    <span className="text-emerald-800 font-bold block">एजेन्टले पाउने कमिशन:</span>
+                    <span className="text-emerald-800 font-bold block">Commission earned by the agent:</span>
                     <div className="text-lg font-black text-emerald-700 font-mono">
-                      रु. {commissionAmount.toLocaleString()}
+                      Rs. {commissionAmount.toLocaleString()}
                     </div>
                     <span className="text-[11px] text-slate-500 font-mono block">
                       ({sellingPrice.toLocaleString()} × {commissionRate}%)
@@ -272,12 +272,12 @@ export const CommissionSalesAgentSimulator: React.FC<{
                   </div>
 
                   <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl space-y-1">
-                    <span className="text-blue-800 font-bold block">जग्गा/घरधनीले पाउने खुद रकम:</span>
+                    <span className="text-blue-800 font-bold block">Net amount received by the land/house owner:</span>
                     <div className="text-lg font-black text-blue-700 font-mono">
-                      रु. {ownerAmount.toLocaleString()}
+                      Rs. {ownerAmount.toLocaleString()}
                     </div>
                     <span className="text-[11px] text-slate-500 font-mono block">
-                      (कुल बिक्री − कमिशन)
+                      (total sale − commission)
                     </span>
                   </div>
                 </div>
@@ -285,8 +285,8 @@ export const CommissionSalesAgentSimulator: React.FC<{
 
               {/* Explanatory Box */}
               <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-950 font-semibold space-y-1">
-                <div>• कमिशन रकम = बिक्री मूल्य × कमिशन दर%</div>
-                <div>• धनीले पाउने रकम = बिक्री मूल्य − कमिशन रकम</div>
+                <div>• Commission amount = selling price × commission rate%</div>
+                <div>• Amount received by the owner = selling price − commission amount</div>
               </div>
             </div>
           </div>
@@ -296,15 +296,15 @@ export const CommissionSalesAgentSimulator: React.FC<{
         {activeTab === 'slabs' && (
           <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-5">
             <h3 className="font-extrabold text-slate-800 text-sm text-center">
-              स्ल्याबमा आधारित कमिशन प्रणाली (Tiered Commission Structure)
+              Tiered (slab-based) commission structure
             </h3>
 
             {/* Slider */}
             <div>
               <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
-                <span>कुल बिक्री रकम (Total Sale Amount):</span>
+                <span>Total sale amount:</span>
                 <span className="font-mono text-indigo-700 text-sm">
-                  रु. {slabPrice.toLocaleString()}
+                  Rs. {slabPrice.toLocaleString()}
                 </span>
               </div>
               <input
@@ -322,40 +322,40 @@ export const CommissionSalesAgentSimulator: React.FC<{
             <div className="space-y-2 text-xs">
               <div className="p-3 rounded-xl border border-slate-200 bg-slate-50 flex justify-between items-center">
                 <div>
-                  <span className="font-bold text-slate-800 block">स्ल्याब १: पहिलो रु. २,००,००० सम्म (५%)</span>
-                  <span className="text-slate-500 font-mono">रु. {slabBreakdown.s1.toLocaleString()} मा ५%</span>
+                  <span className="font-bold text-slate-800 block">Slab 1: up to the first Rs. 2,00,000 (5%)</span>
+                  <span className="text-slate-500 font-mono">Rs. {slabBreakdown.s1.toLocaleString()} at 5%</span>
                 </div>
                 <span className="font-mono font-bold text-amber-700 text-sm">
-                  रु. {slabBreakdown.comm1.toLocaleString()}
+                  Rs. {slabBreakdown.comm1.toLocaleString()}
                 </span>
               </div>
 
               <div className="p-3 rounded-xl border border-slate-200 bg-slate-50 flex justify-between items-center">
                 <div>
-                  <span className="font-bold text-slate-800 block">स्ल्याब २: त्यसपछिको रु. ३,००,००० सम्म (४%)</span>
-                  <span className="text-slate-500 font-mono">रु. {slabBreakdown.s2.toLocaleString()} मा ४%</span>
+                  <span className="font-bold text-slate-800 block">Slab 2: the next amount up to Rs. 3,00,000 (4%)</span>
+                  <span className="text-slate-500 font-mono">Rs. {slabBreakdown.s2.toLocaleString()} at 4%</span>
                 </div>
                 <span className="font-mono font-bold text-amber-700 text-sm">
-                  रु. {slabBreakdown.comm2.toLocaleString()}
+                  Rs. {slabBreakdown.comm2.toLocaleString()}
                 </span>
               </div>
 
               <div className="p-3 rounded-xl border border-slate-200 bg-slate-50 flex justify-between items-center">
                 <div>
-                  <span className="font-bold text-slate-800 block">स्ल्याब ३: रु. ५,००,००० भन्दा माथिको बाँकी (२%)</span>
-                  <span className="text-slate-500 font-mono">रु. {slabBreakdown.s3.toLocaleString()} मा २%</span>
+                  <span className="font-bold text-slate-800 block">Slab 3: the remainder above Rs. 5,00,000 (2%)</span>
+                  <span className="text-slate-500 font-mono">Rs. {slabBreakdown.s3.toLocaleString()} at 2%</span>
                 </div>
                 <span className="font-mono font-bold text-amber-700 text-sm">
-                  रु. {slabBreakdown.comm3.toLocaleString()}
+                  Rs. {slabBreakdown.comm3.toLocaleString()}
                 </span>
               </div>
             </div>
 
             {/* Total Slab Commission */}
             <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex justify-between items-center text-xs">
-              <span className="font-bold text-emerald-950 text-sm">कुल कमिशन रकम:</span>
+              <span className="font-bold text-emerald-950 text-sm">Total commission amount:</span>
               <span className="font-mono font-black text-xl text-emerald-700">
-                रु. {slabBreakdown.totalComm.toLocaleString()}
+                Rs. {slabBreakdown.totalComm.toLocaleString()}
               </span>
             </div>
           </div>
@@ -365,12 +365,12 @@ export const CommissionSalesAgentSimulator: React.FC<{
         {activeTab === 'salary_plus' && (
           <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-4">
             <h3 className="font-extrabold text-slate-800 text-sm text-center">
-              बिक्री प्रतिनिधि मासिक आम्दानी (मासिक तलब + बिक्री कमिशन)
+              Sales representative’s monthly income (monthly salary + sales commission)
             </h3>
 
             <div className="space-y-3 text-xs">
               <div>
-                <label className="block font-bold text-slate-700 mb-1">निश्चित मासिक तलब (रु):</label>
+                <label className="block font-bold text-slate-700 mb-1">Fixed monthly salary (Rs):</label>
                 <input
                   type="number"
                   value={baseSalary}
@@ -380,7 +380,7 @@ export const CommissionSalesAgentSimulator: React.FC<{
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">महिनाको कुल बिक्री (रु):</label>
+                <label className="block font-bold text-slate-700 mb-1">Total sales for the month (Rs):</label>
                 <input
                   type="number"
                   value={agentSales}
@@ -390,7 +390,7 @@ export const CommissionSalesAgentSimulator: React.FC<{
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">बिक्री कमिशन दर (%):</label>
+                <label className="block font-bold text-slate-700 mb-1">Sales commission rate (%):</label>
                 <input
                   type="number"
                   step="0.1"
@@ -404,15 +404,15 @@ export const CommissionSalesAgentSimulator: React.FC<{
             {/* Result */}
             <div className="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-2 text-xs">
               <div className="flex justify-between">
-                <span>१. कमिशन रकम:</span>
+                <span>1. Commission amount:</span>
                 <span className="font-mono font-bold text-sm text-indigo-800">
-                  रु. {Math.round((agentSales * agentBonusRate) / 100).toLocaleString()}
+                  Rs. {Math.round((agentSales * agentBonusRate) / 100).toLocaleString()}
                 </span>
               </div>
               <div className="flex justify-between pt-2 border-t border-indigo-200 font-black text-sm text-indigo-950">
-                <span>२. कुल मासिक आम्दानी (तलब + कमिशन):</span>
+                <span>2. Total monthly income (salary + commission):</span>
                 <span className="font-mono text-lg text-indigo-700">
-                  रु. {(baseSalary + Math.round((agentSales * agentBonusRate) / 100)).toLocaleString()}
+                  Rs. {(baseSalary + Math.round((agentSales * agentBonusRate) / 100)).toLocaleString()}
                 </span>
               </div>
             </div>

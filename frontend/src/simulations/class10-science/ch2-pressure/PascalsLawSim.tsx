@@ -1,23 +1,23 @@
 /**
  * PascalsLawSim.tsx
- * Ultra-High-Definition Interactive Laboratory Simulation: Pascal's Law (पास्कलको नियम)
- * Class 10 Science & Technology • Chapter 2: Pressure (चाप)
+ * Ultra-High-Definition Interactive Laboratory Simulation: Pascal's Law
+ * Class 10 Science & Technology • Chapter 2: Pressure
  * Nepal Curriculum Development Centre (CDC) Alignment
  *
  * Implements:
- * 1. Multi-Piston Spherical Flask (पास्कलको बहु-पिस्टन भाँडो):
+ * 1. Multi-Piston Spherical Flask:
  *    - Enclosed spherical vessel with 4 movable pistons
  *    - Radiating omnidirectional pressure vectors ("Equal Pressure / बराबर चाप")
  *    - Cartoon expressive faces toggle (matching textbook & cartoon illustration)
- * 2. Hydraulic Lift & Hydraulic Press (हाइड्रोलिक लिफ्ट र प्रेस):
+ * 2. Hydraulic Lift & Hydraulic Press:
  *    - Dual cylinder U-tube with unequal cross-sectional areas A1 and A2
  *    - Force multiplication: F2 = F1 * (A2 / A1)
  *    - Conservation of Work/Energy: F1 * d1 = F2 * d2 (Force multiplied, distance reduced)
  *    - Vehicle lifting (Compact Car, SUV, Mini Truck, Heavy Machinery)
- * 3. Hydraulic Brake System (हाइड्रोलिक ब्रेक प्रणाली):
+ * 3. Hydraulic Brake System:
  *    - Foot pedal -> Master cylinder -> Hydraulic brake lines -> Slave calipers -> Rotating wheel drum
  *    - Interactive pedal stepping with friction deceleration, RPM gauge, and braking sparks
- * 4. SEE Numerical Problem Solver (गणितीय प्रयोगशाला):
+ * 4. SEE Numerical Problem Solver:
  *    - Formula solver for F1/A1 = F2/A2 and A1*d1 = A2*d2 with SEE 2079/2080 past exam board presets
  * 5. Interactive Concept Quiz & Challenge:
  *    - 5 SEE syllabus-aligned questions with instant audio/visual feedback and explanations
@@ -77,7 +77,7 @@ export const PascalsLawSim: React.FC<BaseSimulationProps> = ({
   initialLanguage = 'en',
 }) => {
   // Global Simulation State
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -93,7 +93,7 @@ export const PascalsLawSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'p1',
       nameEn: 'Piston 1 (Effort Input)',
-      nameNe: 'पिस्टन १ (दबाब दिने इनपुट)',
+      nameNe: 'पिस्टन 1',
       angleDeg: 215, // Top-Left
       areaCm2: 10,
       displacementPx: 14,
@@ -104,7 +104,7 @@ export const PascalsLawSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'p2',
       nameEn: 'Piston 2 (Output A)',
-      nameNe: 'पिस्टन २ (आउटपुट)',
+      nameNe: 'पिस्टन 2',
       angleDeg: 325, // Top-Right
       areaCm2: 15,
       displacementPx: 21,
@@ -115,7 +115,7 @@ export const PascalsLawSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'p3',
       nameEn: 'Piston 3 (Output B)',
-      nameNe: 'पिस्टन ३ (आउटपुट)',
+      nameNe: 'पिस्टन 3',
       angleDeg: 145, // Bottom-Left
       areaCm2: 20,
       displacementPx: 28,
@@ -126,7 +126,7 @@ export const PascalsLawSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'p4',
       nameEn: 'Piston 4 (Output C)',
-      nameNe: 'पिस्टन ४ (आउटपुट)',
+      nameNe: 'पिस्टन 4',
       angleDeg: 35, // Bottom-Right
       areaCm2: 25,
       displacementPx: 35,
@@ -489,36 +489,36 @@ export const PascalsLawSim: React.FC<BaseSimulationProps> = ({
           active={activeMode === 'flask'}
           onClick={() => handleSelectMode('flask')}
           icon={<Smile size={18} color="#0284c7" />}
-          labelEn="1. Pascal's Flask (पास्कलको भाँडो)"
-          labelNe="१. पास्कलको भाँडो प्रयोग"
+          labelEn="1. Pascal's Flask"
+          labelNe="1. पास्कलको भाँडो प्रयोग"
         />
         <ModeTabButton
           active={activeMode === 'hydraulic_lift'}
           onClick={() => handleSelectMode('hydraulic_lift')}
           icon={<Car size={18} color="#16a34a" />}
-          labelEn="2. Hydraulic Lift (हाइड्रोलिक लिफ्ट)"
-          labelNe="२. हाइड्रोलिक लिफ्ट र प्रेस"
+          labelEn="2. Hydraulic Lift"
+          labelNe="2. हाइड्रोलिक लिफ्ट र प्रेस"
         />
         <ModeTabButton
           active={activeMode === 'hydraulic_brakes'}
           onClick={() => handleSelectMode('hydraulic_brakes')}
           icon={<Disc size={18} color="#ef4444" />}
-          labelEn="3. Hydraulic Brakes (हाइड्रोलिक ब्रेक)"
-          labelNe="३. हाइड्रोलिक ब्रेक प्रणाली"
+          labelEn="3. Hydraulic Brakes"
+          labelNe="3. हाइड्रोलिक ब्रेक प्रणाली"
         />
         <ModeTabButton
           active={activeMode === 'numerical_lab'}
           onClick={() => handleSelectMode('numerical_lab')}
           icon={<Calculator size={18} color="#8b5cf6" />}
-          labelEn="4. SEE Numerical Lab (गणितीय प्रयोगशाला)"
-          labelNe="४. SEE गणितीय प्रयोगशाला"
+          labelEn="4. SEE Numerical Lab"
+          labelNe="4. SEE गणितीय प्रयोगशाला"
         />
         <ModeTabButton
           active={activeMode === 'challenge_quiz'}
           onClick={() => handleSelectMode('challenge_quiz')}
           icon={<Award size={18} color="#f59e0b" />}
-          labelEn="5. Concept Quiz (प्रश्नोत्तरी)"
-          labelNe="५. अभ्यास र प्रश्नोत्तरी"
+          labelEn="5. Concept Quiz"
+          labelNe="5. अभ्यास र प्रश्नोत्तरी"
         />
       </div>
 
@@ -771,7 +771,7 @@ export const PascalsLawSim: React.FC<BaseSimulationProps> = ({
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '4px' }}>
                   <span style={{ fontWeight: '700', color: '#0284c7' }}>
-                    {lang === 'ne' ? 'पिस्टन १ को क्षेत्रफल (A₁):' : 'Piston 1 Area (A₁):'}
+                    {lang === 'ne' ? 'पिस्टन 1 को क्षेत्रफल (A₁):' : 'Piston 1 Area (A₁):'}
                   </span>
                   <span style={{ fontWeight: '800', color: '#0f172a' }}>{flaskP1AreaCm2} cm²</span>
                 </div>

@@ -1,8 +1,8 @@
 /**
  * LineDrawingPlayground.tsx
- * Simulation 05: My Line Drawing Playground (आफैँ रेखा कोरौँ)
- * Class 1 Mathematics - Chapter 2: Lines (रेखाहरू)
- * Based on Nepal CDC Curriculum (मेरो गणित, कक्षा १ - २०७६)
+ * Simulation 05: My Line Drawing Playground
+ * Class 1 Mathematics - Chapter 2: Lines
+ * Based on Nepal CDC Curriculum
  */
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -60,7 +60,7 @@ export const LineDrawingPlayground: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Language & Audio
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Playground Modes
@@ -428,7 +428,7 @@ export const LineDrawingPlayground: React.FC<Props> = ({
               {language === 'np' ? 'आफैँ रेखा कोरौँ' : 'My Line Drawing Playground'}
             </h1>
             <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
-              {language === 'np' ? 'कक्षा १ गणित • अध्याय २: रेखाहरू' : 'Class 1 Math • Chapter 2: Lines'}
+              {language === 'np' ? 'कक्षा 1 गणित • अध्याय 2: रेखाहरू' : 'Class 1 Math • Chapter 2: Lines'}
             </span>
           </div>
         </div>
@@ -486,21 +486,7 @@ export const LineDrawingPlayground: React.FC<Props> = ({
           </div>
 
           {/* Language */}
-          <button
-            onClick={() => setLanguage(language === 'np' ? 'en' : 'np')}
-            style={{
-              background: '#ede9fe',
-              color: '#6d28d9',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '13px',
-              cursor: 'pointer',
-            }}
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
 
           {/* Sound */}
           <button

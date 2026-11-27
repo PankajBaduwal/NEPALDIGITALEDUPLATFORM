@@ -1,6 +1,6 @@
 /**
- * Chapter 19 · Time (समय - घडी)
- * Sim 2: Clock Tower (घडी टावर) — Pure 2D Edition
+ * Chapter 19 · Time
+ * Sim 2: Clock Tower — Pure 2D Edition
  * 100% 2D SVG / Interactive Analog Clock – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -13,7 +13,7 @@ interface Props {
   userRole?: string;
 }
 
-const CLOCK_HOURS_NP = ['१२', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०', '११'];
+const CLOCK_HOURS_NP = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
 
 export const ClockTower: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
@@ -33,7 +33,7 @@ export const ClockTower: React.FC<Props> = ({ onBackToLibrary }) => {
     kit.tap();
     setHour(h);
     setMinute(m);
-    const mStr = m === 0 ? (isNe ? 'ठीक' : "o'clock") : (isNe ? '३० मिनेट' : 'half past');
+    const mStr = m === 0 ? (isNe ? 'ठीक' : "o'clock") : (isNe ? '30 मिनेट' : 'half past');
     kit.say(
       `${toNp(h)} बजेको छ। (${mStr})`,
       `It is ${h}:${m === 0 ? '00' : '30'}.`
@@ -56,12 +56,12 @@ export const ClockTower: React.FC<Props> = ({ onBackToLibrary }) => {
         answer: 'hour',
       },
       {
-        np: 'घडीको लामो सुई १२ मा र सानो सुई ४ मा हुँदा कति बज्छ?',
+        np: 'घडीको लामो सुई 12 मा र सानो सुई 4 मा हुँदा कति बज्छ?',
         en: 'Short hand on 4, long hand on 12. What time is it?',
         options: [
-          { key: '4', label: isNe ? '४ बजे (4:00)' : '4:00' },
-          { key: '12', label: isNe ? '१२ बजे (12:00)' : '12:00' },
-          { key: '6', label: isNe ? '६ बजे (6:00)' : '6:00' },
+          { key: '4', label: isNe ? '4 बजे (4:00)' : '4:00' },
+          { key: '12', label: isNe ? '12 बजे (12:00)' : '12:00' },
+          { key: '6', label: isNe ? '6 बजे (6:00)' : '6:00' },
         ],
         answer: '4',
       },
@@ -87,7 +87,7 @@ export const ClockTower: React.FC<Props> = ({ onBackToLibrary }) => {
             color: '#187C68',
           }}
         >
-          🕒 {isNe ? toNp(hour) : hour}:{minute === 0 ? '००' : '३०'}{' '}
+          🕒 {isNe ? toNp(hour) : hour}:{minute === 0 ? '00' : '30'}{' '}
           <span style={{ fontSize: 16, color: '#64748B' }}>
             {minute === 0 ? (isNe ? 'बजे' : "o'clock") : (isNe ? 'साढे' : 'half past')}
           </span>
@@ -135,7 +135,7 @@ export const ClockTower: React.FC<Props> = ({ onBackToLibrary }) => {
                   cursor: 'pointer',
                 }}
               >
-                :00 {L('(ठीक)', "(o'clock)")}
+                :00 {L('', "(o'clock)")}
               </button>
               <button
                 onClick={() => setTime(hour, 30)}
@@ -150,7 +150,7 @@ export const ClockTower: React.FC<Props> = ({ onBackToLibrary }) => {
                   cursor: 'pointer',
                 }}
               >
-                :30 {L('(साढे)', '(half past)')}
+                :30 {L('', '(half past)')}
               </button>
             </div>
           </div>

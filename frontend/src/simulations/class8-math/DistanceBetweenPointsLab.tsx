@@ -15,10 +15,10 @@ interface PresetPair {
 }
 
 const PRESETS: PresetPair[] = [
-  { id: 'p1', nameNp: 'A(२, ३) र B(६, ६)', nameEn: 'A(2, 3) and B(6, 6)', x1: 2, y1: 3, x2: 6, y2: 6 },
-  { id: 'p2', nameNp: 'A(०, ०) र B(३, ४)', nameEn: 'A(0, 0) and B(3, 4)', x1: 0, y1: 0, x2: 3, y2: 4 },
-  { id: 'p3', nameNp: 'A(-४, ०) र B(२, -४)', nameEn: 'A(-4, 0) and B(2, -4)', x1: -4, y1: 0, x2: 2, y2: -4 },
-  { id: 'p4', nameNp: 'A(-३, -२) र B(१, १)', nameEn: 'A(-3, -2) and B(1, 1)', x1: -3, y1: -2, x2: 1, y2: 1 }
+  { id: 'p1', nameNp: 'A(2, 3) र B(6, 6)', nameEn: 'A(2, 3) and B(6, 6)', x1: 2, y1: 3, x2: 6, y2: 6 },
+  { id: 'p2', nameNp: 'A(0, 0) र B(3, 4)', nameEn: 'A(0, 0) and B(3, 4)', x1: 0, y1: 0, x2: 3, y2: 4 },
+  { id: 'p3', nameNp: 'A(-4, 0) र B(2, -4)', nameEn: 'A(-4, 0) and B(2, -4)', x1: -4, y1: 0, x2: 2, y2: -4 },
+  { id: 'p4', nameNp: 'A(-3, -2) र B(1, 1)', nameEn: 'A(-3, -2) and B(1, 1)', x1: -3, y1: -2, x2: 1, y2: 1 }
 ];
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
@@ -34,13 +34,13 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'मूलबिन्दु (०, ०) र बिन्दु (३, ४) बीचको सीधा दूरी कति हुन्छ?',
+    np: 'मूलबिन्दु (0, 0) र बिन्दु (3, 4) बीचको सीधा दूरी कति हुन्छ?',
     en: 'What is the straight distance between the origin (0, 0) and point (3, 4)?',
     options: [
-      { key: 'A', label: '५ एकाइ (5 units)' },
-      { key: 'B', label: '७ एकाइ' },
-      { key: 'C', label: '२५ एकाइ' },
-      { key: 'D', label: '३.५ एकाइ' },
+      { key: 'A', label: '5 units (5 units)' },
+      { key: 'B', label: '7 units' },
+      { key: 'C', label: '25 units' },
+      { key: 'D', label: '3.5 units' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'दूरी सूत्र कुन प्रसिद्ध ज्यामितीय साध्य (Theorem) मा आधारित छ?',
     en: 'On which famous geometric theorem is the distance formula based?',
     options: [
-      { key: 'A', label: 'पाइथागोरसको साध्य (Pythagoras Theorem)' },
-      { key: 'B', label: 'थेल्सको साध्य' },
-      { key: 'C', label: 'युक्लिडको साध्य' },
-      { key: 'D', label: 'क्षेत्रमिति साध्य' },
+      { key: 'A', label: 'Pythagoras theorem' },
+      { key: 'B', label: 'Thales theorem' },
+      { key: 'C', label: 'Euclid’s theorem' },
+      { key: 'D', label: 'Mensuration theorem' },
     ],
     answer: 'A',
   }
@@ -138,7 +138,7 @@ export const DistanceBetweenPointsLab: React.FC<{
               activeTab === 'visual' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('१. ग्राफीय रेखाचित्र र दूरी (Visual Graph)', '1. Visual Graph & Distance')}
+            {L('1. ग्राफीय रेखाचित्र र दूरी (Visual Graph)', '1. Visual Graph & Distance')}
           </button>
           <button
             onClick={() => setActiveTab('pythagoras')}
@@ -146,7 +146,7 @@ export const DistanceBetweenPointsLab: React.FC<{
               activeTab === 'pythagoras' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('२. पाइथागोरस साध्य विधि (Step-by-Step)', '2. Pythagoras Step-by-Step')}
+            {L('2. पाइथागोरस साध्य विधि (Step-by-Step)', '2. Pythagoras Step-by-Step')}
           </button>
           <button
             onClick={() => setActiveTab('challenge')}
@@ -154,7 +154,7 @@ export const DistanceBetweenPointsLab: React.FC<{
               activeTab === 'challenge' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            {L('३. दूरी गणना अभ्यास (Distance Challenge)', '3. Practice Challenge')}
+            {L('3. दूरी गणना अभ्यास (Distance Challenge)', '3. Practice Challenge')}
           </button>
         </div>
 
@@ -260,9 +260,9 @@ export const DistanceBetweenPointsLab: React.FC<{
           <div className="text-amber-400 font-sans font-bold text-sm">
             {L('पाइथागोरस साध्यद्वारा दूरी निकाल्ने चरणहरू:', 'Pythagoras Distance Derivation Steps:')}
           </div>
-          <div>१. क्षितिज अन्तर (Horizontal difference): x₂ - x₁ = {x2} - ({x1}) = {dx} ⇒ (x₂ - x₁)² = {dxSq}</div>
-          <div>२. ठाडो अन्तर (Vertical difference): y₂ - y₁ = {y2} - ({y1}) = {dy} ⇒ (y₂ - y₁)² = {dySq}</div>
-          <div>३. दूरी AB = √[(x₂ - x₁)² + (y₂ - y₁)²] = √[{dxSq} + {dySq}] = √{sumSq} = <span className="text-emerald-400 font-bold text-sm">{distance.toFixed(2)} एकाइ</span></div>
+          <div>1. Horizontal difference: x₂ - x₁ = {x2} - ({x1}) = {dx} ⇒ (x₂ - x₁)² = {dxSq}</div>
+          <div>2. Vertical difference: y₂ - y₁ = {y2} - ({y1}) = {dy} ⇒ (y₂ - y₁)² = {dySq}</div>
+          <div>3. Distance AB = √[(x₂ - x₁)² + (y₂ - y₁)²] = √[{dxSq} + {dySq}] = √{sumSq} = <span className="text-emerald-400 font-bold text-sm">{distance.toFixed(2)} units</span></div>
         </div>
 
         {/* Challenge Mode Input */}
@@ -298,7 +298,7 @@ export const DistanceBetweenPointsLab: React.FC<{
                 }`}
               >
                 {challengeVerdict === 'correct'
-                  ? L(`🎉 स्याबास! सही दूरी = ${distance.toFixed(2)} एकाइ`, `🎉 Correct! Distance = ${distance.toFixed(2)} units`)
+                  ? L(`🎉 स्याबास! सही दूरी = ${distance.toFixed(2)} units`, `🎉 Correct! Distance = ${distance.toFixed(2)} units`)
                   : L(`❌ मिलेन! सूत्र: d = √[(${dx})² + (${dy})²] = √${sumSq} = ${distance.toFixed(2)}`, `❌ Incorrect. Solve d = √${sumSq} = ${distance.toFixed(2)}`)}
               </div>
             )}

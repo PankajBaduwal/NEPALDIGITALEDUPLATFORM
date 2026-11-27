@@ -1,12 +1,12 @@
 /**
  * SoilFormationSim.tsx
- * Simulation 43: 2D Soil Formation & Weathering Simulator (माटो निर्माण प्रक्रिया)
- * Grade 6 Science • Unit 11: Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 43: 2D Soil Formation & Weathering Simulator
+ * Grade 6 Science • Unit 11: Earth and Space
  *
  * Full 2D Interactive Pedogenesis Simulation featuring:
- * 1. Physical Weathering (भौतिक क्षयीकरण): Freeze-thaw frost wedging & thermal expansion
- * 2. Chemical Weathering (रासायनिक क्षयीकरण): Acid rain and mineral hydration
- * 3. Biological Weathering (जैविक क्षयीकरण): Lichen acids and tree root intrusion
+ * 1. Physical Weathering: Freeze-thaw frost wedging & thermal expansion
+ * 2. Chemical Weathering: Acid rain and mineral hydration
+ * 3. Biological Weathering: Lichen acids and tree root intrusion
  * 4. Humus Formation: Decayed organic litter enriching fine rock powder into fertile soil over 500+ years
  */
 
@@ -22,7 +22,7 @@ export const SoilFormationSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -214,7 +214,7 @@ export const SoilFormationSim: React.FC<BaseSimulationProps> = ({
 
       ctx.fillStyle = '#94a3b8';
       ctx.font = '10px sans-serif';
-      ctx.fillText(lang === 'en' ? 'Pedogenesis: 1 inch = 500+ years!' : '१ इन्च माटो बन्न ५००+ वर्ष लाग्छ!', 32, 102);
+      ctx.fillText(lang === 'en' ? 'Pedogenesis: 1 inch = 500+ years!' : '1 इन्च माटो बन्न 500+ वर्ष लाग्छ!', 32, 102);
 
       animFrameRef.current = requestAnimationFrame(render);
     };
@@ -270,9 +270,9 @@ export const SoilFormationSim: React.FC<BaseSimulationProps> = ({
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '14px' }}>
               {[
-                { id: 'physical', en: '1. Physical Weathering (भौतिक क्षयीकरण)', ne: '१. भौतिक क्षयीकरण (Frost & Heat)' },
-                { id: 'chemical', en: '2. Chemical Weathering (रासायनिक क्षयीकरण)', ne: '२. रासायनिक क्षयीकरण (Acid Rain)' },
-                { id: 'biological', en: '3. Biological Weathering (जैविक क्षयीकरण)', ne: '३. जैविक क्षयीकरण (Lichens & Roots)' },
+                { id: 'physical', en: '1. Physical Weathering', ne: '1. भौतिक क्षयीकरण (Frost & Heat)' },
+                { id: 'chemical', en: '2. Chemical Weathering', ne: '2. रासायनिक क्षयीकरण (Acid Rain)' },
+                { id: 'biological', en: '3. Biological Weathering', ne: '3. जैविक क्षयीकरण (Lichens & Roots)' },
               ].map(wItem => (
                 <button
                   key={wItem.id}
@@ -341,11 +341,11 @@ export const SoilFormationSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: Where Soil Comes From' : '१. खोज: माटो कसरी बन्छ?')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: 3 Weathering Paths' : '२. अन्वेषण: ३ क्षयीकरण विधि')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Time Scale (Centuries)' : '३. अवलोकन: समयको गति (शताब्दी)')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Biological Humus' : '४. बुझाइ: जैविक ह्युमसको महत्व')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Weathering Quiz' : '५. चुनौती: क्षयीकरण प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: Where Soil Comes From' : '1. खोज: माटो कसरी बन्छ?')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: 3 Weathering Paths' : '2. अन्वेषण: 3 क्षयीकरण विधि')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Time Scale (Centuries)' : '3. अवलोकन: समयको गति (शताब्दी)')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Biological Humus' : '4. बुझाइ: जैविक ह्युमसको महत्व')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Weathering Quiz' : '5. चुनौती: क्षयीकरण प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
@@ -355,10 +355,10 @@ export const SoilFormationSim: React.FC<BaseSimulationProps> = ({
                   : 'पृथ्वीको सबै माटो पहिले कडा चट्टान थियो। घाम, पानी, हावा र जीवले गर्दा चट्टान फुटेर मसिना कण बन्दछन्।')}
                 {stage === 'explore' && (lang === 'en'
                   ? 'In the Himalayas, water seeps into rock cracks, freezes at night, expands by 9%, and wedges massive rocks apart!'
-                  : 'हिमाली भेगमा चट्टानका चेपमा पसेको पानी राति जमेर बरफ बन्दा ९% ले फैलिन्छ र कडा चट्टानलाई पनि चक्नाचुर पार्छ!')}
+                  : 'हिमाली भेगमा चट्टानका चेपमा पसेको पानी राति जमेर बरफ बन्दा 9% ले फैलिन्छ र कडा चट्टानलाई पनि चक्नाचुर पार्छ!')}
                 {stage === 'observe' && (lang === 'en'
                   ? 'Slide the time forward to 500 years. Notice how slowly soil forms—only about 2.5 to 3.5 cm of fertile soil in 500 years!'
-                  : 'समयलाई ५०० वर्षमा पुर्याउनुहोस्। हेर्नुहोस्, ५०० वर्षमा मुस्किलले २.५ देखि ३.५ से.मी. मात्र मलिलो माटो बन्न सक्छ!')}
+                  : 'समयलाई 500 वर्षमा पुर्याउनुहोस्। हेर्नुहोस्, 500 वर्षमा मुस्किलले 2.5 देखि 3.5 से.मी. मात्र मलिलो माटो बन्न सक्छ!')}
                 {stage === 'understand' && (lang === 'en'
                   ? 'Because soil takes centuries to form, conserving it from erosion is vital for human survival and food security.'
                   : 'माटो बन्न शताब्दीयौं लाग्ने भएकाले यसलाई भू-क्षयबाट जोगाउनु मानव जीवन र खाद्य सुरक्षाका लागि अनिवार्य छ।')}
@@ -368,12 +368,12 @@ export const SoilFormationSim: React.FC<BaseSimulationProps> = ({
                 <p style={{ margin: '0 0 10px 0', fontSize: '12px', color: '#e2e8f0' }}>
                   {lang === 'en'
                     ? 'Approximately how many years does nature take to form just 1 inch (2.5 cm) of fertile topsoil?'
-                    : 'प्रकृतिमा केवल १ इन्च (२.५ से.मी.) मलिलो माटो बन्न लगभग कति वर्ष लाग्छ?'}
+                    : 'प्रकृतिमा केवल 1 इन्च (2.5 से.मी.) मलिलो माटो बन्न लगभग कति वर्ष लाग्छ?'}
                 </p>
                 {[
-                  { id: 1, en: '500+ Years (५००+ वर्ष)', ne: '५००+ वर्ष' },
-                  { id: 2, en: '5 Years (५ वर्ष)', ne: '५ वर्ष' },
-                  { id: 3, en: '1 Month (१ महिना)', ne: '१ महिना' },
+                  { id: 1, en: '500+ Years', ne: '500+ वर्ष' },
+                  { id: 2, en: '5 Years', ne: '5 वर्ष' },
+                  { id: 3, en: '1 Month', ne: '1 महिना' },
                 ].map(opt => (
                   <button
                     key={opt.id}

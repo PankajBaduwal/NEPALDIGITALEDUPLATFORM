@@ -1,5 +1,5 @@
 /**
- * Lesson 4 · Number patterns (सङ्ख्याको ढाँचा)
+ * Lesson 4 · Number patterns
  * Pattern Train — wagons follow an arithmetic rule (add or subtract); find the missing wagon number!
  * Pure 2D Implementation for Smart Boards & Desktops.
  */

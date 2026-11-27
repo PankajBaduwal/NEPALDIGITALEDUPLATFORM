@@ -1,5 +1,5 @@
 /**
- * Lesson 4 · Comparison of numbers (सङ्ख्याको तुलना)
+ * Lesson 4 · Comparison of numbers
  * Number Seesaw — the bigger number pulls its side down. Choose >, < or =.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -161,8 +161,8 @@ export const NumberSeesaw: React.FC<Props> = ({ onBackToLibrary }) => {
           <span style={{ fontSize: 13, fontWeight: 800, color: '#0284C7', alignSelf: 'center', marginRight: 4 }}>
             {kit.t('बायाँ', 'Left')}:
           </span>
-          <CBtn color="#0284C7" onClick={() => stepVal('a', 10)}>+१०</CBtn>
-          <CBtn color="#0284C7" onClick={() => stepVal('a', -10)}>-१०</CBtn>
+          <CBtn color="#0284C7" onClick={() => stepVal('a', 10)}>+10</CBtn>
+          <CBtn color="#0284C7" onClick={() => stepVal('a', -10)}>-10</CBtn>
         </div>
 
         {/* Adjust B */}
@@ -170,8 +170,8 @@ export const NumberSeesaw: React.FC<Props> = ({ onBackToLibrary }) => {
           <span style={{ fontSize: 13, fontWeight: 800, color: '#E11D48', alignSelf: 'center', marginRight: 4 }}>
             {kit.t('दायाँ', 'Right')}:
           </span>
-          <CBtn color="#E11D48" onClick={() => stepVal('b', 10)}>+१०</CBtn>
-          <CBtn color="#E11D48" onClick={() => stepVal('b', -10)}>-१०</CBtn>
+          <CBtn color="#E11D48" onClick={() => stepVal('b', 10)}>+10</CBtn>
+          <CBtn color="#E11D48" onClick={() => stepVal('b', -10)}>-10</CBtn>
         </div>
 
         {kit.mode === 'LEARN' && (

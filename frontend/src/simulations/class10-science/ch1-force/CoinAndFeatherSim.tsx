@@ -2,7 +2,7 @@
  * CoinAndFeatherSim.tsx
  * Simulation: Robert Boyle's Coin and Feather Experiment in a Vacuum (1660)
  * (रोबर्ट बोयलको गिनी र प्वाँखको प्रयोग - शुन्यमा स्वतन्त्र खसाइ र गुरुत्व प्रवेग)
- * Grade 10 Science • Chapter 1: Force & Gravitation (बल र गुरुत्वाकर्षण)
+ * Grade 10 Science • Chapter 1: Force & Gravitation
  *
  * Upgraded Features:
  * - Dynamic Object Pairs:
@@ -191,7 +191,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -275,31 +275,31 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'boyle-classic',
       nameEn: 'Boyle 1660 (Compare)',
-      nameNe: 'बोयल तुलनात्मक (१६६०)',
+      nameNe: 'बोयल तुलनात्मक (1660)',
       viewMode: 'compare',
       vacuumPercent: 100,
       gravity: 'earth',
       objectPair: 'coin-feather',
       icon: '🏛️',
       descEn: 'Side-by-side: Tube 1 has air (coin falls first), Tube 2 is in vacuum (both land together)!',
-      descNe: 'दुवै नली सँगै: नली १ मा हावा छ (सिक्का छिटो खस्छ), नली २ मा शून्य छ (दुवै सँगै खस्छन्)!',
+      descNe: 'दुवै नली सँगै: नली 1 मा हावा छ (सिक्का छिटो खस्छ), नली 2 मा शून्य छ (दुवै सँगै खस्छन्)!',
     },
     {
       id: 'tube1-study',
       nameEn: 'Tube 1: In Air',
-      nameNe: 'नली १: हावामा',
+      nameNe: 'नली 1: हावामा',
       viewMode: 'tube1',
       vacuumPercent: 0,
       gravity: 'earth',
       objectPair: 'coin-feather',
       icon: '🌬️',
       descEn: 'Zoom into Tube 1 to inspect aerodynamic drag, turbulence, and the feather’s lateral flutter.',
-      descNe: 'नली १ को ठूलो दृश्य: हावाको अवरोध र प्वाँखको हावामा हल्लिने प्रक्रिया नजिकबाट हेर्नुहोस्।',
+      descNe: 'नली 1 को ठूलो दृश्य: हावाको अवरोध र प्वाँखको हावामा हल्लिने प्रक्रिया नजिकबाट हेर्नुहोस्।',
     },
     {
       id: 'tube2-study',
       nameEn: 'Tube 2: Vacuum Lab',
-      nameNe: 'नली २: शुन्य प्रयोगशाला',
+      nameNe: 'नली 2: शुन्य प्रयोगशाला',
       viewMode: 'tube2',
       vacuumPercent: 100,
       gravity: 'earth',
@@ -311,7 +311,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
     {
       id: 'apollo-moon',
       nameEn: 'Apollo 15 Moon',
-      nameNe: 'अपोलो १५ चन्द्रमा',
+      nameNe: 'अपोलो 15 चन्द्रमा',
       viewMode: 'compare',
       vacuumPercent: 100,
       gravity: 'moon',
@@ -482,23 +482,23 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
   const getHeavyLabel = () => {
     const currentPair = objectPairRef.current || objectPair;
     if (currentPair === 'hammer-feather') {
-      return lang === 'ne' ? 'हथौडा (१.३२ kg)' : 'Apollo Hammer (1.32 kg)';
+      return lang === 'ne' ? 'हथौडा (1.32 kg)' : 'Apollo Hammer (1.32 kg)';
     }
     if (currentPair === 'apple-leaf') {
-      return lang === 'ne' ? 'स्याउ (१५० g)' : 'Red Apple (150g)';
+      return lang === 'ne' ? 'स्याउ (150 g)' : 'Red Apple (150g)';
     }
-    return lang === 'ne' ? 'सिक्का (३० g)' : 'Gold Coin (30g)';
+    return lang === 'ne' ? 'सिक्का (30 g)' : 'Gold Coin (30g)';
   };
 
   const getLightLabel = () => {
     const currentPair = objectPairRef.current || objectPair;
     if (currentPair === 'hammer-feather') {
-      return lang === 'ne' ? 'बाजको प्वाँख (०.०३ kg)' : 'Falcon Feather (0.03 kg)';
+      return lang === 'ne' ? 'बाजको प्वाँख (0.03 kg)' : 'Falcon Feather (0.03 kg)';
     }
     if (currentPair === 'apple-leaf') {
-      return lang === 'ne' ? 'पात (१ g)' : 'Leaf (1g)';
+      return lang === 'ne' ? 'पात (1 g)' : 'Leaf (1g)';
     }
-    return lang === 'ne' ? 'प्वाँख (२ g)' : 'Feather (2g)';
+    return lang === 'ne' ? 'प्वाँख (2 g)' : 'Feather (2g)';
   };
 
   // =========================================================================
@@ -1102,7 +1102,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
         : '(Normal Atmospheric Air: 101.3 kPa)';
       const subNe = isVacuum
         ? `(हावा निकालिएको: ${vacLevel}% शून्य)`
-        : '(सामान्य वायुमण्डलीय हावा: १०१.३ kPa)';
+        : '';
       ctx.font = '700 11px system-ui, sans-serif';
       ctx.fillStyle = '#334155';
       ctx.fillText(lang === 'ne' ? subNe : subEn, centerX, topY - 17);
@@ -1300,8 +1300,8 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       const tubeTopY = groundY - tubeH;
       const fallRange = tubeH - 72;
 
-      drawCylinder(t1CenterX, tubeW, tubeH, false, 0, '1. TUBE WITH AIR', '१. हावा भएको नली');
-      drawCylinder(t2CenterX, tubeW, tubeH, true, vacuumPercent, '2. TUBE IN VACUUM', '२. शून्य नली (भ्याकुम)');
+      drawCylinder(t1CenterX, tubeW, tubeH, false, 0, '1. TUBE WITH AIR', '1. हावा भएको नली');
+      drawCylinder(t2CenterX, tubeW, tubeH, true, vacuumPercent, '2. TUBE IN VACUUM', '2. शून्य नली (भ्याकुम)');
 
       // Tube 1 High-Visibility Air Particles (Molecules)
       const t1InnerL = t1CenterX - tubeW / 2 + 10;
@@ -1439,7 +1439,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.font = '800 11.5px system-ui, sans-serif';
       ctx.fillStyle = '#b45309';
       ctx.textAlign = 'center';
-      ctx.fillText(lang === 'ne' ? '१. हावामा (In Air)' : '1. In Air (हावामा)', midGapX, cardTopY + 18);
+      ctx.fillText(lang === 'ne' ? '1. हावामा (In Air)' : '1. In Air', midGapX, cardTopY + 18);
 
       // In Air explanation
       ctx.font = '600 10.5px system-ui, sans-serif';
@@ -1464,12 +1464,12 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
 
       ctx.font = '800 11.5px system-ui, sans-serif';
       ctx.fillStyle = '#0369a1';
-      ctx.fillText(lang === 'ne' ? '२. शुन्यमा (In Vacuum)' : '2. In Vacuum (शून्यमा)', midGapX, cardTopY + 124);
+      ctx.fillText(lang === 'ne' ? '2. शुन्यमा (In Vacuum)' : '2. In Vacuum', midGapX, cardTopY + 124);
 
       // In Vacuum explanation
       ctx.font = '600 10.5px system-ui, sans-serif';
       ctx.fillStyle = '#1e293b';
-      ctx.fillText(lang === 'ne' ? 'हावाको अवरोध = ०' : 'Air resistance = 0', midGapX, cardTopY + 151);
+      ctx.fillText(lang === 'ne' ? 'हावाको अवरोध = 0' : 'Air resistance = 0', midGapX, cardTopY + 151);
       ctx.fillText(lang === 'ne' ? 'दुवै समान प्रवेगले' : 'Identical acceleration:', midGapX, cardTopY + 167);
       ctx.font = '800 11px system-ui, sans-serif';
       ctx.fillStyle = '#15803d';
@@ -1534,7 +1534,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       const tubeTopY = groundY - tubeH;
       const fallRange = tubeH - 75;
 
-      drawCylinder(centerX, tubeW, tubeH, false, 0, 'TUBE 1: NORMAL CONDITIONS WITH AIR', 'नली १: हावा भएको सामान्य अवस्था');
+      drawCylinder(centerX, tubeW, tubeH, false, 0, 'TUBE 1: NORMAL CONDITIONS WITH AIR', 'नली 1: हावा भएको सामान्य अवस्था');
 
       const innerL = centerX - tubeW / 2 + 12;
       const innerR = centerX + tubeW / 2 - 12;
@@ -1657,7 +1657,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       const tubeTopY = groundY - tubeH;
       const fallRange = tubeH - 75;
 
-      drawCylinder(centerX, tubeW, tubeH, true, vacuumPercent, 'TUBE 2: PURE VACUUM CHAMBER', 'नली २: पूर्ण शुन्य नली प्रयोगशाला');
+      drawCylinder(centerX, tubeW, tubeH, true, vacuumPercent, 'TUBE 2: PURE VACUUM CHAMBER', 'नली 2: पूर्ण शुन्य नली प्रयोगशाला');
 
       const innerL = centerX - tubeW / 2 + 12;
       const innerR = centerX + tubeW / 2 - 12;
@@ -1792,7 +1792,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.fillText(
         vacuumPercent >= 95
           ? lang === 'ne'
-            ? '✨ १००% पूर्ण शुन्य: हावाको अवरोध = ० | दुवै सँगै खस्छन्!'
+            ? 'दुवै सँगै खस्छन्!'
             : '✨ 100% PURE VACUUM: Zero Drag | Identical Simultaneous Fall!'
           : lang === 'ne'
           ? `⚠️ आंशिक शुन्य (${vacuumPercent}%): पम्प चलाएर हावा तान्नुहोस्!`
@@ -1947,10 +1947,10 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       qEn: 'What is the condition called when a body falls freely solely under the influence of gravity without any opposition?',
       qNe: 'कुनै पनि बाह्य अवरोध बिना केवल गुरुत्व बलको प्रभावमा मात्र कुनै वस्तु खस्ने अवस्थालाई के भनिन्छ?',
       optsEn: [
-        'Free Fall (स्वतन्त्र खसाइ)',
-        'Terminal Velocity (अन्तिम वेग)',
-        'Centripetal Motion (अभिकेन्द्री गति)',
-        'Frictional Drag (घर्षण गति)',
+        'Free Fall',
+        'Terminal Velocity',
+        'Centripetal Motion',
+        'Frictional Drag',
       ],
       optsNe: [
         'स्वतन्त्र खसाइ (Free Fall)',
@@ -1966,7 +1966,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
     },
     {
       qEn: 'During the Apollo 15 lunar mission in 1971, Astronaut David Scott dropped a 1.32 kg hammer and a 0.03 kg falcon feather on the Moon. What happened?',
-      qNe: 'सन् १९७१ मा अपोलो १५ का अन्तरिक्ष यात्री डेभिड स्कटले चन्द्रमामा १.३२ केजीको हथौडा र ०.०३ केजीको प्वाँख सँगै खसाल्दा के भएको थियो?',
+      qNe: 'सन् 1971 मा अपोलो 15 का अन्तरिक्ष यात्री डेभिड स्कटले चन्द्रमामा 1.32 केजीको हथौडा र 0.03 केजीको प्वाँख सँगै खसाल्दा के भएको थियो?',
       optsEn: [
         'Both hit the lunar surface at the exact same instant because the Moon has no atmosphere',
         'The hammer landed first because it is 44 times heavier',
@@ -1975,7 +1975,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ],
       optsNe: [
         'चन्द्रमामा वायुमण्डल नभएकाले दुवै वस्तु ठीक एउटै समयमा सँगै चन्द्रमाको सतहमा पुगे',
-        'हथौडा ४४ गुणा भारी भएकाले पहिले खस्यो',
+        'हथौडा 44 गुणा भारी भएकाले पहिले खस्यो',
         'प्वाँख अन्तरिक्षमा उडेर गयो',
         'चन्द्रमामा गुरुत्वाकर्षण नभएकाले दुवै खसेनन्',
       ],
@@ -2375,7 +2375,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
               <span style={{ fontSize: '11px', fontWeight: 800, color: '#0369a1', textTransform: 'uppercase' }}>
-                {lang === 'ne' ? 'नली २ शुन्यता र चाप:' : 'Tube 2 Pressure & Vacuum:'}
+                {lang === 'ne' ? 'नली 2 शुन्यता र चाप:' : 'Tube 2 Pressure & Vacuum:'}
               </span>
               <span style={{ fontSize: '11px', fontWeight: 800, fontFamily: 'monospace', color: '#15803d' }}>
                 {vacuumPercent}% {vacuumPercent === 100 ? '(Pure Vacuum)' : '(Partial)'}
@@ -2471,7 +2471,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                 marginBottom: '8px',
               }}
             >
-              {lang === 'ne' ? 'पूर्ण शुन्य बनाउनुहोस् (१००%)' : 'Evacuate to 100% Vacuum'}
+              {lang === 'ne' ? 'पूर्ण शुन्य बनाउनुहोस् (100%)' : 'Evacuate to 100% Vacuum'}
             </button>
 
             <input

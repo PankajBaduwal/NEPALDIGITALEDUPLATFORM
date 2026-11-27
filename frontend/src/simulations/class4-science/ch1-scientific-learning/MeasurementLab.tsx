@@ -1,16 +1,16 @@
 /**
  * MeasurementLab.tsx
- * Simulation 3: 2D Measurement Laboratory (नाप तथा तौल प्रयोगशाला)
- * Grade 4 Science • Chapter 1: Scientific Learning (वैज्ञानिक सिकाइ)
+ * Simulation 3: 2D Measurement Laboratory
+ * Grade 4 Science • Chapter 1: Scientific Learning
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
  * - 3 Dedicated Interactive Scientific Measurement Instruments:
- *   1. Dual-Pan Beam Balance (तराजु र ढक): Central pivot needle, left mystery mass, right addable weights (ढक),
+ *   1. Dual-Pan Beam Balance: Central pivot needle, left mystery mass, right addable weights,
  *      physics equilibrium tilt calculation.
- *   2. Graduated Cylinder (नाप्ने सिलिन्डर): Transparent borosilicate glass, liquid volume in ml,
+ *   2. Graduated Cylinder: Transparent borosilicate glass, liquid volume in ml,
  *      meniscus curve, and water displacement volume of an irregular stone (V2 - V1 = V_stone).
- *   3. Precision Metric Ruler (स्केल): Standard 0-30cm ruler measuring pencil, eraser, and key.
+ *   3. Precision Metric Ruler: Standard 0-30cm ruler measuring pencil, eraser, and key.
  * - Bilingual EN/NE, tactile sounds, and curriculum mastery challenge.
  */
 import React, { useState, useRef, useEffect } from 'react';
@@ -25,7 +25,7 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -136,7 +136,7 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
     };
   }, [mode, leftMass, rightMass, liquidMl, hasStoneInCylinder, selectedItem, lang]);
 
-  // TOOL 1: DUAL-PAN BEAM BALANCE (तराजु)
+  // TOOL 1: DUAL-PAN BEAM BALANCE
   function renderBeamBalance(
     ctx: CanvasRenderingContext2D,
     cx: number,
@@ -221,10 +221,10 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
     ctx.textAlign = 'center';
     ctx.fillText(
       isBalanced
-        ? currentLang === 'en' ? '⚖️ EQUILIBRIUM BALANCED! (बराबर)' : '⚖️ सन्तुलन मिल्यो! (बराबर)'
+        ? currentLang === 'en' ? '⚖️ EQUILIBRIUM BALANCED!' : '⚖️ सन्तुलन मिल्यो!'
         : diff < 0
-        ? currentLang === 'en' ? 'Left is heavier (बायाँ गह्रौं)' : 'बायाँ पल्ला गह्रौं छ'
-        : currentLang === 'en' ? 'Right is heavier (दायाँ गह्रौं)' : 'दायाँ पल्ला गह्रौं छ',
+        ? currentLang === 'en' ? 'Left is heavier' : 'बायाँ पल्ला गह्रौं छ'
+        : currentLang === 'en' ? 'Right is heavier' : 'दायाँ पल्ला गह्रौं छ',
       cx,
       baseY - 225
     );
@@ -323,7 +323,7 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
     ctx.restore();
   }
 
-  // TOOL 2: GRADUATED CYLINDER (नाप्ने सिलिन्डर)
+  // TOOL 2: GRADUATED CYLINDER
   function renderGraduatedCylinder(
     ctx: CanvasRenderingContext2D,
     cx: number,
@@ -431,13 +431,13 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
       ctx.fillText(`Water Displacement: V2 - V1 = 65ml - 40ml = 25 ml`, cx, y - 38);
       ctx.fillStyle = '#cbd5e1';
       ctx.font = '10px system-ui';
-      ctx.fillText(`Stone Volume = 25 cm³ (ढुङ्गाको आयतन = २५ घन से.मि.)`, cx, y - 22);
+      ctx.fillText(`Stone Volume = 25 cm³ (ढुङ्गाको आयतन = 25 घन से.मि.)`, cx, y - 22);
     }
 
     ctx.restore();
   }
 
-  // TOOL 3: PRECISION METRIC RULER (स्केल)
+  // TOOL 3: PRECISION METRIC RULER
   function renderMetricRuler(
     ctx: CanvasRenderingContext2D,
     cx: number,
@@ -630,7 +630,7 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 1: Scientific Learning'
-          : 'कक्षा ४ विज्ञान • एकाइ १: वैज्ञानिक सिकाइ'
+          : 'कक्षा 4 विज्ञान • एकाइ 1: वैज्ञानिक सिकाइ'
       }
       currentStage={stage}
       onStageChange={setStage}
@@ -710,7 +710,7 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
               {mode === 'mass'
                 ? (lang === 'en' ? `Balance Weights: ${totalRightWeights}g` : `दायाँ पल्ला: ${totalRightWeights} ग्राम`)
                 : mode === 'volume'
-                ? (lang === 'en' ? `Liquid Level: ${hasStoneInCylinder ? '75 ml' : '50 ml'}` : `आयतन: ${hasStoneInCylinder ? '७५ ml' : '५० ml'}`)
+                ? (lang === 'en' ? `Liquid Level: ${hasStoneInCylinder ? '75 ml' : '50 ml'}` : `आयतन: ${hasStoneInCylinder ? '75 ml' : '50 ml'}`)
                 : (lang === 'en' ? `Object: ${selectedItem}` : `वस्तु: ${selectedItem}`)}
             </span>
           </div>
@@ -754,14 +754,14 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
                   {mode === 'mass'
                     ? (lang === 'en' ? `Beam Balance Tilt: ${balanceTilt.toFixed(1)}°` : `तराजु सन्तुलन अवस्था`)
                     : mode === 'volume'
-                    ? (lang === 'en' ? `Displaced Stone Volume = 25 ml (cm³)` : `ढुङ्गाको आयतन = २५ मिलिलिटर`)
+                    ? (lang === 'en' ? `Displaced Stone Volume = 25 ml (cm³)` : `ढुङ्गाको आयतन = 25 मिलिलिटर`)
                     : (lang === 'en' ? `Length Measurement via Metric Ruler` : `स्केलबाट लम्बाइ मापन`)}
                 </div>
                 <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>
                   {mode === 'mass'
-                    ? (lang === 'en' ? `Left Unknown Pan: 80g | Right Weights Pan: ${totalRightWeights}g` : `बायाँ वस्तु: ८० ग्राम | दायाँ ढक: ${totalRightWeights} ग्राम`)
+                    ? (lang === 'en' ? `Left Unknown Pan: 80g | Right Weights Pan: ${totalRightWeights}g` : `दायाँ ढक: ${totalRightWeights} ग्राम`)
                     : mode === 'volume'
-                    ? (lang === 'en' ? `V_solid = V2 (Final) - V1 (Initial) = 75ml - 50ml = 25ml` : `ठोसको आयतन = अन्तिम आयतन - सुरुवाती आयतन = २५ मिलिलिटर`)
+                    ? (lang === 'en' ? `V_solid = V2 (Final) - V1 (Initial) = 75ml - 50ml = 25ml` : `ठोसको आयतन = अन्तिम आयतन - सुरुवाती आयतन = 25 मिलिलिटर`)
                     : (lang === 'en' ? `Read direct mm/cm markings aligned with object edges` : `वस्तुको छेउ सिधा राखी सेन्टिमिटर र मिलिमिटर हेर्नुहोस्`)}
                 </div>
               </div>
@@ -878,7 +878,7 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
               }}
             >
               <div style={{ fontSize: '11px', fontWeight: 800, color: '#fbbf24' }}>
-                {lang === 'en' ? 'ADD STANDARD WEIGHTS (ढक)' : 'दायाँ पल्लामा ढक थप्नुहोस्'}
+                {lang === 'en' ? 'ADD STANDARD WEIGHTS' : 'दायाँ पल्लामा ढक थप्नुहोस्'}
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
                 {[10, 20, 50, 100].map((wt) => (
@@ -914,7 +914,7 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
                   cursor: 'pointer',
                 }}
               >
-                {lang === 'en' ? 'Clear All Weights (ढक हटाउनुहोस्)' : 'सबै ढक हटाउनुहोस्'}
+                {lang === 'en' ? 'Clear All Weights' : 'सबै ढक हटाउनुहोस्'}
               </button>
             </div>
           )}
@@ -975,9 +975,9 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '6px' }}>
                 {[
-                  { id: 'pencil', label: 'Pencil (पेन्सिल)' },
-                  { id: 'eraser', label: 'Eraser (रबर)' },
-                  { id: 'key', label: 'Key (चाबी)' },
+                  { id: 'pencil', label: 'Pencil' },
+                  { id: 'eraser', label: 'Eraser' },
+                  { id: 'key', label: 'Key' },
                 ].map((item) => (
                   <button
                     key={item.id}
@@ -1017,7 +1017,7 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
             </div>
             <p style={{ fontSize: '11px', color: '#64748b', margin: '4px 0 8px 0', lineHeight: 1.4 }}>
               {lang === 'en'
-                ? 'Which instrument is used to determine the mass (पिण्ड) of an object in kilograms or grams?'
+                ? 'Which instrument is used to determine the mass of an object in kilograms or grams?'
                 : 'वस्तुको पिण्ड (Mass) किलोग्राम वा ग्राममा नाप्न कुन यन्त्र प्रयोग गरिन्छ?'}
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
@@ -1034,7 +1034,7 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
                   cursor: 'pointer',
                 }}
               >
-                {lang === 'en' ? 'Ruler (स्केल)' : 'स्केल'}
+                {lang === 'en' ? 'Ruler' : 'स्केल'}
               </button>
               <button
                 onClick={() => handleQuizAnswer('balance')}
@@ -1049,7 +1049,7 @@ export const MeasurementLab: React.FC<BaseSimulationProps> = ({
                   cursor: 'pointer',
                 }}
               >
-                {lang === 'en' ? 'Beam Balance (तराजु)' : 'तराजु'}
+                {lang === 'en' ? 'Beam Balance' : 'तराजु'}
               </button>
             </div>
             {quizFeedback && (

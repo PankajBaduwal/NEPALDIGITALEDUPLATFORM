@@ -13,8 +13,8 @@ export const FractionLab6 = makeLab(fractionCfg({ code: 'SIM-MATH-G6-L4-01', cha
 export const fracMulCfg: LabCfg = {
   code: 'SIM-MATH-G6-L4-02', chapter: 4, titleNp: 'भिन्नको गुणन र भाग', titleEn: 'Fraction Multiply and Divide', color: '#ec4899',
   params: [
-    { id: 'n1', np: 'अंश १', en: 'Top 1', min: 1, max: 8, init: 2, color: '#0ea5e9' }, { id: 'd1', np: 'हर १', en: 'Bottom 1', min: 2, max: 8, init: 3, color: '#0ea5e9' },
-    { id: 'n2', np: 'अंश २', en: 'Top 2', min: 1, max: 8, init: 3, color: '#ef4444' }, { id: 'd2', np: 'हर २', en: 'Bottom 2', min: 2, max: 8, init: 4, color: '#ef4444' },
+    { id: 'n1', np: 'अंश 1', en: 'Top 1', min: 1, max: 8, init: 2, color: '#0ea5e9' }, { id: 'd1', np: 'हर 1', en: 'Bottom 1', min: 2, max: 8, init: 3, color: '#0ea5e9' },
+    { id: 'n2', np: 'अंश 2', en: 'Top 2', min: 1, max: 8, init: 3, color: '#ef4444' }, { id: 'd2', np: 'हर 2', en: 'Bottom 2', min: 2, max: 8, init: 4, color: '#ef4444' },
     { id: 'op', np: 'क्रिया', en: 'Operation', min: 0, max: 1, init: 0, names: [{ np: 'गुणन ×', en: 'Multiply ×' }, { np: 'भाग ÷', en: 'Divide ÷' }] },
   ],
   stage: { camera: [0, 12, 9], target: [0, 0, 0], minDistance: 7, maxDistance: 24 },
@@ -50,7 +50,7 @@ export const FracMulLab6 = makeLab(fracMulCfg);
 const trim = (x: number) => String(Number(x.toFixed(5)));
 export const decShiftCfg: LabCfg = {
   code: 'SIM-MATH-G6-L5-01', chapter: 5, titleNp: 'दशमलव बिन्दु सार्ने', titleEn: 'Decimal Point Mover', color: '#f59e0b',
-  params: [{ id: 'd', np: 'सङ्ख्या', en: 'Number', min: 1, max: 9999, step: 25, init: 345, show: (v) => (v / 100).toFixed(2), color: '#0ea5e9' }, { id: 'sh', np: '१० को घात', en: 'Power of 10', min: -3, max: 3, init: 1, show: (v) => (v >= 0 ? `× ${10 ** v}` : `÷ ${10 ** -v}`), color: '#f59e0b' }],
+  params: [{ id: 'd', np: 'सङ्ख्या', en: 'Number', min: 1, max: 9999, step: 25, init: 345, show: (v) => (v / 100).toFixed(2), color: '#0ea5e9' }, { id: 'sh', np: '10 को घात', en: 'Power of 10', min: -3, max: 3, init: 1, show: (v) => (v >= 0 ? `× ${10 ** v}` : `÷ ${10 ** -v}`), color: '#f59e0b' }],
   stage: { camera: [0, 8, 12], target: [0, 1, 0], minDistance: 7, maxDistance: 22 },
   draw: (g, p) => {
     const row = (s: string, z: number, c: string) => [...s].forEach((ch, i) => { const x = (i - (s.length - 1) / 2) * 1.3; tag(g, ch === '.' ? '•' : ch, x, 0.9, z, 1.25, { px: 64, w: 128, h: 128, bg: ch === '.' ? '#fde68a' : '#fff', border: ch === '.' ? '#f59e0b' : c }); box(g, 1.05, 0.12, 1.05, x, 0.06, z, ch === '.' ? '#facc15' : '#e0f2fe', 0.7); });
@@ -58,7 +58,7 @@ export const decShiftCfg: LabCfg = {
     tag(g, p.sh >= 0 ? `→ ${p.sh}` : `← ${-p.sh}`, 0, 1.4, 0, 3, { px: 60, w: 256, h: 96, bg: '#fff', border: '#f59e0b' });
   },
   info: (p) => { const v = p.d / 100; const r = trim(v * 10 ** p.sh); return bi(`${v.toFixed(2)} ${p.sh >= 0 ? '×' : '÷'} ${10 ** Math.abs(p.sh)} = ${r}\nदशमलव बिन्दु ${Math.abs(p.sh)} स्थान ${p.sh >= 0 ? 'दायाँ' : 'बायाँ'} सर्छ`, `${v.toFixed(2)} ${p.sh >= 0 ? '×' : '÷'} ${10 ** Math.abs(p.sh)} = ${r}\nThe decimal point moves ${Math.abs(p.sh)} place${Math.abs(p.sh) > 1 ? 's' : ''} to the ${p.sh >= 0 ? 'right' : 'left'}`); },
-  tip: bi('१०, १००, १००० ले गुणा वा भाग गर्दा बिन्दु कतातिर सर्छ हेरौँ', 'See where the point goes when you multiply or divide by 10, 100, 1000'),
+  tip: bi('10, 100, 1000 ले गुणा वा भाग गर्दा बिन्दु कतातिर सर्छ हेरौँ', 'See where the point goes when you multiply or divide by 10, 100, 1000'),
   goal: () => { const d = 25 * rnd(2, 200), sh = rnd(-3, 3); return { p: { d, sh }, np: `${(d / 100).toFixed(2)} ${sh >= 0 ? '×' : '÷'} ${10 ** Math.abs(sh)} बनाऔँ (= ${trim((d / 100) * 10 ** sh)})`, en: `Set ${(d / 100).toFixed(2)} ${sh >= 0 ? '×' : '÷'} ${10 ** Math.abs(sh)} (= ${trim((d / 100) * 10 ** sh)})`, start: { d: 100, sh: 0 } }; },
   quiz: (i) => {
     const v = rnd(11, 999) / 100; const sh = [1, 2, 3, -1, -2, -3, 1, -1][i]; const r = trim(v * 10 ** sh); const d = Math.round(v * 100);
@@ -78,15 +78,15 @@ export const decMulCfg: LabCfg = {
     tag(g, (p.a / 10).toFixed(1), 0, 0.4, h + 0.8, 2, { px: 56, color: '#0369a1' }); tag(g, (p.b / 10).toFixed(1), w + 1, 0.4, 0, 2, { px: 56, color: '#be123c' });
     tag(g, `${(p.a / 10).toFixed(1)} × ${(p.b / 10).toFixed(1)} = ${((p.a * p.b) / 100).toFixed(2)}`, 0, 0.5, -h - 1.2, 5, { px: 56, w: 560, h: 96, bg: '#fff', border: '#8b5cf6' });
   },
-  info: (p) => bi(`${(p.a / 10).toFixed(1)} × ${(p.b / 10).toFixed(1)} = ${p.a} × ${p.b} ÷ 100 = ${p.a * p.b} ÷ 100 = ${((p.a * p.b) / 100).toFixed(2)}\nप्रत्येक सानो खाना = ०.०१`, `${(p.a / 10).toFixed(1)} × ${(p.b / 10).toFixed(1)} = ${p.a} × ${p.b} ÷ 100 = ${p.a * p.b} ÷ 100 = ${((p.a * p.b) / 100).toFixed(2)}\nEach small square is 0.01`),
+  info: (p) => bi(`${(p.a / 10).toFixed(1)} × ${(p.b / 10).toFixed(1)} = ${p.a} × ${p.b} ÷ 100 = ${p.a * p.b} ÷ 100 = ${((p.a * p.b) / 100).toFixed(2)}\nप्रत्येक सानो खाना = 0.01`, `${(p.a / 10).toFixed(1)} × ${(p.b / 10).toFixed(1)} = ${p.a} × ${p.b} ÷ 100 = ${p.a * p.b} ÷ 100 = ${((p.a * p.b) / 100).toFixed(2)}\nEach small square is 0.01`),
   tip: bi('क्षेत्रफलका सानासाना खाना गनेर दशमलव गुणन गरौँ', 'Count the small squares of the rectangle to multiply decimals'),
   goal: () => { const a = rnd(2, 25), b = rnd(2, 15); return { p: { a, b }, np: `${(a / 10).toFixed(1)} × ${(b / 10).toFixed(1)} बनाऔँ`, en: `Set ${(a / 10).toFixed(1)} × ${(b / 10).toFixed(1)}`, start: { a: 10, b: 10 } }; },
   quiz: (i) => {
     const a = rnd(2, 30), b = rnd(2, 12); const pr = (a * b) / 100;
     if (i < 5) return choice(`${(a / 10).toFixed(1)} × ${(b / 10).toFixed(1)} = ?`, `${(a / 10).toFixed(1)} × ${(b / 10).toFixed(1)} = ?`, pr.toFixed(2), [(pr * 10).toFixed(2), (pr / 10).toFixed(3), (pr + 0.1).toFixed(2), (pr * 100).toFixed(2)], i, { a, b });
     if (i === 5) { const q = rnd(2, 9), x = rnd(11, 99); return choice(`${(x * q) / 10} ÷ ${q} = ?`, `${(x * q) / 10} ÷ ${q} = ?`, (x / 10).toFixed(1), [(x / 100).toFixed(2), String(x), ((x + 1) / 10).toFixed(1)], i); }
-    if (i === 6) return choice('०.४ × ०.३ = ?', '0.4 × 0.3 = ?', '0.12', ['1.2', '0.012', '0.7'], i, { a: 4, b: 3 });
-    return choice('१.५ × १० = ?', '1.5 × 10 = ?', '15', ['1.50', '150', '0.15'], i);
+    if (i === 6) return choice('0.4 × 0.3 = ?', '0.4 × 0.3 = ?', '0.12', ['1.2', '0.012', '0.7'], i, { a: 4, b: 3 });
+    return choice('1.5 × 10 = ?', '1.5 × 10 = ?', '15', ['1.50', '150', '0.15'], i);
   },
 };
 export const DecimalMul6 = makeLab(decMulCfg);
@@ -114,9 +114,9 @@ export const profitCfg: LabCfg = {
     if (i === 2) return numChoice(`ला.मू. रु ${cp} मा रु ${sp - cp} नाफा भए नाफा % कति?`, `A profit of Rs ${sp - cp} on CP Rs ${cp}. Profit %?`, pr, i, [5, -5, 10, 20, 15], 1, '%');
     if (i === 3) return numChoice(`ला.मू. रु ${cp} मा ${pr}% नाफा भए ब.मू. कति?`, `CP Rs ${cp} with ${pr}% profit. SP?`, sp, i, [10, -10, 20, pr, -20], 1, '');
     if (i === 4) return numChoice(`ला.मू. रु ${cp} मा ${pr}% नोक्सान भए ब.मू. कति?`, `CP Rs ${cp} with ${pr}% loss. SP?`, ls, i, [10, -10, 20, pr, -20], 1, '');
-    if (i === 5) return choice(`ब.मू. ला.मू. भन्दा बढी भए के हुन्छ?`, 'If SP is more than CP, there is a…', 'नाफा | profit', ['नोक्सान | loss', 'केही हुँदैन | nothing'], i);
+    if (i === 5) return choice(`ब.मू. ला.मू. भन्दा बढी भए के हुन्छ?`, 'If SP is more than CP, there is a…', 'profit', ['loss', 'nothing'], i);
     if (i === 6) return numChoice(`सामान रु ${cp} मा किनी रु ${cp + 50} मा बेच्दा नाफा कति?`, `Bought for Rs ${cp}, sold for Rs ${cp + 50}. Profit?`, 50, i, [5, -5, 10, 100, 25], 1);
-    return numChoice(`नाफा % = (नाफा ÷ ला.मू.) × १००। नाफा रु ${cp / 4}, ला.मू. रु ${cp} भए नाफा %?`, `Profit % = (profit ÷ CP) × 100. Profit Rs ${cp / 4}, CP Rs ${cp}. Profit %?`, 25, i, [5, -5, 10, 20, 15], 1, '%');
+    return numChoice(`नाफा % = (नाफा ÷ ला.मू.) × 100। नाफा रु ${cp / 4}, ला.मू. रु ${cp} भए नाफा %?`, `Profit % = (profit ÷ CP) × 100. Profit Rs ${cp / 4}, CP Rs ${cp}. Profit %?`, 25, i, [5, -5, 10, 20, 15], 1, '%');
   },
 };
 export const ProfitLoss6 = makeLab(profitCfg);
@@ -132,16 +132,16 @@ export const unitaryCfg: LabCfg = {
     tag(g, `${p.q1} → Rs ${p.q1 * p.u}`, -6, 4.4, 0, 4, { px: 52, w: 400, h: 96, bg: '#fff', border: '#0ea5e9' }); tag(g, `${p.q2} → Rs ${p.q2 * p.u}`, 6, 4.4, 0, 4, { px: 52, w: 400, h: 96, bg: '#fff', border: '#22c55e' });
     tag(g, `1 → Rs ${p.u}`, 0, 0.5, 3.2, 3.6, { px: 54, w: 400, h: 96, bg: '#fef9c3', border: '#f59e0b' }); tag(g, lang === 'ne' ? 'पहिले एकको मूल्य निकालौँ' : 'First find the price of one', 0, 6.4, 0, 5, { px: 44, w: 520, h: 80 });
   },
-  info: (p) => bi(`${p.q1} वटाको मूल्य रु ${p.q1 * p.u}\n१ वटाको मूल्य = ${p.q1 * p.u} ÷ ${p.q1} = रु ${p.u} → ${p.q2} वटाको = ${p.u} × ${p.q2} = रु ${p.q2 * p.u}`, `${p.q1} items cost Rs ${p.q1 * p.u}\nOne item = ${p.q1 * p.u} ÷ ${p.q1} = Rs ${p.u} → ${p.q2} items = ${p.u} × ${p.q2} = Rs ${p.q2 * p.u}`),
+  info: (p) => bi(`${p.q1} वटाको मूल्य रु ${p.q1 * p.u}\n1 वटाको मूल्य = ${p.q1 * p.u} ÷ ${p.q1} = रु ${p.u} → ${p.q2} वटाको = ${p.u} × ${p.q2} = रु ${p.q2 * p.u}`, `${p.q1} items cost Rs ${p.q1 * p.u}\nOne item = ${p.q1 * p.u} ÷ ${p.q1} = Rs ${p.u} → ${p.q2} items = ${p.u} × ${p.q2} = Rs ${p.q2 * p.u}`),
   tip: bi('पहिले एकको मूल्य निकालेर चाहिएको सङ्ख्याको मूल्य हिसाब गरौँ', 'Find the price of one, then the price of what you want'),
   goal: () => { const q1 = rnd(2, 9), u = 5 * rnd(1, 10), q2 = rnd(1, 15); return { p: { q1, u, q2 }, np: `${q1} वटाको रु ${q1 * u} भए ${q2} वटाको रु ${q2 * u} हुने बनाऔँ`, en: `Show ${q1} items for Rs ${q1 * u}, so ${q2} items cost Rs ${q2 * u}`, start: { q1: 2, u: 5, q2: 1 } }; },
   quiz: (i) => {
     const q1 = rnd(2, 9), u = 5 * rnd(1, 10), q2 = rnd(2, 15); const set = { q1, u, q2 };
-    if (i < 2) return numChoice(`${q1} कलमको मूल्य रु ${q1 * u} भए १ कलमको मूल्य कति?`, `${q1} pens cost Rs ${q1 * u}. Price of 1 pen?`, u, i, [5, -5, 10, q1, 15], 1, '', set);
+    if (i < 2) return numChoice(`${q1} कलमको मूल्य रु ${q1 * u} भए 1 कलमको मूल्य कति?`, `${q1} pens cost Rs ${q1 * u}. Price of 1 pen?`, u, i, [5, -5, 10, q1, 15], 1, '', set);
     if (i < 5) return numChoice(`${q1} कपीको मूल्य रु ${q1 * u} भए ${q2} कपीको मूल्य कति?`, `${q1} copies cost Rs ${q1 * u}. Cost of ${q2} copies?`, q2 * u, i, [u, -u, 2 * u, 10, 5 * u], 1, '', set);
-    if (i === 5) return numChoice(`६ किलो चामलको रु ${6 * u} भए १० किलोको मूल्य?`, `6 kg of rice costs Rs ${6 * u}. Cost of 10 kg?`, 10 * u, i, [u, -u, 2 * u, 10, 5 * u], 1);
+    if (i === 5) return numChoice(`6 किलो चामलको रु ${6 * u} भए 10 किलोको मूल्य?`, `6 kg of rice costs Rs ${6 * u}. Cost of 10 kg?`, 10 * u, i, [u, -u, 2 * u, 10, 5 * u], 1);
     if (i === 6) return numChoice(`${q1} पेन्सिल रु ${q1 * u} मा किनिन्छ; रु ${q2 * u} मा कति पेन्सिल आउँछ?`, `${q1} pencils cost Rs ${q1 * u}. How many for Rs ${q2 * u}?`, q2, i, [1, -1, 2, 3, q1], 1, '', set);
-    return numChoice(`४ घण्टामा ${4 * (u / 5) * 12} किमी जाने सवारी १ घण्टामा कति किमी जान्छ?`, `A vehicle goes ${4 * (u / 5) * 12} km in 4 hours. How far in 1 hour?`, (u / 5) * 12, i, [1, -1, 2, 12, 6], 1);
+    return numChoice(`4 घण्टामा ${4 * (u / 5) * 12} किमी जाने सवारी 1 घण्टामा कति किमी जान्छ?`, `A vehicle goes ${4 * (u / 5) * 12} km in 4 hours. How far in 1 hour?`, (u / 5) * 12, i, [1, -1, 2, 12, 6], 1);
   },
 };
 export const UnitaryLab6 = makeLab(unitaryCfg);

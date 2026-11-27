@@ -1,5 +1,5 @@
 /**
- * Class 4 lesson 14 · Bar diagram (स्तम्भ चित्र)
+ * Class 4 lesson 14 · Bar diagram
  * BarGraphLab — 2D Interactive Bar Chart with customizable scales (1, 2, 5, 10).
  */
 import React, { useMemo, useState } from 'react';
@@ -34,7 +34,7 @@ export const BarGraphLab: React.FC<Props> = ({ onBackToLibrary }) => {
     const newVals = CATS.map(() => rnd(1, 8) * newScale);
     setVals(newVals);
     kit.tap();
-    kit.say(`स्केल: १ एकाइ = ${newScale}`, `Scale: 1 unit = ${newScale}`);
+    kit.say(`स्केल: 1 एकाइ = ${newScale}`, `Scale: 1 unit = ${newScale}`);
   };
 
   const bump = (idx: number, delta: number) => {
@@ -63,7 +63,7 @@ export const BarGraphLab: React.FC<Props> = ({ onBackToLibrary }) => {
 
       if (i % 2 === 0) {
         return numQ(
-          `${CATS[catIdx].np}को स्तम्भले कति सङ्ख्या देखाउँछ? (स्केल = ${qScale})`,
+          `${CATS[catIdx].np}को स्तम्भले कति सङ्ख्या देखाउँछ?`,
           `What value does the ${CATS[catIdx].en} bar show? (Scale = ${qScale})`,
           count,
           i,
@@ -97,11 +97,11 @@ export const BarGraphLab: React.FC<Props> = ({ onBackToLibrary }) => {
       mascotGreeting={
         activeBar !== null
           ? kit.t(
-            `${CATS[activeBar].np}: ${vals[activeBar]} (स्केल १ खण्ड = ${scale})`,
+            `${CATS[activeBar].np}: ${vals[activeBar]} (स्केल 1 खण्ड = ${scale})`,
             `${CATS[activeBar].en}: ${vals[activeBar]} (Scale 1 unit = ${scale})`
           )
           : kit.t(
-            `स्तम्भ चित्र: १ खण्ड = ${scale}। स्तम्भमा ट्याप गरेर वा +/− थिचेर मान हेरौँ!`,
+            `स्तम्भ चित्र: 1 खण्ड = ${scale}। स्तम्भमा ट्याप गरेर वा +/− थिचेर मान हेरौँ!`,
             `Bar Graph: 1 block = ${scale}. Tap any bar or use +/− to adjust values!`
           )
       }
@@ -126,7 +126,7 @@ export const BarGraphLab: React.FC<Props> = ({ onBackToLibrary }) => {
                 cursor: 'pointer',
               }}
             >
-              १ = {s}
+              1 = {s}
             </button>
           ))}
           <button

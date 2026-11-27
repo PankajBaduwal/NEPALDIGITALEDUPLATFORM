@@ -1,7 +1,7 @@
 /**
  * EcosystemExplorerSim.tsx
- * Simulation 8: 2D Ecosystem Explorer Sandbox (पारिस्थितिक प्रणाली २डी अन्वेषक)
- * Grade 4 Science • Chapter 3: Organisms and Environment (जीव र वातावरण)
+ * Simulation 8: 2D Ecosystem Explorer Sandbox
+ * Grade 4 Science • Chapter 3: Organisms and Environment
  *
  * 100% Native HTML5 Canvas 2D Interactive Ecological Simulation.
  * Features:
@@ -9,7 +9,7 @@
  * - Biotic components: Producers (Trees, Grass), Herbivores (Musk Deer), Carnivores (Himalayan Eagle/Danfe), Aquatic (Fish)
  * - Abiotic sliders: Sunlight intensity, Water stream volume
  * - Dynamic Food Chain Energy Flow arrows with glowing particle pulses
- * - Real-time Ecosystem Health & Biodiversity index (०% देखि १००% सम्म)
+ * - Real-time Ecosystem Health & Biodiversity index
  * - Bilingual EN/NE labels, environmental audio, and 5-stage inquiry learning
  */
 
@@ -33,7 +33,7 @@ export const EcosystemExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -275,7 +275,7 @@ export const EcosystemExplorerSim: React.FC<BaseSimulationProps> = ({
             a.facingRight = false;
           }
 
-          // Draw Deer (कस्तुरी मृग)
+          // Draw Deer
           ctx.save();
           ctx.translate(a.x, a.y + Math.sin(a.bob) * 1.5);
           if (!a.facingRight) ctx.scale(-1, 1);
@@ -502,7 +502,7 @@ export const EcosystemExplorerSim: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Ecosystem Explorer Sandbox"
-      titleNe="पारिस्थितिक प्रणाली २डी अन्वेषक"
+      titleNe="पारिस्थितिक प्रणाली 2डी अन्वेषक"
       subject="Science"
       grade={4}
       chapter={3}

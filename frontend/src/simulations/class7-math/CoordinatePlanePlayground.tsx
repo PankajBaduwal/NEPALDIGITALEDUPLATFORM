@@ -1,7 +1,7 @@
 /**
  * CoordinatePlanePlayground.tsx
- * Grade 7 Mathematics – Lesson 17: COORDINATES (निर्देशाङ्कहरू)
- * Simulation 6: Coordinate Plane and Point Plotting Playground (निर्देशाङ्क समतल र बिन्दु अङ्कन खेलमैदान)
+ * Grade 7 Mathematics – Lesson 17: COORDINATES
+ * Simulation 6: Coordinate Plane and Point Plotting Playground
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 247-254)
  */
 import React, { useState, useRef, useEffect } from 'react';
@@ -15,43 +15,43 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'निर्देशाङ्क समतलमा क्षितिज रेखा (Horizontal Line) XOX\' लाई के भनिन्छ?',
     en: 'What is the horizontal line XOX\' on a coordinate plane called?',
     options: [
-      { key: 'A', label: 'X-अक्ष (X-axis)' },
-      { key: 'B', label: 'Y-अक्ष (Y-axis)' },
-      { key: 'C', label: 'उद्गम बिन्दु (Origin)' },
-      { key: 'D', label: 'चतुर्थांश (Quadrant)' },
+      { key: 'A', label: 'X-axis' },
+      { key: 'B', label: 'Y-axis' },
+      { key: 'C', label: 'Origin' },
+      { key: 'D', label: 'Quadrant' },
     ],
     answer: 'A',
   },
   {
-    np: 'X-अक्ष र Y-अक्ष काटिएको बिन्दु (उद्गम बिन्दु O) को निर्देशाङ्क कति हुन्छ?',
+    np: 'X-अक्ष and Y-अक्ष काटिएको बिन्दु (उद्गम बिन्दु O) को निर्देशाङ्क कति हुन्छ?',
     en: 'What are the coordinates of the origin O where X-axis and Y-axis intersect?',
     options: [
-      { key: 'A', label: '(०, ०) / (0, 0)' },
-      { key: 'B', label: '(१, १) / (1, 1)' },
-      { key: 'C', label: '(०, १) / (0, 1)' },
-      { key: 'D', label: '(१, ०) / (1, 0)' },
+      { key: 'A', label: '(0, 0) / (0, 0)' },
+      { key: 'B', label: '(1, 1) / (1, 1)' },
+      { key: 'C', label: '(0, 1) / (0, 1)' },
+      { key: 'D', label: '(1, 0) / (1, 0)' },
     ],
     answer: 'A',
   },
   {
-    np: 'कुनै बिन्दुको निर्देशाङ्क (-४, ३) छ भने यो कुन चतुर्थांश (Quadrant) मा पर्छ?',
+    np: 'कुनै बिन्दुको निर्देशाङ्क (-4, 3) छ भने यो कुन Quadrant मा पर्छ?',
     en: 'In which quadrant does the point (-4, 3) lie?',
     options: [
-      { key: 'A', label: 'दोस्रो चतुर्थांश (Quadrant II: -, +)' },
-      { key: 'B', label: 'पहिलो चतुर्थांश (Quadrant I: +, +)' },
-      { key: 'C', label: 'तेस्रो चतुर्थांश (Quadrant III: -, -)' },
-      { key: 'D', label: 'चौथो चतुर्थांश (Quadrant IV: +, -)' },
+      { key: 'A', label: 'Second quadrant (-, +)' },
+      { key: 'B', label: 'First quadrant (+, +)' },
+      { key: 'C', label: 'Third quadrant (-, -)' },
+      { key: 'D', label: 'Fourth quadrant (+, -)' },
     ],
     answer: 'A',
   },
   {
-    np: 'बिन्दु R(-२, ०) कहाँ अवस्थित हुन्छ?',
+    np: 'बिन्दु R(-2, 0) कहाँ अवस्थित हुन्छ?',
     en: 'Where is the point R(-2, 0) located?',
     options: [
-      { key: 'A', label: 'ऋणात्मक X-अक्षमा (On negative X-axis)' },
-      { key: 'B', label: 'Y-अक्षमा' },
-      { key: 'C', label: 'तेस्रो चतुर्थांशमा' },
-      { key: 'D', label: 'पहिलो चतुर्थांशमा' },
+      { key: 'A', label: 'On the negative X-axis' },
+      { key: 'B', label: 'On the Y-axis' },
+      { key: 'C', label: 'In the third quadrant' },
+      { key: 'D', label: 'In the first quadrant' },
     ],
     answer: 'A',
   },
@@ -59,25 +59,25 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'बिन्दु (x, y) अङ्कन गर्दा उद्गम बिन्दु (0,0) बाट पहिले कता हिँडिन्छ?',
     en: 'When plotting a point (x, y), in which direction do you move first from the origin (0,0)?',
     options: [
-      { key: 'A', label: 'क्षितिज दिशामा (दायाँ वा बायाँ) X-मान अनुसार' },
-      { key: 'B', label: 'ठाडो दिशामा (माथि वा तल) मात्र' },
-      { key: 'C', label: 'सिधै छड्के' },
-      { key: 'D', label: 'कुनै पनि दिशामा' },
+      { key: 'A', label: 'Horizontally (right or left) according to the X-value' },
+      { key: 'B', label: 'Vertically (up or down) only' },
+      { key: 'C', label: 'Straight diagonally' },
+      { key: 'D', label: 'In any direction' },
     ],
     answer: 'A',
   },
 ];
 
 const TEXTBOOK_POINTS = [
-  { name: 'A', x: 6, y: 3, labelNp: 'A(६, ३)', labelEn: 'A(6, 3)' },
-  { name: 'B', x: -3, y: 5, labelNp: 'B(-३, ५)', labelEn: 'B(-3, 5)' },
-  { name: 'C', x: -4, y: -3, labelNp: 'C(-४, -३)', labelEn: 'C(-4, -3)' },
-  { name: 'D', x: 4, y: -4, labelNp: 'D(४, -४)', labelEn: 'D(4, -4)' },
-  { name: 'P', x: 2, y: 2, labelNp: 'P(२, २)', labelEn: 'P(2, 2)' },
-  { name: 'Q', x: -3, y: 4, labelNp: 'Q(-३, ४)', labelEn: 'Q(-3, 4)' },
-  { name: 'R', x: -2, y: 0, labelNp: 'R(-२, ०)', labelEn: 'R(-2, 0)' },
-  { name: 'S', x: 5, y: -2, labelNp: 'S(५, -२)', labelEn: 'S(5, -2)' },
-  { name: 'T', x: -5, y: -5, labelNp: 'T(-५, -५)', labelEn: 'T(-5, -5)' },
+  { name: 'A', x: 6, y: 3, labelNp: 'A(6, 3)', labelEn: 'A(6, 3)' },
+  { name: 'B', x: -3, y: 5, labelNp: 'B(-3, 5)', labelEn: 'B(-3, 5)' },
+  { name: 'C', x: -4, y: -3, labelNp: 'C(-4, -3)', labelEn: 'C(-4, -3)' },
+  { name: 'D', x: 4, y: -4, labelNp: 'D(4, -4)', labelEn: 'D(4, -4)' },
+  { name: 'P', x: 2, y: 2, labelNp: 'P(2, 2)', labelEn: 'P(2, 2)' },
+  { name: 'Q', x: -3, y: 4, labelNp: 'Q(-3, 4)', labelEn: 'Q(-3, 4)' },
+  { name: 'R', x: -2, y: 0, labelNp: 'R(-2, 0)', labelEn: 'R(-2, 0)' },
+  { name: 'S', x: 5, y: -2, labelNp: 'S(5, -2)', labelEn: 'S(5, -2)' },
+  { name: 'T', x: -5, y: -5, labelNp: 'T(-5, -5)', labelEn: 'T(-5, -5)' },
 ];
 
 export const CoordinatePlanePlayground: React.FC<{
@@ -87,7 +87,7 @@ export const CoordinatePlanePlayground: React.FC<{
   const kit = useSimKit({
     code: 'SIM-MATH-G7-L17-01',
     chapter: 17,
-    titleNp: 'निर्देशाङ्क समतल र बिन्दु अङ्कन खेलमैदान',
+    titleNp: 'निर्देशाङ्क समतल and बिन्दु अङ्कन खेलमैदान',
     titleEn: 'Coordinate Plane & Point Plotting Playground',
   });
   const isNe = kit.lang === 'ne';
@@ -159,13 +159,13 @@ export const CoordinatePlanePlayground: React.FC<{
   };
 
   const getQuadrant = (x: number, y: number) => {
-    if (x === 0 && y === 0) return L('उद्गम बिन्दु O(०,०)', 'Origin O(0,0)');
-    if (x === 0) return L('Y-अक्षमा (On Y-axis)', 'On Y-axis');
+    if (x === 0 && y === 0) return L('उद्गम बिन्दु O(0,0)', 'Origin O(0,0)');
+    if (x === 0) return L('On the Y-axis (On Y-axis)', 'On Y-axis');
     if (y === 0) return L('X-अक्षमा (On X-axis)', 'On X-axis');
-    if (x > 0 && y > 0) return L('पहिलो चतुर्थांश (Quadrant I: +, +)', 'Quadrant I (+, +)');
-    if (x < 0 && y > 0) return L('दोस्रो चतुर्थांश (Quadrant II: -, +)', 'Quadrant II (-, +)');
-    if (x < 0 && y < 0) return L('तेस्रो चतुर्थांश (Quadrant III: -, -)', 'Quadrant III (-, -)');
-    return L('चौथो चतुर्थांश (Quadrant IV: +, -)', 'Quadrant IV (+, -)');
+    if (x > 0 && y > 0) return L('First quadrant (+, +)', 'Quadrant I (+, +)');
+    if (x < 0 && y > 0) return L('Second quadrant (-, +)', 'Quadrant II (-, +)');
+    if (x < 0 && y < 0) return L('Third quadrant (-, -)', 'Quadrant III (-, -)');
+    return L('Fourth quadrant (+, -)', 'Quadrant IV (+, -)');
   };
 
   const nextGameQuestion = () => {
@@ -269,7 +269,7 @@ export const CoordinatePlanePlayground: React.FC<{
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! XOX\' र YOY\' अक्षहरू तथा चार चतुर्थांशहरूमा बिन्दुहरू अङ्कन गर्न सिकौँ!',
+        'नमस्ते! XOX\' and YOY\' अक्षहरू तथा चार चतुर्थांशहरूमा बिन्दुहरू अङ्कन गर्न सिकौँ!',
         'Hello! Let us explore the axes, quadrants, and plot coordinates accurately on the grid!'
       )}
     >
@@ -277,11 +277,11 @@ export const CoordinatePlanePlayground: React.FC<{
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'axes', labelNp: '१. अक्ष र उद्गम बिन्दु', labelEn: '1. Axes & Origin', icon: Grid },
-            { id: 'pairs', labelNp: '२. क्रमित जोडा (x, y) चाल', labelEn: '2. Ordered Pairs (x,y)', icon: ArrowRight },
-            { id: 'quadrants', labelNp: '३. चार चतुर्थांशहरू', labelEn: '3. 4 Quadrants', icon: Crosshair },
-            { id: 'plotting', labelNp: '४. पाठ्यपुस्तकका बिन्दुहरू अङ्कन', labelEn: '4. Textbook Point Plotting', icon: Target },
-            { id: 'game', labelNp: '५. निर्देशाङ्क खेल तथा चुनौती', labelEn: '5. Coordinate Challenge', icon: Award },
+            { id: 'axes', labelNp: '1. अक्ष and उद्गम बिन्दु', labelEn: '1. Axes & Origin', icon: Grid },
+            { id: 'pairs', labelNp: '2. क्रमित जोडा (x, y) चाल', labelEn: '2. Ordered Pairs (x,y)', icon: ArrowRight },
+            { id: 'quadrants', labelNp: '3. चार चतुर्थांशहरू', labelEn: '3. 4 Quadrants', icon: Crosshair },
+            { id: 'plotting', labelNp: '4. पाठ्यपुस्तकका बिन्दुहरू अङ्कन', labelEn: '4. Textbook Point Plotting', icon: Target },
+            { id: 'game', labelNp: '5. निर्देशाङ्क खेल तथा चुनौती', labelEn: '5. Coordinate Challenge', icon: Award },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -321,7 +321,7 @@ export const CoordinatePlanePlayground: React.FC<{
           <div style={{ background: '#ffffff', borderRadius: 16, padding: 12, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ fontSize: 13, fontWeight: 700, color: '#0369a1', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
               <Crosshair size={16} />
-              {L('ग्राफ पेपरमा क्लिक गरेर बिन्दु छान्न सकिन्छ (-८ देखि +८ सम्म)', 'Click anywhere on the graph grid (-8 to +8) to test')}
+              {L('ग्राफ पेपरमा क्लिक गरेर बिन्दु छान्न सकिन्छ (-8 देखि +8 सम्म)', 'Click anywhere on the graph grid (-8 to +8) to test')}
             </div>
 
             <svg
@@ -489,17 +489,17 @@ export const CoordinatePlanePlayground: React.FC<{
               <div style={{ background: '#f8fafc', padding: 18, borderRadius: 14, border: '1px solid #e2e8f0' }}>
                 <h3 style={{ margin: '0 0 10px 0', color: '#0369a1', fontSize: 17, display: 'flex', alignItems: 'center', gap: 8 }}>
                   <Grid size={20} />
-                  {L('निर्देशाङ्क अक्षहरू र उद्गम बिन्दु (Axes and Origin)', 'Coordinate Axes and Origin')}
+                  {L('निर्देशाङ्क अक्षहरू and उद्गम बिन्दु (Axes and Origin)', 'Coordinate Axes and Origin')}
                 </h3>
                 <div style={{ fontSize: 14, lineHeight: 1.6, color: '#334155', display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <div style={{ background: '#ffffff', padding: 10, borderRadius: 8, borderLeft: '4px solid #0284c7' }}>
-                    <strong>X-अक्ष (X-axis):</strong> {L('क्षितिज रेखा XOX\' लाई X-अक्ष भनिन्छ। दायाँतर्फ OX धनात्मक (+) र बायाँतर्फ OX\' ऋणात्मक (-) हुन्छ।', 'The horizontal line XOX\' is the X-axis. OX is positive (+) to the right and OX\' is negative (-) to the left.')}
+                    <strong>X-axis:</strong> {L('क्षितिज रेखा XOX\' लाई X-अक्ष भनिन्छ। दायाँतर्फ OX धनात्मक (+) and बायाँतर्फ OX\' ऋणात्मक (-) हुन्छ।', 'The horizontal line XOX\' is the X-axis. OX is positive (+) to the right and OX\' is negative (-) to the left.')}
                   </div>
                   <div style={{ background: '#ffffff', padding: 10, borderRadius: 8, borderLeft: '4px solid #10b981' }}>
-                    <strong>Y-अक्ष (Y-axis):</strong> {L('ठाडो रेखा YOY\' लाई Y-अक्ष भनिन्छ। माथितर्फ OY धनात्मक (+) र तलतर्फ OY\' ऋणात्मक (-) हुन्छ।', 'The vertical line YOY\' is the Y-axis. OY is positive (+) upwards and OY\' is negative (-) downwards.')}
+                    <strong>Y-axis:</strong> {L('ठाडो रेखा YOY\' लाई Y-अक्ष भनिन्छ। माथितर्फ OY धनात्मक (+) and तलतर्फ OY\' ऋणात्मक (-) हुन्छ।', 'The vertical line YOY\' is the Y-axis. OY is positive (+) upwards and OY\' is negative (-) downwards.')}
                   </div>
                   <div style={{ background: '#ffffff', padding: 10, borderRadius: 8, borderLeft: '4px solid #ef4444' }}>
-                    <strong>उद्गम बिन्दु (Origin O):</strong> {L('दुवै अक्षहरू एकआपसमा लम्ब भएर काटिने बिन्दु O लाई उद्गम बिन्दु भनिन्छ। यसको निर्देशाङ्क (०, ०) हुन्छ।', 'The intersection point O of both axes is the origin. Its coordinates are (0, 0).')}
+                    <strong>Origin O:</strong> {L('दुवै अक्षहरू एकआपसमा लम्ब भएर काटिने बिन्दु O लाई उद्गम बिन्दु भनिन्छ। यसको निर्देशाङ्क (0, 0) हुन्छ।', 'The intersection point O of both axes is the origin. Its coordinates are (0, 0).')}
                   </div>
                 </div>
 
@@ -522,11 +522,11 @@ export const CoordinatePlanePlayground: React.FC<{
               <div style={{ background: '#f8fafc', padding: 18, borderRadius: 14, border: '1px solid #e2e8f0' }}>
                 <h3 style={{ margin: '0 0 10px 0', color: '#ea580c', fontSize: 17, display: 'flex', alignItems: 'center', gap: 8 }}>
                   <ArrowRight size={20} />
-                  {L('क्रमित जोडा (Ordered Pair) र चाल', 'Ordered Pair (x, y) & Movement')}
+                  {L('क्रमित जोडा (Ordered Pair) and चाल', 'Ordered Pair (x, y) & Movement')}
                 </h3>
                 <p style={{ margin: '0 0 12px 0', fontSize: 14, color: '#475569' }}>
                   {L(
-                    'उद्गम बिन्दु O(०,०) बाट कुनै बिन्दु (x, y) सम्म पुग्न पहिले क्षितिज दिशा (X) र त्यसपछि ठाडो दिशा (Y) मा हिँड्नुपर्छ:',
+                    'उद्गम बिन्दु O(0,0) बाट कुनै बिन्दु (x, y) सम्म पुग्न पहिले क्षितिज दिशा (X) and त्यसपछि ठाडो दिशा (Y) मा हिँड्नुपर्छ:',
                     'To locate any point (x, y), always start from Origin (0,0), move horizontally along X first, then vertically along Y second:'
                   )}
                 </p>
@@ -534,7 +534,7 @@ export const CoordinatePlanePlayground: React.FC<{
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 14 }}>
                   <div style={{ background: '#fff7ed', border: '1.5px solid #fdba74', padding: 10, borderRadius: 8 }}>
                     <div style={{ fontSize: 12, fontWeight: 700, color: '#c2410c' }}>
-                      {L('१. पहिलो सङ्ख्या (x-मान)', '1. First Number (x-coord)')}
+                      {L('1. पहिलो सङ्ख्या (x-मान)', '1. First Number (x-coord)')}
                     </div>
                     <div style={{ fontSize: 15, fontWeight: 800, color: '#9a3412', marginTop: 2 }}>
                       x = {isNe ? toNp(point.x) : point.x}
@@ -548,7 +548,7 @@ export const CoordinatePlanePlayground: React.FC<{
 
                   <div style={{ background: '#eff6ff', border: '1.5px solid #93c5fd', padding: 10, borderRadius: 8 }}>
                     <div style={{ fontSize: 12, fontWeight: 700, color: '#1d4ed8' }}>
-                      {L('२. दोस्रो सङ्ख्या (y-मान)', '2. Second Number (y-coord)')}
+                      {L('2. दोस्रो सङ्ख्या (y-मान)', '2. Second Number (y-coord)')}
                     </div>
                     <div style={{ fontSize: 15, fontWeight: 800, color: '#1e40af', marginTop: 2 }}>
                       y = {isNe ? toNp(point.y) : point.y}
@@ -600,20 +600,20 @@ export const CoordinatePlanePlayground: React.FC<{
                 </h3>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 13 }}>
                   <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', padding: 8, borderRadius: 6 }}>
-                    <strong style={{ color: '#166534' }}>पहिलो (I): (+, +)</strong>
-                    <div style={{ color: '#15803d', fontSize: 12 }}>x &gt; ० र y &gt; ०</div>
+                    <strong style={{ color: '#166534' }}>First (I): (+, +)</strong>
+                    <div style={{ color: '#15803d', fontSize: 12 }}>x &gt; 0 and y &gt; 0</div>
                   </div>
                   <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', padding: 8, borderRadius: 6 }}>
-                    <strong style={{ color: '#1e40af' }}>दोस्रो (II): (-, +)</strong>
-                    <div style={{ color: '#1d4ed8', fontSize: 12 }}>x &lt; ० र y &gt; ०</div>
+                    <strong style={{ color: '#1e40af' }}>Second (II): (-, +)</strong>
+                    <div style={{ color: '#1d4ed8', fontSize: 12 }}>x &lt; 0 and y &gt; 0</div>
                   </div>
                   <div style={{ background: '#fef2f2', border: '1px solid #fecaca', padding: 8, borderRadius: 6 }}>
-                    <strong style={{ color: '#991b1b' }}>तेस्रो (III): (-, -)</strong>
-                    <div style={{ color: '#b91c1c', fontSize: 12 }}>x &lt; ० र y &lt; ०</div>
+                    <strong style={{ color: '#991b1b' }}>Third (III): (-, -)</strong>
+                    <div style={{ color: '#b91c1c', fontSize: 12 }}>x &lt; 0 and y &lt; 0</div>
                   </div>
                   <div style={{ background: '#fffbeb', border: '1px solid #fde68a', padding: 8, borderRadius: 6 }}>
-                    <strong style={{ color: '#92400e' }}>चौथो (IV): (+, -)</strong>
-                    <div style={{ color: '#b45309', fontSize: 12 }}>x &gt; ० र y &lt; ०</div>
+                    <strong style={{ color: '#92400e' }}>Fourth (IV): (+, -)</strong>
+                    <div style={{ color: '#b45309', fontSize: 12 }}>x &gt; 0 and y &lt; 0</div>
                   </div>
                 </div>
 
@@ -622,8 +622,8 @@ export const CoordinatePlanePlayground: React.FC<{
                     {L('अक्षहरूमा पर्ने बिन्दुहरू:', 'Points on Axes:')}
                   </div>
                   <ul style={{ margin: '4px 0 0 16px', padding: 0, fontSize: 12, color: '#334155' }}>
-                    <li>{L('यदि y = ० भए बिन्दु X-अक्षमा पर्छ (जस्तै: (-२, ०))', 'If y = 0, point lies on X-axis (e.g. (-2, 0))')}</li>
-                    <li>{L('यदि x = ० भए बिन्दु Y-अक्षमा पर्छ (जस्तै: (०, ४))', 'If x = 0, point lies on Y-axis (e.g. (0, 4))')}</li>
+                    <li>{L('यदि y = 0 भए बिन्दु X-अक्षमा पर्छ (जस्तै: (-2, 0))', 'If y = 0, point lies on X-axis (e.g. (-2, 0))')}</li>
+                    <li>{L('यदि x = 0 भए बिन्दु On the Y-axis पर्छ (जस्तै: (0, 4))', 'If x = 0, point lies on Y-axis (e.g. (0, 4))')}</li>
                   </ul>
                 </div>
               </div>
@@ -654,7 +654,7 @@ export const CoordinatePlanePlayground: React.FC<{
                   </div>
                   <div style={{ fontSize: 12, color: '#075985', marginTop: 4 }}>
                     {L(
-                      `संकेत: उद्गम बिन्दुबाट X = ${toNp(TEXTBOOK_POINTS[targetPointIndex].x)} र Y = ${toNp(TEXTBOOK_POINTS[targetPointIndex].y)} खोज्नुहोस्।`,
+                      `संकेत: उद्गम बिन्दुबाट X = ${toNp(TEXTBOOK_POINTS[targetPointIndex].x)} and Y = ${toNp(TEXTBOOK_POINTS[targetPointIndex].y)} खोज्नुहोस्।`,
                       `Hint: From Origin, move X = ${TEXTBOOK_POINTS[targetPointIndex].x} and Y = ${TEXTBOOK_POINTS[targetPointIndex].y}.`
                     )}
                   </div>

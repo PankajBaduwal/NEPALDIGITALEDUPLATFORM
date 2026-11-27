@@ -1,7 +1,7 @@
 /**
  * BinaryQuinaryConversionLab.tsx
- * Grade 8 Mathematics – Unit 2: WHOLE NUMBERS (पूर्ण सङ्ख्याहरू)
- * Simulation 2: Binary and Quinary Conversion Lab (द्विआधार र पञ्चआधार रूपान्तरण प्रयोगशाला)
+ * Grade 8 Mathematics – Unit 2: WHOLE NUMBERS
+ * Simulation 2: Binary and Quinary Conversion Lab
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 2)
  */
 import React, { useState } from 'react';
@@ -12,57 +12,57 @@ import { Repeat, ArrowRight, Check, RotateCcw, Award, HelpCircle, Layers } from 
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'दशमलव सङ्ख्या २५ (25₁₀) लाई द्विआधार सङ्ख्यामा रूपान्तरण गर्दा कति हुन्छ?',
+    np: 'दशमलव सङ्ख्या 25 (25₁₀) लाई द्विआधार सङ्ख्यामा रूपान्तरण गर्दा कति हुन्छ?',
     en: 'What is the binary representation of decimal number 25₁₀?',
     options: [
-      { key: 'A', label: '११००१₂ (11001₂)' },
-      { key: 'B', label: '१०१०१₂ (10101₂)' },
-      { key: 'C', label: '१११००₂ (11100₂)' },
-      { key: 'D', label: '१००११₂ (10011₂)' },
+      { key: 'A', label: '11001₂ (11001₂)' },
+      { key: 'B', label: '10101₂ (10101₂)' },
+      { key: 'C', label: '11100₂ (11100₂)' },
+      { key: 'D', label: '10011₂ (10011₂)' },
     ],
     answer: 'A',
   },
   {
-    np: 'लगातार भाग विधि (Repeated Division Method) मा शेषहरू (Remainders) लाई कुन क्रममा लेखिन्छ?',
+    np: 'लगातार भाग विधि (Repeated Division Method) मा Remainderहरू (Remainders) लाई कुन क्रममा लेखिन्छ?',
     en: 'In repeated division method, in which order are the remainders recorded to form the number?',
     options: [
-      { key: 'A', label: 'तलबाट माथितर्फ (From bottom to top: अन्तिम शेष पहिले)' },
-      { key: 'B', label: 'माथिबाट तलतर्फ (From top to bottom)' },
-      { key: 'C', label: 'जुनसुकै क्रममा' },
-      { key: 'D', label: 'केवल पहिलो शेष' },
+      { key: 'A', label: 'From bottom to top (last remainder first)' },
+      { key: 'B', label: 'From top to bottom' },
+      { key: 'C', label: 'In any order' },
+      { key: 'D', label: 'Only the first remainder' },
     ],
     answer: 'A',
   },
   {
-    np: 'दशमलव सङ्ख्या ४३२ (432₁₀) लाई पञ्चआधारमा रूपान्तरण गर्दा कति आउँछ?',
+    np: 'दशमलव सङ्ख्या 432 (432₁₀) लाई पञ्चआधारमा रूपान्तरण गर्दा कति आउँछ?',
     en: 'Converting decimal number 432₁₀ into quinary (Base 5) yields:',
     options: [
-      { key: 'A', label: '३२१२₅ (3212₅)' },
-      { key: 'B', label: '२१२३₅ (2123₅)' },
-      { key: 'C', label: '४३२०₅ (4320₅)' },
-      { key: 'D', label: '१२३४₅ (1234₅)' },
+      { key: 'A', label: '3212₅ (3212₅)' },
+      { key: 'B', label: '2123₅ (2123₅)' },
+      { key: 'C', label: '4320₅ (4320₅)' },
+      { key: 'D', label: '1234₅ (1234₅)' },
     ],
     answer: 'A',
   },
   {
-    np: 'द्विआधार सङ्ख्या १००११₂ (10011₂) लाई पञ्चआधारमा रूपान्तरण गर्दा कति हुन्छ?',
+    np: 'द्विआधार सङ्ख्या 10011₂ (10011₂) लाई पञ्चआधारमा रूपान्तरण गर्दा कति हुन्छ?',
     en: 'Converting binary 10011₂ to quinary (via decimal 19₁₀) gives:',
     options: [
-      { key: 'A', label: '३४₅ [ १९₁₀ = ३ × ५ + ४ = ३४₅ ]' },
-      { key: 'B', label: '४३₅' },
-      { key: 'C', label: '२४₅' },
-      { key: 'D', label: '१४₅' },
+      { key: 'A', label: '34₅ [ 19₁₀ = 3 × 5 + 4 = 34₅ ]' },
+      { key: 'B', label: '43₅' },
+      { key: 'C', label: '24₅' },
+      { key: 'D', label: '14₅' },
     ],
     answer: 'A',
   },
   {
-    np: 'पञ्चआधार सङ्ख्या २३४₅ (234₅) को दशमलव मान कति हुन्छ?',
+    np: 'पञ्चआधार सङ्ख्या 234₅ (234₅) को दशमलव मान कति हुन्छ?',
     en: 'What is the decimal value of the quinary number 234₅?',
     options: [
-      { key: 'A', label: '६९₁₀ [ २ × २५ + ३ × ५ + ४ × १ = ६९ ]' },
-      { key: 'B', label: '५०₁₀' },
-      { key: 'C', label: '५९₁₀' },
-      { key: 'D', label: '७४₁₀' },
+      { key: 'A', label: '69₁₀ [ 2 × 25 + 3 × 5 + 4 × 1 = 69 ]' },
+      { key: 'B', label: '50₁₀' },
+      { key: 'C', label: '59₁₀' },
+      { key: 'D', label: '74₁₀' },
     ],
     answer: 'A',
   },
@@ -113,35 +113,35 @@ export const BinaryQuinaryConversionLab: React.FC<{
 
   const CHALLENGE_PROBLEMS = [
     {
-      promptNp: 'दशमलव सङ्ख्या २१ (21₁₀) लाई द्विआधारमा बदल्नुहोस्:',
+      promptNp: 'दशमलव सङ्ख्या 21 (21₁₀) लाई द्विआधारमा बदल्नुहोस्:',
       promptEn: 'Convert decimal 21₁₀ to binary:',
       ans: '10101',
       base: 2,
-      hintNp: '२१ ÷ २ गर्दै शेषहरू तलबाट माथि पढ्नुहोस् (१६ + ४ + १ = २१)',
+      hintNp: '21 ÷ 2 गर्दै Remainderहरू तलबाट माथि पढ्नुहोस् (16 + 4 + 1 = 21)',
       hintEn: '21 = 16 + 4 + 1 = 10101₂',
     },
     {
-      promptNp: 'द्विआधार सङ्ख्या ११०१₂ (1101₂) लाई दशमलवमा बदल्नुहोस्:',
+      promptNp: 'द्विआधार सङ्ख्या 1101₂ (1101₂) लाई दशमलवमा बदल्नुहोस्:',
       promptEn: 'Convert binary 1101₂ to decimal:',
       ans: '13',
       base: 10,
-      hintNp: '१ × ८ + १ × ४ + ० × २ + १ × १ = १३',
+      hintNp: '1 × 8 + 1 × 4 + 0 × 2 + 1 × 1 = 13',
       hintEn: '1*8 + 1*4 + 0*2 + 1*1 = 13₁₀',
     },
     {
-      promptNp: 'दशमलव सङ्ख्या ६९ (69₁₀) लाई पञ्चआधारमा बदल्नुहोस्:',
+      promptNp: 'दशमलव सङ्ख्या 69 (69₁₀) लाई पञ्चआधारमा बदल्नुहोस्:',
       promptEn: 'Convert decimal 69₁₀ to quinary:',
       ans: '234',
       base: 5,
-      hintNp: '६९ ÷ ५ गर्दै शेषहरू तलबाट माथि पढ्नुहोस्',
+      hintNp: '69 ÷ 5 गर्दै Remainderहरू तलबाट माथि पढ्नुहोस्',
       hintEn: '69 = 2*25 + 3*5 + 4 = 234₅',
     },
     {
-      promptNp: 'पञ्चआधार सङ्ख्या ३४₅ (34₅) लाई दशमलवमा बदल्नुहोस्:',
+      promptNp: 'पञ्चआधार सङ्ख्या 34₅ (34₅) लाई दशमलवमा बदल्नुहोस्:',
       promptEn: 'Convert quinary 34₅ to decimal:',
       ans: '19',
       base: 10,
-      hintNp: '३ × ५ + ४ × १ = १५ + ४ = १९',
+      hintNp: '3 × 5 + 4 × 1 = 15 + 4 = 19',
       hintEn: '3*5 + 4*1 = 19₁₀',
     },
   ];
@@ -204,7 +204,7 @@ export const BinaryQuinaryConversionLab: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! दशमलव, द्विआधार (२) र पञ्चआधार (५) बीच रूपान्तरण गर्न लगातार भाग विधि र विस्तारित रूप अभ्यास गरौँ!',
+        'नमस्ते! दशमलव, द्विआधार (2) र पञ्चआधार (5) बीच रूपान्तरण गर्न लगातार भाग विधि र विस्तारित रूप अभ्यास गरौँ!',
         'Hello! Practice repeated division and expanded form conversions between Decimal, Binary, and Quinary!'
       )}
     >
@@ -212,12 +212,12 @@ export const BinaryQuinaryConversionLab: React.FC<{
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'dec2bin', labelNp: '१. दशमलव → द्विआधार', labelEn: '1. Dec → Bin', icon: Repeat },
-            { id: 'bin2dec', labelNp: '२. द्विआधार → दशमलव', labelEn: '2. Bin → Dec', icon: ArrowRight },
-            { id: 'dec2quin', labelNp: '३. दशमलव → पञ्चआधार', labelEn: '3. Dec → Quin', icon: Repeat },
-            { id: 'quin2dec', labelNp: '४. पञ्चआधार → दशमलव', labelEn: '4. Quin → Dec', icon: ArrowRight },
-            { id: 'bridge', labelNp: '५. द्विआधार ↔ पञ्चआधार', labelEn: '5. Bin ↔ Quin Bridge', icon: Layers },
-            { id: 'challenge', labelNp: '६. रूपान्तरण चुनौती', labelEn: '6. Challenge Quiz', icon: Award },
+            { id: 'dec2bin', labelNp: '1. दशमलव → द्विआधार', labelEn: '1. Dec → Bin', icon: Repeat },
+            { id: 'bin2dec', labelNp: '2. द्विआधार → दशमलव', labelEn: '2. Bin → Dec', icon: ArrowRight },
+            { id: 'dec2quin', labelNp: '3. दशमलव → पञ्चआधार', labelEn: '3. Dec → Quin', icon: Repeat },
+            { id: 'quin2dec', labelNp: '4. पञ्चआधार → दशमलव', labelEn: '4. Quin → Dec', icon: ArrowRight },
+            { id: 'bridge', labelNp: '5. द्विआधार ↔ पञ्चआधार', labelEn: '5. Bin ↔ Quin Bridge', icon: Layers },
+            { id: 'challenge', labelNp: '6. रूपान्तरण चुनौती', labelEn: '6. Challenge Quiz', icon: Award },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -256,11 +256,11 @@ export const BinaryQuinaryConversionLab: React.FC<{
           <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
             <h3 style={{ margin: '0 0 10px 0', color: '#0369a1', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
               <Repeat size={20} />
-              {L('दशमलवबाट द्विआधारमा रूपान्तरण (२ ले लगातार भाग विधि)', 'Decimal to Binary (Repeated Division by 2)')}
+              {L('दशमलवबाट द्विआधारमा रूपान्तरण (2 ले लगातार भाग विधि)', 'Decimal to Binary (Repeated Division by 2)')}
             </h3>
             <p style={{ margin: '0 0 16px 0', fontSize: 14, color: '#475569' }}>
               {L(
-                'दिइएको दशमलव सङ्ख्यालाई २ ले लगातार भाग गर्दै प्रत्येक चरणको शेष (Remainder) दायाँतर्फ टिप्नुहोस्। अन्त्यमा शेषहरू तलबाट माथितर्फ लेख्दा द्विआधार सङ्ख्या प्राप्त हुन्छ।',
+                'दिइएको दशमलव सङ्ख्यालाई 2 ले लगातार भाग गर्दै प्रत्येक चरणको Remainder (Remainder) दायाँतर्फ टिप्नुहोस्। अन्त्यमा Remainderहरू तलबाट माथितर्फ लेख्दा द्विआधार सङ्ख्या प्राप्त हुन्छ।',
                 'Divide repeatedly by 2, write remainders on the right, and read the remainders from bottom to top.'
               )}
             </p>
@@ -296,13 +296,13 @@ export const BinaryQuinaryConversionLab: React.FC<{
                     <tr style={{ background: '#f1f5f9' }}>
                       <th style={{ padding: 8, borderBottom: '2px solid #cbd5e1' }}>{L('भाजक', 'Divisor')}</th>
                       <th style={{ padding: 8, borderBottom: '2px solid #cbd5e1' }}>{L('भाज्य / भागफल', 'Quotient')}</th>
-                      <th style={{ padding: 8, borderBottom: '2px solid #cbd5e1', color: '#c2410c' }}>{L('शेष (Remainder)', 'Remainder')}</th>
+                      <th style={{ padding: 8, borderBottom: '2px solid #cbd5e1', color: '#c2410c' }}>{L('Remainder (Remainder)', 'Remainder')}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {dec2binSteps.map((step, idx) => (
                       <tr key={idx} style={{ background: idx === dec2binSteps.length - 1 ? '#dcfce7' : 'transparent' }}>
-                        <td style={{ padding: 8, borderBottom: '1px solid #e2e8f0', fontWeight: 800, color: '#0369a1' }}>२</td>
+                        <td style={{ padding: 8, borderBottom: '1px solid #e2e8f0', fontWeight: 800, color: '#0369a1' }}>2</td>
                         <td style={{ padding: 8, borderBottom: '1px solid #e2e8f0', fontWeight: 700 }}>
                           {isNe ? toNp(step.dividend) : step.dividend}
                         </td>
@@ -313,7 +313,7 @@ export const BinaryQuinaryConversionLab: React.FC<{
                     ))}
                     <tr>
                       <td style={{ padding: 8, fontWeight: 800, color: '#0369a1' }}></td>
-                      <td style={{ padding: 8, fontWeight: 900, color: '#166534' }}>०</td>
+                      <td style={{ padding: 8, fontWeight: 900, color: '#166534' }}>0</td>
                       <td style={{ padding: 8, color: '#15803d', fontWeight: 800 }}>{L('↑ तलबाट माथि', '↑ Read Upwards')}</td>
                     </tr>
                   </tbody>
@@ -331,7 +331,7 @@ export const BinaryQuinaryConversionLab: React.FC<{
                   </div>
                   <div style={{ fontSize: 13, color: '#064e3b', marginTop: 6 }}>
                     {L(
-                      `शेषहरू तलबाट माथि क्रम मिलाउँदा: ${dec2binSteps.map((s) => s.remainder).reverse().join('')}`,
+                      `Remainderहरू तलबाट माथि क्रम मिलाउँदा: ${dec2binSteps.map((s) => s.remainder).reverse().join('')}`,
                       `Remainders ordered from bottom to top: ${dec2binSteps.map((s) => s.remainder).reverse().join('')}`
                     )}
                   </div>
@@ -339,7 +339,7 @@ export const BinaryQuinaryConversionLab: React.FC<{
 
                 <div style={{ background: '#f0f9ff', padding: 14, borderRadius: 10, border: '1px solid #bae6fd', fontSize: 13, color: '#0369a1', lineHeight: 1.6 }}>
                   <strong>{L('जाँच्ने विधि (Verification):', 'Verification:')}</strong><br />
-                  {dec2binResult.split('').map((b, i, arr) => `${b} × २^${arr.length - 1 - i}`).join(' + ')} = {decInput1}₁₀
+                  {dec2binResult.split('').map((b, i, arr) => `${b} × 2^${arr.length - 1 - i}`).join(' + ')} = {decInput1}₁₀
                 </div>
               </div>
             </div>
@@ -355,7 +355,7 @@ export const BinaryQuinaryConversionLab: React.FC<{
             </h3>
             <p style={{ margin: '0 0 14px 0', fontSize: 14, color: '#475569' }}>
               {L(
-                'द्विआधार सङ्ख्याका प्रत्येक अङ्कलाई दायाँबाट बायाँतर्फ २ को घात (२⁰, २¹, २², २³, ...) ले गुणन गरी जोड्नुहोस्:',
+                'द्विआधार सङ्ख्याका प्रत्येक अङ्कलाई दायाँबाट बायाँतर्फ 2 को घात (2⁰, 2¹, 2², 2³, ...) ले गुणन गरी जोड्नुहोस्:',
                 'Multiply each binary digit by powers of 2 starting from the right (2⁰, 2¹, 2², 2³, ...), then sum them up:'
               )}
             </p>
@@ -390,7 +390,7 @@ export const BinaryQuinaryConversionLab: React.FC<{
                 {binInput2}₂ ={' '}
                 {binInput2
                   .split('')
-                  .map((bit, idx, arr) => `(${bit} × २^${arr.length - 1 - idx})`)
+                  .map((bit, idx, arr) => `(${bit} × 2^${arr.length - 1 - idx})`)
                   .join(' + ')}
               </div>
               <div style={{ fontSize: 15, fontWeight: 700, color: '#1e293b', marginTop: 8 }}>
@@ -411,11 +411,11 @@ export const BinaryQuinaryConversionLab: React.FC<{
           <div style={{ background: '#ffffff', padding: 20, borderRadius: 16, border: '2px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
             <h3 style={{ margin: '0 0 10px 0', color: '#ea580c', fontSize: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
               <Repeat size={20} />
-              {L('दशमलवबाट पञ्चआधारमा रूपान्तरण (५ ले लगातार भाग विधि)', 'Decimal to Quinary (Repeated Division by 5)')}
+              {L('दशमलवबाट पञ्चआधारमा रूपान्तरण (5 ले लगातार भाग विधि)', 'Decimal to Quinary (Repeated Division by 5)')}
             </h3>
             <p style={{ margin: '0 0 16px 0', fontSize: 14, color: '#475569' }}>
               {L(
-                'दशमलव सङ्ख्यालाई ५ ले लगातार भाग गर्दै प्रत्येक चरणको शेष दायाँतर्फ राख्नुहोस् र अन्त्यमा शेषहरू तलबाट माथितर्फ लेख्नुहोस्:',
+                'दशमलव सङ्ख्यालाई 5 ले लगातार भाग गर्दै प्रत्येक चरणको Remainder दायाँतर्फ राख्नुहोस् र अन्त्यमा Remainderहरू तलबाट माथितर्फ लेख्नुहोस्:',
                 'Divide repeatedly by 5, record the remainders, and read from bottom to top:'
               )}
             </p>
@@ -450,13 +450,13 @@ export const BinaryQuinaryConversionLab: React.FC<{
                     <tr style={{ background: '#ffedd5' }}>
                       <th style={{ padding: 8, borderBottom: '2px solid #fed7aa' }}>{L('भाजक', 'Divisor')}</th>
                       <th style={{ padding: 8, borderBottom: '2px solid #fed7aa' }}>{L('भागफल', 'Quotient')}</th>
-                      <th style={{ padding: 8, borderBottom: '2px solid #fed7aa', color: '#c2410c' }}>{L('शेष', 'Remainder')}</th>
+                      <th style={{ padding: 8, borderBottom: '2px solid #fed7aa', color: '#c2410c' }}>{L('Remainder', 'Remainder')}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {dec2quinSteps.map((step, idx) => (
                       <tr key={idx} style={{ background: idx === dec2quinSteps.length - 1 ? '#fef3c7' : 'transparent' }}>
-                        <td style={{ padding: 8, borderBottom: '1px solid #fed7aa', fontWeight: 800, color: '#c2410c' }}>५</td>
+                        <td style={{ padding: 8, borderBottom: '1px solid #fed7aa', fontWeight: 800, color: '#c2410c' }}>5</td>
                         <td style={{ padding: 8, borderBottom: '1px solid #fed7aa', fontWeight: 700 }}>
                           {isNe ? toNp(step.dividend) : step.dividend}
                         </td>
@@ -467,7 +467,7 @@ export const BinaryQuinaryConversionLab: React.FC<{
                     ))}
                     <tr>
                       <td style={{ padding: 8, fontWeight: 800, color: '#c2410c' }}></td>
-                      <td style={{ padding: 8, fontWeight: 900, color: '#b45309' }}>०</td>
+                      <td style={{ padding: 8, fontWeight: 900, color: '#b45309' }}>0</td>
                       <td style={{ padding: 8, color: '#9a3412', fontWeight: 800 }}>{L('↑ तलबाट माथि', '↑ Read Upwards')}</td>
                     </tr>
                   </tbody>
@@ -484,7 +484,7 @@ export const BinaryQuinaryConversionLab: React.FC<{
                   </div>
                   <div style={{ fontSize: 13, color: '#7c2d12', marginTop: 6 }}>
                     {L(
-                      `शेषहरू तलबाट माथि: ${dec2quinSteps.map((s) => s.remainder).reverse().join('')}`,
+                      `Remainderहरू तलबाट माथि: ${dec2quinSteps.map((s) => s.remainder).reverse().join('')}`,
                       `Remainders ordered bottom to top: ${dec2quinSteps.map((s) => s.remainder).reverse().join('')}`
                     )}
                   </div>
@@ -503,7 +503,7 @@ export const BinaryQuinaryConversionLab: React.FC<{
             </h3>
             <p style={{ margin: '0 0 14px 0', fontSize: 14, color: '#475569' }}>
               {L(
-                'पञ्चआधार सङ्ख्याका प्रत्येक अङ्कलाई दायाँबाट ५ को घात (५⁰, ५¹, ५², ५³, ...) ले गुणन गरी जोड्नुहोस्:',
+                'पञ्चआधार सङ्ख्याका प्रत्येक अङ्कलाई दायाँबाट 5 को घात (5⁰, 5¹, 5², 5³, ...) ले गुणन गरी जोड्नुहोस्:',
                 'Multiply each quinary digit by powers of 5 starting from the right (5⁰, 5¹, 5², 5³, ...):'
               )}
             </p>
@@ -537,7 +537,7 @@ export const BinaryQuinaryConversionLab: React.FC<{
                 {quinInput4}₅ ={' '}
                 {quinInput4
                   .split('')
-                  .map((d, idx, arr) => `(${d} × ५^${arr.length - 1 - idx})`)
+                  .map((d, idx, arr) => `(${d} × 5^${arr.length - 1 - idx})`)
                   .join(' + ')}
               </div>
               <div style={{ fontSize: 15, fontWeight: 700, color: '#1e293b', marginTop: 8 }}>
@@ -562,7 +562,7 @@ export const BinaryQuinaryConversionLab: React.FC<{
             </h3>
             <p style={{ margin: '0 0 14px 0', fontSize: 14, color: '#475569' }}>
               {L(
-                'पाठ्यपुस्तकको विधि: पहिले द्विआधारलाई दशमलवमा बदल्ने (चरण १), र प्राप्त दशमलवलाई ५ ले भाग गरी पञ्चआधारमा बदल्ने (चरण २)।',
+                'पाठ्यपुस्तकको विधि: पहिले द्विआधारलाई दशमलवमा बदल्ने (चरण 1), र प्राप्त दशमलवलाई 5 ले भाग गरी पञ्चआधारमा बदल्ने (चरण 2)।',
                 'Textbook 2-step method: First convert binary to decimal (Step 1), then convert that decimal to quinary by dividing by 5 (Step 2).'
               )}
             </p>
@@ -592,10 +592,10 @@ export const BinaryQuinaryConversionLab: React.FC<{
               {/* Step 1 */}
               <div style={{ background: '#eff6ff', padding: 14, borderRadius: 12, border: '1px solid #bfdbfe' }}>
                 <div style={{ fontSize: 13, fontWeight: 800, color: '#1e40af' }}>
-                  {L('चरण १: द्विआधार → दशमलव', 'Step 1: Binary → Decimal')}
+                  {L('चरण 1: द्विआधार → दशमलव', 'Step 1: Binary → Decimal')}
                 </div>
                 <div style={{ fontSize: 14, color: '#1e3a8a', marginTop: 8 }}>
-                  {bridgeBin}₂ = {bridgeBin.split('').map((b, i, arr) => `(${b}×२^${arr.length - 1 - i})`).join('+')}
+                  {bridgeBin}₂ = {bridgeBin.split('').map((b, i, arr) => `(${b}×2^${arr.length - 1 - i})`).join('+')}
                 </div>
                 <div style={{ fontSize: 20, fontWeight: 900, color: '#1d4ed8', marginTop: 8 }}>
                   = {isNe ? toNp(bridgeDec) : bridgeDec}₁₀
@@ -605,10 +605,10 @@ export const BinaryQuinaryConversionLab: React.FC<{
               {/* Step 2 */}
               <div style={{ background: '#fff7ed', padding: 14, borderRadius: 12, border: '1px solid #fed7aa' }}>
                 <div style={{ fontSize: 13, fontWeight: 800, color: '#c2410c' }}>
-                  {L('चरण २: दशमलव → पञ्चआधार (५ ले भाग)', 'Step 2: Decimal → Quinary (÷ 5)')}
+                  {L('चरण 2: दशमलव → पञ्चआधार (5 ले भाग)', 'Step 2: Decimal → Quinary (÷ 5)')}
                 </div>
                 <div style={{ fontSize: 14, color: '#7c2d12', marginTop: 8 }}>
-                  {bridgeDec} ÷ ५ = {Math.floor(bridgeDec / 5)} शेष {bridgeDec % 5}
+                  {bridgeDec} ÷ 5 = {Math.floor(bridgeDec / 5)} Remainder {bridgeDec % 5}
                 </div>
                 <div style={{ fontSize: 20, fontWeight: 900, color: '#ea580c', marginTop: 8 }}>
                   = {bridgeQuin}₅

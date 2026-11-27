@@ -1,20 +1,20 @@
 /**
  * ArchimedesPrincipleSim.tsx
- * Ultra-High-Definition Interactive Laboratory Simulation: Archimedes' Principle (आर्किमिडिजको सिद्धान्त)
- * Class 10 Science & Technology • Chapter 2: Pressure (चाप)
+ * Ultra-High-Definition Interactive Laboratory Simulation: Archimedes' Principle
+ * Class 10 Science & Technology • Chapter 2: Pressure
  * Nepal Curriculum Development Centre (CDC) Alignment
  *
  * Implements:
- * 1. Classic Eureka Overflow Can Experiment (विस्थापन क्यान प्रयोग):
+ * 1. Classic Eureka Overflow Can Experiment:
  *    - Dual spring balance setup: Weight in Air vs Apparent Weight in Liquid
  *    - Direct implementation of CDC textbook & user's reference diagram
  *    - Glass overflow can with spout, fluid discharge animation, and collection beaker on digital scale
- * 2. Controllable Weights & Density Laboratory (तौल र घनत्व नियन्त्रण):
+ * 2. Controllable Weights & Density Laboratory:
  *    - Controllable object mass (W_air), volume (V), and solid density (River Stone, Iron, Aluminum, Gold, Wood, Cork)
  *    - Controllable fluid density (Fresh Water, Salt Water, Glycerin, Kerosene, Custom)
- * 3. Law of Floatation (प्लवनको नियम):
+ * 3. Law of Floatation:
  *    - 3-State physical comparison (Sinking, Neutral suspension, Floating partially)
- * 4. SEE Examination Problem Solver (गणितीय समाधान):
+ * 4. SEE Examination Problem Solver:
  *    - Step-by-step calculations for upthrust, apparent weight, and displaced liquid volume
  * 5. Interactive Concept Mastery Quiz:
  *    - 5 SEE board questions with instant audio/visual feedback and explanations
@@ -71,7 +71,7 @@ export const ArchimedesPrincipleSim: React.FC<BaseSimulationProps> = ({
   initialLanguage = 'en',
 }) => {
   // Global Simulation State
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -381,36 +381,36 @@ export const ArchimedesPrincipleSim: React.FC<BaseSimulationProps> = ({
           active={activeMode === 'eureka_experiment'}
           onClick={() => handleSelectMode('eureka_experiment')}
           icon={<Droplets size={18} color="#0284c7" />}
-          labelEn="1. Eureka Can Experiment (विस्थापन क्यान)"
-          labelNe="१. विस्थापन क्यान प्रयोग"
+          labelEn="1. Eureka Can Experiment"
+          labelNe="1. विस्थापन क्यान प्रयोग"
         />
         <ModeTabButton
           active={activeMode === 'density_lab'}
           onClick={() => handleSelectMode('density_lab')}
           icon={<Scale size={18} color="#16a34a" />}
           labelEn="2. Controllable Weight & Density"
-          labelNe="२. तौल र घनत्व नियन्त्रण"
+          labelNe="2. तौल र घनत्व नियन्त्रण"
         />
         <ModeTabButton
           active={activeMode === 'floatation_laws'}
           onClick={() => handleSelectMode('floatation_laws')}
           icon={<Layers size={18} color="#f59e0b" />}
-          labelEn="3. Law of Floatation (प्लवनको नियम)"
-          labelNe="३. प्लवनको नियम"
+          labelEn="3. Law of Floatation"
+          labelNe="3. प्लवनको नियम"
         />
         <ModeTabButton
           active={activeMode === 'see_solver'}
           onClick={() => handleSelectMode('see_solver')}
           icon={<Calculator size={18} color="#8b5cf6" />}
           labelEn="4. SEE Numerical Solver"
-          labelNe="४. SEE गणितीय समाधान"
+          labelNe="4. SEE गणितीय समाधान"
         />
         <ModeTabButton
           active={activeMode === 'concept_quiz'}
           onClick={() => handleSelectMode('concept_quiz')}
           icon={<Award size={18} color="#ea580c" />}
-          labelEn="5. Concept Quiz (प्रश्नोत्तरी)"
-          labelNe="५. अभ्यास र प्रश्नोत्तरी"
+          labelEn="5. Concept Quiz"
+          labelNe="5. अभ्यास र प्रश्नोत्तरी"
         />
       </div>
 

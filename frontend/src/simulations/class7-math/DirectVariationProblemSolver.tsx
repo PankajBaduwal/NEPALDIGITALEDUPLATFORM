@@ -1,6 +1,6 @@
 /**
  * DirectVariationProblemSolver.tsx
- * Grade 7 Mathematics – Lesson 8: UNITARY METHOD (एकाइ विधि)
+ * Grade 7 Mathematics – Lesson 8: UNITARY METHOD
  * Simulation 3: Direct Variation Problem Solver (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 106-107)
  */
@@ -12,35 +12,35 @@ import { Fuel, Factory, ShoppingBag, ArrowRight, Check } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: '५ केजी चिनीको मूल्य रु ४५० पर्छ भने ३ केजी चिनीको मूल्य कति पर्छ?',
+    np: '5 kg of sugar costs Rs 450 पर्छ भने 3 kg of sugar costs कति पर्छ?',
     en: 'If 5 kg of sugar costs Rs 450, what is the cost of 3 kg of sugar?',
     options: [
-      { key: 'A', label: 'रु २७० (१ केजी = ९० => ३ × ९० = रु २७०)' },
-      { key: 'B', label: 'रु ३००' },
-      { key: 'C', label: 'रु २४०' },
-      { key: 'D', label: 'रु २८०' },
+      { key: 'A', label: 'Rs 270' },
+      { key: 'B', label: 'Rs 300' },
+      { key: 'C', label: 'Rs 240' },
+      { key: 'D', label: 'Rs 280' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा मोटरसाइकलले ८ लिटर पेट्रोलले ३२० किमी पार गर्छ भने ५० किमी दुरी पार गर्न कति लिटर पेट्रोल चाहिन्छ?',
+    np: 'एउटा मोटरसाइकलले 8 litres पेट्रोलले 320 km पार गर्छ भने 50 km दुरी पार गर्न कति litres पेट्रोल चाहिन्छ?',
     en: 'A motorcycle covers 320 km with 8 liters of petrol. How many liters are needed for 50 km?',
     options: [
-      { key: 'A', label: '१.२५ लिटर (१ लिटरले ४० किमी => ५०/४० = १.२५ लिटर)' },
-      { key: 'B', label: '१.५ लिटर' },
-      { key: 'C', label: '२ लिटर' },
-      { key: 'D', label: '०.८ लिटर' },
+      { key: 'A', label: '1.25 litres (1 litre runs 40 km => 50/40 = 1.25 litres)' },
+      { key: 'B', label: '1.5 litres' },
+      { key: 'C', label: '2 litres' },
+      { key: 'D', label: '0.8 litres' },
     ],
     answer: 'A',
   },
   {
-    np: 'कारखानाको एउटा मेसिनले ३ घण्टामा ६,६०० बोतल जुस भर्छ भने ८ घण्टामा कति बोतल भर्ला?',
+    np: 'कारखानाको एउटा मेसिनले 3 घण्टामा 6,600 bottles जुस भर्छ भने 8 घण्टामा कति bottles भर्ला?',
     en: 'A factory machine fills 6,600 juice bottles in 3 hours. How many bottles will it fill in 8 hours?',
     options: [
-      { key: 'A', label: '१७,६०० बोतल (१ घण्टामा २,२०० => ८ × २२०० = १७,६००)' },
-      { key: 'B', label: '१५,००० बोतल' },
-      { key: 'C', label: '१८,००० बोतल' },
-      { key: 'D', label: '२०,००० बोतल' },
+      { key: 'A', label: '17,600 bottles (2,200 in 1 hour => 8 × 2200 = 17,600)' },
+      { key: 'B', label: '15,000 bottles' },
+      { key: 'C', label: '18,000 bottles' },
+      { key: 'D', label: '20,000 bottles' },
     ],
     answer: 'A',
   },
@@ -110,9 +110,9 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'sugar', np: '१. चिनीको मूल्य (Sugar Cost)', en: '1. Sugar Cost' },
-            { id: 'fuel', np: '२. मोटरसाइकल इन्धन (Motorcycle Fuel)', en: '2. Motorcycle Fuel' },
-            { id: 'bottles', np: '३. कारखाना उत्पादन (Bottle Production)', en: '3. Machine Production' },
+            { id: 'sugar', np: '1. चिनीको मूल्य (Sugar Cost)', en: '1. Sugar Cost' },
+            { id: 'fuel', np: '2. मोटरसाइकल इन्धन (Motorcycle Fuel)', en: '2. Motorcycle Fuel' },
+            { id: 'bottles', np: '3. कारखाना उत्पादन (Bottle Production)', en: '3. Machine Production' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -144,7 +144,7 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: ५ केजी चिनीको मूल्य रु ४५० पर्छ भने ३ केजी चिनीको मूल्य कति पर्छ?',
+                'पाठ्यपुस्तक उदाहरण: 5 kg of sugar costs Rs 450 पर्छ भने 3 kg of sugar costs कति पर्छ?',
                 'Textbook Example: If 5 kg sugar costs Rs 450, what is the cost of 3 kg sugar?'
               )}
             </p>
@@ -152,7 +152,7 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#334155', display: 'block', marginBottom: 4 }}>
-                  {L('दिइएको चिनी (केजी): ', 'Given Sugar (kg): ')} {givenSugarKg} kg
+                  {L('दिइएको चिनी (kg): ', 'Given Sugar (kg): ')} {givenSugarKg} kg
                 </label>
                 <input
                   type="range"
@@ -169,7 +169,7 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1', display: 'block', marginBottom: 4 }}>
-                  {L('दिइएको मूल्य (रु): ', 'Given Cost (Rs): ')} रु {givenSugarCost}
+                  {L('दिइएको मूल्य (Rs): ', 'Given Cost (Rs): ')} Rs {givenSugarCost}
                 </label>
                 <input
                   type="range"
@@ -187,7 +187,7 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D', display: 'block', marginBottom: 4 }}>
-                  {L('किन्नुपर्ने चिनी (केजी): ', 'Target Sugar (kg): ')} {targetSugarKg} kg
+                  {L('किन्नुपर्ने चिनी (kg): ', 'Target Sugar (kg): ')} {targetSugarKg} kg
                 </label>
                 <input
                   type="range"
@@ -214,14 +214,14 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('१. दिइएको:', '1. Given:')}</strong> {givenSugarKg} केजी चिनीको मूल्य = रु {givenSugarCost}
+                <strong>{L('1. दिइएको:', '1. Given:')}</strong> {givenSugarKg} kg of sugar costs = Rs {givenSugarCost}
               </div>
               <div>
-                <strong>{L('२. १ केजी चिनीको मूल्य (भाग गर्दा):', '2. Cost of 1 kg (Divide):')}</strong> रु{' '}
-                {givenSugarCost} ÷ {givenSugarKg} = <span style={{ fontWeight: 800, color: '#059669' }}>रु {unitSugarRate}</span>
+                <strong>{L('2. 1 kg of sugar costs:', '2. Cost of 1 kg (Divide):')}</strong> Rs{' '}
+                {givenSugarCost} ÷ {givenSugarKg} = <span style={{ fontWeight: 800, color: '#059669' }}>Rs {unitSugarRate}</span>
               </div>
               <div>
-                <strong>{L('३. ३ केजी चिनीको मूल्य (गुणन गर्दा):', '3. Cost of 3 kg (Multiply):')}</strong> {targetSugarKg} × रु{' '}
+                <strong>{L('3. 3 kg of sugar costs:', '3. Cost of 3 kg (Multiply):')}</strong> {targetSugarKg} × Rs{' '}
                 {unitSugarRate}
               </div>
               <div
@@ -232,7 +232,7 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
                   color: '#187C68',
                 }}
               >
-                {targetSugarKg} केजी {L('चिनीको मूल्य = रु ', 'Sugar Cost = Rs ')} {targetSugarCost.toLocaleString()}
+                {targetSugarKg} kg {L('चिनीको मूल्य = Rs ', 'Sugar Cost = Rs ')} {targetSugarCost.toLocaleString()}
               </div>
             </div>
           </div>
@@ -246,7 +246,7 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: एउटा मोटरसाइकलले ८ लिटर पेट्रोलले ३२० किमी पार गर्छ भने ५० किमी दुरी पार गर्न कति लिटर पेट्रोल चाहिन्छ?',
+                'पाठ्यपुस्तक उदाहरण: एउटा मोटरसाइकलले 8 litres पेट्रोलले 320 km पार गर्छ भने 50 km दुरी पार गर्न कति litres पेट्रोल चाहिन्छ?',
                 'Textbook Example: A motorcycle covers 320 km with 8 liters of petrol. How much petrol is needed for 50 km?'
               )}
             </p>
@@ -262,14 +262,14 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('१. दिइएको:', '1. Given:')}</strong> ३२० किमी दुरी पार गर्न लाग्ने पेट्रोल = ८ लिटर
+                <strong>{L('1. दिइएको:', '1. Given:')}</strong> To cover 320 km, petrol needed = 8 litres
               </div>
               <div>
-                <strong>{L('२. १ किमी दुरी पार गर्न लाग्ने पेट्रोल:', '2. Petrol for 1 km:')}</strong> ८ ÷ ३२० = १/४० लिटर
-                (अर्थात् १ लिटरले ४० किमी गुड्छ)
+                <strong>{L('2. 1 km दुरी पार गर्न petrol needed:', '2. Petrol for 1 km:')}</strong> 8 ÷ 320 = 1/40 litres
+                (that is, 1 litre runs 40 km)
               </div>
               <div>
-                <strong>{L('३. ५० किमी दुरी पार गर्न लाग्ने पेट्रोल:', '3. Petrol for 50 km:')}</strong> ५० × (१/४०) = ५० ÷ ४०
+                <strong>{L('3. 50 km दुरी पार गर्न petrol needed:', '3. Petrol for 50 km:')}</strong> 50 × (1/40) = 50 ÷ 40
               </div>
               <div
                 style={{
@@ -279,7 +279,7 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
                   color: '#1E40AF',
                 }}
               >
-                {L('आवश्यक पेट्रोल = ', 'Petrol Required = ')} {targetPetrolNeeded.toFixed(2)} {L('लिटर', 'Liters')}
+                {L('आवश्यक पेट्रोल = ', 'Petrol Required = ')} {targetPetrolNeeded.toFixed(2)} {L('litres', 'Liters')}
               </div>
             </div>
           </div>
@@ -293,7 +293,7 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक उदाहरण: कारखानाको एउटा मेसिनले ३ घण्टामा ६,६०० बोतल जुस भर्छ भने सोही दरमा ८ घण्टामा कति बोतल भर्ला?',
+                'पाठ्यपुस्तक उदाहरण: कारखानाको एउटा मेसिनले 3 घण्टामा 6,600 bottles जुस भर्छ भने सोही दरमा 8 घण्टामा कति bottles भर्ला?',
                 'Textbook Example: A machine fills 6,600 juice bottles in 3 hours. How many bottles will it fill in 8 hours?'
               )}
             </p>
@@ -309,14 +309,14 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
               }}
             >
               <div>
-                <strong>{L('१. दिइएको:', '1. Given:')}</strong> ३ घण्टामा भरिने बोतल = ६,६०० बोतल
+                <strong>{L('1. दिइएको:', '1. Given:')}</strong> Bottles filled in 3 hours = 6,600 bottles
               </div>
               <div>
-                <strong>{L('२. १ घण्टामा भरिने बोतल:', '2. Bottles in 1 hour:')}</strong> ६,६०० ÷ ३ ={' '}
-                <span style={{ fontWeight: 800, color: '#15803D' }}>२,२०० बोतल</span>
+                <strong>{L('2. 1 घण्टामा भरिने bottles:', '2. Bottles in 1 hour:')}</strong> 6,600 ÷ 3 ={' '}
+                <span style={{ fontWeight: 800, color: '#15803D' }}>2,200 bottles</span>
               </div>
               <div>
-                <strong>{L('३. ८ घण्टामा भरिने बोतल:', '3. Bottles in 8 hours:')}</strong> ८ × २,२०० बोतल
+                <strong>{L('3. 8 घण्टामा भरिने bottles:', '3. Bottles in 8 hours:')}</strong> 8 × 2,200 bottles
               </div>
               <div
                 style={{
@@ -326,8 +326,8 @@ export const DirectVariationProblemSolver: React.FC<{ onBackToLibrary?: () => vo
                   color: '#166534',
                 }}
               >
-                {L('जम्मा भरिने बोतल = ', 'Total Bottles Filled = ')} {targetBottlesFilled.toLocaleString()}{' '}
-                {L('बोतल', 'Bottles')}
+                {L('जम्मा भरिने bottles = ', 'Total Bottles Filled = ')} {targetBottlesFilled.toLocaleString()}{' '}
+                {L('bottles', 'Bottles')}
               </div>
             </div>
           </div>

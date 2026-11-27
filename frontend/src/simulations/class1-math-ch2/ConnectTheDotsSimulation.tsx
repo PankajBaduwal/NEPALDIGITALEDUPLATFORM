@@ -1,8 +1,8 @@
 /**
  * ConnectTheDotsSimulation.tsx
- * Simulation 03: Connect the Dots (थोप्लाहरू जोडेर रेखा बनाऔँ)
- * Class 1 Mathematics - Chapter 2: Lines (रेखाहरू)
- * Based on Nepal CDC Curriculum (मेरो गणित, कक्षा १ - २०७६)
+ * Simulation 03: Connect the Dots
+ * Class 1 Mathematics - Chapter 2: Lines
+ * Based on Nepal CDC Curriculum
  */
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -50,7 +50,7 @@ export const ConnectTheDotsSimulation: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Language & Audio
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Puzzles
@@ -62,10 +62,10 @@ export const ConnectTheDotsSimulation: React.FC<Props> = ({
       typeEn: 'Straight Line',
       typeNp: 'सीधा रेखा',
       instructionEn: 'Tap or drag from Dot 1 to Dot 2 to make a straight line.',
-      instructionNp: 'थोप्ला १ बाट थोप्ला २ सम्म जोडेर तेर्सो सीधा रेखा बनाउनुहोस्।',
+      instructionNp: 'थोप्ला 1 बाट थोप्ला 2 सम्म जोडेर तेर्सो सीधा रेखा बनाउनुहोस्।',
       dots: [
-        { id: 1, x: 120, y: 260, label: '१' },
-        { id: 2, x: 480, y: 260, label: '२' },
+        { id: 1, x: 120, y: 260, label: '1' },
+        { id: 2, x: 480, y: 260, label: '2' },
       ],
     },
     {
@@ -75,10 +75,10 @@ export const ConnectTheDotsSimulation: React.FC<Props> = ({
       typeEn: 'Straight Line',
       typeNp: 'सीधा रेखा',
       instructionEn: 'Drag from Dot 1 down to Dot 2 to draw a straight line.',
-      instructionNp: 'थोप्ला १ बाट थोप्ला २ सम्म जोडेर ठाडो सीधा रेखा बनाउनुहोस्।',
+      instructionNp: 'थोप्ला 1 बाट थोप्ला 2 सम्म जोडेर ठाडो सीधा रेखा बनाउनुहोस्।',
       dots: [
-        { id: 1, x: 300, y: 100, label: '१' },
-        { id: 2, x: 300, y: 420, label: '२' },
+        { id: 1, x: 300, y: 100, label: '1' },
+        { id: 2, x: 300, y: 420, label: '2' },
       ],
     },
     {
@@ -88,11 +88,11 @@ export const ConnectTheDotsSimulation: React.FC<Props> = ({
       typeEn: 'Straight Line',
       typeNp: 'सीधा रेखा',
       instructionEn: 'Join 1 to 2, then 2 to 3. All three lie on one straight line!',
-      instructionNp: '१ बाट २ र २ बाट ३ जोड्नुहोस्। यी तीनै थोप्ला एउटै सीधा रेखामा पर्छन्!',
+      instructionNp: '1 बाट 2 र 2 बाट 3 जोड्नुहोस्। यी तीनै थोप्ला एउटै सीधा रेखामा पर्छन्!',
       dots: [
-        { id: 1, x: 100, y: 380, label: '१' },
-        { id: 2, x: 300, y: 260, label: '२' },
-        { id: 3, x: 500, y: 140, label: '३' },
+        { id: 1, x: 100, y: 380, label: '1' },
+        { id: 2, x: 300, y: 260, label: '2' },
+        { id: 3, x: 500, y: 140, label: '3' },
       ],
     },
     {
@@ -102,12 +102,12 @@ export const ConnectTheDotsSimulation: React.FC<Props> = ({
       typeEn: 'Zigzag Line',
       typeNp: 'जिग्-ज्याग् रेखा',
       instructionEn: 'Join 1 to 4 in order to make a mountain zigzag line.',
-      instructionNp: 'हिमालको चुचुरो जस्तै १ देखि ४ सम्मका थोप्लाहरू क्रमैसँग जोड्नुहोस्।',
+      instructionNp: 'हिमालको चुचुरो जस्तै 1 देखि 4 सम्मका थोप्लाहरू क्रमैसँग जोड्नुहोस्।',
       dots: [
-        { id: 1, x: 100, y: 360, label: '१' },
-        { id: 2, x: 220, y: 160, label: '२' },
-        { id: 3, x: 380, y: 360, label: '३' },
-        { id: 4, x: 500, y: 160, label: '४' },
+        { id: 1, x: 100, y: 360, label: '1' },
+        { id: 2, x: 220, y: 160, label: '2' },
+        { id: 3, x: 380, y: 360, label: '3' },
+        { id: 4, x: 500, y: 160, label: '4' },
       ],
     },
     {
@@ -117,30 +117,30 @@ export const ConnectTheDotsSimulation: React.FC<Props> = ({
       typeEn: 'Curved Line',
       typeNp: 'बाङ्गो रेखा',
       instructionEn: 'Connect 1 through 5 to form a smooth curved rainbow line!',
-      instructionNp: '१ देखि ५ सम्मका थोप्लाहरू जोडेर इन्द्रेणी जस्तै बाङ्गो रेखा बनाउनुहोस्!',
+      instructionNp: '1 देखि 5 सम्मका थोप्लाहरू जोडेर इन्द्रेणी जस्तै बाङ्गो रेखा बनाउनुहोस्!',
       isCurved: true,
       dots: [
-        { id: 1, x: 100, y: 360, label: '१' },
-        { id: 2, x: 170, y: 210, label: '२' },
-        { id: 3, x: 300, y: 140, label: '३' },
-        { id: 4, x: 430, y: 210, label: '४' },
-        { id: 5, x: 500, y: 360, label: '५' },
+        { id: 1, x: 100, y: 360, label: '1' },
+        { id: 2, x: 170, y: 210, label: '2' },
+        { id: 3, x: 300, y: 140, label: '3' },
+        { id: 4, x: 430, y: 210, label: '4' },
+        { id: 5, x: 500, y: 360, label: '5' },
       ],
     },
     {
       id: 'p6_kite',
-      titleEn: 'Kite (चङ्गा) Dot-to-Dot',
+      titleEn: 'Kite Dot-to-Dot',
       titleNp: 'चङ्गाको चित्र बनाऔँ',
       typeEn: 'Picture',
       typeNp: 'चित्र',
       instructionEn: 'Connect all dots in order 1 to 5 to reveal a high flying kite!',
-      instructionNp: '१ देखि ५ सम्म थोप्लाहरू जोडेर सुन्दर चङ्गा बनाउनुहोस्!',
+      instructionNp: '1 देखि 5 सम्म थोप्लाहरू जोडेर सुन्दर चङ्गा बनाउनुहोस्!',
       dots: [
-        { id: 1, x: 300, y: 80, label: '१' },
-        { id: 2, x: 450, y: 240, label: '२' },
-        { id: 3, x: 300, y: 440, label: '३' },
-        { id: 4, x: 150, y: 240, label: '४' },
-        { id: 5, x: 300, y: 80, label: '५' }, // Closes the diamond
+        { id: 1, x: 300, y: 80, label: '1' },
+        { id: 2, x: 450, y: 240, label: '2' },
+        { id: 3, x: 300, y: 440, label: '3' },
+        { id: 4, x: 150, y: 240, label: '4' },
+        { id: 5, x: 300, y: 80, label: '5' }, // Closes the diamond
       ],
     },
   ];
@@ -382,7 +382,7 @@ export const ConnectTheDotsSimulation: React.FC<Props> = ({
               {language === 'np' ? 'थोप्लाहरू जोडेर रेखा बनाऔँ' : 'Connect the Dots'}
             </h1>
             <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
-              {language === 'np' ? 'कक्षा १ गणित • अध्याय २: रेखाहरू' : 'Class 1 Math • Chapter 2: Lines'}
+              {language === 'np' ? 'कक्षा 1 गणित • अध्याय 2: रेखाहरू' : 'Class 1 Math • Chapter 2: Lines'}
             </span>
           </div>
         </div>
@@ -428,21 +428,7 @@ export const ConnectTheDotsSimulation: React.FC<Props> = ({
           </div>
 
           {/* Language */}
-          <button
-            onClick={() => setLanguage(language === 'np' ? 'en' : 'np')}
-            style={{
-              background: '#ede9fe',
-              color: '#6d28d9',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '13px',
-              cursor: 'pointer',
-            }}
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
 
           {/* Sound */}
           <button

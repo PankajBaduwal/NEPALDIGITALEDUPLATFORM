@@ -1,9 +1,9 @@
 /**
  * ShapeExplorer3D.tsx (Converted to 100% Pure 2D)
- * Simulation 01: Shape Explorer (आकारहरू चिनौँ)
- * Class 1 Mathematics - Chapter 3: Geometrical Shapes (ज्यामितीय आकारहरू)
- * Nepal CDC Curriculum Aligned (मेरो गणित, कक्षा १)
- * Covers: Circle (वृत्त/गोलो), Triangle (त्रिभुज/तीनकुने), Quadrilateral (चतुर्भुज/चारकुने)
+ * Simulation 01: Shape Explorer
+ * Class 1 Mathematics - Chapter 3: Geometrical Shapes
+ * Nepal CDC Curriculum Aligned
+ * Covers: Circle, Triangle, Quadrilateral
  * 100% Pure 2D SVG & Vector Illustrations – Zero WebGL/Three.js.
  */
 import React, { useState } from 'react';
@@ -40,9 +40,9 @@ const SHAPES: ShapeInfo[] = [
     color: '#0284c7',
     borderColor: '#0369a1',
     bgColor: '#e0f2fe',
-    sidesNp: '० वटा सिधा रेखा (घुमाउरो घेरा)',
+    sidesNp: '0 वटा सिधा रेखा (घुमाउरो घेरा)',
     sidesEn: '0 straight sides (1 curved line)',
-    cornersNp: '० वटा कुना',
+    cornersNp: '0 वटा कुना',
     cornersEn: '0 corners',
     examplesNp: ['सिक्का (Coin)', 'घडी (Clock)', 'थाल (Plate)', 'पाङ्ग्रा (Wheel)', 'रोटी (Roti)'],
     examplesEn: ['Coin', 'Wall Clock', 'Plate', 'Bicycle Wheel', 'Roti / Chapati'],
@@ -54,9 +54,9 @@ const SHAPES: ShapeInfo[] = [
     color: '#16a34a',
     borderColor: '#15803d',
     bgColor: '#dcfce7',
-    sidesNp: '३ वटा सिधा रेखाहरू',
+    sidesNp: '3 वटा सिधा रेखाहरू',
     sidesEn: '3 straight sides',
-    cornersNp: '३ वटा कुनाहरू',
+    cornersNp: '3 वटा कुनाहरू',
     cornersEn: '3 corners',
     examplesNp: ['समोसा (Samosa)', 'ट्राफिक चिन्ह (Traffic Sign)', 'पहाडको टुप्पो (Mountain Peak)', 'झण्डा (Nepal Flag)'],
     examplesEn: ['Samosa', 'Traffic Yield Sign', 'Mountain Peak', 'Nepal Triangular Flag'],
@@ -68,9 +68,9 @@ const SHAPES: ShapeInfo[] = [
     color: '#ea580c',
     borderColor: '#c2410c',
     bgColor: '#ffedd5',
-    sidesNp: '४ वटा सिधा रेखाहरू',
+    sidesNp: '4 वटा सिधा रेखाहरू',
     sidesEn: '4 straight sides',
-    cornersNp: '४ वटा कुनाहरू',
+    cornersNp: '4 वटा कुनाहरू',
     cornersEn: '4 corners',
     examplesNp: ['किताब (Book)', 'कालोपाटी (Chalkboard)', 'झ्याल (Window)', 'ढोका (Door)', 'मोबाइल (Phone)'],
     examplesEn: ['Book', 'Blackboard', 'Window Frame', 'Classroom Door', 'Mobile Phone'],
@@ -102,7 +102,7 @@ export const ShapeExplorer3D: React.FC<Props> = ({ onBackToLibrary }) => {
       answer: 'c',
     },
     {
-      np: '३ वटा सिधा किनारा र ३ वटा कुना भएको आकार कुन हो?',
+      np: '3 वटा सिधा किनारा र 3 वटा कुना भएको आकार कुन हो?',
       en: 'Which shape has 3 straight sides and 3 corners?',
       options: [
         { key: 't', label: kit.t('त्रिभुज (Triangle)', 'Triangle') },
@@ -205,7 +205,7 @@ export const ShapeExplorer3D: React.FC<Props> = ({ onBackToLibrary }) => {
                 fontWeight: 'bold',
                 fontSize: 13,
               }}
-              title="ठूलो बनाउनुहोस् (Enlarge)"
+              title="Enlarge"
             >
               ➕ {kit.t('ठूलो', 'Larger')}
             </button>
@@ -223,7 +223,7 @@ export const ShapeExplorer3D: React.FC<Props> = ({ onBackToLibrary }) => {
                 fontWeight: 'bold',
                 fontSize: 13,
               }}
-              title="सानो बनाउनुहोस् (Shrink)"
+              title="Shrink"
             >
               ➖ {kit.t('सानो', 'Smaller')}
             </button>

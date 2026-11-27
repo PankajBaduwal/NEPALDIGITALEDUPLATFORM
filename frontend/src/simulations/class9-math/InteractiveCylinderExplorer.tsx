@@ -8,9 +8,9 @@ const QUIZ_QUESTIONS = [
     np: 'बेलना (Cylinder) को वक्र सतहको क्षेत्रफल (Curved Surface Area - CSA) को सूत्र के हो?',
     en: 'What is the formula for the Curved Surface Area (CSA) of a cylinder?',
     options: [
-      { key: 'A', label: '२πrh (2πrh = वृत्तको परिधि × उचाइ)' },
+      { key: 'A', label: '2πrh' },
       { key: 'B', label: 'πr²h' },
-      { key: 'C', label: '२πr(r + h)' },
+      { key: 'C', label: '2πr(r + h)' },
       { key: 'D', label: 'πrl' },
     ],
     answer: 'A',
@@ -19,10 +19,10 @@ const QUIZ_QUESTIONS = [
     np: 'बेलनाको वक्र सतहलाई काटेर समतलमा फुकाउँदा कुन ज्यामितीय आकार बन्छ?',
     en: 'When the curved surface of a cylinder is unrolled onto a plane, what geometric shape is formed?',
     options: [
-      { key: 'A', label: 'वृत्त (Circle)' },
-      { key: 'B', label: 'आयात (Rectangle with length = 2πr, breadth = h)' },
-      { key: 'C', label: 'त्रिभुज (Triangle)' },
-      { key: 'D', label: 'समलम्ब (Trapezium)' },
+      { key: 'A', label: 'Circle' },
+      { key: 'B', label: 'Rectangle (length = 2πr, breadth = h)' },
+      { key: 'C', label: 'Triangle' },
+      { key: 'D', label: 'Trapezium' },
     ],
     answer: 'B',
   },
@@ -30,21 +30,21 @@ const QUIZ_QUESTIONS = [
     np: 'बेलनाको कुल सतहको क्षेत्रफल (Total Surface Area - TSA) को सूत्र के हो?',
     en: 'What is the formula for the Total Surface Area (TSA) of a cylinder?',
     options: [
-      { key: 'A', label: 'TSA = २πrh' },
-      { key: 'B', label: 'TSA = २πr(r + h) [दुई वृत्ताकार आधार + वक्र सतह]' },
+      { key: 'A', label: 'TSA = 2πrh' },
+      { key: 'B', label: 'TSA = 2πr(r + h) [two circular bases + curved surface]' },
       { key: 'C', label: 'TSA = πr²h' },
-      { key: 'D', label: 'TSA = ४πr²' },
+      { key: 'D', label: 'TSA = 4πr²' },
     ],
     answer: 'B',
   },
   {
-    np: '७ सेमि अर्धव्यास (r) र १० सेमि उचाइ (h) भएको बेलनाको वक्र सतहको क्षेत्रफल (CSA) कति हुन्छ? (π = २२/७)',
+    np: '7 सेमि अर्धव्यास (r) र 10 सेमि उचाइ (h) भएको बेलनाको वक्र सतहको क्षेत्रफल (CSA) कति हुन्छ? (π = 22/7)',
     en: 'What is the CSA of a cylinder with radius 7 cm and height 10 cm? (π = 22/7)',
     options: [
-      { key: 'A', label: '२२० वर्ग सेमि' },
-      { key: 'B', label: '४४० वर्ग सेमि (२ × २२/७ × ७ × १० = ४४०)' },
-      { key: 'C', label: '७४८ वर्ग सेमि' },
-      { key: 'D', label: '१,५४० वर्ग सेमि' },
+      { key: 'A', label: '220 sq cm' },
+      { key: 'B', label: '440 sq cm (2 × 22/7 × 7 × 10 = 440)' },
+      { key: 'C', label: '748 sq cm' },
+      { key: 'D', label: '1,540 sq cm' },
     ],
     answer: 'B',
   },
@@ -89,7 +89,7 @@ export const InteractiveCylinderExplorer: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! बेलना (Cylinder) को अर्धव्यास r, उचाइ h, वक्र सतह CSA = २πrh, २D नेटमा आयत र कुल सतह TSA = २πr(r + h) अन्वेषण गरौं!',
+        'नमस्ते! बेलना (Cylinder) को अर्धव्यास r, उचाइ h, वक्र सतह CSA = 2πrh, 2D नेटमा आयत र कुल सतह TSA = 2πr(r + h) अन्वेषण गरौं!',
         'Welcome! Explore cylinder radius, height, curved surface area (CSA = 2πrh), rectangle unfolding, and TSA = 2πr(r + h)!'
       )}
     >
@@ -254,7 +254,7 @@ export const InteractiveCylinderExplorer: React.FC<{
                 className="w-full accent-purple-600 cursor-pointer"
               />
               <div className="text-[11px] text-purple-700 dark:text-purple-300">
-                {L('वक्र सतह फुकाउँदा बन्ने आयतको लम्बाइ = वृत्तको परिधि (२πr) र चौडाइ = उचाइ (h) हुन्छ।', 'Unfolded rectangle length = Circumference (2πr) and breadth = Height (h).')}
+                {L('वक्र सतह फुकाउँदा बन्ने आयतको लम्बाइ = वृत्तको परिधि (2πr) र चौडाइ = उचाइ (h) हुन्छ।', 'Unfolded rectangle length = Circumference (2πr) and breadth = Height (h).')}
               </div>
             </div>
           </div>
@@ -340,12 +340,12 @@ export const InteractiveCylinderExplorer: React.FC<{
                     {/* Unfolded Rectangle (CSA) */}
                     <rect x="70" y="90" width="340" height="100" className="fill-amber-200/70 dark:fill-amber-900/40 stroke-amber-600 stroke-2" />
                     <text x="240" y="145" textAnchor="middle" className="text-xs font-black fill-amber-950 dark:fill-amber-100">
-                      {L('वक्र सतह = लम्बाइ × चौडाइ = २πr × h', 'Curved Surface Area = 2πr × h')}
+                      {L('वक्र सतह = लम्बाइ × चौडाइ = 2πr × h', 'Curved Surface Area = 2πr × h')}
                     </text>
 
                     {/* Length indicator (Circumference = 2πr) */}
                     <text x="240" y="82" textAnchor="middle" className="text-xs font-bold fill-blue-700 dark:fill-blue-300 font-mono">
-                      {L('लम्बाइ', 'Length')} = २πr ≈ {baseCircumference.toFixed(1)} cm
+                      {L('लम्बाइ', 'Length')} = 2πr ≈ {baseCircumference.toFixed(1)} cm
                     </text>
 
                     {/* Breadth indicator (Height = h) */}
@@ -373,14 +373,14 @@ export const InteractiveCylinderExplorer: React.FC<{
               <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl space-y-1 text-xs">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-emerald-900 dark:text-emerald-200">
-                    {L('१. वृत्ताकार आधार (Circular Base):', '1. Circular Base:')}
+                    {L('1. वृत्ताकार आधार (Circular Base):', '1. Circular Base:')}
                   </span>
                   <span className="font-mono font-bold text-emerald-700 dark:text-emerald-300">
                     A = πr² ≈ {baseAreaOne.toFixed(1)} cm²
                   </span>
                 </div>
                 <div className="text-gray-500 font-mono">
-                  परिधि (Circumference) = २πr = २ × (२२/७) × {radiusCm} = {baseCircumference.toFixed(1)} cm
+                  Circumference = 2πr = 2 × (22/7) × {radiusCm} = {baseCircumference.toFixed(1)} cm
                 </div>
               </div>
 
@@ -388,14 +388,14 @@ export const InteractiveCylinderExplorer: React.FC<{
               <div className="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl space-y-1 text-xs">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-amber-900 dark:text-amber-200">
-                    {L('२. वक्र सतहको क्षेत्रफल (CSA = २πrh):', '2. Curved Surface Area (CSA = 2πrh):')}
+                    {L('2. वक्र सतहको क्षेत्रफल (CSA = 2πrh):', '2. Curved Surface Area (CSA = 2πrh):')}
                   </span>
                   <span className="text-base font-black text-amber-700 dark:text-amber-300 font-mono">
                     {isNe ? toNp(csa.toFixed(1)) : csa.toFixed(1)} cm²
                   </span>
                 </div>
                 <div className="text-gray-500 font-mono">
-                  CSA = २ × (२२/७) × {radiusCm} × {heightCm} = {csa.toFixed(1)} cm²
+                  CSA = 2 × (22/7) × {radiusCm} × {heightCm} = {csa.toFixed(1)} cm²
                 </div>
               </div>
 
@@ -403,14 +403,14 @@ export const InteractiveCylinderExplorer: React.FC<{
               <div className="p-3.5 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 rounded-xl space-y-1">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-blue-900 dark:text-blue-200 text-base">
-                    {L('३. कुल सतहको क्षेत्रफल (TSA = २πr(r + h)):', '3. Total Surface Area (TSA = 2πr(r + h)):')}
+                    {L('3. कुल सतहको क्षेत्रफल (TSA = 2πr(r + h)):', '3. Total Surface Area (TSA = 2πr(r + h)):')}
                   </span>
                   <span className="text-xl font-black text-blue-600 dark:text-blue-400 font-mono">
                     {isNe ? toNp(tsa.toFixed(1)) : tsa.toFixed(1)} cm²
                   </span>
                 </div>
                 <div className="text-xs text-blue-800 dark:text-blue-300 font-mono">
-                  TSA = CSA + २ × आधारको क्षेत्रफल = {csa.toFixed(1)} + {twoBasesArea.toFixed(1)} = {tsa.toFixed(1)} cm²
+                  TSA = CSA + 2 × area of base = {csa.toFixed(1)} + {twoBasesArea.toFixed(1)} = {tsa.toFixed(1)} cm²
                 </div>
               </div>
             </div>

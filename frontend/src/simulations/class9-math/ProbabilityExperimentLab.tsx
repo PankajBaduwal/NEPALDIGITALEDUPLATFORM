@@ -88,7 +88,7 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
     odd: { nameNp: 'विजोडी सङ्ख्या (Odd numbers)', nameEn: 'Odd numbers', outcomes: [1, 3, 5] },
     prime: { nameNp: 'रूढ सङ्ख्या (Prime numbers)', nameEn: 'Prime numbers', outcomes: [2, 3, 5] },
     square: { nameNp: 'पूर्ण वर्ग सङ्ख्या (Square numbers)', nameEn: 'Square numbers', outcomes: [1, 4] },
-    greater4: { nameNp: '४ भन्दा ठूलो (Numbers > 4)', nameEn: 'Numbers > 4', outcomes: [5, 6] },
+    greater4: { nameNp: '4 भन्दा ठूलो (Numbers > 4)', nameEn: 'Numbers > 4', outcomes: [5, 6] },
   };
 
   const curDiceEvent = diceEventConfig[selectedDiceEvent];
@@ -133,7 +133,7 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
             }`}
           >
             <span>🪙</span>
-            <span>{L('स्टेसन १: सिक्का उछाल (Coin Toss)', 'Station 1: Coin Toss')}</span>
+            <span>{L('स्टेसन 1: सिक्का उछाल (Coin Toss)', 'Station 1: Coin Toss')}</span>
           </button>
           <button
             onClick={() => setActiveStation('dice')}
@@ -144,7 +144,7 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
             }`}
           >
             <span>🎲</span>
-            <span>{L('स्टेसन २: पासा दगुराइ (Dice Roll)', 'Station 2: Dice Roll')}</span>
+            <span>{L('स्टेसन 2: पासा दगुराइ (Dice Roll)', 'Station 2: Dice Roll')}</span>
           </button>
           <button
             onClick={() => setActiveStation('spinner')}
@@ -155,7 +155,7 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
             }`}
           >
             <span>🎯</span>
-            <span>{L('स्टेसन ३: स्पिनर चक्र (Spinner Wheel)', 'Station 3: Spinner Wheel')}</span>
+            <span>{L('स्टेसन 3: स्पिनर चक्र (Spinner Wheel)', 'Station 3: Spinner Wheel')}</span>
           </button>
         </div>
 
@@ -169,7 +169,7 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
                   {L('सिक्का प्रयोग (Coin Experiment)', 'Coin Experiment')}
                 </h4>
                 <span className="text-xs font-mono text-indigo-600 font-bold bg-indigo-50 px-2 py-0.5 rounded">
-                  S = &#123; H, T &#125;, n(S) = २
+                  S = &#123; H, T &#125;, n(S) = 2
                 </span>
               </div>
 
@@ -202,7 +202,7 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
                   disabled={coinIsFlipping}
                   className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-sm transition-all"
                 >
-                  {L('१ पटक उफार्नुहोस् (Flip 1 Time)', 'Flip 1 Time')}
+                  {L('1 पटक उफार्नुहोस् (Flip 1 Time)', 'Flip 1 Time')}
                 </button>
                 <div className="grid grid-cols-4 gap-2">
                   <button
@@ -210,28 +210,28 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
                     disabled={coinIsFlipping}
                     className="py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-300"
                   >
-                    +१० {L('पटक', 'x')}
+                    +10 {L('पटक', 'x')}
                   </button>
                   <button
                     onClick={() => handleTossCoin(20)}
                     disabled={coinIsFlipping}
                     className="py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-300"
                   >
-                    +२० {L('पटक', 'x')}
+                    +20 {L('पटक', 'x')}
                   </button>
                   <button
                     onClick={() => handleTossCoin(50)}
                     disabled={coinIsFlipping}
                     className="py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-300"
                   >
-                    +५० {L('पटक', 'x')}
+                    +50 {L('पटक', 'x')}
                   </button>
                   <button
                     onClick={() => handleTossCoin(100)}
                     disabled={coinIsFlipping}
                     className="py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-300"
                   >
-                    +१०० {L('पटक', 'x')}
+                    +100 {L('पटक', 'x')}
                   </button>
                 </div>
                 {coinTosses.length > 0 && (
@@ -257,13 +257,13 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
                   <div className="p-2.5 bg-white rounded-lg border border-indigo-100">
                     <span className="text-slate-500 block text-[11px]">{L('शीर्ष (Head, H) आउने सम्भाव्यता:', 'P(Head):')}</span>
                     <span className="text-sm font-bold font-mono text-indigo-700">
-                      P(H) = \frac&#123;१&#125;&#123;२&#125; = ०.५ (५०%)
+                      P(H) = \frac&#123;1&#125;&#123;2&#125; = 0.5 (50%)
                     </span>
                   </div>
                   <div className="p-2.5 bg-white rounded-lg border border-indigo-100">
                     <span className="text-slate-500 block text-[11px]">{L('पुच्छर (Tail, T) आउने सम्भाव्यता:', 'P(Tail):')}</span>
                     <span className="text-sm font-bold font-mono text-indigo-700">
-                      P(T) = \frac&#123;१&#125;&#123;२&#125; = ०.५ (५०%)
+                      P(T) = \frac&#123;1&#125;&#123;2&#125; = 0.5 (50%)
                     </span>
                   </div>
                 </div>
@@ -348,7 +348,7 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
                   {L('पासा प्रयोग (Dice Experiment)', 'Dice Experiment')}
                 </h4>
                 <span className="text-xs font-mono text-indigo-600 font-bold bg-indigo-50 px-2 py-0.5 rounded">
-                  S = &#123; 1, 2, 3, 4, 5, 6 &#125;, n(S) = ६
+                  S = &#123; 1, 2, 3, 4, 5, 6 &#125;, n(S) = 6
                 </span>
               </div>
 
@@ -375,7 +375,7 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
                   disabled={diceIsRolling}
                   className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-sm transition-all"
                 >
-                  {L('१ पटक दगुराउनुहोस् (Roll 1 Time)', 'Roll 1 Time')}
+                  {L('1 पटक दगुराउनुहोस् (Roll 1 Time)', 'Roll 1 Time')}
                 </button>
                 <div className="grid grid-cols-3 gap-2">
                   <button
@@ -383,21 +383,21 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
                     disabled={diceIsRolling}
                     className="py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-300"
                   >
-                    +१० {L('पटक', 'x')}
+                    +10 {L('पटक', 'x')}
                   </button>
                   <button
                     onClick={() => handleRollDice(30)}
                     disabled={diceIsRolling}
                     className="py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-300"
                   >
-                    +३० {L('पटक', 'x')}
+                    +30 {L('पटक', 'x')}
                   </button>
                   <button
                     onClick={() => handleRollDice(60)}
                     disabled={diceIsRolling}
                     className="py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-300"
                   >
-                    +६० {L('पटक', 'x')}
+                    +60 {L('पटक', 'x')}
                   </button>
                 </div>
                 {diceRolls.length > 0 && (
@@ -445,13 +445,13 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
                     {L('घटनाको अनुकूल सङ्ख्या:', 'Favourable Outcomes:')} n(E) = {fmt(curDiceEvent.outcomes.length)}
                   </span>
                   <span className="font-bold text-indigo-950">
-                    {L('कुल सम्भाव्य नतिजा:', 'Total Outcomes:')} n(S) = ६
+                    {L('कुल सम्भाव्य नतिजा:', 'Total Outcomes:')} n(S) = 6
                   </span>
                 </div>
                 <div className="p-2.5 bg-white rounded-lg border border-indigo-100 flex justify-between items-center font-mono">
                   <span className="text-slate-700">P(E) = \frac&#123;n(E)&#125;&#123;n(S)&#125;</span>
                   <span className="text-base font-bold text-indigo-700">
-                    P(E) = \frac&#123;{fmt(curDiceEvent.outcomes.length)}&#125;&#123;६&#125; = {fmt((curDiceEvent.outcomes.length / 6).toFixed(3))}
+                    P(E) = \frac&#123;{fmt(curDiceEvent.outcomes.length)}&#125;&#123;6&#125; = {fmt((curDiceEvent.outcomes.length / 6).toFixed(3))}
                   </span>
                 </div>
               </div>
@@ -496,7 +496,7 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
                   {L('रङ्गीन स्पिनर चक्र', 'Colored Spinner Wheel')}
                 </h4>
                 <span className="text-xs font-mono text-indigo-600 font-bold bg-indigo-50 px-2 py-0.5 rounded">
-                  n(S) = ४ बराबर रङ्गहरू
+                  n(S) = 4 equal colours
                 </span>
               </div>
 
@@ -554,7 +554,7 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
                         <span className="font-bold">{L(sec.labelNp, sec.labelEn)}</span>
                       </div>
                       <div className="mt-2 text-[11px] text-slate-600 font-mono">
-                        P = \frac&#123;१&#125;&#123;४&#125; (२५%)
+                        P = \frac&#123;1&#125;&#123;4&#125; (25%)
                       </div>
                       <div className="mt-1 text-[11px] text-indigo-700 font-mono font-bold">
                         {L(`आएको: ${fmt(count)} पटक`, `Landed: ${count}x`)}
@@ -569,7 +569,7 @@ export const ProbabilityExperimentLab: React.FC<SimProps> = ({ onBackToLibrary, 
                 <strong>{L('पाठ्यपुस्तक सिद्धान्त (Textbook Principle):', 'Textbook Principle:')}</strong>
                 <p>
                   {L(
-                    'जब प्रत्येक सम्भाव्य नतिजा आउने सम्भावना बराबर हुन्छ, त्यस्ता घटनाहरूलाई समसम्भाव्य घटना (Equally Likely Outcomes) भनिन्छ। ४ वटा बराबर खण्ड भएको स्पिनरमा प्रत्येक रङ्ग आउने सम्भाव्यता P(E) = १/४ हुन्छ।',
+                    'जब प्रत्येक सम्भाव्य नतिजा आउने सम्भावना बराबर हुन्छ, त्यस्ता घटनाहरूलाई समसम्भाव्य घटना (Equally Likely Outcomes) भनिन्छ। 4 pcs बराबर खण्ड भएको स्पिनरमा प्रत्येक रङ्ग आउने सम्भाव्यता P(E) = 1/4 हुन्छ।',
                     'When every possible outcome has an identical chance of occurring, they are called Equally Likely Outcomes. On a 4-equal-section spinner, each color has P(E) = 1/4 = 0.25.'
                   )}
                 </p>

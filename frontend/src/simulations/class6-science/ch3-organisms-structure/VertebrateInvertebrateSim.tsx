@@ -1,7 +1,7 @@
 /**
  * VertebrateInvertebrateSim.tsx
- * Simulation 7: 2D Vertebrate and Invertebrate Biological Explorer (ढाड भएका र नभएका जीवहरू)
- * Grade 6 Science • Unit 3: Organisms & Their Structure (जीवहरू र तिनीहरूको बनावट)
+ * Simulation 7: 2D Vertebrate and Invertebrate Biological Explorer
+ * Grade 6 Science • Unit 3: Organisms & Their Structure
  *
  * 100% Native HTML5 Canvas 2D Anatomical X-Ray Simulator.
  * Features:
@@ -39,7 +39,7 @@ export const VertebrateInvertebrateSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -57,9 +57,9 @@ export const VertebrateInvertebrateSim: React.FC<BaseSimulationProps> = ({
   const specimens: AnimalSpecimen[] = [
     {
       id: 'fish',
-      nameEn: 'Himalayan Trout (असला माछा)',
+      nameEn: 'Himalayan Trout',
       nameNe: 'असला माछा (Himalayan Trout)',
-      classGroupEn: 'Pisces (माछा वर्ग)',
+      classGroupEn: 'Pisces',
       classGroupNe: 'माछा वर्ग (Pisces)',
       type: 'vertebrate',
       typeNe: 'ढाड भएको (Vertebrate)',
@@ -72,9 +72,9 @@ export const VertebrateInvertebrateSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'amphibia',
-      nameEn: 'Common Frog (भ्यागुतो)',
+      nameEn: 'Common Frog',
       nameNe: 'भ्यागुतो (Frog)',
-      classGroupEn: 'Amphibia (उभयचर वर्ग)',
+      classGroupEn: 'Amphibia',
       classGroupNe: 'उभयचर वर्ग (Amphibia)',
       type: 'vertebrate',
       typeNe: 'ढाड भएको (Vertebrate)',
@@ -87,9 +87,9 @@ export const VertebrateInvertebrateSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'reptile',
-      nameEn: 'Garden Lizard (छेपारो)',
+      nameEn: 'Garden Lizard',
       nameNe: 'छेपारो (Garden Lizard)',
-      classGroupEn: 'Reptilia (घस्रने वर्ग)',
+      classGroupEn: 'Reptilia',
       classGroupNe: 'घस्रने वर्ग (Reptilia)',
       type: 'vertebrate',
       typeNe: 'ढाड भएको (Vertebrate)',
@@ -102,9 +102,9 @@ export const VertebrateInvertebrateSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'bird',
-      nameEn: 'Danfe Lophophorus (डाँफे चरा)',
+      nameEn: 'Danfe Lophophorus',
       nameNe: 'डाँफे (National Bird)',
-      classGroupEn: 'Aves (चरा वर्ग)',
+      classGroupEn: 'Aves',
       classGroupNe: 'चरा वर्ग (Aves)',
       type: 'vertebrate',
       typeNe: 'ढाड भएको (Vertebrate)',
@@ -117,9 +117,9 @@ export const VertebrateInvertebrateSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'mammal',
-      nameEn: 'Himalayan Musk Deer (कस्तुरी मृग)',
+      nameEn: 'Himalayan Musk Deer',
       nameNe: 'कस्तुरी मृग (Musk Deer)',
-      classGroupEn: 'Mammalia (स्तनधारी वर्ग)',
+      classGroupEn: 'Mammalia',
       classGroupNe: 'स्तनधारी वर्ग (Mammalia)',
       type: 'vertebrate',
       typeNe: 'ढाड भएको (Vertebrate)',
@@ -132,9 +132,9 @@ export const VertebrateInvertebrateSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'arthropod',
-      nameEn: 'Monarch Butterfly (पुतली)',
+      nameEn: 'Monarch Butterfly',
       nameNe: 'पुतली (Butterfly)',
-      classGroupEn: 'Arthropoda (जोर्नीखुट्टे)',
+      classGroupEn: 'Arthropoda',
       classGroupNe: 'जोर्नीखुट्टे (Arthropoda)',
       type: 'invertebrate',
       typeNe: 'ढाड नभएको (Invertebrate)',
@@ -147,9 +147,9 @@ export const VertebrateInvertebrateSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'mollusc',
-      nameEn: 'Garden Snail (शङ्खेकिरा)',
+      nameEn: 'Garden Snail',
       nameNe: 'शङ्खेकिरा (Garden Snail)',
-      classGroupEn: 'Mollusca (कमलो शरीर)',
+      classGroupEn: 'Mollusca',
       classGroupNe: 'कमलो शरीर (Mollusca)',
       type: 'invertebrate',
       typeNe: 'ढाड नभएको (Invertebrate)',
@@ -162,9 +162,9 @@ export const VertebrateInvertebrateSim: React.FC<BaseSimulationProps> = ({
     },
     {
       id: 'annelid',
-      nameEn: 'Earthworm (गड्यौला)',
+      nameEn: 'Earthworm',
       nameNe: 'गड्यौला (Earthworm)',
-      classGroupEn: 'Annelida (खण्ड परेका)',
+      classGroupEn: 'Annelida',
       classGroupNe: 'खण्ड परेका (Annelida)',
       type: 'invertebrate',
       typeNe: 'ढाड नभएको (Invertebrate)',
@@ -658,7 +658,7 @@ export const VertebrateInvertebrateSim: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Vertebrate & Invertebrate Explorer"
-      titleNe="ढाड भएका र नभएका जीवहरू २डी अन्वेषक"
+      titleNe="ढाड भएका र नभएका जीवहरू 2डी अन्वेषक"
       subject="Science"
       grade={6}
       chapter={3}

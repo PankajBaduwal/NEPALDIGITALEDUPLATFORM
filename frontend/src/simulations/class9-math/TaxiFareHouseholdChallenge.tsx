@@ -13,46 +13,46 @@ interface BillComponent {
 
 const QUIZ_QUESTIONS = [
   {
-    np: 'नेपालमा ट्याक्सी मिटरको पहिलो २०० मिटरको सुरुवाती न्यूनतम भाडा (Flag drop) कति तोकिएको छ?',
+    np: 'नेपालमा ट्याक्सी mको पहिलो 200 mको सुरुवाती न्यूनतम भाडा (Flag drop) कति तोकिएको छ?',
     en: 'In Nepal taxi meter regulation, what is the initial minimum flag-drop fare for the first 200 meters?',
     options: [
-      { key: 'A', label: 'रु. १०' },
-      { key: 'B', label: 'रु. १४' },
-      { key: 'C', label: 'रु. २५' },
-      { key: 'D', label: 'रु. ५०' },
+      { key: 'A', label: 'Rs. 10' },
+      { key: 'B', label: 'Rs. 14' },
+      { key: 'C', label: 'Rs. 25' },
+      { key: 'D', label: 'Rs. 50' },
     ],
     answer: 'B',
   },
   {
-    np: 'यदि प्रति २०० मिटरको भाडा रु. ७.२० हुन्छ भने १ किलोमिटर (१,००० मिटर) यात्रा गर्दा कति भाडा लाग्छ?',
+    np: 'यदि प्रति 200 mको भाडा Rs. 7.20 हुन्छ भने 1 km (1,000 m) यात्रा गर्दा कति भाडा लाग्छ?',
     en: 'If the rate is Rs 7.20 per 200 meters, what is the distance charge for 1 kilometer (1,000 meters)?',
     options: [
-      { key: 'A', label: 'रु. १४.४०' },
-      { key: 'B', label: 'रु. २८.८०' },
-      { key: 'C', label: 'रु. ३६.००' },
-      { key: 'D', label: 'रु. ७२.००' },
+      { key: 'A', label: 'Rs. 14.40' },
+      { key: 'B', label: 'Rs. 28.80' },
+      { key: 'C', label: 'Rs. 36.00' },
+      { key: 'D', label: 'Rs. 72.00' },
     ],
     answer: 'C',
   },
   {
-    np: 'राति ९ बजेदेखि बिहान ६ बजेसम्म ट्याक्सी चढ्दा सामान्य मिटर भाडामा कति प्रतिशत थप दस्तुर लाग्दछ?',
+    np: 'राति 9 बजेदेखि बिहान 6 बजेसम्म ट्याक्सी चढ्दा सामान्य m भाडामा कति प्रतिशत थप दस्तुर लाग्दछ?',
     en: 'What percentage surcharge is added for night taxi travel between 9 PM and 6 AM?',
     options: [
-      { key: 'A', label: '१०%' },
-      { key: 'B', label: '२५%' },
-      { key: 'C', label: '५०%' },
-      { key: 'D', label: '१००%' },
+      { key: 'A', label: '10%' },
+      { key: 'B', label: '25%' },
+      { key: 'C', label: '50%' },
+      { key: 'D', label: '100%' },
     ],
     answer: 'C',
   },
   {
-    np: 'एउटा परिवारको १ महिनाको बिजुली रु. १,२००, पानी रु. ६००, टेलिफोन रु. ५०० र ट्याक्सी भाडा रु. ७०० खर्च भयो भने कुल घरायसी उपयोगिता खर्च कति हुन्छ?',
+    np: 'एउटा परिवारको 1 महिनाको बिजुली Rs. 1,200, पानी Rs. 600, टेलिफोन Rs. 500 र ट्याक्सी भाडा Rs. 700 खर्च भयो भने कुल घरायसी उपयोगिता खर्च कति हुन्छ?',
     en: 'A family spends Rs 1,200 on electricity, Rs 600 on water, Rs 500 on phone, and Rs 700 on taxi. What is their total monthly utility expenditure?',
     options: [
-      { key: 'A', label: 'रु. २,५००' },
-      { key: 'B', label: 'रु. २,८००' },
-      { key: 'C', label: 'रु. ३,०००' },
-      { key: 'D', label: 'रु. ३,२००' },
+      { key: 'A', label: 'Rs. 2,500' },
+      { key: 'B', label: 'Rs. 2,800' },
+      { key: 'C', label: 'Rs. 3,000' },
+      { key: 'D', label: 'Rs. 3,200' },
     ],
     answer: 'C',
   },
@@ -122,33 +122,33 @@ export const TaxiFareHouseholdChallenge: React.FC<{
 
   const challenges = [
     {
-      titleNp: 'समस्या १: ट्याक्सी भाडा हिसाब',
+      titleNp: 'समस्या 1: ट्याक्सी भाडा हिसाब',
       titleEn: 'Problem 1: Taxi Fare Calculation',
-      descNp: 'एक व्यक्तिले दिउँसो ३.२ किलोमिटर ट्याक्सी यात्रा गरे र बाटोमा ४ मिनेट पर्खाइ भयो। (पहिलो २०० मिटरको रु. १४, त्यसपछि प्रति २०० मिटर रु. ७.२० र २ मिनेट पर्खाइको रु. ७.२०)। कुल भाडा कति हुन्छ?',
+      descNp: 'एक व्यक्तिले दिउँसो 3.2 km ट्याक्सी यात्रा गरे र बाटोमा 4 min पर्खाइ भयो। (पहिलो 200 mको Rs. 14, त्यसपछि प्रति 200 m Rs. 7.20 र 2 min पर्खाइको Rs. 7.20)। कुल भाडा कति हुन्छ?',
       descEn: 'A passenger travels 3.2 km during daytime with 4 mins waiting time. First 200m is Rs 14, then Rs 7.20 per 200m, and Rs 7.20 per 2 mins waiting. Calculate total fare.',
       // 0.2km = 14; remaining 3.0km = 15 x 7.20 = 108. Waiting 4 mins = 2 x 7.20 = 14.40. Total = 14 + 108 + 14.4 = 136.4 => round to 136 or 136.4
       correctAnswer: 136.4,
-      stepsNp: 'पहिलो २०० मिटर = रु. १४। बाँकी ३००० मिटर (१५ वटा २०० मिटर) = १५ × ७.२० = रु. १०८। पर्खाइ (४ मिनेट = २ पटक) = २ × ७.२० = रु. १४.४०। जम्मा = १४ + १०८ + १४.४० = रु. १३६.४०।',
+      stepsNp: 'पहिलो 200 m = Rs. 14। बाँकी 3000 m (15 pcs 200 m) = 15 × 7.20 = Rs. 108। पर्खाइ (4 min = 2 पटक) = 2 × 7.20 = Rs. 14.40। जम्मा = 14 + 108 + 14.40 = Rs. 136.40।',
       stepsEn: 'First 200m = Rs 14. Remaining 3000m (15 × 200m) = 15 × 7.20 = Rs 108. Waiting (4 mins = 2 intervals) = 2 × 7.20 = Rs 14.40. Total = 14 + 108 + 14.40 = Rs 136.40.',
     },
     {
-      titleNp: 'समस्या २: रात्रिकालीन ट्याक्सी भाडा',
+      titleNp: 'समस्या 2: रात्रिकालीन ट्याक्सी भाडा',
       titleEn: 'Problem 2: Night Taxi Fare',
-      descNp: 'राति १०:३० बजे त्रिभुवन विमानस्थलबाट ५.२ किलोमिटर ट्याक्सी चढ्दा मिटर भाडा रु. १९४ आयो। रात्रिकालीन ५०% थप दस्तुर जोड्दा यात्रुले कति भाडा तिर्नुपर्छ?',
+      descNp: 'राति 10:30 बजे त्रिभुवन विमानस्थलबाट 5.2 km ट्याक्सी चढ्दा m भाडा Rs. 194 आयो। रात्रिकालीन 50% थप दस्तुर जोड्दा यात्रुले कति भाडा तिर्नुपर्छ?',
       descEn: 'At 10:30 PM, the meter shows Rs 194 for a 5.2 km trip. Adding the 50% night surcharge, how much must the passenger pay?',
       // 194 + 50% of 194 = 194 + 97 = 291
       correctAnswer: 291,
-      stepsNp: 'मिटर भाडा = रु. १९४। रात्रिकालीन ५०% थप दस्तुर = रु. १९४ × ०.५० = रु. ९७। कुल भाडा = १९४ + ९७ = रु. २९१।',
+      stepsNp: 'm भाडा = Rs. 194। रात्रिकालीन 50% थप दस्तुर = Rs. 194 × 0.50 = Rs. 97। कुल भाडा = 194 + 97 = Rs. 291।',
       stepsEn: 'Meter fare = Rs 194. 50% Night surcharge = Rs 194 × 0.50 = Rs 97. Total payable = 194 + 97 = Rs 291.',
     },
     {
-      titleNp: 'समस्या ३: कुल घरायसी उपयोगिता खर्च',
+      titleNp: 'समस्या 3: कुल घरायसी उपयोगिता खर्च',
       titleEn: 'Problem 3: Total Household Utility',
-      descNp: 'शर्मा परिवारको बैशाख महिनामा विद्युत बिल रु. १,४००, पानी बिल रु. ५५० र टेलिफोन बिल रु. १,०५० आयो। ती तिनवटै उपयोगिताको कुल खर्च कति भयो?',
+      descNp: 'शर्मा परिवारको बैशाख महिनामा विद्युत बिल Rs. 1,400, पानी बिल Rs. 550 र टेलिफोन बिल Rs. 1,050 आयो। ती तिनवटै उपयोगिताको कुल खर्च कति भयो?',
       descEn: 'The Sharma family received an electricity bill of Rs 1,400, water bill of Rs 550, and phone bill of Rs 1,050. What is their total utility bill for the month?',
       // 1400 + 550 + 1050 = 3000
       correctAnswer: 3000,
-      stepsNp: 'कुल उपयोगिता खर्च = रु. १,४०० + रु. ५५० + रु. १,०५० = रु. ३,०००।',
+      stepsNp: 'कुल उपयोगिता खर्च = Rs. 1,400 + Rs. 550 + Rs. 1,050 = Rs. 3,000।',
       stepsEn: 'Total Utility Expenditure = Rs 1,400 + Rs 550 + Rs 1,050 = Rs 3,000.',
     },
   ];
@@ -175,7 +175,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'ट्याक्सी भाडा तथा घरायसी बजेट हिसाबमा स्वागत छ! मिटर भाडा, रात्रिकालीन थप दस्तुर र मासिक उपयोगिता बजेट हिसाब सिकौं।',
+        'ट्याक्सी भाडा तथा घरायसी बजेट हिसाबमा स्वागत छ! m भाडा, रात्रिकालीन थप दस्तुर र मासिक उपयोगिता बजेट हिसाब सिकौं।',
         'Welcome to Taxi Fare and Household Expense Challenge! Learn meter fares, night surcharges, and utility budgets.'
       )}
     >
@@ -191,7 +191,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
             }`}
           >
             <span>🚕</span>
-            <span>{L('ट्याक्सी मिटर हिसाब', 'Taxi Meter Sim')}</span>
+            <span>{L('ट्याक्सी m हिसाब', 'Taxi Meter Sim')}</span>
           </button>
           <button
             onClick={() => setActiveTab('household')}
@@ -225,11 +225,11 @@ export const TaxiFareHouseholdChallenge: React.FC<{
             <div className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-950/40 dark:to-yellow-950/30 p-5 rounded-2xl border border-amber-200 dark:border-amber-800">
               <h2 className="text-xl font-bold text-amber-900 dark:text-amber-200 mb-2 flex items-center gap-2">
                 <span>🚕</span>
-                <span>{L('ट्याक्सी मिटर प्रणाली (यातायात व्यवस्था विभाग नियम)', 'Taxi Meter Billing System')}</span>
+                <span>{L('ट्याक्सी m प्रणाली (यातायात व्यवस्था विभाग नियम)', 'Taxi Meter Billing System')}</span>
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'ट्याक्सी मिटर सुरु गर्दा पहिलो २०० मिटरको न्यूनतम भाडा रु. १४ खस्दछ। त्यसपछिको प्रत्येक २०० मिटरमा रु. ७.२० (वा १ किमीमा रु. ३६) थप हुन्छ। रोकिराखेको अवस्थामा प्रति २ मिनेटको रु. ७.२० पर्खाइ शुल्क लाग्छ भने राति ९:०० बजेदेखि बिहान ६:०० बजेसम्म ५०% थप भाडा लाग्छ।',
+                  'ट्याक्सी m सुRs गर्दा पहिलो 200 mको न्यूनतम भाडा Rs. 14 खस्दछ। त्यसपछिको प्रत्येक 200 mमा Rs. 7.20 थप हुन्छ। रोकिराखेको अवस्थामा प्रति 2 minको Rs. 7.20 पर्खाइ शुल्क लाग्छ भने राति 9:00 बजेदेखि बिहान 6:00 बजेसम्म 50% थप भाडा लाग्छ।',
                   'Flag drop initial fare is Rs 14 for the first 200m. Every additional 200m costs Rs 7.20 (Rs 36/km). Waiting fee is Rs 7.20 per 2 mins. A 50% surcharge applies between 9 PM and 6 AM.'
                 )}
               </p>
@@ -262,7 +262,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                     className="w-full accent-amber-600 cursor-pointer"
                   />
                   <div className="text-xs text-gray-500 mt-1">
-                    {L(`कुल मिटर: ${toNp(Math.round(distanceKm * 1000))} मिटर`, `Total: ${Math.round(distanceKm * 1000)} meters`)}
+                    {L(`कुल m: ${toNp(Math.round(distanceKm * 1000))} m`, `Total: ${Math.round(distanceKm * 1000)} meters`)}
                   </div>
                 </div>
 
@@ -273,7 +273,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                       {L('पर्खाइ समय (Waiting Time):', 'Waiting Time (Minutes):')}
                     </label>
                     <span className="font-mono font-bold text-amber-600 dark:text-amber-400">
-                      {isNe ? toNp(waitingMinutes) : waitingMinutes} {L('मिनेट', 'mins')}
+                      {isNe ? toNp(waitingMinutes) : waitingMinutes} {L('min', 'mins')}
                     </span>
                   </div>
                   <input
@@ -286,7 +286,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                     className="w-full accent-amber-600 cursor-pointer"
                   />
                   <div className="text-xs text-gray-500 mt-1">
-                    {L(`प्रति २ मिनेट = रु. ७.२० (रु. ३.६०/मिनेट)`, `Rs 7.20 per 2 mins (Rs 3.60/min)`)}
+                    {L(`प्रति 2 min = Rs. 7.20`, `Rs 7.20 per 2 mins (Rs 3.60/min)`)}
                   </div>
                 </div>
 
@@ -298,7 +298,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                       <span>{L('रात्रिकालीन यात्रा (Night Tariff)', 'Night Travel (9 PM - 6 AM)')}</span>
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-400">
-                      {L('सामान्य भाडामा ५०% थप दस्तुर', 'Adds 50% surcharge to total fare')}
+                      {L('सामान्य भाडामा 50% थप दस्तुर', 'Adds 50% surcharge to total fare')}
                     </div>
                   </div>
                   <input
@@ -312,9 +312,9 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                 {/* Rate Card Summary */}
                 <div className="bg-amber-50 dark:bg-amber-950/30 p-3 rounded-xl border border-amber-200 dark:border-amber-800 text-xs text-amber-900 dark:text-amber-200 space-y-1">
                   <div className="font-bold">{L('पाठ्यपुस्तक दर तालिका:', 'Textbook Rate Standard:')}</div>
-                  <div>• {L('पहिलो २०० मिटर = न्यूनतम रु. १४', 'First 200m = Rs 14')}</div>
-                  <div>• {L('प्रति २०० मिटर = रु. ७.२० (रु. ३६/किमी)', 'Each 200m = Rs 7.20 (Rs 36/km)')}</div>
-                  <div>• {L('पर्खाइ प्रति २ मिनेट = रु. ७.२०', 'Waiting per 2 mins = Rs 7.20')}</div>
+                  <div>• {L('पहिलो 200 m = न्यूनतम Rs. 14', 'First 200m = Rs 14')}</div>
+                  <div>• {L('प्रति 200 m = Rs. 7.20', 'Each 200m = Rs 7.20 (Rs 36/km)')}</div>
+                  <div>• {L('पर्खाइ प्रति 2 min = Rs. 7.20', 'Waiting per 2 mins = Rs 7.20')}</div>
                 </div>
               </div>
 
@@ -334,7 +334,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                       </span>
                     </div>
                     <div className="font-mono text-xs text-gray-400">
-                      HIRED / यात्रु सवार
+                      HIRED / passenger on board
                     </div>
                   </div>
 
@@ -344,7 +344,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                       {L('कुल भाडा रकम (FARE PAYABLE)', 'FARE PAYABLE')}
                     </div>
                     <div className="text-4xl sm:text-5xl font-black font-mono tracking-wider text-amber-400 drop-shadow-[0_0_12px_rgba(251,191,36,0.6)]">
-                      रु. {isNe ? toNp(finalTaxiFare.toFixed(1)) : finalTaxiFare.toFixed(1)}
+                      Rs. {isNe ? toNp(finalTaxiFare.toFixed(1)) : finalTaxiFare.toFixed(1)}
                     </div>
                   </div>
 
@@ -374,58 +374,58 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                   <div className="flex justify-between py-1 border-b border-gray-100 dark:border-gray-700">
                     <div>
                       <span className="font-medium text-gray-700 dark:text-gray-300">
-                        {L('१. सुरुको न्यूनतम भाडा (पहिलो २०० मिटर):', '1. Initial Flag Drop (First 200m):')}
+                        {L('1. सुरुको न्यूनतम भाडा (पहिलो 200 m):', '1. Initial Flag Drop (First 200m):')}
                       </span>
                     </div>
                     <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
-                      रु. {isNe ? toNp(flagDropFare) : flagDropFare}
+                      Rs. {isNe ? toNp(flagDropFare) : flagDropFare}
                     </span>
                   </div>
 
                   <div className="flex justify-between py-1 border-b border-gray-100 dark:border-gray-700">
                     <div>
                       <span className="font-medium text-gray-700 dark:text-gray-300">
-                        {L(`२. बाँकी दूरीको भाडा (${extraDistanceKm.toFixed(1)} किमी):`, `2. Additional Distance Fare (${extraDistanceKm.toFixed(1)} km):`)}
+                        {L(`2. बाँकी दूरीको भाडा (${extraDistanceKm.toFixed(1)} किमी):`, `2. Additional Distance Fare (${extraDistanceKm.toFixed(1)} km):`)}
                       </span>
                       <div className="text-xs text-gray-500">
                         {extraDistanceKm > 0
-                          ? L(`${toNp(extraDistanceKm.toFixed(1))} किमी × रु. ३६/किमी`, `${extraDistanceKm.toFixed(1)} km × Rs 36/km`)
+                          ? L(`${toNp(extraDistanceKm.toFixed(1))} किमी × Rs. 36/किमी`, `${extraDistanceKm.toFixed(1)} km × Rs 36/km`)
                           : L('न्यूनतम दूरी भित्र', 'Covered by flag drop')}
                       </div>
                     </div>
                     <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
-                      रु. {isNe ? toNp(Math.round(extraDistanceKm * ratePerKm * 10) / 10) : (Math.round(extraDistanceKm * ratePerKm * 10) / 10).toFixed(1)}
+                      Rs. {isNe ? toNp(Math.round(extraDistanceKm * ratePerKm * 10) / 10) : (Math.round(extraDistanceKm * ratePerKm * 10) / 10).toFixed(1)}
                     </span>
                   </div>
 
                   <div className="flex justify-between py-1 border-b border-gray-100 dark:border-gray-700">
                     <div>
                       <span className="font-medium text-gray-700 dark:text-gray-300">
-                        {L(`३. पर्खाइ शुल्क (${waitingMinutes} मिनेट):`, `3. Waiting Time Fare (${waitingMinutes} mins):`)}
+                        {L(`3. पर्खाइ शुल्क (${waitingMinutes} min):`, `3. Waiting Time Fare (${waitingMinutes} mins):`)}
                       </span>
                       <div className="text-xs text-gray-500">
                         {waitingMinutes > 0
-                          ? L(`${toNp(waitingMinutes)} मिनेट × रु. ३.६०/मिनेट`, `${waitingMinutes} min × Rs 3.60/min`)
+                          ? L(`${toNp(waitingMinutes)} min × Rs. 3.60/min`, `${waitingMinutes} min × Rs 3.60/min`)
                           : L('पर्खाइ नभएको', 'No waiting time')}
                       </div>
                     </div>
                     <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
-                      रु. {isNe ? toNp(waitingFare) : waitingFare.toFixed(1)}
+                      Rs. {isNe ? toNp(waitingFare) : waitingFare.toFixed(1)}
                     </span>
                   </div>
 
                   <div className="flex justify-between py-1.5 bg-gray-50 dark:bg-gray-700/50 px-3 rounded-lg font-semibold text-gray-800 dark:text-gray-200">
                     <span>{L('सामान्य दर उप-जम्मा (Regular Total):', 'Regular Subtotal:')}</span>
                     <span className="font-mono font-bold">
-                      रु. {isNe ? toNp(regularTaxiTotal) : regularTaxiTotal.toFixed(1)}
+                      Rs. {isNe ? toNp(regularTaxiTotal) : regularTaxiTotal.toFixed(1)}
                     </span>
                   </div>
 
                   {isNightTime && (
                     <div className="flex justify-between py-1 text-red-600 dark:text-red-400 border-b border-gray-100 dark:border-gray-700 font-semibold">
-                      <span>{L('४. रात्रिकालीन ५०% थप दस्तुर:', '4. Night Surcharge (50%):')}</span>
+                      <span>{L('4. रात्रिकालीन 50% थप दस्तुर:', '4. Night Surcharge (50%):')}</span>
                       <span className="font-mono">
-                        + रु. {isNe ? toNp(nightSurcharge) : nightSurcharge.toFixed(1)}
+                        + Rs. {isNe ? toNp(nightSurcharge) : nightSurcharge.toFixed(1)}
                       </span>
                     </div>
                   )}
@@ -433,7 +433,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                   <div className="pt-2 flex justify-between items-center text-base font-black text-amber-700 dark:text-amber-400">
                     <span>{L('तिर्नुपर्ने कुल भाडा:', 'Total Fare to Pay:')}</span>
                     <span className="text-xl font-mono">
-                      रु. {isNe ? toNp(finalTaxiFare) : finalTaxiFare.toFixed(1)}
+                      Rs. {isNe ? toNp(finalTaxiFare) : finalTaxiFare.toFixed(1)}
                     </span>
                   </div>
                 </div>
@@ -544,7 +544,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                       <div className="text-2xl mb-1">{item.icon}</div>
                       <div className="text-xs text-gray-500 font-medium">{isNe ? item.nameNp : item.nameEn}</div>
                       <div className="text-base font-black text-gray-800 dark:text-gray-100 mt-1 font-mono">
-                        रु. {isNe ? toNp(item.amount) : item.amount.toLocaleString()}
+                        Rs. {isNe ? toNp(item.amount) : item.amount.toLocaleString()}
                       </div>
                     </div>
                   ))}
@@ -590,7 +590,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                     <div className="flex justify-between py-1">
                       <span className="text-gray-600 dark:text-gray-400">{L('जम्मा घरायसी उपयोगिता खर्च:', 'Total Utility Expenses:')}</span>
                       <span className="font-black text-red-600 dark:text-red-400 font-mono text-base">
-                        रु. {isNe ? toNp(totalHouseholdExpense) : totalHouseholdExpense.toLocaleString()}
+                        Rs. {isNe ? toNp(totalHouseholdExpense) : totalHouseholdExpense.toLocaleString()}
                       </span>
                     </div>
 
@@ -604,7 +604,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
                     <div className="flex justify-between py-1">
                       <span className="text-gray-600 dark:text-gray-400">{L('मासिक बचत रकम (Monthly Savings):', 'Estimated Monthly Savings:')}</span>
                       <span className="font-black text-green-600 dark:text-green-400 font-mono text-base">
-                        रु. {isNe ? toNp(savings) : savings.toLocaleString()}
+                        Rs. {isNe ? toNp(savings) : savings.toLocaleString()}
                       </span>
                     </div>
                   </div>
@@ -657,7 +657,7 @@ export const TaxiFareHouseholdChallenge: React.FC<{
               {/* Answer input form */}
               <div className="space-y-3">
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
-                  {L('तपाईंको उत्तर (रु. मा):', 'Your Answer (in Rs):')}
+                  {L('तपाईंको उत्तर (Rs. मा):', 'Your Answer (in Rs):')}
                 </label>
                 <div className="flex gap-3">
                   <input

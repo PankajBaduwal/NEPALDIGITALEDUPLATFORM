@@ -1,6 +1,6 @@
 /**
- * Chapter 11 · Subtraction of numbers up to 20 (२० सम्मका सङ्ख्याको घटाउ)
- * Sim 1: Fly-Away Birds (चरा उडे!) — Pure 2D Edition
+ * Chapter 11 · Subtraction of numbers up to 20
+ * Sim 1: Fly-Away Birds — Pure 2D Edition
  * 100% 2D SVG / CSS Animations – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -27,7 +27,7 @@ export const FlyAwayBirds: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G1-CH11-01',
     chapter: 11,
-    titleNp: 'चरा उडे! (२० सम्मको घटाउ)',
+    titleNp: 'चरा उडे!',
     titleEn: 'Fly-Away Birds (Take away up to 20)',
   });
 
@@ -66,42 +66,42 @@ export const FlyAwayBirds: React.FC<Props> = ({ onBackToLibrary }) => {
   const quizQuestions: QuizQuestion[] = useMemo(
     () => [
       {
-        np: '१५ चरामा ३ चरा उडे भने कति बाँकी रहन्छन्? (१५ − ३ = ?)',
+        np: '15 चरामा 3 चरा उडे भने कति बाँकी रहन्छन्? (15 − 3 = ?)',
         en: '15 birds on a wall, 3 fly away. How many remain? (15 − 3 = ?)',
         options: [
-          { key: '12', label: isNe ? '१२' : '12' },
-          { key: '11', label: isNe ? '११' : '11' },
-          { key: '18', label: isNe ? '१८' : '18' },
+          { key: '12', label: isNe ? '12' : '12' },
+          { key: '11', label: isNe ? '11' : '11' },
+          { key: '18', label: isNe ? '18' : '18' },
         ],
         answer: '12',
       },
       {
-        np: '१८ चरामा ६ चरा उडे भने कति बाँकी? (१८ − ६ = ?)',
+        np: '18 चरामा 6 चरा उडे भने कति बाँकी? (18 − 6 = ?)',
         en: '18 birds on a wall, 6 fly away. How many remain? (18 − 6 = ?)',
         options: [
-          { key: '12', label: isNe ? '१२' : '12' },
-          { key: '14', label: isNe ? '१४' : '14' },
-          { key: '10', label: isNe ? '१०' : '10' },
+          { key: '12', label: isNe ? '12' : '12' },
+          { key: '14', label: isNe ? '14' : '14' },
+          { key: '10', label: isNe ? '10' : '10' },
         ],
         answer: '12',
       },
       {
-        np: '२० मा ८ घटाउँदा कति हुन्छ? (२० − ८ = ?)',
+        np: '20 मा 8 घटाउँदा कति हुन्छ? (20 − 8 = ?)',
         en: 'What is 20 − 8?',
         options: [
-          { key: '12', label: isNe ? '१२' : '12' },
-          { key: '13', label: isNe ? '१३' : '13' },
-          { key: '11', label: isNe ? '११' : '11' },
+          { key: '12', label: isNe ? '12' : '12' },
+          { key: '13', label: isNe ? '13' : '13' },
+          { key: '11', label: isNe ? '11' : '11' },
         ],
         answer: '12',
       },
       {
-        np: '१४ चरामा ४ चरा उडे भने कति चरा बाँकी? (१४ − ४ = ?)',
+        np: '14 चरामा 4 चरा उडे भने कति चरा बाँकी? (14 − 4 = ?)',
         en: '14 birds, 4 fly away. How many remain? (14 − 4 = ?)',
         options: [
-          { key: '10', label: isNe ? '१०' : '10' },
-          { key: '9', label: isNe ? '९' : '9' },
-          { key: '8', label: isNe ? '८' : '8' },
+          { key: '10', label: isNe ? '10' : '10' },
+          { key: '9', label: isNe ? '9' : '9' },
+          { key: '8', label: isNe ? '8' : '8' },
         ],
         answer: '10',
       },
@@ -151,7 +151,7 @@ export const FlyAwayBirds: React.FC<Props> = ({ onBackToLibrary }) => {
                 boxShadow: '0 4px 10px rgba(24,124,104,0.25)',
               }}
             >
-              🕊️ {L('१ चरा उडाउनुहोस् (−१)', 'Make 1 Bird Fly Away (−1)')}
+              🕊️ {L('1 चरा उडाउनुहोस् (−1)', 'Make 1 Bird Fly Away (−1)')}
             </button>
 
             <button
@@ -276,7 +276,7 @@ export const FlyAwayBirds: React.FC<Props> = ({ onBackToLibrary }) => {
                   transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   filter: isGone ? 'grayscale(100%)' : `drop-shadow(0 4px 6px ${birdColor}40)`,
                 }}
-                title={isGone ? 'उडेको चरा' : 'चरा उडाउन छुनुहोस्!'}
+                title={isGone ? 'उडेको चरा' : 'Tap to make the birds fly!'}
               >
                 🐦
               </div>

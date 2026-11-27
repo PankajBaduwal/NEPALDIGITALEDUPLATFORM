@@ -18,7 +18,7 @@ export interface Class10MathSimDef {
 }
 
 export const CLASS10_MATH: Class10MathSimDef[] = [
-  // ── UNIT 1: SETS (समूह) ───────────────────────────────────────────────────
+  // ── UNIT 1: SETS ───────────────────────────────────────────────────
   {
     code: 'SIM-MATH-G10-U1-01',
     key: 'class10-math-u1-venn-diagram-lab',
@@ -30,7 +30,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./VennDiagramLab'), 'VennDiagramLab'),
   },
 
-  // ── UNIT 2: COMPOUND INTEREST (चक्रीय ब्याज) ──────────────────────────────
+  // ── UNIT 2: COMPOUND INTEREST ──────────────────────────────
   {
     code: 'SIM-MATH-G10-U2-01',
     key: 'class10-math-u2-compound-interest-lab',
@@ -42,7 +42,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./CompoundInterestLab'), 'CompoundInterestLab'),
   },
 
-  // ── UNIT 3: GROWTH AND DEPRECIATION (जनसङ्ख्या वृद्धि तथा ह्रास) ──────────
+  // ── UNIT 3: GROWTH AND DEPRECIATION ──────────
   {
     code: 'SIM-MATH-G10-U3-01',
     key: 'class10-math-u3-growth-depreciation-explorer',
@@ -54,7 +54,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./GrowthDepreciationExplorer'), 'GrowthDepreciationExplorer'),
   },
 
-  // ── UNIT 4: CURRENCY AND EXCHANGE RATE (मुद्रा र विनिमय दर) ───────────────
+  // ── UNIT 4: CURRENCY AND EXCHANGE RATE ───────────────
   {
     code: 'SIM-MATH-G10-U4-01',
     key: 'class10-math-u4-currency-exchange-lab',
@@ -66,7 +66,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./CurrencyExchangeLab'), 'CurrencyExchangeLab'),
   },
 
-  // ── UNIT 5: AREA AND VOLUME (क्षेत्रफल र आयतन) ────────────────────────────
+  // ── UNIT 5: AREA AND VOLUME ────────────────────────────
   {
     code: 'SIM-MATH-G10-U5-01',
     key: 'class10-math-u5-3d-geometry-explorer',
@@ -74,11 +74,11 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     unit: 5,
     grade: 10,
     titleEn: '3D Geometry: Area and Volume Explorer',
-    titleNp: '३डी ज्यामिति: क्षेत्रफल तथा आयतन अन्वेषक',
+    titleNp: '3डी ज्यामिति: क्षेत्रफल तथा आयतन अन्वेषक',
     Component: L(() => import('./AreaVolume3DExplorer'), 'AreaVolume3DExplorer'),
   },
 
-  // ── UNIT 6: SEQUENCE AND SERIES (अनुक्रम र श्रेणी) ─────────────────────────
+  // ── UNIT 6: SEQUENCE AND SERIES ─────────────────────────
   {
     code: 'SIM-MATH-G10-U6-01',
     key: 'class10-math-u6-sequence-series-lab',
@@ -90,7 +90,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./SequenceSeriesLab'), 'SequenceSeriesLab'),
   },
 
-  // ── UNIT 7: QUADRATIC EQUATION (वर्ग समीकरण) ──────────────────────────────
+  // ── UNIT 7: QUADRATIC EQUATION ──────────────────────────────
   {
     code: 'SIM-MATH-G10-U7-01',
     key: 'class10-math-u7-quadratic-explorer',
@@ -102,7 +102,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./QuadraticEquationExplorer'), 'QuadraticEquationExplorer'),
   },
 
-  // ── UNIT 8: ALGEBRAIC FRACTION (बीजीय भिन्न) ──────────────────────────────
+  // ── UNIT 8: ALGEBRAIC FRACTION ──────────────────────────────
   {
     code: 'SIM-MATH-G10-U8-01',
     key: 'class10-math-u8-algebraic-fraction-lab',
@@ -114,7 +114,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./AlgebraicFractionLab'), 'AlgebraicFractionLab'),
   },
 
-  // ── UNIT 9: INDICES (घाताङ्क) ──────────────────────────────────────────────
+  // ── UNIT 9: INDICES ──────────────────────────────────────────────
   {
     code: 'SIM-MATH-G10-U9-01',
     key: 'class10-math-u9-indices-explorer',
@@ -126,7 +126,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./IndicesExplorer'), 'IndicesExplorer'),
   },
 
-  // ── UNIT 10: TRIANGLE AND QUADRILATERALS (त्रिभुज र चतुर्भुजहरू) ──────────
+  // ── UNIT 10: TRIANGLE AND QUADRILATERALS ──────────
   {
     code: 'SIM-MATH-G10-U10-01',
     key: 'class10-math-u10-equal-area-geometry',
@@ -138,7 +138,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./EqualAreaGeometryExplorer'), 'EqualAreaGeometryExplorer'),
   },
 
-  // ── UNIT 11: CONSTRUCTION (रचना) ──────────────────────────────────────────
+  // ── UNIT 11: CONSTRUCTION ──────────────────────────────────────────
   {
     code: 'SIM-MATH-G10-U11-01',
     key: 'class10-math-u11-construction-studio',
@@ -150,7 +150,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./GeometricConstructionStudio'), 'GeometricConstructionStudio'),
   },
 
-  // ── UNIT 12: CIRCLE (वृत्त) ────────────────────────────────────────────────
+  // ── UNIT 12: CIRCLE ────────────────────────────────────────────────
   {
     code: 'SIM-MATH-G10-U12-01',
     key: 'class10-math-u12-circle-theorems',
@@ -162,7 +162,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./CircleTheoremExplorer'), 'CircleTheoremExplorer'),
   },
 
-  // ── UNIT 13: STATISTICS (तथ्याङ्क शास्त्र) ──────────────────────────────────
+  // ── UNIT 13: STATISTICS ──────────────────────────────────
   {
     code: 'SIM-MATH-G10-U13-01',
     key: 'class10-math-u13-statistics-lab',
@@ -174,7 +174,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./InteractiveStatisticsLab'), 'InteractiveStatisticsLab'),
   },
 
-  // ── UNIT 14: PROBABILITY (सम्भाव्यता) ─────────────────────────────────────────
+  // ── UNIT 14: PROBABILITY ─────────────────────────────────────────
   {
     code: 'SIM-MATH-G10-U14-01',
     key: 'class10-math-u14-probability-tree-lab',
@@ -186,7 +186,7 @@ export const CLASS10_MATH: Class10MathSimDef[] = [
     Component: L(() => import('./ProbabilityTreeLab'), 'ProbabilityTreeLab'),
   },
 
-  // ── UNIT 15: TRIGONOMETRY (त्रिकोणमिति) ───────────────────────────────────────
+  // ── UNIT 15: TRIGONOMETRY ───────────────────────────────────────
   {
     code: 'SIM-MATH-G10-U15-01',
     key: 'class10-math-u15-heights-distances',

@@ -1,5 +1,5 @@
 /**
- * Lesson 15 · Currency (मुद्रा)
+ * Lesson 15 · Currency
  * Rupee Market — buy things with Nepali notes and coins (up to Rs 1000): pay exact, add prices, find change.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -16,19 +16,19 @@ const GOODS = [
   { np: 'झोला', en: 'Bag', emoji: '🎒', price: 250 },
   { np: 'जुत्ता', en: 'Shoes', emoji: '👟', price: 450 },
   { np: 'दूध', en: 'Milk', emoji: '🥛', price: 60 },
-  { np: 'स्याउ (१ के.जी.)', en: 'Apples (1 kg)', emoji: '🍎', price: 180 },
+  { np: 'स्याउ (1 के.जी.)', en: 'Apples (1 kg)', emoji: '🍎', price: 180 },
   { np: 'पेन', en: 'Pen', emoji: '🖊️', price: 15 },
   { np: 'बिस्कुट', en: 'Biscuits', emoji: '🍪', price: 45 },
   { np: 'बल', en: 'Ball', emoji: '⚽', price: 120 },
 ];
 
 const NOTES = [
-  { v: 5, color: '#F87171', label: 'रु ५' },
-  { v: 10, color: '#C084FC', label: 'रु १०' },
-  { v: 20, color: '#FB923C', label: 'रु २०' },
-  { v: 50, color: '#60A5FA', label: 'रु ५०' },
-  { v: 100, color: '#4ADE80', label: 'रु १००' },
-  { v: 500, color: '#FBBF24', label: 'रु ५००' },
+  { v: 5, color: '#F87171', label: 'Rs 5' },
+  { v: 10, color: '#C084FC', label: 'Rs 10' },
+  { v: 20, color: '#FB923C', label: 'Rs 20' },
+  { v: 50, color: '#60A5FA', label: 'Rs 50' },
+  { v: 100, color: '#4ADE80', label: 'Rs 100' },
+  { v: 500, color: '#FBBF24', label: 'Rs 500' },
 ];
 
 export const RupeeMarket: React.FC<Props> = ({ onBackToLibrary }) => {
@@ -58,14 +58,14 @@ export const RupeeMarket: React.FC<Props> = ({ onBackToLibrary }) => {
     const next = [...paid, v];
     setPaid(next);
     const sum = next.reduce((a, b) => a + b, 0);
-    kit.say(`रु ${toNp(v)} तिरियो`, `Paid Rs ${v}`);
+    kit.say(`Rs ${toNp(v)} तिरियो`, `Paid Rs ${v}`);
 
     if (sum >= totalPrice && totalPrice > 0) {
       const change = sum - totalPrice;
       if (change === 0) {
         kit.good(`बराबर रकम भुक्तानी भयो! धन्यवाद।`, `Exact payment! Thank you.`);
       } else {
-        kit.good(`रकम पुग्यो! फिर्ता पाउने रकम: रु ${toNp(change)}`, `Payment complete! Change due: Rs ${change}`);
+        kit.good(`रकम पुग्यो! फिर्ता पाउने रकम: Rs ${toNp(change)}`, `Payment complete! Change due: Rs ${change}`);
       }
       kit.star();
     }
@@ -94,43 +94,43 @@ export const RupeeMarket: React.FC<Props> = ({ onBackToLibrary }) => {
   // Quiz Questions for Challenge Mode
   const questions: QuizQuestion[] = [
     {
-      np: 'रु १०० को सामान किनेर रु ५०० को नोट दिँदा कति फिर्ता पाउनुहुन्छ?',
+      np: 'Rs 100 को सामान किनेर Rs 500 को नोट दिँदा कति फिर्ता पाउनुहुन्छ?',
       en: 'If you buy an item for Rs 100 and pay with a Rs 500 note, what is your change?',
       answer: '400',
       options: [
-        { key: '400', label: 'रु ४००' },
-        { key: '300', label: 'रु ३००' },
-        { key: '450', label: 'रु ४५०' },
+        { key: '400', label: 'Rs 400' },
+        { key: '300', label: 'Rs 300' },
+        { key: '450', label: 'Rs 450' },
       ],
     },
     {
-      np: 'कापीको मूल्य रु ३५ र पेनको मूल्य रु १५ छ। दुवैको जम्मा मूल्य कति?',
+      np: 'कापीको मूल्य Rs 35 र पेनको मूल्य Rs 15 छ। दुवैको जम्मा मूल्य कति?',
       en: 'A copy book costs Rs 35 and a pen costs Rs 15. What is the total?',
       answer: '50',
       options: [
-        { key: '50', label: 'रु ५०' },
-        { key: '40', label: 'रु ४०' },
-        { key: '60', label: 'रु ६०' },
+        { key: '50', label: 'Rs 50' },
+        { key: '40', label: 'Rs 40' },
+        { key: '60', label: 'Rs 60' },
       ],
     },
     {
-      np: 'रु ५० बनाउन रु १० का कतिवटा नोट चाहिन्छन्?',
+      np: 'Rs 50 बनाउन Rs 10 का कतिवटा नोट चाहिन्छन्?',
       en: 'How many Rs 10 notes make Rs 50?',
       answer: '5',
       options: [
-        { key: '5', label: '५ वटा' },
-        { key: '10', label: '१० वटा' },
-        { key: '2', label: '२ वटा' },
+        { key: '5', label: '5 items' },
+        { key: '10', label: '10 items' },
+        { key: '2', label: '2 items' },
       ],
     },
     {
-      np: 'रु १०० को एउटा नोट बराबर रु २० का कतिवटा नोट हुन्छन्?',
+      np: 'Rs 100 को एउटा नोट बराबर Rs 20 का कतिवटा नोट हुन्छन्?',
       en: 'How many Rs 20 notes equal one Rs 100 note?',
       answer: '5',
       options: [
-        { key: '5', label: '५ वटा' },
-        { key: '4', label: '४ वटा' },
-        { key: '6', label: '६ वटा' },
+        { key: '5', label: '5 items' },
+        { key: '4', label: '4 items' },
+        { key: '6', label: '6 items' },
       ],
     },
   ];
@@ -150,7 +150,7 @@ export const RupeeMarket: React.FC<Props> = ({ onBackToLibrary }) => {
     >
       {kit.t('जम्मा मूल्य', 'Total Price')}:{' '}
       <span style={{ color: '#0284C7', fontSize: 20 }}>
-        रु {toNp(totalPrice)}
+        Rs {toNp(totalPrice)}
       </span>
     </div>
   );
@@ -262,7 +262,7 @@ export const RupeeMarket: React.FC<Props> = ({ onBackToLibrary }) => {
                       marginTop: 2,
                     }}
                   >
-                    रु {toNp(g.price)}
+                    Rs {toNp(g.price)}
                   </div>
                 </div>
               );
@@ -292,7 +292,7 @@ export const RupeeMarket: React.FC<Props> = ({ onBackToLibrary }) => {
               {kit.t('तिरेको रकम:', 'Cash Paid:')}
             </div>
             <div style={{ fontSize: 24, fontWeight: 900, color: '#0284C7' }}>
-              रु {toNp(totalPaid)}
+              Rs {toNp(totalPaid)}
             </div>
             {/* Visual list of paid notes */}
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 4 }}>
@@ -308,7 +308,7 @@ export const RupeeMarket: React.FC<Props> = ({ onBackToLibrary }) => {
                     fontWeight: 800,
                   }}
                 >
-                  रु {toNp(val)}
+                  Rs {toNp(val)}
                 </span>
               ))}
             </div>
@@ -325,7 +325,7 @@ export const RupeeMarket: React.FC<Props> = ({ onBackToLibrary }) => {
                 color: isPaidEnough ? '#16A34A' : '#EF4444',
               }}
             >
-              {isPaidEnough ? `रु ${toNp(changeDue)}` : kit.t('रकम पुगेन', 'Insufficient')}
+              {isPaidEnough ? `Rs ${toNp(changeDue)}` : kit.t('रकम पुगेन', 'Insufficient')}
             </div>
             <div style={{ fontSize: 11, color: '#64748B', fontWeight: 700 }}>
               {toNp(totalPaid)} − {toNp(totalPrice)} = {toNp(changeDue)}

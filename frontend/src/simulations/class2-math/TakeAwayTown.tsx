@@ -1,5 +1,5 @@
 /**
- * Lesson 8 · Subtraction (घटाउ) — three-digit numbers
+ * Lesson 8 · Subtraction — three-digit numbers
  * Take Away Town — take blocks away; break a hundred into tens or a ten into ones when you need more.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -57,7 +57,7 @@ export const TakeAwayTown: React.FC<Props> = ({ onBackToLibrary }) => {
       return;
     }
     if (o === 0) {
-      kit.oops('एकाइ पुगेन! १ दशक फुकाऔँ 🔨', 'Not enough ones! Break a ten 🔨');
+      kit.oops('एकाइ पुगेन! 1 दशक फुकाऔँ 🔨', 'Not enough ones! Break a ten 🔨');
       return;
     }
     kit.tap();
@@ -71,7 +71,7 @@ export const TakeAwayTown: React.FC<Props> = ({ onBackToLibrary }) => {
       return;
     }
     if (t === 0) {
-      kit.oops('दशक पुगेन! १ सय फुकाऔँ 🔨', 'Not enough tens! Break a hundred 🔨');
+      kit.oops('दशक पुगेन! 1 सय फुकाऔँ 🔨', 'Not enough tens! Break a hundred 🔨');
       return;
     }
     kit.tap();
@@ -98,7 +98,7 @@ export const TakeAwayTown: React.FC<Props> = ({ onBackToLibrary }) => {
     kit.tap();
     setT((v) => v - 1);
     setO((v) => v + 10);
-    kit.say('१ दशक फुकेर १० एकाइ भयो!', '1 ten unbundled into 10 ones!');
+    kit.say('1 दशक फुकेर 10 एकाइ भयो!', '1 ten unbundled into 10 ones!');
   };
 
   const breakHundred = () => {
@@ -109,7 +109,7 @@ export const TakeAwayTown: React.FC<Props> = ({ onBackToLibrary }) => {
     kit.tap();
     setH((v) => v - 1);
     setT((v) => v + 10);
-    kit.say('१ सय फुकेर १० दशक भयो!', '1 hundred unbundled into 10 tens!');
+    kit.say('1 सय फुकेर 10 दशक भयो!', '1 hundred unbundled into 10 tens!');
   };
 
   useEffect(() => {
@@ -185,25 +185,25 @@ export const TakeAwayTown: React.FC<Props> = ({ onBackToLibrary }) => {
         {/* Step-by-step subtraction buttons */}
         <div style={{ display: 'inline-flex', gap: 4, background: '#FFFBEB', padding: '4px 8px', borderRadius: 10, border: '1px solid #FDE68A' }}>
           <CBtn color="#92400E" disabled={remO === 0} onClick={takeOne}>
-            -१ {kit.t('एकाइ घटाऔँ', 'Take One')} ({toNp(remO)})
+            -1 {kit.t('एकाइ घटाऔँ', 'Take One')} ({toNp(remO)})
           </CBtn>
           <CBtn color="#D97706" disabled={t <= 0} onClick={breakTen}>
-            🔨 {kit.t('१ दशक फुकाऔँ', 'Break 1 Ten')}
+            🔨 {kit.t('1 दशक फुकाऔँ', 'Break 1 Ten')}
           </CBtn>
         </div>
 
         <div style={{ display: 'inline-flex', gap: 4, background: '#EFF6FF', padding: '4px 8px', borderRadius: 10, border: '1px solid #BFDBFE' }}>
           <CBtn color="#1E40AF" disabled={remT === 0} onClick={takeTen}>
-            -१ {kit.t('दशक घटाऔँ', 'Take Ten')} ({toNp(remT)})
+            -1 {kit.t('दशक घटाऔँ', 'Take Ten')} ({toNp(remT)})
           </CBtn>
           <CBtn color="#2563EB" disabled={h <= 0} onClick={breakHundred}>
-            🔨 {kit.t('१ सय फुकाऔँ', 'Break 1 Hundred')}
+            🔨 {kit.t('1 सय फुकाऔँ', 'Break 1 Hundred')}
           </CBtn>
         </div>
 
         <div style={{ display: 'inline-flex', gap: 4, background: '#F0FDF4', padding: '4px 8px', borderRadius: 10, border: '1px solid #BBF7D0' }}>
           <CBtn color="#166534" disabled={remH === 0} onClick={takeHundred}>
-            -१ {kit.t('सय घटाऔँ', 'Take Hundred')} ({toNp(remH)})
+            -1 {kit.t('सय घटाऔँ', 'Take Hundred')} ({toNp(remH)})
           </CBtn>
         </div>
 

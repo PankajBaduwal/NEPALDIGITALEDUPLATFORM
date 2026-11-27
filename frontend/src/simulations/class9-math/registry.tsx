@@ -19,7 +19,7 @@ const L = (fn: () => Promise<any>, exportName?: string) => {
 };
 
 export const CLASS9_MATH = [
-  // ── UNIT 1: SETS (समूह) ──────────────────────────────────────────────────
+  // ── UNIT 1: SETS ──────────────────────────────────────────────────
   {
     code: 'SIM-MATH-G9-U1-01',
     key: 'class9-math-u1-set-explorer-venn-lab',
@@ -51,7 +51,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./CardinalityVennProblemSolver'), 'CardinalityVennProblemSolver'),
   },
 
-  // ── UNIT 2: TAX (कर) ──────────────────────────────────────────────────────
+  // ── UNIT 2: TAX ──────────────────────────────────────────────────────
   {
     code: 'SIM-MATH-G9-U2-01',
     key: 'class9-math-u2-income-tax-slab-explorer',
@@ -83,7 +83,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./TaxProblemSolvingChallenge'), 'TaxProblemSolvingChallenge'),
   },
 
-  // ── UNIT 3: COMMISSION AND DIVIDEND (कमिशन र लाभांश) ─────────────────────
+  // ── UNIT 3: COMMISSION AND DIVIDEND ─────────────────────
   {
     code: 'SIM-MATH-G9-U3-01',
     key: 'class9-math-u3-commission-agent-simulator',
@@ -115,7 +115,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./DividendShareholderSimulator'), 'DividendShareholderSimulator'),
   },
 
-  // ── UNIT 4: HOUSEHOLD ARITHMETIC (घरायसी अङ्कगणित) ────────────────────────
+  // ── UNIT 4: HOUSEHOLD ARITHMETIC ────────────────────────
   {
     code: 'SIM-MATH-G9-U4-01',
     key: 'class9-math-u4-electricity-bill-calculator',
@@ -147,7 +147,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./TaxiFareHouseholdChallenge'), 'TaxiFareHouseholdChallenge'),
   },
 
-  // ── UNIT 5: AREA (क्षेत्रफल) ──────────────────────────────────────────────
+  // ── UNIT 5: AREA ──────────────────────────────────────────────
   {
     code: 'SIM-MATH-G9-U5-01',
     key: 'class9-math-u5-herons-formula-land-explorer',
@@ -179,7 +179,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./NepalLandAreaConverter'), 'NepalLandAreaConverter'),
   },
 
-  // ── UNIT 6: PRISM (प्रिज्म) ───────────────────────────────────────────────
+  // ── UNIT 6: PRISM ───────────────────────────────────────────────
   {
     code: 'SIM-MATH-G9-U6-01',
     key: 'class9-math-u6-explore-build-prism',
@@ -211,7 +211,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./PrismVolumeWaterTankDesigner'), 'PrismVolumeWaterTankDesigner'),
   },
 
-  // ── UNIT 7: CYLINDER AND SPHERE (बेलना र गोला) ───────────────────────────
+  // ── UNIT 7: CYLINDER AND SPHERE ───────────────────────────
   {
     code: 'SIM-MATH-G9-U7-01',
     key: 'class9-math-u7-interactive-cylinder-explorer',
@@ -239,11 +239,11 @@ export const CLASS9_MATH = [
     unit: 7,
     grade: 9,
     titleEn: 'Sphere and Hemisphere 3D Laboratory',
-    titleNp: 'गोला तथा अर्धगोला ३D प्रयोगशाला',
+    titleNp: 'गोला तथा अर्धगोला 3D प्रयोगशाला',
     Component: L(() => import('./SphereHemisphere3DLab'), 'SphereHemisphere3DLab'),
   },
 
-  // ── UNIT 8: SEQUENCE AND SERIES (अनुक्रम र श्रेणी) ───────────────────────
+  // ── UNIT 8: SEQUENCE AND SERIES ───────────────────────
   {
     code: 'SIM-MATH-G9-U8-01',
     key: 'class9-math-u8-sequence-pattern-explorer',
@@ -275,7 +275,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./SeriesSigmaNotationExplorer'), 'SeriesSigmaNotationExplorer'),
   },
 
-  // ── UNIT 9: FACTORIZATION (खण्डीकरण) ─────────────────────────────────────
+  // ── UNIT 9: FACTORIZATION ─────────────────────────────────────
   {
     code: 'SIM-MATH-G9-U9-01',
     key: 'class9-math-u9-algebraic-cube-builder',
@@ -307,7 +307,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./FourthDegreeFactorizationLab'), 'FourthDegreeFactorizationLab'),
   },
 
-  // ── UNIT 10: HIGHEST COMMON FACTOR AND LOWEST COMMON MULTIPLE (महत्तम समापवर्तक र लघुत्तम समापवर्त्य) ──
+  // ── UNIT 10: HIGHEST COMMON FACTOR AND LOWEST COMMON MULTIPLE ──
   {
     code: 'SIM-MATH-G9-U10-01',
     key: 'class9-math-u10-algebraic-factorization-explorer',
@@ -339,7 +339,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./HcfLcmRealLifeSolver'), 'HcfLcmRealLifeSolver'),
   },
 
-  // ── UNIT 11: LINEAR EQUATION (रैखिक समीकरण) ──────────────────────────────
+  // ── UNIT 11: LINEAR EQUATION ──────────────────────────────
   {
     code: 'SIM-MATH-G9-U11-01',
     key: 'class9-math-u11-linear-equation-graph-lab',
@@ -371,7 +371,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./SimultaneousEquationChallenge'), 'SimultaneousEquationChallenge'),
   },
 
-  // ── UNIT 12: INDICES (घाताङ्क) ───────────────────────────────────────────
+  // ── UNIT 12: INDICES ───────────────────────────────────────────
   {
     code: 'SIM-MATH-G9-U12-01',
     key: 'class9-math-u12-indices-laws-explorer',
@@ -403,7 +403,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./IndicesSimplificationChallenge'), 'IndicesSimplificationChallenge'),
   },
 
-  // ── UNIT 13: TRIANGLE (त्रिभुज) ──────────────────────────────────────────
+  // ── UNIT 13: TRIANGLE ──────────────────────────────────────────
   {
     code: 'SIM-MATH-G9-U13-01',
     key: 'class9-math-u13-triangle-explorer-properties',
@@ -435,7 +435,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./TriangleTheoremsProblemSolver'), 'TriangleTheoremsProblemSolver'),
   },
 
-  // ── UNIT 14: QUADRILATERAL (चतुर्भुज) ────────────────────────────────────
+  // ── UNIT 14: QUADRILATERAL ────────────────────────────────────
   {
     code: 'SIM-MATH-G9-U14-01',
     key: 'class9-math-u14-quadrilateral-types-properties',
@@ -467,7 +467,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./QuadrilateralAnglePropertyChallenge'), 'QuadrilateralAnglePropertyChallenge'),
   },
 
-  // ── UNIT 15: CONSTRUCTION (रचना) ─────────────────────────────────────────
+  // ── UNIT 15: CONSTRUCTION ─────────────────────────────────────────
   {
     code: 'SIM-MATH-G9-U15-01',
     key: 'class9-math-u15-scalene-quadrilateral-construction-lab',
@@ -499,7 +499,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./CompleteGeometryConstructionChallenge'), 'CompleteGeometryConstructionChallenge'),
   },
 
-  // ── UNIT 16: CIRCLE (वृत्त) ──────────────────────────────────────────────
+  // ── UNIT 16: CIRCLE ──────────────────────────────────────────────
   {
     code: 'SIM-MATH-G9-U16-01',
     key: 'class9-math-u16-circle-parts-measurements',
@@ -531,7 +531,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./CircleProblemSolvingLab'), 'CircleProblemSolvingLab'),
   },
 
-  // ── UNIT 17: CLASSIFICATION AND PRESENTATION OF DATA (तथ्याङ्कको वर्गीकरण र प्रस्तुतीकरण) ──
+  // ── UNIT 17: CLASSIFICATION AND PRESENTATION OF DATA ──
   {
     code: 'SIM-MATH-G9-U17-01',
     key: 'class9-math-u17-data-classification-frequency-lab',
@@ -563,7 +563,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./StatisticalDataInterpretationChallenge'), 'StatisticalDataInterpretationChallenge'),
   },
 
-  // ── UNIT 18: MEASURES OF CENTRAL TENDENCY (केन्द्रीय प्रवृत्तिका नापहरु) ──
+  // ── UNIT 18: MEASURES OF CENTRAL TENDENCY ──
   {
     code: 'SIM-MATH-G9-U18-01',
     key: 'class9-math-u18-arithmetic-mean-explorer',
@@ -595,7 +595,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./MeanMedianComparisonChallenge'), 'MeanMedianComparisonChallenge'),
   },
 
-  // ── UNIT 19: PROBABILITY (सम्भाव्यता) ────────────────────────────────────
+  // ── UNIT 19: PROBABILITY ────────────────────────────────────
   {
     code: 'SIM-MATH-G9-U19-01',
     key: 'class9-math-u19-probability-experiment-lab',
@@ -627,7 +627,7 @@ export const CLASS9_MATH = [
     Component: L(() => import('./EmpiricalProbabilityAnalyser'), 'EmpiricalProbabilityAnalyser'),
   },
 
-  // ── UNIT 20: TRIGONOMETRY (त्रिकोणमिति) ──────────────────────────────────
+  // ── UNIT 20: TRIGONOMETRY ──────────────────────────────────
   {
     code: 'SIM-MATH-G9-U20-01',
     key: 'class9-math-u20-trigonometric-ratio-explorer',

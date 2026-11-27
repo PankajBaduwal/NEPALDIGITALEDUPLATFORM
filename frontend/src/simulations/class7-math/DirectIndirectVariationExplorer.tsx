@@ -1,6 +1,6 @@
 /**
  * DirectIndirectVariationExplorer.tsx
- * Grade 7 Mathematics – Lesson 8: UNITARY METHOD (एकाइ विधि)
+ * Grade 7 Mathematics – Lesson 8: UNITARY METHOD
  * Simulation 2: Direct and Indirect Variation Explorer (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 105-107)
  */
@@ -15,43 +15,43 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'एउटा परिमाण बढ्दा अर्को परिमाण पनि सोही अनुपातमा बढ्छ भने त्यसलाई कस्तो विचरण भनिन्छ?',
     en: 'When an increase in one quantity causes a proportional increase in another, what variation is it?',
     options: [
-      { key: 'A', label: 'प्रत्यक्ष विचरण (Direct Variation: y / x = k)' },
-      { key: 'B', label: 'अप्रत्यक्ष विचरण (Indirect Variation: x × y = k)' },
-      { key: 'C', label: 'मिश्रित विचरण' },
-      { key: 'D', label: 'कुनै विचरण होइन' },
+      { key: 'A', label: 'Direct variation (y / x = k)' },
+      { key: 'B', label: 'Indirect variation (x × y = k)' },
+      { key: 'C', label: 'Mixed variation' },
+      { key: 'D', label: 'No variation' },
     ],
     answer: 'A',
   },
   {
-    np: 'कामदारको सङ्ख्या बढ्दा काम सक्न लाग्ने दिन घट्छ। यो कस्तो विचरणको उदाहरण हो?',
+    np: 'कामदारको सङ्ख्या बढ्दा काम सक्न लाग्ने days घट्छ। यो कस्तो विचरणको उदाहरण हो?',
     en: 'As the number of workers increases, the days required decreases. What type of variation is this?',
     options: [
-      { key: 'A', label: 'अप्रत्यक्ष विचरण (Indirect Variation)' },
-      { key: 'B', label: 'प्रत्यक्ष विचरण (Direct Variation)' },
-      { key: 'C', label: 'समानुपात होइन' },
-      { key: 'D', label: 'स्थिर विचरण' },
+      { key: 'A', label: 'Indirect variation' },
+      { key: 'B', label: 'Direct variation' },
+      { key: 'C', label: 'Not proportional' },
+      { key: 'D', label: 'Constant variation' },
     ],
     answer: 'A',
   },
   {
-    np: 'प्रत्यक्ष विचरण (Direct Variation) मा कुन सम्बन्ध सधैँ स्थिर (Constant) रहन्छ?',
+    np: 'Direct variation मा कुन सम्बन्ध सधैँ स्थिर (Constant) रहन्छ?',
     en: 'In Direct Variation, which relationship is always constant?',
     options: [
-      { key: 'A', label: 'अनुपात (y / x = k)' },
-      { key: 'B', label: 'गुणनफल (x × y = k)' },
-      { key: 'C', label: 'जोडफल (x + y = k)' },
-      { key: 'D', label: 'अन्तर (x - y = k)' },
+      { key: 'A', label: 'Ratio (y / x = k)' },
+      { key: 'B', label: 'Product (x × y = k)' },
+      { key: 'C', label: 'Sum (x + y = k)' },
+      { key: 'D', label: 'Difference (x - y = k)' },
     ],
     answer: 'A',
   },
   {
-    np: 'अप्रत्यक्ष विचरण (Indirect Variation) मा कुन सम्बन्ध सधैँ स्थिर (Constant) रहन्छ?',
+    np: 'Indirect variation मा कुन सम्बन्ध सधैँ स्थिर (Constant) रहन्छ?',
     en: 'In Indirect Variation, which relationship is always constant?',
     options: [
-      { key: 'A', label: 'गुणनफल (x × y = k)' },
-      { key: 'B', label: 'भागफल (y / x = k)' },
-      { key: 'C', label: 'घाताङ्क (x^y = k)' },
-      { key: 'D', label: 'प्रतिशत' },
+      { key: 'A', label: 'Product (x × y = k)' },
+      { key: 'B', label: 'Quotient (y / x = k)' },
+      { key: 'C', label: 'Exponent (x^y = k)' },
+      { key: 'D', label: 'Percentage' },
     ],
     answer: 'A',
   },
@@ -88,7 +88,7 @@ export const DirectIndirectVariationExplorer: React.FC<{ onBackToLibrary?: () =>
   const [classifierPairs, setClassifierPairs] = useState([
     { textNp: 'सामानको सङ्ख्या र तिनको जम्मा मूल्य', textEn: 'Quantity of items and their total cost', type: 'direct', userAns: null as string | null },
     { textNp: 'गाडीको गति र निश्चित दुरी पार गर्न लाग्ने समय', textEn: 'Speed of vehicle and time taken to cover fixed distance', type: 'indirect', userAns: null as string | null },
-    { textNp: 'कामदारको सङ्ख्या र काम सम्पन्न गर्न लाग्ने दिन', textEn: 'Number of workers and days to complete work', type: 'indirect', userAns: null as string | null },
+    { textNp: 'कामदारको सङ्ख्या र काम सम्पन्न गर्न लाग्ने days', textEn: 'Number of workers and days to complete work', type: 'indirect', userAns: null as string | null },
     { textNp: 'पेट्रोलको परिमाण र गाडीले गुड्ने दुरी', textEn: 'Quantity of petrol and distance traveled', type: 'direct', userAns: null as string | null },
   ]);
 
@@ -107,9 +107,9 @@ export const DirectIndirectVariationExplorer: React.FC<{ onBackToLibrary?: () =>
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'direct', np: '१. प्रत्यक्ष विचरण (Direct Variation)', en: '1. Direct Variation' },
-            { id: 'indirect', np: '२. अप्रत्यक्ष विचरण (Indirect Variation)', en: '2. Indirect Variation' },
-            { id: 'classifier', np: '३. विचरण वर्गीकरण चुनौती (Classifier Quiz)', en: '3. Variation Classifier' },
+            { id: 'direct', np: '1. Direct variation', en: '1. Direct Variation' },
+            { id: 'indirect', np: '2. Indirect variation', en: '2. Indirect Variation' },
+            { id: 'classifier', np: '3. विचरण वर्गीकरण चुनौती (Classifier Quiz)', en: '3. Variation Classifier' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -137,18 +137,18 @@ export const DirectIndirectVariationExplorer: React.FC<{ onBackToLibrary?: () =>
         {activeTab === 'direct' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('प्रत्यक्ष विचरण (Direct Variation): कापीको सङ्ख्या र मूल्य', 'Direct Variation: Copies vs Price')}
+              {L('Direct variation: कापीको सङ्ख्या र मूल्य', 'Direct Variation: Copies vs Price')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'कापीको सङ्ख्या बढ्दा मूल्य पनि बढ्छ, र सङ्ख्या घट्दा मूल्य पनि घट्छ। यहाँ मूल्य र सङ्ख्याको अनुपात (y / x) सधैँ स्थिर (रु ५०) रहन्छ।',
+                'कापीको सङ्ख्या बढ्दा मूल्य पनि बढ्छ, र सङ्ख्या घट्दा मूल्य पनि घट्छ। यहाँ मूल्य र सङ्ख्याको अनुपात (y / x) सधैँ स्थिर (Rs 50) रहन्छ।',
                 'As copy quantity increases, cost increases. The ratio of cost to quantity (y/x) remains constant (Rs 50).'
               )}
             </p>
 
             <div style={{ margin: '16px 0' }}>
               <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1', display: 'block', marginBottom: 4 }}>
-                {L('कापीको सङ्ख्या (Quantity - x): ', 'Copy Quantity (x): ')} {nbCount} वटा
+                {L('कापीको सङ्ख्या (Quantity - x): ', 'Copy Quantity (x): ')} {nbCount} pcs
               </label>
               <input
                 type="range"
@@ -169,7 +169,7 @@ export const DirectIndirectVariationExplorer: React.FC<{ onBackToLibrary?: () =>
                 <thead>
                   <tr style={{ background: '#F1F5F9' }}>
                     <th style={{ padding: 8, border: '1px solid #CBD5E1' }}>{L('कापी सङ्ख्या (x)', 'Copies (x)')}</th>
-                    <th style={{ padding: 8, border: '1px solid #CBD5E1' }}>{L('मूल्य रु (y)', 'Cost Rs (y)')}</th>
+                    <th style={{ padding: 8, border: '1px solid #CBD5E1' }}>{L('मूल्य Rs (y)', 'Cost Rs (y)')}</th>
                     <th style={{ padding: 8, border: '1px solid #CBD5E1' }}>{L('अनुपात y/x (k)', 'Ratio y/x (k)')}</th>
                   </tr>
                 </thead>
@@ -183,9 +183,9 @@ export const DirectIndirectVariationExplorer: React.FC<{ onBackToLibrary?: () =>
                       }}
                     >
                       <td style={{ padding: 8, border: '1px solid #CBD5E1' }}>{qty}</td>
-                      <td style={{ padding: 8, border: '1px solid #CBD5E1' }}>रु {qty * costPerNb}</td>
+                      <td style={{ padding: 8, border: '1px solid #CBD5E1' }}>Rs {qty * costPerNb}</td>
                       <td style={{ padding: 8, border: '1px solid #CBD5E1', color: '#059669' }}>
-                        {qty * costPerNb} / {qty} = <strong>५०</strong>
+                        {qty * costPerNb} / {qty} = <strong>50</strong>
                       </td>
                     </tr>
                   ))}
@@ -203,8 +203,8 @@ export const DirectIndirectVariationExplorer: React.FC<{ onBackToLibrary?: () =>
                   {/* Axes */}
                   <line x1="40" y1="150" x2="310" y2="150" stroke="#64748B" strokeWidth="2" />
                   <line x1="40" y1="20" x2="40" y2="150" stroke="#64748B" strokeWidth="2" />
-                  <text x="315" y="155" fontSize="11" fill="#475569">x (कापी)</text>
-                  <text x="40" y="15" fontSize="11" fill="#475569">y (रु)</text>
+                  <text x="315" y="155" fontSize="11" fill="#475569">x</text>
+                  <text x="40" y="15" fontSize="11" fill="#475569">y</text>
 
                   {/* Direct Proportional Line */}
                   <line x1="40" y1="150" x2="290" y2="30" stroke="#10B981" strokeWidth="3" />
@@ -217,7 +217,7 @@ export const DirectIndirectVariationExplorer: React.FC<{ onBackToLibrary?: () =>
                       <>
                         <circle cx={px} cy={py} r="6" fill="#059669" />
                         <text x={px + 8} y={py - 6} fontSize="12" fontWeight="bold" fill="#065F46">
-                          ({nbCount}, रु {totalNbCost})
+                          ({nbCount}, Rs {totalNbCost})
                         </text>
                       </>
                     );
@@ -232,18 +232,18 @@ export const DirectIndirectVariationExplorer: React.FC<{ onBackToLibrary?: () =>
         {activeTab === 'indirect' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('अप्रत्यक्ष विचरण (Indirect Variation): कामदार र लाग्ने दिन', 'Indirect Variation: Workers vs Days')}
+              {L('Indirect variation: कामदार र लाग्ने days', 'Indirect Variation: Workers vs Days')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'कामदारको सङ्ख्या बढ्दा काम सक्न लाग्ने दिन घट्छ, र कामदार घट्दा दिन बढ्छ। यहाँ दुई परिमाणको गुणनफल (x × y) सधैँ स्थिर (१२० श्रम-दिन) रहन्छ।',
+                'कामदारको सङ्ख्या बढ्दा काम सक्न लाग्ने days घट्छ, र कामदार घट्दा days बढ्छ। यहाँ दुई परिमाणको गुणनफल (x × y) सधैँ स्थिर (120 श्रम-days) रहन्छ।',
                 'As workers increase, days required decrease. The product (x × y) remains constant (120 man-days).'
               )}
             </p>
 
             <div style={{ margin: '16px 0' }}>
               <label style={{ fontSize: 13, fontWeight: 700, color: '#4338CA', display: 'block', marginBottom: 4 }}>
-                {L('कामदार सङ्ख्या (Workers - x): ', 'Workers (x): ')} {workers} जना
+                {L('कामदार सङ्ख्या (Workers - x): ', 'Workers (x): ')} {workers} people
               </label>
               <input
                 type="range"
@@ -273,7 +273,7 @@ export const DirectIndirectVariationExplorer: React.FC<{ onBackToLibrary?: () =>
                   {L('कामदार (Workers)', 'Workers')}
                 </span>
                 <div style={{ fontSize: 26, fontWeight: 800, color: '#3730A3', marginTop: 4 }}>
-                  {workers} जना
+                  {workers} people
                 </div>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 8 }}>
                   {Array.from({ length: Math.min(16, workers) }).map((_, i) => (
@@ -292,13 +292,13 @@ export const DirectIndirectVariationExplorer: React.FC<{ onBackToLibrary?: () =>
 
               <div style={{ background: '#FEF3C7', padding: 16, borderRadius: 10, border: '1px solid #FDE68A' }}>
                 <span style={{ fontSize: 12, fontWeight: 700, color: '#B45309' }}>
-                  {L('काम सक्न लाग्ने दिन (Days Needed)', 'Days Needed')}
+                  {L('काम सक्न लाग्ने days (Days Needed)', 'Days Needed')}
                 </span>
                 <div style={{ fontSize: 26, fontWeight: 800, color: '#92400E', marginTop: 4 }}>
-                  {daysNeeded.toFixed(1)} दिन
+                  {daysNeeded.toFixed(1)} days
                 </div>
                 <div style={{ fontSize: 12, color: '#78350F', marginTop: 4 }}>
-                  {L(`१२० ÷ ${workers} = ${daysNeeded.toFixed(1)} दिन`, `120 ÷ ${workers} = ${daysNeeded.toFixed(1)} days`)}
+                  {L(`120 ÷ ${workers} = ${daysNeeded.toFixed(1)} days`, `120 ÷ ${workers} = ${daysNeeded.toFixed(1)} days`)}
                 </div>
               </div>
             </div>
@@ -317,7 +317,7 @@ export const DirectIndirectVariationExplorer: React.FC<{ onBackToLibrary?: () =>
               }}
             >
               {L('स्थिर गुणनफल (Constant Product):', 'Constant Product:')} x × y = {workers} × {daysNeeded.toFixed(1)} ={' '}
-              <span style={{ color: '#047857', fontSize: 18 }}>१२० श्रम-दिन (Man-Days)</span>
+              <span style={{ color: '#047857', fontSize: 18 }}>120 man-days</span>
             </div>
           </div>
         )}

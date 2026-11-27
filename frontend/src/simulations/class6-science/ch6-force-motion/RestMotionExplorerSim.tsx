@@ -1,7 +1,7 @@
 /**
  * RestMotionExplorerSim.tsx
- * Simulation 15: 2D Rest and Relative Motion Explorer (विश्राम र सापेक्ष गति)
- * Grade 6 Science • Unit 6: Force and Motion (बल र गति)
+ * Simulation 15: 2D Rest and Relative Motion Explorer
+ * Grade 6 Science • Unit 6: Force and Motion
  *
  * 100% Native HTML5 Canvas 2D Interactive Kinematics Simulation.
  * Features:
@@ -25,7 +25,7 @@ export const RestMotionExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -153,7 +153,7 @@ export const RestMotionExplorerSim: React.FC<BaseSimulationProps> = ({
         ctx.textAlign = 'center';
         ctx.fillText(lang === 'ne' ? '👁️ बाटोमा उभिएको व्यक्ति' : '👁️ Roadside Observer', obsX, obsY + 16);
         ctx.fillStyle = '#a7f3d0';
-        ctx.fillText(lang === 'ne' ? '(स्थिर / v = 0)' : '(At Rest / v = 0)', obsX, obsY + 30);
+        ctx.fillText(lang === 'ne' ? '' : '(At Rest / v = 0)', obsX, obsY + 30);
 
         // Moving Passenger Bus (travels across road)
         const busX = ((scroll * 3) % (width + 300)) - 250;
@@ -227,7 +227,7 @@ export const RestMotionExplorerSim: React.FC<BaseSimulationProps> = ({
 
           ctx.fillStyle = '#22c55e';
           ctx.font = 'bold 12px sans-serif';
-          ctx.fillText(`v = +${busSpeedKmh} km/h (गतिशील)`, busX + busW / 2 + 40, busY - 26);
+          ctx.fillText(`v = +${busSpeedKmh} km/h`, busX + busW / 2 + 40, busY - 26);
         }
       }
 
@@ -317,7 +317,7 @@ export const RestMotionExplorerSim: React.FC<BaseSimulationProps> = ({
           ctx.fill();
 
           ctx.font = 'bold 12px sans-serif';
-          ctx.fillText(`v = -${busSpeedKmh} km/h (पछाडि दौडिरहेका रुखहरू)`, 600, 115);
+          ctx.fillText(`v = -${busSpeedKmh} km/h`, 600, 115);
         }
       }
 
@@ -364,7 +364,7 @@ export const RestMotionExplorerSim: React.FC<BaseSimulationProps> = ({
       titleNepali="विश्राम र सापेक्ष गति प्रयोगशाला"
       chapterNumber={6}
       chapterTitle="Unit 6: Force and Motion"
-      chapterTitleNepali="एकाइ ६: बल र गति"
+      chapterTitleNepali="एकाइ 6: बल र गति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -529,7 +529,7 @@ export const RestMotionExplorerSim: React.FC<BaseSimulationProps> = ({
           {/* POV Frame Selection Buttons */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. अवलोकनकर्ताको स्थान (Frame of Reference)' : '1. Frame of Reference'}
+              {lang === 'ne' ? '1. अवलोकनकर्ताको स्थान (Frame of Reference)' : '1. Frame of Reference'}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <button

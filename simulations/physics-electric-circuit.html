@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Ohm's Law & Electric Circuit · नेपाल डिजिटल शिक्षा</title>
+  <title>Ohm's Law & Electric Circuit · Nepal Digital Education</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -206,12 +206,11 @@
     <div class="brand">
       <span class="badge">Class 6–10 · Physics</span>
       <div>
-        <h1>Simple Electric Circuit & Ohm's Law (ओमको नियम)</h1>
+        <h1>Simple Electric Circuit & Ohm's Law</h1>
         <div class="subtitle">Nepal National Curriculum · Interactive Laboratory Simulation</div>
       </div>
     </div>
     <div class="actions">
-      <button class="btn" id="nepaliToggle" onclick="toggleLang()">🇳🇵 नेपाली / EN</button>
       <button class="btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
       <button class="btn btn-primary" onclick="launchSmartBoard()">🖥 Smart Board Mode</button>
     </div>
@@ -251,7 +250,7 @@
 
       <div class="meter-card">
         <div class="meter-box">
-          <div class="meter-lbl">Current (विद्युत प्रवाह)</div>
+          <div class="meter-lbl">Current</div>
           <div class="meter-num" id="currNum">1.20 A</div>
         </div>
         <div class="meter-box">
@@ -321,9 +320,9 @@
     function toggleLang() {
       isNepali = !isNepali;
       const t = isNepali ? {
-        volt: "ब्याट्री भोल्टेज (भोल्ट - V)",
-        res: "प्रतिरोध (ओम - Ω)",
-        curr: "विद्युत प्रवाह (एम्पियर - A)",
+        volt: "ब्याट्री भोल्टेज",
+        res: "प्रतिरोध",
+        curr: "विद्युत प्रवाह",
         theory: "<strong>ओमको नियम:</strong> स्थिर तापक्रममा, कुनै चालकबाट प्रवाहित हुने विद्युत प्रवाह (I) त्यसको दुई छेउबीचको सम्भावित भिन्नता (V) सँग प्रत्यक्ष समानुपातिक र प्रतिरोध (R) सँग व्युत्क्रमानुपातिक हुन्छ: I = V / R ।"
       } : {
         volt: "Battery Voltage (V)",

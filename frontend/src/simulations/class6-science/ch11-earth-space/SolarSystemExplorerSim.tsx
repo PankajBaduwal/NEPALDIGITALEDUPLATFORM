@@ -1,7 +1,7 @@
 /**
  * SolarSystemExplorerSim.tsx
- * Simulation 42: 2D Solar System Explorer (सौर्यमण्डल अन्वेषण)
- * Grade 6 Science • Unit 11: Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 42: 2D Solar System Explorer
+ * Grade 6 Science • Unit 11: Earth and Space
  *
  * Full 2D Interactive Solar System featuring:
  * 1. The Sun with glowing plasma corona
@@ -39,7 +39,7 @@ interface PlanetData {
 const PLANETS: PlanetData[] = [
   {
     id: 'mercury',
-    nameEn: 'Mercury (बुध)',
+    nameEn: 'Mercury',
     nameNe: 'बुध ग्रह (Mercury)',
     distAu: 0.39,
     orbitRx: 45,
@@ -48,14 +48,14 @@ const PLANETS: PlanetData[] = [
     speed: 4.15,
     color: '#64748b',
     periodEn: '88 Earth Days',
-    periodNe: '८८ दिन',
+    periodNe: '88 दिन',
     moons: 0,
     factEn: 'Closest planet to the Sun and smallest in our solar system. Has extreme temperatures (-180°C to 430°C).',
     factNe: 'सूर्यको सबैभन्दा नजिकको र सबैभन्दा सानो ग्रह। यहाँ दिउँसो अत्यधिक गर्मी र राति कडा जाडो हुन्छ।',
   },
   {
     id: 'venus',
-    nameEn: 'Venus (शुक्र)',
+    nameEn: 'Venus',
     nameNe: 'शुक्र ग्रह (Venus)',
     distAu: 0.72,
     orbitRx: 75,
@@ -64,14 +64,14 @@ const PLANETS: PlanetData[] = [
     speed: 1.62,
     color: '#facc15',
     periodEn: '225 Earth Days',
-    periodNe: '२२५ दिन',
+    periodNe: '225 दिन',
     moons: 0,
     factEn: 'Hottest planet (465°C) due to runaway CO2 greenhouse effect. Rotates in reverse (East to West)!',
-    factNe: 'सौर्यमण्डलको सबैभन्दा तातो ग्रह (४६५°C)। बाक्लो कार्बन डाइअक्साइडले गर्दा ग्रीनहाउस असर हुन्छ।',
+    factNe: 'सौर्यमण्डलको सबैभन्दा तातो ग्रह (465°C)। बाक्लो कार्बन डाइअक्साइडले गर्दा ग्रीनहाउस असर हुन्छ।',
   },
   {
     id: 'earth',
-    nameEn: 'Earth (पृथ्वी)',
+    nameEn: 'Earth',
     nameNe: 'पृथ्वी (Earth)',
     distAu: 1.0,
     orbitRx: 110,
@@ -80,14 +80,14 @@ const PLANETS: PlanetData[] = [
     speed: 1.0,
     color: '#0284c7',
     periodEn: '365.25 Days (1 Year)',
-    periodNe: '३६५.२५ दिन (१ वर्ष)',
+    periodNe: '365.25 दिन (1 वर्ष)',
     moons: 1,
     factEn: 'Our home oasis! The only known planet with liquid oceans, oxygen atmosphere, and life.',
     factNe: 'हाम्रो घर! तरल पानी, अक्सिजनयुक्त वायुमण्डल र जीवन भएको एकमात्र ज्ञात ग्रह।',
   },
   {
     id: 'mars',
-    nameEn: 'Mars (मङ्गल)',
+    nameEn: 'Mars',
     nameNe: 'मङ्गल ग्रह (Mars)',
     distAu: 1.52,
     orbitRx: 145,
@@ -96,14 +96,14 @@ const PLANETS: PlanetData[] = [
     speed: 0.53,
     color: '#ef4444',
     periodEn: '687 Earth Days',
-    periodNe: '६८७ दिन',
+    periodNe: '687 दिन',
     moons: 2,
     factEn: 'Known as the "Red Planet" due to iron oxide (rust) covering its surface. Hosts Olympus Mons volcano.',
     factNe: 'फलामको खिया (Iron Oxide) ले गर्दा रातो देखिने रातो ग्रह। यहाँ दुई साना चन्द्रमा छन्।',
   },
   {
     id: 'jupiter',
-    nameEn: 'Jupiter (बृहस्पति)',
+    nameEn: 'Jupiter',
     nameNe: 'बृहस्पति ग्रह (Jupiter)',
     distAu: 5.2,
     orbitRx: 195,
@@ -112,14 +112,14 @@ const PLANETS: PlanetData[] = [
     speed: 0.084,
     color: '#ea580c',
     periodEn: '11.86 Earth Years',
-    periodNe: '११.८६ वर्ष',
+    periodNe: '11.86 वर्ष',
     moons: 95,
     factEn: 'Largest planet in our solar system—over 1,300 Earths could fit inside! Features Great Red Spot storm.',
-    factNe: 'सौर्यमण्डलको सबैभन्दा ठूलो ग्रह। यस भित्र १,३०० वटा पृथ्वी अटाउन सक्छन्।',
+    factNe: 'सौर्यमण्डलको सबैभन्दा ठूलो ग्रह। यस भित्र 1,300 वटा पृथ्वी अटाउन सक्छन्।',
   },
   {
     id: 'saturn',
-    nameEn: 'Saturn (शनि)',
+    nameEn: 'Saturn',
     nameNe: 'शनि ग्रह (Saturn)',
     distAu: 9.58,
     orbitRx: 240,
@@ -128,7 +128,7 @@ const PLANETS: PlanetData[] = [
     speed: 0.034,
     color: '#eab308',
     periodEn: '29.45 Earth Years',
-    periodNe: '२९.४५ वर्ष',
+    periodNe: '29.45 वर्ष',
     moons: 146,
     factEn: 'Famous for its dazzling system of icy planetary rings. Has density lower than liquid water!',
     factNe: 'बरफ र चट्टानका सुन्दर चक्रहरू (Rings) का लागि प्रख्यात। यसको घनत्व पानी भन्दा पनि कम छ!',
@@ -136,7 +136,7 @@ const PLANETS: PlanetData[] = [
   },
   {
     id: 'uranus',
-    nameEn: 'Uranus (युरेनस)',
+    nameEn: 'Uranus',
     nameNe: 'युरेनस / अरुण ग्रह',
     distAu: 19.2,
     orbitRx: 285,
@@ -145,14 +145,14 @@ const PLANETS: PlanetData[] = [
     speed: 0.012,
     color: '#38bdf8',
     periodEn: '84 Earth Years',
-    periodNe: '८४ वर्ष',
+    periodNe: '84 वर्ष',
     moons: 28,
     factEn: 'Cyan ice giant that rolls around the Sun on its side with a dramatic 98-degree axial tilt.',
-    factNe: 'नीलो-हरियो बरफको ग्रह, जुन आफ्नो अक्षमा ९८° ढल्केर कोल्टे परेर सूर्यको परिक्रमण गर्छ।',
+    factNe: 'नीलो-हरियो बरफको ग्रह, जुन आफ्नो अक्षमा 98° ढल्केर कोल्टे परेर सूर्यको परिक्रमण गर्छ।',
   },
   {
     id: 'neptune',
-    nameEn: 'Neptune (वरुण)',
+    nameEn: 'Neptune',
     nameNe: 'वरुण ग्रह (Neptune)',
     distAu: 30.1,
     orbitRx: 330,
@@ -161,10 +161,10 @@ const PLANETS: PlanetData[] = [
     speed: 0.006,
     color: '#3b82f6',
     periodEn: '164.8 Earth Years',
-    periodNe: '१६४.८ वर्ष',
+    periodNe: '164.8 वर्ष',
     moons: 16,
     factEn: 'Most distant major planet. Deep azure blue ice giant with supersonic winds reaching 2,100 km/h!',
-    factNe: 'सूर्यबाट सबैभन्दा टाढाको ग्रह। यहाँ २,१०० कि.मी./घण्टाको तीव्र गतिको आँधी चल्छ।',
+    factNe: 'सूर्यबाट सबैभन्दा टाढाको ग्रह। यहाँ 2,100 कि.मी./घण्टाको तीव्र गतिको आँधी चल्छ।',
   },
 ];
 
@@ -172,7 +172,7 @@ export const SolarSystemExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -481,27 +481,27 @@ export const SolarSystemExplorerSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: Planetary Family' : '१. खोज: सौर्यमण्डलका सदस्य')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Keplerian Orbits' : '२. अन्वेषण: केप्लरको नियम')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Inner vs Outer' : '३. अवलोकन: भित्री र बाहिरी ग्रह')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Orbital Period' : '४. बुझाइ: परिक्रमण अवधि')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Solar System Quiz' : '५. चुनौती: सौर्यमण्डल प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: Planetary Family' : '1. खोज: सौर्यमण्डलका सदस्य')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Keplerian Orbits' : '2. अन्वेषण: केप्लरको नियम')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Inner vs Outer' : '3. अवलोकन: भित्री र बाहिरी ग्रह')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Orbital Period' : '4. बुझाइ: परिक्रमण अवधि')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Solar System Quiz' : '5. चुनौती: सौर्यमण्डल प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
               <p style={{ margin: 0, fontSize: '12px', color: '#64748b', lineHeight: '1.5' }}>
                 {stage === 'discover' && (lang === 'en'
                   ? 'Our solar system consists of 1 star (the Sun), 8 planets, over 200 moons, and millions of asteroids and comets.'
-                  : 'हाम्रो सौर्यमण्डलमा १ तारा (सूर्य), ८ ग्रहहरू, २०० भन्दा बढी उपग्रह (चन्द्रमा), र लाखौं क्षुद्रग्रहहरू छन्।')}
+                  : 'हाम्रो सौर्यमण्डलमा 1 तारा (सूर्य), 8 ग्रहहरू, 200 भन्दा बढी उपग्रह (चन्द्रमा), र लाखौं क्षुद्रग्रहहरू छन्।')}
                 {stage === 'explore' && (lang === 'en'
                   ? 'Notice Kepler’s Law: Planets closest to the Sun (Mercury) orbit blazing fast, while distant Neptune creeps slowly!'
                   : 'केप्लरको नियम हेर्नुहोस्: सूर्यको नजिकको बुध ग्रह निकै तीव्र गतिमा घुम्छ, तर टाढाको वरुण ग्रह निकै सुस्त घुम्छ!')}
                 {stage === 'observe' && (lang === 'en'
                   ? 'The 4 inner planets (Mercury to Mars) are rocky terrestrial worlds. The 4 outer planets (Jupiter to Neptune) are massive gas & ice giants.'
-                  : 'भित्री ४ ग्रहहरू (बुधदेखि मङ्गलसम्म) कडा चट्टानी हुन्; बाहिरी ४ ग्रहहरू (बृहस्पतिदेखि वरुणसम्म) विशाल ग्यास र बरफका पिण्ड हुन्।')}
+                  : 'भित्री 4 ग्रहहरू (बुधदेखि मङ्गलसम्म) कडा चट्टानी हुन्; बाहिरी 4 ग्रहहरू (बृहस्पतिदेखि वरुणसम्म) विशाल ग्यास र बरफका पिण्ड हुन्।')}
                 {stage === 'understand' && (lang === 'en'
                   ? 'One year on Neptune takes nearly 165 Earth years because of its colossal orbital circumference!'
-                  : 'वरुण ग्रहमा एक वर्ष हुन पृथ्वीको १६५ वर्ष लाग्छ किनभने यसको सूर्य वरिपरिको बाटो निकै विशाल छ!')}
+                  : 'वरुण ग्रहमा एक वर्ष हुन पृथ्वीको 165 वर्ष लाग्छ किनभने यसको सूर्य वरिपरिको बाटो निकै विशाल छ!')}
               </p>
             ) : (
               <div>
@@ -511,9 +511,9 @@ export const SolarSystemExplorerSim: React.FC<BaseSimulationProps> = ({
                     : 'हाम्रो सौर्यमण्डलको सबैभन्दा ठूलो ग्रह कुन हो?'}
                 </p>
                 {[
-                  { id: 1, en: 'Jupiter (बृहस्पति)', ne: 'बृहस्पति (Jupiter)' },
-                  { id: 2, en: 'Saturn (शनि)', ne: 'शनि (Saturn)' },
-                  { id: 3, en: 'Earth (पृथ्वी)', ne: 'पृथ्वी (Earth)' },
+                  { id: 1, en: 'Jupiter', ne: 'बृहस्पति (Jupiter)' },
+                  { id: 2, en: 'Saturn', ne: 'शनि (Saturn)' },
+                  { id: 3, en: 'Earth', ne: 'पृथ्वी (Earth)' },
                 ].map(opt => (
                   <button
                     key={opt.id}

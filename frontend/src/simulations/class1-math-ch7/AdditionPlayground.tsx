@@ -1,8 +1,8 @@
 /**
  * AdditionPlayground.tsx (Converted to 100% Pure 2D)
- * Simulation 01: Addition Playground (जोड्ने खेलमैदान)
- * Class 1 Mathematics - Chapter 7: Addition up to 10 (योगफल १० सम्म आउने जोड)
- * Nepal CDC Curriculum Aligned (मेरो गणित, कक्षा १)
+ * Simulation 01: Addition Playground
+ * Class 1 Mathematics - Chapter 7: Addition up to 10
+ * Nepal CDC Curriculum Aligned
  * 100% Pure 2D Vector & Canvas – Zero WebGL/Three.js.
  */
 import React, { useState } from 'react';
@@ -19,7 +19,7 @@ export const AdditionPlayground: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G1-CH7-01',
     chapter: 7,
-    titleNp: 'जोड्ने खेलमैदान (१० सम्मको जोड)',
+    titleNp: 'जोड्ने खेलमैदान (10 सम्मको जोड)',
     titleEn: 'Addition Playground (Up to 10)',
   });
 
@@ -29,41 +29,41 @@ export const AdditionPlayground: React.FC<Props> = ({ onBackToLibrary }) => {
 
   const questions: QuizQuestion[] = [
     {
-      np: '४ वटा सुन्तलामा ३ वटा सुन्तला थप्दा जम्मा कति हुन्छ?',
+      np: '4 वटा सुन्तलामा 3 वटा सुन्तला थप्दा जम्मा कति हुन्छ?',
       en: 'If you have 4 oranges and add 3 more, what is the total?',
       options: [
-        { key: '7', label: kit.t('७ (सात - Seven)', '7 (Seven)') },
-        { key: '6', label: kit.t('६ (छ - Six)', '6 (Six)') },
-        { key: '8', label: kit.t('८ (आठ - Eight)', '8 (Eight)') },
+        { key: '7', label: kit.t('7', '7 (Seven)') },
+        { key: '6', label: kit.t('6', '6 (Six)') },
+        { key: '8', label: kit.t('8', '8 (Eight)') },
       ],
       answer: '7',
     },
     {
-      np: '५ + २ = ?',
+      np: '5 + 2 = ?',
       en: '5 + 2 = ?',
       options: [
-        { key: '7', label: kit.t('७ (सात)', '7 (Seven)') },
-        { key: '6', label: kit.t('६ (छ)', '6 (Six)') },
-        { key: '8', label: kit.t('८ (आठ)', '8 (Eight)') },
+        { key: '7', label: kit.t('7', '7 (Seven)') },
+        { key: '6', label: kit.t('6', '6 (Six)') },
+        { key: '8', label: kit.t('8', '8 (Eight)') },
       ],
       answer: '7',
     },
     {
-      np: '६ मा कति जोड्दा १० हुन्छ? (६ + ___ = १०)',
+      np: '6 मा कति जोड्दा 10 हुन्छ? (6 + ___ = 10)',
       en: 'What number added to 6 equals 10? (6 + ___ = 10)',
       options: [
-        { key: '4', label: kit.t('४ (चार)', '4 (Four)') },
-        { key: '3', label: kit.t('३ (तीन)', '3 (Three)') },
-        { key: '5', label: kit.t('५ (पाँच)', '5 (Five)') },
+        { key: '4', label: kit.t('4', '4 (Four)') },
+        { key: '3', label: kit.t('3', '3 (Three)') },
+        { key: '5', label: kit.t('5', '5 (Five)') },
       ],
       answer: '4',
     },
     {
-      np: '० मा ८ जोड्दा कति हुन्छ? (० + ८ = ?)',
+      np: '0 मा 8 जोड्दा कति हुन्छ? (0 + 8 = ?)',
       en: 'What is 0 + 8 = ?',
       options: [
-        { key: '8', label: kit.t('८ (आठ)', '8 (Eight)') },
-        { key: '0', label: kit.t('० (शून्य)', '0 (Zero)') },
+        { key: '8', label: kit.t('8', '8 (Eight)') },
+        { key: '0', label: kit.t('0', '0 (Zero)') },
       ],
       answer: '8',
     },

@@ -1,5 +1,5 @@
 /**
- * Lesson 1 · Capacity (धारिता)
+ * Lesson 1 · Capacity
  * Pour and Count — fill a big jar with a small pitcher and count the pours; compare containers.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -78,10 +78,10 @@ export const PourAndCount: React.FC<Props> = ({ onBackToLibrary }) => {
 
   // Quiz Questions for Challenge Mode
   const data = useMemo(() => [
-    { cap: 4, item: 'जग (Jug)', qNp: 'यो जग भर्न ४ कप पानी लाग्छ भने जगको धारिता कति कप हो?', qEn: 'If it takes 4 cups to fill this jug, what is its capacity in cups?', ans: 4 },
-    { cap: 6, item: 'बाल्टिन (Small Bucket)', qNp: 'यो भाँडो भर्न ६ कप पानी खन्याइयो। यसको धारिता कति हो?', qEn: '6 cups of water were poured to fill this vessel. What is its capacity?', ans: 6 },
-    { cap: 3, item: 'बोतल (Bottle)', qNp: '३ कप पानीले बोतल पूरा भरिन्छ। बोतलको धारिता कति कप?', qEn: '3 cups fill the bottle completely. How many cups is its capacity?', ans: 3 },
-    { cap: 5, item: 'भाँडो (Pot)', qNp: '५ कप खन्याउँदा आधा भरियो भने पूरा भर्न कति कप लाग्ला?', qEn: 'If 5 cups fill half the pot, how many cups fill the whole pot?', ans: 10 },
+    { cap: 4, item: 'जग (Jug)', qNp: 'यो जग भर्न 4 कप पानी लाग्छ भने जगको धारिता कति कप हो?', qEn: 'If it takes 4 cups to fill this jug, what is its capacity in cups?', ans: 4 },
+    { cap: 6, item: 'बाल्टिन (Small Bucket)', qNp: 'यो भाँडो भर्न 6 कप पानी खन्याइयो। यसको धारिता कति हो?', qEn: '6 cups of water were poured to fill this vessel. What is its capacity?', ans: 6 },
+    { cap: 3, item: 'बोतल (Bottle)', qNp: '3 कप पानीले बोतल पूरा भरिन्छ। बोतलको धारिता कति कप?', qEn: '3 cups fill the bottle completely. How many cups is its capacity?', ans: 3 },
+    { cap: 5, item: 'भाँडो (Pot)', qNp: '5 कप खन्याउँदा आधा भरियो भने पूरा भर्न कति कप लाग्ला?', qEn: 'If 5 cups fill half the pot, how many cups fill the whole pot?', ans: 10 },
   ], []);
 
   const questions: QuizQuestion[] = data.map((d, i) => ({
@@ -157,7 +157,7 @@ export const PourAndCount: React.FC<Props> = ({ onBackToLibrary }) => {
       {view === 'FILL' ? (
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
           <CBtn color="#0284C7" disabled={isPouring || pours >= capacity} onClick={handlePour}>
-            💧 {kit.t('१ कप खन्याऔँ', 'Pour 1 Cup')}
+            💧 {kit.t('1 कप खन्याऔँ', 'Pour 1 Cup')}
           </CBtn>
           <CBtn color="#64748B" onClick={handleResetFill}>
             ↺ {kit.t('खाली गरौँ', 'Empty Jar')}
@@ -237,7 +237,7 @@ export const PourAndCount: React.FC<Props> = ({ onBackToLibrary }) => {
             {/* Small Pouring Cup */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
               <div style={{ fontSize: 14, fontWeight: 800, color: '#0369A1' }}>
-                {kit.t('१ कप (एकाइ)', '1 Unit Cup')}
+                {kit.t('1 कप (एकाइ)', '1 Unit Cup')}
               </div>
               <div
                 style={{

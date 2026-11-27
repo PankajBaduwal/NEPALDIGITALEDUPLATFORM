@@ -1,7 +1,7 @@
 /**
  * VirtualOfficeLabSim.tsx
- * Simulation 4: Interactive Virtual Office Laboratory (भर्चुअल कार्यालय प्रयोगशाला)
- * Grade 6 Science • Unit 2: Information & Communication Technology (सूचना तथा सञ्चार प्रविधि)
+ * Simulation 4: Interactive Virtual Office Laboratory
+ * Grade 6 Science • Unit 2: Information & Communication Technology
  *
  * Hands-on educational office suite:
  * 1. Word Processor: Text formatting (Bold, Italic), heading hierarchy, bullet points, inserting tables.
@@ -34,7 +34,7 @@ export const VirtualOfficeLabSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -53,11 +53,11 @@ export const VirtualOfficeLabSim: React.FC<BaseSimulationProps> = ({
   const slides = [
     {
       titleEn: 'Science & Technology Grade 6',
-      titleNe: 'विज्ञान तथा प्रविधि कक्षा ६',
+      titleNe: 'विज्ञान तथा प्रविधि कक्षा 6',
       bullet1En: 'Unit 1: The Scientific Method & Experiments',
-      bullet1Ne: 'पाठ १: वैज्ञानिक पद्धति र नाप',
+      bullet1Ne: 'पाठ 1: वैज्ञानिक पद्धति र नाप',
       bullet2En: 'Unit 2: Computer Hardware & Office Suites',
-      bullet2Ne: 'पाठ २: कम्प्युटर हार्डवेयर र सफ्टवेयर',
+      bullet2Ne: 'पाठ 2: कम्प्युटर हार्डवेयर र सफ्टवेयर',
     },
     {
       titleEn: 'Photosynthesis & Life Process',
@@ -487,7 +487,7 @@ export const VirtualOfficeLabSim: React.FC<BaseSimulationProps> = ({
 
           <div style={{ padding: '12px', borderRadius: '12px', background: 'rgba(255,255,255,0.04)', border: '1px solid #e2e8f0' }}>
             <div style={{ fontSize: '11px', fontWeight: 800, color: '#38bdf8', marginBottom: '4px' }}>
-              1. Word Processor (वर्ड प्रोसेसर):
+              1. Word Processor:
             </div>
             <p style={{ fontSize: '11px', color: '#475569', lineHeight: '1.5', margin: 0 }}>
               {lang === 'ne'
@@ -498,7 +498,7 @@ export const VirtualOfficeLabSim: React.FC<BaseSimulationProps> = ({
 
           <div style={{ padding: '12px', borderRadius: '12px', background: 'rgba(255,255,255,0.04)', border: '1px solid #e2e8f0' }}>
             <div style={{ fontSize: '11px', fontWeight: 800, color: '#fbbf24', marginBottom: '4px' }}>
-              2. Presentation (प्रिजेन्टेसन):
+              2. Presentation:
             </div>
             <p style={{ fontSize: '11px', color: '#475569', lineHeight: '1.5', margin: 0 }}>
               {lang === 'ne'
@@ -509,7 +509,7 @@ export const VirtualOfficeLabSim: React.FC<BaseSimulationProps> = ({
 
           <div style={{ padding: '12px', borderRadius: '12px', background: 'rgba(255,255,255,0.04)', border: '1px solid #e2e8f0' }}>
             <div style={{ fontSize: '11px', fontWeight: 800, color: '#6ee7b7', marginBottom: '4px' }}>
-              3. Spreadsheet (स्प्रेडसिट):
+              3. Spreadsheet:
             </div>
             <p style={{ fontSize: '11px', color: '#475569', lineHeight: '1.5', margin: 0 }}>
               {lang === 'ne'

@@ -20,13 +20,13 @@ interface ShapeDef {
 const PRESET_SHAPES: ShapeDef[] = [
   {
     type: 'point',
-    nameNp: 'बिन्दु P',
+    nameNp: 'Point P',
     nameEn: 'Point P',
     vertices: [{ name: 'P', x: 2, y: 1 }],
   },
   {
     type: 'segment',
-    nameNp: 'रेखाखण्ड AB',
+    nameNp: 'Line segment AB',
     nameEn: 'Line Segment AB',
     vertices: [
       { name: 'A', x: 1, y: 1 },
@@ -35,7 +35,7 @@ const PRESET_SHAPES: ShapeDef[] = [
   },
   {
     type: 'triangle',
-    nameNp: 'त्रिभुज ABC',
+    nameNp: 'Triangle ABC',
     nameEn: 'Triangle ABC',
     vertices: [
       { name: 'A', x: 1, y: 2 },
@@ -45,7 +45,7 @@ const PRESET_SHAPES: ShapeDef[] = [
   },
   {
     type: 'quadrilateral',
-    nameNp: 'चतुर्भुज ABCD',
+    nameNp: 'Quadrilateral ABCD',
     nameEn: 'Quadrilateral ABCD',
     vertices: [
       { name: 'A', x: 1, y: 1 },
@@ -59,38 +59,38 @@ const PRESET_SHAPES: ShapeDef[] = [
 const CHALLENGES = [
   {
     id: 1,
-    titleNp: 'चुनौती १: बिन्दु विस्थापन',
+    titleNp: 'Challenge 1: Translating a point',
     titleEn: 'Challenge 1: Point Translation',
     shape: PRESET_SHAPES[0],
     targetVector: { a: 4, b: 3 },
-    descNp: 'बिन्दु P(2, 1) लाई दायाँ 4 र माथि 3 विस्थापन गर्नुहोस्: T = (4, 3)',
+    descNp: 'Translate point P(2, 1) 4 right and 3 up: T = (4, 3)',
     descEn: 'Translate point P(2, 1) right by 4 and up by 3: T = (4, 3)',
   },
   {
     id: 2,
-    titleNp: 'चुनौती २: रेखाखण्डको विस्थापन',
+    titleNp: 'चुनौती 2: रेखाखण्डको विस्थापन',
     titleEn: 'Challenge 2: Segment Translation',
     shape: PRESET_SHAPES[1],
     targetVector: { a: -3, b: 2 },
-    descNp: 'रेखाखण्ड AB लाई बायाँ 3 र माथि 2 विस्थापन गर्नुहोस्: T = (-3, 2)',
+    descNp: 'Line segment AB लाई बायाँ 3 र Up 2 विस्थापन गर्नुहोस्: T = (-3, 2)',
     descEn: 'Translate segment AB left by 3 and up by 2: T = (-3, 2)',
   },
   {
     id: 3,
-    titleNp: 'चुनौती ३: त्रिभुजको विस्थापन',
+    titleNp: 'चुनौती 3: त्रिभुजको विस्थापन',
     titleEn: 'Challenge 3: Triangle Translation',
     shape: PRESET_SHAPES[2],
     targetVector: { a: 3, b: -2 },
-    descNp: 'त्रिभुज ABC लाई दायाँ 3 र तल 2 विस्थापन गर्नुहोस्: T = (3, -2)',
+    descNp: 'Triangle ABC लाई Right 3 र तल 2 विस्थापन गर्नुहोस्: T = (3, -2)',
     descEn: 'Translate triangle ABC right by 3 and down by 2: T = (3, -2)',
   },
   {
     id: 4,
-    titleNp: 'चुनौती ४: चतुर्भुजको विस्थापन',
+    titleNp: 'चुनौती 4: चतुर्भुजको विस्थापन',
     titleEn: 'Challenge 4: Quadrilateral Translation',
     shape: PRESET_SHAPES[3],
     targetVector: { a: -2, b: -3 },
-    descNp: 'चतुर्भुज ABCD लाई बायाँ 2 र तल 3 विस्थापन गर्नुहोस्: T = (-2, -3)',
+    descNp: 'Quadrilateral ABCD लाई बायाँ 2 र तल 3 विस्थापन गर्नुहोस्: T = (-2, -3)',
     descEn: 'Translate quadrilateral ABCD left by 2 and down by 3: T = (-2, -3)',
   },
 ];
@@ -100,15 +100,15 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'विस्थापन (Translation) गर्दा कुनै वस्तुको कुन गुण परिवर्तन हुँदैन?',
     en: 'Which property of an object does NOT change during translation?',
     options: [
-      { key: 'A', label: 'आकार, नाप र अभिमुखिकरण (Shape, size, and orientation)' },
-      { key: 'B', label: 'स्थान मात्र (Only position)' },
-      { key: 'C', label: 'क्षेत्रफल (Area)' },
-      { key: 'D', label: 'माथिका सबै स्थिर रहन्छन् (All remain invariant)' },
+      { key: 'A', label: 'Shape, size and orientation' },
+      { key: 'B', label: 'Position only' },
+      { key: 'C', label: 'Area' },
+      { key: 'D', label: 'All of the above stay unchanged' },
     ],
     answer: 'D',
   },
   {
-    np: 'यदि विस्थापन भेक्टर T = (3, -4) भए, बिन्दु P(2, 5) को प्रतिबिम्ब P\' कति हुन्छ?',
+    np: 'यदि विस्थापन भेक्टर T = (3, -4) भए, Point P(2, 5) को प्रतिबिम्ब P\' कति हुन्छ?',
     en: 'If translation vector T = (3, -4), what are the coordinates of image P\' for P(2, 5)?',
     options: [
       { key: 'A', label: "(5, 1) — P'(2+3, 5-4)" },
@@ -122,10 +122,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'विस्थापन भेक्टर T = (-5, 0) ले वस्तुलाई कता लैजान्छ?',
     en: 'Where does the translation vector T = (-5, 0) shift the object?',
     options: [
-      { key: 'A', label: '५ एकाइ दायाँ (5 units right)' },
-      { key: 'B', label: '५ एकाइ बायाँ (5 units left horizontally)' },
-      { key: 'C', label: '५ एकाइ माथि (5 units up)' },
-      { key: 'D', label: '५ एकाइ तल (5 units down)' },
+      { key: 'A', label: '5 units right' },
+      { key: 'B', label: '5 units left horizontally' },
+      { key: 'C', label: '5 units up' },
+      { key: 'D', label: '5 units down' },
     ],
     answer: 'B',
   },
@@ -245,7 +245,7 @@ export const TranslationMotionLab: React.FC<{
             activeTab === 'explore' ? 'bg-indigo-600 text-white shadow' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          🔍 अन्वेषण प्रयोगशाला (Explorer)
+          🔍 Explorer lab
         </button>
         <button
           onClick={() => setActiveTab('step')}
@@ -253,7 +253,7 @@ export const TranslationMotionLab: React.FC<{
             activeTab === 'step' ? 'bg-indigo-600 text-white shadow' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          🚶 चरणबद्ध विस्थापन (Step-by-Step)
+          🚶 Step-by-step translation
         </button>
         <button
           onClick={() => setActiveTab('challenge')}
@@ -261,7 +261,7 @@ export const TranslationMotionLab: React.FC<{
             activeTab === 'challenge' ? 'bg-indigo-600 text-white shadow' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          🎯 विस्थापन चुनौती (Challenges)
+          🎯 Translation challenges
         </button>
       </div>
 
@@ -419,15 +419,15 @@ export const TranslationMotionLab: React.FC<{
             <div className="flex flex-wrap gap-4 mt-3 text-xs font-semibold text-slate-700">
               <span className="flex items-center gap-1.5">
                 <span className="w-3.5 h-3.5 rounded-full bg-blue-600 inline-block"></span>
-                मूल वस्तु (Original Object)
+                Original object
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-3.5 h-3.5 rounded-full bg-emerald-600 inline-block"></span>
-                प्रतिबिम्ब (Image Object)
+                Image object
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-5 h-0.5 border-t-2 border-purple-500 border-dashed inline-block"></span>
-                विस्थापन भेक्टर (Translation Vector $\vec{'{T}'}$)
+                Translation vector ( $\vec{'{T}'}$)
               </span>
             </div>
           </div>
@@ -436,7 +436,7 @@ export const TranslationMotionLab: React.FC<{
           <div className="lg:col-span-4 space-y-4">
             <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-4 shadow-sm">
               <h3 className="font-bold text-indigo-900 mb-2 text-sm flex items-center justify-between">
-                <span>आकृति छनोट (Select Shape)</span>
+                <span>Select shape</span>
                 <span className="text-xs bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded">
                   {currentShape.nameNp}
                 </span>
@@ -461,13 +461,13 @@ export const TranslationMotionLab: React.FC<{
             {/* Translation Vector Vector Controls */}
             <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm space-y-4">
               <h3 className="font-bold text-slate-800 text-sm">
-                विस्थापन भेक्टर नियन्त्रण (Vector Controls)
+                Vector controls
               </h3>
 
               {/* Horizontal translation (a) */}
               <div>
                 <div className="flex justify-between text-xs font-semibold mb-1">
-                  <span className="text-slate-700">तेर्सो विस्थापन $\Delta x = a$ ({vectorA >= 0 ? 'दायाँ' : 'बायाँ'}):</span>
+                  <span className="text-slate-700">Horizontal translation $\Delta x = a$ ({vectorA >= 0 ? 'Right' : 'बायाँ'}):</span>
                   <span className="text-indigo-700 font-bold">{vectorA >= 0 ? `+${vectorA}` : vectorA}</span>
                 </div>
                 <input
@@ -480,16 +480,16 @@ export const TranslationMotionLab: React.FC<{
                   className="w-full accent-indigo-600 cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] text-slate-400">
-                  <span>-6 (बायाँ)</span>
+                  <span>-6</span>
                   <span>0</span>
-                  <span>+6 (दायाँ)</span>
+                  <span>+6</span>
                 </div>
               </div>
 
               {/* Vertical translation (b) */}
               <div>
                 <div className="flex justify-between text-xs font-semibold mb-1">
-                  <span className="text-slate-700">ठाडो विस्थापन $\Delta y = b$ ({vectorB >= 0 ? 'माथि' : 'तल'}):</span>
+                  <span className="text-slate-700">Vertical translation $\Delta y = b$ ({vectorB >= 0 ? 'Up' : 'तल'}):</span>
                   <span className="text-indigo-700 font-bold">{vectorB >= 0 ? `+${vectorB}` : vectorB}</span>
                 </div>
                 <input
@@ -502,9 +502,9 @@ export const TranslationMotionLab: React.FC<{
                   className="w-full accent-indigo-600 cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] text-slate-400">
-                  <span>-6 (तल)</span>
+                  <span>-6</span>
                   <span>0</span>
-                  <span>+6 (माथि)</span>
+                  <span>+6</span>
                 </div>
               </div>
 
@@ -514,25 +514,25 @@ export const TranslationMotionLab: React.FC<{
                   onClick={() => setVectorA((prev) => Math.max(-6, prev - 1))}
                   className="py-1 px-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs rounded font-medium border"
                 >
-                  ⬅ बायाँ (-1)
+                  ⬅ Left (-1)
                 </button>
                 <button
                   onClick={() => setVectorA((prev) => Math.min(6, prev + 1))}
                   className="py-1 px-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs rounded font-medium border"
                 >
-                  ➡ दायाँ (+1)
+                  ➡ Right (+1)
                 </button>
                 <button
                   onClick={() => setVectorB((prev) => Math.min(6, prev + 1))}
                   className="py-1 px-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs rounded font-medium border"
                 >
-                  ⬆ माथि (+1)
+                  ⬆ Up (+1)
                 </button>
                 <button
                   onClick={() => setVectorB((prev) => Math.max(-6, prev - 1))}
                   className="py-1 px-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs rounded font-medium border"
                 >
-                  ⬇ तल (-1)
+                  ⬇ Down (-1)
                 </button>
               </div>
 
@@ -545,7 +545,7 @@ export const TranslationMotionLab: React.FC<{
                     onChange={(e) => setShowVectors(e.target.checked)}
                     className="accent-indigo-600"
                   />
-                  <span>भेक्टर रेखा (Vectors)</span>
+                  <span>Vector lines</span>
                 </label>
                 <label className="flex items-center gap-1.5 cursor-pointer">
                   <input
@@ -554,7 +554,7 @@ export const TranslationMotionLab: React.FC<{
                     onChange={(e) => setShowCoords(e.target.checked)}
                     className="accent-indigo-600"
                   />
-                  <span>निर्देशाङ्क देखाउनुहोस्</span>
+                  <span>Show coordinates</span>
                 </label>
               </div>
             </div>
@@ -562,7 +562,7 @@ export const TranslationMotionLab: React.FC<{
             {/* Formula & Calculation Box */}
             <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 shadow-sm">
               <h3 className="font-bold text-emerald-900 text-xs uppercase tracking-wider mb-2">
-                गणितीय सूत्र (Transformation Rule)
+                Transformation rule
               </h3>
               <div className="p-2 bg-white rounded border border-emerald-300 font-mono text-center text-sm font-bold text-emerald-800 mb-3">
                 P(x, y) <span className="text-slate-400">→</span> P'(x + {vectorA}, y + {vectorB})
@@ -642,9 +642,9 @@ export const TranslationMotionLab: React.FC<{
 
           <div className="lg:col-span-4 space-y-4">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-              <h3 className="font-bold text-amber-900 mb-2 text-sm">२-चरण विस्थापन प्रक्रिया</h3>
+              <h3 className="font-bold text-amber-900 mb-2 text-sm">2-step translation process</h3>
               <p className="text-xs text-amber-800 leading-relaxed mb-4">
-                विस्थापनलाई सजिलैसँग बुझ्न पहिले क्षितिज (X-अक्ष) समानान्तर सार्ने र त्यसपछि ठाडो (Y-अक्ष) समानान्तर सार्ने गरिन्छ।
+                To understand translation easily, we first move parallel to the horizontal (X-axis) and then parallel to the vertical (Y-axis).
               </p>
 
               <div className="space-y-2">
@@ -654,7 +654,7 @@ export const TranslationMotionLab: React.FC<{
                     stepPhase === 0 ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-700'
                   }`}
                 >
-                  चरण ०: मूल स्थिति (Initial Position)
+                  Step 0: Initial position
                 </button>
                 <button
                   onClick={() => setStepPhase(1)}
@@ -662,9 +662,9 @@ export const TranslationMotionLab: React.FC<{
                     stepPhase === 1 ? 'bg-amber-500 text-white border-amber-500' : 'bg-white text-slate-700'
                   }`}
                 >
-                  चरण १: तेर्सो विस्थापन ($\Delta x = {vectorA >= 0 ? `+${vectorA}` : vectorA}$)
+                  Step 1: Horizontal translation ($\Delta x = {vectorA >= 0 ? `+${vectorA}` : vectorA}$)
                   <div className="text-[11px] font-normal opacity-90 mt-0.5">
-                    {vectorA >= 0 ? `${vectorA} एकाइ दायाँ` : `${Math.abs(vectorA)} एकाइ बायाँ`} सर्छ
+                    {vectorA >= 0 ? `${vectorA} units right` : `${Math.abs(vectorA)} units left`} moves
                   </div>
                 </button>
                 <button
@@ -673,21 +673,21 @@ export const TranslationMotionLab: React.FC<{
                     stepPhase === 2 ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-slate-700'
                   }`}
                 >
-                  चरण २: ठाडो विस्थापन ($\Delta y = {vectorB >= 0 ? `+${vectorB}` : vectorB}$)
+                  Step 2: Vertical translation ($\Delta y = {vectorB >= 0 ? `+${vectorB}` : vectorB}$)
                   <div className="text-[11px] font-normal opacity-90 mt-0.5">
-                    {vectorB >= 0 ? `${vectorB} एकाइ माथि` : `${Math.abs(vectorB)} एकाइ तल`} सर्छ
+                    {vectorB >= 0 ? `${vectorB} units up` : `${Math.abs(vectorB)} units down`} moves
                   </div>
                 </button>
               </div>
             </div>
 
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-xs text-blue-900 leading-relaxed">
-              <span className="font-bold">✨ अक्षुण्ण गुण (Invariant Properties):</span>
+              <span className="font-bold">✨ Invariant properties:</span>
               <ul className="list-disc list-inside mt-2 space-y-1">
-                <li>भुजाहरूको लम्बाइ बराबर रहन्छ (Side lengths preserved).</li>
-                <li>कोणहरूको नाप बराबर रहन्छ (Angle measures preserved).</li>
-                <li>आकृति घुम्दैन वा उल्टिँदैन (Orientation preserved).</li>
-                <li>प्रतिबिम्ब र मूल आकृति अनुरुप हुन्छन् ($\Delta ABC \cong \Delta A'B'C'$).</li>
+                <li>Side lengths are preserved.</li>
+                <li>Angle measures are preserved.</li>
+                <li>The shape does not rotate or flip (orientation preserved).</li>
+                <li>The image and the original shape are congruent ($\Delta ABC \cong \Delta A'B'C'$).</li>
               </ul>
             </div>
           </div>
@@ -748,7 +748,7 @@ export const TranslationMotionLab: React.FC<{
               <div className="space-y-3 bg-white p-3 rounded-lg border border-purple-200">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    तेर्सो विस्थापन $\Delta x = a$: {userVectorA}
+                    Horizontal translation $\Delta x = a$: {userVectorA}
                   </label>
                   <input
                     type="range"
@@ -765,7 +765,7 @@ export const TranslationMotionLab: React.FC<{
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    ठाडो विस्थापन $\Delta y = b$: {userVectorB}
+                    Vertical translation $\Delta y = b$: {userVectorB}
                   </label>
                   <input
                     type="range"
@@ -786,7 +786,7 @@ export const TranslationMotionLab: React.FC<{
                   onClick={handleCheckChallenge}
                   className="flex-1 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg text-xs shadow transition-all"
                 >
-                  जाँच गर्नुहोस् (Check)
+                  Check
                 </button>
                 {challengeSolved && (
                   <button

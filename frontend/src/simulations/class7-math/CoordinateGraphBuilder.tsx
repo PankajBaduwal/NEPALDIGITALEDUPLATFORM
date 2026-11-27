@@ -1,6 +1,6 @@
 /**
  * CoordinateGraphBuilder.tsx
- * Grade 7 Mathematics – Lesson 12: EQUATION, INEQUALITY AND GRAPH (समीकरण, असमानता र ग्राफ)
+ * Grade 7 Mathematics – Lesson 12: EQUATION, INEQUALITY AND GRAPH
  * Simulation 3: Coordinate Graph and Linear Graph Builder (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 180-186)
  */
@@ -12,24 +12,24 @@ import { Grid, TrendingUp, Compass, ArrowRight, Check } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'बिन्दु B(-३, ५) कार्तेसियन समतल (Cartesian plane) को कुन चतुर्थांश (Quadrant) मा पर्छ?',
+    np: 'बिन्दु B(-3, 5) कार्तेसियन समतल (Cartesian plane) को कुन चतुर्थांश (Quadrant) मा पर्छ?',
     en: 'In which quadrant does point B(-3, 5) lie on the Cartesian plane?',
     options: [
-      { key: 'A', label: 'दोस्रो चतुर्थांश (Second Quadrant: -, +)' },
-      { key: 'B', label: 'पहिलो चतुर्थांश (+, +)' },
-      { key: 'C', label: 'तेस्रो चतुर्थांश (-, -)' },
-      { key: 'D', label: 'चौथो चतुर्थांश (+, -)' },
+      { key: 'A', label: 'Second quadrant (-, +)' },
+      { key: 'B', label: 'First quadrant (+, +)' },
+      { key: 'C', label: 'Third quadrant (-, -)' },
+      { key: 'D', label: 'Fourth quadrant (+, -)' },
     ],
     answer: 'A',
   },
   {
-    np: 'समीकरण ३x + y = ६ (y = ६ - ३x) मा यदि x = १ भए y को मान कति हुन्छ?',
+    np: 'समीकरण 3x + y = 6 (y = 6 - 3x) मा यदि x = 1 भए y को मान कति हुन्छ?',
     en: 'In equation 3x + y = 6 (y = 6 - 3x), if x = 1, what is y?',
     options: [
-      { key: 'A', label: '३ [ y = ६ - ३(१) = ३ ]' },
-      { key: 'B', label: '०' },
-      { key: 'C', label: '६' },
-      { key: 'D', label: '-३' },
+      { key: 'A', label: '3 [ y = 6 - 3(1) = 3 ]' },
+      { key: 'B', label: '0' },
+      { key: 'C', label: '6' },
+      { key: 'D', label: '-3' },
     ],
     answer: 'A',
   },
@@ -37,21 +37,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समीकरणको ग्राफ बनाउँदा प्राप्त हुने सरल रेखा कुन अक्षहरूमा आधारित हुन्छ?',
     en: 'On which axes is a linear equation graph drawn?',
     options: [
-      { key: 'A', label: 'तेर्सो X-अक्ष र ठाडो Y-अक्ष (Horizontal X-axis and Vertical Y-axis)' },
-      { key: 'B', label: 'X-अक्ष मात्र' },
-      { key: 'C', label: 'Z-अक्ष' },
-      { key: 'D', label: 'कोण रेखा' },
+      { key: 'A', label: 'Horizontal X-axis and vertical Y-axis' },
+      { key: 'B', label: 'X-axis only' },
+      { key: 'C', label: 'Z-axis' },
+      { key: 'D', label: 'Angle line' },
     ],
     answer: 'A',
   },
   {
-    np: 'मूलबिन्दु (Origin) का निर्देशाङ्कहरू के हुन्?',
+    np: 'मूलPoint (Origin) का निर्देशाङ्कहरू के हुन्?',
     en: 'What are the coordinates of the origin?',
     options: [
-      { key: 'A', label: '(०, ०)' },
-      { key: 'B', label: '(१, १)' },
-      { key: 'C', label: '(०, १)' },
-      { key: 'D', label: '(१, ०)' },
+      { key: 'A', label: '(0, 0)' },
+      { key: 'B', label: '(1, 1)' },
+      { key: 'C', label: '(0, 1)' },
+      { key: 'D', label: '(1, 0)' },
     ],
     answer: 'A',
   },
@@ -108,8 +108,8 @@ export const CoordinateGraphBuilder: React.FC<{ onBackToLibrary?: () => void; on
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'quadrants', np: '१. चार चतुर्थांश र बिन्दुहरू (Quadrants)', en: '1. Quadrants & Points' },
-            { id: 'linear-graph', np: '२. रेखीय समीकरण ग्राफ: 3x + y = 6', en: '2. Linear Graph (3x+y=6)' },
+            { id: 'quadrants', np: '1. चार चतुर्थांश र बिन्दुहरू (Quadrants)', en: '1. Quadrants & Points' },
+            { id: 'linear-graph', np: '2. रेखीय समीकरण ग्राफ: 3x + y = 6', en: '2. Linear Graph (3x+y=6)' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -141,14 +141,14 @@ export const CoordinateGraphBuilder: React.FC<{ onBackToLibrary?: () => void; on
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'स्लाइडर सारेर बिन्दु (x, y) को स्थान परिवर्तन गर्नुहोस् र चतुर्थांश पहिचान गर्नुहोस्:',
+                'स्लाइडर सारेर Point (x, y) को स्थान परिवर्तन गर्नुहोस् र चतुर्थांश पहिचान गर्नुहोस्:',
                 'Move sliders to change (x, y) and observe the quadrant:'
               )}
             </p>
 
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '16px 0' }}>
               <div>
-                <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1' }}>x-निर्देशाङ्क: {pointX}</label>
+                <label style={{ fontSize: 13, fontWeight: 700, color: '#0369A1' }}>x-coordinate: {pointX}</label>
                 <input
                   type="range"
                   min={-5}
@@ -163,7 +163,7 @@ export const CoordinateGraphBuilder: React.FC<{ onBackToLibrary?: () => void; on
               </div>
 
               <div>
-                <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D' }}>y-निर्देशाङ्क: {pointY}</label>
+                <label style={{ fontSize: 13, fontWeight: 700, color: '#15803D' }}>y-coordinate: {pointY}</label>
                 <input
                   type="range"
                   min={-5}
@@ -239,7 +239,7 @@ export const CoordinateGraphBuilder: React.FC<{ onBackToLibrary?: () => void; on
                 textAlign: 'center',
               }}
             >
-              बिन्दु ({pointX}, {pointY}) ➜ {getQuadrant(pointX, pointY)}
+              Point ({pointX}, {pointY}) ➜ {getQuadrant(pointX, pointY)}
             </div>
           </div>
         )}
@@ -248,11 +248,11 @@ export const CoordinateGraphBuilder: React.FC<{ onBackToLibrary?: () => void; on
         {activeTab === 'linear-graph' && (
           <div style={{ background: '#FFF', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#187C68' }}>
-              {L('रेखीय समीकरणको ग्राफ: ३x + y = ६ (y = ६ - ३x)', 'Linear Equation Graph: 3x + y = 6')}
+              {L('रेखीय समीकरणको ग्राफ: 3x + y = 6 (y = 6 - 3x)', 'Linear Equation Graph: 3x + y = 6')}
             </h3>
             <p style={{ color: '#64748B', fontSize: 14 }}>
               {L(
-                'पाठ्यपुस्तक पृष्ठ १८५ को उदाहरण: मान तालिका बनाई बिन्दुहरू जोडेर सीधा रेखा खिचौँ:',
+                'पाठ्यपुस्तक पृष्ठ 185 को उदाहरण: मान तालिका बनाई बिन्दुहरू जोडेर सीधा रेखा खिचौँ:',
                 'Textbook Page 185 Example: Table of values plotted to form a straight line:'
               )}
             </p>
@@ -315,7 +315,7 @@ export const CoordinateGraphBuilder: React.FC<{ onBackToLibrary?: () => void; on
             </div>
 
             <div style={{ textAlign: 'center', fontSize: 14, fontWeight: 700, color: '#1E40AF' }}>
-              रेखीय समीकरणको ग्राफ सधैँ एउटा सीधा रेखा (Straight Line) हुन्छ।
+              The graph of a linear equation is always a straight line.
             </div>
           </div>
         )}

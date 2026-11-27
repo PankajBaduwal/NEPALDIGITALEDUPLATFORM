@@ -1,7 +1,7 @@
 /**
  * ExpressionSimplificationIndicesChallenge.tsx
- * Grade 8 Mathematics – Unit 9: INDICES (घाताङ्क)
- * Simulation 3: Expression Simplification & Indices Challenge (व्यञ्जक सरलीकरण र घाताङ्क चुनौती)
+ * Grade 8 Mathematics – Unit 9: INDICES
+ * Simulation 3: Expression Simplification & Indices Challenge
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 9)
  */
 import React, { useState } from 'react';
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'x³ × xᐞ = x⁸ भए खाली कोठा (ᐞ) मा कुन घाताङ्क हुन्छ?',
     en: 'In x³ × xᐞ = x⁸, what is the missing exponent?',
     options: [
-      { key: 'A', label: '५ [ ३ + ५ = ८ ]' },
-      { key: 'B', label: '२४' },
-      { key: 'C', label: '२.६' },
-      { key: 'D', label: '११' },
+      { key: 'A', label: '5 [ 3 + 5 = 8 ]' },
+      { key: 'B', label: '24' },
+      { key: 'C', label: '2.6' },
+      { key: 'D', label: '11' },
     ],
     answer: 'A',
   },
@@ -138,7 +138,7 @@ export const ExpressionSimplificationIndicesChallenge: React.FC<{
             }`}
           >
             <Calculator className="w-4 h-4" />
-            {L('१. गुणाङ्क र घाताङ्क सरलीकरण (Coefficients & Powers)', '1. Coefficients & Powers')}
+            {L('1. गुणाङ्क र घाताङ्क सरलीकरण (Coefficients & Powers)', '1. Coefficients & Powers')}
           </button>
           <button
             onClick={() => setActiveTab('missing_exp')}
@@ -147,7 +147,7 @@ export const ExpressionSimplificationIndicesChallenge: React.FC<{
             }`}
           >
             <Puzzle className="w-4 h-4" />
-            {L('२. छुटेको घाताङ्क पत्ता लगाउने (Missing Exponent Puzzle)', '2. Missing Exponent')}
+            {L('2. छुटेको घाताङ्क पत्ता लगाउने (Missing Exponent Puzzle)', '2. Missing Exponent')}
           </button>
         </div>
 
@@ -170,14 +170,14 @@ export const ExpressionSimplificationIndicesChallenge: React.FC<{
               {/* Step Breakdown Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-slate-800 p-5 rounded-2xl border border-slate-700 space-y-2">
-                  <div className="text-xs font-bold text-sky-400 uppercase">{L('चरण १: संख्यात्मक गुणाङ्कको भाग', 'Step 1: Divide Coefficients')}</div>
+                  <div className="text-xs font-bold text-sky-400 uppercase">{L('चरण 1: संख्यात्मक गुणाङ्कको भाग', 'Step 1: Divide Coefficients')}</div>
                   <div className="text-xl font-bold font-mono text-white">
                     {toNp(coeffNum)} ÷ {toNp(coeffDen)} = <span className="text-emerald-400 font-black">{toNp(resCoeff)}</span>
                   </div>
                 </div>
 
                 <div className="bg-slate-800 p-5 rounded-2xl border border-slate-700 space-y-2">
-                  <div className="text-xs font-bold text-amber-400 uppercase">{L('चरण २: चलराशिको घाताङ्क घटाउ', 'Step 2: Subtract Powers')}</div>
+                  <div className="text-xs font-bold text-amber-400 uppercase">{L('चरण 2: चलराशिको घाताङ्क घटाउ', 'Step 2: Subtract Powers')}</div>
                   <div className="text-xl font-bold font-mono text-white">
                     x<sup>{toNp(powerNum)} - {toNp(powerDen)}</sup> = <span className="text-emerald-400 font-black">x<sup>{toNp(resPower)}</sup></span>
                   </div>
@@ -187,19 +187,19 @@ export const ExpressionSimplificationIndicesChallenge: React.FC<{
               {/* Sliders */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <label className="text-[11px] text-slate-300 block mb-1">अंश गुणाङ्क: {toNp(coeffNum)}</label>
+                  <label className="text-[11px] text-slate-300 block mb-1">Numerator coefficient: {toNp(coeffNum)}</label>
                   <input type="range" min="4" max="24" step="2" value={coeffNum} onChange={(e) => setCoeffNum(Number(e.target.value))} className="w-full accent-sky-500" />
                 </div>
                 <div>
-                  <label className="text-[11px] text-slate-300 block mb-1">हर गुणाङ्क: {toNp(coeffDen)}</label>
+                  <label className="text-[11px] text-slate-300 block mb-1">Denominator coefficient: {toNp(coeffDen)}</label>
                   <input type="range" min="1" max="6" value={coeffDen} onChange={(e) => setCoeffDen(Number(e.target.value))} className="w-full accent-sky-500" />
                 </div>
                 <div>
-                  <label className="text-[11px] text-slate-300 block mb-1">अंश घाताङ्क: {toNp(powerNum)}</label>
+                  <label className="text-[11px] text-slate-300 block mb-1">Numerator exponent: {toNp(powerNum)}</label>
                   <input type="range" min={powerDen} max="8" value={powerNum} onChange={(e) => setPowerNum(Number(e.target.value))} className="w-full accent-amber-500" />
                 </div>
                 <div>
-                  <label className="text-[11px] text-slate-300 block mb-1">हर घाताङ्क: {toNp(powerDen)}</label>
+                  <label className="text-[11px] text-slate-300 block mb-1">Denominator exponent: {toNp(powerDen)}</label>
                   <input type="range" min="1" max={powerNum} value={powerDen} onChange={(e) => setPowerDen(Number(e.target.value))} className="w-full accent-amber-500" />
                 </div>
               </div>

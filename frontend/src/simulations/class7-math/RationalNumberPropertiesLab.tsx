@@ -1,6 +1,6 @@
 /**
  * RationalNumberPropertiesLab.tsx
- * Grade 7 Mathematics – Lesson 4: RATIONAL NUMBER (परिमेय सङ्ख्या)
+ * Grade 7 Mathematics – Lesson 4: RATIONAL NUMBER
  * Simulation 6: Rational Number Properties Lab (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 70-73)
  */
@@ -15,21 +15,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'परिमेय सङ्ख्यामा गुणनको तत्समक (Multiplicative Identity) कुन हो?',
     en: 'What is the multiplicative identity for rational numbers?',
     options: [
-      { key: 'A', label: '१ (किनभने a × १ = a)' },
-      { key: 'B', label: '०' },
-      { key: 'C', label: '-१' },
-      { key: 'D', label: '२' },
+      { key: 'A', label: '1' },
+      { key: 'B', label: '0' },
+      { key: 'C', label: '-1' },
+      { key: 'D', label: '2' },
     ],
     answer: 'A',
   },
   {
-    np: '२/३ को गुणन प्रतिलोम (Multiplicative Inverse / Reciprocal) कति हुन्छ?',
+    np: '2/3 को गुणन प्रतिलोम (Multiplicative Inverse / Reciprocal) कति हुन्छ?',
     en: 'What is the multiplicative inverse (reciprocal) of 2/3?',
     options: [
-      { key: 'A', label: '३/२ (किनभने २/३ × ३/२ = १)' },
-      { key: 'B', label: '-२/३' },
-      { key: 'C', label: '१' },
-      { key: 'D', label: '०' },
+      { key: 'A', label: '3/2' },
+      { key: 'B', label: '-2/3' },
+      { key: 'C', label: '1' },
+      { key: 'D', label: '0' },
     ],
     answer: 'A',
   },
@@ -37,21 +37,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुन सङ्ख्याको गुणन प्रतिलोम (Multiplicative Inverse) हुँदैन?',
     en: 'Which number does NOT have a multiplicative inverse?',
     options: [
-      { key: 'A', label: 'शून्य (०)' },
-      { key: 'B', label: '१' },
-      { key: 'C', label: '-१' },
-      { key: 'D', label: '२' },
+      { key: 'A', label: 'Zero (0)' },
+      { key: 'B', label: '1' },
+      { key: 'C', label: '-1' },
+      { key: 'D', label: '2' },
     ],
     answer: 'A',
   },
   {
-    np: '(१/२ + १/३) + १/४ = १/२ + (१/३ + १/४) कुन गुण हो?',
+    np: '(1/2 + 1/3) + 1/4 = 1/2 + (1/3 + 1/4) कुन गुण हो?',
     en: '(1/2 + 1/3) + 1/4 = 1/2 + (1/3 + 1/4) demonstrates which property?',
     options: [
-      { key: 'A', label: 'साहचर्य गुण (Associative Property)' },
-      { key: 'B', label: 'क्रमविनिमेय गुण' },
-      { key: 'C', label: 'संवृत गुण' },
-      { key: 'D', label: 'तत्समक गुण' },
+      { key: 'A', label: 'Associative property' },
+      { key: 'B', label: 'Commutative property' },
+      { key: 'C', label: 'Closure property' },
+      { key: 'D', label: 'Identity property' },
     ],
     answer: 'A',
   },
@@ -81,7 +81,7 @@ export const RationalNumberPropertiesLab: React.FC<{ onBackToLibrary?: () => voi
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'परिमेय सङ्ख्याका ५ मुख्य गुणहरू छन्: तत्समक, प्रतिलोम, क्रमविनिमेय, साहचर्य, र संवृत। शून्यको गुणन प्रतिलोम हुँदैन!',
+        'परिमेय सङ्ख्याका 5 मुख्य गुणहरू छन्: तत्समक, प्रतिलोम, क्रमविनिमेय, साहचर्य, र संवृत। शून्यको गुणन प्रतिलोम हुँदैन!',
         'Explore 5 key rational properties: Identity, Inverse, Commutative, Associative, and Closure. Note that 0 has no reciprocal!'
       )}
     >
@@ -89,11 +89,11 @@ export const RationalNumberPropertiesLab: React.FC<{ onBackToLibrary?: () => voi
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'identity', np: '१. तत्समक गुण (Identity: 0 & 1)', en: '1. Identity (0 & 1)' },
-            { id: 'inverse', np: '२. प्रतिलोम गुण (Inverse: + & ×)', en: '2. Inverses (+ & ×)' },
-            { id: 'commutative', np: '३. क्रमविनिमेय गुण (Commutative)', en: '3. Commutative' },
-            { id: 'associative', np: '४. साहचर्य गुण (Associative)', en: '4. Associative' },
-            { id: 'closure', np: '५. संवृत गुण (Closure)', en: '5. Closure' },
+            { id: 'identity', np: '1. Identity property (Identity: 0 & 1)', en: '1. Identity (0 & 1)' },
+            { id: 'inverse', np: '2. प्रतिलोम गुण (Inverse: + & ×)', en: '2. Inverses (+ & ×)' },
+            { id: 'commutative', np: '3. Commutative property (Commutative)', en: '3. Commutative' },
+            { id: 'associative', np: '4. साहचर्य गुण (Associative)', en: '4. Associative' },
+            { id: 'closure', np: '5. Closure property (Closure)', en: '5. Closure' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -123,34 +123,34 @@ export const RationalNumberPropertiesLab: React.FC<{ onBackToLibrary?: () => voi
         {activeTab === 'identity' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक गुण १ (पृष्ठ ७०)', 'Textbook Property 1 (Page 70)')}
+              {L('पाठ्यपुस्तक गुण 1', 'Textbook Property 1 (Page 70)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('तत्समक गुण (जोडको तत्समक ० र गुणनको तत्समक १)', 'Identity Property: 0 for Addition, 1 for Multiplication')}
+              {L('Identity property', 'Identity Property: 0 for Addition, 1 for Multiplication')}
             </h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
               <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', borderRadius: 16, padding: 18 }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#0F766E', marginBottom: 6 }}>
-                  जोडको तत्समक (Additive Identity: ०)
+                  Additive identity (0)
                 </div>
                 <div style={{ fontSize: 20, fontWeight: 900, color: '#134E4A', margin: '8px 0' }}>
-                  ३/४ + ० = ३/४
+                  3/4 + 0 = 3/4
                 </div>
                 <p style={{ fontSize: 13, color: '#334155', margin: 0 }}>
-                  कुनै पनि परिमेय सङ्ख्यामा शून्य जोड्दा मान परिवर्तन हुँदैन: a + ० = a।
+                  Adding zero to any rational number does not change its value: a + 0 = a.
                 </p>
               </div>
 
               <div style={{ background: '#DCFCE7', border: '2px solid #86EFAC', borderRadius: 16, padding: 18 }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#166534', marginBottom: 6 }}>
-                  गुणनको तत्समक (Multiplicative Identity: १)
+                  Multiplicative identity (1)
                 </div>
                 <div style={{ fontSize: 20, fontWeight: 900, color: '#14532D', margin: '8px 0' }}>
-                  ३/४ × १ = ३/४
+                  3/4 × 1 = 3/4
                 </div>
                 <p style={{ fontSize: 13, color: '#334155', margin: 0 }}>
-                  कुनै पनि परिमेय सङ्ख्यालाई १ ले गुणन गर्दा मान उही रहन्छ: a × १ = a।
+                  Multiplying any rational number by 1 keeps its value the same: a × 1 = a.
                 </p>
               </div>
             </div>
@@ -161,7 +161,7 @@ export const RationalNumberPropertiesLab: React.FC<{ onBackToLibrary?: () => voi
         {activeTab === 'inverse' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#FEF3C7', color: '#B45309', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक गुण २ (पृष्ठ ७१)', 'Textbook Property 2 (Page 71)')}
+              {L('पाठ्यपुस्तक गुण 2', 'Textbook Property 2 (Page 71)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
               {L('प्रतिलोम गुण (Additive Inverse & Multiplicative Inverse)', 'Inverse Properties: Additive and Reciprocal')}
@@ -170,25 +170,25 @@ export const RationalNumberPropertiesLab: React.FC<{ onBackToLibrary?: () => voi
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16, marginBottom: 16 }}>
               <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: 16, padding: 18 }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#0F766E', marginBottom: 6 }}>
-                  १. जोड प्रतिलोम (Additive Inverse)
+                  1. Additive inverse
                 </div>
                 <div style={{ fontSize: 18, fontWeight: 900, color: '#0F172A', margin: '8px 0' }}>
-                  १/२ + (-१/२) = ०
+                  1/2 + (-1/2) = 0
                 </div>
                 <div style={{ fontSize: 13, color: '#475569' }}>
-                  कुनै सङ्ख्या र त्यसको विपरीत सङ्ख्याको जोड सधैं शून्य हुन्छ: a + (-a) = ०।
+                  The sum of a number and its opposite is always zero: a + (-a) = 0.
                 </div>
               </div>
 
               <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: 16, padding: 18 }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#0F766E', marginBottom: 6 }}>
-                  २. गुणन प्रतिलोम / व्युत्क्रम (Reciprocal)
+                  2. Multiplicative inverse (reciprocal)
                 </div>
                 <div style={{ fontSize: 18, fontWeight: 900, color: '#0F172A', margin: '8px 0' }}>
-                  २/३ × ३/२ = १
+                  2/3 × 3/2 = 1
                 </div>
                 <div style={{ fontSize: 13, color: '#475569' }}>
-                  अंश र हर उल्टाएर गुणन गर्दा १ आउँछ: (a/b) × (b/a) = १ (जहाँ a, b ≠ ०)।
+                  Multiplying after inverting the numerator and denominator gives 1: (a/b) × (b/a) = 1.
                 </div>
               </div>
             </div>
@@ -196,10 +196,10 @@ export const RationalNumberPropertiesLab: React.FC<{ onBackToLibrary?: () => voi
             {/* Zero has no reciprocal warning banner */}
             <div style={{ background: '#FEE2E2', border: '2px solid #DC2626', borderRadius: 14, padding: 16 }}>
               <div style={{ fontSize: 14, fontWeight: 900, color: '#991B1B', marginBottom: 4 }}>
-                ⚠️ महत्त्वपूर्ण अपवाद:
+                ⚠️ Important exception:
               </div>
               <div style={{ fontSize: 13, color: '#7F1D1D' }}>
-                शून्य (०) को कुनै पनि गुणन प्रतिलोम हुँदैन, किनभने १/० अपरिभाषित (Undefined) हुन्छ!
+                Zero (0) has no multiplicative inverse, because 1/0 is undefined!
               </div>
             </div>
           </div>
@@ -209,15 +209,15 @@ export const RationalNumberPropertiesLab: React.FC<{ onBackToLibrary?: () => voi
         {activeTab === 'commutative' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <h3 style={{ margin: '0 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('क्रमविनिमेय गुण (Commutative Property: a + b = b + a)', 'Commutative Property: a + b = b + a')}
+              {L('Commutative property (Commutative Property: a + b = b + a)', 'Commutative Property: a + b = b + a')}
             </h3>
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', borderRadius: 16, padding: 20 }}>
               <div style={{ fontSize: 18, fontWeight: 900, color: '#0F766E', marginBottom: 8 }}>
-                १/२ + १/३ = ३/६ + २/६ = ५/६<br />
-                १/३ + १/२ = २/६ + ३/६ = ५/६
+                1/2 + 1/3 = 3/6 + 2/6 = 5/6<br />
+                1/3 + 1/2 = 2/6 + 3/6 = 5/6
               </div>
               <p style={{ fontSize: 13, color: '#334155', margin: 0 }}>
-                क्रम परिवर्तन गरेर जोड्दा वा गुणन गर्दा पनि अन्तिम परिणाम समान आउँछ।
+                Changing the order when adding or multiplying gives the same final result.
               </p>
             </div>
           </div>
@@ -231,10 +231,10 @@ export const RationalNumberPropertiesLab: React.FC<{ onBackToLibrary?: () => voi
             </h3>
             <div style={{ background: '#DCFCE7', border: '2px solid #16A34A', borderRadius: 16, padding: 20 }}>
               <div style={{ fontSize: 18, fontWeight: 900, color: '#166534', marginBottom: 8 }}>
-                (१/२ + १/३) + १/४ = १/२ + (१/३ + १/४) = १३/१२
+                (1/2 + 1/3) + 1/4 = 1/2 + (1/3 + 1/4) = 13/12
               </div>
               <p style={{ fontSize: 13, color: '#14532D', margin: 0 }}>
-                कोष्ठक सारेर समूह परिवर्तन गर्दा पनि जोड र गुणनको परिणाम उही रहन्छ।
+                Regrouping with brackets also leaves the result of addition and multiplication the same.
               </p>
             </div>
           </div>
@@ -244,13 +244,13 @@ export const RationalNumberPropertiesLab: React.FC<{ onBackToLibrary?: () => voi
         {activeTab === 'closure' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <h3 style={{ margin: '0 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('संवृत गुण (Closure Property in Q)', 'Closure Property in Rational Numbers')}
+              {L('Closure property (Closure Property in Q)', 'Closure Property in Rational Numbers')}
             </h3>
             <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: 16, padding: 20 }}>
               <div style={{ fontSize: 14, color: '#1E293B', lineHeight: 1.8 }}>
-                <div>• दुई परिमेय सङ्ख्याहरूको जोड सधैं परिमेय सङ्ख्या नै हुन्छ: a + b ∈ Q</div>
-                <div>• दुई परिमेय सङ्ख्याहरूको घटाउ सधैं परिमेय सङ्ख्या नै हुन्छ: a - b ∈ Q</div>
-                <div>• दुई परिमेय सङ्ख्याहरूको गुणन सधैं परिमेय सङ्ख्या नै हुन्छ: a × b ∈ Q</div>
+                <div>• The sum of two rational numbers is always a rational number: a + b ∈ Q</div>
+                <div>• The difference of two rational numbers is always a rational number: a - b ∈ Q</div>
+                <div>• The product of two rational numbers is always a rational number: a × b ∈ Q</div>
               </div>
             </div>
           </div>

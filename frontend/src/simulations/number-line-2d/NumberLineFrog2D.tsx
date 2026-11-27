@@ -1,6 +1,6 @@
 /**
  * NumberLineFrog2D.tsx (Pure 2D Edition)
- * Interactive Number Line & Counting Frog (सङ्ख्या रेखा र भ्यागुताको उफ्राइ)
+ * Interactive Number Line & Counting Frog
  * Class 1–5 Primary Mathematics · Nepal CDC Curriculum
  */
 import React, { useState } from 'react';
@@ -24,7 +24,7 @@ interface Props {
   embedded?: boolean;
 }
 
-const NEP_NUMS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०', '११', '१२', '१३', '१४', '१५', '१६', '१७', '१८', '१९', '२०'];
+const NEP_NUMS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
 const NEP_WORDS = [
   'शून्य', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ', 'दश',
   'एघार', 'बाह्र', 'तेह्र', 'चौध', 'पन्ध्र', 'सोह्र', 'सत्र', 'अठार', 'उन्नीस', 'बीस',
@@ -43,7 +43,7 @@ export const NumberLineFrog2D: React.FC<Props> = ({
   const [position, setPosition] = useState<number>(0);
   const [prevPosition, setPrevPosition] = useState<number>(0);
   const [lastDelta, setLastDelta] = useState<number>(0);
-  const [lang, setLang] = useState<'ne' | 'en'>('ne');
+  const [lang, setLang] = useState<'ne' | 'en'>('en');
   const [muted, setMuted] = useState<boolean>(false);
   const [mode, setMode] = useState<Mode>('COUNTING');
   const [skipStep, setSkipStep] = useState<number>(2);
@@ -196,7 +196,7 @@ export const NumberLineFrog2D: React.FC<Props> = ({
           )}
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#9FCBCD', letterSpacing: '0.03em' }}>
-              {L('कक्षा १–५ • गणित • सङ्ख्या रेखा प्रयोगशाला', 'Class 1–5 • Mathematics • Number Line Lab')}
+              {L('कक्षा 1–5 • गणित • सङ्ख्या रेखा प्रयोगशाला', 'Class 1–5 • Mathematics • Number Line Lab')}
             </div>
             <h1 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#FFFFFF' }}>
               {L('सङ्ख्या रेखा र भ्यागुतो', 'Interactive Number Line & Frog')}
@@ -223,22 +223,7 @@ export const NumberLineFrog2D: React.FC<Props> = ({
             <span>{numStr(stars)}</span>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setLang(isNe ? 'en' : 'ne')}
-            style={{
-              background: '#167C80',
-              color: '#FFFFFF',
-              border: 'none',
-              padding: '7px 14px',
-              borderRadius: 10,
-              fontSize: 13,
-              fontWeight: 700,
-              cursor: 'pointer',
-            }}
-          >
-            {isNe ? 'English' : 'नेपाली'}
-          </button>
+          
 
           <button
             type="button"

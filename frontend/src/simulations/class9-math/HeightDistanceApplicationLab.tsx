@@ -52,31 +52,31 @@ export const HeightDistanceApplicationLab: React.FC<SimProps> = ({ onBackToLibra
     {
       titleNp: 'घरको उचाइ पत्ता लगाउनुहोस्',
       titleEn: 'Find the height of a house',
-      descNp: 'एउटा घरको फेदबाट १५ मिटर टाढाको बिन्दुबाट घरको टुप्पोमा हेर्दा उन्नतांश कोण (Angle of elevation) ४५° पाइयो भने घरको उचाइ कति होला?',
+      descNp: 'एउटा घरको फेदबाट 15 m टाढाको बिन्दुबाट घरको टुप्पोमा हेर्दा उन्नतांश कोण (Angle of elevation) 45° पाइयो भने घरको उचाइ कति होला?',
       descEn: 'From a point on the ground 15 m away from the foot of a house, the angle of elevation of the top is 45°. Find the height of the house.',
       ans: 15,
       unit: 'm',
-      solutionNp: 'tan 45° = Opposite / Adjacent = h / १५\n१ = h / १५ ⇒ h = १५ मिटर।',
+      solutionNp: 'tan 45° = Opposite / Adjacent = h / 15\n1 = h / 15 ⇒ h = 15 m।',
       solutionEn: 'tan 45° = h / 15 => 1 = h / 15 => h = 15 m.',
     },
     {
       titleNp: 'रुखको फेदसम्मको दुरी',
       titleEn: 'Distance to the foot of a tree',
-      descNp: '२० मिटर अग्लो एउटा रुखको टुप्पोलाई जमिनको कुनै बिन्दुबाट हेर्दा उन्नतांश कोण ४५° हुन्छ भने उक्त बिन्दुबाट रुखको फेदसम्मको दुरी कति होला?',
+      descNp: '20 m अग्लो एउटा रुखको टुप्पोलाई जमिनको कुनै बिन्दुबाट हेर्दा उन्नतांश कोण 45° हुन्छ भने उक्त बिन्दुबाट रुखको फेदसम्मको दुरी कति होला?',
       descEn: 'The angle of elevation of the top of a 20 m high tree is 45°. Find the distance of the observation point from the foot of the tree.',
       ans: 20,
       unit: 'm',
-      solutionNp: 'tan 45° = २० / d ⇒ १ = २० / d ⇒ d = २० मिटर।',
+      solutionNp: 'tan 45° = 20 / d ⇒ 1 = 20 / d ⇒ d = 20 m।',
       solutionEn: 'tan 45° = 20 / d => 1 = 20 / d => d = 20 m.',
     },
     {
       titleNp: 'भित्तामा भर्‍याङ',
       titleEn: 'Ladder leaning on a wall',
-      descNp: '१२ मिटर लामो भर्‍याङ जमिनसँग ३०° को कोण बनाउँदै भित्तामा लगाइएको छ भने भर्‍याङले भित्तामा कति उचाइ छुन्छ?',
+      descNp: '12 m लामो भर्‍याङ जमिनसँग 30° को कोण बनाउँदै भित्तामा लगाइएको छ भने भर्‍याङले भित्तामा कति उचाइ छुन्छ?',
       descEn: 'A 12 m long ladder leans against a vertical wall making an angle of 30° with the ground. Find the vertical height reached by the ladder on the wall.',
       ans: 6,
       unit: 'm',
-      solutionNp: 'sin 30° = h / १२ ⇒ १/२ = h / १२ ⇒ h = १२ / २ = ६ मिटर।',
+      solutionNp: 'sin 30° = h / 12 ⇒ 1/2 = h / 12 ⇒ h = 12 / 2 = 6 m।',
       solutionEn: 'sin 30° = h / 12 => 1/2 = h / 12 => h = 6 m.',
     },
   ];
@@ -125,7 +125,7 @@ export const HeightDistanceApplicationLab: React.FC<SimProps> = ({ onBackToLibra
             }`}
           >
             <span>🏢</span>
-            <span>{L('१. घर / भवनको उचाइ (Building Height)', '1. Building Height')}</span>
+            <span>{L('1. घर / भवनको उचाइ (Building Height)', '1. Building Height')}</span>
           </button>
           <button
             onClick={() => setActiveScenario('tree')}
@@ -136,7 +136,7 @@ export const HeightDistanceApplicationLab: React.FC<SimProps> = ({ onBackToLibra
             }`}
           >
             <span>🌳</span>
-            <span>{L('२. रुखको उचाइ (Tree Measurement)', '2. Tree Measurement')}</span>
+            <span>{L('2. रुखको उचाइ (Tree Measurement)', '2. Tree Measurement')}</span>
           </button>
           <button
             onClick={() => setActiveScenario('ladder')}
@@ -147,7 +147,7 @@ export const HeightDistanceApplicationLab: React.FC<SimProps> = ({ onBackToLibra
             }`}
           >
             <span>🪜</span>
-            <span>{L('३. भर्‍याङ र भित्ता (Ladder on Wall)', '3. Ladder on Wall')}</span>
+            <span>{L('3. भर्‍याङ र भित्ता (Ladder on Wall)', '3. Ladder on Wall')}</span>
           </button>
           <button
             onClick={() => setActiveScenario('word_problem')}
@@ -158,7 +158,7 @@ export const HeightDistanceApplicationLab: React.FC<SimProps> = ({ onBackToLibra
             }`}
           >
             <span>📝</span>
-            <span>{L('४. पाठ्यपुस्तक समस्या चुनौती (Challenge)', '4. Textbook Challenge')}</span>
+            <span>{L('4. पाठ्यपुस्तक समस्या चुनौती (Challenge)', '4. Textbook Challenge')}</span>
           </button>
         </div>
 
@@ -270,21 +270,21 @@ export const HeightDistanceApplicationLab: React.FC<SimProps> = ({ onBackToLibra
 
               <div className="bg-indigo-50/70 p-4 rounded-xl border border-indigo-100 text-xs space-y-2.5">
                 <div>
-                  <span className="text-slate-600 block">{L('१. दिइएको मानहरू (Given):', '1. Given:')}</span>
+                  <span className="text-slate-600 block">{L('1. दिइएको मानहरू (Given):', '1. Given:')}</span>
                   <div className="font-mono font-semibold text-slate-800 mt-0.5">
-                    दुरी (d) = {fmt(buildingDistance)} m, कोण (θ) = {fmt(buildingAngleDeg)}°
+                    Distance (d) = {fmt(buildingDistance)} m, angle (θ) = {fmt(buildingAngleDeg)}°
                   </div>
                 </div>
 
                 <div>
-                  <span className="text-slate-600 block">{L('२. उपयुक्त त्रिकोणमितीय अनुपात (Formula):', '2. Formula:')}</span>
+                  <span className="text-slate-600 block">{L('2. उपयुक्त त्रिकोणमितीय अनुपात (Formula):', '2. Formula:')}</span>
                   <div className="font-mono font-bold text-indigo-900 mt-0.5">
-                    tan θ = \frac&#123;सम्मुख भुजा (Opposite, h)&#125;&#123;आसन्न भुजा (Adjacent, d)&#125;
+                    tan θ = \frac&#123;Opposite side, h&#125;&#123;Adjacent side, d&#125;
                   </div>
                 </div>
 
                 <div>
-                  <span className="text-slate-600 block">{L('३. मान प्रतिस्थापन गर्दा (Substitution):', '3. Substitution:')}</span>
+                  <span className="text-slate-600 block">{L('3. मान प्रतिस्थापन गर्दा (Substitution):', '3. Substitution:')}</span>
                   <div className="font-mono text-slate-800 mt-0.5">
                     tan {fmt(buildingAngleDeg)}° = \frac&#123;h&#125;&#123;{fmt(buildingDistance)}&#125;
                   </div>
@@ -420,16 +420,16 @@ export const HeightDistanceApplicationLab: React.FC<SimProps> = ({ onBackToLibra
                 </div>
                 <div className="space-y-1.5 font-mono text-[11px]">
                   <div className="p-2 bg-white rounded border border-blue-100 flex justify-between">
-                    <span>उचाइ h = L × sin θ:</span>
+                    <span>Height h = L × sin θ:</span>
                     <span className="font-bold text-indigo-700">{fmt(ladderVerticalHeight)} m</span>
                   </div>
                   <div className="p-2 bg-white rounded border border-blue-100 flex justify-between">
-                    <span>फेदको दुरी d = L × cos θ:</span>
+                    <span>Distance from the base d = L × cos θ:</span>
                     <span className="font-bold text-indigo-700">{fmt(ladderGroundDist)} m</span>
                   </div>
                 </div>
                 <div className="text-[11px] text-slate-600">
-                  पाइथागोरस परीक्षण: h² + d² = ({fmt(ladderVerticalHeight)})² + ({fmt(ladderGroundDist)})² ≈ {fmt(ladderLength)}²
+                  Pythagoras check: h² + d² = ({fmt(ladderVerticalHeight)})² + ({fmt(ladderGroundDist)})² ≈ {fmt(ladderLength)}²
                 </div>
               </div>
             </div>

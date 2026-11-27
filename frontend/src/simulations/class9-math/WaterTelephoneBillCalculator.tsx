@@ -13,28 +13,28 @@ interface WaterTariff {
 }
 
 const WATER_TARIFFS: WaterTariff[] = [
-  { pipeSize: '1/2"', pipeNameEn: '1/2 inch (Standard Domestic)', pipeNameNp: '१/२ इन्च (घरायसी सामान्य)', minUnits: 10, minCharge: 100, ratePerUnit: 32 },
-  { pipeSize: '3/4"', pipeNameEn: '3/4 inch (Domestic / Commercial)', pipeNameNp: '३/४ इन्च (घरायसी / व्यापारिक)', minUnits: 27, minCharge: 1910, ratePerUnit: 71 },
-  { pipeSize: '1"', pipeNameEn: '1 inch (Large Commercial)', pipeNameNp: '१ इन्च (ठूलो व्यावसायिक)', minUnits: 56, minCharge: 3960, ratePerUnit: 71 },
+  { pipeSize: '1/2"', pipeNameEn: '1/2 inch (Standard Domestic)', pipeNameNp: '1/2 इन्च (घरायसी सामान्य)', minUnits: 10, minCharge: 100, ratePerUnit: 32 },
+  { pipeSize: '3/4"', pipeNameEn: '3/4 inch (Domestic / Commercial)', pipeNameNp: '3/4 इन्च (घरायसी / व्यापारिक)', minUnits: 27, minCharge: 1910, ratePerUnit: 71 },
+  { pipeSize: '1"', pipeNameEn: '1 inch (Large Commercial)', pipeNameNp: '1 इन्च (ठूलो व्यावसायिक)', minUnits: 56, minCharge: 3960, ratePerUnit: 71 },
 ];
 
 const PAYMENT_TIMELINES = [
-  { id: 'early', nameEn: 'Within 1st to 22nd day (3% Rebate)', nameNp: 'पहिलो देखि २२ औँ दिनभित्र (३% छुट)', factor: -0.03, type: 'rebate' },
-  { id: 'regular', nameEn: '23rd to 30th day (Regular Amount)', nameNp: '२३ औँ देखि ३० औँ दिनसम्म (बिल बराबर रकम)', factor: 0, type: 'regular' },
-  { id: 'penalty1', nameEn: '31st to 45th day (5% Fine)', nameNp: '३१ औँ देखि ४५ औँ दिनसम्म (५% थप दस्तुर)', factor: 0.05, type: 'fine' },
-  { id: 'penalty2', nameEn: '46th to 60th day (10% Fine)', nameNp: '४६ औँ देखि ६० औँ दिनसम्म (१०% थप दस्तुर)', factor: 0.10, type: 'fine' },
-  { id: 'penalty3', nameEn: 'Beyond 60 days (25% Fine)', nameNp: '६० दिनभन्दा बढी (२५% थप दस्तुर)', factor: 0.25, type: 'fine' },
+  { id: 'early', nameEn: 'Within 1st to 22nd day (3% Rebate)', nameNp: 'पहिलो देखि 22 औँ दिनभित्र (3% छुट)', factor: -0.03, type: 'rebate' },
+  { id: 'regular', nameEn: '23rd to 30th day (Regular Amount)', nameNp: '23 औँ देखि 30 औँ दिनसम्म (बिल बराबर रकम)', factor: 0, type: 'regular' },
+  { id: 'penalty1', nameEn: '31st to 45th day (5% Fine)', nameNp: '31 औँ देखि 45 औँ दिनसम्म (5% थप दस्तुर)', factor: 0.05, type: 'fine' },
+  { id: 'penalty2', nameEn: '46th to 60th day (10% Fine)', nameNp: '46 औँ देखि 60 औँ दिनसम्म (10% थप दस्तुर)', factor: 0.10, type: 'fine' },
+  { id: 'penalty3', nameEn: 'Beyond 60 days (25% Fine)', nameNp: '60 दिनभन्दा बढी (25% थप दस्तुर)', factor: 0.25, type: 'fine' },
 ];
 
 const QUIZ_QUESTIONS = [
   {
-    np: 'काठमाडौँ उपत्यका खानेपानी लिमिटेडको १/२ इन्च पाइपको न्यूनतम खपत कति लिटर (वा युनिट) मानिन्छ?',
+    np: 'काठमाडौँ उपत्यका खानेपानी लिमिटेडको 1/2 इन्च पाइपको न्यूनतम खपत कति litres मानिन्छ?',
     en: 'What is the minimum water consumption unit (or volume) for a 1/2 inch pipe?',
     options: [
-      { key: 'A', label: '५,००० लिटर (५ युनिट / 5,000 Liters)' },
-      { key: 'B', label: '१०,००० लिटर (१० युनिट / 10,000 Liters)' },
-      { key: 'C', label: '१५,००० लिटर (१५ युनिट / 15,000 Liters)' },
-      { key: 'D', label: '२०,००० लिटर (२० युनिट / 20,000 Liters)' },
+      { key: 'A', label: '5,000 litres (5 units / 5,000 litres)' },
+      { key: 'B', label: '10,000 litres (10 units / 10,000 litres)' },
+      { key: 'C', label: '15,000 litres (15 units / 15,000 litres)' },
+      { key: 'D', label: '20,000 litres (20 units / 20,000 litres)' },
     ],
     answer: 'B',
   },
@@ -42,32 +42,32 @@ const QUIZ_QUESTIONS = [
     np: 'खानेपानी महसुलमा ढल निकास (Sewerage) सेवा शुल्क सामान्यतया पानीको महसुलको कति प्रतिशत लाग्दछ?',
     en: 'What percentage is normally charged as Sewerage fee on the water tariff?',
     options: [
-      { key: 'A', label: '१०%' },
-      { key: 'B', label: '२५%' },
-      { key: 'C', label: '५०%' },
-      { key: 'D', label: '१००%' },
+      { key: 'A', label: '10%' },
+      { key: 'B', label: '25%' },
+      { key: 'C', label: '50%' },
+      { key: 'D', label: '100%' },
     ],
     answer: 'C',
   },
   {
-    np: 'नेपाल टेलिकमको ल्याण्डलाइन फोनमा १७५ कलसम्म न्यूनतम रु. २०० लाग्छ। यदि एक ग्राहकले २२५ कल गरे भने अतिरिक्त कल शुल्क (रु. १ प्रति कल) कति हुन्छ?',
+    np: 'नेपाल टेलिकमको ल्याण्डलाइन फोनमा 175 कलसम्म न्यूनतम Rs. 200 लाग्छ। यदि एक ग्राहकले 225 कल गरे भने अतिरिक्त कल शुल्क (Rs. 1 प्रति कल) कति हुन्छ?',
     en: 'For landline PSTN, 175 calls are covered in Rs 200 minimum. If 225 calls are made, what is the charge for extra calls at Rs 1/call?',
     options: [
-      { key: 'A', label: 'रु. २५' },
-      { key: 'B', label: 'रु. ५०' },
-      { key: 'C', label: 'रु. ७५' },
-      { key: 'D', label: 'रु. १००' },
+      { key: 'A', label: 'Rs. 25' },
+      { key: 'B', label: 'Rs. 50' },
+      { key: 'C', label: 'Rs. 75' },
+      { key: 'D', label: 'Rs. 100' },
     ],
     answer: 'B',
   },
   {
-    np: 'टेलिफोन बिलमा दूरसञ्चार सेवा दस्तुर (TSC १०%) र त्यसपछि १३% मूल्य अभिवृद्धि कर (VAT) जोड्दा कुन रकममा भ्याट गणना गरिन्छ?',
+    np: 'टेलिफोन बिलमा दूरसञ्चार सेवा दस्तुर (TSC 10%) र त्यसपछि 13% मूल्य अभिवृद्धि कर (VAT) जोड्दा कुन रकममा भ्याट गणना गरिन्छ?',
     en: 'In telephone billing, after adding 10% TSC, on which amount is the 13% VAT calculated?',
     options: [
-      { key: 'A', label: 'कल शुल्कमा मात्र (Only call charge)' },
-      { key: 'B', label: 'सेवा शुल्क (TSC) मा मात्र' },
-      { key: 'C', label: 'कल शुल्क र TSC दुवैको जम्मा रकममा (Total of Call Charge + TSC)' },
-      { key: 'D', label: 'रु. २०० मा मात्र' },
+      { key: 'A', label: 'On the call charge only' },
+      { key: 'B', label: 'On the service charge (TSC) only' },
+      { key: 'C', label: 'On the total of both call charge and TSC' },
+      { key: 'D', label: 'On Rs. 200 only' },
     ],
     answer: 'C',
   },
@@ -192,7 +192,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
 
         {activeService === 'water' ? (
           /* =========================================================================
-             WATER BILL CALCULATOR (खानेपानी महसुल)
+             WATER BILL CALCULATOR
              ========================================================================= */
           <div className="space-y-6">
             {/* Header info */}
@@ -203,7 +203,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'खानेपानीको मिटर रिडिङमा १ युनिट बराबर १,००० लिटर हुन्छ। पाइपको आकार अनुसार न्यूनतम महसुल र न्यूनतम युनिट फरक हुन्छ। ढल निकास जडित भएमा ५०% ढल महसुल थप हुन्छ र बिल भुक्तानी मिति अनुसार छुट वा थप दस्तुर लाग्दछ।',
+                  'खानेपानीको m रिडिङमा 1 युनिट बराबर 1,000 litres हुन्छ। पाइपको आकार अनुसार न्यूनतम महसुल र न्यूनतम युनिट फरक हुन्छ। ढल निकास जडित भएमा 50% ढल महसुल थप हुन्छ र बिल भुक्तानी मिति अनुसार छुट वा थप दस्तुर लाग्दछ।',
                   'In drinking water meter reading, 1 unit equals 1,000 liters. The minimum charge and included units depend on pipe diameter. Sewerage charge is 50%, with rebates/fines depending on payment timeline.'
                 )}
               </p>
@@ -239,7 +239,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
                   </div>
                   <div className="mt-2 text-xs text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 p-2 rounded-lg">
                     {L(
-                      `चयन गरिएको: ${selectedTariff.pipeNameNp} (न्यूनतम ${toNp(selectedTariff.minUnits)} युनिट = रु. ${toNp(selectedTariff.minCharge)}, अतिरिक्त रु. ${toNp(selectedTariff.ratePerUnit)}/युनिट)`,
+                      `चयन गरिएको: ${selectedTariff.pipeNameNp} (न्यूनतम ${toNp(selectedTariff.minUnits)} युनिट = Rs. ${toNp(selectedTariff.minCharge)}, अतिरिक्त Rs. ${toNp(selectedTariff.ratePerUnit)}/युनिट)`,
                       `Selected: ${selectedTariff.pipeNameEn} (Min ${selectedTariff.minUnits} units = Rs ${selectedTariff.minCharge}, Extra Rs ${selectedTariff.ratePerUnit}/unit)`
                     )}
                   </div>
@@ -249,7 +249,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
                 <div className="space-y-3">
                   <div>
                     <label className="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">
-                      {L('अघिल्लो महिनाको मिटर रिडिङ (Previous Reading):', 'Previous Meter Reading (Units):')}
+                      {L('अघिल्लो महिनाको m रिडिङ (Previous Reading):', 'Previous Meter Reading (Units):')}
                     </label>
                     <input
                       type="number"
@@ -261,7 +261,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
 
                   <div>
                     <label className="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">
-                      {L('हालको मिटर रिडिङ (Current Reading):', 'Current Meter Reading (Units):')}
+                      {L('हालको m रिडिङ (Current Reading):', 'Current Meter Reading (Units):')}
                     </label>
                     <input
                       type="number"
@@ -274,10 +274,10 @@ export const WaterTelephoneBillCalculator: React.FC<{
 
                   <div className="flex justify-between items-center p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl">
                     <span className="text-sm font-medium text-blue-900 dark:text-blue-200">
-                      {L('खपत युनिट / लिटर:', 'Consumption Volume:')}
+                      {L('खपत युनिट / litres:', 'Consumption Volume:')}
                     </span>
                     <span className="text-base font-black text-blue-800 dark:text-blue-300">
-                      {isNe ? toNp(waterUnits) : waterUnits} {L('युनिट', 'units')} ({isNe ? toNp(waterVolumeLiters) : waterVolumeLiters.toLocaleString()} {L('लिटर', 'Liters')})
+                      {isNe ? toNp(waterUnits) : waterUnits} {L('युनिट', 'units')} ({isNe ? toNp(waterVolumeLiters) : waterVolumeLiters.toLocaleString()} {L('litres', 'Liters')})
                     </span>
                   </div>
                 </div>
@@ -289,7 +289,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
                       {L('ढल निकास सुविधा (Sewerage Service):', 'Sewerage Connected (50%):')}
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-400">
-                      {L('खानेपानी महसुलको ५०% ढल महसुल थपिन्छ', 'Adds 50% of water fee as sewerage')}
+                      {L('खानेपानी महसुलको 50% ढल महसुल थपिन्छ', 'Adds 50% of water fee as sewerage')}
                     </div>
                   </div>
                   <input
@@ -357,14 +357,14 @@ export const WaterTelephoneBillCalculator: React.FC<{
                     <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-800">
                       <div>
                         <span className="font-semibold text-gray-800 dark:text-gray-200">
-                          {L(`१. न्यूनतम महसुल (${selectedTariff.minUnits} युनिटसम्म)`, `1. Minimum Charge (Up to ${selectedTariff.minUnits} units)`)}
+                          {L(`1. न्यूनतम महसुल (${selectedTariff.minUnits} युनिटसम्म)`, `1. Minimum Charge (Up to ${selectedTariff.minUnits} units)`)}
                         </span>
                         <div className="text-xs text-gray-500">
                           {L(`न्यूनतम तोकिएको स्थिर रकम`, `Fixed minimum charge for pipe`)}
                         </div>
                       </div>
                       <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
-                        रु. {isNe ? toNp(minCharge) : minCharge.toLocaleString()}
+                        Rs. {isNe ? toNp(minCharge) : minCharge.toLocaleString()}
                       </span>
                     </div>
 
@@ -372,16 +372,16 @@ export const WaterTelephoneBillCalculator: React.FC<{
                     <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-800">
                       <div>
                         <span className="font-semibold text-gray-800 dark:text-gray-200">
-                          {L(`२. अतिरिक्त युनिट महसुल (${extraUnits} युनिट)`, `2. Extra Units Charge (${extraUnits} units)`)}
+                          {L(`2. अतिरिक्त युनिट महसुल (${extraUnits} युनिट)`, `2. Extra Units Charge (${extraUnits} units)`)}
                         </span>
                         <div className="text-xs text-gray-500">
                           {extraUnits > 0
-                            ? L(`${toNp(extraUnits)} × रु. ${toNp(selectedTariff.ratePerUnit)}`, `${extraUnits} × Rs ${selectedTariff.ratePerUnit}`)
+                            ? L(`${toNp(extraUnits)} × Rs. ${toNp(selectedTariff.ratePerUnit)}`, `${extraUnits} × Rs ${selectedTariff.ratePerUnit}`)
                             : L('न्यूनतम भन्दा बढी खपत नभएको', 'No extra units consumed')}
                         </div>
                       </div>
                       <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
-                        रु. {isNe ? toNp(extraCharge) : extraCharge.toLocaleString()}
+                        Rs. {isNe ? toNp(extraCharge) : extraCharge.toLocaleString()}
                       </span>
                     </div>
 
@@ -389,7 +389,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
                     <div className="flex justify-between items-center py-1.5 bg-blue-50/60 dark:bg-blue-950/20 px-3 rounded-lg font-semibold text-blue-900 dark:text-blue-200">
                       <span>{L('जम्मा खानेपानी महसुल (Subtotal):', 'Total Water Fee (Subtotal):')}</span>
                       <span className="font-mono font-black">
-                        रु. {isNe ? toNp(basicWaterFee) : basicWaterFee.toLocaleString()}
+                        Rs. {isNe ? toNp(basicWaterFee) : basicWaterFee.toLocaleString()}
                       </span>
                     </div>
 
@@ -397,16 +397,16 @@ export const WaterTelephoneBillCalculator: React.FC<{
                     <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-800">
                       <div>
                         <span className="font-semibold text-gray-800 dark:text-gray-200">
-                          {L('३. ढल निकास महसुल (५०%):', '3. Sewerage Fee (50%):')}
+                          {L('3. ढल निकास महसुल (50%):', '3. Sewerage Fee (50%):')}
                         </span>
                         <div className="text-xs text-gray-500">
                           {hasSewerage
-                            ? L(`रु. ${toNp(basicWaterFee)} को ५०%`, `50% of Rs ${basicWaterFee}`)
-                            : L('ढल सुविधा नभएको (रु. ०)', 'No sewerage connection')}
+                            ? L(`Rs. ${toNp(basicWaterFee)} को 50%`, `50% of Rs ${basicWaterFee}`)
+                            : L('ढल सुविधा नभएको (Rs. 0)', 'No sewerage connection')}
                         </div>
                       </div>
                       <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
-                        रु. {isNe ? toNp(sewerageFee) : sewerageFee.toLocaleString()}
+                        Rs. {isNe ? toNp(sewerageFee) : sewerageFee.toLocaleString()}
                       </span>
                     </div>
 
@@ -414,7 +414,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
                     <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-800">
                       <div>
                         <span className="font-semibold text-gray-800 dark:text-gray-200">
-                          {L('४. भुक्तानी समय समायोजन (छुट / थप दस्तुर):', '4. Payment Adjustment (Rebate/Fine):')}
+                          {L('4. भुक्तानी समय समायोजन (छुट / थप दस्तुर):', '4. Payment Adjustment (Rebate/Fine):')}
                         </span>
                         <div className="text-xs text-gray-500">
                           {isNe ? selectedTimeline.nameNp : selectedTimeline.nameEn}
@@ -427,7 +427,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
                           ? 'text-red-600 dark:text-red-400'
                           : 'text-gray-600'
                       }`}>
-                        {selectedTimeline.factor < 0 ? '-' : selectedTimeline.factor > 0 ? '+' : ''} रु. {isNe ? toNp(adjustmentAmount) : adjustmentAmount.toLocaleString()}
+                        {selectedTimeline.factor < 0 ? '-' : selectedTimeline.factor > 0 ? '+' : ''} Rs. {isNe ? toNp(adjustmentAmount) : adjustmentAmount.toLocaleString()}
                       </span>
                     </div>
 
@@ -442,7 +442,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
                         </div>
                       </div>
                       <div className="text-2xl font-black text-blue-600 dark:text-blue-400 font-mono">
-                        रु. {isNe ? toNp(netWaterPayable) : netWaterPayable.toLocaleString()}
+                        Rs. {isNe ? toNp(netWaterPayable) : netWaterPayable.toLocaleString()}
                       </div>
                     </div>
                   </div>
@@ -452,7 +452,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
           </div>
         ) : (
           /* =========================================================================
-             TELEPHONE BILL CALCULATOR (टेलिफोन महसुल)
+             TELEPHONE BILL CALCULATOR
              ========================================================================= */
           <div className="space-y-6">
             <div className="bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-950/40 dark:to-emerald-950/30 p-5 rounded-2xl border border-teal-200 dark:border-teal-800">
@@ -462,7 +462,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
               </h2>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {L(
-                  'नेपाल टेलिकमको पीएसटीएन (ल्याण्डलाइन) मा १७५ कलसम्म न्यूनतम रु. २०० लाग्छ र त्यसपछिको प्रत्येक कल रु. १ लाग्छ। कुल कल शुल्कमा १०% दूरसञ्चार सेवा शुल्क (TSC) र अन्त्यमा १३% मूल्य अभिवृद्धि कर (VAT) जोडेर कुल बिल निर्धारण गरिन्छ।',
+                  'नेपाल टेलिकमको पीएसटीएन (ल्याण्डलाइन) मा 175 कलसम्म न्यूनतम Rs. 200 लाग्छ र त्यसपछिको प्रत्येक कल Rs. 1 लाग्छ। कुल कल शुल्कमा 10% दूरसञ्चार सेवा शुल्क (TSC) र अन्त्यमा 13% मूल्य अभिवृद्धि कर (VAT) जोडेर कुल बिल निर्धारण गरिन्छ।',
                   'In NTC PSTN landline, minimum charge is Rs 200 for up to 175 calls, then Rs 1 per extra call. 10% Telecommunication Service Charge (TSC) and 13% VAT are applied to determine total bill.'
                 )}
               </p>
@@ -490,7 +490,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
                       }`}
                     >
                       <div className="text-base font-bold">☎️ {L('ल्याण्डलाइन (PSTN)', 'PSTN Landline')}</div>
-                      <div className="text-xs opacity-85 mt-1">{L('१७५ कल = रु. २००', '175 calls = Rs 200')}</div>
+                      <div className="text-xs opacity-85 mt-1">{L('175 कल = Rs. 200', '175 calls = Rs 200')}</div>
                     </button>
                     <button
                       onClick={() => setPhoneType('mobile')}
@@ -501,7 +501,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
                       }`}
                     >
                       <div className="text-base font-bold">📱 {L('पोष्टपेड मोबाइल', 'Postpaid Mobile')}</div>
-                      <div className="text-xs opacity-85 mt-1">{L('२५० कल = रु. ३००', '250 calls = Rs 300')}</div>
+                      <div className="text-xs opacity-85 mt-1">{L('250 कल = Rs. 300', '250 calls = Rs 300')}</div>
                     </button>
                   </div>
                 </div>
@@ -552,8 +552,8 @@ export const WaterTelephoneBillCalculator: React.FC<{
                 {/* Quick Info Badge */}
                 <div className="p-3 bg-teal-50 dark:bg-teal-950/40 rounded-xl border border-teal-200 dark:border-teal-800 text-xs text-teal-800 dark:text-teal-300 space-y-1">
                   <div><strong>{L('कर नियम (Tax Rules):', 'Tax Rules:')}</strong></div>
-                  <div>• {L('दूरसञ्चार सेवा दस्तुर (TSC) = १०%', 'Telecommunication Service Charge (TSC) = 10%')}</div>
-                  <div>• {L('मूल्य अभिवृद्धि कर (VAT) = १३% (कल शुल्क + TSC मा)', 'VAT = 13% (on Call Charge + TSC)')}</div>
+                  <div>• {L('दूरसञ्चार सेवा दस्तुर (TSC) = 10%', 'Telecommunication Service Charge (TSC) = 10%')}</div>
+                  <div>• {L('मूल्य अभिवृद्धि कर (VAT) = 13%', 'VAT = 13% (on Call Charge + TSC)')}</div>
                 </div>
               </div>
 
@@ -595,14 +595,14 @@ export const WaterTelephoneBillCalculator: React.FC<{
                     <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-800">
                       <div>
                         <span className="font-semibold text-gray-800 dark:text-gray-200">
-                          {L(`१. न्यूनतम महसुल (${phoneType === 'pstn' ? pstnMinCalls : gsmIncludedCalls} कलसम्म):`, `1. Minimum Call Tariff:`)}
+                          {L(`1. न्यूनतम महसुल (${phoneType === 'pstn' ? pstnMinCalls : gsmIncludedCalls} कलसम्म):`, `1. Minimum Call Tariff:`)}
                         </span>
                         <div className="text-xs text-gray-500">
-                          {phoneType === 'pstn' ? L('पहिलो १७५ कलको न्यूनतम दर', 'Standard minimum rate') : L('पहिलो २५० कलको न्यूनतम दर', 'GSM Base tariff')}
+                          {phoneType === 'pstn' ? L('पहिलो 175 कलको न्यूनतम दर', 'Standard minimum rate') : L('पहिलो 250 कलको न्यूनतम दर', 'GSM Base tariff')}
                         </div>
                       </div>
                       <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
-                        रु. {isNe ? toNp(phoneType === 'pstn' ? pstnMinCharge : gsmBaseCharge) : (phoneType === 'pstn' ? pstnMinCharge : gsmBaseCharge)}
+                        Rs. {isNe ? toNp(phoneType === 'pstn' ? pstnMinCharge : gsmBaseCharge) : (phoneType === 'pstn' ? pstnMinCharge : gsmBaseCharge)}
                       </span>
                     </div>
 
@@ -610,24 +610,24 @@ export const WaterTelephoneBillCalculator: React.FC<{
                     <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-800">
                       <div>
                         <span className="font-semibold text-gray-800 dark:text-gray-200">
-                          {L(`२. थप कल महसुल (${extraCallsCount} कल):`, `2. Additional Calls Charge (${extraCallsCount} calls):`)}
+                          {L(`2. थप कल महसुल (${extraCallsCount} कल):`, `2. Additional Calls Charge (${extraCallsCount} calls):`)}
                         </span>
                         <div className="text-xs text-gray-500">
                           {extraCallsCount > 0
-                            ? L(`${toNp(extraCallsCount)} × रु. ${toNp(phoneType === 'pstn' ? pstnRatePerCall : gsmRatePerExtra)}`, `${extraCallsCount} × Rs ${phoneType === 'pstn' ? pstnRatePerCall : gsmRatePerExtra}`)
+                            ? L(`${toNp(extraCallsCount)} × Rs. ${toNp(phoneType === 'pstn' ? pstnRatePerCall : gsmRatePerExtra)}`, `${extraCallsCount} × Rs ${phoneType === 'pstn' ? pstnRatePerCall : gsmRatePerExtra}`)
                             : L('थप कल नभएको', 'No extra calls')}
                         </div>
                       </div>
                       <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
-                        रु. {isNe ? toNp(extraPhoneCharge) : extraPhoneCharge.toFixed(2)}
+                        Rs. {isNe ? toNp(extraPhoneCharge) : extraPhoneCharge.toFixed(2)}
                       </span>
                     </div>
 
                     {roamingOrAddon > 0 && (
                       <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-800">
-                        <span className="font-semibold text-gray-800 dark:text-gray-200">{L('३. ISD / डाटा एड-अन:', '3. ISD / Data Add-on:')}</span>
+                        <span className="font-semibold text-gray-800 dark:text-gray-200">{L('3. ISD / डाटा एड-अन:', '3. ISD / Data Add-on:')}</span>
                         <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
-                          रु. {isNe ? toNp(roamingOrAddon) : roamingOrAddon.toFixed(2)}
+                          Rs. {isNe ? toNp(roamingOrAddon) : roamingOrAddon.toFixed(2)}
                         </span>
                       </div>
                     )}
@@ -636,7 +636,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
                     <div className="flex justify-between items-center py-1.5 bg-teal-50/60 dark:bg-teal-950/20 px-3 rounded-lg font-semibold text-teal-900 dark:text-teal-200">
                       <span>{L('जम्मा सेवा महसुल (Service Total):', 'Total Service Charge:')}</span>
                       <span className="font-mono font-black">
-                        रु. {isNe ? toNp(basePhoneCharge) : basePhoneCharge.toFixed(2)}
+                        Rs. {isNe ? toNp(basePhoneCharge) : basePhoneCharge.toFixed(2)}
                       </span>
                     </div>
 
@@ -644,14 +644,14 @@ export const WaterTelephoneBillCalculator: React.FC<{
                     <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-800">
                       <div>
                         <span className="font-semibold text-gray-800 dark:text-gray-200">
-                          {L('४. दूरसञ्चार सेवा दस्तुर (TSC १०%):', '4. Telecom Service Charge (TSC 10%):')}
+                          {L('4. दूरसञ्चार सेवा दस्तुर (TSC 10%):', '4. Telecom Service Charge (TSC 10%):')}
                         </span>
                         <div className="text-xs text-gray-500">
-                          {L(`रु. ${toNp(basePhoneCharge)} × १०%`, `Rs ${basePhoneCharge.toFixed(2)} × 10%`)}
+                          {L(`Rs. ${toNp(basePhoneCharge)} × 10%`, `Rs ${basePhoneCharge.toFixed(2)} × 10%`)}
                         </div>
                       </div>
                       <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
-                        रु. {isNe ? toNp(tscAmount) : tscAmount.toFixed(2)}
+                        Rs. {isNe ? toNp(tscAmount) : tscAmount.toFixed(2)}
                       </span>
                     </div>
 
@@ -659,7 +659,7 @@ export const WaterTelephoneBillCalculator: React.FC<{
                     <div className="flex justify-between items-center py-1 text-xs text-gray-600 dark:text-gray-400">
                       <span>{L('करयोग्य रकम (Base + TSC):', 'Taxable Amount (Base + TSC):')}</span>
                       <span className="font-mono font-bold">
-                        रु. {isNe ? toNp(amountBeforeVat) : amountBeforeVat.toFixed(2)}
+                        Rs. {isNe ? toNp(amountBeforeVat) : amountBeforeVat.toFixed(2)}
                       </span>
                     </div>
 
@@ -667,14 +667,14 @@ export const WaterTelephoneBillCalculator: React.FC<{
                     <div className="flex justify-between items-center py-1.5 border-b border-gray-100 dark:border-gray-800">
                       <div>
                         <span className="font-semibold text-gray-800 dark:text-gray-200">
-                          {L('५. मूल्य अभिवृद्धि कर (VAT १३%):', '5. Value Added Tax (VAT 13%):')}
+                          {L('5. मूल्य अभिवृद्धि कर (VAT 13%):', '5. Value Added Tax (VAT 13%):')}
                         </span>
                         <div className="text-xs text-gray-500">
-                          {L(`रु. ${toNp(amountBeforeVat)} × १३%`, `Rs ${amountBeforeVat.toFixed(2)} × 13%`)}
+                          {L(`Rs. ${toNp(amountBeforeVat)} × 13%`, `Rs ${amountBeforeVat.toFixed(2)} × 13%`)}
                         </div>
                       </div>
                       <span className="font-mono font-bold text-gray-800 dark:text-gray-100">
-                        रु. {isNe ? toNp(vatAmount) : vatAmount.toFixed(2)}
+                        Rs. {isNe ? toNp(vatAmount) : vatAmount.toFixed(2)}
                       </span>
                     </div>
 
@@ -685,11 +685,11 @@ export const WaterTelephoneBillCalculator: React.FC<{
                           {L('कुल भुक्तानी गर्नुपर्ने रकम:', 'Total Bill Payable:')}
                         </div>
                         <div className="text-xs text-gray-500">
-                          {L('TSC १०% र VAT १३% समावेश सहित', 'Includes 10% TSC and 13% VAT')}
+                          {L('TSC 10% र VAT 13% समावेश सहित', 'Includes 10% TSC and 13% VAT')}
                         </div>
                       </div>
                       <div className="text-2xl font-black text-teal-600 dark:text-teal-400 font-mono">
-                        रु. {isNe ? toNp(grandTotalPhoneBill) : grandTotalPhoneBill.toFixed(2)}
+                        Rs. {isNe ? toNp(grandTotalPhoneBill) : grandTotalPhoneBill.toFixed(2)}
                       </div>
                     </div>
                   </div>

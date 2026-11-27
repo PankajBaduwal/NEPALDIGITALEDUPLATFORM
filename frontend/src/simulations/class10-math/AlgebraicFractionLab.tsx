@@ -129,34 +129,34 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
   const quizQuestions = [
     {
       qEn: 'For which value(s) of x is the algebraic fraction (x + 5) / (x² - 16) undefined?',
-      qNp: 'बीजीय भिन्न (x + ५) / (x² - १६) को मान x को कुन मानका लागि अपरिभाषित हुन्छ?',
+      qNp: 'बीजीय भिन्न (x + 5) / (x² - 16) को मान x को कुन मानका लागि अपरिभाषित हुन्छ?',
       options: ['x = 4 and x = -4', 'x = -5 only', 'x = 16 only', 'x = 0'],
-      optionsNp: ['x = ४ र x = -४', 'x = -५ मात्र', 'x = १६ मात्र', 'x = ०'],
+      optionsNp: ['x = 4 र x = -4', 'x = -5 मात्र', 'x = 16 मात्र', 'x = 0'],
       correct: 0,
       hintEn: 'A fraction is undefined when denominator = 0. Here x² - 16 = 0  ⟹  (x - 4)(x + 4) = 0  ⟹  x = 4, -4.',
-      hintNp: 'हर (Denominator) = ० हुँदा भिन्न अपरिभाषित हुन्छ। x² - १६ = ०  ⟹  (x - ४)(x + ४) = ०  ⟹  x = ±४।',
+      hintNp: 'हर (Denominator) = 0 हुँदा भिन्न अपरिभाषित हुन्छ। x² - 16 = 0  ⟹  (x - 4)(x + 4) = 0  ⟹  x = ±4।',
     },
     {
       qEn: 'Simplify the fraction: (x² - 25) / (x + 5). What is the result?',
-      qNp: 'भिन्नलाई सरल गर्नुहोस्: (x² - २५) / (x + ५)। यसको नतिजा कति हुन्छ?',
+      qNp: 'भिन्नलाई सरल गर्नुहोस्: (x² - 25) / (x + 5)। यसको नतिजा कति हुन्छ?',
       options: ['x - 5 (where x ≠ -5)', 'x + 5', 'x - 20', 'x / 5'],
-      optionsNp: ['x - ५ (जहाँ x ≠ -५)', 'x + ५', 'x - २०', 'x / ५'],
+      optionsNp: ['x - 5', 'x + 5', 'x - 20', 'x / 5'],
       correct: 0,
       hintEn: 'Factor numerator: (x - 5)(x + 5) / (x + 5) = x - 5 (provided x ≠ -5).',
-      hintNp: 'अंशको खण्डिकरण: (x - ५)(x + ५) / (x + ५) = x - ५ (जहाँ x ≠ -५)।',
+      hintNp: 'अंशको खण्डिकरण: (x - 5)(x + 5) / (x + 5) = x - 5।',
     },
     {
       qEn: 'What is the Lowest Common Denominator (LCM) of: 1 / (x - 2) and 1 / (x + 2)?',
-      qNp: '१ / (x - २) र १ / (x + २) का हरहरूको साझा ल.सा. (LCM) के हुन्छ?',
+      qNp: '1 / (x - 2) र 1 / (x + 2) का हरहरूको साझा ल.सा. (LCM) के हुन्छ?',
       options: ['(x - 2)(x + 2) = x² - 4', 'x - 4', '2x', '(x - 2) + (x + 2)'],
-      optionsNp: ['(x - २)(x + २) = x² - ४', 'x - ४', '२x', '(x - २) + (x + २)'],
+      optionsNp: ['(x - 2)(x + 2) = x² - 4', 'x - 4', '2x', '(x - 2) + (x + 2)'],
       correct: 0,
       hintEn: 'Since (x - 2) and (x + 2) share no common factor, their LCM is their product: (x - 2)(x + 2) = x² - 4.',
-      hintNp: 'दुवै हरहरू विजातीय भएकाले तिनीहरूको गुणनफल (x - २)(x + २) नै ल.सा. हुन्छ।',
+      hintNp: 'दुवै हरहरू विजातीय भएकाले तिनीहरूको गुणनफल (x - 2)(x + 2) नै ल.सा. हुन्छ।',
     },
     {
       qEn: 'Why is it mathematically illegal to cancel x in (x + 7) / x to get 7?',
-      qNp: '(x + ७) / x मा x लाई काटेर सिधै ७ लेख्नु किन गणितीय रूपमा गलत हो?',
+      qNp: '(x + 7) / x मा x लाई काटेर सिधै 7 लेख्नु किन गणितीय रूपमा गलत हो?',
       options: [
         'Because x is a term in addition, not a multiplying common factor',
         'Because 7 is prime',
@@ -165,7 +165,7 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
       ],
       optionsNp: [
         'किनभने x जोडमा रहेको पद हो, गुणनको साझा खण्ड होइन',
-        'किनभने ७ एउटा रूढ संख्या हो',
+        'किनभने 7 एउटा रूढ संख्या हो',
         'किनभने x सधैँ धनात्मक हुनुपर्छ',
         'यो वास्तवमा काट्न पाइन्छ',
       ],
@@ -201,7 +201,7 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ ८: बीजीय भिन्न (Algebraic Fraction) प्रयोगशालामा स्वागत छ! यहाँ खण्डिकरण गर्नुहोस्, साझा खण्ड काट्नुहोस्, अपरिभाषित हुने हरका मानहरू पत्ता लगाउनुहोस् र भिन्नका ४ वटै क्रियाहरू सिक्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 8: बीजीय भिन्न (Algebraic Fraction) प्रयोगशालामा स्वागत छ! यहाँ खण्डिकरण गर्नुहोस्, साझा खण्ड काट्नुहोस्, अपरिभाषित हुने हरका मानहरू पत्ता लगाउनुहोस् र भिन्नका 4 वटै क्रियाहरू सिक्नुहोस्!',
         'Welcome to Grade 10 Unit 8: Algebraic Fraction Visual Laboratory! Factorize expressions, cancel common factors legally, discover excluded denominator values, and master all 4 fraction operations!'
       )}
     >
@@ -354,14 +354,14 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
                   </span>
 
                   <div className="p-3 bg-slate-50 rounded-xl border">
-                    <span className="text-slate-400 block font-sans text-xs">चरण १: मूल बीजीय भिन्न</span>
+                    <span className="text-slate-400 block font-sans text-xs">Step 1: Original algebraic fraction</span>
                     <div className="font-bold text-slate-800 text-sm mt-0.5">
                       {currentSimEx.numOriginal} / {currentSimEx.denOriginal}
                     </div>
                   </div>
 
                   <div className="p-3 bg-slate-50 rounded-xl border">
-                    <span className="text-slate-400 block font-sans text-xs">चरण २: अंश र हरको खण्डिकरण</span>
+                    <span className="text-slate-400 block font-sans text-xs">Step 2: Factorizing numerator and denominator</span>
                     <div className="font-bold text-teal-700 text-sm mt-0.5">
                       {currentSimEx.numFactors.join('')} / {currentSimEx.denFactors.join('')}
                     </div>
@@ -369,13 +369,13 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
 
                   <div className="p-3 bg-teal-50 rounded-xl border border-teal-200">
                     <span className="text-teal-700 block font-sans text-xs font-bold">
-                      चरण ३: साझा खण्ड काट्दा (सरलीकृत भिन्न)
+                      Step 3: Cancelling the common factor (simplified fraction)
                     </span>
                     <div className="font-bold text-[#142D4E] text-base mt-0.5">
                       {currentSimEx.numSimplified} / {currentSimEx.denSimplified}
                     </div>
                     <span className="text-xs text-slate-600 block mt-1 font-sans">
-                      ({L('जहाँ हर', 'where denominator')} ≠ ०, x ∉ {'{'}{currentSimEx.excludedValues.map(v => fmt(v)).join(', ')}{'}'})
+                      ({L('जहाँ हर', 'where denominator')} ≠ 0, x ∉ {'{'}{currentSimEx.excludedValues.map(v => fmt(v)).join(', ')}{'}'})
                     </span>
                   </div>
                 </div>
@@ -386,7 +386,7 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
                     ⚠️ {L('महत्त्वपूर्ण गणितीय नियम (Crucial Rule):', 'Important Factoring Rule:')}
                   </strong>
                   {L(
-                    'अंश र हरका सम्पूर्ण गुणन खण्ड (Factors) मात्र काट्न पाइन्छ! जोड वा घटाउमा रहेका पदहरू छुट्टाछुट्टै काट्न पाइँदैन। उदाहरणका लागि, (x + ३) / x मा x काट्न मिल्दैन किनभने अंशमा x गुणनमा नभई जोडमा छ।',
+                    'अंश र हरका सम्पूर्ण गुणन खण्ड (Factors) मात्र काट्न पाइन्छ! जोड वा घटाउमा रहेका पदहरू छुट्टाछुट्टै काट्न पाइँदैन। उदाहरणका लागि, (x + 3) / x मा x काट्न मिल्दैन किनभने अंशमा x गुणनमा नभई जोडमा छ।',
                     'Only entire multiplicative factors can be cancelled! Individual terms connected by addition or subtraction cannot be cancelled separately. For example, in (x + 3) / x, you cannot cancel x because x is added, not multiplied.'
                   )}
                 </div>
@@ -403,10 +403,10 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
             {/* Operation Selector */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { id: 'add', np: '१. जोड (+)', en: '1. Addition (+)' },
-                { id: 'subtract', np: '२. घटाउ (-)', en: '2. Subtraction (-)' },
-                { id: 'multiply', np: '३. गुणन (×)', en: '3. Multiplication (×)' },
-                { id: 'divide', np: '४. भाग (÷)', en: '4. Division (÷)' },
+                { id: 'add', np: '1. जोड (+)', en: '1. Addition (+)' },
+                { id: 'subtract', np: '2. घटाउ (-)', en: '2. Subtraction (-)' },
+                { id: 'multiply', np: '3. गुणन (×)', en: '3. Multiplication (×)' },
+                { id: 'divide', np: '4. भाग (÷)', en: '4. Division (÷)' },
               ].map((op) => (
                 <button
                   key={op.id}
@@ -431,25 +431,25 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
               {selectedOp === 'add' && (
                 <div className="space-y-3">
                   <div className="flex justify-between items-center border-b pb-2">
-                    <span className="font-bold text-[#142D4E] text-base">१ / x + १ / (x + १)</span>
+                    <span className="font-bold text-[#142D4E] text-base">1 / x + 1 / (x + 1)</span>
                     <span className="text-xs bg-teal-100 text-teal-800 px-2.5 py-1 rounded-full font-bold">
                       {L('ल.सा. विधि (LCM Method)', 'LCM Method')}
                     </span>
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs font-sans">चरण १: हरहरूको ल.सा. (LCM of Denominators)</span>
-                    <span className="text-teal-700 font-bold">ल.सा. (LCM) = x(x + १)</span>
+                    <span className="text-slate-400 block text-xs font-sans">Step 1: LCM of the denominators</span>
+                    <span className="text-teal-700 font-bold">LCM = x(x + 1)</span>
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs font-sans">चरण २: समान हर बनाएर जोड्ने (Common Denominator)</span>
-                    <span>= [१ · (x + १) + १ · x] / [x(x + १)]</span>
+                    <span className="text-slate-400 block text-xs font-sans">Step 2: Making a common denominator and adding</span>
+                    <span>= [1 · (x + 1) + 1 · x] / [x(x + 1)]</span>
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs font-sans">चरण ३: समान पदहरू जोड्दा (Final Simplified Sum)</span>
-                    <span className="text-base font-bold text-emerald-700">= (२x + १) / [x(x + १)]</span>
+                    <span className="text-slate-400 block text-xs font-sans">Step 3: Adding like terms (final simplified sum)</span>
+                    <span className="text-base font-bold text-emerald-700">= (2x + 1) / [x(x + 1)]</span>
                   </div>
                 </div>
               )}
@@ -465,18 +465,18 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs font-sans">चरण १: हरहरूको ल.सा. (LCM of Denominators)</span>
+                    <span className="text-slate-400 block text-xs font-sans">Step 1: LCM of the denominators</span>
                     <span className="text-teal-700 font-bold">LCM = (x - y)(x + y) = x² - y²</span>
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs font-sans">चरण २: अंश विस्तार र घटाउ (Cross Multiplication)</span>
+                    <span className="text-slate-400 block text-xs font-sans">चरण 2: अंश विस्तार र घटाउ (Cross Multiplication)</span>
                     <span>= [x(x + y) - y(x - y)] / [(x - y)(x + y)]</span>
                     <div className="mt-1">= (x² + xy - xy + y²) / (x² - y²)</div>
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs font-sans">चरण ३: +xy र -xy काटिँदा (Final Difference)</span>
+                    <span className="text-slate-400 block text-xs font-sans">चरण 3: +xy र -xy काटिँदा (Final Difference)</span>
                     <span className="text-base font-bold text-emerald-700">= (x² + y²) / (x² - y²)</span>
                   </div>
                 </div>
@@ -487,7 +487,7 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
                 <div className="space-y-3">
                   <div className="flex justify-between items-center border-b pb-2">
                     <span className="font-bold text-[#142D4E] text-base">
-                      [(x - २) / (x + ३)] × [(x + ३) / (x - १)]
+                      [(x - 2) / (x + 3)] × [(x + 3) / (x - 1)]
                     </span>
                     <span className="text-xs bg-teal-100 text-teal-800 px-2.5 py-1 rounded-full font-bold">
                       {L('गुणन र खण्ड विलोपन', 'Multiplication & Factor Cancel')}
@@ -495,15 +495,15 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs font-sans">चरण १: अंश र हरलाई एउटै भिन्नमा मिलाउने</span>
-                    <span>= [(x - २)(x + ३)] / [(x + ३)(x - १)]</span>
+                    <span className="text-slate-400 block text-xs font-sans">चरण 1: अंश र हरलाई एउटै भिन्नमा मिलाउने</span>
+                    <span>= [(x - 2)(x + 3)] / [(x + 3)(x - 1)]</span>
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs font-sans">चरण २: समान खण्ड (x + ३) लाई काट्दा</span>
-                    <span className="text-base font-bold text-emerald-700">= (x - २) / (x - १)</span>
+                    <span className="text-slate-400 block text-xs font-sans">चरण 2: समान खण्ड (x + 3) लाई काट्दा</span>
+                    <span className="text-base font-bold text-emerald-700">= (x - 2) / (x - 1)</span>
                     <div className="text-xs text-slate-500 font-sans mt-1">
-                      ({L('प्रतिबन्ध: x ≠ -३, x ≠ १', 'Restrictions: x ≠ -3, x ≠ 1')})
+                      ({L('प्रतिबन्ध: x ≠ -3, x ≠ 1', 'Restrictions: x ≠ -3, x ≠ 1')})
                     </div>
                   </div>
                 </div>
@@ -514,7 +514,7 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
                 <div className="space-y-3">
                   <div className="flex justify-between items-center border-b pb-2">
                     <span className="font-bold text-[#142D4E] text-base">
-                      (x² - ४) / (x + ५) ÷ (x - २) / (x + ५)
+                      (x² - 4) / (x + 5) ÷ (x - 2) / (x + 5)
                     </span>
                     <span className="text-xs bg-teal-100 text-teal-800 px-2.5 py-1 rounded-full font-bold">
                       {L('व्युत्क्रम भिन्नले गुणन (Invert & Multiply)', 'Invert & Multiply')}
@@ -522,18 +522,18 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs font-sans">चरण १: दोस्रो भिन्नलाई उल्ट्याएर गुणन चिन्ह राख्ने</span>
-                    <span>= [(x² - ४) / (x + ५)] × [(x + ५) / (x - २)]</span>
+                    <span className="text-slate-400 block text-xs font-sans">चरण 1: दोस्रो भिन्नलाई उल्ट्याएर गुणन चिन्ह राख्ने</span>
+                    <span>= [(x² - 4) / (x + 5)] × [(x + 5) / (x - 2)]</span>
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs font-sans">चरण २: x² - ४ लाई (x - २)(x + २) मा खण्डिकरण गर्ने</span>
-                    <span>= [(x - २)(x + २)(x + ५)] / [(x + ५)(x - २)]</span>
+                    <span className="text-slate-400 block text-xs font-sans">चरण 2: x² - 4 लाई (x - 2)(x + 2) मा खण्डिकरण गर्ने</span>
+                    <span>= [(x - 2)(x + 2)(x + 5)] / [(x + 5)(x - 2)]</span>
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs font-sans">चरण ३: समान खण्डहरू (x - २) र (x + ५) काट्दा</span>
-                    <span className="text-base font-bold text-emerald-700">= x + २</span>
+                    <span className="text-slate-400 block text-xs font-sans">चरण 3: समान खण्डहरू (x - 2) र (x + 5) काट्दा</span>
+                    <span className="text-base font-bold text-emerald-700">= x + 2</span>
                   </div>
                 </div>
               )}
@@ -552,7 +552,7 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
               </h4>
               <p className="text-xs text-slate-600">
                 {L(
-                  'कुनै पनि भिन्नमा हर (Denominator) शून्य (०) हुन सक्दैन। तल x को मान परिवर्तन गरी हेर्नुहोस् कि मूल भिन्न र सरलीकृत भिन्न समान मान दिन्छन् वा अपरिभाषित हुन्छन्।',
+                  'कुनै पनि भिन्नमा हर (Denominator) शून्य (0) हुन सक्दैन। तल x को मान परिवर्तन गरी हेर्नुहोस् कि मूल भिन्न र सरलीकृत भिन्न समान मान दिन्छन् वा अपरिभाषित हुन्छन्।',
                   'A fraction denominator can never be zero. Change x below to verify that the original and simplified fractions yield the identical value, or become undefined at excluded points.'
                 )}
               </p>
@@ -576,9 +576,9 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
                 className="w-full accent-[#167C80]"
               />
               <div className="flex justify-between text-xs text-slate-400 font-mono">
-                <span>x = -६</span>
-                <span>x = ०</span>
-                <span>x = +८</span>
+                <span>x = -6</span>
+                <span>x = 0</span>
+                <span>x = +8</span>
               </div>
             </div>
 
@@ -591,7 +591,7 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
                 }`}
               >
                 <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">
-                  {L('१. मूल भिन्नको मान (Original Expression)', '1. Original Expression')}
+                  {L('1. मूल भिन्नको मान (Original Expression)', '1. Original Expression')}
                 </span>
                 <div className="font-mono text-xs text-slate-600 mb-2">
                   ({currentSimEx.numOriginal}) / ({currentSimEx.denOriginal})
@@ -615,7 +615,7 @@ export const AlgebraicFractionLab: React.FC<SimProps> = ({ onBackToLibrary, onBa
                 }`}
               >
                 <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider block mb-1">
-                  {L('२. सरलीकृत भिन्नको मान (Simplified Expression)', '2. Simplified Expression')}
+                  {L('2. सरलीकृत भिन्नको मान (Simplified Expression)', '2. Simplified Expression')}
                 </span>
                 <div className="font-mono text-xs text-emerald-700 mb-2">
                   ({currentSimEx.numSimplified}) / ({currentSimEx.denSimplified})

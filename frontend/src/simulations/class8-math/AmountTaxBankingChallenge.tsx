@@ -1,7 +1,7 @@
 /**
  * AmountTaxBankingChallenge.tsx
- * Grade 8 Mathematics – Unit 7: SIMPLE INTEREST (साधारण ब्याज)
- * Simulation 3: Total Amount, Interest Tax & Banking Challenge (मिश्रधन, ब्याज कर र बैंकिङ चुनौती)
+ * Grade 8 Mathematics – Unit 7: SIMPLE INTEREST
+ * Simulation 3: Total Amount, Interest Tax & Banking Challenge
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 7)
  */
 import React, { useState } from 'react';
@@ -12,35 +12,35 @@ import { Landmark, FileText, DollarSign, Award, ArrowRight, ShieldCheck, CheckCi
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: '७.५% ब्याजदरमा ४० महिना (१०/३ वर्ष) पछि मिश्रधन रु. २,३७५ हुन्छ भने सावाँ (P) कति थियो?',
+    np: '7.5% ब्याजदरमा 40 महिना (10/3 years) पछि मिश्रधन Rs. 2,375 हुन्छ भने सावाँ (P) कति थियो?',
     en: 'If the amount is Rs. 2,375 after 40 months (10/3 years) at 7.5% per annum, what was the principal (P)?',
     options: [
-      { key: 'A', label: 'रु. १,९०० [ P = (१०० × २३७५) ÷ १२५ = १९०० ]' },
-      { key: 'B', label: 'रु. २,०००' },
-      { key: 'C', label: 'रु. १,८००' },
-      { key: 'D', label: 'रु. १,८५०' },
+      { key: 'A', label: 'Rs. 1,900 [ P = (100 × 2375) ÷ 125 = 1900 ]' },
+      { key: 'B', label: 'Rs. 2,000' },
+      { key: 'C', label: 'Rs. 1,800' },
+      { key: 'D', label: 'Rs. 1,850' },
     ],
     answer: 'A',
   },
   {
-    np: 'रु. ४०,००० को ५% दरले ४ वर्षको कुल ब्याज रु. ८,००० हुन्छ। ५% ब्याज कर कटाउँदा खुद ब्याज (Net Interest) कति बाँकी रहन्छ?',
+    np: 'Rs. 40,000 को 5% दरले 4 yearsको कुल ब्याज Rs. 8,000 हुन्छ। 5% ब्याज कर कटाउँदा खुद ब्याज (Net Interest) कति बाँकी रहन्छ?',
     en: 'Gross interest on Rs. 40,000 at 5% for 4 years is Rs. 8,000. After deducting 5% interest tax, what is the net interest?',
     options: [
-      { key: 'A', label: 'रु. ७,६०० [ कर = ४००, खुद = ८००० - ४०० = ७६०० ]' },
-      { key: 'B', label: 'रु. ७,८००' },
-      { key: 'C', label: 'रु. ७,५००' },
-      { key: 'D', label: 'रु. ७,२००' },
+      { key: 'A', label: 'Rs. 7,600 [ tax = 400, net = 8000 - 400 = 7600 ]' },
+      { key: 'B', label: 'Rs. 7,800' },
+      { key: 'C', label: 'Rs. 7,500' },
+      { key: 'D', label: 'Rs. 7,200' },
     ],
     answer: 'A',
   },
   {
-    np: 'हरिले बैंकबाट १२% वार्षिक ब्याजदरमा रु. ३,००,००० ऋण लिएर २.५ वर्षमा चुक्ता गर्दा जम्मा कति रकम तिर्नुपर्छ?',
+    np: 'हरिले बैंकबाट 12% वार्षिक ब्याजदरमा Rs. 3,00,000 ऋण लिएर 2.5 yearsमा चुक्ता गर्दा जम्मा कति रकम तिर्नुपर्छ?',
     en: 'Hari takes a loan of Rs. 300,000 at 12% for 2.5 years. What total amount must he repay?',
     options: [
-      { key: 'A', label: 'रु. ३,९०,००० [ ब्याज ९०,००० + सावाँ ३००,००० = ३,९०,००० ]' },
-      { key: 'B', label: 'रु. ३,८०,०००' },
-      { key: 'C', label: 'रु. ४,००,०००' },
-      { key: 'D', label: 'रु. ३,७५,०००' },
+      { key: 'A', label: 'Rs. 3,90,000 [ interest 90,000 + principal 300,000 = 3,90,000 ]' },
+      { key: 'B', label: 'Rs. 3,80,000' },
+      { key: 'C', label: 'Rs. 4,00,000' },
+      { key: 'D', label: 'Rs. 3,75,000' },
     ],
     answer: 'A',
   },
@@ -59,10 +59,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'नेपालमा बैंक ब्याजमा लाग्ने कर कुन रकममा काटिन्छ?',
     en: 'In Nepal banking, on which amount is the withholding interest tax deducted?',
     options: [
-      { key: 'A', label: 'प्राप्त ब्याज रकममा मात्र (Only on the earned interest)' },
-      { key: 'B', label: 'सावाँ रकममा' },
-      { key: 'C', label: 'मिश्रधन रकममा' },
-      { key: 'D', label: 'बैंकको कुल पूँजीमा' },
+      { key: 'A', label: 'Only on the interest earned' },
+      { key: 'B', label: 'On the principal amount' },
+      { key: 'C', label: 'On the amount (principal + interest)' },
+      { key: 'D', label: 'On the bank’s total capital' },
     ],
     answer: 'A',
   },
@@ -123,13 +123,13 @@ export const AmountTaxBankingChallenge: React.FC<{
       kit.good();
       setChalFeedback({
         isCorrect: true,
-        msg: L('उत्कृष्ट! खुद ब्याज रु. ७,६०० ठ्याक्कै सही छ!', 'Brilliant! Net interest Rs. 7,600 is exact!'),
+        msg: L('उत्कृष्ट! खुद ब्याज Rs. 7,600 ठ्याक्कै सही छ!', 'Brilliant! Net interest Rs. 7,600 is exact!'),
       });
     } else {
       kit.oops();
       setChalFeedback({
         isCorrect: false,
-        msg: L('पुनः प्रयास गर्नुहोस्! जम्मा ब्याज = रु. ८,०००, ५% कर = रु. ४००, खुद ब्याज = ८,००० - ४०० = ७,६००', 'Hint: Gross Interest = 8,000, Tax = 400, Net = 7,600'),
+        msg: L('पुनः प्रयास गर्नुहोस्! जम्मा ब्याज = Rs. 8,000, 5% कर = Rs. 400, खुद ब्याज = 8,000 - 400 = 7,600', 'Hint: Gross Interest = 8,000, Tax = 400, Net = 7,600'),
       });
     }
   };
@@ -141,7 +141,7 @@ export const AmountTaxBankingChallenge: React.FC<{
       grade={8}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! मिश्रधनबाट सावाँ पत्ता लगाउने, सरकारको ५% ब्याज कर कटाउने र बैंक ऋण चुक्ता गर्ने व्यावहारिक गणित सिकौं!',
+        'नमस्ते! मिश्रधनबाट सावाँ पत्ता लगाउने, सरकारको 5% ब्याज कर कटाउने र बैंक ऋण चुक्ता गर्ने व्यावहारिक गणित सिकौं!',
         'Hello! Let us learn how to find Principal from Amount, calculate 5% interest tax withholding, and manage loan repayments!'
       )}
     >
@@ -155,7 +155,7 @@ export const AmountTaxBankingChallenge: React.FC<{
             }`}
           >
             <DollarSign className="w-4 h-4" />
-            {L('१. मिश्रधनबाट सावाँ (Find P from Amount)', '1. Find P from Amount')}
+            {L('1. मिश्रधनबाट सावाँ (Find P from Amount)', '1. Find P from Amount')}
           </button>
           <button
             onClick={() => setActiveTab('interest_tax')}
@@ -164,7 +164,7 @@ export const AmountTaxBankingChallenge: React.FC<{
             }`}
           >
             <ShieldCheck className="w-4 h-4" />
-            {L('२. ब्याज कर कट्टी (5% Interest Tax)', '2. Interest Tax Withholding')}
+            {L('2. ब्याज कर कट्टी (5% Interest Tax)', '2. Interest Tax Withholding')}
           </button>
           <button
             onClick={() => setActiveTab('loan_repay')}
@@ -173,7 +173,7 @@ export const AmountTaxBankingChallenge: React.FC<{
             }`}
           >
             <Landmark className="w-4 h-4" />
-            {L('३. बैंक ऋण चुक्ता (Loan Repayment)', '3. Loan Repayment')}
+            {L('3. बैंक ऋण चुक्ता (Loan Repayment)', '3. Loan Repayment')}
           </button>
           <button
             onClick={() => setActiveTab('challenge')}
@@ -182,7 +182,7 @@ export const AmountTaxBankingChallenge: React.FC<{
             }`}
           >
             <Award className="w-4 h-4" />
-            {L('४. बैंकिङ चुनौती (CDC Challenge)', '4. CDC Challenge')}
+            {L('4. बैंकिङ चुनौती (CDC Challenge)', '4. CDC Challenge')}
           </button>
         </div>
 
@@ -222,7 +222,7 @@ export const AmountTaxBankingChallenge: React.FC<{
                     className="w-full px-3 py-2 border rounded-xl font-bold"
                   />
                   <div className="text-[11px] text-slate-500 mt-1">
-                    = {toNp(givenMonths)}/१२ = {toNp(timeInYears.toFixed(2))} {L('वर्ष', 'years')}
+                    = {toNp(givenMonths)}/12 = {toNp(timeInYears.toFixed(2))} {L('years', 'years')}
                   </div>
                 </div>
 
@@ -240,14 +240,14 @@ export const AmountTaxBankingChallenge: React.FC<{
               {/* Step by step display */}
               <div className="bg-slate-900 text-white p-6 rounded-2xl space-y-4 font-mono text-xs">
                 <div className="text-amber-400 font-bold uppercase">{L('चरणबद्ध समाधान (CDC Mathematical Solution):', 'CDC Step Solution:')}</div>
-                <div>१. समय (T) = {toNp(givenMonths)} ÷ १२ = {toNp(timeInYears.toFixed(2))} वर्ष</div>
-                <div>२. TR = {toNp(timeInYears.toFixed(2))} × {toNp(givenR)} = {toNp(factorTR.toFixed(2))}</div>
-                <div>३. १०० + TR = १०० + {toNp(factorTR.toFixed(2))} = {toNp((100 + factorTR).toFixed(2))}</div>
+                <div>1. Time (T) = {toNp(givenMonths)} ÷ 12 = {toNp(timeInYears.toFixed(2))} years</div>
+                <div>2. TR = {toNp(timeInYears.toFixed(2))} × {toNp(givenR)} = {toNp(factorTR.toFixed(2))}</div>
+                <div>3. 100 + TR = 100 + {toNp(factorTR.toFixed(2))} = {toNp((100 + factorTR).toFixed(2))}</div>
                 <div className="text-emerald-400 text-base font-bold pt-2 border-t border-slate-700">
-                  ४. सावाँ P = (१०० × {toNp(givenA)}) ÷ {toNp((100 + factorTR).toFixed(2))} = <b>रु. {toNp(derivedP.toFixed(2))}</b>
+                  4. Principal P = (100 × {toNp(givenA)}) ÷ {toNp((100 + factorTR).toFixed(2))} = <b>Rs. {toNp(derivedP.toFixed(2))}</b>
                 </div>
                 <div className="text-slate-400">
-                  ५. जम्मा ब्याज I = A - P = रु. {toNp(givenA)} - रु. {toNp(derivedP.toFixed(2))} = रु. {toNp(derivedI.toFixed(2))}
+                  5. Total interest I = A - P = Rs. {toNp(givenA)} - Rs. {toNp(derivedP.toFixed(2))} = Rs. {toNp(derivedI.toFixed(2))}
                 </div>
               </div>
             </div>
@@ -264,7 +264,7 @@ export const AmountTaxBankingChallenge: React.FC<{
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
                   {L(
-                    'विक्रमले रु. ४०,००० को ५% दरले ४ वर्षका लागि मुद्दती खातामा राख्दा ५% ब्याज कर कटाएपछि पाउने खुद रकम:',
+                    'विक्रमले Rs. 40,000 को 5% दरले 4 yearsका लागि मुद्दती खातामा राख्दा 5% ब्याज कर कटाएपछि पाउने खुद रकम:',
                     'Bikram deposits Rs. 40,000 at 5% for 4 years. Calculate net amount received after 5% tax deduction:'
                   )}
                 </p>
@@ -281,7 +281,7 @@ export const AmountTaxBankingChallenge: React.FC<{
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-600 block mb-1">{L('समय (वर्ष):', 'Time (years):')}</label>
+                  <label className="text-xs font-bold text-slate-600 block mb-1">{L('समय (years):', 'Time (years):')}</label>
                   <input
                     type="number"
                     value={taxT}
@@ -312,27 +312,27 @@ export const AmountTaxBankingChallenge: React.FC<{
               {/* Tax Flow Visual Cards */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
                 <div className="bg-blue-50 p-4 rounded-2xl border border-blue-200 text-center">
-                  <div className="text-xs text-blue-900 font-bold uppercase">{L('१. कुल ब्याज (Gross Interest)', '1. Gross Interest')}</div>
-                  <div className="text-2xl font-black text-blue-800 my-2">रु. {toNp(grossInterest.toLocaleString())}</div>
-                  <div className="text-[11px] text-blue-600">(P × T × R) ÷ १००</div>
+                  <div className="text-xs text-blue-900 font-bold uppercase">{L('1. कुल ब्याज (Gross Interest)', '1. Gross Interest')}</div>
+                  <div className="text-2xl font-black text-blue-800 my-2">Rs. {toNp(grossInterest.toLocaleString())}</div>
+                  <div className="text-[11px] text-blue-600">(P × T × R) ÷ 100</div>
                 </div>
 
                 <div className="bg-rose-50 p-4 rounded-2xl border border-rose-200 text-center">
-                  <div className="text-xs text-rose-900 font-bold uppercase">{L('२. ब्याज कर कट्टी (Tax)', '2. Tax Deduction')}</div>
-                  <div className="text-2xl font-black text-rose-700 my-2">रु. {toNp(taxDeduction.toLocaleString())}</div>
-                  <div className="text-[11px] text-rose-600">कुल ब्याजको {toNp(taxRatePct)}%</div>
+                  <div className="text-xs text-rose-900 font-bold uppercase">{L('2. ब्याज कर कट्टी (Tax)', '2. Tax Deduction')}</div>
+                  <div className="text-2xl font-black text-rose-700 my-2">Rs. {toNp(taxDeduction.toLocaleString())}</div>
+                  <div className="text-[11px] text-rose-600">of the total interest {toNp(taxRatePct)}%</div>
                 </div>
 
                 <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200 text-center">
-                  <div className="text-xs text-amber-900 font-bold uppercase">{L('३. खुद ब्याज (Net Interest)', '3. Net Interest')}</div>
-                  <div className="text-2xl font-black text-amber-800 my-2">रु. {toNp(netInterest.toLocaleString())}</div>
+                  <div className="text-xs text-amber-900 font-bold uppercase">{L('3. खुद ब्याज (Net Interest)', '3. Net Interest')}</div>
+                  <div className="text-2xl font-black text-amber-800 my-2">Rs. {toNp(netInterest.toLocaleString())}</div>
                   <div className="text-[11px] text-amber-700">{toNp(grossInterest)} - {toNp(taxDeduction)}</div>
                 </div>
 
                 <div className="bg-emerald-50 p-4 rounded-2xl border border-emerald-300 text-center">
-                  <div className="text-xs text-emerald-900 font-bold uppercase">{L('४. अन्तिम फिर्ता रकम', '4. Final Amount')}</div>
-                  <div className="text-2xl font-black text-emerald-700 my-2">रु. {toNp(netTotalAmount.toLocaleString())}</div>
-                  <div className="text-[11px] text-emerald-600">सावाँ + खुद ब्याज</div>
+                  <div className="text-xs text-emerald-900 font-bold uppercase">{L('4. अन्तिम फिर्ता रकम', '4. Final Amount')}</div>
+                  <div className="text-2xl font-black text-emerald-700 my-2">Rs. {toNp(netTotalAmount.toLocaleString())}</div>
+                  <div className="text-[11px] text-emerald-600">Principal + net interest</div>
                 </div>
               </div>
             </div>
@@ -349,7 +349,7 @@ export const AmountTaxBankingChallenge: React.FC<{
                 </h3>
                 <p className="text-xs text-slate-600 mt-1">
                   {L(
-                    'CDC पाठ्यपुस्तक: हरिले बैंकबाट १२% ब्याजदरमा रु. ३,००,००० ऋण लिई २.५ वर्षमा चुक्ता गर्दा कति रकम तिर्नुपर्छ?',
+                    'CDC पाठ्यपुस्तक: हरिले बैंकबाट 12% ब्याजदरमा Rs. 3,00,000 ऋण लिई 2.5 yearsमा चुक्ता गर्दा कति रकम तिर्नुपर्छ?',
                     'CDC Example: Hari borrows Rs. 300,000 at 12% for 2.5 years. What total amount must he repay?'
                   )}
                 </p>
@@ -375,7 +375,7 @@ export const AmountTaxBankingChallenge: React.FC<{
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-600 block mb-1">{L('ऋण अवधि (वर्ष T):', 'Loan Term (Years T):')}</label>
+                  <label className="text-xs font-bold text-slate-600 block mb-1">{L('ऋण अवधि (years T):', 'Loan Term (Years T):')}</label>
                   <input
                     type="number"
                     value={loanT}
@@ -389,19 +389,19 @@ export const AmountTaxBankingChallenge: React.FC<{
               <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-100 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                 <div className="bg-white p-4 rounded-xl border border-indigo-200">
                   <div className="text-xs text-slate-500 font-bold uppercase">{L('जम्मा ब्याज रकम', 'Total Loan Interest')}</div>
-                  <div className="text-2xl font-black text-rose-600 my-1">रु. {toNp(loanInterest.toLocaleString())}</div>
-                  <div className="text-[11px] text-slate-400">({toNp(loanP)} × {toNp(loanT)} × {toNp(loanR)}) ÷ १००</div>
+                  <div className="text-2xl font-black text-rose-600 my-1">Rs. {toNp(loanInterest.toLocaleString())}</div>
+                  <div className="text-[11px] text-slate-400">({toNp(loanP)} × {toNp(loanT)} × {toNp(loanR)}) ÷ 100</div>
                 </div>
 
                 <div className="bg-white p-4 rounded-xl border border-indigo-200">
                   <div className="text-xs text-slate-500 font-bold uppercase">{L('कुल चुक्ता रकम (Total Repay)', 'Total Repay (A)')}</div>
-                  <div className="text-2xl font-black text-indigo-700 my-1">रु. {toNp(totalLoanRepay.toLocaleString())}</div>
-                  <div className="text-[11px] text-slate-400">सावाँ + ब्याज</div>
+                  <div className="text-2xl font-black text-indigo-700 my-1">Rs. {toNp(totalLoanRepay.toLocaleString())}</div>
+                  <div className="text-[11px] text-slate-400">Principal + interest</div>
                 </div>
 
                 <div className="bg-white p-4 rounded-xl border border-indigo-200">
                   <div className="text-xs text-slate-500 font-bold uppercase">{L('मासिक किस्ता (Monthly EMI)', 'Monthly Approx')}</div>
-                  <div className="text-2xl font-black text-emerald-700 my-1">रु. {toNp(monthlyInstallment.toFixed(0))}</div>
+                  <div className="text-2xl font-black text-emerald-700 my-1">Rs. {toNp(monthlyInstallment.toFixed(0))}</div>
                   <div className="text-[11px] text-slate-400">{toNp(loanT * 12)} {L('महिनामा समान किस्ता', 'months')}</div>
                 </div>
               </div>
@@ -424,20 +424,20 @@ export const AmountTaxBankingChallenge: React.FC<{
 
               <div className="p-4 bg-slate-50 rounded-2xl text-slate-700 text-sm leading-relaxed border border-slate-200">
                 {L(
-                  'विक्रमले रु. ४०,००० सावाँ ५% का दरले ४ वर्षका लागि बैंकमा जम्मा गरे। ५% ब्याज कर कटाउँदा उनले पाउने खुद ब्याज (Net Interest) कति हुन्छ? हिसाब गरी लेख्नुहोस्।',
+                  'विक्रमले Rs. 40,000 सावाँ 5% का दरले 4 yearsका लागि बैंकमा जम्मा गरे। 5% ब्याज कर कटाउँदा उनले पाउने खुद ब्याज (Net Interest) कति हुन्छ? हिसाब गरी लेख्नुहोस्।',
                   'Bikram deposited Rs. 40,000 at 5% for 4 years in a bank. Deducting 5% tax on interest, calculate the Net Interest he receives.'
                 )}
               </div>
 
               <div className="max-w-xs">
                 <label className="block text-xs font-bold text-slate-600 mb-1">
-                  {L('तपाईंको खुद ब्याज (रु.):', 'Your Net Interest (Rs.):')}
+                  {L('तपाईंको खुद ब्याज (Rs.):', 'Your Net Interest (Rs.):')}
                 </label>
                 <input
                   type="number"
                   value={chalInput}
                   onChange={(e) => setChalInput(e.target.value)}
-                  placeholder={L('रु. लेख्नुहोस्...', 'Enter Rs...')}
+                  placeholder={L('Rs. लेख्नुहोस्...', 'Enter Rs...')}
                   className="w-full px-4 py-2 border rounded-xl font-bold text-slate-800"
                 />
               </div>

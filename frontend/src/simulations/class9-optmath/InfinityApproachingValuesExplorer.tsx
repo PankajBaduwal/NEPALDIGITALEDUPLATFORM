@@ -43,25 +43,25 @@ export const InfinityApproachingValuesExplorer: React.FC<SimProps> = ({ onBackTo
     {
       qNp: '5 ÷ 0 को गणितीय अर्थ के हो?',
       qEn: 'What is the mathematical meaning of 5 ÷ 0?',
-      opts: ['0', '5', 'अपरिभाषित (Undefined)', 'अनन्त (Infinity)'],
+      opts: ['0', '5', 'Undefined', 'Infinity'],
       correct: 2,
-      expNp: 'शून्यले भाग गर्न सकिँदैन, त्यसैले 5 ÷ 0 अपरिभाषित (Undefined) हुन्छ।',
+      expNp: 'शून्यले भाग गर्न सकिँदैन, त्यसैले 5 ÷ 0 Undefined हुन्छ।',
       expEn: 'Division by zero is undefined in mathematics.',
     },
     {
       qNp: '0 / 0 लाई गणितमा के भनिन्छ?',
       qEn: 'What is 0 / 0 called in mathematics?',
-      opts: ['0', '1', 'अनिर्धार्य रूप (Indeterminate form)', 'अनन्त (Infinity)'],
+      opts: ['0', '1', 'अनिर्धार्य रूप (Indeterminate form)', 'Infinity'],
       correct: 2,
       expNp: '0/0 बाट कुनै निश्चित मान प्राप्त हुन नसक्ने भएकोले यसलाई अनिर्धार्य रूप भनिन्छ।',
       expEn: '0/0 cannot be assigned a unique value and is called an indeterminate form.',
     },
     {
-      qNp: 'यदि x धनात्मक दिशाबाट ० को नजिकिँदै जान्छ (x → 0⁺) भने 1/x कहाँ पुग्छ?',
+      qNp: 'यदि x धनात्मक दिशाबाट 0 को नजिकिँदै जान्छ (x → 0⁺) भने 1/x कहाँ पुग्छ?',
       qEn: 'As x approaches 0 from the positive side (x → 0⁺), what does 1/x approach?',
       opts: ['0', '1', '+∞ (धनात्मक अनन्त)', '-∞ (ऋणात्मक अनन्त)'],
       correct: 2,
-      expNp: 'हर जति ० नजिकिन्छ, भागफल उति असीमित रूपमा ठूलो हुँदै +∞ पुग्छ।',
+      expNp: 'हर जति 0 नजिकिन्छ, भागफल उति असीमित रूपमा ठूलो हुँदै +∞ पुग्छ।',
       expEn: 'As the denominator approaches 0 from the right, the quotient grows without bound towards +∞.',
     },
   ];
@@ -109,7 +109,7 @@ export const InfinityApproachingValuesExplorer: React.FC<SimProps> = ({ onBackTo
               <span className="font-bold">{L('अनन्त (Infinity ∞) के हो?', 'What is Infinity (∞)?')}</span>
               <p className="mt-1">
                 {L(
-                  'अनन्त कुनै वास्तविक संख्या होइन! यो असीमित रूपमा बढ्दै जाने वा बिनाअन्त निरन्तर रहने स्थितिको संकेत हो। जस्तै: प्राकृतिक संख्याहरू १, २, ३, ... अनन्तसम्म जान्छन्।',
+                  'अनन्त कुनै वास्तविक संख्या होइन! यो असीमित रूपमा बढ्दै जाने वा बिनाअन्त निरन्तर रहने स्थितिको संकेत हो। जस्तै: प्राकृतिक संख्याहरू 1, 2, 3, ... अनन्तसम्म जान्छन्।',
                   'Infinity is not a real number! It is a concept describing something unbounded, limitless, or continuing without end.'
                 )}
               </p>
@@ -118,10 +118,10 @@ export const InfinityApproachingValuesExplorer: React.FC<SimProps> = ({ onBackTo
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="p-4 bg-slate-50 border rounded-xl space-y-2">
                 <div className="font-bold text-slate-800 text-sm">
-                  {L('१. धनात्मक अनन्त (+∞):', '1. Positive Infinity (+∞):')}
+                  {L('1. धनात्मक अनन्त (+∞):', '1. Positive Infinity (+∞):')}
                 </div>
                 <div className="font-mono text-xs text-indigo-800">
-                  १, १०, १००, १,०००, १०,०००, ... ➔ +∞
+                  1, 10, 100, 1,000, 10,000, ... ➔ +∞
                 </div>
                 <p className="text-xs text-slate-600">
                   {L('कुनै पनि ठूलोभन्दा ठूलो संख्याभन्दा पनि अझ ठूलो हुँदै जाने असीमित मान।', 'Growing larger without any bound.')}
@@ -130,10 +130,10 @@ export const InfinityApproachingValuesExplorer: React.FC<SimProps> = ({ onBackTo
 
               <div className="p-4 bg-slate-50 border rounded-xl space-y-2">
                 <div className="font-bold text-slate-800 text-sm">
-                  {L('२. ऋणात्मक अनन्त (-∞):', '2. Negative Infinity (-∞):')}
+                  {L('2. ऋणात्मक अनन्त (-∞):', '2. Negative Infinity (-∞):')}
                 </div>
                 <div className="font-mono text-xs text-rose-800">
-                  -१, -१०, -१००, -१,०००, -१०,०००, ... ➔ -∞
+                  -1, -10, -100, -1,000, -10,000, ... ➔ -∞
                 </div>
                 <p className="text-xs text-slate-600">
                   {L('शून्यबाट बायाँतर्फ निरन्तर घट्दै जाने असीमित सानो मान।', 'Decreasing boundlessly towards the negative side.')}
@@ -166,10 +166,10 @@ export const InfinityApproachingValuesExplorer: React.FC<SimProps> = ({ onBackTo
         {activeTab === 'divzero' && (
           <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
             <div className="bg-amber-50 border-l-4 border-amber-600 p-3 rounded text-sm text-amber-900">
-              <span className="font-bold">{L('५ ÷ ० किन अपरिभाषित (Undefined) हुन्छ?', 'Why is 5 ÷ 0 Undefined?')}</span>
+              <span className="font-bold">{L('5 ÷ 0 किन Undefined हुन्छ?', 'Why is 5 ÷ 0 Undefined?')}</span>
               <p className="mt-1">
                 {L(
-                  'जब हर (Denominator) शून्यको नजिकिँदै जान्छ, भागफल ५/x असीमित ठूलो बन्छ। दायाँबाट नजिकिँदा +∞ र बायाँबाट नजिकिँदा -∞ पुग्छ। दुई फरक मानमा पुग्ने हुनाले 5/0 लाई कुनै एउटा संख्या तोक्न सकिँदैन, यो अपरिभाषित हुन्छ!',
+                  'जब हर (Denominator) शून्यको नजिकिँदै जान्छ, भागफल 5/x असीमित ठूलो बन्छ। दायाँबाट नजिकिँदा +∞ र बायाँबाट नजिकिँदा -∞ पुग्छ। दुई फरक मानमा पुग्ने हुनाले 5/0 लाई कुनै एउटा संख्या तोक्न सकिँदैन, यो अपरिभाषित हुन्छ!',
                   'As the denominator approaches 0 from the right, the quotient approaches +∞; from the left, it approaches -∞. Hence 5/0 cannot have a single value and is undefined.'
                 )}
               </p>
@@ -183,7 +183,7 @@ export const InfinityApproachingValuesExplorer: React.FC<SimProps> = ({ onBackTo
                 }}
                 className={`flex-1 py-1.5 rounded-lg text-xs font-bold border ${approachSide === 'right' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-slate-50 text-slate-700'}`}
               >
-                {L('धनात्मक दिशाबाट ० तर्फ (x → 0⁺)', 'From positive side (x → 0⁺)')}
+                {L('धनात्मक दिशाबाट 0 तर्फ (x → 0⁺)', 'From positive side (x → 0⁺)')}
               </button>
               <button
                 onClick={() => {
@@ -192,7 +192,7 @@ export const InfinityApproachingValuesExplorer: React.FC<SimProps> = ({ onBackTo
                 }}
                 className={`flex-1 py-1.5 rounded-lg text-xs font-bold border ${approachSide === 'left' ? 'bg-rose-600 text-white border-rose-600' : 'bg-slate-50 text-slate-700'}`}
               >
-                {L('ऋणात्मक दिशाबाट ० तर्फ (x → 0⁻)', 'From negative side (x → 0⁻)')}
+                {L('ऋणात्मक दिशाबाट 0 तर्फ (x → 0⁻)', 'From negative side (x → 0⁻)')}
               </button>
             </div>
 
@@ -216,7 +216,7 @@ export const InfinityApproachingValuesExplorer: React.FC<SimProps> = ({ onBackTo
                 <thead>
                   <tr className="bg-slate-100 border-b">
                     <th className="p-2 font-bold text-slate-700">{L('हर (x)', 'Denominator (x)')}</th>
-                    <th className="p-2 font-bold text-slate-700">{L('भागफल (५ / x)', 'Quotient (5 / x)')}</th>
+                    <th className="p-2 font-bold text-slate-700">{L('भागफल (5 / x)', 'Quotient (5 / x)')}</th>
                     <th className="p-2 font-bold text-slate-700">{L('प्रवृत्ति (Behavior)', 'Trend')}</th>
                   </tr>
                 </thead>
@@ -226,7 +226,7 @@ export const InfinityApproachingValuesExplorer: React.FC<SimProps> = ({ onBackTo
                       <td className="p-2 font-mono">{fmt(step)}</td>
                       <td className="p-2 font-mono text-indigo-700 font-bold">{fmt(5 / step)}</td>
                       <td className="p-2 text-xs text-slate-600">
-                        {idx === currentSteps.length - 1 ? (approachSide === 'right' ? '➔ +∞ तर्फ असीमित' : '➔ -∞ तर्फ असीमित') : 'क्रमशः ठूलो हुँदै'}
+                        {idx === currentSteps.length - 1 ? (approachSide === 'right' ? '➔ Unbounded towards +∞' : '➔ -∞ तर्फ असीमित') : 'Getting gradually larger'}
                       </td>
                     </tr>
                   ))}
@@ -240,10 +240,10 @@ export const InfinityApproachingValuesExplorer: React.FC<SimProps> = ({ onBackTo
         {activeTab === 'indeterminate' && (
           <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
             <div className="bg-emerald-50 border-l-4 border-emerald-600 p-3 rounded text-sm text-emerald-900">
-              <span className="font-bold">{L('० / ० लाई किन अनिर्धार्य (Indeterminate) भनिन्छ?', 'Why is 0/0 Indeterminate?')}</span>
+              <span className="font-bold">{L('0 / 0 लाई किन अनिर्धार्य (Indeterminate) भनिन्छ?', 'Why is 0/0 Indeterminate?')}</span>
               <p className="mt-1">
                 {L(
-                  'प्रत्यक्ष प्रतिस्थापन गर्दा ०/० आउने फरक-फरक अभिव्यक्तिहरूको सीमा मान (Limit) फरक-फरक संख्या निस्कन सक्छ। त्यसैले ०/० लाई सिधै कुनै निश्चित मान दिन सकिँदैन!',
+                  'प्रत्यक्ष प्रतिस्थापन गर्दा 0/0 आउने फरक-फरक अभिव्यक्तिहरूको सीमा मान (Limit) फरक-फरक संख्या निस्कन सक्छ। त्यसैले 0/0 लाई सिधै कुनै निश्चित मान दिन सकिँदैन!',
                   'Different algebraic expressions evaluating to 0/0 on direct substitution approach completely different limiting values. Hence 0/0 is indeterminate.'
                 )}
               </p>
@@ -272,27 +272,27 @@ export const InfinityApproachingValuesExplorer: React.FC<SimProps> = ({ onBackTo
 
             {indetExample === 'x2_minus_4' && (
               <div className="p-4 bg-slate-50 border rounded-xl space-y-2 font-mono text-sm">
-                <div className="text-slate-700 font-bold">f(x) = (x² - 4) / (x - 2) (जब x → 2)</div>
-                <div className="text-rose-700">१. प्रत्यक्ष मान राख्दा: f(2) = (2² - 4)/(2 - 2) = 0/0 (अनिर्धार्य रूप)</div>
-                <div className="text-indigo-800">२. खण्डीकरण गर्दा: ((x - 2)(x + 2)) / (x - 2) = x + 2 (जब x ≠ 2)</div>
-                <div className="text-emerald-700 font-bold text-base">➔ सीमा मान (Limiting value) = 2 + 2 = 4</div>
+                <div className="text-slate-700 font-bold">f(x) = (x² - 4) / (x - 2) (when x → 2)</div>
+                <div className="text-rose-700">1. Direct substitution: f(2) = (2² - 4)/(2 - 2) = 0/0</div>
+                <div className="text-indigo-800">2. Factorizing: ((x - 2)(x + 2)) / (x - 2) = x + 2</div>
+                <div className="text-emerald-700 font-bold text-base">➔ Limiting value = 2 + 2 = 4</div>
               </div>
             )}
 
             {indetExample === 'three_x' && (
               <div className="p-4 bg-slate-50 border rounded-xl space-y-2 font-mono text-sm">
-                <div className="text-slate-700 font-bold">f(x) = 3x / x (जब x → 0)</div>
-                <div className="text-rose-700">१. प्रत्यक्ष मान राख्दा: 3(0) / 0 = 0/0 (अनिर्धार्य रूप)</div>
-                <div className="text-indigo-800">२. सरल गर्दा: 3x / x = 3 (जब x ≠ 0)</div>
+                <div className="text-slate-700 font-bold">f(x) = 3x / x</div>
+                <div className="text-rose-700">1. Direct substitution: 3(0) / 0 = 0/0</div>
+                <div className="text-indigo-800">2. सरल गर्दा: 3x / x = 3</div>
                 <div className="text-emerald-700 font-bold text-base">➔ सीमा मान (Limiting value) = 3</div>
               </div>
             )}
 
             {indetExample === 'x2_over_x' && (
               <div className="p-4 bg-slate-50 border rounded-xl space-y-2 font-mono text-sm">
-                <div className="text-slate-700 font-bold">f(x) = x² / x (जब x → 0)</div>
-                <div className="text-rose-700">१. प्रत्यक्ष मान राख्दा: 0² / 0 = 0/0 (अनिर्धार्य रूप)</div>
-                <div className="text-indigo-800">२. सरल गर्दा: x² / x = x (जब x ≠ 0)</div>
+                <div className="text-slate-700 font-bold">f(x) = x² / x</div>
+                <div className="text-rose-700">1. Direct substitution: 0² / 0 = 0/0</div>
+                <div className="text-indigo-800">2. सरल गर्दा: x² / x = x</div>
                 <div className="text-emerald-700 font-bold text-base">➔ सीमा मान (Limiting value) = 0</div>
               </div>
             )}

@@ -5,13 +5,13 @@ import { toNp, FONT_NP } from '../class1-math-kit/nepali';
 
 const QUIZ_QUESTIONS = [
   {
-    np: '(a + b)³ को ज्यामितीय विस्तार (Geometric Expansion) मा कुल कतिवटा साना ठोसहरू (Tessellated blocks) बन्छन्?',
+    np: '(a + b)³ को ज्यामितीय विस्तार (Geometric Expansion) मा कुल कतिpcs साना ठोसहरू (Tessellated blocks) बन्छन्?',
     en: 'In the geometric expansion of (a + b)³, how many smaller cuboids and cubes are formed?',
     options: [
-      { key: 'A', label: '४ वटा' },
-      { key: 'B', label: '६ वटा' },
-      { key: 'C', label: '८ वटा (१ वटा a³, ३ वटा a²b, ३ वटा ab², १ वटा b³)' },
-      { key: 'D', label: '१२ वटा' },
+      { key: 'A', label: '4 pcs' },
+      { key: 'B', label: '6 pcs' },
+      { key: 'C', label: '8 pcs (1 pcs a³, 3 pcs a²b, 3 pcs ab², 1 pcs b³)' },
+      { key: 'D', label: '12 pcs' },
     ],
     answer: 'C',
   },
@@ -19,10 +19,10 @@ const QUIZ_QUESTIONS = [
     np: '(a + b)³ को सही बीजीय विस्तार सूत्र कुन हो?',
     en: 'What is the correct algebraic expansion formula for (a + b)³?',
     options: [
-      { key: 'A', label: 'a³ + ३a²b + ३ab² + b³' },
+      { key: 'A', label: 'a³ + 3a²b + 3ab² + b³' },
       { key: 'B', label: 'a³ + b³' },
-      { key: 'C', label: 'a³ - ३a²b + ३ab² - b³' },
-      { key: 'D', label: 'a³ + ३ab + b³' },
+      { key: 'C', label: 'a³ - 3a²b + 3ab² - b³' },
+      { key: 'D', label: 'a³ + 3ab + b³' },
     ],
     answer: 'A',
   },
@@ -30,21 +30,21 @@ const QUIZ_QUESTIONS = [
     np: '(a - b)³ को विस्तार सूत्र कुन हो?',
     en: 'What is the expansion formula for (a - b)³?',
     options: [
-      { key: 'A', label: 'a³ - ३a²b + ३ab² - b³' },
+      { key: 'A', label: 'a³ - 3a²b + 3ab² - b³' },
       { key: 'B', label: 'a³ - b³' },
-      { key: 'C', label: 'a³ + ३a²b - ३ab² + b³' },
-      { key: 'D', label: 'a³ - ३ab(a - b)' },
+      { key: 'C', label: 'a³ + 3a²b - 3ab² + b³' },
+      { key: 'D', label: 'a³ - 3ab(a - b)' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि a = ३ र b = २ भए (a + b)³ = ५³ = १२५ हुन्छ। यसमा ३a²b को मान कति हुन्छ?',
+    np: 'यदि a = 3 र b = 2 भए (a + b)³ = 5³ = 125 हुन्छ। यसमा 3a²b को मान कति हुन्छ?',
     en: 'If a = 3 and b = 2, (a + b)³ = 5³ = 125. What is the value of 3a²b?',
     options: [
-      { key: 'A', label: '२७' },
-      { key: 'B', label: '५४ (३ × ३² × २ = ३ × ९ × २ = ५४)' },
-      { key: 'C', label: '३६' },
-      { key: 'D', label: '८' },
+      { key: 'A', label: '27' },
+      { key: 'B', label: '54 (3 × 3² × 2 = 3 × 9 × 2 = 54)' },
+      { key: 'C', label: '36' },
+      { key: 'D', label: '8' },
     ],
     answer: 'B',
   },
@@ -87,7 +87,7 @@ export const AlgebraicCubeBuilder: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! (a + b)³ र (a - b)³ को ज्यामितीय ३D घन ब्लकहरू, ८ वटा खण्डहरूको आयतन र बीजीय विस्तार अन्वेषण गरौं!',
+        'नमस्ते! (a + b)³ र (a - b)³ को ज्यामितीय 3D घन ब्लकहरू, 8 pcs खण्डहरूको आयतन र बीजीय विस्तार अन्वेषण गरौं!',
         'Welcome! Explore geometric 3D visualization of (a + b)³ and (a - b)³, block volumes, and algebraic expansions!'
       )}
     >
@@ -170,32 +170,32 @@ export const AlgebraicCubeBuilder: React.FC<{
             {mode === 'plus' && (
               <div>
                 <div className="text-xs font-bold text-gray-500 mb-2 uppercase tracking-wide">
-                  {L('८ वटा खण्डहरू हाइलाइट गर्नुहोस्:', 'Highlight 8 Components:')}
+                  {L('8 pcs खण्डहरू हाइलाइट गर्नुहोस्:', 'Highlight 8 Components:')}
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-xs font-bold">
                   <button
                     onClick={() => setHighlightBlock('all')}
                     className={`p-2 rounded-xl border ${highlightBlock === 'all' ? 'bg-blue-600 text-white' : 'bg-gray-50 dark:bg-gray-700'}`}
                   >
-                    {L('सबै ८ खण्डहरू (All 8)', 'All 8 Blocks')}
+                    {L('सबै 8 खण्डहरू (All 8)', 'All 8 Blocks')}
                   </button>
                   <button
                     onClick={() => setHighlightBlock('a3')}
                     className={`p-2 rounded-xl border ${highlightBlock === 'a3' ? 'bg-indigo-600 text-white' : 'bg-gray-50 dark:bg-gray-700'}`}
                   >
-                    १ वटा a³ ({aCube})
+                    1 pcs a³ ({aCube})
                   </button>
                   <button
                     onClick={() => setHighlightBlock('a2b')}
                     className={`p-2 rounded-xl border ${highlightBlock === 'a2b' ? 'bg-emerald-600 text-white' : 'bg-gray-50 dark:bg-gray-700'}`}
                   >
-                    ३ वटा a²b ({threeA2B})
+                    3 pcs a²b ({threeA2B})
                   </button>
                   <button
                     onClick={() => setHighlightBlock('ab2')}
                     className={`p-2 rounded-xl border ${highlightBlock === 'ab2' ? 'bg-amber-600 text-white' : 'bg-gray-50 dark:bg-gray-700'}`}
                   >
-                    ३ वटा ab² ({threeAB2})
+                    3 pcs ab² ({threeAB2})
                   </button>
                 </div>
               </div>
@@ -250,31 +250,31 @@ export const AlgebraicCubeBuilder: React.FC<{
               {mode === 'plus' ? (
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between py-1 border-b">
-                    <span className="font-semibold text-indigo-700 dark:text-indigo-300">१. १ वटा a³ ब्लक (a × a × a):</span>
+                    <span className="font-semibold text-indigo-700 dark:text-indigo-300">1. 1 a³ block (a × a × a):</span>
                     <span className="font-mono font-bold">{valA}³ = {aCube}</span>
                   </div>
                   <div className="flex justify-between py-1 border-b">
-                    <span className="font-semibold text-emerald-700 dark:text-emerald-300">२. ३ वटा a²b ब्लक (३ × a² × b):</span>
-                    <span className="font-mono font-bold">३ × {valA}² × {valB} = {threeA2B}</span>
+                    <span className="font-semibold text-emerald-700 dark:text-emerald-300">2. 3 a²b blocks (3 × a² × b):</span>
+                    <span className="font-mono font-bold">3 × {valA}² × {valB} = {threeA2B}</span>
                   </div>
                   <div className="flex justify-between py-1 border-b">
-                    <span className="font-semibold text-amber-700 dark:text-amber-300">३. ३ वटा ab² ब्लक (३ × a × b²):</span>
-                    <span className="font-mono font-bold">३ × {valA} × {valB}² = {threeAB2}</span>
+                    <span className="font-semibold text-amber-700 dark:text-amber-300">3. 3 ab² blocks (3 × a × b²):</span>
+                    <span className="font-mono font-bold">3 × {valA} × {valB}² = {threeAB2}</span>
                   </div>
                   <div className="flex justify-between py-1 border-b">
-                    <span className="font-semibold text-purple-700 dark:text-purple-300">४. १ वटा b³ ब्लक (b × b × b):</span>
+                    <span className="font-semibold text-purple-700 dark:text-purple-300">4. 1 b³ block (b × b × b):</span>
                     <span className="font-mono font-bold">{valB}³ = {bCube}</span>
                   </div>
                   <div className="pt-2 flex justify-between items-center text-sm font-black text-blue-900 dark:text-blue-200">
-                    <span>कुल योगफल = {aCube} + {threeA2B} + {threeAB2} + {bCube}:</span>
+                    <span>Total sum = {aCube} + {threeA2B} + {threeAB2} + {bCube}:</span>
                     <span className="text-xl font-mono text-blue-600 dark:text-blue-400">{totalPlusCube}</span>
                   </div>
                 </div>
               ) : (
                 <div className="space-y-2 text-xs">
                   <div className="p-3 bg-purple-50 dark:bg-purple-950/40 rounded-xl space-y-1 font-mono">
-                    <div>(a - b)³ = a³ - ३a²b + ३ab² - b³</div>
-                    <div>= {valA}³ - ३({valA}²)({valB}) + ३({valA})({valB}²) - {valB}³</div>
+                    <div>(a - b)³ = a³ - 3a²b + 3ab² - b³</div>
+                    <div>= {valA}³ - 3({valA}²)({valB}) + 3({valA})({valB}²) - {valB}³</div>
                     <div>= {aCube} - {threeA2B} + {threeAB2} - {bCube}</div>
                     <div className="text-base font-bold text-purple-700 dark:text-purple-300 pt-1">
                       = {totalMinusCube}

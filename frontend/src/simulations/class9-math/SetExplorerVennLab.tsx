@@ -6,23 +6,23 @@ import { Layers, Sparkles, CheckCircle2, RefreshCw, Plus, X } from 'lucide-react
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'यदि A = {१, २, ३, ४} र B = {३, ४, ५, ६} भए A ∩ B (प्रतिच्छेदन) कुन हो?',
+    np: 'यदि A = {1, 2, 3, 4} र B = {3, 4, 5, 6} भए A ∩ B कुन हो?',
     en: 'If A = {1, 2, 3, 4} and B = {3, 4, 5, 6}, what is A ∩ B (intersection)?',
     options: [
-      { key: 'A', label: '{३, ४} / {3, 4}' },
-      { key: 'B', label: '{१, २, ५, ६}' },
-      { key: 'C', label: '{१, २, ३, ४, ५, ६}' },
-      { key: 'D', label: '∅ (खाली समूह)' },
+      { key: 'A', label: '{3, 4} / {3, 4}' },
+      { key: 'B', label: '{1, 2, 5, 6}' },
+      { key: 'C', label: '{1, 2, 3, 4, 5, 6}' },
+      { key: 'D', label: '∅ (empty set)' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि U = {१, २, ..., १०} र A = {२, ४, ६, ८, १०} भए A को पूरक समूह Ā (वा A\') कति हुन्छ?',
+    np: 'यदि U = {1, 2, ..., 10} र A = {2, 4, 6, 8, 10} भए A को पूरक समूह Ā (वा A\') कति हुन्छ?',
     en: "If U = {1, 2, ..., 10} and A = {2, 4, 6, 8, 10}, what is the complement A'?",
     options: [
-      { key: 'A', label: '{१, ३, ५, ७, ९} (बिजोर सङ्ख्याहरू)' },
-      { key: 'B', label: '{२, ४, ६, ८, १०}' },
-      { key: 'C', label: '{१, २, ३, ४, ५}' },
+      { key: 'A', label: '{1, 3, 5, 7, 9} (odd numbers)' },
+      { key: 'B', label: '{2, 4, 6, 8, 10}' },
+      { key: 'C', label: '{1, 2, 3, 4, 5}' },
       { key: 'D', label: 'U' },
     ],
     answer: 'A',
@@ -31,10 +31,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समूहको अन्तर (Difference of Sets) A − B को अर्थ के हो?',
     en: 'What does the difference of sets A - B mean?',
     options: [
-      { key: 'A', label: 'A मा पर्ने तर B मा नपर्ने सदस्यहरूको समूह ({x : x ∈ A र x ∉ B})' },
-      { key: 'B', label: 'B मा पर्ने तर A मा नपर्ने सदस्यहरू' },
-      { key: 'C', label: 'A र B दुवैमा पर्ने साझा सदस्यहरू' },
-      { key: 'D', label: 'A र B का सबै सदस्यहरू' },
+      { key: 'A', label: 'The set of members in A but not in B ({x : x ∈ A and x ∉ B})' },
+      { key: 'B', label: 'Members in B but not in A' },
+      { key: 'C', label: 'Common members in both A and B' },
+      { key: 'D', label: 'All members of A and B' },
     ],
     answer: 'A',
   },
@@ -42,10 +42,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'यदि दुई समूह A र B मा कुनै पनि साझा सदस्य छैन (A ∩ B = ∅) भने तिनीहरूलाई के भनिन्छ?',
     en: 'If two sets A and B have no common elements (A ∩ B = ∅), what are they called?',
     options: [
-      { key: 'A', label: 'अलगिएका समूहहरू (Disjoint Sets)' },
-      { key: 'B', label: 'खप्टिएका समूहहरू (Overlapping Sets)' },
-      { key: 'C', label: 'उपसमूह (Subset)' },
-      { key: 'D', label: 'बराबर समूह (Equal Sets)' },
+      { key: 'A', label: 'Disjoint sets' },
+      { key: 'B', label: 'Overlapping sets' },
+      { key: 'C', label: 'Subset' },
+      { key: 'D', label: 'Equal sets' },
     ],
     answer: 'A',
   },
@@ -75,30 +75,30 @@ interface PresetItem {
 const PRESET_DOMAINS: PresetItem[] = [
   {
     id: 'numbers',
-    nameNp: 'सङ्ख्याहरू (१ देखि १०)',
+    nameNp: 'Numbers (1 to 10)',
     nameEn: 'Numbers (1 to 10)',
     U: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     A: ['2', '4', '6', '8', '10'], // Even numbers
     B: ['3', '6', '9'], // Multiples of 3
-    descNp: 'U = {१ देखि १० सम्मका प्राकृतिक सङ्ख्याहरू}, A = {जोडी सङ्ख्याहरू}, B = {३ का गुणनफलहरू}',
+    descNp: 'U = {natural numbers from 1 to 10}, A = {even numbers}, B = {multiples of 3}',
   },
   {
     id: 'fruits',
-    nameNp: 'फलफूलहरू (Fruits)',
+    nameNp: 'Fruits',
     nameEn: 'Fruits and Colors',
-    U: ['स्याउ', 'केरा', 'सुन्तला', 'अंगुर', 'आँप', 'अम्बा', 'अनार'],
-    A: ['स्याउ', 'केरा', 'सुन्तला', 'आँप'],
-    B: ['सुन्तला', 'अंगुर', 'आँप', 'अनार'],
+    U: ['Apple', 'Banana', 'Orange', 'Grapes', 'Mango', 'Guava', 'Pomegranate'],
+    A: ['Apple', 'Banana', 'Orange', 'Mango'],
+    B: ['Orange', 'Grapes', 'Mango', 'Pomegranate'],
     descNp: 'U = {नेपालमा पाइने फलहरू}, A = {गर्मियामका फलहरू}, B = {रसिला फलहरू}',
   },
   {
     id: 'subjects',
-    nameNp: 'विद्यालयका विषयहरू',
+    nameNp: 'School subjects',
     nameEn: 'School Subjects',
-    U: ['गणित', 'विज्ञान', 'नेपाली', 'अंग्रेजी', 'सामाजिक', 'स्वास्थ्य', 'कम्प्युटर'],
-    A: ['गणित', 'विज्ञान', 'कम्प्युटर'],
-    B: ['विज्ञान', 'स्वास्थ्य', 'कम्प्युटर', 'सामाजिक'],
-    descNp: 'U = {कक्षा ९ का विषयहरू}, A = {प्राविधिक विषयहरू}, B = {प्रयोगात्मक विषयहरू}',
+    U: ['Maths', 'Science', 'Nepali', 'English', 'Social', 'Health', 'Computer'],
+    A: ['Maths', 'Science', 'Computer'],
+    B: ['Science', 'Health', 'Computer', 'Social'],
+    descNp: 'U = {कक्षा 9 का विषयहरू}, A = {प्राविधिक विषयहरू}, B = {प्रयोगात्मक विषयहरू}',
   },
 ];
 
@@ -222,7 +222,7 @@ export const SetExplorerVennLab: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! कक्षा ९ को पहिलो एकाइ "समूह" (Sets) मा स्वागत छ। भेन चित्रमा समूहका क्रियाहरू (संयोजन, प्रतिच्छेदन, अन्तर र पूरक) प्रत्यक्ष अन्वेषण गरौं!',
+        'नमस्ते! कक्षा 9 को पहिलो एकाइ "समूह" (Sets) मा स्वागत छ। भेन चित्रमा समूहका क्रियाहरू (संयोजन, प्रतिच्छेदन, अन्तर र पूरक) प्रत्यक्ष अन्वेषण गरौं!',
         'Welcome to Grade 9 Unit 1: Sets! Interactively explore Set Union, Intersection, Difference, and Complement with dynamic Venn diagrams!'
       )}
     >
@@ -235,7 +235,7 @@ export const SetExplorerVennLab: React.FC<{
               activeTab === 'two_set' ? 'bg-indigo-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🟡🔵 {L('१. दुई-समूह भेन चित्र प्रयोगशाला (2-Set Lab)', '1. 2-Set Venn Lab')}
+            🟡🔵 {L('1. दुई-समूह भेन चित्र प्रयोगशाला (2-Set Lab)', '1. 2-Set Venn Lab')}
           </button>
           <button
             onClick={() => setActiveTab('three_set')}
@@ -243,7 +243,7 @@ export const SetExplorerVennLab: React.FC<{
               activeTab === 'three_set' ? 'bg-indigo-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🟣 {L('२. तीन-समूह भेन चित्र (3-Set Venn Diagram)', '2. 3-Set Venn Diagram')}
+            🟣 {L('2. तीन-समूह भेन चित्र (3-Set Venn Diagram)', '2. 3-Set Venn Diagram')}
           </button>
           <button
             onClick={() => setActiveTab('relations')}
@@ -251,7 +251,7 @@ export const SetExplorerVennLab: React.FC<{
               activeTab === 'relations' ? 'bg-indigo-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🔍 {L('३. समूहका सम्बन्धहरू (Disjoint & Subsets)', '3. Set Relationships')}
+            🔍 {L('3. समूहका सम्बन्धहरू (Disjoint & Subsets)', '3. Set Relationships')}
           </button>
         </div>
 
@@ -407,21 +407,21 @@ export const SetExplorerVennLab: React.FC<{
               {/* Mathematical Result Banner */}
               <div className="w-full mt-4 p-3 bg-indigo-50 border border-indigo-200 rounded-xl text-center">
                 <span className="text-xs font-bold text-indigo-900 uppercase block mb-1">
-                  गणितीय नतिजा (Mathematical Result):
+                  Mathematical result:
                 </span>
                 <div className="text-base font-extrabold text-indigo-700 font-mono">
                   {currentOp === 'union' && `A ∪ B = { ${resultElements.join(', ')} }`}
                   {currentOp === 'intersect' && `A ∩ B = { ${resultElements.join(', ')} }`}
                   {currentOp === 'diff_A_B' && `A − B = { ${resultElements.join(', ')} }`}
                   {currentOp === 'diff_B_A' && `B − A = { ${resultElements.join(', ')} }`}
-                  {currentOp === 'comp_A' && `Ā (वा A') = { ${resultElements.join(', ')} }`}
-                  {currentOp === 'comp_B' && `B̄ (वा B') = { ${resultElements.join(', ')} }`}
+                  {currentOp === 'comp_A' && `Ā (or A') = { ${resultElements.join(', ')} }`}
+                  {currentOp === 'comp_B' && `B̄ (or B') = { ${resultElements.join(', ')} }`}
                   {currentOp === 'comp_union' && `(A ∪ B)' = { ${resultElements.join(', ')} }`}
                   {currentOp === 'sym_diff' && `A △ B = (A − B) ∪ (B − A) = { ${resultElements.join(', ')} }`}
-                  {currentOp === 'none' && 'कुनै क्रिया छानिएको छैन'}
+                  {currentOp === 'none' && 'No operation selected'}
                 </div>
                 <div className="text-xs text-slate-500 mt-1">
-                  सदस्य सङ्ख्या (Cardinality) = {resultElements.length}
+                  Number of members (cardinality) = {resultElements.length}
                 </div>
               </div>
             </div>
@@ -431,7 +431,7 @@ export const SetExplorerVennLab: React.FC<{
               {/* Presets */}
               <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
                 <span className="text-xs font-bold text-slate-700 uppercase">
-                  १. विषयगत नमुना छनोट (Preset Domain):
+                  1. Choose a preset domain:
                 </span>
                 <div className="grid grid-cols-3 gap-1.5">
                   {PRESET_DOMAINS.map((p, idx) => (
@@ -456,18 +456,18 @@ export const SetExplorerVennLab: React.FC<{
               {/* Set Operation Selector */}
               <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
                 <span className="text-xs font-bold text-slate-700 uppercase">
-                  २. समूहका क्रियाहरू (Choose Operation to Shade):
+                  2. Set operations (choose an operation to shade):
                 </span>
                 <div className="grid grid-cols-2 gap-2 text-xs font-bold">
                   {[
-                    { key: 'union', label: 'A ∪ B (संयोजन / Union)' },
-                    { key: 'intersect', label: 'A ∩ B (प्रतिच्छेदन)' },
-                    { key: 'diff_A_B', label: 'A − B (A मात्र / Only A)' },
-                    { key: 'diff_B_A', label: 'B − A (B मात्र / Only B)' },
-                    { key: 'comp_A', label: "Ā वा A' (A को पूरक)" },
-                    { key: 'comp_B', label: "B̄ वा B' (B को पूरक)" },
-                    { key: 'comp_union', label: "(A ∪ B)' (संयोजनको पूरक)" },
-                    { key: 'sym_diff', label: 'A △ B (सममितीय अन्तर)' },
+                    { key: 'union', label: 'A ∪ B' },
+                    { key: 'intersect', label: 'A ∩ B' },
+                    { key: 'diff_A_B', label: 'A − B' },
+                    { key: 'diff_B_A', label: 'B − A' },
+                    { key: 'comp_A', label: "Ā or A'" },
+                    { key: 'comp_B', label: "B̄ or B'" },
+                    { key: 'comp_union', label: "(A ∪ B)'" },
+                    { key: 'sym_diff', label: 'A △ B' },
                   ].map((op) => (
                     <button
                       key={op.key}
@@ -487,7 +487,7 @@ export const SetExplorerVennLab: React.FC<{
               {/* Interactive Element Toggles in A and B */}
               <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3 text-xs">
                 <span className="font-bold text-slate-700 uppercase block">
-                  ३. समूहमा सदस्य थप/घट (Toggle Elements in Sets):
+                  3. Add/remove members in sets (toggle elements):
                 </span>
 
                 <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
@@ -536,7 +536,7 @@ export const SetExplorerVennLab: React.FC<{
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             <div className="lg:col-span-8 bg-white rounded-2xl shadow-lg p-5 border border-slate-200 flex flex-col items-center">
               <h3 className="font-extrabold text-slate-800 text-sm mb-2">
-                तीन-समूह भेन चित्र (3-Set Venn Diagram: A, B, C in U)
+                3-set Venn diagram (A, B, C in U)
               </h3>
 
               <svg
@@ -614,7 +614,7 @@ export const SetExplorerVennLab: React.FC<{
                       : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                   }`}
                 >
-                  साझा केन्द्र A ∩ B ∩ C = &#123; ५ &#125;
+                  Common centre A ∩ B ∩ C = &#123; 5 &#125;
                 </button>
                 <button
                   onClick={() => setThreeOp('union')}
@@ -624,7 +624,7 @@ export const SetExplorerVennLab: React.FC<{
                       : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                   }`}
                 >
-                  A ∪ B ∪ C = &#123; १, २, ३, ४, ५, ६, ७ &#125;
+                  A ∪ B ∪ C = &#123; 1, 2, 3, 4, 5, 6, 7 &#125;
                 </button>
               </div>
             </div>
@@ -632,7 +632,7 @@ export const SetExplorerVennLab: React.FC<{
             {/* Explanation of 3-Set Formula */}
             <div className="lg:col-span-4 bg-amber-50 border border-amber-200 rounded-2xl p-5 shadow-sm space-y-3 text-xs">
               <h4 className="font-extrabold text-amber-950 text-sm">
-                तीन समूहको गणनात्मकता सूत्र:
+                Cardinality formula for three sets:
               </h4>
               <div className="bg-white p-3 rounded-xl border border-amber-200 font-mono text-amber-900 leading-relaxed font-semibold">
                 n(A ∪ B ∪ C) = n(A) + n(B) + n(C)
@@ -640,9 +640,9 @@ export const SetExplorerVennLab: React.FC<{
                 <br />+ n(A ∩ B ∩ C)
               </div>
               <p className="text-amber-900 leading-relaxed">
-                💡 <b>किन जोडिन्छ र घटाइन्छ?</b>
+                💡 <b>Why is it added and subtracted?</b>
                 <br />
-                दुई-दुईवटाको प्रतिच्छेदन घटाउँदा बीचको साझा भाग (A ∩ B ∩ C) तीनैपटक घट्छ। त्यसैले अन्त्यमा यसलाई एकपटक पुनः जोडिन्छ।
+                When the pairwise intersections are subtracted, the central common part (A ∩ B ∩ C) is removed three times. So it is added back once at the end.
               </p>
             </div>
           </div>
@@ -655,10 +655,10 @@ export const SetExplorerVennLab: React.FC<{
             <div className="bg-white rounded-2xl shadow-lg p-5 border border-slate-200 space-y-3">
               <h3 className="font-extrabold text-slate-800 text-sm flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-rose-500" />
-                अलगिएका समूहहरू (Disjoint Sets)
+                Disjoint sets
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                यदि दुई समूहहरू A र B बीच कुनै पनि साझा सदस्य छैन भने (A ∩ B = ∅), तिनीहरूलाई अलगिएका समूह भनिन्छ।
+                If two sets A and B have no common member (A ∩ B = ∅), they are called disjoint sets.
               </p>
 
               <svg width={360} height={180} className="w-full bg-slate-50 rounded-xl border border-slate-200">
@@ -668,12 +668,12 @@ export const SetExplorerVennLab: React.FC<{
                 </text>
                 <circle cx={100} cy={95} r={55} fill="rgba(59, 130, 246, 0.2)" stroke="#2563eb" strokeWidth="2" />
                 <text x={100} y={90} fontSize="14" fontWeight="bold" fill="#1d4ed8" textAnchor="middle">
-                  A = &#123;१, २&#125;
+                  A = &#123;1, 2&#125;
                 </text>
 
                 <circle cx={250} cy={95} r={55} fill="rgba(16, 185, 129, 0.2)" stroke="#059669" strokeWidth="2" />
                 <text x={250} y={90} fontSize="14" fontWeight="bold" fill="#047857" textAnchor="middle">
-                  B = &#123;३, ४&#125;
+                  B = &#123;3, 4&#125;
                 </text>
               </svg>
 
@@ -686,10 +686,10 @@ export const SetExplorerVennLab: React.FC<{
             <div className="bg-white rounded-2xl shadow-lg p-5 border border-slate-200 space-y-3">
               <h3 className="font-extrabold text-slate-800 text-sm flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-emerald-500" />
-                उपसमूह सम्बन्ध (Subset: B ⊂ A)
+                Subset relation (B ⊂ A)
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                यदि समूह B का सबै सदस्यहरू समूह A मा पनि पर्दछन् भने, B लाई A को उपसमूह (B ⊂ A) भनिन्छ।
+                If all members of set B also belong to set A, then B is called a subset of A (B ⊂ A).
               </p>
 
               <svg width={360} height={180} className="w-full bg-slate-50 rounded-xl border border-slate-200">
@@ -700,7 +700,7 @@ export const SetExplorerVennLab: React.FC<{
                 {/* Outer Circle A */}
                 <circle cx={180} cy={95} r={65} fill="rgba(59, 130, 246, 0.15)" stroke="#2563eb" strokeWidth="2" />
                 <text x={180} y={55} fontSize="13" fontWeight="bold" fill="#1d4ed8" textAnchor="middle">
-                  A (अधि-समूह / Superset)
+                  A
                 </text>
 
                 {/* Inner Circle B */}
@@ -711,7 +711,7 @@ export const SetExplorerVennLab: React.FC<{
               </svg>
 
               <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-lg text-xs font-mono text-emerald-900 font-bold text-center">
-                B ⊂ A भए: A ∩ B = B &nbsp;|&nbsp; A ∪ B = A
+                If B ⊂ A: A ∩ B = B &nbsp;|&nbsp; A ∪ B = A
               </div>
             </div>
           </div>

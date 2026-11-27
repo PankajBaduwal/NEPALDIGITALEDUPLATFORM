@@ -1,6 +1,6 @@
 /**
- * Chapter 13 · Number names up to 20 (२० सम्मका सङ्ख्याका नाम)
- * Sim 1: Number Name Blocks (सङ्ख्याको नाम बनाऔँ) — Pure 2D Edition
+ * Chapter 13 · Number names up to 20
+ * Sim 1: Number Name Blocks — Pure 2D Edition
  * 100% 2D SVG / Interactive Blocks – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -27,7 +27,7 @@ export const NumberNameBlocks: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G1-CH13-01',
     chapter: 13,
-    titleNp: 'सङ्ख्याको नाम बनाऔँ (१–२०)',
+    titleNp: 'सङ्ख्याको नाम बनाऔँ (1–20)',
     titleEn: 'Number Name Blocks (1–20)',
   });
 
@@ -74,7 +74,7 @@ export const NumberNameBlocks: React.FC<Props> = ({ onBackToLibrary }) => {
   const quizQuestions: QuizQuestion[] = useMemo(
     () => [
       {
-        np: '५ (पाँच) को अङ्ग्रेजी नाम के हो?',
+        np: '5 को अङ्ग्रेजी नाम के हो?',
         en: 'What is the number name for 5?',
         options: [
           { key: 'FIVE', label: 'FIVE' },
@@ -84,7 +84,7 @@ export const NumberNameBlocks: React.FC<Props> = ({ onBackToLibrary }) => {
         answer: 'FIVE',
       },
       {
-        np: '१० (दश) को अङ्ग्रेजी नाम के हो?',
+        np: '10 को अङ्ग्रेजी नाम के हो?',
         en: 'What is the number name for 10?',
         options: [
           { key: 'TEN', label: 'TEN' },
@@ -94,7 +94,7 @@ export const NumberNameBlocks: React.FC<Props> = ({ onBackToLibrary }) => {
         answer: 'TEN',
       },
       {
-        np: '१५ लाई अङ्ग्रेजीमा के भनिन्छ?',
+        np: '15 लाई अङ्ग्रेजीमा के भनिन्छ?',
         en: 'What is the number name for 15?',
         options: [
           { key: 'FIFTEEN', label: 'FIFTEEN' },

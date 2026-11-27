@@ -13,44 +13,44 @@ interface ProofStep {
 
 const PROOF_STEPS: ProofStep[] = [
   {
-    statement: '△AOB र △COD मा:',
-    reason: 'तुलना गर्दा (Comparing triangles)',
+    statement: 'In △AOB and △COD:',
+    reason: 'Comparing the triangles',
     missing: false,
   },
   {
     statement: '(i) ∠OAB = ∠OCD (Alternate angles)',
-    reason: 'AB // CD भएकाले एकान्तर कोणहरू बराबर',
+    reason: 'Since AB // CD, alternate angles are equal',
     missing: true,
-    options: ['AB // CD भएकाले एकान्तर कोणहरू बराबर', 'शीर्षाभिमुख कोणहरू', 'आसन्न कोणहरू'],
-    correctAnswer: 'AB // CD भएकाले एकान्तर कोणहरू बराबर',
+    options: ['Since AB // CD, alternate angles are equal', 'Vertically opposite angles', 'Adjacent angles'],
+    correctAnswer: 'Since AB // CD, alternate angles are equal',
   },
   {
     statement: '(ii) AB = CD',
-    reason: 'समानान्तर चतुर्भुजका सम्मुख भुजाहरू बराबर',
+    reason: 'Opposite sides of a parallelogram are equal',
     missing: false,
   },
   {
     statement: '(iii) ∠OBA = ∠ODC (Alternate angles)',
-    reason: 'AB // CD भएकाले एकान्तर कोणहरू बराबर',
+    reason: 'Since AB // CD, alternate angles are equal',
     missing: false,
   },
   {
     statement: '△AOB ≅ △COD',
-    reason: 'को.भु.को. (A.S.A.) अनुरुपता सर्त अनुसार',
+    reason: 'By the A.S.A. congruence condition',
     missing: true,
-    options: ['को.भु.को. (A.S.A.) सर्त', 'भु.भु.भु. (S.S.S.) सर्त', 'भु.को.भु. (S.A.S.) सर्त'],
-    correctAnswer: 'को.भु.को. (A.S.A.) सर्त',
+    options: ['A.S.A. condition', 'S.S.S. condition', 'S.A.S. condition'],
+    correctAnswer: 'A.S.A. condition',
   },
   {
-    statement: 'अतः AO = OC र BO = OD',
-    reason: 'अनुरुप त्रिभुजका अनुरुप भुजाहरू (Corresponding sides of congruent triangles)',
+    statement: 'Therefore AO = OC and BO = OD',
+    reason: 'Corresponding sides of congruent triangles',
     missing: true,
     options: [
-      'अनुरुप त्रिभुजका अनुरुप भुजाहरू (Corresponding sides of congruent triangles)',
-      'साझा भुजाहरू',
-      'रचना अनुसार',
+      'Corresponding sides of congruent triangles',
+      'Common sides',
+      'By construction',
     ],
-    correctAnswer: 'अनुरुप त्रिभुजका अनुरुप भुजाहरू (Corresponding sides of congruent triangles)',
+    correctAnswer: 'Corresponding sides of congruent triangles',
   },
 ];
 
@@ -59,18 +59,18 @@ const QUIZ_QUESTIONS = [
     np: 'समानान्तर चतुर्भुजका विकर्णहरूले एक अर्कालाई के गर्छन्?',
     en: 'What do the diagonals of a parallelogram do to each other?',
     options: [
-      { key: 'A', label: 'परस्पर समद्विभाजित गर्छन् (Bisect each other: AO = OC, BO = OD)' },
-      { key: 'B', label: 'सधैं बराबर हुन्छन्' },
-      { key: 'C', label: 'काट्दैनन्' },
-      { key: 'D', label: 'कुनै सम्बन्ध हुँदैन' },
+      { key: 'A', label: 'They bisect each other (AO = OC, BO = OD)' },
+      { key: 'B', label: 'They are always equal' },
+      { key: 'C', label: 'They do not intersect' },
+      { key: 'D', label: 'There is no relation' },
     ],
     answer: 'A',
   },
   {
-    np: 'समानान्तर चतुर्भुज ABCD मा ∠A = ७०° भए सम्मुख कोण ∠C को मान कति हुन्छ?',
+    np: 'समानान्तर चतुर्भुज ABCD मा ∠A = 70° भए सम्मुख कोण ∠C को मान कति हुन्छ?',
     en: 'In parallelogram ABCD, if ∠A = 70°, what is the value of opposite angle ∠C?',
     options: [
-      { key: 'A', label: '70° (सम्मुख कोणहरू बराबर हुन्छन्)' },
+      { key: 'A', label: '70° (opposite angles are equal)' },
       { key: 'B', label: '110°' },
       { key: 'C', label: '90°' },
       { key: 'D', label: '140°' },
@@ -78,10 +78,10 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: 'समानान्तर चतुर्भुजका कुनै दुई आसन्न कोणहरूको योगफल कति हुन्छ?',
+    np: 'समानान्तर चतुर्भुजका कुनै दुई Adjacent anglesको योगफल कति हुन्छ?',
     en: 'What is the sum of any two adjacent angles of a parallelogram?',
     options: [
-      { key: 'A', label: '180° (क्रमागत भित्री कोणहरू)' },
+      { key: 'A', label: '180° (consecutive interior angles)' },
       { key: 'B', label: '360°' },
       { key: 'C', label: '90°' },
       { key: 'D', label: '120°' },
@@ -168,7 +168,7 @@ export const ParallelogramVerificationLab: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! समानान्तर चतुर्भुजका चार प्रमुख विशेषताहरू: १) सम्मुख भुजाहरू बराबर र समानान्तर, २) सम्मुख कोणहरू बराबर, ३) आसन्न कोणहरू १८०°, र ४) विकर्णहरू आपसमा समद्विभाजित हुने गुणलाई यहाँ प्रत्यक्ष जाँच्नुहोस्!',
+        'नमस्ते! समानान्तर चतुर्भुजका चार प्रमुख विशेषताहरू: 1) सम्मुख भुजाहरू बराबर र समानान्तर, 2) सम्मुख कोणहरू बराबर, 3) Adjacent angles 180°, र 4) विकर्णहरू आपसमा समद्विभाजित हुने गुणलाई यहाँ प्रत्यक्ष जाँच्नुहोस्!',
         'Welcome! Investigate the four core theorems of parallelograms: equal opposite sides, equal opposite angles, supplementary adjacent angles, and diagonal bisection!'
       )}
     >
@@ -341,7 +341,7 @@ export const ParallelogramVerificationLab: React.FC<{
               {/* Prop 1: Opposite sides */}
               <div style={{ backgroundColor: '#F0FDF4', borderRadius: 8, padding: 12, border: '1px solid #86EFAC' }}>
                 <strong style={{ fontSize: 12, color: '#166534' }}>
-                  १. सम्मुख भुजाहरू बराबर (Opposite Sides Equal):
+                  1. Opposite sides equal:
                 </strong>
                 <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#065F46', marginTop: 4 }}>
                   AB = CD = {fmt(lenAB)} cm ✓ | AD = BC = {fmt(lenAD)} cm ✓
@@ -351,7 +351,7 @@ export const ParallelogramVerificationLab: React.FC<{
               {/* Prop 2: Opposite angles */}
               <div style={{ backgroundColor: '#F0FDF4', borderRadius: 8, padding: 12, border: '1px solid #86EFAC' }}>
                 <strong style={{ fontSize: 12, color: '#166534' }}>
-                  २. सम्मुख कोणहरू बराबर (Opposite Angles Equal):
+                  2. Opposite angles equal:
                 </strong>
                 <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#065F46', marginTop: 4 }}>
                   ∠A = ∠C = {fmt(angleA)}° ✓ | ∠B = ∠D = {fmt(angleB)}° ✓
@@ -361,7 +361,7 @@ export const ParallelogramVerificationLab: React.FC<{
               {/* Prop 3: Adjacent angles */}
               <div style={{ backgroundColor: '#EFF6FF', borderRadius: 8, padding: 12, border: '1px solid #BFDBFE' }}>
                 <strong style={{ fontSize: 12, color: '#1E40AF' }}>
-                  ३. आसन्न कोणहरू संपूरक (Adjacent Angles Supplementary):
+                  3. Adjacent angles supplementary:
                 </strong>
                 <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#1E3A8A', marginTop: 4 }}>
                   ∠A + ∠B = {fmt(angleA)}° + {fmt(angleB)}° = {fmt(angleA + angleB)}° ✓
@@ -371,7 +371,7 @@ export const ParallelogramVerificationLab: React.FC<{
               {/* Prop 4: Diagonals bisect */}
               <div style={{ backgroundColor: '#FFFBEB', borderRadius: 8, padding: 12, border: '1px solid #FCD34D' }}>
                 <strong style={{ fontSize: 12, color: '#92400E' }}>
-                  ४. विकर्णहरूको समद्विभाजन (Diagonals Bisect Each Other):
+                  4. Diagonals bisect each other:
                 </strong>
                 <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#B45309', marginTop: 4 }}>
                   AO = OC = {fmt(lenAO)} cm ✓ | BO = OD = {fmt(lenBO)} cm ✓

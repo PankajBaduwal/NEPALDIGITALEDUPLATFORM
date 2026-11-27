@@ -1,7 +1,7 @@
 /**
  * CoordinateGeometryBuilder.tsx
- * Grade 7 Mathematics – Lesson 17: COORDINATES (निर्देशाङ्कहरू)
- * Simulation 7: Coordinate Geometry and Shape Builder (निर्देशाङ्क ज्यामिति र आकृति निर्माण)
+ * Grade 7 Mathematics – Lesson 17: COORDINATES
+ * Simulation 7: Coordinate Geometry and Shape Builder
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 252-258)
  */
 import React, { useState } from 'react';
@@ -12,57 +12,57 @@ import { Shapes, Square, Ruler, Sparkles, Check, RotateCcw, PenTool, HelpCircle 
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'बिन्दुहरू A(४,०), B(४,४), C(-२,४) र D(-२,०) लाई क्रमैसँग जोड्दा कुन ज्यामितीय आकृति बन्दछ?',
+    np: 'बिन्दुहरू A(4,0), B(4,4), C(-2,4) र D(-2,0) लाई क्रमैसँग जोड्दा कुन ज्यामितीय आकृति बन्दछ?',
     en: 'When points A(4,0), B(4,4), C(-2,4), and D(-2,0) are joined in order, what shape is formed?',
     options: [
-      { key: 'A', label: 'आयत (Rectangle - लम्बाइ ६ र चौडाइ ४ एकाइ)' },
-      { key: 'B', label: 'वर्ग (Square)' },
-      { key: 'C', label: 'समलम्ब चतुर्भुज (Trapezium)' },
-      { key: 'D', label: 'त्रिभुज (Triangle)' },
+      { key: 'A', label: 'Rectangle (length 6 and breadth 4 units)' },
+      { key: 'B', label: 'Square' },
+      { key: 'C', label: 'Trapezium' },
+      { key: 'D', label: 'Triangle' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटै क्षितिज रेखामा रहेका दुई बिन्दुहरू P(२, ३) र Q(७, ३) बीचको दुरी ग्रिडका कोठा गन्दा कति हुन्छ?',
+    np: 'एउटै क्षितिज रेखामा रहेका दुई बिन्दुहरू P(2, 3) र Q(7, 3) बीचको दुरी ग्रिडका कोठा गन्दा कति हुन्छ?',
     en: 'What is the distance between points P(2, 3) and Q(7, 3) by counting grid squares along the horizontal line?',
     options: [
-      { key: 'A', label: '५ एकाइ (७ - २ = ५ units)' },
-      { key: 'B', label: '३ एकाइ' },
-      { key: 'C', label: '१० एकाइ' },
-      { key: 'D', label: '४ एकाइ' },
+      { key: 'A', label: '5 units (7 - 2 = 5)' },
+      { key: 'B', label: '3 units' },
+      { key: 'C', label: '10 units' },
+      { key: 'D', label: '4 units' },
     ],
     answer: 'A',
   },
   {
-    np: 'आयतका तीनवटा शीर्षबिन्दुहरू A(-२,३), B(२,३) र C(-२,४) भए चौथो शीर्षबिन्दु D को निर्देशाङ्क कति हुन्छ?',
+    np: 'आयतका तीनpcs शीर्षबिन्दुहरू A(-2,3), B(2,3) र C(-2,4) भए चौथो शीर्षबिन्दु D को निर्देशाङ्क कति हुन्छ?',
     en: 'If three vertices of a rectangle are A(-2,3), B(2,3), and C(-2,4), what is the missing fourth vertex D?',
     options: [
-      { key: 'A', label: 'D(२, ४)' },
-      { key: 'B', label: 'D(-२, -४)' },
-      { key: 'C', label: 'D(४, २)' },
-      { key: 'D', label: 'D(०, ०)' },
+      { key: 'A', label: 'D(2, 4)' },
+      { key: 'B', label: 'D(-2, -4)' },
+      { key: 'C', label: 'D(4, 2)' },
+      { key: 'D', label: 'D(0, 0)' },
     ],
     answer: 'A',
   },
   {
-    np: 'वर्गका तीनवटा शीर्षबिन्दुहरू J(-४, ४), K(४, ४) र L(४, -४) भए चौथो शीर्षबिन्दु M कति हुन्छ?',
+    np: 'वर्गका तीनpcs शीर्षबिन्दुहरू J(-4, 4), K(4, 4) र L(4, -4) भए चौथो शीर्षबिन्दु M कति हुन्छ?',
     en: 'If three vertices of a square are J(-4, 4), K(4, 4), and L(4, -4), what is the missing fourth vertex M?',
     options: [
-      { key: 'A', label: 'M(-४, -४)' },
-      { key: 'B', label: 'M(-४, ०)' },
-      { key: 'C', label: 'M(०, -४)' },
-      { key: 'D', label: 'M(-४, ४)' },
+      { key: 'A', label: 'M(-4, -4)' },
+      { key: 'B', label: 'M(-4, 0)' },
+      { key: 'C', label: 'M(0, -4)' },
+      { key: 'D', label: 'M(-4, 4)' },
     ],
     answer: 'A',
   },
   {
-    np: 'बिन्दुहरू R(२, ३), S(२, -२) र T(-१, २) लाई क्रमैसँग रेखाखण्डले जोड्दा कुन आकृति बन्दछ?',
+    np: 'बिन्दुहरू R(2, 3), S(2, -2) र T(-1, 2) लाई क्रमैसँग रेखाखण्डले जोड्दा कुन आकृति बन्दछ?',
     en: 'When points R(2, 3), S(2, -2), and T(-1, 2) are joined in order, which shape is formed?',
     options: [
-      { key: 'A', label: 'त्रिभुज (Triangle - तीनवटा भुजाहरू भएको)' },
-      { key: 'B', label: 'आयत (Rectangle)' },
-      { key: 'C', label: 'वृत्त (Circle)' },
-      { key: 'D', label: 'समान्तर चतुर्भुज' },
+      { key: 'A', label: 'Triangle (having three sides)' },
+      { key: 'B', label: 'Rectangle' },
+      { key: 'C', label: 'Circle' },
+      { key: 'D', label: 'Parallelogram' },
     ],
     answer: 'A',
   },
@@ -145,20 +145,20 @@ export const CoordinateGeometryBuilder: React.FC<{
       setRectPlacedD({ name: 'D', x: gx, y: gy });
       if (gx === 2 && gy === 5) {
         kit.good();
-        setRectFeedback(L('स्याबास! D(२, ५) सही शीर्षबिन्दु हो। आयत पूरा भयो!', 'Correct! D(2, 5) completes the rectangle!'));
+        setRectFeedback(L('स्याबास! D(2, 5) सही शीर्षबिन्दु हो। आयत पूरा भयो!', 'Correct! D(2, 5) completes the rectangle!'));
       } else {
         kit.oops();
-        setRectFeedback(L(`तपाईंले (${toNp(gx)}, ${toNp(gy)}) छान्नुभयो। विपरित भुजा बराबर हुन D(२, ५) हुनुपर्छ।`, `You clicked (${gx}, ${gy}). Opposite sides must be equal. Try (2, 5)!`));
+        setRectFeedback(L(`तपाईंले (${toNp(gx)}, ${toNp(gy)}) छान्नुभयो। विपरित भुजा बराबर हुन D(2, 5) हुनुपर्छ।`, `You clicked (${gx}, ${gy}). Opposite sides must be equal. Try (2, 5)!`));
       }
     } else if (activeTab === 'missing_square') {
       // Expected M is (-4, -4)
       setSquarePlacedM({ name: 'M', x: gx, y: gy });
       if (gx === -4 && gy === -4) {
         kit.good();
-        setSquareFeedback(L('स्याबास! M(-४, -४) सही शीर्षबिन्दु हो। वर्ग पूरा भयो!', 'Excellent! M(-4, -4) completes the square!'));
+        setSquareFeedback(L('स्याबास! M(-4, -4) सही शीर्षबिन्दु हो। वर्ग पूरा भयो!', 'Excellent! M(-4, -4) completes the square!'));
       } else {
         kit.oops();
-        setSquareFeedback(L(`तपाईंले (${toNp(gx)}, ${toNp(gy)}) छान्नुभयो। वर्गका चारै भुजा ८ एकाइ हुन M(-४, -४) हुनुपर्छ।`, `You clicked (${gx}, ${gy}). All 4 sides must be 8 units. Try (-4, -4)!`));
+        setSquareFeedback(L(`तपाईंले (${toNp(gx)}, ${toNp(gy)}) छान्नुभयो। वर्गका चारै भुजा 8 एकाइ हुन M(-4, -4) हुनुपर्छ।`, `You clicked (${gx}, ${gy}). All 4 sides must be 8 units. Try (-4, -4)!`));
       }
     } else if (activeTab === 'free_draw') {
       if (freePoints.length >= 8) return;
@@ -178,7 +178,7 @@ export const CoordinateGeometryBuilder: React.FC<{
         ],
         shapeNameNp: 'आयत (Rectangle ABCD)',
         shapeNameEn: 'Rectangle ABCD',
-        descNp: 'लम्बाइ = |४ - (-२)| = ६ एकाइ, चौडाइ = |४ - ०| = ४ एकाइ। विपरित भुजाहरू बराबर र समानान्तर छन्।',
+        descNp: 'लम्बाइ = |4 - (-2)| = 6 एकाइ, चौडाइ = |4 - 0| = 4 units। विपरित भुजाहरू बराबर र समानान्तर छन्।',
         descEn: 'Length = |4 - (-2)| = 6 units, Breadth = |4 - 0| = 4 units. Opposite sides are equal & parallel.',
       };
     } else if (selectedShapePreset === 'triangle') {
@@ -190,7 +190,7 @@ export const CoordinateGeometryBuilder: React.FC<{
         ],
         shapeNameNp: 'त्रिभुज (Triangle RST)',
         shapeNameEn: 'Triangle RST',
-        descNp: 'तीनवटा शीर्षबिन्दुहरू R(२,३), S(२,-२) र T(-१,२) लाई क्रमैसँग रेखाखण्डले जोड्दा त्रिभुज बन्दछ। RS = ५ एकाइ।',
+        descNp: 'तीनpcs शीर्षबिन्दुहरू R(2,3), S(2,-2) र T(-1,2) लाई क्रमैसँग रेखाखण्डले जोड्दा त्रिभुज बन्दछ। RS = 5 एकाइ।',
         descEn: 'Joining R(2,3), S(2,-2), and T(-1,2) forms a triangle. Side RS = 5 vertical grid units.',
       };
     } else {
@@ -203,7 +203,7 @@ export const CoordinateGeometryBuilder: React.FC<{
         ],
         shapeNameNp: 'समानान्तर चतुर्भुज (Parallelogram PQRS)',
         shapeNameEn: 'Parallelogram PQRS',
-        descNp: 'PQ र SR दुवै ५ एकाइ लामा र समानान्तर छन्।',
+        descNp: 'PQ र SR दुवै 5 एकाइ लामा र समानान्तर छन्।',
         descEn: 'Opposite horizontal sides PQ and SR are both 5 units long and parallel.',
       };
     }
@@ -285,11 +285,11 @@ export const CoordinateGeometryBuilder: React.FC<{
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#f8fafc', padding: 8, borderRadius: 12, border: '1px solid #e2e8f0' }}>
           {[
-            { id: 'join_shapes', labelNp: '१. बिन्दु जोडेर आकृति बनाउने', labelEn: '1. Join Points to Shape', icon: Shapes },
-            { id: 'grid_distance', labelNp: '२. ग्रिड कोठा गनेर दुरी', labelEn: '2. Count Grid Distance', icon: Ruler },
-            { id: 'missing_rect', labelNp: '३. आयतको हराएको शीर्षबिन्दु', labelEn: '3. Missing Vertex (Rectangle)', icon: Square },
-            { id: 'missing_square', labelNp: '४. वर्गको हराएको शीर्षबिन्दु', labelEn: '4. Missing Vertex (Square)', icon: Square },
-            { id: 'free_draw', labelNp: '५. स्वतन्त्र आकृति स्टुडियो', labelEn: '5. Freeform Studio', icon: PenTool },
+            { id: 'join_shapes', labelNp: '1. बिन्दु जोडेर आकृति बनाउने', labelEn: '1. Join Points to Shape', icon: Shapes },
+            { id: 'grid_distance', labelNp: '2. ग्रिड कोठा गनेर दुरी', labelEn: '2. Count Grid Distance', icon: Ruler },
+            { id: 'missing_rect', labelNp: '3. आयतको हराएको शीर्षबिन्दु', labelEn: '3. Missing Vertex (Rectangle)', icon: Square },
+            { id: 'missing_square', labelNp: '4. वर्गको हराएको शीर्षबिन्दु', labelEn: '4. Missing Vertex (Square)', icon: Square },
+            { id: 'free_draw', labelNp: '5. स्वतन्त्र आकृति स्टुडियो', labelEn: '5. Freeform Studio', icon: PenTool },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -603,15 +603,15 @@ export const CoordinateGeometryBuilder: React.FC<{
                 </h3>
                 <p style={{ margin: '0 0 10px 0', fontSize: 13, color: '#475569' }}>
                   {L(
-                    'दिइएका शीर्षबिन्दुहरू A(-२,३), B(२,३) र C(-२,५) हुन्। आयत पूरा गर्न ग्राफमा D बिन्दु कहाँ हुनुपर्छ? ग्राफमा क्लिक गर्नुहोस्:',
+                    'दिइएका शीर्षबिन्दुहरू A(-2,3), B(2,3) र C(-2,5) हुन्। आयत पूरा गर्न ग्राफमा D बिन्दु कहाँ हुनुपर्छ? ग्राफमा क्लिक गर्नुहोस्:',
                     'Given A(-2,3), B(2,3), and C(-2,5). Find missing vertex D to complete the rectangle. Click on the graph:'
                   )}
                 </p>
 
                 <div style={{ background: '#ffffff', padding: 10, borderRadius: 8, border: '1px solid #cbd5e1', fontSize: 13, marginBottom: 12 }}>
-                  <div>• {L('तल्लो भुजा AB को लम्बाइ = |२ - (-२)| = ४ एकाइ', 'Bottom side AB length = |2 - (-2)| = 4 units')}</div>
-                  <div>• {L('बायाँ भुजा AC को लम्बाइ = |५ - ३| = २ एकाइ', 'Left side AC height = |5 - 3| = 2 units')}</div>
-                  <div>• {L('विपरित भुजाहरू समानान्तर र बराबर हुन D(२, ५) हुनुपर्छ।', 'Opposite sides must match, giving D(2, 5).')}</div>
+                  <div>• {L('तल्लो भुजा AB को लम्बाइ = |2 - (-2)| = 4 units', 'Bottom side AB length = |2 - (-2)| = 4 units')}</div>
+                  <div>• {L('बायाँ भुजा AC को लम्बाइ = |5 - 3| = 2 एकाइ', 'Left side AC height = |5 - 3| = 2 units')}</div>
+                  <div>• {L('विपरित भुजाहरू समानान्तर र बराबर हुन D(2, 5) हुनुपर्छ।', 'Opposite sides must match, giving D(2, 5).')}</div>
                 </div>
 
                 {rectFeedback && (
@@ -631,15 +631,15 @@ export const CoordinateGeometryBuilder: React.FC<{
                 </h3>
                 <p style={{ margin: '0 0 10px 0', fontSize: 13, color: '#475569' }}>
                   {L(
-                    'दिइएका शीर्षबिन्दुहरू J(-४,४), K(४,४) र L(४,-४) हुन्। वर्ग पूरा गर्न चौथो शीर्षबिन्दु M कहाँ पर्छ? ग्राफमा क्लिक गर्नुहोस्:',
+                    'दिइएका शीर्षबिन्दुहरू J(-4,4), K(4,4) र L(4,-4) हुन्। वर्ग पूरा गर्न चौथो शीर्षबिन्दु M कहाँ पर्छ? ग्राफमा क्लिक गर्नुहोस्:',
                     'Given J(-4,4), K(4,4), and L(4,-4). Find missing vertex M to complete the square. Click on the graph:'
                   )}
                 </p>
 
                 <div style={{ background: '#ffffff', padding: 10, borderRadius: 8, border: '1px solid #cbd5e1', fontSize: 13, marginBottom: 12 }}>
-                  <div>• {L('माथिल्लो भुजा JK को लम्बाइ = |४ - (-४)| = ८ एकाइ', 'Top side JK = |4 - (-4)| = 8 units')}</div>
-                  <div>• {L('दायाँ भुजा KL को लम्बाइ = |४ - (-४)| = ८ एकाइ', 'Right side KL = |4 - (-4)| = 8 units')}</div>
-                  <div>• {L('वर्गका चारै भुजा बराबर (८ एकाइ) हुन M(-४, -४) हुनुपर्छ।', 'All 4 sides equal 8 units, so M(-4, -4).')}</div>
+                  <div>• {L('माथिल्लो भुजा JK को लम्बाइ = |4 - (-4)| = 8 एकाइ', 'Top side JK = |4 - (-4)| = 8 units')}</div>
+                  <div>• {L('दायाँ भुजा KL को लम्बाइ = |4 - (-4)| = 8 एकाइ', 'Right side KL = |4 - (-4)| = 8 units')}</div>
+                  <div>• {L('वर्गका चारै भुजा बराबर (8 एकाइ) हुन M(-4, -4) हुनुपर्छ।', 'All 4 sides equal 8 units, so M(-4, -4).')}</div>
                 </div>
 
                 {squareFeedback && (
@@ -659,7 +659,7 @@ export const CoordinateGeometryBuilder: React.FC<{
                 </h3>
                 <p style={{ margin: '0 0 10px 0', fontSize: 13, color: '#475569' }}>
                   {L(
-                    'ग्राफमा क्लिक गरेर ८ वटासम्म शीर्षबिन्दुहरू थप्नुहोस्। शीर्षबिन्दुहरू आफैँ जोडिएर बहुभुज बन्नेछ:',
+                    'ग्राफमा क्लिक गरेर 8 pcsसम्म शीर्षबिन्दुहरू थप्नुहोस्। शीर्षबिन्दुहरू आफैँ जोडिएर बहुभुज बन्नेछ:',
                     'Click on the graph grid to add up to 8 vertices. They will automatically connect to form a polygon:'
                   )}
                 </p>

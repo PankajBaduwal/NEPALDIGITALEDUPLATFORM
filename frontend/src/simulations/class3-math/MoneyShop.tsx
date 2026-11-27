@@ -1,5 +1,5 @@
 /**
- * Lesson 17 · Money (मुद्रा)
+ * Lesson 17 · Money
  * Bill & Change Shop — 2D Nepali store to select goods, create bills, pay with banknotes, and calculate change.
  */
 import React, { useMemo, useState } from 'react';
@@ -19,8 +19,8 @@ interface Good {
 }
 
 const GOODS: Good[] = [
-  { id: 0, np: 'चामल (५ केजी)', en: 'Rice (5 kg)', emoji: '🍚', price: 625 },
-  { id: 1, np: 'तेल (१ लि.)', en: 'Oil (1 L)', emoji: '🛢️', price: 235 },
+  { id: 0, np: 'चामल (5 केजी)', en: 'Rice (5 kg)', emoji: '🍚', price: 625 },
+  { id: 1, np: 'तेल (1 लि.)', en: 'Oil (1 L)', emoji: '🛢️', price: 235 },
   { id: 2, np: 'चियापत्ती', en: 'Tea', emoji: '🍵', price: 120 },
   { id: 3, np: 'कापी', en: 'Exercise Book', emoji: '📒', price: 45 },
   { id: 4, np: 'चप्पल', en: 'Slippers', emoji: '🩴', price: 340 },
@@ -30,12 +30,12 @@ const GOODS: Good[] = [
 ];
 
 const NOTES = [
-  { val: 10, color: '#C084FC', border: '#7E22CE', label: 'रु. १०' },
-  { val: 20, color: '#FB923C', border: '#C2410C', label: 'रु. २०' },
-  { val: 50, color: '#60A5FA', border: '#1D4ED8', label: 'रु. ५०' },
-  { val: 100, color: '#4ADE80', border: '#15803D', label: 'रु. १००' },
-  { val: 500, color: '#FBBF24', border: '#B45309', label: 'रु. ५००' },
-  { val: 1000, color: '#93C5FD', border: '#1E3A8A', label: 'रु. १०००' },
+  { val: 10, color: '#C084FC', border: '#7E22CE', label: 'Rs. 10' },
+  { val: 20, color: '#FB923C', border: '#C2410C', label: 'Rs. 20' },
+  { val: 50, color: '#60A5FA', border: '#1D4ED8', label: 'Rs. 50' },
+  { val: 100, color: '#4ADE80', border: '#15803D', label: 'Rs. 100' },
+  { val: 500, color: '#FBBF24', border: '#B45309', label: 'Rs. 500' },
+  { val: 1000, color: '#93C5FD', border: '#1E3A8A', label: 'Rs. 1000' },
 ];
 
 export const MoneyShop: React.FC<Props> = ({ onBackToLibrary }) => {
@@ -64,7 +64,7 @@ export const MoneyShop: React.FC<Props> = ({ onBackToLibrary }) => {
       }
     }
     const good = GOODS[id];
-    kit.say(`${good.np} रु. ${good.price}`, `${good.en}: Rs ${good.price}`);
+    kit.say(`${good.np} Rs. ${good.price}`, `${good.en}: Rs ${good.price}`);
   };
 
   const handlePay = (val: number) => {
@@ -72,13 +72,13 @@ export const MoneyShop: React.FC<Props> = ({ onBackToLibrary }) => {
     kit.tap();
     if (val < totalBill) {
       kit.oops(
-        `रकम कम भयो! रु. ${totalBill - val} थप चाहिन्छ।`,
+        `रकम कम भयो! Rs. ${totalBill - val} थप चाहिन्छ।`,
         `Not enough! You need Rs ${totalBill - val} more.`
       );
     } else {
       const chg = val - totalBill;
       kit.say(
-        `भुक्तानी: रु. ${val}। बिल: रु. ${totalBill}। फिर्ता: रु. ${chg}।`,
+        `भुक्तानी: Rs. ${val}। बिल: Rs. ${totalBill}। फिर्ता: Rs. ${chg}।`,
         `Paid: Rs ${val}. Bill: Rs ${totalBill}. Change returned: Rs ${chg}.`
       );
       kit.star();
@@ -95,22 +95,22 @@ export const MoneyShop: React.FC<Props> = ({ onBackToLibrary }) => {
 
       if (i % 2 === 0) {
         return {
-          np: `${g1.np} (रु. ${g1.price}) र ${g2.np} (रु. ${g2.price}) को जम्मा बिल कति?`,
+          np: `${g1.np} (Rs. ${g1.price}) र ${g2.np} (Rs. ${g2.price}) को जम्मा बिल कति?`,
           en: `What is the total bill for ${g1.en} (Rs ${g1.price}) and ${g2.en} (Rs ${g2.price})?`,
           answer: String(sum),
           options: near(sum, i + 2, [10, -10, 20, 50, -50]).map((x) => ({
             key: String(x),
-            label: `रु. ${fmt(kit.lang, x)}`,
+            label: `Rs. ${fmt(kit.lang, x)}`,
           })),
         };
       } else {
         return {
-          np: `रु. ${sum} को बिलमा रु. ${noteVal} को नोट दिँदा कति फिर्ता आउँछ?`,
+          np: `Rs. ${sum} को बिलमा Rs. ${noteVal} को नोट दिँदा कति फिर्ता आउँछ?`,
           en: `For a bill of Rs ${sum}, paying with a Rs ${noteVal} note returns how much change?`,
           answer: String(chg),
           options: near(chg, i + 5, [10, -10, 5, -5, 20]).map((x) => ({
             key: String(x),
-            label: `रु. ${fmt(kit.lang, x)}`,
+            label: `Rs. ${fmt(kit.lang, x)}`,
           })),
         };
       }
@@ -123,7 +123,7 @@ export const MoneyShop: React.FC<Props> = ({ onBackToLibrary }) => {
       onBack={onBackToLibrary}
       mascotGreeting={
         change !== null
-          ? kit.t(`बिल रु. ${totalBill}। नोट रु. ${payAmount} दिँदा फिर्ता रु. ${change}`, `Bill Rs ${totalBill}. Paying Rs ${payAmount} gives Rs ${change} change.`)
+          ? kit.t(`बिल Rs. ${totalBill}। नोट Rs. ${payAmount} दिँदा फिर्ता Rs. ${change}`, `Bill Rs ${totalBill}. Paying Rs ${payAmount} gives Rs ${change} change.`)
           : kit.t('पसलबाट सामान छान्नुहोस् र बिल तथा फिर्ता हिसाब गर्नुहोस्!', 'Pick items from the shop, make the bill, and calculate the change!')
       }
       questions={questions}
@@ -185,7 +185,7 @@ export const MoneyShop: React.FC<Props> = ({ onBackToLibrary }) => {
                   {kit.t(g.np, g.en)}
                 </div>
                 <div style={{ fontSize: 13, fontWeight: 900, color: '#187C68' }}>
-                  रु. {fmt(kit.lang, g.price)}
+                  Rs. {fmt(kit.lang, g.price)}
                 </div>
                 <div style={{ fontSize: 10, color: isSelected ? '#187C68' : '#94A3B8', fontWeight: 700 }}>
                   {isSelected ? `✓ ${kit.t('छानियो', 'Selected')}` : kit.t('छान्नुहोस्', 'Select')}
@@ -228,13 +228,13 @@ export const MoneyShop: React.FC<Props> = ({ onBackToLibrary }) => {
               cart.map((id) => (
                 <div key={id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, fontWeight: 700, color: '#475569' }}>
                   <span>{kit.t(GOODS[id].np, GOODS[id].en)}</span>
-                  <span>रु. {fmt(kit.lang, GOODS[id].price)}</span>
+                  <span>Rs. {fmt(kit.lang, GOODS[id].price)}</span>
                 </div>
               ))
             )}
             <div style={{ borderTop: '2px solid #334155', paddingTop: 8, display: 'flex', justifyContent: 'space-between', fontSize: 16, fontWeight: 900, color: '#1E293B' }}>
               <span>{kit.t('जम्मा बिल (Total):', 'Total Bill:')}</span>
-              <span style={{ color: '#187C68' }}>रु. {fmt(kit.lang, totalBill)}</span>
+              <span style={{ color: '#187C68' }}>Rs. {fmt(kit.lang, totalBill)}</span>
             </div>
           </div>
 
@@ -279,7 +279,7 @@ export const MoneyShop: React.FC<Props> = ({ onBackToLibrary }) => {
             <div style={{ borderTop: '2px dashed #E2E8F0', paddingTop: 10, marginTop: 4 }}>
               {payAmount < totalBill ? (
                 <div style={{ fontSize: 13, fontWeight: 800, color: '#DC2626' }}>
-                  ⚠️ {kit.t(`रु. ${totalBill - payAmount} अपुग भयो! ठूलो नोट रोज्नुहोस्।`, `Rs ${totalBill - payAmount} short! Choose a larger note.`)}
+                  ⚠️ {kit.t(`Rs. ${totalBill - payAmount} अपुग भयो! ठूलो नोट रोज्नुहोस्।`, `Rs ${totalBill - payAmount} short! Choose a larger note.`)}
                 </div>
               ) : (
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -287,7 +287,7 @@ export const MoneyShop: React.FC<Props> = ({ onBackToLibrary }) => {
                     {kit.t('फिर्ता रकम (Change):', 'Change Returned:')}
                   </span>
                   <span style={{ fontSize: 20, fontWeight: 900, color: '#16A34A' }}>
-                    रु. {fmt(kit.lang, payAmount - totalBill)}
+                    Rs. {fmt(kit.lang, payAmount - totalBill)}
                   </span>
                 </div>
               )}

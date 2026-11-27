@@ -1,7 +1,7 @@
 /**
  * SubtractionEquationStudio.tsx
- * Simulation 03: Subtraction Equation Studio (घटाउ वाक्य निर्माण प्रयोगशाला)
- * Class 1 Mathematics - Chapter 8: Subtraction up to 10 (१० सम्मका सङ्ख्याहरूको घटाउ)
+ * Simulation 03: Subtraction Equation Studio
+ * Class 1 Mathematics - Chapter 8: Subtraction up to 10
  * Nepal Digital Education Platform
  */
 
@@ -26,7 +26,7 @@ interface Props {
   userRole?: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
 type TaskFormat = 'HORIZONTAL' | 'VERTICAL' | 'MISSING_PART' | 'MISSING_START';
 
@@ -47,7 +47,7 @@ const SUB_TASKS: SubtractionTask[] = [
     itemEmoji: '🍎',
     total: 5,
     takeAway: 2,
-    descriptionNp: '५ वटा स्याउबाट २ वटा स्याउ घटाउँदा कति बाँकी रहन्छ?',
+    descriptionNp: '5 वटा स्याउबाट 2 वटा स्याउ घटाउँदा कति बाँकी रहन्छ?',
     descriptionEn: 'What is 5 − 2 = ?',
   },
   {
@@ -56,7 +56,7 @@ const SUB_TASKS: SubtractionTask[] = [
     itemEmoji: '🍌',
     total: 8,
     takeAway: 4,
-    descriptionNp: '८ वटा केराबाट ४ वटा केरा घटाउँदा कति बाँकी रहन्छ?',
+    descriptionNp: '8 वटा केराबाट 4 वटा केरा घटाउँदा कति बाँकी रहन्छ?',
     descriptionEn: 'What is 8 − 4 = ?',
   },
   {
@@ -65,7 +65,7 @@ const SUB_TASKS: SubtractionTask[] = [
     itemEmoji: '⚽',
     total: 10,
     takeAway: 3,
-    descriptionNp: '१० वटा बलबाट ३ वटा बल घटाउँदा कति बाँकी हुन्छ?',
+    descriptionNp: '10 वटा बलबाट 3 वटा बल घटाउँदा कति बाँकी हुन्छ?',
     descriptionEn: 'What is 10 − 3 = ?',
   },
   {
@@ -74,7 +74,7 @@ const SUB_TASKS: SubtractionTask[] = [
     itemEmoji: '🌸',
     total: 7,
     takeAway: 3,
-    descriptionNp: 'ठाडो घटाउ गर्नुहोस्: ७ बाट ३ घटाउनुहोस्।',
+    descriptionNp: 'ठाडो घटाउ गर्नुहोस्: 7 बाट 3 घटाउनुहोस्।',
     descriptionEn: 'Perform vertical subtraction: 7 minus 3.',
   },
   {
@@ -83,7 +83,7 @@ const SUB_TASKS: SubtractionTask[] = [
     itemEmoji: '🥭',
     total: 9,
     takeAway: 5,
-    descriptionNp: 'ठाडो घटाउ गर्नुहोस्: ९ बाट ५ घटाउनुहोस्।',
+    descriptionNp: 'ठाडो घटाउ गर्नुहोस्: 9 बाट 5 घटाउनुहोस्।',
     descriptionEn: 'Perform vertical subtraction: 9 minus 5.',
   },
   {
@@ -92,7 +92,7 @@ const SUB_TASKS: SubtractionTask[] = [
     itemEmoji: '⭐',
     total: 6,
     takeAway: 2,
-    descriptionNp: 'खाली ठाउँ भर्नुहोस्: ६ − [ ? ] = ४',
+    descriptionNp: 'खाली ठाउँ भर्नुहोस्: 6 − [ ? ] = 4',
     descriptionEn: 'Find the missing number: 6 − [ ? ] = 4',
   },
   {
@@ -101,7 +101,7 @@ const SUB_TASKS: SubtractionTask[] = [
     itemEmoji: '🐦',
     total: 7,
     takeAway: 2,
-    descriptionNp: 'खाली ठाउँ भर्नुहोस्: [ ? ] − २ = ५',
+    descriptionNp: 'खाली ठाउँ भर्नुहोस्: [ ? ] − 2 = 5',
     descriptionEn: 'Find the starting number: [ ? ] − 2 = 5',
   },
   {
@@ -110,7 +110,7 @@ const SUB_TASKS: SubtractionTask[] = [
     itemEmoji: '🥕',
     total: 8,
     takeAway: 5,
-    descriptionNp: 'खाली ठाउँ भर्नुहोस्: ८ − [ ? ] = ३',
+    descriptionNp: 'खाली ठाउँ भर्नुहोस्: 8 − [ ? ] = 3',
     descriptionEn: 'Find the missing number: 8 − [ ? ] = 3',
   },
 ];
@@ -119,7 +119,7 @@ export const SubtractionEquationStudio: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active task tracking
@@ -288,15 +288,7 @@ export const SubtractionEquationStudio: React.FC<Props> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              setLanguage((l) => (l === 'np' ? 'en' : 'np'));
-              playSound('click');
-            }}
-            className="px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition"
-          >
-            {language === 'np' ? 'EN' : 'नेपाली'}
-          </button>
+          
           <button
             onClick={() => setSoundEnabled((s) => !s)}
             className={`p-2 rounded-lg border transition ${

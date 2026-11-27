@@ -1,5 +1,5 @@
 /**
- * Class 4 lesson 7 · Time (समय)
+ * Class 4 lesson 7 · Time
  * Clock24 — 2D 24-Hour Clock vs 12-Hour Clock with dynamic Day/Night sky and dual rings.
  */
 import React, { useMemo, useState } from 'react';
@@ -27,7 +27,7 @@ export const Clock24: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G4-L7-01',
     chapter: 7,
-    titleNp: '२४ घण्टे घडी (१२ घण्टा ↔ २४ घण्टा)',
+    titleNp: '24 घण्टे घडी (12 घण्टा ↔ 24 घण्टा)',
     titleEn: '24-Hour Clock (12-Hour ↔ 24-Hour)',
   });
 
@@ -67,7 +67,7 @@ export const Clock24: React.FC<Props> = ({ onBackToLibrary }) => {
 
       if (i % 2 === 0) {
         return mcq(
-          `${h12(qVal)} लाई २४ घण्टे समयमा रूपान्तरण गर्दा कति हुन्छ?`,
+          `${h12(qVal)} लाई 24 घण्टे समयमा रूपान्तरण गर्दा कति हुन्छ?`,
           `Convert ${h12(qVal)} to 24-hour time:`,
           h24(qVal),
           wr24(qVal),
@@ -75,7 +75,7 @@ export const Clock24: React.FC<Props> = ({ onBackToLibrary }) => {
         );
       } else {
         return mcq(
-          `${h24(qVal)} लाई १२ घण्टे समयमा रूपान्तरण गर्दा कति हुन्छ?`,
+          `${h24(qVal)} लाई 12 घण्टे समयमा रूपान्तरण गर्दा कति हुन्छ?`,
           `Convert ${h24(qVal)} to 12-hour time:`,
           h12(qVal),
           wr12(qVal),
@@ -94,7 +94,7 @@ export const Clock24: React.FC<Props> = ({ onBackToLibrary }) => {
       kit={kit}
       onBack={onBackToLibrary}
       mascotGreeting={kit.t(
-        `२४ घण्टे घडी: दिउँसो १२ बजेपछि थप १ घण्टा = १३:००, २ बजे = १४:००। अहिले ${h24(t)} = ${h12(t)} (${period[0]})`,
+        `24 घण्टे घडी: दिउँसो 12 बजेपछि थप 1 घण्टा = 13:00, 2 बजे = 14:00। अहिले ${h24(t)} = ${h12(t)} (${period[0]})`,
         `24-Hour time: after 12 noon, add 12 hours: 1 PM = 13:00. Currently ${h24(t)} = ${h12(t)} (${period[1]})`
       )}
       questions={questions}
@@ -175,7 +175,7 @@ export const Clock24: React.FC<Props> = ({ onBackToLibrary }) => {
           <div style={{ fontSize: 32 }}>{isDay ? '☀️' : '🌙'}</div>
           <div>
             <div style={{ fontSize: 30, fontWeight: 900, color: isDay ? '#92400E' : '#F8FAFC' }}>
-              {h24(t)} <span style={{ fontSize: 18, opacity: 0.8 }}>(२४ घण्टा)</span>
+              {h24(t)} <span style={{ fontSize: 18, opacity: 0.8 }}>(24-hour)</span>
             </div>
             <div style={{ fontSize: 16, fontWeight: 800, color: isDay ? '#B45309' : '#94A3B8' }}>
               {h12(t)} · {kit.t(period[0], period[1])}
@@ -261,7 +261,7 @@ export const Clock24: React.FC<Props> = ({ onBackToLibrary }) => {
             <circle cx="140" cy="140" r="7" fill="#EF4444" />
           </svg>
           <div style={{ fontSize: 11, color: '#94A3B8', fontWeight: 600, marginTop: 8 }}>
-            {kit.t('बाहिरी घेरा: २४ घण्टे (13-24) · भित्री घेरा: १२ घण्टे (1-12)', 'Outer ring: 24-Hour (13-24) · Inner ring: 12-Hour (1-12)')}
+            {kit.t('बाहिरी घेरा: 24 घण्टे (13-24) · भित्री घेरा: 12 घण्टे (1-12)', 'Outer ring: 24-Hour (13-24) · Inner ring: 12-Hour (1-12)')}
           </div>
         </div>
       </div>

@@ -24,11 +24,11 @@ export const ScalarVectorVisualExplorer: React.FC<SimProps> = ({ onBackToLibrary
 
   // Activity A: Classification
   const quantities = [
-    { nameEn: 'Distance', nameNp: 'दुरी', type: 'scalar', descEn: 'Only magnitude (e.g. 50 m)', descNp: 'केवल परिमाण (जस्तै: ५० मिटर)' },
-    { nameEn: 'Displacement', nameNp: 'विस्थापन', type: 'vector', descEn: 'Magnitude and specific direction (e.g. 50 m North)', descNp: 'परिमाण र निश्चित दिशा (जस्तै: ५० मिटर उत्तर)' },
+    { nameEn: 'Distance', nameNp: 'दुरी', type: 'scalar', descEn: 'Only magnitude (e.g. 50 m)', descNp: 'केवल परिमाण (जस्तै: 50 m)' },
+    { nameEn: 'Displacement', nameNp: 'विस्थापन', type: 'vector', descEn: 'Magnitude and specific direction (e.g. 50 m North)', descNp: 'परिमाण र निश्चित दिशा (जस्तै: 50 m उत्तर)' },
     { nameEn: 'Speed', nameNp: 'चाल', type: 'scalar', descEn: 'Rate of distance covered without direction (e.g. 40 km/h)', descNp: 'दिशा नतोकिएको पार गरिएको दुरीको दर' },
     { nameEn: 'Velocity', nameNp: 'वेग', type: 'vector', descEn: 'Displacement per unit time in a specified direction', descNp: 'निश्चित दिशामा प्रति एकाइ समयमा भएको विस्थापन' },
-    { nameEn: 'Force', nameNp: 'बल', type: 'vector', descEn: 'Push or pull with magnitude and direction (e.g. 10 N East)', descNp: 'परिमाण र दिशा भएको बाह्य प्रभाव (जस्तै: १० न्युटन पूर्व)' },
+    { nameEn: 'Force', nameNp: 'बल', type: 'vector', descEn: 'Push or pull with magnitude and direction (e.g. 10 N East)', descNp: 'परिमाण र दिशा भएको बाह्य प्रभाव (जस्तै: 10 न्युटन पूर्व)' },
     { nameEn: 'Acceleration', nameNp: 'प्रवेग', type: 'vector', descEn: 'Rate of change of velocity', descNp: 'वेग परिवर्तनको दर' },
     { nameEn: 'Temperature', nameNp: 'तापक्रम', type: 'scalar', descEn: 'Degree of hotness or coldness without direction', descNp: 'दिशा नहुने तातो वा चिसोपनको मात्रा' },
     { nameEn: 'Work', nameNp: 'कार्य', type: 'scalar', descEn: 'Scalar dot product of force and displacement (Joules)', descNp: 'बल र विस्थापनको अदिश गुणनफल (जुल)' },
@@ -68,7 +68,7 @@ export const ScalarVectorVisualExplorer: React.FC<SimProps> = ({ onBackToLibrary
       onBack={handleBack}
       grade={9}
       mascotGreeting={L(
-        'नमस्ते! ऐच्छिक गणित एकाइ ४ भेक्टर (Vector) मा स्वागत छ! यहाँ स्केलर र भेक्टरका प्रकार, स्तम्भ र पङ्क्ति रूप, र बिन्दुहरूको भेक्टर अन्वेषण गर्नुहोस्।',
+        'नमस्ते! ऐच्छिक गणित एकाइ 4 भेक्टर (Vector) मा स्वागत छ! यहाँ स्केलर र भेक्टरका प्रकार, स्तम्भ र पङ्क्ति रूप, र बिन्दुहरूको भेक्टर अन्वेषण गर्नुहोस्।',
         'Welcome to Unit 4: Vector! Explore scalar and vector physical quantities, vector representations, and types of vectors!'
       )}
     >
@@ -379,7 +379,7 @@ export const ScalarVectorVisualExplorer: React.FC<SimProps> = ({ onBackToLibrary
                     <>
                       <circle cx={170} cy={130} r={8} fill="#f59e0b" />
                       <text x={140} y={110} fill="#fbbf24" fontSize="13" fontWeight="bold">0⃗ = (0, 0)</text>
-                      <text x={105} y={160} fill="#94a3b8" fontSize="11">परिमाण = ०, दिशा अनिर्धारित</text>
+                      <text x={105} y={160} fill="#94a3b8" fontSize="11">परिमाण = 0, दिशा अनिर्धारित</text>
                     </>
                   )}
                   {vectorType === 'position' && (
@@ -492,14 +492,14 @@ export const ScalarVectorVisualExplorer: React.FC<SimProps> = ({ onBackToLibrary
               <div className="md:col-span-6 space-y-3">
                 <div className="flex gap-4">
                   <div className="flex-1 bg-slate-50 p-3 rounded-xl border">
-                    <span className="text-xs font-bold text-amber-700">बिन्दु A(x₁, y₁):</span>
+                    <span className="text-xs font-bold text-amber-700">Point A(x₁, y₁):</span>
                     <div className="flex gap-2 mt-1">
                       <input type="number" min="-2" max="6" value={ptA.x} onChange={(e) => setPtA({ ...ptA, x: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />
                       <input type="number" min="-2" max="6" value={ptA.y} onChange={(e) => setPtA({ ...ptA, y: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />
                     </div>
                   </div>
                   <div className="flex-1 bg-slate-50 p-3 rounded-xl border">
-                    <span className="text-xs font-bold text-emerald-700">बिन्दु B(x₂, y₂):</span>
+                    <span className="text-xs font-bold text-emerald-700">Point B(x₂, y₂):</span>
                     <div className="flex gap-2 mt-1">
                       <input type="number" min="-2" max="7" value={ptB.x} onChange={(e) => setPtB({ ...ptB, x: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />
                       <input type="number" min="-2" max="7" value={ptB.y} onChange={(e) => setPtB({ ...ptB, y: parseInt(e.target.value) || 0 })} className="w-16 p-1 border rounded text-center text-sm font-bold" />

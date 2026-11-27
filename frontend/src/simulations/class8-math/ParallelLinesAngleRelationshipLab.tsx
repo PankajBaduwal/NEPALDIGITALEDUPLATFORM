@@ -8,32 +8,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'यदि दुई सीधा रेखालाई छेदकले काट्दा एकान्तर कोणहरू बराबर भए ती रेखाहरू कस्ता हुन्छन्?',
     en: 'If alternate interior angles are equal, what can we conclude about the two lines?',
     options: [
-      { key: 'A', label: 'तिनीहरू लम्ब हुन्छन्' },
-      { key: 'B', label: 'तिनीहरू समानान्तर हुन्छन् (Parallel)' },
-      { key: 'C', label: 'तिनीहरू ९०° मा जोडिन्छन्' },
-      { key: 'D', label: 'तिनीहरू बाङ्गा हुन्छन्' }
+      { key: 'A', label: 'They are perpendicular' },
+      { key: 'B', label: 'They are parallel' },
+      { key: 'C', label: 'They add up to 90°' },
+      { key: 'D', label: 'They are crooked' }
     ],
     answer: 'B'
   },
   {
-    np: 'यदि एकैतर्फका क्रमागत भित्री कोणहरूको जोड १७०° भए, के ती रेखाहरू समानान्तर हुन्?',
+    np: 'यदि एकैतर्फका क्रमागत भित्री कोणहरूको जोड 170° भए, के ती रेखाहरू समानान्तर हुन्?',
     en: 'If the sum of co-interior angles is 170°, are the lines parallel?',
     options: [
-      { key: 'A', label: 'हो, सधैं' },
-      { key: 'B', label: 'होइन, समानान्तर छैनन् (Not parallel)' },
-      { key: 'C', label: 'यदि तेर्सो भए मात्र' },
-      { key: 'D', label: 'भन्न सकिँदैन' }
+      { key: 'A', label: 'Yes, always' },
+      { key: 'B', label: 'No, they are not parallel' },
+      { key: 'C', label: 'Only if they are horizontal' },
+      { key: 'D', label: 'Cannot be said' }
     ],
     answer: 'B'
   },
   {
-    np: 'कोणको डिग्री नाप्न परम्परागत रूपमा कुन ज्यामितीय उपकरण प्रयोग गरिन्छ?',
+    np: 'कोणको degrees नाप्न परम्परागत रूपमा कुन ज्यामितीय उपकरण प्रयोग गरिन्छ?',
     en: 'Which tool is traditionally used to measure angle degrees precisely?',
     options: [
-      { key: 'A', label: 'कम्पास' },
-      { key: 'B', label: 'चाँदा (Protractor)' },
-      { key: 'C', label: 'स्केल' },
-      { key: 'D', label: 'डिभाइडर' }
+      { key: 'A', label: 'Compass' },
+      { key: 'B', label: 'Protractor' },
+      { key: 'C', label: 'Ruler' },
+      { key: 'D', label: 'Divider' }
     ],
     answer: 'B'
   }
@@ -104,8 +104,8 @@ export const ParallelLinesAngleRelationshipLab: React.FC<{
               </div>
               <div className="text-xs text-slate-300 mt-0.5">
                 {isParallel
-                  ? L('एकान्तर कोण बराबर छन् र क्रमागत भित्री कोणको जोड १८०° छ।', 'Alternate angles are equal, co-interior sum is exactly 180°.')
-                  : L('दोस्रो रेखा ढल्केको छ। समानान्तर बनाउन तलको स्लाइडरलाई ०° मा लैजानुहोस्।', 'Line CD is tilted. Move slider to 0° to make lines parallel.')}
+                  ? L('एकान्तर कोण बराबर छन् र क्रमागत भित्री कोणको जोड 180° छ।', 'Alternate angles are equal, co-interior sum is exactly 180°.')
+                  : L('दोस्रो रेखा ढल्केको छ। समानान्तर बनाउन तलको स्लाइडरलाई 0° मा लैजानुहोस्।', 'Line CD is tilted. Move slider to 0° to make lines parallel.')}
               </div>
             </div>
           </div>
@@ -162,7 +162,7 @@ export const ParallelLinesAngleRelationshipLab: React.FC<{
                 : 'bg-slate-800/80 border-slate-700 text-slate-300'
             }`}
           >
-            {L('१. एकान्तर कोण परीक्षण (Alternate Angles)', '1. Alternate Angles Test')}
+            {L('1. एकान्तर कोण परीक्षण (Alternate Angles)', '1. Alternate Angles Test')}
           </button>
           <button
             onClick={() => setActiveTestCriterion('cointerior')}
@@ -172,7 +172,7 @@ export const ParallelLinesAngleRelationshipLab: React.FC<{
                 : 'bg-slate-800/80 border-slate-700 text-slate-300'
             }`}
           >
-            {L('२. क्रमागत भित्री कोण परीक्षण (Co-Interior Sum)', '2. Co-Interior Sum Test')}
+            {L('2. क्रमागत भित्री कोण परीक्षण (Co-Interior Sum)', '2. Co-Interior Sum Test')}
           </button>
           <button
             onClick={() => setActiveTestCriterion('corresponding')}
@@ -182,7 +182,7 @@ export const ParallelLinesAngleRelationshipLab: React.FC<{
                 : 'bg-slate-800/80 border-slate-700 text-slate-300'
             }`}
           >
-            {L('३. संगत कोण परीक्षण (Corresponding Angles)', '3. Corresponding Angles Test')}
+            {L('3. संगत कोण परीक्षण (Corresponding Angles)', '3. Corresponding Angles Test')}
           </button>
         </div>
 
@@ -276,7 +276,7 @@ export const ParallelLinesAngleRelationshipLab: React.FC<{
             }`}
           >
             <div className="text-xs font-bold text-amber-400 uppercase tracking-wider">
-              {L('१. एकान्तर कोण (Alternate)', '1. Alternate Angles')}
+              {L('1. एकान्तर कोण (Alternate)', '1. Alternate Angles')}
             </div>
             <div className="mt-2 text-sm text-slate-200">
               ∠A₁ = <span className="font-mono text-amber-300 font-bold">{angle1_obtuse}°</span>
@@ -287,7 +287,7 @@ export const ParallelLinesAngleRelationshipLab: React.FC<{
               {angle1_obtuse === angle2_acute ? (
                 <span className="text-emerald-400">✅ बराबर छन् ({angle1_obtuse}° = {angle2_acute}°)</span>
               ) : (
-                <span className="text-rose-400">❌ बराबर छैनन् ({angle1_obtuse}° ≠ {angle2_acute}°)</span>
+                <span className="text-rose-400">❌ Not equal ({angle1_obtuse}° ≠ {angle2_acute}°)</span>
               )}
             </div>
           </div>
@@ -301,16 +301,16 @@ export const ParallelLinesAngleRelationshipLab: React.FC<{
             }`}
           >
             <div className="text-xs font-bold text-purple-400 uppercase tracking-wider">
-              {L('२. क्रमागत भित्री कोण (Co-Interior)', '2. Co-Interior Sum')}
+              {L('2. क्रमागत भित्री कोण (Co-Interior)', '2. Co-Interior Sum')}
             </div>
             <div className="mt-2 text-sm text-slate-200">
-              जोड = <span className="font-mono text-slate-100 font-bold">{angle1_obtuse}° + {angle2_acute}°</span>
+              Sum = <span className="font-mono text-slate-100 font-bold">{angle1_obtuse}° + {angle2_acute}°</span>
             </div>
             <div className="mt-2 text-xs font-semibold">
               {cointeriorSum === 180 ? (
-                <span className="text-emerald-400">✅ ठीक १८०° छ (Supplementary)</span>
+                <span className="text-emerald-400">✅ Exactly 180° (supplementary)</span>
               ) : (
-                <span className="text-rose-400">❌ {cointeriorSum}° (१८०° भएन)</span>
+                <span className="text-rose-400">❌ {cointeriorSum}° (180° भएन)</span>
               )}
             </div>
           </div>
@@ -328,7 +328,7 @@ export const ParallelLinesAngleRelationshipLab: React.FC<{
             </div>
             <div className="mt-2 text-sm font-bold">
               {isParallel ? (
-                <span className="text-emerald-300">AB समानान्तर CD (AB ∥ CD)</span>
+                <span className="text-emerald-300">AB is parallel to CD (AB ∥ CD)</span>
               ) : (
                 <span className="text-rose-300">AB र CD समानान्तर छैनन्</span>
               )}

@@ -47,13 +47,13 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: 'कुन चतुर्भुजका चारै भुजाहरू बराबर हुन्छन् र विकर्णहरू परस्पर लम्ब (९०°) मा समद्विभाजित हुन्छन्?',
+    np: 'कुन चतुर्भुजका चारै भुजाहरू They are equal र विकर्णहरू परस्पर लम्ब (90°) मा समद्विभाजित हुन्छन्?',
     en: 'In which quadrilateral are all four sides equal and diagonals bisect each other at 90°?',
     options: [
-      { key: 'A', label: 'रोम्बस (Rhombus) र वर्ग (Square)' },
-      { key: 'B', label: 'आयत (Rectangle)' },
-      { key: 'C', label: 'समलम्ब चतुर्भुज (Trapezium)' },
-      { key: 'D', label: 'चङ्गाकार (Kite)' },
+      { key: 'A', label: 'Rhombus and square' },
+      { key: 'B', label: 'Rectangle' },
+      { key: 'C', label: 'Trapezium' },
+      { key: 'D', label: 'Kite' },
     ],
     answer: 'A',
   },
@@ -61,10 +61,10 @@ const QUIZ_QUESTIONS = [
     np: 'समानान्तर चतुर्भुज (Parallelogram) का आसन्न कोणहरू (Adjacent angles) बीचको सम्बन्ध के हुन्छ?',
     en: 'What is the relationship between adjacent angles of a parallelogram?',
     options: [
-      { key: 'A', label: 'परस्पर संपूरक (Supplementary, Sum = 180°)' },
-      { key: 'B', label: 'बराबर हुन्छन्' },
-      { key: 'C', label: 'शून्य हुन्छन्' },
-      { key: 'D', label: '९०° भन्दा साना हुन्छन्' },
+      { key: 'A', label: 'Mutually supplementary (sum = 180°)' },
+      { key: 'B', label: 'They are equal' },
+      { key: 'C', label: 'They are zero' },
+      { key: 'D', label: 'They are less than 90°' },
     ],
     answer: 'A',
   },
@@ -139,7 +139,7 @@ export const QuadrilateralTypesProperties: React.FC<{
     typeTitleEn = 'Square';
     typeColor = '#059669';
   } else if (all4Angles90 && oppSidesEq) {
-    typeTitleNp = 'आयत (Rectangle)';
+    typeTitleNp = 'Rectangle';
     typeTitleEn = 'Rectangle';
     typeColor = '#2563EB';
   } else if (all4SidesEq && parAB_CD && parBC_DA) {
@@ -151,7 +151,7 @@ export const QuadrilateralTypesProperties: React.FC<{
     typeTitleEn = 'Parallelogram';
     typeColor = '#0D9488';
   } else if (parAB_CD || parBC_DA) {
-    typeTitleNp = 'समलम्ब चतुर्भुज (Trapezium)';
+    typeTitleNp = 'Trapezium';
     typeTitleEn = 'Trapezium';
     typeColor = '#D97706';
   }
@@ -238,7 +238,7 @@ export const QuadrilateralTypesProperties: React.FC<{
               cursor: 'pointer',
             }}
           >
-            ▯ {L('आयत (Rectangle)', 'Rectangle')}
+            ▯ {L('Rectangle', 'Rectangle')}
           </button>
           <button
             onClick={() => applyPreset('square')}
@@ -280,7 +280,7 @@ export const QuadrilateralTypesProperties: React.FC<{
               cursor: 'pointer',
             }}
           >
-            ⏢ {L('समलम्ब चतुर्भुज (Trapezium)', 'Trapezium')}
+            ⏢ {L('Trapezium', 'Trapezium')}
           </button>
         </div>
 
@@ -491,7 +491,7 @@ export const QuadrilateralTypesProperties: React.FC<{
                   AC = {fmt(diagAC.toFixed(1))} cm | BD = {fmt(diagBD.toFixed(1))} cm
                   {Math.abs(diagAC - diagBD) < tol && (
                     <div style={{ color: '#059669', fontWeight: 700, marginTop: 2 }}>
-                      ✓ दुवै विकर्णहरू बराबर छन् (AC = BD)!
+                      ✓ Both diagonals are equal (AC = BD)!
                     </div>
                   )}
                 </div>
@@ -511,8 +511,8 @@ export const QuadrilateralTypesProperties: React.FC<{
               }}
             >
               <strong>{L('समानान्तर भुजाहरूको अवस्था:', 'Parallel Sides Status:')}</strong>
-              <div>• AB र CD: {parAB_CD ? 'समानान्तर (Parallel //) ✓' : 'समानान्तर छैनन् (Not parallel)'}</div>
-              <div>• BC र DA: {parBC_DA ? 'समानान्तर (Parallel //) ✓' : 'समानान्तर छैनन् (Not parallel)'}</div>
+              <div>• AB and CD: {parAB_CD ? 'Parallel (//) ✓' : 'Not parallel'}</div>
+              <div>• BC and DA: {parBC_DA ? 'Parallel (//) ✓' : 'Not parallel'}</div>
             </div>
           </div>
         </div>

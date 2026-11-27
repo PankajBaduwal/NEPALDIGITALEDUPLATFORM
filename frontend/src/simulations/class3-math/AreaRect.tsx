@@ -1,5 +1,5 @@
 /**
- * Lesson 22 · Area (क्षेत्रफल)
+ * Lesson 22 · Area
  * Tile the Rectangle — 2D grid covering of rectangles with 1 cm² square tiles (Area = L × B).
  */
 import React, { useMemo, useState } from 'react';
@@ -134,7 +134,7 @@ export const AreaRect: React.FC<Props> = ({ onBackToLibrary }) => {
             {fmt(kit.lang, length)} × {fmt(kit.lang, breadth)} = {fmt(kit.lang, totalArea)} {kit.t('वर्ग सेमी', 'cm²')}
           </div>
           <div style={{ fontSize: 13, fontWeight: 700, color: '#64748B', marginTop: 4 }}>
-            {kit.t('भरिएको टाइल:', 'Filled tiles:')} {fmt(kit.lang, currentTiles)} / {fmt(kit.lang, totalArea)} {kit.t('वटा (१ सेमी × १ सेमी)', 'units (1cm × 1cm)')}
+            {kit.t('भरिएको टाइल:', 'Filled tiles:')} {fmt(kit.lang, currentTiles)} / {fmt(kit.lang, totalArea)} {kit.t('वटा (1 सेमी × 1 सेमी)', 'units (1cm × 1cm)')}
           </div>
         </div>
 

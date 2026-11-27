@@ -31,108 +31,108 @@ export const TrigRatioConversionLab: React.FC<SimProps> = ({ onBackToLibrary, on
     sin: {
       cos: {
         formula: 'cos θ = √(1 − sin² θ)',
-        stepsNp: 'sin² θ + cos² θ = १ बाट: cos² θ = १ − sin² θ ⇒ cos θ = √(१ − sin² θ)',
+        stepsNp: 'sin² θ + cos² θ = 1 बाट: cos² θ = 1 − sin² θ ⇒ cos θ = √(1 − sin² θ)',
         stepsEn: 'From sin² θ + cos² θ = 1: cos² θ = 1 − sin² θ => cos θ = √(1 − sin² θ)',
       },
       tan: {
         formula: 'tan θ = sin θ / √(1 − sin² θ)',
-        stepsNp: 'tan θ = sin θ / cos θ। cos θ = √(१ − sin² θ) प्रतिस्थापन गर्दा: tan θ = sin θ / √(१ − sin² θ)',
+        stepsNp: 'tan θ = sin θ / cos θ। cos θ = √(1 − sin² θ) प्रतिस्थापन गर्दा: tan θ = sin θ / √(1 − sin² θ)',
         stepsEn: 'tan θ = sin θ / cos θ. Substituting cos θ = √(1 − sin² θ): tan θ = sin θ / √(1 − sin² θ)',
       },
       sec: {
         formula: 'sec θ = 1 / √(1 − sin² θ)',
-        stepsNp: 'sec θ = १ / cos θ = १ / √(१ − sin² θ)',
+        stepsNp: 'sec θ = 1 / cos θ = 1 / √(1 − sin² θ)',
         stepsEn: 'sec θ = 1 / cos θ = 1 / √(1 − sin² θ)',
       },
       cosec: {
         formula: 'cosec θ = 1 / sin θ',
-        stepsNp: 'पारस्परिक सम्बन्ध अनुसार: cosec θ = १ / sin θ',
+        stepsNp: 'पारस्परिक सम्बन्ध अनुसार: cosec θ = 1 / sin θ',
         stepsEn: 'By reciprocal definition: cosec θ = 1 / sin θ',
       },
       cot: {
         formula: 'cot θ = √(1 − sin² θ) / sin θ',
-        stepsNp: 'cot θ = cos θ / sin θ = √(१ − sin² θ) / sin θ',
+        stepsNp: 'cot θ = cos θ / sin θ = √(1 − sin² θ) / sin θ',
         stepsEn: 'cot θ = cos θ / sin θ = √(1 − sin² θ) / sin θ',
       },
     },
     cos: {
       sin: {
         formula: 'sin θ = √(1 − cos² θ)',
-        stepsNp: 'sin² θ = १ − cos² θ ⇒ sin θ = √(१ − cos² θ)',
+        stepsNp: 'sin² θ = 1 − cos² θ ⇒ sin θ = √(1 − cos² θ)',
         stepsEn: 'sin² θ = 1 − cos² θ => sin θ = √(1 − cos² θ)',
       },
       tan: {
         formula: 'tan θ = √(1 − cos² θ) / cos θ',
-        stepsNp: 'tan θ = sin θ / cos θ = √(१ − cos² θ) / cos θ',
+        stepsNp: 'tan θ = sin θ / cos θ = √(1 − cos² θ) / cos θ',
         stepsEn: 'tan θ = sin θ / cos θ = √(1 − cos² θ) / cos θ',
       },
       sec: {
         formula: 'sec θ = 1 / cos θ',
-        stepsNp: 'sec θ = १ / cos θ',
+        stepsNp: 'sec θ = 1 / cos θ',
         stepsEn: 'sec θ = 1 / cos θ',
       },
       cosec: {
         formula: 'cosec θ = 1 / √(1 − cos² θ)',
-        stepsNp: 'cosec θ = १ / sin θ = १ / √(१ − cos² θ)',
+        stepsNp: 'cosec θ = 1 / sin θ = 1 / √(1 − cos² θ)',
         stepsEn: 'cosec θ = 1 / sin θ = 1 / √(1 − cos² θ)',
       },
       cot: {
         formula: 'cot θ = cos θ / √(1 − cos² θ)',
-        stepsNp: 'cot θ = cos θ / sin θ = cos θ / √(१ − cos² θ)',
+        stepsNp: 'cot θ = cos θ / sin θ = cos θ / √(1 − cos² θ)',
         stepsEn: 'cot θ = cos θ / sin θ = cos θ / √(1 − cos² θ)',
       },
     },
     tan: {
       sin: {
         formula: 'sin θ = tan θ / √(1 + tan² θ)',
-        stepsNp: 'sec² θ = १ + tan² θ ⇒ sec θ = √(१ + tan² θ)। sin θ = tan θ / sec θ = tan θ / √(१ + tan² θ)',
+        stepsNp: 'sec² θ = 1 + tan² θ ⇒ sec θ = √(1 + tan² θ)। sin θ = tan θ / sec θ = tan θ / √(1 + tan² θ)',
         stepsEn: 'sec θ = √(1 + tan² θ). sin θ = tan θ / sec θ = tan θ / √(1 + tan² θ)',
       },
       cos: {
         formula: 'cos θ = 1 / √(1 + tan² θ)',
-        stepsNp: 'cos θ = १ / sec θ = १ / √(१ + tan² θ)',
+        stepsNp: 'cos θ = 1 / sec θ = 1 / √(1 + tan² θ)',
         stepsEn: 'cos θ = 1 / sec θ = 1 / √(1 + tan² θ)',
       },
       sec: {
         formula: 'sec θ = √(1 + tan² θ)',
-        stepsNp: 'सर्वसमिका अनुसार: sec θ = √(१ + tan² θ)',
+        stepsNp: 'सर्वसमिका अनुसार: sec θ = √(1 + tan² θ)',
         stepsEn: 'By identity: sec θ = √(1 + tan² θ)',
       },
       cosec: {
         formula: 'cosec θ = √(1 + tan² θ) / tan θ',
-        stepsNp: 'cosec θ = १ / sin θ = √(१ + tan² θ) / tan θ',
+        stepsNp: 'cosec θ = 1 / sin θ = √(1 + tan² θ) / tan θ',
         stepsEn: 'cosec θ = 1 / sin θ = √(1 + tan² θ) / tan θ',
       },
       cot: {
         formula: 'cot θ = 1 / tan θ',
-        stepsNp: 'पारस्परिक सम्बन्ध: cot θ = १ / tan θ',
+        stepsNp: 'पारस्परिक सम्बन्ध: cot θ = 1 / tan θ',
         stepsEn: 'Reciprocal relation: cot θ = 1 / tan θ',
       },
     },
     sec: {
       sin: {
         formula: 'sin θ = √(sec² θ − 1) / sec θ',
-        stepsNp: 'tan θ = √(sec² θ − १)। sin θ = tan θ / sec θ = √(sec² θ − १) / sec θ',
+        stepsNp: 'tan θ = √(sec² θ − 1)। sin θ = tan θ / sec θ = √(sec² θ − 1) / sec θ',
         stepsEn: 'tan θ = √(sec² θ − 1). sin θ = tan θ / sec θ = √(sec² θ − 1) / sec θ',
       },
       cos: {
         formula: 'cos θ = 1 / sec θ',
-        stepsNp: 'cos θ = १ / sec θ',
+        stepsNp: 'cos θ = 1 / sec θ',
         stepsEn: 'cos θ = 1 / sec θ',
       },
       tan: {
         formula: 'tan θ = √(sec² θ − 1)',
-        stepsNp: 'सर्वसमिका अनुसार: tan θ = √(sec² θ − १)',
+        stepsNp: 'सर्वसमिका अनुसार: tan θ = √(sec² θ − 1)',
         stepsEn: 'By identity: tan θ = √(sec² θ − 1)',
       },
       cosec: {
         formula: 'cosec θ = sec θ / √(sec² θ − 1)',
-        stepsNp: 'cosec θ = १ / sin θ = sec θ / √(sec² θ − १)',
+        stepsNp: 'cosec θ = 1 / sin θ = sec θ / √(sec² θ − 1)',
         stepsEn: 'cosec θ = 1 / sin θ = sec θ / √(sec² θ − 1)',
       },
       cot: {
         formula: 'cot θ = 1 / √(sec² θ − 1)',
-        stepsNp: 'cot θ = १ / tan θ = १ / √(sec² θ − १)',
+        stepsNp: 'cot θ = 1 / tan θ = 1 / √(sec² θ − 1)',
         stepsEn: 'cot θ = 1 / tan θ = 1 / √(sec² θ − 1)',
       },
     },
@@ -282,7 +282,7 @@ export const TrigRatioConversionLab: React.FC<SimProps> = ({ onBackToLibrary, on
                 </span>
               </div>
               <div className="font-mono bg-white p-3 rounded-lg border border-slate-200 text-slate-800 leading-relaxed text-[11px]">
-                <strong>चरणबद्ध प्रक्रिया: </strong>{L(currentPair.stepsNp, currentPair.stepsEn)}
+                <strong>Step-by-step process: </strong>{L(currentPair.stepsNp, currentPair.stepsEn)}
               </div>
             </div>
           </div>

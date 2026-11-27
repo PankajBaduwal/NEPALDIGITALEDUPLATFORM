@@ -1,7 +1,7 @@
 /**
  * ConeCylinderDiscoveryLab.tsx
- * Grade 7 Mathematics – Lesson 16: SOLID OBJECTS (ठोस वस्तुहरू)
- * Simulation 3: Cone and Cylinder Discovery Lab (शङ्कु र बेलना खोजी प्रयोगशाला)
+ * Grade 7 Mathematics – Lesson 16: SOLID OBJECTS
+ * Simulation 3: Cone and Cylinder Discovery Lab
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 252-254)
  */
 import React, { useEffect, useRef, useState } from 'react';
@@ -13,24 +13,24 @@ import { Layers, Check, CheckCircle2, RotateCw, Sparkles, Scissors } from 'lucid
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'शङ्कु (Cone) मा कतिवटा वृत्ताकार आधार (Circular Base) र कतिवटा शीर्षबिन्दु (Vertex) हुन्छन्?',
+    np: 'Cone मा कतिpcs Circular base and कतिpcs Vertex हुन्छन्?',
     en: 'In a cone, how many circular bases and vertices are there?',
     options: [
-      { key: 'A', label: '१ वृत्ताकार आधार र १ शीर्षबिन्दु' },
-      { key: 'B', label: '२ वृत्ताकार आधार र ० शीर्ष' },
-      { key: 'C', label: '१ वृत्ताकार आधार र ० शीर्ष' },
-      { key: 'D', label: '२ वृत्ताकार आधार र १ शीर्ष' },
+      { key: 'A', label: '1 circular base and 1 vertex' },
+      { key: 'B', label: '2 circular base and 0 vertex' },
+      { key: 'C', label: '1 circular base and 0 vertex' },
+      { key: 'D', label: '2 circular base and 1 vertex' },
     ],
     answer: 'A',
   },
   {
-    np: 'बेलना (Cylinder) का दुईवटा वृत्ताकार आधारहरूको सम्बन्ध कस्तो हुन्छ?',
+    np: 'Cylinder का दुईpcs circular baseहरूको सम्बन्ध कस्तो हुन्छ?',
     en: 'What is the geometric relationship between the two circular bases of a cylinder?',
     options: [
-      { key: 'A', label: 'समानान्तर र बराबर (Parallel and Equal)' },
-      { key: 'B', label: 'आपसमा काटिएका' },
-      { key: 'C', label: 'फरक फरक आकारका' },
-      { key: 'D', label: '९०° को कोणमा' },
+      { key: 'A', label: 'Parallel and equal' },
+      { key: 'B', label: 'Crossing each other' },
+      { key: 'C', label: 'Of different sizes' },
+      { key: 'D', label: 'At an angle of 90°' },
     ],
     answer: 'A',
   },
@@ -38,21 +38,21 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कागजको आयताकार पानालाई घुमाएर (Roll) दुई छेउ जोड्दा कुन ठोस वस्तुको वक्र सतह बन्छ?',
     en: 'Rolling a rectangular sheet of paper and joining opposite edges forms the curved surface of what solid?',
     options: [
-      { key: 'A', label: 'बेलना (Cylinder)' },
-      { key: 'B', label: 'शङ्कु (Cone)' },
-      { key: 'C', label: 'घन (Cube)' },
-      { key: 'D', label: 'गोला (Sphere)' },
+      { key: 'A', label: 'Cylinder' },
+      { key: 'B', label: 'Cone' },
+      { key: 'C', label: 'Cube' },
+      { key: 'D', label: 'Sphere' },
     ],
     answer: 'A',
   },
   {
-    np: 'खानेपानीको पाइप, ड्रम र ग्यास सिलिन्डर कुन ठोस आकारका उदाहरण हुन्?',
+    np: 'खानेपानीको पाइप, ड्रम and ग्यास सिलिन्डर कुन ठोस आकारका उदाहरण हुन्?',
     en: 'Water pipes, drums, and gas cylinders are real-life examples of which solid?',
     options: [
-      { key: 'A', label: 'बेलना (Cylinder)' },
-      { key: 'B', label: 'शङ्कु (Cone)' },
-      { key: 'C', label: 'चतुष्फलक' },
-      { key: 'D', label: 'अष्टफलक' },
+      { key: 'A', label: 'Cylinder' },
+      { key: 'B', label: 'Cone' },
+      { key: 'C', label: 'Tetrahedron' },
+      { key: 'D', label: 'Octahedron' },
     ],
     answer: 'A',
   },
@@ -67,7 +67,7 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
   const kit = useSimKit({
     code: 'SIM-MATH-G7-L16-03',
     chapter: 16,
-    titleNp: 'शङ्कु र बेलना खोजी प्रयोगशाला (Cone & Cylinder Lab)',
+    titleNp: 'शङ्कु and बेलना खोजी प्रयोगशाला (Cone & Cylinder Lab)',
     titleEn: 'Cone and Cylinder Discovery Lab',
   });
   const isNe = kit.lang === 'ne';
@@ -152,7 +152,7 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
       grade={7}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! शङ्कु (Cone) र बेलना (Cylinder) का वक्र सतह र वृत्ताकार आधारहरू ३D तथा कागज निर्माणबाट अध्ययन गरौँ!',
+        'नमस्ते! Cone and Cylinder का वक्र सतह and circular baseहरू 3D तथा कागज निर्माणबाट अध्ययन गरौँ!',
         'Hello! Explore curved surfaces and circular bases of cones and cylinders through 3D models and paper construction!'
       )}
     >
@@ -160,10 +160,10 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 justify-center bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'explore_3d', np: '१. ३D ठोस अन्वेषक (3D Explorer)', en: '1. 3D Model Explorer' },
-            { id: 'paper_construction', np: '२. कागजबाट बनाउने विधि (Paper Construction)', en: '2. Paper Construction' },
-            { id: 'comparison', np: '३. शङ्कु र बेलना तुलना (Comparison)', en: '3. Cone vs Cylinder' },
-            { id: 'real_life', np: '४. दैनिक जीवनका उदाहरण (Real-Life Objects)', en: '4. Real-Life Objects' },
+            { id: 'explore_3d', np: '1. 3D ठोस अन्वेषक (3D Explorer)', en: '1. 3D Model Explorer' },
+            { id: 'paper_construction', np: '2. कागजबाट बनाउने विधि (Paper Construction)', en: '2. Paper Construction' },
+            { id: 'comparison', np: '3. शङ्कु and बेलना तुलना (Comparison)', en: '3. Cone vs Cylinder' },
+            { id: 'real_life', np: '4. दैनिक जीवनका उदाहरण (Real-Life Objects)', en: '4. Real-Life Objects' },
           ].map((t) => (
             <button
               key={t.id}
@@ -191,7 +191,7 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
-                {L('शङ्कु (Cone)', 'Cone (3D)')}
+                {L('Cone', 'Cone (3D)')}
               </button>
               <button
                 onClick={() => setActiveModel('cylinder')}
@@ -201,7 +201,7 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
-                {L('बेलना (Cylinder)', 'Cylinder (3D)')}
+                {L('Cylinder', 'Cylinder (3D)')}
               </button>
             </div>
 
@@ -209,44 +209,44 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
               <div className="bg-slate-900 border border-slate-800 rounded-3xl p-4 flex flex-col items-center shadow-2xl">
                 <canvas ref={canvasRef} className="w-full h-64 rounded-2xl cursor-grab" />
                 <div className="text-xs text-slate-400 mt-2">
-                  {activeModel === 'cone' ? L('शङ्कु ३D मोडेल', '3D Cone Model') : L('बेलना ३D मोडेल', '3D Cylinder Model')}
+                  {activeModel === 'cone' ? L('शङ्कु 3D मोडेल', '3D Cone Model') : L('बेलना 3D मोडेल', '3D Cylinder Model')}
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-3">
                   <div className="text-base font-bold text-slate-900" style={{ fontFamily: FONT_NP }}>
-                    {activeModel === 'cone' ? L('शङ्कु (Cone) का गुणहरू:', 'Cone Characteristics:') : L('बेलना (Cylinder) का गुणहरू:', 'Cylinder Characteristics:')}
+                    {activeModel === 'cone' ? L('Cone का गुणहरू:', 'Cone Characteristics:') : L('Cylinder का गुणहरू:', 'Cylinder Characteristics:')}
                   </div>
                   <ul className="text-xs md:text-sm text-slate-700 space-y-2">
                     {activeModel === 'cone' ? (
                       <>
                         <li className="flex items-center gap-2">
                           <Check className="w-4 h-4 text-amber-600 flex-shrink-0" />
-                          <span>१. शीर्षबिन्दु (Vertex) = १ वटा</span>
+                          <span>1. Vertex = 1 pcs</span>
                         </li>
                         <li className="flex items-center gap-2">
                           <Check className="w-4 h-4 text-amber-600 flex-shrink-0" />
-                          <span>२. वृत्ताकार आधार (Circular Base) = १ वटा</span>
+                          <span>2. Circular base = 1 pcs</span>
                         </li>
                         <li className="flex items-center gap-2">
                           <Check className="w-4 h-4 text-amber-600 flex-shrink-0" />
-                          <span>३. वक्र सतह (Curved Surface) = १ वटा</span>
+                          <span>3. Curved surface = 1 pcs</span>
                         </li>
                       </>
                     ) : (
                       <>
                         <li className="flex items-center gap-2">
                           <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                          <span>१. शीर्षबिन्दु (Vertex) = ० वटा</span>
+                          <span>1. Vertex = 0 pcs</span>
                         </li>
                         <li className="flex items-center gap-2">
                           <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                          <span>२. समानान्तर वृत्ताकार आधार = २ वटा</span>
+                          <span>2. समानान्तर circular base = 2 pcs</span>
                         </li>
                         <li className="flex items-center gap-2">
                           <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                          <span>३. वक्र सतह (Curved Surface) = १ वटा</span>
+                          <span>3. Curved surface = 1 pcs</span>
                         </li>
                       </>
                     )}
@@ -270,7 +270,7 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
               {/* Cone Paper Construction */}
               <div className="p-5 rounded-2xl bg-amber-50/50 border border-amber-200 space-y-3">
                 <div className="text-xs font-black text-amber-900 uppercase">
-                  {L('विधि १: कागजबाट शङ्कु बनाउने', 'Method 1: Making a Cone')}
+                  {L('विधि 1: कागजबाट शङ्कु बनाउने', 'Method 1: Making a Cone')}
                 </div>
                 <div className="h-32 flex items-center justify-center">
                   <svg width="120" height="120" viewBox="0 0 120 120">
@@ -283,7 +283,7 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
                 </div>
                 <p className="text-xs text-slate-700 leading-relaxed">
                   {L(
-                    'वृत्ताकार कागजको १/४ भाग काटी बाँकी ३/४ भागको किनारा जोड्दा शङ्कुको वक्र सतह बन्छ।',
+                    'वृत्ताकार कागजको 1/4 भाग काटी बाँकी 3/4 भागको किनारा जोड्दा शङ्कुको वक्र सतह बन्छ।',
                     'Cut 1/4 of a circle, roll the remaining 3/4 sector and join straight edges to form a cone.'
                   )}
                 </p>
@@ -292,7 +292,7 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
               {/* Cylinder Paper Construction */}
               <div className="p-5 rounded-2xl bg-emerald-50/50 border border-emerald-200 space-y-3">
                 <div className="text-xs font-black text-emerald-900 uppercase">
-                  {L('विधि २: कागजबाट बेलना बनाउने', 'Method 2: Making a Cylinder')}
+                  {L('विधि 2: कागजबाट बेलना बनाउने', 'Method 2: Making a Cylinder')}
                 </div>
                 <div className="h-32 flex items-center justify-center">
                   <svg width="140" height="100" viewBox="0 0 140 100">
@@ -317,7 +317,7 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
           <div className="bg-white rounded-3xl p-6 shadow-xl border border-indigo-100 space-y-6">
             <div className="bg-blue-50 p-4 rounded-2xl border border-blue-200">
               <h3 className="text-base font-bold text-blue-950" style={{ fontFamily: FONT_NP }}>
-                {L('शङ्कु र बेलना बीचको तुलना तालिका (Comparison):', 'Cone vs Cylinder Comparison:')}
+                {L('शङ्कु and बेलना बीचको तुलना तालिका (Comparison):', 'Cone vs Cylinder Comparison:')}
               </h3>
             </div>
 
@@ -326,25 +326,25 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
                 <thead className="bg-slate-200 text-slate-800 font-bold">
                   <tr>
                     <th className="p-3 border-r border-slate-300">{L('गुण / विशेषता', 'Property')}</th>
-                    <th className="p-3 border-r border-slate-300">{L('शङ्कु (Cone)', 'Cone')}</th>
-                    <th className="p-3">{L('बेलना (Cylinder)', 'Cylinder')}</th>
+                    <th className="p-3 border-r border-slate-300">{L('Cone', 'Cone')}</th>
+                    <th className="p-3">{L('Cylinder', 'Cylinder')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200">
                   <tr className="hover:bg-indigo-50/50">
-                    <td className="p-3 font-bold border-r border-slate-200">{L('वृत्ताकार आधार संख्या', 'Circular Bases')}</td>
-                    <td className="p-3 font-bold text-amber-700 border-r border-slate-200">१ वटा</td>
-                    <td className="p-3 font-bold text-emerald-700">२ वटा (समानान्तर र बराबर)</td>
+                    <td className="p-3 font-bold border-r border-slate-200">{L('circular base संख्या', 'Circular Bases')}</td>
+                    <td className="p-3 font-bold text-amber-700 border-r border-slate-200">1 pcs</td>
+                    <td className="p-3 font-bold text-emerald-700">2 pcs (parallel and equal)</td>
                   </tr>
                   <tr className="hover:bg-indigo-50/50">
                     <td className="p-3 font-bold border-r border-slate-200">{L('वक्र सतह संख्या', 'Curved Surface')}</td>
-                    <td className="p-3 font-bold text-amber-700 border-r border-slate-200">१ वटा</td>
-                    <td className="p-3 font-bold text-emerald-700">१ वटा</td>
+                    <td className="p-3 font-bold text-amber-700 border-r border-slate-200">1 pcs</td>
+                    <td className="p-3 font-bold text-emerald-700">1 pcs</td>
                   </tr>
                   <tr className="hover:bg-indigo-50/50">
-                    <td className="p-3 font-bold border-r border-slate-200">{L('शीर्षबिन्दु संख्या (Vertices)', 'Vertices')}</td>
-                    <td className="p-3 font-bold text-amber-700 border-r border-slate-200">१ वटा</td>
-                    <td className="p-3 font-bold text-emerald-700">० वटा (कुनै कुना हुँदैन)</td>
+                    <td className="p-3 font-bold border-r border-slate-200">{L('vertex संख्या (Vertices)', 'Vertices')}</td>
+                    <td className="p-3 font-bold text-amber-700 border-r border-slate-200">1 pcs</td>
+                    <td className="p-3 font-bold text-emerald-700">0 pcs (no corners)</td>
                   </tr>
                 </tbody>
               </table>
@@ -357,7 +357,7 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
           <div className="bg-white rounded-3xl p-6 shadow-xl border border-indigo-100 space-y-6">
             <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200">
               <h3 className="text-base font-bold text-amber-950" style={{ fontFamily: FONT_NP }}>
-                {L('पाठ्यपुस्तकका दैनिक जीवनका शङ्कु र बेलना आकारहरू:', 'Real-Life Cones & Cylinders:')}
+                {L('पाठ्यपुस्तकका दैनिक जीवनका शङ्कु and बेलना आकारहरू:', 'Real-Life Cones & Cylinders:')}
               </h3>
             </div>
 
@@ -365,20 +365,20 @@ export const ConeCylinderDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; 
               <div className="bg-amber-50/50 border border-amber-200 p-4 rounded-2xl space-y-2">
                 <div className="font-bold text-sm text-amber-900">{L('शङ्कु आकार (Cone Examples):', 'Cone Examples:')}</div>
                 <ul className="text-xs text-slate-700 space-y-1 list-disc pl-4">
-                  <li>आइसक्रिम कोण (Ice-cream cone)</li>
-                  <li>ट्राफिक कोण (Traffic cone)</li>
-                  <li>जन्मदिनको टोपी (Birthday party cap)</li>
-                  <li>माछा मार्ने परम्परागत जाल (Conical fishing basket)</li>
+                  <li>Ice-cream cone</li>
+                  <li>Traffic cone</li>
+                  <li>Birthday party cap</li>
+                  <li>Conical fishing basket</li>
                 </ul>
               </div>
 
               <div className="bg-emerald-50/50 border border-emerald-200 p-4 rounded-2xl space-y-2">
                 <div className="font-bold text-sm text-emerald-900">{L('बेलना आकार (Cylinder Examples):', 'Cylinder Examples:')}</div>
                 <ul className="text-xs text-slate-700 space-y-1 list-disc pl-4">
-                  <li>खानेपानीको पाइप (Water pipe)</li>
-                  <li>बाजाको ड्रम (Drum)</li>
-                  <li>पानीको ट्याङ्की (Water tank)</li>
-                  <li>खाना पकाउने ग्यास सिलिन्डर (Gas cylinder)</li>
+                  <li>Water pipe</li>
+                  <li>Drum</li>
+                  <li>Water tank</li>
+                  <li>Gas cylinder</li>
                 </ul>
               </div>
             </div>

@@ -1,6 +1,6 @@
 /**
- * Chapter 20 · Coins and Notes (सिक्का र नोट)
- * Sim 1: Coins and Notes (नेपाली मुद्रा) — Pure 2D Edition
+ * Chapter 20 · Coins and Notes
+ * Sim 1: Coins and Notes — Pure 2D Edition
  * 100% 2D SVG / Interactive Money – No Three.js/WebGL dependencies.
  */
 import React, { useMemo, useState } from 'react';
@@ -23,12 +23,12 @@ interface MoneyItem {
 }
 
 const MONEY_TYPES: MoneyItem[] = [
-  { id: 'c1', nameEn: 'Rs 1 Coin', nameNp: 'रु १ सिक्का', val: 1, type: 'coin', color: '#D4AF37' },
-  { id: 'c2', nameEn: 'Rs 2 Coin', nameNp: 'रु २ सिक्का', val: 2, type: 'coin', color: '#C0C0C0' },
-  { id: 'n5', nameEn: 'Rs 5 Note', nameNp: 'रु ५ नोट', val: 5, type: 'note', color: '#EF4444' },
-  { id: 'n10', nameEn: 'Rs 10 Note', nameNp: 'रु १० नोट', val: 10, type: 'note', color: '#F97316' },
-  { id: 'n20', nameEn: 'Rs 20 Note', nameNp: 'रु २० नोट', val: 20, type: 'note', color: '#84CC16' },
-  { id: 'n50', nameEn: 'Rs 50 Note', nameNp: 'रु ५० नोट', val: 50, type: 'note', color: '#06B6D4' },
+  { id: 'c1', nameEn: 'Rs 1 Coin', nameNp: 'रु 1 सिक्का', val: 1, type: 'coin', color: '#D4AF37' },
+  { id: 'c2', nameEn: 'Rs 2 Coin', nameNp: 'रु 2 सिक्का', val: 2, type: 'coin', color: '#C0C0C0' },
+  { id: 'n5', nameEn: 'Rs 5 Note', nameNp: 'रु 5 नोट', val: 5, type: 'note', color: '#EF4444' },
+  { id: 'n10', nameEn: 'Rs 10 Note', nameNp: 'रु 10 नोट', val: 10, type: 'note', color: '#F97316' },
+  { id: 'n20', nameEn: 'Rs 20 Note', nameNp: 'रु 20 नोट', val: 20, type: 'note', color: '#84CC16' },
+  { id: 'n50', nameEn: 'Rs 50 Note', nameNp: 'रु 50 नोट', val: 50, type: 'note', color: '#06B6D4' },
 ];
 
 export const CoinsAndNotes: React.FC<Props> = ({ onBackToLibrary }) => {
@@ -59,22 +59,22 @@ export const CoinsAndNotes: React.FC<Props> = ({ onBackToLibrary }) => {
   const quizQuestions: QuizQuestion[] = useMemo(
     () => [
       {
-        np: 'कुन बढी मूल्यको छ: रु १० को नोट कि रु ५ को नोट?',
+        np: 'कुन बढी मूल्यको छ: रु 10 को नोट कि रु 5 को नोट?',
         en: 'Which is worth more: Rs 10 note or Rs 5 note?',
         options: [
-          { key: '10', label: isNe ? 'रु १० को नोट' : 'Rs 10 note' },
-          { key: '5', label: isNe ? 'रु ५ को नोट' : 'Rs 5 note' },
+          { key: '10', label: isNe ? 'रु 10 को नोट' : 'Rs 10 note' },
+          { key: '5', label: isNe ? 'रु 5 को नोट' : 'Rs 5 note' },
           { key: 'same', label: isNe ? 'बराबर' : 'Same' },
         ],
         answer: '10',
       },
       {
-        np: 'रु ५ बनाउन रु १ का कतिवटा सिक्का चाहिन्छ?',
+        np: 'रु 5 बनाउन रु 1 का कतिवटा सिक्का चाहिन्छ?',
         en: 'How many Rs 1 coins make Rs 5?',
         options: [
-          { key: '5', label: isNe ? '५ वटा' : '5 coins' },
-          { key: '2', label: isNe ? '२ वटा' : '2 coins' },
-          { key: '10', label: isNe ? '१० वटा' : '10 coins' },
+          { key: '5', label: isNe ? '5 वटा' : '5 coins' },
+          { key: '2', label: isNe ? '2 वटा' : '2 coins' },
+          { key: '10', label: isNe ? '10 वटा' : '10 coins' },
         ],
         answer: '5',
       },

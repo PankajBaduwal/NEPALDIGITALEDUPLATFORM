@@ -202,7 +202,7 @@ const makeHop = (cfg: Cfg): React.FC<Props> => ({ onBackToLibrary }) => {
         </span>
         {stepButtons}
         <CBtn color="#059669" disabled={isHopping || pos >= STONES - 1} onClick={hop}>
-          🐸 {kit.t('उफ्रौँ (+१ कदम)', 'Hop (+1)')}
+          🐸 {kit.t('उफ्रौँ (+1 कदम)', 'Hop (+1)')}
         </CBtn>
         <CBtn color="#8B5CF6" disabled={isHopping} onClick={runAuto}>
           ▶ {kit.t('उफ्रेर देखाऔँ', 'Auto Hop')}
@@ -336,7 +336,7 @@ const seq = (n: number, f: (i: number) => number) => Array.from({ length: n }, (
 export const HopTo1000 = makeHop({
   code: 'SIM-MATH-G2-L3-02',
   chapter: 3,
-  titleNp: 'उफ्रने भ्यागुता (१००० सम्म)',
+  titleNp: 'उफ्रने भ्यागुता (1000 सम्म)',
   titleEn: 'Hopping Frog (counting to 1000)',
   steps: [1, 10, 100],
   starts: (st) => (st === 100 ? [0, 100, 200] : st === 10 ? [0, 100, 250, 400, 560, 700] : [0, 45, 90, 120, 240, 500]),
@@ -345,7 +345,7 @@ export const HopTo1000 = makeHop({
 export const TablesHop = makeHop({
   code: 'SIM-MATH-G2-L11-02',
   chapter: 11,
-  titleNp: 'पहाडा भ्यागुता (गुणन १)',
+  titleNp: 'पहाडा भ्यागुता (गुणन 1)',
   titleEn: 'Tables Frog (Multiplication 1)',
   steps: [2, 3, 4, 5, 10],
   starts: () => seq(1, () => 0),

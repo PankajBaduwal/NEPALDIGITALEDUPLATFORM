@@ -1,6 +1,6 @@
 /**
  * IntegerMulDivStudio.tsx
- * Grade 7 Mathematics – Lesson 3: INTEGER (पूर्णाङ्क)
+ * Grade 7 Mathematics – Lesson 3: INTEGER
  * Simulation 3: Integer Multiplication and Division Studio (2D Interactive Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 58-63)
  */
@@ -12,35 +12,35 @@ import { Sparkles, HelpCircle, ArrowRight, RotateCcw } from 'lucide-react';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'दुईवटा ऋणात्मक पूर्णाङ्कहरूको गुणनफल (Negative × Negative) कस्तो हुन्छ?',
+    np: 'दुईpcs Negative integerहरूको गुणनफल (Negative × Negative) कस्तो हुन्छ?',
     en: 'What is the product of two negative integers (Negative × Negative)?',
     options: [
-      { key: 'A', label: 'धनात्मक पूर्णाङ्क (Positive Integer)' },
-      { key: 'B', label: 'ऋणात्मक पूर्णाङ्क' },
-      { key: 'C', label: 'शून्य मात्र' },
-      { key: 'D', label: 'कुनै पनि होइन' },
+      { key: 'A', label: 'Positive integer' },
+      { key: 'B', label: 'Negative integer' },
+      { key: 'C', label: 'Zero only' },
+      { key: 'D', label: 'None of these' },
     ],
     answer: 'A',
   },
   {
-    np: '(-४) × (+६) को मान कति हुन्छ?',
+    np: '(-4) × (+6) को मान कति हुन्छ?',
     en: 'What is the value of (-4) × (+6)?',
     options: [
-      { key: 'A', label: '-२४' },
-      { key: 'B', label: '+२४' },
-      { key: 'C', label: '-१०' },
-      { key: 'D', label: '+२' },
+      { key: 'A', label: '-24' },
+      { key: 'B', label: '+24' },
+      { key: 'C', label: '-10' },
+      { key: 'D', label: '+2' },
     ],
     answer: 'A',
   },
   {
-    np: '(-३६) ÷ (-९) को मान कति हुन्छ?',
+    np: '(-36) ÷ (-9) को मान कति हुन्छ?',
     en: 'What is the value of (-36) ÷ (-9)?',
     options: [
-      { key: 'A', label: '-४' },
-      { key: 'B', label: '+४ (समान चिन्ह = धनात्मक)' },
-      { key: 'C', label: '-२७' },
-      { key: 'D', label: '+४५' },
+      { key: 'A', label: '-4' },
+      { key: 'B', label: '+4' },
+      { key: 'C', label: '-27' },
+      { key: 'D', label: '+45' },
     ],
     answer: 'B',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'a × (b + c) = a × b + a × c कुन नियम हो?',
     en: 'a × (b + c) = a × b + a × c represents which property?',
     options: [
-      { key: 'A', label: 'वितरण नियम (Distributive Property)' },
-      { key: 'B', label: 'क्रमविनिमेय नियम' },
-      { key: 'C', label: 'साहचर्य नियम' },
-      { key: 'D', label: 'संवृत नियम' },
+      { key: 'A', label: 'Distributive property' },
+      { key: 'B', label: 'Commutative property' },
+      { key: 'C', label: 'Associative property' },
+      { key: 'D', label: 'Closure property' },
     ],
     answer: 'A',
   },
@@ -99,10 +99,10 @@ export const IntegerMulDivStudio: React.FC<{ onBackToLibrary?: () => void; onBac
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'sign_rules', np: '१. चिन्हको नियम तालिका', en: '1. Sign Rules Discovery' },
-            { id: 'numberline', np: '२. सङ्ख्यारेखामा गुणन', en: '2. Multiplication on Line' },
-            { id: 'properties', np: '३. गुणनका गुणहरू (वितरण नियम)', en: '3. Multiplication Properties' },
-            { id: 'fact_families', np: '४. गुणन र भाग सम्बन्ध (Fact Families)', en: '4. Division Fact Families' },
+            { id: 'sign_rules', np: '1. चिन्हको नियम तालिका', en: '1. Sign Rules Discovery' },
+            { id: 'numberline', np: '2. सङ्ख्यारेखामा गुणन', en: '2. Multiplication on Line' },
+            { id: 'properties', np: '3. गुणनका गुणहरू (वितरण नियम)', en: '3. Multiplication Properties' },
+            { id: 'fact_families', np: '4. गुणन र भाग सम्बन्ध (Fact Families)', en: '4. Division Fact Families' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -132,7 +132,7 @@ export const IntegerMulDivStudio: React.FC<{ onBackToLibrary?: () => void; onBac
         {activeTab === 'sign_rules' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक नियम (पृष्ठ ५८)', 'Textbook Sign Rules (Page 58)')}
+              {L('पाठ्यपुस्तक नियम (पृष्ठ 58)', 'Textbook Sign Rules (Page 58)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
               {L('पूर्णाङ्क गुणनमा चिन्हको नियम (Signs Rule in Multiplication)', 'Sign Rules in Integer Multiplication')}
@@ -145,9 +145,9 @@ export const IntegerMulDivStudio: React.FC<{ onBackToLibrary?: () => void; onBac
                   (+) × (+) = (+)
                 </div>
                 <div style={{ fontSize: 16, fontWeight: 900, color: '#14532D' }}>
-                  (+३) × (+४) = +१२
+                  (+3) × (+4) = +12
                 </div>
-                <div style={{ fontSize: 11, color: '#15803D', marginTop: 4 }}>समान चिन्ह ⟹ धनात्मक</div>
+                <div style={{ fontSize: 11, color: '#15803D', marginTop: 4 }}>Same signs ⟹ positive</div>
               </div>
 
               <div style={{ background: '#DCFCE7', border: '2px solid #16A34A', borderRadius: 14, padding: 16 }}>
@@ -155,9 +155,9 @@ export const IntegerMulDivStudio: React.FC<{ onBackToLibrary?: () => void; onBac
                   (-) × (-) = (+)
                 </div>
                 <div style={{ fontSize: 16, fontWeight: 900, color: '#14532D' }}>
-                  (-३) × (-४) = +१२
+                  (-3) × (-4) = +12
                 </div>
-                <div style={{ fontSize: 11, color: '#15803D', marginTop: 4 }}>समान चिन्ह ⟹ धनात्मक</div>
+                <div style={{ fontSize: 11, color: '#15803D', marginTop: 4 }}>Same signs ⟹ positive</div>
               </div>
 
               <div style={{ background: '#FEE2E2', border: '2px solid #DC2626', borderRadius: 14, padding: 16 }}>
@@ -165,9 +165,9 @@ export const IntegerMulDivStudio: React.FC<{ onBackToLibrary?: () => void; onBac
                   (+) × (-) = (-)
                 </div>
                 <div style={{ fontSize: 16, fontWeight: 900, color: '#7F1D1D' }}>
-                  (+३) × (-४) = -१२
+                  (+3) × (-4) = -12
                 </div>
-                <div style={{ fontSize: 11, color: '#B91C1C', marginTop: 4 }}>फरक चिन्ह ⟹ ऋणात्मक</div>
+                <div style={{ fontSize: 11, color: '#B91C1C', marginTop: 4 }}>Different signs ⟹ negative</div>
               </div>
 
               <div style={{ background: '#FEE2E2', border: '2px solid #DC2626', borderRadius: 14, padding: 16 }}>
@@ -175,9 +175,9 @@ export const IntegerMulDivStudio: React.FC<{ onBackToLibrary?: () => void; onBac
                   (-) × (+) = (-)
                 </div>
                 <div style={{ fontSize: 16, fontWeight: 900, color: '#7F1D1D' }}>
-                  (-३) × (+४) = -१२
+                  (-3) × (+4) = -12
                 </div>
-                <div style={{ fontSize: 11, color: '#B91C1C', marginTop: 4 }}>फरक चिन्ह ⟹ ऋणात्मक</div>
+                <div style={{ fontSize: 11, color: '#B91C1C', marginTop: 4 }}>Different signs ⟹ negative</div>
               </div>
             </div>
 
@@ -259,17 +259,17 @@ export const IntegerMulDivStudio: React.FC<{ onBackToLibrary?: () => void; onBac
             </h3>
             <p style={{ fontSize: 13, color: '#475569', margin: '0 0 16px', lineHeight: 1.6 }}>
               {L(
-                '(-२) × ३ को अर्थ: शून्यबाट बायाँतर्फ २-२ एकाइका ३ वटा फड्को मार्ने ⟹ -६ मा पुगिन्छ।',
+                '(-2) × 3 को अर्थ: शून्यबाट बायाँतर्फ 2-2 एकाइका 3 pcs फड्को मार्ने ⟹ -6 मा पुगिन्छ।',
                 '(-2) × 3 means: starting from zero, taking 3 jumps of 2 units to the left ⟹ reaches -6.'
               )}
             </p>
 
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', borderRadius: 14, padding: 20, textAlign: 'center' }}>
               <div style={{ fontSize: 24, fontWeight: 900, color: '#0F766E', marginBottom: 6 }}>
-                (-२) × ३ = (-२) + (-२) + (-२) = -६
+                (-2) × 3 = (-2) + (-2) + (-2) = -6
               </div>
               <div style={{ fontSize: 14, fontWeight: 700, color: '#0D9488' }}>
-                {L('३ पटक बायाँतर्फ २ एकाइ चाल', '3 jumps of 2 units to the left')}
+                {L('3 पटक बायाँतर्फ 2 एकाइ चाल', '3 jumps of 2 units to the left')}
               </div>
             </div>
           </div>
@@ -285,42 +285,42 @@ export const IntegerMulDivStudio: React.FC<{ onBackToLibrary?: () => void; onBac
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 14 }}>
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#0F766E', marginBottom: 4 }}>
-                  १. वितरण नियम (Distributive Property)
+                  1. Distributive property
                 </div>
                 <div style={{ fontSize: 13, color: '#334155' }}>
                   a × (b + c) = (a × b) + (a × c)<br />
-                  २ × (३ + ४) = २ × ७ = १४<br />
-                  (२ × ३) + (२ × ४) = ६ + ८ = १४
+                  2 × (3 + 4) = 2 × 7 = 14<br />
+                  (2 × 3) + (2 × 4) = 6 + 8 = 14
                 </div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#0F766E', marginBottom: 4 }}>
-                  २. गुणनको तत्समक १ (Identity of 1)
+                  2. Identity of multiplication (1)
                 </div>
                 <div style={{ fontSize: 13, color: '#334155' }}>
-                  a × १ = a<br />
-                  (-८) × १ = -८
+                  a × 1 = a<br />
+                  (-8) × 1 = -8
                 </div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#0F766E', marginBottom: 4 }}>
-                  ३. शून्यको गुण (Multiplication by 0)
+                  3. Multiplication by 0
                 </div>
                 <div style={{ fontSize: 13, color: '#334155' }}>
-                  a × ० = ०<br />
-                  (-१५) × ० = ०
+                  a × 0 = 0<br />
+                  (-15) × 0 = 0
                 </div>
               </div>
 
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
                 <div style={{ fontSize: 14, fontWeight: 900, color: '#0F766E', marginBottom: 4 }}>
-                  ४. साहचर्य नियम (Associative)
+                  4. Associative property
                 </div>
                 <div style={{ fontSize: 13, color: '#334155' }}>
                   (a × b) × c = a × (b × c)<br />
-                  [२ × (-३)] × ४ = २ × [(-३) × ४] = -२४
+                  [2 × (-3)] × 4 = 2 × [(-3) × 4] = -24
                 </div>
               </div>
             </div>
@@ -331,7 +331,7 @@ export const IntegerMulDivStudio: React.FC<{ onBackToLibrary?: () => void; onBac
         {activeTab === 'fact_families' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक सम्बन्ध (पृष्ठ ६२)', 'Textbook Fact Families (Page 62)')}
+              {L('पाठ्यपुस्तक सम्बन्ध (पृष्ठ 62)', 'Textbook Fact Families (Page 62)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
               {L('गुणन र भागको प्रत्यक्ष सम्बन्ध (Fact Families)', 'Multiplication and Division Fact Families')}
@@ -339,23 +339,23 @@ export const IntegerMulDivStudio: React.FC<{ onBackToLibrary?: () => void; onBac
 
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', padding: 20, borderRadius: 16, marginBottom: 16 }}>
               <div style={{ fontSize: 18, fontWeight: 900, color: '#0F766E', marginBottom: 8 }}>
-                गुणन तथ्य: (-८) × (-४) = +३२
+                Multiplication fact: (-8) × (-4) = +32
               </div>
               <div style={{ fontSize: 15, color: '#1E293B', lineHeight: 1.8 }}>
-                <div>• भाग तथ्य १: ३२ ÷ (-८) = <strong>-४</strong> (धनात्मक ÷ ऋणात्मक = ऋणात्मक)</div>
-                <div>• भाग तथ्य २: ३२ ÷ (-४) = <strong>-८</strong> (धनात्मक ÷ ऋणात्मक = ऋणात्मक)</div>
+                <div>• Division fact 1: 32 ÷ (-8) = <strong>-4</strong> (positive ÷ negative = negative)</div>
+                <div>• Division fact 2: 32 ÷ (-4) = <strong>-8</strong> (positive ÷ negative = negative)</div>
               </div>
             </div>
 
             <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', padding: 18, borderRadius: 14 }}>
               <div style={{ fontSize: 14, fontWeight: 800, color: '#334155' }}>
-                💡 भागका चिन्ह नियमहरू:
+                💡 Sign rules for division:
               </div>
               <div style={{ fontSize: 13, color: '#475569', marginTop: 4 }}>
-                • (+३६) ÷ (+९) = +४ (समान चिन्ह = +)<br />
-                • (-३६) ÷ (-९) = +४ (समान चिन्ह = +)<br />
-                • (-३६) ÷ (+९) = -४ (फरक चिन्ह = -)<br />
-                • (+३६) ÷ (-९) = -४ (फरक चिन्ह = -)
+                • (+36) ÷ (+9) = +4<br />
+                • (-36) ÷ (-9) = +4<br />
+                • (-36) ÷ (+9) = -4<br />
+                • (+36) ÷ (-9) = -4
               </div>
             </div>
           </div>

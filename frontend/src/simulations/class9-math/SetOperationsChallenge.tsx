@@ -9,7 +9,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'सममितीय अन्तर (Symmetric Difference) A △ B को सूत्र कुन हो?',
     en: 'What is the formula for symmetric difference A △ B?',
     options: [
-      { key: 'A', label: '(A − B) ∪ (B − A) वा (A ∪ B) − (A ∩ B)' },
+      { key: 'A', label: '(A − B) ∪ (B − A) or (A ∪ B) − (A ∩ B)' },
       { key: 'B', label: 'A ∩ B' },
       { key: 'C', label: '(A ∪ B) ∪ (A ∩ B)' },
       { key: 'D', label: 'U − (A ∪ B)' },
@@ -20,32 +20,32 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'भेन चित्रमा (A ∪ B)\' देखाउन कुन भागलाई छायाङ्कन (Shade) गर्नुपर्दछ?',
     en: 'Which region should be shaded in a Venn diagram to represent (A ∪ B)\'?',
     options: [
-      { key: 'A', label: 'वृत्त A र B भन्दा बाहिर, सर्वव्यापक समूह U भित्रको भाग' },
-      { key: 'B', label: 'A र B को बीचको साझा भाग मात्र' },
-      { key: 'C', label: 'A वृत्त मात्र' },
-      { key: 'D', label: 'A र B का दुवै वृत्तहरू' },
+      { key: 'A', label: 'The part outside circles A and B, inside the universal set U' },
+      { key: 'B', label: 'Only the common part between A and B' },
+      { key: 'C', label: 'Only circle A' },
+      { key: 'D', label: 'Both circles A and B' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि U = {१, २, ३, ४, ५}, A = {२, ३} र B = {३, ४} भए A △ B को मान कति हुन्छ?',
+    np: 'यदि U = {1, 2, 3, 4, 5}, A = {2, 3} र B = {3, 4} भए A △ B को मान कति हुन्छ?',
     en: 'If U = {1, 2, 3, 4, 5}, A = {2, 3} and B = {3, 4}, what is A △ B?',
     options: [
-      { key: 'A', label: '{२, ४} / {2, 4}' },
-      { key: 'B', label: '{३}' },
-      { key: 'C', label: '{२, ३, ४}' },
-      { key: 'D', label: '{१, ५}' },
+      { key: 'A', label: '{2, 4} / {2, 4}' },
+      { key: 'B', label: '{3}' },
+      { key: 'C', label: '{2, 3, 4}' },
+      { key: 'D', label: '{1, 5}' },
     ],
     answer: 'A',
   },
   {
-    np: 'भेन चित्रमा A − B (A मात्र) छायाङ्कन गर्दा कुन भाग रङ्ग्याइन्छ?',
+    np: 'भेन चित्रमा A − B छायाङ्कन गर्दा कुन भाग रङ्ग्याइन्छ?',
     en: 'When shading A - B (only A), which region is shaded?',
     options: [
-      { key: 'A', label: 'A को भाग जहाँ B को कुनै अंश पर्दैन' },
-      { key: 'B', label: 'A र B को बीचको प्रतिच्छेदन' },
-      { key: 'C', label: 'B को पूरै वृत्त' },
-      { key: 'D', label: 'सबै बाहिरी भाग' },
+      { key: 'A', label: 'The part of A where no part of B falls' },
+      { key: 'B', label: 'The intersection between A and B' },
+      { key: 'C', label: 'The whole of circle B' },
+      { key: 'D', label: 'All the outside part' },
     ],
     answer: 'A',
   },
@@ -68,15 +68,15 @@ interface ShadingChallenge {
 const SHADING_CHALLENGES: ShadingChallenge[] = [
   {
     id: 'union',
-    targetNp: 'A ∪ B (संयोजन)',
+    targetNp: 'A ∪ B',
     targetEn: 'A ∪ B (Union)',
     formula: 'A ∪ B',
-    descNp: 'समूह A र समूह B का सबै भागहरूलाई छायाङ्कन गर्नुहोस्।',
+    descNp: 'Shade all the parts of set A and set B.',
     expectedRegions: { onlyA: true, intersect: true, onlyB: true, outside: false },
   },
   {
     id: 'intersect',
-    targetNp: 'A ∩ B (प्रतिच्छेदन)',
+    targetNp: 'A ∩ B',
     targetEn: 'A ∩ B (Intersection)',
     formula: 'A ∩ B',
     descNp: 'समूह A र B दुवैमा पर्ने साझा भाग मात्र छायाङ्कन गर्नुहोस्।',
@@ -84,17 +84,17 @@ const SHADING_CHALLENGES: ShadingChallenge[] = [
   },
   {
     id: 'diff_A_B',
-    targetNp: 'A − B (A मात्र / Only A)',
+    targetNp: 'A − B',
     targetEn: 'A − B (Only A)',
-    formula: 'A − B = {x : x ∈ A र x ∉ B}',
+    formula: 'A − B = {x : x ∈ A and x ∉ B}',
     descNp: 'A मा पर्ने तर B मा नपर्ने भाग मात्र छायाङ्कन गर्नुहोस्।',
     expectedRegions: { onlyA: true, intersect: false, onlyB: false, outside: false },
   },
   {
     id: 'diff_B_A',
-    targetNp: 'B − A (B मात्र / Only B)',
+    targetNp: 'B − A',
     targetEn: 'B − A (Only B)',
-    formula: 'B − A = {x : x ∈ B र x ∉ A}',
+    formula: 'B − A = {x : x ∈ B and x ∉ A}',
     descNp: 'B मा पर्ने तर A मा नपर्ने भाग मात्र छायाङ्कन गर्नुहोस्।',
     expectedRegions: { onlyA: false, intersect: false, onlyB: true, outside: false },
   },
@@ -108,18 +108,18 @@ const SHADING_CHALLENGES: ShadingChallenge[] = [
   },
   {
     id: 'comp_A',
-    targetNp: "Ā वा A' (A को पूरक)",
+    targetNp: "Ā वा A'",
     targetEn: "A' (Complement of A)",
     formula: "A' = U − A",
-    descNp: 'समूह A बाहेकको सबै भाग (B मात्र र बाहिरी भाग) छायाङ्कन गर्नुहोस्।',
+    descNp: 'समूह A बाहेकको सबै भाग (B only र बाहिरी भाग) छायाङ्कन गर्नुहोस्।',
     expectedRegions: { onlyA: false, intersect: false, onlyB: true, outside: true },
   },
   {
     id: 'sym_diff',
-    targetNp: 'A △ B (सममितीय अन्तर)',
+    targetNp: 'A △ B',
     targetEn: 'A △ B (Symmetric Difference)',
     formula: 'A △ B = (A − B) ∪ (B − A)',
-    descNp: 'A मात्र र B मात्रको भाग छायाङ्कन गर्नुहोस् (साझा भाग बाहेक)।',
+    descNp: 'A only र B onlyको भाग छायाङ्कन गर्नुहोस् (साझा भाग बाहेक)।',
     expectedRegions: { onlyA: true, intersect: false, onlyB: true, outside: false },
   },
   {
@@ -219,7 +219,7 @@ export const SetOperationsChallenge: React.FC<{
               activeTab === 'shading' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🎨 {L('१. भेन चित्र छायाङ्कन चुनौती (Interactive Shading)', '1. Interactive Shading')}
+            🎨 {L('1. भेन चित्र छायाङ्कन चुनौती (Interactive Shading)', '1. Interactive Shading')}
           </button>
           <button
             onClick={() => setActiveTab('calc_practice')}
@@ -227,7 +227,7 @@ export const SetOperationsChallenge: React.FC<{
               activeTab === 'calc_practice' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🧮 {L('२. समूह हिसाब अभ्यास (Set Calculations)', '2. Set Calculations')}
+            🧮 {L('2. समूह हिसाब अभ्यास (Set Calculations)', '2. Set Calculations')}
           </button>
         </div>
 
@@ -241,7 +241,7 @@ export const SetOperationsChallenge: React.FC<{
                   {L('चित्रका भागहरूमा क्लिक वा टच गरी रङ्ग्याउनुहोस्:', 'Click or tap regions to toggle shading:')}
                 </span>
                 <span className="bg-amber-100 text-amber-900 px-2 py-0.5 rounded font-bold">
-                  अङ्क (Score): {score}
+                  Score: {score}
                 </span>
               </div>
 
@@ -315,16 +315,16 @@ export const SetOperationsChallenge: React.FC<{
 
                 {/* Text prompts inside regions */}
                 <text x={155} y={165} fontSize="11" fontWeight="bold" fill="#1e40af" textAnchor="middle" pointerEvents="none">
-                  A मात्र
+                  A only
                 </text>
                 <text x={250} y={165} fontSize="11" fontWeight="bold" fill="#b45309" textAnchor="middle" pointerEvents="none">
                   A ∩ B
                 </text>
                 <text x={345} y={165} fontSize="11" fontWeight="bold" fill="#065f46" textAnchor="middle" pointerEvents="none">
-                  B मात्र
+                  B only
                 </text>
                 <text x={70} y={295} fontSize="11" fontWeight="bold" fill="#64748b" pointerEvents="none">
-                  बाहिरी भाग (U)
+                  Outside part (U)
                 </text>
               </svg>
 
@@ -335,7 +335,7 @@ export const SetOperationsChallenge: React.FC<{
                   className="py-2 px-3 text-xs rounded-xl font-bold border border-slate-300 text-slate-600 hover:bg-slate-100 flex items-center gap-1.5"
                 >
                   <RotateCcw className="w-4 h-4" />
-                  खाली गर्नुहोस् (Clear)
+                  Clear
                 </button>
 
                 <div className="flex gap-2">
@@ -343,7 +343,7 @@ export const SetOperationsChallenge: React.FC<{
                     onClick={handleCheckShading}
                     className="py-2.5 px-6 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs shadow-md transition-all"
                   >
-                    जाँच गर्नुहोस् (Check Answer)
+                    Check answer
                   </button>
                   {feedback?.isCorrect && (
                     <button
@@ -361,7 +361,7 @@ export const SetOperationsChallenge: React.FC<{
             <div className="lg:col-span-4 space-y-4">
               <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 shadow-sm space-y-3">
                 <span className="text-xs font-bold text-amber-800 uppercase tracking-wide block">
-                  चुनौती #{challengeIdx + 1}
+                  Challenge #{challengeIdx + 1}
                 </span>
 
                 <h3 className="text-xl font-black text-amber-950 font-mono">
@@ -372,7 +372,7 @@ export const SetOperationsChallenge: React.FC<{
                 </p>
 
                 <div className="p-2.5 bg-white rounded-xl border border-amber-200 text-xs font-mono text-amber-800 font-bold">
-                  सूत्र: {curChallenge.formula}
+                  Formula: {curChallenge.formula}
                 </div>
               </div>
 
@@ -406,7 +406,7 @@ export const SetOperationsChallenge: React.FC<{
 
               {/* List of operations quick switch */}
               <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm text-xs space-y-2">
-                <span className="font-bold text-slate-700 block">अभ्यास सूची (Challenge List):</span>
+                <span className="font-bold text-slate-700 block">Challenge list:</span>
                 <div className="grid grid-cols-2 gap-1.5">
                   {SHADING_CHALLENGES.map((ch, idx) => (
                     <button
@@ -434,41 +434,41 @@ export const SetOperationsChallenge: React.FC<{
         {activeTab === 'calc_practice' && (
           <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-5">
             <div className="p-4 bg-indigo-50 border border-indigo-200 rounded-xl space-y-2 text-xs">
-              <span className="font-bold text-indigo-900 uppercase">दिइएको तथ्याङ्क:</span>
+              <span className="font-bold text-indigo-900 uppercase">Given data:</span>
               <div className="font-mono text-indigo-800 text-sm space-y-1">
-                <div>U = &#123;१, २, ३, ४, ५, ६, ७, ८, ९, १०, ११, १२&#125;</div>
-                <div>A = &#123;२, ४, ६, ८, १०, १२&#125; (२ का गुणनफल)</div>
-                <div>B = &#123;३, ६, ९, १२&#125; (३ का गुणनफल)</div>
+                <div>U = &#123;1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12&#125;</div>
+                <div>A = &#123;2, 4, 6, 8, 10, 12&#125; (multiples of 2)</div>
+                <div>B = &#123;3, 6, 9, 12&#125; (multiples of 3)</div>
               </div>
             </div>
 
             <div className="space-y-3 text-xs">
               <h4 className="font-bold text-slate-800 text-sm">
-                तलका समूह क्रियाहरूको मान कति हुन्छ? (आफूले सोचेर उत्तर जाँच गर्नुहोस्)
+                What is the value of the set operations below?
               </h4>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                  <span className="font-bold text-slate-700 block">१. A ∩ B (साझा सदस्यहरू):</span>
-                  <div className="font-mono text-emerald-700 font-bold text-sm">&#123;६, १२&#125;</div>
-                  <span className="text-[11px] text-slate-500">२ र ३ दुवैका साझा गुणनफलहरू</span>
+                  <span className="font-bold text-slate-700 block">1. A ∩ B:</span>
+                  <div className="font-mono text-emerald-700 font-bold text-sm">&#123;6, 12&#125;</div>
+                  <span className="text-[11px] text-slate-500">Common multiples of both 2 and 3</span>
                 </div>
 
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                  <span className="font-bold text-slate-700 block">२. A − B (A मात्र):</span>
-                  <div className="font-mono text-blue-700 font-bold text-sm">&#123;२, ४, ८, १०&#125;</div>
-                  <span className="text-[11px] text-slate-500">A बाट साझा ६ र १२ हटाउँदा</span>
+                  <span className="font-bold text-slate-700 block">2. A − B:</span>
+                  <div className="font-mono text-blue-700 font-bold text-sm">&#123;2, 4, 8, 10&#125;</div>
+                  <span className="text-[11px] text-slate-500">Removing the common 6 and 12 from A</span>
                 </div>
 
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                  <span className="font-bold text-slate-700 block">३. B − A (B मात्र):</span>
-                  <div className="font-mono text-amber-700 font-bold text-sm">&#123;३, ९&#125;</div>
-                  <span className="text-[11px] text-slate-500">B बाट साझा ६ र १२ हटाउँदा</span>
+                  <span className="font-bold text-slate-700 block">3. B − A:</span>
+                  <div className="font-mono text-amber-700 font-bold text-sm">&#123;3, 9&#125;</div>
+                  <span className="text-[11px] text-slate-500">Removing the common 6 and 12 from B</span>
                 </div>
 
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                  <span className="font-bold text-slate-700 block">४. A △ B (सममितीय अन्तर):</span>
-                  <div className="font-mono text-purple-700 font-bold text-sm">&#123;२, ३, ४, ८, ९, १०&#125;</div>
+                  <span className="font-bold text-slate-700 block">4. A △ B:</span>
+                  <div className="font-mono text-purple-700 font-bold text-sm">&#123;2, 3, 4, 8, 9, 10&#125;</div>
                   <span className="text-[11px] text-slate-500">(A − B) ∪ (B − A)</span>
                 </div>
               </div>

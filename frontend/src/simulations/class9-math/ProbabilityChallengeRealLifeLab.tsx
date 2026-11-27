@@ -65,27 +65,27 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
 
   const QUIZ = [
     {
-      qNp: '१ देखि १० सम्मका कार्डहरूबाट एउटा कार्ड थुत्दा पूर्ण वर्ग (Square number: १, ४, ९) पर्ने सम्भाव्यता कति हुन्छ?',
+      qNp: '1 देखि 10 सम्मका कार्डहरूबाट एउटा कार्ड थुत्दा पूर्ण वर्ग (Square number: 1, 4, 9) पर्ने सम्भाव्यता कति हुन्छ?',
       qEn: 'What is the probability of drawing a square number (1, 4, 9) from cards numbered 1 to 10?',
-      opts: ['१/१०', '३/१०', '२/५', '१/२'],
+      opts: ['1/10', '3/10', '2/5', '1/2'],
       correct: 1,
-      expNp: 'अनुकूल सङ्ख्या n(E) = ३ (१, ४, ९), कुल सङ्ख्या n(S) = १०। अतः P(E) = ३/१०।',
+      expNp: 'अनुकूल सङ्ख्या n(E) = 3 (1, 4, 9), कुल सङ्ख्या n(S) = 10। अतः P(E) = 3/10।',
       expEn: 'Favourable outcomes n(E) = 3 ({1, 4, 9}), total outcomes n(S) = 10. Thus P(E) = 3/10.',
     },
     {
-      qNp: '५२ पत्तीको तासमा एउटा तास थुत्दा "हुकुम" (Spade) पर्ने सम्भाव्यता कति हुन्छ?',
+      qNp: '52 पत्तीको तासमा एउटा तास थुत्दा "हुकुम" (Spade) पर्ने सम्भाव्यता कति हुन्छ?',
       qEn: 'What is the probability of drawing a Spade from a well-shuffled pack of 52 cards?',
-      opts: ['१/४', '१/२', '१/१३', '४/५२'],
+      opts: ['1/4', '1/2', '1/13', '4/52'],
       correct: 0,
-      expNp: 'हुकुमको जम्मा सङ्ख्या १३ हुन्छ। अतः P(Spade) = १३/५२ = १/४।',
+      expNp: 'हुकुमको जम्मा सङ्ख्या 13 हुन्छ। अतः P(Spade) = 13/52 = 1/4।',
       expEn: 'Total spades = 13. Therefore P(Spade) = 13/52 = 1/4.',
     },
     {
-      qNp: 'यदि कुनै घटना घट्ने सम्भाव्यता P(E) = ३/५ भए, नघट्ने सम्भाव्यता P(not E) कति हुन्छ?',
+      qNp: 'यदि कुनै घटना घट्ने सम्भाव्यता P(E) = 3/5 भए, नघट्ने सम्भाव्यता P(not E) कति हुन्छ?',
       qEn: 'If the probability of an event is P(E) = 3/5, what is the complementary probability P(not E)?',
-      opts: ['२/५', '३/५', '१/५', '०'],
+      opts: ['2/5', '3/5', '1/5', '0'],
       correct: 0,
-      expNp: 'पूरक सम्भाव्यता P(not E) = १ - P(E) = १ - ३/५ = २/५।',
+      expNp: 'पूरक सम्भाव्यता P(not E) = 1 - P(E) = 1 - 3/5 = 2/5।',
       expEn: 'Complementary probability P(not E) = 1 - P(E) = 1 - 3/5 = 2/5.',
     },
     {
@@ -119,7 +119,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
       onBack={handleBack}
       grade={9}
       mascotGreeting={L(
-        'नमस्ते! कार्डहरू, ५२ पत्तीको तास, कक्षा कोठाका विद्यार्थी छनोट, र ० देखि १ सम्मको सम्भाव्यता रेखा मार्फत व्यावहारिक सम्भाव्यता अन्वेषण गर्नुहोस्!',
+        'नमस्ते! कार्डहरू, 52 पत्तीको तास, कक्षा कोठाका विद्यार्थी छनोट, र 0 देखि 1 सम्मको सम्भाव्यता रेखा मार्फत व्यावहारिक सम्भाव्यता अन्वेषण गर्नुहोस्!',
         'Welcome! Explore practical probability with numbered cards, 52-card decks, real-life student selection, and the 0 to 1 probability scale!'
       )}
     >
@@ -134,7 +134,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            1. {L('१–१० नम्बर कार्ड (Number Cards)', '1–10 Cards')}
+            1. {L('1–10 नम्बर कार्ड (Number Cards)', '1–10 Cards')}
           </button>
           <button
             onClick={() => setActiveTab('deck52')}
@@ -144,7 +144,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            2. {L('५२ पत्ती तास (52-Card Deck)', '52-Card Deck')}
+            2. {L('52 पत्ती तास (52-Card Deck)', '52-Card Deck')}
           </button>
           <button
             onClick={() => setActiveTab('real_life')}
@@ -184,7 +184,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-100">
               <div>
                 <h4 className="font-bold text-slate-800 text-sm">
-                  {L('१ देखि १० सम्मका सङ्ख्या कार्डहरू (Cards 1 to 10)', 'Numbered Cards 1 to 10')}
+                  {L('1 देखि 10 सम्मका सङ्ख्या कार्डहरू (Cards 1 to 10)', 'Numbered Cards 1 to 10')}
                 </h4>
                 <p className="text-xs text-slate-500 font-mono">
                   S = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 &#125;, n(S) = 10
@@ -209,7 +209,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
                   filterType === 'all' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('सबै कार्डहरू (n=१०)', 'All Cards (10)')}
+                {L('सबै कार्डहरू (n=10)', 'All Cards (10)')}
               </button>
               <button
                 onClick={() => setFilterType('even')}
@@ -217,7 +217,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
                   filterType === 'even' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('जोडी सङ्ख्या (Even: ५)', 'Even (5)')}
+                {L('जोडी सङ्ख्या (Even: 5)', 'Even (5)')}
               </button>
               <button
                 onClick={() => setFilterType('odd')}
@@ -225,7 +225,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
                   filterType === 'odd' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('विजोडी सङ्ख्या (Odd: ५)', 'Odd (5)')}
+                {L('विजोडी सङ्ख्या (Odd: 5)', 'Odd (5)')}
               </button>
               <button
                 onClick={() => setFilterType('square')}
@@ -233,7 +233,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
                   filterType === 'square' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('पूर्ण वर्ग (Square: ३)', 'Square (3)')}
+                {L('पूर्ण वर्ग (Square: 3)', 'Square (3)')}
               </button>
               <button
                 onClick={() => setFilterType('prime')}
@@ -241,7 +241,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
                   filterType === 'prime' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-50 text-slate-700'
                 }`}
               >
-                {L('रूढ सङ्ख्या (Prime: ४)', 'Prime (4)')}
+                {L('रूढ सङ्ख्या (Prime: 4)', 'Prime (4)')}
               </button>
             </div>
 
@@ -277,14 +277,14 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
             <div className="p-4 bg-indigo-50/70 border border-indigo-200 rounded-xl text-xs flex flex-col sm:flex-row justify-between items-center gap-2">
               <span className="font-bold text-indigo-950">
                 {filterType === 'all'
-                  ? L('सबै कार्डहरू आउने सम्भाव्यता P(S) = १०/१० = १', 'P(Any card) = 10/10 = 1')
+                  ? L('सबै कार्डहरू आउने सम्भाव्यता P(S) = 10/10 = 1', 'P(Any card) = 10/10 = 1')
                   : filterType === 'square'
-                  ? L('पूर्ण वर्ग सङ्ख्या आउने सम्भाव्यता P(Square) = n(E)/n(S) = ३/१० = ०.३', 'P(Square) = 3/10 = 0.3')
+                  ? L('पूर्ण वर्ग सङ्ख्या आउने सम्भाव्यता P(Square) = n(E)/n(S) = 3/10 = 0.3', 'P(Square) = 3/10 = 0.3')
                   : filterType === 'even'
-                  ? L('जोडी सङ्ख्या आउने सम्भाव्यता P(Even) = ५/१० = १/२ = ०.५', 'P(Even) = 5/10 = 1/2 = 0.5')
+                  ? L('जोडी सङ्ख्या आउने सम्भाव्यता P(Even) = 5/10 = 1/2 = 0.5', 'P(Even) = 5/10 = 1/2 = 0.5')
                   : filterType === 'odd'
-                  ? L('विजोडी सङ्ख्या आउने सम्भाव्यता P(Odd) = ५/१० = १/२ = ०.५', 'P(Odd) = 5/10 = 1/2 = 0.5')
-                  : L('रूढ सङ्ख्या आउने सम्भाव्यता P(Prime) = ४/१० = २/५ = ०.४', 'P(Prime) = 4/10 = 2/5 = 0.4')}
+                  ? L('विजोडी सङ्ख्या आउने सम्भाव्यता P(Odd) = 5/10 = 1/2 = 0.5', 'P(Odd) = 5/10 = 1/2 = 0.5')
+                  : L('रूढ सङ्ख्या आउने सम्भाव्यता P(Prime) = 4/10 = 2/5 = 0.4', 'P(Prime) = 4/10 = 2/5 = 0.4')}
               </span>
               {selectedCard !== null && (
                 <span className="font-mono bg-white px-3 py-1 rounded border border-indigo-200 font-bold text-indigo-700">
@@ -301,14 +301,14 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
             <div className="flex justify-between items-center pb-2 border-b border-slate-100">
               <div>
                 <h4 className="font-bold text-slate-800 text-sm">
-                  {L('५२ पत्तीको तास (Standard 52-Card Deck)', 'Standard 52-Card Pack')}
+                  {L('52 पत्तीको तास (Standard 52-Card Deck)', 'Standard 52-Card Pack')}
                 </h4>
                 <p className="text-xs text-slate-500">
-                  {L('२६ रातो (मुटु र इँट) र २६ कालो (हुकुम र चिडी)', '26 Red (Hearts, Diamonds) and 26 Black (Spades, Clubs)')}
+                  {L('26 रातो (मुटु र इँट) र 26 कालो (हुकुम र चिडी)', '26 Red (Hearts, Diamonds) and 26 Black (Spades, Clubs)')}
                 </p>
               </div>
               <span className="text-xs font-mono font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded">
-                n(S) = ५२
+                n(S) = 52
               </span>
             </div>
 
@@ -334,23 +334,23 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
               <div className="p-3 bg-rose-50 rounded-xl border border-rose-200 text-rose-950">
                 <div className="font-bold text-sm">♥️ {L('पान / मुटु (Hearts)', 'Hearts')}</div>
-                <div className="mt-1 text-slate-600">{L('१३ पत्ती (रातो)', '13 cards (Red)')}</div>
-                <div className="font-mono text-xs font-bold text-rose-700 mt-2">P = १३/५२ = १/४</div>
+                <div className="mt-1 text-slate-600">{L('13 पत्ती (रातो)', '13 cards (Red)')}</div>
+                <div className="font-mono text-xs font-bold text-rose-700 mt-2">P = 13/52 = 1/4</div>
               </div>
               <div className="p-3 bg-rose-50 rounded-xl border border-rose-200 text-rose-950">
                 <div className="font-bold text-sm">♦️ {L('इँट (Diamonds)', 'Diamonds')}</div>
-                <div className="mt-1 text-slate-600">{L('१३ पत्ती (रातो)', '13 cards (Red)')}</div>
-                <div className="font-mono text-xs font-bold text-rose-700 mt-2">P = १३/५२ = १/४</div>
+                <div className="mt-1 text-slate-600">{L('13 पत्ती (रातो)', '13 cards (Red)')}</div>
+                <div className="font-mono text-xs font-bold text-rose-700 mt-2">P = 13/52 = 1/4</div>
               </div>
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-300 text-slate-900">
                 <div className="font-bold text-sm">♠️ {L('हुकुम (Spades)', 'Spades')}</div>
-                <div className="mt-1 text-slate-600">{L('१३ पत्ती (कालो)', '13 cards (Black)')}</div>
-                <div className="font-mono text-xs font-bold text-slate-800 mt-2">P = १३/५२ = १/४</div>
+                <div className="mt-1 text-slate-600">{L('13 पत्ती (कालो)', '13 cards (Black)')}</div>
+                <div className="font-mono text-xs font-bold text-slate-800 mt-2">P = 13/52 = 1/4</div>
               </div>
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-300 text-slate-900">
                 <div className="font-bold text-sm">♣️ {L('चिडी (Clubs)', 'Clubs')}</div>
-                <div className="mt-1 text-slate-600">{L('१३ पत्ती (कालो)', '13 cards (Black)')}</div>
-                <div className="font-mono text-xs font-bold text-slate-800 mt-2">P = १३/५२ = १/४</div>
+                <div className="mt-1 text-slate-600">{L('13 पत्ती (कालो)', '13 cards (Black)')}</div>
+                <div className="font-mono text-xs font-bold text-slate-800 mt-2">P = 13/52 = 1/4</div>
               </div>
             </div>
 
@@ -435,7 +435,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
                 </div>
               </div>
               <div className="text-[11px] text-slate-600 pt-1">
-                P(Boy) + P(Girl) = 1.00 {L('(दुवै परस्पर निवारक र सम्पूरक हुन्)', '(They are mutually exclusive and complementary)')}
+                P(Boy) + P(Girl) = 1.00 {L('', '(They are mutually exclusive and complementary)')}
               </div>
             </div>
           </div>
@@ -449,7 +449,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
                 {L('सम्भाव्यता नाप (Probability Scale: 0 to 1)', 'Probability Scale (0 to 1)')}
               </h4>
               <p className="text-xs text-slate-500">
-                {L('सम्भाव्यता सधैं ० र १ को बीचमा (वा ०% देखि १००% सम्म) मात्र हुन्छ।', 'Probability always lies strictly between 0 and 1 inclusive.')}
+                {L('सम्भाव्यता सधैं 0 र 1 को बीचमा (वा 0% देखि 100% सम्म) मात्र हुन्छ।', 'Probability always lies strictly between 0 and 1 inclusive.')}
               </p>
             </div>
 
@@ -479,7 +479,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
               <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-950 space-y-1">
                 <div className="font-bold">❌ P = 0 ({L('असम्भव घटना', 'Impossible Event')})</div>
                 <div className="text-[11px] text-slate-600">
-                  {L('उदाहरण: साधारण पासा दगुराउँदा ७ आउने सम्भाव्यता।', 'Example: Rolling a 7 on a standard 6-sided die.')}
+                  {L('उदाहरण: साधारण पासा दगुराउँदा 7 आउने सम्भाव्यता।', 'Example: Rolling a 7 on a standard 6-sided die.')}
                 </div>
               </div>
               <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-950 space-y-1">
@@ -491,7 +491,7 @@ export const ProbabilityChallengeRealLifeLab: React.FC<SimProps> = ({ onBackToLi
               <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-950 space-y-1">
                 <div className="font-bold">✅ P = 1 ({L('निश्चित घटना', 'Certain Event')})</div>
                 <div className="text-[11px] text-slate-600">
-                  {L('उदाहरण: पासा दगुराउँदा ७ भन्दा सानो सङ्ख्या आउने।', 'Example: Rolling a number less than 7 on a die.')}
+                  {L('उदाहरण: पासा दगुराउँदा 7 भन्दा सानो सङ्ख्या आउने।', 'Example: Rolling a number less than 7 on a die.')}
                 </div>
               </div>
             </div>

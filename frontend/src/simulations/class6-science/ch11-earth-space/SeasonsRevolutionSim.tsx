@@ -1,15 +1,15 @@
 /**
  * SeasonsRevolutionSim.tsx
- * Simulation 41: 2D Seasons and Earth's Revolution (ऋतुहरू र पृथ्वीको परिक्रमण)
- * Grade 6 Science • Unit 11: Earth and Space (पृथ्वी र अन्तरिक्ष)
+ * Simulation 41: 2D Seasons and Earth's Revolution
+ * Grade 6 Science • Unit 11: Earth and Space
  *
  * Full 2D Heliocentric Orbital System featuring:
  * 1. Earth's constant 23.5° Axial Tilt pointing in fixed direction (Polaris)
  * 2. 4 Solstice & Equinox Milestones:
  *    - Summer Solstice (June 21): Northern hemisphere tilted towards Sun (Longest day in Nepal)
- *    - Autumnal Equinox (Sept 23): Equal day and night (Autumn / शरद् ऋतु)
+ *    - Autumnal Equinox (Sept 23): Equal day and night
  *    - Winter Solstice (Dec 22): Northern hemisphere tilted away (Shortest day in Nepal)
- *    - Spring Equinox (March 21): Equal day and night (Spring / वसन्त ऋतु)
+ *    - Spring Equinox (March 21): Equal day and night
  * 3. Real-time Sun ray incidence angle and day/night terminator on globe
  */
 
@@ -35,48 +35,48 @@ interface SeasonMilestone {
 const MILESTONES: SeasonMilestone[] = [
   {
     id: 'summer_solstice',
-    nameEn: 'Summer Solstice (कर्कट संक्रान्ति)',
+    nameEn: 'Summer Solstice',
     nameNe: 'ग्रीष्म संक्रान्ति (Summer Solstice)',
     dateEn: 'June 21',
-    dateNe: 'असार ७ गते',
+    dateNe: 'असार 7 गते',
     angleRad: Math.PI / 2,
-    seasonNepalEn: 'Summer / Monsoon (गर्मी र वर्षा)',
+    seasonNepalEn: 'Summer / Monsoon',
     seasonNepalNe: 'ग्रीष्म / वर्षा ऋतु',
     descEn: 'Northern hemisphere tilts maximum (23.5°) toward the Sun. Longest day and shortest night of the year in Nepal!',
     descNe: 'उत्तरी गोलार्ध सूर्यतिर झुक्ने हुँदा नेपालमा वर्षकै सबैभन्दा लामो दिन र छोटो रात हुन्छ।',
   },
   {
     id: 'autumn_equinox',
-    nameEn: 'Autumnal Equinox (शरद् सम्पात)',
+    nameEn: 'Autumnal Equinox',
     nameNe: 'शरद् सम्पात (Autumnal Equinox)',
     dateEn: 'September 23',
-    dateNe: 'असोज ७ गते',
+    dateNe: 'असोज 7 गते',
     angleRad: Math.PI,
-    seasonNepalEn: 'Autumn (शरद् ऋतु - Dashain time)',
+    seasonNepalEn: 'Autumn',
     seasonNepalNe: 'शरद् ऋतु (दशैं-तिहारको समय)',
     descEn: 'Sun is directly above the Equator. Day and night are exactly equal (12 hours each) everywhere on Earth.',
-    descNe: 'सूर्य ठीक भूमध्यरेखामाथि पर्ने हुँदा पृथ्वीभरि दिन र रात बराबर (१२-१२ घण्टा) हुन्छन्।',
+    descNe: 'सूर्य ठीक भूमध्यरेखामाथि पर्ने हुँदा पृथ्वीभरि दिन र रात बराबर (12-12 घण्टा) हुन्छन्।',
   },
   {
     id: 'winter_solstice',
-    nameEn: 'Winter Solstice (मकर संक्रान्ति)',
+    nameEn: 'Winter Solstice',
     nameNe: 'हिउँद संक्रान्ति (Winter Solstice)',
     dateEn: 'December 22',
-    dateNe: 'पुस ७ गते',
+    dateNe: 'पुस 7 गते',
     angleRad: (Math.PI * 3) / 2,
-    seasonNepalEn: 'Winter (शिशिर / हिउँद)',
+    seasonNepalEn: 'Winter',
     seasonNepalNe: 'शिशिर ऋतु (जाडो)',
     descEn: 'Northern hemisphere tilts away from Sun. Shortest day and longest, coldest night of the year in Nepal.',
     descNe: 'उत्तरी गोलार्ध सूर्यबाट टाढा झुक्छ; नेपालमा वर्षकै छोटो दिन र लामो चिसो रात हुन्छ।',
   },
   {
     id: 'spring_equinox',
-    nameEn: 'Vernal / Spring Equinox (वसन्त सम्पात)',
+    nameEn: 'Vernal / Spring Equinox',
     nameNe: 'वसन्त सम्पात (Vernal Equinox)',
     dateEn: 'March 21',
-    dateNe: 'चैत ७ गते',
+    dateNe: 'चैत 7 गते',
     angleRad: 0,
-    seasonNepalEn: 'Spring (वसन्त ऋतु - Flowers blooming)',
+    seasonNepalEn: 'Spring',
     seasonNepalNe: 'वसन्त ऋतु (फूल फुल्ने मौसम)',
     descEn: 'Sun crosses Equator moving North. Days and nights are equal, temperatures turn warm and pleasant in Nepal.',
     descNe: 'सूर्य उत्तरतिर सर्दा भूमध्यरेखामाथि पर्छ; दिन र रात बराबर हुन्छन् र न्यानो मौसम सुरु हुन्छ।',
@@ -87,7 +87,7 @@ export const SeasonsRevolutionSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -191,7 +191,7 @@ export const SeasonsRevolutionSim: React.FC<BaseSimulationProps> = ({
 
       ctx.fillStyle = '#78350f';
       ctx.font = 'bold 11px sans-serif';
-      ctx.fillText('SUN (सूर्य)', sunX - 22, sunY + 4);
+      ctx.fillText('SUN', sunX - 22, sunY + 4);
 
       // Earth Position on Orbit
       const earthX = sunX + Math.cos(orbitAngle) * orbitRx;
@@ -426,7 +426,7 @@ export const SeasonsRevolutionSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 <RotateCcw size={14} />
-                {lang === 'en' ? 'Reset June 21' : 'असार ७ मा फर्कनुहोस्'}
+                {lang === 'en' ? 'Reset June 21' : 'असार 7 मा फर्कनुहोस्'}
               </button>
             </div>
           </div>
@@ -445,24 +445,24 @@ export const SeasonsRevolutionSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: Why Do Seasons Occur?' : '१. खोज: ऋतुहरू किन परिवर्तन हुन्छन्?')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: The 23.5° Axial Tilt' : '२. अन्वेषण: २३.५° को झुकाव')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Solstice vs Equinox' : '३. अवलोकन: संक्रान्ति र सम्पात')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Summer in Nepal' : '४. बुझाइ: नेपालको गर्मी र जाडो')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Seasons Quiz' : '५. चुनौती: ऋतु प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: Why Do Seasons Occur?' : '1. खोज: ऋतुहरू किन परिवर्तन हुन्छन्?')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: The 23.5° Axial Tilt' : '2. अन्वेषण: 23.5° को झुकाव')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Solstice vs Equinox' : '3. अवलोकन: संक्रान्ति र सम्पात')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Summer in Nepal' : '4. बुझाइ: नेपालको गर्मी र जाडो')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Seasons Quiz' : '5. चुनौती: ऋतु प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
               <p style={{ margin: 0, fontSize: '12px', color: '#64748b', lineHeight: '1.5' }}>
                 {stage === 'discover' && (lang === 'en'
                   ? 'Seasons are NOT caused by Earth getting closer or further from the Sun! They occur because of Earth’s tilted axis as it orbits the Sun.'
-                  : 'ऋतुहरू पृथ्वी सूर्यको नजिक वा टाढा भएर होइन; पृथ्वी आफ्नो अक्षमा २३.५° ढल्केर सूर्यको परिक्रमण गर्ने हुनाले बदलिन्छन्!')}
+                  : 'ऋतुहरू पृथ्वी सूर्यको नजिक वा टाढा भएर होइन; पृथ्वी आफ्नो अक्षमा 23.5° ढल्केर सूर्यको परिक्रमण गर्ने हुनाले बदलिन्छन्!')}
                 {stage === 'explore' && (lang === 'en'
-                  ? 'Earth’s rotational axis is tilted 23.5° and always points towards the same star (Polaris / ध्रुवतारा) in space.'
-                  : 'पृथ्वीको काल्पनिक अक्ष २३.५° ढल्केको छ र यो अन्तरिक्षमा सधैं ध्रुवतारातर्फ मात्र सोझिएको रहन्छ।')}
+                  ? 'Earth’s rotational axis is tilted 23.5° and always points towards the same star in space.'
+                  : 'पृथ्वीको काल्पनिक अक्ष 23.5° ढल्केको छ र यो अन्तरिक्षमा सधैं ध्रुवतारातर्फ मात्र सोझिएको रहन्छ।')}
                 {stage === 'observe' && (lang === 'en'
                   ? 'On June 21, the North Pole tilts towards the Sun, receiving direct concentrated sunlight $\\rightarrow$ Summer in Nepal!'
-                  : 'असार ७ (June 21) मा उत्तरी ध्रुव सूर्यतिर ढल्कन्छ र नेपालमा सिधा सूर्यको किरण परेर लामो दिन र गर्मी हुन्छ!')}
+                  : 'असार 7 (June 21) मा उत्तरी ध्रुव सूर्यतिर ढल्कन्छ र नेपालमा सिधा सूर्यको किरण परेर लामो दिन र गर्मी हुन्छ!')}
                 {stage === 'understand' && (lang === 'en'
                   ? 'When it is summer in Nepal (Northern Hemisphere), it is freezing winter in Australia (Southern Hemisphere)!'
                   : 'नेपाल (उत्तरी गोलार्ध) मा गर्मी हुँदा अस्ट्रेलिया (दक्षिणी गोलार्ध) मा कडा जाडो हुन्छ!')}
@@ -475,7 +475,7 @@ export const SeasonsRevolutionSim: React.FC<BaseSimulationProps> = ({
                     : 'पृथ्वीमा ऋतु परिवर्तन हुनुको मुख्य कारण के हो?'}
                 </p>
                 {[
-                  { id: 1, en: '23.5° axial tilt and revolution around the Sun', ne: 'पृथ्वीको २३.५° अक्षीय झुकाव र सूर्यको परिक्रमण' },
+                  { id: 1, en: '23.5° axial tilt and revolution around the Sun', ne: 'पृथ्वीको 23.5° अक्षीय झुकाव र सूर्यको परिक्रमण' },
                   { id: 2, en: 'Distance from the Sun changing', ne: 'सूर्यबाट पृथ्वीको दुरी घटबढ हुनु' },
                   { id: 3, en: 'Earth rotation on its axis only', ne: 'पृथ्वीको आफ्नै अक्षको दैनिक घुमाइ मात्र' },
                 ].map(opt => (

@@ -1,14 +1,14 @@
 /**
  * SolutionExplorerSim.tsx
- * Simulation 32: 2D Solution Explorer (घोल अन्वेषण)
- * Grade 6 Science • Unit 9: Matter (पदार्थ)
+ * Simulation 32: 2D Solution Explorer
+ * Grade 6 Science • Unit 9: Matter
  *
  * Full 2D Interactive Solution Chemistry featuring:
- * 1. Solute + Solvent = Solution (घुल्य + घोलक = घोल)
+ * 1. Solute + Solvent = Solution
  * 2. Saturation States:
- *    - Unsaturated (अतृप्त): Dissolves completely
- *    - Saturated (तृप्त): Maximum solute dissolved at this temperature
- *    - Supersaturated (अतितृप्त): Excess solute precipitates out into solid crystals
+ *    - Unsaturated: Dissolves completely
+ *    - Saturated: Maximum solute dissolved at this temperature
+ *    - Supersaturated: Excess solute precipitates out into solid crystals
  * 3. Temperature Modulator (10°C to 90°C) showing increasing solubility limit
  * 4. Dynamic Solubility curve & Seed Crystal nucleation trigger
  */
@@ -23,7 +23,7 @@ export const SolutionExplorerSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -216,9 +216,9 @@ export const SolutionExplorerSim: React.FC<BaseSimulationProps> = ({
       ctx.font = 'bold 12px sans-serif';
       ctx.textAlign = 'center';
       const stateLabels = {
-        unsaturated: { en: 'Unsaturated Solution (अतृप्त घोल)', ne: 'अतृप्त घोल (Unsaturated)' },
-        saturated: { en: 'Saturated Solution (तृप्त घोल)', ne: 'तृप्त घोल (Saturated)' },
-        supersaturated: { en: 'Supersaturated with Sediment (अतितृप्त)', ne: 'अतितृप्त घोल (Precipitate Present)' },
+        unsaturated: { en: 'Unsaturated Solution', ne: 'अतृप्त घोल (Unsaturated)' },
+        saturated: { en: 'Saturated Solution', ne: 'तृप्त घोल (Saturated)' },
+        supersaturated: { en: 'Supersaturated with Sediment', ne: 'अतितृप्त घोल (Precipitate Present)' },
       };
       ctx.fillText(lang === 'en' ? stateLabels[saturationState].en : stateLabels[saturationState].ne, bx, by - 19);
       ctx.textAlign = 'left';
@@ -328,7 +328,7 @@ export const SolutionExplorerSim: React.FC<BaseSimulationProps> = ({
                 }}
               >
                 <Plus size={14} />
-                {lang === 'en' ? 'Add Solute (+5g)' : 'घुल्य थप्नुहोस् (+५g)'}
+                {lang === 'en' ? 'Add Solute (+5g)' : 'घुल्य थप्नुहोस् (+5g)'}
               </button>
 
               <button
@@ -430,24 +430,24 @@ export const SolutionExplorerSim: React.FC<BaseSimulationProps> = ({
           {/* Inquiry Stages */}
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#38bdf8' }}>
-              {stage === 'discover' && (lang === 'en' ? '1. Discover: What is a Solution?' : '१. खोज: घोल भनेको के हो?')}
-              {stage === 'explore' && (lang === 'en' ? '2. Explore: Saturation Point' : '२. अन्वेषण: तृप्त विन्दु')}
-              {stage === 'observe' && (lang === 'en' ? '3. Observe: Temperature Effect' : '३. अवलोकन: तापक्रमको प्रभाव')}
-              {stage === 'understand' && (lang === 'en' ? '4. Understand: Solubility Limit' : '४. बुझाइ: घुलनशीलता सीमा')}
-              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Solution Quiz' : '५. चुनौती: घोल प्रश्न')}
+              {stage === 'discover' && (lang === 'en' ? '1. Discover: What is a Solution?' : '1. खोज: घोल भनेको के हो?')}
+              {stage === 'explore' && (lang === 'en' ? '2. Explore: Saturation Point' : '2. अन्वेषण: तृप्त विन्दु')}
+              {stage === 'observe' && (lang === 'en' ? '3. Observe: Temperature Effect' : '3. अवलोकन: तापक्रमको प्रभाव')}
+              {stage === 'understand' && (lang === 'en' ? '4. Understand: Solubility Limit' : '4. बुझाइ: घुलनशीलता सीमा')}
+              {stage === 'challenge' && (lang === 'en' ? '5. Challenge: Solution Quiz' : '5. चुनौती: घोल प्रश्न')}
             </h4>
 
             {stage !== 'challenge' ? (
               <p style={{ margin: 0, fontSize: '12px', color: '#64748b', lineHeight: '1.5' }}>
                 {stage === 'discover' && (lang === 'en'
-                  ? 'Water is known as the "Universal Solvent" (सर्वघोलक) because it dissolves more substances than any other liquid on Earth.'
+                  ? 'Water is known as the "Universal Solvent" because it dissolves more substances than any other liquid on Earth.'
                   : 'पानीलाई "सर्वघोलक" भनिन्छ किनभने यसले पृथ्वीका अन्य कुनै पनि तरल पदार्थ भन्दा धेरै वस्तुहरूलाई घुलाउन सक्छ।')}
                 {stage === 'explore' && (lang === 'en'
                   ? 'Keep clicking "Add Solute (+5g)". Watch what happens when the amount exceeds the saturation limit—sediment accumulates at the bottom!'
                   : '"घुल्य थप्नुहोस्" थिच्दै जानुहोस्। तृप्त सीमा नाघेपछि थपिएको नून नघुली पिँधमा थिग्रिन थालेको हेर्नुहोस्!')}
                 {stage === 'observe' && (lang === 'en'
                   ? 'Now slide the temperature up to 80°C. Notice how the undissolved sediment suddenly dissolves because warm water holds more solute!'
-                  : 'अब तापक्रम बढाएर ८०°C मा पुर्याउनुहोस्। तातो पानीले बढी घुल्य घुलाउन सक्ने भएकाले पिँधको थिग्रिएको नून पनि घुल्न थाल्छ!')}
+                  : 'अब तापक्रम बढाएर 80°C मा पुर्याउनुहोस्। तातो पानीले बढी घुल्य घुलाउन सक्ने भएकाले पिँधको थिग्रिएको नून पनि घुल्न थाल्छ!')}
                 {stage === 'understand' && (lang === 'en'
                   ? 'When a hot saturated solution cools down, the excess solute must crystallize out into solid crystals.'
                   : 'जब तातो तृप्त घोललाई चिसो पारिन्छ, बढी भएको घुल्य पुनः दानादार क्रिस्टल बनेर बाहिर निस्कन्छ।')}
@@ -460,9 +460,9 @@ export const SolutionExplorerSim: React.FC<BaseSimulationProps> = ({
                     : 'कुनै निश्चित तापक्रममा थप घुल्य घुलाउन नसक्ने घोललाई के भनिन्छ?'}
                 </p>
                 {[
-                  { id: 1, en: 'Saturated Solution (तृप्त घोल)', ne: 'तृप्त घोल (Saturated Solution)' },
-                  { id: 2, en: 'Unsaturated Solution (अतृप्त घोल)', ne: 'अतृप्त घोल (Unsaturated Solution)' },
-                  { id: 3, en: 'Dilute Solution (पातलो घोल)', ne: 'पातलो घोल (Dilute Solution)' },
+                  { id: 1, en: 'Saturated Solution', ne: 'तृप्त घोल (Saturated Solution)' },
+                  { id: 2, en: 'Unsaturated Solution', ne: 'अतृप्त घोल (Unsaturated Solution)' },
+                  { id: 3, en: 'Dilute Solution', ne: 'पातलो घोल (Dilute Solution)' },
                 ].map(opt => (
                   <button
                     key={opt.id}

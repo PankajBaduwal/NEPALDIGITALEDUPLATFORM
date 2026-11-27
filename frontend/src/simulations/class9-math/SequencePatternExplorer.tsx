@@ -20,7 +20,7 @@ const PRESET_SEQUENCES: PresetSequence[] = [
     id: 'odd',
     nameNp: 'बिजोर संख्याहरूको अनुक्रम (Odd numbers)',
     nameEn: 'Odd numbers',
-    ruleNp: 'प्रत्येक पद २ ले बढ्छ: tₙ = २n - १',
+    ruleNp: 'प्रत्येक पद 2 ले बढ्छ: tₙ = 2n - 1',
     ruleEn: 'Increases by 2: tₙ = 2n - 1',
     formula: (n) => 2 * n - 1,
     formulaStr: '2n - 1',
@@ -48,9 +48,9 @@ const PRESET_SEQUENCES: PresetSequence[] = [
   },
   {
     id: 'arith3',
-    nameNp: 'समान अन्तर ३ भएको अनुक्रम (४, ७, १०, १३, ...)',
+    nameNp: 'समान अन्तर 3 भएको अनुक्रम (4, 7, 10, 13, ...)',
     nameEn: 'Arithmetic with d=3 (4, 7, 10, ...)',
-    ruleNp: 'tₙ = ३n + १',
+    ruleNp: 'tₙ = 3n + 1',
     ruleEn: 'tₙ = 3n + 1',
     formula: (n) => 3 * n + 1,
     formulaStr: '3n + 1',
@@ -58,9 +58,9 @@ const PRESET_SEQUENCES: PresetSequence[] = [
   },
   {
     id: 'finite10',
-    nameNp: '१० सम्मका जोड संख्याहरूको सीमित अनुक्रम (Finite)',
+    nameNp: '10 सम्मका जोड संख्याहरूको सीमित अनुक्रम (Finite)',
     nameEn: 'Finite even numbers up to 10',
-    ruleNp: 'tₙ = २n (n = १ देखि ५ सम्म सीमित)',
+    ruleNp: 'tₙ = 2n',
     ruleEn: 'tₙ = 2n (Limited to 5 terms)',
     formula: (n) => 2 * n,
     formulaStr: '2n (n ≤ 5)',
@@ -71,13 +71,13 @@ const PRESET_SEQUENCES: PresetSequence[] = [
 
 const QUIZ_QUESTIONS = [
   {
-    np: 'अनुक्रम १, ४, ९, १६, २५, ... को सामान्य पद (General Term tₙ) के हो?',
+    np: 'अनुक्रम 1, 4, 9, 16, 25, ... को सामान्य पद (General Term tₙ) के हो?',
     en: 'What is the general term (tₙ) of the sequence 1, 4, 9, 16, 25, ...?',
     options: [
-      { key: 'A', label: 'tₙ = २n' },
-      { key: 'B', label: 'tₙ = n² (पद संख्याको वर्ग)' },
-      { key: 'C', label: 'tₙ = n + ३' },
-      { key: 'D', label: 'tₙ = २n - १' },
+      { key: 'A', label: 'tₙ = 2n' },
+      { key: 'B', label: 'tₙ = n² (square of the term number)' },
+      { key: 'C', label: 'tₙ = n + 3' },
+      { key: 'D', label: 'tₙ = 2n - 1' },
     ],
     answer: 'B',
   },
@@ -85,32 +85,32 @@ const QUIZ_QUESTIONS = [
     np: 'जुन अनुक्रममा पदहरूको संख्या निश्चित र गन्न सकिने हुन्छ, त्यसलाई कस्तो अनुक्रम भनिन्छ?',
     en: 'A sequence with a fixed, countable number of terms is called what?',
     options: [
-      { key: 'A', label: 'सीमित अनुक्रम (Finite Sequence)' },
-      { key: 'B', label: 'असीमित अनुक्रम (Infinite Sequence)' },
-      { key: 'C', label: 'श्रेणी (Series)' },
-      { key: 'D', label: 'गुणोत्तर अनुक्रम' },
+      { key: 'A', label: 'Finite sequence' },
+      { key: 'B', label: 'Infinite sequence' },
+      { key: 'C', label: 'Series' },
+      { key: 'D', label: 'Geometric sequence' },
     ],
     answer: 'A',
   },
   {
-    np: 'यदि tₙ = ३n + २ भए सो अनुक्रमको पाँचौँ पद (t₅) कति हुन्छ?',
+    np: 'यदि tₙ = 3n + 2 भए सो अनुक्रमको पाँचौँ पद (t₅) कति हुन्छ?',
     en: 'If tₙ = 3n + 2, what is the 5th term (t₅)?',
     options: [
-      { key: 'A', label: '१५' },
-      { key: 'B', label: '१७ (३ × ५ + २ = १७)' },
-      { key: 'C', label: '२०' },
-      { key: 'D', label: '२५' },
+      { key: 'A', label: '15' },
+      { key: 'B', label: '17 (3 × 5 + 2 = 17)' },
+      { key: 'C', label: '20' },
+      { key: 'D', label: '25' },
     ],
     answer: 'B',
   },
   {
-    np: 'अनुक्रम ३, ७, ११, १५, ... मा खाली ठाउँ भर्नुहोस्: ३, ७, ११, १५, [ ? ]',
+    np: 'अनुक्रम 3, 7, 11, 15, ... मा खाली ठाउँ भर्नुहोस्: 3, 7, 11, 15, [ ? ]',
     en: 'Fill in the missing term in the sequence: 3, 7, 11, 15, [ ? ]',
     options: [
-      { key: 'A', label: '१७' },
-      { key: 'B', label: '१८' },
-      { key: 'C', label: '१९ (प्रत्येक पद ४ ले बढ्छ: १५ + ४ = १९)' },
-      { key: 'D', label: '२१' },
+      { key: 'A', label: '17' },
+      { key: 'B', label: '18' },
+      { key: 'C', label: '19' },
+      { key: 'D', label: '21' },
     ],
     answer: 'C',
   },
@@ -151,7 +151,7 @@ export const SequencePatternExplorer: React.FC<{
       grade={9}
       questions={QUIZ_QUESTIONS}
       mascotGreeting={L(
-        'नमस्ते! पाठ ८ अनुक्रम र श्रेणी अन्तर्गत संख्याहरूको ढाँचा, सामान्य पद tₙ, सीमित र असीमित अनुक्रमको रमाइलो अन्वेषण गरौं!',
+        'नमस्ते! पाठ 8 अनुक्रम र श्रेणी अन्तर्गत संख्याहरूको ढाँचा, सामान्य पद tₙ, सीमित र असीमित अनुक्रमको रमाइलो अन्वेषण गरौं!',
         'Welcome! Explore number patterns, general term tₙ, finite & infinite sequences, and number line visualizations!'
       )}
     >

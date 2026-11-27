@@ -801,7 +801,7 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
           </button>
           <div>
             <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '900' }}>
-              {simulation.title} {simulation.titleNepali && `(${simulation.titleNepali})`}
+              {simulation.title} {simulation.titleNepali && !(simulation.gradeLevels?.length && Math.max(...simulation.gradeLevels) <= 10) && `(${simulation.titleNepali})`}
             </h3>
             <span style={{ fontSize: '11px', color: '#A7F3D0', fontWeight: '700' }}>
               Class {simulation.gradeLevels?.join(', ')} • {simulation.subjectCode || 'General'}

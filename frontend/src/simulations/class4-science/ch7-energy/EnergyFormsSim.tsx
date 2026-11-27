@@ -1,16 +1,16 @@
 /**
  * EnergyFormsSim.tsx
- * Simulation 25: 2D Hydroelectric Energy Transformation Lab (जलविद्युत ऊर्जा रूपान्तरण प्रयोगशाला)
- * Grade 4 Science • Chapter 7: Energy (ऊर्जा)
+ * Simulation 25: 2D Hydroelectric Energy Transformation Lab
+ * Grade 4 Science • Chapter 7: Energy
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
  * - Real-world Nepalese Hydroelectric Power Generation Station:
- *   1. High-altitude Dam Reservoir (स्थितिशक्ति - Potential Energy)
- *   2. Penstock Pipe & Nozzle Jet (गतिशक्ति - Kinetic Energy)
- *   3. Pelton Turbine Runner with rotating spoon cups (यान्त्रिक शक्ति - Mechanical Energy)
- *   4. Copper Coil Dynamo Generator (विद्युत शक्ति - Electrical Energy)
- *   5. Glowing Filament Bulb & Village House (प्रकाश र ताप शक्ति - Light & Heat Energy)
+ *   1. High-altitude Dam Reservoir
+ *   2. Penstock Pipe & Nozzle Jet
+ *   3. Pelton Turbine Runner with rotating spoon cups
+ *   4. Copper Coil Dynamo Generator
+ *   5. Glowing Filament Bulb & Village House
  * - Interactive Penstock Valve flow slider (0% to 100%)
  * - Dynamic energy chain indicators, pulsating electric current, water spray particles
  * - Bilingual EN/NE, realistic sounds, and concept mastery challenge.
@@ -34,7 +34,7 @@ export const EnergyFormsSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -51,36 +51,36 @@ export const EnergyFormsSim: React.FC<BaseSimulationProps> = ({
   const energyStages = [
     {
       id: 'potential',
-      nameEn: '1. Potential Energy (स्थितिशक्ति)',
-      nameNe: '१. स्थितिशक्ति (Potential Energy)',
+      nameEn: '1. Potential Energy',
+      nameNe: '1. स्थितिशक्ति (Potential Energy)',
       descEn: 'Water stored high up in the mountain reservoir has stored gravitational potential energy.',
       descNe: 'उचाइमा रहेको बाँधको पानीमा स्थिति ऊर्जा (Potential Energy) सञ्चित हुन्छ।',
     },
     {
       id: 'kinetic',
-      nameEn: '2. Kinetic Energy (गतिशक्ति)',
-      nameNe: '२. गतिशक्ति (Kinetic Energy)',
+      nameEn: '2. Kinetic Energy',
+      nameNe: '2. गतिशक्ति (Kinetic Energy)',
       descEn: 'As water rushes down the penstock pipe, potential energy converts into high-velocity kinetic energy.',
       descNe: 'पेनस्टक पाइपबाट बेगले पानी खस्दा स्थिति ऊर्जा तीव्र गतिशक्तिमा बदलिन्छ।',
     },
     {
       id: 'mechanical',
-      nameEn: '3. Mechanical Energy (यान्त्रिक शक्ति)',
-      nameNe: '३. यान्त्रिक शक्ति (Mechanical Energy)',
+      nameEn: '3. Mechanical Energy',
+      nameNe: '3. यान्त्रिक शक्ति (Mechanical Energy)',
       descEn: 'The high-pressure jet hits the Pelton wheel runner cups, causing the turbine shaft to spin rapidly.',
       descNe: 'पानीको तीव्र वेगले टर्बाइनको पंखालाई तीव्र गतिमा घुमाउँछ।',
     },
     {
       id: 'electrical',
-      nameEn: '4. Electrical Energy (विद्युत शक्ति)',
-      nameNe: '४. विद्युत शक्ति (Electrical Energy)',
+      nameEn: '4. Electrical Energy',
+      nameNe: '4. विद्युत शक्ति (Electrical Energy)',
       descEn: 'The spinning shaft rotates magnets inside copper coils of the generator, producing electric current.',
       descNe: 'टर्बाइनसँग जोडिएको जेनेरेटर/डाइनामो घुम्दा तारको कुण्डलीमा विद्युत उत्पन्न हुन्छ।',
     },
     {
       id: 'light_heat',
-      nameEn: '5. Light & Heat Energy (प्रकाश र ताप)',
-      nameNe: '५. प्रकाश र ताप शक्ति (Light & Heat)',
+      nameEn: '5. Light & Heat Energy',
+      nameNe: '5. प्रकाश र ताप शक्ति (Light & Heat)',
       descEn: 'Electric current flows through wires to illuminate the bulb filament and power village homes.',
       descNe: 'विद्युत बत्तीको फिलामेन्टमा पुगेर चम्किलो प्रकाश र ताप शक्तिमा रूपान्तरण हुन्छ।',
     },
@@ -253,7 +253,7 @@ export const EnergyFormsSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#f8fafc';
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText('Dam (बाँध)', x + w * 0.5 - 10, y - 18);
+    ctx.fillText('Dam', x + w * 0.5 - 10, y - 18);
     ctx.fillStyle = '#38bdf8';
     ctx.font = '9px system-ui';
     ctx.fillText('Potential Energy', x + w * 0.5 - 10, y - 6);
@@ -493,7 +493,7 @@ export const EnergyFormsSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#f8fafc';
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText('Generator (डाइनामो)', cx, cy - 55);
+    ctx.fillText('Generator', cx, cy - 55);
     ctx.fillStyle = '#60a5fa';
     ctx.font = '9px system-ui';
     ctx.fillText('Electrical Energy', cx, cy - 43);
@@ -612,7 +612,7 @@ export const EnergyFormsSim: React.FC<BaseSimulationProps> = ({
     ctx.fillStyle = '#f8fafc';
     ctx.font = 'bold 11px system-ui';
     ctx.textAlign = 'center';
-    ctx.fillText('Bulb & Home (बत्ती)', x, y - 35);
+    ctx.fillText('Bulb & Home', x, y - 35);
     ctx.fillStyle = '#facc15';
     ctx.font = '9px system-ui';
     ctx.fillText('Light & Heat Energy', x, y - 23);
@@ -685,7 +685,7 @@ export const EnergyFormsSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 7: Energy'
-          : 'कक्षा ४ विज्ञान • एकाइ ७: ऊर्जा'
+          : 'कक्षा 4 विज्ञान • एकाइ 7: ऊर्जा'
       }
       currentStage={stage}
       onStageChange={setStage}

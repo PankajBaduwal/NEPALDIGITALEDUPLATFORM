@@ -115,7 +115,7 @@ export const BoxWhiskerPlotBuilder: React.FC<SimProps> = ({ onBackToLibrary, onB
               <span className="font-bold">{L('पाँच-संख्यात्मक सारांश (Five-Number Summary):', 'Five-Number Summary:')}</span>
               <p className="mt-1">
                 {L(
-                  'बाकस र जुँगा चित्र बनाउन पाँचवटा मानहरू चाहिन्छ: १. सबैभन्दा सानो मान (Min), २. पहिलो चतुर्थांश (Q₁), ३. मध्यिका (Median Q₂), ४. तेस्रो चतुर्थांश (Q₃), र ५. सबैभन्दा ठूलो मान (Max)। बाकसले बीचको ५०% तथ्याङ्क जनाउँछ।',
+                  'बाकस र जुँगा चित्र बनाउन पाँचpcs मानहरू चाहिन्छ: 1. सबैभन्दा सानो मान (Min), 2. पहिलो चतुर्थांश (Q₁), 3. मध्यिका (Median Q₂), 4. तेस्रो चतुर्थांश (Q₃), र 5. सबैभन्दा ठूलो मान (Max)। बाकसले बीचको 50% तथ्याङ्क जनाउँछ।',
                   'A box plot represents five values: Min, Q1, Median (Q2), Q3, and Max. The central box represents the middle 50% of the dataset.'
                 )}
               </p>
@@ -140,15 +140,15 @@ export const BoxWhiskerPlotBuilder: React.FC<SimProps> = ({ onBackToLibrary, onB
                 <span className="font-mono text-base font-bold text-slate-800">{fmt(minVal)}</span>
               </div>
               <div className="p-2.5 bg-indigo-50 border border-indigo-200 rounded-xl">
-                <span className="text-[11px] text-indigo-700 font-bold block">Q₁ (२५%)</span>
+                <span className="text-[11px] text-indigo-700 font-bold block">Q₁ (25%)</span>
                 <span className="font-mono text-base font-bold text-indigo-900">{fmt(q1.toFixed(1))}</span>
               </div>
               <div className="p-2.5 bg-amber-50 border border-amber-300 rounded-xl">
-                <span className="text-[11px] text-amber-800 font-bold block">{L('मध्यिका Q₂ (५०%)', 'Median Q2')}</span>
+                <span className="text-[11px] text-amber-800 font-bold block">{L('मध्यिका Q₂ (50%)', 'Median Q2')}</span>
                 <span className="font-mono text-base font-bold text-amber-950">{fmt(q2.toFixed(1))}</span>
               </div>
               <div className="p-2.5 bg-indigo-50 border border-indigo-200 rounded-xl">
-                <span className="text-[11px] text-indigo-700 font-bold block">Q₃ (७५%)</span>
+                <span className="text-[11px] text-indigo-700 font-bold block">Q₃ (75%)</span>
                 <span className="font-mono text-base font-bold text-indigo-900">{fmt(q3.toFixed(1))}</span>
               </div>
               <div className="p-2.5 bg-slate-50 border rounded-xl">
@@ -270,7 +270,7 @@ export const BoxWhiskerPlotBuilder: React.FC<SimProps> = ({ onBackToLibrary, onB
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div className="p-3 bg-slate-50 border rounded-xl space-y-1">
-                <span className="font-bold text-slate-800">तुलनात्मक विश्लेषण (Comparison):</span>
+                <span className="font-bold text-slate-800">Comparative analysis:</span>
                 <p className="text-slate-600 text-xs leading-relaxed">
                   {L(
                     'खण्ड B को मध्यिका (Median = 38) खण्ड A (Median = 28) भन्दा धेरै माथि छ। यसले खण्ड B का विद्यार्थीहरूको औसत उपलब्धि राम्रो भएको देखाउँछ।',
@@ -280,7 +280,7 @@ export const BoxWhiskerPlotBuilder: React.FC<SimProps> = ({ onBackToLibrary, onB
               </div>
 
               <div className="p-3 bg-slate-50 border rounded-xl space-y-1">
-                <span className="font-bold text-slate-800">फैलावट (Spread / Dispersion):</span>
+                <span className="font-bold text-slate-800">Spread (dispersion):</span>
                 <p className="text-slate-600 text-xs leading-relaxed">
                   {L(
                     'खण्ड B को विस्तार (Max - Min = 35) खण्ड A (Max - Min = 28) भन्दा बढी फैलिएको छ।',

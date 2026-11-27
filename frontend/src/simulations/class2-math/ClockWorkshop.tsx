@@ -1,5 +1,5 @@
 /**
- * Lesson 2 · Time (समय) — the clock
+ * Lesson 2 · Time — the clock
  * Clock Workshop — o'clock, half past, quarter past and quarter to on an interactive 2D clock.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -122,7 +122,7 @@ export const ClockWorkshop: React.FC<Props> = ({ onBackToLibrary }) => {
       ) : (
         <div>
           <div style={{ fontSize: 26, fontWeight: 900, color: '#187C68' }}>
-            {kit.lang === 'ne' ? toNp(hour % 12 || 12) : hour % 12 || 12}:{String(kit.lang === 'ne' ? toNp(min) : min).padStart(2, kit.lang === 'ne' ? '०' : '0')}
+            {kit.lang === 'ne' ? toNp(hour % 12 || 12) : hour % 12 || 12}:{String(kit.lang === 'ne' ? toNp(min) : min).padStart(2, kit.lang === 'ne' ? '0' : '0')}
           </div>
           <div style={{ fontSize: 14, fontWeight: 800, color: '#26332E' }}>
             {phrase(hour, min, kit.lang)}
@@ -138,16 +138,16 @@ export const ClockWorkshop: React.FC<Props> = ({ onBackToLibrary }) => {
     <Controls>
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
         <CBtn color="#0284C7" onClick={() => setTime(hour + 1, min)}>
-          +१ {kit.t('घण्टा', 'hour')}
+          +1 {kit.t('घण्टा', 'hour')}
         </CBtn>
         <CBtn color="#0284C7" onClick={() => setTime(hour - 1, min)}>
-          -१ {kit.t('घण्टा', 'hour')}
+          -1 {kit.t('घण्टा', 'hour')}
         </CBtn>
         <CBtn color="#10B981" onClick={() => setTime(hour, min + 15)}>
-          +१५ {kit.t('मिनेट', 'mins')}
+          +15 {kit.t('मिनेट', 'mins')}
         </CBtn>
         <CBtn color="#10B981" onClick={() => setTime(hour, min - 15)}>
-          -१५ {kit.t('मिनेट', 'mins')}
+          -15 {kit.t('मिनेट', 'mins')}
         </CBtn>
 
         {kit.mode === 'LEARN' && (
@@ -264,9 +264,9 @@ export const ClockWorkshop: React.FC<Props> = ({ onBackToLibrary }) => {
             </span>
             {[
               { l: ':00', m: 0 },
-              { l: ':15 (सवा)', m: 15 },
-              { l: ':30 (साढे)', m: 30 },
-              { l: ':45 (पौने)', m: 45 },
+              { l: ':15', m: 15 },
+              { l: ':30', m: 30 },
+              { l: ':45', m: 45 },
             ].map((chip) => (
               <button
                 key={chip.m}

@@ -2,7 +2,7 @@
  * ════════════════════════════════════════════════════════════════════════════
  * BOTANICAL LABORATORY: SEED GERMINATION & PLANT LIFE CYCLE
  * वनस्पति प्रयोगशाला: बीउको अङ्कुरण र बिरुवाको जीवन चक्र
- * Class 4 Science - Unit 5: Life Process (जीवन प्रक्रिया)
+ * Class 4 Science - Unit 5: Life Process
  *
  * Ultra-realistic botanical simulation:
  * - Clear, museum-grade callout labels with leader lines positioned in safe margins (NEVER inside parts)
@@ -61,7 +61,7 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -98,8 +98,8 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
   const dayMilestones: DayMilestone[] = [
     {
       day: 0,
-      stageNameEn: 'Day 0: Dormant Dry Seed (सुप्त बीउ)',
-      stageNameNe: 'दिन ०: आराम गरिरहेको सुक्खा बीउ',
+      stageNameEn: 'Day 0: Dormant Dry Seed',
+      stageNameNe: 'दिन 0: आराम गरिरहेको सुक्खा बीउ',
       scientificFactEn: 'The dry kidney bean is in a dormant state with less than 10% water. The embryo waits for warm moisture to awaken.',
       scientificFactNe: 'बीउ आरामको अवस्थामा छ। पानी र न्यानोपन पाएपछि मात्र यसभित्रको सुप्त जीवन (भ्रूण) जाग्छ।',
       botanyFocusEn: 'Dormancy protects the seed during harsh winters and dry seasons.',
@@ -107,8 +107,8 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       day: 1,
-      stageNameEn: 'Day 1: Imbibition & Swelling (पानी सोस्ने)',
-      stageNameNe: 'दिन १: बीउले पानी सोसेर फुल्छ',
+      stageNameEn: 'Day 1: Imbibition & Swelling',
+      stageNameNe: 'दिन 1: बीउले पानी सोसेर फुल्छ',
       scientificFactEn: 'The seed absorbs water through the micropyle pore. It swells by over 35%, softening the tough seed coat (testa).',
       scientificFactNe: 'बीउले सानो छिद्र (Micropyle) बाट पानी सोस्छ, जसले गर्दा बीउ फुलेर बाहिरी बोक्रा नरम हुन्छ।',
       botanyFocusEn: 'Water activates enzymes that convert stored starch into glucose energy.',
@@ -116,8 +116,8 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       day: 2,
-      stageNameEn: 'Day 2: Testa Cracking & Radicle Eruption (बोक्रा फुट्ने)',
-      stageNameNe: 'दिन २: बीउको बाहिरी बोक्रा फुट्छ',
+      stageNameEn: 'Day 2: Testa Cracking & Radicle Eruption',
+      stageNameNe: 'दिन 2: बीउको बाहिरी बोक्रा फुट्छ',
       scientificFactEn: 'Internal turgor pressure splits the seed coat open. The radicle (embryonic primary root) begins to push out.',
       scientificFactNe: 'भित्री चापले गर्दा कडा बोक्रा फुट्छ र पहिलो जरा (Radicle) बाहिर निस्कन थाल्छ।',
       botanyFocusEn: 'The root cap (calyptra) protects delicate dividing cells as it enters soil.',
@@ -125,8 +125,8 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       day: 3,
-      stageNameEn: 'Day 3: Gravitropism & Taproot Extension (जरा तल सर्ने)',
-      stageNameNe: 'दिन ३: जरा गुरुत्वाकर्षणतिर तल बढ्छ',
+      stageNameEn: 'Day 3: Gravitropism & Taproot Extension',
+      stageNameNe: 'दिन 3: जरा गुरुत्वाकर्षणतिर तल बढ्छ',
       scientificFactEn: 'Statolith cells in the root tip detect gravity (positive gravitropism), driving the primary root deeper into moist loam.',
       scientificFactNe: 'जराका कोषहरूले गुरुत्वाकर्षण थाहा पाउँछन् र जरा सिधै तल माटोको गहिराइतिर जान्छ।',
       botanyFocusEn: 'Fine microscopic root hairs begin emerging to absorb dissolved minerals.',
@@ -134,8 +134,8 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       day: 4,
-      stageNameEn: 'Day 4: Hypocotyl Hook Arching (काण्डको धनुष आकार)',
-      stageNameNe: 'दिन ४: डाँठ धनुषझैँ बांगिएर माटो फोड्छ',
+      stageNameEn: 'Day 4: Hypocotyl Hook Arching',
+      stageNameNe: 'दिन 4: डाँठ धनुषझैँ बांगिएर माटो फोड्छ',
       scientificFactEn: 'The hypocotyl stem elongates and curves into an inverted "U" arch, pulling the fragile cotyledons upward without damaging them.',
       scientificFactNe: 'डाँठ धनुषझैँ बांगिएर माटो फोड्दै माथि आउँछ, जसले गर्दा बीउका कलिला पात सुरक्षित रहन्छन्।',
       botanyFocusEn: 'Negative gravitropism directs the shoot away from the earth and toward light.',
@@ -143,8 +143,8 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       day: 5,
-      stageNameEn: 'Day 5: Soil Breakthrough & Phototropism (जमिन बाहिर निस्कने)',
-      stageNameNe: 'दिन ५: बिरुवा जमिनमाथि निस्कन्छ',
+      stageNameEn: 'Day 5: Soil Breakthrough & Phototropism',
+      stageNameNe: 'दिन 5: बिरुवा जमिनमाथि निस्कन्छ',
       scientificFactEn: 'The shoot breaks free of the soil surface. Exposure to sunlight triggers phototropism, straightening the hypocotyl stem.',
       scientificFactNe: 'बिरुवा जमिनमाथि देखा पर्छ। घामको प्रकाश देख्नासाथ डाँठ सिधा हुन थाल्छ।',
       botanyFocusEn: 'Light triggers chlorophyll synthesis, turning pale stems into vibrant green.',
@@ -152,8 +152,8 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       day: 6,
-      stageNameEn: 'Day 6: Cotyledons Open & Green (दलहरू खुल्ने)',
-      stageNameNe: 'दिन ६: बीउका दलहरू (Cotyledons) खुल्छन्',
+      stageNameEn: 'Day 6: Cotyledons Open & Green',
+      stageNameNe: 'दिन 6: बीउका दलहरू (Cotyledons) खुल्छन्',
       scientificFactEn: 'The twin cotyledons spread open like leaves, turning green to nourish the seedling while the seed coat drops away.',
       scientificFactNe: 'बीउका दुई दलहरू पातझैँ खुल्छन् र हरियो भएर बिरुवालाई खाना दिन थाल्छन्।',
       botanyFocusEn: 'Secondary lateral roots branch extensively to anchor the growing plant.',
@@ -161,8 +161,8 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       day: 7,
-      stageNameEn: 'Day 7: Plumule Unfurling & First True Leaves (पहिलो हरिया पात)',
-      stageNameNe: 'दिन ७: मुन्टोबाट वास्तविक पातहरू निस्कन्छन्',
+      stageNameEn: 'Day 7: Plumule Unfurling & First True Leaves',
+      stageNameNe: 'दिन 7: मुन्टोबाट वास्तविक पातहरू निस्कन्छन्',
       scientificFactEn: 'The epicotyl and plumule emerge from between the cotyledons, unfurling heart-shaped true leaves with visible veins.',
       scientificFactNe: 'दलहरूको बीचबाट मुन्टो पलाउँछ र नसा भएका वास्तविक हरिया पातहरू फैलिन्छन्।',
       botanyFocusEn: 'Stomata on the new leaves open to absorb carbon dioxide for active photosynthesis.',
@@ -170,8 +170,8 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
     },
     {
       day: 8,
-      stageNameEn: 'Day 8: Autonomous Seedling & Active Photosynthesis (आत्मनिर्भर बिरुवा)',
-      stageNameNe: 'दिन ८: बिरुवा पूर्ण रूपमा आत्मनिर्भर बन्छ',
+      stageNameEn: 'Day 8: Autonomous Seedling & Active Photosynthesis',
+      stageNameNe: 'दिन 8: बिरुवा पूर्ण रूपमा आत्मनिर्भर बन्छ',
       scientificFactEn: 'The cotyledons shrivel after transferring all energy reserves. The seedling is now self-sufficient through photosynthesis and root absorption.',
       scientificFactNe: 'खाना सकिएपछि पुराना दलहरू सुक्छन् र बिरुवा आफ्नै पात र जराको भरमा हुर्कन थाल्छ।',
       botanyFocusEn: 'The plant is now a fully established independent organism capable of autotrophic life.',
@@ -1326,7 +1326,7 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
         'They scare away earthworms',
       ],
       optionsNe: [
-        'यिनले जराको क्षेत्रफल ५००% बढाएर धेरै पानी र खनिज मल सोस्न मद्दत गर्छन्',
+        'यिनले जराको क्षेत्रफल 500% बढाएर धेरै पानी र खनिज मल सोस्न मद्दत गर्छन्',
         'यिनले बिरुवालाई जाडोमा न्यानो राख्छन्',
         'यिनले जमिनमुनि बीउ बनाउँछन्',
         'यिनले गँड्यौलालाई भगाउँछन्',
@@ -1449,7 +1449,7 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
               {lang === 'en'
                 ? showXRay
                   ? 'Internal X-Ray: ON'
-                  : 'X-Ray View (भित्री भाग)'
+                  : 'X-Ray View'
                 : showXRay
                 ? 'भित्री दृश्य: चालु'
                 : 'भित्री भाग हेर्नुहोस्'}
@@ -1478,7 +1478,7 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
               }}
             >
               <Eye size={14} color={showLabels ? '#16a34a' : '#64748b'} />
-              {lang === 'en' ? 'Labels (नामहरू)' : 'नामहरू'}
+              {lang === 'en' ? 'Labels' : 'नामहरू'}
             </button>
           </div>
 
@@ -1510,7 +1510,7 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
               }}
             >
               <Droplets size={16} />
-              {lang === 'en' ? 'Water Plant (पानी हाल)' : 'पानी हाल्नुहोस्'}
+              {lang === 'en' ? 'Water Plant' : 'पानी हाल्नुहोस्'}
             </button>
           </div>
 
@@ -1609,7 +1609,7 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
                     fontWeight: 800,
                   }}
                 >
-                  {lang === 'en' ? `Day ${growthDay.toFixed(1)} / 8.0` : `दिन ${growthDay.toFixed(1)} / ८.०`}
+                  {lang === 'en' ? `Day ${growthDay.toFixed(1)} / 8.0` : `दिन ${growthDay.toFixed(1)} / 8.0`}
                 </span>
 
                 <button
@@ -1636,7 +1636,7 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
             {/* Bottom Row: Scrubber Timeline Slider */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <span style={{ fontSize: '11px', fontWeight: 700, color: '#64748b' }}>
-                {lang === 'en' ? 'Day 0' : 'दिन ०'}
+                {lang === 'en' ? 'Day 0' : 'दिन 0'}
               </span>
               <input
                 type="range"
@@ -1657,7 +1657,7 @@ export const SeedGerminationSim: React.FC<BaseSimulationProps> = ({
                 }}
               />
               <span style={{ fontSize: '11px', fontWeight: 700, color: '#16a34a' }}>
-                {lang === 'en' ? 'Day 8' : 'दिन ८'}
+                {lang === 'en' ? 'Day 8' : 'दिन 8'}
               </span>
             </div>
           </div>

@@ -1,7 +1,7 @@
 /**
  * SimultaneousEquationsGraphPlotter.tsx
- * Grade 8 Mathematics – Unit 12: SIMULTANEOUS & QUADRATIC EQUATIONS (युगपत र द्विघात समीकरण)
- * Simulation 1: Simultaneous Equations Graph Plotter (युगपत समीकरण रेखाचित्र प्लटर)
+ * Grade 8 Mathematics – Unit 12: SIMULTANEOUS & QUADRATIC EQUATIONS
+ * Simulation 1: Simultaneous Equations Graph Plotter
  * Strictly adheres to CDC Nepal Grade 8 Mathematics Curriculum (2023 edition, Unit 12)
  */
 import React, { useState } from 'react';
@@ -15,10 +15,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'ग्राफीय विधिबाट युगपत समीकरण हल गर्दा दुई रेखा काटिएको बिन्दु (Intersection Point) ले के जनाउँछ?',
     en: 'When solving simultaneous equations graphically, what does the intersection point of two lines represent?',
     options: [
-      { key: 'A', label: 'समीकरणको हल: (x, y) को मान (The unique solution to both equations)' },
-      { key: 'B', label: 'समीकरणको योगफल' },
-      { key: 'C', label: 'कुनै अर्थ हुँदैन' },
-      { key: 'D', label: 'y-अक्षको बिन्दु मात्र' },
+      { key: 'A', label: 'Solution of the equations: the values of (x, y)' },
+      { key: 'B', label: 'Sum of the equations' },
+      { key: 'C', label: 'Has no meaning' },
+      { key: 'D', label: 'Only the point on the y-axis' },
     ],
     answer: 'A',
   },
@@ -26,7 +26,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'x + y = 6 र x - y = 2 को प्रतिच्छेदन बिन्दु कुन हो?',
     en: 'What is the intersection point of x + y = 6 and x - y = 2?',
     options: [
-      { key: 'A', label: '(4, 2) [ 4 + 2 = 6 र 4 - 2 = 2 ]' },
+      { key: 'A', label: '(4, 2) [ 4 + 2 = 6 and 4 - 2 = 2 ]' },
       { key: 'B', label: '(3, 3)' },
       { key: 'C', label: '(5, 1)' },
       { key: 'D', label: '(2, 4)' },
@@ -34,13 +34,13 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'यदि दुई समीकरणका रेखाहरू समानान्तर (Parallel) भए त्यसको कतिवटा हल हुन्छ?',
+    np: 'यदि दुई समीकरणका रेखाहरू समानान्तर (Parallel) भए त्यसको कतिpcs हल हुन्छ?',
     en: 'If the lines of two linear equations are parallel, how many solutions exist?',
     options: [
-      { key: 'A', label: 'कुनै पनि हल हुँदैन (No solution: रेखा कहिल्यै काटिँदैनन्)' },
-      { key: 'B', label: 'एउटा मात्र हल' },
-      { key: 'C', label: 'अनगिन्ती हल' },
-      { key: 'D', label: 'दुईवटा हल' },
+      { key: 'A', label: 'No solution (the lines never meet)' },
+      { key: 'B', label: 'Only one solution' },
+      { key: 'C', label: 'Infinitely many solutions' },
+      { key: 'D', label: 'Two solutions' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'समीकरण x + y = 6 मा x = 2 राख्दा y को मान कति हुन्छ?',
     en: 'In equation x + y = 6, when x = 2, what is the value of y?',
     options: [
-      { key: 'A', label: '४ [ y = ६ - २ = ४ ]' },
-      { key: 'B', label: '२' },
-      { key: 'C', label: '८' },
-      { key: 'D', label: '६' },
+      { key: 'A', label: '4 [ y = 6 - 2 = 4 ]' },
+      { key: 'B', label: '2' },
+      { key: 'C', label: '8' },
+      { key: 'D', label: '6' },
     ],
     answer: 'A',
   },
@@ -59,10 +59,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'यदि दुई रेखाहरू एकमाथि अर्को खप्टिएका (Coincident Lines) छन् भने हलको संख्या के हुन्छ?',
     en: 'If two lines are coincident (overlapping), how many solutions exist?',
     options: [
-      { key: 'A', label: 'अनगिन्ती हल (Infinitely many solutions)' },
-      { key: 'B', label: 'शून्य हल' },
-      { key: 'C', label: 'एउटा मात्र हल' },
-      { key: 'D', label: 'दुईवटा हल' },
+      { key: 'A', label: 'Infinitely many solutions' },
+      { key: 'B', label: 'Zero solutions' },
+      { key: 'C', label: 'Only one solution' },
+      { key: 'D', label: 'Two solutions' },
     ],
     answer: 'A',
   },
@@ -70,7 +70,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
 
 const PRESETS = [
   {
-    nameNp: 'x + y = 6 र x - y = 2 (CDC मुख्य पाठ्यपुस्तक उदाहरण)',
+    nameNp: 'x + y = 6 र x - y = 2',
     nameEn: 'x + y = 6 & x - y = 2',
     eq1: { a: 1, b: 1, c: 6, label: 'x + y = 6' },
     eq2: { a: 1, b: -1, c: 2, label: 'x - y = 2' },
@@ -134,7 +134,7 @@ export const SimultaneousEquationsGraphPlotter: React.FC<{
             }`}
           >
             <TrendingUp className="w-4 h-4" />
-            {L('१. रेखाचित्र र प्रतिच्छेदन (Graph & Intersection)', '1. Graph & Intersection')}
+            {L('1. रेखाचित्र र प्रतिच्छेदन (Graph & Intersection)', '1. Graph & Intersection')}
           </button>
           <button
             onClick={() => setActiveTab('tables')}
@@ -143,7 +143,7 @@ export const SimultaneousEquationsGraphPlotter: React.FC<{
             }`}
           >
             <Table className="w-4 h-4" />
-            {L('२. मान तालिका निर्माण (Value Tables)', '2. Value Tables')}
+            {L('2. मान तालिका निर्माण (Value Tables)', '2. Value Tables')}
           </button>
           <button
             onClick={() => setActiveTab('line_types')}
@@ -152,7 +152,7 @@ export const SimultaneousEquationsGraphPlotter: React.FC<{
             }`}
           >
             <Move className="w-4 h-4" />
-            {L('३. रेखाहरूका सम्बन्धहरू (१ हल, शून्य हल, अनगिन्ती हल)', '3. Types of Solutions')}
+            {L('3. रेखाहरूका सम्बन्धहरू (1 हल, Zero solutions, Infinitely many solutions)', '3. Types of Solutions')}
           </button>
         </div>
 
@@ -256,13 +256,13 @@ export const SimultaneousEquationsGraphPlotter: React.FC<{
                     {L('समीकरणहरू र प्रतिच्छेदन बिन्दु:', 'Equations & Solution:')}
                   </div>
                   <div className="text-sm">
-                    • रेखा १ (नीलो): <span className="text-sky-400 font-bold">{selectedPreset.eq1.label}</span><br />
-                    • रेखा २ (गुलाबी): <span className="text-pink-400 font-bold">{selectedPreset.eq2.label}</span>
+                    • Line 1: <span className="text-sky-400 font-bold">{selectedPreset.eq1.label}</span><br />
+                    • Line 2: <span className="text-pink-400 font-bold">{selectedPreset.eq2.label}</span>
                   </div>
 
                   <div className="p-4 bg-emerald-950/90 border border-emerald-500 rounded-xl text-center space-y-1">
                     <div className="text-xs uppercase text-emerald-400 font-bold font-sans">
-                      प्रतिच्छेदन बिन्दुबाट प्राप्त हल:
+                      Solution from the point of intersection:
                     </div>
                     <div className="text-3xl font-black text-amber-400">
                       x = {toNp(selectedPreset.solX)}, y = {toNp(selectedPreset.solY)}
@@ -271,9 +271,9 @@ export const SimultaneousEquationsGraphPlotter: React.FC<{
 
                   {/* Verification */}
                   <div className="text-xs text-slate-300 font-sans space-y-1 pt-2 border-t border-slate-700">
-                    <div className="font-bold text-emerald-400">जाँच (Verification):</div>
-                    <div>१. पहिलो समीकरणमा: {selectedPreset.eq1.a}×{selectedPreset.solX} + {selectedPreset.eq1.b}×{selectedPreset.solY} = {selectedPreset.eq1.c} ✓</div>
-                    <div>२. दोस्रो समीकरणमा: {selectedPreset.eq2.a}×{selectedPreset.solX} + ({selectedPreset.eq2.b})×{selectedPreset.solY} = {selectedPreset.eq2.c} ✓</div>
+                    <div className="font-bold text-emerald-400">Verification:</div>
+                    <div>1. In the first equation: {selectedPreset.eq1.a}×{selectedPreset.solX} + {selectedPreset.eq1.b}×{selectedPreset.solY} = {selectedPreset.eq1.c} ✓</div>
+                    <div>2. In the second equation: {selectedPreset.eq2.a}×{selectedPreset.solX} + ({selectedPreset.eq2.b})×{selectedPreset.solY} = {selectedPreset.eq2.c} ✓</div>
                   </div>
                 </div>
               </div>
@@ -298,7 +298,7 @@ export const SimultaneousEquationsGraphPlotter: React.FC<{
                 {/* Table 1 */}
                 <div className="p-4 bg-sky-50 border border-sky-200 rounded-2xl space-y-3">
                   <div className="font-bold text-sky-900 font-sans text-sm">
-                    समीकरण १: {selectedPreset.eq1.label} ⇒ y = {selectedPreset.eq1.c} - {selectedPreset.eq1.a !== 1 ? `${selectedPreset.eq1.a}x` : 'x'}
+                    Equation 1: {selectedPreset.eq1.label} ⇒ y = {selectedPreset.eq1.c} - {selectedPreset.eq1.a !== 1 ? `${selectedPreset.eq1.a}x` : 'x'}
                   </div>
                   <table className="w-full text-center bg-white rounded-xl overflow-hidden border border-sky-100">
                     <thead>
@@ -323,7 +323,7 @@ export const SimultaneousEquationsGraphPlotter: React.FC<{
                 {/* Table 2 */}
                 <div className="p-4 bg-pink-50 border border-pink-200 rounded-2xl space-y-3">
                   <div className="font-bold text-pink-900 font-sans text-sm">
-                    समीकरण २: {selectedPreset.eq2.label} ⇒ y = x - {selectedPreset.eq2.c}
+                    Equation 2: {selectedPreset.eq2.label} ⇒ y = x - {selectedPreset.eq2.c}
                   </div>
                   <table className="w-full text-center bg-white rounded-xl overflow-hidden border border-pink-100">
                     <thead>
@@ -361,21 +361,21 @@ export const SimultaneousEquationsGraphPlotter: React.FC<{
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="p-5 bg-emerald-50 border border-emerald-300 rounded-2xl space-y-2">
-                  <div className="font-bold text-emerald-950 text-sm">१. प्रतिच्छेदी रेखाहरू (Intersecting)</div>
-                  <div className="text-xs text-slate-600">• दुई रेखा एउटा बिन्दुमा काटिन्छन्।</div>
-                  <div className="text-xs font-bold text-emerald-700">• अद्वितीय हल (Unique Solution: 1 Solution)</div>
+                  <div className="font-bold text-emerald-950 text-sm">1. Intersecting lines</div>
+                  <div className="text-xs text-slate-600">• The two lines cross at one point.</div>
+                  <div className="text-xs font-bold text-emerald-700">• Unique solution (1 solution)</div>
                 </div>
 
                 <div className="p-5 bg-amber-50 border border-amber-300 rounded-2xl space-y-2">
-                  <div className="font-bold text-amber-950 text-sm">२. समानान्तर रेखाहरू (Parallel Lines)</div>
-                  <div className="text-xs text-slate-600">• दुई रेखा कहिल्यै काटिँदैनन्।</div>
-                  <div className="text-xs font-bold text-amber-700">• कुनै पनि हल हुँदैन (No Solution)</div>
+                  <div className="font-bold text-amber-950 text-sm">2. Parallel lines</div>
+                  <div className="text-xs text-slate-600">• The two lines never meet.</div>
+                  <div className="text-xs font-bold text-amber-700">• No solution</div>
                 </div>
 
                 <div className="p-5 bg-purple-50 border border-purple-300 rounded-2xl space-y-2">
-                  <div className="font-bold text-purple-950 text-sm">३. खप्टिएका रेखाहरू (Coincident Lines)</div>
-                  <div className="text-xs text-slate-600">• दुवै समीकरणले एउटै रेखा जनाउँछन्।</div>
-                  <div className="text-xs font-bold text-purple-700">• अनगिन्ती हल (Infinitely Many Solutions)</div>
+                  <div className="font-bold text-purple-950 text-sm">3. Coincident lines</div>
+                  <div className="text-xs text-slate-600">• Both equations represent the same line.</div>
+                  <div className="text-xs font-bold text-purple-700">• Infinitely many solutions</div>
                 </div>
               </div>
             </div>

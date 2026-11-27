@@ -19,7 +19,7 @@ export interface Class9OptMathSimDef {
 }
 
 export const CLASS9_OPTMATH: Class9OptMathSimDef[] = [
-  // ── UNIT 1: ALGEBRA (बीजगणित) ─────────────────────────────────────────────
+  // ── UNIT 1: ALGEBRA ─────────────────────────────────────────────
   {
     code: 'SIM-OPTMATH-G9-U1-01',
     key: 'class9-optmath-u1-relation-function-explorer',
@@ -51,7 +51,7 @@ export const CLASS9_OPTMATH: Class9OptMathSimDef[] = [
     Component: L(() => import('./LinearInequalityGraphingLab'), 'LinearInequalityGraphingLab'),
   },
 
-  // ── UNIT 2: TRIGONOMETRY (त्रिकोणमिति) ──────────────────────────────────
+  // ── UNIT 2: TRIGONOMETRY ──────────────────────────────────
   {
     code: 'SIM-OPTMATH-G9-U2-01',
     key: 'class9-optmath-u2-angle-measurement-conversion-lab',
@@ -83,7 +83,7 @@ export const CLASS9_OPTMATH: Class9OptMathSimDef[] = [
     Component: L(() => import('./TrigRatioConversionLab'), 'TrigRatioConversionLab'),
   },
 
-  // ── UNIT 3: GEOMETRY (निर्देशाङ्क ज्यामिति) ──────────────────────────────
+  // ── UNIT 3: GEOMETRY ──────────────────────────────
   {
     code: 'SIM-OPTMATH-G9-U3-01',
     key: 'class9-optmath-u3-locus-coordinate-geometry-lab',
@@ -115,7 +115,7 @@ export const CLASS9_OPTMATH: Class9OptMathSimDef[] = [
     Component: L(() => import('./GeometricTransformationLab'), 'GeometricTransformationLab'),
   },
 
-  // ── UNIT 4: VECTOR (भेक्टर) ───────────────────────────────────────────────
+  // ── UNIT 4: VECTOR ───────────────────────────────────────────────
   {
     code: 'SIM-OPTMATH-G9-U4-01',
     key: 'class9-optmath-u4-scalar-vector-explorer',
@@ -147,7 +147,7 @@ export const CLASS9_OPTMATH: Class9OptMathSimDef[] = [
     Component: L(() => import('./VectorMagnitudeDirectionUnitLab'), 'VectorMagnitudeDirectionUnitLab'),
   },
 
-  // ── UNIT 5: STATISTICS (तथ्याङ्कशास्त्र) ────────────────────────────────────
+  // ── UNIT 5: STATISTICS ────────────────────────────────────
   {
     code: 'SIM-OPTMATH-G9-U5-01',
     key: 'class9-optmath-u5-quartile-percentile-explorer',
@@ -179,7 +179,7 @@ export const CLASS9_OPTMATH: Class9OptMathSimDef[] = [
     Component: L(() => import('./BoxWhiskerPlotBuilder'), 'BoxWhiskerPlotBuilder'),
   },
 
-  // ── UNIT 6: LIMIT (सीमा) ──────────────────────────────────────────────────
+  // ── UNIT 6: LIMIT ──────────────────────────────────────────────────
   {
     code: 'SIM-OPTMATH-G9-U6-01',
     key: 'class9-optmath-u6-infinity-approaching-values-explorer',

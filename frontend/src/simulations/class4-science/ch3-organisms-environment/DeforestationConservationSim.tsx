@@ -1,7 +1,7 @@
 /**
  * DeforestationConservationSim.tsx
- * Simulation 10: 2D Deforestation and Conservation Hillside (वन विनाश र संरक्षण २डी प्रयोगशाला)
- * Grade 4 Science • Chapter 3: Organisms and Environment (जीव र वातावरण)
+ * Simulation 10: 2D Deforestation and Conservation Hillside
+ * Grade 4 Science • Chapter 3: Organisms and Environment
  *
  * 100% Native HTML5 Canvas 2D Interactive Physics Simulation.
  * Features:
@@ -9,8 +9,8 @@
  * - Underground root anchor network X-ray view showing roots binding topsoil
  * - Dynamic monsoon rain, soil erosion, and mudslide particle cascade
  * - River siltation: crystalline blue alpine water vs turbid brown mud runoff
- * - Real-time Landslide Risk Meter (५% सुरक्षित देखि ९५% जोखिमसम्म)
- * - Community forestry (सामुदायिक वन) afforestation controls
+ * - Real-time Landslide Risk Meter
+ * - Community forestry afforestation controls
  * - Bilingual EN/NE labels, sound effects, and 5-stage inquiry learning
  */
 
@@ -33,7 +33,7 @@ export const DeforestationConservationSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -507,7 +507,7 @@ export const DeforestationConservationSim: React.FC<BaseSimulationProps> = ({
   return (
     <SimulationLayout
       titleEn="2D Deforestation and Conservation Hillside"
-      titleNe="वन विनाश र संरक्षण २डी प्रयोगशाला"
+      titleNe="वन विनाश र संरक्षण 2डी प्रयोगशाला"
       subject="Science"
       grade={4}
       chapter={3}
@@ -585,7 +585,7 @@ export const DeforestationConservationSim: React.FC<BaseSimulationProps> = ({
               }}
             >
               <Trees size={13} />
-              {lang === 'ne' ? `रुख संख्या: ${treeCount}/८` : `Trees: ${treeCount}/8`}
+              {lang === 'ne' ? `रुख संख्या: ${treeCount}/8` : `Trees: ${treeCount}/8`}
             </span>
 
             <span

@@ -85,7 +85,7 @@ export const EmpiricalProbabilityAnalyser: React.FC<SimProps> = ({ onBackToLibra
             }`}
           >
             <span>🪙</span>
-            <span>{L('१. ठूलो मात्रामा सिक्का उछाल (Coin Trials)', '1. Coin Trials')}</span>
+            <span>{L('1. ठूलो मात्रामा सिक्का उछाल (Coin Trials)', '1. Coin Trials')}</span>
           </button>
           <button
             onClick={() => setActiveTab('dice')}
@@ -96,7 +96,7 @@ export const EmpiricalProbabilityAnalyser: React.FC<SimProps> = ({ onBackToLibra
             }`}
           >
             <span>🎲</span>
-            <span>{L('२. पासा बारम्बारता विश्लेषण (Dice Frequency)', '2. Dice Frequency')}</span>
+            <span>{L('2. पासा बारम्बारता विश्लेषण (Dice Frequency)', '2. Dice Frequency')}</span>
           </button>
           <button
             onClick={() => setActiveTab('brick')}
@@ -107,7 +107,7 @@ export const EmpiricalProbabilityAnalyser: React.FC<SimProps> = ({ onBackToLibra
             }`}
           >
             <span>🧱</span>
-            <span>{L('३. इँटा कारखाना समस्या (Brick Factory Lab)', '3. Brick Factory Lab')}</span>
+            <span>{L('3. इँटा कारखाना समस्या (Brick Factory Lab)', '3. Brick Factory Lab')}</span>
           </button>
         </div>
 
@@ -133,25 +133,25 @@ export const EmpiricalProbabilityAnalyser: React.FC<SimProps> = ({ onBackToLibra
                   onClick={() => handleSimulateCoins(10)}
                   className="px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs rounded-lg border border-indigo-200"
                 >
-                  +१० {L('पटक', 'x')}
+                  +10 {L('पटक', 'x')}
                 </button>
                 <button
                   onClick={() => handleSimulateCoins(50)}
                   className="px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs rounded-lg border border-indigo-200"
                 >
-                  +५० {L('पटक', 'x')}
+                  +50 {L('पटक', 'x')}
                 </button>
                 <button
                   onClick={() => handleSimulateCoins(100)}
                   className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-lg shadow-sm"
                 >
-                  +१०० {L('पटक', 'x')}
+                  +100 {L('पटक', 'x')}
                 </button>
                 <button
                   onClick={() => handleSimulateCoins(500)}
                   className="px-3 py-1.5 bg-indigo-800 hover:bg-indigo-900 text-white font-bold text-xs rounded-lg shadow-sm"
                 >
-                  +५०० {L('पटक', 'x')}
+                  +500 {L('पटक', 'x')}
                 </button>
                 {totalCoinTrials > 0 && (
                   <button
@@ -182,7 +182,7 @@ export const EmpiricalProbabilityAnalyser: React.FC<SimProps> = ({ onBackToLibra
                     </span>
                   </div>
                   <div className="text-[11px] text-slate-500">
-                    {L('सैद्धान्तिक मान (Theoretical):', 'Theoretical Value:')} <span className="font-mono font-bold">0.500 (५०%)</span>
+                    {L('सैद्धान्तिक मान (Theoretical):', 'Theoretical Value:')} <span className="font-mono font-bold">0.500 (50%)</span>
                   </div>
                 </div>
               </div>
@@ -200,7 +200,7 @@ export const EmpiricalProbabilityAnalyser: React.FC<SimProps> = ({ onBackToLibra
                     </span>
                   </div>
                   <div className="text-[11px] text-slate-500">
-                    {L('सैद्धान्तिक मान (Theoretical):', 'Theoretical Value:')} <span className="font-mono font-bold">0.500 (५०%)</span>
+                    {L('सैद्धान्तिक मान (Theoretical):', 'Theoretical Value:')} <span className="font-mono font-bold">0.500 (50%)</span>
                   </div>
                 </div>
               </div>
@@ -211,7 +211,7 @@ export const EmpiricalProbabilityAnalyser: React.FC<SimProps> = ({ onBackToLibra
               <strong>💡 {L('ठूलो सङ्ख्याको नियम (Law of Large Numbers):', 'Law of Large Numbers:')}</strong>
               <p>
                 {L(
-                  'थोरै पटक (जस्तै ५ वा १० पटक) उफार्दा शीर्ष र पुच्छरको अनुपात ५०% भन्दा निकै फरक हुन सक्छ। तर जति धेरै पटक (५०० वा १००० पटक) उफार्दै गइन्छ, प्रयोगात्मक सम्भाव्यता सैद्धान्तिक मान ०.५ को नजिक पुग्दै जान्छ।',
+                  'थोरै पटक (जस्तै 5 वा 10 पटक) उफार्दा शीर्ष र पुच्छरको अनुपात 50% भन्दा निकै फरक हुन सक्छ। तर जति धेरै पटक (500 वा 1000 पटक) उफार्दै गइन्छ, प्रयोगात्मक सम्भाव्यता सैद्धान्तिक मान 0.5 को नजिक पुग्दै जान्छ।',
                   'With a small number of trials (e.g. 5 or 10), the empirical ratio may deviate from 50%. As the number of trials increases to 500 or 1000+, empirical probability reliably converges towards the theoretical 0.5.'
                 )}
               </p>
@@ -228,7 +228,7 @@ export const EmpiricalProbabilityAnalyser: React.FC<SimProps> = ({ onBackToLibra
                   {L('पासा बारम्बारता विश्लेषण (Dice Frequency)', 'Dice Frequency Analysis')}
                 </h4>
                 <p className="text-xs text-slate-500 font-mono">
-                  {L(`कुल रोल: ${fmt(diceTrials)} | सैद्धान्तिक सम्भाव्यता = १/६ ≈ ०.१६७`, `Total Rolls: ${diceTrials} | Theoretical = 1/6 ≈ 0.167`)}
+                  {L(`सैद्धान्तिक सम्भाव्यता = 1/6 ≈ 0.167`, `Total Rolls: ${diceTrials} | Theoretical = 1/6 ≈ 0.167`)}
                 </p>
               </div>
 
@@ -237,19 +237,19 @@ export const EmpiricalProbabilityAnalyser: React.FC<SimProps> = ({ onBackToLibra
                   onClick={() => handleSimulateDice(30)}
                   className="px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs rounded-lg border border-indigo-200"
                 >
-                  +३० {L('पटक', 'x')}
+                  +30 {L('पटक', 'x')}
                 </button>
                 <button
                   onClick={() => handleSimulateDice(60)}
                   className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-lg shadow-sm"
                 >
-                  +६० {L('पटक', 'x')}
+                  +60 {L('पटक', 'x')}
                 </button>
                 <button
                   onClick={() => handleSimulateDice(300)}
                   className="px-3 py-1.5 bg-indigo-800 hover:bg-indigo-900 text-white font-bold text-xs rounded-lg shadow-sm"
                 >
-                  +३०० {L('पटक', 'x')}
+                  +300 {L('पटक', 'x')}
                 </button>
                 {diceTrials > 0 && (
                   <button
@@ -369,12 +369,12 @@ export const EmpiricalProbabilityAnalyser: React.FC<SimProps> = ({ onBackToLibra
               <div className="p-3 bg-white rounded-lg border border-indigo-100 flex flex-col sm:flex-row justify-between items-center gap-2">
                 <span className="font-semibold text-slate-800">
                   {L(
-                    `${fmt(futureBatchSize)} वटा इँटाको लटमा अनुमानित खराब इँटा सङ्ख्या:`,
+                    `${fmt(futureBatchSize)} pcs इँटाको लटमा अनुमानित खराब इँटा सङ्ख्या:`,
                     `Expected defective bricks in a batch of ${futureBatchSize}:`
                   )}
                 </span>
                 <span className="text-base font-bold font-mono text-rose-700">
-                  {fmt(futureBatchSize)} × {pDefective.toFixed(4)} ≈ {fmt(expectedDefectiveInBatch)} {L('वटा', 'bricks')}
+                  {fmt(futureBatchSize)} × {pDefective.toFixed(4)} ≈ {fmt(expectedDefectiveInBatch)} {L('pcs', 'bricks')}
                 </span>
               </div>
             </div>

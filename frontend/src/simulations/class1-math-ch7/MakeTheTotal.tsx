@@ -1,7 +1,7 @@
 /**
  * MakeTheTotal.tsx
- * Simulation 02: Make the Total (जम्मा सङ्ख्या पत्ता लगाऔँ)
- * Class 1 Mathematics - Chapter 7: Addition up to 10 (योगफल १० सम्म आउने जोड)
+ * Simulation 02: Make the Total
+ * Class 1 Mathematics - Chapter 7: Addition up to 10
  * Nepal Digital Education Platform
  */
 
@@ -26,7 +26,7 @@ interface Props {
   userRole?: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
 interface SceneActivity {
   id: string;
@@ -55,7 +55,7 @@ const SCENE_ACTIVITIES: SceneActivity[] = [
     itemEmojiB: '🍎',
     itemNameNp: 'स्याउ',
     itemNameEn: 'Apples',
-    descriptionNp: 'पहिलो टोकरीमा २ वटा र दोस्रो टोकरीमा ३ वटा स्याउ छन्।',
+    descriptionNp: 'पहिलो टोकरीमा 2 वटा र दोस्रो टोकरीमा 3 वटा स्याउ छन्।',
     descriptionEn: 'The first basket has 2 apples and the second basket has 3 apples.',
   },
   {
@@ -69,7 +69,7 @@ const SCENE_ACTIVITIES: SceneActivity[] = [
     itemEmojiB: '🕊️',
     itemNameNp: 'चराहरू',
     itemNameEn: 'Birds',
-    descriptionNp: 'रुखको हाँगामा ३ वटा चरा बसिरहेका छन् र २ वटा नयाँ चरा उडेर आइपुगे।',
+    descriptionNp: 'रुखको हाँगामा 3 वटा चरा बसिरहेका छन् र 2 वटा नयाँ चरा उडेर आइपुगे।',
     descriptionEn: 'Three birds are perched on the branch and two more birds arrive.',
   },
   {
@@ -83,7 +83,7 @@ const SCENE_ACTIVITIES: SceneActivity[] = [
     itemEmojiB: '🌼',
     itemNameNp: 'फूलहरू',
     itemNameEn: 'Flowers',
-    descriptionNp: 'गमलामा ४ वटा फूल फुलेका छन् र थप १ वटा फूल रोपियो।',
+    descriptionNp: 'गमलामा 4 वटा फूल फुलेका छन् र थप 1 वटा फूल रोपियो।',
     descriptionEn: 'There are 4 flowers in the pot and 1 more flower is planted.',
   },
   {
@@ -97,7 +97,7 @@ const SCENE_ACTIVITIES: SceneActivity[] = [
     itemEmojiB: '🐠',
     itemNameNp: 'माछाहरू',
     itemNameEn: 'Fish',
-    descriptionNp: 'पोखरीमा ५ वटा सुनौला माछा र २ वटा रंगिन माछा पौडिरहेका छन्।',
+    descriptionNp: 'पोखरीमा 5 वटा सुनौला माछा र 2 वटा रंगिन माछा पौडिरहेका छन्।',
     descriptionEn: 'Five golden fish and two colorful fish are swimming in the pond.',
   },
   {
@@ -111,7 +111,7 @@ const SCENE_ACTIVITIES: SceneActivity[] = [
     itemEmojiB: '🏀',
     itemNameNp: 'बलहरू',
     itemNameEn: 'Balls',
-    descriptionNp: 'बाकसमा ६ वटा फुटबल र ३ वटा बास्केटबल छन्।',
+    descriptionNp: 'बाकसमा 6 वटा फुटबल र 3 वटा बास्केटबल छन्।',
     descriptionEn: 'In the box there are 6 footballs and 3 basketballs.',
   },
   {
@@ -125,7 +125,7 @@ const SCENE_ACTIVITIES: SceneActivity[] = [
     itemEmojiB: '🥭',
     itemNameNp: 'आँपहरू',
     itemNameEn: 'Mangoes',
-    descriptionNp: '५ वटा पाकेका आँप र ५ वटा हरिया आँप एकै ठाउँमा मिलाउँदा कति हुन्छ?',
+    descriptionNp: '5 वटा पाकेका आँप र 5 वटा हरिया आँप एकै ठाउँमा मिलाउँदा कति हुन्छ?',
     descriptionEn: 'When combining 5 ripe mangoes and 5 green mangoes, what is the total?',
   },
   {
@@ -139,7 +139,7 @@ const SCENE_ACTIVITIES: SceneActivity[] = [
     itemEmojiB: '🌱',
     itemNameNp: 'सूर्यमुखी फूल',
     itemNameEn: 'Sunflowers',
-    descriptionNp: '४ वटा सूर्यमुखी फूलमा शून्य (०) फूल थप्दा जम्मा कति हुन्छ?',
+    descriptionNp: '4 वटा सूर्यमुखी फूलमा शून्य (0) फूल थप्दा जम्मा कति हुन्छ?',
     descriptionEn: 'When adding 0 sunflowers to 4 sunflowers, what is the total?',
   },
 ];
@@ -148,7 +148,7 @@ export const MakeTheTotal: React.FC<Props> = ({
   onBackToLibrary,
   userRole = 'TEACHER',
 }) => {
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Scene Index
@@ -315,15 +315,7 @@ export const MakeTheTotal: React.FC<Props> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              setLanguage((l) => (l === 'np' ? 'en' : 'np'));
-              playSound('click');
-            }}
-            className="px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition"
-          >
-            {language === 'np' ? 'EN' : 'नेपाली'}
-          </button>
+          
           <button
             onClick={() => setSoundEnabled((s) => !s)}
             className={`p-2 rounded-lg border transition ${
@@ -376,7 +368,7 @@ export const MakeTheTotal: React.FC<Props> = ({
                 <div className="flex flex-wrap gap-2 justify-center items-center min-h-[100px]">
                   {currentScene.countA === 0 ? (
                     <span className="text-xs text-slate-500 italic">
-                      {language === 'np' ? '(खाली समूह - ०)' : '(Empty Group - 0)'}
+                      {language === 'np' ? '' : '(Empty Group - 0)'}
                     </span>
                   ) : (
                     Array.from({ length: currentScene.countA }).map((_, i) => (
@@ -413,7 +405,7 @@ export const MakeTheTotal: React.FC<Props> = ({
                 <div className="flex flex-wrap gap-2 justify-center items-center min-h-[100px]">
                   {currentScene.countB === 0 ? (
                     <span className="text-xs text-slate-500 italic">
-                      {language === 'np' ? '(खाली समूह - ०)' : '(Empty Group - 0)'}
+                      {language === 'np' ? '' : '(Empty Group - 0)'}
                     </span>
                   ) : (
                     Array.from({ length: currentScene.countB }).map((_, i) => (

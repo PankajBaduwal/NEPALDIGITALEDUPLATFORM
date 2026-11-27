@@ -1,8 +1,8 @@
 /**
  * DrawWithObjectsSimulation.tsx
- * Simulation 04: Draw with Real Objects (वस्तुको प्रयोग गरी रेखा कोरौँ)
- * Class 1 Mathematics - Chapter 2: Lines (रेखाहरू)
- * Based on Nepal CDC Curriculum (मेरो गणित, कक्षा १ - २०७६)
+ * Simulation 04: Draw with Real Objects
+ * Class 1 Mathematics - Chapter 2: Lines
+ * Based on Nepal CDC Curriculum
  */
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -44,7 +44,7 @@ export const DrawWithObjectsSimulation: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Language & Audio
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Active Tool selection
@@ -113,24 +113,24 @@ export const DrawWithObjectsSimulation: React.FC<Props> = ({
   const activities = [
     {
       id: 1,
-      titleEn: 'Step 1: Draw with a Wooden Ruler (स्केल)',
-      titleNp: 'अभ्यास १: रुलर (स्केल) को सिधा किनारा प्रयोग गरौँ',
+      titleEn: 'Step 1: Draw with a Wooden Ruler',
+      titleNp: 'अभ्यास 1: रुलर (स्केल) को सिधा किनारा प्रयोग गरौँ',
       instructionEn: 'Drag the pencil along the top edge of the wooden ruler to draw a perfectly straight line.',
       instructionNp: 'काठको रुलरको सिधा किनारामा पेन्सिल घोटेर एकदम सीधा रेखा खिच्नुहोस्।',
       recommendedTool: 'ruler',
     },
     {
       id: 2,
-      titleEn: 'Step 2: Draw with a Textbook Edge (किताबको किनारा)',
-      titleNp: 'अभ्यास २: किताबको सिधा किनारा प्रयोग गरौँ',
+      titleEn: 'Step 2: Draw with a Textbook Edge',
+      titleNp: 'अभ्यास 2: किताबको सिधा किनारा प्रयोग गरौँ',
       instructionEn: 'Select the Book and draw along its edge. Books also have straight edges!',
       instructionNp: 'किताब छान्नुहोस् र यसको सिधा किनारामा रेखा कोर्नुहोस्। किताबको किनारा पनि सीधा हुन्छ!',
       recommendedTool: 'book',
     },
     {
       id: 3,
-      titleEn: 'Step 3: Try Freehand Without Any Object (हातले मात्र)',
-      titleNp: 'अभ्यास ३: कुनै वस्तु बिना हातले मात्र कोरी हेरौँ',
+      titleEn: 'Step 3: Try Freehand Without Any Object',
+      titleNp: 'अभ्यास 3: कुनै वस्तु बिना हातले मात्र कोरी हेरौँ',
       instructionEn: 'Select Freehand and try drawing straight. Notice how hands wobble without a straight edge!',
       instructionNp: 'हातले मात्र कोर्दा रेखा बाङ्गो हुन सक्छ। सिधा किनारा किन चाहिन्छ विचार गर्नुहोस्!',
       recommendedTool: 'freehand',
@@ -138,7 +138,7 @@ export const DrawWithObjectsSimulation: React.FC<Props> = ({
     {
       id: 4,
       titleEn: 'Step 4: Rotate Objects for Slanted & Vertical Lines',
-      titleNp: 'अभ्यास ४: वस्तु घुमाएर छड्के वा ठाडो सीधा रेखा कोर्नुहोस्',
+      titleNp: 'अभ्यास 4: वस्तु घुमाएर छड्के वा ठाडो सीधा रेखा कोर्नुहोस्',
       instructionEn: 'Rotate your object using the rotate button and draw straight lines in different directions!',
       instructionNp: 'घुमाउने बटन थिचेर रुलर वा बट्टालाई घुमाई छड्के वा ठाडो सीधा रेखा खिच्नुहोस्!',
       recommendedTool: 'box',
@@ -383,7 +383,7 @@ export const DrawWithObjectsSimulation: React.FC<Props> = ({
               {language === 'np' ? 'वस्तुको प्रयोग गरी रेखा कोरौँ' : 'Draw with Real Objects'}
             </h1>
             <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
-              {language === 'np' ? 'कक्षा १ गणित • अध्याय २: रेखाहरू' : 'Class 1 Math • Chapter 2: Lines'}
+              {language === 'np' ? 'कक्षा 1 गणित • अध्याय 2: रेखाहरू' : 'Class 1 Math • Chapter 2: Lines'}
             </span>
           </div>
         </div>
@@ -435,21 +435,7 @@ export const DrawWithObjectsSimulation: React.FC<Props> = ({
           </div>
 
           {/* Language */}
-          <button
-            onClick={() => setLanguage(language === 'np' ? 'en' : 'np')}
-            style={{
-              background: '#ede9fe',
-              color: '#6d28d9',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '13px',
-              cursor: 'pointer',
-            }}
-          >
-            {language === 'np' ? 'English' : 'नेपाली'}
-          </button>
+          
 
           {/* Sound */}
           <button

@@ -1,7 +1,7 @@
 /**
  * ReflectionTransformationLab.tsx
- * Grade 7 Mathematics – Lesson 19: TRANSFORMATION (रूपान्तरण)
- * Simulation 1: Reflection and Mirror Transformation Lab (परावर्तन र ऐना रूपान्तरण प्रयोगशाला)
+ * Grade 7 Mathematics – Lesson 19: TRANSFORMATION
+ * Simulation 1: Reflection and Mirror Transformation Lab
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 278-285)
  */
 import React, { useState } from 'react';
@@ -34,13 +34,13 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'बिन्दु A(४, ५) लाई X-अक्षमा परावर्तन गर्दा यसको प्रतिबिम्ब A\' को निर्देशाङ्क कति हुन्छ?',
+    np: 'बिन्दु A(4, 5) लाई X-अक्षमा परावर्तन गर्दा यसको प्रतिबिम्ब A\' को निर्देशाङ्क कति हुन्छ?',
     en: 'What is the image A\' when point A(4, 5) is reflected across the X-axis?',
     options: [
-      { key: 'A', label: 'A\'(४, −५)' },
-      { key: 'B', label: 'A\'(−४, ५)' },
-      { key: 'C', label: 'A\'(−४, −५)' },
-      { key: 'D', label: 'A\'(५, ४)' },
+      { key: 'A', label: 'A\'(4, −5)' },
+      { key: 'B', label: 'A\'(−4, 5)' },
+      { key: 'C', label: 'A\'(−4, −5)' },
+      { key: 'D', label: 'A\'(5, 4)' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'परावर्तन अक्षबाट वस्तुको बिन्दु र प्रतिबिम्बको बिन्दुको दूरी कस्तो हुन्छ?',
     en: 'What is the distance of the object point and image point from the reflection axis?',
     options: [
-      { key: 'A', label: 'सधैं बराबर (Equal perpendicular distance)' },
-      { key: 'B', label: 'प्रतिबिम्ब दोब्बर टाढा हुन्छ' },
-      { key: 'C', label: 'वस्तु नजिक हुन्छ' },
-      { key: 'D', label: 'फरक फरक हुन्छ' },
+      { key: 'A', label: 'Always equal (equal perpendicular distance)' },
+      { key: 'B', label: 'The image is twice as far away' },
+      { key: 'C', label: 'The object is nearer' },
+      { key: 'D', label: 'They are different' },
     ],
     answer: 'A',
   },
@@ -155,9 +155,9 @@ export const ReflectionTransformationLab: React.FC<{ onBackToLibrary?: () => voi
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 justify-center bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'explore_axes', np: '१. अक्ष परावर्तन अन्वेषक (Explore Axes)', en: '1. Explore Axes' },
-            { id: 'polygon_reflection', np: '२. त्रिभुज परावर्तन (Reflect Polygon)', en: '2. Reflect Polygons' },
-            { id: 'cdc_challenge', np: '३. पाठ्यपुस्तक अभ्यास चुनौती (CDC Challenge)', en: '3. Textbook Challenge' },
+            { id: 'explore_axes', np: '1. अक्ष परावर्तन अन्वेषक (Explore Axes)', en: '1. Explore Axes' },
+            { id: 'polygon_reflection', np: '2. त्रिभुज परावर्तन (Reflect Polygon)', en: '2. Reflect Polygons' },
+            { id: 'cdc_challenge', np: '3. पाठ्यपुस्तक अभ्यास चुनौती (CDC Challenge)', en: '3. Textbook Challenge' },
           ].map((t) => (
             <button
               key={t.id}
@@ -182,14 +182,14 @@ export const ReflectionTransformationLab: React.FC<{ onBackToLibrary?: () => voi
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2 text-xs md:text-sm text-slate-800">
                 <div className="bg-white p-3 rounded-xl border border-blue-200 font-bold">
-                  <div>{L('१. X-अक्षमा परावर्तन (Reflection about X-axis):', '1. Reflection about X-axis:')}</div>
+                  <div>{L('1. X-अक्षमा परावर्तन (Reflection about X-axis):', '1. Reflection about X-axis:')}</div>
                   <div className="text-blue-700 text-base mt-1">(x, y) → (x, −y)</div>
-                  <div className="text-[11px] text-slate-500 font-normal">x यथावत रहन्छ, y को चिन्ह उल्टिन्छ।</div>
+                  <div className="text-[11px] text-slate-500 font-normal">x stays the same, the sign of y is reversed.</div>
                 </div>
                 <div className="bg-white p-3 rounded-xl border border-blue-200 font-bold">
-                  <div>{L('२. Y-अक्षमा परावर्तन (Reflection about Y-axis):', '2. Reflection about Y-axis:')}</div>
+                  <div>{L('2. Y-अक्षमा परावर्तन (Reflection about Y-axis):', '2. Reflection about Y-axis:')}</div>
                   <div className="text-emerald-700 text-base mt-1">(x, y) → (−x, y)</div>
-                  <div className="text-[11px] text-slate-500 font-normal">y यथावत रहन्छ, x को चिन्ह उल्टिन्छ।</div>
+                  <div className="text-[11px] text-slate-500 font-normal">y stays the same, the sign of x is reversed.</div>
                 </div>
               </div>
             </div>
@@ -275,7 +275,7 @@ export const ReflectionTransformationLab: React.FC<{ onBackToLibrary?: () => voi
                   </text>
                 </svg>
                 <div className="text-[11px] text-slate-500 mt-2">
-                  {L('नीलो = वस्तु बिन्दु A | रातो = प्रतिबिम्ब बिन्दु A\'', 'Blue = Object Point A | Red = Reflected Image Point A\'')}
+                  {L('रातो = प्रतिबिम्ब बिन्दु A\'', 'Blue = Object Point A | Red = Reflected Image Point A\'')}
                 </div>
               </div>
 
@@ -319,10 +319,10 @@ export const ReflectionTransformationLab: React.FC<{ onBackToLibrary?: () => voi
                     {L('चरणबद्ध परावर्तन हिसाब:', 'Step-by-Step Calculation:')}
                   </div>
                   <div className="text-xs text-slate-700 space-y-1">
-                    <div>सुरुको बिन्दु A = ({ptX}, {ptY})</div>
-                    <div>परावर्तन अक्ष = {activeAxis === 'x' ? 'X-अक्ष (y = 0)' : 'Y-अक्ष (x = 0)'}</div>
+                    <div>Original point A = ({ptX}, {ptY})</div>
+                    <div>Axis of reflection = {activeAxis === 'x' ? 'X-axis (y = 0)' : 'Y-अक्ष (x = 0)'}</div>
                     <div className="text-sm font-black text-indigo-700 pt-1 border-t border-slate-200">
-                      प्रतिबिम्ब A' = ({toNp(refPtX)}, {toNp(refPtY)})
+                      Image A' = ({toNp(refPtX)}, {toNp(refPtY)})
                     </div>
                   </div>
                 </div>
@@ -417,7 +417,7 @@ export const ReflectionTransformationLab: React.FC<{ onBackToLibrary?: () => voi
                 })()}
               </svg>
               <div className="text-xs text-slate-600 mt-2 text-center">
-                {L('नीलो △PQR = वस्तु | रातो △P\'Q\'R\' = प्रतिबिम्ब (Congruent/अनुरूप)', 'Blue △PQR = Object | Red △P\'Q\'R\' = Image (Congruent)')}
+                {L('रातो △P\'Q\'R\' = प्रतिबिम्ब (Congruent/अनुरूप)', 'Blue △PQR = Object | Red △P\'Q\'R\' = Image (Congruent)')}
               </div>
             </div>
           </div>
@@ -450,7 +450,7 @@ export const ReflectionTransformationLab: React.FC<{ onBackToLibrary?: () => voi
                   {currentProb.axis === 'x' ? L('X-अक्ष परावर्तन', 'X-axis Reflection') : L('Y-अक्ष परावर्तन', 'Y-axis Reflection')}
                 </div>
                 <div className="text-2xl font-black text-slate-800">
-                  बिन्दु P = ({toNp(currentProb.pt[0])}, {toNp(currentProb.pt[1])})
+                  Point P = ({toNp(currentProb.pt[0])}, {toNp(currentProb.pt[1])})
                 </div>
                 <div className="text-sm text-slate-600">
                   {currentProb.axis === 'x'

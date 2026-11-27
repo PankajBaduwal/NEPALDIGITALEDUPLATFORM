@@ -1,5 +1,5 @@
 /**
- * Class 4 lessons 8 and 13 · Currency (मुद्रा), Bill and budget (बिल र बजेट)
+ * Class 4 lessons 8 and 13 · Currency, Bill and budget
  * NoteCounter — 2D Nepali banknote and coin counter.
  * BillShop — 2D grocery store bill generator with quantity × price.
  * BudgetTowers — 2D Income vs Expenses budget balance bars.
@@ -36,7 +36,7 @@ export const NoteCounter: React.FC<Props> = ({ onBackToLibrary }) => {
     setCnt(next);
     kit.tap();
     const sub = next[idx] * DEN[idx];
-    kit.say(`${next[idx]} × रु. ${DEN[idx]} = रु. ${sub}`, `${next[idx]} × Rs ${DEN[idx]} = Rs ${sub}`);
+    kit.say(`${next[idx]} × Rs. ${DEN[idx]} = Rs. ${sub}`, `${next[idx]} × Rs ${DEN[idx]} = Rs ${sub}`);
   };
 
   const clearAll = () => {
@@ -142,12 +142,12 @@ export const NoteCounter: React.FC<Props> = ({ onBackToLibrary }) => {
                     fontSize: 14,
                   }}
                 >
-                  {isCoin ? `🪙 रु. ${d}` : `💵 रु. ${d}`}
+                  {isCoin ? `🪙 Rs. ${d}` : `💵 Rs. ${d}`}
                 </div>
 
                 {/* Subtotal */}
                 <div style={{ fontSize: 12, fontWeight: 800, color: '#475569' }}>
-                  {fmt(kit.lang, count)} × {d} = <span style={{ color: DCOL[i] }}>रु. {fmt(kit.lang, subtotal)}</span>
+                  {fmt(kit.lang, count)} × {d} = <span style={{ color: DCOL[i] }}> Rs. {fmt(kit.lang, subtotal)}</span>
                 </div>
 
                 {/* Counter Steppers */}
@@ -195,10 +195,10 @@ export const NoteCounter: React.FC<Props> = ({ onBackToLibrary }) => {
 
 /* ───────────── 2. BillShop ───────────── */
 const SHOP_ITEMS = [
-  { np: 'चामल (१ किलो)', en: 'Rice (1 kg)', price: 120, emoji: '🍚', color: '#F59E0B' },
-  { np: 'दाल (१ किलो)', en: 'Lentils (1 kg)', price: 180, emoji: '🍲', color: '#EF4444' },
-  { np: 'चिनी (१ किलो)', en: 'Sugar (1 kg)', price: 110, emoji: '🧂', color: '#64748B' },
-  { np: 'तेल (१ लिटर)', en: 'Oil (1 L)', price: 250, emoji: '🛢️', color: '#EAB308' },
+  { np: 'चामल (1 किलो)', en: 'Rice (1 kg)', price: 120, emoji: '🍚', color: '#F59E0B' },
+  { np: 'दाल (1 किलो)', en: 'Lentils (1 kg)', price: 180, emoji: '🍲', color: '#EF4444' },
+  { np: 'चिनी (1 किलो)', en: 'Sugar (1 kg)', price: 110, emoji: '🧂', color: '#64748B' },
+  { np: 'तेल (1 लिटर)', en: 'Oil (1 L)', price: 250, emoji: '🛢️', color: '#EAB308' },
   { np: 'कापी', en: 'Copy Book', price: 30, emoji: '📒', color: '#0EA5E9' },
   { np: 'पेन्सिल', en: 'Pencil', price: 10, emoji: '✏️', color: '#10B981' },
 ];
@@ -291,7 +291,7 @@ export const BillShop: React.FC<Props> = ({ onBackToLibrary }) => {
                 <div>
                   <div style={{ fontSize: 20 }}>{item.emoji}</div>
                   <div style={{ fontSize: 13, fontWeight: 800, color: '#1E293B' }}>{kit.t(item.np, item.en)}</div>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: item.color }}>रु. {fmt(kit.lang, item.price)}</div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: item.color }}> Rs. {fmt(kit.lang, item.price)}</div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <button
@@ -339,7 +339,7 @@ export const BillShop: React.FC<Props> = ({ onBackToLibrary }) => {
               <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, fontWeight: 700, color: '#475569' }}>
                 <span>{kit.t(item.np, item.en)}</span>
                 <span>
-                  {fmt(kit.lang, qty)} × रु. {fmt(kit.lang, item.price)} = रु. {fmt(kit.lang, qty * item.price)}
+                  {fmt(kit.lang, qty)} × Rs. {fmt(kit.lang, item.price)} = Rs. {fmt(kit.lang, qty * item.price)}
                 </span>
               </div>
             );

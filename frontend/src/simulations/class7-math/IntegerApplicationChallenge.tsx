@@ -1,6 +1,6 @@
 /**
  * IntegerApplicationChallenge.tsx
- * Grade 7 Mathematics – Lesson 3: INTEGER (पूर्णाङ्क)
+ * Grade 7 Mathematics – Lesson 3: INTEGER
  * Simulation 4: Integer Application and Simplification Challenge (2D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 64-66)
  */
@@ -12,46 +12,46 @@ import { Check, Sparkles, HelpCircle, ArrowRight, RotateCcw, Wallet, Droplets, T
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'एउटा हाजिरीजवाफ प्रतियोगितामा सही उत्तरको +५ र गलत उत्तरको -२ अंक दिइन्छ। कुनै विद्यार्थीले ८ वटा सही र ३ वटा गलत उत्तर दिए कुल अंक कति हुन्छ?',
+    np: 'एउटा हाजिरीजवाफ प्रतियोगितामा सही उत्तरको +5 र गलत उत्तरको -2 marks दिइन्छ। कुनै विद्यार्थीले 8 pcs सही र 3 pcs गलत उत्तर दिए कुल marks कति हुन्छ?',
     en: 'In a quiz, correct gets +5 and wrong gets -2. If a student answers 8 correct and 3 wrong, what is the total score?',
     options: [
-      { key: 'A', label: '३४ अंक (८×५ - ३×२ = ४० - ६ = ३४)' },
-      { key: 'B', label: '४० अंक' },
-      { key: 'C', label: '२६ अंक' },
-      { key: 'D', label: '४६ अंक' },
+      { key: 'A', label: '34 marks (8×5 - 3×2 = 40 - 6 = 34)' },
+      { key: 'B', label: '40 marks' },
+      { key: 'C', label: '26 marks' },
+      { key: 'D', label: '46 marks' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा ट्यांकीमा ५०० लिटर पानी छ। धारा A ले प्रतिमिनेट २५ लिटर भर्छ र धारा B ले प्रतिमिनेट १५ लिटर निकाल्छ। ६ मिनेटपछि ट्यांकीमा कति पानी रहन्छ?',
+    np: 'एउटा ट्यांकीमा 500 litres पानी छ। धारा A ले प्रतिmin 25 litres भर्छ र धारा B ले प्रतिmin 15 litres निकाल्छ। 6 minपछि ट्यांकीमा कति पानी रहन्छ?',
     en: 'A tank has 500 L. Tap A fills 25 L/min and Tap B drains 15 L/min. How much water is in the tank after 6 minutes?',
     options: [
-      { key: 'A', label: '५०० लिटर' },
-      { key: 'B', label: '५६० लिटर (५०० + १५० - ९०)' },
-      { key: 'C', label: '६०० लिटर' },
-      { key: 'D', label: '४४० लिटर' },
+      { key: 'A', label: '500 litres' },
+      { key: 'B', label: '560 litres (500 + 150 - 90)' },
+      { key: 'C', label: '600 litres' },
+      { key: 'D', label: '440 litres' },
     ],
     answer: 'B',
   },
   {
-    np: 'बैंक खातामा रु. ५,००० मौज्दात थियो। रु. २,००० जम्मा गरी रु. ३,५०० को बिल भुक्तानी गर्दा बाँकी कति हुन्छ?',
+    np: 'बैंक खातामा Rs. 5,000 मौज्दात थियो। Rs. 2,000 जम्मा गरी Rs. 3,500 को बिल भुक्तानी गर्दा बाँकी कति हुन्छ?',
     en: 'A bank balance had Rs 5,000. Depositing Rs 2,000 and paying a bill of Rs 3,500 leaves what balance?',
     options: [
-      { key: 'A', label: 'रु. ३,५००' },
-      { key: 'B', label: 'रु. ५,०००' },
-      { key: 'C', label: 'रु. ६,५००' },
-      { key: 'D', label: 'रु. ३,०००' },
+      { key: 'A', label: 'Rs. 3,500' },
+      { key: 'B', label: 'Rs. 5,000' },
+      { key: 'C', label: 'Rs. 6,500' },
+      { key: 'D', label: 'Rs. 3,000' },
     ],
     answer: 'A',
   },
   {
-    np: '(-३०) - (-४०) - (-२०) + (+२) को मान कति हुन्छ?',
+    np: '(-30) - (-40) - (-20) + (+2) को मान कति हुन्छ?',
     en: 'What is the value of (-30) - (-40) - (-20) + (+2)?',
     options: [
-      { key: 'A', label: '+३२ (-३० + ४० + २० + २ = ३२)' },
-      { key: 'B', label: '-३२' },
-      { key: 'C', label: '+१०' },
-      { key: 'D', label: '-८८' },
+      { key: 'A', label: '+32 (-30 + 40 + 20 + 2 = 32)' },
+      { key: 'B', label: '-32' },
+      { key: 'C', label: '+10' },
+      { key: 'D', label: '-88' },
     ],
     answer: 'A',
   },
@@ -107,10 +107,10 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.03)' }}>
           {[
-            { id: 'quiz_contest', np: '१. हाजिरीजवाफ अंक गणना (+५ / -२)', en: '1. Quiz Contest Score' },
-            { id: 'bank', np: '२. बैंक खाता कारोबार (+ / -)', en: '2. Bank Account Ledger' },
-            { id: 'tank', np: '३. पानी ट्यांकी भर्ने/निकाल्ने', en: '3. Water Tank Flow' },
-            { id: 'simplify', np: '४. कोष्ठक र चिन्ह सरलीकरण (BODMAS)', en: '4. Integer Simplification' },
+            { id: 'quiz_contest', np: '1. हाजिरीजवाफ marks गणना (+5 / -2)', en: '1. Quiz Contest Score' },
+            { id: 'bank', np: '2. बैंक खाता कारोबार (+ / -)', en: '2. Bank Account Ledger' },
+            { id: 'tank', np: '3. पानी ट्यांकी भर्ने/निकाल्ने', en: '3. Water Tank Flow' },
+            { id: 'simplify', np: '4. कोष्ठक र चिन्ह सरलीकरण (BODMAS)', en: '4. Integer Simplification' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -141,10 +141,10 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', borderRadius: 16, padding: 18, marginBottom: 20 }}>
               <div style={{ fontSize: 12, fontWeight: 800, color: '#0F766E', textTransform: 'uppercase', marginBottom: 4 }}>
-                🏆 {L('पाठ्यपुस्तक व्यवहारिक उदाहरण (पृष्ठ ६४)', 'Textbook Quiz Problem (Page 64)')}
+                🏆 {L('पाठ्यपुस्तक व्यवहारिक उदाहरण (पृष्ठ 64)', 'Textbook Quiz Problem (Page 64)')}
               </div>
               <h3 style={{ margin: 0, fontSize: 16, fontWeight: 900, color: '#134E4A' }}>
-                {L('नियम: सही उत्तरमा +५ अंक र गलत उत्तरमा -२ अंक प्राप्त हुन्छ।', 'Rules: Correct answer gets +5 marks, incorrect gets -2 marks.')}
+                {L('नियम: सही उत्तरमा +5 marks र गलत उत्तरमा -2 marks प्राप्त हुन्छ।', 'Rules: Correct answer gets +5 marks, incorrect gets -2 marks.')}
               </h3>
             </div>
 
@@ -158,7 +158,7 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
                   <button onClick={() => setCorrectCount(correctCount + 1)} style={{ padding: '6px 14px', borderRadius: 8, border: 'none', background: '#FFFFFF', fontWeight: 900, cursor: 'pointer' }}>+</button>
                 </div>
                 <div style={{ fontSize: 12, color: '#15803D', marginTop: 8 }}>
-                  अंक = {isNe ? toNp(correctCount) : correctCount} × (+५) = <strong>+{isNe ? toNp(correctCount * 5) : correctCount * 5}</strong>
+                  Marks = {isNe ? toNp(correctCount) : correctCount} × (+5) = <strong>+{isNe ? toNp(correctCount * 5) : correctCount * 5}</strong>
                 </div>
               </div>
 
@@ -171,7 +171,7 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
                   <button onClick={() => setWrongCount(wrongCount + 1)} style={{ padding: '6px 14px', borderRadius: 8, border: 'none', background: '#FFFFFF', fontWeight: 900, cursor: 'pointer' }}>+</button>
                 </div>
                 <div style={{ fontSize: 12, color: '#B91C1C', marginTop: 8 }}>
-                  अंक = {isNe ? toNp(wrongCount) : wrongCount} × (-२) = <strong>-{isNe ? toNp(wrongCount * 2) : wrongCount * 2}</strong>
+                  Marks = {isNe ? toNp(wrongCount) : wrongCount} × (-2) = <strong>-{isNe ? toNp(wrongCount * 2) : wrongCount * 2}</strong>
                 </div>
               </div>
             </div>
@@ -179,10 +179,10 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
             {/* Total score banner */}
             <div style={{ background: '#F8FAFC', border: '2px solid #E2E8F0', padding: 20, borderRadius: 16 }}>
               <div style={{ fontSize: 14, fontWeight: 800, color: '#64748B', marginBottom: 4 }}>
-                {L('कुल प्राप्त अंक (Total Score):', 'Total Score:')}
+                {L('कुल प्राप्त marks (Total Score):', 'Total Score:')}
               </div>
               <div style={{ fontSize: 26, fontWeight: 900, color: '#0F766E' }}>
-                (+{isNe ? toNp(correctCount * 5) : correctCount * 5}) + (-{isNe ? toNp(wrongCount * 2) : wrongCount * 2}) = <strong>{isNe ? toNp(quizScore) : quizScore} {L('अंक', 'marks')}</strong>
+                (+{isNe ? toNp(correctCount * 5) : correctCount * 5}) + (-{isNe ? toNp(wrongCount * 2) : wrongCount * 2}) = <strong>{isNe ? toNp(quizScore) : quizScore} {L('marks', 'marks')}</strong>
               </div>
             </div>
           </div>
@@ -192,7 +192,7 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
         {activeTab === 'bank' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#FEF3C7', color: '#B45309', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक उदाहरण: बैंक मौज्दात', 'Textbook Example: Bank Balance')}
+              {L('पाठ्यपुस्तक Example: बैंक मौज्दात', 'Textbook Example: Bank Balance')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
               {L('जम्मा (Credit: +) र भुक्तानी (Debit: -) हिसाब', 'Credits (+) and Debits (-) Calculation')}
@@ -200,24 +200,24 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
               <div style={{ background: '#F8FAFC', padding: 16, borderRadius: 14, border: '1px solid #E2E8F0' }}>
-                <span style={{ fontSize: 12, color: '#64748B' }}>सुरुवाती मौज्दात (Initial)</span>
-                <div style={{ fontSize: 18, fontWeight: 900, color: '#0F172A', marginTop: 4 }}>रु. {isNe ? toNp(initialBal) : initialBal}</div>
+                <span style={{ fontSize: 12, color: '#64748B' }}>Opening balance</span>
+                <div style={{ fontSize: 18, fontWeight: 900, color: '#0F172A', marginTop: 4 }}>Rs. {isNe ? toNp(initialBal) : initialBal}</div>
               </div>
 
               <div style={{ background: '#DCFCE7', padding: 16, borderRadius: 14, border: '1px solid #86EFAC' }}>
-                <span style={{ fontSize: 12, color: '#166534' }}>थप जम्मा (Deposit: +)</span>
-                <div style={{ fontSize: 18, fontWeight: 900, color: '#14532D', marginTop: 4 }}>+ रु. {isNe ? toNp(deposit) : deposit}</div>
+                <span style={{ fontSize: 12, color: '#166534' }}>Deposit (+)</span>
+                <div style={{ fontSize: 18, fontWeight: 900, color: '#14532D', marginTop: 4 }}>+ Rs. {isNe ? toNp(deposit) : deposit}</div>
               </div>
 
               <div style={{ background: '#FEE2E2', padding: 16, borderRadius: 14, border: '1px solid #FCA5A5' }}>
-                <span style={{ fontSize: 12, color: '#991B1B' }}>बिल भुक्तानी (Payment: -)</span>
-                <div style={{ fontSize: 18, fontWeight: 900, color: '#7F1D1D', marginTop: 4 }}>- रु. {isNe ? toNp(withdrawal) : withdrawal}</div>
+                <span style={{ fontSize: 12, color: '#991B1B' }}>Bill payment (-)</span>
+                <div style={{ fontSize: 18, fontWeight: 900, color: '#7F1D1D', marginTop: 4 }}>- Rs. {isNe ? toNp(withdrawal) : withdrawal}</div>
               </div>
             </div>
 
             <div style={{ background: '#DCFCE7', border: '2px solid #16A34A', padding: 18, borderRadius: 14 }}>
               <div style={{ fontSize: 16, fontWeight: 900, color: '#166534' }}>
-                अन्तिम मौज्दात = ५००० + २००० - ३५०० = <strong>रु. {isNe ? toNp(finalBalance) : finalBalance}</strong>
+                Closing balance = 5000 + 2000 - 3500 = <strong>Rs. {isNe ? toNp(finalBalance) : finalBalance}</strong>
               </div>
             </div>
           </div>
@@ -228,16 +228,16 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <div style={{ background: '#EFF6FF', border: '2px solid #3B82F6', borderRadius: 16, padding: 18, marginBottom: 20 }}>
               <div style={{ fontSize: 12, fontWeight: 800, color: '#1D4ED8', textTransform: 'uppercase', marginBottom: 4 }}>
-                💧 {L('पाठ्यपुस्तक पानी ट्यांकी समस्या (पृष्ठ ६४)', 'Textbook Water Tank Problem (Page 64)')}
+                💧 {L('पाठ्यपुस्तक पानी ट्यांकी समस्या (पृष्ठ 64)', 'Textbook Water Tank Problem (Page 64)')}
               </div>
               <h3 style={{ margin: 0, fontSize: 16, fontWeight: 900, color: '#1E40AF' }}>
-                "{L('सुरुमा ट्यांकीमा ५०० लिटर पानी थियो। धारा A ले प्रतिमिनेट २५ लिटर भर्छ र धारा B ले प्रतिमिनेट १५ लिटर निकाल्छ। ६ मिनेटपछि कति पानी रहन्छ?', 'Tank initially has 500 L. Tap A fills 25 L/min and Tap B drains 15 L/min. Find the water after 6 minutes.')}"
+                "{L('सुरुमा ट्यांकीमा 500 litres पानी थियो। धारा A ले प्रतिmin 25 litres भर्छ र धारा B ले प्रतिmin 15 litres निकाल्छ। 6 minपछि कति पानी रहन्छ?', 'Tank initially has 500 L. Tap A fills 25 L/min and Tap B drains 15 L/min. Find the water after 6 minutes.')}"
               </h3>
             </div>
 
             <div style={{ background: '#F8FAFC', padding: 18, borderRadius: 14, border: '1px solid #E2E8F0', marginBottom: 20 }}>
               <label style={{ fontSize: 13, fontWeight: 800, color: '#334155', display: 'block', marginBottom: 8 }}>
-                {L('धारा खुला राखिएको समय (Minutes):', 'Duration taps are open:')} <strong>{isNe ? toNp(tankMinutes) : tankMinutes} {L('मिनेट', 'min')}</strong>
+                {L('धारा खुला राखिएको समय (Minutes):', 'Duration taps are open:')} <strong>{isNe ? toNp(tankMinutes) : tankMinutes} {L('min', 'min')}</strong>
               </label>
               <div style={{ display: 'flex', gap: 8 }}>
                 {[2, 4, 6, 8, 10].map((m) => (
@@ -258,7 +258,7 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
                       cursor: 'pointer',
                     }}
                   >
-                    {isNe ? toNp(m) : m} {L('मिनेट', 'min')}
+                    {isNe ? toNp(m) : m} {L('min', 'min')}
                   </button>
                 ))}
               </div>
@@ -266,11 +266,11 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
 
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', padding: 18, borderRadius: 14 }}>
               <div style={{ fontSize: 14, color: '#1E293B', lineHeight: 1.8 }}>
-                <div>• सुरुवाती पानी = ५०० लिटर</div>
-                <div>• भरिएको पानी = २५ × {isNe ? toNp(tankMinutes) : tankMinutes} = +{isNe ? toNp(inFlowRate * tankMinutes) : inFlowRate * tankMinutes} लिटर</div>
-                <div>• निकालिएको पानी = १५ × {isNe ? toNp(tankMinutes) : tankMinutes} = -{isNe ? toNp(outFlowRate * tankMinutes) : outFlowRate * tankMinutes} लिटर</div>
+                <div>• Initial water = 500 litres</div>
+                <div>• Water filled = 25 × {isNe ? toNp(tankMinutes) : tankMinutes} = +{isNe ? toNp(inFlowRate * tankMinutes) : inFlowRate * tankMinutes} litres</div>
+                <div>• Water removed = 15 × {isNe ? toNp(tankMinutes) : tankMinutes} = -{isNe ? toNp(outFlowRate * tankMinutes) : outFlowRate * tankMinutes} litres</div>
                 <div style={{ fontSize: 18, fontWeight: 900, color: '#0F766E', marginTop: 8 }}>
-                  अन्तिम परिमाण = ५०० + {isNe ? toNp(inFlowRate * tankMinutes) : inFlowRate * tankMinutes} - {isNe ? toNp(outFlowRate * tankMinutes) : outFlowRate * tankMinutes} = <strong>{isNe ? toNp(totalWater) : totalWater} लिटर</strong>
+                  Final amount = 500 + {isNe ? toNp(inFlowRate * tankMinutes) : inFlowRate * tankMinutes} - {isNe ? toNp(outFlowRate * tankMinutes) : outFlowRate * tankMinutes} = <strong>{isNe ? toNp(totalWater) : totalWater} litres</strong>
                 </div>
               </div>
             </div>
@@ -281,7 +281,7 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
         {activeTab === 'simplify' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक अभ्यास (पृष्ठ ६५)', 'Textbook Simplification (Page 65)')}
+              {L('पाठ्यपुस्तक अभ्यास (पृष्ठ 65)', 'Textbook Simplification (Page 65)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
               {L('चिन्ह र कोष्ठकयुक्त पूर्णाङ्कको सरलीकरण (Step-by-step Simplification)', 'Step-by-Step Integer Simplification')}
@@ -289,15 +289,15 @@ export const IntegerApplicationChallenge: React.FC<{ onBackToLibrary?: () => voi
 
             <div style={{ background: '#F8FAFC', padding: 18, borderRadius: 14, border: '1px solid #E2E8F0', marginBottom: 16 }}>
               <div style={{ fontSize: 16, fontWeight: 900, color: '#0F172A', marginBottom: 10 }}>
-                उदाहरण: (-३०) - (-४०) - (-२०) + (+२)
+                Example: (-30) - (-40) - (-20) + (+2)
               </div>
               <div style={{ fontSize: 14, color: '#334155', lineHeight: 1.8 }}>
-                <div>चरण १: दोहोरो चिन्ह हटाउँदा: - (-४०) = +४०, - (-२०) = +२०</div>
-                <div>= -३० + ४० + २० + २</div>
-                <div>चरण २: धनात्मक सङ्ख्याहरू जोड्दा: ४० + २० + २ = ६२</div>
-                <div>= -३० + ६२</div>
+                <div>Step 1: Removing the double signs: - (-40) = +40, - (-20) = +20</div>
+                <div>= -30 + 40 + 20 + 2</div>
+                <div>Step 2: Adding the positive numbers: 40 + 20 + 2 = 62</div>
+                <div>= -30 + 62</div>
                 <div style={{ fontSize: 17, fontWeight: 900, color: '#166534', marginTop: 6 }}>
-                  = <strong>+३२</strong>
+                  = <strong>+32</strong>
                 </div>
               </div>
             </div>

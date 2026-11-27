@@ -1,5 +1,5 @@
 /**
- * Lesson 13 · Geometric shapes (ज्यामितीय आकार) — flat shapes
+ * Lesson 13 · Geometric shapes — flat shapes
  * Flat Shapes Builder — shapes made of sides and corners; tap sides to count them and tap vertices.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */

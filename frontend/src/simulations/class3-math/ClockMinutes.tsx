@@ -1,5 +1,5 @@
 /**
- * Lesson 1 · Time 1 (समय १) — hour and minute
+ * Lesson 1 · Time 1 — hour and minute
  * Minute Clock — read any time on an interactive 2D clock: o'clock, half past, quarter past, quarter to and every minute in between.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */
@@ -50,7 +50,7 @@ export const ClockMinutes: React.FC<Props> = ({ onBackToLibrary }) => {
   const kit = useSimKit({
     code: 'SIM-MATH-G3-L1-01',
     chapter: 1,
-    titleNp: 'मिनेट घडी (समय १)',
+    titleNp: 'मिनेट घडी (समय 1)',
     titleEn: 'Minute Clock (Time 1)',
   });
 
@@ -139,12 +139,12 @@ export const ClockMinutes: React.FC<Props> = ({ onBackToLibrary }) => {
   ) : (
     <Controls>
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-        <CBtn color="#0284C7" onClick={() => bumpMinutes(60)}>+१ {kit.t('घण्टा', 'hour')}</CBtn>
-        <CBtn color="#0284C7" onClick={() => bumpMinutes(-60)}>-१ {kit.t('घण्टा', 'hour')}</CBtn>
-        <CBtn color="#10B981" onClick={() => bumpMinutes(5)}>+५ {kit.t('मिनेट', 'min')}</CBtn>
-        <CBtn color="#10B981" onClick={() => bumpMinutes(-5)}>-५ {kit.t('मिनेट', 'min')}</CBtn>
-        <CBtn color="#8B5CF6" onClick={() => bumpMinutes(1)}>+१ {kit.t('मिनेट', 'min')}</CBtn>
-        <CBtn color="#8B5CF6" onClick={() => bumpMinutes(-1)}>-१ {kit.t('मिनेट', 'min')}</CBtn>
+        <CBtn color="#0284C7" onClick={() => bumpMinutes(60)}>+1 {kit.t('घण्टा', 'hour')}</CBtn>
+        <CBtn color="#0284C7" onClick={() => bumpMinutes(-60)}>-1 {kit.t('घण्टा', 'hour')}</CBtn>
+        <CBtn color="#10B981" onClick={() => bumpMinutes(5)}>+5 {kit.t('मिनेट', 'min')}</CBtn>
+        <CBtn color="#10B981" onClick={() => bumpMinutes(-5)}>-5 {kit.t('मिनेट', 'min')}</CBtn>
+        <CBtn color="#8B5CF6" onClick={() => bumpMinutes(1)}>+1 {kit.t('मिनेट', 'min')}</CBtn>
+        <CBtn color="#8B5CF6" onClick={() => bumpMinutes(-1)}>-1 {kit.t('मिनेट', 'min')}</CBtn>
 
         {kit.mode === 'LEARN' && (
           <CBtn color="#187C68" onClick={() => setLi((v) => v + 1)}>

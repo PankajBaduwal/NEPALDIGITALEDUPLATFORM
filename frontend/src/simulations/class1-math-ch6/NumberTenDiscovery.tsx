@@ -1,7 +1,7 @@
 /**
  * NumberTenDiscovery.tsx
- * Simulation 02: Number Ten Discovery World (१० चिनौँ)
- * Class 1 Mathematics - Chapter 6: Ten (दश)
+ * Simulation 02: Number Ten Discovery World
+ * Class 1 Mathematics - Chapter 6: Ten
  * Nepal Digital Education Platform
  */
 
@@ -25,7 +25,7 @@ interface Props {
   userRole?: string;
 }
 
-const NEP_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०'];
+const NEP_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 const NEP_NAMES = ['शून्य', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ', 'दश'];
 const EN_NAMES = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
 
@@ -34,23 +34,23 @@ export const NumberTenDiscovery: React.FC<Props> = ({
   userRole = 'TEACHER',
 }) => {
   // Navigation & Settings
-  const [language, setLanguage] = useState<'np' | 'en'>('np');
+  const [language, setLanguage] = useState<'np' | 'en'>('en');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
-  // Active Tab: 1 (Discover 10 / १०), 2 (Card Picker), 3 (Numeral Match), 4 (Name Match)
+  // Active Tab: 1 (Discover 10 / 10), 2 (Card Picker), 3 (Numeral Match), 4 (Name Match)
   const [activeTab, setActiveTab] = useState<'DISCOVER' | 'PICK_CARD' | 'MATCH_NUMERAL' | 'MATCH_NAME'>('DISCOVER');
 
   // Stars
   const [stars, setStars] = useState<number>(0);
 
-  // Tab 2 State: Card Picker (Pick 10 / १० among distractors)
+  // Tab 2 State: Card Picker (Pick 10 / 10 among distractors)
   const [pickerRound, setPickerRound] = useState<number>(0);
   const pickerRounds = [
     {
-      promptNp: 'सङ्ख्या "१०" (दश) भएको कार्ड छान्नुहोस्:',
-      promptEn: 'Select the card showing number "१०":',
-      target: '१०',
-      options: ['७', '१०', '८', '५'],
+      promptNp: 'सङ्ख्या "10" भएको कार्ड छान्नुहोस्:',
+      promptEn: 'Select the card showing number "10":',
+      target: '10',
+      options: ['7', '10', '8', '5'],
     },
     {
       promptNp: 'सङ्ख्या "10" (Ten) भएको कार्ड छान्नुहोस्:',
@@ -74,13 +74,13 @@ export const NumberTenDiscovery: React.FC<Props> = ({
   const [pickerSelected, setPickerSelected] = useState<string | null>(null);
   const [pickerFeedback, setPickerFeedback] = useState<boolean | null>(null);
 
-  // Tab 3 State: Numeral Matching (Objects to 10 / १०)
+  // Tab 3 State: Numeral Matching (Objects to 10 / 10)
   const [matchedGroups, setMatchedGroups] = useState<string[]>([]);
   const matchCandidates = [
-    { id: 'M1', count: 10, labelNp: '१० वटा ताराहरू', labelEn: '10 Stars', icon: '⭐' },
-    { id: 'M2', count: 6, labelNp: '६ वटा फूलहरू', labelEn: '6 Flowers', icon: '🌸' },
-    { id: 'M3', count: 10, labelNp: '१० वटा बेलुनहरू', labelEn: '10 Balloons', icon: '🎈' },
-    { id: 'M4', count: 8, labelNp: '८ वटा चराहरू', labelEn: '8 Birds', icon: '🐦' },
+    { id: 'M1', count: 10, labelNp: '10 वटा ताराहरू', labelEn: '10 Stars', icon: '⭐' },
+    { id: 'M2', count: 6, labelNp: '6 वटा फूलहरू', labelEn: '6 Flowers', icon: '🌸' },
+    { id: 'M3', count: 10, labelNp: '10 वटा बेलुनहरू', labelEn: '10 Balloons', icon: '🎈' },
+    { id: 'M4', count: 8, labelNp: '8 वटा चराहरू', labelEn: '8 Birds', icon: '🐦' },
   ];
 
   // Helper formatting
@@ -182,16 +182,16 @@ export const NumberTenDiscovery: React.FC<Props> = ({
       const ns = stars + 1;
       setStars(ns);
       saveProgress(ns);
-      speakText('सबास! यस समूहमा ठ्याक्कै १० वटा वस्तु छन्।', 'Correct! This group contains 10 items.');
+      speakText('सबास! यस समूहमा ठ्याक्कै 10 वटा वस्तु छन्।', 'Correct! This group contains 10 items.');
     } else {
       playTone(280, 'sawtooth', 0.3);
-      speakText(`यसमा १० होइन, ${formatNum(count)} वटा मात्र छन्।`, `Not ten, this has only ${count} items.`);
+      speakText(`यसमा 10 होइन, ${formatNum(count)} वटा मात्र छन्।`, `Not ten, this has only ${count} items.`);
     }
   };
 
   useEffect(() => {
     speakText(
-      '१० चिनौँ सिमुलेसनमा स्वागत छ! सङ्ख्या १० को रूप, नाम र वस्तु सम्बन्ध बुझौँ।',
+      '10 चिनौँ सिमुलेसनमा स्वागत छ! सङ्ख्या 10 को रूप, नाम र वस्तु सम्बन्ध बुझौँ।',
       'Welcome to Number Ten Discovery World! Discover the number ten, its forms and names.'
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -242,11 +242,11 @@ export const NumberTenDiscovery: React.FC<Props> = ({
 
           <div>
             <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
-              कक्षा १ • गणित • अध्याय ६ : दश (Ten)
+              Class 1 • Maths • Chapter 6 : Ten
             </div>
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
-                ? 'सिमुलेसन ०२: १० चिनौँ (Number Ten Discovery World)'
+                ? 'सिमुलेसन 02: 10 चिनौँ (Number Ten Discovery World)'
                 : 'Simulation 02: Number Ten Discovery World'}
             </h1>
           </div>
@@ -271,21 +271,7 @@ export const NumberTenDiscovery: React.FC<Props> = ({
             <span>{stars} Stars</span>
           </div>
 
-          <button
-            onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
-            style={{
-              padding: '6px 12px',
-              background: '#FFFFFF',
-              border: '1px solid #DCE5DE',
-              borderRadius: '8px',
-              color: '#26332E',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '13px',
-            }}
-          >
-            {language === 'np' ? 'नेपाली | EN' : 'EN | नेपाली'}
-          </button>
+          
 
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
@@ -315,9 +301,9 @@ export const NumberTenDiscovery: React.FC<Props> = ({
         }}
       >
         {[
-          { key: 'DISCOVER', np: '१. १० को परिचय (Introduce 10)', en: '1. Introduce 10' },
-          { key: 'PICK_CARD', np: '२. १० को कार्ड छान्नुहोस् (Pick Card)', en: '2. Pick Card' },
-          { key: 'MATCH_NUMERAL', np: '३. १० वस्तुको जोडी (Match 10 Items)', en: '3. Match 10' },
+          { key: 'DISCOVER', np: '1. 10 को परिचय (Introduce 10)', en: '1. Introduce 10' },
+          { key: 'PICK_CARD', np: '2. 10 को कार्ड छान्नुहोस् (Pick Card)', en: '2. Pick Card' },
+          { key: 'MATCH_NUMERAL', np: '3. 10 वस्तुको जोडी (Match 10 Items)', en: '3. Match 10' },
         ].map((tab) => {
           const isSelected = activeTab === tab.key;
           return (
@@ -371,11 +357,11 @@ export const NumberTenDiscovery: React.FC<Props> = ({
           >
             <div style={{ textAlign: 'center' }}>
               <h2 style={{ margin: 0, fontSize: '24px', fontWeight: 900, color: '#26332E' }}>
-                {language === 'np' ? 'सङ्ख्या १० (दश) को परिचय' : 'Discover the Number 10 (Ten)'}
+                {language === 'np' ? 'सङ्ख्या 10 को परिचय' : 'Discover the Number 10 (Ten)'}
               </h2>
               <p style={{ margin: '6px 0 0', fontSize: '14px', color: '#26332E' }}>
                 {language === 'np'
-                  ? 'दश (१०) ले ठ्याक्कै १० वटा वस्तुहरूको समूहलाई जनाउँछ।'
+                  ? 'दश (10) ले ठ्याक्कै 10 वटा वस्तुहरूको समूहलाई जनाउँछ।'
                   : 'Number 10 represents a collection of exactly ten objects.'}
               </p>
             </div>
@@ -406,8 +392,8 @@ export const NumberTenDiscovery: React.FC<Props> = ({
                 <span style={{ fontSize: '13px', color: '#26332E', fontWeight: 800 }}>
                   {language === 'np' ? 'नेपाली सङ्ख्या (Devanagari)' : 'Devanagari Numeral'}
                 </span>
-                <span style={{ fontSize: '54px', fontWeight: 900, color: '#26332E' }}>१०</span>
-                <span style={{ fontSize: '16px', fontWeight: 800 }}>दश (Dash)</span>
+                <span style={{ fontSize: '54px', fontWeight: 900, color: '#26332E' }}>10</span>
+                <span style={{ fontSize: '16px', fontWeight: 800 }}>Ten</span>
               </div>
 
               {/* 2. English Numeral */}
@@ -562,7 +548,7 @@ export const NumberTenDiscovery: React.FC<Props> = ({
                 >
                   {pickerFeedback
                     ? language === 'np'
-                      ? 'शानदार! सही उत्तर (+१ तारा)'
+                      ? 'शानदार! सही उत्तर (+1 तारा)'
                       : 'Correct! (+1 Star)'
                     : language === 'np'
                     ? 'पुनः प्रयास गर्नुहोस्!'
@@ -606,12 +592,12 @@ export const NumberTenDiscovery: React.FC<Props> = ({
             <div style={{ textAlign: 'center' }}>
               <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 900, color: '#26332E' }}>
                 {language === 'np'
-                  ? '१० वटा वस्तुहरू भएका समूहहरू छान्नुहोस्'
+                  ? '10 वटा वस्तुहरू भएका समूहहरू छान्नुहोस्'
                   : 'Select the groups containing 10 items'}
               </h2>
               <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#26332E' }}>
                 {language === 'np'
-                  ? '१० वटा वस्तु भएका कार्डहरूमा क्लिक गर्नुहोस्।'
+                  ? '10 वटा वस्तु भएका कार्डहरूमा क्लिक गर्नुहोस्।'
                   : 'Click on the cards that contain exactly 10 objects.'}
               </p>
             </div>

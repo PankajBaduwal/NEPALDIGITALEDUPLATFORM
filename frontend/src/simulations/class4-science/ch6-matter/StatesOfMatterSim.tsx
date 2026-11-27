@@ -1,14 +1,14 @@
 /**
  * StatesOfMatterSim.tsx
- * Simulation 20: 2D Interactive Molecular Particle Chamber (पदार्थका ३ अवस्था - अणु भौतिक प्रयोगशाला)
- * Grade 4 Science • Chapter 6: Matter (पदार्थ)
+ * Simulation 20: 2D Interactive Molecular Particle Chamber
+ * Grade 4 Science • Chapter 6: Matter
  *
  * 100% NATIVE 2D CANVAS & VECTOR ANIMATED SIMULATION
  * Features:
  * - Real-time 2D molecular kinetics (H2O molecules with central Oxygen and two Hydrogen ears):
- *   1. Solid (ठोस): Rigid crystalline lattice with micro-vibrations and frost edges
- *   2. Liquid (तरल): Cohesive fluid flow conforming to container, surface waves
- *   3. Gas (ग्यास): High-velocity elastic collisions, wall rebounds, thermal trails
+ *   1. Solid: Rigid crystalline lattice with micro-vibrations and frost edges
+ *   2. Liquid: Cohesive fluid flow conforming to container, surface waves
+ *   3. Gas: High-velocity elastic collisions, wall rebounds, thermal trails
  * - Interactive Bunsen Burner with realistic animated flame (blue core + orange mantle)
  * - Dynamic laboratory Thermometer (-20°C to 120°C) with mercury column
  * - Interactive thermal controls (Heat / Cool, State selectors, Flame power)
@@ -36,7 +36,7 @@ export const StatesOfMatterSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -680,13 +680,13 @@ export const StatesOfMatterSim: React.FC<BaseSimulationProps> = ({
 
     // State name badge
     let badgeColor = '#38bdf8';
-    let label = 'Solid (ठोस)';
+    let label = 'Solid';
     if (state === 'liquid') {
       badgeColor = '#0ea5e9';
-      label = 'Liquid (तरल)';
+      label = 'Liquid';
     } else if (state === 'gas') {
       badgeColor = '#f97316';
-      label = 'Gas (ग्यास)';
+      label = 'Gas';
     }
 
     ctx.fillStyle = badgeColor;
@@ -716,7 +716,7 @@ export const StatesOfMatterSim: React.FC<BaseSimulationProps> = ({
       subtitle={
         lang === 'en'
           ? 'Grade 4 Science • Chapter 6: Matter'
-          : 'कक्षा ४ विज्ञान • एकाइ ६: पदार्थ'
+          : 'कक्षा 4 विज्ञान • एकाइ 6: पदार्थ'
       }
       currentStage={stage}
       onStageChange={setStage}
@@ -1059,7 +1059,7 @@ export const StatesOfMatterSim: React.FC<BaseSimulationProps> = ({
               }}
             />
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', color: '#64748b' }}>
-              <span>-20°C (Ice / हिउँ)</span>
+              <span>-20°C</span>
               <span>0°C (Melt)</span>
               <span>100°C (Boil)</span>
               <span>120°C (Steam)</span>

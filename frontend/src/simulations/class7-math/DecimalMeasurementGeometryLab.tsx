@@ -1,6 +1,6 @@
 /**
  * DecimalMeasurementGeometryLab.tsx
- * Grade 7 Mathematics – Lesson 5: FRACTION AND DECIMAL (भिन्न र दशमलव)
+ * Grade 7 Mathematics – Lesson 5: FRACTION AND DECIMAL
  * Simulation 11: Decimal Measurement and Geometry Lab (2D + Selective 3D Simulation)
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 85-86)
  */
@@ -12,35 +12,35 @@ import { toNp, FONT_NP } from '../class1-math-kit/nepali';
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'लम्बाइ ५.२५ फिट र चौडाइ ३.५ फिट भएको टेबलको परिमिति (Perimeter) कति हुन्छ?',
+    np: 'लम्बाइ 5.25 ft र चौडाइ 3.5 ft भएको टेबलको परिमिति (Perimeter) कति हुन्छ?',
     en: 'What is the perimeter of a table with length 5.25 ft and breadth 3.5 ft?',
     options: [
-      { key: 'A', label: '१७.५ फिट [२ × (५.२५ + ३.५)]' },
-      { key: 'B', label: '१८.३७५ फिट' },
-      { key: 'C', label: '८.७५ फिट' },
-      { key: 'D', label: '३५ फिट' },
+      { key: 'A', label: '17.5 ft [2 × (5.25 + 3.5)]' },
+      { key: 'B', label: '18.375 ft' },
+      { key: 'C', label: '8.75 ft' },
+      { key: 'D', label: '35 ft' },
     ],
     answer: 'A',
   },
   {
-    np: 'एउटा वर्गाकार टेबलको परिमिति २४.४ फिट छ भने त्यसको एक भुजाको लम्बाइ कति हुन्छ?',
+    np: 'एउटा वर्गाकार टेबलको परिमिति 24.4 ft छ भने त्यसको एक भुजाको लम्बाइ कति हुन्छ?',
     en: 'If the perimeter of a square table is 24.4 ft, what is the length of one side?',
     options: [
-      { key: 'A', label: '६.१ फिट (२४.४ ÷ ४ = ६.१)' },
-      { key: 'B', label: '१२.२ फिट' },
-      { key: 'C', label: '४.८ फिट' },
-      { key: 'D', label: '६.२ फिट' },
+      { key: 'A', label: '6.1 ft (24.4 ÷ 4 = 6.1)' },
+      { key: 'B', label: '12.2 ft' },
+      { key: 'C', label: '4.8 ft' },
+      { key: 'D', label: '6.2 ft' },
     ],
     answer: 'A',
   },
   {
-    np: 'आयताकार खेतको क्षेत्रफल २१५.६६ वर्ग मि. र लम्बाइ ६७.३५ मि. भए चौडाइ कति हुन्छ?',
+    np: 'आयताकार खेतको क्षेत्रफल 215.66 वर्ग मि. र लम्बाइ 67.35 मि. भए चौडाइ कति हुन्छ?',
     en: 'If a rectangular field has area 215.66 sq. m and length 67.35 m, what is the breadth?',
     options: [
-      { key: 'A', label: '३.२ मिटर (२१५.६६ ÷ ६७.३५ = ३.२)' },
-      { key: 'B', label: '२.८ मिटर' },
-      { key: 'C', label: '४.५ मिटर' },
-      { key: 'D', label: '५.१ मिटर' },
+      { key: 'A', label: '3.2 m (215.66 ÷ 67.35 = 3.2)' },
+      { key: 'B', label: '2.8 m' },
+      { key: 'C', label: '4.5 m' },
+      { key: 'D', label: '5.1 m' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'मुद्रा सटहीमा खरिद दर (Buying Rate) भन्दा बिक्री दर (Selling Rate) सधैं के हुन्छ?',
     en: 'In currency exchange, how does the Selling Rate compare to the Buying Rate?',
     options: [
-      { key: 'A', label: 'बढी हुन्छ (Higher, बैंकको मुनाफा)' },
-      { key: 'B', label: 'कम हुन्छ' },
-      { key: 'C', label: 'सधैं बराबर हुन्छ' },
-      { key: 'D', label: 'कुनै सम्बन्ध छैन' },
+      { key: 'A', label: 'Higher (the bank’s profit)' },
+      { key: 'B', label: 'Lower' },
+      { key: 'C', label: 'Always equal' },
+      { key: 'D', label: 'No relation' },
     ],
     answer: 'A',
   },
@@ -179,30 +179,16 @@ export const DecimalMeasurementGeometryLab: React.FC<{ onBackToLibrary?: () => v
           </button>
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#99F6E4' }}>
-              {L('कक्षा ७ • गणित • अध्याय ५: भिन्न र दशमलव', 'Class 7 • Math • Chapter 5: Fraction & Decimal')}
+              {L('कक्षा 7 • गणित • अध्याय 5: भिन्न र दशमलव', 'Class 7 • Math • Chapter 5: Fraction & Decimal')}
             </div>
             <h1 style={{ margin: 0, fontSize: 18, fontWeight: 900 }}>
-              {isNe ? 'दशमलव नाप र ज्यामिति प्रयोगशाला (२D + ३D)' : 'Decimal Measurement & Geometry Lab (2D + 3D)'}
+              {isNe ? 'दशमलव नाप र ज्यामिति प्रयोगशाला (2D + 3D)' : 'Decimal Measurement & Geometry Lab (2D + 3D)'}
             </h1>
           </div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button
-            onClick={() => kit.setLang(isNe ? 'en' : 'ne')}
-            style={{
-              padding: '6px 12px',
-              borderRadius: 8,
-              border: '1px solid rgba(255,255,255,0.3)',
-              background: 'rgba(255,255,255,0.12)',
-              color: '#FFFFFF',
-              fontWeight: 800,
-              fontSize: 12,
-              cursor: 'pointer',
-            }}
-          >
-            {isNe ? 'English' : 'नेपाली'}
-          </button>
+          
         </div>
       </header>
 
@@ -211,11 +197,11 @@ export const DecimalMeasurementGeometryLab: React.FC<{ onBackToLibrary?: () => v
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#FFFFFF', padding: 8, borderRadius: 16, border: '1px solid #E2E8F0' }}>
           {[
-            { id: 'table_2d', np: '१. आयताकार टेबल नाप (५.२५ × ३.५ फिट)', en: '1. Rectangular Table' },
-            { id: 'garden_3d', np: '२. ३D आयताकार बगैँचा दृश्य', en: '2. 3D Garden View' },
-            { id: 'square_table', np: '३. वर्गाकार टेबल (परिमिति २४.४ फिट)', en: '3. Square Table' },
-            { id: 'field_area', np: '४. खेतको क्षेत्रफलबाट चौडाइ (२१५.६६ m²)', en: '4. Field Area to Breadth' },
-            { id: 'currency', np: '५. विदेशी मुद्रा सटही परियोजना (Currency)', en: '5. Currency Exchange' },
+            { id: 'table_2d', np: '1. आयताकार टेबल नाप (5.25 × 3.5 ft)', en: '1. Rectangular Table' },
+            { id: 'garden_3d', np: '2. 3D आयताकार बगैँचा दृश्य', en: '2. 3D Garden View' },
+            { id: 'square_table', np: '3. वर्गाकार टेबल (परिमिति 24.4 ft)', en: '3. Square Table' },
+            { id: 'field_area', np: '4. खेतको क्षेत्रफलबाट चौडाइ (215.66 m²)', en: '4. Field Area to Breadth' },
+            { id: 'currency', np: '5. विदेशी मुद्रा सटही परियोजना (Currency)', en: '5. Currency Exchange' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -245,10 +231,10 @@ export const DecimalMeasurementGeometryLab: React.FC<{ onBackToLibrary?: () => v
         {activeTab === 'table_2d' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक उदाहरण (पृष्ठ ८५)', 'Textbook Example (Page 85)')}
+              {L('पाठ्यपुस्तक उदाहरण (पृष्ठ 85)', 'Textbook Example (Page 85)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('टेबलको परिमिति हिसाब: P = २(l + b) = २(५.२५ + ३.५) = १७.५ फिट', 'Table Perimeter: P = 2(l + b) = 2(5.25 + 3.5) = 17.5 ft')}
+              {L('टेबलको परिमिति हिसाब: P = 2(l + b) = 2(5.25 + 3.5) = 17.5 ft', 'Table Perimeter: P = 2(l + b) = 2(5.25 + 3.5) = 17.5 ft')}
             </h3>
 
             {/* Visual Table Frame */}
@@ -268,18 +254,18 @@ export const DecimalMeasurementGeometryLab: React.FC<{ onBackToLibrary?: () => v
                 }}
               >
                 <span style={{ fontSize: 13, fontWeight: 800, color: '#92400E' }}>
-                  लम्बाइ (Length) = ५.२५ फिट
+                  Length = 5.25 ft
                 </span>
                 <span style={{ fontSize: 13, fontWeight: 800, color: '#92400E', marginTop: 8 }}>
-                  चौडाइ (Breadth) = ३.५० फिट
+                  Breadth = 3.50 ft
                 </span>
               </div>
             </div>
 
             <div style={{ background: '#DCFCE7', border: '2px solid #16A34A', padding: 18, borderRadius: 14 }}>
               <div style={{ fontSize: 16, fontWeight: 900, color: '#166534' }}>
-                • परिमिति (P) = २ × (५.२५ + ३.५०) = २ × ८.७५ = <strong>१७.५ फिट</strong><br />
-                • क्षेत्रफल (A) = ५.२५ × ३.५० = <strong>१८.३७५ वर्ग फिट</strong>
+                • Perimeter (P) = 2 × (5.25 + 3.50) = 2 × 8.75 = <strong>17.5 ft</strong><br />
+                • Area (A) = 5.25 × 3.50 = <strong>18.375 sq ft</strong>
               </div>
             </div>
           </div>
@@ -289,7 +275,7 @@ export const DecimalMeasurementGeometryLab: React.FC<{ onBackToLibrary?: () => v
         {activeTab === 'garden_3d' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <h3 style={{ margin: '0 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('३D आयताकार बगैँचा नाप मोडेल (२२.६६ मि. × १५.६५ मि.)', '3D Rectangular Garden Model (22.66 m × 15.65 m)')}
+              {L('3D आयताकार बगैँचा नाप मोडेल (22.66 मि. × 15.65 मि.)', '3D Rectangular Garden Model (22.66 m × 15.65 m)')}
             </h3>
 
             <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid #E2E8F0', position: 'relative' }}>
@@ -298,8 +284,8 @@ export const DecimalMeasurementGeometryLab: React.FC<{ onBackToLibrary?: () => v
 
             <div style={{ marginTop: 16, background: '#F0FDFA', border: '2px solid #99F6E4', padding: 18, borderRadius: 14 }}>
               <div style={{ fontSize: 15, fontWeight: 900, color: '#0F766E' }}>
-                • क्षेत्रफल (Area) = २२.६६ × १५.६५ = <strong>३५४.६२९ वर्ग मिटर</strong><br />
-                • परिमिति (Perimeter) = २ × (२२.६६ + १५.६५) = २ × ३८.३१ = <strong>७६.६२ मिटर</strong>
+                • Area = 22.66 × 15.65 = <strong>354.629 sq m</strong><br />
+                • Perimeter = 2 × (22.66 + 15.65) = 2 × 38.31 = <strong>76.62 m</strong>
               </div>
             </div>
           </div>
@@ -309,19 +295,19 @@ export const DecimalMeasurementGeometryLab: React.FC<{ onBackToLibrary?: () => v
         {activeTab === 'square_table' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#FEF3C7', color: '#B45309', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक समस्या (पृष्ठ ८६)', 'Textbook Problem (Page 86)')}
+              {L('पाठ्यपुस्तक समस्या (पृष्ठ 86)', 'Textbook Problem (Page 86)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('वर्गाकार टेबलको परिमिति २४.४ फिट भए एक भुजाको लम्बाइ निकाल्ने', 'Square Table: Perimeter 24.4 ft ⟹ Side Length')}
+              {L('वर्गाकार टेबलको परिमिति 24.4 ft भए एक भुजाको लम्बाइ निकाल्ने', 'Square Table: Perimeter 24.4 ft ⟹ Side Length')}
             </h3>
 
             <div style={{ background: '#F8FAFC', padding: 20, borderRadius: 16, border: '1px solid #E2E8F0' }}>
               <div style={{ fontSize: 15, color: '#1E293B', lineHeight: 1.8 }}>
-                <div>• वर्गाकार टेबलमा चारवटै भुजा बराबर हुन्छन् (P = ४ × l)</div>
-                <div>• २४.४ = ४ × l</div>
-                <div>• l = २४.४ ÷ ४</div>
+                <div>• All four sides of a square table are equal (P = 4 × l)</div>
+                <div>• 24.4 = 4 × l</div>
+                <div>• l = 24.4 ÷ 4</div>
                 <div style={{ fontSize: 22, fontWeight: 900, color: '#0F766E', marginTop: 8 }}>
-                  l = <strong>६.१ फिट</strong>
+                  l = <strong>6.1 ft</strong>
                 </div>
               </div>
             </div>
@@ -332,19 +318,19 @@ export const DecimalMeasurementGeometryLab: React.FC<{ onBackToLibrary?: () => v
         {activeTab === 'field_area' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक समस्या: खेतको क्षेत्रफल (पृष्ठ ८६)', 'Textbook Field Problem (Page 86)')}
+              {L('पाठ्यपुस्तक समस्या: खेतको क्षेत्रफल (पृष्ठ 86)', 'Textbook Field Problem (Page 86)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
-              {L('खेतको क्षेत्रफल २१५.६६ m² र लम्बाइ ६७.३५ m भए चौडाइ निकाल्ने', 'Field: Area 215.66 m² and Length 67.35 m ⟹ Breadth')}
+              {L('खेतको क्षेत्रफल 215.66 m² र लम्बाइ 67.35 m भए चौडाइ निकाल्ने', 'Field: Area 215.66 m² and Length 67.35 m ⟹ Breadth')}
             </h3>
 
             <div style={{ background: '#F0FDFA', border: '2px solid #99F6E4', padding: 20, borderRadius: 16 }}>
               <div style={{ fontSize: 15, color: '#134E4A', lineHeight: 2 }}>
-                <div>• चौडाइ (Breadth) = क्षेत्रफल ÷ लम्बाइ (Area ÷ Length)</div>
-                <div>• b = २१५.६६ ÷ ६७.३५</div>
-                <div>• दशमलव बिन्दु हटाउन १०० ले गुणन गर्दा: २१५६६ ÷ ६७३५</div>
+                <div>• Breadth = Area ÷ Length</div>
+                <div>• b = 215.66 ÷ 67.35</div>
+                <div>• Multiply by 100 to remove the decimal point: 21566 ÷ 6735</div>
                 <div style={{ fontSize: 24, fontWeight: 900, color: '#0F766E', marginTop: 8 }}>
-                  b = <strong>३.२ मिटर</strong>
+                  b = <strong>3.2 m</strong>
                 </div>
               </div>
             </div>
@@ -355,7 +341,7 @@ export const DecimalMeasurementGeometryLab: React.FC<{ onBackToLibrary?: () => v
         {activeTab === 'currency' && (
           <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 20, border: '1px solid #E2E8F0' }}>
             <span style={{ fontSize: 11, fontWeight: 800, background: '#FEF3C7', color: '#B45309', padding: '3px 8px', borderRadius: 6 }}>
-              {L('पाठ्यपुस्तक परियोजना कार्य (पृष्ठ ८६)', 'Textbook Project Work (Page 86)')}
+              {L('पाठ्यपुस्तक परियोजना कार्य (पृष्ठ 86)', 'Textbook Project Work (Page 86)')}
             </span>
             <h3 style={{ margin: '6px 0 16px', fontSize: 18, fontWeight: 900, color: '#0F172A' }}>
               {L('विदेशी मुद्रा सटही दर (खरिद दर, बिक्री दर र अन्तर हिसाब)', 'Foreign Currency Exchange Rates: Buying vs Selling Rates')}
@@ -365,28 +351,28 @@ export const DecimalMeasurementGeometryLab: React.FC<{ onBackToLibrary?: () => v
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
                 <thead>
                   <tr style={{ background: '#F1F5F9', borderBottom: '2px solid #CBD5E1' }}>
-                    <th style={{ padding: '10px 14px' }}>मुद्रा (Currency)</th>
-                    <th style={{ padding: '10px 14px' }}>एकाइ (Unit)</th>
-                    <th style={{ padding: '10px 14px' }}>खरिद दर (Buying)</th>
-                    <th style={{ padding: '10px 14px' }}>बिक्री दर (Selling)</th>
-                    <th style={{ padding: '10px 14px' }}>अन्तर (Difference)</th>
+                    <th style={{ padding: '10px 14px' }}>Currency</th>
+                    <th style={{ padding: '10px 14px' }}>Unit</th>
+                    <th style={{ padding: '10px 14px' }}>Buying rate</th>
+                    <th style={{ padding: '10px 14px' }}>Selling rate</th>
+                    <th style={{ padding: '10px 14px' }}>Difference</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    { curr: 'अमेरिकी डलर (USD)', unit: '१', buy: 132.50, sell: 133.10 },
-                    { curr: 'युरोपियन युरो (EUR)', unit: '१', buy: 142.20, sell: 142.85 },
-                    { curr: 'युके पाउन्ड (GBP)', unit: '१', buy: 167.40, sell: 168.15 },
-                    { curr: 'अष्ट्रेलियन डलर (AUD)', unit: '१', buy: 86.30, sell: 86.70 },
-                    { curr: 'जापानी येन (JPY)', unit: '१०', buy: 8.90, sell: 8.95 },
+                    { curr: 'US dollar (USD)', unit: '1', buy: 132.50, sell: 133.10 },
+                    { curr: 'Euro (EUR)', unit: '1', buy: 142.20, sell: 142.85 },
+                    { curr: 'UK pound (GBP)', unit: '1', buy: 167.40, sell: 168.15 },
+                    { curr: 'Australian dollar (AUD)', unit: '1', buy: 86.30, sell: 86.70 },
+                    { curr: 'Japanese yen (JPY)', unit: '10', buy: 8.90, sell: 8.95 },
                   ].map((row, idx) => (
                     <tr key={idx} style={{ borderBottom: '1px solid #E2E8F0' }}>
                       <td style={{ padding: '10px 14px', fontWeight: 800 }}>{row.curr}</td>
                       <td style={{ padding: '10px 14px' }}>{row.unit}</td>
-                      <td style={{ padding: '10px 14px', color: '#166534', fontWeight: 700 }}>रु. {row.buy.toFixed(2)}</td>
-                      <td style={{ padding: '10px 14px', color: '#DC2626', fontWeight: 700 }}>रु. {row.sell.toFixed(2)}</td>
+                      <td style={{ padding: '10px 14px', color: '#166534', fontWeight: 700 }}>Rs. {row.buy.toFixed(2)}</td>
+                      <td style={{ padding: '10px 14px', color: '#DC2626', fontWeight: 700 }}>Rs. {row.sell.toFixed(2)}</td>
                       <td style={{ padding: '10px 14px', fontWeight: 900, color: '#0F766E' }}>
-                        रु. {(row.sell - row.buy).toFixed(2)}
+                        Rs. {(row.sell - row.buy).toFixed(2)}
                       </td>
                     </tr>
                   ))}

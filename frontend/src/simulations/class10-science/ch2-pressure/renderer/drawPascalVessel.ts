@@ -1,6 +1,6 @@
 /**
  * drawPascalVessel.ts
- * Dedicated HTML5 Canvas Rendering Engine for Pascal's Law Laboratory (पास्कलको नियम)
+ * Dedicated HTML5 Canvas Rendering Engine for Pascal's Law Laboratory
  * Grade 10 Science & Technology • Pressure
  * Nepal CDC Aligned
  *
@@ -936,7 +936,7 @@ export function drawHydraulicBrakes(
   ctx.fillStyle = wheelRpm === 0 && pedalPct > 0 ? '#16a34a' : '#0284c7';
   ctx.font = 'bold 12px sans-serif';
   ctx.fillText(
-    wheelRpm === 0 ? 'STATUS: LOCKED (रोकियो)' : 'STATUS: SPINNING (घूमिरहेको)',
+    wheelRpm === 0 ? 'STATUS: LOCKED' : 'STATUS: SPINNING',
     wheelCenterX,
     wheelCenterY + drumRadius + 70
   );

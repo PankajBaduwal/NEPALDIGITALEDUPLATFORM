@@ -1,7 +1,7 @@
 /**
  * ForceMotionPlaygroundSim.tsx
- * Simulation 14: 2D Force & Motion Playground (बल र गतिको संसार)
- * Grade 6 Science • Unit 6: Force and Motion (बल र गति)
+ * Simulation 14: 2D Force & Motion Playground
+ * Grade 6 Science • Unit 6: Force and Motion
  *
  * 100% Native HTML5 Canvas 2D Interactive Vector Mechanics.
  * Features:
@@ -24,7 +24,7 @@ export const ForceMotionPlaygroundSim: React.FC<BaseSimulationProps> = ({
   onBackToLibrary,
   initialLanguage = 'en',
 }) => {
-  const [lang, setLang] = useState<Language>(initialLanguage);
+  const [lang, setLang] = useState<Language>('en');
   const [stage, setStage] = useState<SimulationStage>('discover');
   const [stars, setStars] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -358,7 +358,7 @@ export const ForceMotionPlaygroundSim: React.FC<BaseSimulationProps> = ({
       titleNepali="बल, घर्षण र गति प्रयोगशाला"
       chapterNumber={6}
       chapterTitle="Unit 6: Force and Motion"
-      chapterTitleNepali="एकाइ ६: बल र गति"
+      chapterTitleNepali="एकाइ 6: बल र गति"
       currentStage={stage}
       onStageChange={(s) => {
         setStage(s);
@@ -515,7 +515,7 @@ export const ForceMotionPlaygroundSim: React.FC<BaseSimulationProps> = ({
           {/* Surface Material Selection */}
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
-              {lang === 'ne' ? '१. सतह चयन (Surface Friction)' : '1. Track Surface'}
+              {lang === 'ne' ? '1. सतह चयन (Surface Friction)' : '1. Track Surface'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
               {(['ice', 'wood', 'carpet'] as const).map((s) => (

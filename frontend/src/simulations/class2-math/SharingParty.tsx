@@ -1,5 +1,5 @@
 /**
- * Lesson 17 · Division (भाग)
+ * Lesson 17 · Division
  * Sharing Party — share sweets equally among friends: 12 ÷ 3 = 4.
  * Pure 2D Implementation for Smart Boards & Desktops.
  */

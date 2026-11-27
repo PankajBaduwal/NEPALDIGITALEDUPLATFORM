@@ -12,7 +12,7 @@ const rad = (d: number) => (d * Math.PI) / 180;
 /* ───────────── parallel lines and a transversal ───────────── */
 const PAIRS = [
   { np: 'संगत कोण', en: 'Corresponding', note: ['बराबर', 'equal'] }, { np: 'एकान्तर कोण', en: 'Alternate interior', note: ['बराबर', 'equal'] },
-  { np: 'सहभित्री कोण', en: 'Co-interior', note: ['योगफल १८०°', 'sum is 180°'] }, { np: 'शीर्षाभिमुख कोण', en: 'Vertically opposite', note: ['बराबर', 'equal'] }, { np: 'रेखीय जोडा', en: 'Linear pair', note: ['योगफल १८०°', 'sum is 180°'] },
+  { np: 'सहभित्री कोण', en: 'Co-interior', note: ['योगफल 180°', 'sum is 180°'] }, { np: 'शीर्षाभिमुख कोण', en: 'Vertically opposite', note: ['बराबर', 'equal'] }, { np: 'रेखीय जोडा', en: 'Linear pair', note: ['योगफल 180°', 'sum is 180°'] },
 ];
 // the two highlighted arcs for each pair: [line (0 top,1 bottom), quadrant 0..3]
 const HI: [number, number][][] = [[[0, 0], [1, 0]], [[0, 2], [1, 0]], [[0, 3], [1, 0]], [[0, 0], [0, 2]], [[0, 0], [0, 1]]];
@@ -42,8 +42,8 @@ export const transversalCfg: LabCfg = {
     if (i === 2) return numChoice(`सहभित्री कोण ${th}° भए अर्को कोण कति?`, `Co-interior angles: one is ${th}°. The other is…`, 180 - th, i, [10, -10, th, 90, 20], 1, '°', { th, pr: 2 });
     if (i === 3) return numChoice(`शीर्षाभिमुख कोण ${th}° भए त्यसको सम्मुखको कोण कति?`, `Vertically opposite angle of ${th}° is…`, th, i, [10, -10, 180 - th, 90, 20], 1, '°', { th, pr: 3 });
     if (i === 4) return numChoice(`रेखीय जोडाको एक कोण ${th}° भए अर्को कति?`, `One angle of a linear pair is ${th}°. The other is…`, 180 - th, i, [10, -10, th, 90, 20], 1, '°', { th, pr: 4 });
-    if (i === 5) return choice('समानान्तर रेखामा दुईवटा भित्री कोण एकैतर्फ भए ती…', 'Two interior angles on the same side of the transversal are…', 'सहभित्री (योगफल १८०°) | co-interior (sum 180°)', ['एकान्तर | alternate', 'संगत | corresponding'], i, { th, pr: 2 });
-    return choice('कुन जोडा सधैँ बराबर हुन्छ?', 'Which pair is always equal?', 'शीर्षाभिमुख कोण | vertically opposite', ['रेखीय जोडा | linear pair', 'सहभित्री | co-interior'], i, set);
+    if (i === 5) return choice('समानान्तर रेखामा दुईवटा भित्री कोण एकैतर्फ भए ती…', 'Two interior angles on the same side of the transversal are…', 'co-interior (sum 180°)', ['alternate', 'corresponding'], i, { th, pr: 2 });
+    return choice('कुन जोडा सधैँ बराबर हुन्छ?', 'Which pair is always equal?', 'vertically opposite', ['linear pair', 'co-interior'], i, set);
   },
 };
 export const TransversalLab6 = makeLab(transversalCfg);
@@ -62,25 +62,25 @@ export const triangleCfg: LabCfg = {
     const kind = c === 90 || p.a === 90 || p.b === 90 ? 0 : Math.max(p.a, p.b, c) > 90 ? 1 : 2; const eq = [p.a === p.b, p.a === c, p.b === c].filter(Boolean).length;
     tag(g, `${[lang === 'ne' ? 'समकोणी' : 'Right', lang === 'ne' ? 'अधिककोणी' : 'Obtuse', lang === 'ne' ? 'न्यूनकोणी' : 'Acute'][kind]} · ${eq === 3 ? (lang === 'ne' ? 'समबाहु' : 'Equilateral') : eq === 1 ? (lang === 'ne' ? 'समद्विबाहु' : 'Isosceles') : lang === 'ne' ? 'विषमबाहु' : 'Scalene'}`, 0, 0.5, 5.2, 5.4, { px: 52, w: 640, h: 96, bg: '#fff', border: '#f59e0b' });
   },
-  info: (p) => { const c = 180 - p.a - p.b; return bi(`∠A + ∠B + ∠C = ${p.a}° + ${p.b}° + ${c}° = १८०°\nतेस्रो कोण = १८० − (${p.a} + ${p.b}) = ${c}°`, `∠A + ∠B + ∠C = ${p.a}° + ${p.b}° + ${c}° = 180°\nThird angle = 180 − (${p.a} + ${p.b}) = ${c}°`); },
+  info: (p) => { const c = 180 - p.a - p.b; return bi(`∠A + ∠B + ∠C = ${p.a}° + ${p.b}° + ${c}° = 180°\nतेस्रो कोण = 180 − (${p.a} + ${p.b}) = ${c}°`, `∠A + ∠B + ∠C = ${p.a}° + ${p.b}° + ${c}° = 180°\nThird angle = 180 − (${p.a} + ${p.b}) = ${c}°`); },
   tip: bi('दुई कोण बदल्दा तेस्रो कोण र त्रिभुजको प्रकार कसरी बदलिन्छ हेरौँ', 'Change two angles; the third angle and the kind of triangle follow'),
   goal: () => { const kinds = [[60, 60], [90, 45], [50, 50], [100, 40], [30, 60]]; const k = kinds[rnd(0, 4)]; return { p: { a: k[0], b: k[1] }, np: `कोण ${k[0]}° र ${k[1]}° भएको त्रिभुज बनाऔँ (तेस्रो ${180 - k[0] - k[1]}°)`, en: `Make a triangle with angles ${k[0]}° and ${k[1]}° (third is ${180 - k[0] - k[1]}°)`, start: { a: 30, b: 30 } }; },
   quiz: (i) => {
     const a = 5 * rnd(6, 18), b = 5 * rnd(4, 14); const c = 180 - a - b; if (c <= 0) return numChoice('त्रिभुजका तीन कोणको योगफल कति?', 'The three angles of a triangle add up to…', 180, i, [90, 360, 100, 120], 1, '°');
     if (i < 3) return numChoice(`त्रिभुजका दुई कोण ${a}° र ${b}° भए तेस्रो कोण कति?`, `Two angles of a triangle are ${a}° and ${b}°. The third is…`, c, i, [10, -10, 5, 180 - a, 20], 1, '°', { a, b });
-    if (i === 3) return choice('एउटा कोण ९०° भएको त्रिभुजलाई के भनिन्छ?', 'A triangle with one angle of 90° is…', 'समकोणी | right-angled', ['न्यूनकोणी | acute', 'अधिककोणी | obtuse'], i, { a: 90, b: 45 });
-    if (i === 4) return choice('तीनवटै भुजा बराबर भएको त्रिभुज?', 'A triangle with all three sides equal is…', 'समबाहु | equilateral', ['समद्विबाहु | isosceles', 'विषमबाहु | scalene'], i, { a: 60, b: 60 });
+    if (i === 3) return choice('एउटा कोण 90° भएको त्रिभुजलाई के भनिन्छ?', 'A triangle with one angle of 90° is…', 'right-angled', ['acute', 'obtuse'], i, { a: 90, b: 45 });
+    if (i === 4) return choice('तीनवटै भुजा बराबर भएको त्रिभुज?', 'A triangle with all three sides equal is…', 'equilateral', ['isosceles', 'scalene'], i, { a: 60, b: 60 });
     if (i === 5) return numChoice('समबाहु त्रिभुजको प्रत्येक कोण कति?', 'Each angle of an equilateral triangle is…', 60, i, [30, 90, 45, 120], 1, '°', { a: 60, b: 60 });
     if (i === 6) return numChoice(`समद्विबाहु त्रिभुजको शीर्षकोण ${a}° भए आधार कोण कति?`, `The apex of an isosceles triangle is ${a}°. Each base angle is…`, (180 - a) / 2, i, [5, -5, 10, 20, a], 1, '°');
-    return choice('अधिककोणी त्रिभुजमा कतिवटा अधिक कोण हुन्छन्?', 'How many obtuse angles can a triangle have?', '1', ['2', '3', '0 मात्र | only 0'], i, { a: 100, b: 40 });
+    return choice('अधिककोणी त्रिभुजमा कतिवटा अधिक कोण हुन्छन्?', 'How many obtuse angles can a triangle have?', '1', ['2', '3', 'only 0'], i, { a: 100, b: 40 });
   },
 };
 export const TriangleLab6 = makeLab(triangleCfg);
 
 /* ───────────── quadrilaterals ───────────── */
 const QUADS: { np: string; en: string; pts: [number, number][]; props: [string, string][] }[] = [
-  { np: 'वर्ग', en: 'Square', pts: [[-2.2, -2.2], [2.2, -2.2], [2.2, 2.2], [-2.2, 2.2]], props: [['चारै भुजा बराबर, चारै कोण ९०°', 'All sides equal, all angles 90°'], ['विकर्ण बराबर र समकोणमा काट्छन्', 'Diagonals are equal and cross at 90°']] },
-  { np: 'आयत', en: 'Rectangle', pts: [[-3.2, -1.8], [3.2, -1.8], [3.2, 1.8], [-3.2, 1.8]], props: [['सम्मुख भुजा बराबर, चारै कोण ९०°', 'Opposite sides equal, all angles 90°'], ['विकर्ण बराबर हुन्छन्', 'Diagonals are equal']] },
+  { np: 'वर्ग', en: 'Square', pts: [[-2.2, -2.2], [2.2, -2.2], [2.2, 2.2], [-2.2, 2.2]], props: [['चारै भुजा बराबर, चारै कोण 90°', 'All sides equal, all angles 90°'], ['विकर्ण बराबर र समकोणमा काट्छन्', 'Diagonals are equal and cross at 90°']] },
+  { np: 'आयत', en: 'Rectangle', pts: [[-3.2, -1.8], [3.2, -1.8], [3.2, 1.8], [-3.2, 1.8]], props: [['सम्मुख भुजा बराबर, चारै कोण 90°', 'Opposite sides equal, all angles 90°'], ['विकर्ण बराबर हुन्छन्', 'Diagonals are equal']] },
   { np: 'समानान्तर चतुर्भुज', en: 'Parallelogram', pts: [[-3.4, -1.8], [1.8, -1.8], [3.4, 1.8], [-1.8, 1.8]], props: [['सम्मुख भुजा समानान्तर र बराबर', 'Opposite sides parallel and equal'], ['सम्मुख कोण बराबर; विकर्णले एकअर्कालाई आधा गर्छन्', 'Opposite angles equal; diagonals bisect each other']] },
   { np: 'समचतुर्भुज', en: 'Rhombus', pts: [[0, -2.8], [2.6, 0], [0, 2.8], [-2.6, 0]], props: [['चारै भुजा बराबर', 'All four sides equal'], ['विकर्ण समकोणमा आधा गरी काट्छन्', 'Diagonals bisect each other at 90°']] },
   { np: 'समलम्ब चतुर्भुज', en: 'Trapezium', pts: [[-3.2, -1.8], [3.2, -1.8], [1.8, 1.8], [-1.8, 1.8]], props: [['एक जोडा भुजा समानान्तर', 'One pair of parallel sides'], ['अरू दुई भुजा समानान्तर हुँदैनन्', 'The other two sides are not parallel']] },
@@ -99,13 +99,13 @@ export const quadCfg: LabCfg = {
   tip: bi('आकृति छानेर भुजा, कोण र विकर्णका गुण पढौँ', 'Pick a shape and read its sides, angles and diagonals'),
   goal: () => { const s = rnd(0, QUADS.length - 1); return { p: { s }, np: `यो गुण भएको आकृति देखाऔँ: ${QUADS[s].props[0][0]}`, en: `Show the shape: ${QUADS[s].props[0][1]}`, start: { s: (s + 1) % QUADS.length } }; },
   quiz: (i) => {
-    const s = rnd(0, QUADS.length - 1); const q = QUADS[s]; const names = QUADS.map((x) => `${x.np} | ${x.en}`);
-    if (i < 3) return choice(`${q.props[0][0]} — कुन आकृति हो?`, `${q.props[0][1]} — which shape?`, `${q.np} | ${q.en}`, names.filter((_x, k) => k !== s), i, { s });
+    const s = rnd(0, QUADS.length - 1); const q = QUADS[s]; const names = QUADS.map((x) => `${x.en}`);
+    if (i < 3) return choice(`${q.props[0][0]} — कुन आकृति हो?`, `${q.props[0][1]} — which shape?`, `${q.en}`, names.filter((_x, k) => k !== s), i, { s });
     if (i === 3) return numChoice('चतुर्भुजका चार कोणको योगफल कति?', 'The four angles of a quadrilateral add up to…', 360, i, [180, 90, 270, 720], 1, '°');
-    if (i === 4) return choice('कुन चतुर्भुजका चारै भुजा बराबर र कोण ९०° हुन्छन्?', 'Which quadrilateral has equal sides and four right angles?', 'वर्ग | Square', ['आयत | Rectangle', 'समचतुर्भुज | Rhombus', 'समलम्ब | Trapezium'], i, { s: 0 });
-    if (i === 5) return choice('कुन चतुर्भुजमा एक जोडा मात्र समानान्तर भुजा हुन्छ?', 'Which quadrilateral has exactly one pair of parallel sides?', 'समलम्ब | Trapezium', ['आयत | Rectangle', 'वर्ग | Square', 'समचतुर्भुज | Rhombus'], i, { s: 4 });
-    if (i === 6) return numChoice('चतुर्भुजमा ३ कोण ९०°, ८०° र १००° भए चौथो कोण कति?', 'Three angles of a quadrilateral are 90°, 80° and 100°. The fourth is…', 90, i, [10, -10, 80, 100, 20], 1, '°');
-    return choice('आयत र वर्ग बीच के फरक छ?', 'How is a square different from a rectangle?', 'वर्गमा चारै भुजा बराबर | a square has four equal sides', ['वर्गमा कोण ९० होइन | angles are not 90°', 'वर्गका विकर्ण छैनन् | no diagonals'], i, { s: 0 });
+    if (i === 4) return choice('कुन चतुर्भुजका चारै भुजा बराबर र कोण 90° हुन्छन्?', 'Which quadrilateral has equal sides and four right angles?', 'Square', ['Rectangle', 'Rhombus', 'Trapezium'], i, { s: 0 });
+    if (i === 5) return choice('कुन चतुर्भुजमा एक जोडा मात्र समानान्तर भुजा हुन्छ?', 'Which quadrilateral has exactly one pair of parallel sides?', 'Trapezium', ['Rectangle', 'Square', 'Rhombus'], i, { s: 4 });
+    if (i === 6) return numChoice('चतुर्भुजमा 3 कोण 90°, 80° र 100° भए चौथो कोण कति?', 'Three angles of a quadrilateral are 90°, 80° and 100°. The fourth is…', 90, i, [10, -10, 80, 100, 20], 1, '°');
+    return choice('आयत र वर्ग बीच के फरक छ?', 'How is a square different from a rectangle?', 'a square has four equal sides', ['angles are not 90°', 'no diagonals'], i, { s: 0 });
   },
 };
 export const QuadLab6 = makeLab(quadCfg);
@@ -131,18 +131,18 @@ export const circleCfg: LabCfg = {
     if (p.pt === 5) box(g, 2 * R * 0.1428, 0.14, 0.4, -R * 1.57 + R + 6 * R - R + R * 0.1428, 0.1, cz + R + 1.6, '#f43f5e', 0.5);
     tag(g, lang === 'ne' ? CPART[p.pt].np : CPART[p.pt].en, 0, 0.5, cz + R + 3.4, 4.4, { px: 56, w: 480, h: 96, bg: '#fff', border: '#ef4444' });
   },
-  info: (p) => bi(`r = ${p.r} · d = 2r = ${2 * p.r} · परिधि = 2πr = ${((2 * 22 * p.r) / 7).toFixed(2)} · क्षेत्रफल = πr² = ${((22 * p.r * p.r) / 7).toFixed(2)} (π = 22/7)\nपरिधि ≈ ३ व्यास र केही बढी`, `r = ${p.r} · d = 2r = ${2 * p.r} · circumference = 2πr = ${((2 * 22 * p.r) / 7).toFixed(2)} · area = πr² = ${((22 * p.r * p.r) / 7).toFixed(2)} (π = 22/7)\nCircumference ≈ 3 diameters and a bit`),
-  tip: bi('वृत्तका भाग छानौँ; परिधि = व्यासको ३ पटकभन्दा अलि बढी', 'Pick a part of the circle; the circumference is a little more than 3 diameters'),
+  info: (p) => bi(`r = ${p.r} · d = 2r = ${2 * p.r} · परिधि = 2πr = ${((2 * 22 * p.r) / 7).toFixed(2)} · क्षेत्रफल = πr² = ${((22 * p.r * p.r) / 7).toFixed(2)} (π = 22/7)\nपरिधि ≈ 3 व्यास र केही बढी`, `r = ${p.r} · d = 2r = ${2 * p.r} · circumference = 2πr = ${((2 * 22 * p.r) / 7).toFixed(2)} · area = πr² = ${((22 * p.r * p.r) / 7).toFixed(2)} (π = 22/7)\nCircumference ≈ 3 diameters and a bit`),
+  tip: bi('वृत्तका भाग छानौँ; परिधि = व्यासको 3 पटकभन्दा अलि बढी', 'Pick a part of the circle; the circumference is a little more than 3 diameters'),
   goal: () => { const pt = rnd(0, 5); return { p: { pt }, np: `${CPART[pt].np} देखाऔँ`, en: `Show the ${CPART[pt].en.toLowerCase()}`, start: { pt: (pt + 1) % 6 } }; },
   quiz: (i) => {
     const r = rnd(2, 9), r7 = 7 * rnd(1, 3);
     if (i === 0) return numChoice(`अर्धव्यास ${r} सेमी भए व्यास कति?`, `The radius is ${r} cm. The diameter is…`, 2 * r, i, [r, 4 * r, 1, -r, 2], 1, '', { r: Math.min(7, r), pt: 1 });
     if (i === 1) return numChoice(`व्यास ${2 * r} सेमी भए अर्धव्यास कति?`, `The diameter is ${2 * r} cm. The radius is…`, r, i, [r, 2 * r, 1, 4 * r, 2], 1, '', { r: Math.min(7, r), pt: 0 });
-    if (i === 2) return numChoice(`अर्धव्यास ${r7} सेमी (π = 22/७) भए परिधि कति?`, `Radius ${r7} cm (π = 22/7). Circumference?`, 44 * (r7 / 7), i, [22, -22, 44, 7, r7], 1, '', { r: 7, pt: 5 });
-    if (i === 3) return numChoice(`व्यास ${r7} सेमी (π = 22/७) भए परिधि कति?`, `Diameter ${r7} cm (π = 22/7). Circumference?`, 22 * (r7 / 7), i, [22, -22, 44, 7, r7], 1, '', { r: 4, pt: 5 });
-    if (i === 4) return choice('वृत्तको केन्द्रबाट परिधिसम्म जोड्ने रेखा?', 'A line from the centre to the circle is…', 'अर्धव्यास | radius', ['जीवा | chord', 'व्यास | diameter', 'चाप | arc'], i, { pt: 0 });
-    if (i === 5) return choice('केन्द्रबाट नजाने दुई बिन्दु जोड्ने रेखा?', 'A line joining two points on the circle but not through the centre is…', 'जीवा | chord', ['व्यास | diameter', 'अर्धव्यास | radius', 'चाप | arc'], i, { pt: 2 });
-    if (i === 6) return choice('सबैभन्दा लामो जीवा?', 'The longest chord of a circle is the…', 'व्यास | diameter', ['अर्धव्यास | radius', 'चाप | arc', 'सेक्टर | sector'], i, { pt: 1 });
+    if (i === 2) return numChoice(`अर्धव्यास ${r7} सेमी (π = 22/7) भए परिधि कति?`, `Radius ${r7} cm (π = 22/7). Circumference?`, 44 * (r7 / 7), i, [22, -22, 44, 7, r7], 1, '', { r: 7, pt: 5 });
+    if (i === 3) return numChoice(`व्यास ${r7} सेमी (π = 22/7) भए परिधि कति?`, `Diameter ${r7} cm (π = 22/7). Circumference?`, 22 * (r7 / 7), i, [22, -22, 44, 7, r7], 1, '', { r: 4, pt: 5 });
+    if (i === 4) return choice('वृत्तको केन्द्रबाट परिधिसम्म जोड्ने रेखा?', 'A line from the centre to the circle is…', 'radius', ['chord', 'diameter', 'arc'], i, { pt: 0 });
+    if (i === 5) return choice('केन्द्रबाट नजाने दुई बिन्दु जोड्ने रेखा?', 'A line joining two points on the circle but not through the centre is…', 'chord', ['diameter', 'radius', 'arc'], i, { pt: 2 });
+    if (i === 6) return choice('सबैभन्दा लामो जीवा?', 'The longest chord of a circle is the…', 'diameter', ['radius', 'arc', 'sector'], i, { pt: 1 });
     return choice('परिधि ÷ व्यास = ?', 'Circumference ÷ diameter = ?', 'π (≈ 22/7)', ['2', '1', '4'], i, { pt: 5 });
   },
 };
@@ -207,7 +207,7 @@ export const symmetryCfg: LabCfg = {
   quiz: (i) => {
     const s = rnd(0, 5); const sh = SYM[s];
     if (i < 3) return numChoice(`${sh.np} मा कति सममिति रेखा हुन्छन्?`, `How many lines of symmetry does a ${sh.en.toLowerCase()} have?`, sh.lines, i, [1, -1, 2, 3, -2], 0, '', { s });
-    if (i === 3) return choice('कुन आकृतिमा अनगिन्ती सममिति रेखा हुन्छन्?', 'Which shape has infinitely many lines of symmetry?', 'वृत्त | circle', ['वर्ग | square', 'आयत | rectangle', 'त्रिभुज | triangle'], i, { s: 6 });
+    if (i === 3) return choice('कुन आकृतिमा अनगिन्ती सममिति रेखा हुन्छन्?', 'Which shape has infinitely many lines of symmetry?', 'circle', ['square', 'rectangle', 'triangle'], i, { s: 6 });
     if (i === 4) return numChoice('नियमित षट्भुजमा कति सममिति रेखा हुन्छन्?', 'How many lines of symmetry has a regular hexagon?', 6, i, [4, 3, 8, 12, 5], 1, '', { s: 5 });
     if (i === 5) return choice('A, B, C, D मध्ये कुन अक्षर ठाडो सममिति भएको हो?', 'Which letter has a vertical line of symmetry?', 'A', ['F', 'G', 'R'], i);
     if (i === 6) return numChoice('आयतमा कति सममिति रेखा हुन्छन्?', 'How many lines of symmetry does a rectangle have?', 2, i, [1, 3, 4, 0], 0, '', { s: 1 });
@@ -236,17 +236,17 @@ export const tessCfg: LabCfg = {
     if (p.s === 5) for (let r = -2; r <= 2; r++) for (let c = -4; c <= 4; c++) disc(g, 1.05, '#fda4af', c * 2.1, 0.05, r * 2.1);
     const t = TES[p.s]; tag(g, `${lang === 'ne' ? t.np : t.en} — ${t.ok ? (lang === 'ne' ? 'खाली ठाउँ बिना भरिन्छ ✓' : 'fills the plane ✓') : lang === 'ne' ? 'खाली ठाउँ बाँकी रहन्छ ✗' : 'leaves gaps ✗'}`, 0, 0.6, -5.9, 7, { px: 50, w: 760, h: 96, bg: '#fff', border: t.ok ? '#22c55e' : '#ef4444' });
   },
-  info: (p) => { const t = TES[p.s]; return bi(t.ang ? `${t.np}: भित्री कोण ${t.ang}° · ३६० ÷ ${t.ang} = ${(360 / t.ang).toFixed(t.ok ? 0 : 2)} ${t.ok ? '(पूर्ण सङ्ख्या ✓)' : '(पूर्ण सङ्ख्या होइन ✗)'}` : 'वृत्त: बीचमा खाली ठाउँ बाँकी रहन्छ', t.ang ? `${t.en}: interior angle ${t.ang}° · 360 ÷ ${t.ang} = ${(360 / t.ang).toFixed(t.ok ? 0 : 2)} ${t.ok ? '(whole number ✓)' : '(not a whole number ✗)'}` : 'Circle: gaps are left between the circles'); },
-  tip: bi('कुन आकृतिले खाली ठाउँ नछाडी सतह भर्छ? ३६० ले भाग जाने कोण हुनुपर्छ', 'Which shapes tile the floor without gaps? The angles at a point must make 360°'),
+  info: (p) => { const t = TES[p.s]; return bi(t.ang ? `${t.np}: भित्री कोण ${t.ang}° · 360 ÷ ${t.ang} = ${(360 / t.ang).toFixed(t.ok ? 0 : 2)} ${t.ok ? '' : ''}` : 'वृत्त: बीचमा खाली ठाउँ बाँकी रहन्छ', t.ang ? `${t.en}: interior angle ${t.ang}° · 360 ÷ ${t.ang} = ${(360 / t.ang).toFixed(t.ok ? 0 : 2)} ${t.ok ? '(whole number ✓)' : '(not a whole number ✗)'}` : 'Circle: gaps are left between the circles'); },
+  tip: bi('कुन आकृतिले खाली ठाउँ नछाडी सतह भर्छ? 360 ले भाग जाने कोण हुनुपर्छ', 'Which shapes tile the floor without gaps? The angles at a point must make 360°'),
   goal: () => { const s = [0, 1, 2][rnd(0, 2)]; return { p: { s }, np: `खाली ठाउँ नछाडी भर्ने ${TES[s].np} देखाऔँ`, en: `Show a shape that tiles with no gaps: ${TES[s].en.toLowerCase()}`, start: { s: 3 } }; },
   quiz: (i) => {
     const s = rnd(0, 5); const t = TES[s];
-    if (i < 3) return choice(`${t.np} ले टेस्सेलेसन बनाउँछ?`, `Does a regular ${t.en.toLowerCase()} tessellate?`, t.ok ? 'बनाउँछ | Yes' : 'बनाउँदैन | No', [t.ok ? 'बनाउँदैन | No' : 'बनाउँछ | Yes'], i, { s });
+    if (i < 3) return choice(`${t.np} ले टेस्सेलेसन बनाउँछ?`, `Does a regular ${t.en.toLowerCase()} tessellate?`, t.ok ? 'Yes' : 'No', [t.ok ? 'No' : 'Yes'], i, { s });
     if (i === 3) return numChoice('समबाहु त्रिभुजको भित्री कोण कति?', 'The interior angle of an equilateral triangle is…', 60, i, [30, 90, 120, 45], 1, '°', { s: 0 });
-    if (i === 4) return numChoice('बिन्दुमा ६ वटा समबाहु त्रिभुज जोडिँदा जम्मा कोण कति?', 'Six equilateral triangles meet at a point. The angles add up to…', 360, i, [180, 270, 720, 540], 1, '°', { s: 0 });
-    if (i === 5) return choice('कुन तीन नियमित आकृतिले मात्र टेस्सेलेसन बनाउँछन्?', 'Which three regular shapes tessellate on their own?', 'त्रिभुज, वर्ग, षट्भुज | triangle, square, hexagon', ['वर्ग, पञ्चभुज, अष्टभुज | square, pentagon, octagon', 'त्रिभुज, पञ्चभुज, षट्भुज | triangle, pentagon, hexagon'], i);
+    if (i === 4) return numChoice('बिन्दुमा 6 वटा समबाहु त्रिभुज जोडिँदा जम्मा कोण कति?', 'Six equilateral triangles meet at a point. The angles add up to…', 360, i, [180, 270, 720, 540], 1, '°', { s: 0 });
+    if (i === 5) return choice('कुन तीन नियमित आकृतिले मात्र टेस्सेलेसन बनाउँछन्?', 'Which three regular shapes tessellate on their own?', 'triangle, square, hexagon', ['square, pentagon, octagon', 'triangle, pentagon, hexagon'], i);
     if (i === 6) return numChoice('षट्भुजको भित्री कोण कति?', 'The interior angle of a regular hexagon is…', 120, i, [60, 90, 108, 135], 1, '°', { s: 2 });
-    return choice('टेस्सेलेसनमा आकृति बीच के हुनु हुँदैन?', 'In a tessellation there must be no…', 'खाली ठाउँ र ओभरल्याप | gaps or overlaps', ['रङ्ग | colours', 'सममिति | symmetry'], i);
+    return choice('टेस्सेलेसनमा आकृति बीच के हुनु हुँदैन?', 'In a tessellation there must be no…', 'gaps or overlaps', ['colours', 'symmetry'], i);
   },
 };
 export const TessLab6 = makeLab(tessCfg);

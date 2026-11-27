@@ -1,7 +1,7 @@
 /**
  * TallShortAdventure.tsx (Pure 2D Edition)
  * Grade 1 Mathematics • Chapter 1: आकारप्रकार र स्थान (Shapes & Position)
- * 2D Simulation: Tall and Short Adventure (अग्लो र होचो साहसिक यात्रा)
+ * 2D Simulation: Tall and Short Adventure
  * 100% 2D SVG & Canvas – No Three.js/WebGL dependencies.
  */
 import React, { useState, useEffect } from 'react';
@@ -46,7 +46,7 @@ export const TallShortAdventure: React.FC<TallShortAdventureProps> = ({
   onBackToLibrary,
   initialLanguage = 'ne',
 }) => {
-  const [lang, setLang] = useState<'ne' | 'en'>(initialLanguage);
+  const [lang, setLang] = useState<'ne' | 'en'>('en');
   const [muted, setMuted] = useState(false);
   const [mode, setMode] = useState<Mode>('PAIRS');
   const [pairIdx, setPairIdx] = useState(0);
@@ -179,10 +179,10 @@ export const TallShortAdventure: React.FC<TallShortAdventureProps> = ({
           </button>
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#9FCBCD' }}>
-              {L('कक्षा १ • गणित • अध्याय १', 'Class 1 • Mathematics • Chapter 1')}
+              {L('कक्षा 1 • गणित • अध्याय 1', 'Class 1 • Mathematics • Chapter 1')}
             </div>
             <h1 style={{ margin: 0, fontSize: 18, fontWeight: 900 }}>
-              {L('अग्लो र होचो साहसिक यात्रा (Tall and Short Adventure)', 'Tall and Short Adventure (अग्लो र होचो)')}
+              {L('अग्लो र होचो साहसिक यात्रा (Tall and Short Adventure)', 'Tall and Short Adventure')}
             </h1>
           </div>
         </div>
@@ -204,21 +204,7 @@ export const TallShortAdventure: React.FC<TallShortAdventureProps> = ({
             <span>{isNe ? toNp(stars) : stars}</span>
           </div>
 
-          <button
-            onClick={() => setLang(isNe ? 'en' : 'ne')}
-            style={{
-              background: 'rgba(255,255,255,0.2)',
-              color: '#FFFFFF',
-              border: 'none',
-              padding: '8px 14px',
-              borderRadius: 12,
-              fontSize: 13,
-              fontWeight: 800,
-              cursor: 'pointer',
-            }}
-          >
-            {isNe ? 'English' : 'नेपाली'}
-          </button>
+          
 
           <button
             onClick={toggleSound}

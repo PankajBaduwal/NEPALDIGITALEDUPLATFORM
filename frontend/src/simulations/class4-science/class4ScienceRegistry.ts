@@ -1,6 +1,6 @@
 /**
  * class4ScienceRegistry.ts
- * Master Simulation Metadata Registry for Grade 4 Science & Technology (विज्ञान तथा प्रविधि - कक्षा ४)
+ * Master Simulation Metadata Registry for Grade 4 Science & Technology
  * Government of Nepal Curriculum Development Centre (CDC) Alignment
  */
 
@@ -389,7 +389,7 @@ export const GRADE_4_SCIENCE_SIMULATIONS: Grade4SimulationEntry[] = [
     difficulty: 'INTERMEDIATE',
     estimatedMinutes: 15,
     description: 'Controlled experiment comparing plant pots across 20 days with sunlight vs dark box, water vs drought, tracking heights and leaf colors.',
-    descriptionNepali: 'घाम र पानी पाउने, घाम नपाउने र पानी नपाउने ३ गमलाहरूमा २० दिनसम्म बिरुवाको वृद्धि कसरी फरक हुन्छ तुलना गर्नुहोस्।',
+    descriptionNepali: 'घाम र पानी पाउने, घाम नपाउने र पानी नपाउने 3 गमलाहरूमा 20 दिनसम्म बिरुवाको वृद्धि कसरी फरक हुन्छ तुलना गर्नुहोस्।',
     tags: ['plant-growth', 'sunlight', 'water', 'photosynthesis', 'experiment'],
   },
   {
@@ -409,7 +409,7 @@ export const GRADE_4_SCIENCE_SIMULATIONS: Grade4SimulationEntry[] = [
     difficulty: 'BEGINNER',
     estimatedMinutes: 15,
     description: 'Explore the 4 stages of human life: Baby (Infancy), Child (Grade 4), Adult, and Old Age, examining height, teeth, nutrition, and milestones.',
-    descriptionNepali: 'मानव जीवनका ४ चरणहरू: शिशु, बालक, वयस्क र वृद्धावस्थाको उचाइ, दाँत, खानपान र शारीरिक विकासको अध्ययन गर्नुहोस्।',
+    descriptionNepali: 'मानव जीवनका 4 चरणहरू: शिशु, बालक, वयस्क र वृद्धावस्थाको उचाइ, दाँत, खानपान र शारीरिक विकासको अध्ययन गर्नुहोस्।',
     tags: ['human-growth', 'milestones', 'nutrition', 'life-stages'],
   },
   {
@@ -615,7 +615,7 @@ export const GRADE_4_SCIENCE_SIMULATIONS: Grade4SimulationEntry[] = [
     difficulty: 'BEGINNER',
     estimatedMinutes: 15,
     description: 'Interactive rotating 3D globe to explore continents, oceans, latitude lines, day/night cycles, and locate Nepal in South Asia.',
-    descriptionNepali: 'घुम्ने ३डी ग्लोब चलाएर विश्वका ७ महादेश, ५ महासागर र एसियामा हाम्रो देश नेपालको अवस्थिति पत्ता लगाउनुहोस्।',
+    descriptionNepali: 'घुम्ने 3डी ग्लोब चलाएर विश्वका 7 महादेश, 5 महासागर र एसियामा हाम्रो देश नेपालको अवस्थिति पत्ता लगाउनुहोस्।',
     tags: ['earth', 'globe', 'continents', 'oceans', 'nepal', 'space'],
   },
   {

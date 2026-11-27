@@ -56,7 +56,7 @@ const SCENARIOS: Scenario[] = [
       'A rectangular room has given length and breadth. Find the side length of the largest square tile that fits without cutting, and the total tiles required.',
     defaultVal1: 18,
     defaultVal2: 12,
-    unitNp: 'मिटर (m)',
+    unitNp: 'm (m)',
     unitEn: 'meters (m)',
     questionNp: 'सबैभन्दा ठूलो टायलको भुजा (म.स.) कति हुन्छ?',
     questionEn: 'What is the side of the largest square tile (HCF)?',
@@ -68,7 +68,7 @@ const SCENARIOS: Scenario[] = [
         factors1: getPrimeFactors(l),
         factors2: getPrimeFactors(b),
         common: getPrimeFactors(h),
-        extraCalcNp: `कुल टायल संख्या = (लम्बाइ × चौडाइ) ÷ (टायलको क्षेत्रफल) = (${toNp(l)} × ${toNp(b)}) ÷ (${toNp(h)} × ${toNp(h)}) = ${toNp(totalTiles)} वटा`,
+        extraCalcNp: `कुल टायल संख्या = (लम्बाइ × चौडाइ) ÷ (टायलको क्षेत्रफल) = (${toNp(l)} × ${toNp(b)}) ÷ (${toNp(h)} × ${toNp(h)}) = ${toNp(totalTiles)} pcs`,
         extraCalcEn: `Total tiles = (Area of floor) ÷ (Area of 1 tile) = (${l} × ${b}) ÷ (${h} × ${h}) = ${totalTiles} tiles`,
       };
     },
@@ -79,12 +79,12 @@ const SCENARIOS: Scenario[] = [
     titleEn: 'Simultaneous Ringing of School Bells',
     type: 'LCM',
     storyNp:
-      'विद्यालयमा दुईवटा घण्टीहरू निश्चित समयान्तरमा बज्छन्। यदि तिनीहरू बिहान १०:०० बजे एकसाथ बजेका थिए भने, अब कति समयपछि पुनः एकैसाथ बज्नेछन्?',
+      'विद्यालयमा दुईpcs घण्टीहरू निश्चित समयान्तरमा बज्छन्। यदि तिनीहरू बिहान 10:00 बजे एकसाथ बजेका थिए भने, अब कति समयपछि पुनः एकैसाथ बज्नेछन्?',
     storyEn:
       'Two school bells ring at regular intervals. If they rang together at 10:00 AM, after how many minutes will they ring together again?',
     defaultVal1: 12,
     defaultVal2: 18,
-    unitNp: 'मिनेट (mins)',
+    unitNp: 'min (mins)',
     unitEn: 'minutes (mins)',
     questionNp: 'पुनः एकैसाथ बज्न लाग्ने न्यूनतम समय (ल.स.) कति हो?',
     questionEn: 'Minimum time interval to ring together again (LCM)?',
@@ -95,7 +95,7 @@ const SCENARIOS: Scenario[] = [
         factors1: getPrimeFactors(t1),
         factors2: getPrimeFactors(t2),
         common: getPrimeFactors(gcd(t1, t2)),
-        extraCalcNp: `घण्टी १ ले ${toNp(l / t1)} फन्को र घण्टी २ ले ${toNp(l / t2)} फन्को पूरा गर्दा दुवै एकैसाथ बज्नेछन्।`,
+        extraCalcNp: `घण्टी 1 ले ${toNp(l / t1)} फन्को र घण्टी 2 ले ${toNp(l / t2)} फन्को पूरा गर्दा दुवै एकैसाथ बज्नेछन्।`,
         extraCalcEn: `Bell 1 completes ${l / t1} cycles and Bell 2 completes ${l / t2} cycles at the simultaneous ringing moment.`,
       };
     },
@@ -111,7 +111,7 @@ const SCENARIOS: Scenario[] = [
       'Apples and oranges are to be packed into the maximum number of identical gift packs without leaving any fruit behind. How many packets can be made?',
     defaultVal1: 24,
     defaultVal2: 36,
-    unitNp: 'वटा (items)',
+    unitNp: 'pcs (items)',
     unitEn: 'items',
     questionNp: 'बनाउन सकिने अधिकतम प्याकेट संख्या (म.स.) कति हो?',
     questionEn: 'Maximum number of identical gift packs (HCF)?',
@@ -122,7 +122,7 @@ const SCENARIOS: Scenario[] = [
         factors1: getPrimeFactors(v1),
         factors2: getPrimeFactors(v2),
         common: getPrimeFactors(h),
-        extraCalcNp: `प्रत्येक प्याकेटमा: स्याउ = ${toNp(v1 / h)} वटा, सुन्तला = ${toNp(v2 / h)} वटा हुनेछन्।`,
+        extraCalcNp: `प्रत्येक प्याकेटमा: स्याउ = ${toNp(v1 / h)} pcs, सुन्तला = ${toNp(v2 / h)} pcs हुनेछन्।`,
         extraCalcEn: `In each pack: Apples = ${v1 / h}, Oranges = ${v2 / h}.`,
       };
     },
@@ -134,10 +134,10 @@ const QUIZ_QUESTIONS = [
     np: 'कुनै वस्तुलाई टुक्र्याएर अधिकतम ठूलो वा बराबर भाग बनाउन कुन विधि प्रयोग गरिन्छ?',
     en: 'Which method is used when dividing into maximum equal or largest possible pieces?',
     options: [
-      { key: 'A', label: 'महत्तम समापवर्तक (HCF)' },
-      { key: 'B', label: 'लघुत्तम समापवर्त्य (LCM)' },
-      { key: 'C', label: 'साधारण जोड' },
-      { key: 'D', label: 'वर्गमूल' },
+      { key: 'A', label: 'Highest common factor (HCF)' },
+      { key: 'B', label: 'Lowest common multiple (LCM)' },
+      { key: 'C', label: 'Simple addition' },
+      { key: 'D', label: 'Square root' },
     ],
     answer: 'A',
   },
@@ -145,21 +145,21 @@ const QUIZ_QUESTIONS = [
     np: 'विभिन्न समयमा दोहोरिने घटनाहरू एकैसाथ फेरि कहिले हुन्छन् भनी पत्ता लगाउन कुन प्रयोग गरिन्छ?',
     en: 'To find when recurring events at different intervals happen together again, which is used?',
     options: [
-      { key: 'A', label: 'लघुत्तम समापवर्त्य (LCM)' },
-      { key: 'B', label: 'महत्तम समापवर्तक (HCF)' },
-      { key: 'C', label: 'गुणनफल मात्र' },
-      { key: 'D', label: 'अन्तर' },
+      { key: 'A', label: 'Lowest common multiple (LCM)' },
+      { key: 'B', label: 'Highest common factor (HCF)' },
+      { key: 'C', label: 'Product only' },
+      { key: 'D', label: 'Difference' },
     ],
     answer: 'A',
   },
   {
-    np: '१२ सेमी र १८ सेमी नाप भएका दुई डोरीहरूलाई बराबर लम्बाइका सबैभन्दा लामा टुक्रा पार्दा एउटा टुक्राको लम्बाइ कति हुन्छ?',
+    np: '12 cm र 18 cm नाप भएका दुई डोरीहरूलाई बराबर लम्बाइका सबैभन्दा लामा टुक्रा पार्दा एउटा टुक्राको लम्बाइ कति हुन्छ?',
     en: 'What is the length of the longest equal pieces that 12cm and 18cm ropes can be cut into?',
     options: [
-      { key: 'A', label: '६ सेमी (HCF of 12 and 18)' },
-      { key: 'B', label: '३६ सेमी' },
-      { key: 'C', label: '२ सेमी' },
-      { key: 'D', label: '३ सेमी' },
+      { key: 'A', label: '6 cm (HCF of 12 and 18)' },
+      { key: 'B', label: '36 cm' },
+      { key: 'C', label: '2 cm' },
+      { key: 'D', label: '3 cm' },
     ],
     answer: 'A',
   },
@@ -253,8 +253,8 @@ export const HcfLcmRealLifeSolver: React.FC<{
               }}
             >
               {scenario.type === 'HCF'
-                ? L('महत्तम समापवर्तक (HCF) आवश्यक', 'HCF Problem Required')
-                : L('लघुत्तम समापवर्त्य (LCM) आवश्यक', 'LCM Problem Required')}
+                ? L('Highest common factor (HCF) आवश्यक', 'HCF Problem Required')
+                : L('Lowest common multiple (LCM) आवश्यक', 'LCM Problem Required')}
             </span>
             <span style={{ fontSize: 13, color: '#64748B' }}>
               {L('एकाइ:', 'Unit:')} <strong>{L(scenario.unitNp, scenario.unitEn)}</strong>
@@ -346,7 +346,7 @@ export const HcfLcmRealLifeSolver: React.FC<{
             <div style={{ fontFamily: 'monospace', fontSize: 15, color: '#0F766E' }}>
               {result.common.length > 0
                 ? result.common.map((f) => fmt(f)).join(' × ')
-                : L('कुनै छैन (१)', 'None (1)')}
+                : L('कुनै छैन (1)', 'None (1)')}
             </div>
           </div>
 
@@ -407,7 +407,7 @@ export const HcfLcmRealLifeSolver: React.FC<{
           }}
         >
           <div>
-            <strong style={{ color: '#047857' }}>📌 {L('कहिले HCF (म.स.) प्रयोग गर्ने?', 'When to use HCF?')}</strong>
+            <strong style={{ color: '#047857' }}>📌 {L('कहिले HCF प्रयोग गर्ने?', 'When to use HCF?')}</strong>
             <p style={{ margin: '4px 0 0 0' }}>
               {L(
                 'जब वस्तुहरूलाई नटुक्र्याई बराबर अधिकतम भागमा बाँड्नुपर्छ, सबैभन्दा ठूलो नाप वा टायल निकाल्नुपर्छ।',
@@ -416,7 +416,7 @@ export const HcfLcmRealLifeSolver: React.FC<{
             </p>
           </div>
           <div>
-            <strong style={{ color: '#1D4ED8' }}>📌 {L('कहिले LCM (ल.स.) प्रयोग गर्ने?', 'When to use LCM?')}</strong>
+            <strong style={{ color: '#1D4ED8' }}>📌 {L('कहिले LCM प्रयोग गर्ने?', 'When to use LCM?')}</strong>
             <p style={{ margin: '4px 0 0 0' }}>
               {L(
                 'जब भिन्न समयमा दोहोरिने घटनाहरू फेरि न्यूनतम कति समयपछि एकसाथ घट्छन् भनी निकाल्नुपर्छ।',

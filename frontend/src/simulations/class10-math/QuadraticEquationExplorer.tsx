@@ -71,53 +71,53 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
   const wordProblemsList = [
     {
       titleEn: '1. Area of a Garden (Rectangle)',
-      titleNp: '१. बगैँचाको क्षेत्रफल (आयाताकार)',
+      titleNp: '1. बगैँचाको क्षेत्रफल (आयाताकार)',
       descEn:
         'The length of a rectangular garden is 4 meters more than its breadth. If the total area of the garden is 96 square meters, find its length and breadth.',
       descNp:
-        'एउटा आयाताकार बगैँचाको लम्बाइ यसको चौडाइ भन्दा ४ मिटर बढी छ। यदि बगैँचाको क्षेत्रफल ९६ वर्ग मिटर भए, लम्बाइ र चौडाइ पत्ता लगाउनुहोस्।',
+        'एउटा आयाताकार बगैँचाको लम्बाइ यसको चौडाइ भन्दा 4 m बढी छ। यदि बगैँचाको क्षेत्रफल 96 sq m भए, लम्बाइ र चौडाइ पत्ता लगाउनुहोस्।',
       letStatementEn: 'Let breadth = x meters. Then length = (x + 4) meters.',
-      letStatementNp: 'मानौँ, चौडाइ = x मिटर। त्यसो भए लम्बाइ = (x + ४) मिटर।',
+      letStatementNp: 'मानौँ, चौडाइ = x m। त्यसो भए लम्बाइ = (x + 4) m।',
       eqFormation: 'x(x + 4) = 96  ⟹  x² + 4x - 96 = 0',
       factoring: '(x + 12)(x - 8) = 0',
       solutionsEn: 'x = 8 or x = -12',
-      solutionsNp: 'x = ८ अथवा x = -१२',
+      solutionsNp: 'x = 8 अथवा x = -12',
       validReasonEn: 'Breadth cannot be negative (x > 0). Therefore, Breadth = 8 m, Length = 8 + 4 = 12 m.',
-      validReasonNp: 'चौडाइ ऋणात्मक हुन सक्दैन (x > ०)। अतः चौडाइ = ८ मिटर, लम्बाइ = ८ + ४ = १२ मिटर।',
+      validReasonNp: 'चौडाइ ऋणात्मक हुन सक्दैन (x > 0)। अतः चौडाइ = 8 m, लम्बाइ = 8 + 4 = 12 m।',
       b: 8,
       l: 12,
     },
     {
       titleEn: '2. Consecutive Natural Numbers Product',
-      titleNp: '२. लगातार दुई प्राकृतिक संख्याको गुणनफल',
+      titleNp: '2. लगातार दुई प्राकृतिक संख्याको गुणनफल',
       descEn: 'The product of two consecutive positive integers is 72. Find the two numbers.',
-      descNp: 'लगातार दुई धनात्मक प्राकृतिक संख्याहरूको गुणनफल ७२ छ भने ती संख्याहरू पत्ता लगाउनुहोस्।',
+      descNp: 'लगातार दुई धनात्मक प्राकृतिक संख्याहरूको गुणनफल 72 छ भने ती संख्याहरू पत्ता लगाउनुहोस्।',
       letStatementEn: 'Let the numbers be x and (x + 1).',
-      letStatementNp: 'मानौँ, ती संख्याहरू x र (x + १) हुन्।',
+      letStatementNp: 'मानौँ, ती संख्याहरू x र (x + 1) हुन्।',
       eqFormation: 'x(x + 1) = 72  ⟹  x² + x - 72 = 0',
       factoring: '(x + 9)(x - 8) = 0',
       solutionsEn: 'x = 8 or x = -9',
-      solutionsNp: 'x = ८ अथवा x = -९',
+      solutionsNp: 'x = 8 अथवा x = -9',
       validReasonEn: 'Given positive integers (x > 0), reject -9. The numbers are 8 and 8 + 1 = 9.',
-      validReasonNp: 'धनात्मक संख्या भएकाले ऋणात्मक -९ लाई अस्वीकार गरिन्छ। अतः ती संख्याहरू ८ र ९ हुन्।',
+      validReasonNp: 'धनात्मक संख्या भएकाले ऋणात्मक -9 लाई अस्वीकार गरिन्छ। अतः ती संख्याहरू 8 र 9 हुन्।',
       b: 8,
       l: 9,
     },
     {
       titleEn: '3. Right Triangle Dimensions',
-      titleNp: '३. समकोणी त्रिभुजको नाप',
+      titleNp: '3. समकोणी त्रिभुजको नाप',
       descEn:
         'In a right-angled triangle, the base is 7 cm longer than the perpendicular. If the hypotenuse is 13 cm, find the lengths of the base and perpendicular.',
       descNp:
-        'एउटा समकोणी त्रिभुजको आधार यसको लम्ब भन्दा ७ से.मी. लामो छ। यदि कर्ण १३ से.मी. भए आधार र लम्बको लम्बाइ निकाल्नुहोस्।',
+        'एउटा समकोणी त्रिभुजको आधार यसको लम्ब भन्दा 7 से.मी. लामो छ। यदि कर्ण 13 से.मी. भए आधार र लम्बको लम्बाइ निकाल्नुहोस्।',
       letStatementEn: 'Let perpendicular = x cm. Then base = (x + 7) cm and hypotenuse = 13 cm.',
-      letStatementNp: 'मानौँ, लम्ब = x से.मी., आधार = (x + ७) से.मी. र कर्ण = १३ से.मी.।',
+      letStatementNp: 'मानौँ, लम्ब = x से.मी., आधार = (x + 7) से.मी. र कर्ण = 13 से.मी.।',
       eqFormation: 'x² + (x + 7)² = 13²  ⟹  2x² + 14x + 49 = 169  ⟹  2x² + 14x - 120 = 0  ⟹  x² + 7x - 60 = 0',
       factoring: '(x + 12)(x - 5) = 0',
       solutionsEn: 'x = 5 or x = -12',
-      solutionsNp: 'x = ५ अथवा x = -१२',
+      solutionsNp: 'x = 5 अथवा x = -12',
       validReasonEn: 'Side length cannot be negative. Hence, Perpendicular = 5 cm, Base = 5 + 7 = 12 cm.',
-      validReasonNp: 'लम्बाइ ऋणात्मक हुन सक्दैन। त्यसैले लम्ब = ५ से.मी., आधार = ५ + ७ = १२ से.मी.।',
+      validReasonNp: 'लम्बाइ ऋणात्मक हुन सक्दैन। त्यसैले लम्ब = 5 से.मी., आधार = 5 + 7 = 12 से.मी.।',
       b: 5,
       l: 12,
     },
@@ -132,7 +132,7 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
   const quizQuestions = [
     {
       qEn: 'For the equation 2x² - 4x + 2 = 0, what is the value of Discriminant D and the nature of roots?',
-      qNp: 'समीकरण २x² - ४x + २ = ० का लागि विविक्तकर (D) को मान र मूलहरूको प्रकृति के हुन्छ?',
+      qNp: 'समीकरण 2x² - 4x + 2 = 0 का लागि विविक्तकर (D) को मान र मूलहरूको प्रकृति के हुन्छ?',
       options: [
         'D = 0, Real and equal roots',
         'D = 16, Two distinct roots',
@@ -140,26 +140,26 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
         'D = 4, Real and distinct roots',
       ],
       optionsNp: [
-        'D = ०, वास्तविक र बराबर मूलहरू',
-        'D = १६, दुई फरक वास्तविक मूलहरू',
-        'D = -८, कुनै वास्तविक मूल छैन',
-        'D = ४, वास्तविक र फरक मूलहरू',
+        'D = 0, वास्तविक र बराबर मूलहरू',
+        'D = 16, दुई फरक वास्तविक मूलहरू',
+        'D = -8, कुनै वास्तविक मूल छैन',
+        'D = 4, वास्तविक र फरक मूलहरू',
       ],
       correct: 0, // D = (-4)^2 - 4(2)(2) = 16 - 16 = 0
       hintEn: 'D = b² - 4ac = (-4)² - 4(2)(2) = 16 - 16 = 0. When D = 0, roots are real and equal.',
-      hintNp: 'D = b² - 4ac = (-४)² - ४(२)(२) = १६ - १६ = ०। D = ० हुँदा मूलहरू वास्तविक र बराबर हुन्छन्।',
+      hintNp: 'D = b² - 4ac = (-4)² - 4(2)(2) = 16 - 16 = 0। D = 0 हुँदा मूलहरू वास्तविक र बराबर हुन्छन्।',
     },
     {
       qEn: 'Solve by factorization: x² - 7x + 12 = 0. What are the roots?',
-      qNp: 'खण्डिकरण विधिबाट हल गर्नुहोस्: x² - ७x + १२ = ०। यसका मूलहरू के हुन्?',
+      qNp: 'खण्डिकरण विधिबाट हल गर्नुहोस्: x² - 7x + 12 = 0। यसका मूलहरू के हुन्?',
       options: ['x = 3, 4', 'x = -3, -4', 'x = 2, 6', 'x = 1, 12'],
       correct: 0,
       hintEn: 'Factorization: (x - 3)(x - 4) = 0  ⟹  x = 3 or x = 4.',
-      hintNp: 'खण्डिकरण: (x - ३)(x - ४) = ०  ⟹  x = ३ अथवा x = ४।',
+      hintNp: 'खण्डिकरण: (x - 3)(x - 4) = 0  ⟹  x = 3 अथवा x = 4।',
     },
     {
       qEn: 'If a quadratic equation ax² + bx + c = 0 has D < 0, what does its parabola look like on the graph?',
-      qNp: 'यदि वर्ग समीकरण ax² + bx + c = ० को D < ० भए, यसको परबोला रेखाचित्र कस्तो देखिन्छ?',
+      qNp: 'यदि वर्ग समीकरण ax² + bx + c = 0 को D < 0 भए, यसको परबोला रेखाचित्र कस्तो देखिन्छ?',
       options: [
         'Does not touch or intersect the x-axis',
         'Intersects the x-axis at exactly 2 points',
@@ -168,22 +168,22 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
       ],
       optionsNp: [
         'x-अक्षलाई कतै पनि छुँदैन वा काट्दैन',
-        'x-अक्षलाई ठिक २ ठाउँमा काट्छ',
-        'x-अक्षलाई ठिक १ बिन्दुमा छुन्छ',
-        'मूल बिन्दु (०,०) बाट जान्छ',
+        'x-अक्षलाई ठिक 2 ठाउँमा काट्छ',
+        'x-अक्षलाई ठिक 1 बिन्दुमा छुन्छ',
+        'मूल बिन्दु (0,0) बाट जान्छ',
       ],
       correct: 0,
       hintEn: 'When D < 0, there are no real roots, meaning the parabola has no x-intercepts.',
-      hintNp: 'D < ० हुँदा कुनै वास्तविक मूल नहुने भएकाले परबोलाले x-अक्षलाई कतै पनि काट्दैन।',
+      hintNp: 'D < 0 हुँदा कुनै वास्तविक मूल नहुने भएकाले परबोलाले x-अक्षलाई कतै पनि काट्दैन।',
     },
     {
       qEn: 'The length of a room exceeds its breadth by 3 m and area is 40 m². What is its breadth?',
-      qNp: 'एउटा कोठाको लम्बाइ चौडाइ भन्दा ३ मिटर बढी छ र क्षेत्रफल ४० वर्ग मिटर छ भने चौडाइ कति हुन्छ?',
+      qNp: 'एउटा कोठाको लम्बाइ चौडाइ भन्दा 3 m बढी छ र क्षेत्रफल 40 sq m छ भने चौडाइ कति हुन्छ?',
       options: ['5 m', '8 m', '4 m', '10 m'],
-      optionsNp: ['५ मिटर', '८ मिटर', '४ मिटर', '१० मिटर'],
+      optionsNp: ['5 m', '8 m', '4 m', '10 m'],
       correct: 0, // x(x+3) = 40 => x^2 + 3x - 40 = 0 => (x+8)(x-5)=0 => x=5
       hintEn: 'x(x + 3) = 40 ⟹ x² + 3x - 40 = 0 ⟹ (x + 8)(x - 5) = 0. Since breadth > 0, breadth = 5 m.',
-      hintNp: 'x(x + ३) = ४० ⟹ x² + ३x - ४० = ० ⟹ (x + ८)(x - ५) = ०। चौडाइ > ० हुने हुँदा चौडाइ = ५ मिटर।',
+      hintNp: 'x(x + 3) = 40 ⟹ x² + 3x - 40 = 0 ⟹ (x + 8)(x - 5) = 0। चौडाइ > 0 हुने हुँदा चौडाइ = 5 m।',
     },
   ];
 
@@ -234,7 +234,7 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
       onBack={handleBack}
       grade={10}
       mascotGreeting={L(
-        'नमस्ते! कक्षा १० गणितको एकाइ ७: वर्ग समीकरण (Quadratic Equation) तथा परबोला अन्वेषकमा स्वागत छ! यहाँ गुणाङ्कहरू परिवर्तन गर्नुहोस्, विविक्तकर र मूलहरू जाँच्नुहोस्, र तीनवटै समाधान विधिहरू सिक्नुहोस्!',
+        'नमस्ते! कक्षा 10 गणितको एकाइ 7: वर्ग समीकरण (Quadratic Equation) तथा परबोला अन्वेषकमा स्वागत छ! यहाँ गुणाङ्कहरू परिवर्तन गर्नुहोस्, विविक्तकर र मूलहरू जाँच्नुहोस्, र तीनवटै समाधान विधिहरू सिक्नुहोस्!',
         'Welcome to Grade 10 Unit 7: Quadratic Equation & Parabola Explorer! Adjust coefficients, inspect discriminant D, visualize roots on the coordinate graph, and master all textbook solving methods!'
       )}
     >
@@ -243,7 +243,7 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
         <div className="flex flex-wrap gap-2 border-b pb-2">
           {[
             { id: 'parabolaGraph', labelNp: 'क) परबोला रेखाचित्र तथा विविक्तकर (Graph & D)', labelEn: 'A) Parabola Graph & Discriminant' },
-            { id: 'solvingMethods', labelNp: 'ख) पाठ्यपुस्तकका ३ वटै समाधान विधिहरू', labelEn: 'B) 3 Textbook Solving Methods' },
+            { id: 'solvingMethods', labelNp: 'ख) पाठ्यपुस्तकका 3 वटै समाधान विधिहरू', labelEn: 'B) 3 Textbook Solving Methods' },
             { id: 'wordProblems', labelNp: 'ग) व्यावहारिक शाब्दिक समस्या प्रयोगशाला', labelEn: 'C) Word Problems Laboratory' },
             { id: 'challenge', labelNp: 'घ) अभ्यास चुनौती (Quiz)', labelEn: 'D) Practice Challenge' },
           ].map((tab) => (
@@ -385,7 +385,7 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
 
                 <div>
                   <div className="flex justify-between text-xs font-semibold text-slate-700">
-                    <span>{L('x² को गुणाङ्क (a ≠ ०):', 'Coefficient of x² (a ≠ 0):')}</span>
+                    <span>{L('x² को गुणाङ्क (a ≠ 0):', 'Coefficient of x² (a ≠ 0):')}</span>
                     <span className="text-[#167C80] font-bold">{fmt(coeffA)}</span>
                   </div>
                   <input
@@ -459,14 +459,14 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                 </div>
 
                 <div className="text-xs text-slate-600 mb-2 font-mono">
-                  D = ({fmt(coeffB)})² - ४({fmt(coeffA)})({fmt(coeffC)}) = {fmt(coeffB * coeffB)} - {fmt(4 * coeffA * coeffC)} = {fmt(D)}
+                  D = ({fmt(coeffB)})² - 4({fmt(coeffA)})({fmt(coeffC)}) = {fmt(coeffB * coeffB)} - {fmt(4 * coeffA * coeffC)} = {fmt(D)}
                 </div>
 
                 <div className="p-2.5 bg-white/80 rounded-xl text-xs space-y-1">
                   <div className="font-bold text-slate-800">
-                    {D > 0 && L('✔ D > ०: दुई फरक वास्तविक मूलहरू (Two Distinct Real Roots)', '✔ D > 0: Two Distinct Real Roots')}
-                    {D === 0 && L('✔ D = ०: दुई बराबर वास्तविक मूलहरू (Real & Equal Double Root)', '✔ D = 0: Real & Equal Double Root')}
-                    {D < 0 && L('✖ D < ०: कुनै वास्तविक मूल छैन (No Real Roots)', '✖ D < 0: No Real Roots (Parabola does not cross X-axis)')}
+                    {D > 0 && L('✔ D > 0: दुई फरक वास्तविक मूलहरू (Two Distinct Real Roots)', '✔ D > 0: Two Distinct Real Roots')}
+                    {D === 0 && L('✔ D = 0: दुई बराबर वास्तविक मूलहरू (Real & Equal Double Root)', '✔ D = 0: Real & Equal Double Root')}
+                    {D < 0 && L('✖ D < 0: कुनै वास्तविक मूल छैन (No Real Roots)', '✖ D < 0: No Real Roots (Parabola does not cross X-axis)')}
                   </div>
                   <div className="text-slate-700">
                     {D > 0 && (
@@ -525,9 +525,9 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
             {/* Method Tabs */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { id: 'factorization', np: '१. खण्डिकरण विधि', en: '1. Factorization Method' },
-                { id: 'completingSquare', np: '२. पूर्ण वर्ग बनाउने विधि', en: '2. Completing the Square' },
-                { id: 'formula', np: '३. सुत्र प्रयोग विधि', en: '3. Quadratic Formula' },
+                { id: 'factorization', np: '1. खण्डिकरण विधि', en: '1. Factorization Method' },
+                { id: 'completingSquare', np: '2. पूर्ण वर्ग बनाउने विधि', en: '2. Completing the Square' },
+                { id: 'formula', np: '3. सुत्र प्रयोग विधि', en: '3. Quadratic Formula' },
               ].map((m) => (
                 <button
                   key={m.id}
@@ -551,7 +551,7 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
               <div className="flex justify-between items-center border-b pb-2">
                 <span className="text-sm font-bold text-[#142D4E]">
                   {L('समीकरण:', 'Equation:')} {fmt(pA !== 1 ? pA : '')}x² {pB >= 0 ? `+ ${fmt(pB)}x` : `- ${fmt(Math.abs(pB))}x`}{' '}
-                  {pC >= 0 ? `+ ${fmt(pC)}` : `- ${fmt(Math.abs(pC))}`} = ०
+                  {pC >= 0 ? `+ ${fmt(pC)}` : `- ${fmt(Math.abs(pC))}`} = 0
                 </span>
                 <span className="text-xs bg-teal-100 text-teal-800 px-2.5 py-1 rounded-full font-bold">
                   {L('अन्तिम मूलहरू:', 'Final Roots:')} x = {fmt(pRoot1)}, x = {fmt(pRoot2)}
@@ -562,9 +562,9 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
               {selectedMethod === 'factorization' && (
                 <div className="space-y-3 font-mono text-xs sm:text-sm">
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs">चरण १: मध्य पद विभाजन (Splitting the middle term)</span>
+                    <span className="text-slate-400 block text-xs">Step 1: Splitting the middle term</span>
                     <span>
-                      {pA !== 1 ? `${fmt(pA)}x²` : 'x²'} + ({fmt(-pRoot1 - pRoot2)})x + {fmt(pC)} = ०
+                      {pA !== 1 ? `${fmt(pA)}x²` : 'x²'} + ({fmt(-pRoot1 - pRoot2)})x + {fmt(pC)} = 0
                     </span>
                     <p className="text-xs text-slate-500 font-sans mt-1">
                       {L(
@@ -575,17 +575,17 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs">चरण २: साझा खण्ड निकाल्ने (Grouping & Factoring)</span>
+                    <span className="text-slate-400 block text-xs">Step 2: Grouping and factoring</span>
                     <span>
-                      ({fmt(pA)}x - {fmt(Math.abs(pRoot1 * pA))})(x - {fmt(pRoot2)}) = ०
+                      ({fmt(pA)}x - {fmt(Math.abs(pRoot1 * pA))})(x - {fmt(pRoot2)}) = 0
                     </span>
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs">चरण ३: शून्य गुणन नियम (Zero-Product Property)</span>
+                    <span className="text-slate-400 block text-xs">Step 3: Zero-product property</span>
                     <div className="space-y-1 mt-1 text-teal-700 font-bold">
-                      <div>वा त (Either): x - {fmt(pRoot1)} = ०  ⟹  x = {fmt(pRoot1)}</div>
-                      <div>वा (Or): x - {fmt(pRoot2)} = ०  ⟹  x = {fmt(pRoot2)}</div>
+                      <div>Either: x - {fmt(pRoot1)} = 0  ⟹  x = {fmt(pRoot1)}</div>
+                      <div>Or: x - {fmt(pRoot2)} = 0  ⟹  x = {fmt(pRoot2)}</div>
                     </div>
                   </div>
                 </div>
@@ -595,19 +595,19 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
               {selectedMethod === 'completingSquare' && (
                 <div className="space-y-3 font-mono text-xs sm:text-sm">
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs">चरण १: अचर पदलाई दायाँतर्फ सार्ने (Move constant term)</span>
+                    <span className="text-slate-400 block text-xs">चरण 1: अचर पदलाई दायाँतर्फ सार्ने (Move constant term)</span>
                     <span>{pA !== 1 ? `${fmt(pA)}x²` : 'x²'} {pB >= 0 ? `+ ${fmt(pB)}x` : `- ${fmt(Math.abs(pB))}x`} = {fmt(-pC)}</span>
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs">चरण २: दुवैतर्फ (b/2a)² थप्ने (Add (b/2a)² to both sides)</span>
+                    <span className="text-slate-400 block text-xs">चरण 2: दुवैतर्फ (b/2a)² थप्ने (Add (b/2a)² to both sides)</span>
                     <span>
                       (x {pB >= 0 ? '+' : '-'} {fmt(Math.abs(pB / (2 * pA)))})² = {fmt(-pC / pA)} + {fmt(Math.pow(pB / (2 * pA), 2).toFixed(2))}
                     </span>
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs">चरण ३: दुवैतर्फ वर्गमूल लिने (Take square root of both sides)</span>
+                    <span className="text-slate-400 block text-xs">चरण 3: दुवैतर्फ वर्गमूल लिने (Take square root of both sides)</span>
                     <div className="mt-1 text-teal-700 font-bold">
                       x = {fmt(-pB / (2 * pA))} ± √{fmt(pD / (4 * pA * pA))}  ⟹  x = {fmt(pRoot1)}, x = {fmt(pRoot2)}
                     </div>
@@ -619,7 +619,7 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
               {selectedMethod === 'formula' && (
                 <div className="space-y-3 font-mono text-xs sm:text-sm">
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs">चरण १: वर्ग समीकरणको सुत्र (Standard Quadratic Formula)</span>
+                    <span className="text-slate-400 block text-xs">चरण 1: वर्ग समीकरणको सुत्र (Standard Quadratic Formula)</span>
                     <span className="text-base font-bold text-[#167C80]">x = [-b ± √(b² - 4ac)] / 2a</span>
                     <div className="text-xs text-slate-500 font-sans mt-1">
                       a = {fmt(pA)}, b = {fmt(pB)}, c = {fmt(pC)}
@@ -627,9 +627,9 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs">चरण २: मानहरू प्रतिस्थापन (Substituting values)</span>
+                    <span className="text-slate-400 block text-xs">चरण 2: मानहरू प्रतिस्थापन (Substituting values)</span>
                     <span>
-                      x = [-({fmt(pB)}) ± √(({fmt(pB)})² - ४({fmt(pA)})({fmt(pC)}))] / २({fmt(pA)})
+                      x = [-({fmt(pB)}) ± √(({fmt(pB)})² - 4({fmt(pA)})({fmt(pC)}))] / 2({fmt(pA)})
                     </span>
                     <div className="mt-1">
                       x = [{fmt(-pB)} ± √{fmt(pD)}] / {fmt(2 * pA)}
@@ -637,7 +637,7 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                   </div>
 
                   <div className="p-3 bg-white border rounded-lg">
-                    <span className="text-slate-400 block text-xs">चरण ३: धनात्मक (+) र ऋणात्मक (-) चिन्ह लिँदा</span>
+                    <span className="text-slate-400 block text-xs">चरण 3: धनात्मक (+) र ऋणात्मक (-) चिन्ह लिँदा</span>
                     <div className="space-y-1 mt-1 text-teal-700 font-bold">
                       <div>(+) लिँदा: x = [{fmt(-pB)} + {fmt(Math.sqrt(pD))}] / {fmt(2 * pA)} = {fmt(pRoot1)}</div>
                       <div>(-) लिँदा: x = [{fmt(-pB)} - {fmt(Math.sqrt(pD))}] / {fmt(2 * pA)} = {fmt(pRoot2)}</div>
@@ -688,14 +688,14 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-4 bg-slate-50 border rounded-xl space-y-2">
                 <span className="text-xs font-bold text-[#142D4E] block">
-                  {L('१. चल राशि मान्ने (Variable Assignment):', '1. Variable Assignment:')}
+                  {L('1. चल राशि मान्ने (Variable Assignment):', '1. Variable Assignment:')}
                 </span>
                 <p className="text-xs text-slate-700 font-medium">
                   {isNe ? wordProblemsList[activeProblem].letStatementNp : wordProblemsList[activeProblem].letStatementEn}
                 </p>
 
                 <span className="text-xs font-bold text-[#142D4E] block pt-2">
-                  {L('२. वर्ग समीकरण निर्माण (Equation Formation):', '2. Equation Formation:')}
+                  {L('2. वर्ग समीकरण निर्माण (Equation Formation):', '2. Equation Formation:')}
                 </span>
                 <p className="text-xs font-mono font-bold text-teal-700 bg-white p-2 rounded border">
                   {wordProblemsList[activeProblem].eqFormation}
@@ -704,7 +704,7 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
 
               <div className="p-4 bg-slate-50 border rounded-xl space-y-2">
                 <span className="text-xs font-bold text-[#142D4E] block">
-                  {L('३. खण्डिकरण र हल (Factoring & Solving):', '3. Factoring & Solving:')}
+                  {L('3. खण्डिकरण र हल (Factoring & Solving):', '3. Factoring & Solving:')}
                 </span>
                 <p className="text-xs font-mono font-bold text-slate-800 bg-white p-2 rounded border">
                   {wordProblemsList[activeProblem].factoring}
@@ -714,7 +714,7 @@ export const QuadraticEquationExplorer: React.FC<SimProps> = ({ onBackToLibrary,
                 </p>
 
                 <span className="text-xs font-bold text-[#142D4E] block pt-1">
-                  {L('४. यथार्थपरक उत्तरको छनोट (Valid Solution Filtering):', '4. Valid Physical Interpretation:')}
+                  {L('4. यथार्थपरक उत्तरको छनोट (Valid Solution Filtering):', '4. Valid Physical Interpretation:')}
                 </span>
                 <div className="p-2.5 bg-emerald-100 border border-emerald-300 rounded text-xs text-emerald-900 font-medium">
                   {isNe ? wordProblemsList[activeProblem].validReasonNp : wordProblemsList[activeProblem].validReasonEn}

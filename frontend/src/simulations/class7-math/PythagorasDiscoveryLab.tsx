@@ -1,7 +1,7 @@
 /**
  * PythagorasDiscoveryLab.tsx
- * Grade 7 Mathematics – Lesson 14: PLANE FIGURES (समतलीय आकृतिहरू)
- * Simulation 3: Pythagoras Discovery and Geometric Proof Lab (पाइथागोरस साध्य प्रयोगशाला)
+ * Grade 7 Mathematics – Lesson 14: PLANE FIGURES
+ * Simulation 3: Pythagoras Discovery and Geometric Proof Lab
  * Strictly adheres to CDC Nepal Grade 7 Mathematics Curriculum (2079 B.S., Pages 223-230)
  */
 import React, { useState } from 'react';
@@ -12,13 +12,13 @@ import { Calculator, Check, CheckCircle2, RotateCcw, Sparkles } from 'lucide-rea
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    np: 'समकोणी त्रिभुज (Right-angled Triangle) मा ९०° को विपरित सबैभन्दा लामो भुजालाई के भनिन्छ?',
+    np: 'समकोणी त्रिभुज (Right-angled Triangle) मा 90° को विपरित सबैभन्दा लामो भुजालाई के भनिन्छ?',
     en: 'In a right-angled triangle, what is the longest side opposite to the 90° angle called?',
     options: [
-      { key: 'A', label: 'कर्ण (Hypotenuse - h)' },
-      { key: 'B', label: 'लम्ब (Perpendicular - p)' },
-      { key: 'C', label: 'आधार (Base - b)' },
-      { key: 'D', label: 'विकर्ण' },
+      { key: 'A', label: 'Hypotenuse (h)' },
+      { key: 'B', label: 'Perpendicular (p)' },
+      { key: 'C', label: 'Base (b)' },
+      { key: 'D', label: 'Diagonal' },
     ],
     answer: 'A',
   },
@@ -34,13 +34,13 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     answer: 'A',
   },
   {
-    np: 'यदि समकोणी त्रिभुजमा आधार (b) = ३ सेमी र लम्ब (p) = ४ सेमी भए कर्ण (h) कति हुन्छ?',
+    np: 'यदि समकोणी त्रिभुजमा आधार (b) = 3 cm र लम्ब (p) = 4 cm भए Hypotenuse (h) कति हुन्छ?',
     en: 'If base = 3 cm and perpendicular = 4 cm, what is the hypotenuse h? (√(3² + 4²))',
     options: [
-      { key: 'A', label: '५ सेमी (√(९ + १६) = √२५ = ५)' },
-      { key: 'B', label: '७ सेमी' },
-      { key: 'C', label: '६ सेमी' },
-      { key: 'D', label: '१२ सेमी' },
+      { key: 'A', label: '5 cm (√(9 + 16) = √25 = 5)' },
+      { key: 'B', label: '7 cm' },
+      { key: 'C', label: '6 cm' },
+      { key: 'D', label: '12 cm' },
     ],
     answer: 'A',
   },
@@ -48,10 +48,10 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     np: 'कुन त्रिक (Triplet) ले समकोणी त्रिभुज बनाउँछ?',
     en: 'Which triplet forms a right-angled triangle?',
     options: [
-      { key: 'A', label: '५, १२, १३ (५² + १२² = १३²)' },
-      { key: 'B', label: '४, ५, ६' },
-      { key: 'C', label: '२, ३, ४' },
-      { key: 'D', label: '३, ४, ८' },
+      { key: 'A', label: '5, 12, 13 (5² + 12² = 13²)' },
+      { key: 'B', label: '4, 5, 6' },
+      { key: 'C', label: '2, 3, 4' },
+      { key: 'D', label: '3, 4, 8' },
     ],
     answer: 'A',
   },
@@ -112,9 +112,9 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 justify-center bg-indigo-50/80 p-2 rounded-2xl border border-indigo-200">
           {[
-            { id: 'visual_proof', np: '१. तीन वर्गको ज्यामितीय प्रमाण (Geometric Square Proof)', en: '1. Geometric Square Proof' },
-            { id: 'solver', np: '२. अज्ञात भुजा क्यालकुलेटर (Unknown Side Solver)', en: '2. Unknown Side Solver' },
-            { id: 'triplet_tester', np: '३. पाइथागोरस त्रिक परीक्षण (Pythagorean Triplets)', en: '3. Pythagorean Triplets' },
+            { id: 'visual_proof', np: '1. तीन वर्गको ज्यामितीय प्रमाण (Geometric Square Proof)', en: '1. Geometric Square Proof' },
+            { id: 'solver', np: '2. अज्ञात भुजा क्यालकुलेटर (Unknown Side Solver)', en: '2. Unknown Side Solver' },
+            { id: 'triplet_tester', np: '3. पाइथागोरस त्रिक परीक्षण (Pythagorean Triplets)', en: '3. Pythagorean Triplets' },
           ].map((item) => (
             <button
               key={item.id}
@@ -316,7 +316,7 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
             {/* Target selector */}
             <div className="flex gap-2 justify-center">
               {[
-                { id: 'h', labelNp: 'कर्ण (h) पत्ता लगाउने: h = √(p² + b²)', labelEn: 'Find Hypotenuse (h)' },
+                { id: 'h', labelNp: 'Hypotenuse (h) पत्ता लगाउने: h = √(p² + b²)', labelEn: 'Find Hypotenuse (h)' },
                 { id: 'p', labelNp: 'लम्ब (p) पत्ता लगाउने: p = √(h² - b²)', labelEn: 'Find Perpendicular (p)' },
                 { id: 'b', labelNp: 'आधार (b) पत्ता लगाउने: b = √(h² - p²)', labelEn: 'Find Base (b)' },
               ].map((item) => (
@@ -341,7 +341,7 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                   <>
                     <div>
                       <label className="text-xs font-bold text-slate-700 block mb-1">
-                        {L('लम्ब (p) सेमी:', 'Perpendicular (p) cm:')}
+                        {L('लम्ब (p) cm:', 'Perpendicular (p) cm:')}
                       </label>
                       <input
                         type="number"
@@ -352,7 +352,7 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                     </div>
                     <div>
                       <label className="text-xs font-bold text-slate-700 block mb-1">
-                        {L('आधार (b) सेमी:', 'Base (b) cm:')}
+                        {L('आधार (b) cm:', 'Base (b) cm:')}
                       </label>
                       <input
                         type="number"
@@ -368,7 +368,7 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                   <>
                     <div>
                       <label className="text-xs font-bold text-slate-700 block mb-1">
-                        {L('कर्ण (h) सेमी (सबैभन्दा ठूलो):', 'Hypotenuse (h) cm (largest):')}
+                        {L('Hypotenuse (h) cm:', 'Hypotenuse (h) cm (largest):')}
                       </label>
                       <input
                         type="number"
@@ -379,7 +379,7 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                     </div>
                     <div>
                       <label className="text-xs font-bold text-slate-700 block mb-1">
-                        {L('आधार (b) सेमी:', 'Base (b) cm:')}
+                        {L('आधार (b) cm:', 'Base (b) cm:')}
                       </label>
                       <input
                         type="number"
@@ -395,7 +395,7 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                   <>
                     <div>
                       <label className="text-xs font-bold text-slate-700 block mb-1">
-                        {L('कर्ण (h) सेमी:', 'Hypotenuse (h) cm:')}
+                        {L('Hypotenuse (h) cm:', 'Hypotenuse (h) cm:')}
                       </label>
                       <input
                         type="number"
@@ -406,7 +406,7 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                     </div>
                     <div>
                       <label className="text-xs font-bold text-slate-700 block mb-1">
-                        {L('लम्ब (p) सेमी:', 'Perpendicular (p) cm:')}
+                        {L('लम्ब (p) cm:', 'Perpendicular (p) cm:')}
                       </label>
                       <input
                         type="number"
@@ -431,10 +431,10 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                   const resH = Math.sqrt(hCalcSq);
                   return (
                     <div className="text-sm text-slate-800 space-y-1.5">
-                      <div>सूत्र: h² = p² + b²</div>
+                      <div>Formula: h² = p² + b²</div>
                       <div>h² = {solverP}² + {solverB}² = {solverP * solverP} + {solverB * solverB} = {hCalcSq}</div>
                       <div className="text-lg font-black text-emerald-900 pt-2 border-t border-emerald-200">
-                        कर्ण (h) = √{hCalcSq} = {toNp(resH % 1 === 0 ? resH : resH.toFixed(2))} सेमी
+                        Hypotenuse (h) = √{hCalcSq} = {toNp(resH % 1 === 0 ? resH : resH.toFixed(2))} cm
                       </div>
                     </div>
                   );
@@ -445,10 +445,10 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                   const resP = pCalcSq > 0 ? Math.sqrt(pCalcSq) : 0;
                   return (
                     <div className="text-sm text-slate-800 space-y-1.5">
-                      <div>सूत्र: p² = h² - b²</div>
+                      <div>Formula: p² = h² - b²</div>
                       <div>p² = {solverH}² - {solverB}² = {solverH * solverH} - {solverB * solverB} = {pCalcSq}</div>
                       <div className="text-lg font-black text-emerald-900 pt-2 border-t border-emerald-200">
-                        लम्ब (p) = √{pCalcSq} = {toNp(resP % 1 === 0 ? resP : resP.toFixed(2))} सेमी
+                        लम्ब (p) = √{pCalcSq} = {toNp(resP % 1 === 0 ? resP : resP.toFixed(2))} cm
                       </div>
                     </div>
                   );
@@ -459,10 +459,10 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                   const resB = bCalcSq > 0 ? Math.sqrt(bCalcSq) : 0;
                   return (
                     <div className="text-sm text-slate-800 space-y-1.5">
-                      <div>सूत्र: b² = h² - p²</div>
+                      <div>Formula: b² = h² - p²</div>
                       <div>b² = {solverH}² - {solverP}² = {solverH * solverH} - {solverP * solverP} = {bCalcSq}</div>
                       <div className="text-lg font-black text-emerald-900 pt-2 border-t border-emerald-200">
-                        आधार (b) = √{bCalcSq} = {toNp(resB % 1 === 0 ? resB : resB.toFixed(2))} सेमी
+                        आधार (b) = √{bCalcSq} = {toNp(resB % 1 === 0 ? resB : resB.toFixed(2))} cm
                       </div>
                     </div>
                   );
@@ -521,10 +521,10 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      { s: [3, 4, 5], label: '३, ४, ५' },
-                      { s: [5, 12, 13], label: '५, १२, १३' },
-                      { s: [8, 15, 17], label: '८, १५, १७' },
-                      { s: [12, 10, 5], label: '१२, १०, ५ (गलत/No)' },
+                      { s: [3, 4, 5], label: '3, 4, 5' },
+                      { s: [5, 12, 13], label: '5, 12, 13' },
+                      { s: [8, 15, 17], label: '8, 15, 17' },
+                      { s: [12, 10, 5], label: '12, 10, 5' },
                     ].map((item, idx) => (
                       <button
                         key={idx}
@@ -569,11 +569,11 @@ export const PythagorasDiscoveryLab: React.FC<{ onBackToLibrary?: () => void; on
                 </div>
 
                 <div className="text-xs md:text-sm text-slate-700 space-y-1">
-                  <div>साना भुजाहरूको वर्गको जोड: {sides[0]}² + {sides[1]}² = {sides[0] * sides[0]} + {sides[1] * sides[1]} = <b>{sides[0] * sides[0] + sides[1] * sides[1]}</b></div>
-                  <div>ठूलो भुजाको वर्ग: {sides[2]}² = <b>{sides[2] * sides[2]}</b></div>
+                  <div>Sum of squares of the shorter sides: {sides[0]}² + {sides[1]}² = {sides[0] * sides[0]} + {sides[1] * sides[1]} = <b>{sides[0] * sides[0] + sides[1] * sides[1]}</b></div>
+                  <div>Square of the longest side: {sides[2]}² = <b>{sides[2] * sides[2]}</b></div>
                   <div className="pt-2 font-bold">
                     {isTriplet
-                      ? `✓ ${sides[0] * sides[0] + sides[1] * sides[1]} = ${sides[2] * sides[2]} (बराबर भएकोले समकोणी त्रिभुज बन्छ)`
+                      ? `✓ ${sides[0] * sides[0] + sides[1] * sides[1]} = ${sides[2] * sides[2]} (they are equal, so it forms a right-angled triangle)`
                       : `✕ ${sides[0] * sides[0] + sides[1] * sides[1]} ≠ ${sides[2] * sides[2]} (बराबर नभएकोले समकोणी त्रिभुज बन्दैन)`}
                   </div>
                 </div>

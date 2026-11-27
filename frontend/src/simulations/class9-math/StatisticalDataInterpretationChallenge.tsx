@@ -24,7 +24,7 @@ const QUESTIONS: Question[] = [
     level: 1,
     type: 'histogram',
     questionEn: 'In the given histogram representing test scores (10–20: 5, 20–30: 12, 30–40: 18, 40–50: 9), which class interval has the highest frequency (Modal Class)?',
-    questionNp: 'दिइएको प्राप्ताङ्कको आयतचित्र (१०–२०: ५, २०–३०: १२, ३०–४०: १८, ४०–५०: ९) मा कुन वर्गान्तरको बारम्बारता सबैभन्दा बढी (रूत वर्ग / Modal Class) छ?',
+    questionNp: 'दिइएको प्राप्ताङ्कको आयतचित्र (10–20: 5, 20–30: 12, 30–40: 18, 40–50: 9) मा कुन वर्गान्तरको बारम्बारता सबैभन्दा बढी (रूत वर्ग / Modal Class) छ?',
     dataSummary: {
       classes: [
         { label: '10–20', f: 5, cf: 5 },
@@ -35,20 +35,20 @@ const QUESTIONS: Question[] = [
       totalN: 44
     },
     options: [
-      { textEn: '20–30', textNp: '२०–३०', correct: false },
-      { textEn: '30–40', textNp: '३०–४०', correct: true },
-      { textEn: '40–50', textNp: '४०–५०', correct: false },
-      { textEn: '10–20', textNp: '१०–२०', correct: false }
+      { textEn: '20–30', textNp: '20–30', correct: false },
+      { textEn: '30–40', textNp: '30–40', correct: true },
+      { textEn: '40–50', textNp: '40–50', correct: false },
+      { textEn: '10–20', textNp: '10–20', correct: false }
     ],
     explanationEn: 'The class interval 30–40 has the highest frequency of 18, making it the modal class.',
-    explanationNp: 'वर्गान्तर ३०–४० को बारम्बारता सबैभन्दा बढी १८ भएकाले यो रूत वर्ग (Modal class) हो।'
+    explanationNp: 'वर्गान्तर 30–40 को बारम्बारता सबैभन्दा बढी 18 भएकाले यो रूत वर्ग (Modal class) हो।'
   },
   {
     id: 2,
     level: 1,
     type: 'table',
     questionEn: 'What is the total number of students (N = ∑f) in the frequency table with frequencies 4, 8, 14, 10, and 4?',
-    questionNp: 'बारम्बारताहरू ४, ८, १४, १० र ४ भएको तालिकामा कुल विद्यार्थी सङ्ख्या (N = ∑f) कति हुन्छ?',
+    questionNp: 'बारम्बारताहरू 4, 8, 14, 10 र 4 भएको तालिकामा कुल विद्यार्थी सङ्ख्या (N = ∑f) कति हुन्छ?',
     dataSummary: {
       classes: [
         { label: '0–10', f: 4, cf: 4 },
@@ -60,20 +60,20 @@ const QUESTIONS: Question[] = [
       totalN: 40
     },
     options: [
-      { textEn: '36', textNp: '३६', correct: false },
-      { textEn: '40', textNp: '४०', correct: true },
-      { textEn: '44', textNp: '४४', correct: false },
-      { textEn: '50', textNp: '५०', correct: false }
+      { textEn: '36', textNp: '36', correct: false },
+      { textEn: '40', textNp: '40', correct: true },
+      { textEn: '44', textNp: '44', correct: false },
+      { textEn: '50', textNp: '50', correct: false }
     ],
     explanationEn: 'Total frequency N = 4 + 8 + 14 + 10 + 4 = 40 students.',
-    explanationNp: 'कुल बारम्बारता N = ४ + ८ + १४ + १० + ४ = ४० विद्यार्थी।'
+    explanationNp: 'कुल बारम्बारता N = 4 + 8 + 14 + 10 + 4 = 40 विद्यार्थी।'
   },
   {
     id: 3,
     level: 2,
     type: 'histogram',
     questionEn: 'How many students scored 30 or more marks if the distribution is: 10–20: 6, 20–30: 14, 30–40: 16, 40–50: 8?',
-    questionNp: 'यदि प्राप्ताङ्क १०–२०: ६, २०–३०: १४, ३०–४०: १६, ४०–५०: ८ भए ३० वा सोभन्दा बढी अङ्क प्राप्त गर्ने विद्यार्थी सङ्ख्या कति छ?',
+    questionNp: 'यदि प्राप्ताङ्क 10–20: 6, 20–30: 14, 30–40: 16, 40–50: 8 भए 30 वा सोभन्दा बढी अङ्क प्राप्त गर्ने विद्यार्थी सङ्ख्या कति छ?',
     dataSummary: {
       classes: [
         { label: '10–20', f: 6, cf: 6 },
@@ -84,20 +84,20 @@ const QUESTIONS: Question[] = [
       totalN: 44
     },
     options: [
-      { textEn: '16', textNp: '१६', correct: false },
-      { textEn: '24', textNp: '२४', correct: true },
-      { textEn: '36', textNp: '३६', correct: false },
-      { textEn: '20', textNp: '२०', correct: false }
+      { textEn: '16', textNp: '16', correct: false },
+      { textEn: '24', textNp: '24', correct: true },
+      { textEn: '36', textNp: '36', correct: false },
+      { textEn: '20', textNp: '20', correct: false }
     ],
     explanationEn: 'Students scoring 30 or more are in classes 30–40 and 40–50: 16 + 8 = 24 students.',
-    explanationNp: '३० वा सोभन्दा बढी अङ्क ल्याउने विद्यार्थीहरू वर्गान्तर ३०–४० र ४०–५० मा पर्दछन्: १६ + ८ = २४ जना।'
+    explanationNp: '30 वा सोभन्दा बढी अङ्क ल्याउने विद्यार्थीहरू वर्गान्तर 30–40 र 40–50 मा पर्दछन्: 16 + 8 = 24 जना।'
   },
   {
     id: 4,
     level: 2,
     type: 'ogive',
     questionEn: 'In a cumulative frequency curve (less than ogive), what does the value on the Y-axis corresponding to the upper boundary 40 represent?',
-    questionNp: 'भन्दा कम तोरण वक्र (Less than ogive) मा माथिल्लो सीमा ४० सँग मिल्ने Y-अक्षको मानले के जनाउँछ?',
+    questionNp: 'भन्दा कम तोरण वक्र (Less than ogive) मा माथिल्लो सीमा 40 सँग मिल्ने Y-अक्षको मानले के जनाउँछ?',
     dataSummary: {
       classes: [
         { label: '10–20', f: 7, cf: 7 },
@@ -108,9 +108,9 @@ const QUESTIONS: Question[] = [
       totalN: 50
     },
     options: [
-      { textEn: 'Number of students who scored exactly 40', textNp: 'ठ्याक्कै ४० अङ्क ल्याउने विद्यार्थी सङ्ख्या', correct: false },
-      { textEn: 'Number of students who scored 40 or less', textNp: '४० वा सोभन्दा कम अङ्क ल्याउने विद्यार्थीहरूको सञ्चित सङ्ख्या', correct: true },
-      { textEn: 'Number of students who scored more than 40', textNp: '४० भन्दा धेरै अङ्क ल्याउने विद्यार्थी सङ्ख्या', correct: false },
+      { textEn: 'Number of students who scored exactly 40', textNp: 'ठ्याक्कै 40 अङ्क ल्याउने विद्यार्थी सङ्ख्या', correct: false },
+      { textEn: 'Number of students who scored 40 or less', textNp: '40 वा सोभन्दा कम अङ्क ल्याउने विद्यार्थीहरूको सञ्चित सङ्ख्या', correct: true },
+      { textEn: 'Number of students who scored more than 40', textNp: '40 भन्दा धेरै अङ्क ल्याउने विद्यार्थी सङ्ख्या', correct: false },
       { textEn: 'The class midpoint', textNp: 'वर्गान्तरको मध्यमान', correct: false }
     ],
     explanationEn: 'In a less-than ogive, each point (X, Y) shows that Y observations have a value less than or equal to the upper limit X.',
@@ -121,7 +121,7 @@ const QUESTIONS: Question[] = [
     level: 3,
     type: 'ogive',
     questionEn: 'If the total frequency is N = 60, at what cumulative frequency (Y-value) do the less-than and more-than ogives intersect?',
-    questionNp: 'यदि कुल बारम्बारता N = ६० भए, भन्दा कम र भन्दा बढी तोरण वक्रहरू कुन सञ्चित बारम्बारता (Y-मान) मा प्रतिच्छेदन हुन्छन्?',
+    questionNp: 'यदि कुल बारम्बारता N = 60 भए, भन्दा कम र भन्दा बढी तोरण वक्रहरू कुन सञ्चित बारम्बारता (Y-मान) मा प्रतिच्छेदन हुन्छन्?',
     dataSummary: {
       classes: [
         { label: '0–10', f: 8, cf: 8 },
@@ -133,13 +133,13 @@ const QUESTIONS: Question[] = [
       totalN: 60
     },
     options: [
-      { textEn: '60 (at total N)', textNp: '६० (कुल N मा)', correct: false },
-      { textEn: '30 (at N/2, the median position)', textNp: '३० (N/२, मध्यिका स्थितिमा)', correct: true },
-      { textEn: '20 (at the modal value)', textNp: '२० (रूत मानमा)', correct: false },
-      { textEn: '15 (at N/4)', textNp: '१५ (N/४ मा)', correct: false }
+      { textEn: '60 (at total N)', textNp: '60', correct: false },
+      { textEn: '30 (at N/2, the median position)', textNp: '30', correct: true },
+      { textEn: '20 (at the modal value)', textNp: '20', correct: false },
+      { textEn: '15 (at N/4)', textNp: '15', correct: false }
     ],
     explanationEn: 'The intersection of both ogives corresponds to the median position N/2 = 60/2 = 30 on the cumulative frequency axis.',
-    explanationNp: 'दुवै तोरण वक्रहरू सञ्चित बारम्बारता अक्षमा N/२ = ६०/२ = ३० को उचाइमा प्रतिच्छेदन हुन्छन्, जसले मध्यिका दिन्छ।'
+    explanationNp: 'दुवै तोरण वक्रहरू सञ्चित बारम्बारता अक्षमा N/2 = 60/2 = 30 को उचाइमा प्रतिच्छेदन हुन्छन्, जसले मध्यिका दिन्छ।'
   }
 ];
 
@@ -366,7 +366,7 @@ export const StatisticalDataInterpretationChallenge: React.FC<SimProps> = ({ onB
               onClick={handleReset}
               className="px-3 py-1.5 text-xs text-slate-500 hover:text-slate-800 font-medium"
             >
-              {L('पुनः सुरु गर्नुहोस्', 'Reset Challenge')}
+              {L('पुनः सुRs गर्नुहोस्', 'Reset Challenge')}
             </button>
             {isAnswered && (
               <button

@@ -115,13 +115,13 @@ const QUIZ_QUESTIONS = [
     answer: 'A',
   },
   {
-    np: '(२³)² को सरलीकृत मान कति हुन्छ?',
+    np: '(2³)² को सरलीकृत मान कति हुन्छ?',
     en: 'What is the simplified value of (2³)²?',
     options: [
-      { key: 'A', label: '२⁶ = ६४' },
-      { key: 'B', label: '२⁵ = ३२' },
-      { key: 'C', label: '२⁹ = ५१२' },
-      { key: 'D', label: '१२' },
+      { key: 'A', label: '2⁶ = 64' },
+      { key: 'B', label: '2⁵ = 32' },
+      { key: 'C', label: '2⁹ = 512' },
+      { key: 'D', label: '12' },
     ],
     answer: 'A',
   },
