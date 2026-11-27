@@ -1454,72 +1454,73 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
                           )}
                         </div>
 
-                        {/* Action Buttons: Exactly Two Options (Preview & Launch to Smart Board) */}
+                        {/* Action Buttons: Primary is Launch Simulation (Real Interactive UI), Secondary is Smart Board */}
                         <div style={{ display: 'flex', gap: '10px', paddingTop: '12px', borderTop: '1px solid #e2e8f0' }}>
                           <button
                             type="button"
                             onClick={() => setActiveSimulation(sim)}
                             style={{
-                              flex: 1,
+                              flex: 2,
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
                               gap: '6px',
-                              padding: '9px 12px',
-                              background: '#ffffff',
-                              color: '#0f766e',
-                              border: '1.5px solid #0f766e',
+                              padding: '10px 16px',
+                              background: '#117a6b',
+                              color: '#ffffff',
+                              border: 'none',
                               borderRadius: '8px',
-                              fontSize: '12px',
-                              fontWeight: '700',
+                              fontSize: '13px',
+                              fontWeight: '800',
                               cursor: 'pointer',
+                              boxShadow: '0 2px 8px rgba(17, 122, 107, 0.25)',
                               transition: 'all 0.15s ease',
+                              whiteSpace: 'nowrap',
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.background = '#f0fdfa';
+                              e.currentTarget.style.background = '#0e6558';
+                              e.currentTarget.style.transform = 'translateY(-1px)';
                             }}
                             onMouseLeave={(e) => {
-                              e.currentTarget.style.background = '#ffffff';
+                              e.currentTarget.style.background = '#117a6b';
+                              e.currentTarget.style.transform = 'translateY(0)';
                             }}
-                            title="Preview simulation right here"
+                            title="Launch Interactive Simulation Lab"
                           >
-                            <Eye size={15} />
-                            <span>Preview</span>
+                            <Play size={15} fill="#ffffff" />
+                            <span>Launch Simulation</span>
                           </button>
 
                           <button
                             type="button"
                             onClick={() => launchOnSmartBoard(sim.componentKey || sim.code || sim.id, sim.title)}
                             style={{
-                              flex: 1.5,
+                              flex: 1,
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
-                              gap: '6px',
-                              padding: '9px 14px',
-                              background: '#0284c7',
-                              color: '#ffffff',
-                              border: 'none',
+                              gap: '5px',
+                              padding: '10px 12px',
+                              background: '#ffffff',
+                              color: '#0284c7',
+                              border: '1.5px solid #0284c7',
                               borderRadius: '8px',
                               fontSize: '12px',
-                              fontWeight: '800',
+                              fontWeight: '700',
                               cursor: 'pointer',
-                              boxShadow: '0 2px 6px rgba(2, 132, 199, 0.25)',
                               transition: 'all 0.15s ease',
                               whiteSpace: 'nowrap',
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.background = '#0369a1';
-                              e.currentTarget.style.transform = 'translateY(-1px)';
+                              e.currentTarget.style.background = '#f0f9ff';
                             }}
                             onMouseLeave={(e) => {
-                              e.currentTarget.style.background = '#0284c7';
-                              e.currentTarget.style.transform = 'translateY(0)';
+                              e.currentTarget.style.background = '#ffffff';
                             }}
-                            title="Launch to Smart Board"
+                            title="Open on Smart Board whiteboard"
                           >
-                            <Monitor size={15} />
-                            <span>Launch to Smart Board</span>
+                            <Monitor size={14} />
+                            <span>Smart Board</span>
                           </button>
                         </div>
                       </div>

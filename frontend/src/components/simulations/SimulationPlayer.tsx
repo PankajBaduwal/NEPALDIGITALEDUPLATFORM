@@ -853,23 +853,7 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
   );
 };
 
-/** The running simulation, with a "Launch on Smart Board" button over it (every simulation, every role). */
+/** The running simulation player */
 export const SimulationPlayer: React.FC<SimulationPlayerProps> = (props) => {
-  const { simulation, embedded } = props;
-  const ported = String(simulation.componentKey || '').startsWith('kpriet:'); // ported ones carry their own button
-  return (
-    <>
-      <SimulationPlayerView {...props} />
-      {!embedded && !ported && (
-        <button
-          type="button"
-          onClick={() => launchOnSmartBoard(simulation.componentKey || simulation.code || simulation.id, simulation.title)}
-          aria-label="Launch on Smart Board"
-          style={{ position: 'fixed', right: 16, bottom: 16, zIndex: 10030, height: 42, padding: '0 16px', borderRadius: 999, border: '1px solid rgba(255,255,255,.3)', background: '#0f4c4a', color: '#fff', display: 'inline-flex', alignItems: 'center', gap: 8, fontWeight: 800, fontSize: 13, cursor: 'pointer', boxShadow: '0 8px 22px rgba(15,76,74,.4)' }}
-        >
-          🖥 Launch on Smart Board
-        </button>
-      )}
-    </>
-  );
+  return <SimulationPlayerView {...props} />;
 };
