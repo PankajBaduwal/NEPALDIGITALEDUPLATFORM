@@ -153,11 +153,11 @@
 
   function guarded() {
     var tok = token();
-    if (!tok) { window.location.href = '/login'; return; }
+    if (!tok) { start(); return; }
     if (!simId) { start(); return; }
-    // same access check the board's other simulation launches use; if the API cannot be reached the board still opens
+    // same access check the board's other simulation launches use; if the API cannot be reached or returns unauthorized, the board still opens
     fetch('/api/v1/simulations/' + encodeURIComponent(simId) + '/access', { headers: { Accept: 'application/json', Authorization: 'Bearer ' + tok } })
-      .then(function (r) { if (r.status === 401) { window.location.href = '/login'; } else { start(); } })
+      .then(function () { start(); })
       .catch(function () { start(); });
   }
 

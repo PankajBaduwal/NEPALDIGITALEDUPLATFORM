@@ -26,14 +26,17 @@ export async function simulationPlayRedirect(req: Request, res: Response) {
   const { id } = req.params;
   if (!SAFE_ID.test(id)) return res.status(400).send('Invalid simulation id');
   let sim: any = null;
-  try {
-    const query: any[] = [{ code: id }, { componentKey: id }];
-    if (mongoose.isValidObjectId(id)) {
-      query.push({ _id: id });
+  // Only query MongoDB if connected, and cap query time so it never hangs
+  if (mongoose.connection.readyState === 1) {
+    try {
+      const query: any[] = [{ code: id }, { componentKey: id }];
+      if (mongoose.isValidObjectId(id)) {
+        query.push({ _id: id });
+      }
+      sim = await Simulation.findOne({ $or: query }).maxTimeMS(1500).lean();
+    } catch {
+      sim = null;
     }
-    sim = await Simulation.findOne({ $or: query }).lean();
-  } catch {
-    sim = null;
   }
   const key = String(sim?.componentKey || '');
   if (key.startsWith('kpriet:')) return res.redirect(302, `/sim.html?id=${encodeURIComponent(key.slice('kpriet:'.length))}&embed=1`);

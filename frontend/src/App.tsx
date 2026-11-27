@@ -80,8 +80,8 @@ export const App: React.FC = () => {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/launchpad" element={<Navigate to="/login" replace />} />
-          {/* Bare page the Smart Board embeds to run a platform simulation (any signed-in user) */}
-          <Route path="/embed/simulation/:key" element={<ProtectedRoute><EmbeddedSimulationPage /></ProtectedRoute>} />
+          {/* Bare page the Smart Board embeds to run a platform simulation */}
+          <Route path="/embed/simulation/:key" element={<EmbeddedSimulationPage />} />
           <Route path="/sim/floating-sinking" element={<FloatingSinkingLab onBackToLibrary={() => window.history.back()} />} />
           <Route path="/sim/dissolving" element={<DissolvingMaterialsLab onBackToLibrary={() => window.history.back()} />} />
           <Route path="/sim/explore-computer" element={<ExploreComputerSim onBackToLibrary={() => window.history.back()} />} />
