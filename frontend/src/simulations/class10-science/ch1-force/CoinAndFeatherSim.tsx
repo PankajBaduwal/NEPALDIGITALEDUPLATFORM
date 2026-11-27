@@ -574,60 +574,66 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.translate(cx, cy);
       ctx.rotate(spin);
 
-      const r = 18 * scale;
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 0;
+      const r = 20 * scale;
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.28)';
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetY = 3;
 
-      const rimGrad = ctx.createRadialGradient(-r * 0.2, -r * 0.3, r * 0.1, 0, 0, r);
+      const rimGrad = ctx.createRadialGradient(-r * 0.25, -r * 0.35, r * 0.1, 0, 0, r);
       rimGrad.addColorStop(0, '#fef08a');
-      rimGrad.addColorStop(0.5, '#f59e0b');
-      rimGrad.addColorStop(0.9, '#b45309');
+      rimGrad.addColorStop(0.4, '#f59e0b');
+      rimGrad.addColorStop(0.85, '#b45309');
       rimGrad.addColorStop(1, '#78350f');
 
       ctx.fillStyle = rimGrad;
       ctx.beginPath();
       ctx.arc(0, 0, r, 0, Math.PI * 2);
       ctx.fill();
+
+      // Outer sharp rim contour
+      ctx.strokeStyle = '#78350f';
+      ctx.lineWidth = 1.8 * scale;
+      ctx.stroke();
+
       ctx.shadowColor = 'transparent';
 
-      ctx.strokeStyle = '#d97706';
-      ctx.lineWidth = 1.2 * scale;
-      const notches = 20;
+      // Coin serration / milled edge notches
+      ctx.strokeStyle = '#fef08a';
+      ctx.lineWidth = 1.4 * scale;
+      const notches = 24;
       for (let i = 0; i < notches; i++) {
         const ang = (i * Math.PI * 2) / notches;
         ctx.beginPath();
-        ctx.moveTo(Math.cos(ang) * (r - 2 * scale), Math.sin(ang) * (r - 2 * scale));
+        ctx.moveTo(Math.cos(ang) * (r - 2.5 * scale), Math.sin(ang) * (r - 2.5 * scale));
         ctx.lineTo(Math.cos(ang) * r, Math.sin(ang) * r);
         ctx.stroke();
       }
 
       const innerR = r * 0.78;
       const faceGrad = ctx.createRadialGradient(-innerR * 0.2, -innerR * 0.3, 2, 0, 0, innerR);
-      faceGrad.addColorStop(0, '#fde68a');
-      faceGrad.addColorStop(0.7, '#f59e0b');
-      faceGrad.addColorStop(1, '#b45309');
+      faceGrad.addColorStop(0, '#fef9c3');
+      faceGrad.addColorStop(0.65, '#f59e0b');
+      faceGrad.addColorStop(1, '#92400e');
 
       ctx.fillStyle = faceGrad;
       ctx.beginPath();
       ctx.arc(0, 0, innerR, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.strokeStyle = '#fef08a';
-      ctx.lineWidth = 1 * scale;
-      ctx.beginPath();
-      ctx.arc(0, 0, innerR, 0, Math.PI * 2);
+      ctx.strokeStyle = '#b45309';
+      ctx.lineWidth = 1.2 * scale;
       ctx.stroke();
 
-      ctx.fillStyle = '#78350f';
-      ctx.font = `900 ${Math.round(11 * scale)}px system-ui, sans-serif`;
+      ctx.fillStyle = '#451a03';
+      ctx.font = `900 ${Math.round(12 * scale)}px system-ui, sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('£', 0, 0);
 
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+      // Specular highlight
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
       ctx.beginPath();
-      ctx.ellipse(-innerR * 0.4, -innerR * 0.4, 4 * scale, 2 * scale, Math.PI / 4, 0, Math.PI * 2);
+      ctx.ellipse(-innerR * 0.4, -innerR * 0.4, 5 * scale, 2.8 * scale, Math.PI / 4, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
@@ -639,50 +645,53 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.translate(cx, cy);
       ctx.rotate(spin);
 
-      const hScale = scale * 1.1;
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 0;
+      const hScale = scale * 1.15;
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetY = 3;
 
       // Handle shaft (Aluminium tube with grooved black rubber grip)
-      ctx.fillStyle = '#cbd5e1';
+      ctx.fillStyle = '#94a3b8';
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 1.2 * hScale;
       ctx.fillRect(-2.5 * hScale, -14 * hScale, 5 * hScale, 36 * hScale);
+      ctx.strokeRect(-2.5 * hScale, -14 * hScale, 5 * hScale, 36 * hScale);
 
       // Black textured rubber grip
-      ctx.fillStyle = '#1e293b';
-      ctx.fillRect(-3 * hScale, 2 * hScale, 6 * hScale, 18 * hScale);
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(-3.2 * hScale, 2 * hScale, 6.4 * hScale, 18 * hScale);
       for (let g = 3; g < 18; g += 3) {
-        ctx.fillStyle = '#475569';
-        ctx.fillRect(-3 * hScale, (2 + g) * hScale, 6 * hScale, 1.2 * hScale);
+        ctx.fillStyle = '#64748b';
+        ctx.fillRect(-3.2 * hScale, (2 + g) * hScale, 6.4 * hScale, 1.2 * hScale);
       }
 
       // Red NASA lanyard ring at bottom
-      ctx.fillStyle = '#ef4444';
+      ctx.fillStyle = '#dc2626';
       ctx.beginPath();
-      ctx.arc(0, 21 * hScale, 3 * hScale, 0, Math.PI * 2);
+      ctx.arc(0, 22 * hScale, 3.5 * hScale, 0, Math.PI * 2);
       ctx.fill();
 
       // Steel Hammer Head (Flat Mallet on left, Beveled Pick on right)
       const headGrad = ctx.createLinearGradient(-18 * hScale, 0, 18 * hScale, 0);
-      headGrad.addColorStop(0, '#94a3b8');
+      headGrad.addColorStop(0, '#64748b');
       headGrad.addColorStop(0.5, '#f8fafc');
-      headGrad.addColorStop(1, '#64748b');
+      headGrad.addColorStop(1, '#475569');
 
       ctx.fillStyle = headGrad;
-      ctx.strokeStyle = '#334155';
-      ctx.lineWidth = 1.5 * hScale;
+      ctx.strokeStyle = '#0f172a';
+      ctx.lineWidth = 1.8 * hScale;
 
       // Mallet block left
       ctx.beginPath();
-      ctx.rect(-16 * hScale, -20 * hScale, 14 * hScale, 9 * hScale);
+      ctx.rect(-17 * hScale, -21 * hScale, 15 * hScale, 10 * hScale);
       ctx.fill();
       ctx.stroke();
 
       // Pointed rock pick right
       ctx.beginPath();
-      ctx.moveTo(-2 * hScale, -20 * hScale);
-      ctx.lineTo(18 * hScale, -17 * hScale);
-      ctx.lineTo(18 * hScale, -14 * hScale);
+      ctx.moveTo(-2 * hScale, -21 * hScale);
+      ctx.lineTo(20 * hScale, -18 * hScale);
+      ctx.lineTo(20 * hScale, -14 * hScale);
       ctx.lineTo(-2 * hScale, -11 * hScale);
       ctx.closePath();
       ctx.fill();
@@ -697,10 +706,10 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.translate(cx, cy);
       ctx.rotate(spin * 0.4);
 
-      const aR = 17 * scale;
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 0;
+      const aR = 19 * scale;
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetY = 3;
 
       // Apple Body (Juicy red radial gradient)
       const appleGrad = ctx.createRadialGradient(-aR * 0.3, -aR * 0.3, aR * 0.1, 0, 0, aR);
@@ -710,37 +719,42 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       appleGrad.addColorStop(1, '#7f1d1d');
 
       ctx.fillStyle = appleGrad;
+      ctx.strokeStyle = '#7f1d1d';
+      ctx.lineWidth = 1.5 * scale;
       ctx.beginPath();
-      // Organic rounded apple shape with top and bottom indent
       ctx.moveTo(0, -aR * 0.7);
       ctx.bezierCurveTo(-aR * 0.6, -aR * 1.1, -aR * 1.15, -aR * 0.2, -aR * 0.95, aR * 0.5);
       ctx.bezierCurveTo(-aR * 0.8, aR * 1.05, -aR * 0.2, aR * 1.05, 0, aR * 0.8);
       ctx.bezierCurveTo(aR * 0.2, aR * 1.05, aR * 0.8, aR * 1.05, aR * 0.95, aR * 0.5);
       ctx.bezierCurveTo(aR * 1.15, -aR * 0.2, aR * 0.6, -aR * 1.1, 0, -aR * 0.7);
       ctx.fill();
+      ctx.stroke();
 
       ctx.shadowColor = 'transparent';
 
       // Stem
-      ctx.strokeStyle = '#573315';
-      ctx.lineWidth = 2.5 * scale;
+      ctx.strokeStyle = '#451a03';
+      ctx.lineWidth = 2.8 * scale;
       ctx.beginPath();
       ctx.moveTo(0, -aR * 0.6);
       ctx.quadraticCurveTo(3 * scale, -aR * 1.1, 6 * scale, -aR * 1.35);
       ctx.stroke();
 
       // Small Green Leaf attached to stem
-      ctx.fillStyle = '#22c55e';
+      ctx.fillStyle = '#16a34a';
+      ctx.strokeStyle = '#14532d';
+      ctx.lineWidth = 1 * scale;
       ctx.beginPath();
       ctx.moveTo(2 * scale, -aR * 0.9);
       ctx.quadraticCurveTo(10 * scale, -aR * 1.25, 12 * scale, -aR * 0.9);
       ctx.quadraticCurveTo(6 * scale, -aR * 0.75, 2 * scale, -aR * 0.9);
       ctx.fill();
+      ctx.stroke();
 
       // Specular Shine
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
       ctx.beginPath();
-      ctx.ellipse(-aR * 0.35, -aR * 0.25, 4 * scale, 2.5 * scale, Math.PI / 4, 0, Math.PI * 2);
+      ctx.ellipse(-aR * 0.35, -aR * 0.25, 4.5 * scale, 3 * scale, Math.PI / 4, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
@@ -764,22 +778,22 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.translate(cx, cy);
       ctx.rotate(tiltAngle);
 
-      const fH = 46 * scale;
-      const fW = 19 * scale;
+      const fH = 50 * scale;
+      const fW = 21 * scale;
 
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 0;
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetY = 3;
 
       const vaneGrad = ctx.createLinearGradient(-fW, -fH * 0.5, fW, fH * 0.5);
-      vaneGrad.addColorStop(0, '#f472b6');
-      vaneGrad.addColorStop(0.4, '#c084fc');
-      vaneGrad.addColorStop(0.8, '#38bdf8');
-      vaneGrad.addColorStop(1, '#67e8f9');
+      vaneGrad.addColorStop(0, '#ec4899');
+      vaneGrad.addColorStop(0.35, '#a855f7');
+      vaneGrad.addColorStop(0.7, '#0284c7');
+      vaneGrad.addColorStop(1, '#06b6d4');
 
       ctx.fillStyle = vaneGrad;
-      ctx.strokeStyle = 'rgba(236, 72, 153, 0.6)';
-      ctx.lineWidth = 1 * scale;
+      ctx.strokeStyle = '#831843';
+      ctx.lineWidth = 1.6 * scale;
 
       // Left Vane
       ctx.beginPath();
@@ -801,8 +815,8 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.shadowColor = 'transparent';
 
       // Barbs
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
-      ctx.lineWidth = 0.9 * scale;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+      ctx.lineWidth = 1.1 * scale;
       for (let y = -fH * 0.38; y <= fH * 0.35; y += 4.5 * scale) {
         ctx.beginPath();
         ctx.moveTo(0, y);
@@ -817,7 +831,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
 
       // Rachis
       ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 2.2 * scale;
+      ctx.lineWidth = 2.6 * scale;
       ctx.beginPath();
       ctx.moveTo(0, fH * 0.52);
       ctx.quadraticCurveTo(-1.5 * scale, 0, 0, -fH * 0.5);
@@ -832,23 +846,23 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.translate(cx, cy);
       ctx.rotate(tiltAngle);
 
-      const fH = 48 * scale;
-      const fW = 17 * scale;
+      const fH = 52 * scale;
+      const fW = 20 * scale;
 
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 0;
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetY = 3;
 
       // Falcon feather: Snowy white with slate grey/brown barred bands
       const falconGrad = ctx.createLinearGradient(0, -fH * 0.5, 0, fH * 0.5);
-      falconGrad.addColorStop(0, '#f8fafc');
-      falconGrad.addColorStop(0.3, '#e2e8f0');
+      falconGrad.addColorStop(0, '#ffffff');
+      falconGrad.addColorStop(0.3, '#f1f5f9');
       falconGrad.addColorStop(0.7, '#cbd5e1');
       falconGrad.addColorStop(1, '#94a3b8');
 
       ctx.fillStyle = falconGrad;
-      ctx.strokeStyle = '#475569';
-      ctx.lineWidth = 1 * scale;
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 1.6 * scale;
 
       ctx.beginPath();
       ctx.moveTo(0, fH * 0.45);
@@ -861,9 +875,9 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
 
       ctx.shadowColor = 'transparent';
 
-      // Falcon grey barring stripes
-      ctx.strokeStyle = '#475569';
-      ctx.lineWidth = 2 * scale;
+      // Falcon dark grey barring stripes
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 2.5 * scale;
       for (let s = -fH * 0.3; s <= fH * 0.3; s += 8 * scale) {
         ctx.beginPath();
         ctx.moveTo(-fW * 0.7 * (1 - Math.abs(s) / (fH * 0.5)), s);
@@ -872,8 +886,8 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       }
 
       // Rachis
-      ctx.strokeStyle = '#f1f5f9';
-      ctx.lineWidth = 2.2 * scale;
+      ctx.strokeStyle = '#0f172a';
+      ctx.lineWidth = 2.5 * scale;
       ctx.beginPath();
       ctx.moveTo(0, fH * 0.52);
       ctx.lineTo(0, -fH * 0.5);
@@ -888,27 +902,27 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.translate(cx, cy);
       ctx.rotate(tiltAngle);
 
-      const lS = scale * 1.2;
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 0;
+      const lS = scale * 1.25;
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetY = 3;
 
       // Golden amber to forest olive autumn gradient
       const leafGrad = ctx.createLinearGradient(-15 * lS, -18 * lS, 15 * lS, 18 * lS);
-      leafGrad.addColorStop(0, '#f59e0b'); // Amber
-      leafGrad.addColorStop(0.5, '#ea580c'); // Orange
-      leafGrad.addColorStop(1, '#84cc16'); // Olive
+      leafGrad.addColorStop(0, '#f59e0b');
+      leafGrad.addColorStop(0.5, '#ea580c');
+      leafGrad.addColorStop(1, '#84cc16');
 
       ctx.fillStyle = leafGrad;
-      ctx.strokeStyle = '#9a3412';
-      ctx.lineWidth = 1.2 * lS;
+      ctx.strokeStyle = '#7c2d12';
+      ctx.lineWidth = 1.6 * lS;
 
       // Multi-lobed leaf shape
       ctx.beginPath();
-      ctx.moveTo(0, 18 * lS); // Stem base
+      ctx.moveTo(0, 18 * lS);
       ctx.quadraticCurveTo(-14 * lS, 10 * lS, -12 * lS, -2 * lS);
       ctx.quadraticCurveTo(-18 * lS, -6 * lS, -14 * lS, -14 * lS);
-      ctx.quadraticCurveTo(-6 * lS, -12 * lS, 0, -22 * lS); // Top tip
+      ctx.quadraticCurveTo(-6 * lS, -12 * lS, 0, -22 * lS);
       ctx.quadraticCurveTo(6 * lS, -12 * lS, 14 * lS, -14 * lS);
       ctx.quadraticCurveTo(18 * lS, -6 * lS, 12 * lS, -2 * lS);
       ctx.quadraticCurveTo(14 * lS, 10 * lS, 0, 18 * lS);
@@ -919,13 +933,13 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
 
       // Leaf veins
       ctx.strokeStyle = '#fef08a';
-      ctx.lineWidth = 1.5 * lS;
+      ctx.lineWidth = 1.8 * lS;
       ctx.beginPath();
       ctx.moveTo(0, 22 * lS);
-      ctx.lineTo(0, -20 * lS); // Central vein
+      ctx.lineTo(0, -20 * lS);
       ctx.stroke();
 
-      ctx.lineWidth = 0.9 * lS;
+      ctx.lineWidth = 1.1 * lS;
       for (let v = -12; v <= 10; v += 6) {
         ctx.beginPath();
         ctx.moveTo(0, v * lS);
@@ -966,60 +980,92 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
 
       ctx.save();
 
-      // Tube glass gradient
+      // Tube glass gradient - Pristine, ultra-clear borosilicate glass with realistic reflections
       const tubeGrad = ctx.createLinearGradient(leftX, 0, rightX, 0);
-      tubeGrad.addColorStop(0, 'rgba(255, 255, 255, 0.22)');
-      tubeGrad.addColorStop(0.18, isVacuum ? 'rgba(15, 23, 42, 0.5)' : 'rgba(186, 230, 253, 0.28)');
-      tubeGrad.addColorStop(0.82, isVacuum ? 'rgba(15, 23, 42, 0.5)' : 'rgba(186, 230, 253, 0.28)');
-      tubeGrad.addColorStop(1, 'rgba(255, 255, 255, 0.25)');
+      if (isVacuum) {
+        // Crystal-clear vacuum glass with subtle cyan-tinted refraction at edges
+        tubeGrad.addColorStop(0, 'rgba(255, 255, 255, 0.85)');
+        tubeGrad.addColorStop(0.08, 'rgba(224, 242, 254, 0.45)');
+        tubeGrad.addColorStop(0.25, 'rgba(240, 249, 255, 0.12)');
+        tubeGrad.addColorStop(0.75, 'rgba(240, 249, 255, 0.12)');
+        tubeGrad.addColorStop(0.92, 'rgba(224, 242, 254, 0.45)');
+        tubeGrad.addColorStop(1, 'rgba(255, 255, 255, 0.85)');
+      } else {
+        // Air-filled tube: gentle pale azure atmosphere
+        tubeGrad.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+        tubeGrad.addColorStop(0.1, 'rgba(186, 230, 253, 0.45)');
+        tubeGrad.addColorStop(0.5, 'rgba(224, 242, 254, 0.28)');
+        tubeGrad.addColorStop(0.9, 'rgba(186, 230, 253, 0.45)');
+        tubeGrad.addColorStop(1, 'rgba(255, 255, 255, 0.8)');
+      }
 
       ctx.fillStyle = tubeGrad;
       ctx.beginPath();
       ctx.roundRect(leftX, topY, tWidth, tHeight, 16);
       ctx.fill();
 
-      // Glass specular reflection lines
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+      // Glass specular reflection glares (Left & Right cylindrical highlights)
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.lineWidth = 3.5;
+      ctx.beginPath();
+      ctx.moveTo(leftX + 12, topY + 16);
+      ctx.lineTo(leftX + 12, topY + tHeight - 18);
+      ctx.stroke();
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(leftX + 22, topY + 28);
+      ctx.lineTo(leftX + 22, topY + tHeight - 30);
+      ctx.stroke();
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(rightX - 14, topY + 20);
+      ctx.lineTo(rightX - 14, topY + tHeight - 22);
+      ctx.stroke();
+
+      // Tube outer glass border - Crisp high-contrast slate frame
+      ctx.strokeStyle = '#334155';
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.moveTo(leftX + 14, topY + 16);
-      ctx.lineTo(leftX + 14, topY + tHeight - 18);
-      ctx.stroke();
-
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
-      ctx.lineWidth = 1.8;
-      ctx.beginPath();
-      ctx.moveTo(leftX + 24, topY + 28);
-      ctx.lineTo(leftX + 24, topY + tHeight - 30);
-      ctx.stroke();
-
-      // Tube outer glass border
-      ctx.strokeStyle = '#94a3b8';
-      ctx.lineWidth = 2.5;
+      ctx.roundRect(leftX, topY, tWidth, tHeight, 16);
       ctx.stroke();
 
       // Top Heavy Brass Sealing Cap
-      ctx.fillStyle = '#64748b';
-      ctx.strokeStyle = '#334155';
+      const capGrad = ctx.createLinearGradient(leftX, topY - 14, rightX, topY + 2);
+      capGrad.addColorStop(0, '#334155');
+      capGrad.addColorStop(0.5, '#475569');
+      capGrad.addColorStop(1, '#1e293b');
+      ctx.fillStyle = capGrad;
+      ctx.strokeStyle = '#0f172a';
       ctx.lineWidth = 2.5;
       ctx.beginPath();
       ctx.roundRect(leftX - 8, topY - 14, tWidth + 16, 16, 7);
       ctx.fill();
       ctx.stroke();
 
-      // Top knurled knob
-      ctx.fillStyle = '#cbd5e1';
+      // Top knurled brass knob
+      ctx.fillStyle = '#d97706';
+      ctx.strokeStyle = '#78350f';
+      ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.arc(centerX, topY - 18, 10, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
+
+      ctx.fillStyle = '#fde68a';
+      ctx.beginPath();
+      ctx.arc(centerX - 2, topY - 20, 3, 0, Math.PI * 2);
+      ctx.fill();
 
       // Bottom Brass Stopcock Valve Mount
       ctx.fillStyle = '#d97706';
       ctx.strokeStyle = '#78350f';
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.rect(centerX - 14, groundY - 14, 28, 20);
+      ctx.rect(centerX - 16, groundY - 14, 32, 20);
       ctx.fill();
       ctx.stroke();
 
@@ -1039,15 +1085,15 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
 
       // Valve state indicator tag
       if (isVacuum) {
-        ctx.font = '700 9px system-ui, sans-serif';
-        ctx.fillStyle = valveOpen ? '#ef4444' : '#10b981';
+        ctx.font = '800 10px system-ui, sans-serif';
+        ctx.fillStyle = valveOpen ? '#dc2626' : '#15803d';
         ctx.textAlign = 'center';
-        ctx.fillText(valveOpen ? 'VALVE OPEN (AIR IN)' : 'SEALED (VACUUM)', centerX, groundY + 18);
+        ctx.fillText(valveOpen ? 'VALVE OPEN (AIR IN)' : 'SEALED (VACUUM)', centerX, groundY + 20);
       }
 
-      // Title & Condition Label
+      // Title & Condition Label - High Contrast Dark Shades
       ctx.font = '800 13px system-ui, sans-serif';
-      ctx.fillStyle = isVacuum ? '#38bdf8' : '#f59e0b';
+      ctx.fillStyle = isVacuum ? '#0369a1' : '#b45309';
       ctx.textAlign = 'center';
       ctx.fillText(lang === 'ne' ? titleNe : titleEn, centerX, topY - 32);
 
@@ -1057,9 +1103,9 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       const subNe = isVacuum
         ? `(हावा निकालिएको: ${vacLevel}% शून्य)`
         : '(सामान्य वायुमण्डलीय हावा: १०१.३ kPa)';
-      ctx.font = '600 11px system-ui, sans-serif';
-      ctx.fillStyle = '#94a3b8';
-      ctx.fillText(lang === 'ne' ? subNe : subEn, centerX, topY - 18);
+      ctx.font = '700 11px system-ui, sans-serif';
+      ctx.fillStyle = '#334155';
+      ctx.fillText(lang === 'ne' ? subNe : subEn, centerX, topY - 17);
 
       ctx.restore();
     };
@@ -1070,8 +1116,9 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.translate(gx, gy);
 
       // Brass outer rim
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+      ctx.shadowBlur = 6;
+      ctx.shadowOffsetY = 2;
       ctx.fillStyle = '#b45309';
       ctx.strokeStyle = '#fde68a';
       ctx.lineWidth = 3;
@@ -1082,16 +1129,19 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.shadowColor = 'transparent';
 
       // Dial face (white porcelain)
-      ctx.fillStyle = '#f8fafc';
+      ctx.fillStyle = '#ffffff';
+      ctx.strokeStyle = '#0f172a';
+      ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.arc(0, 0, radius - 4, 0, Math.PI * 2);
       ctx.fill();
+      ctx.stroke();
 
       // Gauge dial ticks (0 kPa to 100 kPa)
       const startAngle = Math.PI * 0.75;
       const endAngle = Math.PI * 2.25;
 
-      ctx.strokeStyle = '#334155';
+      ctx.strokeStyle = '#0f172a';
       ctx.lineWidth = 1.5;
       for (let i = 0; i <= 10; i++) {
         const ang = startAngle + (i / 10) * (endAngle - startAngle);
@@ -1108,7 +1158,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       const needleAngle = startAngle + fraction * (endAngle - startAngle);
 
       ctx.strokeStyle = '#dc2626';
-      ctx.lineWidth = 2.2;
+      ctx.lineWidth = 2.4;
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(Math.cos(needleAngle) * (radius - 10), Math.sin(needleAngle) * (radius - 10));
@@ -1117,17 +1167,17 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       // Center brass pin
       ctx.fillStyle = '#b45309';
       ctx.beginPath();
-      ctx.arc(0, 0, 4, 0, Math.PI * 2);
+      ctx.arc(0, 0, 4.5, 0, Math.PI * 2);
       ctx.fill();
 
-      // Gauge Label
-      ctx.font = '800 8px system-ui, sans-serif';
+      // Gauge Label - High Contrast Dark Text
+      ctx.font = '800 8.5px system-ui, sans-serif';
       ctx.fillStyle = '#0f172a';
       ctx.textAlign = 'center';
       ctx.fillText('PRESSURE', 0, -radius * 0.35);
 
-      ctx.font = '800 9px monospace';
-      ctx.fillStyle = '#0284c7';
+      ctx.font = '800 10px monospace';
+      ctx.fillStyle = '#0369a1';
       ctx.fillText(`${pressureKPa} kPa`, 0, radius * 0.45);
 
       ctx.restore();
@@ -1159,8 +1209,8 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
 
       // Piston Rod
       const pistonDisplacement = Math.sin(pumpAngleRef.current) * 8 * scale;
-      ctx.strokeStyle = '#94a3b8';
-      ctx.lineWidth = 3 * scale;
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 3.2 * scale;
       ctx.beginPath();
       ctx.moveTo(cylX + cW / 2, cylY + pistonDisplacement);
       ctx.lineTo(cylX + cW / 2, cylY - 14 * scale + pistonDisplacement);
@@ -1171,7 +1221,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       const wheelY = py - bH - 52 * scale;
       const wheelR = 30 * scale;
 
-      ctx.strokeStyle = '#475569';
+      ctx.strokeStyle = '#334155';
       ctx.lineWidth = 3.5 * scale;
       ctx.beginPath();
       ctx.moveTo(wheelX - 16 * scale, py - bH);
@@ -1183,7 +1233,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.translate(wheelX, wheelY);
       ctx.rotate(pumpAngleRef.current);
 
-      ctx.strokeStyle = '#334155';
+      ctx.strokeStyle = '#0f172a';
       ctx.lineWidth = 4 * scale;
       ctx.beginPath();
       ctx.arc(0, 0, wheelR, 0, Math.PI * 2);
@@ -1198,7 +1248,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
         ctx.stroke();
       }
 
-      ctx.fillStyle = '#f59e0b';
+      ctx.fillStyle = '#d97706';
       ctx.beginPath();
       ctx.arc(0, 0, 5 * scale, 0, Math.PI * 2);
       ctx.fill();
@@ -1211,9 +1261,9 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.lineTo(Math.cos(0) * 16 * scale, Math.sin(0) * 16 * scale);
       ctx.stroke();
 
-      ctx.fillStyle = '#ef4444';
+      ctx.fillStyle = '#dc2626';
       ctx.beginPath();
-      ctx.arc(Math.cos(0) * 16 * scale, Math.sin(0) * 16 * scale, 4 * scale, 0, Math.PI * 2);
+      ctx.arc(Math.cos(0) * 16 * scale, Math.sin(0) * 16 * scale, 4.5 * scale, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
@@ -1223,17 +1273,18 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
         for (let p = 0; p < 4; p++) {
           const puffX = cylX - 10 * scale - p * 8 * scale;
           const puffY = cylY + 10 * scale - Math.sin(time * 8 + p) * 6;
-          ctx.fillStyle = `rgba(255, 255, 255, ${0.6 - p * 0.12})`;
+          ctx.fillStyle = `rgba(100, 116, 139, ${0.7 - p * 0.15})`;
           ctx.beginPath();
           ctx.arc(puffX, puffY, (3.5 + p * 1.5) * scale, 0, Math.PI * 2);
           ctx.fill();
         }
       }
 
+      // High-contrast label under pump
       ctx.font = `800 ${Math.round(11 * scale)}px system-ui, sans-serif`;
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = '#0f172a';
       ctx.textAlign = 'center';
-      ctx.fillText("Boyle's Air Pump (1660)", px, py + 16 * scale);
+      ctx.fillText("Boyle's Air Pump (1660)", px, py + 18 * scale);
 
       ctx.restore();
     };
@@ -1242,131 +1293,203 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
     // 4. VIEW MODE RENDERING: 'compare', 'tube1', 'tube2'
     // =========================================================================
     if (viewMode === 'compare') {
-      const tubeW = 140;
-      const tubeH = 285;
-      const t1CenterX = width * 0.28;
-      const t2CenterX = width * 0.65;
+      const tubeW = 160;
+      const tubeH = 300;
+      const t1CenterX = width * 0.27;
+      const t2CenterX = width * 0.66;
       const tubeTopY = groundY - tubeH;
-      const fallRange = tubeH - 52;
+      const fallRange = tubeH - 72;
 
       drawCylinder(t1CenterX, tubeW, tubeH, false, 0, '1. TUBE WITH AIR', '१. हावा भएको नली');
       drawCylinder(t2CenterX, tubeW, tubeH, true, vacuumPercent, '2. TUBE IN VACUUM', '२. शून्य नली (भ्याकुम)');
 
-      // Tube 1 Air Particles
+      // Tube 1 High-Visibility Air Particles (Molecules)
       const t1InnerL = t1CenterX - tubeW / 2 + 10;
       const t1InnerR = t1CenterX + tubeW / 2 - 10;
       const innerW = t1InnerR - t1InnerL;
       const innerH = tubeH - 30;
 
-      ctx.fillStyle = 'rgba(147, 197, 253, 0.45)';
       airParticlesRef.current.t1.forEach((p) => {
         p.x = (p.x + p.vx * 0.04 + 1) % 1;
         p.y = (p.y + p.vy * 0.04 + 1) % 1;
+        const px = t1InnerL + p.x * innerW;
+        const py = tubeTopY + 15 + p.y * innerH;
         ctx.beginPath();
-        ctx.arc(t1InnerL + p.x * innerW, tubeTopY + 15 + p.y * innerH, p.radius, 0, Math.PI * 2);
+        ctx.arc(px, py, Math.max(p.radius * 1.3, 3), 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(2, 132, 199, 0.65)';
         ctx.fill();
+        ctx.strokeStyle = 'rgba(3, 105, 161, 0.85)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
       });
 
-      // Tube 2 Remaining Air Particles
+      // Tube 2 Remaining Air Particles (Evacuation visualization)
       const remainingCount = Math.round(55 * (1 - vacuumPercent / 100));
       const t2InnerL = t2CenterX - tubeW / 2 + 10;
-      ctx.fillStyle = 'rgba(147, 197, 253, 0.35)';
       for (let i = 0; i < remainingCount; i++) {
         const p = airParticlesRef.current.t2[i];
         if (p) {
           p.x = (p.x + p.vx * 0.04 + 1) % 1;
           p.y = (p.y + p.vy * 0.04 + 1) % 1;
+          const px = t2InnerL + p.x * innerW;
+          const py = tubeTopY + 15 + p.y * innerH;
           ctx.beginPath();
-          ctx.arc(t2InnerL + p.x * innerW, tubeTopY + 15 + p.y * innerH, p.radius, 0, Math.PI * 2);
+          ctx.arc(px, py, Math.max(p.radius * 1.3, 3), 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(2, 132, 199, 0.55)';
           ctx.fill();
+          ctx.strokeStyle = 'rgba(3, 105, 161, 0.75)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
         }
       }
 
       // Vacuum Hose connecting Tube 2 to Pump
       const pumpX = width * 0.88;
-      const hoseStartX = t2CenterX + 14;
+      const hoseStartX = t2CenterX + 16;
       const hoseStartY = groundY - 6;
-      ctx.strokeStyle = '#334155';
-      ctx.lineWidth = 6;
+      ctx.strokeStyle = '#1e293b';
+      ctx.lineWidth = 7;
       ctx.beginPath();
       ctx.moveTo(hoseStartX, hoseStartY);
       ctx.bezierCurveTo(hoseStartX + 20, hoseStartY + 25, pumpX - 45, groundY + 15, pumpX - 35, groundY - 14);
       ctx.stroke();
 
       ctx.strokeStyle = '#64748b';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 3.5;
       ctx.stroke();
 
       drawBoylePump(pumpX, groundY, 0.85);
-      drawAnalogGauge(t2CenterX + tubeW / 2 + 34, tubeTopY + 50, 26);
+      drawAnalogGauge(t2CenterX + tubeW / 2 + 36, tubeTopY + 50, 27);
 
-      // Object Positions
-      const t1CoinX = t1CenterX - 28;
-      const t1CoinY = tubeTopY + 22 + posRef.current.t1HeavyY * fallRange;
-      const t1FeatherX = t1CenterX + 28 + Math.sin(time * 3 + posRef.current.t1LightFlutter) * 10;
-      const t1FeatherY = tubeTopY + 22 + posRef.current.t1LightY * fallRange;
+      // Distinct Object Labels at top of tube (No overlap with falling objects!)
+      const drawColBadge = (title: string, x: number, y: number, color: string, bg: string, border: string) => {
+        ctx.save();
+        ctx.font = '800 11px system-ui, sans-serif';
+        const txtW = ctx.measureText(title).width + 16;
+        ctx.fillStyle = bg;
+        ctx.strokeStyle = border;
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.roundRect(x - txtW / 2, y - 9, txtW, 18, 5);
+        ctx.fill();
+        ctx.stroke();
 
-      const t2CoinX = t2CenterX - 28;
-      const t2CoinY = tubeTopY + 22 + posRef.current.t2HeavyY * fallRange;
-      const t2FeatherX = t2CenterX + 28;
-      const t2FeatherY = tubeTopY + 22 + posRef.current.t2LightY * fallRange;
+        ctx.fillStyle = color;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(title, x, y);
+        ctx.restore();
+      };
 
-      // Render Dynamic Objects in Tube 1
-      drawHeavyObject(t1CoinX, t1CoinY, 0.9, posRef.current.t1HeavyY * 2);
-      drawLightObject(t1FeatherX, t1FeatherY, 0.9, Math.sin(time * 3.5) * 0.35);
+      const heavyShort = getHeavyLabel().split(' ')[0];
+      const lightShort = getLightLabel().split(' ')[0];
 
-      // Render Dynamic Objects in Tube 2
-      drawHeavyObject(t2CoinX, t2CoinY, 0.9, posRef.current.t2HeavyY * 2);
-      drawLightObject(t2FeatherX, t2FeatherY, 0.9, 0);
+      drawColBadge(heavyShort, t1CenterX - 36, tubeTopY + 18, '#92400e', '#fef3c7', '#f59e0b');
+      drawColBadge(lightShort, t1CenterX + 36, tubeTopY + 18, '#831843', '#fce7f3', '#ec4899');
 
-      // Spaced Clear Labels: NO OVERLAP!
-      ctx.font = '800 11px system-ui, sans-serif';
-      ctx.fillStyle = '#fde68a';
-      ctx.textAlign = 'center';
-      ctx.fillText(getHeavyLabel().split(' ')[0], t1CenterX - 28, tubeTopY + 12);
-      ctx.fillStyle = '#f472b6';
-      ctx.fillText(getLightLabel().split(' ')[0], t1CenterX + 28, tubeTopY + 12);
+      drawColBadge(heavyShort, t2CenterX - 36, tubeTopY + 18, '#92400e', '#fef3c7', '#f59e0b');
+      drawColBadge(lightShort, t2CenterX + 36, tubeTopY + 18, '#831843', '#fce7f3', '#ec4899');
 
-      ctx.fillStyle = '#fde68a';
-      ctx.fillText(getHeavyLabel().split(' ')[0], t2CenterX - 28, tubeTopY + 12);
-      ctx.fillStyle = '#f472b6';
-      ctx.fillText(getLightLabel().split(' ')[0], t2CenterX + 28, tubeTopY + 12);
+      // Object Positions (Suspended neatly below the label badges)
+      const initialObjY = tubeTopY + 54;
+      const t1CoinX = t1CenterX - 36;
+      const t1CoinY = initialObjY + posRef.current.t1HeavyY * fallRange;
+      const t1FeatherX = t1CenterX + 36 + Math.sin(time * 3 + posRef.current.t1LightFlutter) * 12;
+      const t1FeatherY = initialObjY + posRef.current.t1LightY * fallRange;
 
-      // Educational Callout Text
+      const t2CoinX = t2CenterX - 36;
+      const t2CoinY = initialObjY + posRef.current.t2HeavyY * fallRange;
+      const t2FeatherX = t2CenterX + 36;
+      const t2FeatherY = initialObjY + posRef.current.t2LightY * fallRange;
+
+      // Render Dynamic Objects in Tube 1 (Scale 1.32 for ultra-clear visibility!)
+      drawHeavyObject(t1CoinX, t1CoinY, 1.32, posRef.current.t1HeavyY * 2);
+      drawLightObject(t1FeatherX, t1FeatherY, 1.32, Math.sin(time * 3.5) * 0.35);
+
+      // Render Dynamic Objects in Tube 2 (Scale 1.32)
+      drawHeavyObject(t2CoinX, t2CoinY, 1.32, posRef.current.t2HeavyY * 2);
+      drawLightObject(t2FeatherX, t2FeatherY, 1.32, 0);
+
+      // Professional Educational Comparison Card in Mid Gap
       const midGapX = (t1CenterX + t2CenterX) / 2;
-      ctx.textAlign = 'center';
-      ctx.font = '800 12px system-ui, sans-serif';
-      ctx.fillStyle = '#f59e0b';
-      ctx.fillText(lang === 'ne' ? 'हावामा:' : 'In Air:', midGapX, tubeTopY + 60);
-      ctx.font = '600 11px system-ui, sans-serif';
-      ctx.fillStyle = '#e2e8f0';
-      ctx.fillText(lang === 'ne' ? 'हावाको अवरोधले' : 'Air resistance opposes', midGapX, tubeTopY + 78);
-      ctx.fillText(lang === 'ne' ? 'हल्का वस्तु ढिलो खस्छ' : 'lighter broad object!', midGapX, tubeTopY + 94);
-      ctx.font = '800 11px system-ui, sans-serif';
-      ctx.fillStyle = '#f59e0b';
-      ctx.fillText(lang === 'ne' ? 'भारी वस्तु छिटो खस्छ!' : 'Heavy lands FASTER!', midGapX, tubeTopY + 112);
+      const cardW = 155;
+      const cardH = 220;
+      const cardTopY = tubeTopY + 28;
 
-      ctx.font = '800 12px system-ui, sans-serif';
-      ctx.fillStyle = '#38bdf8';
-      ctx.fillText(lang === 'ne' ? 'शुन्यमा (Vacuum):' : 'In Vacuum:', midGapX, tubeTopY + 155);
-      ctx.font = '600 11px system-ui, sans-serif';
-      ctx.fillStyle = '#e2e8f0';
-      ctx.fillText(lang === 'ne' ? 'हावाको अवरोध = ०' : 'Air resistance = 0', midGapX, tubeTopY + 173);
-      ctx.fillText(lang === 'ne' ? 'दुवै समान प्रवेगले' : 'Both fall at identical', midGapX, tubeTopY + 189);
+      ctx.save();
+      // Card background & subtle shadow
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.08)';
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetY = 4;
+      ctx.fillStyle = '#ffffff';
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(midGapX - cardW / 2, cardTopY, cardW, cardH, 12);
+      ctx.fill();
+      ctx.stroke();
+      ctx.shadowColor = 'transparent';
+
+      // Top Header: In Air
+      ctx.fillStyle = '#fef3c7';
+      ctx.beginPath();
+      ctx.roundRect(midGapX - cardW / 2 + 1, cardTopY + 1, cardW - 2, 27, [11, 11, 0, 0]);
+      ctx.fill();
+
+      ctx.font = '800 11.5px system-ui, sans-serif';
+      ctx.fillStyle = '#b45309';
+      ctx.textAlign = 'center';
+      ctx.fillText(lang === 'ne' ? '१. हावामा (In Air)' : '1. In Air (हावामा)', midGapX, cardTopY + 18);
+
+      // In Air explanation
+      ctx.font = '600 10.5px system-ui, sans-serif';
+      ctx.fillStyle = '#1e293b';
+      ctx.fillText(lang === 'ne' ? 'हावाको अवरोधले' : 'Air resistance opposes', midGapX, cardTopY + 45);
+      ctx.fillText(lang === 'ne' ? 'हल्का वस्तु ढिलो खस्छ' : 'lighter broad objects!', midGapX, cardTopY + 61);
       ctx.font = '800 11px system-ui, sans-serif';
-      ctx.fillStyle = '#4ade80';
-      ctx.fillText(lang === 'ne' ? 'सँगै खस्छन् (a = g)!' : 'rate: a = g simultaneously!', midGapX, tubeTopY + 207);
+      ctx.fillStyle = '#dc2626';
+      ctx.fillText(lang === 'ne' ? 'भारी वस्तु छिटो खस्छ!' : 'Heavy lands FASTER!', midGapX, cardTopY + 81);
+
+      // Horizontal Divider
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(midGapX - cardW / 2 + 10, cardTopY + 97);
+      ctx.lineTo(midGapX + cardW / 2 - 10, cardTopY + 97);
+      ctx.stroke();
+
+      // Bottom Header: In Vacuum
+      ctx.fillStyle = '#e0f2fe';
+      ctx.fillRect(midGapX - cardW / 2 + 1, cardTopY + 107, cardW - 2, 26);
+
+      ctx.font = '800 11.5px system-ui, sans-serif';
+      ctx.fillStyle = '#0369a1';
+      ctx.fillText(lang === 'ne' ? '२. शुन्यमा (In Vacuum)' : '2. In Vacuum (शून्यमा)', midGapX, cardTopY + 124);
+
+      // In Vacuum explanation
+      ctx.font = '600 10.5px system-ui, sans-serif';
+      ctx.fillStyle = '#1e293b';
+      ctx.fillText(lang === 'ne' ? 'हावाको अवरोध = ०' : 'Air resistance = 0', midGapX, cardTopY + 151);
+      ctx.fillText(lang === 'ne' ? 'दुवै समान प्रवेगले' : 'Identical acceleration:', midGapX, cardTopY + 167);
+      ctx.font = '800 11px system-ui, sans-serif';
+      ctx.fillStyle = '#15803d';
+      ctx.fillText(lang === 'ne' ? 'सँगै खस्छन् (a = g)!' : 'Both fall at a = g!', midGapX, cardTopY + 187);
+
+      ctx.font = '800 9.5px system-ui, sans-serif';
+      ctx.fillStyle = '#166534';
+      ctx.fillText(lang === 'ne' ? '✓ एकैसाथ जमिन छुन्छन्' : '✓ Land Simultaneously', midGapX, cardTopY + 205);
+      ctx.restore();
 
       // Left Vertical Air Resistance Ruler
       const rulerX = t1CenterX - tubeW / 2 - 20;
-      ctx.strokeStyle = '#f59e0b';
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#b45309';
+      ctx.lineWidth = 2.5;
       ctx.beginPath();
       ctx.moveTo(rulerX, groundY - 10);
       ctx.lineTo(rulerX, tubeTopY + 10);
       ctx.stroke();
 
-      ctx.fillStyle = '#f59e0b';
+      ctx.fillStyle = '#b45309';
       ctx.beginPath();
       ctx.moveTo(rulerX, tubeTopY + 6);
       ctx.lineTo(rulerX - 5, tubeTopY + 16);
@@ -1378,34 +1501,38 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       ctx.translate(rulerX - 10, (groundY + tubeTopY) / 2);
       ctx.rotate(-Math.PI / 2);
       ctx.font = '800 11px system-ui, sans-serif';
+      ctx.fillStyle = '#b45309';
       ctx.textAlign = 'center';
       ctx.fillText(lang === 'ne' ? 'हावाको अवरोध' : 'Air Resistance (Drag)', 0, 0);
       ctx.restore();
 
-      // Timers below tubes
+      // High-Contrast Timers below tubes
       const drawTimerBadge = (x: number, timeMs: number) => {
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.save();
+        ctx.fillStyle = '#ffffff';
+        ctx.strokeStyle = '#cbd5e1';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
-        ctx.roundRect(x - 42, groundY + 10, 84, 24, 6);
+        ctx.roundRect(x - 48, groundY + 10, 96, 26, 6);
         ctx.fill();
         ctx.stroke();
 
-        ctx.fillStyle = '#38bdf8';
-        ctx.font = '800 11px monospace';
+        ctx.fillStyle = '#0f172a';
+        ctx.font = '800 12px monospace';
         ctx.textAlign = 'center';
-        ctx.fillText(`${(timeMs / 1000).toFixed(2)} s`, x, groundY + 26);
+        ctx.textBaseline = 'middle';
+        ctx.fillText(`⏱ ${(timeMs / 1000).toFixed(2)} s`, x, groundY + 23);
+        ctx.restore();
       };
 
       drawTimerBadge(t1CenterX, tube1TimeMs);
       drawTimerBadge(t2CenterX, tube2TimeMs);
     } else if (viewMode === 'tube1') {
-      const tubeW = 220;
+      const tubeW = 230;
       const tubeH = 320;
       const centerX = width * 0.38;
       const tubeTopY = groundY - tubeH;
-      const fallRange = tubeH - 58;
+      const fallRange = tubeH - 75;
 
       drawCylinder(centerX, tubeW, tubeH, false, 0, 'TUBE 1: NORMAL CONDITIONS WITH AIR', 'नली १: हावा भएको सामान्य अवस्था');
 
@@ -1414,22 +1541,28 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       const innerW = innerR - innerL;
       const innerH = tubeH - 35;
 
-      ctx.fillStyle = 'rgba(147, 197, 253, 0.55)';
       airParticlesRef.current.t1.forEach((p) => {
         p.x = (p.x + p.vx * 0.05 + 1) % 1;
         p.y = (p.y + p.vy * 0.05 + 1) % 1;
+        const px = innerL + p.x * innerW;
+        const py = tubeTopY + 18 + p.y * innerH;
         ctx.beginPath();
-        ctx.arc(innerL + p.x * innerW, tubeTopY + 18 + p.y * innerH, p.radius * 1.2, 0, Math.PI * 2);
+        ctx.arc(px, py, Math.max(p.radius * 1.4, 3.5), 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(2, 132, 199, 0.65)';
         ctx.fill();
+        ctx.strokeStyle = 'rgba(3, 105, 161, 0.85)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
       });
 
-      const coinX = centerX - 55;
-      const featherX = centerX + 55 + Math.sin(time * 3 + posRef.current.t1LightFlutter) * 18;
-      const coinY = tubeTopY + 28 + posRef.current.t1HeavyY * fallRange;
-      const featherY = tubeTopY + 28 + posRef.current.t1LightY * fallRange;
+      const initialObjY = tubeTopY + 56;
+      const coinX = centerX - 60;
+      const featherX = centerX + 60 + Math.sin(time * 3 + posRef.current.t1LightFlutter) * 18;
+      const coinY = initialObjY + posRef.current.t1HeavyY * fallRange;
+      const featherY = initialObjY + posRef.current.t1LightY * fallRange;
 
       if (isDropping && !tube1Landed.light) {
-        ctx.strokeStyle = '#f59e0b';
+        ctx.strokeStyle = '#d97706';
         ctx.lineWidth = 2.5;
         for (let i = -1; i <= 1; i++) {
           const streamX = featherX + i * 16;
@@ -1440,66 +1573,89 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
         }
       }
 
-      // Render Dynamic Objects in Tube 1
-      drawHeavyObject(coinX, coinY, 1.3, posRef.current.t1HeavyY * 2.5);
-      drawLightObject(featherX, featherY, 1.3, Math.sin(time * 3.5) * 0.45);
+      // Render Dynamic Objects in Tube 1 (Scale 1.45)
+      drawHeavyObject(coinX, coinY, 1.45, posRef.current.t1HeavyY * 2.5);
+      drawLightObject(featherX, featherY, 1.45, Math.sin(time * 3.5) * 0.45);
 
-      ctx.font = '800 13px system-ui, sans-serif';
-      ctx.fillStyle = '#fde68a';
-      ctx.textAlign = 'center';
-      ctx.fillText(getHeavyLabel(), coinX, tubeTopY + 14);
+      // Label Badges
+      const drawSingleColBadge = (title: string, x: number, y: number, color: string, bg: string, border: string) => {
+        ctx.save();
+        ctx.font = '800 12px system-ui, sans-serif';
+        const txtW = ctx.measureText(title).width + 20;
+        ctx.fillStyle = bg;
+        ctx.strokeStyle = border;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.roundRect(x - txtW / 2, y - 10, txtW, 20, 6);
+        ctx.fill();
+        ctx.stroke();
 
-      ctx.fillStyle = '#f472b6';
-      ctx.fillText(getLightLabel(), centerX + 55, tubeTopY + 14);
+        ctx.fillStyle = color;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(title, x, y);
+        ctx.restore();
+      };
 
-      // Right Inspection Panel inside canvas
+      drawSingleColBadge(getHeavyLabel(), coinX, tubeTopY + 18, '#92400e', '#fef3c7', '#f59e0b');
+      drawSingleColBadge(getLightLabel(), centerX + 60, tubeTopY + 18, '#831843', '#fce7f3', '#ec4899');
+
+      // Right Inspection Panel inside canvas - High-Contrast White Card
       const panelX = width * 0.76;
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.lineWidth = 2;
+      ctx.save();
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.08)';
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetY = 4;
+      ctx.fillStyle = '#ffffff';
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.roundRect(panelX - 110, tubeTopY + 15, 220, 290, 14);
       ctx.fill();
       ctx.stroke();
+      ctx.shadowColor = 'transparent';
 
-      ctx.font = '800 14px system-ui, sans-serif';
-      ctx.fillStyle = '#f59e0b';
+      ctx.font = '800 13px system-ui, sans-serif';
+      ctx.fillStyle = '#b45309';
       ctx.textAlign = 'center';
       ctx.fillText(lang === 'ne' ? 'हावाको अवरोध विश्लेषण' : 'Aerodynamic Drag Analysis', panelX, tubeTopY + 45);
 
-      ctx.font = '600 12px system-ui, sans-serif';
-      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '700 11.5px system-ui, sans-serif';
+      ctx.fillStyle = '#1e293b';
       ctx.textAlign = 'left';
       ctx.fillText('• Air Resistance (F_drag):', panelX - 95, tubeTopY + 80);
       ctx.font = '700 11px monospace';
-      ctx.fillStyle = '#fde68a';
+      ctx.fillStyle = '#b45309';
       ctx.fillText('  F_d = 0.5 · ρ · v² · C_d · A', panelX - 95, tubeTopY + 100);
 
-      ctx.font = '600 12px system-ui, sans-serif';
-      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '700 11.5px system-ui, sans-serif';
+      ctx.fillStyle = '#1e293b';
       ctx.fillText('• Surface Area Ratio:', panelX - 95, tubeTopY + 135);
-      ctx.fillStyle = '#f472b6';
+      ctx.font = '600 11px system-ui, sans-serif';
+      ctx.fillStyle = '#be185d';
       ctx.fillText('  Lighter body has LARGE Area/Mass', panelX - 95, tubeTopY + 155);
 
-      ctx.font = '600 12px system-ui, sans-serif';
-      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '700 11.5px system-ui, sans-serif';
+      ctx.fillStyle = '#1e293b';
       ctx.fillText('• Net Acceleration:', panelX - 95, tubeTopY + 190);
       ctx.font = '700 11px monospace';
-      ctx.fillStyle = '#38bdf8';
+      ctx.fillStyle = '#0369a1';
       ctx.fillText('  a = g - (F_drag / m)', panelX - 95, tubeTopY + 210);
 
-      ctx.font = '700 12px system-ui, sans-serif';
-      ctx.fillStyle = '#4ade80';
-      ctx.fillText('• Heavy body lands first in air!', panelX - 95, tubeTopY + 250);
-      ctx.font = '800 14px monospace';
-      ctx.fillStyle = '#38bdf8';
+      ctx.font = '800 12px system-ui, sans-serif';
+      ctx.fillStyle = '#dc2626';
+      ctx.fillText('• Heavy body lands first in air!', panelX - 95, tubeTopY + 248);
+
+      ctx.font = '800 13px monospace';
+      ctx.fillStyle = '#0369a1';
       ctx.fillText(`Timer: ${(tube1TimeMs / 1000).toFixed(2)} s`, panelX - 95, tubeTopY + 275);
+      ctx.restore();
     } else if (viewMode === 'tube2') {
-      const tubeW = 210;
+      const tubeW = 220;
       const tubeH = 320;
       const centerX = width * 0.32;
       const tubeTopY = groundY - tubeH;
-      const fallRange = tubeH - 58;
+      const fallRange = tubeH - 75;
 
       drawCylinder(centerX, tubeW, tubeH, true, vacuumPercent, 'TUBE 2: PURE VACUUM CHAMBER', 'नली २: पूर्ण शुन्य नली प्रयोगशाला');
 
@@ -1509,41 +1665,46 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       const innerH = tubeH - 35;
 
       const remainingCount = Math.round(55 * (1 - vacuumPercent / 100));
-      ctx.fillStyle = 'rgba(147, 197, 253, 0.4)';
       for (let i = 0; i < remainingCount; i++) {
         const p = airParticlesRef.current.t2[i];
         if (p) {
           p.x = (p.x + p.vx * 0.04 + 1) % 1;
           p.y = (p.y + p.vy * 0.04 + 1) % 1;
+          const px = innerL + p.x * innerW;
+          const py = tubeTopY + 18 + p.y * innerH;
           ctx.beginPath();
-          ctx.arc(innerL + p.x * innerW, tubeTopY + 18 + p.y * innerH, p.radius * 1.2, 0, Math.PI * 2);
+          ctx.arc(px, py, Math.max(p.radius * 1.4, 3.5), 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(2, 132, 199, 0.55)';
           ctx.fill();
+          ctx.strokeStyle = 'rgba(3, 105, 161, 0.75)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
         }
       }
 
       // Suction particles animation when pumping
-      ctx.fillStyle = 'rgba(56, 189, 248, 0.75)';
+      ctx.fillStyle = 'rgba(2, 132, 199, 0.85)';
       airParticlesRef.current.suction.forEach((sp) => {
         sp.y += sp.vy;
         sp.x += (0.5 - sp.x) * 0.08;
         sp.alpha -= 0.03;
         if (sp.alpha > 0) {
           ctx.beginPath();
-          ctx.arc(innerL + sp.x * innerW, tubeTopY + sp.y * innerH, 3, 0, Math.PI * 2);
+          ctx.arc(innerL + sp.x * innerW, tubeTopY + sp.y * innerH, 3.5, 0, Math.PI * 2);
           ctx.fill();
         }
       });
       airParticlesRef.current.suction = airParticlesRef.current.suction.filter((sp) => sp.alpha > 0);
 
       // Inrush particles animation when releasing valve
-      ctx.fillStyle = 'rgba(251, 191, 36, 0.75)';
+      ctx.fillStyle = 'rgba(217, 119, 6, 0.85)';
       airParticlesRef.current.inrush.forEach((ip) => {
         ip.y += ip.vy;
         ip.x += ip.vx;
         ip.alpha -= 0.025;
         if (ip.alpha > 0) {
           ctx.beginPath();
-          ctx.arc(innerL + ip.x * innerW, tubeTopY + ip.y * innerH, 3.5, 0, Math.PI * 2);
+          ctx.arc(innerL + ip.x * innerW, tubeTopY + ip.y * innerH, 4, 0, Math.PI * 2);
           ctx.fill();
         }
       });
@@ -1551,9 +1712,9 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
 
       // Connected Vacuum Hose
       const pumpX = width * 0.75;
-      const hoseStartX = centerX + 14;
+      const hoseStartX = centerX + 16;
       const hoseStartY = groundY - 6;
-      ctx.strokeStyle = '#334155';
+      ctx.strokeStyle = '#1e293b';
       ctx.lineWidth = 8;
       ctx.beginPath();
       ctx.moveTo(hoseStartX, hoseStartY);
@@ -1568,26 +1729,42 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
       drawAnalogGauge(width * 0.54, tubeTopY + 55, 36);
 
       // Synchronized Falling Objects
-      const coinX = centerX - 50;
-      const featherX = centerX + 50;
-      const coinY = tubeTopY + 28 + posRef.current.t2HeavyY * fallRange;
-      const featherY = tubeTopY + 28 + posRef.current.t2LightY * fallRange;
+      const initialObjY = tubeTopY + 56;
+      const coinX = centerX - 55;
+      const featherX = centerX + 55;
+      const coinY = initialObjY + posRef.current.t2HeavyY * fallRange;
+      const featherY = initialObjY + posRef.current.t2LightY * fallRange;
 
-      // Render Dynamic Objects in Tube 2
-      drawHeavyObject(coinX, coinY, 1.3, posRef.current.t2HeavyY * 2.5);
-      drawLightObject(featherX, featherY, 1.3, 0);
+      // Render Dynamic Objects in Tube 2 (Scale 1.45)
+      drawHeavyObject(coinX, coinY, 1.45, posRef.current.t2HeavyY * 2.5);
+      drawLightObject(featherX, featherY, 1.45, 0);
 
-      ctx.font = '800 13px system-ui, sans-serif';
-      ctx.fillStyle = '#fde68a';
-      ctx.textAlign = 'center';
-      ctx.fillText(getHeavyLabel(), coinX, tubeTopY + 14);
+      // Label Badges
+      const drawSingleColBadge2 = (title: string, x: number, y: number, color: string, bg: string, border: string) => {
+        ctx.save();
+        ctx.font = '800 12px system-ui, sans-serif';
+        const txtW = ctx.measureText(title).width + 20;
+        ctx.fillStyle = bg;
+        ctx.strokeStyle = border;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.roundRect(x - txtW / 2, y - 10, txtW, 20, 6);
+        ctx.fill();
+        ctx.stroke();
 
-      ctx.fillStyle = '#f472b6';
-      ctx.fillText(getLightLabel(), featherX, tubeTopY + 14);
+        ctx.fillStyle = color;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(title, x, y);
+        ctx.restore();
+      };
+
+      drawSingleColBadge2(getHeavyLabel(), coinX, tubeTopY + 18, '#92400e', '#fef3c7', '#f59e0b');
+      drawSingleColBadge2(getLightLabel(), featherX, tubeTopY + 18, '#831843', '#fce7f3', '#ec4899');
 
       if (isDropping && !tube2Landed.heavy) {
         ctx.setLineDash([5, 5]);
-        ctx.strokeStyle = '#38bdf8';
+        ctx.strokeStyle = '#0284c7';
         ctx.lineWidth = 2.5;
         ctx.beginPath();
         ctx.moveTo(coinX, coinY + 25);
@@ -1598,9 +1775,20 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
         ctx.setLineDash([]);
       }
 
-      ctx.font = '800 13px system-ui, sans-serif';
-      ctx.fillStyle = vacuumPercent >= 95 ? '#4ade80' : '#f59e0b';
+      ctx.save();
+      const bannerW = 420;
+      ctx.fillStyle = vacuumPercent >= 95 ? '#dcfce7' : '#fef3c7';
+      ctx.strokeStyle = vacuumPercent >= 95 ? '#16a34a' : '#d97706';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(centerX - bannerW / 2, groundY + 18, bannerW, 28, 8);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.font = '800 12px system-ui, sans-serif';
+      ctx.fillStyle = vacuumPercent >= 95 ? '#15803d' : '#92400e';
       ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
       ctx.fillText(
         vacuumPercent >= 95
           ? lang === 'ne'
@@ -1610,8 +1798,9 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
           ? `⚠️ आंशिक शुन्य (${vacuumPercent}%): पम्प चलाएर हावा तान्नुहोस्!`
           : `⚠️ Partial Vacuum (${vacuumPercent}%): Pump more air out!`,
         centerX,
-        groundY + 30
+        groundY + 32
       );
+      ctx.restore();
     }
 
     ctx.restore();
@@ -1890,20 +2079,22 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '6px 14px',
+                padding: '7px 14px',
                 borderRadius: '8px',
-                background: 'rgba(15, 23, 42, 0.88)',
-                border: '1px solid rgba(56, 189, 248, 0.3)',
-                color: '#38bdf8',
+                background: 'rgba(255, 255, 255, 0.95)',
+                border: '1.5px solid #cbd5e1',
+                color: '#0369a1',
                 fontSize: '11px',
                 fontFamily: 'monospace',
-                fontWeight: 700,
+                fontWeight: 800,
                 backdropFilter: 'blur(8px)',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
               }}
             >
               <span>a = g - (F_air / m)</span>
-              <span style={{ color: '#fbbf24' }}>│ In Vacuum:</span>
-              <span style={{ color: '#4ade80' }}>a = g ({gVal} m/s²)</span>
+              <span style={{ color: '#94a3b8' }}>│</span>
+              <span style={{ color: '#b45309' }}>In Vacuum:</span>
+              <span style={{ color: '#15803d' }}>a = g ({gVal} m/s²)</span>
             </div>
 
             {/* View Mode Selector Tabs */}
@@ -1912,10 +2103,11 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                 display: 'flex',
                 gap: '4px',
                 background: 'rgba(255, 255, 255, 0.95)',
-                border: '1px solid #e2e8f0',
+                border: '1.5px solid #cbd5e1',
                 padding: '3px',
                 borderRadius: '8px',
                 backdropFilter: 'blur(8px)',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
               }}
             >
               {(
@@ -1932,14 +2124,14 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                     ScienceAudio.playClick();
                   }}
                   style={{
-                    padding: '4px 8px',
+                    padding: '5px 10px',
                     borderRadius: '6px',
                     fontSize: '11px',
                     fontWeight: 700,
                     cursor: 'pointer',
-                    border: 'none',
-                    background: viewMode === vm.id ? 'rgba(56, 189, 248, 0.25)' : 'transparent',
-                    color: viewMode === vm.id ? '#38bdf8' : '#94a3b8',
+                    border: viewMode === vm.id ? '1.5px solid #0284c7' : '1px solid transparent',
+                    background: viewMode === vm.id ? '#e0f2fe' : 'transparent',
+                    color: viewMode === vm.id ? '#0369a1' : '#475569',
                   }}
                 >
                   {lang === 'ne' ? vm.labelNe : vm.labelEn}
@@ -1962,18 +2154,19 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
               style={{
                 padding: '7px 12px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.95)',
-                border: '1px solid #e2e8f0',
-                color: '#475569',
+                background: '#ffffff',
+                border: '1.5px solid #cbd5e1',
+                color: '#1e293b',
                 fontSize: '11px',
                 fontWeight: 700,
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
               }}
             >
-              <RotateCcw size={14} />
+              <RotateCcw size={14} color="#0369a1" />
               {lang === 'ne' ? 'रिसेट' : 'Reset'}
             </button>
           </div>
@@ -1987,8 +2180,9 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
               right: '16px',
               background: 'rgba(255, 255, 255, 0.95)',
               borderRadius: '14px',
-              border: '1px solid #e2e8f0',
+              border: '1.5px solid #cbd5e1',
               backdropFilter: 'blur(12px)',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
               padding: '12px 18px',
               display: 'flex',
               justifyContent: 'space-between',
@@ -2027,15 +2221,15 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                   gap: '6px',
                   padding: '8px 12px',
                   borderRadius: '8px',
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid #e2e8f0',
-                  color: '#475569',
+                  background: '#ffffff',
+                  border: '1.5px solid #cbd5e1',
+                  color: '#1e293b',
                   fontSize: '11px',
                   fontWeight: 700,
                   cursor: 'pointer',
                 }}
               >
-                <RotateCcw size={14} />
+                <RotateCcw size={14} color="#0369a1" />
                 <span>{lang === 'ne' ? 'नली उल्टाउनुहोस्' : 'Invert / Reset'}</span>
               </button>
 
@@ -2047,15 +2241,15 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                   gap: '6px',
                   padding: '8px 12px',
                   borderRadius: '8px',
-                  background: slowMo ? 'rgba(245, 158, 11, 0.25)' : 'rgba(255, 255, 255, 0.08)',
-                  border: slowMo ? '1px solid rgba(245, 158, 11, 0.4)' : '1px solid rgba(255, 255, 255, 0.15)',
-                  color: slowMo ? '#fbbf24' : '#cbd5e1',
+                  background: slowMo ? '#fef3c7' : '#ffffff',
+                  border: slowMo ? '1.5px solid #d97706' : '1.5px solid #cbd5e1',
+                  color: slowMo ? '#92400e' : '#1e293b',
                   fontSize: '11px',
                   fontWeight: 700,
                   cursor: 'pointer',
                 }}
               >
-                <Timer size={14} />
+                <Timer size={14} color={slowMo ? '#b45309' : '#64748b'} />
                 <span>{slowMo ? 'Slow-Mo (0.35×)' : 'Normal Speed'}</span>
               </button>
             </div>
@@ -2064,30 +2258,30 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <div
                 style={{
-                  background: 'rgba(245, 158, 11, 0.12)',
-                  border: '1px solid rgba(245, 158, 11, 0.3)',
-                  padding: '4px 10px',
+                  background: '#fef3c7',
+                  border: '1.5px solid #fde68a',
+                  padding: '5px 12px',
                   borderRadius: '8px',
                   fontSize: '11px',
                   fontFamily: 'monospace',
                 }}
               >
-                <span style={{ color: '#64748b' }}>Tube 1 (Air): </span>
-                <span style={{ color: '#fbbf24', fontWeight: 800 }}>{(tube1TimeMs / 1000).toFixed(2)}s</span>
+                <span style={{ color: '#475569', fontWeight: 600 }}>Tube 1 (Air): </span>
+                <span style={{ color: '#b45309', fontWeight: 800 }}>{(tube1TimeMs / 1000).toFixed(2)}s</span>
               </div>
 
               <div
                 style={{
-                  background: 'rgba(34, 197, 94, 0.12)',
-                  border: '1px solid rgba(34, 197, 94, 0.3)',
-                  padding: '4px 10px',
+                  background: '#dcfce7',
+                  border: '1.5px solid #bbf7d0',
+                  padding: '5px 12px',
                   borderRadius: '8px',
                   fontSize: '11px',
                   fontFamily: 'monospace',
                 }}
               >
-                <span style={{ color: '#64748b' }}>Tube 2 (Vacuum): </span>
-                <span style={{ color: '#4ade80', fontWeight: 800 }}>{(tube2TimeMs / 1000).toFixed(2)}s</span>
+                <span style={{ color: '#475569', fontWeight: 600 }}>Tube 2 (Vacuum): </span>
+                <span style={{ color: '#15803d', fontWeight: 800 }}>{(tube2TimeMs / 1000).toFixed(2)}s</span>
               </div>
             </div>
           </div>
@@ -2105,25 +2299,26 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
             flexDirection: 'column',
             gap: '14px',
             overflowY: 'auto',
-            color: '#fff',
+            color: '#0f172a',
           }}
         >
           {/* Station Header Card */}
           <div
             style={{
-              background: 'rgba(255, 255, 255, 0.95)',
+              background: '#ffffff',
               borderRadius: '12px',
-              border: '1px solid rgba(56, 189, 248, 0.2)',
+              border: '1.5px solid #e2e8f0',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
               padding: '14px',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-              <Zap size={18} color="#38bdf8" />
+              <Zap size={18} color="#0284c7" />
               <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', letterSpacing: '0.3px' }}>
                 {lang === 'ne' ? 'रोबर्ट बोयल शुन्य नली केन्द्र' : "Boyle's Vacuum Station"}
               </span>
             </div>
-            <div style={{ fontSize: '11px', color: '#64748b', lineHeight: 1.45 }}>
+            <div style={{ fontSize: '11px', color: '#334155', lineHeight: 1.5 }}>
               {lang === 'ne'
                 ? 'हावा भएको नली र शुन्य नलीमा विभिन्न वस्तुहरू खसालेर गुरुत्व प्रवेग पिण्डमा निर्भर नहुने तथ्य प्रमाणित गर्नुहोस्।'
                 : "Compare falling bodies in air vs vacuum to prove Galileo and Newton's law: acceleration in vacuum is strictly independent of mass."}
@@ -2132,7 +2327,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
 
           {/* Preset Scenarios Selector (2x2 Grid) */}
           <div>
-            <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', marginBottom: '8px', textTransform: 'uppercase' }}>
+            <div style={{ fontSize: '11px', fontWeight: 700, color: '#475569', marginBottom: '8px', textTransform: 'uppercase' }}>
               {lang === 'ne' ? 'पूर्वनिर्धारित परिस्थिति (Presets)' : 'Preset Scenarios'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
@@ -2145,9 +2340,9 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                     style={{
                       padding: '8px 10px',
                       borderRadius: '8px',
-                      border: active ? '2px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.1)',
-                      background: active ? 'rgba(56, 189, 248, 0.2)' : 'rgba(255, 255, 255, 0.03)',
-                      color: active ? '#38bdf8' : '#cbd5e1',
+                      border: active ? '2px solid #0284c7' : '1.5px solid #cbd5e1',
+                      background: active ? '#e0f2fe' : '#ffffff',
+                      color: active ? '#0369a1' : '#1e293b',
                       fontSize: '11px',
                       fontWeight: 700,
                       cursor: 'pointer',
@@ -2155,6 +2350,7 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                       alignItems: 'center',
                       gap: '6px',
                       textAlign: 'left',
+                      boxShadow: active ? '0 1px 3px rgba(2, 132, 199, 0.2)' : '0 1px 2px rgba(0, 0, 0, 0.05)',
                     }}
                   >
                     <span>{p.icon}</span>
@@ -2170,17 +2366,18 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
           {/* Vacuum & Pressure Status Card */}
           <div
             style={{
-              background: 'rgba(255, 255, 255, 0.03)',
+              background: '#ffffff',
               borderRadius: '12px',
-              border: '1px solid #e2e8f0',
+              border: '1.5px solid #e2e8f0',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
               padding: '12px',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '11px', fontWeight: 700, color: '#38bdf8', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '11px', fontWeight: 800, color: '#0369a1', textTransform: 'uppercase' }}>
                 {lang === 'ne' ? 'नली २ शुन्यता र चाप:' : 'Tube 2 Pressure & Vacuum:'}
               </span>
-              <span style={{ fontSize: '11px', fontWeight: 800, fontFamily: 'monospace', color: '#4ade80' }}>
+              <span style={{ fontSize: '11px', fontWeight: 800, fontFamily: 'monospace', color: '#15803d' }}>
                 {vacuumPercent}% {vacuumPercent === 100 ? '(Pure Vacuum)' : '(Partial)'}
               </span>
             </div>
@@ -2189,24 +2386,26 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
               <div
                 style={{
                   background: '#f8fafc',
+                  border: '1px solid #e2e8f0',
                   padding: '6px 8px',
                   borderRadius: '6px',
                   textAlign: 'center',
                 }}
               >
-                <span style={{ fontSize: '10px', color: '#64748b', display: 'block' }}>Pressure (kPa):</span>
-                <span style={{ fontSize: '11px', fontWeight: 700, color: '#0f172a' }}>{pressureKPa} kPa</span>
+                <span style={{ fontSize: '10px', color: '#475569', display: 'block', fontWeight: 600 }}>Pressure (kPa):</span>
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a' }}>{pressureKPa} kPa</span>
               </div>
               <div
                 style={{
                   background: '#f8fafc',
+                  border: '1px solid #e2e8f0',
                   padding: '6px 8px',
                   borderRadius: '6px',
                   textAlign: 'center',
                 }}
               >
-                <span style={{ fontSize: '10px', color: '#64748b', display: 'block' }}>Pressure (mmHg):</span>
-                <span style={{ fontSize: '11px', fontWeight: 700, color: '#0f172a' }}>{pressureMmHg} mmHg</span>
+                <span style={{ fontSize: '10px', color: '#475569', display: 'block', fontWeight: 600 }}>Pressure (mmHg):</span>
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a' }}>{pressureMmHg} mmHg</span>
               </div>
             </div>
 
@@ -2221,12 +2420,13 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                   background: isPumping ? '#0369a1' : 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
                   color: '#fff',
                   fontSize: '11px',
-                  fontWeight: 700,
+                  fontWeight: 800,
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '5px',
+                  boxShadow: '0 2px 8px rgba(2, 132, 199, 0.3)',
                 }}
               >
                 <Wind size={14} />
@@ -2242,12 +2442,13 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                   background: isReleasing ? '#6d28d9' : 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
                   color: '#fff',
                   fontSize: '11px',
-                  fontWeight: 700,
+                  fontWeight: 800,
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '5px',
+                  boxShadow: '0 2px 8px rgba(124, 58, 237, 0.3)',
                 }}
               >
                 <Volume2 size={14} />
@@ -2259,13 +2460,13 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
               onClick={handleEvacuateFull}
               style={{
                 width: '100%',
-                padding: '7px',
+                padding: '8px',
                 borderRadius: '6px',
-                border: '1px solid rgba(56, 189, 248, 0.3)',
-                background: 'rgba(56, 189, 248, 0.15)',
-                color: '#38bdf8',
+                border: '1.5px solid #0284c7',
+                background: '#f0f9ff',
+                color: '#0369a1',
                 fontSize: '11px',
-                fontWeight: 700,
+                fontWeight: 800,
                 cursor: 'pointer',
                 marginBottom: '8px',
               }}
@@ -2283,20 +2484,21 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                 ScienceAudio.playPop();
                 setVacuumPercent(Number(e.target.value));
               }}
-              style={{ width: '100%', accentColor: '#38bdf8', cursor: 'pointer' }}
+              style={{ width: '100%', accentColor: '#0284c7', cursor: 'pointer' }}
             />
           </div>
 
           {/* Falling Object Pair Selector */}
           <div
             style={{
-              background: 'rgba(255, 255, 255, 0.03)',
+              background: '#ffffff',
               borderRadius: '12px',
-              border: '1px solid #e2e8f0',
+              border: '1.5px solid #e2e8f0',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
               padding: '12px',
             }}
           >
-            <div style={{ fontSize: '11px', fontWeight: 700, color: '#fbbf24', marginBottom: '8px', textTransform: 'uppercase' }}>
+            <div style={{ fontSize: '11px', fontWeight: 700, color: '#475569', marginBottom: '8px', textTransform: 'uppercase' }}>
               {lang === 'ne' ? 'खसालिने वस्तुहरूको जोडी:' : 'Falling Object Pair:'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
@@ -2318,19 +2520,20 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                     style={{
                       padding: '8px 4px',
                       borderRadius: '8px',
-                      border: isActive ? '2px solid #fbbf24' : '1px solid rgba(255, 255, 255, 0.1)',
-                      background: isActive ? 'rgba(245, 158, 11, 0.25)' : 'rgba(255, 255, 255, 0.03)',
-                      color: isActive ? '#fbbf24' : '#cbd5e1',
-                      fontSize: '10px',
+                      border: isActive ? '2px solid #d97706' : '1.5px solid #cbd5e1',
+                      background: isActive ? '#fef3c7' : '#ffffff',
+                      color: isActive ? '#92400e' : '#1e293b',
+                      fontSize: '10.5px',
                       fontWeight: 700,
                       cursor: 'pointer',
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
                       gap: '4px',
+                      boxShadow: isActive ? '0 1px 3px rgba(217, 119, 6, 0.2)' : '0 1px 2px rgba(0, 0, 0, 0.04)',
                     }}
                   >
-                    <span style={{ fontSize: '16px' }}>{item.icon}</span>
+                    <span style={{ fontSize: '18px' }}>{item.icon}</span>
                     <span style={{ textAlign: 'center', lineHeight: 1.2 }}>{item.label}</span>
                   </button>
                 );
@@ -2341,17 +2544,18 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
           {/* Gravity Selector */}
           <div
             style={{
-              background: 'rgba(255, 255, 255, 0.03)',
+              background: '#ffffff',
               borderRadius: '12px',
-              border: '1px solid #e2e8f0',
+              border: '1.5px solid #e2e8f0',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
               padding: '12px',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '11px', fontWeight: 700, color: '#4ade80', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '11px', fontWeight: 700, color: '#475569', textTransform: 'uppercase' }}>
                 {lang === 'ne' ? 'गुरुत्व प्रवेग (g):' : 'Celestial Gravity (g):'}
               </span>
-              <span style={{ fontSize: '11px', fontWeight: 800, fontFamily: 'monospace', color: '#4ade80' }}>
+              <span style={{ fontSize: '11px', fontWeight: 800, fontFamily: 'monospace', color: '#15803d' }}>
                 {gVal} m/s²
               </span>
             </div>
@@ -2364,14 +2568,15 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
                     key={g}
                     onClick={() => setGravityPreset(g)}
                     style={{
-                      padding: '6px',
+                      padding: '7px 4px',
                       borderRadius: '6px',
                       fontSize: '11px',
                       fontWeight: 700,
                       cursor: 'pointer',
-                      border: isActive ? '1px solid #4ade80' : '1px solid rgba(255, 255, 255, 0.1)',
-                      background: isActive ? 'rgba(34, 197, 94, 0.25)' : 'rgba(255, 255, 255, 0.03)',
-                      color: isActive ? '#4ade80' : '#cbd5e1',
+                      border: isActive ? '2px solid #16a34a' : '1.5px solid #cbd5e1',
+                      background: isActive ? '#dcfce7' : '#ffffff',
+                      color: isActive ? '#15803d' : '#1e293b',
+                      boxShadow: isActive ? '0 1px 3px rgba(22, 163, 74, 0.2)' : '0 1px 2px rgba(0, 0, 0, 0.04)',
                     }}
                   >
                     {label}
@@ -2384,16 +2589,17 @@ export const CoinAndFeatherSim: React.FC<BaseSimulationProps> = ({
           {/* Curriculum Key Takeaway Card */}
           <div
             style={{
-              background: 'rgba(56, 189, 248, 0.08)',
-              border: '1px solid rgba(56, 189, 248, 0.2)',
+              background: '#f0f9ff',
+              border: '1.5px solid #bae6fd',
               borderRadius: '12px',
               padding: '12px',
               fontSize: '11px',
-              color: '#475569',
-              lineHeight: 1.45,
+              color: '#1e293b',
+              lineHeight: 1.5,
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.03)',
             }}
           >
-            <div style={{ fontWeight: 800, color: '#38bdf8', marginBottom: '4px' }}>
+            <div style={{ fontWeight: 800, color: '#0369a1', marginBottom: '6px', fontSize: '12px' }}>
               💡 {lang === 'ne' ? 'SEE परीक्षा मुख्य निष्कर्ष:' : 'SEE Exam Key Takeaways:'}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
