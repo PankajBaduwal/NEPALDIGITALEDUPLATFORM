@@ -107,7 +107,7 @@ export const LongShortExplorer: React.FC<LongShortExplorerProps> = ({
 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         {!isFinished ? (
-          <div style={{ maxWidth: '720px', width: '100%', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', padding: '28px', borderRadius: '20px', textAlign: 'center' }}>
+          <div style={{ maxWidth: '720px', width: '100%', background: '#e2e8f0', backdropFilter: 'blur(10px)', padding: '28px', borderRadius: '20px', textAlign: 'center' }}>
             <span style={{ background: '#fbcfe8', color: '#831843', padding: '3px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: '800' }}>
               Step {stepIdx + 1} of {activities.length}
             </span>
@@ -167,7 +167,7 @@ export const LongShortExplorer: React.FC<LongShortExplorerProps> = ({
             )}
           </div>
         ) : (
-          <div style={{ textAlign: 'center', background: 'rgba(255,255,255,0.1)', padding: '36px', borderRadius: '20px' }}>
+          <div style={{ textAlign: 'center', background: '#e2e8f0', padding: '36px', borderRadius: '20px' }}>
             <Trophy size={50} color="#fcd34d" style={{ margin: '0 auto 12px auto' }} />
             <h3 style={{ fontSize: '24px', fontWeight: '800' }}>
               {lang === 'ne' ? 'सबास! लामो र छोटो अभ्यास पूरा भयो!' : 'Great Job! Long & Short Completed!'}

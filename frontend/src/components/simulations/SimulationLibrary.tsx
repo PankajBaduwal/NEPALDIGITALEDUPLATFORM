@@ -33,6 +33,18 @@ import {
   Languages,
   CheckCircle2,
 } from 'lucide-react';
+import {
+  GRADE_4_SCIENCE_CHAPTERS,
+  GRADE_4_SCIENCE_SIMULATIONS,
+} from '../../simulations/class4-science/class4ScienceRegistry';
+import {
+  GRADE_6_SCIENCE_CHAPTERS,
+  GRADE_6_SCIENCE_SIMULATIONS,
+} from '../../simulations/class6-science/class6ScienceRegistry';
+import {
+  GRADE_10_SCIENCE_CHAPTERS,
+  GRADE_10_SCIENCE_SIMULATIONS,
+} from '../../simulations/class10-science/class10ScienceRegistry';
 
 interface SimulationLibraryProps {
   userRole?: string;
@@ -43,6 +55,42 @@ interface SimulationLibraryProps {
     subjectId: string;
   };
 }
+
+const DEFAULT_LEVELS = [
+  { id: 'PRIMARY', name: 'Primary Level', nameNepali: 'आधारभूत तह (कक्षा १–५)', range: 'Class 1–5', grades: [1, 2, 3, 4, 5] },
+  { id: 'BASIC', name: 'Basic Level', nameNepali: 'आधारभूत तह (कक्षा ६–८)', range: 'Class 6–8', grades: [6, 7, 8] },
+  { id: 'SECONDARY', name: 'Secondary Level', nameNepali: 'माध्यमिक तह (कक्षा ९–१०)', range: 'Class 9–10', grades: [9, 10] },
+  { id: 'HIGHER_SECONDARY', name: 'Higher Secondary Level', nameNepali: 'उच्च माध्यमिक तह (कक्षा ११–१२)', range: 'Class 11–12', grades: [11, 12] },
+];
+
+const NEP_NUMS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०', '११', '१२'];
+
+const getDefaultHierarchy = () => {
+  const classes = [];
+  for (let g = 1; g <= 12; g++) {
+    const lvl = DEFAULT_LEVELS.find((l) => l.grades.includes(g)) || DEFAULT_LEVELS[0];
+    classes.push({
+      grade: g,
+      className: `Class ${g}`,
+      classNameNepali: `कक्षा ${NEP_NUMS[g]}`,
+      levelId: lvl.id,
+      levelName: lvl.name,
+      subjectCount: g <= 5 ? 5 : 6,
+      simulationCount: 0,
+      subjects: [
+        { code: 'MATH', name: 'Mathematics', nameNepali: 'गणित', icon: 'Calculator', simulationCount: 0, chapters: [] },
+        { code: 'SCI', name: g <= 3 ? 'Environmental Studies' : 'Science & Technology', nameNepali: g <= 3 ? 'हाम्रो सेरोफेरो' : 'विज्ञान तथा प्रविधि', icon: 'Atom', simulationCount: 0, chapters: [] },
+        { code: 'NEP', name: 'Nepali', nameNepali: 'नेपाली', icon: 'BookOpen', simulationCount: 0, chapters: [] },
+        { code: 'ENG', name: 'English', nameNepali: 'English', icon: 'Languages', simulationCount: 0, chapters: [] },
+      ],
+    });
+  }
+  return {
+    totalSimulations: 0,
+    levels: DEFAULT_LEVELS,
+    classes,
+  };
+};
 
 export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
   userRole = 'TEACHER',
@@ -79,11 +127,18 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
     setLoading(true);
     try {
       const res = await api.get('/simulation-activity/hierarchy');
-      setHierarchyData(res);
+      // If backend returned empty/no classes, seed default skeleton so the UI is never blank
+      if (!res || !res.classes || res.classes.length === 0) {
+        setHierarchyData(getDefaultHierarchy());
+      } else {
+        setHierarchyData(res);
+      }
       setError('');
     } catch (err: any) {
-      console.error('Failed to load simulation library hierarchy:', err);
-      setError(err?.message || 'Unable to load simulation hierarchy');
+      console.error('Failed to load simulation library hierarchy, using local fallback:', err);
+      // Graceful offline fallback — still show all classes and Grade 4 Science
+      setHierarchyData(getDefaultHierarchy());
+      setError('');
     } finally {
       setLoading(false);
     }
@@ -125,21 +180,378 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
     }
   };
 
+  // ── AUGMENT HIERARCHY DATA WITH GRADE 4 & GRADE 6 SCIENCE SIMULATIONS ──
+  const augmentedHierarchyData = useMemo(() => {
+    if (!hierarchyData) return null;
+
+    const baseClasses = hierarchyData.classes || [];
+    const hasGrade4 = baseClasses.some((c: any) => c.grade === 4);
+    const hasGrade6 = baseClasses.some((c: any) => c.grade === 6);
+    const hasGrade10 = baseClasses.some((c: any) => c.grade === 10);
+    const classesList = [...baseClasses];
+    if (!hasGrade4) {
+      classesList.push({
+        grade: 4,
+        className: 'Class 4',
+        classNameNepali: 'कक्षा ४',
+        levelId: 'PRIMARY',
+        levelName: 'Primary Level',
+        subjectCount: 5,
+        simulationCount: 0,
+        subjects: [
+          { code: 'MATH', name: 'Mathematics', nameNepali: 'गणित', icon: 'Calculator', simulationCount: 0, chapters: [] },
+          { code: 'SCI', name: 'Science & Technology', nameNepali: 'विज्ञान तथा प्रविधि', icon: 'Atom', simulationCount: 0, chapters: [] },
+          { code: 'SOC', name: 'Social Studies', nameNepali: 'सामाजिक अध्ययन', icon: 'Globe', simulationCount: 0, chapters: [] },
+          { code: 'NEP', name: 'Nepali', nameNepali: 'नेपाली', icon: 'BookOpen', simulationCount: 0, chapters: [] },
+          { code: 'ENG', name: 'English', nameNepali: 'English', icon: 'Languages', simulationCount: 0, chapters: [] },
+        ],
+      });
+    }
+
+    if (!hasGrade6) {
+      classesList.push({
+        grade: 6,
+        className: 'Class 6',
+        classNameNepali: 'कक्षा ६',
+        levelId: 'BASIC',
+        levelName: 'Basic Level',
+        subjectCount: 5,
+        simulationCount: 0,
+        subjects: [
+          { code: 'MATH', name: 'Mathematics', nameNepali: 'गणित', icon: 'Calculator', simulationCount: 0, chapters: [] },
+          { code: 'SCI', name: 'Science & Technology', nameNepali: 'विज्ञान तथा प्रविधि', icon: 'Atom', simulationCount: 0, chapters: [] },
+          { code: 'SOC', name: 'Social Studies', nameNepali: 'सामाजिक अध्ययन', icon: 'Globe', simulationCount: 0, chapters: [] },
+          { code: 'NEP', name: 'Nepali', nameNepali: 'नेपाली', icon: 'BookOpen', simulationCount: 0, chapters: [] },
+          { code: 'ENG', name: 'English', nameNepali: 'English', icon: 'Languages', simulationCount: 0, chapters: [] },
+        ],
+      });
+    }
+
+    if (!hasGrade10) {
+      classesList.push({
+        grade: 10,
+        className: 'Class 10',
+        classNameNepali: 'कक्षा १०',
+        levelId: 'SECONDARY',
+        levelName: 'Secondary Level',
+        subjectCount: 6,
+        simulationCount: 0,
+        subjects: [
+          { code: 'SCI', name: 'Science & Technology', nameNepali: 'विज्ञान तथा प्रविधि', icon: 'Atom', simulationCount: 0, chapters: [] },
+          { code: 'MATH', name: 'Compulsory Mathematics', nameNepali: 'अनिवार्य गणित', icon: 'Calculator', simulationCount: 0, chapters: [] },
+          { code: 'SOC', name: 'Social Studies', nameNepali: 'सामाजिक अध्ययन', icon: 'Globe', simulationCount: 0, chapters: [] },
+          { code: 'NEP', name: 'Nepali', nameNepali: 'नेपाली', icon: 'BookOpen', simulationCount: 0, chapters: [] },
+          { code: 'ENG', name: 'English', nameNepali: 'English', icon: 'Languages', simulationCount: 0, chapters: [] },
+        ],
+      });
+    }
+
+    const updatedClasses = classesList.map((cls: any) => {
+      if (cls.grade === 4) {
+        const subjects = cls.subjects ? [...cls.subjects] : [];
+        let sciSub = subjects.find((s: any) => s.code.toUpperCase() === 'SCI');
+        if (!sciSub) {
+          sciSub = {
+            code: 'SCI',
+            name: 'Science & Technology',
+            nameNepali: 'विज्ञान तथा प्रविधि',
+            icon: 'Atom',
+            simulationCount: 0,
+            chapters: [],
+          };
+          subjects.push(sciSub);
+        }
+
+        // Build 8 chapters for Class 4 Science
+        const chapters = GRADE_4_SCIENCE_CHAPTERS.map((ch) => {
+          const simsForChapter = GRADE_4_SCIENCE_SIMULATIONS.filter(
+            (s) => s.chapterNumber === ch.number
+          ).map((s) => ({
+            ...s,
+            estimatedDurationMinutes: s.estimatedMinutes || 15,
+            status: 'AVAILABLE',
+            isPublished: true,
+            learningObjectives: [s.description],
+          }));
+
+          const existingCh = sciSub?.chapters?.find((c: any) => c.chapterNumber === ch.number);
+          const backendSims = existingCh?.simulations || [];
+
+          const mergedSims = [...simsForChapter];
+          backendSims.forEach((bsim: any) => {
+            if (!mergedSims.some((ms) => ms.code === bsim.code || ms.componentKey === bsim.componentKey)) {
+              mergedSims.push(bsim);
+            }
+          });
+
+          return {
+            chapterNumber: ch.number,
+            title: ch.title,
+            titleNepali: ch.titleNepali,
+            simulationCount: mergedSims.length,
+            simulations: mergedSims,
+          };
+        });
+
+        const totalSciSimCount = chapters.reduce((acc, c) => acc + c.simulationCount, 0);
+
+        const updatedSubjects = subjects.map((s: any) => {
+          if (s.code.toUpperCase() === 'SCI') {
+            return {
+              ...s,
+              name: 'Science & Technology',
+              nameNepali: 'विज्ञान तथा प्रविधि',
+              simulationCount: totalSciSimCount,
+              chapters,
+            };
+          }
+          return s;
+        });
+
+        const totalSimsInClass = updatedSubjects.reduce((acc: number, s: any) => acc + (s.simulationCount || 0), 0);
+
+        return {
+          ...cls,
+          simulationCount: totalSimsInClass,
+          subjectCount: updatedSubjects.length,
+          subjects: updatedSubjects,
+        };
+      }
+
+      if (cls.grade === 6) {
+        const subjects = cls.subjects ? [...cls.subjects] : [];
+        let sciSub = subjects.find((s: any) => s.code.toUpperCase() === 'SCI');
+        if (!sciSub) {
+          sciSub = {
+            code: 'SCI',
+            name: 'Science & Technology',
+            nameNepali: 'विज्ञान तथा प्रविधि',
+            icon: 'Atom',
+            simulationCount: 0,
+            chapters: [],
+          };
+          subjects.push(sciSub);
+        }
+
+        // Build 11 chapters for Class 6 Science
+        const chapters = GRADE_6_SCIENCE_CHAPTERS.map((ch) => {
+          const simsForChapter = GRADE_6_SCIENCE_SIMULATIONS.filter(
+            (s) => s.chapterNumber === ch.number
+          ).map((s) => ({
+            ...s,
+            estimatedDurationMinutes: s.estimatedMinutes || 15,
+            status: 'AVAILABLE',
+            isPublished: true,
+            learningObjectives: [s.description],
+          }));
+
+          const existingCh = sciSub?.chapters?.find((c: any) => c.chapterNumber === ch.number);
+          const backendSims = existingCh?.simulations || [];
+
+          const mergedSims = [...simsForChapter];
+          backendSims.forEach((bsim: any) => {
+            if (!mergedSims.some((ms) => ms.code === bsim.code || ms.componentKey === bsim.componentKey)) {
+              mergedSims.push(bsim);
+            }
+          });
+
+          return {
+            chapterNumber: ch.number,
+            title: ch.title,
+            titleNepali: ch.titleNepali,
+            simulationCount: mergedSims.length,
+            simulations: mergedSims,
+          };
+        });
+
+        const totalSciSimCount = chapters.reduce((acc, c) => acc + c.simulationCount, 0);
+
+        const updatedSubjects = subjects.map((s: any) => {
+          if (s.code.toUpperCase() === 'SCI') {
+            return {
+              ...s,
+              name: 'Science & Technology',
+              nameNepali: 'विज्ञान तथा प्रविधि',
+              simulationCount: totalSciSimCount,
+              chapters,
+            };
+          }
+          return s;
+        });
+
+        const totalSimsInClass = updatedSubjects.reduce((acc: number, s: any) => acc + (s.simulationCount || 0), 0);
+
+        return {
+          ...cls,
+          simulationCount: totalSimsInClass,
+          subjectCount: updatedSubjects.length,
+          subjects: updatedSubjects,
+        };
+      }
+
+      if (cls.grade === 10) {
+        const subjects = cls.subjects ? [...cls.subjects] : [];
+        let sciSub = subjects.find(
+          (s: any) =>
+            s.code.toUpperCase() === 'SCI' ||
+            s.code.toUpperCase() === 'SCI10' ||
+            s.code.toUpperCase().startsWith('SCI') ||
+            (s.name && s.name.toLowerCase().includes('science'))
+        );
+        if (!sciSub) {
+          sciSub = {
+            code: 'SCI',
+            name: 'Science & Technology',
+            nameNepali: 'विज्ञान तथा प्रविधि',
+            icon: 'Atom',
+            simulationCount: 0,
+            chapters: [],
+          };
+          subjects.push(sciSub);
+        }
+
+        // Build 23 chapters for Class 10 Science
+        const chapters = GRADE_10_SCIENCE_CHAPTERS.map((ch) => {
+          const simsForChapter = GRADE_10_SCIENCE_SIMULATIONS.filter(
+            (s) => s.chapterNumber === ch.number
+          ).map((s) => ({
+            ...s,
+            estimatedDurationMinutes: s.estimatedMinutes || 15,
+            status: 'AVAILABLE',
+            isPublished: true,
+            learningObjectives: [s.description],
+          }));
+
+          const existingCh = sciSub?.chapters?.find((c: any) => c.chapterNumber === ch.number);
+          const backendSims = existingCh?.simulations || [];
+
+          const mergedSims = [...simsForChapter];
+          backendSims.forEach((bsim: any) => {
+            if (!mergedSims.some((ms) => ms.code === bsim.code || ms.componentKey === bsim.componentKey)) {
+              mergedSims.push(bsim);
+            }
+          });
+
+          return {
+            chapterNumber: ch.number,
+            title: ch.title,
+            titleNepali: ch.titleNepali,
+            simulationCount: mergedSims.length,
+            simulations: mergedSims,
+          };
+        });
+
+        const totalSciSimCount = chapters.reduce((acc, c) => acc + c.simulationCount, 0);
+
+        const updatedSubjects = subjects.map((s: any) => {
+          if (
+            s.code.toUpperCase() === 'SCI' ||
+            s.code.toUpperCase() === 'SCI10' ||
+            s.code.toUpperCase().startsWith('SCI') ||
+            (s.name && s.name.toLowerCase().includes('science'))
+          ) {
+            return {
+              ...s,
+              name: s.name || 'Science & Technology',
+              nameNepali: s.nameNepali || 'विज्ञान तथा प्रविधि',
+              simulationCount: totalSciSimCount,
+              chapters,
+            };
+          }
+          return s;
+        });
+
+        const totalSimsInClass = updatedSubjects.reduce((acc: number, s: any) => acc + (s.simulationCount || 0), 0);
+
+        return {
+          ...cls,
+          simulationCount: totalSimsInClass,
+          subjectCount: updatedSubjects.length,
+          subjects: updatedSubjects,
+        };
+      }
+
+      return cls;
+    });
+
+    const totalSims = updatedClasses.reduce((acc: number, c: any) => acc + (c.simulationCount || 0), 0);
+
+    return {
+      ...hierarchyData,
+      totalSimulations: Math.max(hierarchyData.totalSimulations || 0, totalSims),
+      classes: updatedClasses,
+    };
+  }, [hierarchyData]);
+
   // ── ACTIVE CLASS OBJECT ──────────────────────────────────────
   const currentClassObject = useMemo(() => {
-    if (!hierarchyData || !selectedClass) return null;
-    return hierarchyData.classes?.find((c: any) => c.grade === selectedClass) || null;
-  }, [hierarchyData, selectedClass]);
+    if (!augmentedHierarchyData || !selectedClass) return null;
+    return augmentedHierarchyData.classes?.find((c: any) => c.grade === selectedClass) || null;
+  }, [augmentedHierarchyData, selectedClass]);
 
   // ── ACTIVE SUBJECT OBJECT ────────────────────────────────────
   const currentSubjectObject = useMemo(() => {
     if (!currentClassObject || !selectedSubject) return null;
+    const target = (selectedSubject.code || selectedSubject.name || selectedSubject || '').toUpperCase();
     return (
-      currentClassObject.subjects?.find(
-        (s: any) => s.code.toUpperCase() === (selectedSubject.code || selectedSubject).toUpperCase()
-      ) || null
+      currentClassObject.subjects?.find((s: any) => {
+        const scode = (s.code || '').toUpperCase();
+        if (scode === target) return true;
+        if (target.startsWith('SCI') && scode.startsWith('SCI')) return true;
+        if (target.includes('SCIENCE') && (s.name || '').toLowerCase().includes('science')) return true;
+        return false;
+      }) || null
     );
   }, [currentClassObject, selectedSubject]);
+
+  // ── ALL FLATTENED SIMULATIONS FOR SEARCH ─────────────────────
+  const allLibrarySimulations = useMemo(() => {
+    if (!augmentedHierarchyData?.classes) return [];
+    const list: any[] = [];
+    augmentedHierarchyData.classes.forEach((c: any) => {
+      (c.subjects || []).forEach((s: any) => {
+        (s.chapters || []).forEach((ch: any) => {
+          (ch.simulations || []).forEach((sim: any) => {
+            if (!list.some((existing) => existing.code === sim.code || existing.componentKey === sim.componentKey)) {
+              list.push({
+                ...sim,
+                classGrade: c.grade,
+                className: c.className,
+                classNameNepali: c.classNameNepali,
+                subjectCode: s.code,
+                subjectName: s.name,
+                subjectNameNepali: s.nameNepali,
+                chapterNumber: ch.chapterNumber,
+                chapterTitle: ch.title,
+                chapterTitleNepali: ch.titleNepali,
+              });
+            }
+          });
+        });
+      });
+    });
+    return list;
+  }, [augmentedHierarchyData]);
+
+  const globalSearchResults = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return [];
+    return allLibrarySimulations.filter((sim) => {
+      if (filterType !== 'ALL') {
+        const type = sim.simulationType || '';
+        if (filterType === '3D_WEBGL' && !type.includes('3D') && type !== 'THREE_JS') return false;
+        if (filterType === '2D_CANVAS' && !type.includes('2D') && type !== 'REACT_CANVAS') return false;
+        if (filterType === 'HTML5_SIM' && !type.includes('HTML')) return false;
+      }
+      const matchTitle = (sim.title || '').toLowerCase().includes(q);
+      const matchTitleNe = (sim.titleNepali || '').includes(q);
+      const matchDesc = (sim.description || '').toLowerCase().includes(q);
+      const matchTopic = (sim.topicName || '').toLowerCase().includes(q);
+      const matchTags = (sim.tags || []).some((t: string) => t.toLowerCase().includes(q));
+      const matchGrade = q.includes(`class ${sim.classGrade}`) || q.includes(`grade ${sim.classGrade}`) || q === String(sim.classGrade);
+      return matchTitle || matchTitleNe || matchDesc || matchTopic || matchTags || matchGrade;
+    });
+  }, [allLibrarySimulations, searchQuery, filterType]);
 
   // ── BREADCRUMB NAVIGATION HANDLERS ───────────────────────────
   const goToAllClasses = () => {
@@ -171,6 +583,17 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
         onClose={() => setActiveSimulation(null)}
         userRole={userRole}
       />
+    );
+  }
+
+  // ── LOADING STATE ─────────────────────────────────────────────
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '60px 20px', gap: '16px' }}>
+        <div style={{ width: '48px', height: '48px', borderRadius: '50%', border: '4px solid #dcebe6', borderTopColor: '#117a6b', animation: 'spin 0.8s linear infinite' }} />
+        <p style={{ fontSize: '14px', fontWeight: '700', color: '#475569' }}>Loading simulation library…</p>
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </div>
     );
   }
 
@@ -234,7 +657,7 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
         {/* Quick Stats Pill */}
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
           <div style={{ background: 'rgba(255,255,255,0.15)', padding: '8px 16px', borderRadius: '10px', textAlign: 'center' }}>
-            <div style={{ fontSize: '18px', fontWeight: '800' }}>{hierarchyData?.totalSimulations || 0}</div>
+            <div style={{ fontSize: '18px', fontWeight: '800' }}>{augmentedHierarchyData?.totalSimulations || hierarchyData?.totalSimulations || 0}</div>
             <div style={{ fontSize: '10px', color: '#ccfbf1', textTransform: 'uppercase', fontWeight: '700' }}>Active Simulations</div>
           </div>
           <div style={{ background: 'rgba(255,255,255,0.15)', padding: '8px 16px', borderRadius: '10px', textAlign: 'center' }}>
@@ -450,9 +873,133 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
       {/* ═════════════════════════════════════════════════════════════ */}
       {!selectedClass && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+          {/* Quick Search Results if search query is active */}
+          {searchQuery.trim() && (
+            <div
+              style={{
+                background: '#ffffff',
+                borderRadius: '16px',
+                border: '1.5px solid #117a6b',
+                padding: '22px 24px',
+                boxShadow: '0 4px 16px rgba(17,122,107,0.1)',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
+                <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0e3e3b', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Sparkles size={20} color="#117a6b" /> Search Results for "{searchQuery}" ({globalSearchResults.length})
+                </h3>
+                <button
+                  onClick={() => setSearchQuery('')}
+                  style={{
+                    fontSize: '12px',
+                    fontWeight: '700',
+                    color: '#64748b',
+                    background: '#f1f5f9',
+                    border: 'none',
+                    padding: '6px 12px',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Clear Search
+                </button>
+              </div>
+
+              {globalSearchResults.length > 0 ? (
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                    gap: '16px',
+                  }}
+                >
+                  {globalSearchResults.map((sim: any) => (
+                    <div
+                      key={sim.code}
+                      style={{
+                        background: '#f8fafc',
+                        borderRadius: '12px',
+                        border: '1px solid #e2e8f0',
+                        padding: '16px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                          <span style={{ fontSize: '11px', fontWeight: '800', background: '#e0f2fe', color: '#0369a1', padding: '2px 8px', borderRadius: '4px' }}>
+                            Class {sim.classGrade} • {sim.subjectName}
+                          </span>
+                          <span style={{ fontSize: '10px', fontWeight: '800', background: '#dcfce7', color: '#166534', padding: '2px 8px', borderRadius: '4px' }}>
+                            {sim.simulationType?.replace('_', ' ')}
+                          </span>
+                        </div>
+                        <h5 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', margin: '0 0 2px 0' }}>
+                          {sim.title}
+                        </h5>
+                        {sim.titleNepali && (
+                          <div style={{ fontSize: '12px', color: '#059669', fontWeight: '700', marginBottom: '6px' }}>
+                            {sim.titleNepali}
+                          </div>
+                        )}
+                        <p style={{ fontSize: '12px', color: '#475569', lineHeight: 1.4, margin: '0 0 12px 0' }}>
+                          {sim.description}
+                        </p>
+                      </div>
+
+                      <div style={{ display: 'flex', gap: '8px', paddingTop: '8px', borderTop: '1px solid #e2e8f0' }}>
+                        <button
+                          onClick={() => setPreviewSimulation(sim)}
+                          style={{
+                            flex: 1,
+                            padding: '7px 10px',
+                            background: '#ffffff',
+                            color: '#334155',
+                            border: '1px solid #cbd5e1',
+                            borderRadius: '6px',
+                            fontSize: '11px',
+                            fontWeight: '700',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          Preview
+                        </button>
+                        <button
+                          onClick={() => setActiveSimulation(sim)}
+                          style={{
+                            flex: 1.4,
+                            padding: '7px 12px',
+                            background: '#117a6b',
+                            color: '#ffffff',
+                            border: 'none',
+                            borderRadius: '6px',
+                            fontSize: '11px',
+                            fontWeight: '800',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '4px',
+                          }}
+                        >
+                          <Play size={12} fill="#ffffff" />
+                          <span>Launch</span>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div style={{ textAlign: 'center', padding: '24px', color: '#64748b', fontSize: '13px' }}>
+                  No simulations found matching "{searchQuery}". Try searching "gravitation", "newton", "force", or "density".
+                </div>
+              )}
+            </div>
+          )}
           {/* Loop through each academic level */}
-          {hierarchyData?.levels?.map((lvl: any) => {
-            const levelClasses = hierarchyData.classes?.filter((c: any) =>
+          {(augmentedHierarchyData?.levels || hierarchyData?.levels)?.map((lvl: any) => {
+            const levelClasses = (augmentedHierarchyData?.classes || hierarchyData?.classes)?.filter((c: any) =>
               lvl.grades.includes(c.grade)
             );
 
@@ -748,7 +1295,30 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
 
           {/* Chapters List */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            {currentSubjectObject?.chapters?.map((ch: any) => (
+            {currentSubjectObject?.chapters?.map((ch: any) => {
+              const filteredSims = (ch.simulations || []).filter((sim: any) => {
+                if (filterType !== 'ALL') {
+                  const type = sim.simulationType || '';
+                  if (filterType === '3D_WEBGL' && !type.includes('3D') && type !== 'THREE_JS') return false;
+                  if (filterType === '2D_CANVAS' && !type.includes('2D') && type !== 'REACT_CANVAS') return false;
+                  if (filterType === 'HTML5_SIM' && !type.includes('HTML')) return false;
+                }
+                if (searchQuery.trim()) {
+                  const q = searchQuery.toLowerCase().trim();
+                  const matchTitle = (sim.title || '').toLowerCase().includes(q);
+                  const matchTitleNe = (sim.titleNepali || '').includes(q);
+                  const matchDesc = (sim.description || '').toLowerCase().includes(q);
+                  const matchTags = (sim.tags || []).some((t: string) => t.toLowerCase().includes(q));
+                  if (!matchTitle && !matchTitleNe && !matchDesc && !matchTags) return false;
+                }
+                return true;
+              });
+
+              if (searchQuery.trim() && filteredSims.length === 0) {
+                return null;
+              }
+
+              return (
               <div
                 key={ch.chapterNumber}
                 style={{
@@ -790,20 +1360,20 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
 
                   <span
                     style={{
-                      background: ch.simulationCount > 0 ? '#dcfce7' : '#f1f5f9',
-                      color: ch.simulationCount > 0 ? '#166534' : '#64748b',
+                      background: filteredSims.length > 0 ? '#dcfce7' : '#f1f5f9',
+                      color: filteredSims.length > 0 ? '#166534' : '#64748b',
                       fontSize: '11px',
                       fontWeight: '800',
                       padding: '3px 10px',
                       borderRadius: '12px',
                     }}
                   >
-                    {ch.simulationCount} {ch.simulationCount === 1 ? 'Simulation' : 'Simulations'}
+                    {filteredSims.length} {filteredSims.length === 1 ? 'Simulation' : 'Simulations'}
                   </span>
                 </div>
 
                 {/* Simulation Cards for this Chapter */}
-                {ch.simulations?.length > 0 ? (
+                {filteredSims.length > 0 ? (
                   <div
                     style={{
                       display: 'grid',
@@ -811,7 +1381,7 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
                       gap: '18px',
                     }}
                   >
-                    {ch.simulations.map((sim: any) => (
+                    {filteredSims.map((sim: any) => (
                       <div
                         key={sim.code}
                         style={{
@@ -963,7 +1533,8 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
                   </div>
                 )}
               </div>
-            ))}
+            );
+            })}
           </div>
         </div>
       )}

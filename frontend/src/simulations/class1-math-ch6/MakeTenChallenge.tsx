@@ -206,7 +206,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
         flexDirection: 'column',
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)',
-        color: '#f8fafc',
+        color: '#0f172a',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -217,7 +217,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgba(15, 23, 42, 0.95)',
+          background: 'rgba(255, 255, 255, 0.95)',
           borderBottom: '1px solid rgba(129, 140, 248, 0.3)',
         }}
       >
@@ -229,8 +229,8 @@ export const MakeTenChallenge: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '10px',
               color: '#ffffff',
               cursor: 'pointer',
@@ -277,7 +277,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: 'rgba(255, 255, 255, 0.12)',
+              background: '#e2e8f0',
               border: '1px solid rgba(255, 255, 255, 0.25)',
               borderRadius: '8px',
               color: '#ffffff',
@@ -293,8 +293,8 @@ export const MakeTenChallenge: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '8px',
               color: soundEnabled ? '#a5b4fc' : '#94a3b8',
               cursor: 'pointer',
@@ -312,7 +312,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '12px',
           padding: '12px 16px',
-          background: 'rgba(15, 23, 42, 0.5)',
+          background: '#f8fafc',
           borderBottom: '1px solid rgba(129, 140, 248, 0.2)',
         }}
       >
@@ -381,7 +381,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
             <div
               style={{
                 textAlign: 'center',
-                background: 'rgba(15, 23, 42, 0.75)',
+                background: '#f8fafc',
                 padding: '16px 32px',
                 borderRadius: '20px',
                 border: '2px solid rgba(129, 140, 248, 0.4)',
@@ -393,7 +393,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
               <div style={{ fontSize: '32px', fontWeight: 900, color: '#facc15', marginTop: '4px' }}>
                 {formatNum(basketACount)} + {formatNum(basketBCount)} = {formatNum(10)}
               </div>
-              <div style={{ fontSize: '13px', color: '#cbd5e1', marginTop: '4px' }}>
+              <div style={{ fontSize: '13px', color: '#475569', marginTop: '4px' }}>
                 {language === 'np'
                   ? `${formatName(basketACount)} र ${formatName(basketBCount)} मिलेर दश हुन्छ।`
                   : `${formatName(basketACount)} and ${formatName(basketBCount)} make Ten.`}
@@ -408,7 +408,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                   width: '320px',
                   height: '240px',
                   borderRadius: '24px',
-                  background: 'rgba(30, 41, 59, 0.85)',
+                  background: '#f8fafc',
                   border: '3px solid #38bdf8',
                   padding: '20px',
                   display: 'flex',
@@ -487,7 +487,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                   width: '320px',
                   height: '240px',
                   borderRadius: '24px',
-                  background: 'rgba(30, 41, 59, 0.85)',
+                  background: '#f8fafc',
                   border: '3px solid #f472b6',
                   padding: '20px',
                   display: 'flex',
@@ -536,7 +536,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                     padding: '8px 14px',
                     borderRadius: '10px',
                     background: basketACount === p.a ? '#059669' : 'rgba(30, 41, 59, 0.8)',
-                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    border: '1px solid #e2e8f0',
                     color: '#ffffff',
                     fontWeight: 800,
                     fontSize: '13px',
@@ -582,7 +582,7 @@ export const MakeTenChallenge: React.FC<Props> = ({
                 display: 'flex',
                 alignItems: 'center',
                 gap: '16px',
-                background: 'rgba(30, 41, 59, 0.8)',
+                background: '#f8fafc',
                 padding: '20px 32px',
                 borderRadius: '20px',
                 border: '2px solid rgba(129, 140, 248, 0.4)',

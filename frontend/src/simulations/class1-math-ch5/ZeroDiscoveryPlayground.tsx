@@ -657,7 +657,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
         flexDirection: 'column',
         height: '100vh',
         background: '#0f172a',
-        color: '#f8fafc',
+        color: '#0f172a',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
         overflow: 'hidden',
       }}
@@ -669,7 +669,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '10px 20px',
-          background: 'rgba(15, 23, 42, 0.95)',
+          background: 'rgba(255, 255, 255, 0.95)',
           borderBottom: '1px solid rgba(56, 189, 248, 0.25)',
           zIndex: 20,
         }}
@@ -682,8 +682,8 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '10px',
               color: '#ffffff',
               cursor: 'pointer',
@@ -769,8 +769,8 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 10px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '8px',
               color: '#ffffff',
               cursor: 'pointer',
@@ -786,8 +786,8 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '7px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '8px',
               color: soundEnabled ? '#38bdf8' : '#94a3b8',
               cursor: 'pointer',
@@ -805,7 +805,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '8px',
           padding: '8px 16px',
-          background: 'rgba(15, 23, 42, 0.75)',
+          background: '#f8fafc',
           borderBottom: '1px solid rgba(56, 189, 248, 0.2)',
           zIndex: 15,
           overflowX: 'auto',
@@ -857,7 +857,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.92)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
               borderRadius: '24px',
               padding: '20px 32px',
@@ -908,7 +908,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   <div style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff' }}>
                     {language === 'np' ? 'शून्य (Zero)' : 'Zero (शून्य)'}
                   </div>
-                  <div style={{ fontSize: '12px', color: '#94a3b8' }}>
+                  <div style={{ fontSize: '12px', color: '#64748b' }}>
                     {language === 'np'
                       ? 'कुनै समूहमा कुनै वस्तु छैन भने त्यसलाई शून्य (०) भनिन्छ।'
                       : 'When there are no objects in a group, we call it zero (0).'}
@@ -948,7 +948,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                     alignItems: 'center',
                     gap: '8px',
                     padding: '10px 20px',
-                    background: 'rgba(255, 255, 255, 0.15)',
+                    background: '#e2e8f0',
                     border: '1px solid rgba(255, 255, 255, 0.3)',
                     borderRadius: '12px',
                     color: '#ffffff',
@@ -997,7 +997,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.92)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
               borderRadius: '24px',
               padding: '20px 32px',
@@ -1034,7 +1034,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                     maxWidth: '260px',
                     padding: '16px',
                     borderRadius: '16px',
-                    background: 'rgba(30, 41, 59, 0.8)',
+                    background: '#f8fafc',
                     border: '2px solid rgba(56, 189, 248, 0.3)',
                     color: '#ffffff',
                     cursor: 'pointer',
@@ -1049,7 +1049,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   <span style={{ fontSize: '14px', fontWeight: 800 }}>
                     {language === 'np' ? opt.labelNp : opt.labelEn}
                   </span>
-                  <span style={{ fontSize: '11px', color: '#94a3b8' }}>
+                  <span style={{ fontSize: '11px', color: '#64748b' }}>
                     {language === 'np' ? `सङ्ख्या: ${formatNum(opt.count)}` : `Count: ${opt.count}`}
                   </span>
                 </button>
@@ -1109,7 +1109,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.92)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
               borderRadius: '24px',
               padding: '20px 32px',
@@ -1147,7 +1147,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   padding: '6px 14px',
                   borderRadius: '10px',
                   background: stage3Target === 'BIRDS' ? '#0284c7' : 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  border: '1px solid #e2e8f0',
                   color: '#ffffff',
                   fontWeight: 800,
                   fontSize: '12px',
@@ -1162,7 +1162,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   padding: '6px 14px',
                   borderRadius: '10px',
                   background: stage3Target === 'DUCKS' ? '#0284c7' : 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  border: '1px solid #e2e8f0',
                   color: '#ffffff',
                   fontWeight: 800,
                   fontSize: '12px',
@@ -1231,7 +1231,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.92)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
               borderRadius: '24px',
               padding: '20px 32px',
@@ -1315,7 +1315,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.94)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
               borderRadius: '24px',
               padding: '24px 32px',
@@ -1392,7 +1392,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                 {/* Explanation and Next Button */}
                 {quizAnswered && (
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-                    <div style={{ fontSize: '13px', color: '#cbd5e1', textAlign: 'center' }}>
+                    <div style={{ fontSize: '13px', color: '#475569', textAlign: 'center' }}>
                       {language === 'np'
                         ? assessmentQuestions[quizIndex].explanationNp
                         : assessmentQuestions[quizIndex].explanationEn}
@@ -1500,7 +1500,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.92)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
               borderRadius: '24px',
               padding: '16px 24px',
@@ -1523,7 +1523,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   width: '28px',
                   height: '28px',
                   borderRadius: '8px',
-                  background: 'rgba(255,255,255,0.1)',
+                  background: '#e2e8f0',
                   border: 'none',
                   color: '#fff',
                   cursor: 'pointer',
@@ -1540,7 +1540,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   width: '28px',
                   height: '28px',
                   borderRadius: '8px',
-                  background: 'rgba(255,255,255,0.1)',
+                  background: '#e2e8f0',
                   border: 'none',
                   color: '#fff',
                   cursor: 'pointer',
@@ -1559,7 +1559,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   width: '28px',
                   height: '28px',
                   borderRadius: '8px',
-                  background: 'rgba(255,255,255,0.1)',
+                  background: '#e2e8f0',
                   border: 'none',
                   color: '#fff',
                   cursor: 'pointer',
@@ -1576,7 +1576,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   width: '28px',
                   height: '28px',
                   borderRadius: '8px',
-                  background: 'rgba(255,255,255,0.1)',
+                  background: '#e2e8f0',
                   border: 'none',
                   color: '#fff',
                   cursor: 'pointer',
@@ -1595,7 +1595,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   width: '28px',
                   height: '28px',
                   borderRadius: '8px',
-                  background: 'rgba(255,255,255,0.1)',
+                  background: '#e2e8f0',
                   border: 'none',
                   color: '#fff',
                   cursor: 'pointer',
@@ -1612,7 +1612,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   width: '28px',
                   height: '28px',
                   borderRadius: '8px',
-                  background: 'rgba(255,255,255,0.1)',
+                  background: '#e2e8f0',
                   border: 'none',
                   color: '#fff',
                   cursor: 'pointer',
@@ -1631,7 +1631,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   width: '28px',
                   height: '28px',
                   borderRadius: '8px',
-                  background: 'rgba(255,255,255,0.1)',
+                  background: '#e2e8f0',
                   border: 'none',
                   color: '#fff',
                   cursor: 'pointer',
@@ -1648,7 +1648,7 @@ export const ZeroDiscoveryPlayground: React.FC<Props> = ({
                   width: '28px',
                   height: '28px',
                   borderRadius: '8px',
-                  background: 'rgba(255,255,255,0.1)',
+                  background: '#e2e8f0',
                   border: 'none',
                   color: '#fff',
                   cursor: 'pointer',

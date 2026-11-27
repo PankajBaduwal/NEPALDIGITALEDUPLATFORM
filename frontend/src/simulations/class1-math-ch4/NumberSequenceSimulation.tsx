@@ -366,7 +366,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
         flexDirection: 'column',
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%)',
-        color: '#f8fafc',
+        color: '#0f172a',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -390,8 +390,8 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '10px',
               color: '#ffffff',
               cursor: 'pointer',
@@ -482,7 +482,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: 'rgba(255, 255, 255, 0.12)',
+              background: '#e2e8f0',
               border: '1px solid rgba(255, 255, 255, 0.25)',
               borderRadius: '8px',
               color: '#ffffff',
@@ -499,8 +499,8 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '8px',
               color: soundEnabled ? '#5eead4' : '#94a3b8',
               cursor: 'pointer',
@@ -518,7 +518,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '10px',
           padding: '12px 16px',
-          background: 'rgba(15, 23, 42, 0.5)',
+          background: '#f8fafc',
           borderBottom: '1px solid rgba(45, 212, 191, 0.2)',
           flexWrap: 'wrap',
         }}
@@ -926,7 +926,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 display: 'flex',
                 gap: '12px',
                 padding: '20px',
-                background: 'rgba(15, 23, 42, 0.7)',
+                background: '#f8fafc',
                 borderRadius: '24px',
                 border: '2px dashed rgba(45, 212, 191, 0.4)',
                 minHeight: '110px',
@@ -938,7 +938,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
               }}
             >
               {placedCards.length === 0 ? (
-                <div style={{ color: '#94a3b8', fontStyle: 'italic', fontSize: '15px' }}>
+                <div style={{ color: '#64748b', fontStyle: 'italic', fontSize: '15px' }}>
                   {language === 'np'
                     ? '👇 तलबाट कार्डहरू छानेर यहाँ क्रममा राख्नुहोस्'
                     : '👇 Click cards below to place them in order here'}
@@ -1067,7 +1067,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 padding: '24px 32px',
-                background: 'rgba(15, 23, 42, 0.6)',
+                background: '#f8fafc',
                 borderRadius: '24px',
                 border: '2px solid rgba(45, 212, 191, 0.3)',
               }}

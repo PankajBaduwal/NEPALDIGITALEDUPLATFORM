@@ -829,7 +829,7 @@ export const ShapeBuilderSimulation: React.FC<Props> = ({
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
                   textAlign: 'center',
-                  color: '#94a3b8',
+                  color: '#64748b',
                   pointerEvents: 'none',
                 }}
               >

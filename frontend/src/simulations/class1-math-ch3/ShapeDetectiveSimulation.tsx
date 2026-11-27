@@ -638,7 +638,7 @@ export const ShapeDetectiveSimulation: React.FC<Props> = ({
             <span style={{ background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '6px 14px', borderRadius: '12px', fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>
               📍 {language === 'np' ? currentScene.titleNp : currentScene.titleEn}
             </span>
-            <span style={{ background: 'rgba(15,23,42,0.8)', color: '#ffffff', padding: '6px 14px', borderRadius: '12px', fontSize: '12px', fontWeight: 700 }}>
+            <span style={{ background: 'rgba(255, 255, 255, 0.95)', color: '#ffffff', padding: '6px 14px', borderRadius: '12px', fontSize: '12px', fontWeight: 700 }}>
               {language === 'np' ? 'वस्तुमा थिचेर आकार चिन्नुहोस् 🔍' : 'Tap objects to inspect shapes 🔍'}
             </span>
           </div>

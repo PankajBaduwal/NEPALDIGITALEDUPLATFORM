@@ -566,7 +566,7 @@ export const TenObjectAdventure: React.FC<Props> = ({
         flexDirection: 'column',
         height: '100vh',
         background: '#0f172a',
-        color: '#f8fafc',
+        color: '#0f172a',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
         overflow: 'hidden',
       }}
@@ -578,7 +578,7 @@ export const TenObjectAdventure: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '10px 20px',
-          background: 'rgba(15, 23, 42, 0.95)',
+          background: 'rgba(255, 255, 255, 0.95)',
           borderBottom: '1px solid rgba(56, 189, 248, 0.25)',
           zIndex: 20,
         }}
@@ -591,8 +591,8 @@ export const TenObjectAdventure: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '10px',
               color: '#ffffff',
               cursor: 'pointer',
@@ -677,8 +677,8 @@ export const TenObjectAdventure: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 10px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '8px',
               color: '#ffffff',
               cursor: 'pointer',
@@ -694,8 +694,8 @@ export const TenObjectAdventure: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '7px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '8px',
               color: soundEnabled ? '#38bdf8' : '#94a3b8',
               cursor: 'pointer',
@@ -713,7 +713,7 @@ export const TenObjectAdventure: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '8px',
           padding: '8px 16px',
-          background: 'rgba(15, 23, 42, 0.75)',
+          background: '#f8fafc',
           borderBottom: '1px solid rgba(56, 189, 248, 0.2)',
           zIndex: 15,
           overflowX: 'auto',
@@ -764,7 +764,7 @@ export const TenObjectAdventure: React.FC<Props> = ({
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.92)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
               borderRadius: '24px',
               padding: '20px 32px',
@@ -865,8 +865,8 @@ export const TenObjectAdventure: React.FC<Props> = ({
                 style={{
                   padding: '10px 18px',
                   borderRadius: '12px',
-                  background: 'rgba(255,255,255,0.1)',
-                  border: '1px solid rgba(255,255,255,0.2)',
+                  background: '#e2e8f0',
+                  border: '1px solid #e2e8f0',
                   color: '#ffffff',
                   fontWeight: 700,
                   cursor: 'pointer',
@@ -888,7 +888,7 @@ export const TenObjectAdventure: React.FC<Props> = ({
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.92)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
               borderRadius: '24px',
               padding: '20px 32px',
@@ -975,7 +975,7 @@ export const TenObjectAdventure: React.FC<Props> = ({
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.92)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
               borderRadius: '24px',
               padding: '20px 32px',
@@ -1092,7 +1092,7 @@ export const TenObjectAdventure: React.FC<Props> = ({
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.92)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
               borderRadius: '24px',
               padding: '20px 32px',
@@ -1180,7 +1180,7 @@ export const TenObjectAdventure: React.FC<Props> = ({
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.94)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
               borderRadius: '24px',
               padding: '24px 32px',
@@ -1249,7 +1249,7 @@ export const TenObjectAdventure: React.FC<Props> = ({
 
                 {quizAnswered && (
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-                    <div style={{ fontSize: '13px', color: '#cbd5e1', textAlign: 'center' }}>
+                    <div style={{ fontSize: '13px', color: '#475569', textAlign: 'center' }}>
                       {language === 'np'
                         ? assessmentQuestions[quizIndex].explanationNp
                         : assessmentQuestions[quizIndex].explanationEn}

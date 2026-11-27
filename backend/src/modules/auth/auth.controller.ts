@@ -228,6 +228,32 @@ export class AuthController {
 
   static async getPublicInstitutions(req: Request, res: Response, next: NextFunction) {
     try {
+      const { LocalAuthService } = await import('./localAuth.service');
+      const mongoose = await import('mongoose');
+      if (mongoose.default.connection.readyState !== 1 && LocalAuthService.isAvailable()) {
+        const { institution } = LocalAuthService.listAccounts();
+        return ApiResponse.success(
+          res,
+          institution
+            ? [
+                {
+                  _id: institution.id,
+                  id: institution.id,
+                  emisCode: institution.emisCode,
+                  name: institution.name,
+                  nameNepali: institution.nameNepali,
+                  province: institution.province,
+                  district: institution.district,
+                  localLevel: institution.localLevel,
+                  type: institution.type,
+                  status: institution.status,
+                },
+              ]
+            : [],
+          'Public institutions retrieved (local demo mode)'
+        );
+      }
+
       const list = await Institution.find({ status: { $in: ['ACTIVE', 'PROVISIONED'] } })
         .select('id emisCode name nameNepali province district localLevel type status logoUrl mediumOfInstruction')
         .sort({ name: 1 })
@@ -256,6 +282,24 @@ export class AuthController {
     try {
       const result = await AuthService.updateProfile(req.user!.userId, req.body);
       return ApiResponse.success(res, result, 'Profile updated successfully');
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * GET /auth/demo-accounts
+   * Returns a list of all local demo accounts (no passwords).
+   * Only available in development / DEMO_MODE.
+   */
+  static async getDemoAccounts(_req: Request, res: Response, next: NextFunction) {
+    try {
+      const { LocalAuthService } = await import('./localAuth.service');
+      if (!LocalAuthService.isAvailable()) {
+        return ApiResponse.error(res, 'Demo accounts not available', 404, 'NO_DEMO_ACCOUNTS');
+      }
+      const data = LocalAuthService.listAccounts();
+      return ApiResponse.success(res, data, 'Demo accounts retrieved');
     } catch (error) {
       next(error);
     }

@@ -80,6 +80,110 @@ import { AdditionChallengeWorld } from '../../simulations/class1-math-ch10/Addit
 // Class 1–5 Mathematics - Interactive Number Line & Counting Frog 3D Edition
 import { NumberLineFrog3D } from '../../simulations/number-line-3d/NumberLineFrog3D';
 
+// Class 4 Science & Technology - Chapter 1: Scientific Learning (वैज्ञानिक सिकाइ)
+import { FloatingSinkingLab } from '../../simulations/class4-science/ch1-scientific-learning/FloatingSinkingLab';
+import { DissolvingMaterialsLab } from '../../simulations/class4-science/ch1-scientific-learning/DissolvingMaterialsLab';
+import { MeasurementLab } from '../../simulations/class4-science/ch1-scientific-learning/MeasurementLab';
+
+// Class 4 Science & Technology - Chapter 2: ICT (सूचना तथा सञ्चार प्रविधि)
+import { ExploreComputerSim } from '../../simulations/class4-science/ch2-ict/ExploreComputerSim';
+import { InputProcessingOutputSim } from '../../simulations/class4-science/ch2-ict/InputProcessingOutputSim';
+import { VirtualComputerLab } from '../../simulations/class4-science/ch2-ict/VirtualComputerLab';
+
+// Class 4 Science & Technology - Chapter 3: Organisms and Environment (जीवहरू र वातावरण)
+import { LivingEnvironmentSim } from '../../simulations/class4-science/ch3-organisms-environment/LivingEnvironmentSim';
+import { EcosystemExplorerSim } from '../../simulations/class4-science/ch3-organisms-environment/EcosystemExplorerSim';
+import { PollutionLabSim } from '../../simulations/class4-science/ch3-organisms-environment/PollutionLabSim';
+import { DeforestationConservationSim } from '../../simulations/class4-science/ch3-organisms-environment/DeforestationConservationSim';
+
+// Class 4 Science & Technology - Chapter 4: Classification of Living Beings (जीवहरूको वर्गीकरण)
+import { AnimalClassificationSim } from '../../simulations/class4-science/ch4-classification/AnimalClassificationSim';
+import { PlantGardenSim } from '../../simulations/class4-science/ch4-classification/PlantGardenSim';
+import { AquaticTerrestrialSim } from '../../simulations/class4-science/ch4-classification/AquaticTerrestrialSim';
+import { FloweringPlantsSim } from '../../simulations/class4-science/ch4-classification/FloweringPlantsSim';
+
+// Class 4 Science & Technology - Chapter 5: Life Process (जीवन प्रक्रिया)
+import { ButterflyLifeCycleSim } from '../../simulations/class4-science/ch5-life-process/ButterflyLifeCycleSim';
+import { SeedGerminationSim } from '../../simulations/class4-science/ch5-life-process/SeedGerminationSim';
+import { PlantGrowthSim } from '../../simulations/class4-science/ch5-life-process/PlantGrowthSim';
+import { HumanGrowthSim } from '../../simulations/class4-science/ch5-life-process/HumanGrowthSim';
+import { AnimalLifeCyclesSim } from '../../simulations/class4-science/ch5-life-process/AnimalLifeCyclesSim';
+
+// Class 4 Science & Technology - Chapter 6: Matter (पदार्थ)
+import { StatesOfMatterSim } from '../../simulations/class4-science/ch6-matter/StatesOfMatterSim';
+import { MeltingFreezingSim } from '../../simulations/class4-science/ch6-matter/MeltingFreezingSim';
+import { EvaporationCondensationSim } from '../../simulations/class4-science/ch6-matter/EvaporationCondensationSim';
+import { WaterCycleSim } from '../../simulations/class4-science/ch6-matter/WaterCycleSim';
+import { WaterSourcesSim } from '../../simulations/class4-science/ch6-matter/WaterSourcesSim';
+
+// Class 4 Science & Technology - Chapter 7: Energy (शक्ति)
+import { EnergyFormsSim } from '../../simulations/class4-science/ch7-energy/EnergyFormsSim';
+import { VirtualElectricityLab } from '../../simulations/class4-science/ch7-energy/VirtualElectricityLab';
+import { MagnetExplorerSim } from '../../simulations/class4-science/ch7-energy/MagnetExplorerSim';
+
+// Class 4 Science & Technology - Chapter 8: The Earth and Space (पृथ्वी र अन्तरिक्ष)
+import { PlanetEarthSim } from '../../simulations/class4-science/ch8-earth-space/PlanetEarthSim';
+import { LandformsExplorerSim } from '../../simulations/class4-science/ch8-earth-space/LandformsExplorerSim';
+import { WaterBodiesExplorerSim } from '../../simulations/class4-science/ch8-earth-space/WaterBodiesExplorerSim';
+import { AtmosphereExplorerSim } from '../../simulations/class4-science/ch8-earth-space/AtmosphereExplorerSim';
+import { WeatherSimulatorSim } from '../../simulations/class4-science/ch8-earth-space/WeatherSimulatorSim';
+import { WeatherObservationLab } from '../../simulations/class4-science/ch8-earth-space/WeatherObservationLab';
+
+// Class 6 Science & Technology (विज्ञान तथा प्रविधि) - Units 1 to 11
+import {
+  ScientificMethodLab,
+  MeasurementLabSim,
+  ComputerHardwareExplorerSim,
+  VirtualOfficeLabSim,
+  AnimalAdaptationSim,
+  AnimalClassificationLabSim,
+  VertebrateInvertebrateSim,
+  FloweringNonFloweringSim,
+  EcosystemSimulatorSim,
+  FoodChainExplorerSim,
+  WasteManagementLabSim,
+  PhotosynthesisLabSim,
+  HumanDigestiveSystemSim,
+  ForceMotionPlaygroundSim,
+  RestMotionExplorerSim,
+  SpeedMotionLabSim,
+  SpringBalanceLabSim,
+  SimpleMachineWorkshopSim,
+  PotentialKineticEnergySim,
+  EnergyTransformationLabSim,
+  HeatTransferLabSim,
+  ThermalExpansionSim,
+  LightShadowLabSim,
+  PinholeCameraSim,
+  SoundVibrationLabSim,
+  MagneticFieldExplorerSim,
+  MagnetMakingLabSim,
+  ElectromagnetWorkshopSim,
+  VirtualCircuitBuilderSim,
+  SimpleCellLabSim,
+  MixtureLabSim,
+  SolutionExplorerSim,
+  SeparationLabSim,
+  DistillationSimulatorSim,
+  PaperChromatographyLabSim,
+  CentrifugationSimulatorSim,
+  MetalsNonMetalsLabSim,
+  EverydayChemicalsSim,
+  MaterialEnvironmentalImpactSim,
+  EarthInternalStructureSim,
+  SeasonsRevolutionSim,
+  SolarSystemExplorerSim,
+  SoilFormationSim,
+  SoilProfileExplorerSim,
+  SoilConservationLabSim,
+  SoilPollutionSimulatorSim,
+} from '../../simulations/class6-science';
+
+// Class 10 Science - Chapter 1: Force & Gravitation (बल र गुरुत्वाकर्षण)
+import { UniversalGravitationSim } from '../../simulations/class10-science/ch1-force/UniversalGravitationSim';
+import { TidesGravitationSim } from '../../simulations/class10-science/ch1-force/TidesGravitationSim';
+import { CoinAndFeatherSim } from '../../simulations/class10-science/ch1-force/CoinAndFeatherSim';
+
 export interface SimulationPlayerProps {
   simulation: {
     id: string;
@@ -334,6 +438,307 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
     simulation.runtimeUrl?.includes('math-number-line')
   ) {
     return <NumberLineFrog3D onBackToLibrary={onClose} userRole={userRole} embedded={embedded} />;
+  }
+
+  // ── Class 4 Science & Technology (विज्ञान तथा प्रविधि - कक्षा ४) ────────
+  // Chapter 1: Scientific Learning (वैज्ञानिक सिकाइ)
+  if (simulation.componentKey === 'class4-sci-ch1-floating-sinking') {
+    return <FloatingSinkingLab onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch1-dissolving') {
+    return <DissolvingMaterialsLab onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch1-measurement') {
+    return <MeasurementLab onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Chapter 2: Information & Communication Technology (सूचना तथा सञ्चार प्रविधि)
+  if (simulation.componentKey === 'class4-sci-ch2-explore-computer') {
+    return <ExploreComputerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch2-ipo-cycle') {
+    return <InputProcessingOutputSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch2-virtual-computer') {
+    return <VirtualComputerLab onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Chapter 3: Organisms & Environment (जीवहरू र वातावरण)
+  if (simulation.componentKey === 'class4-sci-ch3-living-environment') {
+    return <LivingEnvironmentSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch3-ecosystem-explorer') {
+    return <EcosystemExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch3-pollution-lab') {
+    return <PollutionLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch3-deforestation') {
+    return <DeforestationConservationSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Chapter 4: Classification of Living Beings (जीवहरूको वर्गीकरण)
+  if (simulation.componentKey === 'class4-sci-ch4-animal-classification') {
+    return <AnimalClassificationSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch4-plant-garden') {
+    return <PlantGardenSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch4-aquatic-terrestrial') {
+    return <AquaticTerrestrialSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch4-flowering-plants') {
+    return <FloweringPlantsSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Chapter 5: Life Process (जीवन प्रक्रिया)
+  if (simulation.componentKey === 'class4-sci-ch5-butterfly-cycle') {
+    return <ButterflyLifeCycleSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch5-seed-germination') {
+    return <SeedGerminationSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch5-plant-growth') {
+    return <PlantGrowthSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch5-human-growth') {
+    return <HumanGrowthSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch5-animal-lifecycles') {
+    return <AnimalLifeCyclesSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Chapter 6: Matter (पदार्थ)
+  if (simulation.componentKey === 'class4-sci-ch6-states-of-matter') {
+    return <StatesOfMatterSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch6-melting-freezing') {
+    return <MeltingFreezingSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch6-evaporation-condensation') {
+    return <EvaporationCondensationSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch6-water-cycle') {
+    return <WaterCycleSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch6-water-sources') {
+    return <WaterSourcesSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Chapter 7: Energy (शक्ति)
+  if (simulation.componentKey === 'class4-sci-ch7-energy-forms') {
+    return <EnergyFormsSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch7-electricity-lab') {
+    return <VirtualElectricityLab onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch7-magnet-explorer') {
+    return <MagnetExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Chapter 8: The Earth and Space (पृथ्वी र अन्तरिक्ष)
+  if (simulation.componentKey === 'class4-sci-ch8-planet-earth') {
+    return <PlanetEarthSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch8-landforms') {
+    return <LandformsExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch8-water-bodies') {
+    return <WaterBodiesExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch8-atmosphere') {
+    return <AtmosphereExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch8-weather-simulator') {
+    return <WeatherSimulatorSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class4-sci-ch8-weather-observation') {
+    return <WeatherObservationLab onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // CLASS 6 SCIENCE & TECHNOLOGY (कक्षा ६ विज्ञान तथा प्रविधि) - 46 SIMULATIONS
+  // ══════════════════════════════════════════════════════════════
+
+  // Unit 1: Scientific Learning (वैज्ञानिक सिकाइ)
+  if (simulation.componentKey === 'class6-sci-ch1-scientific-method') {
+    return <ScientificMethodLab onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch1-measurement-lab') {
+    return <MeasurementLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Unit 2: Information and Communication Technology (सूचना तथा सञ्चार प्रविधि)
+  if (simulation.componentKey === 'class6-sci-ch2-computer-hardware') {
+    return <ComputerHardwareExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch2-virtual-office') {
+    return <VirtualOfficeLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Unit 3: Organisms and Their Structure (जीव र तिनका शारीरिक बनोट)
+  if (simulation.componentKey === 'class6-sci-ch3-animal-adaptation') {
+    return <AnimalAdaptationSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch3-animal-classification') {
+    return <AnimalClassificationLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch3-vertebrate-invertebrate') {
+    return <VertebrateInvertebrateSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch3-flowering-plants') {
+    return <FloweringNonFloweringSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Unit 4: Environment and Biodiversity (वातावरण र जैविक विविधता)
+  if (simulation.componentKey === 'class6-sci-ch4-ecosystem-simulator') {
+    return <EcosystemSimulatorSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch4-food-chain-explorer') {
+    return <FoodChainExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch4-waste-management') {
+    return <WasteManagementLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Unit 5: Life Process (जीवन प्रक्रिया)
+  if (simulation.componentKey === 'class6-sci-ch5-photosynthesis-lab') {
+    return <PhotosynthesisLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch5-human-digestive-system') {
+    return <HumanDigestiveSystemSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Unit 6: Force and Motion (बल र चाल)
+  if (simulation.componentKey === 'class6-sci-ch6-force-motion-playground') {
+    return <ForceMotionPlaygroundSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch6-rest-motion-explorer') {
+    return <RestMotionExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch6-speed-motion-lab') {
+    return <SpeedMotionLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch6-spring-balance-lab') {
+    return <SpringBalanceLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch6-simple-machine-workshop') {
+    return <SimpleMachineWorkshopSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Unit 7: Energy in Daily Life (दैनिक जीवनमा शक्ति)
+  if (simulation.componentKey === 'class6-sci-ch7-potential-kinetic-energy') {
+    return <PotentialKineticEnergySim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch7-energy-transformation-lab') {
+    return <EnergyTransformationLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch7-heat-transfer-lab') {
+    return <HeatTransferLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch7-thermal-expansion') {
+    return <ThermalExpansionSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch7-light-shadow-lab') {
+    return <LightShadowLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch7-pinhole-camera') {
+    return <PinholeCameraSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch7-sound-vibration-lab') {
+    return <SoundVibrationLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Unit 8: Electricity and Magnetism (विद्युत् र चुम्बकत्व)
+  if (simulation.componentKey === 'class6-sci-ch8-magnetic-field-explorer') {
+    return <MagneticFieldExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch8-magnet-making-lab') {
+    return <MagnetMakingLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch8-electromagnet-workshop') {
+    return <ElectromagnetWorkshopSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch8-virtual-circuit-builder') {
+    return <VirtualCircuitBuilderSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch8-simple-cell-lab') {
+    return <SimpleCellLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Unit 9: Matter (पदार्थ)
+  if (simulation.componentKey === 'class6-sci-ch9-mixture-lab') {
+    return <MixtureLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch9-solution-explorer') {
+    return <SolutionExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch9-separation-lab') {
+    return <SeparationLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch9-distillation-simulator') {
+    return <DistillationSimulatorSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch9-paper-chromatography-lab') {
+    return <PaperChromatographyLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch9-centrifugation-simulator') {
+    return <CentrifugationSimulatorSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Unit 10: Materials Used in Daily Life (दैनिक जीवनमा प्रयोग हुने वस्तुहरू)
+  if (simulation.componentKey === 'class6-sci-ch10-metals-non-metals-lab') {
+    return <MetalsNonMetalsLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch10-everyday-chemicals') {
+    return <EverydayChemicalsSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch10-material-environmental-impact') {
+    return <MaterialEnvironmentalImpactSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Unit 11: Earth and Space (पृथ्वी र अन्तरिक्ष)
+  if (simulation.componentKey === 'class6-sci-ch11-earth-internal-structure') {
+    return <EarthInternalStructureSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch11-seasons-revolution') {
+    return <SeasonsRevolutionSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch11-solar-system-explorer') {
+    return <SolarSystemExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch11-soil-formation') {
+    return <SoilFormationSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch11-soil-profile-explorer') {
+    return <SoilProfileExplorerSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch11-soil-conservation-lab') {
+    return <SoilConservationLabSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (simulation.componentKey === 'class6-sci-ch11-soil-pollution-simulator') {
+    return <SoilPollutionSimulatorSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+
+  // Class 10 Science - Chapter 1: Force & Gravitation
+  if (
+    simulation.componentKey === 'class10-sci-ch1-universal-gravitation' ||
+    simulation.componentKey === 'universal-gravitation'
+  ) {
+    return <UniversalGravitationSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (
+    simulation.componentKey === 'class10-sci-ch1-tides-gravitation' ||
+    simulation.componentKey === 'ocean-tides' ||
+    simulation.componentKey === 'tides-gravitation'
+  ) {
+    return <TidesGravitationSim onBackToLibrary={onClose} userRole={userRole} />;
+  }
+  if (
+    simulation.componentKey === 'class10-sci-ch1-coin-and-feather' ||
+    simulation.componentKey === 'coin-and-feather'
+  ) {
+    return <CoinAndFeatherSim onBackToLibrary={onClose} userRole={userRole} />;
   }
 
   // Fallback to iframe player for HTML simulations

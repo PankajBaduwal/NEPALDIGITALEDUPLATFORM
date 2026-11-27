@@ -200,9 +200,41 @@ export class StudentService {
         teacher: alloc.teacherId,
         digitalTextbook: books.get(subIdStr),
         textbooks: [books.get(subIdStr)?.textbook, ...(books.get(subIdStr)?.supplementary || [])].filter(Boolean),
-        simulations: simulations.filter(
-          (s) => (s.subjectId && s.subjectId.toString() === subIdStr) || s.gradeLevels.includes(cls.gradeNumber)
-        ),
+        simulations: [
+          ...simulations.filter(
+            (s) => (s.subjectId && s.subjectId.toString() === subIdStr) || s.gradeLevels.includes(cls.gradeNumber)
+          ),
+          ...(cls.gradeNumber === 10 && (sub.code?.toUpperCase().startsWith('SCI') || sub.name?.toLowerCase().includes('science'))
+            ? [
+                {
+                  _id: 'sim-sci-g10-ch1-01',
+                  id: 'sim-sci-g10-ch1-01',
+                  code: 'SIM-SCI-G10-CH1-01',
+                  title: "Newton's Universal Law of Gravitation",
+                  titleNepali: 'न्युटनको विश्वव्यापी गुरुत्वाकर्षणको नियम',
+                  description: "Interactive cartoon demonstration of Newton's Gravitation Law. Adjust masses (m₁, m₂) and distance (d), observe mutual force vectors, inverse-square law, and cartoon strain expressions.",
+                  simulationType: '2D_CANVAS',
+                  domain: 'Science',
+                  gradeLevels: [10],
+                  runtimeUrl: '/sim/universal-gravitation',
+                  componentKey: 'class10-sci-ch1-universal-gravitation',
+                },
+                {
+                  _id: 'sim-sci-g10-ch1-02',
+                  id: 'sim-sci-g10-ch1-02',
+                  code: 'SIM-SCI-G10-CH1-02',
+                  title: 'Ocean Tides and Lunar Gravitation',
+                  titleNepali: 'समुद्री ज्वारभाटा र चन्द्रमाको गुरुत्वाकर्षण बल',
+                  description: 'Interactive cartoon demonstration of lunar gravitational pull creating ocean tides. Experience high tide bulging water, Spring/Neap syzygy alignment, tidal differential gravity (F_tide ∝ M/d³), and diurnal cycles.',
+                  simulationType: '2D_CANVAS',
+                  domain: 'Science',
+                  gradeLevels: [10],
+                  runtimeUrl: '/sim/ocean-tides',
+                  componentKey: 'class10-sci-ch1-tides-gravitation',
+                },
+              ]
+            : [])
+        ],
       };
     });
   }

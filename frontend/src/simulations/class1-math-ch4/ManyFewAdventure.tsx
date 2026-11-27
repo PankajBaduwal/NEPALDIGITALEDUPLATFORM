@@ -413,7 +413,7 @@ export const ManyFewAdventure: React.FC<Props> = ({
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#fbbf24' }}>
               {language === 'np' ? 'धेरै र थोरै चिनौँ (Many and Few Adventure)' : 'Many and Few Adventure'}
             </h1>
-            <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 600 }}>
+            <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
               {language === 'np'
                 ? 'कक्षा १ गणित • अध्याय ४: ९ सम्मका सङ्ख्याहरू (Numbers up to 9)'
                 : 'Class 1 Math • Chapter 4: Numbers up to 9'}
@@ -556,7 +556,7 @@ export const ManyFewAdventure: React.FC<Props> = ({
                     : (language === 'np' ? 'थोरै (FEW) भएको बाकस खोज्नुहोस्!' : 'Find the basket with FEW!')}
                 </div>
 
-                <p style={{ margin: 0, fontSize: '13px', color: '#cbd5e1', lineHeight: 1.5 }}>
+                <p style={{ margin: 0, fontSize: '13px', color: '#475569', lineHeight: 1.5 }}>
                   {language === 'np'
                     ? `दुवै बाकसमा भएका ${currentRound.itemTypeNp}लाई हेर्नुहोस्। कुनमा धेरै र कुनमा थोरै छन् तुलना गर्नुहोस्।`
                     : `Observe the ${currentRound.itemTypeEn} in both baskets. Compare which has more and which has fewer.`}
@@ -565,7 +565,7 @@ export const ManyFewAdventure: React.FC<Props> = ({
 
               {/* Baskets Selection Buttons */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <span style={{ fontSize: '12px', fontWeight: 800, color: '#94a3b8' }}>
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#64748b' }}>
                   {language === 'np' ? 'बाकस छान्नुहोस् (Pick a Basket):' : 'Select Basket:'}
                 </span>
 
@@ -837,7 +837,7 @@ export const ManyFewAdventure: React.FC<Props> = ({
                   {language === 'np' ? 'मूल्याङ्कन सम्पन्न भयो!' : 'Assessment Complete!'}
                 </h2>
 
-                <p style={{ fontSize: '16px', color: '#cbd5e1', margin: '0 0 24px 0' }}>
+                <p style={{ fontSize: '16px', color: '#475569', margin: '0 0 24px 0' }}>
                   {language === 'np'
                     ? `तपाईंले ${assessmentQuestions.length} मा ${assessmentScore} अङ्क प्राप्त गर्नुभयो।`
                     : `You scored ${assessmentScore} out of ${assessmentQuestions.length}.`}

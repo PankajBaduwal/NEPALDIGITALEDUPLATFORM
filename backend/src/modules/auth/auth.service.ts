@@ -1,11 +1,18 @@
 import { ENV } from '../../config/env';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
+import mongoose from 'mongoose';
 import { User, Institution, Subscription, RegistrationRequest, Section, Class, AcademicYear, StudentEnrollment, SubjectAllocation } from '../../models';
 import { TokenUtil } from '../../common/utils/token.util';
 import { UserRole } from '../../common/constants/roles';
 import { MailService } from '../../common/services/mail.service';
 import { TwoFactorService } from './twofactor.service';
+import { LocalAuthService } from './localAuth.service';
+
+/** True when MongoDB is connected and usable */
+function isMongoLive(): boolean {
+  return mongoose.connection.readyState === 1;
+}
 
 export class AuthService {
   static async login(identifier: string, password: string) {
@@ -13,6 +20,14 @@ export class AuthService {
     if (!rawId) {
       throw { status: 400, message: 'Username or identifier is required', code: 'INVALID_CREDENTIALS' };
     }
+
+    // ── Local fallback when MongoDB is offline ──────────────────────────────
+    if (!isMongoLive() && LocalAuthService.isAvailable()) {
+      console.log('[Auth] MongoDB offline → using local demo accounts');
+      return LocalAuthService.login(identifier, password);
+    }
+    // ────────────────────────────────────────────────────────────────────────
+
     const escaped = rawId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const idRegex = new RegExp(`^${escaped}$`, 'i');
 
@@ -207,6 +222,14 @@ export class AuthService {
     if (!ENV.DEMO_MODE) {
       throw { status: 403, message: 'Demo login is disabled', code: 'DEMO_DISABLED' };
     }
+
+    // ── Local fallback when MongoDB is offline ──────────────────────────────
+    if (!isMongoLive() && LocalAuthService.isAvailable()) {
+      console.log('[Auth] MongoDB offline → demo login via local accounts');
+      return LocalAuthService.demoLogin(requestedRole);
+    }
+    // ────────────────────────────────────────────────────────────────────────
+
     const roleKey = requestedRole.toUpperCase();
     const candidateUsernames: Record<string, string[]> = {
       SUPER_ADMIN: ['superadmin'],
@@ -486,6 +509,10 @@ export class AuthService {
   }
 
   static async getMe(userId: string) {
+    if ((!isMongoLive() || (typeof userId === 'string' && userId.startsWith('local-'))) && LocalAuthService.isAvailable()) {
+      return LocalAuthService.getMe(userId);
+    }
+
     const user = await User.findById(userId);
 
     if (!user) {

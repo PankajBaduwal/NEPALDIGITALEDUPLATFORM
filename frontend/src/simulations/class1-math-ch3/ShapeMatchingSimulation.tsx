@@ -549,7 +549,7 @@ export const ShapeMatchingSimulation: React.FC<Props> = ({
             minHeight: '140px',
           }}
         >
-          <span style={{ fontSize: '12px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase' }}>
+          <span style={{ fontSize: '12px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>
             {language === 'np' ? 'छान्न बाँकी वस्तुहरू' : 'Objects to Categorize'}
           </span>
 

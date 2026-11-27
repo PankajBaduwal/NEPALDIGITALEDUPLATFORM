@@ -18,6 +18,123 @@ import {
 } from '../../models/SimulationActivity';
 import { CentralSubject } from '../../models/Curriculum';
 
+export const FALLBACK_CLASS10_SIM = {
+  _id: 'sim-sci-g10-ch1-01',
+  id: 'sim-sci-g10-ch1-01',
+  code: 'SIM-SCI-G10-CH1-01',
+  title: "Newton's Universal Law of Gravitation",
+  titleNepali: 'न्युटनको विश्वव्यापी गुरुत्वाकर्षणको नियम',
+  description: "Interactive cartoon demonstration of Newton's Gravitation Law. Adjust masses (m₁, m₂) and distance (d), observe mutual force vectors, inverse-square law, and cartoon strain expressions.",
+  descriptionNepali: 'न्युटनको गुरुत्वाकर्षण नियमको अन्तरक्रियात्मक कार्टुन प्रयोगशाला। पिण्ड र दूरी परिवर्तन गरी गुरुत्वाकर्षण बल र विपरीत आकर्षणका सदिशहरूको अध्ययन गर्नुहोस्।',
+  learningObjectives: [
+    "Verify Newton's Universal Law of Gravitation: F = G*(m1*m2)/d²",
+    'Observe mutual attractive force vectors (equal in magnitude, opposite in direction)',
+    'Investigate inverse-square relationship with distance between centers',
+  ],
+  learningObjectivesNepali: [
+    'न्युटनको विश्वव्यापी गुरुत्वाकर्षण नियमको प्रयोगात्मक परीक्षण',
+    'पिण्डहरूबीचको पारस्परिक आकर्षण बलको अध्ययन',
+    'दूरीको वर्गसँग व्युत्क्रमानुपातिक सम्बन्ध बुझ्ने',
+  ],
+  gradeLevels: [10],
+  subjectCode: 'SCI',
+  chapterNumber: 1,
+  chapterTitle: 'Force and Gravitation',
+  chapterTitleNepali: 'बल र गुरुत्वाकर्षण',
+  topicName: 'Newton Universal Law of Gravitation',
+  topicNameNepali: 'न्युटनको विश्वव्यापी गुरुत्वाकर्षण नियम',
+  difficulty: 'INTERMEDIATE',
+  estimatedMinutes: 20,
+  language: 'both',
+  simulationType: '2D_CANVAS',
+  componentKey: 'class10-sci-ch1-universal-gravitation',
+  runtimeUrl: '/sim/universal-gravitation',
+  status: 'AVAILABLE',
+  isPublished: true,
+  currentVersion: '1.0.0',
+  tags: ['gravitation', 'Newton law', 'force', 'mass', 'inverse square law', 'class 10 science'],
+};
+
+export const FALLBACK_CLASS10_SIM_TIDES = {
+  _id: 'sim-sci-g10-ch1-02',
+  id: 'sim-sci-g10-ch1-02',
+  code: 'SIM-SCI-G10-CH1-02',
+  title: 'Ocean Tides and Lunar Gravitation',
+  titleNepali: 'समुद्री ज्वारभाटा र चन्द्रमाको गुरुत्वाकर्षण बल',
+  description: 'Interactive cartoon demonstration of lunar gravitational pull creating ocean tides. Experience high tide bulging water, Spring/Neap syzygy alignment, tidal differential gravity (F_tide ∝ M/d³), and diurnal cycles.',
+  descriptionNepali: 'चन्द्रमाको गुरुत्वाकर्षण बलले समुद्री ज्वारभाटा उत्पन्न गर्ने अन्तरक्रियात्मक कार्टुन प्रयोगशाला। पानीको उच्च ज्वार, बृहत् र लघु ज्वार, ज्वारीय अन्तर बल (F_tide ∝ M/d³) र दैनिक चक्रको प्रयोगात्मक अध्ययन गर्नुहोस्।',
+  learningObjectives: [
+    'Investigate lunar gravitational differential pull on Earth oceans vs solid lithosphere',
+    'Understand why high tide occurs both on sub-lunar and antipodal sides of Earth',
+    'Explore Spring Tides (बृहत् ज्वार) vs Neap Tides (लघु ज्वार) based on solar-lunar alignment',
+    'Master the inverse-cube tidal force relation: F_tide ∝ M/d³',
+  ],
+  learningObjectivesNepali: [
+    'चन्द्रमाको गुरुत्वाकर्षण बलले समुद्री पानी तान्ने र उच्च ज्वारभाटा उत्पन्न हुने प्रक्रिया',
+    'चन्द्रमा भएको र विपरित दुवै दिशामा उच्च ज्वार उत्पन्न हुनुको कारण',
+    'औंसी र पूर्णिमामा बृहत् ज्वार (Spring Tide) तथा अष्टमीमा लघु ज्वार (Neap Tide) को अध्ययन',
+    'ज्वारीय विभेदक बलको गणितीय सम्बन्ध (F_tide ∝ M/d³) बुझ्ने',
+  ],
+  gradeLevels: [10],
+  subjectCode: 'SCI',
+  chapterNumber: 1,
+  chapterTitle: 'Force and Gravitation',
+  chapterTitleNepali: 'बल र गुरुत्वाकर्षण',
+  topicName: 'Ocean Tides and Gravitational Force',
+  topicNameNepali: 'समुद्री ज्वारभाटा र गुरुत्वाकर्षण बल',
+  difficulty: 'INTERMEDIATE',
+  estimatedMinutes: 25,
+  language: 'both',
+  simulationType: '2D_CANVAS',
+  componentKey: 'class10-sci-ch1-tides-gravitation',
+  runtimeUrl: '/sim/ocean-tides',
+  status: 'AVAILABLE',
+  isPublished: true,
+  currentVersion: '1.0.0',
+  tags: ['tides', 'gravitation', 'moon pull', 'high tide', 'spring tide', 'neap tide', 'class 10 science'],
+};
+
+export const FALLBACK_CLASS10_SIM_BOYLE = {
+  _id: 'sim-sci-g10-ch1-03',
+  id: 'sim-sci-g10-ch1-03',
+  code: 'SIM-SCI-G10-CH1-03',
+  title: "Coin and Feather Experiment (Boyle's Vacuum Tube)",
+  titleNepali: 'गिनी र प्वाँखको प्रयोग (रोबर्ट बोयलको शुन्य नली प्रयोग)',
+  description: "Interactive cartoon demonstration of Robert Boyle's 1660 Coin and Feather experiment. Compare free fall in air (aerodynamic drag opposes feather) vs vacuum (air pumped out: coin and feather fall simultaneously with acceleration a = g).",
+  descriptionNepali: 'रोबर्ट बोयलको १६६० को गिनी र प्वाँखको ऐतिहासिक अन्तरक्रियात्मक प्रयोगशाला। हावा भएको नली (हावाको अवरोधले प्वाँख ढिलो खस्ने) र शुन्य नली (हावा पम्प गरी फालिएको: दुवै वस्तु समान प्रवेग a = g ले सँगै खस्ने) को प्रत्यक्ष तुलना र अध्ययन गर्नुहोस्।',
+  learningObjectives: [
+    "Verify Robert Boyle's experiment: air resistance opposes lighter objects with larger surface areas",
+    'Demonstrate that in a vacuum, all falling bodies experience identical gravitational acceleration (a = g)',
+    'Understand why acceleration due to gravity is independent of the mass of the falling body (g = GM/R²)',
+    'Contrast terminal velocity in air with unconstrained free fall in a vacuum',
+  ],
+  learningObjectivesNepali: [
+    'रोबर्ट बोयलको ऐतिहासिक प्रयोगबाट हावाको अवरोधको प्रभाव प्रमाणित गर्ने',
+    'शुन्य नलीमा सबै वस्तुहरू समान प्रवेग (a = g) का साथ एकैसाथ खस्छन् भनी प्रदर्शन गर्ने',
+    'गुरुत्व प्रवेग खस्ने वस्तुको पिण्डमा भर पर्दैन (g = GM/R²) भनी प्रमाणित गर्ने',
+    'हावामा सीमागत गति र शुन्यमा स्वतन्त्र खसाइबीचको भिन्नता बुझ्ने',
+  ],
+  gradeLevels: [10],
+  subjectCode: 'SCI',
+  chapterNumber: 1,
+  chapterTitle: 'Force and Gravitation',
+  chapterTitleNepali: 'बल र गुरुत्वाकर्षण',
+  topicName: "Robert Boyle's Coin and Feather Experiment",
+  topicNameNepali: 'रोबर्ट बोयलको गिनी र प्वाँखको प्रयोग',
+  difficulty: 'INTERMEDIATE',
+  estimatedMinutes: 20,
+  language: 'both',
+  simulationType: '2D_CANVAS',
+  componentKey: 'class10-sci-ch1-coin-and-feather',
+  runtimeUrl: '/sim/coin-and-feather',
+  status: 'AVAILABLE',
+  isPublished: true,
+  currentVersion: '1.0.0',
+  tags: ['coin and feather', 'boyle experiment', 'vacuum tube', 'free fall', 'acceleration due to gravity', 'air resistance', 'class 10 science'],
+};
+
+export const FALLBACK_CLASS10_SIMS = [FALLBACK_CLASS10_SIM, FALLBACK_CLASS10_SIM_TIDES, FALLBACK_CLASS10_SIM_BOYLE];
+
 export class SimulationActivityService {
   // ══════════════════════════════════════════════════════════════════
   // SIMULATIONS
@@ -62,7 +179,20 @@ export class SimulationActivityService {
       ];
     }
 
-    return await Simulation.find(query).sort({ chapterNumber: 1, createdAt: 1 });
+    const sims = await Simulation.find(query).sort({ chapterNumber: 1, createdAt: 1 });
+    const items: any[] = sims.map((doc: any) => (doc.toJSON ? doc.toJSON() : doc));
+    if (!filter.grade || filter.grade === 10) {
+      if (!filter.subjectCode || filter.subjectCode === 'SCI') {
+        if (!filter.chapterNumber || filter.chapterNumber === 1) {
+          FALLBACK_CLASS10_SIMS.forEach((fallbackSim) => {
+            if (!items.some((s: any) => s.code === fallbackSim.code)) {
+              items.push(fallbackSim);
+            }
+          });
+        }
+      }
+    }
+    return items;
   }
 
   static async getSimulationById(id: string) {
@@ -990,6 +1120,16 @@ export class SimulationActivityService {
       );
     }
     console.log('Verified registration of Class 1 Mathematics Chapter 1 simulations.');
+
+    // Always ensure the official Class 10 Science simulations (Universal Gravitation & Ocean Tides) are registered
+    for (const sim of FALLBACK_CLASS10_SIMS) {
+      await Simulation.findOneAndUpdate(
+        { code: sim.code },
+        { $set: sim },
+        { upsert: true, new: true }
+      );
+    }
+    console.log('Verified registration of Class 10 Science Chapter 1 simulations.');
 
     // Always ensure the 5 official Class 1 Mathematics Chapter 2 (Lines / रेखाहरू) simulations are registered
     const class1MathCh2Sims = [
@@ -2692,6 +2832,11 @@ export class SimulationActivityService {
   static async getLibraryHierarchy() {
     // 1. Fetch all published simulations from database to get real counts
     const allSims = await Simulation.find({ isPublished: true }).lean();
+    for (const sim of FALLBACK_CLASS10_SIMS) {
+      if (!allSims.some((s: any) => s.code === sim.code)) {
+        allSims.push(sim as any);
+      }
+    }
 
     // 2. Define Nepal CDC standard subjects configuration per level/grade
     const standardSubjectsByGrade: Record<number, Array<{ code: string; name: string; nameNepali: string; icon: string }>> = {
@@ -2807,6 +2952,41 @@ export class SimulationActivityService {
         { number: 1, title: 'Me and My Family', titleNepali: 'म र मेरो परिवार' },
         { number: 2, title: 'Our Daily Life', titleNepali: 'हाम्रो दैनिक जीवन' },
         { number: 3, title: 'Our Surrounding Environment', titleNepali: 'हाम्रो वरिपरिको वातावरण' },
+      ],
+      '4_SCI': [
+        { number: 1, title: 'Scientific Learning', titleNepali: 'वैज्ञानिक सिकाइ' },
+        { number: 2, title: 'Information and Communication Technology', titleNepali: 'सूचना तथा सञ्चार प्रविधि' },
+        { number: 3, title: 'Organisms and Environment', titleNepali: 'जीवहरू र वातावरण' },
+        { number: 4, title: 'Classification of Living Beings', titleNepali: 'जीवहरूको वर्गीकरण' },
+        { number: 5, title: 'Life Process', titleNepali: 'जीवन प्रक्रिया' },
+        { number: 6, title: 'Matter', titleNepali: 'पदार्थ' },
+        { number: 7, title: 'Energy', titleNepali: 'शक्ति' },
+        { number: 8, title: 'The Earth and Space', titleNepali: 'पृथ्वी र अन्तरिक्ष' },
+      ],
+      '10_SCI': [
+        { number: 1, title: 'Force and Gravitation', titleNepali: 'बल र गुरुत्वाकर्षण' },
+        { number: 2, title: 'Pressure', titleNepali: 'चाप' },
+        { number: 3, title: 'Energy', titleNepali: 'शक्ति' },
+        { number: 4, title: 'Heat', titleNepali: 'ताप' },
+        { number: 5, title: 'Light', titleNepali: 'प्रकाश' },
+        { number: 6, title: 'Current Electricity and Magnetism', titleNepali: 'विद्युत र चुम्बकत्व' },
+        { number: 7, title: 'Classification of Elements', titleNepali: 'तत्वहरूको वर्गीकरण' },
+        { number: 8, title: 'Chemical Reaction', titleNepali: 'रासायनिक प्रतिक्रिया' },
+        { number: 9, title: 'Acid, Base and Salt', titleNepali: 'अम्ल, क्षार र लवण' },
+        { number: 10, title: 'Some Gases', titleNepali: 'केही ग्यासहरू' },
+        { number: 11, title: 'Metals', titleNepali: 'धातुहरू' },
+        { number: 12, title: 'Hydrocarbon and Its Compounds', titleNepali: 'हाइड्रोकार्बन र यसका यौगिकहरू' },
+        { number: 13, title: 'Materials Used in Daily Life', titleNepali: 'दैनिक जीवनमा प्रयोग हुने वस्तुहरू' },
+        { number: 14, title: 'Invertebrates', titleNepali: 'ढाड नभएका जीवहरू' },
+        { number: 15, title: 'Human Nervous and Glandular System', titleNepali: 'मानव स्नायु र ग्रन्थी प्रणाली' },
+        { number: 16, title: 'Blood Circulatory System', titleNepali: 'मानव शरीरमा रक्तसञ्चार प्रणाली' },
+        { number: 17, title: 'Chromosome and Sex Determination', titleNepali: 'क्रोमोजोम र लिङ्ग निर्धारण' },
+        { number: 18, title: 'Reproduction', titleNepali: 'प्रजनन' },
+        { number: 19, title: 'Heredity', titleNepali: 'वंशाणुक्रम' },
+        { number: 20, title: 'Environmental Management', titleNepali: 'वातावरणीय व्यवस्थापन' },
+        { number: 21, title: 'Geological History of Earth', titleNepali: 'पृथ्वीको भूतात्विक इतिहास' },
+        { number: 22, title: 'Atmosphere and Climate Change', titleNepali: 'वायुमण्डल र जलवायु परिवर्तन' },
+        { number: 23, title: 'The Universe', titleNepali: 'ब्रह्माण्ड' },
       ],
     };
 

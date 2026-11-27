@@ -1149,6 +1149,86 @@ export const class912Thermo = defineSchool({
 });
 
 // ─────────────────────────────────────────────────────────────
+// 9. NEWTON'S UNIVERSAL LAW OF GRAVITATION (Class 10 Physics)
+// ─────────────────────────────────────────────────────────────
+export const class10Gravitation = defineSchool({
+  id: 'g912-physics-gravitation',
+  title: "Newton's Universal Law of Gravitation",
+  band: 'GRADES_9_12',
+  level: 'grade-10',
+  levelLabel: 'Class 10',
+  subject: 'Physics',
+  category: 'Gravitation & Celestial Mechanics',
+  icon: '🪐',
+  topic: 'Universal Gravitation, Inverse-Square Law & Mutual Force Vectors',
+  shortDescription: "Interactive demonstration of Newton's Gravitation Law. Adjust masses (m1, m2) and distance (d), observe mutual force vectors, and inverse-square law.",
+  detailedDescription: "Every object in the universe attracts every other object with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centres: F = G*(m1*m2)/d².",
+  learningObjectives: [
+    "Verify Newton's Universal Law of Gravitation: F = G*(m1*m2)/d²",
+    'Observe mutual attractive force vectors (equal in magnitude, opposite in direction)',
+    'Investigate inverse-square relationship with distance between centers',
+  ],
+  formulaOverview: 'F = G · (m₁ · m₂) / d²;  G = 6.674 × 10⁻¹¹ N·m²/kg²',
+  parameters: [
+    P.range('m1', 'Mass of Object 1 (m₁)', 10, 200, 50, 5, 'kg'),
+    P.range('m2', 'Mass of Object 2 (m₂)', 10, 200, 75, 5, 'kg'),
+    P.range('dist', 'Distance between centers (d)', 2, 20, 6, 0.5, 'm'),
+    P.toggle('vectors', 'Show force vectors', true),
+  ],
+  metrics: [
+    metric('force', 'Gravitational Force F', (_s, p) => {
+      const G = 6.674e-11;
+      const f = (G * p.m1 * p.m2) / (p.dist * p.dist);
+      return `${f.toExponential(3)} N`;
+    }),
+    metric('acc1', 'Acceleration of m₁', (_s, p) => {
+      const G = 6.674e-11;
+      const a = (G * p.m2) / (p.dist * p.dist);
+      return `${a.toExponential(3)} m/s²`;
+    }),
+    metric('acc2', 'Acceleration of m₂', (_s, p) => {
+      const G = 6.674e-11;
+      const a = (G * p.m1) / (p.dist * p.dist);
+      return `${a.toExponential(3)} m/s²`;
+    }),
+  ],
+  tags: ['gravitation', 'Newton law', 'force', 'mass', 'inverse square law', 'class 10 science'],
+  engine: timeEngine((ctx, w, h, _s, p) => {
+    clear(ctx, w, h, 'Class 10 Science · Universal Law of Gravitation');
+    const centerY = h * 0.5;
+    const totalDistPx = Math.min(w * 0.55, p.dist * 35);
+    const x1 = w * 0.5 - totalDistPx / 2;
+    const x2 = w * 0.5 + totalDistPx / 2;
+    const r1 = Math.max(16, Math.min(48, Math.cbrt(p.m1) * 8));
+    const r2 = Math.max(16, Math.min(48, Math.cbrt(p.m2) * 8));
+
+    // Distance line & dimension
+    line(ctx, x1, centerY + 70, x2, centerY + 70, '#0284c7', 2, [4, 4]);
+    line(ctx, x1, centerY + 60, x1, centerY + 80, '#0284c7', 2);
+    line(ctx, x2, centerY + 60, x2, centerY + 80, '#0284c7', 2);
+    text(ctx, `d = ${p.dist} m`, w * 0.5, centerY + 90, { size: 13, weight: 700, color: '#0284c7' });
+
+    // Body 1
+    circle(ctx, x1, centerY, r1, { fill: '#38bdf8', stroke: '#0284c7', width: 3 });
+    text(ctx, `m₁ = ${p.m1} kg`, x1, centerY - r1 - 12, { size: 12, weight: 700, color: '#0369a1' });
+
+    // Body 2
+    circle(ctx, x2, centerY, r2, { fill: '#fb923c', stroke: '#ea580c', width: 3 });
+    text(ctx, `m₂ = ${p.m2} kg`, x2, centerY - r2 - 12, { size: 12, weight: 700, color: '#c2410c' });
+
+    // Vectors
+    if (p.vectors) {
+      const vLen = Math.min(60, Math.max(20, (Math.sqrt(p.m1 * p.m2) / (p.dist * 0.5))));
+      arrow(ctx, x1, centerY, x1 + vLen, centerY, { color: '#16a34a', width: 3 });
+      text(ctx, 'F⃗', x1 + vLen / 2, centerY - 14, { size: 13, weight: 800, color: '#16a34a' });
+
+      arrow(ctx, x2, centerY, x2 - vLen, centerY, { color: '#16a34a', width: 3 });
+      text(ctx, '-F⃗', x2 - vLen / 2, centerY - 14, { size: 13, weight: 800, color: '#16a34a' });
+    }
+  }),
+});
+
+// ─────────────────────────────────────────────────────────────
 // EXPORT ALL CLASS 9–12 PHYSICS SIMULATIONS
 // ─────────────────────────────────────────────────────────────
 export const CLASS_9_12_PHYSICS_SIMULATIONS = [
@@ -1160,4 +1240,5 @@ export const CLASS_9_12_PHYSICS_SIMULATIONS = [
   class912Waves,
   class912Circuits,
   class912Thermo,
+  class10Gravitation,
 ];

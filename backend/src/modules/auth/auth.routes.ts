@@ -15,6 +15,7 @@ router.post('/2fa/enable', authMiddleware, rateLimit('auth-2fa-enable', 10, 5 * 
 router.post('/2fa/disable', authMiddleware, rateLimit('auth-2fa-disable', 10, 5 * 60_000), AuthController.twoFactorDisable);
 router.post('/demo-login', AuthController.demoLogin);
 router.get('/demo-class-accounts', AuthController.demoClassAccounts);
+router.get('/demo-accounts', AuthController.getDemoAccounts);
 router.get('/institutions', AuthController.getPublicInstitutions);
 router.post('/register-institution', AuthController.registerInstitution);
 router.get('/institution-registration-status/:code', AuthController.getInstitutionRegistrationStatus);

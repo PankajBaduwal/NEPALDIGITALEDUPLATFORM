@@ -473,7 +473,7 @@ export const NumberGardenSimulation: React.FC<Props> = ({
             <span style={{ background: 'rgba(255,255,255,0.9)', padding: '6px 14px', borderRadius: '12px', fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>
               🌷 {language === 'np' ? `बगैँचा: ${currentConfig.itemNameNp} गनौँ` : `Count the ${currentConfig.itemNameEn}`}
             </span>
-            <span style={{ background: 'rgba(15,23,42,0.8)', color: '#ffffff', padding: '6px 14px', borderRadius: '12px', fontSize: '12px', fontWeight: 700 }}>
+            <span style={{ background: 'rgba(255, 255, 255, 0.95)', color: '#ffffff', padding: '6px 14px', borderRadius: '12px', fontSize: '12px', fontWeight: 700 }}>
               {language === 'np' ? 'प्रत्येक वस्तुलाई छुनुहोस् 👆' : 'Touch each object to count 👆'}
             </span>
           </div>

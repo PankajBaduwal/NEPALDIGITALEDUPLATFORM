@@ -559,7 +559,7 @@ export const StraightCurvedLineExplorer: React.FC<StraightCurvedLineExplorerProp
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              background: 'rgba(255,255,255,0.15)',
+              background: '#e2e8f0',
               color: '#ffffff',
               border: 'none',
               padding: '7px 14px',

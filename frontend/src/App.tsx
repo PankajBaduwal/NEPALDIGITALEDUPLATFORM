@@ -25,6 +25,15 @@ const ClassTeacherDashboard = lazy(() => import('./pages/ClassTeacherDashboard')
 const TeacherDashboard = lazy(() => import('./pages/TeacherDashboard').then((m) => ({ default: m.TeacherDashboard })));
 const EmbeddedSimulationPage = lazy(() => import('./pages/EmbeddedSimulationPage').then((m) => ({ default: m.EmbeddedSimulationPage })));
 const StudentDashboard = lazy(() => import('./pages/StudentDashboard').then((m) => ({ default: m.StudentDashboard })));
+const FloatingSinkingLab = lazy(() => import('./simulations/class4-science/ch1-scientific-learning/FloatingSinkingLab'));
+const DissolvingMaterialsLab = lazy(() => import('./simulations/class4-science/ch1-scientific-learning/DissolvingMaterialsLab'));
+const ExploreComputerSim = lazy(() => import('./simulations/class4-science/ch2-ict/ExploreComputerSim'));
+const UniversalGravitationSim = lazy(() => import('./simulations/class10-science/ch1-force/UniversalGravitationSim'));
+const TidesGravitationSim = lazy(() => import('./simulations/class10-science/ch1-force/TidesGravitationSim'));
+const CoinAndFeatherSim = lazy(() => import('./simulations/class10-science/ch1-force/CoinAndFeatherSim'));
+const PhenomenaOfLightSim = lazy(() => import('./simulations/class10-science/ch5-light/PhenomenaOfLightSim'));
+const PollutionLabSim = lazy(() => import('./simulations/class4-science/ch3-organisms-environment/PollutionLabSim'));
+const LivingEnvironmentSim = lazy(() => import('./simulations/class4-science/ch3-organisms-environment/LivingEnvironmentSim'));
 
 const RouteLoading: React.FC = () => (
   <div role="status" aria-live="polite" style={{ minHeight: '60vh', display: 'grid', placeItems: 'center', color: '#64748b', fontSize: 14 }}>Loading…</div>
@@ -71,6 +80,15 @@ export const App: React.FC = () => {
           <Route path="/launchpad" element={<Navigate to="/login" replace />} />
           {/* Bare page the Smart Board embeds to run a platform simulation (any signed-in user) */}
           <Route path="/embed/simulation/:key" element={<ProtectedRoute><EmbeddedSimulationPage /></ProtectedRoute>} />
+          <Route path="/sim/floating-sinking" element={<FloatingSinkingLab onBackToLibrary={() => window.history.back()} />} />
+          <Route path="/sim/dissolving" element={<DissolvingMaterialsLab onBackToLibrary={() => window.history.back()} />} />
+          <Route path="/sim/explore-computer" element={<ExploreComputerSim onBackToLibrary={() => window.history.back()} />} />
+          <Route path="/sim/universal-gravitation" element={<UniversalGravitationSim onBackToLibrary={() => window.history.back()} />} />
+          <Route path="/sim/ocean-tides" element={<TidesGravitationSim onBackToLibrary={() => window.history.back()} />} />
+          <Route path="/sim/coin-and-feather" element={<CoinAndFeatherSim onBackToLibrary={() => window.history.back()} />} />
+          <Route path="/sim/phenomena-of-light" element={<PhenomenaOfLightSim onBackToLibrary={() => window.history.back()} />} />
+          <Route path="/sim/pollution-lab" element={<PollutionLabSim onBackToLibrary={() => window.history.back()} />} />
+          <Route path="/sim/living-environment" element={<LivingEnvironmentSim onBackToLibrary={() => window.history.back()} />} />
 
           {/* Protected Role Dashboards */}
           <Route

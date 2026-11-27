@@ -433,7 +433,7 @@ export const NumberMatchingSimulation: React.FC<Props> = ({
               gap: '14px',
             }}
           >
-            <span style={{ fontSize: '13px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '13px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>
               {language === 'np' ? '१. वस्तुहरूको समूह (Object Groups)' : '1. Object Groups'}
             </span>
 
@@ -497,7 +497,7 @@ export const NumberMatchingSimulation: React.FC<Props> = ({
               gap: '14px',
             }}
           >
-            <span style={{ fontSize: '13px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '13px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>
               {language === 'np' ? '२. सङ्ख्या र नाम कार्ड (Numerals & Names)' : '2. Numerals & Names'}
             </span>
 

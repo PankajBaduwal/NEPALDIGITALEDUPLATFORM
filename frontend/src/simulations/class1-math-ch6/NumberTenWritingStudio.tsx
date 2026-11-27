@@ -280,7 +280,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
         flexDirection: 'column',
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #042f2e 0%, #134e4a 50%, #115e59 100%)',
-        color: '#f8fafc',
+        color: '#0f172a',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -304,8 +304,8 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '10px',
               color: '#ffffff',
               cursor: 'pointer',
@@ -401,7 +401,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: 'rgba(255, 255, 255, 0.12)',
+              background: '#e2e8f0',
               border: '1px solid rgba(255, 255, 255, 0.25)',
               borderRadius: '8px',
               color: '#ffffff',
@@ -417,8 +417,8 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '8px',
               color: soundEnabled ? '#5eead4' : '#94a3b8',
               cursor: 'pointer',
@@ -626,7 +626,7 @@ export const NumberTenWritingStudio: React.FC<Props> = ({
 
           {/* Chalk Color Palette */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '12px' }}>
-            <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 700 }}>
+            <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 700 }}>
               {language === 'np' ? 'चक रङ:' : 'Chalk:'}
             </span>
             {['#38bdf8', '#facc15', '#4ade80', '#f472b6', '#ffffff'].map((c) => (

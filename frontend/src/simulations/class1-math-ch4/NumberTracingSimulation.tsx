@@ -419,7 +419,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
         flexDirection: 'column',
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #042f2e 0%, #134e4a 50%, #115e59 100%)',
-        color: '#f8fafc',
+        color: '#0f172a',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -443,8 +443,8 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '10px',
               color: '#ffffff',
               cursor: 'pointer',
@@ -541,7 +541,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: 'rgba(255, 255, 255, 0.12)',
+              background: '#e2e8f0',
               border: '1px solid rgba(255, 255, 255, 0.25)',
               borderRadius: '8px',
               color: '#ffffff',
@@ -558,8 +558,8 @@ export const NumberTracingSimulation: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '8px',
               color: soundEnabled ? '#5eead4' : '#94a3b8',
               cursor: 'pointer',
@@ -577,7 +577,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '8px',
           padding: '12px 16px',
-          background: 'rgba(15, 23, 42, 0.6)',
+          background: '#f8fafc',
           borderBottom: '1px solid rgba(45, 212, 191, 0.2)',
           overflowX: 'auto',
         }}
@@ -606,7 +606,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
                   : isDone
                   ? 'rgba(16, 185, 129, 0.2)'
                   : 'rgba(30, 41, 59, 0.5)',
-                color: isSelected ? '#ffffff' : '#e2e8f0',
+                color: isSelected ? '#ffffff' : '#334155',
                 cursor: 'pointer',
                 transform: isSelected ? 'scale(1.08)' : 'scale(1)',
                 transition: 'all 0.18s ease',
@@ -691,7 +691,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
                     ? `सङ्ख्या ${activeNumeral.nepaliChar} (${activeNumeral.nepaliName})`
                     : `Number ${activeNumeral.value} (${activeNumeral.englishName})`}
                 </span>
-                <div style={{ fontSize: '11px', color: '#94a3b8' }}>
+                <div style={{ fontSize: '11px', color: '#64748b' }}>
                   {language === 'np'
                     ? 'थोप्लाहरू जोडेर सङ्ख्या कोर्नुहोस्'
                     : 'Trace along the guide path smoothly'}
@@ -877,7 +877,7 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               marginTop: '14px',
             }}
           >
-            <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 700 }}>
+            <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 700 }}>
               {language === 'np' ? 'चक रङ (Chalk):' : 'Chalk:'}
             </span>
             {['#38bdf8', '#facc15', '#4ade80', '#f472b6', '#ffffff'].map((c) => (
@@ -917,8 +917,8 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '10px 18px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '12px',
               color: '#ffffff',
               cursor: currentIndex === 0 ? 'not-allowed' : 'pointer',
@@ -987,8 +987,8 @@ export const NumberTracingSimulation: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '10px 18px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '12px',
               color: '#ffffff',
               cursor: currentIndex === NUMERALS.length - 1 ? 'not-allowed' : 'pointer',

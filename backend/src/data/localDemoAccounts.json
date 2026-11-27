@@ -1,0 +1,111 @@
+{
+  "institution": {
+    "id": "local-inst-001",
+    "emisCode": "270010001",
+    "name": "Shree Dhambojhi Secondary School",
+    "nameNepali": "श्री धाम्बोझी माध्यमिक विद्यालय",
+    "type": "COMMUNITY",
+    "province": "Bagmati Province",
+    "district": "Kathmandu",
+    "localLevel": "Kathmandu Metropolitan City",
+    "ward": 7,
+    "address": "Dhambojhi, Kathmandu",
+    "email": "info@dhambojhi.edu.np",
+    "phone": "01-4100000",
+    "status": "ACTIVE"
+  },
+  "users": [
+    {
+      "id": "local-user-001",
+      "username": "superadmin",
+      "email": "superadmin@nepaledu.gov.np",
+      "passwordHash": "$2a$10$sAPWtAMsO1YLvS8HYOCyMevgpbJMEB8LIhRRtkOI/DqqWS30Hu6li",
+      "role": "SUPER_ADMIN",
+      "fullName": "Central System Administrator",
+      "fullNameNepali": "केन्द्रीय प्रणाली प्रशासक",
+      "phone": "9800000000",
+      "institutionId": null,
+      "status": "ACTIVE",
+      "demoPassword": "NepalSuperAdmin@2081"
+    },
+    {
+      "id": "local-user-002",
+      "username": "school_admin",
+      "email": "admin@dhambojhi.edu.np",
+      "passwordHash": "$2a$10$EjN2iWxWQRLFizy2ik/jxuH8c4e/sRPhI0zvTYX5z0d7RqW83KOUy",
+      "role": "SCHOOL_ADMIN",
+      "fullName": "Ramesh Sharma",
+      "fullNameNepali": "रमेश शर्मा",
+      "phone": "9801000001",
+      "institutionId": "local-inst-001",
+      "status": "ACTIVE",
+      "demoPassword": "Nepal@1234"
+    },
+    {
+      "id": "local-user-003",
+      "username": "principal",
+      "email": "principal@dhambojhi.edu.np",
+      "passwordHash": "$2a$10$dpS7cq7/pW35Ce0bTSFlPeonP2W4pi8ippTzwsH4KrrbYIDSE7Luq",
+      "role": "PRINCIPAL",
+      "fullName": "Shailesh Verma",
+      "fullNameNepali": "शैलेश वर्मा",
+      "phone": "9801000002",
+      "institutionId": "local-inst-001",
+      "status": "ACTIVE",
+      "demoPassword": "Nepal@1234"
+    },
+    {
+      "id": "local-user-004",
+      "username": "teacher_bishnu",
+      "email": "bishnu.thapa@dhambojhi.edu.np",
+      "passwordHash": "$2a$10$8y/BoTNqE1TmGLgCilmJ6uRMjrPC2FdTmfUt.kVg6iWy9BKRatQDS",
+      "role": "TEACHER",
+      "fullName": "Bishnu Thapa",
+      "fullNameNepali": "विष्णु थापा",
+      "phone": "9802000001",
+      "institutionId": "local-inst-001",
+      "status": "ACTIVE",
+      "demoPassword": "Nepal@1234"
+    },
+    {
+      "id": "local-user-005",
+      "username": "teacher_sarita",
+      "email": "sarita.gautam@dhambojhi.edu.np",
+      "passwordHash": "$2a$10$W.yGdHpxUDz.mx2ybymhMekJXO/j.8z1B7I4pK1RvOIeQtgCUHZAm",
+      "role": "TEACHER",
+      "fullName": "Sarita Gautam",
+      "fullNameNepali": "सरिता गौतम",
+      "phone": "9802000002",
+      "institutionId": "local-inst-001",
+      "status": "ACTIVE",
+      "demoPassword": "Nepal@1234"
+    },
+    {
+      "id": "local-user-006",
+      "username": "student_aarav",
+      "email": "aarav.chaudhary@dhambojhi.edu.np",
+      "passwordHash": "$2a$10$XoeGPhrwEX.VXTZdoBtsQOaENlps3a/YspAu7x59opPMCkFzmxKr2",
+      "role": "STUDENT",
+      "fullName": "Aarav Chaudhary",
+      "fullNameNepali": "आरव चौधरी",
+      "phone": "9803000001",
+      "institutionId": "local-inst-001",
+      "status": "ACTIVE",
+      "demoPassword": "Nepal@1234"
+    },
+    {
+      "id": "local-user-007",
+      "username": "student_priya",
+      "email": "priya.shrestha@dhambojhi.edu.np",
+      "passwordHash": "$2a$10$EjN2iWxWQRLFizy2ik/jxuH8c4e/sRPhI0zvTYX5z0d7RqW83KOUy",
+      "role": "STUDENT",
+      "fullName": "Priya Shrestha",
+      "fullNameNepali": "प्रिया श्रेष्ठ",
+      "phone": "9803000002",
+      "institutionId": "local-inst-001",
+      "status": "ACTIVE",
+      "demoPassword": "Nepal@1234"
+    }
+  ]
+}
+

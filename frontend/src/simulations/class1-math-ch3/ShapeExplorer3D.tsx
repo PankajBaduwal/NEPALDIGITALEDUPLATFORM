@@ -451,7 +451,7 @@ export const ShapeExplorer3D: React.FC<Props> = ({ onBackToLibrary, userRole = '
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#38bdf8' }}>
               {language === 'np' ? 'आकारहरू चिनौँ (Shape Explorer 3D)' : 'Shape Explorer 3D'}
             </h1>
-            <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 600 }}>
+            <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
               {language === 'np'
                 ? 'कक्षा १ गणित • अध्याय ३: ज्यामितीय आकारहरू (वृत्त, त्रिभुज, चतुर्भुज)'
                 : 'Class 1 Math • Chapter 3: Geometrical Shapes (Circle, Triangle, Quadrilateral)'}
@@ -584,7 +584,7 @@ export const ShapeExplorer3D: React.FC<Props> = ({ onBackToLibrary, userRole = '
                   </h3>
                 </div>
 
-                <p style={{ margin: 0, fontSize: '13px', color: '#cbd5e1', lineHeight: 1.5 }}>
+                <p style={{ margin: 0, fontSize: '13px', color: '#475569', lineHeight: 1.5 }}>
                   {currentLevel === 1 &&
                     (language === 'np'
                       ? '३डी खेलमैदानमा रहेको कुनै पनि वस्तुलाई छुनुहोस्। माउस वा औँलाले घुमाएर हेर्नुहोस्!'
@@ -672,7 +672,7 @@ export const ShapeExplorer3D: React.FC<Props> = ({ onBackToLibrary, userRole = '
                     >
                       {language === 'np' ? selectedShape.categoryNp : selectedShape.category.toUpperCase()}
                     </span>
-                    <span style={{ fontSize: '11px', color: '#94a3b8' }}>
+                    <span style={{ fontSize: '11px', color: '#64748b' }}>
                       {language === 'np' ? '३डी मोडेल' : '3D Object'}
                     </span>
                   </div>
@@ -681,7 +681,7 @@ export const ShapeExplorer3D: React.FC<Props> = ({ onBackToLibrary, userRole = '
                     {language === 'np' ? selectedShape.nameNp : selectedShape.nameEn}
                   </h2>
 
-                  <p style={{ margin: 0, fontSize: '14px', color: '#cbd5e1', lineHeight: 1.5 }}>
+                  <p style={{ margin: 0, fontSize: '14px', color: '#475569', lineHeight: 1.5 }}>
                     {language === 'np' ? selectedShape.descriptionNp : selectedShape.descriptionEn}
                   </p>
 
@@ -743,7 +743,7 @@ export const ShapeExplorer3D: React.FC<Props> = ({ onBackToLibrary, userRole = '
 
             {/* Bottom Level Navigation */}
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-              <span style={{ fontSize: '12px', color: '#94a3b8' }}>
+              <span style={{ fontSize: '12px', color: '#64748b' }}>
                 {language === 'np' ? 'माउस वा औँलाले वस्तु घुमाउनुहोस् 🔄' : 'Drag to rotate 3D objects 🔄'}
               </span>
               <button
@@ -792,7 +792,7 @@ export const ShapeExplorer3D: React.FC<Props> = ({ onBackToLibrary, userRole = '
                 position: 'absolute',
                 top: '16px',
                 right: '16px',
-                background: 'rgba(15, 23, 42, 0.85)',
+                background: 'rgba(255, 255, 255, 0.95)',
                 backdropFilter: 'blur(8px)',
                 padding: '8px 16px',
                 borderRadius: '14px',
@@ -907,7 +907,7 @@ export const ShapeExplorer3D: React.FC<Props> = ({ onBackToLibrary, userRole = '
                   {language === 'np' ? 'मूल्याङ्कन सम्पन्न भयो!' : 'Assessment Complete!'}
                 </h2>
 
-                <p style={{ fontSize: '16px', color: '#cbd5e1', margin: '0 0 24px 0' }}>
+                <p style={{ fontSize: '16px', color: '#475569', margin: '0 0 24px 0' }}>
                   {language === 'np'
                     ? `तपाईंले ${assessmentQuestions.length} मा ${assessmentScore} अङ्क प्राप्त गर्नुभयो।`
                     : `You scored ${assessmentScore} out of ${assessmentQuestions.length}.`}

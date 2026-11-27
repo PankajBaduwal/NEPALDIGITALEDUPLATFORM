@@ -57,6 +57,7 @@ import { SimulationViewerModal } from '../components/SimulationViewerModal';
 import { InteractiveActivityPlayer } from '../components/InteractiveActivityPlayer';
 import { DemoBanner } from '../components/common/DemoBanner';
 import { ExploreSimulationsPanel } from '../components/academic/ExploreSimulationsPanel';
+import { GRADE_10_SCIENCE_SIMULATIONS } from '../simulations/class10-science/class10ScienceRegistry';
 
 type TabType =
   | 'OVERVIEW'
@@ -270,7 +271,20 @@ export const StudentDashboard: React.FC = () => {
         api.get<any>('/simulation-activity/progress/my')
       ]);
 
-      setStudentSimulations(Array.isArray(simulations) ? simulations : []);
+      const simList: any[] = Array.isArray(simulations) ? [...simulations] : [];
+      if (!grade || grade === 10) {
+        GRADE_10_SCIENCE_SIMULATIONS.forEach((g10) => {
+          if (!simList.some((s) => s.code === g10.code || s.componentKey === g10.componentKey)) {
+            simList.push({
+              ...g10,
+              id: g10.id,
+              learningObjectives: [g10.description],
+            });
+          }
+        });
+      }
+
+      setStudentSimulations(simList);
       setPracticeActivities(Array.isArray(activities) ? activities : []);
       setAssignedActivities(Array.isArray(assignments) ? assignments : []);
       setStudentProgress(Array.isArray(progress) ? progress : []);
@@ -1755,49 +1769,87 @@ export const StudentDashboard: React.FC = () => {
                     )}
 
                     {/* Simulations for this subject */}
-                    {selectedSubject.simulations?.length > 0 && (
-                      <div style={{ marginTop: '24px', borderTop: '1px solid #ebf5f1', paddingTop: '20px' }}>
-                        <h4 style={{ fontSize: '15px', fontWeight: '800', color: '#0e3e3b', marginBottom: '14px' }}>
-                          Aligned Interactive Virtual Labs
-                        </h4>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '14px' }}>
-                          {selectedSubject.simulations.map((sim: any) => (
-                            <div
-                              key={sim.id || sim._id}
-                              style={{
-                                padding: '14px',
-                                background: '#effaf6',
-                                border: '1px solid #bbf7d0',
-                                borderRadius: '10px',
-                              }}
-                            >
-                              <div style={{ fontSize: '11px', fontWeight: '800', color: '#117a6b', marginBottom: '4px' }}>
-                                {sim.simulationType} • {sim.domain || 'Science'}
-                              </div>
-                              <div style={{ fontSize: '14px', fontWeight: '800', color: '#0e3e3b', marginBottom: '4px' }}>
-                                {sim.title}
-                              </div>
-                              <button
-                                onClick={() => setActiveSim(sim)}
+                    {(() => {
+                      const grade = overview?.academicInfo?.gradeNumber || overview?.studentProfile?.classId?.gradeNumber || 10;
+                      const subCode = (selectedSubject.subject?.code || '').toUpperCase();
+                      const subName = (selectedSubject.subject?.name || '').toLowerCase();
+                      const isScience = subCode.startsWith('SCI') || subName.includes('science');
+                      const subjectSims: any[] = [...(selectedSubject.simulations || [])];
+                      if (grade === 10 && isScience) {
+                        GRADE_10_SCIENCE_SIMULATIONS.forEach((s) => {
+                          if (!subjectSims.some((existing: any) => existing.code === s.code || existing.componentKey === s.componentKey)) {
+                            subjectSims.push({
+                              ...s,
+                              id: s.id,
+                              learningObjectives: [s.description],
+                            });
+                          }
+                        });
+                      }
+                      if (subjectSims.length === 0) return null;
+                      return (
+                        <div style={{ marginTop: '24px', borderTop: '1px solid #ebf5f1', paddingTop: '20px' }}>
+                          <h4 style={{ fontSize: '15px', fontWeight: '800', color: '#0e3e3b', marginBottom: '14px' }}>
+                            Aligned Interactive Virtual Labs (प्रयोगात्मक सिमुलेसन)
+                          </h4>
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '14px' }}>
+                            {subjectSims.map((sim: any) => (
+                              <div
+                                key={sim.id || sim._id || sim.code}
                                 style={{
-                                  marginTop: '8px',
-                                  padding: '6px 12px',
-                                  background: '#117a6b',
-                                  color: '#ffffff',
-                                  border: 'none',
-                                  borderRadius: '6px',
-                                  fontSize: '12px',
-                                  fontWeight: '700',
-                                  cursor: 'pointer',
+                                  padding: '16px',
+                                  background: '#effaf6',
+                                  border: '1.5px solid #a7f3d0',
+                                  borderRadius: '12px',
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  justifyContent: 'space-between',
                                 }}
                               >
-                                Launch Virtual Lab →
-                              </button>
-                            </div>
-                          ))}
+                                <div>
+                                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                                    <span style={{ fontSize: '11px', fontWeight: '800', color: '#047857', background: '#d1fae5', padding: '2px 8px', borderRadius: '4px' }}>
+                                      {sim.simulationType?.replace('_', ' ') || '2D CANVAS'}
+                                    </span>
+                                    <span style={{ fontSize: '11px', color: '#059669', fontWeight: '700' }}>
+                                      Class {grade}
+                                    </span>
+                                  </div>
+                                  <div style={{ fontSize: '15px', fontWeight: '800', color: '#0e3e3b', marginBottom: '2px' }}>
+                                    {sim.title}
+                                  </div>
+                                  {sim.titleNepali && (
+                                    <div style={{ fontSize: '12px', color: '#059669', fontWeight: '700', marginBottom: '8px' }}>
+                                      {sim.titleNepali}
+                                    </div>
+                                  )}
+                                  <p style={{ fontSize: '12px', color: '#475569', lineHeight: 1.4, margin: '0 0 10px 0' }}>
+                                    {sim.description}
+                                  </p>
+                                </div>
+                                <button
+                                  onClick={() => setActiveSim(sim)}
+                                  style={{
+                                    marginTop: '8px',
+                                    padding: '8px 14px',
+                                    background: '#117a6b',
+                                    color: '#ffffff',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    fontSize: '12px',
+                                    fontWeight: '800',
+                                    cursor: 'pointer',
+                                    boxShadow: '0 2px 6px rgba(17,122,107,0.2)',
+                                  }}
+                                >
+                                  Launch Virtual Lab →
+                                </button>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      );
+                    })()}
                   </div>
                 </div>
               )}

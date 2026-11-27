@@ -249,7 +249,7 @@ export const ZeroChallenge: React.FC<Props> = ({
         flexDirection: 'column',
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)',
-        color: '#f8fafc',
+        color: '#0f172a',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -260,7 +260,7 @@ export const ZeroChallenge: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgba(15, 23, 42, 0.95)',
+          background: 'rgba(255, 255, 255, 0.95)',
           borderBottom: '1px solid rgba(129, 140, 248, 0.3)',
         }}
       >
@@ -272,8 +272,8 @@ export const ZeroChallenge: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '10px',
               color: '#ffffff',
               cursor: 'pointer',
@@ -320,7 +320,7 @@ export const ZeroChallenge: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: 'rgba(255, 255, 255, 0.12)',
+              background: '#e2e8f0',
               border: '1px solid rgba(255, 255, 255, 0.25)',
               borderRadius: '8px',
               color: '#ffffff',
@@ -336,8 +336,8 @@ export const ZeroChallenge: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '8px',
               color: soundEnabled ? '#a5b4fc' : '#94a3b8',
               cursor: 'pointer',
@@ -355,7 +355,7 @@ export const ZeroChallenge: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '12px',
           padding: '12px 16px',
-          background: 'rgba(15, 23, 42, 0.6)',
+          background: '#f8fafc',
           borderBottom: '1px solid rgba(129, 140, 248, 0.2)',
         }}
       >
@@ -404,7 +404,7 @@ export const ZeroChallenge: React.FC<Props> = ({
           <div
             style={{
               width: '100%',
-              background: 'rgba(15, 23, 42, 0.85)',
+              background: 'rgba(255, 255, 255, 0.95)',
               borderRadius: '24px',
               padding: '28px',
               border: '2px solid rgba(129, 140, 248, 0.4)',
@@ -477,7 +477,7 @@ export const ZeroChallenge: React.FC<Props> = ({
             {/* Feedback & Next */}
             {isAnswered && (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
-                <div style={{ fontSize: '14px', color: '#cbd5e1', textAlign: 'center' }}>
+                <div style={{ fontSize: '14px', color: '#475569', textAlign: 'center' }}>
                   {language === 'np' ? activeChallenge.explanationNp : activeChallenge.explanationEn}
                 </div>
 
@@ -507,7 +507,7 @@ export const ZeroChallenge: React.FC<Props> = ({
           <div
             style={{
               width: '100%',
-              background: 'rgba(15, 23, 42, 0.9)',
+              background: 'rgba(255, 255, 255, 0.95)',
               borderRadius: '24px',
               padding: '32px',
               border: '2px solid #10b981',

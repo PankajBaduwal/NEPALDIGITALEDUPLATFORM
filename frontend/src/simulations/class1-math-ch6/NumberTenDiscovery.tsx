@@ -204,7 +204,7 @@ export const NumberTenDiscovery: React.FC<Props> = ({
         flexDirection: 'column',
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%)',
-        color: '#f8fafc',
+        color: '#0f172a',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -227,8 +227,8 @@ export const NumberTenDiscovery: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '10px',
               color: '#ffffff',
               cursor: 'pointer',
@@ -275,7 +275,7 @@ export const NumberTenDiscovery: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: 'rgba(255, 255, 255, 0.12)',
+              background: '#e2e8f0',
               border: '1px solid rgba(255, 255, 255, 0.25)',
               borderRadius: '8px',
               color: '#ffffff',
@@ -291,8 +291,8 @@ export const NumberTenDiscovery: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: '#e2e8f0',
+              border: '1px solid #e2e8f0',
               borderRadius: '8px',
               color: soundEnabled ? '#5eead4' : '#94a3b8',
               cursor: 'pointer',
@@ -310,7 +310,7 @@ export const NumberTenDiscovery: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '12px',
           padding: '12px 16px',
-          background: 'rgba(15, 23, 42, 0.5)',
+          background: '#f8fafc',
           borderBottom: '1px solid rgba(45, 212, 191, 0.2)',
         }}
       >
@@ -393,7 +393,7 @@ export const NumberTenDiscovery: React.FC<Props> = ({
               {/* 1. Devanagari Numeral */}
               <div
                 style={{
-                  background: 'rgba(30, 41, 59, 0.85)',
+                  background: '#f8fafc',
                   borderRadius: '20px',
                   padding: '24px',
                   border: '2px solid rgba(45, 212, 191, 0.4)',
@@ -403,7 +403,7 @@ export const NumberTenDiscovery: React.FC<Props> = ({
                   gap: '8px',
                 }}
               >
-                <span style={{ fontSize: '13px', color: '#94a3b8', fontWeight: 800 }}>
+                <span style={{ fontSize: '13px', color: '#64748b', fontWeight: 800 }}>
                   {language === 'np' ? 'नेपाली सङ्ख्या (Devanagari)' : 'Devanagari Numeral'}
                 </span>
                 <span style={{ fontSize: '54px', fontWeight: 900, color: '#facc15' }}>१०</span>
@@ -413,7 +413,7 @@ export const NumberTenDiscovery: React.FC<Props> = ({
               {/* 2. English Numeral */}
               <div
                 style={{
-                  background: 'rgba(30, 41, 59, 0.85)',
+                  background: '#f8fafc',
                   borderRadius: '20px',
                   padding: '24px',
                   border: '2px solid rgba(45, 212, 191, 0.4)',
@@ -423,7 +423,7 @@ export const NumberTenDiscovery: React.FC<Props> = ({
                   gap: '8px',
                 }}
               >
-                <span style={{ fontSize: '13px', color: '#94a3b8', fontWeight: 800 }}>
+                <span style={{ fontSize: '13px', color: '#64748b', fontWeight: 800 }}>
                   {language === 'np' ? 'अङ्ग्रेजी सङ्ख्या (English)' : 'English Numeral'}
                 </span>
                 <span style={{ fontSize: '54px', fontWeight: 900, color: '#38bdf8' }}>10</span>
@@ -434,7 +434,7 @@ export const NumberTenDiscovery: React.FC<Props> = ({
             {/* 10 Apples Showcase */}
             <div
               style={{
-                background: 'rgba(15, 23, 42, 0.7)',
+                background: '#f8fafc',
                 borderRadius: '20px',
                 padding: '20px 32px',
                 border: '2px dashed rgba(45, 212, 191, 0.4)',
@@ -642,7 +642,7 @@ export const NumberTenDiscovery: React.FC<Props> = ({
                         <div style={{ fontSize: '15px', fontWeight: 800 }}>
                           {language === 'np' ? c.labelNp : c.labelEn}
                         </div>
-                        <div style={{ fontSize: '12px', color: '#94a3b8' }}>
+                        <div style={{ fontSize: '12px', color: '#64748b' }}>
                           {formatNum(c.count)} Items
                         </div>
                       </div>

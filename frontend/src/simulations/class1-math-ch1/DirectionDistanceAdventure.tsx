@@ -158,7 +158,7 @@ export const DirectionDistanceAdventure: React.FC<DirectionDistanceAdventureProp
             )}
           </div>
         ) : (
-          <div style={{ textAlign: 'center', background: 'rgba(255,255,255,0.1)', padding: '36px', borderRadius: '20px' }}>
+          <div style={{ textAlign: 'center', background: '#e2e8f0', padding: '36px', borderRadius: '20px' }}>
             <Trophy size={50} color="#fcd34d" style={{ margin: '0 auto 12px auto' }} />
             <h3 style={{ fontSize: '24px', fontWeight: '800' }}>
               {lang === 'ne' ? 'सबास! दिशा र दूरी अभ्यास पूरा भयो!' : 'Great Job! Direction & Distance Completed!'}
