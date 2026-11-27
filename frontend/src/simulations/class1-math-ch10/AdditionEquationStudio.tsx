@@ -515,41 +515,41 @@ export const AdditionEquationStudio: React.FC<Props> = ({
   };
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
             title="Back to Chapter 10"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 font-semibold">
                 Class 1 • Math • Chapter 10
               </span>
               <span className="text-xs px-2 py-0.5 rounded-full bg-violet-500/20 text-violet-300 font-semibold">
                 Simulation 03
               </span>
             </div>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
               {language === 'np' ? 'जोड वाक्य निर्माण प्रयोगशाला' : 'Addition Equation Studio'}
             </h1>
           </div>
         </div>
 
         {/* Tab Selector */}
-        <div className="hidden lg:flex items-center gap-1 bg-slate-900/60 p-1 rounded-xl border border-slate-700/60 text-xs">
+        <div className="hidden lg:flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200/60 text-xs">
           <button
             onClick={() => {
               playSound('click');
               setActiveTab('PICTURE_EQUATION');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition ${
-              activeTab === 'PICTURE_EQUATION' ? 'bg-violet-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              activeTab === 'PICTURE_EQUATION' ? 'bg-violet-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             {language === 'np' ? 'चित्रबाट समीकरण' : 'Picture Eq'}
@@ -560,7 +560,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               setActiveTab('HORIZONTAL');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition ${
-              activeTab === 'HORIZONTAL' ? 'bg-emerald-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              activeTab === 'HORIZONTAL' ? 'bg-emerald-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             {language === 'np' ? 'तेर्सो जोड' : 'Horizontal'}
@@ -571,7 +571,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               setActiveTab('THREE_NUMBER');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition ${
-              activeTab === 'THREE_NUMBER' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              activeTab === 'THREE_NUMBER' ? 'bg-amber-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             {language === 'np' ? 'तीन सङ्ख्याको जोड' : '3-Number Add'}
@@ -582,7 +582,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               setActiveTab('MISSING_ADDEND');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition ${
-              activeTab === 'MISSING_ADDEND' ? 'bg-cyan-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              activeTab === 'MISSING_ADDEND' ? 'bg-cyan-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             {language === 'np' ? 'खाली ठाउँ भर्ने' : 'Missing Addend'}
@@ -593,7 +593,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               setActiveTab('QUIZ');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1 ${
-              activeTab === 'QUIZ' ? 'bg-rose-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              activeTab === 'QUIZ' ? 'bg-rose-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Trophy className="w-3.5 h-3.5" />
@@ -605,10 +605,10 @@ export const AdditionEquationStudio: React.FC<Props> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setSoundEnabled((prev) => !prev)}
-            className="p-2 rounded-xl bg-slate-700/80 hover:bg-slate-700 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-100 transition text-slate-700"
             title={soundEnabled ? 'Mute' : 'Unmute'}
           >
-            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-400" /> : <VolumeX className="w-5 h-5 text-slate-400" />}
+            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
           <button
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
@@ -626,13 +626,13 @@ export const AdditionEquationStudio: React.FC<Props> = ({
         {/* ========================================================================= */}
         {activeTab === 'PICTURE_EQUATION' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-violet-400 tracking-wider">
                     {language === 'np' ? 'कार्य १: चित्र हेरी समीकरण बनाउनुहोस्' : 'Activity 1: Picture to Equation'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np'
                       ? `चित्रका ${currentPic.nameNp} गनेर जोड वाक्य पूरा गर्नुहोस्!`
                       : `Count the ${currentPic.nameEn} and complete the addition equation!`}
@@ -641,14 +641,14 @@ export const AdditionEquationStudio: React.FC<Props> = ({
 
                 <button
                   onClick={handleNextPicItem}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को चित्र' : 'Next Picture'}
                 </button>
               </div>
 
               {/* Picture Display: Two Collections */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-900/80 p-5 rounded-2xl border border-violet-500/30">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-5 rounded-2xl border border-violet-500/30">
                 {/* Group 1 */}
                 <div className="flex flex-col items-center p-3 bg-violet-950/40 rounded-xl border border-violet-500/40">
                   <span className="text-xs font-bold text-violet-300 uppercase mb-2">
@@ -668,7 +668,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
 
                 {/* Group 2 */}
                 <div className="flex flex-col items-center p-3 bg-amber-950/40 rounded-xl border border-amber-500/40">
-                  <span className="text-xs font-bold text-amber-300 uppercase mb-2">
+                  <span className="text-xs font-bold text-amber-700 uppercase mb-2">
                     {language === 'np' ? `समूह २: ${NEP_NUMERALS[currentPic.count2]} ओटा` : `Group 2: ${currentPic.count2}`}
                   </span>
                   <div className="flex flex-wrap items-center justify-center gap-2 max-w-[200px]">
@@ -685,30 +685,30 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               </div>
 
               {/* Equation Slots to fill */}
-              <div className="flex flex-wrap items-center justify-center gap-3 bg-slate-900/90 p-5 rounded-2xl border border-slate-700">
+              <div className="flex flex-wrap items-center justify-center gap-3 bg-slate-50 p-5 rounded-2xl border border-slate-200">
                 {/* Slot 1 */}
-                <div className="w-14 h-14 rounded-2xl bg-slate-800 border-2 border-violet-500 flex items-center justify-center text-2xl font-black text-violet-300 shadow">
+                <div className="w-14 h-14 rounded-2xl bg-white border-2 border-violet-500 flex items-center justify-center text-2xl font-black text-violet-300 shadow">
                   {slot1 ? NEP_NUMERALS[slot1] : '?'}
                 </div>
 
-                <span className="text-3xl font-black text-white">+</span>
+                <span className="text-3xl font-black text-slate-900">+</span>
 
                 {/* Slot 2 */}
-                <div className="w-14 h-14 rounded-2xl bg-slate-800 border-2 border-amber-500 flex items-center justify-center text-2xl font-black text-amber-300 shadow">
+                <div className="w-14 h-14 rounded-2xl bg-white border-2 border-amber-500 flex items-center justify-center text-2xl font-black text-amber-700 shadow">
                   {slot2 ? NEP_NUMERALS[slot2] : '?'}
                 </div>
 
-                <span className="text-3xl font-black text-white">=</span>
+                <span className="text-3xl font-black text-slate-900">=</span>
 
                 {/* Slot Sum */}
-                <div className="w-16 h-14 rounded-2xl bg-slate-800 border-2 border-emerald-500 flex items-center justify-center text-2xl font-black text-emerald-300 shadow">
+                <div className="w-16 h-14 rounded-2xl bg-white border-2 border-emerald-500 flex items-center justify-center text-2xl font-black text-emerald-700 shadow">
                   {slotSum ? NEP_NUMERALS[slotSum] : '?'}
                 </div>
               </div>
 
               {/* Number Tiles Rack (Click to place) */}
               <div className="flex flex-col items-center gap-2">
-                <span className="text-xs text-slate-400 font-bold uppercase">
+                <span className="text-xs text-slate-500 font-bold uppercase">
                   {language === 'np' ? 'समीकरणमा राख्न अङ्क छान्नुहोस्:' : 'Click number tiles to place in equation:'}
                 </span>
                 <div className="flex flex-wrap items-center justify-center gap-2">
@@ -716,7 +716,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                     <button
                       key={num}
                       onClick={() => handlePlaceNumberTile(num)}
-                      className="w-11 h-11 rounded-xl bg-slate-700 hover:bg-violet-600 text-white font-black text-base flex items-center justify-center border border-slate-600 transition transform hover:scale-110 shadow"
+                      className="w-11 h-11 rounded-xl bg-slate-100 hover:bg-violet-600 text-slate-900 font-black text-base flex items-center justify-center border border-slate-300 transition transform hover:scale-110 shadow"
                     >
                       {NEP_NUMERALS[num]}
                     </button>
@@ -725,10 +725,10 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               </div>
 
               {/* Actions & Feedback */}
-              <div className="flex items-center justify-between border-t border-slate-700 pt-3">
+              <div className="flex items-center justify-between border-t border-slate-200 pt-3">
                 <button
                   onClick={handleResetPicSlots}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-300 font-bold text-xs"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs"
                 >
                   <RotateCcw className="w-4 h-4 inline mr-1" />
                   {language === 'np' ? 'खाली गर्नुहोस्' : 'Reset Slots'}
@@ -745,7 +745,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
 
               {picFeedback === 'success' && (
                 <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-emerald-200 text-sm font-bold flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-emerald-400" />
+                  <Sparkles className="w-5 h-5 text-emerald-700" />
                   <span>
                     {language === 'np'
                       ? `उत्कृष्ट! ${NEP_NUMERALS[currentPic.count1]} + ${NEP_NUMERALS[currentPic.count2]} = ${NEP_NUMERALS[currentPic.sum]} समीकरण पूर्ण रूपमा सही छ!`
@@ -762,32 +762,32 @@ export const AdditionEquationStudio: React.FC<Props> = ({
         {/* ========================================================================= */}
         {activeTab === 'HORIZONTAL' && (
           <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="text-xs font-bold uppercase text-emerald-400 tracking-wider">
+                  <span className="text-xs font-bold uppercase text-emerald-700 tracking-wider">
                     {language === 'np' ? 'कार्य २: तेर्सो जोड' : 'Activity 2: Horizontal Addition'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? 'सही जोडफल छान्नुहोस्!' : 'Choose the correct sum!'}
                   </h3>
                 </div>
 
                 <button
                   onClick={handleNextHoriz}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को प्रश्न' : 'Next'}
                 </button>
               </div>
 
               {/* Big Equation Banner */}
-              <div className="p-8 bg-slate-900/80 rounded-2xl border border-slate-700 flex items-center justify-center text-4xl md:text-5xl font-black text-white gap-4">
+              <div className="p-8 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center text-4xl md:text-5xl font-black text-slate-900 gap-4">
                 <span>{NEP_NUMERALS[currentHoriz.a]}</span>
-                <span className="text-amber-400">+</span>
+                <span className="text-amber-700">+</span>
                 <span>{NEP_NUMERALS[currentHoriz.b]}</span>
-                <span className="text-white">=</span>
-                <span className="text-emerald-400 underline decoration-dashed">
+                <span className="text-slate-900">=</span>
+                <span className="text-emerald-700 underline decoration-dashed">
                   {horizAnswer ? NEP_NUMERALS[horizAnswer] : '?'}
                 </span>
               </div>
@@ -803,7 +803,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                         ? opt === currentHoriz.ans
                           ? 'bg-emerald-600 text-white border-emerald-400 scale-105 shadow-lg'
                           : 'bg-rose-600 text-white border-rose-400'
-                        : 'bg-slate-700/80 hover:bg-slate-700 text-white border-slate-600'
+                        : 'bg-slate-100 hover:bg-slate-100 text-slate-900 border-slate-300'
                     }`}
                   >
                     <span>{NEP_NUMERALS[opt]}</span>
@@ -815,7 +815,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               {horizFeedback === 'success' && (
                 <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-emerald-200 text-sm font-bold flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                    <CheckCircle2 className="w-5 h-5 text-emerald-700" />
                     <span>
                       {language === 'np'
                         ? `स्याबास! ${NEP_NUMERALS[currentHoriz.a]} + ${NEP_NUMERALS[currentHoriz.b]} = ${NEP_NUMERALS[currentHoriz.ans]}!`
@@ -839,13 +839,13 @@ export const AdditionEquationStudio: React.FC<Props> = ({
         {/* ========================================================================= */}
         {activeTab === 'THREE_NUMBER' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="text-xs font-bold uppercase text-amber-400 tracking-wider">
+                  <span className="text-xs font-bold uppercase text-amber-700 tracking-wider">
                     {language === 'np' ? 'कार्य ३: तीन सङ्ख्याको जोड (दश बनाएर)' : 'Activity 3: Three-Number Addition'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np'
                       ? 'पहिले १० बनाउने दुई सङ्ख्या जोड्नुहोस्, अनि तेस्रो सङ्ख्या थप्नुहोस्!'
                       : 'Make 10 first with a pair, then add the third number!'}
@@ -854,47 +854,47 @@ export const AdditionEquationStudio: React.FC<Props> = ({
 
                 <button
                   onClick={handleNextThree}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को समस्या' : 'Next Problem'}
                 </button>
               </div>
 
               {/* Three-Group Banner */}
-              <div className="p-6 bg-slate-900/90 rounded-2xl border border-amber-500/30 flex flex-col items-center gap-4">
-                <span className="text-xs text-amber-400 font-bold uppercase tracking-wider">
+              <div className="p-6 bg-slate-50 rounded-2xl border border-amber-500/30 flex flex-col items-center gap-4">
+                <span className="text-xs text-amber-700 font-bold uppercase tracking-wider">
                   {language === 'np' ? 'समीकरण:' : 'Original Equation:'}
                 </span>
 
-                <div className="text-3xl md:text-4xl font-black text-white flex items-center gap-3">
-                  <span className="px-3 py-1 bg-amber-500/20 text-amber-300 rounded-xl border border-amber-500/50">
+                <div className="text-3xl md:text-4xl font-black text-slate-900 flex items-center gap-3">
+                  <span className="px-3 py-1 bg-amber-500/20 text-amber-700 rounded-xl border border-amber-500/50">
                     {NEP_NUMERALS[currentThree.a]}
                   </span>
                   <span>+</span>
-                  <span className="px-3 py-1 bg-amber-500/20 text-amber-300 rounded-xl border border-amber-500/50">
+                  <span className="px-3 py-1 bg-amber-500/20 text-amber-700 rounded-xl border border-amber-500/50">
                     {NEP_NUMERALS[currentThree.b]}
                   </span>
                   <span>+</span>
-                  <span className="px-3 py-1 bg-sky-500/20 text-sky-300 rounded-xl border border-sky-500/50">
+                  <span className="px-3 py-1 bg-sky-500/20 text-sky-700 rounded-xl border border-sky-500/50">
                     {NEP_NUMERALS[currentThree.c]}
                   </span>
                   <span>= ?</span>
                 </div>
 
                 {/* Step 1 -> Pair makes 10 */}
-                <div className="w-full bg-slate-800/80 p-4 rounded-xl border border-slate-700 flex flex-col items-center">
-                  <span className="text-xs text-slate-400 font-bold mb-1">
+                <div className="w-full bg-white p-4 rounded-xl border border-slate-200 flex flex-col items-center">
+                  <span className="text-xs text-slate-500 font-bold mb-1">
                     {language === 'np'
                       ? `पहिले ${NEP_NUMERALS[currentThree.tenPairA]} र ${NEP_NUMERALS[currentThree.tenPairB]} जोड्दा १० बन्छ:`
                       : `First ${currentThree.tenPairA} + ${currentThree.tenPairB} makes 10:`}
                   </span>
-                  <span className="text-xl font-black text-amber-400">
+                  <span className="text-xl font-black text-amber-700">
                     ({NEP_NUMERALS[currentThree.tenPairA]} + {NEP_NUMERALS[currentThree.tenPairB]}) + {NEP_NUMERALS[currentThree.c]} = १० + {NEP_NUMERALS[currentThree.c]}
                   </span>
                 </div>
 
                 {/* Step 2 -> 10 + C = Final */}
-                <div className="text-2xl font-black text-emerald-400">
+                <div className="text-2xl font-black text-emerald-700">
                   १० + {NEP_NUMERALS[currentThree.c]} = {NEP_NUMERALS[currentThree.sum]}
                 </div>
               </div>
@@ -907,46 +907,46 @@ export const AdditionEquationStudio: React.FC<Props> = ({
         {/* ========================================================================= */}
         {activeTab === 'MISSING_ADDEND' && (
           <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-cyan-400 tracking-wider">
                     {language === 'np' ? 'कार्य ४: खाली ठाउँको सङ्ख्या पत्ता लगाऔँ' : 'Activity 4: Find Missing Addend'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? 'खाली कोष्ठमा कुन सङ्ख्या हुन्छ?' : 'What number belongs in the box?'}
                   </h3>
                 </div>
 
                 <button
                   onClick={handleNextMissing}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को प्रश्न' : 'Next'}
                 </button>
               </div>
 
               {/* Equation with Blank */}
-              <div className="p-8 bg-slate-900/90 rounded-2xl border border-slate-700 flex items-center justify-center text-4xl md:text-5xl font-black text-white gap-4">
+              <div className="p-8 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center text-4xl md:text-5xl font-black text-slate-900 gap-4">
                 {currentMissing.type === 'SECOND' ? (
                   <>
                     <span>{NEP_NUMERALS[currentMissing.known1]}</span>
-                    <span className="text-amber-400">+</span>
-                    <span className="px-4 py-1 rounded-2xl bg-slate-800 border-2 border-cyan-400 border-dashed text-cyan-300">
+                    <span className="text-amber-700">+</span>
+                    <span className="px-4 py-1 rounded-2xl bg-white border-2 border-cyan-400 border-dashed text-cyan-700">
                       {missingSelected ? NEP_NUMERALS[missingSelected] : '?'}
                     </span>
                     <span>=</span>
-                    <span className="text-emerald-400">{NEP_NUMERALS[currentMissing.total]}</span>
+                    <span className="text-emerald-700">{NEP_NUMERALS[currentMissing.total]}</span>
                   </>
                 ) : (
                   <>
-                    <span className="px-4 py-1 rounded-2xl bg-slate-800 border-2 border-cyan-400 border-dashed text-cyan-300">
+                    <span className="px-4 py-1 rounded-2xl bg-white border-2 border-cyan-400 border-dashed text-cyan-700">
                       {missingSelected ? NEP_NUMERALS[missingSelected] : '?'}
                     </span>
-                    <span className="text-amber-400">+</span>
+                    <span className="text-amber-700">+</span>
                     <span>{NEP_NUMERALS[currentMissing.known1]}</span>
                     <span>=</span>
-                    <span className="text-emerald-400">{NEP_NUMERALS[currentMissing.total]}</span>
+                    <span className="text-emerald-700">{NEP_NUMERALS[currentMissing.total]}</span>
                   </>
                 )}
               </div>
@@ -962,7 +962,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                         ? opt === currentMissing.missing
                           ? 'bg-emerald-600 text-white border-emerald-400 scale-105 shadow-lg'
                           : 'bg-rose-600 text-white border-rose-400'
-                        : 'bg-slate-700/80 hover:bg-slate-700 text-white border-slate-600'
+                        : 'bg-slate-100 hover:bg-slate-100 text-slate-900 border-slate-300'
                     }`}
                   >
                     <span>{NEP_NUMERALS[opt]}</span>
@@ -974,7 +974,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
               {missingFeedback === 'success' && (
                 <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-emerald-200 text-sm font-bold flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                    <CheckCircle2 className="w-5 h-5 text-emerald-700" />
                     <span>
                       {language === 'np'
                         ? `स्याबास! छुटेको सङ्ख्या ${NEP_NUMERALS[currentMissing.missing]} हो!`
@@ -999,8 +999,8 @@ export const AdditionEquationStudio: React.FC<Props> = ({
         {activeTab === 'QUIZ' && (
           <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full justify-center">
             {!quizCompleted ? (
-              <div className="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-                <div className="flex items-center justify-between text-xs text-slate-400 border-b border-slate-700 pb-3">
+              <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+                <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-200 pb-3">
                   <span className="font-bold text-violet-400">
                     {language === 'np'
                       ? `प्रश्न ${NEP_NUMERALS[quizIdx + 1]} / ${NEP_NUMERALS[quizList.length]}`
@@ -1011,7 +1011,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                   </span>
                 </div>
 
-                <h3 className="text-xl md:text-2xl font-black text-white">
+                <h3 className="text-xl md:text-2xl font-black text-slate-900">
                   {language === 'np' ? quizList[quizIdx].questionNp : quizList[quizIdx].questionEn}
                 </h3>
 
@@ -1019,7 +1019,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                   {quizList[quizIdx].options.map((opt) => {
                     const isSelected = quizSelected === opt;
                     const isCorrectOpt = opt === quizList[quizIdx].correct;
-                    let btnStyle = 'bg-slate-700/80 hover:bg-slate-700 text-white';
+                    let btnStyle = 'bg-slate-100 hover:bg-slate-100 text-slate-900';
 
                     if (quizAnswered) {
                       if (isCorrectOpt) {
@@ -1027,7 +1027,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                       } else if (isSelected) {
                         btnStyle = 'bg-rose-600 text-white font-black';
                       } else {
-                        btnStyle = 'bg-slate-800 text-slate-500 opacity-50';
+                        btnStyle = 'bg-white text-slate-500 opacity-50';
                       }
                     }
 
@@ -1036,7 +1036,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                         key={opt}
                         disabled={quizAnswered}
                         onClick={() => handleQuizAnswer(opt)}
-                        className={`p-4 rounded-2xl text-xl font-bold transition flex flex-col items-center justify-center gap-1 border border-slate-600 ${btnStyle}`}
+                        className={`p-4 rounded-2xl text-xl font-bold transition flex flex-col items-center justify-center gap-1 border border-slate-300 ${btnStyle}`}
                       >
                         <span className="text-3xl">{NEP_NUMERALS[opt]}</span>
                         <span className="text-xs opacity-75">{opt}</span>
@@ -1046,7 +1046,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                 </div>
 
                 {quizAnswered && (
-                  <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700 text-xs text-slate-300">
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
                     <p className="font-bold text-violet-400 mb-1">
                       {language === 'np' ? 'व्याख्या:' : 'Explanation:'}
                     </p>
@@ -1067,16 +1067,16 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                 )}
               </div>
             ) : (
-              <div className="bg-slate-800/95 border-2 border-violet-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
+              <div className="bg-white border-2 border-violet-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
                 <div className="w-20 h-20 rounded-full bg-violet-500/20 flex items-center justify-center">
                   <Award className="w-10 h-10 text-violet-400" />
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-black text-white">
+                  <h3 className="text-2xl font-black text-slate-900">
                     {language === 'np' ? 'बधाई छ! परीक्षा सम्पन्न भयो!' : 'Congratulations! Assessment Complete!'}
                   </h3>
-                  <p className="text-slate-400 text-xs mt-1">
+                  <p className="text-slate-500 text-xs mt-1">
                     {language === 'np'
                       ? 'तपाईंले जोड वाक्य निर्माण, तीन सङ्ख्याको जोड र खाली ठाउँ भर्नमा दक्षता हासिल गर्नुभयो।'
                       : 'You have mastered constructing equations, three-number additions, and missing addends.'}
@@ -1090,7 +1090,7 @@ export const AdditionEquationStudio: React.FC<Props> = ({
                 <div className="flex gap-3 w-full">
                   <button
                     onClick={handleQuizReset}
-                    className="flex-1 py-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                    className="flex-1 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                   >
                     {language === 'np' ? 'फेरि परीक्षा दिनुहोस्' : 'Retake Quiz'}
                   </button>

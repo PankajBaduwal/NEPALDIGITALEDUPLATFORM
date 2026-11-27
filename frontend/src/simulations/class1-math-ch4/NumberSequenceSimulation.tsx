@@ -365,8 +365,8 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%)',
-        color: '#0f172a',
+        background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
+        color: '#26332E',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -377,7 +377,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgba(2, 44, 34, 0.9)',
+          background: '#FFFFFF',
           backdropFilter: 'blur(12px)',
           borderBottom: '1px solid rgba(45, 212, 191, 0.25)',
         }}
@@ -390,10 +390,10 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '10px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 600,
               fontSize: '14px',
@@ -404,10 +404,10 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
           </button>
 
           <div>
-            <div style={{ fontSize: '11px', color: '#5eead4', textTransform: 'uppercase', fontWeight: 800 }}>
+            <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
               कक्षा १ • गणित • अध्याय ४ : ९ सम्मका सङ्ख्याहरू
             </div>
-            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#f0fdfa' }}>
+            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
                 ? 'सिमुलेसन ०५: सङ्ख्या क्रम मिलाऔँ (Number Sequence Adventure)'
                 : 'Simulation 05: Number Sequence Adventure'}
@@ -421,7 +421,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
           <div
             style={{
               display: 'flex',
-              background: 'rgba(0,0,0,0.4)',
+              background: 'rgba(255,255,255,0.9)',
               borderRadius: '10px',
               padding: '3px',
               border: '1px solid rgba(45, 212, 191, 0.3)',
@@ -469,7 +469,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
               border: '1px solid rgba(245, 158, 11, 0.4)',
               padding: '6px 14px',
               borderRadius: '20px',
-              color: '#fef08a',
+              color: '#26332E',
               fontWeight: 800,
             }}
           >
@@ -482,10 +482,10 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: '#e2e8f0',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 700,
               fontSize: '13px',
@@ -499,10 +499,10 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: soundEnabled ? '#5eead4' : '#94a3b8',
+              color: soundEnabled ? '#5eead4' : '#26332E',
               cursor: 'pointer',
             }}
           >
@@ -518,7 +518,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '10px',
           padding: '12px 16px',
-          background: '#f8fafc',
+          background: 'rgba(255,255,255,0.9)',
           borderBottom: '1px solid rgba(45, 212, 191, 0.2)',
           flexWrap: 'wrap',
         }}
@@ -561,8 +561,8 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 padding: '10px 18px',
                 borderRadius: '12px',
                 border: isSelected ? '2px solid #5eead4' : '1px solid rgba(255, 255, 255, 0.15)',
-                background: isSelected ? 'rgba(13, 148, 136, 0.7)' : 'rgba(30, 41, 59, 0.6)',
-                color: '#ffffff',
+                background: isSelected ? 'rgba(13, 148, 136, 0.7)' : '#F1F5F9',
+                color: '#26332E',
                 fontWeight: 800,
                 fontSize: '13px',
                 cursor: 'pointer',
@@ -607,18 +607,18 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
             <div
               style={{
                 textAlign: 'center',
-                background: 'rgba(0, 0, 0, 0.3)',
+                background: 'rgba(255,255,255,0.9)',
                 padding: '12px 24px',
                 borderRadius: '16px',
                 border: '1px solid rgba(45, 212, 191, 0.3)',
               }}
             >
-              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 800, color: '#fef08a' }}>
+              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 800, color: '#26332E' }}>
                 {language === 'np'
                   ? '१ देखि ९ सम्मका ढुङ्गाहरूमा टेकेर नदी पार गर्नुहोस्!'
                   : 'Step on the numbered stones 1 through 9 to cross the river!'}
               </h2>
-              <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#a7f3d0' }}>
+              <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#26332E' }}>
                 {language === 'np'
                   ? `अब आउने सङ्ख्या: ${formatNum(currentStep + 1)} (${formatName(currentStep + 1)})`
                   : `Next stone to step on: ${currentStep + 1} (${formatName(currentStep + 1)})`}
@@ -632,7 +632,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 width: '100%',
                 maxWidth: '920px',
                 height: '240px',
-                background: 'linear-gradient(180deg, #0284c7 0%, #0369a1 50%, #075985 100%)',
+                background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
                 borderRadius: '24px',
                 border: '8px solid #064e3b',
                 boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)',
@@ -651,7 +651,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                   top: 0,
                   bottom: 0,
                   width: '60px',
-                  background: '#15803d',
+                  background: '#FFFFFF',
                   borderRight: '6px solid #854d0e',
                   display: 'flex',
                   alignItems: 'center',
@@ -728,7 +728,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                           style={{
                             fontSize: '24px',
                             fontWeight: 900,
-                            color: isSteppedOn ? '#ffffff' : '#f8fafc',
+                            color: isSteppedOn ? '#ffffff' : '#26332E',
                           }}
                         >
                           {formatNum(stoneNum)}
@@ -747,7 +747,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                   top: 0,
                   bottom: 0,
                   width: '60px',
-                  background: '#15803d',
+                  background: '#FFFFFF',
                   borderLeft: '6px solid #854d0e',
                   display: 'flex',
                   alignItems: 'center',
@@ -769,7 +769,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                   marginTop: '10px',
                 }}
               >
-                <div style={{ fontSize: '15px', fontWeight: 800, color: '#fef08a' }}>
+                <div style={{ fontSize: '15px', fontWeight: 800, color: '#26332E' }}>
                   {language === 'np'
                     ? `अर्को ढुङ्गा छान्नुहोस् (सङ्ख्या ${formatNum(currentStep + 1)}):`
                     : `Pick the next stone (Number ${currentStep + 1}):`}
@@ -784,9 +784,9 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                         width: '84px',
                         height: '84px',
                         borderRadius: '22px',
-                        background: 'linear-gradient(135deg, #0d9488, #0f766e)',
+                        background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
                         border: '3px solid #5eead4',
-                        color: '#ffffff',
+                        color: '#26332E',
                         fontSize: '36px',
                         fontWeight: 900,
                         cursor: 'pointer',
@@ -823,12 +823,12 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <Trophy size={40} color="#fbbf24" />
                   <div>
-                    <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 900, color: '#f0fdf4' }}>
+                    <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 900, color: '#26332E' }}>
                       {language === 'np'
                         ? 'शानदार! नदी सफलतापूर्वक पार भयो!'
                         : 'Splendid! River crossed successfully!'}
                     </h3>
-                    <span style={{ fontSize: '13px', color: '#a7f3d0' }}>
+                    <span style={{ fontSize: '13px', color: '#26332E' }}>
                       {language === 'np'
                         ? 'तपाईंले १ देखि ९ सम्मको क्रम बुझ्नुभयो।'
                         : 'You learned the sequence 1 to 9.'}
@@ -839,8 +839,8 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 <button
                   onClick={resetRiverCrossing}
                   style={{
-                    background: '#0d9488',
-                    color: '#ffffff',
+                    background: '#FFFFFF',
+                    color: '#26332E',
                     border: 'none',
                     padding: '10px 18px',
                     borderRadius: '12px',
@@ -883,12 +883,12 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
               }}
             >
               <div>
-                <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 800, color: '#fef08a' }}>
+                <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 800, color: '#26332E' }}>
                   {language === 'np'
                     ? 'सङ्ख्याहरूलाई सानोदेखि ठुलो क्रममा मिलाऔँ'
                     : 'Arrange numbers in increasing order (1 to 9)'}
                 </h2>
-                <div style={{ fontSize: '13px', color: '#a7f3d0' }}>
+                <div style={{ fontSize: '13px', color: '#26332E' }}>
                   {language === 'np'
                     ? 'तलका कार्डहरू छानेर क्रमबद्ध राख्नुहोस्।'
                     : 'Click cards below to put them in ascending sequence.'}
@@ -909,7 +909,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                       borderRadius: '8px',
                       border: arrangeRound === r ? '2px solid #5eead4' : '1px solid rgba(255,255,255,0.2)',
                       background: arrangeRound === r ? '#0d9488' : 'rgba(0,0,0,0.3)',
-                      color: '#ffffff',
+                      color: '#26332E',
                       fontWeight: 800,
                       cursor: 'pointer',
                     }}
@@ -926,7 +926,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 display: 'flex',
                 gap: '12px',
                 padding: '20px',
-                background: '#f8fafc',
+                background: 'rgba(255,255,255,0.9)',
                 borderRadius: '24px',
                 border: '2px dashed rgba(45, 212, 191, 0.4)',
                 minHeight: '110px',
@@ -938,7 +938,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
               }}
             >
               {placedCards.length === 0 ? (
-                <div style={{ color: '#64748b', fontStyle: 'italic', fontSize: '15px' }}>
+                <div style={{ color: '#26332E', fontStyle: 'italic', fontSize: '15px' }}>
                   {language === 'np'
                     ? '👇 तलबाट कार्डहरू छानेर यहाँ क्रममा राख्नुहोस्'
                     : '👇 Click cards below to place them in order here'}
@@ -953,9 +953,9 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                       width: '64px',
                       height: '74px',
                       borderRadius: '16px',
-                      background: 'linear-gradient(135deg, #10b981, #047857)',
+                      background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
                       border: '2px solid #6ee7b7',
-                      color: '#ffffff',
+                      color: '#26332E',
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
@@ -991,7 +991,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                     borderRadius: '18px',
                     background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
                     border: '3px solid #93c5fd',
-                    color: '#ffffff',
+                    color: '#26332E',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -1023,7 +1023,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 }}
               >
                 <Sparkles size={32} color="#fbbf24" />
-                <span style={{ fontSize: '16px', fontWeight: 800, color: '#f0fdf4' }}>
+                <span style={{ fontSize: '16px', fontWeight: 800, color: '#26332E' }}>
                   {language === 'np'
                     ? 'उत्तम काम! सबै सङ्ख्याहरू सही क्रममा छन्! (+२ ताराहरू)'
                     : 'Splendid! All numbers in proper increasing order! (+2 Stars)'}
@@ -1047,12 +1047,12 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
             }}
           >
             <div style={{ textAlign: 'center' }}>
-              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 800, color: '#fef08a' }}>
+              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 800, color: '#26332E' }}>
                 {language === 'np'
                   ? 'खाली ठाउँमा छुटेको सङ्ख्या पत्ता लगाऔँ'
                   : 'Find the missing number in the sequence'}
               </h2>
-              <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#a7f3d0' }}>
+              <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#26332E' }}>
                 {language === 'np'
                   ? `प्रश्न ${missingRoundIndex + 1} / ${missingChallenges.length}`
                   : `Question ${missingRoundIndex + 1} of ${missingChallenges.length}`}
@@ -1067,7 +1067,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 padding: '24px 32px',
-                background: '#f8fafc',
+                background: 'rgba(255,255,255,0.9)',
                 borderRadius: '24px',
                 border: '2px solid rgba(45, 212, 191, 0.3)',
               }}
@@ -1091,7 +1091,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                       flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#ffffff',
+                      color: '#26332E',
                       boxShadow: '0 6px 16px rgba(0,0,0,0.2)',
                     }}
                   >
@@ -1113,9 +1113,9 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                     width: '84px',
                     height: '84px',
                     borderRadius: '20px',
-                    background: 'linear-gradient(135deg, #0d9488, #0f766e)',
+                    background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
                     border: '3px solid #5eead4',
-                    color: '#ffffff',
+                    color: '#26332E',
                     fontSize: '34px',
                     fontWeight: 900,
                     cursor: 'pointer',
@@ -1161,8 +1161,8 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                       setMissingFeedback(null);
                     }}
                     style={{
-                      background: '#2563eb',
-                      color: '#ffffff',
+                      background: '#FFFFFF',
+                      color: '#26332E',
                       border: 'none',
                       padding: '10px 18px',
                       borderRadius: '12px',
@@ -1196,7 +1196,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
             }}
           >
             <div style={{ textAlign: 'center' }}>
-              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 800, color: '#fef08a' }}>
+              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 800, color: '#26332E' }}>
                 {language === 'np'
                   ? beforeAfterChallenges[beforeAfterIndex].type === 'AFTER'
                     ? `सङ्ख्या ${formatNum(beforeAfterChallenges[beforeAfterIndex].targetNum)} को पछि कुन सङ्ख्या आउँछ?`
@@ -1205,7 +1205,7 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                   ? `Which number comes AFTER ${beforeAfterChallenges[beforeAfterIndex].targetNum}?`
                   : `Which number comes BEFORE ${beforeAfterChallenges[beforeAfterIndex].targetNum}?`}
               </h2>
-              <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#a7f3d0' }}>
+              <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#26332E' }}>
                 {language === 'np'
                   ? `प्रश्न ${beforeAfterIndex + 1} / ${beforeAfterChallenges.length}`
                   : `Question ${beforeAfterIndex + 1} of ${beforeAfterChallenges.length}`}
@@ -1245,9 +1245,9 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                     width: '84px',
                     height: '84px',
                     borderRadius: '20px',
-                    background: 'linear-gradient(135deg, #0d9488, #0f766e)',
+                    background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
                     border: '3px solid #5eead4',
-                    color: '#ffffff',
+                    color: '#26332E',
                     fontSize: '34px',
                     fontWeight: 900,
                     cursor: 'pointer',
@@ -1293,8 +1293,8 @@ export const NumberSequenceSimulation: React.FC<Props> = ({
                       setBeforeAfterFeedback(null);
                     }}
                     style={{
-                      background: '#2563eb',
-                      color: '#ffffff',
+                      background: '#FFFFFF',
+                      color: '#26332E',
                       border: 'none',
                       padding: '10px 18px',
                       borderRadius: '12px',

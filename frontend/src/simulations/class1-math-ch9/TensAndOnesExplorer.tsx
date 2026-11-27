@@ -440,41 +440,41 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
   const builderCurrentTotal = userTens * 10 + userOnes;
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
             title="Back to Chapter 9"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 font-semibold">
                 Class 1 • Math • Chapter 9
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-700 font-semibold">
                 Simulation 03
               </span>
             </div>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
               {language === 'np' ? 'दहाइ र एकाइ पत्ता लगाऔँ (स्थानमान)' : 'Tens and Ones Explorer (Place Value)'}
             </h1>
           </div>
         </div>
 
         {/* Mode Selector */}
-        <div className="flex items-center gap-1 bg-slate-900/60 p-1 rounded-xl border border-slate-700/60 text-xs">
+        <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200/60 text-xs">
           <button
             onClick={() => {
               playSound('click');
               setMode('EXPLORE');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              mode === 'EXPLORE' ? 'bg-cyan-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'EXPLORE' ? 'bg-cyan-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Columns className="w-3.5 h-3.5" />
@@ -486,7 +486,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
               setMode('BUILDER');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              mode === 'BUILDER' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'BUILDER' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
@@ -498,7 +498,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
               setMode('QUIZ');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              mode === 'QUIZ' ? 'bg-amber-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'QUIZ' ? 'bg-amber-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Trophy className="w-3.5 h-3.5" />
@@ -510,10 +510,10 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setSoundEnabled((prev) => !prev)}
-            className="p-2 rounded-xl bg-slate-700/80 hover:bg-slate-700 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-100 transition text-slate-700"
             title={soundEnabled ? 'Mute' : 'Unmute'}
           >
-            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-400" /> : <VolumeX className="w-5 h-5 text-slate-400" />}
+            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
           <button
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
@@ -532,8 +532,8 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
         {mode === 'EXPLORE' && (
           <div className="flex-1 flex flex-col max-w-5xl mx-auto w-full">
             {/* Number Selector Carousel */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mb-4 bg-slate-800/60 p-3 rounded-2xl border border-slate-700/60">
-              <span className="text-xs font-bold text-slate-400 mr-2 uppercase tracking-wider">
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-4 bg-white p-3 rounded-2xl border border-slate-200/60">
+              <span className="text-xs font-bold text-slate-500 mr-2 uppercase tracking-wider">
                 {language === 'np' ? 'सङ्ख्या छान्नुहोस्:' : 'Choose Number:'}
               </span>
               {[11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((num) => (
@@ -543,7 +543,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                   className={`w-11 h-11 rounded-xl font-bold flex flex-col items-center justify-center transition-all ${
                     selectedNum === num
                       ? 'bg-cyan-500 text-slate-950 scale-105 shadow-lg shadow-cyan-500/30 ring-2 ring-cyan-300'
-                      : 'bg-slate-700/80 hover:bg-slate-700 text-white hover:scale-102'
+                      : 'bg-slate-100 hover:bg-slate-100 text-slate-900 hover:scale-102'
                   }`}
                 >
                   <span className="text-sm leading-none">{NEP_NUMERALS[num]}</span>
@@ -553,14 +553,14 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
             </div>
 
             {/* Central Interactive Chart */}
-            <div className="bg-slate-800/80 rounded-3xl border border-slate-700/80 p-6 shadow-2xl flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-2xl flex flex-col gap-6">
               {/* Header Title with Spoken Word */}
-              <div className="flex flex-wrap items-center justify-between border-b border-slate-700 pb-3 gap-2">
+              <div className="flex flex-wrap items-center justify-between border-b border-slate-200 pb-3 gap-2">
                 <div>
-                  <h2 className="text-2xl font-black text-white flex items-center gap-2">
+                  <h2 className="text-2xl font-black text-slate-900 flex items-center gap-2">
                     <span className="text-cyan-400">{NEP_NUMERALS[selectedNum]}</span>
                     <span>({selectedNum})</span>
-                    <span className="text-slate-400 font-normal text-sm">
+                    <span className="text-slate-500 font-normal text-sm">
                       • {language === 'np' ? NEP_NAMES[selectedNum] : EN_NAMES[selectedNum]}
                     </span>
                   </h2>
@@ -583,12 +583,12 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
               {/* Two Column Layout: Tens (दहाइ) vs Ones (एकाइ) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* TENS COLUMN */}
-                <div className="bg-slate-900/70 p-5 rounded-2xl border-2 border-emerald-500/40 flex flex-col items-center justify-between min-h-[300px]">
+                <div className="bg-slate-50 p-5 rounded-2xl border-2 border-emerald-500/40 flex flex-col items-center justify-between min-h-[300px]">
                   <div className="w-full text-center border-b border-emerald-500/30 pb-2">
-                    <span className="text-sm font-black text-emerald-400 uppercase tracking-widest">
+                    <span className="text-sm font-black text-emerald-700 uppercase tracking-widest">
                       {language === 'np' ? 'दहाइ (Tens)' : 'Tens Column'}
                     </span>
-                    <p className="text-xs text-slate-400 mt-0.5">
+                    <p className="text-xs text-slate-500 mt-0.5">
                       {language === 'np' ? '१० वटा एकाइ बराबर १ दहाइ' : '10 units = 1 Ten Rod'}
                     </p>
                   </div>
@@ -600,7 +600,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                         key={rodIdx}
                         className="flex flex-col items-center bg-emerald-500/20 border-2 border-emerald-400 rounded-xl p-2 shadow-lg shadow-emerald-500/10"
                       >
-                        <span className="text-[10px] font-bold text-emerald-300 mb-1">
+                        <span className="text-[10px] font-bold text-emerald-700 mb-1">
                           {language === 'np' ? `१ दहाइ (${NEP_NUMERALS[10]})` : '1 Ten (10)'}
                         </span>
                         {/* 10 stacked segments */}
@@ -618,21 +618,21 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                     ))}
                   </div>
 
-                  <div className="text-center bg-slate-800/80 px-4 py-2 rounded-xl border border-emerald-500/30">
-                    <span className="text-xs text-slate-400 block">{language === 'np' ? 'दहाइको सङ्ख्या:' : 'Tens Value:'}</span>
-                    <span className="text-xl font-black text-emerald-400">
+                  <div className="text-center bg-white px-4 py-2 rounded-xl border border-emerald-500/30">
+                    <span className="text-xs text-slate-500 block">{language === 'np' ? 'दहाइको सङ्ख्या:' : 'Tens Value:'}</span>
+                    <span className="text-xl font-black text-emerald-700">
                       {NEP_NUMERALS[expTens]} {language === 'np' ? 'दहाइ' : 'Tens'} = {NEP_NUMERALS[expTens * 10]}
                     </span>
                   </div>
                 </div>
 
                 {/* ONES COLUMN */}
-                <div className="bg-slate-900/70 p-5 rounded-2xl border-2 border-sky-500/40 flex flex-col items-center justify-between min-h-[300px]">
+                <div className="bg-slate-50 p-5 rounded-2xl border-2 border-sky-500/40 flex flex-col items-center justify-between min-h-[300px]">
                   <div className="w-full text-center border-b border-sky-500/30 pb-2">
-                    <span className="text-sm font-black text-sky-400 uppercase tracking-widest">
+                    <span className="text-sm font-black text-sky-700 uppercase tracking-widest">
                       {language === 'np' ? 'एकाइ (Ones)' : 'Ones Column'}
                     </span>
-                    <p className="text-xs text-slate-400 mt-0.5">
+                    <p className="text-xs text-slate-500 mt-0.5">
                       {language === 'np' ? 'छुट्टाटुट्टै १-१ वटा क्युबहरू' : 'Single Unit Cubes'}
                     </p>
                   </div>
@@ -655,9 +655,9 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                     )}
                   </div>
 
-                  <div className="text-center bg-slate-800/80 px-4 py-2 rounded-xl border border-sky-500/30">
-                    <span className="text-xs text-slate-400 block">{language === 'np' ? 'एकाइको सङ्ख्या:' : 'Ones Value:'}</span>
-                    <span className="text-xl font-black text-sky-400">
+                  <div className="text-center bg-white px-4 py-2 rounded-xl border border-sky-500/30">
+                    <span className="text-xs text-slate-500 block">{language === 'np' ? 'एकाइको सङ्ख्या:' : 'Ones Value:'}</span>
+                    <span className="text-xl font-black text-sky-700">
                       {NEP_NUMERALS[expOnes]} {language === 'np' ? 'एकाइ' : 'Ones'} = {NEP_NUMERALS[expOnes]}
                     </span>
                   </div>
@@ -665,31 +665,31 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
               </div>
 
               {/* Bottom Place Value Summary Card */}
-              <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-4 rounded-2xl border border-cyan-500/40 flex flex-wrap items-center justify-between gap-4">
+              <div className="bg-gradient-to-r from-sky-50 via-white to-emerald-50 p-4 rounded-2xl border border-cyan-500/40 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="text-center border-r border-slate-700 pr-4">
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block">
+                  <div className="text-center border-r border-slate-200 pr-4">
+                    <span className="text-[10px] text-slate-500 uppercase font-bold block">
                       {language === 'np' ? 'दहाइ' : 'Tens'}
                     </span>
-                    <span className="text-2xl font-black text-emerald-400">{NEP_NUMERALS[expTens]}</span>
+                    <span className="text-2xl font-black text-emerald-700">{NEP_NUMERALS[expTens]}</span>
                   </div>
-                  <div className="text-center border-r border-slate-700 pr-4">
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block">
+                  <div className="text-center border-r border-slate-200 pr-4">
+                    <span className="text-[10px] text-slate-500 uppercase font-bold block">
                       {language === 'np' ? 'एकाइ' : 'Ones'}
                     </span>
-                    <span className="text-2xl font-black text-sky-400">{NEP_NUMERALS[expOnes]}</span>
+                    <span className="text-2xl font-black text-sky-700">{NEP_NUMERALS[expOnes]}</span>
                   </div>
                   <div className="text-center">
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block">
+                    <span className="text-[10px] text-slate-500 uppercase font-bold block">
                       {language === 'np' ? 'जम्मा सङ्ख्या' : 'Total'}
                     </span>
-                    <span className="text-2xl font-black text-amber-400">{NEP_NUMERALS[selectedNum]}</span>
+                    <span className="text-2xl font-black text-amber-700">{NEP_NUMERALS[selectedNum]}</span>
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <span className="text-xs text-slate-400 block">{language === 'np' ? 'विस्तारित रूप:' : 'Expanded Form:'}</span>
-                  <span className="text-lg font-black text-white">
+                  <span className="text-xs text-slate-500 block">{language === 'np' ? 'विस्तारित रूप:' : 'Expanded Form:'}</span>
+                  <span className="text-lg font-black text-slate-900">
                     {expTens * 10} + {expOnes} = {selectedNum} ({NEP_NUMERALS[expTens * 10]} + {NEP_NUMERALS[expOnes]} = {NEP_NUMERALS[selectedNum]})
                   </span>
                 </div>
@@ -703,21 +703,21 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
         {/* ========================================================================= */}
         {mode === 'BUILDER' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 shadow-2xl flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-2xl flex flex-col gap-6">
               {/* Mission Header */}
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="text-xs font-bold uppercase text-emerald-400 tracking-wider">
+                  <span className="text-xs font-bold uppercase text-emerald-700 tracking-wider">
                     {language === 'np' ? 'प्रयोगात्मक कार्य' : 'Hands-on Challenge'}
                   </span>
-                  <h3 className="text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? (
                       <>
-                        सङ्ख्या <span className="text-amber-400">{NEP_NUMERALS[builderTarget]}</span> बनाउनुहोस्!
+                        सङ्ख्या <span className="text-amber-700">{NEP_NUMERALS[builderTarget]}</span> बनाउनुहोस्!
                       </>
                     ) : (
                       <>
-                        Build number <span className="text-amber-400">{builderTarget}</span>!
+                        Build number <span className="text-amber-700">{builderTarget}</span>!
                       </>
                     )}
                   </h3>
@@ -725,7 +725,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
 
                 <button
                   onClick={handleNextBuilderTarget}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को सङ्ख्या' : 'Next Target'}
                 </button>
@@ -734,8 +734,8 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
               {/* Two Workstations: Tens Rod Controls vs Ones Cubes Controls */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Tens Workstation */}
-                <div className="bg-slate-900/80 p-5 rounded-2xl border border-emerald-500/40 flex flex-col items-center justify-between min-h-[260px]">
-                  <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">
+                <div className="bg-slate-50 p-5 rounded-2xl border border-emerald-500/40 flex flex-col items-center justify-between min-h-[260px]">
+                  <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
                     {language === 'np' ? '१० को छड (Tens Rods)' : 'Tens Rods (10 each)'}
                   </span>
 
@@ -767,7 +767,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                     <button
                       onClick={handleRemoveTenRod}
                       disabled={userTens <= 0}
-                      className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 disabled:opacity-40 text-slate-300 font-bold text-xs transition"
+                      className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 text-slate-600 font-bold text-xs transition"
                     >
                       -
                     </button>
@@ -775,8 +775,8 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                 </div>
 
                 {/* Ones Workstation */}
-                <div className="bg-slate-900/80 p-5 rounded-2xl border border-sky-500/40 flex flex-col items-center justify-between min-h-[260px]">
-                  <span className="text-xs font-bold text-sky-400 uppercase tracking-wider">
+                <div className="bg-slate-50 p-5 rounded-2xl border border-sky-500/40 flex flex-col items-center justify-between min-h-[260px]">
+                  <span className="text-xs font-bold text-sky-700 uppercase tracking-wider">
                     {language === 'np' ? 'एकाइ क्युब (Unit Cubes)' : 'Unit Cubes (1 each)'}
                   </span>
 
@@ -808,7 +808,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                     <button
                       onClick={handleRemoveOneCube}
                       disabled={userOnes <= 0}
-                      className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 disabled:opacity-40 text-slate-300 font-bold text-xs transition"
+                      className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 text-slate-600 font-bold text-xs transition"
                     >
                       -
                     </button>
@@ -817,12 +817,12 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
               </div>
 
               {/* Status and Check */}
-              <div className="bg-slate-900/90 p-4 rounded-2xl border border-slate-700 flex flex-wrap items-center justify-between gap-4">
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <span className="text-xs text-slate-400 block">
+                  <span className="text-xs text-slate-500 block">
                     {language === 'np' ? 'तपाईंको जम्मा मान:' : 'Your Total Value:'}
                   </span>
-                  <div className="text-2xl font-black text-amber-400">
+                  <div className="text-2xl font-black text-amber-700">
                     {userTens * 10} + {userOnes} = {builderCurrentTotal} ({NEP_NUMERALS[builderCurrentTotal]})
                   </div>
                 </div>
@@ -830,7 +830,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                 <div className="flex gap-2">
                   <button
                     onClick={handleResetBuilder}
-                    className="p-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-slate-300 transition"
+                    className="p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition"
                     title="Reset"
                   >
                     <RotateCcw className="w-5 h-5" />
@@ -848,7 +848,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
               {/* Feedback Alert */}
               {builderFeedback === 'success' && (
                 <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-emerald-200 text-sm font-bold flex items-center gap-3">
-                  <Sparkles className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <Sparkles className="w-5 h-5 text-emerald-700 shrink-0" />
                   <div>
                     {language === 'np'
                       ? `स्याबास! तपाईंले ठीक ${NEP_NUMERALS[builderTarget]} बनाउनुभयो!`
@@ -876,9 +876,9 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
         {mode === 'QUIZ' && (
           <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full justify-center">
             {!quizCompleted ? (
-              <div className="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
                 {/* Progress bar */}
-                <div className="flex items-center justify-between text-xs text-slate-400 border-b border-slate-700 pb-3">
+                <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-200 pb-3">
                   <span className="font-bold text-cyan-400">
                     {language === 'np'
                       ? `प्रश्न ${NEP_NUMERALS[quizIndex + 1]} / ${NEP_NUMERALS[quizList.length]}`
@@ -891,7 +891,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
 
                 {/* Question */}
                 <div>
-                  <h3 className="text-xl md:text-2xl font-extrabold text-white">
+                  <h3 className="text-xl md:text-2xl font-extrabold text-slate-900">
                     {language === 'np' ? quizList[quizIndex].questionNp : quizList[quizIndex].questionEn}
                   </h3>
                 </div>
@@ -901,7 +901,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                   {quizList[quizIndex].options.map((opt) => {
                     const isSelected = quizSelected === opt;
                     const isCorrectOpt = opt === quizList[quizIndex].correct;
-                    let btnStyle = 'bg-slate-700/80 hover:bg-slate-700 text-white';
+                    let btnStyle = 'bg-slate-100 hover:bg-slate-100 text-slate-900';
 
                     if (quizAnswered) {
                       if (isCorrectOpt) {
@@ -909,7 +909,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                       } else if (isSelected) {
                         btnStyle = 'bg-rose-600 text-white font-black';
                       } else {
-                        btnStyle = 'bg-slate-800 text-slate-500 opacity-50';
+                        btnStyle = 'bg-white text-slate-500 opacity-50';
                       }
                     }
 
@@ -918,7 +918,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                         key={opt}
                         disabled={quizAnswered}
                         onClick={() => handleQuizAnswer(opt)}
-                        className={`p-4 rounded-2xl text-lg font-bold transition flex flex-col items-center justify-center gap-1 border border-slate-600 ${btnStyle}`}
+                        className={`p-4 rounded-2xl text-lg font-bold transition flex flex-col items-center justify-center gap-1 border border-slate-300 ${btnStyle}`}
                       >
                         <span className="text-2xl">{NEP_NUMERALS[opt]}</span>
                         <span className="text-xs opacity-75">{opt}</span>
@@ -929,7 +929,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
 
                 {/* Feedback */}
                 {quizAnswered && (
-                  <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700 text-xs text-slate-300">
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
                     <p className="font-bold text-cyan-400 mb-1">
                       {language === 'np' ? 'व्याख्या:' : 'Explanation:'}
                     </p>
@@ -954,16 +954,16 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
               </div>
             ) : (
               /* Quiz Finished Celebratory Card */
-              <div className="bg-slate-800/95 border-2 border-cyan-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
+              <div className="bg-white border-2 border-cyan-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
                 <div className="w-20 h-20 rounded-full bg-cyan-500/20 flex items-center justify-center">
                   <Award className="w-10 h-10 text-cyan-400" />
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-black text-white">
+                  <h3 className="text-2xl font-black text-slate-900">
                     {language === 'np' ? 'बधाई छ! मूल्याङ्कन पूरा भयो!' : 'Congratulations! Assessment Complete!'}
                   </h3>
-                  <p className="text-slate-400 text-xs mt-1">
+                  <p className="text-slate-500 text-xs mt-1">
                     {language === 'np'
                       ? 'तपाईंले दहाइ र एकाइको स्थानमान अवधारणा सफलतापूर्वक सिक्नुभयो।'
                       : 'You have mastered place values for numbers 11 to 20.'}
@@ -977,7 +977,7 @@ export const TensAndOnesExplorer: React.FC<Props> = ({
                 <div className="flex gap-3 w-full">
                   <button
                     onClick={handleQuizReset}
-                    className="flex-1 py-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                    className="flex-1 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                   >
                     {language === 'np' ? 'फेरि परीक्षा दिनुहोस्' : 'Retake Quiz'}
                   </button>

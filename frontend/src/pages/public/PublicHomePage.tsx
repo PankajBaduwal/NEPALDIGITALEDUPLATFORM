@@ -6,15 +6,12 @@ import { useAuth } from '../../context/AuthContext';
 import { HomeCtx, reducedMotion, useInView, type HomeActions, type LevelKey } from './home/hooks';
 import { HomeHeader } from './home/HomeHeader';
 import { Hero } from './home/Hero';
-import { ProductPreview } from './home/ProductPreview';
 import './home/home.css';
 
 // Everything below the first screen is split into its own chunks and loaded as the visitor scrolls (or when the browser is idle).
 const loaders = {
   features: () => import('./home/Features').then((m) => ({ default: m.Features })),
-  studios: () => import('./home/Features').then((m) => ({ default: m.Studios })),
   roles: () => import('./home/Roles').then((m) => ({ default: m.Roles })),
-  curriculum: () => import('./home/Curriculum').then((m) => ({ default: m.Curriculum })),
   board: () => import('./home/Showcase').then((m) => ({ default: m.SmartBoardShowcase })),
   stats: () => import('./home/Showcase').then((m) => ({ default: m.Stats })),
   connectivity: () => import('./home/Showcase').then((m) => ({ default: m.Connectivity })),
@@ -23,7 +20,7 @@ const loaders = {
   footer: () => import('./home/Closing').then((m) => ({ default: m.HomeFooter })),
 };
 const L = {
-  features: lazy(loaders.features), studios: lazy(loaders.studios), roles: lazy(loaders.roles), curriculum: lazy(loaders.curriculum), board: lazy(loaders.board),
+  features: lazy(loaders.features), roles: lazy(loaders.roles), board: lazy(loaders.board),
   stats: lazy(loaders.stats), connectivity: lazy(loaders.connectivity), faq: lazy(loaders.faq), cta: lazy(loaders.cta), footer: lazy(loaders.footer),
 };
 
@@ -90,11 +87,8 @@ export const PublicHomePage: React.FC = () => {
         <HomeHeader />
         <main id="main">
           <Hero />
-          <ProductPreview />
           <Defer force={mountAll} height={900}><L.features /></Defer>
-          <Defer force={mountAll} height={700}><L.studios /></Defer>
           <Defer force={mountAll} height={900}><L.roles /></Defer>
-          <Defer force={mountAll} height={900}><L.curriculum /></Defer>
           <Defer force={mountAll} height={560}><L.board /></Defer>
           <Defer force={mountAll} height={560}><L.stats /></Defer>
           <Defer force={mountAll} height={640}><L.connectivity /></Defer>

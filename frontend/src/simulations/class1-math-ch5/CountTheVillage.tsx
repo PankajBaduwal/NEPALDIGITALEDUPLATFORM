@@ -282,8 +282,8 @@ export const CountTheVillage: React.FC<Props> = ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        background: '#042f2e',
-        color: '#0f172a',
+        background: '#FFFFFF',
+        color: '#26332E',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -294,7 +294,7 @@ export const CountTheVillage: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgba(2, 44, 34, 0.95)',
+          background: '#FFFFFF',
           borderBottom: '1px solid rgba(45, 212, 191, 0.25)',
         }}
       >
@@ -306,10 +306,10 @@ export const CountTheVillage: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '10px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 600,
               fontSize: '14px',
@@ -320,10 +320,10 @@ export const CountTheVillage: React.FC<Props> = ({
           </button>
 
           <div>
-            <div style={{ fontSize: '11px', color: '#5eead4', textTransform: 'uppercase', fontWeight: 800 }}>
+            <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
               कक्षा १ • गणित • अध्याय ५ : शून्य (Zero)
             </div>
-            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#f0fdfa' }}>
+            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
                 ? 'सिमुलेसन ०४: गाउँमा गनौँ (Count the Village)'
                 : 'Simulation 04: Count the Village'}
@@ -342,7 +342,7 @@ export const CountTheVillage: React.FC<Props> = ({
               border: '1px solid rgba(245, 158, 11, 0.4)',
               padding: '6px 14px',
               borderRadius: '20px',
-              color: '#fef08a',
+              color: '#26332E',
               fontWeight: 800,
             }}
           >
@@ -354,10 +354,10 @@ export const CountTheVillage: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: '#e2e8f0',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 700,
               fontSize: '13px',
@@ -370,10 +370,10 @@ export const CountTheVillage: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: soundEnabled ? '#5eead4' : '#94a3b8',
+              color: soundEnabled ? '#5eead4' : '#26332E',
               cursor: 'pointer',
             }}
           >
@@ -389,7 +389,7 @@ export const CountTheVillage: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '8px',
           padding: '12px 16px',
-          background: '#f8fafc',
+          background: 'rgba(255,255,255,0.9)',
           borderBottom: '1px solid rgba(45, 212, 191, 0.2)',
           overflowX: 'auto',
         }}
@@ -414,8 +414,8 @@ export const CountTheVillage: React.FC<Props> = ({
                 padding: '8px 14px',
                 borderRadius: '12px',
                 border: isSelected ? '2px solid #5eead4' : '1px solid rgba(255, 255, 255, 0.15)',
-                background: isSelected ? 'rgba(13, 148, 136, 0.8)' : 'rgba(30, 41, 59, 0.6)',
-                color: '#ffffff',
+                background: isSelected ? 'rgba(13, 148, 136, 0.8)' : '#F1F5F9',
+                color: '#26332E',
                 fontWeight: 700,
                 fontSize: '12px',
                 cursor: 'pointer',
@@ -470,8 +470,8 @@ export const CountTheVillage: React.FC<Props> = ({
                 style={{
                   fontSize: '18px',
                   fontWeight: 900,
-                  color: '#fef08a',
-                  background: 'rgba(0,0,0,0.5)',
+                  color: '#26332E',
+                  background: 'rgba(255,255,255,0.9)',
                   padding: '6px 20px',
                   borderRadius: '16px',
                   marginTop: '10px',
@@ -501,7 +501,7 @@ export const CountTheVillage: React.FC<Props> = ({
         {/* Question & Choices */}
         <div
           style={{
-            background: 'rgba(255, 255, 255, 0.95)',
+            background: 'rgba(255,255,255,0.9)',
             borderRadius: '20px',
             padding: '20px 32px',
             border: '2px solid rgba(45, 212, 191, 0.3)',
@@ -512,7 +512,7 @@ export const CountTheVillage: React.FC<Props> = ({
             width: '100%',
           }}
         >
-          <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 900, color: '#fef08a', textAlign: 'center' }}>
+          <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 900, color: '#26332E', textAlign: 'center' }}>
             {language === 'np' ? activeSpot.promptNp : activeSpot.promptEn}
           </h2>
 
@@ -536,9 +536,9 @@ export const CountTheVillage: React.FC<Props> = ({
                         ? '#10b981'
                         : isAnswered && isSelected
                         ? '#ef4444'
-                        : 'rgba(30, 41, 59, 0.8)',
+                        : '#F1F5F9',
                     border: '3px solid rgba(45, 212, 191, 0.4)',
-                    color: '#ffffff',
+                    color: '#26332E',
                     fontSize: '32px',
                     fontWeight: 900,
                     cursor: isAnswered ? 'default' : 'pointer',
@@ -558,7 +558,7 @@ export const CountTheVillage: React.FC<Props> = ({
           {/* Feedback & Next */}
           {isAnswered && (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-              <div style={{ fontSize: '14px', color: '#475569', textAlign: 'center' }}>
+              <div style={{ fontSize: '14px', color: '#26332E', textAlign: 'center' }}>
                 {language === 'np' ? activeSpot.explanationNp : activeSpot.explanationEn}
               </div>
 
@@ -567,8 +567,8 @@ export const CountTheVillage: React.FC<Props> = ({
                 style={{
                   padding: '10px 24px',
                   borderRadius: '12px',
-                  background: '#0d9488',
-                  color: '#ffffff',
+                  background: '#FFFFFF',
+                  color: '#26332E',
                   border: 'none',
                   fontWeight: 800,
                   cursor: 'pointer',

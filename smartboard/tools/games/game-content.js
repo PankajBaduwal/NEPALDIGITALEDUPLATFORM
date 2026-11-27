@@ -23,6 +23,7 @@
     { id: 'sequence', name: 'Sequence Builder', icon: '🔢', category: 'Sequence', desc: 'Put the steps of a process or timeline into the right order.' },
     { id: 'spot', name: 'Spot the Difference', icon: '🔍', category: 'Observation', desc: 'Find every difference between two pictures.' },
     { id: 'race', name: 'Board Race', icon: '🏁', category: 'Team Competition', desc: '2–4 teams race side by side — keypad, choices or scratch pad.' },
+    { id: 'tugofwar', name: 'Math Tug of War', icon: '🪢', category: 'Team Competition', desc: 'Two teams solve math problems simultaneously to pull the rope across the winning line.' },
     { id: 'boardgame', name: 'Quiz Path', icon: '🎲', category: 'Board Game', desc: 'Teams roll the dice, race along the path and answer question spaces.' },
     { id: 'circle', name: 'Circle Challenge', icon: '⭕', category: 'Drawing', desc: 'Just draw one circle — your accuracy % appears inside it.' }
   ];

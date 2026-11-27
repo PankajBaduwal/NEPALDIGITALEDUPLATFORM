@@ -78,6 +78,7 @@ import {
   NotebookPen,
 } from 'lucide-react';
 import { PdfReaderModal, TextbookData } from '../components/PdfReaderModal';
+import { TeachingVault } from '../components/teacher/TeachingVault';
 import { SimulationViewerModal } from '../components/SimulationViewerModal';
 import { InteractiveActivityPlayer } from '../components/InteractiveActivityPlayer';
 import { DemoBanner } from '../components/common/DemoBanner';
@@ -122,6 +123,7 @@ export const TeacherDashboard: React.FC = () => {
     | 'MY_SUBJECTS'
     | 'LEARNING_RESOURCES'
     | 'TEACHING_DIARY'
+    | 'TEACHING_MATERIALS'
     | 'ATTENDANCE'
     | 'RESULTS'
     | 'TODAY_SCHEDULE'
@@ -316,7 +318,22 @@ export const TeacherDashboard: React.FC = () => {
       name: subject.name || 'Subject',
       nameNp: subject.nameNepali || '',
       department: cls.stream || '',
-      classSem: `${className} · ${sectionName}`,
+      classSem: (() => {
+        // Short form for cards, e.g. "Grade 12 - Management" + "Section B" → "Gr 12 · Mgmt · B"
+        const streamShort = (s: string) => {
+          const t = s.trim().toLowerCase();
+          if (t.startsWith('manag')) return 'Mgmt';
+          if (t.startsWith('sci')) return 'Sci';
+          if (t.startsWith('human')) return 'Hum';
+          if (t.startsWith('educ')) return 'Edu';
+          if (t.startsWith('hotel')) return 'Hotel';
+          return s.trim().length > 5 ? s.trim().slice(0, 4) : s.trim();
+        };
+        const [gradePart, ...streamParts] = String(className).split(/\s*[-–]\s*/);
+        const gradeShort = gradePart.replace(/^grade\s*/i, 'Gr ').replace(/^class\s*/i, 'Gr ');
+        const secShort = String(sectionName).replace(/^section\s*/i, '');
+        return [gradeShort, ...streamParts.map(streamShort), secShort].filter(Boolean).join(' · ');
+      })(),
       gradeNumber,
       grade: gradeNumber,
       sectionName,
@@ -1312,6 +1329,53 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
     }
   };
 
+  /** Every class and subject the teacher teaches, for the Teaching Materials screen. */
+  const vaultScopes = SUBJECT_COURSES.map((c: any) => {
+    const a: any = allocations[c.allocIndex];
+    const sid = String(a?.sectionId?.id || a?.sectionId?._id || a?.sectionId || '');
+    const sub = String(a?.centralSubjectId?.id || a?.centralSubjectId?._id || a?.centralSubjectId || '');
+    return { key: `${sid}:${sub}`, sectionId: sid, subjectId: sub, subjectName: c.name, classLabel: c.classSem };
+  }).filter((x: any) => x.sectionId && x.subjectId);
+
+  /** Open a Teaching Vault file on the Smart Board for the class and subject of the open workspace. */
+  const launchVaultItem = async (item: { id: string; title: string }, scope: { sectionId: string; subjectId: string }) => {
+    const idOf = (v: any) => String(v?.id || v?._id || v || '');
+    const sectionId = scope.sectionId;
+    const subjectId = scope.subjectId;
+    const alloc = allocations.find((a) => idOf(a.sectionId) === sectionId && idOf(a.centralSubjectId) === subjectId);
+    const classId = idOf(alloc?.sectionId?.classId);
+    if (!sectionId || !subjectId || !classId) {
+      toast('Open the vault from one of your allocated classes first.', 'error');
+      return;
+    }
+    const board = window.open('about:blank', '_blank');
+    if (!board) {
+      toast('The Smart Board could not open. Please allow pop-ups for this site and try again.', 'error');
+      return;
+    }
+    try {
+      const session = await api.post<{ launcherUrl?: string }>('/smartboard/sessions', {
+        classId,
+        sectionId,
+        subjectId,
+        lessonTitle: item.title,
+        initialResourceType: 'WHITEBOARD',
+        initialResourceName: item.title,
+      });
+      if (!session.launcherUrl) throw new Error('The Smart Board session was created without a launch URL.');
+      const url = new URL(session.launcherUrl, window.location.origin);
+      // the board shows the vault file, not the textbook
+      ['pdf', 'textbookId', 'page', 'chapter'].forEach((k) => url.searchParams.delete(k));
+      url.searchParams.set('vault', item.id);
+      url.searchParams.set('title', item.title);
+      board.location.href = url.toString();
+      setIsVaultModalOpen(false);
+    } catch (err: any) {
+      board.close();
+      toast(err?.message || 'Unable to launch the Smart Board. Please try again.', 'error');
+    }
+  };
+
   const handleExecuteLaunch = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     const alloc = allocations[launcherAllocIndex];
@@ -2258,6 +2322,32 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                   {!isSidebarCollapsed && <span>Teaching Diary</span>}
                 </button>
 
+                <button
+                  onClick={() => {
+                    setActiveNav('TEACHING_MATERIALS');
+                    setSelectedWorkspace(null);
+                  }}
+                  title="Teaching Materials"
+                  aria-current={activeNav === 'TEACHING_MATERIALS' ? 'page' : undefined}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    padding: '9px 14px',
+                    borderRadius: '10px',
+                    fontSize: '13px',
+                    fontWeight: '700',
+                    border: activeNav === 'TEACHING_MATERIALS' ? '1.5px solid #EA580C' : '1.5px solid transparent',
+                    cursor: 'pointer',
+                    background: activeNav === 'TEACHING_MATERIALS' ? '#FFF7ED' : 'transparent',
+                    color: activeNav === 'TEACHING_MATERIALS' ? '#EA580C' : '#475569',
+                    textAlign: 'left',
+                  }}
+                >
+                  <FolderPlus size={17} color={activeNav === 'TEACHING_MATERIALS' ? '#EA580C' : '#64748B'} />
+                  {!isSidebarCollapsed && <span>Teaching Materials</span>}
+                </button>
+
 
                 {!isAssignmentsDisabled && (
                   <button data-nav-feature="ASSIGNMENTS"
@@ -2750,6 +2840,8 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                   ? 'Overview'
                   : activeNav === 'TEACHING_DIARY'
                     ? 'Teaching Diary'
+                  : activeNav === 'TEACHING_MATERIALS'
+                    ? 'Teaching Materials'
                   : activeNav === 'MY_SUBJECTS'
                     ? 'My Subjects'
                     : activeNav === 'ATTENDANCE'
@@ -3466,7 +3558,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                           </div>
 
                           {/* Title */}
-                          <h4 style={{ fontSize: '15px', fontWeight: '800', color: isDarkMode ? '#f4faf8' : '#0e3e3b', margin: '0 0 8px 0', minHeight: '38px', lineHeight: '1.3' }}>
+                          <h4 style={{ fontSize: '22px', fontWeight: '800', color: isDarkMode ? '#F8FAFC' : '#0F172A', margin: '0 0 8px 0', minHeight: '56px', lineHeight: '1.25', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             {course.name}
                           </h4>
 
@@ -3485,15 +3577,16 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                           )}
                         </div>
 
-                        {/* Action buttons: Open Workspace + Attendance, Notes, Quiz, Assignment, Smart Board */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', paddingTop: '12px', borderTop: isDarkMode ? '1px solid #2f4f4c' : '1px solid #ebf5f1' }}>
+                        {/* Action buttons: Open Workspace + Book PDF */}
+                        <div style={{ display: 'flex', gap: '8px', paddingTop: '12px', borderTop: isDarkMode ? '1px solid #334155' : '1px solid #F1F5F9' }}>
                           <button
                             onClick={() => {
                               setActiveCourseIndex(idx);
+                              setWorkspaceTab('OVERVIEW');
                               openWorkspace(alloc, true);
                             }}
                             style={{
-                              width: '100%',
+                              flex: 1,
                               padding: '8px 12px',
                               background: '#0f5f55',
                               color: '#ffffff',
@@ -3506,69 +3599,37 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                               alignItems: 'center',
                               justifyContent: 'center',
                               gap: '6px',
+                              whiteSpace: 'nowrap',
                             }}
                           >
                             <BookOpen size={13} color="#ffffff" />
                             <span>Open Workspace</span>
                           </button>
-
-                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '4px' }}>
-                            <button
-                              onClick={() => {
-                                setActiveCourseIndex(idx);
-                                openWorkspace(alloc, true);
-                                setWorkspaceTab('ATTENDANCE');
-                              }}
-                              style={{ padding: '6px 2px', background: isDarkMode ? '#0b3f3d' : '#e6f7f0', color: isDarkMode ? '#2fcf9c' : '#0f4c4a', border: isDarkMode ? '1px solid #117a6b' : '1px solid #bfeede', borderRadius: '6px', fontSize: '10px', fontWeight: '700', cursor: 'pointer', textAlign: 'center' }}
-                            >
-                              Attendance
-                            </button>
-                            {!resourcesOff(secOf(alloc)) && (
-                            <button
-                              onClick={() => {
-                                setActiveCourseIndex(idx);
-                                openWorkspace(alloc, true);
-                                setWorkspaceTab('RESOURCES');
-                              }}
-                              style={{ padding: '6px 2px', background: isDarkMode ? '#134744' : '#f4faf8', color: isDarkMode ? '#dcebe6' : '#0e3e3b', border: isDarkMode ? '1px solid #4b605b' : '1px solid #dcebe6', borderRadius: '6px', fontSize: '10px', fontWeight: '700', cursor: 'pointer', textAlign: 'center' }}
-                            >
-                              Notes
-                            </button>
-                            )}
-                            {!offFor(secOf(alloc), 'QUIZZES') && (
-                            <button
-                              onClick={() => {
-                                setActiveCourseIndex(idx);
-                                openWorkspace(alloc, true);
-                                setWorkspaceTab('QUIZZES');
-                              }}
-                              style={{ padding: '6px 2px', background: isDarkMode ? '#134744' : '#eff6ff', color: isDarkMode ? '#60a5fa' : '#1d4ed8', border: isDarkMode ? '1px solid #2563eb' : '1px solid #bfdbfe', borderRadius: '6px', fontSize: '10px', fontWeight: '700', cursor: 'pointer', textAlign: 'center' }}
-                            >
-                              Quiz
-                            </button>
-                            )}
-                            {!offFor(secOf(alloc), 'ASSIGNMENTS') && (
-                            <button
-                              onClick={() => {
-                                setActiveCourseIndex(idx);
-                                openWorkspace(alloc, true);
-                                setWorkspaceTab('ASSIGNMENTS');
-                              }}
-                              style={{ padding: '6px 2px', background: isDarkMode ? '#134744' : '#f5f3ff', color: isDarkMode ? '#a78bfa' : '#4c3fa8', border: isDarkMode ? '1px solid #6d5bd0' : '1px solid #ede9fe', borderRadius: '6px', fontSize: '10px', fontWeight: '700', cursor: 'pointer', textAlign: 'center' }}
-                            >
-                              Assignment
-                            </button>
-                            )}
-                            <button
-                              onClick={() => {
-                                setActiveCourseIndex(idx);
-                                handleOpenLauncher(alloc);
-                              }}
-                              style={{ padding: '6px 2px', background: isDarkMode ? '#134744' : '#f5f3ff', color: isDarkMode ? '#c084fc' : '#6d28d9', border: isDarkMode ? '1px solid #7c3aed' : '1px solid #ddd6fe', borderRadius: '6px', fontSize: '10px', fontWeight: '700', cursor: 'pointer', textAlign: 'center' }}
-                            >
-                              Smart Board
-                            </button>
-                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleOpenTextbook(alloc);
+                            }}
+                            title="Open Official CDC Textbook PDF"
+                            style={{
+                              padding: '8px 12px',
+                              background: '#FFF7ED',
+                              color: '#EA580C',
+                              border: '1px solid #FED7AA',
+                              borderRadius: '8px',
+                              fontSize: '12px',
+                              fontWeight: '800',
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              whiteSpace: 'nowrap',
+                            }}
+                          >
+                            <BookOpen size={13} />
+                            <span>Book PDF</span>
+                          </button>
                         </div>
                       </div>
                     );
@@ -3847,13 +3908,13 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                   <span style={{ fontSize: '11px', fontWeight: '800', color: isDarkMode ? '#2fcf9c' : '#0f4c4a', fontFamily: 'monospace', background: isDarkMode ? '#0b3f3d' : '#e6f7f0', padding: '3px 8px', borderRadius: '4px' }}>
                                     {subItem.code}
                                   </span>
-                                  <span style={{ fontSize: '12px', fontWeight: '700', color: isDarkMode ? '#cfdcd8' : '#4b605b' }}>
+                                  <span style={{ fontSize: '12px', fontWeight: '700', whiteSpace: 'nowrap', color: isDarkMode ? '#CBD5E1' : '#475569' }}>
                                     {subItem.classSem}
                                   </span>
                                 </div>
 
-                                {/* Title */}
-                                <h4 style={{ fontSize: '15px', fontWeight: '800', color: isDarkMode ? '#f4faf8' : '#0e3e3b', margin: '0 0 8px 0', minHeight: '38px', lineHeight: '1.3' }}>
+                                {/* Title: larger and centred */}
+                                <h4 style={{ fontSize: '22px', fontWeight: '800', color: isDarkMode ? '#F8FAFC' : '#0F172A', margin: '0 0 8px 0', minHeight: '56px', lineHeight: '1.25', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                   {subItem.name}
                                 </h4>
 
@@ -3880,6 +3941,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                       setActiveCourseIndex(idx);
                                       setWorkspaceTab('OVERVIEW');
                                       if (matchingAlloc) openWorkspace(matchingAlloc, false);
+                                      setTimeout(() => document.getElementById('subject-workspace-anchor')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 250);
                                     }}
                                     style={{
                                       flex: 1,
@@ -3928,128 +3990,6 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                   </button>
                                 </div>
 
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '4px' }}>
-                                  <button
-                                    onClick={() => {
-                                      setActiveCourseIndex(idx);
-                                      setWorkspaceTab('ATTENDANCE');
-                                      if (matchingAlloc) openWorkspace(matchingAlloc, false);
-                                    }}
-                                    style={{
-                                      display: 'flex',
-                                      alignItems: 'center',
-                                      justifyContent: 'center',
-                                      padding: '6px 2px',
-                                      background: isDarkMode ? '#0b3f3d' : '#e6f7f0',
-                                      color: isDarkMode ? '#2fcf9c' : '#0f4c4a',
-                                      border: isDarkMode ? '1px solid #117a6b' : '1px solid #bfeede',
-                                      borderRadius: '6px',
-                                      fontSize: '10px',
-                                      fontWeight: '700',
-                                      cursor: 'pointer',
-                                      whiteSpace: 'nowrap',
-                                    }}
-                                  >
-                                    <span>Attendance</span>
-                                  </button>
-                                  {!resourcesOff(secOf(matchingAlloc)) && (
-                                  <button
-                                    onClick={() => {
-                                      setActiveCourseIndex(idx);
-                                      setWorkspaceTab('RESOURCES');
-                                      if (matchingAlloc) openWorkspace(matchingAlloc, false);
-                                    }}
-                                    style={{
-                                      display: 'flex',
-                                      alignItems: 'center',
-                                      justifyContent: 'center',
-                                      padding: '6px 2px',
-                                      background: isDarkMode ? '#134744' : '#f4faf8',
-                                      color: isDarkMode ? '#dcebe6' : '#0e3e3b',
-                                      border: isDarkMode ? '1px solid #4b605b' : '1px solid #dcebe6',
-                                      borderRadius: '6px',
-                                      fontSize: '10px',
-                                      fontWeight: '700',
-                                      cursor: 'pointer',
-                                      whiteSpace: 'nowrap',
-                                    }}
-                                  >
-                                    <span>Notes</span>
-                                  </button>
-                                  )}
-                                  {!offFor(secOf(matchingAlloc), 'QUIZZES') && (
-                                  <button
-                                    onClick={() => {
-                                      setActiveCourseIndex(idx);
-                                      setWorkspaceTab('QUIZZES');
-                                      if (matchingAlloc) openWorkspace(matchingAlloc, false);
-                                    }}
-                                    style={{
-                                      display: 'flex',
-                                      alignItems: 'center',
-                                      justifyContent: 'center',
-                                      padding: '6px 2px',
-                                      background: isDarkMode ? '#134744' : '#eff6ff',
-                                      color: isDarkMode ? '#60a5fa' : '#1d4ed8',
-                                      border: isDarkMode ? '1px solid #2563eb' : '1px solid #bfdbfe',
-                                      borderRadius: '6px',
-                                      fontSize: '10px',
-                                      fontWeight: '700',
-                                      cursor: 'pointer',
-                                      whiteSpace: 'nowrap',
-                                    }}
-                                  >
-                                    <span>Quiz</span>
-                                  </button>
-                                  )}
-                                  {!offFor(secOf(matchingAlloc), 'ASSIGNMENTS') && (
-                                  <button
-                                    onClick={() => {
-                                      setActiveCourseIndex(idx);
-                                      setWorkspaceTab('ASSIGNMENTS');
-                                      if (matchingAlloc) openWorkspace(matchingAlloc, false);
-                                    }}
-                                    style={{
-                                      display: 'flex',
-                                      alignItems: 'center',
-                                      justifyContent: 'center',
-                                      padding: '6px 2px',
-                                      background: isDarkMode ? '#134744' : '#f5f3ff',
-                                      color: isDarkMode ? '#a78bfa' : '#4c3fa8',
-                                      border: isDarkMode ? '1px solid #6d5bd0' : '1px solid #ede9fe',
-                                      borderRadius: '6px',
-                                      fontSize: '10px',
-                                      fontWeight: '700',
-                                      cursor: 'pointer',
-                                      whiteSpace: 'nowrap',
-                                    }}
-                                  >
-                                    <span>Assignment</span>
-                                  </button>
-                                  )}
-                                  <button
-                                    onClick={() => {
-                                      setActiveCourseIndex(idx);
-                                      if (matchingAlloc) handleOpenLauncher(matchingAlloc);
-                                    }}
-                                    style={{
-                                      display: 'flex',
-                                      alignItems: 'center',
-                                      justifyContent: 'center',
-                                      padding: '6px 2px',
-                                      background: isDarkMode ? '#134744' : '#f5f3ff',
-                                      color: isDarkMode ? '#c084fc' : '#6d28d9',
-                                      border: isDarkMode ? '1px solid #7c3aed' : '1px solid #ddd6fe',
-                                      borderRadius: '6px',
-                                      fontSize: '10px',
-                                      fontWeight: '700',
-                                      cursor: 'pointer',
-                                      whiteSpace: 'nowrap',
-                                    }}
-                                  >
-                                    <span>Smart Board</span>
-                                  </button>
-                                </div>
                               </div>
                             </div>
                           );
@@ -4064,6 +4004,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
 
                     {/* Active Subject Information Banner */}
                     <div
+                      id="subject-workspace-anchor"
                       style={{
                         background: '#ffffff',
                         borderRadius: '16px',
@@ -4275,7 +4216,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                           { key: 'ANNOUNCEMENTS', label: 'Announcements', icon: Megaphone, type: 'TAB' },
                           { key: 'PROGRESS', label: 'Student Progress', count: courseStudents.length || undefined, icon: BarChart2, type: 'TAB' },
                           { key: 'AI', label: 'AI Lesson Copilot', icon: Sparkles, type: 'TAB' },
-                          { key: 'VAULT', label: 'Secure Vault', icon: Lock, type: 'ACTION', action: () => setIsVaultModalOpen(true) },
+                          { key: 'VAULT', label: 'Teaching Materials', icon: FolderPlus, type: 'ACTION', action: () => setIsVaultModalOpen(true) },
                         ].filter((item) => !wsTabHidden(item.key)).map((item) => {
                           const Icon = item.icon;
                           const isTab = item.type === 'TAB';
@@ -4554,7 +4495,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                 border: '2px solid #117a6b',
                                 borderRadius: '16px',
                                 padding: '24px 28px',
-                                boxShadow: '0 4px 14px rgba(17,122,107,0.08)',
+                                boxShadow: '0 4px 14px rgba(234,88,12,0.08)',
                               }}
                             >
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
@@ -4570,7 +4511,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                       alignItems: 'center',
                                       justifyContent: 'center',
                                       fontSize: '32px',
-                                      boxShadow: '0 4px 12px rgba(17,122,107,0.3)',
+                                      boxShadow: '0 4px 12px rgba(234,88,12,0.3)',
                                       flexShrink: 0,
                                     }}
                                   >
@@ -4625,7 +4566,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                       fontSize: '13px',
                                       fontWeight: '800',
                                       cursor: 'pointer',
-                                      boxShadow: '0 3px 8px rgba(17,122,107,0.3)',
+                                      boxShadow: '0 3px 8px rgba(234,88,12,0.3)',
                                     }}
                                   >
                                     <BookOpen size={16} />
@@ -5276,7 +5217,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                   display: 'flex',
                                   alignItems: 'center',
                                   gap: '6px',
-                                  boxShadow: '0 2px 4px rgba(17,122,107,0.25)',
+                                  boxShadow: '0 2px 4px rgba(234,88,12,0.25)',
                                 }}
                               >
                                 <Check size={15} /> {isSubmittingMarks ? 'Submitting...' : 'Submit Final Marks'}
@@ -6006,6 +5947,10 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
               VIEW 4: LEARNING RESOURCES (All Resources Explorer across all classes)
               ========================================================================= */}
               {activeNav === 'TEACHING_DIARY' && <TeachingDiaryPanel allocations={allocations} />}
+
+              {activeNav === 'TEACHING_MATERIALS' && (
+                <TeachingVault inline scopes={vaultScopes} onLaunch={(item, scope) => launchVaultItem(item, scope)} />
+              )}
 
               {activeNav === 'LEARNING_RESOURCES' && (() => {
                 const filteredAllResources = learningResources.filter((r) => {
@@ -7259,10 +7204,10 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                         fontSize: '12.5px',
                         fontWeight: '800',
                         cursor: 'pointer',
-                        border: profileActiveTab === 'DETAILS' ? 'none' : (isDarkMode ? '1px solid #2f4f4c' : '1px solid #cfdcd8'),
-                        background: profileActiveTab === 'DETAILS' ? '#117a6b' : (isDarkMode ? '#134744' : '#ffffff'),
-                        color: profileActiveTab === 'DETAILS' ? '#ffffff' : (isDarkMode ? '#8da19d' : '#4b605b'),
-                        boxShadow: profileActiveTab === 'DETAILS' ? '0 2px 8px rgba(17, 122, 107, 0.25)' : 'none',
+                        border: profileActiveTab === 'DETAILS' ? 'none' : (isDarkMode ? '1px solid #334155' : '1px solid #CBD5E1'),
+                        background: profileActiveTab === 'DETAILS' ? '#EA580C' : (isDarkMode ? '#131D33' : '#ffffff'),
+                        color: profileActiveTab === 'DETAILS' ? '#ffffff' : (isDarkMode ? '#94A3B8' : '#475569'),
+                        boxShadow: profileActiveTab === 'DETAILS' ? '0 2px 8px rgba(234,88,12, 0.25)' : 'none',
                       }}
                     >
                       <School size={15} />
@@ -7281,10 +7226,10 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                         fontSize: '12.5px',
                         fontWeight: '800',
                         cursor: 'pointer',
-                        border: profileActiveTab === 'SECURITY' ? 'none' : (isDarkMode ? '1px solid #2f4f4c' : '1px solid #cfdcd8'),
-                        background: profileActiveTab === 'SECURITY' ? '#117a6b' : (isDarkMode ? '#134744' : '#ffffff'),
-                        color: profileActiveTab === 'SECURITY' ? '#ffffff' : (isDarkMode ? '#8da19d' : '#4b605b'),
-                        boxShadow: profileActiveTab === 'SECURITY' ? '0 2px 8px rgba(17, 122, 107, 0.25)' : 'none',
+                        border: profileActiveTab === 'SECURITY' ? 'none' : (isDarkMode ? '1px solid #334155' : '1px solid #CBD5E1'),
+                        background: profileActiveTab === 'SECURITY' ? '#EA580C' : (isDarkMode ? '#131D33' : '#ffffff'),
+                        color: profileActiveTab === 'SECURITY' ? '#ffffff' : (isDarkMode ? '#94A3B8' : '#475569'),
+                        boxShadow: profileActiveTab === 'SECURITY' ? '0 2px 8px rgba(234,88,12, 0.25)' : 'none',
                       }}
                     >
                       <ShieldCheck size={15} />
@@ -7574,7 +7519,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                               display: 'flex',
                               alignItems: 'center',
                               gap: '6px',
-                              boxShadow: '0 2px 6px rgba(17,122,107,0.2)',
+                              boxShadow: '0 2px 6px rgba(234,88,12,0.2)',
                             }}
                           >
                             <Presentation size={14} />
@@ -7840,7 +7785,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '6px',
-                                boxShadow: '0 2px 8px rgba(17, 122, 107, 0.25)',
+                                boxShadow: '0 2px 8px rgba(234,88,12, 0.25)',
                               }}
                             >
                               {passwordChangeLoading && <RefreshCw size={14} className="animate-spin" />}
@@ -8034,8 +7979,8 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
         const isClassTeacher = Boolean(overview?.counts?.isClassTeacher && overview?.classTeacherSection);
 
         return (
-          <div style={{ position: 'fixed', inset: 0, background: 'rgba(14,62,59,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, padding: '20px' }}>
-            <div style={{ background: isDarkMode ? '#134744' : '#ffffff', borderRadius: '20px', padding: '28px', width: '580px', maxWidth: '100%', maxHeight: '90vh', overflowY: 'auto', border: isDarkMode ? '1px solid #2f4f4c' : '1px solid #dcebe6', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.2)' }}>
+          <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, padding: '20px' }}>
+            <div style={{ background: isDarkMode ? '#131D33' : '#ffffff', borderRadius: '20px', padding: '28px', width: '580px', maxWidth: '100%', maxHeight: '90vh', overflowY: 'auto', border: isDarkMode ? '1px solid #334155' : '1px solid #E2E8F0', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.2)' }}>
               
               {/* Header */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
@@ -8306,38 +8251,14 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
         );
       })()}
 
-      {/* 3. Secure Vault Modal */}
-      {isVaultModalOpen && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
-          <div style={{ background: '#ffffff', borderRadius: '16px', padding: '28px', width: '520px', maxWidth: '90%' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Lock size={18} color="#117a6b" />
-                <h3 style={{ fontSize: '16px', fontWeight: '800', margin: 0 }}>Examination Secure Vault</h3>
-              </div>
-              <button onClick={() => setIsVaultModalOpen(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '18px' }}>✕</button>
-            </div>
-
-            <p style={{ fontSize: '12px', color: '#5f736f', marginBottom: '16px' }}>
-              Encrypted institutional exam question bank and answer keys with role-based moderation.
-            </p>
-
-            <div style={{ padding: '16px', background: '#f4faf8', borderRadius: '10px', border: '1px solid #dcebe6', marginBottom: '20px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <strong>First Terminal Exam 2083 (Draft Paper)</strong>
-                <span style={{ fontSize: '10px', fontWeight: '800', padding: '2px 6px', borderRadius: '4px', background: '#ede9fe', color: '#4c3fa8' }}>UNDER MODERATION</span>
-              </div>
-              <div style={{ fontSize: '11px', color: '#5f736f' }}>
-                Locked by School Examination Committee • 75 Marks Theory + 25 Marks Practical
-              </div>
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <button onClick={() => setIsVaultModalOpen(false)} style={{ padding: '8px 16px', background: '#117a6b', color: '#ffffff', border: 'none', borderRadius: '8px', fontSize: '12px', fontWeight: '700', cursor: 'pointer' }}>Close Vault</button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* 3. Teaching Materials (pop-up from the subject workspace) */}
+      {isVaultModalOpen && <TeachingVault
+        open={isVaultModalOpen}
+        onClose={() => setIsVaultModalOpen(false)}
+        scopes={vaultScopes}
+        initialScopeKey={`${String(selectedWorkspace?.section?.id || selectedWorkspace?.section?._id || '')}:${String(selectedWorkspace?.subject?.id || selectedWorkspace?.subject?._id || '')}`}
+        onLaunch={(item, scope) => launchVaultItem(item, scope)}
+      />}
 
       {/* 4. Smart Board Launcher Modal */}
       {dossier && <StudentDossierModal studentId={dossier.studentId} sectionId={dossier.sectionId} onClose={() => setDossier(null)} />}

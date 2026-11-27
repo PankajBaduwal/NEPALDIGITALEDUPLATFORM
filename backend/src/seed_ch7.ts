@@ -21,7 +21,7 @@ const SimulationSchema = new mongoose.Schema(
     chapterNameNepali: { type: String },
     simulationType: {
       type: String,
-      enum: ['THREE_JS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'],
+      enum: ['HTML5_CANVAS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'],
       default: 'REACT_CANVAS',
     },
     componentKey: { type: String },
@@ -54,7 +54,7 @@ async function seedCh7() {
         title: 'Addition Playground',
         titleNepali: 'जोड्ने खेलमैदान',
         description:
-          'Combine two groups of real-world objects in a 3D village playground, move them together into a combined basket, and discover the total.',
+          'Combine two groups of real-world objects in a village playground, move them together into a combined basket, and discover the total.',
         descriptionNepali:
           '३डी गाउँको खेलमैदानमा दुई समूहका वस्तुहरूलाई एकै ठाउँमा मिसाएर जम्मा सङ्ख्या पत्ता लगाउने र जोडको अवधारणा बुझ्ने अभ्यास।',
         subjectCode: 'MATH',
@@ -63,7 +63,7 @@ async function seedCh7() {
         chapterNumber: 7,
         chapterName: 'Addition up to 10',
         chapterNameNepali: 'योगफल १० सम्म आउने जोड',
-        simulationType: 'THREE_JS',
+        simulationType: 'HTML5_CANVAS',
         componentKey: 'class1-math-ch7-playground',
         runtimeUrl: '/simulations/class1-math/ch7/playground',
         difficulty: 'BEGINNER',
@@ -82,7 +82,7 @@ async function seedCh7() {
         ],
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 7', 'Addition', 'Playground', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 7', 'Addition', 'Playground'],
       },
       {
         code: 'SIM-MATH-G1-CH7-02',

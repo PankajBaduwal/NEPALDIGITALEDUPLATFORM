@@ -21,7 +21,7 @@ const SimulationSchema = new mongoose.Schema(
     chapterNameNepali: { type: String },
     simulationType: {
       type: String,
-      enum: ['THREE_JS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'],
+      enum: ['HTML5_CANVAS', 'PHASER', 'REACT_CANVAS', 'HTML5_CANVAS', 'WEB_GL'],
       default: 'REACT_CANVAS',
     },
     componentKey: { type: String },
@@ -67,7 +67,7 @@ async function seedCh10() {
         title: 'Addition Playground',
         titleNepali: 'जोड खेलमैदान',
         description:
-          'Physically combine two groups of 3D objects (fruits, birds, balloons, counting blocks) into one common space and discover the addition equation up to 20.',
+          'Physically combine two groups of objects (fruits, birds, balloons, counting blocks) into one common space and discover the addition equation up to 20.',
         descriptionNepali:
           '३डी बगैँचामा दुई समूहका वस्तुहरू (स्याउ, केरा, बेलुन, चराहरू) एकै ठाउँमा जम्मा गरी २० सम्मको जोडफल र गणितीय समीकरण पत्ता लगाउने खेल।',
         subjectCode: 'MATH',
@@ -76,7 +76,7 @@ async function seedCh10() {
         chapterNumber: 10,
         chapterName: 'Addition up to 20',
         chapterNameNepali: 'योगफल २० सम्म आउने जोड',
-        simulationType: 'THREE_JS',
+        simulationType: 'HTML5_CANVAS',
         componentKey: 'class1-math-ch10-playground',
         runtimeUrl: '/simulations/class1-math/ch10/playground',
         difficulty: 'BEGINNER',
@@ -95,7 +95,7 @@ async function seedCh10() {
         ],
         isPublished: true,
         currentVersion: '1.0.0',
-        tags: ['Class 1', 'Mathematics', 'Chapter 10', 'Addition up to 20', 'Playground', 'Grouping', '3D WebGL'],
+        tags: ['Class 1', 'Mathematics', 'Chapter 10', 'Addition up to 20', 'Playground', 'Grouping'],
       },
       {
         code: 'SIM-MATH-G1-CH10-02',

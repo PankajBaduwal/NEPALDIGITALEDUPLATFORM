@@ -1,44 +1,184 @@
-import React from 'react';
-import { Play, ArrowRight, CheckCircle2, ShieldCheck, ClipboardCheck, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
+import { Play, ArrowRight, CheckCircle2, ShieldCheck, MonitorPlay, Sparkles, Calculator, BarChart3 } from 'lucide-react';
 import { useHome } from './hooks';
 
-const TRUST = ['CDC Curriculum Framework', 'Classes 1–12', 'English & Nepali Medium', 'AI-Powered Learning', 'Institutional Academic Management'];
+const TRUST = [
+  'CDC Curriculum (Classes 1–12)',
+  '430+ Interactive Math & Science Labs',
+  'English & Nepali Medium',
+  'Smart Board & AI Ready',
+];
 
-/** Hero: headline and calls to action on the left, the classroom photograph on the right. The framed dashboard follows in ProductPreview. */
+interface ShowcaseTab {
+  id: string;
+  label: string;
+  icon: React.ElementType;
+  img: string;
+  alt: string;
+  badge: string;
+  title: string;
+  caption: string;
+}
+
+const SHOWCASE_TABS: ShowcaseTab[] = [
+  {
+    id: 'classroom',
+    label: 'Smart Classroom',
+    icon: MonitorPlay,
+    img: '/assets/home/hero/nepal-smart-classroom-hero.jpg',
+    alt: 'Nepali teacher demonstrating geometry and graphs on an interactive Smart Board while students follow along on tablets',
+    badge: 'Live Classroom Mode',
+    title: 'Interactive Smart Board + Split-Screen Textbook',
+    caption: 'Write, draw geometry, launch simulations, and export notes to PDF for every student.',
+  },
+  {
+    id: 'simulations',
+    label: '430+ Simulations',
+    icon: Calculator,
+    img: '/assets/home/hero/nepal-digital-ecosystem.jpg',
+    alt: 'Laptop and tablet displaying interactive Mathematics simulations with geometry and coordinate graphs',
+    badge: 'Classes 1–10 Complete',
+    title: 'Bilingual 2D Math & Science Laboratories',
+    caption: 'Hands-on visual labs aligned strictly to the Nepal CDC textbook in English & नेपाली.',
+  },
+  {
+    id: 'ai',
+    label: 'AI Tutor',
+    icon: Sparkles,
+    img: '/assets/home/teacher-ai.jpg',
+    alt: 'Textbook-grounded AI teaching assistant explaining concepts with source citations',
+    badge: 'Curriculum-Grounded AI',
+    title: 'Instant Step-by-Step Explanations with Sources',
+    caption: 'Answers student and teacher questions in English & Nepali, citing exact textbook pages.',
+  },
+  {
+    id: 'analytics',
+    label: 'School Analytics',
+    icon: BarChart3,
+    img: '/assets/home/principal-overview.jpg',
+    alt: 'Principal and administrator dashboard showing attendance, marks, and timetable management',
+    badge: 'Real-Time Operations',
+    title: 'Unified Attendance, Marks & Timetable Automation',
+    caption: 'Role-based portals for Principals, Admins, Class Teachers, Subject Teachers & Students.',
+  },
+];
+
+/** Hero: editorial headline and CTAs on the left, interactive visual platform showcase on the right. */
 export const Hero: React.FC = () => {
   const h = useHome();
+  const [activeTab, setActiveTab] = useState<string>('classroom');
+  const current = SHOWCASE_TABS.find((t) => t.id === activeTab) || SHOWCASE_TABS[0];
+
   return (
     <section className="nh-hero" aria-labelledby="hero-title">
       <div className="nh-wrap nh-hero-grid">
-        <div>
+        {/* Left Column: Editorial Headline & Actions */}
+        <div className="nh-hero-left">
           <div className="nh-badge-row nh-rise" style={{ ['--i' as any]: 0 }}>
-            <span className="nh-flagline"><span aria-hidden="true">🇳🇵</span> NATIONAL UNIFIED EDUCATIONAL PLATFORM OF NEPAL</span>
-            <span className="nh-chip"><ShieldCheck size={13} /> CDC CURRICULUM ALIGNED</span>
+            <span className="nh-flagline">
+              <span aria-hidden="true">🇳🇵</span> NATIONAL UNIFIED EDUCATIONAL PLATFORM OF NEPAL
+            </span>
+            <span className="nh-chip">
+              <ShieldCheck size={13} /> CDC CURRICULUM ALIGNED
+            </span>
           </div>
-          <h1 id="hero-title" className="nh-rise" style={{ ['--i' as any]: 1 }}>The Modern Digital Operating System <em>for Schools &amp; Colleges in Nepal.</em></h1>
+
+          <h1 id="hero-title" className="nh-rise" style={{ ['--i' as any]: 1 }}>
+            The Modern Digital Operating System{' '}
+            <em>
+              for Schools &amp; Colleges in <span className="nh-uline">Nepal.</span>
+            </em>
+          </h1>
+
           <p className="nh-hero-copy nh-rise" style={{ ['--i' as any]: 2 }}>
-            Unifying school leadership, teachers, students and curriculum operations in one secure digital ecosystem. From Classes 1 to 12 in English and Nepali medium, with interactive Smart Board lessons, intelligent academic management and curriculum-grounded AI learning.
+            Unifying school leadership, teachers, students, and curriculum operations in one secure digital ecosystem.
+            Built for <strong>Classes 1 to 12</strong> in English and Nepali medium — with interactive Smart Board lessons,{' '}
+            <strong>430+ hands-on simulations</strong>, and textbook-grounded AI.
           </p>
+
           <div className="nh-hero-cta nh-rise" style={{ ['--i' as any]: 3 }}>
-            <button type="button" className="nh-btn nh-btn-primary" onClick={h.openDemo}><Play size={16} /> Launch Interactive Demo</button>
-            <button type="button" className="nh-btn nh-btn-ghost" onClick={() => h.go('platform-preview')}>Explore Platform <ArrowRight size={16} /></button>
-            <button type="button" className="nh-link" onClick={h.tour} style={{ alignSelf: 'center' }}>Watch the platform tour</button>
+            <button type="button" className="nh-btn nh-btn-primary nh-btn-lg" onClick={h.openDemo}>
+              <Play size={16} /> Launch Interactive Demo
+            </button>
+            <button type="button" className="nh-btn nh-btn-ghost nh-btn-lg" onClick={() => h.go('features')}>
+              Explore Platform <ArrowRight size={16} />
+            </button>
+            <button type="button" className="nh-link" onClick={h.tour} style={{ alignSelf: 'center', marginLeft: 4 }}>
+              Watch platform tour
+            </button>
           </div>
+
           <div className="nh-trust nh-rise" style={{ ['--i' as any]: 4 }}>
-            {TRUST.map((t) => <span key={t}><CheckCircle2 size={13} color="#1fb589" /> {t}</span>)}
+            {TRUST.map((t) => (
+              <span key={t}>
+                <CheckCircle2 size={14} color="#167C80" /> {t}
+              </span>
+            ))}
           </div>
         </div>
 
-        <div className="nh-hero-photo nh-rise" style={{ ['--i' as any]: 2 }}>
-          <img src="/assets/brand/hero_classroom.webp" alt="A teacher pointing at a geometry lesson on a Smart Board while five students sit around a table" width="1024" height="1024" decoding="async" fetchPriority="high" />
-          <div className="nh-photo-card nh-float-a" aria-hidden="true" style={{ left: -18, top: '14%' }}>
-            <div style={{ display: 'flex', gap: 7, alignItems: 'center', fontWeight: 800, color: '#0e3e3b', fontSize: 12 }}><ClipboardCheck size={14} color="#1fb589" /> Attendance</div>
-            <div style={{ fontSize: 24, fontWeight: 800, color: '#0e3e3b', lineHeight: 1.2 }}>96%</div>
-            <div style={{ height: 5, borderRadius: 4, background: '#daf5ec', overflow: 'hidden', marginTop: 4 }}><i style={{ display: 'block', width: '96%', height: '100%', background: '#1fb589' }} /></div>
+        {/* Right Column: Interactive Visual Showcase */}
+        <div className="nh-hero-right nh-rise" style={{ ['--i' as any]: 2 }}>
+          <div className="nh-showcase-card">
+            {/* Mode Switcher Tabs */}
+            <div className="nh-showcase-tabs" role="tablist" aria-label="Platform highlights">
+              {SHOWCASE_TABS.map((tab) => {
+                const Icon = tab.icon;
+                const isActive = tab.id === activeTab;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    className={`nh-showcase-tab ${isActive ? 'active' : ''}`}
+                    onClick={() => setActiveTab(tab.id)}
+                  >
+                    <Icon size={14} />
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Visual Stage */}
+            <div className="nh-showcase-media">
+              <img
+                key={current.id}
+                src={current.img}
+                alt={current.alt}
+                className="nh-showcase-img"
+              />
+              <div className="nh-showcase-gradient" aria-hidden="true" />
+
+              {/* Top-right live status pill */}
+              <div className="nh-showcase-pill-top" aria-hidden="true">
+                <span className="nh-pulse-dot" />
+                <span>{current.badge}</span>
+              </div>
+
+              {/* Clean bottom caption overlay */}
+              <div className="nh-showcase-caption">
+                <strong>{current.title}</strong>
+                <span>{current.caption}</span>
+              </div>
+            </div>
           </div>
-          <div className="nh-photo-card nh-float-b" aria-hidden="true" style={{ right: -14, bottom: '12%', maxWidth: 190 }}>
-            <div style={{ display: 'flex', gap: 7, alignItems: 'center', fontWeight: 800, color: '#0e3e3b', fontSize: 12 }}><Sparkles size={14} color="#1fb589" /> AI explanation</div>
-            <div style={{ marginTop: 3 }}>With a source from the textbook</div>
+
+          {/* Clean Metric Bar */}
+          <div className="nh-hero-metrics" aria-label="Platform key metrics">
+            <div className="nh-metric-pill">
+              <b>430+</b>
+              <span>Math &amp; Science Sims</span>
+            </div>
+            <div className="nh-metric-pill">
+              <b>Classes 1–12</b>
+              <span>EN / नेपाली Medium</span>
+            </div>
+            <div className="nh-metric-pill">
+              <b>96%</b>
+              <span>Live Attendance Sync</span>
+            </div>
           </div>
         </div>
       </div>

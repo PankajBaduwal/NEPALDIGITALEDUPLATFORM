@@ -1,11 +1,10 @@
 /**
  * SimFrame2D.tsx
- * Shared 2D Simulation Frame for Classes 1–6 Mathematics
- * Designed for Smart Boards, Desktops, and Tablets.
- * Adheres to the Nepal Digital Education Platform 2D Design System.
+ * Shared 2D Simulation Frame for Classes 1–10 Mathematics
+ * Clean, well-organized academic workspace for Smart Boards, Desktops, and Tablets.
  */
 import React from 'react';
-import { ArrowLeft, Volume2, VolumeX, Star, Maximize2, Minimize2 } from 'lucide-react';
+import { ArrowLeft, Volume2, VolumeX, Star, Maximize2, Minimize2, BookOpen, Gamepad2, Trophy } from 'lucide-react';
 import { SimKit, Mode, QuizPanel, QuizQuestion } from '../class1-math-kit/SimKit';
 import { FONT_NP, toNp } from '../class1-math-kit/nepali';
 
@@ -25,7 +24,7 @@ export interface SimFrame2DProps {
   extra?: React.ReactNode;
   /** Grade level display. Defaults to 1 */
   grade?: number;
-  /** Mascot prompt/speech */
+  /** Guidance prompt/speech */
   mascotGreeting?: string;
   /** Quiz questions for CHALLENGE mode */
   questions?: QuizQuestion[];
@@ -33,10 +32,10 @@ export interface SimFrame2DProps {
   onAskQuestion?: (q: any, index: number) => void;
 }
 
-const MODE_META: Record<Mode, { np: string; en: string; icon: string }> = {
-  LEARN: { np: 'सिकौँ', en: 'Learn', icon: '📖' },
-  PLAY: { np: 'खेलौँ', en: 'Play', icon: '🎈' },
-  CHALLENGE: { np: 'चुनौती', en: 'Challenge', icon: '🏆' },
+const MODE_META: Record<Mode, { np: string; en: string; Icon: React.ElementType }> = {
+  LEARN: { np: 'सिकौँ', en: 'Learn', Icon: BookOpen },
+  PLAY: { np: 'खेलौँ', en: 'Explore', Icon: Gamepad2 },
+  CHALLENGE: { np: 'अभ्यास', en: 'Challenge', Icon: Trophy },
 };
 
 export const SimFrame2D: React.FC<SimFrame2DProps> = ({
@@ -78,29 +77,29 @@ export const SimFrame2D: React.FC<SimFrame2DProps> = ({
         minHeight: '88vh',
         display: 'flex',
         flexDirection: 'column',
-        background: '#F5F7F5',
+        background: '#F5F7F8',
         fontFamily: FONT_NP,
-        color: '#26332E',
+        color: '#263746',
         userSelect: 'none',
         WebkitUserSelect: 'none',
       }}
     >
       <style>{`
-        @keyframes simPop { 0% { transform: scale(0.7); opacity: 0; } 70% { transform: scale(1.06); } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes simShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
-        @keyframes simBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+        @keyframes simFadeIn { 0% { opacity: 0; transform: translateY(-4px); } 100% { opacity: 1; transform: none; } }
+        @keyframes simShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
       `}</style>
-      {/* ── Top Header ────────────────────────────────────────── */}
+
+      {/* ── Top Academic Header ────────────────────────────────── */}
       <header
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: 12,
-          padding: '10px 18px',
-          background: '#187C68',
+          padding: '10px 20px',
+          background: '#142D4E',
           color: '#FFFFFF',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.08)',
+          borderBottom: '3px solid #167C80',
           flexWrap: 'wrap',
         }}
       >
@@ -112,27 +111,27 @@ export const SimFrame2D: React.FC<SimFrame2DProps> = ({
               display: 'inline-flex',
               alignItems: 'center',
               gap: 6,
-              background: 'rgba(255,255,255,0.18)',
+              background: 'rgba(255,255,255,0.12)',
               color: '#FFFFFF',
-              border: 'none',
-              padding: '8px 14px',
-              borderRadius: 12,
-              fontSize: 14,
-              fontWeight: 800,
+              border: '1px solid rgba(255,255,255,0.2)',
+              padding: '7px 13px',
+              borderRadius: 10,
+              fontSize: 13.5,
+              fontWeight: 700,
               cursor: 'pointer',
               transition: 'background 0.15s',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.28)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.18)')}
+            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.22)')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
           >
-            <ArrowLeft size={16} /> {L('पुस्तकालय', 'Library')}
+            <ArrowLeft size={15} /> {L('पुस्तकालय', 'Library')}
           </button>
 
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: '#A7F3D0', letterSpacing: '0.04em' }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: '#9FCBCD', letterSpacing: '0.03em' }}>
               {L(`कक्षा ${toNp(grade)} • गणित • अध्याय ${toNp(kit.cfg.chapter)}`, `Class ${grade} • Mathematics • Chapter ${kit.cfg.chapter}`)}
             </div>
-            <h1 style={{ margin: 0, fontSize: 18, fontWeight: 900, lineHeight: 1.25 }}>
+            <h1 style={{ margin: 0, fontSize: 17.5, fontWeight: 800, lineHeight: 1.25, color: '#FFFFFF' }}>
               {isNe ? kit.cfg.titleNp : kit.cfg.titleEn}
             </h1>
           </div>
@@ -141,20 +140,22 @@ export const SimFrame2D: React.FC<SimFrame2DProps> = ({
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {extra}
 
-          {/* Stars Pill */}
+          {/* Stars / Score Pill */}
           <div
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: 6,
-              background: 'rgba(255,255,255,0.22)',
-              padding: '6px 14px',
-              borderRadius: 20,
-              fontWeight: 900,
-              fontSize: 14,
+              background: 'rgba(217, 164, 65, 0.2)',
+              border: '1px solid rgba(217, 164, 65, 0.45)',
+              color: '#F3E2B5',
+              padding: '6px 12px',
+              borderRadius: 999,
+              fontWeight: 800,
+              fontSize: 13.5,
             }}
           >
-            <Star size={16} fill="#FDE047" color="#FDE047" />
+            <Star size={15} fill="#D9A441" color="#D9A441" />
             <span>{isNe ? toNp(kit.stars) : kit.stars}</span>
           </div>
 
@@ -163,13 +164,13 @@ export const SimFrame2D: React.FC<SimFrame2DProps> = ({
             type="button"
             onClick={() => kit.setLang(isNe ? 'en' : 'ne')}
             style={{
-              background: 'rgba(255,255,255,0.18)',
+              background: '#167C80',
               color: '#FFFFFF',
               border: 'none',
-              padding: '8px 14px',
-              borderRadius: 12,
+              padding: '7px 14px',
+              borderRadius: 10,
               fontSize: 13,
-              fontWeight: 800,
+              fontWeight: 700,
               cursor: 'pointer',
             }}
           >
@@ -182,17 +183,17 @@ export const SimFrame2D: React.FC<SimFrame2DProps> = ({
             aria-label="Toggle Sound"
             onClick={() => kit.setMuted(!muted)}
             style={{
-              background: 'rgba(255,255,255,0.18)',
+              background: 'rgba(255,255,255,0.12)',
               color: '#FFFFFF',
-              border: 'none',
-              padding: '8px 10px',
-              borderRadius: 12,
+              border: '1px solid rgba(255,255,255,0.18)',
+              padding: '7px 10px',
+              borderRadius: 10,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
             }}
           >
-            {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+            {muted ? <VolumeX size={17} /> : <Volume2 size={17} />}
           </button>
 
           {/* Fullscreen Toggle */}
@@ -201,133 +202,38 @@ export const SimFrame2D: React.FC<SimFrame2DProps> = ({
             aria-label="Toggle Fullscreen"
             onClick={toggleFullscreen}
             style={{
-              background: 'rgba(255,255,255,0.18)',
+              background: 'rgba(255,255,255,0.12)',
               color: '#FFFFFF',
-              border: 'none',
-              padding: '8px 10px',
-              borderRadius: 12,
+              border: '1px solid rgba(255,255,255,0.18)',
+              padding: '7px 10px',
+              borderRadius: 10,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
             }}
           >
-            {isFullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
+            {isFullscreen ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
           </button>
         </div>
       </header>
 
-      {/* ── Central 2D Interactive Stage ─────────────────────── */}
-      <main
+      {/* ── Mode Bar & Guidance Strip (Non-Overlapping) ───────── */}
+      <div
         style={{
-          position: 'relative',
-          flex: 1,
-          minHeight: '480px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
           background: '#FFFFFF',
+          borderBottom: '1px solid #E2E8F0',
+          padding: '10px 20px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 12,
+          flexWrap: 'wrap',
         }}
       >
-        {children}
-
-        {/* Mascot Speech Bubble */}
-        {Boolean(activeSpeech) && (
-          <div
-            style={{
-              position: 'absolute',
-              left: 16,
-              top: 16,
-              maxWidth: 'min(520px, 85%)',
-              display: 'flex',
-              gap: 12,
-              alignItems: 'flex-start',
-              animation: 'simPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
-              zIndex: 30,
-            }}
-          >
-            <div style={{ fontSize: 36, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))', animation: 'simBob 2.5s infinite' }}>🐼</div>
-            <div
-              onClick={() => {
-                if (bubble.np || bubble.en) {
-                  kit.say(bubble.np, bubble.en);
-                } else if (mascotGreeting) {
-                  kit.say(mascotGreeting, mascotGreeting);
-                }
-              }}
-              style={{
-                background: '#FFFFFF',
-                border: '2px solid #187C68',
-                borderRadius: 18,
-                padding: '10px 16px',
-                fontSize: 15,
-                fontWeight: 800,
-                color: '#26332E',
-                lineHeight: 1.4,
-                boxShadow: '0 6px 18px rgba(24,124,104,0.15)',
-                cursor: 'pointer',
-              }}
-              title="Click to replay audio"
-            >
-              {activeSpeech} <span style={{ opacity: 0.6 }}>🔊</span>
-            </div>
-          </div>
-        )}
-
-        {/* HUD Indicator */}
-        {hud && (
-          <div
-            style={{
-              position: 'absolute',
-              top: 16,
-              right: 16,
-              zIndex: 20,
-              pointerEvents: 'none',
-            }}
-          >
-            {hud}
-          </div>
-        )}
-
-        {/* Toast / Instant Praise */}
-        {toast && (
-          <div
-            style={{
-              position: 'absolute',
-              left: '50%',
-              top: '40%',
-              transform: 'translateX(-50%)',
-              background: toast.ok ? '#10B981' : '#F59E0B',
-              color: '#FFFFFF',
-              padding: '14px 32px',
-              borderRadius: 30,
-              fontSize: 24,
-              fontWeight: 900,
-              boxShadow: '0 12px 30px rgba(0,0,0,0.25)',
-              zIndex: 50,
-              pointerEvents: 'none',
-              whiteSpace: 'nowrap',
-              animation: toast.ok ? 'simPop 0.35s' : 'simShake 0.4s',
-            }}
-          >
-            {toast.ok ? '🌟 ' : '💡 '}
-            {L(toast.np, toast.en)}
-          </div>
-        )}
-      </main>
-
-      {/* ── Mode Switcher & Interaction Panel ────────────────── */}
-      <footer
-        style={{
-          background: '#F5F7F5',
-          borderTop: '1px solid #DCE5DE',
-          padding: '12px 18px 16px',
-        }}
-      >
-        <div style={{ display: 'flex', gap: 10, marginBottom: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
           {modes.map((m) => {
             const meta = MODE_META[m];
+            const Icon = meta.Icon;
             const active = kit.mode === m;
             return (
               <button
@@ -338,34 +244,135 @@ export const SimFrame2D: React.FC<SimFrame2DProps> = ({
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 6,
-                  padding: '9px 20px',
-                  fontSize: 15,
-                  fontWeight: 800,
-                  borderRadius: 14,
-                  border: active ? '2px solid #187C68' : '1px solid #CBD5E1',
-                  background: active ? '#187C68' : '#FFFFFF',
+                  padding: '7px 15px',
+                  fontSize: 13.5,
+                  fontWeight: 700,
+                  borderRadius: 9,
+                  border: active ? '1px solid #142D4E' : '1px solid #CBD5E1',
+                  background: active ? '#142D4E' : '#F8FAFC',
                   color: active ? '#FFFFFF' : '#334155',
                   cursor: 'pointer',
-                  boxShadow: active ? '0 3px 8px rgba(24,124,104,0.25)' : 'none',
                   transition: 'all 0.15s ease',
                 }}
               >
-                <span>{meta.icon}</span>
+                <Icon size={15} />
                 <span>{L(meta.np, meta.en)}</span>
               </button>
             );
           })}
         </div>
 
-        {/* When in CHALLENGE mode and questions are supplied, show QuizPanel */}
-        {kit.mode === 'CHALLENGE' && questions && questions.length > 0 ? (
-          <div style={{ background: '#FFFFFF', padding: '16px 20px', borderRadius: 16, border: '1.5px solid #E2E8F0', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
-            <QuizPanel kit={kit} questions={questions} onAsk={onAskQuestion} />
-          </div>
-        ) : (
-          controls || panel
+        {/* Dedicated Clean Instruction / Audio Guidance Pill */}
+        {Boolean(activeSpeech) && (
+          <button
+            type="button"
+            onClick={() => {
+              if (bubble.np || bubble.en) kit.say(bubble.np, bubble.en);
+              else if (mascotGreeting) kit.say(mascotGreeting, mascotGreeting);
+            }}
+            title={L('फेरि सुन्नुहोस्', 'Click to hear instruction')}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              background: '#E8F1F1',
+              border: '1px solid #CFE3E4',
+              borderRadius: 10,
+              padding: '6px 12px',
+              fontSize: 13,
+              fontWeight: 700,
+              color: '#142D4E',
+              cursor: 'pointer',
+              maxWidth: 'min(540px, 100%)',
+              textAlign: 'left',
+            }}
+          >
+            <Volume2 size={15} color="#167C80" style={{ flexShrink: 0 }} />
+            <span style={{ lineHeight: 1.35 }}>{activeSpeech}</span>
+          </button>
         )}
-      </footer>
+      </div>
+
+      {/* ── Central 2D Interactive Stage ─────────────────────── */}
+      <main
+        style={{
+          position: 'relative',
+          flex: 1,
+          minHeight: '460px',
+          margin: '14px 20px 0',
+          borderRadius: 16,
+          border: '1px solid #E2E8F0',
+          background: '#FFFFFF',
+          boxShadow: '0 4px 16px -6px rgba(15, 23, 42, 0.06)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'auto',
+        }}
+      >
+        {children}
+
+        {/* HUD Indicator */}
+        {hud && (
+          <div
+            style={{
+              position: 'absolute',
+              top: 14,
+              right: 14,
+              zIndex: 20,
+              pointerEvents: 'none',
+            }}
+          >
+            {hud}
+          </div>
+        )}
+
+        {/* Toast / Instant Feedback */}
+        {toast && (
+          <div
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: 18,
+              transform: 'translateX(-50%)',
+              background: toast.ok ? '#167C80' : '#D97706',
+              color: '#FFFFFF',
+              padding: '10px 24px',
+              borderRadius: 999,
+              fontSize: 16,
+              fontWeight: 800,
+              boxShadow: '0 8px 24px rgba(15,23,42,0.2)',
+              zIndex: 50,
+              pointerEvents: 'none',
+              whiteSpace: 'nowrap',
+              animation: toast.ok ? 'simFadeIn 0.25s' : 'simShake 0.35s',
+            }}
+          >
+            {L(toast.np, toast.en)}
+          </div>
+        )}
+      </main>
+
+      {/* ── Interaction & Controls Panel ─────────────────────── */}
+      {(controls || panel || (kit.mode === 'CHALLENGE' && questions && questions.length > 0)) && (
+        <footer
+          style={{
+            margin: '12px 20px 16px',
+            background: '#FFFFFF',
+            border: '1px solid #E2E8F0',
+            borderRadius: 14,
+            padding: '14px 18px',
+            boxShadow: '0 2px 6px rgba(15, 23, 42, 0.04)',
+          }}
+        >
+          {kit.mode === 'CHALLENGE' && questions && questions.length > 0 ? (
+            <QuizPanel kit={kit} questions={questions} onAsk={onAskQuestion} />
+          ) : (
+            controls || panel
+          )}
+        </footer>
+      )}
     </div>
   );
 };

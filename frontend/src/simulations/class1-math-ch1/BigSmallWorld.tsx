@@ -171,7 +171,7 @@ export const BigSmallWorld: React.FC<BigSmallWorldProps> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '10px 18px',
-          background: '#187C68',
+          background: '#142D4E', borderBottom: '3px solid #167C80',
           color: '#FFFFFF',
           flexWrap: 'wrap',
           gap: 12,
@@ -197,7 +197,7 @@ export const BigSmallWorld: React.FC<BigSmallWorldProps> = ({
             <ArrowLeft size={16} /> {L('पुस्तकालय', 'Library')}
           </button>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: '#A7F3D0' }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: '#9FCBCD' }}>
               {L('कक्षा १ • गणित • अध्याय १', 'Class 1 • Mathematics • Chapter 1')}
             </div>
             <h1 style={{ margin: 0, fontSize: 18, fontWeight: 900 }}>
@@ -275,7 +275,7 @@ export const BigSmallWorld: React.FC<BigSmallWorldProps> = ({
           display: 'flex',
           gap: 10,
           padding: '10px 18px',
-          background: '#EAF0EB',
+          background: '#FFFFFF',
           borderBottom: '1px solid #DCE5DE',
           flexWrap: 'wrap',
           alignItems: 'center',

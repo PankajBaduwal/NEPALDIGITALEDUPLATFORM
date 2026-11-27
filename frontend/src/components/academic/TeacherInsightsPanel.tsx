@@ -225,7 +225,7 @@ export const TeacherInsightsPanel: React.FC<Props> = ({ view, scopes, fixedScope
                     <CartesianGrid vertical={false} strokeDasharray="3 3" />
                     <XAxis dataKey="band" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
                     <YAxis allowDecimals={false} tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
-                    <Tooltip cursor={{ fill: 'rgba(31,181,137,0.06)' }} />
+                    <Tooltip cursor={{ fill: 'rgba(234,88,12,0.06)' }} />
                     <Bar dataKey="count" radius={[8, 8, 0, 0]} animationDuration={900}>
                       {scoreBands.map((b) => <Cell key={b.band} fill={b.color} />)}
                     </Bar>

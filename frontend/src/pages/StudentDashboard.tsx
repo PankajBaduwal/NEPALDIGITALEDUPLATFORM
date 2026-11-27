@@ -370,8 +370,8 @@ export const StudentDashboard: React.FC = () => {
 
   if (dashboardOff) {
     return (
-      <div style={{ minHeight: '100vh', background: '#f4faf8', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-        <div style={{ maxWidth: 460, width: '100%', background: '#fff', border: '1px solid #dcebe6', borderRadius: 20, padding: '36px 28px', textAlign: 'center', boxShadow: '0 8px 30px rgba(15,95,85,0.08)' }}>
+      <div style={{ minHeight: '100vh', background: '#F8FAFC', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+        <div style={{ maxWidth: 460, width: '100%', background: '#fff', border: '1px solid #E2E8F0', borderRadius: 20, padding: '36px 28px', textAlign: 'center', boxShadow: '0 8px 30px rgba(234,88,12,0.08)' }}>
           <div style={{ fontSize: 44, marginBottom: 8 }}>🎓</div>
           <h2 style={{ margin: '0 0 8px', fontSize: 20, fontWeight: 900, color: '#0e3e3b' }}>Student dashboard is not available</h2>
           <p style={{ margin: '0 0 22px', fontSize: 14, color: '#5f736f', lineHeight: 1.6 }}>
@@ -418,7 +418,7 @@ export const StudentDashboard: React.FC = () => {
                 color: '#ffffff',
                 fontWeight: '900',
                 fontSize: '16px',
-                boxShadow: '0 2px 5px rgba(17, 122, 107, 0.25)',
+                boxShadow: '0 2px 5px rgba(234,88,12, 0.25)',
               }}
             >
               🇳🇵
@@ -2082,7 +2082,7 @@ export const StudentDashboard: React.FC = () => {
                         fontSize: '13px',
                         fontWeight: '700',
                         cursor: 'pointer',
-                        boxShadow: '0 2px 4px rgba(17, 122, 107, 0.2)',
+                        boxShadow: '0 2px 4px rgba(234,88,12, 0.2)',
                       }}
                     >
                       <Download size={15} /> Download Official CDC Report Card (PDF)
@@ -3291,7 +3291,7 @@ export const StudentDashboard: React.FC = () => {
           {viewNote && (() => {
             const info = describeNote(viewNote);
             return (
-              <div style={{ position: 'fixed', inset: 0, background: 'rgba(14,62,59,0.6)', zIndex: 60, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+              <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', zIndex: 60, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
                 <div style={{ background: '#ffffff', borderRadius: '16px', width: '100%', maxWidth: '760px', maxHeight: '88vh', overflowY: 'auto', padding: '22px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: '12px', marginBottom: '14px' }}>
                     <div>

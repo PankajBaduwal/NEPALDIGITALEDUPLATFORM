@@ -1,6 +1,6 @@
 # RAG Ingestion Progress
 
-Generated 2026-11-15T08:32:48.965Z.
+Generated 2026-11-27T09:09:07.399Z.
 
 | Status | Documents |
 | --- | ---: |

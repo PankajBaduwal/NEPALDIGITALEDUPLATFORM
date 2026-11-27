@@ -857,8 +857,8 @@ export const SchoolAdminDashboard: React.FC = () => {
           <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             {activeTab === 'OVERVIEW' && (
               <>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#5f736f', background: '#f4faf8', padding: '6px 12px', borderRadius: '8px', border: '1px solid #dcebe6' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#1fb589', boxShadow: '0 0 6px rgba(31, 181, 137, 0.6)' }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#64748B', background: '#F8FAFC', padding: '6px 12px', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#EA580C', boxShadow: '0 0 6px rgba(234,88,12, 0.6)' }} />
                   <span>Real-time Sync • {lastSyncTime.toLocaleTimeString()}</span>
                 </div>
 
@@ -937,7 +937,7 @@ export const SchoolAdminDashboard: React.FC = () => {
                     fontSize: '12px',
                     fontWeight: '700',
                     textDecoration: 'none',
-                    boxShadow: '0 2px 6px rgba(17, 122, 107, 0.25)',
+                    boxShadow: '0 2px 6px rgba(234,88,12, 0.25)',
                   }}
                 >
                   <Presentation size={15} /> Smart Board
@@ -1130,7 +1130,7 @@ export const SchoolAdminDashboard: React.FC = () => {
                       top: '-40px',
                       width: '260px',
                       height: '260px',
-                      background: 'radial-gradient(circle, rgba(31, 181, 137, 0.25) 0%, transparent 70%)',
+                      background: 'radial-gradient(circle, rgba(234,88,12, 0.25) 0%, transparent 70%)',
                       borderRadius: '50%',
                       pointerEvents: 'none',
                     }}
@@ -1528,7 +1528,7 @@ export const SchoolAdminDashboard: React.FC = () => {
                           <XAxis dataKey="grade" tick={{ fontSize: 10, fill: '#5f736f' }} axisLine={{ stroke: '#dcebe6' }} tickLine={false} interval={1} />
                           <YAxis domain={[2.0, 4.0]} tick={{ fontSize: 11, fill: '#5f736f' }} axisLine={false} tickLine={false} />
                           <Tooltip
-                            contentStyle={{ background: '#ffffff', borderRadius: '10px', border: '1px solid #dcebe6', color: '#0e3e3b', fontSize: '12px', boxShadow: '0 10px 24px -8px rgba(14, 62, 59, 0.18)' }}
+                            contentStyle={{ background: '#ffffff', borderRadius: '10px', border: '1px solid #E2E8F0', color: '#0F172A', fontSize: '12px', boxShadow: '0 10px 24px -8px rgba(15,23,42, 0.18)' }}
                             formatter={(val: any, _name: any, item: any) => [`GPA: ${val} (Pass: ${item.payload.passRate}%)`, 'Class Result']}
                           />
                           <Bar dataKey="gpa" radius={[5, 5, 0, 0]}>
@@ -1581,7 +1581,7 @@ export const SchoolAdminDashboard: React.FC = () => {
                               ))}
                             </Pie>
                             <Tooltip
-                              contentStyle={{ background: '#ffffff', borderRadius: '10px', border: '1px solid #dcebe6', color: '#0e3e3b', fontSize: '12px', boxShadow: '0 10px 24px -8px rgba(14, 62, 59, 0.18)' }}
+                              contentStyle={{ background: '#ffffff', borderRadius: '10px', border: '1px solid #E2E8F0', color: '#0F172A', fontSize: '12px', boxShadow: '0 10px 24px -8px rgba(15,23,42, 0.18)' }}
                               formatter={(val: any, _name: any, item: any) => [`${val} Students (${item.payload.percentage})`, item.payload.grade]}
                             />
                           </PieChart>
@@ -3320,7 +3320,7 @@ export const SchoolAdminDashboard: React.FC = () => {
                         display: 'flex',
                         alignItems: 'center',
                         gap: '6px',
-                        boxShadow: '0 2px 4px rgba(17, 122, 107, 0.2)',
+                        boxShadow: '0 2px 4px rgba(234,88,12, 0.2)',
                       }}
                     >
                       <Megaphone size={15} /> {isAnnPosting ? 'Broadcasting...' : 'Publish Announcement Now'}
@@ -4329,7 +4329,7 @@ export const SchoolAdminDashboard: React.FC = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'rgba(14, 62, 59, 0.6)',
+          background: 'rgba(15,23,42, 0.6)',
           backdropFilter: 'blur(4px)',
           display: 'flex',
           alignItems: 'center',
@@ -4506,7 +4506,7 @@ export const SchoolAdminDashboard: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'rgba(14, 62, 59, 0.8)',
+          background: 'rgba(15,23,42, 0.8)',
           backdropFilter: 'blur(4px)',
           padding: '16px',
         }}>
@@ -4523,7 +4523,7 @@ export const SchoolAdminDashboard: React.FC = () => {
           }}>
             <div style={{ padding: '16px 24px', background: '#effaf6', color: '#0b3f3d', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <span style={{ fontSize: '11px', background: 'rgba(31, 181, 137, 0.2)', color: '#2fcf9c', padding: '2px 8px', borderRadius: '4px', fontFamily: 'monospace' }}>
+                <span style={{ fontSize: '11px', background: 'rgba(234,88,12, 0.2)', color: '#FB923C', padding: '2px 8px', borderRadius: '4px', fontFamily: 'monospace' }}>
                   Assignment Studio Inspector
                 </span>
                 <h3 style={{ fontSize: '16px', fontWeight: '800', margin: '4px 0 0 0' }}>{inspectAssignment.title}</h3>
@@ -4581,7 +4581,7 @@ export const SchoolAdminDashboard: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'rgba(14, 62, 59, 0.8)',
+          background: 'rgba(15,23,42, 0.8)',
           backdropFilter: 'blur(4px)',
           padding: '16px',
         }}>
@@ -4598,7 +4598,7 @@ export const SchoolAdminDashboard: React.FC = () => {
           }}>
             <div style={{ padding: '16px 24px', background: '#effaf6', color: '#0b3f3d', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <span style={{ fontSize: '11px', background: 'rgba(109,91,208, 0.2)', color: '#a78bfa', padding: '2px 8px', borderRadius: '4px', fontFamily: 'monospace' }}>
+                <span style={{ fontSize: '11px', background: 'rgba(86,109,150, 0.2)', color: '#7D91B3', padding: '2px 8px', borderRadius: '4px', fontFamily: 'monospace' }}>
                   Quiz Studio Inspector
                 </span>
                 <h3 style={{ fontSize: '16px', fontWeight: '800', margin: '4px 0 0 0' }}>{inspectQuiz.title}</h3>

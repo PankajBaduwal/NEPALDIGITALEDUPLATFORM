@@ -1,6 +1,6 @@
 /**
  * SimulationPlayer.tsx
- * Dedicated Simulation Player Component for 3D Interactive & HTML Simulations
+ * Dedicated Simulation Player Component for interactive 2D & HTML Simulations
  */
 import React, { Suspense, useState } from 'react';
 import { ArrowLeft, Maximize2, Minimize2, ExternalLink, RefreshCw } from 'lucide-react';
@@ -413,7 +413,7 @@ const SimulationPlayerView: React.FC<SimulationPlayerProps> = ({
     return <AdditionChallengeWorld onBackToLibrary={onClose} userRole={userRole} />;
   }
 
-  // Class 1 Mathematics - Chapters 11–22 (3D, one shared kit)
+  // Class 1 Mathematics - Chapters 11–22 (2D, one shared kit)
   const ch1122 = findClass1Sim(simulation.componentKey, simulation.code);
   if (ch1122) {
     const Sim = ch1122.Component;
@@ -857,7 +857,7 @@ export const SimulationPlayer: React.FC<SimulationPlayerProps> = (props) => {
           type="button"
           onClick={() => launchOnSmartBoard(simulation.componentKey || simulation.code || simulation.id, simulation.title)}
           aria-label="Launch on Smart Board"
-          style={{ position: 'fixed', right: 16, bottom: 16, zIndex: 10030, height: 42, padding: '0 16px', borderRadius: 999, border: '1px solid rgba(255,255,255,.3)', background: '#0f4c4a', color: '#fff', display: 'inline-flex', alignItems: 'center', gap: 8, fontWeight: 800, fontSize: 13, cursor: 'pointer', boxShadow: '0 8px 22px rgba(15,76,74,.4)' }}
+          style={{ position: 'fixed', right: 16, bottom: 16, zIndex: 10030, height: 42, padding: '0 16px', borderRadius: 999, border: '1px solid rgba(255,255,255,.3)', background: '#0F172A', color: '#fff', display: 'inline-flex', alignItems: 'center', gap: 8, fontWeight: 800, fontSize: 13, cursor: 'pointer', boxShadow: '0 8px 22px rgba(15,23,42,.4)' }}
         >
           🖥 Launch on Smart Board
         </button>

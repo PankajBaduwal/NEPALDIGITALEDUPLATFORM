@@ -92,7 +92,7 @@ export const DialogsProvider: React.FC<{ children: React.ReactNode }> = ({ child
       {children}
       <div aria-live="polite" role="status" style={{ position: 'fixed', top: 16, right: 16, zIndex: 3000, display: 'flex', flexDirection: 'column', gap: 10, width: 'min(380px, calc(100vw - 32px))' }}>
         {toasts.map((t) => (
-          <div key={t.id} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', background: '#fff', border: `1px solid ${BORDER[t.kind]}`, borderRadius: 12, padding: '12px 14px', boxShadow: '0 10px 30px rgba(14,62,59,0.14)', animation: 'dlg-in 0.2s ease-out' }}>
+          <div key={t.id} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', background: '#fff', border: `1px solid ${BORDER[t.kind]}`, borderRadius: 12, padding: '12px 14px', boxShadow: '0 10px 30px rgba(15,23,42,0.14)', animation: 'dlg-in 0.2s ease-out' }}>
             <span style={{ marginTop: 1 }}>{ICON[t.kind]}</span>
             <div style={{ flex: 1, fontSize: 13, lineHeight: 1.45, color: '#0e3e3b', wordBreak: 'break-word' }}>{t.message}</div>
             <button type="button" aria-label="Dismiss" onClick={() => setToasts((l) => l.filter((x) => x.id !== t.id))} style={{ color: '#5f736f', padding: 2 }}>
@@ -102,10 +102,10 @@ export const DialogsProvider: React.FC<{ children: React.ReactNode }> = ({ child
         ))}
       </div>
       {dialog && (
-        <div role="presentation" onClick={() => close(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(14,62,59,0.5)', zIndex: 3100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16, animation: 'dlg-fade 0.15s ease-out' }}>
-          <div role="alertdialog" aria-modal="true" aria-label={dialog.title || 'Please confirm'} onClick={(e) => e.stopPropagation()} style={{ background: '#fff', borderRadius: 14, padding: 22, width: 'min(440px, 100%)', boxShadow: '0 25px 60px rgba(14,62,59,0.3)', animation: 'dlg-in 0.18s ease-out' }}>
-            <div style={{ fontWeight: 800, fontSize: 16, color: '#0e3e3b', marginBottom: 8 }}>{dialog.title || 'Please confirm'}</div>
-            <div style={{ fontSize: 14, color: '#4b605b', lineHeight: 1.5, marginBottom: dialog.input ? 10 : 20 }}>{dialog.message}</div>
+        <div role="presentation" onClick={() => close(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.5)', zIndex: 3100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16, animation: 'dlg-fade 0.15s ease-out' }}>
+          <div role="alertdialog" aria-modal="true" aria-label={dialog.title || 'Please confirm'} onClick={(e) => e.stopPropagation()} style={{ background: '#fff', borderRadius: 14, padding: 22, width: 'min(440px, 100%)', boxShadow: '0 25px 60px rgba(15,23,42,0.3)', animation: 'dlg-in 0.18s ease-out' }}>
+            <div style={{ fontWeight: 800, fontSize: 16, color: '#0F172A', marginBottom: 8 }}>{dialog.title || 'Please confirm'}</div>
+            <div style={{ fontSize: 14, color: '#475569', lineHeight: 1.5, marginBottom: dialog.input ? 10 : 20 }}>{dialog.message}</div>
             {dialog.input && (
               <input value={promptText} onChange={(e) => setPromptText(e.target.value)} autoFocus aria-label={dialog.message} style={{ width: '100%', padding: '9px 12px', border: '1px solid #cfdcd8', borderRadius: 8, fontSize: 14, marginBottom: 20 }} />
             )}

@@ -97,13 +97,13 @@ export const BarGraphLab: React.FC<Props> = ({ onBackToLibrary }) => {
       mascotGreeting={
         activeBar !== null
           ? kit.t(
-              `${CATS[activeBar].np}: ${vals[activeBar]} (स्केल १ खण्ड = ${scale})`,
-              `${CATS[activeBar].en}: ${vals[activeBar]} (Scale 1 unit = ${scale})`
-            )
+            `${CATS[activeBar].np}: ${vals[activeBar]} (स्केल १ खण्ड = ${scale})`,
+            `${CATS[activeBar].en}: ${vals[activeBar]} (Scale 1 unit = ${scale})`
+          )
           : kit.t(
-              `स्तम्भ चित्र: १ खण्ड = ${scale}। स्तम्भमा ट्याप गरेर वा +/− थिचेर मान हेरौँ!`,
-              `Bar Graph: 1 block = ${scale}. Tap any bar or use +/− to adjust values!`
-            )
+            `स्तम्भ चित्र: १ खण्ड = ${scale}। स्तम्भमा ट्याप गरेर वा +/− थिचेर मान हेरौँ!`,
+            `Bar Graph: 1 block = ${scale}. Tap any bar or use +/− to adjust values!`
+          )
       }
       questions={questions}
       controls={

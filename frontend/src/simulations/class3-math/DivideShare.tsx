@@ -101,13 +101,13 @@ export const DivideShare: React.FC<Props> = ({ onBackToLibrary }) => {
       mascotGreeting={
         isDistributed
           ? kit.t(
-              `बराबर बाँडियो! हरेक थालमा ${quotient} वटा, बाँकी ${remainder} वटा।`,
-              `Shared equally! Each plate gets ${quotient}, with ${remainder} remainder.`
-            )
+            `बराबर बाँडियो! हरेक थालमा ${quotient} वटा, बाँकी ${remainder} वटा।`,
+            `Shared equally! Each plate gets ${quotient}, with ${remainder} remainder.`
+          )
           : kit.t(
-              `जम्मा ${n} वटा मिठाईलाई ${k} वटा थालमा बराबर बाँडौँ!`,
-              `Let's share ${n} sweets equally among ${k} plates!`
-            )
+            `जम्मा ${n} वटा मिठाईलाई ${k} वटा थालमा बराबर बाँडौँ!`,
+            `Let's share ${n} sweets equally among ${k} plates!`
+          )
       }
       questions={questions}
       controls={

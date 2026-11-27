@@ -23,7 +23,7 @@ const FEATURE_COLUMNS: [string, string][] = [['ASSIGNMENTS', 'Assignments'], ['Q
 
 type Tab = 'OVERVIEW' | 'PEOPLE' | 'ACCESS' | 'SUBSCRIPTION' | 'PROFILE';
 
-const card: React.CSSProperties = { background: '#fff', border: `1px solid ${C.line}`, borderRadius: 16, padding: 18, boxShadow: '0 2px 8px rgba(15,95,85,0.05)' };
+const card: React.CSSProperties = { background: '#fff', border: `1px solid ${C.line}`, borderRadius: 16, padding: 18, boxShadow: '0 2px 8px rgba(234,88,12,0.05)' };
 const fmt = (n: any) => (typeof n === 'number' ? n.toLocaleString('en-IN') : '—');
 
 const Kpi: React.FC<{ icon: React.ReactNode; label: string; value: any; sub?: string; color: string; onClick?: () => void; active?: boolean }> = ({ icon, label, value, sub, color, onClick, active }) => (
@@ -235,7 +235,7 @@ export const SuperAdminSchoolPage: React.FC = () => {
         <CartesianGrid strokeDasharray="3 3" stroke="#e5efeb" />
         <XAxis dataKey="grade" tick={{ fontSize: 11 }} interval={0} angle={-35} textAnchor="end" height={55} />
         <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
-        <Tooltip cursor={{ fill: 'rgba(17,122,107,0.08)' }} />
+        <Tooltip cursor={{ fill: 'rgba(234,88,12,0.08)' }} />
         <Bar dataKey="students" name="Students" radius={[6, 6, 0, 0]} onClick={(d: any) => setGradeFocus((g) => (g === d.grade ? null : d.grade))}>
           {gradeRows.map((r: any) => <Cell key={r.grade} fill={gradeFocus && gradeFocus !== r.grade ? '#bfe3da' : C.teal} cursor="pointer" />)}
         </Bar>

@@ -18,6 +18,7 @@ import { featureAccessRoutes } from './modules/feature-access/feature-access.rou
 import { adminRoutes } from './modules/admin/admin.routes';
 import { schoolAdminRoutes } from './modules/school-admin/school-admin.routes';
 import { teacherRoutes } from './modules/teacher/teacher.routes';
+import { teacherVaultRoutes } from './modules/teacher-vault/vault.routes';
 import { classTeacherRoutes } from './modules/class-teacher/class-teacher.routes';
 import { principalToolsRoutes } from './modules/principal-tools/principal-tools.routes';
 import { publicRoutes } from './modules/public/public.routes';
@@ -107,6 +108,7 @@ export function createApp() {
   v1.use('/admin', adminRoutes);
   v1.use('/school-admin', schoolAdminRoutes);
   v1.use('/school', schoolAdminRoutes);
+  v1.use('/teacher-vault', teacherVaultRoutes);
   v1.use('/teacher', teacherRoutes);
   v1.use('/class-teacher', classTeacherRoutes);
   v1.use('/principal-tools', principalToolsRoutes);

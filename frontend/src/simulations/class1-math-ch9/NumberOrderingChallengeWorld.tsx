@@ -482,41 +482,41 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
   }, [shopTargetNum]);
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header Bar */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
             title="Back to Chapter 9"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 font-semibold">
                 Class 1 • Math • Chapter 9
               </span>
               <span className="text-xs px-2 py-0.5 rounded-full bg-violet-500/20 text-violet-300 font-semibold">
                 Simulation 05
               </span>
             </div>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
               {language === 'np' ? 'सङ्ख्या मिलाउने चुनौती संसार (११ देखि २०)' : 'Number Ordering Challenge World'}
             </h1>
           </div>
         </div>
 
         {/* Village Station Selector */}
-        <div className="hidden lg:flex items-center gap-1 bg-slate-900/60 p-1 rounded-xl border border-slate-700/60 text-xs">
+        <div className="hidden lg:flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200/60 text-xs">
           <button
             onClick={() => {
               playSound('click');
               setActiveStation('SHOP');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              activeStation === 'SHOP' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              activeStation === 'SHOP' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Store className="w-3.5 h-3.5" />
@@ -528,7 +528,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               setActiveStation('COMPARE');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              activeStation === 'COMPARE' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              activeStation === 'COMPARE' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Mountain className="w-3.5 h-3.5" />
@@ -540,7 +540,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               setActiveStation('TRAIN');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              activeStation === 'TRAIN' ? 'bg-amber-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              activeStation === 'TRAIN' ? 'bg-amber-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <TrainTrack className="w-3.5 h-3.5" />
@@ -552,7 +552,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               setActiveStation('MASTER');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              activeStation === 'MASTER' ? 'bg-rose-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800'
+              activeStation === 'MASTER' ? 'bg-rose-600 text-white shadow-md' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Trophy className="w-3.5 h-3.5" />
@@ -564,10 +564,10 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setSoundEnabled((prev) => !prev)}
-            className="p-2 rounded-xl bg-slate-700/80 hover:bg-slate-700 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-100 transition text-slate-700"
             title={soundEnabled ? 'Mute' : 'Unmute'}
           >
-            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-400" /> : <VolumeX className="w-5 h-5 text-slate-400" />}
+            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
           <button
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
@@ -585,48 +585,48 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
         {/* ========================================================================= */}
         {activeStation === 'SHOP' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
               {/* Station Banner */}
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-indigo-400 tracking-wider">
                     {language === 'np' ? 'केन्द्र १: सङ्ख्या नाम पसल' : 'Station 1: Number Name Shop'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? 'सङ्ख्याको सही नेपाली नाम पत्ता लगाउनुहोस्!' : 'Find the correct word name!'}
                   </h3>
                 </div>
 
                 <button
                   onClick={handleNextShopTarget}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को सङ्ख्या' : 'Next Number'}
                 </button>
               </div>
 
               {/* Big Shop Numeral Display */}
-              <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-b from-slate-900 to-indigo-950/40 rounded-3xl border-2 border-indigo-500/40 shadow-inner">
-                <span className="text-xs text-indigo-300 font-bold uppercase tracking-wider mb-2">
+              <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-b from-sky-50 to-indigo-950/40 rounded-3xl border-2 border-indigo-500/40 shadow-inner">
+                <span className="text-xs text-indigo-700 font-bold uppercase tracking-wider mb-2">
                   {language === 'np' ? 'यो सङ्ख्याको नाम के हो?' : 'What is the name of this number?'}
                 </span>
-                <span className="text-7xl font-black text-amber-400 tracking-tight">
+                <span className="text-7xl font-black text-amber-700 tracking-tight">
                   {NEP_NUMERALS[shopTargetNum]}
                 </span>
-                <span className="text-sm font-semibold text-slate-400 mt-1">({shopTargetNum})</span>
+                <span className="text-sm font-semibold text-slate-500 mt-1">({shopTargetNum})</span>
               </div>
 
               {/* Word Name Cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {shopOptions.map((name) => {
                   const isCorrect = name === NEP_NAMES[shopTargetNum];
-                  let btnStyle = 'bg-slate-700/80 hover:bg-indigo-600/50 text-white';
+                  let btnStyle = 'bg-slate-100 hover:bg-indigo-600/50 text-slate-900';
 
                   if (shopAnswered) {
                     if (isCorrect) {
                       btnStyle = 'bg-emerald-600 text-white font-black shadow-lg shadow-emerald-500/30';
                     } else {
-                      btnStyle = 'bg-slate-800 text-slate-500 opacity-40';
+                      btnStyle = 'bg-white text-slate-500 opacity-40';
                     }
                   }
 
@@ -635,7 +635,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                       key={name}
                       disabled={shopAnswered}
                       onClick={() => handleShopSelectName(name)}
-                      className={`p-5 rounded-2xl text-xl font-bold transition flex items-center justify-center border border-slate-600 ${btnStyle}`}
+                      className={`p-5 rounded-2xl text-xl font-bold transition flex items-center justify-center border border-slate-300 ${btnStyle}`}
                     >
                       {name}
                     </button>
@@ -647,7 +647,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               {shopFeedback === 'success' && (
                 <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-emerald-200 text-sm font-bold flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-emerald-400" />
+                    <Sparkles className="w-5 h-5 text-emerald-700" />
                     <span>
                       {language === 'np'
                         ? `उत्कृष्ट! ${NEP_NUMERALS[shopTargetNum]} लाई "${NEP_NAMES[shopTargetNum]}" भनिन्छ।`
@@ -671,14 +671,14 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
         {/* ========================================================================= */}
         {activeStation === 'COMPARE' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
               {/* Station Banner */}
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="text-xs font-bold uppercase text-emerald-400 tracking-wider">
+                  <span className="text-xs font-bold uppercase text-emerald-700 tracking-wider">
                     {language === 'np' ? 'केन्द्र २: तुलना हिमाल' : 'Station 2: Comparison Mountain'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {compareMode === 'SMALLEST'
                       ? language === 'np'
                         ? 'सबैभन्दा सानो सङ्ख्या छान्नुहोस्!'
@@ -697,7 +697,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                       setCompareSelected(null);
                       setCompareFeedback('idle');
                     }}
-                    className="px-3 py-1.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs"
+                    className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs"
                   >
                     {compareMode === 'SMALLEST'
                       ? language === 'np'
@@ -725,7 +725,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                       ? num === Math.min(...compareNumbers)
                       : num === Math.max(...compareNumbers);
 
-                  let cardStyle = 'bg-slate-700/80 hover:bg-slate-700 text-white hover:scale-105';
+                  let cardStyle = 'bg-slate-100 hover:bg-slate-100 text-slate-900 hover:scale-105';
 
                   if (compareSelected !== null) {
                     if (isTarget) {
@@ -733,7 +733,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                     } else if (isSelected) {
                       cardStyle = 'bg-rose-600 text-white';
                     } else {
-                      cardStyle = 'bg-slate-800 text-slate-500 opacity-40';
+                      cardStyle = 'bg-white text-slate-500 opacity-40';
                     }
                   }
 
@@ -742,7 +742,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                       key={num}
                       disabled={compareSelected !== null}
                       onClick={() => handleComparePick(num)}
-                      className={`h-36 rounded-3xl flex flex-col items-center justify-center border border-slate-600 transition-all ${cardStyle}`}
+                      className={`h-36 rounded-3xl flex flex-col items-center justify-center border border-slate-300 transition-all ${cardStyle}`}
                     >
                       <span className="text-4xl font-black">{NEP_NUMERALS[num]}</span>
                       <span className="text-xs opacity-75 mt-1">({num})</span>
@@ -758,7 +758,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               {compareFeedback === 'success' && (
                 <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-emerald-200 text-sm font-bold flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                    <CheckCircle2 className="w-5 h-5 text-emerald-700" />
                     <span>
                       {language === 'np'
                         ? `स्याबास! ${NEP_NUMERALS[compareSelected!]} सबैभन्दा ${
@@ -786,14 +786,14 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
         {/* ========================================================================= */}
         {activeStation === 'TRAIN' && (
           <div className="flex-1 flex flex-col max-w-5xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
               {/* Banner */}
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="text-xs font-bold uppercase text-amber-400 tracking-wider">
+                  <span className="text-xs font-bold uppercase text-amber-700 tracking-wider">
                     {language === 'np' ? 'केन्द्र ३: क्रम मिलाउने रेल' : 'Station 3: Number Train'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {trainOrderMode === 'ASCENDING'
                       ? language === 'np'
                         ? 'सङ्ख्याहरूलाई बढ्दो क्रममा (सानोदेखि ठूलो) मिलाउनुहोस्!'
@@ -823,8 +823,8 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               </div>
 
               {/* Train Carriages (Slots) */}
-              <div className="bg-slate-900/80 p-6 rounded-3xl border border-amber-500/30 flex flex-col items-center gap-4">
-                <span className="text-xs text-amber-400 font-bold uppercase tracking-wider">
+              <div className="bg-slate-50 p-6 rounded-3xl border border-amber-500/30 flex flex-col items-center gap-4">
+                <span className="text-xs text-amber-700 font-bold uppercase tracking-wider">
                   {trainOrderMode === 'ASCENDING'
                     ? language === 'np'
                       ? 'सानो → → → ठूलो'
@@ -842,10 +842,10 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                       className={`w-20 h-24 md:w-24 md:h-28 rounded-2xl border-2 flex flex-col items-center justify-center font-black transition-all ${
                         slotNum !== null
                           ? 'bg-amber-500 text-slate-950 border-amber-300 shadow-lg scale-105'
-                          : 'bg-slate-800/80 border-dashed border-slate-600 text-slate-500 hover:border-amber-400'
+                          : 'bg-white border-dashed border-slate-300 text-slate-500 hover:border-amber-400'
                       }`}
                     >
-                      <span className="text-xs text-slate-400 font-medium block mb-1">
+                      <span className="text-xs text-slate-500 font-medium block mb-1">
                         {language === 'np' ? `डिब्बा ${NEP_NUMERALS[idx + 1]}` : `Car ${idx + 1}`}
                       </span>
                       {slotNum !== null ? (
@@ -865,7 +865,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
 
               {/* Available Pool of Numbers */}
               <div className="flex flex-col items-center gap-2">
-                <span className="text-xs text-slate-400 font-bold uppercase">
+                <span className="text-xs text-slate-500 font-bold uppercase">
                   {language === 'np' ? 'रेलमा राख्न सङ्ख्या छान्नुहोस्:' : 'Pick a number to load into the train:'}
                 </span>
                 <div className="flex flex-wrap items-center justify-center gap-3">
@@ -873,7 +873,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                     <button
                       key={num}
                       onClick={() => handleTrainPlaceNumber(num)}
-                      className="w-14 h-14 rounded-2xl bg-slate-700 hover:bg-amber-500 hover:text-slate-950 text-white font-black text-xl flex flex-col items-center justify-center transition-all transform hover:scale-110 shadow-md border border-slate-600"
+                      className="w-14 h-14 rounded-2xl bg-slate-100 hover:bg-amber-500 hover:text-slate-950 text-slate-900 font-black text-xl flex flex-col items-center justify-center transition-all transform hover:scale-110 shadow-md border border-slate-300"
                     >
                       <span>{NEP_NUMERALS[num]}</span>
                     </button>
@@ -882,10 +882,10 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               </div>
 
               {/* Action Buttons & Feedback */}
-              <div className="flex items-center justify-between gap-4 pt-2 border-t border-slate-700">
+              <div className="flex items-center justify-between gap-4 pt-2 border-t border-slate-200">
                 <button
                   onClick={handleTrainReset}
-                  className="px-4 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-300 font-bold text-xs transition"
+                  className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs transition"
                 >
                   <RotateCcw className="w-4 h-4 inline mr-1" />
                   {language === 'np' ? 'पुनः मिलाउनुहोस्' : 'Reset'}
@@ -901,7 +901,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
 
               {trainFeedback === 'success' && (
                 <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-emerald-200 text-sm font-bold flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-emerald-400" />
+                  <Sparkles className="w-5 h-5 text-emerald-700" />
                   <span>
                     {language === 'np'
                       ? 'स्याबास! सबै सङ्ख्याहरू ठीक क्रममा मिलेका छन्!'
@@ -929,9 +929,9 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
         {activeStation === 'MASTER' && (
           <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full justify-center">
             {!masterCompleted ? (
-              <div className="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
                 {/* Header */}
-                <div className="flex items-center justify-between text-xs text-slate-400 border-b border-slate-700 pb-3">
+                <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-200 pb-3">
                   <span className="font-bold text-rose-400">
                     {language === 'np'
                       ? `प्रश्न ${NEP_NUMERALS[masterIdx + 1]} / ${NEP_NUMERALS[masterQuestions.length]}`
@@ -943,12 +943,12 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                 </div>
 
                 {/* Station Tag */}
-                <span className="text-xs text-slate-400 font-semibold">
+                <span className="text-xs text-slate-500 font-semibold">
                   {masterQuestions[masterIdx].station}
                 </span>
 
                 {/* Question */}
-                <h3 className="text-xl md:text-2xl font-black text-white">
+                <h3 className="text-xl md:text-2xl font-black text-slate-900">
                   {language === 'np'
                     ? masterQuestions[masterIdx].questionNp
                     : masterQuestions[masterIdx].questionEn}
@@ -959,7 +959,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                   {masterQuestions[masterIdx].options.map((opt) => {
                     const isSelected = masterSelected === opt;
                     const isCorrectOpt = opt === masterQuestions[masterIdx].correct;
-                    let btnStyle = 'bg-slate-700/80 hover:bg-slate-700 text-white';
+                    let btnStyle = 'bg-slate-100 hover:bg-slate-100 text-slate-900';
 
                     if (masterAnswered) {
                       if (isCorrectOpt) {
@@ -967,7 +967,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                       } else if (isSelected) {
                         btnStyle = 'bg-rose-600 text-white font-black';
                       } else {
-                        btnStyle = 'bg-slate-800 text-slate-500 opacity-50';
+                        btnStyle = 'bg-white text-slate-500 opacity-50';
                       }
                     }
 
@@ -976,7 +976,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                         key={opt}
                         disabled={masterAnswered}
                         onClick={() => handleMasterAnswer(opt)}
-                        className={`p-4 rounded-2xl text-lg font-bold transition flex items-center justify-center border border-slate-600 ${btnStyle}`}
+                        className={`p-4 rounded-2xl text-lg font-bold transition flex items-center justify-center border border-slate-300 ${btnStyle}`}
                       >
                         {opt}
                       </button>
@@ -986,8 +986,8 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
 
                 {/* Explanation */}
                 {masterAnswered && (
-                  <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700 text-xs text-slate-300">
-                    <p className="font-bold text-amber-400 mb-1">
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+                    <p className="font-bold text-amber-700 mb-1">
                       {language === 'np' ? 'व्याख्या:' : 'Explanation:'}
                     </p>
                     <p>
@@ -1011,16 +1011,16 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
               </div>
             ) : (
               /* Finish Card */
-              <div className="bg-slate-800/95 border-2 border-rose-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
+              <div className="bg-white border-2 border-rose-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
                 <div className="w-20 h-20 rounded-full bg-rose-500/20 flex items-center justify-center">
                   <Award className="w-10 h-10 text-rose-400" />
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-black text-white">
+                  <h3 className="text-2xl font-black text-slate-900">
                     {language === 'np' ? 'बधाई छ! महा-चुनौती पूरा भयो!' : 'Congratulations! Master Challenge Complete!'}
                   </h3>
-                  <p className="text-slate-400 text-xs mt-1">
+                  <p className="text-slate-500 text-xs mt-1">
                     {language === 'np'
                       ? 'तपाईंले कक्षा १ अध्याय ९ सम्बन्धी सम्पूर्ण ज्ञान प्रमाणित गर्नुभयो।'
                       : 'You have mastered numbers 11 to 20, ordering, comparison, and number names.'}
@@ -1034,7 +1034,7 @@ export const NumberOrderingChallengeWorld: React.FC<Props> = ({
                 <div className="flex gap-3 w-full">
                   <button
                     onClick={handleMasterReset}
-                    className="flex-1 py-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                    className="flex-1 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                   >
                     {language === 'np' ? 'पुनः परीक्षा दिनुहोस्' : 'Retake Challenge'}
                   </button>

@@ -169,7 +169,7 @@ export const InstitutionManagementModal: React.FC<InstitutionManagementModalProp
       style={{
         position: 'fixed',
         inset: 0,
-        background: 'rgba(14, 62, 59, 0.65)',
+        background: 'rgba(15,23,42, 0.65)',
         backdropFilter: 'blur(4px)',
         display: 'flex',
         alignItems: 'center',

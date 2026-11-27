@@ -11,7 +11,7 @@ const card: React.CSSProperties = {
   border: '1px solid #dcebe6',
   borderRadius: '16px',
   padding: '20px 22px',
-  boxShadow: '0 1px 3px rgba(14, 62, 59, 0.04)',
+  boxShadow: '0 1px 3px rgba(15,23,42, 0.04)',
 };
 
 const scoreColor = (p: number) => (p >= 80 ? '#6d4fd6' : p >= 60 ? '#a08be6' : p >= 40 ? '#f1b434' : '#e5533d');
@@ -81,7 +81,7 @@ export const StudentSnapshot: React.FC<Props> = ({ attendance, results }) => {
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
                 <XAxis dataKey="name" tickLine={false} axisLine={false} interval={0} tick={{ fontSize: 11 }} />
                 <YAxis domain={[0, 100]} tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
-                <Tooltip formatter={(v: any) => [`${v}%`, 'Average']} cursor={{ fill: 'rgba(31,181,137,0.06)' }} />
+                <Tooltip formatter={(v: any) => [`${v}%`, 'Average']} cursor={{ fill: 'rgba(234,88,12,0.06)' }} />
                 <Bar dataKey="score" radius={[8, 8, 0, 0]} animationDuration={900}>
                   {subjectData.map((d) => (
                     <Cell key={d.name} fill={scoreColor(d.score)} />

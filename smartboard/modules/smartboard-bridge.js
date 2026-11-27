@@ -95,6 +95,11 @@
       } catch (e) {}
     }
 
+    if (vaultId) {
+      presentVaultItem(vaultId);
+      return;
+    }
+
     if (pdfUrl && typeof WorkspaceSplit !== 'undefined' && typeof WorkspaceSplit.openEmbed === 'function') {
       var embedPdf = pdfUrl + '#page=' + pageNumber + '&zoom=100';
       WorkspaceSplit.openEmbed(embedPdf, sessionTitle + ' (Textbook PDF)');
@@ -308,6 +313,7 @@
     var html = '';
     html += '<span style="font-size:11px;font-weight:700;color:#38bdf8;padding:0 6px;border-right:1px solid #334155;white-space:nowrap;">🇳🇵 ' + (sessionTitle.slice(0, 18) || 'Smart Board') + '</span>';
     html += '<button id="pd-btn-cloud-save" title="Save notes to school cloud and share with students" style="display:flex;align-items:center;gap:4px;background:#2563eb;color:#ffffff;border:none;border-radius:16px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;">☁️ Save</button>';
+    html += '<button id="pd-btn-vault" title="Open your Teaching Vault" style="display:flex;align-items:center;gap:4px;background:#0f766e;color:#ffffff;border:none;border-radius:16px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;">📁 Vault</button>';
     html += '<button id="pd-btn-cloud-load" title="Load saved notes" style="display:flex;align-items:center;gap:4px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:16px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;">📂 Notes</button>';
     if (sessionId) {
       html += '<button id="pd-btn-end-session" title="End classroom teaching session" style="display:flex;align-items:center;gap:4px;background:#991b1b;color:#fecaca;border:none;border-radius:16px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;">⏹️ End</button>';
@@ -318,6 +324,7 @@
     document.getElementById('pd-btn-cloud-save')?.addEventListener('click', function () {
       saveCloudAnnotations(true);
     });
+    document.getElementById('pd-btn-vault')?.addEventListener('click', function () { openVaultPanel(); });
     document.getElementById('pd-btn-cloud-load')?.addEventListener('click', function () {
       openCloudAnnotationsModal();
     });
@@ -346,9 +353,127 @@
     } catch (e) {}
   });
 
+  // 7. Teaching Vault: the teacher's own PDFs, slides, Word files, videos and pictures, organised by unit and topic
+  var vaultId = params.get('vault') || '';
+  var vaultSectionId = params.get('sectionId') || '';
+  var vaultSubjectId = params.get('subjectId') || '';
+
+  function vaultToast(msg) {
+    if (window.App && typeof App.showToast === 'function') App.showToast(msg);
+  }
+
+  async function presentVaultItem(id) {
+    try {
+      var res = await fetch('/api/v1/teacher-vault/' + encodeURIComponent(id) + '/present', { headers: getHeaders() });
+      var body = await res.json();
+      if (!res.ok || !body.success) throw new Error(body.message || 'Could not open this file');
+      var item = body.data;
+      vaultToast('Opening "' + item.title + '"...');
+      if (item.mode === 'DECK' && window.PptPresenter && typeof PptPresenter.handleFileSelect === 'function') {
+        var fileRes = await fetch(item.fileUrl);
+        if (!fileRes.ok) throw new Error('The file could not be downloaded');
+        var blob = await fileRes.blob();
+        var file = new File([blob], item.originalFilename, { type: blob.type || '' });
+        await PptPresenter.handleFileSelect({ target: { files: [file] } });
+      } else if (typeof WorkspaceSplit !== 'undefined' && typeof WorkspaceSplit.openEmbed === 'function') {
+        if (!WorkspaceSplit.openEmbed(item.embedUrl, item.title)) throw new Error('This file could not be shown on the board');
+      } else {
+        window.open(item.embedUrl, '_blank');
+      }
+      closeVaultPanel();
+    } catch (e) {
+      vaultToast('Could not open the file: ' + (e && e.message ? e.message : e));
+    }
+  }
+
+  function closeVaultPanel() {
+    var p = document.getElementById('pd-vault-panel');
+    if (p) p.remove();
+  }
+
+  var VAULT_ICON = { PDF: '📕', PRESENTATION: '📊', DOCUMENT: '📄', VIDEO: '🎬', AUDIO: '🎧', IMAGE: '🖼️', SPREADSHEET: '📈', TEXT: '📝', OTHER: '📎' };
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  async function openVaultPanel() {
+    closeVaultPanel();
+    var panel = document.createElement('div');
+    panel.id = 'pd-vault-panel';
+    panel.style.cssText = 'position:fixed;top:56px;right:16px;width:380px;max-height:78vh;z-index:99998;background:#ffffff;color:#1d2b27;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.35);border:1px solid #dcebe6;display:flex;flex-direction:column;overflow:hidden;font-family:Inter,system-ui,sans-serif;';
+    panel.innerHTML =
+      '<div style="padding:14px 16px;background:#0f5f55;color:#fff;display:flex;justify-content:space-between;align-items:center;">' +
+      '<div><div style="font-size:14px;font-weight:800;">📁 Teaching Vault</div><div style="font-size:11px;opacity:.85;">Tap a file to teach it on the board</div></div>' +
+      '<button id="pd-vault-close" style="background:rgba(255,255,255,.18);border:none;color:#fff;border-radius:8px;width:28px;height:28px;cursor:pointer;font-size:14px;">✕</button></div>' +
+      '<div style="padding:10px 14px;border-bottom:1px solid #e3efeb;"><input id="pd-vault-search" placeholder="Search unit, topic or file" style="width:100%;padding:8px 10px;border:1px solid #cfe0db;border-radius:8px;font-size:13px;box-sizing:border-box;"></div>' +
+      '<div id="pd-vault-body" style="overflow-y:auto;padding:10px 14px 16px;font-size:13px;">Loading...</div>';
+    document.body.appendChild(panel);
+    document.getElementById('pd-vault-close').addEventListener('click', closeVaultPanel);
+
+    var items = [];
+    try {
+      if (!vaultSectionId || !vaultSubjectId) throw new Error('Open the board from a class to see its vault.');
+      var res = await fetch('/api/v1/teacher-vault?sectionId=' + encodeURIComponent(vaultSectionId) + '&centralSubjectId=' + encodeURIComponent(vaultSubjectId), { headers: getHeaders() });
+      var body = await res.json();
+      if (!res.ok || !body.success) throw new Error(body.message || 'Could not load the vault');
+      items = body.data || [];
+    } catch (e) {
+      document.getElementById('pd-vault-body').innerHTML = '<div style="color:#991b1b;">' + esc(e.message) + '</div>';
+      return;
+    }
+
+    function render(filter) {
+      var q = (filter || '').toLowerCase();
+      var list = items.filter(function (i) { return !q || (i.title + ' ' + i.unitTitle + ' ' + i.topic).toLowerCase().indexOf(q) >= 0; });
+      var bodyEl = document.getElementById('pd-vault-body');
+      if (!list.length) {
+        bodyEl.innerHTML = '<div style="color:#5f736f;">' + (items.length ? 'Nothing matches your search.' : 'No materials yet. Upload files from the Teacher Dashboard under Secure Vault.') + '</div>';
+        return;
+      }
+      var units = {};
+      list.forEach(function (i) {
+        var uk = (i.unitNumber ? 'Unit ' + i.unitNumber + ': ' : '') + i.unitTitle;
+        units[uk] = units[uk] || {};
+        var tk = i.topic || 'General';
+        (units[uk][tk] = units[uk][tk] || []).push(i);
+      });
+      var html = '';
+      Object.keys(units).forEach(function (u) {
+        html += '<div style="font-weight:800;color:#0f4c4a;margin:10px 0 4px;">' + esc(u) + '</div>';
+        Object.keys(units[u]).forEach(function (t) {
+          html += '<div style="font-size:11px;font-weight:700;color:#6b7f7a;text-transform:uppercase;letter-spacing:.04em;margin:6px 0 3px;">' + esc(t) + '</div>';
+          units[u][t].forEach(function (i) {
+            html += '<button data-vault-id="' + esc(i.id) + '" style="display:flex;width:100%;align-items:center;gap:8px;text-align:left;padding:8px 10px;margin-bottom:4px;background:#f4faf8;border:1px solid #dcebe6;border-radius:10px;cursor:pointer;font-size:13px;color:#1d2b27;"><span style="font-size:18px;">' + (VAULT_ICON[i.kind] || '📎') + '</span><span style="flex:1;min-width:0;"><span style="display:block;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + esc(i.title) + '</span><span style="font-size:11px;color:#5f736f;">' + esc((i.extension || '').toUpperCase()) + '</span></span><span style="color:#0f5f55;font-weight:800;font-size:12px;">Teach ▶</span></button>';
+          });
+        });
+      });
+      bodyEl.innerHTML = html;
+      bodyEl.querySelectorAll('[data-vault-id]').forEach(function (b) {
+        b.addEventListener('click', function () { presentVaultItem(b.getAttribute('data-vault-id')); });
+      });
+    }
+    render('');
+    document.getElementById('pd-vault-search').addEventListener('input', function (e) { render(e.target.value); });
+  }
+
+  // A standalone button: the cloud pill is hidden by the school session bar, so the vault gets its own
+  function mountVaultButton() {
+    if (!vaultSectionId || !vaultSubjectId || document.getElementById('pd-vault-fab')) return;
+    var b = document.createElement('button');
+    b.id = 'pd-vault-fab';
+    b.type = 'button';
+    b.title = 'Open your Teaching Vault';
+    b.style.cssText = 'position:fixed;top:64px;right:14px;z-index:9500;display:flex;align-items:center;gap:6px;background:#0f766e;color:#ffffff;border:none;border-radius:20px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.3);font-family:Inter,system-ui,sans-serif;';
+    b.innerHTML = '📁 Vault';
+    b.addEventListener('click', function () { openVaultPanel(); });
+    document.body.appendChild(b);
+  }
+
   // Initialization after DOM ready
   function start() {
     mountCloudSyncBar();
+    mountVaultButton();
     setTimeout(initSessionResource, 500);
   }
 

@@ -90,7 +90,7 @@ export const SimulationPreviewModal: React.FC<SimulationPreviewModalProps> = ({
                 textTransform: 'uppercase',
               }}
             >
-              {simulation.simulationType?.replace('_', ' ') || '3D WEBGL'}
+              {simulation.simulationType?.replace('_', ' ') || 'INTERACTIVE'}
             </span>
             <span
               style={{
@@ -185,11 +185,11 @@ export const SimulationPreviewModal: React.FC<SimulationPreviewModalProps> = ({
                 fontSize: '14px',
                 fontWeight: '800',
                 cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(17, 122, 107, 0.25)',
+                boxShadow: '0 4px 12px rgba(234,88,12, 0.25)',
               }}
             >
               <Play size={16} fill="#ffffff" />
-              <span>Launch 3D Simulation</span>
+              <span>Launch Simulation</span>
             </button>
 
             {onLaunchSmartBoard && (

@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <base href="/smartboard/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://generativelanguage.googleapis.com; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://generativelanguage.googleapis.com; img-src 'self' data: blob:; worker-src 'self' blob:; frame-src 'self' blob:; media-src 'self' blob:; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
   <title>Nepal Digital Education · Smart Board</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/app.css?v=2.2.6">
-  <link rel="stylesheet" href="styles/games.css?v=3.2.0">
+  <link rel="stylesheet" href="styles/games.css?v=3.4.0">
 </head>
 <body class="smartboard-mode">
 
@@ -1076,11 +1076,11 @@
 <script src="tools/clipboard.js?v=2.2.1"></script>
 <script src="tools/simulation-ai-context.js?v=2.2.1"></script>
 <script src="tools/ai-assistant.js?v=2.2.1"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="assets/vendor/jszip.min.js"></script>
+<script src="assets/vendor/pdf.min.js"></script>
 <script>
   if (window.pdfjsLib) {
-    window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/vendor/pdf.worker.min.js';
   }
 </script>
 <script src="chapters/calculators.js"></script>
@@ -3054,6 +3054,8 @@ window.Library = Library;
 <script src="tools/games/games-circle.js?v=2.1.0"></script>
 <script src="tools/games/games-path.js?v=2.1.0"></script>
 <script src="tools/games/games-race.js?v=2.1.0"></script>
+<script src="tools/games/tug-engine.js?v=1.0.0"></script>
+<script src="tools/games/games-tugofwar.js?v=1.0.0"></script>
 <script src="modules/smartboard-bridge.js"></script>
 <script src="modules/smartboard-ai.js"></script>
 </body>

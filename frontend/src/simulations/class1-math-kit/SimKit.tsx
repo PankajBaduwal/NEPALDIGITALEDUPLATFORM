@@ -95,50 +95,53 @@ export const SimFrame: React.FC<FrameProps> = ({ kit, onBack, panel, hud, modes 
   const { lang, bubble, toast } = kit;
   const L = (np: string, en: string) => (lang === 'ne' ? np : en);
   return (
-    <div style={{ width: '100%', height: '100%', minHeight: '88vh', display: 'flex', flexDirection: 'column', background: '#f0f9ff', fontFamily: FONT_NP, color: '#0f172a' }}>
+    <div style={{ width: '100%', height: '100%', minHeight: '88vh', display: 'flex', flexDirection: 'column', background: '#F5F7F8', fontFamily: FONT_NP, color: '#263746' }}>
       <style>{css}</style>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 12px', background: 'linear-gradient(90deg,#0f766e,#0ea5e9)', color: '#fff', flexWrap: 'wrap' }}>
-        <button className="sim-btn" onClick={onBack} style={{ background: 'rgba(255,255,255,.2)', color: '#fff', padding: '8px 12px', fontSize: 14, display: 'inline-flex', alignItems: 'center', gap: 6 }}><ArrowLeft size={16} /> {L('फर्कनुहोस्', 'Back')}</button>
+      <header style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 20px', background: '#142D4E', color: '#fff', borderBottom: '3px solid #167C80', flexWrap: 'wrap' }}>
+        <button className="sim-btn" onClick={onBack} style={{ background: 'rgba(255,255,255,.14)', color: '#fff', border: '1px solid rgba(255,255,255,.2)', padding: '7px 13px', borderRadius: 10, fontSize: 13.5, display: 'inline-flex', alignItems: 'center', gap: 6 }}><ArrowLeft size={15} /> {L('फर्कनुहोस्', 'Back')}</button>
         <div style={{ flex: 1, minWidth: 160 }}>
-          <div style={{ fontSize: 12, opacity: 0.9, fontWeight: 700 }}>{L('कक्षा १ • गणित • अध्याय', 'Class 1 • Maths • Chapter')} {lang === 'ne' ? toNp(kit.cfg.chapter) : kit.cfg.chapter}</div>
-          <div style={{ fontSize: 18, fontWeight: 900, lineHeight: 1.2 }}>{lang === 'ne' ? kit.cfg.titleNp : kit.cfg.titleEn}</div>
+          <div style={{ fontSize: 11, color: '#9FCBCD', fontWeight: 700 }}>{L('कक्षा १ • गणित • अध्याय', 'Class 1 • Maths • Chapter')} {lang === 'ne' ? toNp(kit.cfg.chapter) : kit.cfg.chapter}</div>
+          <div style={{ fontSize: 17.5, fontWeight: 800, lineHeight: 1.25 }}>{lang === 'ne' ? kit.cfg.titleNp : kit.cfg.titleEn}</div>
         </div>
         {extra}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'rgba(255,255,255,.22)', padding: '6px 12px', borderRadius: 20, fontWeight: 900 }}><Star size={16} fill="#fde047" color="#fde047" /> {lang === 'ne' ? toNp(kit.stars) : kit.stars}</div>
-        <button className="sim-btn" onClick={() => kit.setLang(lang === 'ne' ? 'en' : 'ne')} style={{ background: 'rgba(255,255,255,.2)', color: '#fff', padding: '8px 12px', fontSize: 14 }}>{lang === 'ne' ? 'EN' : 'नेपाली'}</button>
-        <button className="sim-btn" aria-label="sound" onClick={() => kit.setMuted(!kit.muted)} style={{ background: 'rgba(255,255,255,.2)', color: '#fff', padding: '8px 10px' }}>{kit.muted ? <VolumeX size={18} /> : <Volume2 size={18} />}</button>
-      </div>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(217,164,65,.2)', border: '1px solid rgba(217,164,65,.45)', color: '#F3E2B5', padding: '6px 12px', borderRadius: 999, fontWeight: 800, fontSize: 13.5 }}><Star size={15} fill="#D9A441" color="#D9A441" /> {lang === 'ne' ? toNp(kit.stars) : kit.stars}</div>
+        <button className="sim-btn" onClick={() => kit.setLang(lang === 'ne' ? 'en' : 'ne')} style={{ background: '#167C80', color: '#fff', padding: '7px 14px', borderRadius: 10, fontSize: 13 }}>{lang === 'ne' ? 'English' : 'नेपाली'}</button>
+        <button className="sim-btn" aria-label="sound" onClick={() => kit.setMuted(!kit.muted)} style={{ background: 'rgba(255,255,255,.14)', border: '1px solid rgba(255,255,255,.18)', color: '#fff', padding: '7px 10px', borderRadius: 10 }}>{kit.muted ? <VolumeX size={17} /> : <Volume2 size={17} />}</button>
+      </header>
 
-      <div style={{ position: 'relative', flex: 1, minHeight: 320 }}>
-        <div ref={kit.stageRef} style={{ position: 'absolute', inset: 0 }} />
-        {(bubble.np || bubble.en) && (
-          <div style={{ position: 'absolute', left: 10, top: 10, maxWidth: 'min(440px, 70%)', display: 'flex', gap: 8, alignItems: 'flex-start', animation: 'simPop .3s' }}>
-            <div style={{ fontSize: 34, animation: 'simBob 2s infinite' }}>🐻</div>
-            <div style={{ background: '#fff', border: '3px solid #0ea5e9', borderRadius: 18, padding: '8px 12px', fontSize: 16, fontWeight: 800, lineHeight: 1.35, boxShadow: '0 4px 10px rgba(0,0,0,.12)', cursor: 'pointer' }} onClick={() => kit.say(bubble.np, bubble.en)} title="🔊">
-              {L(bubble.np, bubble.en)} <span style={{ opacity: 0.6 }}>🔊</span>
-            </div>
-          </div>
-        )}
-        {hud && <div style={{ position: 'absolute', top: 10, right: 10, textAlign: 'right', pointerEvents: 'none' }}>{hud}</div>}
-        {toast && (
-          <div style={{ position: 'absolute', left: '50%', top: '38%', transform: 'translateX(-50%)', background: toast.ok ? '#16a34a' : '#f97316', color: '#fff', padding: '14px 28px', borderRadius: 24, fontSize: 28, fontWeight: 900, boxShadow: '0 8px 24px rgba(0,0,0,.25)', animation: toast.ok ? 'simPop .35s' : 'simShake .4s', pointerEvents: 'none', whiteSpace: 'nowrap' }}>
-            {toast.ok ? '⭐ ' : '🤔 '}{L(toast.np, toast.en)}
-          </div>
-        )}
-      </div>
-
-      <div style={{ background: '#fff', borderTop: '3px solid #bae6fd', padding: '8px 12px 12px' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
+      <div style={{ background: '#FFFFFF', borderBottom: '1px solid #E2E8F0', padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {modes.map((m) => {
-            const [np, en, ic] = MODE_LABEL[m];
+            const [np, en] = MODE_LABEL[m];
             const on = kit.mode === m;
             return (
-              <button key={m} className="sim-btn" onClick={() => kit.setMode(m)} style={{ padding: '8px 16px', fontSize: 16, background: on ? '#0ea5e9' : '#e0f2fe', color: on ? '#fff' : '#075985', boxShadow: on ? '0 3px 0 #0369a1' : 'none' }}>{ic} {L(np, en)}</button>
+              <button key={m} className="sim-btn" onClick={() => kit.setMode(m)} style={{ padding: '7px 15px', fontSize: 13.5, borderRadius: 9, border: on ? '1px solid #142D4E' : '1px solid #CBD5E1', background: on ? '#142D4E' : '#F8FAFC', color: on ? '#fff' : '#334155' }}>{L(np, en)}</button>
             );
           })}
         </div>
-        {panel}
+        {(bubble.np || bubble.en) && (
+          <button type="button" onClick={() => kit.say(bubble.np, bubble.en)} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#E8F1F1', border: '1px solid #CFE3E4', borderRadius: 10, padding: '6px 12px', fontSize: 13, fontWeight: 700, color: '#142D4E', cursor: 'pointer' }}>
+            <Volume2 size={15} color="#167C80" />
+            <span>{L(bubble.np, bubble.en)}</span>
+          </button>
+        )}
       </div>
+
+      <div style={{ position: 'relative', flex: 1, minHeight: 340, margin: '14px 20px 0', background: '#FFFFFF', borderRadius: 16, border: '1px solid #E2E8F0', boxShadow: '0 4px 16px -6px rgba(15,23,42,.06)', overflow: 'hidden' }}>
+        <div ref={kit.stageRef} style={{ position: 'absolute', inset: 0 }} />
+        {hud && <div style={{ position: 'absolute', top: 12, right: 14, textAlign: 'right', pointerEvents: 'none' }}>{hud}</div>}
+        {toast && (
+          <div style={{ position: 'absolute', left: '50%', top: 18, transform: 'translateX(-50%)', background: toast.ok ? '#167C80' : '#D97706', color: '#fff', padding: '10px 24px', borderRadius: 999, fontSize: 16, fontWeight: 800, boxShadow: '0 8px 24px rgba(15,23,42,.2)', animation: toast.ok ? 'simPop .25s' : 'simShake .35s', pointerEvents: 'none', whiteSpace: 'nowrap' }}>
+            {L(toast.np, toast.en)}
+          </div>
+        )}
+      </div>
+
+      {panel && (
+        <div style={{ margin: '12px 20px 16px', background: '#fff', border: '1px solid #E2E8F0', borderRadius: 14, padding: '14px 18px', boxShadow: '0 2px 6px rgba(15,23,42,.04)' }}>
+          {panel}
+        </div>
+      )}
     </div>
   );
 };
@@ -213,11 +216,13 @@ export const QuizPanel: React.FC<QuizProps> = ({ kit, questions, resetKey, onAsk
         {q.options.map((o) => {
           const isPicked = picked === o.key;
           const isAns = reveal === o.key;
+          const ok = isAns || (isPicked && o.key === q.answer);
           const bad = isPicked && o.key !== q.answer;
-          const bg = isAns || (isPicked && o.key === q.answer) ? '#22c55e' : bad ? '#fb923c' : '#fef3c7';
-          const fg = isAns || (isPicked && o.key === q.answer) || bad ? '#fff' : '#78350f';
+          const bg = ok ? '#167C80' : bad ? '#DC2626' : '#FFFFFF';
+          const fg = ok || bad ? '#FFFFFF' : '#142D4E';
+          const border = ok ? '1.5px solid #167C80' : bad ? '1.5px solid #DC2626' : '1.5px solid #CBD5E1';
           return (
-            <button key={o.key} className="sim-btn" onClick={() => choose(o.key)} style={{ ...bigBtn(bg, fg), minWidth: 92, fontSize: 24, animation: bad ? 'simShake .4s' : undefined, border: '3px solid rgba(0,0,0,.06)' }}>{o.label}</button>
+            <button key={o.key} className="sim-btn" onClick={() => choose(o.key)} style={{ padding: '10px 20px', minHeight: 48, minWidth: 88, borderRadius: 10, background: bg, color: fg, border, fontSize: 18, fontWeight: 800, animation: bad ? 'simShake .35s' : undefined, boxShadow: '0 1px 3px rgba(15,23,42,.06)' }}>{o.label}</button>
           );
         })}
       </div>

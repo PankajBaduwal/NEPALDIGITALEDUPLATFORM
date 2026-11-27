@@ -248,8 +248,8 @@ export const ZeroChallenge: React.FC<Props> = ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)',
-        color: '#0f172a',
+        background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
+        color: '#26332E',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -260,7 +260,7 @@ export const ZeroChallenge: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgba(255, 255, 255, 0.95)',
+          background: 'rgba(255,255,255,0.9)',
           borderBottom: '1px solid rgba(129, 140, 248, 0.3)',
         }}
       >
@@ -272,10 +272,10 @@ export const ZeroChallenge: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '10px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 600,
               fontSize: '14px',
@@ -286,10 +286,10 @@ export const ZeroChallenge: React.FC<Props> = ({
           </button>
 
           <div>
-            <div style={{ fontSize: '11px', color: '#a5b4fc', textTransform: 'uppercase', fontWeight: 800 }}>
+            <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
               कक्षा १ • गणित • अध्याय ५ : शून्य (Zero)
             </div>
-            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#f0fdfa' }}>
+            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
                 ? 'सिमुलेसन ०५: शून्यको खेल (Zero Challenge)'
                 : 'Simulation 05: Zero Challenge'}
@@ -308,7 +308,7 @@ export const ZeroChallenge: React.FC<Props> = ({
               border: '1px solid rgba(245, 158, 11, 0.4)',
               padding: '6px 14px',
               borderRadius: '20px',
-              color: '#fef08a',
+              color: '#26332E',
               fontWeight: 800,
             }}
           >
@@ -320,10 +320,10 @@ export const ZeroChallenge: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: '#e2e8f0',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 700,
               fontSize: '13px',
@@ -336,10 +336,10 @@ export const ZeroChallenge: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: soundEnabled ? '#a5b4fc' : '#94a3b8',
+              color: soundEnabled ? '#a5b4fc' : '#26332E',
               cursor: 'pointer',
             }}
           >
@@ -355,7 +355,7 @@ export const ZeroChallenge: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '12px',
           padding: '12px 16px',
-          background: '#f8fafc',
+          background: 'rgba(255,255,255,0.9)',
           borderBottom: '1px solid rgba(129, 140, 248, 0.2)',
         }}
       >
@@ -372,9 +372,9 @@ export const ZeroChallenge: React.FC<Props> = ({
                 gap: '6px',
                 padding: '6px 16px',
                 borderRadius: '12px',
-                background: isCurrent ? '#4f46e5' : isPassed ? 'rgba(16, 185, 129, 0.3)' : 'rgba(30, 41, 59, 0.6)',
+                background: isCurrent ? '#4f46e5' : isPassed ? 'rgba(16, 185, 129, 0.3)' : '#F1F5F9',
                 border: isCurrent ? '2px solid #a5b4fc' : '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#ffffff',
+                color: '#26332E',
                 fontWeight: 700,
                 fontSize: '12px',
               }}
@@ -404,7 +404,7 @@ export const ZeroChallenge: React.FC<Props> = ({
           <div
             style={{
               width: '100%',
-              background: 'rgba(255, 255, 255, 0.95)',
+              background: 'rgba(255,255,255,0.9)',
               borderRadius: '24px',
               padding: '28px',
               border: '2px solid rgba(129, 140, 248, 0.4)',
@@ -417,10 +417,10 @@ export const ZeroChallenge: React.FC<Props> = ({
           >
             {/* Header Badge */}
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '12px', color: '#a5b4fc', fontWeight: 800 }}>
+              <div style={{ fontSize: '12px', color: '#26332E', fontWeight: 800 }}>
                 {language === 'np' ? activeChallenge.titleNp : activeChallenge.titleEn}
               </div>
-              <h2 style={{ margin: '6px 0 0', fontSize: '20px', fontWeight: 900, color: '#fef08a' }}>
+              <h2 style={{ margin: '6px 0 0', fontSize: '20px', fontWeight: 900, color: '#26332E' }}>
                 {language === 'np' ? activeChallenge.promptNp : activeChallenge.promptEn}
               </h2>
             </div>
@@ -447,14 +447,14 @@ export const ZeroChallenge: React.FC<Props> = ({
                           ? 'rgba(16, 185, 129, 0.3)'
                           : isAnswered && isSelected
                           ? 'rgba(239, 68, 68, 0.3)'
-                          : 'rgba(30, 41, 59, 0.8)',
+                          : '#F1F5F9',
                       border:
                         isAnswered && isCorrect
                           ? '2px solid #10b981'
                           : isAnswered && isSelected
                           ? '2px solid #ef4444'
                           : '2px solid rgba(129, 140, 248, 0.3)',
-                      color: '#ffffff',
+                      color: '#26332E',
                       cursor: isAnswered ? 'default' : 'pointer',
                       transition: 'all 0.15s ease',
                     }}
@@ -466,7 +466,7 @@ export const ZeroChallenge: React.FC<Props> = ({
                       </span>
                     </div>
 
-                    <div style={{ fontSize: '24px', fontWeight: 900, color: '#a5b4fc' }}>
+                    <div style={{ fontSize: '24px', fontWeight: 900, color: '#26332E' }}>
                       {formatNum(opt.value)}
                     </div>
                   </button>
@@ -477,7 +477,7 @@ export const ZeroChallenge: React.FC<Props> = ({
             {/* Feedback & Next */}
             {isAnswered && (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
-                <div style={{ fontSize: '14px', color: '#475569', textAlign: 'center' }}>
+                <div style={{ fontSize: '14px', color: '#26332E', textAlign: 'center' }}>
                   {language === 'np' ? activeChallenge.explanationNp : activeChallenge.explanationEn}
                 </div>
 
@@ -507,7 +507,7 @@ export const ZeroChallenge: React.FC<Props> = ({
           <div
             style={{
               width: '100%',
-              background: 'rgba(255, 255, 255, 0.95)',
+              background: 'rgba(255,255,255,0.9)',
               borderRadius: '24px',
               padding: '32px',
               border: '2px solid #10b981',
@@ -519,12 +519,12 @@ export const ZeroChallenge: React.FC<Props> = ({
             }}
           >
             <Trophy size={54} color="#fbbf24" />
-            <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 900, color: '#f0fdf4' }}>
+            <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 900, color: '#26332E' }}>
               {language === 'np'
                 ? 'शानदार! शून्य चुनौती सफलतापूर्वक पूरा भयो!'
                 : 'Splendid! Zero Challenge Mastered!'}
             </h2>
-            <p style={{ margin: 0, fontSize: '14px', color: '#a7f3d0' }}>
+            <p style={{ margin: 0, fontSize: '14px', color: '#26332E' }}>
               {language === 'np'
                 ? 'तपाईंले शून्य (०) को अवधारणा सम्पूर्ण रूपमा सिक्नुभयो।'
                 : 'You have completely mastered the concept of Zero (0).'}
@@ -536,8 +536,8 @@ export const ZeroChallenge: React.FC<Props> = ({
                 marginTop: '12px',
                 padding: '12px 28px',
                 borderRadius: '14px',
-                background: '#059669',
-                color: '#ffffff',
+                background: '#FFFFFF',
+                color: '#26332E',
                 border: 'none',
                 fontWeight: 800,
                 cursor: 'pointer',

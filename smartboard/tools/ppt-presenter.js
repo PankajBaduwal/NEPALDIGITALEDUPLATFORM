@@ -249,10 +249,10 @@ const PptPresenter = (() => {
       if (typeof window.pdfjsLib === 'undefined') {
         await new Promise((resolve, reject) => {
           const s = document.createElement('script');
-          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+          s.src = 'assets/vendor/pdf.min.js';
           s.onload = () => {
             if (window.pdfjsLib) {
-              window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+              window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/vendor/pdf.worker.min.js';
             }
             resolve();
           };
@@ -285,7 +285,7 @@ const PptPresenter = (() => {
       if (typeof window.JSZip === 'undefined') {
         await new Promise((resolve, reject) => {
           const s = document.createElement('script');
-          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+          s.src = 'assets/vendor/jszip.min.js';
           s.onload = () => resolve();
           s.onerror = () => reject(new Error('JSZip failed to load'));
           document.head.appendChild(s);

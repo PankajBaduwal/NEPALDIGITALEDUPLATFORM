@@ -323,7 +323,7 @@ const SubjectDetail: React.FC<{ id: string; onClose: () => void; onOpenSubject: 
   };
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(14,62,59,0.45)', zIndex: 50, display: 'flex', justifyContent: 'flex-end' }} onClick={onClose}>
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.45)', zIndex: 50, display: 'flex', justifyContent: 'flex-end' }} onClick={onClose}>
       <div style={{ width: 'min(760px, 100%)', height: '100%', overflowY: 'auto', background: '#fff', padding: 20 }} onClick={(e) => e.stopPropagation()}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
           <h3 style={{ margin: 0, fontSize: 17 }}>{data ? `Class ${data.subject.gradeNumber} · ${data.subject.name}` : 'Subject'}</h3>

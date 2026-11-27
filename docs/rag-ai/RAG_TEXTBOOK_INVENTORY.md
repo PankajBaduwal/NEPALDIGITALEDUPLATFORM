@@ -1,6 +1,6 @@
 # RAG Textbook Inventory
 
-Generated 2026-11-15T08:32:48.965Z from the ingestion database (`npm run rag:ingest -- report`).
+Generated 2026-11-27T09:09:07.399Z from the ingestion database (`npm run rag:ingest -- report`).
 
 Documents: **141** · Pages: **33915**
 

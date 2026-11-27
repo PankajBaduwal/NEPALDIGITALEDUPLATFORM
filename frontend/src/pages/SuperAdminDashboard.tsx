@@ -953,7 +953,7 @@ export const SuperAdminDashboard: React.FC = () => {
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
                       transition: 'all 0.15s ease',
-                      boxShadow: isSelected ? '0 2px 6px rgba(17,122,107,0.2)' : 'none',
+                      boxShadow: isSelected ? '0 2px 6px rgba(234,88,12,0.2)' : 'none',
                     }}
                   >
                     <Icon size={15} color={isSelected ? '#ffffff' : '#64748b'} />
@@ -1019,7 +1019,7 @@ export const SuperAdminDashboard: React.FC = () => {
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
                       transition: 'all 0.15s ease',
-                      boxShadow: isSelected ? '0 2px 6px rgba(17,122,107,0.2)' : 'none',
+                      boxShadow: isSelected ? '0 2px 6px rgba(234,88,12,0.2)' : 'none',
                     }}
                   >
                     <Icon size={15} color={isSelected ? '#ffffff' : '#64748b'} />
@@ -1072,7 +1072,7 @@ export const SuperAdminDashboard: React.FC = () => {
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
                       transition: 'all 0.15s ease',
-                      boxShadow: isSelected ? '0 2px 6px rgba(17,122,107,0.2)' : 'none',
+                      boxShadow: isSelected ? '0 2px 6px rgba(234,88,12,0.2)' : 'none',
                     }}
                   >
                     <Icon size={15} color={isSelected ? '#ffffff' : '#64748b'} />
@@ -1140,7 +1140,7 @@ export const SuperAdminDashboard: React.FC = () => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      boxShadow: '0 4px 12px rgba(109,91,208, 0.08)',
+                      boxShadow: '0 4px 12px rgba(86,109,150, 0.08)',
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
@@ -1155,7 +1155,7 @@ export const SuperAdminDashboard: React.FC = () => {
                           alignItems: 'center',
                           justifyContent: 'center',
                           flexShrink: 0,
-                          boxShadow: '0 2px 8px rgba(109,91,208, 0.3)',
+                          boxShadow: '0 2px 8px rgba(86,109,150, 0.3)',
                         }}
                       >
                         <AlertCircle size={22} />
@@ -1456,8 +1456,8 @@ export const SuperAdminDashboard: React.FC = () => {
                           <XAxis dataKey="province" tick={{ fontSize: 11, fill: '#5f736f' }} axisLine={{ stroke: '#dcebe6' }} tickLine={false} />
                           <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: '#5f736f' }} axisLine={false} tickLine={false} />
                           <Tooltip
-                            contentStyle={{ background: '#ffffff', borderRadius: '10px', border: '1px solid #dcebe6', color: '#0e3e3b', fontSize: '12px', boxShadow: '0 10px 24px -8px rgba(14, 62, 59, 0.18)' }}
-                            cursor={{ fill: '#f4faf8' }}
+                            contentStyle={{ background: '#ffffff', borderRadius: '10px', border: '1px solid #E2E8F0', color: '#0F172A', fontSize: '12px', boxShadow: '0 10px 24px -8px rgba(15,23,42, 0.18)' }}
+                            cursor={{ fill: '#F8FAFC' }}
                           />
                           <Bar dataKey="institutions" radius={[6, 6, 0, 0]}>
                             {provinceChartData.map((_, idx) => (
@@ -1504,7 +1504,7 @@ export const SuperAdminDashboard: React.FC = () => {
                               <Cell key={`slice-${index}`} fill={entry.color} />
                             ))}
                           </Pie>
-                          <Tooltip contentStyle={{ background: '#ffffff', borderRadius: '10px', border: '1px solid #dcebe6', color: '#0e3e3b', fontSize: '12px', boxShadow: '0 10px 24px -8px rgba(14, 62, 59, 0.18)' }} />
+                          <Tooltip contentStyle={{ background: '#ffffff', borderRadius: '10px', border: '1px solid #E2E8F0', color: '#0F172A', fontSize: '12px', boxShadow: '0 10px 24px -8px rgba(15,23,42, 0.18)' }} />
                         </PieChart>
                       </ResponsiveContainer>
                     </div>
@@ -1568,12 +1568,12 @@ export const SuperAdminDashboard: React.FC = () => {
                             <stop offset="95%" stopColor="#f1b434" stopOpacity={0.0} />
                           </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ebf5f1" />
-                        <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#5f736f' }} axisLine={{ stroke: '#dcebe6' }} tickLine={false} />
-                        <YAxis tick={{ fontSize: 11, fill: '#5f736f' }} axisLine={false} tickLine={false} />
-                        <Tooltip contentStyle={{ background: '#ffffff', borderRadius: '10px', border: '1px solid #dcebe6', color: '#0e3e3b', fontSize: '12px', boxShadow: '0 10px 24px -8px rgba(14, 62, 59, 0.18)' }} />
-                        <Area type="monotone" dataKey="institutions" stroke="#6d4fd6" strokeWidth={2.5} fillOpacity={1} fill="url(#areaInstGrad)" />
-                        <Area type="monotone" dataKey="students" stroke="#f1b434" strokeWidth={2.5} fillOpacity={1} fill="url(#areaStudentGrad)" />
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F1F5F9" />
+                        <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#64748B' }} axisLine={{ stroke: '#E2E8F0' }} tickLine={false} />
+                        <YAxis tick={{ fontSize: 11, fill: '#64748B' }} axisLine={false} tickLine={false} />
+                        <Tooltip contentStyle={{ background: '#ffffff', borderRadius: '10px', border: '1px solid #E2E8F0', color: '#0F172A', fontSize: '12px', boxShadow: '0 10px 24px -8px rgba(15,23,42, 0.18)' }} />
+                        <Area type="monotone" dataKey="institutions" stroke="#566D96" strokeWidth={2.5} fillOpacity={1} fill="url(#areaInstGrad)" />
+                        <Area type="monotone" dataKey="students" stroke="#D97706" strokeWidth={2.5} fillOpacity={1} fill="url(#areaStudentGrad)" />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>

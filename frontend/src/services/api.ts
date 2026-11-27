@@ -42,10 +42,18 @@ class ApiService {
     const downloadEndpoint = endpoint.startsWith(assignmentUploadPrefix)
       ? `/assignments/files/${encodeURIComponent(endpoint.slice(assignmentUploadPrefix.length))}`
       : endpoint;
-    const response = await fetch(`${API_BASE}${downloadEndpoint}`, {
-      ...options,
-      headers,
-    });
+    let response: Response;
+    try {
+      response = await fetch(`${API_BASE}${downloadEndpoint}`, {
+        ...options,
+        headers,
+      });
+    } catch {
+      // The browser could not reach the server at all (it is restarting, or the connection dropped)
+      const netErr: any = new Error('Cannot reach the server right now. Please wait a moment and press Retry.');
+      netErr.code = 'NETWORK_ERROR';
+      throw netErr;
+    }
 
     const data: ApiResponse<T> & { message?: string } = await response.json().catch(() => ({ success: false }) as any);
 

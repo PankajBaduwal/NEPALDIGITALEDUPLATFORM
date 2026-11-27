@@ -384,41 +384,41 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
   const frame2Count = cells.slice(10, 20).filter(Boolean).length;
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
             title="Back to Chapter 10"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 font-semibold">
                 Class 1 • Math • Chapter 10
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-700 font-semibold">
                 Simulation 04
               </span>
             </div>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
               {language === 'np' ? 'जोड ब्लक निर्माण खेल (दश-कोठे घरहरू)' : 'Addition Block Builder'}
             </h1>
           </div>
         </div>
 
         {/* Mode Selector */}
-        <div className="flex items-center gap-1 bg-slate-900/60 p-1 rounded-xl border border-slate-700/60 text-xs">
+        <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200/60 text-xs">
           <button
             onClick={() => {
               playSound('click');
               setMode('DUAL_TEN_FRAME');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition ${
-              mode === 'DUAL_TEN_FRAME' ? 'bg-rose-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'DUAL_TEN_FRAME' ? 'bg-rose-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             {language === 'np' ? 'दश-कोठे घरहरू' : 'Dual Ten-Frames'}
@@ -429,7 +429,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
               setMode('THREE_GROUPS');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition ${
-              mode === 'THREE_GROUPS' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'THREE_GROUPS' ? 'bg-amber-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             {language === 'np' ? '३ समूहको जोड' : 'Three Groups'}
@@ -440,7 +440,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
               setMode('QUIZ');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1 ${
-              mode === 'QUIZ' ? 'bg-emerald-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              mode === 'QUIZ' ? 'bg-emerald-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Trophy className="w-3.5 h-3.5" />
@@ -452,10 +452,10 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setSoundEnabled((prev) => !prev)}
-            className="p-2 rounded-xl bg-slate-700/80 hover:bg-slate-700 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-100 transition text-slate-700"
             title={soundEnabled ? 'Mute' : 'Unmute'}
           >
-            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-400" /> : <VolumeX className="w-5 h-5 text-slate-400" />}
+            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
           <button
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
@@ -473,20 +473,20 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
         {/* ========================================================================= */}
         {mode === 'DUAL_TEN_FRAME' && (
           <div className="flex-1 flex flex-col max-w-5xl mx-auto w-full justify-center gap-6">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-rose-400 tracking-wider">
                     {language === 'np' ? 'रातो र नीलो ब्लक जोड' : 'Red & Blue Block Addition'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {NEP_NUMERALS[currentProb.a]} (रातो) + {NEP_NUMERALS[currentProb.b]} (नीलो) = {NEP_NUMERALS[currentProb.sum]} ({currentProb.a} + {currentProb.b} = {currentProb.sum})
                   </h3>
                 </div>
 
                 <button
                   onClick={handleNextProblem}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को समस्या' : 'Next Problem'}
                 </button>
@@ -495,17 +495,17 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
               {/* Two Ten-Frame Houses */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Frame 1: Complete Ten */}
-                <div className="bg-slate-900/80 p-5 rounded-2xl border-2 border-emerald-500/40 flex flex-col items-center">
+                <div className="bg-slate-50 p-5 rounded-2xl border-2 border-emerald-500/40 flex flex-col items-center">
                   <div className="flex items-center justify-between w-full mb-3">
-                    <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">
+                    <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
                       {language === 'np' ? 'पहिलो घर (पूरा १०)' : 'First House (Full 10)'}
                     </span>
-                    <span className="text-xs font-bold text-white bg-slate-800 px-2 py-0.5 rounded-full">
+                    <span className="text-xs font-bold text-slate-900 bg-white px-2 py-0.5 rounded-full">
                       {NEP_NUMERALS[frame1Count]} / १०
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-5 gap-2 p-3 bg-slate-950/60 rounded-xl border border-slate-700">
+                  <div className="grid grid-cols-5 gap-2 p-3 bg-slate-50 rounded-xl border border-slate-200">
                     {cells.slice(0, 10).map((color, idx) => (
                       <div
                         key={idx}
@@ -514,7 +514,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                             ? 'bg-rose-500 text-white border-rose-300'
                             : color === 'BLUE'
                             ? 'bg-sky-500 text-white border-sky-300'
-                            : 'bg-slate-900 border-slate-700 text-slate-600'
+                            : 'bg-slate-50 border-slate-200 text-slate-600'
                         }`}
                       >
                         {color ? NEP_NUMERALS[idx + 1] : ''}
@@ -522,23 +522,23 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                     ))}
                   </div>
 
-                  <span className="text-xs text-emerald-300 font-bold mt-3">
+                  <span className="text-xs text-emerald-700 font-bold mt-3">
                     {language === 'np' ? '१ पूरा दश = १०' : '1 Full Ten = 10'}
                   </span>
                 </div>
 
                 {/* Frame 2: Remaining ones */}
-                <div className="bg-slate-900/80 p-5 rounded-2xl border-2 border-amber-500/40 flex flex-col items-center">
+                <div className="bg-slate-50 p-5 rounded-2xl border-2 border-amber-500/40 flex flex-col items-center">
                   <div className="flex items-center justify-between w-full mb-3">
-                    <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                    <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
                       {language === 'np' ? 'दोस्रो घर (बाँकी एकाइ)' : 'Second House (Remaining)'}
                     </span>
-                    <span className="text-xs font-bold text-white bg-slate-800 px-2 py-0.5 rounded-full">
+                    <span className="text-xs font-bold text-slate-900 bg-white px-2 py-0.5 rounded-full">
                       {NEP_NUMERALS[frame2Count]} / १०
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-5 gap-2 p-3 bg-slate-950/60 rounded-xl border border-slate-700">
+                  <div className="grid grid-cols-5 gap-2 p-3 bg-slate-50 rounded-xl border border-slate-200">
                     {cells.slice(10, 20).map((color, idx) => (
                       <div
                         key={idx + 10}
@@ -547,7 +547,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                             ? 'bg-rose-500 text-white border-rose-300'
                             : color === 'BLUE'
                             ? 'bg-sky-500 text-white border-sky-300'
-                            : 'bg-slate-900 border-slate-700 text-slate-600'
+                            : 'bg-slate-50 border-slate-200 text-slate-600'
                         }`}
                       >
                         {color ? NEP_NUMERALS[idx + 11] : ''}
@@ -555,34 +555,34 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                     ))}
                   </div>
 
-                  <span className="text-xs text-amber-300 font-bold mt-3">
+                  <span className="text-xs text-amber-700 font-bold mt-3">
                     {language === 'np' ? `थप एकाइ = ${NEP_NUMERALS[frame2Count]}` : `Remaining = ${frame2Count}`}
                   </span>
                 </div>
               </div>
 
               {/* Bottom Equation Summary */}
-              <div className="bg-slate-900/90 p-5 rounded-2xl border border-slate-700 flex flex-wrap items-center justify-between gap-4">
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <span className="text-xs px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-300 font-bold">
+                  <span className="text-xs px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-700 font-bold">
                     {language === 'np' ? 'समीकरण:' : 'Equation:'}
                   </span>
-                  <span className="text-2xl font-black text-white">
+                  <span className="text-2xl font-black text-slate-900">
                     १० + {NEP_NUMERALS[frame2Count]} ={' '}
-                    <span className="text-amber-400">{NEP_NUMERALS[currentProb.sum]}</span>
+                    <span className="text-amber-700">{NEP_NUMERALS[currentProb.sum]}</span>
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="px-3 py-1 rounded-xl bg-rose-500/20 text-rose-300 font-bold border border-rose-500/40">
+                  <span className="px-3 py-1 rounded-xl bg-rose-500/20 text-rose-700 font-bold border border-rose-500/40">
                     {NEP_NUMERALS[currentProb.a]} रातो
                   </span>
                   <span>+</span>
-                  <span className="px-3 py-1 rounded-xl bg-sky-500/20 text-sky-300 font-bold border border-sky-500/40">
+                  <span className="px-3 py-1 rounded-xl bg-sky-500/20 text-sky-700 font-bold border border-sky-500/40">
                     {NEP_NUMERALS[currentProb.b]} नीलो
                   </span>
                   <span>=</span>
-                  <span className="px-3 py-1 rounded-xl bg-amber-500/20 text-amber-300 font-black border border-amber-500/40">
+                  <span className="px-3 py-1 rounded-xl bg-amber-500/20 text-amber-700 font-black border border-amber-500/40">
                     {NEP_NUMERALS[currentProb.sum]} जम्मा
                   </span>
                 </div>
@@ -596,20 +596,20 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
         {/* ========================================================================= */}
         {mode === 'THREE_GROUPS' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="text-xs font-bold uppercase text-amber-400 tracking-wider">
+                  <span className="text-xs font-bold uppercase text-amber-700 tracking-wider">
                     {language === 'np' ? '३ समूहको रङ्गीन ब्लक जोड' : 'Three Group Color Addition'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {NEP_NUMERALS[currentThree.a]} (रातो) + {NEP_NUMERALS[currentThree.b]} (नीलो) + {NEP_NUMERALS[currentThree.c!]} (पहेंलो) = {NEP_NUMERALS[currentThree.sum]}
                   </h3>
                 </div>
 
                 <button
                   onClick={handleNextThree}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को समस्या' : 'Next'}
                 </button>
@@ -619,7 +619,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Group A */}
                 <div className="p-4 bg-rose-950/40 border border-rose-500/40 rounded-2xl flex flex-col items-center">
-                  <span className="text-xs font-bold text-rose-300 uppercase mb-2">
+                  <span className="text-xs font-bold text-rose-700 uppercase mb-2">
                     {language === 'np' ? `रातो (${NEP_NUMERALS[currentThree.a]})` : `Red (${currentThree.a})`}
                   </span>
                   <div className="flex flex-wrap justify-center gap-1.5">
@@ -633,7 +633,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
 
                 {/* Group B */}
                 <div className="p-4 bg-sky-950/40 border border-sky-500/40 rounded-2xl flex flex-col items-center">
-                  <span className="text-xs font-bold text-sky-300 uppercase mb-2">
+                  <span className="text-xs font-bold text-sky-700 uppercase mb-2">
                     {language === 'np' ? `नीलो (${NEP_NUMERALS[currentThree.b]})` : `Blue (${currentThree.b})`}
                   </span>
                   <div className="flex flex-wrap justify-center gap-1.5">
@@ -647,7 +647,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
 
                 {/* Group C */}
                 <div className="p-4 bg-amber-950/40 border border-amber-500/40 rounded-2xl flex flex-col items-center">
-                  <span className="text-xs font-bold text-amber-300 uppercase mb-2">
+                  <span className="text-xs font-bold text-amber-700 uppercase mb-2">
                     {language === 'np' ? `पहेंलो (${NEP_NUMERALS[currentThree.c!]})` : `Yellow (${currentThree.c})`}
                   </span>
                   <div className="flex flex-wrap justify-center gap-1.5">
@@ -661,7 +661,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
               </div>
 
               {/* Total Calculation */}
-              <div className="bg-slate-900/90 p-4 rounded-2xl border border-slate-700 flex items-center justify-center text-2xl font-black text-amber-400">
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-center justify-center text-2xl font-black text-amber-700">
                 {NEP_NUMERALS[currentThree.a]} + {NEP_NUMERALS[currentThree.b]} + {NEP_NUMERALS[currentThree.c!]} = {NEP_NUMERALS[currentThree.sum]}
               </div>
             </div>
@@ -674,8 +674,8 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
         {mode === 'QUIZ' && (
           <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full justify-center">
             {!quizCompleted ? (
-              <div className="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-                <div className="flex items-center justify-between text-xs text-slate-400 border-b border-slate-700 pb-3">
+              <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+                <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-200 pb-3">
                   <span className="font-bold text-rose-400">
                     {language === 'np'
                       ? `प्रश्न ${NEP_NUMERALS[quizIdx + 1]} / ${NEP_NUMERALS[quizList.length]}`
@@ -686,7 +686,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                   </span>
                 </div>
 
-                <h3 className="text-xl md:text-2xl font-black text-white">
+                <h3 className="text-xl md:text-2xl font-black text-slate-900">
                   {language === 'np' ? quizList[quizIdx].questionNp : quizList[quizIdx].questionEn}
                 </h3>
 
@@ -694,7 +694,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                   {quizList[quizIdx].options.map((opt) => {
                     const isSelected = quizSelected === opt;
                     const isCorrectOpt = opt === quizList[quizIdx].correct;
-                    let btnStyle = 'bg-slate-700/80 hover:bg-slate-700 text-white';
+                    let btnStyle = 'bg-slate-100 hover:bg-slate-100 text-slate-900';
 
                     if (quizAnswered) {
                       if (isCorrectOpt) {
@@ -702,7 +702,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                       } else if (isSelected) {
                         btnStyle = 'bg-rose-600 text-white font-black';
                       } else {
-                        btnStyle = 'bg-slate-800 text-slate-500 opacity-50';
+                        btnStyle = 'bg-white text-slate-500 opacity-50';
                       }
                     }
 
@@ -711,7 +711,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                         key={opt}
                         disabled={quizAnswered}
                         onClick={() => handleQuizAnswer(opt)}
-                        className={`p-4 rounded-2xl text-xl font-bold transition flex flex-col items-center justify-center gap-1 border border-slate-600 ${btnStyle}`}
+                        className={`p-4 rounded-2xl text-xl font-bold transition flex flex-col items-center justify-center gap-1 border border-slate-300 ${btnStyle}`}
                       >
                         <span className="text-3xl">{NEP_NUMERALS[opt]}</span>
                         <span className="text-xs opacity-75">{opt}</span>
@@ -721,7 +721,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                 </div>
 
                 {quizAnswered && (
-                  <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700 text-xs text-slate-300">
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
                     <p className="font-bold text-rose-400 mb-1">
                       {language === 'np' ? 'व्याख्या:' : 'Explanation:'}
                     </p>
@@ -742,16 +742,16 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                 )}
               </div>
             ) : (
-              <div className="bg-slate-800/95 border-2 border-rose-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
+              <div className="bg-white border-2 border-rose-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
                 <div className="w-20 h-20 rounded-full bg-rose-500/20 flex items-center justify-center">
                   <Award className="w-10 h-10 text-rose-400" />
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-black text-white">
+                  <h3 className="text-2xl font-black text-slate-900">
                     {language === 'np' ? 'बधाई छ! परीक्षा सम्पन्न भयो!' : 'Congratulations! Assessment Complete!'}
                   </h3>
-                  <p className="text-slate-400 text-xs mt-1">
+                  <p className="text-slate-500 text-xs mt-1">
                     {language === 'np'
                       ? 'तपाईंले दश-कोठे घरमा रङ्गीन ब्लकहरू भरेर २० सम्मको जोड गर्न सिक्नुभयो।'
                       : 'You have mastered ten-frame houses and block addition up to 20.'}
@@ -765,7 +765,7 @@ export const AdditionBlockBuilder: React.FC<Props> = ({
                 <div className="flex gap-3 w-full">
                   <button
                     onClick={handleQuizReset}
-                    className="flex-1 py-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                    className="flex-1 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                   >
                     {language === 'np' ? 'पुनः परीक्षा दिनुहोस्' : 'Retake Quiz'}
                   </button>

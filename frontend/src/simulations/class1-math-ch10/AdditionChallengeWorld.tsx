@@ -445,41 +445,41 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
   };
 
   return (
-    <div className="relative w-full h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none overflow-hidden">
       {/* Header */}
-      <header className="h-16 px-4 bg-slate-800/95 backdrop-blur border-b border-slate-700 flex items-center justify-between z-20 shrink-0">
+      <header className="h-16 px-4 bg-white backdrop-blur border-b border-slate-200 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToLibrary}
-            className="p-2 rounded-xl bg-slate-700 hover:bg-slate-600 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700"
             title="Back to Chapter 10"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 font-semibold">
                 Class 1 • Math • Chapter 10
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-semibold">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-700 font-semibold">
                 Simulation 05
               </span>
             </div>
-            <h1 className="text-base font-bold text-white flex items-center gap-2">
+            <h1 className="text-base font-bold text-slate-900 flex items-center gap-2">
               {language === 'np' ? 'जोड चुनौती संसार (गाउँका ५ केन्द्रहरू)' : 'Addition Challenge World'}
             </h1>
           </div>
         </div>
 
         {/* Station Selector */}
-        <div className="hidden lg:flex items-center gap-1 bg-slate-900/60 p-1 rounded-xl border border-slate-700/60 text-xs">
+        <div className="hidden lg:flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200/60 text-xs">
           <button
             onClick={() => {
               playSound('click');
               setActiveStation('FRUIT_SHOP');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              activeStation === 'FRUIT_SHOP' ? 'bg-amber-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              activeStation === 'FRUIT_SHOP' ? 'bg-amber-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Store className="w-3.5 h-3.5" />
@@ -491,7 +491,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
               setActiveStation('BIRD_GARDEN');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              activeStation === 'BIRD_GARDEN' ? 'bg-emerald-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              activeStation === 'BIRD_GARDEN' ? 'bg-emerald-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Trees className="w-3.5 h-3.5" />
@@ -503,7 +503,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
               setActiveStation('TOY_HOUSE');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              activeStation === 'TOY_HOUSE' ? 'bg-sky-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              activeStation === 'TOY_HOUSE' ? 'bg-sky-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Gamepad2 className="w-3.5 h-3.5" />
@@ -515,7 +515,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
               setActiveStation('WORKSHOP');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              activeStation === 'WORKSHOP' ? 'bg-violet-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              activeStation === 'WORKSHOP' ? 'bg-violet-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Wrench className="w-3.5 h-3.5" />
@@ -527,7 +527,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
               setActiveStation('MASTER_QUIZ');
             }}
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 ${
-              activeStation === 'MASTER_QUIZ' ? 'bg-rose-600 text-white shadow' : 'text-slate-300 hover:bg-slate-800'
+              activeStation === 'MASTER_QUIZ' ? 'bg-rose-600 text-white shadow' : 'text-slate-600 hover:bg-white'
             }`}
           >
             <Trophy className="w-3.5 h-3.5" />
@@ -539,10 +539,10 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setSoundEnabled((prev) => !prev)}
-            className="p-2 rounded-xl bg-slate-700/80 hover:bg-slate-700 transition text-slate-200"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-100 transition text-slate-700"
             title={soundEnabled ? 'Mute' : 'Unmute'}
           >
-            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-400" /> : <VolumeX className="w-5 h-5 text-slate-400" />}
+            {soundEnabled ? <Volume2 className="w-5 h-5 text-emerald-700" /> : <VolumeX className="w-5 h-5 text-slate-500" />}
           </button>
           <button
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
@@ -560,13 +560,13 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
         {/* ========================================================================= */}
         {activeStation === 'FRUIT_SHOP' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="text-xs font-bold uppercase text-amber-400 tracking-wider">
+                  <span className="text-xs font-bold uppercase text-amber-700 tracking-wider">
                     {language === 'np' ? 'केन्द्र १: फलफूल पसल (कथा जोड)' : 'Station 1: Fruit Shop (Story Addition)'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? 'कथा पढेर जम्मा फलफूलको सङ्ख्या पत्ता लगाउनुहोस्!' : 'Read the story and find total fruits!'}
                   </h3>
                 </div>
@@ -577,26 +577,26 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                     setFruitIdx((prev) => (prev + 1) % fruitStories.length);
                     setFruitSelected(null);
                   }}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को कथा' : 'Next Story'}
                 </button>
               </div>
 
               {/* Story Box */}
-              <div className="p-6 bg-slate-900/80 rounded-2xl border border-amber-500/40">
+              <div className="p-6 bg-slate-50 rounded-2xl border border-amber-500/40">
                 <p className="text-lg md:text-xl font-bold text-amber-200 leading-relaxed">
                   {language === 'np' ? currentFruit.storyNp : currentFruit.storyEn}
                 </p>
               </div>
 
               {/* Equation Visual */}
-              <div className="flex items-center justify-center text-3xl font-black text-white gap-3">
+              <div className="flex items-center justify-center text-3xl font-black text-slate-900 gap-3">
                 <span>{NEP_NUMERALS[currentFruit.a]}</span>
-                <span className="text-amber-400">+</span>
+                <span className="text-amber-700">+</span>
                 <span>{NEP_NUMERALS[currentFruit.b]}</span>
                 <span>=</span>
-                <span className="text-emerald-400 underline decoration-dashed">
+                <span className="text-emerald-700 underline decoration-dashed">
                   {fruitSelected ? NEP_NUMERALS[fruitSelected] : '?'}
                 </span>
               </div>
@@ -612,7 +612,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                         ? opt === currentFruit.sum
                           ? 'bg-emerald-600 text-white border-emerald-400 scale-105 shadow-lg'
                           : 'bg-rose-600 text-white border-rose-400'
-                        : 'bg-slate-700/80 hover:bg-slate-700 text-white border-slate-600'
+                        : 'bg-slate-100 hover:bg-slate-100 text-slate-900 border-slate-300'
                     }`}
                   >
                     {NEP_NUMERALS[opt]}
@@ -628,13 +628,13 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
         {/* ========================================================================= */}
         {activeStation === 'BIRD_GARDEN' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="text-xs font-bold uppercase text-emerald-400 tracking-wider">
+                  <span className="text-xs font-bold uppercase text-emerald-700 tracking-wider">
                     {language === 'np' ? 'केन्द्र २: चरा बगैँचा (दश बनाउने विधि)' : 'Station 2: Bird Garden (Make Ten)'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {NEP_NUMERALS[currentBird.a]} + {NEP_NUMERALS[currentBird.b]} = ?
                   </h3>
                 </div>
@@ -645,18 +645,18 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                     setBirdIdx((prev) => (prev + 1) % birdProblems.length);
                     setBirdSelected(null);
                   }}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को समस्या' : 'Next'}
                 </button>
               </div>
 
               {/* Make Ten Visual Explainer Card */}
-              <div className="p-6 bg-slate-900/90 rounded-2xl border border-emerald-500/40 flex flex-col items-center gap-3">
-                <span className="text-xs text-slate-400 font-bold">
+              <div className="p-6 bg-slate-50 rounded-2xl border border-emerald-500/40 flex flex-col items-center gap-3">
+                <span className="text-xs text-slate-500 font-bold">
                   {language === 'np' ? 'दश बनाएर जोड्ने चरण:' : 'Make 10 Step:'}
                 </span>
-                <span className="text-2xl font-black text-emerald-400">
+                <span className="text-2xl font-black text-emerald-700">
                   {NEP_NUMERALS[currentBird.a]} + {NEP_NUMERALS[currentBird.need]} + {NEP_NUMERALS[currentBird.remain]} = १० + {NEP_NUMERALS[currentBird.remain]}
                 </span>
               </div>
@@ -672,7 +672,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                         ? opt === currentBird.sum
                           ? 'bg-emerald-600 text-white border-emerald-400 scale-105 shadow-lg'
                           : 'bg-rose-600 text-white border-rose-400'
-                        : 'bg-slate-700/80 hover:bg-slate-700 text-white border-slate-600'
+                        : 'bg-slate-100 hover:bg-slate-100 text-slate-900 border-slate-300'
                     }`}
                   >
                     {NEP_NUMERALS[opt]}
@@ -688,13 +688,13 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
         {/* ========================================================================= */}
         {activeStation === 'TOY_HOUSE' && (
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="text-xs font-bold uppercase text-sky-400 tracking-wider">
+                  <span className="text-xs font-bold uppercase text-sky-700 tracking-wider">
                     {language === 'np' ? 'केन्द्र ३: खेलौना घर (तीन सङ्ख्याको जोड)' : 'Station 3: Toy House (3-Number)'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {NEP_NUMERALS[currentToy.a]} + {NEP_NUMERALS[currentToy.b]} + {NEP_NUMERALS[currentToy.c]} = ?
                   </h3>
                 </div>
@@ -705,21 +705,21 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                     setToyIdx((prev) => (prev + 1) % toyProblems.length);
                     setToySelected(null);
                   }}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को समस्या' : 'Next'}
                 </button>
               </div>
 
               {/* Visual equation */}
-              <div className="p-6 bg-slate-900/90 rounded-2xl border border-sky-500/40 flex items-center justify-center text-3xl font-black text-sky-300 gap-3">
+              <div className="p-6 bg-slate-50 rounded-2xl border border-sky-500/40 flex items-center justify-center text-3xl font-black text-sky-700 gap-3">
                 <span>{NEP_NUMERALS[currentToy.a]}</span>
                 <span>+</span>
                 <span>{NEP_NUMERALS[currentToy.b]}</span>
                 <span>+</span>
                 <span>{NEP_NUMERALS[currentToy.c]}</span>
                 <span>=</span>
-                <span className="text-white underline decoration-dashed">
+                <span className="text-slate-900 underline decoration-dashed">
                   {toySelected ? NEP_NUMERALS[toySelected] : '?'}
                 </span>
               </div>
@@ -735,7 +735,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                         ? opt === currentToy.sum
                           ? 'bg-emerald-600 text-white border-emerald-400 scale-105 shadow-lg'
                           : 'bg-rose-600 text-white border-rose-400'
-                        : 'bg-slate-700/80 hover:bg-slate-700 text-white border-slate-600'
+                        : 'bg-slate-100 hover:bg-slate-100 text-slate-900 border-slate-300'
                     }`}
                   >
                     {NEP_NUMERALS[opt]}
@@ -751,13 +751,13 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
         {/* ========================================================================= */}
         {activeStation === 'WORKSHOP' && (
           <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full justify-center">
-            <div className="bg-slate-800/90 rounded-3xl border border-slate-700 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-xs font-bold uppercase text-violet-400 tracking-wider">
                     {language === 'np' ? 'केन्द्र ४: ठाडो जोड (Vertical Addition)' : 'Station 4: Vertical Addition'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-black text-white mt-0.5">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
                     {language === 'np' ? 'ठाडो स्तम्भमा जोड गर्नुहोस्!' : 'Add the vertical column!'}
                   </h3>
                 </div>
@@ -768,7 +768,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                     setVertIdx((prev) => (prev + 1) % verticalProblems.length);
                     setVertSelected(null);
                   }}
-                  className="px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                 >
                   {language === 'np' ? 'अर्को समस्या' : 'Next'}
                 </button>
@@ -776,14 +776,14 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
 
               {/* Vertical Column Board */}
               <div className="flex justify-center my-4">
-                <div className="bg-slate-900/90 p-8 rounded-3xl border border-violet-500/40 w-48 flex flex-col items-end text-4xl font-black text-white gap-2 shadow-inner">
+                <div className="bg-slate-50 p-8 rounded-3xl border border-violet-500/40 w-48 flex flex-col items-end text-4xl font-black text-slate-900 gap-2 shadow-inner">
                   <span>{NEP_NUMERALS[currentVert.a]}</span>
                   <div className="flex items-center justify-between w-full">
                     <span className="text-violet-400">+</span>
                     <span>{NEP_NUMERALS[currentVert.b]}</span>
                   </div>
                   <div className="w-full h-1 bg-white rounded-full my-1" />
-                  <span className="text-emerald-400">
+                  <span className="text-emerald-700">
                     {vertSelected ? NEP_NUMERALS[vertSelected] : '?'}
                   </span>
                 </div>
@@ -800,7 +800,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                         ? opt === currentVert.sum
                           ? 'bg-emerald-600 text-white border-emerald-400 scale-105 shadow-lg'
                           : 'bg-rose-600 text-white border-rose-400'
-                        : 'bg-slate-700/80 hover:bg-slate-700 text-white border-slate-600'
+                        : 'bg-slate-100 hover:bg-slate-100 text-slate-900 border-slate-300'
                     }`}
                   >
                     {NEP_NUMERALS[opt]}
@@ -817,8 +817,8 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
         {activeStation === 'MASTER_QUIZ' && (
           <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full justify-center">
             {!masterCompleted ? (
-              <div className="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-                <div className="flex items-center justify-between text-xs text-slate-400 border-b border-slate-700 pb-3">
+              <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
+                <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-200 pb-3">
                   <span className="font-bold text-rose-400">
                     {language === 'np'
                       ? `प्रश्न ${NEP_NUMERALS[masterIdx + 1]} / ${NEP_NUMERALS[masterList.length]}`
@@ -829,25 +829,25 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                   </span>
                 </div>
 
-                <span className="text-xs text-slate-400 font-semibold">
+                <span className="text-xs text-slate-500 font-semibold">
                   {masterList[masterIdx].stationName}
                 </span>
 
                 {/* If vertical question */}
                 {masterList[masterIdx].verticalFormat ? (
                   <div className="flex justify-center my-2">
-                    <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-700 w-36 flex flex-col items-end text-3xl font-black text-white gap-1">
+                    <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 w-36 flex flex-col items-end text-3xl font-black text-slate-900 gap-1">
                       <span>{NEP_NUMERALS[masterList[masterIdx].verticalFormat!.a]}</span>
                       <div className="flex items-center justify-between w-full">
                         <span className="text-rose-400">+</span>
                         <span>{NEP_NUMERALS[masterList[masterIdx].verticalFormat!.b]}</span>
                       </div>
                       <div className="w-full h-0.5 bg-white rounded-full my-0.5" />
-                      <span className="text-amber-400">?</span>
+                      <span className="text-amber-700">?</span>
                     </div>
                   </div>
                 ) : (
-                  <h3 className="text-xl md:text-2xl font-black text-white">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900">
                     {language === 'np' ? masterList[masterIdx].questionNp : masterList[masterIdx].questionEn}
                   </h3>
                 )}
@@ -856,7 +856,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                   {masterList[masterIdx].options.map((opt) => {
                     const isSelected = masterSelected === opt;
                     const isCorrectOpt = opt === masterList[masterIdx].correct;
-                    let btnStyle = 'bg-slate-700/80 hover:bg-slate-700 text-white';
+                    let btnStyle = 'bg-slate-100 hover:bg-slate-100 text-slate-900';
 
                     if (masterAnswered) {
                       if (isCorrectOpt) {
@@ -864,7 +864,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                       } else if (isSelected) {
                         btnStyle = 'bg-rose-600 text-white font-black';
                       } else {
-                        btnStyle = 'bg-slate-800 text-slate-500 opacity-50';
+                        btnStyle = 'bg-white text-slate-500 opacity-50';
                       }
                     }
 
@@ -873,7 +873,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                         key={opt}
                         disabled={masterAnswered}
                         onClick={() => handleMasterAnswer(opt)}
-                        className={`p-4 rounded-2xl text-xl font-bold transition flex items-center justify-center border border-slate-600 ${btnStyle}`}
+                        className={`p-4 rounded-2xl text-xl font-bold transition flex items-center justify-center border border-slate-300 ${btnStyle}`}
                       >
                         {NEP_NUMERALS[opt]}
                       </button>
@@ -882,8 +882,8 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                 </div>
 
                 {masterAnswered && (
-                  <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700 text-xs text-slate-300">
-                    <p className="font-bold text-amber-400 mb-1">
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+                    <p className="font-bold text-amber-700 mb-1">
                       {language === 'np' ? 'व्याख्या:' : 'Explanation:'}
                     </p>
                     <p>
@@ -905,16 +905,16 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                 )}
               </div>
             ) : (
-              <div className="bg-slate-800/95 border-2 border-rose-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
+              <div className="bg-white border-2 border-rose-500/50 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
                 <div className="w-20 h-20 rounded-full bg-rose-500/20 flex items-center justify-center">
                   <Award className="w-10 h-10 text-rose-400" />
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-black text-white">
+                  <h3 className="text-2xl font-black text-slate-900">
                     {language === 'np' ? 'बधाई छ! महा-चुनौती पूरा भयो!' : 'Congratulations! Master Challenge Complete!'}
                   </h3>
-                  <p className="text-slate-400 text-xs mt-1">
+                  <p className="text-slate-500 text-xs mt-1">
                     {language === 'np'
                       ? 'तपाईंले कक्षा १ अध्याय १० (योगफल २० सम्म आउने जोड) सम्बन्धी सम्पूर्ण ज्ञान प्रमाणित गर्नुभयो।'
                       : 'You have mastered Addition up to 20 across all representations and strategies.'}
@@ -928,7 +928,7 @@ export const AdditionChallengeWorld: React.FC<Props> = ({
                 <div className="flex gap-3 w-full">
                   <button
                     onClick={handleMasterReset}
-                    className="flex-1 py-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition"
+                    className="flex-1 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition"
                   >
                     {language === 'np' ? 'पुनः परीक्षा दिनुहोस्' : 'Retake Challenge'}
                   </button>

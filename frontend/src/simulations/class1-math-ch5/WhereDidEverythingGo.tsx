@@ -74,7 +74,7 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
       initialCount: 3,
       locationNp: 'पोखरीमा',
       locationEn: 'in the pond',
-      background: 'linear-gradient(180deg, #0284c7 0%, #0369a1 60%, #075985 100%)',
+      background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
     },
     {
       id: 'APPLES',
@@ -247,8 +247,8 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        background: '#0f172a',
-        color: '#0f172a',
+        background: '#FFFFFF',
+        color: '#26332E',
         fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
@@ -259,7 +259,7 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgba(255, 255, 255, 0.95)',
+          background: 'rgba(255,255,255,0.9)',
           borderBottom: '1px solid rgba(56, 189, 248, 0.25)',
         }}
       >
@@ -271,10 +271,10 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '8px 14px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '10px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 600,
               fontSize: '14px',
@@ -285,10 +285,10 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
           </button>
 
           <div>
-            <div style={{ fontSize: '11px', color: '#38bdf8', textTransform: 'uppercase', fontWeight: 800 }}>
+            <div style={{ fontSize: '11px', color: '#26332E', textTransform: 'uppercase', fontWeight: 800 }}>
               कक्षा १ • गणित • अध्याय ५ : शून्य (Zero)
             </div>
-            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#f0fdfa' }}>
+            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
                 ? 'सिमुलेसन ०३: वस्तुहरू कहाँ गए? (Where Did Everything Go?)'
                 : 'Simulation 03: Where Did Everything Go?'}
@@ -308,7 +308,7 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
               border: '1px solid rgba(245, 158, 11, 0.4)',
               padding: '6px 14px',
               borderRadius: '20px',
-              color: '#fef08a',
+              color: '#26332E',
               fontWeight: 800,
             }}
           >
@@ -321,10 +321,10 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
             onClick={() => setLanguage((l) => (l === 'np' ? 'en' : 'np'))}
             style={{
               padding: '6px 12px',
-              background: '#e2e8f0',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: '#ffffff',
+              color: '#26332E',
               cursor: 'pointer',
               fontWeight: 700,
               fontSize: '13px',
@@ -338,10 +338,10 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
             onClick={() => setSoundEnabled(!soundEnabled)}
             style={{
               padding: '8px',
-              background: '#e2e8f0',
-              border: '1px solid #e2e8f0',
+              background: '#FFFFFF',
+              border: '1px solid #DCE5DE',
               borderRadius: '8px',
-              color: soundEnabled ? '#38bdf8' : '#94a3b8',
+              color: soundEnabled ? '#38bdf8' : '#26332E',
               cursor: 'pointer',
             }}
           >
@@ -357,7 +357,7 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
           justifyContent: 'center',
           gap: '12px',
           padding: '12px 16px',
-          background: '#f8fafc',
+          background: 'rgba(255,255,255,0.9)',
           borderBottom: '1px solid rgba(56, 189, 248, 0.2)',
         }}
       >
@@ -377,8 +377,8 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
                 padding: '8px 18px',
                 borderRadius: '12px',
                 border: isSelected ? '2px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.15)',
-                background: isSelected ? 'rgba(2, 132, 199, 0.7)' : 'rgba(30, 41, 59, 0.6)',
-                color: '#ffffff',
+                background: isSelected ? 'rgba(2, 132, 199, 0.7)' : '#F1F5F9',
+                color: '#26332E',
                 fontWeight: 800,
                 fontSize: '13px',
                 cursor: 'pointer',
@@ -433,13 +433,13 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              background: 'rgba(0, 0, 0, 0.4)',
+              background: 'rgba(255,255,255,0.9)',
               backdropFilter: 'blur(8px)',
               padding: '8px 16px',
               borderRadius: '14px',
             }}
           >
-            <div style={{ fontSize: '14px', fontWeight: 800, color: '#fef08a' }}>
+            <div style={{ fontSize: '14px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np' ? activeScene.titleNp : activeScene.titleEn}
             </div>
 
@@ -499,7 +499,7 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                background: 'rgba(0, 0, 0, 0.6)',
+                background: 'rgba(255,255,255,0.9)',
                 backdropFilter: 'blur(10px)',
                 padding: '16px 32px',
                 borderRadius: '20px',
@@ -507,10 +507,10 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
                 animation: 'pulse 1.5s infinite',
               }}
             >
-              <span style={{ fontSize: '48px', fontWeight: 900, color: '#facc15', lineHeight: 1 }}>
+              <span style={{ fontSize: '48px', fontWeight: 900, color: '#26332E', lineHeight: 1 }}>
                 {language === 'np' ? '०' : '0'}
               </span>
-              <span style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', marginTop: '6px' }}>
+              <span style={{ fontSize: '15px', fontWeight: 800, color: '#26332E', marginTop: '6px' }}>
                 {language === 'np'
                   ? 'सबै वस्तुहरू गए! सङ्ख्या शून्य (०) भयो!'
                   : 'All objects left! Count is ZERO (0)!'}
@@ -523,7 +523,7 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
         {itemsLeft === 0 && !questionAnswered && (
           <div
             style={{
-              background: '#f8fafc',
+              background: 'rgba(255,255,255,0.9)',
               borderRadius: '20px',
               padding: '20px 32px',
               border: '2px solid rgba(56, 189, 248, 0.3)',
@@ -535,7 +535,7 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
               maxWidth: '680px',
             }}
           >
-            <h3 style={{ margin: 0, fontSize: '17px', fontWeight: 800, color: '#fef08a' }}>
+            <h3 style={{ margin: 0, fontSize: '17px', fontWeight: 800, color: '#26332E' }}>
               {language === 'np'
                 ? `सबै ${activeScene.itemNameNp}हरू गएपछि अब त्यहाँ कति बाँकी छन्?`
                 : `After all ${activeScene.itemNameEn} left, how many remain now?`}
@@ -550,9 +550,9 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
                     width: '64px',
                     height: '64px',
                     borderRadius: '16px',
-                    background: 'linear-gradient(135deg, #0284c7, #0369a1)',
+                    background: 'linear-gradient(135deg, #E7F1FC 0%, #E6F3E9 100%)',
                     border: '2px solid #38bdf8',
-                    color: '#ffffff',
+                    color: '#26332E',
                     fontSize: '28px',
                     fontWeight: 900,
                     cursor: 'pointer',
@@ -583,12 +583,12 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <Trophy size={36} color="#fbbf24" />
               <div>
-                <div style={{ fontWeight: 800, color: '#f0fdf4', fontSize: '16px' }}>
+                <div style={{ fontWeight: 800, color: '#26332E', fontSize: '16px' }}>
                   {language === 'np'
                     ? 'शानदार! तपाईंले शून्य (०) को अवधारणा बुझ्नुभयो!'
                     : 'Splendid! You understood the concept of zero (0)!'}
                 </div>
-                <div style={{ fontSize: '12px', color: '#a7f3d0' }}>
+                <div style={{ fontSize: '12px', color: '#26332E' }}>
                   {language === 'np'
                     ? 'कुनै पनि समूहबाट सबै वस्तु हटेपछि शून्य (०) बाँकी रहन्छ।'
                     : 'When all objects leave a collection, zero (0) remains.'}
@@ -599,8 +599,8 @@ export const WhereDidEverythingGo: React.FC<Props> = ({
             <button
               onClick={handleNextScene}
               style={{
-                background: '#0284c7',
-                color: '#ffffff',
+                background: '#FFFFFF',
+                color: '#26332E',
                 border: 'none',
                 padding: '10px 18px',
                 borderRadius: '12px',

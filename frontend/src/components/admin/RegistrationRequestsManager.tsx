@@ -849,7 +849,7 @@ export const RegistrationRequestsManager: React.FC = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'rgba(14, 62, 59, 0.65)',
+            background: 'rgba(15,23,42, 0.65)',
             backdropFilter: 'blur(4px)',
             display: 'flex',
             alignItems: 'center',
@@ -1048,7 +1048,7 @@ export const RegistrationRequestsManager: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '6px',
-                    boxShadow: '0 2px 4px rgba(17, 122, 107, 0.2)',
+                    boxShadow: '0 2px 4px rgba(234,88,12, 0.2)',
                   }}
                 >
                   {actionLoading ? <Loader2 size={16} className="animate-spin" /> : <ShieldCheck size={16} />}
@@ -1073,7 +1073,7 @@ export const RegistrationRequestsManager: React.FC = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'rgba(14, 62, 59, 0.7)',
+            background: 'rgba(15,23,42, 0.7)',
             backdropFilter: 'blur(4px)',
             display: 'flex',
             alignItems: 'center',
