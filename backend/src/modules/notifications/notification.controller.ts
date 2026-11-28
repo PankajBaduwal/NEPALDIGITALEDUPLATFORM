@@ -1,4 +1,5 @@
 import { Response, NextFunction } from 'express';
+import mongoose from 'mongoose';
 import { AuthenticatedRequest } from '../../common/middleware/auth.middleware';
 import { NotificationService } from './notification.service';
 import { ApiResponse } from '../../common/utils/response.util';

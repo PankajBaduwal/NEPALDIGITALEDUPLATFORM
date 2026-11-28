@@ -1,4 +1,5 @@
 import { Response, NextFunction } from 'express';
+import mongoose from 'mongoose';
 import { AuthenticatedRequest } from '../../common/middleware/auth.middleware';
 import { FeatureAccessService } from './feature-access.service';
 import { FEATURE_DEFINITIONS, FeatureKey } from '../../models/FeatureAccess';
@@ -25,6 +26,9 @@ export class FeatureAccessController {
       const user = req.user!;
       const institutionId = String(req.institutionId || user.institutionId || '');
       if (!institutionId) return res.json({ success: true, data: { disabled: [] } });
+      if (mongoose.connection.readyState !== 1 || !mongoose.Types.ObjectId.isValid(institutionId) || !mongoose.Types.ObjectId.isValid(user.userId)) {
+        return res.json({ success: true, data: { disabled: [], bySection: {} } });
+      }
       const role = user.role === 'STUDENT' ? 'student' : 'teacher';
 
       // Contexts to evaluate: the student themself, or each section a teacher teaches / leads.

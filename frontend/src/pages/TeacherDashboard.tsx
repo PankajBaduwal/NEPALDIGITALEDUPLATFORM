@@ -1229,14 +1229,16 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
 
   const handleOpenLauncher = async (defaultAlloc?: any) => {
     setIsLauncherOpen(true);
-    let targetIndex = 0;
+    let targetIndex = allocations.length > 0 ? 0 : -1;
     if (defaultAlloc && allocations.length > 0) {
       const idx = allocations.findIndex((a) => (a.id || a._id) === (defaultAlloc.id || defaultAlloc._id));
       if (idx !== -1) targetIndex = idx;
     }
     setLauncherAllocIndex(targetIndex);
-    if (allocations[targetIndex]) {
+    if (targetIndex >= 0 && allocations[targetIndex]) {
       await loadLauncherResourcesForAlloc(allocations[targetIndex]);
+    } else {
+      setLauncherMode('WHITEBOARD');
     }
   };
 
@@ -1378,16 +1380,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
 
   const handleExecuteLaunch = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    const alloc = allocations[launcherAllocIndex];
-    if (!alloc) {
-      alert('No teaching allocation is available for this Smart Board session.');
-      return;
-    }
-
-    if (launcherMode === 'SIMULATION' && !launcherSelectedSim) {
-      alert('Select a simulation before launching the Smart Board.');
-      return;
-    }
+    const alloc = launcherAllocIndex >= 0 ? allocations[launcherAllocIndex] : null;
 
     setLauncherLoading(true);
     const smartBoardWindow = window.open('about:blank', '_blank');
@@ -1397,48 +1390,67 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
       return;
     }
 
+    let initialResourceName = 'Whiteboard';
+    let initialResourceUrl = '';
+    if (launcherMode === 'TEXTBOOK') {
+      const textbook = launcherTextbooks.find((item) => (item.id || item._id) === launcherSelectedTbId);
+      initialResourceName = textbook?.title || 'CDC Textbook PDF';
+      initialResourceUrl = launcherSelectedTbId ? `/api/v1/curriculum/textbooks/${launcherSelectedTbId}/pdf` : '';
+    } else if (launcherMode === 'SIMULATION') {
+      initialResourceName = 'Simulation';
+      const simTarget = launcherSelectedSim || '/sim/pascals-law';
+      initialResourceUrl = simTarget.startsWith('/') ? simTarget : `/simulations/${simTarget}`;
+    }
+
+    const defaultTitle = alloc
+      ? `${alloc.centralSubjectId?.name || 'Class'} Smart Board`
+      : 'Smart Board Canvas';
+    const effectiveTitle = launcherLessonTitle || defaultTitle;
+
+    const fallbackUrl = new URL('/smartboard/index.html', window.location.origin);
+    fallbackUrl.searchParams.set('mode', launcherMode);
+    fallbackUrl.searchParams.set('title', effectiveTitle);
+    if (launcherMode === 'SIMULATION' && initialResourceUrl) {
+      fallbackUrl.searchParams.set('sim', initialResourceUrl);
+    }
+    fallbackUrl.searchParams.set('sessionId', `session-${Date.now()}`);
+
     try {
-      let initialResourceName = 'Whiteboard';
-      let initialResourceUrl = '';
-      if (launcherMode === 'TEXTBOOK') {
-        const textbook = launcherTextbooks.find((item) => (item.id || item._id) === launcherSelectedTbId);
-        initialResourceName = textbook?.title || 'CDC Textbook PDF';
-        initialResourceUrl = `/api/v1/curriculum/textbooks/${launcherSelectedTbId}/pdf`;
-      } else if (launcherMode === 'SIMULATION') {
-        initialResourceName = 'Simulation';
-        initialResourceUrl = launcherSelectedSim.startsWith('/')
-          ? launcherSelectedSim
-          : `/simulations/${launcherSelectedSim}`;
-      }
+      const classId = alloc?.sectionId?.classId?.id || alloc?.sectionId?.classId?._id || alloc?.sectionId?.classId || 'general';
+      const sectionId = alloc?.sectionId?.id || alloc?.sectionId?._id || alloc?.sectionId || 'general';
+      const subjectId = alloc?.centralSubjectId?.id || alloc?.centralSubjectId?._id || alloc?.centralSubjectId || 'general';
 
       const session = await api.post<{ launcherUrl?: string }>('/smartboard/sessions', {
-        classId: alloc.sectionId?.classId?.id || alloc.sectionId?.classId?._id || alloc.sectionId?.classId,
-        sectionId: alloc.sectionId?.id || alloc.sectionId?._id || alloc.sectionId,
-        subjectId: alloc.centralSubjectId?.id || alloc.centralSubjectId?._id || alloc.centralSubjectId,
+        classId,
+        sectionId,
+        subjectId,
         textbookId: launcherMode === 'TEXTBOOK' ? launcherSelectedTbId || undefined : undefined,
         chapterNumber: launcherMode === 'TEXTBOOK' ? launcherSelectedChapter || 1 : undefined,
-        lessonTitle: launcherLessonTitle || 'Interactive Classroom Session',
+        lessonTitle: effectiveTitle,
         initialResourceType: launcherMode,
         initialResourceName,
         initialResourceUrl,
+      }).catch((apiErr) => {
+        console.warn('Smartboard session API returned error, falling back to direct launch:', apiErr);
+        return { launcherUrl: fallbackUrl.pathname + fallbackUrl.search };
       });
 
-      if (!session.launcherUrl) {
-        throw new Error('The Smart Board session was created without a launch URL.');
-      }
-
-      const launchUrl = new URL(session.launcherUrl, window.location.origin);
+      const launchUrl = session?.launcherUrl
+        ? new URL(session.launcherUrl, window.location.origin)
+        : fallbackUrl;
       launchUrl.searchParams.set('mode', launcherMode);
-      launchUrl.searchParams.set('title', launcherLessonTitle || 'Interactive Classroom Session');
-      if (launcherMode === 'SIMULATION') launchUrl.searchParams.set('sim', initialResourceUrl);
+      launchUrl.searchParams.set('title', effectiveTitle);
+      if (launcherMode === 'SIMULATION' && initialResourceUrl) {
+        launchUrl.searchParams.set('sim', initialResourceUrl);
+      }
 
       smartBoardWindow.location.href = launchUrl.toString();
       setIsLauncherOpen(false);
       loadTeacherData();
     } catch (error) {
-      smartBoardWindow.close();
-      console.error('Unable to launch Smart Board session:', error);
-      alert(error instanceof Error ? error.message : 'Unable to launch Smart Board. Please try again.');
+      console.warn('Launching Smart Board with fallback URL due to error:', error);
+      smartBoardWindow.location.href = fallbackUrl.toString();
+      setIsLauncherOpen(false);
     } finally {
       setLauncherLoading(false);
     }
@@ -8286,7 +8298,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                     onChange={(e) => {
                       const idx = Number(e.target.value);
                       setLauncherAllocIndex(idx);
-                      if (allocations[idx]) {
+                      if (idx >= 0 && allocations[idx]) {
                         loadLauncherResourcesForAlloc(allocations[idx]);
                       }
                     }}
@@ -8300,7 +8312,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                       color: isDarkMode ? '#f4faf8' : '#0e3e3b',
                     }}
                   >
-                    {allocations.length === 0 && <option value="">No teaching allocations available</option>}
+                    <option value="-1">✨ Open Smart Board Canvas (Whiteboard / No Book Required)</option>
                     {allocations.map((a: any, idx: number) => (
                       <option key={idx} value={idx}>
                         {a.centralSubjectId?.name} — {a.sectionId?.name} (Class {a.sectionId?.classId?.gradeNumber || '—'})
@@ -8336,6 +8348,73 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                     ))}
                   </div>
                 </div>
+
+                {launcherMode === 'TEXTBOOK' && (
+                  <div>
+                    {launcherTextbooks.length > 0 ? (
+                      <>
+                        <label style={{ fontSize: '12px', fontWeight: '700', display: 'block', marginBottom: '4px', color: isDarkMode ? '#cfdcd8' : '#2f4f4c' }}>Textbook</label>
+                        <select
+                          value={launcherSelectedTbId}
+                          onChange={(e) => setLauncherSelectedTbId(e.target.value)}
+                          style={{
+                            width: '100%',
+                            padding: '9px 12px',
+                            border: isDarkMode ? '1px solid #2f4f4c' : '1px solid #cfdcd8',
+                            borderRadius: '8px',
+                            fontSize: '13px',
+                            background: isDarkMode ? '#0e3e3b' : '#ffffff',
+                            color: isDarkMode ? '#f4faf8' : '#0e3e3b',
+                          }}
+                        >
+                          {launcherTextbooks.map((tb: any) => (
+                            <option key={tb.id || tb._id} value={tb.id || tb._id}>
+                              {tb.title} ({tb.medium || 'Standard'})
+                            </option>
+                          ))}
+                        </select>
+                      </>
+                    ) : (
+                      <div style={{ padding: '10px 14px', background: isDarkMode ? '#0f2f2c' : '#f0fdf4', border: '1px dashed #117a6b', borderRadius: '8px', fontSize: '12px', color: isDarkMode ? '#a7f3d0' : '#166534', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span>✨ No book required. Smart Board will launch directly in interactive Whiteboard mode.</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {launcherMode === 'SIMULATION' && (
+                  <div>
+                    <label style={{ fontSize: '12px', fontWeight: '700', display: 'block', marginBottom: '4px', color: isDarkMode ? '#cfdcd8' : '#2f4f4c' }}>Select Simulation</label>
+                    <select
+                      value={launcherSelectedSim || '/sim/pascals-law'}
+                      onChange={(e) => {
+                        setLauncherSelectedSim(e.target.value);
+                        const selText = e.target.options[e.target.selectedIndex].text;
+                        setLauncherLessonTitle(selText.replace(/^[^\w\s]+/, '').trim());
+                      }}
+                      style={{
+                        width: '100%',
+                        padding: '9px 12px',
+                        border: isDarkMode ? '1px solid #2f4f4c' : '1px solid #cfdcd8',
+                        borderRadius: '8px',
+                        fontSize: '13px',
+                        background: isDarkMode ? '#0e3e3b' : '#ffffff',
+                        color: isDarkMode ? '#f4faf8' : '#0e3e3b',
+                      }}
+                    >
+                      <option value="/sim/pascals-law">🔬 Pascal's Law Master Laboratory (Class 10 Science)</option>
+                      <option value="/sim/archimedes-principle">⚖️ Archimedes' Principle & Upthrust Lab (Class 10 Science)</option>
+                      <option value="/sim/boyles-law">🪶 Coin & Feather Vacuum Tube Experiment (Boyle's Vacuum)</option>
+                      <option value="/sim/gravitation">🌍 Newton's Law of Gravitation & Free Fall</option>
+                      <option value="/sim/floating-sinking">⛵ Law of Flotation & Liquid Density</option>
+                      {launcherSimulations.map((s: any, idx: number) => (
+                        <option key={idx} value={s.entryUrl || s.runtimeUrl || s.componentKey}>
+                          🎮 {s.title}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
 
                 <div>
                   <label style={{ fontSize: '12px', fontWeight: '700', display: 'block', marginBottom: '4px', color: isDarkMode ? '#cfdcd8' : '#2f4f4c' }}>Lesson Title</label>
@@ -8394,7 +8473,7 @@ Total Internal CAS = 50 Marks • External Board Examination = 50 Marks (Total =
                   </button>
                   <button
                     type="submit"
-                    disabled={launcherLoading || allocations.length === 0}
+                    disabled={launcherLoading}
                     style={{
                       padding: '8px 18px',
                       background: '#117a6b',

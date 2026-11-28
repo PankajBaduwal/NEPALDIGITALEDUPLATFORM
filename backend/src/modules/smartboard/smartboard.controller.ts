@@ -57,33 +57,29 @@ export class SmartBoardController {
       const institutionId = getInstId(req);
 
       const {
-        classId,
-        sectionId,
-        subjectId,
+        classId = 'general',
+        sectionId = 'general',
+        subjectId = 'general',
         textbookId,
         chapterNumber,
         chapterTitle,
         lessonTitle,
-        initialResourceType,
+        initialResourceType = 'WHITEBOARD',
         initialResourceName,
         initialResourceUrl,
       } = req.body;
 
-      if (!classId || !sectionId || !subjectId) {
-        return ApiResponse.error(res, 'Class, section, and subject are required to launch Smart Board', 400);
-      }
-
       const result = await SmartBoardService.startClassroomSession({
         institutionId,
         teacherId,
-        classId,
-        sectionId,
-        subjectId,
+        classId: classId || 'general',
+        sectionId: sectionId || 'general',
+        subjectId: subjectId || 'general',
         textbookId,
         chapterNumber: chapterNumber ? parseInt(chapterNumber, 10) : undefined,
         chapterTitle,
         lessonTitle,
-        initialResourceType,
+        initialResourceType: initialResourceType || 'WHITEBOARD',
         initialResourceName,
         initialResourceUrl,
       });

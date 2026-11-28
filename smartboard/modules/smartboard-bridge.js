@@ -107,7 +107,7 @@
         App.showToast('📖 CDC Textbook loaded — Use Pen to annotate over pages');
       }
     } else if (simName && typeof WorkspaceSplit !== 'undefined' && typeof WorkspaceSplit.openEmbed === 'function') {
-      var simUrl = '/smartboard/' + simName;
+      var simUrl = (simName.startsWith('/') || simName.startsWith('http')) ? simName : '/smartboard/' + simName;
       WorkspaceSplit.openEmbed(simUrl, sessionTitle + ' (Simulation)');
       if (window.App && typeof App.showToast === 'function') {
         App.showToast('🔬 Simulation active — Use Select tool to interact, Pen to annotate');
