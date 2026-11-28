@@ -445,10 +445,61 @@ export const SimulationLibrary: React.FC<SimulationLibraryProps> = ({
         </div>
       </div>
 
+      {/* ── LOADING & ERROR FEEDBACK ─────────────────────────────── */}
+      {loading && !hierarchyData && (
+        <div style={{ padding: '60px 20px', textAlign: 'center', color: '#64748b' }}>
+          <div
+            style={{
+              display: 'inline-block',
+              width: '36px',
+              height: '36px',
+              border: '3px solid #cbd5e1',
+              borderTopColor: '#117a6b',
+              borderRadius: '50%',
+            }}
+          />
+          <p style={{ marginTop: '12px', fontSize: '14px', fontWeight: '600' }}>
+            Loading curriculum simulations library...
+          </p>
+        </div>
+      )}
+
+      {error && !hierarchyData && (
+        <div
+          style={{
+            background: '#fef2f2',
+            border: '1px solid #fecaca',
+            borderRadius: '12px',
+            padding: '16px 20px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '16px',
+          }}
+        >
+          <span style={{ color: '#991b1b', fontSize: '13px', fontWeight: '600' }}>{error}</span>
+          <button
+            onClick={loadHierarchy}
+            style={{
+              background: '#dc2626',
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '6px 14px',
+              fontSize: '12px',
+              fontWeight: '700',
+              cursor: 'pointer',
+            }}
+          >
+            Retry
+          </button>
+        </div>
+      )}
+
       {/* ═════════════════════════════════════════════════════════════ */}
       {/* VIEW 1: CENTRALIZED SIMULATION LIBRARY HOMEPAGE (ALL CLASSES) */}
       {/* ═════════════════════════════════════════════════════════════ */}
-      {!selectedClass && (
+      {!selectedClass && hierarchyData && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
           {/* Loop through each academic level */}
           {hierarchyData?.levels?.map((lvl: any) => {

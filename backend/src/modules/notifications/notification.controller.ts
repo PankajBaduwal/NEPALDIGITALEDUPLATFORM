@@ -14,6 +14,10 @@ export class NotificationController {
         return ApiResponse.error(res, 'Authentication required', 401);
       }
 
+      if (mongoose.connection.readyState !== 1) {
+        return ApiResponse.success(res, { items: [], unreadCount: 0 }, 'Notifications (offline mode)');
+      }
+
       // If user has no institutionId, get from User record
       let effectiveInstId = institutionId;
       if (!effectiveInstId) {
@@ -23,7 +27,7 @@ export class NotificationController {
 
       // Query notifications for this user (or system-wide)
       const query: any = { recipientId: userId };
-      if (effectiveInstId) {
+      if (effectiveInstId && mongoose.Types.ObjectId.isValid(effectiveInstId)) {
         query.institutionId = effectiveInstId;
       }
 

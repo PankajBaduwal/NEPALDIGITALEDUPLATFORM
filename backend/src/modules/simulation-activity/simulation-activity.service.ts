@@ -17,6 +17,7 @@ import {
   ActivityType,
 } from '../../models/SimulationActivity';
 import { CentralSubject } from '../../models/Curriculum';
+import { class4ScienceSimulations } from '../../seed_ch4_science';
 
 export const FALLBACK_CLASS10_SIM = {
   _id: 'sim-sci-g10-ch1-01',
@@ -133,12 +134,973 @@ export const FALLBACK_CLASS10_SIM_BOYLE = {
   tags: ['coin and feather', 'boyle experiment', 'vacuum tube', 'free fall', 'acceleration due to gravity', 'air resistance', 'class 10 science'],
 };
 
-export const FALLBACK_CLASS10_SIMS = [FALLBACK_CLASS10_SIM, FALLBACK_CLASS10_SIM_TIDES, FALLBACK_CLASS10_SIM_BOYLE];
+export const FALLBACK_CLASS10_SIM_PASCAL = {
+  _id: 'sim-sci-g10-ch2-01',
+  id: 'sim-sci-g10-ch2-01',
+  code: 'SIM-SCI-G10-CH2-01',
+  title: "Pascal's Law & Hydraulic Machines",
+  titleNepali: 'पास्कलको नियम र हाइड्रोलिक मेसिन',
+  description: "Interactive simulation demonstrating Pascal's Law: pressure applied to an enclosed liquid is transmitted equally in all directions (P1 = P2, F1/A1 = F2/A2). Explore hydraulic lift, press, brakes, and piston equilibrium.",
+  descriptionNepali: 'बन्द भाँडोमा रहेको तरल पदार्थमा बाहिरबाट दबाब दिँदा उक्त दबाब सबै दिशामा बराबर रूपले प्रसारण हुन्छ। हाइड्रोलिक लिफ्ट, प्रेस, र ब्रेकको कार्यप्रणालीको अन्तरक्रियात्मक कार्टुन प्रयोगशाला।',
+  learningObjectives: [
+    "State and verify Pascal's Law: P = F1/A1 = F2/A2",
+    'Investigate hydraulic force multiplication: F2 = F1 * (A2 / A1)',
+    'Observe equal pressure transmission vectors in enclosed fluids',
+    'Calculate mechanical advantage in hydraulic lifts and presses',
+  ],
+  learningObjectivesNepali: [
+    'पास्कलको नियमको प्रयोगात्मक परीक्षण: P = F1/A1 = F2/A2',
+    'हाइड्रोलिक मेसिनमा बल गुणनको अध्ययन (F2 = F1 * A2 / A1)',
+    'बन्द भाँडोमा तरलको चारैतिर समान चाप प्रसारण अवलोकन गर्ने',
+    'हाइड्रोलिक लिफ्ट र प्रेसको यान्त्रिक फाइदा गणना गर्ने',
+  ],
+  gradeLevels: [10],
+  subjectCode: 'SCI',
+  chapterNumber: 2,
+  chapterTitle: 'Pressure',
+  chapterTitleNepali: 'चाप',
+  topicName: "Pascal's Law and Hydraulic Machines",
+  topicNameNepali: 'पास्कलको नियम र हाइड्रोलिक मेसिन',
+  difficulty: 'INTERMEDIATE',
+  estimatedMinutes: 25,
+  language: 'both',
+  simulationType: '2D_CANVAS',
+  componentKey: 'class10-sci-ch2-pascals-law',
+  runtimeUrl: '/sim/pascals-law',
+  status: 'AVAILABLE',
+  isPublished: true,
+  currentVersion: '1.0.0',
+  tags: ['pascals law', 'pressure', 'hydraulic lift', 'hydraulic press', 'force multiplication', 'class 10 science'],
+};
+
+export const FALLBACK_CLASS10_SIM_ARCHIMEDES = {
+  _id: 'sim-sci-g10-ch2-02',
+  id: 'sim-sci-g10-ch2-02',
+  code: 'SIM-SCI-G10-CH2-02',
+  title: "Archimedes' Principle & Law of Flotation",
+  titleNepali: 'आर्किमिडिजको सिद्धान्त र तैरने नियम',
+  description: "Interactive laboratory verifying Archimedes' Principle: upthrust experienced by an immersed body equals the weight of displaced liquid (Upthrust U = Weight in Air - Weight in Liquid = Weight of Displaced Liquid = V*d*g).",
+  descriptionNepali: 'कुनै वस्तुलाई तरल पदार्थमा आंशिक वा पूर्ण रूपले डुबाउँदा त्यसमा लाग्ने उर्ध्वचाप (Upthrust) वस्तुले विस्थापित गरेको तरलको तौलसँग बराबर हुन्छ (U = W_air - W_water = Vdg)।',
+  learningObjectives: [
+    "Verify Archimedes' Principle: Upthrust = Weight of displaced fluid",
+    'Measure apparent weight loss in liquid: Apparent Weight = Weight in air - Upthrust',
+    'Explore the conditions of floating and sinking based on density (d_object vs d_liquid)',
+    'Derive Upthrust formula: U = V * d * g',
+  ],
+  learningObjectivesNepali: [
+    'आर्किमिडिजको सिद्धान्तको प्रयोगात्मक प्रमाणीकरण (उर्ध्वचाप = विस्थापित पानीको तौल)',
+    'पानीमा तौल घट्ने प्रक्रिया (पानीमा तौल = हावामा तौल - उर्ध्वचाप)',
+    'घनत्वको आधारमा उत्रने र डुब्ने नियमको परीक्षण (d_object vs d_liquid)',
+    'उर्ध्वचापको सुत्र U = V * d * g को प्रयोग र गणना',
+  ],
+  gradeLevels: [10],
+  subjectCode: 'SCI',
+  chapterNumber: 2,
+  chapterTitle: 'Pressure',
+  chapterTitleNepali: 'चाप',
+  topicName: "Archimedes' Principle and Law of Flotation",
+  topicNameNepali: 'आर्किमिडिजको सिद्धान्त र तैरने नियम',
+  difficulty: 'INTERMEDIATE',
+  estimatedMinutes: 25,
+  language: 'both',
+  simulationType: '2D_CANVAS',
+  componentKey: 'class10-sci-ch2-archimedes-principle',
+  runtimeUrl: '/sim/archimedes-principle',
+  status: 'AVAILABLE',
+  isPublished: true,
+  currentVersion: '1.0.0',
+  tags: ['archimedes principle', 'upthrust', 'buoyancy', 'flotation', 'density', 'eureka can', 'class 10 science'],
+};
+
+export const FALLBACK_CLASS10_SIM_LIGHT = {
+  _id: 'sim-sci-g10-ch5-01',
+  id: 'sim-sci-g10-ch5-01',
+  code: 'SIM-SCI-G10-CH5-01',
+  title: 'Phenomena of Light: Refraction, Dispersion & TIR',
+  titleNepali: 'प्रकाशका परिघटनाहरू: अपवर्तन, वर्ण विच्छेदन र पूर्ण आन्तरिक परावर्तन',
+  description: 'Comprehensive interactive optics laboratory for Grade 10 Science: Snell’s Law of Refraction, Lateral Displacement in Glass Slabs, Cauchy Prism Dispersion (VIBGYOR wavelengths), and Total Internal Reflection with Critical Angle calculation.',
+  descriptionNepali: 'कक्षा १० विज्ञानको पूर्ण प्रकाश प्रयोगशाला: स्नेलको अपवर्तन नियम, काँचको स्ल्याबमा पार्श्व विस्थापन, प्रिज्मबाट प्रकाशको वर्ण विच्छेदन (VIBGYOR तरंग लम्बाइ) र क्रान्तिक कोणसहित पूर्ण आन्तरिक परावर्तन (TIR)।',
+  learningObjectives: [
+    "Verify Snell's Law (sin i / sin r = μ) and refractive indices across media",
+    'Measure lateral displacement (d) and normal shift through rectangular glass slabs',
+    'Demonstrate dispersion of white light into spectrum colors (VIBGYOR) through triangular prism',
+    'Observe Total Internal Reflection (TIR) and determine critical angle (i_c = arcsin(1/n))',
+  ],
+  learningObjectivesNepali: [
+    'स्नेलको अपवर्तन नियम र विभिन्न माध्यमको अपवर्तनांक (Refractive Index) को अध्ययन',
+    'काँचको स्ल्याबमा पार्श्व विस्थापन (Lateral shift) नाप्ने',
+    'प्रिज्मबाट सेतो प्रकाशको ७ रंगमा विच्छेदन (VIBGYOR) र तरंग लम्बाइको अध्ययन',
+    'क्रान्तिक कोण (Critical Angle) र पूर्ण आन्तरिक परावर्तन (TIR) को प्रयोगात्मक परीक्षण',
+  ],
+  gradeLevels: [10],
+  subjectCode: 'SCI',
+  chapterNumber: 5,
+  chapterTitle: 'Light',
+  chapterTitleNepali: 'प्रकाश',
+  topicName: 'Refraction, Dispersion, and Total Internal Reflection',
+  topicNameNepali: 'अपवर्तन, वर्ण विच्छेदन र पूर्ण आन्तरिक परावर्तन',
+  difficulty: 'INTERMEDIATE',
+  estimatedMinutes: 30,
+  language: 'both',
+  simulationType: '2D_CANVAS',
+  componentKey: 'class10-sci-ch5-phenomena-of-light',
+  runtimeUrl: '/sim/phenomena-of-light',
+  status: 'AVAILABLE',
+  isPublished: true,
+  currentVersion: '1.0.0',
+  tags: ['light', 'refraction', 'snells law', 'dispersion', 'prism', 'total internal reflection', 'critical angle', 'class 10 science'],
+};
+
+export const FALLBACK_CLASS10_SIMS = [
+  FALLBACK_CLASS10_SIM,
+  FALLBACK_CLASS10_SIM_TIDES,
+  FALLBACK_CLASS10_SIM_BOYLE,
+  FALLBACK_CLASS10_SIM_PASCAL,
+  FALLBACK_CLASS10_SIM_ARCHIMEDES,
+  FALLBACK_CLASS10_SIM_LIGHT,
+];
+
+export const FALLBACK_K12_CATALOG_SIMS = [
+  // ── Grade 2 ────────────────────────────────────────────────────────
+  {
+    _id: 'sim-math-g2-ch1-01',
+    code: 'SIM-MATH-G2-CH1-01',
+    title: 'Addition & Subtraction on 2D Number Line',
+    titleNepali: 'सङ्ख्या रेखामा जोड र घटाउ (कक्षा २)',
+    description: 'Jump along the number line up to 100 with interactive frog jumps, skip counting by 2s, 5s and 10s.',
+    descriptionNepali: 'सङ्ख्या रेखामा भ्यागुताको उफ्राइबाट २, ५ र १० को अन्तरमा गन्ती गर्दै १०० सम्मको जोड र घटाउ सिक्ने अभ्यास।',
+    gradeLevels: [2],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    chapterTitle: 'Numbers and Operations',
+    chapterTitleNepali: 'सङ्ख्या र गणितीय क्रियाहरू',
+    topicName: 'Number Line Operations',
+    topicNameNepali: 'सङ्ख्या रेखाका क्रियाहरू',
+    difficulty: 'BEGINNER',
+    estimatedMinutes: 15,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-number-line-frog',
+    runtimeUrl: '/simulations/math-number-line.html',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Math', 'Grade 2', 'Number Line', 'Addition'],
+  },
+  {
+    _id: 'sim-sci-g2-ch1-01',
+    code: 'SIM-SCI-G2-CH1-01',
+    title: 'Plants and Animals Around Us',
+    titleNepali: 'हाम्रो वरिपरिका बिरुवा र जनावरहरू',
+    description: 'Explore domestic animals, wild habitats, flowering plants, and trees in a rural Nepalese village.',
+    descriptionNepali: 'नेपाली गाउँको परिवेशमा घरपालुवा र जङ्गली जनावरहरू तथा फूल फुल्ने बिरुवाहरूको पहिचान र वर्गीकरण।',
+    gradeLevels: [2],
+    subjectCode: 'SCI',
+    chapterNumber: 1,
+    chapterTitle: 'Our Surrounding Environment',
+    chapterTitleNepali: 'हाम्रो वरिपरिको वातावरण',
+    topicName: 'Living Things in Village',
+    topicNameNepali: 'वरिपरिका सजीवहरू',
+    difficulty: 'BEGINNER',
+    estimatedMinutes: 15,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class4-sci-ch4-plant-garden',
+    runtimeUrl: '/simulations/class4-sci-ch4-plant-garden',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Science', 'Grade 2', 'Plants', 'Animals'],
+  },
+  // ── Grade 3 ────────────────────────────────────────────────────────
+  {
+    _id: 'sim-math-g3-ch1-01',
+    code: 'SIM-MATH-G3-CH1-01',
+    title: 'Multiplication Arrays & Equal Grouping',
+    titleNepali: 'गुणन र समूह विभाजन प्रयोगशाला',
+    description: 'Visualize multiplication as rows and columns of apples and classroom desks. Understand repeated addition.',
+    descriptionNepali: 'पंक्ति र स्तम्भमा वस्तुहरू राखी बारम्बार जोडबाट गुणनको नियम र अवधारणा बुझ्ने अन्तरक्रियात्मक अभ्यास।',
+    gradeLevels: [3],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    chapterTitle: 'Multiplication and Division',
+    chapterTitleNepali: 'गुणन र भाग',
+    topicName: 'Multiplication Arrays',
+    topicNameNepali: 'गुणन तालिका र समूह',
+    difficulty: 'BEGINNER',
+    estimatedMinutes: 15,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch10-make-ten',
+    runtimeUrl: '/simulations/class1-math/ch10/make-ten',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Math', 'Grade 3', 'Multiplication'],
+  },
+  {
+    _id: 'sim-sci-g3-ch1-01',
+    code: 'SIM-SCI-G3-CH1-01',
+    title: 'Himalayan Weather and Seasons Simulator',
+    titleNepali: 'मौसम र ऋतु परिवर्तन प्रयोगशाला',
+    description: 'Observe seasonal changes (Summer, Monsoon, Autumn, Winter, Spring) and cloud patterns in Nepal.',
+    descriptionNepali: 'नेपालका ६ वटा ऋतुहरू, वर्षा, घाम, हिउँ र बादल बन्ने प्रक्रियाको अन्तरक्रियात्मक अध्ययन।',
+    gradeLevels: [3],
+    subjectCode: 'SCI',
+    chapterNumber: 1,
+    chapterTitle: 'Weather and Seasons',
+    chapterTitleNepali: 'मौसम र ऋतुहरू',
+    topicName: 'Weather Dynamics',
+    topicNameNepali: 'मौसम परिवर्तन',
+    difficulty: 'BEGINNER',
+    estimatedMinutes: 15,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class4-sci-ch8-weather-simulator',
+    runtimeUrl: '/simulations/class4-sci-ch8-weather-simulator',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Science', 'Grade 3', 'Weather', 'Seasons'],
+  },
+  // ── Grade 5 ────────────────────────────────────────────────────────
+  {
+    _id: 'sim-sci-g5-ch1-01',
+    code: 'SIM-SCI-G5-CH1-01',
+    title: 'Photosynthesis & Solar Energy Lab',
+    titleNepali: 'प्रकाश संश्लेषण र सौर्य ऊर्जा प्रयोगशाला',
+    description: 'Control sunlight, carbon dioxide, and water levels to watch chloroplasts generate glucose and oxygen.',
+    descriptionNepali: 'घामको प्रकाश, कार्बनडाइअक्साइड र पानीको मात्रा मिलाएर बिरुवाले खाना बनाउने प्रकाश संश्लेषण प्रक्रिया।',
+    gradeLevels: [5],
+    subjectCode: 'SCI',
+    chapterNumber: 1,
+    chapterTitle: 'Plants and Photosynthesis',
+    chapterTitleNepali: 'बिरुवा र प्रकाश संश्लेषण',
+    topicName: 'Photosynthesis',
+    topicNameNepali: 'प्रकाश संश्लेषण',
+    difficulty: 'INTERMEDIATE',
+    estimatedMinutes: 20,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class4-sci-ch5-plant-growth',
+    runtimeUrl: '/simulations/class4-sci-ch5-plant-growth',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Science', 'Grade 5', 'Photosynthesis', 'Plants'],
+  },
+  {
+    _id: 'sim-math-g5-ch1-01',
+    code: 'SIM-MATH-G5-CH1-01',
+    title: 'Decimals, Percentages & Fractions Grid',
+    titleNepali: 'दशमलव, प्रतिशत र भिन्न तालिका',
+    description: '10x10 hundredths grid linking fractions, decimals (0.01 to 1.00), and percentages (1% to 100%).',
+    descriptionNepali: '१०० वटा कोठा भएको तालिकामा भिन्न, दशमलव र प्रतिशतबीचको सम्बन्ध स्पष्ट बुझ्ने अन्तरक्रियात्मक प्रयोगशाला।',
+    gradeLevels: [5],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    chapterTitle: 'Fractions and Decimals',
+    chapterTitleNepali: 'भिन्न र दशमलव',
+    topicName: 'Percentages and Decimals',
+    topicNameNepali: 'प्रतिशत र दशमलव',
+    difficulty: 'BEGINNER',
+    estimatedMinutes: 15,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-number-line-frog',
+    runtimeUrl: '/simulations/math-number-line.html',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Math', 'Grade 5', 'Fractions', 'Decimals', 'Percent'],
+  },
+  // ── Grade 7 ────────────────────────────────────────────────────────
+  {
+    _id: 'sim-sci-g7-ch1-01',
+    code: 'SIM-SCI-G7-CH1-01',
+    title: 'Heat Transfer: Conduction, Convection & Radiation',
+    titleNepali: 'ताप प्रसारण: सञ्चालन, संवहन र विकिरण',
+    description: 'Simulate thermal equilibrium, heat conduction in metals vs wood, convection currents in water, and infrared radiation.',
+    descriptionNepali: 'धातु र काठमा ताप सञ्चालन, तरलमा संवहन धारा र सौर्य विकिरणको प्रयोगात्मक परीक्षण।',
+    gradeLevels: [7],
+    subjectCode: 'SCI',
+    chapterNumber: 1,
+    chapterTitle: 'Heat',
+    chapterTitleNepali: 'ताप',
+    topicName: 'Heat Transfer Modes',
+    topicNameNepali: 'ताप प्रसारणका विधिहरू',
+    difficulty: 'INTERMEDIATE',
+    estimatedMinutes: 20,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class4-sci-ch6-states-of-matter',
+    runtimeUrl: '/simulations/class4-sci-ch6-states-of-matter',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Science', 'Grade 7', 'Heat', 'Thermodynamics'],
+  },
+  {
+    _id: 'sim-math-g7-ch1-01',
+    code: 'SIM-MATH-G7-CH1-01',
+    title: 'Linear Equations & Balance Scale',
+    titleNepali: 'समीकरण र तराजु सन्तुलन प्रयोगशाला',
+    description: 'Solve single-variable linear equations (ax + b = c) using visual two-pan balance weights and isolate x.',
+    descriptionNepali: 'तराजुका दुवै पल्लामा तौल थपघट गरी एक अज्ञात राशि भएको रैखिक समीकरण हल गर्ने अन्तरक्रियात्मक अभ्यास।',
+    gradeLevels: [7],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    chapterTitle: 'Algebra',
+    chapterTitleNepali: 'बीजगणित',
+    topicName: 'Linear Equations',
+    topicNameNepali: 'रैखिक समीकरण',
+    difficulty: 'INTERMEDIATE',
+    estimatedMinutes: 20,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch7-make-total',
+    runtimeUrl: '/simulations/class1-math/ch7/make-total',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Math', 'Grade 7', 'Algebra', 'Linear Equations'],
+  },
+  // ── Grade 8 ────────────────────────────────────────────────────────
+  {
+    _id: 'sim-sci-g8-ch1-01',
+    code: 'SIM-SCI-G8-CH1-01',
+    title: 'Fluid Pressure & Hydrostatic Depth Lab',
+    titleNepali: 'तरल पदार्थको चाप र गहिराइ प्रयोगशाला',
+    description: 'Investigate hydrostatic liquid pressure formula P = h * d * g with U-tube manometer at variable depths.',
+    descriptionNepali: 'गहिराइ, तरलको घनत्व र गुरुत्व प्रवेगको सम्बन्ध (P = h*d*g) म्यानोमिटरबाट मापन गर्ने अभ्यास।',
+    gradeLevels: [8],
+    subjectCode: 'SCI',
+    chapterNumber: 1,
+    chapterTitle: 'Pressure',
+    chapterTitleNepali: 'चाप',
+    topicName: 'Liquid Pressure',
+    topicNameNepali: 'तरलको चाप',
+    difficulty: 'INTERMEDIATE',
+    estimatedMinutes: 20,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class10-sci-ch2-pascals-law',
+    runtimeUrl: '/sim/pascals-law',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Science', 'Grade 8', 'Pressure', 'Fluids'],
+  },
+  // ── Grade 9 ────────────────────────────────────────────────────────
+  {
+    _id: 'sim-sci-g9-ch1-01',
+    code: 'SIM-SCI-G9-CH1-01',
+    title: "Newton's Laws of Motion & Momentum Lab",
+    titleNepali: 'न्युटनका चाल सम्बन्धी नियमहरू र संवेग',
+    description: "Verify Newton's First, Second (F = ma), and Third Laws of Motion with frictionless carts, mass weights, and spring collisions.",
+    descriptionNepali: 'न्युटनका तीनवटै चालका नियमहरू (F = ma, क्रिया र प्रतिक्रिया बल) कार्ट र स्प्रिङको मद्दतले प्रमाणीकरण गर्ने।',
+    gradeLevels: [9],
+    subjectCode: 'SCI',
+    chapterNumber: 1,
+    chapterTitle: 'Force and Motion',
+    chapterTitleNepali: 'बल र चाल',
+    topicName: "Newton's Laws of Motion",
+    topicNameNepali: 'चालका नियमहरू',
+    difficulty: 'INTERMEDIATE',
+    estimatedMinutes: 25,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class10-sci-ch1-universal-gravitation',
+    runtimeUrl: '/sim/universal-gravitation',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Physics', 'Grade 9', 'Newton Laws', 'Force', 'Momentum'],
+  },
+  // ── Grade 11 ───────────────────────────────────────────────────────
+  {
+    _id: 'sim-phy-g11-ch1-01',
+    code: 'SIM-PHY-G11-CH1-01',
+    title: "Young's Double Slit Wave Optics Laboratory",
+    titleNepali: 'यङ्गको द्वि-छिद्र तरंग अपवर्तन र व्यतिकरण',
+    description: 'Adjust slit separation (d), screen distance (D), and monochromatic laser wavelength (λ) to observe interference fringes (β = λD/d).',
+    descriptionNepali: 'प्रकाशको तरंग प्रकृति, द्वि-छिद्र व्यतिकरण (Interference fringes) र फ्रिन्ज चौडाइ (β = λD/d) को मापन।',
+    gradeLevels: [11],
+    subjectCode: 'PHY',
+    chapterNumber: 1,
+    chapterTitle: 'Wave Optics',
+    chapterTitleNepali: 'तरंग प्रकाशिकी',
+    topicName: 'Interference of Light',
+    topicNameNepali: 'प्रकाशको व्यतिकरण',
+    difficulty: 'ADVANCED',
+    estimatedMinutes: 30,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class10-sci-ch5-phenomena-of-light',
+    runtimeUrl: '/sim/phenomena-of-light',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Physics', 'Grade 11', 'Wave Optics', 'Interference', 'Young Double Slit'],
+  },
+  {
+    _id: 'sim-chem-g11-ch1-01',
+    code: 'SIM-CHEM-G11-CH1-01',
+    title: 'Volumetric Acid-Base Titration Simulator',
+    titleNepali: 'अम्ल र क्षारको आयतनात्मक अनुमापन (टाइट्रेसन)',
+    description: 'Titrate HCl with standard NaOH solution using phenolphthalein indicator. Observe titration curves and calculate unknown molarity.',
+    descriptionNepali: 'ब्युरेट, पिपेट र फेनोलफ्थालिन सूचक प्रयोग गरी अम्ल र क्षारको सन्तुलन बिन्दु पत्ता लगाउने टाइट्रेसन अभ्यास।',
+    gradeLevels: [11],
+    subjectCode: 'CHEM',
+    chapterNumber: 1,
+    chapterTitle: 'Quantitative Chemistry & Titration',
+    chapterTitleNepali: 'मात्रात्मक रसायन र अनुमापन',
+    topicName: 'Acid-Base Titration',
+    topicNameNepali: 'अम्ल-क्षार टाइट्रेसन',
+    difficulty: 'ADVANCED',
+    estimatedMinutes: 25,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class4-sci-ch1-dissolving',
+    runtimeUrl: '/simulations/class4-sci-ch1-dissolving',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Chemistry', 'Grade 11', 'Titration', 'Acids', 'Bases'],
+  },
+  {
+    _id: 'sim-bio-g11-ch1-01',
+    code: 'SIM-BIO-G11-CH1-01',
+    title: 'DNA Double Helix & Molecular Structure Lab',
+    titleNepali: 'डि.एन.ए. डबल हेलिक्स र आणविक संरचना',
+    description: 'Explore adenine-thymine (A-T) and guanine-cytosine (G-C) hydrogen bonding, antiparallel phosphate-sugar backbone, and replication forks.',
+    descriptionNepali: 'डीएनएको दुईवटा सूत्र, नाइट्रोजन बेस (A-T, G-C) बीचको हाइड्रोजन बन्धन र प्रतिकृतिकरण (Replication) को अध्ययन।',
+    gradeLevels: [11],
+    subjectCode: 'BIO',
+    chapterNumber: 1,
+    chapterTitle: 'Biomolecules and Cell Biology',
+    chapterTitleNepali: 'जैव अणु र कोष जीवविज्ञान',
+    topicName: 'DNA Structure',
+    topicNameNepali: 'डीएनएको संरचना',
+    difficulty: 'ADVANCED',
+    estimatedMinutes: 25,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class4-sci-ch5-butterfly-cycle',
+    runtimeUrl: '/simulations/class4-sci-ch5-butterfly-cycle',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Biology', 'Grade 11', 'DNA', 'Genetics', 'Molecular Biology'],
+  },
+  {
+    _id: 'sim-math-g11-ch1-01',
+    code: 'SIM-MATH-G11-CH1-01',
+    title: 'Calculus: Derivative & Tangent Line Explorer',
+    titleNepali: 'क्यालकुलस: अवकलज र स्पर्श रेखा अन्वेषक',
+    description: 'Drag points on curve y = f(x) to watch secant lines converge to tangent lines: dy/dx = lim(h->0) [f(x+h)-f(x)]/h.',
+    descriptionNepali: 'वक्र रेखामा स्पर्श रेखाको झुकाव (Slope) र सीमागत परिवर्तनबाट अवकलज (Derivative) को ज्यामितीय अर्थ सिक्ने।',
+    gradeLevels: [11],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    chapterTitle: 'Calculus',
+    chapterTitleNepali: 'क्यालकुलस',
+    topicName: 'Derivatives and Tangents',
+    topicNameNepali: 'अवकलन र स्पर्श रेखा',
+    difficulty: 'ADVANCED',
+    estimatedMinutes: 25,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch2-explorer',
+    runtimeUrl: '/simulations/class1-math/ch2/explorer',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Mathematics', 'Grade 11', 'Calculus', 'Derivatives'],
+  },
+  // ── Grade 12 ───────────────────────────────────────────────────────
+  {
+    _id: 'sim-phy-g12-ch1-01',
+    code: 'SIM-PHY-G12-CH1-01',
+    title: "Einstein's Photoelectric Effect Laboratory",
+    titleNepali: 'आइन्स्टाइनको फोटोइलेक्ट्रिक प्रभाव प्रयोगशाला',
+    description: 'Shine ultraviolet, visible, and infrared light on zinc, sodium, and copper cathodes. Measure stopping potential and verify h*f = Φ + KE_max.',
+    descriptionNepali: 'विभिन्न धातुहरूमा प्रकाश पारी इलेक्ट्रोन निष्कासन हुने प्रक्रिया, देहली आवृत्ति (Threshold frequency) र रोक्ने विभवको अध्ययन।',
+    gradeLevels: [12],
+    subjectCode: 'PHY',
+    chapterNumber: 1,
+    chapterTitle: 'Modern Physics & Photons',
+    chapterTitleNepali: 'आधुनिक भौतिकी र फोटोन',
+    topicName: 'Photoelectric Effect',
+    topicNameNepali: 'फोटोइलेक्ट्रिक प्रभाव',
+    difficulty: 'ADVANCED',
+    estimatedMinutes: 30,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class10-sci-ch5-phenomena-of-light',
+    runtimeUrl: '/sim/phenomena-of-light',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Physics', 'Grade 12', 'Modern Physics', 'Photoelectric', 'Quantum'],
+  },
+  {
+    _id: 'sim-chem-g12-ch1-01',
+    code: 'SIM-CHEM-G12-CH1-01',
+    title: 'Galvanic Electrochemical Cell & Nernst Equation',
+    titleNepali: 'ग्याल्भानिक विद्युत रासायनिक सेल र नर्न्स्ट समीकरण',
+    description: 'Construct a Zn-Cu Daniell cell with salt bridge. Monitor electron flow, standard cell potential (E° = 1.10 V), and concentration dependence.',
+    descriptionNepali: 'जिंक र कपर इलेक्ट्रोड भएको ड्यानिएल सेलमा इलेक्ट्रोन प्रवाह, लवण पुल (Salt bridge) र भोल्टेज मापन।',
+    gradeLevels: [12],
+    subjectCode: 'CHEM',
+    chapterNumber: 1,
+    chapterTitle: 'Electrochemistry',
+    chapterTitleNepali: 'विद्युत रसायन',
+    topicName: 'Galvanic Cells',
+    topicNameNepali: 'विद्युत रासायनिक सेल',
+    difficulty: 'ADVANCED',
+    estimatedMinutes: 25,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class4-sci-ch7-electricity-lab',
+    runtimeUrl: '/simulations/class4-sci-ch7-electricity-lab',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Chemistry', 'Grade 12', 'Electrochemistry', 'Galvanic Cell', 'Nernst'],
+  },
+  {
+    _id: 'sim-bio-g12-ch1-01',
+    code: 'SIM-BIO-G12-CH1-01',
+    title: 'Mendelian Genetics: Monohybrid & Dihybrid Cross',
+    titleNepali: 'मेन्डेलको वंशाणुक्रम नियम र पुनेट स्क्वायर',
+    description: 'Cross dominant and recessive pea plant traits (round/wrinkled seeds, yellow/green color). Verify 3:1 and 9:3:3:1 phenotypic ratios.',
+    descriptionNepali: 'केराउको बोटमा मेन्डेलका नियमहरू (प्रभावी र अप्रभावी गुण) पुनेट स्क्वायरको मद्दतले क्रस गराई अनुपात परीक्षण गर्ने।',
+    gradeLevels: [12],
+    subjectCode: 'BIO',
+    chapterNumber: 1,
+    chapterTitle: 'Genetics and Heredity',
+    chapterTitleNepali: 'वंशाणुक्रम र जेनेटिक्स',
+    topicName: 'Mendelian Inheritance',
+    topicNameNepali: 'मेन्डेलियन क्रस',
+    difficulty: 'ADVANCED',
+    estimatedMinutes: 25,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class4-sci-ch4-animal-classification',
+    runtimeUrl: '/simulations/class4-sci-ch4-animal-classification',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Biology', 'Grade 12', 'Genetics', 'Mendel', 'Punnett Square'],
+  },
+  {
+    _id: 'sim-math-g12-ch1-01',
+    code: 'SIM-MATH-G12-CH1-01',
+    title: 'Integral Calculus: Definite Integrals & Riemann Sums',
+    titleNepali: 'समाकलन क्यालकुलस: निश्चित समाकलन र क्षेत्रफल',
+    description: 'Approximate area under curve y = f(x) from a to b using left, right, and midpoint Riemann sums with increasing n partitions.',
+    descriptionNepali: 'वक्र रेखा र अक्षबीचको क्षेत्रफल रिमान योग (Riemann sums) र समाकलन (Definite integral) बाट गणना गर्ने।',
+    gradeLevels: [12],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    chapterTitle: 'Integral Calculus',
+    chapterTitleNepali: 'समाकलन क्यालकुलस',
+    topicName: 'Definite Integrals and Area',
+    topicNameNepali: 'निश्चित समाकलन र क्षेत्रफल',
+    difficulty: 'ADVANCED',
+    estimatedMinutes: 25,
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch2-drawing',
+    runtimeUrl: '/simulations/class1-math/ch2/drawing',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Mathematics', 'Grade 12', 'Calculus', 'Integrals', 'Riemann Sum'],
+  },
+];
+
+export const FALLBACK_SEED_SIMS = [
+  {
+    _id: 'sim-phy-g6-circuit',
+    id: 'sim-phy-g6-circuit',
+    code: 'SIM-PHY-G6-CIRCUIT',
+    title: "Simple Electric Circuit & Ohm's Law",
+    titleNepali: 'सामान्य विद्युत परिपथ र ओमको नियम',
+    description:
+      'Interactive electric circuit with live voltage/resistance controls, ammeter calculations, and electron particle visualization.',
+    learningObjectives: [
+      "Demonstrate Ohm's Law (I = V / R)",
+      'Understand relationship between voltage, resistance and electric current',
+      'Observe bulb luminosity with power variations',
+    ],
+    gradeLevels: [6, 7, 8, 9, 10],
+    subjectCode: 'SCI',
+    chapterNumber: 4,
+    topicName: 'Current Electricity & Magnetism',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    runtimeUrl: '/simulations/physics-electric-circuit.html',
+    isPublished: true,
+    tags: ['Physics', 'Electricity', "Ohm's Law", 'Class 6-10'],
+  },
+  {
+    _id: 'sim-math-g1-fractions',
+    id: 'sim-math-g1-fractions',
+    code: 'SIM-MATH-G1-FRACTIONS',
+    title: 'Interactive Fractions Visualizer',
+    titleNepali: 'भिन्नको अवधारणा र वृत्त विभाजन',
+    description:
+      'Dynamic pizza and slice visualizer illustrating denominators, numerators, and equivalent fractions for primary students.',
+    learningObjectives: [
+      'Identify parts of a whole',
+      'Understand numerator (shaded) and denominator (total)',
+      'Calculate equivalent fractions and decimals',
+    ],
+    gradeLevels: [3, 4, 5],
+    subjectCode: 'MATH',
+    chapterNumber: 7,
+    topicName: 'Fractions & Decimals',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    runtimeUrl: '/simulations/math-fractions-pizza.html',
+    isPublished: true,
+    tags: ['Math', 'Primary', 'Fractions', 'Class 1-5'],
+  },
+  {
+    _id: 'sim-phy-g9-projectile',
+    id: 'sim-phy-g9-projectile',
+    code: 'SIM-PHY-G9-PROJECTILE',
+    title: 'Projectile Motion Laboratory',
+    titleNepali: 'प्रक्षेप्य गति प्रयोगशाला',
+    description:
+      'Parabolic flight physics simulation with launch angle, velocity, and gravity selectors including high-altitude Nepal Everest gravity.',
+    learningObjectives: [
+      'Calculate maximum height and horizontal range',
+      'Determine time of flight across angles',
+      'Verify theoretical trajectory parabolas',
+    ],
+    gradeLevels: [9, 10, 11, 12],
+    subjectCode: 'SCI',
+    chapterNumber: 2,
+    topicName: 'Motion in Two Dimensions',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    runtimeUrl: '/simulations/physics-projectile-motion.html',
+    isPublished: true,
+    tags: ['Physics', 'Mechanics', 'Projectile', 'Class 9-12'],
+  },
+  {
+    _id: 'sim-chem-g6-bohr',
+    id: 'sim-chem-g6-bohr',
+    code: 'SIM-CHEM-G6-BOHR',
+    title: "Bohr's Atomic Model Visualizer",
+    titleNepali: 'बोरको पारमाणविक नमुना',
+    description:
+      'Animated electron shell visualizer (K, L, M, N) for elements 1 to 20 with valence electrons and atomic numbers.',
+    learningObjectives: [
+      'Apply 2n² electron configuration rule',
+      'Identify valence electrons and chemical valency',
+      'Distinguish protons and neutrons in nucleus',
+    ],
+    gradeLevels: [6, 7, 8, 9, 10],
+    subjectCode: 'SCI',
+    chapterNumber: 5,
+    topicName: 'Matter and Atomic Structure',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    runtimeUrl: '/simulations/chem-atomic-bohr.html',
+    isPublished: true,
+    tags: ['Chemistry', 'Atom', 'Bohr Model', 'Class 6-10'],
+  },
+  {
+    _id: 'sim-cs-g9-logic',
+    id: 'sim-cs-g9-logic',
+    code: 'SIM-CS-G9-LOGIC',
+    title: 'Digital Logic Circuit Simulator',
+    titleNepali: 'डिजिटल लजिक गेट्स प्रयोगशाला',
+    description:
+      'Interactive logic gate tester for AND, OR, NOT, NAND, NOR, XOR with live toggles, output LED, and truth table highlighting.',
+    learningObjectives: [
+      'Construct basic and universal logic gates',
+      'Formulate Boolean algebra outputs',
+      'Verify complete truth tables interactively',
+    ],
+    gradeLevels: [9, 10, 11, 12],
+    subjectCode: 'COM',
+    chapterNumber: 1,
+    topicName: 'Boolean Logic & Digital Systems',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    runtimeUrl: '/simulations/cs-logic-gates.html',
+    isPublished: true,
+    tags: ['Computer Science', 'Logic Gates', 'Class 9-12'],
+  },
+  {
+    _id: 'sim-math-g1-numberline',
+    id: 'sim-math-g1-numberline',
+    code: 'SIM-MATH-G1-NUMBERLINE',
+    title: 'Number Line & Counting Frog',
+    titleNepali: 'सङ्ख्या रेखा र भ्यागुताको उफ्राइ',
+    description:
+      'Interactive number line and garden with animated frog demonstrating counting, addition, subtraction, missing numbers, and Nepali numerals ० देखि २०.',
+    learningObjectives: [
+      'Count forward and backward on number line',
+      'Recognize Nepali numerals and word values (० देखि २०)',
+      'Perform single-digit addition and subtraction using forward and backward jumps',
+      'Solve missing number challenges and complete number patterns',
+    ],
+    gradeLevels: [1, 2, 3, 4, 5],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    topicName: 'Numbers & Basic Operations',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-number-line-frog',
+    runtimeUrl: '/simulations/math-number-line.html',
+    isPublished: true,
+    tags: ['Math', 'Primary', 'Counting', 'Number Line', 'Class 1-5'],
+  },
+  {
+    _id: 'sim-bio-g6-cell',
+    id: 'sim-bio-g6-cell',
+    code: 'SIM-BIO-G6-CELL',
+    title: 'Virtual Microscope: Cell Structure',
+    titleNepali: 'कोषको संरचना र भर्चुअल माइक्रोस्कोप',
+    description:
+      'Specimen comparison between plant cell and animal cell with interactive organelle inspection.',
+    learningObjectives: [
+      'Differentiate plant and animal cell organelles',
+      'Identify nucleus, mitochondria, chloroplast and cell wall functions',
+      'Understand cellular turgor and photosynthesis support',
+    ],
+    gradeLevels: [6, 7, 8, 9, 10],
+    subjectCode: 'SCI',
+    chapterNumber: 3,
+    topicName: 'Living Organisms & Cell Biology',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    runtimeUrl: '/simulations/bio-cell-structure.html',
+    isPublished: true,
+    tags: ['Biology', 'Cells', 'Microscope', 'Class 6-10'],
+  },
+];
+
+export const FALLBACK_CLASS1_MATH_SIMS = [
+  {
+    _id: 'sim-math-g1-ch1-01',
+    id: 'sim-math-g1-ch1-01',
+    code: 'SIM-MATH-G1-CH1-01',
+    title: 'My Position Playground – Inside, Outside, Above and Below',
+    titleNepali: 'मेरो ३डी स्थिति खेलमैदान – भित्र, बाहिर, माथि र तल',
+    description: 'Interactive Nepalese village playground for learning Inside/Outside and Above/Below spatial relationships.',
+    descriptionNepali: 'नेपाली गाउँको सुन्दर ३डी खेलमैदानमा भित्र र बाहिर, माथि र तलका अवधारणाहरू सिक्ने अन्तरक्रियात्मक अभ्यास।',
+    gradeLevels: [1],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    chapterTitle: 'Shapes and Position',
+    chapterTitleNepali: 'आकारप्रकार र स्थान',
+    topicName: 'Inside, Outside, Above and Below',
+    topicNameNepali: 'भित्र, बाहिर, माथि र तल',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch1-playground',
+    runtimeUrl: '/simulations/class1-math-ch1-playground',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Class 1', 'Mathematics', 'Shapes and Position'],
+  },
+  {
+    _id: 'sim-math-g1-ch1-02',
+    id: 'sim-math-g1-ch1-02',
+    code: 'SIM-MATH-G1-CH1-02',
+    title: 'Big and Small World',
+    titleNepali: 'ठूलो र सानो संसार',
+    description: 'Interactive scale laboratory comparing volume, mass perception, and object sizes.',
+    descriptionNepali: 'हात्ती, बल, माटोका भाँडा र फलफूलका टोकरीहरूको आकार तुलना गरी ठूलो र सानो छुट्याउने अभ्यास।',
+    gradeLevels: [1],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    chapterTitle: 'Shapes and Position',
+    chapterTitleNepali: 'आकारप्रकार र स्थान',
+    topicName: 'Big and Small',
+    topicNameNepali: 'ठूलो र सानो',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch1-big-small',
+    runtimeUrl: '/simulations/class1-math-ch1-big-small',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Class 1', 'Mathematics', 'Big and Small'],
+  },
+  {
+    _id: 'sim-math-g1-ch1-03',
+    id: 'sim-math-g1-ch1-03',
+    code: 'SIM-MATH-G1-CH1-03',
+    title: 'Tall and Short Adventure',
+    titleNepali: 'अग्लो र होचो यात्रा',
+    description: 'Compare vertical height of Himalayan mountains, trees, towers, and animals.',
+    descriptionNepali: 'हिमाल, रुख, स्तम्भ र जनावरहरूको उचाइ तुलना गरी अग्लो र होचो छुट्याउने ३डी अभ्यास।',
+    gradeLevels: [1],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    chapterTitle: 'Shapes and Position',
+    chapterTitleNepali: 'आकारप्रकार र स्थान',
+    topicName: 'Tall and Short',
+    topicNameNepali: 'अग्लो र होचो',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch1-tall-short',
+    runtimeUrl: '/simulations/class1-math-ch1-tall-short',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Class 1', 'Mathematics', 'Tall and Short'],
+  },
+  {
+    _id: 'sim-math-g1-ch1-04',
+    id: 'sim-math-g1-ch1-04',
+    code: 'SIM-MATH-G1-CH1-04',
+    title: 'Long and Short Explorer',
+    titleNepali: 'लामो र छोटो अन्वेषक',
+    description: 'Compare horizontal lengths of pencils, ropes, bridges, and trains.',
+    descriptionNepali: 'सिसाकलम, डोरी, झोलुङ्गे पुल र रेलको लम्बाइ नापी लामो र छोटो छुट्याउने अन्तरक्रियात्मक अभ्यास।',
+    gradeLevels: [1],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    chapterTitle: 'Shapes and Position',
+    chapterTitleNepali: 'आकारप्रकार र स्थान',
+    topicName: 'Long and Short',
+    topicNameNepali: 'लामो र छोटो',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch1-long-short',
+    runtimeUrl: '/simulations/class1-math-ch1-long-short',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Class 1', 'Mathematics', 'Long and Short'],
+  },
+  {
+    _id: 'sim-math-g1-ch1-05',
+    id: 'sim-math-g1-ch1-05',
+    code: 'SIM-MATH-G1-CH1-05',
+    title: 'Direction and Distance Adventure',
+    titleNepali: 'दिशा र दूरी साहसिक यात्रा',
+    description: 'Navigate village map learning Near/Far and Left/Right/Front/Back directions.',
+    descriptionNepali: 'गाउँको नक्सामा नजिक र टाढा, दायाँ, बायाँ, अगाडि र पछाडि दिशा पत्ता लगाउने यात्रा।',
+    gradeLevels: [1],
+    subjectCode: 'MATH',
+    chapterNumber: 1,
+    chapterTitle: 'Shapes and Position',
+    chapterTitleNepali: 'आकारप्रकार र स्थान',
+    topicName: 'Direction and Distance',
+    topicNameNepali: 'दिशा र दूरी',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch1-direction-distance',
+    runtimeUrl: '/simulations/class1-math-ch1-direction-distance',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Class 1', 'Mathematics', 'Direction and Distance'],
+  },
+  {
+    _id: 'sim-math-g1-ch2-01',
+    id: 'sim-math-g1-ch2-01',
+    code: 'SIM-MATH-G1-CH2-01',
+    title: 'Straight and Curved Line Explorer',
+    titleNepali: 'सीधा र बाङ्गो रेखा चिनौँ',
+    description: 'Explore straight and curved lines in a vibrant village playground.',
+    descriptionNepali: 'गाउँको सुन्दर खेलमैदानमा सडक, डोरी, पुल र रेलको लिकबाट सीधा र बाङ्गो रेखा सिक्ने अभ्यास।',
+    gradeLevels: [1],
+    subjectCode: 'MATH',
+    chapterNumber: 2,
+    chapterTitle: 'Lines',
+    chapterTitleNepali: 'रेखाहरू',
+    topicName: 'Straight and Curved Lines',
+    topicNameNepali: 'सीधा र बाङ्गो रेखा',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch2-explorer',
+    runtimeUrl: '/simulations/class1-math/ch2/explorer',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Class 1', 'Mathematics', 'Lines'],
+  },
+  {
+    _id: 'sim-math-g1-ch3-01',
+    id: 'sim-math-g1-ch3-01',
+    code: 'SIM-MATH-G1-CH3-01',
+    title: '3D Geometrical Shape Explorer',
+    titleNepali: 'ज्यामितीय आकारहरूको संसार',
+    description: 'Identify circles, triangles, squares, and rectangles in traditional Nepalese structures.',
+    descriptionNepali: 'गोलो, त्रिकोण, वर्गाकार र आयातकार आकारहरू मन्दिर, घर र झ्यालहरूमा पहिचान गर्ने।',
+    gradeLevels: [1],
+    subjectCode: 'MATH',
+    chapterNumber: 3,
+    chapterTitle: 'Geometrical Shapes',
+    chapterTitleNepali: 'ज्यामितीय आकारहरू',
+    topicName: '2D & 3D Shapes',
+    topicNameNepali: 'ज्यामितीय आकारहरू',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch3-explorer',
+    runtimeUrl: '/simulations/class1-math/ch3/explorer',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Class 1', 'Mathematics', 'Shapes'],
+  },
+  {
+    _id: 'sim-math-g1-ch4-01',
+    id: 'sim-math-g1-ch4-01',
+    code: 'SIM-MATH-G1-CH4-01',
+    title: 'Many and Few Adventure – Numbers up to 9',
+    titleNepali: 'धेरै र थोरै – ९ सम्मका सङ्ख्याहरू',
+    description: 'Count apples, butterflies, and stones up to 9 with visual comparisons of many vs few.',
+    descriptionNepali: '९ सम्मका सङ्ख्याहरू गन्ती गर्दै धेरै र थोरै वस्तुहरूको समूह तुलना गर्ने अभ्यास।',
+    gradeLevels: [1],
+    subjectCode: 'MATH',
+    chapterNumber: 4,
+    chapterTitle: 'Numbers up to 9',
+    chapterTitleNepali: '९ सम्मका सङ्ख्याहरू',
+    topicName: 'Counting up to 9',
+    topicNameNepali: '९ सम्मको गन्ती',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch4-many-few',
+    runtimeUrl: '/simulations/class1-math/ch4/many-few',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Class 1', 'Mathematics', 'Numbers up to 9'],
+  },
+  {
+    _id: 'sim-math-g1-ch5-01',
+    id: 'sim-math-g1-ch5-01',
+    code: 'SIM-MATH-G1-CH5-01',
+    title: 'Zero Discovery Playground',
+    titleNepali: 'शून्य (०) को खोज खेलमैदान',
+    description: 'Understand the concept of zero (empty basket, zero birds on branch) interactively.',
+    descriptionNepali: 'टोकरी रित्तो हुनु र रुखका चरा उडेर केही पनि नरहनुबाट शून्यको अवधारणा बुझ्ने।',
+    gradeLevels: [1],
+    subjectCode: 'MATH',
+    chapterNumber: 5,
+    chapterTitle: 'Zero',
+    chapterTitleNepali: 'शून्य',
+    topicName: 'Concept of Zero',
+    topicNameNepali: 'शून्यको अवधारणा',
+    language: 'both',
+    simulationType: '2D_CANVAS',
+    componentKey: 'class1-math-ch5-playground',
+    runtimeUrl: '/simulations/class1-math/ch5/playground',
+    status: 'AVAILABLE',
+    isPublished: true,
+    tags: ['Class 1', 'Mathematics', 'Zero'],
+  },
+];
 
 export class SimulationActivityService {
   // ══════════════════════════════════════════════════════════════════
   // SIMULATIONS
   // ══════════════════════════════════════════════════════════════════
+
+  static getAllFallbackSimulations(): any[] {
+    const class4Sims = (class4ScienceSimulations || []).map((s: any) => ({
+      ...s,
+      _id: s._id || s.code.toLowerCase(),
+      id: s.id || s.code.toLowerCase(),
+      status: s.status || 'AVAILABLE',
+      isPublished: true,
+    }));
+
+    return [
+      ...FALLBACK_CLASS10_SIMS,
+      ...FALLBACK_SEED_SIMS,
+      ...FALLBACK_CLASS1_MATH_SIMS,
+      ...FALLBACK_K12_CATALOG_SIMS,
+      ...class4Sims,
+    ];
+  }
 
   static async listSimulations(filter: {
     grade?: number;
@@ -149,75 +1111,134 @@ export class SimulationActivityService {
     simulationType?: string;
     isPublished?: boolean;
   }) {
-    const query: any = {};
-    if (filter.grade) {
-      query.gradeLevels = filter.grade;
-    }
-    if (filter.subjectCode) {
-      const sc = filter.subjectCode.toUpperCase();
-      if (sc === 'MATH') {
-        query.subjectCode = { $in: ['MATH', 'MTH', /^MATH-/i] };
-      } else if (sc === 'OPTMATH') {
-        query.subjectCode = { $in: ['OPTMATH', /^OPTMATH-/i] };
-      } else {
-        query.subjectCode = filter.subjectCode;
+    let items: any[] = [];
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const query: any = {};
+        if (filter.grade) {
+          query.gradeLevels = filter.grade;
+        }
+        if (filter.subjectCode) {
+          const sc = filter.subjectCode.toUpperCase();
+          if (sc === 'MATH') {
+            query.subjectCode = { $in: ['MATH', 'MTH', /^MATH-/i] };
+          } else if (sc === 'OPTMATH') {
+            query.subjectCode = { $in: ['OPTMATH', /^OPTMATH-/i] };
+          } else {
+            query.subjectCode = filter.subjectCode;
+          }
+        }
+        if (filter.chapterNumber) {
+          query.chapterNumber = filter.chapterNumber;
+        }
+        if (filter.language && filter.language !== 'all') {
+          query.$or = [{ language: filter.language }, { language: 'both' }];
+        }
+        if (filter.simulationType) {
+          query.simulationType = filter.simulationType;
+        }
+        if (typeof filter.isPublished === 'boolean') {
+          query.isPublished = filter.isPublished;
+        }
+        if (filter.search) {
+          const regex = new RegExp(filter.search, 'i');
+          query.$or = [
+            { title: regex },
+            { titleNepali: regex },
+            { description: regex },
+            { topicName: regex },
+            { tags: regex },
+          ];
+        }
+
+        const sims = await Simulation.find(query).sort({ chapterNumber: 1, createdAt: 1 }).maxTimeMS(2500);
+        items = sims.map((doc: any) => (doc.toJSON ? doc.toJSON() : doc));
+      } catch (err) {
+        console.warn('[SimulationActivityService] listSimulations DB query timed out or failed:', err);
+        items = [];
       }
-    }
-    if (filter.chapterNumber) {
-      query.chapterNumber = filter.chapterNumber;
-    }
-    if (filter.language && filter.language !== 'all') {
-      query.$or = [{ language: filter.language }, { language: 'both' }];
-    }
-    if (filter.simulationType) {
-      query.simulationType = filter.simulationType;
-    }
-    if (typeof filter.isPublished === 'boolean') {
-      query.isPublished = filter.isPublished;
-    }
-    if (filter.search) {
-      const regex = new RegExp(filter.search, 'i');
-      query.$or = [
-        { title: regex },
-        { titleNepali: regex },
-        { description: regex },
-        { topicName: regex },
-        { tags: regex },
-      ];
     }
 
-    const sims = await Simulation.find(query).sort({ chapterNumber: 1, createdAt: 1 });
-    const items: any[] = sims.map((doc: any) => (doc.toJSON ? doc.toJSON() : doc));
-    if (!filter.grade || filter.grade === 10) {
-      if (!filter.subjectCode || filter.subjectCode === 'SCI') {
-        if (!filter.chapterNumber || filter.chapterNumber === 1) {
-          FALLBACK_CLASS10_SIMS.forEach((fallbackSim) => {
-            if (!items.some((s: any) => s.code === fallbackSim.code)) {
-              items.push(fallbackSim);
-            }
-          });
+    const fallbacks = SimulationActivityService.getAllFallbackSimulations();
+    const filteredFallbacks = fallbacks.filter((sim: any) => {
+      if (filter.grade && !(sim.gradeLevels || []).includes(filter.grade)) return false;
+      if (filter.subjectCode) {
+        const sc = filter.subjectCode.toUpperCase();
+        const simSc = (sim.subjectCode || '').toUpperCase();
+        if (sc === 'MATH') {
+          if (!simSc.includes('MATH') && simSc !== 'MTH') return false;
+        } else if (sc === 'OPTMATH') {
+          if (!simSc.includes('OPTMATH')) return false;
+        } else if (simSc !== sc) {
+          return false;
         }
       }
-    }
+      if (filter.chapterNumber && sim.chapterNumber !== filter.chapterNumber) return false;
+      if (filter.language && filter.language !== 'all' && sim.language && sim.language !== 'both' && sim.language !== filter.language) return false;
+      if (filter.simulationType && sim.simulationType !== filter.simulationType) return false;
+      if (typeof filter.isPublished === 'boolean' && sim.isPublished !== filter.isPublished) return false;
+      if (filter.search) {
+        const s = filter.search.toLowerCase();
+        const matches =
+          sim.title?.toLowerCase().includes(s) ||
+          sim.titleNepali?.toLowerCase().includes(s) ||
+          sim.description?.toLowerCase().includes(s) ||
+          sim.topicName?.toLowerCase().includes(s) ||
+          (sim.tags || []).some((t: string) => t.toLowerCase().includes(s));
+        if (!matches) return false;
+      }
+      return true;
+    });
+
+    filteredFallbacks.forEach((fallbackSim) => {
+      if (!items.some((s: any) => s.code === fallbackSim.code)) {
+        items.push(fallbackSim);
+      }
+    });
+
     return items;
   }
 
   static async getSimulationById(id: string) {
-    const simulation = await Simulation.findById(id).populate('subjectId');
-    if (!simulation) return null;
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const simulation = await Simulation.findById(id).populate('subjectId');
+        if (simulation) {
+          const [versions, assets, topics] = await Promise.all([
+            SimulationVersion.find({ simulationId: id }).sort({ createdAt: -1 }),
+            SimulationAsset.find({ simulationId: id }),
+            SimulationTopic.find({ simulationId: id }),
+          ]);
 
-    const [versions, assets, topics] = await Promise.all([
-      SimulationVersion.find({ simulationId: id }).sort({ createdAt: -1 }),
-      SimulationAsset.find({ simulationId: id }),
-      SimulationTopic.find({ simulationId: id }),
-    ]);
+          return {
+            ...simulation.toJSON(),
+            versions,
+            assets,
+            topics,
+          };
+        }
+      } catch (err) {
+        console.warn('[SimulationActivityService] getSimulationById DB query error:', err);
+      }
+    }
 
-    return {
-      ...simulation.toJSON(),
-      versions,
-      assets,
-      topics,
-    };
+    const fallback = SimulationActivityService.getAllFallbackSimulations().find(
+      (s: any) => String(s._id || s.id) === id || s.code === id
+    );
+    return fallback || null;
+  }
+
+  static async getSimulationByCode(code: string) {
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const sim = await Simulation.findOne({ code });
+        if (sim) return sim.toJSON ? sim.toJSON() : sim;
+      } catch (err) {
+        console.warn('[SimulationActivityService] getSimulationByCode DB query error:', err);
+      }
+    }
+    const fallback = SimulationActivityService.getAllFallbackSimulations().find((s: any) => s.code === code);
+    return fallback || null;
   }
 
   static async createSimulation(data: Partial<ISimulation>) {
@@ -2838,8 +3859,18 @@ export class SimulationActivityService {
   // ══════════════════════════════════════════════════════════════════
   static async getLibraryHierarchy() {
     // 1. Fetch all published simulations from database to get real counts
-    const allSims = await Simulation.find({ isPublished: true }).lean();
-    for (const sim of FALLBACK_CLASS10_SIMS) {
+    let allSims: any[] = [];
+    if (mongoose.connection.readyState === 1) {
+      try {
+        allSims = await Simulation.find({ isPublished: true }).lean().maxTimeMS(2500);
+      } catch (err) {
+        console.warn('[SimulationActivityService] getLibraryHierarchy DB query error/timeout:', err);
+        allSims = [];
+      }
+    }
+
+    const fallbacks = SimulationActivityService.getAllFallbackSimulations();
+    for (const sim of fallbacks) {
       if (!allSims.some((s: any) => s.code === sim.code)) {
         allSims.push(sim as any);
       }
@@ -3210,6 +4241,18 @@ export class SimulationActivityService {
     let subjectCode = params.subjectCode;
     let chapterNumber = params.chapterNumber;
     let simulationTitle = params.simulationTitle;
+
+    if (mongoose.connection.readyState !== 1) {
+      return {
+        userId: params.userId,
+        simulationCode: params.simulationCode,
+        simulationTitle: params.simulationTitle || params.simulationCode,
+        assessmentScore: params.assessmentScore || 0,
+        percentage: params.percentage || 100,
+        isCompleted: true,
+        offlineMode: true,
+      };
+    }
 
     if (!gradeLevel || !subjectCode || !chapterNumber || !simulationTitle) {
       const sim = await Simulation.findOne({ code: params.simulationCode });
